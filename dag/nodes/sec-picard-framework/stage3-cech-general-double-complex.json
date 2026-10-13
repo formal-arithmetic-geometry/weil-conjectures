@@ -2,7 +2,7 @@
  "id": "stage3-cech-general-double-complex",
  "kind": "statement",
  "title": "Independent-universe Cech double-complex comparison",
- "statement": "For a site C with finite wide pullbacks and sheafification of abelian presheaves, an abelian sheaf F and a covering family indexed in universe w, assuming HasExt in universe w, there is a double complex of AddCommGrpCat in universe w whose column homology is the Cech complex of the cohomology presheaves of F and whose total homology is the sheaf cohomology of F.",
+ "statement": "For a site C with v-small morphisms, finite wide pullbacks and sheafification of v-small abelian presheaves, assume HasExt in universe v and EnoughInjectives for abelian sheaves. For an abelian sheaf F and a covering family indexed in universe v, there is a double complex of AddCommGrpCat.{v} whose column homology is the Cech complex of the cohomology presheaves of F and whose total homology is the sheaf cohomology of F.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
   "place": "Steps 1--2: universe-lifted injective-resolution double complex and its column and total comparisons"
@@ -14,25 +14,13 @@
  ],
  "proof": [
   {
-   "text": "OPEN: construct one universe-lifted injective-resolution Cech bicomplex, retaining its resolution and augmentation data. Do not use the split zero-vertical-differential bicomplex supplied by the column-existence theorem. Resolution existence under the stated large-site hypotheses remains disputed.",
+   "text": "Reuse CategoryTheory.Sheaf.exists_cechDoubleComplex in WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech through the canonical Lean alias command. Its injective-resolution bicomplex construction, column comparison and total comparison are exactly the equal-universe EnoughInjectives statement authorized by the earlier return; no duplicate proof or new construction is needed. The existing theorem uses the three resolution nodes listed here.",
    "uses": [
-    "def-sc-cech-resolution-double-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For that same resolution bicomplex, prove the column comparisons by evaluation of the resolution and compatible universe transports.",
-   "uses": [
-    "lem-sc-cech-resolution-columns"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For that same resolution bicomplex, prove the total comparison using Cech acyclicity of injectives and its augmentation, with compatible universe transports. Combine both comparisons with the constructed object. This entire joint construction is restored as the existing named Lean obligation.",
-   "uses": [
+    "def-sc-cech-resolution-double-complex",
+    "lem-sc-cech-resolution-columns",
     "lem-sc-cech-resolution-total"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -41,9 +29,9 @@
   "lem-sc-cech-resolution-total"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
-  "place": "Steps 1--2; joint resolution-bicomplex route restored after review X-e14bd, E1 point 4. Lean proof is open, not the invalid column-only reduction."
+  "by": "worker",
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+  "place": "Sheaf.exists_cechDoubleComplex; repair X-b0ad5 replaces the duplicate proof by a canonical alias of this existing theorem"
  },
  "mathlib_searches": [
   {
@@ -94,7 +82,7 @@
   "module": "Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral",
   "file": "lean/Sheaf/CategoryTheory/Sites/SheafCohomology/CechGeneral.lean",
   "declaration": "CategoryTheory.Sheaf.exists_cechDoubleComplex_general",
-  "statement": "theorem Sheaf.exists_cechDoubleComplex_general [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C) {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) : ∃ D : HomologicalComplex₂ AddCommGrpCat.{w} (ComplexShape.up ℕ) (ComplexShape.up ℕ), (∀ q : ℕ, Nonempty (((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q).mapHomologicalComplex (ComplexShape.up ℕ)).obj D ≅ (cechComplexFunctor fun i ↦ Over.mk (π i)).obj ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧ ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X)",
+  "statement": "alias Sheaf.exists_cechDoubleComplex_general := Sheaf.exists_cechDoubleComplex",
   "branch": "sheaf-dag",
   "by": "T1",
   "date": "2026-10-12"
@@ -110,13 +98,53 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-3b657",
-  "group": "U2",
+  "reviewer": "X-6a78b",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T194146-L-466702",
+  "landing": "20261013T003202-L-2430493",
   "kind": "interface",
-  "note": "independent Codex review: Matched the withdrawal and forced adaptation with the change record, unchanged caller signature, DAG records, report, counterexample, and clean compilation of delivered modules and downstream caller; reproduced the original compiler failures and axiom check."
+  "note": "independent Codex review: Matched the alias with the corrected node and change record; verified unchanged caller signatures, minimal forced adaptation, DAG dependencies, report repair, compilation and axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V2 stage 2",
+  "old_statement": "For a site C with finite wide pullbacks and sheafification of abelian presheaves, an abelian sheaf F and a covering family indexed in universe w, assuming HasExt in universe w, there is a double complex of AddCommGrpCat in universe w whose column homology is the Cech complex of the cohomology presheaves of F and whose total homology is the sheaf cohomology of F.",
+  "what": "Reviewer X-a400d E2 requires the model to assume EnoughInjectives and use universe v throughout. Restrict this non-target double-complex helper accordingly; do not weaken the general spectral-sequence caller.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
+   "place": "Steps 1--2: universe-lifted injective-resolution double complex and its column and total comparisons"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-cech-spectral",
+    "holds": false,
+    "note": "The independent-universe spectral-sequence statement is unchanged, but its application of this helper no longer typechecks. Its general proof is withdrawn to a named sorry, preserving its signature."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "OPEN: construct one universe-lifted injective-resolution Cech bicomplex, retaining its resolution and augmentation data. Do not use the split zero-vertical-differential bicomplex supplied by the column-existence theorem. Resolution existence under the stated large-site hypotheses remains disputed.",
+    "uses": [
+     "def-sc-cech-resolution-double-complex"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For that same resolution bicomplex, prove the column comparisons by evaluation of the resolution and compatible universe transports.",
+    "uses": [
+     "lem-sc-cech-resolution-columns"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For that same resolution bicomplex, prove the total comparison using Cech acyclicity of injectives and its augmentation, with compatible universe transports. Combine both comparisons with the constructed object. This entire joint construction is restored as the existing named Lean obligation.",
+    "uses": [
+     "lem-sc-cech-resolution-total"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }

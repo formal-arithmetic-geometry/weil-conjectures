@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral
 import Sheaf.CategoryTheory.CechResolutionColumns
 import Sheaf.CategoryTheory.CechResolutionTotal
 import Sheaf.CategoryTheory.CechResolutionDoubleComplex
@@ -72,7 +71,18 @@ sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
 The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
 of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
 
-(blueprint: `sk-thm-picard-cech`, `lem-sc-cech-spectral`) -/
+Source: blueprint sk-thm-picard-cech, Steps 1--4; Stacks Tag 03AZ.
+Proof plan: construct a derived-section model compatible with this large site's
+independent coefficient and covering-index universe. Apply the Čech functor
+termwise to form a first-quadrant bicomplex. Exact products identify its column
+homology with the Čech complex of the cohomology presheaves. Acyclic augmented
+rows identify total homology with derived sections. Apply the first bicomplex
+spectral sequence, compose its second-page comparison with column homology,
+and transport the finite-degree abutment along the total comparison.
+STATEMENT-DISPUTED: the required general model is not supplied by HasExt alone;
+the repaired equal-universe helper additionally assumes EnoughInjectives.
+The general realization step remains unresolved, with no counterexample claimed.
+(blueprint: lem-sc-cech-spectral) -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
     (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -80,12 +90,7 @@ theorem Sheaf.exists_cechToDerivedSpectralSequence [HasExt.{w} (Sheaf J AddCommG
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X := by
-  obtain ⟨D, hcol, htot⟩ := F.exists_cechDoubleComplex_general X π hπ
-  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
-  refine ⟨E, fun p q ↦ ?_, hE.of_iso fun n ↦ (htot n).some⟩
-  obtain ⟨e⟩ := hE₂ p q
-  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso (hcol q).some⟩
+      E.AbutsTo fun n ↦ F.H' n X := by sorry
 
 /-- **The Čech double complex of a covering.** Let `𝔘 = {π i : U i ⟶ X}` generate a covering
 sieve of `X` and let `F` be an abelian sheaf, on a site whose abelian sheaves have enough
