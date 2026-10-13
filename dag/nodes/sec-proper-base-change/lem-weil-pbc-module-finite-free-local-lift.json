@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-module-finite-free-local-lift",
+ "kind": "statement",
+ "title": "Local finite free maps lifting finite type generators",
+ "statement": "Let X be a scheme [def-pc-scheme], V and K opens with K contained in V, H a module sheaf [def-weil-sheaf-of-modules-category] whose restriction to K is of finite type [def-weil-pbc-module-finite-type-presentation], G a module sheaf on V, and p:G -> H|V an epimorphism. For every x in K there is a neighbourhood U contained in K, a natural number n, and a morphism l from the finite free module O_U^{n} to G|U such that l followed by p|U is an epimorphism. The source G is arbitrary; no generating family or finite-support subset is specified.",
+ "source": {
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Definition 01B5 and Lemma 01B8, its proof choosing finite generators and lifting them locally. Read https://stacks.math.columbia.edu/tag/01B8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof": [
+  {
+   "text": "Apply finite type on K to choose finitely many generating sections of H near x, on an open A contained in K. The corresponding finite free morphism to H|A is epi. Identify a finite index set with ULift (Fin n).",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Because p is epi, each of the finitely many chosen sections has a lift to G on an open neighbourhood of x inside A. Intersect those neighbourhoods. The lifts are sections on a common U; by the universal property of a finite free module sheaf they define l. Its composite with p|U sends every basis vector to the restricted generating section.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of the generating epimorphism from A to U remains epi; restriction preserves the unit and free coproducts. Equality on the free basis identifies it with the composite l followed by p|U. If n=0, H vanishes on A, the source is zero, and its unique map has epi composite. Empty K supplies no x.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Definition 01B5 and Lemma 01B8, its proof choosing finite generators and lifting them locally. Read https://stacks.math.columbia.edu/tag/01B8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism to a finite type sheaf locally has an epimorphic composite from a finite free sheaf",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type sheaf target of an epimorphism admits locally a map from a finite free sheaf into the source with epimorphic composite",
+   "date": "2026-10-13",
+   "results": "Read SheafOfModules.GeneratingSections.ofEpi, IsFiniteType.exists_localGeneratorsData, freeHomEquiv, freeSection. None provides this local lift or finite-support factorization.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections, CategoryTheory.Epi",
+   "date": "2026-10-13",
+   "results": "GeneratingSections.ofEpi maps generators forward; freeMap and its basis formulas describe inclusions. Neither constructs the required local factorization.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*lift|free.*local.*support",
+   "date": "2026-10-13",
+   "results": "Two unrelated free monoid/group results in Mathlib/GroupTheory/Finiteness.lean. Read module-sheaf Generators.lean, Free.lean and PushforwardContinuous.lean. Library and blueprint searches found no statement of these local factors.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsLocalSelection",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The finite-generation step of the affine-union construction in the H1 constructible representation: choose a finite support locally near each point before compactness selects a finite subcover. Part: Local finite free maps lifting finite type generators.",
+   "via": [
+    "lem-weil-pbc-module-generating-sections-local-selection",
+    "lem-weil-pbc-module-generating-sections-compact-selection",
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteFreeLocalLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_free_local_lift",
+  "statement": "theorem exists_finite_free_local_lift\n    (X : Scheme.{u}) (V K : X.Opens) (hKV : K ≤ V)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    [(H.over K).IsFiniteType]\n    (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n    (p : G ⟶ H.over V) [Epi p] (x : K) :\n    ∃ (U : X.Opens) (hUK : U ≤ K), (x : X) ∈ U ∧ ∃ (n : ℕ)\n      (l : free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin n)) ⟶\n        (overMap (moduleRings X.toRingedSpace) (homOfLE (hUK.trans hKV))).obj G),\n      Epi (l ≫ (overMap (moduleRings X.toRingedSpace)\n        (homOfLE (hUK.trans hKV))).map p)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501763",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

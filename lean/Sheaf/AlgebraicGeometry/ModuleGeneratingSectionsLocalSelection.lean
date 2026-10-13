@@ -6,6 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalLift
+import Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport
 
 /-! # Finite support of a generating family near a point
 
@@ -20,6 +22,9 @@ open CategoryTheory AlgebraicGeometry SheafOfModules
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option maxHeartbeats 800000 in
+-- Comparing iterated slice restrictions requires additional elaboration steps.
+set_option backward.isDefEq.respectTransparency false in
 /-- Near any point of an open on which a module sheaf is finite type, finitely many
 members of a specified global generating family generate. Compactness is not assumed.
 
@@ -52,6 +57,24 @@ theorem exists_finset_generatingSections_near_point
       Epi ((SheafOfModules.overMap (moduleRings X.toRingedSpace)
         (homOfLE (hUK.trans hKV))).map
           (SheafOfModules.freeMap (R := (moduleRings X.toRingedSpace).over V)
-            ((↑) : S → σ.I) ≫ σ.π)) := by sorry
+            ((↑) : S → σ.I) ≫ σ.π)) := by
+  obtain ⟨U, hUK, hxU, n, l, hl⟩ := exists_finite_free_local_lift X V K hKV H
+    (free (R := (moduleRings X.toRingedSpace).over V) σ.I) σ.π x
+  obtain ⟨W, hWU, hxW, S, a, ha⟩ := exists_finite_free_local_support X V U
+    (hUK.trans hKV) σ.I n l ⟨x.val, hxU⟩
+  refine ⟨W, hWU.trans hUK, hxW, S, ?_⟩
+  let F := overMap (moduleRings X.toRingedSpace) (homOfLE hWU)
+  have : Epi (F.map (l ≫ (overMap (moduleRings X.toRingedSpace)
+      (homOfLE (hUK.trans hKV))).map σ.π)) := by
+    have := hl
+    infer_instance
+  have hfac : a ≫ (overMap (moduleRings X.toRingedSpace)
+      (homOfLE ((hWU.trans hUK).trans hKV))).map
+        (freeMap (R := (moduleRings X.toRingedSpace).over V) ((↑) : S → σ.I) ≫ σ.π) =
+      F.map (l ≫ (overMap (moduleRings X.toRingedSpace)
+        (homOfLE (hUK.trans hKV))).map σ.π) := by
+    rw [Functor.map_comp, ← Category.assoc, ha, Functor.map_comp]
+    rfl
+  exact epi_of_epi_fac hfac
 
 end AlgebraicGeometry.Scheme.Modules

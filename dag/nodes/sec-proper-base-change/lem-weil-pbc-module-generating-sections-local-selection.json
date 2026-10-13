@@ -16,26 +16,38 @@
  "statement": "Let X be a scheme [def-pc-scheme], V and K opens with K contained in V. Let H be an O_X-module [def-weil-sheaf-of-modules-category] such that its restriction to K is of finite type [def-weil-pbc-module-finite-type-presentation]. Let sigma be a specified generating family of H on V, namely an epimorphism from the free sheaf on sigma.I, and let x be a point of K. There exist an open neighbourhood U of x contained in K and a finite subset S of sigma.I such that the free map on S followed by sigma becomes an epimorphism after restriction from V to U. There is no compactness, affineness or quasi-coherence assumption.",
  "proof": [
   {
-   "text": "For x in K, choose finitely many local generators of H on a neighbourhood inside K. The epimorphism from the specified global free sheaf locally lifts them. Each germ of a section of the free sheaf is a finite linear combination of its basis germs: the free sheaf is the filtered colimit of its finite sub-coproducts, and stalks commute with filtered colimits. The finitely many lifts therefore have a common finite support S_x. Their germ identities hold on a common smaller neighbourhood; on that neighbourhood the finite-support map is epi because its image contains every local generator. This is the local lifting argument of Stacks 01B8 and 01BB. No finite presentation, affine localization, or quasi-coherence is used. Work inside K, so all chosen neighbourhoods are contained in K. An empty local generating family permits S empty. If the original index type is empty, its generating epimorphism already forces the target to be zero. There is no x when K is empty. Restriction to slice sites preserves the basis maps and the unit, identifying the local finite-support epimorphism with the displayed overMap morphism. No compactness or choice of a global finite subcover is involved.",
+   "text": "Apply the finite free local lift theorem to the specified generating epimorphism sigma.pi. Obtain U contained in K and a map l from a finite free module sheaf to the restricted source free sheaf with epimorphic composite.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "lem-weil-pbc-module-stalk-filtered-colimit",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-module-finite-free-local-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the finite free local support theorem to l at x. On a smaller neighbourhood W obtain a finite subset S of sigma.I and a factoring map a into the restriction of free S.",
+   "uses": [
+    "lem-weil-pbc-module-finite-free-local-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the epimorphic composite involving l from U to W. It stays epi because open restriction is a left adjoint and preserves cokernels. The factoring equality and functoriality identify this composite with a followed by the restriction of freeMap(S -> sigma.I) composed with sigma.pi. A right factor of an epimorphic composite is epi, giving the required map on W. Iterated overMap restrictions agree on sections and morphisms, and W is contained in K by transitivity.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-finite-type-presentation",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-finite-free-local-lift",
+  "lem-weil-pbc-module-finite-free-local-support",
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BB, first paragraph of proof, and Lemma 01B8."
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Tags 01B8 and 01BB, finite-generator lifting and finite-support selection. The categorical composition, restriction, and epi factor argument are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -130,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T133229-L-473",
+  "landing": "20261013T142907-L-501763",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

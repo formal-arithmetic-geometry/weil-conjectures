@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-module-finite-free-local-support",
+ "kind": "statement",
+ "title": "Local finite support for maps with finite free source",
+ "statement": "Let X be a scheme [def-pc-scheme], V and U opens with U contained in V, I a type in the module universe, and n a natural number. For every morphism l:O_U^{n} -> (O_V^{(I)})|U of module sheaves [def-weil-sheaf-of-modules-category] and x in U there is a neighbourhood W contained in U, a finite subset S of I, and a morphism a:(O_U^{n})|W -> (O_V^{(S)})|W such that a followed by the restricted basis inclusion equals l|W. No epimorphism or finite type target is assumed.",
+ "source": {
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Lemma 01BB first paragraph, specialized to the finite sub-coproducts of a free module sheaf, and Lemma 01AH (2). Read https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01AH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof": [
+  {
+   "text": "The free sheaf on I is the filtered colimit of the free sheaves on finite subsets S, with transition basis inclusions. To verify this, a compatible cocone gives one map out of the unit for each i by its singleton support. Compatibility on unions implies that these maps agree with the maps on every finite S. The universal property of the free coproduct gives the unique map out of the full free sheaf. Thus the cocone has the required colimit property. Mathlib already supplies the categorical finite-subcoproduct colimit construction as CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone; transport its coproducts to the chosen free sheaves using their universal properties.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict this system to U and take stalks at x. The restriction and stalk colimit results show that every image germ of one of the n source basis elements lifts into a finite-support stage. Choose such a stage for each basis element, and take their finite union S. Represent the lift germs in the finite free stage near x.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-filtered-colimit",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each lift has the same image germ as its original basis image, so equality of germs permits shrinking to where the two sections agree. Intersect these finitely many neighbourhoods to obtain W. The lifted sections define a by the finite-free universal property. Equality on all basis sections gives the required morphism equality. Restriction preserves the unit, free sheaves and basis inclusions, identifying it with the displayed overMap formula. For n=0 choose W=U, S empty and the unique zero-source map. If I is empty all basis image sections vanish and S empty works.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Sheaves of Modules",
+  "place": "Modules, Lemma 01BB first paragraph, specialized to the finite sub-coproducts of a free module sheaf, and Lemma 01AH (2). Read https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01AH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Any morphism from a finite free sheaf to an arbitrary free sheaf factors near a point through a finite subset of the basis",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finite free sheaf into an arbitrary free sheaf locally factors through a finite subset of the basis",
+   "date": "2026-10-13",
+   "results": "Read SheafOfModules.GeneratingSections.ofEpi, IsFiniteType.exists_localGeneratorsData, freeHomEquiv, freeSection. None provides this local lift or finite-support factorization.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.freeMap",
+   "date": "2026-10-13",
+   "results": "GeneratingSections.ofEpi maps generators forward; freeMap and its basis formulas describe inclusions. Neither constructs the required local factorization.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*lift|free.*local.*support",
+   "date": "2026-10-13",
+   "results": "Two unrelated free monoid/group results in Mathlib/GroupTheory/Finiteness.lean. Read module-sheaf Generators.lean, Free.lean and PushforwardContinuous.lean. Library and blueprint searches found no statement of these local factors.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subcoproduct|finite_sections_lift|local_support",
+   "date": "2026-10-13",
+   "results": "Mathlib.CategoryTheory.Limits.Constructions.Filtered provides CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone, which supplies the categorical colimit construction in step 1; it does not give the local sheaf factorization or basis-section lifting. No matching theorem in the library.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsLocalSelection",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The finite-generation step of the affine-union construction in the H1 constructible representation: choose a finite support locally near each point before compactness selects a finite subcover. Part: Local finite support for maps with finite free source.",
+   "via": [
+    "lem-weil-pbc-module-generating-sections-local-selection",
+    "lem-weil-pbc-module-generating-sections-compact-selection",
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteFreeLocalSupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_free_local_support",
+  "statement": "theorem exists_finite_free_local_support\n    (X : Scheme.{u}) (V U : X.Opens) (hUV : U ≤ V)\n    (I : Type u) (n : ℕ)\n    (l : free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin n)) ⟶\n      (overMap (moduleRings X.toRingedSpace) (homOfLE hUV)).obj\n        (free (R := (moduleRings X.toRingedSpace).over V) I)) (x : U) :\n    ∃ (W : X.Opens) (hWU : W ≤ U), (x : X) ∈ W ∧ ∃ (S : Finset I)\n      (a : (overMap (moduleRings X.toRingedSpace) (homOfLE hWU)).obj\n          (free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin n))) ⟶\n        (overMap (moduleRings X.toRingedSpace) (homOfLE (hWU.trans hUV))).obj\n          (free (R := (moduleRings X.toRingedSpace).over V) S)),\n      a ≫ (overMap (moduleRings X.toRingedSpace) (homOfLE (hWU.trans hUV))).map\n        (freeMap (R := (moduleRings X.toRingedSpace).over V) ((↑) : S → I)) =\n      (overMap (moduleRings X.toRingedSpace) (homOfLE hWU)).map l",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T142907-L-501763",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
