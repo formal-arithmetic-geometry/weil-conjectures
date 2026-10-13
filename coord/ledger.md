@@ -11546,3 +11546,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/M2/Sheaf.RingTheory.NoetherNormalizationOverDomainSurjectiveCore (stage 3; reviewer PASS; first push; landing 20261013T072357-L-1122488 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/M2/Sheaf.RingTheory.PolynomialLocalFlatQuotientDescent (stage 3; reviewer PASS; first push; landing 20261013T072358-L-1122588 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/M4/Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapInjective (stage 3; reviewer PASS; first push; landing 20261013T072358-L-1122734 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/N2/Sheaf.Algebra.Homology.RingProjectiveInternalHomExact (stage 3; reviewer PASS; first push; landing 20261013T072359-L-1122872 (proof); batch 20261013T072335; modules 1; new nodes 0)
