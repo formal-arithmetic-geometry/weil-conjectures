@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-ordinary-evaluation-postcomposition",
+ "kind": "statement",
+ "title": "Ordinary evaluation is natural in the coefficient complex",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open, and P,F,F′ cochain complexes of modules on its over-site. Let t:F→F′ be a chain map. Write D=Hom(P,O_U[0]) [def-pur-hom-complex] and T(F)=Tot(F tensor D) [def-pc-tensor-complex-sheaves]. If f:T(F)→Hom(P,F) and f′:T(F′)→Hom(P,F′) satisfy the component formula [def-pc-ordinary-evaluation-data], then Tot(t tensor identity_D);f′ = f;Hom(P,t). No exactness, flatness, boundedness or perfectness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM (lemma-Rhom-strictly-perfect), 08DQ (lemma-dual-perfect-complex): ordinary complex computation, with the stated exactness and flatness assumptions replacing the finite-perfect part"
+ },
+ "proof": [
+  {
+   "text": "Use chain-map extensionality, the tensor coproduct inclusions, and the chosen Hom product projections. The projections are natural by lem-sc-hom-complex-projections. On each tensor summand substitute the given evaluation formulas. If r+q is nonzero both components vanish. Otherwise use lem-pc-ordinary-evaluation-component-factorization to factor through moduleDualEvaluation. Uncurry that module evaluation using tensor-Hom naturality. Braiding naturality, associator naturality, exchange of the tensor morphisms, and right-unitor naturality move the coefficient map to the output. Transport between equal complex degrees is natural by eliminating the degree equality. The components agree, and the product and coproduct universal properties finish the proof.",
+   "uses": [
+    "def-pc-ordinary-evaluation-data",
+    "lem-sc-hom-complex-projections",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-ordinary-evaluation-component-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-ordinary-evaluation-component-factorization",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ and 08DQ, component naturality of ordinary internal-Hom evaluation",
+  "description": "Underived coefficient naturality isolated as a named obligation; tensor-Hom naturality and the recorded component factorization detect the square on coproduct inclusions and product projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|XIsoOfEq_hom_naturality",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Bifunctor.lean, Mathlib/CategoryTheory/GradedObject/Bifunctor.lean. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_id",
+   "results": "Hits: Functor.map_id. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary evaluation from tensor with dual to internal Hom complex is natural in target chain maps",
+   "results": "Hits: ModuleCat.ihom_ev_app, CategoryTheory.ihom.ev_naturality, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.coev_naturality_assoc, ModuleCat.ihom_coev_app, ModuleCat.monoidalClosed_uncurry, ModuleCat.monoidalClosedHomEquiv. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation from tensor product with dual to internal Hom is natural in the coefficient morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactSourceEvaluationOpenModels",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route. Coefficient naturality of the ordinary representative.",
+   "via": [
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationPostcomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationPostcomposition.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_postcomposition",
+  "statement": "theorem ordinaryEvaluation_postcomposition (X : Scheme.{u}) (U : X.Opens)\n    (P F F' : CochainComplex (localEvaluationModules X U) ℤ) (t : F ⟶ F')\n    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)\n    (f' : localEvaluationTensor X U P F' ⟶ homComplex (R := X.sheaf.over U) P F')\n    (hf : IsLocalOrdinaryEvaluation X U P F f)\n    (hf' : IsLocalOrdinaryEvaluation X U P F' f') :\n    HomologicalComplex.mapBifunctorMap t (𝟙 (localEvaluationDual X U P))\n      (curriedTensor _) (.up ℤ) ≫ f' =\n        f ≫ ((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04757",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04757",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123777",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile successfully, including direct importer ExactSourceEvaluationLocalComparisons; target signature and existing declarations match the repository, with only the two documented named sorries remaining."
+ }
+}

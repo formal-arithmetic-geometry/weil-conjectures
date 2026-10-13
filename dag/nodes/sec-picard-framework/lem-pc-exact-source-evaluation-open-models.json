@@ -22,65 +22,43 @@
  },
  "proof": [
   {
-   "text": "Use the concrete over-equivalence on P,F,f. Each module on V→U becomes its section module on the corresponding open of U.toScheme, with the identical scalar action. Tensor pure sections, unit actions and local linear maps therefore have the same formulas. Equivalences preserve the products defining Hom and the coproducts defining total tensor; their canonical comparisons send projections and inclusions to the same maps. Both Hom differential and signed total differential are built from these maps, so the comparisons are chain isomorphisms. Tensoring an acyclic complex is preserved in both directions, proving preservation of K-flatness. The exact equivalence and its inverse preserve quasi-isomorphisms, and conjugation of Hom proves preservation of the assumed Hom exactness. Thus hf transports to precisely the evaluation formula on the open scheme.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex",
-    "def-pc-ordinary-evaluation-data",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the fixed functorial K-injective resolutions of the transported F and degree-zero unit. The Hom exactness hypothesis makes Hom(P,eta_F) and Hom(P,eta_unit) quasi-isomorphisms. The derived internal Hom factorization, their localized inverses, and the supplied eK,eN give the ordinary target and dual comparisons. Their objects are actual Hom complexes; no arbitrary witness of an existence theorem defines data.",
+   "text": "Take the fixed functorial K-injective resolution eta:F→I. Construct fI by the ordinary evaluation degree maps and their differential identity. Hom(P,eta) is a quasi-isomorphism by hhom. Tensoring eta with the K-flat ordinary dual is a quasi-isomorphism: its mapping cone is the total tensor of cone(eta) with the dual, which is acyclic by K-flatness.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "def-pc-derived-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The K-flat dual computes derived tensor with every F: use symmetry to apply the K-flat first-factor comparison and then restore the order F tensor dual. Compose with eN and the dual comparison of the preceding step to get a. Take b to be the target comparison of that step. All comparison data are used existentially in the proof, not installed as choices in definitions.",
-   "uses": [
-    "lem-pc-kflat-derived-tensor-comparison",
-    "lem-sc-scheme-derived-tensor-symmetry",
+    "lem-pc-ordinary-evaluation-differential",
     "def-pc-kflat-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use K-flat resolutions of the tensor inputs and the same fixed K-injective target as the canonical tensor-Hom representative equation. Uncurry the identity of the dual and form its tensor with F. Follow a degree-(p,q) tensor inclusion by the r-th Hom projection. Associator and symmetry restore F tensor dual; evaluating the dual on P^r and acting on F^p by the unit gives the hf component when r+q=0, and every other component is zero because the unit is supported in degree zero. Evaluation is natural with the resolution maps. The tensor coproduct inclusions and Hom product projections detect equality of chain maps. Localize that equality and cancel the Hom resolution isomorphisms to obtain the square. This calculation asserts no inverse of f and uses neither boundedness nor finite freeness.",
+   "text": "Apply the K-injective representative calculation to I, using eN composed with the inverse of the localized resolution map. This gives aI,bI and their commuting square.",
    "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-pc-kflat-resolution",
-    "def-pc-ordinary-evaluation-data",
-    "lem-sc-hom-complex-projections"
+    "lem-pc-exact-source-kinjective-evaluation-open-models"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Ordinary evaluation postcomposition gives Tot(eta tensor identity);fI=f;Hom(P,eta). Localize. Set a=aI followed by the inverse of E(Q Tot(eta tensor identity)), and b=bI followed by the inverse of E(Q Hom(P,eta)). Cancel the latter isomorphism, substitute the resolved square, and cancel the tensor resolution isomorphism.",
+   "uses": [
+    "lem-pc-ordinary-evaluation-postcomposition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-canonical-derived-tensor-hom-bijection",
-  "def-pc-derived-category",
   "def-pc-kflat-complex",
-  "def-pc-ordinary-evaluation-data",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "lem-pc-kflat-derived-tensor-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-sc-hom-complex-projections",
-  "lem-sc-scheme-derived-tensor-symmetry",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-pc-exact-source-kinjective-evaluation-open-models",
+  "lem-pc-ordinary-evaluation-differential",
+  "lem-pc-ordinary-evaluation-postcomposition",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "P4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08DJ (lemma-internal-hom), 08DM (lemma-Rhom-strictly-perfect), 08DQ (lemma-dual-perfect-complex): ordinary complex computation, with the stated exactness and flatness assumptions replacing the finite-perfect part",
-  "description": "N4 read the cited Stacks tags online. This fills out the ordinary representative and restriction calculations in the source; no evaluation invertibility is claimed."
+  "description": "K-injective replacement, a proved mapping-cone tensor argument, ordinary evaluation naturality, and proved categorical cancellation. K-injective representative comparison and the underived naturality square are isolated as two strictly smaller obligations."
  },
  "mathlib_searches": [
   {
@@ -158,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
+  "reviewer": "X-04757",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T132737-L-4152183",
+  "landing": "20261013T153936-L-1123777",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile successfully, including direct importer ExactSourceEvaluationLocalComparisons; target signature and existing declarations match the repository, with only the two documented named sorries remaining."
  }
 }

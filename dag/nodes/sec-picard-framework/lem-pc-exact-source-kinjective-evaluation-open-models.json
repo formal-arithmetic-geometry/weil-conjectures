@@ -1,0 +1,180 @@
+{
+ "id": "lem-pc-exact-source-kinjective-evaluation-open-models",
+ "kind": "statement",
+ "title": "Ordinary representative evaluation with K-injective coefficient",
+ "statement": "Let X be a scheme [def-pc-scheme], U an open, and choose a derived category of modules on the over-site of U in morphism universe w [def-pc-derived-category]. Write E for the exact derived over-equivalence into the standard derived category of U.toScheme [lem-weil-pbc-module-restriction-open-immersion-colimits]. Let K,N be arbitrary objects of that standard category. Let P,F be actual complexes on the over-site, with F K-injective [def-pur-kinjective-complex], Hom(P,-) preserve every quasi-isomorphism [def-pur-hom-complex], and the actual dual Hom(P,O_U[0]) be K-flat [def-pc-kflat-complex]. Suppose eK:E(QP)≅K and eN:E(QF)≅N. Let f:Tot(F tensor Hom(P,O_U[0]))→Hom(P,F) satisfy [def-pc-ordinary-evaluation-data]. Put H=RHom on U.toScheme [def-pur-derived-internal-hom], D=H(K,1), and g the canonical adjunct of associator; identity_N tensor evaluation_D,K; right unitor, using [def-pc-canonical-derived-tensor-hom-bijection] and [def-pc-scheme-derived-tensor-structure]. There exist isomorphisms a:N tensor D≅E(Q Tot(F tensor Hom(P,O_U[0]))) and b:H(K,N)≅E(Q Hom(P,F)) with g;b.hom=a.hom;E(Qf). No object of D(O_X) and no restriction of a global evaluation arrow appear.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pur-hom-complex",
+  "def-pc-kflat-complex",
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-quasi-iso-modules",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM (lemma-Rhom-strictly-perfect), 08DQ (lemma-dual-perfect-complex): ordinary complex computation, with the stated exactness and flatness assumptions replacing the finite-perfect part"
+ },
+ "proof": [
+  {
+   "text": "Use the concrete over-equivalence on P,F,f. Each module on V→U becomes its section module on the corresponding open of U.toScheme, with the identical scalar action. Tensor pure sections, unit actions and local linear maps therefore have the same formulas. Equivalences preserve the products defining Hom and the coproducts defining total tensor; their canonical comparisons send projections and inclusions to the same maps. Both Hom differential and signed total differential are built from these maps, so the comparisons are chain isomorphisms. Tensoring an acyclic complex is preserved in both directions, proving preservation of K-flatness. The exact equivalence and its inverse preserve quasi-isomorphisms, and conjugation of Hom proves preservation of the assumed Hom exactness. Thus hf transports to precisely the evaluation formula on the open scheme. The exact inverse transports K-injectivity, since the Hom homotopy functors and acyclic complexes are preserved.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "def-pc-ordinary-evaluation-data",
+    "def-pc-kflat-complex",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transported coefficient F is already K-injective. The derived internal Hom factorization identifies its ordinary Hom target with RHom(K,N). Take the fixed functorial K-injective resolution of the degree-zero unit. Hom exactness makes Hom(P,eta_unit) a quasi-isomorphism. The derived internal Hom factorization, its localized inverse, and eK identify the actual ordinary dual with RHom(K,1). These comparison objects are actual Hom complexes, and no arbitrary witness of mere existence defines data.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The K-flat dual computes derived tensor with every F: use symmetry to apply the K-flat first-factor comparison and then restore the order F tensor dual. Compose with eN and the dual comparison of the preceding step to get a. Take b to be the target comparison of that step. All comparison data are used existentially in the proof, not installed as choices in definitions.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison",
+    "lem-sc-scheme-derived-tensor-symmetry",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use K-flat resolutions of the tensor inputs and the same fixed K-injective target as the canonical tensor-Hom representative equation. Uncurry the identity of the dual and form its tensor with F. Follow a degree-(p,q) tensor inclusion by the r-th Hom projection. Associator and symmetry restore F tensor dual; evaluating the dual on P^r and acting on F^p by the unit gives the hf component when r+q=0, and every other component is zero because the unit is supported in degree zero. Evaluation is natural with the resolution maps. The tensor coproduct inclusions and Hom product projections detect equality of chain maps. Localize that equality and cancel the Hom resolution isomorphisms to obtain the square. This calculation asserts no inverse of f and uses neither boundedness nor finite freeness.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-pc-kflat-resolution",
+    "def-pc-ordinary-evaluation-data",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-scheme-derived-tensor-symmetry",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DM (lemma-Rhom-strictly-perfect), 08DQ (lemma-dual-perfect-complex): ordinary complex computation, with the stated exactness and flatness assumptions replacing the finite-perfect part",
+  "description": "Resolve the coefficient complex first and separate the K-injective representative calculation from coefficient naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Nn]atural|[Nn]atural.*evaluation",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary derived evaluation K flat dual exact Hom source comparison",
+   "results": "Hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, Ext, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorMap",
+   "results": "Hits: HomologicalComplex.mapBifunctorMap, CategoryTheory.Functor.map₂HomologicalComplex_obj_map, CategoryTheory.Functor.map₂HomologicalComplex_map_app, HomologicalComplex.ι_mapBifunctorMap, HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, HomologicalComplex.mapBifunctorMapHomotopy₁. No exact sheaf-complex comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary tensor dual evaluation agrees with derived internal Hom evaluation for K-injective coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactSourceEvaluationOpenModels",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route. K-injective coefficient case.",
+   "via": [
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactSourceKInjectiveEvaluationOpenModels.lean",
+  "declaration": "AlgebraicGeometry.exists_exactSource_kInjective_evaluation_open_models",
+  "statement": "theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K N : schemeDerivedCategory U.toScheme)\n    (P F : CochainComplex (localEvaluationModules X U) ℤ)\n    (_hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),\n      QuasiIso t → QuasiIso (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t))\n    (_hdual : (localEvaluationDual X U P).IsKFlat)\n    (_eK : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj P) ≅ K)\n    (_eN : (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj\n      (DerivedCategory.Q.obj F) ≅ N)\n    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)\n    (_hf : IsLocalOrdinaryEvaluation X U P F f) [F.IsKInjective] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let H := derivedInternalHom\n      (Opens.grothendieckTopology U.toScheme.toRingedSpace) U.toScheme.sheaf\n    let D := H.obj (op K, 𝟙_ (schemeDerivedCategory U.toScheme))\n    let g := ((schemeDerivedTensorHomEquiv U.toScheme) (N ⊗ D) K N).symm\n      ((α_ N D K).hom ≫ N ◁\n        ((schemeDerivedTensorHomEquiv U.toScheme) D K\n          (𝟙_ (schemeDerivedCategory U.toScheme)) (𝟙 D)) ≫ (ρ_ N).hom)\n    ∃ a : N ⊗ D ≅ E.obj (DerivedCategory.Q.obj (localEvaluationTensor X U P F)),\n      ∃ b : H.obj (op K, N) ≅\n          E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),\n        g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04757",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04757",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T153936-L-1123777",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile successfully, including direct importer ExactSourceEvaluationLocalComparisons; target signature and existing declarations match the repository, with only the two documented named sorries remaining."
+ }
+}
