@@ -101,46 +101,53 @@ theorem Scheme.exists_equiv_isClopen_graph {U V Y : Scheme.{u}} (p : U ⟶ Y) (q
     pullback.lift a.1 (𝟙 U) (by rw [a.2, Category.id_comp])
   have hs (a) : s a ≫ pullback.snd q p = 𝟙 U := pullback.lift_snd _ _ _
   have hs' (a) := isOpenImmersion_and_isClosedImmersion_of_comp_eq_id _ _ (hs a)
-  have hiso (a) : (hs' a).1.isoOpensRange.hom = inv ((s a).opensRange.ι ≫ pullback.snd q p) := by
-    have := (hs' a).1
-    rw [IsIso.eq_inv_iff, ← Category.assoc, Scheme.Hom.isoOpensRange_hom_ι, hs]
+  have hι (a) [IsOpenImmersion (s a)] :
+      (s a).opensRange.ι ≫ pullback.snd q p = (s a).isoOpensRange.inv := by
+    rw [← cancel_epi (s a).isoOpensRange.hom, Iso.hom_inv_id, ← Category.assoc,
+      Scheme.Hom.isoOpensRange_hom_ι, hs]
+  let σ (W : {W : (pullback q p).Opens //
+      IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) : U ≅ W.1 :=
+    (@asIso _ _ _ _ _ W.2.2).symm
+  have hσ (W : {W : (pullback q p).Opens //
+      IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
+      (σ W).hom ≫ W.1.ι ≫ pullback.snd q p = 𝟙 U :=
+    (@asIso _ _ _ _ _ W.2.2).inv_hom_id
   let toFun (a : {a : U ⟶ V // a ≫ q = p}) : {W : (pullback q p).Opens //
       IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)} := by
-    refine ⟨@Scheme.Hom.opensRange _ _ (s a) (hs' a).1, ?_, ?_⟩
+    have := (hs' a).1
+    refine ⟨(s a).opensRange, ?_, ?_⟩
     · have := (hs' a).2
       exact (s a).isClosedEmbedding.isClosed_range
-    · have := (hs' a).1
-      rw [← IsIso.inv_hom_id_assoc (hs' a).1.isoOpensRange.hom
-        ((s a).opensRange.ι ≫ pullback.snd q p), ← Category.assoc,
-        Scheme.Hom.isoOpensRange_hom_ι, hs]
+    · rw [hι]
       infer_instance
   let invFun (W : {W : (pullback q p).Opens //
       IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
-      {a : U ⟶ V // a ≫ q = p} := by
-    have := W.2.2
-    refine ⟨inv (W.1.ι ≫ pullback.snd q p) ≫ W.1.ι ≫ pullback.fst q p, ?_⟩
-    rw [Category.assoc, Category.assoc, pullback.condition, ← Category.assoc W.1.ι,
-      IsIso.inv_hom_id_assoc]
+      {a : U ⟶ V // a ≫ q = p} :=
+    ⟨(σ W).hom ≫ W.1.ι ≫ pullback.fst q p, by
+      simp only [Category.assoc, pullback.condition, reassoc_of% (hσ W)]⟩
   have hinvs (W : {W : (pullback q p).Opens //
       IsClosed (W : Set ↥(pullback q p)) ∧ IsIso (W.ι ≫ pullback.snd q p)}) :
-      s (invFun W) = inv (W.1.ι ≫ pullback.snd q p) ≫ W.1.ι := by
-    have := W.2.2
+      s (invFun W) = (σ W).hom ≫ W.1.ι := by
     apply pullback.hom_ext
     · simp [s, invFun]
-    · simp only [s, pullback.lift_snd, Category.assoc, IsIso.inv_hom_id]
+    · simp only [s, pullback.lift_snd, Category.assoc, hσ]
   refine ⟨⟨toFun, invFun, fun a ↦ ?_, fun W ↦ ?_⟩, fun a ↦ rfl⟩
   · have := (hs' a).1
+    have := (toFun a).2.2
+    have hσa : (σ (toFun a)).hom = (s a).isoOpensRange.hom := by
+      rw [← cancel_mono ((toFun a).1.ι ≫ pullback.snd q p), hσ]
+      change 𝟙 U = _ ≫ (s a).opensRange.ι ≫ _
+      rw [hι, Iso.hom_inv_id]
     apply Subtype.ext
-    simp only [toFun, invFun]
-    rw [← hiso, ← Category.assoc, Scheme.Hom.isoOpensRange_hom_ι]
+    change (σ (toFun a)).hom ≫ (s a).opensRange.ι ≫ pullback.fst q p = a.1
+    rw [hσa, Scheme.Hom.isoOpensRange_hom_ι_assoc]
     exact pullback.lift_fst _ _ _
-  · have := W.2.2
-    apply Subtype.ext
-    simp only [toFun]
+  · apply Subtype.ext
     have := (hs' (invFun W)).1
     apply TopologicalSpace.Opens.ext
-    rw [Scheme.Hom.coe_opensRange, hinvs, Scheme.Hom.comp_base, TopCat.coe_comp,
-      Set.range_comp, Set.range_eq_univ.mpr (inv (W.1.ι ≫ pullback.snd q p)).homeomorph.surjective,
-      Set.image_univ, Scheme.Opens.range_ι]
+    change Set.range (s (invFun W)).base = _
+    rw [hinvs, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.mpr fun x ↦ ⟨(σ W).inv x, Scheme.inv_hom_apply _ x⟩, Set.image_univ,
+      Scheme.Opens.range_ι]
 
 end AlgebraicGeometry
