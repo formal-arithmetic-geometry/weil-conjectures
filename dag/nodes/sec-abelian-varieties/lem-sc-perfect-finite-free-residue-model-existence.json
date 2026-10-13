@@ -15,28 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Unpack the strictly perfect neighbourhood V and restrict it to an affine open\nW = Spec A containing x. The bounded strictly perfect complex has quasi-coherent terms\n(each is a summand of a finite free sheaf). The affine correspondence identifies it with\na bounded complex C of finite projective A-modules. Let p be the prime corresponding to x.\nLocalize C at p. Its terms are finite projective over the local ring A_p, hence finite\nfree. It is consequently pseudo-coherent. Termwise scalar extension computes its derived\nresidue fibre, since C is bounded and flat, and its homology identifies with\n derivedFiberCohomology X E i x. Use hfin and the definition of derivedFiberBetti to supply\nthe finite residue cohomology and rank hypotheses of exists_unique_minimalFreeModel\n(Tag 0BCC). The upper bound in hbound supplies its remaining hypothesis. This gives a\nbounded above finite free complex F representing C_p with terms of ranks d_i. The lower\nbound in hbound makes the remaining terms zero too, so F is bounded.\n\nPresent A_p as the filtered colimit of principal localizations A_f for f outside p\n(Tag 00CM). Descend F as a bounded finite projective complex Q at one such stage by\nexists_finite_projective_model_of_directed_colimit (Tag 0BC7). Its derived isomorphism\nwith C_p and the inverse descend by affine_perfect_hom_colimit (Tag 09RE), applied in\nboth orders. Apply the injectivity clause of that same theorem to descend both inverse\nidentities after further localization. Thus Q and C become isomorphic in the derived\ncategory on a principal neighbourhood of p. For each of the finitely many possibly\nnonzero terms of Q, exists_standardFreeCover_of_finite_projective gives a principal free cover.\nSelect one member containing p and intersect these finitely many principal opens. On\nthis affine neighbourhood all terms are free. Their ranks equal d_i by localization at\np and invariant basis number over the nonzero ring A_p. Outside the bounds use the zero\nmodule, which is free of rank zero. Sheafify Q and the descended isomorphism and transport\nalong the affine-open identification. This produces U, its bounded complex K with terms\nisomorphic to the displayed free sheaves, and the required derived isomorphism.",
+   "text": "Choose G with Q(G) isomorphic to E by essential surjectivity of the localization. Take its termwise stalk complex C and invoke strictPerfect_stalk_fiberData to obtain pseudo-coherence of Q(C) and the finite residue cohomology and rank identification.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-sc-perfect-local-pseudocoherent-free-model",
-    "lem-pc-affine-perfect-colimit-descent",
-    "lem-pc-affine-perfect-hom-colimit",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-sc-strict-perfect-stalk-fiber-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract a and b from hbound. Its upper half bounds the rank sequence. Apply exists_unique_minimalFreeModel over the stalk ring with that rank sequence and the finite cohomology and rank equality from the preceding step.",
+   "uses": [
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i outside [a,b], hbound says d_i = 0. The termwise free-module isomorphism identifies F.X i with ULift(Fin 0 -> R), a subsingleton module, hence a zero object by ModuleCat.isZero_of_subsingleton. Transport zero-ness across the isomorphism with IsZero.of_iso. Thus F is bounded.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply spread_boundedFree_stalkModel to G, the strictly perfect neighbourhood, the bounded stalk model F, its termwise ranks and its derived isomorphism with C. Its conclusion is exactly the required affine free model.",
+   "uses": [
+    "lem-sc-bounded-free-stalk-model-spread"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
+  "lem-sc-strict-perfect-stalk-fiber-data",
   "lem-sc-perfect-local-pseudocoherent-free-model",
-  "lem-pc-affine-perfect-colimit-descent",
-  "lem-pc-affine-perfect-hom-colimit",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-sc-bounded-free-stalk-model-spread"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD, local model and spreading paragraphs"
+  "place": "Tag 0BCD; H2 formalizes the local-minimal-model and boundedness steps, with two separate scheme/stalk comparison and spreading interfaces"
  },
  "mathlib_searches": [
   {
@@ -143,12 +156,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T194100-L-451685",
+  "landing": "20261013T015556-L-3021423",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

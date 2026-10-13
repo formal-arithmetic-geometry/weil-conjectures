@@ -1,0 +1,165 @@
+{
+ "id": "lem-sc-strict-perfect-stalk-fiber-data",
+ "kind": "statement",
+ "title": "Strictly perfect stalk and residue fibre comparison",
+ "statement": "Let X be a scheme [def-pc-scheme], E an object of its derived category [def-pc-derived-category], x a point, and G a complex of structure-sheaf modules with Q(G) isomorphic to E. Suppose E has a strictly perfect representative on a neighbourhood of x [def-pc-perfect-complex] and every derived fibre cohomology space at x is finite-dimensional [def-sc-derived-fiber-betti]. Write C for the termwise stalk of G [def-pc-module-stalk-functor], over R = O_{X,x}. Then Q(C) is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. For a witness hK of this pseudo-coherence, the bounded-above finite-free representative selected by hK has finite-dimensional residue-tensor cohomology in every degree, with dimension equal to the derived fibre Betti number of E at x. The chosen derived category of R-modules can have a different morphism universe from the sheaf derived category.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-derived-fiber-betti",
+  "def-pc-module-stalk-functor",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose the strictly perfect representative P on V from hlocal. Restriction to V\n   followed by its stalk at x agrees with taking the stalk on X, since neighbourhoods\n   contained in V are cofinal. Stalks are exact, hence preserve quasi-isomorphisms and\n   derived isomorphisms. Apply this to eG and the comparison of P with E restricted to V.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-module-stalk-functor",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk of a rank-m free sheaf is the free stalk module of rank m. Apply stalks to\n   the retractions in IsStrictlyPerfect: the terms of the resulting bounded complex\n   are finite projective over the local ring O_X,x, hence finite free. Its bounds are\n   preserved because stalks preserve zero objects. This gives hK.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-free representative chosen by hK is bounded above, hence K-flat. Termwise\n   extension along O_X,x -> kappa(x) computes its derived residue tensor product.\n   The residue-field point factors through V and through Spec O_X,x. Associativity of\n   derived pullback and the affine module/sheaf correspondence identify its degree-i\n   homology with derivedFiberCohomology X E i x. This identification is linear over\n   kappa(x) = IsLocalRing.ResidueField O_X,x. Transport hfin across the linear\n   isomorphism, and use invariance of finrank to obtain the displayed equality.\nThe computation concerns every bounded-above finite-free representative of the same\nderived object: K-flatness makes residue cohomology invariant under its derived comparison.\nIt therefore applies to Classical.choose hK. No rank-minimal model is constructed here.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-derived-pullback-module-model",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-derived-pullback-module-model",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison; H2 expands the scheme/stalk interface in the existing proof plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a perfect complex is pseudo coherent and scalar extension to the residue field computes its derived fibre",
+   "results": "Service unavailable: Internal Server Error; no search verdict. Independent LeanFinder, Loogle and grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free complex over a stalk representing a perfect complex descends to a principal open neighborhood",
+   "results": "8 hits, including Module.isLocallyConstant_rankAtStalk_freeLocus and Tilde.exists_const. No complex descent or prescribed-rank sheaf model.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, IsLocalRing, Module.Finite",
+   "results": "0 hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalFree|finiteFreeResidue|stalkFunctor",
+   "results": "Mathlib has ordinary stalk and localization tools, but no perfect-complex fibre/minimal-model spreading theorem. Project search found the ring MinimalFreeModel; FiniteFreeStalkHomotopySpread treats only a single-degree normal form and uses Scheme.Modules, not arbitrary bounded local-ring complexes.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact stalk functor sends locally perfect sheaf complexes to pseudo coherent complexes over the local ring and computes residue tensor cohomology",
+   "results": "Second reading: 8 hits, including ModuleCat.localizedModule_functor_map_exact and ordinary exactness/localization tools; no stalk/residue derived comparison theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"stalk\"",
+   "results": "Second reading: 0 hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent.*stalk|stalk.*pseudoCoherent|extendScalars.*homology",
+   "results": "Second reading msearch: only a cotangent-complex comment. Independent project rg found StrictPerfectClosedPushforwardStalkModel, restricted to closed pushforwards and degree-zero cohomology, not this comparison.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison",
+   "via": [
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectStalkFiberData",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectStalkFiberData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictPerfect_stalk_fiberData",
+  "statement": "theorem strictPerfect_stalk_fiberData\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (x : X)\n    [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eG : DerivedCategory.Q.obj G ≅ E)\n    (hlocal : ∃ V : X.Opens, x ∈ V ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        IsStrictlyPerfect X V P ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj P))\n    (hfin : ∀ i : ℤ, Module.Finite (X.residueField x) (derivedFiberCohomology X E i x)) :\n    ∃ hK : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj\n      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj G)),\n      (∀ i : ℤ, Module.Finite (IsLocalRing.ResidueField (X.presheaf.stalk x))\n        ((((ModuleCat.extendScalars\n          (IsLocalRing.residue (X.presheaf.stalk x))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) ∧\n      (∀ i : ℤ, derivedFiberBetti X E i x =\n        Module.finrank (IsLocalRing.ResidueField (X.presheaf.stalk x))\n          ((((ModuleCat.extendScalars\n            (IsLocalRing.residue (X.presheaf.stalk x))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

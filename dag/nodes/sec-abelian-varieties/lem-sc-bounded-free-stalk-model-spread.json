@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-bounded-free-stalk-model-spread",
+ "kind": "statement",
+ "title": "Spreading a given bounded free stalk model",
+ "statement": "Let X be a scheme [def-pc-scheme], E an object of D(O_X) [def-pc-derived-category] with a strictly perfect representative on a neighbourhood of x [def-pc-perfect-complex], and G a sheaf complex with Q(G) isomorphic to E. Write C for its termwise stalk complex over R = O_{X,x} [def-pc-module-stalk-functor]. Let d be any sequence of natural numbers and F a bounded complex of R-modules whose term in degree i is isomorphic to R^{d_i}, and suppose Q(F) is isomorphic to Q(C). Then there is an affine open U containing x and a bounded complex K of sheaves of O_U-modules whose term in degree i is isomorphic to the rank-d_i free sheaf and whose derived image is isomorphic to E restricted to U. No relation between d and residue cohomology is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the strictly perfect representative P from hlocal to an affine neighbourhood\n   W = Spec A of x, and let p be its corresponding prime. Its terms are quasi-coherent:\n   each is a direct summand of a finite free sheaf. The affine correspondence produces\n   a bounded complex C of finite projective A-modules. Its localization at p represents\n   the same derived object as the stalk of G, by the exact stalk functor applied to eG\n   and the local comparison for P. Thus eF identifies F with C_p in the derived category.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present A_p as the filtered colimit of the A_f for f outside p (Tag 00CM).\n   Apply exists_finite_projective_model_of_directed_colimit to F, whose terms are\n   finite projective by hfree, obtaining a bounded finite projective complex Q at a stage.\n   Apply affine_perfect_hom_colimit in both orders to descend eF and its inverse.\n   Its injectivity clause makes their two inverse identities hold at a common later\n   stage. Then Q represents E on that principal neighbourhood of x.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-pc-affine-perfect-colimit-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_standardFreeCover_of_finite_projective to each of the finitely many\n   possibly nonzero terms of Q. In each cover select a principal open containing p,\n   and intersect the finitely many selected principal opens. This is still principal\n   in Spec A, hence affine, and contains x. All terms are free there. Their ranks equal\n   d i: localization at p recovers F.X i, and invariant basis number over the nonzero\n   local ring identifies their finite ranks. Outside the bounds the terms are zero;\n   hfree at p and invariant basis number force d i = 0, so the asserted free sheaf\n   is zero as well. Sheafify Q and the descended derived isomorphism and transport\n   to the over-site. Sheafification and localization preserve the bounds, giving K.\nNo arbitrary stalk complex is assumed to spread: bounded finite freeness and a local\nstrictly perfect comparison are both used. This includes d identically zero and any\nchoice of bounds, and does not require the scheme to be separated.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX; H2 expands the scheme/stalk interface in the existing proof plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a perfect complex is pseudo coherent and scalar extension to the residue field computes its derived fibre",
+   "results": "Service unavailable: Internal Server Error; no search verdict. Independent LeanFinder, Loogle and grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free complex over a stalk representing a perfect complex descends to a principal open neighborhood",
+   "results": "8 hits, including Module.isLocallyConstant_rankAtStalk_freeLocus and Tilde.exists_const. No complex descent or prescribed-rank sheaf model.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, IsLocalRing, Module.Finite",
+   "results": "0 hits.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalFree|finiteFreeResidue|stalkFunctor",
+   "results": "Mathlib has ordinary stalk and localization tools, but no perfect-complex fibre/minimal-model spreading theorem. Project search found the ring MinimalFreeModel; FiniteFreeStalkHomotopySpread treats only a single-degree normal form and uses Scheme.Modules, not arbitrary bounded local-ring complexes.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex with finitely many finite projective terms and its homotopy comparison descend from a prime localization after inverting one element, retaining term ranks",
+   "results": "Second reading: 8 hits about K-projectivity and derived chain-map representatives; no neighbourhood descent theorem. Project search found only single-degree stalk homotopy spreading.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, spreading paragraph; Tags 00CM, 0BC7, 09RE and 00NX",
+   "via": [
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedFreeStalkModelSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedFreeStalkModelSpread.lean",
+  "declaration": "AlgebraicGeometry.Scheme.spread_boundedFree_stalkModel",
+  "statement": "theorem spread_boundedFree_stalkModel\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (x : X)\n    [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eG : DerivedCategory.Q.obj G ≅ E)\n    (hlocal : ∃ V : X.Opens, x ∈ V ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        IsStrictlyPerfect X V P ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj P))\n    (d : ℤ → ℕ)\n    (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i))\n    (hfree : ∀ i : ℤ, Nonempty (F.X i ≅ ModuleCat.of (X.presheaf.stalk x)\n      (ULift.{0} (Fin (d i) → X.presheaf.stalk x))))\n    (eF : DerivedCategory.Q.obj F ≅ DerivedCategory.Q.obj\n      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj G)) :\n    ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧\n      ∃ K : CochainComplex\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (K.X i)) ∧\n        (∀ i : ℤ, Nonempty (K.X i ≅ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin (d i))))) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
