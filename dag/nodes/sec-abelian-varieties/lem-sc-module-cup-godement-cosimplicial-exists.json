@@ -15,22 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Construct the stalk/product-skyscraper adjunction. Identify its monad unit and multiplication with the concrete formulas by projection and stalk evaluation. The triangle identities and counit naturality give the unit and associativity laws. Insert the unit and multiplication in iterates; the monad identities imply the simplex relations, which extend these operators to a functor by the surjection/injection normal form. The degree terms and prescribed cofaces and codegeneracies follow from the construction.",
+   "text": "Construct the free-quiver action on the concrete iterates and operators. Its lifted path functor preserves all simplex relations by the concrete coordinate calculation and induction. Descend through the relation quotient using CategoryTheory.Quotient.lift.",
    "uses": [
-    "def-sc-module-cup-godement-model",
-    "def-sc-module-cup-godement-codegeneracies"
+    "lem-sc-module-cup-godement-relations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove fullness of the canonical presentation functor by strong induction on source length plus target length. A noninjective map factors off a sigma; a nonsurjective map factors off a delta. An injective and surjective map has equal source and target lengths and is the identity. Faithfulness supplies unique preimages. Define the desired functor by applying the quotient functor to these preimages. The preimage identity and composition lemmas prove its functor laws.",
+   "uses": [
+    "lem-sc-module-cup-godement-simplex-presentation-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed objects are definitionally T^(n+1)(F). For each delta or sigma, preimage_map identifies its unique preimage with the corresponding generator in the quotient. Quotient.lift_map_functor_map and Paths.lift_toPath identify the result with the concrete operator. Choose reflexive object equalities and supply these two operator equations.",
+   "uses": [
+    "lem-sc-module-cup-godement-relations",
+    "lem-sc-module-cup-godement-simplex-presentation-faithful"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-module-cup-godement-model",
-  "def-sc-module-cup-godement-codegeneracies"
+  "lem-sc-module-cup-godement-relations",
+  "lem-sc-module-cup-godement-simplex-presentation-faithful"
  ],
  "proof_origin": {
-  "by": "F1 stage-3 worker; independently checked and augmentation proved by F1 second reader",
+  "by": "H1 stage-3 worker, concrete coordinate proofs and explicit quotient construction",
   "document": "https://stacks.math.columbia.edu/tag/0FKR",
-  "place": "Godement resolution construction"
+  "place": "Godement construction and dual of Tag 08N8; simplex presentation via Kerodon 04FQ/04FT"
  },
  "status": "split",
  "created": {
@@ -107,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T151659-L-923774",
+  "landing": "20261013T161729-L-1460232",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

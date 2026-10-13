@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-module-cup-godement-relations",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Concrete Godement operators respect the simplex relations",
+ "statement": "For a scheme X and an O_X-module F, let T, the iterates T^(n+1)(F), the insertion maps and the collapse maps be the concrete constructions of [def-sc-module-cup-godement-model] and [def-sc-module-cup-godement-codegeneracies]. Send the object n of the free simplex quiver to T^(n+1)(F), delta_i to insertion_i, and sigma_i to collapse_i. The induced path functor sends every pair related by FreeSimplexQuiver.homRel to equal morphisms of X.Modules. Thus all six simplex relations hold for the actual operators, without assuming existence of a cosimplicial object.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement construction; dual of Lemma 14.34.2, Tag 08N8"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof": [
+  {
+   "text": "Project to each point coordinate and use skyscraperHomEquiv. Define e_F,x as skyscraperStalkEval composed with the stalk map of the product projection. The adjunction gives e_F,x after the unit equal to identity, e_G,x after T(f) equal to f_x after e_F,x, and e_F,x after multiplication equal to e_F,x after e_T(F),x. These identities prove that T respects identity and composition, that unit and multiplication are natural, both multiplication-unit identities, and multiplication associativity. Each helper is proved in Lean by product extensionality, stalk functoriality, and the stated adjunction inverse laws.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the outer iterate, splitting each Fin index into zero and successor. Successor indices reduce to the induction hypothesis under T, using its composition and identity laws. A zero coface with a later operator uses unit naturality; a zero collapse with a later operator uses multiplication naturality. The two adjacent coface-collapse equations use the two unit laws. Adjacent collapses use associativity. The order bounds rule out zero indices on the wrong side. This proves insert_insert, insert_collapse_le, insert_collapse_self, insert_collapse_succ, insert_collapse_gt and collapse_collapse. Finally case split on the six constructors of homRel and simplify the lifted path maps.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof_origin": {
+  "by": "H1 stage-3 worker, written from the cited sources",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement construction; dual of Lemma 14.34.2, Tag 08N8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Concrete Godement unit insertions and multiplication collapses respect the simplex relations",
+   "results": "service unavailable: Internal Server Error",
+   "available": false,
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"godement\"",
+   "results": "0 hits: ",
+   "available": true,
+   "date": "2026-10-13",
+   "verdict": "No exact theorem; use the existing API"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement",
+   "results": "0 hits: ",
+   "available": true,
+   "date": "2026-10-13",
+   "verdict": "No exact theorem; use the existing API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCosimplicialExists",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-godement-model-pairing",
+   "place": "Godement cosimplicial realization: simplex relations and extension to all simplex maps",
+   "via": [
+    "lem-sc-module-cup-godement-cosimplicial-exists",
+    "lem-sc-module-cup-godement-model-pairing-models-exist"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementRelations",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementRelations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_relations",
+  "statement": "theorem moduleCup_godement_relations (X : Scheme.{u}) (F : X.Modules) :\n    ∀ (a b : Paths FreeSimplexQuiver) (f g : a ⟶ b),\n      FreeSimplexQuiver.homRel f g →\n        (Paths.lift (moduleCup_godementQuiver X F)).map f =\n          (Paths.lift (moduleCup_godementQuiver X F)).map g",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_godementQuiver",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_relations"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
