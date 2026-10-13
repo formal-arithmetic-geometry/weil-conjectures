@@ -17,43 +17,39 @@
  ],
  "proof": [
   {
-   "text": "The composition and identity comparisons for e.hom and e.inv exhibit derived pullback along e as an equivalence; do the same for e′. The units and counits of the pinned adjunctions are therefore invertible. The mate of c(e,f) identifies R_(ef) with R_e followed by R_f. Insert the invertible unit E→R_e L_e E, apply R_f, then the inverse mate and the image of α to obtain R_f E≅R_(ef) N. Apply L_g to construct a. Repeat with e′,f′,β to construct b.",
+   "text": "Use the selected pullback composition and identity comparisons to exhibit pullback along each source isomorphism as fully faithful. Its pinned adjunction unit is invertible. For e and f let k be the right-adjoint conjugate of c(e,f). The composite Rf(unit_e) followed by k inverse defines the isomorphism d:Rf(E) to R(ef)(Le(E)). Composing with R(ef)(alpha) and applying Lg gives a; repeating for e prime gives b. The conjugate-counit identity, counit naturality and the triangle identity prove that L(ef)(d) followed by its counit equals c(e,f) inverse followed by Le(counit_f).",
    "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-derived-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Tags 0D5S and 08HY: composition comparisons and pinned adjunctions"
-   }
+   "elementary": false
   },
   {
-   "text": "Transpose both composite arrows under the pinned adjunction for e′f′. The mate-pasting law and the two triangle identities move b through this transposition. The square comparison on the left is the pullback of the original square comparison, followed by the source counit; on the right it is the comparison for t. Associativity of c and te=e′g′ identify these two comparisons, including their equality transports. Naturality of the counit moves α past that counit. The displayed coefficient equation identifies their final factors involving φ and φ₀. Thus the transposes coincide; injectivity of the Hom equivalence proves the arrow equality. Empty schemes and zero coefficients use the same identities.",
+   "text": "Write q and q0 for the original and new square pullback comparisons, and ch for Lg prime followed by Le prime compared with Le followed by Lt. Evaluate the associativity law at (t,e,f), (e prime,g prime,f), and (e prime,f prime,g). Naturality of equality transport in ht and h, cancellation of comparison inverses, and transitivity of equality transport prove Le prime(q) followed by ch and Lt(c(e,f)) equals c(e prime,f prime) followed by q0.",
    "uses": [
-    "lem-pc-derived-base-change-pasting",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the desired coordinate equation under the new f prime adjunction. The counit identities for d and d prime, naturality of the square comparisons, and the preceding coherence identity give the coordinate mate equation for alpha and beta identities. Prove naturality in E directly from the Hom-equivalence naturality and counit naturality. Finally substitute the given coefficient equation, map alpha and beta through direct image, and reassociate. This supplies the claimed equation for arbitrary alpha, beta, phi and phi0. Every step is a categorical identity, including empty schemes, identity coordinates and zero coefficients.",
+   "uses": [
     "def-pc-derived-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08HY",
-    "place": "Tag 08HY counit description, with Tag 0D5S associativity"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-base-change-map",
-  "lem-pc-derived-base-change-pasting",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M2",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
   "place": "Tag 08HY: counit-defined base change; Tag 0D5S: derived pullback composition",
-  "group": "Q3",
-  "date": "2026-10-13",
-  "note": "Expansion of the original nested-comparison proof; checked against the online Stacks text."
+  "note": "Direct formal counit and conjugate-adjunction calculation; no pasting theorem needed. Unit route retained."
  },
  "mathlib_searches": [
   {
@@ -138,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T113351-L-3186774",
-  "kind": "interface",
+  "landing": "20261013T123547-L-3711853",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
