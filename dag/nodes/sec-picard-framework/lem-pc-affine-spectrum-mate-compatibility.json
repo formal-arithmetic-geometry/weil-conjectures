@@ -14,26 +14,44 @@
  },
  "proof": [
   {
-   "text": "Postcompose both sides by the inverse direct-image coordinate map, cancel its hom-inverse pair, and transpose the resulting equality under the pinned adjunction for fprime. Expand both base-change maps using the counit definition. Use conjugateEquiv_counit for the explicitly constructed direct-image comparisons. Naturality moves the equivalence units through the square comparisons; pullback composition associativity and unit laws identify those comparisons. Triangle identities cancel the spectrum equivalence factors, leaving identical transposes. Injectivity of the Hom equivalence proves the equation. This argument is unbounded and applies also to empty schemes, zero rings, and zero coefficients.",
+   "text": "In a proved private categorical helper, expand the source-coordinate component with the whiskering and associator app equations. The helper keeps the source natural isomorphism as a parameter and uses its defining equality, so its component does not require unfolding the scheme coordinate construction. Evaluate the spectrum mate under the pinned adjunction and postcompose its evaluation by counit naturality with the inverse-spectrum pullback comparison.",
    "uses": [
     "def-pc-affine-spectrum-direct-image-coordinates",
-    "def-pc-affine-spectrum-derived-coordinates",
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-scheme-derived-mate-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback of the candidate spectrum-coordinate composite, followed by the transported counit, can be evaluated using naturality of the forward spectrum comparison. Apply pullback-square coherence to its square-comparison part, then move the spectrum counit in the reverse direction across the forward comparison for gprime. Comparison cancellation removes the inverse unit and counit compatibility for f identifies the remaining composite with the defining transpose of the original mate.",
+   "uses": [
+    "lem-pc-affine-spectrum-pullback-square-coherence",
+    "lem-pc-affine-spectrum-comparison-cancellation",
+    "lem-pc-affine-spectrum-counit-compatibility"
    ],
    "elementary": false
+  },
+  {
+   "text": "Counit compatibility for fprime identifies the transported counit with pullback of the inverse direct-image coordinate map followed by the original counit. Postcompose both sides of the desired equation by that inverse, cancel the coordinate hom-inverse pair, and apply injectivity of the inverse adjunction Hom equivalence. The previous evaluation equals the defining original-mate evaluation, proving the equation.",
+   "uses": [
+    "lem-pc-affine-spectrum-counit-compatibility",
+    "lem-pc-scheme-derived-mate-evaluation",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-affine-spectrum-direct-image-coordinates",
-  "def-pc-affine-spectrum-derived-coordinates",
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-scheme-derived-mate-evaluation",
+  "lem-pc-affine-spectrum-pullback-square-coherence",
+  "lem-pc-affine-spectrum-comparison-cancellation",
+  "lem-pc-affine-spectrum-counit-compatibility",
+  "def-pc-derived-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Conjugation and coherence argument for the affine reduction in parent node"
+  "place": "Remark 08HY, counit transpose; Tag 0D5S coherence. A fully proved categorical coordinate-mate helper is instantiated with the exact canonical choices; the defining source-iso equality is reflexivity."
  },
  "mathlib_searches": [
   {
@@ -112,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T125009-L-3836814",
+  "landing": "20261013T165643-L-1808781",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

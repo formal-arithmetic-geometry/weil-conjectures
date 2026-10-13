@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-scheme-derived-mate-evaluation",
+ "kind": "statement",
+ "title": "Counit evaluation of the canonical derived base-change mate",
+ "statement": "Let X, Xprime, S and Sprime be schemes, with unbounded derived categories of module sheaves, and f:X→S, fprime:Xprime→Sprime, g:Sprime→S and gprime:Xprime→X satisfying gprime≫f=fprime≫g. For every K in D(O_X), applying Lfprime* to the canonical base-change mate and composing with the pinned counit at Lgprime*K gives the canonical square comparison at Rf_*K followed by Lgprime* of the pinned counit at K. The square comparison is the hom of c(fprime,g), the equality transport for the commutative square, and the inverse of c(gprime,f), in that order. The adjunctions and composition comparisons are exactly the choices specifying the canonical base-change map, not independent choices.",
+ "stmt_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Remark 08HY: the base-change map is adjoint to pullback of the counit after the square comparison"
+ },
+ "proof": [
+  {
+   "text": "Name the exact pinned adjunction and composition comparisons used by the existing base-change definition. In a proved categorical helper, a morphism beta equal to the forward Hom equivalence of a four-factor composite evaluates under pullback and the counit to that composite, by inverse-forward evaluation. Reassociate its first three factors. Instantiate the four factors with the two composition comparisons, equality transport for the square, and pullback of the counit. The equality identifying beta with its defining Hom-equivalence formula is reflexivity. This uses no affineness, cartesianness, boundedness or nonzero-object hypothesis.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Formal evaluation of the defining adjunction transpose"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change mates under isomorphisms of schemes and equivalences of derived categories",
+   "results": "Underived pullback composition conjugation and unitality results, including Scheme.Modules.conjugateEquiv_pullbackComp_inv; no derived spectrum transport statement.",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, _ ≅ _",
+   "results": "Twelve generic adjunction isomorphism-transport lemmas, including ofNatIsoLeft, ofNatIsoRight and their unit/counit equations; no scheme-specific coherence identity.",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|isoSpec_inv_naturality",
+   "results": "Seven matches: conjugateEquiv_counit and its symmetric form in Adjunction.Mates, and isoSpec_inv_naturality in AffineScheme. No derived affine-spectrum identity.",
+   "date": "2026-10-14",
+   "verdict": "building blocks only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change mates in affine spectrum coordinates via adjunction counits and coherent pullback composition",
+   "results": "Service unavailable: Internal Server Error, as logged by the earlier attempt. No match verdict obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumMateCompatibility",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-mate-compatibility",
+   "place": "Expand both base-change maps using the counit definition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedMateEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedMateEvaluation.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedMate_evaluation",
+  "statement": "theorem schemeDerivedMate_evaluation\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g) (K : schemeDerivedCategory X) :\n  (derivedPullback f').map (schemeDerivedBaseChangeMap f f' g g' h K) ≫\n      (canonicalSchemeDerivedAdjunction f').counit.app ((derivedPullback g').obj K) =\n    canonicalDerivedSquareComparison f f' g g' h ((schemeDerivedDirectImage f).obj K) ≫\n      (derivedPullback g').map ((canonicalSchemeDerivedAdjunction f).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165643-L-1808781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165643-L-1808781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
