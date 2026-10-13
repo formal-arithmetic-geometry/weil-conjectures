@@ -20,20 +20,34 @@
  },
  "proof": [
   {
-   "text": "Unfold the Ext-defined pullback. The comparison isomorphisms for inverse images and constant sheaves are compatible with composition; naturality of Ext maps and associativity of Yoneda products identify the composite pullback with the pullback along f ≫ g, evaluated at x.",
+   "text": "Apply the proved library theorem CategoryTheory.Abelian.Ext.exactFunctorCompositionComparison to the natural isomorphism from the inverse-image functor of f composite g to the composite inverse-image functors. This identifies their Ext maps after pre- and postcomposition with the degree-zero comparison components.",
+   "uses": [
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use uniqueness of left adjoints to compare the inverse-image functor of f composite g with the composite inverse-image functors. Applying the hom equivalences shows that the adjoint structure-sheaf morphisms compose across this comparison (adjoint_comp_mate). Applying the constant-sheaf adjunctions and their units likewise shows that the inverse constant-sheaf comparisons compose (adjoint_constant_comp). Both helpers are proved in the module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand structureSheafCohomologyPullback as the Yoneda product of the constant-sheaf comparison, the exact-functor image of the class, and the adjoint structure-sheaf map. Substitute the preceding comparison equalities; use exactFunctorCompositionComparison and associativity of Yoneda products to identify it with the two successive pullbacks.",
    "uses": [
     "def-sc-structure-sheaf-cohomology-pullback"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-structure-sheaf-cohomology-pullback"
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "S2",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Section 01F7 equation-functorial"
+  "place": "Section 01F7 equation-functorial; Ext and adjunction coherence made explicit in Lean"
  },
  "mathlib_searches": [
   {
@@ -89,13 +103,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T223423-L-1643324",
-  "kind": "interface",
+  "landing": "20261013T015613-L-3026542",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

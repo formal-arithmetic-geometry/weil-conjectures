@@ -10589,3 +10589,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/R3/Sheaf.RingTheory.SymmetricConormalPresentationTransport (stage 3; reviewer PASS; first push; landing 20261013T015611-L-3026137 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/R4/Sheaf.AlgebraicGeometry.FormalCompletionExact (stage 3; reviewer PASS; first push; landing 20261013T015612-L-3026269 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/R4/Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionCore (stage 3; reviewer PASS; first push; landing 20261013T015612-L-3026420 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/S2/Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackCompositionPointwise (stage 3; reviewer PASS; first push; landing 20261013T015613-L-3026542 (proof); batch 20261013T015540; modules 1; new nodes 0)
