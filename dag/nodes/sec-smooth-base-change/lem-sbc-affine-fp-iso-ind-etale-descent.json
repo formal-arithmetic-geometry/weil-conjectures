@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-affine-fp-iso-ind-etale-descent",
+ "kind": "statement",
+ "title": "Relative affine isomorphisms and finite unit conditions descend to an etale stage",
+ "statement": "Let R,H be commutative rings and iota:R→H an ind-etale ring homomorphism. Let p:Y→Spec R and q:Z→Spec R be affine and locally of finite presentation. Fix finitely many elements a(k) of R whose images in H are units. If Y×_R Spec H and Z×_R Spec H are isomorphic over Spec H, there are a commutative ring S, ring homomorphisms phi:R→S and psi:S→H with psi∘phi=iota, Spec(phi) etale, all phi(a(k)) units, and Y×_R Spec S≅Z×_R Spec S over Spec S. No chosen point or polynomial chart is involved.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use RingHom.IndEtale.iff_exists to present H as a filtered colimit of etale R-algebras. Put w=product a(k). Since its image is a unit, the map R→H extends to R[1/w]. Factor this finitely presented algebra map through one stage using the cited finite-presentation factorization lemma. The image of w is a unit there, hence every a(k) is a unit there by IsUnit.prod_univ_iff. This is the fully proved private helper finite_units_stage.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Spec to the ring colimit cocone to obtain a limit cone of affine schemes. At the unit stage take the base changes of p and q. They are affine and locally finitely presented, hence qcqs. Their two pullback squares have a common limit model after transporting the second square through the given isomorphism.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved source-library AlgebraicGeometry.exists_iso_of_isPullback, the isomorphism assembly of the morphism and equality descent clauses of thm-pd-spreading-out. At its later stage use canonical pullback maps; the cone identities show their composites with the limit maps are the old maps. The resulting isomorphism commutes with the second projections. Naturality carries the unit conditions to the later stage, while the ring cocone compatibility gives psi.comp phi=iota and the original etale-stage property gives Spec(phi) etale.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYG, 05N9; the scheme limit route is Tag 01ZM, implemented by the source library."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between finitely presented affine schemes descends along an ind etale ring map to an etale stage",
+   "digest": "dde6d936368dc9d6",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:31:52Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between finitely presented affine schemes descends along an ind etale ring map to an etale stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"RingHom.Etale.toAlgebra\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"dde6d936368dc9d6\"}",
+   "verdict": "no exact match; ingredients used after source search"
+  },
+  {
+   "tool": "grep",
+   "query": "(iso|equiv).*colimit|colimit.*(iso|equiv)",
+   "digest": "8248cb359c81fb21",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:32:10Z\", \"tool\": \"grep\", \"query\": \"(iso|equiv).*colimit|colimit.*(iso|equiv)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RingHomProperties.lean\"], \"digest\": \"8248cb359c81fb21\"}",
+   "verdict": "no exact match; ingredients used after source search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms of finitely presented algebras descend along filtered colimits",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:32:10Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphisms of finitely presented algebras descend along filtered colimits\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-cyclic-charts",
+   "place": "Tag 0EYG descent paragraph: Relative affine isomorphisms and finite unit conditions descend to an etale stage",
+   "via": [
+    "lem-sbc-punctured-root-charts-ind-etale-descent",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineFpIsoIndEtaleDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_fp_iso_descend_indEtale",
+  "statement": "theorem affine_fp_iso_descend_indEtale\n    (R H : CommRingCat.{u}) (ι : R →+* H) (hι : ι.IndEtale)\n    {Y Z : Scheme.{u}} (p : Y ⟶ Spec R) (q : Z ⟶ Spec R)\n    (hp : IsAffineHom p ∧ LocallyOfFinitePresentation p)\n    (hq : IsAffineHom q ∧ LocallyOfFinitePresentation q)\n    (m : ℕ) (a : Fin m → R) (ha : ∀ k, IsUnit (ι (a k)))\n    (hiso : ∃ γ : pullback p (Spec.map (CommRingCat.ofHom ι)) ≅\n        pullback q (Spec.map (CommRingCat.ofHom ι)),\n      γ.hom ≫ pullback.snd q (Spec.map (CommRingCat.ofHom ι)) =\n        pullback.snd p (Spec.map (CommRingCat.ofHom ι))) :\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (ψ : S →+* H),\n      ψ.comp φ = ι ∧ Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (∀ k, IsUnit (φ (a k))) ∧\n      ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅\n          pullback q (Spec.map (CommRingCat.ofHom φ)),\n        γ.hom ≫ pullback.snd q (Spec.map (CommRingCat.ofHom φ)) =\n          pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T151136-L-878095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T151136-L-878095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

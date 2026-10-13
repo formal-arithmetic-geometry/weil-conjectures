@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-punctured-root-product-base-change",
+ "kind": "statement",
+ "title": "Punctured products of root algebras commute with base change",
+ "statement": "For every commutative ring R, element g of R, natural number m and family e:Fin m→N, let A_R be the finite product of R[t]/(t^(e(k))-g), let V_R=D(g) in Spec A_R, and let q_R:V_R→Spec R be its structural map. Then q_R is affine and locally of finite presentation. For every ring homomorphism phi:R→S there is an isomorphism V_R×_R Spec S≅V_S over Spec S, where V_S uses the same exponents and the coefficient phi(g). Empty products, exponent zero and empty basic opens are allowed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, descent paragraph; Tag 05N9 (2), (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Each factor has finite presentation by AdjoinRoot.finitePresentation. Use Algebra.FinitePresentation.pi from Mathlib.RingTheory.Finiteness.FinitePresentationLocal for the finite product. The basic open is affine by IsAffineOpen.Spec_basicOpen, its inclusion is locally finitely presented, and composition gives both properties of q_R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the individual tensor equivalences with AdjoinRoot.tensorAlgEquiv followed by AdjoinRoot.mapAlgEquiv and the tensor right unit equivalence. Take their finite product using Algebra.TensorProduct.piRight. Applying Spec and pullbackSpecIso gives a cartesian square of the unpunctured products. Identify the inverse image of D(g) with D(phi(g)) by PrimeSpectrum.comap_basicOpen and the structural-map equation. Paste the restriction pullback square with the product square and use its isoPullback; this proves the second projection identity. All cited equivalences and pullback lemmas are already proved in Mathlib.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYG, 05N9; the scheme limit route is Tag 01ZM, implemented by the source library."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorAlgEquiv|piRight|pullback.*Restrict|FinitePresentation.pi",
+   "digest": "9287080bf2c7e65f",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:36:37Z\", \"tool\": \"grep\", \"query\": \"tensorAlgEquiv|piRight|pullback.*Restrict|FinitePresentation.pi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\"], \"digest\": \"9287080bf2c7e65f\"}",
+   "verdict": "no exact match; ingredients used after source search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the basic open in the spectrum of a finite product of polynomial root quotient algebras",
+   "digest": "aec7e50516071a97",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:36:37Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of the basic open in the spectrum of a finite product of polynomial root quotient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.image_comap_C_basicOpen\", \"MvPolynomial.image_comap_C_basicOpen\", \"Polynomial.mem_image_comap_C_basicOpen\", \"MvPolynomial.mem_image_comap_C_basicOpen\", \"AlgebraicGeometry.Polynomial.comap_C_mem_imageOfDf\", \"AlgebraicGeometry.Polynomial.imageOfDf_eq_comap_C_compl_zeroLocus\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"PrimeSpectrum.mem_image_comap_basicOpen\"], \"digest\": \"aec7e50516071a97\"}",
+   "verdict": "no exact match; ingredients used after source search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product commutes with finite products and polynomial quotients and localization",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:36:37Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product commutes with finite products and polynomial quotients and localization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootChartsIndEtaleDescent",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-split-cover-cyclic-charts",
+   "place": "Tag 0EYG descent paragraph: Punctured products of root algebras commute with base change",
+   "via": [
+    "lem-sbc-punctured-root-charts-ind-etale-descent",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootProductBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootProductBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_root_product_base_change",
+  "statement": "theorem punctured_root_product_base_change\n    (R : CommRingCat.{u}) (g : R) (m : ℕ) (e : Fin m → ℕ) :\n    IsAffineHom (puncturedRootProductMap R g m e) ∧\n    LocallyOfFinitePresentation (puncturedRootProductMap R g m e) ∧\n    ∀ (S : CommRingCat.{u}) (φ : R →+* S),\n      ∃ δ : pullback (puncturedRootProductMap R g m e)\n          (Spec.map (CommRingCat.ofHom φ)) ≅\n          (puncturedRootProductOpen S (φ g) m e).toScheme,\n        δ.hom ≫ puncturedRootProductMap S (φ g) m e =\n          pullback.snd (puncturedRootProductMap R g m e)\n            (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T151136-L-878095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T151136-L-878095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
