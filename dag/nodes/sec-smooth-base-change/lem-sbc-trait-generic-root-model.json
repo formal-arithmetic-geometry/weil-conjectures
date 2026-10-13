@@ -1,0 +1,158 @@
+{
+ "id": "lem-sbc-trait-generic-root-model",
+ "kind": "statement",
+ "title": "Local normal root models containing the generic trait torsor as a dense open",
+ "statement": "Let $A$ be a discrete valuation ring, $K$ its fraction field as an $A$-algebra, and $d:L\\to\\operatorname{Spec}A$ a quasi-compact quasi-separated smooth morphism [def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms]. Write $b:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ for the algebra map, and $L_K=L\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$ [def-pc-fibre-product]. Let $G$ be a finite group of invertible order in $A$, and $W\\to L_K$ a finite etale $G$-torsor [def-sbc-normal-dominant-galois], with composite $p:W\\to L$. For every $x\\in L$, there are a ring $R$, an etale map $\\varphi:\\operatorname{Spec}R\\to L$ and $y$ with $\\varphi(y)=x$, an integer $m\\geq0$, $f\\in R$ and positive integers $e_k$ invertible in $R$, such that $N=\\operatorname{Spec}\\prod_{k\\in\\operatorname{Fin}m}R[T]/(T^{e_k}-f)$ has all local rings integrally closed domains [def-weil-pbc-normal-ring], and has a dense open $V$ and an isomorphism $\\gamma:W\\times_L\\operatorname{Spec}R\\simeq V$ over $\\operatorname{Spec}R$. If $q:N\\to\\operatorname{Spec}R$ is the algebra structure map, the compatibility is $\\gamma;\\iota_V;q=\\operatorname{pr}_2$. No relative normalization occurs in the conclusion; $N$ is the concrete spectrum of the displayed product. Rings and schemes lie in one universe, and $G$ in the next. The empty product is allowed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ (trait paragraph), 09EB, 0EYG (punctured root charts) and 0EYH (regularity of full root algebras)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "The DVR is regular and Noetherian. Smoothness makes L regular and locally Noetherian. Flatness makes its closed fibre a regular effective Cartier divisor, cut out by a uniformizer, and identifies its complement with the generic fibre. At a generic point of the closed fibre the local ring is a DVR. For each connected generic torsor component use its stabilizer: ramification indices and inseparable residue degrees divide the stabilizer order by Tag 09EB and hence divide the invertible order of G. The residue characteristic cannot divide these indices or inseparable degrees. Thus the generic cover is tame in codimension one, as in the first paragraph of Tag 0EYJ.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Tag 0EYG at x to obtain an affine etale neighborhood Spec R with a point above x. On that neighborhood the generic cover is the finite disjoint union of punctured root covers with a common equation f and positive invertible exponents e_k. Enumerate the finite family by Fin m and write its disjoint union as the spectrum of the finite product. Off the closed fibre split the cover etale locally and take f=1 and e_k=1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct N as Spec of the product of the full monic root algebras. These are finite over the Noetherian R, so N is locally Noetherian. If x lies on the closed fibre, f is a nonzerodivisor and R/fR is regular. At primes containing the root coordinate, quotienting by that nonzerodivisor gives a localization of R/fR, which is regular, so the local ring of the root algebra is regular. At the remaining primes the coordinate and f are units; the derivative e_k*T^(e_k-1) is a unit, so the algebra is etale over the regular R and its local rings are regular. Regular local rings are integrally closed domains. These arguments also apply to f=1, where the root algebras with exponent one are copies of R. Stalks of a finite product belong to one factor, so N has the stated normal domain stalks. This is the local-ring verification in Tag 0EYH.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take V to be the open in N on which f is invertible. The monic root algebras are free over R, so multiplication by f is injective; consequently V is dense in every factor and hence in N. The punctured-root isomorphism from the second step is exactly gamma: W pulled back to Spec R is isomorphic to V over Spec R. For m=0 the product ring is zero, N and V are empty, density is vacuous and gamma is the unique empty isomorphism. Nothing in this construction uses a relative normalization or chooses data for a definition.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ, 09EB, 0EYG and 0EYH; local normal model before normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tame finite etale cover of generic fiber of smooth scheme over discrete valuation ring has local normal root model",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization of tame finite etale cover complement regular divisor standard root charts",
+   "results": "8 hits: StandardEtalePair.hasMap_X, StandardEtalePresentation.hasMap, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, StandardEtalePresentation, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, StandardEtalePair.instEtaleRing; none gives the local normal root model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tame|AdjoinRoot|normalizationPullback",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean; none gives the local normal root model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale torsor on complement of smooth closed fiber admits Kummer root model with normal local rings",
+   "results": "8 standard etale algebra/presentation and etale-locus results; no local root model theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsIntegrallyClosed",
+   "results": "4 minpoly equivalence and injectivity results; these do not construct charts or prove root-model normality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Abhyankar|ramification",
+   "results": "25 number field and Kummer-Dedekind results, no geometric local model. rg on both library roots found normalization comparisons, but no punctured root-model construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraitGenericNormalizationCharts",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: punctured standard root covers and regularity of their full monic root algebras, before identifying the normalization",
+   "via": [
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.TraitGenericRootModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/TraitGenericRootModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.trait_generic_root_model",
+  "statement": "theorem GaloisCover.trait_generic_root_model (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Field K] [Algebra A K] [IsFractionRing A K] {L : Scheme.{u}} (d : L ⟶ Spec (CommRingCat.of A)) [QuasiCompact d] [QuasiSeparated d] [Smooth d] (G : Type (u + 1)) [Group G] [Finite G] (hG : IsUnit (Nat.card G : A)) (W : GaloisCover G (pullback d (Spec.map (CommRingCat.ofHom (algebraMap A K))))) : letI : IsFinite W.π := W.isFinite let b := Spec.map (CommRingCat.ofHom (algebraMap A K)) let p := W.π ≫ pullback.fst d b ∀ x : L, ∃ (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R), Etale φ ∧ φ y = x ∧ ∃ (m : ℕ) (f : R) (e : Fin m → ℕ), (∀ k, 0 < e k ∧ IsUnit (e k : R)) ∧ let N := Spec (CommRingCat.of (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))) let q := Spec.map (CommRingCat.ofHom (algebraMap R (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) (∀ z : N, IsDomain (N.presheaf.stalk z) ∧ IsIntegrallyClosed (N.presheaf.stalk z)) ∧ ∃ V : N.Opens, Dense (V : Set N) ∧ ∃ γ : pullback p φ ≅ V.toScheme, γ.hom ≫ V.ι ≫ q = pullback.snd p φ",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T060429-L-586115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T060429-L-586115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

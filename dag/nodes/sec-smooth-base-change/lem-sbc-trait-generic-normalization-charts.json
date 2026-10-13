@@ -16,17 +16,38 @@
  ],
  "proof": [
   {
-   "text": "A DVR is Noetherian and regular. Smoothness makes L locally Noetherian and regular.\nA uniformizer cuts out its closed fibre D as an effective Cartier divisor, since the\nsmooth morphism is flat. D is regular because it is smooth over the residue field.\nThe complement is the generic fibre. At a generic point of D its local ring is a DVR.\nFor each connected component of the generic torsor, use its stabilizer in G as the\nGalois group. The ramification indices and residue degrees divide the stabilizer order\n(Tag 09EB). They therefore divide the invertible order of G. The inseparable residue\nextension has degree a power of the residue characteristic, so its degree is one.\nConsequently the generic cover is tame in codimension one. Tag 0EYG gives an affine\netale neighbourhood of each point on which the punctured cover is a finite disjoint\nunion of standard root covers, all using the same equation for D. Tag 0EYH identifies\nits normalization with the full standard root covers. Normalization commutes with\netale base change (03GE, 03GV), giving isomorphisms over each affine neighbourhood.\nFinite disjoint unions of affine spectra are spectra of product rings. Enumerate the\nfinite component set by Fin m. Outside D split the finite etale cover etale locally and\nuse e = 1, f = 1. The empty family of\ncomponents gives m = 0 and the zero product ring. No section is required.",
+   "text": "Apply [lem-sbc-trait-generic-root-model] at x. It supplies the affine etale neighborhood, the concrete product root scheme N with normal domain stalks, and a dense open V identified with the generic cover pulled back to this neighborhood. Its statement concerns the generic cover, not its normalization.",
+   "uses": [
+    "lem-sbc-trait-generic-root-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each polynomial X^e_k-C f is monic since e_k>0. Mathlib Polynomial.Monic.finite_adjoinRoot and Module.Finite.pi make the product a finite R-module. IsFinite.SpecMap_iff makes q:N -> Spec R finite and hence integral. The DVR is Noetherian. Successive applications of LocallyOfFiniteType.isLocallyNoetherian to the smooth d, etale phi and finite q make L, Spec R and N locally Noetherian; therefore V -> N is quasi-compact. Apply [lem-sbc-normalization-dense-open] to identify the normalization of N in V with N.",
+   "uses": [
+    "lem-sbc-normalization-dense-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private Lean helper normalization_iso_of_dense_open_model constructs a:g.normalization -> N using normalizationDesc, where g is the pulled-back generic cover and gamma identifies its source with V. The integral a allows the inverse generic map V -> g.normalization to descend from V.ι.normalization; precompose with the inverse of its canonical isomorphism onto N to get c:N -> g.normalization. normalizationDesc_comp gives c;a=id. The equality on V and normalization.hom_ext give a;c=id; normalizationDesc_comp also gives a;q=g.fromNormalization. This is the universal-property assembly, proved in Lean without a new hole.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The etale phi is smooth. Mathlib Hom.normalizationPullback phi is therefore an isomorphism between the normalization of the generic-cover pullback and the pullback of p.fromNormalization. Compose its inverse with the helper isomorphism to obtain alpha. Cancel the normalizationPullback isomorphism and use normalizationPullback_snd to prove the required equation over Spec R. Package the unchanged chart conclusion. The supplied finiteness hypothesis on p.fromNormalization is not needed for this route, but its binder stays unchanged.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-trait-generic-root-model",
+  "lem-sbc-normalization-dense-open"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0EYJ (first trait paragraph), 09EB, 0EYG, 0EYH, 03GE and 03GV"
+  "place": "Tags 0EYG and 0EYH; local normal root model plus dense-open normalization and Mathlib universal-property/base-change assembly written in Lean by V3"
  },
  "mathlib_searches": [
   {
@@ -126,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T040748-L-3948948",
+  "landing": "20261013T060429-L-586115",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
