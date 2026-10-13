@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-colimit-site-kan-unit-relations",
+ "kind": "statement",
+ "title": "Single-stage Kan unit relations vanish after refinement",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathbf{Cat}$ a diagram of small categories, and $V$ a cocone with vertex $C$ [def-weil-pbc-category-colimit]. Assume its object and arrow cocones are colimits in sets [def-weil-pbc-arrows-functor]. Fix $i\\in J$ and $t=(i\\to j)\\in\\mathrm{Under}(i)$, whose objects are arrows out of $i$ and whose morphisms are commuting triangles. For every $r=(i\\to k)$ give a presheaf of sets $A_r:F(k)^{op}\\to\\mathrm{Sets}$. For every $b:t\\to r$, with underlying arrow $b.right:j\\to k$, give a natural transformation $\\theta_{r,b}:A_t\\to F(b.right)^{op}\\circ A_r$; no compatibility between these transformations is assumed. Let $K:C^{op}\\to\\mathrm{Sets}$ and $\\beta:A_t\\to V_j^{op}\\circ K$ exhibit $K$ as the left Kan extension of $A_t$ along $V_j^{op}$, meaning that precomposition with $\\beta$ bijects natural maps $K\\to T$ with natural maps $A_t\\to V_j^{op}\\circ T$ for each presheaf $T$ on $C$. For $U\\in F(j)$ and $x,x'\\in A_t(U)$, if $\\beta_U(x)=\\beta_U(x')$, then some $r\\in\\mathrm{Under}(i)$ and $b:t\\to r$ satisfy $\\theta_{r,b,U}(x)=\\theta_{r,b,U}(x')$ in $A_r(F(b.right)U)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of presentations in the section construction; omitted verification expanded using finite Kan relations"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the pointwise set-valued left Kan formula: K(V_j(U)) is the colimit over structured arrows, with generators (W,f,s) for W in F(j), f:V_j(U)→V_j(W), s in A_t(W). The unit sends x to (U,id,x). Equality of the two unit images gives a finite zigzag of the generating relations induced by arrows h:W→W′, relating (W,f,A_t(h.op)(s′)) and (W′,V_j(h)∘f,s′).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the finitely many structured arrows f in the zigzag choose representatives in the arrow colimit, and a common stage receiving their representing stages and j. Apply the object-colimit eventual-equality criterion to identify their source and target with the transported U and W. Apply the arrow-colimit criterion to impose all triangle equations g′=F(b.right)(h)∘g and both endpoint identity equations. Equalize the finite collection of competing arrows from j. Then equalize the arrows from i to ensure one commuting triangle b:t→r in Under(i). All equations already imposed persist under refinement. This produces one b and simultaneous lifted arrows for the whole zigzag.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use only the transformation θ_(r,b) at this final refinement. Send a generator to A_r(g.op)(θ_(r,b,W)(s)). For a relation from h, naturality of θ gives θ_W(A_t(h.op)(s′))=A_r(F(b.right)(h).op)(θ_W′(s′)); functoriality and g′=F(b.right)(h)∘g identify the two restricted sections. Reverse relations reverse equality and reflexive relations preserve it. Induction along the finite zigzag equates its endpoint images. Both lifted endpoint arrows are identities, so these images are precisely θ_(r,b,U)(x) and θ_(r,b,U)(x′). Coherence of different θ maps, sheaf conditions, and any outer colimit are unnecessary.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of presentations in the section construction; omitted verification expanded using finite Kan relations",
+  "note": "Expansion of the omitted independence-of-presentation verification; the Stacks source was read at https://stacks.math.columbia.edu/tag/0A35."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equal elements under a left Kan extension unit eventually become equal along a filtered category diagram",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "date": "2026-10-13",
+   "results": "12 hits, including leftKanExtensionUnique, descOfIsLeftKanExtension, colimitIsoOfIsLeftKanExtension; generic Kan universal properties only",
+   "verdict": "no single-stage relation lifting result"
+  },
+  {
+   "tool": "grep",
+   "query": "Kan.*unit.*(inject|equal)|unit.*Kan.*(inject|equal)",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of unit generators in a left Kan extension along a filtered colimit of categories",
+   "date": "2026-10-13",
+   "results": "8 hits: generic pointwise Kan unit and colimit comparison formulas",
+   "verdict": "no varying-category relation lifting result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawSectionRelations",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0A35 section construction: independence of presentations; the single-stage finite Kan zigzag part of raw_section_relations",
+   "via": [
+    "lem-weil-pbc-colimit-site-raw-section-relations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteKanUnitRelations",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteKanUnitRelations.lean",
+  "declaration": "CategoryTheory.raw_section_kan_unit_relations",
+  "statement": "theorem raw_section_kan_unit_relations\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (t : Under i)\n    (A : ∀ r : Under i, (F.obj r.right)ᵒᵖ ⥤ Type u)\n    (θ : ∀ (r : Under i) (b : t ⟶ r),\n      A t ⟶ (F.map b.right).toFunctor.op ⋙ A r)\n    (K : V.ptᵒᵖ ⥤ Type u)\n    (β : A t ⟶ (V.ι.app t.right).toFunctor.op ⋙ K)\n    (hβ : K.IsLeftKanExtension β)\n    (U : F.obj t.right) :\n    ∀ (x x' : (A t).obj (op U)), β.app (op U) x = β.app (op U) x' →\n      ∃ (r : Under i) (b : t ⟶ r),\n        (θ r b).app (op U) x = (θ r b).app (op U) x'",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T031532-L-3568738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T031532-L-3568738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

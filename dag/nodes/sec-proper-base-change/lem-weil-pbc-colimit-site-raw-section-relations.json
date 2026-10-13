@@ -14,24 +14,34 @@
  ],
  "proof": [
   {
-   "text": "First the adjunction hom-equivalence and htheta determine theta_b\nuniquely: its adjoint is the unit at t' after the canonical functor transports.\nInjectivity of this hom-equivalence gives theta_id = id and compatibility of\ntheta with composition, with the same transports. Thus sections can be moved\nthrough successive refinements without changing their eventual value.\n\nEvaluate the outer presheaf colimit at Y = V_i(U). Its filtered-set equality\ncriterion moves the two given representatives to B_k(Y) for a common object\nk of Under i. The equations hbeta_map, hm and hkappa identify them with the\nbeta_k unit representatives of their transported sections at U_k = F(k.hom)(U).\nThe pointwise left Kan formula identifies B_k(Y) with the set colimit whose\ngenerators are triples (W, f, s), where W lies in F(k.right), f : Y -> V_k(W),\nand s is a section at W. Equality of two generators in a set colimit means a\nfinite zigzag of generating relations. A relation from h : W -> W' identifies\n(W, f, A_k.map(h.op)(s')) with (W', f followed by V_k(h), s').\n\nLift the finitely many f arrows to one later stage r, using surjectivity of\nthe arrow colimit. The object-colimit equality criterion aligns their sources\nwith U_r and their targets with the forward images of the W. Refine again so\nthe arrow-colimit equality criterion enforces every triangle from the zigzag\nand makes the endpoint arrows the identities of U_r. Equalize the finitely\nmany competing stage maps, including those out of i, so all these choices\nuse one arrow k -> r in Under i. Finite repetition preserves all earlier\nequations because the transition functors preserve equality and composition.\n\nSend (W, f, s) to the section obtained by applying theta_(k,r) to s and\nrestricting along the chosen lift g : U_r -> F(k -> r)(W). Each generating\nrelation has equal images: naturality of theta moves restriction by h through\ntheta, and the lifted triangle identifies g followed by F(k -> r)(h) with\nthe next lifted arrow. Both orientations of a relation preserve equality, so\ninduction along the zigzag equates its endpoint sections. The identity\nendpoint arrows and composition compatibility of theta identify these with\nthe sections obtained from the original x and x' at stage r. Finally hm and\nthe injectivity of (E r).hom give D.map b x = D.map b' x'. This proves only\nthe eventual equality criterion; no representative-existence or comparison\nisomorphism is used.",
+   "text": "For each t choose the object equality e_t supplied by hκ. Normalize the stage map f_t = E_t β_t followed by transport to B_t(Y), Y = V_i(U). For b:t→t′, Under.w and functor composition give F(b.right)(F(t.hom)U)=F(t′.hom)U. Precompose hβmap by E_t and postcompose hm by β_t′ at these equal objects. Naturality of B(b) along e_t, and invariance of Arrow.mk under equality transport, give f_t B(b)(Y)=D(b) f_t′. Naturality of the colimit coprojection gives κ_t=f_t ι_t(Y). These calculations are proved in Lean by the private Arrow helpers and hf and hk.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation at Y preserves the presheaf colimit. Apply the filtered-set equality criterion to κ_t(x)=κ_t′(x′), obtaining k and b:t→k, b′:t′→k with B(b)(Y)(f_t(x))=B(b′)(Y)(f_t′(x′)). The preceding compatibility gives f_k(D(b)x)=f_k(D(b′)x′). Cancel the equality transport in f_k, which is an isomorphism of sets, to obtain equality of the β_k unit images of E_k(D(b)x) and E_k(D(b′)x′).",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-stage Kan-unit relation lemma to the underlying presheaves A_r of the stage inverse images, the natural maps θ(k,r,c).hom, β_k, and F(k.hom)U. Obtain c:k→r with the two transported sections equal. The Arrow equation hm identifies θ_c E_k with D(c) E_r up to equality transport. Injectivity of this transport and E_r implies D(c)(D(b)x)=D(c)(D(b′)x′). Functor.map_comp now yields the desired equality along b≫c and b′≫c. No representative-existence or comparison-isomorphism theorem is used.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-kan-unit-relations"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-colimit-site-kan-unit-relations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of presentations in the section construction; omitted verification expanded using finite Kan relations",
+  "note": "C3: the outer filtered-colimit and transport steps are formalized; only the single-stage finite Kan zigzag is split off."
  },
  "mathlib_searches": [
   {
@@ -162,9 +172,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T015543-L-3016460",
+  "landing": "20261013T031532-L-3568738",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
