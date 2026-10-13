@@ -13,25 +13,42 @@
  },
  "proof": [
   {
-   "text": "Put L_t = tensorPullback t and use the normalized adjunction\nL_t ⊣ t_*. The adjunction defining scalarPullbackCompIso identifies the unit\nof L_(a ≫ b) with the successive units for L_b and L_a, followed by the\npushforward-composition comparison. Apply inverse-image adjunction on sheaves\nof k-vector spaces. The sectionwise characterization of scalarPullbackCoefficient\nthen identifies the coefficient map for the composite with the composite of\nthe two coefficient maps, followed by the inverse of scalarPullbackCompIso.\nIndeed, their adjoints have the same component on every section by the unit\nidentity; hence they are equal by sheaf-morphism extensionality and injectivity\nof the adjunction hom equivalence. The comparison of inverse images also\nidentifies scalarInverseUnitIso for the composite with the successive constant\nunit isomorphisms, by naturality of constant-sheaf pullback. For an Ext class,\napply exact-functor composition comparison and naturality with respect to these\ntwo coefficient maps. Associativity of Yoneda composition and the constant-unit\nidentity give equality of the resulting scalar Ext classes. Finally the\ninjective-resolution comparison defining scalarCohomologyExtEquiv is natural\nin the coefficient module: a resolution lift induces both its derived-functor\nmap and postcomposition in Ext, independently of the lift by homotopy. This\nidentifies postcomposition by the inverse pullback comparison with\nscalarCohomologyMap and transports the Ext equality to the displayed formula.\nAll normalization choices here are determined by their unit or resolution\ncharacterization. In degree zero this is composition of section pullback;\nidentity arrows, zero coefficients and empty schemes satisfy the same argument.",
+   "text": "Apply injectivity of scalarCohomologyExtEquiv on A. Rewrite the cohomology coefficient map using [lem-sc-scalar-cohomology-ext-coefficient-naturality]. Unfold scalarCohomologyPullback and cancel each equivalence with its inverse, exposing the constant-unit precomposition, inverse-image Ext map and coefficient postcomposition for each arrow.",
    "uses": [
-    "def-sc-field-linear-module-cohomology-operations",
-    "lem-pc-module-pullback-identity-composition"
+    "lem-sc-scalar-cohomology-ext-coefficient-naturality",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the explicit inverse-image comparison and its two coherence identities from [lem-sc-scalar-inverse-image-composition-coherence]. Apply [lem-weil-pbc-ext-exact-functor-composition-comparison] to that isomorphism and the scalar Ext class of x, obtaining composite-map postcomposition by e at F equals precomposition by e at the constant unit followed by the two exact-functor maps.",
+   "uses": [
+    "lem-sc-scalar-inverse-image-composition-coherence",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand exact-functor transport of Yoneda composites and degree-zero classes. Reassociate the Ext composites and combine degree-zero factors. Precompose the comparison equality with mk_0 of the inverse constant-unit isomorphism for a followed by b, and postcompose with mk_0 of L_a(j_b), j_a and scalarHom(q_F). Substitute the unit coherence on the right and the coefficient coherence on the left. The resulting equality is exactly the goal in reverse orientation.",
+   "uses": [
+    "lem-sc-scalar-inverse-image-composition-coherence"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-scalar-cohomology-ext-coefficient-naturality",
   "def-sc-field-linear-module-cohomology-operations",
-  "lem-pc-module-pullback-identity-composition"
+  "lem-sc-scalar-inverse-image-composition-coherence",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "F1",
+  "by": "agent",
+  "group": "S4",
   "date": "2026-10-13",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01F7, cohomology-equation-functorial and Remark 20.14.2 (resolution construction); Sheaves Tag 0097, normalized pullback composition. Official sources https://stacks.math.columbia.edu/tag/01F7, https://stacks.math.columbia.edu/tag/01FD and https://stacks.math.columbia.edu/tag/0097",
-  "note": "Single-path specialization of the original scalar-square normalization argument; detailed glue written by F1."
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 008I, 0097 and 01FB; decomposition of the existing scalar normalization plan, with Yoneda/Ext glue implemented in Lean.",
+  "note": "No change to statement, coefficient operations, tensor comparison, or the unit route. The sole new residual theorem is morphism coherence; coefficient naturality is an existing proved dependency."
  },
  "mathlib_searches": [
   {
@@ -109,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-ec76b",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T025300-L-3422276",
+  "landing": "20261013T100127-L-2487381",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean theorem signatures to their nodes, the residual coherence to the normalized definitions, and proof dependencies to the code; both delivered modules and direct importer ScalarCohomologyPullbackSquare compile cleanly; axiom probes show only permitted axioms and expected sorryAx."
  }
 }

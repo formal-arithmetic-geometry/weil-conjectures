@@ -6,6 +6,9 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+import Sheaf.AlgebraicGeometry.ScalarInverseImageCompositionCoherence
+import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
+import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Composition of scalar cohomology pullbacks
@@ -21,6 +24,11 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+private instance pullbackCompositionMonoidal {k : Type w} [Field k] {X : Scheme.{w}} :
+    MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
+private instance pullbackCompositionHasExt {k : Type w} [Field k] {X : Scheme.{w}} :
+    HasExt.{w + 1} (KSheaf X k) := HasExt.standard _
 
 /-- Successive scalar cohomology pullbacks agree with pullback along the composite,
 after the normalized tensor-pullback comparison.
@@ -61,7 +69,32 @@ theorem scalarCohomologyPullback_comp
       (scalarCohomologyPullback fB fA a ha ((tensorPullback b).obj F) n
         (scalarCohomologyPullback fC fB b hb F n x)) =
       scalarCohomologyPullback fC fA (a ≫ b) (by rw [Category.assoc, hb, ha]) F n x := by
-  sorry
+  apply (scalarCohomologyExtEquiv fA _ n).injective
+  rw [scalarCohomologyExtEquiv_map]
+  unfold scalarCohomologyPullback
+  dsimp only [Functor.comp_obj]
+  simp only [AddEquiv.apply_symm_apply]
+  have hc := scalarInverseImageCompIso_coherence k A B C fA fB fC a b ha hb F
+  have he := Abelian.Ext.exactFunctorCompositionComparison
+    (scalarInverseImage (k := k) b) (scalarInverseImage (k := k) a)
+    (scalarInverseImage (k := k) (a ≫ b)) (scalarInverseImageCompIso k a b)
+    (scalarCohomologyExtEquiv fC F n x)
+  simp only [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀]
+  simp only [Abelian.Ext.comp_assoc_of_third_deg_zero,
+    Abelian.Ext.mk₀_comp_mk₀]
+  simp only [← Abelian.Ext.comp_assoc_of_second_deg_zero,
+    Abelian.Ext.mk₀_comp_mk₀]
+  rw [← hc.1]
+  have h := congrArg (fun z ↦
+    ((Abelian.Ext.mk₀ (scalarInverseUnitIso (a ≫ b)).inv).comp z (zero_add n)).comp
+      (Abelian.Ext.mk₀ ((scalarInverseImage a).map
+        (scalarPullbackCoefficient fC fB b hb F) ≫
+        scalarPullbackCoefficient fB fA a ha ((tensorPullback b).obj F) ≫
+        scalarHom fA ((scalarPullbackCompIso a b).app F).inv)) (add_zero n)) he
+  simp only [Abelian.Ext.comp_assoc_of_third_deg_zero,
+    ← Abelian.Ext.comp_assoc_of_second_deg_zero, Abelian.Ext.mk₀_comp_mk₀] at h
+  rw [hc.2] at h
+  exact h.symm
 
 end
 end AlgebraicGeometry.Scheme.Modules

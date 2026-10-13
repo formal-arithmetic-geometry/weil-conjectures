@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-scalar-inverse-image-composition-coherence",
+ "kind": "statement",
+ "title": "Composition coherence of scalar inverse-image units and coefficients",
+ "statement": "Let $k$ be a field, $A,B,C$ schemes, and $f_A:A\\to\\operatorname{Spec}k$, $f_B:B\\to\\operatorname{Spec}k$, $f_C:C\\to\\operatorname{Spec}k$ structure maps. Let $a:A\\to B$ and $b:B\\to C$ satisfy $a\\gg f_B=f_A$ and $b\\gg f_C=f_B$, and let $F$ be an $\\mathcal O_C$-module. Use the scalar sheaf, inverse-image functor, constant-unit isomorphisms, coefficient maps, scalar morphism functor and normalized tensor-pullback comparison of [def-sc-field-linear-module-cohomology-operations]. Write $L_t=\\mathrm{scalarInverseImage}(t)$, $P_t=\\mathrm{tensorPullback}(t)$, $u_t=\\mathrm{scalarInverseUnitIso}(t)^{-1}$, $j_t=\\mathrm{scalarPullbackCoefficient}(t)$ and $q_F=(\\mathrm{scalarPullbackCompIso}(a,b))_F^{-1}$. Define $e:L_{a\\gg b}\\cong L_b\\circ L_a$ by uniqueness of left adjoints between the inverse-image adjunction for $a\\gg b$ and the composite inverse-image adjunction for $b$ then $a$; their right adjoints are definitionally equal sheaf pushforwards. Then $u_{a\\gg b}\\gg e_{\\mathbf1_C}=u_a\\gg L_a(u_b)$ and $e_{\\mathrm{scalarSheaf}(f_C,F)}\\gg L_a(j_{b,F})\\gg j_{a,P_bF}\\gg\\mathrm{scalarHom}(f_A,q_F)=j_{a\\gg b,F}$. These assertions require no flatness, quasi-coherence or nonempty-scheme hypothesis.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008I, lemma-pullback-composition; Tag 0097, lemma-push-pull-composition-modules. Read from the official Stacks sources; normalized scalar specialization of the first part of the item proof."
+ },
+ "proof": [
+  {
+   "text": "Construct e by Adjunction.leftAdjointUniq. Its unit equation says that the composite inverse-image unit equals the successive units. The constant sheaf functor has the global-sections adjunction. Both constant-unit composites have the same adjoint: the section assigning each scalar its constant section. Apply naturality of the constant-sheaf comparison and the unit equation to obtain the first equality.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-image adjunction hom equivalence to the second equality, and evaluate on every open U and section s of F. By exists_scalarPullbackCoefficient, the adjoints of the coefficient maps are the normalized tensor-pullback units. The comparison scalarPullbackCompIso is defined by left-adjoint uniqueness and thus carries the composite tensor unit to the successive units. The inverse-image comparison satisfies the corresponding unit equation. After postcomposition by q_F both adjoints consequently have identical components on s. Sheaf-morphism extensionality and injectivity of the hom equivalence give the equality. The argument uses equations of maps and does not cancel sections, so it also handles zero coefficients and empty schemes.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008I, lemma-pullback-composition; Tag 0097, lemma-push-pull-composition-modules. Read from the official Stacks sources; normalized scalar specialization of the first part of the item proof.",
+  "note": "Morphism-level normalization argument extracted from the item proof; no resolution or cohomological degree occurs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image composition isomorphism preserves constant sheaf and tensor pullback adjunction units",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits include leftAdjointUniq, unit_leftAdjointUniq_hom_app and leftAdjointUniq_trans_app. These supply generic adjunction identities but no joint scalar coefficient and constant-unit coherence.",
+   "verdict": "no exact scalar match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|constantSheafsheafPullbackIso",
+   "results": "24 Mathlib hits include adjunction uniqueness and generic sheaf pullback. Local reading of WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf shows the constant comparison is normalized by leftAdjointUniq. No existing scalar coherence statement in either library root.",
+   "verdict": "no duplicate",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "Second reader: one exact generic unit-compatibility lemma. It controls leftAdjointUniq but does not identify the scalar coefficient maps or constant-unit composite.",
+   "verdict": "generic ingredient, no exact scalar match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of left adjoint comparison isomorphisms commutes with constant sheaf pullback and restriction of scalars",
+   "results": "Second reader: eight hits including SheafOfModules.pullbackComp, pullbackIso, freeFunctorCompPullbackIso and constantSheafAdj_counit_w. None states either normalized scalar equation. Read the existing constantSheafsheafPullbackIso construction in the upstream library.",
+   "verdict": "no duplicate",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Cc]omp|unit_leftAdjointUniq|leftAdjointUniq_trans",
+   "results": "Second reader: 20 Mathlib hits, including generic uniqueness transitivity and unit identities. Separate rg of lean/Sheaf and lean/WeilConjectures for scalarInverseImageComp, scalarPullbackCoefficient and constant-sheaf composition found no existing scalar composition coherence. ScalarPullbackTensorCoefficient handles tensor products rather than successive arrows.",
+   "verdict": "no duplicate",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCohomologyPullbackComposition",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, Kunneth pullback functoriality on the special fibre: coefficient and constant-unit comparisons for the two successive pullbacks",
+   "via": [
+    "lem-sc-scalar-cohomology-pullback-composition",
+    "lem-sc-scalar-cohomology-pullback-square",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarInverseImageCompositionCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarInverseImageCompositionCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarInverseImageCompIso_coherence",
+  "statement": "theorem scalarInverseImageCompIso_coherence\n    (k : Type w) [Field k] (A B C : Scheme.{w})\n    (fA : A ⟶ Spec (CommRingCat.of k)) (fB : B ⟶ Spec (CommRingCat.of k))\n    (fC : C ⟶ Spec (CommRingCat.of k)) (a : A ⟶ B) (b : B ⟶ C)\n    (ha : a ≫ fB = fA) (hb : b ≫ fC = fB) (F : C.Modules) :\n    (scalarInverseUnitIso (a ≫ b)).inv ≫\n        (scalarInverseImageCompIso k a b).hom.app (𝟙_ (KSheaf C k)) =\n      (scalarInverseUnitIso a).inv ≫\n        (scalarInverseImage a).map (scalarInverseUnitIso b).inv ∧\n    (scalarInverseImageCompIso k a b).hom.app (scalarSheaf fC F) ≫\n        (scalarInverseImage a).map (scalarPullbackCoefficient fC fB b hb F) ≫\n        scalarPullbackCoefficient fB fA a ha ((tensorPullback b).obj F) ≫\n        scalarHom fA ((scalarPullbackCompIso a b).app F).inv =\n      scalarPullbackCoefficient fC fA (a ≫ b)\n        (by rw [Category.assoc, hb, ha]) F",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ec76b",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T100127-L-2487381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-ec76b",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T100127-L-2487381",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean theorem signatures to their nodes, the residual coherence to the normalized definitions, and proof dependencies to the code; both delivered modules and direct importer ScalarCohomologyPullbackSquare compile cleanly; axiom probes show only permitted axioms and expected sorryAx."
+ }
+}
