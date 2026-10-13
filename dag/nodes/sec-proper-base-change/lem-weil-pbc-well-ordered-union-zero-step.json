@@ -9,8 +9,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 0D1U: source argument, with categorical projective presentations and shrinking for independent universes; D4, 2026-10-13"
+  "document": "https://stacks.math.columbia.edu/tag/0D1U",
+  "place": "Lemma 10.109.11, base case; formalized by T1 on 2026-10-13 with supremum-range induction and direct categorical componentwise lifting to avoid universe shrinking."
  },
  "mathlib_searches": [
   {
@@ -64,12 +64,10 @@
  "statement": "Let R be a commutative ring, M an R-module, E a linearly ordered well-ordered set, and F : E → Submodule R M a monotone family with every element of M in some F e. Let U e be the supremum of stages F i with i < e, pulled back into F e. If every quotient F e / U e has a projective resolution of length at most zero [def-weil-pbc-finite-global-dimension], then M has one of length at most zero.",
  "proof": [
   {
-   "text": "(Case $n=0$: the quotients are projective and the projections split.) For $n=0$ a projective resolution of length $\\le0$ of $Q_e=M_e/M_{<e}$ [def-weil-pbc-quotient-module] is an exact sequence $0\\to P_0\\to Q_e\\to0$ [def-weil-pbc-finite-global-dimension], i.e. an isomorphism $P_0\\cong Q_e$ with $P_0$ projective; hence $Q_e$ is projective [lem-weil-pbc-projective-direct-summand] (2). The sequence $0\\to M_{<e}\\to M_e\\xrightarrow{q_e}Q_e\\to0$ ($q_e$ the quotient map, surjective with kernel $M_{<e}$) is short exact with projective quotient, so there is an $R$-linear section $s_e:Q_e\\to M_e$ with $q_e\\circ s_e=\\mathrm{id}_{Q_e}$ [lem-weil-pbc-ses-projective-quotient-splits]. Choose one $s_e$ for every $e\\in E$ (axiom of choice), regard it as a map to $M$, and let $\\psi:\\bigoplus_{e\\in E}Q_e\\to M$ [def-weil-pbc-direct-sum-modules] be the $R$-linear map $\\psi((x_e)_e)=\\sum_es_e(x_e)$ (a finite sum). In Lean use categorical projectivity from the length-zero augmentation being an isomorphism, and categorical splitting of the quotient epimorphism. This avoids a Small R hypothesis.",
+   "text": "For each stage e put U_e equal to the predecessor supremum pulled back into F e, and Q_e = F e / U_e. Unpack its length-zero projective resolution. Since its degree-one object is zero, its differential into degree zero is zero. The augmentation is a colimit cokernel cofork, hence an isomorphism by CokernelCofork.IsColimit.isIso_π. Transfer projectivity of degree zero along this isomorphism using Projective.of_iso. The quotient map is epi by ModuleCat.epi_iff_surjective and Submodule.mkQ_surjective. Apply categorical Projective.factors to its identity to obtain a section s_e. Choice is confined to the theorem proof. Define ψ by DirectSum.toModule on the section maps followed by stage inclusions.",
    "uses": [
     "def-weil-pbc-finite-global-dimension",
     "def-weil-pbc-quotient-module",
-    "lem-weil-pbc-projective-direct-summand",
-    "lem-weil-pbc-ses-projective-quotient-splits",
     "def-weil-pbc-direct-sum-modules"
    ],
    "elementary": false,
@@ -79,7 +77,7 @@
    }
   },
   {
-   "text": "($\\psi$ is injective.) Let $x=(x_e)_e\\ne0$ in $\\bigoplus_eQ_e$. Its support $\\{e:x_e\\ne0\\}$ is finite and nonempty; let $e_{\\max}$ be its largest element. For $e$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{e_{\\max}}$, so $y=\\psi(x)\\in M_{e_{\\max}}$. Apply $q_{e_{\\max}}$: for $e<e_{\\max}$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{<e_{\\max}}=\\operatorname{Ker}q_{e_{\\max}}$, and $q_{e_{\\max}}(s_{e_{\\max}}(x_{e_{\\max}}))=x_{e_{\\max}}$. Hence $q_{e_{\\max}}(y)=x_{e_{\\max}}\\ne0$, so $y\\ne0$.",
+   "text": "Prove injectivity by Finset.induction_on_max on a finite relation among section images. For an inserted greatest index e, all other summands lie in the predecessor supremum and, by monotonicity, in F e. The relation implies s_e(x_e) equals the negative of their sum, so s_e(x_e) belongs to U_e. Applying its quotient projection and using the section identity gives x_e = 0. The remaining relation is handled by induction. Apply this result to the DFinsupp support of a vector in the kernel of ψ; coefficients outside the support are zero as well, hence the vector is zero.",
    "uses": [
     "def-weil-pbc-direct-sum-modules",
     "def-weil-pbc-quotient-module"
@@ -91,7 +89,7 @@
    }
   },
   {
-   "text": "($\\psi$ is surjective, by transfinite induction.) Suppose not. Since $M=\\bigcup_eM_e$, the set of $e\\in E$ with $M_e\\not\\subseteq\\operatorname{Im}\\psi$ is nonempty; as $E$ is well-ordered it has a least element $e$, so $M_{e'}\\subseteq\\operatorname{Im}\\psi$ for every $e'<e$, hence $M_{<e}\\subseteq\\operatorname{Im}\\psi$. Take $y\\in M_e\\setminus\\operatorname{Im}\\psi$ and $x_e=q_e(y)\\in Q_e$. Then $q_e(y-s_e(x_e))=x_e-x_e=0$, so $y-s_e(x_e)\\in M_{<e}\\subseteq\\operatorname{Im}\\psi$, and $s_e(x_e)=\\psi(\\iota_e(x_e))\\in\\operatorname{Im}\\psi$ ($\\iota_e$ the canonical inclusion). So $y\\in\\operatorname{Im}\\psi$, a contradiction. Thus $\\psi$ is an isomorphism.",
+   "text": "Prove F e ≤ range ψ by well-founded induction on e. Given y in F e, subtract the section of its quotient class. The quotient of this difference is zero, so the difference belongs to the predecessor supremum. Each earlier stage lies in range ψ by induction; iSup_le therefore places the whole predecessor supremum in range ψ. The section term is the image of DirectSum.lof. Add the two terms to get y in range ψ. Finally hcover makes ψ surjective. This formulation avoids the separate identification of a directed supremum with its union and works at a least stage without a separate case.",
    "uses": [
     "def-weil-pbc-direct-sum-modules",
     "def-weil-pbc-quotient-module"
@@ -103,10 +101,9 @@
    }
   },
   {
-   "text": "(Conclusion for $n=0$.) $\\bigoplus_eQ_e$ is projective as a direct sum of the projective modules $Q_e$ [lem-weil-pbc-projective-direct-sum-family] (Stacks 065Q, which the source cites), so $M\\cong\\bigoplus_eQ_e$ is projective [lem-weil-pbc-projective-direct-summand] (2), and $0\\to M\\xrightarrow{\\mathrm{id}}M\\to0$ is a projective resolution of length $\\le0$ [def-weil-pbc-finite-global-dimension]. This is $C(0)$. For independent index and module universes, shrink the external direct sum along its linear equivalence with M, and prove categorical projectivity of the shrunk sum by lifting each quotient component and summing on finite supports.",
+   "text": "Use LinearEquiv.ofBijective to identify the external direct sum with M. Prove categorical projectivity of M directly: for a map f from M across an epimorphism p, lift each f composed with a section inclusion using categorical projectivity of Q_e. DirectSum.toModule sums these lifts into χ. DirectSum.linearMap_ext and the component lift identities show p.hom.comp χ = f.hom.comp ψ. Compose χ with the inverse linear equivalence to get the required lift from M. The external sum is never made into a ModuleCat object, so no shrinking or Small R hypothesis is needed. Finally ProjectiveResolution.self M, with its positive-degree terms zero, gives the required length-zero resolution.",
    "uses": [
-    "lem-weil-pbc-projective-direct-sum-family",
-    "lem-weil-pbc-projective-direct-summand",
+    "def-weil-pbc-direct-sum-modules",
     "def-weil-pbc-finite-global-dimension"
    ],
    "elementary": false,
@@ -119,10 +116,7 @@
  "proof_deps": [
   "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-finite-global-dimension",
-  "def-weil-pbc-quotient-module",
-  "lem-weil-pbc-projective-direct-sum-family",
-  "lem-weil-pbc-projective-direct-summand",
-  "lem-weil-pbc-ses-projective-quotient-splits"
+  "def-weil-pbc-quotient-module"
  ],
  "lean": {
   "existing": false,
@@ -145,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "X-2b8e0",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T230754-L-1907773",
+  "landing": "20261013T011936-L-2766236",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, and import change record matched against the packet, baseline declarations, lcompile results, axioms, and direct importer compilation"
  }
 }
