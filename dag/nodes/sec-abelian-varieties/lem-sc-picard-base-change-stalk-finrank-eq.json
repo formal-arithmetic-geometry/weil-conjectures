@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-picard-base-change-stalk-finrank-eq",
+ "kind": "statement",
+ "title": "Equality of Picard base-change stalk finranks",
+ "statement": "Let f:X\\to S be flat [def-weil-flat-morphism], proper [def-weil-proper-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation]. Let E be finite locally free [def-sc-finite-locally-free-sheaf], let g:T\\to S satisfy PicardUniversalRankMatch f E g [def-sc-picard-universal-rank-match], and let h:T\\prime\\to T, t\\in T\\prime, and F=E or F=E^\\vee. Write p:X\\times_S T\\to T and q:X\\times_S T\\to X for the projections, and p\\prime:(X\\times_S T)\\times_T T\\prime\\to T\\prime and v:(X\\times_S T)\\times_T T\\prime\\to X\\times_S T for the next two projections [def-pc-base-change]. Put P=h^*p_*q^*F and Q=p\\prime_*v^*q^*F, and take their stalks [def-weil-pbc-module-stalk] at t. Then Module.finrank over O_{T\\prime,t} of P_t equals Module.finrank of Q_t. This asserts only equality of natural-number finranks, not finite generation, freeness or a linear equivalence.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "local rank reduction, expanded using Tags 01C6 (local frames), 0098 (pullback stalks), and 0097 (composition); agent expansion of the original node argument"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-universal-rank-match",
+  "def-weil-pbc-module-stalk",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply universal rank matching at h(t) for the identity and at t for h, getting local ranks r and s. The local stalk finrank calculation and scalar-extension invariance identify the source finrank with r and the target finrank with s. Use tensor-pullback composition and the associativity of base change to identify the target.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a nonempty fibre over h(t), take x in it. The tensor product of kappa(x) and kappa(t) over kappa(h(t)) is nonzero by faithful flatness of field extensions. A prime of that tensor product yields a point y over x and t. The third clause of the two rank conditions gives rank r and rank s for the same pulled-back E at y. Pullback transports the frames, and the stalk finrank formula over the nonzero local ring gives r=s.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an empty fibre, properness of the projection gives an open neighbourhood of h(t) disjoint from its closed image. The direct image of either F vanishes on that open. Both the pullback and the base-changed direct image vanish on its inverse image, so both stalk finranks are zero. This avoids equating unconstrained ranks chosen on empty preimages.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-universal-rank-match",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-base-change",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "local rank reduction, expanded using Tags 01C6 (local frames), 0098 (pullback stalks), and 0097 (composition); agent expansion of the original node argument",
+  "note": "Second-reader decomposition: this is only the numerical rank-comparison part."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]talk|stalk.*[Pp]ullback|finrank.*baseChange",
+   "results": "Module.finrank_baseChange and generic topological stalk transport found; no Picard rank-matching specialization. Local rg found TensorPullbackStalk and FiniteLocallyFreeStalkFinrank, retained in the planned proof. Upstream has no PicardUniversalRankMatch specialization.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank_baseChange",
+   "results": "Module.finrank_baseChange preserves the rank of an already free module under scalar extension; it does not identify the two geometric ranks.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free modules equal finrank linear equivalence",
+   "results": "LinearEquiv.ofFinrankEq and nonempty_linearEquiv_of_finrank_eq solve the final algebra only after finite freeness and equality are supplied.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rank of finite free module preserved under extension of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general cube theorem; Picard common-rank comparison, including the empty-fibre case",
+   "via": [
+    "lem-sc-picard-base-change-stalk-ranks",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeStalkFinrankEq.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_baseChange_stalk_finrank_eq",
+  "statement": "theorem picardRankMatch_baseChange_stalk_finrank_eq {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g) {T' : Scheme.{u}} (h : T' ⟶ T)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) (t : T') :\n    let P := (Modules.tensorPullback h).obj\n      ((Modules.pushforward (pullback.snd f g)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    let Q := (Modules.pushforward (pullback.snd (pullback.snd f g) h)).obj\n      ((Modules.tensorPullback (pullback.fst (pullback.snd f g) h)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    Module.finrank (T'.presheaf.stalk t) (P.presheaf.stalk t) =\n      Module.finrank (T'.presheaf.stalk t) (Q.presheaf.stalk t)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1727d",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T005859-L-2608019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1727d",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T005859-L-2608019",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures with their nodes, verified only proof fields changed, and compiled the delivery plus its sole direct importer PicardRankMatchBaseChange; axiom probes show only standard axioms and the reported sorryAx dependencies."
+ }
+}

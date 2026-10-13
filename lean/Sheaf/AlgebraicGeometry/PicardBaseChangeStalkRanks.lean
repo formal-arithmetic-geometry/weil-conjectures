@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFiniteBases
+import Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq
 
 /-! # Equal finite ranks of the stalks in Picard base change
 
@@ -64,6 +65,14 @@ theorem picardRankMatch_baseChange_stalk_ranks {X S T : Scheme.{u}} (f : X ⟶ S
       ((Modules.tensorPullback (pullback.fst (pullback.snd f g) h)).obj
         ((Modules.tensorPullback (pullback.fst f g)).obj F))
     Module.Finite (T'.presheaf.stalk t) (Q.presheaf.stalk t) ∧
-      Nonempty (P.presheaf.stalk t ≃ₗ[T'.presheaf.stalk t] Q.presheaf.stalk t) := by sorry
+      Nonempty (P.presheaf.stalk t ≃ₗ[T'.presheaf.stalk t] Q.presheaf.stalk t) := by
+  obtain ⟨⟨r, ⟨bP⟩⟩, ⟨s, ⟨bQ⟩⟩⟩ :=
+    picardRankMatch_baseChange_stalk_finite_bases f E g hR h F hF t
+  have hrs : r = s := by
+    have he := picardRankMatch_baseChange_stalk_finrank_eq f E g hR h F hF t
+    simpa only [Module.finrank_eq_card_basis bP, Module.finrank_eq_card_basis bQ,
+      Fintype.card_fin] using he
+  subst s
+  exact ⟨Module.Finite.of_basis bQ, ⟨bP.equiv bQ (Equiv.refl _)⟩⟩
 
 end AlgebraicGeometry.Scheme

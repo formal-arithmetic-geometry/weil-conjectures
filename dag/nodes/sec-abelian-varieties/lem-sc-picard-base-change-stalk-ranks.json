@@ -18,52 +18,23 @@
  ],
  "proof": [
   {
-   "text": "Apply R to the identity of T at h(t) and to h at t. Take neighbourhoods with common ranks r and s. The local frames in finite local freeness give finite free stalks; dual frames have the same rank.",
+   "text": "Obtain a finite basis for each stalk separately from lem-sc-picard-base-change-stalk-finite-bases. Obtain equality of the stalk finranks from lem-sc-picard-base-change-stalk-finrank-eq. Module.finrank_eq_card_basis and Fintype.card_fin identify the two basis cardinalities, so substitute the equality. Module.Finite.of_basis proves finite generation of Q_t, and Module.Basis.equiv along Equiv.refl gives the required linear equivalence.",
    "uses": [
-    "def-sc-picard-universal-rank-match",
-    "def-sc-finite-locally-free-sheaf"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The tensor-pullback stalk formula transports the source frame across h. Composition of tensor pullbacks and the canonical associativity isomorphism of categorical pullbacks identify the target with the ordinary direct image on the composite base change.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-pc-module-pullback-identity-composition",
-    "def-pc-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If the fibre over h(t) is nonempty, choose a common residue field extension and a point in the base-changed fibre. At that point the rank of the pullback of E is both r and s. The finite locally free stalk finrank formula and invariance of finite free rank under scalar extension imply r=s.",
-   "uses": [
-    "lem-sc-finite-locally-free-stalk-finrank",
-    "lem-weil-pbc-module-stalk-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If the fibre is empty, the closed image of the proper morphism omits h(t); on the complementary open both direct images vanish. Thus both stalks are zero. Otherwise compose the two rank-r stalk frames to obtain an equivalence; the target is finite generated.",
-   "uses": [
-    "def-weil-proper-morphism"
+    "lem-sc-picard-base-change-stalk-finite-bases",
+    "lem-sc-picard-base-change-stalk-finrank-eq"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-picard-universal-rank-match",
-  "def-sc-finite-locally-free-sheaf",
-  "lem-weil-pbc-module-stalk-pullback",
-  "lem-pc-module-pullback-identity-composition",
-  "def-pc-base-change",
-  "lem-sc-finite-locally-free-stalk-finrank",
-  "def-weil-proper-morphism"
+  "lem-sc-picard-base-change-stalk-finite-bases",
+  "lem-sc-picard-base-change-stalk-finrank-eq"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "common-rank reduction; Tag 01C6 (finite local frames), Tag 0098 (pullback stalks)",
-  "note": "Q1 expanded the omitted detail, separating stalk ranks from canonical surjectivity."
+  "place": "local rank reduction; final finite-basis algebra",
+  "note": "V2 second reading: finite freeness and numerical equality split separately; target combines them using proved generic basis lemmas. One closed hole, two new holes: decomposition only."
  },
  "mathlib_searches": [
   {
@@ -133,13 +104,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
+  "reviewer": "X-1727d",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T223413-L-1639409",
+  "landing": "20261013T005859-L-2608019",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean signatures with their nodes, verified only proof fields changed, and compiled the delivery plus its sole direct importer PicardRankMatchBaseChange; axiom probes show only standard axioms and the reported sorryAx dependencies."
  }
 }
