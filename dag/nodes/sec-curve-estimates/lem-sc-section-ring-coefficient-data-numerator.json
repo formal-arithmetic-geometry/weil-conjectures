@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-section-ring-coefficient-data-numerator",
+ "kind": "statement",
+ "title": "Existence of coefficient numerator map",
+ "statement": "For a scheme X, an invertible module L, a homogeneous section s of positive degree d, and an open U on which its restriction is a free generator, there exists a coefficient function on the homogeneous localization satisfying the displayed numerator equation for every exponent and homogeneous numerator.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "Existence of a coefficient function satisfying the numerator equation.\nThe function is obtained by the local quotient construction of Stacks Tags 01N8 and 01NK.\n(blueprint: lem-sc-section-ring-coefficient-data-numerator)\n\nWrite e_n for the restriction of the degree-n*d component of s^n. The section-ring\nproduct is the tensor product transported by tensorPowAddIso. Restriction preserves\nthis product, so induction from hs, the unit generator, and IsFreeGenerator.tmulSection\nshows that each e_n is a free generator. For a numerator a of degree n*d, let r_n(a)\nbe the unique scalar with r_n(a) • e_n equal to its restriction to U.\nIf a/s^n = b/s^m, localization equality supplies k with\ns^k * (a*s^m - b*s^n) = 0. Restrict and use bilinearity to get\n(r_n(a) - r_m(b)) • e_(k+n+m) = 0. Injectivity of scalar multiplication\nby that free generator gives r_n(a) = r_m(b). Every fraction has such a\nrepresentative by Away.mk_surjective, so these coefficients descend to a function.\nIts numerator equation is the defining equation of r_n(a). This also works on the\nempty open: the scalar ring and section modules there are trivial.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-section-ring",
+  "def-sc-local-free-generator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "There is a ring homomorphism from the homogeneous localization of the section ring of an invertible sheaf to functions on the open where a chosen section is a free generator",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error. Repeated for the chart-transfer query.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an invertible sheaf defines a ring map from the homogeneous localization of its section ring on the nonvanishing open; the coefficient map on one chart determines all other chart formulas",
+   "date": "2026-10-13",
+   "results": "Proj.awayToSection, ProjectiveSpectrum.Proj.awayToSection_apply, Proj.awayMap_awayToSection, HomogeneousLocalization.awayMap_mk; no invertible-module coefficient map or numerator equation.",
+   "verdict": "partial matches for Proj geometry only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRing.*coefficient|quotient_chart_transfer|coefficient_hom|tensorPow.*generator (Mathlib AlgebraicGeometry/Modules and ProjectiveSpectrum, both library roots, DAG and blueprint_refs.py)",
+   "date": "2026-10-13",
+   "results": "No existing declaration states either intermediate theorem. InvertibleSectionRing has a private tensorPowLocalSection_generator for powers of a section of L, not a section of L.tensorPow d. blueprint_refs.py search returned no blueprint match. Existing single-chart/overlap nodes state existence or uniqueness of scheme maps, not the two intermediate results.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingCoefficientData",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-section-ring-coefficient-data",
+   "place": "decomposition of coefficient construction"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingCoefficientNumerator",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingCoefficientNumerator.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_coefficient_numerator",
+  "statement": "theorem exists_sectionRing_coefficient_numerator\n    (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)\n    (hs : IsFreeGenerator ((L.tensorPow d).presheaf.map\n      (homOfLE (le_top : U ≤ ⊤)).op (s.val d))) :\n    ∃ c : HomogeneousLocalization.Away (sectionRingGrade L) s.val → Γ(X, U),\n      ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)),\n        c (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n\n            ξ.val ξ.property) •\n          (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op\n            ((s.val ^ n) (n • d)) =\n        (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op\n          (ξ.val (n • d))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T015547-L-3017854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T015547-L-3017854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

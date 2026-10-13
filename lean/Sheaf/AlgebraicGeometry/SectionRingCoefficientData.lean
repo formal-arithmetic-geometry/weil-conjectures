@@ -1,6 +1,8 @@
 module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Sheaf.AlgebraicGeometry.SectionRingCoefficientNumerator
+import Sheaf.AlgebraicGeometry.SectionRingCoefficientArithmetic
 @[expose] public section
 universe v
 open CategoryTheory
@@ -28,5 +30,8 @@ theorem exists_sectionRing_coefficient_data
           (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op
             ((s.val ^ n) (n • d)) =
         (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op
-          (ξ.val (n • d))) := by sorry
+          (ξ.val (n • d))) := by
+  obtain ⟨c, hn⟩ := exists_sectionRing_coefficient_numerator X L d s hd U hs
+  obtain ⟨h0, h1, ha, hm⟩ := sectionRing_coefficient_arithmetic_of_numerator X L d s hd U hs c hn
+  exact ⟨c, h0, h1, ha, hm, hn⟩
 end AlgebraicGeometry.Scheme.Modules
