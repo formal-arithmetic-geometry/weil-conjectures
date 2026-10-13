@@ -21,35 +21,46 @@
  },
  "proof": [
   {
-   "text": "The zero section s = Spec constantCoeff has inverse image of V equal to U. Points of U are included by haway, since t composed with s is the identity. The closed point maps to the closed point of the local power-series spectrum; every open containing that point is the whole spectrum, which contradicts properness of V. Pull p restricted to V back along the zero section restricted to U to get the finite etale cover W0 of U.",
+   "text": "Write t for Spec of the constants map and s for Spec of constantCoeff. The identity constantCoeff composed with C = id gives s composed with t = id. Set W=t inverse U. The hypothesis haway gives W subset V, so restricting p to W is finite etale, by the cartesian square for nested open restrictions. The identity s composed with t identifies s inverse W with U. Pull p restricted to W back along s restricted to W and compose its projection with this open identification to obtain a finite etale cover f over U. No assertion about s inverse V is needed.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The boundary of U is the closed point of Spec B. Its stalk is B, so has depth at least two. Apply the finite depth-two extension theorem to W0 -> U to obtain a finite g:Y -> Spec B, the stated boundary depth, and a restriction isomorphism over U.",
+   "text": "The only point outside U is the closed point. Its stalk is ring-isomorphic to B, using the localization at the maximal ideal and the structure-sheaf stalk isomorphism. This isomorphism is a flat local map; the flat local depth formula gives depth of the stalk at least depth B, hence at least two.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite depth-two extension theorem to f over U to obtain a finite g:Y -> Spec B, depth at least two at every source stalk above the complement, and an isomorphism e0 between g restricted to U and f. Because f is etale, e0 also makes g restricted to U etale.",
    "uses": [
     "lem-sbc-depth-two-finite-extension"
    ],
    "elementary": false
   },
   {
-   "text": "On W = t inverse U, the covers p restricted to W and the pullback of W0 are finite etale and restrict to the same cover on the zero section U. Apply the fully faithful restriction argument of Tag 0EY9: with I the variables ideal, the sections on U of each truncated polynomial algebra are B[X]/I^k by depth-two Hartogs; their inverse limit is the complete power-series ring. The constants inclusion is flat by the polynomial-adic completion equivalence and flatness of Noetherian completion; the flat local depth formula gives depth at least two at every point outside W. Apply depth-two Hartogs restriction to the structure module on the power-series spectrum to identify its sections with those on W. Thus the sections of W and of its formal completion agree, and finite locally free coherent sheaves are fully faithfully detected by completion (Tag 0EKP). Etale covers of the nilpotent thickenings are uniquely determined by their restriction to U (Tag 0EL8). Hence the section comparison isomorphism and its inverse lift to W, and faithfulness makes the composites identities. Compose this with the pullback of the extension isomorphism over U to obtain e and its equation over W. This works for the empty cover as well.",
+   "text": "Put r=the second projection of Y times_Spec B T. Pasting its pullback square with the open restriction square, then cancelling the restriction square of g, proves that r restricted to W is the base change of g restricted to U along t restricted to U. It is therefore finite etale. Pull this square back along s restricted to W. Since the composite of this section with t restricted to U is the open identification s inverse W -> U, an isomorphism, the induced map k from this zero-section pullback to Y restricted to U is an isomorphism. Compose e0 inverse with k inverse to get an isomorphism between the zero-section pullbacks of p restricted to W and r restricted to W. Cancelling the open-identification isomorphism in its structure-map equation verifies that it lies over s inverse W.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The zero-section inverse image of W is U, as proved in the first step. Apply full faithfulness on the punctured power-series zero section to W. Its bijections on all morphism sets supply full and faithful instances for the finite-etale pullback functor. Take the preimage of the preceding isomorphism, and forget to schemes. The finite-etale morphism equation gives exactly e.hom composed with r restricted to W = p restricted to W. Combine this with the finite and boundary-depth properties of g.",
    "uses": [
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-sbc-depth-two-hartogs-restriction"
+    "lem-sbc-power-series-punctured-section-fully-faithful"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-flat-local-depth-formula",
   "lem-sbc-depth-two-finite-extension",
-  "lem-sbc-depth-two-hartogs-restriction",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-power-series-punctured-section-fully-faithful"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 0EYA and 0EY9, comparison over the punctured base; finite coefficient extension by 0EY6"
+  "place": "Tags 0EYA and 0EY9, comparison over the punctured coefficient spectrum; 0EY6 coefficient extension; Lean pullback pasting and full-faithful lifting by G2"
  },
  "mathlib_searches": [
   {
@@ -131,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T111836-L-3046711",
-  "kind": "interface",
+  "landing": "20261013T121221-L-3505770",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
