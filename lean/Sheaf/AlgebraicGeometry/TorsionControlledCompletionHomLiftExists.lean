@@ -38,7 +38,7 @@ theorem torsionControlled_completion_hom_lift_exists
     (θ : (completion X J).obj F ⟶ (completion X J).obj F')
     (hθ : θ ≫ (completion X J).map a' = (completion X J).map a) :
     ∃ g : F ⟶ F', g ≫ a' = a ∧ (completion X J).map g = θ := by
-  obtain ⟨g, hg⟩ := torsionControlled_completion_hom_lift_raw J H F F' a a' ha ha'
+  obtain ⟨g, hg⟩ := torsionControlled_completion_hom_lift_raw J H F F' a a' ha ha' θ hθ
   exact ⟨g, hg, torsionControlled_completion_hom_lift_completion
     J H F F' a a' ha ha' θ hθ g hg⟩
 
