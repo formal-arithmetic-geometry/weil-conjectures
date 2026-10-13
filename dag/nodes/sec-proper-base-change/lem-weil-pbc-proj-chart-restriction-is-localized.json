@@ -16,19 +16,19 @@
  ],
  "proof": [
   {
-   "text": "Write r as a homogeneous fraction and choose the positive-degree chart g=f*a. The chart-intersection formula identifies the inverse image with D_+(g), and hU identifies the transition element with a positive power of r.",
+   "text": "Write r=a/f^n using Away.mk_surjective and choose g=f*a of degree deg(f)+n*deg(f). The toSpec membership formula and basicOpen_mul identify the image of the principal open with D[g]. Injectivity of HomogeneousLocalization.val and the fraction equality criterion prove U(f,g)=r^deg(f), with denominator cancellation witnessed by 1.",
    "uses": [
     "lem-weil-pbc-proj-basic-open-intersection"
    ],
    "elementary": false
   },
   {
-   "text": "An S-algebra map out of S_f sends a/f^n to the image of a times the inverse of the image of f^n, so hcanonical identifies rhoS with actual section restriction, using injectivity of the homogeneous inclusion. Let beta:E(V) to Z_g be restrictAppIso followed by transport of the image open and alpha_g. Naturality and hrestriction give beta(l(q))=rho(q), and hscalar gives beta(k(x) smul s)=rhoS(x) smul beta(s). Thus psi=theta inverse composed with beta is R_f-linear and psi(l(q))=q/1 by htheta. The standard localized module has invertible U-action; writing psi(s)=q/U^j gives U^j smul s=l(q), and equality of q1/1 and q2/1 gives a power U^j killing their difference. These are the three localization conditions transported through psi.",
+   "text": "For any chart inclusion, evaluate the two proposed restricted constants at each projective point. The maps S_f to S_p agree because both commute with the algebra map from S; IsLocalization.ringHom_ext proves equality. The awayToSection evaluation formula identifies the corresponding sections. basicOpenToSpec_app_top and appLE_map then identify the pulled-back constant k with the restricted chart constant. Construct beta explicitly from restrictAppIso, transport along the equality of image opens, and alpha_g. Scalar naturality and hscalar give its rhoS-linearity, while functoriality and hrestriction give beta(l(q))=rho(q). Compose beta with theta inverse; htheta makes this an R_f-linear equivalence psi and proves psi(l(q))=q/1. Thus l is the standard localized-module map followed by psi inverse; IsLocalizedModule.of_linearEquiv proves localization at U.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Put d=deg(f)>0 and U=r^d. The denominators and equality witnesses from step 2 already are powers r^(d*j). If A is multiplication by r and B inverts A^d, then A commutes with B and A^(d-1)*B inverts A, hence all powers of r act invertibly. This is also IsLocalizedModule.of_exists_mul_mem for powers(r^d) contained in powers(r). If r=0 the open is empty and E(V) is zero; for unit r it is the whole chart. Empty charts and zero modules are included.",
+   "text": "Transfer localization from powers(U)=powers(r^d) to powers(r) using IsLocalizedModule.of_exists_mul_mem. The inclusion follows from powers_le. For x=r^n choose the multiplier r^(n*(d-1)); its product with x is (r^d)^n because d=deg(f)>0. These algebraic identities include zero rings, r=0, nilpotent r, units, and empty charts without a separate case split.",
    "uses": [],
    "elementary": true
   }
@@ -37,10 +37,10 @@
   "lem-weil-pbc-proj-basic-open-intersection"
  ],
  "proof_origin": {
-  "by": "Y2 stage-3 worker",
+  "by": "R4 stage-3 worker",
   "document": "literature/stacks-project/constructions.tex",
   "place": "Tags 01M4, 01M7 and 01MB",
-  "note": "Transport argument of the existing node, using the cited source chart-localization formulas; its algebraic assembly is now proved in the parent."
+  "note": "Original three-step route fully formalized with Mathlib localization, projective-chart and module-restriction lemmas; no new holes or dependencies."
  },
  "mathlib_searches": [
   {
@@ -132,10 +132,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T100227-L-2504901",
-  "kind": "interface",
+  "landing": "20261013T113351-L-3186880",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
