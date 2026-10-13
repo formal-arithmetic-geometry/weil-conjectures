@@ -70,7 +70,71 @@ theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T)
     ∀ (a : Γ(U.toScheme, ⊤)) (s : N),
       coefficientSectionAddMap f F U Z g g' f' w W hW (a • s) =
         a • (show P from coefficientSectionAddMap f F U Z g g' f' w W hW s) := by
-  sorry
+  dsimp only
+  intro a s
+  let B := g ⁻¹ᵁ (U.toScheme.toSpecΓ ⁻¹ᵁ ⊤)
+  let L := W.ι ''ᵁ ((W.ι ≫ f') ⁻¹ᵁ B)
+  have hL : L ≤ g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ Z) := by
+    dsimp [L]
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
+    exact inf_le_left.trans hW.le
+  let r := (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+    ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom) a
+  change (((pullback g').obj F).presheaf.map (homOfLE hL).op)
+    (((pullbackPushforwardAdjunction g').unit.app F).app
+      ((f ⁻¹ᵁ U).ι ''ᵁ Z)
+      ((F.restrictAppIso (f ⁻¹ᵁ U).ι Z).hom
+        (((f ⁻¹ᵁ U).toScheme.presheaf.map Z.leTop.op) r •
+          (show Γ(F.restrict (f ⁻¹ᵁ U).ι, Z) from s)))) = _
+  -- Transport the source scalar through restriction, the unit, and restriction again.
+  rw [smul_restrictAppIso_hom_apply, Hom.app_smul]
+  change (((pullback g').obj F).presheaf.map (homOfLE hL).op)
+    (g'.app ((f ⁻¹ᵁ U).ι ''ᵁ Z)
+      (((f ⁻¹ᵁ U).ι.appIso Z).inv
+        (((f ⁻¹ᵁ U).toScheme.presheaf.map Z.leTop.op) r)) • _) = _
+  rw [Scheme.Modules.map_smul]
+  conv_rhs => rw [smul_Spec_def]
+  simp only [show (⊤ : (Spec Γ(U.toScheme, ⊤)).Opens).leTop.op = 𝟙 _ from rfl]
+  change _ =
+    ((W.ι.appIso ((W.ι ≫ f') ⁻¹ᵁ B)).inv
+      ((W.ι ≫ f').app B (g.app (U.toScheme.toSpecΓ ⁻¹ᵁ ⊤)
+        (U.toScheme.toSpecΓ.app ⊤ ((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv a))))) •
+      (show Γ((pullback g').obj F, L) from
+        coefficientSectionAddMap f F U Z g g' f' w W hW s)
+  congr 1
+  simp only [r, Scheme.Opens.ι_appIso, Iso.refl_inv,
+    Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+  simp only [Scheme.toSpecΓ_appTop, Iso.inv_hom_id_apply]
+  simp only [← CommRingCat.comp_apply, Iso.inv_hom_id, Category.id_comp]
+  change ((f ∣_ U).appTop ≫ (f ⁻¹ᵁ U).toScheme.presheaf.map Z.leTop.op ≫
+    g'.app ((f ⁻¹ᵁ U).ι ''ᵁ Z) ≫ X'.presheaf.map (homOfLE hL).op) a =
+    (g.app ⊤ ≫ (W.ι ≫ f').app B) a
+  congr 1
+  simp only [AlgebraicGeometry.morphismRestrict_appTop,
+    Scheme.Opens.toScheme_presheaf_map, Category.assoc]
+  -- Express both scalar transports as appLE of the commuting square.
+  apply congrArg ConcreteCategory.hom
+  erw [← X.presheaf.map_comp_assoc]
+  have hZ : (f ⁻¹ᵁ U).ι ''ᵁ Z ≤ f ⁻¹ᵁ (U.ι ''ᵁ ⊤) := by
+    rw [← AlgebraicGeometry.image_morphismRestrict_preimage]
+    exact Scheme.Hom.image_mono _ le_top
+  change f.appLE (U.ι ''ᵁ ⊤) ((f ⁻¹ᵁ U).ι ''ᵁ Z) hZ ≫
+    g'.appLE ((f ⁻¹ᵁ U).ι ''ᵁ Z) L hL = _
+  rw [Scheme.Hom.appLE_comp_appLE]
+  generalize_proofs _ h
+  revert h
+  rw [w]
+  intro h
+  have ht : ⊤ ≤ U.ι ⁻¹ᵁ (U.ι ''ᵁ ⊤) := by
+    rw [Scheme.Hom.preimage_image_eq]
+  have hl : L ≤ (f' ≫ g) ⁻¹ᵁ ⊤ := le_top
+  have hi : U.ι.appLE (U.ι ''ᵁ ⊤) ⊤ ht = 𝟙 Γ(U.toScheme, ⊤) := by
+    rw [Scheme.Opens.ι_appLE]
+    change T.presheaf.map (𝟙 _) = 𝟙 _
+    exact T.presheaf.map_id _
+  change ((f' ≫ g) ≫ U.ι).appLE (U.ι ''ᵁ ⊤) L h = _
+  rw [← Scheme.Hom.appLE_comp_appLE (f' ≫ g) U.ι _ _ _ ht hl]
+  erw [hi, Category.id_comp]
 
 /-- The linear map of sections used as the mate in the composed adjunction.
 Source: Stacks Project, Tag 02KE, termwise coefficient construction. -/
