@@ -11465,3 +11465,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:51 L: merged deliver/R2/Sheaf.RingTheory.PopescuRescaledCoefficientChart (stage 3; reviewer PASS; first push; landing 20261013T065116-L-901028 (interface); batch 20261013T065054; modules 2; new nodes 1)
 - 06:51 L: merged deliver/S1/Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientSystem (stage 3; reviewer PASS; first push; landing 20261013T065117-L-901215 (interface); batch 20261013T065054; modules 3; new nodes 2)
 - 06:51 L: merged deliver/S3/Sheaf.AlgebraicGeometry.CartesianTensorDataComparison (stage 3; reviewer PASS; first push; landing 20261013T065117-L-901356 (proof); batch 20261013T065054; modules 1; new nodes 0)
+- 06:51 L: merged deliver/T1/Sheaf.RingTheory.PopescuZeroBaseSingleChartUnlocalized (stage 3; reviewer PASS; first push; landing 20261013T065118-L-901484 (proof); batch 20261013T065054; modules 1; new nodes 0)
