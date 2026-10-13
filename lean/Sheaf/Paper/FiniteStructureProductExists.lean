@@ -11,7 +11,6 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
-import Sheaf.Paper.FiniteStructureProductCore
 import Sheaf.Paper.FiniteStructureProductCompatibility
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
@@ -125,9 +124,7 @@ theorem finite_structure_product_exists
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x
         ∀ (x y : Γ(G, U)),
           a (μ.app U (tmulSection x y)) = a x * a y) := by
-  rcases finite_structure_product_exists_core A I X f i hi hp c hc Yn fnY gn hcart hw G hG
-    hproper ψ hψ with ⟨μ⟩
-  exact ⟨μ, finite_structure_product_compatibility A I X f i hi hp c hc Yn fnY gn hcart hw G hG
-    hproper ψ hψ μ⟩
+  exact finite_structure_product_compatibility A I X f i hi hp c hc
+    Yn fnY gn hcart hw G hG hproper ψ hψ
 
 end AlgebraicGeometry
