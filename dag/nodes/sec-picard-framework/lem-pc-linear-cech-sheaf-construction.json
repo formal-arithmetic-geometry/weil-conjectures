@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-linear-cech-sheaf-construction",
+ "kind": "statement",
+ "title": "Scalar-compatible augmented Cech sheaf construction without exactness",
+ "statement": "Let X be a scheme [def-pc-scheme], I an index type in its universe, U:I -> Opens(X) any family of opens, and F an O_X-module sheaf [def-weil-sheaf-of-modules-category]. Put A=Gamma(X,O_X) and C=cechComplexFunctor(U)(W -> (B -> F(W product B))) [def-weil-pbc-site-cech-complex], with the A-action restricted from X. There exist a nonnegative cochain complex D of O_X-module sheaves, an augmentation epsilon:F[0] -> D, and natural A-module-presheaf isomorphisms e_p:forget(D^p) -> C^p. For each p, forget(d_D^p) e_(p+1) = e_p d_C^p. On each open B and singleton tuple y:Fin(1) -> I, the y-coordinate of e_0 epsilon^0 is restriction along prod.snd:(product_l U_(y(l))) product B -> B. For each p, D^p is isomorphic as a module sheaf to the product over y:Fin(p+1) -> I of j_y,*(F restricted to inf_l U_(y(l))). For each p,y,B let c be the y-coordinate of e_p(B). For every a in O_X(B) and s in D^p(B), c(a s) = (restriction of a along prod.snd) c(s). No covering or quasi-isomorphism assertion is made. The empty index type, empty scheme, zero module, and infinite families are included.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "source": {
+  "document": "Weil conjectures blueprint and Stacks Project",
+  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Stacks Tag 02FU, construction of the sheaf Cech complex before the exactness argument"
+ },
+ "proof": [
+  {
+   "text": "For each open W construct P(W) as the pushforward of F.over W along Over.star W, with ring restriction along prod.snd. On B its sections are F(W product B) with scalars restricted from O_X(B). For W contained in Z, use the restriction map F(Z product B) -> F(W product B). Functoriality of F and of the structure sheaf proves naturality in B, local scalar compatibility, and the identity and composition laws, yielding P on opposite opens.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cechComplexFunctor U to P. Products of module sheaves are computed on sections, and restriction of scalars preserves products. Their product comparison isomorphisms give the natural e_p. Each comparison commutes with every face restriction by its projection equations; taking the alternating sum gives the displayed differential identity. The restriction maps F -> P(product of a singleton) assemble into a degree-zero product map; the two restrictions to every double intersection are equal, so its first differential is zero. The universal property of single_0 gives the augmentation, and the product projection equations give the required degree-zero coordinate formula.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The categorical product of a finite family of opens is canonically isomorphic to its infimum, since both are greatest lower bounds. Transport P along this isomorphism and compare Over W with opens of the open subscheme W to identify P(W) with j_W,*(F restricted to W). Taking the product of these isomorphisms gives the termwise open-direct-image description. On B, each coordinate of e_p is a module-sheaf product projection followed by the above section identification for P(W), so local scalar multiplication becomes restriction along prod.snd, giving exactly the displayed scalar equation. Neither construction nor these identities use covering or exactness; empty index families use empty products.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "worker S3",
+  "document": "Weil conjectures blueprint and Stacks Project",
+  "place": "lem-pc-cech-resolution, displayed complex and proof paragraph 1; Stacks Tag 02FU, construction of the sheaf Cech complex before the exactness argument; sectionwise details and no-cover construction written by S3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech resolution of sheaves of modules compatible with local scalar actions",
+   "results": "PresheafOfModules.Sheafify.SMulCandidate.mk', PresheafOfModules.Sheafify.instNonemptySMulCandidate, PresheafOfModules.Sheafify.SMulCandidate, PresheafOfModules.Sheafify.smulCandidate, PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.smul",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for the scalar-compatible augmented sheaf construction; cechComplexFunctor only builds the complex from an already constructed sheaf-valued functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "results": "QuasiIso, HomotopyEquiv.quasiIso_hom, HomotopyEquiv.quasiIso_inv, QuasiIso.quasiIsoAt, quasiIso_iff, quasiIso_of_isIso, QuasiIso.mk, HomologicalComplex.mem_quasiIso_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for the scalar-compatible augmented sheaf construction; cechComplexFunctor only builds the complex from an already constructed sheaf-valued functor."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|quasiIso_of_restrict",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for the scalar-compatible augmented sheaf construction; cechComplexFunctor only builds the complex from an already constructed sheaf-valued functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct Cech complex as a complex of sheaves of modules with sectionwise product projections linear over local scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for the scalar-compatible augmented sheaf construction; cechComplexFunctor only builds the complex from an already constructed sheaf-valued functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LinearCechSheafResolution",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Cech sheaf construction, separated from local exactness; retain the local scalar actions in the displayed product terms",
+   "via": [
+    "lem-pc-linear-cech-sheaf-resolution",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LinearCechSheafConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearCechSheafConstruction.lean",
+  "declaration": "AlgebraicGeometry.exists_augmented_linear_cech_sheaf_complex",
+  "statement": "theorem exists_augmented_linear_cech_sheaf_complex\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    (F : X.Modules) :\n    ∃ (D : CochainComplex X.Modules ℕ)\n      (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D)\n      (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p),\n      (∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1)) ∧\n      (∀ (y : Fin 1 → ι) (V : X.Opens),\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫\n          (e 0).hom ≫\n            Pi.π (fun y : Fin 1 → ι =>\n              ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n                (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                  (op (∏ᶜ fun l => U (y l)))) y).app (op V) =\n          F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧\n      (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>\n        (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧\n      (∀ (p : ℕ) (y : Fin (p + 1) → ι) (B : X.Opens),\n        let c : Γ(D.X p, B) → Γ(F, (∏ᶜ fun l ↦ U (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ι ↦\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ U (y l)))) y).app (op B) s\n        ∀ (a : Γ(X, B)) (s : Γ(D.X p, B)),\n          c (a • s) = X.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ U (y l)) ⨯ B ⟶ B).op a • c s)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T054237-L-449145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

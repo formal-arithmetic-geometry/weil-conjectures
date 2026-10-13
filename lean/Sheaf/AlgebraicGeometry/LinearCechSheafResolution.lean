@@ -8,13 +8,15 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.CechSheafConstruction
+import Sheaf.AlgebraicGeometry.LinearCechSheafConstruction
+import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso
 
 /-! # Čech sheaf resolution with local scalar compatibility
 
 Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
-Stacks Project, Tags 01EO and 01FJ.
+Stacks Project, Tag 02FU (construction and insertion homotopy).
 -/
 
 @[expose] public section
@@ -27,7 +29,7 @@ namespace AlgebraicGeometry
 This refines the global-ring-linear presheaf description without changing its complex,
 differential, augmentation, or termwise open-direct-image description.
 Source: blueprint lem-pc-cech-resolution, displayed complex and proof paragraph 1;
-Stacks Project, Tags 01EO and 01FJ.
+Stacks Project, Tag 02FU (construction and insertion homotopy).
 (blueprint: lem-pc-linear-cech-sheaf-resolution).
 
 Proof: Construct P(Z) = j_Z,*(F|Z) as an actual module sheaf on X, with sections
@@ -81,6 +83,40 @@ theorem exists_linear_cech_sheaf_resolution
         ∀ (a : Γ(X, B)) (s : Γ(D.X p, B)),
           c (a • s) = X.presheaf.map (prod.snd :
             (∏ᶜ fun l ↦ U (y l)) ⨯ B ⟶ B).op a • c s) ∧
-      QuasiIso ε := by sorry
+      QuasiIso ε := by
+  obtain ⟨D, ε, e, hd, hε, hterms, hlinear⟩ :=
+    exists_augmented_linear_cech_sheaf_complex U F
+  refine ⟨D, ε, e, hd, hε, hterms, hlinear, ?_⟩
+  -- Compare the homology maps of this augmentation with their restrictions.
+  rw [quasiIso_iff]
+  intro n
+  rw [quasiIsoAt_iff, ShortComplex.quasiIso_iff]
+  let φ := (HomologicalComplex.shortComplexFunctor X.Modules (ComplexShape.up ℕ) n).map ε
+  have hlocal (i : ι) :
+      IsIso ((Scheme.Modules.restrictFunctor (U i).ι).map
+        (ShortComplex.homologyMap φ)) := by
+    let R := Scheme.Modules.restrictFunctor (U i).ι
+    have := augmented_cech_sheaf_quasiIso_restrict U F D ε e hd hε i
+    have hφ : ShortComplex.QuasiIso (R.mapShortComplex.map φ) :=
+      (quasiIsoAt_iff ((R.mapHomologicalComplex (ComplexShape.up ℕ)).map ε) n).mp
+        inferInstance
+    have : IsIso (ShortComplex.homologyMap (R.mapShortComplex.map φ)) :=
+      (ShortComplex.quasiIso_iff _).mp hφ
+    have he := ShortComplex.mapHomologyIso_inv_naturality φ R
+    have : IsIso (R.map (ShortComplex.homologyMap φ) ≫
+        ((D.sc n).mapHomologyIso R).inv) := by
+      rw [he]
+      infer_instance
+    exact (isIso_comp_right_iff _ ((D.sc n).mapHomologyIso R).inv).mp inferInstance
+  -- Use the existing public reflection theorem for jointly surjective flat maps.
+  apply Scheme.Modules.isIso_of_isIso_pullback_map (fun i ↦ (U i).ι)
+  · intro x
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.1
+      (hU.ge (Set.mem_univ x) : x ∈ ⨆ i, U i)
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
+  · intro i
+    have := hlocal i
+    exact (NatIso.isIso_map_iff (Scheme.Modules.restrictFunctorIsoPullback (U i).ι)
+      (ShortComplex.homologyMap φ)).mp inferInstance
 
 end AlgebraicGeometry
