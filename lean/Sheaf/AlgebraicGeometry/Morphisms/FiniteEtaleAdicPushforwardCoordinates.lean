@@ -63,6 +63,24 @@ def coordinates {r : ℕ}
       (Modules.pullbackFreeIso (pullback.fst V.ι (baseMap f n))
         (ULift.{u} (Fin r))).hom).app ⊤ (liftSection f V P n a)) (ULift.up i)
 
+/-- Bundled-function form of the transition identity.
+(Source: Stacks Project, Tag 02KG.)
+(blueprint: new-sbc-finite-etale-adic-pushforward-coordinates-core)
+-/
+theorem pushforward_coordinates_transition_fun :
+    ∀ (r : ℕ)
+      (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶
+        free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))),
+      (∀ (n : ℕ) (a : Γ(cover f V P (n + 1), ⊤)),
+        coordinates f V P α n ((coverTransition f V P n).appTop a) =
+          fun i ↦
+            (pullback.lift (pullback.fst V.ι (baseMap f n))
+              (pullback.snd V.ι (baseMap f n) ≫ baseTransition f n)
+              (by rw [Category.assoc, baseTransition_comp_baseMap]
+                  exact pullback.condition)).appTop
+                (coordinates f V P α (n + 1) a i)) := by
+  sorry
+
 /-- Coordinates from the canonical finite affine base-change comparison are natural
 under successive thickenings.
 
@@ -95,6 +113,7 @@ theorem pushforward_coordinates_transition :
             (by rw [Category.assoc, baseTransition_comp_baseMap]
                 exact pullback.condition)).appTop
                   (coordinates f V P α (n + 1) a i)) := by
-  sorry
+  intro r α n a i
+  exact congrFun (pushforward_coordinates_transition_fun f V P r α n a) i
 
 end AlgebraicGeometry.Scheme.FiniteEtale.Adic
