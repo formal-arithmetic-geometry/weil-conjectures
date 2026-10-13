@@ -13,35 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Use Mathlib IsFiltered.exists_directed (Stacks 0032) to choose a small nonempty directed partial order A and a final functor R : A to I.op. Its left opposite is initial, so c.whisker R.leftOp is limiting; compactness, quasi-separatedness and affine transitions are inherited from D. Finality preserves the colimit cocone L.whisker R.",
+   "text": "Evaluate G and its colimit cocone L at s. HomologicalComplex evaluation preserves colimits, so the evaluated cocone is colimiting. Evaluate eG at s to obtain the scalar pullback identifications.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Evaluate R composed with G and its colimit cocone at s. Mathlib HomologicalComplex evaluation preserves colimits. Set the stage sheaf at a to (F ((R.obj a).unop)).X s and its transition to (phi ((R.map f).unop)).f s. Evaluating hidentity, hcomposition and hG gives precisely the coherence assumptions of ordinary continuity. The evaluated eG gives the pullback identifications.",
+   "text": "Apply the component map at s to hidentity, hcomposition and hG. Simplify components of composition, mapped natural isomorphisms and mapped complex morphisms; these give the identity, composition and pullback compatibility laws for the scalar sheaf system.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply nonempty_isColimit_etale_cohomology_of_isLimit to these evaluated sheaves in degree r, using the reindexed H and B. Expand complexTermCohomologyMap as the composite of cohomologyMap and Sheaf.H.map. Cancel eH.hom on the right of hH to obtain the required arrow equality; hB already gives the required cocone-leg equality. The result makes B.whisker R a colimit.",
+   "text": "Apply ordinary continuity for small cofiltered categories to the evaluated scalar system in degree r. Expanding complexTermCohomologyMap yields exactly the prescribed cohomology arrows and cocone legs. Normalize evaluation and constant-functor expressions, including instance arguments, so the fixed-point cohomology types coincide. Ordinary cofiltered continuity performs the same directed replacement and application of directed-order continuity as the former plan.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+    "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
    ],
    "elementary": false
-  },
-  {
-   "text": "Transport the resulting colimit structure along Functor.Final.isColimitWhiskerEquiv R B to conclude Nonempty (IsColimit B).",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+  "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
  ],
  "proof_origin": {
-  "by": "Q1",
-  "document": "Stacks Project Tag 09YQ",
-  "place": "termwise application"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Termwise continuity: evaluate complexes first, then perform Tag 0032 directed replacement on the scalar sheaf system"
  },
  "mathlib_searches": [
   {
@@ -114,13 +109,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f69aa",
-  "group": "Q1",
+  "reviewer": "X-43dcd",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T144137-L-2104543",
+  "landing": "20261013T163538-L-1620886",
   "kind": "interface",
-  "note": "independent Codex review: Existing signature is byte-identical; both Lean signatures match their nodes, and the proof and termwise reduction match the recorded dependencies and sources. Both delivered modules and unchanged direct importer EtaleComplexFiltrationDeepening compile cleanly; axiom probes show only standard axioms and the documented sorryAx."
+  "note": "independent Codex review: Packet ↔ delivered files; both modules and direct importer compile cleanly; signatures, target statement, nodes, report, and documented sorry all comply."
  }
 }
