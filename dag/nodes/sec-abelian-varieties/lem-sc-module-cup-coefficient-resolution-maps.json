@@ -1,0 +1,189 @@
+{
+ "id": "lem-sc-module-cup-coefficient-resolution-maps",
+ "kind": "statement",
+ "title": "Coefficient maps between computing cup resolutions",
+ "statement": "For a scheme X and module morphisms phi:F→F1 and psi:G→G1, there exist computing pairings D for F,G and E for F1,G1 [def-sc-module-cup-resolution-data] and cochain maps l:D.left.K→E.left.K, r:D.right.K→E.right.K and t:D.target.K→E.target.K. In every degree these maps on global cocycles induce respectively H(phi), H(psi), and H(phi tensor psi) under the computing class maps [def-sc-ringed-space-module-cohomology]. For every open V and bidegree p,q, t(p+q)(D.pair(p,q,V)(a,b))=E.pair(p,q,V)(l(p)(a),r(q)(b)). This is simultaneous functorial resolution data, with no specified bilinear map on cohomology and no quasi-coherence or flatness hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Section 20.31, naive cup product and Lemma 20.31.3; functorial Godement construction in Section 20.30 (0FKR)"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCoefficientResolutionMaps",
+  "file": "lean/Sheaf/Paper/ModuleCupCoefficientResolutionMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_coefficient_resolution_maps",
+  "statement": "theorem moduleCup_coefficient_resolution_maps (X : Scheme.{v})\n    (F G F₁ G₁ : X.Modules) (φ : F ⟶ F₁) (ψ : G ⟶ G₁) :\n    ∃ (D : CupResolutionPairing F G) (E : CupResolutionPairing F₁ G₁)\n      (l : D.left.K ⟶ E.left.K) (r : D.right.K ⟶ E.right.K)\n      (t : D.target.K ⟶ E.target.K),\n      (∀ (n : ℕ)\n        (a : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.left.K).sc n).moduleCatLeftHomologyData.K)\n        (a' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.left.K).sc n).moduleCatLeftHomologyData.K),\n        a'.val = (l.f n).val.app (op ⊤) a.val →\n          E.left.class n a' =\n            (RingedSpace.moduleCohomology X.toRingedSpace n).map φ (D.left.class n a)) ∧\n      (∀ (n : ℕ)\n        (b : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.right.K).sc n).moduleCatLeftHomologyData.K)\n        (b' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.right.K).sc n).moduleCatLeftHomologyData.K),\n        b'.val = (r.f n).val.app (op ⊤) b.val →\n          E.right.class n b' =\n            (RingedSpace.moduleCohomology X.toRingedSpace n).map ψ (D.right.class n b)) ∧\n      (∀ (n : ℕ)\n        (c : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj D.target.K).sc n).moduleCatLeftHomologyData.K)\n        (c' : ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj E.target.K).sc n).moduleCatLeftHomologyData.K),\n        c'.val = (t.f n).val.app (op ⊤) c.val →\n          E.target.class n c' =\n            (RingedSpace.moduleCohomology X.toRingedSpace n).map\n              (@id (F ⊗ G ⟶ F₁ ⊗ G₁) (φ ⊗ₘ ψ)) (D.target.class n c)) ∧\n      (∀ (p q : ℕ) (V : X.Opens)\n        (a : Γ(D.left.K.X p, V)) (b : Γ(D.right.K.X q, V)),\n        (t.f (p + q)).val.app (op V) (D.pair p q V a b) =\n          E.pair p q V ((l.f p).val.app (op V) a) ((r.f q).val.app (op V) b))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "proof": [
+  {
+   "text": "Obtain simultaneous augmented flasque integer tensor complexes and coefficient maps from moduleCup_godement_coefficient_complexes. Restrict the six complexes and maps to natural degrees. Identify the restricted single complex with single0 and prove augmentation naturality on degree-zero components. Curry tensor sections followed by the tensor summand inclusion and raw pairing. Prove restriction compatibility using sheaf morphism naturality and signed Leibniz using the total tensor differential. The raw zero-degree formula supplies augmentation_pair.",
+   "uses": [
+    "lem-sc-module-cup-godement-coefficient-complexes",
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct each injective comparison explicitly by InjectiveResolution.descOfQuasiIso of the identity. Flasque source terms and injective target terms are right-acyclic, and the acyclic-resolution comparison criterion gives isomorphisms on global homology. Package these comparisons and section pairings into D and E.",
+   "uses": [
+    "lem-sc-module-cup-flasque-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct a comparison homotopy for a quasi-isomorphic nonnegative augmented source and injective target. Degree-zero and positive-degree exact sequences of the source allow extension through each differential to build a nullhomotopy for a map vanishing on the augmentation. Apply this to the difference of the coefficient map followed by the target comparison and the source comparison followed by an injective lift. Global sections preserves the homotopy, so homology maps agree. ModuleCat cycles isomorphisms and naturality of the homology projection identify the mapped concrete cycle. InjectiveResolution.isoRightDerivedObj_inv_naturality gives the class equation for any map over a coefficient morphism. Apply it to the three restricted coefficient maps.",
+   "uses": [
+    "def-sc-module-cup-resolution-data",
+    "def-sp-injective-resolutions",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the raw tensor-chain square on a tensor summand in bidegree (p,q). The tensorHom component sends tensor sections to the tensor of mapped sections. Restriction to natural degrees yields the section pairing equation. Assemble the five existential witnesses and four conjunctions.",
+   "uses": [
+    "lem-sc-module-cup-godement-coefficient-complexes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-coefficient-complexes",
+  "def-sc-module-cup-resolution-data",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-injective-resolutions",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "J3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0FKU",
+  "place": "Explicit flasque comparison packaging, comparison homotopy and class naturality proved in Lean; raw functorial tensor construction isolated separately",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupCoefficientResolutionMaps",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: the Kunneth cup compatibility used for the special fibre; simultaneous natural computing resolutions for Step 4 of the Cech cup compatibility lemma",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of sheaf cohomology cup products in coefficient morphisms",
+   "results": "8 hits: groupCohomology.mapCocycles₂_comp_i, groupCohomology.mapCocycles₁_comp_i, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, groupCohomology.π_map, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂, groupCohomology.π_map_assoc, groupCohomology.π_map_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact match for compatible computing resolution maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "results": "1 hits: HomologicalComplex.homologyMap_comp",
+   "date": "2026-10-13",
+   "verdict": "no exact match for compatible computing resolution maps"
+  },
+  {
+   "tool": "grep",
+   "query": "CupResolutionPairing|isoRightDerivedObj_inv_naturality",
+   "results": "1 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match for compatible computing resolution maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial Godement resolutions with natural tensor pairing for sheaf cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Godement resolution maps for a morphism of ringed spaces commute with the tensor cup pairing",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left",
+   "date": "2026-10-13",
+   "verdict": "no exact match for compatible computing resolution maps"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|cup.*pullback|pullback.*cup",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match for compatible computing resolution maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.descOfQuasiIso",
+   "results": "0 hits: ; loogle: unknown identifier 'InjectiveResolution.descOfQuasiIso'",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact simultaneous computing-resolution map theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial flasque resolution with Alexander Whitney multiplication and maps induced by a continuous map",
+   "results": "8 hits: AlgebraicTopology.DoldKan.N₁_map_f, AlgebraicTopology.DoldKan.Γ₀_obj_map, AlgebraicTopology.map_alternatingFaceMapComplex, AlgebraicTopology.DoldKan.natTransPInfty_f, AlgebraicTopology.DoldKan.Γ₀.obj_map, AlgebraicTopology.DoldKan.Γ₀.Obj.map, CategoryTheory.Idempotents.DoldKan.Γ_map_app, AlgebraicTopology.DoldKan.Γ₀.map",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact simultaneous computing-resolution map theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|cosimplicial.*(pair|tensor)|descOfQuasiIso|homotopy.*[Nn]aturality",
+   "results": "10 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+   "date": "2026-10-14",
+   "verdict": "second reading: no exact simultaneous computing-resolution map theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T181105-L-2602131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T181105-L-2602131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
