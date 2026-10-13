@@ -151,7 +151,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChangeSection
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
@@ -438,6 +440,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorO
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.RelativeGluing.BaseChange
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Affine
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
