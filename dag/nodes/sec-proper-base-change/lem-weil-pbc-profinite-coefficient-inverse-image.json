@@ -24,9 +24,139 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a scheme $Z$ over $T$, write $h_Z(W)=\\operatorname{Mor}_T(W,Z)$ on $T_{\\mathrm{proet}}$. This is a sheaf: a pro-etale covering is fpqc, so compatible morphisms glue uniquely by [lem-weil-pbc-fpqc-representable-descent]. The glued morphism is over $T$, since its two composites to $T$ agree on the cover and uniqueness of descent into $T$ makes them agree globally. Thus the small pro-etale site is subcanonical, including for every object that will be constructed below.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, label lemma-fpqc-universal-effective-epimorphisms"
+   }
+  },
+  {
+   "text": "For a finite ring $Q$, use [lem-weil-pbc-scheme-coproduct-family] to form the scheme $E_{T,Q}=\\coprod_{q\\in Q}T$, with ring-object operations given on labels by the operations of $Q$. A map $W\\to E_{T,Q}$ over $T$ is precisely a partition $W=\\coprod_{q\\in Q}W_q$ into open-and-closed subschemes: on $W_q$ it is the structure morphism to the copy labelled $q$. Consequently $h_{E_{T,Q}}$ is the sheafification of the constant presheaf $Q$, as follows directly from the universal property [def-weil-pbc-sheafification]. Given any map from that presheaf to a sheaf $F$, send a partition to the section obtained by gluing the image of the constant section $q$ over each $W_q$. These opens form a pro-etale cover: each is an open immersion with identity maps on local rings and hence flat with flat diagonal, and they have a finite affine refinement on every affine open: refine their intersections with $\\operatorname{Spec}B$ by basic opens $D(f)$; these cover the spectrum, so their $f$ generate the unit ideal (otherwise a maximal ideal containing them would give an uncovered point); writing $1$ as a finite linear combination gives a finite subcover. Uniqueness of sheaf gluing shows that this extension is unique and natural in $W$. For a ring-valued $F$ the extension is a ring map: on the common refinement $W_q\\cap W'_{q'}$ the sum and product are respectively the images of $q+q'$ and $qq'$. Thus $(Q)_T=h_{E_{T,Q}}$ canonically as ring sheaves. The constant $q$ is the map to the labelled copy. A ring map $Q\\to Q'$ acts by the same label map on these schemes. The partition description also gives the stated continuous-functions description: a map to finite discrete $Q$ is continuous exactly when its fibres are clopen, and it factors uniquely through the quotient space of connected components.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, label example-constant-sheaf; universal-property argument for finite coefficients"
+   }
+  },
+  {
+   "text": "Put $E_{T,n}=E_{T,Q_n}$ with transition sending the copy labelled $q$ to that labelled $t_n(q)$. Each transition is affine: over an affine open in one target copy its inverse image is a finite disjoint union of that affine open, with coordinate ring a finite product of its ring. Apply [lem-weil-pbc-limit-affine-transition] to this countable directed system to obtain $E_T=\\varprojlim_n E_{T,n}$. Over an affine open $\\operatorname{Spec}B\\subset T$, the restriction is $\\operatorname{Spec}(\\varinjlim_n B^{Q_n})$. Indeed the limit theorem permits restriction to the open $\\coprod_{Q_1}\\operatorname{Spec}B$ in $E_{T,1}$, and its affine-limit clause gives this formula. Every $B^{Q_n}$ is an etale algebra of finite presentation over $B$: its spectrum is finitely many copies of $\\operatorname{Spec}B$, and on each copy the map is the identity (flat, with open diagonal and finite presentation). Hence the displayed colimit is ind-etale by [def-weil-pbc-ind-etale-algebra], and is weakly etale by [lem-weil-pbc-ind-etale-stability]. Weak etaleness is the condition of flatness on the local ring maps and on those of the diagonal; the affine restrictions cover both source and diagonal, so $E_T\\to T$ is weakly etale. The same applies to $E_{T,n}\\to T$. All these schemes belong to the chosen universe: a countable colimit of rings and a finite product stay in the universe, and the affine descriptions glue over the small set of affine opens of $T$. Thus they are objects of the specified small pro-etale site.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-etale-morphism",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097N, label lemma-ind-etale-implies; limits.tex Tags 01YW/01YX, labels lemma-directed-inverse-system-affine-schemes-has-limit and lemma-directed-inverse-system-has-limit"
+   }
+  },
+  {
+   "text": "For every $W\\to T$, the scheme-limit universal property gives $\\operatorname{Mor}_T(W,E_T)=\\varprojlim_n\\operatorname{Mor}_T(W,E_{T,n})$, with the indicated projections. By Step 2 and the sectionwise computation of ring-sheaf limits [def-pur-sheaf-inverse-limit], this identifies $h_{E_T}$ with the underlying sheaf of $R_T$. Endow $E_T$ with its ring-object operations by the limit universal property: for example the $n$-th component of addition is addition in $E_{T,n}$ after the two projections, and zero and one are the compatible labelled sections. The ring axioms hold after every projection and therefore hold by uniqueness. Under the displayed sectionwise identification, these are exactly the componentwise ring operations of $R_T$, and $h_{E_T}\\to h_{E_{T,n}}$ is exactly $\\pi_{T,n}$.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB/03CO, labels lemma-limits-colimits and lemma-limits-colimits-abelian-sheaves"
+   }
+  },
+  {
+   "text": "Let $b_u:V_{\\mathrm{proet}}\\to U_{\\mathrm{proet}}$ be base change. For any object $Z\\to V$, Step 1 and [lem-galois-yoneda-hom-bijection], applied to the two small site categories, give for every sheaf of sets $F$ on $U_{\\mathrm{proet}}$ the natural bijections $\\operatorname{Hom}(u^{-1}h_Z,F)=\\operatorname{Hom}(h_Z,u_*F)=(u_*F)(Z)=F(U\\times_V Z)=\\operatorname{Hom}(h_{U\\times_V Z},F)$. Here the first and third equalities are the adjunction and the direct-image evaluation formula of [def-weil-proetale-inverse-image]. The uniqueness result [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] gives $u^{-1}h_Z\\cong h_{U\\times_V Z}$. It is natural in $Z$ because every displayed bijection is natural in the representing object as well as in $F$. Its adjoint is the map $h_Z\\to u_*h_{U\\times_V Z}$ sending $W\\to Z$ to its base change $U\\times_V W\\to U\\times_V Z$, as is seen by evaluation on the identity of $Z$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, label lemma-pullback-representable-sheaf; proetale.tex Tag 098T (2), label lemma-morphism-big-small"
+   }
+  },
+  {
+   "text": "Base change identifies $U\\times_V E_{V,n}$ with $E_{U,n}$ by preserving labels. It also identifies $U\\times_V E_V$ with $E_U$: for an arbitrary $U$-scheme $W$, a map $W\\to U\\times_V E_V$ over $U$ is a $V$-map $W\\to E_V$, hence a compatible family of $V$-maps $W\\to E_{V,n}$, hence a compatible family of $U$-maps $W\\to U\\times_V E_{V,n}$. This is exactly the limit universal property defining $E_U$. The unique isomorphism is therefore compatible with all projections and with the label maps of the tower. Apply Step 5 to $Z=E_{V,n}$ and $Z=E_V$, and then Steps 2 and 4. This produces isomorphisms of underlying sheaves $c_{u,n}$ and $c_u$, compatible with the transitions and all projections. In particular it proves that this specific infinite-limit comparison is invertible, without asserting preservation of arbitrary infinite limits by $u^{-1}$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW, label lemma-directed-inverse-system-affine-schemes-has-limit; fibre-product and limit universal properties"
+   }
+  },
+  {
+   "text": "These underlying-sheaf isomorphisms are ring isomorphisms, with the inverse-image ring structures meant in the statement. To justify this compatibility, [lem-weil-pbc-presheaf-pullback-sets-left-exact] applies to $b_u$, since it preserves the final object and fibre products by [def-weil-proetale-inverse-image]; composing with the finite-limit-preserving sheafification [lem-weil-pbc-sheafification-sets-exact] shows that the set-valued $u^{-1}$ preserves finite products. It therefore sends a ring object to a ring object by applying it to addition, multiplication, zero, one and negation, using the canonical product identifications. By [lem-weil-pbc-sheaf-algebraic-structures-objects] this gives a sheaf of rings. The set adjunction restricts to the ring adjunction: naturality of its unit and counit, together with their finite-product identifications, makes the equations for commuting with each operation equivalent for adjoint maps. This characterizes the ring inverse image of [def-weil-proetale-inverse-image]. For a representable ring object, Step 5 is compatible with products: evaluate the Hom bijection at a pair of sections and its two projections; the result is their pair after base change. Naturality in each scheme-operation map then proves compatibility with all five ring operations. The base-change identifications of Step 6 preserve these operations too, since at each finite coordinate they preserve labels. Finally, the adjunct of $c_{u,n}$ sends the constant $q$ to the same labelled constant $q$ on a base-changed object, so it is precisely the specified adjunct, not a different isomorphism.",
+   "uses": [
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WJ and 04D3, labels lemma-sheafification-exact and lemma-pullback-representable-sheaf; ring-object interpretation"
+   }
+  },
+  {
+   "text": "By the projection compatibility in Step 6, $\\pi_{U,n}\\circ c_u=c_{u,n}\\circ u^{-1}\\pi_{V,n}$. The same naturality applied to the label map $t_n$ gives $(t_n)_U\\circ c_{u,n+1}=c_{u,n}\\circ u^{-1}(t_n)_V$. The limit universal property says that the first equations uniquely determine $c_u$. A morphism of towers induces the corresponding label maps at every level and the unique map between their representing limits; naturality of Step 5 proves the desired naturality, with its infinite-level square checked after each projection. For $u=\\mathrm{id}$ the adjoint map is the identity label map; the resulting comparison is the identity. For $U\\xrightarrow{u}V\\xrightarrow{v}T$, base-changing a map twice and once along $v\\circ u$ gives the same map under the fibre-product association isomorphism. The adjunct descriptions in Step 5 therefore identify the finite-level comparisons with $c_{u,n}\\circ u^{-1}c_{v,n}$ under the canonical composite-inverse-image identification. Checking after each projection gives the identical composition law for $c_u$. This proves all clauses, including identity and composition coherence.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04D3, label lemma-pullback-representable-sheaf; naturality and uniqueness in the preceding construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-etale-morphism",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-proetale-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Coefficient-system argument assembled from Tags 098T and 097N, with Sites 04D3, Descent 023Q and Limits 01YW/01YX; not a verbatim theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +220,80 @@
    "results": "25 hits; top: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
    "date": "2026-10-14",
    "verdict": "no match: ordinary sheaf pullback, sheafification monoidal structures and unrelated categorical limits do not state the unbounded ringed-topos theorem or compatible profinite coefficient inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyYoneda|pullback.*[Yy]oneda|[Yy]oneda.*pullback",
+   "results": "22 hits; Mathlib/Condensed/TopComparison.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the profinite constant ring sheaf under arbitrary scheme base change",
+   "results": "8 hits; AlgebraicGeometry.StructureSheaf.comap_const, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.underlying_obj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom, LightCondensed.ofSheafForgetLightProfinite_val",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, yoneda",
+   "results": "0 hits; ; loogle: unknown identifier 'yoneda'",
+   "date": "2026-10-14",
+   "verdict": "unavailable: query rejected because 'yoneda' is an unknown identifier; this failed query supplies no evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a representable sheaf on a site is the sheaf represented by the image object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on small pro-etale sites preserves inverse limits of finite constant ring sheaves by representing them by affine weakly etale schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtalePretopology, LightCondensed.ofSheafForgetLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyYoneda|pullback.*[Yy]oneda|[Yy]oneda.*pullback",
+   "results": "22 hits; Mathlib/Condensed/TopComparison.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Square.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the profinite constant ring sheaf under arbitrary scheme base change",
+   "results": "8 hits; AlgebraicGeometry.StructureSheaf.comap_const, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, LightCondensed.underlying_obj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom, LightCondensed.ofSheafForgetLightProfinite_val",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, yoneda",
+   "results": "0 hits; ; loogle: unknown identifier 'yoneda'",
+   "date": "2026-10-14",
+   "verdict": "unavailable: query rejected because 'yoneda' is an unknown identifier; this failed query supplies no evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a representable sheaf on a site is the sheaf represented by the image object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on small pro-etale sites preserves inverse limits of finite constant ring sheaves by representing them by affine weakly etale schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtalePretopology, LightCondensed.ofSheafForgetLightProfinite",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the compatible finite and profinite ring-sheaf comparison on scheme pro-etale sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-weil-pbc-four-corners",
   "by": "worker",
@@ -113,5 +313,109 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "worker": "stage1",
+  "summary": "Statement retained. Proved by representing each finite constant ring by a finite disjoint union, constructing the affine ind-etale tower limit, and applying adjunction/Yoneda to its representable sheaf. Ring structure, projection comparison, naturality and composition checked explicitly. No new nodes: existing generic tools suffice.",
+  "blueprint": "def-weil-pbc-four-corners: statement coefficient identifications c_u and c_{u,n}, compatible with projections and composition, used to identify ordinary finite reductions.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-pbc-proetale-covering",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-weakly-etale-morphism",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-pur-sheaf-inverse-limit",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic foundational tool for the representable-sheaf coefficient construction; the proper-base-change unit does not supply this site/category/limit fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-etale-morphism",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-proetale-inverse-image",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-99fea38a6",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-99fea38a6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all eight steps support the ordinary ring-sheaf comparison, including non-surjective towers and coherence. Corrected two rejected Loogle queries incorrectly recorded as 'no match'. review.md records source checks, accepted tools, the condensed-coefficient distinction, and pre-existing cycles outside this delivery.; 1 file(s) fixed by the reviewer"
  }
 }
