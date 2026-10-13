@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-picard-scalar-cech-external-cup-pointwise",
+ "kind": "statement",
+ "title": "Pointwise scalar Cech external cup compatibility",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-scalar-cech-external-cup-core",
+   "place": "pointwise cycle step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "For fixed degree, summand, factor cycles and total cycle satisfying the cycle-inclusion equation, the scalar comparison image under c equals the external cup of the compared factor classes.",
+ "stmt_deps": [
+  "lem-sc-picard-scalar-cech-comparison",
+  "lem-sc-picard-external-cech-cup-component"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FD, 07MB, 0FKV and 0BED, pointwise cycle computation."
+ },
+ "proof": [
+  {
+   "text": "Expand the refinement and Alexander–Whitney coordinates, apply the scalar comparison witnesses and identify the resulting class with externalCup.",
+   "uses": [
+    "lem-sc-picard-scalar-cech-comparison",
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-sc-picard-cech-cup-pullback-compat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-scalar-cech-comparison",
+  "lem-sc-picard-external-cech-cup-component",
+  "lem-sc-picard-cech-cup-pullback-compat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01FD, 07MB, 0FKV and 0BED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech external cup scalar comparison fixed cycles",
+   "results": "No exact theorem found.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology map cycles tensor Cech cup",
+   "results": "Only generic supporting lemmas.",
+   "verdict": "partial supporting lemmas",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech external cup scalar comparison",
+   "results": "No exact generic theorem.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarCechExternalCup.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardScalarCech_externalCup_pointwise",
+  "statement": "theorem picardScalarCech_externalCup_pointwise\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)\n    (c : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ) ⟶\n      (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G))\n    (hc : IsPicardExternalCechCupComponent f g U V F G c)\n    (eX : ∀ p : ℕ, ((picardCechFunctor f U).obj F).homology p →ₗ[k]\n      scalarCohomology f F p)\n    (heX : ∀ p, IsPicardScalarCechComparison f U F p (eX p))\n    (eY : ∀ q : ℕ, ((picardCechFunctor g V).obj G).homology q →ₗ[k]\n      scalarCohomology g G q)\n    (heY : ∀ q, IsPicardScalarCechComparison g V G q (eY q))\n    (eP : ∀ n : ℕ,\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n            (externalCupCoefficients f g F G)).homology n →ₗ[k]\n        scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n)\n    (heP : ∀ n, IsPicardScalarCechComparison (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G) n (eP n))\n    (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n    (a : ((picardCechFunctor f U).obj F).cycles i.val.1)\n    (v : ((picardCechFunctor g V).obj G).cycles i.val.2)\n    (z : (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n        (ComplexShape.up ℕ)).cycles n)\n    (hz : (HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n      ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n        (ComplexShape.up ℕ)).iCycles n z = HomologicalComplex.ιMapBifunctor\n      ((picardCechFunctor f U).obj F) ((picardCechFunctor g V).obj G)\n      (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n\n      i.property (((picardCechFunctor f U).obj F).iCycles i.val.1 a ⊗ₜ[k]\n        ((picardCechFunctor g V).obj G).iCycles i.val.2 v)) :\n    eP n (HomologicalComplex.homologyMap c n\n      ((HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ)).homologyπ n z)) =\n      cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)\n        (externalCupCoefficients f g F G) d)) i.property)\n        (externalCup f g F G i.val.1 i.val.2\n          (eX i.val.1 (((picardCechFunctor f U).obj F).homologyπ _ a))\n          (eY i.val.2 (((picardCechFunctor g V).obj G).homologyπ _ v)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T181056-L-2599078",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T181056-L-2599078",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
