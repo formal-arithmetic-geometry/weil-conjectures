@@ -11398,3 +11398,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/D3/Sheaf.Paper.BalancedActionAffineSections (stage 3; reviewer PASS; first push; landing 20261013T062518-L-731966 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyTensorKernel (stage 3; reviewer PASS; first push; landing 20261013T062519-L-732081 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/E2/Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft (stage 3; reviewer PASS; first push; landing 20261013T062519-L-732227 (interface); batch 20261013T062512; modules 2; new nodes 1)
+- 06:25 L: merged deliver/E3/Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal (stage 3; reviewer PASS; after a return; landing 20261013T062520-L-732369 (interface); batch 20261013T062512; modules 2; new nodes 1)

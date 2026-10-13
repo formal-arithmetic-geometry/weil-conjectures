@@ -10,35 +10,30 @@
  },
  "proof": [
   {
-   "text": "Fix x in U. Locally lift the finitely many sections defining g through the cokernel projection, intersecting the resulting neighbourhoods of x. The image of f is an epimorphic image of F and hence finite type; shrink once more so that finitely many image sections generate it. Denote the resulting neighbourhood by V ≤ U.",
+   "text": "Fix x in U. Apply the local finite-free pullback-cover theorem to obtain V ≤ U containing x and an epi p : O_V^m → P, where P is the pullback of the restricted g and the restricted cokernel projection.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "lem-weil-pbc-sheaf-finite-type-epi-image"
+    "lem-weil-pbc-cokernel-tuple-pullback-local-free-cover"
    ],
    "elementary": false
   },
   {
-   "text": "Combine the image generators and lifts into ψ : O_V^m → G|_V. Projection to the lift summands sends kernel ψ to the relations of the restricted original tuple. In the diagram from the split finite-free sequence to image-G-cokernel, the first vertical map is epi; the snake lemma gives an epimorphism on relation kernels. Equivalently, locally express each relation among the lifts using the image generators and subtract that expression to lift it to kernel ψ.",
-   "uses": [
-    "lem-weil-pbc-snake-lemma-abelian"
-   ],
-   "elementary": false
+   "text": "Write gV for restricted g, q for the restricted cokernel projection, and ψ = p followed by the second projection P → G|_V. The square with top ψ, left p, right identity, and bottom P → G|_V is a pushout: its cocone descends by the identity leg, and epi cancellation of p proves the other factorization. Apply Mathlib Abelian.epi_kernel_map_of_isPushout to obtain the induced epi a : kernel ψ → kernel(P → G|_V). The original pullback square gives an isomorphism b from kernel(P → G|_V) to kernel gV, by Mathlib isIso_kernel_map_of_isPullback.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Kernels of sheaves of modules are computed sectionwise, so the restricted relation kernel is the overMap restriction of kernel g. Return V, its inclusion in U, x ∈ V, m, ψ and the epimorphism. The empty U case is vacuous and the construction also applies to rank zero.",
+   "text": "The overMap restriction preserves kernel g: after forgetting modules and evaluating on each object of Over V, its image cone is the evaluated original kernel cone followed by identity restriction of scalars. Evaluation and that restriction preserve the cone, and evaluation jointly reflects limits. The proved private overMap_preserves_kernel supplies this instance. Compose a, b and the inverse of PreservesKernel.iso to obtain e : kernel ψ → overMap(kernel g). Each component is epi, so successive cancellation proves Epi e. Return V, hVU, its point membership, m, ψ and e.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-sheaf-finite-type-epi-image",
-  "lem-weil-pbc-snake-lemma-abelian"
+  "lem-weil-pbc-cokernel-tuple-pullback-local-free-cover"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), cokernel paragraph"
+  "place": "Modules, Lemma 01BY, proof of (3), cokernel paragraph: same local generator construction, with Mathlib pushout kernel epimorphism and pullback kernel comparison replacing the snake lemma. Restriction comparison and pushout universal property are proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -110,12 +105,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-bbe71",
-  "group": "K4",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T040750-L-3949517",
+  "landing": "20261013T062520-L-732369",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs matched with DAG nodes, Stacks 01BY, change record, earlier return, forced-adaptation compiler failure, direct-importer compiles, and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-13",
