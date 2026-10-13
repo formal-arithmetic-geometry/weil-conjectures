@@ -884,7 +884,7 @@ of geometric schemes over `s`: the composite
 ```
 of the unit of `h^* ⊣ Rh_*`, the proper identification `Rh_* = Rh_!`, the dualizing
 composition `h^! ω_{T'} ≃ ω_T` and the counit of `Rh_! ⊣ h^!`
-(blueprint: `sk-d-integral`). -/
+(blueprint: `def-trf-borel-moore-pushforward`, subsection `sk-d-integral`). -/
 noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : T' ⟶ s)
     [IsGeometric a] [IsGeometric (h ≫ a)] [HasCompactification h] [IsProper h]
     (α : G.borelMooreSections (h ≫ a)) :
@@ -951,6 +951,74 @@ noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a] [HasCo
       (α ≫ (G.dualizingCongr (Category.comp_id a).symm).hom) ≫
     G.dualizingBase.hom
 
+/-- Blueprint `def-trf-integration`: the *integration* `∫_T τ ∈ End (A_s)` of a Borel-Moore
+section `τ : A_T ⟶ ω_T` over a geometric scheme `a : T ⟶ s` proper over the base: the composite
+
+```
+  A_s ──η──▶ Ra_* La^* A_s ≃ Ra_* A_T ──τ──▶ Ra_* ω_T ≃ Ra_! ω_T ≃ Ra_! a^! A_s ──ε──▶ A_s
+```
+
+of the unit of `La^* ⊣ Ra_*`, the identification `Ra_* = Ra_!` for the proper `a`,
+`ω_T ≃ a^! A_s` (`GeometricOperations.dualizingIso`) and the counit of `Ra_! ⊣ a^!` at `A_s`.
+The blueprint reads it in `A` through `RΓ(s, -)`; here it is kept in `End (A_s)`. It agrees
+with the pushforward to the point (`integration_eq_integral`). -/
+noncomputable def integration {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
+    [HasCompactification a] [IsProper a] (τ : G.borelMooreSections a) :
+    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
+  (derivedUpperStarLowerStarAdjunction A a).unit.app (𝟙_ _) ≫
+    ((lowerStar A a).rightDerivedFunctor).map ((G.upperStarUnit a).hom ≫ τ) ≫
+    ((G.properComparison a (.of_isGeometric a)).inv.app
+      ⟨G.dualizing a, G.ctf_dualizing a⟩).hom ≫
+    (rightDerivedLowerShriek A a).map (G.dualizingIso a).hom ≫
+    G.exceptionalCounit a (.of_isGeometric a) (𝟙_ _) (G.ctf_unit (.id (𝟙 s)))
+
+/-- Blueprint `lem-trf-integration-linear`: the integration is `A`-linear,
+`∫_T (τ + c · τ') = ∫_T τ + c ∫_T τ'` for Borel-Moore sections `τ`, `τ'` and a scalar
+`c ∈ End (A_s)`, acting on Borel-Moore sections on `T` through its pullback
+`La^* c : A_T ≃ La^* A_s ⟶ La^* A_s ≃ A_T`. -/
+theorem integration_add_smul {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
+    [HasCompactification a] [IsProper a] (τ τ' : G.borelMooreSections a)
+    (c : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)))) :
+    G.integration a (τ + ((G.upperStarUnit a).inv ≫
+        ((upperStar A a).leftDerivedFunctor).map c ≫ (G.upperStarUnit a).hom) ≫ τ') =
+      G.integration a τ + (show End _ from c ≫ G.integration a τ') := by
+  simp only [integration, Preadditive.comp_add, Functor.map_add, Preadditive.add_comp,
+    Category.assoc, Iso.hom_inv_id_assoc, Functor.map_comp]
+  congr 1
+  rw [← Category.assoc c, ← (derivedUpperStarLowerStarAdjunction A a).unit_naturality c]
+  simp only [Category.assoc]
+
 end GeometricOperations
+
+
+namespace Correspondence
+
+variable [DerivedBraiding A] (G : GeometricOperations A s) {X : Scheme.{u}} {aX : X ⟶ s}
+  [IsGeometric aX] {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+
+omit [DerivedBraiding A] [IsGeometric aX] in
+/-- Blueprint `thm-trf-fixed-point-base-change` (1): pullback along the ordinary leg in the
+fixed square, `Li_F^* Lc₂^* K ≃ Ld^* K` for `d = c₁ ∘ i_F = c₂ ∘ i_F`, the composition
+isomorphism of derived pullbacks along `c₂ ∘ i_F = d`. -/
+noncomputable def fixUpperStarIso (c : Correspondence aX aX K K) :
+    ((upperStar A c.fixι).leftDerivedFunctor).obj (((upperStar A c.snd).leftDerivedFunctor).obj K) ≅
+      ((upperStar A (c.fixι ≫ c.fst)).leftDerivedFunctor).obj K :=
+  leftDerivedUpperStarCompIso c.fixι c.fixι_snd K
+
+/-- Blueprint `thm-trf-fixed-point-base-change` (2): base change for the total correspondence in
+the Cartesian fixed square `Fix(c) = C ×_{X × X} X` (`isPullback_fixι_toProd`),
+`LΔ_X^* Rc_! M ≃ Rd_! Li_F^* M` on `Dᵇctf(C)`: the `!`-base change of the package for that
+square. -/
+noncomputable def fixLowerShriekBaseChange (c : Correspondence aX aX K K) [IsGeometric c.str]
+    [HasCompactification c.toProd] :
+    G.lowerShriekCtf c.toProd c.isGeometricHom_toProd ⋙
+        G.upperStarCtf (pullback.diagonal aX)
+          (.mk (aX := aX) (aY := pullback.fst aX aX ≫ aX) (by simp)) ≅
+      G.upperStarCtf c.fixι (.mk (aX := c.fixStr) (aY := c.str) rfl) ⋙
+        G.lowerShriekCtf (c.fixι ≫ c.fst)
+          (.mk (aX := c.fixStr) (aY := aX) (by simp [fixStr, c.fst_comp])) :=
+  G.baseChange c.isPullback_fixι_toProd _ _ _ _
+
+end Correspondence
 
 end AlgebraicGeometry.ProEtale

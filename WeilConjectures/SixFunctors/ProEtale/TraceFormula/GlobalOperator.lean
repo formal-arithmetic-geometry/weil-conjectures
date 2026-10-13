@@ -486,6 +486,119 @@ lemma exceptionalPushforward_id {aX : Y ⟶ s} [IsGeometric aX] [HasCompactifica
 
 end ExceptionalPushforward
 
+section Integration
+
+variable {X Y : Scheme.{u}}
+
+/-- The transport `ω_a ≃ ω_b` of the dualizing complex along `a = b` is compatible with the
+identifications `ω_a ≃ a^! A` and `ω_b ≃ b^! A`. -/
+lemma dualizingCongr_hom_dualizingIso_hom {a b : X ⟶ s} (e : a = b) [HasCompactification a]
+    [HasCompactification b] :
+    (G.dualizingCongr e).hom ≫ (G.dualizingIso b).hom =
+      (G.dualizingIso a).hom ≫ (rightDerivedUpperShriekCongr A e).hom.app (𝟙_ _) := by
+  subst e
+  simp
+
+/-- The conjugate of the transport `Rf_! ≃ Rg_!` along `f = g` on `Dᵇctf` is the transport
+`g^! ≃ f^!`. -/
+lemma conjugateIsoEquiv_ctfLowerShriekCongr_hom_app_hom {f g : X ⟶ Y} (e : f = g)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) [HasCompactification f]
+    [HasCompactification g] (L : Ctf A Y) :
+    ((conjugateIsoEquiv (G.exceptionalAdjunction g hg) (G.exceptionalAdjunction f hf)
+      (ctfLowerShriekCongr e (fun _ hK ↦ G.ctf_lowerShriek f hf hK)
+        (fun _ hK ↦ G.ctf_lowerShriek g hg hK))).hom.app L).hom =
+      (rightDerivedUpperShriekCongr A e.symm).hom.app L.obj := by
+  subst e
+  simp [ctfLowerShriekCongr]
+
+/-- The right unit law of the composition isomorphisms of exceptional inverse images on
+`Dᵇctf`: `(f ≫ 𝟙)^! L ≃ f^! (𝟙^! L) ≃ f^! L` is the transport along `f ≫ 𝟙 = f`. It is the
+conjugate of the right unit axiom `lowerShriekComp_id_right`. -/
+lemma upperShriekComp_id_right_hom_app_hom (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    (hY : IsGeometricHom s (𝟙 Y)) (hf' : IsGeometricHom s (f ≫ 𝟙 Y)) [HasCompactification f]
+    [HasCompactification (f ≫ 𝟙 Y)] (L : Ctf A Y) :
+    ((G.upperShriekComp f (𝟙 Y) hf hY hf').hom.app L).hom ≫
+        (rightDerivedUpperShriek A f).map ((G.upperShriekId Y hY).hom.app L).hom =
+      (rightDerivedUpperShriekCongr A (Category.comp_id f)).hom.app L.obj := by
+  rw [show G.upperShriekComp f (𝟙 Y) hf hY hf' = conjugateIsoEquiv _ _
+      (G.lowerShriekComp f (𝟙 Y) hf hY hf') from rfl, G.lowerShriekComp_id_right,
+    conjugateIsoEquiv_trans (adj₂ := (G.exceptionalAdjunction f hf).comp Adjunction.id),
+    conjugateIsoEquiv_trans (adj₂ := G.exceptionalAdjunction f hf),
+    conjugateIsoEquiv_rightUnitor, conjugateIsoEquiv_isoWhiskerLeft,
+    conjugateIsoEquiv_lowerShriekId]
+  simp only [Iso.trans_hom, NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    Iso.symm_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_inv_app, Category.assoc]
+  rw [ObjectProperty.FullSubcategory.id_hom, Category.id_comp,
+    show ((G.upperShriekCtf f hf).map ((G.upperShriekId Y hY).inv.app L)).hom =
+      (rightDerivedUpperShriek A f).map ((G.upperShriekId Y hY).inv.app L).hom from rfl,
+    ← Functor.map_comp, ← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
+  erw [ObjectProperty.FullSubcategory.id_hom, CategoryTheory.Functor.map_id]
+  exact (Category.comp_id _).trans (G.conjugateIsoEquiv_ctfLowerShriekCongr_hom_app_hom _ _ _ L)
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [DerivedBraiding A] in
+/-- The transports `Rg^! ≃ Rf^!` and `Rf^! ≃ Rg^!` along `f = g` are inverse. -/
+@[reassoc]
+lemma rightDerivedUpperShriekCongr_symm_hom_app_hom_app {f g : X ⟶ Y} (e : f = g)
+    [HasCompactification f] [HasCompactification g]
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    (rightDerivedUpperShriekCongr A e.symm).hom.app L ≫
+      (rightDerivedUpperShriekCongr A e).hom.app L = 𝟙 _ := by
+  subst e
+  simp
+
+/-- The dualizing composition `a^! ω_s ≃ ω_{a ≫ 𝟙}` followed by the normalisation
+`ω_s ≃ A_s` is the identification `ω_a ≃ a^! A_s`, up to the transport along `a ≫ 𝟙 = a`. -/
+lemma dualizingCongr_hom_dualizingComp_inv_map_dualizingBase_hom {T : Scheme.{u}} (a : T ⟶ s)
+    [IsGeometric a] [HasCompactification a] :
+    (G.dualizingCongr (Category.comp_id a).symm).hom ≫ (G.dualizingComp a (𝟙 s)).inv ≫
+        (rightDerivedUpperShriek A a).map G.dualizingBase.hom =
+      (G.dualizingIso a).hom := by
+  have : HasCompactification (a ≫ 𝟙 s) := .of_eq (Category.comp_id a).symm
+  rw [G.dualizingComp_eq a (𝟙 s), G.dualizingBase_eq]
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Functor.mapIso_inv, Functor.mapIso_hom,
+    Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp,
+    reassoc_of% (G.dualizingCongr_hom_dualizingIso_hom (Category.comp_id a).symm)]
+  conv_rhs => rw [← Category.comp_id (G.dualizingIso a).hom]
+  congr 1
+  have hru := G.upperShriekComp_id_right_hom_app_hom a (.mk (aY := 𝟙 s) rfl) (.id (𝟙 s))
+    (.of_isGeometric (a ≫ 𝟙 s)) ⟨𝟙_ _, G.ctf_unit (.id (𝟙 s))⟩
+  have hc := rightDerivedUpperShriekCongr_symm_hom_app_hom_app (A := A) (Category.comp_id a)
+    (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)))
+  change (rightDerivedUpperShriekCongr A (Category.comp_id a).symm).hom.app _ ≫
+    ((G.upperShriekComp a (𝟙 s) (.mk (aY := 𝟙 s) rfl) (.id (𝟙 s))
+      (.of_isGeometric (a ≫ 𝟙 s))).hom.app ⟨𝟙_ _, G.ctf_unit (.id (𝟙 s))⟩).hom ≫
+    (rightDerivedUpperShriek A a).map ((G.upperShriekId s (.id (𝟙 s))).hom.app
+      ⟨𝟙_ _, G.ctf_unit (.id (𝟙 s))⟩).hom = 𝟙 _
+  rw [hru]
+  exact hc
+
+/-- Blueprint `lem-trf-integration-as-pushforward`: the integration of a Borel-Moore section over
+a scheme proper over the base is its pushforward to the point, `∫_T τ = (a_T)_* τ`, read in
+`End (A_s)` through `ω_s ≃ A_s` (`GeometricOperations.integral`). -/
+theorem integration_eq_integral {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
+    [HasCompactification a] [IsProper a] (τ : G.borelMooreSections a) :
+    G.integration a τ = G.integral a τ := by
+  have : HasCompactification (a ≫ 𝟙 s) := .of_eq (Category.comp_id a).symm
+  simp only [integration, integral, borelMoorePushforward, Functor.map_comp, Category.assoc]
+  rw [G.properComparison_inv_app_naturality_assoc a (.mk (aY := 𝟙 s) rfl)
+      (M := ⟨G.dualizing a, G.ctf_dualizing a⟩)
+      (M' := ⟨G.dualizing (a ≫ 𝟙 s), G.ctf_dualizing (a ≫ 𝟙 s)⟩),
+    ← G.exceptionalCounit_naturality a (.mk (aY := 𝟙 s) rfl) (G.ctf_dualizing (𝟙 s))
+      (G.ctf_unit (.id (𝟙 s))) G.dualizingBase.hom]
+  have key : (rightDerivedLowerShriek A a).map (G.dualizingCongr (Category.comp_id a).symm).hom ≫
+      (rightDerivedLowerShriek A a).map (G.dualizingComp a (𝟙 s)).inv ≫
+      (rightDerivedLowerShriek A a).map ((rightDerivedUpperShriek A a).map G.dualizingBase.hom) =
+      (rightDerivedLowerShriek A a).map (G.dualizingIso a).hom := by
+    rw [← Functor.map_comp, ← Functor.map_comp,
+      G.dualizingCongr_hom_dualizingComp_inv_map_dualizingBase_hom]
+  rw [reassoc_of% key]
+
+end Integration
+
+
 end GeometricOperations
 
 namespace Correspondence
