@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-ind-etale-basis",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The ind-etale subsite is a basis",
@@ -13,35 +13,105 @@
   "place": "node lem-weil-pbc-ind-etale-basis, order 1279"
  },
  "stmt_deps": [
+  "def-weil-pbc-ind-etale-basis",
   "def-weil-pbc-proetale-site"
  ],
  "proof": [
   {
-   "text": "Cover an object by affine opens. On each of them apply the ind-etale\nrefinement theorem over the affine base $X$. Its faithfully flat affine\nrefinement is a covering in the small pro-etale site and belongs to\n[def-weil-pbc-ind-etale-basis]. For a covering of an affine basis object, the\ndefinition of a pro-etale covering first selects finitely many affine pieces\nof its members. Apply the same refinement theorem over that basis object to\nthese pieces. Their composites with $X$ are ind-etale by the stability lemma\nfor ind-etale algebras. The relative-map and base-change assertions of that\nlemma prove stability under the required fibre products.",
+   "text": "Write $X=\\operatorname{Spec}A$. For an affine open $\\operatorname{Spec}B$ of a pro-etale object $U$, the restriction to this open is flat because its stalk maps are unchanged. Its diagonal is the pullback of the flat diagonal of $U/X$ along the open immersion $\\operatorname{Spec}B\\times_X\\operatorname{Spec}B\\to U\\times_XU$; this pullback is the diagonal of the restriction, and on affines its coordinate ring is $B\\otimes_A B$. Its stalk maps are unchanged too. The affine flatness criterion, applied to this morphism and its diagonal, shows that $A\\to B$ is weakly etale in the ring sense. Apply the named weak-etale refinement construction and its theorem to obtain faithfully flat ind-etale $B\\to B'$ with $A\\to B'$ ind-etale. Its spectrum is surjective by the faithfully-flat-surjective-spectrum lemma and is weakly etale by ind-etale stability. It is affine, so the inverse image of any affine open in $\\operatorname{Spec}B$ is affine. If $V\\subseteq\\operatorname{Spec}B$ is affine and $p\\in V$, the spectrum-surjectivity lemma gives a prime $q\\subset B'$ contracting to $p$; since $p$ lies in $V$, $q$ lies in the inverse image of $V$. Thus that inverse image surjects onto $V$, and this singleton is a covering by the stated covering definition. It is a basis object. Over all affine opens this covers the original object: for any affine open $W\\subset U$, choose finitely many principal opens of $W$ lying in affine opens of $U$. Their inverse images under the corresponding affine refinements are affine opens, and their images cover $W$. For a covering of a basis object $V=\\operatorname{Spec}D$, the pro-etale covering definition selects finitely many affine opens in the members whose images cover $V$. Refine each selected affine piece over $D$ by the same construction. The faithfully-flat-surjective-spectrum lemma shows that the refinements still cover these pieces. Their maps to the affine $V$ are affine and weakly etale; inverse images of any affine open of $V$ are therefore affine and have images covering that open. Thus this finite family is a covering of $V$; composition with $A\\to D$ makes every refinement a basis object. For fibre products of $\\operatorname{Spec}B$ and $\\operatorname{Spec}C$ over $\\operatorname{Spec}D$ in the basis, the relative-map clause of ind-etale stability makes $D\\to B$ and $D\\to C$ ind-etale. Base change and composition make $D\\to B\\otimes_D C$ ind-etale, and then $A\\to B\\otimes_D C$ ind-etale. The affine spectrum of this tensor product is the required basis fibre product.",
    "uses": [
-    "def-weil-pbc-ind-etale-basis"
+    "def-weil-pbc-ind-etale-basis",
+    "thm-weil-pbc-weak-etale-refinement",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-weak-etale-refinement",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-basis.md",
+    "place": "## Proof, first paragraph"
+   }
   },
   {
-   "text": "For completeness, the extension of a sheaf on this basis is explicit: a\nsection on an arbitrary object is a compatible family of sections on a basis\ncovering, with equality imposed on basis coverings of the pairwise\nintersections. Two choices are compared on a common refinement, which exists\nby the preceding covering and fibre-product assertions. The basis sheaf axiom\nmakes this comparison independent of refinements and permits gluing. This\nconstructs a sheaf on the full site inverse to restriction, on objects and\nmorphisms. It also proves the asserted detection of isomorphisms.",
-   "uses": [],
-   "elementary": null
+   "text": "Take the small skeleton and universes of the pro-etale-site definition, and its full subcategory of basis objects. The inclusion $u:\\mathcal B_X\\to X_{\\mathrm{proet}}$ is fully faithful because every morphism between basis objects is retained by the full-subcategory definition. In particular it is locally full: any morphism between its images lifts already on the identity cover; it is locally faithful: equality of images is equality before restriction, again on the identity cover. Step 1 gives cover-density. A sieve on a basis object is covering for the induced topology exactly when its image generates a covering sieve in the full site. This is the topology of the basis definition: any such full-site covering has a finite basis refinement by step 1, and each basis covering is a full-site covering. Apply the existing dense-subsite comparison theorem to this fully faithful inclusion and these topologies. For set-valued sheaves all required small structured-arrow limits exist: they are subsets of products consisting of compatible families. The same construction with coordinatewise operations gives the required limits for abelian groups and modules over a fixed commutative ring. The cited theorem therefore says specifically that restriction along $u$ is an equivalence, not merely that some equivalence exists.",
+   "uses": [
+    "def-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-proetale-site",
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-basis.md",
+    "place": "## Proof, second paragraph"
+   }
+  },
+  {
+   "text": "An inverse to the restriction equivalence in step 2 extends a basis sheaf, uniquely up to the unique isomorphism compatible with its specified restriction. Full faithfulness identifies the sets of sheaf morphisms with the morphisms of their restrictions. If a sheaf morphism restricts to an isomorphism, lift its inverse by fullness; the two inverse identities lift by faithfulness. Thus restriction determines sheaves and their morphisms in the usual categorical sense and detects isomorphisms.",
+   "uses": [
+    "lem-pc-fppf-dense-sheaf-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-basis.md",
+    "place": "## Proof, second paragraph: inverse to restriction and detection"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ind-etale-basis",
+  "thm-weil-pbc-weak-etale-refinement",
   "lem-weil-pbc-ind-etale-stability",
-  "thm-weil-pbc-weak-etale-refinement"
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-weak-etale-refinement",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-pc-fppf-dense-sheaf-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-ind-etale-basis.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf restriction to a basis of a site determines sheaves and morphisms and detects isomorphisms",
+   "results": "CategoryTheory.isSheaf_iff_isSheaf_of_type; CategoryTheory.Presieve.IsSheaf.isSheafFor; TopCat.Sheaf.restrictHomEquivHom; CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "date": "2026-10-14",
+   "verdict": "general comparison declarations found; only the cover-dense comparison is directly reusable after the basis hypotheses are established"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "date": "2026-10-14",
+   "verdict": "match for the comparison subargument"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'sheafInducedTopologyEquivOfIsCoverDense|isIso_iff_isIso_basis' Mathlib/CategoryTheory/Sites",
+   "results": "no matches (path expression did not match source files)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf restriction to a basis of a site determines sheaves and morphisms and detects isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +141,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ind-etale-basis",
+  "worker": "stage1",
+  "summary": "Repair of E2/B8 and F1/F4: discarded the unlanded false comparison leaf and reused the existing correctly stated Mathlib leaf lem-pc-fppf-dense-sheaf-equivalence. Made full faithfulness, the local-full/local-faithful identity-cover checks, smallness, coefficient limits, and restriction as the equivalence explicit. Expanded affine refinement and tensor-product bookkeeping; stated morphism determination and isomorphism detection as elementary consequences of restriction being an equivalence. Second reader supplied the affine flatness and faithfully flat spectrum-surjectivity citations, and wrote the local-stalk and affine-cover checks explicitly.",
+  "blueprint": "Proof first paragraph is step 1 (covers, finite refinements, fibre products); proof second paragraph is steps 2-3 (comparison via restriction and its consequences).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-dense-sheaf-equivalence",
+    "why": "Generic comparison lemma for a fully faithful cover-dense inclusion; used only to extend/restrict sheaves on the basis, with no replacement of the unit proper-base-change route. Existing Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-dense-sheaf-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-9a1fb670d",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-9a1fb670d (reviewer sub-agent of L); spot-checked: Two local step-1 gaps were repaired: the restricted diagonal’s pullback and B⊗_A B identification, and surjectivity over each affine open via prime contraction. Full source, DAG, Mathlib comparison, target morphism/coefficient, hypothesis, and edge-case checks are recorded in review.md. Corrected whole JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-ind-etale-basis.json; no nodes dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
