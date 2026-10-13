@@ -60,17 +60,15 @@ theorem stalk_normalization_depth_two_section_flat_core
         inferInstanceAs (IsLocalHom (g.stalkMap w).hom)
       exact Module.FaithfullyFlat.of_flat_of_isLocalHom
     have hp : (p.stalkMap (g w)).hom.Flat := by
-      let R := L.presheaf.stalk (p (g w))
-      let A := E.presheaf.stalk (g w)
-      let B := (pullback p t).presheaf.stalk w
-      let f : R →+* A := (p.stalkMap (g w)).hom
-      let g : A →+* B := (g.stalkMap w).hom
-      have hfg : (g.comp f).Flat := hcomp
-      have hg : g.FaithfullyFlat := hg
-      algebraize [f, g, g.comp f]
-      have : Module.Flat R B := hfg
-      have : Module.FaithfullyFlat A B := hg
-      exact Module.Flat.of_flat_of_faithfullyFlat (A := R) (B := A) (C := B)
+      algebraize [(p.stalkMap (g w)).hom, (g.stalkMap w).hom,
+        (g.stalkMap w).hom.comp (p.stalkMap (g w)).hom]
+      have : Module.Flat (L.presheaf.stalk (p (g w)))
+          ((pullback p t).presheaf.stalk w) := hcomp
+      have : Module.FaithfullyFlat (E.presheaf.stalk (g w))
+          ((pullback p t).presheaf.stalk w) := hg
+      exact Module.Flat.of_flat_of_faithfullyFlat
+        (A := L.presheaf.stalk (p (g w))) (B := E.presheaf.stalk (g w))
+        (C := (pullback p t).presheaf.stalk w)
     change g w = z at hw
     rw [hw] at hp
     exact hp
