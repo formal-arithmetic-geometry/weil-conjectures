@@ -1,0 +1,191 @@
+{
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "kind": "statement",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15–16"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof": [
+  {
+   "text": "Project to each point skyscraper, tensor the evaluated stalk coordinates, and use the stalk tensor map and skyscraper adjunction to construct the pointwise map. Assemble by the product universal property. Check naturality and the unit on pure tensors of germs; check multiplication by evaluating outer germs and then inner coordinates on a common neighbourhood. Stalk-colimit, tensor and product universal properties extend these checks to all morphisms. Empty products and zero modules satisfy the same argument.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15–16"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementIteratePairingsCanonical",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-module-cup-godement-iterate-pairings-canonical-exists",
+   "place": "decomposition",
+   "via": []
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementBetaExists",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementBetaExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_beta_maps_exists",
+  "statement": "theorem moduleCup_godement_beta_maps_exists (X : Scheme.{u}) :\n    ∃ b : ∀ H K : X.Modules,\n        moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶\n          moduleCup_godementObject X (H ⊗ K),\n      (∀ (H K H' K' : X.Modules) (f : H ⟶ H') (g : K ⟶ K'),\n        (moduleCup_godementMap X f ⊗ₘ moduleCup_godementMap X g) ≫ b H' K' =\n          b H K ≫ moduleCup_godementMap X (f ⊗ₘ g)) ∧\n      (∀ H K : X.Modules,\n        (moduleCup_godementUnit X H ⊗ₘ moduleCup_godementUnit X K) ≫ b H K =\n          moduleCup_godementUnit X (H ⊗ K)) ∧\n      (∀ H K : X.Modules,\n        (moduleCup_godementMultiply X H ⊗ₘ moduleCup_godementMultiply X K) ≫ b H K =\n          b (moduleCup_godementObject X H) (moduleCup_godementObject X K) ≫\n            moduleCup_godementMap X (b H K) ≫ moduleCup_godementMultiply X (H ⊗ K))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "id": "new-module-cup-godement-beta-exists",
+ "title": "Coordinatewise Godement tensor pairing",
+ "statement": "For every scheme X, there exist maps b(H,K): T(H) tensor T(K) → T(H tensor K), where T and its action and unit are those of [def-sc-module-cup-godement-model] and multiplication is that of [def-sc-module-cup-godement-codegeneracies]. The maps are natural in H and K, satisfy (eta_H tensor eta_K); b(H,K) = eta_(H tensor K), and (mu_H tensor mu_K); b(H,K) = b(TH,TK); T(b(H,K)); mu_(H tensor K). Composition is left to right. This asserts only the one-step pairing, not any iterate pairings.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between cosimplicial vector spaces commuting with all coface maps does not necessarily commute with codegeneracy maps",
+   "results": "8 hits: CategoryTheory.CosimplicialObject.σ_naturality, CategoryTheory.CosimplicialObject.σ_naturality_assoc, CategoryTheory.CosimplicialObject.δ_naturality, CategoryTheory.CosimplicialObject.δ_naturality_assoc, CategoryTheory.CosimplicialObject.σ, CategoryTheory.CosimplicialObject.σ_comp_σ, CategoryTheory.CosimplicialObject.δ, CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk",
+   "results": "20 hits: Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "12 hits: CategoryTheory.Functor.LaxMonoidal.μ, CategoryTheory.Functor.Monoidal.instIsIsoμ, CategoryTheory.Functor.LaxMonoidal.id_μ, CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal, CategoryTheory.Functor.Monoidal.ofLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal_μ, CategoryTheory.Functor.Monoidal.μIso_hom, CategoryTheory.Functor.LaxMonoidal.ext",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "grep",
+   "query": "godement.*tensor|Godement.*pairing",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pairings of iterated Godement products compatible with unit and multiplication",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.GradedObject.Monoidal.ι_tensorHom, CategoryTheory.GradedObject.Monoidal.ιTensorObj₄_eq, CategoryTheory.GradedObject.Monoidal.tensorHom_comp_tensorHom",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ",
+   "results": "12 hits: CategoryTheory.Functor.LaxMonoidal.μ, CategoryTheory.Functor.Monoidal.instIsIsoμ, CategoryTheory.Functor.LaxMonoidal.id_μ, CategoryTheory.Functor.CoreMonoidal.ofLaxMonoidal, CategoryTheory.Functor.Monoidal.ofLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal_μ, CategoryTheory.Functor.Monoidal.μIso_hom, CategoryTheory.Functor.LaxMonoidal.ext",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact theorem for the concrete Godement construction; generic monoidal and tensor identities only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Godement tensor pairing compatible with monad unit and multiplication",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|monoidalMonad|MonoidalMonad",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Generic monad and lax-monoidal naturality only; no concrete Godement iterate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lax monoidal monad iterated multiplication tensor compatibility",
+   "results": "8 hits: CategoryTheory.Monad.mul_def, CategoryTheory.Monad.ofMon_μ, CategoryTheory.Monad.instMonObjFunctor, CategoryTheory.Monad.assoc, CategoryTheory.Monad.mu_naturality, CategoryTheory.Monad.mu_naturality_assoc, Mathlib.Tactic.Monoidal.instMonadCoherehnceHomMonoidalM, CategoryTheory.MonadHom.app_μ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Generic monad and lax-monoidal naturality only; no concrete Godement iterate theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Generic monad and lax-monoidal naturality only; no concrete Godement iterate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "skyscraper sheaf tensor stalk evaluation gives natural product pairing",
+   "results": "Eight stalk-skyscraper presheaf adjunction results; no concrete module Godement tensor pairing.",
+   "date": "2026-10-14",
+   "available": true
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "One generic tensor-composition identity; no concrete Godement pairing.",
+   "date": "2026-10-14",
+   "available": true
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*tensor|tensor.*skyscraper",
+   "results": "No hits. Local rg additionally found private map_id, map_comp and unit_natural in ModuleCupGodementRelations; these do not supply the pairing and are not externally accessible.",
+   "date": "2026-10-14",
+   "available": true
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T164045-L-1667143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T164045-L-1667143",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

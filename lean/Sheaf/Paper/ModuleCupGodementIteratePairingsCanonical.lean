@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ModuleCupGodementCodegeneracies
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.Paper.ModuleCupGodementBetaExists
+import Sheaf.Paper.ModuleCupGodementPairingsFromBeta
 
 /-! # Canonical recursively generated tensor pairing -/
 
@@ -62,7 +64,11 @@ theorem moduleCup_godement_iterate_pairings_canonical_exists (X : Scheme.{u})
       (∀ (n : ℕ) (i : Fin (n + 1)),
         (moduleCup_godementInsert X F n i ⊗ₘ moduleCup_godementInsert X G n i) ≫
           p (n + 1) = p n ≫ moduleCup_godementInsert X (F ⊗ G) n i) := by
-  sorry
+  obtain ⟨b, hbNat, hbUnit, hbMul⟩ := moduleCup_godement_beta_maps_exists X
+  let β : ModuleCupGodementBeta X := ⟨b, hbNat, hbUnit, hbMul⟩
+  obtain ⟨p, hp0, hprec, hpins⟩ :=
+    moduleCup_godement_iterate_pairings_from_beta X F G b hbNat hbUnit
+  exact ⟨β, p, hp0, hprec, hpins⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
