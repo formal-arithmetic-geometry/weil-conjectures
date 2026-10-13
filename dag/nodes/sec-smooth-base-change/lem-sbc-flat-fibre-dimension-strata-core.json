@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-flat-fibre-dimension-strata-core",
+ "kind": "statement",
+ "title": "Fibrewise dense constant dimension opens",
+ "statement": "Let $f:X\\to T$ be a scheme morphism and $U\\subseteq T$ open such that the restriction is flat [def-weil-flat-morphism] and locally finitely presented [def-sbc-locally-finite-presentation]. There exist opens $V_n\\subseteq X$ for $n\\in\\mathbb N$ such that their inverse-image union is dense in every fibre [def-pc-scheme-fibre] over $t\\in U$, and at every $x\\in V_n$ the local topological dimension [def-kun-topological-dimension-at-point] of the fibre at x is n.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 054T, 045U, 02NM, 02NJ"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Restrict f to the inverse image of U. By Tag 045U, its Cohen-Macaulay locus is open and fibrewise dense. Restrict further to that locus and use Tag 02NM to decompose it into open and closed pieces of relative dimension n, indexed by natural numbers. Their union is the Cohen-Macaulay locus, so is fibrewise dense. Their images in X are open because both restriction inclusions are open immersions. For t in U, pullback associativity identifies the restricted fibre with f.fiber t. Each piece has equidimensional fibres of dimension n by Tag 02NJ; hence its local topological dimension is n. Local dimension is unchanged by inclusion of an open fibre subscheme, giving the displayed equality in the original fibre. Fibres outside U do not meet these opens, so the dimension conclusion there is vacuous. Empty fibres satisfy density of the empty union. This constructs the opens without choosing arbitrary data from an unproved existence theorem.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 054T and 054U; expanded restriction and topology steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat locally finitely presented morphism fibrewise dense opens constant relative dimension",
+   "date": "2026-10-13",
+   "results": "service unavailable",
+   "verdict": "unavailable; no verdict recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpen, Dense, genericPoints",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDimension|genericPoints.*Dense|Dense.*genericPoints",
+   "date": "2026-10-13",
+   "results": "Mathlib fibre and noetherian APIs only",
+   "verdict": "no complete matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFibreDimensionStrata",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic closed-fibre geometry; the Tag 054X density argument after the generic-flatness preparation. Specifically: Fibre dimension along a specialization from a component point. Constant-dimension neighbourhood step, via the opens of Tag 054T.",
+   "via": [
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFibreDimensionStrataCore.lean",
+  "declaration": "AlgebraicGeometry.exists_fibre_dimension_opens_of_flat_restrict",
+  "statement": "theorem exists_fibre_dimension_opens_of_flat_restrict\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :\n    ∃ V : ℕ → X.Opens,\n      (∀ t : T, t ∈ U → Dense {z : f.fiber t | ∃ n : ℕ, f.fiberι t z ∈ V n}) ∧\n      (∀ (n : ℕ) (x : X), x ∈ V n →\n        topologicalKrullDimAt (f.asFiber x) = (n : WithBot ℕ∞))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

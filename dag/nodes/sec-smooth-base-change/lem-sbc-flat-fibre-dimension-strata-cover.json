@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-flat-fibre-dimension-strata-cover",
+ "kind": "statement",
+ "title": "Dense fibre opens contain component generic points",
+ "statement": "Let $f:X\\to T$ be a scheme morphism and $U\\subseteq T$ open such that the restriction is flat [def-weil-flat-morphism] and locally finitely presented [def-sbc-locally-finite-presentation]. For every $t\\in U$ and every dense open subset W of its fibre [def-pc-scheme-fibre], every irreducible-component [def-weil-irreducible-components] generic point [def-sc-generic-point] belongs to W.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054U, first sentence; locally noetherian component argument"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "For t in U, the fibre is isomorphic to a fibre of the restricted locally finitely presented morphism. It is locally of finite type over the residue field and hence locally noetherian. Fix a component generic point z and choose a noetherian affine open neighbourhood A of z. The intersection of its component with A is an irreducible component of A and has generic point z. There are finitely many components of A. Remove all the other components; the resulting open O contains z and is contained in its component, and is nonempty. The dense open W intersects O in a point y. Since y belongs to the closure of z, z generalizes y; openness of W forces z to lie in W. This proves the inclusion for every component generic point. Empty fibres have no component generic points.",
+   "uses": [
+    "lem-sbc-restricted-fibre-locally-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-fibre-locally-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 054T and 054U; expanded restriction and topology steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat locally finitely presented morphism fibrewise dense opens constant relative dimension",
+   "date": "2026-10-13",
+   "results": "service unavailable",
+   "verdict": "unavailable; no verdict recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpen, Dense, genericPoints",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDimension|genericPoints.*Dense|Dense.*genericPoints",
+   "date": "2026-10-13",
+   "results": "Mathlib fibre and noetherian APIs only",
+   "verdict": "no complete matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFibreDimensionStrata",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic closed-fibre geometry; the Tag 054X density argument after the generic-flatness preparation. Specifically: Fibre dimension along a specialization from a component point. Constant-dimension neighbourhood step, via the opens of Tag 054T.",
+   "via": [
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFibreDimensionStrataCover.lean",
+  "declaration": "AlgebraicGeometry.generic_points_mem_dense_open_fibre_of_flat_restrict",
+  "statement": "theorem generic_points_mem_dense_open_fibre_of_flat_restrict\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    (t : T) (ht : t ∈ U) (W : Set (f.fiber t))\n    (hopen : IsOpen W) (hdense : Dense W) :\n    genericPoints (f.fiber t) ⊆ W",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T131948-L-4087291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

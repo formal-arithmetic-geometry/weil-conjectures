@@ -8,6 +8,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore
+import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCover
 
 /-! # Constant relative dimension opens for a flat finitely presented morphism
 
@@ -46,6 +48,19 @@ theorem exists_fibre_dimension_strata_of_flat_restrict
       (∀ x : X, f x ∈ U →
         f.asFiber x ∈ genericPoints (f.fiber (f x)) → ∃ n : ℕ, x ∈ V n) ∧
       (∀ (n : ℕ) (x : X), x ∈ V n →
-        topologicalKrullDimAt (f.asFiber x) = (n : WithBot ℕ∞)) := by sorry
+        topologicalKrullDimAt (f.asFiber x) = (n : WithBot ℕ∞)) := by
+  obtain ⟨V, hdense, hdim⟩ := exists_fibre_dimension_opens_of_flat_restrict f U
+  refine ⟨V, ?_, hdim⟩
+  intro x hx hcomponent
+  have hopen : IsOpen {z : f.fiber (f x) | ∃ n : ℕ, f.fiberι (f x) z ∈ V n} := by
+    have heq : {z : f.fiber (f x) | ∃ n : ℕ, f.fiberι (f x) z ∈ V n} =
+        ⋃ n : ℕ, (f.fiberι (f x)) ⁻¹' (V n : Set X) := by
+      ext z
+      simp
+    rw [heq]
+    exact isOpen_iUnion fun n ↦ (V n).isOpen.preimage (f.fiberι (f x)).continuous
+  obtain ⟨n, hn⟩ := generic_points_mem_dense_open_fibre_of_flat_restrict
+    f U (f x) hx _ hopen (hdense (f x) hx) hcomponent
+  exact ⟨n, by simpa only [Scheme.Hom.fiberι_asFiber] using hn⟩
 
 end AlgebraicGeometry

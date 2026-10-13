@@ -17,21 +17,28 @@
  ],
  "proof": [
   {
-   "text": "Restrict f over U. The constant-relative-dimension opens of Tag 054T have fibrewise dense union. Each fibre is locally noetherian, since it is locally of finite type over a field. A dense open in a locally noetherian space contains every irreducible-component generic point: on a noetherian neighbourhood exclude the other finitely many components; density then supplies a point of the open in this component, and its generic point is a generalization of that point. Thus the union covers every fibre component generic point.",
-   "uses": [],
+   "text": "Obtain dimension opens V_n with fibrewise dense union from the core theorem.",
+   "uses": [
+    "lem-sbc-flat-fibre-dimension-strata-core"
+   ],
    "elementary": false
   },
   {
-   "text": "The restricted source is an open subscheme of X. Regard its dimension-n opens as opens V_n of X. Pullback pasting identifies each restricted fibre with its original fibre, preserving generic points and local dimension. The definition of relative dimension n and invariance of local dimension under open immersion give the second clause. Empty fibres impose no condition.",
-   "uses": [],
-   "elementary": false
+   "text": "For x over U, the union of inverse images of V_n in its fibre is open, since each fibre inclusion is continuous. The cover theorem puts its component generic point asFiber x in this union. Unpack union membership and use fiberι_asFiber to obtain x in V_n. Pair this coverage with the dimension clause of the core theorem.",
+   "uses": [
+    "lem-sbc-flat-fibre-dimension-strata-cover"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-flat-fibre-dimension-strata-core",
+  "lem-sbc-flat-fibre-dimension-strata-cover"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 054T, Lemma 37.22.9 (constant relative dimension opens), and Tag 054U, first sentence of the proof."
+  "place": "Tag 054T and first sentence of Tag 054U; explicit open-union and fibre inclusion proof by F1"
  },
  "mathlib_searches": [
   {
@@ -121,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T123212-L-3679028",
+  "landing": "20261013T131948-L-4087291",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
