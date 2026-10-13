@@ -18,45 +18,58 @@
  ],
  "proof": [
   {
-   "text": "Cover the quasi-compact overlap by finitely many affine opens. On each affine open restrict alpha and beta and subtract them. Identify the ideal with a finitely generated ideal J=(f_i), its powers with J^n, and F with M~ via the affine section equivalence. The restricted difference is a linear map J^n -> M.",
+   "text": "Restrict alpha and beta to T=V intersect V' using overMap, and subtract to obtain phi:P_n|_T -> F|_T. The evaluation hypothesis says that phi_W(one_n|_W)=0 whenever W lies in U intersect T. Cover T by finitely many affine opens, using only compactness of T, not quasi-separatedness of X.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On an affine member A of the cover put J=image(I(A)->O_X(A)). Finite type gives finite sections of I, hence J is finitely generated. Recursive multiplication-range formulas show image(P_n(A)->O_X(A))=J^n, including n=0; injectivity of that map and finite generation of J^n make P_n(A) finite. For f in J, the stalk multiplication theorem identifies its germ with the image of a section of I; if the germ is a unit then the ideal stalk map is surjective. Consequently D(f) lies in U. On D(f) the restricted one_n has image 1 under the injective power inclusion, so every section s equals j_n(s) times one_n; linearity and the evaluation hypothesis make phi zero there.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Q be the finite section image of phi on A. For each f in J every element of Q restricts to zero on D(f), hence is killed by some power of f by basic-open localization. Thus Q localized away from f is zero. Mathlib's localization/support equality and support=V(annihilator) give J contained in radical(annihilator(Q)). Finite generation of J gives k with J^k contained in annihilator(Q). The injective power inclusion identifies J^k P_n(A) with J^(n+k), so hr puts the image of r_(n,n+k) on sections inside J^k P_n(A), which phi kills. This argument also covers the zero ideal, zero ring, and n=0.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The higher power P_(n+k) is quasi-coherent. Clear denominators on each basic open of A: a power of its defining section times any section comes from A. Naturality and linearity make the restricted composite zero after multiplication by this unit, hence zero. Basic opens cover every subopen of A, and Mathlib TopCat.Sheaf.eq_of_locally_eq' gives zero on all of them.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "On D(f_i) the evaluation of the difference is zero by heval. Since one n is the preimage of 1, this is phi(f_i^n)/f_i^n=0. The localization criterion yields a common k with f_i^k phi(f_i^n)=0 for every i and n+k positive. Linearity gives phi(f_i^(n+k))=0. Every monomial of degree t*(n+k-1)+1 contains such a pure power. Enlarge to a degree at least n. If J=0, use a positive degree at least n.",
+   "text": "Take m to be the maximum of n and all finite affine vanishing degrees (the empty cover gives m=n). Monicity of j_n and hr give r_(k,m) followed by r_(n,k)=r_(n,m), so every local vanishing persists at m. On any W contained in T, the opens W intersect A cover W; naturality restricts the composite to the already zero local composites. Mathlib TopCat.Sheaf.eq_of_locally_eq' proves it zero on W. Distribute composition over the difference alpha-beta and apply sub_eq_zero to obtain the required equality.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-pbc-module-localization-away"
+    "lem-weil-pbc-formal-polynomial-power-lifts"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Take the maximum of the finite set of affine vanishing degrees and n. Monicity of power inclusions and hr give the composition laws for r, so restricting further preserves vanishing. The difference vanishes on the finite cover and hence globally on the overlap by separation of sheaves of modules, which gives the component equation on every W. For an empty overlap use degree n and the empty covering.",
-   "uses": [
-    "lem-weil-pbc-formal-polynomial-power-lifts",
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-formal-polynomial-power-lifts",
-  "lem-weil-pbc-glue-sheaves-of-modules"
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "def-weil-pbc-module-localization-away"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+  "place": "Tags 01PM (injectivity) and 01PQ (finite affine cover), read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ. The affine exponent calculation is implemented by the equivalent finite-image radical-annihilator argument using Mathlib support and localization."
  },
  "mathlib_searches": [
   {
@@ -161,10 +174,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T100142-L-2491649",
-  "kind": "interface",
+  "landing": "20261013T111855-L-3053481",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

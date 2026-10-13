@@ -12130,3 +12130,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/H4/Sheaf.AlgebraicGeometry.AffineOpenSupportedTargetModel (stage 3; reviewer PASS; first push; landing 20261013T111854-L-3053076 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/H4/Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType (stage 3; reviewer PASS; first push; landing 20261013T111854-L-3053183 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/J1/Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineGlobalComparison (stage 3; reviewer PASS; first push; landing 20261013T111854-L-3053289 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/J1/Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree (stage 3; reviewer PASS; first push; landing 20261013T111855-L-3053481 (proof); batch 20261013T111833; modules 1; new nodes 0)
