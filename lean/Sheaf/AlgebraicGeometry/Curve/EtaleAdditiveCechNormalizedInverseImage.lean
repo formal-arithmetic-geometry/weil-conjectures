@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCycleRealization
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer
 
 /-! # Inverse image on normalized additive étale Čech edges
 Source: Stacks Project, Tags 01FD and 03P2. -/
@@ -77,6 +78,27 @@ theorem etaleAdditiveCech_normalized_inverseImage
           (Scheme.etaleAdditiveSheafToLowerStar g)) n
         (Etale.cohomologyMap g X.etaleAdditiveSheaf n
           (a.symm ((cechOver X.toSpecΓ U
-            (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z)))) := by sorry
+            (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z)))) := by
+  classical
+  have _ := hU
+  have _ := hV
+  have _ := hcover'
+  let I := injectiveResolution X.etaleAdditiveSheaf
+  let J := injectiveResolution Y.etaleAdditiveSheaf
+  obtain ⟨cX⟩ := Etale.exists_resolutionSection_canonical_comparison X.etaleAdditiveSheaf I
+  obtain ⟨cY⟩ := Etale.exists_resolutionSection_canonical_comparison Y.etaleAdditiveSheaf J
+  obtain ⟨s, tα, tβ, hα, hβ, heq⟩ :=
+    etaleAdditiveCech_cycle_realization U hcover I n z
+  have hx := ha I cX s z tα tβ hα hβ heq
+  have hx' : cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s) =
+      a.symm ((cechOver X.toSpecΓ U
+        (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z) := by
+    rw [← hx, AddEquiv.symm_apply_apply]
+  obtain ⟨s', tα', tβ', hα', hβ', heq', hclass⟩ :=
+    etaleAdditiveCech_augmentation_transfer g U V hinter I J cX cY n
+      z z' hcoords s tα tβ hα hβ heq
+  have hy := ha' J cY s' z' tα' tβ' hα' hβ' heq'
+  rw [hclass, hx'] at hy
+  exact hy.symm
 
 end AlgebraicGeometry.Scheme.Modules

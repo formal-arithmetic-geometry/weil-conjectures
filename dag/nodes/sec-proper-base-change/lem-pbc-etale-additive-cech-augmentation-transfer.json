@@ -1,0 +1,139 @@
+{
+ "id": "lem-pbc-etale-additive-cech-augmentation-transfer",
+ "kind": "statement",
+ "title": "Transport of an equal pair of additive Cech augmentation classes",
+ "statement": "Let g:Y to X be any scheme morphism [def-pc-scheme], U and V finite indexed families of opens such that every V tuple intersection lies in the g-preimage of its U tuple intersection. Let I,J resolve the respective fixed lifted additive structure sheaves [def-sc-etale-additive-structure-restriction], with canonical comparisons c_X,c_Y [def-weil-pbc-etale-resolution-section-canonical-comparison]. Fix n and Cech cycles z,z_prime whose target coordinates are structural pullbacks of source coordinates restricted along the tuple inclusions [lem-pc-flat-cech-base-change]. Suppose supplied global cycle s and total cycles t_alpha,t_beta have inclusions alpha(s),beta(z) and equal total classes [def-pbc-etale-additive-cech-normalization]. Then there are target cycles s_prime,t_alpha_prime,t_beta_prime with inclusions alpha(s_prime),beta(z_prime) and equal total classes, and c_Y([s_prime]) equals H^n(q_g)(cohomologyMap(g)(c_X([s]))), where q_g is the adjoint of etaleAdditiveSheafToLowerStar [def-weil-pbc-inverse-image,def-weil-pbc-etale-cohomology]. No normalized edge equivalence is used or asserted. No covering, affineness, separatedness, compactness or flatness hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, augmented resolution pentagon and refinement section maps; Tag 03P2 identifies the coefficient sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Resolve exact inverse image of the source sheaf and lift the unit into the direct image of that resolution, preserving augmentation. Lift the adjoint coefficient morphism into J and compose the two global-section transfers. Take s_prime to be the image global cycle. The canonical transfer calculation identifies the first map with cohomologyMap; the global_cocycle fields and extMk naturality identify the coefficient map with Sheaf.H.map(q_g). This gives only the last cohomology equality, not an edge compatibility statement.",
+   "uses": [
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On intersections construct the refined section transfer along hinter; its naturality makes it commute with cofaces and the vertical differential. Both augmentation faces commute. The unit equation identifies the coefficient face with structural pullback and restriction, and the coordinate equalities identify the beta cycle of z_prime. Use the auxiliary direct-image resolution pentagon of 01FD, inverting its quasi-isomorphisms. It transports the given source total-class equality to the target. The target augmentation images are cycles and their classes agree. The equality and its cycle representatives are independent of normalized edge equivalences.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+ ],
+ "proof_origin": {
+  "by": "W2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, augmented resolution pentagon and refinement section maps; Tag 03P2 identifies the coefficient sections. Explicit cycle-witness formulation written by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology injective resolution augmentation comparison natural inverse image",
+   "results": "{\"t\": \"2026-10-13T11:22:02Z\", \"tool\": \"leanfinder\", \"query\": \"Cech cohomology injective resolution augmentation comparison natural inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.iso_inv_naturality\", \"CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality\", \"CategoryTheory.InjectiveResolution.Hom.hom'_f\", \"CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.\\u03b9'_f_zero\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\"], \"digest\": \"31a3b5eac3cf043d\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact additive etale augmentation witness theorem; generic resolution and homology APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\"",
+   "results": "{\"t\": \"2026-10-13T11:22:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"homology\\u03c0\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.leftHomology\\u03c0\", \"CategoryTheory.ShortComplex.instEpiLeftHomology\\u03c0\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0NatTrans\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0NatTrans_app\", \"CategoryTheory.ShortComplex.isIso_leftHomology\\u03c0\", \"CategoryTheory.ShortComplex.toCycles_comp_leftHomology\\u03c0\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality\", \"CategoryTheory.ShortComplex.leftHomology\\u03c0_naturality'\"], \"digest\": \"2a4c7e8f31d85991\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact additive etale augmentation witness theorem; generic resolution and homology APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "additiveCechAlpha|additiveCechBeta|Cech.*[Aa]ugment",
+   "results": "{\"t\": \"2026-10-13T11:24:13Z\", \"tool\": \"grep\", \"query\": \"additiveCechAlpha|additiveCechBeta|Cech.*[Aa]ugment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"28d77a925e9dcdd9\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact additive etale augmentation witness theorem; generic resolution and homology APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech coefficient augmentation and global sections of an injective resolution have equal total cohomology classes",
+   "results": "{\"t\": \"2026-10-13T11:28:35Z\", \"tool\": \"leansearch\", \"query\": \"Cech coefficient augmentation and global sections of an injective resolution have equal total cohomology classes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedInverseImage",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison: Transport of an equal pair of additive Cech augmentation classes.",
+   "via": [
+    "lem-pbc-etale-additive-cech-normalized-inverse-image",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechAugmentationTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleAdditiveCech_augmentation_transfer",
+  "statement": "theorem etaleAdditiveCech_augmentation_transfer\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (J : InjectiveResolution Y.etaleAdditiveSheaf)\n    (cX : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)\n    (cY : Etale.ResolutionSectionCanonicalComparison Y.etaleAdditiveSheaf J)\n    (n : ℕ)\n    (z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n)\n    (z' : (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).cycles n)\n    (hcoords : ∀ y : Fin (n + 1) → ι,\n            cechCoordinate Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf) n y\n                ((cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') =\n              (show Y.Modules from SheafOfModules.unit Y.ringCatSheaf).presheaf.map\n                (homOfLE (hinter n y)).op\n                ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app\n                  (op (⨅ l, U (y l)))\n                  (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y\n                    ((cechOver X.toSpecΓ U\n                      (SheafOfModules.unit X.ringCatSheaf)).iCycles n z))))\n    (s : (additiveCechGlobal I).cycles n)\n    (tα tβ : (additiveCechTotal U I).cycles n)\n    (hα : (additiveCechTotal U I).iCycles n tα =\n      additiveCechAlpha U I n ((additiveCechGlobal I).iCycles n s))\n    (hβ : (additiveCechTotal U I).iCycles n tβ = additiveCechBeta U I n\n      ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z))\n    (heq : (additiveCechTotal U I).homologyπ n tα =\n      (additiveCechTotal U I).homologyπ n tβ) :\n    ∃ (s' : (additiveCechGlobal J).cycles n)\n      (tα' tβ' : (additiveCechTotal V J).cycles n),\n      (additiveCechTotal V J).iCycles n tα' =\n        additiveCechAlpha V J n ((additiveCechGlobal J).iCycles n s') ∧\n      (additiveCechTotal V J).iCycles n tβ' = additiveCechBeta V J n\n        ((cechOver Y.toSpecΓ V\n          (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') ∧\n      (additiveCechTotal V J).homologyπ n tα' =\n        (additiveCechTotal V J).homologyπ n tβ' ∧\n      cY.globalEquiv n ((additiveCechGlobal J).homologyπ n s') =\n        Sheaf.H.map\n          (((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm\n            (Scheme.etaleAdditiveSheafToLowerStar g)) n\n          (Etale.cohomologyMap g X.etaleAdditiveSheaf n\n            (cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T121842-L-3558897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T121842-L-3558897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
