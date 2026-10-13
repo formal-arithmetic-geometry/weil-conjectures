@@ -25,9 +25,50 @@
   "def-pur-derived-internal-hom",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object $U$ and section $f\\in\\mathcal J(U)$, apply [lem-weil-pbc-local-hom-tower-criterion] to identify the local derived-completeness condition over $\\mathcal O$ with the vanishing of the derived multiplication tower $T(E|_U,f)$. Apply the same criterion over $\\mathcal B$ to the image of $f$ and the restricted object. The vanishing-elements-ideal statement [lem-weil-pbc-ringed-derived-complete-elements-ideal] then upgrades vanishing for these image sections to vanishing for every section of the locally generated ideal $\\mathcal J\\mathcal B$ (and conversely restricts the condition to the generators).",
+   "uses": [
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-limit",
+    "lem-weil-pbc-ringed-derived-complete-elements-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099C proof, first sentence, using Tags 0997 and 0998"
+   }
+  },
+  {
+   "text": "Restriction of scalars leaves the underlying sheaf of abelian groups and every multiplication-by-$f$ map unchanged: only the scalar action is precomposed with $\\varphi$. By the sectionwise kernel/cokernel description of module sheaves, the cohomology sheaves of the two towers and their derived-limit vanishing are computed in the same underlying abelian-sheaf category. Therefore $T(E|_U,f)=0$ exactly when the corresponding tower over $\\mathcal B_U$ is zero, proving both implications.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099C proof, observations that cohomology sheaves of T(K',f) are computed in the category of abelian sheaves and that f is viewed through its image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099C proof together with Tag 0997"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,12 +121,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-restriction-local-completeness",
+  "worker": "stage1",
+  "summary": "Split the local completeness equivalence into the Stacks localization-Hom/multiplication-tower criterion and the restriction-of-scalars comparison of the underlying abelian-sheaf towers. The statement and hypotheses were checked against Tag 099C; no Lean declaration states this item.",
+  "blueprint": "Realizes the final Stacks comparison clause of def-weil-pbc-completed-pullback, namely preservation and reflection of the local Stacks condition under restriction of scalars.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-d0630f3ba",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-d0630f3ba (reviewer sub-agent of L); spot-checked: Step 1 omitted the existing generated-ideal closure lemma needed to pass from images of J sections to all sections of JB. The new node also had incomplete created metadata. Corrected DAG JSON files are under fixes/dag/nodes/sec-proper-base-change/, and review.md records source, edge-case, route, and duplicate checks.; 2 file(s) fixed by the reviewer"
+ }
 }
