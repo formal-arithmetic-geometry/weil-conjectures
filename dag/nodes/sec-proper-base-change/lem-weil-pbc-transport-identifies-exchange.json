@@ -3,45 +3,124 @@
  "blueprint": {
   "is": "lem-weil-pbc-transport-identifies-exchange",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Transport identifies the exchange map",
- "statement": "For a cartesian square [def-weil-pbc-cartesian-square] and\n$L\\in\\Dplus(X_{\\Et},\\Lambda)$, use the natural comparison isomorphisms\n\n$$\n \\nu_{X'}^*g'_{\\Et}{}^{-1}\\simeq\n g'_{\\Proet}{}^{-1}\\nu_X^*,\n \\qquad\n \\nu_Y^*Rf_{\\Et,*}L\\simeq Rf_{\\Proet,*}\\nu_X^*L,\n$$\n\nand their analogues for the other sides. Conjugating the etale exchange map\n[def-weil-pbc-derived-exchange] by these isomorphisms gives the pro-etale\nunit--counit exchange map\n\n$$\n g_{\\Proet}^{-1}Rf_{\\Proet,*}\\nu_X^*L\n \\longrightarrow\n Rf'_{\\Proet,*}g_{\\Proet}'{}^{-1}\\nu_X^*L\n$$\n\nof [def-weil-pbc-ambient-ringed-exchange].",
+ "statement": "Let $\\Lambda$ be a finite discrete commutative ring. Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square], with $f$ and $f'$ quasi-compact and quasi-separated, and let $L\\in\\Dplus(X_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. On each pro-etale corner use precisely the constant ring $R_T=\\Lambda_{T,\\Proet}$ and its module category [def-weil-pbc-proetale-modules]; use the canonical structure isomorphisms of [prop-weil-pbc-proetale-constant-ring-map] on all four edges. Write $A_T=\\nu_T^*$ [def-weil-pbc-site-comparison-morphism], $l_u=u_{\\Et}^{-1}$, $r_u=Ru_{\\Et,*}$, $p_u=Lu_{\\Proet}^*$, $s_u=Ru_{\\Proet,*}$ [def-weil-pbc-proetale-operations]. Let $a_u:A_Ul_u\\xrightarrow{\\sim}p_uA_V$ be the canonical pullback comparison [lem-weil-pbc-comparison-pullback], and let $b_u:A_Vr_u\\xrightarrow{\\sim}s_uA_U$ for $u=f,f'$ be the canonical counit-mate comparison of [lem-weil-pbc-comparison-direct-image-canonical-mate], namely the transpose of $A_U\\varepsilon_u^e\\circ a_{u,r_u}^{-1}$. These are the specified direct-image comparison isomorphisms of [prop-weil-pbc-comparison-direct-image], with their normalization now made explicit.\n\nDefine\n$$S_L=p_g(b_{f,L})\\circ a_{g,r_fL}:A_{Y'}l_gr_fL\\xrightarrow{\\sim}p_gs_fA_XL,$$\n$$T_L=s_{f'}(a_{g',L})\\circ b_{f',l_{g'}L}:A_{Y'}r_{f'}l_{g'}L\\xrightarrow{\\sim}s_{f'}p_{g'}A_XL.$$\nLet $E_L$ be the etale module exchange, the unit--square--counit mate of $\\theta^e_\\square:l_{f'}l_g\\cong l_{g'}l_f$, using the module version of [def-weil-pbc-derived-exchange] as identified by [lem-weil-pbc-module-abelian-derived-exchange-compatibility]. Then\n$$T_L\\circ A_{Y'}(E_L)=\\Ex^{R}_{\\square,A_XL}\\circ S_L,$$\nwhere $\\Ex^R$ is precisely the ambient ringed unit--counit exchange of [def-weil-pbc-ambient-ringed-exchange]. Under the constant-ring identifications its source and target are $g_{\\Proet}^{-1}Rf_{\\Proet,*}A_XL$ and $Rf'_{\\Proet,*}g'_{\\Proet}{}^{-1}A_XL$, respectively. Thus conjugation by $S_L,T_L$ identifies the specified etale exchange with the specified pro-etale exchange.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
   "place": "node lem-weil-pbc-transport-identifies-exchange, order 1324"
  },
  "stmt_deps": [
   "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "prop-weil-pbc-comparison-direct-image",
   "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "def-weil-pbc-site-comparison-morphism"
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "def-weil-pbc-ambient-ringed-exchange"
  ],
  "proof": [
   {
-   "text": "Expanding the unit--$\\theta_\\square$--counit composite of\n[def-weil-pbc-derived-exchange] and conjugating each arrow through the\ncomparison isomorphisms of [lem-weil-pbc-comparison-pullback] and\n[prop-weil-pbc-comparison-direct-image] gives exactly the mate of the ambient\nringed exchange; naturality of the two comparison adjunctions makes the\nresulting square commute.",
+   "text": "Check the ringed specialization first. For every edge $u$, put $c_u:u^{-1}R_V\\cong R_U$ equal to the canonical constant-ring structure map. Both composites on the square take a constant scalar $\\lambda$ to the same scalar; therefore the coefficient identifications agree under the chosen cartesian identification. The module pullback is $u^{-1}M\\otimes_{u^{-1}R_V,c_u}R_U$. Its natural identification with the inverse image carrying the transported action is $m\\otimes r\\mapsto c_u^{-1}(r)m$, with inverse $m\\mapsto m\\otimes1$: the two composites are identities by tensor balancing. The operations node specifies this identification and the associated module adjunction. Exactness of this pullback implies that $p_u$ is computed termwise on any representing complex. For composable edges the two identifications send an iterated tensor $(m\\otimes r)\\otimes t$ to the same product of scalars acting on $m$; hence the composition isomorphism in the ringed square is precisely the inverse-image square isomorphism. We may consequently use the constant-module notation $p_u=u_{\\Proet}^{-1}$, with its specified adjunction, throughout the following calculation.",
    "uses": [
-    "def-weil-pbc-derived-exchange",
-    "lem-weil-pbc-comparison-pullback",
-    "prop-weil-pbc-comparison-direct-image"
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-ambient-ringed-exchange"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 (lemma-pullback-module), 03D3 (lemma-adjoint-push-pull-modules); explicit tensor identities in the identified-coefficient case"
+   }
+  },
+  {
+   "text": "Fix all maps before calculating. The comparison $A_T$ is the finite-discrete-module comparison adjunction; the pullback comparisons are the specified $a_u$, not arbitrary natural isomorphisms. Apply the canonical-mate lemma to $f$ with input $L$ and to $f'$ with input $l_{g'}L$. The inverse-image functor $l_{g'}$ is exact, so it preserves bounded-below objects; thus the finite commutative coefficient, bounded-below, quasi-compact, and quasi-separated hypotheses are all met. This gives the invertible $b_f,b_{f'}$ together with the counit equations\n$$\\varepsilon^p_{u,A_UK}\\circ p_u(b_{u,K})=A_U(\\varepsilon^e_{u,K})\\circ a_{u,r_uK}^{-1}\\quad(u=f,f').$$\nNo normalization is inferred from the bare existence/coherence assertion of the older direct-image comparison node. On the etale side use the module unit--square--counit exchange. The module/abelian derived-exchange compatibility node identifies its fixed maps with the abelian exchange of the derived-exchange definition, so that this is a coefficient specialization rather than a change of exchange morphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+    "place": "Proof, specifying the two comparisons and the module exchange; normalization supplied by the new one-edge node"
+   }
+  },
+  {
+   "text": "The corresponding unit face is forced by that counit equation. For $M\\in D^+(V_{\\Et},\\Lambda)$ and $u=f,f'$, set\n$$h=s_u(a_{u,M})\\circ b_{u,l_uM}\\circ A_V(\\eta^e_{u,M}):A_VM\\to s_up_uA_VM.$$\nIts transpose under $p_u\\dashv s_u$ is, by naturality of the pro-etale counit followed by the displayed counit equation,\n$$a_{u,M}\\circ A_U(\\varepsilon^e_{u,l_uM})\\circ a_{u,r_ul_uM}^{-1}\\circ p_uA_V(\\eta^e_{u,M}).$$\nNaturality of $a_u$ rewrites the last two factors as $A_Ul_u(\\eta^e_{u,M})\\circ a_{u,M}^{-1}$. The etale triangle identity makes this transpose $a_{u,M}\\circ1\\circ a_{u,M}^{-1}=1$. The unit $\\eta^p_{u,A_VM}$ also has transpose $1$, so injectivity of the adjunction bijection gives $h=\\eta^p_{u,A_VM}$. This proves the missing unit equation; invertibility of $b_u$ was not needed for this face.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); explicit transpose calculation and triangle identity"
+   }
+  },
+  {
+   "text": "Write $\\theta^e:l_{f'}l_g\\to l_{g'}l_f$ and $\\theta^p:p_{f'}p_g\\to p_{g'}p_f$ for the two specified square comparisons. Compatibility of $a_u$ with composites and the chosen cartesian identification says exactly\n$$p_{g'}a_f\\circ(a_{g'}l_f)\\circ A_{X'}\\theta^e=(\\theta^p A_Y)\\circ(p_{f'}a_g)\\circ(a_{f'}l_g).$$\nBoth sides start at $A_{X'}l_{f'}l_g$ and end at $p_{g'}p_fA_Y$. This uses only the square-coherence clause of the pullback comparison statement, not any assertion about units or counits.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
+    "place": "Proof, theta-square face, written as the explicit coherence equation"
+   }
+  },
+  {
+   "text": "Compare the two arrows of the conclusion by taking their transposes under $p_{f'}\\dashv s_{f'}$. Put $Z=A_{Y'}l_gr_fL$. Naturality of $\\varepsilon^p_{f'}$, the $f'$ counit equation from step 2, and naturality of $a_{f'}$ give the transpose of $T_L\\circ A_{Y'}E_L$ as\n$$a_{g',L}\\circ A_{X'}(\\varepsilon^e_{f',l_{g'}L}\\circ l_{f'}E_L)\\circ a_{f',l_gr_fL}^{-1}.$$\nBy the defining etale mate formula, $\\varepsilon^e_{f'}\\circ l_{f'}E_L=l_{g'}(\\varepsilon^e_{f,L})\\circ\\theta^e_{r_fL}$. Naturality of $a_{g'}$ and the step 4 square equation therefore turn this transpose into\n$$p_{g'}\\!\\left(A_X\\varepsilon^e_{f,L}\\circ a_{f,r_fL}^{-1}\\right)\\circ\\theta^p_{A_Yr_fL}\\circ p_{f'}(a_{g,r_fL}).$$\nThe transpose of $\\Ex^R_{\\square,A_XL}\\circ S_L$, using the defining ambient mate, is\n$$p_{g'}\\varepsilon^p_{f,A_XL}\\circ\\theta^p_{s_fA_XL}\\circ p_{f'}p_g(b_{f,L})\\circ p_{f'}(a_{g,r_fL}).$$\nMove $b_{f,L}$ through $\\theta^p$ by naturality to replace its first three factors by $p_{g'}(\\varepsilon^p_f\\circ p_f b_{f,L})\\circ\\theta^p_{A_Yr_fL}$. The $f$ counit equation of step 2 gives exactly the previous transpose. Injectivity of the adjunction bijection proves $T_L A_{Y'}E_L=\\Ex^R S_L$. Since $S_L,T_L$ are isomorphisms, this is precisely the asserted conjugation identity. The cancellation rules used here are the mate-pasting calculus; their application has been exhibited at the level of these particular transposes.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 (lemma-transformation-between-functors-and-adjoints), 0DV0 (lemma-compose-counits); explicit two-transpose calculation supplementing the blueprint proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-cartesian-square",
   "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-comparison-pullback",
-  "prop-weil-pbc-comparison-direct-image"
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-weil-pbc-proetale-constant-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
-  "place": "## Proof"
+  "place": "Proof expanded by the explicit counit, unit, square-coherence and two-transpose calculations; constant-coefficient scope clarified"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +150,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-transport-identifies-exchange",
+  "worker": "stage1",
+  "summary": "Repair: specify finite discrete commutative constant coefficients and qcqs vertical morphisms; isolate the one-edge canonical-mate invertibility obligation as a statement-only node, rather than borrowing normalization from a cited proof. Explicitly specialize the ringed operations, prove the unit face from the counit face, display the square coherence identity, and compare the exact exchange composites by transposition. Condensed-ring targets remain untouched.",
+  "blueprint": "Realizes the sole blueprint proof paragraph via steps 1-5; supplies the previously omitted unit/counit normalization and named-morphism calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+    "why": "Identifies the module-coefficient etale exchange with the abelian definition; this is a coefficient comparison tool and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-3ee909212",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-3ee909212 (reviewer sub-agent of L); spot-checked: Review written. Mathematics and source checks pass, but the new node’s created record omits required by/date fields, and step 2 leaves bounded-below preservation for l_{g'}L implicit. Corrected whole-node JSON files are under fixes/dag/nodes/sec-proper-base-change/.; 2 file(s) fixed by the reviewer"
+ }
 }
