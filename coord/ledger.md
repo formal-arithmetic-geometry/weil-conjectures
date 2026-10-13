@@ -12438,3 +12438,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/M1/Sheaf.Paper.BoundaryHorseshoeRepresentative (stage 3; reviewer PASS; first push; landing 20261013T123208-L-3677880 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:32 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffine (stage 3; reviewer PASS; first push; landing 20261013T123209-L-3678049 (proof); batch 20261013T123200; modules 1; new nodes 0)
 - 12:32 L: merged deliver/M3/Sheaf.AlgebraicGeometry.PicardConnectiveModelComparison (stage 3; reviewer PASS; first push; landing 20261013T123209-L-3678149 (interface); batch 20261013T123200; modules 2; new nodes 1)
+- 12:32 L: merged deliver/M4/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting (stage 3; reviewer PASS; first push; landing 20261013T123210-L-3678298 (proof); batch 20261013T123200; modules 1; new nodes 0)
