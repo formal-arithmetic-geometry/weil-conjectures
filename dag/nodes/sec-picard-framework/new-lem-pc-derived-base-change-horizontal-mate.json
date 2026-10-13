@@ -24,13 +24,28 @@
  ],
  "proof": [
   {
-   "text": "Expand both base-change maps as transposes of their pulled-back counits. Naturality moves the inner transpose through the direct-image functor, the triangle identity cancels the inserted unit, and associativity of the pinned pullback composition comparisons identifies the resulting counit with the outer one. The commutativity equalities identify transports by proof irrelevance.",
+   "text": "For the pinned pullback comparisons, expand the three square isomorphisms as composition comparison, equality transport, and inverse comparison. Apply associativity for (v,j,f), (j′,g′,f), and (j′,f′,g). Cancel the terminal comparison, move equality transports through naturality, and cancel adjacent comparison inverses. Proof irrelevance identifies the composite transports. This proves the horizontal coherence equation for the square isomorphisms.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-relative-mv-maps",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-relative-mv-maps"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove the generic horizontal mate identity for six adjunctions. The counit equations for rightAdjointUniq, ofNatIsoLeft, and composition express each direct-image composition comparison in terms of the two counits and the inverse pullback comparison. Postcompose with the target composition comparison and apply injectivity of the outer target Hom equivalence. Naturality of the inner counit followed by both Hom-equivalence inverse identities reduces the left side to the two square comparisons followed by the source counits. On the right side, naturality of the outer square and the source comparison counit equation give the outer comparison followed by the same counits. The horizontal coherence equation identifies them after cancelling the target pullback comparison.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the generic identity to the pinned adjunctions of f, f′, j, j′, j≫f, and j′≫f′. Supply the horizontal coherence equation from step 1. Rewrite the three base-change maps using the proved definitional equation baseChange_eq, which expresses them with relativeMVAdj and relativeMVComp without repeatedly unfolding the selected canonical data. Unfold the square comparisons and relativeMVImageComp only, and reassociate compositions to obtain the unchanged statement.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -39,9 +54,11 @@
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
+  "group": "C4",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY and 0D5S"
+  "place": "Tags 08HY and 0D5S; explicit adjunction counit calculation, with the pullback coherence calculation adapted from the proved private helper in DerivedBaseChangeSourceIso."
  },
  "mathlib_searches": [
   {
@@ -106,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T201800-L-3973176",
-  "kind": "interface",
+  "landing": "20261013T211055-L-389181",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
