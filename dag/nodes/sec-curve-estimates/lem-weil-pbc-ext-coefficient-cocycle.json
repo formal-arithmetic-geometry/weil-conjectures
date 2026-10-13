@@ -1,0 +1,145 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-pc-ext"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Lemma 13.27.2(1), roof description of Ext; functoriality as in Tag 01F8 and equations 01F9/01FA"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "id": "lem-weil-pbc-ext-coefficient-cocycle",
+ "title": "Exact functor and coefficient map on an individual Ext cocycle",
+ "statement": "Let C and D be abelian categories [def-sp-abelian] with Ext groups [def-pc-ext], L:C→D an additive exact functor, A,B objects of C, A′,B′ objects of D, α:A′→L(A), and v:L(B)→B′. Let R,R′ be injective resolutions [def-sp-injective-resolutions] of B,B′. Let φ:L(R)→R′ be a chain map whose composite with L of the augmentation is homotopic to the single-complex comparison followed by v and the target augmentation. For q≥0 and a:A→R^q with a;d_R=0, suppose a′=α;L(a);φ^q satisfies a′;d_R′=0. The Ext class of a′ in R′ equals the composite of Ext.mk₀(α), L applied to the Ext class of a in R, and Ext.mk₀(v). This is a formula on individual cocycles before quotient descent, homology, or sections evaluation.",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCERowOrdinaryComparison",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "proof": [
+  {
+   "text": "Use Mathlib extEquivCohomologyClass_symm_mk_hom and Ext.mapExactFunctor_hom to express both sides as derived-category roofs. ShiftedHom.comp_map and map_naturality_2 transport the mapped numerator through mapDerivedCategoryFactors; the single-complex comparison identifies its source.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply DerivedCategory.Q_map_eq_of_homotopy to the given augmentation homotopy. Naturality of mapDerivedCategoryFactors.inv and cancellation of the invertible mapped augmentation give factors.inv(R);mapDerivedCategory(inv(Q(ι_R)));singleComparison.hom(B);Q(single(v)) = Q(φ);inv(Q(ι_R′)). This is a direct equality of localized morphisms, requiring no bijectivity theorem for maps into K-injectives. The coefficient morphism remains after the single-complex comparison and is carried through the same denominator cancellation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the numerator at degree zero by HomologicalComplex.from_single_hom_ext. The component formulas for Cocycle.equivHomShift.symm, fromSingleMk, and mapHomologicalComplex show it is exactly α;L(a);φ^q. Transport this equality with ShiftedHom.map and combine it with the denominator equality. Ext.hom injectivity closes the claim. All formulas also hold for q=0 and zero α or a.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "C3 stage-3 worker",
+  "document": "Stacks Project",
+  "place": "Tags 06XR, 01F8 (01F9/01FA), 013P",
+  "note": "Complete derived-category roof calculation extending the proved pure-pullback cocycle argument to a coefficient map."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Arbitrary row comparison: individual Ext cocycle with coefficient map, before evaluation and quotient descent.",
+   "via": [
+    "lem-weil-pbc-ce-row-ordinary-naturality",
+    "lem-weil-pbc-ce-normalized-representative-cohomology",
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor and coefficient morphism preserve the cocycle representative of Ext on arbitrary injective resolutions",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Ext and cohomology of sections of an injective resolution under pullback and a comparison chain map",
+   "date": "2026-10-13",
+   "results": "extMk_comp_mk₀, mk₀_comp_extMk, extEquivCohomologyClass_extMk, extMk_hom, extEquivCohomologyClass_symm_mk_hom; no combined exact-functor coefficient formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ext_mapExactFunctor.*coefficient|mapExactFunctor.*mk₀|comp.*mapExactFunctor",
+   "date": "2026-10-13",
+   "results": "Ext.Map has mapExactFunctor_hom, mapExactFunctor_comp and mapExactFunctor_mk₀; existing ExtExactFunctorCocycle fixes the target resolution to L(B), without v."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext resolution equivalence natural under exact functor and coefficient postcomposition",
+   "date": "2026-10-13",
+   "results": "Ext.mapExactFunctor_hom, mapExactFunctor, mapExtAddHom_apply, and projective-resolution tools; no combined formula on arbitrary injective resolutions.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extMk_comp_mk₀\"",
+   "date": "2026-10-13",
+   "results": "InjectiveResolution.extMk_comp_mk₀ and ProjectiveResolution.extMk_comp_mk₀; handles coefficient transport alone, not exact-functor transport.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extMk_comp_mk₀|mk₀_comp_extMk",
+   "date": "2026-10-13",
+   "results": "Four Mathlib injective/projective cocycle-composition lemmas; none includes the exact functor and arbitrary supplied augmentation homotopy.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExtCoefficientCocycle",
+  "file": "lean/Sheaf/CategoryTheory/ExtCoefficientCocycle.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.ext_mapExactFunctor_coefficient_cocycle",
+  "statement": "theorem ext_mapExactFunctor_coefficient_cocycle\n    {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]\n    [Abelian C] [Abelian D] [HasExt.{v} C] [HasExt.{v} D]\n    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    {A B : C} {A' B' : D} (α : A' ⟶ L.obj A)\n    (R : InjectiveResolution B) (R' : InjectiveResolution B') (v : L.obj B ⟶ B')\n    (φ : (L.mapHomologicalComplex (.up ℤ)).obj R.cochainComplex ⟶ R'.cochainComplex)\n    (hφ : Nonempty (Homotopy\n      ((L.mapHomologicalComplex (.up ℤ)).map R.ι' ≫ φ)\n      ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app B ≫\n        (singleFunctor D 0).map v ≫ R'.ι')))\n    (q : ℕ) (a : A ⟶ R.cochainComplex.X (q : ℤ))\n    (ha : a ≫ R.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0)\n    (ha' : (α ≫ L.map a ≫ φ.f (q : ℤ)) ≫\n      R'.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0) :\n    ((Ext.mk₀ α).comp\n      ((R.extEquivCohomologyClass.symm\n        (.mk (Cocycle.fromSingleMk a (zero_add (q : ℤ)) _ rfl ha))).mapExactFunctor L)\n      (zero_add q)).comp (Ext.mk₀ v) (add_zero q) =\n    R'.extEquivCohomologyClass.symm\n      (.mk (Cocycle.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ))\n        (zero_add (q : ℤ)) _ rfl ha'))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T160709-L-1371142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T160709-L-1371142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

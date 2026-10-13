@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.EtaleCETotalSections
 public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+import Sheaf.Paper.EtaleRowSectionsExtend
 
 /-! # Explicit ordinary cohomology comparisons for CE rows
 
@@ -69,6 +70,7 @@ def cePresentationRow {X : Scheme.{uNatural}}
   injective := D.terms q
   quasiIso := D.rows q
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The explicit row comparison computes pullback followed by a coefficient map.
 Source: Stacks Project, Tag 01F8, equations 01F9 and 01FA; Tags 06XR and 08J6.
 (blueprint: lem-weil-pbc-ce-row-ordinary-naturality).
@@ -98,6 +100,70 @@ theorem ceRowOrdinaryIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     HomologicalComplex.homologyMap (ceRowSectionsMap f φ) p ≫
         (ceRowOrdinaryIso Y G' R' p).hom =
       (ceRowOrdinaryIso X G R p).hom ≫
-        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) := by sorry
+        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p)) := by
+  let ψ := ceExtendedRowMap f φ
+  have hψ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map R.ι' ≫ ψ =
+      (HomologicalComplex.singleMapHomologicalComplex
+        (upperStar AddCommGrpCat.{uNatural + 1} f) (ComplexShape.up ℤ) 0).hom.app G ≫
+      (CochainComplex.singleFunctor _ 0).map v ≫ R'.ι' := by
+    apply (cancel_epi ((HomologicalComplex.singleMapHomologicalComplex
+      (upperStar AddCommGrpCat.{uNatural + 1} f) (ComplexShape.up ℤ) 0).inv.app G)).1
+    apply HomologicalComplex.from_single_hom_ext
+    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+    dsimp only [ψ, ceExtendedRowMap]
+    simp only [HomologicalComplex.comp_f]
+    rw [R.ι'_f_zero, R'.ι'_f_zero]
+    erw [HomologicalComplex.extendMap_f φ ComplexShape.embeddingUpNat (i := 0) rfl]
+    dsimp [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents]
+    erw [HomologicalComplex.mapExtendX_hom_eq R.cocomplex
+      (upperStar AddCommGrpCat.{uNatural + 1} f) (ComplexShape.embeddingUpNat.r_f 0)]
+    simp only [InjectiveResolution.cochainComplexXIso, HomologicalComplex.extendXIso,
+      HomologicalComplex.extend.XIso, eqToIso, HomologicalComplex.singleMapHomologicalComplex,
+      NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app,
+      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
+      CochainComplex.singleFunctor, CochainComplex.singleFunctors,
+      HomologicalComplex.single_map_f_self, eqToHom_map, Functor.map_comp,
+      Category.assoc, eqToHom_refl, Category.id_comp, Category.comp_id]
+    simp only [↓reduceDIte, Category.id_comp, ← Category.assoc, eqToHom_trans,
+      eqToHom_refl]
+    simp [HomologicalComplex.extend, HomologicalComplex.extend.X]
+    have hh : (upperStar AddCommGrpCat.{uNatural + 1} f).map (R.ι.f 0) ≫ φ.f 0 =
+        v ≫ R'.ι.f 0 := by
+      simpa [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
+        HomologicalComplex.single] using hφ
+    simpa only [Category.assoc, InjectiveResolution.cochainComplexXIso,
+      HomologicalComplex.extendXIso, HomologicalComplex.extend.XIso, eqToIso] using!
+      congrArg (fun z ↦ z ≫ (R'.cochainComplexXIso 0 0 rfl).inv) hh
+  have hi := ceIntegerSectionsIso_naturality f G G' R R' v ψ hψ p
+  have hs := congrArg (fun k ↦ HomologicalComplex.homologyMap k (p : ℤ))
+    (ceRowSectionsMap_extend f φ)
+  simp only [HomologicalComplex.homologyMap_comp] at hs
+  have he : HomologicalComplex.homologyMap (ceRowSectionsMap f φ) p ≫
+      (HomologicalComplex.extendHomologyIso
+        (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj R'.cocomplex)
+        ComplexShape.embeddingUpNat (j := p) (j' := (p : ℤ)) rfl).inv =
+    (HomologicalComplex.extendHomologyIso
+        (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj R.cocomplex)
+        ComplexShape.embeddingUpNat (j := p) (j' := (p : ℤ)) rfl).inv ≫
+      HomologicalComplex.homologyMap
+        (HomologicalComplex.extendMap (ceRowSectionsMap f φ)
+          ComplexShape.embeddingUpNat) (p : ℤ) := by
+    rw [← cancel_epi (HomologicalComplex.extendHomologyIso
+      (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj R.cocomplex)
+      ComplexShape.embeddingUpNat (j := p) (j' := (p : ℤ)) rfl).hom]
+    simp only [Iso.hom_inv_id_assoc]
+    erw [← HomologicalComplex.extendHomologyIso_hom_naturality_assoc
+      (ceRowSectionsMap f φ) ComplexShape.embeddingUpNat (j := p) (j' := (p : ℤ)) rfl]
+    simp only [Iso.hom_inv_id, Category.comp_id]
+  dsimp only [ceRowOrdinaryIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  simp only [HomologicalComplex.homologyFunctor_map, Category.assoc]
+  rw [reassoc_of% he]
+  erw [← reassoc_of% hs]
+  erw [hi]
+
 
 end AlgebraicGeometry.Etale

@@ -19,34 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Extend the two nonnegative injective rows and their comparison by zero. The canonical map-extend comparison identifies the resulting sections map with the extension of ceRowSectionsMap. Compute Ext pullback on a cocycle from the constant integer sheaf, then compose with the coefficient map. The augmentation equation identifies this with the cocycle of the supplied row comparison: compare with the chosen resolution of the pulled-back sheaf, use injectivity of the target to lift the coefficient map, and use uniqueness of augmentation-compatible comparisons up to homotopy. This uses no injectivity of the pulled-back row.",
+   "text": "Extend the prescribed nonnegative row comparison using ceExtendedRowMap. Precompose with the inverse single-complex comparison, and test the augmentation square in degree zero. The given hφ, ι′_f_zero, extendMap_f and mapExtendX_hom_eq give the integer augmentation equality.",
    "uses": [
-    "lem-weil-pbc-ext-pullback-resolution-sections",
     "def-sp-injective-resolutions"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Evaluation at 1 commutes with inverse image via the constant-sheaf transpose and with postcomposition via the adjunction. It therefore identifies the Ext cocycle map with the sections row map. Coboundaries map to coboundaries. Descend to homology and transport through mapExtendIso and extendHomologyIso; expand the explicit ceRowOrdinaryIso. The square holds in degree zero as well, and for zero sheaves and empty schemes.",
+   "text": "Apply the integer-indexed Ext/evaluation square to this augmented comparison. Apply homology to ceRowSectionsMap_extend, and use extendHomologyIso_hom_naturality to pass between nonnegative homology and the homology of its extension. Expand ceRowOrdinaryIso and compose the three squares.",
    "uses": [
-    "def-weil-pbc-ext-resolution-sections-iso",
-    "lem-weil-pbc-constant-sheaf-pullback-transpose"
+    "lem-weil-pbc-row-integer-sections",
+    "lem-weil-pbc-row-sections-extend",
+    "def-weil-pbc-ext-resolution-sections-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
-  "def-weil-pbc-ext-resolution-sections-iso",
-  "lem-weil-pbc-constant-sheaf-pullback-transpose",
-  "lem-weil-pbc-ext-pullback-resolution-sections"
+  "lem-weil-pbc-row-integer-sections",
+  "lem-weil-pbc-row-sections-extend",
+  "def-weil-pbc-ext-resolution-sections-iso"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "M4",
-  "date": "2026-10-13",
-  "document": "Stacks Project, Derived Categories and Homological Algebra",
-  "place": "Tags 015J, 015K, 012K, 06XR and 01F8; ordinary Ext comparison in step 3 of lem-weil-pbc-ce-normalized-representative-cohomology"
+  "by": "C3 stage-3 worker",
+  "document": "Stacks Project",
+  "place": "Tags 06XR, 01F8 (01F9/01FA), 015J/015K and 08J6",
+  "note": "Concrete extension of the augmented map; independent integer-indexed evaluation and chain extension squares; naturality of extendHomologyIso and categorical composition."
  },
  "mathlib_searches": [
   {
@@ -137,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-51c15",
-  "group": "M4",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T134102-L-72090",
+  "landing": "20261013T160709-L-1371142",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures and proof dependencies with all three node records; verified unchanged existing interface, concrete definitions, expected axioms, clean compilation of all delivered modules and the sole direct importer Sheaf.Paper.EtaleCEPrescribedNormalizedFirstPages."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

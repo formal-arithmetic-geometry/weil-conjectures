@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-row-sections-extend",
+ "kind": "statement",
+ "title": "Sections comparison commutes with extension by zero",
+ "statement": "Let f:Y→X be a scheme morphism [def-weil-pbc-scheme-conventions], J and J′ arbitrary nonnegative cochain complexes of abelian etale sheaves on X and Y [def-weil-pbc-etale-sheaves], and φ:f*J→J′ [def-weil-pbc-inverse-image]. Extend φ by zero and precompose with mapExtendIso to define ψ:f*(extend J)→extend J′ using the explicit maps of [lem-weil-pbc-row-integer-sections]. Let b_N and b_Z be the sections-unit comparison maps on the nonnegative and integer-indexed complexes [lem-weil-pbc-ce-total-sections-comparison]. Then mapExtendIso(J,Γ_X).inv;b_Z = extendMap(b_N);mapExtendIso(J′,Γ_Y).inv as chain maps. No augmentation, injectivity or cohomology hypothesis is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06XR, 01F8 (equations 01F9/01FA), 08J6, and the row comparison of Tags 015J/015K"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "lem-weil-pbc-row-integer-sections"
+ ],
+ "proof": [
+  {
+   "text": "Test equality degreewise. For degree n≥0, express n as the image of a natural number. Unfold mapExtendIso, use mapExtendX_hom_eq and extendMap_f, and normalize the equality transports; both sides become the sections-unit component followed by Γ_Y(φ^n).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a degree outside the image of the embedding, the extended sections source is zero by isZero_extend_X. Both morphisms are therefore equal.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "C3 stage-3 worker",
+  "document": "Stacks Project",
+  "place": "Cocycle evaluation and extension-by-zero steps of lem-weil-pbc-ce-row-ordinary-naturality",
+  "note": "Concrete chain maps, quotient descent, evaluation naturality and canonical transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology naturality extension by zero sections comparison",
+   "date": "2026-10-13",
+   "results": "No exact match; service returned no direct theorem.",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso_hom_naturality",
+   "date": "2026-10-13",
+   "results": "HomologicalComplex.extendHomologyIso_hom_naturality",
+   "verdict": "Used for transport."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExtendIso homology naturality",
+   "date": "2026-10-13",
+   "results": "Existing mapExtendIso and extendMap lemmas inspected.",
+   "verdict": "No complete theorem; explicit proof written."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive natural transformation commutes with extending a cochain complex by zero and applying a functor",
+   "date": "2026-10-13",
+   "results": "Cochain.map_v, map_ofHom, mapCochainComplexSingleFunctor and embedding extendFunctor additivity; no complete sections square.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExtendIso\"",
+   "date": "2026-10-13",
+   "results": "No hits in service index.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExtend.*naturality|mapExtendFunctorNatIso",
+   "date": "2026-10-13",
+   "results": "Generic mapExtendFunctorNatIso naturality is available for complex morphisms; the new square also transports the sections natural transformation between different sites.",
+   "verdict": "Second reading: component tools only; no duplicate of the delivered statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCERowOrdinaryComparison",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Ordinary row comparison: integer sections and extension-by-zero transport.",
+   "via": [
+    "lem-weil-pbc-ce-row-ordinary-naturality",
+    "lem-weil-pbc-ce-normalized-representative-cohomology",
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleRowSectionsExtend",
+  "file": "lean/Sheaf/Paper/EtaleRowSectionsExtend.lean",
+  "declaration": "AlgebraicGeometry.Etale.ceRowSectionsMap_extend",
+  "statement": "theorem ceRowSectionsMap_extend {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}\n    {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}\n    (φ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J ⟶ J') :\n    (J.mapExtendIso ComplexShape.embeddingUpNat\n        (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).inv ≫\n        ceIntegerSectionsMap f (ceExtendedRowMap f φ) =\n      HomologicalComplex.extendMap\n        ((NatTrans.mapHomologicalComplex (ceSectionsUnit f) (ComplexShape.up ℕ)).app J ≫\n          ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex\n            (ComplexShape.up ℕ)).map φ)\n        ComplexShape.embeddingUpNat ≫\n      (J'.mapExtendIso ComplexShape.embeddingUpNat\n        (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).inv",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T160709-L-1371142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T160709-L-1371142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
