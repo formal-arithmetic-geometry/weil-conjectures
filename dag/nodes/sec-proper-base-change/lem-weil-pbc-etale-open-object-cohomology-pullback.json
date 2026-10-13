@@ -15,36 +15,28 @@
  },
  "proof": [
   {
-   "text": "Expand both cohomology maps into Ext exact inverse images and degree-zero precomposition. Move precomposition through the functors with mapExactFunctor_comp and mapExactFunctor_mk₀. Apply exactFunctorCompositionComparison for the two factorizations of the commuting open pullback square.",
+   "text": "Expand the two cohomology maps. Move degree-zero precomposition through exact inverse image with Ext.mapExactFunctor_comp and mapExactFunctor_mk₀. Apply etaleOpenFreeSheafUnit_pullback to identify the source morphisms. Apply exactFunctorCompositionComparison to both factorizations through h = (g⁻¹W).ι >> g. Precompose and postcompose the first comparison with its inverse components; the hom/inv cancellations isolate the mapped Ext class. Ext associativity and mk₀ composition give exactly the desired coefficient transport.",
    "uses": [
     "def-weil-pbc-etale-open-object-cohomology-map",
     "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-ext-exact-functor-composition-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Check the remaining identity-generator equality under the constant-sheaf sections adjunction. Expand the explicitly constructed free-sheaf pullback and identity generator: both images of 1 are the pulled-back identity section, with transport given by the localization comparison and inverse-image unit naturality. Ext associativity completes the equality.",
-   "uses": [
-    "def-weil-pbc-etale-open-free-sheaf-pullback",
-    "def-weil-pbc-etale-open-comparison-data",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison",
+    "lem-weil-pbc-etale-open-free-sheaf-unit-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-open-comparison-data",
-  "def-weil-pbc-etale-open-free-sheaf-pullback",
   "def-weil-pbc-etale-open-object-cohomology-map",
   "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-open-free-sheaf-unit-pullback",
   "lem-weil-pbc-ext-exact-functor-composition-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project (tag pages read online)",
-  "place": "https://stacks.math.columbia.edu/tag/03F3 (localization); https://stacks.math.columbia.edu/tag/01F8 and https://stacks.math.columbia.edu/tag/01FB (functoriality); explicit Lean-model calculation, not a verbatim Stacks statement."
+  "document": "Stacks Project, Cohomology on Sites; Lean-model Ext calculation",
+  "place": "Tag 03F3; explicit Ext calculation from exactFunctorCompositionComparison and the separately stated degree-zero identity-generator equality."
  },
  "mathlib_searches": [
   {
@@ -127,12 +119,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261012T234226-L-2127286",
+  "landing": "20261013T011926-L-2762803",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

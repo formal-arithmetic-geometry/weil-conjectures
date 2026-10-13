@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-etale-open-free-sheaf-unit-pullback",
+ "kind": "statement",
+ "title": "The open identity generator commutes with arbitrary scheme pullback",
+ "statement": "Let $g:Y\\to X$ be a scheme morphism and $W\\subseteq X$ an open. Write $W'=g^{-1}W$, $j:W\\to X$, $j':W'\\to Y$ and $t:W'\\to W$ for the restricted morphism. Let $A_W$ and $u_W:\\mathbf Z_W\\to j^*A_W$ be the free sheaf and its identity-generator map [def-weil-pbc-etale-open-object-cohomology-map]. Let $k:A_{W'}\\to g^*A_W$ be the explicit section-classifying map [def-weil-pbc-etale-open-free-sheaf-pullback]. Use the exact inverse image [def-weil-pbc-inverse-image]. Put $h=j'\\gg g$ in Lean's composition order, and let $e_1:h^*\\cong t^*\\circ j^*$ and $e_2:h^*\\cong j'^*\\circ g^*$ be the canonical composition comparisons [lem-weil-pbc-inverse-image-composition], with the equality $t\\gg j=j'\\gg g$. Let $c_t:\\mathbf Z_{W'}\\to t^*\\mathbf Z_W$ be the inverse constant-sheaf pullback comparison. Then, in Lean's left-to-right composition order,\n$$u_{W'}\\gg j'^*k=c_t\\gg t^*u_W\\gg (e_1^{-1}\\gg e_2)_{A_W}.$$\nThis is an equality of sheaf morphisms, without a coefficient sheaf, Ext degree, Ext class, resolution or cocycle.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "def-weil-pbc-etale-open-free-sheaf-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology on Sites; explicit calculation in the Lean model",
+  "place": "Tag 03F3 (localization); step 2 of lem-weil-pbc-etale-open-object-cohomology-pullback. The precise generator equality is agent-written, using constantSection_adjunct_pullback and open_restriction_pullback_unit, not stated verbatim in Stacks."
+ },
+ "proof": [
+  {
+   "text": "Apply the constant-sheaf adjunction at mk(id of W') and the integer-generator equivalence. Both are injective, so it suffices to equate the classified sections. On the left, naturality of this adjunction makes the section j'^*k applied to the identity generator. Naturality of the inverse-image/localization comparison identifies this with restriction to W' of the section classified by k. The free-abelian sheaf/Yoneda adjunction and its inverse cancellation expand this section to the adjunction unit eta_g applied to the identity section of A_W, then restriction along openSectionPullback. Naturality in the sheafification map identifies the identity section used here with the one defining u_W.",
+   "uses": [
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "def-weil-pbc-etale-open-free-sheaf-pullback",
+    "def-weil-pbc-etale-open-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the right, constantSection_adjunct_pullback says that c_t followed by t^*u_W classifies the section of j^*A_W defining u_W, first sent through eta_t and then restricted along the terminal pullback identification. Postcomposition by e_1.inv followed by e_2.hom transports this section to j'^*g^*A_W. Evaluate open_restriction_pullback_unit at A_W and at that identity section. Its two sides are exactly this transported section and the unit eta_g section computed in step 1, after the localization comparisons. The displayed comparisons use a common composite h; transport the other version of the composition comparison along t >> j = j' >> g by equality elimination. The identity maps identifying mk(id >> j) with mk(j) cancel. Thus the two sections agree, and the two adjunction bijections prove the morphism equality. Terminal objects and all these comparisons exist for the empty open as well; no nonemptiness is used.",
+   "uses": [
+    "lem-weil-pbc-constant-section-adjunct-pullback",
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology on Sites",
+  "place": "Tag 03F3; degree-zero generator calculation isolated from the parent proof, using the explicitly stated adjunction-unit identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of identity generator of a free abelian representable sheaf to an open subscheme is compatible with inverse image composition",
+   "results": "UNAVAILABLE: Internal Server Error; LeanFinder, Loogle and pinned source searches used instead.",
+   "date": "2026-10-13",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image functors on Ext commute with precomposition by the generator of the free abelian sheaf on an open subscheme",
+   "results": "Generic mapExactFunctor and Sheaf.H results; no concrete identity-generator equality. Loogle mapExactFunctor_comp confirms the generic composition tool.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOpenFreeSheafUnit.*pullback|exactFunctorCompositionComparison; identity generator pullback",
+   "results": "No Mathlib match. Local EtaleOpenFreeSheafUnitCoherence covers only nested opens of one scheme. ConstantSectionAdjunctPullback and OpenRestrictionPullbackUnit supply the two adjunction calculations. Whole blueprint search for identity generator pullback: zero matches.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate or exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Degree-zero identity-generator compatibility in step 2 of the parent open-object Ext pullback argument.",
+   "via": [
+    "lem-weil-pbc-etale-open-object-cohomology-pullback",
+    "lem-weil-pbc-etale-resolution-section-open-transfer",
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer",
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-etale-resolution-section-open-transfer-ext"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "proof_deps": [
+  "def-weil-pbc-etale-open-comparison-data",
+  "def-weil-pbc-etale-open-free-sheaf-pullback",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "lem-weil-pbc-constant-section-adjunct-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-restriction-pullback-unit"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenFreeSheafUnitPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenFreeSheafUnit_pullback",
+  "statement": "theorem etaleOpenFreeSheafUnit_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens) : etaleOpenFreeSheafUnit (g ⁻¹ᵁ W) ≫ (upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι).map (etaleOpenFreeSheafPullback g W) = (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (g ∣_ W)).inv.app (AddCommGrpCat.of (ULift ℤ)) ≫ (upperStar AddCommGrpCat.{u + 1} (g ∣_ W)).map (etaleOpenFreeSheafUnit W) ≫ ((upperStarComp AddCommGrpCat.{u + 1} (g ∣_ W) W.ι ((g ⁻¹ᵁ W).ι ≫ g) (morphismRestrict_ι g W).symm).inv ≫ (upperStarComp AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι g).hom).app ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk W.ι))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T011926-L-2762803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
