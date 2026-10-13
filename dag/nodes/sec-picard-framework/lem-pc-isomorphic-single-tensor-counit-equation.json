@@ -15,26 +15,37 @@
  },
  "proof": [
   {
-   "text": "Use the specified inverse-component formula from the transport theorem. Naturality of the unit, followed by the defining derived composition factorization, identifies the first two displayed factors with the counit for p followed by t.inv.app M. Compose with t.hom.app M and cancel its inverse. The equation refers only to this uniquely characterized transport.",
+   "text": "Evaluate the defining leftDerivedLift factorization of the selected composition comparison at the homotopy single of M. The termwise mapped-single comparisons commute with a natural composition isomorphism: check degree zero using to_single_hom_ext, and apply the homotopy quotient. Naturality of the selected counit then gives c(e.hom,p).hom at M[0] followed by the pinned single tensor counit for e.hom ≫ p as derivedPullback(e.hom) of the pinned single tensor counit for p, followed by the pinned single tensor counit for e.hom and the single image of the specified underived tensor mate.",
    "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-pinned-single-tensor-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the selected derived adjunction for e.hom and the inverse-component equation of the specified transport. Unit naturality rewrites the direct image of the preceding composition as the pinned single tensor counit for p followed by the inverse component of the transport.",
+   "uses": [
     "def-pc-derived-base-change-map",
-    "lem-pc-pinned-single-tensor-shifts",
     "lem-pc-isomorphic-single-tensor-counit-transport"
    ],
    "elementary": false
+  },
+  {
+   "text": "Postcompose with the hom component of the same transport. The inverse-hom identity and the category identity law give exactly the desired counit equation. All calculations hold for zero modules and empty schemes and do not invert the counit for p.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-derived-base-change-map",
   "lem-pc-pinned-single-tensor-shifts",
+  "def-pc-derived-base-change-map",
   "lem-pc-isomorphic-single-tensor-counit-transport"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0D5S",
-  "place": "Canonical transport fixed by explicit inverse components and counit compatibility"
+  "place": "F2 Lean proof: defining left-derived composition factorization on singles, naturality of the unit, and cancellation of the uniquely specified transport"
  },
  "mathlib_searches": [
   {
@@ -106,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d0cfe",
-  "group": "T2",
+  "reviewer": "X-0237c",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T190155-L-3221152",
+  "landing": "20261013T215604-L-897801",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, DAG nodes, report, and change record match the stated item; all modules and direct importer compile cleanly."
+  "note": "independent Codex review: Delivered module, node metadata, report, and change record match the stated target; scratch compilation and direct importer compilation succeed, with only the recorded dependency sorryAx."
  }
 }
