@@ -27,50 +27,36 @@
  ],
  "proof": [
   {
-   "text": "Put C=R^{\\mathrm{sh}} and I=mC. The strict-henselization triples statement identifies C as the filtered colimit of the pointed etale R-algebras S in its triple category, with maximal ideal I and with C/I equal to K.",
+   "text": "Unpack IsStrictHenselization to obtain its universal cocone and algebra isomorphism to C. Extend the cocone by that isomorphism. Apply lem-sc-pointed-etale-small-filtered and whisker with its small-model equivalence to obtain a small filtered algebra diagram whose colimit vertex is C.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-sc-pointed-etale-small-filtered"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), strict-henselization construction"
-   }
+   "elementary": false
   },
   {
-   "text": "For every triple algebra S, the canonical map S\\to\\widehat C is flat by the per-triple completion-flatness assertion [lem-sc-etale-triple-to-sh-completion-flat]. This is the auxiliary assertion used in the paragraph beginning 'To finish the proof of (c)' in Tag 06LJ; it already includes the identification of the completed target with \\widehat C.",
+   "text": "Forget to commutative rings using commAlgCatEquivUnder followed by Under.forget. These preserve the filtered colimit. For each stage, lem-sc-pointed-etale-completion-stage-flat gives flatness of the coprojection followed by the completion map.",
    "uses": [
-    "lem-sc-etale-triple-to-sh-completion-flat"
+    "lem-sc-pointed-etale-completion-stage-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
+   "elementary": false
   },
   {
-   "text": "The composites S\\to C\\to\\widehat C are flat for every object S of the filtered triple category. Since C is the filtered colimit of these S, the filtered-colimit flatness lemma [lem-weil-pbc-colimit-rings-flat] implies that the canonical map C\\to\\widehat C is flat.",
+   "text": "Compare the resulting cocone with the chosen categorical colimit by its unique ring isomorphism E. The coprojection equations show that completion composed with E inverse is flat by lem-weil-pbc-colimit-rings-flat. Compose with E, whose ring map is flat because it is bijective, and cancel E inverse composed with E to recover the desired completion map.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-sc-etale-triple-to-sh-completion-flat",
     "lem-weil-pbc-colimit-rings-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-sc-etale-triple-to-sh-completion-flat",
+  "lem-sc-pointed-etale-small-filtered",
+  "lem-sc-pointed-etale-completion-stage-flat",
   "lem-weil-pbc-colimit-rings-flat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c)"
+  "place": "Tag 06LJ(c), filtered-colimit argument; W3 makes the pointed algebra presentation and colimit transport explicit in Lean"
  },
  "mathlib_searches": [
   {
@@ -177,5 +163,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T153938-L-1124471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-pointed-etale-completion-stage-flat",
+ "kind": "statement",
+ "title": "Pointed etale stages map flatly to their colimit completion",
+ "statement": "Let R be a Noetherian commutative local ring and K a chosen separable closure of its residue field, with compatible R-algebra structure. Let P be the full subcategory of etale R-algebras pointed in K, as in def-sc-ring-strict-henselization, and D its forgetful functor to commutative R-algebras. For any colimit cocone c on D and any object t of P, the composite from the underlying algebra of t through c.pt to the completion of c.pt at m_R c.pt is flat.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ, proof of (c), paragraph beginning To finish the proof of (c)"
+ },
+ "stmt_deps": [
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the equivalence between pointed etale algebras and etale residue triples: the prime is the kernel of S → K and its residue embedding is the induced map on the fraction field of S/q. Translate the local residue field R/m to the scheme residue field at the maximal ideal via the canonical field isomorphism. This translation preserves the chosen map from R to K.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport c along this equivalence and forget its R-algebra structure. The underlying ring cocone is a colimit: the nonempty filtered diagram gives the base action on any ring cocone from any one coprojection; filteredness makes it independent of that choice, and the ring descent is therefore an algebra descent. Structural compatibility of each coprojection gives hρ in the triple flatness lemma.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etaleTriple_to_strictHenselization_completion_flat to the transported cocone and the triple of t. The structural map is algebraMap R c.pt, so its extended ideal is exactly m_R c.pt. The forgetful equivalence retains the same ring and coprojection, identifying the resulting map with the displayed composite.",
+   "uses": [
+    "lem-sc-etale-triple-to-sh-completion-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triple-to-sh-completion-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ, proof of (c), paragraph beginning To finish the proof of (c); presentation bridge written by W3 from the cited construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "each pointed etale algebra maps flatly to the completion of its strict henselization colimit",
+   "results": "Etale.toAlgebra and localization theorems only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.Flat",
+   "results": "AdicCompletion.flat_of_isNoetherian requires the vertex Noetherian; invoking strict henselization Noetherianity would create an import cycle",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*Flat|flat_of_isNoetherian",
+   "results": "ordinary Noetherian completion flatness only; existing project per-triple lemma uses another presentation",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointed etale stages map flatly to their colimit completion",
+   "results": "service unavailable: Internal Server Error; attempted with msearch.py",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictHenselizationCompletionFlat",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "boundary stalk calculation: flatness of strict henselization completion",
+   "via": [
+    "lem-sc-strict-henselization-completion-flat",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleCompletionStageFlat",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleCompletionStageFlat.lean",
+  "declaration": "Algebra.pointedEtale_completion_stage_flat",
+  "statement": "theorem pointedEtale_completion_stage_flat\n    (R K : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K]\n    [Algebra (IsLocalRing.ResidueField R) K]\n    [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K]\n    [IsScalarTower R (IsLocalRing.ResidueField R) K]\n    (c : Cocone ((ObjectProperty.ι\n      (fun X : Over (CommAlgCat.of R K) ↦ Etale R X.left)) ⋙\n        Over.forget (CommAlgCat.of R K)))\n    (hc : IsColimit c)\n    (t : ObjectProperty.FullSubcategory\n      (fun X : Over (CommAlgCat.of R K) ↦ Etale R X.left)) :\n    ((algebraMap c.pt\n      (AdicCompletion ((IsLocalRing.maximalIdeal R).map (algebraMap R c.pt)) c.pt)).comp\n        (c.ι.app t).hom.toRingHom).Flat",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T153938-L-1124471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T153938-L-1124471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
