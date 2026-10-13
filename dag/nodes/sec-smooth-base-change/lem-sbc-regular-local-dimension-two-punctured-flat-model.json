@@ -18,25 +18,23 @@
  },
  "proof": [
   {
-   "text": "A is normal by regularity. Apply the construction of Tag 0BM9 (pione-lemma-reformulate-purity-normal): B = Gamma(Y,O_Y) is finite and normal, and its spectrum restricts to Y. On each integral component the finite separable generic field extension has a finite integral closure; normality identifies its localizations off the closed point with the cover algebra. Depth two identifies its global sections with B. Empty covers use the zero algebra.",
+   "text": "The only boundary point is the closed point. Its stalk is ring-isomorphic to A by Mathlib stalkClosedPointIso. Transfer regularity and dimension, choose minimal generators of the maximal ideal, and use the regular-generator theorem to obtain a regular sequence. Its length occurs in the supremum defining depth, giving boundary depth at least two. The Lean private helper spells out the supremum argument.",
    "uses": [
-    "lem-weil-pbc-regular-local-localization",
-    "lem-weil-pbc-regular-ring-normal"
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
    ],
    "elementary": false
   },
   {
-   "text": "Going down and finite integrality give dimension two at each maximal ideal of B. Serre S2 gives depth at least two at these normal localizations. Their finite closed fibre has dimension zero, so the dimension formula in miracle flatness holds. They are Cohen-Macaulay and miracle flatness makes each maximal localization flat over A. Local flatness detects flatness of B, giving a finite flat structure map r.",
+   "text": "Apply the depth-two finite extension theorem to q, obtaining a finite r, the source boundary depth bound, and an isomorphism from its restriction to Y. The restriction is etale because it is isomorphic over U to q.",
    "uses": [
-    "lem-weil-pbc-going-down-normal-integral",
-    "lem-weil-pbc-serre-criterion-normal",
-    "lem-weil-pbc-miracle-flatness"
+    "lem-sbc-depth-two-finite-extension"
    ],
    "elementary": false
   },
   {
-   "text": "F = Spec B is locally Noetherian since B is finite over the Noetherian ring A. A point outside r⁻¹(U) lies over the maximal ideal of A; integrality makes its prime maximal, so the depth bound just proved applies. The restriction identification supplied by 0BM9 is over U, hence yields the displayed morphism equality. For the empty scheme the depth condition is vacuous.",
+   "text": "Apply the supplied-model flatness theorem for a regular local surface to r. Since r is finite over the Noetherian affine target, its source is locally Noetherian. Retain the source depth bound and invert the restriction isomorphism; composition with its inverse proves the displayed equation over U.",
    "uses": [
+    "lem-sbc-regular-local-surface-depth-two-flat",
     "def-weil-pbc-noetherian-ring",
     "def-weil-pbc-scheme-conventions"
    ],
@@ -44,19 +42,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-regular-local-localization",
-  "lem-weil-pbc-regular-ring-normal",
-  "lem-weil-pbc-going-down-normal-integral",
-  "lem-weil-pbc-serre-criterion-normal",
-  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sbc-depth-two-finite-extension",
+  "lem-sbc-regular-local-surface-depth-two-flat",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "Q4",
+  "by": "C1",
   "document": "Stacks Project",
-  "place": "Tag 0BMA, pione-lemma-purity-regular, dimension-two paragraph up to flatness; Tag 0BM9, pione-lemma-reformulate-purity-normal"
+  "place": "Tags 0EY6(2), 0BMA dimension-two flatness step, 00R4; depth-two extension replaces the finite-normal-algebra construction below the unit level."
  },
  "mathlib_searches": [
   {
@@ -130,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T141531-L-380570",
+  "landing": "20261013T145724-L-750496",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

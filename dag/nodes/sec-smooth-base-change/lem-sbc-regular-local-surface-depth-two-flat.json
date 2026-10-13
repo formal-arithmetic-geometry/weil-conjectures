@@ -1,0 +1,146 @@
+{
+ "id": "lem-sbc-regular-local-surface-depth-two-flat",
+ "kind": "statement",
+ "title": "A finite depth-two model over a regular local surface is flat",
+ "statement": "Let A be a regular local ring [def-weil-regular-scheme] of Krull dimension two [def-weil-pbc-krull-dimension-ring]. Let U be the complement of the closed point in Spec A [def-weil-pbc-scheme-conventions]. For any finite morphism r:F \\to Spec A [def-weil-finite-integral-morphism] whose restriction over U is etale [def-weil-etale-morphism], assume every source stalk over the closed point has depth at least two [def-weil-pbc-depth]. Then r is flat [def-weil-flat-morphism].",
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-depth",
+  "def-weil-flat-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BMA dimension-two flatness paragraph, using Tag 00R4. The supplied depth assumption replaces the normality/S2 argument in 0BMA; scheme stalk form derived in Lean."
+ },
+ "proof": [
+  {
+   "text": "Finiteness over the Noetherian spectrum makes F locally Noetherian. At points over U, transfer flatness from the etale restriction through the open-immersion stalk isomorphisms (Mathlib Flat.stalkMap and morphismRestrictStalkMap). At every other point r(x) is the closed point by hU, so its stalk is isomorphic to A by stalkClosedPointIso.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a quasi-finite ring map, Mathlib Algebra.QuasiFinite.eq_of_le_of_under_eq makes contraction strictly monotone on primes. Order.krullDim_le_of_strictMono bounds the source dimension by two. The depth/support-dimension inequality, applied to the source local ring itself, gives the opposite bound from hsource. Hence the source dimension is two.",
+   "uses": [
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the closed-fibre quotient, the image of the base maximal ideal is proper by locality. Every prime of this quotient contracts to the base maximal ideal. Quasi-finite incomparability identifies each prime with the quotient maximal ideal, since every prime in a local ring lies below it. Thus Ring.krullDimLE_zero_iff and nontriviality give dimension zero. The private fibre_dimension_zero lemma proves each of these steps from Mathlib.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The source dimension is two, its depth is at least two, and two equals the target dimension plus the fibre dimension. Miracle flatness makes the boundary stalk map flat. Apply Flat.of_stalkMap to the interior and boundary cases. Empty sources have no stalk points and need no special construction.",
+   "uses": [
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "0BMA dimension-two paragraph and 00R4; derived supplied-depth variant, with all geometric and dimension glue proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra over a regular local ring of dimension two with depth two is flat",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.flat, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.free_of_flat_of_isLocalRing, Module.FaithfullyFlat.of_flat_of_isLocalHom, Module.Flat.instOfIsDedekindDomainOfIsTorsionFree, Module.flat_of_localized_maximal, RingHom.Flat.ofLocalizationPrime",
+   "date": "2026-10-13",
+   "verdict": "No matching supplied-model flatness theorem; Mathlib facts used directly in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, RingHom.Flat",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No matching supplied-model flatness theorem; Mathlib facts used directly in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*[Ff]lat|[Ff]lat.*depth",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No matching supplied-model flatness theorem; Mathlib facts used directly in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a finite morphism to the spectrum of a two dimensional regular local ring with source depth at least two over the closed point is flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularLocalDimensionTwoPuncturedFlatModel",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity extension across the regular special divisor; dimension-two punctured local purity, flatness step of Tag 0BMA.",
+   "via": [
+    "lem-sbc-regular-local-dimension-two-punctured-flat-model",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularLocalSurfaceDepthTwoFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.flat_of_regular_local_surface_depth_two",
+  "statement": "theorem flat_of_regular_local_surface_depth_two\n    (A : Type u) [CommRing A] [IsRegularLocalRing A]\n    (hdim : ringKrullDim A = 2) (U : (Spec (.of A)).Opens)\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {F : Scheme.{u}} (r : F ⟶ Spec (.of A)) [IsFinite r] [Etale (r ∣_ U)]\n    (hsource : ∀ x : F, r x ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk x) (F.presheaf.stalk x)) :\n    Flat r",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-miracle-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T145724-L-750496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T145724-L-750496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12888,3 +12888,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/A2/Sheaf.Paper.FiniteStructureMultiplicationLift (stage 3; reviewer PASS; first push; landing 20261013T145723-L-750006 (interface); batch 20261013T145721; modules 4; new nodes 3)
 - 14:57 L: merged deliver/B3/Sheaf.Paper.ModuleCupResolutionExistence (stage 3; reviewer PASS; first push; landing 20261013T145723-L-750142 (proof); batch 20261013T145721; modules 1; new nodes 1)
 - 14:57 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedEtaleLifting (stage 3; reviewer PASS; first push; landing 20261013T145723-L-750314 (interface); batch 20261013T145721; modules 3; new nodes 2)
+- 14:57 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Morphisms.RegularLocalDimensionTwoPuncturedFlatModel (stage 3; reviewer PASS; first push; landing 20261013T145724-L-750496 (interface); batch 20261013T145721; modules 2; new nodes 1)
