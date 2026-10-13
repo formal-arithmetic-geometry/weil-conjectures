@@ -11388,3 +11388,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: returned deliver/J2/Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceExtend (reviewer RETURN: (the landing tools, head 05059127f) the delivery did not land: lean/Sheaf/AlgebraicGeometry/AbelianRawPullbackCompositio)
 - 06:25 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.PerfectSummand (reviewer RETURN: (the landing tools, head bdcbfe831) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:25 L: returned deliver/T1/Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart (reviewer RETURN: (the landing tools, head efbfcb57d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 06:25 L: merged deliver/A3/Sheaf.RingTheory.PowerSeriesParameterMapFormallySmoothAdic (stage 3; reviewer PASS; first push; landing 20261013T062514-L-730859 (interface); batch 20261013T062512; modules 4; new nodes 3)

@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.RingTheory.FormallySmoothAdicSmallKernelCriterion
+import Sheaf.RingTheory.PowerSeriesParameterPreservingRingLift
+import Sheaf.RingTheory.ClosedFiberDefectDerivationExtension
 
 /-! # Formal smoothness of parameter-preserving power-series maps
 
@@ -82,6 +85,40 @@ theorem formallySmoothAdic_of_parameters_closedFiber
         maximalIdeal R ≤ L.comap (algebraMap R T))
     Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)
         ((maximalIdeal T).map (Ideal.Quotient.mk L)) →
-      Algebra.FormallySmoothAdic R T (maximalIdeal T) := by sorry
+      Algebra.FormallySmoothAdic R T (maximalIdeal T) := by
+  dsimp only
+  let R := MvPowerSeries (Fin n) ΛR
+  let T := MvPowerSeries (Fin m) ΛT
+  let : Algebra R T := i.toAlgebra
+  intro hclosed
+  apply Algebra.formallySmoothAdic_of_smallKernel_lifts R T (maximalIdeal T)
+  intro D _ _ J hJ g hg hsmall
+  obtain ⟨f, hf, hft⟩ := exists_parameterPreserving_ringLift ΛR ΛT n m i t y
+    hy hcoeff D J hJ g hg
+  obtain ⟨δ, hδone, hδmem, hδmul, hδbase⟩ :=
+    Algebra.exists_closedFiber_defect_derivation R T t ht.1 hclosed
+      D J hJ g f hf hft hsmall
+  have hδprod (x z : T) : δ x * δ z = 0 := by
+    have hmem : δ x * δ z ∈ J ^ 2 := by
+      rw [pow_two]
+      exact Ideal.mul_mem_mul (hδmem x) (hδmem z)
+    simpa only [hJ, Ideal.mem_bot] using hmem
+  let l : T →ₐ[R] D :=
+    { toFun := fun x ↦ f x - δ x
+      map_zero' := by simp
+      map_one' := by simp [hδone]
+      map_add' := fun x z ↦ by simp only [map_add]; ring
+      map_mul' := fun x z ↦ by
+        simp only [map_mul, hδmul]
+        linear_combination -(hδprod x z)
+      commutes' := fun r ↦ by
+        change f (algebraMap R T r) - δ (algebraMap R T r) = algebraMap R D r
+        rw [hδbase]
+        ring }
+  refine ⟨l, ?_⟩
+  ext x
+  change Ideal.Quotient.mk J (f x - δ x) = g x
+  rw [map_sub, Ideal.Quotient.eq_zero_iff_mem.mpr (hδmem x), sub_zero]
+  exact RingHom.congr_fun hf x
 
 end MvPowerSeries
