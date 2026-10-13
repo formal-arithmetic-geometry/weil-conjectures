@@ -22,9 +22,121 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a pointed etale neighbourhood $(W,\\bar w)$ of $\\bar v$ with $W$ affine, and put $Z=U\\times_VW$, with projection $a:Z\\to U$. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $Z\\to W$ is quasi-compact and quasi-separated; [lem-weil-pbc-qcqs-over-affine] therefore makes the scheme $Z$ qcqs. Set $G=a^{-1}F$. For every geometric point $\\bar z$ of $Z$, [lemma-openclosed-stalk-upperstar] identifies $G_{\\bar z}$ with $F_{a\\bar z}$, so every element of $G_{\\bar z}$ has an annihilator with the prescribed prime divisors. This uses no global qcqs hypothesis on $U$ or $V$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDD, lemma-torsion-direct-image (1), affine test object; Schemes Tags 01K5, 01KU(4), 01K4 and 01KN; pullback stalk formula"
+   }
+  },
+  {
+   "text": "Let $S_{\\mathcal P}$ be the set of positive integers all of whose prime divisors belong to $\\mathcal P$, ordered by divisibility. It is a small nonempty directed partial order: $1$ belongs to it and $nm$ is a common upper bound of $n,m$. For $n\\in S_{\\mathcal P}$ define $G[n]=\\ker(n:G\\to G)$ using [def-pur-abelian-sheaf-kernel]. If $n\\mid m$, a section killed by $n$ is killed by $m$, so the inclusions form a diagram and a cocone to $G$. Form its sheaf colimit $C$ using [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], and let $c:C\\to G$ be the induced map. The index set is a subset of the natural numbers, hence fits the coefficient universe required by directed cohomology continuity.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDC, lemma-torsion-cohomology (1), restricted annihilator index; Modules on Sites Tag 03CO(1),(2),(4)"
+   }
+  },
+  {
+   "text": "We prove that the cocone just constructed is colimiting with vertex $G$, rather than invoking the unrestricted torsion union. By [prop-weil-pbc-geometric-stalks-exact], $(G[n])_{\\bar z}=\\ker(n:G_{\\bar z}\\to G_{\\bar z})$. By [lem-kun-stalks-commute-colimits], $C_{\\bar z}$ is the colimit of these subgroups. Every element of $G_{\\bar z}$ belongs to one of them by step 1. To check injectivity of $c_{\\bar z}$, represent an element of $C_{\\bar z}$ by $x\\in(G[n])_{\\bar z}$ using [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=\\mathbf Z$ (abelian groups have their canonical $\\mathbf Z$-module structure). If its image in $G_{\\bar z}$ is zero, $x=0$ because this is a subgroup inclusion, so its colimit class is zero. Thus $c_{\\bar z}$ is bijective at every geometric point. [lemma-weil-pbc-geometric-stalk-conservative] makes $c$ an isomorphism. Its composites with the colimit legs are exactly the inclusions $G[n]\\to G$, so these inclusions exhibit $G$ as their colimit.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-stalks-commute-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDC, lemma-torsion-cohomology (1), fixed-prime union justified on stalks; Tag 03PT(3),(4), theorem-exactness-stalks; Algebra Tag 00D6"
+   }
+  },
+  {
+   "text": "The scheme $Z$ is qcqs and $S_{\\mathcal P}$ is a small nonempty directed partial order. Apply [lem-weil-pbc-etale-directed-cohomology-colimit] to the diagram $n\\mapsto G[n]$ and the colimit cocone of step 3. It gives\n$$H^q(Z_{\\Et},G)=\\varinjlim_{n\\in S_{\\mathcal P}}H^q(Z_{\\Et},G[n]),$$\nwith coprojections induced by the actual inclusions $G[n]\\hookrightarrow G$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=\\mathbf Z$, any class $b\\in H^q(Z_{\\Et},G)$ is the image of a class $b_n\\in H^q(Z_{\\Et},G[n])$ for some $n\\in S_{\\mathcal P}$. There is no uniform annihilator assumption on $G$, and no torsion assumption is needed for this continuity theorem.",
+   "uses": [
+    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDC, lemma-torsion-cohomology (1); Tag 03Q5, lemma-colimit; Algebra Tag 00D6"
+   }
+  },
+  {
+   "text": "The sectionwise kernel description in [def-pur-abelian-sheaf-kernel] gives $n\\operatorname{id}_{G[n]}=0$. By [def-weil-pbc-sites-and-cohomology](2), $H^q(Z_{\\Et},-)$ is $R^q\\Gamma(Z,-)$ for the left exact additive sections functor. [lem-weil-pbc-right-derived-universal-delta-functor] says that these derived functors form a delta functor, whose degree functors are additive. Consequently\n$$n\\operatorname{id}_{H^q(Z_{\\Et},G[n])}=H^q(n\\operatorname{id}_{G[n]})=H^q(0)=0.$$\nIndeed an additive functor sends the sum of $n$ identity maps to the sum of their images, sends the identity to the identity, and sends zero to zero. Thus $nb_n=0$. The coprojection of step 4 is a group homomorphism, so $nb=0$ as well. Every class over the affine neighbourhood $W$ is therefore killed by an integer in $S_{\\mathcal P}$.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDC, lemma-torsion-cohomology (1), final sentence; Derived Categories Tags 015B(4), 05TE, Homology Definition 010Q"
+   }
+  },
+  {
+   "text": "By [sbc-lem-higher-direct-image-presheaf], $R^qu_*F$ is the sheafification of the abelian presheaf $W\\mapsto H^q(U\\times_VW,F|_{U\\times_VW})$. [lem-weil-pbc-sheafification-geometric-stalk] identifies its stalk at $\\bar v$ with the presheaf stalk. Pointed etale neighbourhoods form a cofiltered category by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; their opposite is the filtered index in [def-weil-pbc-geometric-stalks]. The elementwise colimit statement of [lem-weil-pbc-filtered-colimit-modules-elementwise], again with $R=\\mathbf Z$, therefore represents the given $y$ by a class over some pointed neighbourhood $(W_0,\\bar w_0)$. Use [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] with the open subset $W_0$ itself to obtain an affine pointed neighbourhood $(W,\\bar w)\\to(W_0,\\bar w_0)$. Restrict the representative to $W$; it has the same stalk class. All stalk index categories are taken in a common universe containing the site and its chosen geometric point, or in a small equivalent category; the colimit assertions are small-index assertions in that universe.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDD, lemma-torsion-direct-image (1); Tag 03Q8, lemma-higher-direct-images; Tag 03PT(2); Tag 03PQ and affine shrinking in Tag 04HX"
+   }
+  },
+  {
+   "text": "Apply steps 1--5 to the affine representative $b$ obtained in step 6. There is $m\\in S_{\\mathcal P}$ with $mb=0$. The canonical map from its cohomology group into the stalk is a group homomorphism and takes $b$ to $y$, hence $my=0$. By definition of $S_{\\mathcal P}$, $m>0$ and every prime divisor of $m$ belongs to $\\mathcal P$. This proves the assertion for arbitrary $q\\ge0$ and arbitrary $\\bar v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDD, lemma-torsion-direct-image (1), stalk conclusion of the fixed-prime refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-openclosed-stalk-upperstar",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-etale-directed-cohomology-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DDC, lemma-torsion-cohomology (1), and 0DDD, lemma-torsion-direct-image (1): fixed-prime refinement with the restricted directed union and stalk arguments written explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,15 +179,99 @@
    "results": "8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
    "date": "2026-10-14",
    "verdict": "no match: hits concern scheme morphisms, structure sheaf sections, elliptic curves, or site coverings; none states this etale cohomology assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion|annihilat",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned statements concern structure-sheaf sections, ring etaleness, or the abelian/Grothendieck structure of sheaf categories, not fixed-prime torsion of etale higher direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images preserve torsion etale sheaves with a fixed set of allowed primes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of abelian etale sheaves under a quasi compact quasi separated scheme morphism preserve torsion supported on a fixed set of primes",
+   "results": "8 hits; LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, instAbelianCondensedMod, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-14",
+   "verdict": "no match: returned statements concern structure-sheaf sections, ring etaleness, or the abelian/Grothendieck structure of sheaf categories, not fixed-prime torsion of etale higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"torsion\"",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: returned statements concern structure-sheaf sections, ring etaleness, or the abelian/Grothendieck structure of sheaf categories, not fixed-prime torsion of etale higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a quasi compact quasi separated scheme preserves sheaves whose stalk elements have finite order with prime divisors in P",
+   "results": "8 hits; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_of_res_eq_of_qcqs, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-14",
+   "verdict": "no match: returned statements concern structure-sheaf sections, ring etaleness, or the abelian/Grothendieck structure of sheaf categories, not fixed-prime torsion of etale higher direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-thm-bounded-allowable-torsion",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sbc-qcqs-higher-images-prime-torsion",
+  "worker": "stage1",
+  "summary": "Seven steps expand the fixed-prime refinement of Stacks 0DDC/0DDD, reusing existing nodes throughout; no new nodes. Restricted annihilator subsheaves, their stalkwise union, additive cohomology, affine qcqs test objects and sheafification stalk representatives are all justified explicitly. Statement unchanged.",
+  "blueprint": "sbc-thm-bounded-allowable-torsion Proof, final bounded allowable-torsion clause: supplies preservation of the allowed prime set on higher-image E_2 terms.",
+  "tool_uses": [
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic tool for the fixed-prime union/cohomology/stalk argument in Stacks 0DDC/0DDD; sk-rem-rest has no local node stating this fact. The base-change unit route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-openclosed-stalk-upperstar",
+  "lem-kun-stalks-commute-colimits",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-etale-directed-cohomology-colimit",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-7a48e72b8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-7a48e72b8 (reviewer sub-agent of L); spot-checked: Read the item and all seven steps in full, every cited statement, source passages, and chapter/unit route. Stacks 0DDC/0DDD support the fixed-prime refinement; hypotheses, coefficients, edge cases, dependencies, and six generic tool uses check out. No new nodes, duplicates, cycles, or repairs. Findings recorded in review.md."
+ }
 }
