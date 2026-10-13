@@ -51,9 +51,10 @@
    }
   },
   {
-   "text": "The hypothesis that E has finite Tor dimension over f^{-1}\\mathcal O_S concerns E on X, not Rf_*E on S; the passage between them is [lem-pc-proper-direct-image-finite-tor], whose hypotheses (S Noetherian, f locally of finite type, E bounded with coherent cohomology, every cohomology sheaf with support proper over S, E of finite Tor dimension in D(f^{-1}\\mathcal O_S)) are exactly those of the statement. Hence Rf_*E has finite Tor dimension as an object of D(\\mathcal O_S).",
+   "text": "The hypothesis that E has finite Tor dimension over f^{-1}\\mathcal O_S concerns E on X, not Rf_*E on S; the passage between them is [lem-pc-proper-direct-image-finite-tor], whose hypotheses (S Noetherian, f locally of finite type, E bounded with coherent cohomology, every cohomology sheaf with support proper over S, E of finite Tor dimension in D(f^{-1}\\mathcal O_S)) are exactly those of the statement. Hence Rf_*E has finite Tor dimension as an object of D(\\mathcal O_S). In Lean the cited finite-Tor lemma uses a common morphism universe for both derived localizations. Choose a complex K representing E by essential surjectivity of Q. The homology factorization identifies its cohomology in the original and standard localizations; finite generation and coherence are transported by finite local generators and the kernel isomorphism for postcomposition with an isomorphism, and proper support by the stalk isomorphisms. The relative finite-Tor witness is transported by Mathlib Localization.uniq and Localization.compUniqFunctor. Replace bounds a,b by min(a,b),b to obtain ordered bounds. Apply the cited theorem in the standard source and target localizations. By [def-pc-ringed-spaces-derived-direct-image], the K-injective factorization identifies both versions of the direct image with Q(f_*I(K)), using exactly the same complex f_*I(K). Transport each K-flat representative and its localization isomorphism back along Localization.uniq; the tensor complexes and their homology remain unchanged. This gives finite Tor dimension in the original target localization, without changing any hypothesis.",
    "uses": [
-    "lem-pc-proper-direct-image-finite-tor"
+    "lem-pc-proper-direct-image-finite-tor",
+    "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false,
    "source": {
@@ -77,12 +78,13 @@
   "lem-pc-direct-image-bounded-coherent",
   "lem-pc-noetherian-bounded-coherent-pseudo-coherent",
   "lem-pc-proper-direct-image-finite-tor",
+  "def-pc-ringed-spaces-derived-direct-image",
   "lem-pc-pseudo-coherent-finite-tor-perfect"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV)"
+  "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV); Lean localization-universe transport by U4 using Mathlib uniqueness of localization"
  },
  "mathlib_searches": [
   {
@@ -174,5 +176,15 @@
   "reviewer": "R-bcp",
   "group": "Q1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T025310-L-3425294",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

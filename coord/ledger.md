@@ -10826,3 +10826,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/T2/Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime (stage 3; reviewer PASS; first push; landing 20261013T025308-L-3424917 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:53 L: merged deliver/T3/Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension (stage 3; reviewer PASS; first push; landing 20261013T025309-L-3425017 (interface); batch 20261013T025255; modules 3; new nodes 2)
 - 02:53 L: merged deliver/U3/Sheaf.CategoryTheory.CartanEilenbergConeGradedShortComplex (stage 3; reviewer PASS; first push; landing 20261013T025309-L-3425145 (interface); batch 20261013T025255; modules 3; new nodes 2)
+- 02:53 L: merged deliver/U4/Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261013T025310-L-3425294 (proof); batch 20261013T025255; modules 1; new nodes 0)
