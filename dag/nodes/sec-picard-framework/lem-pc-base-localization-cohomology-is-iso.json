@@ -1,0 +1,145 @@
+{
+ "id": "lem-pc-base-localization-cohomology-is-iso",
+ "kind": "statement",
+ "title": "BaseLocalizationCohomologyIsIso",
+ "statement": "For commutative rings R, Rp, A, B, D with R to Rp a localization at S, compatible R and Rp algebra structures on A and B, tensor coefficient maps to D, and derived categories, let Q be any A-cochain complex and L, K the base-derived tensor cohomology models over R and Rp. In every degree i the canonical B-linear baseLocalizationCohomologyMap of [lem-pc-base-localization-map] is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "choose a K-flat Rp-resolution P of the restricted input Q. Restriction to R\npreserves K-flatness: tensor an acyclic R-complex with Rp, use exactness of localization,\nand identify its tensor with P by associativity. Apply the K-flat counit theorem to\nboth universal derived functors on P. The counit equation for the universal lift,\nand the ordinary localization tensor isomorphism, then make the lift on P invertible.\nThe augmentation P to Q is a quasi-isomorphism over both bases; naturality transports\ninvertibility to Q. Apply the B-homology functor and conjugate by the two model\ncohomology isomorphisms. This is exactly baseLocalizationCohomologyMap. Identity\nlocalization gives model transport; when S contains zero, both cohomologies are zero.\nNo algebra structures on D over A or B, and no flatness of D, are needed.",
+   "uses": [
+    "lem-pc-base-localization-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-map",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map",
+   "results": [
+    "TensorProduct.map",
+    "TensorProduct.map_id",
+    "LinearMap.lTensor_def",
+    "LinearMap.rTensor_def",
+    "TensorProduct.range_map",
+    "LinearMap.lTensor_comp_rTensor",
+    "LinearMap.rTensor_comp_lTensor",
+    "TensorProduct.toLinearMap_congr"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*derived|derived.*localization",
+   "results": [
+    "Mathlib/Algebra/Homology/Localization.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": [
+    "IsLocalization.tensorProduct_tensorProduct",
+    "IsLocalization.Away.tensorEquiv",
+    "IsLocalization.Away.tensorRightEquiv",
+    "IsLocalization.algebraTensorEquiv",
+    "IsLocalization.tensorRight",
+    "IsLocalization.tensor",
+    "IsLocalization.Away.tensorRight",
+    "IsLocalization.Away.tensor"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseLocalizationIso",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Canonical base-localization comparison: BaseLocalizationCohomologyIsIso",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationCohomologyIsIso",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationCohomologyIsIso.lean",
+  "declaration": "RingTensorCohomology.baseLocalizationCohomologyMap_isIso",
+  "statement": "theorem baseLocalizationCohomologyMap_isIso (S : Submonoid R) [IsLocalization S Rp] (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (i : ℤ) : IsIso (baseLocalizationCohomologyMap R Rp B A D S Q L K i)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

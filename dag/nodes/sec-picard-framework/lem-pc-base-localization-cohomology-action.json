@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-base-localization-cohomology-action",
+ "kind": "statement",
+ "title": "BaseLocalizationCohomologyAction",
+ "statement": "For the commutative rings, compatible R and Rp algebra structures, localization S, complex Q and models L, K of [lem-pc-base-localization-map], every degree i, a in A and x in L.cohomology i satisfy f((a tensor 1) smul x) = (a tensor 1) smul f(x), where f is the canonical B-linear localization cohomology map. No invertibility hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply naturality of baseLocalizationInputNatIso to a times the identity on Q. Apply L.derived and combine with naturality of baseLocalizationDerivedMap, obtaining the commuting square for the two derived multiplication endomorphisms. Apply B-homology. Cancel the target cohomology isomorphism, use cohomologyIso_smul for both models, and evaluate the resulting B-linear map equality at x.",
+   "uses": [
+    "lem-pc-base-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map",
+   "results": [
+    "TensorProduct.map",
+    "TensorProduct.map_id",
+    "LinearMap.lTensor_def",
+    "LinearMap.rTensor_def",
+    "TensorProduct.range_map",
+    "LinearMap.lTensor_comp_rTensor",
+    "LinearMap.rTensor_comp_lTensor",
+    "TensorProduct.toLinearMap_congr"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*derived|derived.*localization",
+   "results": [
+    "Mathlib/Algebra/Homology/Localization.lean",
+    "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": [
+    "IsLocalization.tensorProduct_tensorProduct",
+    "IsLocalization.Away.tensorEquiv",
+    "IsLocalization.Away.tensorRightEquiv",
+    "IsLocalization.algebraTensorEquiv",
+    "IsLocalization.tensorRight",
+    "IsLocalization.tensor",
+    "IsLocalization.Away.tensorRight",
+    "IsLocalization.Away.tensor"
+   ],
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseLocalizationIso",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Canonical base-localization comparison: BaseLocalizationCohomologyAction",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationCohomologyAction",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationCohomologyAction.lean",
+  "declaration": "RingTensorCohomology.baseLocalizationCohomologyMap_smul",
+  "statement": "theorem baseLocalizationCohomologyMap_smul (S : Submonoid R) [IsLocalization S Rp] (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (i : ℤ) (a : A) (x : L.cohomology i) : baseLocalizationCohomologyMap R Rp B A D S Q L K i ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • x) = (Algebra.TensorProduct.includeLeft (S := Rp) a : A ⊗[Rp] B) • baseLocalizationCohomologyMap R Rp B A D S Q L K i x",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T231541-L-1819412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
