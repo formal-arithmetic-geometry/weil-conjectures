@@ -12253,3 +12253,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/D2/Sheaf.AlgebraicGeometry.OrderedCechModuleSecondSortingBoundary (stage 3; reviewer PASS; first push; landing 20261013T113337-L-3181464 (interface); batch 20261013T113333; modules 2; new nodes 1)
 - 11:33 L: merged deliver/D2/Sheaf.AlgebraicGeometry.RawModuleRestrictedAbelianNaturalIso (stage 3; reviewer PASS; first push; landing 20261013T113337-L-3181682 (interface); batch 20261013T113333; modules 3; new nodes 2)
 - 11:33 L: merged deliver/D3/Sheaf.AlgebraicGeometry.EtaleCoefficientProductIdentityComponent (stage 3; reviewer PASS; first push; landing 20261013T113338-L-3181811 (proof); batch 20261013T113333; modules 1; new nodes 0)
+- 11:33 L: merged deliver/D4/Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink (stage 3; reviewer PASS; first push; landing 20261013T113338-L-3181977 (interface); batch 20261013T113333; modules 3; new nodes 2)

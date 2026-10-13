@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-open-module-stalk-restriction-comparison",
+ "kind": "statement",
+ "title": "Natural comparison of open module stalks under restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $V\\subseteq W\\subseteq X$ open, and $x\\in V$. Let $B$ be the restriction functor on module sheaves from the slice site over $W$ to that over $V$ [def-pur-localized-ringed-site]. Let $S_V$ and $S_W$ be the open module stalk functors at $x$, with values in modules over $\\mathcal O_{X,x}$ [def-sc-open-module-stalk-functor]. There is a natural isomorphism $B\\circ S_V\\cong S_W$, natural in every module sheaf on the slice site over $W$. No finiteness assumption is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00A0, lemma-restrict (3), including its module-sheaf clause; https://stacks.math.columbia.edu/tag/00A0, read 2026-10-13. This is step 3 of lem-sc-perfect-open-stalk-degreewise-shrink."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-localized-ringed-site",
+  "def-sc-open-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the slice-site equivalences to identify B with restriction along V.toScheme to W.toScheme, via Mathlib Scheme.Modules.overMapCompOverEquiv. Transport a sheaf on the W slice to W.toScheme. The module restriction-stalk component construction gives the linear comparison sending each restricted germ to the ambient germ.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-sc-open-module-stalk-functor",
+    "new-module-restriction-stalk-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open neighbourhoods of x inside V are cofinal among those inside W: intersect any W neighbourhood with V. The additive comparison is therefore the invertible colimit comparison Scheme.Modules.restrictStalkNatIso. The linear maps in the preceding step have this same germ formula, so their underlying additive maps are that comparison and are invertible. Equality of the composite open-immersion stalk-ring maps permits restriction of scalars to O_X,x.",
+   "uses": [
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every sheaf morphism, both routes around the comparison square act identically on every germ, by stalkFunctor_map_germ_apply. Stalk_hom_ext gives naturality. Assemble the invertible linear components as a natural isomorphism. V=W gives the identity; the empty open has no point x.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-sc-open-module-stalk-functor",
+  "new-module-restriction-stalk-components"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D4",
+  "document": "Stacks Project",
+  "place": "Tag 00A0, lemma-restrict (3), including its module-sheaf clause; https://stacks.math.columbia.edu/tag/00A0, read 2026-10-13. This is step 3 of lem-sc-perfect-open-stalk-degreewise-shrink."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalk of a sheaf of modules after restricting to a smaller open subset is naturally isomorphic to the original stalk",
+   "date": "2026-10-13",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between open module stalk functor after overMap restriction and original stalk functor",
+   "date": "2026-10-13",
+   "digest": "b06594a2a8aeaae2",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_apply",
+   "verdict": "Related generic declarations only; no exact statement with this open-site module-stalk interface."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|openModuleStalkFunctor",
+   "date": "2026-10-13",
+   "digest": "ada769008021fbd2",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "Related generic declarations only; no exact statement with this open-site module-stalk interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the local perfect-model comparison in the route through perfect H0 locally closed; arbitrary inverse chain-map descent; shrink part of lem-sc-perfect-open-stalk-chain-map-lift; Natural comparison of open module stalks under restriction",
+   "via": [
+    "lem-sc-perfect-open-stalk-degreewise-shrink",
+    "lem-sc-perfect-open-stalk-chain-map-lift",
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleStalkRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_openModuleStalkRestrictionComparison",
+  "statement": "theorem nonempty_openModuleStalkRestrictionComparison\n    (X : Scheme.{u}) (W V : X.Opens) (hVW : V ≤ W)\n    (x : X) (hxW : x ∈ W) (hxV : x ∈ V) :\n    Nonempty\n      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n          (homOfLE hVW : V ⟶ W) ⋙ openModuleStalkFunctor X V ⟨x, hxV⟩ ≅\n        openModuleStalkFunctor X W ⟨x, hxW⟩)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T113338-L-3181977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T113338-L-3181977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
