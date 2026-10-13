@@ -1,0 +1,90 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group V2
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Algebra.Regular.SMul
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Localization.Ideal
+
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+
+/-! # Residue degrees of root normalization at the divisor generic point
+
+Source: Stacks Project, Tags 09EB and 0307. -/
+
+@[expose] public section
+universe u
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Scheme
+
+/-- The normalization residue degree at the root divisor divides the torsor group order.
+
+Source: Stacks Project, Tag 09EB (Galois DVR degree formula) and Tag 0307
+(localization of integral closure).
+
+Proof: Put n=|G|>0 and t=root(X^n-g). The monic quotient A is free over H, so g
+remains a nonzerodivisor and t^n=g makes t a nonzerodivisor. Evaluation at t=0
+identifies A/(t) with the domain H/(g), hence (t) is prime. The principal ideal
+theorem makes its localization one dimensional: t is regular, so this prime is
+not minimal. The assumed regularity therefore makes A_(t) a DVR. The integral
+Cartier centre has precisely the irreducible support V(t), so j(eta) is this prime.
+Localization of relative normalization identifies its stalks over this point with
+localizations of the integral closure of A_(t) in the generic fibre of p. The
+compatible beta identifies p with the base change of the original G-torsor to V;
+the fraction field of A_(t) lies in V. A finite etale G-torsor over a field is a
+product of finite Galois field extensions: each factor has a stabilizer subgroup
+of G as its Galois group, so its degree divides n. The integral closure is finite
+by the assumed finiteness of the relative normalization. For each factor, Tag
+09EB gives [L:K]=r*e*f, where f is its residue degree at any prime above the DVR
+maximal ideal. Thus f divides [L:K] and hence n. The localized integral-closure
+comparison respects the base map; passing to residue fields identifies this f
+with the finrank for the displayed canonical residueFieldMap. This argument
+uses neither invertibility of n nor Abhyankar's lemma. Empty fibres are vacuous;
+for n=1 every such residue degree is one. No perfectness assumption is made.
+(blueprint: lem-sbc-root-normalization-generic-stalk-residue-degree-dvd) -/
+theorem root_normalization_generic_stalk_residue_degree_dvd
+    {L U : Scheme.{u}} (i : U ⟶ L)
+    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)
+    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)
+    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R)
+      (PrimeSpectrum.basicOpen f))
+    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R)
+      (PrimeSpectrum.basicOpen f) = pullback.snd i φ)
+    (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)
+    (hg : IsSMulRegular H (b.hom f))
+    [IsDomain (H ⧸ Ideal.span {b.hom f})] :
+    let g := b.hom f
+    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)
+    let N := Spec (CommRingCat.of A)
+    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
+    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)
+    (∀ (Q : Ideal A) (hQ : Q.IsPrime),
+      letI := hQ
+      AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) ∈ Q →
+        IsRegularLocalRing (Localization.AtPrime Q)) →
+    ∀ (hN : IsLocallyNoetherian N),
+    letI := hN
+    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)
+    ∀ (hp : IsFinite p),
+    letI := hp
+    let a := p ≫ V.ι
+    Etale p → IsFinite a.fromNormalization →
+    ∀ (D : Scheme.{u}) (j : D ⟶ N),
+      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →
+      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →
+      ∀ (η : D), IsGenericPoint η Set.univ →
+      ∀ (x : a.normalization), a.fromNormalization x = j η →
+        letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra
+        Module.finrank (N.residueField (a.fromNormalization x))
+          (a.normalization.residueField x) ∣ Nat.card G := by sorry
+
+end AlgebraicGeometry.Scheme

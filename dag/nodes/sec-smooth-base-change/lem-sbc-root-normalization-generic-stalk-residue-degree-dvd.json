@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-root-normalization-generic-stalk-residue-degree-dvd",
+ "kind": "statement",
+ "title": "Root normalization residue degrees divide the torsor group order",
+ "statement": "Let i:U -> L and W -> U be a finite etale G-torsor, G finite. Let phi:Spec R -> L, f in R, and an isomorphism beta:U times_L Spec R = D(f) compatible with the maps to Spec R. Let H be a commutative Noetherian R-algebra via b, put g=b(f) and n=|G|, assume multiplication by g is injective, and H/(g) is a domain. Set A=H[t]/(t^n-g), N=Spec A and V=D(g). Assume prime localizations containing t are regular local and N is locally Noetherian. Pull the given torsor back to $V$, obtaining $p:P\\to V$. Assume $p$ is finite etale. Set $a=p\\circ V.\\iota:P\\to N$ and let $a^{\\mathrm{norm}}:a.\\mathrm{normalization}\\to N$ be its concrete relative normalization; assume this map is finite. Let j:D -> N be a regular integral effective Cartier centre with image N minus V. At every normalization point x above j(eta), where eta is generic in D, the residue extension induced by the canonical residueFieldMap [def-weil-residue-field] is finite, and its vector-space degree [def-weil-vector-space-dimension] divides n=|G|. Formally its Module.finrank divides n; since n>0 this also forces finite dimensionality. No invertibility of n, separability of residues, or maximal-ideal equality is assumed or concluded.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-relative-normalization",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-residue-field",
+  "def-weil-vector-space-dimension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB (Galois DVR degree formula) and 0307 (localization of integral closure)"
+ },
+ "proof": [
+  {
+   "text": "The root t is regular and A/(t)=H/(g) is a domain. The prime (t) has height one by the principal ideal theorem and regularity of t. Its assumed regular localization is a DVR; the generic Cartier point j(eta) corresponds to (t).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The compatible beta identifies p with a base change of the G-torsor. Over the fraction field of A_(t), its connected factors are Galois with stabilizer subgroups of G, so each field degree divides |G|.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Localize the concrete relative normalization at (t), using normalization stalk base change. The assumed finiteness identifies its local rings with the finite integral closures of these field factors. The comparisons respect the canonical residue maps.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tag 09EB gives [L:K]=r*e*f in every factor. The residue degree f therefore divides that field degree and hence |G|. No tame ramification or unit assumption is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "V2",
+  "document": "Stacks Project",
+  "place": "Tags 09EB and 0307; Galois degree calculation over the fraction field of the root DVR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The residue field degree in the normalization of a finite Galois torsor over a discrete valuation ring divides the order of the group",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Galois extension of fraction fields of discrete valuation rings the residue degree divides the Galois group order",
+   "date": "2026-10-14",
+   "results": "8 hits: Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.card_inertia_eq_ramificationIdxIn, Ideal.inertiaDegIn_ne_zero, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.inertiaDeg_le_finrank",
+   "verdict": "Useful algebraic ingredients only; no scheme normalization degree theorem. The Galois ramification identity requires the integral-closure and Galois-group identifications that this node supplies."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*degree|residue.*finrank|finrank.*residue",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/RamificationInertia/Inertia.lean, Mathlib/RingTheory/RamificationInertia/Inertia.lean, Mathlib/RingTheory/RamificationInertia/Inertia.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean",
+   "verdict": "Useful algebraic ingredients only; no scheme normalization degree theorem. The Galois ramification identity requires the integral-closure and Galois-group identifications that this node supplies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueSeparable",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-root-normalization-generic-stalk-residue-separable",
+   "place": "Galois residue-degree divisibility subargument; before using invertibility of the group order"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueDegreeDvd",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationGenericStalkResidueDegreeDvd.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_normalization_generic_stalk_residue_degree_dvd",
+  "statement": "theorem root_normalization_generic_stalk_residue_degree_dvd\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R)\n      (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R)\n      (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)\n    (hg : IsSMulRegular H (b.hom f))\n    [IsDomain (H ⧸ Ideal.span {b.hom f})] :\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    (∀ (Q : Ideal A) (hQ : Q.IsPrime),\n      letI := hQ\n      AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g) ∈ Q →\n        IsRegularLocalRing (Localization.AtPrime Q)) →\n    ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (x : a.normalization), a.fromNormalization x = j η →\n        letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra\n        Module.finrank (N.residueField (a.fromNormalization x))\n          (a.normalization.residueField x) ∣ Nat.card G",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-396967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211119-L-396967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
