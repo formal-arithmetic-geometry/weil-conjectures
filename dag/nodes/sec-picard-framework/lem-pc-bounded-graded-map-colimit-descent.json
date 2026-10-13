@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-bounded-graded-map-colimit-descent",
+ "kind": "statement",
+ "title": "Descent of bounded graded families of module maps",
+ "statement": "Let I be a directed preorder, F : I → CRing a functor, i₀ an element of I, and A = colimit F [def-weil-pbc-category-colimit]. Let P and Q be cochain complexes of F(i₀)-modules [def-pc-cochain-complex-modules]. Fix integers a,b such that Pⁿ is zero whenever n<a or b<n. Assume every Pⁿ and Qⁿ is finitely presented [def-sc-finitely-presented-module]. Let fⁿ : A⊗Pⁿ → A⊗Qⁿ be an arbitrary family of module maps, with no chain-map equation imposed. Then there are i≥i₀ and maps vⁿ : F(i)⊗Pⁿ → F(i)⊗Qⁿ for all integers n such that extension to A, conjugated by the canonical scalar-extension comparisons [def-pc-complex-scalar-extension-hom], equals fⁿ in every degree. No differential compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine case (1), via Algebra Tag 05N7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sc-finitely-presented-module",
+  "def-pc-complex-scalar-extension-hom"
+ ],
+ "proof": [
+  {
+   "text": "For each n in the finite integer interval [a,b], apply the map clause of [lem-pc-fp-module-map-descent-affine] to Pⁿ,Qⁿ and fⁿ. Its comparisons are the canonical ones because they take 1 tensor x to 1 tensor (1 tensor x); scalar-extension morphisms are determined by these pure tensors. For a preorder use the presentation-matrix argument: lift the finitely many generator-image coefficients and relation witnesses, and make their finitely many coefficient equations true by the elementwise filtered-ring criterion [lem-pc-filtered-colimit-commrings-elementwise]. Only directedness is used. Alternatively pass to mutual-comparability classes, choose representatives, transport the finite presentations along the resulting ring isomorphisms, and apply the partial-order version to that equivalent diagram.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a common upper index for i₀ and the finitely many obtained indices by directedness. Extend the maps to this index; naturality and associativity coherence of scalar extension identify their further extensions with fⁿ. Outside [a,b], Pⁿ is zero, hence its scalar extensions are zero, so take the zero map and use uniqueness of a map from a zero object. If b<a the finite list is empty and i₀ suffices.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine case (1) and Algebra Tag 05N7; explicit graded-map and finite-square specialization by N4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded graded family of maps between scalar extensions of finitely presented modules descends along a directed colimit of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded graded family of maps between scalar extensions of finitely presented modules descends along a directed colimit of rings",
+   "results": "ModuleCat.directLimitIsColimit_desc; ModuleCat.directLimitIsColimit; Module.DirectLimit.lift; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; TensorProduct.fromDirectLimit; Submodule.FG.lTensor.directLimit_apply'; Submodule.FG.rTensor.directLimit_apply; Submodule.FG.rTensor.directLimit_apply'",
+   "date": "2026-10-13",
+   "verdict": "no match: returned declarations do not descend graded maps or finite chain squares over varying rings"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*descen|descen.*graded|FinitePresentation.*colimit",
+   "results": "Mathlib/Data/FunLike/Graded.lean; Mathlib/Data/FunLike/Graded.lean; Mathlib/RingTheory/GradedAlgebra/RingHom.lean; Mathlib/RingTheory/GradedAlgebra/RingHom.lean",
+   "date": "2026-10-13",
+   "verdict": "no match: returned declarations do not descend graded maps or finite chain squares over varying rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePerfectChainMapDescent",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine calculation: lifting the finitely many graded map components",
+   "via": [
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedGradedMapColimitDescent",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedGradedMapColimitDescent.lean",
+  "declaration": "CochainComplex.exists_bounded_graded_map_of_directed_colimit",
+  "statement": "theorem exists_bounded_graded_map_of_directed_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (a b : ℤ) (hzero : ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hP : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (P.X n))\n    (hQ : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (Q.X n))\n    (f : ∀ n : ℤ,\n      (ModuleCat.extendScalars (colimit.ι F i₀).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (colimit.ι F i₀).hom).obj (Q.X n)) :\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∃ (i : Set.Ici i₀)\n      (v : ∀ n : ℤ,\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n          (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n)),\n      ∀ n : ℤ, (e i P).hom.f n ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n          (e i Q).inv.f n = f n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T082359-L-1641614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T082359-L-1641614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

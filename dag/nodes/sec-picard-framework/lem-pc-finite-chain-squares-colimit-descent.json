@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-finite-chain-squares-colimit-descent",
+ "kind": "statement",
+ "title": "Eventual commutativity of a finite interval of chain squares",
+ "statement": "Let I be a directed preorder, F : I → CRing, i₀∈I, A = colimit F [def-weil-pbc-category-colimit], and P,Q cochain complexes of F(i₀)-modules [def-pc-cochain-complex-modules] whose terms are finitely presented [def-sc-finitely-presented-module]. Fix i≥i₀ and a graded family vⁿ : Pᵢⁿ → Qᵢⁿ, where Pᵢ,Qᵢ denote extension from F(i₀) to F(i). Fix integers a,b. Assume that for every a≤n≤b the two composites vⁿ followed by d_Q and d_P followed by vⁿ⁺¹ become equal after extension from F(i) to A. Then there are j≥i and a graded family wⁿ : Pⱼⁿ → Qⱼⁿ such that the chain squares commute at j for a≤n≤b, and in every integer degree the extensions of wⁿ and vⁿ to A agree after the canonical scalar-extension comparisons [def-pc-complex-scalar-extension-hom]. No support bound, no map descent, and no equations outside [a,b] are asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, affine case (1), via Algebra Tag 05N7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-sc-finitely-presented-module",
+  "def-pc-complex-scalar-extension-hom"
+ ],
+ "proof": [
+  {
+   "text": "For each integer n in [a,b], form the two composites vⁿ d_Q and d_P vⁿ⁺¹ from Pᵢⁿ to Qᵢⁿ⁺¹. Extension of scalars preserves finite presentations, so both modules are finitely presented over F(i). Functoriality identifies the assumption with equality of the scalar extensions of these composites. Apply the equality clause of [lem-pc-fp-module-map-descent-affine] to obtain a later index where this equality holds. For a preorder the finite-presentation matrix proof uses only finitely many generator values, target relation witnesses, the filtered-ring elementwise criterion [lem-pc-filtered-colimit-commrings-elementwise], and directed upper bounds. Equivalently transport through the mutual-comparability quotient equivalence before applying the partial-order theorem.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose j above i and every one of these finitely many indices. Extend every vⁿ to j, including degrees not in the interval, and conjugate by the canonical associativity comparisons to obtain wⁿ. Naturality with respect to both differentials identifies its square with the scalar extension of the corresponding square at i, which is equal at j. Associativity coherence identifies its further extension to A with that of vⁿ in every degree. For an empty interval take j=i and use identity-extension comparisons.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine case (1) and Algebra Tag 05N7; explicit graded-map and finite-square specialization by N4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many chain squares of a fixed graded module map commute at a later stage if they commute over a directed ring colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many equations of module maps which hold over a directed colimit of rings hold at a later stage",
+   "results": "Module.DirectLimit.exists_of₂; Module.DirectLimit.exists_of; Module.DirectLimit.exists_eq_of_of_eq; Module.DirectLimit.induction_on; DirectLimit.Module.of_f; Module.DirectLimit.of.zero_exact; Module.DirectLimit.Eqv.of_map; ModuleCat.directLimitIsColimit",
+   "date": "2026-10-13",
+   "verdict": "no match: returned declarations do not descend graded maps or finite chain squares over varying rings"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*(commut|equal).*map|descen.*(equation|relation)|chain.*square.*colimit",
+   "results": "Mathlib/Order/OrderIsoNat.lean; Mathlib/Order/Filter/Germ/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no match: returned declarations do not descend graded maps or finite chain squares over varying rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffinePerfectChainMapDescent",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine calculation: imposing the finitely many chain-square relations",
+   "via": [
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteChainSquaresColimitDescent.lean",
+  "declaration": "CochainComplex.eventually_commuting_finite_chain_squares",
+  "statement": "theorem eventually_commuting_finite_chain_squares\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hP : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (P.X n))\n    (hQ : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (Q.X n))\n    (i : Set.Ici i₀)\n    (v : ∀ n : ℤ,\n      (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n))\n    (a b : ℤ)\n    (hcomm : ∀ n : ℤ, a ≤ n → n ≤ b →\n      (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map\n          ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).map\n            (Q.d n (n + 1))) =\n      (ModuleCat.extendScalars (colimit.ι F i.val).hom).map\n          ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).map\n            (P.d n (n + 1))) ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v (n + 1))) :\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∃ (j : Set.Ici i₀), i.val ≤ j.val ∧\n      ∃ (w : ∀ n : ℤ,\n        (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).obj (P.X n) ⟶\n          (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).obj (Q.X n)),\n        (∀ n : ℤ, a ≤ n → n ≤ b →\n          w n ≫ (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).map\n            (Q.d n (n + 1)) =\n          (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).map\n            (P.d n (n + 1)) ≫ w (n + 1)) ∧\n        (∀ n : ℤ, (e j P).hom.f n ≫\n          (ModuleCat.extendScalars (colimit.ι F j.val).hom).map (w n) ≫\n            (e j Q).inv.f n =\n          (e i P).hom.f n ≫\n            (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n              (e i Q).inv.f n)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T082359-L-1641614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T082359-L-1641614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
