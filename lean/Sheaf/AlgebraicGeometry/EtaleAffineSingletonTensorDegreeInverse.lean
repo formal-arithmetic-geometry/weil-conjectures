@@ -5,11 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverseBijective
 
 @[expose] public section
 
@@ -52,7 +48,23 @@ theorem exists_singletonTensorDegreeComparison_inverse
     (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :
     ∃ inv : (singletonTensorCech X F U W g).X n ⟶
       (singletonTensorAmitsur X F U W g).X n,
-      f ≫ inv = 𝟙 _ ∧ inv ≫ f = 𝟙 _ := by sorry
+      f ≫ inv = 𝟙 _ ∧ inv ≫ f = 𝟙 _ := by
+  have hb := singletonTensorDegreeComparisonHom_bijective X F U W g hU hW n f hf
+  let e : (singletonTensorAmitsur X F U W g).X n ≃+
+      (singletonTensorCech X F U W g).X n :=
+    AddEquiv.ofBijective (AddCommGrpCat.Hom.hom f) hb
+  let inv : (singletonTensorCech X F U W g).X n ⟶
+      (singletonTensorAmitsur X F U W g).X n :=
+    AddCommGrpCat.ofHom e.symm.toAddMonoidHom
+  refine ⟨inv, ?_, ?_⟩
+  · apply AddCommGrpCat.hom_ext
+    ext x
+    change e.symm (e x) = x
+    simp
+  · apply AddCommGrpCat.hom_ext
+    ext x
+    change e (e.symm x) = x
+    simp
 
 end
 end AlgebraicGeometry.Scheme
