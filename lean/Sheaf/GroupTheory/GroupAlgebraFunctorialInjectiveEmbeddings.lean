@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.MonoidAlgebra.Defs
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-!
 # Functorial injective embeddings for group-ring modules
@@ -38,6 +40,23 @@ theorem groupAlgebra_functorialInjectiveEmbeddings
     ∃ (J : ModuleCat.{max u v} (MonoidAlgebra R G) ⥤
         ModuleCat.{max u v} (MonoidAlgebra R G)) (j : 𝟭 _ ⟶ J),
       (∀ M, Mono (j.app M)) ∧ ∀ M, Injective (J.obj M) := by
-  sorry
+  open scoped ZeroObject in
+  exact by
+    let C := ModuleCat.{max u v} (MonoidAlgebra R G)
+    let F : C ⥤ Arrow C :=
+      { obj := fun M ↦ Arrow.mk (0 : M ⟶ 0)
+        map := fun f ↦ { left := f, right := 𝟙 0 } }
+    let d := MorphismProperty.functorialFactorizationData
+      (MorphismProperty.monomorphisms C) (MorphismProperty.monomorphisms C).rlp
+    let j : 𝟭 C ⟶ F ⋙ d.Z :=
+      { app := fun M ↦ d.i.app (F.obj M)
+        naturality := fun M N f ↦ d.i.naturality (F.map f) }
+    refine ⟨F ⋙ d.Z, j, ?_, ?_⟩
+    · intro M
+      exact d.hi (F.obj M)
+    · intro M
+      change Injective
+        (IsGrothendieckAbelian.monoMapFactorizationDataRlp (0 : M ⟶ 0)).Z
+      infer_instance
 
 end ModuleCat
