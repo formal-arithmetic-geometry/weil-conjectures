@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-scheme-canonical-tensor-shift-right-unitor",
+ "kind": "statement",
+ "title": "Canonical tensor shift right-unitor square",
+ "statement": "For a scheme Y [def-pc-scheme], its derived category [def-pc-derived-category] with the recorded derived tensor [def-pc-scheme-derived-tensor-structure] and canonical shifts [def-sc-scheme-canonical-tensor-shift], let P be K-flat [def-pc-kflat-complex], K = Q(P), and tau the right unitor from tensorRight of the unit to the identity. Then s_T(1)_K followed by tau_K[1] equals tau_{K[1]} followed by the standard identity-functor shift s_I(1)_K.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YH",
+  "place": "Derived tensor localization; upstream BifunctorShift.mapBifunctorShift₁Iso_hom_rightUnitor_hom and ShiftUnitor.rightUnitor_commShift representative calculation"
+ },
+ "proof": [
+  {
+   "text": "Let U be the unit complex, concentrated in degree zero. For a K-flat P,\nthe tensor localization comparison Q(P) tensor Q(U) to Q(P tensor U) is invertible.\nThe derived right unitor at Q(P) is this comparison followed by the localization\nof the complex right unitor, with the localization unit identification inserted.\nThis is the right-unit identity of the lax monoidal localization functor.\nThe defining shift square for the localized two-variable tensor comparison,\nspecialized to P and U, relates the derived first-variable shift to the complex\nKoszul shift. In each summand of the total tensor complex with U, its second degree\nis zero, so the Koszul sign for translation of the first variable is one.\nThus the complex right unitor commutes with that shift. Apply localization to\nthis equality and substitute the right-unit identity into the comparison square.\nNaturality of the right unitor cancels the shift comparison for the inclusion of\nK-flat complexes; naturality in the second variable absorbs the unit identification.\nCancel the invertible tensor localization comparison and localization shift maps.\nThe resulting equation is exactly the displayed square, with the usual shift of\nthe identity functor. All comparisons restrict to the unique morphism on zero\nobjects, so this also covers P zero and the empty scheme.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-kflat-complex",
+    "def-sc-scheme-canonical-tensor-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-sc-scheme-canonical-tensor-shift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ShiftUnitor.lean",
+  "place": "rightUnitor_commShift: generalize its representative-complex argument from the unit first factor to arbitrary K-flat first factors, with independent universes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right unitor of the derived tensor product commutes with the canonical integer translation of complexes",
+   "date": "2026-10-13",
+   "results": "HomologicalComplex.rightUnitor, rightUnitor', rightUnitor'_inv_comm: no derived-shift compatibility statement",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "date": "2026-10-13",
+   "results": "NatTrans.CommShift.rightUnitor is the functor-composition unitor, not the tensor unitor",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitor.*commShift|commShiftTensorRight_eq",
+   "date": "2026-10-13",
+   "results": "Mathlib.CategoryTheory.Shift.CommShift: composition rightUnitor only; source Shift has shift equality on K-flat objects",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right unitor of the derived tensor product commutes with canonical integer shifts",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor unit natural isomorphism compatible with translation in derived category",
+   "date": "2026-10-13",
+   "results": "singleFunctorIsoCompQ; quotientCompQhIso CommShift; HomologicalComplex.leftUnitor; no arbitrary-object derived tensor-unitor shift square",
+   "verdict": "no exact match (second reader)"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.rightUnitor_commShift",
+   "date": "2026-10-13",
+   "results": "unknown identifier to Mathlib-only service; inspected upstream ShiftUnitor.lean locally",
+   "verdict": "upstream result only at the unit object and with equal universes"
+  },
+  {
+   "tool": "grep",
+   "query": "rightUnitor.*[Ss]hift|[Ss]hift.*rightUnitor|[Uu]nitor.*CommShift",
+   "date": "2026-10-13",
+   "results": "upstream ShiftUnitor.rightUnitor_commShift and BifunctorShift.mapBifunctorShift₁Iso_hom_rightUnitor_hom; source derived theorem has first factor unit only; unrelated functor-composition unitors in Sheaf",
+   "verdict": "no exact match for the remaining arbitrary-K-flat statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftProperties",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-scheme-canonical-tensor-shift-properties",
+   "place": "Right-unitor part of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCanonicalTensorShiftRightUnitor.lean",
+  "declaration": "AlgebraicGeometry.schemeCanonicalTensorShift_rightUnitor",
+  "statement": "theorem schemeCanonicalTensorShift_rightUnitor (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :\n    letI := schemeCanonicalTensorShift Y\n    letI : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ :=\n      fun M ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) M\n    ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,\n      CochainComplex.IsKFlat (R := Y.sheaf) P →\n      let K := DerivedCategory.Q.obj P\n      let τ := (rightUnitorNatIso (schemeDerivedCategory Y)).hom\n      ((tensorRight (𝟙_ (schemeDerivedCategory Y))).commShiftIso (1 : ℤ)).hom.app K ≫\n          (τ.app K)⟦(1 : ℤ)⟧' =\n        τ.app (K⟦(1 : ℤ)⟧) ≫ ((𝟭 (schemeDerivedCategory Y)).commShiftIso\n          (1 : ℤ)).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c7b7d",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T134801-L-129634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c7b7d",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T134801-L-129634",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged parent signature and node matched delivered Lean; remaining unitor conjunct matched its new node and cited source argument; both modules, axiom probes, and sole direct importer compiled cleanly."
+ }
+}
