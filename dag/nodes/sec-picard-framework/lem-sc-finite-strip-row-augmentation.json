@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-finite-strip-row-augmentation",
+ "kind": "statement",
+ "title": "Finite horizontal strip row augmentation induces a total quasi-isomorphism",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer-indexed commuting double cochain complex whose total exists [def-sp-double-complex-total], and r≥0. Suppose K.X p is zero whenever p<0 or r≤p. Let A be an integer cochain complex, a_n:A.X n→(K.X 0).X n arbitrary morphisms, and b:A→Tot K a chain map with b.f n=a_n followed by the (0,n) diagonal inclusion. Assume for every n there exists a quasi-isomorphism f_n:A.X n[0]→K.flip.X n whose zero component is the canonical single-term identification followed by a_n. Then b is a quasi-isomorphism. There is no vertical boundedness hypothesis and no injectivity or sheaf hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, variant in the second variable, as used in Tag 08C1; finite horizontal strip case."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Each supplied row map out of a single complex is uniquely determined by its degree-zero component, and its quasi-isomorphism identifies A.X n with horizontal cycles at zero and gives exactness in all positive horizontal degrees. The row map chain law gives zero horizontal differential on a n. The component formula for b and its chain law give the vertical chain law for a, by cancellation of the split monic (0,n+1) total inclusion. Construct the cone of b as the total of the augmented rows, using the standard cone shift and signs. Its horizontal degrees lie between -1 and r-1.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each augmented row is exact. Its finitely supported total complex is acyclic: lift the largest horizontal component of a total cocycle through the preceding horizontal differential, subtract its total differential, and repeat downward. The vertical correction only changes the preceding column. At column -1, augmentation injectivity forces the remainder to vanish. This is a finite diagram chase in an abelian category (equivalently the finite diagonal filtration argument of Stacks 0133); no bound on vertical degrees is used. For r=0 the support condition kills all of K and the row quasi-isomorphisms kill each A.X n.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone is acyclic, so the mapping-cone criterion makes the actual map b a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, variant in the second variable, as used in Tag 08C1; finite horizontal strip case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite horizontal strip double complex row augmentation is a quasi isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite horizontal strip double complex row augmentation is a quasi isomorphism",
+   "results": "Eight hits, headed by HomologicalComplex.quasiIsoAt_extendMap_iff and quasiIso_extendMap_iff, plus single-complex truncation comparisons. No finite-strip augmentation criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"total\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*quasiIso|quasiIso.*total",
+   "results": "msearch: 0 hits. Direct repository search found the first-quadrant augmentation criterion and BicomplexColumns total comparisons. Their boundedness and direction hypotheses do not directly give the unbounded finite-horizontal-strip augmentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveTermsAlternatingCechAugmentation",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: comparison of the alternating Cech complex with derived sections on the principal-open cover; Cohomology, Lemma 08C1, proof using 01EP and alternating comparison; parent proof Steps 4--5; parent augmentation Steps 1--2, injective-term finite-column case; injective-term augmentation proof Step 2: finite-horizontal-strip totalization",
+   "via": [
+    "lem-sc-injective-terms-alternating-cech-augmentation",
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripAugmentation",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripAugmentation.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_of_finite_strip_row_augmentation",
+  "statement": "theorem quasiIso_of_finite_strip_row_augmentation\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ p : ℤ, p < 0 ∨ (r : ℤ) ≤ p → IsZero (K.X p))\n    (A : CochainComplex C ℤ)\n    (a : ∀ n : ℤ, A.X n ⟶ (K.X 0).X n)\n    (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (hb : ∀ n : ℤ, b.f n =\n      a n ≫ K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))\n    (hrows : ∀ n : ℤ, ∃ f :\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X n) ⟶ K.flip.X n,\n      f.f 0 = (HomologicalComplex.singleObjXSelf\n        (ComplexShape.up ℤ) 0 (A.X n)).hom ≫ a n ∧ QuasiIso f) :\n    QuasiIso b",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T111910-L-3058445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T111910-L-3058445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

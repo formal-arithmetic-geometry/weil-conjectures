@@ -16,31 +16,37 @@
  ],
  "proof": [
   {
-   "text": "For each integer degree, use injective module Cech acyclicity and the ordered-to-increasing comparison to obtain exact positive alternating row cohomology. In degree zero, the sheaf gluing axiom says that restrictions of global sections identify with the kernel; injectivity follows from separatedness. Forgetting global-ring scalars detects exactness. The comparison restricts to the actual increasing tuples and preserves the degree-zero augmentation.",
+   "text": "Apply injective_alternatingCech_row_augmentation to every term I.X n, using hI n. It supplies the actual horizontal single-row augmentation with its canonical zero-component formula and its quasi-isomorphism.",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes",
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-injective-alternating-cech-row-augmentation"
    ],
    "elementary": false
   },
   {
-   "text": "The cone is the total of these augmented exact rows, with the usual cone shift and signs. There are only columns -1 through r-1 because increasing (p+1)-tuples in Fin r are empty for p>=r. For a total cocycle, lift its highest Cech component horizontally, subtract the total boundary, and repeat toward smaller Cech degree. The vertical part changes only the preceding column. At column -1 augmentation injectivity forces the remainder to vanish. The finite number of columns makes this chase terminate with no vertical bound. For r=0 the covering scheme is empty; all section modules vanish. Hence the cone is acyclic and the augmentation is a quasi-isomorphism.",
+   "text": "Prove finite horizontal support directly: negative columns vanish by extension by zero; for p≥r an increasing (p+1)-tuple in Fin r would contradict the cardinality bound for an injection. Products over the empty tuple type are zero. Thus only columns 0 through r-1 can survive, including the empty strip when r=0.",
    "uses": [
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply quasiIso_of_finite_strip_row_augmentation with K=alternatingCechDoubleFunctor U I, A=the global-section complex, and a_n=alternatingCechZero U (I.X n). The actual augmentation has the required (0,n) inclusion formula definitionally. Combine the proved support bound with the row quasi-isomorphisms from Step 1.",
+   "uses": [
+    "lem-sc-finite-strip-row-augmentation",
     "def-sc-alternating-cech-total-complex"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes",
-  "def-sc-alternating-cech-total-complex"
+  "lem-sc-injective-alternating-cech-row-augmentation",
+  "def-sc-alternating-cech-total-complex",
+  "lem-sc-finite-strip-row-augmentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C1; explicit Lean reduction by T2 of parent proof Steps 1--2"
+  "document": "https://stacks.math.columbia.edu/tag/08C1",
+  "place": "First paragraph; explicit increasing-tuple row proof and finite-strip reduction by P3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -141,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T100134-L-2489512",
+  "landing": "20261013T111910-L-3058445",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
