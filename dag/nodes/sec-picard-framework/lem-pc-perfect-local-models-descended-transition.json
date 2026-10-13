@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-perfect-local-models-descended-transition",
+ "kind": "statement",
+ "title": "Descended overlap transition acting on every realization",
+ "statement": "Let I be a directed preorder, R a diagram of commutative rings, c a colimit cocone, i an index, and t:Z → Spec R_i finitely presented. Fix shared derived module categories on all schemes and localized open sites [def-pc-derived-category]. Let j≥i and Yj=Z times_{R_i} R_j, X=Z times_{R_i} c.pt, with canonical map gj:X → Yj. Let compact opens U,V cover Yj, let A,B be perfect derived objects on them [def-pc-perfect-complex], and give isomorphisms φU,φV of their limit pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k≥j and an isomorphism e between the exact overlap restrictions of A′=Lf* A and B′=Lf* B on U′=f inverse U and V′=f inverse V, where f:Yk → Yj is the canonical stage transition. For every supplied F on Yk and isomorphisms iU:F restricted to U′ ≅ A′ and iV:F restricted to V′ ≅ B′ realizing e under the canonical restriction-composition comparisons, there exist isomorphisms from Lgk*F to E restricted on the localized sites P=gj inverse U and Q=gj inverse V whose canonical derivedOpenHomRestriction maps agree [lem-sc-derived-hom-mayer-vietoris]. This asserts existence of a transition, not of a global stage object F or of a global comparison map.",
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "On the directed tail above j, Yj is quasi-separated over its affine base. Thus the intersection of the two compact opens is compact. Its quasi-compact open inclusion followed by the finite-presentation structure map is finitely presented. Restrict A and B to the overlap; perfect pullback preserves perfectness. The two specified limit isomorphisms determine the overlap isomorphism, under pullback composition and exact restriction comparisons.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply perfect_descend_morphisms on this tail to the prescribed overlap isomorphism. Its invertibility clause gives an isomorphism at k; equivalently descend the inverse and stabilize both inverse identities at a common upper bound. Transport the result through the cartesian identifications of open base changes. This produces e between the exact overlap restrictions of the actual pullbacks A′ and B′, with prescribed limit pullback.",
+   "uses": [
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any F,iU,iV satisfying the realization equation, pull iU and iV to the limit and compose with the transported original comparisons. Restrict these composites to the common overlap. The realization equation, pullback of e and naturality of composition comparisons imply equality. Conjugate by mapDerivedCategoryCompIso and take preimageIso through the fully faithful derived open equivalences. Apply scheme_derived_hom_restriction_transport to both local maps and cancel the common comparison components; faithfulness yields exactly equality of their derivedOpenHomRestriction maps. This produces only local comparisons for a supplied realization, never an existential global object.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "def-pc-derived-open-restriction-maps",
+    "lem-sc-scheme-derived-hom-restriction-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-scheme-derived-hom-restriction-transport"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Lemma 36.29.3, two-open induction: descent of c before application of Tag 08DG; Tag 09RE provides full faithfulness"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F1 stage-3 worker",
+  "date": "2026-10-14",
+  "note": "Formal-interface refinement of Tags 09RE and 09RF: quantify over realizations to separate overlap descent and comparison transport from object gluing."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalModelsStageComparisons",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction, prescribed overlap transition c and its action on local comparisons before the invocation of object gluing",
+   "via": [
+    "lem-pc-perfect-local-models-stage-comparisons",
+    "lem-pc-perfect-local-models-stage-gluing",
+    "lem-pc-perfect-local-models-eventually-compatible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend overlap isomorphism of perfect complexes and glue two local models at a finite stage",
+   "results": "8 hits about ordinary GlueData and scheme gluing; no derived-perfect overlap descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preimageIso",
+   "results": "preimageIso and its mapIso/hom/inv lemmas supply fully faithful isomorphism transport, not finite-stage overlap descent.",
+   "date": "2026-10-14",
+   "verdict": "Tool available; no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(glue|local_models)|derivedOpenHomRestriction",
+   "results": "msearch reports 0 hits. Local rg finds PerfectLocalModelsEventuallyCompatible and PerfectDescentCompatibleLocalData; both depend transitively on the assigned module and cannot be imported. PerfectDescendMorphisms provides descent before the cartesian-open and comparison transport glue.",
+   "date": "2026-10-14",
+   "verdict": "No acyclic matching interface"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed overlap isomorphism between perfect complexes descends along a directed colimit of rings",
+   "results": "Service unavailable: Internal Server Error; 0 hits.",
+   "date": "2026-10-14"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLocalModelsDescendedTransition.lean",
+  "declaration": "AlgebraicGeometry.perfect_local_models_descended_transition",
+  "statement": "theorem perfect_local_models_descended_transition\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    :\n    let Yj := pullback t (Spec.map (R.map (homOfLE hij)))\n    let X := pullback t (Spec.map (c.ι.app i))\n    let gj := baseChangeMap t\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (Spec.map (c.ι.app i)))\n      (Over.homMk (Spec.map (c.ι.app j))\n        (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))\n    ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤)\n      (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj))\n      (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)\n      (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)\n      (E : schemeDerivedCategory X),\n    let instP : Category (schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme) := inferInstance\n    let instQ : Category (schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme) := inferInstance\n    let instX : Category (schemeDerivedCategory X) := inferInstance\n    let PU : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme :=\n      (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory\n    let PV : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme :=\n      (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory\n    ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅\n        PU.obj E)\n      (φV : (derivedPullback (gj ∣_ V)).obj B ≅\n        PV.obj E),\n    ∃ (k : I) (hjk : j ≤ k),\n      let g := baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app k))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))\n      let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans hjk))))\n      let f := baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U' := f ⁻¹ᵁ U\n      let V' := f ⁻¹ᵁ V\n      let instY : Category (schemeDerivedCategory Yk) := inferInstance\n      let instU : Category (schemeDerivedCategory U'.toScheme) := inferInstance\n      let instV : Category (schemeDerivedCategory V'.toScheme) := inferInstance\n      let instW : Category (schemeDerivedCategory (U' ⊓ V').toScheme) := inferInstance\n      let A' : schemeDerivedCategory U'.toScheme := (derivedPullback (f ∣_ U)).obj A\n      let B' : schemeDerivedCategory V'.toScheme := (derivedPullback (f ∣_ V)).obj B\n      let SU : schemeDerivedCategory U'.toScheme ⥤\n          schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk\n        (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))).mapDerivedCategory\n      let SV : schemeDerivedCategory V'.toScheme ⥤\n          schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk\n        (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))).mapDerivedCategory\n      let TU : schemeDerivedCategory Yk ⥤ schemeDerivedCategory U'.toScheme :=\n        (schemeOpenRestriction Yk U').mapDerivedCategory\n      let TV : schemeDerivedCategory Yk ⥤ schemeDerivedCategory V'.toScheme :=\n        (schemeOpenRestriction Yk V').mapDerivedCategory\n      let TW : schemeDerivedCategory Yk ⥤ schemeDerivedCategory (U' ⊓ V').toScheme :=\n        (schemeOpenRestriction Yk (U' ⊓ V')).mapDerivedCategory\n      let αU : TU ⋙ SU ≅ TW := schemeDerivedOpenRestrictionCompIso Yk\n        (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))\n      let αV : TV ⋙ SV ≅ TW := schemeDerivedOpenRestrictionCompIso Yk\n        (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))\n      ∃ e : SU.obj A' ≅ SV.obj B',\n        ∀ (F : schemeDerivedCategory Yk)\n          (iU : TU.obj F ≅ A')\n          (iV : TV.obj F ≅ B'),\n        αU.inv.app F ≫ SU.map iU.hom ≫ e.hom =\n          αV.inv.app F ≫ SV.map iV.hom →\n        let P := gj ⁻¹ᵁ U\n        let Q := gj ⁻¹ᵁ V\n        let L : schemeDerivedCategory X := (derivedPullback g).obj F\n        let instLP : Category (DerivedCategory\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over P))) := inferInstance\n        let instLQ : Category (DerivedCategory\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Q))) := inferInstance\n        let instLW : Category (DerivedCategory\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q)))) := inferInstance\n        let RU : schemeDerivedCategory X ⥤\n            DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over P)) :=\n          (SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) P).mapDerivedCategory\n        let RV : schemeDerivedCategory X ⥤\n            DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Q)) :=\n          (SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) Q).mapDerivedCategory\n        let RW : schemeDerivedCategory X ⥤ DerivedCategory\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (P ⊓ Q))) :=\n          (SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory\n        let rU : (RU.obj L ⟶ RU.obj E) → (RW.obj L ⟶ RW.obj E) :=\n          derivedOpenHomRestriction X.toRingedSpace\n            (homOfLE (show P ⊓ Q ≤ P from inf_le_left)) (E := L) (F := E)\n        let rV : (RV.obj L ⟶ RV.obj E) → (RW.obj L ⟶ RW.obj E) :=\n          derivedOpenHomRestriction X.toRingedSpace\n            (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)) (E := L) (F := E)\n        ∃ (pU : RU.obj L ≅ RU.obj E) (pV : RV.obj L ≅ RV.obj E),\n          rU pU.hom = rV pV.hom",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c541c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T190139-L-3215863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c541c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T190139-L-3215863",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature and delivered transition with their nodes and Stacks 09RE/09RF; both modules compile, axiom checks pass, and direct importer PerfectLocalModelsStageGluing compiles against delivered artifacts."
+ }
+}

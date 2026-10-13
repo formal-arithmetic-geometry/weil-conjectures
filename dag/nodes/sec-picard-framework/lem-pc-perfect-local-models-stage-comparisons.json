@@ -17,9 +17,10 @@
  "title": "Stage object and compatible local limit comparisons",
  "statement": "Let I be a directed preorder, R:I → CommRingCat a system, c a colimit cocone with proof hc, i an index, and t:Z → Spec R_i locally of finite presentation, quasi-compact and quasi-separated. Fix shared derived module categories [def-pc-derived-category] on all schemes and localized open sites. Write Y_l=Z times_{R_i} R_l and X=Z times_{R_i} c.pt. Given j≥i, let U,V be compact opens covering Y_j, and A,B perfect objects [def-pc-perfect-complex] on their open subschemes. Let E be a derived object on X and give isomorphisms from the derived pullbacks of A,B along g_j restricted to U,V to the exact restrictions of E, where g_j:X → Y_j is the canonical base-change map [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k≥j, F in D(O_{Y_k}), and opens U',V' covering Y_k such that the derived pullbacks of F along both open inclusions are perfect. There are isomorphisms pU from Lg_k*F restricted to P=g_j inverse U to E restricted to P, and pV over Q=g_j inverse V. Here these last restrictions land on the localized open sites (the overFunctor restrictions). The canonical maps derivedOpenHomRestriction [lem-sc-derived-hom-mayer-vietoris] of pU.hom and pV.hom to P intersection Q agree. No global morphism from Lg_k*F to E is supplied.",
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RF, two-open induction: descend the prescribed transition and glue the stage object; Tag 08DG object-gluing clause"
+  "by": "agent",
+  "agent": "F1 stage-3 worker",
+  "date": "2026-10-14",
+  "note": "Lean assembly of the object-gluing and local-perfectness portions of the Tag 09RF two-open step; overlap descent and comparison transport separated as a strict intermediate theorem."
  },
  "mathlib_match": null,
  "status": "split",
@@ -43,44 +44,35 @@
  },
  "proof": [
   {
-   "text": "On the directed tail above j, restrict A and B to the compact overlap. Its finite-presentation structure morphism permits perfect morphism descent. The two given limit comparisons and the coherent pullback/restriction comparisons define a prescribed overlap isomorphism. Descend it and its inverse and stabilize the inverse equations at a common stage k, retaining the prescribed pullback equation.",
+   "text": "Apply the descended-transition theorem to choose k and the prescribed overlap isomorphism e for the actual pullbacks A′,B′. It supplies compatible local limit comparisons for any realization of this datum, but no stage object.",
    "uses": [
-    "lem-pc-perfect-descend-morphisms",
-    "lem-pc-derived-pullback-perfect",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "lem-pc-perfect-local-models-descended-transition"
    ],
    "elementary": false
   },
   {
-   "text": "Let f_kj:Y_k → Y_j be the canonical stage map. The cocone identity and baseChangeMap_comp imply g_k followed by f_kj = g_j. Set U'=f_kj inverse U and V'=f_kj inverse V; they cover Y_k and their g_k inverse images are P and Q. Apply derived_open_gluing_objects to the two pulled local objects on this cover with the descended transition. This produces F and local identifications inducing exactly that transition. Perfect pullback, iso invariance (compose the local model isomorphisms), and the exact open-restriction comparison show that the derived pullbacks of F to the two covering opens are perfect.",
+   "text": "Set U′=f inverse U and V′=f inverse V. Inverse image preserves sup and top, so these opens cover Yk. Derived pullback preserves perfectness of A′,B′. Invoke derived_open_gluing_objects with e to construct F and local identifications satisfying the transition equation.",
    "uses": [
-    "lem-sc-derived-open-gluing-objects",
     "lem-pc-derived-pullback-perfect",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "lem-sc-derived-open-gluing-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Pull the local identifications to X and compose them with the original comparisons to E. The stage object transition equation and the prescribed pullback equation of the descended transition give equality on the overlap in the open-subscheme categories. Take fully faithful preimages through the derived exact equivalences Modules.overEquiv. The canonical Hom restriction transport formula converts the equality into equality of derivedOpenHomRestriction. Isomorphisms are reflected by the equivalences. Return these local isomorphisms and the stage cover; no Hom gluing is used.",
+   "text": "For each point of Yk, the cover places it in U′ or V′. Apply local_perfect_of_openRestriction_iso using the corresponding gluing identification and local perfect object to obtain the defining local model witness. Thus F is perfect. Apply derivedPullback_preserve_perfect to each open inclusion to obtain both perfectness assertions. Finally apply the universal realization clause of the descended transition to F,iU,iV and the gluing equation to obtain pU,pV and their overlap equality.",
    "uses": [
-    "lem-sc-derived-open-gluing-objects",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-open-restriction-maps",
-    "lem-sc-scheme-derived-hom-restriction-transport"
+    "lem-sc-open-perfect-model-transport",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-perfect-local-models-descended-transition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
-  "lem-pc-derived-pullback-open-restriction-universes",
   "lem-pc-derived-pullback-perfect",
-  "lem-pc-perfect-descend-morphisms",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-perfect-local-models-descended-transition",
   "lem-sc-derived-open-gluing-objects",
-  "lem-sc-scheme-derived-hom-restriction-transport"
+  "lem-sc-open-perfect-model-transport"
  ],
  "mathlib_searches": [
   {
@@ -135,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-830fe",
-  "group": "G2",
+  "reviewer": "X-c541c",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T153459-L-1084958",
+  "landing": "20261013T190139-L-3215863",
   "kind": "interface",
-  "note": "independent Codex review: Delivered signatures match both nodes; original signature check and unchanged direct importer PerfectLocalModelsEventuallyCompatible compile; delivered modules compile cleanly and axiom checks agree with the reported decomposition."
+  "note": "independent Codex review: Matched unchanged item signature and delivered transition with their nodes and Stacks 09RE/09RF; both modules compile, axiom checks pass, and direct importer PerfectLocalModelsStageGluing compiles against delivered artifacts."
  }
 }

@@ -11,12 +11,10 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
-import Sheaf.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
+import Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition
 
 /-! # Stage object with compatible local limit comparisons
 
@@ -33,6 +31,58 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+
+private theorem perfect_of_two_open_models
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (Z : Scheme.{u}) (U : Z.Opens),
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+    (Y : Scheme.{u}) (U V : Y.Opens) (hcover : U ⊔ V = ⊤)
+    (F : schemeDerivedCategory Y)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)
+    (iU : (schemeOpenRestriction Y U).mapDerivedCategory.obj F ≅ A)
+    (iV : (schemeOpenRestriction Y V).mapDerivedCategory.obj F ≅ B) :
+    Y.IsPerfect F := by
+  intro x
+  have hx : x ∈ U ⊔ V := by rw [hcover]; trivial
+  rcases hx with hx | hx
+  · exact Scheme.local_perfect_of_openRestriction_iso Y U F A hA iU x hx
+  · exact Scheme.local_perfect_of_openRestriction_iso Y V F B hB iV x hx
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem glue_perfect_two_open_models
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [∀ (Z : Scheme.{u}) (U : Z.Opens),
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+    (Y : Scheme.{u}) (U V : Y.Opens) (hcover : U ⊔ V = ⊤)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)
+    (e : (schemeOpenOverlapRestriction Y
+        (homOfLE (show U ⊓ V ≤ U from inf_le_left))).mapDerivedCategory.obj A ≅
+      (schemeOpenOverlapRestriction Y
+        (homOfLE (show U ⊓ V ≤ V from inf_le_right))).mapDerivedCategory.obj B) :
+    ∃ (F : schemeDerivedCategory Y)
+      (iU : (schemeOpenRestriction Y U).mapDerivedCategory.obj F ≅ A)
+      (iV : (schemeOpenRestriction Y V).mapDerivedCategory.obj F ≅ B),
+      Y.IsPerfect F ∧
+      (schemeDerivedOpenRestrictionCompIso Y
+          (homOfLE (show U ⊓ V ≤ U from inf_le_left))).inv.app F ≫
+          (schemeOpenOverlapRestriction Y
+            (homOfLE (show U ⊓ V ≤ U from inf_le_left))).mapDerivedCategory.map iU.hom ≫
+          e.hom =
+        (schemeDerivedOpenRestrictionCompIso Y
+          (homOfLE (show U ⊓ V ≤ V from inf_le_right))).inv.app F ≫
+          (schemeOpenOverlapRestriction Y
+            (homOfLE (show U ⊓ V ≤ V from inf_le_right))).mapDerivedCategory.map iV.hom := by
+  obtain ⟨F, iU, iV, hi⟩ := derived_open_gluing_objects Y U V hcover A B e
+  exact ⟨F, iU, iV, perfect_of_two_open_models Y U V hcover F A B hA hB iU iV, hi⟩
+
+set_option linter.unusedVariables false in
+-- Keep the named forall hypotheses of the unchanged signature; intro rebinds these names.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 800000 in
@@ -132,6 +182,39 @@ theorem perfect_local_models_stage_comparisons
           derivedOpenHomRestriction X.toRingedSpace
               (homOfLE (show P ⊓ Q ≤ P from inf_le_left)) (E := L) (F := E) pU.hom =
             derivedOpenHomRestriction X.toRingedSpace
-              (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)) (E := L) (F := E) pV.hom := by sorry
+              (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)) (E := L) (F := E) pV.hom := by
+  classical
+  intro Yj X gj U V hcover hU hV A B hA hB E φU φV
+  obtain ⟨k, hjk, e, he⟩ := perfect_local_models_descended_transition
+    R c hc i Z t j hij U V hcover hU hV A B hA hB E φU φV
+  let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans hjk))))
+  let f := baseChangeMap t
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
+    (Over.homMk (Spec.map (R.map (homOfLE hjk)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
+  let U' := f ⁻¹ᵁ U
+  let V' := f ⁻¹ᵁ V
+  let instYk : Category (schemeDerivedCategory Yk) := inferInstance
+  let instU' : Category (schemeDerivedCategory U'.toScheme) := inferInstance
+  let instV' : Category (schemeDerivedCategory V'.toScheme) := inferInstance
+  let instW' : Category (schemeDerivedCategory (U' ⊓ V').toScheme) := inferInstance
+  let A' : schemeDerivedCategory U'.toScheme := (derivedPullback (f ∣_ U)).obj A
+  let B' : schemeDerivedCategory V'.toScheme := (derivedPullback (f ∣_ V)).obj B
+  have hcover' : U' ⊔ V' = ⊤ := by
+    rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]
+  have hA' : U'.toScheme.IsPerfect A' :=
+    derivedPullback_preserve_perfect (f ∣_ U) A hA
+  have hB' : V'.toScheme.IsPerfect B' :=
+    derivedPullback_preserve_perfect (f ∣_ V) B hB
+  obtain ⟨F, iU, iV, hF, hi⟩ :=
+    glue_perfect_two_open_models Yk U' V' hcover' A' B' hA' hB' e
+  refine ⟨k, hjk, ?_⟩
+  intro g
+  refine ⟨F, U', V', hcover',
+    derivedPullback_preserve_perfect U'.ι F hF,
+    derivedPullback_preserve_perfect V'.ι F hF, ?_⟩
+  intro P Q L RU RV
+  exact he F iU iV hi
 
 end AlgebraicGeometry
