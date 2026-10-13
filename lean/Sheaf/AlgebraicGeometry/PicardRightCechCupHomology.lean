@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.PicardRightCechCupGenerators
+import Sheaf.Algebra.Homology.TensorKunnethNat
 
 /-! # Affine Cech comparison of the external cup formula
 
@@ -70,6 +72,40 @@ theorem picardRightCechCup_homology
             (externalCupCoefficients f g F G)).homology (n : ℤ)),
       IsPicardExternalCupHomology f g F G (fun n ↦
         (a n).inv ≫ HomologicalComplex.homologyMap (θ.app G) (n : ℤ) ≫ (b n).hom) :=
-  by sorry
+  by
+    classical
+    let A := picardScalarModel f F
+    let B := picardScalarModel g G
+    let T := picardExternalTotal f g F G
+    have hg := fun n ↦ picardRightCechCup_generators f g F U V hU hV hUc hVc θ hθ G n
+    choose e b he using hg
+    have hk := fun n ↦ HomologicalComplex.tensor_kunneth_nat A B
+      (picardScalarModel_negative f F) (picardScalarModel_negative g G) n
+    choose s hs using hk
+    let a := fun n ↦ ((e n).symm.trans (s n)).toModuleIso
+    refine ⟨a, b, ?_⟩
+    intro n i x y z hz
+    obtain ⟨z', hz', hsz'⟩ := hs n i x y
+    have hzz : z' = z := by
+      apply (ModuleCat.mono_iff_injective (T.iCycles (n : ℤ))).mp inferInstance
+      exact hz'.trans hz.symm
+    subst z'
+    change s n (DirectSum.lof k _ _ i
+      (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) x)
+        (B.homologyπ (i.val.2 : ℤ) y))) = T.homologyπ (n : ℤ) z at hsz'
+    have hpre : (a n).inv (T.homologyπ (n : ℤ) z) =
+        e n (DirectSum.lof k _ _ i
+          (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) x)
+            (B.homologyπ (i.val.2 : ℤ) y))) := by
+      rw [← hsz']
+      change e n ((s n).symm (s n _)) = _
+      rw [LinearEquiv.symm_apply_apply]
+    change picardScalarModelEquiv (pullback.fst f g ≫ f)
+      (externalCupCoefficients f g F G) n
+      ((b n).hom (HomologicalComplex.homologyMap (θ.app G) (n : ℤ)
+        ((a n).inv (T.homologyπ (n : ℤ) z)))) = _
+    rw [hpre]
+    exact he n i (A.homologyπ (i.val.1 : ℤ) x) (B.homologyπ (i.val.2 : ℤ) y)
+
 
 end AlgebraicGeometry.Scheme.Modules
