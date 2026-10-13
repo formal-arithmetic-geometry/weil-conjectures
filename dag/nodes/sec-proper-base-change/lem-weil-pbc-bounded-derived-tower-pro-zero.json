@@ -21,11 +21,53 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n$. For each $q$, choose $k_q\\geq n$ with $H^q(t_{k_q,n})=0$. Since only finitely many degrees $q\\in[a,b]$ can be nonzero, choose $k\\geq n$ dominating all $k_q$. Then every cohomology map $H^q(t_{k,n})$ is zero; outside $[a,b]$ both groups vanish by the boundedness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3B, hypotheses (1) and (2), specialized to zero-valued systems"
+   }
+  },
+  {
+   "text": "Apply the canonical truncation triangle functorially to each $X_n$ at degree $a$: $\\tau_{\\leq a}X_n \\to X_n \\to \\tau_{\\geq a+1}X_n \\to (\\tau_{\\leq a}X_n)[1]$. Functoriality makes these into inverse systems of distinguished triangles, and under the canonical identification $\\tau_{\\leq a}X_n\\cong H^a(X_n)[-a]$ the lower transition is $H^a(t_{k,n})[-a]$. Because $H^q(X_n)=0$ for $q<a$, the lower truncation is isomorphic to $H^a(X_n)[-a]$, so its transition maps are eventually zero by Step 1. The upper truncations have cohomology in the shorter interval $[a+1,b]$.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3B, proof: truncation distinguished triangle and induction on $b-a$"
+   }
+  },
+  {
+   "text": "Induct on $b-a$. The base case $b=a$ identifies each $X_n$ with $H^a(X_n)[-a]$, hence the transition is zero. For the induction step, the lower truncation system is pro-zero and the upper truncation system is pro-zero by induction; the zero-valued two-out-of-three lemma for inverse systems of distinguished triangles then gives a later index $k$ with $t_{k,n}=0$.",
+   "uses": [
+    "lem-weil-pbc-essentially-constant-zero-triangle",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G3B proof together with Tag 0G3A, specialized to essentially zero systems"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-essentially-constant-zero-triangle",
+  "lem-sf-derived-concentrated-single"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0G3B proof, truncation induction, using Tag 0G3A for the two-out-of-three step"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,12 +120,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-bounded-derived-tower-pro-zero",
+  "worker": "stage1",
+  "summary": "Split the bounded derived tower argument into an elementary finite-degree stabilization step, the existing truncation-triangle node, and one new statement-only zero-valued two-out-of-three node for inverse systems of distinguished triangles. The induction is written explicitly and no clause of the item is restated as a child.",
+  "blueprint": "Realizes def-weil-pbc-completed-pullback detailed comparison, via the truncation induction and Stacks Tags 0G3B/0G3A."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-a76d59cb7",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-a76d59cb7 (reviewer sub-agent of L); spot-checked: The mathematics is sound, but two repairs are required. The new triangle node lacks required created metadata and does not explicitly state that transition triples are morphisms of distinguished triangles. The item’s truncation step also omitted functoriality and the identification of lower transition maps with H^a(t)[-a]. Corrected whole DAG JSON files are in fixes/dag/nodes/sec-proper-base-change/. Full review: review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
