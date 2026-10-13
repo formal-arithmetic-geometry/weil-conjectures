@@ -16,45 +16,39 @@
  },
  "proof": [
   {
-   "text": "Transport K to modules on U using the localized-site equivalence. The associated-sheaf counit on a finite free sheaf identifies it with the sheaf of its global sections; in finite free coordinates this is the identity. Naturality of this counit in each differential gives a chain isomorphism from the associated sheaf of the explicit section complex to K. Transport this isomorphism through the affine spectrum chart and the localized derived equivalence.",
+   "text": "Evaluation preserves the support bound. Each supplied free sheaf isomorphism gives a linear equivalence from its terminal-over-object sections to a finite coordinate module, hence a free and flat section module. Convert the upper support bound to IsStrictlyLE and apply the closed upstream CochainComplex.kFlat_of_isStrictlyLE_of_flat; exact filtered colimits and tensor colimit preservation hold in ModuleCat. This proves the K-flat hypothesis of the object-level comparison.",
    "uses": [
-    "lem-pc-affine-localized-site-derived-transport"
+    "lem-pc-module-bounded-flat-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "The section complex is bounded with finite free terms, since evaluation of each given free isomorphism gives a finite coordinate module and evaluation preserves zero objects. Its terms are flat; bounded above flat K-flatness makes it a valid representative for derived extension of scalars. The affine K-flat pullback chart comparison identifies termwise extension along the residue evaluation homomorphism with the derived pullback to Spec kappa(w).",
+   "text": "Use the derived-model comparison to identify the derived residue pullback with Q of the associated sheaf of the explicit residue section complex.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-affine-kflat-pullback-chart-comparison"
+    "lem-sc-affine-free-residue-sections-derived-model"
    ],
    "elementary": false
   },
   {
-   "text": "The residue point factors through U. Derived pullback composition, together with exact open restriction and he, identifies this object with Li_w^* E. Sections on the one-point residue spectrum are exact, so the homology of its section complex is the section module of its homology sheaf. GammaSpecIso identifies the scalar action with kappa(w). The coefficient map is evaluation (residue of the section germ), hence the resulting complex is exactly the displayed scalar extension; taking homology gives the asserted linear equivalence in every degree.",
+   "text": "Apply DerivedCategory.homologyFunctorFactors. Over the residue field, moduleSpecGammaFunctor is an equivalence and preserves homology. Its homology comparison identifies sections of the homology sheaf with homology of the section complex. The tilde.toTildeGammaNatIso unit, mapped to cochain complexes, identifies that complex with C. Compose these three isomorphisms and convert the resulting ModuleCat isomorphism to a linear equivalence. This is the Lean proof in the original module.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-sc-derived-fiber-betti",
-    "def-weil-residue-field"
+    "def-sc-derived-fiber-betti"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-derived-fiber-betti",
-  "def-weil-residue-field",
-  "lem-pc-affine-kflat-pullback-chart-comparison",
-  "lem-pc-affine-localized-site-derived-transport",
   "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-sc-affine-free-residue-sections-derived-model"
  ],
  "proof_origin": {
   "document": "Stacks Project",
-  "place": "Tags 064K (bounded above flat complexes), 06YB (stalkwise K-flatness), 06YI and 06YJ (derived pullback), 0098 (stalks of pullback), and 0BCD (affine finite free models)",
+  "place": "Exact sections on Spec of a field after Tags 064K, 08DW and 0098",
   "by": "agent",
-  "group": "X3",
+  "group": "U2",
   "date": "2026-10-13",
-  "note": "Explicit section-complex version of step 1 of lem-sc-residue-rank-model-differential. Generic affine comparison tools preserve the unit route."
+  "note": "The original module now proves both bounded-free section K-flatness and the exact-section homology calculation. Only affine sheafification and residue derived pullback comparison remain split off."
  },
  "mathlib_searches": [
   {
@@ -132,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T121225-L-3507132",
+  "landing": "20261013T130036-L-3924048",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
