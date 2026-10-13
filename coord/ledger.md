@@ -10900,3 +10900,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/W3/Sheaf.AlgebraicGeometry.PrincipalCechResolutionQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T031557-L-3576943 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/W3/Sheaf.RingTheory.CohenStructurePowerSeriesSurjection (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577047 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577148 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:17 L: returned deliver/P3/Sheaf.Paper.ModuleCohomologyCupProduct (reviewer RETURN: (reviewer X-e5709, head e57090dbb) C1/D3: In dag/nodes/sec-abelian-varieties/lem-sc-module-cup-pairing-exists.json, proo)
