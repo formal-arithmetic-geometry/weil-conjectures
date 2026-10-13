@@ -17,20 +17,23 @@ public import WeilConjectures.RingTheory.RegularLocalRing.IsRegularRing
 /-!
 # Zariski–Nagata purity of the branch locus
 
-Let `(A, 𝔪)` be a regular local ring of dimension `d ≥ 2` and `A ⊆ B` a finite extension with
-`B` an integrally closed domain. If `A → B` is étale at every prime of `B` not lying over `𝔪`,
-then `A → B` is étale ([Stacks 0BMA], `Algebra.Etale.of_isRegularLocalRing`). This is an input of
-blueprint `sbc-thm-spreading-finite-etale-galois` (through [Stacks 0EYE]).
+Let `(A, 𝔪)` be a regular local ring of dimension `d ≥ 2` and `A → B` a finite ring map with `B`
+normal (its localizations at primes are integrally closed domains) and torsion-free as an
+`A`-module. If `A → B` is étale at every prime of `B` not lying over `𝔪`, then `A → B` is étale
+([Stacks 0BMA], `Algebra.Etale.of_isRegularLocalRing`; for `B` a normal domain containing `A` see
+`Algebra.Etale.of_isRegularLocalRing_of_isDomain`). This is an input of blueprint
+`sbc-thm-spreading-finite-etale-galois` (through [Stacks 0EYE]).
 
-We require `B` to be a domain containing `A` (`FaithfulSMul A B`): for `B = A × κ` with `κ` the
-residue field, `B` is normal and étale over the punctured spectrum but not étale over `A`.
+Torsion-freeness (no irreducible component of `Spec B` lies over the closed point) is necessary:
+`B = A × κ`, with `κ` the residue field, is normal and étale over the punctured spectrum but not
+étale over `A`.
 
 ## Dimension two (`Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two`)
 
 Let `𝔪 = (x, y)`.
 1. `[x, y]` is a regular sequence on `B`: by going down the maximal ideals of `B` have height `≥ 2`,
    so they are not associated to `B / xB` as `B` is normal
-   (`IsIntegrallyClosed.isWeaklyRegular_pair_of_isIntegral`).
+   (`RingTheory.Sequence.isWeaklyRegular_pair_of_isTorsionFree`).
 2. Hence `B` is a free `A`-module (`Module.free_of_isWeaklyRegular_of_maximalIdeal_eq_span_pair`),
    and `[x, y]` is regular on `B ⊗[A] B`.
 3. `B` is unramified over `A` on `D(x) ∪ D(y)`, and the separability idempotents glue across the
@@ -53,11 +56,13 @@ universe u v
 open IsLocalRing RingTheory.Sequence
 
 /-- **Zariski–Nagata purity in dimension two** [Stacks 0BMA]. Let `(A, 𝔪)` be a regular local ring
-of dimension two and `A ⊆ B` a finite extension by an integrally closed domain `B` which is étale
-at every prime of `B` not lying over `𝔪`. Then `B` is étale over `A`. -/
+of dimension two and `A → B` a finite ring map with `B` normal and torsion-free over `A`, which is
+étale at every prime of `B` not lying over `𝔪`. Then `B` is étale over `A`. -/
 theorem Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two {A : Type u} {B : Type v}
     [CommRing A] [CommRing B] [Algebra A B] [IsRegularLocalRing A] (hd : ringKrullDim A = 2)
-    [Module.Finite A B] [IsDomain B] [IsIntegrallyClosed B] [FaithfulSMul A B]
+    [Module.Finite A B] [Module.IsTorsionFree A B]
+    (hB : ∀ (Q : Ideal B) [Q.IsPrime], IsDomain (Localization.AtPrime Q) ∧
+      IsIntegrallyClosed (Localization.AtPrime Q))
     (h : ∀ (Q : Ideal B) [Q.IsPrime], Q.comap (algebraMap A B) ≠ maximalIdeal A →
       Algebra.IsEtaleAt A Q) :
     Algebra.Etale A B := by
@@ -88,8 +93,8 @@ theorem Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two {A : Type u} 
     exact WithBot.coe_le_coe.1 h'
   -- `[x, y]` is regular on `B`, so `B` is free
   have hregB : IsWeaklyRegular B [x, y] :=
-    IsIntegrallyClosed.isWeaklyRegular_pair_of_isIntegral hx (by rw [hm]; exact Ideal.le_radical)
-      h2
+    isWeaklyRegular_pair_of_isTorsionFree hx (by rw [hm]; exact Ideal.le_radical) h2
+      fun Q _ ↦ hB Q
   have : Module.Free A B := Module.free_of_isWeaklyRegular_of_maximalIdeal_eq_span_pair hm hregB
   -- `[x, y]` is regular on `B ⊗[A] B`
   have hregF : IsWeaklyRegular (R := A) (TensorProduct A B B) [x, y] :=
@@ -115,12 +120,13 @@ theorem Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two {A : Type u} 
   have : Algebra.FinitePresentation A B := Algebra.FinitePresentation.of_finiteType.mp inferInstance
   exact Algebra.Etale.of_formallyUnramified_of_flat
 
-/-- A local ring `A` has **purity of the branch locus** (for normal domains in universe `v`) if
-every finite extension `A ⊆ B` by an integrally closed domain `B` which is étale over the punctured
-spectrum of `A` is étale. -/
+/-- A local ring `A` has **purity of the branch locus** (for algebras in universe `v`) if every
+finite `A`-algebra `B` which is normal, torsion-free over `A`, and étale over the punctured
+spectrum of `A` is étale over `A`. -/
 def IsLocalRing.HasPurityOfBranchLocus (A : Type u) [CommRing A] [IsLocalRing A] : Prop :=
-  ∀ (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B] [IsDomain B]
-    [IsIntegrallyClosed B] [FaithfulSMul A B],
+  ∀ (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B] [Module.IsTorsionFree A B],
+    (∀ (Q : Ideal B) [Q.IsPrime], IsDomain (Localization.AtPrime Q) ∧
+      IsIntegrallyClosed (Localization.AtPrime Q)) →
     (∀ (Q : Ideal B) [Q.IsPrime], Q.comap (algebraMap A B) ≠ maximalIdeal A →
       Algebra.IsEtaleAt A Q) → Algebra.Etale A B
 
@@ -128,13 +134,13 @@ def IsLocalRing.HasPurityOfBranchLocus (A : Type u) [CommRing A] [IsLocalRing A]
 at least three and `f ∈ 𝔪 \ 𝔪²`, so that `A ⧸ (f)` is a regular local ring of dimension
 `dim A - 1 ≥ 2`. If `A ⧸ (f)` has purity of the branch locus, so does `A`.
 
-Not formalized yet. Stacks' proof: given `A ⊆ B` étale over the punctured spectrum `U`, restrict
+Not formalized yet. Stacks' proof: given `A → B` étale over the punctured spectrum `U`, restrict
 `V = Spec B ×_X U → U` to `U₀ = U ∩ V(f)`; by purity for `A ⧸ (f)` (via [Stacks 0BLR], `A ⧸ (f)`
 being normal) it extends to a finite étale cover of `Spec (A ⧸ f)`, which lifts to the completion
 `Â` along the henselian pair `(Â, fÂ)`; since `depth A ≥ 3`, i.e. `H¹_𝔪(A) = H²_𝔪(A) = 0`,
 finite étale covers of `U` and of the formal completion of `U` along `U₀` agree
 ([Stacks 0BLM], [Stacks 0BL8]), so `V` extends to a finite étale cover of `Spec A`, which is
-`Spec B` as `B` is normal. -/
+`Spec B` as `B` is normal and torsion-free. -/
 theorem IsRegularLocalRing.hasPurityOfBranchLocus_of_quotient {A : Type u} [CommRing A]
     [IsRegularLocalRing A] (hd : 3 ≤ ringKrullDim A) {f : A} (hf : f ∈ maximalIdeal A)
     (hf2 : f ∉ maximalIdeal A ^ 2) [IsLocalRing (A ⧸ Ideal.span {f})]
@@ -146,8 +152,8 @@ theorem IsRegularLocalRing.hasPurityOfBranchLocus_of_quotient {A : Type u} [Comm
 theorem IsRegularLocalRing.hasPurityOfBranchLocus :
     ∀ (n : ℕ) (A : Type u) [CommRing A] [IsRegularLocalRing A],
       ringKrullDim A = (n + 2 : ℕ) → HasPurityOfBranchLocus.{u, v} A
-  | 0, A, _, _, hd => fun _ _ _ _ _ _ _ h ↦
-    Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two (by exact_mod_cast hd) h
+  | 0, A, _, _, hd => fun _ _ _ _ _ hB h ↦
+    Algebra.Etale.of_isRegularLocalRing_of_ringKrullDim_eq_two (by exact_mod_cast hd) hB h
   | n + 1, A, _, _, hd => by
     set m := maximalIdeal A
     have hne : m ≠ ⊥ := by
@@ -175,15 +181,17 @@ theorem IsRegularLocalRing.hasPurityOfBranchLocus :
       exact_mod_cast (show (maximalIdeal (A ⧸ Ideal.span {f})).spanFinrank = n + 2 by omega)
 
 /-- **Zariski–Nagata purity of the branch locus** [Stacks 0BMA]. Let `(A, 𝔪)` be a regular local
-ring of dimension at least two and `A ⊆ B` a finite extension by an integrally closed domain `B`
-which is étale at every prime of `B` not lying over `𝔪`. Then `B` is étale over `A`.
+ring of dimension at least two and `A → B` a finite ring map with `B` normal and torsion-free over
+`A`, which is étale at every prime of `B` not lying over `𝔪`. Then `B` is étale over `A`.
 
 This is an input of blueprint `sbc-thm-spreading-finite-etale-galois` (through [Stacks 0EYE]).
 In dimension two the proof is complete; in higher dimension it depends on the reduction step
 `IsRegularLocalRing.hasPurityOfBranchLocus_of_quotient` ([Stacks 0BLS]). -/
 theorem Algebra.Etale.of_isRegularLocalRing {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [Algebra A B] [IsRegularLocalRing A] (hd : 2 ≤ ringKrullDim A) [Module.Finite A B]
-    [IsDomain B] [IsIntegrallyClosed B] [FaithfulSMul A B]
+    [Module.IsTorsionFree A B]
+    (hB : ∀ (Q : Ideal B) [Q.IsPrime], IsDomain (Localization.AtPrime Q) ∧
+      IsIntegrallyClosed (Localization.AtPrime Q))
     (h : ∀ (Q : Ideal B) [Q.IsPrime], Q.comap (algebraMap A B) ≠ maximalIdeal A →
       Algebra.IsEtaleAt A Q) :
     Algebra.Etale A B := by
@@ -193,4 +201,21 @@ theorem Algebra.Etale.of_isRegularLocalRing {A : Type u} {B : Type v} [CommRing 
   have hk : 2 ≤ k := by exact_mod_cast hd
   obtain ⟨n, hn⟩ : ∃ n, k = n + 2 := ⟨k - 2, by omega⟩
   rw [hn] at h1
-  exact IsRegularLocalRing.hasPurityOfBranchLocus n A h1.symm B h
+  exact IsRegularLocalRing.hasPurityOfBranchLocus n A h1.symm B hB h
+
+/-- **Zariski–Nagata purity of the branch locus** [Stacks 0BMA] for a normal domain `B` containing
+the regular local ring `A`, see `Algebra.Etale.of_isRegularLocalRing`. -/
+theorem Algebra.Etale.of_isRegularLocalRing_of_isDomain {A : Type u} {B : Type v} [CommRing A]
+    [CommRing B] [Algebra A B] [IsRegularLocalRing A] (hd : 2 ≤ ringKrullDim A)
+    [Module.Finite A B] [IsDomain B] [IsIntegrallyClosed B] [FaithfulSMul A B]
+    (h : ∀ (Q : Ideal B) [Q.IsPrime], Q.comap (algebraMap A B) ≠ maximalIdeal A →
+      Algebra.IsEtaleAt A Q) :
+    Algebra.Etale A B := by
+  have hinj := FaithfulSMul.algebraMap_injective A B
+  have : Module.IsTorsionFree A B := ⟨fun r hr b₁ b₂ hb ↦ mul_left_cancel₀
+    ((map_ne_zero_iff _ hinj).2 (isRegular_iff_ne_zero.1 hr))
+    (by simpa only [Algebra.smul_def] using hb)⟩
+  refine Algebra.Etale.of_isRegularLocalRing hd (fun Q _ ↦ ?_) h
+  have hle := Ideal.primeCompl_le_nonZeroDivisors Q
+  exact ⟨IsLocalization.isDomain_localization hle,
+    isIntegrallyClosed_of_isLocalization _ Q.primeCompl hle⟩

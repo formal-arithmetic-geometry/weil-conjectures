@@ -14,9 +14,11 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 # Parameters of the base form a regular pair on a normal finite extension
 
 Let `(A, 𝔪)` be a Noetherian integrally closed local domain with `ht 𝔪 ≥ 2`, and let `x, y ∈ A`
-with `x ≠ 0` and `𝔪 ⊆ √(x, y)`. If `B` is a Noetherian integrally closed domain which is an
-integral extension of `A`, then `[x, y]` is a weakly regular sequence on `B`
-(`IsIntegrallyClosed.isWeaklyRegular_pair_of_isIntegral`).
+with `x ≠ 0` and `𝔪 ⊆ √(x, y)`. If `B` is a Noetherian torsion-free integral `A`-algebra whose
+localizations at maximal ideals are integrally closed domains (e.g. a normal domain containing
+`A`), then `[x, y]` is a weakly regular sequence on `B`
+(`RingTheory.Sequence.isWeaklyRegular_pair_of_isTorsionFree`,
+`RingTheory.Sequence.isWeaklyRegular_pair_of_isDomain`).
 
 The key point is `IsIntegrallyClosed.exists_eq_of_mul_maximalIdeal`: in a Noetherian integrally
 closed local domain `R` whose maximal ideal `𝔫` is not principal, an element `f` of the fraction
@@ -133,33 +135,24 @@ theorem dvd_of_dvd_mul_of_le_radical (hR : ¬ (maximalIdeal R).IsPrincipal) {a b
   refine ⟨z, IsFractionRing.injective R K ?_⟩
   rw [map_mul, hz, mul_comm, div_mul_cancel₀ _ ha']
 
+end IsIntegrallyClosed
+
+namespace RingTheory.Sequence
 
 variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [IsLocalRing A]
-  [IsNoetherianRing A] [IsIntegrallyClosed A] [IsDomain B] [IsNoetherianRing B]
-  [IsIntegrallyClosed B]
-  [FaithfulSMul A B] [Algebra.IsIntegral A B]
+  [IsNoetherianRing B] [Algebra.IsIntegral A B]
 
-omit [IsIntegrallyClosed B] in
-/-- By going down, a maximal ideal of an integral extension `B` of a local integrally closed
-domain `(A, 𝔪)` has height at least the height of `𝔪`. -/
-theorem height_maximalIdeal_le_height (Q : Ideal B) [Q.IsMaximal] :
-    (maximalIdeal A).height ≤ Q.height := by
-  have : Q.LiesOver (maximalIdeal A) :=
-    ⟨(IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal Q)).symm⟩
-  rw [Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (maximalIdeal A) Q]
-  exact le_self_add
-
-/-- Let `(A, 𝔪)` be an integrally closed local domain with `ht 𝔪 ≥ 2`, and `x, y ∈ A` with `x ≠ 0`
-and `𝔪 ⊆ √(x, y)`. Then `[x, y]` is a weakly regular sequence on every Noetherian integrally
-closed domain `B` which is an integral extension of `A`. Step (i) of [Stacks 0BMA] in dimension
-two. -/
-theorem isWeaklyRegular_pair_of_isIntegral {x y : A} (hx : x ≠ 0)
-    (hm : maximalIdeal A ≤ (Ideal.span {x, y}).radical) (h2 : 2 ≤ (maximalIdeal A).height) :
+/-- Let `(A, 𝔪)` be a local ring, `B` a Noetherian integral `A`-algebra whose localizations at
+maximal ideals are integrally closed domains, and whose maximal ideals have height at least two.
+If `x, y ∈ A` with `x` regular on `B` and `𝔪 ⊆ √(x, y)`, then `[x, y]` is a weakly regular
+sequence on `B`. -/
+theorem isWeaklyRegular_pair_of_isIntegral {x y : A} (hx : IsSMulRegular B x)
+    (hm : maximalIdeal A ≤ (Ideal.span {x, y}).radical)
+    (hQ : ∀ (Q : Ideal B) [Q.IsMaximal], IsDomain (Localization.AtPrime Q) ∧
+      IsIntegrallyClosed (Localization.AtPrime Q) ∧ 2 ≤ Q.height) :
     IsWeaklyRegular B [x, y] := by
   set X := algebraMap A B x
   set Y := algebraMap A B y
-  have hinj := FaithfulSMul.algebraMap_injective A B
-  have hX : X ≠ 0 := (map_ne_zero_iff _ hinj).2 hx
   -- the key point: `Y` is a nonzerodivisor modulo `X`
   have key : ∀ b : B, X ∣ Y * b → X ∣ b := by
     intro b hb
@@ -176,18 +169,22 @@ theorem isWeaklyRegular_pair_of_isIntegral {x y : A} (hx : x ≠ 0)
     have hJ : J ≠ ⊤ := fun h ↦ hnot (by
       have : (1 : B) ∈ J := h ▸ Submodule.mem_top
       simpa [J] using this)
-    obtain ⟨Q, hQ, hJQ⟩ := Ideal.exists_le_maximal J hJ
+    obtain ⟨Q, hQm, hJQ⟩ := Ideal.exists_le_maximal J hJ
+    obtain ⟨hdom, hic, hht⟩ := hQ Q
     let R := Localization.AtPrime Q
-    have hle := Ideal.primeCompl_le_nonZeroDivisors Q
-    have : IsDomain R := IsLocalization.isDomain_localization hle
-    have : IsIntegrallyClosed R := isIntegrallyClosed_of_isLocalization R Q.primeCompl hle
-    have hRinj : Function.Injective (algebraMap B R) := IsLocalization.injective R hle
     have hcomap : (maximalIdeal R).comap (algebraMap B R) = Q :=
       Localization.AtPrime.under_maximalIdeal
     have hR : ¬ (maximalIdeal R).IsPrincipal := by
       refine IsLocalRing.not_isPrincipal_maximalIdeal_of_two_le_height ?_
       rw [← IsLocalization.height_under Q.primeCompl, Ideal.under, hcomap]
-      exact h2.trans (height_maximalIdeal_le_height Q)
+      exact hht
+    have hX0 : algebraMap B R X ≠ 0 := by
+      intro h0
+      obtain ⟨⟨s, hs⟩, hs0⟩ := (IsLocalization.map_eq_zero_iff Q.primeCompl R X).1 h0
+      have : s = 0 := hx (show x • s = x • 0 by
+        rw [Algebra.smul_def, smul_zero, mul_comm]
+        exact hs0)
+      exact hs (this ▸ Q.zero_mem)
     have hQA : Q.comap (algebraMap A B) = maximalIdeal A :=
       IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal Q)
     have hrad : maximalIdeal R ≤ (Ideal.span {algebraMap B R X, algebraMap B R Y}).radical := by
@@ -212,17 +209,19 @@ theorem isWeaklyRegular_pair_of_isIntegral {x y : A} (hx : x ≠ 0)
       calc maximalIdeal R = Q.map (algebraMap B R) := Localization.AtPrime.map_eq_maximalIdeal.symm
         _ = P'.map (algebraMap B R) := by rw [hP'eq]
         _ ≤ P := (IsLocalization.map_under Q.primeCompl R P).le
-    obtain ⟨z, hz⟩ := dvd_of_dvd_mul_of_le_radical R hR
-      ((map_ne_zero_iff _ hRinj).2 hX) hrad (b := algebraMap B R b) (by
+    obtain ⟨z, hz⟩ := IsIntegrallyClosed.dvd_of_dvd_mul_of_le_radical R hR hX0 hrad
+      (b := algebraMap B R b) (by
         obtain ⟨d, hd⟩ := hb
         exact ⟨algebraMap B R d, by rw [← map_mul, hd, map_mul]⟩)
     obtain ⟨⟨r, s⟩, rfl⟩ := IsLocalization.mk'_surjective Q.primeCompl z
-    have hbs : b * s = X * r := hRinj (by
-      rw [map_mul, hz, map_mul, mul_assoc, IsLocalization.mk'_spec])
-    have hsJ : (s : B) ∈ J := show X ∣ (s : B) * b from ⟨r, by rw [mul_comm, hbs]⟩
-    exact s.2 (hJQ hsJ)
+    have hbs : algebraMap B R (b * s) = algebraMap B R (X * r) := by
+      rw [map_mul, hz, map_mul, mul_assoc, IsLocalization.mk'_spec]
+    obtain ⟨⟨t, ht⟩, hts⟩ := IsLocalization.exists_of_eq (M := Q.primeCompl) hbs
+    have hsJ : t * (s : B) ∈ J := show X ∣ t * (s : B) * b from
+      ⟨t * r, by rw [mul_assoc, mul_comm (s : B), hts]; ring⟩
+    exact (Ideal.IsPrime.mul_notMem inferInstance ht s.2) (hJQ hsJ)
   rw [isWeaklyRegular_cons_iff, isWeaklyRegular_singleton_iff]
-  refine ⟨fun b₁ b₂ h ↦ mul_left_cancel₀ hX (by simpa only [Algebra.smul_def] using h), ?_⟩
+  refine ⟨hx, ?_⟩
   refine isSMulRegular_iff_right_eq_zero_of_smul.2 fun q hq ↦ ?_
   obtain ⟨b, rfl⟩ := Submodule.Quotient.mk_surjective _ q
   rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero,
@@ -232,4 +231,108 @@ theorem isWeaklyRegular_pair_of_isIntegral {x y : A} (hx : x ≠ 0)
   rw [Submodule.Quotient.mk_eq_zero, Submodule.mem_smul_pointwise_iff_exists]
   exact ⟨d, Submodule.mem_top, by rw [Algebra.smul_def, hd]⟩
 
-end IsIntegrallyClosed
+end RingTheory.Sequence
+
+namespace Ideal
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [IsLocalRing A]
+  [IsNoetherianRing A] [IsIntegrallyClosed A] [IsNoetherianRing B] [Algebra.IsIntegral A B]
+
+/-- By going down, a maximal ideal of an integral extension `B` of a local integrally closed
+domain `(A, 𝔪)` by a domain `B` has height at least the height of `𝔪`. -/
+theorem height_maximalIdeal_le_height_of_isDomain [IsDomain B] [FaithfulSMul A B] (Q : Ideal B)
+    [Q.IsMaximal] : (maximalIdeal A).height ≤ Q.height := by
+  have : Q.LiesOver (maximalIdeal A) :=
+    ⟨(IsLocalRing.eq_maximalIdeal (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal Q)).symm⟩
+  rw [Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown (maximalIdeal A) Q]
+  exact le_self_add
+
+/-- Let `(A, 𝔪)` be a Noetherian integrally closed local domain and `B` a torsion-free Noetherian
+integral `A`-algebra. If the localization of `B` at a maximal ideal `Q` is a domain, then
+`ht Q ≥ ht 𝔪`: apply going down to `B ⧸ P`, where `P ⊆ Q` is a minimal prime (which meets `A`
+trivially as it consists of zerodivisors). -/
+theorem height_maximalIdeal_le_height_of_isTorsionFree [IsDomain A] [Module.IsTorsionFree A B]
+    (Q : Ideal B) [Q.IsMaximal] : (maximalIdeal A).height ≤ Q.height := by
+  obtain ⟨P, hPmin, hPQ⟩ := Ideal.exists_minimalPrimes_le (show ⊥ ≤ Q from bot_le)
+  have hP : P.IsPrime := hPmin.1.1
+  let B' := B ⧸ P
+  have : FaithfulSMul A B' := by
+    refine (faithfulSMul_iff_algebraMap_injective A B').2 ?_
+    rw [injective_iff_map_eq_zero]
+    intro a ha
+    by_contra ha0
+    have hreg : IsSMulRegular B a := (isRegular_iff_ne_zero.2 ha0).isSMulRegular
+    have hmem : algebraMap A B a ∈ P := by
+      rwa [IsScalarTower.algebraMap_apply A B B', Ideal.Quotient.algebraMap_eq,
+        Ideal.Quotient.eq_zero_iff_mem] at ha
+    have hnzd : algebraMap A B a ∈ nonZeroDivisors B := by
+      refine mem_nonZeroDivisors_iff.2 ⟨fun z hz ↦ hreg ?_, fun z hz ↦ hreg ?_⟩
+      · change a • z = a • 0
+        rw [Algebra.smul_def, smul_zero, hz]
+      · change a • z = a • 0
+        rw [Algebra.smul_def, smul_zero, mul_comm, hz]
+    exact Set.disjoint_left.1 (Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes
+      (by simpa [minimalPrimes] using hPmin)) hmem hnzd
+  have hsurj := Ideal.Quotient.mk_surjective (I := P)
+  let Q' := Q.map (Ideal.Quotient.mk P)
+  have hQQ' : Q'.comap (Ideal.Quotient.mk P) = Q := by
+    rw [Ideal.comap_map_of_surjective' _ hsurj, Ideal.mk_ker, sup_eq_left.2 hPQ]
+  have hQ'max : Q'.IsMaximal := by
+    refine (Ideal.map_eq_top_or_isMaximal_of_surjective _ hsurj inferInstance).resolve_left ?_
+    intro htop
+    have : Q'.comap (Ideal.Quotient.mk P) = ⊤ := by
+      change (Q.map _).comap _ = ⊤
+      rw [htop, Ideal.comap_top]
+    exact Ideal.IsMaximal.ne_top inferInstance (hQQ'.symm.trans this)
+  have h1 := height_maximalIdeal_le_height_of_isDomain (A := A) (B := B') Q'
+  refine h1.trans ?_
+  let q : PrimeSpectrum B' := ⟨Q', hQ'max.isPrime⟩
+  have e1 := PrimeSpectrum.height_eq_orderHeight q
+  have e2 := PrimeSpectrum.height_eq_orderHeight (PrimeSpectrum.comap (Ideal.Quotient.mk P) q)
+  have e3 : (PrimeSpectrum.comap (Ideal.Quotient.mk P) q).asIdeal = Q := hQQ'
+  rw [e3] at e2
+  change Q'.height ≤ Q.height
+  rw [show Q'.height = q.asIdeal.height from rfl, e1, e2]
+  have hmono : StrictMono (PrimeSpectrum.comap (Ideal.Quotient.mk P)) := by
+    intro a b hab
+    refine lt_of_le_of_ne (Ideal.comap_mono (f := Ideal.Quotient.mk P) hab.le) fun h ↦ hab.ne ?_
+    exact PrimeSpectrum.comap_injective_of_surjective _ hsurj h
+  exact Order.height_le_height_apply_of_strictMono _ hmono q
+
+end Ideal
+
+namespace RingTheory.Sequence
+
+variable {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [IsLocalRing A]
+  [IsNoetherianRing A] [IsIntegrallyClosed A] [IsNoetherianRing B] [Algebra.IsIntegral A B]
+
+/-- Let `(A, 𝔪)` be a Noetherian integrally closed local domain with `ht 𝔪 ≥ 2`, and `x, y ∈ A`
+with `x ≠ 0` and `𝔪 ⊆ √(x, y)`. Then `[x, y]` is a weakly regular sequence on every Noetherian
+integral torsion-free `A`-algebra `B` whose localizations at maximal ideals are integrally closed
+domains. Step (i) of [Stacks 0BMA] in dimension two. -/
+theorem isWeaklyRegular_pair_of_isTorsionFree [IsDomain A] [Module.IsTorsionFree A B] {x y : A}
+    (hx : x ≠ 0) (hm : maximalIdeal A ≤ (Ideal.span {x, y}).radical)
+    (h2 : 2 ≤ (maximalIdeal A).height)
+    (hB : ∀ (Q : Ideal B) [Q.IsMaximal], IsDomain (Localization.AtPrime Q) ∧
+      IsIntegrallyClosed (Localization.AtPrime Q)) :
+    IsWeaklyRegular B [x, y] := by
+  refine isWeaklyRegular_pair_of_isIntegral
+    (show IsSMulRegular B x from (isRegular_iff_ne_zero.2 hx).isSMulRegular) hm fun Q _ ↦ ?_
+  obtain ⟨h1, h2'⟩ := hB Q
+  exact ⟨h1, h2', h2.trans (Ideal.height_maximalIdeal_le_height_of_isTorsionFree Q)⟩
+
+/-- Domain version of `RingTheory.Sequence.isWeaklyRegular_pair_of_isTorsionFree`. -/
+theorem isWeaklyRegular_pair_of_isDomain [IsDomain B] [IsIntegrallyClosed B] [FaithfulSMul A B]
+    {x y : A} (hx : x ≠ 0) (hm : maximalIdeal A ≤ (Ideal.span {x, y}).radical)
+    (h2 : 2 ≤ (maximalIdeal A).height) :
+    IsWeaklyRegular B [x, y] := by
+  have hinj := FaithfulSMul.algebraMap_injective A B
+  refine isWeaklyRegular_pair_of_isIntegral (fun b₁ b₂ h ↦
+    mul_left_cancel₀ ((map_ne_zero_iff _ hinj).2 hx)
+    (by simpa only [Algebra.smul_def] using h)) hm fun Q _ ↦ ?_
+  have hle := Ideal.primeCompl_le_nonZeroDivisors Q
+  exact ⟨IsLocalization.isDomain_localization hle,
+    isIntegrallyClosed_of_isLocalization _ Q.primeCompl hle,
+    h2.trans (Ideal.height_maximalIdeal_le_height_of_isDomain Q)⟩
+
+end RingTheory.Sequence
