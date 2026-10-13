@@ -148,6 +148,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
@@ -958,6 +962,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothn
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.FamilyObject
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
@@ -1606,6 +1611,7 @@ public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
+public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
