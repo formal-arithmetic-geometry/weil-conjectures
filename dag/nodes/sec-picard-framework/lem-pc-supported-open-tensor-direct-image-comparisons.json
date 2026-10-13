@@ -17,46 +17,61 @@
  ],
  "proof": [
   {
-   "text": "Apply the supported-open unit theorem to E, then apply Rf_* and the derived direct-image composition isomorphism. Auxiliary open localizations may be standard; transport the result along localization equivalences to the fixed categories.",
+   "text": "Use exact restriction and its homology comparison to prove that an object whose homology stalks vanish on an open has zero derived restriction, allowing the target localization universe to differ from the ambient one. In the proof, module sections vanish because all their germs vanish (TopCat.Presheaf.section_ext); DerivedCategory.isIso_iff applied to the zero map detects the zero derived object. The inverse implication follows from the restriction homology stalk isomorphism. These are the private supportedTensor_restriction_zero, supportedTensor_restriction_stalk_iso and supportedTensor_stalk_zero_of_restriction_zero helpers.",
    "uses": [
-    "lem-pc-supported-open-pushforward",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Closed support passes through derived direct image: restrict to the open complement of T, use open base change, and apply the first step to the inverse-image open. The direct image of its zero restriction is zero, so the stalk comparison gives the claimed support. Choose standard localizations only on these auxiliary opens; no same-universe family of open localizations is assumed.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
    ],
    "elementary": false
   },
   {
-   "text": "On the open complement of T, exact restriction of E is zero. Derived tensor commutes with restriction, so restriction of E tensor Lf^*K is zero as well. Exact restriction and stalk comparison identify this with vanishing of all cohomology stalks outside T. The same supported-open comparison and composition therefore apply to that tensor input.",
+   "text": "Construct the restriction/direct-image adjunction by deriving the exact underived open restriction adjunction. The open direct image is fully faithful, since its underived functor is fully faithful and preserves K-injective complexes. Thus the restricted unit is invertible on U by the triangle identity. On X minus T both endpoints are zero by steps 1 and 2. The opens cover X. Apply DerivedCategory.isIso_iff, exact restriction/homology and sheaf-module isomorphism locality on this cover to show the global unit is invertible. Apply Rf_* to its isomorphism and then the component of derivedDirectImageComposition to obtain the first comparison.",
    "uses": [
-    "lem-pc-supported-derived-restriction-zero",
-    "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-supported-open-pushforward",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "lem-pc-derived-direct-image-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Use compatibility of restriction with derived tensor and pullback to identify the restricted input with R_U E tensor L(fj)^*K, then apply R(fj)_*. The pullback composition identifies restriction along j followed by pullback along f with pullback along fj.",
+   "text": "Restrict E tensor F to X minus T using the independently localized derived tensor restriction comparison. The restriction of E is zero by step 1. Tensoring on the right preserves the empty coproduct, hence zero objects. Therefore this tensor restricts to zero, and the stalk comparison proves its cohomological support is in T. Apply step 3 with F = Lf^*K to obtain the supported comparison for the tensor input.",
    "uses": [
     "lem-pc-derived-tensor-open-restriction-universes",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-derived-tensor-right-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the derived tensor restriction comparison on U. For the remaining factor, compose Lf^* adjoint to Rf_* with exact U-restriction adjoint to Rj_*, and transport the right adjoint along the derived direct-image composition comparison. Uniqueness of left adjoints identifies Lf^* followed by U-restriction with L(fj)^*. Apply tensorIso with the identity on restricted E and this comparison at K, then R(fj)_*. Compose with the tensor-input comparison from step 4. The two comparisons form the required conjunction.",
+   "uses": [
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-derived-direct-image-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-supported-open-pushforward",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-supported-derived-restriction-zero",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+  "lem-pc-derived-direct-image-composition",
   "lem-pc-derived-tensor-open-restriction-universes",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-pc-ringed-spaces-derived-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 08EV, support reduction; Tag 08DF (1); Tags 08DX and 08DW, open compatibility",
-  "note": "U3: comparison packaging of the cited source proof for fixed derived localizations."
+  "place": "Tags 08DF (1), 08FE, 06YH and 0D5T; Tag 079W and uniqueness of left adjoints",
+  "note": "K2: compiled support-and-restriction proof with standard localizations on auxiliary opens. The final pullback comparison is obtained by adjoint uniqueness rather than the global pullback-composition interface. No statement changes and no new holes."
  },
  "mathlib_searches": [
   {
@@ -149,11 +164,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-25c8d",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T100151-L-2494144",
+  "landing": "20261013T113346-L-3185422",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature with the node statement; proof with recorded dependencies; delivered module and sole direct importer compile cleanly; all nine declarations use only the three permitted axioms."
  }
 }
