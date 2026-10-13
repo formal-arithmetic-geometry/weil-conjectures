@@ -10874,3 +10874,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/K3/Sheaf.AlgebraicGeometry.KoszulBasicOpenExact (stage 3; reviewer PASS; first push; landing 20261013T031544-L-3571854 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists (stage 3; reviewer PASS; first push; landing 20261013T031544-L-3571982 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/M2/Sheaf.RingTheory.PrincipalLocalizationAlgEquiv (stage 3; reviewer PASS; first push; landing 20261013T031545-L-3572132 (interface); batch 20261013T031526; modules 1; new nodes 0; change records: coord/changes/principalLocalization_algEquiv-imports.md)
+- 03:15 L: merged deliver/M3/Sheaf.FieldTheory.PBasisExtension (stage 3; reviewer PASS; first push; landing 20261013T031545-L-3572232 (interface); batch 20261013T031526; modules 3; new nodes 2)

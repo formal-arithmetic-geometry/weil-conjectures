@@ -10,6 +10,9 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 public import Mathlib.Algebra.BigOperators.Finsupp.Basic
 public import Mathlib.Algebra.CharP.Defs
+import Mathlib.LinearAlgebra.Basis.Basic
+import Sheaf.FieldTheory.PBasisMaximalSuperset
+import Sheaf.FieldTheory.PIndependentInsert
 
 /-!
 # Extension of p-independent families to p-bases
@@ -24,6 +27,43 @@ Lemma 15.47.2 (Tag 07P2), the p-basis extension assertion
 universe u v w
 
 namespace FieldTheory
+
+private def boundedExponentEquiv {A : Type*} {B : Type*} (p : ℕ) (e : A ≃ B) :
+    {E : A →₀ ℕ // ∀ a, E a < p} ≃ {E : B →₀ ℕ // ∀ b, E b < p} :=
+  Equiv.subtypeEquiv (Finsupp.equivCongrLeft e) (by
+    intro E
+    constructor
+    · intro h b
+      exact h (e.symm b)
+    · intro h a
+      simpa using h (e a))
+
+private theorem boundedExponentEquiv_prod {A : Type*} {B : Type*}
+    {K : Type*} [CommMonoid K] (p : ℕ) (e : A ≃ B) (z : B → K)
+    (E : {E : A →₀ ℕ // ∀ a, E a < p}) :
+    (boundedExponentEquiv p e E).val.prod (fun b n ↦ z b ^ n) =
+      E.val.prod (fun a n ↦ z (e a) ^ n) :=
+  Finsupp.prod_equivMapDomain e E.val (fun b n ↦ z b ^ n)
+
+private theorem injective_of_pIndependent
+    {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
+    (p : ℕ) [Fact p.Prime] {I : Type w} (x : I → K)
+    (hx : LinearIndependent (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p)))
+      (fun E : {E : I →₀ ℕ // ∀ i : I, E i < p} ↦
+        E.val.prod (fun i e ↦ x i ^ e))) : Function.Injective x := by
+  classical
+  have hp : 1 < p := (Fact.out : p.Prime).one_lt
+  let single (i : I) : {E : I →₀ ℕ // ∀ i : I, E i < p} :=
+    ⟨Finsupp.single i 1, fun j ↦ by
+      by_cases h : i = j
+      · subst j
+        simpa using hp
+      · simp [h, Nat.zero_lt_of_lt hp]⟩
+  intro i j hij
+  have he : single i = single j := hx.injective (by
+    simpa [single] using hij)
+  exact Finsupp.single_left_injective (by decide : (1 : ℕ) ≠ 0)
+    (congrArg Subtype.val he)
 
 /-- A p-independent family extends to a p-basis, preserving its original indexing.
 Source: Stacks Project, More on Algebra, Tags 07P1 and 07P2
@@ -63,6 +103,72 @@ theorem exists_pBasis_extension
       (b : Module.Basis {E : (I ⊕ J) →₀ ℕ // ∀ l : I ⊕ J, E l < p}
         (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p))) K),
       ∀ E, b E = E.val.prod (fun l e ↦ Sum.elim x y l ^ e) := by
-  sorry
+  classical
+  let F := IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p))
+  have hxi := injective_of_pIndependent p x hx
+  let ex : I ≃ Set.range x := Equiv.ofInjective x hxi
+  have hr : LinearIndependent F
+      (fun E : {E : Set.range x →₀ ℕ // ∀ i, E i < p} ↦
+        E.val.prod (fun i n ↦ (i : K) ^ n)) := by
+    apply (linearIndependent_equiv' (boundedExponentEquiv p ex) ?_).mp hx
+    funext E
+    simpa [Function.comp_def, ex] using
+      boundedExponentEquiv_prod p ex (fun i : Set.range x ↦ (i : K)) E
+  obtain ⟨T, hsub, hmax⟩ := exists_maximal_pIndependent_superset p (Set.range x) hr
+  have hspan : Submodule.span F
+      (Set.range (fun E : {E : T →₀ ℕ // ∀ t : T, E t < p} ↦
+        E.val.prod (fun t n ↦ (t : K) ^ n))) = ⊤ := by
+    apply top_unique
+    intro a _
+    by_contra ha
+    have hins := pIndependent_insert_of_not_mem_span p T hmax.prop a ha
+    have haT : a ∈ T := hmax.2 hins (Set.subset_insert a T) (Set.mem_insert a T)
+    let t : T := ⟨a, haT⟩
+    let E : {E : T →₀ ℕ // ∀ t : T, E t < p} :=
+      ⟨Finsupp.single t 1, fun j ↦ by
+        by_cases ht : t = j
+        · subst j
+          simpa using (Fact.out : p.Prime).one_lt
+        · simp [ht, (Fact.out : p.Prime).pos]⟩
+    apply ha
+    apply Submodule.subset_span
+    exact ⟨E, by simp [E, t]⟩
+  let J : Type v := {a : K // a ∈ T ∧ a ∉ Set.range x}
+  let y : J → K := Subtype.val
+  let f : I ⊕ J → T := Sum.elim
+    (fun i ↦ ⟨x i, hsub ⟨i, rfl⟩⟩) (fun j ↦ ⟨j.val, j.property.1⟩)
+  have hf : Function.Bijective f := by
+    constructor
+    · intro a b hab
+      cases a with
+      | inl i =>
+        cases b with
+        | inl j =>
+          exact congrArg Sum.inl (hxi (congrArg Subtype.val hab))
+        | inr j =>
+          exact (j.property.2 ⟨i, congrArg Subtype.val hab⟩).elim
+      | inr i =>
+        cases b with
+        | inl j =>
+          exact (i.property.2 ⟨j, (congrArg Subtype.val hab).symm⟩).elim
+        | inr j =>
+          have hv : (i : K) = (j : K) := congrArg (fun t : T ↦ (t : K)) hab
+          exact congrArg Sum.inr (Subtype.ext hv)
+    · intro t
+      by_cases ht : (t : K) ∈ Set.range x
+      · obtain ⟨i, hi⟩ := ht
+        exact ⟨Sum.inl i, Subtype.ext hi⟩
+      · exact ⟨Sum.inr ⟨t.val, t.property, ht⟩, rfl⟩
+  let e : I ⊕ J ≃ T := Equiv.ofBijective f hf
+  let bT := Module.Basis.mk hmax.prop hspan.ge
+  refine ⟨J, y, bT.reindex (boundedExponentEquiv p e).symm, ?_⟩
+  intro E
+  rw [Module.Basis.reindex_apply]
+  change bT (boundedExponentEquiv p e E) = _
+  rw [Module.Basis.mk_apply]
+  rw [boundedExponentEquiv_prod]
+  congr 1
+  funext l n
+  cases l <;> rfl
 
 end FieldTheory
