@@ -1,0 +1,118 @@
+{
+ "id": "lem-sbc-ext-injective-resolution-comparison",
+ "kind": "statement",
+ "title": "Projective Ext computed from an injective resolution",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module, $E$ an injective resolution of $M$, and $q\\in\\mathbf N$. For a module $X$, let $\\operatorname{Hom}(X,E)$ be the nonnegative cochain complex of $R$-linear maps, with differential given by postcomposition. There is a natural $R$-linear isomorphism, contravariant in $X$, between Mathlib's projectively defined $\\operatorname{Ext}^q_R(X,M)$ and $H^q(\\operatorname{Hom}(X,E))$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0954, proof of Lemma 47.8.2"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For each module X choose a projective resolution P. Form the first-quadrant double complex Hom(P,E), with horizontal precomposition differential and vertical postcomposition differential, and total differential d_horizontal + (-1)^i d_vertical in horizontal degree i. The edge maps from Hom(P,M) and Hom(X,E) are compatible with these differentials. The vertical augmented complexes are exact because P^i is projective; the horizontal augmented complexes are exact because E^j is injective. For the first edge, take its augmented total complex, with vertical augmentation degree -1. In each total degree the diagonal is finite. The lowest-horizontal-degree component of a total cocycle is a vertical cycle. Lift it by vertical exactness and subtract the signed total boundary of the lift. That component disappears and any new component lies one horizontal degree higher and one vertical degree lower. Repeat finitely often. At vertical degree -1, injectivity of the augmentation forces the final component to vanish. Thus every total cocycle is a boundary. Interchange horizontal and vertical for the other edge, using horizontal augmentation degree -1. Both edge maps are therefore quasi-isomorphisms. Mathlib ProjectiveResolution.isoExt computes the first edge cohomology as projective Ext. Compose its identification with the inverse of the second edge cohomology isomorphism. Every map is R-linear.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Lift a morphism X′ → X to the chosen projective resolutions. Precomposition gives a map of double complexes compatible with both augmentations. The induced maps on edge cohomology thus commute with the constructed isomorphisms. Two projective comparison lifts are homotopic, and precomposition with a homotopy changes the cochain map by a cochain homotopy, hence does not change its cohomology map. The isomorphisms therefore form a natural isomorphism of functors on the opposite module category. In degree zero the edge maps are the usual Hom identification.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0954, proof of Lemma 47.8.2; explicit Mathlib comparison infrastructure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext computed with an injective resolution natural in the first argument",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.sub_extMk, CategoryTheory.InjectiveResolution.extMk_eq_zero_iff, CategoryTheory.ProjectiveResolution.extMk_hom",
+   "verdict": "Related infrastructure only; no exact comparison found. Mathlib has the constructions used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectively defined Ext groups are naturally isomorphic to cohomology of Hom into an injective resolution",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoExt|linearCoyoneda.*homology|Ext.*InjectiveResolution",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/Algebra/Category/Grp/Images.lean",
+   "verdict": "Related infrastructure only; no exact comparison found. Mathlib has the constructions used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalCohomologyDerivedTorsion",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, purity across a regular special divisor: depth-three punctured-spectrum H¹ vanishing used by principal-quotient lifting; the affine local-cohomology comparison step. Component: Projective Ext computed from an injective resolution.",
+   "via": [
+    "lem-sbc-local-cohomology-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ExtInjectiveResolutionComparison.lean",
+  "declaration": "ModuleCat.nonempty_ext_iso_injectiveResolution_homology",
+  "declarations": [
+   "ModuleCat.nonempty_ext_iso_injectiveResolution_homology",
+   "ModuleCat.homComplexDiagram"
+  ],
+  "statement": "theorem nonempty_ext_iso_injectiveResolution_homology\n    {R : Type u} [CommRing R] (M : ModuleCat.{u} R)\n    (E : InjectiveResolution M) (q : ℕ) :\n    Nonempty ((Ext R (ModuleCat.{u} R) q).flip.obj M ≅\n      homComplexDiagram E.cocomplex ⋙\n        HomologicalComplex.homologyFunctor (ModuleCat.{u} R) (ComplexShape.up ℕ) q)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T222421-L-1229554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T222421-L-1229554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.Algebra.Homology.LocalCohomology
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.Algebra.Homology.ExtInjectiveResolutionComparison
+import Sheaf.Algebra.Homology.FilteredColimitCochainHomology
+import Sheaf.Algebra.Homology.QuotientHomComplexColimit
 
 /-! # Ext-colimit local cohomology and derived ideal-power torsion
 
@@ -47,6 +50,20 @@ theorem nonempty_localCohomology_iso_derived_torsion
     {R : Type u} [CommRing R] (J : Ideal R) (hJ : J.FG)
     (M : ModuleCat.{u} R) (q : ℕ) :
     Nonempty ((localCohomology J q).obj M ≅
-      ((idealPowerTorsion J).rightDerived q).obj M) := by sorry
+      ((idealPowerTorsion J).rightDerived q).obj M) := by
+  have _hJ := hJ
+  clear _hJ hJ
+  let E := injectiveResolution M
+  let Q := (localCohomology.ringModIdeals (localCohomology.idealPowersDiagram J)).op
+  let F := Q ⋙ homComplexDiagram E.cocomplex
+  obtain ⟨e⟩ := nonempty_ext_iso_injectiveResolution_homology M E q
+  obtain ⟨h⟩ := nonempty_colimit_homology_iso F q
+  obtain ⟨t⟩ := nonempty_colimit_quotientHomComplex_iso_torsion J E.cocomplex
+  let c := CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation
+    (localCohomology.diagram (localCohomology.idealPowersDiagram J) q) M
+  refine ⟨c ≪≫ ?_ ≪≫ h ≪≫
+    (HomologicalComplex.homologyFunctor (ModuleCat.{u} R) (ComplexShape.up ℕ) q).mapIso t ≪≫
+      (E.isoRightDerivedObj (idealPowerTorsion J) q).symm⟩
+  exact CategoryTheory.Limits.HasColimit.isoOfNatIso (Functor.isoWhiskerLeft Q e)
 
 end ModuleCat

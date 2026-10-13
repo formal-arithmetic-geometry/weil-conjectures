@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-filtered-colimit-cochain-homology",
+ "kind": "statement",
+ "title": "Filtered module colimits commute with cochain homology",
+ "statement": "Let $R$ be a commutative ring, $D$ a small filtered category and $F:D\\to\\operatorname{CoCh}_{\\ge0}(\\operatorname{Mod}_R)$ a diagram of nonnegative cochain complexes. For every $q\\in\\mathbf N$ there is an $R$-linear isomorphism $\\operatorname{colim}_{d\\in D} H^q(F(d))\\cong H^q(\\operatorname{colim}_{d\\in D} F(d))$. Colimits of complexes are computed degreewise.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0954, proof of Lemma 47.8.2"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Form the short complex S in the diagram category D ⥤ ModuleCat R by applying ShortComplex.functorEquivalence.inverse to the degree-q short complexes of F. The canonical homology comparisons S.mapHomologyIso for evaluation at each d give a natural isomorphism from the diagram d ↦ H^q(F(d)) to S.homology. Naturality follows from ShortComplex.homologyMap_mapNatTrans.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "ModuleCat.AB gives AB5; shrink its universe using AB5OfSize_of_univLE. Hence colim is exact, and S.mapHomologyIso colim identifies colim(S.homology) with the homology of S.map colim. The latter short complex has the same objects and arrows as the degree-q short complex of HomologicalComplex.coconeOfHasColimitEval F. ShortComplex.isoMk and homologyMapIso identify their homologies. Finally the uniqueness isomorphism from HomologicalComplex.isColimitCoconeOfHasColimitEval identifies that explicit degreewise complex with colimit F. Compose these isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0954, proof of Lemma 47.8.2; explicit Mathlib comparison infrastructure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimits commute with homology of complexes of modules",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimits.*homology|homologyFunctor.*[Cc]olimit|colimit.*homologyFunctor",
+   "date": "2026-10-14",
+   "results": "0 hits: ",
+   "verdict": "Related infrastructure only; no exact comparison found. Mathlib has the constructions used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of cochain complex homology is homology of colimit complex",
+   "date": "2026-10-14",
+   "results": "8 hits: instPreservesHomologyFunctorAddCommGrpCatColim, HomologicalComplex.isColimitCoconeOfHasColimitEval, HomologicalComplex.isColimitOfEval, HomologicalComplex.homologyIsCokernel, HomologicalComplex.opcyclesIsCokernel, HomologicalComplex.instHasColimit, HomologicalComplex.extend.leftHomologyData.isColimitCokernelCofork, HomologicalComplex.instHasFilteredColimitsOfSize",
+   "verdict": "Related infrastructure only; no exact comparison found. Mathlib has the constructions used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalCohomologyDerivedTorsion",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, purity across a regular special divisor: depth-three punctured-spectrum H¹ vanishing used by principal-quotient lifting; the affine local-cohomology comparison step. Component: Filtered module colimits commute with cochain homology.",
+   "via": [
+    "lem-sbc-local-cohomology-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredColimitCochainHomology",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredColimitCochainHomology.lean",
+  "declaration": "ModuleCat.nonempty_colimit_homology_iso",
+  "declarations": [
+   "ModuleCat.nonempty_colimit_homology_iso"
+  ],
+  "statement": "theorem nonempty_colimit_homology_iso\n    {R : Type (max u v)} [CommRing R] {D : Type v} [SmallCategory D] [IsFiltered D]\n    (F : D ⥤ CochainComplex (ModuleCat.{max u v} R) ℕ) (q : ℕ) :\n    Nonempty (colimit (F ⋙\n      HomologicalComplex.homologyFunctor (ModuleCat.{max u v} R) (ComplexShape.up ℕ) q) ≅\n      (colimit F).homology q)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T222421-L-1229554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T222421-L-1229554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
