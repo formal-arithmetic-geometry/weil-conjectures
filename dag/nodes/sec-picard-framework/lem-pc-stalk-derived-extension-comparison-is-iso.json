@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-stalk-derived-extension-comparison-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of a stalk comparison satisfying the K-flat equation",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S, g′:X′→X form a cartesian square of schemes, with chosen derived categories of module sheaves. Let z∈X′ and R,A,B,C be the actual stalk rings, with ρ:A→A⊗_R B→C the composite stalk ring map [def-pc-single-complex-base-change-stalk-condition]. Let L:D(A)→D(C), ε:Qh⋙L→extendScalars(ρ)⋙Qh be a universal left-derived scalar-extension pair. Use the exact derived stalk functors [lem-pc-stalk-comparison-source-transport]. Let j be a natural transformation stalk(g′z)⋙L→derivedPullback(g′)⋙stalk(z). Suppose j satisfies the following equation. For every K-flat sheaf complex P on X with invertible recorded pullback counit, L of the inverse old exact-stalk factor followed by the component at Q(P) equals, in order, L of the inverse Q/Qh factor, ε at the stalk complex, Qh of the ordinary scalar-extension homotopy factor, the new Q/Qh factor, Q of tensorStalkIso, the inverse new exact-stalk factor, and the new derived stalk of the inverse pullback counit. This is the exact derived-morphism equation of the Lean signature. Then j is invertible as a natural transformation.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-kflat-complex",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8"
+ },
+ "proof": [
+  {
+   "text": "On each K-flat P with invertible pullback counit, apply the K-flat stalk criterion and scalar-extension counit theorem. All factors of the representative equation are then invertible; cancel its source localization factor to deduce IsIso of the comparison component.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary K use nonempty_coordinates for the identity of derivedPullback(g′)(K). The coordinates give Q(P) ≅ K, K-flatness of P, and an invertible pullback counit. Naturality at this coordinate isomorphism and cancellation transport IsIso to the component at K. NatIso.isIso_of_isIso_app concludes.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8; Tags 06YB, 0D5S, 06Y6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-13",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv",
+   "verdict": "no exact match; generic localization tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation on derived categories is an isomorphism if its components on K-flat resolutions are isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts, DerivedCategory.instIsIsoMapCochainComplexIntQ, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+   "verdict": "no exact match; generic localization tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkDerived|tensorPullback_stalk|isLeftDerivedFunctor_iff_isIso_app",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match; generic localization tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact stalks of sheaf pullback on K-flat complexes, with counit compatibility",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Derived pullback-stalk comparison before equation-bc, Tag 0DJ8: invertibility on K-flat representatives",
+   "via": [
+    "lem-pc-stalk-derived-extension-comparison-intermediate",
+    "lem-pc-stalk-derived-extension-comparison",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.stalkDerivedExtensionComparison_isIso",
+  "statement": "theorem stalkDerivedExtensionComparison_isIso (z : X') :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (A g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (C z))\n    ∀ (L : DerivedCategory (ModuleCat.{u} (A g' z)) ⥤\n      DerivedCategory (ModuleCat.{u} (C z)))\n      (ε : DerivedCategory.Qh ⋙ L ⟶\n        (ModuleCat.extendScalars.{u, u, u}\n          ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp\n            (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomotopyCategory\n              (.up ℤ) ⋙ DerivedCategory.Qh)\n      (_hL : L.IsLeftDerivedFunctor ε\n        (HomotopyCategory.quasiIso (ModuleCat.{u} (A g' z)) (.up ℤ)))\n      (j : comparisonDerivedStalk X (g' z) ⋙ L ⟶\n        derivedPullback g' ⋙ comparisonDerivedStalk X' z)\n      (_hj :\n      ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (_hP : P.IsKFlat)\n        (_hcP : IsIso ((counit g').app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),\n        L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (g' z)).mapDerivedCategoryFactors.inv.app P) ≫\n            j.app (DerivedCategory.Q.obj P) =\n          L.map ((DerivedCategory.quotientCompQhIso _).inv.app (stalkComplex g' z P)) ≫\n            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (stalkComplex g' z P)) ≫\n            DerivedCategory.Qh.map\n              (((ModuleCat.extendScalars.{u, u, u}\n                ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp\n                  (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomotopyCategoryFactors\n                  (.up ℤ)).hom.app\n                (stalkComplex g' z P)) ≫\n            (DerivedCategory.quotientCompQhIso (ModuleCat.{u} (C z))).hom.app\n              (tensorComplex f f' g g' sq z P) ≫\n            DerivedCategory.Q.map (tensorStalkIso f f' g g' sq z P).hom ≫\n            (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapDerivedCategoryFactors.inv.app\n                (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) ≫\n            (comparisonDerivedStalk X' z).map\n              (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))), IsIso j",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T131329-L-4035221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
