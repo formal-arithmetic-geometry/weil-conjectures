@@ -21,50 +21,33 @@
  },
  "proof": [
   {
-   "text": "Use open derived direct-image restriction for the nested opens and identify the restricted coefficient sheaf with q^*M using the supplied sheaf isomorphism. Transport to the cartesian pullback scheme.",
+   "text": "Apply nestedOpen_single_directImage_comparison to identify the twice localized restriction with the transported direct image of the single sheaf tensorPullbackObj (pullback.fst f (V.ι ≫ U.ι)) F.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-nested-open-single-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 0A1D and 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply relatively flat complex tensor base change to p with perfect unit O_Y[0] and G=M[0]. Tensor unit comparisons remove the unit, producing Lg^*Rp_*M[0]. Identify the given cartesian square with the canonical pullback square.",
+   "text": "Apply localized_cartesian_flat_single_comparison to the square sq; this identifies the transported direct image of tensorPullbackObj q M with the requested localized mixed derived pullback.",
    "uses": [
-    "lem-pc-rf-base-change-complex"
+    "lem-pc-localized-cartesian-flat-single-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 0A1D and 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Use canonical localization equivalences to compare independently supplied universes. Compute right-derived images using a common K-injective resolution. Apply the exact inverse overEquiv V to obtain precisely the explicit localized mixed pullback.",
-   "uses": [
-    "def-pc-ringed-spaces-derived-direct-image",
-    "def-pc-localized-mixed-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 0A1D and 08FE"
-   }
+   "text": "Map the supplied eM through the single functor, derived direct image of pullback.snd, and the exact inverse overEquiv V. Its inverse connects the outputs of the two comparisons. Compose a, this inverse c, and b. This is the Lean term a ≪≫ c.symm ≪≫ b.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-localized-mixed-derived-pullback",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-rf-base-change-complex"
+  "lem-pc-nested-open-single-direct-image-comparison",
+  "lem-pc-localized-cartesian-flat-single-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0A1D and 08FE"
+  "place": "Tags 08FE and 0A1D; open and relatively flat comparisons split at the actual transported cartesian direct image, combined by functorial transport of eM"
  },
  "mathlib_searches": [
   {
@@ -172,9 +155,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T124310-L-3775843",
+  "landing": "20261013T131951-L-4088458",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

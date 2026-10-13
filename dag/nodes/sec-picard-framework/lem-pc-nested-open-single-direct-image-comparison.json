@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-nested-open-single-direct-image-comparison",
+ "kind": "statement",
+ "title": "Nested open single direct-image comparison",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $F$ an $\\mathcal O_X$-module, $U\\subset S$ open and $V\\subset U$ open. Put $j=V.\\iota\\circ U.\\iota:V\\to S$, $Z=X\\times_S V$, $a:Z\\to X$ and $r:Z\\to V$ [def-pc-fibre-product]. Use the supplied derived localizations on $X,S,U$ and the localized module site over $V$ [def-pc-derived-category]. Let $D_Z,D_V$ be the standard localizations and $E$ the inverse exact localized-site equivalence for $V$ [def-pc-derived-open-restriction-maps]. Then $\\operatorname{over}_V((Rf_*F[0])|_U)\\cong E_D(Rr_*(a^*F)[0])$, where $a^*$ is ordinary tensor pullback [def-pc-module-pullback], $E_D$ is the induced exact derived functor, and the direct images are [def-pc-derived-direct-image]. No quasi-compactness, separatedness, flatness or quasi-coherence is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 08FE, lemma-restrict-direct-image-open; two successive restrictions and standard-localization transport"
+ },
+ "proof": [
+  {
+   "text": "Apply the open-restriction direct-image comparison first to U and then to V. Exact restriction commutes with the single functor. Both functors are computed by the same restricted K-injective resolution.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the iterated inverse-image open with Z by the unique projection-preserving scheme isomorphism. The composite open restriction is tensor pullback a^*, by the ordinary pullback adjunction and restriction composition. These identifications commute with the coefficient maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the direct images on one K-injective resolution, compare localization functors using Localization.compUniqFunctor, and apply the inverse exact localized-site equivalence E. Exact-functor localization factors and its unit and counit give precisely the displayed comparison.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08FE, lemma-restrict-direct-image-open; two successive restrictions and standard-localization transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with nested open restriction and independent localization equivalences",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nested open restriction of derived direct image of a single sheaf is direct image from pullback of the composite open immersion with independent derived localization universes",
+   "results": "8 ordinary open-restriction/composition hits, including Scheme.Modules.restrictFunctorComp; no matching derived geometric theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits including the exact-functor/single comparison; no matching geometric theorem.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "nestedOpen_single_directImage|localized_cartesian_flat_single|relativelyFlat_tensor_baseChange_iso",
+   "results": "Search service returned 0 hits. Local rg/read found the same-universe relativelyFlat_tensor_baseChange_iso and schemeDerivedDirectImage_openRestriction. Neither has the displayed localized signature.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "termwise comparison step in the Noetherian approximation argument: Nested open single direct-image comparison",
+   "via": [
+    "lem-pc-cartesian-flat-single-localized-base-change",
+    "lem-pc-cartesian-flat-single-termwise-comparison",
+    "lem-pc-proper-flat-single-open-noetherian-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NestedOpenSingleDirectImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/NestedOpenSingleDirectImageComparison.lean",
+  "declaration": "AlgebraicGeometry.nestedOpen_single_directImage_comparison",
+  "statement": "theorem nestedOpen_single_directImage_comparison\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasDerivedCategory.{wX}\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wS}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    (F : X.Modules) (U : S.Opens)\n    [HasDerivedCategory.{wS}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (V : U.toScheme.Opens)\n    [HasDerivedCategory.{wS}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n  let dV := HasDerivedCategory.standard\n    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n  letI := dV\n  letI := HasDerivedCategory.standard (SheafOfModules.{u}\n    (moduleRings (pullback f (V.ι ≫ U.ι)).toRingedSpace))\n  Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj\n      ((schemeOpenRestriction S U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅\n    (@Functor.mapDerivedCategory _ _ _ dV _ _ _ _\n      (Scheme.Modules.overEquiv V).inverse _ _ _).obj\n      ((schemeDerivedDirectImage (pullback.snd f (V.ι ≫ U.ι))).obj\n        ((DerivedCategory.singleFunctor (SheafOfModules.{u}\n          (moduleRings (pullback f (V.ι ≫ U.ι)).toRingedSpace)) 0).obj\n          (Scheme.Modules.tensorPullbackObj (pullback.fst f (V.ι ≫ U.ι)) F))))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

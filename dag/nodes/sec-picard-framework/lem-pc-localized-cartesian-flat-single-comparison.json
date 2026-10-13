@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-localized-cartesian-flat-single-comparison",
+ "kind": "statement",
+ "title": "Localized flat single comparison on a cartesian source",
+ "statement": "Let $S,T,Y,Z$ be schemes [def-pc-scheme], $U\\subset S$, $V\\subset U$ and $W\\subset T$ open. Let $p:Y\\to W$ be quasi-compact and quasi-separated, $M$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent] flat over $p$ [def-pc-scheme-module-flat-over], $g:V\\to W$, $q:Z\\to Y$ and $r:Z\\to V$, with $(q,r,p,g)$ cartesian [def-pc-fibre-product]. Supply arbitrary derived localizations on $Y,W$ and the localized module site over $V$ [def-pc-derived-category]; use standard localizations on $Z,V$. For the inverse exact site equivalence $E$ over $V$ [def-pc-derived-open-restriction-maps], there is an isomorphism $E_D(Rr_*(q^*M)[0])\\cong \\operatorname{localizedMixedDerivedPullback}(U,V,W,g)(Rp_*M[0])$. Here $q^*$ is ordinary tensor pullback [def-pc-module-pullback], the direct images are [def-pc-derived-direct-image], and the mixed functor is [def-pc-localized-mixed-derived-pullback]. No morphism from another ambient scheme to S and no ambient coefficient F is given.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme-module-flat-over",
+  "pqf-def-coherent",
+  "def-pc-localized-mixed-derived-pullback"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0A1D, lemma-base-change-tensor, with E equal to the structure-sheaf tensor unit and G=M[0]"
+ },
+ "proof": [
+  {
+   "text": "Apply relativelyFlat_tensor_baseChange_iso in the standard localization with E=O_Y[0] and G=M[0]. The single complex is bounded above and its terms are quasi-coherent and flat over p; zero terms satisfy both conditions.",
+   "uses": [
+    "lem-pc-relatively-flat-tensor-base-change-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute pullback of the K-flat structure-sheaf single complex by the derived pullback counit and identify its ordinary tensor pullback with the structure sheaf. Cancel the derived tensor unit on both sides; ordinary pullback of a single complex is the single of its pulled module.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the projection-preserving isomorphism of sq with the canonical pullback square and tensor pullback composition. Its inverse exact module functors identify the corresponding direct images.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A common K-injective resolution of M[0] computes direct image in the supplied and standard localizations. Localization.compUniqFunctor identifies their Qh images and the single objects. Apply the inverse exact overEquiv V; the composite is definitionally the localizedMixedDerivedPullback functor.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-localized-mixed-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-fibre-product",
+  "def-pc-localized-mixed-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-relatively-flat-tensor-base-change-iso",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0A1D, lemma-base-change-tensor, with E equal to the structure-sheaf tensor unit and G=M[0]"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for a quasi coherent relatively flat sheaf along a cartesian square of schemes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes a relatively flat quasi coherent module has arbitrary derived base change with ordinary module pullback and independent derived category universes",
+   "results": "8 ordinary flatness/base-change hits; no derived direct-image comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits including the exact-functor/single comparison; no matching geometric theorem.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "nestedOpen_single_directImage|localized_cartesian_flat_single|relativelyFlat_tensor_baseChange_iso",
+   "results": "Search service returned 0 hits. Local rg/read found the same-universe relativelyFlat_tensor_baseChange_iso and schemeDerivedDirectImage_openRestriction. Neither has the displayed localized signature.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "termwise comparison step in the Noetherian approximation argument: Localized flat single comparison on a cartesian source",
+   "via": [
+    "lem-pc-cartesian-flat-single-localized-base-change",
+    "lem-pc-cartesian-flat-single-termwise-comparison",
+    "lem-pc-proper-flat-single-open-noetherian-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedCartesianFlatSingleComparison.lean",
+  "declaration": "AlgebraicGeometry.localized_cartesian_flat_single_comparison",
+  "statement": "theorem localized_cartesian_flat_single_comparison\n    {S T Y Z : Scheme.{u}} (U : S.Opens) (V : U.toScheme.Opens) (W : T.Opens)\n    [HasDerivedCategory.{wS}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    [HasDerivedCategory.{wW}\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (p : Y ⟶ W.toScheme) [QuasiCompact p] [QuasiSeparated p]\n    (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p)\n    (g : V.toScheme ⟶ W.toScheme) (q : Z ⟶ Y) (r : Z ⟶ V.toScheme)\n    (sq : IsPullback q r p g) :\n  let dV := HasDerivedCategory.standard\n    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n  letI := dV\n  letI := HasDerivedCategory.standard\n    (SheafOfModules.{u} (moduleRings Z.toRingedSpace))\n  Nonempty ((@Functor.mapDerivedCategory _ _ _ dV _ _ _ _\n      (Scheme.Modules.overEquiv V).inverse _ _ _).obj\n      ((schemeDerivedDirectImage r).obj ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj\n          (Scheme.Modules.tensorPullbackObj q M))) ≅\n    (localizedMixedDerivedPullback U V W g).obj\n      ((schemeDerivedDirectImage p).obj ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

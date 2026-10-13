@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Sheaf.AlgebraicGeometry.LocalizedMixedDerivedPullback
 
+import Sheaf.AlgebraicGeometry.NestedOpenSingleDirectImageComparison
+import Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison
+
 /-! # Localized cartesian base change for a relatively flat single sheaf
 Source: Stacks Project, Tags 0A1D and 08FE.
 (blueprint: lem-pc-cartesian-flat-single-localized-base-change).
@@ -68,6 +71,24 @@ theorem cartesian_flat_single_localized_baseChange
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅
       (localizedMixedDerivedPullback U V W g).obj
         ((schemeDerivedDirectImage p).obj ((DerivedCategory.singleFunctor
-          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M))) := by sorry
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M))) := by
+  classical
+  let dV := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
+  let := dV
+  let := HasDerivedCategory.standard (SheafOfModules.{u}
+    (moduleRings (pullback f (V.ι ≫ U.ι)).toRingedSpace))
+  let E := (Scheme.Modules.overEquiv V).inverse
+  let : E.Additive := Functor.additive_of_preserves_binary_products _
+  obtain ⟨a⟩ := nestedOpen_single_directImage_comparison f F U V
+  obtain ⟨b⟩ := localized_cartesian_flat_single_comparison U V W p M hM g q
+    (pullback.snd f (V.ι ≫ U.ι)) sq
+  let c := (@Functor.mapDerivedCategory _ _ _ dV _ _ _ _ E _ _ _).mapIso
+    ((schemeDerivedDirectImage (pullback.snd f (V.ι ≫ U.ι))).mapIso
+      ((DerivedCategory.singleFunctor (SheafOfModules.{u}
+        (moduleRings (pullback f (V.ι ≫ U.ι)).toRingedSpace)) 0).mapIso
+          (Classical.choice eM)))
+  exact ⟨a ≪≫ c.symm ≪≫ b⟩
+
 
 end AlgebraicGeometry
