@@ -13,17 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Form Spec B times_L Spec R and choose a point above y and the closed point\nusing a common extension of their residue fields. Take its local ring A. The\nprojection to Spec B induces iota and that to Spec R induces delta. The projection\nto the trait is etale; its local ring at this point is a DVR, and the local map\ndelta is flat and injective. Its closed fibre is a field, so the maximal ideal of\nA is the extension of the maximal ideal of R. Thus delta(varpi0) generates it.\nThe equality phi followed by p = Spec rho and the pullback square give both the\ncommuting scheme maps and iota(rho(varpi0)) = delta(varpi0). These witnesses are\nused only in the existential proof, never to define an unspecified object.",
-   "uses": [],
+   "text": "Form X=Spec B times_L Spec R. Mathlib Pullback.exists_preimage_pullback supplies a point x above y and the closed point from hy. The second projection is etale by base change. Apply etale_trait_stalk to its explicit stalk at x, obtaining domain and DVR instances, injectivity and the maximal-ideal formula.",
+   "uses": [
+    "lem-sbc-etale-trait-stalk"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Define delta and iota as the canonical structural maps to that actual stalk. Mathlib SpecMap_stalkMap_fromSpecStalk and Spec.fromSpecStalk_eq identify their Spec maps with fromSpecStalk followed by the two pullback projections. Precompose the pullback condition to get the required square. Postcompose that equality with p and use h_rho and h_tau. Faithfulness of Spec gives rho followed by iota = delta, and evaluating at varpi0 gives the coefficient identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-etale-trait-stalk"
+ ],
  "proof_origin": {
-  "kind": "from-document",
+  "kind": "by-agent",
   "by": "N1",
-  "document": "Stacks Project",
-  "place": "Tag 0EYI, preliminary paragraph; Tag 0AP2 (15.45.4)"
+  "source": "Explicit fibre-product and stalk construction using Mathlib and the proved etale_trait_stalk lemma; follows Stacks Tags 0EYI and 0AP2"
  },
  "mathlib_searches": [
   {
@@ -123,7 +131,7 @@
   "reviewer": "COMPILER",
   "group": "N1",
   "result": "pass",
-  "landing": "20261013T115430-L-3359427",
+  "landing": "20261013T123547-L-3712098",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
