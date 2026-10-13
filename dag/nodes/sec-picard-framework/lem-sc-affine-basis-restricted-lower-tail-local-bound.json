@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-affine-basis-restricted-lower-tail-local-bound",
+ "kind": "statement",
+ "title": "Local bound zero for the restricted lower tail",
+ "statement": "Let $X$ be a scheme, $V$ an affine open, $F$ an integer-indexed complex of $\\mathcal O_X$-modules, and $a\\in\\mathbb Z$. Assume $H^{p}(W,H^n(F)|_W)=0$ for every affine $W\\subseteq V$, every $n\\in\\mathbb Z$, and every $p>0$, in the source module-cohomology model. Put $E=r_V(\\tau_{<a}QF)$, where $r_V$ is exact restriction to $V$. There is a topological basis $B$ of opens of $V$ such that $H^p(U,H^q(E)|_U)=0$ for every $U\\in B$, $p>0$, and $q<0$, with open module cohomology defined by right-derived evaluation. This is a local cohomological bound and asserts no derived-limit reconstruction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-cohomology-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-t-structure",
+  "def-sp-left-exact-additive",
+  "def-pc-derived-open-restriction-maps",
+  "def-sc-open-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D64 (lemma-is-limit-dimension), 08BS (restriction of K-injectives), 01E1 (restriction of injectives); Tag 03FD in sites-cohomology.tex"
+ },
+ "proof": [
+  {
+   "text": "Take all affine opens of V as B. By the affine-open basis theorem this is a topological basis. The image W of such an open under V.ι is affine and contained in V. Exact restriction identifies homology with restricted homology; below a use the truncation inclusion, and at or above a it is zero. Transitivity of restriction identifies the further restricted sheaf with H^q(F)|_W.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-truncation-cohomology",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use nonempty_openModuleCohomology_addEquiv_restrict_H on V to identify each open module cohomology group with source H of the restricted sheaf. For positive p write p = (p-1)+1 and apply the supplied subsingleton hypothesis on W, transferring it along the additive equivalence. Above the truncation cutoff additive cohomology preserves zero. Choose bound d=0.",
+   "uses": [
+    "lem-pqf-open-module-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pqf-open-module-cohomology-comparison",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-truncation-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "restriction and local-bound steps of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology on an open subscheme equals derived evaluation of the restricted sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a lower truncation to an open has zero positive cohomology of its homology sheaves on an affine basis when the original homology sheaves are acyclic on every affine open",
+   "results": "8 hits: DerivedCategory.isZero_of_isGE, HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside, HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, CochainComplex.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology|moduleCohomology.*restrict|restrict.*moduleCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: unbounded sections comparison on affine opens; Local bound zero for the restricted lower tail",
+   "via": [
+    "lem-sc-affine-basis-sections-resolution-homology-epi",
+    "lem-sc-affine-basis-sections-derived-unit",
+    "lem-sc-affine-basis-kinjective-sections-preserves-homology",
+    "lem-sc-affine-basis-lower-tail-sections-reconstruction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasisRestrictedLowerTailLocalBound.lean",
+  "declaration": "AlgebraicGeometry.affineBasisRestrictedLowerTail_local_bound",
+  "statement": "theorem affineBasisRestrictedLowerTail_local_bound\n    (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    (F : CochainComplex X.Modules ℤ)\n    (hhomology : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),\n      Subsingleton (((F.homology n).restrict W.ι).H (q + 1)))\n    (a : ℤ) :\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let E := (schemeOpenRestriction X V).mapDerivedCategory.obj\n      ((t.truncLT a).obj (DerivedCategory.Q.obj F))\n    ∃ (B : Set (Opens V.toScheme)),\n      IsTopologicalBasis ((fun U : Opens V.toScheme => (U : Set V.toScheme)) '' B) ∧\n      ∀ (U : Opens V.toScheme), U ∈ B → ∀ (p : ℕ), 0 < p → ∀ (q : ℤ), q < 0 →\n        IsZero ((RingedSpace.openModuleCohomology V.toScheme.toRingedSpace p U).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) q).obj E))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T155928-L-1300907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T155928-L-1300907",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-open-derived-sections-truncation-tower-comparison",
+ "kind": "statement",
+ "title": "Open derived sections respect the canonical truncation tower",
+ "statement": "Let $X$ be a scheme, $V$ an arbitrary open, $E\\in D(\\mathcal O_X)$, and let $r_V$ be exact restriction. Let $G$ be evaluation on V followed by forgetting module scalars to abelian groups and $H$ abelian global sections on the scheme V. There exist isomorphisms $e:RH(r_VE)\\cong RG(E)$ and $e_n:RH(\\tau_{\\geq -n}r_VE)\\cong RG(\\tau_{\\geq -n}E)$ for every natural n, such that $RH(\\pi_n)e_n=eRG(\\pi_n)$ and $RH(f_n)e_n=e_{n+1}RG(f_n)$, where $\\pi_n$ are the canonical truncation projections and $f_n:\\tau_{\\geq -(n+1)}\\to\\tau_{\\geq -n}$ the canonical transitions. There is no acyclicity hypothesis and no assertion of reconstruction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-open-module-derived-sections",
+  "def-weil-abstract-derived-category",
+  "def-weil-t-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D64 (lemma-is-limit-dimension), 08BS (restriction of K-injectives), 01E1 (restriction of injectives); Tag 03FD in sites-cohomology.tex"
+ },
+ "proof": [
+  {
+   "text": "Restriction preserves K-injectives by its exact extension-by-zero left adjoint, and the equivalence to modules on the open scheme also preserves them. The underived identity of abelian sections on V and global sections after restriction is natural. Derive it using the composition comparison for K-injective-preserving functors and identify exact derived restriction with its mapDerivedCategory. This produces a natural isomorphism RH after r_V with RG.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing Functor.mapDerivedCategoryTruncGEIso for exact restriction, rather than constructing a second truncation isomorphism. Its inverse is the factorization descTruncGE, and π_descTruncGE gives projection compatibility. The two induced transition maps coincide by from_truncGE_obj_ext after precomposition with the truncation projection and π_natTransTruncGEOfLE_app. Applying RH and composing with the natural comparison of the first step yields e_n and the two displayed squares.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "restriction and local-bound steps of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction commutes with standard truncations and unbounded derived sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to an open commutes with lower truncations and derived evaluation, respecting the canonical truncation projections and transition maps",
+   "results": "8 hits: HomologicalComplex.restrictionToTruncGE'_naturality_assoc, HomologicalComplex.restrictionToTruncGE'_naturality, HomologicalComplex.restrictionToTruncGE'.comm_assoc, HomologicalComplex.truncLE'ToRestriction_naturality_assoc, HomologicalComplex.truncLE'ToRestriction_naturality, ComplexShape.Embedding.restrictionToTruncGE'NatTrans_app, HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_iso_inv, ComplexShape.Embedding.truncLE'ToRestrictionNatTrans_app",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*rightDerivedFunctor|rightDerivedFunctor.*truncGE",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryTruncGEIso; overFunctorEquiv; restrictFunctorComp",
+   "results": "Second reader: upstream ExactFunctor.lean contains mapDerivedCategoryTruncGEIso, a proved general truncation comparison. Mathlib Modules/Sheaf.lean contains overFunctorEquiv and restrictFunctorComp. These are ingredients; no derived sections tower comparison found.",
+   "date": "2026-10-13",
+   "verdict": "use upstream truncation comparison in the proof plan"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: unbounded sections comparison on affine opens; Open derived sections respect the canonical truncation tower",
+   "via": [
+    "lem-sc-affine-basis-sections-resolution-homology-epi",
+    "lem-sc-affine-basis-sections-derived-unit",
+    "lem-sc-affine-basis-kinjective-sections-preserves-homology",
+    "lem-sc-affine-basis-lower-tail-sections-reconstruction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedSectionsTruncationTowerComparison.lean",
+  "declaration": "AlgebraicGeometry.openDerivedSections_truncationTower_comparison",
+  "statement": "theorem openDerivedSections_truncationTower_comparison\n    (X : Scheme.{u}) (V : X.Opens)\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{wA} AddCommGrpCat.{u}]\n    (E : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :\n    let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)\n    letI : S.Additive := inferInstanceAs\n      ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙\n        PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)\n    let G := S ⋙ forget₂\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V))) AddCommGrpCat.{u}\n    let H := RingedSpace.openModuleSections V.toScheme.toRingedSpace ⊤\n    let R := (schemeOpenRestriction X V).mapDerivedCategory\n    let t := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    let s := DerivedCategory.TStructure.t\n      (C := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n    ∃ (e : H.rightDerivedFunctor.obj (R.obj E) ≅ G.rightDerivedFunctor.obj E)\n      (en : ∀ n : ℕ, H.rightDerivedFunctor.obj ((s.truncGE (-(n : ℤ))).obj (R.obj E)) ≅\n        G.rightDerivedFunctor.obj ((t.truncGE (-(n : ℤ))).obj E)),\n      (∀ n : ℕ, H.rightDerivedFunctor.map ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ≫\n        (en n).hom = e.hom ≫ G.rightDerivedFunctor.map ((t.truncGEπ (-(n : ℤ))).app E)) ∧\n      (∀ n : ℕ, H.rightDerivedFunctor.map\n        ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app (R.obj E)) ≫\n          (en n).hom = (en (n + 1)).hom ≫ G.rightDerivedFunctor.map\n            ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T155928-L-1300907",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T155928-L-1300907",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

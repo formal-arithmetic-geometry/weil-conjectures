@@ -18,24 +18,24 @@
  },
  "proof": [
   {
-   "text": "Restrict to the open subscheme V. Exact restriction commutes with homology and standard truncations; K-injective restriction identifies derived evaluation with derived global sections there. Use source comparison to transfer the given positive H vanishings to module cohomology of each restricted homology sheaf.",
+   "text": "Apply affineBasisRestrictedLowerTail_local_bound to obtain a basis on the open subscheme V with cohomological bound zero for exact restriction of the lower tail.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-sc-module-cohomology-source-comparison"
+    "lem-sc-affine-basis-restricted-lower-tail-local-bound"
    ],
    "elementary": false
   },
   {
-   "text": "The affine opens of V form a basis. The homology of E restricted to V is that of F below a and zero otherwise; thus the local-bound criterion with d=0 gives the canonical lower-truncation Roos triangle on V.",
+   "text": "Choose the standard derived category for modules on V, apply truncation_isDerivedLimitTriangle_of_local_bound with d=0, and map the resulting specified Roos triangle using rightDerivedFunctor_isDerivedLimitTriangle for abelian global sections on V. Sections preserve products. The private map_product_lift lemma identifies its first map using each product projection.",
    "uses": [
-    "lem-pc-ringed-space-truncation-derived-limit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluation followed by forgetting preserves countable products. Apply the derived-functor derived-limit comparison on V. Its projection compatibility and exact restriction identify the product lift and transition maps with those displayed in Lean.",
-   "uses": [
+    "lem-pc-ringed-space-truncation-derived-limit",
     "lem-pc-derived-functor-commutes-derived-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use openDerivedSections_truncationTower_comparison. The private transport_roos_triangle lemma forms the product of the component isomorphisms, checks the first and middle maps by product projections and the two compatibility squares, and transports the last map by the inverse product isomorphism and the shifted e. Transport the distinguished triangle with Triangle.isoMk.",
+   "uses": [
+    "lem-sc-open-derived-sections-truncation-tower-comparison"
    ],
    "elementary": false
   }
@@ -43,15 +43,15 @@
  "proof_deps": [
   "lem-pc-derived-functor-commutes-derived-limit",
   "lem-pc-ringed-space-truncation-derived-limit",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-sc-module-cohomology-source-comparison"
+  "lem-sc-affine-basis-restricted-lower-tail-local-bound",
+  "lem-sc-open-derived-sections-truncation-tower-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M1",
+  "group": "A4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 0BKT, 0D64 and 071B"
+  "place": "Tags 0D64 and 08BS; Injectives Tag 08U1; compiled reduction and explicit Roos triangle transport"
  },
  "mathlib_searches": [
   {
@@ -151,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T151134-L-877320",
+  "landing": "20261013T155928-L-1300907",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
