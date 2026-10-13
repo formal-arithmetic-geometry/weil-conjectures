@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-dual-map-local-retraction",
+ "kind": "statement",
+ "title": "Local retractions of the transpose of an epimorphism onto a vector bundle",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], let $P,Q$ be $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category], and assume $Q$ is finite locally free [def-sc-finite-locally-free-sheaf]. Let $f:P\\to Q$ be an epimorphism. The transpose $f^\\vee:\\mathcal Hom(Q,\\mathcal O_X)\\to\\mathcal Hom(P,\\mathcal O_X)$ [def-pur-sheaf-hom] locally admits a retraction: for each point $x\\in X$ there is an open neighbourhood $U$ of $x$ such that $f^\\vee|_U$ has a left inverse [def-pur-localized-ringed-site]. No quasi-coherence or finiteness of $P$ is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, proof of (2) to (3), taking the dual of the surjection; local-splitting details expanded from the finite-basis argument. Read at https://stacks.math.columbia.edu/tag/0EKP."
+ },
+ "proof": [
+  {
+   "text": "Fix x and trivialize Q on an open W containing x with a finite basis. For each basis section use local surjectivity of the sheaf epimorphism f to obtain a lift on a neighbourhood V_i of x contained in W. Their finite intersection U is open and contains x. Restrict the lifts to U and use the universal property of the finite free sheaf to define s:Q|_U -> P|_U. Since f composed with s fixes every basis section, s followed by f|_U is the identity. In rank zero take U=W and the unique map out of zero.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Internal Hom commutes with open restriction: sections over V contained in U are module morphisms over V, so restriction merely restricts that morphism. Under this identification the restriction of dualMap f sends phi to phi composed with f|_V. Precomposition with s restricts compatibly on all smaller V and gives a retraction, since s followed by f is the identity. Transport this retraction from the over category to scheme restriction. For the empty scheme the quantified claim has no points.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "K4",
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, proof of (2) to (3); expanded the omitted local finite-basis splitting and transpose compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism onto a finite locally free sheaf locally admits a section and its transpose locally admits a retraction",
+   "results": "{\"t\": \"2026-10-13T17:07:47Z\", \"tool\": \"leansearch\", \"query\": \"An epimorphism onto a finite locally free sheaf locally admits a section and its transpose locally admits a retraction\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of an epimorphism of sheaves into a finite locally free module is locally split monic with locally free cokernel",
+   "results": "{\"t\": \"2026-10-13T16:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"The transpose of an epimorphism of sheaves into a finite locally free module is locally split monic with locally free cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.epi\", \"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.GeneratingSections.ofEpi_I\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\"], \"digest\": \"653a7b60b37110bb\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact local-retraction theorem among the returned declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSplitMono|SplitEpi",
+   "results": "{\"t\": \"2026-10-13T17:07:48Z\", \"tool\": \"grep\", \"query\": \"IsSplitMono|SplitEpi\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact local-retraction theorem among the returned declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding",
+  "date": "2026-10-14",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison. Local splitting of the first dual-surjection construction in Tag 0EKP.",
+   "via": [
+    "new-sbc-quasi-affine-embedding-pullback",
+    "new-sbc-quasi-affine-locally-free-embedding",
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DualMapLocalRetraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DualMapLocalRetraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_retraction_dualMap_of_epi",
+  "statement": "theorem exists_local_retraction_dualMap_of_epi\n    {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) [Epi f] [Q.IsFiniteLocallyFree] :\n    ∀ x : X, ∃ U : X.Opens, x ∈ U ∧\n      IsSplitMono ((restrictFunctor U.ι).map (dualMap f))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T181111-L-2603995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T181111-L-2603995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

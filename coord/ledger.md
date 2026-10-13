@@ -13312,3 +13312,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/K2/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale (stage 3; reviewer PASS; first push; landing 20261013T181109-L-2603378 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/K3/Sheaf.AlgebraicGeometry.FinitePresentationChartMapZeroEventually (stage 3; reviewer PASS; first push; landing 20261013T181110-L-2603579 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/K3/Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonForward (stage 3; reviewer PASS; first push; landing 20261013T181110-L-2603716 (proof); batch 20261013T181050; modules 1; new nodes 0)
+- 18:11 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding (stage 3; reviewer PASS; first push; landing 20261013T181111-L-2603995 (interface); batch 20261013T181050; modules 2; new nodes 1)
