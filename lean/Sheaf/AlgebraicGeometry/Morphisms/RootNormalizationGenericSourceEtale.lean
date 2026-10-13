@@ -6,6 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtalePoint
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
@@ -86,6 +87,10 @@ theorem GaloisCover.root_normalization_generic_source_etale
       (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →
       ∀ (η : D), IsGenericPoint η Set.univ →
       ∀ x : a.normalization, a.fromNormalization x = j η →
-        ∃ E : a.normalization.Opens, x ∈ E ∧ Etale (E.ι ≫ a.fromNormalization) := by sorry
+        ∃ E : a.normalization.Opens, x ∈ E ∧ Etale (E.ι ≫ a.fromNormalization) := by
+  dsimp only
+  intro hroot hN hp he hn D j hD hDi hj hV η hη x hx
+  exact root_normalization_generic_source_etale_point i G W R φ f β hβ H b hG hg hroot hN hp
+    he hn D j hD hDi hj hV η hη x hx
 
 end AlgebraicGeometry.Scheme
