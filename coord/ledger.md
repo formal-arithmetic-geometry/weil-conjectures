@@ -13011,3 +13011,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:35 L: merged deliver/V2/Sheaf.AlgebraicGeometry.MixedAffineSectionsExtensionUnitNormalization (stage 3; reviewer PASS; first push; landing 20261013T153502-L-1085866 (proof); batch 20261013T153456; modules 1; new nodes 0)
 - 15:39 L: merged deliver/B2/Sheaf.AlgebraicGeometry.RawModuleFreeSourceHomBijective (stage 3; reviewer PASS; first push; landing 20261013T153934-L-1122975 (proof); batch 20261013T153932; modules 1; new nodes 0)
 - 15:39 L: merged deliver/B3/Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateStalkTransportData (stage 3; reviewer PASS; first push; landing 20261013T153934-L-1123135 (interface); batch 20261013T153932; modules 3; new nodes 2)
+- 15:39 L: merged deliver/N2/Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullback (stage 3; reviewer PASS; first push; landing 20261013T153935-L-1123242 (interface); batch 20261013T153932; modules 2; new nodes 2)

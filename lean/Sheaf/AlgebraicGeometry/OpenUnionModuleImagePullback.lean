@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.OpenModuleImageSectionRestriction
+import Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullbackCore
 
 /-! # Sheaf gluing over an arbitrary open union
 
@@ -50,6 +50,8 @@ theorem schemeOpenUnionModuleImage_isPullback
       ((schemeOpenModuleImageRestriction X
         (homOfLE (inf_le_left : U ⊓ V ≤ U))).app M)
       ((schemeOpenModuleImageRestriction X
-        (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M) := by sorry
+        (homOfLE (inf_le_right : U ⊓ V ≤ V))).app M) := by
+  apply schemeOpenUnionModuleImage_isPullback_of_sectionwise X U V M
+  exact schemeOpenUnionModuleImage_sectionwise_gluing X U V M
 
 end AlgebraicGeometry
