@@ -27,9 +27,6 @@ rational representation `r` is read on tangent points the same way
 
 ## Main results
 
-- `AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant`: a subspace is
-  stable under a connected `V(I)` acting by a rational representation if and only if it is
-  stable under its differential.
 - `AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_center`,
   `AlgebraicGeometry.GeneralLinearGroup.range_lieAlgebraMap_identityComponent_center`: the Lie
   algebra of the centre of a connected `V(I)`, and of its identity component, is the centre of the
@@ -38,7 +35,7 @@ rational representation `r` is read on tangent points the same way
 ## Blueprint
 
 - `sk-p-comparison`: the group–Lie comparison.
-- `lem-ag-lie-stable-subspace`, `lem-ag-lie-centre`: invariant subspaces and the centre.
+- `lem-ag-lie-centre`: the centre.
 -/
 
 @[expose] public section
@@ -285,103 +282,6 @@ theorem RationalHom.map_fst_points_eq_one (r : RationalHom (subgroupScheme I) m)
   have h := congrFun₂ this i j
   rw [Matrix.GeneralLinearGroup.map_apply] at h
   exact h
-
-/-- **Group-invariant and Lie-invariant subspaces agree**, for a rational representation: over an
-algebraically closed field of characteristic zero, a subspace is stable under a connected closed
-subgroup `V(I)` of `GL_n` acting on `kᵐ` by a rational representation `r` if and only if it is
-stable under the differential of `r`.
-
-The points of `V(I)` whose image under `r` stabilizes `U` form a closed subgroup functor, cut out
-by the pullbacks along `r` of the linear equations of the stabilizer of `U` in `GL_m`; its Lie
-algebra is the stabilizer of `U` under `dr`, so
-`forall_zeroLocus_iff_forall_lieSubalgebra` applies. (blueprint: `sk-p-comparison`,
-`lem-ag-lie-stable-subspace`) -/
-theorem invariant_iff_differential_invariant [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
-    (r : RationalHom (subgroupScheme I) m) [IsMonHom r] (U : Submodule k (m → k)) :
-    (∀ g : zeroLocus I k,
-        U ≤ U.comap (Matrix.toLin' (r.points k (zeroLocusMulEquiv I k g)))) ↔
-      ∀ X : GrpObj.Lie (subgroupScheme I), U ≤ U.comap (Matrix.toLin' (r.differential X)) := by
-  have := hconn.isPrime
-  obtain ⟨P, hPi, hP⟩ := U.exists_isIdempotentElem_matrix
-  let S : (R : Type u) → [CommRing R] → [Algebra k R] → Subalgebra R (Matrix m m R) :=
-    fun R _ _ ↦ Subalgebra.ofIsIdempotentElem (hPi.map (algebraMap k R).mapMatrix)
-  let E : Set (CoordinateRing n k) := {e | ∃ ij : m × m,
-    Ideal.Quotient.mk I e = r.coordMap (sandwichEquation (1 - P) P ij.1 ij.2)}
-  have hmemS {R : Type u} [CommRing R] [Algebra k R] (M : GL m R) :
-      (M : Matrix m m R) ∈ S R ↔ ∀ i j, evalAlgHom M (sandwichEquation (1 - P) P i j) = 0 := by
-    simp only [S, Subalgebra.mem_ofIsIdempotentElem, evalAlgHom_sandwichEquation]
-    change _ ↔ ∀ i j, ((algebraMap k R).mapMatrix (1 - P) * (M : Matrix m m R) *
-      (algebraMap k R).mapMatrix P : Matrix m m R) i j = 0
-    rw [map_sub, map_one]
-    exact ⟨fun h i j ↦ by rw [h]; rfl, fun h ↦ Matrix.ext fun i j ↦ h i j⟩
-  have key := forall_zeroLocus_iff_forall_lieSubalgebra (I := I) E
-    (fun R _ _ g ↦ ((r.points R (zeroLocusMulEquiv I R g) : GL m R) : Matrix m m R) ∈ S R)
-    (fun R _ _ g hg ↦ by
-      rw [hmemS]
-      have heval (e : CoordinateRing n k) (i j : m)
-          (he : Ideal.Quotient.mk I e = r.coordMap (sandwichEquation (1 - P) P i j)) :
-          evalAlgHom g e = evalAlgHom (r.points R (zeroLocusMulEquiv I R ⟨g, hg⟩))
-            (sandwichEquation (1 - P) P i j) := by
-        rw [RationalHom.evalAlgHom_points_zeroLocusMulEquiv, AlgHom.comp_apply, ← he]
-        rfl
-      constructor
-      · intro h i j
-        obtain ⟨e, he⟩ := Ideal.Quotient.mk_surjective (r.coordMap (sandwichEquation (1 - P) P i j))
-        rw [← heval e i j he]
-        exact h e ⟨(i, j), he⟩
-      · rintro h e ⟨⟨i, j⟩, he⟩
-        rw [heval e i j he]
-        exact h i j)
-    (by
-      have hone : r.points k (zeroLocusMulEquiv I k 1) = 1 :=
-        map_one ((r.points k).comp (zeroLocusMulEquiv I k).toMonoidHom)
-      rw [hone, Units.val_one]
-      exact Subalgebra.one_mem _)
-    (fun R _ _ g g' hg hg' ↦ by
-      have hmul : r.points R (zeroLocusMulEquiv I R (g * g')) =
-          r.points R (zeroLocusMulEquiv I R g) * r.points R (zeroLocusMulEquiv I R g') :=
-        map_mul ((r.points R).comp (zeroLocusMulEquiv I R).toMonoidHom) g g'
-      rw [hmul, Units.val_mul]
-      exact Subalgebra.mul_mem _ hg hg')
-    (fun R _ _ g hg ↦ by
-      have hinv : r.points R (zeroLocusMulEquiv I R g⁻¹) =
-          (r.points R (zeroLocusMulEquiv I R g))⁻¹ :=
-        map_inv ((r.points R).comp (zeroLocusMulEquiv I R).toMonoidHom) g
-      rw [hinv, Matrix.coe_units_inv]
-      exact Matrix.inv_mem_of_mem_subalgebra _ (Units.isUnit _) hg)
-  have hk (M : Matrix m m k) : M ∈ S k ↔ U ≤ U.comap (Matrix.toLin' M) := by
-    simp only [S, Subalgebra.mem_ofIsIdempotentElem, Algebra.algebraMap_self,
-      RingHom.mapMatrix_id, RingHom.id_apply]
-    rw [← forall_mulVec_mem_iff_one_sub_mul_mul_eq_zero hP]
-    exact ⟨fun h u hu ↦ h u hu, fun h u hu ↦ h hu⟩
-  have hε {p : points (subgroupScheme I) (DualNumber k)}
-      (hp : p ∈ tangentGroup (subgroupScheme I)) :
-      ((r.points (DualNumber k) p : GL m (DualNumber k)) : Matrix m m (DualNumber k)) ∈
-          S (DualNumber k) ↔
-        U ≤ U.comap (Matrix.toLin'
-          (((r.points (DualNumber k) p : GL m (DualNumber k)) :
-            Matrix m m (DualNumber k)).map snd)) := by
-    conv_lhs => rw [eq_one_add_eps_smul_of_map_fst_eq_one (r.map_fst_points_eq_one hp)]
-    rw [one_add_eps_smul_mem_ofIsIdempotentElem_iff hPi,
-      ← forall_mulVec_mem_iff_one_sub_mul_mul_eq_zero hP]
-    exact ⟨fun h u hu ↦ h u hu, fun h u hu ↦ h hu⟩
-  have htp (x : GrpObj.Lie (subgroupScheme I)) :
-      zeroLocusMulEquiv I (DualNumber k) ⟨_, differential_subgroupSchemeι_mem x⟩ =
-        GrpObj.tangentPoint x := by
-    rw [← (zeroLocusMulEquiv I _).apply_symm_apply (GrpObj.tangentPoint x)]
-    congr 1
-    exact Subtype.ext (dualUnit_differential_subgroupSchemeι x)
-  simp only [hk] at key
-  rw [key]
-  constructor
-  · intro h x
-    rw [RationalHom.differential_eq_map_snd, ← hε (GrpObj.tangentPoint_mem_tangentGroup x),
-      ← htp]
-    exact h _ (differential_subgroupSchemeι_mem x)
-  · intro h X hX
-    obtain ⟨x, rfl⟩ := exists_differential_subgroupSchemeι_eq hX
-    rw [htp, hε (GrpObj.tangentPoint_mem_tangentGroup x), ← RationalHom.differential_eq_map_snd]
-    exact h x
 
 end Rational
 
