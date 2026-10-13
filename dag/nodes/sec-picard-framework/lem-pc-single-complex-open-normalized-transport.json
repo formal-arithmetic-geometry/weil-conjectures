@@ -20,52 +20,50 @@
  },
  "proof": [
   {
-   "text": "Identify the four local rings and their structure maps using the actual open-immersion stalk isomorphisms, stalkMap_comp, hj and the restriction squares. Identify the tensor algebra and its map to the final stalk ring by its universal property.",
+   "text": "Construct nu by the explicit additive derived-stalk open restriction isomorphism. Put P0 equal to actual termwise restriction. The canonical termwise comparison lemma supplies K-flatness of P0, invertibility of its pinned counit, and the normalized comparison square for P and P0 with K=Q(P).",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact stalks of e and a identify the two K-flat source representatives after ring transport. Use restriction-stalk extension and the overFunctor/restrictFunctor comparison. Transport left-derived scalar extension through the exact ring equivalences; its counit-compatible uniqueness gives the cohomology transport. The cohomologyIso_smul equations lift this to the tensor-algebra action. Extend to the final stalk ring and forget scalars to obtain l. Exact restriction and the restriction-stalk natural isomorphism induce the derived cohomology natural isomorphism nu.",
-   "uses": [
-    "lem-pc-open-restriction-stalk-extension-iso",
+    "def-pc-open-derived-additive-stalk-iso",
     "def-pc-derived-open-restriction-maps",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-comparison-source-transport"
+    "lem-pc-single-complex-open-termwise-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On K-flat source representatives the pinned pullback counits are invertible. The comparison_eq and localized_eq equations and the tensor-stalk identification express comparisonIntoPullback by their universal counits. Naturality under the preceding ring and representative transports identifies the two maps. The leftDerivedUnique factorization equation of singleComplexOpenPullbackIso and the pinned composition maps identify the intervening morphism with theta, the restricted identity coefficient. This proves the displayed square before postcomposition with any coefficient or target homology identification.",
+   "text": "Compose the naturality equations of the six factors of the restricted identity coefficient using a proved generic categorical lemma. Its naturality in e, together with naturality of nu, transports the canonical comparison square from Q(P) to K. Put E=the canonical localization factor for P0 followed by restriction(e), and b=a followed by E inverse. Thus b is a derived isomorphism Q(Q) to Q(P0).",
    "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "lem-pc-stalk-comparison-pullback-naturality",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-single-complex-open-restriction-data",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-open-derived-additive-stalk-iso",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_comparisonSourceIso and comparisonIntoPullback_naturality to b inside the restricted square. Extend the unique tensor-algebra source isomorphism to the final stalk ring and forget scalars to get d. Postcompose its square with H0 of Lj(E) then the restricted identity coefficient; b then E equals a. Compose this square with the preceding canonical square and use functoriality and associativity. The required source isomorphism is d followed by l. This handles arbitrary Q,e,a without changing the given statement.",
+   "uses": [
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-single-complex-open-termwise-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
   "def-pc-derived-open-restriction-maps",
-  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-open-derived-additive-stalk-iso",
   "def-pc-single-complex-open-restriction-data",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-open-restriction-stalk-extension-iso",
   "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-single-complex-open-termwise-comparison",
   "lem-pc-stalk-comparison-pullback-naturality",
   "lem-pc-stalk-comparison-source-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q2",
+  "group": "B3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE",
-  "note": "Extracted only the source/counit calculation from steps 1-3 of the parent. The coefficient and target-coordinate calculation is proved in Lean in the parent."
+  "note": "Explicit additive derived-stalk construction, coefficient naturality and arbitrary representative transport; the canonical termwise restriction calculation and its K-flat/counit properties remain together in the single lower theorem."
  },
  "mathlib_searches": [
   {
@@ -142,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T133227-L-4193932",
+  "landing": "20261013T153934-L-1123135",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
