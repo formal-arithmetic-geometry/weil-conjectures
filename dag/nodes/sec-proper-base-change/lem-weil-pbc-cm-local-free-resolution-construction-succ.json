@@ -12,32 +12,44 @@
  },
  "proof": [
   {
-   "text": "Choose a finite free surjection onto M; its kernel is finite over the Noetherian ring.",
+   "text": "Apply the already proved infinite finite-free resolution theorem to M, obtaining ranks n(i), a surjective augmentation epsilon, and differentials with range equal to the preceding kernel.",
    "uses": [
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-noetherian-submodule-finite"
+    "lem-weil-pbc-finite-free-resolution-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the finite-free truncation construction to the kernel and splice its terminal map with the kernel inclusion and the chosen surjection. Exactness follows at the splice from the kernel-image equality and surjectivity, while earlier terms are unchanged.",
+   "text": "Lift M and every finite function module Fin(n(i)) → R into universe max(u,v), and conjugate the augmentation and differentials by ULift.moduleEquiv. Surjectivity and each kernel-image equality are preserved: lift a preimage for surjectivity, and lift or project the witnesses in the image for the equalities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the finite tail F_k → ⋯ → F_0 → ULift M → 0 by recursion using ComposableArrows.precomp. The base tail is exact by surjectivity of the augmentation. Each added arrow preserves exactness by the given kernel-image equality, using ComposableArrows.exact_of_δ₀ and the concrete module criterion for ShortComplex.Exact. Induction also identifies the last two objects and proves that the first k+1 objects are finite free.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-free-module",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let g be the first arrow of the tail and K its linear kernel. Prefix the kernel inclusion K → F_k and then 0 → K. The inclusion is injective, its range is ker(g), and hence the prefixed sequence is exact at K and F_k; earlier tail exactness is unchanged. The two endpoints are zero, the penultimate module is ULift M with its canonical equivalence to M, and the required finite-free objects are exactly the first k+1 tail objects. This also applies when k=0, M=0, or the ring is the zero ring.",
    "uses": [
     "def-weil-pbc-exact-sequence"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-free-resolution-noetherian",
   "def-weil-pbc-exact-sequence",
-  "def-weil-finitely-generated-module",
   "def-weil-pbc-free-module",
-  "lem-weil-pbc-noetherian-submodule-finite"
+  "def-weil-finitely-generated-module"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00LP, finite truncation construction"
+  "place": "Algebra, Tag 00LP, part (2): finite truncation of the already proved Module.exists_finite_free_resolution, with explicit kernel endpoint and ULift transport (P3)."
  },
  "mathlib_searches": [
   {
@@ -110,20 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T235111-L-2171786",
+  "landing": "20261013T004026-L-2491865",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "IsLocalRing.exists_finite_free_resolution_data_succ",
-   "IsLocalRing.exists_finite_free_resolution_data_zero"
-  ],
-  "sorry_after": [
-   "IsLocalRing.exists_finite_free_resolution_data_succ"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
