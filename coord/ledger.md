@@ -13165,3 +13165,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:35 L: merged deliver/U2/Sheaf.Paper.FiniteStructureSupportedUnitKernel (stage 3; reviewer PASS; first push; landing 20261013T163540-L-1621510 (proof); batch 20261013T163531; modules 1; new nodes 0)
 - 16:35 L: merged deliver/V2/Sheaf.RingTheory.ColimitFlatRelationDescent (stage 3; reviewer PASS; first push; landing 20261013T163540-L-1621766 (interface); batch 20261013T163531; modules 2; new nodes 1)
 - 16:35 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale (reviewer RETURN: (reviewer X-4b58a, head 4b58ac096) E2: `exists_open_etale_fromNormalization_of_divisor` is false. Counterexample: for a )
+- 16:40 L: merged deliver/A2/Sheaf.AlgebraicGeometry.SelfExtTorDualChart (stage 3; reviewer PASS; first push; landing 20261013T164045-L-1667042 (interface); batch 20261013T164043; modules 3; new nodes 2)

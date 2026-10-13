@@ -21,41 +21,37 @@
  },
  "proof": [
   {
-   "text": "For B=i_*O_Z let G=H^n RHom_Y(B[0],B[0]) and Q=i*H^{-n}(B[0] tensor^L B[0]). Construct the canonical cap pairing of the Ext and Tor sheaves. A local Ext class is a derived morphism B -> B[n]; tensor it with B and take degree-minus-n homology to get Tor_n(B,B) -> Tor_0(B,B)=B. In a free resolution on an affine chart this is evaluation of a Hom(P,B) cocycle on a cycle of P tensor B. Boundaries evaluate to zero, and resolution comparison preserves this evaluation. Internal derived Hom and its open restriction identify these local pairings with the Ext sheaf G. This defines a restriction-compatible sheaf pairing, including on singular charts.",
+   "text": "Apply exists_selfExt_tor_resolution_model to obtain common complexes T and J, the pure degree-zero cohomology of J, the structure-sheaf identification e0, the Ext and Tor identifications eG and eQ, and all regular-chart zero-differential models.",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open"
+    "lem-sc-self-ext-tor-resolution-model"
    ],
    "elementary": false
   },
   {
-   "text": "The quotient ideal acts by zero on B and on Tor. Consequently the pairing factors through tensor-pullback to Z and takes values in O_Z. By internal tensor--Hom currying it defines a global morphism kappa: i*G -> dual(Q). The construction uses the actual fixed derived tensor and RHom, not a newly chosen derived structure. It does not refer to a conormal sheaf or an exterior comparison.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "On a regular affine chart choose the Koszul projective resolution and sheafify its augmentation. The bounded finite free Hom complex computes RHom. Hom into B and tensor with B both have zero differential. The cap pairing is the evaluation pairing Hom_A(K_n,B) times (K_n tensor_A B) -> B. A finite increasing-wedge basis makes the resulting map into the B-dual an isomorphism. Localization preserves the pairing, and restriction therefore gives an isomorphism on each over site in the statement.",
+   "text": "Use the uniquely cycle-characterized homologyEvaluation of T against J. Apply the internal Hom bifunctor to the Tor isomorphism contravariantly and the degree-zero isomorphism covariantly, obtaining an isomorphism eD into dual Q. Define the existential witness by the composite eG.hom followed by evaluation followed by eD.hom.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification",
-    "lem-sc-derived-hom-finite-free-model"
+    "lem-sc-homology-evaluation-formal-complex",
+    "def-pur-sheaf-hom"
    ],
    "elementary": false
   },
   {
-   "text": "At n=0 evaluation is multiplication on B. For n greater than the number of generators the two modules vanish. The zero quotient ring, empty inverse-image charts and generator length zero satisfy the same calculation. Restriction to an arbitrary V preserves the chart isomorphism.",
-   "uses": [],
+   "text": "For a chosen V and regular affine U, use the model theorem to get K-injectivity of the restricted J and a finite free zero model of the restricted T. homologyEvaluation_isIso gives invertibility of restricted evaluation. Restriction and over-site functors preserve the two comparison isomorphisms. Expand their functor images using map_comp and compose the three isomorphisms.",
+   "uses": [
+    "lem-sc-homology-evaluation-formal-complex",
+    "lem-sc-self-ext-tor-resolution-model"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "new-j3-koszul-projective-resolution"
+  "def-pur-sheaf-hom",
+  "lem-sc-homology-evaluation-formal-complex",
+  "lem-sc-self-ext-tor-resolution-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H1",
+  "agent": "A2",
   "date": "2026-10-13",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
@@ -144,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T154357-L-1163248",
+  "landing": "20261013T164045-L-1667042",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

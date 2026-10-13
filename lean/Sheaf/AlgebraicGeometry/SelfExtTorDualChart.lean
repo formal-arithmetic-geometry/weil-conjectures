@@ -13,6 +13,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.Algebra.Homology.HomologyEvaluation
+import Sheaf.AlgebraicGeometry.SelfExtTorResolutionModel
 
 /-! # Evaluation between self Ext and self Tor
 
@@ -25,6 +27,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Transport through the fixed derived tensor involves several composed object types.
 /-- The Ext--Tor evaluation map is invertible on regular affine charts.
 
 Source: Stacks Project, duality.tex, lemma-regular-ideal-ext (0BQY), its
@@ -32,25 +36,20 @@ zero-differential Hom calculation; cohomology.tex, derived evaluation (08DH);
 more-algebra.tex, equation-simple-tor-product (068G).
 (blueprint: lem-sc-self-ext-tor-dual-chart).
 
-Proof: Use the canonical cap action of Ext on Tor. Locally an Ext class is a
-derived morphism B -> B[n]. Tensoring it with B and taking degree-minus-n
-homology gives Tor_n(B,B) -> Tor_0(B,B) = B. Equivalently compute this action
-by evaluating a cocycle in Hom(P,B) on cycles in P tensor B, for a free
-resolution P of B. Changing a cocycle or cycle by a boundary does not change
-the value, and resolution comparison preserves evaluation. This construction
-sheafifies, giving a bilinear pairing of the Ext and Tor sheaves. The Tor sheaf
-carries the quotient scalar action, so the pairing descends to ordinary pullback
-to Z. Curry it to obtain κ into the internal dual of the pulled-back Tor sheaf.
-The cap action, quotient action and currying commute with restriction;
-no regularity is needed to define the map. On a regular affine chart use the
-augmented finite free Koszul resolution of A/I. Hom into A/I and tensor with A/I
-both have zero differential. The displayed evaluation is functional evaluation
-of Hom_A(K_n,A/I) on K_n tensor_A A/I. The increasing wedge basis is finite,
-so this pairing is perfect and κ is an isomorphism. Localization preserves that
-pairing, giving an isomorphism of over-site sheaves. The same resolution computes
-in the supplied derived universe. For n=0 the pairing is multiplication on A/I;
-for n above the generator length both sides vanish. Empty charts and zero quotient
-rings also give isomorphisms of zero objects. -/
+Proof: Choose a common complex T on Z and an injective representative J of O_Z
+using exists_selfExt_tor_resolution_model. Its isomorphisms identify pulled-back
+self Ext with H^n(Hom(T,J)) and pulled-back self Tor with H^(-n)(T). Apply the
+uniquely characterized homologyEvaluation: evaluate Hom cocycles on cycles of T,
+pass to both homology quotients, and curry the resulting pairing. The internal
+Hom bifunctor transports its target from Hom(H^(-n)(T),H^0(J)) to dual Q using
+the Tor comparison and H^0(J) = O_Z. Compose with the Ext comparison to obtain κ.
+For every regular affine U the common-model theorem gives a finite free
+zero-differential model for T on the indicated over site and K-injectivity of
+restricted J. homologyEvaluation_isIso applies on that site. The two comparison
+isomorphisms remain isomorphisms after restriction and passage to the over site;
+their composite with evaluation is therefore invertible. Rank zero, empty
+charts, zero quotient rings and n above the Koszul length are included in the
+two model/evaluation lemmas. No new definition selects an arbitrary resolution. -/
 theorem selfExt_tor_dual_chart
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -72,6 +71,22 @@ theorem selfExt_tor_dual_chart
           Ideal.span (Set.range f) = i.ker.ideal U ∧
             RingTheory.Sequence.IsKoszulRegular f),
         IsIso (((Scheme.Modules.restrictFunctor V.ι).map κ).over
-          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) := by sorry
+          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) := by
+  obtain ⟨T, J, hJ, e0, eG, eQ, hcharts⟩ :=
+    exists_selfExt_tor_resolution_model.{u, w} i n
+  let eD := (Functor.uncurry.obj (SheafOfModules.homFunctor Z.sheaf)).mapIso
+    (eQ.op.prod e0)
+  let ε := homologyEvaluation Z T J (n : ℤ) hJ
+  refine ⟨eG.hom ≫ ε ≫ eD.hom, ?_⟩
+  intro V U hU
+  obtain ⟨hI, hT⟩ := hcharts V U hU
+  have hε : IsIso (((Scheme.Modules.restrictFunctor V.ι).map ε).over
+      (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) :=
+    homologyEvaluation_isIso Z T J (n : ℤ) hJ V _ hI hT
+  change IsIso ((SheafOfModules.overFunctor V.toScheme.ringCatSheaf
+    (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))).map
+      ((Scheme.Modules.restrictFunctor V.ι).map (eG.hom ≫ ε ≫ eD.hom)))
+  rw [Functor.map_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp]
+  infer_instance
 
 end AlgebraicGeometry

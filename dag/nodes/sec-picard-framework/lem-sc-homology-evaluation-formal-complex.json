@@ -1,0 +1,167 @@
+{
+ "id": "lem-sc-homology-evaluation-formal-complex",
+ "kind": "statement",
+ "title": "Homology evaluation is perfect on locally split finite free models",
+ "statement": "Let X be a scheme [def-pc-scheme], let T and J be integer-indexed cochain complexes of O_X-modules [def-pc-cochain-complex-modules], and let n be an integer. Assume H^k(J)=0 for every k different from zero. Write P=Hom^bullet(T,J) [def-pur-hom-complex]. There is a unique morphism e:H^n(P) to Hom(H^(-n)(T),H^0(J)) [def-pur-sheaf-hom] satisfying both the following properties. First, for every open U, Hom cocycle phi over U, T-cycle z of degree -n over U, and J-cycle b of degree zero over U whose inclusion equals the evaluation of the (-n,0) component of phi on the inclusion of z, e([phi])([z])=[b]. Second, for every open V of X and open W of V, let F be restriction to V followed by restriction to its over site W [def-pur-localized-ringed-site], applied termwise to complexes. If F(J) is K-injective [def-pur-kinjective-complex] and F(T) admits a quasi-isomorphism roof [def-pc-quasi-iso-modules] L to F(T), L to E, where all differentials of E vanish, E is zero outside some finite integer interval, and every E^k is isomorphic to a finite direct sum of the structure sheaf, then F(e) is an isomorphism. The component projection and evaluation in the first property are those of the fixed Hom-complex bifunctor.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-pur-kinjective-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+ },
+ "proof": [
+  {
+   "text": "Use the product projection in degree n to evaluate a Hom cocycle phi on a T-cycle z in degree -n. The Hom differential equation gives d_J(phi(z))=0. Evaluating a Hom boundary changes this cycle by a J-boundary, since d_T(z)=0; evaluating a T-boundary also gives a J-boundary by the same cocycle equation. These equations are bilinear and commute with restriction.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the bilinear pairing through the two homology cokernels, sheafify the local formulas, and curry into internal Hom. The displayed cycle formula follows. Homology class maps are locally surjective; on such local lifts it forces evaluation against every class. Separatedness proves uniqueness of the resulting internal-Hom morphism.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves Hom complexes and their differential component formulas. The cycle characterization therefore restricts to the identical evaluation map. For a roof L to F(T), L to E, K-injectivity of F(J) makes both induced Hom maps quasi-isomorphisms. Evaluation commutes with precomposition, so its perfection can be checked on E.",
+   "uses": [
+    "lem-sc-hom-complex-restrict-open",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For E with zero differential and finite support, Hom(E,F(J)) is a finite product of shifted complexes Hom(E^p,F(J)). Each term E^p is finite free, hence its Hom is the corresponding finite product of F(J), an exact functor. Since F(J) has cohomology only in degree zero, only p=-n contributes to degree n; evaluation is the identity on Hom(E^(-n),H^0(F(J))). This is invertible, as are all comparison maps. Empty opens, zero modules and ranks zero have the same calculation.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "A2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0A8X",
+   "place": "sites-cohomology.tex, section-hom-complexes; cohomology.tex, section-internal-hom (08DH), complex evaluation; duality.tex, lemma-regular-ideal-ext (0BQY), zero-differential Hom calculation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology evaluation Hom complex finite free zero differential",
+   "results": "LeanSearch returned Internal Server Error; unavailable, not an absence result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of Hom complex evaluation on homology universal coefficient map zero differential finite free complex",
+   "results": "Eight generic Hom-complex cohomology and group-cohomology declarations; none supplies sheaf-valued cycle evaluation with the local split-model assertion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "Twelve results for homology class maps, including HomologicalComplex.homologyIsCokernel and isIso_homologyπ; these do not construct the bilinear evaluation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ee]valuation|[Ee]valuation.*homology",
+   "results": "One Mathlib Functor.lean match concerning a homology-functor evaluation isomorphism, not Hom-complex evaluation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfExtTorDualChart",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite-duality branch, local Koszul self-Ext calculation: evaluating Hom cocycles on the quotient-tensor Koszul cycles and proving its perfection. This is the generic homological part of that calculation.",
+   "via": [
+    "lem-sc-self-ext-tor-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluation",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluation.lean",
+  "declaration": "CategoryTheory.exists_homologyEvaluation",
+  "statement": "theorem exists_homologyEvaluation (X : AlgebraicGeometry.Scheme.{u})\n    (T J : CochainComplex X.Modules ℤ) (n : ℤ)\n    (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k)) :\n    ∃! e : (homComplex (R := X.sheaf) T J).homology n ⟶\n      SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0),\n      IsHomologyEvaluation X T J n e ∧\n        ∀ (V : X.Opens) (W : V.toScheme.Opens),\n          let Fc := moduleOpenOverComplexFunctor X V W\n          CochainComplex.IsKInjective (Fc.obj J) →\n          HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) →\n          IsIso (((Scheme.Modules.restrictFunctor V.ι).map e).over W)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T164045-L-1667042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T164045-L-1667042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
