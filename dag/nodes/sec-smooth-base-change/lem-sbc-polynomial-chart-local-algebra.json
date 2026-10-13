@@ -24,51 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Work in A = Gamma(T) and B = Gamma(U), with P = A[t_1,...,t_n]. The factorization is an A-algebra map P to B. The open immersion U into X induces open immersions of fibres and isomorphisms of their stalks; dimension at a point agrees with dimension at that point in an open subspace. Thus compute both invariants using B tensor_A kappa(p), where p is the contraction of the prime of x. Localization and tensor base change identify the fibre stalk and the source polynomial fibre local ring. Take R to be the polynomial fibre ring localized at the contracted prime, and transport the resulting local ring map to the actual fibre stalk S. The rings are in the same universe as the schemes; tensor products and localizations do not require a universe increase.",
+   "text": "Take the explicitly constructed polynomial fibre stalk R and canonical local map φ into the actual fibre stalk S. R is regular local and φ is quasi-finite. Finite presentation of f makes its residue-field fibre locally Noetherian, hence S is Noetherian. No arbitrary witness is chosen.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
+    "lem-sbc-polynomial-chart-canonical-fibre-stalk"
    ],
    "elementary": false
   },
   {
-   "text": "The polynomial local ring R is regular local. S is Noetherian local since the fibre coordinate algebra is finite type over the residue field of the base. Quasi-finiteness after base change gives a nonzero Artinian local closed fibre, whose dimension is zero. The quasi-finite local dimension inequality bounds dim(S) by dim(R). Name the finite local dimensions d and r. Apply the isolated-prime finite-residue theorem to the closed fibre to obtain a finite residue extension. The source and target residue fields therefore have the same finite transcendence degree t over the base residue field. Apply the finite-type field dimension-at-point formula to both coordinate rings. It gives fibre dimension r+t, while standard smooth polynomial n-space has dimension n at its image point, giving n=d+t. The open-fibre identification from the first step transports fibre dimension to the displayed point of f.fiber.",
+   "text": "The proved canonical fibre dimension theorem gives d,r,t, both local ring dimensions, the fibre topological dimension r+t and n=d+t. For a quasi-finite map the prime contraction map is strictly monotone, so dim S≤dim R. A prime of S above the ideal m_R S contracts to m_R; quasi-finite incomparability makes every prime of the closed fibre maximal. The quotient is a nontrivial local ring because φ is local; hence its dimension is exactly zero. The natural-number dimension equality turns dim S≤dim R into r≤d.",
    "uses": [
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "lem-weil-pbc-dimension-inequality-quasi-finite",
-    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+    "lem-sbc-polynomial-chart-fibre-dimensions"
    ],
    "elementary": false
   },
   {
-   "text": "Flatness of the original polynomial stalk map survives base change to the base residue field and localization, hence implies flatness of the transported map phi. For the converse, use the local tower A_p to P_qprime to B_q. The two algebras are essentially finitely presented, the module B_q over itself is nonzero and finitely presented, and it is A_p-flat since f is flat and U is open. Its closed-fibre module is identified with S and its polynomial closed-fibre base with R. Apply the fibre criterion for flatness with M=B_q. This proves flatness of the original stalk map from flatness of phi. Ring isomorphisms preserve flatness, so the equivalence follows.",
+   "text": "Apply the chart stalk/closed-fibre flatness comparison to this same canonical map φ, and assemble all conjuncts without changing the original theorem statement.",
    "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre",
-    "lem-weil-pbc-spec-map-stalk-localization"
+    "lem-sbc-polynomial-chart-stalk-flat-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-spec-map-stalk-localization",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-polynomial-ring-field-regular-ring",
-  "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
-  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-  "lem-weil-pbc-dimension-inequality-quasi-finite",
-  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
-  "lem-weil-pbc-criterion-flatness-fibre"
+  "lem-sbc-polynomial-chart-canonical-fibre-stalk",
+  "lem-sbc-polynomial-chart-fibre-dimensions",
+  "lem-sbc-polynomial-chart-stalk-flat-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "The fibre and stalk comparison in Tag 00RH and the dimension comparison in Tag 00RE, expanded into the explicit local algebra data needed by the Lean argument."
+  "place": "Tags 00RE, 00P1 and 00RH: canonical categorical fibre construction and proved dimension comparison, with only the local flatness comparison separated for a subsequent worker. K2 reduction 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -161,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T155930-L-1301361",
+  "landing": "20261013T164048-L-1668289",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

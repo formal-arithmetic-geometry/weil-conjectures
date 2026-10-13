@@ -1,0 +1,197 @@
+{
+ "id": "lem-sbc-polynomial-chart-canonical-fibre-stalk",
+ "kind": "statement",
+ "title": "Canonical polynomial fibre stalk and its regularity",
+ "statement": "For a scheme map f:X→T, an open U⊆X and a chart e:U→A^n_T whose projection is f|U, construct the base changed chart over each residue field and the open fibre inclusion [def-pc-scheme-fibre; def-nagata-relative-affine-space]. At x∈U define R as the stalk of the polynomial fibre at the chart image and φ:R→S as its stalk map followed by the inverse open-immersion stalk isomorphism, where S is the actual f-fibre stalk. This is a local map, and R is regular local [def-weil-regular-scheme]. If e is locally quasi-finite [pqf-def-quasifinite], φ is quasi-finite.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00RH and 00RE: polynomial chart, fibre localization and regularity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme-fibre",
+  "def-nagata-relative-affine-space",
+  "def-weil-regular-scheme",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Use pullback associativity to construct the open fibre inclusion and the base changed chart. Define the open fibre point with the fibre homeomorphism. The pullback equations show its image is f.asFiber(U.ι x). Define φ by the chart stalk map, the inverse inclusion stalk map, and transport along this point equality. Scheme stalk maps and isomorphisms are local. Base change and localization preserve quasi-finiteness; its composition with ring isomorphisms is quasi-finite.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine-space base change identifies the polynomial fibre with Spec(k[t_1,…,t_n]), for k=kappa(f(U.ι x)). Spec.stalkIso identifies R with the localization at the image prime. A polynomial ring over a field is regular, so every prime localization is regular local. Transport through the stalk ring equivalence.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 00RH and 00RE: polynomial chart, fibre localization and regularity.; implemented using canonical scheme pullbacks and Mathlib stalk isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite polynomial chart has a regular polynomial fibre local ring mapping to the fibre stalk with zero dimensional closed fibre and equivalent flatness",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.smooth_iff_locally_isStandardSmooth, RingHom.Smooth.locally_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, IsRegularLocalRing",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*stalk|stalk.*fiber|polynomial_chart_local",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/Sheafify.lean",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_flat_closedFiber|flat.*fiber.*stalk|stalk.*fiber.*flat",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "fibre_dimensions|fiber_dimensions|stalk_flat_comparison|flat_closedFiber",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi finite map into polynomial n space over a field, the fibre local dimension equals the stalk dimension plus the common residue transcendence degree, and n equals the polynomial stalk dimension plus that degree",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth.relativeDimension, Algebra.QuasiFinite.finite_fiber, IsLocalRing.finrank_quotient_map, Module.rankAtStalk_eq, Ideal.inertiaDeg, Algebra.quasiFinite_iff, Ideal.finrank_quotient_map",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a locally finitely presented polynomial chart stalk is equivalent to flatness of its closed fibre stalk map when the source is flat over the base",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, RingHom.Flat.propertyIsLocal, Algebra.Smooth.flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.Flat.localRingHom, RingHom.Flat.ofLocalizationPrime",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, IsLocalHom",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.stalkMap",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "Related ingredients only; no theorem with the stated combined conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a polynomial chart stalk is equivalent to flatness of its closed fibre stalk for a flat finitely presented source",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite polynomial chart fibre stalk dimensions and a common finite residue transcendence degree over the base field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the canonical local map from a polynomial fibre stalk to the fibre stalk using the chart base change and open immersion stalk isomorphism",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the geometric polynomial-chart local-algebra comparison, before applying the Cohen-Macaulay/miracle-flatness argument.",
+   "via": [
+    "lem-sbc-polynomial-chart-local-algebra",
+    "lem-sbc-polynomial-chart-fibre-flat-criterion",
+    "lem-sbc-affine-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-restricted-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolynomialChartFibreStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialChartFibreStalk.lean",
+  "declaration": "AlgebraicGeometry.PolynomialChart.isRegularLocalRing_sourceStalk",
+  "statement": "theorem isRegularLocalRing_sourceStalk (x : U.toScheme) :\n    IsRegularLocalRing (sourceStalk f U n e he x)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T164048-L-1668289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T164048-L-1668289",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
