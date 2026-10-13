@@ -30,13 +30,18 @@
    "text": "principalCechFunctor_exists constructs its object function as principalCechTotal and its morphisms as componentwise section maps of coefficient chain maps. Vertical compatibility follows by applying the sections functor to g.comm. For horizontal compatibility, equality transports commute with g by equality induction, and restriction commutes with g by naturality of modulesSpecToSheaf.map; compare each summand, including the zero branch. Identities, composition and addition hold componentwise. Proof irrelevance reduces the displayed object equality transports to reflexivity. The complex objects still use the original unproved principalCechDifferential_square; this step is a proved reduction, not a proof of square-zero.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "principalCechAugmentation_exists is proved by constructing its degree components as LinearMap.pi: singleton coordinates are restriction after the unique degree transport, and all other coordinates are zero. To prove chain compatibility, split on subset cardinality. A singleton has no nonempty deletion and restriction commutes with the coefficient differential. For a pair, order its members a < b; the two deletion terms restrict the same section to the same intersection after equal degree transports, by presheaf functoriality and proof irrelevance; their signs are +1 and -1, hence cancel. For larger subsets the coordinate and all erased coordinates are zero. This gives a chain map to principalCechTotal. Compose with principalCechObjIso.inv. The componentwise map specification of principalCechFunctor_exists and restriction naturality give naturality of this family, hence the required natural transformation. Cancel principalCechObjIso.inv against its hom to establish both specified formulas. The empty cover has no nonempty coordinates; the same construction and extensionality apply without any nonemptiness hypothesis on the index type.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Partial Lean realization of the existing alternating totalization construction (Tags 08D1 and 08D2), E1 second reading 2026-10-13. The square-zero, augmentation, K-injective quasi-isomorphism and derived comparison obligations remain the four original named theorem holes, with their original docstring arguments; no complete proof of those obligations is claimed."
+  "place": "Partial Lean realization of the existing alternating totalization construction (Tags 08D1 and 08D2): E1 proves the section and functor constructions; P2 proves the restriction augmentation, 2026-10-13. Square-zero, K-injective quasi-isomorphism and derived comparison remain the three original named theorem holes with their original docstring arguments; no complete proof of those obligations is claimed."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -160,11 +165,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e6b65",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T054212-L-441651",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean proofs and unchanged interfaces with the node, change record, report, axiom checks, and clean compilation of the module and all four direct importers."
+  "landing": "20261013T065114-L-900467",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

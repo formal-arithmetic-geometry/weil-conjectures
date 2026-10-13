@@ -330,6 +330,246 @@ theorem principalCech_singleton_degree (j : Fin r) (n : ℤ) :
     n = n + 1 - (({j} : Finset (Fin r)).card : ℤ) := by
   simp
 
+private def principalCechAugmentationComponent (n : ℤ) :
+    (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).obj (F.X n) ⟶
+      principalCechTerms r f F n := by
+  classical
+  exact ModuleCat.ofHom (R := A)
+    (X := (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).obj (F.X n))
+    (Y := principalCechTerms r f F n)
+    (LinearMap.pi fun J ↦ if h : J.val.card = 1 then
+      ((modulesSpecToSheaf.obj (F.X (n + 1 - (J.val.card : ℤ)))).obj.map
+        (homOfLE (show principalCechIntersection r f J.val ≤
+            ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) by
+          obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h
+          rw [hj]
+          exact principalCechIntersection_singleton_le r f j)).op).hom.comp
+        ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+          (eqToHom (congrArg F.X (show n = n + 1 - (J.val.card : ℤ) by omega)))).hom
+      else 0)
+
+private theorem principalCechAugmentationComponent_one (n : ℤ)
+    (s : (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).obj (F.X n))
+    (J : {J : Finset (Fin r) // J.Nonempty}) (h : J.val.card = 1)
+    (hle : principalCechIntersection r f J.val ≤
+      ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))
+    (he : n = n + 1 - (J.val.card : ℤ)) :
+    principalCechAugmentationComponent r f F n s J =
+      (modulesSpecToSheaf.obj (F.X (n + 1 - (J.val.card : ℤ)))).obj.map
+        (homOfLE hle).op
+        ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+          (eqToHom (congrArg F.X he)) s) := by
+  classical
+  change (if h : J.val.card = 1 then _ else (0 : _ →ₗ[A] _)) s = _
+  rw [dif_pos h]
+  rfl
+
+private theorem principalCechAugmentationComponent_large (n : ℤ)
+    (s : (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).obj (F.X n))
+    (J : {J : Finset (Fin r) // J.Nonempty}) (h : 1 < J.val.card) :
+    principalCechAugmentationComponent r f F n s J = 0 := by
+  classical
+  change (if h : J.val.card = 1 then _ else (0 : _ →ₗ[A] _)) s = 0
+  rw [dif_neg (ne_of_gt h)]
+  rfl
+
+private theorem principalCech_transport_restriction_d
+    (U V : (Spec (.of A)).Opens) (hle : V ≤ U)
+    (a b c d : ℤ) (e : a = c) (e' : b = d) :
+    (affineOpenSections A U).map (eqToHom (congrArg F.X e)) ≫
+        (modulesSpecToSheaf.obj (F.X c)).obj.map (homOfLE hle).op ≫
+        (affineOpenSections A V).map (F.d c d) =
+      (affineOpenSections A U).map (F.d a b) ≫
+        (affineOpenSections A U).map (eqToHom (congrArg F.X e')) ≫
+        (modulesSpecToSheaf.obj (F.X d)).obj.map (homOfLE hle).op := by
+  subst c d
+  change (𝟙 _ ≫ _) = (_ ≫ 𝟙 _ ≫ _)
+  simp only [Category.id_comp]
+  exact (modulesSpecToSheaf.map (F.d a b)).hom.naturality (homOfLE hle).op
+
+private theorem principalCech_transport_two_restrictions
+    (U V W : (Spec (.of A)).Opens) (hVU : V ≤ U) (hWV : W ≤ V)
+    (a b c : ℤ) (e : a = b) (e' : b = c) :
+    (affineOpenSections A U).map (eqToHom (congrArg F.X e)) ≫
+        (modulesSpecToSheaf.obj (F.X b)).obj.map (homOfLE hVU).op ≫
+        (affineOpenSections A V).map (eqToHom (congrArg F.X e')) ≫
+        (modulesSpecToSheaf.obj (F.X c)).obj.map (homOfLE hWV).op =
+      (affineOpenSections A U).map (eqToHom (congrArg F.X (e.trans e'))) ≫
+        (modulesSpecToSheaf.obj (F.X c)).obj.map (homOfLE (hWV.trans hVU)).op := by
+  subst b c
+  change (𝟙 _ ≫ _ ≫ 𝟙 _ ≫ _) = (𝟙 _ ≫ _)
+  simp only [Category.id_comp]
+  exact ((modulesSpecToSheaf.obj (F.X a)).obj.map_comp
+    (homOfLE hVU).op (homOfLE hWV).op).symm
+
+set_option maxHeartbeats 800000 in
+-- The pair calculation contains several dependent transports of section modules.
+private theorem principalCechAugmentationComponent_comm (n : ℤ) :
+    principalCechAugmentationComponent r f F n ≫
+        (principalCechTotal r f F).d n (n + 1) =
+      (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+        (F.d n (n + 1)) ≫
+          principalCechAugmentationComponent r f F (n + 1) := by
+  classical
+  ext s
+  simp only [principalCechTotal, CochainComplex.of_d, ModuleCat.comp_apply]
+  change (principalCechDifferential_exists r f F n).choose
+      (principalCechAugmentationComponent r f F n s) = _
+  rw [(principalCechDifferential_exists r f F n).choose_spec]
+  funext J
+  by_cases h1 : J.val.card = 1
+  · obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h1
+    rcases J with ⟨J, hJ⟩
+    dsimp at hj
+    subst J
+    simp only [principalCechDifferentialValue, id_eq]
+    let v := (-1 : A) ^ (({j} : Finset (Fin r)).card - 1) •
+      (affineOpenSections A (principalCechIntersection r f {j})).map
+        (F.d (n + 1 - (({j} : Finset (Fin r)).card : ℤ))
+          ((n + 1) + 1 - (({j} : Finset (Fin r)).card : ℤ)))
+        (principalCechAugmentationComponent r f F n s ⟨{j}, hJ⟩)
+    trans v + 0
+    · apply congrArg (fun x ↦ v + x)
+      apply Finset.sum_eq_zero
+      intro k _
+      split
+      next h =>
+        exfalso
+        have hk : k.val = j := Finset.mem_singleton.mp k.property
+        have he : ({j} : Finset (Fin r)).erase k.val = ∅ := by simp [hk]
+        exact h.ne_empty he
+      next => rfl
+    · dsimp only [v]
+      rw [add_zero]
+      rw [principalCechAugmentationComponent_one r f F n s _ h1
+        (principalCechIntersection_singleton_le r f j) (principalCech_singleton_degree r j n)]
+      rw [principalCechAugmentationComponent_one r f F (n + 1)
+        ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+          (F.d n (n + 1)) s) _ h1
+        (principalCechIntersection_singleton_le r f j)
+        (principalCech_singleton_degree r j (n + 1))]
+      have hp : ({j} : Finset (Fin r)).card - 1 = 0 := by simp
+      rw [hp, pow_zero, one_smul]
+      exact ConcreteCategory.congr_hom
+        (principalCech_transport_restriction_d F _ _
+          (principalCechIntersection_singleton_le r f j) n (n + 1) _ _
+          (principalCech_singleton_degree r j n)
+          (principalCech_singleton_degree r j (n + 1))) s
+  · have hlarge : 1 < J.val.card := by
+      have := J.property.card_pos
+      omega
+    by_cases h2 : J.val.card = 2
+    · obtain ⟨a, b, hab, hJ⟩ := Finset.card_eq_two.mp h2
+      have hs : ∃ a b : Fin r, a < b ∧ J.val = {a, b} := by
+        rcases lt_or_gt_of_ne hab with hlt | hgt
+        · exact ⟨a, b, hlt, hJ⟩
+        · exact ⟨b, a, hgt, hJ.trans (Finset.pair_comm a b)⟩
+      obtain ⟨a, b, hab, hJ⟩ := hs
+      rcases J with ⟨J, hne⟩
+      dsimp at hJ
+      subst J
+      let a' : ({a, b} : Finset (Fin r)) := ⟨a, by simp⟩
+      let b' : ({a, b} : Finset (Fin r)) := ⟨b, by simp⟩
+      have hu : (Finset.univ : Finset ({a, b} : Finset (Fin r))) = {a', b'} := by
+        ext x
+        simp only [Finset.mem_univ, Finset.mem_insert, Finset.mem_singleton, true_iff]
+        rcases Finset.mem_insert.mp x.property with hx | hx
+        · exact Or.inl (Subtype.ext hx)
+        · exact Or.inr (Subtype.ext (Finset.mem_singleton.mp hx))
+      simp only [principalCechDifferentialValue, id_eq]
+      rw [principalCechAugmentationComponent_large r f F n s _ hlarge,
+        principalCechAugmentationComponent_large r f F (n + 1) _ _ hlarge]
+      simp only [map_zero, smul_zero, zero_add]
+      rw [hu, Finset.sum_pair (show a' ≠ b' from fun h ↦ hab.ne (congrArg Subtype.val h))]
+      dsimp only [a', b']
+      have hea : ({a, b} : Finset (Fin r)).erase a = {b} := by simp [hab.ne]
+      have heb : ({a, b} : Finset (Fin r)).erase b = {a} := by
+        rw [Finset.pair_comm]
+        simp [hab.ne']
+      have hna : (({a, b} : Finset (Fin r)).erase a).Nonempty := by simp [hea]
+      have hnb : (({a, b} : Finset (Fin r)).erase b).Nonempty := by simp [heb]
+      rw [dif_pos hna, dif_pos hnb]
+      have hca : (({a, b} : Finset (Fin r)).erase a).card = 1 := by simp [hea]
+      have hcb : (({a, b} : Finset (Fin r)).erase b).card = 1 := by simp [heb]
+      have hlea : principalCechIntersection r f (({a, b} : Finset (Fin r)).erase a) ≤
+          ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) := by
+        rw [hea]
+        exact principalCechIntersection_singleton_le r f b
+      have hleb : principalCechIntersection r f (({a, b} : Finset (Fin r)).erase b) ≤
+          ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) := by
+        rw [heb]
+        exact principalCechIntersection_singleton_le r f a
+      have hda : n = n + 1 - ((({a, b} : Finset (Fin r)).erase a).card : ℤ) := by
+        rw [hca]
+        omega
+      have hdb : n = n + 1 - ((({a, b} : Finset (Fin r)).erase b).card : ℤ) := by
+        rw [hcb]
+        omega
+      rw [principalCechAugmentationComponent_one r f F n s
+        ⟨({a, b} : Finset (Fin r)).erase a, hna⟩ hca hlea hda]
+      rw [principalCechAugmentationComponent_one r f F n s
+        ⟨({a, b} : Finset (Fin r)).erase b, hnb⟩ hcb hleb hdb]
+      have ha := ConcreteCategory.congr_hom
+        (principalCech_transport_two_restrictions F _ _ _ hlea
+          (principalCechIntersection_erase_le r f {a, b} a) n _ _ hda
+          (principalCech_erase_degree r {a, b} a (by simp) n)) s
+      have hb := ConcreteCategory.congr_hom
+        (principalCech_transport_two_restrictions F _ _ _ hleb
+          (principalCechIntersection_erase_le r f {a, b} b) n _ _ hdb
+          (principalCech_erase_degree r {a, b} b (by simp) n)) s
+      simp only [ModuleCat.comp_apply] at ha hb
+      have ht : n = n + 1 + 1 - (({a, b} : Finset (Fin r)).card : ℤ) := by
+        rw [show ({a, b} : Finset (Fin r)).card = 2 from h2]
+        omega
+      let t := (modulesSpecToSheaf.obj
+          (F.X (n + 1 + 1 - (({a, b} : Finset (Fin r)).card : ℤ)))).obj.map
+        (homOfLE ((principalCechIntersection_erase_le r f {a, b} a).trans hlea)).op
+        ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+          (eqToHom (congrArg F.X ht)) s)
+      trans (-1 : A) ^ (({a, b} : Finset (Fin r)).filter (fun x ↦ x < a)).card • t +
+        (-1 : A) ^ (({a, b} : Finset (Fin r)).filter (fun x ↦ x < b)).card • t
+      · exact congrArg₂ (· + ·)
+          (congrArg (fun x ↦ (-1 : A) ^
+            (({a, b} : Finset (Fin r)).filter (fun x ↦ x < a)).card • x) ha)
+          (congrArg (fun x ↦ (-1 : A) ^
+            (({a, b} : Finset (Fin r)).filter (fun x ↦ x < b)).card • x) hb)
+      have hpa : (({a, b} : Finset (Fin r)).filter (fun x ↦ x < a)).card = 0 := by
+        simp [Finset.filter_insert, Finset.filter_singleton, hab.not_gt]
+      have hpb : (({a, b} : Finset (Fin r)).filter (fun x ↦ x < b)).card = 1 := by
+        simp [Finset.filter_insert, Finset.filter_singleton, hab]
+      rw [hpa, hpb, pow_zero, one_smul, pow_one, neg_one_smul]
+      exact add_neg_cancel _
+    · simp only [principalCechDifferentialValue, id_eq]
+      rw [principalCechAugmentationComponent_large r f F n s _ hlarge,
+        principalCechAugmentationComponent_large r f F (n + 1) _ _ hlarge]
+      simp only [map_zero, smul_zero, zero_add]
+      apply Finset.sum_eq_zero
+      intro j _
+      split
+      next h =>
+        have hj : 1 < (J.val.erase j.val).card := by
+          have := Finset.card_erase_add_one j.property
+          omega
+        rw [principalCechAugmentationComponent_large r f F n s _ hj]
+        simp only [map_zero, smul_zero]
+      next => rfl
+
+private theorem principalCech_transport_restriction_map
+    {G : CochainComplex
+      (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ}
+    (g : F ⟶ G) (U V : (Spec (.of A)).Opens) (hle : V ≤ U)
+    (a b : ℤ) (e : a = b) :
+    (affineOpenSections A U).map (g.f a) ≫
+        (affineOpenSections A U).map (eqToHom (congrArg G.X e)) ≫
+        (modulesSpecToSheaf.obj (G.X b)).obj.map (homOfLE hle).op =
+      (affineOpenSections A U).map (eqToHom (congrArg F.X e)) ≫
+        (modulesSpecToSheaf.obj (F.X b)).obj.map (homOfLE hle).op ≫
+        (affineOpenSections A V).map (g.f b) := by
+  subst b
+  change (_ ≫ 𝟙 _ ≫ _) = (𝟙 _ ≫ _)
+  simp only [Category.id_comp]
+  exact ((modulesSpecToSheaf.map (g.f a)).hom.naturality (homOfLE hle).op).symm
+
 /-- The augmentation from sections of U to alternating Čech cochains.
 It is restriction on singleton rows and zero on larger subsets.
 Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total).
@@ -354,7 +594,65 @@ theorem principalCechAugmentation_exists :
         (s : (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).obj (F.X n))
         (J : {J : Finset (Fin r) // J.Nonempty}), 1 < J.val.card →
           ((α.app F ≫ (principalCechObjIso r f F).hom).f n) s J = 0) := by
-  sorry
+  classical
+  let a (F : CochainComplex
+      (SheafOfModules.{uC} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :
+      ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj F ⟶ principalCechTotal r f F :=
+    CochainComplex.ofHom (principalCechAugmentationComponent r f F)
+      (principalCechAugmentationComponent_comm r f F)
+  let α : (affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).mapHomologicalComplex
+      (ComplexShape.up ℤ) ⟶ principalCechFunctor r f :=
+    { app F := a F ≫ (principalCechObjIso r f F).inv
+      naturality := by
+        intro F G g
+        apply (cancel_mono (principalCechObjIso r f G).hom).mp
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        ext n s
+        funext J
+        change principalCechAugmentationComponent r f G n
+            ((affineOpenSections A (⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))).map
+              (g.f n) s) J =
+          (((principalCechObjIso r f F).inv ≫ (principalCechFunctor r f).map g ≫
+            (principalCechObjIso r f G).hom).f n)
+              (principalCechAugmentationComponent r f F n s) J
+        trans (affineOpenSections A (principalCechIntersection r f J.val)).map
+          (g.f (n + 1 - (J.val.card : ℤ)))
+            (principalCechAugmentationComponent r f F n s J)
+        swap
+        · exact ((principalCechFunctor_exists r f).choose_spec.choose_spec.2 F G g n
+            (principalCechAugmentationComponent r f F n s) J
+            ((principalCechFunctor_exists r f).choose_spec.choose_spec.1 F)
+            ((principalCechFunctor_exists r f).choose_spec.choose_spec.1 G)).symm
+        by_cases h : J.val.card = 1
+        · have hle : principalCechIntersection r f J.val ≤
+              ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) := by
+            obtain ⟨j, hj⟩ := Finset.card_eq_one.mp h
+            rw [hj]
+            exact principalCechIntersection_singleton_le r f j
+          have he : n = n + 1 - (J.val.card : ℤ) := by rw [h]; omega
+          rw [principalCechAugmentationComponent_one r f G n _ J h hle he,
+            principalCechAugmentationComponent_one r f F n s J h hle he]
+          exact ConcreteCategory.congr_hom
+            (principalCech_transport_restriction_map F g _ _ hle n _ he) s
+        · have hlarge : 1 < J.val.card := by
+            have := J.property.card_pos
+            omega
+          rw [principalCechAugmentationComponent_large r f G n _ J hlarge,
+            principalCechAugmentationComponent_large r f F n s J hlarge]
+          exact (map_zero _).symm }
+  refine ⟨α, ?_, ?_⟩
+  · intro F n s j
+    change (((a F ≫ (principalCechObjIso r f F).inv) ≫
+      (principalCechObjIso r f F).hom).f n) s ⟨{j}, by simp⟩ = _
+    rw [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact principalCechAugmentationComponent_one r f F n s _ (Finset.card_singleton j)
+      (principalCechIntersection_singleton_le r f j) (principalCech_singleton_degree r j n)
+  · intro F n s J h
+    change (((a F ≫ (principalCechObjIso r f F).inv) ≫
+      (principalCechObjIso r f F).hom).f n) s J = _
+    rw [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact principalCechAugmentationComponent_large r f F n s J h
 
 /-- The canonical restriction augmentation.
 Source: Stacks, Tag 08D2 (blueprint: def-sc-principal-open-alternating-total). -/
