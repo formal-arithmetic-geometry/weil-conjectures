@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-derived-base-change-pasting",
+ "kind": "statement",
+ "title": "Derived base-change pasting before unit cancellation",
+ "statement": "Choose the derived categories of modules [def-pc-derived-category] on schemes [def-pc-scheme]. Let $f:X\\to S$, $g:S'\\to S$, $p:P\\to X$, $q:P\\to S'$ satisfy $h:pf=qg$, and let $t:T\\to P$ be any morphism. Write $L_s=Ls^*$ and $R_s=Rs_*$ [def-pc-derived-pullback, def-pc-derived-direct-image]. Take the pinned adjunctions $a_s:L_s\\dashv R_s$ used in [def-pc-derived-base-change-map], with unit $\\eta_s$, and the selected coherent comparisons $c(r,s):L_r\\circ L_s\\cong L_{rs}$ [lem-pc-ringed-spaces-derived-pullback-composition]. Let $k:R_{tq}\\cong R_q\\circ R_t$ be the right-adjoint conjugate of $c(t,q)$, using $a_{tq}$ and the composite adjunction $L_t\\circ L_q\\dashv R_q\\circ R_t$. For every $E\\in D(\\mathcal O_X)$, the canonical base-change mates satisfy $\\beta(h_t)_E\\,k_{L_{tp}E}\\,R_q(R_t(c(t,p)^{-1}_E))=\\beta(h)_E\\,R_q(\\eta_{t,L_pE})$, where $h_t:(tp)f=(tq)g$ is obtained by associativity from $h$. No cartesian or invertibility assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit description; Tag 0D5S, derived pullback composition"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the canonical counit transposes. The unit_conjugateEquiv identity and naturality show that conjugating a right adjoint carries its Hom equivalence to the composite Hom equivalence. Expand Adjunction.comp_homEquiv and use naturality on both factors to reduce the desired identity to c(t,q) followed by the composite-square transpose and c(t,p) inverse, equal to L_t of the original-square transpose.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two associativity laws of the selected c to (t,q,g) and (t,p,f). Equality-transport naturality of the family c(t,s) with respect to h identifies the middle comparison. Cancel the mapped isomorphism c(p,f) followed by c(t,pf); functoriality, inverse cancellation and transitivity of eqToHom prove the resulting comparison identity.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of c(t,p) inverse moves the counit of a_f through it. Postcompose the comparison identity by L_t L_p of this counit and apply both adjunction Hom equivalences. This proves the original pasting identity. Identity morphisms, empty schemes and zero E are covered by the same categorical identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit description; Tag 0D5S, derived pullback composition",
+  "note": "Formal mate calculation from the cited counit construction and composition coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley base change mate composition upper left isomorphism",
+   "results": "8 hits: mateEquiv_apply, mateEquiv, mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv, mateEquiv_symm_apply, iterated_mateEquiv_conjugateEquiv_symm, mateEquiv_vcomp.",
+   "date": "2026-10-13",
+   "verdict": "Generic mate calculus; no pinned scheme-derived pasting statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits on rightAdjointUniq and its unit and counit compatibilities.",
+   "date": "2026-10-13",
+   "verdict": "Generic uniqueness only; direct conjugation used instead."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|homEquiv_naturality_right|unit_conjugateEquiv",
+   "results": "25 hits, including Adjunction.Basic homEquiv_naturality_right and Adjunction.Mates mateEquiv_vcomp and unit_conjugateEquiv.",
+   "date": "2026-10-13",
+   "verdict": "Used unit_conjugateEquiv and Hom-equivalence naturality as elementary proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change mate pasting along a morphism at the upper left corner",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeTopIso",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Derived mate transport at the upper-left vertex: transposition and associativity step before cancellation of the upper-left adjunction unit",
+   "via": [
+    "lem-pc-derived-base-change-top-iso",
+    "lem-pc-derived-base-change-coordinate-naturality",
+    "stage3-canonicalModuleBaseChange_iso_comparison_ab",
+    "lem-pc-canonical-module-base-change-iso-comparison",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangePasting.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedBaseChange_pasting",
+  "statement": "theorem schemeDerivedBaseChange_pasting\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S P S' T : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (p : P ⟶ X) (q : P ⟶ S') (h : p ≫ f = q ≫ g) (t : T ⟶ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let k := conjugateIsoEquiv (a (t ≫ q)) ((a q).comp (a t)) (c t q)\n    ∀ E : schemeDerivedCategory X,\n      schemeDerivedBaseChangeMap f (t ≫ q) g (t ≫ p)\n          (by rw [Category.assoc, h, Category.assoc]) E ≫\n        k.hom.app ((derivedPullback (t ≫ p)).obj E) ≫\n        (schemeDerivedDirectImage q).map\n          ((schemeDerivedDirectImage t).map ((c t p).inv.app E)) =\n      schemeDerivedBaseChangeMap f q g p h E ≫\n        (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T062515-L-731174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T062515-L-731174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
