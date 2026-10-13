@@ -1,0 +1,121 @@
+{
+ "id": "def-pc-derived-mayer-vietoris-open-counit-model",
+ "kind": "definition",
+ "title": "Explicit underived and homotopy open comparison models",
+ "statement": "For a scheme morphism $h:X\\to Y$ [def-pc-scheme] and an arbitrary open $U\\subseteq Y$, put $V=h^{-1}U$, $g:V\\to U$, and let $j_X,j_Y$ be the open inclusions. The underived composition model is $j_{X*}h_*\\cong g_*j_{Y*}$, constructed using pushforward composition, the equality $j_Xh=gj_Y$, and inverse pushforward composition. The underived restriction model is $h_*r_Y\\cong r_Xg_*$, obtained by transport along the open-site equivalences [def-pc-derived-open-restriction-maps] of the sectionwise inverse-image identification of Tag 08FE. Their homotopy models include the explicit mapHomotopyCategory composition factors. The homotopy adjunction is the termwise open adjunction [def-pc-kinjective-mayer-vietoris-data] localized at homotopy equivalences. These are real constructions, with no chosen existence witness.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 08BV; official pages https://stacks.math.columbia.edu/tag/08FE, https://stacks.math.columbia.edu/tag/0D5T and https://stacks.math.columbia.edu/tag/08BV, read 2026-10-14"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the underived composition from pushforwardComp and pushforwardCongr. Construct the restriction comparison using the sectionwise inverse-image-open equality and morphismRestrict_app, transported along overFunctorEquiv. Apply mapHomotopyCategoryCompIso to construct the two homotopy models. Apply mapHomotopyCategory to the specialized underived adjunction. All construction and compatibility proofs are written in Lean.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E3",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE, 0D5T and 08BV; normalization of the fixed Lean comparisons by their factorization equations",
+  "note": "Lean interface calculations expanding the numbered argument of the parent; source pages read, categorical details written by E3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived composition comparison factorization units and open restriction counits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived open restriction direct image comparison counit compatibility",
+   "results": "Underived open restriction counit formulas, restrictFunctorAdjCounitIso, and restrictAdjunction. No fixed comparison normalization. Loogle for the right derived functor returned unknown identifier.",
+   "date": "2026-10-14",
+   "verdict": "underived ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|rightDerivedFunctorObjQIso.*counit",
+   "results": "Adjunction.derivedε_fac_app is the generic derived counit factorization. The explicit fixed open comparison models and their normalization equations are absent. Also searched all blueprint nodes for open counit and 08FE: only unrelated recollement nodes.",
+   "date": "2026-10-14",
+   "verdict": "generic factorization, no exact scheme normalization or underived square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionCounit",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map: compatibility with individual open units and restrictions; normalized comparison computation before the unit and triangle-identity calculation; counit-computation proof step 2",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-open-composition-counit",
+    "lem-pc-derived-mayer-vietoris-open-comparison-unit",
+    "lem-pc-derived-mayer-vietoris-direct-image-squares",
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisOpenCounitModel.lean",
+  "declaration": "AlgebraicGeometry.schemeMVUnderivedOpenComposition",
+  "statement": "def schemeMVUnderivedOpenComposition {X Y : Scheme.{u}} (h : X ⟶ Y) (U : Y.Opens) : RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom ⋙ RingedSpace.moduleDirectImage h.toLRSHom.toShHom ≅ RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom ⋙ RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.schemeMVUnderivedOpenComposition",
+   "AlgebraicGeometry.schemeMVUnderivedOpenRestriction",
+   "AlgebraicGeometry.schemeMVHomotopyOpenComposition",
+   "AlgebraicGeometry.schemeMVHomotopyOpenRestriction",
+   "AlgebraicGeometry.schemeMVHomotopyOpenAdjunction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T201746-L-3968243",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T201746-L-3968243",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
