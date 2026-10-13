@@ -15,20 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Apply the derived Gabriel-Popescu localization L from modules over a ring R, with derived right adjoint RG, fully faithful RG, and invertible counit L RG ≅ identity. Since L is exact and preserves coproducts, H L is cohomological and takes coproducts to products. Brown representability for the compact generator R represents H L by E. Complete E → RG(L(E)) to a triangle M → E → RG(L(E)) → M[1]. Applying L shows L(M)=0, since the image of the unit is inverse to the counit. Consequently Hom(M,E)=H(L(M))=0. The exact Hom(-,E) sequence gives a retraction of E → RG(L(E)). Evaluating the split inclusion on RG(X) identifies H(X) with a natural direct summand of Hom(RG(X),RG(L(E))) ≅ Hom(X,L(E)), using full faithfulness and the counit. The corresponding Yoneda idempotent on L(E) splits because the derived category has countable coproducts. The splitting object represents H. The coproduct indexing universe U=max(w,vA,vH) contains all element-indexing sets in this construction. Representability is expressed by natural Hom bijections, so unequal Hom and value universes require no equality of types or chosen arbitrary witness in a definition.",
-   "uses": [],
+   "text": "First obtain the natural retract of the underlying functor from the localization construction [lem-grothendieck-derived-brown-retract]. Then split the resulting idempotent using countable coproducts [lem-countable-coproducts-idempotent-complete]. The explicit projector-to-representing-object construction is the private helper in the Lean proof.",
+   "uses": [
+    "lem-grothendieck-derived-brown-retract",
+    "lem-countable-coproducts-idempotent-complete"
+   ],
    "elementary": false,
    "source": {
     "document": "https://stacks.math.columbia.edu/tag/0F5X",
-    "place": "injectives-lemma-brown, complete proof"
+    "place": "injectives-lemma-brown; final Karoubian argument using Tag 05QW"
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-grothendieck-derived-brown-retract",
+  "lem-countable-coproducts-idempotent-complete"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0F5X",
-  "place": "injectives-lemma-brown"
+  "place": "injectives-lemma-brown, localization retract followed by Tag 05QW Karoubianity"
  },
  "mathlib_searches": [
   {
@@ -105,9 +111,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T153222-L-1059758",
+  "landing": "20261013T155937-L-1303629",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
