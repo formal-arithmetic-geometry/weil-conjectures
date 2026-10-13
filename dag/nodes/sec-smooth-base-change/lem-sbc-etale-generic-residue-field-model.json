@@ -15,33 +15,46 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open containing the generic point of S. Its nilradical p is prime. The supplied finite etale field extension of kappa(p) is finite separable. Choose a primitive element; apply the existing residue_polynomial_lift lemma to multiply by a coefficient denominator outside p and lift its monic minimal polynomial to the affine ring R. Form the monic quotient B, finite free over R. Its generic fibre is the prescribed field L, including its structure map.",
+   "text": "Equip L with the algebra structure induced by Spec.preimage y_eta. The affine Etale criterion gives Algebra.Etale, and the Mathlib formally unramified finiteness and formally etale field separability lemmas give a finite separable extension. Apply the already proved Scheme.exists_etale_neighbourhood_prescribed_residueField to obtain an etale morphism phi:U to S, u over eta_S, and a compatible residue-field isomorphism e:L to kappa(u).",
    "uses": [
-    "lem-weil-pbc-finite-separable-primitive-element",
-    "lem-weil-pbc-etale-residue-polynomial-lift"
+    "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
    ],
    "elementary": false
   },
   {
-   "text": "There is exactly one prime q of B over p. The fibre is separable and the quotient is flat, so the map is etale at q. The complement of the etale locus has closed image under the finite map, avoiding p. Restrict to a principal open of the base disjoint from that image. The resulting map is finite etale. For each prime Q of the localized quotient, flat going down gives a prime q_prime contained in Q and lying over p. The unique such prime is q, hence q is contained in every Q and is generic, also when R is nonreduced.",
-   "uses": [],
+   "text": "The closed source instance LocallyQuasiFinite.of_etale and Mathlib Scheme.Hom.isDiscrete_preimage_singleton make the set-theoretic fibre over eta_S discrete. By isDiscrete_iff_forall_mem_exists_isOpen choose an open V of U with V intersect phi^{-1}({eta_S}) = {u}. Set T=V, eta=u as a point of V, and g=V.ι followed by phi. The open immersion and phi are etale, so g is etale, and its fibre over eta_S is exactly {eta}. This uses only the proved quasi-finiteness tool, without importing the stronger scheme fibre-decomposition statement.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-open-immersion"
+   ],
    "elementary": false
   },
   {
-   "text": "Compose the resulting etale map with the affine open immersion into S. The field isomorphism between kappa(q) and the supplied L gives the isomorphism r of spectra. The construction identifies their maps from the base residue field; functoriality of canonical residue-field point maps gives the required equality of maps to S. The generic point maps to eta_S.",
-   "uses": [],
-   "elementary": false
+   "text": "Etale morphisms are flat and locally of finite presentation. Mathlib UniversallyOpen.of_flat and Scheme.Hom.isOpenMap therefore make g open. For the continuous open map g, IsOpenMap.preimage_closure_eq_closure_preimage gives closure({eta}) = closure(g^{-1}({eta_S})) = g^{-1}(closure({eta_S})) = T, so eta is generic. Its image is eta_S by construction. This uses the closed Mathlib instances directly, not the unstated DAG lemma lem-weil-pbc-etale-morphism-open-map, and requires neither reducedness nor Noetherianity.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose e with the residue-field isomorphism of the open immersion V.ι at eta to get d:L isomorphic to kappa_T(eta), and take r=Spec(d). Compatibility of e and residueFieldMap_comp give (residueFieldCongr(g eta=eta_S)).inv followed by g.residueFieldMap eta = Spec.preimage(y_eta) followed by d.hom. Applying Spec, residueFieldCongr_fromSpecResidueField and SpecMap_residueFieldMap_fromSpecResidueField proves the required equality. All identifications, including the prescribed algebra structure, are retained.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-separable-primitive-element",
-  "lem-weil-pbc-etale-residue-polynomial-lift"
+  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-residue-field"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0551, proof, monic polynomial construction",
-  "note": "Extracts steps 1 and 2 of the parent node, with the compatible residue-field point equality. The construction is independent of X; its proof remains the next stage-3 item."
+  "place": "Tags 02LF, 02GL and 03WT; generic-point closure argument",
+  "note": "V2: shorter route below the unit level using the already proved prescribed residue-field neighbourhood and closed quasi-finiteness tools. The Lean proof is complete and uses only propext, Classical.choice and Quot.sound. The unit realized lists are empty; no fixed unit step is bypassed. Second reading: openness comes directly from Mathlib UniversallyOpen.of_flat and Scheme.Hom.isOpenMap; removed the citation to the DAG open-map lemma, which has no Lean declaration. External closed tools used in step 2 are LocallyQuasiFinite.of_etale and Scheme.Hom.isDiscrete_preimage_singleton."
  },
  "mathlib_searches": [
   {
@@ -115,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T054215-L-442392",
-  "kind": "interface",
+  "landing": "20261013T065119-L-901842",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
