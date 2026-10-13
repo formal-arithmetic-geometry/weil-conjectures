@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+
+import Sheaf.AlgebraicGeometry.EtaleLimitOpenRestrictionTransform
+import Sheaf.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform
 
 /-! # Compatible Mayer--Vietoris maps on canonical open diagrams
 
@@ -23,6 +23,55 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+-- Keep inverse-image sheaves symbolic while comparing the transported map types.
+attribute [local irreducible] upperStar cohomologyMap
+
+private noncomputable def pairLeg {J : Type u} [Category J]
+    {K M : J ⥤ AddCommGrpCat.{u + 1}} {A B : Type (u + 1)}
+    [AddCommGroup A] [AddCommGroup B]
+    (α : K ⟶ (Functor.const J).obj (AddCommGrpCat.of A))
+    (β : M ⟶ (Functor.const J).obj (AddCommGrpCat.of B)) :
+    K ⊞ M ⟶ (Functor.const J).obj (AddCommGrpCat.of (A × B)) where
+  app j := AddCommGrpCat.ofHom
+    (((biprod.fst : K ⊞ M ⟶ K).app j ≫ α.app j).hom.prod
+      ((biprod.snd : K ⊞ M ⟶ M).app j ≫ β.app j).hom)
+  naturality j k f := by
+    ext x
+    apply Prod.ext
+    · exact congrArg (fun m ↦ m x) ((biprod.fst ≫ α).naturality f)
+    · exact congrArg (fun m ↦ m x) ((biprod.snd ≫ β).naturality f)
+
+private theorem pairLeg_fst {J : Type u} [Category J]
+    {K M : J ⥤ AddCommGrpCat.{u + 1}} {A B : Type (u + 1)}
+    [AddCommGroup A] [AddCommGroup B]
+    (α : K ⟶ (Functor.const J).obj (AddCommGrpCat.of A))
+    (β : M ⟶ (Functor.const J).obj (AddCommGrpCat.of B)) (j : J) :
+    (pairLeg α β).app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst A B) =
+      (biprod.fst : K ⊞ M ⟶ K).app j ≫ α.app j := by rfl
+
+private theorem pairLeg_snd {J : Type u} [Category J]
+    {K M : J ⥤ AddCommGrpCat.{u + 1}} {A B : Type (u + 1)}
+    [AddCommGroup A] [AddCommGroup B]
+    (α : K ⟶ (Functor.const J).obj (AddCommGrpCat.of A))
+    (β : M ⟶ (Functor.const J).obj (AddCommGrpCat.of B)) (j : J) :
+    (pairLeg α β).app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd A B) =
+      (biprod.snd : K ⊞ M ⟶ M).app j ≫ β.app j := by rfl
+
+private theorem pairLeg_exists {J : Type u} [Category J]
+    {K M : J ⥤ AddCommGrpCat.{u + 1}} {A B : Type (u + 1)}
+    [AddCommGroup A] [AddCommGroup B]
+    (α : K ⟶ (Functor.const J).obj (AddCommGrpCat.of A))
+    (β : M ⟶ (Functor.const J).obj (AddCommGrpCat.of B)) :
+    ∃ γ : K ⊞ M ⟶ (Functor.const J).obj (AddCommGrpCat.of (A × B)),
+      (∀ j, γ.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst A B) =
+        (biprod.fst : K ⊞ M ⟶ K).app j ≫ α.app j) ∧
+      (∀ j, γ.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd A B) =
+        (biprod.snd : K ⊞ M ⟶ M).app j ≫ β.app j) :=
+  ⟨pairLeg α β, pairLeg_fst α β, pairLeg_snd α β⟩
+
+set_option maxHeartbeats 200000 in
+-- The transported cohomology objects require extra elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
 /-- Canonical restricted diagrams admit the compatible exact successor segment.
 
@@ -145,6 +194,54 @@ theorem etale_limit_open_mayerVietoris_maps
       (∀ j, ι₄.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst _ _) =
         (biprod.fst : KU (q + 1) ⊞ KV (q + 1) ⟶ KU (q + 1)).app j ≫ (ιU (q + 1)).app j) ∧
       (∀ j, ι₄.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd _ _) =
-        (biprod.snd : KU (q + 1) ⊞ KV (q + 1) ⟶ KV (q + 1)).app j ≫ (ιV (q + 1)).app j) := by sorry
+        (biprod.snd : KU (q + 1) ⊞ KV (q + 1) ⟶ KV (q + 1)).app j ≫ (ιV (q + 1)).app j) := by
+  set_option backward.isDefEq.respectTransparency true in
+    intro t WU WV WI BI BP r'
+    have hstageCover (j : Set.Ici i₀) :
+        tailStageOpen D g₀ U j ⊔ tailStageOpen D g₀ V j = ⊤ := by
+      simp only [tailStageOpen, ← Scheme.Hom.preimage_sup,
+        Scheme.Hom.comp_preimage, hcover, Scheme.Hom.preimage_top]
+    have hlimitCover : ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ⊔
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V) = ⊤ := by
+      rw [← Scheme.Hom.preimage_sup, Scheme.Hom.comp_preimage, hcover,
+        Scheme.Hom.preimage_top]
+    obtain ⟨ι₁, h₁U, h₁V⟩ := pairLeg_exists
+      (A := Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) q)
+      (B := Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) q) (ιU q) (ιV q)
+    obtain ⟨ι₄, h₄U, h₄V⟩ := pairLeg_exists
+      (A := Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) (q + 1))
+      (B := Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) (q + 1))
+      (ιU (q + 1)) (ιV (q + 1))
+    have hRestriction := etale_limit_open_restriction_transform
+      X U V D c F φ G eG L q H eH hH B eB hB i₀ g₀
+      KU eKU hKU ιU hιU KV eKV hKV ιV hιV ι₄ h₄U h₄V
+    obtain ⟨r, hs, hrU, hrV⟩ := hRestriction
+    have hBoundary := etale_limit_open_boundary_transform
+      X U V D c F φ G eG L q H eH hH B eB hB i₀ g₀ hstageCover hlimitCover
+      KU eKU hKU ιU hιU KV eKV hKV ιV hιV KI eKI hKI ιI hιI ι₁ h₁U h₁V r hrU hrV
+    obtain ⟨a, b, a', b', hab, hbr, hab', ha, hb⟩ := hBoundary
+    set_option backward.isDefEq.respectTransparency true in
+      refine ⟨a, b, r, a', b', ι₁, ι₄, ?_⟩
+      refine ⟨hab, hbr, hab', ha, hb, ?_⟩
+      refine ⟨?_, ?_, ?_, ?_, ?_⟩
+      · intro j
+        ext x
+        exact congrArg (fun m ↦ m x) (hs j)
+      · intro j
+        ext x
+        exact congrArg (fun m ↦ m x) (h₁U j)
+      · intro j
+        ext x
+        exact congrArg (fun m ↦ m x) (h₁V j)
+      · intro j
+        ext x
+        exact congrArg (fun m ↦ m x) (h₄U j)
+      · intro j
+        ext x
+        exact congrArg (fun m ↦ m x) (h₄V j)
 
 end AlgebraicGeometry.Etale

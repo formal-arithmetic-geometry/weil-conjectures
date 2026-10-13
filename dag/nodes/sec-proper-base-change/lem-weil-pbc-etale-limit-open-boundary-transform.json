@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-etale-limit-open-boundary-transform",
+ "kind": "statement",
+ "title": "Difference and boundary transformations for a supplied canonical restriction row",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse diagram of schemes [def-pc-scheme], with a cone $c$ [def-weil-pbc-category-colimit]. Let $F_i$ be abelian étale sheaves [def-weil-pbc-abelian-etale-sheaves] on $D_i$ and let $\\varphi_f:D(f^{\\mathrm{op}})^*F_i\\to F_j$ be coefficient maps [def-weil-pbc-inverse-image] for arrows $f:i\\to j$. Let $G:I\\to\\operatorname{Ab}(c.pt_{\\acute et})$ have specified isomorphisms $eG_i:G_i\\cong c_i^*F_i$, and let $L$ be any cocone on $G$. No identity/composition law on $\\varphi$ or formula for the arrows of $G$ is assumed. Fix $X$, an index $i_0$, a map $g_0:D_{i_0}\\to X$, opens $U,V$ [def-weil-pbc-scheme-conventions], and $q\\in\\mathbb N$. Write $J=I_{\\ge i_0}$ and $t:J\\to I$ for the inclusion. For each open $W$ put $W_j=(D(j\\to i_0);g_0)^{-1}W$ and $W_L=(c_{i_0};g_0)^{-1}W$. Let $T_W^n(f)$ be pullback along the restricted transition $W_k\\to W_j$, followed by cohomology of the coefficient map obtained from the inverse-image composition comparisons and the restriction of $\\varphi_f$; let $\\lambda_W^n(j)$ be the analogous restricted cone-projection pullback followed by the coefficient map from $(eG_j)^{-1};L_j$ [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]. For $W=U,V$, suppose degree-indexed functors $K_W^n:J\\to\\operatorname{Ab}$, object isomorphisms $eW_{n,j}:K_W^n(j)\\cong H^n(W_j,F_j|)$, and natural legs $\\iota_W^n:K_W^n\\to\\mathrm{const}(H^n(W_L,L.pt|))$ are supplied, with $K_W^n(f)=eW_{n,j};T_W^n(f);eW_{n,k}^{-1}$ and $\\iota_W^n(j)=eW_{n,j};\\lambda_W^n(j)$. Let $H:I\\to\\operatorname{Ab}$ have isomorphisms $eH_i:H_i\\cong H^{q+1}(D_i,F_i)$ and arrows conjugate to pullback along $D(f^{\\mathrm{op}})$ followed by $H^{q+1}(\\varphi_f)$. Let $B$ be a cocone on $H$ with an isomorphism $eB:B.pt\\cong H^{q+1}(c.pt,L.pt)$ such that $B_i;eB=eH_i;c_i^*;H^{q+1}((eG_i)^{-1};L_i)$. Put $BP_n=H^n(W_{L,U},L.pt|)\\times H^n(W_{L,V},L.pt|)$, and let $r':B.pt\\to BP_{q+1}$ be $eB$ followed by the actual pair of restrictions. Assume $U_j\\cup V_j=D_j$ for every $j\\in J$ and $W_{L,U}\\cup W_{L,V}=c.pt$. Supply also $K_{U\\cap V}^n$, $eI_{n,j}$ and $\\iota_I^n$ satisfying the same canonical arrow and leg formulas for $W=U\\cap V$. Put $BI=H^q(W_{L,U\\cap V},L.pt|)$. Given a natural product leg $\\iota_1:K_U^q\\oplus K_V^q\\to\\mathrm{const}(BP_q)$ whose projections are the corresponding biproduct projections followed by $\\iota_U^q$ and $\\iota_V^q$, and a supplied natural $r:tH\\to K_U^{q+1}\\oplus K_V^{q+1}$ whose two components followed by $eU,eV$ are $eH$ followed by the actual stage restrictions, there exist $a:K_U^q\\oplus K_V^q\\to K_{U\\cap V}^q$, $b:K_{U\\cap V}^q\\to tH$, $a':BP_q\\to BI$ and $b':BI\\to B.pt$. For every $j$, $(a_j,b_j)$ and $(b_j,r_j)$ are exact (the image of the first map is the kernel of the second); $(a',b')$ is exact; and $a_j;\\iota_{I,j}=\\iota_{1,j};a'$ and $b_j;B_{t(j)}=\\iota_{I,j};b'$. This asserts no right square and constructs neither $r$ nor a product cocone leg.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ (theorem-colimit), coherent-system construction, and 0A50 (lemma-mayer-vietoris), functorial exact sequence; geometric restriction part of parent ladder steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-stage-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied covering equations at each tail stage and at c.pt. Inverse image preserves intersections, identifying the intersection with the supplied intersection open. Use the functorial Mayer--Vietoris connecting transformation before evaluating at the coefficient sheaves, so the same boundary is natural for all transitions and cone legs. Transport the difference and boundary by eKU, eKV, eKI and eH; at the bottom transport the boundary by eB.inv. More explicitly, identify the stage biproduct with the ordinary product by evaluation's biproduct comparison and biprodIsoProd, then apply the two object isomorphisms. The map a_j is this identification followed by restriction from U_j to the intersection minus restriction from V_j, followed by eKI_j.inv. The map b_j is eKI_j.hom followed by the canonical boundary delta_j followed by eH_j.inv. The bottom a' is the actual difference of intersection restrictions, and b' is delta_L followed by eB.inv. The comparisons are all isomorphisms, so images and kernels of these maps are the images and kernels in the original long exact sequence. Coefficient naturality and pullback naturality prove that the stage maps are natural transformations. The long exact sequence gives exactness of (a,b). For (b,r), the supplied component formulas hrU and hrV identify the kernel of r with the kernel of the actual pair of restrictions: the biproduct projections are jointly monic and eKU,eKV are isomorphisms. The long exact sequence gives that kernel as the image of b. Transport also gives bottom exactness. Naturality under the restricted cone projections followed by the coefficient legs proves the two left squares. For the difference square, postcompose the two factors with intersection restriction and subtract; h₁U and h₁V replace the product leg by the two supplied legs. Pullback/coefficient naturality identifies each resulting term with the intersection leg after the corresponding stage restriction. For the boundary square, substitute hB and hιI, cancel eH and eKI, and apply the naturality of the same connecting transformation under the cone projection followed by (eG_j).inv;L_j. These equations are exactly the two asserted left squares. This theorem constructs neither r nor a product cocone map and asserts no right square. The argument also applies to empty or coincident opens.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "T1 stage 3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/0A50",
+  "place": "Functoriality of the long exact sequence; Tag 09YQ coherent-system maps; agent-written transport argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural Mayer Vietoris exact sequence on diagrams and product cocone maps",
+   "results": "MayerVietorisSquare short-complex and sheaf-condition lemmas; no canonical restricted coherent-system transformation.",
+   "date": "2026-10-13",
+   "verdict": "Tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.prod",
+   "results": "AddMonoidHom.prod, fst_comp_prod, snd_comp_prod, prod_unique; product-leg construction tools only.",
+   "date": "2026-10-13",
+   "verdict": "No geometric transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*prod|AddMonoidHom.fst_comp_prod",
+   "results": "Generic natural transformation products, no open-restriction ladder. Also rg in both Lean roots found no existing exact canonical ladder.",
+   "date": "2026-10-13",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural Mayer Vietoris cohomology transformations on diagrams of schemes with canonical product cocone maps",
+   "results": "Service unavailable: Internal Server Error. No search result or mathematical conclusion was obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenMayerVietorisMaps",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-limit-open-mayer-vietoris-maps",
+   "place": "Separate the restriction row from the difference/boundary rows of the canonical ladder.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitOpenBoundaryTransform.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_open_boundary_transform",
+  "statement": "theorem etale_limit_open_boundary_transform\n    (X : Scheme.{u}) (U V : X.Opens)\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (L : Cocone G) (q : ℕ)\n    (H : I ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) (q + 1)))\n    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) (q + 1)) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map (φ f) (q + 1)) ≫ (eH j).inv)\n    (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt (q + 1)))\n    (hB : ∀ i : I, B.ι.app i ≫ eB.hom =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) (q + 1)) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) (q + 1)))\n    (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X)\n    (hstageCover : ∀ j : Set.Ici i₀,\n      tailStageOpen D g₀ U j ⊔ tailStageOpen D g₀ V j = ⊤)\n    (hlimitCover : ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U) ⊔\n      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V) = ⊤)\n    (KU : ℕ → Set.Ici i₀ ⥤ AddCommGrpCat.{u + 1})\n    (eKU : ∀ n j, (KU n).obj j ≅ AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ U j).ι).obj (F j.val)) n))\n    (hKU : ∀ n j k (f : j ⟶ k), (KU n).map f =\n      (eKU n j).hom ≫ tailOpenCohomologyMapDegree D g₀ U F φ n f ≫ (eKU n k).inv)\n    (ιU : ∀ n, KU n ⟶ (Functor.const (Set.Ici i₀)).obj (AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) n)))\n    (hιU : ∀ n j, (ιU n).app j =\n      (eKU n j).hom ≫ tailOpenCohomologyLegDegree D c g₀ U F G eG L n j)\n    (KV : ℕ → Set.Ici i₀ ⥤ AddCommGrpCat.{u + 1})\n    (eKV : ∀ n j, (KV n).obj j ≅ AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ V j).ι).obj (F j.val)) n))\n    (hKV : ∀ n j k (f : j ⟶ k), (KV n).map f =\n      (eKV n j).hom ≫ tailOpenCohomologyMapDegree D g₀ V F φ n f ≫ (eKV n k).inv)\n    (ιV : ∀ n, KV n ⟶ (Functor.const (Set.Ici i₀)).obj (AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) n)))\n    (hιV : ∀ n j, (ιV n).app j =\n      (eKV n j).hom ≫ tailOpenCohomologyLegDegree D c g₀ V F G eG L n j)\n    (KI : ℕ → Set.Ici i₀ ⥤ AddCommGrpCat.{u + 1})\n    (eKI : ∀ n j, (KI n).obj j ≅ AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ (U ⊓ V) j).ι).obj (F j.val)) n))\n    (hKI : ∀ n j k (f : j ⟶ k), (KI n).map f =\n      (eKI n j).hom ≫ tailOpenCohomologyMapDegree D g₀ (U ⊓ V) F φ n f ≫ (eKI n k).inv)\n    (ιI : ∀ n, KI n ⟶ (Functor.const (Set.Ici i₀)).obj (AddCommGrpCat.of (Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)).ι).obj L.pt) n)))\n    (hιI : ∀ n j, (ιI n).app j =\n      (eKI n j).hom ≫ tailOpenCohomologyLegDegree D c g₀ (U ⊓ V) F G eG L n j)\n    (ι₁ : KU q ⊞ KV q ⟶ (Functor.const (Set.Ici i₀)).obj\n      (AddCommGrpCat.of\n        (Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n          ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) q ×\n         Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n          ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) q)))\n    (h₁U : ∀ j, ι₁.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst _ _) =\n      (biprod.fst : KU q ⊞ KV q ⟶ KU q).app j ≫ (ιU q).app j)\n    (h₁V : ∀ j, ι₁.app j ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd _ _) =\n      (biprod.snd : KU q ⊞ KV q ⟶ KV q).app j ≫ (ιV q).app j)\n    (r : ((show Monotone (fun j : Set.Ici i₀ ↦ j.val) from\n      fun _ _ h ↦ h).functor) ⋙ H ⟶ KU (q + 1) ⊞ KV (q + 1))\n    (hrU : ∀ j, r.app j ≫ (biprod.fst : KU (q + 1) ⊞ KV (q + 1) ⟶\n      KU (q + 1)).app j ≫ (eKU (q + 1) j).hom =\n      (eH j.val).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (tailStageOpen D g₀ U j).ι (F j.val) (q + 1)))\n    (hrV : ∀ j, r.app j ≫ (biprod.snd : KU (q + 1) ⊞ KV (q + 1) ⟶\n      KV (q + 1)).app j ≫ (eKV (q + 1) j).hom =\n      (eH j.val).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (tailStageOpen D g₀ V j).ι (F j.val) (q + 1)))\n :\n    let t : Set.Ici i₀ ⥤ I :=\n      (show Monotone (fun j : Set.Ici i₀ ↦ j.val) from fun _ _ h ↦ h).functor\n    let WU := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U\n    let WV := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V\n    let WI := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)\n    let BI := AddCommGrpCat.of\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} WI.ι).obj L.pt) q)\n    let BP := fun n ↦ AddCommGrpCat.of\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} WU.ι).obj L.pt) n ×\n        Sheaf.H ((upperStar AddCommGrpCat.{u + 1} WV.ι).obj L.pt) n)\n    ∃ (a : KU q ⊞ KV q ⟶ KI q) (b : KI q ⟶ t ⋙ H)\n      (a' : BP q ⟶ BI) (b' : BI ⟶ B.pt),\n      (∀ j, Function.Exact (a.app j) (b.app j)) ∧\n      (∀ j, Function.Exact (b.app j) (r.app j)) ∧ Function.Exact a' b' ∧\n      (∀ j, a.app j ≫ (ιI q).app j = ι₁.app j ≫ a') ∧\n      (∀ j, b.app j ≫ B.ι.app j.val = (ιI q).app j ≫ b')",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-38999",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T145124-L-697337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-38999",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T145124-L-697337",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three nodes, the unchanged library signature, sources, change record, and report; compiled all delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitBinarySuccessorCoconeSegment; axiom probes show only standard axioms plus sorryAx for the declared boundary hole and its parent."
+ }
+}
