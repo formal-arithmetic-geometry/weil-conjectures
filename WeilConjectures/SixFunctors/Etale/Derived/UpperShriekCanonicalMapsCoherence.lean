@@ -104,18 +104,6 @@ lemma isInvertible_leftDerivedUpperStar_obj
     ⟨(leftDerivedUpperStarTensorIso A f N' N).symm ≪≫ (L((f)^*[A])).mapIso e' ≪≫
       leftDerivedUpperStarUnitIso A f⟩⟩
 
-/-- The tensor comparison of `Lf^*` is natural in its first variable. -/
-@[reassoc]
-lemma leftDerivedUpperStarTensorIso_hom_naturality_left
-    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : K ⟶ K')
-    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    (L((f)^*[A])).map (φ ▷ N) ≫ (leftDerivedUpperStarTensorIso A f K' N).hom =
-      (leftDerivedUpperStarTensorIso A f K N).hom ≫ (L((f)^*[A])).map φ ▷ (L((f)^*[A])).obj N := by
-  have := leftDerivedUpperStarTensorComparison_naturality A f φ (𝟙 N)
-  rw [← leftDerivedUpperStarTensorIso_hom, ← leftDerivedUpperStarTensorIso_hom] at this
-  erw [CategoryTheory.Functor.map_id, tensorHom_id, tensorHom_id] at this
-  exact this.symm
-
 end Invertible
 
 section TensorMap

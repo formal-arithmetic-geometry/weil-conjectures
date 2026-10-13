@@ -78,7 +78,7 @@ instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
 
 Let `A` be an abelian variety over `K`. Then `m ∘ s = m`, where `s` is the swap of the two
 factors of `A ⊗ A`; that is, `A` is a commutative group object, and in particular `A(K)` is an
-abelian group.
+abelian group. This is also blueprint `lem-sc-av-commutative`.
 
 This is Mathlib's `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral` applied
 to `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. The blueprint instead deduces it
