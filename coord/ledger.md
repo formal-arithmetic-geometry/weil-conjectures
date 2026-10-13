@@ -11487,3 +11487,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: returned deliver/M2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality (reviewer RETURN: (the landing tools, head b2adebf4c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:23 L: returned deliver/M4/Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic (reviewer RETURN: (the landing tools, head 60e907a77) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 07:23 L: returned deliver/P3/Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap (reviewer RETURN: (the landing tools, head d3443a806) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 07:23 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.PerfectSummand (reviewer RETURN: (the landing tools, head 88e3f33e7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
