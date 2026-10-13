@@ -12856,3 +12856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 22:47 L: batch 20261013T144152 withdrawn: take-out conflict: repair claim already held by C3
 - 14:48 L: returned deliver/F1/Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel (reviewer RETURN: (reviewer X-62ccc, head 62ccc3923) H9: In lean/Sheaf/AlgebraicGeometry/LocalKFlatPullbackModel.lean, change `public impo)
+- 14:49 L: returned deliver/G3/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-97c32, head 97c326da7) A: Each of the three coord/changes/cupClassCongruence*.md files lists only the defini)
