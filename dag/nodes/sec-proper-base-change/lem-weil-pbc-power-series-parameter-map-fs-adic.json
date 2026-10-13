@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-power-series-parameter-map-fs-adic",
+ "kind": "statement",
+ "title": "Coordinate lifting for parameter-preserving power-series maps",
+ "statement": "Let $R=\\Lambda_R[[X_1,\\ldots,X_n]]$ and $T=\\Lambda_T[[Y_1,\\ldots,Y_m]]$ be regular local power-series rings [def-weil-regular-scheme, def-weil-pbc-multivariate-power-series]. Let $i:R\\to T$ be a local ring map. Let $t$ be a regular system of parameters of $R$ and $y$ a list in $T$ such that $(i(t),y)$ is a regular system of parameters of $T$ [def-weil-pbc-regular-system-of-parameters]. Assume either $\\Lambda_R$ and $\\Lambda_T$ are both characteristic-zero fields, or both are Cohen rings for the same prime $p$ [def-weil-pbc-cohen-ring] and the first entry of $t$ is $p$. Equip $T$ with its $R$-algebra structure from $i$. Let $L=\\mathfrak m_R T$; equip $T/L$ with its quotient algebra structure over $R/\\mathfrak m_R$ [def-weil-pbc-algebra-hom-quotient]. If $T/L$ is formally smooth over $R/\\mathfrak m_R$ for the image of $\\mathfrak m_T$ [def-weil-pbc-formally-smooth-adic], then $T$ is formally smooth over $R$ for its $\\mathfrak m_T$-adic topology.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ, proof of (2) implies (3), final paragraphs from Choose elements y through psi prime = psi - D prime; Tags 07NM, 07NL and 07EL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "For a continuous square-zero lifting problem T -> N/J over R, the quotient map makes J a T-module because J^2 = 0. If the map kills m_T^e then m_T^e J = 0. Filter J by J_a = {j : m_T^a j = 0}. The successive quotients are annihilated by m_T. Descend from N/J_e to N/J_0. A lift killing m_T^b modulo a square-zero kernel kills m_T^(2b), so every stage remains continuous. The action on the next kernel is the original action since changing representatives by J has zero product with J.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Thus assume m_T J = 0, making J a vector space over the residue field K of T. Tag 07NM gives coordinates t,y (with p omitted as a variable in the Cohen case). Tag 07NL gives an unrestricted lift over Q or Z. In characteristic zero N is a Q-algebra: integers are units modulo J, and a unit modulo a square-zero ideal lifts to a unit. Keep the coefficient map and change the t-variable values to their prescribed images from R; the variable images are nilpotent, so evaluation uses finite truncations. The new lift agrees on all parameters of R, including p.",
+   "uses": [
+    "lem-weil-pbc-power-series-parameter-quotient",
+    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its defect on R is a derivation into J, annihilating the parameters. The universal property of differentials and the exact quotient differential sequence make it factor through Omega_(k/Z), where k is the residue field of R: the R-action on J factors through k, and the differentials of the parameters generate the conormal image. Tensor this k-linear map with K.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Formal smoothness of the closed fibre gives injectivity of Omega_(k/Z) tensor_k K -> Omega_(T/m_R T / Z) tensor_T K by Tag 07EL. Extend the defect functional along this injection by extending a vector-space basis. Compose with the differential of T -> T/m_R T to obtain a derivation D' on T whose restriction to R is the defect. Subtract D' from the unrestricted lift. Leibniz and J^2 = 0 prove multiplicativity; derivations kill 1. The correction vanishes modulo J and cancels the defect on R, so the corrected lift is R-linear. Apply this at every stage of the filtration in step 1. This solves all lifting problems. Empty parameter lists and the case J = 0 require no parameter correction.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-field-differentials-injective",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-quotient-local-structure",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-power-series-parameter-quotient",
+  "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-fs-adic-field-differentials-injective",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ, proof of (2) implies (3), final paragraphs from Choose elements y through psi prime = psi - D prime; Tags 07NM, 07NL and 07EL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local map of power series rings over characteristic zero fields or Cohen rings carrying parameters to parameters is adically formally smooth when its closed fibre is formally smooth",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local map of power series rings over fields or Cohen rings sending a regular system of parameters into a regular system is formally smooth for the maximal ideal topology if the closed fibre is formally smooth",
+   "results": "8 hits: Algebra.IsSmoothAt, RingHom.Smooth.locally_isStandardSmooth, Algebra.Smooth.formallySmooth, Algebra.instSmoothOfIsStandardSmooth, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.smooth_iff_locally_isStandardSmooth; no adic power-series model or parameter-map criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen|[Pp]owerSeries.*[Pp]arameter|[Pp]arameter.*[Pp]owerSeries",
+   "results": "1 hits: Mathlib/RingTheory/Noetherian/OfPrime.lean; no adic power-series model or parameter-map criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiberComplete",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Completion reduction of Tag 07NQ (2) => (3), under the finite-etale-lifting step: Tag 07NQ (2) implies (3), complete-ring argument, from the compatible Cohen presentation through the final derivation correction; Tag 07NQ, proof of (2) implies (3), final paragraphs from Choose elements y through psi prime = psi - D prime; Tags 07NM, 07NL and 07EL",
+   "via": [
+    "lem-weil-pbc-flat-fs-closed-fibre-complete-case",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PowerSeriesParameterMapFormallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesParameterMapFormallySmoothAdic.lean",
+  "declaration": "MvPowerSeries.formallySmoothAdic_of_parameters_closedFiber",
+  "statement": "theorem formallySmoothAdic_of_parameters_closedFiber\n    (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]\n    [IsRegularLocalRing (MvPowerSeries (Fin m) ΛT)]\n    (i : MvPowerSeries (Fin n) ΛR →+* MvPowerSeries (Fin m) ΛT) [IsLocalHom i]\n    (t : List (MvPowerSeries (Fin n) ΛR))\n    (y : List (MvPowerSeries (Fin m) ΛT))\n    (ht : IsRegularSystemOfParameters t)\n    (hy : IsRegularSystemOfParameters (t.map i ++ y))\n    (hcoeff : (IsField ΛR ∧ IsField ΛT ∧ CharZero ΛR ∧ CharZero ΛT) ∨\n      ∃ p : ℕ, p.Prime ∧ IsCohenRing p ΛR ∧ IsCohenRing p ΛT ∧\n        t.head? = some (p : MvPowerSeries (Fin n) ΛR)) :\n    let R := MvPowerSeries (Fin n) ΛR\n    let T := MvPowerSeries (Fin m) ΛT\n    letI : Algebra R T := i.toAlgebra\n    let L : Ideal T := (maximalIdeal R).map i\n    letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal R ≤ L.comap (algebraMap R T))\n    Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n        ((maximalIdeal T).map (Ideal.Quotient.mk L)) →\n      Algebra.FormallySmoothAdic R T (maximalIdeal T)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T045602-L-137260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T045602-L-137260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

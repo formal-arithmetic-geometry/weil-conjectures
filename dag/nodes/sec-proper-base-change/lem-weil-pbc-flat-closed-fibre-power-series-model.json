@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-flat-closed-fibre-power-series-model",
+ "kind": "statement",
+ "title": "Remove fibre equations from a compatible Cohen presentation",
+ "statement": "Let $f:A\\to B$ be a flat local homomorphism of Noetherian local rings [def-weil-pbc-noetherian-ring, def-weil-pbc-flat-ring-map]. Suppose given power-series rings $R=\\Lambda_R[[X_1,\\ldots,X_n]]$ and $S=\\Lambda_S[[Z_1,\\ldots,Z_m]]$ [def-weil-pbc-multivariate-power-series], both regular local [def-weil-regular-scheme], local surjections $q:R\\twoheadrightarrow A$ and $b:S\\twoheadrightarrow B$, and a local map $i:R\\to S$ with $bi=fq$. Suppose $t$ is a regular system of parameters of $R$ and $(i(t),z)$ is one of $S$ [def-weil-pbc-regular-system-of-parameters]. Assume either both coefficient rings are characteristic-zero fields, or both are Cohen rings for the same prime $p$ [def-weil-pbc-cohen-ring] and the first entry of $t$ is $p$. Assume the closed fibre $B/\\mathfrak m_A B$, with the quotient algebra structure over $A/\\mathfrak m_A$ [def-weil-pbc-algebra-hom-quotient], is formally smooth for the image of $\\mathfrak m_B$ [def-weil-pbc-formally-smooth-adic]. Then there are $m'\\ge0$, a regular local power-series ring $T=\\Lambda_S[[Y_1,\\ldots,Y_{m'}]]$, a surjection $v:T\\twoheadrightarrow B$, a local map $j:R\\to T$ and a list $y$ in $T$ such that $vj=fq$, $\\ker(v)=(\\ker(q))T$, $(j(t),y)$ is a regular system of parameters of $T$, and $T/\\mathfrak m_R T$ is formally smooth over $R/\\mathfrak m_R$ for the image of $\\mathfrak m_T$. No formal smoothness of $j$ or $f$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ, proof of (2) implies (3), compatible diagram through S tensor_R A -> B; Tags 07NN and 07NM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the given compatible Cohen presentation R -> S, R -> A, S -> B of Tag 07NN. The coefficient hypotheses make these complete power-series rings over fields or Cohen rings. The parameters t of R extend to parameters of S. The surjection R -> A identifies residue fields. No completeness assumption on A or B is needed after this presentation.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed fibre of B is regular by Tag 07EL, since it is adically formally smooth over the residue field. The closed fibre of S is regular by the parameter quotient theorem. Tag 00NR gives generators of the kernel between these fibres which extend to parameters. Lift them to ker(S -> B): subtract an element of m_R S from each lift, using surjectivity onto m_A B. Their cotangent classes together with those of t are independent; extend to a basis, and apply Nakayama to obtain parameters of S.",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-fs-adic-field-geometrically-regular",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quotient S by these lifted equations. Tag 07NM identifies the quotient with a power-series ring T over the same coefficients, retaining the images of t as parameters (and retaining p in the Cohen case). The map T -> B is surjective. The parameter regular-sequence criterion and Tag 07DY give flatness of R -> T. The induced map of closed fibres is an isomorphism, so the fibre of T has the given formal smoothness.",
+   "uses": [
+    "lem-weil-pbc-power-series-parameter-quotient",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-flat-over-regular",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set D = T/(ker(R -> A))T = T tensor_R A. The induced map D -> B is surjective. Both sides are A-flat, by base change and the hypothesis. Tensor its kernel sequence with the residue field: flatness of B gives left exactness, and the fibre isomorphism shows that the kernel modulo m_A is zero. D is Noetherian local, being a proper quotient of T. Its kernel is finitely generated and m_A D lies in its maximal ideal; Nakayama gives zero kernel. Thus ker(T -> B) = (ker(R -> A))T, as asserted. The zero-dimensional and empty-equation cases use empty parameter lists and zero ideals.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-fs-adic-field-geometrically-regular",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-power-series-parameter-quotient",
+  "lem-weil-pbc-flat-over-regular",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-quotient-tensor-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ, proof of (2) implies (3), compatible diagram through S tensor_R A -> B; Tags 07NN and 07NM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat local homomorphism of complete Noetherian local rings with formally smooth closed fibre admits a power series presentation whose kernel is the extension of the base presentation kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat map complete Noetherian local rings formally smooth closed fibre implies adic formal smoothness",
+   "results": "8 hits: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.formallySmooth, RingHom.smooth_def; no adic power-series model or parameter-map criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen|[Pp]owerSeries.*[Pp]arameter|[Pp]arameter.*[Pp]owerSeries",
+   "results": "1 hits: Mathlib/RingTheory/Noetherian/OfPrime.lean; no adic power-series model or parameter-map criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiberComplete",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Completion reduction of Tag 07NQ (2) => (3), under the finite-etale-lifting step: Tag 07NQ (2) implies (3), complete-ring argument, from the compatible Cohen presentation through the final derivation correction; Tag 07NQ, proof of (2) implies (3), compatible diagram through S tensor_R A -> B; Tags 07NN and 07NM",
+   "via": [
+    "lem-weil-pbc-flat-fs-closed-fibre-complete-case",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatClosedFiberPowerSeriesModel",
+  "file": "lean/Sheaf/RingTheory/FlatClosedFiberPowerSeriesModel.lean",
+  "declaration": "RingHom.exists_flat_closedFiber_powerSeries_model",
+  "statement": "theorem exists_flat_closedFiber_powerSeries_model\n    (A : Type u) (B : Type v) [CommRing A] [CommRing B]\n    [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]\n    (f : A →+* B) [IsLocalHom f] (hflat : f.Flat)\n    (ΛR ΛS : Type w) [CommRing ΛR] [CommRing ΛS] (n m : ℕ)\n    [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]\n    [IsRegularLocalRing (MvPowerSeries (Fin m) ΛS)]\n    (q : MvPowerSeries (Fin n) ΛR →+* A) [IsLocalHom q]\n    (b : MvPowerSeries (Fin m) ΛS →+* B) [IsLocalHom b]\n    (i : MvPowerSeries (Fin n) ΛR →+* MvPowerSeries (Fin m) ΛS) [IsLocalHom i]\n    (hq : Function.Surjective q) (hb : Function.Surjective b)\n    (hcomm : b.comp i = f.comp q)\n    (t : List (MvPowerSeries (Fin n) ΛR))\n    (z : List (MvPowerSeries (Fin m) ΛS))\n    (ht : IsRegularSystemOfParameters t)\n    (hz : IsRegularSystemOfParameters (t.map i ++ z))\n    (hcoeff : (IsField ΛR ∧ IsField ΛS ∧ CharZero ΛR ∧ CharZero ΛS) ∨\n      ∃ p : ℕ, p.Prime ∧ IsCohenRing p ΛR ∧ IsCohenRing p ΛS ∧\n        t.head? = some (p : MvPowerSeries (Fin n) ΛR)) :\n    letI : Algebra A B := f.toAlgebra\n    let I : Ideal B := Ideal.map f (maximalIdeal A)\n    letI : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal A ≤ I.comap (algebraMap A B))\n    Algebra.FormallySmoothAdic (A ⧸ maximalIdeal A) (B ⧸ I)\n        (Ideal.map (Ideal.Quotient.mk I) (maximalIdeal B)) →\n    ∃ m' : ℕ, let T := MvPowerSeries (Fin m') ΛS\n      ∃ (_ : IsRegularLocalRing T)\n        (v : T →+* B) (j : MvPowerSeries (Fin n) ΛR →+* T),\n        Function.Surjective v ∧ IsLocalHom j ∧\n        v.comp j = f.comp q ∧ RingHom.ker v = (RingHom.ker q).map j ∧\n        ∃ y : List T, IsRegularSystemOfParameters (t.map j ++ y) ∧\n          (let R := MvPowerSeries (Fin n) ΛR\n           letI : Algebra R T := j.toAlgebra\n           let L : Ideal T := (maximalIdeal R).map j\n           letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n             Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n               maximalIdeal R ≤ L.comap (algebraMap R T))\n           Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n             ((maximalIdeal T).map (Ideal.Quotient.mk L)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T045602-L-137260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T045602-L-137260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
