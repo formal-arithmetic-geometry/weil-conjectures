@@ -18,49 +18,53 @@
  ],
  "proof": [
   {
-   "text": "Let q be the canonical map O_X to k_*O_Z, and J=ker(k). The closed-immersion unit quotient and the canonical unit isomorphism identify kernel(q) with the ideal module J. On pure tensors of local sections the multiplication J tensor G to G vanishes by hkill; sheafification extends this equality to the module morphism.",
+   "text": "The kernel K of the closed-immersion structure map is quasi-coherent: both the structure unit and its closed-immersion pushforward are quasi-coherent, and kernels of maps of quasi-coherent modules are quasi-coherent. On an affine V, the kernel condition shows that the kernel inclusion sends K(V) into ker(k.app V), which is k.ker.ideal V. The all-open idealOfOpens agrees with this affine ideal, so hkill annihilates G(V) by these scalars. No quotient identification or ideal product is needed.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-pc-closed-immersion-coherent-cohomology",
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Pulling back the zero ideal-product inclusion yields zero. The pulled-back ideal-product image theorem identifies its image with the extended-ideal product in j^*G. The affine ideal-product section formula therefore says that every scalar in the extended ideal kills every local section of j^*G. The affine pullback section formula, applied to J and O_X, identifies the image of j^*kernel(q) in O_S with that extended ideal on paired affine opens.",
+   "text": "On affine V in X and U in S contained in j inverse V, use exists_tensorPullback_affine_sections for K, G, and the unit. The characterization of tensorPullbackObjUnitToUnit by the adjunction unit, together with restriction naturality, gives epsilon(c_unit(a tensor b)) = b times j.appLE(a). Naturality of the affine comparison identifies the pulled-back kernel inclusion on pure tensors. A scalar from x tensor b therefore acts on the pullback of G as b times the image of the original scalar i(x). A-linearity of the section comparison and tensor induction reduce this action to i(x) acting on a section of G(V), which is zero by hkill. Additivity and tensor induction in K give annihilation by every scalar in the image.",
    "uses": [
-    "lem-weil-pbc-module-pullback-ideal-product-image",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "lem-weil-pbc-module-pullback-affine-sections",
     "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Transport scalar annihilation along psi to p_*O_Y. For every paired affine open apply it to the section 1: rho(a) times 1 equals zero, so the structure map of p kills every scalar in the extended ideal. Hence the displayed module composite vanishes on paired affine opens. These opens form a basis; restriction naturality and sheaf separatedness give its vanishing on every open, hence equality to zero as a module morphism. The argument uses no nonempty opens or nonzero algebra assumption.",
+   "text": "Paired affine opens form a basis: first choose an affine neighbourhood V of j(x), then an affine U inside the given open intersected with j inverse V. Apply sheaf separatedness to the section a times t of j-star G. Restriction compatibility of scalar multiplication and naturality of the pulled-back kernel composite identify its restrictions with the affine annihilation calculation. This proves annihilation on all opens.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-scheme"
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each open U and section s of j-star K, let a be its image in O_S(U). Apply the proved scalar annihilation to psi inverse of the section 1 of p-star O_Y. Apply psi hom and use its O_S-linearity and inverse identity to obtain a times 1 = 0 in p-star O_Y. Its scalar action is multiplication by p.app U applied to a, so multiplication by 1 yields p.app U(a) = 0. Module morphism extensionality gives the requested composite equation. Empty opens and zero algebras use exactly the same identities.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-pc-closed-immersion-coherent-cohomology",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-module-pullback-ideal-product-image",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-module-pullback-affine-sections",
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-scheme"
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E2",
-  "date": "2026-10-13",
+  "group": "U2",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09ZT, algebra structure paragraph, expanded local unit factorization using Modules Tags 01BG and 0096 and the closed-immersion quotient; official pages read 2026-10-13."
+  "place": "Tag 09ZT algebra structure paragraph; direct affine tensor and local unit argument using Tags 0096, 01I9, 01IC and 01BG. Official pages 09ZT and 01BG read; the local unit step is the expansion described by the existing node."
  },
  "mathlib_searches": [
   {
@@ -158,10 +162,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T160710-L-1371353",
-  "kind": "interface",
+  "landing": "20261013T163540-L-1621510",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
