@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-injective-exchange-target-transport",
+ "kind": "statement",
+ "title": "Localization and target-unit transport for termwise exchange",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $K\\in D^+(\\operatorname{Ab}(X_{et}))$, $J$ a bounded-below injective complex, and $q:K\\cong QJ$. Let $U,P,F$ be respectively strict-local inverse image, its base-changed inverse image, and base-changed direct image. Set $H=[J]$ and lift $q$ to $q^\\prime:K\\cong Q_hH$. The image in $D$ of the bounded-below composite of the exact $U$ localization comparison, the localized underived exchange [def-weil-pbc-underived-exchange], the target $R^+F$ unit, and $R^+F$ of the inverse exact $P$ comparison followed by $P(q^{\\prime -1})$, precomposed by the inverse complex-level $U$ comparison, equals $Q$ of termwise exchange followed by the unbounded $RF$ unit and $RF$ of the exact inverse-image transport by $q^{-1}$, with the canonical quotient comparisons and the inverse bounded-below/unbounded compatibility as the last factor. No derived mate occurs and no target unit is inverted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "map the bounded-below composite through the inclusion and use its\ncompatibility with mapDerivedCategoryPlusFactorsh. The first factor is the\nhomotopy version of the exact comparison for U and cancels against its\ncomplex-level inverse, because the homotopy quotient comparison is identity.\nThe next factor is Q of the termwise underived exchange. The defining\nright-derived uniqueness isomorphism carries the bounded-below target unit to\nthe unbounded target unit; naturality carries the following target transport\nthrough this isomorphism, leaving its inverse as the last factor. The inverse\nexact pullback comparison maps to the unbounded inverse comparison. Full\nfaithfulness identifies the image of q'.inv with quotientCompQhIso.hom followed\nby q.inv. Insert the canonical quotient comparisons on D and its direct image\nto express these identities in the stated complex-level form. No target unit\nis inverted, so no acyclicity of the pulled-back complex is assumed.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent B2",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9; expansion of the canonical localization and derived-unit comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusCompatibility|mapDerivedCategoryPlusFactorsh",
+   "results": "[]",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of exact functor localization comparisons and right derived functor units between bounded below and unbounded derived categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "results": "['CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app']",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below derived inclusion compatibility unit localization naturality",
+   "results": "Second reading: eight hits, including LocalizerMorphism.rightDerivedFunctorComparison_fac_app and Functor.mapDerivedCategoryFactorsh_hom_app. These are component identities, not either complete transport equality. No duplicate found.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveExchangeRepresentative",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tag 03Q9, final injective-complex paragraph: termwise exchange followed by the target derived unit",
+   "via": [
+    "lem-weil-pbc-injective-exchange-representative",
+    "lem-weil-pbc-strict-local-derived-exchange-leray",
+    "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction",
+    "lem-weil-pbc-strict-local-complex-sections-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveExchangeTargetTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveExchangeTargetTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.injectiveExchange_target_transport",
+  "statement": "theorem injectiveExchange_target_transport {X S : Scheme.{v}} (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (J : CochainComplex.Plus (InjectiveObject\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))\n    (q : K.obj ≅ DerivedCategory.Q.obj\n      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :\n    let M₁ := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj\n    let M : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) :=\n      ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩\n    let H := (HomotopyCategory.Plus.quotient _).obj M\n    let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=\n      DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)\n        (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)\n    let R := lowerStar AddCommGrpCat.{v + 1} f\n    let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)\n    let P := upperStar AddCommGrpCat.{v + 1}\n      (pullback.fst f (Scheme.strictHenselizationStructuralMap s))\n    let F := lowerStar AddCommGrpCat.{v + 1}\n      (pullback.snd f (Scheme.strictHenselizationStructuralMap s))\n    let M₀ := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj\n    let L := (R.mapHomologicalComplex (.up ℤ)).obj M₀\n    let D := (P.mapHomologicalComplex (.up ℤ)).obj M₀\n    let T := P.mapDerivedCategoryPlus.obj K\n    let sq := (IsPullback.of_hasPullback f\n      (Scheme.strictHenselizationStructuralMap s)).toCommSq\n    let a : (U.mapHomologicalComplex (.up ℤ)).obj L ⟶\n        (F.mapHomologicalComplex (.up ℤ)).obj D :=\n      (NatTrans.mapHomologicalComplex\n      (baseChangeMap AddCommGrpCat.{v + 1} sq) (.up ℤ)).app M₀\n    U.mapDerivedCategoryFactors.inv.app\n      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj) ≫\n      DerivedCategory.Plus.ι.map\n        (U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫\n          DerivedCategory.Plus.Qh.map\n            ((NatTrans.mapHomotopyCategoryPlus\n              (baseChangeMap AddCommGrpCat.{v + 1} sq)).app H) ≫\n          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫\n          F.rightDerivedFunctorPlus.map\n            (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫\n              P.mapDerivedCategoryPlus.map q'.inv)) =\n    DerivedCategory.Q.map a ≫\n      (DerivedCategory.quotientCompQhIso _).inv.app\n        ((F.mapHomologicalComplex (.up ℤ)).obj D) ≫\n      F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj D) ≫\n      F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫\n      F.rightDerivedFunctor.map\n        (P.mapDerivedCategoryFactors.inv.app M₀ ≫ P.mapDerivedCategory.map q.inv) ≫\n      F.rightDerivedFunctorPlusCompatibility.inv.app T",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T130347-L-3951668",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T130347-L-3951668",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

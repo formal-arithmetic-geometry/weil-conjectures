@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import Sheaf.AlgebraicGeometry.InjectiveExchangeSourceTransport
+import Sheaf.AlgebraicGeometry.InjectiveExchangeTargetTransport
 
 /-! # Injective representative computation of the derived exchange
 
@@ -23,6 +25,25 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
+
+private lemma assemble_exchange {A B : Type*} [Category A] [Category B]
+    (I : A ⥤ B) {X Y Z : A} {W : B}
+    (a : W ⟶ I.obj X) (b : I.obj X ⟶ I.obj Y) (c : X ⟶ Y)
+    (d : Y ⟶ Z) (e : X ⟶ Z) (t : W ⟶ I.obj Z)
+    (hs : b = I.map c) (hm : c ≫ d = e) (ht : a ≫ I.map e = t) :
+    a ≫ b ≫ I.map d = t := by
+  rw [hs, ← Functor.map_comp, hm]
+  exact ht
+
+private lemma map_comp_naturality {A B C D : Type*}
+    [Category A] [Category B] [Category C] [Category D]
+    (R : A ⥤ B) (U : B ⥤ C) (P : A ⥤ D) (F : D ⥤ C)
+    (θ : R ⋙ U ⟶ P ⋙ F) {X Y : A} {W : B}
+    (u : W ⟶ R.obj X) (t : X ⟶ Y) :
+    U.map (u ≫ R.map t) ≫ θ.app Y =
+      (U.map u ≫ θ.app X) ≫ F.map (P.map t) := by
+  simpa only [Functor.map_comp, Category.assoc, Functor.comp_map] using
+    congrArg (fun z ↦ U.map u ≫ z) (θ.naturality t)
 
 /-- Compute the derived mate on the chosen injective representative, before sections.
 
@@ -79,6 +100,64 @@ theorem injectiveExchange_representative {X S : Scheme.{v}} (f : X ⟶ S)
       F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).hom.app D) ≫
       F.rightDerivedFunctor.map
         (P.mapDerivedCategoryFactors.inv.app M ≫ P.mapDerivedCategory.map q.inv) ≫
-      F.rightDerivedFunctorPlusCompatibility.inv.app T := by sorry
+      F.rightDerivedFunctorPlusCompatibility.inv.app T := by
+  let M₁ := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+  let M : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) :=
+    ⟨M₁, ((InjectiveObject.ι _).mapCochainComplexPlus.obj J).property⟩
+  let H := (HomotopyCategory.Plus.quotient _).obj M
+  let q' : K ≅ DerivedCategory.Plus.Qh.obj H :=
+    DerivedCategory.Plus.ι.preimageIso (Y := DerivedCategory.Plus.Q.obj M)
+      (q ≪≫ (DerivedCategory.quotientCompQhIso _).symm.app M.obj)
+  let sq := (IsPullback.of_hasPullback f
+    (Scheme.strictHenselizationStructuralMap s)).toCommSq
+  let R := lowerStar AddCommGrpCat.{v + 1} f
+  let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
+  let P := upperStar AddCommGrpCat.{v + 1}
+    (pullback.fst f (Scheme.strictHenselizationStructuralMap s))
+  let F := lowerStar AddCommGrpCat.{v + 1}
+    (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
+  let θ := (mateEquiv
+    (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
+    (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
+      (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
+    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom)).natTrans
+  have fac := Adjunction.derivedPlus_mateEquiv_app_fac
+    (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)
+    (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f
+      (Scheme.strictHenselizationStructuralMap s)))
+    (TwoSquare.mk _ _ _ _ (squareUpperStarIso AddCommGrpCat.{v + 1} sq).hom)
+    (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} sq).hom)
+    (pullbackSquareComparison_hom_app_factorsh AddCommGrpCat.{v + 1} sq) H
+  have hb :
+      U.mapDerivedCategoryPlus.map
+        (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv) ≫
+          θ.app K =
+        U.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj H) ≫
+          DerivedCategory.Plus.Qh.map
+            ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap
+              AddCommGrpCat.{v + 1} sq)).app H) ≫
+          F.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj H) ≫
+          F.rightDerivedFunctorPlus.map
+            (P.mapDerivedCategoryPlusFactorsh.inv.app H ≫
+              P.mapDerivedCategoryPlus.map q'.inv) := by
+    have hn := map_comp_naturality R.rightDerivedFunctorPlus U.mapDerivedCategoryPlus
+      P.mapDerivedCategoryPlus F.rightDerivedFunctorPlus θ
+      (R.rightDerivedFunctorPlusUnit.app H) q'.inv
+    have hf := congrArg (fun z ↦ z ≫ F.rightDerivedFunctorPlus.map
+      (P.mapDerivedCategoryPlus.map q'.inv)) fac
+    refine hn.trans (hf.trans ?_)
+    simp only [Functor.map_comp, Category.assoc]
+    rfl
+  have hs := injectiveExchange_source_transport f K J q
+  have hs' :
+      U.mapDerivedCategory.map (sourceInjectiveDirectImageIso f K J q).inv =
+        DerivedCategory.Plus.ι.map (U.mapDerivedCategoryPlus.map
+          (R.rightDerivedFunctorPlusUnit.app H ≫ R.rightDerivedFunctorPlus.map q'.inv)) :=
+    congrArg U.mapDerivedCategory.map hs
+  have result := assemble_exchange DerivedCategory.Plus.ι
+    (U.mapDerivedCategoryFactors.inv.app
+      ((R.mapHomologicalComplex (.up ℤ)).obj M.obj)) _ _ _ _ _ hs' hb
+    (injectiveExchange_target_transport f s K J q)
+  exact result
 
 end AlgebraicGeometry.Etale
