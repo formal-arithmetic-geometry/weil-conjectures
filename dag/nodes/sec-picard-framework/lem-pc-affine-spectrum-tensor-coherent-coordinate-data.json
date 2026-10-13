@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-affine-spectrum-tensor-coherent-coordinate-data",
+ "kind": "statement",
+ "title": "Canonical affine spectrum tensor coordinate data and chain coherence",
+ "statement": "Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, $g':X'\\to X$ be a cartesian square of affine schemes [def-pc-scheme], and suppose their spectrum maps on global sections also form a cartesian square. Fix sheaf derived categories [def-pc-derived-category], a complex $P$ of modules on $X$, $z_0\\in\\operatorname{Spec}\\Gamma(X',\\top)$ and $i\\in\\mathbf Z$. Put $j=X'.\\mathrm{isoSpec}^{-1}$, $z=j(z_0)$, $P_0=(X.\\mathrm{isoSpec}^{-1})^*P$ and $P_g=(g')^*P$ termwise. Write $R,A,B,D$ and $R_0,A_0,B_0,D_0$ for the two sets of four stalk rings and their structural maps [def-pc-single-complex-base-change-stalk-condition], $Q=P_{g'(z)}$, $Q_0=(P_0)_{g'_0(z_0)}$, and $V=D\\otimes_A Q$, $V_0=D_0\\otimes_{A_0}Q_0$ for tensorComplex. There exist ring isomorphisms $e_R,e_A,e_B,e_D$, commuting with the R-to-A and R-to-B maps and satisfying $e_D(\\mu(a\\otimes b))=\\mu_0(e_A(a)\\otimes e_B(b))$, and chain isomorphisms $q:Q\\cong\\operatorname{Res}_{e_A}Q_0$, $t:V\\cong\\operatorname{Res}_{e_D}V_0$ with $t^k(d\\otimes x)=e_D(d)\\otimes q^k(x)$. Let F and F0 forget scalars, Fc and F0c be their complex functors, rho the canonical identification of forgotten restriction of scalars, s and s0 the tensorStalkIso maps, Uchain the ordinary pullback-stalk complex comparison along j, and alpha the canonical composition isomorphism. These coordinates satisfy Fc(t);rho;F0c(s0)=Fc(s);Uchain;F0c(stalk(alpha inverse)). This is an equality of chain maps before homology.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "lemma-stalk-pullback-modules; Tag 0096 pullback adjunction; Tag 0DJ8 affine reduction of equation-bc"
+ },
+ "proof": [
+  {
+   "text": "Use isoSpec naturality to construct the stalk ring coordinates; use the pullback-stalk comparison for q and the balanced tensor map d tensor x to eD(d) tensor q(x) for t. Tensor induction in every degree and naturality of pullback germs under the adjunction mate alpha identify both sides of the chain coherence. The differential commutes by naturality, so these are coherent chain isomorphisms.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-iso-pullback-stalk-cohomology",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Canonical stalk-ring and input-complex coordinates; termwise balanced tensor construction; chain coherence from the pinned pullback adjunction units and their composition mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology comparison is natural under affine spectrum isomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc, AlgebraicGeometry.Scheme.ΓSpecIso_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality, AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_inv_naturality, AlgebraicGeometry.Scheme.isoSpec_hom_naturality_assoc, AlgebraicGeometry.Scheme.isoSpec_hom_naturality",
+   "date": "2026-10-14",
+   "verdict": "No exact comparison transport theorem; component naturality lemmas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoSpec_inv_naturality\"",
+   "results": "2 hits: AlgebraicGeometry.Scheme.isoSpec_inv_naturality, AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc",
+   "date": "2026-10-14",
+   "verdict": "No exact comparison transport theorem; component naturality lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|leftDerivedNatIso",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact comparison transport theorem; component naturality lemmas only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension counit is natural under isomorphisms of the base and target rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_hom_naturality",
+   "results": "Mathlib.Algebra.Homology.ShortComplex.PreservesHomology, line 616; no geometric coordinate construction.",
+   "date": "2026-10-14",
+   "verdict": "Used exact comparison naturality in the completed homology proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk tensor pullback compatibility with composition of scheme isomorphisms",
+   "results": "8 hits: pullback-triplet tensor congruence and SpecTensorTo naturality; Scheme.stalkMap_inv_hom_assoc. None constructs the required coherent module-complex coordinates.",
+   "date": "2026-10-14",
+   "verdict": "Component tools only; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexCompIso\"",
+   "results": "4 hits: mapHomologicalComplexCompIso, hom_app_f, inv_app_f, and its commShift instance.",
+   "date": "2026-10-14",
+   "verdict": "Complex-functor composition tools, not geometric coordinate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorStalkIso|stalkPullback",
+   "results": "5 hits in Mathlib/Topology/Sheaves/Stalks.lean: stalkPullback section, stalkPullbackHom and germ_stalkPullbackHom.",
+   "date": "2026-10-14",
+   "verdict": "Presheaf stalk-pullback components only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-spectrum-tensor-coordinate-transport",
+   "place": "canonical chain-level coordinate construction",
+   "via": [
+    "lem-pc-affine-spectrum-tensor-coordinate-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoherentCoordinateData",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumTensorCoherentCoordinateData.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_tensor_coherent_coordinate_data",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.ordinaryIsoPullbackStalkComplexIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.exists_affineSpectrum_tensor_coherent_coordinate_data"
+  ],
+  "statement": "theorem exists_affineSpectrum_tensor_coherent_coordinate_data {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S'] (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop) (Spec.map f.appTop) (Spec.map g.appTop)) (z0 : Spec Γ(X', ⊤)) (i : ℤ) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : let z := X'.isoSpec.inv z0 let P0 := ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj P let Pg := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P let j := X'.isoSpec.inv let S0 := RingedSpace.moduleStalkFunctor (Spec Γ(X', ⊤)).toRingedSpace z0 let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z)) AddCommGrpCat.{u} let F0 := forget₂ (ModuleCat.{u} ((Spec Γ(X', ⊤)).presheaf.stalk z0)) AddCommGrpCat.{u} let alpha := (NatIso.mapHomologicalComplex ((Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫ Scheme.Modules.tensorPullbackCompositionIso j g' ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm) (.up ℤ)).app P letI := leftAlgebra f g' z letI := rightAlgebra f f' g g' sq z letI := (tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z)) letI := leftAlgebra (Spec.map f.appTop) (Spec.map g'.appTop) z0 letI := rightAlgebra (Spec.map f.appTop) (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 letI := (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (R (Spec.map f.appTop) (Spec.map g'.appTop) z0)) letI := HasDerivedCategory.standard (ModuleCat.{u} (B (Spec.map f'.appTop) z0)) let R0 := R (Spec.map f.appTop) (Spec.map g'.appTop) z0 let A0 := A (Spec.map g'.appTop) z0 let B0 := B (Spec.map f'.appTop) z0 let D0 := C z0 let Q := stalkComplex g' z P let Q0 := stalkComplex (Spec.map g'.appTop) z0 P0 let V0 := tensorComplex (Spec.map f.appTop) (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0 ∃ (eR : R f g' z ≃+* R0) (eA : A g' z ≃+* A0) (eB : B f' z ≃+* B0) (eD : C z ≃+* D0) (q : Q ≅ ((ModuleCat.restrictScalars.{u} eA.toRingHom).mapHomologicalComplex (.up ℤ)).obj Q0) (t : tensorComplex f f' g g' sq z P ≅ ((ModuleCat.restrictScalars.{u} eD.toRingHom).mapHomologicalComplex (.up ℤ)).obj V0), (∀ r : R f g' z, eA (algebraMap (R f g' z) (A g' z) r) = algebraMap R0 A0 (eR r)) ∧ (∀ r : R f g' z, eB (algebraMap (R f g' z) (B f' z) r) = algebraMap R0 B0 (eR r)) ∧ (∀ (a : A g' z) (b : B f' z), eD (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z) (a ⊗ₜ[R f g' z] b)) = algebraMap (A0 ⊗[R0] B0) D0 (eA a ⊗ₜ[R0] eB b)) ∧ (∀ (k : ℤ) (d : C z) (x : Q.X k), t.hom.f k (d ⊗ₜ[A g' z, (tensorMap f f' g g' sq z).comp (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z))] x) = eD d ⊗ₜ[A0, (tensorMap (Spec.map f.appTop) (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0).comp (algebraMap A0 (A0 ⊗[R0] B0))] (show Q0.X k from q.hom.f k x)) ∧ (F.mapHomologicalComplex (.up ℤ)).map t.hom ≫ (Functor.mapHomologicalComplexCompIso (Iso.refl (ModuleCat.restrictScalars.{u} eD.toRingHom ⋙ F)) (.up ℤ)).hom.app V0 ≫ (F0.mapHomologicalComplex (.up ℤ)).map (tensorStalkIso (Spec.map f.appTop) (Spec.map f'.appTop) (Spec.map g.appTop) (Spec.map g'.appTop) sq0 z0 P0).hom = (F.mapHomologicalComplex (.up ℤ)).map (tensorStalkIso f f' g g' sq z P).hom ≫ (ordinaryIsoPullbackStalkComplexIso j z0 Pg).hom ≫ (F0.mapHomologicalComplex (.up ℤ)).map ((S0.mapHomologicalComplex (.up ℤ)).map alpha.inv)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9dc96",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T222420-L-1229109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9dc96",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T222420-L-1229109",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; changed statements match the recorded change, existing signatures remain intact, the direct importer compiles, and all remaining sorry/dependency records are documented."
+ }
+}
