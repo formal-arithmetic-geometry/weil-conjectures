@@ -16,28 +16,28 @@
  ],
  "proof": [
   {
-   "text": "the source and target homotopy comparison isomorphisms are the two\ntermwise paths from tensor pullback along the composite to restriction\nfollowed by tensor pullback. Expand openPinnedTensorRestrictionIso into its\nfour factors. The target comparison cancels its inverse composition and\ninverse open tensor comparison, leaving the source comparison, with transport\nalong hj. The functor from additive functors to homotopy functors preserves\nthese compositions and inverses, as does Qh. The counit family respects\ntransport along equality of scheme morphisms by equality induction. Combine\nthat transport identity with the termwise comparison identity. No derived\ncomposition comparison, derived open-pullback comparison, or flatness of P\nis used. Empty opens and zero complexes obey the same functor identities.",
+   "text": "Use the proved homotopy tensor comparison coherence, which identifies the two underived comparison paths and includes equality transport along hj.",
    "uses": [
-    "def-pc-open-pinned-single-tensor-restriction-iso",
-    "def-pc-single-complex-open-restriction-data",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-open-pinned-target-counit-triangle",
-    "lem-pc-open-pinned-source-counit-triangle"
+    "lem-pc-open-pinned-tensor-counit-transport-coherence"
    ],
    "elementary": false
+  },
+  {
+   "text": "Regard the composition-pinned counit as a dependent family indexed by scheme morphisms. Generalize the two morphisms before equality induction; at reflexivity its transport identity is the identity law. The private transport_counit_comparison lemma performs this argument for arbitrary categories, families and a localization functor, then applies functoriality and the comparison identity. Instantiate it with derived pullback objects, homotopy tensor pullback objects, Qh and the pinned counit. Neither derived counit triangle theorem is used.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-open-pinned-single-tensor-restriction-iso",
-  "def-pc-single-complex-open-restriction-data",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-open-pinned-target-counit-triangle",
-  "lem-pc-open-pinned-source-counit-triangle"
+  "lem-pc-open-pinned-tensor-counit-transport-coherence",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
-  "place": "Separate open-leg factorization identities and functorial tensor comparison"
+  "place": "S2: generic equality transport of the pinned counit family, functoriality of Qh, and the proved underived tensor comparison coherence."
  },
  "mathlib_searches": [
   {
@@ -114,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T165640-L-1807483",
+  "landing": "20261013T190152-L-3220432",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

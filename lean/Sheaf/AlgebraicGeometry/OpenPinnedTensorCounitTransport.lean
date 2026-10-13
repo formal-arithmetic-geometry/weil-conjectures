@@ -3,6 +3,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenPinnedTargetCounitTriangle
 public import Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
+import Sheaf.AlgebraicGeometry.OpenPinnedTensorComparisonCoherence
 
 /-! # Counit comparison for one open leg
 Source: Stacks Project, Tags 08DW and 0D5S. -/
@@ -15,6 +16,17 @@ universe u w
 open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
+private theorem transport_counit_comparison
+    {I C D : Type*} [Category C] [Category D]
+    (A : I → D) (B : I → C) (Q : C ⥤ D) (ε : ∀ i, A i ⟶ Q.obj (B i))
+    {i j : I} (h : i = j) {E F : C}
+    (a : B j ⟶ E) (b : E ⟶ F) (c : B i ⟶ F)
+    (hc : a ≫ b = eqToHom (congrArg B h).symm ≫ c) :
+    eqToHom (congrArg A h) ≫ ε j ≫ Q.map a ≫ Q.map b = ε i ≫ Q.map c := by
+  cases h
+  simp only [eqToHom_refl, Category.id_comp] at hc ⊢
+  rw [← Q.map_comp, hc]
+
 variable [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
   [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]
@@ -44,6 +56,12 @@ theorem open_pinned_tensor_counit_transport
       DerivedCategory.Qh.map ((openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
     (pinnedPullbackCounit.{u, w} (j ≫ U.ι)).app P ≫
       DerivedCategory.Qh.map ((openPinnedHomotopySourceCompositionIso U j).hom.app P) := by
-  sorry
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  exact transport_counit_comparison
+    (fun f : U'.toScheme ⟶ X ↦ (derivedPullback.{u, w} f).obj (DerivedCategory.Qh.obj P))
+    (fun f ↦ ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj P)
+    (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings U'.toScheme.toRingedSpace)))
+    (fun f ↦ (pinnedPullbackCounit.{u, w} f).app P) hj _ _ _
+    (open_pinned_tensor_comparison_coherence k U U' j hj P)
 
 end AlgebraicGeometry

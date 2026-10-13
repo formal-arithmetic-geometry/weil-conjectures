@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-open-pinned-tensor-counit-transport-coherence",
+ "kind": "statement",
+ "title": "Underived localized tensor comparison coherence",
+ "statement": "For schemes X and X′, k : X′ ⟶ X, opens U of X and U′ of X′, j : U′.toScheme ⟶ U.toScheme, hj : j ≫ U.ι = U′.ι ≫ k, and any homotopy complex P of O_X-modules, the target homotopy comparison followed by the homotopy tensor restriction comparison equals eqToHom of the inverse of congrArg (f ↦ ((tensorPullback f).mapHomotopyCategory (.up ℤ)).obj P) hj followed by the source homotopy comparison. Additivity of all tensor pullbacks and shared derived-category localizations are assumed, as required by the definitions. The restriction comparison is [def-pc-open-pinned-single-tensor-restriction-iso]; the source and target homotopy comparisons are the definitions in [lem-pc-open-pinned-source-counit-triangle] and [lem-pc-open-pinned-target-counit-triangle], respectively. No derived counit or derived composition is involved.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Termwise tensor comparison coherence"
+ },
+ "stmt_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-open-pinned-source-counit-triangle",
+  "lem-pc-open-pinned-target-counit-triangle"
+ ],
+ "proof": [
+  {
+   "text": "expand the restriction comparison into its four factors: the inverse\nopen comparison for U', the inverse target composition comparison, the source\ncomposition comparison along hj, and the open comparison for U. The target\nhomotopy comparison is the inverse of the lift of the first two factors, so\nthese cancel. The last two factors are the source comparison. For an arbitrary\nmorphism f and an equality j ≫ U.ι = f, equality induction identifies the\ncomposition comparison along that equality with the comparison at j ≫ U.ι\nprecomposed by equality transport. This induction generalizes f first, rather\nthan trying to eliminate the equality of two fixed composites. Apply this at\nhj. Lifting additive functors to complexes and then to the homotopy quotient\npreserves composition, inverses, and equality transport, giving the displayed\nidentity for every P. This argument uses only functor identities; it applies to\nempty and top opens and zero complexes without any extra hypothesis.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso",
+    "lem-pc-open-pinned-source-counit-triangle",
+    "lem-pc-open-pinned-target-counit-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "lem-pc-open-pinned-source-counit-triangle",
+  "lem-pc-open-pinned-target-counit-triangle"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Four constructed comparison factors, equality induction, and functorial lifting to homotopy categories; fully checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToHom_map",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.eqToHom_map, Mathlib.CategoryTheory.EqToHom: functors preserve equality transport.",
+   "verdict": "Constituent only, no open tensor comparison coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor equality transport natural transformation components eqToHom",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.NatTrans.congr, Functor.congr_hom, Functor.hcongr_hom, congr_app and related component lemmas.",
+   "verdict": "Constituents only, no specific comparison identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryCompIso|eqToHom_map",
+   "date": "2026-10-14",
+   "results": "Mathlib HomotopyCategory/Shift and EqToHom supply functoriality and equality transport; local rg found the comparison definitions and general homotopy-functor lemmas, not this identity.",
+   "verdict": "No duplicate of the stated coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting natural transformations to homotopy categories preserves composition and equality transport",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenPinnedTensorCounitTransport",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-pinned-tensor-counit-transport",
+   "place": "coherence substep"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPinnedTensorComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPinnedTensorComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.open_pinned_tensor_comparison_coherence",
+  "statement": "theorem open_pinned_tensor_comparison_coherence {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme) (hj : j ≫ U.ι = U'.ι ≫ k) (P : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) : (openPinnedHomotopyTargetCompositionIso k U').hom.app P ≫ (openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P = eqToHom (congrArg (fun f ↦ ((Scheme.Modules.tensorPullback f).mapHomotopyCategory (.up ℤ)).obj P) hj).symm ≫ (openPinnedHomotopySourceCompositionIso U j).hom.app P",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.open_pinned_tensor_comparison_coherence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T190152-L-3220432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T190152-L-3220432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
