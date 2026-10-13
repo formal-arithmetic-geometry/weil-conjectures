@@ -118,4 +118,127 @@ end PullHom
 
 end Scheme.Modules
 
+section Stages
+
+variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) {i₀ : I}
+
+open Scheme.Modules
+
+lemma opensCone_π_app_eq_resTo (c : Cone D) (V : (D.obj i₀).Opens) (j : Over i₀) :
+    (opensCone D c i₀ V).π.app j = resTo (c.π.app j.left) (c.w j.hom) (le_refl V) := by
+  rw [← cancel_mono (Scheme.Opens.ι _)]
+  simp
+
+lemma opensDiagram_map_eq_resTo (V : (D.obj i₀).Opens) {j k : Over i₀} (t : j ⟶ k) :
+    (opensDiagram D i₀ V).map t =
+      resTo (D.map t.left) (by rw [← D.map_comp, Over.w t]) (le_refl V) := by
+  rw [← cancel_mono (Scheme.Opens.ι _)]
+  simp
+
+end Stages
+
+variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
+
+open Scheme.Modules in
+/-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
+be a cofiltered system of quasi-compact separated schemes with affine transition morphisms and
+limit cone `c`. Every module of finite presentation `ℱ` on `lim Dⱼ` is isomorphic to the pullback
+of a module of finite presentation on some stage `Dᵢ`. -/
+theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCofiltered I]
+    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)]
+    [∀ i, (D.obj i).IsSeparated] (hc : IsLimit c) (ℱ : c.pt.Modules)
+    [ℱ.IsFinitePresentation] :
+    ∃ (i : I) (𝒢 : (D.obj i).Modules), 𝒢.IsFinitePresentation ∧
+      Nonempty ((Modules.pullback (c.π.app i)).obj 𝒢 ≅ ℱ) := by
+  classical
+  obtain ⟨i₀⟩ := IsCofiltered.nonempty (C := I)
+  -- A finite affine open cover `U` of `D.obj i₀`.
+  obtain ⟨s, hs⟩ := (isCompact_univ (X := D.obj i₀)).elim_finite_subcover
+    (fun V : (D.obj i₀).affineOpens ↦ ((V : (D.obj i₀).Opens) : Set (D.obj i₀)))
+    (fun V ↦ V.1.2) (fun x _ ↦ by
+      obtain ⟨V, hx⟩ := TopologicalSpace.Opens.mem_iSup.1
+        ((iSup_affineOpens_eq_top (D.obj i₀)).ge (Set.mem_univ x) :
+          x ∈ ⨆ V : (D.obj i₀).affineOpens, (V : (D.obj i₀).Opens))
+      exact Set.mem_iUnion.2 ⟨V, hx⟩)
+  let U (a : s) : (D.obj i₀).Opens := a.1.1
+  have hU (a : s) : IsAffineOpen (U a) := a.1.2
+  have hUtop : ⨆ a, U a = ⊤ := eq_top_iff.2 fun x _ ↦ by
+    obtain ⟨V, hVs, hx⟩ := Set.mem_iUnion₂.1 (hs (Set.mem_univ x))
+    exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨V, hVs⟩, hx⟩
+  have hAff (V : (D.obj i₀).Opens) (hV : IsAffineOpen V) (j : Over i₀) :
+      IsAffine ((opensDiagram D i₀ V).obj j) :=
+    hV.preimage (D.map j.hom)
+  have hU₂ (a b : s) : IsAffineOpen (U a ⊓ U b) := (hU a).inf (hU b)
+  have hU₃ (a b d : s) : IsAffineOpen (U a ⊓ U b ⊓ U d) := (hU₂ a b).inf (hU d)
+  -- Step 1: the restrictions of `ℱ` to the preimages of the `U a` descend.
+  have h₁ (a : s) := by
+    haveI := hAff (U a) (hU a)
+    exact exists_pullback_iso_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U a))
+      ((Modules.pullback (c.π.app i₀ ⁻¹ᵁ U a).ι).obj ℱ)
+  choose j N hN e using h₁
+  let gL := c.π.app i₀
+  let W (a : s) := (opensDiagram D i₀ (U a)).obj (j a)
+  let μL (a : s) : (gL ⁻¹ᵁ U a).toScheme ⟶ W a :=
+    resTo (c.π.app (j a).left) (c.w (j a).hom) (le_refl (U a))
+  let ε (a : s) : (modulesPseudofunctor.map (μL a).op.toLoc).toFunctor.obj (N a) ≅
+      (modulesPseudofunctor.map (gL ⁻¹ᵁ U a).ι.op.toLoc).toFunctor.obj ℱ :=
+    ((Modules.pullbackCongr (opensCone_π_app_eq_resTo D c (U a) (j a))).app (N a)).symm ≪≫
+      (e a).some
+  let HL := DescentData'.isoGlueHom (preimageChosenPullback U gL) ε
+  -- Step 2: a common stage `k₀` below the `j a`.
+  obtain ⟨k₀, hk₀⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image j)
+  let t (a : s) : k₀ ⟶ j a := (hk₀ (Finset.mem_image_of_mem j (Finset.mem_univ a))).some
+  let g₀ := D.map k₀.hom
+  let μ₀ (a : s) : (g₀ ⁻¹ᵁ U a).toScheme ⟶ W a :=
+    resTo (D.map (t a).left) (by rw [← D.map_comp, Over.w (t a)]) (le_refl (U a))
+  -- Step 3: the gluing isomorphisms descend.
+  have h₃ (p : s × s) := by
+    haveI := hAff (U p.1 ⊓ U p.2) (hU₂ p.1 p.2)
+    haveI := hN p.1
+    haveI := hN p.2
+    exact exists_pullHom_eq_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U p.1 ⊓ U p.2))
+      (j := k₀) (O₁ := N p.1) (O₂ := N p.2)
+      ((preimageChosenPullback U g₀ p.1 p.2).p₁ ≫ μ₀ p.1)
+      ((preimageChosenPullback U g₀ p.1 p.2).p₂ ≫ μ₀ p.2)
+      (y₁ := (preimageChosenPullback U gL p.1 p.2).p₁ ≫ μL p.1)
+      (y₂ := (preimageChosenPullback U gL p.1 p.2).p₂ ≫ μL p.2)
+      (by rw [opensCone_π_app_eq_resTo, ← cancel_mono (Scheme.Opens.ι _)]; simp [μ₀, μL, g₀, gL])
+      (by rw [opensCone_π_app_eq_resTo, ← cancel_mono (Scheme.Opens.ι _)]; simp [μ₀, μL, g₀, gL])
+      (HL p.1 p.2)
+  choose k' t' ψ hψ using h₃
+  -- Step 4: a common stage `k₁` below the `k' p`, over `k₀`, with the descended gluing
+  -- morphisms `H₁`, whose pullbacks to the limit are `HL`.
+  obtain ⟨k₁, v₁, w, hw⟩ := IsCofiltered.wideCospan t'
+  have hw' (p : s × s) {Z : Scheme.{u}} (x : D.obj k₀.left ⟶ Z) :
+      D.map (w p).left ≫ D.map (t' p).left ≫ x = D.map v₁.left ≫ x := by
+    rw [← D.map_comp_assoc, ← Over.comp_left, hw]
+  let g₁ := D.map k₁.hom
+  let μ₁ (a : s) : (g₁ ⁻¹ᵁ U a).toScheme ⟶ W a :=
+    resTo (D.map (v₁ ≫ t a).left) (by rw [← D.map_comp, Over.w (v₁ ≫ t a)]) (le_refl (U a))
+  let H₁ (a b : s) :
+      (modulesPseudofunctor.map ((preimageChosenPullback U g₁ a b).p₁ ≫ μ₁ a).op.toLoc).toFunctor.obj
+        (N a) ⟶
+      (modulesPseudofunctor.map ((preimageChosenPullback U g₁ a b).p₂ ≫ μ₁ b).op.toLoc).toFunctor.obj
+        (N b) :=
+    pullHom (ψ (a, b)) ((opensDiagram D i₀ (U a ⊓ U b)).map (w (a, b))) _ _
+      (by
+        rw [opensDiagram_map_eq_resTo, opensDiagram_map_eq_resTo, ← cancel_mono (Scheme.Opens.ι _)]
+        simp [μ₀, μ₁, g₀, g₁, hw'])
+      (by
+        rw [opensDiagram_map_eq_resTo, opensDiagram_map_eq_resTo, ← cancel_mono (Scheme.Opens.ι _)]
+        simp [μ₀, μ₁, g₀, g₁, hw'])
+  have hμL₁ (a : s) : resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a)) ≫ μ₁ a = μL a :=
+    resTo_resTo _ _ _ _ (c.w _) _ _ _ _
+  have hA : DescentData'.pullGlue (H := H₁)
+      (fun a b ↦ resTo (c.π.app k₁.left) (c.w k₁.hom) (le_refl (U a ⊓ U b)))
+      (resTo_p₁ U (c.π.app k₁.left) (c.w k₁.hom)) (resTo_p₂ U (c.π.app k₁.left) (c.w k₁.hom))
+      hμL₁ = HL := by
+    funext a b
+    simp only [DescentData'.pullGlue, H₁, pullHom_pullHom]
+    rw [← hψ (a, b)]
+    refine pullHom_congr_left _ ?_ _ _ _ _
+    rw [opensDiagram_map_eq_resTo, opensCone_π_app_eq_resTo]
+    exact resTo_resTo _ _ _ _ (c.w _) _ _ _ _
+  sorry
+
 end AlgebraicGeometry
