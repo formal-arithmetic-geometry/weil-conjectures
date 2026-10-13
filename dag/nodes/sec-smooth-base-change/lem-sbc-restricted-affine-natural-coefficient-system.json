@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-restricted-affine-natural-coefficient-system",
+ "kind": "statement",
+ "title": "Restricted coefficient complexes with stage and cone comparison equations",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ a nonempty directed preorder and $D:I^{op}\\to\\mathrm{Over}(S)$ a diagram with affine transitions and qcqs structure morphisms. Let $c$ have limiting underlying scheme cone and qcqs structure morphism. Let $F_i,\\phi$ be abelian etale coefficients with the identity and composition HEq laws in the Lean signature, and $H:I\\to\\mathrm{Sh}(c.pt)$ with isomorphisms $eH_i:H_i\\simeq f_i^{-1}F_i$ and canonical transition equation. Fix $p\\in\\mathbb N$ and an affine etale $U\\to S$. The groups $R(g_i,F_i,U,p)$ and $R(g,\\operatorname{colim}H,U,p)$ of [def-sbc-raw-affine-restricted-cohomology], with the canonical restricted pullback/coefficient maps from $\\phi_i=(eH_i)^{-1}\\operatorname{colimit}.\\iota_i$, admit the following complex-system realization: an $I^{op}$ diagram $D'$ of qcqs schemes with affine maps and a limiting cone $c'$; complexes $K_i$ with coherent inverse-image transitions and zero terms below degree zero; a diagram $G$ of their pullbacks to the limit with isomorphisms $eG_i$ and the canonical transition equation; and a coefficient cocone $L$ with $\\mathrm{IsColimit}(L)$ and zero vertex terms in negative degrees.  Instead of constructing a cohomology diagram, provide isomorphisms r_i from the restricted-cohomology groups R_i to H^p(D'i,QK_i), and r_L from R_limit to H^p(c'.pt,QL.pt). For each cone projection, r_i followed by rawAffineComplexPullback and the coefficient map (eG_i)^(-1) followed by L.iota_i equals the canonical restricted-cohomology map followed by r_L. The full hypotheses and morphism equality are given verbatim in lean.statement. No cohomology diagram T or cocone B is supplied. In addition, for every arrow f:i→j, r_i followed by rawAffineComplexPullback along D′.map(f.op) and cohomology of Q(psi(f.op)) equals rawAffineRestrictedCohomologyMap of the original stage arrow with phi(f), followed by r_j. This is a morphism equality at every stage, independent of the cone-leg equality. There is still no cohomology functor T or cocone B in the conclusion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, base change to affine U; Tag 0EZM coefficient complex cocone and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct U ×_S D(i), its pullback transitions and cone U ×_S c.pt using the pullback universal property. The universal property gives identity, composition and the limit assertion. Affine, quasi-compact and quasi-separated morphisms remain so under base change; the affine target U makes stage schemes compact and quasi-separated.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict F_i and phi along the second projections, using rawAffineRestrictedCoefficient. The identity and associativity of upperStarComp transport the sheaf transition laws. Apply singleFunctor in degree zero. Restrict and reindex H and use eH to obtain G, eG and hG. Single complexes vanish in negative degrees. On a stage square, expand the same two upperStarComp comparisons. They are exactly rawAffineRestrictedCoefficient for the original phi(f); the single-functor comparison and Q/cohomology identify the induced complex transition with rawAffineRestrictedCohomologyMap, giving the stage morphism equality. This is proved separately from cone compatibility.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction is left adjoint and preserves the coefficient colimit. singleFunctor preserves colimits degreewise, so the image cocone L is colimiting. Its vertex is the degree-zero single complex of the restricted coefficient colimit, so it also vanishes in negative degrees, giving hbelowL. The stage cohomology comparisons r are the single-complex identifications; the preserved coefficient colimit gives rL. On each cone triangle, the inverse-image comparisons in eG are exactly rawAffineRestrictedCoefficient. Naturality of the single comparison identifies the Q-image coefficient map in the displayed morphism equation; compose with rawAffineComplexPullback.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent N1",
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 and 0EZM, affine restriction and coefficient complex construction; explicit stage compatibility in the base-change squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict a compatible system of etale sheaves to affine base change and form single complexes with natural cohomology maps",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural cohomology diagram of restricted sheaves on a cofiltered inverse system of schemes",
+   "results": "8 hits, including exists_app_map_eq_map_of_isLimit and exists_appTop_π_eq_of_isLimit. These concern structure-sheaf sections, not the coefficient complexes and their prescribed cohomology maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.map",
+   "results": "12 hits, including pullback.map, pullback.map_id, pullback.map_comp and Over.starPullbackIsoStar_hom_app_left. These give scheme maps, not coefficient or cohomology comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rawAffineComplexPullback|restricted_affine_complex_system",
+   "results": "0 hits in the search service. Local repository search finds RestrictedAffineCoefficientSystem, which supplies only cone-leg compatibility, and RawAffineComplexSystemMapCoherence, which supplies the generic cohomology laws but no restricted coefficient construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystemNatural",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Affine-object reduction in Tag 09Z1: restrict coefficients to U times_S X_i and transport each transition before applying continuity.",
+   "via": [
+    "lem-sbc-restricted-affine-complex-system-natural",
+    "lem-sbc-abelian-raw-cocone-complex-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineNaturalCoefficientSystem.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_restricted_affine_natural_coefficient_system",
+  "statement": "theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ)\n    (U : S.Etale) [IsAffine U.left] :\n    ∃\n    (D' : Iᵒᵖ ⥤ Scheme.{v})\n    (c' : Cone D')\n    (hc : IsLimit c')\n    (compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))\n    (quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))\n    (affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))\n    (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology\n      AddCommGrpCat.{v + 1}) ℤ)\n    (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i) ⟶ K j)\n    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (K i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))\n        (ComplexShape.up ℤ)).hom.app (K i))\n    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)\n            (D'.map (g ≫ f)) (D'.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)\n    (hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))\n    (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i))\n    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)\n            (c'.π.app i) (c'.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)\n    (L : Cocone G)\n    (hL : IsColimit L)\n    (hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))\n    (r : ∀ i : Iᵒᵖ,\n      rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅\n        (cohomology AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj\n          (DerivedCategory.Q.obj (K i)))\n    (rL : rawAffineRestrictedCohomology c.pt.hom p (colimit H) U ≅\n      (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).obj\n        (DerivedCategory.Q.obj L.pt)),\n    (∀ i : Iᵒᵖ,\n      (r i).hom ≫ rawAffineComplexPullback (p : ℤ) (c'.π.app i) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))) =\n      rawAffineRestrictedCohomologyMap (c.π.app (op i.unop)).left\n        (D.obj (op i.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop))) p\n        (F i.unop) (colimit H) ((eH i.unop).inv ≫ colimit.ι H i.unop) U ≫ rL.hom) ∧\n    (∀ {i j : I} (f : i ⟶ j),\n      (r (op i)).hom ≫ rawAffineComplexPullback (p : ℤ) (D'.map f.op) (K (op i)) ≫\n        (cohomology AddCommGrpCat.{v + 1} (D'.obj (op j)) (p : ℤ)).map\n          (DerivedCategory.Q.map (ψ f.op)) =\n      rawAffineRestrictedCohomologyMap (D.map f.op).left\n        (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p\n        (F i) (F j) (φ f) U ≫ (r (op j)).hom)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c5349",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T082357-L-1640805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c5349",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T082357-L-1640805",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both DAG records, source constructions, unchanged interface, clean compilation, direct importer, and allowed axioms plus documented sorryAx."
+ }
+}

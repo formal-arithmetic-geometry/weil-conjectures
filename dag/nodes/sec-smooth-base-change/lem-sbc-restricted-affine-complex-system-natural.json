@@ -14,43 +14,34 @@
  ],
  "proof": [
   {
-   "text": "Form the pullback diagram with stage U times_S X_i and limit U times_S X, taking maps from pullback universal properties. The same universal property proves the limit assertion. Qcqs morphisms remain qcqs after base change; since U is affine the stages are qcqs schemes. Affine transition morphisms remain affine. Restrict the sheaves and their transition maps along the second projections, transport the identity, composition and H-transition laws through the inverse-image composition isomorphisms, and put all sheaves into degree-zero single complexes, zero below zero. Inverse image, being a left adjoint, preserves the coefficient colimit; termwise colimits of single complexes are again single complexes. This supplies D,c,hc,compact,quasiSeparated,affine,F,phi,hidentity,hcomposition,a,hbelow,G,eG,hG,L,hL in the presentation. Fix the lower bound to zero. All objects in this statement concern restricted single-complex cohomology, with no raw-Hom comparison.",
+   "text": "Apply the natural coefficient-system construction. It provides the limiting qcqs scheme diagram, degree-zero lower bound, coefficient colimit, and both the stage and cone comparison morphism equalities. No cohomology functor or cocone is supplied by this step.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-affine-morphism-permanence"
+    "lem-sbc-restricted-affine-natural-coefficient-system"
    ],
    "elementary": false
   },
   {
-   "text": "Use P_p = rawAffineComplexPullback as a fixed canonical map. Define the stage cohomology diagram and its cocone by P_p followed by the complex coefficient maps. Naturality and composition of the derived adjunction unit, inverse-image coherence and the coefficient cocone equations prove functoriality and the displayed hT and hB equations. The stage restriction isomorphisms identify the same single complexes. Inverse image preserves the coefficient colimit and gives the limit single-complex comparison, hence restrictionLimitIso. The two comparisons on each pullback projection triangle are exactly rawAffineRestrictedCoefficient, giving the final restricted-cohomology leg equation. Do not assert B is colimiting or use continuity.",
+   "text": "The lower bounds give CochainComplex.plus for every stage and the coefficient cocone vertex. Apply rawAffineComplex_system_map_coherence. Define T.obj to be H^p(Q K_i), its maps to be rawAffineComplexPullback followed by cohomology of Q(psi). Its identity and composition equations are the first two coherence conclusions. Define B.pt to be H^p(Q L.pt) and its legs by the cone projection and coefficient legs. The third coherence conclusion is exactly cocone naturality.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-inverse-image-composition",
+    "lem-sbc-raw-affine-complex-system-map-coherence",
     "def-sbc-raw-affine-restricted-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For each stage arrow, the map of the pullback schemes is rawAffineRestrictedMap, and inverse-image composition identifies its coefficient map with rawAffineRestrictedCoefficient. The stage restriction isomorphisms identify the same degree-zero single complexes. The single-functor comparison and derived adjunction-unit pullback therefore identify its cohomology transition with rawAffineRestrictedCohomologyMap, giving the additional stage equation. This uses the actual base-change construction of steps 1 and 2; it is not inferred by cancelling cocone legs.",
+   "text": "Pack these data into EtaleComplexCohomologyPresentation with bound zero, the fixed rawAffineComplexPullback, and identity eT/eB. The prescribed pullback formula is reflexivity. Use r and rL for the restriction isomorphisms. Evaluate the coefficient construction’s cone-leg and stage morphism equalities at a class t using ConcreteCategory.congr_hom. The definitions of T and B give the two required element equations. No cocone leg is cancelled and no continuity theorem is invoked.",
    "uses": [
-    "def-sbc-raw-affine-restricted-cohomology",
-    "lem-weil-pbc-inverse-image-composition",
-    "prop-weil-pbc-derived-inverse-image-adjunction"
+    "def-sbc-etale-complex-cohomology-presentation",
+    "lem-sbc-restricted-affine-natural-coefficient-system"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-pc-fibre-product",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-sbc-restricted-affine-natural-coefficient-system",
+  "lem-sbc-raw-affine-complex-system-map-coherence",
   "def-sbc-raw-affine-restricted-cohomology",
-  "lem-weil-pbc-affine-morphism-permanence"
+  "def-sbc-etale-complex-cohomology-presentation"
  ],
  "unit": "sk-lem-failure-field",
  "chapter": "sec-smooth-base-change",
@@ -60,9 +51,9 @@
  "mathlib_match": null,
  "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Over}(S)$ have affine transitions and quasi-compact quasi-separated structure morphisms. Let $c$ be a cone with limiting underlying scheme cone and quasi-compact quasi-separated structure morphism. Write $g_i:X_i\\to S$, $g:X\\to S$, $a_f:X_j\\to X_i$ for $f:i\\to j$, and $a_i:X\\to X_i$ for its projections. Let $F_i$ be abelian etale sheaves [def-weil-pbc-etale-sheaves] and $\\varphi_f:a_f^{-1}F_i\\to F_j$ satisfy the canonical unital and composition HEq laws displayed in the Lean signature [lem-weil-pbc-inverse-image-composition]. Let $H:I\\to\\mathrm{Sh}(X_{\\mathrm{et}},\\mathbf{Ab})$ have a colimit and isomorphisms $eH_i:H_i\\simeq a_i^{-1}F_i$, with $H(f)=eH_i;\\mathrm{upperStarComp};a_j^{-1}(\\varphi_f);eH_j^{-1}$. Fix $p\\in\\mathbf N$ and an affine etale $U\\to S$. Write $R(g_i,F_i)$ and $R(g,\\operatorname{colim}H)$ for the restricted single-complex cohomology groups at $U$ in degree $p$ [def-sbc-raw-affine-restricted-cohomology]. There exist $T:(I^{\\mathrm{op}})^{\\mathrm{op}}\\to\\mathbf{Ab}$, a cocone $B$ on $T$, an EtaleComplexCohomologyPresentation of $T,B$ [def-sbc-etale-complex-cohomology-presentation], additive isomorphisms $s_i:R(g_i,F_i)\\simeq T_{i^{\\mathrm{op},\\mathrm{op}}}$ and $s_B:R(g,\\operatorname{colim}H)\\simeq B_{\\mathrm{pt}}$, such that simultaneously $T(f^{\\mathrm{op},\\mathrm{op}})(s_i(t))=s_j(R(a_f,\\varphi_f)(t))$ for every arrow $f:i\\to j$ and restricted class $t$, and $B_i(s_i(t))=s_B(R(a_i,eH_i^{-1};\\iota_i)(t))$ for every stage and class. Here both $R$ maps are exactly rawAffineRestrictedCohomologyMap with the over-triangle equations, as in the Lean signature. No raw derived-Hom group, prescribed raw diagram, cohomology-colimit assertion, or representative assertion occurs in the statement.",
  "proof_origin": {
-  "by": "agent F1",
+  "by": "agent N1",
   "document": "Stacks Project",
-  "place": "Tags 09Z1 (lemma-relative-colimit, affine-object reduction) and 0EZM (lemma-colimit-variant-complexes, input construction); parent proof steps 1 and 3; explicit stage naturality elaboration by F1"
+  "place": "Tags 09Z1 and 0EZM; coefficient restriction followed by existing generic complex-map coherence and explicit Lean functor/cocone construction"
  },
  "created": {
   "by": "worker",
@@ -134,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-c5349",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T040745-L-3947869",
+  "landing": "20261013T082357-L-1640805",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both DAG records, source constructions, unchanged interface, clean compilation, direct importer, and allowed axioms plus documented sorryAx."
  }
 }
