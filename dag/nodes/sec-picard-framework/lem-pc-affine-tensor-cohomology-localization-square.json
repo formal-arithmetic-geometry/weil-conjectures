@@ -12,26 +12,39 @@
  },
  "proof": [
   {
-   "text": "use the functorial A-K-flat resolution P of M and its localization J(P).\nThe balanced base-derived tensor cohomology models retain the A tensor_R B action.\nApply derivedTensor_localization_cohomology to these models. Its naturality equations\ngive the first displayed naturality equation for the source identifications alpha, and its comparison equation identifies\nboth composites with the localized augmentation on the K-flat comparison span.\nFor beta, localization is exact, hence commutes with homology. Tensor associativity\nidentifies the extension of J(P) to D with that of P to D. The localized resolution\naugmentation is a quasi-isomorphism from an Aq-K-flat complex; comparing it with the\nchosen functorial Aq-K-flat resolution gives the natural target identification.\nTransport these maps along eS, eT, eSl, eTl. Their generator equations make them\nlinear over both tensor factors, hence over the tensor algebras. The equations on\nf and hB identify all coefficient maps. The naturality and comparison equations\nsurvive this transport and give the asserted componentwise equality. The target identifications satisfy the second\nnaturality equation since every tensor and resolution comparison is natural in M.\nThis statement concerns only the commuting global-to-local square; it does not\nidentify the local target after coefficient extension with ordinary D-cohomology.\nZero complexes and identity localizations use the same maps; if no prime exists,\nthere is no instance of the assertion to check.",
+   "text": "Choose the existing balanced derived cohomology models L(M) on the functorial A-K-flat resolution P(M), and K(M) on J(P(M)), where J is extension from A to Aq. K-flatness of J(P(M)) follows from K-flat extension of scalars; exact localization makes J(augmentation_A) a quasi-isomorphism. Apply prescribedTensorCohomology_model_realization globally with U=id,Q=P and locally with U=J,Q=P followed by J. The global coefficient map is flat by localization; the local coefficient map is flat by affineTensorLocalization_flat. These applications supply sigma,gamma and sigmal,gammal with naturality and comparison equations.",
    "uses": [
-    "lem-pc-derived-tensor-localization-cohomology",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-pc-affine-tensor-localization-flat"
+    "lem-pc-prescribed-tensor-cohomology-model-realization",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-affine-tensor-localization-flat",
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Install the local tensor-algebra D-structure from f. The equations hfA,hfB,hB give its scalar towers. The contractions of qprime to R through A agree by IsScalarTower.algebraMap_eq and Ideal.comap_comap. Apply derivedTensor_localization_cohomology to L and K to obtain e with its model-map naturality and localized comparison equation.",
+   "uses": [
+    "lem-pc-derived-tensor-localization-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor associativity gives a natural chain isomorphism tau:D tensor_A P to D tensor_Aq (Aq tensor_A P). The two A-to-D maps agree by the supplied towers. Use ModuleCat.extendScalarsComp and equality of scalar maps to construct tau; its hom sends d tensor x to d tensor (1 tensor x), first for d=1 by extendScalarsComp_hom_app_one_tmul and then for all d by D-linearity. Set alpha=EL(sigma) followed by e followed by ER(sigmal inverse). Set beta=gamma followed by H^i(tau) followed by gammal inverse. For source naturality, apply e naturality to the conjugates sigma inverse S(g) sigma and sigmal inverse Sl(J(g)) sigmal, with the counit-compatible morphisms from realization; cancel the adjacent inverse pairs. For target naturality, compose gamma naturality, H^i of tau naturality, and gammal naturality. For the comparison square, cancel gammal.hom on the right; the global realization equation, e comparison equation, and the local realization equation give exactly the two composites. Every cancellation is between actual isomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-tensor-localization-cohomology",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-pc-affine-tensor-localization-flat"
+  "lem-pc-prescribed-tensor-cohomology-model-realization",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-affine-tensor-localization-flat",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-derived-tensor-localization-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0DJ8, 00DL, 00CS; explicit prescribed-lift transport"
+  "place": "Tags 0DJ8, 06Y6, 064L, 065Z, 00HD and 00CS; Lean composition through single-ring realization and the existing derived-localization cohomology theorem, G2"
  },
  "mathlib_searches": [
   {
@@ -105,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-924a1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T123542-L-3710508",
+  "landing": "20261013T145119-L-695927",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered files, DAG records, change record, direct importer, and lcompile checks all agree; delivery compiles cleanly with only the declared sorryAx dependency."
  }
 }

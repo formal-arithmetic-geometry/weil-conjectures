@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-prescribed-tensor-cohomology-model-realization",
+ "kind": "statement",
+ "title": "Realization of prescribed tensor cohomology on a K-flat replacement",
+ "statement": "Let R,A,B,D be commutative rings with R-algebra structures on A and B. Set C=A tensor_R B. Give D a C-algebra and an A-algebra structure with compatible scalar tower A to C to D, and assume C to D is flat. Let E be any category, U,Q functors from E to unbounded cochain complexes of A-modules, and pi:Q to U a natural transformation whose components are quasi-isomorphisms. Suppose every Q(M) is A-K-flat. The cohomology functors source and target and their comparison are those of [def-pc-ring-tensor-cohomology]. Fix an integer i. Let S,T:E to C-modules have natural B-restriction isomorphisms eS,eT to U followed by source and target respectively. Suppose eS and eT identify multiplication by a tensor 1 with applying the corresponding cohomology functor to a times the identity of U(M), for all M and a in A. Let c:S to T restrict, under eS and eT, to U applied to comparison. Choose derived categories of R- and B-modules, and supply any family L(M) of base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model] for Q(M) with coefficients D. Then there exist C-linear isomorphisms sigma_M:S(M) to L(M).cohomology(i), and D-linear isomorphisms gamma_M:D tensor_C T(M) to H^i(D tensor_A Q(M)), where the A-to-D scalar map in this formula is explicitly the composite A to C to D. Gamma is natural in every morphism g:M to N of E. For each g there is a counit-compatible derived-functor morphism delta:L(M).derived to L(N).derived, and the B-restriction of sigma_M inverse followed by S(g) followed by sigma_N, then L(N).cohomologyIso(i), equals L(M).cohomologyIso(i) followed by cohomology of L(M).derived applied to Q(g) and cohomology of delta at Q(N). Finally extension of c_M to D followed by gamma_M equals extension of sigma_M to D followed by L(M).localizedComparison(i). This is a realization over a single base ring; no prime localizations or comparison between different base rings is assumed or concluded.",
+ "stmt_deps": [
+  "def-pc-ring-tensor-cohomology",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Tags 06Y6 and 064L, K-flat derived tensor and tensor invariance; Tag 065Z, more-algebra-equation-comparison-map; Tag 00HD, exact flat tensor extension. Official pages read online; this remote clone omits the literature sources."
+ },
+ "proof": [
+  {
+   "text": "Put V(M)=resolution_R(restrict_R(Q(M))). This is an R-K-flat complex with quasi-isomorphism augmentation to restrict_R(Q(M)). The universal counit of L(M) is invertible on V(M) by the K-flat counit theorem; applying the derived functor to the augmentation and then taking cohomology identifies L(M) cohomology at Q(M) with ordinary extension of V(M). Since restriction of pi is a quasi-isomorphism, resolution_R(restrict_R(pi)) is a quasi-isomorphism between R-K-flat complexes and remains so after extension to B: apply clause (i) of [lem-pc-mixed-tensor-kflat-quasi-iso] with the B-complex B[0]; the natural single-complex tensor and unit isomorphisms identify the induced mixed tensor map with scalar extension of this resolution map. Its cohomology identifies this model with source(U(M)). Conjugate by eS and L(M).cohomologyIso to obtain sigma. Naturality for multiplication by a and hS show commutation with a tensor 1. B-linearity gives commutation with 1 tensor b; tensor induction proves C-linearity. Naturality of counits and augmentations makes the source identification natural before its tensor-algebra upgrade.",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pc-base-derived-tensor-cohomology-model-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For target(U), use the common K-flat span resolution_A(Q(M)) to Q(M) and resolution_A(U(M)). Its two maps are augmentation_A(Q(M)) and resolution_A(pi(M)); they are quasi-isomorphisms between A-K-flat complexes, hence remain so after extension from A to C: apply clause (i) of [lem-pc-mixed-tensor-kflat-quasi-iso] with the C-complex C[0]; the natural single-complex tensor and unit isomorphisms identify the induced mixed tensor maps with scalar extension of the two span maps. The ordinary balanced tensor isomorphism identifies B tensor_R resolution_A(U(M)) with restriction of C tensor_A resolution_A(U(M)). Conjugate by eT and upgrade to C-linearity using hT and the two tensor generators, obtaining T(M) isomorphic to H^i(C tensor_A Q(M)). Flatness of C to D and the canonical scalar-extension homology adjunct now give gamma:T(M) extended to D isomorphic to H^i(D tensor_A Q(M)). Each span map, balanced tensor map and homology adjunct is natural in M, giving the displayed gamma naturality.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-pc-flat-scalar-extension-homology-adjunct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For g:M to N, use the unique counit-compatible isomorphism delta:L(M).derived to L(N).derived. Under sigma, the prescribed map S.map g agrees with cohomology of L(M).derived applied to Q.map g followed by delta. This is the model-map equation; it follows from the natural derived identification of the first step. All identities are morphism identities, so no functorial choice of the model family is assumed.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-model-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation hc identifies c with the canonical comparison computed on the common R-K-flat span of the A-resolution. The model comparison_eq identifies L.comparison with the universal counit on the same span. Its counit is invertible on the resolving K-flat complex, so the span comparison is preserved by the above identifications. Extend the comparison to D and compose with the canonical flat homology adjunct used to construct gamma. The adjunction identity localized_eq in L identifies this composite exactly with L.localizedComparison. This gives EL(c) followed by gamma equals EL(sigma) followed by L.localizedComparison.",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-flat-scalar-extension-homology-adjunct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-base-derived-tensor-cohomology-model-map",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-flat-scalar-extension-homology-adjunct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 06Y6, 064L, 065Z, 00HD and 0DJ8; explicit single-ring prescribed-lift realization written by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|cohomologyIso_smul|localizedComparison",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact prescribed-lift realization statement; infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat replacement realizes prescribed tensor cohomology lifts and counit comparison under flat scalar extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat replacement realizes prescribed tensor cohomology lifts and counit comparison under flat scalar extension",
+   "results": "8 hits: Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+   "date": "2026-10-13",
+   "verdict": "No exact prescribed-lift realization statement; infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationSquare",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8 affine proof: realize the prescribed tensor-algebra cohomology lifts on the A-K-flat resolution before comparing global and localized models.",
+   "via": [
+    "lem-pc-affine-tensor-cohomology-localization-square",
+    "lem-pc-affine-tensor-cohomology-localization-isos",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-rf-single-complex-affine-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PrescribedTensorCohomologyModelRealization",
+  "file": "lean/Sheaf/Algebra/Homology/PrescribedTensorCohomologyModelRealization.lean",
+  "declaration": "RingTensorCohomology.prescribedTensorCohomology_model_realization",
+  "statement": "theorem prescribedTensorCohomology_model_realization\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]\n    [Algebra A D] [IsScalarTower A (A ⊗[R] B) D]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B)]\n    (E : Type v) [Category.{z} E]\n    (U Q : E ⥤ CochainComplex (ModuleCat.{u} A) ℤ)\n    (pi : Q ⟶ U) (hpi : ∀ M, QuasiIso (pi.app M))\n    (hQ : ∀ M, (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat (Q.obj M))\n    (i : ℤ)\n    (S T : E ⥤ ModuleCat.{u} (A ⊗[R] B))\n    (eS : S ⋙ ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom ≅\n      U ⋙ source R A B i)\n    (eT : T ⋙ ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom ≅\n      U ⋙ target R A B i)\n    (c : S ⟶ T)\n    (hS : ∀ (M : E) (a : A) (x : S.obj M),\n      eS.hom.app M ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • x) =\n        (source R A B i).map (a • 𝟙 (U.obj M)) (eS.hom.app M x))\n    (hT : ∀ (M : E) (a : A) (x : T.obj M),\n      eT.hom.app M ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • x) =\n        (target R A B i).map (a • 𝟙 (U.obj M)) (eT.hom.app M x))\n    (hc : Functor.whiskerRight c\n        (ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom) ≫ eT.hom =\n      eS.hom ≫ Functor.whiskerLeft U (comparison R A B i))\n    (hf : (algebraMap (A ⊗[R] B) D).Flat)\n    (L : ∀ M : E, ModuleCat.BaseDerivedTensorCohomologyModel R A B (Q.obj M) D) :\n    ∃ (sigma : ∀ M : E, S.obj M ≅ (L M).cohomology i)\n      (gamma : ∀ M : E,\n        (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (T.obj M) ≅\n          (((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp\n            (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj\n              (Q.obj M)).homology i),\n      (∀ (M N : E) (g : M ⟶ N),\n        (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map (T.map g) ≫\n            (gamma N).hom =\n          (gamma M).hom ≫ HomologicalComplex.homologyMap\n            (((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp\n              (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).map (Q.map g)) i) ∧\n      (∀ (M N : E) (g : M ⟶ N),\n        ∃ delta : (L M).derived ⟶ (L N).derived,\n          Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) delta ≫\n              (L N).counit = (L M).counit ∧\n          (ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom).map\n              ((sigma M).inv ≫ S.map g ≫ (sigma N).hom) ≫ ((L N).cohomologyIso i).hom =\n            ((L M).cohomologyIso i).hom ≫\n              (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n                ((L M).derived.map (DerivedCategory.Qh.map\n                  ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n                    ((restrict R A).map (Q.map g))))) ≫\n              (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n                (delta.app (DerivedCategory.Qh.obj\n                  ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n                    ((restrict R A).obj (Q.obj N)))))) ∧\n      (∀ M : E,\n        (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map (c.app M) ≫ (gamma M).hom =\n          (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map (sigma M).hom ≫\n            (L M).localizedComparison i)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-924a1",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T145119-L-695927",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-924a1",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T145119-L-695927",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, change record, direct importer, and lcompile checks all agree; delivery compiles cleanly with only the declared sorryAx dependency."
+ }
+}
