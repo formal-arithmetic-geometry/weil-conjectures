@@ -9,8 +9,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.Ideal.Operations
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitModel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Mathlib.CategoryTheory.ObjectProperty.Kernels
 
 /-! # Annihilators of affine limits of formal kernels and cokernels -/
 
@@ -59,6 +61,67 @@ theorem coherentFormalModule_limit_annihilators
         (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op V.1)) :
           ModuleCat Γ(X, V.1)) ⧸ LinearMap.range
           (lim.map (Functor.whiskerRight α.hom
-            (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom) := by sorry
+            (SheafOfModules.evaluation X.ringCatSheaf (op V.1)))).hom) := by
+  let L : CoherentFormalModule X I ⥤ ModuleCat Γ(X, V.1) :=
+    (IsCoherentFormalModule I).ι ⋙
+      (Functor.whiskeringRight ℕᵒᵖ X.Modules (ModuleCat Γ(X, V.1))).obj
+        (SheafOfModules.evaluation X.ringCatSheaf (op V.1)) ⋙ lim
+  have : TopologicalSpace.NoetherianSpace V.1.toScheme :=
+    (Scheme.Hom.isOpenEmbedding V.1.ι).isInducing.noetherianSpace
+  have : IsNoetherian V.1.toScheme := {
+    toIsLocallyNoetherian := inferInstance
+    isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+  have : IsNoetherianRing Γ(X, V.1) := IsLocallyNoetherian.component_noetherian V
+  have : IsNoetherianRing (AdicCompletion (I.ideal V) Γ(X, V.1)) :=
+    AdicCompletion.isNoetherianRing (I.ideal V)
+  let P : ObjectProperty (ModuleCat.{u} (AdicCompletion (I.ideal V) Γ(X, V.1))) :=
+    fun N ↦ Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N
+  have : P.IsClosedUnderSubobjects := by
+    constructor
+    intro M N f hf hN
+    have : Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N := hN
+    have := isNoetherian_of_injective f.hom ((ModuleCat.mono_iff_injective f).mp hf)
+    exact inferInstanceAs (Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) M)
+  have : P.IsClosedUnderQuotients := by
+    constructor
+    intro M N f hf hM
+    have : Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) M := hM
+    exact Module.Finite.of_surjective f.hom ((ModuleCat.epi_iff_surjective f).mp hf)
+  obtain ⟨E, ⟨e⟩⟩ := coherentFormalModule_affine_limit_model X I V
+  let R := coherentFormalModulesRestriction I V.1
+  let S := ModuleCat.restrictScalars
+    (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1)))
+  let T := R ⋙ E.functor ⋙ P.ι ⋙ S
+  have : PreservesFiniteLimits R := (coherentFormalModules_restriction_limits I V.1).1
+  have : PreservesFiniteColimits R := (coherentFormalModules_restriction_limits I V.1).2
+  have : PreservesLimit (parallelPair α 0) T := by
+    have hR := k.mapIsLimit hk R
+    have hE := (k.map R).mapIsLimit hR E.functor
+    have : PreservesLimit (parallelPair (E.functor.map (R.map α)) 0) P.ι :=
+      P.preservesKernels_ι _
+    have hP := ((k.map R).map E.functor).mapIsLimit hE P.ι
+    have hS := (((k.map R).map E.functor).map P.ι).mapIsLimit hP S
+    apply preservesLimit_of_preserves_limit_cone hk
+    exact (k.isLimitMapConeEquiv T).symm hS
+  have : PreservesColimit (parallelPair α 0) T := by
+    have hR := c.mapIsColimit hc R
+    have hE := (c.map R).mapIsColimit hR E.functor
+    have : PreservesColimit (parallelPair (E.functor.map (R.map α)) 0) P.ι :=
+      P.preservesCokernels_ι _
+    have hP := ((c.map R).map E.functor).mapIsColimit hE P.ι
+    have hS := (((c.map R).map E.functor).map P.ι).mapIsColimit hP S
+    apply preservesColimit_of_preserves_colimit_cocone hc
+    exact (c.isColimitMapCoconeEquiv T).symm hS
+  have : PreservesLimit (parallelPair α 0) L :=
+    preservesLimit_of_natIso _ e.symm
+  have : PreservesColimit (parallelPair α 0) L :=
+    preservesColimit_of_natIso _ e.symm
+  have : L.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_iso e.symm
+  let ek := IsLimit.conePointUniqueUpToIso (k.mapIsLimit hk L) (kernelIsKernel (L.map α))
+  let ec := IsColimit.coconePointUniqueUpToIso
+    (c.mapIsColimit hc L) (cokernelIsCokernel (L.map α))
+  constructor
+  · exact (ek ≪≫ ModuleCat.kernelIsoKer (L.map α)).toLinearEquiv.annihilator_eq
+  · exact (ec ≪≫ ModuleCat.cokernelIsoRangeQuotient (L.map α)).toLinearEquiv.annihilator_eq
 
 end AlgebraicGeometry

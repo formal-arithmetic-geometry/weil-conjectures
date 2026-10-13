@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-formal-affine-limit-model",
+ "kind": "statement",
+ "title": "Natural finite completed-module model of the affine section-limit functor",
+ "statement": "Let $X$ be a Noetherian scheme, $I$ a quasi-coherent ideal sheaf, and $V$ an affine open with its Noetherian open subscheme. Put $A=\\Gamma(V,\\mathcal O_X)$, $J=I(V)$, and $\\widehat A=\\varprojlim_n A/J^{n+1}$ [def-weil-pbc-adic-completion]. Write $\\mathit{Coh}(X,I)$ for the coherent formal modules [def-weil-pbc-coherent-formal-module], $\\rho_V$ for their termwise restriction [lem-weil-pbc-coherent-formal-modules-restriction-objects], $\\mathrm{Fin}(\\widehat A)$ for the full subcategory of finitely generated $\\widehat A$-modules, $\\iota$ for its inclusion, and $\\mathrm{Res}_A^{\\widehat A}$ for restriction of scalars. There exists an equivalence $E:\\mathit{Coh}(V,I|_V)\\simeq\\mathrm{Fin}(\\widehat A)$ together with a natural isomorphism $L_V\\cong\\rho_V\\circ E\\circ\\iota\\circ\\mathrm{Res}_A^{\\widehat A}$ (composition in application order), where $L_V(F)=\\varprojlim_n\\Gamma(V,F_{n+1})$ and $L_V(\\alpha)=\\varprojlim_n\\Gamma(V,\\alpha_{n+1})$. This is only the completed-module model, with no kernel, cokernel, exactness or annihilator assertion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W (lemma-inverse-systems-affine), its limiting-module construction and natural morphisms, and Lemma 087X (lemma-inverse-systems-abelian), affine reduction; checked at https://stacks.math.columbia.edu/tag/087W and https://stacks.math.columbia.edu/tag/087X."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine open subscheme V with Spec A by IsAffineOpen.isoSpec. The ideal sheaf transported along the inverse isomorphism is ofIdealTop of the ideal J transported along GammaSpecIso. Check this equality on affine sections: the top section-ring map of the canonical affine isomorphism is V.topIso.hom followed by GammaSpecIso.inv; ideal comap along an open immersion is ideal extension along that same map. Thus the resulting ideal is exactly J=I(V), including J=0 and J=A.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual termwise formal pullback functors for the affine isomorphism and its inverse, including their equalities after the full-subcategory inclusions. Pullback composition and identity natural isomorphisms cancel the two composites; fully faithful cancellation lifts them to formal modules. This constructs a transport equivalence whose underlying functor is the stated termwise pullback, rather than an unspecified abstract equivalence.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply coherentFormalModules_affine to A, J and the transported ideal with the equality from step 1. Compose its equivalence with the transport equivalence from step 2 to obtain E. The limiting cones p in that theorem specify the underlying A-module and commute with every morphism of formal modules. Their scalar action is along algebraMap A (AdicCompletion J A).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every global F, restrict termwise to V. For each level, restrictAppIso identifies its top sections with Gamma(V,F_n); scalar compatibility follows from smul_restrictAppIso_hom and the top-ring maps in step 1. Apply the Spec global-sections scalar transport to those comparisons to identify the entire A-module diagrams. Transport p through that diagram isomorphism, giving a limiting cone over the concrete section diagram. Its unique comparison with limit.cone gives an A-linear isomorphism. Naturality of p and uniqueness of lifts show these object comparisons commute with limit maps for every alpha, so assemble them with NatIso.ofComponents. This proves the asserted comparison after rho_V. Empty V gives only zero modules and the same construction.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "The natural affine-presentation comparison from Lemma 087W and the affine reduction in Lemma 087X, separated from exactness and annihilator transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv.annihilator_eq",
+   "results": "LinearEquiv.annihilator_eq",
+   "date": "2026-10-13",
+   "verdict": "Partial categorical/algebraic matches only; no exact natural affine completed-module model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of sections on an affine open of coherent formal modules is an exact functor preserving kernels and cokernels",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, instHasLimitsCondensedMod, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instHasLimits, Condensed.instAB5CondensedMod, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf",
+   "date": "2026-10-13",
+   "verdict": "Partial categorical/algebraic matches only; no exact natural affine completed-module model."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelIsoKer|cokernelIso",
+   "results": "Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Limits.lean, Mathlib/Algebra/Category/Grp/Limits.lean",
+   "date": "2026-10-13",
+   "verdict": "Partial categorical/algebraic matches only; no exact natural affine completed-module model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism from affine sections inverse limits of coherent adic systems to restriction of scalars of finite modules over adic completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent formal modules restricted to an affine open are equivalent to finite modules over the ideal-adic completion with underlying module naturally isomorphic to the inverse limit of sections",
+   "results": "AdicCompletion.ofLinearEquiv, AdicCompletion.module, AdicCompletion.ofLinearEquiv_apply, AdicCompletion, AdicCompletion.congr, localCohomology, IsAdicComplete, Hausdorffification",
+   "date": "2026-10-13",
+   "verdict": "Partial categorical/algebraic matches only; no exact natural affine completed-module model."
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*ModuleCat|ModuleCat.*AdicCompletion",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "Partial categorical/algebraic matches only; no exact natural affine completed-module model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleLimitAnnihilators",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine-model natural comparison needed in step 2 of lem-weil-pbc-formal-kernel-cokernel-limit-annihilators",
+   "via": [
+    "lem-weil-pbc-formal-kernel-cokernel-limit-annihilators",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineLimitModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineLimitModel.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_limit_model",
+  "statement": "theorem coherentFormalModule_affine_limit_model (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens) [IsNoetherian V.1.toScheme] : ∃ E : CoherentFormalModule V.1.toScheme (I.comap V.1.ι) ≌ ObjectProperty.FullSubcategory (fun N : ModuleCat.{u} (AdicCompletion (I.ideal V) Γ(X, V.1)) ↦ Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N), Nonempty (((IsCoherentFormalModule I).ι ⋙ (Functor.whiskeringRight ℕᵒᵖ X.Modules (ModuleCat Γ(X, V.1))).obj (SheafOfModules.evaluation X.ringCatSheaf (op V.1)) ⋙ lim) ≅ coherentFormalModulesRestriction I V.1 ⋙ E.functor ⋙ ObjectProperty.ι (fun N : ModuleCat.{u} (AdicCompletion (I.ideal V) Γ(X, V.1)) ↦ Module.Finite (AdicCompletion (I.ideal V) Γ(X, V.1)) N) ⋙ ModuleCat.restrictScalars (algebraMap Γ(X, V.1) (AdicCompletion (I.ideal V) Γ(X, V.1))))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

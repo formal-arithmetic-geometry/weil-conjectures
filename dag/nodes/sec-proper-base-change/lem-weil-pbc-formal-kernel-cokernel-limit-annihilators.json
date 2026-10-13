@@ -14,33 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Exact restriction to V preserves the given limiting fork and colimiting cofork.",
+   "text": "Obtain Noetherianness of the open subscheme from the open embedding, and Noetherianness of its affine section ring from IsLocallyNoetherian.component_noetherian. Apply AdicCompletion.isNoetherianRing to the section ideal. Prove the finite-module property is closed under subobjects by mono_iff_injective and isNoetherian_of_injective, and under quotients by epi_iff_surjective and Module.Finite.of_surjective. Thus its full-subcategory inclusion preserves kernels and cokernels.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the affine finite completed-module equivalence and the natural comparison for the concrete section-limit functor from the affine-limit model. Only proof data is chosen; no object or definition is built from arbitrary existence.",
+   "uses": [
+    "lem-weil-pbc-formal-affine-limit-model"
    ],
    "elementary": false
   },
   {
-   "text": "Identify V with Spec of A. The affine equivalence has underlying A-module the inverse limit of sections and is natural on morphisms. Equivalences preserve kernels and cokernels; finite modules over the Noetherian completion are closed under them, and restriction of scalars preserves both operations. This gives A-linear isomorphisms from L(k) and L(c) to the linear kernel and cokernel of L(alpha).",
+   "text": "Map the given limiting kernel fork and colimiting cokernel cofork successively through restriction, the equivalence, the finite-module inclusion and restriction of scalars. Restriction preserves finite limits and colimits; the equivalence preserves all existing ones; the inclusion preserves these two operations by the closure assertions just proved; scalar restriction preserves both. This gives preservation of the two parallel-pair diagrams by the composite functor.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-coherent-formal-modules-restriction-limits"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply LinearEquiv.annihilator_eq to both linear isomorphisms.",
+   "text": "Transport both preservation assertions to the concrete section-limit functor along the natural isomorphism. Compare its mapped fork and cofork with the categorical kernel and cokernel using uniqueness of (co)limits. Compose these isomorphisms with ModuleCat.kernelIsoKer and ModuleCat.cokernelIsoRangeQuotient. Apply LinearEquiv.annihilator_eq to their underlying linear equivalences to obtain the two desired equalities.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-modules-local-exactness"
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-formal-affine-limit-model",
+  "lem-weil-pbc-coherent-formal-modules-restriction-limits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U2",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W and Lemma 087X, affine kernel/cokernel calculation; https://stacks.math.columbia.edu/tag/087X"
+  "place": "Lemma 087W and Lemma 087X; affine-model transport separated from the proved finite-module closure, (co)limit preservation and annihilator comparison. Sources checked at https://stacks.math.columbia.edu/tag/087W and https://stacks.math.columbia.edu/tag/087X."
  },
  "mathlib_searches": [
   {
@@ -123,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T022426-L-3217928",
+  "landing": "20261013T040802-L-3953541",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
