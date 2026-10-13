@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-generic-open-geometric-fibre-density",
+ "kind": "statement",
+ "title": "Spread density of an open into every geometric fibre",
+ "statement": "Let f:X→T be a finite type scheme morphism, η a generic point of T, and W an open subscheme of X. Suppose both X_η and W_η are geometrically irreducible. There is an open U containing η such that for every t in U and every field K with Spec K→Spec κ(t), the canonical inclusion W_t×κ(t)Spec K→X_t×κ(t)Spec K has dense range. Geometric irreducibility includes nonemptiness.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054X (Lemma 37.24.3), its use in Tag 0559, second proof; Tag 0383."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "The open W_η is nonempty in the irreducible X_η, so is dense. Its closed complement Z_η is nowhere dense. Reduce the base to an integral scheme without changing fibre spaces. Generic flat finite presentation, applied to X and the reduced complement Z, gives a common generic neighbourhood where both morphisms are flat and locally finitely presented.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If Z_t has interior in X_t, choose a generic point ξ of an irreducible component of X_t in Z_t. Flatness of Z gives a generalization ξ′ in Z_η. Stacks Lemma 37.22.10 equates the fibre dimensions of Z and X at these points, contradicting the nowhere dense generic complement. This is the proof of Tag 054X and yields a neighbourhood where W_t is dense in X_t.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A residue-field extension is faithfully flat and universally open (Tag 0383), hence its base-change projection is an open surjection. The inverse image of W_t is dense. The canonical double pullback map in the statement is its open inclusion, so has dense range.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-generic-flat-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054X (Lemma 37.24.3), its use in Tag 0559, second proof; Tag 0383.",
+  "note": "Source read online; explicit agent-written specialization and geometric-base-change glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A source open with nonempty generic fibre is dense in all geometric fibres after shrinking a finite type morphism with geometrically irreducible generic fibre",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A source open with nonempty generic fibre is dense in all geometric fibres after shrinking a finite type morphism with geometrically irreducible generic fibre",
+   "digest": "af215b04b601daea",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.IsDominant, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*dense|dense.*fiber|nowhere.*dense",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Generic geometric fibre shrinking in the intermediate component-spreading route: Tag 054X (Lemma 37.24.3), its use in Tag 0559, second proof; Tag 0383.",
+   "via": [
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericOpenGeometricFibreDensity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericOpenGeometricFibreDensity.lean",
+  "declaration": "AlgebraicGeometry.exists_open_geometric_fibre_dense_of_open",
+  "statement": "theorem exists_open_geometric_fibre_dense_of_open {X T : Scheme.{u}}\n    (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]\n    (W : X.Opens) (η : T) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (f.fiberToSpecResidueField η))\n    (hWgeom : GeometricallyIrreducible ((W.ι ≫ f).fiberToSpecResidueField η)) :\n    ∃ U : T.Opens, η ∈ U ∧\n      ∀ (t : T), t ∈ U → ∀ (K : Type u) [Field K]\n        (z : Spec (.of K) ⟶ Spec (T.residueField t)),\n        DenseRange (pullback.map ((W.ι ≫ f).fiberToSpecResidueField t) z\n          (f.fiberToSpecResidueField t) z\n          (pullback.map (W.ι ≫ f) (T.fromSpecResidueField t) f\n            (T.fromSpecResidueField t) W.ι (𝟙 _) (𝟙 _) (by simp) (by simp))\n          (𝟙 _) (𝟙 _) (by simp [Scheme.Hom.fiberToSpecResidueField]) (by simp))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T065112-L-899769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T065112-L-899769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

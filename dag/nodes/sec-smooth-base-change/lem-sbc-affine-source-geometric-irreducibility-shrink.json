@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-affine-source-geometric-irreducibility-shrink",
+ "kind": "statement",
+ "title": "Spread geometric irreducibility for an affine source with affine target image",
+ "statement": "Let X be an affine scheme and f:X→T a locally finite type morphism whose image lies in an affine open V of T. Let η be a generic point of T, and suppose X_η is geometrically irreducible. There exists an open U of T containing η such that every fibre X_t for t in U is geometrically irreducible. No global quasi-compactness of the open immersion V→T is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0559, second proof, affine-source case; Tags 0557 and 054X."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Nonemptiness of X_η puts η in V. Factor f through V; the map between affine schemes is finite type. Reduce source and base and use generic flat finite presentation to arrange a reduced affine source over an integral affine base with flat finitely presented morphism.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the affine rings as A and B. Make the generic source fraction field separably generated after a finite purely inseparable base extension. Spread this extension by scaling a generator b with b^q=a/d to db, whose q-th power is integral over A. The generated finite radicial algebra has the chosen fraction field and defines a universal homeomorphism. Base change, reduce, and restore flat finite presentation by generic flatness.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A separating transcendence basis and a final algebraic generator give an absolutely irreducible hypersurface with the same generic function field. Clear denominators to obtain a common affine open. Apply the geometric fibre density theorem to this open on both sides. Tag 0557 spreads absolute irreducibility by making the polynomial monic, constructing finite coefficient algebras for positive monic factor-degree pairs, applying Nullstellensatz at the generic fibre, and killing these algebras by inverting a finite product of nonzero base elements.",
+   "uses": [
+    "lem-sbc-generic-open-geometric-fibre-density"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The common dense open transfers irreducibility from the hypersurface to the original fibres. Shrink to the open image of the flat finitely presented map for nonemptiness. Descend the neighbourhood through universal homeomorphisms and then through V→T; it contains η because every nonempty open of the irreducible base contains its generic point.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-generic-open-geometric-fibre-density"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0559, second proof, affine-source case; Tags 0557 and 054X.",
+  "note": "Source read online; explicit agent-written specialization and geometric-base-change glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine finite type scheme with geometrically irreducible generic fibre over an integral affine base has geometrically irreducible nearby fibres",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type scheme with geometrically irreducible generic fibre over an integral affine base has geometrically irreducible nearby fibres",
+   "digest": "03c51300909a58dd",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*geometrically|irreducib.*specializ|absolute.*irreducib",
+   "digest": "e88583a01131acae",
+   "date": "2026-10-13",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Generic geometric fibre shrinking in the intermediate component-spreading route: Tag 0559, second proof, affine-source case; Tags 0557 and 054X.",
+   "via": [
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSourceGeometricIrreducibilityShrink",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSourceGeometricIrreducibilityShrink.lean",
+  "declaration": "AlgebraicGeometry.exists_open_affine_source_geometric_irreducibility_shrink",
+  "statement": "theorem exists_open_affine_source_geometric_irreducibility_shrink\n    {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]\n    (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)\n    (η : T) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (f.fiberToSpecResidueField η)) :\n    ∃ U : T.Opens, η ∈ U ∧ ∀ t, t ∈ U →\n      GeometricallyIrreducible (f.fiberToSpecResidueField t)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T065112-L-899769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T065112-L-899769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
