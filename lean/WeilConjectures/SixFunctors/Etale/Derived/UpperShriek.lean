@@ -31,7 +31,7 @@ which is taken as an instance argument.
   on the unbounded derived categories.
 
 - `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
-  below objects under an explicit finite-amplitude hypothesis; and
+  below objects, an instance for torsion coefficients; and
   `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
 
 ## Implementation notes
@@ -51,9 +51,11 @@ which is taken as an instance argument.
 * There is no underived `f^!`, but the notation still carries the `R` of `R(f)_![A]` and
   `R((g)_*[A])`, to mark that it lives on derived categories rather than on sheaves.
 * No bounded below variant of `Rf^!` is defined here. The ambient `Rf^!` preserves `D⁺` only
-  through a supplied finite cohomological amplitude bound for `Rf_!`. That preservation is
-  recorded, together with the existence of `Rf^!`, by the hypothesis class
-  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes.
+  through the finite cohomological amplitude of `Rf_!`, and the bounded below exceptional
+  functor of the blueprint is the constructible one of `sk-prop-sf-existence` (c). That `Rf^!`
+  preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
+  is an instance for torsion coefficients (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
 
 ## TODO
 
@@ -143,9 +145,16 @@ end Unbounded
 
 section BoundedBelow
 
-/-- A bounded-below exceptional inverse image is an additional hypothesis on the morphism.
-Torsion coefficients alone do not provide it for an arbitrary compactifiable morphism, since
-fibre dimensions may be unbounded on disconnected schemes. -/
+/-- `Rf_!` is a left adjoint whose right adjoint `Rf^!` preserves bounded below objects: if
+`K ∈ D(Y_ét)` is bounded below, then so is `Rf^! K ∈ D(X_ét)`.
+
+This is what the constructible pro-étale `Rf^!`
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) needs of the étale one. Neither half
+holds for an arbitrary coefficient category: both rest on the finite cohomological amplitude of
+the proper direct image, that is, on torsion coefficients, where the class is the instance
+`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`. Note that `Rf^!` is not left t-exact:
+the bound it produces is shifted by the cohomological amplitude of `Rf_!`, which is why the
+condition is about `t.plus` rather than about `IsGE n` for a fixed `n`. -/
 class HasBoundedBelowUpperShriek : Prop extends (R(f)_![A]).IsLeftAdjoint where
   plus_rightDerivedUpperShriek_obj (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     DerivedCategory.TStructure.t.plus K →
@@ -159,14 +168,32 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- A bounded-below exceptional inverse image for every morphism, supplied by a separate
-finite-amplitude hypothesis. -/
+/-- For torsion coefficients, `Rf_!` is a left adjoint
+(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
+below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
+by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
+then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. -/
+-- STATEMENT-DISPUTED: fibre dimensions need not have a uniform global bound.
+-- The proper map ⨿ₙ Pⁿ → ⨿ₙ Spec ℂ has Rf^! Λ of cohomological degrees -2n.
+-- Thus a degree-zero object can have an exceptional inverse image outside D⁺.
+instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
+  plus_rightDerivedUpperShriek_obj := sorry
+
+/-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
+compactification: the coefficients have exceptional inverse images preserving bounded below
+objects. This holds for torsion coefficients
+(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks`). -/
 class HasBoundedBelowUpperShrieks : Prop where
   hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     HasBoundedBelowUpperShriek A f
 
 attribute [instance] HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
 
+/-- Torsion coefficients have exceptional inverse images preserving bounded below objects. -/
+instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
+  hasBoundedBelowUpperShriek _ _ := inferInstance
 
 end BoundedBelow
 

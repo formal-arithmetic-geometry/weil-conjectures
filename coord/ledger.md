@@ -13392,7 +13392,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/P2/Sheaf.Paper.GlobalTensorPullbackKFlat (stage 3; reviewer PASS; first push; landing 20261013T190150-L-3219598 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/P2/Sheaf.Paper.GlobalTensorPullbackTensorDescent (stage 3; reviewer PASS; first push; landing 20261013T190150-L-3219701 (proof); batch 20261013T190131; modules 1; new nodes 0)
 - 19:01 L: merged deliver/P2/Sheaf.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization (stage 3; reviewer PASS; after a return; landing 20261013T190151-L-3219893 (interface); batch 20261013T190131; modules 3; new nodes 2; change records: coord/changes/etaleResidueTriplesLocalizedStrictHenselization.md)
-- 19:01 L: merged deliver/P3/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (stage 3; reviewer PASS; after a return; landing 20261013T190151-L-3220102 (interface); batch 20261013T190131; modules 1; new nodes 0; change records: coord/changes/hasBoundedBelowUpperShriek.md)
 - 19:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison (stage 3; reviewer PASS; first push; landing 20261013T190152-L-3220210 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/S2/Sheaf.AlgebraicGeometry.OpenPinnedTensorCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T190152-L-3220432 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/S3/Sheaf.Algebra.Homology.LocalizedTensorComparisonShift (stage 3; reviewer PASS; first push; landing 20261013T190153-L-3220602 (interface); batch 20261013T190131; modules 2; new nodes 1)
@@ -13435,3 +13434,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:31 L: returned deliver/R4/Sheaf.Topology.RingedModuleSkyscraper (reviewer RETURN: (reviewer X-2785a, head 2785a2380) H2: dag/nodes/sec-picard-framework/def-pc-ringed-module-skyscraper.json:156 has a sta)
 - 19:47 L: returned deliver/T4/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData (reviewer RETURN: (reviewer X-5ea8e, head 5ea8eb77f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.De)
 - 19:53 L: returned deliver/E1/Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition (reviewer RETURN: (reviewer X-e5fdb, head e5fdb65ea) C4/C5/C6: In dag/nodes/sec-abelian-varieties/lem-sc-canonical-termwise-single-map-fac)
+
+- 03:54 L: batch 20261013T190131 dependency take-out
