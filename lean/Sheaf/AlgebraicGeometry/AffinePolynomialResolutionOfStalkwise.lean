@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPolynomial.Basic
+import Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedFiniteProjectiveDimension
+import Sheaf.RingTheory.ProjectiveDimensionLocusOpen
+import Sheaf.RingTheory.ProjectiveResolutionExtDegree
 
 /-! # A bounded polynomial resolution from finite stalk Tor dimension
 
@@ -20,6 +23,28 @@ Source: Stacks Project, Tag 069C, proof of (3) implies (1), and Tags 068X and 06
 universe u
 
 open CategoryTheory CategoryTheory.Limits
+
+private theorem finite_projectiveDimension_of_localized
+    {R : Type u} [CommRing R] [IsNoetherianRing R]
+    (M : ModuleCat.{u} R) [Module.Finite R M]
+    (h : ∀ p : PrimeSpectrum R, ∃ n : ℕ,
+      HasProjectiveDimensionLE (M.localizedModule p.asIdeal.primeCompl) n) :
+    ∃ n : ℕ, HasProjectiveDimensionLE M n := by
+  classical
+  let O (n : ℕ) : Set (PrimeSpectrum R) :=
+    {p | HasProjectiveDimensionLE (M.localizedModule p.asIdeal.primeCompl) n}
+  have hcover : Set.univ ⊆ ⋃ n, O n := by
+    intro p _
+    obtain ⟨n, hn⟩ := h p
+    exact Set.mem_iUnion.mpr ⟨n, hn⟩
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover O
+    (fun n ↦ ModuleCat.isOpen_hasProjectiveDimensionLE_locus M n) hcover
+  refine ⟨s.sup id, (M.hasProjectiveDimensionLE_iff_forall_primeSpectrum _).mpr ?_⟩
+  intro p
+  obtain ⟨n, hn, hpn⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ p))
+  have : HasProjectiveDimensionLE (M.localizedModule p.asIdeal.primeCompl) n := hpn
+  exact hasProjectiveDimensionLT_of_ge _ (n + 1) (s.sup id + 1)
+    (Nat.add_le_add_right (Finset.le_sup (f := id) hn) 1)
 
 namespace AlgebraicGeometry
 
@@ -54,6 +79,22 @@ theorem affinePolynomial_boundedResolution_of_stalkwise
     (hcomp : g.comp (MvPolynomial.C) = (f.appLE U V e).hom) :
     ∃ (d : ℕ) (P : ProjectiveResolution
         ((ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V)))),
-      ∀ i : ℕ, d < i → IsZero (P.complex.X i) := by sorry
+      ∀ i : ℕ, d < i → IsZero (P.complex.X i) := by
+  let R := MvPolynomial (Fin n) Γ(Y, U)
+  let M := (ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))
+  have : IsNoetherianRing Γ(Y, U) := IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+  have : IsNoetherianRing R := inferInstance
+  let φ : ModuleCat.of R R ⟶ M :=
+    ModuleCat.semilinearMapAddEquiv g _ _ g.toSemilinearMap
+  have hφ : Function.Surjective φ.hom := hg
+  have : Module.Finite R M := Module.Finite.of_surjective φ.hom hφ
+  obtain ⟨d, hd⟩ := finite_projectiveDimension_of_localized (R := R) M
+    (affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise
+      f hperfect U hU V hV e n g hg hcomp)
+  have : HasProjectiveDimensionLE M d := hd
+  let := HasExt.standard (ModuleCat.{u} R)
+  obtain ⟨P, hP⟩ := (ModuleCat.projective_resolution_ext_degree.{u, u} (R := R) M d).mpr
+    (fun N ↦ HasProjectiveDimensionLT.subsingleton M (d + 1) (d + 1) le_rfl N)
+  exact ⟨d, P, hP⟩
 
 end AlgebraicGeometry

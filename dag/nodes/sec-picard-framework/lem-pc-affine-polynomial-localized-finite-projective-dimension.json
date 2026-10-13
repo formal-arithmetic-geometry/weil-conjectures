@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-affine-polynomial-localized-finite-projective-dimension",
+ "kind": "statement",
+ "title": "Pointwise finite projective dimension of an affine polynomial presentation",
+ "statement": "Let f : X → Y be a locally finite type morphism of schemes [def-pc-scheme], with Y Noetherian [pqf-def-locnoeth] and HasStalkwiseFiniteTorDimension f [def-pc-perfect-morphism]. Let U and V be affine opens with V ⊆ f⁻¹(U), and g : R = Γ(Y,U)[t₁,...,tₙ] → Γ(X,V) a surjective homomorphism compatible with the coordinate map. Put M = Γ(X,V), viewed as an R-module through g. For every prime p of R there exists a natural d such that Ext^i_{R_p}(M_p,N) = 0 for every R_p-module N and every i ≥ d+1 [def-pc-ext]. Equivalently the categorical localized module has HasProjectiveDimensionLE M_p d. The bound may depend on p; n = 0 and M = 0 are allowed [def-weil-pbc-finite-global-dimension].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-perfect-morphism",
+  "def-pc-ext",
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [
+  {
+   "text": "A = Γ(Y,U) is Noetherian and R = A[t₁,...,tₙ] is Noetherian by the Hilbert basis theorem. The surjection g makes B = Γ(X,V) finite over R. Fix a prime q of R. If ker(g) is not contained in q, invert an element of ker(g) outside q: it is simultaneously invertible and annihilates B_q, so B_q = 0 and all its positive Ext groups vanish.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-pc-scheme",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
+   }
+  },
+  {
+   "text": "Otherwise q corresponds to a prime of B and hence a point x of V. The affine stalk/localization isomorphisms identify B_q with O_{X,x}, and A_p with O_{Y,f(x)}, where p is the contraction of q to A. The equation g.comp C = f.appLE identifies the scalar actions with the stalk map. HasStalkwiseFiniteTorDimension supplies a finite Tor bound over A_p.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-perfect-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
+   }
+  },
+  {
+   "text": "The map A_p → R_q is flat; each of its fibres is a localization of a polynomial ring over a field and has global dimension at most n. B_q[0] is pseudo-coherent by the Noetherian finite-module property. Tag 068X makes it perfect over R_q. In a finite free resolution, dimension shifting and the finite Tor bound make a high syzygy flat; it is finitely presented, hence projective. Truncation gives a finite projective resolution. Computing Ext using that resolution yields a natural d with HasProjectiveDimensionLE B_q d. No global bound is chosen here.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ext",
+  "def-pc-perfect-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-finite-global-dimension",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 069C, proof of (3) implies (1), and More on Algebra, Tag 068X; https://stacks.math.columbia.edu/tag/069C; https://stacks.math.columbia.edu/tag/068X; sources read online; Lean written by N3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible affine polynomial presentation of a morphism with stalkwise finite Tor dimension has finite projective dimension at each prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian ring with finite projective dimension at every prime has finite projective dimension",
+   "results": "Returned projectiveDimension_ne_top_iff and projectiveDimension_le_iff, not the affine stalkwise-to-localized polynomial criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLE",
+   "results": "Found the Ext-defined predicate and Mathlib local-to-global criterion for a fixed bound, but no affine stalkwise criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "068X|068W|069C|finite projective dimension|HasStalkwiseFiniteTorDimension",
+   "results": "Searched both library roots and DAG. Only the parent and its already dependent affine-sections theorem give the global result; neither can prove the pointwise step without a cycle. Mathlib has projective-dimension localization, no Tag 068X. Blueprint search for 068X and localized finite projective dimension returned no match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePolynomialResolutionOfStalkwise",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Pointwise perfection and gluing in the relative finite Tor step descending from lem-sc-finite-duality; Pointwise finite projective dimension of an affine polynomial presentation",
+   "via": [
+    "lem-pc-affine-polynomial-resolution-of-stalkwise",
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedFiniteProjectiveDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePolynomialLocalizedFiniteProjectiveDimension.lean",
+  "declaration": "AlgebraicGeometry.affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise",
+  "statement": "theorem affinePolynomial_localized_finiteProjectiveDimension_of_stalkwise\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (f : X ⟶ Y) [LocallyOfFiniteType f]\n    (hperfect : HasStalkwiseFiniteTorDimension f)\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (V : X.Opens) (hV : IsAffineOpen V) (e : V ≤ f ⁻¹ᵁ U)\n    (n : ℕ) (g : MvPolynomial (Fin n) Γ(Y, U) →+* Γ(X, V))\n    (hg : Function.Surjective g)\n    (hcomp : g.comp (MvPolynomial.C) = (f.appLE U V e).hom) :\n    ∀ p : PrimeSpectrum (MvPolynomial (Fin n) Γ(Y, U)), ∃ d : ℕ,\n      HasProjectiveDimensionLE\n        (((ModuleCat.restrictScalars g).obj (ModuleCat.of Γ(X, V) Γ(X, V))).localizedModule\n          p.asIdeal.primeCompl) d",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T113349-L-3186297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T113349-L-3186297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

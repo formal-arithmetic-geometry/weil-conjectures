@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-projective-dimension-locus-open",
+ "kind": "statement",
+ "title": "Openness of a fixed projective-dimension bound",
+ "statement": "Let R be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], M a finite R-module [def-weil-finitely-generated-module], and n a natural number. The set of primes p of R such that Ext^i_{R_p}(M_p,N) vanishes for every R_p-module N and every i ≥ n+1 [def-pc-ext] is open in Spec R. In Lean this is the locus of HasProjectiveDimensionLE (M.localizedModule p.primeCompl) n. This includes n = 0 and M = 0.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, finite projective modules and local freeness; dimension shifting applied to finite free presentations; More on Algebra, Tag 068V; https://stacks.math.columbia.edu/tag/00NX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Induct on n, generalizing M. For n = 0 use projective_iff_hasProjectiveDimensionLE_zero and IsProjective.iff_projective. Identify the categorical localized module (a Shrink model) with the usual localized module using Module.mem_freeLocus_of_isLocalization and localizedModuleMkLinearMap. A finite projective module over a local ring is free by Module.free_of_flat_of_isLocalRing, and a free module is projective. Thus the locus is Module.freeLocus R M. Finite modules over a Noetherian ring are finitely presented, and Module.isOpen_freeLocus makes this locus open.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module",
+    "def-pc-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, finite projective modules and local freeness; dimension shifting applied to finite free presentations; More on Algebra, Tag 068V; https://stacks.math.columbia.edu/tag/00NX"
+   }
+  },
+  {
+   "text": "For n + 1 take Module.exists_finite_presentation R M, with finite projective middle module P and surjection f onto M. Its kernel is finite by Noetherianity. Form f.shortComplexKer and localize it at each prime. Exactness is preserved by localizedModuleFunctor, as is projectivity of P. Apply ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff to identify the locus of bound n + 1 for M with the locus of bound n for the kernel. Apply the induction hypothesis to the kernel. These are the exact steps of the delivered Lean proof.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module",
+    "def-pc-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, finite projective modules and local freeness; dimension shifting applied to finite free presentations; More on Algebra, Tag 068V; https://stacks.math.columbia.edu/tag/00NX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ext",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, finite projective modules and local freeness; dimension shifting applied to finite free presentations; More on Algebra, Tag 068V; https://stacks.math.columbia.edu/tag/00NX; sources read online; Lean written by N3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The locus of prime ideals where a finite module over a Noetherian ring has projective dimension at most n is open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a finite module over a Noetherian ring has projective dimension at most n is open",
+   "results": "Found Module.isOpen_freeLocus, basicOpen_subset_freeLocus_iff, and projective-dimension numerical predicates. No exact fixed-projective-dimension locus theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; theorem proved by induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.isOpen_freeLocus",
+   "results": "Found the open free locus of a finitely presented module; this proves the base case of the induction.",
+   "date": "2026-10-13",
+   "verdict": "base-case match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasProjectiveDimensionLE|isOpen_freeLocus|projective.*locus",
+   "results": "Mathlib local-properties ProjectiveDimension and Prime.FreeLocus provide exact localization, dimension shifting and open free locus. No identical theorem in either library root or DAG. Blueprint search projective dimension locus returned no match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; proof completed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePolynomialResolutionOfStalkwise",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Pointwise perfection and gluing in the relative finite Tor step descending from lem-sc-finite-duality; Openness of a fixed projective-dimension bound",
+   "via": [
+    "lem-pc-affine-polynomial-resolution-of-stalkwise",
+    "lem-pc-affine-sections-finite-tor-of-stalkwise",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ProjectiveDimensionLocusOpen",
+  "file": "lean/Sheaf/RingTheory/ProjectiveDimensionLocusOpen.lean",
+  "declaration": "ModuleCat.isOpen_hasProjectiveDimensionLE_locus",
+  "statement": "theorem isOpen_hasProjectiveDimensionLE_locus\n    {R : Type u} [CommRing R] [IsNoetherianRing R]\n    (M : ModuleCat.{u} R) [Module.Finite R M] (n : ℕ) :\n    IsOpen {p : PrimeSpectrum R |\n      HasProjectiveDimensionLE (M.localizedModule p.asIdeal.primeCompl) n}",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T113349-L-3186297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T113349-L-3186297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
