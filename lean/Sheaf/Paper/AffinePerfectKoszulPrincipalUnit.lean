@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.ShiftedKoszulAugmentation
-import Sheaf.Paper.KoszulComplex
+import Sheaf.Paper.AffinePerfectKoszulPrincipalUnitPerfect
+import Sheaf.Paper.AffinePerfectKoszulPrincipalUnitIso
 
 /-! # Powers Koszul complexes are perfect on a principal-open cover
 
@@ -59,6 +60,7 @@ theorem affine_perfect_koszul_principal_unit
         (⨆ i : Fin r, (Spec (.of A)).basicOpen
           ((Scheme.ΓSpecIso (.of A)).inv (f i)))).mapDerivedCategory).map
             (affineKoszulAugmentation A r (fun i ↦ f i ^ e))) := by
-  sorry
+  exact ⟨affine_perfect_koszul_principal_unit_perfect A r f e he,
+    affine_perfect_koszul_principal_unit_iso A r f e he⟩
 
 end AlgebraicGeometry
