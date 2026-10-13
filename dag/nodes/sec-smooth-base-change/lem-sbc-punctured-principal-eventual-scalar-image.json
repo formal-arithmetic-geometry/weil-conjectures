@@ -47,38 +47,28 @@
  "statement": "Let R be a Noetherian commutative local ring [def-weil-pbc-noetherian-ring] of depth at least three [def-weil-pbc-depth], g in its maximal ideal, and W its punctured spectrum [def-weil-pbc-scheme-conventions]. For the quotient map f:R to R/(g) and every n, there is a finite gap k such that every section on openThickening f W (n+k) [lem-sbc-finite-etale-adic-sections-transfer] restricts to the scalar image of R at level n. Restriction is the recursively composed k consecutive openThickeningTransition.appTop maps, with identity at k=0. The gap is independent of the section, and no compatible infinite family is assumed.",
  "proof": [
   {
-   "text": "Depth at least three implies depth at least two. Use canonical depth-two Hartogs restriction [lem-sbc-depth-two-puncture-global-sections] to identify Gamma(W,O_W) with R. Tags 0AVY and 0BK0 identify H^1(W,O_W) with H^2_m(R), which vanishes under depth three.",
+   "text": "Depth three implies depth two. Apply canonical depth-two Hartogs and GammaSpecIso to obtain surjectivity of the scalar restriction R->Gamma(W,O_W). Apply the depth-three puncture H^1 lemma to obtain the vanishing hypothesis needed by the lifting lemma.",
    "uses": [
     "def-weil-pbc-depth",
-    "lem-sbc-depth-two-puncture-global-sections"
+    "lem-sbc-depth-two-puncture-global-sections",
+    "lem-sbc-depth-three-puncture-h-one"
    ],
    "elementary": false
   },
   {
-   "text": "Put F=O_W. The ascending ideals Ann_R(g^j) stabilize because R is Noetherian. Their restrictions identify with F[g^j], since localization is exact. Choose c which both bounds the stabilization index and annihilates the stabilized torsion sheaf. Form E_j=[F --g^j--> F] in degrees -1,0. Its transition to E_(j-1) is g in degree -1 and the identity in degree 0. The natural map E_j to F/g^j F has cone F[g^j][2]. A sufficiently long transition of these cones is zero. This is the pro-isomorphism explicitly stated in 0H3E.",
+   "text": "The kernels of scalar multiplication by g^j form an increasing chain of R-submodules of R. Mathlib monotone_stabilizes_iff_noetherian makes the chain constant from c on. For j>=c use equality of kernels; for j<=c use monotonicity. Consequently g^c kills every element killed by any g^j. This is the private proved scalar_power_torsion_bound helper.",
    "uses": [
     "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derived global sections to this pro-isomorphism and then degree-zero cohomology. Zero error transitions stay zero after derived global sections; the long exact sequences show that both the kernels and cokernels of the induced cohomology maps form pro-zero systems (enlarge the bound to accommodate both adjacent connecting maps). Since H^1(W,F)=0, H^0(R Gamma(W,E_j)) is exactly Gamma(W,F)/g^j Gamma(W,F)=R/g^j R, by the triangle for multiplication by g. The induced comparison is the canonical scalar quotient restriction.",
+   "text": "Apply principal_thickening_sections_lift to this c, the H^1 vanishing and the recursive puncturedPrincipalSectionRestriction (whose two recursion laws are reflexivity). Choose the same gap c at every n. Lift the resulting ambient section through Hartogs surjectivity, then use comp_appTop and associativity to identify the resulting scalar map with the exact map in the goal.",
    "uses": [
-    "def-weil-pbc-depth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The kernel I of R to R/(g) equals (g), and I^j=(g^j). Under the second pullback projection, the structure sheaf on openThickening f W n pushes forward to F/g^(n+1)F. The quotient maps induce the stated transitions. Naturality of GammaSpecIso and the pullback square identify the scalar comparison with GammaSpecIso.inv followed by (openThickeningMap f W n composed with W.ι).appTop.",
-   "uses": [
+    "lem-sbc-principal-thickening-sections-lift",
     "lem-sbc-finite-etale-adic-sections-transfer",
     "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The cokernel comparison is pro-zero by the preceding steps. For each n choose m=n+k at which its transition to n is zero. Every section at m therefore has scalar restriction at n. This does not require an infinite family. The recursive restriction is exactly the composite of quotient transitions. For g=0 use k=0 and Hartogs; for nilpotent g take m beyond the nilpotence exponent.",
-   "uses": [],
    "elementary": false
   }
  ],
@@ -86,13 +76,15 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-scheme-conventions",
+  "lem-sbc-depth-three-puncture-h-one",
   "lem-sbc-depth-two-puncture-global-sections",
-  "lem-sbc-finite-etale-adic-sections-transfer"
+  "lem-sbc-finite-etale-adic-sections-transfer",
+  "lem-sbc-principal-thickening-sections-lift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Finite-stage cokernel consequence of 0H3E and the depth comparison in 0BK0 and 0AVY; the first four steps of the parent proof plan."
+  "place": "Finite-stage cokernel consequence of 0H3E and depth comparison; reduced using two intermediate comparison lemmas."
  },
  "mathlib_searches": [
   {
@@ -159,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T181122-L-2607134",
+  "landing": "20261013T190203-L-3224509",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
