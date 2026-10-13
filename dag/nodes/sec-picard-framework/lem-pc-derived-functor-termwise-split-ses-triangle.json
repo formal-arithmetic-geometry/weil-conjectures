@@ -28,56 +28,50 @@
  ],
  "proof": [
   {
-   "text": "Choose degreewise retractions $\\pi^n:\\mathcal I_2^n\\to\\mathcal I_1^n$ and sections $s^n:\\mathcal I_3^n\\to\\mathcal I_2^n$ with $\\pi^n i^n=\\mathrm{id}$, $p^n s^n=\\mathrm{id}$, $i^n\\pi^n+s^n p^n=\\mathrm{id}$. Since $g_*$ is additive [def-pc-ringed-spaces-derived-direct-image], applying it to these identities shows that $0\\to g_*\\mathcal I_1^\\bullet\\to g_*\\mathcal I_2^\\bullet\\to g_*\\mathcal I_3^\\bullet\\to0$ is degreewise split short exact with retractions $g_*\\pi^n$ and sections $g_*s^n$; and $g_*(-d)=-g_*(d)$ gives $g_*(\\mathcal I_1^\\bullet[1])=(g_*\\mathcal I_1^\\bullet)[1]$ (elementary). By [lem-weil-pbc-degreewise-split-connecting-morphism] and [lem-weil-pbc-degreewise-split-derived-triangle] the connecting morphism $\\delta$ of [lem-weil-pbc-complex-ses-triangle] is $Q$ of the chain map $\\pi^{n+1}d^n_{\\mathcal I_2}s^n$, with the sign fixed by the cone convention; applied in $\\Mod(\\mathcal B)$ to the image sequence with the splittings $g_*\\pi$, $g_*s$, the same nodes give $\\delta'=Q(g_*\\pi^{n+1}\\circ g_*d^n_{\\mathcal I_2}\\circ g_*s^n)=Q(g_*(\\pi^{n+1}d^n_{\\mathcal I_2}s^n))$, since $g_*$ preserves composition.",
+   "text": "For each degree, map a chosen splitting by the additive module direct image [def-pc-ringed-spaces-derived-direct-image]. Mathlib ShortComplex.Splitting.map preserves the retraction, section and sum identities. Its exact, mono_f and epi_g give degreewise short exactness, and HomologicalComplex.shortExact_of_degreewise_shortExact gives short exactness of the image complex sequence. This also supplies the asserted degreewise splittings.",
    "uses": [
-    "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-degreewise-split-connecting-morphism",
-    "lem-weil-pbc-degreewise-split-derived-triangle",
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0152, construction of the canonical delta-functor from a short exact sequence"
-   }
-  },
-  {
-   "text": "A shift of a K-injective complex is K-injective, since acyclic complexes are stable under shift and $\\operatorname{Hom}_{K}(\\mathcal N^\\bullet,\\mathcal I_1^\\bullet[1])=\\operatorname{Hom}_K(\\mathcal N^\\bullet[-1],\\mathcal I_1^\\bullet)$ [def-pur-kinjective-complex] (elementary). For a chain map $u:\\mathcal K^\\bullet\\to\\mathcal K'^\\bullet$ between K-injective complexes, the definition [def-pc-ringed-spaces-derived-direct-image] gives $Rg_*(Qu)=Q(g_*I(u))$ with the functorial K-injective resolutions $\\iota_{\\mathcal K}:\\mathcal K^\\bullet\\to I(\\mathcal K^\\bullet)$, which are homotopy equivalences between K-injective complexes and satisfy $I(u)\\iota_{\\mathcal K}=\\iota_{\\mathcal K'}u$; $g_*$ carries homotopies to homotopies, and $\\varphi_{\\mathcal K}$ is the inverse of $Q(g_*\\iota_{\\mathcal K})$. Hence $\\varphi_{\\mathcal K'}\\circ Rg_*(Qu)=Q(g_*u)\\circ\\varphi_{\\mathcal K}$. Applied to $u=i$, $u=p$ and to the chain map $\\pi d_{\\mathcal I_2}s:\\mathcal I_3^\\bullet\\to\\mathcal I_1^\\bullet[1]$ of Step 1 (whose $Q$ is $\\delta$), this gives the three asserted identities, the last because $Q(g_*(\\pi d_{\\mathcal I_2}s))=\\delta'$ by Step 1.",
-   "uses": [
-    "def-pur-kinjective-complex",
     "def-pc-ringed-spaces-derived-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "K-injective construction of right derived functors"
-   }
+   "elementary": true
   },
   {
-   "text": "The triangle of the image sequence $g_*\\mathcal I_1^\\bullet\\to g_*\\mathcal I_2^\\bullet\\to g_*\\mathcal I_3^\\bullet\\xrightarrow{\\delta'}(g_*\\mathcal I_1^\\bullet)[1]$ is distinguished in $D(\\mathcal B)$ [lem-weil-pbc-complex-ses-triangle]. By Step 2 the isomorphisms $(\\varphi_{\\mathcal I_1},\\varphi_{\\mathcal I_2},\\varphi_{\\mathcal I_3})$ commute with the first two maps, and with the third map $\\varphi_{\\mathcal I_1}[1]^{-1}\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta)$ because $\\varphi_{\\mathcal I_1}[1]\\circ(\\varphi_{\\mathcal I_1}[1]^{-1}\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta))=\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta)=\\delta'\\varphi_{\\mathcal I_3}$. A triangle isomorphic to a distinguished triangle is distinguished [def-weil-triangulated-category], which gives the conclusion.",
+   "text": "Whisker the right-derived unit with the homotopy quotient and the two quotient/localization comparison isomorphisms of [def-pc-ringed-spaces-derived-direct-image]. This gives a natural transformation beta from termwise direct image followed by Q to Q followed by Rg_*. On a K-injective K, beta_K is exactly the inverse of the displayed phi_K. Cancelling its invertible components in naturality gives the first two comparison identities. The shift of the first complex is K-injective [def-pur-kinjective-complex], so the same inverse comparison is available there.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the cone description of the canonical connecting morphism [lem-weil-pbc-complex-ses-triangle], rather than a degreewise splitting formula. Put d = descShortComplex S and t = the third map of the cone triangle of S.f. Then Q(d) delta Q(commShiftIso).inv = Q(t), by descShortComplex_triangleOfSESδ. Mathlib mappingCone.mapHomologicalComplexIso_hom_descShortComplex and mappingCone.map_δ give Q(g_*d) delta_image = Q(g_*t) times the localized shift comparison. The map Q(g_*d) is invertible because the image sequence is short exact and its cone comparison is an isomorphism. Precompose the desired boundary identity by beta_(S.X3), then by Q(g_*d). Naturality of beta at d and t, the preceding cone identities, and beta_(S.X1[1]) phi_(S.X1[1]) = id give the equality. Cancel the two invertible precomposition maps. All identities here are explicit in directImage_boundary and the hδ calculation in the Lean proof; no K-injectivity assertion about the cone is required.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The three proved comparison equalities define Triangle.isoMk with components phi_1, phi_2, phi_3. Its third compatibility cancels the shifted inverse of phi_1 with its shifted hom. The image triangle is distinguished by triangleOfSES_distinguished [lem-weil-pbc-complex-ses-triangle]; isomorphic_distinguished [def-weil-triangulated-category] transports this to the displayed triangle.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
     "def-weil-triangulated-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0152, compatibility of the connecting morphism with additive functors"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-weil-pbc-degreewise-split-connecting-morphism",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
-  "lem-weil-pbc-complex-ses-triangle",
   "def-pur-kinjective-complex",
+  "lem-weil-pbc-complex-ses-triangle",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "N2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 0152 (canonical delta-functor) together with the K-injective construction of right derived functors"
+  "place": "Tag 0152 cone description of the canonical delta-functor; Tag 079V K-injective right-derived construction. Cone comparison and naturality calculation formalized by N2 using Mathlib mappingCone.map_δ and mapHomologicalComplexIso_hom_descShortComplex."
  },
  "mathlib_searches": [
   {
@@ -178,5 +172,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T100039-L-2472119",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
