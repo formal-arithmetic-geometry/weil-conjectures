@@ -18,6 +18,8 @@ The upstream module `WeilConjectures.AlgebraicGeometry.Cohomology.FiniteFibre` n
 provides `AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalk`. The former
 `isZero_of_isZero_stalks` declaration was a duplicate and has been retired.
 No local declaration callers need adaptation.
+
+This compatibility module intentionally contains no declarations after duplicate removal.
 -/
 
 @[expose] public section
