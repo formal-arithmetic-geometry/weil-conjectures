@@ -10,12 +10,8 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.Algebra.Exact.Basic
-import Mathlib.RingTheory.Polynomial.Basic
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
-import Sheaf.RingTheory.ConormalIntersectionRegularQuotient
+import Sheaf.RingTheory.PolynomialCoefficientConormalInclusion
+import Sheaf.RingTheory.ProjectiveSymmetricCoefficientIntersection
 
 /-! # Left exactness of coefficient reduction for a projective symmetric presentation
 
@@ -80,6 +76,52 @@ theorem projective_symmetric_conormal_reduction_exact
         (y : (Extension.ofSurjective α hα).ker),
         y.1 = MvPolynomial.map (Ideal.Quotient.mk I) x.1 →
           r (Extension.Cotangent.mk x) = Extension.Cotangent.mk y) ∧
-      Function.Injective i ∧ Function.Exact i r ∧ Function.Surjective r := by sorry
+      Function.Injective i ∧ Function.Exact i r ∧ Function.Surjective r := by
+  let E := Extension.ofSurjective φ.toIntAlgHom hφ
+  let F := Extension.ofSurjective α.toRingHom.toIntAlgHom hα
+  let π := MvPolynomial.map (Ideal.Quotient.mk I) (σ := Fin m)
+  let f : E.Hom F := {
+    toRingHom := π
+    toRingHom_algebraMap := by intro z; simp
+    algebraMap_toRingHom := by
+      intro z
+      change α (π z) = φ z
+      exact (RingHom.congr_fun hφeq z).symm }
+  have hf : Function.Surjective f :=
+    MvPolynomial.map_surjective _ Ideal.Quotient.mk_surjective
+  have hcomap : F.ker.comap f.toRingHom = E.ker := by
+    ext z
+    change α (π z) = 0 ↔ φ z = 0
+    exact Iff.of_eq (congrArg (fun a ↦ a = 0) (RingHom.congr_fun hφeq z).symm)
+  have hle : RingHom.ker f.toRingHom ≤ E.ker := by
+    intro z hz
+    change φ z = 0
+    rw [hφeq]
+    change α (π z) = 0
+    rw [show π z = 0 from hz, map_zero]
+  have heq : F.ker.comap f.toRingHom = RingHom.ker f.toRingHom ⊔ E.ker := by
+    rw [hcomap, sup_eq_right.mpr hle]
+  let r := Extension.Cotangent.map f
+  have hr : Function.Surjective r :=
+    Extension.Cotangent.map_surjective_of_comap_eq hf heq
+  have hrformula : ∀ (x : E.ker) (y : F.ker), y.1 = π x.1 →
+      r (Extension.Cotangent.mk x) = Extension.Cotangent.mk y := by
+    intro x y hy
+    rw [Extension.Cotangent.map_mk]
+    congr 1
+    exact Subtype.ext hy.symm
+  obtain ⟨i, hi, himage, hinj⟩ := polynomial_coefficient_conormal_inclusion
+    P I m (SymmetricAlgebra (P ⧸ I) I.Cotangent) α φ hφeq hφ
+  have hiinj : Function.Injective i := hinj.mpr
+    (projective_symmetric_coefficient_intersection P I m q hq α hαX φ hφeq)
+  have hker := Extension.Cotangent.map_ker_of_surjective hf heq
+  rw [inf_eq_left.mpr hle] at hker
+  have hexact : Function.Exact i r := by
+    intro z
+    change z ∈ LinearMap.ker r ↔ z ∈ i.range
+    change z ∈ (LinearMap.ker r).restrictScalars E.Ring ↔
+      z ∈ i.range.restrictScalars E.Ring
+    rw [hker, himage]
+  exact ⟨i, r, hi, hrformula, hiinj, hexact, hr⟩
 
 end Algebra
