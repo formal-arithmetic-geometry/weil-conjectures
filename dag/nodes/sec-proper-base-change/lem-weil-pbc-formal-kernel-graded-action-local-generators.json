@@ -15,43 +15,50 @@
  },
  "proof": [
   {
-   "text": "Restrict to an affine neighbourhood U of a given point. The affine equivalence gives a finite completion module N with projections having kernels I^r N. Affine ideal-power and quotient-section formulas and the tilde/global-sections adjunction identify B_n and K_n with the sheaves associated to I^n/I^(n+1) and I^n N/I^(n+1)N. This includes K_0=N/IN.",
+   "text": "Choose an affine neighbourhood U of the given point. The affine-open adic-sections theorem makes the degree-zero sections a finite module. Choose a Fin r-indexed spanning family s using Module.Finite.exists_fin. Coherence makes degree zero quasi-coherent. For any smaller open V and q in V, choose an affine W contained in V; affine section base change transports the spanning family s to W.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-formal-module-affine-open-sections-adic",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a finite family generating N/IN and lift it to N. The completed-module associated-graded generator theorem supplies coefficient representatives in I^n for every element of I^n N modulo I^(n+1)N. Their quotient classes multiply the fixed degree-zero generators. Apply the assumed degree-zero action formula to the projection of each fixed lift to F_(n+1) to identify these products with M.act n 0.",
+   "text": "Work in the affine sections tower T on W. Lift the finite family one successor at a time using transition surjectivity. If L is the span of the lifted family, its image is all of the preceding term, so L plus the successor kernel is top. The kernel is I(W)^(n+1)T_(n+1), contained in I(W)T_(n+1). From L plus IT=top, induction gives L plus I^kT=top for every k: multiply the equality by I^k and absorb I^kL into L. The annihilation I^(n+2)T_(n+1)=0 gives L=top. Functoriality shows that the lifts reduce to the fixed s. These two inductions are the fully proved private helpers span_eq_top_of_nilpotent_error and adic_lifts_span; no completion is used.",
    "uses": [
-    "lem-weil-pbc-completed-module-associated-graded-generators"
+    "lem-weil-pbc-formal-module-affine-open-sections-adic"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion of a restricted section of K_n lies in I(W)^n T_n by the transition-kernel equality; for n=0 this is top. Since the lifted family spans T_n, Submodule.mem_ideal_smul_span_iff_exists_sum gives coefficients c_i in I(W)^n expressing that inclusion as sum c_i*x_i. The affine ideal-power sections formula lifts each c_i to a section a_i of the sheaf I^n; for n=0 use the identity inclusion of O_X.",
+   "uses": [
+    "lem-weil-pbc-formal-module-affine-open-sections-adic",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The resulting finite-sum degree-n map is an epimorphism after tilde, which preserves quotient epimorphisms as a left adjoint. For an arbitrary smaller open V, section y and point q in V, sheaf-local surjectivity supplies W inside V containing q and coefficient sections on W expressing y. The fixed sections on U, these W and their coefficients satisfy exactly IsLocallyGeneratedInDegreeZero, with HEq accounting for n+0=n.",
+   "text": "Apply hact to a_i, the restriction of s_i and x_i. Its equality identifies each c_i*x_i with the inclusion of M.act n 0 of the quotient coefficient and the restriction of s_i. Linearity gives equality of the finite sums after inclusion. Cancel the sectionwise injective kernel inclusion (the identity when n=0), and turn equality into HEq. The chosen affine W, quotient coefficients and unchanged family s satisfy IsLocallyGeneratedInDegreeZero.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-formal-module-affine-open-sections-adic",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-completed-module-associated-graded-generators",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z, construction and affine proof; local-lift and sheaf descent details expanded by Q3."
+  "place": "Lemma 087Z via the finite-level affine adic tower of Lemma 087W; elementary nilpotent-error induction replaces completion and the associated-graded completion theorem."
  },
  "mathlib_searches": [
   {
@@ -120,10 +127,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T024044-L-3337718",
-  "kind": "interface",
+  "landing": "20261013T045617-L-140536",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
