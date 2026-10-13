@@ -11,6 +11,14 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ProjectivePushforwardFiniteTypeIndependent
+import Sheaf.AlgebraicGeometry.ProjectiveAffineFiniteCohomologyIndependent
+import Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing
+import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-! # Finite cohomology of a sufficiently large Chow twist
 
@@ -38,26 +46,20 @@ paragraphs defining L and G and applying the relative Leray spectral sequence.
 (blueprint: lem-pc-q2-chow-twist-finite-cohomology)
 
 Proof:
-1. The graph (j, pi) embeds Y as a closed subscheme of projective space over W:
-   g is separated, pi is proper, and j is closed. The pullback L of the integral
-   O(1) agrees with the twist from this graph. Hence L is invertible and relatively
-   ample for both pi and pi followed by g. Reindex the finite coordinates by
-   ULift (Fin (m+1)) when nonempty; if there are no coordinates Y is empty and
-   all the asserted modules are zero.
-2. Relative Serre vanishing supplies a common n killing all positive higher images
-   of L^n for these two morphisms. Over each affine open of W, projective-space
-   cohomology finiteness makes the sections of pi_* L^n finite. Quasi-coherent
-   localization identifies its restrictions with the associated finite modules.
-   W is locally Noetherian since it is proper over the affine Noetherian T, so
-   pi_* L^n is coherent. This uses the projective finiteness theorem, never the
-   general proper coherence theorem under construction.
-3. Closed pushforward along i preserves quasi-coherence and finite presentation,
-   so i_* pi_* L^n is coherent on the locally Noetherian X.
-4. Leray for pi with its positive images zero, followed by the exact closed
-   pushforward along i, compares its cohomology with H^q(Y,L^n). The comparison
-   commutes with multiplication by global sections pulled back from T. The
-   projective finiteness theorem over the affine Noetherian T makes these finite
-   Gamma(T,top)-modules. Transport finiteness through these linear comparisons. -/
+1. Put p = pi followed by i. The scheme X is Noetherian because it is proper
+   over the affine Noetherian T. Separatedness of f gives a closed graph embedding
+   of Y into projective space over X. Relative graph-twist vanishing chooses n
+   killing every positive higher direct image of L.tensorPow n along p.
+2. Invertibility of L makes its powers quasi-coherent and finitely presented.
+   The independent projective pushforward argument gives finite type of p_* L^n:
+   degree-zero projective finiteness on affine opens and quasi-coherent localization
+   suffice. Quasi-coherence and the locally Noetherian finite-type criterion give
+   coherence. Transport this along pushforwardComp pi i to i_* pi_* L^n.
+3. The given closed embedding over T gives finite cohomology of L^n over Gamma(T,O).
+   A linear Leray comparison for p, whose positive higher images vanish, identifies
+   these groups with the cohomology of p_* L^n. The pushforwardComp isomorphism
+   identifies the latter with that of i_* pi_* L^n. Restrict scalars along f.appTop
+   and transport finite generation through the two linear equivalences. -/
 theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (i : W ⟶ X) [IsClosedImmersion i] (π : Y ⟶ W) [IsProper π]
@@ -74,6 +76,66 @@ theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
           (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=
             Module.compHom _ f.appTop.hom
         Module.Finite Γ(T, ⊤)
-          (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q)) := by sorry
+          (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q)) := by
+  classical
+  let L := (pullback j).obj
+    ((pullback (ProjectiveSpace.toProjInt N T)).obj
+      (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))
+  let p := π ≫ i
+  have hp : IsProper p := inferInstance
+  have hT : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian T.toSpecΓ
+  have hX : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : _root_.CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have hXN : IsNoetherian X := ⟨⟩
+  have : EnoughInjectives Y.Modules := (isGrothendieckAbelian Y).enoughInjectives
+  have hI : HasInjectiveResolutions Y.Modules := inferInstance
+  have hdiag : j ≫ (ℙ(N; T) ↘ T) = p ≫ f := by
+    simpa only [p, Category.assoc] using hj
+  obtain ⟨n, hn⟩ := exists_isZero_higherDirectImage_graph_twist f p N j hdiag
+  have hL : L.IsInvertible := inferInstance
+  have hLn : (L.tensorPow n).IsQuasicoherent := inferInstance
+  have hLs : SheafOfModules.IsInvertible (R := Y.ringCatSheaf) (L.tensorPow n) :=
+    IsInvertible.sheafOfModules_isInvertible _
+  have hFP : (L.tensorPow n).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  let k := ProjectiveSpace.liftBaseChange p j hdiag.symm
+  have hk : IsClosedImmersion k := inferInstance
+  have hG : ((pushforward p).obj (L.tensorPow n)).IsFiniteType :=
+    isFiniteType_projective_pushforward_independent p N k
+      (ProjectiveSpace.liftBaseChange_over p j hdiag.symm) (L.tensorPow n)
+  have hGq : ((pushforward p).obj (L.tensorPow n)).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated p (L.tensorPow n)
+  let e := (pushforwardComp π i).app (L.tensorPow n)
+  have hG' : ((pushforward i).obj ((pushforward π).obj
+      (L.tensorPow n))).IsFiniteType :=
+    finiteType_of_iso.{u, u, u} e.symm
+  have hGq' : ((pushforward i).obj ((pushforward π).obj
+      (L.tensorPow n))).IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e hGq
+  refine ⟨n, (isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
+    ⟨hGq', inferInstance⟩, ?_⟩
+  intro q
+  let : Module Γ(T, ⊤) ((L.tensorPow n).H q) :=
+    Module.compHom _ (p ≫ f).appTop.hom
+  have hfin : Module.Finite Γ(T, ⊤) ((L.tensorPow n).H q) := by
+    change letI : Module Γ(T, ⊤) ((L.tensorPow n).H q) :=
+      Module.compHom _ (p ≫ f).appTop.hom
+      Module.Finite Γ(T, ⊤) ((L.tensorPow n).H q)
+    rw [← hdiag]
+    exact finite_H_projective_affine_independent N j (L.tensorPow n) q
+  let : Module Γ(T, ⊤) (((pushforward p).obj (L.tensorPow n)).H q) :=
+    Module.compHom _ f.appTop.hom
+  let : Module Γ(T, ⊤)
+      (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=
+    Module.compHom _ f.appTop.hom
+  obtain ⟨a⟩ := nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
+    p f (L.tensorPow n) (hn n le_rfl) q
+  let b : (((pushforward p).obj (L.tensorPow n)).H q) ≃ₗ[Γ(T, ⊤)]
+      (((pushforward i).obj ((pushforward π).obj (L.tensorPow n))).H q) :=
+    { (H.mapLinearEquiv e.symm q).toAddEquiv with
+      map_smul' := fun r x ↦ (H.mapLinearEquiv e.symm q).map_smul (f.appTop r) x }
+  exact Module.Finite.of_surjective (a.symm.trans b).toLinearMap
+    (a.symm.trans b).surjective
 
 end AlgebraicGeometry.Scheme.Modules

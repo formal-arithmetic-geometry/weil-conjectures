@@ -1,0 +1,160 @@
+{
+ "id": "lem-pc-m1-leray-acyclic-pushforward-linear-comparison",
+ "kind": "statement",
+ "title": "Base-linear Leray comparison for acyclic direct image",
+ "statement": "For arbitrary scheme maps p:Y -> X and f:X -> T [def-pc-scheme], injective resolutions of Y.Modules, and module F [def-weil-sheaf-of-modules-category] with all positive R^q p_*F zero, there is for each q a Gamma(T,O)-linear equivalence H^q(X,p_*F) = H^q(Y,F) [pqf-def-cohomology], where the actions are restricted along f.appTop and (p followed by f).appTop respectively.",
+ "source": {
+  "document": "Stacks Project, cohomology.tex",
+  "place": "Tag 01F4 (1), Lemma 20.13.6; naturality in coefficients in Tag 01EY"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The Leray spectral sequence has only its direct-image-degree-zero row. Its edge map is an additive isomorphism from the cohomology of p_*F to that of F. Use the natural comparison between module-derived and abelian-sheaf cohomology.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, cohomology.tex",
+    "place": "Tag 01F4 (1), Lemma 20.13.6; naturality in coefficients in Tag 01EY"
+   }
+  },
+  {
+   "text": "Multiplication by each section of T defines compatible endomorphisms of F and p_*F. Naturality of the spectral sequence and its edge map gives compatibility with multiplication by this section. Equip the additive isomorphism with this proof to obtain the stated linear equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project, cohomology.tex",
+    "place": "Tag 01F4 (1), Lemma 20.13.6; naturality in coefficients in Tag 01EY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-abelian-zariski-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, cohomology.tex",
+  "place": "Tag 01F4 (1), Lemma 20.13.6; naturality in coefficients in Tag 01EY",
+  "note": "M1 extracted an independent step of the specified Chow-twist argument; no use of general proper coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leray cohomology linear equivalence over the base ring when all positive higher direct images vanish",
+   "results": {
+    "t": "2026-10-13T04:49:50Z",
+    "tool": "leansearch",
+    "query": "Leray cohomology linear equivalence over the base ring when all positive higher direct images vanish",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If higher direct images vanish then cohomology of pushforward equals cohomology of the original module linearly over the base ring",
+   "results": {
+    "t": "2026-10-13T04:33:56Z",
+    "tool": "leanfinder",
+    "query": "If higher direct images vanish then cohomology of pushforward equals cohomology of the original module linearly over the base ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.pushforwardNatIso_hom",
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforwardCongr",
+     "SheafOfModules.pushforward_assoc",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "SheafOfModules.pushforward_obj_val",
+     "SheafOfModules.pushforwardSections_unitHomEquiv"
+    ],
+    "digest": "0797f8f2b2c623d7"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem: the returned declarations do not assert this cohomology, vanishing, or projective finiteness result."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|cohomology.*finite|finite.*cohomology|IsCoherent",
+   "results": {
+    "t": "2026-10-13T04:49:49Z",
+    "tool": "grep",
+    "query": "higherDirectImage|cohomology.*finite|finite.*cohomology|IsCoherent",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching theorem: the returned declarations do not assert this cohomology, vanishing, or projective finiteness result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof: the paragraphs defining L and G=pi_* L^n and applying relative Leray and projective finiteness",
+   "via": [
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayAcyclicPushforwardLinearComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing",
+  "statement": "theorem nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing\n    {Y X T : Scheme.{u}} (p : Y ⟶ X) (f : X ⟶ T)\n    [HasInjectiveResolutions Y.Modules] (F : Y.Modules)\n    (hF : ∀ q : ℕ, 0 < q → IsZero ((higherDirectImage p q).obj F)) (q : ℕ) :\n    letI : Module Γ(T, ⊤) (((pushforward p).obj F).H q) :=\n      Module.compHom _ f.appTop.hom\n    letI : Module Γ(T, ⊤) (F.H q) :=\n      Module.compHom _ (p ≫ f).appTop.hom\n    Nonempty (((pushforward p).obj F).H q ≃ₗ[Γ(T, ⊤)] F.H q)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T054225-L-445166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T054225-L-445166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
