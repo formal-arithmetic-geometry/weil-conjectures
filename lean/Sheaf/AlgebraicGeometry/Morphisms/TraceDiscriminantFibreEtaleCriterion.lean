@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Discriminant
 
+import Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantEvaluationEtaleFibre
+import Sheaf.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
+
 /-!
 # Local trace discriminants detect non-etale fibres
 
@@ -48,6 +51,26 @@ theorem trace_discriminant_zeroLocus_iff_nonEtale_fibre
     letI := (f.app U.1).hom.toAlgebra
     ∀ (n : ℕ) (b : Module.Basis (Fin n) Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1)),
       y ∈ Y.zeroLocus {Algebra.discr Γ(Y, U.1) b} ↔
-        ∃ x : X, f x = y ∧ ¬ (∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f)) := by sorry
+        ∃ x : X, f x = y ∧ ¬ (∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f)) := by
+  classical
+  let := (f.app U.1).hom.toAlgebra
+  dsimp only
+  intro n b
+  have heval := trace_discriminant_evaluation_ne_zero_iff_etale_fibre f U y hy n b
+  have hzero : y ∈ Y.zeroLocus {Algebra.discr Γ(Y, U.1) b} ↔
+      Y.evaluation U.1 y hy (Algebra.discr Γ(Y, U.1) b) = 0 := by
+    rw [Y.zeroLocus_singleton]
+    exact (Y.evaluation_eq_zero_iff_notMem_basicOpen y hy _).symm
+  rw [hzero]
+  constructor
+  · intro hz
+    by_contra h
+    push Not at h
+    have hE := (etale_fibre_iff_forall_etale_neighbourhood f y).mpr h
+    exact (heval.mpr hE) hz
+  · rintro ⟨x, hxy, hx⟩
+    by_contra hz
+    have hE := heval.mp hz
+    exact hx ((etale_fibre_iff_forall_etale_neighbourhood f y).mp hE x hxy)
 
 end AlgebraicGeometry.Scheme

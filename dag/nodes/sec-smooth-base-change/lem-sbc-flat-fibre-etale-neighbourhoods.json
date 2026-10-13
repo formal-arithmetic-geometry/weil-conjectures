@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-flat-fibre-etale-neighbourhoods",
+ "kind": "statement",
+ "title": "Etale fibre versus source neighbourhoods for a flat finitely presented morphism",
+ "statement": "Let $f:X\\to Y$ be a flat [def-weil-flat-morphism] morphism of schemes [def-weil-pbc-scheme-conventions], locally of finite presentation [def-sbc-locally-finite-presentation], and let $y\\in Y$. The scheme-theoretic fibre [def-pc-scheme-fibre] $X_y\\to\\operatorname{Spec}\\kappa(y)$ [def-weil-residue-field] is etale [def-weil-etale-morphism] if and only if for every $x\\in X$ with $f(x)=y$ there is an open neighbourhood $V$ of $x$ such that $V\\to Y$ is etale. No finite-morphism or Noetherian hypothesis is assumed; an empty fibre is allowed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02GM, lemma-etale-flat-etale-fibres; pointwise smooth fibre criterion and smooth relative-dimension-zero criterion (02GK)"
+ },
+ "proof": [
+  {
+   "text": "For an etale fibre use its smoothness of relative dimension zero and the proved upstream local dimension formula to get local fibre dimension zero. The proved upstream pointwise smooth fibre criterion puts each x over y in the smooth locus of f. Its restriction is smooth by preimage_smoothLocus_eq and smoothLocus_eq_top_iff. Apply exists_etale_open_of_smooth_of_fibre_dimension_zero to get the desired source neighbourhood. All upstream fibre and dimension results are already proved; the only Sheaf theorem invoked is the named neighbourhood theorem.",
+   "uses": [
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the converse, choose an etale source neighbourhood at the image of each fibre point. Preimages along fiberι cover the fibre. The pasted restriction pullback square makes each restricted fibre morphism etale by stable base change. Apply source locality of Etale with of_iSup_eq_top. This also handles an empty fibre.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "U2",
+  "document": "Stacks Project",
+  "place": "Tag 02GM, lemma-etale-flat-etale-fibres; pointwise smooth fibre criterion and smooth relative-dimension-zero criterion (02GK)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat locally finitely presented scheme morphism etale fibre iff etale at every point above it",
+   "results": "{\"t\": \"2026-10-13T07:45:53Z\", \"tool\": \"leanfinder\", \"query\": \"flat locally finitely presented scheme morphism etale fibre iff etale at every point above it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.toAlgebra\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.etale_algebraMap\"], \"digest\": \"55253101e54bf037\"}",
+   "date": "2026-10-13",
+   "verdict": "Related declarations; no direct match for this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-13T07:45:53Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.etale_isStableUnderBaseChange\", \"AlgebraicGeometry.Etale.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Etale\", \"AlgebraicGeometry.Etale.instHasRingHomPropertyEtale\", \"AlgebraicGeometry.Scheme.Etale.mk\", \"AlgebraicGeometry.Etale.instFormallyUnramified\", \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\"], \"digest\": \"3ee0cf803e09614f\"}",
+   "date": "2026-10-13",
+   "verdict": "Related declarations; no direct match for this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Ee]tale|[Ee]tale.*fiber",
+   "results": "{\"t\": \"2026-10-13T07:45:53Z\", \"tool\": \"grep\", \"query\": \"fiber.*[Ee]tale|[Ee]tale.*fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\"], \"digest\": \"027e19ba9712089b\"}",
+   "date": "2026-10-13",
+   "verdict": "Related declarations; no direct match for this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat locally finitely presented morphism etale fibre equivalent to etale source neighbourhoods",
+   "results": "{\"t\": \"2026-10-13T07:56:59Z\", \"tool\": \"leansearch\", \"query\": \"flat locally finitely presented morphism etale fibre equivalent to etale source neighbourhoods\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.TraceDiscriminantFibreEtaleCriterion",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: the extension is etale exactly where it is flat (0EY6(3)); local ramification step using 0BJH. Local trace determinant vanishing and fibrewise etaleness criterion.",
+   "via": [
+    "lem-sbc-trace-discriminant-fibre-etale-criterion",
+    "lem-sbc-finite-flat-discriminant-branch-support",
+    "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+    "lem-sbc-flat-depth-two-finite-formally-unramified",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatFibreEtaleNeighbourhoods.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_fibre_iff_forall_etale_neighbourhood",
+  "statement": "theorem etale_fibre_iff_forall_etale_neighbourhood\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] (y : Y) :\n    Etale (f.fiberToSpecResidueField y) ↔\n      ∀ x : X, f x = y → ∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100147-L-2493067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100147-L-2493067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

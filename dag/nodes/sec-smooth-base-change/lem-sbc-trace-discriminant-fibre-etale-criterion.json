@@ -18,17 +18,42 @@
  },
  "proof": [
   {
-   "text": "The preimage of the affine target chart is affine because f is finite. The chosen basis makes its section algebra finite free. Tensor its multiplication matrices with the residue field at y; taking traces and determinants commutes with this operation. Thus the trace determinant vanishes at y exactly when the trace pairing of the finite fibre algebra is degenerate. Over a field a finite algebra has nondegenerate trace pairing precisely when it is a product of finite separable field extensions: nilpotents are in the radical of the trace form; after reduction the algebra is a product of fields, and the trace form on each field is nondegenerate precisely for a separable extension. Hence nonvanishing is equivalent to an etale fibre. For a flat morphism of finite presentation the fibre is etale precisely when f is etale at each of its points. The etale locus is open, so this means each x above y has a source open neighbourhood V with etale V.ι followed by f. Negating this universal statement gives the existential on the right. In rank zero the fibre is empty and the determinant is one, so both sides are false. A zero determinant is permitted, and makes both sides true at every point of the chart.",
+   "text": "Evaluate the discriminant at y. Scheme.zeroLocus_singleton and Scheme.evaluation_eq_zero_iff_notMem_basicOpen identify zero-locus membership with zero evaluation.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The evaluated discriminant is nonzero exactly when the scheme-theoretic fibre is etale.",
+   "uses": [
+    "lem-sbc-trace-discriminant-evaluation-etale-fibre"
+   ],
    "elementary": false
+  },
+  {
+   "text": "For the finite flat morphism over the locally Noetherian base, local finite presentation is inferred. Fibre etaleness is equivalent to etale source neighbourhoods for every point mapping to y.",
+   "uses": [
+    "lem-sbc-flat-fibre-etale-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Negate this universal statement. In the forward implication assume no bad point, obtain all etale neighbourhoods, hence etale fibre and nonzero evaluation, contradicting zero evaluation. Conversely a bad point contradicts nonzero evaluation via the two fibre criteria. These are the two constructor branches in Lean.",
+   "uses": [
+    "lem-sbc-trace-discriminant-evaluation-etale-fibre",
+    "lem-sbc-flat-fibre-etale-neighbourhoods"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-trace-discriminant-evaluation-etale-fibre",
+  "lem-sbc-flat-fibre-etale-neighbourhoods"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "F2",
+  "by": "U2",
   "document": "Stacks Project",
-  "place": "Tag 0BVH, discriminant-lemma-discriminant (Lemma 49.3.1) and its fibrewise proof"
+  "place": "Tag 0BJF fibre-algebra argument and Tag 02GM pointwise fibre criterion; Lean zero-locus evaluation and classical negation glue"
  },
  "mathlib_searches": [
   {
@@ -117,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T072346-L-1118181",
+  "landing": "20261013T100147-L-2493067",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
