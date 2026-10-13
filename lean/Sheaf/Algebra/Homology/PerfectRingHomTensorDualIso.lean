@@ -6,8 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import Sheaf.Algebra.Homology.PerfectRingDualTermFlat
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+import Sheaf.Algebra.Homology.PerfectRingHomTensorDifferential
 
 /-! # Finite-projective Hom as the total tensor with the explicit dual
 
@@ -50,6 +49,13 @@ theorem perfectRingHom_tensorDual_iso {A : Type u} [CommRing A]
     (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) :
     letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
     Nonempty (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _) ≅
-      homComplex (R := CochainComplex.onePointRingSheaf A) P Q) := by sorry
+      homComplex (R := CochainComplex.onePointRingSheaf A) P Q) := by
+  classical
+  let := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
+  have he := perfectRingHom_tensorDual_degree_exists P Q hb hp hf
+  choose e heval using he
+  have hcomm := perfectRingHom_tensorDual_degree_comm P Q
+    (fun n ↦ (e n).hom) heval
+  exact ⟨HomologicalComplex.Hom.isoOfComponents e hcomm⟩
 
 end CategoryTheory

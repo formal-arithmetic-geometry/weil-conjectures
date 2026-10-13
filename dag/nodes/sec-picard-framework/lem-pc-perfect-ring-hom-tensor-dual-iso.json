@@ -15,34 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Evaluate on the one-object bottom-topology site to identify internal Hom and tensor with linear Hom and module tensor. For a finite free M the evaluation map Hom(M,A) tensor N -> Hom(M,N), lambda tensor y |-> (x |-> lambda(x)y), has inverse f |-> sum_i e_i^* tensor f(e_i). The basis identities prove both composites are identities. If M is finite projective, choose maps i:M -> A^r and p:A^r -> M with pi=id. Naturality under precomposition restricts the free evaluation isomorphism to the images of the splitting idempotents and supplies inverse maps for M. Apply this to M=P^(-r) and N=Q^s. Projection identifies the r-th dual term with Hom(P^(-r),A).",
+   "text": "For each integer n use the normalized degreewise evaluation isomorphism. These are isomorphisms of sheaf modules only, with no differential compatibility included. Choose the family of isomorphisms and retain its signed evaluation condition.",
    "uses": [
-    "def-pc-perfect-rhom-base-change-map",
-    "def-pur-hom-complex",
-    "lem-pc-perfect-ring-dual-term-flat"
+    "lem-pc-perfect-ring-hom-tensor-degrees"
    ],
    "elementary": false
   },
   {
-   "text": "For each n, reindex r+s=n by p=-r. Bounds on P mean only a<=p<=b can contribute. All remaining terms vanish, so the coproduct over r+s=n and the product over p become the same finite biproduct. Take the direct sum of the evaluation isomorphisms with coefficient (-1)^(rs). This yields degreewise mutually inverse maps Tot(D tensor Q)^n <-> Hom(P,Q)^n. The tensor differential has terms d_D lambda tensor y and (-1)^r lambda tensor d_Q y. Since d_D lambda=-(-1)^r lambda d_P, the first term after evaluation has sign (-1)^(rs+r+s+1) and the second has sign (-1)^(rs). These are the precomposition and postcomposition signs of d_Q f - (-1)^(r+s) f d_P. Thus the forward maps commute with differentials; their inverses do also, by cancellation. They form the asserted chain isomorphism and can be transported back to sheaves. Q may be unbounded, and a>b simply makes all terms zero.",
+   "text": "Apply the differential compatibility theorem to the homs of the chosen family, with their retained signed evaluation formulas. No boundedness or invertibility is needed for this step.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "lem-pc-perfect-ring-hom-tensor-differential"
    ],
    "elementary": false
+  },
+  {
+   "text": "Assemble the degreewise isomorphisms and their differential identity using Mathlib HomologicalComplex.Hom.isoOfComponents. Its inverse chain-map identities follow by cancellation with the component inverses, and its two chain-map inverse identities hold componentwise. Wrap this chain isomorphism in Nonempty.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-rhom-base-change-map",
-  "def-pur-hom-complex",
-  "lem-pc-perfect-ring-dual-term-flat",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "lem-pc-perfect-ring-hom-tensor-differential"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
-  "note": "Expanded chain-level finite-projective argument; the exact sheaf interface is not a verbatim Stacks statement."
+  "note": "Lean reduction into normalized degreewise invertibility and differential compatibility, assembled by Mathlib HomologicalComplex.Hom.isoOfComponents; statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T082423-L-1651496",
+  "landing": "20261013T100025-L-2468203",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
