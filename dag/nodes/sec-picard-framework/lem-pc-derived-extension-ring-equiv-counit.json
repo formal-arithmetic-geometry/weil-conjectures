@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-derived-extension-ring-equiv-counit",
+ "kind": "statement",
+ "title": "Universal derived counit transport after ordinary coefficient identification",
+ "statement": "Let R0,B0,R,B be commutative rings in a common universe, with algebra structures R0→B0 and R→B. Choose derived categories of R0,B0 in morphism universe w and of R,B in possibly distinct universe w′ [def-weil-abstract-derived-category]. Let L0:D(R0)→D(B0) and L:D(R)→D(B) have universal left-derived counits for ordinary scalar extension [def-weil-module-base-change]. Let eR:R0≃R and eB:B0≃B be compatible ring equivalences. Fix i. Write V for termwise restriction along eR, U for restriction along eB, T0,T for ordinary termwise scalar extension, and P0,P for localization followed by L0,L and degree-i homology. Define c0,c on each complex by applying homology to its counit and composing with the derived and homotopy homology factorization isomorphisms. Given a natural isomorphism t:V⋙T0≅T⋙U_complex whose degree-j component sends b⊗x to eB(b)⊗x for every complex, there is a natural isomorphism d:V⋙P0≅P⋙U satisfying d_K followed by U(c_K) = c0_(VK) followed by H^i(t_K) and the exact-restriction homology isomorphism. There are no extra algebra-action or model-cohomology objects in this statement.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3."
+ },
+ "proof": [
+  {
+   "text": "Termwise restriction and its inverse give exact homotopy equivalences preserving quasi-isomorphisms. Localization extends them to inverse equivalences of the chosen derived categories, including different morphism universes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generator formula identifies t as ordinary tensor transport. Descend it to homotopy categories. Transport L0 and its counit through the derived equivalences; transport every test functor through inverse equivalences to verify its right Kan extension universal property. Uniqueness identifies the transported L0 with L, compatibly with counits.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker with complex localization and apply homology. Exact restriction commutes with homology. The naturality of the derived/homotopy factorization isomorphisms turns counit compatibility into the displayed square for d.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3.",
+  "note": "Coefficient-equivalence refinement of the cited construction; the proof steps spell out the universal-property and ordinary-homology bookkeeping."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal left derived extension of scalars is invariant under equivalence of coefficient rings, compatibly with its counit",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false,
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal left derived extension of scalars commutes with ring isomorphisms",
+   "results": "ModuleCat.extendScalarsComp and coherence lemmas; no universal-derived coefficient-equivalence comparison.",
+   "verdict": "Ordinary scalar-extension tools found; derived transport still requires an argument.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalarsComp",
+   "results": "restrictScalarsComp, homEquiv_extendScalarsComp, and the restriction pseudofunctor composition.",
+   "verdict": "Ordinary restriction composition only.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|leftDerivedUnique|restrictScalarsEquivalenceOfRingEquiv|IsRightKanExtension.*precomp",
+   "results": "Mathlib provides exact-functor localization, restriction equivalences, leftDerivedUnique and isRightKanExtension_iff_precomp/postcomp₁. The source library additionally proves isEquivalence_mapDerivedCategory and mapDerivedCategoryHomologyFunctorIso in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. No assembled ring-equivalence derived-counit statement was found.",
+   "verdict": "Generic APIs, not a one-line specialization.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorRestrictedRingComparison",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3.",
+   "via": [
+    "lem-pc-base-derived-tensor-restricted-ring-comparison",
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+    "lem-pc-base-derived-tensor-ring-transport",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivCounit",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedExtensionRingEquivCounit.lean",
+  "declaration": "ModuleCat.exists_derivedExtension_ringEquiv_counit",
+  "statement": "theorem exists_derivedExtension_ringEquiv_counit\n    {R₀ B₀ R B : Type u}\n    [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]\n    [Algebra R₀ B₀] [Algebra R B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n    (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))\n    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶\n      (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (eR : R₀ ≃+* R) (eB : B₀ ≃+* B)\n    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =\n      (algebraMap R B).comp eR.toRingHom) (i : ℤ) :\n    let π₀ := HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)\n    let π := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)\n    let H₀ := DerivedCategory.homologyFunctor (ModuleCat.{u} B₀) i\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i\n    let P₀ := π₀ ⋙ DerivedCategory.Qh ⋙ L₀ ⋙ H₀\n    let P := π ⋙ DerivedCategory.Qh ⋙ L ⋙ H\n    let V := (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)\n    let U := restrictScalars.{u} eB.toRingHom\n    let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)\n    let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)\n    let c₀ := fun K : CochainComplex (ModuleCat.{u} R₀) ℤ ↦\n      H₀.map (ε₀.app (π₀.obj K)) ≫\n        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B₀) i).hom.app\n          ((HomotopyCategory.quotient _ _).obj (T₀.obj K)) ≫\n        (HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B₀) (.up ℤ) i).hom.app\n          (T₀.obj K)\n    let c := fun K : CochainComplex (ModuleCat.{u} R) ℤ ↦\n      H.map (ε.app (π.obj K)) ≫\n        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B) i).hom.app\n          ((HomotopyCategory.quotient _ _).obj (T.obj K)) ≫\n        (HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B) (.up ℤ) i).hom.app\n          (T.obj K)\n    ∀ (t : V ⋙ T₀ ≅ T ⋙ U.mapHomologicalComplex (.up ℤ))\n      (_ht : ∀ (K : CochainComplex (ModuleCat.{u} R) ℤ) (j : ℤ) (b : B₀) (x : K.X j),\n        (t.hom.app K).f j (b ⊗ₜ[R₀,algebraMap R₀ B₀] x) =\n          eB b ⊗ₜ[R,algebraMap R B] x),\n      ∃ d : V ⋙ P₀ ≅ P ⋙ U,\n        ∀ K : CochainComplex (ModuleCat.{u} R) ℤ,\n          d.hom.app K ≫ U.map (c K) =\n            c₀ (V.obj K) ≫ HomologicalComplex.homologyMap (t.hom.app K) i ≫\n              ((T.obj K).sc i |>.mapHomologyIso U).hom",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T231528-L-1814595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T231528-L-1814595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

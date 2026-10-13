@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-base-derived-tensor-ring-counit-square",
+ "kind": "statement",
+ "title": "Ordinary model comparison from a raw transported counit square",
+ "statement": "Let R0,A0,B0,C0 and R,A,B,C be commutative rings in a common universe, with algebra structures R0→A0,R0→B0,A0⊗[R0]B0→C0 and R→A,R→B,A⊗[R]B→C. Choose derived categories of R0,B0 and R,B, possibly in different morphism universes [def-weil-abstract-derived-category]. Let Q0,Q be complexes of A0,A modules and M,N their base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model]. Fix ring equivalences eA:A0≃A,eB:B0≃B and a chain isomorphism q:Q0≅restriction_eA(Q). Fix a ring equivalence eE:A0⊗[R0]B0≃A⊗[R]B with eE(a⊗b)=eA(a)⊗eB(b), and a chain isomorphism s from the ordinary A0-to-A0⊗B0 extension of Q0 to restriction_eE of the ordinary A-to-A⊗B extension of Q, satisfying s(r⊗x)=eE(r)⊗q(x) in every degree. Fix degree i. Write T0,T for termwise extension from R0,R to B0,B, P0,P for complex localization followed by M.derived,N.derived and degree-i homology, and c0,c for homology of their counits composed with the derived and homotopy homology factorization isomorphisms. Let K0,K be Q0,Q restricted to the base rings. Given an ordinary chain isomorphism v:T0(K0)≅restriction_eB(T(K)) sending b⊗x to eB(b)⊗q(x), a B0-linear map f on the raw derived cohomology whose square with the raw counits c0,c commutes through H^i(v), and a B0-linear map k on the restricted model cohomology satisfying k followed by restriction(cohomologyIso_N) = cohomologyIso_M followed by f, the model comparison square commutes on every element: inverse exact-restriction homology along eE applied to N.comparison(k(x)) equals H^i(s)(M.comparison(x)). Neither k nor f need be invertible; no universality hypothesis is used beyond the recorded model equations.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Tag 06Y6, Lemma 15.61.1; original restricted-ring comparison proof step 3, ordinaryIso_tmul and exact-restriction homology naturality."
+ },
+ "proof": [
+  {
+   "text": "Prove that forgetting commutes with the exact-restriction homology isomorphism. Compare twice-mapped and directly mapped left homology data by identity maps; ShortComplex.LeftHomologyMapData.homologyMap_comm supplies the equality. Combine it with ShortComplex.mapHomologyIso_hom_naturality to obtain the forgotten homology-map formula.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute M.comparison_eq and N.comparison_eq, compose with the restriction homology isomorphisms, and forget to additive groups. The preceding homology formula expresses both comparisons using the raw counits and the ordinaryIso maps.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive chain square ordinaryIso_M followed by s equals v followed by ordinaryIso_N holds on b tensor x by ordinaryIso_tmul, hv, hs and heE at 1 tensor b. Tensor induction proves it on all elements and hence on chain maps.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget hk and hf. Substitute the two comparison formulas, cancel the intermediate homology isomorphisms and apply homology to the chain square. The forgotten homology-map formula for s identifies the final exact-restriction map. Evaluate at x and apply the inverse isomorphism to obtain the asserted equality.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Tag 06Y6, Lemma 15.61.1; original restricted-ring comparison proof step 3, ordinaryIso_tmul and exact-restriction homology naturality.",
+  "note": "Coefficient-equivalence refinement of the cited construction; the proof steps spell out the universal-property and ordinary-homology bookkeeping."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal left derived extension of scalars is invariant under equivalence of coefficient rings, compatibly with its counit",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false,
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking homology of a commutative square of semilinear chain maps is compatible with restriction of scalars",
+   "results": "Representation-theoretic cycle maps and complex-index restriction homology; no model counit comparison square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapHomologyIso_hom_naturality",
+   "results": "Service returned unknown identifier; the local Mathlib source has this declaration.",
+   "verdict": "Local source is used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_hom_naturality|forgetHomologyIso_comp|forgetHomologyMap|ordinaryIso_tmul",
+   "results": "Mathlib ShortComplex.mapHomologyIso_hom_naturality and LeftHomologyMapData.homologyMap_comm; proved private forgetHomologyIso_comp and forgetHomologyMap helpers in Sheaf.Algebra.Homology.SemilinearScalarExtensionHomologySquare. These private helpers are reproduced locally with proofs; the public theorem there concerns a different scalar-extension square.",
+   "verdict": "The generic ingredients prove the new square; no new hole needed.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorRestrictedRingComparison",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 06Y6, Lemma 15.61.1; original restricted-ring comparison proof step 3, ordinaryIso_tmul and exact-restriction homology naturality.",
+   "via": [
+    "lem-pc-base-derived-tensor-restricted-ring-comparison",
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+    "lem-pc-base-derived-tensor-ring-transport",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorRingCounitSquare",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorRingCounitSquare.lean",
+  "declaration": "ModuleCat.baseDerivedTensor_ring_counit_square",
+  "statement": "theorem baseDerivedTensor_ring_counit_square\n    {R₀ A₀ B₀ C₀ R A B C : Type u}\n    [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]\n    [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R₀ A₀] [Algebra R₀ B₀] [Algebra (A₀ ⊗[R₀] B₀) C₀]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (Q₀ : CochainComplex (ModuleCat.{u} A₀) ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (M : BaseDerivedTensorCohomologyModel R₀ A₀ B₀ Q₀ C₀)\n    (N : BaseDerivedTensorCohomologyModel R A B Q C)\n    (eA : A₀ ≃+* A) (eB : B₀ ≃+* B)\n    (q : Q₀ ≅ ((restrictScalars.{u} eA.toRingHom).mapHomologicalComplex (.up ℤ)).obj Q)\n    (eE : (A₀ ⊗[R₀] B₀) ≃+* (A ⊗[R] B))\n    (heE : ∀ (a : A₀) (b : B₀), eE (a ⊗ₜ[R₀] b) = eA a ⊗ₜ[R] eB b)\n    (s : ((extendScalars (algebraMap A₀ (A₀ ⊗[R₀] B₀))).mapHomologicalComplex\n        (.up ℤ)).obj Q₀ ≅\n      ((restrictScalars.{u} eE.toRingHom).mapHomologicalComplex (.up ℤ)).obj\n        (((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n          (.up ℤ)).obj Q))\n    (hs : ∀ (j : ℤ) (r : A₀ ⊗[R₀] B₀) (x : Q₀.X j),\n      s.hom.f j (r ⊗ₜ[A₀,algebraMap A₀ (A₀ ⊗[R₀] B₀)] x) =\n        eE r ⊗ₜ[A,algebraMap A (A ⊗[R] B)] (show Q.X j from q.hom.f j x))\n    (i : ℤ) :\n    let π₀ := HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)\n    let π := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)\n    let H₀ := DerivedCategory.homologyFunctor (ModuleCat.{u} B₀) i\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i\n    let P₀ := π₀ ⋙ DerivedCategory.Qh ⋙ M.derived ⋙ H₀\n    let P := π ⋙ DerivedCategory.Qh ⋙ N.derived ⋙ H\n    let U := restrictScalars.{u} eB.toRingHom\n    let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)\n    let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)\n    let c₀ := fun K : CochainComplex (ModuleCat.{u} R₀) ℤ ↦\n      H₀.map (M.counit.app (π₀.obj K)) ≫\n        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B₀) i).hom.app\n          ((HomotopyCategory.quotient _ _).obj (T₀.obj K)) ≫\n        (HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B₀) (.up ℤ) i).hom.app\n          (T₀.obj K)\n    let c := fun K : CochainComplex (ModuleCat.{u} R) ℤ ↦\n      H.map (N.counit.app (π.obj K)) ≫\n        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B) i).hom.app\n          ((HomotopyCategory.quotient _ _).obj (T.obj K)) ≫\n        (HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B) (.up ℤ) i).hom.app\n          (T.obj K)\n    let K₀ := ((restrictScalars.{u} (algebraMap R₀ A₀)).mapHomologicalComplex\n      (.up ℤ)).obj Q₀\n    let K := ((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj Q\n    let S₀ := restrictScalars.{u}\n      (Algebra.TensorProduct.includeRight : B₀ →ₐ[R₀] A₀ ⊗[R₀] B₀).toRingHom\n    let S := restrictScalars.{u}\n      (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom\n    let E := ((extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)).obj Q\n    ∀ (v : T₀.obj K₀ ≅ (U.mapHomologicalComplex (.up ℤ)).obj (T.obj K))\n      (_hv : ∀ (j : ℤ) (b : B₀) (x : Q₀.X j),\n        v.hom.f j (b ⊗ₜ[R₀,algebraMap R₀ B₀] (show K₀.X j from x)) =\n          eB b ⊗ₜ[R,algebraMap R B] (show K.X j from q.hom.f j x))\n      (f : P₀.obj K₀ ⟶ U.obj (P.obj K))\n      (_hf : f ≫ U.map (c K) = c₀ K₀ ≫ HomologicalComplex.homologyMap v.hom i ≫\n        ((T.obj K).sc i |>.mapHomologyIso U).hom)\n      (k : S₀.obj (M.cohomology i) ⟶ U.obj (S.obj (N.cohomology i)))\n      (_hk : k ≫ U.map (N.cohomologyIso i).hom = (M.cohomologyIso i).hom ≫ f),\n      ∀ x : M.cohomology i,\n        ((E.sc i).mapHomologyIso (restrictScalars.{u} eE.toRingHom)).inv\n            (N.comparison i (show N.cohomology i from k x)) =\n          HomologicalComplex.homologyMap s.hom i (M.comparison i x)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T231528-L-1814595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T231528-L-1814595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
