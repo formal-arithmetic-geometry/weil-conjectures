@@ -15,36 +15,33 @@
  },
  "proof": [
   {
-   "text": "For |J|>1, both tail terms are supported and every erased subset is nonempty. Transport the negative boundary to the exterior-power term. Contraction of the increasing wedge is the negative sum of the wedges with one generator deleted, with coefficient (-1)^position*f(j)^(e+1); increasing enumeration identifies position with the number of elements smaller than j.",
+   "text": "Apply the unlocalized increasing-wedge boundary evaluation. The negative Koszul boundary and the Hom sign (n+1).negOnePow give n.negOnePow; restrictions and inverse scalar multiplication distribute over the finite sum.",
    "uses": [
-    "def-sc-koszul-open-system"
+    "lem-sc-koszul-cech-boundary-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "Apply z and restriction to the sum, using A-linearity. Factor prod(J)=f(j)*prod(J.erase j). All factors are invertible on D(prod(J)). To prove the denominator cancellation identity, apply the injective scalar multiplication by prod(J)^(e+1) to both proposed fractions: the inverse equations and A-linearity of restriction identify both with f(j)^(e+1) times the original restricted numerator. Functoriality composes the restrictions.",
+   "text": "For each erased subset, construct the linear map from sections on its principal open to sections on the original principal open by composing the coefficient-degree transport and restriction. Naturality and functoriality identify its value on the restricted global numerator. Apply the inverse of scalar multiplication by the full product to both sides; factor the full product as f(j) times the erased product, use mul_pow and A-linearity, and cancel multiplication by the erased product with its specified inverse. This proves the denominator cancellation including empty opens.",
    "uses": [
     "def-sc-principal-open-alternating-total"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use principalCech_erase_degree for the coefficient-degree transport. The negative boundary together with (n+1).negOnePow leaves n.negOnePow. For p>0, S(p,n+1)+n-S(p-1,n) is even: its integer expression is 2*n-2*p+2. Thus the remaining sign is exactly the deletion sign times the erased evaluation sign. Equality term by term yields the sum. Empty opens have zero sections and require no cancellation in A.",
-   "uses": [
-    "def-sc-module-total-hom-complex"
-   ],
-   "elementary": false
+   "text": "Prove the triangular-number recurrence from Nat.choose_succ_succ and choose_two_right. It gives S(p,n+1)+n=S(p-1,n)+2*n. Apply Int.negOnePow_add and negOnePow_two_mul, then commute scalar actions to match the deletion sign and erased localized evaluation sign. Sum the termwise identities; absent erased subsets give zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-koszul-open-system",
-  "def-sc-module-total-hom-complex",
+  "lem-sc-koszul-cech-boundary-evaluation",
   "def-sc-principal-open-alternating-total"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Stacks Project Tags 08D0 and 08D1, read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1; fraction differential calculation and coefficient naturality with totalization signs."
+  "place": "Stacks Project Tag 08D0, first differential calculation, and Tag 08D1, Hom complex degree conventions; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -127,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d959f",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T113342-L-3183419",
+  "landing": "20261013T124318-L-3778668",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean statements, relocated definitions, proof decomposition, DAG records and report; all three delivered modules and direct importer KoszulCechComparisonConstruction compile cleanly; axiom probes show only permitted axioms and the declared remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

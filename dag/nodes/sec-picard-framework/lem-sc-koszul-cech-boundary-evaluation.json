@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-koszul-cech-boundary-evaluation",
+ "kind": "lemma",
+ "title": "Unlocalized increasing-wedge Koszul boundary evaluation",
+ "statement": "For a commutative ring A, a finite sequence f, its extended negative Koszul tail I at exponent e+1 [def-sc-koszul-open-system], a complex F of module sheaves, and a degree n Hom cochain z [def-sc-module-total-hom-complex], let B_J be the transported increasing wedge for each nonempty subset. If card(J)>1, evaluation of d_I followed by the component of z on B_J equals minus the sum over j in J of (-1)^position*f(j)^(e+1) times the evaluation on B_(J.erase j), transported in the coefficient degree by principalCech_erase_degree [def-sc-principal-open-alternating-total]. Position is the number of elements of J smaller than j. This statement has no localization, denominator, Hom-differential sign or totalization sign.",
+ "stmt_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Stacks Project Tag 08D0, first differential calculation, and Tag 08D1, Hom complex degree conventions; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "proof": [
+  {
+   "text": "Transport both supported degrees through extendXIso; the differential is minus koszulBoundary. Include exterior powers in the exterior algebra. Obtain the explicit contraction formula from the proved ExteriorAlgebra.koszul_differential by its uniqueness clause. For the increasing enumeration of J, delete position i using Fin.succAbove. Finset.orderEmbOfFin_unique identifies this enumeration with the increasing enumeration of J.erase j. The image of Finset.Iio i under the original enumeration is J.filter (< j), so its cardinality is i.val. Reindex the sum by Finset.orderIsoOfFin. Apply the linear component of z; card_erase_add_one identifies the source degrees and principalCech_erase_degree identifies the target degrees, giving the displayed eqToHom. Linearity distributes the negative, sum and coefficients.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "def-sc-module-total-hom-complex",
+    "def-sc-principal-open-alternating-total",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Stacks Project Tag 08D0, first differential calculation, and Tag 08D1, Hom complex degree conventions; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul differential on an increasing exterior-power basis wedge is an alternating sum over deleted generators",
+   "results": "Service unavailable: Internal Server Error. No result or mathematical verdict was obtained.",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul exterior power contraction on increasing basis wedge alternating sum deletion",
+   "results": "Contraction recursion and exterior product tools; no exact localized or ordered-finset boundary theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CliffordAlgebra.contractLeft",
+   "results": "Contraction unit, generator and recursion equations; no finset boundary expansion.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "contraction_formula|contractLeft.*ιMulti|koszulBoundary.*ιMulti",
+   "results": "msearch returned no hits. Direct reading found a private contraction_formula and its public formula clause in Sheaf.Paper.KoszulDifferential. The latter is proved and usable.",
+   "date": "2026-10-13",
+   "verdict": "formula ingredient available"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulCechLocalizedBoundary",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-cech-localized-boundary",
+   "place": "Step 1: increasing-wedge boundary expansion, before localization.",
+   "via": [
+    "lem-sc-koszul-cech-localized-boundary"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechBoundaryEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechBoundaryEvaluation.lean",
+  "declaration": "AlgebraicGeometry.koszulCechBoundary_evaluation",
+  "statement": "theorem koszulCechBoundary_evaluation (e : ℕ)\n    (B : ∀ J : {J : Finset (Fin r) // J.Nonempty},\n      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X\n        (1 - (J.val.card : ℤ)))\n    (hB : ∀ J, B J =\n      ((koszulOpenTail A r f e).extendXIso ComplexShape.embeddingDownNat\n        (show ComplexShape.embeddingDownNat.f (J.val.card - 1) =\n          1 - (J.val.card : ℤ) by\n          simp only [ComplexShape.embeddingDownNat_f]\n          have h : 0 < J.val.card := Finset.card_pos.mpr J.property\n          omega)).inv\n        (exteriorPower.ιMulti A (J.val.card - 1 + 1)\n          (fun i ↦ Finsupp.single (J.val.orderEmbOfFin\n            (show J.val.card = J.val.card - 1 + 1 by\n              have h : 0 < J.val.card := Finset.card_pos.mpr J.property\n              omega) i) (1 : A)))) (n : ℤ)\n    (z : CochainComplex.HomComplex.Cochain\n      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat)\n      (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F) n)\n    (J : {J : Finset (Fin r) // J.Nonempty}) (hJ : 1 < J.val.card) :\n    ((((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).d\n      (1 - (J.val.card : ℤ)) (2 - (J.val.card : ℤ)) ≫\n      z.v (2 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ)) (by ring)) (B J)) =\n    -(∑ j : J.val, if h : (J.val.erase j.val).Nonempty then\n      ((-1 : A) ^ ((J.val.filter (fun i ↦ i < j.val)).card) * f j.val ^ (e + 1)) •\n        (affineOpenSections A ⊤).map\n          (eqToHom (congrArg F.X\n            (principalCech_erase_degree r J.val j.val j.property n)))\n          ((z.v (1 - ((J.val.erase j.val).card : ℤ))\n            (n + 1 - ((J.val.erase j.val).card : ℤ)) (by ring))\n              (B ⟨J.val.erase j.val, h⟩))\n      else 0)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T124318-L-3778668",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T124318-L-3778668",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
