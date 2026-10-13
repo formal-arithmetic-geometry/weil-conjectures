@@ -460,6 +460,23 @@ variable [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
   [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
 
 omit [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
+  [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)] in
+include hπ hker hcomplete hsep hc in
+/-- A right dual of the derived limit, chosen using its perfectness (`isPerfect_pt`). The trace
+statements below hold for every right dual of `c.pt`, so in particular for this one. -/
+@[instance_reducible]
+noncomputable def hasRightDualPt : HasRightDual c.pt :=
+  (T.isPerfect_pt hπ hker hcomplete hsep hc).isDualizable.some
+
+omit [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
+  [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)] in
+/-- A right dual of the level `n`, chosen using its perfectness. The trace statements below hold
+for every right dual of `T.obj n`, so in particular for this one. -/
+@[instance_reducible]
+noncomputable def hasRightDualObj (n : ℕ) : HasRightDual (T.obj n) :=
+  (T.isPerfect n).isDualizable.some
+
+omit [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
   [∀ n, HasRightDual (T.obj n)] in
 variable {T} in
 /-- The trace of an endomorphism `V` of the point of the cone is the alternating sum of the

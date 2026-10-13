@@ -218,6 +218,10 @@ section Trace
 
 attribute [local instance] DerivedCategory.braidedCategory
 
+/-! The trace statements below hold for every choice of right duals. Both are available by
+perfectness: `ModuleCat.NormalizedPerfectTower.hasRightDualPt` and
+`ModuleCat.NormalizedPerfectTower.hasRightDualObj`. -/
+
 variable [HasRightDual c.pt] [∀ n, HasRightDual (T.obj n)]
 
 include hϖ hI hc in
