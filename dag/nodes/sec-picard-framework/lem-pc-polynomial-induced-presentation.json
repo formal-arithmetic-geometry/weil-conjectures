@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-pc-polynomial-induced-presentation",
+ "title": "Canonical induced polynomial-module presentation",
+ "statement": "Let A be any commutative ring, n a natural number, R = MvPolynomial (Fin n) A, S = MvPolynomial (Fin (n+1)) A, and ρ = rename Fin.castSucc. For every S-module M, put L = Res_ρ M and E = Ext_ρ L [def-weil-module-base-change]. There are S-linear maps δ : E → E and π : E → M such that 0 → E → E → M → 0 is short exact [def-weil-pbc-exact-sequence]. No Tor bound, finiteness or domain hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "C. Weibel, An Introduction to Homological Algebra",
+  "place": "Corollary 4.3.6 and Theorem 4.3.7, pp. 101–102; https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf; source read online, including the proof of sequence (*)"
+ },
+ "proof": [
+  {
+   "text": "Set x = X(last n). Define the S-linear endomorphism tM = x times identity on M, restrict it to an R-linear t on L, and construct δ = x times identity on E minus Ext_ρ(t). Define π as the actual extension-restriction adjunction counit. Its tensor formula is π(s tensor m) = s m.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Rotate the variables with finRotate(n+1), then apply MvPolynomial.finSuccEquiv. The resulting ring isomorphism sends ρ to Polynomial.C and x to Polynomial.X. Check the coefficient and variable generators using ring-hom extensionality. Make this an R-linear equivalence and transport Polynomial.basisMonomials to the R-basis b_k = x^k of S. TensorProduct.equivFinsuppOfBasisLeft gives an R-linear coefficient isomorphism c from E to finitely supported sequences in L; c inverse sends single(k,m) to x^k tensor m.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On finitely supported sequences put D = shift by Nat.succ minus coefficientwise t, and V = Finsupp.lsum of t^k. Compute D(single(k,m)) = single(k+1,m)-single(k,t m), and V(single(k,m)) = t^k m. Prove D injective: if Dq=0 and q is nonzero, take k=max support(q); q(k+1)=0, so Dq(k+1)=q(k), contradicting q(k)≠0. This uses no nonzero-ring assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove for every q that Dp=q-single(0,Vq) for some p. Use Finsupp.induction_linear: zero uses p=0 and addition adds witnesses. For single(0,m) take p=0. For single(k+1,m), add single(k,m) to the inductive correction for single(k,t m); the formula for D and t^(k+1)=t^k composed with t give the correction identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check δ c inverse = c inverse D and π c inverse = V on single sequences, using ExtendScalars.smul_tmul, the definition of scalar extension on maps, and the counit formula; extend by Finsupp.induction_linear. VD=0 follows from the same single-sequence formula, so δπ=0. Injectivity of D proves δ mono. π(1 tensor m)=m proves π epi. For π(c inverse q)=0, the correction identity supplies p with Dp=q, hence c inverse p maps to c inverse q under δ. ModuleCat exactness then proves short exactness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "C. Weibel, An Introduction to Homological Algebra",
+  "place": "Corollary 4.3.6 and Theorem 4.3.7, pp. 101–102; https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf; source read online, including the proof of sequence (*)",
+  "note": "Complete compiled Lean proof by U2, following the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence for a polynomial module induced from the underlying module: variable minus its action",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical short exact sequence from an induced polynomial module to a module with one polynomial variable acting",
+   "results": "Found PolynomialModule.polynomialModule and scalar-multiplication short complexes, but none with variable minus its action on coefficients.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Polynomial\", \"ShortExact\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*[Ss]hortExact|induced.*[Ss]hortExact",
+   "results": "No matches. Direct repository and Mathlib search found polynomial module and tensor-basis APIs, not this presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialSuccessorTorBound",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Canonical induced polynomial-module presentation in the canonical polynomial Tor-bound proof",
+   "via": [
+    "lem-pc-polynomial-tor-bound",
+    "lem-pc-polynomial-successor-tor-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialInducedPresentation",
+  "file": "lean/Sheaf/RingTheory/PolynomialInducedPresentation.lean",
+  "declaration": "ModuleCat.exists_polynomial_induced_presentation",
+  "statement": "theorem exists_polynomial_induced_presentation\n    {A : Type u} [CommRing A] (n : ℕ)\n    (M : ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A)) :\n    let E := (extendScalars (MvPolynomial.rename Fin.castSucc).toRingHom).obj\n      ((restrictScalars (MvPolynomial.rename Fin.castSucc).toRingHom).obj M)\n    ∃ (δ : E ⟶ E) (π : E ⟶ M) (w : δ ≫ π = 0),\n      (ShortComplex.mk δ π w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T151137-L-878528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T151137-L-878528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

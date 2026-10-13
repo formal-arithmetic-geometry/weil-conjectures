@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-pc-flat-scalar-extension-tor-comparison",
+ "title": "Tor comparison for flat scalar extension",
+ "statement": "Let R and S be commutative rings in one universe and f : R → S a flat ring homomorphism [def-weil-pbc-flat-ring-map]. For every R-module L, S-module N, and natural i, there is an R-linear isomorphism Res_f(Tor_i^S(Ext_f L,N)) ≅ Tor_i^R(L,Res_f N), with extension and restriction of scalars [def-weil-module-base-change] and Tor [def-weil-pbc-tor-modules]. No finite generation or nonzero hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change",
+  "def-weil-pbc-tor-modules"
+ ],
+ "source": {
+  "document": "C. Weibel, An Introduction to Homological Algebra",
+  "place": "Corollary 4.3.6 and Theorem 4.3.7, pp. 101–102; https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf; source read online, including the proof of sequence (*)"
+ },
+ "proof": [
+  {
+   "text": "Take Mathlib projectiveResolution L. Flatness gives preservesFiniteLimits_extendScalars_of_flat. Extension is additive by extendRestrictScalarsAdj.left_adjoint_additive and preserves projective objects by preservesProjectiveObjects_of_adjunction_of_preservesEpimorphisms, since restriction is exact. Mathlib mapProjectiveResolution therefore extends this resolution to a projective resolution of Ext_f L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each term P_j, compose restriction of the S-tensor braiding, exists_tensorRestrictExtend_module_natural at (N,P_j), and the R-tensor braiding to identify Res_f(Ext_f(P_j) tensor_S N) with P_j tensor_R Res_f N. The naturality equation of the cited statement and the two braiding naturality equations prove compatibility with every differential. HomologicalComplex.Hom.isoOfComponents builds the chain isomorphism.",
+   "uses": [
+    "lem-pc-tensor-restrict-extend-module-natural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction preserves homology. Compose restriction of Q.isoLeftDerivedObj with the inverse of (K.sc i).mapHomologyIso, homology of the chain isomorphism, and the inverse of P.isoLeftDerivedObj. This gives the stated isomorphism for all i, including zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-restrict-extend-module-natural"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "C. Weibel, An Introduction to Homological Algebra",
+  "place": "Corollary 4.3.6 and Theorem 4.3.7, pp. 101–102; https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf; source read online, including the proof of sequence (*)",
+  "note": "Complete compiled Lean proof by U2, following the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor under flat extension of scalars computed by extension of projective resolutions",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor of a module induced along a flat ring map agrees after restriction with Tor over the base ring",
+   "results": "Found Module.Flat.baseChange, Module.Flat.trans and ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; no Tor comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"extendScalars\"",
+   "results": "Only scalar-extension pseudofunctor and algebra-generator declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*Tor|Tor.*extendScalars",
+   "results": "No exact result in Mathlib or the source library. Repository search found TensorRestrictExtendScalarsModule, the proved degreewise tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; ingredients used in Lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialSuccessorTorBound",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tor comparison for flat scalar extension in the canonical polynomial Tor-bound proof",
+   "via": [
+    "lem-pc-polynomial-tor-bound",
+    "lem-pc-polynomial-successor-tor-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatScalarExtensionTorComparison",
+  "file": "lean/Sheaf/RingTheory/FlatScalarExtensionTorComparison.lean",
+  "declaration": "ModuleCat.nonempty_flat_scalar_extension_tor_iso",
+  "statement": "theorem nonempty_flat_scalar_extension_tor_iso\n    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.Flat)\n    (L : ModuleCat.{u} R) (N : ModuleCat.{u} S) (i : ℕ) :\n    Nonempty ((restrictScalars f).obj\n      (((Tor' (ModuleCat.{u} S) i).obj ((extendScalars f).obj L)).obj N) ≅\n      (((Tor' (ModuleCat.{u} R) i).obj L).obj ((restrictScalars f).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T151137-L-878528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T151137-L-878528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

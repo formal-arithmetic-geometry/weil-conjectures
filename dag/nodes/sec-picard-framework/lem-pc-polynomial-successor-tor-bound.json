@@ -14,16 +14,47 @@
  },
  "proof": [
   {
-   "text": "put R = A[t_0,...,t_{n-1}] and S = R[t_n], using the coefficient inclusion\n`rename Fin.castSucc`. For L = M restricted to R, let E = S tensor_R L. The maps\non E given by delta(f tensor m) = t_n f tensor m - f tensor (t_n m) and\naug(f tensor m) = f m are S-linear and form 0 -> E -> E -> M -> 0.\nTo see delta is injective, expand an element as sum t_n^j tensor m_j: its top\ncoefficient in delta is the top m_j. To see ker aug = im delta, subtract delta\nof the term one degree lower to eliminate the highest coefficient, then descend\nuntil the remaining degree-zero coefficient is zero by aug. Aug is surjective\nsince aug(1 tensor m) = m. Freeness of S over R means extension of an R-projective\nresolution of L is an S-projective resolution of E. Tensor associativity, and\nexactness of restriction of scalars, identify restricted Tor_i^S(E,N) with\nTor_i^R(L,N restricted to R). Hence both copies of E have zero Tor above d.\nFor i > d+1, the exact segment Tor_i^S(E,N) -> Tor_i^S(M,N) ->\nTor_{i-1}^S(E,N) has zero ends, proving the conclusion. This argument also covers\nn=0, d=0, the zero module, and the zero ring; no degree of a nonzero scalar\npolynomial and no domain assumption is used.",
+   "text": "Apply exists_polynomial_induced_presentation to obtain a short exact sequence E → E → M, where E=Ext_ρ(Res_ρ M).",
+   "uses": [
+    "lem-pc-polynomial-induced-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove ρ flat by rotating variables and composing with finSuccEquiv: the coefficient inclusion becomes Polynomial.C. Polynomial rings are free over their coefficient ring; RingHom.flat_algebraMap_iff and RingHom.Flat.comp_iff_of_bijective_left transfer flatness back.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For every j>d apply nonempty_flat_scalar_extension_tor_iso to L=Res_ρ M and N. The hypothesis hTor kills Tor_j^R(L,Res_ρ N). Transport zero across the comparison isomorphism. ModuleCat.isZero_iff_subsingleton reflects zero through restriction, so Tor_j^S(E,N)=0.",
+   "uses": [
+    "lem-pc-flat-scalar-extension-tor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private tor_isZero_of_shortExact helper: reuse resolutionSES from import all Sheaf.Paper.TorLongExactFirstVariable, the projective-resolution packaging of the cited split free horseshoe statement. Tensor its degreewise splittings with N to get a short exact sequence of complexes. The resolution computation isomorphisms turn the two assumed Tor zero objects into homology zero objects. Mathlib ShortComplex.ShortExact.mono_δ makes the connecting map from H_(j+1)(P_M tensor N) into H_j(P_E tensor N) mono; IsZero.of_mono then kills its source. Transport back with isoLeftDerivedObj.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For i>d+1 write i=j+1 using Nat.exists_eq_succ_of_ne_zero. Arithmetic gives j>d and j+1>d. Apply the helper to E → E → M with the two zero objects from step 3. This proves the original statement without changing any binder or adding any hole.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-flat-scalar-extension-tor-comparison",
+  "lem-pc-polynomial-induced-presentation",
+  "lem-weil-pbc-free-resolution-ses-split"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "C. Weibel, An Introduction to Homological Algebra",
-  "place": "Theorem 4.3.7, pp. 101–102"
+  "place": "Theorem 4.3.7, pp. 101–102, canonical exact sequence; Corollary 4.3.6 projective-resolution comparison",
+  "note": "Complete Lean proof by U2. Two new modules are fully proved; the existing free horseshoe theorem remains an imported dependency."
  },
  "mathlib_searches": [
   {
@@ -97,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T142905-L-501094",
+  "landing": "20261013T151137-L-878528",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

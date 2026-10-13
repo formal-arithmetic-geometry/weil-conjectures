@@ -11,6 +11,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.RingTheory.FlatScalarExtensionTorComparison
+import Sheaf.RingTheory.PolynomialInducedPresentation
+import all Sheaf.Paper.TorLongExactFirstVariable
+import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.Logic.Equiv.Fin.Rotate
+import Mathlib.LinearAlgebra.Finsupp.VectorSpace
 
 /-! # Tor bound for adjoining a single variable
 Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.
@@ -24,6 +30,55 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
+
+private theorem polynomial_castSucc_flat
+    {A : Type u} [CommRing A] (n : ℕ) :
+    (MvPolynomial.rename (R := A) (Fin.castSucc : Fin n → Fin (n + 1))).toRingHom.Flat := by
+  let e := (MvPolynomial.renameEquiv A (finRotate (n + 1))).trans
+    (MvPolynomial.finSuccEquiv A n)
+  have he : e.toRingEquiv.toRingHom.comp
+      (MvPolynomial.rename Fin.castSucc).toRingHom =
+      (Polynomial.C : MvPolynomial (Fin n) A →+* _) := by
+    ext a : 1
+    · ext x : 1
+      simp [e, MvPolynomial.finSuccEquiv_apply]
+    · have hj : finRotate (n + 1) a.castSucc = a.succ := finRotate_of_lt a.isLt
+      simp [e, hj, MvPolynomial.finSuccEquiv_X_succ]
+  apply (RingHom.Flat.comp_iff_of_bijective_left
+    (f := (MvPolynomial.rename Fin.castSucc).toRingHom)
+    (g := e.toRingEquiv.toRingHom) e.bijective).mp
+  rw [he]
+  change (algebraMap (MvPolynomial (Fin n) A) (Polynomial (MvPolynomial (Fin n) A))).Flat
+  rw [RingHom.flat_algebraMap_iff]
+  infer_instance
+
+private theorem tor_isZero_of_shortExact
+    {R : Type u} [CommRing R] (S : ShortComplex (ModuleCat.{u} R))
+    (hS : S.ShortExact) (N : ModuleCat.{u} R) (j : ℕ)
+    (h₂ : IsZero (((Tor' (ModuleCat.{u} R) (j + 1)).obj S.X₂).obj N))
+    (h₁ : IsZero (((Tor' (ModuleCat.{u} R) j).obj S.X₁).obj N)) :
+    IsZero (((Tor' (ModuleCat.{u} R) (j + 1)).obj S.X₃).obj N) := by
+  classical
+  have hu := (ModuleCat.mono_iff_injective S.f).mp hS.mono_f
+  have hv := (ModuleCat.epi_iff_surjective S.g).mp hS.epi_g
+  have hex := (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact S).mp hS.exact
+  obtain ⟨P, P', P'', a, b, w, _, _, hs⟩ :=
+    CategoryTheory.resolutionSES S.f.hom S.g.hom hu hv hex
+  let T := ShortComplex.mk a b w
+  let F := (MonoidalCategory.tensoringRight (ModuleCat.{u} R)).obj N
+  let TN := T.map (F.mapHomologicalComplex (ComplexShape.down ℕ))
+  have hTN : TN.ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro k
+    exact ((hs k).some.map F).shortExact
+  have h₂' : IsZero (TN.X₂.homology (j + 1)) :=
+    h₂.of_iso (P'.isoLeftDerivedObj F (j + 1)).symm
+  have h₁' : IsZero (TN.X₁.homology j) :=
+    h₁.of_iso (P.isoLeftDerivedObj F j).symm
+  have hij : (ComplexShape.down ℕ).Rel (j + 1) j := by simp
+  have : Mono (hTN.δ (j + 1) j hij) := hTN.mono_δ _ _ _ h₂'
+  exact (h₁'.of_mono (hTN.δ (j + 1) j hij)).of_iso
+    (P''.isoLeftDerivedObj F (j + 1))
 
 /-- Adjoining one variable raises a Tor bound by at most one.
 Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.
@@ -52,6 +107,21 @@ theorem polynomial_successor_tor_bound
         ((restrictScalars (MvPolynomial.rename Fin.castSucc).toRingHom).obj M)).obj N)) :
     ∀ N : ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A), ∀ i : ℕ, d + 1 < i →
       IsZero (((Tor' (ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A)) i).obj M).obj N) := by
-  sorry
+  intro N i hi
+  let ρ : MvPolynomial (Fin n) A →+* MvPolynomial (Fin (n + 1)) A :=
+    (MvPolynomial.rename Fin.castSucc).toRingHom
+  let L := (restrictScalars ρ).obj M
+  let E := (extendScalars ρ).obj L
+  have hE (j : ℕ) (hj : d < j) :
+      IsZero (((Tor' (ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A)) j).obj E).obj N) := by
+    obtain ⟨e⟩ := nonempty_flat_scalar_extension_tor_iso ρ (polynomial_castSucc_flat n)
+      L N j
+    have h := (hTor ((restrictScalars ρ).obj N) j hj).of_iso e
+    apply ModuleCat.isZero_iff_subsingleton.mpr
+    exact (ModuleCat.isZero_iff_subsingleton (R := MvPolynomial (Fin n) A)).mp h
+  obtain ⟨δ, π, w, hS⟩ := exists_polynomial_induced_presentation n M
+  obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : i ≠ 0)
+  exact tor_isZero_of_shortExact (ShortComplex.mk δ π w) hS N j
+    (hE (j + 1) (by omega)) (hE j (by omega))
 
 end ModuleCat
