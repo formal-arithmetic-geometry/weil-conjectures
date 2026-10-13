@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-unit",
+ "kind": "statement",
+ "title": "Localized tensor comparison: unit",
+ "statement": "Let R,A,B,C be commutative rings in a universe u, A and B R-algebras, and C an algebra over E=A tensor_R B. Fix derived categories of R-, A- and B-modules, an A-complex Q, a C-complex N and a chain map t:F(Q) to N, where F is termwise extension from A to C. Let P be the all-representatives, all-models, all-degree predicate of [def-pc-localized-tensor-comparison-property]. Assume Q is K-flat over A. Given a model m of [def-pc-base-derived-tensor-cohomology-model] for Q, assume m.localizedComparison_i followed by H^i(t) is an isomorphism for every integer i. Then P holds for the unshifted image of the free rank-one A-module ULift A under the degree-zero single functor.",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1); Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "let S be A placed in degree zero. The ULift equivalence identifies the\nspecified free module with A, and the chain left unitor identifies S tensor Q\nwith Q. Scalar extension is monoidal, so its unit comparison identifies F(S)\nwith C in degree zero. Under these identifications, the map\nmu.inv followed by F(S) tensor t is t. For any base-derived model of S tensor Q,\nuniqueness of the universal left-derived counit identifies its cohomology with\nthat of m. Naturality for multiplication by a in A makes this identification\nA tensor_R B-linear; the B action is already part of the target module category.\nThe equations comparison_eq and localized_eq then identify the comparison\nsquare, and extension to C preserves the source isomorphism. Thus the given\nall-degree hypothesis proves comparison for S.\nFor an arbitrary A-K-flat U representing S in D(A), take a roof implementing\nthis derived isomorphism and resolve its apex A-K-flatly. Both maps from that\napex to U and S are quasi-isomorphisms. Tensor with the A-K-flat Q preserves\nthese maps, as does scalar extension of the K-flat complexes to C, followed\nby tensor with N. Apply the universal R-to-B counit to the two tensor maps;\nits naturality gives commuting cohomology squares. The same scalar-action\nargument makes their source maps A tensor_R B-linear isomorphisms. After\nextension to C, the localized_eq equations give the comparison squares.\nInvertibility for S transports along both roof legs to U, for every model\nand every degree. No flatness of C is used; all transports are isomorphisms.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), unit step of the localized generator argument; read official pages https://stacks.math.columbia.edu/tag/0DJA and https://stacks.math.columbia.edu/tag/0BYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localized tensor comparison property for shifts of the free rank one generator",
+   "results": "IsLocalization.moduleLid; Module.mem_freeLocus_iff_tensor; IsLocalization.moduleTensorEquiv; IsLocalizedModule.map_lTensor; CategoryTheory.Shift.linear_of_localization; Module.Invertible.instTensorProduct_1; IsLocalization.instIsLocalizedModuleTensorProductMap; CommRing.Pic.mk_tensor",
+   "date": "2026-10-14",
+   "verdict": "No exact match for this specialized comparison; available shift isomorphisms are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsStableUnderShift",
+   "results": "CategoryTheory.ObjectProperty.IsStableUnderShift; CategoryTheory.ObjectProperty.instIsStableUnderShiftShiftClosure; CategoryTheory.ObjectProperty.instIsStableUnderShiftBot; CategoryTheory.ObjectProperty.instIsStableUnderShiftTop; CategoryTheory.ObjectProperty.IsStableUnderShift.isStableUnderShiftBy; CategoryTheory.ObjectProperty.instIsStableUnderShiftIsoClosure; CategoryTheory.ObjectProperty.hasShift; CategoryTheory.ObjectProperty.IsStableUnderShift.mk",
+   "date": "2026-10-14",
+   "verdict": "No exact match for this specialized comparison; available shift isomorphisms are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*shift|shift.*mapBifunctor",
+   "results": "Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact match for this specialized comparison; available shift isomorphisms are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of tensor products of complexes commutes with integer shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonGenerators",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "single-complex base-change criterion, tensor inheritance (Tag 0DJA(1)), via the fixed-degree local comparison; unit comparison step",
+   "via": [
+    "lem-pc-localized-tensor-comparison-inheritance",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
+    "lem-pc-localized-tensor-comparison-generators"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonUnit",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonUnit.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_unit",
+  "statement": "theorem localizedTensorComparisonProperty_unit\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (m : BaseDerivedTensorCohomologyModel R A B Q C)\n    (h : ∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) :\n    localizedTensorComparisonProperty R A B C Q N t\n      ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj\n        (ModuleCat.of A (ULift.{0} A)))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172655-L-2099579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T172655-L-2099579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

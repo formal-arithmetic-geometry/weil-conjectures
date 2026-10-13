@@ -6,7 +6,8 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
-import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonUnit
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonShift
 
 /-! # The generators satisfy localized tensor comparison
 
@@ -59,6 +60,9 @@ theorem localizedTensorComparisonProperty_generators
     (h : ∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) :
     ∀ n : ℤ, localizedTensorComparisonProperty R A B C Q N t
       (((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj
-        (ModuleCat.of A (ULift.{0} A)))⟦n⟧) := by sorry
+        (ModuleCat.of A (ULift.{0} A)))⟦n⟧) := by
+  have hunit := localizedTensorComparisonProperty_unit R A B C Q N t hQ m h
+  intro n
+  exact localizedTensorComparisonProperty_shift R A B C Q N t _ hunit n
 
 end ModuleCat
