@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-normalized-graded-finite-kernel",
+ "kind": "statement",
+ "title": "The kernel of a normalized colimit graded-piece map is a finite alpha pullback",
+ "statement": "Let C be an abelian category, X a type-zero bigraded exact couple [def-sp-exact-couple] with E(p,q)=0 for p<0, and A(n) alpha colimits [def-sp-convergence] normalized by A(n).obj=D(0,n) and transported identity zeroth maps. For r natural and p,q integers with p<=r, the kernel of toGradedPiece from D(p,q) to the pth graded piece [def-sp-filtration] of A(p+q) is the pullback along alphaIter r of image(incomingAlphaIter(r+1) at (p-r,q+r)). This statement does not refer to finite page E or its cycle projection.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2: finite-page successive-image quotient, before passage to the infinite page",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 011R, 011T and 0AMJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "For any nested subobjects S<=R and any map e into R, the kernel of e followed by the cokernel projection of S into R is the inverse image of S along e followed by R.arrow. Prove both subobject inequalities by Factors tests, using Abelian.monoLift for the implication from annihilation by the cokernel and mono cancellation for its converse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reuse alpha_iso_left from HalfPlaneDiagonalColimits for invertibility of alpha at nonpositive first index. Starting from the normalized zeroth cocone map, induct through the cocone equation to show all nonpositive cocone maps invertible. Induction on alphaIter gives its cocone equation; expanding incomingAlphaIter gives its analogous equation.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "lem-sp-half-plane-diagonal-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put u=p-r, v=q+r and let c be the invertible cocone map at (u,v) with transport. The iterate equations say alphaIter r followed by c is transported iota_p, while incomingAlphaIter(r+1) followed by c is transported iota_(p+1). Apply the first step to the explicit image quotient defining toGradedPiece. An epi-mono image factorization identifies the next filtration step with the image of incomingAlphaIter transported through c. Functoriality of pullback and pullback_map_self cancel c and give the formula.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtration",
+  "lem-sp-half-plane-diagonal-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2; Y3 expansion of the finite intrinsic kernel and normalized colimit calculation; repair reuses the existing private alpha_iso_left theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of graded piece map image filtration normalized alpha colimit finite iterate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of graded piece map image filtration normalized alpha colimit finite iterate",
+   "results": "IsModuleFiltration.mk_int, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge, IsModuleFiltration.toGradedSMul, Ideal.Filtration.Stable.bounded_difference, Ideal.Filtration.Stable.exists_forall_le, Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge, Ideal.Filtration.Stable",
+   "date": "2026-10-13",
+   "verdict": "no exact-couple-specific statement; generic tools used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "kernelSubobject.*cokernel|kernel.*graded|graded.*kernel",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact-couple-specific statement; generic tools used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FinitePageImageQuotient",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-half-plane-convergence",
+   "place": "proof paragraph 2: intrinsic finite-cycle kernel and normalized graded-image kernel",
+   "via": [
+    "lem-sp-finite-page-image-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedGradedFiniteKernel",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedGradedFiniteKernel.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.normalizedGraded_finite_kernel",
+  "statement": "theorem normalizedGraded_finite_kernel (X : BigradedExactCouple C 0)\n    (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q))\n    (A : ∀ n : ℤ, AlphaColimit X n)\n    (hA : ∀ n : ℤ, (A n).obj = X.D 0 n)\n    (hι : ∀ n : ℤ, (A n).ι 0 ≫ eqToHom (hA n) =\n      eqToHom (by congr 1; omega))\n    (r : ℕ) (p q : ℤ) (hp : p ≤ (r : ℤ)) :\n    kernelSubobject (X.toGradedPiece A p q) =\n      (Subobject.pullback (X.alphaIter r p q)).obj\n        (imageSubobject (X.incomingAlphaIter (r + 1) (p - r) (q + r)))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T011939-L-2767212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T011939-L-2767212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

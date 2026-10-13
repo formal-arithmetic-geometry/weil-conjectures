@@ -31,52 +31,29 @@
  ],
  "proof": [
   {
-   "text": "Put u=p-r and v=q+r. The adjacent initial E objects at negative first index vanish. The original exactness identities give ker alpha=0 and im alpha=D at nonpositive first index, so these diagonal transitions are invertible. Iterate the cocone equation from the normalized zeroth map to conclude that the cocone map D(u,v) to A(p+q) is invertible.",
+   "text": "Use the intrinsic finite-cycle presentation to obtain an epimorphic canonical finite-cycle map and its kernel as an alpha-image pullback. Use normalizedGraded_finite_kernel to identify the graded-piece map kernel with the same pullback. Its epimorphicity follows directly from its definition as an image epimorphism followed by a cokernel projection and an index transport.",
    "uses": [
-    "def-sp-exact-couple",
+    "lem-sp-finite-cycle-kernel-presentation",
+    "lem-sp-normalized-graded-finite-kernel",
     "def-sp-convergence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Construct e_n:D(p,q) to D_n(p-n,q+n) recursively: e_0 is the identity; e_(n+1) is e_n followed by the canonical image epimorphism of alpha_n(p-n,q+n), transported to the successor D object. Every e_n is epi. The inclusion recurrences and alpha restriction equation in pageCouple_image identify its composite with the original-D inclusion with the n-fold diagonal alpha composite. By the cocone equations, this inclusion followed by the invertible cocone map at (u,v) is a mono whose composite with e_r is the original cocone map at p. Thus it represents im(iota_p). Applying the same calculation at (p+1,q-1), and then the derived alpha restriction equation, identifies im(alpha_r(u+1,v-1)) with the next image im(iota_(p+1)) inside im(iota_p).",
-   "uses": [
-    "lem-sp-derived-couple-exact",
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "def-sp-filtration"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The following D term D_r(p+2,q-1) is zero by hypothesis, so f_r(p,q)=0. Exactness at E makes transported g_r(u,v) epimorphic; exactness at D identifies its kernel with im(alpha_r(u+1,v-1)). An epi in an abelian category is the cokernel of its kernel. Under the image identifications of the previous step this is the same inclusion whose cokernel is the graded piece. The unique comparison of these cokernels is the claimed isomorphism.",
-   "uses": [
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "def-sp-filtration"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Induct on n to identify e_n followed by transported g_n with the nth finite-cycle lift of initialG followed by the tower projection. At zero use projection_zero. At a successor, DerivedMaps.g_comm replaces the image-epi/derived-g composite by gToCycles followed by the derived E projection. Cancel the kernel inclusion, using cycleLift_comm and the induction hypothesis, to identify the cycle lift. Then projection_succ gives the successor projection. The monic cycle arrow ensures every factorization of initialG is equal to factorThru(initialG,hg). At r, compose this equality with the cokernel comparison equation of the preceding step. Its other side is precisely the image epimorphism followed by the graded-piece projection, including the prescribed eqToHom transport, namely toGradedPiece.",
-   "uses": [
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "def-sp-filtration"
-   ],
-   "elementary": false
+   "text": "Equal kernel subobjects show that each kernel inclusion is killed by the other epimorphism, using kernelSubobject_factors_iff. Define the comparison hom and inv by Abelian.epiDesc. Cancel the two epimorphisms and use comp_epiDesc to prove that the composites are identities. The same factorization equation gives exactly the required original-g/tower-projection equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-convergence",
-  "def-sp-exact-couple",
-  "def-sp-filtration",
-  "lem-sp-derived-couple-exact"
+  "lem-sp-finite-cycle-kernel-presentation",
+  "lem-sp-normalized-graded-finite-kernel"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
-  "place": "proof paragraph 2; explicit image-epimorphism induction and projection compatibility expanded by P2"
+  "place": "Y3: proof paragraph 2 reduced to intrinsic finite-cycle presentation plus proved normalized colimit kernel; explicit epiDesc comparison"
  },
  "mathlib_searches": [
   {
@@ -162,12 +139,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T210029-L-953655",
+  "landing": "20261013T011939-L-2767212",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-finite-cycle-kernel-presentation",
+ "kind": "statement",
+ "title": "The canonical finite-cycle projection is epic with its intrinsic alpha-image kernel",
+ "statement": "Let C be an abelian category and X a type-zero bigraded exact couple [def-sp-exact-couple]. Fix r natural and p,q integer. Suppose D_r(p+2,q-1) is zero and initialG at (p,q) factors through Z_r of [def-sp-convergence]. Its lift followed by the canonical tower projection onto E_r is epimorphic. Its kernel is the pullback along alphaIter r from D(p,q) to D(p-r,q+r) of the image of incomingAlphaIter (r+1) at (p-r,q+r). No half-plane or colimit hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2: finite-page successive-image quotient, before passage to the infinite page",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 011R, 011T and 0AMJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical epimorphisms e_n from original D(p,q) to D_n(p-n,q+n) by identity at zero and successive image epimorphisms of restricted alpha. Using pageCouple_image, compose each with the canonical monic inclusion and obtain alphaIter n by induction.",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n to identify e_n followed by transported derived g with the finite factorThru(initialG) followed by projection n. At zero apply projection_zero. At a successor apply DerivedMaps.g_comm, cancel the kernel inclusion using cycleLift_comm, and apply projection_succ. The cycle arrow is mono so the chosen lift equals factorThru. The successor cycle lift restricts to the preceding one by cancellation of its cycle arrow.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness identifies the kernel of g_n with the incoming restricted-alpha image. Under the monic inclusion I_n its image is incomingAlphaIter(n+1), by the successor image recurrence. Pulling this back along e_n, whose inclusion composite is alphaIter n, gives the displayed kernel formula. The zero following D term makes f_n zero, hence exactness makes g_n epic. Since e_n is epic, the canonical finite cycle map is epic.",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2; Y3 expansion of the finite intrinsic kernel and normalized colimit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exact.couple|alphaIter|incomingAlphaIter",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact-couple-specific statement; generic tools used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of original g projected to finite derived exact couple page is inverse image of incoming alpha iterate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of original g projected to finite derived exact couple page is inverse image of incoming alpha iterate",
+   "results": "Profinite.NobelingProof.succ_exact, AlgebraicTopology.NormalizedMooreComplex.objX_add_one, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d, HomologicalComplex.kernel_from_eq_kernel, AlgebraicTopology.NormalizedMooreComplex.objD, SnakeLemma.δ_aux, CategoryTheory.ComposableArrows.Exact.cokerToKer', HomologicalComplex.kernel_eq_kernel",
+   "date": "2026-10-12",
+   "verdict": "no exact-couple-specific statement; generic tools used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FinitePageImageQuotient",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-half-plane-convergence",
+   "place": "proof paragraph 2: intrinsic finite-cycle kernel and normalized graded-image kernel",
+   "via": [
+    "lem-sp-finite-page-image-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteCycleKernelPresentation",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCycleKernelPresentation.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCycle_kernel_presentation",
+  "statement": "theorem finiteCycle_kernel_presentation (X : BigradedExactCouple C 0)\n    (r : ℕ) (p q : ℤ)\n    (hnext : IsZero ((X.pageCouple r).D (p + 2) (q - 1)))\n    (hg : (X.cycleBoundaryTower.Z r p q).Factors (X.initialG p q)) :\n    Epi ((X.cycleBoundaryTower.Z r p q).factorThru (X.initialG p q) hg ≫\n      X.cycleBoundaryTower.projection r p q) ∧\n    kernelSubobject ((X.cycleBoundaryTower.Z r p q).factorThru\n        (X.initialG p q) hg ≫ X.cycleBoundaryTower.projection r p q) =\n      (Subobject.pullback (X.alphaIter r p q)).obj\n        (imageSubobject (X.incomingAlphaIter (r + 1) (p - r) (q + r)))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T011939-L-2767212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T011939-L-2767212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
