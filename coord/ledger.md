@@ -13107,3 +13107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:13 L: merged deliver/K1/Sheaf.RingTheory.PointedEtaleEssentiallySmall (stage 3; reviewer PASS; first push; landing 20261013T161320-L-1423680 (proof); batch 20261013T161318; modules 1; new nodes 0)
 - 16:13 L: merged deliver/K2/Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom (stage 3; reviewer PASS; first push; landing 20261013T161320-L-1423831 (proof); batch 20261013T161318; modules 1; new nodes 0)
 - 16:13 L: merged deliver/N4/Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport (stage 3; reviewer PASS; first push; landing 20261013T161321-L-1423982 (interface); batch 20261013T161318; modules 3; new nodes 2)
+- 16:13 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapSurjective (stage 3; reviewer PASS; first push; landing 20261013T161321-L-1424092 (interface); batch 20261013T161318; modules 2; new nodes 1)
