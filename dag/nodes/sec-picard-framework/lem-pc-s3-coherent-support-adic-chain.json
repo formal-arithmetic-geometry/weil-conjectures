@@ -16,33 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Take the actual vanishing ideal J of T. Its proper-stalk locus is T, so support containment and coherent_support_power_ideal_kills give n with J^n F zero. No arbitrary object is defined by choosing this witness.",
+   "text": "Construct the vanishing ideal J of T and apply coherent_support_vanishingIdeal_nilpotence to obtain n with the actual image product J^n F zero. The helper uses an acyclic affine-cover proof of Stacks 01Y9. Only the exponent is chosen; the ideal and every sheaf are explicit constructions.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "lem-weil-pbc-coherent-support-power-ideal-kills"
+    "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence"
    ],
    "elementary": false
   },
   {
-   "text": "For positive t set P(t) to the actual image idealModuleProduct of J^t acting on F, and b(t) to its image inclusion. Quasi-coherence of the ideal (source-library isQuasicoherent_toModules, HilbertPolynomial), tensor products and images proves quasi-coherence of powers and products by induction. Quasi-coherence of F follows from its assumed coherence via the finite-type criterion; the coherent-submodule criterion proves coherence of every P(t), and coherent cokernel closure proves coherence of each successive quotient. Set P(0) literally to F and use the canonical isomorphism at zero. After n extend P by zero.",
+   "text": "Define P(t) as the image product J^t F. Apply quasi-coherent pushforward and kernel closure to J. The private power_quasiCoherent helper is proved for any quasi-coherent module mapping to the unit, not just IdealSheafData; tensor and image closure prove its induction. Coherent submodule and cokernel closure give coherence. The zero-power inclusion is an isomorphism.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "lem-weil-pbc-quasi-coherent-module-cokernel-image",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Apply formalModuleQuotient_factor to the identity of F and t <= t+1, obtaining f:P(t+1) -> P(t) with f b(t)=b(t+1). Both image inclusions are monic, hence f is monic and its cokernel sequence is short exact. Outside T the stalk of F is zero. Injectivity of the stalk of b(t) makes the stalk of P(t) zero, and surjectivity of the stalk cokernel projection makes the quotient stalk zero. Stalk injectivity is proved for arbitrary ringed spaces from module_stalk_exact, rather than duplicating the private scheme-level lemma.",
+   "text": "The local idealSheafPower_factor and product_power_factor are generalized to arbitrary module morphisms to the tensor unit, with no ideal-sheaf or monicity assumption. Recursion factors power inclusions; image.map on the tensor naturality square gives product factorization. Specialize to J.toModulesι to construct f:P(t+1) -> P(t). Image monicity gives Mono f, so its cokernel sequence is short exact. Apply module_stalk_exact and ModuleCat.mono_iff_injective through stalk_map_mono to show support containment.",
    "uses": [
-    "lem-weil-pbc-formal-module-ideal-power-factor",
     "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the image I of J at the generic point with the maximal ideal. A germ of a J-section has zero residue at the generic point and is a nonunit. Conversely represent a nonunit germ by f on U. Its basic open does not contain the generic point; specialization then excludes every point of T from that basic open. Thus f vanishes on T intersect U and is a section of J, giving the required germ lift. This is the private generic_ideal_range proof, using the pointwise description of the reduced vanishing ideal and Mathlib basic-open and generic-point specialization lemmas.",
+   "text": "Use generic_ideal_range generalized to an arbitrary subset T and an ideal J characterized by pointwise vanishing on T, assuming ξ belongs to T and specializes to each point of T; no closedness or generic-point equality is assumed by this helper. Sections of J have nonunit germ at ξ. Conversely a nonunit germ is represented by f whose basic open omits ξ, hence every specialization in T, so f belongs to J. Specialize using reduced_induced_closed_subscheme and hξ.",
    "uses": [
     "lem-weil-pbc-reduced-induced-closed-subscheme"
    ],
@@ -57,28 +57,28 @@
    "elementary": false
   },
   {
-   "text": "Assemble the finite chain, the zero terminal object, its coherent terms and the coherent generic-annihilated cokernel sequences. No integral filtration is asserted here.",
+   "text": "Set Q(0)=F and Q(k+1)=P(k), with terminal index n+1. The first map is the zero-power isomorphism b(0), with zero cokernel; all later steps are the constructed cokernel sequences. This extra zero quotient avoids transporting the chain along the zero-power isomorphism. No conditions are required past the terminal index.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-support-power-ideal-kills",
-  "lem-weil-pbc-formal-module-ideal-power-factor",
   "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "pqf-lem-coherent-ft-locnoeth"
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-pushforward-qcoh"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "W3",
+  "agent": "M4",
   "date": "2026-10-13",
-  "based_on": "Construction subproblem extracted from the literal Stacks 01YF proof, not a restatement of an existing filtration theorem."
+  "based_on": "Stacks 01YF adic reduction, proved vanishing-ideal nilpotence, generalized unit-valued module power factorization, and a leading zero quotient; repair removes word-for-word duplicate helpers without cyclic imports."
  },
  "mathlib_searches": [
   {
@@ -190,9 +190,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T001618-L-2331747",
+  "landing": "20261013T040752-L-3950019",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

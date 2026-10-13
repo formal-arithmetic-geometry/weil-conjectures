@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-s3-coherent-support-vanishing-ideal-nilpotence",
+ "kind": "statement",
+ "title": "A power of the vanishing ideal kills a coherent module",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], T a closed subset, and F a coherent module [pqf-def-coherent, def-weil-sheaf-of-modules-category] with its nonzero module-stalk locus [def-weil-pbc-module-stalk] contained in T. Then some nonnegative power of the actual vanishing ideal of T acting on F, formed by idealModuleProduct and idealSheafPower, is a zero object.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01Y9, ideal-power support lemma."
+ },
+ "proof": [
+  {
+   "text": "Coherence implies quasi-coherence and finite type. Cover X by finitely many affine opens. finite_type_module_support_closed identifies support locally with V(Ann M); quasi_coherent_ideal_zero_set_affine identifies the vanishing ideal zero locus with T. Containment gives J(U) contained in radical(Ann M). Apply Mathlib Ideal.exists_pow_le_of_le_radical_of_fg using Noetherian finite generation, and take the maximum exponent (zero for an empty cover).",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local ideal_qc helper uses closed-immersion pushforward and kernel quasi-coherence. The generalized multiplication_range requires only quasi-coherence of the target and tensor object and surjectivity of the affine tensor comparison, not quasi-coherence of the source. powers_affine_sections treats an arbitrary quasi-coherent module morphism i to the unit, with no monicity or ideal-sheaf hypothesis: it proves quasi-coherence and range(i^n) = range(i)^n for every exponent, including zero. The generalized powerProduct_isZero_iff_affine_cover gives vanishing of its product with F exactly when those affine ideals annihilate F. affine_source_zero_of_sections applies to any open immersion from an affine scheme, not only the canonical inclusion of an affine open; use the affine tilde-Gamma equivalence and sheaf locality. Specialize i to the vanishing-ideal inclusion and identify its range using range_toModulesι_app. The two existing affine-product packages reach the item and cannot be imported without a cycle.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "M4",
+  "date": "2026-10-13",
+  "based_on": "Affine support and annihilator argument from Stacks Tag 01Y9; repair removes duplicate helpers and generalizes affine powers and vanishing to arbitrary unit-valued module maps and arbitrary affine source open immersions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "power of vanishing ideal kills coherent module support",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error"
+   },
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_le_of_le_radical_of_fg",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "Ideal.exists_pow_le_of_le_radical_of_fg"
+    ],
+    "note": ""
+   },
+   "verdict": "Affine ingredient only; no exact sheaf theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_le_of_le_radical_of_fg",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "verdict": "No direct grep hit in the searched Mathlib path.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentSupportAdicChain",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-s3-coherent-support-adic-chain",
+   "place": "ideal-power nilpotence step"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportVanishingIdealNilpotence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_support_vanishingIdeal_nilpotence",
+  "statement": "theorem coherent_support_vanishingIdeal_nilpotence\n    (X : Scheme.{u}) [IsNoetherian X] (T : TopologicalSpace.Closeds X)\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (hSupp : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ (T : Set X)) :\n    ∃ n : ℕ, IsZero (idealModuleProduct\n      (idealSheafPower (IdealSheafData.vanishingIdeal T).toModulesι n).2 F)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T040752-L-3950019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T040752-L-3950019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
