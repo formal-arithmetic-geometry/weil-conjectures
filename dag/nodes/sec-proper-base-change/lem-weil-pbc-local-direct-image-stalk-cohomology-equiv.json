@@ -12,25 +12,26 @@
  ],
  "proof": [
   {
-   "text": "Each neighborhood of y pulls back under c to top; the top germ identifies sections with the pushforward stalk. On the local spectrum, global evaluation is closed-point stalk evaluation and is exact.",
+   "text": "On a local spectrum every neighborhood of its closed point is top. Use Mathlib exists_germ_eq and germ_eq to prove the top germ of any abelian presheaf bijective. The sectionCohomologyComparison is an isomorphism: its homology comparison is an isomorphism, and the counit is a componentwise isomorphism of complexes. Underlying theta is the sheafification unit followed by this comparison. Its stalk is an isomorphism by stalkFunctor_map_unit_toSheafify_isIso. The germ naturality square and the two bijective top germs imply that theta on top is bijective.",
    "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Commute this exact evaluation with homology and use the specified resolution comparisons and identity of section complexes to prove b bijective.",
-   "uses": [
+    "def-weil-pbc-local-direct-image-stalk-class-map",
     "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-pbc-local-direct-image-stalk-class-map"
+    "lem-weil-pbc-stalk-sheafification-space"
    ],
    "elementary": false
   },
   {
-   "text": "Represent a stalk scalar by a germ; the structure-sheaf germ square identifies its action with the action through Gamma-Spec followed by f′.appTop. All section and homology comparisons are linear for this action. Equip b with this linear structure.",
+   "text": "For c = fromSpecStalk y, Mathlib preimage_eq_top_of_closedPoint_mem and fromSpecStalk_closedPoint show that every neighborhood of y has inverse image top. Consequently every restriction of c_*N between such neighborhoods is an isomorphism: it is the image of the unique isomorphism between the equal inverse-image opens. The germ representative and germ equality lemmas then prove the top germ into (c_*N)_y bijective. Expand the actual class map. resolutionSectionClass is an isomorphism on top by step 1 and its other specified resolution/evaluation homology isomorphisms. The next resolution comparison on sections is also an isomorphism. Compose these two bijections with the pushforward top germ bijection. This proves bijectivity of the specified additive map without any new hole.",
    "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-pbc-local-direct-image-stalk-class-map",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the separate scalar compatibility theorem to equip the given additive map with a linear-map structure. Apply LinearEquiv.ofBijective to this very linear map using step 2. Its underlying function is definitionally the specified class map, so the required pointwise equality is reflexivity. No arbitrary witness or repackaged equivalence is used.",
+   "uses": [
+    "lem-weil-pbc-local-direct-image-stalk-class-smul",
     "def-weil-pbc-local-direct-image-stalk-class-map"
    ],
    "elementary": false
@@ -39,13 +40,13 @@
  "proof_deps": [
   "def-weil-pbc-local-direct-image-stalk-class-map",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+  "lem-weil-pbc-local-direct-image-stalk-class-smul",
+  "lem-weil-pbc-stalk-sheafification-space"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3 (Tag 01E4); Lemma 30.20.7 (Tag 02OD), displayed stalk/global-cohomology equality, expanded using exact closed-point evaluation. No formal-functions hypotheses are needed for this subargument.; detailed construction and reduction by S3, 2026-10-13."
+  "place": "Lemma 20.7.3, the comparison of section-complex cohomology with higher direct-image sheaves; Tag 02OD, Lemma 30.20.7, the displayed local-stalk/global-cohomology equality, before formal functions. Scalar compatibility expanded by S4. S4: bijectivity proved from Mathlib sheafification stalk invariance and the explicit resolution comparisons; only scalar compatibility remains separate."
  },
  "mathlib_searches": [
   {
@@ -127,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T230802-L-1910647",
+  "landing": "20261013T011934-L-2765733",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

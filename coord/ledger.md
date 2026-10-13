@@ -10478,3 +10478,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/N4/Sheaf.CategoryTheory.ColimitSiteAbelianCoverSectionLift (stage 3; reviewer PASS; first push; landing 20261013T011933-L-2765378 (interface); batch 20261013T011921; modules 2; new nodes 1)
 - 01:19 L: merged deliver/R2/Sheaf.Algebra.Homology.OpenExtensionCounitStalk (stage 3; reviewer PASS; first push; landing 20261013T011933-L-2765507 (proof); batch 20261013T011921; modules 1; new nodes 0)
 - 01:19 L: merged deliver/S1/Sheaf.AlgebraicGeometry.Modules.LocalBlockResidueRank (stage 3; reviewer PASS; after a return; landing 20261013T011934-L-2765605 (proof); batch 20261013T011921; modules 1; new nodes 0)
+- 01:19 L: merged deliver/S4/Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassEquiv (stage 3; reviewer PASS; first push; landing 20261013T011934-L-2765733 (interface); batch 20261013T011921; modules 2; new nodes 1)
