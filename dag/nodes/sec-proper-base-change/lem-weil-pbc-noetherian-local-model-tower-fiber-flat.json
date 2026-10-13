@@ -1,0 +1,196 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-model-tower-fiber-flat",
+ "kind": "statement",
+ "title": "Closed-fibre flatness on a tail of a Noetherian local model tower",
+ "statement": "Let $R,S,T$ be commutative rings with maps $R\\to S\\to T$, with $R$ local and maximal ideal $\\mathfrak m$. Let $M$ be a $T$-module with its restricted $S$-action and let $X$ be a Noetherian local model tower [def-weil-pbc-noetherian-local-model-tower] for these rings and this module, indexed by $I$. Suppose $(S/\\mathfrak m S)\\otimes_S M$ is flat over $S/\\mathfrak m S$ [def-weil-pbc-flat-ring-map]. Then there exists $i\\in I$ such that for every $j\\ge i$, writing $\\mathfrak m_j$ for the maximal ideal of $R_j$, $(S_j/\\mathfrak m_jS_j)\\otimes_{S_j}N_j$ is flat over $S_j/\\mathfrak m_jS_j$. No base-flatness hypothesis or conclusion is included, and the zero module is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Closed-fibre flatness on a tail of a Noetherian local model tower"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "1. Write `mᵢ` for the maximal ideal of `Rᵢ`. A local map of local rings pulls the\n   target maximal ideal back to the source maximal ideal. Thus the base transition\n   maps send `mᵢ` into `mⱼ`, and membership of a represented limit element in `m_R`\n   already holds at its representing stage.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Form `Aᵢ = Sᵢ/mᵢSᵢ`, `Bᵢ = Tᵢ/mᵢTᵢ` and `Dᵢ = Nᵢ/mᵢNᵢ`. These are\n   Noetherian local rings and finite top-ring modules: the extended ideals are contained\n   in the respective maximal ideals, and quotients preserve Noetherianity and finiteness.\n   The compatible stage maps descend to local maps and semilinear module maps.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Tensor-over-quotient and localization base change identify the new transition\n   tensor maps with quotients of `fibreTransition` and `moduleTransition`. Thus the\n   former are localizations and the latter are module base-change isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. The quotient-system limits are `S/m_RS`, `S'/m_RS'` and `M/m_RM`. Surjectivity\n   follows by representing elements at a stage. For injectivity, represent a finite\n   expression in an extended maximal ideal at a common later stage. Its coefficients\n   lie in that stage's maximal ideal by step 1. Descend equality with the given element\n   using the eventual-equality clauses of the tower. The element is then zero in that\n   quotient stage. The same argument works for modules and preserves scalar actions.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "5. The quotient-tensor isomorphism identifies `M/m_RM` with the given closed-fibre\n   tensor module. Apply `RingTheory.exists_flat_stage` to the quotient system and the\n   limit fibre-flatness hypothesis. This gives a fibre-flat stage. At every later stage,\n   base change preserves flatness; tensor associativity and the quotient transition\n   localization identify the later module with a localization of that base change.\n   `Module.Flat.localizedModule_of_algebra` preserves base flatness, completing the tail\n   assertion. No base-flatness hypothesis is needed, and the zero module is allowed.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Closed-fibre flatness on a tail of a Noetherian local model tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of the closed fibre of a module descends to every sufficiently large stage of a directed Noetherian local model tower",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of the closed fibre of a module descends to every sufficiently large stage of a directed Noetherian local model tower",
+   "results": "AdicCompletion.flat_of_isNoetherian; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Module.flat_of_isLocalized_span; Module.flat_of_localized_maximal; Module.flat_of_isLocalized_maximal; Module.flat_of_localized_span; Module.FaithfullyFlat.iff_flat_and_proper_ideal; Algebra.Smooth.flat_of_isNoetherianRing",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(closedFiber|closed_fiber|fibre).*stage|fibre.*eventually|fiber.*eventually",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianFlatClosedFiberModel",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Closed-fibre flatness on a tail of a Noetherian local model tower",
+   "via": [
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlat",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerFiberFlat.lean",
+  "declaration": "Module.NoetherianLocalModelTower.eventually_fiberFlat",
+  "statement": "theorem NoetherianLocalModelTower.eventually_fiberFlat\n    {R : Type u} {S : Type v} {S' : Type w} {M : Type t}\n    [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]\n    [Algebra R S] [Algebra S S'] [Module S' M] [Module S M]\n    [IsScalarTower S S' M]\n    (X : NoetherianLocalModelTower R S S' M)\n    (h_fibre : Module.Flat\n      (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R))\n      ((S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ⊗[S] M)) :\n    letI := X.preorder\n    letI := X.commR\n    letI := X.commS\n    letI := X.localR\n    letI := X.algRS\n    letI := X.addN\n    letI := X.moduleS\n    ∃ i : X.ι, ∀ j : X.ι, i ≤ j → Module.Flat\n      (X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))\n        (IsLocalRing.maximalIdeal (X.R₀ j)))\n      ((X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))\n        (IsLocalRing.maximalIdeal (X.R₀ j))) ⊗[X.S₀ j] X.N₀ j)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

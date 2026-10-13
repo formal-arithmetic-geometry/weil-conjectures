@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-model-tower-base-flat-stage",
+ "kind": "statement",
+ "title": "Existence of a base-flat stage",
+ "statement": "Let $R,S,T$ be commutative rings with $R\\to S\\to T$, and let $M$ be a $T$-module with its compatible restricted $S$- and $R$-actions. Let $X$ be a Noetherian local model tower [def-weil-pbc-noetherian-local-model-tower], indexed by $I$. If $M$ is flat over $R$ [def-weil-pbc-flat-ring-map], then there is $i\\in I$ such that $N_i$ is flat over $R_i$. This assertion does not include persistence or fibre flatness.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a base-flat stage"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-local-model-tower",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "1. Convert the base and top ring directed systems and the module directed system to\n   functors on the index preorder. The directed-system axioms give identity and composition.\n   The compatible ring and module limit maps give cocones, after lifting limit rings to\n   the stage-ring universe as needed.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. The elementwise representation and eventual-equality fields of the tower imply these\n   cocones are colimits: every element is represented; two representatives are equal\n   exactly when their images agree at a common later stage. The universal maps from these\n   colimits are therefore bijective ring or additive homomorphisms. Semilinearity and\n   the ring-map squares transport scalar structures and base flatness to the colimits.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Apply `RingTheory.exists_flat_stage`. All stage rings are Noetherian local, all ring\n   maps are local, the stage modules are finite and the module transitions are semilinear.\n   The fields `baseTransition` and `moduleTransition` give precisely its localization\n   and module tensor-isomorphism hypotheses. Transport the resulting flat stage from\n   the restricted action along the base-to-top map to the tower's specified base action;\n   these actions agree by the two stage scalar towers. No persistence or fibre argument\n   is part of this statement, and the zero module is allowed.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-eventually-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Existence of a base-flat stage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat limit module in a directed system of Noetherian local rings with localization base change transitions is flat at every sufficiently large stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat limit module in a directed system of Noetherian local rings with localization base change transitions is flat at every sufficiently large stage",
+   "results": "AdicCompletion.flat_of_isNoetherian; Module.flat_of_localized_maximal; Module.flat_of_isLocalized_span; Module.flat_of_localized_span; Module.flat_of_isLocalized_maximal; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Algebra.Smooth.flat_of_isNoetherianRing; Module.flat_iff_of_isLocalization",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*flat|flat.*stage|localization.*flat",
+   "results": "Mathlib/RingTheory/Regular/Flat.lean; Mathlib/RingTheory/Flat/Stability.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/RingTheory/Flat/Localization.lean; Mathlib/Algebra/Module/LocalizedModule/Submodule.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianFlatClosedFiberModel",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Existence of a base-flat stage",
+   "via": [
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTowerBaseFlatStage",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTowerBaseFlatStage.lean",
+  "declaration": "Module.NoetherianLocalModelTower.exists_baseFlat_stage",
+  "statement": "theorem NoetherianLocalModelTower.exists_baseFlat_stage\n    {R : Type u} {S : Type v} {S' : Type w} {M : Type t}\n    [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]\n    [Algebra R S] [Algebra S S'] [Algebra R S'] [IsScalarTower R S S']\n    [Module S' M] [Module S M] [Module R M]\n    [IsScalarTower S S' M] [IsScalarTower R S M]\n    (X : NoetherianLocalModelTower R S S' M) [Module.Flat R M] :\n    letI := X.commR\n    letI := X.addN\n    letI := X.moduleR\n    ∃ i : X.ι, Module.Flat (X.R₀ i) (X.N₀ i)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

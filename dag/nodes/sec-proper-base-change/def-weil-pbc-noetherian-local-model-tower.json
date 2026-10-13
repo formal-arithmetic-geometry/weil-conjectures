@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-noetherian-local-model-tower",
+ "kind": "definition",
+ "title": "Directed Noetherian local model towers",
+ "statement": "Let $R,S,T$ be commutative rings with ring maps $R\\to S\\to T$, and let $M$ be a $T$-module with a specified restricted $S$-action. A Noetherian local model tower consists of a nonempty directed preorder $I$; for each $i\\in I$, commutative Noetherian local rings $R_i,S_i,T_i$ [def-weil-pbc-noetherian-ring], local homomorphisms $R_i\\to S_i\\to T_i$, and a finite $T_i$-module $N_i$ [def-weil-finitely-generated-module] with its restricted $S_i$- and $R_i$-actions. For $i\\le j$ it has local ring transitions $r_{ji},s_{ji},t_{ji}$ and additive transitions $n_{ji}$, equal to identities at equal indices and compatible with composition; ring squares commute and $n_{ji}(ax)=t_{ji}(a)n_{ji}(x)$. There are compatible local maps $R_i\\to R,S_i\\to S,T_i\\to T$ commuting with the two horizontal ring maps, and compatible additive maps $\\nu_i:N_i\\to M$ semilinear over $T_i\\to T$. Every element of each limit ring and $M$ is the image of a stage element, and equality of two elements at one stage whose limit images coincide holds at a later stage. For $i\\le j$ the canonical maps $T_i\\otimes_{R_i}R_j\\to T_j$ and $T_i\\otimes_{S_i}S_j\\to T_j$, $a\\otimes b\\mapsto t_{ji}(a)b$, are localizations at some multiplicative subsets, and $T_j\\otimes_{T_i}N_i\\to N_j$, $a\\otimes x\\mapsto a n_{ji}(x)$, is a linear isomorphism. Finally for every $i$ there is a submonoid $U\\subseteq R\\otimes_{R_i}S_i$ with an $R$-linear isomorphism $U^{-1}(R\\otimes_{R_i}S_i)\\cong S$, and a module structure of $C=S\\otimes_{S_i}T_i$ on $S\\otimes_{S_i}N_i$ extending its usual $S$-action, a submonoid $V\\subseteq C$, and an $S$-linear isomorphism $V^{-1}(S\\otimes_{S_i}N_i)\\cong M$ [def-weil-pbc-module-localization]. No flatness is assumed. For rings in universes $u,v,w$ and module in universe $t$, $I$ and the three stage rings lie in universe $\\max(u,v,w)$ and the stage modules in universe $t$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00R7 (lemma-criterion-flatness-fibre), first two paragraphs; Directed Noetherian local model towers"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Directed Noetherian local model towers with localization transitions for an essentially finitely presented local algebra and finitely presented module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Directed Noetherian local model towers with localization transitions for an essentially finitely presented local algebra and finitely presented module",
+   "results": "IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway; Algebra.FinitePresentation.of_span_eq_top_target; RingHom.finitePresentation_ofLocalizationSpanTarget; Module.Finite.of_localizationSpan_finite'; Module.Finite.of_localizationSpan'; Module.FinitePresentation.exists_free_localizedModule_powers; instFinitePresentationLocalizationLocalizedModule",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianLocalModelTower|noetherian.*local.*tower|local.*model.*system",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianFlatClosedFiberModel",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite-etale-lifting step 7 (essential surjectivity via 0GS2): approximation branch, criterion-flatness-fibre steps 1--8 and its limit localization comparisons; Directed Noetherian local model towers",
+   "via": [
+    "lem-weil-pbc-noetherian-flat-closed-fiber-model",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherianLocalModelTower",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalModelTower.lean",
+  "declaration": "Module.NoetherianLocalModelTower",
+  "statement": "structure NoetherianLocalModelTower\n    (R : Type u) (S : Type v) (S' : Type w) (M : Type t)\n    [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]\n    [Algebra R S] [Algebra S S'] [Module S' M] [Module S M]",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222423-L-1230145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

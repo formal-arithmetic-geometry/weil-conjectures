@@ -12,8 +12,9 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.Paper.LimitTowerEssentiallyFinitePresentation
-import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.NoetherianLocalModelTowerExistence
+import Sheaf.RingTheory.NoetherianLocalModelTowerBaseFlat
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberFlat
 
 /-!
 # A common Noetherian stage for base and closed-fibre flatness
@@ -119,6 +120,41 @@ theorem exists_noetherian_flat_closedFiber_model
       (∃ (_ : Module (S ⊗[S₀] T₀) (S ⊗[S₀] N₀))
         (_ : IsScalarTower S (S ⊗[S₀] T₀) (S ⊗[S₀] N₀))
         (U : Submonoid (S ⊗[S₀] T₀)),
-        Nonempty (LocalizedModule U (S ⊗[S₀] N₀) ≃ₗ[S] M)) := by sorry
+        Nonempty (LocalizedModule U (S ⊗[S₀] N₀) ≃ₗ[S] M)) := by
+  obtain ⟨X⟩ := exists_noetherian_localModelTower R S S' M P Q W V
+  let := X.preorder
+  let := X.directed
+  let := X.commR
+  let := X.commS
+  let := X.commT
+  let := X.localR
+  let := X.localS
+  let := X.localT
+  let := X.noethR
+  let := X.noethS
+  let := X.noethT
+  let := X.algRS
+  let := X.algST
+  let := X.algRT
+  let := X.towerRST
+  let := X.localRS
+  let := X.localST
+  let := X.addN
+  let := X.moduleT
+  let := X.moduleS
+  let := X.moduleR
+  let := X.towerSTN
+  let := X.towerRSN
+  let := X.algRLimit
+  let := X.algSLimit
+  obtain ⟨i, hi⟩ := X.eventually_baseFlat
+  obtain ⟨j, hj⟩ := X.eventually_fiberFlat h_fibre
+  obtain ⟨k, hik, hjk⟩ := exists_ge_ge i j
+  exact ⟨X.R₀ k, X.S₀ k, X.T₀ k, X.N₀ k,
+    X.commR k, X.commS k, X.commT k, X.localR k, X.localS k, X.localT k,
+    X.noethR k, X.noethS k, X.noethT k, X.algRS k, X.algST k, X.algRT k,
+    X.towerRST k, X.localRS k, X.localST k, X.addN k, X.moduleT k, X.moduleS k,
+    X.moduleR k, X.towerSTN k, X.towerRSN k, X.algRLimit k, X.algSLimit k,
+    X.finite k, hi k hik, hj k hjk, X.baseLocalization k, X.moduleLocalization k⟩
 
 end Module
