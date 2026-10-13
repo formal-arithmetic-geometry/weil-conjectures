@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.AffineAlternatingCechModel
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.AlternatingCechSheafTerms
+import Sheaf.AlgebraicGeometry.AlternatingCechSheafLocalContraction
+import Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineComparison
 
 /-! # Augmented increasing-tuple complex of module sheaves
 
@@ -69,6 +72,25 @@ theorem exists_affineAlternatingCech_augmented_construction
       ∀ k : ℕ, ∃ (n : ℕ) (W : Fin n → X.Opens),
         (∀ j, IsAffineOpen (W j)) ∧
         Nonempty (C.X k ≅ ∏ᶜ fun j : Fin n ↦
-          (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι)) := by sorry
+          (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι)) := by
+  classical
+  have hsep : IsSeparated (terminal.from X) := by
+    have h : IsSeparated (f ≫ terminal.from (Spec A)) := inferInstance
+    simpa only [terminal.comp_from] using h
+  let : X.IsSeparated := ⟨hsep⟩
+  obtain ⟨hε, hpε⟩ := alternatingCechSheafAugmentation_quasiIso (pullback.fst f g) U hU G
+  refine ⟨alternatingCechSheafComplex U G, alternatingCechSheafAugmentation U G,
+    alternatingCechSheafComplex_affineComparison f U haffine G, hε, hpε, ?_⟩
+  intro k
+  let T := Fin (k + 1) ↪o Fin r
+  let e : T ≃ Fin (Fintype.card T) := Fintype.equivFin T
+  let W : Fin (Fintype.card T) → X.Opens := fun j ↦ alternatingCechIntersection U (e.symm j)
+  obtain ⟨q⟩ := alternatingCechSheafComplex_terms U G k
+  refine ⟨Fintype.card T, W, ?_, ?_⟩
+  · intro j
+    exact IsAffineOpen.iInf fun l ↦ haffine (e.symm j l)
+  · exact ⟨q ≪≫ (Pi.reindex e.symm (fun t : T ↦
+      (Scheme.Modules.pushforward (alternatingCechIntersection U t).ι).obj
+        (G.restrict (alternatingCechIntersection U t).ι))).symm⟩
 
 end AlgebraicGeometry

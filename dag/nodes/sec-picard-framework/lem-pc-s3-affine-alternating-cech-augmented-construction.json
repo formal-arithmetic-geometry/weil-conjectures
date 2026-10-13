@@ -15,38 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Form actual sheaves P(W)=j_W*(G restricted to W), with P(W)(V)=G(V intersection W). Restriction along W contained in Z gives P(Z)->P(W), compatible with the O_X(V)-action. In degree k take the product over increasing (k+1)-tuples, with intersections W_t, and signed face restriction differential as in the section complex. Pair the two orders of deleting two entries: restrictions agree and their signs are opposite, proving d squared zero. The restriction maps G->P(U_i) have zero composite with d, giving epsilon.",
+   "text": "Use the explicitly constructed increasing-tuple complex and restriction augmentation. Apply the local contraction theorem to the base-change projection, and the affine comparison theorem to f.",
    "uses": [
-    "def-sc-alternating-cech-total-complex"
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+    "lem-pc-s3-alternating-cech-sheaf-affine-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On U_i, evaluate a cochain at the tuple obtained by inserting i, sorted with sign; use zero for a repeated index. Each term is over the same intersection after restriction to U_i. In dh+hd, deleting the newly inserted i gives the original cochain, while deleting another index cancels between the two summands. This also contracts degree zero against the augmentation. Thus epsilon is locally a homotopy equivalence and is a quasi-isomorphism. Restriction of tensor pullback to p inverse U_i commutes with restriction of modules. Apply the additive tensor pullback to the same homotopy identities: it preserves sums, negatives, compositions and identities, so the pulled-back augmentation is again locally a homotopy equivalence. Extension by zero preserves both conclusions. No flatness or general preservation of quasi-isomorphisms by tensor is asserted.",
+   "text": "The tuple-indexed term comparison gives products of open direct images. Since f is separated and Spec A is affine, X is separated; each finite nonempty tuple intersection is affine. Enumerate the finite tuple type by Fin of its cardinality, and reindex the product along this equivalence to obtain the required W and n. This works for empty tuple types as well.",
    "uses": [
-    "def-pc-module-pullback"
+    "lem-pc-s3-alternating-cech-sheaf-terms"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Nonempty finite intersections of the U_i are affine because f is separated over an affine base. Enumerate the finite increasing-tuple type by Fin n, and reindex its product; n=0 covers degrees without tuples. Pushforward is a right adjoint and preserves these products. For each affine intersection W_t, the quasi-coherent direct image on Spec A is the tilde of Gamma(W_t,G), with its A-action through f. The tilde-Gamma counit and its naturality intertwine each restriction map. The tilde functor is additive and preserves finite biproducts. Hence the product comparisons intertwine the signed differential and assemble into the complex isomorphism with affineAlternatingCechModel. Negative degrees are zero. If r=0, the cover condition makes X empty and all module sheaves are zero.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-affine-alternating-cech-model"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-alternating-cech-total-complex",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-pc-affine-alternating-cech-model"
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-alternating-cech-sheaf-affine-comparison",
+  "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+  "lem-pc-s3-alternating-cech-sheaf-terms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 01FM (ordered/alternating complex), 02KG (affine pushforward), and 02KH, separated-case proof before taking cohomology; parent resolution construction and local contraction paragraphs; expanded module-sheaf argument and Lean transport by Q2"
+  "place": "Tags 01FM, 02KG and 02KH; explicit sheaf complex, local contraction and affine comparison; Lean construction and finite product reindexing by H1"
  },
  "mathlib_searches": [
   {
@@ -130,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T045551-L-134603",
+  "landing": "20261013T062521-L-732713",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

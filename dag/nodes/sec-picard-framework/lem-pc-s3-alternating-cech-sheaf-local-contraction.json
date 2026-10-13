@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+ "kind": "statement",
+ "title": "Local contraction survives additive tensor pullback",
+ "statement": "Let $p:Y\\to X$ be a morphism of schemes and assume its tensor pullback [def-pc-module-pullback] is additive. Let $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ satisfy $\\bigcup_i U_i=X$, and let $G$ be any $\\mathcal O_X$-module. For the explicit augmentation $\\epsilon:G[0]\\to C$ [def-pc-s3-alternating-cech-sheaf-construction], both $\\epsilon$ and $p^*(\\operatorname{extend}\\epsilon)$ are quasi-isomorphisms. There is no affineness, separatedness, quasi-coherence or flatness hypothesis.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01FM, signed ordered faces; parent augmented-construction proof step 2, local insertion contraction"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "On U_i, insert i into an increasing tuple in its ordered position, with sign (-1) to that position; set the operator to zero for a repeated index. At degree zero project to the singleton i. In dh+hd the face deleting the inserted i gives the identity; each other deletion cancels against the same restriction composite with opposite sign. This contracts the augmented complex on U_i.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor pullback commutes with restriction to the inverse-image opens. Apply its additivity to the local homotopy identities: it preserves sums, integer multiples, compositions and identities. Thus the pulled-back augmentation is locally a homotopy equivalence as well. Homology of module sheaves is local on the two covers, so both augmentations are quasi-isomorphisms. Extension by zero adds only zero terms. For r=0 both schemes are empty.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01FM, signed ordered faces; parent augmented-construction proof step 2, local insertion contraction; expanded module-sheaf argument by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented increasing tuple Cech complex of module sheaves has a quasi-isomorphism augmentation after any additive tensor pullback",
+   "results": "8 hits: Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.cm5b, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', Rep.standardComplex.compForgetAugmentedIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The increasing tuple Cech complex of module sheaves is locally contractible and is compatible with affine pushforward",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*sheaf|sheaf.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite ordered Čech resolution of a sheaf is exact on stalks by inserting an index containing the point",
+   "results": "8 hits: condensed exact-colimit and exact-limit instances, sheaf exact-colimit instances, MayerVietorisSquare.shortComplex_exact and shortComplex_shortExact, Profinite.NobelingProof.succ_exact. None compares the explicit ordered module-sheaf complex or its tensor pullback.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"exact\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Cc]ech|[Cc]ech.*homotopy|[Cc]ech.*[Qq]uasi[Ii]so",
+   "results": "msearch: 0 hits. Separate repository search found all-tuple CechModuleSheafFunctor and CechModuleSheafComparison, and sorting homotopies for a different all-tuple complex; none is the specified augmentation or affine comparison.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Tag 01FM, signed ordered faces; parent augmented-construction proof step 2, local insertion contraction",
+   "via": [
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafLocalContraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafLocalContraction.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafAugmentation_quasiIso",
+  "statement": "theorem alternatingCechSheafAugmentation_quasiIso {X Y : Scheme.{u}} (p : Y ⟶ X) [(Scheme.Modules.tensorPullback p).Additive] {r : ℕ} (U : Fin r → X.Opens) (hU : iSup U = ⊤) (G : X.Modules) : QuasiIso (alternatingCechSheafAugmentation U G) ∧ QuasiIso (((Scheme.Modules.tensorPullback p).mapHomologicalComplex (ComplexShape.up ℤ)).map (HomologicalComplex.extendMap (alternatingCechSheafAugmentation U G) ComplexShape.embeddingUpNat))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T062521-L-732713",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T062521-L-732713",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

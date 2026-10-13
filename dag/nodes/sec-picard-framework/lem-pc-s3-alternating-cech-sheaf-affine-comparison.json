@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-affine-comparison",
+ "kind": "statement",
+ "title": "Affine pushforward of the constructed increasing-tuple sheaf complex",
+ "statement": "Let $A$ be a commutative ring, $f:X\\to\\operatorname{Spec}A$ a separated scheme morphism, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ any finite family of affine opens, and $G$ a quasi-coherent $\\mathcal O_X$-module. For the explicit sheaf complex $C$ [def-pc-s3-alternating-cech-sheaf-construction], there is an integer cochain-complex isomorphism $f_*(\\operatorname{extend}C)\\cong\\operatorname{affineAlternatingCechModel}(f,U,G)$ [def-pc-affine-alternating-cech-model]. No covering condition or base change is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02KG and 02KH, separated-case affine Cech comparison before cohomology; Tag 01FM, signed faces; parent augmented-construction proof step 3"
+ },
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "def-pc-affine-alternating-cech-model"
+ ],
+ "proof": [
+  {
+   "text": "Each nonempty tuple intersection W_t is affine, as X is separated over the affine base. Identify the intersection sheaf with j_* of G restricted to W_t by the term comparison. Pushforward composition and the tilde-Gamma counit identify f_*j_* of the restriction with tilde of Gamma(W_t,G), restricting scalars along f. The comparison is natural in inclusions of intersections.",
+   "uses": [
+    "lem-pc-s3-alternating-cech-sheaf-terms",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pushforward preserves products as a right adjoint. Tilde preserves finite products by additivity and preservation of finite coproducts. Taking the product of the component comparisons gives degreewise isomorphisms intertwining every signed face map. Their inverses commute with the differential by cancellation. Extend the resulting natural-degree complex isomorphism by zero to integers, compatibly with the additive functors. Empty tuple types give zero objects on both sides.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "def-pc-affine-alternating-cech-model",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-alternating-cech-model",
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-alternating-cech-sheaf-terms",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 02KG and 02KH, separated-case affine Cech comparison before cohomology; Tag 01FM, signed faces; parent augmented-construction proof step 3; expanded module-sheaf argument by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented increasing tuple Cech complex of module sheaves has a quasi-isomorphism augmentation after any additive tensor pullback",
+   "results": "8 hits: Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.instQuasiIsoNatεToSingle₀, CochainComplex.cm5b, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', Rep.standardComplex.compForgetAugmentedIso",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The increasing tuple Cech complex of module sheaves is locally contractible and is compatible with affine pushforward",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*sheaf|sheaf.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite ordered Čech resolution of a sheaf is exact on stalks by inserting an index containing the point",
+   "results": "8 hits: condensed exact-colimit and exact-limit instances, sheaf exact-colimit instances, MayerVietorisSquare.shortComplex_exact and shortComplex_shortExact, Profinite.NobelingProof.succ_exact. None compares the explicit ordered module-sheaf complex or its tensor pullback.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"exact\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Cc]ech|[Cc]ech.*homotopy|[Cc]ech.*[Qq]uasi[Ii]so",
+   "results": "msearch: 0 hits. Separate repository search found all-tuple CechModuleSheafFunctor and CechModuleSheafComparison, and sorting homotopies for a different all-tuple complex; none is the specified augmentation or affine comparison.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no direct replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Tags 02KG and 02KH, separated-case affine Cech comparison before cohomology; Tag 01FM, signed faces; parent augmented-construction proof step 3",
+   "via": [
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafAffineComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafAffineComparison.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafComplex_affineComparison",
+  "statement": "theorem alternatingCechSheafComplex_affineComparison {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i)) (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] : Nonempty (((Scheme.Modules.pushforward f).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat) ≅ affineAlternatingCechModel f U G)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T062521-L-732713",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T062521-L-732713",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
