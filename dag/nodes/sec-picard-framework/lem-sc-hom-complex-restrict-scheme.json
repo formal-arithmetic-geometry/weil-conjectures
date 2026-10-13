@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-hom-complex-restrict-scheme",
+ "kind": "statement",
+ "title": "Ordinary Hom complexes commute with scheme open restriction",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an open subscheme, and L,M arbitrary integer-indexed cochain complexes of O_Y-modules [def-weil-sheaf-of-modules-category, def-weil-pbc-module-chain-complex-homology]. Write res_U for Scheme.Modules.restrictFunctor U.ι, applied degreewise. There is an isomorphism of cochain complexes res_U(Hom^bullet_Y(L,M)) ≅ Hom^bullet_U(res_U L,res_U M), with Hom^bullet the ordinary sheaf Hom complex [def-pur-hom-complex]. No boundedness, freeness, K-injectivity or derived-category hypothesis is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08DL, Lemma 20.42.3, ordinary restriction in its construction; Section 21.34 (Tag 0A8X), product terms and differential; Mathlib AlgebraicGeometry/Modules/Sheaf.lean, overEquiv and overFunctorEquiv"
+ },
+ "proof": [
+  {
+   "text": "Restrict the ordinary Hom complex to the localized over-U site using homComplex_restrict_open, which applies to arbitrary unbounded complexes.",
+   "uses": [
+    "lem-sc-hom-complex-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport by Scheme.Modules.overEquiv U. On every open of U, the equivalence transports a local linear map to the identical local map on its image in Y, conjugated by the structure-sheaf appIso. This is an isomorphism of internal Hom sheaves: its inverse transports the same maps back; restrictions agree since appIso is natural. Precomposition and postcomposition agree by cancellation of the component isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equivalence preserves the integer-indexed products defining each Hom degree. Apply the preceding factor isomorphisms to product projections. For the differential, postcomposition with d_M and precomposition with d_L agree with transport by the previous step. Additivity preserves their signed difference. Hence the product isomorphisms define a chain isomorphism by HomologicalComplex.Hom.isoOfComponents.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Scheme.Modules.overFunctorEquiv U on L, M and their Hom complex to replace restriction followed by overEquiv by Scheme.Modules.restrictFunctor U.ι, obtaining the displayed chain isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N3",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 08DL, Lemma 20.42.3, ordinary restriction in its construction; Section 21.34 (Tag 0A8X), product terms and differential; Mathlib AlgebraicGeometry/Modules/Sheaf.lean, overEquiv and overFunctorEquiv"
+  },
+  "note": "Explicit scheme-site transport step of the restriction argument; source read at https://stacks.math.columbia.edu/tag/08DL and https://stacks.math.columbia.edu/tag/0A8X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary sheaf internal Hom complex commutes with restriction along an open immersion of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom sheaves transported by an equivalence between the site over an open and the open subspace",
+   "results": "8 hits: TopCat.Sheaf.restrictHomEquivHom, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, TopCat.Sheaf.extend_hom_app, CategoryTheory.sheafHom'Iso, CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_app_app, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Sheaf.ΓHomEquiv; signatures inspected; no ordinary scheme Hom-complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex_restrict|overHomObjIso|sheafOfModulesEquivOver",
+   "results": "6 hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; signatures inspected; no ordinary scheme Hom-complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalFiniteFreeScalarHomology",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local Koszul derived sheaf Hom computation: transport the ordinary Hom complex from the over-open site to the open subscheme",
+   "via": [
+    "lem-sc-local-finite-free-scalar-homology",
+    "lem-sc-affine-koszul-scalar-ext-comparison",
+    "lem-sc-koszul-ext-off-rank-stalk",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexRestrictScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexRestrictScheme.lean",
+  "declaration": "AlgebraicGeometry.homComplex_restrict_scheme",
+  "statement": "theorem homComplex_restrict_scheme {Y : Scheme.{u}} (U : Y.Opens)\n    (L M : CochainComplex Y.Modules ℤ) :\n    Nonempty (\n      ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj\n        (homComplex (R := Y.toRingedSpace.sheaf) L M) ≅\n      homComplex (R := U.toScheme.toRingedSpace.sheaf)\n        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj L)\n        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5a53e",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T130750-L-3986356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5a53e",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T130750-L-3986356",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the proof with its recorded dependencies, and the new restriction lemma with its source construction; both modules and AffineKoszulScalarExtComparison compile cleanly, with only permitted axioms and documented sorryAx."
+ }
+}

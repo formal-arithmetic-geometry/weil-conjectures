@@ -17,50 +17,56 @@
  },
  "proof": [
   {
-   "text": "Compute ambient derived Hom using a bounded-below injective resolution I (hence K-injective) of the degree-zero structure sheaf. The representative theorem and homology factorization identify its cohomology with the Hom complex of single K and I; exact restriction commutes with homology.",
+   "text": "Choose a bounded-below injective resolution I of the degree-zero unit on Y using exists_boundedBelow_injective_resolution, with its quasi-isomorphism η and K-injectivity. derivedInternalHom_obj_iso and homologyFunctorFactors identify ambient scalar derived Hom homology with ordinary Hom(single K,I) homology.",
    "uses": [
-    "def-pur-derived-internal-hom"
+    "def-pur-derived-internal-hom",
+    "lem-sc-bounded-below-injective-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction preserves K-injectives and commutes with the ordinary Hom complex; transport via the equivalence between the over-U site and U.toScheme. The equivalence restricts local module morphisms and preserves their products and compositions, hence the Hom differential.",
+   "text": "Factor scheme restriction as overFunctor followed by overEquiv. The first is exact and preserves K-injectives; the equivalence is an exact right adjoint and also preserves K-injectives. The complex composition comparison therefore makes the restricted I K-injective on U.toScheme. The single-complex comparison and restrictUnitIso identify its quasi-isomorphism source with O_U[0].",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "def-pur-hom-complex"
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false
   },
   {
-   "text": "In the standard derived universe on U.toScheme, apply the bounded-above finite-free model to E, its augmentation and the degree-zero unit complex. The target is bounded below by zero. Taking homology identifies its Hom complex with the restricted derived Hom from the preceding step. For each fixed homology degree, boundedness below of I allows truncating the bounded-above finite free E far enough to apply the strictly perfect comparison of Tag 08DM; no lower bound on E is assumed.",
+   "text": "Choose HasDerivedCategory.standard on U.toScheme only. Compute its derived Hom using this same restricted I and the representative isomorphisms of (K|U)[0] and O_U[0]. Independently apply derivedInternalHom_of_boundedAbove_finiteFree to E, ε and O_U[0], whose negative terms vanish, obtaining a comparison with Hom(E,O_U[0]).",
    "uses": [
+    "def-pur-derived-internal-hom",
     "lem-sc-derived-hom-finite-free-model"
    ],
    "elementary": false
   },
   {
-   "text": "The representative comparison in both derived universes uses the same ambient I and ordinary Hom complex. Compose the homology isomorphisms and return through the over-site equivalence. This removes the need for a localization on U in the supplied universe.",
+   "text": "Apply homComplex_restrict_scheme to single K and I. Exact restriction commutes with ordinary homology. Compose the ambient representative comparison, this complex restriction comparison, the local representative comparison, and the finite-free comparison after applying homologyFunctor. Finally use the unit isomorphism of overEquiv to transport the result to the over-U category. All comparisons occur on ordinary module sheaves, so no localization on U in universe w is used.",
    "uses": [
-    "def-pur-derived-internal-hom"
+    "lem-sc-hom-complex-restrict-scheme"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "def-pur-hom-complex",
-  "lem-sc-derived-hom-finite-free-model"
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-hom-complex-restrict-scheme",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "N1",
+  "agent": "N3",
   "date": "2026-10-13",
   "based_on": {
-   "document": "literature/stacks-project/duality.tex",
-   "place": "Tag 0BQZ, proof of lemma-regular-immersion-ext, local finite free Hom computation; cohomology.tex Tag 08DM, Lemma 20.46.9"
+   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 08DL, Lemma 20.42.3, ordinary restriction in its construction; Section 21.34 (Tag 0A8X), product terms and differential; Mathlib AlgebraicGeometry/Modules/Sheaf.lean, overEquiv and overFunctorEquiv"
   },
-  "note": "Stage-3 reduction: explicit augmentation, free bases and exact homology transport; two comparison glue statements remain."
+  "note": "Lean assembly through a common K-injective complex; only ordinary Hom transport from the over-site to the open scheme is split off. Existing target signature and statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -136,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N1",
+  "reviewer": "X-5a53e",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T111905-L-3056807",
+  "landing": "20261013T130750-L-3986356",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the proof with its recorded dependencies, and the new restriction lemma with its source construction; both modules and AffineKoszulScalarExtComparison compile cleanly, with only permitted axioms and documented sorryAx."
  }
 }
