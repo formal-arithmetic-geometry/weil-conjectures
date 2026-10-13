@@ -14,36 +14,33 @@
  ],
  "proof": [
   {
-   "text": "The homology shift isomorphism preserves quasi-coherent cohomology. Apply exact open restriction and its module over-site equivalence [lem-pc-open-derived-restriction-comparison], then the inverse affine chart to obtain a quasi-coherent derived object K on Spec A. Restriction along the affine chart is an exact equivalence, preserving local quasi-coherent presentations.",
+   "text": "The homology shift isomorphism identifies H^n(Eprime[k]) with H^(k+n)(Eprime), hence it is quasi-coherent. Construct the actual sheaf equivalence t from restriction along isoSpec and Modules.overEquiv.inverse, and derive its two functors by Functor.mapDerivedCategory. Derive its counit by the composition, natural-isomorphism and identity comparisons. Put K = D(overFunctor followed by t.inverse)(Eprime[k]). The composite overFunctor followed by t.inverse is naturally isomorphic to restriction along isoSpec.inv followed by the open immersion. Functor.mapDerivedCategoryCompIso and mapDerivedCategoryHomologyFunctorIso identify each homology sheaf of K with this restriction of the shifted homology. Mathlib Modules.isQuasicoherent_restrictFunctor and invariance under isomorphism show that K belongs to D_QCoh(Spec A).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [new-affine-qcoh-derived-equivalence-core] in the standard derived category of sheaf modules on Spec A and the given derived category of A-modules. Take M = e.inverse(K). Whisker its termwise tilde comparison by D(t.functor). The exact-functor factorization and mapHomologicalComplexCompIso identify this composite after Q with Q of the explicit affinePerfectSheafification complex [lem-pc-affine-perfect-module-model]. The normalization on shifts in the larger affine equivalence theorem is not needed.",
    "uses": [
-    "lem-pc-open-derived-restriction-comparison"
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-perfect-module-model"
    ],
    "elementary": false
   },
   {
-   "text": "Use the inverse of [lem-pc-affine-qcoh-derived-equivalence] on K. Its counit supplies M and an isomorphism from derived tilde of M to K. Transport by the canonical affine-site equivalence of [lem-pc-affine-localized-site-derived-transport]. Its comparison identifies this transported functor on complexes with Q of affinePerfectSheafification.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-localized-site-derived-transport"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose the two comparisons after Q and descend their natural isomorphism through the localization property (CategoryTheory.Localization.liftNatIso). Evaluating at M and composing with the transported counit yields F(M) isomorphic to R(Eprime[k]). Support and a scalar are not used.",
+   "text": "Compose hF with the inverse of the preceding comparison to obtain Q followed by F isomorphic to Q followed by G, where G is affine derived tilde followed by D(t.functor). The given module localization is pinned explicitly, with identity Lifting isomorphisms for its composites with F and G. Localization.liftNatIso descends the comparison to F isomorphic to G. Evaluate at M, apply D(t.functor) to the affine equivalence counit at K, and compose with the counit of D(t). This yields F(M) isomorphic to the required over-site restriction of Eprime[k]. Every chosen object is given by an explicit functor or an equivalence inverse. No support or boundedness is used, and the same construction applies when U is empty.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-derived-restriction-comparison",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-localized-site-derived-transport"
+  "new-affine-qcoh-derived-equivalence-core",
+  "lem-pc-affine-perfect-module-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H4",
+  "group": "J2",
   "date": "2026-10-13",
-  "note": "Second reading: actual proper substatement of the target, with source-based proof steps; no claim that the new hole is closed."
+  "note": "Lean proof using the existing affine core equivalence, explicit canonical chart transport, exact-functor homology comparisons and localization uniqueness; no new holes."
  },
  "mathlib_searches": [
   {
@@ -131,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T111854-L-3053076",
-  "kind": "interface",
+  "landing": "20261013T123206-L-3676921",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
