@@ -1,0 +1,37 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group K4
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+
+@[expose] public section
+
+universe u
+set_option autoImplicit false
+open CategoryTheory
+namespace AlgebraicGeometry.Scheme.Modules
+
+/-- A local section induces a local retraction of the transpose.
+
+Source: Stacks Project, Tag 0EKP, proof of (2) to (3), transpose compatibility.
+(blueprint: new-sbc-dual-retraction-of-local-section)
+
+Transport the given section through `overFunctorEquiv` to the over category.
+`SheafOfModules.overHomObjIso` identifies the restricted duals with the internal Homs
+of the restrictions. On every smaller open, precomposition with the section gives a
+map in the reverse direction; these maps commute with restriction. Internal Hom
+contravariant functoriality identifies the composite with precomposition by
+`s ≫ f|_U`, which is the identity by `hs`. Conjugating by the internal-Hom restriction
+isomorphisms and transporting back through `overEquiv` gives the desired retraction.
+This works for arbitrary P and Q, including zero sheaves and the empty open.
+-/
+theorem isSplitMono_restrict_dualMap_of_local_section
+    {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)
+    (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)
+    (hs : s ≫ (restrictFunctor U.ι).map f = 𝟙 _) :
+    IsSplitMono ((restrictFunctor U.ι).map (dualMap f))  := by sorry
+
+end AlgebraicGeometry.Scheme.Modules

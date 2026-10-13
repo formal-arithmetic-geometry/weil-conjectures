@@ -16,33 +16,29 @@
  },
  "proof": [
   {
-   "text": "Fix x and trivialize Q on an open W containing x with a finite basis. For each basis section use local surjectivity of the sheaf epimorphism f to obtain a lift on a neighbourhood V_i of x contained in W. Their finite intersection U is open and contains x. Restrict the lifts to U and use the universal property of the finite free sheaf to define s:Q|_U -> P|_U. Since f composed with s fixes every basis section, s followed by f|_U is the identity. In rank zero take U=W and the unique map out of zero.",
+   "text": "For each point apply exists_local_section_of_epi to obtain a neighbourhood and a section of the restricted epimorphism.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf",
-    "def-weil-sheaf-of-modules-category"
+    "new-sbc-local-section-of-epi"
    ],
    "elementary": false
   },
   {
-   "text": "Internal Hom commutes with open restriction: sections over V contained in U are module morphisms over V, so restriction merely restricts that morphism. Under this identification the restriction of dualMap f sends phi to phi composed with f|_V. Precomposition with s restricts compatibly on all smaller V and gives a retraction, since s followed by f is the identity. Transport this retraction from the over category to scheme restriction. For the empty scheme the quantified claim has no points.",
+   "text": "Apply isSplitMono_restrict_dualMap_of_local_section on that neighbourhood with the section identity, and package the open and its membership proof.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-localized-ringed-site"
+    "new-sbc-dual-retraction-of-local-section"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-finite-locally-free-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-hom",
-  "def-pur-localized-ringed-site"
+  "new-sbc-local-section-of-epi",
+  "new-sbc-dual-retraction-of-local-section"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "K4",
+  "by": "N2",
   "document": "Stacks Project",
-  "place": "Tag 0EKP, proof of (2) to (3); expanded the omitted local finite-basis splitting and transpose compatibility."
+  "place": "Tag 0EKP, proof of (2) to (3); explicit two-step decomposition, preserving the finite-basis local section and transpose restriction route."
  },
  "mathlib_searches": [
   {
@@ -131,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T181111-L-2603995",
+  "landing": "20261013T190148-L-3218816",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

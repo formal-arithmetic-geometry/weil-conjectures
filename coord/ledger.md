@@ -13385,3 +13385,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:01 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartPowerLift (stage 3; reviewer PASS; first push; landing 20261013T190146-L-3218412 (interface); batch 20261013T190131; modules 2; new nodes 1)
 - 19:01 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtalePoint (stage 3; reviewer PASS; first push; landing 20261013T190147-L-3218544 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:01 L: merged deliver/N1/Sheaf.AlgebraicGeometry.SelfTorConormalDualChartIso (stage 3; reviewer PASS; first push; landing 20261013T190147-L-3218715 (interface); batch 20261013T190131; modules 3; new nodes 2)
+- 19:01 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Modules.DualMapLocalRetraction (stage 3; reviewer PASS; first push; landing 20261013T190148-L-3218816 (interface); batch 20261013T190131; modules 3; new nodes 2)

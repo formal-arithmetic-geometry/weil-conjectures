@@ -1,0 +1,132 @@
+{
+ "id": "new-sbc-dual-retraction-of-local-section",
+ "kind": "statement",
+ "title": "Transpose retraction induced by a local section",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], f:P → Q a morphism of O_X-module sheaves [def-weil-sheaf-of-modules-category], and U an open. If s:Q|_U → P|_U satisfies s followed by f|_U equal to id_Q|_U [def-pur-localized-ringed-site], the restriction of dualMap f:Hom(Q,O_X) → Hom(P,O_X) [def-pur-sheaf-hom] admits a left inverse. No epimorphism or finiteness hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, proof of (2) to (3), taking the dual of the surjection; local-splitting details expanded from the finite-basis argument. Read at https://stacks.math.columbia.edu/tag/0EKP."
+ },
+ "proof": [
+  {
+   "text": "Transport s to the over category using overFunctorEquiv and overEquiv. Internal Hom commutes with open restriction via SheafOfModules.overHomObjIso. Under this isomorphism the restriction of dualMap f is precomposition with f|_U. Precomposition with s defines the retraction on every smaller open; these maps commute with restriction. Contravariant functoriality identifies their composite with precomposition with s followed by f|_U, which is the identity by the hypothesis. Transport back through the two isomorphisms to obtain a split monomorphism of restricted scheme modules.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N2",
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, proof of (2) to (3), omitted local splitting details expanded by finite-basis lifting and contravariant internal-Hom functoriality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overHomObjIso|freeHomEquiv|IsFiniteLocallyFree.exists",
+   "results": "{\"t\": \"2026-10-13T18:19:42Z\", \"tool\": \"grep\", \"query\": \"overHomObjIso|freeHomEquiv|IsFiniteLocallyFree.exists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"a168f20e2ef501e9\"}",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem; local-surjectivity and freeHomEquiv APIs are available."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_isSplitMono",
+   "results": "{\"t\": \"2026-10-13T18:19:42Z\", \"tool\": \"loogle\", \"query\": \"Functor.map_isSplitMono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.map_isSplitMono'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem; local-surjectivity and freeHomEquiv APIs are available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective morphism of sheaves locally lifts finitely many sections simultaneously",
+   "results": "{\"t\": \"2026-10-13T18:19:42Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective morphism of sheaves locally lifts finitely many sections simultaneously\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective\", \"TopCat.Presheaf.isLocallySurjective_iff\", \"CategoryTheory.Sheaf.IsLocallySurjective\", \"CategoryTheory.Sheaf.instIsLocallySurjectiveHomObjForgetTypeToImage\", \"CategoryTheory.Sheaf.locallySurjective\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"CategoryTheory.Sheaf.isLocallySurjective_sheafToPresheaf_map_iff\", \"CategoryTheory.extensiveTopology.surjective_of_isLocallySurjective_sheaf_of_types\"], \"digest\": \"d6fe8b2da1a849cd\"}",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem; local-surjectivity and freeHomEquiv APIs are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An epimorphism onto a finite locally free sheaf locally admits a right inverse and its dual has a retraction",
+   "results": "{\"t\": \"2026-10-13T18:26:53Z\", \"tool\": \"leansearch\", \"query\": \"An epimorphism onto a finite locally free sheaf locally admits a right inverse and its dual has a retraction\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "availability": "unavailable: Internal Server Error; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DualMapLocalRetraction",
+  "date": "2026-10-14",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-dual-map-local-retraction",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DualRetractionOfLocalSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DualRetractionOfLocalSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isSplitMono_restrict_dualMap_of_local_section",
+  "statement": "theorem isSplitMono_restrict_dualMap_of_local_section\n    {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)\n    (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)\n    (hs : s ≫ (restrictFunctor U.ι).map f = 𝟙 _) :\n    IsSplitMono ((restrictFunctor U.ι).map (dualMap f))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T190148-L-3218816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T190148-L-3218816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
