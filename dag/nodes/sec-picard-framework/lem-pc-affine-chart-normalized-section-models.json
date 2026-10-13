@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-affine-chart-normalized-section-models",
+ "kind": "statement",
+ "title": "Normalized section models for affine upper-tail charts",
+ "statement": "Let I be a directed preorder, R:I → CommRingCat, c an affine limiting cone of R.op followed by Spec, i ≤ j, f:Xi → Spec R(i), and U an open cover of its j-base change with affine chart U(a) [def-pc-scheme], [def-pc-base-change], [def-pc-fibre-product]. Let M,N be quasi-coherent modules on U(a) [pqf-def-coherent]. Use the representative rep of the antisymmetrization of the upper tail j ≤ k, its initial class t, F = rep followed by upperTailChartDiagram.rightOp followed by global sections [new-affine-chart-upper-tail-limit-data], and the actual starting pullback section modules P,Q of the Lean statement. There are equivalences δM:P → Γ(M), δN:Q → Γ(N), a ring map ρ₀:colimit F → Γ(W₀(a)), and additive equivalences e₀M,e₀N from extension of scalars of P,Q to sections of the direct chart pullbacks. These are semilinear along ρ₀ and send 1 ⊗ m to the pullback of δ(m). The associated Hom equivalence α acts by conjugation with e₀M,e₀N on every section. At every x ≥ t there similarly exist ρₓ, eₓM,eₓN and β for the ordinary stage chart, with the same δM,δN, semilinearity, unit normalization and sectionwise conjugation formulas. The stage chart is affine. On the iterated chart V(a), with v:V(a) → W₀(a) and l:V(a) → Wₓ(a) the canonical lifts, the ring maps satisfy v.appTop(ρ₀(r₁(b))) = l.appTop(ρₓ(b)) for r₁ = colimit.ι F x. No compatibility for scalar extension of module morphisms is concluded.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR first affine proof; Tag 01I6 (Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5); Tags 0095 and 0096"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "new-affine-chart-upper-tail-limit-data"
+ ],
+ "proof": [
+  {
+   "text": "The starting representative is equivalent to j, hence its spectrum map and its pulled-back second projection are isomorphisms. Inverting the section pullback unit gives δM and δN. Apply upperTailChartCone_isLimit and reindex along the quotient-tail equivalence. Affine base change makes every stage and vertex affine. Affine spectrum/global-sections duality identifies the vertex ring with colimit F. Pullback pasting identifies the vertex and stage charts with W₀(a) and Wₓ(a), giving ρ₀ and ρₓ. The cocone equation gives their displayed compatibility on V(a).",
+   "uses": [
+    "new-affine-chart-upper-tail-limit-data",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use affine quasi-coherent reconstruction and the unit-normalized scalar-extension/pullback identification at the starting chart, each stage and the vertex. Transport across the chart and ring isomorphisms from step 1. This gives the additive section equivalences, their semilinearity and their common unit normalizations. Fully faithfulness of affine reconstruction gives α and β, acting sectionwise by conjugation with these equivalences.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "new-affine-chart-upper-tail-limit-data",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Steps 1–2 of lem-pc-affine-chart-canonical-hom-naturality, expanded in normalized tensor coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent affine normalized sections pullback scalar extension",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine quasi coherent pullback global sections extension scalars naturality composition",
+   "results": "Pullback adjunction and composition APIs; no exact normalized upper-tail section models.",
+   "verdict": "supporting APIs only",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(iso|equiv|tensor)|fullyFaithful.*tilde",
+   "results": "Supporting pullback/tilde APIs; project PullbackTilde provides pullbackSpecΓEquiv and its unit normalization. No upper-tail chart-ring identification or simultaneous normalized models.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: affine first proof of Tag 01ZR; canonical affine Hom comparison and pullback functoriality; Normalized section models for affine upper-tail charts",
+   "via": [
+    "lem-pc-affine-chart-canonical-hom-naturality",
+    "lem-pc-affine-chart-ordinary-hom-comparison",
+    "lem-pc-affine-chart-ordinary-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartNormalizedSectionModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartNormalizedSectionModels.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_normalized_section_models",
+  "statement": "theorem affine_chart_normalized_section_models\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    (M N : (U.X a).Modules)\n    (hMq : M.IsQuasicoherent)\n    (hNq : N.IsQuasicoherent)\n    :\n    let rep := (OrderEmbedding.ofAntisymmetrization\n      (α := {k : I // j ≤ k})).monotone.functor\n    let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))\n    let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ\n    let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})\n    let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by\n      let k := rep.obj t\n      let r := Spec.map (R.map (homOfLE k.property))\n      change ModuleCat.{u} Γ(pullback r g, ⊤)\n      exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)\n    let P : ModuleCat.{u} (F.obj t) := B M\n    let Q : ModuleCat.{u} (F.obj t) := B N\n    let r₀ := (colimit.ι F t).hom\n    let q₀ := baseChangeMap f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n    ∃ (δM : (P : Type u) ≃ Γ(M, ⊤)) (δN : (Q : Type u) ≃ Γ(N, ⊤))\n      (ρ₀ : ↑(colimit F) →+* Γ((U.pullback₁ q₀).X a, ⊤))\n      (e₀M : (ModuleCat.extendScalars r₀).obj P ≃+\n        Γ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M, ⊤))\n      (e₀N : (ModuleCat.extendScalars r₀).obj Q ≃+\n        Γ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N, ⊤))\n      (α : ((ModuleCat.extendScalars r₀).obj P ⟶\n          (ModuleCat.extendScalars r₀).obj Q) ≃\n        ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M ⟶\n          (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N)),\n      (∀ b z, e₀M (b • z) = ρ₀ b • e₀M z) ∧\n      (∀ b z, e₀N (b • z) = ρ₀ b • e₀N z) ∧\n      (∀ m, e₀M ((1 : ↑(colimit F)) ⊗ₜ[F.obj t, r₀] m) =\n        pullbackΓ (U.pullbackHom q₀ a) M (δM m)) ∧\n      (∀ m, e₀N ((1 : ↑(colimit F)) ⊗ₜ[F.obj t, r₀] m) =\n        pullbackΓ (U.pullbackHom q₀ a) N (δN m)) ∧\n      (∀ s z, (α s).app ⊤ (e₀M z) = e₀N (s z)) ∧\n      ∀ (x : Antisymmetrization {k : I // j ≤ k} (· ≤ ·)) (htx : t ≤ x),\n        let k := (rep.obj x).val\n        let hjk := (rep.obj x).property\n        let q := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n        let q₀ := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n        let w : p ≫ q = q₀ := by\n          rw [← baseChangeMap_comp]\n          congr 1\n          ext\n          simpa using c.w (homOfLE hjk).op\n        let r := (F.map (homOfLE htx)).hom\n        let r₁ := (colimit.ι F x).hom\n        let Uk : (pullback f (Spec.map\n          (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q\n        let V : (pullback f (c.π.app (op i))).OpenCover.{u} := Uk.pullback₁ p\n        let v : V.X a ⟶ (U.pullback₁ q₀).X a := pullback.lift (V.f a)\n          (Uk.pullbackHom p a ≫ U.pullbackHom q a)\n          (by\n            dsimp only [V]\n            rw [Category.assoc, U.pullbackHom_map,\n              ← Category.assoc, Uk.pullbackHom_map, Category.assoc, w])\n        ∃ (ρₓ : ↑(F.obj x) →+* Γ((U.pullback₁ q).X a, ⊤))\n          (eₓM : (ModuleCat.extendScalars r).obj P ≃+\n            Γ((Scheme.Modules.pullback (U.pullbackHom q a)).obj M, ⊤))\n          (eₓN : (ModuleCat.extendScalars r).obj Q ≃+\n            Γ((Scheme.Modules.pullback (U.pullbackHom q a)).obj N, ⊤))\n          (β : ((ModuleCat.extendScalars r).obj P ⟶\n              (ModuleCat.extendScalars r).obj Q) ≃\n            ((Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n              (Scheme.Modules.pullback (U.pullbackHom q a)).obj N)),\n          (∀ b z, eₓM (b • z) = ρₓ b • eₓM z) ∧\n          (∀ b z, eₓN (b • z) = ρₓ b • eₓN z) ∧\n          (∀ m, eₓM ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, r] m) =\n            pullbackΓ (U.pullbackHom q a) M (δM m)) ∧\n          (∀ m, eₓN ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, r] m) =\n            pullbackΓ (U.pullbackHom q a) N (δN m)) ∧\n          (∀ s z, (β s).app ⊤ (eₓM z) = eₓN (s z)) ∧\n          IsAffine (Uk.X a) ∧\n          (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T231542-L-1820031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T231542-L-1820031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

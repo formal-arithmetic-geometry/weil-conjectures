@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-affine-chart-tensor-coordinate-recovery",
+ "kind": "statement",
+ "title": "Affine chart recovery from normalized tensor coordinates",
+ "statement": "Let A,B,C be commutative rings, r:A → B, r₁:B → C, r₀:A → C, and q:Y → X, p:Z → Y, q₀:Z → X with p ≫ q = q₀. Let U be an open cover of X, a a chart, and M,N modules on U(a) with M quasi-coherent [pqf-def-coherent], [def-pc-scheme], [def-pc-fibre-product]. Let P,Q be A-modules, δM:P ≃ Γ(M), δN:Q ≃ Γ(N). Put Wₓ=U.pullback₁ q, W₀=U.pullback₁ q₀ and V=Wₓ.pullback₁ p, with l:V(a) → Wₓ(a), v:V(a) → W₀(a) the canonical maps. Assume Wₓ(a) affine. Suppose maps ρₓ:B → Γ(Wₓ(a)), ρ₀:C → Γ(W₀(a)) and additive equivalences eₓM,eₓN,e₀M,e₀N identify scalar extensions of P,Q with sections of the respective pullbacks. Require semilinearity of eₓM,eₓN along ρₓ and of e₀N along ρ₀, and all four unit normalizations e(1 ⊗ m)=pullbackΓ(δ(m)). Assume v.appTop(ρ₀(r₁(b)))=l.appTop(ρₓ(b)). Let cQ:C ⊗ₐ Q ≅ C ⊗ᵦ (B ⊗ₐ Q) be C-linear and satisfy cQ(1 ⊗ n)=1 ⊗ (1 ⊗ n). Given module morphisms τ:C ⊗ₐ P → C ⊗ₐ Q and s:B ⊗ₐ P → B ⊗ₐ Q with τ(1 ⊗ m)=cQ⁻¹(1 ⊗ s(1 ⊗ m)), and sheaf morphisms ψ on W₀(a), s′ on Wₓ(a) with ψ(e₀M(z))=e₀N(τ(z)) and s′(eₓM(z))=eₓN(s(z)) for every z, then chartOrdinaryMapRecovery q p q₀ w U a M N ψ s′ holds [def-pc-chart-ordinary-map-recovery]. This assertion has no inverse-system or colimit hypotheses and constructs no Hom equivalence.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01ZR first affine proof; Tag 01I6 (Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5); Tags 0095 and 0096"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-chart-ordinary-map-recovery"
+ ],
+ "proof": [
+  {
+   "text": "The pullback composition comparison d sends the direct composite unit to the iterated unit by pullbackCompOfEq_hom_app_pullbackΓ and its inverse. For Q compare z ↦ d.hom(pullbackΓ v(e₀N(cQ.inv(1 ⊗ z)))) and z ↦ pullbackΓ l(eₓN(z)). On 1 ⊗ n they agree by cQ normalization and the unit comparison. Semilinearity and the ring-map equation extend this to b ⊗ n, and tensor induction handles every z. This calculation is proved in Lean, including the tensor scalar law, the inverse-cQ normalization and the square-unit comparison.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the affine pullback Hom extensionality lemma: apply the pullback adjunction Hom equivalence and global-section extensionality on the affine source X₁, proved by restriction along its spectrum isomorphism and hom_ext_of_isQuasicoherent_Spec. Pullback of M is quasi-coherent. On stage generators eₓM(1 ⊗ m), the input unit comparison, hψ, hτ, the Q-coordinate identity, and hs give equality. This is written as a calc of seven section equalities by congrArg and transitivity. Semilinearity and tensor induction extend to all stage tensors; surjectivity of eₓM gives all stage global sections, hence equality of the sheaf maps. No affine hypothesis on V or X₀ is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart assertion is the specialization of the square criterion to the canonical lift v from V(a) to W₀(a), with l its stage projection. pullback.lift_snd gives the square equation; unfold chartOrdinaryMapRecovery once and apply the proved generic criterion. The global-section extensionality proof restricts to Spec Γ(X₁) and uses only affine tilde reconstruction, avoiding the cohomology imports of Modules.AffineHom.",
+   "uses": [
+    "def-pc-chart-ordinary-map-recovery",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-chart-ordinary-map-recovery",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Original step 3, proved directly by tensor induction and affine pullback extensionality. The square is abstract to prevent repeated reduction of concrete chart objects; no timeout is changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product normalized pullback unit composition morphism recovery",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms from the pullback of a quasicoherent module on an affine scheme are equal if equal on pulled back global sections",
+   "results": "General sheaf Hom extensionality, pullbackCongr and affine scheme morphism extensionality. Local source AffineHom gives hom_ext_of_isAffine; PullbackUnit gives unit-composition laws. No exact tensor-coordinate recovery.",
+   "verdict": "supporting APIs only",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext_of_isAffine|pullback_hom_ext|pullbackUnit_comp_app",
+   "results": "Mathlib search returned unrelated categorical pullback extensionality. Local source rg found Modules.AffineHom.hom_ext_of_isAffine and Modules.PullbackUnit.pullback_hom_ext/pullbackUnit_comp_app.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartCanonicalHomNaturality",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: affine first proof of Tag 01ZR; canonical affine Hom comparison and pullback functoriality; Affine chart recovery from normalized tensor coordinates",
+   "via": [
+    "lem-pc-affine-chart-canonical-hom-naturality",
+    "lem-pc-affine-chart-ordinary-hom-comparison",
+    "lem-pc-affine-chart-ordinary-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartTensorRecovery",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartTensorRecovery.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_tensor_coordinate_recovery",
+  "statement": "theorem affine_chart_tensor_coordinate_recovery\n    {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]\n    (r : A →+* B) (r₁ : B →+* C) (r₀ : A →+* C)\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)\n    (M N : (U.X a).Modules) (hMq : M.IsQuasicoherent)\n    (P Q : ModuleCat.{u} A)\n    (δM : P ≃ Γ(M, ⊤)) (δN : Q ≃ Γ(N, ⊤))\n    (ρ₀ : C →+* Γ((U.pullback₁ q₀).X a, ⊤))\n    (ρₓ : B →+* Γ((U.pullback₁ q).X a, ⊤))\n    (e₀M : (ModuleCat.extendScalars r₀).obj P ≃+\n      Γ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M, ⊤))\n    (e₀N : (ModuleCat.extendScalars r₀).obj Q ≃+\n      Γ((Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N, ⊤))\n    (eₓM : (ModuleCat.extendScalars r).obj P ≃+\n      Γ((Scheme.Modules.pullback (U.pullbackHom q a)).obj M, ⊤))\n    (eₓN : (ModuleCat.extendScalars r).obj Q ≃+\n      Γ((Scheme.Modules.pullback (U.pullbackHom q a)).obj N, ⊤))\n    (h₀N : ∀ b z, e₀N (b • z) = ρ₀ b • e₀N z)\n    (hₓM : ∀ b z, eₓM (b • z) = ρₓ b • eₓM z)\n    (hₓN : ∀ b z, eₓN (b • z) = ρₓ b • eₓN z)\n    (n₀M : ∀ m, e₀M ((1 : C) ⊗ₜ[A,r₀] m) =\n      pullbackΓ (U.pullbackHom q₀ a) M (δM m))\n    (n₀N : ∀ m, e₀N ((1 : C) ⊗ₜ[A,r₀] m) =\n      pullbackΓ (U.pullbackHom q₀ a) N (δN m))\n    (nₓM : ∀ m, eₓM ((1 : B) ⊗ₜ[A,r] m) =\n      pullbackΓ (U.pullbackHom q a) M (δM m))\n    (nₓN : ∀ m, eₓN ((1 : B) ⊗ₜ[A,r] m) =\n      pullbackΓ (U.pullbackHom q a) N (δN m))\n    (hAffine : IsAffine ((U.pullback₁ q).X a))\n    (cQ : (ModuleCat.extendScalars r₀).obj Q ≅\n      (ModuleCat.extendScalars r₁).obj ((ModuleCat.extendScalars r).obj Q))\n    (hcQ : ∀ m, cQ.hom ((1 : C) ⊗ₜ[A,r₀] m) =\n      (1 : C) ⊗ₜ[B,r₁] ((1 : B) ⊗ₜ[A,r] m))\n    (τ : (ModuleCat.extendScalars r₀).obj P ⟶ (ModuleCat.extendScalars r₀).obj Q)\n    (s : (ModuleCat.extendScalars r).obj P ⟶ (ModuleCat.extendScalars r).obj Q)\n    (hτ : ∀ m, τ ((1 : C) ⊗ₜ[A,r₀] m) =\n      cQ.inv ((1 : C) ⊗ₜ[B,r₁] s ((1 : B) ⊗ₜ[A,r] m)))\n    (ψ : (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M ⟶\n      (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N)\n    (s' : (Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n      (Scheme.Modules.pullback (U.pullbackHom q a)).obj N)\n    (hψ : ∀ z, ψ.app ⊤ (e₀M z) = e₀N (τ z))\n    (hs : ∀ z, s'.app ⊤ (eₓM z) = eₓN (s z)) :\n    let Uk : Y.OpenCover.{u} := U.pullback₁ q\n    let V : Z.OpenCover.{u} := Uk.pullback₁ p\n    let v : V.X a ⟶ (U.pullback₁ q₀).X a := pullback.lift (V.f a)\n      (Uk.pullbackHom p a ≫ U.pullbackHom q a)\n      (by\n        dsimp only [V]\n        rw [Category.assoc, U.pullbackHom_map,\n          ← Category.assoc, Uk.pullbackHom_map, Category.assoc, w])\n    (∀ b, v.appTop (ρ₀ (r₁ b)) = (Uk.pullbackHom p a).appTop (ρₓ b)) →\n      chartOrdinaryMapRecovery q p q₀ w U a M N ψ s'",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T231542-L-1820031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T231542-L-1820031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

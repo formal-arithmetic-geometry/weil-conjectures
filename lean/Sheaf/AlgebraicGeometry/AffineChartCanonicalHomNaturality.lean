@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.AffineChartUpperTailLimitData
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Order.Antisymmetrization
+import Sheaf.AlgebraicGeometry.AffineChartNormalizedSectionModels
+import Sheaf.AlgebraicGeometry.AffineChartTensorRecovery
 
 /-! # Canonical affine chart Hom naturality
 
@@ -69,6 +71,8 @@ theorem colimitScalarExtensionComp_one_tmul
         ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, (F.map h).hom] m) := by
   exact scalarExtensionCompOfEq_one_tmul _ _ _ _ P m
 
+set_option maxHeartbeats 800000 in
+-- The dependent chart and section-model witnesses require substantial elaboration.
 /-- Affine Hom comparisons commute with the canonical scalar-extension map.
 Source: Stacks Project, Tag 01ZR (first affine proof), Tag 01I6,
 and Tags 0095 and 0096 (pullback functoriality).
@@ -160,6 +164,46 @@ theorem affine_chart_canonical_hom_naturality
             chartOrdinaryMapRecovery q p q₀ w U a M N
               (α ((colimitScalarExtensionComp F (homOfLE htx) P).hom ≫
                 (ModuleCat.extendScalars r₁).map s ≫
-                (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s) := by sorry
+                (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s) := by
+  classical
+  let rep := (OrderEmbedding.ofAntisymmetrization
+    (α := {k : I // j ≤ k})).monotone.functor
+  let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))
+  let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ
+  let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})
+  let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by
+    let k := rep.obj t
+    let r := Spec.map (R.map (homOfLE k.property))
+    change ModuleCat.{u} Γ(pullback r g, ⊤)
+    exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)
+  let P := B M
+  let Q := B N
+  obtain ⟨δM, δN, ρ₀, e₀M, e₀N, α, _h₀M, h₀N, n₀M, n₀N, hα, hx⟩ :=
+    affine_chart_normalized_section_models R c hc i f j hij U a ha M N hMq hNq
+  refine ⟨α, ?_⟩
+  intro x htx
+  obtain ⟨ρₓ, eₓM, eₓN, β, hₓM, hₓN, nₓM, nₓN, hβ, hAffine, hRing⟩ := hx x htx
+  refine ⟨β, ?_⟩
+  intro s
+  let r := (F.map (homOfLE htx)).hom
+  let r₁ := (colimit.ι F x).hom
+  let r₀ := (colimit.ι F t).hom
+  let cP := colimitScalarExtensionComp F (homOfLE htx) P
+  let cQ := colimitScalarExtensionComp F (homOfLE htx) Q
+  let τ := cP.hom ≫ (ModuleCat.extendScalars r₁).map s ≫ cQ.inv
+  have hτ (m : P) : τ ((1 : ↑(colimit F)) ⊗ₜ[F.obj t, r₀] m) =
+      cQ.inv ((1 : ↑(colimit F)) ⊗ₜ[F.obj x, r₁]
+        s ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, r] m)) := by
+    change cQ.inv ((ModuleCat.extendScalars r₁).map s
+      (cP.hom ((1 : ↑(colimit F)) ⊗ₜ[F.obj t, r₀] m))) = _
+    apply congrArg cQ.inv
+    exact (congrArg ((ModuleCat.extendScalars r₁).map s)
+      (colimitScalarExtensionComp_one_tmul F (homOfLE htx) P m)).trans
+        (ModuleCat.ExtendScalars.map_tmul r₁ s 1 _)
+  apply affine_chart_tensor_coordinate_recovery r r₁ r₀ _ _ _ _ U a M N hMq P Q
+    δM δN ρ₀ ρₓ e₀M e₀N eₓM eₓN h₀N hₓM hₓN n₀M n₀N nₓM nₓN hAffine
+    cQ (colimitScalarExtensionComp_one_tmul F (homOfLE htx) Q)
+    τ s hτ (α τ) (β s) (hα τ) (hβ s)
+  exact hRing
 
 end AlgebraicGeometry

@@ -18,42 +18,35 @@
  ],
  "proof": [
   {
-   "text": "Apply upperTailChartCone_isLimit. The partial-order quotient is equivalent to the tail, so reindexing preserves the limit. All stages and the vertex are affine by affine base change. Affine spectrum/global sections duality identifies the vertex ring with colimit F. Pullback pasting identifies these charts with the ordinary direct and stage charts. The starting representative is equivalent to j, and thus gives an isomorphic starting chart.",
+   "text": "Obtain normalized section models for the limit and all stages. Take their sectionwise Hom equivalences α and β.",
    "uses": [
-    "new-affine-chart-upper-tail-limit-data",
-    "def-pc-fibre-product"
+    "lem-pc-affine-chart-normalized-section-models"
    ],
    "elementary": false
   },
   {
-   "text": "Use the affine quasi-coherent equivalence (Stacks 26.7.5) and its functorial pullback/scalar-extension identification (26.7.3). The actual section modules B(M),B(N) at the starting chart reconstruct M,N. Extend them to the stage and colimit rings. Fully faithfulness gives the two Hom equivalences alpha,beta from these canonical object comparisons.",
-   "uses": [
-    "pqf-def-coherent",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false
+   "text": "For s at x define τ by conjugating its scalar extension with colimitScalarExtensionComp. On 1 tensor m, the existing normalization colimitScalarExtensionComp_one_tmul and ModuleCat.ExtendScalars.map_tmul show τ(1 tensor m)=cQ.inv(1 tensor s(1 tensor m)). This equality is proved by congrArg and transitivity, without rewriting through the geometric models.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For each stage map s, tensor associativity and the cocone equation give colimitScalarExtensionComp. Under the affine equivalence, conjugating the further scalar extension by these canonical isomorphisms is ordinary pullback of beta(s). Pullback composition coherence, followed by pullback along the canonical lift from the iterated chart to the direct chart, gives chartOrdinaryMapRecovery. Its lift_snd equation identifies the comparison with the d in that predicate. This only treats the canonical image of s; uniqueness of arbitrary normalized composition isomorphisms and cancellation of the algebraic square are handled in the parent theorem.",
+   "text": "Apply the affine tensor-coordinate recovery criterion with the section models, their semilinearity, unit normalizations, full-faithfulness formulas and ring-map compatibility. Its normalization hypothesis for cQ is colimitScalarExtensionComp_one_tmul. This gives the required ordinary recovery for every s.",
    "uses": [
-    "def-pc-chart-ordinary-map-recovery",
-    "def-pc-fibre-product"
+    "lem-pc-affine-chart-tensor-coordinate-recovery"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-chart-ordinary-map-recovery",
-  "def-pc-fibre-product",
-  "new-affine-chart-upper-tail-limit-data",
-  "pqf-def-coherent"
+  "lem-pc-affine-chart-normalized-section-models",
+  "lem-pc-affine-chart-tensor-coordinate-recovery"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "P4",
+  "group": "R2",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tag 01ZR first affine proof; Tag 01I6, Lemmas 26.7.3 and 26.7.5; Tags 0095 and 0096. Specialized geometric part of the parent proof."
+  "place": "Original three steps; object reconstruction separated from generic tensor-coordinate recovery. The scalar-extension generator calculation and assembly are complete Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -159,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T215609-L-899843",
+  "landing": "20261013T231542-L-1820031",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
