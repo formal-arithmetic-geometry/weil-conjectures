@@ -178,7 +178,7 @@ lemma exists_algHom_of_isRegularPair {M : Type*} [CommRing M] [Algebra R M]
   refine ⟨(AlgEquiv.ofInjective iR hinj).symm.toAlgHom.comp (ga.codRestrict _ fun t ↦
     hrange ⟨t, rfl⟩), ?_⟩
   ext t
-  simp only [AlgHom.comp_apply, AlgHom.coe_coe]
+  simp only [AlgHom.comp_apply]
   exact congrArg Subtype.val ((AlgEquiv.ofInjective iR hinj).apply_symm_apply _)
 
 /-- One step of the lifting: a map `T → R / I^m` lifts to `T → R / I^(m+1)`, uniquely. -/
@@ -259,9 +259,9 @@ lemma existsUnique_lift (hRI : ∀ n, IsRegularPair a b (R ⧸ I ^ n))
   | base =>
     let e := Ideal.quotientEquivAlgOfEq R (pow_one I).symm
     have hfe : (Ideal.Quotient.factorₐ R (Ideal.pow_le_self one_ne_zero)).comp e.toAlgHom =
-        AlgHom.id R (R ⧸ I) := Ideal.Quotient.algHom_ext _ (by ext <;> rfl)
+        AlgHom.id R (R ⧸ I) := Ideal.Quotient.algHom_ext _ (by ext)
     have hef : e.toAlgHom.comp (Ideal.Quotient.factorₐ R (Ideal.pow_le_self one_ne_zero)) =
-        AlgHom.id R (R ⧸ I ^ 1) := Ideal.Quotient.algHom_ext _ (by ext <;> rfl)
+        AlgHom.id R (R ⧸ I ^ 1) := Ideal.Quotient.algHom_ext _ (by ext)
     refine ⟨e.toAlgHom.comp φ, by beta_reduce; rw [← AlgHom.comp_assoc, hfe, AlgHom.id_comp],
       fun F hF ↦ ?_⟩
     beta_reduce at hF
