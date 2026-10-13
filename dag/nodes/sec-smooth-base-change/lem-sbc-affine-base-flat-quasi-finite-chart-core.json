@@ -1,0 +1,112 @@
+{
+ "id": "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+ "kind": "statement",
+ "title": "Affine-base flat quasi-finite polynomial chart core",
+ "statement": "Under the hypotheses of lem-sbc-cohen-macaulay-flat-quasi-finite-chart, there exist n, an open O containing y, an affine open V of T, and a flat locally quasi-finite locally finitely presented map e: O → AffineSpace_n(V) whose projection followed by V's inclusion equals O.ι followed by f.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00RH, affine localization, polynomial factorization and flat shrinking (Tags 00QE, 00RE, 00R7, 00RC)."
+ },
+ "stmt_deps": [
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighborhoods and translate the flat finitely presented morphism to rings. Apply the quasi-finite polynomial factorization, the fibre flatness criterion using the depth equality, and openness of the flat locus; transport the resulting localized ring map back to schemes.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-miracle-flatness",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-finite-over-polynomial-algebra",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+ ],
+ "proof_origin": {
+  "by": "Stacks Project",
+  "document": "Stacks Project",
+  "place": "Tag 00RH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine flat quasi-finite polynomial chart near a Cohen-Macaulay fibre point",
+   "results": "service unavailable; no exact result",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme morphism affine open flat locally quasi-finite chart",
+   "results": "no exact chart construction; only affine-space smoothness and flatness primitives",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*flat.*quasiFinite.*chart",
+   "results": "no existing declaration with this affine-base core statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohenMacaulayFlatQuasiFiniteChart",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 00RH affine chart core",
+   "via": [
+    "lem-sbc-cohen-macaulay-flat-quasi-finite-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseFlatQuasiFiniteChartCore.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_base_flat_quasiFinite_chart_core",
+  "statement": "theorem exists_affine_base_flat_quasiFinite_chart_core\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    (y : X) (ht : f y ∈ U)\n    (hdepth :\n      (IsLocalRing.depth (R := (f.fiber (f y)).presheaf.stalk (f.asFiber y))\n        ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) : WithBot ℕ∞) =\n          ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))) :\n    ∃ (n : ℕ) (O : X.Opens) (V : T.Opens)\n      (_ : IsAffine V.toScheme)\n      (e : O.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) V.toScheme),\n      y ∈ O ∧ Flat e ∧ LocallyQuasiFinite e ∧ LocallyOfFinitePresentation e ∧\n        e ≫ (AffineSpace (ULift.{u} (Fin n)) V.toScheme ↘ V.toScheme) ≫ V.ι =\n          O.ι ≫ f",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T155940-L-1304887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T155940-L-1304887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

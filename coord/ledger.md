@@ -13066,3 +13066,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/R4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapDifferential (stage 3; reviewer PASS; first push; landing 20261013T155939-L-1304307 (proof); batch 20261013T155927; modules 1; new nodes 0)
 - 15:59 L: merged deliver/R4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapIsIso (stage 3; reviewer PASS; first push; landing 20261013T155939-L-1304509 (interface); batch 20261013T155927; modules 3; new nodes 2)
 - 15:59 L: merged deliver/R4/Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective (stage 3; reviewer PASS; first push; landing 20261013T155939-L-1304631 (proof); batch 20261013T155927; modules 1; new nodes 0)
+- 15:59 L: merged deliver/S1/Sheaf.AlgebraicGeometry.CohenMacaulayFlatQuasiFiniteChart (stage 3; reviewer PASS; first push; landing 20261013T155940-L-1304887 (interface); batch 20261013T155927; modules 2; new nodes 1)

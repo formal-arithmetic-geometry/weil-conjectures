@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Sheaf.RingTheory.Depth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore
 
 /-! # Flat quasi-finite charts at Cohen-Macaulay fibre points
 
@@ -53,6 +54,19 @@ theorem exists_flat_quasiFinite_chart_of_fibre_depth_eq_ringKrullDim
           ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))) :
     ∃ (n : ℕ) (O : X.Opens) (P : Scheme.{u}) (h : O.toScheme ⟶ P) (g : P ⟶ T),
       y ∈ O ∧ Flat h ∧ LocallyQuasiFinite h ∧ LocallyOfFinitePresentation h ∧
-        SmoothOfRelativeDimension n g ∧ h ≫ g = O.ι ≫ f := by sorry
+        SmoothOfRelativeDimension n g ∧ h ≫ g = O.ι ≫ f := by
+  obtain ⟨n, O, V, hV, e, hy, heflat, heqf, helfp, he⟩ :=
+    exists_affine_base_flat_quasiFinite_chart_core f U y ht hdepth
+  let P := AffineSpace (ULift.{u} (Fin n)) V.toScheme
+  let g : P ⟶ T := (P ↘ V.toScheme) ≫ V.ι
+  have hsm : SmoothOfRelativeDimension n g := by
+    have h1 : SmoothOfRelativeDimension n (P ↘ V.toScheme) := by
+      simpa [P] using
+        (AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin n)) V.toScheme)
+    let _ : SmoothOfRelativeDimension n (P ↘ V.toScheme) := h1
+    exact smoothOfRelativeDimension_comp (n := n) (m := 0) (P ↘ V.toScheme) V.ι
+  refine ⟨n, O, P, e, g, hy, heflat, heqf, helfp, hsm, ?_⟩
+  change e ≫ (P ↘ V.toScheme) ≫ V.ι = O.ι ≫ f
+  exact he
 
 end AlgebraicGeometry
