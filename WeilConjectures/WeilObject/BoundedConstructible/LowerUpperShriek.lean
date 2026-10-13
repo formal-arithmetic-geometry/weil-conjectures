@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 
@@ -38,11 +39,14 @@ of `c` along it, a compactification of `f` again.
 
 ## Sorried input
 
-- `ProEtale.CondensedRing.isIso_weilUpperShriekComparison`: the mate `b^!` is an isomorphism.
-  The mate of an isomorphism is not an isomorphism in general; it is here because `Φ_X` and
-  `Φ_Y` are equivalences, with inverses the pullbacks along `e_X⁻¹` and `e_Y⁻¹`, so that `b^!`
-  is conjugate to `b_!` under these equivalences. Making this precise needs the identity
-  isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module objects.
+- `ProEtale.CondensedRing.isEquivalence_boundedConstructibleUpperStar_of_iso`: the Frobenius
+  pullback `Φ_X = Le_X^*` is an equivalence, with inverse the pullback along `e_X⁻¹`. Making it
+  precise needs the identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module
+  objects, which is not yet available.
+
+That the mate `b^!` is an isomorphism (`ProEtale.CondensedRing.isIso_weilUpperShriekComparison`)
+follows: the mate of an isomorphism along equivalences is an isomorphism
+(`CategoryTheory.isIso_mateEquiv_of_isEquivalence`).
 
 The compactly supported base change theorem, and the identification
 `Rf_!^{c'} ≅ Rf_!^c`, are inputs from
@@ -69,7 +73,25 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-  {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+
+section Equivalence
+
+variable {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+  (e : X ≅ X) [e.hom.IsOver (Spec (.of k))]
+
+/-- The derived pullback `Le^*` on bounded constructible `ℚ̄_ℓ`-sheaves along an automorphism
+`e` of a scheme over `Spec k` is an equivalence: its inverse is the pullback along `e⁻¹`, and
+the unit and counit are the composition isomorphisms `L(e⁻¹)^* ⋙ Le^* ≅ L(e ≫ e⁻¹)^* = L(𝟙)^*`
+and `Le^* ⋙ L(e⁻¹)^* ≅ L(𝟙)^*`, followed by the identity isomorphism `L(𝟙)^* ≅ 𝟭`. The identity
+isomorphism of the derived pullback on module objects is not yet available. -/
+instance isEquivalence_boundedConstructibleUpperStar_of_iso :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ k e.hom).IsEquivalence :=
+  sorry
+
+end Equivalence
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
   [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
   [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
@@ -162,11 +184,13 @@ noncomputable def weilUpperShriekComparison :
       ℓ k c)
     (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ k eX eY hf c).inv)).natTrans
 
-/-- The Frobenius comparison of the upper shriek is an isomorphism, the Frobenius pullbacks being
-equivalences. See the module docstring for the argument. -/
+/-- The Frobenius comparison of the upper shriek is an isomorphism: it is the mate of an
+isomorphism along the Frobenius pullbacks, which are equivalences
+(`ProEtale.CondensedRing.isEquivalence_boundedConstructibleUpperStar_of_iso`). -/
 instance isIso_weilUpperShriekComparison :
     IsIso (weilUpperShriekComparison ℓ k eX eY hf c) :=
-  sorry
+  isIso_mateEquiv_of_isEquivalence _ _
+    (TwoSquare.mk _ _ _ _ (weilLowerShriekComparison ℓ k eX eY hf c).inv)
 
 /-- The upper shriek `Rf^!(c)` of Weil objects along a compactification `c` of `f`: a Weil object
 `(K, φ_K)` for `e_Y` is sent to `Rf^!(c) K` with the structure isomorphism
