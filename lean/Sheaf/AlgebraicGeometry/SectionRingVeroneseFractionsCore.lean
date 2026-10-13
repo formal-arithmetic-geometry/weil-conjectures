@@ -25,6 +25,14 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- The canonical map from section-fraction classes to homogeneous fractions. -/
+noncomputable def sectionRingVeroneseFractionCanonicalMap
+    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
+    (d : ℕ) (s : sectionRingGrade L d) :
+    SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d) →+
+      HomogeneousLocalization.Away (sectionRingGrade L) s.val :=
+  (sectionRingVeroneseFractionEquiv X L d s).symm.toAddMonoidHom
+
 /-- The canonical Veronese fraction map is bijective.
 Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
 (blueprint: lem-sc-section-ring-veronese-fractions-core)
@@ -36,7 +44,7 @@ theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :
     Function.Bijective
-      (sectionRingVeroneseFractionEquiv X L d s).symm := by
+      (sectionRingVeroneseFractionCanonicalMap X L d s) := by
   exact (sectionRingVeroneseFractionEquiv X L d s).symm.bijective
 
 end AlgebraicGeometry.Scheme.Modules

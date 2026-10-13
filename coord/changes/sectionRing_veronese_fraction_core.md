@@ -27,10 +27,13 @@ theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :
     Function.Bijective
-      (sectionRingVeroneseFractionEquiv X L d s).symm
+      (sectionRingVeroneseFractionCanonicalMap X L d s)
 ```
 
-The inverse equivalence has domain `SectionFractionPresentation` and codomain
+The public definition is
+`sectionRingVeroneseFractionCanonicalMap X L d s :=
+(sectionRingVeroneseFractionEquiv X L d s).symm.toAddMonoidHom`.
+It has domain `SectionFractionPresentation` and codomain
 `HomogeneousLocalization.Away`; on the class represented by a degree-`n`
 numerator it is the fraction with denominator `s^n`.
 
@@ -213,4 +216,4 @@ numerator it is the fraction with denominator `s^n`.
 
 ## Status
 
-landed 20261013T190155-L-3221358 2026-10-13 (merge of deliver/T3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore)
+landed 20261013T201809-L-3977060 2026-10-13 (merge of deliver/T3/Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsCore)
