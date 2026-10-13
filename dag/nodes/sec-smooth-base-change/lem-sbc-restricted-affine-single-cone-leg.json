@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-restricted-affine-single-cone-leg",
+ "kind": "statement",
+ "title": "Compatibility of the explicit restricted cone comparison with colimit legs",
+ "statement": "For any preordered I, diagram D : Iᵒᵖ → Over S, cone c, coefficients F, coefficient diagram H on the cone point with a colimit, object isomorphisms eH identifying H_i with the inverse images of F_i, and etale U over S, the inverse of the explicit cone comparison [def-sbc-restricted-affine-single-maps] followed by the leg of the concrete restricted colimit cocone [def-sbc-restricted-affine-coefficient-construction] equals mapCochainComplexSingleFunctor.hom followed by singleFunctor.map of rawAffineRestrictedCoefficient for the original cone leg, with coefficient eH_i.inv followed by colimit.iota_i [def-sbc-raw-affine-restricted-cohomology]. No coefficient transitions, transition coherence, directedness, nonemptiness, or geometric limit are assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, restriction to an affine etale object; Tag 0EZM coefficient complexes; Tag 03CB canonical inverse-image composition comparisons"
+ },
+ "stmt_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Expand the inverse of the explicit cone isomorphism and the mapped cocone leg. The inverse factors are the single comparison, the inverse composition comparison for q and r_i, the composition comparison for r and c_i, and the restricted eH inverse. Combine the latter with the restricted colimit injection by functoriality. These are exactly the defining factors of rawAffineRestrictedCoefficient. The pullback projection identity makes the two composite inverse images identical, and proof irrelevance identifies the witnesses of that equality.",
+   "uses": [
+    "def-sbc-restricted-affine-single-maps",
+    "def-sbc-restricted-affine-coefficient-construction",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-restricted-affine-single-maps",
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker T4",
+  "document": "Stacks Project, Tags 09Z1, 0EZM and 03CB; library inverse-image coherence",
+  "place": "Categorical elaboration of the restriction step; no continuity assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaf composition coherence restricted to pullback and degree zero single complexes",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_assoc, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapCochainComplexSingleFunctor",
+   "results": "loogle: unknown identifier 'Functor.mapCochainComplexSingleFunctor'",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarComp_assoc|singleMapHomologicalComplex",
+   "results": "Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaf composition coherence with degree zero single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleCoherence",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Restriction of the inverse-image coefficient system to fibre products before applying cohomology",
+   "via": [
+    "lem-sbc-restricted-affine-single-coherence",
+    "lem-sbc-restricted-affine-coefficient-system",
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleConeLeg",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleConeLeg.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleConeIso_inv_leg",
+  "statement": "theorem restrictedAffineSingleConeIso_inv_leg {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D) (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) [HasColimit H] (U : S.Etale) (i : Iᵒᵖ) : (restrictedAffineSingleConeIso D c F H eH U i).inv ≫ (restrictedAffineL D c H U).ι.app (op i) = ((upperStar AddCommGrpCat.{v + 1} ((restrictedAffineCone D c U).π.app i)).mapCochainComplexSingleFunctor 0).hom.app ((upperStar AddCommGrpCat.{v + 1} (pullback.snd U.hom (D.obj i).hom)).obj (F i.unop)) ≫ (CochainComplex.singleFunctor _ 0).map (rawAffineRestrictedCoefficient (c.π.app i).left (D.obj i).hom c.pt.hom (Over.w (c.π.app i)) (F i.unop) (colimit H) ((eH i.unop).inv ≫ colimit.ι H i.unop) U)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T100140-L-2491216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T100140-L-2491216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,9 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientConstruction
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleConeNaturality
+import Sheaf.AlgebraicGeometry.RestrictedAffineSingleConeLeg
 import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -22,6 +25,9 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+-- Preserve the existing names of the existential proof witnesses in the statement.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Coherent transitions and cone comparisons for the concrete restricted single complexes.
 Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object), and
 Tag 0EZM (canonical coefficient maps).
@@ -115,6 +121,17 @@ theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}
         (CochainComplex.singleFunctor _ 0).map
           (rawAffineRestrictedCoefficient (c.π.app i).left (D.obj i).hom c.pt.hom
             (Over.w (c.π.app i)) (F i.unop) (colimit H)
-            ((eH i.unop).inv ≫ colimit.ι H i.unop) U)) := by sorry
+            ((eH i.unop).inv ≫ colimit.ι H i.unop) U)) := by
+  subst D'
+  cases eq_of_heq hc'
+  cases eq_of_heq hK
+  cases eq_of_heq hG'
+  cases eq_of_heq hL'
+  obtain ⟨hid, hcomp⟩ := restrictedAffineSingleTransition_laws D F φ hφid hφcomp U
+  refine ⟨restrictedAffineSingleTransition D F φ U, hid, hcomp,
+    restrictedAffineSingleConeIso D c F H eH U,
+    restrictedAffineSingleConeIso_naturality D c F φ H eH hH U, ?_⟩
+  intro i
+  exact heq_of_eq (restrictedAffineSingleConeIso_inv_leg D c F H eH U i)
 
 end AlgebraicGeometry.Etale

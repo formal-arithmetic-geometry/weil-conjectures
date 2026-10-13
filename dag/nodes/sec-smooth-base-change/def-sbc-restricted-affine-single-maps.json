@@ -1,0 +1,118 @@
+{
+ "id": "def-sbc-restricted-affine-single-maps",
+ "kind": "definition",
+ "title": "Explicit restricted single-complex transitions and cone comparisons",
+ "statement": "For a diagram D in Over S, coefficients F with transitions phi, and an etale U over S, form the concrete fibre-product diagram and degree-zero complexes of [def-sbc-restricted-affine-coefficient-construction]. Define the complex transition to be mapCochainComplexSingleFunctor.hom followed by singleFunctor.map of rawAffineRestrictedCoefficient [def-sbc-raw-affine-restricted-cohomology]. For a cone c and a coefficient diagram H identified with the pullbacks of F by eH, define eG by restricting eH along the cone second projection, then the inverse composition comparison for that projection and the original cone leg, then the composition comparison for the restricted cone leg and the stage projection, then the inverse single-complex comparison. The pullback projection identity identifies the two composites. All maps and isomorphisms are explicit; no unproved existence witness is chosen.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1 proof, restriction to an affine etale object; Tag 0EZM coefficient complexes; Tag 03CB canonical inverse-image composition comparisons"
+ },
+ "stmt_deps": [
+  "def-sbc-restricted-affine-coefficient-construction",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaf composition coherence restricted to pullback and degree zero single complexes",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_assoc, CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapCochainComplexSingleFunctor",
+   "results": "loogle: unknown identifier 'Functor.mapCochainComplexSingleFunctor'",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarComp_assoc|singleMapHomologicalComplex",
+   "results": "Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete restricted single-complex theorem; use the library comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaf composition coherence with degree zero single complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleCoherence",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Restriction of the inverse-image coefficient system to fibre products before applying cohomology",
+   "via": [
+    "lem-sbc-restricted-affine-single-coherence",
+    "lem-sbc-restricted-affine-coefficient-system",
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleMaps.lean",
+  "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleTransition",
+  "statement": "def restrictedAffineSingleTransition {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (U : S.Etale) {i j : Iᵒᵖ} (f : j ⟶ i) : ((upperStar AddCommGrpCat.{v + 1} ((restrictedAffineDiagram D U).map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (restrictedAffineK D F U i) ⟶ restrictedAffineK D F U j",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.restrictedAffineSingleTransition",
+   "AlgebraicGeometry.Etale.restrictedAffineSingleConeIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T100140-L-2491216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T100140-L-2491216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
