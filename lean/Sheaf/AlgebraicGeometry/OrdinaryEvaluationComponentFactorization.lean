@@ -28,6 +28,42 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
+private theorem uncurry_projection {C : Type u} [Category.{u} C]
+    {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u})
+    {E D : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
+    (b : D ⟶ SheafOfModules.homObj (R := R) E (𝟙_ _)) :
+    (SheafOfModules.tensorHomEquiv (R := R) E D (𝟙_ _)).symm b =
+      E ◁ b ≫ (SheafOfModules.tensorHomEquiv (R := R) E _ (𝟙_ _)).symm (𝟙 _) := by
+  apply (SheafOfModules.tensorHomEquiv (R := R) E D (𝟙_ _)).injective
+  rw [SheafOfModules.tensorHomEquiv_whiskerLeft_comp (R := R)]
+  simp
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem evaluation_factorization {C : Type u} [Category.{u} C]
+    {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u})
+    (E B D T : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (b : D ⟶ SheafOfModules.homObj (R := R) E (𝟙_ _)) (g : B ⟶ T) :
+    SheafOfModules.tensorHomEquiv (R := R) E (B ⊗ D) T
+      ((β_ E (B ⊗ D)).hom ≫ (α_ B D E).hom ≫
+        B ◁ ((β_ D E).hom ≫
+          (SheafOfModules.tensorHomEquiv (R := R) E D (𝟙_ _)).symm b) ≫
+        (ρ_ B).hom ≫ g) =
+      B ◁ b ≫ SheafOfModules.moduleDualEvaluation R E B ≫
+        SheafOfModules.homObjMap (R := R) (𝟙 E) g := by
+  unfold SheafOfModules.moduleDualEvaluation
+  rw [← SheafOfModules.tensorHomEquiv_comp_homObjMap (R := R),
+    ← SheafOfModules.tensorHomEquiv_whiskerLeft_comp (R := R)]
+  apply (SheafOfModules.tensorHomEquiv (R := R) E (B ⊗ D) T).congr_arg
+  simp only [Category.assoc]
+  rw [BraidedCategory.braiding_naturality_right_assoc,
+    associator_naturality_middle_assoc, ← whiskerLeft_comp_assoc,
+    BraidedCategory.braiding_naturality_left_assoc, uncurry_projection R]
+
 /-- Factorization of a nonzero ordinary evaluation component through module evaluation.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation map; Tag 03EO, tensor-Hom
 adjunction naturality.
@@ -56,6 +92,11 @@ theorem ordinaryEvaluation_component_factorization (X : Scheme.{u}) (U : X.Opens
         (C := Over U) (J := (Opens.grothendieckTopology X).over U) (X.sheaf.over U)
         (P.X r) (F.X p) ≫
       SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))
-        (F.XIsoOfEq (by omega : p = r + n)).hom := by sorry
+        (F.XIsoOfEq (by omega : p = r + n)).hom := by
+  set_option backward.isDefEq.respectTransparency.types false in
+    simp only [localEvaluationComponent, dif_pos hr]
+    exact evaluation_factorization.{u}
+      (C := Over U) (J := (Opens.grothendieckTopology X).over U) (X.sheaf.over U)
+      (P.X r) (F.X p) ((localEvaluationDual X U P).X q) (F.X (r + n)) _ _
 
 end AlgebraicGeometry
