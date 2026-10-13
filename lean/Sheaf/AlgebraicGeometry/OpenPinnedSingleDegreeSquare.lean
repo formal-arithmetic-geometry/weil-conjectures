@@ -4,11 +4,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes
 
 /-! # The geometric restriction square for the pinned single-complex counits
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
@@ -44,6 +41,26 @@ def pinnedSingleDegreeTensorComparison
       ((HomologicalComplex.singleMapHomologicalComplex
         (Scheme.Modules.tensorPullback k) (ComplexShape.up ℤ) n).hom.app M))
 
+private theorem transport_square
+    {C : Type*} [Category C] {A A₀ B B₀ C₁ C₀ D D₀ : C}
+    (eA : A ≅ A₀) (eB : B ≅ B₀) (eC : C₁ ≅ C₀) (eD : D ≅ D₀)
+    (a : A₀ ≅ C₀) (b : B₀ ≅ D₀)
+    (x : A ⟶ B) (x₀ : A₀ ⟶ B₀) (y : C₁ ⟶ D) (y₀ : C₀ ⟶ D₀)
+    (hx : x ≫ eB.hom = eA.hom ≫ x₀)
+    (hy : y ≫ eD.hom = eC.hom ≫ y₀)
+    (h₀ : x₀ ≫ b.hom = a.hom ≫ y₀) :
+    x ≫ (eB ≪≫ b ≪≫ eD.symm).hom =
+      (eA ≪≫ a ≪≫ eC.symm).hom ≫ y := by
+  apply (cancel_mono eD.hom).1
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  rw [← Category.assoc x eB.hom, hx]
+  simp only [Category.assoc]
+  rw [← Category.assoc x₀ b.hom, h₀, hy]
+  simp only [Iso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
+
+set_option maxHeartbeats 2000000 in
+-- Transporting the explicit derived functor comparisons needs extra elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the
 single components of the pinned counits. This contains only the geometric part
 of open compatibility: neither arbitrary witnessing counits nor truncation or
@@ -113,6 +130,39 @@ theorem open_pinned_single_degree_square
             (T0.obj ((schemeOpenRestriction X U).obj G)) ≫
           (schemeDerivedDirectImage q).map
             (pinnedSingleDegreeTensorComparison p ((schemeOpenRestriction X U).obj G) n))
-    := by sorry
+    := by
+  classical
+  dsimp only
+  let U := f ⁻¹ᵁ V
+  let fA := f ∣_ V
+  let gA := g.resLE V W hWV
+  let p := pullback.fst fA gA
+  let q := pullback.snd fA gA
+  let r := schemeOpenRestriction X U
+  let R := (schemeOpenRestriction S' W).mapDerivedCategory
+  let J := shiftFunctor (schemeDerivedCategory.{u, w} W.toScheme) (-n)
+  obtain ⟨a₀, b₀, h₀⟩ := open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V W hWV
+  obtain ⟨a₁, b₁, h₁⟩ := pinned_single_base_change_shift.{u, w} f g g' f' sq.w R n
+  obtain ⟨a₂, b₂, h₂⟩ :=
+    pinned_single_base_change_shift.{u, w} fA gA p q pullback.condition
+      (𝟭 (schemeDerivedCategory.{u, w} W.toScheme)) n
+  simp only [Functor.comp_id, Functor.id_map] at a₂ b₂ h₂
+  let a₂' := Functor.isoWhiskerLeft r a₂
+  let b₂' := Functor.isoWhiskerLeft r b₂
+  let a := a₁ ≪≫ Functor.isoWhiskerRight a₀ J ≪≫ a₂'.symm
+  let b := b₁ ≪≫ Functor.isoWhiskerRight b₀ J ≪≫ b₂'.symm
+  refine ⟨a, b, ?_⟩
+  intro G
+  have hshift := congrArg J.map (h₀ G)
+  simp only [Functor.map_comp] at hshift
+  have h := transport_square (C := schemeDerivedCategory.{u, w} W.toScheme)
+    (a₁.app G) (b₁.app G) (a₂'.app G) (b₂'.app G)
+    ((Functor.isoWhiskerRight a₀ J).app G) ((Functor.isoWhiskerRight b₀ J).app G)
+    (R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w n G))
+    (J.map (R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w 0 G)))
+    (singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition n (r.obj G))
+    (J.map (singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition 0 (r.obj G)))
+    (h₁ G) (h₂ (r.obj G)) hshift
+  exact h
 
 end AlgebraicGeometry

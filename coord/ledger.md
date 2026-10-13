@@ -12506,3 +12506,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ClosedImmersionTwistCohomologyBound (stage 3; reviewer PASS; first push; landing 20261013T125007-L-3835787 (proof); batch 20261013T125004; modules 1; new nodes 0)
 - 12:50 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep (stage 3; reviewer PASS; first push; landing 20261013T125007-L-3835893 (interface); batch 20261013T125004; modules 3; new nodes 2)
 - 12:50 L: merged deliver/E2/Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology (stage 3; reviewer PASS; first push; landing 20261013T125008-L-3835996 (interface); batch 20261013T125004; modules 3; new nodes 2)
+- 12:50 L: merged deliver/F3/Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeSquare (stage 3; reviewer PASS; first push; landing 20261013T125008-L-3836119 (interface); batch 20261013T125004; modules 3; new nodes 2)
