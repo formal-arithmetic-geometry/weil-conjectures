@@ -14,32 +14,55 @@
  },
  "proof": [
   {
-   "text": "Define I on sections by signed extension of a-coordinates. A distinct tuple is transported from its unique sorted increasing tuple, multiplied by the sorting sign; a repeated tuple has value zero. Use the inverse of e and the inverse of the product-intersection isomorphisms to return to D. SignedCechExtension_differential gives stability under the differential: for distinct tuples its permutation law matches the ordered differential, while repeated tuple faces cancel in pairs. The inputs ha and hd transport this equation to I.",
+   "text": "Define a private full-tuple signed value by summing over permutations whose reordered underlying Fin r tuple is strictly increasing. Each summand is the sign times coefficient restriction from the ordered intersection to the full product times the inverse image of the base open. Repeated tuples have no contributing permutation. On an increasing tuple only the identity permutation contributes: Tuple.unique_monotone and injectivity show uniqueness. Its sign is one, and the composite of the full-product-to-intersection and intersection-to-product arrows is the identity in the poset of opens. This proves the increasing-coordinate identity in Lean.",
    "uses": [
-    "lem-pc-signed-cech-extension-differential",
     "def-pc-ordered-cech-module-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "The formulas commute with base-open restriction by hn and naturality of e. For scalar multiplication, use hl on the ordered input and hlinear on the usual output coordinates, and semilinearity of the intersection isomorphisms. This constructs module-sheaf morphisms; no arbitrary existence witness is chosen. On increasing tuples the sorting permutation is the identity and its sign is one, so the displayed coordinate equation follows. Set negative components to zero; hK makes all chain equations there vanish, including the boundary at -1.",
+   "text": "Evaluate the presentation e_p on an open C. Compose its evaluation with PreservesProduct.iso for evaluation and ModuleCat.piIsoPi to obtain an actual additive equivalence V between sections of D^p on C and all full-tuple coordinates. The identities piIsoPi_hom_ker_subtype and piComparison_comp_π identify V with the coordinate maps. Apply V inverse to the full signed formula of a_{p,B}(s). This defines additive section maps v_{p,B}. Naturality of e followed by each projection, hn and functoriality of coefficient restriction show that v commutes with restrictions; the two composite arrows between opens are equal by thinness. Apply V and each coordinate to scalar multiplication: hlinear describes the output scalar, hl describes the input scalar, map_smul transports it, and integer signs commute with local scalars. Finite sums preserve these identities. PresheafOfModules.homMk assembles these explicit maps into module-sheaf morphisms, and the inverse extendXIso gives the graded maps to the extended pushforward. No postponed existence theorem supplies any data.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a base open B use the SiteCechComplex whose p-tuple open is (infimum_l W_{t(l)}) intersect f inverse B. Its universal arrows and the canonical map to the categorical product times f inverse B are actual homOfLE maps; the latter is an isomorphism by the product projections. Use orderedCechNaturalCoordinate from the proved degreewise-projection module only as a full-coordinate definition. Transport its values to this intersection model. The filtered-permutation sum equals signedCechExtension: for an injective tuple there is exactly one strictly increasing permutation, its sorting permutation; for a noninjective tuple every summand vanishes. This identifies the full coordinates of the graded maps with the sectionwise signed extension.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates",
+    "lem-pc-ordered-cech-degreewise-projection",
+    "lem-pc-signed-cech-extension-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose hd with the full-tuple projection and evaluate on a section. The proved upstream TopCat.Presheaf.cechComplexFunctor_d_π in WeilConjectures.Topology.Sheaves.CechComparison expands the categorical differential as the alternating sum of signed face restrictions. Transporting to the intersection model gives SiteCechComplex.differentialValue: additivity moves restrictions through the finite sum and integer coefficients, and the restriction composites agree by uniqueness of arrows of opens. Apply signedCechExtension_differential. On each increasing tuple every face is increasing, so signedCechExtension_increasing followed by ha identifies the ordered differential coordinates with a applied to d_K. Thus all full coordinates of the two adjacent composites agree. Injectivity of the product-intersection isomorphisms, the product projections, e and extendXIso proves their equality as module-sheaf morphisms. HomologicalComplex.extend_d_eq handles the differential transport.",
    "uses": [
     "def-pc-ordered-cech-module-coordinates",
     "lem-pc-signed-cech-extension-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the integer-degree components by the graded maps, transported along Int.toNat_of_nonneg, for nonnegative integers, and zero otherwise. For an adjacent pair beginning in a nonnegative degree, Int.eq_ofNat_of_zero_le reduces the chain condition to the proved adjacent equation. If the source degree is negative, hK gives IsZero of that term, so eq_of_src proves the chain condition, including degree minus one to zero. The increasing-coordinate calculation from the first step proves the required formula. The public theorem signature and all hypotheses remain unchanged.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-ordered-cech-module-coordinates",
+  "lem-pc-ordered-cech-degreewise-projection",
   "lem-pc-signed-cech-extension-differential"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "U1",
+  "agent": "U2",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 01FJ and 01FK",
-  "note": "Module-sheaf assembly of ordered restriction and signed extension; split from the retraction argument."
+  "place": "Section 20.23, signed extension following Definition 01FI; Lemmas 01FJ and 01FK",
+  "note": "The source omits these proofs. U2 proved explicit local module-sheaf assembly, sectionwise differential transport and integer-degree extension in Lean; all auxiliary declarations are proved private helpers. Reuses signedCechExtension_differential and the source-library Cech projection differential formula; no new sorry or node."
  },
  "mathlib_searches": [
   {
@@ -134,10 +157,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T100142-L-2491794",
-  "kind": "interface",
+  "landing": "20261013T111932-L-3066501",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
