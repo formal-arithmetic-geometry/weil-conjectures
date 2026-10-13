@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-residue-bottom-differential",
+ "kind": "statement",
+ "title": "A single bottom differential is split injective from residue exactness",
+ "statement": "Let R be a commutative ring and P a cochain complex of R-modules indexed by the integers. Let a be an integer. Suppose P^(a-1) is zero, and P^a and P^(a+1) are finite projective R-modules [def-pc-perfect-ring-complex]. Suppose that for every prime ideal p, termwise extension of scalars to the residue field kappa(p) has zero homology in degree a. Then d:P^a -> P^(a+1) is injective, and the canonical opcycles in degree a+1, namely coker(d), is projective over R. No boundedness or hypotheses on other terms or other homology groups are imposed.",
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00O0, Algebra Lemma cokernel-flat (1), applied on all of Spec R; Tag 00NX, finite projectivity"
+ },
+ "proof": [
+  {
+   "text": "Extension of scalars takes the zero term P^(a-1) to zero. The residue homology hypothesis therefore says that the base change of d(a,a+1) is injective at each prime: with zero incoming differential, zero homology is equivalent to monicity of the outgoing map. Identify categorical monicity of a module map with injectivity of its underlying linear map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-finite-projective-cokernel-localization to the two finite projective terms at each prime. Obtain principal neighbourhoods on which d is injective and its cokernel projective. The kernel is zero globally: a nonzero element would have a proper annihilator contained in a maximal ideal, hence would remain nonzero at that prime, contrary to local injectivity. The terms are finitely presented by lem-weil-pbc-finite-projective-finitely-presented. Their cokernel is finitely presented, because the image of the finite source is finitely generated. Localization commutes with this quotient. Local projectivity gives local flatness, which descends from the covering principal opens, so the cokernel is flat. Apply lem-weil-pbc-finitely-presented-flat-module-projective. Equivalently, the full statement of Stacks 00O0 (1) with its injective-fibre locus equal to Spec R and f=1 yields exactly this global map and cokernel conclusion.",
+   "uses": [
+    "lem-pc-finite-projective-cokernel-localization",
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical abstract opcycles in degree a+1 are isomorphic to the quotient of P^(a+1) by the range of d(a,a+1), by the ModuleCat cokernel isomorphism. Transfer projectivity along this linear equivalence; transfer injectivity to Mono d. The construction involves no arbitrary data chosen from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-cokernel-localization",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 00O0 (1), cokernel-flat, and Tag 00NX; single-differential specialization written by Q3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "map between finite projective modules injective after tensor every residue field implies split injective projective cokernel",
+   "results": "{\"t\": \"2026-10-13T15:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"map between finite projective modules injective after tensor every residue field implies split injective projective cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.free_of_lTensor_residueField_injective\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.finitePresentation_of_projective_of_exact\", \"Module.Invertible.rTensor_injective_iff\", \"Module.Invertible.lTensor_injective_iff\"], \"digest\": \"6491c4afb737a07d\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact global bottom-differential criterion; local-ring splitting and general module tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChange",
+   "results": "{\"t\": \"2026-10-13T15:46:53Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.baseChange\", \"LinearMap.baseChange_id\", \"LinearEquiv.coe_baseChange\", \"LinearMap.baseChange_tmul\", \"LinearMap.baseChange_one\", \"LinearMap.baseChange_comp\", \"LinearMap.baseChange_zero\", \"LinearMap.baseChange_eq_lTensor\"], \"digest\": \"7f528683a9db7d1f\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact global bottom-differential criterion; local-ring splitting and general module tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "projective_of_localization|cokernel.*[Pp]rojective|exact_iff_mono",
+   "results": "{\"t\": \"2026-10-13T15:46:53Z\", \"tool\": \"grep\", \"query\": \"projective_of_localization|cokernel.*[Pp]rojective|exact_iff_mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Exact.lean\"], \"digest\": \"e61bd34c9d862399\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact global bottom-differential criterion; local-ring splitting and general module tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of finite projective modules injective on every residue field is injective with projective cokernel",
+   "results": "{\"t\": \"2026-10-13T15:51:31Z\", \"tool\": \"leansearch\", \"query\": \"A map of finite projective modules injective on every residue field is injective with projective cokernel\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ResidueConnectiveProjectiveOpcycles",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 fixed-affine normalization: finite-projective cancellation of a negative bottom differential; parent proof steps 1 and 2, single-degree residue criterion",
+   "via": [
+    "lem-sc-residue-connective-projective-opcycles",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueBottomDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueBottomDifferential.lean",
+  "declaration": "CochainComplex.residue_bottom_differential",
+  "statement": "theorem residue_bottom_differential\n    (R : Type v) [CommRing R]\n    (P : CochainComplex (ModuleCat.{v} R) ℤ) (a : ℤ)\n    (hz : IsZero (P.X (a - 1)))\n    (hf₀ : Module.Finite R (P.X a))\n    (hf₁ : Module.Finite R (P.X (a + 1)))\n    (hp₀ : Module.Projective R (P.X a))\n    (hp₁ : Module.Projective R (P.X (a + 1)))\n    (hresidue : ∀ (p : Ideal R) [p.IsPrime],\n      let Pp := ((ModuleCat.extendScalars (algebraMap R p.ResidueField)).mapHomologicalComplex\n        (.up ℤ)).obj P\n      IsZero (Pp.homology a)) :\n    Mono (P.d a (a + 1)) ∧ Module.Projective R (P.opcycles (a + 1))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T160711-L-1371841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

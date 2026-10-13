@@ -12,36 +12,37 @@
  },
  "proof": [
   {
-   "text": "Choose a lower support bound a and induct on max(0,-a). For a >= 0 the incoming degree-zero differential is zero and opcycles is the finite projective term P^0. Otherwise the bottom differential is residue-injective: the incoming term is zero and residue homology vanishes in its negative degree.",
+   "text": "Finiteness is independent of the residue hypothesis: the epimorphism P.X 0 -> P.opcycles 0 is a surjective linear map, so Module.Finite.of_surjective applies to hf 0. For projectivity, induct on k with lower support bound -k and fixed upper support bound b; choose k=(-a).toNat from the original bound. At k=0, P.X (-1) is zero, and pOpcyclesIso identifies opcycles 0 with the projective module P.X 0.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply lem-pc-finite-projective-cokernel-localization to the bottom differential at each prime. Its cokernel is finitely presented, since both terms are finitely presented. The resulting locally projective cokernel is locally flat, hence globally flat. Apply the finitely-presented-flat criterion to obtain global projectivity; finiteness follows from the quotient presentation.",
+   "text": "For k+1 put c=-k. The incoming term in degree c-2 is zero. Apply lem-sc-residue-bottom-differential at a=c-1, using residue homology only in this negative degree. This yields Mono d(c-1,c) and projectivity of opcycles c. If k=0 this already gives projectivity of opcycles 0.",
    "uses": [
-    "lem-pc-finite-projective-cokernel-localization",
-    "lem-weil-pbc-finite-projective-finitely-presented",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
+    "lem-sc-residue-bottom-differential"
    ],
    "elementary": false
   },
   {
-   "text": "Split the bottom injection and cancel the identity pair. Its inverse gives a contracting homotopy, so all residue extensions retain negative exactness. The support lower bound rises by one. If a < -1 the image of the differential into degree zero is unchanged; if a = -1 the new degree-zero term is the original opcycles. Apply induction and these identifications to conclude. The zero ring and empty support interval obey the same quotient calculation.",
+   "text": "For k>0 construct Q=P.truncGE c. Its terms below c are zero, its term at c is opcycles c, and higher terms are the original terms. Finiteness at c follows from the surjective pOpcycles; the other terms transport along truncGEXIso and truncGEXIsoOpcycles. Q retains upper bound b, including the case b<c: there P.X c is zero, hence its quotient opcycles c is zero. Monicity of d(c-1,c) and the zero incoming term give exactness at c-1; lower degrees have zero terms. Thus P.IsGE c and piTruncGE c is a quasi-isomorphism. Both bounded-above complexes have projective terms, so Mathlib K-projectivity upgrades it to a homotopy equivalence. Extension of scalars is additive by the extend/restrict adjunction and maps this homotopy equivalence to one on residue complexes. Its toHomologyIso preserves negative homology vanishing.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the induction hypothesis to the explicitly constructed Q. Since c<0, the component of piTruncGE c at degree 0 is an isomorphism, and its component at the preceding degree is epi. ShortComplex.isIso_opcyclesMap_of_isIso_of_epi gives an isomorphism of zeroth opcycles. Transport Q opcycles projectivity back by Module.Projective.of_equiv. All these steps are implemented directly in the compiled Lean proof.",
    "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-projective-cokernel-localization",
-  "lem-weil-pbc-finite-projective-finitely-presented",
-  "lem-weil-pbc-finitely-presented-flat-module-projective"
+  "lem-sc-residue-bottom-differential"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "U2",
+  "by": "worker",
+  "group": "Q3",
   "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tags 00O0 (open loci for finite projective maps) and 00NX (finite projectivity); negative-tail cancellation in the parent node; fixed-affine adaptation written by U2"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 00O0 negative-tail cancellation; explicit induction and good truncation in Lean"
  },
  "mathlib_searches": [
   {
@@ -120,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T153937-L-1124215",
+  "landing": "20261013T160711-L-1371841",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
