@@ -12918,3 +12918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:03 L: merged deliver/S1/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSectionsComparison (stage 3; reviewer PASS; first push; landing 20261013T150353-L-810369 (interface); batch 20261013T150347; modules 4; new nodes 3)
 - 15:03 L: merged deliver/S1/Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction (stage 3; reviewer PASS; first push; landing 20261013T150354-L-810490 (interface); batch 20261013T150347; modules 2; new nodes 1)
 - 15:03 L: merged deliver/S3/Sheaf.AlgebraicGeometry.PicardRightCechCupCycleComparison (stage 3; reviewer PASS; first push; landing 20261013T150354-L-810653 (interface); batch 20261013T150347; modules 3; new nodes 2)
+- 15:03 L: merged deliver/T2/Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNatural (stage 3; reviewer PASS; first push; landing 20261013T150355-L-810807 (interface); batch 20261013T150347; modules 2; new nodes 1)

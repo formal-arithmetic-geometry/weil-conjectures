@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-hom-complex-restrict-scheme-natural-components",
+ "kind": "statement",
+ "title": "Componentwise restriction Hom isomorphisms natural in coefficient complex",
+ "statement": "For a scheme Y, open U and cochain complex L of Y-modules, there exists a family of chain isomorphisms between the restriction of Hom(L,M) and Hom(restrict L, restrict M), indexed by M, whose hom components are natural in every chain map M ⟶ N.",
+ "stmt_deps": [
+  "lem-sc-hom-complex-restrict-scheme-natural"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3, ordinary Hom restriction and postcomposition compatibility"
+ },
+ "proof": [
+  {
+   "text": "Construct each chain isomorphism degreewise from restriction of local module maps and the product description of the Hom complex.",
+   "uses": [
+    "lem-sc-hom-complex-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every chain map of coefficient complexes, compare the composites after every product projection; both are restrictions of the same postcomposition map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "group": "T2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08DL",
+  "place": "Lemma 20.42.3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism restriction hom complex",
+   "results": "No exact match; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso homComplex",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex restrict natural",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNatural",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-local-finite-free-homology-natural",
+   "place": "coefficient naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNaturalComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexRestrictSchemeNaturalComponents.lean",
+  "declaration": "AlgebraicGeometry.homComplex_restrict_scheme_natural_components",
+  "statement": "theorem homComplex_restrict_scheme_natural_components {Y : Scheme.{u}} (U : Y.Opens)\n    (L : CochainComplex Y.Modules ℤ) :\n∃ e : ∀ M : CochainComplex Y.Modules ℤ,\n      ((homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op L) ⋙\n          (Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj M ≅\n      ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ) ⋙\n        (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj\n          (op (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj L))).obj M\n    , ∀ {M N} (f : M ⟶ N),\n      ((homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op L) ⋙\n          (Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).map f ≫ (e N).hom =\n      (e M).hom ≫ ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ) ⋙\n        (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj\n          (op (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj L))).map\n          f",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T150355-L-810807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T150355-L-810807",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Additive
+import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNaturalComponents
 
 /-! # Naturality of restriction of the ordinary internal Hom complex
 
@@ -39,6 +40,11 @@ theorem homComplex_restrict_scheme_natural {Y : Scheme.{u}} (U : Y.Opens)
       (Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ) ⋙
         (homComplexFunctor (R := U.toScheme.toRingedSpace.sheaf)).obj
           (op (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj
-            L))) := by sorry
+            L))) := by
+  obtain ⟨e, he⟩ := homComplex_restrict_scheme_natural_components U L
+  exact ⟨CategoryTheory.NatIso.ofComponents e (by
+    intro M N f
+    exact he f)⟩
+
 
 end AlgebraicGeometry
