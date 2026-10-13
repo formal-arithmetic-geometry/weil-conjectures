@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, final Stacks comparison: flat constant-to-completed comparison, specifically the extended Čech quasi-isomorphism used by 099I to compare its two coefficient rings.",
+   "place": "Detailed form, final Stacks comparison: flat constant-to-completed comparison, specifically the extended Čech quasi-isomorphism used by 099H to compare its two coefficient rings.",
    "via": [
     "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
     "lem-weil-pbc-constant-completion-equivalence"
@@ -26,9 +26,107 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a product $g$ of the $f_j$, interpret $\\mathcal O[1/g]$ as the sheaf associated to $U\\mapsto\\mathcal O(U)[1/g|_U]$. The maps $a/g^k\\otimes b\\mapsto\\varphi(a)b/\\varphi(g)^k$ and $b/\\varphi(g)^k\\mapsto (1/g^k)\\otimes b$ give inverse scalar-extension maps after sheafification, by the tensor definition. Finite products here are finite direct sums, so tensoring the source complex with $\\mathcal B$ gives the target; these formulas commute with every localization map and with the degree-zero identity augmentation.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099H, first sentence of proof; Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Use the following explicit cochain Koszul model, avoiding any implicit conversion from chain to cochain degrees. Put $K_n^q=\\bigoplus_{|I|=q}\\mathcal O e_I$ for subsets $I\\subset\\{1,\\ldots,r\\}$, $n\\geq1$, and zero outside $0\\leq q\\leq r$. Set $a(j,I)=|\\{i\\in I:i<j\\}|$ and $d_n(e_I)=\\sum_{j\\notin I}(-1)^{a(j,I)}f_j^n e_{I\\cup\\{j\\}}$; the two orders of inserting distinct indices cancel, giving $d_n^2=0$. The transition $t_n(e_I)=(\\prod_{i\\in I}f_i)e_I$ is a chain map: the coefficient at $I\\cup\\{j\\}$ in either composite is $(-1)^{a(j,I)}(\\prod_{i\\in I}f_i)f_j^{n+1}$. These sectionwise formulas commute with restriction and hence define complexes and maps of module sheaves.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0913 (more-algebra-lemma-extended-alternating-Cech-is-colimit-koszul), complementary-basis model in the proof"
+   }
+  },
+  {
+   "text": "For $g_I=\\prod_{i\\in I}f_i$ (empty product $1$), the map from the $I$ summand at stage $n$ to $\\mathcal O[1/g_I]$ is $a e_I\\mapsto a/g_I^n$. It is colimiting: every fraction has such a representative, and equality of two fractions means that multiplication by a sufficiently large power of $g_I$ identifies their representatives at a later stage. The colimit is computed by sheafifying sectionwise colimits; its differential coefficient is $f_j^n/g_{I\\cup\\{j\\}}^n=1/g_I^n$, with sign $(-1)^{a(j,I)}$, exactly the alternating localization differential. Consequently $\\operatorname{colim}_n K_n=C(\\mathcal O;f_1,\\ldots,f_r)$, and the identical formulas with $\\varphi(f_j)$ give the target as $\\operatorname{colim}_n(K_n\\otimes_{\\mathcal O}\\mathcal B)$; the two identifications commute with the termwise comparison maps and augmentations.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0913 (more-algebra-lemma-extended-alternating-Cech-is-colimit-koszul), colimit formula; Tag 099H"
+   }
+  },
+  {
+   "text": "Fix $j$. Define $h_j(e_I)=0$ when $j\\notin I$, and $h_j(e_I)=(-1)^{a(j,I)}e_{I\\setminus\\{j\\}}$ when $j\\in I$. In $d_nh_j+h_jd_n$ every insertion of an index different from $j$ cancels with its removal in the opposite order; the remaining insertion/removal of $j$ has coefficient $f_j^n$, so $d_nh_j+h_jd_n=f_j^n\\mathrm{id}$. This identity commutes with restrictions, and for a cycle $z$ gives $f_j^nz=d_nh_jz$, so $f_j^n$ annihilates every cohomology sheaf. For $r\\geq1$, set $m=r(n-1)+1$: each degree-$m$ monomial in the $f_j$ contains some $f_j^n$, hence $\\mathcal I^m\\mathcal H^i(K_n)=0$ for $\\mathcal I=(f_1,\\ldots,f_r)\\mathcal O$. For $r=0$, use $m=1$, since $\\mathcal I=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099H, annihilation step; Tag 0626 (more-algebra-lemma-homotopy-koszul)"
+   }
+  },
+  {
+   "text": "Here is the ideal-power torsion comparison needed in the preceding step, proved for sheaves rather than applied to section rings. If $\\mathcal I\\mathcal F=0$, the tensor universal property identifies $\\mathcal F\\otimes_{\\mathcal O}\\mathcal B$ with $\\mathcal F\\otimes_{\\mathcal O/\\mathcal I}(\\mathcal B/\\mathcal I\\mathcal B)\\cong\\mathcal F$; the inverse is induced by the given quotient-ring isomorphism, and the identification carries $x\\otimes1$ to $x$. Inductively, if $\\mathcal I^{k+1}\\mathcal F=0$, apply exact tensoring to $0\\to\\mathcal I^k\\mathcal F\\to\\mathcal F\\to\\mathcal F/\\mathcal I^k\\mathcal F\\to0$; the left term is killed by $\\mathcal I$ and the right term by $\\mathcal I^k$, so the outer canonical maps are isomorphisms, and a kernel/cokernel diagram chase makes the middle one an isomorphism. Thus $\\mathcal F\\to\\mathcal F\\otimes_{\\mathcal O}\\mathcal B$ is an isomorphism for every $\\mathcal F$ killed by any positive power of $\\mathcal I$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GLY (sites-modules-lemma-neighbourhood-isomorphism), with the induction of Tag 05E9 (more-algebra-lemma-neighbourhood-isomorphism)"
+   }
+  },
+  {
+   "text": "Flatness makes $F=(-)\\otimes_{\\mathcal O}\\mathcal B$ an exact endofunctor of $\\Mod(\\mathcal O)$ after restriction of scalars. Apply the exact-functor cohomology isomorphism to $K_n$. Since it is induced on kernels and images, the map on cohomology of $K_n\\to F(K_n)$ becomes the canonical $\\mathcal H^i(K_n)\\to F(\\mathcal H^i(K_n))$; steps 4 and 5 show this is an isomorphism. Hence each $K_n\\to K_n\\otimes_{\\mathcal O}\\mathcal B$ is a quasi-isomorphism, naturally with respect to the transitions.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099H, flatness and cohomology comparison"
+   }
+  },
+  {
+   "text": "The exact and faithful forgetful functor to abelian sheaves preserves filtered colimits. The cited general-site abelian-sheaf theorem makes those colimits exact; exactness and faithfulness of forget therefore imply exactness of filtered colimits of module sheaves. Applying the exact-functor cohomology comparison to the colimit functor on the abelian category of diagrams (kernels and images componentwise) identifies $\\mathcal H^i(\\operatorname{colim}K_n)$ with $\\operatorname{colim}\\mathcal H^i(K_n)$, compatibly with maps. The colimit of the isomorphisms from step 6 is an isomorphism, so step 3 gives the required quasi-isomorphism, respecting the augmentations. If $r=0$, the quotient hypothesis is $\\mathcal O\\cong\\mathcal B$ and the complexes are concentrated in degree zero, which also verifies this edge case directly.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099H, passage to colimits; Tags 03DB (sites-modules-lemma-limits-colimits) and 03CO (sites-modules-lemma-limits-colimits-abelian-sheaves)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099H"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,12 +179,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-flat-extended-cech-comparison",
+  "worker": "stage1",
+  "summary": "Explicit cochain Koszul model, transition and localization-colimit calculation; sheaf homotopy annihilation, ideal-power tensor comparison by induction, exact-functor cohomology and exact filtered colimits. Both proposed new nodes folded into elementary proof steps.",
+  "blueprint": "Detailed form, final Stacks comparison: flat constant-to-completed comparison, specifically the extended Cech quasi-isomorphism used by 099H."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-731732237",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-731732237 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited DAG statements, and Tags 099H, 0913, 0626, 0GLY/05E9, 03DB, and 03CO. Verified hypotheses, the O-to-B base-change map, restriction-of-scalars coefficient category, explicit Koszul/Čech colimit, sheaf homotopy annihilation, ideal-power tensor induction, exact filtered-colimit passage, augmentations, and r=0/principal/zero/unit edge cases. No delivered new nodes remain; the proposed intermediates were correctly folded into explicit proof steps. Accepted generic tool uses for exact-functor cohomology, module-sheaf colimits, and exact filtered colimits. Review written to review.md."
+ }
 }
