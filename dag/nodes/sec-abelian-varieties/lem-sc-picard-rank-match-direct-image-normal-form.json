@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "The local rank loci of E are clopen. Their images and the image of X are clopen, by openness of a flat locally finitely presented map and proper closedness. If the fibre at s is nonempty of rank r, use the image of X minus the image of the complement of the rank-r locus. Pullback preserves ranks. Every further fibre is nonempty, so compare a local reference witness with r on a stalk. Invariant basis number forces the witness rank to equal r. Locality of fixed-rank freeness glues the direct-image witnesses; conversely a globally rank-r direct image supplies witnesses by restriction.",
+   "text": "Use the localRank, exists_localRank, localRank_isClopen, tensorPullback_rank_iff and rank_unique API of PicardFiberRankClopen. Properness and flat local finite presentation make the image of X, the image of any rank locus, and the image of its complement clopen. Split first on whether s belongs to the image of f, and then on whether all points above s have one local rank.",
    "uses": [
     "lem-sc-picard-fiber-rank-clopen",
     "lem-sc-finite-locally-free-stalk-finrank",
@@ -22,18 +22,26 @@
    "elementary": false
   },
   {
-   "text": "If the fibre at s is empty, use the complement of the image of X. Every base-changed source is empty, so its modules and their pushforwards are zero. A zero module is free of rank zero. Both the direct-image rank-zero assertion and the reference predicate hold on every test scheme, since the reference clause is on an empty source.",
+   "text": "If all points above s have local rank r and the fibre is nonempty, take U to be the image of X intersected with the complement of the image of the bad rank locus. Every pullback of E over U has rank r by tensorPullback_rank_iff. The range formula for pullback.snd provides a point above any local test point, so rank_unique forces each rank n in a reference witness to equal r. Convert tensor restriction to ordinary pullback by uniqueness of left adjoints and glue fixed-rank local freeness using Modules.isFiniteLocallyFreeOfRank_of_isOpenImmersion. Conversely, restrict the assumed global direct-image rank to the top open; the reference pullback already has rank r.",
    "uses": [
     "lem-sc-picard-fiber-rank-clopen",
+    "lem-sc-finite-locally-free-stalk-finrank",
     "def-sc-picard-universal-single-rank-match"
    ],
    "elementary": false
   },
   {
-   "text": "Otherwise select two different ranks a and c in the fibre and intersect their open images. Every fibre on this neighbourhood has points of both ranks. For a point of any nonempty test, the source of any reference witness also has points of these two ranks: nonempty fibre products of points persist under residue-field extension. A fixed-rank reference witness would force a=c by stalk finrank comparison. Thus the predicate implies emptiness of the test. On empty tests its quantified pointwise witnesses are vacuous. The three cases exhaust all fibres.",
+   "text": "If the fibre is nonempty without one rank, choose a point of rank a and a point outside its rank-a locus. Take U to be the intersection of the images of that locus and its complement. A reference witness at a nonempty test point gives rank n on its entire inverse image. The range formula for pullback.fst lifts both kinds of points to that inverse image. The rank criterion and localRank_unique force n=a, then force the point in the complement to have rank a, a contradiction. Thus tests satisfying the predicate are empty; on empty tests the predicate is vacuous.",
    "uses": [
     "lem-sc-picard-fiber-rank-clopen",
     "lem-sc-finite-locally-free-stalk-finrank",
+    "def-sc-picard-universal-single-rank-match"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the fibre is empty, take U to be the complement of the image of X. Every pullback source over U is empty, by the pullback commutative square. Its module is zero and pushforward preserves zero objects. Identify the zero direct image with the free module on ULift (Fin 0), proving rank zero. Modules on empty schemes have every fixed rank by the empty open cover. These facts supply rank-zero witnesses on the top open after every test, and give the rank-zero direct-image condition independently of the predicate.",
+   "uses": [
     "def-sc-picard-universal-single-rank-match"
    ],
    "elementary": false
@@ -47,8 +55,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "first three proof paragraphs, with the unrestricted fibre-rank adaptation of the parent node",
-  "note": "U4: isolated ordinary geometric part of the existing chart proof plan. Edge cases: empty source and test, rank zero, mixed ranks, arbitrary nonreduced tests."
+  "place": "first three proof paragraphs, ordinary rank comparison; homogeneous, empty and mixed-fibre adaptation in steps 1-5 of lem-sc-picard-single-rank-unrestricted-perfect-chart",
+  "note": "K2: complete Lean proof of the homogeneous, mixed and empty cases using the existing private local-rank API by a proof-only import all; no new holes or nodes."
  },
  "mathlib_searches": [
   {
@@ -131,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T113356-L-3188364",
-  "kind": "interface",
+  "landing": "20261013T124311-L-3776469",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
