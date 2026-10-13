@@ -6,6 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization
+import Sheaf.AlgebraicGeometry.ScalarForgetPullbackIntegerUnit
 
 /-! # Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence
 
@@ -58,6 +59,18 @@ theorem scalar_forget_pullback_adjunction (k : Type u) [Field k]
         (((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}
           (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
           isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))).hom ≫
-        L.map (Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k X)) := by sorry
+        L.map (Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k X)) := by
+  have hi := scalarForgetPullbackComparison_isIso k a
+  let c := (asIso (scalarForgetPullbackComparison k a)).symm
+  refine ⟨c, ?_, ?_⟩
+  · intro F G q
+    exact scalarForgetPullbackComparison_adjunct k a F G q
+  · change _ ≫ _ ≫ (asIso (scalarForgetPullbackComparison k a)).inv.app _ = _
+    rw [← Category.assoc, scalarForgetPullbackComparison_integerUnit k a,
+      Category.assoc, Category.assoc]
+    have he := (asIso (scalarForgetPullbackComparison k a)).hom_inv_id_app
+      (𝟙_ (KSheaf X k))
+    simp only [asIso_hom] at he
+    erw [he, Category.comp_id]
 
 end AlgebraicGeometry.Scheme

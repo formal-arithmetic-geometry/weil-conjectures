@@ -1,0 +1,119 @@
+{
+ "id": "new-sc-scalar-forget-pullback-integer-unit",
+ "kind": "statement",
+ "title": "Integer-unit compatibility of the scalar-forgetful comparison",
+ "statement": "With δ from [new-sc-scalar-forget-pullback-comparison-isIso], the integer-unit morphism on Y followed by U_Y of the inverse scalar unit isomorphism equals the inverse constant-integer pullback isomorphism followed by L_ab of the integer-unit morphism on X and δ at the scalar tensor unit.",
+ "stmt_deps": [
+  "new-sc-scalar-forget-pullback-comparison-isIso",
+  "new-sc-scalar-abelian-ext-factorization",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 (lemma-pullback-pushforward-adjoint) and 01F7 (cohomology-equation-functorial); specialization to the explicit Lean constructions"
+ },
+ "proof": [
+  {
+   "text": "Apply the constant-integer adjunction and evaluate at the generator 1; this is injective. On the left naturality gives the inverse scalar unit map applied to the section one. On the right the uniqueness identity for constant-sheaf pullback changes the adjunction to the composite adjunction. Naturality and the adjunct formula for δ give the scalar inverse-image unit applied to the section one. These sections agree: unfold scalarInverseUnitIso, use the uniqueness identity for scalar constant-sheaf pullback, and naturality of the scalar inverse-image unit. No nonemptiness or characteristic hypothesis enters.",
+   "uses": [
+    "new-sc-scalar-forget-pullback-comparison-isIso",
+    "new-sc-scalar-abelian-ext-factorization",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-sc-scalar-forget-pullback-comparison-isIso",
+  "new-sc-scalar-abelian-ext-factorization",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 and 01F7; categorical adjunction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting coefficients commutes with pullback of sheaves and the constant integer unit",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaves commutes with forgetting module scalar actions via adjunction mate isomorphism",
+   "results": "SheafOfModules pullback adjunction and unit formulas, no exact match. Loogle additionally found sheafComposeNatIso and preservation of sheafification.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib adjunction uniqueness and constant-sheaf adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompos|[Cc]ompos.*sheafPullback",
+   "results": "Topology.Sheaves.Functors; local ScalarUnitClassPullback and ScalarPullbackZeroGlobalSections contain uniqueness-adjunction proof patterns.",
+   "date": "2026-10-13",
+   "verdict": "No existing theorem states the requested comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "canonical scalar-forgetful inverse-image comparison, Integer-unit compatibility of the scalar-forgetful comparison",
+   "via": [
+    "new-sc-scalar-forget-pullback-adjunction",
+    "new-sc-scalar-abelian-pullback-square",
+    "new-sc-scalar-unit-pullback-naturality",
+    "lem-sc-scalar-unit-cohomology-pullback-comparison",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarForgetPullbackIntegerUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarForgetPullbackIntegerUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scalarForgetPullbackComparison_integerUnit",
+  "statement": "theorem scalarForgetPullbackComparison_integerUnit (k : Type u) [Field k]\n    {X Y : Scheme.{u}} (a : Y ⟶ X) :\n    let L := (Opens.map a.base).sheafPullback AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n    Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k Y) ≫\n        (scalarAbelianForget k Y).map (scalarInverseUnitIso a).inv =\n      (((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}\n        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n        isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))).hom ≫\n      L.map (Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k X)) ≫\n        (scalarForgetPullbackComparison k a).app (𝟙_ (KSheaf X k))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T140814-L-311813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T140814-L-311813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

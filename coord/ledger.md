@@ -12709,3 +12709,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/B4/Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift (stage 3; reviewer PASS; first push; landing 20261013T140812-L-311310 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/C1/Sheaf.AlgebraicGeometry.OrdinaryEvaluationPrecompositionNaturality (stage 3; reviewer PASS; first push; landing 20261013T140813-L-311501 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/C3/Sheaf.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalStalk (stage 3; reviewer PASS; first push; landing 20261013T140813-L-311647 (interface); batch 20261013T140810; modules 3; new nodes 2)
+- 14:08 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction (stage 3; reviewer PASS; first push; landing 20261013T140814-L-311813 (interface); batch 20261013T140810; modules 3; new nodes 2)
