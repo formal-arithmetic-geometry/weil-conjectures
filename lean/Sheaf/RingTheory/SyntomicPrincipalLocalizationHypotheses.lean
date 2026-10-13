@@ -7,8 +7,7 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.SyntomicPrincipalLocalizationFibreTransport
 
 /-!
 # Syntomic hypotheses after principal localization
@@ -52,6 +51,13 @@ theorem exists_completeIntersection_fibre_away
           (q₁.comap (algebraMap R (Localization.Away g))) ⟨q₁, rfl⟩).asIdeal ∧
         IsGlobalCompleteIntersection
           (q₁.asIdeal.comap (algebraMap R (Localization.Away g))).ResidueField
-          (Localization.Away h) := by sorry
+          (Localization.Away h) := by
+  have hq : q ∈ Set.range (PrimeSpectrum.comap
+      (algebraMap S (Localization.Away g))) := by
+    rw [PrimeSpectrum.localization_away_comap_range (Localization.Away g) g]
+    exact hg
+  obtain ⟨q₁, hq₁⟩ := hq
+  refine ⟨q₁, hq₁, ?_⟩
+  exact exists_completeIntersection_fibre_transport q g hg q₁ hq₁ hci
 
 end Algebra

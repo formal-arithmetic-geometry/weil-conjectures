@@ -10348,3 +10348,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:42 L: returned deliver/P4/Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux (reviewer RETURN: (reviewer X-91d94, head 91d942948) E2: Delete the complete added files lean/Sheaf/AlgebraicGeometry/localized_middle_com)
 - 00:43 L: returned deliver/T1/Sheaf.Topology.TopologicalTerminalResolutionExtComparison (reviewer RETURN: (the landing tools, head 9e26b9f77) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
 - 00:43 L: merged deliver/B2/Sheaf.RingTheory.SmoothStableConormalBasisAux (stage 3; reviewer PASS; first push; landing 20261013T004331-L-2508303 (interface); batch 20261013T004330; modules 2; new nodes 1)
+- 00:43 L: merged deliver/C3/Sheaf.RingTheory.SyntomicPrincipalLocalizationHypotheses (stage 3; reviewer PASS; first push; landing 20261013T004332-L-2508417 (interface); batch 20261013T004330; modules 2; new nodes 1)
