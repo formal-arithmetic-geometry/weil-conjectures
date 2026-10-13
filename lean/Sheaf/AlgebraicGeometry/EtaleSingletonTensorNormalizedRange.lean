@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+import Sheaf.AlgebraicGeometry.EtaleSingletonTensorPureImage
 
 /-! # Pure sections in the normalized comparison range
 
@@ -51,7 +52,11 @@ theorem singletonTensorDegreeComparisonHom_normalized_range
         (∏ k : Fin (n + 1),
           (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop (p.2 k)) •
             Modules.etaleTensorSectionsRestriction F P.hom p.1) ⊆
-      (q.comp f.hom).range := by sorry
+      (q.comp f.hom).range := by
+  let : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
+  exact fun y ⟨p, hp⟩ ↦
+    ⟨_, (singletonTensorDegreeComparisonHom_pure_image.{u}
+      X F U W g n f hf p.1 p.2).trans hp⟩
 
 end
 end AlgebraicGeometry.Scheme
