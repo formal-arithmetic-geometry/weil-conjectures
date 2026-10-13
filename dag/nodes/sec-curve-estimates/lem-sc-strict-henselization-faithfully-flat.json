@@ -25,52 +25,49 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak m$ be the maximal ideal of the local ring $R$. Applying [lem-weil-pbc-strict-henselization-triples] to the pair $(R,\\mathfrak m)$ identifies the filtered colimit in the statement with the ring $C=(R_{\\mathfrak m})^{\\mathrm{sh}}=R^{\\mathrm{sh}}$, and its canonical map from $R$ with the structural map of that strict henselization. The residue-field embedding into $K$ is exactly the chosen embedding in the triple construction.",
+   "text": "Apply [lem-weil-pbc-strict-henselization-triples] to obtain filteredness and a local colimit c0 with structure map rho0 and residue map psi0. Its maximal ideal is ker psi0, whose contraction is p. Using hp, the local_hom_TFAE criterion makes rho0 local. The unique colimit isomorphism e : c.pt -> c0.pt satisfies rho ; e = rho0: evaluate the two compatibility equations on the identity triple and use the colimit factorization equation. Transport the local-ring structure along e and reflect units through e to make rho local.",
    "uses": [
     "lem-weil-pbc-strict-henselization-triples"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1), using the strict henselization construction of Algebra Tag 04GP"
-   }
+   "elementary": true
   },
   {
-   "text": "Every algebra in the filtered diagram is etale over $R$, hence flat over $R$ by [lem-weil-pbc-etale-algebra-flat]. The underlying $R$-module of the colimit $R^{\\mathrm{sh}}$ is the filtered colimit of these flat modules, so [lem-weil-pbc-filtered-colimit-flat-modules] shows that $R^{\\mathrm{sh}}$ is flat over $R$.",
+   "text": "Use the fully faithful functor from triples to arrows B -> K out of affine etale R-algebras, as in the existing EtaleResidueTriplesExistsColimit proof. The affine etale category is essentially small by [lem-weil-pbc-affine-etale-essentially-small-cover]; Mathlib essential smallness for costructured arrows and fully faithful functors gives a small model of the triples. Transfer filteredness across the small-model equivalence and whisker the supplied colimit along its inverse. The structural maps of the triples give a natural transformation from the constant R diagram; naturality is the equation Under.w on a morphism of triples.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
-    "lem-weil-pbc-etale-algebra-flat",
-    "lem-weil-pbc-filtered-colimit-flat-modules"
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-strict-henselization-triples"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), proof of (1): the maps R -> R^h -> R^sh are flat"
-   }
+   "elementary": true
   },
   {
-   "text": "The triple construction makes $R^{\\mathrm{sh}}$ local and the structural map $R\\to R^{\\mathrm{sh}}$ local, since the preimage of its maximal ideal is the maximal ideal of $R$ [lem-weil-pbc-strict-henselization-triples]. A flat local homomorphism of local rings is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. Therefore the canonical map $R\\to R^{\\mathrm{sh}}$ is faithfully flat.",
+   "text": "Every structural map in the small diagram is etale by the defining field of its triple. Translate scheme etaleness with HasRingHomProperty.Spec_iff; etale algebras are flat by [lem-weil-pbc-etale-algebra-flat]. Apply RingHom.Flat.of_isColimit, the colimit-presentation form of [lem-weil-pbc-flat-ring-map-iff-ind-flat], to the whiskered colimit and the structural natural transformation. Its common-composite condition is precisely hρ. This proves flatness of rho without constructing an additional module diagram.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-iff-ind-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the algebra structure induced by rho. The preceding flatness and localness results satisfy Module.FaithfullyFlat.of_flat_of_isLocalHom, the first clause of [lem-pc-local-flat-faithful-flat-reflects-surjective]. Its conclusion is definitionally rho.hom.FaithfullyFlat.",
+   "uses": [
     "lem-pc-local-flat-faithful-flat-reflects-surjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1): R -> R^h -> R^sh are faithfully flat"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
   "lem-weil-pbc-etale-algebra-flat",
-  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-ring-map-iff-ind-flat",
   "lem-pc-local-flat-faithful-flat-reflects-surjective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (1)"
+  "place": "Tag 07QM (1), using Tag 04GP; Lean assembly uses the existing RingHom.Flat.of_isColimit in WeilConjectures.RingTheory.ProEtale.FaithfullyFlat and the small-model construction from Sheaf.RingTheory.EtaleResidueTriplesExistsColimit."
  },
  "mathlib_searches": [
   {
@@ -169,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T152729-L-1015486",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
