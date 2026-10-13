@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-restriction-composite-homology",
+ "kind": "statement",
+ "title": "Composition of restriction homology isomorphisms",
+ "statement": "Let D,E,B be commutative rings with ring maps f:E to D and g:B to E. For each D-module cochain complex P and integer i, the homology isomorphism of the composite restriction Res_f followed by Res_g is the homology isomorphism of Res_g on Res_f(P), followed by Res_g of the homology isomorphism of Res_f on P. All maps are the canonical kernel/cokernel homology maps.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section 06Y5, Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7)"
+ },
+ "proof": [
+  {
+   "text": "For any short complex and exact functors F,G, compare the cycles isomorphisms for mapping the left homology data once by F followed by G and once by their composite. Cancel the monomorphism given by the image of the cycles inclusion. Then cancel the canonical homology quotient epimorphism to identify the homology isomorphisms of these data. Expand mapHomologyIso using this left homology data; the middle inverse and forward isomorphisms cancel. Specialize to the short complex of P in degree i and expand mapHomologicalComplexHomologyIso.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Derived coefficient comparison and the exact restriction homology calculation preceding application to equation-bc, Tag 0DJ7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology commutes with successive exact restriction of scalars functors",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "date": "2026-10-13",
+   "results": "9 hits: mapHomologyIso, mapHomologyIso'_eq_mapHomologyIso, LeftHomologyData.mapHomologyIso_eq, mapHomologyIso_hom_naturality, mapHomologyIso_inv_naturality, reassociated naturality forms, NatTrans.app_homology, homologyMap_mapNatTrans",
+   "verdict": "canonical isomorphism and naturality are available; no composition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology isomorphism for a composite exact functor is the composition of the two homology isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 hits, including mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, ShortComplex.mapHomologyIso, mapHomologyIso', homologyFunctorIso and naturality lemmas",
+   "verdict": "no exact composition identity"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*comp|mapHomologyIso_comp",
+   "date": "2026-10-13",
+   "results": "one hit: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:516, expansion of mapHomologyIso",
+   "verdict": "no composition theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorDerivedComparison",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Passage from the derived coefficient comparison to cohomology: composition of the two successive exact restriction homology isomorphisms.",
+   "via": [
+    "lem-pc-base-tensor-derived-comparison",
+    "lem-pc-base-derived-tensor-localized-naturality",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RestrictionCompositeHomology",
+  "file": "lean/Sheaf/Algebra/Homology/RestrictionCompositeHomology.lean",
+  "declaration": "ModuleCat.restrictionCompositeHomology",
+  "statement": "theorem restrictionCompositeHomology\n    (D E B : Type u) [CommRing D] [CommRing E] [CommRing B]\n    (f : E →+* D) (g : B →+* E) (P : CochainComplex (ModuleCat.{u} D) ℤ) (i : ℤ) :\n    ((restrictScalars.{u} f ⋙ restrictScalars.{u} g).mapHomologicalComplexHomologyIso\n      (.up ℤ) i).hom.app P =\n    (((((restrictScalars.{u} f).mapHomologicalComplex (.up ℤ)).obj P).sc i).mapHomologyIso\n       (restrictScalars.{u} g)).hom ≫\n    (restrictScalars.{u} g).map (((P.sc i).mapHomologyIso (restrictScalars.{u} f)).hom)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-base-tensor-derived-chain-comparison",
+ "kind": "statement",
+ "title": "Derived coefficient comparison before homology",
+ "statement": "Let R,A,B,D be commutative rings, A and B R-algebras and D an (A tensor_R B)-algebra. Let F:D(R) to D(B) and L:D(A) to D(D) be universal left derived scalar extension functors with counits delta and epsilon. There is a natural transformation eta: Res_R(-) followed by F to L followed by derived restriction D to A tensor_R B to B. For any A-complex P and any coefficient chain map beta from B tensor_R Res_R(P) to Res_B(D tensor_A P) with generator formula b tensor p maps to the image of (1 tensor b) tensor p, composing the derived input localization factors, delta, and Q(beta) equals eta at Q(P), followed by derived restriction of the epsilon representative at P and the exact restriction localization factor. This is a single comparison in the derived category, independent of homology degree. Derived categories are as in [def-weil-abstract-derived-category].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065Y, construction of equation-comparison-map (Tag 065Z); Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7)"
+ },
+ "proof": [
+  {
+   "text": "Choose an A-K-flat resolution U to P and an R-K-flat resolution V to Res_R(U). The coefficient chain map V tensor_R B to Res_B(U tensor_A D) and the invertible resolution counits give the comparison at Q(P). Independence of resolution refinements and the commuting generator equations give naturality for roofs, hence for arbitrary derived morphisms.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resolution augmentation and counit squares give the equation in the derived category before homology. Tensor induction identifies any beta with the coefficient map. Uniqueness of counit-compatible isomorphisms transports to the supplied universal pairs.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065Y, construction of equation-comparison-map, followed by the counit and resolution augmentation squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings has a natural coefficient comparison compatible with the scalar-extension counits",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived extension of scalars comparison after restriction of scalars with counit compatibility",
+   "date": "2026-10-13",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, counit, Counit.map, homEquiv_extendScalarsComp, Unit.map, counit_app, extendScalars_id_comp_assoc, extendScalars_comp_id_assoc",
+   "verdict": "underived tools only; no exact comparison in derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "date": "2026-10-13",
+   "results": "6 hits: leftDerivedLift, isLeftDerivedFunctor_iff_isIso_leftDerivedLift, leftDerived_fac, leftDerived_fac_app and reassociated forms",
+   "verdict": "generic Kan extension tools, no specialized derived coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_comp|mapDerivedCategoryHomologyFunctorIso.*comp|baseTensorDerivedChainComparison",
+   "date": "2026-10-13",
+   "results": "no exact result in Sheaf or WeilConjectures; AffineDerivedTildeHomologyComparison only mentions the homology isomorphism",
+   "verdict": "no exact result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorDerivedComparison",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Construction of the stalkwise derived coefficient comparison, before applying homology.",
+   "via": [
+    "lem-pc-base-tensor-derived-comparison",
+    "lem-pc-base-derived-tensor-localized-naturality",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorDerivedChainComparison.lean",
+  "declaration": "ModuleCat.exists_baseTensorDerivedChainComparison",
+  "statement": "theorem exists_baseTensorDerivedChainComparison\n    (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))\n    (δ : DerivedCategory.Qh ⋙ F ⟶\n      (extendScalars.{u, u, u} (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙\n        DerivedCategory.Qh)\n    (hF : F.IsLeftDerivedFunctor δ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} D))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      (extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp\n        (algebraMap A (A ⊗[R] B)))).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) :\n    ∃ η : (restrictScalars.{u} (algebraMap R A)).mapDerivedCategory ⋙ F ⟶\n        L ⋙ (restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙\n          restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).mapDerivedCategory,\n      ∀ (P : CochainComplex (ModuleCat.{u} A) ℤ)\n        (β : ((extendScalars.{u, u, u} (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj\n            (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P) ⟶\n          ((restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙\n            restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).mapHomologicalComplex\n              (.up ℤ)).obj\n            (((extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp\n              (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj P)),\n        (∀ (j : ℤ) (b : B) (p : P.X j),\n          β.f j (b ⊗ₜ[R, algebraMap R B] p) =\n            (algebraMap (A ⊗[R] B) D (Algebra.TensorProduct.includeRight b) ⊗ₜ[A,\n              (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] p)) →\n        F.map (((DerivedCategory.quotientCompQhIso _).app _ ≪≫\n          (restrictScalars.{u} (algebraMap R A)).mapDerivedCategoryFactors.symm.app P).inv) ≫\n          δ.app ((HomotopyCategory.quotient _ (.up ℤ)).obj\n            (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P)) ≫\n          DerivedCategory.Qh.map\n            (((extendScalars.{u, u, u} (algebraMap R B)).mapHomotopyCategoryFactors\n              (.up ℤ)).hom.app _) ≫\n          (DerivedCategory.quotientCompQhIso _).hom.app _ ≫ DerivedCategory.Q.map β =\n        η.app (DerivedCategory.Q.obj P) ≫\n          (restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙\n            restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).mapDerivedCategory.map\n            (L.map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫\n              ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫\n              DerivedCategory.Qh.map\n                (((extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp\n                  (algebraMap A (A ⊗[R] B)))).mapHomotopyCategoryFactors\n                    (.up ℤ)).hom.app P) ≫\n              (DerivedCategory.quotientCompQhIso _).hom.app _) ≫\n          (Functor.mapDerivedCategoryFactors\n            (restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙\n              restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom)).hom.app _",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

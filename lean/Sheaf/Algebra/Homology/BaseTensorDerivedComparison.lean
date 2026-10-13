@@ -6,8 +6,9 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.DerivedTensorActionNaturality
+import Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.RestrictionCompositeHomology
 
 /-! # Construction of the derived coefficient comparison
 
@@ -103,6 +104,7 @@ def IsBaseTensorDerivedComparison
         restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map
           (scalarExtensionHomologyMap _ L ε P i)
 
+set_option backward.defeqAttrib.useBackward true in
 /-- Construct the derived coefficient comparison before introducing cohomology models.
 
 Proof: choose an A-K-flat resolution U to P and an R-K-flat resolution V to
@@ -143,6 +145,111 @@ theorem exists_baseTensorDerivedComparison
       L ⋙ DerivedCategory.homologyFunctor _ i ⋙
         restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙
           restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom,
-      IsBaseTensorDerivedComparison R A B D F δ L ε i τ := by sorry
+      IsBaseTensorDerivedComparison R A B D F δ L ε i τ := by
+  let r := restrictScalars.{u}
+    (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom
+  let t := restrictScalars.{u} (algebraMap (A ⊗[R] B) D)
+  let s := t ⋙ r
+  obtain ⟨η, hη⟩ := exists_baseTensorDerivedChainComparison R A B D F δ hF L ε hL
+  let e := s.mapDerivedCategoryHomologyFunctorIso i
+  let τ := CategoryTheory.Functor.whiskerRight η (DerivedCategory.homologyFunctor _ i) ≫
+    CategoryTheory.Functor.whiskerLeft L e.inv
+  refine ⟨τ, ?_⟩
+  intro P β hβ
+  let c := ((extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp
+    (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj P
+  change ((extendScalars.{u, u, u} (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj
+    (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P) ⟶
+    ((s.mapHomologicalComplex (.up ℤ)).obj c) at β
+  have h := congrArg (fun f ↦ (DerivedCategory.homologyFunctor _ i).map f) (hη P β hβ)
+  let ℓ := L.map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫
+    ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+    DerivedCategory.Qh.map
+      (((extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp
+        (algebraMap A (A ⊗[R] B)))).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+    (DerivedCategory.quotientCompQhIso _).hom.app _
+  have he := s.mapDerivedCategoryHomologyFunctorIso_hom_app_Q i c
+  have hcomp := restrictionCompositeHomology D (A ⊗[R] B) B
+    (algebraMap (A ⊗[R] B) D) Algebra.TensorProduct.includeRight.toRingHom c i
+  change (DerivedCategory.homologyFunctor _ i).map
+    (F.map (((DerivedCategory.quotientCompQhIso _).app _ ≪≫
+      (restrictScalars.{u} (algebraMap R A)).mapDerivedCategoryFactors.symm.app P).inv) ≫
+      δ.app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      DerivedCategory.Qh.map
+        (((extendScalars.{u, u, u} (algebraMap R B)).mapHomotopyCategoryFactors
+          (.up ℤ)).hom.app _) ≫
+      (DerivedCategory.quotientCompQhIso _).hom.app _ ≫ DerivedCategory.Q.map β) =
+    (DerivedCategory.homologyFunctor _ i).map
+      (η.app (DerivedCategory.Q.obj P) ≫ s.mapDerivedCategory.map ℓ ≫
+        s.mapDerivedCategoryFactors.hom.app c) at h
+  simp only [CategoryTheory.Functor.map_comp] at h
+  have hh := congrArg (fun f ↦ f ≫
+    (DerivedCategory.homologyFunctorFactors _ i).hom.app
+      ((s.mapHomologicalComplex (.up ℤ)).obj c) ≫
+    (s.mapHomologicalComplexHomologyIso (.up ℤ) i).hom.app c) h
+  clear h hη hβ hF hL
+  simp only [Category.assoc] at hh
+  rw [DerivedCategory.homologyFunctorFactors_hom_naturality_assoc] at hh
+  dsimp only [CategoryTheory.Functor.comp_obj, HomologicalComplex.homologyFunctor] at hh ⊢
+  have he' : (DerivedCategory.homologyFunctor _ i).map
+      (s.mapDerivedCategoryFactors.hom.app c) ≫
+      (DerivedCategory.homologyFunctorFactors _ i).hom.app
+        ((s.mapHomologicalComplex (.up ℤ)).obj c) ≫
+      (s.mapHomologicalComplexHomologyIso (.up ℤ) i).hom.app c =
+      e.inv.app (DerivedCategory.Q.obj c) ≫
+        s.map ((DerivedCategory.homologyFunctorFactors _ i).hom.app c) := by
+    apply (cancel_epi (e.hom.app (DerivedCategory.Q.obj c))).1
+    rw [Iso.hom_inv_id_app_assoc]
+    change (s.mapDerivedCategoryHomologyFunctorIso i).hom.app _ ≫ _ = _
+    rw [he]
+    simp only [Category.assoc, ← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    change s.map ((DerivedCategory.homologyFunctorFactors _ i).hom.app c) ≫
+      (s.mapHomologicalComplexHomologyIso (.up ℤ) i).inv.app c ≫
+      (DerivedCategory.homologyFunctorFactors _ i).inv.app
+        ((s.mapHomologicalComplex (.up ℤ)).obj c) ≫
+      (DerivedCategory.homologyFunctor _ i).map
+        (𝟙 (DerivedCategory.Q.obj ((s.mapHomologicalComplex (.up ℤ)).obj c))) ≫
+      (DerivedCategory.homologyFunctorFactors _ i).hom.app
+        ((s.mapHomologicalComplex (.up ℤ)).obj c) ≫
+      (s.mapHomologicalComplexHomologyIso (.up ℤ) i).hom.app c = _
+    dsimp only [CategoryTheory.Functor.comp_obj, HomologicalComplex.homologyFunctor]
+    rw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc,
+      Iso.inv_hom_id_app]
+    exact Category.comp_id _
+  rw [he'] at hh
+  have hn := e.inv.naturality ℓ
+  change (DerivedCategory.homologyFunctor _ i).map (s.mapDerivedCategory.map ℓ) ≫
+    e.inv.app (DerivedCategory.Q.obj c) =
+    e.inv.app (L.obj (DerivedCategory.Q.obj P)) ≫
+      s.map ((DerivedCategory.homologyFunctor _ i).map ℓ) at hn
+  rw [reassoc_of% hn] at hh
+  rw [hcomp] at hh
+  let q := ((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P
+  let X := ((extendScalars.{u, u, u} (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj q
+  have hx : ((extendScalars.{u, u, u} (algebraMap R B)).mapHomotopyCategoryFactors
+      (.up ℤ)).hom.app q = 𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj X) := rfl
+  erw [hx, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+    Category.id_comp] at hh
+  change (DerivedCategory.homologyFunctor _ i).map
+    (F.map (((DerivedCategory.quotientCompQhIso _).app q ≪≫
+      (restrictScalars.{u} (algebraMap R A)).mapDerivedCategoryFactors.symm.app P).inv) ≫
+      δ.app ((HomotopyCategory.quotient _ (.up ℤ)).obj q)) ≫
+    (DerivedCategory.homologyFunctorFactorsh _ i).hom.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj X) ≫
+    (HomotopyCategory.homologyFunctorFactors _ (.up ℤ) i).hom.app X ≫
+    HomologicalComplex.homologyMap β i ≫
+    ((((t.mapHomologicalComplex (.up ℤ)).obj c).sc i).mapHomologyIso r).hom ≫
+    r.map (((c.sc i).mapHomologyIso t).hom) = _
+  rw [DerivedCategory.homologyFunctorFactorsh_hom_app_quotient_obj]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  have hy : (DerivedCategory.quotientCompQhIso _).hom.app X =
+      𝟙 (DerivedCategory.Q.obj X) := rfl
+  erw [hy, CategoryTheory.Functor.map_id]
+  erw [Category.id_comp] at hh ⊢
+  simpa only [τ, NatTrans.comp_app, CategoryTheory.Functor.whiskerRight_app,
+    CategoryTheory.Functor.whiskerLeft_app, scalarExtensionHomologyMap, ℓ, s, q, X, c, r, t,
+    CategoryTheory.Functor.comp_map, CategoryTheory.Functor.map_comp, Category.assoc]
+    using hh
 
 end ModuleCat
