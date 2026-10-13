@@ -1,0 +1,179 @@
+{
+ "id": "lem-pc-closed-structure-ambient-ideal-extension",
+ "kind": "statement",
+ "title": "Ambient ideal-power extension from a closed structure module",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth] and $i:W\\to X$ a closed immersion [def-weil-closed-immersion]. Let $I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], $G$ a coherent $\\mathcal O_X$-module [pqf-def-coherent], and $U\\subseteq X$ an open whose complement is the support $V(I)$. Put $H=i_*\\mathcal O_W$ [def-pc-module-pullback]. For every morphism $\\varphi:H|_U\\to G|_U$ there exist $n\\geq0$ and $\\chi:I^nH\\to G$ such that $\\chi|_U=(I^nH\\hookrightarrow H)|_U$ followed by $\\varphi$, where the power is the ideal-sheaf-data power and the product is the image of multiplication [lem-weil-pbc-ideal-module-product-stalk]. No integrality, generic point, or nonzero ideal on $W$ is asserted.",
+ "source": {
+  "document": "Stacks Project, coherent.tex and morphisms.tex",
+  "place": "Tag 01YB (lemma-homs-over-open), with Tags 01XZ and 01QY; source and target specialized to the closed structure pushforward and a coherent module."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Closed pushforward H is quasi-coherent. On an affine Spec A in X the inverse image is Spec(A/K); the sections of H are the cyclic A-module A/K. The affine finite-type criterion makes H finite type, and the locally Noetherian coherence criterion makes H coherent and G quasi-coherent.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the surjectivity clause of coherent_homs_over_open with source H and target G. The pointwise description of its open is the complement of V(I), hence the specified U. It gives an exponent and a morphism from the recursively formed ideal power times H agreeing with phi after the inclusion.",
+   "uses": [
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine ideal-power formula identifies the recursively formed power with the ideal-sheaf-data power I^n: both inclusions have range I(V)^n on every affine V. Equality of these subobjects gives an inclusion-compatible isomorphism, and functoriality of tensor multiplication and image gives the same for their products with H. At zero both powers are the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the map through this image isomorphism. The natural isomorphism overFunctorEquiv identifies overFunctor followed by overEquiv with restrictFunctor. Its naturality transports the inclusion equation to the displayed restriction equation. No data for the ideal on W is chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-homs-over-open",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex and morphisms.tex",
+  "place": "Tag 01YB (lemma-homs-over-open), with Tags 01XZ and 01QY; source and target specialized to the closed structure pushforward and a coherent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a morphism from a closed pushforward structure sheaf on an open subset to a nonzero ideal on the integral closed subscheme",
+   "results": {
+    "t": "2026-10-13T05:04:40Z",
+    "tool": "leanfinder",
+    "query": "Extend a morphism from a closed pushforward structure sheaf on an open subset to a nonzero ideal on the integral closed subscheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_ideal_basicOpen",
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'",
+     "AlgebraicGeometry.Scheme.IdealSheafData.map_ideal",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_comap_ideal",
+     "AlgebraicGeometry.Scheme.IdealSheafData.subschemeMap",
+     "AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap"
+    ],
+    "digest": "37aff9950c1f1498"
+   },
+   "date": "2026-10-13",
+   "verdict": "No theorem with the required normalized inclusion-compatible statement; ideal restriction hits only."
+  },
+  {
+   "tool": "grep",
+   "query": "homs_over_open|pushforward.*ideal.*[Pp]ower|ideal.*[Pp]ower.*pushforward",
+   "results": {
+    "t": "2026-10-13T05:06:34Z",
+    "tool": "grep",
+    "query": "homs_over_open|pushforward.*ideal.*[Pp]ower|ideal.*[Pp]ower.*pushforward",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No theorem with the required normalized inclusion-compatible statement; ideal restriction hits only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from the restriction of the pushforward of a closed subscheme structure sheaf to a coherent module extends from an ambient ideal power times that pushforward",
+   "results": {
+    "t": "2026-10-13T05:10:12Z",
+    "tool": "leansearch",
+    "query": "A map from the restriction of the pushforward of a closed subscheme structure sheaf to a coherent module extends from an ambient ideal power times that pushforward",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalClosedIdealMapExtension",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Ambient extension by Tag 01YB in the integral-ideal devissage underlying lem-pc-coherent-hi.",
+   "via": [
+    "lem-pc-local-closed-ideal-map-extension",
+    "new-generic-ideal-stalk-embedding-extension",
+    "lem-pc-r2-rank-one-generic-ideal-inclusion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedStructureAmbientIdealExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedStructureAmbientIdealExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closed_structure_ambient_ideal_extension",
+  "statement": "theorem closed_structure_ambient_ideal_extension\n    {X W : Scheme.{u}} [IsNoetherian X]\n    (i : W ⟶ X) [IsClosedImmersion i]\n    (I : X.IdealSheafData) (G : X.Modules)\n    (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (U : X.Opens) (hI : (I.support : Set X) = (U : Set X)ᶜ)\n    (φ : (restrictFunctor U.ι).obj\n        ((pushforward i).obj (SheafOfModules.unit W.ringCatSheaf)) ⟶\n      (restrictFunctor U.ι).obj G) :\n    ∃ (n : ℕ) (χ : idealModuleProduct (I ^ n).toModulesι\n        ((pushforward i).obj (SheafOfModules.unit W.ringCatSheaf)) ⟶ G),\n      (restrictFunctor U.ι).map χ =\n        (restrictFunctor U.ι).map (idealModuleProductι (I ^ n).toModulesι\n          ((pushforward i).obj (SheafOfModules.unit W.ringCatSheaf))) ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054232-L-447637",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054232-L-447637",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
