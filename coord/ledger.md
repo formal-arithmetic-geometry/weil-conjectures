@@ -10923,3 +10923,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FormalAssociatedGradedPolynomialCover (stage 3; reviewer PASS; after a return; landing 20261013T033000-L-3675832 (interface); batch 20261013T032954; modules 3; new nodes 2)
 - 03:30 L: merged deliver/H1/Sheaf.Paper.GradedModuleRealizationFiniteType (stage 3; reviewer PASS; first push; landing 20261013T033001-L-3675998 (interface); batch 20261013T032954; modules 2; new nodes 1)
 - 03:30 L: merged deliver/H4/Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux (stage 3; reviewer PASS; first push; landing 20261013T033001-L-3676158 (proof); batch 20261013T032954; modules 1; new nodes 0)
+- 03:30 L: merged deliver/J4/Sheaf.AlgebraicGeometry.SupportedOpenPushforwardPerfectComponent (stage 3; reviewer PASS; after a return; landing 20261013T033002-L-3676299 (interface); batch 20261013T032954; modules 3; new nodes 2)

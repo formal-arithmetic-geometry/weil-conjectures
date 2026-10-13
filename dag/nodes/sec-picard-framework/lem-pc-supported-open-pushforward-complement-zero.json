@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-supported-open-pushforward-complement-zero",
+ "kind": "statement",
+ "title": "Open pushforward vanishes off cohomological support",
+ "statement": "Let X be a scheme, U and V opens, and T any subset of X with V disjoint from T. Use derived categories of module sheaves on X, U and their localized open sites [def-pc-derived-category]. Let F in D(O_U) have zero cohomology stalks at every point of U mapping outside T. Then R(U.ι)_*F [def-pc-derived-direct-image] restricted to the localized site at V is zero. Closedness of T, containment of T in U, and perfection of F are not required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 08DP, computation on the complementary open, using Lemma 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put W = U.ι preimage V. Import all Sheaf.AlgebraicGeometry.PerfectRestrictionClassesSmall and use its existing private helper hasDerivedCategory_of_equivalence with (Modules.overEquiv W).symm and (Modules.overEquiv V).symm to obtain chosen localizations on W.toScheme and V.toScheme in the same morphism universe. The helper transports localization along the exact equivalence; no duplicate transport theorem is needed.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each homology module of F, restriction to W has zero stalks: restrictStalkNatIso identifies them with the original stalks and every point of W maps into V, hence outside T. TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero and the faithful underlying-sheaf functor show that this restricted module is zero. Exact restriction commutes with homology; DerivedCategory.isZero_of_forall_isZero_homology makes the derived restriction of F to W zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply schemeDerivedDirectImage_openRestriction to U.ι and V. Its right-hand object is derived direct image of the zero restriction on W, hence zero by additive_rightDerivedFunctor. Transport this zero object through the comparison isomorphism, then reflect zero along the exact derived equivalence of Modules.overEquiv V. This gives zero on the over-site at V. For empty W or V the same zero-detection argument applies; for U=X it is ordinary restriction.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Explicit Lean transport and zero-detection details of Stacks 08DP, 08FE, and Definition 08CM; source pages read online. Repair: reuse the private localization-transport helper from PerfectRestrictionClassesSmall via import all instead of duplicating it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local strictly perfect models of a derived restriction to an open can be viewed as models on opens of the ambient scheme; derived open direct image vanishes off cohomology support",
+   "results": "Both requests returned Internal Server Error; service unavailable.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictFunctorComp\"; CategoryTheory.Limits.IsZero, CategoryTheory.Functor.obj",
+   "results": "restrictFunctorComp and its component formulas; IsZero.of_full_of_faithful_of_isZero and Functor.map_isZero. These supply underived transport and zero-object ingredients, not the complete statements.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; use the returned ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*open|open.*perfect; over.*[Ee]quiv|[Ee]quiv.*over; isZero.*homology|homology.*isZero",
+   "results": "Mathlib Scheme.Modules.overEquiv, overFunctorEquiv, restrictFunctorComp, restrictUnitIso, and source-library DerivedCategory.isZero_of_forall_isZero_homology found. No theorem for the exact Sheaf.IsPerfect local-model assertion or supported open vanishing.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; use existing component declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardPerfectComponent",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-supported-open-pushforward-perfect-component",
+   "place": "Lemma 08DP, computation on the complementary open, using Lemma 08FE",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardComplementZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenPushforwardComplementZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.supported_open_pushforward_complement_zero",
+  "statement": "theorem supported_open_pushforward_complement_zero (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (V : X.Opens) (hV : ∀ x : X, x ∈ V → x ∉ T)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (F : schemeDerivedCategory U.toScheme)\n    (hs : ∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf x))) :\n    IsZero ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage U.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T033002-L-3676299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T033002-L-3676299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

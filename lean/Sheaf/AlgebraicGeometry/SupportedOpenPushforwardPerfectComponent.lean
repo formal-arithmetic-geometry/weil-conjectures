@@ -2,7 +2,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
+import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardComplementZero
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 @[expose] public section
 set_option autoImplicit false
@@ -37,6 +40,41 @@ theorem supported_open_pushforward_perfect (X : Scheme.{u}) (U : X.Opens)
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf
             x))) →
       IsPerfect X ((schemeDerivedDirectImage U.ι).obj F)) := by
-  sorry
+  classical
+  intro F hF hs
+  let L := schemeOpenRestriction X U
+  let R := RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom
+  let a : L ⊣ R := (Modules.restrictAdjunction U.ι).ofNatIsoLeft
+    (Modules.overFunctorEquiv U).symm
+  let adj := a.mapDerivedCategoryRightDerivedAdjunction
+  have : R.PreservesKInjectiveComplexes := a.preservesKInjectiveComplexes
+  have : R.Full := (Modules.restrictAdjunction U.ι).fullyFaithfulROfIsIsoCounit.full
+  have : R.Faithful := (Modules.restrictAdjunction U.ι).fullyFaithfulROfIsIsoCounit.faithful
+  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
+  have hU : IsPerfect U.toScheme
+      (L.mapDerivedCategory.obj ((schemeDerivedDirectImage U.ι).obj F)) := by
+    intro x
+    obtain ⟨W, hxW, K, hK, ⟨iK⟩⟩ := hF x
+    exact ⟨W, hxW, K, hK, ⟨(SheafOfModules.overFunctor.{u}
+      (moduleRings U.toScheme.toRingedSpace) W).mapDerivedCategory.mapIso
+        (asIso (adj.counit.app F)) ≪≫ iK⟩⟩
+  intro x
+  by_cases hx : x ∈ U
+  · exact open_restriction_perfect_local_models X U _ hU x hx
+  · let V : X.Opens := ⟨Tᶜ, hT.isOpen_compl⟩
+    have hxV : x ∈ V := fun hxT ↦ hx (hTU hxT)
+    have hz := supported_open_pushforward_complement_zero X U T V
+      (fun _ h ↦ h) F hs
+    let K : CochainComplex
+        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ :=
+      HomologicalComplex.zero
+    have hK : IsStrictlyPerfect X V K := by
+      constructor
+      · exact ⟨0, 0, fun _ _ ↦ isZero_zero _⟩
+      · intro n
+        refine ⟨0, 0, 0, ?_⟩
+        exact (isZero_zero _).eq_of_src _ _
+    refine ⟨V, hxV, K, hK, ?_⟩
+    exact ⟨hz.iso (DerivedCategory.Q.map_isZero HomologicalComplex.isZero_zero)⟩
 
 end AlgebraicGeometry.Scheme
