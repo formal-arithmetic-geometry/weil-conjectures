@@ -10,11 +10,28 @@
  },
  "proof": [
   {
-   "text": "Proof: The surjectivity component gives surjectivity at every degree. At degree zero\nboth quotients are zero, and at degree one both augmentations identify the quotients\nwith B; degree two is the given bijection. Assume bijectivity at degree r ≥ 2.\nLift its inverse composed with C → C/I^r to C → B[X]/J^(r+1) by formal smoothness.\nThe projection kernel J^r/J^(r+1) is square-zero. Reduction to B shows that this lift\nsends I into J/J^(r+1), so it descends through C/I^(r+1). Its composite with f sends\neach variable Xᵢ to Xᵢ + δᵢ, with δᵢ in J^r/J^(r+1). Substitution Xᵢ ↦ Xᵢ - δᵢ\ninverts this composite: substitution changes a degree-r correction only in degrees\nat least 2r-1 ≥ r+1. Thus the composite is injective, and so is f at degree r+1.\nCombine this with the separately known surjectivity to continue the induction.\nThe same calculation uses empty sums for n = 0 and also covers the zero base ring.",
+   "text": "Use the existing surjectivity theorem to obtain surjectivity at every degree from h₂. In degrees zero and one injectivity is proved directly: the zeroth quotient is trivial, and ε composed with f is constantCoeff since f sends all variables into ker ε. The coefficient characterization of the variables ideal therefore proves its preimage is exactly that ideal. Degree two is the given injectivity.",
    "uses": [
     "lem-sbc-formally-smooth-augmentation-truncations-surjective"
    ],
    "elementary": false
+  },
+  {
+   "text": "For r ≥ 2, invert the bijective degree-r map. Compose the inverse with C → C/I^r and lift it across P/J^(r+1) → P/J^r by Mathlib FormallySmooth.liftOfSurjective. The projection kernel is the image of J^r and its square is zero by 2r ≥ r+1. For c ∈ I, choose p representing its lift. Commutativity gives f(p)-c ∈ I^r ⊆ I, so f(p) ∈ I. The proved degree-one injectivity gives p ∈ J. Thus the lift sends I to the image of J, kills I^(r+1), and descends to g : C/I^(r+1) → P/J^(r+1). The composite g f_(r+1) reduces to the identity at degree r. Every assertion in this step is proved in the private helper exists_augmented_truncation_inverse_lift.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Replace explicit polynomial substitution by a general ideal-power estimate. Let L^(r+1)=0 and let e be a ring endomorphism satisfying e(x)-x ∈ L^r for every x, with r ≥ 2. Induction on k, using ideal product induction and e(ab)-ab=(e(a)-a)e(b)+a(e(b)-b), proves e(x)-x ∈ L^(r+k) for x ∈ L^(k+1). If e(z)=0 then z ∈ L^r, and the estimate with k=r-1 gives -z ∈ L^(2r-1) ⊆ L^(r+1)=0. Thus e is injective. Apply this proved estimate to L equal to the image of J in P/J^(r+1) and e=g f_(r+1).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Since g composed with f_(r+1) is injective, f_(r+1) is injective. Pair this with the already known surjectivity to run Nat.le_induction starting at two. Finish with the separate degree-zero and degree-one cases. This is the complete Lean proof and introduces no new sorry.",
+   "uses": [
+    "lem-sbc-formally-smooth-augmentation-truncations-surjective"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -22,9 +39,9 @@
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "K1",
+  "by": "W4",
   "document": "Stacks Project",
-  "place": "Tag 05D5, finite-truncation induction"
+  "place": "Tag 05D5, proof of Lemma 10.139.4; correction replaced by a proved ideal-power estimate in injective_near_identity_nilpotent."
  },
  "mathlib_searches": [
   {
@@ -100,10 +117,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T125447-L-3875209",
-  "kind": "interface",
+  "landing": "20261013T142908-L-502061",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

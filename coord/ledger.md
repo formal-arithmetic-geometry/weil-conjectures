@@ -12828,3 +12828,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/W2/Sheaf.Paper.FiniteStructureUnitLift (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501588 (interface); batch 20261013T142848; modules 2; new nodes 1)
 - 14:29 L: merged deliver/W3/Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsLocalSelection (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501763 (interface); batch 20261013T142848; modules 3; new nodes 2)
 - 14:29 L: merged deliver/W3/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapIsIso (stage 3; reviewer PASS; first push; landing 20261013T142907-L-501871 (interface); batch 20261013T142848; modules 3; new nodes 2)
+- 14:29 L: merged deliver/W4/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsInjective (stage 3; reviewer PASS; first push; landing 20261013T142908-L-502061 (proof); batch 20261013T142848; modules 1; new nodes 0)
