@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore
 
 /-! # Sheaf quotients on the finite fibres
 
@@ -58,6 +59,9 @@ theorem formalFunctions_finite_sheaf_quotient {X Y : Scheme.{u}} (f : X ⟶ Y)
             ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F),
         formalModuleQuotientπ J (n + 1) F' ≫ e.hom =
           formalFunctionsFiniteFMap f y F n := by
-  sorry
+  dsimp
+  intro n
+  refine ⟨formalFunctionsFiniteι_isClosedImmersion f y n, ?_⟩
+  exact formalFunctionsFinite_sheaf_quotient_iso f F y n
 
 end AlgebraicGeometry
