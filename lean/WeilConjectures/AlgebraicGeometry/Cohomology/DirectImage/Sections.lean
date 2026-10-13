@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators
+import Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
@@ -45,22 +47,25 @@ set_option backward.isDefEq.respectTransparency.types true in
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
 quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
 
-The quasi-coherence proof is split off because importing the ordinary higher-image theorem
-creates a cycle through the proper-flat modules. It will be supplied by an acyclic theorem
-with the same ordinary right-derived identification.
-
-Proof: restrict to affine base opens, apply an acyclic ordinary higher-image quasi-coherence
-result, and identify the ordinary right-derived functor with `higherDirectImage`.
+Proof: the two localization assertions for sections of the higher direct image give the
+quasi-coherence criterion `isQuasicoherent_of_forall_isAffineOpen`: sections on a principal
+open lift after multiplying by a power of its defining function, and sections restricting
+to zero are annihilated by a power. Apply the criterion and restrict to each affine open.
+The two assertions are stated in separate acyclic modules, with proofs through localization
+of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
 
 (blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
 (blueprint: `sk-thm-picard-coherence`)
-
-Affine-local step (blueprint: new-higher-direct-image-affine-local-qcoherent): restrict to an affine
-base open and apply the ordinary right-derived quasi-coherence theorem. -/
+(blueprint: new-higher-direct-image-affine-local-qcoherent) -/
 theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
     ∀ U : T.affineOpens,
       (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent := by
-  sorry
+  have hqc : ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+    isQuasicoherent_of_forall_isAffineOpen _
+      (fun W hW a s ↦ higherDirectImage_section_clearDenominators f ℱ q W hW a s)
+      (fun W hW a t ht ↦ higherDirectImage_section_pow_annihilates f ℱ q W hW a t ht)
+  intro U
+  exact SheafOfModules.isQuasicoherent_over _ U.1
 
 /-- Quasi-coherence is local on affine opens of the base. -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :

@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-higher-direct-image-section-torsion",
+ "kind": "statement",
+ "title": "Higher direct image sections vanishing on a principal open are power torsion",
+ "statement": "Let f : X → T be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], F a quasi-coherent O_X-module [pqf-def-coherent], q a natural number and W an affine open of T. Let M = R^q f_* F [pqf-def-cohomology], a ∈ Γ(T,W), and let r be the restriction from W to the principal open D(a). For every t ∈ Γ(M,W) with r(t)=0, there is n ≥ 0 with a^n t=0.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09MR",
+  "place": "Lemma 30.17.3, tensor-unit specialization, combined with Tag 01E4 and the localization criterion for quasi-coherence used in Tag 01XJ (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Set Y = f⁻¹W, b = f^♯a on Y, and N = H^q(Y,F|Y). The morphism is qcqs and W is affine, so Y is qcqs. Its principal open D(b) is f⁻¹D(a). Restriction preserves quasi-coherence. Here H^q is the right-derived module-section cohomology of RingedSpace.openModuleCohomology, the same theory as the higher-image presheaf; no comparison with abelian-sheaf Ext cohomology is needed.",
+   "uses": [
+    "def-pc-morphism-conventions",
+    "pqf-def-coherent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply invertS_cohomology to the tensor unit O_Y, section b, and F|Y. Tensor powers of O_Y identify with O_Y, and tensoring the coefficient module with them is the identity. The canonical fraction relation becomes the ordinary module localization relation. The numerator formula identifies restriction to D(b) with N → N[1/b]; the identification respects scalar multiplication from A = Γ(T,W). Apply this also to every principal open D(c) of W, and its further principal refinements. Explicitly, under the tensor-unit identifications the fraction relations are [n,x]=[n+k,b^k x]. The canonical map sends x/b^n to b^(-n) res(x). This formula proves A-linearity and compatibility with further principal restrictions by checking the fraction generators.",
+   "uses": [
+    "lem-sc-invert-s-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associated A-module sheaf tilde N has sections N[1/c] on D(c), with the same restriction maps. Thus the cohomology presheaf on the principal-open basis agrees naturally with this sheaf. A sheaf on a basis extends uniquely to the whole space; the sheafification agrees with this extension. The higher-direct-image presheaf theorem identifies that sheafification with R^q f_* F restricted to W, using the same injective section complexes and their cohomology restriction maps. Consequently the actual section restriction on W → D(a) is identified with N → N[1/a], with its scalar action. This reasoning never invokes the Leray affine section comparison, which depends on quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-sheaf-on-basis-extends",
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section t restricting to zero gives t/1 = 0 in N[1/a]. The zero criterion for localization gives n with a^n t = 0. Transport this identity through the comparison on W. For a=0 the open is empty and one can use exponent 1 for torsion and the zero section for the denominator assertion. Units, degree zero, zero coefficients, and empty W follow from the same localization formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "lem-sc-invert-s-cohomology",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-sheaf-on-basis-extends",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent: Q4, specialization of documented localization and cohomology-presheaf comparison",
+  "document": "https://stacks.math.columbia.edu/tag/09MR",
+  "place": "Lemma 30.17.3; Tags 01E4 and 01HV for the sheafification and associated-module comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image quasi coherent basic open localization sections powers denominators",
+   "results": "msearch.py: UNAVAILABLE, Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of quasi coherent sheaf modules along quasi compact quasi separated morphisms are quasi coherent",
+   "results": "Eight generic quasicoherence definitions and presentation lemmas; no higher-image localization result. Loogle finds isQuasicoherent_over, which is used for the final restriction.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*[Qq]uasicoherent|isQuasicoherent_of_forall_isAffineOpen; section_clearDenominators|section_pow_annihilates",
+   "results": "No Mathlib higher direct image match. Local library has the criterion in QuasicoherentKernel, ordinaryHigherImage_isQuasicoherent (cyclic import), invertS_cohomology and higherDirectImagePresheaf. Ordinary section denominator lemmas require quasi-coherence already and cannot prove this instance. No duplicate higher-image section lemmas found in Lean or DAG.",
+   "date": "2026-10-13",
+   "verdict": "use criterion; split its two independent hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Proof of clause (1), quasi-coherence: the principal-open localization criterion, realized here by separate lifting and kernel assertions.",
+   "via": [
+    "new-higher-direct-image-affine-local-qcoherent",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageSectionTorsion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.higherDirectImage_section_pow_annihilates",
+  "statement": "theorem higherDirectImage_section_pow_annihilates (q : ℕ) (W : T.Opens) (hW : IsAffineOpen W) (a : Γ(T, W)) (t : Γ((higherDirectImage f q).obj ℱ, W)) (ht : ((higherDirectImage f q).obj ℱ).presheaf.map (homOfLE (T.basicOpen_le a)).op t = 0) : ∃ n : ℕ, a ^ n • t = 0",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T025308-L-3424720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T025308-L-3424720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
