@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-hom-complex-restrict-scheme-transport",
+ "kind": "statement",
+ "title": "Transport Hom complexes through the open-subscheme equivalence",
+ "statement": "Let Y be a scheme, U an open of Y, and L and M arbitrary integer-indexed cochain complexes of O_Y-modules. Assume that the over-open equivalence F = Scheme.Modules.overEquiv U carries each internal Hom(A,B) to internal Hom(F(A),F(B)) by isomorphisms e(A,B), natural for every precomposition A' -> A and postcomposition B -> B'. Then degreewise scheme restriction res_U carries Hom^bullet_Y(L,M) to Hom^bullet_U(res_U L,res_U M), up to an isomorphism of cochain complexes. The comparison follows from the open-site restriction theorem [lem-sc-hom-complex-restrict-open] and the product/differential description [def-pur-hom-complex].",
+ "stmt_deps": [
+  "lem-sc-hom-complex-restrict-open",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08DL and Tag 0A8X, transport of the ordinary Hom complex"
+ },
+ "proof": [
+  {
+   "text": "Use the open-site Hom-complex comparison and preserve the integer-indexed products under the equivalence.",
+   "uses": [
+    "lem-sc-hom-complex-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied naturality hypothesis and the projection differential formula to identify both signed differential summands. Assemble the degreewise product isomorphisms using isoOfComponents, then compose with overFunctorEquiv on the Hom complex and both inputs.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-restrict-open",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "E3",
+  "date": "2026-10-13",
+  "note": "Second reading completed the proof from product preservation, the supplied internal-Hom naturality and the existing open-restriction theorem; no unproved internal-Hom theorem is used here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving products and a natural comparison for internal hom induces a comparison of Hom complexes",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.uncurry_expComparison, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.Functor.mapCochainComplexSingleFunctor, CategoryTheory.coev_expComparison, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplexCompIso",
+   "results": "7 hits: CategoryTheory.Functor.mapHomologicalComplexCompIso, CategoryTheory.Functor.mapHomologicalComplexCompIso_hom_app_f, CategoryTheory.Functor.mapHomologicalComplexCompIso_inv_app_f, HomologicalComplex.singleMapHomologicalComplex_comp_hom_app, HomologicalComplex.singleMapHomologicalComplex_comp_hom_app_assoc, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpHomMapHomologicalComplexCompIso, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_Q_obj; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafOfModulesEquivOver homObj",
+   "results": "0 hits: ; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural internal Hom comparison under the over-open equivalence induces an isomorphism between the ordinary sheaf Hom complexes after open scheme restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HomComplexRestrictScheme",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-complex-restrict-scheme",
+   "place": "product and differential transport",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexRestrictSchemeTransport.lean",
+  "declaration": "AlgebraicGeometry.homComplex_restrict_scheme_of_homIso",
+  "statement": "theorem homComplex_restrict_scheme_of_homIso {Y : Scheme.{u}} (U : Y.Opens)\n    (L M : CochainComplex Y.Modules ℤ)\n    (e : ∀ (A B : SheafOfModules.{u} (Y.ringCatSheaf.over U)),\n      (Scheme.Modules.overEquiv U).functor.obj\n        (SheafOfModules.homObj (R := Y.toRingedSpace.sheaf.over U) A B) ≅\n      SheafOfModules.homObj (R := U.toScheme.toRingedSpace.sheaf)\n        ((Scheme.Modules.overEquiv U).functor.obj A)\n        ((Scheme.Modules.overEquiv U).functor.obj B))\n    (he : ∀ (A A' B B' : SheafOfModules.{u} (Y.ringCatSheaf.over U))\n      (f : A' ⟶ A) (g : B ⟶ B'),\n      (Scheme.Modules.overEquiv U).functor.map\n          (SheafOfModules.homObjMap (R := Y.toRingedSpace.sheaf.over U) f g) ≫\n        (e A' B').hom =\n      (e A B).hom ≫ SheafOfModules.homObjMap\n        (R := U.toScheme.toRingedSpace.sheaf)\n        ((Scheme.Modules.overEquiv U).functor.map f)\n        ((Scheme.Modules.overEquiv U).functor.map g)) :\n    Nonempty (\n      ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj\n        (homComplex (R := Y.toRingedSpace.sheaf) L M) ≅\n      homComplex (R := U.toScheme.toRingedSpace.sheaf)\n        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj L)\n        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T140816-L-312564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T140816-L-312564",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

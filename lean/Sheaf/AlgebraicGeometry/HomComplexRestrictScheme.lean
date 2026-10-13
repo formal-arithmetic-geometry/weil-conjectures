@@ -8,7 +8,8 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Additive
-import Sheaf.Algebra.Homology.HomComplexRestrictOpen
+import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeTransport
+import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 
 /-! # Ordinary internal Hom complexes on an open subscheme
 
@@ -48,6 +49,8 @@ theorem homComplex_restrict_scheme {Y : Scheme.{u}} (U : Y.Opens)
         (homComplex (R := Y.toRingedSpace.sheaf) L M) ≅
       homComplex (R := U.toScheme.toRingedSpace.sheaf)
         (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj L)
-        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj M)) := by sorry
+        (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj M)) := by
+  obtain ⟨e, he⟩ := internalHom_overEquiv U
+  exact homComplex_restrict_scheme_of_homIso U L M e he
 
 end AlgebraicGeometry

@@ -15,46 +15,29 @@
  },
  "proof": [
   {
-   "text": "Restrict the ordinary Hom complex to the localized over-U site using homComplex_restrict_open, which applies to arbitrary unbounded complexes.",
+   "text": "Obtain the natural internal-Hom comparison for the over-open equivalence. This is existential elimination into the proposition Nonempty, not data selected in a definition.",
    "uses": [
-    "lem-sc-hom-complex-restrict-open"
+    "lem-sc-internal-hom-over-equiv"
    ],
    "elementary": false
   },
   {
-   "text": "Transport by Scheme.Modules.overEquiv U. On every open of U, the equivalence transports a local linear map to the identical local map on its image in Y, conjugated by the structure-sheaf appIso. This is an isomorphism of internal Hom sheaves: its inverse transports the same maps back; restrictions agree since appIso is natural. Precomposition and postcomposition agree by cancellation of the component isomorphisms.",
+   "text": "Apply the proved Hom-complex transport theorem to these comparisons; it uses open-site restriction, product limits, differential naturality and overFunctorEquiv.",
    "uses": [
-    "def-pur-sheaf-hom"
+    "lem-sc-hom-complex-restrict-scheme-transport"
    ],
-   "elementary": true
-  },
-  {
-   "text": "The equivalence preserves the integer-indexed products defining each Hom degree. Apply the preceding factor isomorphisms to product projections. For the differential, postcomposition with d_M and precomposition with d_L agree with transport by the previous step. Additivity preserves their signed difference. Hence the product isomorphisms define a chain isomorphism by HomologicalComplex.Hom.isoOfComponents.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Use Scheme.Modules.overFunctorEquiv U on L, M and their Hom complex to replace restriction followed by overEquiv by Scheme.Modules.restrictFunctor U.ι, obtaining the displayed chain isomorphism.",
-   "uses": [],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-pur-sheaf-hom",
-  "lem-sc-hom-complex-restrict-open"
+  "lem-sc-internal-hom-over-equiv",
+  "lem-sc-hom-complex-restrict-scheme-transport"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "N3",
+  "by": "worker",
+  "agent": "E3",
   "date": "2026-10-13",
-  "based_on": {
-   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
-   "place": "Tag 08DL, Lemma 20.42.3, ordinary restriction in its construction; Section 21.34 (Tag 0A8X), product terms and differential; Mathlib AlgebraicGeometry/Modules/Sheaf.lean, overEquiv and overFunctorEquiv"
-  },
-  "note": "Explicit scheme-site transport step of the restriction argument; source read at https://stacks.math.columbia.edu/tag/08DL and https://stacks.math.columbia.edu/tag/0A8X."
+  "note": "Second reading: explicit reduction through natural internal-Hom comparison and proved product/differential transport; the old dependencies remain in the transitive proof closure."
  },
  "mathlib_searches": [
   {
@@ -131,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-5a53e",
-  "group": "N3",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T130750-L-3986356",
+  "landing": "20261013T140816-L-312564",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, the proof with its recorded dependencies, and the new restriction lemma with its source construction; both modules and AffineKoszulScalarExtComparison compile cleanly, with only permitted axioms and documented sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

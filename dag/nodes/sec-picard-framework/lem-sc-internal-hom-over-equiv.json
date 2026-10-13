@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-internal-hom-over-equiv",
+ "kind": "statement",
+ "title": "Internal Hom under the open-subscheme equivalence",
+ "statement": "For an open U of a scheme Y, the equivalence between modules on the over-U site and modules on U carries internal Hom to internal Hom, naturally in both arguments.",
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DL, construction of internal Hom"
+ },
+ "proof": [
+  {
+   "text": "Transport compatible local linear maps along the slice equivalence and the structure-sheaf and module isomorphisms; transport back gives the inverse.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality in precomposition and postcomposition follows by cancellation of the intermediate module isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "E3",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sites transports sheaves of module internal hom naturally in both variables",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, SheafOfModules.pullbackPushforwardAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.sheafHom'Iso, CategoryTheory.Equivalence.sheafCongr.functor_map_val_app, SheafOfModules.pullbackIso, SheafOfModules.instIsRightAdjointPushforward; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "loogle: unknown identifier 'SheafOfModules.homObj'; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafOfModulesEquivOver homObj",
+   "results": "0 hits: ; no exact site-specific internal-Hom or Hom-complex comparison. Checked local InternalHom and InternalHomOver sources as well.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equivalence between module sheaves on the over-open site and on an open subscheme preserves internal Hom naturally in both module variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HomComplexRestrictScheme",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-complex-restrict-scheme",
+   "place": "transport through overEquiv",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InternalHomOverEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/InternalHomOverEquiv.lean",
+  "declaration": "AlgebraicGeometry.internalHom_overEquiv",
+  "statement": "theorem internalHom_overEquiv {Y : Scheme.{u}} (U : Y.Opens) :\n    let F := (Scheme.Modules.overEquiv U).functor\n    ∃ e : ∀ (A B : SheafOfModules.{u} (Y.ringCatSheaf.over U)),\n      F.obj (SheafOfModules.homObj (R := Y.toRingedSpace.sheaf.over U) A B) ≅\n        SheafOfModules.homObj (R := U.toScheme.toRingedSpace.sheaf) (F.obj A) (F.obj B),\n      ∀ (A A' B B' : SheafOfModules.{u} (Y.ringCatSheaf.over U))\n        (f : A' ⟶ A) (g : B ⟶ B'),\n        F.map (SheafOfModules.homObjMap (R := Y.toRingedSpace.sheaf.over U) f g) ≫\n            (e A' B').hom =\n          (e A B).hom ≫\n            SheafOfModules.homObjMap (R := U.toScheme.toRingedSpace.sheaf)\n              (F.map f) (F.map g)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T140816-L-312564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T140816-L-312564",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
