@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-formal-affine-section-limit-full",
+ "kind": "statement",
+ "title": "Full faithfulness of the concrete affine section-limit functor",
+ "statement": "Let X be a scheme and U an affine open whose open subscheme is Noetherian [pqf-def-locnoeth]. For a quasi-coherent ideal J on U, let F be the concrete functor on coherent formal modules [def-weil-pbc-coherent-formal-module] obtained by taking the ModuleCat inverse limit of their sections on U (computed by pushforward along U inclusion followed by evaluation). Then F is full and faithful. This identifies morphisms of arbitrary formal systems; it asserts no comparison with completion of a coherent module.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W: quotient formula for the limiting module and affine Hom correspondence, steps 1-2 of the natural affine comparison"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine open with its canonical spectrum. The affine formal equivalence realizes each system by its inverse limit, with surjective projections and ideal-power kernels.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-modules-iso-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Any linear map of limits carries each ideal-power multiple into the same ideal-power multiple. Descend it uniquely through the surjective projections and identify the resulting component maps with sheaf maps by the affine Hom correspondence.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the source surjective projection to prove compatibility of component maps with transitions. The resulting natural transformation induces the original limit map, since all projections agree. A transformation with zero limit map has zero components by the same cancellation; affine Hom faithfulness makes it zero. This proves fullness and faithfulness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A2",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W: quotient formula for the limiting module and affine Hom correspondence, steps 1-2 of the natural affine comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules on an affine scheme are reconstructed fully faithfully from inverse limits of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit functor from coherent adic systems on an affine scheme to modules is fully faithful",
+   "results": "SheafOfModules.fullyFaithfulForget and Scheme.Modules.fullyFaithfulToPresheafOfModules concern forgetful functors, not section limits; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Limits.lim",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*(Full|Faithful)|quotKerEquivOfSurjective",
+   "results": "General fully faithful functors reflect limits; LinearMap.quotKerEquivOfSurjective constructs quotient equivalences. No formal affine section-limit theorem. Local source search found Scheme.Modules.exists_hom_app_top_eq_of_isAffine, hom_ext_of_isAffine and the affine formal projection theorem; these supply the route for the remaining lemma.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An A-linear morphism between inverse limits of finite adic systems descends uniquely to compatible morphisms of the systems",
+   "results": "Second reader: AdicCompletion.lift, IsAdicComplete.lift and map_ext lemmas construct or compare maps involving completions; none asserts full faithfulness for coherent formal section towers.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful, CategoryTheory.Limits.lim",
+   "results": "Second reader: 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lim\", \"Full\"",
+   "results": "Current second reader: 12 results, including fullyFaithful_reflectsLimits and cone/cocone functoriality. These require an already fully faithful functor and do not establish fullness of section limits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear maps between inverse limits of finite modules killed by increasing ideal powers descend to the levels of adic systems",
+   "results": "Current second reader: AdicCompletion.lift, Hausdorffification.lift, IsAdicComplete.lift and completion map/evaluation equations; no full-faithfulness statement for formal section systems.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lim.*Faithful|Faithful.*lim|hom_ext_of_isAffine|exists_hom_app_top_eq_of_isAffine",
+   "results": "Current second reader: Mathlib has categorical limit reflection and affine Hom helpers, not this formal-system statement. Local lean source inspection additionally found coherentFormalModule_affine_limit_equivalence, which supplies limit cones after scalar restriction but no fullness or quotient-projection kernels for the concrete pushforward/evaluation functor. Bridging it to this functor and reconstructing morphisms remains necessary.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionAffineNaturalComparison",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 087W: quotient formula for the limiting module and affine Hom correspondence, steps 1-2 of the natural affine comparison; refinement of the affine identification needed in the finite-etale lifting proof.",
+   "via": [
+    "lem-weil-pbc-formal-completion-affine-natural-comparison",
+    "lem-weil-pbc-formal-completion-affine-comparison",
+    "lem-weil-pbc-formal-completion-affine-kernel",
+    "lem-weil-pbc-formal-completion-exact",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalAffineSectionLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalAffineSectionLimit.lean",
+  "declaration": "AlgebraicGeometry.formalAffineSectionLimit_full_faithful",
+  "statement": "theorem formalAffineSectionLimit_full_faithful (X : Scheme.{u})\n    (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)\n    (J : U.toScheme.IdealSheafData) :\n    (formalAffineSectionLimit X U J).Full ∧\n      (formalAffineSectionLimit X U J).Faithful",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T095926-L-2450032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T095926-L-2450032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

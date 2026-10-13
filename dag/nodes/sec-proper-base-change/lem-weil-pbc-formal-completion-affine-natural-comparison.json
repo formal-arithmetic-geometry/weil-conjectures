@@ -15,55 +15,46 @@
  ],
  "proof": [
   {
-   "text": "Put A = Gamma(X,U) and J = I(U). Transport formal systems through the canonical isomorphism U ≅ Spec A and identify the ideal using the affine ideal dictionary. Apply the affine formal-module equivalence of 087W, and compose with the full finite-module inclusion and scalar restriction to A to obtain F.",
+   "text": "Construct F as the actual ModuleCat limit of the affine section tower. Full faithfulness gives reflection of parallel-pair limits. Zero-map preservation is proved by composing with every limit projection; the tower sends zero maps componentwise to zero.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-formal-affine-section-limit-full"
    ],
    "elementary": false
   },
   {
-   "text": "The equivalences and full inclusion reflect limits by full faithfulness. Restriction of scalars preserves limits and reflects isomorphisms, hence reflects limits because its source has limits. Composition gives reflection of parallel-pair limits. The componentwise natural limit cones show F preserves zero maps.",
+   "text": "Apply the finite-level affine quotient comparison theta, including its transition and coherent-map equations.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-formal-completion-affine-quotients"
    ],
    "elementary": false
   },
   {
-   "text": "Open restriction preserves ideal products, powers, and quotient cokernels. Affine sections identify the positive-level quotient system of any coherent G with Gamma(G,U)/J^(n+1)Gamma(G,U), with canonical quotient transitions. The specified equality after the formal-system inclusion identifies this very system with rho(completion G).",
+   "text": "Compose theta with mkQ. Injectivity of theta identifies the projection kernel with the ideal power, and surjectivity of theta and mkQ gives full range. Apply the existing stable-range completion/limit theorem with c=0 to obtain the canonical linear isomorphisms v_G and set e_G=v_G inverse.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-adic-completion-stable-ranges"
    ],
    "elementary": false
   },
   {
-   "text": "The limiting cones of 087W identify F(rho(completion G)) with the inverse limit of these quotients. Adjoining the initial zero quotient gives the limit defining AdicCompletion. The unique limit isomorphism yields e_G. For a coherent map f, evaluate the two composites on every quotient projection: both are reduction of f. Joint monicity of the limit projections proves naturality. Zero and unit ideals, empty affine opens, and zero modules require no exceptions.",
+   "text": "Apply v_H injectivity and Concrete.limit_ext to naturality. Rewrite each limit projection using the specified equations for v_G and v_H, then the limit-map projection equation. The finite-level coherent-map equation is exactly the desired equality after applying AdicCompletion.eval. All hypotheses and conclusions of the original statement are preserved.",
    "uses": [
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-formal-completion-affine-quotients",
+    "def-weil-pbc-adic-completion"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-formal-affine-section-limit-full",
+  "lem-weil-pbc-formal-completion-affine-quotients",
+  "lem-weil-pbc-adic-completion-stable-ranges",
   "def-weil-pbc-adic-completion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "A2",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine identification in the proof, and Lemma 087W (lemma-inverse-systems-affine)"
+  "place": "Lemmas 087W and 0881; concrete section limits, finite-level quotient comparison, and c=0 specialization of the stable-range limit construction"
  },
  "mathlib_searches": [
   {
@@ -139,10 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4a1ac",
-  "group": "D3",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T062517-L-731821",
-  "kind": "interface"
+  "landing": "20261013T095926-L-2450032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
