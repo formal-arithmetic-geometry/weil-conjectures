@@ -11884,3 +11884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/K4/Sheaf.Algebra.Homology.PerfectRingHomTensorDualIso (stage 3; reviewer PASS; first push; landing 20261013T100025-L-2468203 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/K4/Sheaf.AlgebraicGeometry.SingleComplexTargetLocality (stage 3; reviewer PASS; first push; landing 20261013T100026-L-2468322 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/K4/Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality (stage 3; reviewer PASS; first push; landing 20261013T100027-L-2468492 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:00 L: merged deliver/K4/Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective (stage 3; reviewer PASS; first push; landing 20261013T100027-L-2468647 (interface); batch 20261013T095923; modules 2; new nodes 1)

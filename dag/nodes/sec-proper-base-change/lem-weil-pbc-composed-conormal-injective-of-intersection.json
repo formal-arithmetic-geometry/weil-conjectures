@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-composed-conormal-injective-of-intersection",
+ "kind": "statement",
+ "title": "Composed conormal map injective from the coefficient ideal intersection",
+ "statement": "Let $A\\to B\\to C$ be a tower of commutative ring homomorphisms. Let $P=A[x_s:s\\in\\Sigma]\\to B$ and $Q=B[y_i:i\\in\\mathcal I]\\to C$ be surjective polynomial presentations [def-weil-pbc-mv-polynomial-ring]. Let $T=A[y_i,x_s]\\to C$ be their composed presentation, $K=\\ker(T\\to C)$, and $J=\\ker(T\\to B[y_i])$ for the coefficient map. Suppose $J\\cap K^2=JK$. Then the canonical $C$-linear map $C\\otimes_B (\\ker P/(\\ker P)^2)\\to K/K^2$, $c\\otimes[g]\\mapsto c[g]$, induced by the inclusion $A[x_s]\\to T$, is injective. The sets of variables may be empty or infinite; no regular-sequence or flatness hypothesis on $B\\to C$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D4, lemma-transitive-lci-at-end, proof: injectivity of the conormal map from IA[x,y] intersect K squared = IK and the final tensor identification. Read at https://stacks.math.columbia.edu/tag/07D4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Let T=(Q.comp P).Ring, I=P.ker, J=ker(Q.ofComp P), and K=(Q.comp P).ker. Mathlib Generators.map_toComp_ker identifies J with the extension of I. The sum-variable polynomial equivalence identifies T with a polynomial algebra over P.Ring, so T is free and hence flat. The multiplication map T tensor I -> J is bijective: injectivity follows by tensoring the ideal subtype and composing with the tensor unit equivalence; its range is the ideal span of the image of I, namely J. This is the private flat_ideal_bijective proof.",
+   "uses": [
+    "lem-weil-pbc-polynomial-coefficient-map-kernel",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the inclusion J -> K, the map f:J -> K/K² has kernel the preimage of J intersect K². The hypothesis identifies this with JK, the image of K smul top in J. Thus f descends to an injection J/(K smul top) -> K/K². Identify T/K with C by the first isomorphism theorem, then use the quotient tensor equivalence to identify C tensor_T J with J/(K smul top). Checking on c tensor j shows the resulting injection is f.liftBaseChange C. This is the private ideal_injective proof.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Extension.cotangentEquiv identifies B tensor_P I with P.Cotangent. Base change to C and cancel B to identify C tensor_B P.Cotangent with C tensor_P I. Cancel T in the other direction and tensor the equivalence of step 1 with C to obtain C tensor_T J. Compose with the injection of step 2. On c tensor Cotangent.mk x, the composite is c smul Cotangent.mk of the polynomial-variable inclusion of x, by contangentEquiv_tmul, cancelBaseChange_tmul and the multiplication formula. It is therefore exactly the displayed conormal map, and is injective.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-transitive",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-base-change-transitive",
+  "lem-weil-pbc-polynomial-coefficient-map-kernel",
+  "lem-weil-pbc-tensor-over-quotient-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D4, lemma-transitive-lci-at-end, proof: injectivity of the conormal map from IA[x,y] intersect K squared = IK and the final tensor identification. Read at https://stacks.math.columbia.edu/tag/07D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For composed polynomial presentations the conormal map is injective if the coefficient kernel intersect the square of the presentation kernel equals their product",
+   "results": "HTTP 500 Internal Server Error; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composed polynomial presentations the conormal map is injective if the coefficient kernel intersect the square of the presentation kernel equals their product",
+   "results": "CotangentSpace.map_toComp_injective is the degree-zero map, not the conormal map. Other hits require localization or standard smoothness. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toComp.*injective|injective.*toComp|quotTensorEquivQuotSMul",
+   "results": "CotangentSpace.map_toComp_injective only; quotTensorEquivQuotSMul provides the quotient tensor equivalence used in the proof. No conormal injectivity lemma.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the conormal tensor identification in step 2 of lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+   "via": [
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ComposedConormalInjectiveOfIntersection",
+  "file": "lean/Sheaf/RingTheory/ComposedConormalInjectiveOfIntersection.lean",
+  "declaration": "Algebra.Generators.Cotangent.toComp_injective_of_intersection",
+  "statement": "theorem Cotangent.toComp_injective_of_intersection\n    {A : Type u} {B : Type v} {C : Type w}\n    [CommRing A] [CommRing B] [CommRing C]\n    [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]\n    {ι : Type a} {σ : Type b} (Q : Generators B C ι) (P : Generators A B σ)\n    (h : RingHom.ker (Q.ofComp P).toAlgHom.toRingHom ⊓ (Q.comp P).ker ^ 2 =\n      RingHom.ker (Q.ofComp P).toAlgHom.toRingHom * (Q.comp P).ker) :\n    Function.Injective\n      ((Extension.Cotangent.map (Q.toComp P).toExtensionHom).liftBaseChange C)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
