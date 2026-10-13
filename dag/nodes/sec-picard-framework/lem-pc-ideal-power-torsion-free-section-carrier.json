@@ -1,0 +1,194 @@
+{
+ "id": "lem-pc-ideal-power-torsion-free-section-carrier",
+ "kind": "statement",
+ "title": "An ideal-power-torsion-free carrier of an open section",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $I$ ideal-sheaf data [def-sbc-closed-immersion-ideal-sheaf], $E$ a quasi-coherent module [pqf-def-coherent, def-weil-sheaf-of-modules-category], and $U$ open with $V(I)=X\\setminus U$. Write $P_n$ for the recursive powers with inclusion $j_n:P_n\\to\\mathcal O_X$ [lem-weil-pbc-ideal-module-product-stalk]. For every $s\\in E(U)$ there are a quasi-coherent module $G$, a monomorphism $g:G\\to E$, and $t\\in G(U)$ with $g_U(t)=s$, such that for every $n$, open $W$, and $x\\in G(W)$, if $j_{n,V}(b)x|_V=0$ for every open $V\\subseteq W$ and $b\\in P_n(V)$, then $x=0$.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (lemma-homs-over-open), first two paragraphs of the proof, through the construction of F prime."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Extend the finite-type image of the section map O_U to E|U to a finite-type quasi-coherent submodule G of E. On the Noetherian scheme this submodule is coherent.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quasi-coherent annihilators of I-powers form an increasing chain in G. By ACC they stabilize at T=G_r. Artin-Rees yields c with I^(r+c)G intersect T=0. The submodule G prime=I^(r+c)G has zero annihilator for every I-power and agrees with G on U.",
+   "uses": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-weil-pbc-coherent-artin-rees",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let G be the ideal-power product selected by Artin-Rees, with its inclusion into E. On U it agrees with the finite-type carrier H, so the section lifts. Any section of G killed by an ideal power belongs to the stabilized annihilator T of H. It is also in G, whose intersection with T is zero; injectivity of G into H then forces the section to vanish. This argument applies on every open and includes n=0.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-artin-rees",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-weil-pbc-sections-annihilated-by-ideal",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (lemma-homs-over-open), first two paragraphs of the proof, through the construction of F prime."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi coherent section on an open complement find a coherent submodule containing the section with no sections annihilated by powers of the ideal",
+   "results": {
+    "t": "2026-10-13T08:31:11Z",
+    "tool": "leanfinder",
+    "query": "Given a quasi coherent section on an open complement find a coherent submodule containing the section with no sections annihilated by powers of the ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.sectionsSubmodule",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "ModuleCat.Tilde.exists_const",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal"
+    ],
+    "digest": "6735f986b2dda09e"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, SheafOfModules.IsFiniteType",
+   "results": {
+    "t": "2026-10-13T08:31:12Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Scheme.Modules, SheafOfModules.IsFiniteType",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*section|annihilator.*stabil|Artin.Rees",
+   "results": {
+    "t": "2026-10-13T08:31:41Z",
+    "tool": "grep",
+    "query": "torsion.*section|annihilator.*stabil|Artin.Rees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Filtration.lean",
+     "Mathlib/RingTheory/Filtration.lean",
+     "Mathlib/RingTheory/ReesAlgebra.lean"
+    ],
+    "digest": "559236d946d6622b"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent sheaf ideal powers torsion free submodule containing a section",
+   "results": {
+    "t": "2026-10-13T08:44:39Z",
+    "tool": "leansearch",
+    "query": "quasi coherent sheaf ideal powers torsion free submodule containing a section",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "The ambient ideal-power extension in the integral ideal devissage: the tensor extension part of 01YB. Extension of a quasi-coherent open section from an ideal power; An ideal-power-torsion-free carrier of an open section",
+   "via": [
+    "lem-pc-quasicoherent-open-section-ideal-extension",
+    "lem-pc-coherent-open-map-tensor-extension",
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerTorsionFreeSectionCarrier",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerTorsionFreeSectionCarrier.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_idealPower_torsionFree_section_carrier",
+  "statement": "theorem exists_idealPower_torsionFree_section_carrier\n    {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)\n    (E : X.Modules) [E.IsQuasicoherent] (U : X.Opens)\n    (hI : (I.support : Set X) = (U : Set X)ᶜ) (s : E.val.obj (op U)) :\n    ∃ (G : X.Modules) (g : G ⟶ E) (t : G.val.obj (op U)),\n      G.IsQuasicoherent ∧ Mono g ∧ g.val.app (op U) t = s ∧\n      ∀ (n : ℕ) (W : X.Opens) (x : G.val.obj (op W)),\n        (∀ (V : X.Opens) (h : V ≤ W)\n          (b : (idealSheafPower I.toModulesι n).1.val.obj (op V)),\n          ((idealSheafPower I.toModulesι n).2.val.app (op V) b : Γ(X, V)) •\n            G.val.map (homOfLE h).op x = 0) → x = 0",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111918-L-3061225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111918-L-3061225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
