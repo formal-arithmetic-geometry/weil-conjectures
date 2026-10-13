@@ -17,6 +17,8 @@ public import WeilConjectures.WeilSheaf.DirectImageStalk
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.TraceFunctionOps
+public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.PointCount
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
@@ -236,19 +238,6 @@ theorem WeilSheaf.nonempty_equiv_stalk_upperStar {X Y : Scheme.{u}}
   obtain ⟨e₂⟩ := key _ hdeg (hdeg ▸ hs') ht'
   exact ⟨e₁.symm.trans e₂⟩
 
-set_option maxHeartbeats 1000000 in
--- the kernel unfolds the exactness instances of the pullback
-/-- The cohomology sheaves of a pullback are the pullbacks of the cohomology sheaves, the
-pullback of pro-étale Weil sheaves being exact. -/
-noncomputable def WeilComplex.homologySheafUpperStarIso {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l Y) (n : ℤ) :
-    (WeilComplex.homologySheaf n).obj ((WeilComplex.upperStar φ).obj K) ≅
-      (WeilSheaf.upperStar φ).obj ((WeilComplex.homologySheaf n).obj K) :=
-  ObjectProperty.isoMk _
-    ((Functor.mapDerivedCategoryHomologyFunctorIso (ProEtaleWeilSheaf.upperStar k₀ l φ) n).app
-      K.obj).symm
-
 /-- The direct image of Weil sheaves commutes with constant twists. -/
 noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y)
@@ -347,7 +336,7 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
     (WeilComplex.homologySheaf (-1)).mapIso E₁ ≪≫
       WeilComplex.homologySheafShiftIso _ (-1) (-1) (-2) (by norm_num) ≪≫
       WeilComplex.homologySheafShiftIso _ _ (-2) 0 (by norm_num) ≪≫
-      WeilComplex.homologySheafUpperStarIso i _ 0 ≪≫
+      WeilComplex.homologySheafUpperStarIso i 0 _ ≪≫
       (WeilSheaf.upperStar i).mapIso (WeilSheaf.homologySheafZeroDerivedLowerStarIso j G ≪≫
         WeilSheaf.lowerStarConstantTwistIso j (F.dual hF) c)
   -- `𝔻_Z` is t-exact on the finite `Z`: `𝓗⁻¹(𝔻_Z A(F)) ≅ (𝓗¹ A(F))^∨`
@@ -368,14 +357,14 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
   have S₃ : (((WeilSheaf.upperStar i).obj
       (((WeilSheaf.lowerStar j).obj (F.dual hF)).constantTwist c)).stalk zf).Equiv
       (((H.dual hH).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ))).stalk zf) :=
-    (WeilSheaf.nonempty_equiv_stalkAt_of_iso (L.symm ≪≫ R) _ _ _).some
+    (WeilSheaf.nonempty_equiv_stalk_of_iso (L.symm ≪≫ R) zf).some
   have S₄ := (WeilSheaf.nonempty_equiv_stalk_constantTwist (H.dual hH)
     (WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ)) zf).some
   have S₅ := (WeilSheaf.nonempty_equiv_stalk_dual hH zf).some
   have S₆ : (H.stalk zf).Equiv (((WeilSheaf.upperStar i).obj ((WeilComplex.homologySheaf 1).obj
       ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F)))).stalk zf) :=
-    (WeilSheaf.nonempty_equiv_stalkAt_of_iso (WeilComplex.homologySheafUpperStarIso i _ 1)
-      _ _ _).some
+    (WeilSheaf.nonempty_equiv_stalk_of_iso (WeilComplex.homologySheafUpperStarIso i 1 _)
+      zf).some
   have S₇ := (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
       ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg).some
   -- the linear algebra
