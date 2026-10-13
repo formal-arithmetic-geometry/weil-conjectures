@@ -23,38 +23,30 @@
  ],
  "proof": [
   {
-   "text": "For fixed total degree p and q=p+n, take a section over U of the source iterated Hom. Its (i,j) localized component is an R-linear map taking x,y to φ_i(x)_j(y), for i+j=p. The Hom-complex componentwise functoriality formula gives precomposition by f^i,g^j and postcomposition by h^q.",
+   "text": "Eliminate the equality p+n=q and apply homTensorLocalized_ext to the two displayed projected composites. It suffices to compare their values on every localized pure tensor of each (i,j) summand with i+j=p.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-sc-hom-tensor-localized-ext"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the degree-p total tensor map to its (i,j) summand using HomologicalComplex.ι_mapBifunctorMap. Naturality of the sheafification unit and the tensor comparison takes x⊗y to f^i(x)⊗g^j(y).",
+   "text": "For each summand substitute p=i+j. Apply homTensorCurry_natural_pure to the two chosen degreewise maps. Their hypotheses are the first components of homTensorDegreewiseMap_spec for the unprimed and primed triples. This proves all the pointwise equalities required by the extensionality lemma.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the localized pure-tensor equation homTensorDegreewiseMap_spec to both chosen currying maps. Both composites on each such tensor give h^q(φ_i(f^i(x))_j(g^j(y))). Tensor and sheafification universal properties extend equality to each sheaf tensor summand; the total coproduct universal property extends it to the total term. Internal-Hom and sheaf-morphism extensionality give the fixed (p,q) projection equality. No target-product extensionality is used.",
-   "uses": [
+    "lem-sc-hom-tensor-curry-natural-pure",
     "lem-sc-hom-tensor-degreewise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-hom-tensor-curry-natural-pure",
   "lem-sc-hom-tensor-degreewise",
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-sc-hom-tensor-localized-ext"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), functoriality; component argument expanded by K1, following the pure-tensor construction referred to there"
+  "place": "Tag 0A90; original component argument factored into pure-tensor calculation and localized extensionality by A4, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -119,9 +111,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T011927-L-2763268",
+  "landing": "20261013T031529-L-3567700",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

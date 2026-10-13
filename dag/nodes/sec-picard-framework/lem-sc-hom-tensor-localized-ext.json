@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-hom-tensor-localized-ext",
+ "kind": "statement",
+ "title": "Localized pure-tensor extensionality for Hom out of a total tensor",
+ "statement": "Let (C,J) be a site, R a sheaf of commutative rings, K,L cochain complexes of R-module sheaves, X,N R-module sheaves, and p an integer. Put T=Tot(K tensor L), using [def-pc-tensor-complex-sheaves]. For a,b : X -> internal Hom(T^p,N), suppose the following holds. For every U, source section s in X(U), W -> U, integers i,j with i+j=p, and sections x in K^i(W), y in L^j(W), the localized maps a_U(s) and b_U(s) have equal values on the image in T^p(W) of x tensor y under the presheaf-to-sheaf tensor comparison and the (i,j) coproduct inclusion. Then a=b. Internal Hom and the presheaf-to-sheaf tensor comparison are those in [lem-sc-hom-tensor-degreewise] and [lem-pc-sheaf-modules-tensor-closed]. No chosen currying maps or complex morphisms are involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-tensor-degreewise",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Fix U and s. Their images are morphisms of module presheaves on the localized site Over U. Restrict these morphisms to every (i,j) total tensor summand with i+j=p. Pure-tensor equality and the bilinear universal property give equality on each presheaf tensor. Sheafification commutes with localization to Over U, so its adjunction extends this equality to each sheaf tensor summand. This uses the canonical comparison homTensorSectionMap, not a claim that sheaf tensor sections are globally sums of pure tensors.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to Over U preserves coproducts. Thus the coproduct universal property for T^p gives equality of the two localized morphisms. Extensionality in W, s and U gives equality of internal-Hom sections and then of the original sheaf-module morphisms a,b.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90: expanded localized component proof by A4; tensor universal property from Modules on Sites, Section 03EK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps into internal Hom out of total tensor determined on localized pure tensors",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom morphisms out of total tensor complex determined on localized pure tensors",
+   "results": "Found HomologicalComplex.mapBifunctor.hom_ext and ModuleCat.MonoidalCategory.tensor_ext. Neither includes localized internal Hom sections or sheafification.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hom_ext\"",
+   "results": "General extensionality hits only; no result for the localized sheaf Hom of a total tensor.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*hom_ext|sheafification.*hom_ext|tensor_ext",
+   "results": "Found module tensor extensionality and total-complex extensionality, but no combined localized sheaf-tensor internal-Hom extensionality.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorNaturalityComponent",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-tensor-total",
+   "place": "Tag 0A90, degreewise currying and its functoriality",
+   "via": [
+    "lem-sc-hom-tensor-naturality-component",
+    "lem-sc-hom-tensor-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorLocalizedExt",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorLocalizedExt.lean",
+  "declaration": "CategoryTheory.homTensorLocalized_ext",
+  "statement": "theorem homTensorLocalized_ext (K L : CochainComplex Mod ℤ) (N X : Mod) (p : ℤ) : letI := SheafOfModules.monoidalCategory R ∀ (a b : X ⟶ SheafOfModules.homObj (R := R) ((CochainComplex.mapBifunctor K L (curriedTensor Mod)).X p) N), (∀ (U : Cᵒᵖ) (s : X.val.obj U) (W : (Over U.unop)ᵒᵖ) (i j : ℤ) (hij : i + j = p) (x : (K.X i).val.obj (op W.unop.left)) (y : (L.X j).val.obj (op W.unop.left)), (((a.val.app U).hom s).app W).hom (((CochainComplex.ιMapBifunctor K L (curriedTensor Mod) i j p hij).val.app (op W.unop.left)).hom (((homTensorSectionMap R (K.X i) (L.X j)).app (op W.unop.left)).hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y))) = (((b.val.app U).hom s).app W).hom (((CochainComplex.ιMapBifunctor K L (curriedTensor Mod) i j p hij).val.app (op W.unop.left)).hom (((homTensorSectionMap R (K.X i) (L.X j)).app (op W.unop.left)).hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)))) → a = b",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T031529-L-3567700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T031529-L-3567700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,8 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Homology.HomTensorLocalizedExt
+import Sheaf.Algebra.Homology.HomTensorCurryNaturalPure
 
 /-!
 # A single component of currying naturality
@@ -78,6 +80,15 @@ theorem homTensorDegreewiseMap_natural_component
           ((homComplexFunctor (R := R)).obj
             (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h).f n) ≫
       homTensorProjection R (CochainComplex.mapBifunctor K' L'
-        (curriedTensor Mod)) M' n p q hpq := by sorry
+        (curriedTensor Mod)) M' n p q hpq := by
+  let := SheafOfModules.monoidalCategory R
+  subst q
+  apply homTensorLocalized_ext R K' L' (M'.X (p + n)) _ p
+  intro U s W i j hij x y
+  subst p
+  exact homTensorCurry_natural_pure R K K' L L' M M' f g h n
+    (homTensorDegreewiseMap R K L M n) (homTensorDegreewiseMap R K' L' M' n)
+    (homTensorDegreewiseMap_spec R K L M n).1
+    (homTensorDegreewiseMap_spec R K' L' M' n).1 U s W i j x y
 
 end CategoryTheory

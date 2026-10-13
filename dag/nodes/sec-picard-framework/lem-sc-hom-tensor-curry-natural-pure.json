@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-hom-tensor-curry-natural-pure",
+ "kind": "statement",
+ "title": "Pure-tensor evaluation of currying naturality",
+ "statement": "Let (C,J) be a site, R a sheaf of commutative rings, K,Kprime,L,Lprime,M,Mprime complexes of R-module sheaves, f:Kprime -> K, g:Lprime -> L, h:M -> Mprime cochain maps, and n an integer. Let a and aprime be degree-n morphisms from Hom(K,Hom(L,M)) to Hom(Tot(K tensor L),M), and for the primed triple respectively, satisfying HomTensorCurryCondition [lem-sc-hom-tensor-degreewise]. Let alpha be the iterated Hom map from f,g,h [def-pur-hom-complex], beta the Hom map from the total tensor map f tensor g and h [def-pc-tensor-complex-sheaves]. For every U, source section s, W -> U, i,j and x in Kprime^i(W), y in Lprime^j(W), the (i+j,i+j+n) projections of alpha^n then aprime and of a then beta^n have equal localized evaluations on the (i,j) inclusion of the canonical image of x tensor y in the sheaf total tensor. This asserts equality on a single pure tensor, not equality of projected morphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-tensor-degreewise",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Apply the primed currying condition to alpha^n(s). The componentwise functoriality formula in homComplex_exists, applied first to the outer projection and then the inner projection, gives h^(i+j+n)(phi_i(f^i(x))_j(g^j(y))). Here phi is the original source iterated-Hom section.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the other evaluation apply the Hom functor projection formula to beta. The identity HomologicalComplex.ι_mapBifunctorMap restricts its precomposition map to the termwise tensor f^i tensor g^j on the (i,j) summand. Naturality of the tensorator of sheafification and its counit shows the tensorObjIsoSheafification comparison is natural; combine this with naturality of the sheafification unit. Consequently the canonical image of x tensor y is sent to the canonical image of f^i(x) tensor g^j(y). The unprimed currying condition yields the same value as the previous step, proving the equality.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90: expanded localized component proof by A4; tensor universal property from Modules on Sites, Section 03EK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of degreewise tensor Hom currying evaluated on a pure tensor",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized pure tensor equation of currying commutes with precomposition and postcomposition of cochain maps",
+   "results": "Found localization tensorator comparisons, not this degreewise Hom projection equation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uncurry_natural_right\"",
+   "results": "Found MonoidalClosed.uncurry_natural_right and its reassociated version. They do not identify the chosen Hom-complex projections and localized pure-tensor specification.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|homObjMap_app_apply",
+   "results": "Found the total-map summand formula in Mathlib. The sheaf Hom action is in the source library. No combined component evaluation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorNaturalityComponent",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-tensor-total",
+   "place": "Tag 0A90, degreewise currying and its functoriality",
+   "via": [
+    "lem-sc-hom-tensor-naturality-component",
+    "lem-sc-hom-tensor-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorCurryNaturalPure",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorCurryNaturalPure.lean",
+  "declaration": "CategoryTheory.homTensorCurry_natural_pure",
+  "statement": "theorem homTensorCurry_natural_pure (K K' L L' M M' : CochainComplex Mod ℤ) (f : K' ⟶ K) (g : L' ⟶ L) (h : M ⟶ M') (n : ℤ) : letI := SheafOfModules.monoidalCategory R ∀ (a : (homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶ (homComplex (R := R) (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M).X n) (a' : (homComplex (R := R) K' (homComplex (R := R) L' M')).X n ⟶ (homComplex (R := R) (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)) M').X n), HomTensorCurryCondition R K L M n a → HomTensorCurryCondition R K' L' M' n a' → ∀ (U : Cᵒᵖ) (s : (homComplex (R := R) K (homComplex (R := R) L M)).X n |>.val.obj U) (W : (Over U.unop)ᵒᵖ) (i j : ℤ) (x : (K'.X i).val.obj (op W.unop.left)) (y : (L'.X j).val.obj (op W.unop.left)), let α := (((homComplexFunctor (R := R)).map f.op).app (homComplex (R := R) L M)) ≫ ((homComplexFunctor (R := R)).obj (op K')).map ((((homComplexFunctor (R := R)).map g.op).app M) ≫ ((homComplexFunctor (R := R)).obj (op L')).map h) let β := (((homComplexFunctor (R := R)).map (HomologicalComplex.mapBifunctorMap f g (curriedTensor Mod) (.up ℤ)).op).app M) ≫ ((homComplexFunctor (R := R)).obj (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h let z := ((CochainComplex.ιMapBifunctor K' L' (curriedTensor Mod) i j (i + j) rfl).val.app (op W.unop.left)).hom (((homTensorSectionMap R (K'.X i) (L'.X j)).app (op W.unop.left)).hom (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) (((((α.f n ≫ a') ≫ homTensorProjection R (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)) M' n (i + j) (i + j + n) rfl).val.app U).hom s).app W).hom z = (((((a ≫ β.f n) ≫ homTensorProjection R (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)) M' n (i + j) (i + j + n) rfl).val.app U).hom s).app W).hom z",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T031529-L-3567700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T031529-L-3567700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
