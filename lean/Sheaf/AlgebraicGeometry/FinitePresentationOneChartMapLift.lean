@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStage
+import Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport
 
 /-! # Eventual lifting of a map on one affine chart
 Source: Stacks Project, Limits Tag 01ZR and Algebra Tag 05N7 (2).
@@ -20,6 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+-- The unchanged statement has an unused witness proof and an unused intermediate functor.
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Lifting on a single supplied affine chart persists at every later stage.
@@ -106,6 +109,15 @@ theorem finitePresentation_one_chart_map_lift_eventually
         t.inv.app (A.obj Fj) ≫ (Scheme.Modules.pullback
           (U.pullbackHom p a)).map r ≫ t.hom.app (A.obj Gj) =
         (Scheme.Modules.pullback (V.f a)).map
-          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj) := by sorry
+          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj) := by
+  obtain ⟨k, hjk, hstage⟩ := finitePresentation_one_chart_map_lift_at_stage
+    R c hc i f j hij Fj Gj hF hFq hG hGq φ Uj a ha
+  refine ⟨k, hjk, ?_⟩
+  intro l hjl hkl
+  set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+      with_reducible
+        exact @openCover_map_lift_transport.{u} I inferInstance R c i Xi f j hij
+          Fj Gj φ Uj a k hjk hstage l hjl hkl
 
 end AlgebraicGeometry

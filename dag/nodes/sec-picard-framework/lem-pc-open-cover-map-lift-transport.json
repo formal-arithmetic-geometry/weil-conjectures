@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-open-cover-map-lift-transport",
+ "kind": "statement",
+ "title": "Persistence of a supplied chart map lift at later stages",
+ "statement": "Let I be a preorder, R:I→CommRing a functor, and c any cone over the opposite Spec diagram. Fix i≤j, a scheme morphism f:Xi→Spec R(i), arbitrary modules Fj,Gj on Xj=Xi×_Spec R(i) Spec R(j), a morphism φ between their tensor pullbacks to X=Xi×_Spec R(i) c.pt, an open cover Uj of Xj and an index a [def-pc-scheme, def-pc-base-change]. Supply an index k and a proof j≤k. If the selected chart of Uj pulled back to Xk carries a morphism between the restrictions of the base changes of Fj and Gj which recovers the restriction of φ under the canonical tensor composition and restriction comparisons [def-pc-tensor-pullback-composition-iso, def-pc-open-cover-tensor-pullback-comparison], then for every l≥j with k≤l the selected chart of Uj pulled back to Xl carries such a recovering morphism. The recovery assertion at k is an explicit hypothesis. No finite presentation, quasi-coherence, affine chart, directedness, affine cone vertex, or limit universal property is assumed. This asserts transport of a supplied lift, not existence of an initial lift.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality of module pullback; Tag 01ZR first proof; extension of a descended map to later stages in lem-pc-rf-perfect-base-change, Noetherian approximation"
+ },
+ "proof": [
+  {
+   "text": "Fix l≥j,k. In Over(Spec R(i)) construct q:Tk→Tj, s:Tl→Tk and v:Tl→Tj from the ring maps, where Tr=Spec R(r) with its specified map to Spec R(i). Spec.map_comp and R.map_comp give s≫q=v. Cone naturality gives pl≫s=pk, pk≫q=h and pl≫v=h for the projections from c.pt. The baseChangeMap composition law gives the same triangles on fibre-product schemes. Write q,s,v for the induced maps. The cartesian chart squares give d:Ul(a)→Uk(a) with d≫Uk.f(a)=Ul.f(a)≫s and d≫Uj.pullbackHom(q,a)=Uj.pullbackHom(v,a). Compare restriction of v* with d* of restriction of q* using the first triangle, ordinary pullback composition and the tensor-to-ordinary comparison. Pull back the supplied rk along d and conjugate by this comparison to define rl.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At W, cartesian pasting gives a canonical isomorphism of the two iterated pulled-back charts. Their refinement triangle follows from pl≫s=pk. Pull back the recovery equation for rk along this refinement. Use naturality to move the comparison factors past rk, and associativity of pullback composition to identify the remaining factors with the canonical comparisons for pl and v. The comparisons are mates of the same pushforward composition under the pinned adjunctions, so their coherence follows from pushforward associativity. The resulting equation is exactly recovery for rl. Identity factorizations, empty charts, and zero modules are included.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality of module pullback; Tag 01ZR first proof; extension of a descended map to later stages in lem-pc-rf-perfect-base-change, Noetherian approximation",
+  "note": "The source gives the affine argument and functorial pullback. The displayed canonical-comparison details are expanded by C4; source read online at the cited tag pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a sheaf map on a base changed open chart preserves the recovery equation under a further base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a local lift of a sheaf morphism along a factorization gives a local lift at the next stage",
+   "results": "CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac; unrelated site or scheme-morphism lifts, not a sheaf map and its canonical tensor comparisons.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "map.*lift|lift.*map|pullback_assoc in Mathlib/AlgebraicGeometry/Modules and Mathlib/Algebra/Category/ModuleCat/Sheaf; pullbackComp.*assoc|pullbackHom.*comp in the library",
+   "results": "SheafOfModules.pullback_assoc; Scheme.Modules.pseudofunctor_associativity; no exact chart recovery transport statement. Blueprint search pullback composition gives derived trace and finite-section statements, not this statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tags 0095 and 0096, functoriality of module pullback; Tag 01ZR first proof; extension of a descended map to later stages in lem-pc-rf-perfect-base-change, Noetherian approximation",
+   "via": [
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverMapLiftTransport.lean",
+  "declaration": "AlgebraicGeometry.openCover_map_lift_transport",
+  "statement": "theorem openCover_map_lift_transport\n    {I : Type u} [Preorder I]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec))\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (Fj Gj : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    (φ : (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Fj ⟶\n          (Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj Gj)\n    (Uj : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : Uj.I₀) (k : I) (hjk : j ≤ k) :\n    (let A := Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n            (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n              (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let B := Scheme.Modules.moduleBaseChange f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n      let q := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U : (pullback f (Spec.map\n        (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := Uj.pullback₁ q\n      let e := Scheme.Modules.tensorPullbackCompositionIso\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op)))\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n              (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n              (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n                (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)))\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))\n            (by\n              rw [← baseChangeMap_comp]\n              congr 1\n              ext\n              simpa using c.w (homOfLE hjk).op)\n      let Q := modulesPseudofunctor.toDescentData U.f\n      let p := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n      let V := U.pullback₁ p\n      ∃ r : (Q.obj (A.obj Fj)).obj a ⟶ (Q.obj (A.obj Gj)).obj a,\n        let t := Scheme.Modules.openCoverTensorPullbackComparison p U a\n        t.inv.app (A.obj Fj) ≫ (Scheme.Modules.pullback\n          (U.pullbackHom p a)).map r ≫ t.hom.app (A.obj Gj) =\n        (Scheme.Modules.pullback (V.f a)).map\n          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj)) →\n    ∀ (j' : I) (hjj' : j ≤ j'), k ≤ j' →\n      let A := Scheme.Modules.moduleBaseChange f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n            (Over.homMk (Spec.map (R.map (homOfLE hjj')))\n              (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let B := Scheme.Modules.moduleBaseChange f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))\n      let q := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjj')))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U : (pullback f (Spec.map\n        (R.map (homOfLE (hij.trans hjj'))))).OpenCover.{u} := Uj.pullback₁ q\n      let e := Scheme.Modules.tensorPullbackCompositionIso\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op)))\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n              (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n              (Over.homMk (Spec.map (R.map (homOfLE hjj')))\n                (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)))\n            (baseChangeMap f\n              (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n              (T' := Over.mk (c.π.app (op i)))\n              (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))\n            (by\n              rw [← baseChangeMap_comp]\n              congr 1\n              ext\n              simpa using c.w (homOfLE hjj').op)\n      let Q := modulesPseudofunctor.toDescentData U.f\n      let p := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))\n      let V := U.pullback₁ p\n      ∃ r : (Q.obj (A.obj Fj)).obj a ⟶ (Q.obj (A.obj Gj)).obj a,\n        let t := Scheme.Modules.openCoverTensorPullbackComparison p U a\n        t.inv.app (A.obj Fj) ≫ (Scheme.Modules.pullback\n          (U.pullbackHom p a)).map r ≫ t.hom.app (A.obj Gj) =\n        (Scheme.Modules.pullback (V.f a)).map\n          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T172652-L-2098293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T172652-L-2098293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
