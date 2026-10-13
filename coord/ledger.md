@@ -13424,3 +13424,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:12 L: returned deliver/T4/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData (reviewer RETURN: (reviewer X-ea877, head ea877f5a7) C1/C4 (brief points 4 and 6): The remaining pullback lemma invokes the split-SES theo)
 - 19:12 L: returned deliver/D3/Sheaf.RingTheory.SelfTorConormalRegularIso (reviewer RETURN: (reviewer X-fcce5, head fcce566fe) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.SelfTorCo)
 - 19:15 L: returned deliver/C1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (reviewer RETURN: (reviewer X-2527f, head 2527f78d2) E1/E2, review point 4: picardScalarCech_externalCup_core remains false. With R=Q[t], )
+- 19:18 L: returned deliver/P3/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-fb036, head fb036c918) E2 (brief §4): IdealKernelElementDescent.lean:99 replaces the existing proof with `θ )
