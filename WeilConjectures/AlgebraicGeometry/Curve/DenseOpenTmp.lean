@@ -83,14 +83,16 @@ namespace AlgebraicGeometry
 
 open Etale
 
-lemma Scheme.nsmul_id_eq_zero_of_mono {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
-    {G F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ι : G ⟶ F) [Mono ι] {r : ℕ}
+/-- A subobject of an object killed by `r` is killed by `r`. -/
+lemma _root_.CategoryTheory.Preadditive.nsmul_id_eq_zero_of_mono {C : Type*} [Category C]
+    [Preadditive C] {G F : C} (ι : G ⟶ F) [Mono ι] {r : ℕ}
     (hF : r • 𝟙 F = 0) : r • 𝟙 G = 0 := by
   rw [← cancel_mono ι, Preadditive.nsmul_comp, Category.id_comp, zero_comp,
     ← Category.comp_id ι, ← Preadditive.comp_nsmul, hF, comp_zero]
 
-lemma Scheme.nsmul_id_eq_zero_of_epi {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
-    {G F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (π : F ⟶ G) [Epi π] {r : ℕ}
+/-- A quotient of an object killed by `r` is killed by `r`. -/
+lemma _root_.CategoryTheory.Preadditive.nsmul_id_eq_zero_of_epi {C : Type*} [Category C]
+    [Preadditive C] {G F : C} (π : F ⟶ G) [Epi π] {r : ℕ}
     (hF : r • 𝟙 F = 0) : r • 𝟙 G = 0 := by
   rw [← cancel_epi π, Preadditive.comp_nsmul, Category.comp_id, comp_zero,
     ← Category.id_comp π, ← Preadditive.nsmul_comp, hF, zero_comp]
@@ -174,8 +176,8 @@ theorem IsCurve.assertions_iff_openImmersionLowerShriek_of_dense [Finite Λ] {k 
   have hC : IsCurve.Assertions Λ f S.X₃ :=
     IsCurve.Assertions.lowerStar_of_isFinite Λ (i ≫ f) f i rfl _
       (IsCurve.Assertions.of_topologicalKrullDim_le_zero Λ (i ≫ f) hZdim _)
-  have hX₁ : r • 𝟙 S.X₁ = 0 := Scheme.nsmul_id_eq_zero_of_mono S.f hF
-  have hX₃ : r • 𝟙 S.X₃ = 0 := Scheme.nsmul_id_eq_zero_of_epi S.g hF
+  have hX₁ : r • 𝟙 S.X₁ = 0 := Preadditive.nsmul_id_eq_zero_of_mono S.f hF
+  have hX₃ : r • 𝟙 S.X₃ = 0 := Preadditive.nsmul_id_eq_zero_of_epi S.g hF
   have hzero : IsZero ((U.ι)^*[AddCommGrpCat.{u + 1}].obj
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj S.X₃)) :=
     (Functor.map_isZero _ (Etale.isZero_upperStar_lowerStar_of_disjoint_range _ U.ι i hji
