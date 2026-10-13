@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-base-derived-tensor-cohomology-model-map",
+ "kind": "statement",
+ "title": "Functoriality between base-derived tensor cohomology models",
+ "statement": "Let $R,A,B,D$ be commutative rings with $R$-algebras $A,B$ and an $(A\\otimes_R B)$-algebra $D$. For complexes $Q,Q^{\\prime}$ of $A$-modules, an $A$-linear chain map $f:Q\\to Q^{\\prime}$, and models $L,K$ of base-derived tensor cohomology [def-pc-base-derived-tensor-cohomology-model], in every integer degree $i$ there exist a counit-compatible natural transformation $\\delta:L.derived\\to K.derived$ and an $(A\\otimes_R B)$-linear morphism $g:H_L^i\\to H_K^i$. After restriction to $B$ and conjugation by the models cohomology identifications, $g$ is the cohomology of $L.derived(f)$ followed by the component of $\\delta$ at $Q^{\\prime}$. Complex and restriction functors use [def-pc-ring-tensor-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change, functoriality and coefficient actions"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the two universal counits to obtain the unique isomorphism between the left derived functors (Mathlib Functor.leftDerivedUnique). Its hom is delta and its counit compatibility is Functor.leftDerived_fac.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the induced B-linear cohomology map by the two cohomologyIso isomorphisms. Naturality of delta and f with multiplication by a, together with cohomologyIso_smul, shows that this map commutes with a tensor 1. It is B-linear, so it also commutes with 1 tensor b. Since a tensor b is their product, tensor induction proves linearity over A tensor_R B and supplies g.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, model functoriality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology models left derived functor unique morphism tensor algebra linear",
+   "results": "LeanSearch service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical morphism between cohomology models of left derived extension of scalars respecting both coefficient actions",
+   "results": "LeanFinder returned group-cohomology/Ext resolution identifications, not the model morphism theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "BaseDerivedTensorCohomologyModel.*map|exists.*baseDerivedTensorCohomology.*Map",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "affine displayed localization identity in Tag 0DJ8: Functoriality between base-derived tensor cohomology models",
+   "via": [
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyModelMap.lean",
+  "declaration": "RingTensorCohomology.exists_baseDerivedTensorCohomologyModelMap",
+  "statement": "theorem exists_baseDerivedTensorCohomologyModelMap\n    (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q' D) (i : ℤ) :\n    ∃ (δ : L.derived ⟶ K.derived) (g : L.cohomology i ⟶ K.cohomology i),\n        Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) δ ≫\n            K.counit = L.counit ∧\n        (ModuleCat.restrictScalars.{u}\n          (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map g ≫\n              (K.cohomologyIso i).hom =\n          (L.cohomologyIso i).hom ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n              (L.derived.map (DerivedCategory.Qh.map\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map\n                  ((restrict R A).map f)))) ≫\n            (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map\n              (δ.app (DerivedCategory.Qh.obj\n                ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj\n                  ((restrict R A).obj Q'))))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T100224-L-2504027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
