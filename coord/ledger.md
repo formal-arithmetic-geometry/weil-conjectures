@@ -12220,3 +12220,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/U2/Sheaf.AlgebraicGeometry.OrderedCechModuleSignedSection (stage 3; reviewer PASS; first push; landing 20261013T111932-L-3066501 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/U2/Sheaf.AlgebraicGeometry.TensorUnitOpenDegreeZero (stage 3; reviewer PASS; first push; landing 20261013T111932-L-3066641 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent (stage 3; reviewer PASS; first push; landing 20261013T111933-L-3066783 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PerfectOpenStalkReverseComponentsLift (stage 3; reviewer PASS; first push; landing 20261013T111933-L-3067006 (interface); batch 20261013T111833; modules 2; new nodes 1)

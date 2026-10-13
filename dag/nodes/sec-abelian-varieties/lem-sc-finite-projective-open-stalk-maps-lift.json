@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01CP (lemma-stalk-internal-hom), finite-presentation case; finite matrix argument in Tags 09RE affine case (1) and 0BC7 (2). https://stacks.math.columbia.edu/tag/01CP"
+ },
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-finite-projective-open-stalk-maps-lift",
+ "title": "Lifting a finite family of maps from finite-projective open-site stalks",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $T\\subseteq V$ opens and $x\\in T$. Let $I$ be a finite set and let $M_q,N_q$ be sheaves of $\\mathcal O_V$-modules on the slice site, for $q\\in I$. Suppose each $M_q$ is a retract of a finite free sheaf: for some $m_q\\in\\mathbf N$ there are $\\iota_q:M_q\\to\\mathcal O_V^{m_q}$ and $\\pi_q:\\mathcal O_V^{m_q}\\to M_q$ with $\\iota_q\\pi_q=1_{M_q}$ (the termwise retraction condition of [def-pc-perfect-complex]). Write $F$ for the open module stalk functor at $x$ [def-sc-open-module-stalk-functor]. For arbitrary maps $h_q:F(M_q)\\to F(N_q)$ there exist an open $Z\\subseteq T$ containing $x$, a natural isomorphism $e:R_{Z,V}S_Z\\cong F$ on module sheaves, and maps $k_q:R_{Z,V}(M_q)\\to R_{Z,V}(N_q)$ such that $S_Z(k_q)=e_{M_q}h_qe_{N_q}^{-1}$ for every $q\\in I$. Targets are arbitrary; no complex, boundedness, degree relation or differential equation occurs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the retractions to precompose each stalk map with the projection from a finite free sheaf. Such a map is specified by finitely many target-stalk vectors. Equivalently finite-presentation internal Hom gives a germ of a local sheaf morphism. Represent these finitely many germs on neighbourhoods inside T and intersect the neighbourhoods; finiteness of I and each rank makes this a neighbourhood of x. This is the representative argument in Tag 01CP, requiring no finite-presentation condition on the targets.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the chosen representatives to the intersection and precompose with the restricted source inclusions. On stalks their composite equals the prescribed map because inclusion followed by projection is the identity. The canonical restriction-stalk comparison on module sheaves, using the open-subscheme equivalence and restriction of scalars, is natural in every sheaf; its naturality converts the germ agreement to the stated conjugation identity. Empty index families and rank-zero sources use T and zero maps.",
+   "uses": [
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+  "def-sc-open-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 01CP representative argument and finite-free retraction reduction, adapted to a finite family on the open slice site by U3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*(lift|finitePresentation)|(lift|finitePresentation).*stalk",
+   "results": "6 hits: Mathlib/Geometry/RingedSpace/Stalks.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "verdict": "No exact finite-family open-site lifting theorem; candidate ring spreading and finite-presentation definitions have different types.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite family of morphisms between finite projective module sheaf stalks to a common open neighbourhood",
+   "results": "8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_lift_of_germInjective_aux, SheafOfModules.LocalGeneratorsData.IsFiniteType, ModuleCat.Tilde.exists_const, SheafOfModules.IsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType",
+   "verdict": "No exact finite-family open-site lifting theorem; candidate ring spreading and finite-presentation definitions have different types.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, stalk",
+   "results": "0 hits: ; loogle: unknown identifier 'stalk'",
+   "verdict": "No exact finite-family open-site lifting theorem; candidate ring spreading and finite-presentation definitions have different types.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of maps from finite projective module stalks lifts to a common open neighbourhood",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOpenStalkReverseComponentsLift",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the local perfect-model comparison in the route through perfect H0 locally closed; descent of the two inverse homotopies; Lifting reverse-degree stalk components without equations; finite family of component stalk maps after removing the bounded-support assembly",
+   "via": [
+    "lem-sc-perfect-open-stalk-reverse-components-lift",
+    "lem-sc-perfect-open-stalk-inverse-homotopies-spread",
+    "lem-sc-perfect-stalk-quasi-iso-detection",
+    "lem-sc-bounded-free-stalk-model-spread",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteProjectiveOpenStalkMapsLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteProjectiveOpenStalkMapsLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_projective_open_stalk_maps_lift",
+  "statement": "theorem exists_finite_projective_open_stalk_maps_lift\n    (X : Scheme.{u}) (V : X.Opens) (x : X) (hxV : x ∈ V)\n    (T : X.Opens) (hTV : T ≤ V) (hxT : x ∈ T)\n    (I : Type u) [Finite I]\n    (M N : I → SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n    (hM : ∀ q, ∃ m : ℕ,\n      ∃ (ι : M q ⟶ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)))\n        (π : SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)) ⟶ M q),\n        ι ≫ π = 𝟙 (M q))\n    (h : ∀ q, (openModuleStalkFunctor X V ⟨x, hxV⟩).obj (M q) ⟶\n      (openModuleStalkFunctor X V ⟨x, hxV⟩).obj (N q)) :\n    ∃ (Z : X.Opens) (hZT : Z ≤ T) (hxZ : x ∈ Z),\n      let R := SheafOfModules.overMap (moduleRings X.toRingedSpace)\n        (homOfLE (hZT.trans hTV))\n      let S := openModuleStalkFunctor X Z ⟨x, hxZ⟩\n      let F := openModuleStalkFunctor X V ⟨x, hxV⟩\n      ∃ (e : R ⋙ S ≅ F) (k : ∀ q, R.obj (M q) ⟶ R.obj (N q)),\n        ∀ q, S.map (k q) = (e.app (M q)).hom ≫ h q ≫ (e.app (N q)).inv",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T111933-L-3067006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T111933-L-3067006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
