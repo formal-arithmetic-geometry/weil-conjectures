@@ -19,6 +19,47 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
+/-- Raw categorical coface projection, before evaluating lifted sections.
+(blueprint: new-etale-singleton-tensor-cech-coface-raw-projection)
+Proof: unfold the formal coproduct coface and apply the product projection equation. -/
+theorem singletonTensorCech_coface_raw_projection
+    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
+    (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))
+    (s : (singletonTensorCech X F U W g).X n) :
+    let G := (Over.forget U).op ⋙
+      (((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
+        (Modules.etaleTensorSectionsSheaf F)).obj)
+    let P := ∏ᶜ (fun _ : Fin (n + 2) ↦ Over.mk g)
+    let Q := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)
+    let f := Pi.lift (fun k : Fin (n + 1) ↦
+      Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g) (j.succAbove k))
+    Pi.π (fun _ : Fin (n + 2) → Fin 1 ↦ G.obj (op P)) (fun _ ↦ 0)
+        ((singletonTensorCechCosimplicial X F U W g).δ j s) =
+      G.map f.op (Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦ G.obj (op Q)) (fun _ ↦ 0) s) := by
+  sorry
+
+/-- Downstairs evaluation of the raw coface map is restriction.
+(blueprint: new-etale-singleton-tensor-cech-coface-map-down)
+Proof: apply the lifted tensor section restriction evaluation and remove ULift. -/
+theorem singletonTensorCech_coface_map_down
+    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
+    (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))
+    (s : (singletonTensorCech X F U W g).X n) :
+    let G := (Over.forget U).op ⋙
+      (((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
+        (Modules.etaleTensorSectionsSheaf F)).obj)
+    let P := ∏ᶜ (fun _ : Fin (n + 2) ↦ Over.mk g)
+    let Q := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)
+    let f := Pi.lift (fun k : Fin (n + 1) ↦
+      Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g) (j.succAbove k))
+    (G.map f.op (Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦ G.obj (op Q)) (fun _ ↦ 0) s)).down =
+      Modules.etaleTensorSectionsRestriction F f.left
+        ((Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦
+          AddCommGrpCat.of (ULift.{u + 1}
+            Γ((Modules.tensorPullback Q.left.hom).obj F, ⊤))) (fun _ ↦ 0) s).down)  := by
+  sorry
+
+
 /-- Evaluation of a singleton Čech coface is restriction along the product map.
 Source: Stacks Project, Tag 03P2 (Čech restriction formula), Tag 03DR.
 (blueprint: lem-sc-singleton-tensor-cech-coface-evaluation)
@@ -50,7 +91,10 @@ theorem singletonTensorCech_coface_evaluation
       AddCommGrpCat.of (ULift.{u + 1}
         Γ((Modules.tensorPullback
           (∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)).left.hom).obj F, ⊤)))
-      (fun _ ↦ 0)) s).down) := by sorry
+      (fun _ ↦ 0)) s).down) := by
+  have h := singletonTensorCech_coface_raw_projection X F U W g n j s
+  have h' := singletonTensorCech_coface_map_down X F U W g n j s
+  exact (congrArg ULift.down h).trans h'
 
 end
 end AlgebraicGeometry.Scheme
