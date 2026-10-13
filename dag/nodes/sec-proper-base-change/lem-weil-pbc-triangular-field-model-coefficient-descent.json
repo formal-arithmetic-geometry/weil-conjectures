@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-triangular-field-model-coefficient-descent",
+ "kind": "statement",
+ "title": "Descent of the last coefficient in a triangular monic quotient",
+ "statement": "Let $k$ be a field [def-weil-field], $d,n\\geq0$, $h\\in k[X_0,\\ldots,X_{d-1}]$, arbitrary $p_i\\in k[X_0,\\ldots,X_{d+i}][Y_i]$ for $i\\in\\operatorname{Fin}(n+1)$, and bounds $e_i\\in\\mathbb N$ [def-weil-pbc-mv-polynomial-ring]. Assume only that $p_n$ is monic with natural degree $e_n$. Put $D=k[X_0,\\ldots,X_{d-1}][1/h]$ [def-weil-ring-localization-away], and let $Q$ and $Q_0$ be the quotients by the explicit equations $hT-1,p_0,\\ldots,p_n$ and $hT-1,p_0,\\ldots,p_{n-1}$ respectively [def-weil-pbc-triangular-field-model-equations, def-weil-pbc-algebra-hom-quotient]. Let $\\psi:D\\to_k Q$ and $\\psi_0:D\\to_k Q_0$ agree on the base polynomial ring with its canonical quotient maps. For any function $c:(\\prod_{i=0}^n\\operatorname{Fin}(e_i))\\to D$, if $\\sum_a\\psi(c(a))\\prod_{i=0}^n[Y_i]^{a_i}=0$ in $Q$, then for every $j\\in\\operatorname{Fin}(e_n)$ one has $\\sum_{a\\in\\prod_{i=0}^{n-1}\\operatorname{Fin}(e_i)}\\psi_0(c(\\operatorname{snoc}(a,j)))\\prod_{i=0}^{n-1}[Y_i]^{a_i}=0$ in $Q_0$. Here snoc appends the last exponent. Earlier relations need not be monic and their degrees need not equal the earlier bounds; zero h, zero bounds and n=0 are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BV (lemma-colimit-syntomic), first assertion: successive triangular monic equations; Tag 08JZ (lemma-localize-at-element), localization presentation. The proof uses an explicit map into the last AdjoinRoot rather than a quotient isomorphism. Sources read online at https://stacks.math.columbia.edu/tag/07BV and https://stacks.math.columbia.edu/tag/08JZ."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Let Q₀ be the preceding quotient. If Q₀ is subsingleton, the assertion follows immediately. Otherwise map p_n to g in Q₀[X]; monicity and natural degree are preserved. Construct S=AdjoinRoot g. Assign every preceding variable to of g of its class in Q₀ and the last variable to root g. Evaluation at this assignment sends the localization equation and each earlier relation to zero because they are images of relations in Q₀. The last relation maps to eval₂_root g=0. Ideal.Quotient.liftₐ therefore constructs an evaluation map ev:Q→ₖS. Earlier polynomial relations are checked using hom_eval₂ and rename_rename.",
+   "uses": [
+    "def-weil-pbc-triangular-field-model-equations",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composites ev∘psi and of g∘psi₀ agree on every base polynomial by the assumed agreements and evaluation of the renamed preceding variables. IsLocalization.ringHom_ext for powers of h proves equality on D. Thus ev sends each coefficient psi(c(a)) to of g(psi₀(c(a))).",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply ev to the vanishing full expansion. Fin.prod_univ_castSucc splits each product into its initial product and last power. Reindex the sum along Fin.snocEquiv and Fintype.sum_prod_type, and use map_sum, map_mul and sum_mul to collect the terms by last exponent. Obtain a zero linear combination of root g powers whose coefficient at j is exactly the asserted earlier expansion. Reindex the monic AdjoinRoot power basis along natDegree(g)=e_n, then apply Fintype.linearIndependent_iff to conclude every coefficient is zero. No prior independence statement is used; when e_n=0 the theorem has no j.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BV (lemma-colimit-syntomic), first assertion: successive triangular monic equations; Tag 08JZ (lemma-localize-at-element), localization presentation. The proof uses an explicit map into the last AdjoinRoot rather than a quotient isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coefficients below the degree of a monic polynomial vanish if their expansion in the quotient is zero",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true,
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.powerBasisAux'",
+   "results": "AdjoinRoot.powerBasisAux', powerBasisAux'_repr_apply_to_fun and powerBasisAux'_repr_symm_apply. Read Mathlib/RingTheory/AdjoinRoot.lean lines 590–646.",
+   "verdict": "Monic single-variable basis used in the proof; no simultaneous-quotient coefficient-descent statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent.*pow|powerBasis.*monic|mvPolynomialQuotientEquiv",
+   "results": "AdjoinRoot.powerBasisAux' and powerBasis' in Mathlib/RingTheory/AdjoinRoot.lean; IsLocalization.Away.mvPolynomialQuotientEquiv in Mathlib/RingTheory/MvPolynomial/Localization.lean; no triangular coefficient-descent declaration.",
+   "verdict": "Ingredients only. The new theorem proves the explicit quotient-evaluation compatibility and the grouped coefficient conclusion.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.TriangularFieldModelBoundedIndependent",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Triangular field model in the approximation argument: the last-variable coefficient step in successive monic division, before induction on the preceding variables.",
+   "via": [
+    "lem-weil-pbc-triangular-field-model-bounded-independent",
+    "lem-weil-pbc-triangular-field-model-reconstruction-bijective",
+    "lem-weil-pbc-triangular-field-model-localized-normal-form",
+    "lem-weil-pbc-triangular-field-model-normal-form",
+    "lem-weil-pbc-triangular-field-model-evaluation-kernel",
+    "lem-weil-pbc-triangular-field-model-presentation",
+    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+    "lem-weil-pbc-cartier-equality",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TriangularFieldModelCoefficientDescent",
+  "file": "lean/Sheaf/FieldTheory/TriangularFieldModelCoefficientDescent.lean",
+  "declaration": "FieldTheory.triangularFieldModel_coefficient_descent",
+  "statement": "theorem triangularFieldModel_coefficient_descent\n    (k : Type u) [Field k] (d n : ℕ) (h : MvPolynomial (Fin d) k)\n    (p : (i : Fin (n + 1)) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))\n    (e : Fin (n + 1) → ℕ)\n    (hp : (p (Fin.last n)).Monic)\n    (he : (p (Fin.last n)).natDegree = e (Fin.last n))\n    (psi : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + (n + 1))) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d (n + 1) h p)))\n    (hpsi : ∀ r : MvPolynomial (Fin d) k,\n      psi (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + (n + 1)))) r))\n    (psi₀ : Localization.Away h →ₐ[k]\n      (MvPolynomial (Fin (d + 1 + n)) k ⧸\n        Ideal.ofList (triangularFieldModelEquations k d n h (fun i ↦ p i.castSucc))))\n    (hpsi₀ : ∀ r : MvPolynomial (Fin d) k,\n      psi₀ (algebraMap _ (Localization.Away h) r) = Ideal.Quotient.mk _\n        (MvPolynomial.rename (fun j : Fin d ↦\n          (⟨j.val, by omega⟩ : Fin (d + 1 + n))) r))\n    (c : (((i : Fin (n + 1)) → Fin (e i)) → Localization.Away h))\n    (hc : (∑ a : ((i : Fin (n + 1)) → Fin (e i)),\n        psi (c a) * (∏ i : Fin (n + 1),\n          (Ideal.Quotient.mk _ (MvPolynomial.X\n            (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + (n + 1))))) ^ (a i).val)) = 0)\n    (j : Fin (e (Fin.last n))) :\n    (∑ a : ((i : Fin n) → Fin (e i.castSucc)),\n      psi₀ (c (Fin.snoc a j)) * (∏ i : Fin n,\n        (Ideal.Quotient.mk _ (MvPolynomial.X\n          (⟨d + 1 + i.val, by omega⟩ : Fin (d + 1 + n)))) ^ (a i).val)) = 0",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-pbc-triangular-field-model-equations",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-ring-localization-away"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T145724-L-750716",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T145724-L-750716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
