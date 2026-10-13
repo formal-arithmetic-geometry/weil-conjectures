@@ -13129,3 +13129,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:18 L: returned deliver/N2/Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections (reviewer RETURN: (reviewer X-2a5bf, head 2a5bfa215) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fl)
 - 16:23 L: returned deliver/K1/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-54178, head 541782cd0) H10 / reader gate: WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions exits 12)
 - 16:24 L: merged deliver/A2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518522 (proof); batch 20261013T162406; modules 1; new nodes 0)
+- 16:24 L: merged deliver/A4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518626 (interface); batch 20261013T162406; modules 2; new nodes 1)

@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.FiniteStripConeGradedMap
+import Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi
 
 @[expose] public section
 set_option autoImplicit false
@@ -9,6 +10,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace HomologicalComplex₂
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
+set_option linter.style.haveILetI false in
 /-- The canonical finite-strip graded map is epic.
 Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), diagonal quotient argument;
 explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3.
@@ -43,6 +45,18 @@ theorem finiteStripGradedMap_epi
           (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
             (CochainComplex.mappingCone.inr b).f n) else ⊥))
     (p n : ℤ) : Epi (finiteStripGradedMap K r hsupport A b f F hsteps p n) := by
-  sorry
+  letI : Epi ((F.complexStep p n).factorThru
+      (finiteStripRowInclusion K A b f p n)
+      (finiteStripRowInclusion_factors K r hsupport A b f F hsteps p n)) :=
+    finiteStripGradedMap_factorThru_epi K r hsupport A b f F hsteps p n
+  letI : IsIso (factorThruImageSubobject ((F.step p).arrow.f n)) :=
+    finiteStripStep_image_isIso (CochainComplex.mappingCone b) F p n
+  letI : Epi ((F.complexQuotientπ p (p + 1) (by omega)).f n) := by
+    change Epi ((HomologicalComplex.eval C (ComplexShape.up ℤ) n).map
+      (cokernel.π (Subobject.ofLE (F.step (p + 1)) (F.step p)
+        (F.antitone_step (by omega)))))
+    infer_instance
+  dsimp [finiteStripGradedMap]
+  infer_instance
 
 end HomologicalComplex₂
