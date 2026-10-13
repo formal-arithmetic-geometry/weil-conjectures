@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+import Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquareSection
 
 /-! # The ordinary open counit square
 
@@ -62,6 +63,8 @@ theorem schemeMVOrdinaryOpenCounit_square
       (schemeMVUnderivedOpenRestriction h U).hom.app
           ((RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom).obj M) ≫
         (RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).map
-          ((schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)).counit.app M) := by sorry
-
+          ((schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)).counit.app M) := by
+  ext W
+  exact congrFun (congrArg (fun q => q.hom)
+    (schemeMVOrdinaryOpenCounit_square_app X Y h U M W)) _
 end AlgebraicGeometry

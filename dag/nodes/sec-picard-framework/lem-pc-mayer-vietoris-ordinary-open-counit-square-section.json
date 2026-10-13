@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-mayer-vietoris-ordinary-open-counit-square-section",
+ "kind": "statement",
+ "title": "Sectionwise ordinary module open counit compatibility",
+ "statement": "For the objects and morphisms of lem-pc-mayer-vietoris-ordinary-open-counit-square, the two displayed composite sheaf morphisms have equal components on every open of U.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 08FE, proof: the underived open restriction/direct-image identity; Tag 08BV, open restriction maps. Official pages https://stacks.math.columbia.edu/tag/08FE and https://stacks.math.columbia.edu/tag/08BV read 2026-10-14. The counit normalization calculation expands the existing parent proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "The component identity is the sectionwise calculation on opens described in the parent node: expand the two comparison isomorphisms and both restriction counits, then use functoriality of presheaf maps and thinness of opens. This is left as the named sectionwise theorem for a subsequent worker.",
+   "uses": [
+    "lem-pc-mayer-vietoris-ordinary-open-counit-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-mayer-vietoris-ordinary-open-counit-square"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Cohomology, Tags 08FE and 08BV",
+  "place": "sectionwise ordinary-module calculation",
+  "note": "split from parent stage-3 proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction direct image open immersion counit compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of direct image along an open immersion counit commutative square",
+   "results": "OpenImmersion app_ΓIso_hom, map_ΓIso_hom, map_ΓIso_hom_assoc, appIso_hom and related ring-section formulas; no fixed ordinary-module comparison square.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_counit_app_app|mapHomotopyCategoryCompIso",
+   "results": "Scheme.Modules.restrictAdjunction_counit_app_app in Mathlib.AlgebraicGeometry.Modules.Sheaf; mapHomotopyCategoryCompIso in Mathlib.Algebra.Homology.HomotopyCategory. No ordinary comparison square.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-underived-open-counit-square",
+   "place": "proof: sectionwise ordinary-module counit computation, before applying the termwise functors and homotopy quotient",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquareSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryOpenCounitSquareSection.lean",
+  "declaration": "AlgebraicGeometry.schemeMVOrdinaryOpenCounit_square_app",
+  "statement": "theorem schemeMVOrdinaryOpenCounit_square_app (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens) (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace)) (W : (U.toScheme : Scheme).Opensᵒᵖ) : (((schemeOpenRestriction Y U).map ((schemeMVUnderivedOpenComposition h U).hom.app M) ≫ (schemeOpenModuleAdjunction Y U).counit.app ((RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).obj M)).val.app W) = (((schemeMVUnderivedOpenRestriction h U).hom.app ((RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom).obj M) ≫ (RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).map ((schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)).counit.app M)).val.app W)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T224523-L-1476909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T224523-L-1476909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
