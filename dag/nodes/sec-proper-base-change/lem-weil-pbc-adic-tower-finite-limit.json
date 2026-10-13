@@ -1,0 +1,201 @@
+{
+ "id": "lem-weil-pbc-adic-tower-finite-limit",
+ "kind": "statement",
+ "title": "Finite generation and reduction kernels for an algebraic adic tower",
+ "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], I an ideal, B its I-adic completion [def-weil-pbc-adic-completion], and T an inverse system of A-modules [def-weil-inverse-system]. Index n denotes level n+1. Assume every T_n is finite [def-weil-finitely-generated-module], I^(n+1)T_n=0, and every successor transition T_(n+1) -> T_n is surjective with kernel I^(n+1)T_(n+1). Let N be a B-module and e: Res_A N -> lim T an A-linear isomorphism whose projections satisfy the completed scalar residue equation of [lem-weil-pbc-adic-tower-completed-scalar-limit]. Then N is finite over B. Each projection p_n=e followed by the nth limit projection is surjective, with kernel I^(n+1)N as an A-submodule.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, proof, generator lifting through the final cokernel calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-inverse-system",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-adic-tower-completed-scalar-limit"
+ ],
+ "proof": [
+  {
+   "text": "Surjective transitions give surjective limit projections. Lift generators of T_0 to N. At every level the associated finite free quotient presentation is surjective by nilpotent Nakayama: reduction modulo I is the given generating map onto T_0.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernels of these presentations have surjective transitions: lift a vector in a lower kernel, then correct its next image by a vector in I^(n+1) times the free module. Exactness of tower limits with surjective kernels gives a surjection from a finite free B-module to N. The residue equation makes it B-linear, so N is finite.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an element with zero nth projection, choose a free completed lift. Lift its nth coordinate through the kernel tower and subtract this kernel lift. The difference has zero nth free coordinate, so lies in I^(n+1) times the completed free module by the completion quotient formula, since I is finitely generated. Its image gives membership in I^(n+1)N. The reverse inclusion follows from annihilation of T_n.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-weil-pbc-nakayama-nilpotent",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, proof, generator lifting through the final cokernel calculation; explicit categorical and scalar glue by R3, following the source argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit finite modules adic completion compatible quotients",
+   "results": "8 hits: AdicCompletion.of_apply, AdicCompletion, Hausdorffification, IsAdicComplete, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.module, AdicCompletion.eval, AdicCompletion.incl",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion",
+   "results": "12 hits: AdicCompletion, AdicCompletion.instAdd, AdicCompletion.instAddCommGroup, AdicCompletion.instNeg, AdicCompletion.instSub, AdicCompletion.instZero, AdicCompletion.instSMul, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*tower|tower.*adic|Module.*AdicCompletion",
+   "results": "25 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite generation adic inverse limit modules compatible quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed scalar action on inverse limit annihilated module tower",
+   "results": "8 hits: AdicCompletion.instSMul, AdicCompletion.smul, AdicCompletion.instIsScalarTower, AdicCompletion.instIsScalarTower_1, AdicCompletion.instSMulCommClass, AdicCompletion.instModuleOfIsScalarTower, AdicCompletion.smul_eval, AdicCompletion.val_smul",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, AdicCompletion",
+   "results": "10 hits: AdicCompletion.map_injective, AdicCompletion.map_exact, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_injective_of_injective",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*formal|adic.*tower|Module.*AdicCompletion",
+   "results": "18 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem for arbitrary annihilated towers or the affine formal-system bridge; completion-specific ingredients only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections coherent sheaf affine scheme finite module quotient ideal",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop_ideal, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.Scheme.Hom.finiteType_appLE",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no duplicate. Affine-section and completion tools supply ingredients, not this arbitrary-tower or formal-system statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleSpecΓFunctor\"",
+   "results": "1 hits: AlgebraicGeometry.moduleSpecΓFunctor",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no duplicate. Affine-section and completion tools supply ingredients, not this arbitrary-tower or formal-system statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective inverse system modules finite generation over completed ring projection kernel",
+   "results": "8 hits: AdicCompletion.map_surjective_of_mkQ_comp_surjective, AdicCompletion.eval_surjective, AdicCompletion.map_surjective, AdicCompletion.of_surjective, AdicCompletion.of_surjective_iff, AdicCompletion.mk_surjective, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no duplicate. Affine-section and completion tools supply ingredients, not this arbitrary-tower or formal-system statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.limit\", Module.Finite",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no duplicate. Affine-section and completion tools supply ingredients, not this arbitrary-tower or formal-system statement."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*[Ff]inite|[Ff]inite.*limit|quotient.*sections|sections.*quotient",
+   "results": "25 hits: Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Algebra/Category/Grp/AB.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no duplicate. Affine-section and completion tools supply ingredients, not this arbitrary-tower or formal-system statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineLimit",
+  "group": "R3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 087W, proof, generator lifting through the final cokernel calculation",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-affine-limit",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/AdicTowerFiniteLimit.lean",
+  "declaration": "ModuleCat.adicTower_finiteLimit",
+  "statement": "theorem adicTower_finiteLimit (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (hfinite : ∀ n : ℕ, Module.Finite A (T.obj (op n)))\n    (hzero : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥)\n    (htrans : ∀ n : ℕ,\n      Function.Surjective (T.map (homOfLE (Nat.le_succ n)).op) ∧\n      LinearMap.ker (T.map (homOfLE (Nat.le_succ n)).op).hom =\n        I ^ (n + 1) • (⊤ : Submodule A (T.obj (op (n + 1)))))\n    (N : ModuleCat.{u} (AdicCompletion I A))\n    (e : (restrictScalars (algebraMap A (AdicCompletion I A))).obj N ≅ limit T)\n    (hscalar : ∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (e.hom ≫ limit.π T (op n)) (r • x) =\n        a • (e.hom ≫ limit.π T (op n)) x) :\n    Module.Finite (AdicCompletion I A) N ∧\n    ∀ n : ℕ, Function.Surjective (e.hom ≫ limit.π T (op n)) ∧\n      LinearMap.ker (e.hom ≫ limit.π T (op n)).hom =\n        I ^ (n + 1) • (⊤ : Submodule A\n          ((restrictScalars (algebraMap A (AdicCompletion I A))).obj N))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T002358-L-2376819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T002358-L-2376819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
