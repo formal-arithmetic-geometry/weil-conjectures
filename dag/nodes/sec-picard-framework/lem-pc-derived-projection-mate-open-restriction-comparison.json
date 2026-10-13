@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-derived-projection-mate-open-restriction-comparison",
+ "kind": "statement",
+ "title": "Open restriction comparison for supplied derived projection mates",
+ "statement": "Let f:X→Y be any morphism of schemes [def-pc-scheme], with supplied derived localizations in universe w [def-pc-derived-category], their fixed tensor [def-pc-scheme-derived-tensor-structure], pullback [def-pc-derived-pullback] and direct image [def-pc-derived-direct-image]. Fix an adjunction p:Lf* ⊣ Rf* and a natural tensor comparison t:Lf*(- tensor -) ≅ Lf*(-) tensor Lf*(-). For quasi-coherent derived M on Y and L on X, an open U of Y, and the explicitly specified inverse-image source Z and restricted morphism g (given equalities hZ and hg), the restriction [def-pc-derived-open-restriction-maps] of the projection mate defined by p and t is isomorphic in the arrow category to a projection mate defined by an adjunction q and natural tensor comparison s for g and quasi-coherent local objects N,E. Use the shared small localizations in universe u on Z and U. There is no assertion of invertibility of either projection mate, and no quasi-compactness or quasi-separatedness hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Lemma 36.22.1, first sentence of proof; Tag 08FE, Lemma 20.32.4, and the adjunction definition of the projection map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use hZ and hg to identify the supplied source and morphism with the explicit inverse-image open and f restricted to U. Use exact restriction to set N=rY(M) and E=rX(L). They have quasi-coherent cohomology by the open restriction criterion in every degree.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First choose local derived categories in the ambient universe using the open localization and adjunction interfaces. For an open inclusion j, derived direct image followed by exact restriction is the identity: compute on a K-injective representative, whose restriction remains K-injective, and use the underived restriction counit. Hence the open restriction right adjoints are fully faithful, and restriction is a localization. The recorded pullback/tensor restriction comparisons and direct-image restriction comparison identify the two bifunctors of the projection mate with bifunctors on the local categories.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe",
+    "lem-pc-open-derived-localization-adjunction",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend t by evaluating it on the fully faithful right adjoints of the two open restrictions and conjugating by the invertible localization counits. Its naturality at the localization units shows that this descended isomorphism agrees with the restriction of t on arbitrary global inputs. Descend p in the same way: its Hom equivalence on local inputs is obtained by using these right adjoints, the original Hom equivalence, and the restriction/pullback and restriction/direct-image comparisons. These equivalences are natural and define q. The triangle identities follow from those of p and the localization counits.",
+   "uses": [
+    "lem-pc-open-derived-localization-adjunction",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the local categories to the fixed small localizations in universe u using uniqueness of localization. The universal properties of the chosen derived pullback, direct image and K-flat tensor identify the transported functors with the displayed functors, so q and the descended tensor isomorphism s have the required types.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let a identify rY(M tensor Rf(L)) with N tensor Rg(E), and b identify rY(Rf(F(M) tensor L)) with Rg(Fg(N) tensor E), using respectively tensor/direct-image and direct-image/tensor/pullback restriction comparisons. Expand the adjunction transpose as its unit followed by direct image of the input morphism. Compatibility of the descended unit and counit and naturality of t at the localization units give rY(pi) followed by b = a followed by the local mate. Thus the pair (a,b) is the required arrow isomorphism. This compares arrows without using their invertibility. Empty U gives the same comparisons in the zero module categories.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08EU locality and Tag 08FE restriction comparison",
+  "note": "J2: expansion of the local comparison, separating comparison of arrows from invertibility; explicit inverse-image geometry is constructed by the caller."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback tensor projection adjunction mate commutes with restriction to an open subset",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection adjunction mate commutes with open restriction as an isomorphism in the arrow category",
+   "results": "8 hits: underived restriction counit and pullback comparison, arrowResLEAppIso for scheme sections, and topological restriction formulas; no derived projection mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isIso_iff_isIso_of_isIso",
+   "results": "One exact generic arrow-isomorphism transfer lemma, useful to consume the comparison, but it does not construct it.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]rojection|[Pp]rojection.*derived",
+   "results": "Two unrelated Mathlib.CategoryTheory.Monad.Algebra projection-lemma comments; no derived projection restriction comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EU local reduction used by the derived projection formula; the parent node proof step 1 (restriction of the canonical projection map) and step 4 (transport of localizations).",
+   "via": [
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-pc-proper-support-derived-projection-formula",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedProjectionMateOpenRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedProjectionMate_openRestriction_comparison",
+  "statement": "theorem exists_derivedProjectionMate_openRestriction_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (p : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅\n      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X))\n    (M : schemeDerivedQCohCategory Y) (L : schemeDerivedQCohCategory X)\n    (U : Y.Opens)\n    (Z : Scheme.{u}) (g : Z ⟶ U.toScheme)\n    (hZ : Z = (f ⁻¹ᵁ U).toScheme) (hg : HEq g (f ∣_ U)) :\n    letI : HasDerivedCategory.{u}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=\n        inferInstance\n    letI : HasDerivedCategory.{u}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) := inferInstance\n    ∃ (q : derivedPullback g ⊣ schemeDerivedDirectImage g)\n        (s : tensor (schemeDerivedCategory U.toScheme) ⋙ derivedPullback g ≅\n          (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory Z))\n        (N : schemeDerivedQCohCategory U.toScheme) (E : schemeDerivedQCohCategory Z),\n        Nonempty (Arrow.mk ((schemeOpenRestriction Y U).mapDerivedCategory.map\n          (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)\n            ((derivedPullback f).obj M.obj ⊗ L.obj)\n              (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫\n                (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))) ≅\n          Arrow.mk (q.homEquiv (N.obj ⊗ (schemeDerivedDirectImage g).obj E.obj)\n            ((derivedPullback g).obj N.obj ⊗ E.obj)\n              (s.hom.app (N.obj, (schemeDerivedDirectImage g).obj E.obj) ≫\n                (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj))))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T111856-L-3053766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T111856-L-3053766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

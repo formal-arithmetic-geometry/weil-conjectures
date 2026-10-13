@@ -1,0 +1,86 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under the Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group J2
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Comma.Arrow
+
+/-! # Open restriction comparison for derived projection mates
+
+Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
+(blueprint: lem-pc-derived-projection-mate-open-restriction-comparison).
+-/
+
+@[expose] public section
+
+universe u w
+open CategoryTheory MonoidalCategory
+namespace AlgebraicGeometry
+
+/-- Restriction of a projection mate to a target open is isomorphic, as an
+arrow, to a projection mate for the inverse-image source over that open, using the
+shared small localizations.
+This is a comparison statement; it does not assert that either mate is invertible.
+
+Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
+(blueprint: lem-pc-derived-projection-mate-open-restriction-comparison).
+
+Proof: use hZ and hg to identify Z with the inverse image of U and g with the
+restricted morphism. No compactness or quasi-separatedness is needed for this comparison.
+Restriction of quasi-coherent cohomology remains quasi-coherent. Use the exact open
+restriction functors and the direct-image/open-restriction comparison of Tag 08FE.
+Tensor and pullback commute with these restrictions. Open restriction on derived
+categories is a localization with fully faithful right adjoint. Evaluate the supplied
+tensor comparison on these right adjoints and use the localization counits to descend
+it to Z and U. Descend the adjunction in the same way. Naturality of the supplied
+tensor comparison and the formula for the adjunction Hom equivalence identify the
+restricted mate with the descended mate, conjugated by the object comparison maps.
+Change both local derived categories to their shared small localizations by uniqueness
+of localization; the K-flat tensor and derived-functor universal properties transport
+all the comparisons. Write rX and rY for the restrictions, N = rY(M), E = rX(L).
+The source comparison a identifies rY(M tensor Rf(L)) with N tensor Rg(E).
+The target comparison b identifies rY(Rf(F(M) tensor L)) with Rg(Fg(N) tensor E).
+Expand p.homEquiv(v) as p.unit followed by Rf(v); the restriction comparisons
+carry the unit and counit to those of q. Naturality of t at the localization
+units then gives rY(pi) followed by b = a followed by the local mate.
+Thus a and b define the required arrow isomorphism. The two object comparisons give
+an isomorphism in the arrow category. No invertibility of a projection mate is used.
+If U is empty, Z is empty and the same localization and restriction comparisons apply. -/
+theorem exists_derivedProjectionMate_openRestriction_comparison
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (p : derivedPullback f ⊣ schemeDerivedDirectImage f)
+    (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅
+      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X))
+    (M : schemeDerivedQCohCategory Y) (L : schemeDerivedQCohCategory X)
+    (U : Y.Opens)
+    (Z : Scheme.{u}) (g : Z ⟶ U.toScheme)
+    (hZ : Z = (f ⁻¹ᵁ U).toScheme) (hg : HEq g (f ∣_ U)) :
+    letI : HasDerivedCategory.{u}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+        inferInstance
+    letI : HasDerivedCategory.{u}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) := inferInstance
+    ∃ (q : derivedPullback g ⊣ schemeDerivedDirectImage g)
+        (s : tensor (schemeDerivedCategory U.toScheme) ⋙ derivedPullback g ≅
+          (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory Z))
+        (N : schemeDerivedQCohCategory U.toScheme) (E : schemeDerivedQCohCategory Z),
+        Nonempty (Arrow.mk ((schemeOpenRestriction Y U).mapDerivedCategory.map
+          (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
+            ((derivedPullback f).obj M.obj ⊗ L.obj)
+              (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
+                (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))) ≅
+          Arrow.mk (q.homEquiv (N.obj ⊗ (schemeDerivedDirectImage g).obj E.obj)
+            ((derivedPullback g).obj N.obj ⊗ E.obj)
+              (s.hom.app (N.obj, (schemeDerivedDirectImage g).obj E.obj) ≫
+                (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj)))) := by sorry
+
+end AlgebraicGeometry

@@ -17,38 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Form the canonical projection map using derived adjunction and the K-flat tensor comparison. Restriction of this canonical map is the canonical map for the restricted morphism. Detect its invertibility on an affine cover of Y.",
+   "text": "Obtain the existing derived adjunction and a canonical monoidal model of derived pullback. The inverse tensorator natural isomorphism supplies t. Form its projection mate phi by transposing t followed by tensor with the adjunction counit. Use the shared derived tensor symmetries to conjugate phi into the order of the displayed projection map psi.",
    "uses": [
     "lem-pc-ringed-spaces-derived-adjoint",
     "def-pc-derived-pullback-monoidal-model",
+    "lem-sc-scheme-derived-tensor-symmetry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cover Y by all affine opens, using exists_isAffineOpen_mem_and_subset. For each U construct Z=(f inverse U).toScheme and g=f restricted to U. Its quasi-compactness and quasi-separatedness are inherited from f. Since U is affine, Mathlib QuasiCompact.compactSpace_of_compactSpace and quasiSeparatedSpace_of_quasiSeparated give the global qcqs hypotheses on Z. Apply the open restriction comparison, with hZ=rfl and hg=HEq.rfl, to obtain an arrow isomorphism to a local projection mate.",
+   "uses": [
+    "lem-pc-derived-projection-mate-open-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing qcqs derived projection mate theorem to Z and U in the shared small localization universe u. Both schemes are globally qcqs. Transfer IsIso through the arrow isomorphism using Arrow.isIso_iff_isIso_of_isIso. Exact restriction maps the two symmetry isomorphisms to isomorphisms; Functor.map_comp proves that the restricted conjugate psi is invertible.",
+   "uses": [
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-sc-scheme-derived-tensor-symmetry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply projectionFormula_isIso_iff_openCover to psi and this affine open cover. The preceding local invertibility proves IsIso psi. Return asIso psi, whose two objects are definitionally the objects in the unchanged statement.",
+   "uses": [
     "lem-pc-projection-locality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On Y=Spec A, identify D_QCoh(Y) with D(A). For fixed E the class of K making the map invertible is closed under coproducts because pullback and tensor preserve coproducts and qcqs direct image preserves quasi-coherent coproducts. The tensor input remains quasi-coherent. Exactness and the canonical shift compatibility make this class closed under distinguished triangles.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-sc-derived-tensor-right-coproducts",
-    "lem-pc-derived-direct-image-preserves-direct-sums",
-    "lem-pc-derived-pullback-tensor-qcoh"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The map is invertible for every shift of the structure sheaf by the adjunction triangle identity and tensor unit comparison. Generation of D(A) by shifts of A proves invertibility for all K. On an affine cover use the preceding detection and take asIso of the canonical map.",
-   "uses": [
-    "lem-pc-derived-module-free-generation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The entire construction uses the supplied localizations; alternatively carry out the K-flat and K-injective computations in standard localizations and transport by Localization.uniq. Their derived universal properties identify pullback and direct image, while K-flat tensor models identify tensor. This gives precisely the displayed objects.",
-   "uses": [
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   }
@@ -56,22 +51,16 @@
  "proof_deps": [
   "lem-pc-ringed-spaces-derived-adjoint",
   "def-pc-derived-pullback-monoidal-model",
-  "lem-pc-projection-locality",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-sc-derived-tensor-right-coproducts",
-  "lem-pc-derived-direct-image-preserves-direct-sums",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-derived-module-free-generation",
-  "def-pc-derived-category",
-  "def-pc-derived-pullback",
-  "def-pc-derived-direct-image",
-  "def-pc-scheme-derived-tensor-structure"
+  "lem-sc-scheme-derived-tensor-symmetry",
+  "lem-pc-derived-projection-mate-open-restriction-comparison",
+  "lem-pc-qcqs-derived-projection-mate",
+  "lem-pc-projection-locality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 08EU, Lemma 36.22.1, applied to the fixed derived functors",
-  "note": "U3: comparison packaging of the cited source proof for fixed derived localizations."
+  "place": "Tag 08EU, Lemma 36.22.1, local reduction and affine projection formula",
+  "note": "J2: compiling reduction to the existing qcqs mate theorem and one strictly local arrow-comparison obligation. Geometry, tensor-order conjugation, arrow-isomorphism transfer and open-cover detection are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -165,9 +154,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T100151-L-2494144",
+  "landing": "20261013T111856-L-3053766",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

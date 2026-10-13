@@ -11,6 +11,13 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
+import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
+import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
+import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionMate
+import Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison
+
 /-! # The derived qcqs projection isomorphism in fixed localizations
 
 Source: Stacks Project, Tag 08EU, Lemma 36.22.1.
@@ -53,6 +60,42 @@ theorem nonempty_qcqs_derivedProjection_iso_universes
     (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)
     (K : schemeDerivedCategory Y) (hK : schemeDerivedQCohProperty Y K) :
     Nonempty (((schemeDerivedDirectImage f).obj E) ⊗ K ≅
-      (schemeDerivedDirectImage f).obj (E ⊗ (derivedPullback f).obj K)) := by sorry
+      (schemeDerivedDirectImage f).obj (E ⊗ (derivedPullback f).obj K)) := by
+  classical
+  obtain ⟨p⟩ := nonempty_derivedPullbackAdjunction f
+  obtain ⟨m, _⟩ := exists_derivedPullbackMonoidalModel f
+  let := m.toMonoidal
+  let t := (Functor.Monoidal.μNatIso (derivedPullback f)).symm
+  obtain ⟨sX, _⟩ := exists_schemeDerivedTensorSymmetry X
+  obtain ⟨sY, _⟩ := exists_schemeDerivedTensorSymmetry Y
+  let φ := p.homEquiv (K ⊗ (schemeDerivedDirectImage f).obj E)
+    ((derivedPullback f).obj K ⊗ E)
+      (t.hom.app (K, (schemeDerivedDirectImage f).obj E) ≫
+        (𝟙 ((derivedPullback f).obj K) ⊗ₘ p.counit.app E))
+  let ψ := (sY ((schemeDerivedDirectImage f).obj E) K).hom ≫ φ ≫
+    (schemeDerivedDirectImage f).map (sX ((derivedPullback f).obj K) E).hom
+  have hcover : ∀ y : Y, ∃ U : Y.affineOpens, y ∈ U.1 := by
+    intro y
+    obtain ⟨U, hU, hy, _⟩ :=
+      exists_isAffineOpen_mem_and_subset (X := Y) (U := ⊤) (x := y) (by trivial)
+    exact ⟨⟨U, hU⟩, hy⟩
+  have hψ : IsIso ψ := by
+    apply (projectionFormula_isIso_iff_openCover f E K Y.affineOpens
+      (fun U ↦ U.1) hcover ψ).mpr
+    intro U
+    let Z := (f ⁻¹ᵁ U.1).toScheme
+    let g := f ∣_ U.1
+    have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace g
+    have : QuasiSeparatedSpace Z := quasiSeparatedSpace_of_quasiSeparated g
+    obtain ⟨q, s, N, L, ⟨a⟩⟩ :=
+      exists_derivedProjectionMate_openRestriction_comparison f p t ⟨K, hK⟩ ⟨E, hE⟩
+        U.1 Z g rfl HEq.rfl
+    have hlocal := qcqsDerivedProjectionMate_isIso.{u, u} Z U.1.toScheme g q s N L
+    have hφ : IsIso ((schemeOpenRestriction Y U.1).mapDerivedCategory.map φ) :=
+      (Arrow.isIso_iff_isIso_of_isIso a.hom).mpr hlocal
+    dsimp only [ψ]
+    rw [Functor.map_comp, Functor.map_comp]
+    infer_instance
+  exact ⟨asIso ψ⟩
 
 end AlgebraicGeometry
