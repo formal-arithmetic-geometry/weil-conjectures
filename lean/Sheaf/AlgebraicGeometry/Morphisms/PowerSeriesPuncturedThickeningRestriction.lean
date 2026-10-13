@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso
 
 /-!
 # Restriction to a punctured power-series thickening
@@ -55,6 +56,8 @@ theorem bijective_powerSeries_punctured_thickening_restriction
       ((ΓSpecIso (.of (MvPowerSeries (Fin d) A ⧸ FiniteEtale.Adic.ideal
         (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n))).inv ≫
         (pullback.snd V.ι (FiniteEtale.Adic.baseMap
-          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n)).appTop).hom := by sorry
+          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n)).appTop).hom := by
+  exact (ConcreteCategory.isIso_iff_bijective _).mp
+    (isIso_powerSeries_punctured_thickening_restriction A hdepth d hd V hV n)
 
 end AlgebraicGeometry.Scheme

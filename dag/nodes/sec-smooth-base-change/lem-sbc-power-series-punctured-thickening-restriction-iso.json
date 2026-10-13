@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-power-series-punctured-thickening-restriction-iso",
+ "kind": "statement",
+ "title": "Categorical isomorphism for sections of a punctured power-series thickening",
+ "statement": "Under the hypotheses of lem-sbc-power-series-punctured-thickening-restriction, the canonical morphism from the quotient affine scheme to sections on the punctured thickening is an isomorphism in CommRingCat.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed calculation at a fixed index."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The fixed-index geometric calculation identifies sections of the finite thickening with the quotient ring via depth-two Hartogs and the finite monomial basis.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identification is the canonical restriction morphism, hence that morphism is an isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "proof_origin": {
+  "kind": "decomposition",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, categorical reformulation of the fixed-index restriction comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism sections punctured power series thickening quotient",
+   "results": "No exact match; substantial geometric comparison remains.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ((ΓSpecIso _).inv ≫ (pullback.snd _ _).appTop)",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "powerSeries punctured thickening restriction isIso",
+   "results": "Only this decomposition and the bijective target were found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-power-series-punctured-thickening-restriction",
+   "place": "Categorical reformulation used to derive the Function.Bijective target."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedThickeningRestrictionIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_powerSeries_punctured_thickening_restriction",
+  "statement": "theorem isIso_powerSeries_punctured_thickening_restriction\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (n : ℕ) :\n    IsIso\n      ((ΓSpecIso (.of (MvPowerSeries (Fin d) A ⧸ FiniteEtale.Adic.ideal\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n))).inv ≫\n        (pullback.snd V.ι (FiniteEtale.Adic.baseMap\n          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n)).appTop)",
+  "by": "J4",
+  "date": "2026-10-13",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T152730-L-1015822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T152730-L-1015822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
