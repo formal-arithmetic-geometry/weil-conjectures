@@ -26,9 +26,67 @@
   "def-weil-size-convention",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-proetale-affine-wcontractible-covering-family], choose a covering family $\\{U_i\\to T\\}_{i\\in I}$ whose members are affine and weakly contractible for the full site.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0990, lemma-proetale-enough-w-contractible"
+   }
+  },
+  {
+   "text": "Choose a finite affine open covering $T=\\bigcup_{a=1}^r A_a$, using quasi-compactness. For each $A_a$, the covering definition [def-weil-pbc-proetale-covering] supplies finitely many affine opens $W_{ab}\\subset U_{i(a,b)}$ with images whose union is exactly $A_a$. Retain the finite set $J$ of all indices $i(a,b)$. The maps $W_{ab}\\to A_a$ form a pro-etale covering by the same affine-open criterion: over a principal open $D(h)\\subset A_a$, use the principal affine opens $D(f_{ab}^*h)\\subset W_{ab}$; an arbitrary affine open of $A_a$ has a finite covering by such principal opens. Thus the required affine witnesses exist for every affine open; composing these coverings with the Zariski covering of $T$ gives a covering refining $\\{U_j\\to T\\}_{j\\in J}$, so this retained family covers. These are the composition and refinement axioms of the site [def-weil-pbc-proetale-site]. If $T=\\varnothing$, take $J=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F4P, lemma-weakly-contractible-cover, finite-subfamily paragraph; elementary finite-witness argument"
+   }
+  },
+  {
+   "text": "Form $V=\\coprod_{j\\in J}U_j$. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], each affine $U_j$ is qcqs and this finite coproduct is an affine object of the full site. Let $f:V\\to T$ be induced by the covering arrows. It is weakly etale by [def-weil-weakly-etale-morphism]: at each point of $V$, flatness of $f$ is flatness of the corresponding $U_j\\to T$; its diagonal on the open-and-closed piece $U_j\\times_TU_k$ is the diagonal of $U_j\\to T$ if $j=k$, and has empty source otherwise, hence is flat. For any affine open $A\\subset T$, the affine opens witnessing the covering criterion for the retained family are also affine opens of $V$, with the same images. Thus [def-weil-pbc-proetale-covering] makes $\\{V\\to T\\}$ a covering. For $J=\\varnothing$ and $T=\\varnothing$, flatness and the covering criterion are vacuous.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F4P, disjoint-union paragraph; Tag 09A1, qcqs subsite paragraph"
+   }
+  },
+  {
+   "text": "Let $F\\to G$ be any epimorphism of sheaves of sets on the full site. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], the restriction maps identify $F(V)$ and $G(V)$ naturally with $\\prod_{j\\in J}F(U_j)$ and $\\prod_{j\\in J}G(U_j)$. Given $(g_j)$, choose a preimage $f_j$ of each $g_j$ using weak contractibility of $U_j$ from step 1. The tuple $(f_j)$ then maps to $(g_j)$. If $J$ is empty both products are singletons and their unique map is surjective. Hence $F(V)\\to G(V)$ is surjective and $V$ is weakly contractible.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F4P, disjoint-union paragraph; Tag 090L, definition-w-contractible"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "def-weil-weakly-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0F4P, lemma-weakly-contractible-cover"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,12 +125,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-affine-acyclic-hypercover",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-qc-affine-contractible-cover",
+  "worker": "stage1",
+  "summary": "Choose an affine weakly contractible covering family (0990), extract a finite subfamily by explicit covering witnesses, form its affine coproduct, verify the singleton covering criterion, and prove weak contractibility using the natural section-product formula.",
+  "blueprint": "Realizes thm-weil-pbc-qbar proof paragraph 1 clause on constructing affine weakly contractible covers."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-45dffc326",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-45dffc326 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources: Stacks 0990/098I supply the covering family; 0F4P and 090K/090L validate all four steps, including empty and non-quasi-separated cases. No duplicate or restated split found. Corrected new-node creation metadata, blueprint ancestry, and audit defaults. Concrete checks and inherited DAG limitations are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
