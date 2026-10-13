@@ -9,51 +9,60 @@
  },
  "proof": [
   {
-   "text": "(Proof of (2): the induction and the reduction to extensions without intermediate fields.) For every finite extension $L/K$ and every $\\alpha$, $L^p\\subseteq L^pK_\\alpha$, so $L^p\\subseteq\\bigcap_\\alpha L^pK_\\alpha$ (intersection taken in $L$, the empty intersection being $L$); we prove the reverse inclusion by induction on $d=[L:K]$, for all fields $K$ of characteristic $p$, all families $(K_\\alpha)$ satisfying (i)-(iii) and all $L/K$ with $[L:K]=d$ simultaneously. If $d=1$, $L=K$ and $K^pK_\\alpha=K_\\alpha$ by (i), so $\\bigcap_\\alpha K^pK_\\alpha=K^p$ by (ii). Let $d>1$. Suppose first that there is an intermediate field $K\\subsetneq M\\subsetneq L$. By [lem-weil-pbc-field-degree-multiplicativity] $[L:K]=[L:M][M:K]$ with both factors $>1$, so $[M:K]<d$ and $[L:M]<d$. Put $M_\\alpha=M^pK_\\alpha\\subseteq M$. By induction for $M/K$, $M^p=\\bigcap_\\alpha M_\\alpha$. The family $(M_\\alpha)$ of subfields of the field $M$ (of characteristic $p$) satisfies (i)-(iii): $M^p\\subseteq M_\\alpha$; $M^p=\\bigcap_\\alpha M_\\alpha$; and if $K_{\\alpha''}\\subseteq K_\\alpha\\cap K_{\\alpha'}$ then $M_{\\alpha''}\\subseteq M_\\alpha\\cap M_{\\alpha'}$. By induction for $L/M$ and $(M_\\alpha)$, $L^p=\\bigcap_\\alpha L^pM_\\alpha$, and $L^pM_\\alpha=L^pK_\\alpha$ since $M^p\\subseteq L^p$. Suppose now that $K$ and $L$ are the only intermediate fields. Choose $\\theta\\in L\\setminus K$; then $K(\\theta)$ (the smallest subfield of $L$ containing $K$ and $\\theta$) is an intermediate field $\\ne K$, so $L=K(\\theta)$; every element of $L$ is algebraic over $K$ [def-weil-algebraic-element] (the $d+1$ elements $1,\\theta,\\ldots,\\theta^d$ of the $d$-dimensional $K$-space $L$ are linearly dependent). Either $\\theta^p\\notin K$ (Step 4) or $\\theta^p\\in K$ (Step 5); in both cases $\\bigcap_\\alpha L^pK_\\alpha\\subseteq L^p$, which completes the induction.",
+   "text": "If the index type is empty, the intersection hypothesis says K^p=K. Thus Frobenius is surjective on K, giving PerfectRing K p and PerfectField K. A finite extension is algebraic, so Mathlib Algebra.IsAlgebraic.perfectField gives PerfectField L, and PerfectRing.bijective_frobenius gives L^p=L. This proves the equality with the empty intersection directly. These are the perfect-field results of Mathlib.FieldTheory.Perfect, used directly in the Lean proof.",
    "uses": [
-    "lem-weil-pbc-field-degree-multiplicativity",
-    "def-pc-field-extension",
-    "def-weil-algebraic-element"
+    "def-pc-field-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), first paragraph ('Suppose that we have a tower L/M/K ... Hence it suffices to prove (2) for primitive field extensions having no nontrivial subfields'); the induction on [L:K] is set up explicitly"
+    "place": "Tags 07P4 (lemma-intersection-subfields), proof of (2), and 07P3 (lemma-intersection-subfields-subspace); homogeneous coefficient descent instead of degree induction"
    }
   },
   {
-   "text": "(Case $\\theta^p\\notin K$.) Put $\\varphi=\\theta^p\\in L^p$. $K(\\varphi)$ is an intermediate field containing $\\varphi\\notin K$, so $K(\\varphi)=L$. By [lem-weil-pbc-simple-algebraic-extension-power-basis] for $\\theta$ and for $\\varphi$, both $1,\\theta,\\ldots,\\theta^{d-1}$ and $1,\\varphi,\\ldots,\\varphi^{d-1}$ are $K$-bases of $L$, $d=[L:K]$. The Frobenius $F:L\\to L^p$, $b\\mapsto b^p$, is a ring isomorphism mapping $K$ onto $K^p$ and $F(\\sum_jc_j\\theta^j)=\\sum_jc_j^p\\varphi^j$, so $L^p=\\{\\sum_{j<d}a_j\\varphi^j:a_j\\in K^p\\}$. Fix $\\alpha$ and put $W_\\alpha=\\{\\sum_{j<d}a_j\\varphi^j:a_j\\in K_\\alpha\\}$. It is a $K_\\alpha$-subspace of $L$ containing $K_\\alpha$ and, by (i), $L^p$; it is closed under multiplication by $\\varphi$ because $\\varphi\\cdot\\varphi^{d-1}=\\varphi^d\\in L^p\\subseteq W_\\alpha$, hence it is a subring. It is a field: for $0\\ne x\\in W_\\alpha$, $y\\mapsto xy$ is an injective $K_\\alpha$-linear endomorphism of the finite-dimensional $K_\\alpha$-space $W_\\alpha$ ($L$ is a field), hence surjective, so $x^{-1}\\in W_\\alpha$. Every subfield of $L$ containing $L^p$ and $K_\\alpha$ contains $W_\\alpha$; so $L^pK_\\alpha=W_\\alpha$. Let $x\\in\\bigcap_\\alpha L^pK_\\alpha$ and write $x=\\sum_{j<d}c_j\\varphi^j$ with $c_j\\in K$, uniquely. For each $\\alpha$, $x\\in W_\\alpha$ gives $x=\\sum_jc'_j\\varphi^j$ with $c'_j\\in K_\\alpha\\subseteq K$, and uniqueness gives $c_j=c'_j\\in K_\\alpha$. So $c_j\\in\\bigcap_\\alpha K_\\alpha=K^p$ by (ii), and $x\\in L^p$.",
+   "text": "For a nonempty index type, choose the finite K-basis e=Module.finBasis K L and set b_i=e_i^p. Applying Frobenius to the basis expansion proves that L^p consists exactly of sums sum a_i b_i with a_i in K^p. Such sums are independent over K^p: choose p-th roots c_i in K; a zero sum is (sum c_i e_i)^p=0, so Frobenius injectivity and the original basis independence give c_i=0, hence a_i=0. Both facts are proved directly in the importing module. Apply [lem-weil-pbc-frobenius-basis-compositum] to identify L^p K_alpha with the K_alpha-span of the b_i; no independence over K_alpha is assumed.",
    "uses": [
-    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-frobenius-basis-compositum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), the case 'L = K(theta) separable over K. Then L is generated by theta^p over K ... L^p = K^p + K^p theta + ... and L^pK_alpha = K_alpha + K_alpha theta + ...'; the case split is by whether theta^p lies in K, which avoids separability, and the identification of L^pK_alpha and the intersection are written out"
+    "place": "Tags 07P4 (lemma-intersection-subfields), proof of (2), and 07P3 (lemma-intersection-subfields-subspace); homogeneous coefficient descent instead of degree induction"
    }
   },
   {
-   "text": "(Case $\\theta^p\\in K$.) Put $t=\\theta^p\\in K$. Then $t\\notin K^p$: if $t=s^p$ with $s\\in K$ then $(\\theta-s)^p=\\theta^p-s^p=0$, so $\\theta=s\\in K$. By [lem-weil-pbc-simple-algebraic-extension-power-basis] every element of $L=K(\\theta)$ is $\\sum_{j<d}c_j\\theta^j$ with $c_j\\in K$, so $L^p=F(L)=\\{\\sum_{j<d}c_j^pt^j\\}$ is contained in the subring $K^p[t]$ of $K$ generated by $K^p$ and $t$; conversely $K^p\\subseteq L^p$ and $t=\\theta^p\\in L^p$. As $t^p\\in K^p$, $L^p=K^p[t]=\\{\\sum_{j<p}a_jt^j:a_j\\in K^p\\}$. For each $\\alpha$ let $U_\\alpha=\\{\\sum_{j<p}a_jt^j:a_j\\in K_\\alpha\\}\\subseteq K$; it contains $K_\\alpha$ and (by (i)) $L^p$, is closed under multiplication by $t$ since $t^p\\in K^p\\subseteq K_\\alpha$, hence is a subring, finite-dimensional over $K_\\alpha$, hence a subfield (as in Step 4), contained in every subfield containing $K_\\alpha$ and $L^p$: $L^pK_\\alpha=U_\\alpha$. (The source writes $U_\\alpha$ as a direct sum $\\bigoplus_{j<p}K_\\alpha t^j$; this fails when $t\\in K_\\alpha$, and the directedness (iii) is used instead.) By (ii) there is $\\alpha_0$ with $t\\notin K_{\\alpha_0}$. Claim: $1,t,\\ldots,t^{p-1}$ are linearly independent over $K_{\\alpha_0}$. Indeed $t$ is a root of $X^p-t^p\\in K_{\\alpha_0}[X]$; let $e=[K_{\\alpha_0}(t):K_{\\alpha_0}]$; by [lem-weil-pbc-simple-algebraic-extension-power-basis] $1,t,\\ldots,t^{e-1}$ is a $K_{\\alpha_0}$-basis of $K_{\\alpha_0}(t)$, so expressing $t^e$ in it gives a monic $m\\in K_{\\alpha_0}[X]$ of degree $e\\ge1$ with $m(t)=0$, and every $g\\in K_{\\alpha_0}[X]$ with $g(t)=0$ is divisible by $m$ (write $g=qm+r$ with $\\deg r<e$; $r(t)=0$ forces $r=0$). So $m$ divides $X^p-t^p=(X-t)^p$ in $K[X]$; since $K[X]$ is a unique factorization domain and $m$ is monic, $m=(X-t)^e$, whose coefficient of $X^{e-1}$ is $-e\\,t\\in K_{\\alpha_0}$. If $e<p$, $e$ is invertible in $\\mathbf F_p\\subseteq K_{\\alpha_0}$ and $t\\in K_{\\alpha_0}$, a contradiction; so $e=p$, proving the claim. Now let $x\\in\\bigcap_\\alpha U_\\alpha$ and write $x=\\sum_{j<p}c_jt^j$ with $c_j\\in K_{\\alpha_0}$ ($x\\in U_{\\alpha_0}$), uniquely by the claim. Given $\\alpha'$, choose by (iii) $\\alpha''$ with $K_{\\alpha''}\\subseteq K_{\\alpha'}\\cap K_{\\alpha_0}$; $x\\in U_{\\alpha''}$ gives $x=\\sum_jc''_jt^j$ with $c''_j\\in K_{\\alpha''}\\subseteq K_{\\alpha_0}$, so $c_j=c''_j\\in K_{\\alpha'}$. Hence $c_j\\in\\bigcap_{\\alpha'}K_{\\alpha'}=K^p$ by (ii), and $x\\in K^p[t]=L^p$.",
+   "text": "Let x belong to every L^p K_alpha. View F=K^p as the concrete subfield (frobenius K p).fieldRange and extend the scalar base of K_alpha to F. Their infimum is bottom by the intersection hypothesis and they remain downward directed. In K^(n+1), take the kernel of the K-linear map (a_1,...,a_n,t) to sum a_i b_i-t x (the Lean proof puts t in coordinate zero). For each alpha, the coefficient description provides a nonzero vector in this kernel with coordinates in K_alpha and t=1. Apply [lem-weil-pbc-intersection-subfields-subspace] to obtain a nonzero kernel vector with every coordinate in K^p.",
    "uses": [
-    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+    "lem-weil-pbc-intersection-subfields-subspace",
+    "lem-weil-pbc-frobenius-basis-compositum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), the case 'L = K(theta) with theta^p = t in K, t not in K^p ... Again the result is clear'; the decomposition L^pK_alpha = sum K_alpha t^j is not direct when t is in K_alpha, and the argument via (iii) is written out"
+    "place": "Tags 07P4 (lemma-intersection-subfields), proof of (2), and 07P3 (lemma-intersection-subfields-subspace); homogeneous coefficient descent instead of degree induction"
+   }
+  },
+  {
+   "text": "For this vector t cannot vanish: otherwise independence of the b_i over K^p, proved in Step 2, would make all a_i zero as well, contradicting nonzeroness. Divide its coefficients by t; since K^p is a subfield, the quotients still lie in K^p, and the kernel equation gives x=sum (a_i/t)b_i. The power-span characterization in Step 2 gives x in L^p. The opposite containment follows from the generators of each subfield closure. This completes the set equality without an induction on extension degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07P4 (lemma-intersection-subfields), proof of (2), and 07P3 (lemma-intersection-subfields-subspace); homogeneous coefficient descent instead of degree induction"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-field-degree-multiplicativity",
   "def-pc-field-extension",
-  "def-weil-algebraic-element",
-  "lem-weil-pbc-simple-algebraic-extension-power-basis"
+  "lem-weil-pbc-vector-space-free",
+  "lem-weil-pbc-frobenius-basis-compositum",
+  "lem-weil-pbc-intersection-subfields-subspace"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P4"
+  "place": "Tags 07P4 (lemma-intersection-subfields), proof of (2), and 07P3 (lemma-intersection-subfields-subspace); homogeneous coefficient descent instead of degree induction"
  },
  "status": "split",
  "created": {
@@ -141,12 +150,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T213040-L-1151387",
+  "landing": "20261013T113335-L-3180767",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
