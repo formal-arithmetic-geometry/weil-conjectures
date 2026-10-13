@@ -12,37 +12,40 @@
  },
  "proof": [
   {
-   "text": "Restrict N, apply the three open presentation hypotheses and use invertibility of the bounded-flat derived pullback counit (transported to the pinned counit by uniqueness of left-derived functors). The three canonical comparisons for the restrictions are isomorphisms.",
+   "text": "Obtain the two distinguished triangles with literal union, member and overlap comparison components from standardSingleFlatCounitUnionTriangles. Its hypotheses are exactly the three open presentation properties for this N.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback"
+    "new-pc-standard-single-flat-counit-union-triangles"
    ],
    "elementary": false
   },
   {
-   "text": "Construct relative Mayer--Vietoris triangles using K-injective resolutions and the short exact cover complexes, on the union and its base change. The underived open counit square identifies the degreewise comparison squares. Naturality of the short-exact boundary and transposition under the pullback/direct-image adjunction identify the connecting square. Thus the three comparisons form a morphism of triangles. Two-out-of-three gives invertibility of the union comparison. The argument uses the general sheaf-module presentation, without compactness or quasi-coherent direct-image assertions.",
+   "text": "The U and V comparisons give invertibility of their biproduct map (via biprod.mapIso). Transport along the second-component equality; transport overlap invertibility along the third-component equality. Apply Mathlib Pretriangulated.isIso₁_of_isIso₂₃ and the first-component equality to get invertibility of standardSingleBaseChangeMap on the union.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the supplied K, use bounded-above termwise flatness to obtain K-flatness, and then counit_isIso_kFlat to get invertibility of the pinned pullback counit at precisely K.",
    "uses": [
-    "lem-pc-kinjective-mayer-vietoris-presentation",
-    "lem-pc-mayer-vietoris-underived-open-counit-square"
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-isomorphism-pullback-counit"
    ],
    "elementary": false
   },
   {
-   "text": "The counit at the supplied bounded-flat K is invertible. The composite a=Lg*(e.hom) followed by this counit is invertible. Set t.hom=a inverse followed by the union comparison. This is invertible; cancelling a with its inverse gives the required factorization for this same K and e.",
-   "uses": [
-    "lem-pc-flat-complex-derived-pullback"
-   ],
-   "elementary": false
+   "text": "In the fully proved generic helper unionEquation_factor, form a=asIso of the pullback of e.hom followed by asIso of the pinned counit. Set t=a.symm followed by asIso of the union comparison; inverse cancellation gives the factorization. Apply this helper to the actual three geometric maps. No complex or representing isomorphism is replaced. The helper unionEquation_isIso_of_eq transports the triangle component equations without unfolding geometric maps.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-kinjective-mayer-vietoris-presentation",
-  "lem-pc-mayer-vietoris-underived-open-counit-square"
+  "new-pc-standard-single-flat-counit-union-triangles",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-isomorphism-pullback-counit"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0DJ9, relative Mayer--Vietoris induction step"
+  "place": "Tags 0DJ9, 06YD and 0D5S; C1 formal combination of triangle two-out-of-three, K-flat counit computation and inverse cancellation"
  },
  "mathlib_searches": [
   {
@@ -139,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T224515-L-1473798",
+  "landing": "20261013T231531-L-1815631",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,13 +1,49 @@
 module
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionTriangles
+import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+/-! # The counit factorization at a supplied union complex
+
+Source: Stacks Project, Tag 0DJ9, relative Mayer--Vietoris induction.
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem unionEquation_isIso_biprod_map
+    {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
+    {S T S' T' : C} {f : S ⟶ S'} {g : T ⟶ T'}
+    (hf : IsIso f) (hg : IsIso g) : IsIso (biprod.map f g) := by
+  let := hf
+  let := hg
+  change IsIso (biprod.mapIso (asIso f) (asIso g)).hom
+  infer_instance
+
+private theorem unionEquation_isIso_of_eq
+    {C : Type*} [Category C] {S T : C} {f g : S ⟶ T}
+    (h : f = g) (hf : IsIso f) : IsIso g := h ▸ hf
+
+private theorem unionEquation_factor
+    {C : Type*} [Category C] {S T W Z : C}
+    (f : S ⟶ T) (c : T ⟶ W) (m : S ⟶ Z)
+    (hf : IsIso f) (hc : IsIso c) (hm : IsIso m) :
+    ∃ t : W ≅ Z, m = f ≫ c ≫ t.hom := by
+  let := hf
+  let := hc
+  let := hm
+  let a := asIso f ≪≫ asIso c
+  refine ⟨a.symm ≪≫ asIso m, ?_⟩
+  simpa only [a, Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc] using
+    (Iso.hom_inv_id_assoc a m).symm
+
+set_option linter.unusedVariables false in
+-- Preserve the original names of the nondependent forall proof binders.
+set_option maxHeartbeats 800000 in
+-- The literal local comparison vertices require a larger elaboration budget.
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and
 counit data for a bounded flat union complex (Stacks, Tag 0DJ9).
 (blueprint: new-pc-standard-single-flat-counit-union-equation).
@@ -65,5 +101,23 @@ theorem standardSingleFlatCounitUnionEquation
         (derivedPullback g).map e.hom ≫
           (SingleComplexBaseChange.counit g).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫ t.hom := by
-  sorry
+  classical
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let := HasDerivedCategory.standard A.Modules
+  let := HasDerivedCategory.standard B.Modules
+  intro K hbounded hflat e
+  obtain ⟨d₁, d₂, d₃, d₁', d₂', d₃', hT, hT', φ, h₁, h₂, h₃, hU, hV, hUV⟩ :=
+    standardSingleFlatCounitUnionTriangles p g U V N hN hPU hPV hPUV
+  have hm : IsIso φ.hom₂ := h₂.symm ▸ unionEquation_isIso_biprod_map hU hV
+  have ho : IsIso φ.hom₃ := h₃.symm ▸ hUV
+  have hbc := unionEquation_isIso_of_eq h₁
+    (Pretriangulated.isIso₁_of_isIso₂₃ φ hT hT' hm ho)
+  have hK := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+    B.toRingedSpace K hbounded hflat
+  have hc := SingleComplexBaseChange.counit_isIso_kFlat g K hK
+  exact unionEquation_factor ((derivedPullback g).map e.hom)
+    ((SingleComplexBaseChange.counit g).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj K))
+    (standardSingleBaseChangeMap ((U ⊔ V).ι ≫ p) N g) (by infer_instance) hc hbc
 end AlgebraicGeometry
