@@ -1150,7 +1150,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Coyoneda
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Descent
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
@@ -1179,7 +1178,7 @@ public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
 public import WeilConjectures.Mathlib.Algebra.CharP.Lemmas
 public import WeilConjectures.Mathlib.Algebra.DirectSum.Internal
 public import WeilConjectures.Mathlib.Algebra.DirectSum.LinearMap
-public import WeilConjectures.Mathlib.Algebra.DirectSum.Telescope
+public import WeilConjectures.Mathlib.Algebra.DirectSum.Module
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
@@ -1380,7 +1379,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.AdjunctionMate
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise

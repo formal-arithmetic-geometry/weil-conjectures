@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.AdjunctionMate
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
@@ -146,7 +146,15 @@ lemma derivedSquareUpperStarIso_hom_app_Qh_obj (sq : CommSq g' f' f g)
 `M` of sheaves on `X`, the derived base change map `Lg^* Rf_* M ⟶ Rf'_* Lg'^* M`, read through
 the unit `f_* M ⟶ Rf_* M` and the counit `Lg'^* M ⟶ g'^* M`, is the degreewise underived base
 change map `g^* f_* M ⟶ f'_* g'^* M` followed by the unit `f'_* g'^* M ⟶ Rf'_* (g'^* M)`, through
-the counit `Lg^* (f_* M) ⟶ g^* f_* M`. -/
+the counit `Lg^* (f_* M) ⟶ g^* f_* M`:
+```
+Lg^* (f_* M) ──Lg^* (unit)──▶ Lg^* Rf_* M ──(base change)──▶ Rf'_* Lg'^* M
+     │                                                            │
+  counit                                                   Rf'_* (counit)
+     ▼                                                            ▼
+g^* f_* M ──(base change)──▶ f'_* g'^* M ──────unit──────▶ Rf'_* (g'^* M)
+```
+-/
 theorem derivedBaseChangeMap_app_fac (sq : CommSq g' f' f g)
     (M : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) :
     L((g)^*[A]).map ((f)_*[A].rightDerivedFunctorUnit.app

@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Products
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
-public import WeilConjectures.Mathlib.Algebra.DirectSum.Telescope
+public import WeilConjectures.Mathlib.Algebra.DirectSum.Module
 
 /-!
 # Telescopes and stupid truncations of complexes of modules
