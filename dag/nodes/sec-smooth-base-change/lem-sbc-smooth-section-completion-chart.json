@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-smooth-section-completion-chart",
+ "kind": "statement",
+ "title": "A flat completion chart respecting a smooth section",
+ "statement": "Let $B$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], $p:X\\to\\operatorname{Spec}B$ a smooth morphism [def-sbc-smooth-morphisms] of schemes [def-weil-pbc-scheme-conventions], and $s:\\operatorname{Spec}B\\to X$ a section, meaning $p\\circ s=\\mathrm{id}$. For $n\\geq0$, write $P_n=B[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series], $C_n:B\\to P_n$ for the constant-series map and $e_n:P_n\\to B$ for constant-coefficient evaluation. There are $n\\geq0$ and a flat morphism $t:\\operatorname{Spec}P_n\\to X$ [def-weil-flat-morphism] such that $p\\circ t=\\operatorname{Spec}C_n$ and $t\\circ\\operatorname{Spec}e_n=s$. Spectra are those of [def-weil-affine-spectrum].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, completion paragraph; Tag 05D5 (smooth algebra with split augmentation); Tag 00MB (flatness of Noetherian completion)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of s at the closed point. Its inverse image under s is all of Spec B, since an open containing the closed point of a local spectrum is the whole spectrum. Thus its smooth B-algebra C has an augmentation C to B splitting the structure map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Put I equal to the augmentation kernel. Tag 05D5 identifies I/I^2 with the pullback of the differentials module; it is finite projective over B and hence free. Choose lifts in I of a basis. The induced B-algebra map from the power-series ring to the I-adic completion is an isomorphism: it is an isomorphism modulo I^2; formal smoothness successively lifts the inverse modulo I^k; a map congruent to the identity modulo the next-highest power of the variables ideal is an automorphism, so the lifted inverse proves the induction. Take inverse limits. Evaluation at zero corresponds to the augmentation because all chosen lifts lie in I.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "C is Noetherian since it is finite type over B. The completion map is flat by Tag 00MB. Compose its spectrum map, transported along the B-algebra isomorphism, with the affine open immersion. The B-algebra structure gives the structure-map equality and the augmentation gives the equality of section morphisms. The proof includes rank zero.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, completion paragraph; Tag 05D5 (smooth algebra with split augmentation); Tag 00MB (flatness of Noetherian completion)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a smooth algebra along a section is a power series ring flat over the original algebra",
+   "results": "Algebra.Smooth.flat, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.of_isLocalization, RingHom.smooth_def",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism to the spectrum of a local Noetherian ring with a section has a flat chart by multivariate power series compatible with the section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*[Ff]lat|[Ff]lat.*generic|completion.*section|section.*completion",
+   "results": "Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/Topology/Algebra/LinearMapCompletion.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/Topology/UniformSpace/Completion.lean, Mathlib/Topology/UniformSpace/Completion.lean, Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/Analysis/InnerProductSpace/Completion.lean, Mathlib/Analysis/Normed/Group/HomCompletion.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYB, completion paragraph; Tag 05D5 (smooth algebra with split augmentation); Tag 00MB (flatness of Noetherian completion)",
+   "via": [
+    "lem-sbc-smooth-section-power-series-chart",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothSectionCompletionChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_section_completion_chart",
+  "statement": "theorem exists_smooth_section_completion_chart\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    {X : Scheme.{u}} (p : X ⟶ Spec (.of B)) [Smooth p]\n    (s : Spec (.of B) ⟶ X) (hs : s ≫ p = 𝟙 _) :\n    ∃ (n : ℕ) (t : Spec (.of (MvPowerSeries (Fin n) B)) ⟶ X), Flat t ∧\n      t ≫ p = Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n))) ∧\n      Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin n))) ≫\n        t = s",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-57c3a",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-57c3a",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481022",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and delivered proof match its node; both lower lemmas match their nodes and sources. Three delivered modules and direct importer ClosedFiberPowerSeriesTest compile cleanly; public imports remain available; axioms are permitted plus expected sorryAx."
+ }
+}

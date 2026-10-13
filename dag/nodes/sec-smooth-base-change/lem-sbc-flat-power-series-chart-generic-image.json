@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-flat-power-series-chart-generic-image",
+ "kind": "statement",
+ "title": "Generic closed-fibre image of a flat chart over the changed base",
+ "statement": "Let $A,B$ be commutative Noetherian local rings [def-weil-pbc-noetherian-ring], $\\varphi:A\\to B$ a local homomorphism, $q:L\\to\\operatorname{Spec}A$ a smooth scheme morphism [def-sbc-smooth-morphisms], and $X=L\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ [def-pc-fibre-product]. For $n\\geq0$ let $P=B[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series] and $C:B\\to P$ be the constant-series map. Suppose $t:\\operatorname{Spec}P\\to X$ is flat [def-weil-flat-morphism] and $\\operatorname{pr}_B\\circ t=\\operatorname{Spec}C$. There are a point $v\\in\\operatorname{Spec}P$ with prime ideal $\\mathfrak m_B P$, an affine open $V$ in the closed fibre $L_{\\mathfrak m_A}$, and $x\\in V$, such that $(\\operatorname{pr}_L\\circ t)(v)$ equals the image of $x$ in $L$, and the closure of $\\{x\\}$ in $V$ is an irreducible component of $V$. Spectra and scheme topology are those of [def-weil-affine-spectrum] and [def-weil-pbc-scheme-conventions]. Local means that the inverse image of the maximal ideal of B is the maximal ideal of A; no flatness of $\\varphi$ or section is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, sentence on the image of the extended maximal ideal; Tag 00HS (flat going down)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-fibre-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use finite generation of m_B to identify P/m_B P with kappa(B)[[X]]: lift coefficients for surjectivity and write coefficients in a fixed finite set of generators for the kernel equality. The quotient is a domain, including n=0, so m_B P defines v. Its contraction to B is m_B, and localness contracts that to m_A.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Restrict t by base change to the closed fibre over B. This is flat because t is flat over X. Identify the target with the original closed fibre of q base changed to kappa(B). Projection to the original closed fibre is flat since kappa(B) over kappa(A) is a field extension. Compose to obtain a flat map from the spectrum of the power-series domain over kappa(B) to the original fibre. Its zero-ideal point maps to the fibre point eta whose image in L is pr_L(t(v)).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine neighbourhood V of eta. Going down for the flat map shows that eta has no strict generalization: a generalization would lift to one of the zero-ideal point of the domain, which has none. In V this says its prime ideal is minimal. The closure of the corresponding point x is therefore an irreducible component of V. The fibre topology and residue-field base change used here are scheme-theoretic, not merely a topological factorization.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-going-down"
+ ],
+ "proof_origin": {
+  "kind": "agent-written",
+  "by": "R1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, sentence on the image of the extended maximal ideal; Tag 00HS (flat going down)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of schemes sends a generic point of the source to a generic point of an irreducible component of the target",
+   "results": "AlgebraicGeometry.Flat.generalizingMap, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.range_fromSpecStalk",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extended maximal ideal in a multivariate power series ring over a Noetherian local ring defines the generic point of its closed fiber",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries.*quotient|quotient.*MvPowerSeries|generalizingMap|exists_isOpen_nonempty_subset_irreducibleComponent",
+   "results": "Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYB, sentence on the image of the extended maximal ideal; Tag 00HS (flat going down)",
+   "via": [
+    "lem-sbc-smooth-section-power-series-chart",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatPowerSeriesChartGenericImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_flat_power_series_chart_generic_image",
+  "statement": "theorem exists_flat_power_series_chart_generic_image\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    (φ : A →+* B) [IsLocalHom φ]\n    (n : ℕ) (t : Spec (.of (MvPowerSeries (Fin n) B)) ⟶\n      Limits.pullback q (Spec.map (CommRingCat.ofHom φ))) [Flat t]\n    (ht : t ≫ Limits.pullback.snd q (Spec.map (CommRingCat.ofHom φ)) =\n      Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) :\n    ∃ (v : Spec (.of (MvPowerSeries (Fin n) B)))\n      (V : (q.fiber (IsLocalRing.closedPoint A)).Opens) (_ : IsAffineOpen V) (x : V),\n      v.asIdeal = (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n)) ∧\n      (t ≫ Limits.pullback.fst q (Spec.map (CommRingCat.ofHom φ))) v =\n        q.fiberι (IsLocalRing.closedPoint A) (V.ι x) ∧\n      closure ({x} : Set V) ∈ irreducibleComponents V",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-57c3a",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-57c3a",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481022",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and delivered proof match its node; both lower lemmas match their nodes and sources. Three delivered modules and direct importer ClosedFiberPowerSeriesTest compile cleanly; public imports remain available; axioms are permitted plus expected sorryAx."
+ }
+}

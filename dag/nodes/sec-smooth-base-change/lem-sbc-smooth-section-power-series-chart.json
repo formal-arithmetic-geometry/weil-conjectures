@@ -19,17 +19,39 @@
  ],
  "proof": [
   {
-   "text": "Base change q along Spec φ; the morphism s gives a section of that smooth scheme.\nChoose an affine chart containing its value at the closed point of B. Its inverse image\nunder the section is an open neighbourhood of the closed point of the local spectrum,\nso is all of Spec B. Thus the affine chart algebra has an augmentation to B. Its\nconormal module is finite projective, hence free over the local ring B. Tag 05D5\nidentifies completion along the augmentation ideal with B[[X_1,...,X_n]]. The chart\nalgebra is Noetherian, so completion is flat by 00MB. Compose with the affine chart\ninclusion and the flat base-change projection to get t. The augmentation gives the\nstated origin equality and the B-algebra structure gives the commuting square.\nThe ideal m_B B[[X]] is prime, since the quotient is the power-series domain over κ(B).\nIts point is generic in the completed closed fibre. Flatness of fibre completion and\nfield base change maps it to a generic point η of an irreducible component of the\noriginal smooth fibre. That fibre is locally Noetherian, so this component has a\nnonempty open W avoiding the other components. Every point of W specializes from η.\nThis argument includes n = 0 and assumes neither a dense open nor a depth bound.",
-   "uses": [],
+   "text": "Lift the given map s to a section s-prime of the smooth base change pullback(q, Spec phi) over Spec B, using the supplied commuting square. Apply the smooth-section completion-chart lemma to obtain n and a flat t-prime compatible with the structure map and the entire section.",
+   "uses": [
+    "lem-sbc-smooth-section-completion-chart"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Spec phi is flat by hflat. Thus its base-change projection to L is flat, and composing with t-prime gives the desired flat t. The pullback condition and the chart structure-map equality give the commuting square. Compose the equality of entire section morphisms with the other pullback projection and evaluate at the closed point of B to obtain the origin equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the generic-image lemma to the flat chart t-prime over the base-changed scheme. Obtain v with the prescribed extended maximal ideal and an affine open V in the original closed fibre, with x in V whose singleton closure is a component, and whose image is t(v).",
+   "uses": [
+    "lem-sbc-flat-power-series-chart-generic-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The smooth closed fibre is locally Noetherian, so V is Noetherian. Use Mathlib NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent (Stacks 0052(3)) to obtain a nonempty open W inside closure {x} in V. Its image under the open immersion V to the fibre is open and nonempty. Membership in closure {x} gives specialization from x, and continuity of the immersion maps this to specialization from eta=V.ι(x).",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-smooth-section-completion-chart",
+  "lem-sbc-flat-power-series-chart-generic-image"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G1",
+  "by": "R1",
   "document": "Stacks Project",
-  "place": "Tag 0EYB, completion and image of the extended maximal ideal; Tags 05D5 and 00MB"
+  "place": "Tag 0EYB completion paragraph, with 05D5, 00MB and affine Noetherian topology (0052(3)); categorical assembly formalized by R1"
  },
  "mathlib_searches": [
   {
@@ -124,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-57c3a",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T072348-L-1118824",
+  "landing": "20261013T100108-L-2481022",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged item signature and delivered proof match its node; both lower lemmas match their nodes and sources. Three delivered modules and direct importer ClosedFiberPowerSeriesTest compile cleanly; public imports remain available; axioms are permitted plus expected sorryAx."
  }
 }
