@@ -1,0 +1,158 @@
+{
+ "id": "lem-pc-open-pinned-single-degree-zero-target",
+ "kind": "statement",
+ "title": "Target comparison assembled from counit restriction and apex transport",
+ "statement": "For a cartesian square f,g,g′,f′ and V,W with W⊆g⁻¹V, there exists a natural target restriction isomorphism b satisfying the pinned degree-zero comparison equation with the explicitly constructed source isomorphism openPinnedSingleDegreeZeroSourceIso. This theorem is proved from counit restriction, isomorphic apex transport and the existing bare base-change calculation. Definitions and ingredients: [def-pc-fibre-product], [def-pc-n3-open-base-change-comparisons], [def-pc-open-pinned-single-degree-zero-source], [lem-pc-n3-open-base-change-calculation], [lem-pc-open-pinned-single-degree-zero-apex], [lem-pc-open-pinned-single-degree-zero-counit].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tags 08HY (mate construction), 08FE (open direct image), 08DW (pullback restriction); inherited argument of lem-pc-open-pinned-single-degree-zero-square."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-n3-open-base-change-comparisons",
+  "def-pc-open-pinned-single-degree-zero-source",
+  "lem-pc-n3-open-base-change-calculation",
+  "lem-pc-open-pinned-single-degree-zero-apex",
+  "lem-pc-open-pinned-single-degree-zero-counit"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib Scheme.Hom.isPullback_resLE to restrict the cartesian square and its isoPullback to identify the apex with the chosen pullback. Obtain t from the counit square. Whisker the explicit direct-image comparison and t to construct b₀. Use the existing bare base-change calculation and direct-image comparison naturality to move the counit through b₀. Cancel the constructed pullback comparison using the counit square. Prove and use base-change naturality to move the single restriction map to the source. Compose b₀ with the isomorphic apex target comparison and use its component equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-fibre-product",
+    "def-pc-n3-open-base-change-comparisons",
+    "def-pc-open-pinned-single-degree-zero-source",
+    "lem-pc-n3-open-base-change-calculation",
+    "lem-pc-open-pinned-single-degree-zero-apex",
+    "lem-pc-open-pinned-single-degree-zero-counit",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-fibre-product",
+  "def-pc-n3-open-base-change-comparisons",
+  "def-pc-open-pinned-single-degree-zero-source",
+  "lem-pc-n3-open-base-change-calculation",
+  "lem-pc-open-pinned-single-degree-zero-apex",
+  "lem-pc-open-pinned-single-degree-zero-counit",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Refinement of the inherited proof plan; explicit Lean assembly by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor pullback counit is compatible with restriction to opens and with isomorphic commutative squares",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change commutes with restriction to open subschemes and single complex tensor counits",
+   "results": "restrictFunctorComp, restrictFunctorAdjCounitIso, restrictFunctorIsoPullback; no derived pinned-counit theorem",
+   "verdict": "Constituents only; explicit source comparison uses these via existing constructions.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "Functor.mapDerivedCategorySingleFunctor and its component identities in ExactFunctor.lean",
+   "verdict": "Used in the source construction; no complete pinned square theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor counit compatibility with exact functor composition and localization",
+   "results": "CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app_assoc, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app",
+   "verdict": "Independent second reading: constituent identities only; no complete residual theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "verdict": "Independent second reading: constituent identities only; no complete residual theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical base change mate unchanged by replacing the top left vertex with an isomorphic scheme",
+   "results": "AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff",
+   "verdict": "Independent second reading: constituent identities only; no complete residual theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*counit|apex.*transport|baseChange.*naturality",
+   "results": "Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean, Mathlib/RingTheory/Coalgebra/Basic.lean, Mathlib/RingTheory/Coalgebra/Basic.lean, Mathlib/RingTheory/Coalgebra/Basic.lean, Mathlib/RingTheory/Coalgebra/Basic.lean, Mathlib/RingTheory/Coalgebra/Basic.lean, Mathlib/CategoryTheory/Skeletal.lean",
+   "verdict": "Independent second reading: constituent identities only; no complete residual theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_fac|leftDerivedUnique|conjugateEquiv_counit|homEquiv_naturality_left_square",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "verdict": "Independent second reading: constituent identities only; no complete residual theorem.",
+   "date": "2026-10-13",
+   "sub": "CategoryTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroSquare",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-pinned-single-degree-zero-square",
+   "place": "Target comparison assembled from counit restriction and apex transport"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroTarget",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPinnedSingleDegreeZeroTarget.lean",
+  "declaration": "AlgebraicGeometry.open_pinned_single_degree_zero_target",
+  "declarations": [
+   "AlgebraicGeometry.open_pinned_single_degree_zero_target"
+  ],
+  "statement": "theorem open_pinned_single_degree_zero_target\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g)\n    (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) :\n    ∃ b : singleDegreeBaseChangeTarget.{u, w} g' f' 0 ⋙\n        (schemeOpenRestriction S' W).mapDerivedCategory ≅\n      schemeOpenRestriction X (f ⁻¹ᵁ V) ⋙\n        singleDegreeBaseChangeTarget.{u, w} (pullback.fst (f ∣_ V) (g.resLE V W hWV))\n          (pullback.snd (f ∣_ V) (g.resLE V W hWV)) 0,\n    ∀ G : X.Modules,\n      (schemeOpenRestriction S' W).mapDerivedCategory.map\n          (singleDegreeBaseChangeComposite f g g' f' sq.w 0 G) ≫ b.hom.app G =\n        (openPinnedSingleDegreeZeroSourceIso f g V W hWV).hom.app G ≫\n          singleDegreeBaseChangeComposite (f ∣_ V) (g.resLE V W hWV)\n            (pullback.fst (f ∣_ V) (g.resLE V W hWV))\n            (pullback.snd (f ∣_ V) (g.resLE V W hWV)) pullback.condition 0\n            ((schemeOpenRestriction X (f ⁻¹ᵁ V)).obj G)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T143548-L-561653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T143548-L-561653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,11 +5,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes
+import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroTarget
 
 /-! # Degree-zero geometric open restriction square for pinned tensor counits
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
@@ -60,6 +56,9 @@ theorem open_pinned_single_degree_zero_square
       R.map (singleDegreeBaseChangeComposite f g g' f' sq.w 0 G) ≫ b.hom.app G =
         a.hom.app G ≫
           singleDegreeBaseChangeComposite fA gA p q pullback.condition 0
-            ((schemeOpenRestriction X U).obj G) := by sorry
+            ((schemeOpenRestriction X U).obj G) := by
+  dsimp
+  obtain ⟨b, hb⟩ := open_pinned_single_degree_zero_target f g g' f' sq V W hWV
+  exact ⟨openPinnedSingleDegreeZeroSourceIso f g V W hWV, b, hb⟩
 
 end AlgebraicGeometry
