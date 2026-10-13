@@ -16,30 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Cover X by opens with a free generator of L. Induct on tensorPowAddIso and tensorPowMulIso to show that their maps preserve the corresponding tensor-power generators; the unitors remove the tensor-unit generator. The inverse numerator identification consequently preserves coefficient functions.",
+   "text": "Import all Sheaf.AlgebraicGeometry.InvertibleSectionRing and reuse its proved private tensorPowAddIso_assoc_inv and eqToHom_app_heq rather than duplicating their statements. Induct on n to prove tensorPowMulIso_add_inv: the zero case is left-unitor naturality; the successor uses associator naturality, the induction hypothesis and the imported associativity theorem, reassociated with reassoc_of%. Thus regrouping d-fold blocks commutes with concatenation.",
    "uses": [
-    "def-sc-section-ring-veronese-fraction-map",
-    "def-sc-section-fraction-presentation"
+    "def-sc-invertible-module"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Locally write s=c times the degree-d generator and the numerator as f times its tensor-unit/tensor-power generator. homOfGlobalSection sends 1 to s and its b-th tensor power sends 1 to c^b times the degree-b*d generator. mulTensorPowSection and section-ring multiplication therefore both give coefficient f*c^b in degree (n+b)*d. Naturality identifies these calculations with restrictions; sheaf separatedness glues equality. This also proves the identity for d=0, n=0, b=0, or zero s, since no division occurs.",
+   "text": "Prove the transition for exponent one. Expand the numerator as its direct-sum injection after tensorPowMulIso inverse and the left unitor. The left unitor takes mulTensorPowSection to concatenation with tensorPowSectionOne. The exponent-one tensor section transported back by tensorPowMulIso is the original section: expand tensorPowMulIso at one, use tensorPowAddIso_zero_inv from InvertibleSectionRing, and apply the right unitor. DirectSum.of_mul_of and tensorPowMulIso_add_inv then identify the one-step numerator with multiplication by s. No ring_power_of theorem or general homogeneous power calculation is needed.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-invertible-section-ring",
+    "def-sc-section-ring-veronese-fraction-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on b. Import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower and reuse its proved private mulTensorPowSection_zero and mulTensorPowSection_comp. At b=0 the transition is the identity and the ring power is one. At b+1, composition with the one-step transition, the inductive numerator identity, pow_succ and ring associativity give the claimed formula. The associativity exponent transport in the composition theorem is definitionally the identity for its final exponent one. This works for d=0, n=0, b=0, and zero s. No hypotheses, definition, or unit route change.",
    "uses": [
     "def-sc-section-ring-veronese-fraction-map",
-    "def-sc-section-fraction-presentation"
+    "def-sc-invertible-section-ring",
+    "lem-sc-section-affine-open-kills-cohomology-localization-step"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
   "def-sc-section-ring-veronese-fraction-map",
-  "def-sc-section-fraction-presentation"
+  "lem-sc-section-affine-open-kills-cohomology-localization-step"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1; E4 repaired categorical coherence proof: import existing private coherence/transport lemmas from InvertibleSectionRing and transition composition/zero lemmas from FractionZeroTensorPower; prove the one-step numerator identity and induct on the transition exponent."
  },
  "mathlib_searches": [
   {
@@ -122,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T065119-L-901696",
-  "kind": "interface",
+  "landing": "20261013T095946-L-2456302",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
