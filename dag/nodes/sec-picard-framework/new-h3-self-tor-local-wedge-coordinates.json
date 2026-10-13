@@ -1,0 +1,149 @@
+{
+ "id": "new-h3-self-tor-local-wedge-coordinates",
+ "kind": "statement",
+ "title": "Local agreement on pure wedges in normalized self-Tor coordinates",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], $n\\in\\mathbf N$, $B=i_*\\mathcal O_Z$, $Q=i^*H^{-n}(B[0]\\otimes^{\\mathbf L}B[0])$ for the fixed derived tensor [def-pc-derived-category, def-pc-scheme-derived-tensor-structure], $N=i^*\\ker(i)$ [def-pc-module-pullback, def-sbc-closed-immersion-ideal-sheaf], and $E=\\bigwedge^n N$ [def-sc-sheaf-exterior-power]. For each affine open $U$ of $Y$, put $A_U=\\Gamma(Y,U)$, $I_U=i.\\mathrm{ker}.\\mathrm{ideal}(U)$, $O_U=i^{-1}U$, and let $T_U$ be associated-sheaf formation on $\\operatorname{Spec}(A_U)$ followed by affine chart restriction, open pushforward, and tensor pullback by $i$. Let $c_U$ be the normalized comparison from the exterior conormal module to $\\operatorname{Tor}^{A_U}_n(A_U/I_U,A_U/I_U)$ [new-r4-self-tor-conormal-comparison]. There exist families of isomorphisms $s_U:E|_{O_U}\\cong T_U(\\operatorname{source}(c_U))|_{O_U}$ and $t_U:T_U(\\operatorname{target}(c_U))|_{O_U}\\cong Q|_{O_U}$. Define $\\varphi_U=s_U\\,T_U(c_U)\\,t_U$ in composition order. For affine opens $V\\subseteq U$, every open $W\\subseteq O_V$, every tuple $a:\\operatorname{Fin}(n)\\to\\Gamma(W,N)$, and every $x\\in W$, there exists an open $W'\\subseteq W$ containing $x$ such that the restrictions to $W'$ of $\\varphi_U(W)(\\bigwedge a)$ and $\\varphi_V(W)(\\bigwedge a)$ are equal. Here $\\bigwedge a$ is the canonical section of the sheafification of the sectionwise exterior power. Equality on arbitrary sections and equality of the component maps are not asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-sheaf-exterior-power",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Tags 09PQ (resolution-independent products), 01R3 (1),(2), and 06YH; parent proof steps 1-3, restricted to local evaluation of a single pure wedge."
+ },
+ "proof": [
+  {
+   "text": "On each affine U use the quotient presentation of the closed chart and sheafify a projective quotient resolution. Compare the resulting bounded-above flat cochain resolution with a K-flat representative of the fixed tensor; tensor with the quotient and take degree minus n homology. The ideal annihilates that homology, so tensor pullback gives the associated Tor sheaf, furnishing t_U.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine conormal sections theorem with identity ring coordinates. Its unit equation identifies each ideal class with its pulled-back kernel section. Exterior universal properties, restriction of exterior sheaves, and localization produce s_U. Use these resolution and conormal coordinates in every chart.",
+   "uses": [
+    "lem-sc-affine-open-kernel-conormal-sections",
+    "lem-sc-exterior-sheaf-restrict-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given nested V and U, W in i^-1 V, a tuple of n conormal sections on W, and a point x in W, refine near x by principal opens of U and V. Lift the finitely many conormal classes locally to ideal sections and clear their denominators on a common refinement. Flat localization preserves the quotient resolutions, augmentations, and homology. Lift each finite ideal tuple Koszul augmentation to the localized projective resolutions. The normalized comparison identifies the wedge-cycle image with its value on the corresponding conormal wedge. Homotopic lifts and resolution comparisons preserve this homology class, so the two charts agree on these ideal tuples. Expand the lifted sections using multilinearity with identical restricted scalar coefficients, and invert the cleared denominators; obtain the displayed equality on a neighbourhood W prime of x. No extension to arbitrary sheafified sections occurs in this step. The empty tuple uses the quotient unit; empty opens make the pointwise condition vacuous, and zero quotients, zero ideals, and nonregular ideals need no regular Koszul resolution.",
+   "uses": [
+    "new-r4-self-tor-conormal-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-open-kernel-conormal-sections",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-exterior-sheaf-restrict-iso",
+  "new-r4-self-tor-conormal-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Agent expansion of parent steps 1-3 to local pure-wedge evaluation; also Tags 01R3 and 06YH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul normalized self Tor comparison on pure wedges is compatible on local affine charts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|selfTor|conormal.*localiz",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul normalized self Tor comparison on pure conormal wedges is compatible with flat localization between affine charts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorNestedAffineCoordinates",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, affine Koszul self-coefficient calculation: parent coordinate construction and comparison only on a local pure wedge.",
+   "via": [
+    "new-e1-self-tor-nested-affine-coordinates",
+    "new-n1-self-tor-compatible-affine-maps",
+    "new-r4-self-tor-conormal-dual-chart-iso",
+    "lem-sc-self-tor-conormal-dual-chart",
+    "new-s3-koszul-conormal-nested-charts",
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover",
+    "lem-sc-koszul-self-ext-conormal-local-comparison",
+    "lem-sc-koszul-self-ext-conormal-comparison-surjection",
+    "lem-sc-koszul-self-ext-dual-exterior-conormal",
+    "lem-sc-koszul-self-ext-yoneda-surjection",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorLocalWedgeCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorLocalWedgeCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_local_wedge_selfTor_coordinates",
+  "statement": "theorem exists_local_wedge_selfTor_coordinates\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    let E := Scheme.Modules.exteriorSheaf\n      ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n\n    let T := fun U : Y.affineOpens ↦\n      tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n        Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    let c := fun U : Y.affineOpens ↦\n      selfTorConormalComparison (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    ∃ (s : ∀ U : Y.affineOpens,\n        E.over (i ⁻¹ᵁ U.1) ≅ ((T U).obj _).over (i ⁻¹ᵁ U.1))\n      (t : ∀ U : Y.affineOpens,\n        ((T U).obj _).over (i ⁻¹ᵁ U.1) ≅ Q.over (i ⁻¹ᵁ U.1)),\n      let φ := fun U ↦ (s U).hom ≫ ((T U).map (c U)).over (i ⁻¹ᵁ U.1) ≫ (t U).hom\n      ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)\n        (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)\n        (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))\n        (x : Z) (hx : x ∈ W),\n        ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧\n          Q.presheaf.map (homOfLE hW').op\n              ((φ U).val.app (op (Over.mk (homOfLE\n                (hW.trans ((TopologicalSpace.Opens.map i.base).monotone h)))))\n                (Scheme.Modules.exteriorSheafSection\n                  ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a)) =\n            Q.presheaf.map (homOfLE hW').op\n              ((φ V).val.app (op (Over.mk (homOfLE hW)))\n                (Scheme.Modules.exteriorSheafSection\n                  ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n W a))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T211106-L-393021",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T211106-L-393021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

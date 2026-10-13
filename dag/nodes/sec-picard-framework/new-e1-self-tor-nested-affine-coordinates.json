@@ -19,40 +19,34 @@
  },
  "proof": [
   {
-   "text": "For each affine U identify the closed chart with Spec(A/I). Sheafify a projective quotient resolution using exists_affine_quotient_sheafified_resolution. Tensoring with A/I computes the fixed K-flat derived tensor on U; resolution comparison identifies its homology with the associated Tor module. Tor is annihilated by I, so tensor pullback does not change its associated quotient-module sheaf. This constructs the target coordinate t_U.",
+   "text": "Take the affine coordinate families whose conjugated comparisons agree locally on every pure wedge, supplied by the local-wedge theorem. Fix nested V and U and an exterior-sheaf section x on i^-1 V.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-h3-self-tor-local-wedge-coordinates"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use affineOpen_kernel_conormal_sections with identity ring coordinates and the surjective affine closed-immersion section map. Its unit equation identifies ideal classes canonically with sections of the pulled-back kernel. Exterior universal properties give the source isomorphism on principal opens; localization and sheafification give s_U. Choose these conormal and resolution coordinates, not unrelated arbitrary isomorphisms.",
-   "uses": [
-    "lem-sc-affine-open-kernel-conormal-sections",
-    "lem-sc-exterior-sheaf-restrict-iso"
-   ],
-   "elementary": false
+   "text": "The sheafification unit of the sectionwise exterior presheaf is locally surjective. Its image sieve covers the smaller chart. On a member W of that sieve choose a presheaf lift z of the restriction of x. Naturality of the two over-site maps reduces equality of the restricted values of x to their values on the sheafification-unit image of z.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For V affine contained in U refine V by principal opens of U and then of V. Flat localization preserves quotient resolutions, homology, conormal classes and Koszul augmentation maps. Evaluate the normalized comparison on wedges of ideal classes; its normalization and uniqueness identify the two localized products. Multilinearity extends from ideal classes to localized tuples, and the wedges span the exterior module. Derived resolution comparison commutes with these maps. Target separatedness on the refinement gives equality of the maps on Γ(E,O_V). This yields only the nested top-component equation, not arbitrary overlap compatibility. The argument includes n=0, empty charts, zero quotients, the zero ideal and nonregular ideals.",
+   "text": "Pure wedges span the sectionwise exterior module. Apply Submodule.span_induction to z. Zero, addition and scalar multiplication follow from linearity of the unit and component maps. For a pure wedge, the supplied local-wedge agreement and target sheaf separatedness identify the two values on W. Target separatedness again, now on the image sieve, identifies the values of x on the entire smaller chart. ModuleCat.hom_ext yields the required component equality. This is the proved private exterior_over_component_ext lemma; no affine or quasi-coherence assumption is needed in that lemma.",
    "uses": [
-    "new-r4-self-tor-conormal-comparison"
+    "new-h3-self-tor-local-wedge-coordinates"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-open-kernel-conormal-sections",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-exterior-sheaf-restrict-iso",
-  "new-r4-self-tor-conormal-comparison"
+  "new-h3-self-tor-local-wedge-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E1",
+  "agent": "H3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-  "place": "Lemma 23.6.12; Tags 01R3 (1),(2), 06YH and preceding K-flat comparison construction; original node steps 1-3 through affine section naturality."
+  "place": "Parent plan reduced to local wedge calculation; Lean proof supplies span induction, local surjectivity of sheafification, and separatedness."
  },
  "mathlib_searches": [
   {
@@ -148,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T201745-L-3967702",
+  "landing": "20261013T211106-L-393021",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
