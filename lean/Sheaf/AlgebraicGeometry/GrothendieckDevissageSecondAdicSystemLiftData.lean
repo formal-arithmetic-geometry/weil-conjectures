@@ -1,8 +1,11 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.CategoryTheory.Functor.Currying
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Mathlib.CategoryTheory.Functor.OfSequence
+import Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
+import Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic
+import Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported
+import Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions
 
 @[expose] public section
 
@@ -10,6 +13,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+-- This data-only conclusion has unused original hypotheses and existential binder names.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the algebraized K-adic system and its comparison isomorphism.
 Source: Stacks Project, Tag 088A, construction of the systems G_e.
 (blueprint: lem-weil-pbc-devissage-second-adic-system-lift-data)
@@ -34,6 +40,50 @@ theorem grothendieckDevissage_secondAdicSystem_lift_data
     ∃ (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)
       (σ : N.obj ⋙ formalCompletionFunctor I ≅
         (M.obj ⋙ formalCompletionFunctor K).flip), True := by
-  sorry
+  classical
+  let B := (M.obj ⋙ formalCompletionFunctor K).flip
+  have halg (e : ℕ) :
+      ∃ (G : CoherentModules (K ^ (e + 1)).subscheme)
+        (hG : RingedSpace.IsCoherent X.toRingedSpace
+          ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj G.obj)),
+        Nonempty (formalCompletionSystem I
+          ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj G.obj) ≅ B.obj (op e)) := by
+    have hQ := formalSecondIdealQuotient_coherent I K M e
+    have hsupport := formalSecondIdealQuotient_supported I K M e
+    let Q : CoherentFormalModule X I := ⟨B.obj (op e), hQ⟩
+    obtain ⟨G, hG, ⟨β⟩⟩ := closedSupported_formal_algebraization
+      (K ^ (e + 1)).subschemeι I
+      (hthick (e + 1) (Nat.succ_le_succ (Nat.zero_le e)) _) Q hsupport
+    exact ⟨G, hG, ⟨(ObjectProperty.ι (IsCoherentFormalModule I)).mapIso β⟩⟩
+  choose G hG β using halg
+  let b (e : ℕ) := (β e).some
+  have ht := formalSecondIdealAlgebraization_transitions I K M hthick G b
+  have hzero (e : ℕ) := (ht e).1
+  choose t hq hb using fun e ↦ (ht e).2
+  let F : ℕᵒᵖ ⥤ X.Modules := Functor.ofOpSequence
+    (X := fun e ↦ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj) t
+  have hstep (e : ℕ) : F.map (homOfLE (Nat.le_succ e)).op = t e :=
+    Functor.ofOpSequence_map_homOfLE_succ
+      (X := fun e ↦ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj) t e
+  have hF : IsCoherentFormalModule K F := by
+    refine ⟨hG, hzero, ?_⟩
+    intro e
+    obtain ⟨q, hq⟩ := hq e
+    refine ⟨q, ?_⟩
+    rw [hstep]
+    exact hq
+  let N : CoherentFormalModule X K := ⟨F, hF⟩
+  let s : F ⋙ formalCompletionFunctor I ⟶ B :=
+    NatTrans.ofOpSequence (fun e ↦ (b e).hom) (by
+      intro e
+      change formalCompletionMap I
+        (F.map (homOfLE (Nat.le_succ e)).op) ≫ (b e).hom = _
+      rw [hstep]
+      exact hb e)
+  have (a : ℕᵒᵖ) : IsIso (s.app a) := by
+    change IsIso ((b a.unop).hom)
+    infer_instance
+  have : IsIso s := NatIso.isIso_of_isIso_app s
+  exact ⟨N, 0, asIso s, trivial⟩
 
 end AlgebraicGeometry

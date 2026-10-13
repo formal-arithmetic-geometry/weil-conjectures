@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-formal-second-ideal-quotient-supported",
+ "kind": "statement",
+ "title": "Second-ideal quotient systems are annihilated by the thickening ideal",
+ "statement": "Let X be a Noetherian scheme, I and K quasi-coherent ideal sheaves, M a coherent I-adic formal module [def-weil-pbc-coherent-formal-module], and e ≥ 0. Every term M_n/K^(e+1)M_n, using the recursive module quotient of that definition, is annihilated by the kernel ideal of the closed immersion V(K^(e+1)) → X. This is scheme-theoretic annihilation, including nilpotents.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, construction of G_e and their adjacent quotient maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "At each level the term is the cokernel quotient by the recursive K-power product. The existing private idealModuleProduct_quotient_zero theorem in CoherentFormalModule proves annihilation by this recursive power.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the closed-immersion kernel with ker_subschemeι. Reuse power_inclusion_iso and product_inclusion_iso from ThickeningSystemPushforwardAdic (import all): the former identifies the positive recursive power inclusion with (K^(e+1)).toModulesι, and the latter identifies their multiplication images on the quotient. Transfer the zero-object property across that isomorphism. These helpers are already proved using the affine-section ideal-power formula, not assumed.",
+   "uses": [
+    "lem-weil-pbc-thickening-system-pushforward-adic",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-thickening-system-pushforward-adic",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, construction of G_e; second reading by W4 closes the Lean proof using existing recursive-power/product isomorphisms and cokernel annihilation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules reduced modulo a second ideal and lifting adjacent algebraization maps through completion equivalences",
+   "results": "Both natural-language queries returned service unavailable: Internal Server Error. No absence conclusion drawn from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent formal modules quotiented by a second ideal form coherent adic systems supported on a closed subscheme; completion equivalences lift their adjacent quotient maps",
+   "results": "Quotient query found AdicCompletion, Hausdorffification and localCohomology. Transition query found IsAdicComplete.mkQ_comp_lift and module adic completion maps. None is a coherent sheaf formal-system theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalSecondIdeal|coherentFormal|SupportedOn|ofOpSequence; blueprint_refs search quotient adic system, adic quotient, algebraized transition, 088A",
+   "results": "Mathlib has ofOpSequence constructors but no coherent formal sheaf quotient/algebraization statements. Library searches found CoherentFormalModule, the canonical quotient comparison, and ClosedSupportedFormalAlgebraization, used by this delivery. No matching blueprint nodes for the searched phrases.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-devissage-second-adic-system-lift",
+   "place": "Construction of the second-ideal algebraized system; the lift-data part",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-lift-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSecondIdealQuotientSupported.lean",
+  "declaration": "AlgebraicGeometry.formalSecondIdealQuotient_supported",
+  "statement": "theorem formalSecondIdealQuotient_supported {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (e : ℕ) : ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (K ^ (e + 1)).subschemeι.ker.toModulesι (((M.obj ⋙ formalCompletionFunctor K).flip.obj (op e)).obj (op n)))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and residual transition statement against the node records, repository baseline, source construction, compilation and axiom checks."
+ }
+}

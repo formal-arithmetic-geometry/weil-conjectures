@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-formal-second-ideal-algebraization-transitions",
+ "kind": "statement",
+ "title": "Adjacent transitions of second-ideal algebraizations lift and induce quotients",
+ "statement": "Let X be a Noetherian scheme and I,K quasi-coherent ideals. Let M be a coherent I-adic formal module [def-weil-pbc-coherent-formal-module]. Assume completion on V(K^r) with extended ideal I is an equivalence for every r ≥ 1. For each e ≥ 0 let G_e be a coherent module on V(K^(e+1)), let F_e be its closed pushforward, and fix an isomorphism β_e from the I-completion of F_e to the system (M_n/K^(e+1)M_n)_n. Then K^(e+1)F_e=0, and there exists t_e:F_(e+1)→F_e such that (i) an isomorphism q_e:F_(e+1)/K^(e+1)F_(e+1)→F_e satisfies π_K q_e=t_e, and (ii) completion(t_e) β_e=β_(e+1) B(e+1→e), where B is the double quotient system and B(e+1→e) its induced adjacent K-transition.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, construction of G_e and their adjacent quotient maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Closed pushforward from V(K^(e+1)) is annihilated by its ideal. The affine section formula for recursive ideal powers identifies this with K^(e+1)F_e=0.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both adjacent pushforwards are killed by K^(e+2). Use the closed-immersion equivalence and the assumed completion equivalence on V(K^(e+2)); their composite is fully faithful on these modules. Lift β_(e+1) followed by the adjacent transition and β_e inverse to t_e. By construction its completion satisfies (ii).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Annihilation of the target factors t_e through the K^(e+1)-quotient. Coherence of this quotient follows from formalCompletionSystem_coherent. Interchange quotients by I and K, and use the iterated quotient identity, to see that completion of the factor is an isomorphism. Both objects of the factor are killed by K^(e+1); completion on V(K^(e+1)) reflects isomorphisms. Its factor is therefore q_e, with (i) by construction.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-devissage-second-adic-system-comparison",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-devissage-second-adic-system-comparison",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, first two construction paragraphs; categorical and affine details expanded by W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules reduced modulo a second ideal and lifting adjacent algebraization maps through completion equivalences",
+   "results": "Both natural-language queries returned service unavailable: Internal Server Error. No absence conclusion drawn from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent formal modules quotiented by a second ideal form coherent adic systems supported on a closed subscheme; completion equivalences lift their adjacent quotient maps",
+   "results": "Quotient query found AdicCompletion, Hausdorffification and localCohomology. Transition query found IsAdicComplete.mkQ_comp_lift and module adic completion maps. None is a coherent sheaf formal-system theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalSecondIdeal|coherentFormal|SupportedOn|ofOpSequence; blueprint_refs search quotient adic system, adic quotient, algebraized transition, 088A",
+   "results": "Mathlib has ofOpSequence constructors but no coherent formal sheaf quotient/algebraization statements. Library searches found CoherentFormalModule, the canonical quotient comparison, and ClosedSupportedFormalAlgebraization, used by this delivery. No matching blueprint nodes for the searched phrases.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-devissage-second-adic-system-lift",
+   "place": "Construction of the second-ideal algebraized system; the lift-data part",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-lift-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSecondIdealAlgebraizationTransitions.lean",
+  "declaration": "AlgebraicGeometry.formalSecondIdealAlgebraization_transitions",
+  "statement": "theorem formalSecondIdealAlgebraization_transitions {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (hthick : ∀ (e : ℕ), 1 ≤ e → ∀ (hZ : IsNoetherian (K ^ e).subscheme), Functor.IsEquivalence (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι))) (G : ∀ e : ℕ, CoherentModules (K ^ (e + 1)).subscheme) (β : ∀ e : ℕ, formalCompletionSystem I ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj) ≅ (M.obj ⋙ formalCompletionFunctor K).flip.obj (op e)) : ∀ e : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (e + 1)).2 ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj)) ∧ ∃ t : (Scheme.Modules.pushforward (K ^ (e + 2)).subschemeι).obj (G (e + 1)).obj ⟶ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj, (∃ q : formalModuleQuotient K (e + 1) ((Scheme.Modules.pushforward (K ^ (e + 2)).subschemeι).obj (G (e + 1)).obj) ≅ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj, formalModuleQuotientπ K (e + 1) _ ≫ q.hom = t) ∧ formalCompletionMap I t ≫ (β e).hom = (β (e + 1)).hom ≫ (M.obj ⋙ formalCompletionFunctor K).flip.map (homOfLE (Nat.le_succ e)).op",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and residual transition statement against the node records, repository baseline, source construction, compilation and axiom checks."
+ }
+}

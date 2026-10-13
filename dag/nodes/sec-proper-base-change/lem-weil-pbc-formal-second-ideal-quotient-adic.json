@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-formal-second-ideal-quotient-adic",
+ "kind": "statement",
+ "title": "Second-ideal quotients of coherent formal modules are adic",
+ "statement": "Let X be a Noetherian scheme, I and K quasi-coherent ideal sheaves, and M a coherent I-adic formal module [def-weil-pbc-coherent-formal-module]. For each e ≥ 0 the inverse system in n with terms M_n/K^(e+1)M_n and induced transitions is a coherent I-adic formal module, with positive I-level n represented by n+1.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, construction of G_e and their adjacent quotient maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Each K-quotient term is coherent by formalCompletionSystem_coherent applied to the coherent term of M.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Multiplication by I^(n+1) on a K-quotient is zero: use idealModuleProduct_quotient_comp_zero_iff to check this after its epimorphic projection, and use annihilation of the original term. The product inclusion is monic, hence its zero map gives a zero product object.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For adjacent n, use the canonical quotient interchange isomorphism of grothendieckDevissage_secondAdicSystem_comparison, followed by the K-quotient of the defining adjacent I-quotient isomorphism of M. Cancel the K-quotient projection; the interchange projection identity and the original adjacent quotient identity give the actual transition.",
+   "uses": [
+    "lem-weil-pbc-devissage-second-adic-system-comparison",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-devissage-second-adic-system-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, first two construction paragraphs; categorical and affine details expanded by W4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules reduced modulo a second ideal and lifting adjacent algebraization maps through completion equivalences",
+   "results": "Both natural-language queries returned service unavailable: Internal Server Error. No absence conclusion drawn from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent formal modules quotiented by a second ideal form coherent adic systems supported on a closed subscheme; completion equivalences lift their adjacent quotient maps",
+   "results": "Quotient query found AdicCompletion, Hausdorffification and localCohomology. Transition query found IsAdicComplete.mkQ_comp_lift and module adic completion maps. None is a coherent sheaf formal-system theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalSecondIdeal|coherentFormal|SupportedOn|ofOpSequence; blueprint_refs search quotient adic system, adic quotient, algebraized transition, 088A",
+   "results": "Mathlib has ofOpSequence constructors but no coherent formal sheaf quotient/algebraization statements. Library searches found CoherentFormalModule, the canonical quotient comparison, and ClosedSupportedFormalAlgebraization, used by this delivery. No matching blueprint nodes for the searched phrases.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-devissage-second-adic-system-lift",
+   "place": "Construction of the second-ideal algebraized system; the lift-data part",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-lift-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientAdic",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSecondIdealQuotientAdic.lean",
+  "declaration": "AlgebraicGeometry.formalSecondIdealQuotient_coherent",
+  "statement": "theorem formalSecondIdealQuotient_coherent {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (e : ℕ) : IsCoherentFormalModule I ((M.obj ⋙ formalCompletionFunctor K).flip.obj (op e))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-32d56",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024052-L-3340575",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proofs and residual transition statement against the node records, repository baseline, source construction, compilation and axiom checks."
+ }
+}
