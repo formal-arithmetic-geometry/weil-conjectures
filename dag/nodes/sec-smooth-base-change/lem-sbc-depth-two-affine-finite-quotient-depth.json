@@ -1,0 +1,168 @@
+{
+ "id": "lem-sbc-depth-two-affine-finite-quotient-depth",
+ "kind": "statement",
+ "title": "Positive local depth of finite intermediate restriction quotients",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $U$ an open subscheme, and $N$ a quasi-coherent module [pqf-def-coherent], finite on every affine open. Assume the restriction unit is injective on sections of every open, and every stalk $N_y$ outside $U$ is finite of depth at least two [def-weil-pbc-depth]. Fix an affine open $V$, put $R=\\mathcal O_L(V)$, $M=N(V)$ and $P=(j_*(N|_U))(V)$, and write $a:M\\to P$ for the unit. For any finitely generated $R$-submodule $S\\subseteq P$ containing $a(M)$, put $K=\\{s\\in S:s\\in a(M)\\}$ and $Q=S/K$. For every prime ideal $p$ of $R$, the localization $Q_p$ is finite over $R_p$ [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization] and has depth at least one. The zero localization is included, with infinite depth.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0AV8, proof: finite intermediate submodule and short exact sequence paragraphs; Tag 0E9I, proof via 0AVN; Tags 05AM, 00LL and 00LX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "On the Noetherian affine V, quasi-coherence identifies the source with the sheaf of M. The open immersion U intersect V into V is qcqs, and its pushforward is quasi-coherent with module P. The unit is injective by hypothesis and an isomorphism on U intersect V. By 0AVN boundary points are not weakly associated to P, hence are not associated (05AM). This is the affine setup of the proof of 0E9I. The affine stalk comparisons identify R_p with the local ring at the corresponding point and M_p with N at that point; they transport the boundary depth assumption and the unit map.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associated primes of the submodule S are contained in those of P. Localizing the injective map M into S produces 0 -> M_p -> S_p -> Q_p -> 0. Over U the first map is an isomorphism, so Q_p is zero and has infinite depth. At boundary primes S_p, if nonzero, has depth at least one by 00LL since its maximal ideal is not associated. When M_p and Q_p are nonzero the quotient inequality in 00LX and depth(M_p) >= 2 imply depth(Q_p) >= 1. If M_p is zero, Q_p is isomorphic to S_p; if S_p or Q_p is zero, the quotient is zero. Thus every case has the claimed lower bound.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-submodule",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "lem-weil-pbc-depth-in-ses"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite generation of S gives finite generation of S/K, and its localization is finite over R_p. Together with the preceding depth inequality this gives the asserted existential witness for the finiteness instance.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tags 0AV8 and 0E9I, finite intermediate quotient argument; 0AVN, 05AM, 00LL, 00LX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hartogs|depth.*restriction|restriction.*depth|associatedPrimes.*empty",
+   "results": "8 hits: Mathlib/RingTheory/Regular/LinearMap.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match for positive depth of finite intermediate restriction quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on a locally Noetherian scheme with depth at least two on the complement of an open has surjective restriction on boundary stalks",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective_aux, TopCat.stalkToFiber_surjective, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget, TopCat.Presheaf.stalkToFiber_surjective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, AlgebraicGeometry.SurjectiveOnStalks.surj_on_stalks",
+   "date": "2026-10-13",
+   "verdict": "no exact match for positive depth of finite intermediate restriction quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes",
+   "results": "12 hits: associatedPrimes, associatedPrimes.nonempty, associatedPrimes.eq_empty_of_subsingleton, AssociatedPrimes.mem_iff, instIsPrimeValIdealMemSetAssociatedPrimes, associatedPrimes.prod, LinearEquiv.AssociatedPrimes.eq, associatedPrimes.eq_singleton_of_isPrimary",
+   "date": "2026-10-13",
+   "verdict": "no exact match for positive depth of finite intermediate restriction quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite submodule of sections of a direct image containing a depth two coherent sheaf has quotient of positive depth at every prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*(one|zero|positive)|subsingleton.*associated|associated.*subsingleton",
+   "results": "20 hits: Mathlib/Tactic/Convert.lean, Mathlib/Tactic/Convert.lean, Mathlib/Tactic/TermCongr.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/FunProp/Types.lean, Mathlib/Tactic/CategoryTheory/CancelIso.lean, Mathlib/Tactic/CategoryTheory/CancelIso.lean",
+   "date": "2026-10-13",
+   "verdict": "second reading: ingredients only; no exact finite restriction quotient depth or global positive-depth vanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.AtPrime",
+   "results": "2 hits: LocalizedModule.AtPrime, Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes",
+   "date": "2026-10-13",
+   "verdict": "second reading: ingredients only; no exact finite restriction quotient depth or global positive-depth vanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over a Noetherian ring is zero if all its prime localizations have positive depth; finite submodule quotients of open restriction sections",
+   "results": "8 hits: IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime, Module.Finite.of_localized_maximal, Submodule.fg_of_isLocalized_maximal, Module.Finite.of_isLocalized_maximal, associatedPrimes.finite, Module.notMem_support_iff, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, Submodule.fg_of_localized_maximal",
+   "date": "2026-10-13",
+   "verdict": "second reading: ingredients only; no exact finite restriction quotient depth or global positive-depth vanishing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoRestrictionBoundarySurjective",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: finite intermediate quotients in the boundary restriction surjectivity argument, before exhaustion by finite submodules.",
+   "via": [
+    "lem-sbc-depth-two-restriction-boundary-surjective",
+    "lem-sbc-depth-two-hartogs-restriction",
+    "lem-sbc-depth-two-hartogs-algebra-comparison",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-associated-prime-submodule",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-depth-in-ses"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineFiniteQuotientDepth",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoAffineFiniteQuotientDepth.lean",
+  "declaration": "AlgebraicGeometry.Scheme.depth_one_affine_finite_quotient_of_depth_two",
+  "statement": "theorem depth_one_affine_finite_quotient_of_depth_two\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) \n    (hinj : ∀ V : L.Opens,\n      Function.Injective (((Modules.restrictAdjunction U.ι).unit.app N).app V))\n    (V : L.Opens) (hV : IsAffineOpen V)\n    (S : Submodule (L.presheaf.obj (op V))\n      (((Modules.pushforward U.ι).obj\n        ((Modules.restrictFunctor U.ι).obj N)).val.obj (op V)))\n    (hS : S.FG)\n    (hMS : LinearMap.range\n      (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom ≤ S)\n    (p : Ideal (L.presheaf.obj (op V))) [p.IsPrime] :\n    ∃ hfinite : Module.Finite (Localization.AtPrime p)\n      (LocalizedModule.AtPrime p\n        (S ⧸ (LinearMap.range\n          (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom).comap\n            S.subtype)),\n      letI := hfinite\n      (1 : ℕ∞) ≤ IsLocalRing.depth (R := Localization.AtPrime p)\n        (LocalizedModule.AtPrime p\n          (S ⧸ (LinearMap.range\n            (((Modules.restrictAdjunction U.ι).unit.app N).val.app (op V)).hom).comap\n              S.subtype))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

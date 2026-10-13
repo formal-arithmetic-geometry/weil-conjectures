@@ -11872,3 +11872,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/J3/Sheaf.RingTheory.FormalGlueingEquivalence (stage 3; reviewer PASS; first push; landing 20261013T100018-L-2466240 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:00 L: merged deliver/J4/Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor (stage 3; reviewer PASS; first push; landing 20261013T100018-L-2466424 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/J4/Sheaf.AlgebraicGeometry.Morphisms.DepthOneRestrictionInjective (stage 3; reviewer PASS; first push; landing 20261013T100019-L-2466599 (interface); batch 20261013T095923; modules 2; new nodes 1)
+- 10:00 L: merged deliver/J4/Sheaf.AlgebraicGeometry.Morphisms.DepthTwoRestrictionBoundarySurjective (stage 3; reviewer PASS; first push; landing 20261013T100020-L-2466799 (interface); batch 20261013T095923; modules 2; new nodes 1)
