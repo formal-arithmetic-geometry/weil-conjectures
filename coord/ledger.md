@@ -13277,3 +13277,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:40 L: returned deliver/B2/Sheaf.AlgebraicGeometry.SelfExtTorResolutionModel (reviewer RETURN: (reviewer X-5938d, head 5938d8963) E2/D1: SelfExtTorResolutionLocal.lean states `... [IsClosedImmersion i] (T J : Cochai)
 - 17:40 L: returned deliver/D4/Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization (reviewer RETURN: (reviewer X-00fe3, head 00fe3aba9) F: The target proof directly invokes `globalSectionsFunctor_laxMonoidal_data X`, but )
 - 17:55 L: returned deliver/P3/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-fd2d9, head fd2d9578d) G3 (stage-3 point 2): In coord/changes/hasBoundedBelowUpperShriek.md, replace lines 1)
+- 17:59 L: returned deliver/D4/Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization (reviewer RETURN: (reviewer X-1420a, head 1420aa8fb) B3/C1: `lem-sc-global-sections-lax-monoidal-data.json` cites nonexistent node `lem-sc)
