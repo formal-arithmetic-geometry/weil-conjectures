@@ -36,45 +36,52 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak q\\subset T$ be any prime and let $\\mathfrak p$ be its contraction to $P=k[t_1,\\ldots,t_n]$. Quasi-finiteness at $\\mathfrak q$ and the finite-type hypothesis allow [lem-weil-pbc-dimension-inequality-quasi-finite] to be applied, giving $\\dim T_{\\mathfrak q}\\le\\dim P_{\\mathfrak p}$. Choose a maximal ideal $\\mathfrak m$ containing $\\mathfrak p$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Every prime chain below $\\mathfrak p$ is also below $\\mathfrak m$, so [lem-weil-pbc-localization-dimension-chains-below-prime] gives $\\dim P_{\\mathfrak p}\\le\\dim P_{\\mathfrak m}=n$, the equality being [lem-weil-pbc-polynomial-ring-maximal-localization-dimension]. Thus every local ring of $T$ has dimension at most $n$.",
+   "text": "Put P = k[t_1, ..., t_n]. Mathlib's MvPolynomial.ringKrullDim_of_isNoetherianRing gives dim P = dim k + n = n: rewrite the field dimension using ringKrullDimZero_iff_ringKrullDim_eq_zero and simplify Nat.card_fin. This is a three-line specialization of the Noetherian polynomial dimension theorem (Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-136), using the zero-dimensional field instance and Mathlib/RingTheory/KrullDimension/Zero.lean:62-67.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QG, proof, first sentence: bound the local dimensions of the polynomial source; implemented by the global polynomial dimension calculation in Mathlib rather than the maximal-localization detour through 00OP"
+   }
+  },
+  {
+   "text": "Let q be a prime of T and p its contraction to P under the algebra structure induced by the given map. Install that algebra structure and its supplied finite-type instance. Apply [lem-weil-pbc-dimension-inequality-quasi-finite] with the supplied quasi-finiteness at q. Rewrite dim T_q and dim P_p as heights with [lem-weil-pbc-localization-dimension-chains-below-prime]. The height of p is at most dim P (Ideal.height_le_ringKrullDim_of_isPrime, Mathlib/RingTheory/Ideal/Height.lean:167-170), which is n by step 1. Thus ht(q) <= n.",
    "uses": [
     "lem-weil-pbc-dimension-inequality-quasi-finite",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31291-31305), via Tags 00QF and 00OP"
+    "place": "Tag 00QG, proof, application of 00QF; height bounded by global dimension is the immediate inclusion of chains below p among all prime chains"
    }
   },
   {
-   "text": "A chain of irreducible closed subsets of $\\operatorname{Spec}T$ corresponds, with reversed inclusions, to a chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ of primes of $T$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. It ends at $\\mathfrak q_r$, so [lem-weil-pbc-localization-dimension-chains-below-prime] bounds its length $r$ by $\\dim T_{\\mathfrak q_r}\\le n$ from Step 1. Taking the supremum over chains gives $\\dim\\operatorname{Spec}T\\le n$ by [def-kun-topological-krull-dimension]; if the spectrum is empty this dimension is $-\\infty$ by the same definition.",
+   "text": "Use [lem-weil-pbc-spec-topological-krull-dimension-ring] to replace the topological dimension of Spec T with dim T. The supremum-of-heights identity [lem-pc-ring-dimension-supremum-heights], in the inequality form ringKrullDim_le_iff_height_le (Mathlib/RingTheory/Ideal/Height.lean:364-372), reduces the conclusion to ht(q) <= n for every prime q; step 2 supplies this. The identity and criterion also hold for the zero ring, whose empty spectrum has bottom dimension.",
    "uses": [
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-kun-topological-krull-dimension"
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-pc-ring-dimension-supremum-heights"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31301-31305), with prime-chain interpretation of dimension from Tag 00ES"
+    "place": "Tag 00QG, proof, final conclusion; expanded with Tags 00KG (dimension as supremum of heights) and 00KE/00ES (topological dimension equals ring dimension)"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
   "lem-weil-pbc-dimension-inequality-quasi-finite",
-  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-  "def-kun-topological-krull-dimension"
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-pc-ring-dimension-supremum-heights"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra, lines 31291-31305), with the prime-chain interpretation of the local-to-global step expanded"
+  "place": "Tag 00QG, proof, using 00QF. R2 stage-3 Lean implementation replaces the source polynomial-localization bound by Mathlib's global Noetherian polynomial dimension theorem, then uses the existing Mathlib height/localization and spectrum-dimension identities. Checked canonical Stacks pages for 00QG and 00OP on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -157,5 +164,15 @@
   "group": "E1",
   "result": "pass",
   "note": "k field, n:ℕ (n=0 ok), T CommRing k-alg FiniteType, φ k-AlgHom MvPolynomial (Fin n) k →ₐ T, finite type + IsQuasiFiniteAtPrime at every q via φ.toRingHom.toAlgebra (recorded C1 form, no Noetherian), topologicalKrullDim (Spec T) ≤ n in WithBot ℕ∞ (empty spectrum = ⊥)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T072404-L-1124367",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
