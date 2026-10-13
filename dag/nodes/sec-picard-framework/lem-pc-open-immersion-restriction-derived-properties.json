@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-open-immersion-restriction-derived-properties",
+ "kind": "statement",
+ "title": "Open-immersion restriction preserves finite limits and K-injectives",
+ "statement": "For an open immersion $j:X\\to Y$ of schemes [def-pc-scheme, def-weil-open-immersion], ordinary module restriction [lem-weil-pbc-module-restriction-open-immersion-colimits] preserves finite limits and sends every K-injective complex [def-pur-kinjective-complex] termwise to a K-injective complex. No boundedness or quasi-coherence hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 08BS, lemma-restrict-K-injective-to-open; Tag 01AH sectionwise limits"
+ },
+ "proof": [
+  {
+   "text": "Preservation of finite limits is the existing source-library instance preservesLimitsOfSize_restrictFunctor [lem-weil-pbc-module-restriction-open-immersion-limits]. Additivity is checked sectionwise by extensionality and rfl.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-limits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor j through its image open using isoOpensRange. Restriction along the isomorphism is an equivalence: its inverse is restriction along the inverse isomorphism, and restrictFunctorComp, restrictFunctorCongr and restrictFunctorId supply the unit and counit. The equivalence preserves K-injectives.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The overFunctor on the image open preserves K-injectives by kInjective_of_restrict_open [lem-sc-derived-k-injective-restrict-open]. Compose it with overEquiv and the preceding restriction equivalence. overFunctorEquiv and restrictFunctorComp identify this composite with restriction along j; transport K-injective preservation through the natural isomorphism.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08BS, lemma-restrict-K-injective-to-open; Tag 01AH sectionwise limits; complete Lean proof by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves along an open immersion preserves K-injective complexes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along an open immersion preserves K-injective complexes and finite limits",
+   "results": "8 hits: ordinary restriction/composition and related module functors; no complete match. Read and used the relevant Mathlib APIs.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "12 hits including restrictFunctorComp, restrictAdjunction, restrictFunctorIsoPullback; no complete match.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor.*Preserves|openImmersion.*directImage",
+   "results": "Search service: 0 hits. Local rg additionally found the source-library limit-preservation instance and existing open-subset K-injective theorem, used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "tool match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NestedOpenSingleDirectImageComparison",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "termwise open restriction comparison in the Noetherian approximation argument; Open-immersion restriction preserves finite limits and K-injectives",
+   "via": [
+    "lem-pc-nested-open-single-direct-image-comparison",
+    "lem-pc-cartesian-flat-single-localized-base-change",
+    "lem-pc-cartesian-flat-single-termwise-comparison",
+    "lem-pc-proper-flat-single-open-noetherian-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionRestrictionDerivedProperties.lean",
+  "declaration": "AlgebraicGeometry.openImmersion_restriction_derived_properties",
+  "statement": "theorem openImmersion_restriction_derived_properties {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] : PreservesFiniteLimits (Scheme.Modules.restrictFunctor j) ∧ (Scheme.Modules.restrictFunctor j).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.restriction_additive",
+   "AlgebraicGeometry.openImmersion_restriction_derived_properties"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T142906-L-501278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T142906-L-501278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
