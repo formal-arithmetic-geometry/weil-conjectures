@@ -1,0 +1,143 @@
+{
+ "id": "lem-sp-filtered-quotient-canonical-functor",
+ "kind": "statement",
+ "title": "Functorial quotient pages with representative differentials",
+ "statement": "Let C be abelian [def-sp-abelian], and let F be the full category of finite decreasing filtered cochain complexes [def-sp-filtration]. For each U,p,q,r>=1 let hBZ give B_r<=Z_r [def-sp-filtered-complex-subquotients], and write Q_r=coker(B_r to Z_r). For each U,r let D(U,r) be representative differential data [lem-sp-filtered-complex-page-differential], whose representative equation is x to dx. There exist a functor S:F to cohomological spectral sequences starting at 1 [def-sp-spectral-sequence] and eZ:E_r^(p,q)(U) isomorphic to Q_r^(p,q)(U). For all source and target bidegrees i,j, d_S(i,j)eZ_j=eZ_i D(i,j). If t has step restrictions s, graded descent g, cycle restriction kz, and quotient descent k satisfying the step-inclusion, graded-projection, cycle-inclusion and boundary-projection squares, then S(t)_r eZ_V=eZ_U k. No graded-homology comparison, first-page connecting map or exact couple is asserted.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; parent realization steps 1 and 3; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "For each U and r use the concrete cokernel Q_r=Z_r/B_r. Its D differential is uniquely determined by its representative equation x to dx. Successor cycles map epically onto its kernel, and the preimage of the incoming boundaries is B_(r+1). Therefore the induced quotient isomorphism H(Q_r,D_r) to Q_(r+1) is normalized by the successor-cycle projection. Use these normalized isomorphisms, not arbitrary existential homology isomorphisms, to assemble the spectral sequences.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-sp-filtered-complex-successor-boundaries-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For t:U to V, choose its step restriction from the preservation property. Cancel the monic target step inclusion to prove uniqueness. Descend to the graded quotient by its cokernel property, restrict to graded cycles using the defining pullback/image formulas, and descend modulo boundaries. These are the unique maps in the four squares of the statement.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an epic cover by cycle representatives, the two composites with the page differentials are induced by t d = d t; hence they coincide. The same successor-cycle equation proves commutation with the normalized homology comparisons. Thus the quotient maps give spectral-sequence morphisms. Cancel the epic boundary projections and monic cycle inclusions to prove identity and composition. Take eZ to be the identity comparison of the concrete cokernels (boundary containment proofs are proof-irrelevant). This gives hd and naturality for every displayed choice of the restriction and descent maps.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "def-sp-spectral-sequence",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-successor-boundaries-image",
+  "lem-sp-filtered-complex-successor-cycles-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; parent realization steps 1 and 3",
+  "note": "Componentwise expansion of the cited construction in an arbitrary abelian category; no direct sums or stabilization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical differential cycle boundary quotients filtered complex spectral sequence naturality",
+   "date": "2026-10-13",
+   "results": "8 hits, including HomologicalComplex.homologyπ_naturality and HomologicalComplex.HomologySequence.δ_naturality. No filtered-complex functor or derived-couple representative comparison.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.Hom",
+   "date": "2026-10-13",
+   "results": "9 hits: Hom, Hom.hom, Hom.ext, Hom.comm and category laws. These describe morphisms; they do not construct filtered quotient pages.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural spectral sequence of a filtered complex and comparison with its exact couple",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|exactCouple in Mathlib/Algebra/Homology/SpectralSequence; FilteredComplexPageDifferential and filteredComplex.*(natural|functor) in lean/Sheaf and lean/WeilConjectures",
+   "date": "2026-10-13",
+   "results": "No Mathlib filtered-complex construction. Sheaf has unique representative page differential, positive-page existence, successor-cycle cover and successor-boundary image; none supplies the required natural functor or exact-couple realization.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientPageRealization",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; parent realization steps 1 and 3",
+   "via": [
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor",
+  "file": "lean/Sheaf/CategoryTheory/FilteredQuotientCanonicalFunctor.lean",
+  "declaration": "CategoryTheory.filteredQuotient_canonical_functor",
+  "statement": "theorem filteredQuotient_canonical_functor (C : Type u) [Category.{v} C] [Abelian C] (hBZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexBoundaries p (p + q) r ≤ U.obj.filtration.complexCycles p (p + q) r) (D : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ) (hr : 1 ≤ r), FilteredComplexPageDifferential U.obj.obj U.obj.filtration r) : ∃ (S : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite) ⥤ CohomologicalSpectralSequence C 1) (eZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), ((S.obj U).page r hr).X (p, q) ≅ cokernel (Subobject.ofLE _ _ (hBZ U p q r hr))), (∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q p' q' r : ℤ) (hr : 1 ≤ r), ((S.obj U).page r hr).d (p, q) (p', q') ≫ (eZ U p' q' r hr).hom = (eZ U p q r hr).hom ≫ (D U r hr).d (p, q) (p', q')) ∧ (∀ (U V : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (p q r : ℤ) (hr : 1 ≤ r) (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶ (V.obj.filtration.step a : CochainComplex C ℤ)) (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p) (kz : (U.obj.filtration.complexCycles p (p + q) r : C) ⟶ (V.obj.filtration.complexCycles p (p + q) r : C)) (k : cokernel (Subobject.ofLE _ _ (hBZ U p q r hr)) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q r hr))) (hs : ∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow = (U.obj.filtration.step i).arrow ≫ t.hom.hom) (hg : U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g = s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega)) (hkz : kz ≫ (V.obj.filtration.complexCycles p (p + q) r).arrow = (U.obj.filtration.complexCycles p (p + q) r).arrow ≫ g.f (p + q)) (hk : cokernel.π (Subobject.ofLE _ _ (hBZ U p q r hr)) ≫ k = kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q r hr))), ((S.map t).hom r hr).f (p, q) ≫ (eZ V p q r hr).hom = (eZ U p q r hr).hom ≫ k)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T002007-L-2357816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T002007-L-2357816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

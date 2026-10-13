@@ -10,10 +10,9 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.FilteredComplexPositivePages
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor
+import Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure
 
 /-!
 # Exact-couple realization of the cycle-boundary quotient pages
@@ -28,6 +27,7 @@ universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Realize the concrete positive quotient pages, naturally in filtered maps.
 Source: Stacks Project, Tag 012K, and blueprint thm-sp-spectral-object-yields,
 steps 1--4 (blueprint: lem-sp-filtered-quotient-page-realization).
@@ -152,6 +152,18 @@ theorem filteredQuotient_page_realization
                   (p + (s + 1), q - (s + 1) + 1) =
               (X.pageCouple s).d (2 * p + q) (-p) ≫
                 eqToHom (by congr 1 <;> omega) ≫
-                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by sorry
+                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by
+  classical
+  have hD (U : ObjectProperty.FullSubcategory
+      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))
+      (r : ℤ) (hr : 1 ≤ r) :
+      ∃! D : FilteredComplexPageDifferential U.obj.obj U.obj.filtration r, True :=
+    filteredComplex_page_differential_exists_unique U.obj.obj U.obj.filtration r hr
+  let D := fun U r hr ↦ (hD U r hr).choose
+  obtain ⟨S, eZ, hd, hnat⟩ := filteredQuotient_canonical_functor C hBZ D
+  refine ⟨S, eZ, hnat, ?_⟩
+  intro U
+  exact filteredQuotient_canonical_structure C hBZ eH hH U (S.obj U) (eZ U) (D U)
+    (hd U)
 
 end CategoryTheory
