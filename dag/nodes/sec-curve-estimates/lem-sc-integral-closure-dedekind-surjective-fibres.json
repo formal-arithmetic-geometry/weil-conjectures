@@ -65,17 +65,24 @@
    }
   },
   {
-   "text": "For every maximal ideal m of A, localize A at A\\m and C at the same multiplicative set. By the localization prime correspondence [lem-weil-pbc-localization-prime-residue-field-iso] (1), applied to C → (A\\m)⁻¹C with W = A\\m, contraction is a bijection from the primes of (A\\m)⁻¹C onto the primes of C disjoint from A\\m; since A is one-dimensional, a prime of C is disjoint from A\\m exactly when it contracts to (0) or to m, and the primes lying over mA_m correspond exactly to the primes of C over m. By part (3) of the same statement, corresponding primes have isomorphic residue fields as C-algebras, hence as A-algebras. The resulting injective map A_m → (A\\m)⁻¹C is between domains, its fraction fields are K and L, and A_m is Noetherian local of dimension 1. Thus [lem-weil-pbc-dim-one-residue-field-extensions-finite] gives finitely many primes over m, each maximal, and finite residue-field extensions. For the generic prime (0), any prime q of C contracting to (0) contains (0), and incomparability for the integral extension A ⊆ C forces q=(0), so the generic fibre has one point; its residue extension is Frac(C)=L over Frac(A)=K, finite by hypothesis. Hence every fibre is finite, and all residue-field extensions are finite.",
+   "text": "For a nonzero prime p of A, Ring.KrullDimLE 1 A makes p maximal. Since C is now Dedekind, Mathlib IsDedekindDomain.primesOver_finite gives finitely many prime ideals of C above p; the injective map from spectrum points to their ideals transports this finiteness to the scheme fibre. For the prime zero, Mathlib Ideal.eq_bot_of_comap_eq_bot shows that an ideal with zero contraction is zero: a nonzero integral element in the ideal would yield a nonzero base-ring element in its contraction. Thus the fibre is a singleton. The inclusion A to C is injective, so the contraction of zero is zero.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09IG, finite fibres; alternate Dedekind ideal-factorization argument, formalized using Mathlib IsDedekindDomain.primesOver_finite"
+   }
+  },
+  {
+   "text": "For a prime q of C whose contraction p is nonzero, q is nonzero and hence maximal in the Dedekind domain C. Choose a nonzero a in p. Using a finite K-basis of L, embed C A-linearly into K^r. Apply lem-sc-finite-length-global-submodule to its image to give finite A-length of C/aC. Since q is maximal, C to kappa(q) is surjective. As a belongs to p, aC maps to zero; the resulting quotient map C/aC to kappa(q) is A-linear and surjective. Thus kappa(q) is finite as an A-module. The canonical map kappa(p) to kappa(q) agrees with the A-action on ring elements, so restriction of scalars makes kappa(q) finite over kappa(p). If p=0, Mathlib Ideal.eq_bot_of_comap_eq_bot gives q=0. Both residue fields are fraction fields; their canonical map, by uniqueness on A, is the composite of a fraction-field isomorphism to K, the given finite map K to L, and a fraction-field isomorphism from L. It is therefore finite. Finally the canonical affine stalk isomorphisms conjugate the scheme residueFieldMap to the ideal ResidueField.map, preserving finiteness.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
-    "lem-weil-pbc-integral-injective-lying-over",
-    "lem-weil-pbc-integral-incomparability"
+    "lem-sc-finite-length-global-submodule",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 09IG, final sentence, invoking Lemma 10.119.10 (Tag 031F)"
+    "place": "Tags 09IG and 00PF (lemma-finite-length-global); finite-length quotient argument for closed residue fields"
    }
   }
  ],
@@ -84,14 +91,12 @@
   "lem-weil-pbc-integral-injective-dimension-equal",
   "lem-weil-pbc-integral-closure-finite-extension-normal",
   "lem-weil-pbc-integral-injective-lying-over",
-  "lem-weil-pbc-dim-one-residue-field-extensions-finite",
-  "lem-weil-pbc-integral-incomparability",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
+  "lem-sc-finite-length-global-submodule"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 10.120.18 (Tag 09IG), proof"
+  "place": "Tags 09IG and 00PF; B3 replaces localization at closed points by Dedekind prime factorization and the global finite-length theorem, retaining Krull-Akizuki, dimension equality and lying over."
  },
  "mathlib_searches": [
   {
@@ -180,5 +185,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T003154-L-2428001",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
