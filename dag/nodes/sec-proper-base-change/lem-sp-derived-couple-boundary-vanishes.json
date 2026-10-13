@@ -24,20 +24,25 @@
  ],
  "proof": [
   {
-   "text": "Apply the abelian-category element chase described in the source.",
+   "text": "Apply derivedCoupleBackward_exists to the original families alpha, f, g and dInto. The square-zero hypothesis is dInto_comp_d after unfolding d; the incoming-differential formula is definitional. This gives a map from the incoming alpha image to the cycle quotient, with the equation factorThruImage(alpha) followed by that map equal to gToCycles followed by derivedEProjection and the canonical equality transport.",
    "uses": [
-    "lem-sp-derived-couple-exact"
+    "lem-sp-derived-map-construction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Precompose the defining equation by kernel.ι(factorThruImage(alpha)). Its left side is zero by kernel.condition and zero_comp. Cancel the mono equality transport on the right. The remaining equality is precisely the claimed boundary vanishing, at every integer bidegree and for every natural type s.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-derived-couple-exact"
+  "lem-sp-derived-map-construction"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "W3 stage 3 worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+  "place": "Stacks Tags 011R and 0AMJ: use the proved backward-map descent equation, then kernel.condition and cancellation of its canonical equality transport."
  },
  "mathlib_searches": [
   {
@@ -149,13 +154,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T194158-L-470988",
-  "kind": "interface",
+  "landing": "20261013T015622-L-3029849",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
