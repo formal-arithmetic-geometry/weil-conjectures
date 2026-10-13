@@ -10,6 +10,10 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Filtered.Basic
 
+import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
+import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
+import Mathlib.RingTheory.RingHom.FiniteType
+
 /-! # Approximation data with the base colimit
 Source: Stacks Tag 00R0, expanded from the non-local version of Tag 00QV.
 (blueprint: lem-weil-pbc-limit-finite-presentation-core)
@@ -67,6 +71,90 @@ theorem exists_limit_finite_presentation_core
           (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm))) ∧
       Nonempty (IsColimit cR)
 := by
-  sorry
+  classical
+  obtain ⟨j, T, g, hg, k, hp⟩ :=
+    CommRingCat.exists_isPushout_of_finitePresentation
+      (CommRingCat.fgSubalgebraDiagram R) (CommRingCat.fgSubalgebraCocone R)
+      (CommRingCat.isColimitFgSubalgebraCocone R) (CommRingCat.ofHom φ) hφ
+  let P : Subalgebra ℤ R → Prop := fun A ↦ A.FG ∧ j.1 ≤ A
+  let Λ := {A : Subalgebra ℤ R // P A}
+  let : Nonempty Λ := ⟨⟨j.1, j.2, le_rfl⟩⟩
+  let : IsDirectedOrder Λ := ⟨fun A B ↦
+    ⟨⟨A.1 ⊔ B.1, A.2.1.sup B.2.1, A.2.2.trans le_sup_left⟩,
+      Subtype.coe_le_coe.mp le_sup_left, Subtype.coe_le_coe.mp le_sup_right⟩⟩
+  have hsup : ⨆ A : Λ, A.1 = ⊤ := by
+    apply top_unique
+    intro x _
+    let A : Λ := ⟨j.1 ⊔ (Subalgebra.fgAdjoinSingleton ℤ R x).1,
+      j.2.sup (Subalgebra.fgAdjoinSingleton ℤ R x).2, le_sup_left⟩
+    exact le_iSup (fun A : Λ ↦ A.1) A
+      ((show (Subalgebra.fgAdjoinSingleton ℤ R x).1 ≤ A.1 from le_sup_right)
+        (Subalgebra.self_mem_fgAdjoinSingleton ℤ R x))
+  let F := CommRingCat.subalgebraDiagram R P
+  let c := CommRingCat.subalgebraCocone R P
+  let a (l : Λ) : CommRingCat.of j.1 ⟶ F.obj l :=
+    CommRingCat.ofHom (Subalgebra.inclusion l.2.2).toRingHom
+  have ha {l m : Λ} (f : l ⟶ m) : a l ≫ F.map f = a m := by
+    ext x
+    rfl
+  have hac (l : Λ) : a l ≫ c.ι.app l =
+      (CommRingCat.fgSubalgebraCocone R).ι.app j := by
+    ext x
+    rfl
+  let G : Λ ⥤ CommRingCat :=
+    { obj := fun l ↦ pushout (a l) g
+      map := fun {l m} f ↦ pushout.desc
+        (F.map f ≫ pushout.inl (a m) g) (pushout.inr (a m) g) (by
+          rw [← Category.assoc, ha, pushout.condition])
+      map_id := by
+        intro l
+        apply pushout.hom_ext <;> simp
+      map_comp := by
+        intro l m n f h
+        apply pushout.hom_ext <;> simp [Category.assoc] }
+  let η : F ⟶ G :=
+    { app := fun l ↦ pushout.inl (a l) g
+      naturality := by
+        intro l m f
+        simp [G] }
+  let d : Cocone G :=
+    { pt := CommRingCat.of S
+      ι :=
+        { app := fun l ↦ pushout.desc (c.ι.app l ≫ CommRingCat.ofHom φ) k (by
+            rw [← Category.assoc, hac, hp.w])
+          naturality := by
+            intro l m f
+            apply pushout.hom_ext <;> simp [G, Category.assoc] } }
+  refine ⟨Λ, inferInstance, inferInstance, inferInstance, F, G, η, c, d,
+    rfl, rfl, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro l hR hS
+    simp [η, d, c]
+  · intro l
+    exact RingHom.finiteType_isStableUnderBaseChange.pushout_inl
+      RingHom.finiteType_respectsIso (a l) g (RingHom.FiniteType.of_finitePresentation hg)
+  · intro l
+    exact RingHom.finiteType_algebraMap.mpr ((l.1.fg_iff_finiteType).mp l.2.1)
+  · intro l m h
+    have hm := CategoryTheory.IsPushout.of_hasPushout (a m) g
+    have hl := CategoryTheory.IsPushout.of_hasPushout (a l) g
+    have hw : η.app l ≫ G.map (homOfLE h) = F.map (homOfLE h) ≫ η.app m := by
+      simp [η, G]
+    refine ⟨?_⟩
+    apply IsPushout.flip
+    apply IsPushout.of_left (t := hl) (p := hw.symm)
+    simpa [G, η, ha] using hm
+  · intro l hR hS
+    have hp' : CategoryTheory.IsPushout g (a l ≫ c.ι.app l) k (CommRingCat.ofHom φ) := by
+      rw [hac]
+      exact hp.flip
+    refine ⟨?_⟩
+    have hw : η.app l ≫ d.ι.app l = c.ι.app l ≫ CommRingCat.ofHom φ := by
+      simp [η, d]
+    have hfinal : CategoryTheory.IsPushout (η.app l) (c.ι.app l) (d.ι.app l)
+        (CommRingCat.ofHom φ) := by
+      apply IsPushout.of_top (t := (IsPushout.of_hasPushout (a l) g).flip) (p := hw)
+      simpa [d] using hp'
+    simpa [c, d] using hfinal
+  · exact ⟨CommRingCat.isColimitSubalgebraCocone R P hsup⟩
 
 end Algebra
