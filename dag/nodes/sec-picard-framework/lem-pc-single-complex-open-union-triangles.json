@@ -15,51 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Put W=U union V. IsCompact.union makes W compact. Quasi-separatedness of X follows from quasi-separatedness of f over affine S. Therefore the compact open inclusion W→X and the composite W→S are qcqs. Pullback pasting gives the restricted cartesian square on W and W′=X′ times_X W. The inverse images of U,V in W cover W, and the three opens are compact. The affine morphism g and its base change make their inverse images in W′ compact. Restrict K,K′ and the coefficient morphism by the displayed canonical pullback composition comparisons; preservation of quasi-coherent cohomology supplies their QCoh hypotheses.",
+   "text": "Obtain the short exact complex presentation P,P′,m and six vertex comparisons on U∪V. This is the geometric construction before passage to triangles.",
    "uses": [
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "def-pc-single-complex-open-comparison"
+    "lem-pc-single-complex-open-union-ses-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Construct functorial K-injective resolutions with injective components for the coefficients on W and W′. On each source the direct-image restriction sequence for the two-open cover is short exact: the first kernel identity is sheaf gluing, and surjectivity onto the overlap follows from flasqueness of injective module sheaves. Open restriction preserves K-injectivity, so the four terms compute the required derived images. The short-exact-complex triangle gives distinguishedness. Apply Lg* to the first relative triangle. Derived direct-image composition and the biproduct comparison identify its vertices with the required open images. This is the construction of Tag 08HZ, not an assumption of any base-change isomorphism.",
+   "text": "Define the first two maps by conjugating Q(P.f), Q(P.g) and their primed analogues by the vertex isomorphisms. Define the boundaries by conjugating triangleOfSESδ with the overlap comparison and shifted union comparison. Triangle.isoMk gives isomorphisms with the Mathlib short exact triangles; isomorphic_distinguished proves both transported triangles distinguished. Conjugate triangleOfSES.map hP hP′ m by those triangle isomorphisms. Its three components simplify using the three localized-component conjugacy equations and iso inverse-hom cancellation. This gives exactly b_(U∪V), biprod.map b_U b_V, and b_(U∩V), including the connecting square from Mathlib SES naturality.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sc-ringed-space-injective-restriction-surjective",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pc-derived-direct-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the restricted coefficient arrow using the derived adjunction for g′ restricted to W′. Functoriality of the K-injective restriction sequence gives its morphism of short exact sequences, hence its morphism of distinguished triangles including the connecting square by short-exact-triangle naturality. Transpose back. The canonical mate formula for the base-change map identifies its components: expand the counit for a composite adjunction, cancel the unit/counit triangle identities, and use associativity and naturality of the pullback composition comparisons to identify the coefficient restrictions. The middle component is the biproduct of the two open components by its projections. Construct the nested-open image isomorphisms and pullback-pasting isomorphisms explicitly. The coefficient-coherence theorem identifies the twice-restricted coefficient arrow. Apply source-coordinate naturality to obtain the domain and codomain isomorphisms and their conjugacy equations for the actual comparison arrows. Transport the vertices, all three arrows and the triangle morphism along these isomorphisms. This gives exactly the ambient comparisons on W,U,V,U intersection V, not merely unrelated arrows on isomorphic objects. None of these operations uses local invertibility. Empty, contained and repeated opens give zero or split sequences by the same construction.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
-    "lem-pc-derived-base-change-source-iso",
-    "lem-pc-single-complex-nested-coefficient-coherence"
+    "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-single-complex-open-comparison",
-  "lem-pc-derived-base-change-source-iso",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-single-complex-nested-coefficient-coherence",
-  "lem-sc-ringed-space-injective-restriction-surjective",
-  "lem-weil-pbc-complex-ses-triangle",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pc-single-complex-open-union-ses-presentation",
+  "lem-weil-pbc-complex-ses-triangle"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0DJ9, 08HZ, 08HY",
-  "place": "The source induction diagram restricted to U union V, with explicit coefficient transport and connecting-square naturality. D2 separated diagram construction from the two-out-of-three inference to avoid the existing relative-MV import cycle."
+  "document": "Stacks Project, Tags 08HZ, 08HY and 0DJ9; Mathlib.Algebra.Homology.DerivedCategory.ShortExact",
+  "place": "R2: geometric presentation split off; actual SES triangle construction, distinguishedness transport and triangle morphism conjugation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -127,9 +104,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T215559-L-895761",
+  "landing": "20261013T222411-L-1225932",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

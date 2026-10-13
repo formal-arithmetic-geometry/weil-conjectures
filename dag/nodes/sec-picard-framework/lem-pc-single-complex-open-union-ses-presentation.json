@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-single-complex-open-union-ses-presentation",
+ "kind": "statement",
+ "title": "Chain-level relative comparison presentation on a compact source-open union",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S, g′:X′→X form a cartesian square of schemes [def-pc-scheme], with S,S′ affine and f quasi-compact and quasi-separated. Let K and K′ have quasi-coherent derived cohomology [def-pc-derived-category], and φ:L(g′)*K→K′ [def-pc-derived-pullback]. Let U,V be compact opens of X with compact intersection. For each open Z let a_Z be the canonical comparison arrow [def-pc-single-complex-open-comparison]. There exist short complexes P,P′ of cochain complexes of O_S′-modules, a morphism m:P→P′, and six isomorphisms e_i:Q(P_i)≅A_i, e_i′:Q(P_i′)≅B_i, where (A₁,A₂,A₃)=(domain a_(U∪V), domain a_U⊕domain a_V, domain a_(U∩V)) and (B₁,B₂,B₃) are the corresponding codomains. Both P and P′ are short exact. The localized components satisfy Q(m₁)e₁′=e₁ a_(U∪V), Q(m₂)e₂′=e₂(a_U⊕a_V), and Q(m₃)e₃′=e₃ a_(U∩V). This statement asserts no connecting morphism, distinguished triangle or triangle morphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 08HZ, 08HY and 0DJ9, relative restriction sequence and coefficient comparison before passing to the derived triangle; functorial cylinder replacement as in Tags 013N and 013O. Online 08HZ, 08HY, 0DJ9 read on 2026-10-14."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-open-comparison",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put W=U union V. IsCompact.union makes W compact. Quasi-separatedness of X follows from quasi-separatedness of f over affine S. Therefore the compact open inclusion W→X and the composite W→S are qcqs. Pullback pasting gives the restricted cartesian square on W and W′=X′ times_X W. The inverse images of U,V in W cover W, and the three opens are compact. The affine morphism g and its base change make their inverse images in W′ compact. Restrict K,K′ and the coefficient morphism by the displayed canonical pullback composition comparisons; preservation of quasi-coherent cohomology supplies their QCoh hypotheses.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-single-complex-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the K-injective relative restriction rows on W and its inverse image as in Tag 08HZ. Sheaf gluing and flasqueness of injective terms prove the rows short exact degreewise. Restriction preserves K-injectivity, so they compute the derived open images. Transpose the coefficient map under the derived adjunction and represent it by a map into the K-injective resolution. Restriction gives a morphism of the rows. Compute derived images using resolutions of the entire finite diagram and the derived base pullback using a K-flat diagram resolution. The strict first-map square has cones computing the two overlap terms. For a chain arrow t:A→B use the functorial short exact cylinder row A→B⊕Cone(id A)→Cone(t): its first map is (t,inr(id A)), and its second map is (inr(t), -ConeMap(id A,t;id A,t)). The degreewise splitting proves short exactness. For a strict square (α,β), use α, β⊕ConeMap(id A,id A′;α,α), and ConeMap(t,t′;α,β) as its components. The strict square equation proves that this is a row morphism. Cone(id A) is contractible, so projection to B becomes an isomorphism after localization. The middle row component conjugates to Q(β) because projection commutes with β; the first and third components are Q(α) and the localized cone map. This provides P,P′,m and their six vertex comparisons before any connecting map or triangle is formed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-ringed-space-injective-restriction-surjective",
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-cone-diagram-ses-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify exact restriction with derived open pullback by the canonical comparison of adjunctions, and use the direct-image composition comparisons to identify all vertices. Construct the nested-open and pullback-pasting isomorphisms. The nested coefficient coherence theorem identifies the twice-restricted coefficient arrow. Apply source-coordinate naturality to identify the comparisons with the actual ambient arrows. Expanding the composite adjunction counit in the mates formula of Tag 08HY and using associativity of the pinned pullback comparisons identifies the first localized component with b_W and the third with b_(U∩V). At each of U and V the same computation identifies the middle component; its two biproduct projections give b_U⊕b_V. Compose with the cylinder vertex comparisons to obtain precisely the three displayed conjugacy equations. No connecting-map equation or distinguishedness is invoked. Empty opens, zero coefficients and redundant members of the cover give zero or split restriction rows and satisfy the same equations.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-source-iso",
+    "lem-pc-single-complex-nested-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-cone-diagram-ses-presentation",
+  "lem-pc-derived-base-change-source-iso",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-single-complex-nested-coefficient-coherence",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 08HZ, 08HY, 0DJ9, 013N and 013O",
+  "place": "Chain-level argument underlying the existing union-triangle plan, with explicit functorial cylinder replacement. R2; no use of the parent triangle theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A short exact complex model for the relative Mayer Vietoris base change diagram on a union of open subschemes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of short exact sequences of complexes gives a morphism of distinguished triangles in the derived category",
+   "results": "triangleOfSES, triangleOfSESδ and triangleOfSES_distinguished; these supply the subsequent triangle construction, not geometric short exact representatives with the three pinned comparison components.",
+   "date": "2026-10-14",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSESδ_naturality",
+   "results": "Found boundary naturality once a short exact complex diagram is supplied.",
+   "date": "2026-10-14",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES.*map|MayerVietoris.*Triangle; local union.*ses.*presentation and open.*union.*ShortExact",
+   "results": "Mathlib ShortExact provides triangle functoriality. DerivedOpenUnionSESPresentation gives one coefficient over X, not the base-pullback comparison. RelativeMVSESPresentation requires a global cover and importing it closes a cycle through the parent. No usable exact statement for the arbitrary union.",
+   "date": "2026-10-14",
+   "verdict": "no usable exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionTriangles",
+  "date": "2026-10-14",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 0DJ9 induction diagram, chain-level restriction presentation on U∪V before the short-exact-sequence triangle step.",
+   "via": [
+    "lem-pc-single-complex-qcqs-homology-mono",
+    "lem-pc-standard-flat-single-base-change-mono",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-single-complex-open-affine-union",
+    "lem-pc-single-complex-open-union-triangles"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnionSESPresentation.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union_ses_presentation",
+  "statement": "theorem singleComplexOpenComparison_union_ses_presentation\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) :\n    let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦\n      Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)\n    ∃ (P P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n      (m : P ⟶ P')\n      (e₁ : DerivedCategory.Q.obj P.X₁ ≅ (a (U ⊔ V)).left)\n      (e₂ : DerivedCategory.Q.obj P.X₂ ≅ (a U).left ⊞ (a V).left)\n      (e₃ : DerivedCategory.Q.obj P.X₃ ≅ (a (U ⊓ V)).left)\n      (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ (a (U ⊔ V)).right)\n      (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (a U).right ⊞ (a V).right)\n      (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (a (U ⊓ V)).right),\n      P.ShortExact ∧ P'.ShortExact ∧\n      DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧\n      DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom =\n        e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧\n      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T222411-L-1225932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T222411-L-1225932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
