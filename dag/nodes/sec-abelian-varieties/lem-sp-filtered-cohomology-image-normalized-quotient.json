@@ -15,12 +15,19 @@
  },
  "proof": [
   {
-   "text": "Identify the image filtration graded piece with the cokernel of the inclusion of the next image step into the current image step, and identify those image steps with the normalized cycle and boundary subobjects under the degree-n graded projection. The boundary inclusion follows from d²=0 and filtration antitonicity. The first isomorphism theorem yields the stated quotient.",
+   "text": "Establish the normalized boundary subobject is contained in the normalized cycle subobject by applying monotonicity of intersection, supremum, pullback, and direct image to d²=0.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sp-filtered-cohomology-image-finite"
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the ambient cycle lift of the inclusion S=A intersection Z. Apply the cycle class map image and inverse-image identities. Reuse the existing private image_quotient theorem from FilteredNormalizedQuotientPresentation through a proof-only import all: it identifies the graded cohomology image with the cokernel of the restricted denominator. Compose with the inverse of normalizedStationaryQuotient_presentation.",
+   "uses": [
+    "new-cohomology-image-cycle-map",
+    "lem-sp-filtered-normalized-quotient-presentation"
    ],
    "elementary": false
   }
@@ -29,12 +36,13 @@
   "def-sp-abelian",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
-  "lem-sp-filtered-cohomology-image-finite"
+  "new-cohomology-image-cycle-map",
+  "lem-sp-filtered-normalized-quotient-presentation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-filtered-cohomology-image-presentation.md",
-  "place": "Intermediate normalized quotient step of the cycle presentation."
+  "place": "Normalized cycle and boundary quotient calculation, formalized by monotonicity, reuse of the existing image_quotient theorem via import all, and composition."
  },
  "mathlib_searches": [
   {
@@ -101,12 +109,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T225310-L-1805182",
+  "landing": "20261013T011925-L-2762348",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,127 @@
+{
+ "id": "new-cohomology-image-cycle-map",
+ "kind": "statement",
+ "title": "Image and inverse-image identities of the filtered cycle class map",
+ "statement": "Let C be an abelian category, K a cochain complex and L a decreasing filtration. For integers p,n set A=L.complexStep p n, A′=L.complexStep (p+1) n, Z=ker(K.d n (n+1)), B=im(K.d (n-1) n), and S=A∩Z. Let c:S→K.cycles n satisfy c followed by the cycle inclusion = S.arrow, and set f=c followed by K.homologyπ n. Then imageSubobject f=(L.cohomologyImage n).step p, and the inverse image under f of (L.cohomologyImage n).step (p+1) equals the restriction to S of (A∩B)+(A′∩Z).",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-cohomology-image-finite"
+ ],
+ "source": {
+  "document": "Stacks Project, https://stacks.math.columbia.edu/tag/012Q",
+  "place": "Section 12.24, Equation 12.24.5.2 and the final quotient calculation of Lemma 12.24.6."
+ },
+ "proof": [
+  {
+   "text": "The subcomplex inclusion identifies its cycles with A intersection Z by the pullback universal property. Naturality and epimorphy of the cycle-to-homology map identify the image of f with the cohomology image step. Repeat at p+1. The ambient cycle class epimorphism has kernel B; the inverse image of the next image step is B+(A′ intersection Z). Restrict to S and use the modular identity, B contained in Z and A′ contained in A, to get the displayed inverse-image formula.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-cohomology-image-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-cohomology-image-finite"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, https://stacks.math.columbia.edu/tag/012Q",
+  "place": "Section 12.24, Equation 12.24.5.2 and the final quotient calculation of Lemma 12.24.6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "image of homology of a subcomplex cycles modulo ambient boundaries",
+   "results": "8 hits; related homology naturality and refinement results, no filtered image/inverse-image identity. See searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "12 hits; related homology naturality and refinement results, no filtered image/inverse-image identity. See searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap.*image|image.*homologyMap|cycles.*homologyπ",
+   "results": "25 hits; related homology naturality and refinement results, no filtered image/inverse-image identity. See searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of the cycles of a filtered subcomplex in ambient homology and the inverse image of the next filtration step",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredCohomologyImageNormalized",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-cohomology-image-normalized-quotient",
+   "place": "Cycle class map image and inverse image before taking cokernels",
+   "via": [
+    "lem-sp-filtered-cohomology-image-normalized-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredCohomologyImageCycleMap",
+  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImageCycleMap.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_cycle_map",
+  "statement": "theorem cohomologyImage_cycle_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ)\n    (c : ((L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥ :\n      Subobject (K.X n)) : C) ⟶\n      K.cycles n)\n    (hc : c ≫ K.iCycles n =\n      (L.complexStep p n ⊓ (Subobject.pullback (K.d n (n + 1))).obj ⊥).arrow) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  let f := c ≫ K.homologyπ n\n  imageSubobject f = (L.cohomologyImage n).step p ∧\n    (Subobject.pullback f).obj ((L.cohomologyImage n).step (p + 1)) =\n      (Subobject.pullback (A ⊓ Z).arrow).obj ((A ⊓ B) ⊔ (A' ⊓ Z))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T011925-L-2762348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
