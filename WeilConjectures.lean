@@ -562,6 +562,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
+public import WeilConjectures.AlgebraicGeometry.QcqsHigherDirectImage
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.RelativeGluing.BaseChange
