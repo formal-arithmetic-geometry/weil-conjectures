@@ -29,60 +29,35 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the idempotents and the projections).* Put $S=S'\\times S''$, $e_1=(1,0)$, $e_2=(0,1)$. Then $e_1^2=e_1$, $e_2=1-e_1$, and $e_1+e_2=1$, so $e_1,e_2$ generate the unit ideal of $S$. Let $p_1:S\\to S'$, $(a,b)\\mapsto a$, and $p_2:S\\to S''$, $(a,b)\\mapsto b$, be the projections. They are surjective ring homomorphisms, and homomorphisms of $R$-algebras: $p_1(\\psi'(r),\\psi''(r))=\\psi'(r)$ and $p_2(\\psi'(r),\\psi''(r))=\\psi''(r)$. Their kernels are $\\ker p_1=\\{(0,b)\\}=e_2S=(1-e_1)S$ and $\\ker p_2=\\{(a,0)\\}=e_1S=(1-e_2)S$, since $(0,b)=(0,1)(a',b)$ and $(a,0)=(1,0)(a,b')$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ED (lemma-spec-product, line 3822), first line of its proof ('Write 1 = e_1 + e_2 with e_1 = (1, 0) and e_2 = (0, 1)')"
-   }
-  },
-  {
-   "text": "*Step 2 (the factors are the localizations $S_{e_1}$, $S_{e_2}$).* By Step 1, $e_1$ is idempotent and $p_1:S\\to S'$ is surjective with $\\ker p_1=(1-e_1)S$; so by [lem-weil-pbc-fg-idempotent-ideal-idempotent-generator] (2) $p_1(e_1)=1$ and the ring map $\\bar p_1:S_{e_1}=S[1/e_1]\\to S'$, $x/e_1^n\\mapsto p_1(x)$, induced by $p_1$ is an isomorphism. It is a homomorphism of $R$-algebras, where $S_{e_1}$ is an $R$-algebra via $R\\to S\\to S_{e_1}$: the image $(\\psi'(r),\\psi''(r))/1$ of $r$ goes to $p_1(\\psi'(r),\\psi''(r))=\\psi'(r)$ (Step 1). In the same way (with $e_2$, $\\ker p_2=(1-e_2)S$) $\\bar p_2:S_{e_2}\\to S''$ is an isomorphism of $R$-algebras.",
+   "text": "Lift S' and S'' to the common universe max v w, using ULift.algEquiv and smoothness invariant under algebra equivalence [lem-weil-pbc-smooth-ring-map-isomorphism-invariant]. Define the Fin 2 family A by these two lifted factors, with its componentwise commutative-ring and R-algebra structures.",
    "uses": [
-    "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator"
+    "lem-weil-pbc-smooth-ring-map-isomorphism-invariant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ED (lemma-spec-product, line 3822), proof: 'We leave it to the reader to show that R_1 = R_{e_1} is the localization of R at e_1'; the fact is Lemma Tag 00EH (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the localizations are smooth).* $R\\to S'$ is smooth by hypothesis and $\\bar p_1^{-1}:S'\\to S_{e_1}$ is an isomorphism of $R$-algebras (Step 2), so $R\\to S_{e_1}$ is a smooth ring map by [lem-weil-pbc-smooth-ring-map-isomorphism-invariant] (with $A=S'$, $B=S_{e_1}$, $\\alpha=\\bar p_1^{-1}$). Likewise $R\\to S_{e_2}$ is smooth, from $R\\to S''$ smooth and $\\bar p_2^{-1}:S''\\to S_{e_2}$.",
+   "text": "Smoothness [def-weil-pbc-smooth-ring-map] supplies formal smoothness and finite presentation for each A i. Mathlib Algebra.FormallySmooth.instForallOfFinite and Algebra.FinitePresentation.pi supply both properties for the finite dependent product, hence Smooth R (forall i, A i).",
    "uses": [
-    "lem-weil-pbc-smooth-ring-map-isomorphism-invariant",
     "def-weil-pbc-smooth-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), hint: 'smoothness of R -> S at q corresponds to ... smoothness of R -> S' at the corresponding prime'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (conclusion).* The elements $g_1=e_1$, $g_2=e_2$ of $S$ generate the unit ideal (Step 1) and $R\\to S_{g_1}$, $R\\to S_{g_2}$ are smooth ring maps (Step 3). By [lem-weil-pbc-smooth-ring-map-local-on-cover] (with $m=2$), $R\\to S=S'\\times S''$ is a smooth ring map [def-weil-pbc-smooth-ring-map]. (This is the finite-cover form of Stacks' hint 'by Lemma 00TC we can check smoothness one prime at a time': every prime of $S$ lies in $D(e_1)$ or $D(e_2)$, Lemma 00ED.)",
+   "text": "Upgrade RingEquiv.piFinTwo A to an R-algebra equivalence: scalar compatibility is definitional. Transfer smoothness to the binary product and then to S' x S'' by AlgEquiv.prodCongr of the ULift algebra equivalences, using [lem-weil-pbc-smooth-ring-map-isomorphism-invariant].",
    "uses": [
-    "lem-weil-pbc-smooth-ring-map-local-on-cover",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-smooth-ring-map-isomorphism-invariant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth, line 37572), its proof ('there exists a finite covering Spec(S) = union D(g_i) such that each S_{g_i} is smooth ...')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator",
-  "lem-weil-pbc-smooth-ring-map-isomorphism-invariant",
   "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+  "lem-weil-pbc-smooth-ring-map-isomorphism-invariant"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth): Stacks' proof is 'Omitted' with a hint (Lemmas 00TC and 00ED); the steps carry out that hint, written by the agent"
+  "by": "worker",
+  "document": "Mathlib/RingTheory/Smooth/Pi.lean; Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean; Mathlib/Algebra/Ring/Fin.lean",
+  "place": "Finite-product formal smoothness and finite presentation, transported through explicit algebra equivalences (P4 second reading, 2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -206,5 +181,15 @@
   "reviewer": "R-spa",
   "group": "H1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T010618-L-2672214",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
