@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the affine derived equivalence. The termwise tilde/global-sections counit on F is invertible because hF gives quasi-coherence in every degree. Consequently derived maps from tilde L to Q(F) are derived module maps from L to the top-sections complex M. K-projectivity represents every such map by a module chain map; the adjunction counit gives its sheaf chain map to F. This proves the representative clause.",
+   "text": "Use exists_affineQCohDerivedEquivalence and its natural tilde comparison to transport derived Hom by full faithfulness. The termwise ordinary tilde/sections counit on F is invertible by hF. Naturality of the comparison and the ordinary complex adjunction prove normalization on Q.map of chain maps. The existing CochainComplex.IsKProjective.exists_Q_map_eq then supplies a module chain representative, whose ordinary adjoint is the required sheaf representative.",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
     "def-sc-koszul-open-system"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "Cycles of the module Hom complex in degree zero are chain maps; its boundaries are null homotopies. The K-projective localization bijection therefore identifies its homology with derived Hom. The ordinary complex adjunction computes the transpose of a sheaf chain map. Compose the inverse Hom identification with the inverse localization/homology factor iso and the inverse of koszulCechHomObjIso. This gives the equivalences a and exactly koszulOpenHomStageClass on Q.map t. The class itself is constructed by the module cycle-kernel iso and homology projection; it involves no chosen data from an existence theorem. Zero tails and zero rings give singleton groups.",
+   "text": "Construct an additive equivalence between degree-zero Hom cocycles and the kernel of the module Hom differential. Compose with the module short-complex homology projection. Its kernel is precisely coboundaries and it is surjective, so it induces an additive equivalence from CohomologyClass to module Hom homology. Mathlib CohomologyClass.equivOfIsKProjective, SmallShiftedHom.equiv, and ShiftedHom.homEquiv give derived Hom, with normalization verified at degree zero. Compose these equivalences with the inverse localization/homology factor iso and the inverse of koszulCechHomObjIso. The resulting equivalence sends Q.map t to exactly koszulOpenHomStageClass. Zero tails and zero rings are included.",
    "uses": [
     "lem-sc-bounded-above-projective-kprojective",
     "def-sc-module-total-hom-complex",
@@ -49,10 +49,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R3",
+  "group": "V4",
   "document": "https://stacks.math.columbia.edu/tag/08DD",
-  "place": "Proposition 36.9.5; 06Z0 and module Hom cycles",
-  "note": "Expansion of the assigned node proof, with the chain-map class constructed explicitly and the transport along the representative isomorphism proved in the parent."
+  "place": "Proposition 36.9.5; Tags 06Z0 and 0A8H; Mathlib KProjective and module short-complex homology",
+  "note": "Stage-3 proof independently read by V4: explicit cycle quotient, Mathlib K-projective shifted-Hom equivalence with degree-zero normalization, affine fully faithful transport normalized by naturality, and the existing K-projective chain-representative theorem. All five original proof dependencies remain used."
  },
  "mathlib_searches": [
   {
@@ -132,10 +132,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T072404-L-1124568",
-  "kind": "interface",
+  "landing": "20261013T100209-L-2499767",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
