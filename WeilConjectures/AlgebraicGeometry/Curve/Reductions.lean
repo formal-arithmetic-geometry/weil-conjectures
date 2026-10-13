@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Devissage
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
@@ -137,6 +141,58 @@ theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : T
   sorry
 
 /-! ### Reduction to constructible prime torsion -/
+
+/-- The reduction `C_red ⟶ C` of a scheme, the closed immersion of the closed subscheme cut out
+by the nilradical, is surjective. -/
+instance Scheme.surjective_nilradical_subschemeι (C : Scheme.{u}) :
+    Surjective C.nilradical.subschemeι :=
+  ⟨Set.range_eq_univ.mp (by
+    rw [Scheme.IdealSheafData.range_subschemeι, Scheme.support_nilradical]; rfl)⟩
+
+/-- **`C₇` for constructible prime-field coefficients on a possibly non-reduced curve.** Under
+the hypothesis of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`, the
+pullback maps `Hᵠ(C, G) ⟶ Hᵠ(C', ι'^* G)` are bijective for every proper curve `C` and every
+constructible sheaf `G` of `𝐅_r`-modules on `C`: the reduction `ρ : C_red ⟶ C` and its base
+change `C'_red ⟶ C'` are universal homeomorphisms, which identify the cohomology of `C` and
+`C'` with that of `C_red` and `C'_red` (`AlgebraicGeometry.Etale.cohomologyMap_bijective`).
+(blueprint: `lem-weil-pbc-curve-constructible-reduction`, reduction to `C_red`) -/
+theorem IsCurve.bijective_cohomologyMap_of_isConstructibleSheaf_of_forall_isReduced
+    {k : Type u} [Field k] [IsAlgClosed k]
+    (H : ∀ {X X' : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsProper g] [IsReduced X]
+      (k' : Type u) [Field k'] [IsAlgClosed k'] {ι : Spec (.of k') ⟶ Spec (.of k)}
+      {g' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X} (_ : IsPullback ι' g' g ι) (r : ℕ) [Fact r.Prime]
+      (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
+      [Scheme.IsConstructibleSheaf G] (q : ℕ),
+      Function.Bijective (Etale.cohomologyMap ι'
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+          AddCommGrpCat.{u + 1})).obj G) q))
+    {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] (k' : Type u)
+    [Field k'] [IsAlgClosed k'] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')}
+    {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι) (r : ℕ) [Fact r.Prime]
+    (G : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
+    [Scheme.IsConstructibleSheaf G] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι'
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+        AddCommGrpCat.{u + 1})).obj G) q) := by
+  set ρ := C.nilradical.subschemeι
+  have : IsCurve (ρ ≫ f) :=
+    { krullDim_le_one := ρ.isClosedEmbedding.isInducing.topologicalKrullDim_le.trans
+        (IsCurve.krullDim_le_one (f := f)) }
+  have : Scheme.IsConstructibleSheaf ((ρ)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))].obj G) :=
+    Scheme.IsConstructibleSheaf.upperStar ρ G
+  have hred := H (ρ ≫ f) k' ((IsPullback.of_hasPullback ρ ι').paste_vert h) r
+    ((ρ)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))].obj G) q
+  set A := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+    AddCommGrpCat.{u + 1})).obj G
+  have e := asIso (upperStarForget₂Comparison (ULift.{u + 1} (ZMod r)) ρ G)
+  have hred' : Function.Bijective (cohomologyMap (pullback.fst ρ ι')
+      ((ρ)^*[AddCommGrpCat.{u + 1}].obj A) q) :=
+    bijective_cohomologyMap_of_retract _ e.hom e.inv e.hom_inv_id q hred
+  have h₁ := (bijective_cohomologyMap_comp_iff (pullback.fst ρ ι') ρ _ rfl A q).1
+    (hred'.comp (cohomologyMap_bijective ρ A q))
+  have h₂ := (bijective_cohomologyMap_comp_iff (pullback.snd ρ ι') ι' _ pullback.condition.symm
+    A q).2 h₁
+  exact (Function.Bijective.of_comp_iff' (cohomologyMap_bijective _ _ q) _).1 h₂
 
 /-- **Reduction of `C₇` to constructible prime torsion on reduced curves.** Let `k` be
 algebraically closed. Suppose that `C₇` holds for every reduced proper curve `X` over `k`,
