@@ -1,6 +1,10 @@
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel
+import all Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries
+import Sheaf.CategoryTheory.FiniteCycleFormula
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 @[expose] public section
 
@@ -40,6 +44,46 @@ theorem finiteCocone_stationary
       (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))) :
     ∀ p q : ℤ, ∃ r : ℕ, ∀ t : ℕ, r ≤ t →
       X.cycleBoundaryTower.Z t p q = X.cycleBoundaryTower.Z r p q ∧
-      X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q := by sorry
+      X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q := by
+  intro p q
+  obtain ⟨a, _, ha, _⟩ := hA (p + q)
+  obtain ⟨_, b, _, hb⟩ := hA (p + q + 1)
+  let r := max (p - a).toNat (b - p - 2).toNat
+  have hcycles (t : ℕ) (ht : r ≤ t) :
+      X.cycleBoundaryTower.Z t p q = kernelSubobject (X.f p q) := by
+    have hbound : b ≤ p + 2 + (t : ℤ) := by dsimp [r] at ht; omega
+    have hsrc : IsZero (X.D (p + 2 + (t : ℤ)) (q - 1 - (t : ℤ))) := by
+      convert hb (p + 2 + t) hbound using 1
+      congr 1
+      omega
+    rw [finiteCycle_formula X t p q,
+      hsrc.eq_zero_of_src (X.incomingAlphaIter t (p + 2) (q - 1)),
+      imageSubobject_zero]
+    apply le_antisymm
+    · apply le_kernelSubobject
+      have hw := (Subobject.isPullback (X.f p q) ⊥).w
+      rw [← hw]
+      simp
+    · apply Subobject.le_of_factors
+      apply pullback_factors
+      rw [kernelSubobject_arrow_comp]
+      exact Subobject.factors_zero
+  have hboundaries (t : ℕ) (ht : r ≤ t) :
+      X.cycleBoundaryTower.B t p q =
+        (Subobject.«exists» (X.initialG p q)).obj
+          (kernelSubobject (eqToHom (by congr 1; omega) ≫ (A (p + q)).ι p)) := by
+    have hbound : p - (t : ℤ) ≤ a := by dsimp [r] at ht; omega
+    have := ha (p - t) hbound
+    have hker : kernelSubobject (X.alphaIter t p q) =
+        kernelSubobject (eqToHom (by congr 1; omega) ≫ (A (p + q)).ι p) := by
+      have hh := congrArg
+        (fun f : X.D p q ⟶ (A (p + q)).obj ↦ kernelSubobject f)
+        (alphaIter_cocone X (p + q) (A (p + q)) t p q rfl)
+      simpa only [← Category.assoc, kernelSubobject_comp_mono] using hh
+    rw [finiteBoundary_alphaKernel X t p q, hker]
+  refine ⟨r, ?_⟩
+  intro t ht
+  exact ⟨(hcycles t ht).trans (hcycles r le_rfl).symm,
+    (hboundaries t ht).trans (hboundaries r le_rfl).symm⟩
 
 end CategoryTheory.BigradedExactCouple

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-finite-cycle-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-cocone-limits",
+   "place": "Stationarity sublemma"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite cycle formula",
+ "statement": "Let C be an abelian category and X a type-zero bigraded exact couple [def-sp-exact-couple]. Write T for its canonical cycle-boundary tower [def-sp-convergence]. For every natural t and integers p,q, T.Z t p q is the inverse image under X.f p q of the image of the incoming t-fold alpha iterate from D(p+2+t,q-1-t) to D(p+2,q-1). No cocone or tail assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 12.21.4 (Tag 011T), cycle formula; Remark 12.21.5 (Tag 0AMJ), shifted form"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Use the recursively prescribed incoming powers A and mono inclusions I of pageCouple_image_prefix. Identify A with incomingAlphaIter by induction on their recurrences, with integer transports. Their image subobjects agree. Reuse the private incomingAlphaIter_succ helper of FinitePageImageLift for the incoming-iterate recurrence, via a proof-only import all.",
+   "uses": [
+    "lem-sp-derived-couple-image-prefix",
+    "def-sp-convergence",
+    "lem-sp-finite-page-image-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on r to show that the canonical cycle projection, page f and I r compose to the cycle inclusion followed by original f. The base is projection_zero. At the successor substitute projection_succ and the I recurrence, use DerivedMaps.f_comm, then cycleLift_comm, the induction hypothesis and the nested cycle inclusion equation.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on r for the cycle formula with image I r. The base is the whole E and the pullback of the identity image. Rewrite the successor cycle recursion using ker(page d)=page f inverse image of ker(page g). Compose pullbacks. The commutative square in the previous step, whose right arrow I r is mono and whose left subobject is by induction the pullback of image I r, identifies this new cycle subobject with original f inverse image of the direct image under I r of ker(page g). Both square-factorization implications follow from the pullback universal property, cancelling the mono I r for the reverse implication. Exactness identifies ker(page g) with the incoming page-alpha image represented by derivedDInclusion. Its direct image under I r is the image of I(r+1), by the inclusion recurrence. Replace image I by image A and then A by incomingAlphaIter.",
+   "uses": [
+    "lem-sp-derived-couple-kernel-identities",
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-couple-image-prefix",
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-kernel-identities",
+  "lem-sp-finite-page-image-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011T and 0AMJ read online at https://stacks.math.columbia.edu/tag/011T and https://stacks.math.columbia.edu/tag/0AMJ because local literature is absent; induction expanded and formalized by the H3 second reader."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact couple finite page cycles inverse image iterated alpha image",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac, HomologicalComplex.cycles_left_exact, HomologicalComplex.cyclesIsoSc'_inv_iCycles, HomologicalComplex.toCycles_i, CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac_assoc, HomologicalComplex.i_cyclesMk, CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles, HomologicalComplex.restrictionCyclesIso_inv_iCycles",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exactCouple|exact_couple|incomingAlpha|cycle.*formula",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subobject.pullback, imageSubobject",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Subobject.pullback'",
+   "verdict": "No matching exact-couple cycle formula; the Loogle identifier was not recognized."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite page cycles of an exact couple are the inverse image under f of the image of an iterated alpha map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteCoconeStationary",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteCycleFormula",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCycleFormula.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCycle_formula",
+  "statement": "theorem finiteCycle_formula (X : BigradedExactCouple C 0) (t : ℕ) (p q : ℤ) :\n    X.cycleBoundaryTower.Z t p q =\n      (Subobject.pullback (X.f p q)).obj\n        (imageSubobject (X.incomingAlphaIter t (p + 2) (q - 1)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T060418-L-583366",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T060418-L-583366",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

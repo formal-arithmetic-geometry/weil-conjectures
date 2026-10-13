@@ -21,22 +21,36 @@
  ],
  "proof": [
   {
-   "text": "Write T for the canonical tower. For every natural t, its subobjects satisfy\nZ_t(p,q) = f(p,q)^{-1}(im incomingAlphaIter t (p+2) (q-1)) and\nB_t(p,q) = im(initialG(p,q) restricted to ker(alphaIter t p q)).\nThese identities are proved simultaneously by induction on t. At zero the incoming\niterate is an identity, giving the whole E-object, and the outgoing iterate has zero\nkernel, giving zero boundaries. For the successor, use the tower pullback formulas:\nthe derived D inclusion identifies its D-object with the image of the incoming alpha;\nthe derived f commutation identifies the lifted cycle condition with membership in\nthe next incoming image. The derived g commutation identifies the pulled-back image\nof the incoming differential with the initial g-image of the next outgoing kernel.\nExactness at D supplies the kernel/image identifications, and the epimorphic tower\nprojection with kernel B_t makes these equalities of subobjects of the initial E.\nFix p,q and choose the upper bound b on diagonal p+q+1 and the lower bound a on\ndiagonal p+q. Choose r natural with p+2+r >= b and p-r <= a. For every t >= r,\nthe source of incomingAlphaIter t (p+2) (q-1) is zero, so Z_t = ker(f(p,q)).\nThe iterated cocone equation says alphaIter t p q followed by the cocone map at\np-t equals the cocone map at p, after the canonical index transports. The map at\np-t is an isomorphism, hence ker(alphaIter t p q) is the kernel of the cocone map\nat p. Thus B_t is its image under initialG, independently of t. Both formulas\nalso hold at r, proving the required simultaneous stationarity.",
+   "text": "Use finiteCycle_formula and finiteBoundary_alphaKernel for the canonical towers. Fix p,q and choose a lower cocone-isomorphism bound a on degree p+q and an upper zero bound b on degree p+q+1. Set r=max(toNat(p-a),toNat(b-p-2)). For every t>=r the source D(p+2+t,q-1-t) of incomingAlphaIter t is zero; its image is zero and the cycle formula gives Z t=ker(original f).",
    "uses": [
     "def-sp-exact-couple",
-    "def-sp-convergence"
+    "def-sp-convergence",
+    "lem-sp-finite-cycle-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the existing private alphaIter_cocone theorem through a proof-only import all of Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries; it telescopes alphaIter t against the cocone transition equations, including all index transports. For t>=r the endpoint p-t is at most a, so its cocone map is an isomorphism. Postcomposition with this isomorphism and the endpoint transport preserves kernels; hence ker(alphaIter t) is the kernel of the cocone map at p transported from D(p,q). The finite boundary formula therefore makes B t the fixed initial-g image of this kernel. The cycle and boundary formulas also hold at r, proving both eventual equalities.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "lem-sp-finite-boundary-alpha-kernel",
+    "lem-sp-finite-cocone-limit-boundaries"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-exact-couple",
-  "def-sp-convergence"
+  "def-sp-convergence",
+  "lem-sp-finite-cycle-formula",
+  "lem-sp-finite-boundary-alpha-kernel",
+  "lem-sp-finite-cocone-limit-boundaries"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012W"
+  "place": "Tag 011T and shifted Tag 0AMJ give the finite formulas; the diagonal-tail cocone argument is an agent-written generalization of the finite-filtration argument of Tag 012W. Returned-delivery repair reuses the existing cocone iteration helper from FiniteCoconeLimitBoundaries instead of proving it again."
  },
  "mathlib_searches": [
   {
@@ -101,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c48ee",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T022429-L-3219042",
+  "landing": "20261013T060418-L-583366",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged finiteCocone_limits signature and proof with its node; checked stationarity formulas, metadata, repair, clean compilation of both delivered modules and direct importer Sheaf.CategoryTheory.FiniteCoconeExactCouple, and axioms limited to the three permitted axioms plus sorryAx from the named stationarity hole."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
