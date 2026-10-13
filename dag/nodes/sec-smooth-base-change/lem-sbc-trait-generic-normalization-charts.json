@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-trait-generic-normalization-charts",
+ "kind": "statement",
+ "title": "Pointwise standard tame charts for a generic torsor over a DVR",
+ "statement": "Let $A$ be a discrete valuation ring (a nonfield local principal ideal domain), $K$ a field with an $A$-algebra structure making it the fraction field of $A$, and $d:L\\to\\operatorname{Spec}A$ a quasi-compact quasi-separated smooth morphism of schemes [def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms]. Write $b:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ for the algebra map, $L_K=L\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$ and $j:L_K\\to L$ for the first projection [def-pc-fibre-product]. Let $G$ be a finite group with $|G|$ invertible in $A$ and $W\\to L_K$ a finite etale $G$-torsor [def-sbc-normal-dominant-galois]. Let $p:W\\to L$ be its composite with $j$, and let $\\nu:p.\\mathrm{normalization}\\to L$ be the concrete relative normalization [lem-weil-pbc-relative-normalization]. If $\\nu$ is finite, every $x\\in L$ has an affine etale neighbourhood $\\varphi:\\operatorname{Spec}R\\to L$ and $y\\in\\operatorname{Spec}R$ with $\\varphi(y)=x$, and integers $m\\geq0$, $e_k>0$ for $k\\in\\operatorname{Fin}m$, all invertible in $R$, together with $f\\in R$, such that $\\nu\\times_L\\operatorname{Spec}R$ is isomorphic over $\\operatorname{Spec}R$ to $\\operatorname{Spec}\\prod_{k\\in\\operatorname{Fin}m}R[T]/(T^{e_k}-f)$. All schemes and rings lie in one universe; the group lies in the next universe. The case $m=0$ uses the empty product ring.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ (first trait paragraph), 09EB, 0EYG, 0EYH, 03GE and 03GV"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "A DVR is Noetherian and regular. Smoothness makes L locally Noetherian and regular.\nA uniformizer cuts out its closed fibre D as an effective Cartier divisor, since the\nsmooth morphism is flat. D is regular because it is smooth over the residue field.\nThe complement is the generic fibre. At a generic point of D its local ring is a DVR.\nFor each connected component of the generic torsor, use its stabilizer in G as the\nGalois group. The ramification indices and residue degrees divide the stabilizer order\n(Tag 09EB). They therefore divide the invertible order of G. The inseparable residue\nextension has degree a power of the residue characteristic, so its degree is one.\nConsequently the generic cover is tame in codimension one. Tag 0EYG gives an affine\netale neighbourhood of each point on which the punctured cover is a finite disjoint\nunion of standard root covers, all using the same equation for D. Tag 0EYH identifies\nits normalization with the full standard root covers. Normalization commutes with\netale base change (03GE, 03GV), giving isomorphisms over each affine neighbourhood.\nFinite disjoint unions of affine spectra are spectra of product rings. Enumerate the\nfinite component set by Fin m. Outside D split the finite etale cover etale locally and\nuse e = 1, f = 1. The empty family of\ncomponents gives m = 0 and the zero product ring. No section is required.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ (first trait paragraph), 09EB, 0EYG, 0EYH, 03GE and 03GV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalization of a finite Galois cover of a smooth scheme over a discrete valuation ring has standard tame root charts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|tamely ramified",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale covering complement of regular effective Cartier divisor normalization standard Kummer charts",
+   "results": "8 results: normalizationOpenCover and etale-locus algebra tools, no standard tame chart theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "7 results include smooth normalization base change; it identifies normalization after charts exist, but does not construct root charts.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "root cover|regular divisor|tame ramification",
+   "results": "No Mathlib hits. rg in both library roots found descriptions and section-dependent downstream statements; none supplies generic trait charts.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitCharts",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: standard tame root forms and local reduction in the proof of Tag 0EYJ",
+   "via": [
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.TraitGenericNormalizationCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/TraitGenericNormalizationCharts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.trait_generic_normalization_chart",
+  "statement": "theorem GaloisCover.trait_generic_normalization_chart (A K : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Field K] [Algebra A K] [IsFractionRing A K] {L : Scheme.{u}} (d : L ⟶ Spec (CommRingCat.of A)) [QuasiCompact d] [QuasiSeparated d] [Smooth d] (G : Type (u + 1)) [Group G] [Finite G] (hG : IsUnit (Nat.card G : A)) (W : GaloisCover G (pullback d (Spec.map (CommRingCat.ofHom (algebraMap A K))))) : letI : IsFinite W.π := W.isFinite let b := Spec.map (CommRingCat.ofHom (algebraMap A K)) let p := W.π ≫ pullback.fst d b IsFinite p.fromNormalization → ∀ x : L, ∃ (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R), Etale φ ∧ φ y = x ∧ ∃ (m : ℕ) (f : R) (e : Fin m → ℕ), (∀ k, 0 < e k ∧ IsUnit (e k : R)) ∧ ∃ α : pullback p.fromNormalization φ ≅ Spec (CommRingCat.of (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))), α.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R (∀ k : Fin m, AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) = pullback.snd p.fromNormalization φ",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T040748-L-3948948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T040748-L-3948948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

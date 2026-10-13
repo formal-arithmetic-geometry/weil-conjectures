@@ -17,6 +17,9 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 public import Mathlib.RingTheory.AdjoinRoot
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
+import Sheaf.AlgebraicGeometry.Morphisms.TraitGenericNormalizationCharts
+
 /-!
 # Standard tame charts for normalization over a local trait
 
@@ -95,6 +98,48 @@ theorem GaloisCover.stalk_normalization_trait_charts {S C : Scheme.{u}}
             α.hom ≫ Spec.map (CommRingCat.ofHom
               (algebraMap (R i) (∀ k : Fin m,
                 AdjoinRoot ((Polynomial.X : Polynomial (R i)) ^ e k - Polynomial.C f)))) =
-              pullback.snd n (φ i) := by sorry
+              pullback.snd n (φ i) := by
+  classical
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr
+  dsimp only
+  intro hn
+  let a := S.fromSpecStalk s
+  let d := pullback.snd c a
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
+  let : IsFinite n := hn
+  obtain ⟨W, β, hβ⟩ := GaloisCover.stalk_normalization_generic_comparison
+    hS c G q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr
+  let : IsFinite W.π := W.isFinite
+  let b := Spec.map (CommRingCat.ofHom (algebraMap (S.presheaf.stalk s) S.functionField))
+  let p := W.π ≫ pullback.fst d b
+  have hβ' : β.hom ≫ p.fromNormalization = n := hβ
+  have hp : IsFinite p.fromNormalization := by
+    have h : β.inv ≫ n = p.fromNormalization := by
+      rw [← hβ', Iso.inv_hom_id_assoc]
+    rw [← h]
+    infer_instance
+  have hGA : IsUnit (Nat.card G : S.presheaf.stalk s) := by
+    simpa using hG.map (S.presheaf.Γgerm s).hom
+  have hlocal :=
+    GaloisCover.trait_generic_normalization_chart (S.presheaf.stalk s) S.functionField
+      d G hGA W hp
+  choose R φ y hφ hy hcharts using hlocal
+  refine ⟨↥(pullback c a), R, φ, hφ, ?_, ?_⟩
+  · intro x
+    exact ⟨x, y x, hy x⟩
+  intro i
+  obtain ⟨m, f, e, he, α, hα⟩ := hcharts i
+  let δ : pullback n (φ i) ≅ pullback p.fromNormalization (φ i) :=
+    asIso (pullback.map n (φ i) p.fromNormalization (φ i) β.hom (𝟙 _) (𝟙 _)
+      (by simpa using hβ'.symm) (by simp))
+  refine ⟨m, f, e, he, δ ≪≫ α, ?_⟩
+  simp only [Iso.trans_hom, Category.assoc, hα]
+  change δ.hom ≫ pullback.snd p.fromNormalization (φ i) = pullback.snd n (φ i)
+  simp [δ, pullback.map]
+
 
 end AlgebraicGeometry.Scheme
