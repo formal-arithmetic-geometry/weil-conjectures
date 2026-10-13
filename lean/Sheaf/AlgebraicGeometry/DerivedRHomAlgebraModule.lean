@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.HomComplexSingleNatural
 
 /-!
 # Derived internal Hom with its algebra module structure
@@ -32,6 +32,107 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem compose_comparisons
+    {A D : Type*} [Category A] [Category D] [Abelian A] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory D]
+    (H : A ⥤ D) [H.Additive] (T : D ⥤ A) [T.Additive]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    (O : A ⥤ A) [O.Additive] (I : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
+    (S : DerivedCategory A ⥤ DerivedCategory D) (R : DerivedCategory A ⥤ DerivedCategory A)
+    (s : Nonempty (DerivedCategory.Q ⋙ S ≅
+      I ⋙ H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q))
+    (e : H ⋙ T ≅ O)
+    (t : Nonempty (DerivedCategory.Q ⋙ R ≅
+      I ⋙ O.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)) :
+    Nonempty (S ⋙ T.mapDerivedCategory ≅ R) := by
+  obtain ⟨s⟩ := s
+  obtain ⟨t⟩ := t
+  let s' : DerivedCategory.Q ⋙ S ⋙ T.mapDerivedCategory ≅
+      I ⋙ H.mapHomologicalComplex (.up ℤ) ⋙ T.mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+    Functor.isoWhiskerRight s T.mapDerivedCategory ≪≫
+      Functor.isoWhiskerLeft (I ⋙ H.mapHomologicalComplex (.up ℤ))
+        T.mapDerivedCategoryFactors
+  let ec := Functor.mapHomologicalComplexCompIso e (.up ℤ)
+  let s'' := s' ≪≫ Functor.isoWhiskerLeft I (Functor.isoWhiskerRight ec DerivedCategory.Q)
+  exact ⟨(Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso A (.up ℤ)) _).preimageIso (s'' ≪≫ t.symm)⟩
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem fixed_comparison
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (I : C ⥤ C) (H : Cᵒᵖ ⥤ C ⥤ C) (R : Dᵒᵖ × D ⥤ E)
+    (P : C) (O : C ⥤ C) (V : C ⥤ E)
+    (c : Nonempty (Q.op.prod Q ⋙ R ≅ (𝟭 _).prod I ⋙ Functor.uncurry.obj H ⋙ V))
+    (e : Nonempty (H.obj (op P) ≅ O)) :
+    Nonempty (Q ⋙ ((Functor.const D).obj (op (Q.obj P))).prod' (𝟭 D) ⋙ R ≅
+      I ⋙ O ⋙ V) := by
+  obtain ⟨c⟩ := c
+  obtain ⟨e⟩ := e
+  let c' := (Functor.curry.mapIso c).app (op P)
+  let a := (Functor.curryObjProdComp Q.op Q R).app (op P)
+  let b : (Functor.curry.obj
+      ((𝟭 _).prod I ⋙ Functor.uncurry.obj H ⋙ V)).obj (op P) ≅
+      I ⋙ H.obj (op P) ⋙ V :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (by intro K K' f; simp)
+  exact ⟨a.symm ≪≫ c' ≪≫ b ≪≫
+    Functor.isoWhiskerLeft I (Functor.isoWhiskerRight e V)⟩
+
+
+private theorem restrictScalars_finite_limits
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u}} (α : R ⟶ S) :
+    PreservesFiniteLimits (SheafOfModules.restrictScalars.{u} α) := by
+  let T := SheafOfModules.restrictScalars.{u} α
+  have he : T ⋙ SheafOfModules.toSheaf.{u} R ≅ SheafOfModules.toSheaf.{u} S := Iso.refl _
+  have : PreservesFiniteLimits (T ⋙ SheafOfModules.toSheaf.{u} R) :=
+    preservesFiniteLimits_of_natIso he.symm
+  exact preservesFiniteLimits_of_reflects_of_preserves T (SheafOfModules.toSheaf.{u} R)
+
+private theorem restrictScalars_finite_colimits
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u}} (α : R ⟶ S) :
+    PreservesFiniteColimits (SheafOfModules.restrictScalars.{u} α) := by
+  let T := SheafOfModules.restrictScalars.{u} α
+  have he : T ⋙ SheafOfModules.toSheaf.{u} R ≅ SheafOfModules.toSheaf.{u} S := Iso.refl _
+  have : ReflectsFiniteColimits (SheafOfModules.toSheaf.{u} R) :=
+    { reflects := fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+  have : PreservesFiniteColimits (T ⋙ SheafOfModules.toSheaf.{u} R) :=
+    preservesFiniteColimits_of_natIso he.symm
+  exact preservesFiniteColimits_of_reflects_of_preserves T (SheafOfModules.toSheaf.{u} R)
+
+attribute [local instance] restrictScalars_finite_limits restrictScalars_finite_colimits
+
+private theorem additive_resolution_inverts
+    {A : Type*} [Category A] [Abelian A] [IsGrothendieckAbelian.{u} A]
+    {D : Type*} [Category D] [Abelian D] [HasDerivedCategory D]
+    (F : A ⥤ D) [F.Additive] :
+    (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy
+      (CochainComplex.kInjectiveResolutionFunctor.{u} A ⋙
+        F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) := by
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  intro M N f hf
+  have : QuasiIso f := hf
+  have : QuasiIso (η.app M) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
+  have : QuasiIso (η.app N) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A N).2
+  have hη : QuasiIso (η.app M ≫ I.map f) := by
+    rw [← η.naturality f]
+    dsimp
+    infer_instance
+  have : QuasiIso (I.map f) := (quasiIso_iff_comp_left _ _).mp hη
+  obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff (I.map f)).mp
+    (inferInstance : QuasiIso (I.map f))
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr
+  change QuasiIso ((F.mapHomologicalComplex _).map (I.map f))
+  rw [← he]
+  exact homotopyEquivalences_le_quasiIso _ _ _ ⟨F.mapHomotopyEquiv e, rfl⟩
 
 variable (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf)
 
@@ -407,20 +508,6 @@ private theorem forget_restrictScalars {C : Type*} [Category C]
       PresheafOfModules.toPresheaf R.obj =
       SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj := rfl
 
-private theorem ofPresheaf_eq {C : Type*} [Category C] (R : Cᵒᵖ ⥤ RingCat)
-    (P : Cᵒᵖ ⥤ AddCommGrpCat) (m₁ m₂ : ∀ U, Module (R.obj U) (P.obj U))
-    (h : m₁ = m₂)
-    (h₁ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : R.obj U) (x : P.obj U),
-      P.map f (@SMul.smul _ _ (m₁ U).toSMul r x) =
-        @SMul.smul _ _ (m₁ V).toSMul (R.map f r) (P.map f x))
-    (h₂ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : R.obj U) (x : P.obj U),
-      P.map f (@SMul.smul _ _ (m₂ U).toSMul r x) =
-        @SMul.smul _ _ (m₂ V).toSMul (R.map f r) (P.map f x)) :
-    @PresheafOfModules.ofPresheaf _ _ R P m₁ h₁ =
-      @PresheafOfModules.ofPresheaf _ _ R P m₂ h₂ := by
-  subst m₂
-  rfl
-
 private theorem sheaf_eq {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat} {M N : SheafOfModules R} (h : M.val = N.val) : M = N := by
   cases M
@@ -438,6 +525,61 @@ private theorem functor_eq_of_comp {C D E : Type*} [Category C] [Category D] [Ca
     CategoryTheory.Functor.congr_hom hc f
 
 
+private theorem restrict_ofPresheaf_eq
+    {C : Type*} [Category C] (R S : Cᵒᵖ ⥤ RingCat) (α : R ⟶ S)
+    (P : Cᵒᵖ ⥤ AddCommGrpCat) (m₁ : ∀ U, Module (S.obj U) (P.obj U))
+    (m₂ : ∀ U, Module (R.obj U) (P.obj U))
+    (h : (fun U ↦ letI := m₁ U; Module.compHom (P.obj U) (α.app U).hom) = m₂)
+    (h₁ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : S.obj U) (x : P.obj U),
+      P.map f (@SMul.smul _ _ (m₁ U).toSMul r x) =
+        @SMul.smul _ _ (m₁ V).toSMul (S.map f r) (P.map f x))
+    (h₂ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : R.obj U) (x : P.obj U),
+      P.map f (@SMul.smul _ _ (m₂ U).toSMul r x) =
+        @SMul.smul _ _ (m₂ V).toSMul (R.map f r) (P.map f x)) :
+    (PresheafOfModules.restrictScalars α).obj
+      (@PresheafOfModules.ofPresheaf _ _ S P m₁ h₁) =
+        @PresheafOfModules.ofPresheaf _ _ R P m₂ h₂ := by
+  subst m₂
+  rfl
+
+private theorem presheaf_ofPresheaf_eq
+    {C : Type*} [Category C] (R : Cᵒᵖ ⥤ RingCat) (M : PresheafOfModules R) :
+    @PresheafOfModules.ofPresheaf _ _ R M.presheaf
+      (fun U ↦ (M.obj U).isModule) (fun _ _ f r x ↦ M.map_smul f r x) = M := by
+  rfl
+
+private theorem sheafAlgebraHomUnderlying_obj_val_eq
+    (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj Y.sheaf)) :
+    ((sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
+      ((sheafCompose (Opens.grothendieckTopology Y)
+        (forget₂ CommRingCat RingCat)).map B.hom)).obj F).val =
+      (SheafOfModules.homObj (R := Y.sheaf) B.toModule F).val := by
+  let P := (PresheafOfModules.homObj B.toModule.val F.val).presheaf
+  let R := Y.sheaf.obj ⋙ forget₂ CommRingCat RingCat
+  let m₁ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
+    Module.compHom (sheafAlgebraHomSections Y B F U) (B.hom.hom.app U).hom
+  let m₂ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
+    (PresheafOfModules.homObj B.toModule.val F.val).obj U |>.isModule
+  have hm : m₁ = m₂ := by
+    funext U
+    exact Module.ext' _ _ (sheafAlgebraHom_underlying_linear Y B F U)
+  let S := B.right.obj ⋙ forget₂ CommRingCat RingCat
+  let α : R ⟶ S := (Functor.whiskerRight B.hom.hom (forget₂ CommRingCat RingCat))
+  have h := restrict_ofPresheaf_eq R S α P (sheafAlgebraHomModule Y B F) m₂ hm
+    (fun _ _ f b φ ↦ sheafAlgebraHom_restrict_smul Y B F f b φ)
+    (fun _ _ f r x ↦ (PresheafOfModules.homObj B.toModule.val F.val).map_smul f r x)
+  exact h.trans (presheaf_ofPresheaf_eq R (PresheafOfModules.homObj B.toModule.val F.val))
+
+private theorem sheafAlgebraHomUnderlying_obj_eq (F : SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf)) :
+    (sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars.{u}
+      ((sheafCompose (Opens.grothendieckTopology Y)
+        (forget₂ CommRingCat RingCat)).map B.hom)).obj F =
+      ((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)).obj F :=
+  sheaf_eq (sheafAlgebraHomUnderlying_obj_val_eq Y B F)
+
 /-- Restricting the explicitly constructed Hom functor gives the existing O-module Hom.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
 (blueprint: def-pc-derived-rhom-algebra-module).
@@ -451,38 +593,19 @@ theorem sheafAlgebraHomUnderlying_eq :
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom) =
       (SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule) := by
-  have hobj (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
-      (forget₂ CommRingCat RingCat)).obj Y.sheaf)) :
-      ((sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
-        ((sheafCompose (Opens.grothendieckTopology Y)
-          (forget₂ CommRingCat RingCat)).map B.hom)).obj F).val =
-        (SheafOfModules.homObj (R := Y.sheaf) B.toModule F).val := by
-    let P := (PresheafOfModules.homObj B.toModule.val F.val).presheaf
-    let R := Y.sheaf.obj ⋙ forget₂ CommRingCat RingCat
-    let m₁ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
-      Module.compHom (sheafAlgebraHomSections Y B F U) (B.hom.hom.app U).hom
-    let m₂ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
-      (PresheafOfModules.homObj B.toModule.val F.val).obj U |>.isModule
-    have hm : m₁ = m₂ := by
-      funext U
-      exact Module.ext' _ _ (sheafAlgebraHom_underlying_linear Y B F U)
-    apply ofPresheaf_eq R P m₁ m₂ hm
-    · intro U V f r x
-      exact ((sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
-        ((sheafCompose (Opens.grothendieckTopology Y)
-          (forget₂ CommRingCat RingCat)).map B.hom )).obj F).val.map_smul f r x
-    · intro U V f r x
-      exact (PresheafOfModules.homObj B.toModule.val F.val).map_smul f r x
-  have hs (F) : (sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
-        ((sheafCompose (Opens.grothendieckTopology Y)
-          (forget₂ CommRingCat RingCat)).map B.hom)).obj F =
-      ((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)).obj F := by
-    exact sheaf_eq (hobj F)
   let R := ((sheafCompose (Opens.grothendieckTopology Y)
     (forget₂ CommRingCat RingCat)).obj Y.sheaf)
   apply functor_eq_of_comp _ _
-    (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) hs
+    (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj)
+    (sheafAlgebraHomUnderlying_obj_eq Y B)
   rw [CategoryTheory.Functor.assoc, forget_restrictScalars]
+  refine CategoryTheory.Functor.ext (fun F ↦ rfl) ?_
+  intro F G f
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro φ
   rfl
 
 
@@ -527,38 +650,13 @@ noncomputable def toSheafAlgebraHomResolution :
     (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
 
+section
+
 variable (hB : B.toModule.IsQuasicoherent)
   [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
   [HasDerivedCategory.{wB} (SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))]
-
-private theorem additive_resolution_inverts
-    {A : Type*} [Category A] [Abelian A] [IsGrothendieckAbelian.{u} A]
-    {D : Type*} [Category D] [Abelian D] [HasDerivedCategory D]
-    (F : A ⥤ D) [F.Additive] :
-    (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy
-      (CochainComplex.kInjectiveResolutionFunctor.{u} A ⋙
-        F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) := by
-  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
-  let η := CochainComplex.toKInjectiveResolution.{u} A
-  intro M N f hf
-  have : QuasiIso f := hf
-  have : QuasiIso (η.app M) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
-  have : QuasiIso (η.app N) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A N).2
-  have hη : QuasiIso (η.app M ≫ I.map f) := by
-    rw [← η.naturality f]
-    dsimp
-    infer_instance
-  have : QuasiIso (I.map f) := (quasiIso_iff_comp_left _ _).mp hη
-  obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff (I.map f)).mp
-    (inferInstance : QuasiIso (I.map f))
-  apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr
-  change QuasiIso ((F.mapHomologicalComplex _).map (I.map f))
-  rw [← he]
-  exact homotopyEquivalences_le_quasiIso _ _ _ ⟨F.mapHomotopyEquiv e, rfl⟩
 
 set_option linter.unusedSectionVars false in
 /-- The resolution followed by termwise algebra-valued Hom inverts quasi-isomorphisms
@@ -582,6 +680,8 @@ theorem sheafAlgebraHomResolution_inverts :
   let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   exact additive_resolution_inverts (sheafAlgebraHom Y B)
 
+end
+
 /-- Derived internal Hom with the natural B-module structure: localize termwise
 Hom(B, I(M)), where I is the fixed degreewise injective K-injective resolution.
 Source: Stacks Project, Section 48.11, Tags 0BV0 and 0BV1
@@ -601,6 +701,12 @@ noncomputable def derivedRHomAlgebraModule
     (sheafAlgebraHomResolution Y ⋙
       (sheafAlgebraHom Y B).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)
     (sheafAlgebraHomResolution_inverts Y B) DerivedCategory.Q
+
+variable (hB : B.toModule.IsQuasicoherent)
+  [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+  [HasDerivedCategory.{wB} (SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))]
 
 /-- Computation on a representative, naturally in the entire complex M.
 Source: Stacks Project, Section 48.11, Tag 0BV0
@@ -624,18 +730,7 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom)) := by
-  let R := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).obj Y.sheaf
-  let A := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).obj B.right
-  let α : R ⟶ A := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).map B.hom
-  let T := SheafOfModules.restrictScalars.{u} α
-  have he : T ⋙ SheafOfModules.toSheaf.{u} R ≅ SheafOfModules.toSheaf.{u} A :=
-    Iso.refl _
-  have : PreservesFiniteLimits (T ⋙ SheafOfModules.toSheaf.{u} R) :=
-    preservesFiniteLimits_of_natIso he.symm
-  exact preservesFiniteLimits_of_reflects_of_preserves T (SheafOfModules.toSheaf.{u} R)
+  exact restrictScalars_finite_limits _
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteLimits
 
@@ -649,23 +744,14 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
     PreservesFiniteColimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom)) := by
-  let R := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).obj Y.sheaf
-  let A := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).obj B.right
-  let α : R ⟶ A := (sheafCompose (Opens.grothendieckTopology Y)
-    (forget₂ CommRingCat RingCat)).map B.hom
-  let T := SheafOfModules.restrictScalars.{u} α
-  have he : T ⋙ SheafOfModules.toSheaf.{u} R ≅ SheafOfModules.toSheaf.{u} A :=
-    Iso.refl _
-  have : ReflectsFiniteColimits (SheafOfModules.toSheaf.{u} R) :=
-    { reflects := fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
-  have : PreservesFiniteColimits (T ⋙ SheafOfModules.toSheaf.{u} R) :=
-    preservesFiniteColimits_of_natIso he.symm
-  exact preservesFiniteColimits_of_reflects_of_preserves T (SheafOfModules.toSheaf.{u} R)
+  exact restrictScalars_finite_colimits _
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteColimits
 
+set_option maxHeartbeats 1000000 in
+-- The single-complex and scalar-restriction encodings need additional elaboration fuel.
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Forgetting the algebra action recovers the recorded derived internal Hom, naturally
 in K. The derived restriction of scalars is the exact functor mapDerivedCategory; the Hom
 computation uses the same I as the definition above.
@@ -692,6 +778,31 @@ theorem derivedRHomAlgebraModule_underlying :
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
               (ComplexShape.up ℤ) 0).obj B.toModule)))).prod' (𝟭 _) ⋙
           derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+      let A := SheafOfModules.{u}
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).obj Y.sheaf)
+      let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+      let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+      let η := CochainComplex.toKInjectiveResolution.{u} A
+      let L := (CochainComplex.singleFunctor A 0).obj B.toModule
+      let T := SheafOfModules.restrictScalars.{u}
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map B.hom)
+      have eL := homComplex_single_natural_iso Y B.toModule
+      have c := derivedInternalHom_comparison.{u, w}
+        (Opens.grothendieckTopology Y) Y.sheaf I η
+        (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+      have t := fixed_comparison DerivedCategory.Q I
+        (homComplexFunctor (R := Y.sheaf))
+        (derivedInternalHom (Opens.grothendieckTopology Y) Y.sheaf) L
+        (((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)).mapHomologicalComplex
+          (.up ℤ)) DerivedCategory.Q c eL
+      have s := derivedRHomAlgebraModule_comparison Y B hB
+      exact compose_comparisons (sheafAlgebraHom Y B) T
+        ((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)) I
+        (derivedRHomAlgebraModule Y B hB) _ s (sheafAlgebraHomUnderlyingIso Y B) t
 
 end AlgebraicGeometry

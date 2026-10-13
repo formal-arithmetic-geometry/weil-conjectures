@@ -36,18 +36,29 @@
    }
   },
   {
-   "text": "Localization.lift defines the derived functor, and the already proved Localization.fac comparison computes it on a representative. For sheafAlgebraHomUnderlying_eq, compare the two sectionwise O-module structures on the same Hom carrier using Module.ext' and sheafAlgebraHom_underlying_linear. The generic ofPresheaf_eq helper identifies the resulting presheaves by equality of the module structures and proof irrelevance of their semilinearity witnesses; sheaf_eq identifies the sheaves. Both functors have the same maps after forgetting to abelian presheaves: scalar restriction changes neither the carrier nor the restriction and postcomposition functions. The generic functor_eq_of_comp helper uses faithful forgetting and Functor.congr_hom to prove equality of the original functors from this equality and the object equalities. The existing derivedRHomAlgebraModule_underlying obligation remains unchanged, with its planned proof in its docstring; it is not claimed proved by this partial delivery.",
+   "text": "Localization.lift defines the derived functor, and the already proved Localization.fac comparison computes it on a representative. For sheafAlgebraHomUnderlying_eq, compare the two sectionwise O-module structures on the same Hom carrier using Module.ext' and sheafAlgebraHom_underlying_linear. The generic restrict_ofPresheaf_eq and presheaf_ofPresheaf_eq helpers identifies the resulting presheaves by equality of the module structures and proof irrelevance of their semilinearity witnesses; sheaf_eq identifies the sheaves. Objectwise equality and extensionality of natural transformations and additive maps verify the equality after forgetting to abelian presheaves: scalar restriction changes neither the carrier nor the restriction and postcomposition functions. The generic functor_eq_of_comp helper uses faithful forgetting and Functor.congr_hom to prove equality of the original functors from this equality and the object equalities.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For the underlying comparison, apply derivedInternalHom_comparison to the same canonical K-injective resolution I. The existing homComplex_single_natural_iso identifies Hom-complex(B[0],-) naturally with termwise sheaf Hom(B,-). The generic helpers eliminate the Nonempty comparison witnesses internally, avoiding repeated concrete case elimination. The proved private fixed_comparison helper specializes the bifunctor comparison at B[0] by curryObjProdComp and composes it with this chain isomorphism. Completely proved generic scalar-restriction lemmas provide the finite limits and colimits used by exact scalar restriction. The proved private compose_comparisons helper composes derivedRHomAlgebraModule_comparison with the exact scalar-restriction factorization mapDerivedCategoryFactors, then mapHomologicalComplexCompIso transports sheafAlgebraHomUnderlyingIso to complexes. The two comparisons have identical targets I followed by termwise O-module Hom and Q. Their composite gives an isomorphism after precomposition by Q; Localization.fullyFaithfulWhiskeringLeft.preimageIso descends it to the stated natural isomorphism. No representatives, Hom objects, or arbitrary existence witnesses are chosen.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-single-natural"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sc-hom-complex-single-natural"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "T3",
+  "group": "M1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0BUZ, 0BV0, 0BV1; inherited descent proof and completed underlying sheaf-Hom equality via scalar compatibility and faithful forgetting"
+  "place": "Tag 0BV1; inherited explicit action and descent proofs, underlying comparison via the shared resolution, the natural single-source Hom comparison, and localization full faithfulness"
  },
  "mathlib_searches": [
   {
@@ -168,13 +179,13 @@
   "note": "headless review: Y : Scheme.{u} (any scheme); B : Y.CommAlgebraSheaf + hB quasi-coherent (commutative qcoh O_Y-algebra); F arbitrary SheafOfModules over sheafCompose Y.sheaf; Hom(B,F) = shared PresheafOfModules.homObj with B-action b•φ = (mult by b|_W) ≫ φ as explicit data, additive functor sheafAlgebraHom Mod(O_Y)→Mod(B) with only Prop obligations sorried; functorial degreewise-injective K-injective resolution = proved kInjectiveResolutionFunctor/toKInjectiveResolution with SheafOfModules.isGrothendieckAbelian (same as derivedInternalHom; injective_kInjectiveResolutionFunctor_obj_X proved); RHom(B,K) = Localization.lift of resolution ⋙ termwise Hom(B,-) ⋙ Q into sheafAlgebraDerivedCategory Y B hB; descent via sheafAlgebraHomResolution_inverts (quasiIso_homComplex_map with L=B[0]); underlying object = derivedInternalHom at Q(B[0]) via restrictScalars(B.hom).mapDerivedCategory; all R-dra "
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-65640",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T194144-L-465894",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T100028-L-2468823",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the proof with the node and recorded dependencies; all 27 public signatures are unchanged, the delivery and 14 listed direct importers compile cleanly, and all public declarations and private helpers use only the three permitted axioms."
  }
 }
