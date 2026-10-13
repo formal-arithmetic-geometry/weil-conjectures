@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import WeilConjectures.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 import WeilConjectures.RingTheory.RegularSequenceConormal
 
@@ -49,7 +50,7 @@ steps recorded in the node proof (blueprint: lem-weil-pbc-cartier-equality).
 -/
 theorem cartier_equality
     (k K : Type*) [Field k] [Field K] [Algebra k K]
-    [Algebra.FiniteType k K] :
+    (hfg : (⊤ : IntermediateField k K).FG) :
     Module.Finite K (KaehlerDifferential k K) ∧
       Module.Finite K (Algebra.H1Cotangent k K) ∧
       Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) =

@@ -20,16 +20,18 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/- Mathematical caveat: without the fibre-density hypothesis `hclosed` (the Tag 0EYJ input,
-cf. `hclosed` in `flat_of_smooth_local_depth_two_finite_extension`) the cover need not split
-over the section. Take c and sigma
+/- Mathematical caveat: the Tag 0EYJ input is the rational point of the cover over the
+section, recorded as `hsplit`: the pullback of the cover along `σ` is completely decomposed
+over `σ⁻¹(c⁻¹U) = U`. Fibre density of `c⁻¹U` in the fibre over `s` (cf. `hclosed` in
+`flat_of_smooth_local_depth_two_finite_extension`) cannot serve instead: as `s ∉ U`, the
+open `c⁻¹U` misses that fibre, which contains `σ s`, so such a hypothesis is contradictory.
+Without `hsplit` the statement is false. Take c and sigma
 both the identity of Spec A, where A = Q[x^2,xy,y^2], and U the complement of the
 vertex m = (x^2,xy,y^2). The restriction of Spec Q[x,y] to U is finite etale.
 A_m has depth two, but its relative normalization B = Q[x,y] localized over A_m
 is not flat: its generic rank is two and B/mB has basis 1,x,y, hence dimension
-three. Thus no flat neighbourhood of the section closed point exists.
-Tag 0EYJ uses the omitted rational-point hypothesis to split the section cover.
-See report.md, Second reading by N2, for verification of every hypothesis. -/
+three. Thus no flat neighbourhood of the section closed point exists. There the cover is
+connected of degree two over `σ⁻¹U = U`, so `hsplit` fails. -/
 
 /-- The formal-neighbourhood flatness calculation for a finite etale model over a
 smooth family.  This is the local algebraic core of the depth-two section argument.
@@ -37,8 +39,9 @@ smooth family.  This is the local algebraic core of the depth-two section argume
 Source: Stacks Project, Tag 0EYJ, formal-neighbourhood calculation.
 (blueprint: lem-sbc-stalk-normalization-depth-two-section-flat-core)
 
-The proof uses the completion of a smooth local chart at the section, the split
-finite-etale algebra on the punctured completion, and faithfully-flat descent.
+The proof uses the completion of a smooth local chart at the section, the
+finite-etale algebra on the punctured completion (split by `hsplit` and Tag 0EY6),
+and faithfully-flat descent.
 The resulting flatness locus is open; finiteness makes the image of its complement
 closed, producing the displayed neighbourhood. -/
 theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}}
@@ -48,7 +51,10 @@ theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}}
     (U : S.Opens) (hηU : genericPoint S ∈ U)
     (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (s : S) (hs : s ∉ U)
-    (hclosed : Dense (↑((c.fiberι s) ⁻¹ᵁ (c ⁻¹ᵁ U)) : Set (c.fiber s)))
+    (hsplit : ∃ (ι : Type u) (_ : Finite ι)
+      (e : pullback PA.obj.hom (σ ∣_ (c ⁻¹ᵁ U)) ≅
+        ∐ fun _ : ι ↦ (σ ⁻¹ᵁ c ⁻¹ᵁ U).toScheme),
+      e.hom ≫ Sigma.desc (fun _ ↦ 𝟙 _) = pullback.snd _ _)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
       (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :

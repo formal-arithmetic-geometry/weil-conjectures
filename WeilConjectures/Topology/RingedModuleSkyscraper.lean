@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
@@ -19,6 +20,13 @@ Source: Stacks Project, Sheaves, Tag 009A, case (4)
 ## Main definitions
 
 * `SheafOfModules.ringedModuleSkyscraperFunctor`: skyscraper modules, also applied termwise.
+
+## Relation to `Scheme.Modules.skyscraper`
+
+This is the ringed-space generalisation of `AlgebraicGeometry.Scheme.Modules.skyscraper`
+(in `WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk`), which only treats schemes.
+For a scheme the two constructions agree definitionally
+(`SheafOfModules.ringedModuleSkyscraper_toRingedSpace`).
 -/
 
 @[expose] public section
@@ -179,5 +187,13 @@ theorem ringedModuleSkyscraperFunctor_additive :
   rfl
 
 attribute [instance] ringedModuleSkyscraperFunctor_additive
+
+/-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
+On the ringed space underlying a scheme, the ringed skyscraper module is definitionally the
+scheme skyscraper module `Scheme.Modules.skyscraper`. -/
+theorem ringedModuleSkyscraper_toRingedSpace {X : Scheme.{u_sky}} (x : X)
+    (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
+    ringedModuleSkyscraper X.toRingedSpace x M = Scheme.Modules.skyscraper x M :=
+  rfl
 
 end SheafOfModules
