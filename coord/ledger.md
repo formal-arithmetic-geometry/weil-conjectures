@@ -13882,3 +13882,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:20 L: returned deliver/Y3/Sheaf.Algebra.Homology.SecondLocalizationIsoAux (reviewer RETURN: (reviewer X-b2359, head b2359c172) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Sec)
 - 23:21 L: returned deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility (reviewer RETURN: (reviewer X-ef2ab, head ef2abc366) E2: Review point 4 fails: singleComplexOpenComparison_union_ses_compatibility remains)
 - 23:21 L: returned deliver/F2/Sheaf.RingTheory.LimitModuleModuleData (reviewer RETURN: (reviewer X-5522d, head 5522d5fef) D2/G1 — LimitModuleModuleData.lean:72–138 now duplicates the complete statement of ex)
+- 23:22 L: returned deliver/R3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-f752b, head f752bb882) 5: In `lean/Sheaf/AlgebraicGeometry/AffineGlobalHomBaseChangeMap.lean`, change `publi)
