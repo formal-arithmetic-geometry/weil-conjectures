@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-projection-formula-identity-compactification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Identity compactification recovers direct image",
@@ -12,25 +12,71 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-identity-compactification.md",
   "place": "node lemma-weil-pbc-projection-formula-identity-compactification, order 1272"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-projection-compactification",
+  "lemma-weil-pbc-projection-formula-compactified",
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-open-piece"
+ ],
  "proof": [
   {
-   "text": "For $j=1_X$, extension by zero, inverse image, and both unit constraints are\nidentities. Substitution into the ordered composite leaves\n$\\pi_{f,E,Q}$; substitution into its inverse leaves $\\rho_{f,E,Q}$.",
-   "uses": [],
-   "elementary": null
+   "text": "For the identity compactification $(j,p)=(1_X,f)$, the definition gives $Rf_!^{(1,f)}E=Rf_*j_!E$, canonically identified with $Rf_*E$. Under the identity-functor identifications, $j_!$ and $Lj^*$ and their unit constraints are identities. The canonical open-piece tensor map is then the identity map on $E\\otimes^LLf^*Q$: its tensor and adjunction identity constraints have all become identities. Thus $\\theta_1=1$ and $Rf_*\\theta_1=Rf_*(\\theta_1^{-1})=1$. Substituting into the displayed ordered composite gives $1\\circ\\pi_{f,E,Q}=\\pi_{f,E,Q}$, and into the displayed reverse composite gives $\\rho_{f,E,Q}\\circ1=\\rho_{f,E,Q}$. The maps $\\pi$ and $\\rho$ are the named projection-formula arrows, with $Q$ perfect as in the cited compactified formula; no new coefficient-category comparison is used.",
+   "uses": [
+    "def-weil-pbc-projection-compactification",
+    "lemma-weil-pbc-projection-formula-compactified",
+    "def-weil-pbc-projection-formula-arrows",
+    "lemma-weil-pbc-projection-formula-open-piece"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "Lemma labelled lemma:weil-pbc-projection-formula-identity-compactification, statement and proof, TeX lines 5600–5616; ordered composite at lines 5558–5597."
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-projection-formula-compactified"
+  "def-weil-pbc-projection-compactification",
+  "lemma-weil-pbc-projection-formula-compactified",
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-open-piece"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-identity-compactification.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "identity compactification projection formula direct image",
+   "results": "OnePoint.map_id and unrelated compactification topology declarations; no match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id, CategoryTheory.Iso.refl",
+   "results": "CategoryTheory.Over.postAdjunctionLeft_unit_app_left; CategoryTheory.Under.postAdjunctionRight_counit_app_right; no match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula identity compactification Mathlib",
+   "results": "0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "identity compactification identifies compactly supported direct image with direct image and projection formula map",
+   "results": "service unavailable",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +101,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-identity-compactification",
+  "worker": "stage1",
+  "summary": "Audited the imported identity-compactification lemma against the detailed blueprint. No child node is needed: the sole proof step is substitution into the existing compactification definition and compactified projection-formula statement, with identity functor laws as an elementary calculation. Added the missing statement and proof dependencies and recorded Mathlib searches. Maintainer review added direct citations defining the projection arrows and identifying the canonical open-piece map, expanded the identity substitution, and corrected the source line locator; the statement is unchanged.",
+  "blueprint": "Realizes the entire proof paragraph of lemma-weil-pbc-projection-formula-identity-compactification: setting j=1_X and simplifying the ordered composite and its inverse."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-f27ba0921",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-f27ba0921 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, master and detailed source passages, and unit/chapter route in full. The identity specialization and inverse order are sound. Added direct citations for the projection arrows and canonical open-piece map, expanded the identity calculation, and corrected the mistaken page locator to TeX lines. Statement unchanged; no new nodes. Edge cases and dependency acyclicity checked. review.md and corrected whole JSON written under fixes/.; 1 file(s) fixed by the reviewer"
+ }
 }
