@@ -13,32 +13,25 @@
  ],
  "proof": [
   {
-   "text": "On upper sets, construct the B and C ring tensor diagrams. Representatives and eventual equality come from the directed base-change elementwise theorem. Define the ring colimit universal map by representatives; eventual equality makes it well defined, and computing sums and products at common upper bounds makes it a ring homomorphism. This identifies the colimits with B and C.",
+   "text": "Descend the comparison to one stage with its P-linear canonical map to B and its exact limit identity. This is the finite-presentation factorization portion only; it asserts no system or finite presentation of ψ.",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+    "lem-weil-pbc-comparison-map-finite-stage"
    ],
    "elementary": false
   },
   {
-   "text": "Factor P → B over Z through a B stage, and transport its P-structure to later stages. The comparison induces Q → C as a P-algebra map. Factor this through a later C stage over P by finite presentation. Its restriction to P equals the chosen B-to-C map, by the factorization over P.",
+   "text": "Extend that single map by base change to the upper-tail tensor diagrams, a natural comparison, colimit cocones and a bijective limit map, with pushout transitions and the left-inclusion identities.",
    "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-weil-pbc-comparison-map-base-change-system"
    ],
    "elementary": false
   },
   {
-   "text": "Use the tensor universal property to construct ψⱼ on pure tensors b tensor q, and verify naturality and left-inclusion compatibility on pure tensors. Tensor cancellation identifies transition squares with base-change pushouts. Base change of φ₀ makes Cⱼ finitely presented over Bⱼ; base change of P → Q makes Bⱼ tensor_P Q finitely presented over Bⱼ. Finite-type cancellation (RingHom.FinitePresentation.of_comp_finiteType) makes ψⱼ finitely presented.",
+   "text": "The upper tail is nonempty (it contains i) and directed (take an upper bound in I), so it is filtered. For each stage, base change φ₀ using the explicit ring equivalence (T tensor_R B₀) tensor_{B₀} C₀ ≅ T tensor_R C₀. It is the composition of tensor commutation, tensor congruence, and cancelBaseChange; on the left inclusion it is id_T tensor φ₀. Thus the stage φ map is finitely presented. The source left inclusion is finitely presented by base change of P → Q. The identity supplied by the system makes the comparison composed with that inclusion finitely presented. Apply Mathlib RingHom.FinitePresentation.of_comp_finiteType to deduce finite presentation of the conjugated comparison, and conjugate back through d,c. The Lean proof supplies every equivalence and cancellation equality explicitly.",
    "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
     "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
-    "lem-weil-pbc-finite-presentation-base-change-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tensor products commute with these colimits by the universal property: compatible maps out correspond to compatible pairs of algebra maps agreeing on P. The source colimit is B tensor_P Q. The comparison on this colimit equals e on the B and Q inclusions, so is bijective. Lift rings into the common universe and conjugate all maps by the canonical ULift ring equivalences.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
    ],
    "elementary": false
   }
@@ -46,15 +39,15 @@
  "proof_deps": [
   "lem-weil-pbc-algebra-tensor-base-change-universal-property",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-comparison-map-base-change-system",
+  "lem-weil-pbc-comparison-map-finite-stage",
   "lem-weil-pbc-finite-presentation-base-change-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F1",
+  "group": "K1",
   "date": "2026-10-13",
-  "place": "Construction made explicit from the cited Stacks proof; bijectivity argument formalized directly from Mathlib."
+  "place": "Lean reduction to finite-stage descent and base-change extension, with pointwise finite presentation proved using Mathlib tensor cancellation and finite-type cancellation."
  },
  "mathlib_searches": [
   {
@@ -141,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T045525-L-127760",
+  "landing": "20261013T062526-L-734064",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Mathlib.RingTheory.FiniteStability
+import Sheaf.RingTheory.ComparisonMapFiniteStage
+import Sheaf.RingTheory.ComparisonMapBaseChangeSystem
 
 /-! # Descending a comparison map and its filtered pushout system -/
 
@@ -21,6 +24,36 @@ open CategoryTheory CategoryTheory.Limits
 universe v w x y
 
 namespace RingHom
+
+private theorem finitePresentation_tensorMap {R B C T : Type*}
+    [CommRing R] [CommRing B] [CommRing C] [CommRing T]
+    [Algebra R B] [Algebra R C] [Algebra R T]
+    (φ : B →ₐ[R] C) (hφ : φ.toRingHom.FinitePresentation) :
+    (Algebra.TensorProduct.map (Algebra.ofId T T) φ).toRingHom.FinitePresentation := by
+  let := φ.toRingHom.toAlgebra
+  have : IsScalarTower R B C := IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
+  let : Algebra.FinitePresentation B C := hφ
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := T) (B := B)
+  let e₁ := (Algebra.TensorProduct.comm B (T ⊗[R] B) C).toRingEquiv
+  let e₂ := (Algebra.TensorProduct.congr (AlgEquiv.refl : C ≃ₐ[B] C)
+    (Algebra.TensorProduct.commRight R B T).symm).toRingEquiv
+  let e₃ := (Algebra.TensorProduct.cancelBaseChange R B B C T).toRingEquiv
+  let e₄ := (Algebra.TensorProduct.comm R C T).toRingEquiv
+  let e := e₁.trans (e₂.trans (e₃.trans e₄))
+  have hincl : (Algebra.TensorProduct.includeLeftRingHom (R := B)
+      (A := T ⊗[R] B) (B := C)).FinitePresentation := by
+    exact RingHom.finitePresentation_algebraMap.mpr inferInstance
+  have he : (Algebra.TensorProduct.map (Algebra.ofId T T) φ).toRingHom =
+      e.toRingHom.comp (Algebra.TensorProduct.includeLeftRingHom (R := B)
+        (A := T ⊗[R] B) (B := C)) := by
+    apply Algebra.TensorProduct.ringHom_ext
+    · ext t
+      simp [e, e₁, e₂, e₃, e₄, Algebra.smul_def]
+    · ext b
+      simp [e, e₁, e₂, e₃, e₄, Algebra.smul_def]
+      rfl
+  rw [he]
+  exact (RingHom.FinitePresentation.of_bijective e.bijective).comp hincl
 
 /-- The comparison descends as a finitely presented ring map, in a filtered system
 of pushout squares. No stage map is asserted to be bijective.
@@ -101,6 +134,40 @@ theorem exists_finitePresentation_comparison_system
                     (Algebra.TensorProduct.includeLeftRingHom (R := P)
                       (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)) =
                     (Algebra.TensorProduct.map (Algebra.ofId (F.obj j.val) (F.obj j.val))
-                      φ₀).toRingHom) := by sorry
+                      φ₀).toRingHom) := by
+  classical
+  obtain ⟨i, hi, aPi, μB, hμB, ψ, hψ, hlim⟩ :=
+    exists_comparison_map_finite_stage F i₀ B₀ C₀ φ₀ P Q aP e.toRingHom he
+  obtain ⟨aPs, D, E, α, d, c, cD, cE, f, hD, hE, hcomm, hbij, hpush, hcompat⟩ :=
+    exists_comparison_map_base_change_system F i₀ B₀ C₀ φ₀ P Q aP e
+      i hi aPi μB hμB ψ hψ hlim
+  have hfilt : IsFiltered {j : I // i ≤ j} := by
+    have : Nonempty {j : I // i ≤ j} := ⟨⟨i, le_rfl⟩⟩
+    have : IsDirected {j : I // i ≤ j} (· ≤ ·) := ⟨by
+      intro j k
+      obtain ⟨l, hjl, hkl⟩ := exists_ge_ge j.val k.val
+      exact ⟨⟨l, j.property.trans hjl⟩, hjl, hkl⟩⟩
+    infer_instance
+  refine ⟨i, hi, aPs, D, E, α, d, c, cD, cE, f, hD, hE,
+    hfilt, hcomm, hbij, ?_, hpush, hcompat⟩
+  intro j
+  let := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra
+  let := aPs j
+  let g := (c j).toRingHom.comp ((α.app j).hom.comp (d j).symm.toRingHom)
+  let b := Algebra.TensorProduct.includeLeftRingHom (R := P)
+    (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)
+  have hb : b.FinitePresentation := RingHom.finitePresentation_algebraMap.mpr inferInstance
+  have hgb : (g.comp b).FinitePresentation := by
+    rw [show g.comp b = _ from hcompat j]
+    exact finitePresentation_tensorMap φ₀ hfp
+  have hg : g.FinitePresentation :=
+    hgb.of_comp_finiteType b (RingHom.FiniteType.of_finitePresentation hb)
+  have hα := (RingHom.FinitePresentation.of_bijective (f := (c j).symm.toRingHom)
+      (c j).symm.bijective).comp
+    (hg.comp (RingHom.FinitePresentation.of_bijective
+      (f := (d j).toRingHom) (d j).bijective))
+  convert hα using 1
+  ext z
+  simp [g]
 
 end RingHom
