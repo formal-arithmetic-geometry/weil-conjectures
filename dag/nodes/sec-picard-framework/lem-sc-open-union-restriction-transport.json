@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-open-union-restriction-transport",
+ "kind": "statement",
+ "title": "Transport the relative restriction diagram to opens of the union scheme",
+ "statement": "Let X be a scheme [def-pc-scheme] and W,V opens, with derived categories of module sheaves [def-pc-derived-category] in common Hom universe w on X,W,V,W intersect V,W union V. All functors and comparisons are those of [def-pc-derived-open-restriction-maps]. Put Y=(W union V).toScheme, U=Y.ι inverse image W, T=Y.ι inverse image V. Write L=D(restriction X to W union V), JW=D(restriction X to W), JV=D(restriction X to V), PW=D(relative restriction W union V to W), PV=D(relative restriction W union V to V), SW=D(relative restriction W to W intersect V), SV=D(relative restriction V to W intersect V). Write kW:L PW isomorphic to JW, kV:L PV isomorphic to JV, sW:JW SW isomorphic to direct intersection restriction, sV:JV SV isomorphic to direct intersection restriction for the canonical comparisons. There exist derived localizations in universe w on U,T,U intersect T, derived equivalences eW:D(U) equivalent to D(W), eV:D(T) equivalent to D(V), and natural isomorphisms qW:RU eW.functor isomorphic to PW and qV:RT eV.functor isomorphic to PV, where RU and RT are direct derived restrictions from Y. For every G,E in D(X) and a:JW(G) to JW(E), b:JV(G) to JV(E) satisfying sW(G) inverse followed by SW(a) followed by sW(E) = sV(G) inverse followed by SV(b) followed by sV(E), define a' as eW.functor.preimage of qW(LG) followed by kW(G) followed by a followed by kW(E) inverse followed by qW(LE) inverse, and similarly b'. Then tU(LG) inverse followed by SU(a') followed by tU(LE) = tT(LG) inverse followed by ST(b') followed by tT(LE), where SU,ST and tU,tT are the relative intersection restrictions and canonical comparisons in Y. This is only a transport identity; no local or global gluing assertion is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom: canonical restriction diagram on W union V; Mathlib.AlgebraicGeometry.Modules.Sheaf, overMapCompOverEquiv and overFunctorEquiv"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Let Y=(W union V).toScheme, U=Y.ι inverse image W and T=Y.ι inverse image V. The canonical image isomorphisms identify U.toScheme with W.toScheme, T.toScheme with V.toScheme, and (U intersect T).toScheme with (W intersect V).toScheme. Obtain derived localizations of the pulled-back open schemes in Hom universe w using derived-open localization and localization transport. Derive the exact module equivalences induced by these scheme isomorphisms to obtain eW and eV.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe",
+    "lem-pc-open-derived-localization-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each relative inclusion, Modules.overMapCompOverEquiv and the counit of overEquiv identify schemeOpenOverlapRestriction with restriction along the scheme inclusion. For U into Y and the canonical isomorphism U.toScheme to W.toScheme, overFunctorEquiv, restrictFunctorComp and restrictFunctorCongr identify the other route with the same restriction. Deriving these exact natural isomorphisms gives qW and qV. Repeat on the intersection. This construction concerns restriction comparisons only and uses no Hom exactness or gluing theorem.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the overlap pasting identity first for underived module functors, by evaluating on every open and cancelling equivalence units and counits. Pass to complexes degreewise. The factorization laws mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac identify the derived pasted comparison on Q(K) with that of the underived square; Localization.natTrans_ext extends equality to the localization. Conjugate a and b by kW,kV and qW,qV, and take the full-faithful preimages. Apply the intersection equivalence to their transported overlap equation. Functor.map_preimage, the derived pasting identity, naturality, and inverse cancellation reduce this equation to the original ambient compatibility. No global morphism is constructed; the empty and disjoint cases require no changes.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-open-derived-localization-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom: canonical restriction diagram on W union V; Mathlib.AlgebraicGeometry.Modules.Sheaf, overMapCompOverEquiv and overFunctorEquiv",
+  "note": "Agent-written expansion of the canonical change of open schemes; Mathlib comparison definitions and the factorization-law proof in SchemeDerivedHomRestrictionTransport provide the component argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|overFunctorEquiv|restrictFunctorComp",
+   "date": "2026-10-13",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "verdict": "No exact derived restriction diagram transport theorem; underived tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the derived restriction diagram on two opens to the inverse image covering opens of their union and preserve compatibility of local morphisms",
+   "date": "2026-10-13",
+   "results": "8 hits: TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCoverMap, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_map, TopCat.Presheaf.generateEquivalenceOpensLe_inverse', TopCat.Presheaf.generateEquivalenceOpensLe_inverse, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_obj, TopCat.Presheaf.generateEquivalenceOpensLe_functor",
+   "verdict": "No exact derived restriction diagram transport theorem; underived tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "date": "2026-10-13",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "verdict": "No exact derived restriction diagram transport theorem; underived tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to the inverse image opens of an open union is naturally equivalent to relative restriction, compatibly on their intersection",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenUnionHomGluing",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing of fixed ambient maps in the relative gluing step: canonical transport to covering opens of W union V.",
+   "via": [
+    "lem-sc-relative-open-gluing",
+    "lem-sc-open-union-hom-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenUnionRestrictionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenUnionRestrictionTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.open_union_restriction_transport",
+  "statement": "theorem open_union_restriction_transport\n    (X : Scheme.{u}) (W V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]\n    :\n    let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let sW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let sV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    let PW := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory\n    let PV := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)\n    let U := (W ⊔ V).ι ⁻¹ᵁ W\n    let T := (W ⊔ V).ι ⁻¹ᵁ V\n      ∃ hU : HasDerivedCategory.{w}\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n      letI := hU\n      ∃ hT : HasDerivedCategory.{w}\n          (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace)),\n      letI := hT\n      ∃ hI : HasDerivedCategory.{w}\n          (SheafOfModules.{u} (moduleRings (U ⊓ T).toScheme.toRingedSpace)),\n      letI := hI\n      let RU := (schemeOpenRestriction (W ⊔ V).toScheme U).mapDerivedCategory\n      let RT := (schemeOpenRestriction (W ⊔ V).toScheme T).mapDerivedCategory\n      let SU := (schemeOpenOverlapRestriction (W ⊔ V).toScheme\n        (homOfLE inf_le_left : U ⊓ T ⟶ U)).mapDerivedCategory\n      let ST := (schemeOpenOverlapRestriction (W ⊔ V).toScheme\n        (homOfLE inf_le_right : U ⊓ T ⟶ T)).mapDerivedCategory\n      let tU := schemeDerivedOpenRestrictionCompIso (W ⊔ V).toScheme\n        (homOfLE inf_le_left : U ⊓ T ⟶ U)\n      let tT := schemeDerivedOpenRestrictionCompIso (W ⊔ V).toScheme\n        (homOfLE inf_le_right : U ⊓ T ⟶ T)\n      ∃ (eW : schemeDerivedCategory U.toScheme ≌ schemeDerivedCategory W.toScheme)\n        (eV : schemeDerivedCategory T.toScheme ≌ schemeDerivedCategory V.toScheme)\n        (qW : RU ⋙ eW.functor ≅ PW) (qV : RT ⋙ eV.functor ≅ PV),\n      ∀ (G E : schemeDerivedCategory X)\n        (a : JW.obj G ⟶ JW.obj E) (b : JV.obj G ⟶ JV.obj E),\n        sW.inv.app G ≫ SW.map a ≫ sW.hom.app E =\n          sV.inv.app G ≫ SV.map b ≫ sV.hom.app E →\n        let a' := eW.functor.preimage\n          (qW.hom.app (L.obj G) ≫ kW.hom.app G ≫ a ≫\n            kW.inv.app E ≫ qW.inv.app (L.obj E))\n        let b' := eV.functor.preimage\n          (qV.hom.app (L.obj G) ≫ kV.hom.app G ≫ b ≫\n            kV.inv.app E ≫ qV.inv.app (L.obj E))\n        tU.inv.app (L.obj G) ≫ SU.map a' ≫ tU.hom.app (L.obj E) =\n          tT.inv.app (L.obj G) ≫ ST.map b' ≫ tT.hom.app (L.obj E)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T111845-L-3050040",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T111845-L-3050040",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

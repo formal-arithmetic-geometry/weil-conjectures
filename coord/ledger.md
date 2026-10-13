@@ -12105,3 +12105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/E4/Sheaf.RingTheory.ResidueConormalSnakeSequence (stage 3; reviewer PASS; first push; landing 20261013T111843-L-3049603 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorBoundary (stage 3; reviewer PASS; first push; landing 20261013T111844-L-3049787 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/F1/Sheaf.AlgebraicGeometry.OrdinaryEvaluationSourceBiproduct (stage 3; reviewer PASS; first push; landing 20261013T111844-L-3049889 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/F2/Sheaf.AlgebraicGeometry.OpenUnionHomGluing (stage 3; reviewer PASS; first push; landing 20261013T111845-L-3050040 (interface); batch 20261013T111833; modules 2; new nodes 1)

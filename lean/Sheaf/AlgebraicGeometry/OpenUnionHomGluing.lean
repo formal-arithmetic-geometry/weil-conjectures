@@ -6,9 +6,8 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing
+import Sheaf.AlgebraicGeometry.OpenUnionRestrictionTransport
 
 /-! # Gluing morphisms between fixed objects on an open union
 
@@ -24,6 +23,21 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem transported_morphism_eq
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    (r : C ⥤ D) (e : D ⥤ B) [e.Full] [e.Faithful]
+    (T : C ⥤ B) (q : r ⋙ e ≅ T) {F H : C} (f : F ⟶ H)
+    (a : T.obj F ⟶ T.obj H)
+    (h : r.map f = e.preimage (q.hom.app F ≫ a ≫ q.inv.app H)) :
+    T.map f = a := by
+  apply (cancel_epi (q.hom.app F)).mp
+  rw [← q.hom.naturality]
+  change e.map (r.map f) ≫ q.hom.app H = _
+  rw [h, Functor.map_preimage]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+
+set_option maxHeartbeats 1600000 in
+-- Elaborating the transported derived restriction diagram needs this budget.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible local maps between restrictions of two fixed ambient objects glue on
@@ -78,6 +92,46 @@ theorem exists_open_union_hom
         sV.inv.app G ≫ SV.map b ≫ sV.hom.app E →
       ∃ (α : L.obj G ⟶ L.obj E),
         PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a ∧
-        PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b := by sorry
+        PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b := by
+  dsimp only
+  intro a b hab
+  let U := (W ⊔ V).ι ⁻¹ᵁ W
+  let T := (W ⊔ V).ι ⁻¹ᵁ V
+  have hcover : U ⊔ T = ⊤ := by
+    exact (Scheme.Hom.preimage_sup (W ⊔ V).ι).symm.trans
+      (W ⊔ V).ι_preimage_self
+  obtain ⟨hU, hT, hI, eW, eV, qW, qV, hcompat⟩ :=
+    open_union_restriction_transport X W V
+  let := hU
+  let := hT
+  let := hI
+  let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory
+  let PW := (schemeOpenOverlapRestriction X
+    (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory
+  let PV := (schemeOpenOverlapRestriction X
+    (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory
+  let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)
+  let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)
+  let a' := eW.functor.preimage
+    (qW.hom.app (L.obj G) ≫ kW.hom.app G ≫ a ≫
+      kW.inv.app E ≫ qW.inv.app (L.obj E))
+  let b' := eV.functor.preimage
+    (qV.hom.app (L.obj G) ≫ kV.hom.app G ≫ b ≫
+      kV.inv.app E ≫ qV.inv.app (L.obj E))
+  obtain ⟨α, hαW, hαV⟩ := scheme_derived_hom_gluing (W ⊔ V).toScheme U T hcover
+    (L.obj G) (L.obj E) a' b' (hcompat G E a b hab)
+  have hW : PW.map α = kW.hom.app G ≫ a ≫ kW.inv.app E := by
+    apply transported_morphism_eq _ eW.functor PW qW α
+    simpa only [a', Category.assoc] using hαW
+  have hV : PV.map α = kV.hom.app G ≫ b ≫ kV.inv.app E := by
+    apply transported_morphism_eq _ eV.functor PV qV α
+    simpa only [b', Category.assoc] using hαV
+  refine ⟨α, ?_, ?_⟩
+  · change PW.map α ≫ kW.hom.app E = kW.hom.app G ≫ a
+    rw [hW]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  · change PV.map α ≫ kV.hom.app E = kV.hom.app G ≫ b
+    rw [hV]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 end AlgebraicGeometry.Scheme
