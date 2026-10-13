@@ -14,22 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Use uniqueness in the universal property of Kähler differentials after the affine comparison.",
+   "text": "Use relativeDifferentials_affine_chart_derivation to obtain the specified affine-chart isomorphism T and its inverse formula on universal differentials. Take global sections of T inverse and compose with relativeDifferentialsSpecΓHom for the affine ring map. Transport sections back to U using restrictAppIso and the equality fromSpec image top = U. This gives a linear map C from ring differentials to sheaf sections.",
    "uses": [
+    "lem-sc-relative-differentials-affine-chart-derivation",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute C(d a) using relativeDifferentialsSpecΓHom_d, the inverse formula for T, naturality of the sheaf derivation, and ΓSpecIso_inv_map_appIso_inv. The two restriction maps compose to the identity, so C(d a) = d a. The supplied map e has this same value by hypothesis. Apply CommRingCat.KaehlerDifferential.ext to conclude e = C.",
+   "uses": [
+    "lem-sc-relative-differentials-affine-chart-derivation",
     "def-sc-relative-differential-sheaf",
     "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section transport L is injective: apply restriction in the other direction to L(z) = L(w), cancel the restriction maps, and use injectivity of restrictAppIso hom. Both relativeDifferentialsSpecΓHom and the global-sections map of T inverse are isomorphisms, hence injective. Their composite with L is injective. Since e equals that composite, e is injective.",
+   "uses": [
+    "def-sc-relative-differential-sheaf"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-relative-differential-sheaf",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-relative-differentials-affine-chart-derivation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 01UT"
+  "place": "Tag 01UT (affine calculation and uniqueness); restriction compatibility supplied by the existing affine-chart derivation node",
+  "note": "Uses the existing source-library Spec differential isomorphism. Linear transport and the generator calculation follow the landed surjectivity proof; injectivity of section transport and composition are proved here."
  },
  "mathlib_searches": [
   {
@@ -104,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T230803-L-1911109",
-  "kind": "interface",
+  "landing": "20261013T072358-L-1122734",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
