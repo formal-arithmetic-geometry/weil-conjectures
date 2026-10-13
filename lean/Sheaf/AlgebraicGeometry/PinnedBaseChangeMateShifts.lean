@@ -3,6 +3,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PinnedPullbackCounitShifts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts
+import Sheaf.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
 /-! # Shift compatibility of the canonical derived base-change mate
 Source: Stacks Project, Tag 08HY.
@@ -15,6 +17,18 @@ open CategoryTheory
 noncomputable section
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
+
+private theorem pullback_eqToHom_commShift
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)
+    {X Y : Scheme.{u}} {k l : X ⟶ Y} (h : k = l) :
+    letI := s k
+    letI := s l
+    NatTrans.CommShift (eqToHom (congrArg (fun f ↦ derivedPullback.{u, w} f) h)) ℤ := by
+  subst l
+  simp only [eqToHom_refl]
+  infer_instance
 
 /-- The base-change components form a natural transformation commuting with shift,
 when pullback shifts are transported using the selected left-derived counits.
@@ -47,6 +61,52 @@ theorem exists_pinned_base_change_mate_shifts
     ∃ τ : schemeDerivedDirectImage.{u, w, w} f ⋙ derivedPullback.{u, w} g ⟶
         derivedPullback.{u, w} g' ⋙ schemeDerivedDirectImage.{u, w, w} f',
       (∀ E, τ.app E = schemeDerivedBaseChangeMap.{u, w} f f' g g' h E) ∧
-        NatTrans.CommShift τ ℤ := by sorry
+        NatTrans.CommShift τ ℤ := by
+  classical
+  let _ := s f
+  let _ := s f'
+  let _ := s g
+  let _ := s g'
+  let _ := s (f' ≫ g)
+  let _ := s (g' ≫ f)
+  have := pinnedPullbackComposition_commShift s hs f' g
+  have := pinnedPullbackComposition_commShift s hs g' f
+  have := pinnedDerivedAdjunction_commShift s hs f
+  have := pinnedDerivedAdjunction_commShift s hs f'
+  have htransport : NatTrans.CommShift
+      (eqToHom (congrArg (fun k ↦ derivedPullback.{u, w} k) h.symm)) ℤ :=
+    pullback_eqToHom_commShift s h.symm
+  let γ : (schemeDerivedDirectImage f ⋙ derivedPullback g) ⋙ derivedPullback f' ⟶
+      derivedPullback g' :=
+    (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (pinnedPullbackComposition f' g).hom ≫
+      Functor.whiskerLeft _ (eqToHom (congrArg (fun k ↦ derivedPullback k) h.symm)) ≫
+      Functor.whiskerLeft _ (pinnedPullbackComposition g' f).inv ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (pinnedDerivedAdjunction f).counit (derivedPullback g') ≫
+      (Functor.leftUnitor _).hom
+  have : NatTrans.CommShift γ ℤ := by dsimp only [γ]; infer_instance
+  let τ : schemeDerivedDirectImage f ⋙ derivedPullback g ⟶
+      derivedPullback g' ⋙ schemeDerivedDirectImage f' :=
+    (Functor.rightUnitor _).inv ≫
+      Functor.whiskerLeft _ (pinnedDerivedAdjunction f').unit ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight γ (schemeDerivedDirectImage f')
+  refine ⟨τ, ?_, ?_⟩
+  · intro E
+    dsimp only [τ, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+      Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app]
+    simp only [Category.id_comp]
+    change (pinnedDerivedAdjunction f').unit.app _ ≫
+      (schemeDerivedDirectImage f').map (γ.app E) = _
+    change (pinnedDerivedAdjunction f').homEquiv _ _ (γ.app E) = _
+    congr 1
+    simp only [γ, NatTrans.comp_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.leftUnitor_hom_app, eqToHom_app, Category.id_comp]
+    change _ ≫ _ ≫ _ ≫ _ ≫ 𝟙 _ = _
+    simp only [Category.comp_id]
+  · dsimp only [τ]
+    infer_instance
 
 end AlgebraicGeometry

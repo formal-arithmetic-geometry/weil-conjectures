@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-pinned-pullback-composition-shifts",
+ "kind": "statement",
+ "title": "The selected pullback composition comparison commutes with shifts",
+ "statement": "The selected pullback composition comparison commutes with shifts. For chosen derived categories [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback], take any family of pullback integer shift comparisons compatible with the selected left-derived counits [lem-pc-pinned-pullback-counit-shifts]. For any composable f and g, the hom of the comparison selected by [lem-pc-ringed-spaces-derived-pullback-composition] commutes with these shift comparisons.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "The selected pullback composition comparison commutes with shifts; shift verification of the constructions, written by K4."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "lem-pc-pinned-pullback-counit-shifts",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "precompose both proposed shift equations with the localization functor Qh and then postcompose with the selected counit of the composite pullback. The factorization of the selected left-derived lift identifies each side with the successive counits followed by the termwise composition comparison. The assumed shift equations for the counits and the shift equation for termwise tensor reassociation identify these expressions. The left-derived universal property makes the two lifted maps equal. This proves the equation for each integer; no cartesian, flatness or boundedness hypothesis enters.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-pinned-pullback-counit-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-pinned-pullback-counit-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Constituent shift verification in the canonical mate construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived counit compatible shift functor",
+   "results": "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift",
+   "results": "loogle: unknown identifier 'NatTrans.CommShift'",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Ss]hift|commShift.*[Cc]ounit",
+   "results": "Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Pullback.lean",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived adjunction commutes with shifts when its derived counit commutes with shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedBaseChangeMateShifts",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-pinned-base-change-mate-shifts",
+   "place": "The selected pullback composition comparison commutes with shifts",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedPullbackCompositionShifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedPullbackCompositionShifts.lean",
+  "declaration": "AlgebraicGeometry.pinnedPullbackComposition_commShift",
+  "statement": "theorem pinnedPullbackComposition_commShift\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)\n    (hs : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),\n      letI := s f\n      NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ)\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    letI := s f\n    letI := s g\n    letI := s (f ≫ g)\n    NatTrans.CommShift (pinnedPullbackComposition.{u, w} f g).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T145727-L-751682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T145727-L-751682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
