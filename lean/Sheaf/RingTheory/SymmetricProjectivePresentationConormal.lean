@@ -10,11 +10,12 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.Algebra.Exact.Basic
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Mathlib.LinearAlgebra.TensorProduct.Prod
 import Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
-import Sheaf.RingTheory.ConormalIntersectionRegularQuotient
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.RingTheory.RegularSequenceConormal
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import Sheaf.RingTheory.ProjectiveSymmetricPresentationConormalEquiv
+import Sheaf.RingTheory.ProjectiveSymmetricConormalReductionExact
 
 /-!
 # Conormal sequence of a projective symmetric-algebra presentation
@@ -32,6 +33,8 @@ open scoped TensorProduct
 
 namespace Algebra
 
+set_option maxHeartbeats 1000000 in
+-- The dependent conormal types and both tensor equivalences need extra elaboration steps.
 /-- Source: Stacks Project, proof of Lemma 07CE, lines 357–414, with projective `I/I²`
 (blueprint: lem-weil-pbc-symmetric-projective-presentation-conormal).
 
@@ -122,6 +125,89 @@ theorem symmetric_projective_presentation_conormal
           n) R ⧸ I)] (I.Cotangent × LinearMap.ker q)
           ≃ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (Fin m → SymmetricAlgebra
             (MvPolynomial (Fin n) R ⧸ I) I.Cotangent)) := by
-  sorry
+  classical
+  let P := MvPolynomial (Fin n) R
+  let A := P ⧸ I
+  let M := I.Cotangent
+  let C := SymmetricAlgebra A M
+  have hqsurj : Function.Surjective q := by
+    intro z
+    obtain ⟨x, rfl⟩ := I.toCotangent_surjective z
+    have hx : x.1 ∈ Submodule.span P (Set.range (fun j ↦ (f j).1)) := by
+      change x.1 ∈ Ideal.span (Set.range (fun j ↦ (f j).1))
+      rw [hf]
+      exact x.2
+    obtain ⟨a, ha⟩ := (Submodule.mem_span_range_iff_exists_fun _).mp hx
+    have hax : (∑ j, a j • f j : I) = x := by
+      apply Subtype.ext
+      simpa using ha
+    refine ⟨fun j ↦ Ideal.Quotient.mk I (a j), ?_⟩
+    calc
+      q (fun j ↦ Ideal.Quotient.mk I (a j)) =
+          q (∑ j, Ideal.Quotient.mk I (a j) • Pi.single j 1) := by
+        congr 1
+        ext j
+        simp [Pi.single_apply]
+      _ = ∑ j, Ideal.Quotient.mk I (a j) • I.toCotangent (f j) := by
+        simp only [map_sum, map_smul, hq]
+      _ = I.toCotangent (∑ j, a j • f j) := by
+        simp only [map_sum, map_smul]
+        apply Finset.sum_congr rfl
+        intro j _
+        exact algebraMap_smul A (a j) (I.toCotangent (f j))
+      _ = I.toCotangent x := congrArg I.toCotangent hax
+  have hαeq : α = MvPolynomial.aeval
+      (fun j ↦ SymmetricAlgebra.ι A M (q (Pi.single j 1))) := by
+    ext j
+    rw [MvPolynomial.aeval_X]
+    exact hαX j
+  obtain ⟨⟨hsurj, hker, lam₀, hlam₀, hsurjlam, hdlam, hrange⟩, ediff⟩ :=
+    AlgebraicGeometry.cotangentComplex_symmetricAlgebra (LinearMap.ker q) q hqsurj rfl
+  have hα : Function.Surjective α := by
+    rw [hαeq]
+    exact hsurj
+  have hφeq : φ = α.toRingHom.comp (MvPolynomial.map (Ideal.Quotient.mk I)) := by
+    apply MvPolynomial.ringHom_ext
+    · intro x
+      simp only [RingHom.comp_apply, MvPolynomial.map_C]
+      change φ (MvPolynomial.C x) = α (algebraMap A _ (Ideal.Quotient.mk I x))
+      rw [AlgHom.commutes]
+      exact hφC x
+    · intro j
+      simp only [RingHom.comp_apply, MvPolynomial.map_X]
+      exact (hφX j).trans (hαX j).symm
+  have hφ : Function.Surjective φ := by
+    rw [hφeq]
+    exact hα.comp (MvPolynomial.map_surjective _ Ideal.Quotient.mk_surjective)
+  obtain ⟨lam, hlam⟩ :=
+    projective_symmetric_presentation_conormal_equiv A M m q hqsurj α hαX hα
+  obtain ⟨i, r, hi_formula, hr_formula, hi, hir, hr⟩ :=
+    projective_symmetric_conormal_reduction_exact P I m q hqsurj α hαX φ hφeq hφ hα
+  let p := lam.symm.toLinearMap.comp r
+  have hip : Function.Exact i p := lam.symm.postcomp_exact_iff_exact.mpr hir
+  have hp : Function.Surjective p := lam.symm.surjective.comp hr
+  obtain ⟨s, hs⟩ := Module.projective_lifting_property q LinearMap.id hqsurj
+  let e₀ := ((LinearMap.exact_subtype_ker_map q).splitSurjectiveEquiv
+    (Submodule.injective_subtype _) ⟨s, hs⟩).1
+  let e : (M × LinearMap.ker q) ≃ₗ[A] (Fin m → A) :=
+    (LinearEquiv.prodComm A M (LinearMap.ker q)).trans e₀.symm
+  let inclusion := e.toLinearMap.comp (LinearMap.inr A M (LinearMap.ker q))
+  let retraction := (LinearMap.snd A M (LinearMap.ker q)).comp e.symm.toLinearMap
+  have hsplit : retraction.comp inclusion = LinearMap.id := by
+    ext k
+    simp [retraction, inclusion]
+  let : Module.Projective A (LinearMap.ker q) :=
+    Module.Projective.of_split inclusion retraction hsplit
+  obtain ⟨t, ht⟩ := Module.projective_lifting_property p LinearMap.id hp
+  let eJ := (hip.splitSurjectiveEquiv hi ⟨t, ht⟩).1
+  let eprod := TensorProduct.prodRight A C C M (LinearMap.ker q)
+  let eFree := (LinearEquiv.baseChange A C _ _ e).trans
+    ((Pi.basisFun A (Fin m)).baseChange C).equivFun
+  refine ⟨hφ, hα, lam, i, p, hlam, hi_formula, ?_, hi, hip, hp,
+    ⟨t, ht⟩, ⟨eJ.trans eprod.symm⟩, ⟨eFree⟩⟩
+  intro x y hy
+  change lam (lam.symm (r (Extension.Cotangent.mk x))) = _
+  rw [lam.apply_symm_apply]
+  exact hr_formula x y hy
 
 end Algebra

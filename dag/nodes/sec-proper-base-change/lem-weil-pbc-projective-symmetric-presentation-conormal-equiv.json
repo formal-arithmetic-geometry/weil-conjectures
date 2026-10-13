@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-projective-symmetric-presentation-conormal-equiv",
+ "kind": "statement",
+ "title": "Conormal equivalence for a projective symmetric-algebra presentation",
+ "statement": "Let A be a commutative ring, M a projective A-module, and q:A^m→M a surjection. Let C=Sym_A(M) [lem-weil-pbc-symmetric-algebra-universal-property] and α:A[y_1,…,y_m]→C the surjective presentation taking y_j to ι(q(e_j)). Then there is a C-linear equivalence C⊗_A ker(q)≃ker(α)/ker(α)^2 taking c⊗k to c[∑k_j y_j].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE (lemma-improve-presentation), lines 357-414, especially equation-sequence and its splitting in lines 369-414. The projective case repairs the use of More on Algebra Lemma Tag 07EV: its general claim K tensor C = J/J^2 is false, as recorded in lem-weil-pbc-cotangent-complex-symmetric-algebra. Here q splits, so locally M and K are free, the linear relations corresponding to a basis of K are coordinate variables, and the conormal sequence is exact on the left. Algebra Lemma Tag 00S2 supplies the right-exact sequence."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Use the general symmetric-algebra conormal theorem to construct a surjective λ and its differential formula.",
+   "uses": [
+    "lem-weil-pbc-cotangent-complex-symmetric-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Split q by projectivity. The inclusion ker(q)→A^m has a linear retraction, so its base change to C is injective. The polynomial Kähler basis identifies δλ with this base-changed inclusion: both have coordinates c k_j on c⊗k. Therefore λ is injective and gives the stated equivalence with unchanged formula.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+  "lem-weil-pbc-polynomial-ring-kahler-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EV and polynomial differential calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split exact sequence of modules gives an isomorphism with a product; symmetric algebra conormal module of a projective quotient",
+   "results": "Relevant hits: lequivProdOfRightSplitExact, lequivProdOfLeftSplitExact, Function.Exact.splitSurjectiveEquiv, Function.Exact.splitInjectiveEquiv, retractionKerToTensorEquivSection, retractionKerCotangentToTensorEquivSection, lTensor.linearEquiv_of_rightInverse, rTensor.linearEquiv_of_rightInverse",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component results used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conormal exact sequence of a polynomial algebra over a quotient ring with a projective symmetric algebra quotient; conormal module of a split symmetric algebra presentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Cotangent.exact|cotangentComplex|inf_sq_eq_mul",
+   "results": "Relevant hits: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component results used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent",
+   "results": "Second reader: maps and basic definitions only, no exact projective symmetric coefficient-reduction sequence or conormal equivalence. Inspected Mathlib JacobiZariski Cotangent.exact and Smooth.Basic kerCotangentToTensor_injective_iff; these are component results with different statements.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SymmetricProjectivePresentationConormal",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Conormal sequence and projective splitting in the proof of Tag 07CE; specialized step 3",
+   "via": [
+    "lem-weil-pbc-symmetric-projective-presentation-conormal",
+    "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+    "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveSymmetricPresentationConormalEquiv",
+  "file": "lean/Sheaf/RingTheory/ProjectiveSymmetricPresentationConormalEquiv.lean",
+  "declaration": "Algebra.projective_symmetric_presentation_conormal_equiv",
+  "statement": "theorem projective_symmetric_presentation_conormal_equiv (A M : Type u) [CommRing A] [AddCommGroup M] [Module A M] [Module.Projective A M] (m : ℕ) (q : (Fin m → A) →ₗ[A] M) (hq : Function.Surjective q) (α : MvPolynomial (Fin m) A →ₐ[A] SymmetricAlgebra A M) (hαX : ∀ j, α (MvPolynomial.X j) = SymmetricAlgebra.ι A M (q (Pi.single j 1))) (hα : Function.Surjective α) : ∃ lam : SymmetricAlgebra A M ⊗[A] LinearMap.ker q ≃ₗ[SymmetricAlgebra A M] (Extension.ofSurjective α hα).Cotangent, ∀ (c : SymmetricAlgebra A M) (k : LinearMap.ker q) (y : (Extension.ofSurjective α hα).ker), y.1 = ∑ j, MvPolynomial.C (k.1 j) * MvPolynomial.X j → lam (c ⊗ₜ k) = c • Extension.Cotangent.mk y",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015610-L-3025669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T015610-L-3025669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
