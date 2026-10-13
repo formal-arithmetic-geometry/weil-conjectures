@@ -9,7 +9,6 @@ public import Sheaf.Paper.CechComparisonMapNaturality
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Cech cup products and pullback
@@ -31,6 +30,187 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
+
+/-- Coefficient maps act componentwise in the intersection description of cochains. -/
+private theorem cech_coefficient_apply {X : Scheme.{v}} {ι : Type v}
+    (U : ι → X.Opens) {F H : X.Modules} (φ : F ⟶ H) (n : ℕ)
+    (a : ((cechComplexFunctor U).obj F.presheafModuleCat).X n)
+    (y : Fin (n + 1) → ι) :
+    TopCat.Presheaf.cechComplexFunctorXAddEquiv U H.presheafModuleCat n
+        (((cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            φ.val)).f n a) y =
+      φ.val.app (op (⨅ j, U (y j)))
+        (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a y) := by
+  let ψ := (PresheafOfModules.forgetToPresheafModuleCat
+    (op ⊤) isTerminalTop.op).map φ.val
+  have hπ := TopCat.Presheaf.cechComplexFunctor_map_f_π U F.presheafModuleCat ψ n y
+  have hπa := congrArg (fun k ↦ k a) hπ
+  change TopCat.Presheaf.cechComplexFunctorπ U H.presheafModuleCat n y
+    (((cechComplexFunctor U).map ψ).f n a) =
+    ψ.app _ (TopCat.Presheaf.cechComplexFunctorπ U F.presheafModuleCat n y a) at hπa
+  change H.presheaf.map _
+    (TopCat.Presheaf.cechComplexFunctorπ U H.presheafModuleCat n y
+      (((cechComplexFunctor U).map ψ).f n a)) = _
+  rw [hπa]
+  exact (Hom.app_presheaf_map φ (homOfLE (TopCat.Presheaf.iInf_le_piObj U y))
+    (TopCat.Presheaf.cechComplexFunctorπ U F.presheafModuleCat n y a)).symm
+
+/-- The Alexander--Whitney cochain formula commutes with coefficient morphisms. -/
+private theorem cup_coefficient_cochain {X : Scheme.{v}} {ι : Type v}
+    (U : ι → X.Opens) {F G F₁ G₁ : X.Modules} (φ : F ⟶ F₁) (ψ : G ⟶ G₁)
+    (p q : ℕ) (a : ((cechComplexFunctor U).obj F.presheafModuleCat).X p)
+    (b : ((cechComplexFunctor U).obj G.presheafModuleCat).X q) :
+    (((cechComplexFunctor U).map
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+        (φ ⊗ₘ ψ).val)).f (p + q)) (cechCupCochain U F G p q a b) =
+      cechCupCochain U F₁ G₁ p q
+        (((cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            φ.val)).f p a)
+        (((cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            ψ.val)).f q b) := by
+  apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U
+    (F₁ ⊗ G₁).presheafModuleCat (p + q)).injective
+  funext y
+  rw [cech_coefficient_apply]
+  unfold cechCupCochain
+  rw [AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
+  erw [tensorHom_app_tmulSection, cech_coefficient_apply, cech_coefficient_apply]
+  congr 1
+  · exact Hom.app_presheaf_map φ (cupFaceRestriction U y (cupFront p q)) _
+  · exact Hom.app_presheaf_map ψ (cupFaceRestriction U y (cupBack p q)) _
+
+private theorem restriction_comp {X : Scheme.{v}}
+    (P : X.Opensᵒᵖ ⥤ AddCommGrpCat.{v}) {V W Z : X.Opensᵒᵖ}
+    (i : V ⟶ W) (j : W ⟶ Z) (k : V ⟶ Z) (a : P.obj V) :
+    P.map j (P.map i a) = P.map k a := by
+  rw [← ConcreteCategory.comp_apply, ← P.map_comp]
+  congr 2
+
+/-- Restricting a pulled-back face section agrees with pulling back its restriction. -/
+private theorem refinement_face_apply {X X' : Scheme.{v}} (f : X' ⟶ X)
+    {ι ι' : Type v} (U : ι → X.Opens) (U' : ι' → X'.Opens)
+    (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))
+    (F : X.Modules) (n m : ℕ) (y : Fin (n + 1) → ι')
+    (face : Fin (m + 1) → Fin (n + 1))
+    (a : Γ(F, ⨅ j, U (refine (y (face j))))) :
+    ((tensorPullback f).obj F).presheaf.map
+        (cechRefinementIntersection f U U' refine hrefine n y).op
+        (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app
+          (⨅ j, U (refine (y j)))
+          (F.presheaf.map (cupFaceRestriction U (refine ∘ y) face).op a)) =
+      ((tensorPullback f).obj F).presheaf.map (cupFaceRestriction U' y face).op
+        (((tensorPullback f).obj F).presheaf.map
+          (cechRefinementIntersection f U U' refine hrefine m (y ∘ face)).op
+          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app
+            (⨅ j, U (refine (y (face j)))) a)) := by
+  have hu := Hom.app_presheaf_map
+    ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F)
+    (cupFaceRestriction U (refine ∘ y) face) a
+  change ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app
+      (⨅ j, U (refine (y j)))
+      (F.presheaf.map (cupFaceRestriction U (refine ∘ y) face).op a) =
+    ((tensorPullback f).obj F).presheaf.map
+      ((Opens.map f.base).map (cupFaceRestriction U (refine ∘ y) face)).op
+      (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).app
+        (⨅ j, U (refine (y (face j)))) a) at hu
+  rw [hu]
+  let k := ((Opens.map f.base).map (cupFaceRestriction U (refine ∘ y) face)).op ≫
+    (cechRefinementIntersection f U U' refine hrefine n y).op
+  exact (restriction_comp ((tensorPullback f).obj F).presheaf _ _ k _).trans
+    (restriction_comp ((tensorPullback f).obj F).presheaf _ _ k _).symm
+
+/-- Every homology class has a representative in the concrete kernel of the differential. -/
+private theorem cycle_class_surjective {R : Type v} [Ring R]
+    (K : CochainComplex (ModuleCat.{v} R) ℕ) (n : ℕ) :
+    Function.Surjective (cupCycleClass K n) := by
+  exact (ModuleCat.epi_iff_surjective
+    ((K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).homologyπ)).1 inferInstance
+
+/-- Transport a concrete cocycle through a cochain map. -/
+private def map_cycle {R : Type v} [Ring R]
+    {K L : CochainComplex (ModuleCat.{v} R) ℕ} (φ : K ⟶ L) (n : ℕ)
+    (a : (K.sc n).moduleCatLeftHomologyData.K) :
+    (L.sc n).moduleCatLeftHomologyData.K :=
+  (L.sc n).moduleCatCyclesIso.hom
+    (HomologicalComplex.cyclesMap φ n ((K.sc n).moduleCatCyclesIso.inv a))
+
+private theorem map_cycle_val {R : Type v} [Ring R]
+    {K L : CochainComplex (ModuleCat.{v} R) ℕ} (φ : K ⟶ L) (n : ℕ)
+    (a : (K.sc n).moduleCatLeftHomologyData.K) :
+    (map_cycle φ n a).val = φ.f n a.val := by
+  have h : (K.sc n).moduleCatCyclesIso.inv ≫ HomologicalComplex.cyclesMap φ n ≫
+      (L.sc n).moduleCatCyclesIso.hom ≫ (L.sc n).moduleCatLeftHomologyData.i =
+      (K.sc n).moduleCatLeftHomologyData.i ≫ φ.f n := by
+    rw [ShortComplex.moduleCatCyclesIso_hom_i]
+    change (K.sc n).moduleCatCyclesIso.inv ≫
+      ShortComplex.cyclesMap ((HomologicalComplex.shortComplexFunctor _ _ n).map φ) ≫
+        (L.sc n).iCycles = _
+    rw [ShortComplex.cyclesMap_i, ShortComplex.moduleCatCyclesIso_inv_iCycles_assoc]
+    rfl
+  exact congrArg (fun k ↦ k a) h
+
+private theorem map_cycle_class {R : Type v} [Ring R]
+    {K L : CochainComplex (ModuleCat.{v} R) ℕ} (φ : K ⟶ L) (n : ℕ)
+    (a : (K.sc n).moduleCatLeftHomologyData.K) :
+    HomologicalComplex.homologyMap φ n (cupCycleClass K n a) =
+      cupCycleClass L n (map_cycle φ n a) := by
+  have h : (K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).homologyπ ≫
+      HomologicalComplex.homologyMap φ n =
+      (K.sc n).moduleCatCyclesIso.inv ≫ HomologicalComplex.cyclesMap φ n ≫
+        (L.sc n).homologyπ := by
+    exact congrArg ((K.sc n).moduleCatCyclesIso.inv ≫ ·)
+      (ShortComplex.homologyπ_naturality
+        ((HomologicalComplex.shortComplexFunctor _ _ n).map φ))
+  have h' : (K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).homologyπ ≫
+      HomologicalComplex.homologyMap φ n =
+      (K.sc n).moduleCatCyclesIso.inv ≫ HomologicalComplex.cyclesMap φ n ≫
+        (L.sc n).moduleCatCyclesIso.hom ≫ (L.sc n).moduleCatCyclesIso.inv ≫
+          (L.sc n).homologyπ := by
+    rw [Iso.hom_inv_id_assoc]
+    exact h
+  exact congrArg (fun k ↦ k a) h'
+
+private theorem cycle_val_d {R : Type v} [Ring R]
+    (K : CochainComplex (ModuleCat.{v} R) ℕ) (n m : ℕ)
+    (a : (K.sc n).moduleCatLeftHomologyData.K) : K.d n m a.val = 0 := by
+  have h : (K.sc n).moduleCatCyclesIso.inv ≫ K.iCycles n ≫ K.d n m = 0 := by
+    rw [K.iCycles_d, comp_zero]
+  change (K.sc n).moduleCatCyclesIso.inv ≫ (K.sc n).iCycles ≫ K.d n m = 0 at h
+  rw [ShortComplex.moduleCatCyclesIso_inv_iCycles_assoc] at h
+  exact congrArg (fun k ↦ k a) h
+
+/-- Leibniz makes the cup of two concrete cocycles a concrete cocycle. -/
+private def cup_cycle {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
+    (F G : X.Modules) (p q : ℕ)
+    (a : (((cechComplexFunctor U).obj F.presheafModuleCat).sc p).moduleCatLeftHomologyData.K)
+    (b : (((cechComplexFunctor U).obj G.presheafModuleCat).sc q).moduleCatLeftHomologyData.K) :
+    (((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).sc
+      (p + q)).moduleCatLeftHomologyData.K := by
+  refine ⟨cechCupCochain U F G p q a.val b.val, ?_⟩
+  have hz : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).d
+      (p + q) (p + q + 1) (cechCupCochain U F G p q a.val b.val) = 0 := by
+    rw [cechCupCochain_leibniz, cycle_val_d _ p (p + 1) a, cycle_val_d _ q (q + 1) b]
+    have hl : cechCupCochain U F G (p + 1) q 0 b.val = 0 := by
+      apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U
+        (F ⊗ G).presheafModuleCat (p + 1 + q)).injective
+      simp only [cechCupCochain, AddEquiv.apply_symm_apply, map_zero,
+        Pi.zero_apply, zero_tmulSection]
+      rfl
+    have hr : cechCupCochain U F G p (q + 1) a.val 0 = 0 := by
+      apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U
+        (F ⊗ G).presheafModuleCat (p + (q + 1))).injective
+      simp only [cechCupCochain, AddEquiv.apply_symm_apply, map_zero,
+        Pi.zero_apply, tmulSection_zero]
+      rfl
+    rw [hl, hr]
+    simp only [map_zero, smul_zero, add_zero]
+  change ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).d
+    (p + q) ((ComplexShape.up ℕ).next (p + q)) (cechCupCochain U F G p q a.val b.val) = 0
+  rw [(ComplexShape.up ℕ).next_eq' (show p + q + 1 = p + q + 1 from rfl)]
+  exact hz
 
 /-- Refinement pullback and the signed Cech cup product commute with the canonical
 Cech-to-module-cohomology comparisons. If these comparisons are isomorphisms, the
@@ -190,8 +370,26 @@ theorem cechRefinement_coefficient_naturality (X X' : Scheme.{v}) (f : X' ⟶ X)
         ((cechComplexFunctor U').map
           ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
             ((tensorPullback f).map φ).val)).f n (gamma.f n a) := by
-  sorry
+  intro n a
+  apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U'
+    ((tensorPullback f).obj F₁).presheafModuleCat n).injective
+  funext y
+  rw [hgamma₁, cech_coefficient_apply, cech_coefficient_apply, hgamma]
+  have hu := (Classical.choose (exists_tensorPullbackAdjunction f)).unit_naturality φ
+  have hs := congrArg (fun k ↦ k.val.app (op (⨅ j, U (refine (y j))))
+    (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a
+      (refine ∘ y))) hu
+  have hn := Hom.app_presheaf_map ((tensorPullback f).map φ)
+    (cechRefinementIntersection f U U' refine hrefine n y)
+    ((((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F).val.app
+      (op (⨅ j, U (refine (y j)))))
+      (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a
+        (refine ∘ y)))
+  exact (congrArg (((tensorPullback f).obj F₁).presheaf.map
+    (cechRefinementIntersection f U U' refine hrefine n y).op) hs.symm).trans hn.symm
 
+set_option maxHeartbeats 800000 in
+-- The three homology transports require additional elaboration steps.
 /-- The Cech cup product is natural in both coefficient sheaves.
 Source: Stacks Project, Tags 07MB and 0FKV
 (blueprint: lem-sc-picard-cech-cup-pullback-compat).
@@ -220,7 +418,25 @@ theorem cechCup_coefficient_naturality (X : Scheme.{v}) {ι : Type v} (U : ι �
         (HomologicalComplex.homologyMap ((cechComplexFunctor U).map
           ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
             ψ.val)) q b) := by
-  sorry
+  intro a b
+  obtain ⟨a, rfl⟩ := cycle_class_surjective
+    ((cechComplexFunctor U).obj F.presheafModuleCat) p a
+  obtain ⟨b, rfl⟩ := cycle_class_surjective
+    ((cechComplexFunctor U).obj G.presheafModuleCat) q b
+  let φC := (cechComplexFunctor U).map
+    ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)
+  let ψC := (cechComplexFunctor U).map
+    ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map ψ.val)
+  let τC := (cechComplexFunctor U).map
+    ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+      (φ ⊗ₘ ψ).val)
+  rw [hc a b (cup_cycle U F G p q a b) rfl]
+  erw [map_cycle_class, map_cycle_class, map_cycle_class]
+  apply (hc₁ (map_cycle φC p a) (map_cycle ψC q b)
+    (map_cycle τC (p + q) (cup_cycle U F G p q a b)) ?_).symm
+  rw [map_cycle_val, map_cycle_val, map_cycle_val]
+  exact cup_coefficient_cochain U φ ψ p q a.val b.val
+
 
 /-- Successive specified refinements compose after the canonical coefficient identification.
 The last two equalities give the composite comparison square and functoriality of the
@@ -296,6 +512,8 @@ theorem cechRefinement_composition_naturality
       moduleCohomologyPullback (f₁ ≫ f) F p) := by
   sorry
 
+set_option maxHeartbeats 800000 in
+-- The tuplewise tensor-pullback calculation needs additional elaboration steps.
 /-- The specified refinement carries the Cech cup cochain to the cup of the refined
 cochains, after the canonical tensor-pullback coefficient identification.
 Source: Stacks Project, Tags 01FD and 07MB; Step 4 of the node's proof
@@ -337,7 +555,33 @@ theorem cechCup_refinement_naturality (X X' : Scheme.{v}) (f : X' ⟶ X)
         (gammaFG.f (p + q) (cechCupCochain U F G p q a b)) =
       cechCupCochain U' ((tensorPullback f).obj F) ((tensorPullback f).obj G) p q
         (gammaF.f p a) (gammaG.f q b) := by
-  sorry
+  intro a b
+  apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U'
+    (((tensorPullback f).obj F) ⊗ ((tensorPullback f).obj G)).presheafModuleCat
+    (p + q)).injective
+  funext y
+  rw [cech_coefficient_apply, hgammaFG]
+  unfold cechCupCochain
+  rw [AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
+  have hn := Hom.app_presheaf_map
+    (((Classical.choose (module_pullback_tensor f)) F G).hom)
+    (cechRefinementIntersection f U U' refine hrefine (p + q) y)
+    (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app (F ⊗ G)).app
+      (⨅ j, U (refine (y j)))
+      (tmulSection
+        (F.presheaf.map (cupFaceRestriction U (refine ∘ y) (cupFront p q)).op
+          (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat p a
+            ((refine ∘ y) ∘ cupFront p q)))
+        (G.presheaf.map (cupFaceRestriction U (refine ∘ y) (cupBack p q)).op
+          (TopCat.Presheaf.cechComplexFunctorXAddEquiv U G.presheafModuleCat q b
+            ((refine ∘ y) ∘ cupBack p q)))))
+  erw [hn, (Classical.choose_spec (module_pullback_tensor f)).2,
+    tmulSection_map]
+  rw [hgammaF, hgammaG]
+  congr 1
+  · exact refinement_face_apply f U U' refine hrefine F (p + q) p y (cupFront p q) _
+  · exact refinement_face_apply f U U' refine hrefine G (p + q) q y (cupBack p q) _
+
 
 end
 end AlgebraicGeometry.Scheme.Modules

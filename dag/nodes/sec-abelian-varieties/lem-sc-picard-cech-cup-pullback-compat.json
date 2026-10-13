@@ -68,9 +68,12 @@
    }
   },
   {
-   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality.",
+   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality. The Lean delivery V3 proves three naturality declarations directly: cech_coefficient_apply transports a coefficient morphism through the Cech product projections and the intersection equivalence. Unit naturality and Hom.app_presheaf_map then prove cechRefinement_coefficient_naturality. For cechCup_coefficient_naturality, first prove the cochain coefficient identity by tensorHom_app_tmulSection and restriction naturality. Represent both homology classes by concrete kernel cycles (the cycle-class map is an epimorphism). Leibniz gives their cup cycle. Transport cycles and cycle classes along the cochain coefficient maps using Mathlib cyclesMap_i and homologypi_naturality, and apply the IsCechCupProduct characterization to the source and target cycles. Finally, cechCup_refinement_naturality follows tuplewise from the section formula of lem-weil-pbc-module-pullback-tensor, tensor-section restriction, and the unit restriction square on each front/back face. The resolution comparisons, sheaf-cup naturalities, and successive-refinement composition remain as originally stated, unproved in this delivery.",
    "uses": [
-    "lem-sc-cech-comparison-map-naturality"
+    "lem-sc-cech-comparison-map-naturality",
+    "def-sc-cech-refinement-cochain-map",
+    "def-sc-cech-cup-product",
+    "lem-weil-pbc-module-pullback-tensor"
    ],
    "elementary": true,
    "source": {
@@ -81,12 +84,15 @@
  ],
  "proof_deps": [
   "lem-sc-cech-comparison-map-naturality",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-cup-product",
+  "lem-weil-pbc-module-pullback-tensor"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01FD, 07MB and 0FKV"
+  "place": "Tags 01FD, 07MB and 0FKV; V3 formalizes the coefficient and refinement naturalities of Step 4 using the existing section-normalized tensor-pullback theorem and the Cech Leibniz theorem, with explicit kernel-to-homology transports"
  },
  "mathlib_searches": [
   {
@@ -199,5 +205,15 @@
   "group": "T1",
   "result": "pass",
   "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-89e5b",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T060429-L-586224",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all seven unchanged signatures and three proofs against the node and dependency definitions; compilation and axiom checks passed; direct importers: none; import removal is recorded."
  }
 }
