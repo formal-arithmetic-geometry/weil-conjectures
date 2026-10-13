@@ -201,6 +201,48 @@ structure IsEquivalenceAt (t : Spec (.of Ω) ⟶ Y) : Prop where
     ∃ (G : LisseSheaf l Y) (e : StalkSpace t G ≃ₗ[PadicAlgCl l] V),
       ∀ g v, e (M.rep t G g v) = ρ g (e v)
 
+/-- The stalk map of a morphism of lisse sheaves intertwines the monodromy representations. -/
+lemma rep_naturality (t : Spec (.of Ω) ⟶ Y) {G H : LisseSheaf l Y} (f : G ⟶ H)
+    (g : Aut (fiber t)) (v : StalkSpace t G) :
+    ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom (M.rep t G g v) =
+      M.rep t H g (((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom v) := by
+  have h := congrArg (fun ψ ↦ ((WeilCoefficients.toModuleCat l).map ψ).hom v)
+    ((M.mono g).hom.naturality f)
+  simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at h
+  exact h.symm
+
+variable {M} in
+/-- A morphism of lisse sheaves whose stalk at a base point is bijective is an isomorphism, if
+the monodromy at that base point is an equivalence. -/
+lemma IsEquivalenceAt.isIso_of_bijective {t : Spec (.of Ω) ⟶ Y} (hM : M.IsEquivalenceAt t)
+    {G H : LisseSheaf l Y} (f : G ⟶ H)
+    (hf : Function.Bijective ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom) :
+    IsIso f := by
+  let e := LinearEquiv.ofBijective _ hf
+  obtain ⟨f', hf'⟩ := hM.full e.symm.toLinearMap fun g v ↦ by
+    apply e.injective
+    simp only [LinearEquiv.coe_coe, LinearEquiv.apply_symm_apply]
+    change _ = ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map f)).hom _
+    rw [M.rep_naturality]
+    exact congrArg _ (e.apply_symm_apply v).symm
+  have hcomp : ∀ (a : G ⟶ H) (b : H ⟶ G) (x : StalkSpace t G),
+      ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map (a ≫ b))).hom x =
+        ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map b)).hom
+          (((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map a)).hom x) := fun a b x ↦ by
+    rw [Functor.map_comp, Functor.map_comp]
+    rfl
+  refine ⟨f', hM.faithful _ _ (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)),
+    hM.faithful _ _ (ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_))⟩
+  · change ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map (f ≫ f'))).hom x =
+      ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map (𝟙 G))).hom x
+    rw [hcomp, hf', CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    exact e.symm_apply_apply x
+  · change ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map (f' ≫ f))).hom x =
+      ((WeilCoefficients.toModuleCat l).map ((lisseStalk l t).map (𝟙 H))).hom x
+    rw [CategoryTheory.Functor.map_comp, Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply,
+      hf', CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    exact e.apply_symm_apply x
+
 end LisseMonodromy
 
 /-- **Lisse `ℚ̄_ℓ`-sheaves and continuous representations** (blueprint:
