@@ -9,22 +9,19 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
 
 /-!
-# Gluing morphisms for modules along preimages of an open cover
+# Chosen pullbacks of preimages of an open cover
 
-Let `U a` be a family of opens of a scheme `S` and let `O a` be modules on schemes `W a`. For a
-morphism `g : Z ⟶ S` together with morphisms `μ a : g⁻¹ U a ⟶ W a`, we consider *gluing
-morphisms* `H a b` between the pullbacks of `O a` and `O b` to `g⁻¹ (U a ⊓ U b)`
-(`AlgebraicGeometry.Scheme.Modules.GlueHom`), without the identity and cocycle conditions. The
-intersections `g⁻¹ (U a ⊓ U b)` and `g⁻¹ (U a ⊓ U b ⊓ U c)` are chosen (wide) pullbacks
-(`AlgebraicGeometry.Scheme.Modules.preimageChosenPullback`). Gluing morphisms can be pulled back
-along any morphism `h : Z' ⟶ Z` over `S` (`GlueHom.pull`), compatibly with the identity and
-cocycle conditions (`GlueHom.SelfCond`, `GlueHom.CocycleCond`). When these conditions hold, the
-gluing morphisms define a descent datum relative to the open cover `g⁻¹ U a` of `Z`
-(`CategoryTheory.Pseudofunctor.DescentData'.ofGlue`).
+Let `U a` be a family of opens of a scheme `S` and `g : Z ⟶ S` a morphism. The intersections
+`g⁻¹ (U a ⊓ U b)` and `g⁻¹ (U a ⊓ U b ⊓ U c)` are chosen (wide) pullbacks of the open immersions
+of the `g⁻¹ U a` (`AlgebraicGeometry.Scheme.Modules.preimageChosenPullback`,
+`AlgebraicGeometry.Scheme.Modules.preimageChosenPullback₃`), with diagonals
+`AlgebraicGeometry.Scheme.Modules.preimageDiag`. A morphism `h : Z' ⟶ Z` over `S` restricts to
+morphisms between these preimages (`AlgebraicGeometry.Scheme.Modules.resTo`), compatibly with the
+projections.
 
-This is used to glue modules descended to a finite stage of a cofiltered limit of schemes: the
-modules `O a` live on (possibly different) stages, and the conditions only hold after passing to
-a later stage.
+This is the input for gluing modules along the open cover `g⁻¹ U a` of `Z` with
+`CategoryTheory.Pseudofunctor.DescentData'.ofGlue`, and for pulling gluing morphisms back along
+morphisms between stages of a cofiltered system of schemes.
 -/
 
 @[expose] public section

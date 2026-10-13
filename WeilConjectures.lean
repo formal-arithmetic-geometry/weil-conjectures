@@ -1538,6 +1538,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Coverage
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.DescentData
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.Precoverage
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Equivalence

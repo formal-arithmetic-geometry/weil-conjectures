@@ -155,6 +155,7 @@ end Stages
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
 
 set_option maxHeartbeats 1000000 in
+-- The proof glues data over a finite affine open cover in a single declaration.
 open Scheme.Modules in
 /-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
 be a cofiltered system of quasi-compact separated schemes with affine transition morphisms and
@@ -188,7 +189,7 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
   have hU₃ (a b d : s) : IsAffineOpen (U a ⊓ U b ⊓ U d) := (hU₂ a b).inf (hU d)
   -- Step 1: the restrictions of `ℱ` to the preimages of the `U a` descend.
   have h₁ (a : s) := by
-    haveI := hAff (U a) (hU a)
+    have := hAff (U a) (hU a)
     exact exists_pullback_iso_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U a))
       ((Modules.pullback (c.π.app i₀ ⁻¹ᵁ U a).ι).obj ℱ)
   choose j N hN e using h₁
@@ -209,9 +210,9 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     resTo (D.map (t a).left) (by rw [← D.map_comp, Over.w (t a)]) (le_refl (U a))
   -- Step 3: the gluing isomorphisms descend.
   have h₃ (p : s × s) := by
-    haveI := hAff (U p.1 ⊓ U p.2) (hU₂ p.1 p.2)
-    haveI := hN p.1
-    haveI := hN p.2
+    have := hAff (U p.1 ⊓ U p.2) (hU₂ p.1 p.2)
+    have := hN p.1
+    have := hN p.2
     exact exists_pullHom_eq_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U p.1 ⊓ U p.2))
       (j := k₀) (O₁ := N p.1) (O₂ := N p.2)
       ((preimageChosenPullback U g₀ p.1 p.2).p₁ ≫ μ₀ p.1)
@@ -232,10 +233,10 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
   let μ₁ (a : s) : (g₁ ⁻¹ᵁ U a).toScheme ⟶ W a :=
     resTo (D.map (v₁ ≫ t a).left) (by rw [← D.map_comp, Over.w (v₁ ≫ t a)]) (le_refl (U a))
   let H₁ (a b : s) :
-      (modulesPseudofunctor.map ((preimageChosenPullback U g₁ a b).p₁ ≫ μ₁ a).op.toLoc).toFunctor.obj
-        (N a) ⟶
-      (modulesPseudofunctor.map ((preimageChosenPullback U g₁ a b).p₂ ≫ μ₁ b).op.toLoc).toFunctor.obj
-        (N b) :=
+      (modulesPseudofunctor.map
+        ((preimageChosenPullback U g₁ a b).p₁ ≫ μ₁ a).op.toLoc).toFunctor.obj (N a) ⟶
+      (modulesPseudofunctor.map
+        ((preimageChosenPullback U g₁ a b).p₂ ≫ μ₁ b).op.toLoc).toFunctor.obj (N b) :=
     pullHom (ψ (a, b)) ((opensDiagram D i₀ (U a ⊓ U b)).map (w (a, b))) _ _
       (by
         rw [opensDiagram_map_eq_resTo, opensDiagram_map_eq_resTo, ← cancel_mono (Scheme.Opens.ι _)]
@@ -262,8 +263,8 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
   have hcocL : DescentData'.GlueCocycle (preimageChosenPullback₃ U gL) HL :=
     DescentData'.glueCocycle_isoGlueHom ε
   have h₅ (a : s) := by
-    haveI := hAff (U a) (hU a)
-    haveI := hN a
+    have := hAff (U a) (hU a)
+    have := hN a
     exact exists_pullHom_eq_pullHom_of_isLimit_of_isAffine (isLimitOpensCone D c hc i₀ (U a))
       (j := k₁) (O₁ := N a) (O₂ := N a) (μ₁ a) (μ₁ a) (y₁ := μL a) (y₂ := μL a)
       (by rw [opensCone_π_app_eq_resTo]; exact hμL₁ a)
@@ -282,9 +283,9 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
           pullHom_id_eq_id])
   choose kS tS htS using h₅
   have h₅' (q : s × s × s) := by
-    haveI := hAff (U q.1 ⊓ U q.2.1 ⊓ U q.2.2) (hU₃ q.1 q.2.1 q.2.2)
-    haveI := hN q.1
-    haveI := hN q.2.2
+    have := hAff (U q.1 ⊓ U q.2.1 ⊓ U q.2.2) (hU₃ q.1 q.2.1 q.2.2)
+    have := hN q.1
+    have := hN q.2.2
     exact exists_pullHom_eq_pullHom_of_isLimit_of_isAffine'
       (isLimitOpensCone D c hc i₀ (U q.1 ⊓ U q.2.1 ⊓ U q.2.2)) (j := k₁) (O₁ := N q.1)
       (O₂ := N q.2.2) ((preimageChosenPullback₃ U g₁ q.1 q.2.1 q.2.2).p₁ ≫ μ₁ q.1)
@@ -411,14 +412,14 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
     (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) (ofArrows_mem_fpqcTopology_of_isOpenImmersion _ hsup₂)
     (DescentData'.ofGlue (preimageChosenPullback₃ U g₂) μ₂ N H₂ hself₂ hcoc₂).descentData
     (fun a ↦ by
-      haveI := hN a
+      have := hN a
       change ((Modules.pullback (μ₂ a)).obj (N a)).IsQuasicoherent
       infer_instance)
   -- Step 8: the glued module is of finite presentation.
   have h𝒢 : (𝒢 : (D.obj k₂.left).Modules).IsFinitePresentation := by
     refine isFinitePresentation_of_isOpenImmersion _ (fun a : s ↦ (g₂ ⁻¹ᵁ U a).ι) hsup₂
       fun a ↦ ?_
-    haveI := hN a
+    have := hN a
     have e₂a : (Modules.pullback (g₂ ⁻¹ᵁ U a).ι).obj (𝒢 : (D.obj k₂.left).Modules) ≅
         (Modules.pullback (μ₂ a)).obj (N a) :=
       { hom := e₂.hom.hom a
@@ -426,6 +427,23 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
         hom_inv_id := by rw [← DescentData.comp_hom, e₂.hom_inv_id]; rfl
         inv_hom_id := by rw [← DescentData.comp_hom, e₂.inv_hom_id]; rfl }
     exact isFinitePresentation_of_iso e₂a.symm
-  sorry
+  -- Step 9: the pullback of the glued module to the limit is `ℱ`.
+  have hμL₂ (a : s) : resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a)) ≫ μ₂ a = μL a :=
+    resTo_resTo _ _ _ _ (c.w _) _ _ _ _
+  have hε (a b : s) : pullHom (H₂ a b)
+      (resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a ⊓ U b)))
+      ((preimageChosenPullback U gL a b).p₁ ≫ μL a) ((preimageChosenPullback U gL a b).p₂ ≫ μL b)
+      (by rw [reassoc_of% (resTo_p₁ U _ (c.w k₂.hom) a b), hμL₂])
+      (by rw [reassoc_of% (resTo_p₂ U _ (c.w k₂.hom) a b), hμL₂]) = HL a b := by
+    have h := congrFun (congrFun hA a) b
+    refine Eq.trans ?_ h
+    simp only [H₂, DescentData'.pullGlue, pullHom_pullHom]
+    exact pullHom_congr_left _ (resTo_resTo _ _ _ _ (c.w v₂.left) _ _ _ _) _ _ _ _
+  obtain ⟨φ⟩ := DescentData'.nonempty_map_iso_of_ofGlue e₂ (preimageChosenPullback U gL)
+    (fun M N ↦ bijective_toDescentData_map_of_isOpenImmersion _ hsupL M N) (c.π.app k₂.left)
+    (fun a ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a))) (fun a ↦ resTo_ι _ _ _)
+    (fun a b ↦ resTo (c.π.app k₂.left) (c.w k₂.hom) (le_refl (U a ⊓ U b)))
+    (resTo_p₁ U _ (c.w k₂.hom)) (resTo_p₂ U _ (c.w k₂.hom)) μL hμL₂ ℱ ε hε
+  exact ⟨k₂.left, 𝒢, h𝒢, ⟨φ⟩⟩
 
 end AlgebraicGeometry
