@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-weil-pbc-site-comparison",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded-below site comparison",
- "statement": "For finite $\\Lambda$, the inverse image of the comparison morphism of\n[def-weil-pbc-site-comparison-morphism] is fully faithful on bounded-below\ncomplexes of finite-coefficient module sheaves:\n\n$$\n \\nu_T^*:\\Dplus(T_{\\Et},\\Lambda)\n \\longrightarrow\\Dplus(T_{\\Proet},\\Lambda),\n \\qquad \\operatorname{id}\\xrightarrow{\\sim}R\\nu_{T,*}\\nu_T^*.\n$$",
+ "statement": "Let $T$ be a scheme and $\\Lambda$ a finite discrete ring, with left module sheaves and the coefficient categories of [def-weil-pbc-proetale-modules]. The inverse image of the comparison morphism [def-weil-pbc-site-comparison-morphism] is fully faithful on the bounded-below derived categories:\n$$\n\\nu_T^*:\\Dplus(T_{\\Et},\\Lambda)\\longrightarrow\\Dplus(T_{\\Proet},\\Lambda).\n$$\nMore precisely, the unit of its adjunction with the bounded-below right derived direct image is a natural isomorphism\n$$\n\\operatorname{id}\\xrightarrow{\\sim}R\\nu_{T,*}\\nu_T^*.\n$$\nNo constructibility or finiteness of the individual module sheaves is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-site-comparison.md",
   "place": "node thm-weil-pbc-site-comparison, order 1286"
@@ -18,39 +18,157 @@
  ],
  "proof": [
   {
-   "text": "Represent $K$ by a bounded-below complex $I^\\bullet$ of injective module\nsheaves. The exactness assertion of\n[prop-weil-pbc-site-comparison-finite-level] shows that $\\nu_T^*I^\\bullet$\nrepresents $\\nu_T^*K$. Each of its terms is acyclic for $\\nu_{T,*}$ by the\nsame proposition. The bounded-below acyclic-resolution calculation in\nordinary homological algebra therefore gives\n\n$$\n R\\nu_{T,*}(\\nu_T^*K)\\simeq\n \\nu_{T,*}(\\nu_T^*I^\\bullet).\n$$",
+   "text": "Put $\\mathcal A=\\Mod(T_{\\Et},\\Lambda)$ and $\\mathcal B=\\Mod(T_{\\Proet},\\Lambda)$, with the small sites and coefficient sheaves specified by [def-weil-pbc-proetale-modules]. They are abelian by [def-weil-sheaf-of-modules-category]. Write $L=\\nu_T^*$ and $R=\\nu_{T,*}$ for the additive module adjunction of [def-weil-pbc-site-comparison-morphism]. A right adjoint preserves kernels (their universal property is transported by the Hom adjunction), so $R$ is left exact. The finite-level proposition gives exactness of $L$. By [lem-weil-pbc-exact-functor-bounded-below], termwise $L$ induces a functor on $D^+$ and preserves quasi-isomorphisms.\nFor $K\\in D^+(\\mathcal A)$ choose a representing complex $C$ and $a$ with $H^n(C)=0$ for $n<a$. Its good truncation $M=\\tau_{\\ge a}C$, zero below $a$, with $M^a=\\operatorname{coker}(d_C^{a-1})$ and $M^n=C^n$ above $a$, has the same cohomology as $C$ in all degrees: in degree $a$ the kernel of the induced differential is $\\ker d_C^a/\\operatorname{im}d_C^{a-1}$, and the images and kernels in the higher degrees are unchanged. Thus $C\\to M$ is a quasi-isomorphism. Apply [lem-sc-bounded-below-injective-resolution] on the small ringed etale site to obtain $M\\to I$, with $I$ bounded below and termwise injective. It represents $K$, and $LI$ represents $LK$. The same resolution lemma applies on the pro-etale site.",
    "uses": [
-    "prop-weil-pbc-site-comparison-finite-level"
+    "def-weil-pbc-proetale-modules",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sc-bounded-below-injective-resolution"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099V (lemma-relative-comparison), second paragraph; good truncation as in Derived Categories 013J, and ringed-site injective resolutions 07A5 with Derived Categories 013K"
+   }
   },
   {
-   "text": "More explicitly, resolve $\\nu_T^*I^\\bullet$ by a Cartan--Eilenberg injective\ndouble complex before applying $\\nu_{T,*}$. Its column spectral sequence has\n$E_1^{p,q}=R^q\\nu_{T,*}(\\nu_T^*I^p)$; only $q=0$ survives, and its $d_1$\ndifferential is the differential of $\\nu_{T,*}\\nu_T^*I^\\bullet$. Its next\npage is thus the cohomology of that complex, not the individual terms $I^p$.\nBoundedness below makes each total degree finite in this calculation.",
-   "uses": [],
-   "elementary": null
+   "text": "The two module categories have enough injectives, as can also be recovered from the bounded-below resolution statement without a commutativity restriction. Resolve $F[0]\\to J$. Starting at the lowest nonzero degree below zero, exactness there makes the differential injective; the injection of this injective term splits. Remove the resulting two-term contractible direct summand and repeat up to degree $-1$. This is a finite induction because $J$ is bounded below. The remaining degree-zero term is a direct summand of $J^0$, hence injective, and $H^0(J)=F$ is its kernel of the outgoing differential, so embeds in that injective term. Direct summands are injective because a map into a summand can be extended into the injective object and projected back.\nConsequently [lem-weil-pbc-right-derived-plus-injective] defines $\\mathbf R R:D^+(\\mathcal B)\\to D^+(\\mathcal A)$ with a natural comparison $\\alpha_N:Q(RN)\\to\\mathbf R R(QN)$, invertible on bounded-below injective complexes. Here $Q$ denotes the appropriate localization. The notation $R\\nu_{T,*}$ in the statement means this right derived functor.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic); existence on the ringed sites as in 07A5"
+   }
   },
   {
-   "text": "The underived unit is an isomorphism on every $I^p$, by\n[prop-weil-pbc-site-comparison-finite-level], and commutes with its\ndifferentials by naturality. It identifies $I^\\bullet$ with\n$\\nu_{T,*}\\nu_T^*I^\\bullet$. Under the displayed acyclic-resolution\nidentification, this map is the derived unit for\n[def-weil-pbc-site-comparison-morphism]. Hence $K\\to R\\nu_{T,*}\\nu_T^*K$ is a\nnatural isomorphism. For bounded-below $K,L$, derived adjunction now gives\n\n$$\n \\operatorname{Hom}\\bigl(\\nu_T^*K,\\nu_T^*L\\bigr)\n \\cong\\operatorname{Hom}\\bigl(K,R\\nu_{T,*}\\nu_T^*L\\bigr)\n \\cong\\operatorname{Hom}(K,L),\n$$\n\nwith the second identification induced by that unit. This proves full\nfaithfulness. The finite-level proposition used here has already established\nits geometric acyclicity input by the two finite-cover limits above.",
+   "text": "We construct the derived adjunction and identify its unit, rather than assuming an adjunction for a scheme morphism. For a bounded-below complex $M$ of $\\mathcal A$ and a bounded-below complex $N$ of $\\mathcal B$, resolve $N\\to J$ by [lem-sc-bounded-below-injective-resolution]. This lemma also says $J$ is K-injective; [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to $L\\dashv R$ in the convention that $R$ is the right adjoint and $L$ is exact, and makes $RJ$ K-injective. The injective calculation of [lem-weil-pbc-right-derived-plus-injective] identifies $\\mathbf R R(QN)$ with $Q(RJ)$. The Hom-localization bijections of [lem-weil-pbc-kinjective-hom-derived] and the homotopy adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] give\n$$\n\\operatorname{Hom}_{D(\\mathcal B)}(Q(LM),QN)\n\\cong\\operatorname{Hom}_{K(\\mathcal B)}(LM,J)\n\\cong\\operatorname{Hom}_{K(\\mathcal A)}(M,RJ)\n\\cong\\operatorname{Hom}_{D(\\mathcal A)}(QM,\\mathbf R R(QN)).\n$$\nAll complexes here are bounded below, so these are also the Hom sets in $D^+$. Each bijection is natural; maps between injective representatives are represented uniquely up to homotopy by the same Hom-localization bijection, so changing the resolution does not change the bijection. This gives $L\\dashv\\mathbf R R$. If $j:LM\\to J$ is a resolution, the identity of $Q(LM)$ is represented by $j$, whose transpose is $Rj\\circ\\eta_M$. Thus its unit at $QM$ is represented by $M\\xrightarrow{\\eta_M}RLM\\xrightarrow{Rj}RJ$, or equivalently $Q(\\eta_M)$ followed by $\\alpha_{LM}$, under the localization identifications.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective), and 09T5 (lemma-derived-adjoint-functors); explicit Hom calculation following their proofs"
+   }
+  },
+  {
+   "text": "Use the injective representative $I$ of $K$ chosen in step 1. The finite-level proposition states $R^qR(LI^n)=0$ for every $q>0$ and every $n$. Choose a bounded-below injective resolution $j:LI\\to J$ on the pro-etale site. Each $J^n$ is $R$-acyclic by clause 1 of [lemma-weil-pbc-leray-acyclicity]; its hypotheses of abelian categories with enough injectives hold by steps 1 and 2. Apply [lem-weil-pbc-leray-acyclicity-quasi-iso] to $j$ and the left exact additive functor $R$: $LI$ and $J$ are bounded below (use the smaller of their lower bounds), every term of both is $R$-acyclic, and $j$ is a quasi-isomorphism. Therefore $Rj:RLI\\to RJ$ is a quasi-isomorphism. By the natural comparison $\\alpha$, and its invertibility at $J$, this identifies $Q(RLI)$ with $\\mathbf R R(LK)$, with comparison exactly $Q(Rj)$ followed by $\\alpha_J$ and the inverse transport along $\\mathbf R R(Qj)$. This is the bounded-below acyclic-resolution calculation in the blueprint; a Cartan--Eilenberg spectral sequence is unnecessary once this existing lemma is cited.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-sc-bounded-below-injective-resolution",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "015E (lemma-leray-acyclicity), 05TH (lemma-injective-acyclic), applied as in Pro-etale Cohomology 099V (lemma-relative-comparison), second paragraph"
+   }
+  },
+  {
+   "text": "The finite-level proposition makes $\\eta_{I^n}:I^n\\to RLI^n$ an isomorphism for every $n$. The termwise adjunction lemma says these components form a chain map $\\eta_I$, since naturality gives $RL(d_I^n)\\eta_{I^n}=\\eta_{I^{n+1}}d_I^n$. Multiplying this equation by the inverses shows that the inverse components also form a chain map. Thus $\\eta_I:I\\to RLI$ is an isomorphism of complexes. Step 3 identifies the derived unit at $QI$ with $Q(Rj\\circ\\eta_I)$; step 4 makes $Q(Rj)$ invertible, and the termwise unit is invertible as just checked. Hence the derived unit is invertible at $QI$, and therefore at $K$ by its naturality and the isomorphism $K\\cong QI$. The unit is natural from step 3, so its pointwise inverses form the claimed natural isomorphism.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "099V (lemma-relative-comparison), final paragraph of the proof, with the derived unit identified in step 3"
+   }
+  },
+  {
+   "text": "For $K,H\\in D^+(\\mathcal A)$, step 3 gives the adjunction bijection\n$$\n\\operatorname{Hom}_{D^+(\\mathcal B)}(LK,LH)\n\\cong\\operatorname{Hom}_{D^+(\\mathcal A)}(K,\\mathbf R R(LH)).\n$$\nBy step 5, composition with the unit $\\eta_H^D:H\\to\\mathbf R R(LH)$ gives a bijection from $\\operatorname{Hom}(K,H)$ to the Hom set on the right. The adjunction sends $L(f)$ to $\\mathbf R R(Lf)\\eta_K^D=\\eta_H^D f$ by naturality. Thus the actual map on Hom sets induced by $L$ is the composite of two bijections, proving full faithfulness. Both functors take values in $D^+$ by steps 1 and 2; no boundedness above or constructibility was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-site-comparison.md",
+    "place": "Proof, final Hom display, with the derived adjunction constructed in step 3"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-site-comparison-finite-level",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-site-comparison-morphism",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-site-comparison.md",
-  "place": "## Proof"
+  "place": "Proof, injective/acyclic resolution route; homological details supplied from Stacks 013J, 013K, 015E, 05TI, 070I, 08BJ and 09T5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image from etale to proetale sheaves of modules is fully faithful on bounded below derived categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, DerivedCategory.instFullSingleFunctor, AlgebraicGeometry.Scheme.instFullEtaleOverForget, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, CategoryTheory.fullyFaithfulSheafCompose, CategoryTheory.instFullSheafFunctorOppositeCompSheafComposeSheafToPresheafOfFaithful",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*(comparison|fully.?faithful)|comparison.*pro.?etale",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus.*unit|unit.*rightAcyclic|rightAcyclic.*unit",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale proetale comparison derived unit isomorphism bounded below modules",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.proetalePrecoverage, AlgebraicGeometry.Scheme.proetaleTopology, AlgebraicGeometry.Scheme.instHasIsosProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeProetalePrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionProetalePrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalProetaleTopology, AlgebraicGeometry.Scheme.proetaleTopology_eq_propQCTopology, AlgebraicGeometry.Scheme.etaleTopology_le_proetaleTopology",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact fully faithful left adjoint whose images of injectives are acyclic has fully faithful bounded below derived functor",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, DerivedCategory.instFullSingleFunctor, DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "10 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: site definitions, exact derived functor constructions and ordinary adjunction results do not establish the derived pro-etale comparison unit"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +197,44 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "thm-weil-pbc-site-comparison",
+  "worker": "stage1",
+  "summary": "Made the coefficient ring and scheme explicit without restricting the statement; replaced the uncited Cartan--Eilenberg calculation by existing acyclic-quasi-isomorphism and injective-calculation nodes, constructed the derived adjunction and computed its unit using existing generic Hom lemmas. Reused all homological nodes; no new nodes. The nearby project derived comparison proof uses the sorried finite-level acyclicity theorem and is not an attachment.",
+  "blueprint": "Proof paragraph 1: steps 1, 2 and 4 supply bounded-below injective representatives and acyclic calculation. Paragraph 2: step 4 replaces the optional spectral-sequence explanation by the existing equivalent acyclic-quasi-isomorphism lemma. Paragraph 3: steps 3, 5 and 6 identify the derived unit and prove full faithfulness.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic ringed-site bounded-below injective resolutions on both small sites; the unit has only an etale K-injective existence node, which does not state bounded-below termwise-injective resolutions for these coefficient categories."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic right derived functor existence, natural comparison and injective calculation; applies to the comparison right adjoint independently of geometry."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Only clause 1, injectives are acyclic for a left exact additive functor, to apply the generic quasi-isomorphism lemma; no alternative geometric route is used."
+   },
+   {
+    "node": "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "why": "Generic bounded-below acyclic-quasi-isomorphism preservation specializes to the comparison right adjoint; it supplies the ordinary homological algebra step already called for by the blueprint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-271377941",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-271377941 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. All six steps support the finite-ring bounded-below comparison and identify its canonical derived unit. No new nodes or repairs; four generic tool uses accepted. Condensed target coefficients remain distinct. review.md records checks and inherited DAG defects."
+ }
 }
