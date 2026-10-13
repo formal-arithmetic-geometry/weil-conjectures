@@ -198,7 +198,8 @@ theorem exists_open_comparisonIntoPullback_transport
     n.hom ((derivedPullback q).map d.hom) ((derivedPullback q).map eR.hom)
     ((derivedPullback q).map eQ.hom) β hd hn
   exact hl.trans (by
-    simpa only [Category.assoc, Iso.trans_hom] using
+    simpa only [l, FU, HU, q, RQ, eR, β, openRestrictedCompositionMap,
+      Category.assoc, Iso.trans_hom] using
       congrArg (fun t ↦ l.hom ≫ t) hs)
 
 end AlgebraicGeometry.SingleComplexBaseChange

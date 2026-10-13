@@ -1,0 +1,166 @@
+{
+ "id": "lem-pc-open-restricted-comparison-core",
+ "kind": "statement",
+ "title": "Open comparison square with supplied literal restricted representative data",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S and g′:X′→X be a cartesian square of schemes, U an open of X, j:U→X its inclusion, T=X′×X U, p:T→X′ and q:T→U the projections, with the induced square supplied. Fix z∈T and an integer i, and the specified derived categories. Let H and HU be additive derived stalk cohomology at pz and z. There exists η:H≅Lp*⋙HU independent of representatives. For every K, K-flat P, invertible specified pullback counit hcP for g′ and eP:DQ(P)≅K, let Q be the literal termwise restriction of P along j. For every supplied invertible specified pullback counit hcQ for q and eQ:DQ(Q)≅Lj*K, let a and b be the additive comparisonIntoPullback arrows for P and Q. Let β:Lq*Lj*K→Lp*L(g′)*K be the specified derived-composition identification. Then there is an isomorphism l of the sources of a and b with a;H(L(g′)*(eP));η=l.hom;b;HU(Lq*(eQ);β). No K-flatness certificate for Q or existence of hcQ or eQ is asserted by this lemma.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-kflat-open-restriction",
+  "def-pc-open-restricted-composition-map"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, proof: locality of equation-bc; Tag 0DJ9, source-open induction paragraph"
+ },
+ "proof": [
+  {
+   "text": "The base change p of j is open. Identify tensor pullback along p and j with exact restriction by uniqueness of adjoints, and their derived functors by the universal counits. Descend the additive restriction-stalk natural isomorphism to complexes, derived categories and cohomology to obtain η independently of P.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-open-restriction-stalk-extension-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On literal restrictions, apply comparison_eq and localized_eq to identify comparisons with the universal counits and scalar-extension transposes. Naturality of these counits and tensorStalkIso gives the comparison square. The universal-counit equation for the chosen derived composition comparison identifies the target transport with β. Apply cohomology and forget scalars to obtain the stated equality. There is no arbitrary representative to compare in this lemma.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the restriction-stalk extension and universal base-derived tensor models to identify the comparison sources. For arbitrary supplied eQ, use representative naturality and comparisonSourceIso to transport the canonical square.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-kflat-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Locality of equation-bc; exact open restriction uses Tag 0D5U and K-flat restriction uses Tag 06YB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk cohomology comparison commutes with restriction to an open subscheme",
+   "results": "Eight hits including Scheme.Modules.restrictStalkNatIso and stalk ring comparison isomorphisms; no derived tensor comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "Twelve hits for restriction adjunction, composition and stalk isomorphisms. None supplies the derived base tensor comparison square on literal restricted complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|comparisonIntoPullback",
+   "results": "Five Mathlib hits for the additive stalk natural isomorphism and germ formulas. Library rg found representative naturality, already used in the parent proof, but no literal-open comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor comparison on a literal restriction to an open subscheme commutes with the derived pullback composition isomorphism",
+   "results": "Service unavailable: Internal Server Error. No verdict of absence is inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change morphism of stalk cohomology is conjugate under inverse image by an open immersion",
+   "results": "Eight hits: restriction-stalk isomorphisms for the square query; exact derived-functor factorization and ordinary flat-module results for the representative query. No full match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique is available and underlies the existing universal-counit uniqueness argument; it does not supply the open comparison square or all representative data.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|restrictStalk|leftAdjointUniq",
+   "results": "Exact derived-functor factors, stalk restriction and adjoint uniqueness are available; no full square or representative-data theorem. Library search also checked SingleComplexOpenRestrictionData and the private counit helper in SingleComplexBaseChangeStalkCondition.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-comparison-transport",
+   "place": "Separate construction of representative data from the comparison square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_open_restricted_comparison_square",
+  "statement": "theorem exists_open_restricted_comparison_square\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ) :\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let H := comparisonStalkCohomology X' (pullback.fst g' U.ι z) i ⋙ F\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : P.IsKFlat)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (eP : DerivedCategory.Q.obj P ≅ K),\n      let Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n        ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n      ∀ (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),\n      let a := F.map (comparisonIntoPullback f f' g g' sq\n        (pullback.fst g' U.ι z) P hcP i)\n      let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n        g (pullback.snd g' U.ι) sqU z Q hcQ i)\n      let β := openRestrictedCompositionMap g' U K\n      ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n        a ≫ H.map ((derivedPullback g').map eP.hom) ≫\n            η.hom.app ((derivedPullback g').obj K) =\n          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, change record, compilation, and forced adaptation checks all agree; delivered modules compile, and the original downstream importer fails while the adapted importer compiles."
+ }
+}

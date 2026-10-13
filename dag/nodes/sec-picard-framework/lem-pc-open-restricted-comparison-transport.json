@@ -20,47 +20,30 @@
  },
  "proof": [
   {
-   "text": "The base change p of j is open. Identify tensor pullback along p and j with exact restriction by uniqueness of adjoints, and their derived functors by the universal counits. Descend the additive restriction-stalk natural isomorphism to complexes, derived categories and cohomology to obtain η independently of P.",
+   "text": "Construct the literal restricted K-flat representative, prove its specified counit invertible by left-derived uniqueness, and construct its derived identification via exact restriction.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-open-restriction-stalk-extension-iso"
+    "lem-pc-open-restricted-representative-data"
    ],
    "elementary": false
   },
   {
-   "text": "Use the literal termwise restriction Q of P. Open restriction preserves K-flatness. The K-flat derived pullback counit gives hcQ. Exact restriction computes derived pullback along j; its canonical identification composed with Lj*(eP) gives eQ. The open-immersion stalk maps identify the old and new local rings, and the pullback condition identifies the base-ring actions. The restriction-stalk extension isomorphism, universal derived tensor extension and final scalar extension identify the comparison sources, giving l.",
+   "text": "Choose the natural stalk isomorphism from the comparison-square theorem and specialize its square to the representative data just constructed. Package the witnesses.",
    "uses": [
-    "lem-pc-kflat-open-restriction",
-    "def-pc-derived-pullback",
-    "lem-pc-open-restriction-stalk-extension-iso",
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On literal restrictions, apply comparison_eq and localized_eq to identify comparisons with the universal counits and scalar-extension transposes. Naturality of these counits and tensorStalkIso gives the comparison square. The universal-counit equation for the chosen derived composition comparison identifies the target transport with β. Apply cohomology and forget scalars to obtain the stated equality. There is no arbitrary representative to compare in this lemma.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-open-restricted-comparison-core"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-open-restriction-stalk-extension-iso",
-  "lem-pc-kflat-open-restriction",
-  "def-pc-derived-pullback",
-  "def-pc-base-derived-tensor-cohomology-model",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-pc-open-restricted-representative-data",
+  "lem-pc-open-restricted-comparison-core"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "F2",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/0DJ8",
-  "place": "Expansion of locality of equation-bc on literal restrictions; Tag 0DJ9 source-open induction."
+  "place": "Locality of equation-bc; exact open restriction uses Tag 0D5U and K-flat restriction uses Tag 06YB."
  },
  "mathlib_searches": [
   {
@@ -122,7 +105,7 @@
   "module": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport",
   "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedComparisonTransport.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_open_restricted_comparison_transport",
-  "statement": "theorem exists_open_restricted_comparison_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ) :\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let H := comparisonStalkCohomology X' (pullback.fst g' U.ι z) i ⋙ F\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : P.IsKFlat)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (eP : DerivedCategory.Q.obj P ≅ K),\n      let Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n        ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n      ∃ (hQ : Q.IsKFlat) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),\n      let a := F.map (comparisonIntoPullback f f' g g' sq\n        (pullback.fst g' U.ι z) P hcP i)\n      let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n        g (pullback.snd g' U.ι) sqU z Q hcQ i)\n      let β :=\n        ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))))\n          (pullback.snd g' U.ι) U.ι).hom.app K ≫\n        eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n          (pullback.condition (f := g') (g := U.ι)).symm) ≫\n        ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))))\n          (pullback.fst g' U.ι) g').inv.app K\n      ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n        a ≫ H.map ((derivedPullback g').map eP.hom) ≫\n            η.hom.app ((derivedPullback g').obj K) =\n          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β)",
+  "statement": "theorem exists_open_restricted_comparison_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g)\n    (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ) :\n    let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n      AddCommGrpCat.{u}\n    let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n      AddCommGrpCat.{u}\n    let H := comparisonStalkCohomology X' (pullback.fst g' U.ι z) i ⋙ F\n    let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU\n    ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,\n      ∀ (K : schemeDerivedCategory X)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : P.IsKFlat)\n        (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n        (eP : DerivedCategory.Q.obj P ≅ K),\n      let Q : CochainComplex\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n        ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n      ∃ (hQ : Q.IsKFlat) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n        (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),\n      let a := F.map (comparisonIntoPullback f f' g g' sq\n        (pullback.fst g' U.ι z) P hcP i)\n      let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n        g (pullback.snd g' U.ι) sqU z Q hcQ i)\n      let β := openRestrictedCompositionMap g' U K\n      ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,\n        a ≫ H.map ((derivedPullback g').map eP.hom) ≫\n            η.hom.app ((derivedPullback g').obj K) =\n          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β)",
   "branch": "sheaf-dag",
   "by": "A4",
   "date": "2026-10-13"
@@ -140,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-634a0",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T140812-L-311094",
+  "landing": "20261013T172653-L-2098665",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, change record, compilation, and forced adaptation checks all agree; delivered modules compile, and the original downstream importer fails while the adapted importer compiles."
  }
 }

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality
 public import Mathlib.CategoryTheory.Comma.Arrow
+public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
+import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonCore
+import Sheaf.AlgebraicGeometry.OpenRestrictedRepresentativeData
 
 /-! # Comparison on the literal restriction of a complex
 
@@ -23,6 +26,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+set_option linter.unusedVariables false in
 /-- Open transport for the literal termwise restriction of a K-flat complex.
 Unlike transport to an arbitrary representative, this only compares a complex
 with its actual restriction, and constructs its derived identification.
@@ -81,18 +85,17 @@ theorem exists_open_restricted_comparison_transport
         (pullback.fst g' U.ι z) P hcP i)
       let b := FU.map (comparisonIntoPullback (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
         g (pullback.snd g' U.ι) sqU z Q hcQ i)
-      let β :=
-        ((Classical.choose (Classical.choose_spec (Classical.choose_spec
-          (Classical.choose_spec exists_derivedPullbackComposition))))
-          (pullback.snd g' U.ι) U.ι).hom.app K ≫
-        eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)
-          (pullback.condition (f := g') (g := U.ι)).symm) ≫
-        ((Classical.choose (Classical.choose_spec (Classical.choose_spec
-          (Classical.choose_spec exists_derivedPullbackComposition))))
-          (pullback.fst g' U.ι) g').inv.app K
+      let β := openRestrictedCompositionMap g' U K
       ∃ l : (Arrow.mk a).left ≅ (Arrow.mk b).left,
         a ≫ H.map ((derivedPullback g').map eP.hom) ≫
             η.hom.app ((derivedPullback g').obj K) =
-          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β) := by sorry
+          l.hom ≫ b ≫ HU.map ((derivedPullback (pullback.snd g' U.ι)).map eQ.hom ≫ β) := by
+  refine Exists.imp ?_
+    (exists_open_restricted_comparison_square.{u, w} f f' g g' sq U sqU z i)
+  intro η hη K P hP hcP eP
+  obtain ⟨hQ, hcQ, eQ, _⟩ :=
+    exists_open_restricted_representative_data U (pullback.snd g' U.ι) K P hP eP
+  have hs := hη K P hP hcP eP hcQ eQ
+  exact ⟨hQ, hcQ, eQ, hs⟩
 
 end AlgebraicGeometry.SingleComplexBaseChange

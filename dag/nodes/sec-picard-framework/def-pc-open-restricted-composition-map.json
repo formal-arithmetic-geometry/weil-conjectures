@@ -1,0 +1,114 @@
+{
+ "id": "def-pc-open-restricted-composition-map",
+ "kind": "definition",
+ "title": "The specified derived open-pullback composition map",
+ "statement": "For schemes X and X′, g′:X′→X, an open U⊆X, and K in the specified scheme derived category of X, let T=X′×X U with projections p:T→X′ and q:T→U. The openRestrictedCompositionMap is the morphism Lq*Lj*K→Lp*L(g′)*K obtained by the chosen derived pullback composition comparison for (q,j), then equality transport along q;j=p;g′, then the inverse chosen comparison for (p,g′). It is literally the morphism previously written inline as β; it introduces no new choice or axiom.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Composition of derived pullbacks; the library’s specified exists_derivedPullbackComposition comparisons, specialized to pullback.condition."
+ },
+ "proof": [
+  {
+   "text": "Compose the chosen isomorphisms from exists_derivedPullbackComposition and equality transport along pullback.condition. These are the same three factors as the former inline β expression.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Composition of derived pullbacks; the library’s specified exists_derivedPullbackComposition comparisons, specialized to pullback.condition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk cohomology comparison commutes with restriction to an open subscheme",
+   "results": "Eight hits including Scheme.Modules.restrictStalkNatIso and stalk ring comparison isomorphisms; no derived tensor comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "Twelve hits for restriction adjunction, composition and stalk isomorphisms. None supplies the derived base tensor comparison square on literal restricted complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|comparisonIntoPullback",
+   "results": "Five Mathlib hits for the additive stalk natural isomorphism and germ formulas. Library rg found representative naturality, already used in the parent proof, but no literal-open comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change comparison for a K-flat sheaf complex agrees with the comparison for its termwise restriction to an open subscheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-comparison-transport",
+   "place": "The β expression in the original Lean signature, factored to avoid repeated large type inference.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedComparisonComposition.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestrictedCompositionMap",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13",
+  "statement": "def openRestrictedCompositionMap\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens) (K : schemeDerivedCategory X) :\n    (derivedPullback (pullback.snd g' U.ι)).obj ((derivedPullback U.ι).obj K) ⟶\n      (derivedPullback (pullback.fst g' U.ι)).obj ((derivedPullback g').obj K)"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, change record, compilation, and forced adaptation checks all agree; delivered modules compile, and the original downstream importer fails while the adapted importer compiles."
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-open-restricted-representative-data",
+ "kind": "statement",
+ "title": "Literal open restriction gives a K-flat derived pullback representative",
+ "statement": "For every scheme X, open U, scheme T and morphism q:T→U, with the specified scheme derived categories, and every K-flat complex P on X with eP:DQ(P)≅K, the literal restriction Q of P to U is K-flat, the specified derived pullback counit for q at Q is invertible, and DQ(Q)≅L(U.ι)*(K). No cartesian square or stalk point is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-comparison-pullback-naturality",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-kflat-open-restriction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YB",
+  "place": "K-flat stalk criterion; Tag 0D5U, exact open restriction; the universal derived counit and the pinned tensor-pullback adjunction identify the literal restriction."
+ },
+ "proof": [
+  {
+   "text": "Open restriction preserves K-flatness by the stalk criterion.",
+   "uses": [
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved counit_isIso_kFlat theorem from IsomorphismPullbackCounit to the literal restricted K-flat complex; apply it again along U.ι to the original complex.",
+   "uses": [
+    "lem-pc-isomorphism-pullback-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies tensor pullback along U.ι with literal restriction. Map this natural isomorphism to complexes and localization, then use the inverse specified counit along U.ι and the quotientCompQhIso factors. Compose with derived pullback of eP.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-isomorphism-pullback-counit",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/06YB",
+  "place": "K-flat stalk criterion; Tag 0D5U, exact open restriction; the universal derived counit and the pinned tensor-pullback adjunction identify the literal restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk cohomology comparison commutes with restriction to an open subscheme",
+   "results": "Eight hits including Scheme.Modules.restrictStalkNatIso and stalk ring comparison isomorphisms; no derived tensor comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "Twelve hits for restriction adjunction, composition and stalk isomorphisms. None supplies the derived base tensor comparison square on literal restricted complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|comparisonIntoPullback",
+   "results": "Five Mathlib hits for the additive stalk natural isomorphism and germ formulas. Library rg found representative naturality, already used in the parent proof, but no literal-open comparison square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The literal termwise open restriction of a K-flat sheaf complex is K-flat and represents the derived pullback, with invertible left-derived counit",
+   "results": "Service unavailable: Internal Server Error. No verdict of absence is inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor on module sheaf complexes sends a K flat complex to a representative of derived inverse image and the universal left derived counit is invertible there",
+   "results": "Eight hits: restriction-stalk isomorphisms for the square query; exact derived-functor factorization and ordinary flat-module results for the representative query. No full match.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique is available and underlies the existing universal-counit uniqueness argument; it does not supply the open comparison square or all representative data.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|restrictStalk|leftAdjointUniq",
+   "results": "Exact derived-functor factors, stalk restriction and adjoint uniqueness are available; no full square or representative-data theorem. Library search also checked SingleComplexOpenRestrictionData and the private counit helper in SingleComplexBaseChangeStalkCondition.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-comparison-transport",
+   "place": "Separate construction of representative data from the comparison square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedRepresentativeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedRepresentativeData.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_open_restricted_representative_data",
+  "statement": "theorem exists_open_restricted_representative_data\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X T : Scheme.{u}} (U : X.Opens) (q : T ⟶ U.toScheme)\n    (K : schemeDerivedCategory X)\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (eP : DerivedCategory.Q.obj P ≅ K) :\n    let Q : CochainComplex\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=\n      ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P\n    ∃ (_hQ : Q.IsKFlat)\n      (_hcQ : IsIso ((counit q).app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n      (_eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K), True",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-634a0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098665",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, change record, compilation, and forced adaptation checks all agree; delivered modules compile, and the original downstream importer fails while the adapted importer compiles."
+ }
+}
