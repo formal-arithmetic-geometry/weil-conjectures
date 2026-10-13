@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift
+import Mathlib.Data.Finset.Order
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Affine local lifts of fixed-model maps
 
@@ -114,6 +116,57 @@ theorem exists_finitePresentation_local_map_lifts
                 (U.pullbackHom p a)).map (r a) ≫ t.hom.app (A.obj Gj) =
               (Scheme.Modules.pullback (V.f a)).map
                 (e.inv.app Fj ≫ φ ≫ e.hom.app Gj)) := by
-  sorry
+  classical
+  intro j hij Fj Gj hF hFq hG hGq φ
+  let Xj := pullback f (Spec.map (R.map (homOfLE hij)))
+  let : CompactSpace Xj :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (pullback.snd f (Spec.map (R.map (homOfLE hij))))
+  let Uj : Xj.OpenCover.{u} := Xj.affineCover.finiteSubcover
+  have one (a : Uj.I₀) := finitePresentation_one_chart_map_lift_eventually
+    R c hc i f j hij Fj Gj hF hFq hG hGq φ Uj a (inferInstance)
+  choose stage hstage hlift using one
+  let : Nonempty I := ⟨j⟩
+  obtain ⟨l, hl⟩ := (insert j (Finset.univ.image stage)).exists_le
+  have hjl : j ≤ l := hl j (Finset.mem_insert_self _ _)
+  let q := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))
+    (Over.homMk (Spec.map (R.map (homOfLE hjl)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
+  let U : (pullback f (Spec.map
+    (R.map (homOfLE (hij.trans hjl))))).OpenCover.{u} := Uj.pullback₁ q
+  let e := Scheme.Modules.tensorPullbackCompositionIso
+            (baseChangeMap f
+              (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))
+              (T' := Over.mk (c.π.app (op i)))
+              (Over.homMk (c.π.app (op l)) (c.w (homOfLE (hij.trans hjl)).op)))
+            (baseChangeMap f
+              (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+              (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))
+              (Over.homMk (Spec.map (R.map (homOfLE hjl)))
+                (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)))
+            (baseChangeMap f
+              (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+              (T' := Over.mk (c.π.app (op i)))
+              (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op)))
+            (by
+              rw [← baseChangeMap_comp]
+              congr 1
+              ext
+              simpa using c.w (homOfLE hjl).op)
+  refine ⟨l, hjl, e, rfl, U, ?_, ?_, ?_⟩
+  · exact inferInstanceAs (Finite Uj.I₀)
+  · intro a
+    let : IsAffineHom (Spec.map (R.map (homOfLE hjl))) := inferInstance
+    let : IsAffineHom q := MorphismProperty.of_isPullback
+      (isPullback_baseChangeMap f _).flip (inferInstance :
+        IsAffineHom (Spec.map (R.map (homOfLE hjl))))
+    change IsAffine (pullback q (Uj.f a))
+    infer_instance
+  · have lifts (a : Uj.I₀) := hlift a l hjl (hl (stage a)
+      (Finset.mem_insert_of_mem (Finset.mem_image.mpr ⟨a, Finset.mem_univ a, rfl⟩)))
+    choose r hr using lifts
+    exact ⟨r, hr⟩
 
 end AlgebraicGeometry

@@ -17,20 +17,30 @@
  },
  "proof": [
   {
-   "text": "Choose a finite affine cover of Xj, using quasi-compactness over Spec Rj.\nIts inverse images at later stages and at the limit are affine. On a chart,\nquasi-coherent sheaves and pullback identify with modules and scalar extension.\nThe stage coordinate rings have colimit the limit chart ring: they are tensor\nproducts of the fixed chart ring with the stage base rings, and tensor products\ncommute with this colimit. Apply the map clause of finitePresentation_descent_directedColimit\non each chart, passing through the partial-order quotient of the directed preorder.\nThere are finitely many charts; choose a common upper bound and pull the local maps\nthere. Composition comparisons transport their scalar-extension equations to the\ndisplayed recovery equations. The comparison e is explicitly the canonical tensor\npullback composition comparison, so no choice of comparison is needed. No agreement\non overlaps has been imposed. Empty charts have unique maps; an empty cover requires\nno lifts and j itself is an upper bound. The zero ring and zero modules cause no\nexception. Noetherianity is not used.",
+   "text": "Use quasi-compactness of the base-changed structure morphism over Spec Rj to obtain CompactSpace Xj. Choose Xj.affineCover.finiteSubcover. Every chart is affine by the Mathlib instance for a finite subcover of an affine cover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each chart apply finitePresentation_one_chart_map_lift_eventually to the supplied finite affine cover, the two models and the limit map. Choose its stage and its eventual chart lifting assertion.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-one-chart-map-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "The finite set formed by j and the image of the chart stages has an upper bound l by Finset.exists_le. Pull the chosen cover back along the transition map to l. Its index type is still finite, and its charts are affine because the transition map is an affine base change of Spec.map. Construct e explicitly as tensorPullbackCompositionIso; its canonicality clause is reflexivity. Apply each eventual assertion at l, choose the resulting component map and combine the family with its recovery equations. This proves the displayed existential conclusion. In the empty-cover case the finite set still contains j, so the bound exists and the family of chart maps is empty.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-one-chart-map-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR, first proof; missing gluing details expanded by P2"
+  "place": "Tag 01ZR first proof; finite affine cover and directed common-stage assembly in Lean by F3"
  },
  "mathlib_searches": [
   {
@@ -109,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T140823-L-315298",
+  "landing": "20261013T155932-L-1302194",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
