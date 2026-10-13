@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+import Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyFinite
+import Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyBounded
 
 @[expose] public section
 
@@ -44,7 +46,8 @@ theorem finiteFiberData
           DerivedCategory.Q.obj P)) :
     (∀ i : ℤ, Module.Finite (X.residueField x) (derivedFiberCohomology X E i x)) ∧
       ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → derivedFiberBetti X E i x = 0 := by
-  sorry
+  exact ⟨finiteFiberCohomology X E x hlocal,
+    finiteFiberCohomologyBounded X E x hlocal⟩
 
 end
 end AlgebraicGeometry.Scheme
