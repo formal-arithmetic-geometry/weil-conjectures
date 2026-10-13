@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Expand the restriction map as the adjunction unit along g evaluated on V_i, then evaluation along the pointed neighbourhood section. Expand the underived mate as the unit along f′, the inverse-image square comparison, and the counit along f. Use naturality of the evaluation morphism to move the square comparison and counit past the pointed section. The two triangle identities cancel the intervening units and counits.",
+   "text": "Work componentwise on a sheaf F. Use unit_map_baseChangeMap_app, the pushforward-unit form of the mate, and naturality at the pointed neighbourhood section to replace the mate by the p-unit followed by the square pullback-pasting map. Terminal evaluation and lowerStarCompGlobalSectionsIso identify its terminal component with the pullback-site arrow psi into p^*V_i. These are proved by the private terminalEvaluation_map_eq_res_forAdjoint and lowerStarSections_eval helpers. The terminal-evaluation helper explicitly quantifies over any HasGlobalSectionsFunctor instance, so it applies to any chosen right adjoint, not only the terminal-object instance.",
    "uses": [
     "def-weil-pbc-underived-exchange",
     "lem-weil-pbc-strict-local-localized-hom-germ"
@@ -24,7 +24,15 @@
    "elementary": false
   },
   {
-   "text": "Use sourceStageSectionsIso to identify the initial evaluation with sections of t_i^*F on the stage. The remaining map is the unit for Q.legs.app i followed by the global-sections direct-image comparison and the inverse upperStarComp. The base component of the morphism in the evaluation is Q.first i; its X component is Q.over i. Uniqueness of the map into the scheme pullback therefore identifies it with Q.legs.app i. This gives the asserted equality on every sheaf F; naturality gives the transformation equality.",
+   "text": "The private restriction_unit and composition_unit helpers follow from adjunction uniqueness and upperStarComp_hom_app_unit_app. Combining them with terminal evaluation proves pointedSections_pullback: a section evaluated after the unit along an arbitrary map into an etale stage equals etaleObjectSectionsIso followed by globalSectionsUpperStarMap and the inverse upperStarComp. This is a complete proof, with no new postponed lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-object-sections-base-change",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first projection of psi into V_i times_S X is the strict-henselization cone leg composed with the second limit projection: compute pullback-pasting projections, use the defining pointed section, and apply Q.first. The second projection is p by the site-arrow equation and Q.over. Pullback extensionality therefore identifies it with Q.legs.app i. Apply pointedSections_pullback, identify the etale-object section iso with sourceStageSectionsIso by proof irrelevance, and identify globalSectionsUpperStarMap with sectionsPullbackNat using naturality of terminal evaluation. NatTrans.ext gives the stated equality.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
     "def-weil-pbc-strict-local-neighbourhood-geometry",
@@ -37,13 +45,15 @@
   "def-weil-pbc-strict-local-injective-source-comparison",
   "def-weil-pbc-strict-local-neighbourhood-geometry",
   "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-etale-object-sections-base-change",
   "lem-weil-pbc-injective-sections-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-strict-local-localized-hom-germ"
  ],
  "proof_origin": {
-  "by": "agent P1",
+  "by": "agent H2",
   "document": "Stacks Project",
-  "place": "Tag 03Q9, final injective-complex paragraph; explicit mate and localization factorization argument"
+  "place": "Tag 03Q9, final injective-complex paragraph; explicit pushforward-unit mate calculation and pointed-section evaluation, proved in Lean; repaired duplicate helper by generalizing to an explicitly chosen global-sections right adjoint"
  },
  "mathlib_searches": [
   {
@@ -118,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T025306-L-3424146",
-  "kind": "interface",
+  "landing": "20261013T062522-L-733115",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
