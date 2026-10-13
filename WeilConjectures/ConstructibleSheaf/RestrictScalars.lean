@@ -284,7 +284,10 @@ lemma IsFiniteLocallyConstantSheaf.of_restrictScalars [Finite (Λ ⧸ J)]
 
 /-- For `Λ ⧸ J` finite, a sheaf of `Λ ⧸ J`-modules is constructible if and only if its
 restriction of scalars to `Λ` is: pullback to the strata commutes with restriction of scalars
-(`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`). -/
+(`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`). A surjection of rings `Λ ⟶ Λ'` is, up
+to isomorphism, a quotient map `Λ ⟶ Λ ⧸ J`, so constructibility is unchanged under restriction
+of scalars along a surjection onto a finite ring, the same stratifications serving for both.
+(blueprint: `lem-weil-pbc-constructible-change-of-ring`) -/
 lemma isConstructibleSheaf_restrictScalars_iff [Finite (Λ ⧸ J)]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Λ ⧸ J))) :
     IsConstructibleSheaf

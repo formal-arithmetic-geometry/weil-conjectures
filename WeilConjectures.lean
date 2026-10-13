@@ -1036,6 +1036,7 @@ public import WeilConjectures.ConstructibleSheaf.ConstantFiniteFreeDualNaturalit
 public import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernel
 public import WeilConjectures.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux
 public import WeilConjectures.ConstructibleSheaf.ConstantModuleDual
+public import WeilConjectures.ConstructibleSheaf.Curve
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 public import WeilConjectures.ConstructibleSheaf.EtaleDescent
