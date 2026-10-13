@@ -15,26 +15,46 @@
  },
  "proof": [
   {
-   "text": "Express the morphism between finite free sheaves over the stalk spectrum as a finite matrix, represent every coefficient by a local section of the structure sheaf, intersect the finitely many coefficient neighbourhoods, and use the free universal property to form the local matrix morphism. Naturality of the comparison isomorphisms gives the stated equality.",
+   "text": "Set V to the top open of Y. Identify the restrictions of the two standard free sheaves to V with the standard free sheaves on V using restrictFreeIso. Transport t along the canonical comparison E_V and these free isomorphisms to a map f over the ambient stalk spectrum. These constructions use the ordinary Modules.pullback and its composition and congruence isomorphisms, not tensorPullback.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_finite_free_matrices_of_stalk_local with the singleton index type Unit and constant ranks r and s to f. It gives an open U contained in V, membership of y in U, and a single restricted free map whose stalk pullback is conjugation of f by stalkRestrictionWithinIso.",
+   "uses": [
+    "lem-pc-finite-free-stalk-finite-matrix-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport this local map by the restrictions of restrictFreeIso and the natural isomorphism C from restriction along U.ι to restriction first to V and then to U. Form E_prime by whiskering C with stalk pullback, applying the functor associator, whiskering the within-open comparison by restriction to V, and composing with E_V. Naturality of the within-open comparison and cancellation of the free isomorphisms prove S_U(g_prime) = E_prime.hom ; t ; E_prime.inv.",
+   "uses": [
+    "lem-pc-finite-free-stalk-finite-matrix-lift",
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare E_prime with the exact requested comparison E_U via the natural automorphism D = E_prime.symm followed by E_U of stalk pullback. Prove the stronger intertwining identity for an arbitrary natural transformation between two functors equipped with compatible free and unit comparisons: normalized components commute with every map between standard free sheaves. Naturality on each free inclusion makes each normalized component a common scalar on the summands. Use free_hom_ext and the finite identity sum of projection-inclusion composites to reduce intertwining to a unit-sheaf identity. On every open, linearity says an endomorphism of the unit sends z to z times its value at 1, so the two composites agree by commutativity of the structure ring. This direct calculation needs no freeMatrix injectivity or top-open unit extensionality lemma. Specialize the intertwining identity to D.hom, postcompose with D.inv, and cancel the free isomorphisms. Thus D.hom ; t ; D.inv = t, and cancellation of E_prime gives the equation for exactly E_U. The generalized helper is fully proved, also for noninvertible natural transformations and zero ranks; no holes are introduced.",
    "uses": [
     "def-weil-pbc-free-module",
-    "def-weil-pbc-module-stalk",
-    "def-pc-module-pullback",
     "def-pc-stalk-restriction-complex-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-stalk-restriction-complex-iso",
   "def-weil-pbc-free-module",
-  "def-weil-pbc-module-stalk",
-  "def-pc-module-pullback",
-  "def-pc-stalk-restriction-complex-iso"
+  "lem-pc-finite-free-stalk-finite-matrix-lift"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Finite matrix coefficient extension after excluding rank-zero cases"
+  "place": "Finite matrix coefficient extension; singleton specialization at the top open, restriction transport, and generalized natural-transformation intertwining proved by a direct sectionwise scalar calculation; S4 repair of duplicate private helpers"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -100,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b50ce",
-  "group": "A2",
+  "reviewer": "COMPILER",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T010610-L-2669068",
-  "kind": "interface",
-  "note": "independent Codex review: Packet contents matched the delivered files and DAG; both modules and the direct importer compiled cleanly, with only the named helper sorry remaining."
+  "landing": "20261013T034211-L-3768018",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
