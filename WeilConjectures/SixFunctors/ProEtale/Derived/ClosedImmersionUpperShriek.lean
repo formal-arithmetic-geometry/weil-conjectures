@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 
 /-!
 # The constructible exceptional unit along a closed immersion
@@ -68,7 +69,7 @@ end LowerShriek
 section Unit
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {Z X : Scheme.{u}} (i : Z ⟶ X)
-  [IsClosedImmersion i] [HasCompactification i]
+  [IsClosedImmersion i] [HasCompactification i] [CompactSpace X]
 
 instance full_rightDerivedLowerShriek_of_isClosedImmersion :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) i).Full :=
