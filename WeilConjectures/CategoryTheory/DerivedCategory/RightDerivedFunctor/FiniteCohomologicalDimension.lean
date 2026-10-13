@@ -257,6 +257,25 @@ theorem preservesColimitsOfShape_rightDerivedFunctor [IsGrothendieckAbelian.{w} 
     rw [Category.assoc, nat]
     simp
 
+/-- **Right derived functors of finite cohomological dimension commute with coproducts**, when
+all the classical right derived functors `R^n F` (`n ≥ 0`) commute with coproducts of shape `J`:
+`R^0 F ≅ F` commutes with them, and a coproduct of `F`-acyclic objects is `F`-acyclic
+(`Functor.preservesColimitsOfShape_rightDerivedFunctor`). -/
+theorem preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived [IsGrothendieckAbelian.{w} C]
+    [HasInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D] (J : Type*)
+    [HasColimitsOfShape (Discrete J) C] [HasColimitsOfShape (Discrete J) D] (d : ℕ)
+    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+    (hJ : ∀ n, PreservesColimitsOfShape (Discrete J) (F.rightDerived n)) :
+    PreservesColimitsOfShape (Discrete J) F.rightDerivedFunctor :=
+  have : PreservesColimitsOfShape (Discrete J) F :=
+    have := hJ 0
+    preservesColimitsOfShape_of_natIso F.rightDerivedZeroIsoSelf
+  F.preservesColimitsOfShape_rightDerivedFunctor J d hF fun X hX q ↦
+    have := hJ (q + 1)
+    IsZero.of_iso ((IsZero.iff_id_eq_zero _).2
+        (Sigma.hom_ext _ _ fun j ↦ (hX j q).eq_of_src _ _))
+      (PreservesCoproduct.iso (F.rightDerived (q + 1)) X)
+
 end Derived
 
 end Functor

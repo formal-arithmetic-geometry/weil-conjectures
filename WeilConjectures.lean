@@ -1393,6 +1393,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 public import WeilConjectures.Mathlib.CategoryTheory.Presentable.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
