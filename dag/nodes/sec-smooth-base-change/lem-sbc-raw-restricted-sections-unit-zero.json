@@ -13,30 +13,36 @@
  ],
  "proof": [
   {
-   "text": "Expand zeroIso into exact restriction on a single sheaf, the unbounded/bounded-below derived compatibility, injective-resolution homology, and the classical degree-zero comparison. The defining compatibility with the two right-derived units cancels the unbounded/bounded-below comparison. Use Functor.rightDerivedNatTrans_app for the identity transformation in the defining rightDerivedUnique comparison; this is its unit factorization equation.",
+   "text": "Expand zeroIso. Naturality of the right-derived unit along the termwise exact-restriction single isomorphism, together with mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, transports sectionsUnit to the ordinary unit on L(A)[0]. The localization quotient comparisons are identities.",
    "uses": [
     "def-sbc-raw-restricted-cohomology-comparison-map"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the already proved rightDerivedPlusSingleUnitHomology_comp_comparison to the sheaf L(A). It identifies homology of the bounded-below single unit, transported through the classical comparison, with toRightDerivedZero. Since sections preserve finite limits, rightDerivedZeroIsoSelf is inverse to that map. Cancel these factors. Expand mapDerivedCategorySingleFunctor and use naturality of homologyFunctorFactors to transport through exact restriction and the termwise single-complex isomorphism, giving underivedSingleIso. This yields the displayed equality. All equations are natural-transformation identities and inverse cancellations, including A=0 and empty W.",
+   "text": "Use rightDerivedNatTrans_app to transport the unbounded derived unit to the bounded-below unit. Apply the public proved rightDerivedPlusSingleUnitHomology_comp_comparison to L(A). The single-complex and homology localization comparisons, by naturality, identify this with the unbounded unit followed by homologyRightDerivedFunctorObjSingleFunctorIso. This is the proved private helper unit_zero_comparison; it does not repeat the injective-resolution proof.",
    "uses": [
-    "lem-sbc-raw-restricted-homotopy-sections-iso",
     "lem-sbc-right-derived-single-unit-homology-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Composition of the two termwise single-complex isomorphisms is the single-complex isomorphism for L followed by R (check degree zero and use the zero target in every other degree). Naturality of homologyFunctorFactors cancels the localization comparisons. Cancel the single-complex homology maps and use rightDerivedZeroIsoSelf_inv_hom_id_app: left exactness of sections makes the classical comparison inverse to toRightDerivedZero. Cancel zeroIso.hom to obtain the equality. No single sheaf is required to be K-injective; zero and empty cases satisfy the same equations.",
+   "uses": [
+    "lem-sbc-raw-restricted-homotopy-sections-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-raw-restricted-cohomology-comparison-map",
-  "lem-sbc-raw-restricted-homotopy-sections-iso",
-  "lem-sbc-right-derived-single-unit-homology-comparison"
+  "lem-sbc-right-derived-single-unit-homology-comparison",
+  "lem-sbc-raw-restricted-homotopy-sections-iso"
  ],
  "proof_origin": {
-  "by": "agent F3",
-  "document": "Stacks Project and Lean definitions",
-  "place": "Tags 072W, 0BKV and 0D6F; Functor.homologyRightDerivedFunctorObjSingleFunctorIso, rightDerivedFunctorPlusCompatibility, InjectiveResolution.toRightDerivedZero_eq; second reading uses the existing bounded-below normalization rightDerivedPlusSingleUnitHomology_comp_comparison rather than redoing its augmentation proof"
+  "by": "agent C2",
+  "document": "Stacks Project and existing public Lean normalization",
+  "place": "Tags 072W and 0BKV; public Functor.rightDerivedPlusSingleUnitHomology_comp_comparison, Functor.rightDerivedNatTrans_app and homology localization naturality. Repair removes all four duplicate Picard helpers."
  },
  "mathlib_searches": [
   {
@@ -139,10 +145,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T082343-L-1634995",
-  "kind": "interface",
+  "landing": "20261013T111839-L-3047964",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
