@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "merged_into": null,
+ "mathlib_match": null,
+ "id": "new-w4-koszul-self-ext-local-iso",
+ "title": "Local Koszul self-Ext isomorphisms",
+ "statement": "Let i:Z→Y be a closed immersion, V an open, n a natural number and assume Koszul-regular affine generators near V. Write B=i_*O_Z, G=H^n(RHom_Y(B[0],B[0])), T=(i*G)|V and F=dual(exteriorSheaf(i*ker(i),n))|V. Each point z of V has an open W containing z and an isomorphism F.over W ≅ T.over W. No overlap compatibility is asserted.",
+ "proof": [
+  {
+   "text": "At z choose the supplied chart U and its regular generators. The existing\nself-Ext pullback local frame identifies the target over i⁻¹U with the free sheaf\nindexed by increasing n-element subsets. The regular conormal basis and affine\nconormal frame identify i*ker(i) over i⁻¹U with the m-fold free sheaf. Apply the\nexterior local-free comparison, then overHomObjIso and homObjFreeUnitIso to identify\nits internal dual with the same subset-indexed free sheaf. Restrict both frames\nalong V.ι to V.ι⁻¹(i⁻¹U), using the over-to-restricted-site equivalence, composition\nof open restriction, and restriction of free sheaves. Compose the restricted source\nframe with the inverse restricted target frame. Membership is the original chart\nmembership. No generator comparison is required here. The already stated frame\nlemmas include all derived universes, n=0, n>m, and empty charts. Empty V is vacuous.",
+   "uses": [
+    "lem-sc-koszul-self-ext-pullback-local-frame",
+    "lem-sc-affine-conormal-frame",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-exterior-sheaf-local-free-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-self-ext-pullback-local-frame",
+  "lem-sc-affine-conormal-frame",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-exterior-sheaf-local-free-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W4",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+  },
+  "note": "Proved from existing finite-free frames; no new hole for the affine calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Koszul regular closed immersion has local self Ext sheaf isomorphic to the dual exterior conormal",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Koszul self Ext isomorphism dual exterior conormal sheaf",
+   "results": "Eight Kaehler differential and derivation hits; no sheaf comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "Iso.inv_hom_id is used to construct preimages.",
+   "date": "2026-10-13",
+   "verdict": "partial tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*self.*ext|self.*ext.*conormal",
+   "results": "No Mathlib match. Project local frame gives free coordinates, without a conormal comparison. Parent exterior and Yoneda modules cause cycles.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparison",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-self-ext-conormal-local-comparison",
+   "place": "Affine local existence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtConormalLocalComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_conormal_local_iso",
+  "statement": "theorem koszulRegularImmersion_self_ext_conormal_local_iso\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ)\n    (hregular : ∀ z : Z, z ∈ V → ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∀ z : V.toScheme, ∃ W : V.toScheme.Opens,\n      z ∈ W ∧ Nonempty (F.over W ≅ T.over W)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T134804-L-130986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T134804-L-130986",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

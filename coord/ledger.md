@@ -12691,3 +12691,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: merged deliver/S4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit (stage 3; reviewer PASS; first push; landing 20261013T134803-L-130281 (interface); batch 20261013T134758; modules 3; new nodes 2)
 - 13:48 L: merged deliver/T2/Sheaf.AlgebraicGeometry.ExternalSectionsUnitMapLeft (stage 3; reviewer PASS; first push; landing 20261013T134803-L-130454 (interface); batch 20261013T134758; modules 3; new nodes 2)
 - 13:48 L: merged deliver/W2/Sheaf.AlgebraicGeometry.FinitePresentationAffineChartSectionsModel (stage 3; reviewer PASS; first push; landing 20261013T134803-L-130762 (interface); batch 20261013T134758; modules 2; new nodes 1)
+- 13:48 L: merged deliver/W4/Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparison (stage 3; reviewer PASS; first push; landing 20261013T134804-L-130986 (interface); batch 20261013T134758; modules 3; new nodes 2)

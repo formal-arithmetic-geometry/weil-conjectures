@@ -17,13 +17,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.AffineConormalFrame
-import Sheaf.RingTheory.KoszulConormalBasis
-import Sheaf.RingTheory.KoszulGeneratorChainMap
+import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalComparisonCore
+import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalAlignment
 
 /-! # Compatible local Koszul comparison maps
 
@@ -101,7 +96,21 @@ theorem koszulRegularImmersion_self_ext_conormal_local_comparison
         (φ x).val.app (op (Over.mk (homOfLE hx))) =
           (φ y).val.app (op (Over.mk (homOfLE hy)))) ∧
       (∀ (x : V.toScheme) (U : V.toScheme.Opens) (hx : U ≤ W x),
-        Function.Surjective ((φ x).val.app (op (Over.mk (homOfLE hx))))) := by sorry
-
+        Function.Surjective ((φ x).val.app (op (Over.mk (homOfLE hx))))) := by
+  classical
+  dsimp only
+  have hlocal := koszulRegularImmersion_self_ext_conormal_local_iso i V n hregular
+  choose W hmem he using hlocal
+  let e := fun z ↦ Classical.choice (he z)
+  obtain ⟨a, ha⟩ :=
+    koszulRegularImmersion_self_ext_conormal_local_alignment i V n hregular W e hmem
+  refine ⟨W, fun z ↦ (a z).hom ≫ (e z).hom, hmem, ha, ?_⟩
+  intro x U hx t
+  let E := a x ≪≫ e x
+  let C := op (Over.mk (homOfLE hx))
+  refine ⟨E.inv.val.app C t, ?_⟩
+  have h := congrArg (fun f ↦ f.val.app C t) E.inv_hom_id
+  change E.hom.val.app C (E.inv.val.app C t) = t at h
+  exact h
 
 end AlgebraicGeometry
