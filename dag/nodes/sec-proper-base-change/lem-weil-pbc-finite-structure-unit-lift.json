@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-finite-structure-unit-lift",
+ "kind": "statement",
+ "title": "FiniteStructureUnitLift",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], complete for an ideal $I$ [def-weil-pbc-adically-complete-ring], and let $f:X\\to\\operatorname{Spec}A$ be separated and finite type. Write $X_n=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ and $j_n:X_n\\to X$. Let $i_n:X_n\\to X_{n+1}$ be the canonical transition immersion, specified by both pullback projection equations. Let $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ be the canonical composition comparison of tensor pullback [def-pc-module-pullback]. Let $p_n:Y_n\\to X_n$ be finite, with $g_n:Y_n\\to Y_{n+1}$ giving cartesian transition squares and $j_{n+1}\\circ p_{n+1}\\circ g_n=j_n\\circ p_n$. Let $G$ be a coherent module [pqf-def-coherent] on $X$ with support proper over $A$ [def-weil-pbc-closed-subset-proper-over-base], and suppose isomorphisms $\\psi_n:j_n^*G\\cong p_{n,*}\\mathcal O_{Y_n}$ commute with $c_n$ and the canonical affine base-change maps followed by the structure-sheaf pullback maps [lem-weil-pbc-affine-pushforward-base-change]. Put a_n:G to (j_n p_n)_* O_Yn equal to the adjoint of psi_n [lem-weil-pbc-finite-structure-adjoint-transitions]. Suppose mu:G tensor G to G is an O_X-linear symmetric product, with a_n(mu(x tensor y))=a_n(x)a_n(y) on every open. There is a unique O_X-linear map eta:O_X to G satisfying mu(eta(1) tensor x)=x on each open, and a_n(eta(r))=(j_n p_n)^sharp(r) for each scalar section r. This states only the unit step, without constructing any ring sheaf or algebra maps.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Tag 09ZT, multiplication paragraph; expanded using 088E, 088F and 0CYS. Read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-weil-pbc-finite-structure-adjoint-transitions",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By proper support choose a closed subscheme with ideal J annihilating G. Its supporting quotient O_X/J is coherent with proper support. The reduced structure maps factor through its reductions, since J kills each direct-image algebra identified with the pullback of G. The factorization is compatible with transitions by the unit base-change formula and the pinned-adjunction composition comparison.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Full faithfulness of completion lifts these factorizations to the unique quotient-to-G map; compose with O_X to obtain eta. Under the adjunction unit and pushforward composition, its section formula is the structure ring map. The multiplicativity hypothesis on mu identifies its completed left-unit composite with the identity. Faithfulness on G proves the left-unit identity on X.",
+   "uses": [
+    "prop-weil-pbc-grothendieck-existence",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If eta and eta-prime satisfy the left-unit law, mu(eta(1),eta-prime(1)) equals eta-prime(1) by the first unit law and eta(1) by symmetry and the second law. Hence the two units agree over every open. Module linearity gives eta(r)=r eta(1), so their section maps agree on all scalars. Sectionwise extensionality proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-tensor-pullback-composition-iso",
+  "prop-weil-pbc-grothendieck-existence",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Tag 09ZT, multiplication paragraph; expanded using 088E, 088F and 0CYS. Read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift the unit of a compatible algebra system through a coherent proper supporting structure sheaf quotient",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift the unit of a compatible algebra system through a coherent proper supporting structure sheaf quotient",
+   "results": "ModuleCat.Tilde.exists_const, structure-sheaf local section formulas; no unit lift.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck|grothendieck|lift.*[Mm]ul|lift.*[Uu]nit",
+   "results": "Mathlib category Grothendieck construction, Unitization.lift, algebra bilinear maps; no sheaf operation lift.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureAlgebraAdjointsConstruct",
+  "group": "D2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-structure-algebra-operations-lift",
+   "place": "09ZT multiplication paragraph: lift the unit through the proper supporting quotient",
+   "via": [
+    "lem-weil-pbc-finite-structure-algebra-adjoints-construct"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureUnitLift",
+  "file": "lean/Sheaf/Paper/FiniteStructureUnitLift.lean",
+  "declaration": "AlgebraicGeometry.finite_structure_unit_lift",
+  "statement": "theorem finite_structure_unit_lift (A : Type u) [CommRing A] (I : Ideal A) [IsNoetherianRing A] [IsAdicComplete I A] (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) (Nat.le_succ (n + 1)))))) (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))) (hc : ∀ n : ℕ, c n = (Scheme.Modules.tensorPullbackCompositionIso (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (hi n)).symm) (Yn : ℕ → Scheme.{u}) (fnY : ∀ n, Yn n ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) [∀ n, IsFinite (fnY n)] (gn : ∀ n, Yn n ⟶ Yn (n + 1)) (hcart : ∀ n, IsPullback (fnY n) (gn n) (i n) (fnY (n + 1))) (hw : ∀ n, gn n ≫ (fnY (n + 1) ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) = fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (hproper : Scheme.Modules.HasSupportProperOver f G) (ψ : ∀ n, (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅ (Scheme.Modules.pushforward (fnY n)).obj (SheafOfModules.unit (Yn n).ringCatSheaf)) (hψ : ∀ n, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (Scheme.Modules.moduleBaseChangeMap (fnY (n + 1)) (fnY n) (i n) (gn n) (hcart n).flip.w (SheafOfModules.unit (Yn (n + 1)).ringCatSheaf) ≫ (Scheme.Modules.pushforward (fnY n)).map (Scheme.Modules.tensorPullbackObjUnitToUnit (gn n))) = (c n).hom.app G ≫ (ψ n).hom) (μ : G ⊗ G ⟶ G) (hcomm : ∀ (U : X.Opens) (x y : Γ(G, U)), μ.app U (tmulSection x y) = μ.app U (tmulSection y x)) (hμ : ∀ (n : ℕ) (U : X.Opens), let a : Γ(G, U) → Γ(Yn n, (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U) := fun x ↦ (Scheme.Modules.finiteStructureAdjoint (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x ∀ (x y : Γ(G, U)), a (μ.app U (tmulSection x y)) = a x * a y) : ∃! η : SheafOfModules.unit X.ringCatSheaf ⟶ G, (∀ (U : X.Opens) (x : Γ(G, U)), μ.app U (tmulSection ((η.val.app (op U)).hom (1 : Γ(X, U))) x) = x) ∧ (∀ (n : ℕ) (U : X.Opens) (r : Γ(X, U)), (Scheme.Modules.finiteStructureAdjoint (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U ((η.val.app (op U)).hom r) = (fnY n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))).app U r)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T140814-L-311918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T140814-L-311918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

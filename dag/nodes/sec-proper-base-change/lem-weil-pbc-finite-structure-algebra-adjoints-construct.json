@@ -23,63 +23,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a proper closed subscheme annihilating G. Its ideal also annihilates the tensor square and cube and the structure sheaf quotient; quasi-coherence and the finite-type affine criterion make these coherent.",
+   "text": "Apply finite_structure_multiplication_lift to obtain the uniquely determined multiplication mu, its associative and commutative section laws and multiplicativity under each finiteStructureAdjoint. Apply finite_structure_unit_lift to mu and its symmetry and multiplicativity to obtain the unique unit eta, its left-unit law and the structure-map formula for its adjoints.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-finite-structure-multiplication-lift",
+    "lem-weil-pbc-finite-structure-unit-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback and its canonical comparison commute with multiplication, unit and the monoidal constraints. Conjugate the canonical finite direct-image multiplications by psi; the displayed compatibility equation makes the family compatible.",
+   "text": "Define a commutative ring on each section group of G: xy=mu(x tensor y) and 1=eta(1). The associativity, symmetry and left-unit equations provide the multiplicative laws. Tensor bilinearity and module-map additivity provide both distributive and zero laws. Naturality makes restriction a ring homomorphism. The underlying type-valued presheaf is a sheaf because the additive presheaf of G is; reflection by the ring forgetful functor gives the ring sheaf condition. The scalar map is eta(r)=r eta(1), which is multiplicative by bilinearity and the left-unit law. This gives B. Identity on each section group is an isomorphism e:B.toModule to G, since scalar multiplication through this structure map is the original scalar multiplication. Each adjoint is a ring homomorphism by the two lifted operation formulas, and these ring homomorphisms are natural and commute with the scalar maps. They give the maps b_n.",
    "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-weil-pbc-module-tensor-symmetric-monoidal",
-    "lem-weil-pbc-affine-pushforward-base-change"
+    "def-weil-pbc-comm-algebra-sheaf",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use full faithfulness of Grothendieck existence on the tensor square and the supporting structure-sheaf quotient to lift multiplication and unit uniquely. Faithfulness on the tensor cube, square and G checks associativity, commutativity and both unit identities. Equip the additive sheaf of G with these operations, yielding a commutative ring sheaf and its structure map. Its underlying module is isomorphic to G.",
-   "uses": [
-    "prop-weil-pbc-grothendieck-existence",
-    "def-weil-pbc-comm-algebra-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The lifted multiplication and unit make the adjoints algebra maps. The pinned adjunction unit and pushforward composition give the explicit section formula, expressed by finiteStructureAdjoint. This step does not assert transition compatibility.",
+   "text": "For the exact section formula, expand finiteStructureAdjoint. The adjunction unit is natural in e.hom, so precomposing its adjoint by e.hom is the adjoint of tensorPullback.map e.hom followed by psi.hom. Functoriality of pushforward and associativity of composition prove this equality in Lean. Evaluate it on U and x; it is precisely the requested formula.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "def-pc-tensor-pullback-composition-iso"
+    "lem-weil-pbc-finite-structure-adjoint-transitions"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-module-tensor-symmetric-monoidal",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "prop-weil-pbc-grothendieck-existence",
+  "lem-weil-pbc-finite-structure-multiplication-lift",
+  "lem-weil-pbc-finite-structure-unit-lift",
   "def-weil-pbc-comm-algebra-sheaf",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
   "def-pc-module-pullback",
-  "def-pc-tensor-pullback-composition-iso"
+  "lem-weil-pbc-finite-structure-adjoint-transitions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks 09ZT multiplication paragraph, expanded using 088E, 088F and 0CYS; read https://stacks.math.columbia.edu/tag/09ZT on 2026-10-13"
+  "place": "Stacks Tag 09ZT, multiplication paragraph, expanded using 088E, 088F and 0CYS. D2 separates multiplication and unit lifting and proves sectionwise packaging and adjunction naturality in Lean."
  },
  "mathlib_searches": [
   {
@@ -152,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-0f31d",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T130749-L-3985816",
+  "landing": "20261013T140814-L-311918",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivery packet, recorded statement change, Lean files, forced adaptation, compilation results, imports, declarations, and report against the stage-3 review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
