@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.RingTheory.PolynomialTorBound
+import Sheaf.RingTheory.TorVanishingLocalizedBase
 
 /-! # Transfer of Tor bounds to localized polynomial rings
 Source: Stacks Project, Tag 068X.
@@ -30,16 +32,12 @@ namespace ModuleCat
 
 /-- Transfer the base Tor bound to a Tor bound over the localized polynomial ring.
 Source: Stacks Project, Tag 068X, lemma-recognize-perfect-over-base.
-Proof: the Hilbert basis theorem and localization make the localized polynomial ring
-Noetherian. Thus the finite module, placed in degree zero, has a bounded-above finite free
-resolution and is pseudo-coherent. Polynomial extension and localization are flat over the
-base, so this resolution is also a flat base resolution. The given Tor vanishing puts its
-base Tor amplitude in [-d,0]. Every nonzero fibre of the localization over a base prime is a
-localization of a polynomial ring in n variables over the residue field; Hilbert syzygy and
-localization give global dimension at most n. The zero fibres contribute nothing. Tag 068X
-now gives Tor amplitude [-d-n,0] over the localized ring. Computing its derived tensor with
-any module over that ring proves the displayed vanishing. The same argument covers n=0,
-d=0, and the zero module without any separate choice of resolution length.
+Proof: restrict the localized module to the polynomial ring. The polynomial Tor bound
+increases the base bound by at most n, without needing this restricted module to be finite.
+For each localized test module, apply that bound to its polynomial-ring restriction.
+The proved localization comparison then transfers this vanishing to the localized ring.
+Successive restriction to the base is definitionally restriction along the composite in
+hTor. This argument also covers n=0, d=0, and the zero module.
 (blueprint: lem-pc-localized-polynomial-tor-bound)
 -/
 theorem localizedPolynomial_tor_bound_of_base_tor_bound
@@ -55,7 +53,15 @@ theorem localizedPolynomial_tor_bound_of_base_tor_bound
             (Localization p.asIdeal.primeCompl)).comp MvPolynomial.C)).obj M)).obj N)) :
     ∀ N : ModuleCat.{u} (Localization p.asIdeal.primeCompl), ∀ i : ℕ, d + n < i →
       IsZero (((Tor' (ModuleCat.{u} (Localization p.asIdeal.primeCompl)) i).obj M).obj N) := by
-  sorry
+  intro N i hi
+  apply isZero_tor_of_restrictScalars_localization
+    (MvPolynomial (Fin n) A) (Localization p.asIdeal.primeCompl)
+    p.asIdeal.primeCompl M N i
+  apply polynomial_tor_bound_of_base_tor_bound n
+    ((restrictScalars (algebraMap (MvPolynomial (Fin n) A)
+      (Localization p.asIdeal.primeCompl))).obj M) d ?_ _ i hi
+  intro L j hj
+  exact hTor L j hj
 
 
 end ModuleCat
