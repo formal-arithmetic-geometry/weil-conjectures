@@ -12,49 +12,61 @@
  ],
  "proof": [
   {
-   "text": "For any module, iterated quotients by the two ideal powers represent the quotient by their sum. Construct maps in both directions from their cokernel universal properties. Cancelling the composite quotient epimorphisms proves inverse identities and naturality in the module and both indices.",
+   "text": "Apply grothendieckDevissage_secondAdicSystem_comparison to F.obj to obtain the natural interchange tau and its composite-projection equation. This reuses the existing cokernel construction rather than constructing a second interchange.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-devissage-second-adic-system-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n"
    }
   },
   {
-   "text": "Interchange the quotients on F; compose the reduction of beta inverse with sigma and transpose the indices to produce Xi natural in the I-index.",
+   "text": "Forget beta to an isomorphism b of K-completion diagrams. Whisker b.inverse by the I-completion functor and compose with sigma. Precompose with tau.inverse, then apply the flip functor to this composite isomorphism. Since flipping twice is definitionally the identity, this gives Xi with exactly the required source and target, natural in both indices.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n"
    }
   },
   {
-   "text": "Apply the comparison square and delta=beta.hom followed by completed a. Naturality of interchange for a identifies the target interchange with theta, because htheta characterizes it after an epimorphic projection from H. This proves the map equality at every pair of indices.",
+   "text": "At every pair of indices prove tau.forward followed by K-reduction of I-reduction of a equals I-reduction of K-reduction of a followed by the supplied theta. Cancel the two epimorphic quotient projections from F. Use the projection equation for tau, the cokernel equations for the reduced maps, and the supplied projection equation htheta precomposed by a. This proves the needed module-map naturality without choosing an interchange for H or a witness for any coherent module.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n"
+   }
+  },
+  {
+   "text": "The equation hbeta and the inverse law for b give b.inverse at e followed by delta at e equal to K-reduction of a. Expand Xi componentwise. Substitute the supplied comparison square hsquare, combine the two I-reduction maps using formalModuleQuotientMap_comp, and substitute this equality. Use the naturality equation from the preceding step and cancel tau.inverse followed by tau.forward. Two applications of NatTrans.ext identify the full diagram maps.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-devissage-second-adic-system-comparison",
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E3",
+  "group": "A4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n",
-  "note": "Source argument expanded into an explicit sheaf interface; no new mathematical assumption."
+  "note": "Compiled Lean proof using the already proved quotient interchange, whiskering, flipping, quotient-projection cancellation and the supplied comparison square. No new statement or hole."
  },
  "mathlib_searches": [
   {
@@ -147,13 +159,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261012T214706-L-1269692",
-  "kind": "interface",
+  "landing": "20261013T072338-L-1114767",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison
 
 /-! # Completed comparison in the original index
 
@@ -21,6 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Double quotient comparison gives an isomorphism after K-completion, natural in
 all I-levels. No torsion hypothesis is needed for this purely quotient-theoretic step.
 Source: Stacks Project, Tag 088A, final paragraph
@@ -67,6 +69,60 @@ theorem grothendieckDevissage_completedComparison
         M.obj ⋙ formalCompletionFunctor K,
       ∀ n : ℕᵒᵖ,
         Ξ.hom.app n ≫ formalCompletionMap K (α.hom.app n) =
-          formalCompletionMap K (((completion X I).map a).hom.app n) := by sorry
+          formalCompletionMap K (((completion X I).map a).hom.app n) := by
+  obtain ⟨τ, hτ⟩ := grothendieckDevissage_secondAdicSystem_comparison I K F.obj
+  let b : N.obj ≅ formalCompletionSystem K F.obj :=
+    (ObjectProperty.ι (IsCoherentFormalModule K)).mapIso β
+  let γ := Functor.isoWhiskerRight b.symm (formalCompletionFunctor I) ≪≫ σ
+  let Ξ := (flipFunctor _ _ _).mapIso (τ.symm ≪≫ γ)
+  refine ⟨Ξ, ?_⟩
+  intro n
+  apply NatTrans.ext
+  funext e
+  have ht := hτ e.unop n.unop
+  simp only [← Category.assoc] at ht
+  have hh := hθ e.unop n.unop
+  have hs := hsquare e.unop n.unop
+  have hnat : (τ.hom.app e).app n ≫
+      formalModuleQuotientMap K
+        (formalModuleQuotientMap I a.hom (Nat.le_refl (n.unop + 1)))
+        (Nat.le_refl (e.unop + 1)) =
+      formalModuleQuotientMap I
+        (formalModuleQuotientMap K a.hom (Nat.le_refl (e.unop + 1)))
+        (Nat.le_refl (n.unop + 1)) ≫ (θ.hom.app e).app n := by
+    have : Epi (formalModuleQuotientπ K (e.unop + 1) F.obj) := by
+      dsimp [formalModuleQuotientπ]
+      infer_instance
+    have : Epi (formalModuleQuotientπ I (n.unop + 1)
+        (formalModuleQuotient K (e.unop + 1) F.obj)) := by
+      dsimp [formalModuleQuotientπ]
+      infer_instance
+    apply (cancel_epi (formalModuleQuotientπ I (n.unop + 1)
+      (formalModuleQuotient K (e.unop + 1) F.obj))).1
+    apply (cancel_epi (formalModuleQuotientπ K (e.unop + 1) F.obj)).1
+    simp only [← Category.assoc]
+    rw [ht]
+    simp only [Category.assoc, formalModuleQuotientMap, formalModuleQuotientπ,
+      cokernel.π_desc, cokernel.π_desc_assoc]
+    simpa only [formalModuleQuotientπ, Category.assoc] using
+      congrArg (fun t ↦ a.hom ≫ t) hh.symm
+  have hb : b.inv.app e ≫ δ.hom.app e =
+      formalModuleQuotientMap K a.hom (Nat.le_refl (e.unop + 1)) := by
+    rw [hβ]
+    change b.inv.app e ≫ (b.hom.app e ≫
+      formalModuleQuotientMap K a.hom (Nat.le_refl (e.unop + 1))) = _
+    simp
+  change ((τ.inv.app e).app n ≫
+      formalModuleQuotientMap I (b.inv.app e) (Nat.le_refl (n.unop + 1)) ≫
+      (σ.hom.app e).app n) ≫
+      formalModuleQuotientMap K (α.hom.app n) (Nat.le_refl (e.unop + 1)) =
+    formalModuleQuotientMap K
+      (formalModuleQuotientMap I a.hom (Nat.le_refl (n.unop + 1)))
+      (Nat.le_refl (e.unop + 1))
+  rw [Category.assoc, Category.assoc, hs, ← Category.assoc
+    (formalModuleQuotientMap I (b.inv.app e) _), ← formalModuleQuotientMap_comp, hb]
+  rw [← hnat]
+  simp
+
 
 end AlgebraicGeometry

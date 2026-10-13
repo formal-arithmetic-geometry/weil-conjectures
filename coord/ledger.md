@@ -11495,3 +11495,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: returned deliver/U3/Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionT (reviewer RETURN: (the landing tools, head 3605c3ef9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:23 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FormalKernelBilinearActionExists (stage 3; reviewer PASS; after a return; landing 20261013T072337-L-1114530 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientBaseChange (stage 3; reviewer PASS; first push; landing 20261013T072337-L-1114642 (interface); batch 20261013T072335; modules 3; new nodes 2)
+- 07:23 L: merged deliver/A4/Sheaf.AlgebraicGeometry.GrothendieckDevissageCompletedComparison (stage 3; reviewer PASS; first push; landing 20261013T072338-L-1114767 (proof); batch 20261013T072335; modules 1; new nodes 0)
