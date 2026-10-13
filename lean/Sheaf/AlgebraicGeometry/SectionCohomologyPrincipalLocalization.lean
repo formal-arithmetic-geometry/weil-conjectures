@@ -10,7 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Module.LocalizedModule.Away
-import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import Sheaf.AlgebraicGeometry.SectionCohomologyClearDenominators
+import Sheaf.AlgebraicGeometry.SectionCohomologyKernelPowerTorsion
 
 /-! # Principal localization of the cohomology presheaf
 
@@ -54,6 +55,29 @@ theorem sectionCohomologyPresheaf_isLocalized_away {X T : Scheme.{u}}
     let P := sectionCohomologyPresheaf K q
     let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=
       Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
-    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by sorry
+    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by
+  dsimp only
+  let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  let P := sectionCohomologyPresheaf K q
+  let r := (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom
+  let N := P.obj (op (T.basicOpen a))
+  let : Module Γ(T, W) N := Module.compHom _ r
+  have hu : IsUnit (algebraMap Γ(T, W) (Module.End Γ(T, W) N) a) := by
+    rw [Module.End.isUnit_iff]
+    change Function.Bijective (fun x : N ↦ r a • x)
+    change Function.Bijective
+      (algebraMap Γ(T, T.basicOpen a) (Module.End Γ(T, T.basicOpen a) N) (r a))
+    apply (Module.End.isUnit_iff _).mp
+    exact (T.toRingedSpace.isUnit_res_basicOpen a).map
+      (algebraMap Γ(T, T.basicOpen a) (Module.End Γ(T, T.basicOpen a) N))
+  apply IsLocalizedModule.Away.mk_of_addCommGroup hu
+  · intro s
+    obtain ⟨n, t, ht⟩ := sectionCohomologyPresheaf_clearDenominators f F I q W hW a s
+    refine ⟨n, t, ?_⟩
+    change r (a ^ n) • s = _
+    change _ = (r a) ^ n • s at ht
+    rw [map_pow]
+    exact ht.symm
+  · exact sectionCohomologyPresheaf_kernel_pow_annihilates f F I q W hW a
 
 end AlgebraicGeometry.Scheme.Modules
