@@ -26,37 +26,61 @@
  ],
  "proof": [
   {
-   "text": "By the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence], the functor from D(A) to D_{\\mathrm{QCoh}}(\\mathcal O_X) is an equivalence with quasi-inverse R\\Gamma(X,-), and it sends A[n] to \\mathcal O_X[n]. Therefore zero objects and all Hom-vanishing conditions for the shifts of A are preserved and reflected by this equivalence.",
+   "text": "Compute the cohomology of O_X concentrated in degree zero. In degree zero, singleFunctorCompHomologyFunctorIso identifies it with the quasi-coherent unit sheaf. In every other degree the term is zero, hence so is its cohomology. The empty free sheaf gives a quasi-coherent zero object, so all cohomology sheaves are quasi-coherent.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded; Tag 09IS, affine case"
+   }
+  },
+  {
+   "text": "For every point use the whole open X and the single complex of its structure sheaf on the localized site. It is supported in degree zero. Its degree-zero term is the free sheaf on ULift(Fin 1), by freeUniqueIso; its other terms are zero and are retracts of the free sheaf on ULift(Fin 0). Exact restriction commutes with singleFunctor. This gives the explicitly constructed strictly perfect local model required by def-pc-perfect-complex.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded; Tag 09IS, affine case"
+   }
+  },
+  {
+   "text": "Write A=Gamma(X,O_X) and use X.isoSpec to identify X with Y=Spec(A). Restriction along this isomorphism and its inverse forms an exact equivalence of module-sheaf categories. Its derived equivalence commutes with shifts and homology and sends O_X[0] to O_Y[0]. Restriction preserves quasi-coherence, so a given E in D_QCoh(X) transports to E′ in D_QCoh(Y). Full faithfulness and the shifted unit isomorphisms carry the assumed Hom subsingletons to Hom(O_Y[n],E′). Apply lem-pc-affine-qcoh-derived-equivalence, including its normalization A[n] to O_Y[n], and put M=e.inverse(E′). The equivalence, full-subcategory inclusion, and counit show that Hom(A[n],M) is subsingleton for every n.",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 06Z0, affine comparison, applied in Tag 09IS"
+    "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded; Tag 09IS, affine case"
    }
   },
   {
-   "text": "The structure sheaf \\mathcal O_X is represented on the affine scheme by the degree-zero free rank-one module A, so it is perfect by the definition of a strictly perfect complex. In D(A), maps from A[n] to a complex M identify with the corresponding shifted cohomology group of M; hence all these Hom groups vanish exactly when every cohomology group of M vanishes, which is equivalent to M=0. Transporting this calculation across the equivalence in Step 1 gives the asserted criterion for E.",
+   "text": "The private proved helper freeModule_detects_zero uses the shift adjunction to identify Hom(A[-n],M) with Hom(A[0],M[n]). Apply the additive equivalence of lem-pc-derived-free-module-hom-homology to M[n]; its zeroth homology is subsingleton, hence zero as a module. The homology shift isomorphism identifies this with H^n(M). DerivedCategory.isZero_of_forall_isZero_homology gives M=0. The affine-equivalence counit and the inverse scheme-isomorphism derived equivalence give E=0. Conversely a zero target makes every Hom type subsingleton, by IsZero.eq_of_tgt. This proves both directions without boundedness or a nonempty-scheme assumption.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "def-pc-perfect-complex"
+    "lem-pc-derived-free-module-hom-homology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IS, affine case; Tag 06Z0, affine tilde construction"
+    "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded; Tag 09IS, affine case"
    }
   }
  ],
  "proof_deps": [
+  "def-pc-perfect-complex",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "def-pc-perfect-complex"
+  "lem-pc-derived-free-module-hom-homology"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IS, affine case using Tag 06Z0"
+  "by": "agent",
+  "agent": "J1",
+  "based_on": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 06Z0, perfect-lemma-affine-compare-bounded; Tag 09IS, affine case"
+  },
+  "note": "Follows the original affine-base route in Tags 06Z0 and 09IS. Explicit degree-zero perfect model and exact scheme-isomorphism transport; uses the existing proved free-module homology calculation. No new intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -144,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d4de1",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T003158-L-2429093",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proof and imports matched the node and baseline signatures; all delivered files and both direct importers compiled cleanly."
  }
 }
