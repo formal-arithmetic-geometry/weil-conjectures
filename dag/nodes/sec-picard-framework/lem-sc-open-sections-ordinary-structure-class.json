@@ -14,15 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Identify the extension single and its homology with A[0], then apply termwise tilde and restriction. The single-map and over-unit comparisons preserve the degree-zero unit.",
+   "text": "The fully proved private extension_single_homology identity identifies j with homology of extendSingleIso followed by singleObjHomologySelfIso. Cancel homologyπ and use homologyπ_extendHomologyIso_hom, homologyπ_naturality, extendCyclesIso_hom_iCycles, and extendSingleIso_hom_f. For an arbitrary map between complexes identified with single complexes, normalize its homology map to its degree-zero component using singleObjHomologySelfIso naturality. Apply this to the termwise tilde/sections unit, using the functors of def-sc-koszul-open-system and def-sc-principal-open-alternating-total.",
    "uses": [
-    "def-sc-koszul-open-system"
+    "def-sc-koszul-open-system",
+    "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
   },
   {
-   "text": "tilde.toOpen sends one to the constant section one by the defining localization section map and StructureSheaf.const_one. The top-open restriction sections isomorphism preserves this section. Naturality of homology on cycles and of exact scalar-forgetting homology comparisons gives the asserted ordinary equality, including empty U and the zero ring.",
+   "text": "Use naturality of ShortComplex.mapHomologyIso for exact scalar forgetting. Its compatibility with single-complex homology follows by canceling homologyπ, the mapCyclesIso comparison, and singleMapHomologicalComplex in degree zero. This proves normalized_forget_comparison and applies to openComparisonOrdinaryIso of lem-sc-open-sections-cohomology-model-comparison. The global-sections class has normalized coordinate one, since homology of the inverse complex isomorphism cancels homology of the forward complex isomorphism.",
    "uses": [
+    "lem-sc-open-sections-cohomology-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private ordinary_section_one calculation unfolds openComparisonSectionsIso on the unit sheaf: overFunctorEquiv and restrictAppIso act identically on the underlying section, transport of opens is a ring map and preserves one, and StructureSheaf.const_one identifies the tilde/sections unit on one. Naturality of openComparisonSectionsIso applies this calculation to the degree-zero inverse tilde-single map. All degree-zero single-map and over-unit comparisons are identities. tilde.toOpen_map_app for the inverse extended-single degree-zero component gives exactly the normalized ambient class. Apply the normalized coordinate equality and cancel the ordinary comparison and homology normalization isomorphisms. All steps are independent of nonemptiness and nonzero-ring assumptions.",
+   "uses": [
+    "def-sc-koszul-open-system",
     "def-sc-principal-open-alternating-total",
     "lem-sc-open-sections-cohomology-model-comparison"
    ],
@@ -36,9 +45,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R3",
+  "group": "J1",
   "document": "https://stacks.math.columbia.edu/tag/06Z0",
-  "place": "Tilde/sections unit restricted to U; extracted ordinary part of the existing structure-class proof."
+  "place": "Tilde/sections unit restricted to U; full Lean realization of the ordinary degree-zero normalization and section naturality calculation, using Mathlib single homology and exact scalar forgetting."
  },
  "mathlib_searches": [
   {
@@ -124,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T155938-L-1304198",
-  "kind": "interface",
+  "landing": "20261013T165642-L-1808541",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
