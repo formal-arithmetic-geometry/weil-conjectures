@@ -1,0 +1,124 @@
+{
+ "id": "new-sbc-finite-etale-adic-pushforward-coordinates",
+ "kind": "statement",
+ "title": "Consecutive-thickening naturality of canonical finite etale coordinates",
+ "statement": "Let $R,S$ be commutative rings, $f:R\\to S$, $V$ an open of $\\operatorname{Spec}R$ [def-weil-pbc-scheme-conventions], and $P\\to V$ finite etale [def-weil-pbc-finite-etale-category]. Let $V_n$ and $P_n$ be the pullbacks along $\\operatorname{Spec}(R/\\ker(f)^{n+1})$, with projections $g_n:V_n\\to V$ and $k_n:P_n\\to P$. Define $b_n:g_n^*(p_*\\mathcal O_P)\\to(p_n)_*\\mathcal O_{P_n}$ as the adjoint of restriction along $k_n$, transported through the commuting pushforwards [def-weil-sheaf-of-modules-category]. For any $r$ and sheaf morphism $\\alpha:p_*\\mathcal O_P\\to\\mathcal O_V^r$ [def-weil-pbc-free-module], define the coordinates of $a\\in\\Gamma(P_n,\\mathcal O)$ by applying $g_n^*\\alpha$ and the canonical free pullback isomorphism to the function inverse of $\\Gamma(b_n)$ at $a$. These coordinates commute with every consecutive transition $P_n\\to P_{n+1}$ and $V_n\\to V_{n+1}$, as precisely stated by pushforward_coordinates_transition. No Noetherian, injectivity, or scalar comparison hypothesis is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KG, affine quasi-coherent base change, with its canonical tensor comparison; Tag 0EKP restriction of a finite free embedding."
+ },
+ "proof": [
+  {
+   "text": "The square with k_n, p_n, p, and g_n is cartesian by pullback pasting. The structure sheaf is quasi-coherent and p is finite, hence affine. Affine base change is an isomorphism. Compare the tensor pullback adjunction with the standard pullback adjunction by uniqueness of left adjoints, and compose with the canonical pullback-of-structure-sheaf isomorphism. The resulting morphism is b_n, because their adjoints both are restriction along k_n.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change-isIso",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let u_n:V_n to V_(n+1) and w_n:P_n to P_(n+1) be the transitions. Their defining pullback squares paste. In the affine tensor calculation, identify u_n^*(g_(n+1)^* p_*O_P) with g_n^* p_*O_P by associativity of tensor products. Both ways of comparing with functions on P_n send a pure tensor s tensor a to s times the restriction of a. Therefore b_n intertwines the pullback of b_(n+1) and restriction along w_n. Equality is local on the base, so the affine calculation proves the sheaf identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the identity on the top open. Since b_n and b_(n+1) are isomorphisms, their function inverses are genuine unique inverses, and the identity transports liftSection along the transition. Naturality of pulling back alpha and of the free coordinate projections identifies each resulting scalar with u_n.appTop of the previous scalar. This is exactly the displayed transition equality. The argument applies also when a scheme is empty or r is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-pushforward-base-change-isIso",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R4",
+  "document": "Stacks Project",
+  "place": "Tag 02KG, affine quasi-coherent base change, with its canonical tensor comparison; Tag 0EKP restriction of a finite free embedding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine pushforward base change isomorphism on sections natural in finite free coordinates and consecutive infinitesimal thickenings",
+   "results": "Hits: AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.AffineSpace.mapSpecMap, AlgebraicGeometry.AffineSpace.SpecIso_inv_over",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine pushforward base change canonical map natural on global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*baseChange|baseChange.*pushforward",
+   "results": "No Mathlib source matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleAdicPushforwardCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.Adic.pushforward_coordinates_transition",
+  "statement": "theorem pushforward_coordinates_transition :\n    ∀ (r : ℕ)\n      (α : (Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left) ⟶\n        free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))),\n      (∀ (n : ℕ) (a : Γ(cover f V P (n + 1), ⊤)) (i : Fin r),\n        coordinates f V P α n ((coverTransition f V P n).appTop a) i =\n          (pullback.lift (pullback.fst V.ι (baseMap f n))\n            (pullback.snd V.ι (baseMap f n) ≫ baseTransition f n)\n            (by rw [Category.assoc, baseTransition_comp_baseMap]\n                exact pullback.condition)).appTop\n                  (coordinates f V P α (n + 1) a i))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13136,3 +13136,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:24 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso (stage 3; reviewer PASS; first push; landing 20261013T162410-L-1519171 (interface); batch 20261013T162406; modules 4; new nodes 3)
 - 16:24 L: merged deliver/J1/Sheaf.Paper.ModuleCupComponentChainEquation (stage 3; reviewer PASS; first push; landing 20261013T162410-L-1519362 (proof); batch 20261013T162406; modules 1; new nodes 0)
 - 16:24 L: merged deliver/N4/Sheaf.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport (stage 3; reviewer PASS; first push; landing 20261013T162411-L-1519488 (interface); batch 20261013T162406; modules 3; new nodes 3)
+- 16:24 L: merged deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel (stage 3; reviewer PASS; first push; landing 20261013T162411-L-1519595 (interface); batch 20261013T162406; modules 3; new nodes 2)

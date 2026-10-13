@@ -1,0 +1,130 @@
+{
+ "id": "new-sbc-quasi-affine-locally-free-embedding",
+ "kind": "statement",
+ "title": "Universal finite free embeddings on Noetherian quasi-affine opens",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $V$ an open of $\\operatorname{Spec}R$ [def-weil-pbc-scheme-conventions], and $M$ an $\\mathcal O_V$-module [def-weil-sheaf-of-modules-category] which is finite locally free [def-sc-finite-locally-free-sheaf]. There exist a natural number $r$ and a monomorphism $\\alpha:M\\to\\mathcal O_V^r$ [def-weil-pbc-free-module] such that its categorical cokernel is finite locally free and, for every scheme $Y$ and morphism $g:Y\\to V$, the morphism $g^*\\alpha$ is monic.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, first dual-surjection construction in (2) to (3), with the structure sheaf ample; denominator clearing gives global generators on a quasi-affine open."
+ },
+ "proof": [
+  {
+   "text": "The Noetherian open V is quasi-compact. Cover it by finitely many affine principal opens of Spec R on which the dual of M is free. Finite locally free duality makes the dual finite type and quasi-coherent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend each basis section from each such principal open by clearing denominators, using the structure sheaf as the invertible module. On that principal open its defining function is a unit, so the resulting global sections still generate. The finite collection of all these sections therefore gives an epimorphism from a finite free sheaf to the dual of M.",
+   "uses": [
+    "lem-pc-section-clearing-denominators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine trivializing neighbourhood the target of this epimorphism is a finite free module. The epimorphism splits. Its kernel is a finitely generated projective summand, hence becomes free after shrinking. Dualize the split sequence and use finite locally free biduality. This yields a monomorphism from M to finite free with finite locally free cokernel. Locally the morphism is a split inclusion; arbitrary pullback preserves this splitting. Use a finite cardinal and ULift to index the finite free sheaf, including the empty and rank-zero cases.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-section-clearing-denominators"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R4",
+  "document": "Stacks Project",
+  "place": "Tag 0EKP, first dual-surjection construction in (2) to (3), with the structure sheaf ample; denominator clearing gives global generators on a quasi-affine open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf on quasi affine scheme embeds into finite free sheaf with locally free cokernel",
+   "results": "Hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteLocallyFree",
+   "results": "loogle: unknown identifier 'SheafOfModules.IsFiniteLocallyFree'",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*exact|finite.*free.*cokernel",
+   "results": "Hits: Mathlib/CategoryTheory/EquivalenceRelation.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally free sheaf on quasi affine scheme has a universally injective embedding into a finite free sheaf with locally free cokernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.QuasiAffineLocallyFreeEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/QuasiAffineLocallyFreeEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_universally_mono_free",
+  "statement": "theorem exists_universally_mono_free\n    {R : Type u} [CommRing R] [IsNoetherianRing R]\n    (V : (Spec (.of R)).Opens) (M : V.toScheme.Modules) [M.IsFiniteLocallyFree] :\n    ∃ (r : ℕ) (α : M ⟶ free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))),\n      Mono α ∧ (cokernel α).IsFiniteLocallyFree ∧\n      ∀ (Y : Scheme.{u}) (g : Y ⟶ V.toScheme), Mono ((Modules.pullback g).map α)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
