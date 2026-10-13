@@ -14,45 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Construct the additive Hom/section identification using the sheafification adjunction, the free abelian adjunction and Yoneda. On a map out of the free terminal sheaf, it evaluates the image of its terminal generator. Use its naturality degreewise to identify the Hom complex of every injective resolution with its section complex.",
-   "uses": [
-    "lem-sc-site-cohomology-right-derived-sections"
-   ],
+   "text": "Construct the additive Hom/section isomorphisms on X and Z using the sheafification additive adjunction, whiskered free-abelian adjunction and Yoneda. Use Mathlib Adjunction.homEquiv_naturality_right directly for the natural isomorphism construction; use NatTrans.naturality and ConcreteCategory.congr_hom for all subsequent postcomposition calculations, without restating a section-naturality theorem. Prove the terminal-generator formula directly.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "Compute Ext by the Hom complex and ordinary derived sections by the section complex; compose these explicit identifications on the chosen resolution to construct x_n, with naturality from resolution-map naturality. Do not choose an arbitrary isomorphism from the nonempty comparison theorem: use the underlying Hom-complex construction, so its value on extMk is the represented homology class.",
+   "text": "Apply the normalized generic represented-functor comparison on both sites. This supplies x and y together with their values on every resolution cocycle.",
    "uses": [
-    "lem-sc-ext-right-derived-hom",
-    "lem-sp-derived-well-defined"
+    "lem-sc-ext-right-derived-cocycle-comparison"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Construct t:f_* followed by X terminal sections isomorphic to Z terminal sections from transport along Opens.map_top. Derive t and compose with y to define zc. The generator hypothesis ha, applied at top to the identity, and naturality of sheafification show that t sends the section represented by a followed by f_*z to the section represented by z.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "The equality of terminal sections of f_*M and M, including transport across f^{-1}(top)=top, is an additive natural isomorphism. The generator formula for a says that precomposing F(t) with a corresponds to the same terminal section as t. Derive this natural isomorphism and compose with the Z analogue of x to construct z_n.",
+   "text": "Represent the two section cocycles in the abstract cycle objects using ShortComplex.abCyclesIso. The relation hsz and the generator calculation identify the image of the first cycle under G(phi) followed by t with the second cycle. Monicity of the cycle inclusion and homologyπ_naturality give equality of their homology classes. Use InjectiveResolution.rightDerived_app_eq to compute derived t on I, apply the two normalization equations, and cancel the resolution and functor isomorphisms to obtain exactly the required equation.",
    "uses": [
-    "lem-sc-site-cohomology-right-derived-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For arbitrary I,J,phi, apply the degreewise Hom/section identification to s and t. The given relation aF(t)=s phi sends the cocycle represented by s to the cocycle represented by t. Homology of G(phi) thus has the required effect. Naturality of the canonical right-derived resolution computations and independence of injective-resolution comparisons give the equation for all supplied resolutions and comparisons.",
-   "uses": [
-    "lem-sc-ext-right-derived-hom",
+    "lem-sc-ext-right-derived-cocycle-comparison",
     "lem-sp-derived-well-defined"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-ext-right-derived-hom",
-  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-ext-right-derived-cocycle-comparison",
   "lem-sp-derived-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Cohomology on Sites and Derived Categories; https://stacks.math.columbia.edu/tag/01FT",
-  "place": "Tag 01FT equation 21.2.0.1, Tag 06XR injective-resolution Ext computation, and Tag 01F2 terminal-section composite; cocycle part of parent augmentation step 2"
+  "place": "Terminal-section generator transport and homology naturality; Ext normalization isolated in lem-sc-ext-right-derived-cocycle-comparison"
  },
  "mathlib_searches": [
   {
@@ -138,12 +132,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T194117-L-457274",
+  "landing": "20261013T015615-L-3027390",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
