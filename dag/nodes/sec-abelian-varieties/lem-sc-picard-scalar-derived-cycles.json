@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-picard-scalar-derived-cycles",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, degree-zero cycle lifting; Tags 08C4, 0D5S and 06YJ, bounded flat computation and composition",
+   "via": [
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar cycles give compatible derived test sections",
+ "statement": "Fix shared derived-category localizations [def-pc-derived-category]. Let W be a scheme, E in D(O_W), w∈U with U affine, A=Γ(W,U), and K a strictly perfect complex on the localized open site over U [def-pc-perfect-complex], zero in negative degrees. Fix section bases e0:Γ(K^0)≅_A A and e1:Γ(K^1)≅_A A^m, and an isomorphism E|U≅QK. Suppose d∈A^m satisfies e1(d_K(e0 inverse(a)))=a d and each d_i evaluates to zero at w [def-weil-residue-field]. For the derived test groups and restriction r of [def-sc-picard-derived-model-sections], there exists an additive equivalence c:P(E,Spec κ(w)→W)≅κ(w). For every open neighbourhood V⊆U of w and every a∈Γ(W,V) annihilating d|V, there exists ξ∈P(E,V→W) such that r along the residue factor sends ξ to c inverse(a(w)).",
+ "source": {
+  "document": "Stacks Project, More on Morphisms and Cohomology of Sheaves",
+  "place": "Tag 0BF2, degree-zero cycle lifting; Tags 08C4, 0D5S and 06YJ, bounded flat computation and composition"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-weil-residue-field",
+  "def-sc-picard-derived-model-sections"
+ ],
+ "proof": [
+  {
+   "text": "The strictly perfect terms are retracts of finite free modules, hence quasi-coherent and flat. On affine U, the affine quasi-coherent equivalence sheafifies the supplied section bases. Thus the degree-zero differential is the scalar vector d.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use boundedness and flatness to compute derived pullback termwise. On V and on the residue spectrum the complex is still zero in negative degrees. Its degree-zero hypercohomology, or equivalently Hom from the structure sheaf in degree zero, consists of global cycles with no incoming boundaries. Every annihilating scalar therefore defines ξ, and hdw identifies residue cycles with κ(w). Transport these identifications using the fixed hE.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-sc-derived-pullback-structure-sheaf-local",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback of these cycle representatives evaluates their scalar at w. The canonical derived composition comparison is computed by these same K-flat representatives, so its conjugation is the defined restriction r. This proves the equality for every V with the one residue equivalence c. Rank zero has the zero outgoing differential; no lift of an arbitrary residue scalar is asserted.",
+   "uses": [
+    "def-sc-picard-derived-model-sections",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-picard-derived-model-sections",
+  "def-weil-residue-field",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-pullback-structure-sheaf-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, More on Morphisms and Cohomology of Sheaves",
+  "place": "Tag 0BF2, degree-zero cycle lifting; Tags 08C4, 0D5S and 06YJ, bounded flat computation and composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback morphisms from the structure sheaf and degree zero sections of connective strictly perfect complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero cycles of connective perfect complex realize sections compatibly with residue field base change",
+   "results": "Eight hits including DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.cm5b, and ProjectiveResolution.π′. None computes the scalar model or direct-image section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback|unitHomEquiv",
+   "results": "25 Mathlib hits, including SheafOfModules.unitHomEquiv and pushforwardSections_unitHomEquiv. Local rg also finds nonempty_derivedPullback_structureSheaf_iso, perfect_derivedDirectImage_baseChange, canonicalDegreeZeroMateSquare and Modules.unitHomAddEquiv; these are ingredients, not the full comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardScalarModelCyclesRealization",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarDerivedCycles.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_scalar_derived_cycles",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picard_scalar_derived_cycles"
+  ],
+  "statement": "theorem picard_scalar_derived_cycles\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    (W : Scheme.{v}) (E : schemeDerivedCategory W) (w : W)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (m : ℕ) (d : Fin m → Γ(W, U))\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K) (hneg : ∀ i : ℤ, i < 0 → IsZero (K.X i))\n    (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U))\n    (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U)))\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj K))\n    (hd : ∀ a : Γ(W, U), e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a)) = a • d)\n    (hdw : ∀ i, W.evaluation U w hwU (d i) = 0) :\n    ∃ c : picardDerivedModelSections E (W.fromSpecResidueField w) ≃+ W.residueField w,\n      ∀ (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U) (a : Γ(W, V)),\n        (a • (fun i ↦ W.presheaf.map (homOfLE hVU).op (d i)) = 0) →\n        ∃ ξ : picardDerivedModelSections E V.ι,\n          picardDerivedModelRestriction E (picardResidueLift W w V hwV) V.ι\n              (W.fromSpecResidueField w) (picardResidueLift_comp W w V hwV) ξ =\n            c.symm (W.evaluation V w hwV a)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100121-L-2485300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100121-L-2485300",
+  "kind": "interface"
+ }
+}

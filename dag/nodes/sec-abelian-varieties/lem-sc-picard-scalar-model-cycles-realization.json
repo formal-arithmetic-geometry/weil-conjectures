@@ -1,150 +1,126 @@
 {
-  "id": "lem-sc-picard-scalar-model-cycles-realization",
-  "kind": "statement",
-  "title": "Scalar cycle realization for a fixed connective perfect direct-image model",
-  "statement": "Choose shared derived localizations [def-pc-derived-category]. Let f:X→S be flat proper locally of finite presentation, L invertible [def-sc-invertible-module], k:W→S any map, w in W, and U an affine open neighbourhood of w. Put A=Gamma(W,U). Suppose a fixed strictly perfect K on the localized site over U has zero terms in negative degrees [def-pc-perfect-complex], section bases e0:Gamma(K^0)≅A and e1:Gamma(K^1)≅A^m, and a derived isomorphism hE identifying K with the restriction of R(f_W)_*(L_W[0]) [def-pc-derived-direct-image]. Suppose d in A^m satisfies e1(d_K^0(e0 inverse(a)))=a d for every a and each d coordinate evaluates to zero at w [def-weil-residue-field]. There exists an additive equivalence c between global sections of L on the residue fibre Y=X times_S Spec kappa(w) and kappa(w). For every smaller open V containing w there exist j:Y→X_V hitting all points above w and e:j^*L_V≅L_Y [def-pc-base-change,def-pc-module-pullback]. Every a in Gamma(W,V) with a times the restricted vector d equal to zero is realized by a section sigma of L_V whose canonical adjunction-unit restriction along j, followed by e, equals c inverse of a(w) [lem-pc-module-pullback-adjunction]. This concerns a fixed source model; it has no target family, degree-one comparison map, or H-one injectivity assumption.",
-  "stmt_deps": [
-    "def-weil-flat-morphism",
-    "def-weil-proper-morphism",
-    "def-sbc-locally-finite-presentation",
-    "def-pc-base-change",
-    "def-pc-module-pullback",
-    "def-sc-invertible-module",
-    "def-weil-residue-field",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-derived-category",
-    "def-pc-derived-direct-image",
-    "def-pc-perfect-complex"
-  ],
-  "source": {
-    "document": "Stacks Project, More on Morphisms",
-    "place": "Tag 0BF2, degree-zero cycle lifting, with Tag 0B91 and the degree-zero canonical mate of Tag 08HY; https://stacks.math.columbia.edu/tag/0BF2"
+ "id": "lem-sc-picard-scalar-model-cycles-realization",
+ "kind": "statement",
+ "title": "Scalar cycle realization for a fixed connective perfect direct-image model",
+ "statement": "Choose shared derived localizations [def-pc-derived-category]. Let f:X→S be flat proper locally of finite presentation, L invertible [def-sc-invertible-module], k:W→S any map, w in W, and U an affine open neighbourhood of w. Put A=Gamma(W,U). Suppose a fixed strictly perfect K on the localized site over U has zero terms in negative degrees [def-pc-perfect-complex], section bases e0:Gamma(K^0)≅A and e1:Gamma(K^1)≅A^m, and a derived isomorphism hE identifying K with the restriction of R(f_W)_*(L_W[0]) [def-pc-derived-direct-image]. Suppose d in A^m satisfies e1(d_K^0(e0 inverse(a)))=a d for every a and each d coordinate evaluates to zero at w [def-weil-residue-field]. There exists an additive equivalence c between global sections of L on the residue fibre Y=X times_S Spec kappa(w) and kappa(w). For every smaller open V containing w there exist j:Y→X_V hitting all points above w and e:j^*L_V≅L_Y [def-pc-base-change,def-pc-module-pullback]. Every a in Gamma(W,V) with a times the restricted vector d equal to zero is realized by a section sigma of L_V whose canonical adjunction-unit restriction along j, followed by e, equals c inverse of a(w) [lem-pc-module-pullback-adjunction]. This concerns a fixed source model; it has no target family, degree-one comparison map, or H-one injectivity assumption.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-perfect-complex"
+ ],
+ "source": {
+  "document": "Stacks Project, More on Morphisms",
+  "place": "Tag 0BF2, degree-zero cycle lifting, with Tag 0B91 and the degree-zero canonical mate of Tag 08HY; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Apply the scalar derived-cycle theorem to E=R(f_W)_*(L_W[0]) and the given fixed K,hE,e0,e1 to obtain c and derived test-section lifts ξ of all annihilating scalars.",
+   "uses": [
+    "lem-sc-picard-scalar-derived-cycles"
+   ],
+   "elementary": false
   },
-  "proof": [
-    {
-      "text": "Use the affine equivalence between quasi-coherent modules on U and modules over A=Gamma(W,U). Each strictly perfect term is a retract of a finite free sheaf, hence quasi-coherent. The supplied global-section bases e0,e1 therefore give sheaf bases of K-zero and K-one. The equality hd identifies the outgoing differential with a times d. On any V contained in U, a scalar annihilating the restricted d defines a cycle in degree zero. There are no incoming boundaries because all negative terms are zero.",
-      "uses": [
-        "def-pc-perfect-complex",
-        "def-pc-derived-category"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply hE and the canonical arbitrary base-change isomorphism for the relatively flat invertible module L, first to V and then to Spec kappa(w). In degree zero, derived direct image is ordinary pushforward. Thus the cycle on V determines sigma. At the residue point hdw makes the differential zero and the scalar degree-zero basis identifies the cycle group with kappa(w). Its comparison with fibre sections gives c. The same fixed hE and basis e0 define these comparisons on every smaller open.",
-      "uses": [
-        "lem-pc-rf-perfect-base-change",
-        "lem-pc-canonical-degree-zero-mate-square",
-        "def-pc-derived-direct-image",
-        "def-sc-invertible-module"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Factor the residue-field point of W through V, and apply the fibre-product universal property to construct j from Y to X_V. Its image is exactly the points above w: for x above w, the canonical map Spec kappa(x) to X_V factors through its fibre over Spec kappa(w), so the corresponding point of Y maps to x. Tensor-pullback composition, together with equality of the two composites to X, gives e. The canonical degree-zero mate square computes restriction along j as the adjunction unit. Naturality of the derived comparison sends the scalar cycle to its evaluation a(w), hence e transports restriction of sigma to c inverse of a(w). The restriction from j inverse of top to top is the presheaf identity after the canonical equality, giving the exact displayed expression. No assertion that d vanishes on a neighbourhood, nor any scalar lifting assertion, is used.",
-      "uses": [
-        "def-pc-base-change",
-        "def-weil-residue-field",
-        "lem-pc-module-pullback-identity-composition",
-        "lem-pc-module-pullback-adjunction",
-        "lem-pc-canonical-degree-zero-mate-square"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-base-change",
-    "def-pc-derived-category",
-    "def-pc-derived-direct-image",
-    "def-pc-perfect-complex",
-    "def-sc-invertible-module",
-    "def-weil-residue-field",
-    "lem-pc-canonical-degree-zero-mate-square",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-rf-perfect-base-change"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "Stacks Project, More on Morphisms",
-    "place": "Tag 0BF2; explicit interface and comparison details written by A2"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "On an affine base a minimal finite free perfect direct image model has degree zero cycles equal to sections compatibly with residue field base change",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-13",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A perfect direct image local finite free complex degree zero cycles sections line bundle and injective first cohomology pullbacks",
-      "results": "Eight hits, including Sheaf.H and groupCohomology cochainsMap component lemmas; none constructs the geometric local scalar model. A separate fixed-model query returned affine transition-limit and localization lemmas, not the cycle-realization comparison.",
-      "date": "2026-10-13",
-      "verdict": "No exact match; abstract complex and sheaf APIs only."
-    },
-    {
-      "tool": "grep",
-      "query": "exists_finiteFreeResidueModel|picard_h1_base_descent|degree.zero.*cycles; scalar.*model|degree-one comparison square; rank.one|invertible.*descen",
-      "results": "Searched Mathlib/AlgebraicGeometry, lean/WeilConjectures/AlgebraicGeometry, lean/Sheaf/AlgebraicGeometry and all DAG nodes. Found the existing perfect model, affine chain representative, field rank-one trivialization, and downstream Picard section-lifting declarations. No existing statement constructs the model plus its degree-one square, or realizes cycles of an arbitrary fixed model.",
-      "date": "2026-10-13",
-      "verdict": "No duplicate statement. Downstream section lifting imports the current item and cannot be used here."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation",
-    "date": "2026-10-13",
-    "group": "A2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "Tag 0BF2, degree-zero cycle lifting, with Tag 0B91 and the degree-zero canonical mate of Tag 08HY; https://stacks.math.columbia.edu/tag/0BF2",
-      "via": [
-        "lem-sc-picard-h1-base-descent-cycle-presentation",
-        "lem-sc-picard-h1-base-descent-section-lifting",
-        "lem-sc-picard-h1-local-section-base-descent",
-        "lem-sc-picard-h1-intersection-section",
-        "lem-sc-picard-h1-multiple-locus",
-        "lem-sc-picard-product-open"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.PicardScalarModelCyclesRealization",
-    "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarModelCyclesRealization.lean",
-    "declaration": "AlgebraicGeometry.Scheme.picard_scalar_model_cycles_realization",
-    "statement": "theorem picard_scalar_model_cycles_realization\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) (w : W)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (m : ℕ) (d : Fin m → Γ(W, U))\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K) (hneg : ∀ i : ℤ, i < 0 → IsZero (K.X i))\n    (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U))\n    (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U)))\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n              ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅\n      DerivedCategory.Q.obj K))\n    (hd : ∀ a : Γ(W, U), e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a)) = a • d)\n    (hdw : ∀ i, W.evaluation U w hwU (d i) = 0) :\n      ∃ c : Γ((Modules.tensorPullback\n          (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L, ⊤) ≃+\n            W.residueField w,\n        ∀ (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U),\n          ∃ j : pullback f (W.fromSpecResidueField w ≫ k) ⟶ pullback f (V.ι ≫ k),\n            (∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n              (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n                ∃ y, j y = x) ∧\n            ∃ e : (Modules.tensorPullback j).obj\n                ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) ≅\n                (Modules.tensorPullback\n                  (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L,\n              ∀ a : Γ(W, V),\n                (a • (fun i ↦ W.presheaf.map (homOfLE hVU).op (d i)) = 0) →\n                ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n                  e.hom.app ⊤\n                    (((Modules.tensorPullback j).obj\n                      ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).presheaf.map\n                        (homOfLE j.preimage_top.ge).op\n                          (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app\n                            ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app\n                              (Opposite.op ⊤) σ)) =\n                    c.symm (W.evaluation V w hwV a)",
-    "branch": "sheaf-dag",
-    "by": "A2",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261013T054208-L-440350",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261013T054208-L-440350",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Apply the independent direct-image test-section theorem to obtain q_t and, for each V, j,e and the restriction identity for every ξ. Choose the desired residue equivalence to be q_residue inverse followed by c, and realize a by σ=q_V(ξ). Substitute the scalar-cycle restriction equality into the identity for q. The inverse of the composite equivalence sends a(w) to q_residue(c inverse(a(w))), which is the same section.",
+   "uses": [
+    "lem-sc-picard-direct-image-test-sections"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-scalar-derived-cycles",
+  "lem-sc-picard-direct-image-test-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0BF2, 0B91 and 08HY",
+  "place": "S2: split scalar-cycle computation for an arbitrary derived object from the independent direct-image comparison; compose the two additive identifications in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an affine base a minimal finite free perfect direct image model has degree zero cycles equal to sections compatibly with residue field base change",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect direct image local finite free complex degree zero cycles sections line bundle and injective first cohomology pullbacks",
+   "results": "Eight hits, including Sheaf.H and groupCohomology cochainsMap component lemmas; none constructs the geometric local scalar model. A separate fixed-model query returned affine transition-limit and localization lemmas, not the cycle-realization comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; abstract complex and sheaf APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteFreeResidueModel|picard_h1_base_descent|degree.zero.*cycles; scalar.*model|degree-one comparison square; rank.one|invertible.*descen",
+   "results": "Searched Mathlib/AlgebraicGeometry, lean/WeilConjectures/AlgebraicGeometry, lean/Sheaf/AlgebraicGeometry and all DAG nodes. Found the existing perfect model, affine chain representative, field rank-one trivialization, and downstream Picard section-lifting declarations. No existing statement constructs the model plus its degree-one square, or realizes cycles of an arbitrary fixed model.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate statement. Downstream section lifting imports the current item and cannot be used here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, degree-zero cycle lifting, with Tag 0B91 and the degree-zero canonical mate of Tag 08HY; https://stacks.math.columbia.edu/tag/0BF2",
+   "via": [
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardScalarModelCyclesRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarModelCyclesRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_scalar_model_cycles_realization",
+  "statement": "theorem picard_scalar_model_cycles_realization\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) (w : W)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (m : ℕ) (d : Fin m → Γ(W, U))\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K) (hneg : ∀ i : ℤ, i < 0 → IsZero (K.X i))\n    (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U))\n    (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U)))\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n        ((schemeDerivedDirectImage (pullback.snd f k)).obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n              ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅\n      DerivedCategory.Q.obj K))\n    (hd : ∀ a : Γ(W, U), e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a)) = a • d)\n    (hdw : ∀ i, W.evaluation U w hwU (d i) = 0) :\n      ∃ c : Γ((Modules.tensorPullback\n          (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L, ⊤) ≃+\n            W.residueField w,\n        ∀ (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U),\n          ∃ j : pullback f (W.fromSpecResidueField w ≫ k) ⟶ pullback f (V.ι ≫ k),\n            (∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n              (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n                ∃ y, j y = x) ∧\n            ∃ e : (Modules.tensorPullback j).obj\n                ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) ≅\n                (Modules.tensorPullback\n                  (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L,\n              ∀ a : Γ(W, V),\n                (a • (fun i ↦ W.presheaf.map (homOfLE hVU).op (d i)) = 0) →\n                ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n                  e.hom.app ⊤\n                    (((Modules.tensorPullback j).obj\n                      ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).presheaf.map\n                        (homOfLE j.preimage_top.ge).op\n                          (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app\n                            ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app\n                              (Opposite.op ⊤) σ)) =\n                    c.symm (W.evaluation V w hwV a)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T054208-L-440350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100121-L-2485300",
+  "kind": "interface"
+ }
 }
