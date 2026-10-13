@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting
+import Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence
 
 /-! # Eventual compatibility of fixed local models
 
@@ -93,6 +95,33 @@ theorem exists_finitePresentation_local_overlap_models
           (fun a ↦ V.pullbackHom_map p a)).obj D ⟶
           (modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M,
           ∀ a, IsIso (η.hom a) := by
-  sorry
+  classical
+  obtain ⟨k, hjk, T, hT, hcmp⟩ :=
+    exists_finitePresentation_overlap_map_lifting R c hc i f j hij U N hN hNq M e
+  obtain ⟨l, hkl, hcoh, hcomp⟩ :=
+    exists_finitePresentation_overlap_eventual_coherence R c hc i f j hij U N hN hNq M
+      k hjk T hT hcmp
+  let q₀ := overlapStageMap R f hij hjk
+  let q := overlapStageMap R f hij (hjk.trans hkl)
+  let V : (pullback f (Spec.map
+      (R.map (homOfLE (hij.trans (hjk.trans hkl)))))).OpenCover.{u} := U.pullback₁ q
+  let r := overlapStageMap R f (hij.trans hjk) hkl
+  let s := overlapRefinementHom U q₀ q r (overlapStageMap_comp R f hij hjk hkl)
+  let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s)
+    (fun a ↦ overlapRefinementHom_map U q₀ q r
+      (overlapStageMap_comp R f hij hjk hkl) a)
+  let p := overlapLimitMap R c f (hij.trans (hjk.trans hkl))
+  let D := T'.toDescentData hcoh
+  obtain ⟨ε⟩ := hcomp
+  refine ⟨l, hjk.trans hkl, D, ?_, ?_⟩
+  · intro a
+    obtain ⟨ea⟩ := hT a
+    exact ⟨(Scheme.Modules.pullback (s a)).mapIso ea ≪≫
+      pullbackCompOfEq (s a) (U.pullbackHom q₀ a)
+        (U.pullbackHom q a)
+        (overlapRefinementHom_comp U q₀ q r (overlapStageMap_comp R f hij hjk hkl) a)
+        (N a)⟩
+  · exact ⟨T'.pullComparisonHom (fun a ↦ V.pullbackHom_map p a) hcoh ε,
+      fun a ↦ T'.pullComparisonHom_isIso_hom (fun a ↦ V.pullbackHom_map p a) hcoh ε a⟩
 
 end AlgebraicGeometry

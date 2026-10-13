@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-fp-overlap-eventual-coherence",
+ "kind": "statement",
+ "title": "Eventual identity and cocycle for specified lifted transitions",
+ "statement": "Let I be a directed preorder, R:I→CommRing a diagram of Noetherian rings, c a limit cone of Spec(R) with affine vertex S, and f:X_i→Spec(R_i) a quasi-compact, quasi-separated, locally finitely presented morphism [def-pc-scheme, def-pc-morphism-conventions]. For j≥i write X_j=X_i×Spec(R_j) and X=X_i×S [def-pc-base-change]. Fix a finite affine open cover U of X_j and finitely presented quasi-coherent modules N_a on its members [pqf-def-coherent]. Let M be any module on X. Suppose k≥j and natural overlap transitions T on U×X_k [def-pc-local-overlap-transitions] are supplied, together with isomorphisms of their local objects to the pullbacks of N_a and an invertible component comparison of their limit pullback to the restriction descent data of M. Then at some l≥k the specific canonical pullback T' of T to U×X_l is coherent: it satisfies the identity and triple composition equations on all test schemes. The refinement chart map defining T' is the pullback lift over X_l→X_k, and not a fresh choice of transitions. The limit pullback of T' still admits an invertible component comparison to the restriction descent data of M.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR, first proof (Zariski gluing); Algebra Tag 05N7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "The invertible component comparison implies coherence at the limit by cancellation of its component maps (Comparison.coherent). Test identities on each cover member, and composition on each threefold fiber product of cover members. These are quasi-compact quasi-separated intersections. Choose finite affine covers and apply the equality clause of affine module descent to the finitely many equations between restrictions of the prescribed finite models. Choose a common stage l. Sheaf locality gives the equations on the test schemes.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality and the universal properties of pairwise and threefold fiber products extend the equations to all test schemes. Use the explicit chart refinement maps and their composition equations to identify the transitions with the canonical pullback of T. Transport the limit component comparison by pullback composition isomorphisms; their naturality preserves commutation. Empty covers are vacuous, and the nonempty tail of a preorder is reduced to its partial-order quotient.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Expansion of Tag 01ZR first proof; sources read at https://stacks.math.columbia.edu/tag/01ZR and https://stacks.math.columbia.edu/tag/05N7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and cocycle equations for fixed lifted overlap maps become true at a later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and cocycle equations for fixed lifted overlap maps hold at a later stage of a directed system of schemes",
+   "results": "Returned AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected, AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left, AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected, AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected, AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected_assoc, AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOverOfLocallyDirected_left_assoc, AlgebraicGeometry.Scheme.IsLocallyDirected.tAux, AlgebraicGeometry.Scheme.IsLocallyDirected.t; no matching theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(eventual|exists_stage).*(cocycle|coheren)|cocycle.*directed",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalOverlapModels",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: fixed local module models, lifting overlap maps and enforcing their equations",
+   "via": [
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationOverlapCoherence.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_coherence",
+  "statement": "theorem exists_finitePresentation_overlap_eventual_coherence {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u}) [Finite U.I₀] [∀ a, IsAffine (U.X a)] (N : (a : U.I₀) → (U.X a).Modules) (hN : ∀ a, (N a).IsFinitePresentation) (hNq : ∀ a, (N a).IsQuasicoherent) (M : (pullback f (c.π.app (op i))).Modules) : ∀ (k : I) (hjk : j ≤ k), let q₀ := overlapStageMap R f hij hjk let V₀ : (pullback f (Spec.map (R.map (homOfLE (hij.trans hjk))))).OpenCover.{u} := U.pullback₁ q₀ let p₀ := overlapLimitMap R c f (hij.trans hjk) ∀ T : modulesPseudofunctor.OverlapTransitions V₀.f, (∀ a, Nonempty ((T.obj a : (V₀.X a).Modules) ≅ (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj (N a))) → Nonempty ((T.pull (p := p₀) (α := fun a ↦ a) (fun a ↦ V₀.pullbackHom_map p₀ a)).Comparison ((modulesPseudofunctor.toDescentData (V₀.pullback₁ p₀).f).obj M)) → ∃ (l : I) (hkl : k ≤ l), let q := overlapStageMap R f hij (hjk.trans hkl) let V : (pullback f (Spec.map (R.map (homOfLE (hij.trans (hjk.trans hkl)))))).OpenCover.{u} := U.pullback₁ q let r := overlapStageMap R f (hij.trans hjk) hkl let s := overlapRefinementHom U q₀ q r (overlapStageMap_comp R f hij hjk hkl) let T' := T.pull (p := r) (α := fun a ↦ a) (p' := s) (fun a ↦ overlapRefinementHom_map U q₀ q r (overlapStageMap_comp R f hij hjk hkl) a) let p := overlapLimitMap R c f (hij.trans (hjk.trans hkl)) T'.Coherent ∧ Nonempty ((T'.pull (p := p) (α := fun a ↦ a) (fun a ↦ V.pullbackHom_map p a)).Comparison ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M))",
+  "declarations": [
+   "AlgebraicGeometry.exists_finitePresentation_overlap_eventual_coherence"
+  ],
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
