@@ -12953,3 +12953,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisStageRowsCore (stage 3; reviewer PASS; first push; landing 20261013T151702-L-924504 (interface); batch 20261013T151657; modules 3; new nodes 2)
 - 15:17 L: merged deliver/R1/Sheaf.Paper.FiniteStructureUnitLiftExistence (stage 3; reviewer PASS; first push; landing 20261013T151703-L-924613 (interface); batch 20261013T151657; modules 2; new nodes 1)
 - 15:17 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffineChartUpperTailLimit (stage 3; reviewer PASS; first push; landing 20261013T151703-L-924803 (interface); batch 20261013T151657; modules 3; new nodes 2)
+- 15:17 L: returned deliver/U3/Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison (reviewer RETURN: (reviewer X-b71ea, head b71ea8e5a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fl)
