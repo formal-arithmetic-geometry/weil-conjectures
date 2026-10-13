@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-closure-triangles-core",
+ "kind": "statement",
+ "title": "Localized tensor comparison triangle: fixed representative step",
+ "statement": "Under the hypotheses of the localized tensor comparison triangle, for a fixed distinguished triangle, fixed K-flat representative U of its third vertex, fixed K-flatness witness, fixed base-derived tensor model mU and degree i, the comparison morphism at i is an isomorphism whenever the first two vertices satisfy the localized comparison property.",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property",
+  "lem-pc-localized-tensor-comparison-closure-triangles"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), five-lemma step in the triangle closure argument"
+ },
+ "proof": [
+  {
+   "text": "Tensor the distinguished triangle with U and apply the base-derived tensor model. Flat scalar extension gives exactness of the source sequence, while the K-flat representative computes the target sequence. The canonical associator and counit make the comparisons a morphism of long exact cohomology sequences. Apply the five lemma to the five consecutive terms around degree i; the outer maps come from the hypotheses on the first two vertices and their shifts.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-kflat-derived-tensor-associator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), five-lemma step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Five|five.*lemma",
+   "results": "No direct five-lemma text match.",
+   "date": "2026-10-14",
+   "verdict": "No direct specialized theorem found by grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "five lemma isomorphism morphism of exact sequences homology",
+   "results": "CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃; HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃",
+   "date": "2026-10-14",
+   "verdict": "General exact-sequence lemmas found, but they do not construct this specialized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.isIso₂_of_shortExact_of_isIso₁₃",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "verdict": "No directly applicable theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "five lemma exact sequence isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "No result; specialized construction remains split off."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangle",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-closure-triangles",
+   "place": "stage-3 fixed representative decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangleCore",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonClosureTriangleCore.lean",
+  "declaration": "ModuleCat.localizedTensorComparisonProperty_triangle_core",
+  "statement": "theorem localizedTensorComparisonProperty_triangle_core\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)))\n    (hT : T ∈ Pretriangulated.distinguishedTriangles)\n    (h1 : localizedTensorComparisonProperty R A B C Q N t T.obj₁)\n    (h2 : localizedTensorComparisonProperty R A B C Q N t T.obj₂)\n    (U : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hU : Nonempty (DerivedCategory.Q.obj U ≅ T.obj₃))\n    (hUK : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)\n    (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181102-L-2601465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T181102-L-2601465",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

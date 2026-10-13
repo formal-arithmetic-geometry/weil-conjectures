@@ -2,7 +2,7 @@ module
 
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureTriangleCore
 
 @[expose] public section
 
@@ -56,6 +56,8 @@ theorem localizedTensorComparisonProperty_closure_triangles
       T ∈ Pretriangulated.distinguishedTriangles →
       localizedTensorComparisonProperty R A B C Q N t T.obj₁ →
       localizedTensorComparisonProperty R A B C Q N t T.obj₂ →
-      localizedTensorComparisonProperty R A B C Q N t T.obj₃ := by sorry
+      localizedTensorComparisonProperty R A B C Q N t T.obj₃ := by
+  intro T hT h1 h2 U hU hUK mU i
+  exact localizedTensorComparisonProperty_triangle_core R A B C Q N t hC hQ T hT h1 h2 U hU hUK mU i
 
 end ModuleCat
