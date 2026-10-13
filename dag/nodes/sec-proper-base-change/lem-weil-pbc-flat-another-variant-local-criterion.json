@@ -33,89 +33,38 @@
  ],
  "proof": [
   {
-   "text": "Put $A=S\\otimes_RR'$ and $N=M\\otimes_RR'$. The balancing relation gives an $A$-linear isomorphism $N\\simeq M\\otimes_SA$, $x\\otimes r'\\mapsto x\\otimes(1\\otimes r')$, with inverse $x\\otimes(s\\otimes r')\\mapsto sx\\otimes r'$. Tensoring this isomorphism over $A$ with $S'$ identifies $N\\otimes_AS'$ with $M'=M\\otimes_SS'$; $x\\otimes r'\\otimes c'\\mapsto x\\otimes\\varphi'(r')c'$. By hypothesis (1), $A\\to S'$ is a localization at $W$, so $M'$ is the localization $W^{-1}N$ as an $A$-module. If $x_1,\\ldots,x_t$ generate $M$ over $S$, then $x_i\\otimes1$ generate $M'$ over $S'$; hence $M'$ is finite over $S'$.",
+   "text": "Apply the quotient-flatness statement for localized base change to obtain Flat(R'/J, (R'/J) tensor_R' M'). Extend the quotient-tensor equivalence to R'/J using surjectivity of R' to R'/J, obtaining flatness of M'/JM'.",
    "uses": [
-    "lem-weil-pbc-module-tensor-cancel-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23945--23947), first sentence; tensor cancellation is Algebra Tag 00D2 (lemma-tensor-with-bimodule)"
-   }
-  },
-  {
-   "text": "Put $Q=R/I$ and $Q'=R'/I'$. The canonical maps identify $Q\\to Q'$ with the base change of $R\\to R'$ to the quotient, since $Q'=R'\\otimes_RQ$ as $R'$-algebras [lem-weil-pbc-tensor-quotient-base-change]. Hypothesis (2) and [lem-weil-pbc-flat-module-base-change] make $E=(M/IM)\\otimes_QQ'$ flat over $Q'$. The maps $(x\\bmod IM)\\otimes(r'\\bmod I')\\mapsto(x\\otimes r')\\bmod I'N$ and $(x\\otimes r')\\bmod I'N\\mapsto(x\\bmod IM)\\otimes(r'\\bmod I')$ are inverse $Q'$-linear maps; their balancing and quotient relations follow from $I'=IR'$, so $E\\simeq N/I'N$. In particular $M\\otimes_RQ\\simeq M/IM$ is flat over $Q$, the hypothesis needed in the next step.",
-   "uses": [
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-localized-base-change-quotient-flat",
     "lem-weil-pbc-tensor-over-quotient-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MO (lines 23947--23950), with Lemma Tag 00HI (lemma-flat-base-change)"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $K=\\ker(I\\otimes_RM\\to M)$ and $K_N=\\ker(I'\\otimes_{R'}N\\to N)$. By [lem-weil-pbc-tor-one-surjective-flat-middle], applied to $R\\to Q=R/I\\to Q'=R'/I'$ and $M$ (the middle base change is $M/IM$, flat by Step 2), $\\operatorname{Tor}_1^R(M,Q)\\otimes_QQ'\\twoheadrightarrow\\operatorname{Tor}_1^R(M,Q')$. By [lem-weil-pbc-tor-ideal-kernel-naturality], $K\\simeq\\operatorname{Tor}_1^R(M,Q)$; this Tor group is a $Q$-module through its second variable [def-weil-pbc-tor-modules], so $I$ annihilates $K$. Thus $K\\otimes_RR'\\simeq K\\otimes_QQ'$ by [lem-weil-pbc-tensor-over-quotient-ring]. By [lem-weil-pbc-tor-one-surjective-change-rings], with $R\\to R'$ and ideal $I$, $\\operatorname{Tor}_1^R(M,Q')\\twoheadrightarrow\\operatorname{Tor}_1^{R'}(N,Q')$. By [lem-weil-pbc-tor-ideal-kernel-naturality] the composite onto $\\operatorname{Tor}_1^{R'}(N,Q')\\simeq K_N$ sends $k\\otimes r'$ to $r'$ times the image of $k$ under $I\\otimes_RM\\to I'\\otimes_{R'}N$, $a\\otimes x\\mapsto\\rho(a)\\otimes(x\\otimes1)$. Thus $K\\otimes_RR'\\twoheadrightarrow K_N$.",
+   "text": "For z in the multiplication kernel of J tensor_R' M', the kernel-span statement puts its tensor symmetry in the S'-span of theta(K). The hypothesis kills every theta(k), k in K; therefore the span lies in the zero submodule, and z=0 by injectivity of tensor symmetry. This gives injectivity of multiplication. The pure-tensor identity mu composed with comm equals rid composed with J.subtype.lTensor transfers this injectivity to the form used by the local criterion.",
    "uses": [
-    "lem-weil-pbc-tor-one-surjective-flat-middle",
-    "lem-weil-pbc-tor-one-surjective-change-rings",
-    "lem-weil-pbc-tor-ideal-kernel-naturality",
-    "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-tensor-over-quotient-ring"
+    "lem-weil-pbc-localized-base-change-ideal-kernel-span"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MO (lines 23953--23969), Lemma Tag 00MM (lemma-surjective-on-tor-one), Lemma Tag 00MN (lemma-surjective-on-tor-one-trivial), Remark Tag 00M6"
-   }
+   "elementary": false
   },
   {
-   "text": "The map $I'\\otimes_{R'}N\\to N$ is $A$-linear. Localization at $W$ is exact [lem-weil-pbc-localization-module-exact], so $W^{-1}K_N$ is the kernel of its localized map. By the naturality clause of [lem-weil-pbc-localization-tensor-over-base] for the $A$-module $N$ and the $R'$-module $I'$, $W^{-1}(I'\\otimes_{R'}N)\\simeq I'\\otimes_{R'}W^{-1}N=I'\\otimes_{R'}M'$ and the localized multiplication map is $I'\\otimes_{R'}M'\\to M'$. Thus $K_{M'}:=\\ker(I'\\otimes_{R'}M'\\to M')\\simeq W^{-1}K_N$, and the localization of the surjection in Step 3 is onto $K_{M'}$. The image of each $k\\otimes r'$ from Step 3 in $K_{M'}$ is $\\varphi'(r')\\theta(k)$, zero by hypothesis (3); its localization is also zero. Hence $K_{M'}=0$.",
+   "text": "Finiteness of M over S gives finiteness of S' tensor_S M over S' by Mathlib Module.Finite.base_change. Since I is proper, it lies in the maximal ideal of R. Locality of R to R' and R' to S' puts J S' in the maximal ideal of S', its Jacobson radical. Apply Module.Flat.of_flat_quotient_of_lTensor_injective to the finite S'-module, the flat quotient, and the injective ideal tensor map.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-over-base"
+    "lem-weil-pbc-flat-variant-local-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MO (lines 23951--23958), the localization step made explicit with Proposition Tag 00CS (proposition-localization-exact) and Lemma Tag 00DK (lemma-tensor-localization)"
-   }
-  },
-  {
-   "text": "The quotient $M'/I'M'$ is flat over $Q'=R'/I'$. By Step 2, $N/I'N$ is flat over $Q'$. The exact sequence $I'N\\to N\\to N/I'N\\to0$ remains exact on localizing at $W$ [lem-weil-pbc-localization-module-exact], so $M'/I'M'\\simeq W^{-1}(N/I'N)$, with $W$ acting through its image in $A/I'A$. For any injective map $U\\to V$ of $Q'$-modules, flatness of $N/I'N$ makes $U\\otimes_{Q'}(N/I'N)\\to V\\otimes_{Q'}(N/I'N)$ injective; localization at the image of $W$ in $A/I'A$ keeps it injective [lem-weil-pbc-localization-module-exact], and tensor/localization naturality [lem-weil-pbc-localization-tensor-over-base] over the base ring $Q'$ identifies it with $U\\otimes_{Q'}(M'/I'M')\\to V\\otimes_{Q'}(M'/I'M')$. Finally $I'\\subsetneq R'$ because $I\\subseteq\\mathfrak m_R$ and $\\rho$ is local, so $I'\\subseteq\\mathfrak m_{R'}$. The $R'\\to S'$ map is local between Noetherian local rings, $M'$ is finite over $S'$ (Step 1), its ideal-tensor multiplication is injective (Step 4), and its quotient is flat. Apply [lem-weil-pbc-flat-variant-local-criterion] to conclude $M'$ flat over $R'$.",
-   "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-flat-variant-local-criterion",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MO (lines 23947--23952), with Lemma Tag 00ML (lemma-variant-local-criterion-flatness); flatness of the localized quotient expanded using Proposition Tag 00CS and Lemma Tag 00DK"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-tensor-cancel-base-change",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-localized-base-change-quotient-flat",
+  "lem-weil-pbc-localized-base-change-ideal-kernel-span",
   "lem-weil-pbc-tensor-over-quotient-ring",
-  "lem-weil-pbc-tor-one-surjective-flat-middle",
-  "lem-weil-pbc-tor-one-surjective-change-rings",
-  "lem-weil-pbc-tor-ideal-kernel-naturality",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-flat-variant-local-criterion",
-  "def-weil-pbc-flat-ring-map"
+  "lem-weil-pbc-flat-variant-local-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23945--23969), with Tags 00MM, 00MN, 00ML and Remark 00M6"
+  "place": "Algebra, Tag 00MO; Q1 Lean reduction separates quotient flatness and generation of the localized ideal-tensor kernel, then applies the existing local criterion"
  },
  "mathlib_searches": [
   {
@@ -200,5 +149,15 @@
   "group": "E1",
   "result": "pass",
   "note": "four Noetherian local rings, IsLocalHom on phi/rho/sigma/phi', square via Algebra R S' + two scalar towers, I≠⊤, I'=I.map rho, M finite over S with R-action through tower, M'=S'⊗[S]M (R'-action = leftModule via algebraMap R' S', #synth), (1) ∃q with pure-tensor formula + IsLocalization W S', (2) Flat (R⧸I) ((R⧸I)⊗[R]M) as in fd047eff9/a3715b2f7, (3) theta binder: compiled a construction of theta for every square (not hollow, R-balanced via towers), hker on full lift-lsmul kernel; conclusion Flat R' M'"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082404-L-1643910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

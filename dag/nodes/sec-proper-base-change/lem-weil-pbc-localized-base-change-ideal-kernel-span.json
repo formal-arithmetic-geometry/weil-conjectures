@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-localized-base-change-ideal-kernel-span",
+ "kind": "statement",
+ "title": "Generators of the ideal-tensor kernel after localized base change",
+ "statement": "Let $R,S,R',S'$ be commutative rings with algebra maps $R\\to S$, $R\\to R'$, $S\\to S'$, $R'\\to S'$ and compatible scalar towers giving the same map $R\\to S'$. Let $I$ be an ideal of $R$, $J=IR'$ its image ideal, and $M$ an $S$-module with compatible restricted $R$-action. Suppose that $q:S\\otimes_R R'\\to S'$, $q(s\\otimes r')=\\sigma(s)\\varphi'(r')$ (the product of their images), is localization at a multiplicative subset $W$. Put $M'=S'\\otimes_S M$. Assume $(R/I)\\otimes_R M$ is flat over $R/I$ [def-weil-pbc-flat-ring-map]. Let $\\theta:I\\otimes_R M\\to J\\otimes_{R'}M'$ be an additive map satisfying $\\theta(a\\otimes x)=\\rho(a)\\otimes(1\\otimes x)$, where $\\rho:R\\to R'$. Define $\\mu:I\\otimes_R M\\to M$, $a\\otimes x\\mapsto ax$, and $\\mu':J\\otimes_{R'}M'\\to M'$, $b\\otimes y\\mapsto by$. For every $z$ with $\\mu'(z)=0$, tensor symmetry sends $z$ into the $S'$-linear span of the elements $\\operatorname{comm}(\\theta(k))$ for $k\\in\\ker\\mu$ in $M'\\otimes_{R'}J$. Here $S'$ acts through the first factor. No vanishing of $\\theta$ on $\\ker\\mu$ is assumed, and no local, Noetherian, finite-module, or proper-ideal hypothesis is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MO (lemma-another-variant-local-criterion-flatness), second and third proof paragraphs; Tags 00MM, 00MN and Remark 00M6, followed by localization exactness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put A=S tensor_R R' and N=R' tensor_R M. Tensor cancellation identifies S' tensor_S M with S' tensor_A N, hence with W-inverse N. The formula c' tensor (r' tensor x) maps to c' times the image of r' tensor x.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write $K=\\ker(I\\otimes_R M\\to M)$ and $K_N=\\ker(J\\otimes_{R'}N\\to N)$, where $N=R'\\otimes_R M$, $Q=R/I$, $J=IR'$ and $Q'=R'/J$. Apply the canonical surjectivity of Tag 00MM to $R\\to Q\\to Q'$ using the hypothesis that $Q\\otimes_R M$ is flat over $Q$. Compose with the canonical surjectivity of Tag 00MN from $\\operatorname{Tor}_1^R(M,Q')$ to $\\operatorname{Tor}_1^{R'}(N,Q')$. The connecting-map descriptions of Tag 00M6 identify the source with $K\\otimes_Q Q'$ and the target with $K_N$. The ideal $I$ annihilates $K$, since it annihilates the second-variable action on $\\operatorname{Tor}_1^R(M,Q)$ and the connecting map is R-linear. Hence quotient tensor relations identify $K\\otimes_R R'$ with $K\\otimes_Q Q'$. Naturality sends $k\\otimes r'$ to $r'$ times the image of $k$ under $a\\otimes x\\mapsto\\rho(a)\\otimes(1\\otimes x)$. Therefore the composite gives a surjection with this generator formula. The existing Lean interface for 00MM will need its canonical-map characterization for this step; mere existence of an epi is not used as if it characterized the map.",
+   "uses": [
+    "lem-weil-pbc-tor-one-surjective-flat-middle",
+    "lem-weil-pbc-tor-one-surjective-change-rings",
+    "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MO (lines 23953--23969), Lemma Tag 00MM (lemma-surjective-on-tor-one), Lemma Tag 00MN (lemma-surjective-on-tor-one-trivial), Remark Tag 00M6"
+   }
+  },
+  {
+   "text": "Use tensor cancellation to identify $M'$ with $W^{-1}N$. The multiplication map $J\\otimes_{R'}N\\to N$ is $A$-linear. Localization exactness and tensor naturality identify $W^{-1}K_N$ with the kernel for $M'$. The localized surjection from step 2 sends a generator $k\\otimes r'$ to $\\varphi'(r')\\theta(k)$. Its value on a fraction is multiplied by the inverse of $q(w)$, an $S'$-scalar. Thus the localized kernel lies in the $S'$-span of $\\theta(K)$, without assuming those images vanish. Tensor symmetry places the $S'$-module factor on the left.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-cancel-base-change",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00MO (lines 23951--23958), the localization step made explicit with Proposition Tag 00CS (proposition-localization-exact) and Lemma Tag 00DK (lemma-tensor-localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-tensor-cancel-base-change",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-tor-one-surjective-flat-middle",
+  "lem-weil-pbc-tor-one-surjective-change-rings",
+  "lem-weil-pbc-tor-ideal-kernel-naturality",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00MO; expanded tensor and localization identifications as in the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of ideal multiplication after localized base change is generated by the image of the original kernel if the quotient module is flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearMap.ker, Submodule.span",
+   "results": "TensorProduct.AlgebraTensorModule.ker_mapOfCompatibleSMul",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*base.change|ker.*localiz|flat.*quotient",
+   "results": "Mathlib/RingTheory/LocalProperties/Basic.lean, Mathlib/RingTheory/LocalProperties/FinitePresentation.lean, Mathlib/RingTheory/LocalProperties/FinitePresentation.lean, Mathlib/RingTheory/LocalProperties/Exactness.lean, Mathlib/RingTheory/LocalProperties/Exactness.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatOfLocalCriterionBaseChange",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); localized base-change local criterion, Tor-kernel generation",
+   "via": [
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan",
+  "file": "lean/Sheaf/RingTheory/LocalizedBaseChangeIdealKernelSpan.lean",
+  "declaration": "Module.mem_span_ideal_kernel_localized_baseChange",
+  "statement": "theorem mem_span_ideal_kernel_localized_baseChange\n    {R : Type u} {S : Type v} {R' : Type w} {S' : Type z}\n    [CommRing R] [CommRing S] [CommRing R'] [CommRing S']\n    [Algebra R S] [Algebra R R'] [Algebra S S'] [Algebra R' S'] [Algebra R S']\n    [IsScalarTower R S S'] [IsScalarTower R R' S']\n    (I : Ideal R)\n    (M : Type t) [AddCommGroup M] [Module S M] [Module R M]\n    [IsScalarTower R S M]\n    (hloc : ∃ (q : S ⊗[R] R' →+* S') (W : Submonoid (S ⊗[R] R')),\n      (∀ (s : S) (r' : R'), q (s ⊗ₜ[R] r') =\n        algebraMap S S' s * algebraMap R' S' r') ∧\n      (letI := q.toAlgebra; IsLocalization W S'))\n    (hquot : Module.Flat (R ⧸ I) ((R ⧸ I) ⊗[R] M))\n    (θ : I ⊗[R] M →+ (I.map (algebraMap R R')) ⊗[R'] (S' ⊗[S] M))\n    (hθ : ∀ (a : I) (x : M), θ (a ⊗ₜ[R] x) =\n      (⟨algebraMap R R' a, Ideal.mem_map_of_mem (algebraMap R R') a.property⟩ :\n        I.map (algebraMap R R')) ⊗ₜ[R'] ((1 : S') ⊗ₜ[S] x))\n    (z : (I.map (algebraMap R R')) ⊗[R'] (S' ⊗[S] M))\n    (hz : TensorProduct.lift\n      ((LinearMap.lsmul R' (S' ⊗[S] M)).comp (I.map (algebraMap R R')).subtype) z = 0) :\n    TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) z ∈\n      Submodule.span S'\n        ((fun k : I ⊗[R] M ↦\n          TensorProduct.comm R' (I.map (algebraMap R R')) (S' ⊗[S] M) (θ k)) ''\n          (LinearMap.ker (TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)) :\n            Set (I ⊗[R] M)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082404-L-1643910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082404-L-1643910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

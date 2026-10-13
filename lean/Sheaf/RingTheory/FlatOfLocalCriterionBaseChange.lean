@@ -12,9 +12,10 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Sheaf.Algebra.TorOneSurjectiveChangeRings
-import Sheaf.RingTheory.TorIdealKernelNaturality
-import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle
+import Sheaf.RingTheory.LocalizedBaseChangeQuotientFlat
+import Sheaf.RingTheory.LocalizedBaseChangeIdealKernelSpan
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import WeilConjectures.Mathlib.RingTheory.Filtration
 
 /-!
@@ -90,6 +91,50 @@ theorem flat_of_local_criterion_baseChange
     (hker : ∀ k : I ⊗[R] M,
       TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype) k = 0 → θ k = 0) :
     Module.Flat R' (S' ⊗[S] M) := by
-  sorry
+  let J := I.map (algebraMap R R')
+  let N := S' ⊗[S] M
+  have hquot' : Module.Flat (R' ⧸ J) ((R' ⧸ J) ⊗[R'] N) :=
+    flat_quotient_localized_baseChange I M hloc hquot
+  have : Module.Flat (R' ⧸ J) (N ⧸ J • (⊤ : Submodule R' N)) :=
+    Module.Flat.of_linearEquiv
+      ((TensorProduct.quotTensorEquivQuotSMul N J).extendScalarsOfSurjective
+        Ideal.Quotient.mk_surjective).symm
+  have hspan : Submodule.span S'
+      ((fun k : I ⊗[R] M ↦ TensorProduct.comm R' J N (θ k)) ''
+        (LinearMap.ker (TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)) :
+          Set (I ⊗[R] M))) ≤ ⊥ := by
+    refine Submodule.span_le.mpr ?_
+    rintro _ ⟨k, hk, rfl⟩
+    have hk' := hker k (LinearMap.mem_ker.mp hk)
+    simp [hk']
+  have hmul : Function.Injective
+      (TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype)) := by
+    rw [injective_iff_map_eq_zero]
+    intro z hz
+    have hmem := mem_span_ideal_kernel_localized_baseChange I M hloc hquot θ hθ z hz
+    have heq : TensorProduct.comm R' J N z = 0 := hspan hmem
+    exact (TensorProduct.comm R' J N).injective (heq.trans (map_zero _).symm)
+  have hinj : Function.Injective (J.subtype.lTensor N) := by
+    intro x y hxy
+    apply (TensorProduct.comm R' N J).injective
+    apply hmul
+    have hcomm :
+        (TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype)).comp
+            (TensorProduct.comm R' N J).toLinearMap =
+          (TensorProduct.rid R' N).toLinearMap.comp (J.subtype.lTensor N) := by
+      ext n j
+      simp
+    change ((TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype)).comp
+      (TensorProduct.comm R' N J).toLinearMap) x =
+        ((TensorProduct.lift ((LinearMap.lsmul R' N).comp J.subtype)).comp
+          (TensorProduct.comm R' N J).toLinearMap) y
+    rw [hcomm]
+    exact congrArg (TensorProduct.rid R' N) hxy
+  have hIS : J.map (algebraMap R' S') ≤ Ideal.jacobson ⊥ := by
+    rw [IsLocalRing.jacobson_eq_maximalIdeal _ bot_ne_top]
+    exact (Ideal.map_mono ((Ideal.map_mono (IsLocalRing.le_maximalIdeal hI)).trans
+      (IsLocalRing.map_maximalIdeal_le (algebraMap R R')))).trans
+        (IsLocalRing.map_maximalIdeal_le (algebraMap R' S'))
+  exact Module.Flat.of_flat_quotient_of_lTensor_injective (S := S') J hIS hinj
 
 end Module
