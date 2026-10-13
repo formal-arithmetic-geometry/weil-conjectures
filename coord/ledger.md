@@ -11375,3 +11375,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:13 L: batch 20261013T060408 dependency take-out
 - 06:14 L: returned deliver/M1/WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech (reviewer RETURN: (reviewer X-b5293, head b5293e89b) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.Mathlib.Ca)
 - 06:15 L: returned deliver/Q2/Sheaf.Algebra.Homology.HomTensorDifferentialSummand (reviewer RETURN: (reviewer X-ca1d8, head ca1d823fd) C5/H9: CategoryTheory.homTensorSectionMap_natural already exists in lean/Sheaf/Algebr)
+- 06:20 L: returned deliver/V1/Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality (reviewer RETURN: (reviewer X-dd64f, head dd64f28d7) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Hi)
