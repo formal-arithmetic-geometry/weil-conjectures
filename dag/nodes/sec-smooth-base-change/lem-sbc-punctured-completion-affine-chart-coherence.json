@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-punctured-completion-affine-chart-coherence",
+ "kind": "statement",
+ "title": "Localization uniqueness promotes affine generator coherence",
+ "statement": "Let $A$ be a commutative local ring and let $C$ be its maximal-ideal adic completion [def-weil-pbc-adic-completion], with structural homomorphism $\\varphi:A\\to C$. Let $U\\subseteq\\operatorname{Spec}A$ be open, $q:Y\\to U$ and $s:E\\to\\operatorname{Spec}C$ morphisms of schemes, and $D$ a supplied overlap identification [def-sbc-punctured-completion-matching-sections]. Let $t\\in\\mathbb N$, $f:\\operatorname{Fin}(t)\\to A$, and suppose $D(f_i)\\subseteq U$ and $V_i=(q\\circ U.\\iota)^{-1}D(f_i)$ is affine for every $i$. Put $O=Y\\times_U(\\operatorname{Spec}C|_U)$ and $p:O\\to Y$ its projection. Suppose $T$ is any system of transition and section equivalences satisfying the scalar and restriction formulas [lem-sbc-punctured-completion-affine-chart-transitions]. Its transition maps satisfy the square and cocycle equalities of linear maps in [def-weil-pbc-formal-glueing-data] on every element of the appropriate iterated localized module. In particular these maps, together with $T$'s modules, are formal glueing data. No new section identifications are selected.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "lem-sbc-punctured-completion-affine-chart-transitions"
+ ],
+ "proof": [
+  {
+   "text": "apply the generator-coherence theorem to obtain equality on the original module elements. Multiplication by each power of f_j is invertible on M_j, since M_j is a module over A_(f_j). Map these invertible endomorphisms through localization and scalar extension; they remain invertible. Consequently both f_i and f_j act invertibly on the target C tensor_A (M_j)_(f_i). Apply the universal property of localization first at f_j and then at f_i: to compare the square paths it suffices to evaluate them on (m'/1)/1, which is exactly the first generator equation. Similarly f_k acts invertibly on M_k, hence on its two localizations. Powers of f_j act invertibly by the outer localization. Two applications of localization uniqueness reduce the cocycle paths to their values on (m/1)/1, given by the second generator equation. This proof constructs no geometric objects and needs no flatness. With t=0 all equalities are vacuous; with zero principal opens the same universal property applies to zero modules.",
+   "uses": [
+    "lem-sbc-punctured-completion-affine-chart-generator-coherence",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-punctured-completion-affine-chart-generator-coherence",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "T1",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, second proof paragraph; Tag 05EL, item (1), with the section and localization checks expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme gluing module transitions satisfy cocycle by restriction maps",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine principal open sections localization and affine pullback tensor product",
+   "results": "IsAffineOpen.appLE_eq_away_map, IsAffineOpen.app_basicOpen_eq_away_map, IsAffineOpen.isLocalization_of_eq_basicOpen, Gamma_restrict_isLocalization.",
+   "date": "2026-10-14",
+   "verdict": "Constituent APIs; no full affine chart transition or generator coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalizedModule.ext\"",
+   "results": "IsLocalizedModule.ext in Mathlib.Algebra.Module.LocalizedModule.Basic.",
+   "date": "2026-10-14",
+   "verdict": "Used in the proof of full coherence from original-element identities."
+  },
+  {
+   "tool": "grep",
+   "query": "FormalGlueing|isLocalization_basicOpen",
+   "results": "isLocalization_basicOpen in Mathlib/AlgebraicGeometry/AffineScheme.lean:673; no FormalGlueing match in Mathlib. Local source search finds no AffineChartTransitions or generator_coherence declaration.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate of the new statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartRealization",
+  "date": "2026-10-14",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completion-glueing comparison: affine chart transition construction and object coherence check.",
+   "via": [
+    "lem-sbc-punctured-completion-affine-chart-realization",
+    "lem-sbc-punctured-completion-formal-glueing-data-prime",
+    "lem-sbc-punctured-completion-formal-glueing-data",
+    "lem-sbc-completed-matching-ring-map-residue-quotient-surjective",
+    "lem-sbc-completed-matching-ring-map-residue-lift",
+    "lem-sbc-completed-matching-ring-map-surjective",
+    "def-sbc-completed-matching-ring-map",
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineChartCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.affine_chart_transition_coherence",
+  "statement": "theorem affine_chart_transition_coherence\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hf : ∀ i, PrimeSpectrum.basicOpen (f i) ≤ U)\n    (hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)))\n    (T : AffineChartTransitions D t f) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let F := T.F\n    (∀ i j : Fin t,\n      (FormalGlueing.extendMapR φ (F.alpha_overlap i j).toLinearMap).comp\n          ((FormalGlueing.compare φ (f j) (FormalGlueing.piece (f i) (F.M i))).comp\n            (FormalGlueing.localMap (f j) (F.alpha i).toLinearMap)) =\n        (FormalGlueing.compare φ (f i) (FormalGlueing.piece (f j) (F.M j))).comp\n          ((FormalGlueing.localMap (f i) (F.alpha j).toLinearMap).comp\n            (FormalGlueing.swap (f i) (f j) (FormalGlueing.restrict φ F.M')))) ∧\n    (∀ i j k : Fin t,\n      (FormalGlueing.localMap (f i) (F.alpha_overlap j k).toLinearMap).comp\n          ((FormalGlueing.swap (f i) (f k) (FormalGlueing.piece (f j) (F.M j))).comp\n            (FormalGlueing.localMap (f k) (F.alpha_overlap i j).toLinearMap)) =\n        (FormalGlueing.swap (f i) (f j) (FormalGlueing.piece (f k) (F.M k))).comp\n          ((FormalGlueing.localMap (f j) (F.alpha_overlap i k).toLinearMap).comp\n            (FormalGlueing.swap (f j) (f k) (FormalGlueing.piece (f i) (F.M i)))))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T211114-L-395253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T211114-L-395253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

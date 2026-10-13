@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 public import Sheaf.RingTheory.FormalGlueingData
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineChartCoherence
 
 /-!
 # Realizing formal glueing data on affine principal charts
@@ -20,6 +21,33 @@ Source: Stacks Project, Tag 0BLH, first two proof paragraphs; Tag 05EL.
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
+
+private theorem empty_chart_transitions
+    {A : Type u} [CommRing A] [IsLocalRing A]
+    {U : (Spec (.of A)).Opens} {Y E : Scheme.{u}} {q : Y ⟶ U.toScheme}
+    {s : E ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))}
+    (D : CompletionGluingData A U q E s) (f : Fin 0 → A) :
+    Nonempty (AffineChartTransitions D 0 f) := by
+  let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+  let : Module C Γ(E, ⊤) := completedChartModule s
+  let F : FormalGlueing.Transitions (algebraMap A C) f :=
+    { M' := ModuleCat.of C Γ(E, ⊤)
+      M := fun i ↦ Fin.elim0 i
+      alpha := fun i ↦ Fin.elim0 i
+      alpha_smul := fun i ↦ Fin.elim0 i
+      alpha_overlap := fun i ↦ Fin.elim0 i }
+  exact ⟨{
+    F := F
+    e := LinearEquiv.refl C Γ(E, ⊤)
+    c := fun i ↦ Fin.elim0 i
+    b := fun i ↦ Fin.elim0 i
+    d := fun i ↦ Fin.elim0 i
+    b_left := fun i ↦ Fin.elim0 i
+    b_right := fun i ↦ Fin.elim0 i
+    d_prime := fun i ↦ Fin.elim0 i
+    d_chart := fun i ↦ Fin.elim0 i
+    b_scalar := fun i ↦ Fin.elim0 i
+    d_scalar := fun i ↦ Fin.elim0 i }⟩
 
 /-- Realize the localization and scalar-extension maps as actual restrictions on
 principal affine charts. This statement concerns arbitrary chart and prime elements;
@@ -92,6 +120,33 @@ theorem exists_affine_chart_realization
       (∀ i m, d i (X.alpha i (LocalizedModule.mk m 1)) =
         O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V i ≤ ⊤)).op
           (D.toCompleted.appTop (e m))) ∧
-      (∀ i m, d i (TensorProduct.tmul A (1 : C) m) = p.app (V i) (c i m)) := by sorry
+      (∀ i m, d i (TensorProduct.tmul A (1 : C) m) = p.app (V i) (c i m)) := by
+  let : IsAffine E := isAffine_of_isAffineHom s
+  have hV : ∀ i, IsAffineOpen ((q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)) := by
+    intro i
+    rw [Scheme.Hom.comp_preimage]
+    have hbase : IsAffineOpen (X := Spec (.of A)) (PrimeSpectrum.basicOpen (f i)) :=
+      IsAffineOpen.Spec_basicOpen (R := .of A) (f i)
+    have hsub : PrimeSpectrum.basicOpen (f i) ≤ U.ι.opensRange := by
+      rw [Scheme.Opens.opensRange_ι]
+      exact hf i
+    exact (hbase.preimage_of_isOpenImmersion U.ι hsub).preimage q
+  have hT : Nonempty (AffineChartTransitions D t f) := by
+    cases t with
+    | zero => exact empty_chart_transitions D f
+    | succ t => exact exists_affine_chart_transitions D (t + 1) f hf hV
+  obtain ⟨T⟩ := hT
+  obtain ⟨hsquare, hcocycle⟩ := affine_chart_transition_coherence D t f hf hV T
+  let X : FormalGlueing.Data (algebraMap A
+      (AdicCompletion (IsLocalRing.maximalIdeal A) A)) f :=
+    { M' := T.F.M'
+      M := T.F.M
+      alpha := T.F.alpha
+      alpha_smul := T.F.alpha_smul
+      alpha_overlap := T.F.alpha_overlap
+      square := hsquare
+      cocycle := hcocycle }
+  refine ⟨X, T.e, T.c, T.b, T.d, ?_⟩
+  exact ⟨T.b_left, T.b_right, T.d_prime, T.d_chart⟩
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
