@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-restricted-global-hom-shifted-equiv",
+ "kind": "statement",
+ "title": "Natural shifted Hom identification for restricted global RHom",
+ "statement": "Let $f:X\\to S$ be any morphism of schemes [def-weil-pbc-scheme-conventions], and let $P,Q\\in D(\\mathcal O_X)$ [def-pc-derived-category]. With global RHom [def-pc-global-derived-rhom] restricted along $\\Gamma(S)\\to\\Gamma(X)$, for all integers $m,n$ there are additive equivalences $e_{P,Q,m,n}:H^{n-m}(RHom_X(P,Q))\\simeq Hom(P[m],Q[n])$. For every $q:Q\\to Q\\prime$ and cohomology class $x$, $e_{P,Q\\prime,m,n}(H^{n-m}(RHom_X(P,q))(x))=e_{P,Q,m,n}(x)\\circ q[n]$. There are no boundedness or quasi-coherence hypotheses. Module and sheaf localization universes may be chosen independently.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, lemma-internal-hom, global statement; cohomology.tex, Tag 0B6A"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Compute internal RHom using a K-flat source and K-injective target. Apply the natural global RHom/derived Hom identification to the shifted representatives. Degree n-m cocycles modulo boundaries are maps P[m] to Q[n].",
+   "uses": [
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact scalar restriction leaves the underlying group unchanged and commutes with cohomology. Postcomposition with q commutes with the representative maps, shifts and localization, giving the asserted naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, lemma-internal-hom, global statement; cohomology.tex, Tag 0B6A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of global derived Hom from a perfect complex commutes with flat affine base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars global RHom base change comparison for flat morphism and perfect complexes",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; CategoryTheory.Abelian.Ext.mapExactFunctor; comonadicExtendScalars; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; Module.Flat.isBaseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GlobalDerivedHom.*shift|global.*[Hh]om.*[Ee]quiv",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\"",
+   "results": "CategoryTheory.ShortComplex.leftHomologyFunctor; CategoryTheory.ShortComplex.leftHomologyFunctor_obj; CategoryTheory.ShortComplex.leftHomologyFunctor_map; CategoryTheory.ShortComplex.rightHomologyFunctor; CategoryTheory.ShortComplex.rightHomologyFunctor_obj; CategoryTheory.ShortComplex.rightHomologyFunctor_map; CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso; CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso; no global RHom base-change or shifted sheaf-Hom statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match (independent second reading)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology global internal Hom identifies morphisms shifted derived categories natural postcomposition",
+   "results": "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.Abelian.Ext.hom; CategoryTheory.Abelian.Ext.hom'",
+   "date": "2026-10-13",
+   "verdict": "no exact match; raw complex Hom cohomology results require further global-section and resolution transport"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8: Tag 08JA, lemma-internal-hom, global statement; cohomology.tex, Tag 0B6A",
+   "via": [
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedGlobalHomShiftedEquiv.lean",
+  "declaration": "AlgebraicGeometry.restrictedGlobalHom_shiftedHom_equiv",
+  "statement": "theorem restrictedGlobalHom_shiftedHom_equiv\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {X S : Scheme.{u}} (f : X ⟶ S) :\n    ∃ e : ∀ (P Q : schemeDerivedCategory X) (m n : ℤ),\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) (n - m)).obj\n          ((schemeGlobalScalarRestriction f).obj\n            ((schemeGlobalDerivedHom X).obj (op P, Q)))) ≃+ (P⟦m⟧ ⟶ Q⟦n⟧),\n      ∀ (P Q Q' : schemeDerivedCategory X) (m n : ℤ) (q : Q ⟶ Q')\n        (x : ((DerivedCategory.homologyFunctor\n          (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) (n - m)).obj\n            ((schemeGlobalScalarRestriction f).obj\n              ((schemeGlobalDerivedHom X).obj (op P, Q))))),\n        e P Q' m n\n          (((DerivedCategory.homologyFunctor\n            (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) (n - m)).map\n              ((schemeGlobalScalarRestriction f).map\n                ((schemeGlobalDerivedHom X).map ((𝟙 P).op, q)))) x) =\n          e P Q m n x ≫ q⟦n⟧'",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface"
+ }
+}

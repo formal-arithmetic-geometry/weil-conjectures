@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-mixed-global-sections-direct-image-iso",
+ "kind": "statement",
+ "title": "Normalized derived Leray with independent module localization universes",
+ "statement": "For a scheme morphism f:X→Y [def-weil-pbc-scheme-conventions], derived direct image followed by Y-global sections is naturally isomorphic to X-global sections followed by exact scalar restriction [def-pc-global-derived-rhom, def-pc-derived-category]. The underived comparison is the identity on sections. The derived comparison satisfies the displayed right-derived-unit equation. Sheaf and module localization universes are independent.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T; duality.tex Tag 0B6I"
+ },
+ "stmt_deps": [
+  "def-pc-global-derived-rhom",
+  "def-pc-derived-category",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Form the underived identity sections/restriction isomorphism. Direct image of a K-injective is acyclic for subsequent global sections, so the composite-unit comparison is invertible on K-injectives.",
+   "uses": [
+    "lem-pc-direct-image-global-sections-kinjective-acyclic",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the K-injective derivability structure to prove both composites right derived for the same underived functor. RightDerivedDesc and uniqueness give an isomorphism, and its factorization equation is exactly the stated unit normalization.",
+   "uses": [
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-direct-image-global-sections-kinjective-acyclic",
+  "lem-pc-global-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-13",
+  "note": "Landing-rejection repair: existing private construction lemmas are reused through proof-only import all GlobalHomAdjunctionIso; copied private declarations removed. The mixed Leray signature explicitly distinguishes independent sheaf and module localization universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor composition Leray comparison under K injective acyclicity exact restriction scalars",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "verdict": "underived or generic infrastructure; implemented using the existing project derivability/adjunction interfaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "CategoryTheory.Functor.HasRightDerivedFunctor; CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'; CategoryTheory.Functor.HasRightDerivedFunctor.mk; CategoryTheory.Functor.totalRightDerived; CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension; CategoryTheory.Functor.hasRightDerivedFunctor_iff; CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso; CategoryTheory.Functor.IsRightDerivedFunctor",
+   "date": "2026-10-13",
+   "verdict": "underived or generic infrastructure; implemented using the existing project derivability/adjunction interfaces"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComp",
+   "results": "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "underived or generic infrastructure; implemented using the existing project derivability/adjunction interfaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension restriction adjunction and normalized Leray for unbounded complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8: Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1)",
+   "via": [
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedGlobalSectionsDirectImageIso.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedGlobalSectionsDirectImageIso",
+  "statement": "theorem exists_mixedGlobalSectionsDirectImageIso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ (c₀ : RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙\n        RingedSpace.globalSectionsFunctor Y.toRingedSpace ≅\n      RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙\n        ModuleCat.restrictScalars.{u}\n          (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))\n          (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom)\n      (c : schemeDerivedDirectImage f ⋙ schemeDerivedGlobalSections Y ≅\n        schemeDerivedGlobalSections X ⋙ schemeGlobalScalarRestriction f),\n      (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (x : (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙\n          RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj F),\n        (c₀.hom.app F).hom x = x) ∧\n      (∀ K : HomotopyCategory\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),\n        (RingedSpace.globalSectionsFunctor Y.toRingedSpace).rightDerivedFunctorUnit.app\n            (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n              (ComplexShape.up ℤ)).obj K) ≫\n          (schemeDerivedGlobalSections Y).map\n            ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) ≫\n          c.hom.app (DerivedCategory.Qh.obj K) =\n        (DerivedCategory.Qh\n          (C := ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))).map\n          ((Functor.mapHomotopyCategoryCompIso\n            (Iso.refl (RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙\n              RingedSpace.globalSectionsFunctor Y.toRingedSpace))\n            (ComplexShape.up ℤ)).hom.app K ≫\n            (Functor.mapHomotopyCategoryCompIso c₀.symm\n              (ComplexShape.up ℤ)).inv.app K) ≫\n          (ModuleCat.restrictScalars.{u}\n            (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))\n            (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤))\n            f.appTop.hom).mapDerivedCategoryFactorsh.inv.app\n              (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomotopyCategory\n                (ComplexShape.up ℤ)).obj K) ≫\n          (schemeGlobalScalarRestriction f).map\n            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface"
+ }
+}

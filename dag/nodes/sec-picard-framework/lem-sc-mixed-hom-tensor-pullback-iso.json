@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-mixed-hom-tensor-pullback-iso",
+ "kind": "statement",
+ "title": "Canonical pullback tensor isomorphism for mixed global Hom",
+ "statement": "Let $h:T\\to S$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and choose sheaf derived localizations [def-pc-derived-category]. There exists a natural isomorphism from $\\otimes_S^L$ followed by $Lh^*$ to $(Lh^*\\times Lh^*)$ followed by $\\otimes_T^L$, whose forward components satisfy the shared-counit normalization of [def-pc-derived-pullback-tensor-comparison]. It imposes no relation on any independently chosen module derived localization universe.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, lemma-pullback-tensor-product; perfect.tex Tag 0B6I, canonical global Hom comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the canonical comparison using exists_canonicalPullbackTensorComparison, which transports the model counit to SingleComplexBaseChange.counit through exists_canonical_from_model. Package its two-variable naturality as a natural transformation. No raw model tensorator is selected.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove localization tensor maps invertible on K-flat inputs using derived monoidal localization. Transfer K-flat invertibility of a universal pullback counit to the shared counit by leftDerivedLift and its factorization equation. Tensor and pullback preserve K-flatness, so the canonical coordinate equation implies the comparison is invertible on representatives. Resolve arbitrary objects by K-flat complexes, use naturality to transport invertibility, and form NatIso.ofComponents.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-kflat-tensor-product",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-resolution",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-13",
+  "note": "Landing-rejection repair: existing private construction lemmas are reused through proof-only import all GlobalHomAdjunctionIso; copied private declarations removed. The mixed Leray signature explicitly distinguishes independent sheaf and module localization universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived pullback tensor comparison is a natural isomorphism normalized to fixed derived counit",
+   "results": "Eight underived pullback composition/isomorphism hits; no derived tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q",
+   "results": "Twelve localization functor Q, essential-surjectivity, shift and single-complex hits; no canonical pullback tensor isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_.*HomTensorPullbackIso|IsCanonicalPullbackTensorComparison",
+   "results": "msearch found zero Mathlib hits. Repository rg found exists_schemeHomTensorPullbackIso, whose module binder ties localization universes; its K-flat proof is reused with independent universes.",
+   "date": "2026-10-13",
+   "verdict": "adapt existing project proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived pullback tensor natural isomorphism normalized by derived counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper base change auxiliary argument, Tag 0AA8: Tag 0AA7, lemma-affine-morphism-and-hom-out-of-perfect, case (1)",
+   "via": [
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedHomTensorPullbackIso.lean",
+  "declaration": "AlgebraicGeometry.exists_mixedHomTensorPullbackIso",
+  "statement": "theorem exists_mixedHomTensorPullbackIso {T S : Scheme.{u}} (h : T ⟶ S) :\n    ∃ t : tensor (schemeDerivedCategory S) ⋙ derivedPullback h ≅\n      (derivedPullback h).prod (derivedPullback h) ⋙ tensor (schemeDerivedCategory T),\n      IsCanonicalPullbackTensorComparison h (fun K L ↦ t.hom.app (K, L))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f26bb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082420-L-1650363",
+  "kind": "interface"
+ }
+}
