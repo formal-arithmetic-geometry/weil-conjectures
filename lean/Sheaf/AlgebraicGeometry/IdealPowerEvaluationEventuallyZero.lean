@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero
+import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
+import Sheaf.Topology.GlueSheavesOfModules
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-! # IdealPowerEvaluationEventuallyZero
 
@@ -54,6 +58,38 @@ theorem ideal_power_evaluation_eventually_zero
       r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2) :
     ∀ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ F),
       φ.app U (one n) = 0 →
-      ∃ (m : ℕ) (h : n ≤ m), r n m h ≫ φ = 0 := by sorry
+      ∃ (m : ℕ) (h : n ≤ m), r n m h ≫ φ = 0 := by
+  classical
+  intro n φ hφ
+  obtain ⟨S, hfin, hcover⟩ :=
+    isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
+      ⟨isCompact_univ (X := X), isOpen_univ⟩
+  have hcover' : (⨆ V : S, V.1.1) = ⊤ := by
+    ext x
+    simpa using (Set.ext_iff.mp hcover x).symm
+  have hlocal (V : S) :=
+    ideal_power_evaluation_affine_eventually_zero ι F U one r hU hone hr V.1 n φ hφ
+  choose k hk hzero using hlocal
+  have := hfin.to_subtype
+  let := Fintype.ofFinite S
+  let m := max n (Finset.univ.sup k)
+  have hnm : n ≤ m := le_max_left _ _
+  refine ⟨m, hnm, ?_⟩
+  apply (glue_sheaves_of_modules X.toRingedSpace S (fun V ↦ V.1.1) hcover').2.1
+  intro V
+  have hkm : k V ≤ m := (Finset.le_sup (Finset.mem_univ V)).trans (le_max_right _ _)
+  have : Mono (idealSheafPower ι n).2 := formalPolynomial_power_mono ι n
+  have hcomp : r (k V) m hkm ≫ r n (k V) (hk V) = r n m hnm := by
+    apply (cancel_mono (idealSheafPower ι n).2).mp
+    rw [Category.assoc, hr, hr, hr]
+  have hz : (r n m hnm ≫ φ).over V.1.1 = 0 := by
+    rw [← hcomp, Category.assoc]
+    change (SheafOfModules.overFunctor X.ringCatSheaf V.1.1).map
+      (r (k V) m hkm ≫ (r n (k V) (hk V) ≫ φ)) = 0
+    rw [Functor.map_comp]
+    change (r (k V) m hkm).over V.1.1 ≫
+      (r n (k V) (hk V) ≫ φ).over V.1.1 = 0
+    rw [hzero V, comp_zero]
+  simpa using hz
 
 end AlgebraicGeometry.Scheme

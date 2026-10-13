@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero",
+ "kind": "statement",
+ "title": "Affine local eventual vanishing of ideal-power evaluation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\iota:\\mathcal I\\hookrightarrow\\mathcal O_X$ a monomorphism of modules [def-weil-sheaf-of-modules-category], with $\\mathcal I$ quasi-coherent and of finite type [pqf-def-coherent]. Put $P_n=\\mathcal I^n$ with inclusion $j_n:P_n\\hookrightarrow\\mathcal O_X$ and $P_0=\\mathcal O_X$, using the recursive ideal powers of [lem-weil-pbc-ideal-module-product-stalk]. Let $\\mathcal F$ be quasi-coherent. Let $U\\subseteq X$ be open with $x\\in U$ if and only if $\\iota_x$ is surjective. Fix sections $1_n\\in P_n(U)$ with $j_n(1_n)=1$ and maps $r_{nm}:P_m\\to P_n$ for $n\\le m$ with $j_n r_{nm}=j_m$. For every $n$ and $\\varphi:P_n\\to\\mathcal F$ such that $\\varphi_U(1_n)=0$, for every affine open $V\\subseteq X$ there are $m\\ge n$ with $(\\varphi r_{nm})|_V=0$. The ambient scheme need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PM, proof of injectivity of the first arrow; Lemma 01PQ, first proof paragraph. Source text read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-category-colimit",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "On the chosen affine open V identify the quasi-coherent ideal and module with their affine section modules, and P_n with the nth power of a finitely generated ideal J. No finite cover is chosen here. The general monic quasi-coherent structure-module subobject must be treated via its affine section image; the existing ideal-times statement is directly stated for IdealSheafData, so an identification with that model is required.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "For generators f_i of J, evaluation on D(f_i) is phi(f_i^n)/f_i^n. Vanishing and the localization zero criterion give a common k with phi(f_i^(n+k))=0 for all i. A sufficiently high degree monomial contains one of these pure powers, so phi vanishes on a higher ideal power. For the zero ideal take a positive power directly.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "After the affine algebra calculation kills a power J^m with m at least n, identify the prescribed r with the ideal-power inclusion by monicity. The affine tilde/Gamma equivalence turns the zero linear map into the zero sheaf morphism over V. This concerns only one affine open and uses no quasi-compactness of the ambient scheme.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-formal-polynomial-power-lifts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PM, proof of injectivity of the first arrow; Lemma 01PQ, first proof paragraph. Source text read at https://stacks.math.columbia.edu/tag/01PM and https://stacks.math.columbia.edu/tag/01PQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear map from a power of a finitely generated ideal which is zero after localization away from each ideal generator is zero on a higher power",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a power of a finitely generated ideal into a module vanishing on the complement of its vanishing locus is zero on some higher ideal power",
+   "date": "2026-10-13",
+   "results": "Filtration, Nakayama, and Module.support_quotient results; none gives the affine local evaluation criterion. Loogle Ideal.FG also finds Ideal.FG.pow and radical power containment, lower-level algebra only.",
+   "verdict": "No exact match in the returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_eventually|eventually_zero|ideal_power|idealSheafPower; annihilat.*pow|pow.*annihilat",
+   "date": "2026-10-13",
+   "results": "No matching affine local evaluation theorem in the source or Sheaf library. The original global theorem and SectionsOverQuasiCompactOpen (which imports it) cannot be used. FormalPolynomialPowerLifts supplies power monicity, and IdealTimesQuasiCoherentAffineSections supplies power sections for IdealSheafData.",
+   "verdict": "Only ingredients; no duplicate statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine calculation in steps 1 and 2 of lem-weil-pbc-ideal-power-evaluation-eventually-zero, separated from the finite-cover globalization.",
+   "via": [
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-ideal-power-evaluation-eventually-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerEvaluationAffineEventuallyZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_power_evaluation_affine_eventually_zero",
+  "statement": "theorem ideal_power_evaluation_affine_eventually_zero\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (r : ∀ (n m : ℕ), n ≤ m →\n      ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (hr : ∀ (n m : ℕ) (h : n ≤ m),\n      r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2) :\n    ∀ (V : X.affineOpens) (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ F),\n      φ.app U (one n) = 0 →\n      ∃ (m : ℕ) (h : n ≤ m), (r n m h ≫ φ).over V.1 = 0",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T054234-L-448217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T054234-L-448217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
