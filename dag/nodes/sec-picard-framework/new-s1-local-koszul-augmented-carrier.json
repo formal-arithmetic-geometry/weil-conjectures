@@ -19,22 +19,47 @@
  ],
  "proof": [
   {
-   "text": "Identify the restricted closed subscheme with Spec(A/I) and apply exists_affine_quotient_sheafified_resolution to Q.complex and Q.pi. Reindex chain degree n as cochain degree -n, inserting zero in positive degrees. This gives B on U augmented quasi-isomorphically to F(S).",
+   "text": "Extend Q.pi along embeddingDownNat and compose with extendSingleIso to get an integer-indexed quotient augmentation. Transport its source with hQ. Mathlib preserves quasi-isomorphisms under extension. Apply affine_koszul_finite_free_resolution to obtain the explicit sheafified Koszul complex E on U, its bounded-above finite-free terms, and its quasi-isomorphic augmentation a.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "lem-sc-affine-koszul-finite-free-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Using hQ, the exterior basis of A^m makes B^{-n} free of rank binomial(m,n), and exterior powers vanish above m. A bounded-above complex of flat module sheaves is K-flat. Put K equal to termwise pushforward of B along U.ι and use the natural isomorphism restricting that pushforward back to B to transport the augmentation and K-flatness; no exactness of pushforward is asserted.",
+   "text": "Define K termwise as pushforward of E along U.ι. The Mathlib restriction-pushforward counit gives c:F(K) ≅ E. Compose c.hom, a, and the inverse singleMapHomologicalComplex comparison to construct b:F(K) → F(S). Every comparison is invertible, so b is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The tensor unit is flat by its unitor and the proved abstract flat_of_tensorIso lemma. A free sheaf is its coproduct, hence flat by isFlat_coproduct. Transport flatness through the displayed finite-free term isomorphisms and c. Transport the upper bound through c and apply isKFlat_of_boundedAbove_flat_ringedSpace. This proves K-flatness only on U, as required.",
    "uses": [
+    "lem-pc-sites-modules-coproduct-flat",
     "lem-pc-bounded-above-flat-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "On W the restriction of tensor pullback of K equals the restricted tensor pullback of B. Verify this termwise by the inverse-image and scalar-extension formula. Each f_j maps to zero in A/I since span(range f)=I, so each contraction differential becomes zero. Scalar extension and restriction preserve the displayed free bases and the bounds [-m,0]. Empty sequences give the unit in degree zero; empty charts and zero quotients give zero modules with the same constructions.",
+   "text": "For every ring map φ killing the generators, koszulBaseChangeIso identifies scalar extension with the Koszul complex on the zero sequence. Its contraction differential is zero since contraction is linear in the zero functional. Extension by zero preserves this calculation: positive cochain terms are zero and the other differential components are conjugates of the chain differentials. On the affine source X=i^{-1}(U), the chart ring map is i.app(U) followed by the inverse top-open identification. Every f_j lies in ker(i)(U) by hf, so this map kills f_j. Use tensorPullback_tilde_iso, uniqueness of open pullback adjoints and tensor pullback composition to transport the algebraic zero calculation through the affine charts. Factor the map W→U through X. The open pullback square and restriction-pushforward counit identify the local carrier with this pullback of E. Finally use the faithful over-site equivalence to detect zero differentials in G(K). All isomorphisms act on the actual constructed complexes.",
    "uses": [
+    "lem-sc-koszul-base-change-iso",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-module-pullback",
+    "lem-sc-homology-evaluation-formal-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In exterior degree q>m the exterior basis is indexed by an empty powersetCard, hence its module is zero. In positive cochain degree extension has zero terms. Thus E is supported in [-m,0]. Pushforward, tensor pullback and open-over restriction preserve zero objects, giving the same bound for G(K).",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each degree, restrict K back to U and identify it through c with the finite-free term of E. Tensor pullback preserves coproducts as a left adjoint and preserves the unit by tensorPullbackObjUnitToUnit_isIso, so it preserves free modules with their same rank. For W=V^{-1}(i^{-1}(U)), factor W→Y through U. Pullback composition and uniqueness of the left adjoint along an open immersion give the natural open square. Combine this with restriction composition and overIsoFreeEquiv to obtain the required free isomorphism over V/W. Empty ranks, empty opens, m=0 and zero rings require no nontriviality hypotheses.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
     "def-pc-module-pullback",
     "lem-sc-homology-evaluation-formal-complex"
    ],
@@ -44,18 +69,23 @@
  "proof_deps": [
   "def-pc-module-pullback",
   "lem-pc-bounded-above-flat-kflat",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-homology-evaluation-formal-complex"
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-sc-affine-koszul-finite-free-resolution",
+  "lem-sc-homology-evaluation-formal-complex",
+  "lem-sc-koszul-base-change-iso",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-tilde-pullback-base-change"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "S1",
+  "group": "C1",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "Local Koszul complex in the proof; Tag 068C finite-free quotient resolution; reindexing and chart pushforward provide a carrier on Y."
   },
-  "note": "Strict component of split-local-tensor-finite-free. The module docstring gives the complete construction and edge cases."
+  "note": "Complete Lean construction from the existing finite-free affine augmentation and proved pullback APIs. Private helpers supply explicit scalar-zero and chart/over-site transport glue; no new sorry or arbitrary model witness. Below-unit refinement keeps the local Koszul route."
  },
  "mathlib_searches": [
   {
@@ -144,11 +174,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
+  "reviewer": "X-e0ea0",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T211112-L-394675",
+  "landing": "20261013T222359-L-1220971",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, theorem signature, DAG proof metadata, report, and documented local attribute change matched against the baseline and node; delivered files and direct importer compiled successfully."
  }
 }
