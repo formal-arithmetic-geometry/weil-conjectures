@@ -49,6 +49,16 @@ private theorem tensor_composition_inv
   rw [pushforwardCongr_refl]
   rfl
 
+private theorem tensor_composition_symm
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (Scheme.Modules.tensorPullbackCompositionIso f g (f ≫ g) rfl).symm =
+      (conjugateIsoEquiv
+        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+        (Scheme.Modules.pushforwardComp f g).symm :=
+  Iso.ext (tensor_composition_inv f g)
+
 private theorem map_complex_comparison
     {V W D : Type*} [Category V] [Preadditive V] [Category W] [Preadditive W]
     [Category D] {F G H : V ⥤ W}
@@ -76,6 +86,12 @@ private theorem reassoc_transported_factorization
     (c ≪≫ e).hom ≫ ε = (l ≫ r) ≫ t :=
   (Category.assoc c.hom e.hom ε).trans (h.trans (Category.assoc l r t).symm)
 
+private theorem eqToIso_congr_symm
+    {C D : Type*} [Category D] (F : C → D) {k l : C} (h : k = l) :
+    eqToIso (congrArg F h.symm) = (eqToIso (congrArg F h)).symm := by
+  subst l
+  rfl
+
 private theorem compare_counit_factorizations
     {C : Type*} [Category C] {U V W A B D : C}
     (c₁ : U ≅ V) (c₂ : W ≅ V) (b₁ : A ≅ B) (b₂ : A ≅ D)
@@ -87,6 +103,96 @@ private theorem compare_counit_factorizations
   rw [hr]
   simp only [Iso.inv_hom_id_assoc]
   exact ((reassoc_of% h₁) b₂.hom).symm
+
+private noncomputable def selectedComposition
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    derivedPullback.{u, w} g ⋙ derivedPullback.{u, w} f ≅ derivedPullback.{u, w} (f ≫ g) :=
+  (Classical.choose (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))) f g
+
+private theorem composition_factorization
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :
+    (selectedComposition.{u, w} f g).hom.app (DerivedCategory.Q.{w}.obj P) ≫
+        (counit (f ≫ g)).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
+      ((derivedPullback.{u, w} f).map
+          ((counit g).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+        (counit f).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P))) ≫
+        (DerivedCategory.Q.{w}.mapIso
+          ((NatIso.mapHomologicalComplex
+            (Scheme.Modules.tensorPullbackCompositionIso f g (f ≫ g) rfl)
+            (.up ℤ)).app P)).inv := by
+  have : (derivedPullback.{u, w} (f ≫ g)).IsLeftDerivedFunctor (counit (f ≫ g))
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)) :=
+    (Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) (f ≫ g)
+  have hc := (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))).1 f g
+  let β := (Functor.associator DerivedCategory.Qh.{w} (derivedPullback.{u, w} g)
+      (derivedPullback.{u, w} f)).inv ≫
+    Functor.whiskerRight (counit g) (derivedPullback.{u, w} f) ≫
+    (Functor.associator _ DerivedCategory.Qh.{w} (derivedPullback.{u, w} f)).hom ≫
+    Functor.whiskerLeft _ (counit f) ≫
+    (Functor.associator _ _
+      (DerivedCategory.Qh.{w} (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))).inv ≫
+    Functor.whiskerRight
+      (Functor.mapHomotopyCategoryCompIso
+        ((conjugateIsoEquiv
+          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+            (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+          (Scheme.Modules.pushforwardComp f g).symm) (.up ℤ)).hom
+      (DerivedCategory.Qh.{w} (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+  have hnat : Functor.whiskerLeft DerivedCategory.Qh.{w} (selectedComposition.{u, w} f g).hom ≫
+      counit (f ≫ g) = β := by
+    rw [show (selectedComposition.{u, w} f g).hom = _ from hc]
+    exact Functor.leftDerived_fac (derivedPullback.{u, w} (f ≫ g)) (counit (f ≫ g))
+      (HomotopyCategory.quasiIso _ (.up ℤ)) (derivedPullback.{u, w} g ⋙ derivedPullback.{u, w} f) β
+  have h := congrArg (fun t ↦ t.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) hnat
+  dsimp only [β, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.associator_hom_app, Functor.whiskerRight_app] at h
+  simp only [Category.id_comp] at h
+  rw [← tensor_composition_symm f g] at h
+  have hmap : (DerivedCategory.Qh.{w}
+      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).map
+      ((Functor.mapHomotopyCategoryCompIso
+          (Scheme.Modules.tensorPullbackCompositionIso f g (f ≫ g) rfl).symm
+          (.up ℤ)).hom.app ((HomotopyCategory.quotient
+            (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (.up ℤ)).obj P)) =
+      ((DerivedCategory.Q.{w}
+        (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).mapIso
+        ((NatIso.mapHomologicalComplex
+          (Scheme.Modules.tensorPullbackCompositionIso f g (f ≫ g) rfl) (.up ℤ)).app P)).inv := by
+    rfl
+  erw [hmap] at h
+  simp only [Functor.comp_obj, Category.assoc] at h ⊢
+  exact h
+
+private theorem composition_factorization_transport
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (h : f ≫ g = k)
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :
+    ((selectedComposition.{u, w} f g ≪≫
+        eqToIso (congrArg (fun l ↦ derivedPullback.{u, w} l) h)).app
+          (DerivedCategory.Q.{w}.obj P)).hom ≫
+        (counit k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
+      ((derivedPullback.{u, w} f).map
+          ((counit g).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
+        (counit f).app ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (.up ℤ)).obj P))) ≫
+        (DerivedCategory.Q.{w}.mapIso
+          ((NatIso.mapHomologicalComplex
+            (Scheme.Modules.tensorPullbackCompositionIso f g k h) (.up ℤ)).app P)).inv := by
+  cases h
+  simpa only [eqToIso_refl, Iso.trans_refl, Iso.app_hom] using
+    composition_factorization f g P
 
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
@@ -132,6 +238,34 @@ theorem affineSpectrum_composition_counit_square
       (counit X'.isoSpec.inv).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj
           (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) := by
-  sorry
+  let b₁ := Scheme.Modules.tensorPullbackCompositionIso
+    (Spec.map g'.appTop) X.isoSpec.inv ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl
+  let b₂ := Scheme.Modules.tensorPullbackCompositionIso
+    X'.isoSpec.inv g' ((Spec.map g'.appTop) ≫ X.isoSpec.inv)
+    (Scheme.isoSpec_inv_naturality g').symm
+  let c₁ := selectedComposition.{u, w} (Spec.map g'.appTop) X.isoSpec.inv
+  let c₂ := selectedComposition.{u, w} X'.isoSpec.inv g' ≪≫
+    (eqToIso (congrArg (fun k ↦ derivedPullback.{u, w} k)
+      (Scheme.isoSpec_inv_naturality g'))).symm
+  have h₁ := composition_factorization (Spec.map g'.appTop) X.isoSpec.inv P
+  have h₂ := composition_factorization_transport X'.isoSpec.inv g'
+    ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm P
+  erw [eqToIso_congr_symm (fun k ↦ derivedPullback.{u, w} k)
+    (Scheme.isoSpec_inv_naturality g')] at h₂
+  have h := compare_counit_factorizations
+    (c₁.app (DerivedCategory.Q.obj P)) (c₂.app (DerivedCategory.Q.obj P))
+    (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₁ (.up ℤ)).app P))
+    (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex b₂ (.up ℤ)).app P))
+    ((counit ((Spec.map g'.appTop) ≫ X.isoSpec.inv)).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) _ _ h₁ h₂
+  dsimp only
+  have he : affineSpectrumDerivedPullbackIso g' = c₁ ≪≫ c₂.symm := by
+    dsimp only [affineSpectrumDerivedPullbackIso, c₁, c₂, selectedComposition]
+    simp only [Iso.trans_symm, Iso.symm_symm_eq]
+  conv_rhs => rw [he]
+  simpa only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    NatIso.mapHomologicalComplex,
+    NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app, Functor.map_comp,
+    Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using h
 
 end AlgebraicGeometry.SingleComplexBaseChange

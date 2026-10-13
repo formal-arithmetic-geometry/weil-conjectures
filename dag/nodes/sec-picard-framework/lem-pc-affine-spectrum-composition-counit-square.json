@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "For each composable pair f,g evaluate the defining leftDerivedLift equation for the selected derived comparison at the homotopy image of P. The leftDerived_fac_app equation expresses comparison followed by total counit as the derived image of the first counit, the second counit and Q of the inverse underived comparison. The pinned adjunction conjugates commute with inversion, and pushforwardCongr rfl is the identity. This identifies the underived comparison with the inverse of tensorPullbackCompositionIso.",
+   "text": "Use the composition family selected by exists_derivedPullbackComposition. Its recorded leftDerivedLift equation and Mathlib Functor.leftDerived_fac give the natural-transformation factorization; evaluate this at the homotopy image of P. The inverse underived mate is the inverse of tensorPullbackCompositionIso: unfold its definition and use pushforwardCongr rfl = Iso.refl. The quotient comparison maps this termwise comparison definitionally to DerivedCategory.Q of the same comparison. Normalize functor composition on objects and reassociate to obtain composition_factorization, with no assumption on P.",
    "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-tensor-pullback-composition-iso"
@@ -24,7 +24,7 @@
    "elementary": false
   },
   {
-   "text": "Apply this identity to (Spec.map g.appTop, X.isoSpec.inv) and (Xprime.isoSpec.inv,g). Transport the second identity along isoSpec_inv_naturality, identifying both total pullbacks and both total counits. Cancel the invertible second derived comparison and first underived comparison. The quotient/localization comparison has identity components; its naturality identifies Qh of the termwise comparison with Q of the same map. This gives the stated square, without inverting any counit.",
+   "text": "Transport composition_factorization along an equality of composite scheme maps by equality induction. Apply it to (Spec.map g.appTop, X.isoSpec.inv) and to (Xprime.isoSpec.inv,g), using isoSpec_inv_naturality for the second path. The elementary compare_counit_factorizations identity cancels the derived and underived composition isomorphisms, never a counit. Termwise mapping preserves the composite of the inverse first underived comparison and the second one. The elementary inverse-transport identity and the inverse-composite law identify the resulting derived comparison with affineSpectrumDerivedPullbackIso, proving the displayed square.",
    "uses": [
     "def-pc-affine-spectrum-derived-coordinates",
     "def-pc-single-complex-base-change-stalk-condition"
@@ -41,7 +41,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0D5S",
-  "place": "Expansion of the left-derived composition factorization, original node proof step 2"
+  "place": "Direct expansion of the pinned left-derived universal factorization and categorical cancellation; the original two proof steps, implemented by H2."
  },
  "mathlib_searches": [
   {
@@ -121,10 +121,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T155941-L-1305413",
-  "kind": "interface",
+  "landing": "20261013T165641-L-1808140",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
