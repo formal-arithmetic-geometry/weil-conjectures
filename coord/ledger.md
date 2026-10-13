@@ -13025,3 +13025,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:39 L: returned deliver/X2/Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem (reviewer RETURN: (reviewer X-31cba, head 31cba8f2e) E2: `restricted_affine_stage_compatibility` is false as stated. Its hypotheses allow )
 - 15:40 L: returned deliver/S2/Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting (reviewer RETURN: (reviewer X-f8275, head f82756e18) B3: Add definition citations inside the three new nodes' statement fields, as require)
 - 15:43 L: merged deliver/C4/Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart (stage 3; reviewer PASS; first push; landing 20261013T154356-L-1162748 (interface); batch 20261013T154354; modules 3; new nodes 2)
+- 15:43 L: merged deliver/D2/Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroApex (stage 3; reviewer PASS; first push; landing 20261013T154356-L-1162897 (interface); batch 20261013T154354; modules 2; new nodes 1)
