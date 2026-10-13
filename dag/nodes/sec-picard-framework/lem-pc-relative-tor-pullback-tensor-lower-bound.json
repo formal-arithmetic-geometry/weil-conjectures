@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-relative-tor-pullback-tensor-lower-bound",
+ "kind": "statement",
+ "title": "Relative Tor amplitude bounds pulled-back tensor",
+ "statement": "For any morphism f:X -> S and E in D(O_X) with finite Tor dimension over f-inverse O_S, there is an integer a such that E tensor^L Lf*(F[0]) has zero cohomology below a for every O_S-module F, without any quasi-coherence or geometric assumptions.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, proof, second displayed equality and assumption (3); Cohomology Lemma 20.27.4"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-finite-tor-dimension-over",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Choose the representative K, its K-flat restricted-scalars resolution P, and finite Tor interval [a,b] from HasFiniteTorDimensionOver. For any module F on S resolve F by a flat complex L zero above zero.",
+   "uses": [
+    "def-pc-finite-tor-dimension-over",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The termwise pullback of L is K-flat and represents Lf*(F[0]); inverse image is exact and preserves flatness stalkwise, so f-inverse L resolves f-inverse F over f-inverse O_S. Associativity of extension of scalars gives E tensor Lf*F = K restricted to f-inverse O_S tensor f-inverse F. Compute the latter with P and use its finite Tor interval; isGE_iff expresses its lower endpoint a.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, proof, second displayed equality and assumption (3); Cohomology Lemma 20.27.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctor'",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds or Tor lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Ii]sGE|[Ii]sGE.*rightDerivedFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds or Tor lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor dimension over inverse image structure sheaf uniformly bounds derived tensor with derived pullback of any module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|finiteTor|torDimension",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds or Tor lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor dimension relative to a morphism bounds E derived tensor derived pullback of any module uniformly below",
+   "results": "8 hits: CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.isZero_Tor_succ_of_projective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.Tor_obj, CategoryTheory.HasInjectiveDimensionLT.mk",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds or Tor lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isGE_iff",
+   "results": "1 hits: DerivedCategory.isGE_iff",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds or Tor lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperDirectImageTensorLowerBound",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV, proof, second displayed equality and assumption (3); Cohomology Lemma 20.27.4",
+   "via": [
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorPullbackTensorLowerBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorPullbackTensorLowerBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_relativeTor_pullback_tensor_lower_bound",
+  "statement": "theorem exists_relativeTor_pullback_tensor_lower_bound\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    (E : schemeDerivedCategory X) (hTor : HasFiniteTorDimensionOver f E) :\n    ∃ a : ℤ, ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace),\n      (E ⊗ (derivedPullback f).obj\n        ((DerivedCategory.singleFunctor _ 0).obj F)).IsGE a",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T082350-L-1637831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T082350-L-1637831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

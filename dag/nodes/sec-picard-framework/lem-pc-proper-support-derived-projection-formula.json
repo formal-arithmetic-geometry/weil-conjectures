@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-proper-support-derived-projection-formula",
+ "kind": "statement",
+ "title": "Derived projection isomorphism for proper-support complexes",
+ "statement": "Let S be Noetherian, f:X -> S locally of finite type, and E bounded with coherent cohomology and all cohomological supports proper over S. For every quasi-coherent O_S-module F there is an isomorphism Rf*E tensor^L F[0] ≅ Rf*(E tensor^L Lf*F[0]). No relative Tor condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, support reduction and first displayed equality; Tag 08EU"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Boundedness leaves finitely many cohomological supports. Their proper union T is quasi-compact, and a quasi-compact open U contains T. The restricted map U -> S is qcqs; restriction preserves the coherent cohomology and supported-open direct-image comparison identifies Rf*E with the direct image from U. Auxiliary localizations on U are transported by localization equivalences to the fixed localizations on X and S.",
+   "uses": [
+    "lem-pc-direct-image-qc-support-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coherence on the locally Noetherian source implies quasi-coherence. Apply the quasi-coherent projection formula Tag 08EU on U. The restricted tensor input is still supported on T since E restricts to zero away from T, and restriction commutes with tensor and pullback. The supported-open comparison for that tensor input and composition comparison transport the resulting isomorphism from U to X.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-projection-formula",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-direct-image-qc-support-reduction",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-projection-formula",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-supported-open-pushforward",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EV, support reduction and first displayed equality; Tag 08EU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor preserves cohomology vanishing below a fixed integer",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_iff, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.isLE_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctor'",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Ii]sGE|[Ii]sGE.*rightDerivedFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor dimension over inverse image structure sheaf uniformly bounds derived tensor with derived pullback of any module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for a bounded coherent complex with proper support and an arbitrary quasi coherent module",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.cm5b, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds only"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|finiteTor|torDimension",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic cohomological bounds only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperDirectImageTensorLowerBound",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV, support reduction and first displayed equality; Tag 08EU",
+   "via": [
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportDerivedProjectionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportDerivedProjectionFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_properSupport_derivedProjection_iso",
+  "statement": "theorem nonempty_properSupport_derivedProjection_iso\n    (S : Scheme.{u}) [IsNoetherian S]\n    (X : Scheme.{u}) (f : X ⟶ S) [LocallyOfFiniteType f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    (E : schemeDerivedCategory X)\n    (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i →\n      IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E))\n    (hcoherent : ∀ i : ℤ,\n      RingedSpace.IsCoherent X.toRingedSpace\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E))\n    (hsupport : ∀ i : ℤ,\n      Scheme.Modules.HasSupportProperOver f\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E))\n    (F : SheafOfModules.{u} (moduleRings S.toRingedSpace)) (hF : F.IsQuasicoherent) :\n    Nonempty (((schemeDerivedDirectImage f).obj E) ⊗\n        (DerivedCategory.singleFunctor _ 0).obj F ≅\n      (schemeDerivedDirectImage f).obj\n        (E ⊗ (derivedPullback f).obj ((DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T082350-L-1637831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T082350-L-1637831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
