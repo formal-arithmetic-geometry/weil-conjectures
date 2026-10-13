@@ -15,27 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Work on a Noetherian affine open V. Its module N(V) is finite. Positive depth at a boundary point gives a nonzerodivisor in the maximal ideal, so that ideal cannot be associated to the stalk. Associated and weakly associated points coincide on locally Noetherian schemes (05AR). Hence all weakly associated points lie in U.",
-   "uses": [],
+   "text": "At a boundary stalk, an associated maximal ideal would force depth zero. The proof is implemented by the private depth_zero_of_maximal_associated: association implies a nontrivial module; Nakayama rules out maximalIdeal times M = M; every nonempty regular sequence in the maximal ideal is contradicted by the union-of-associated-primes criterion for zerodivisors. Thus the supremum defining depth is zero, contradicting the positive-depth hypothesis.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
    "elementary": false
   },
   {
-   "text": "A section vanishing on V intersect U has cyclic image subsheaf supported outside U. Its weakly associated points are among those of N, and also in its support. There are none. A module with no weakly associated points is zero. This is the argument of 0B3M and proves injectivity on V.",
-   "uses": [],
+   "text": "On an affine open W, if s and t differ, the affine associated-stalk detection lemma supplies y in W with an associated maximal ideal and unequal germs. The preceding argument puts y in U. Equality of their images under the adjunction unit is equality after restriction to W intersect U, by restrictAdjunction_unit_app_app. Applying the germ at y and germ_res_apply contradicts the unequal germs.",
+   "uses": [
+    "lem-sbc-affine-section-associated-stalk"
+   ],
    "elementary": false
   },
   {
-   "text": "For arbitrary V cover V by affine opens. Two sections with the same restriction to V intersect U agree on each affine member by the preceding argument, so separatedness makes them equal. The unit component is restriction by Mathlib restrictAdjunction_unit_app_app.",
+   "text": "For arbitrary V and a point x in V, choose an affine open W containing x and contained in V, using the affine-open basis. Naturality of the unit carries equality of the unit images on V to equality of the unit images of the restricted sections on W. Affine injectivity gives equality on W; germ_res_apply gives equality of the germs at x. The sheaf section_ext theorem gives equality on V.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "lem-sbc-affine-section-associated-stalk"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "D3",
+  "by": "J4",
   "document": "Stacks Project",
-  "place": "Tags 0B3M, 05AR and 00LL; injectivity step of Tag 0E9I"
+  "place": "Tags 0B3M and 05AR, combined with the regular-sequence definition of depth and the associated-prime zerodivisor criterion (00LL)"
  },
  "mathlib_searches": [
   {
@@ -117,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T082336-L-1632718",
+  "landing": "20261013T100019-L-2466599",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
