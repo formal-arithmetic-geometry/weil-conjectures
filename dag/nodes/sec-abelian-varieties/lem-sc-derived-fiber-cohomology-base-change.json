@@ -15,34 +15,47 @@
  ],
  "proof": [
   {
-   "text": "The residue-field square commutes. Represent E by a K-flat resolution, using essential surjectivity of Q followed by exists_isKFlatResolution. Pullback preserves K-flatness, and the recorded derived-pullback counits compute both successive pullbacks termwise. Apply the ordinary tensor-pullback composition isomorphism on the two sides of the residue-field square. This identifies the fibre over y with termwise pullback of the fibre over x along Spec kappa(y) -> Spec kappa(g y), using only the derived-category instances in the statement. No global family of derived-category instances is used.",
+   "text": "Choose a complex representing E using essential surjectivity of DerivedCategory.Q, then resolve it by exists_isKFlatResolution. Inverting Q of the augmentation gives eP : Q(P) ≅ E. Obtain additivity of the concrete tensor pullback G from its adjunction. Pullback preserves K-flatness; the termwise G(P) is definitionally the tensorPullbackComplex in isKFlat_pullback.",
    "uses": [
     "lem-pc-kflat-resolution",
     "lem-pc-kflat-pullback-preservation",
-    "lem-pc-module-pullback-identity-composition",
-    "def-pc-derived-pullback"
+    "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Since k is a field, l is flat over k, and extension of scalars is exact. It commutes with kernels, images and their quotient, hence with cohomology in every degree even for an unbounded complex. The spectra of k and l have one point; global evaluation and scalar transport along GammaSpecIso identify the sheaf pullback with ModuleCat.extendScalars for the specified residue-field map. Combining this identification with the derived comparison gives the asserted ModuleCat isomorphism. This holds for zero and infinite-dimensional cohomology as well.",
+   "text": "Unpack the witness defining derivedPullback g. Functor.ext identifies its additive module functor F with G using the recorded object and morphism formulas. The K-flat counit and quotientCompQhIso identify Lg* Q(P) with Q(G(P)); compose its inverse with Lg*(eP) to represent Lg* E. Apply nonempty_kFlat_stalk_residueCohomology_linearEquiv to P at g(y) and G(P) at y.",
    "uses": [
-    "def-sc-derived-fiber-betti"
+    "def-pc-derived-pullback",
+    "lem-sc-kflat-stalk-residue-cohomology"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use exists_tensorPullback_stalk_iso at y. Write rx and ry for the stalk residue maps, t for g.stalkMap y, and l for g.residueFieldMap y. Mathlib residue_residueFieldMap gives ry.comp t = l.comp rx. Whisker the stalk comparison with extension along ry, and use extendScalarsComp twice with this equality to construct the natural isomorphism (G followed by stalk at y) followed by extension along ry ≅ (stalk at g(y) followed by extension along rx) followed by extension along l. Apply NatIso.mapHomologicalComplex to P and then the degree-i homology functor.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The source of l is a field, so RingHom.Flat.of_isField proves l flat. ModuleCat.preservesFiniteLimits_extendScalars_of_flat together with the scalar-extension left adjunction makes extension along l preserve homology. Apply (K.sc i).mapHomologyIso to the residue stalk complex K. Compose the y-fibre linear equivalence, the complex comparison on homology, this exact-functor comparison, and extension of the inverse x-fibre linear equivalence. This yields exactly the required ModuleCat isomorphism. No boundedness or dimension hypothesis is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-kflat-resolution",
   "lem-pc-kflat-pullback-preservation",
-  "lem-pc-module-pullback-identity-composition",
+  "def-pc-module-pullback",
   "def-pc-derived-pullback",
-  "def-sc-derived-fiber-betti"
+  "lem-sc-kflat-stalk-residue-cohomology",
+  "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project, Derived Categories of Schemes",
-  "place": "Tag 0BDI, first paragraph of proof; Tag 06YJ; https://stacks.math.columbia.edu/tag/0BDI"
+  "place": "D2 Lean proof of the scalar-extension argument of Tags 0BDI and 06YJ via K-flat stalk residue cohomology and the natural stalk tensor comparison (0098)."
  },
  "mathlib_searches": [
   {
@@ -143,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T082418-L-1649844",
-  "kind": "interface",
+  "landing": "20261013T095937-L-2453681",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
