@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-finite-presentation-stalk-localization-model",
+ "kind": "statement",
+ "title": "Essential finite presentation of affine morphism stalks",
+ "statement": "Let $g:X\\to Y$ be a locally finitely presented morphism of affine schemes, and $x\\in X$ [def-sbc-locally-finite-presentation; def-weil-affine-spectrum]. Put $R=\\mathcal O_{Y,g(x)}$ and $S=\\mathcal O_{X,x}$, with $R$ acting on $S$ by the stalk map [def-weil-pbc-module-stalk]. There exist a commutative ring $P$, compatible algebra structures $R\\to P\\to S$, and a multiplicative submonoid $W\\subseteq P$, such that $P$ is finitely presented over $R$ and $S$ is the localization of $P$ at $W$ [def-weil-pbc-finitely-presented-algebra; def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 00RH, displayed localized closed-fibre map and application of Tag 00R7"
+ },
+ "stmt_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Write A=Gamma(Y) and B=Gamma(X). The global section map phi:A to B is finitely presented. The affine stalks are A_p and B_q, with p the contraction of q; germ-stalk-map compatibility identifies the induced map with the given stalk map.",
+   "uses": [
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize B at M=phi(A minus p) and call the result P. Localization of a finitely presented ring map is finitely presented (Mathlib RingHom.finitePresentation_localizationPreserves, a localized base change), so P is finitely presented over A_p=R.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "M lies in B minus q. Localization transitivity, clause (2), makes S=B_q a localization of P at the image of B minus q. The scalar tower is checked on A by localization ring-hom extensionality and germ-stalk-map compatibility.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 00RH; explicit affine localization and closed-fibre verifications for its use of 00R7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A stalk of a locally finitely presented morphism is a localization of a finitely presented algebra over the base stalk",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a localization of a finitely presented algebra after localizing the base at a prime ideal is essentially of finite presentation",
+   "date": "2026-10-14",
+   "results": "8 hits: Algebra.FinitePresentation.of_isLocalizationAway, RingHom.finitePresentation_holdsForLocalizationAway, instFinitePresentationAway, RingHom.finitePresentation_localizationPreserves, RingHom.finitePresentation_ofLocalizationSpanTarget, IsLocalization.Away.finitePresentation, Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway, Algebra.FinitePresentation.of_span_eq_top_target",
+   "verdict": "Ingredients only; no direct match for the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.*stalk|isLocalization_stalk|stalk.*quotient",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "verdict": "Ingredients only; no direct match for the statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonReverseAux",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Polynomial chart local-algebra comparison in the slicing argument: essentially finitely presented stalks and identification of the closed-fibre map before applying the fibrewise flatness criterion.",
+   "via": [
+    "lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux-ring-bridge",
+    "lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux",
+    "lem-sbc-polynomial-chart-stalk-flat-comparison-reverse",
+    "lem-sbc-polynomial-chart-stalk-flat-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationStalkLocalizationModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationStalkLocalizationModel.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_stalk_localization_model",
+  "statement": "theorem exists_finitePresentation_stalk_localization_model\n    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (g : X ⟶ Y)\n    [LocallyOfFinitePresentation g] (x : X) :\n    let R := Y.presheaf.stalk (g x)\n    let S := X.presheaf.stalk x\n    letI : Algebra R S := (g.stalkMap x).hom.toAlgebra\n    ∃ (P : CommRingCat.{u}) (_ : Algebra R P) (_ : Algebra P S),\n      IsScalarTower R P S ∧ Algebra.FinitePresentation R P ∧\n        ∃ W : Submonoid P, IsLocalization W S",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T211118-L-396658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T211118-L-396658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
