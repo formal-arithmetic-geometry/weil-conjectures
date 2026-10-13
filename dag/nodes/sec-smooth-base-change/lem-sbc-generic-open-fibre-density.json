@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-generic-open-fibre-density",
+ "kind": "statement",
+ "title": "Spread density of an open in ordinary fibres",
+ "statement": "Let $f:X\\to T$ be a finite type morphism of schemes [def-weil-finite-type-morphism], $W\\subset X$ an open subset, and $\\eta$ a point with closure all of $T$. For the scheme fibres [def-pc-scheme-fibre] and their canonical maps $i_t:X_t\\to X$, suppose $i_\\eta^{-1}(W)$ is dense in $X_\\eta$. Then there is an open $U\\subset T$ containing $\\eta$ such that $i_t^{-1}(W)$ is dense in $X_t$ for every $t\\in U$. Density means that the topological closure is the entire fibre; empty fibres are allowed. No geometric irreducibility is assumed, and the conclusion concerns ordinary residue-field fibres only.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054X, Lemma 37.24.3, applied to the closed complement of an open subset; Tags 03HV and 054U in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Give the closed complement Z = X \\ W its reduced induced scheme structure. The generic density hypothesis says Z_eta is nowhere dense in X_eta. Reduce T and base change X and Z; the reduction map and its base changes are universal homeomorphisms, so all fibrewise topological density assertions are unchanged. The reduced irreducible base is integral. Apply generic flat finite presentation to X and Z and intersect the two resulting nonempty base opens. Each contains the generic point.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Follow Tag 054X on this common open. If Z_t has nonempty interior in X_t, take the generic point xi of a fibre component contained in that interior. Flatness of Z lifts the generalization eta of t to xi_prime in Z_eta (Tag 03HV). Apply Tag 054U to X and Z along xi_prime specializing to xi: xi is a generic point of a component in both fibres, and their fibre dimensions at xi agree. Their generic fibre dimensions at xi_prime therefore agree. A component of Z_eta through xi_prime has the dimension of X_eta there, contradicting nowhere density of Z_eta in the finite type scheme over the field kappa(eta). Hence Z_t has empty interior in each fibre.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The fibrewise complement of Z_t is i_t inverse image W and is open dense. Transport the common base open back through the reduction homeomorphism. This gives the required open containing eta. If a fibre is empty, its empty subset is dense and the conclusion holds as well.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-generic-flat-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054X, proof read online; its closed-complement reformulation. Tags 03HV and 054U checked online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes an open subscheme dense in the generic fibre is dense in every fibre after shrinking the base",
+   "digest": "31166d68614ddc6f",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*dense|dense.*fiber|nowhere.*dense",
+   "digest": "7f5e51865f52c375",
+   "date": "2026-10-13",
+   "results": "15 hits: Mathlib/Topology/Irreducible.lean, Mathlib/Topology/Irreducible.lean, Mathlib/Topology/EMetricSpace/Lipschitz.lean, Mathlib/Topology/Baire/Lemmas.lean, Mathlib/Topology/GDelta/Basic.lean, Mathlib/Topology/GDelta/Basic.lean, Mathlib/Topology/GDelta/Basic.lean, Mathlib/Topology/GDelta/Basic.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type morphism of schemes an open subscheme dense in the generic fibre is dense in every fibre after shrinking the base",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericOpenGeometricFibreDensity",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "The generic geometric fibre shrinking route, Tag 054X ordinary-fibre density step before passage to arbitrary field extensions.",
+   "via": [
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericOpenFibreDensity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericOpenFibreDensity.lean",
+  "declaration": "AlgebraicGeometry.exists_open_fibre_dense_of_generic_dense",
+  "statement": "theorem exists_open_fibre_dense_of_generic_dense {X T : Scheme.{u}}\n    (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]\n    (W : X.Opens) (η : T) (hη : IsGenericPoint η Set.univ)\n    (hdense : Dense ((f.fiberι η) ⁻¹' (W : Set X))) :\n    ∃ U : T.Opens, η ∈ U ∧\n      ∀ (t : T), t ∈ U → Dense ((f.fiberι t) ⁻¹' (W : Set X))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T082344-L-1635292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T082344-L-1635292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

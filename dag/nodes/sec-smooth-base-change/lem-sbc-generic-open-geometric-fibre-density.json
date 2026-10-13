@@ -14,31 +14,30 @@
  ],
  "proof": [
   {
-   "text": "The open W_η is nonempty in the irreducible X_η, so is dense. Its closed complement Z_η is nowhere dense. Reduce the base to an integral scheme without changing fibre spaces. Generic flat finite presentation, applied to X and the reduced complement Z, gives a common generic neighbourhood where both morphisms are flat and locally finitely presented.",
+   "text": "Geometric irreducibility over the residue field gives irreducibility of X_eta and nonemptiness of W_eta. Its canonical map to X_eta is an open immersion, hence has dense range by Mathlib IsOpenMap.denseRange_of_isPreirreducibleSpace. Scheme.Pullback.range_map identifies that range with the inverse image of W under the fibre inclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_open_fibre_dense_of_generic_dense to obtain an open U containing eta on which the inverse image of W is dense in each ordinary fibre.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation"
+    "lem-sbc-generic-open-fibre-density"
    ],
    "elementary": false
   },
   {
-   "text": "If Z_t has interior in X_t, choose a generic point ξ of an irreducible component of X_t in Z_t. Flatness of Z gives a generalization ξ′ in Z_η. Stacks Lemma 37.22.10 equates the fibre dimensions of Z and X at these points, contradicting the nowhere dense generic complement. This is the proof of Tag 054X and yields a neighbourhood where W_t is dense in X_t.",
+   "text": "For every field extension z, the projection from the geometric fibre to the ordinary fibre is open: Mathlib supplies UniversallyOpen for a morphism with integral subsingleton target, and this property is stable under base change. Dense.preimage preserves density along this projection. Scheme.Pullback.range_map identifies this dense inverse image with the range of the double pullback map in the statement, since the other comparison map is the identity. This proves the full geometric-fibre conclusion. Surjectivity of the projection is unnecessary.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "A residue-field extension is faithfully flat and universally open (Tag 0383), hence its base-change projection is an open surjection. The inverse image of W_t is dense. The canonical double pullback map in the statement is its open inclusion, so has dense range.",
-   "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-flat-finite-presentation"
+  "lem-sbc-generic-open-fibre-density"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 054X (Lemma 37.24.3), its use in Tag 0559, second proof; Tag 0383.",
-  "note": "Source read online; explicit agent-written specialization and geometric-base-change glue."
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 054X ordinary-density step isolated; generic density and arbitrary field-extension glue proved using Mathlib Topology.Irreducible, Dense.preimage, Scheme.Pullback.range_map and UniversallyOpen."
  },
  "mathlib_searches": [
   {
@@ -124,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T065112-L-899769",
+  "landing": "20261013T082344-L-1635292",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
