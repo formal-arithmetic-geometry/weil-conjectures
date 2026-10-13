@@ -9,9 +9,9 @@
  },
  "proof_origin": {
   "kind": "from-document",
-  "by": "J1",
+  "by": "N4",
   "document": "Stacks Project",
-  "place": "Tag 05D5"
+  "place": "Tag 05D5, basis lifts and the map Ψ₂; implemented via Mathlib conormal retraction and polynomial coefficient APIs"
  },
  "created": {
   "by": "worker",
@@ -58,7 +58,17 @@
  "statement": "Let $B$ be a commutative local ring and $C$ a smooth $B$-algebra [def-weil-pbc-smooth-ring-map] with a $B$-algebra augmentation $\\varepsilon:C\\to B$. Put $I=\\ker\\varepsilon$. There exist $n\\in\\mathbb N$ and a $B$-algebra map $f:B[X_1,\\ldots,X_n]\\to C$ such that, for the ideal $J=(X_1,\\ldots,X_n)$, $f(J)\\subseteq I$ and the induced map $B[X_1,\\ldots,X_n]/J^2\\to C/I^2$ is bijective. Rank zero is permitted. No Noetherian hypothesis is imposed.",
  "proof": [
   {
-   "text": "Write I = ker ε. The split conormal sequence for B → C → B identifies I/I²\nwith Ω[C/B] tensored along ε with B. Smoothness makes this module finite projective.\nSince B is local, it is free of finite rank n. Lift a basis to elements fᵢ of I and\nlet f be polynomial evaluation at these elements. Thus f sends the variables ideal\nJ into I. The augmentation splits C/I² as B ⊕ I/I², with square-zero second summand.\nLikewise B[X]/J² is B ⊕ Bⁿ, with square-zero second summand. Evaluation is the identity\non B and the chosen basis map on the second summands, hence bijective. If n = 0,\nboth second summands vanish and evaluation on these quotients is the identity of B.\nNo finite generation of I itself or Noetherian hypothesis is used.",
+   "text": "The augmentation induces a B-algebra section B → C/I². Mathlib Algebra.retractionKerCotangentToTensorEquivSection converts this section to a C-linear retraction of the conormal map I/I² → B tensor[C] Ω[C/B]. Restrict scalars to B. Smoothness gives finite projective differentials, and base change gives a finite projective tensor module. Its retract I/I² is finite projective by Module.Finite.of_surjective and Module.Projective.of_split, hence finite free by Module.free_of_flat_of_isLocalRing.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite basis indexed by Fin n of I/I², lift its elements to I using the proved surjectivity of Ideal.toCotangent, and evaluate polynomials at the lifts. Evaluation sends the variable ideal J into I and therefore J² into I². Every polynomial is congruent modulo J² to its constant term plus the sum of its degree-one monomials, by MvPolynomial.mem_pow_idealOfVars_iff' and the classification of monomials of degree zero and one.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, if evaluation of a polynomial lies in I², the augmentation kills the evaluated linear part and detects its constant coefficient, so that coefficient is zero. Applying Ideal.toCotangent to the evaluated linear part and using basis independence forces all linear coefficients to vanish. The polynomial remainder lemma then puts the polynomial in J². For surjectivity, subtract the augmentation constant from a representative a in C to obtain an element of I, expand its cotangent class in the basis, and use the lifted linear combination. The discrepancy belongs to I² by Ideal.toCotangent_eq. Empty bases and sums cover n = 0. All chosen witnesses occur within a proved theorem; no definition chooses data from an unproved existence statement.",
    "uses": [],
    "elementary": false
   }
@@ -116,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T122727-L-3632371",
-  "kind": "interface",
+  "landing": "20261013T125014-L-3838315",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

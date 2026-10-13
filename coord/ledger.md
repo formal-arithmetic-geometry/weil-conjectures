@@ -12519,3 +12519,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechGenerators (stage 3; reviewer PASS; first push; landing 20261013T125012-L-3837863 (interface); batch 20261013T125004; modules 3; new nodes 2)
 - 12:50 L: merged deliver/N1/Sheaf.AlgebraicGeometry.SingleComplexNestedCoefficientCoherence (stage 3; reviewer PASS; first push; landing 20261013T125013-L-3838022 (interface); batch 20261013T125004; modules 3; new nodes 2)
 - 12:50 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity (stage 3; reviewer PASS; first push; landing 20261013T125013-L-3838151 (interface); batch 20261013T125004; modules 3; new nodes 2)
+- 12:50 L: merged deliver/N4/Sheaf.RingTheory.Smooth.AugmentationFirstOrderCoordinates (stage 3; reviewer PASS; first push; landing 20261013T125014-L-3838315 (proof); batch 20261013T125004; modules 1; new nodes 0)
