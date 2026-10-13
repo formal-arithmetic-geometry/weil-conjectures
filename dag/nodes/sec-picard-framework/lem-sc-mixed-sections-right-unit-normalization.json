@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-mixed-sections-right-unit-normalization",
+ "kind": "statement",
+ "title": "Right path normalization of the mixed Leray unit diagram",
+ "statement": "For schemes X,Y,Z and maps f:X→Y, g:Y→Z, let I be any cochain complex of O_X-modules, K its homotopy image and F=Qh(K). Let e be the normalized direct-image composition isomorphism, c_h the normalized mixed Leray comparisons, and s the derived scalar-composition isomorphism. Let p=unit_ΓZ(Dfg K);RΓZ(unit_Dfg(K));RΓZ(e.inv(F)). Let b=factor_g(ΓY Df K);Sg(factor_f(ΓX K));SgSf(unit_ΓX(K)). Then p;RΓZ(e.hom(F));c_fg(F);s(RΓX F)=b. No K-injectivity, boundedness or nonemptiness is assumed; sheaf and module localization universes are independent.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-global-derived-rhom",
+  "lem-sc-derived-direct-image-square-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5T and 0D5W; right-path portion of the pinned-unit calculation in lem-sc-mixed-sections-composition-kinjective, elaborated by Q3 from the library unit equations. Primary source URLs https://stacks.math.columbia.edu/tag/0D5T and https://stacks.math.columbia.edu/tag/0D5W read 2026-10-13."
+ },
+ "proof": [
+  {
+   "text": "Functoriality and the inverse law for e cancel its inverse followed by its hom in the precomposed right path.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the mixed Leray unit equation for fg at K, obtaining factor_fg followed by Sfg(unit_ΓX). Underived comparisons are identity on sections and their homotopy factors cancel.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the scalar-composition isomorphism at unit_ΓX. The equations Functor.mapDerivedCategoryCompIso_fach and Functor.mapDerivedCategoryNatIso_fach identify factor_fg followed by scalar composition with factor_g followed by Sg(factor_f): restrictScalarsComp' is identity on underlying elements. Paste with the two scalar maps of unit_ΓX to obtain b. No derived unit is canceled.",
+   "uses": [
+    "def-pc-global-hom-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "note": "Strict component of the parent argument: normalize only the right path before any invertibility or cancellation. The other path is not mentioned and I need not be K-injective. Identity morphisms, zero complexes and empty schemes satisfy the same unit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leray.*unit|mixed.*unit|scalar.*factor",
+   "date": "2026-10-13",
+   "results": "['Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/Geometry/Euclidean/Volume/Measure.lean', 'Mathlib/NumberTheory/RamificationInertia/Basic.lean', 'Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean', 'Mathlib/FieldTheory/SplittingField/Construction.lean']",
+   "verdict": "No exact mixed unit-normalization result; generic derived-functor or unrelated scalar results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting normalized Leray units for direct image and global sections with scalar restriction",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "date": "2026-10-13",
+   "results": "['CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint', 'CategoryTheory.Functor.rightDerivedNatTrans_comp', 'CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc', 'CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison', 'CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app', 'CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc']",
+   "verdict": "No exact mixed unit-normalization result; generic derived-functor or unrelated scalar results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mixed-sections-composition-coherence",
+   "via": [
+    "lem-sc-mixed-sections-composition-kinjective"
+   ],
+   "place": "Right path of the pinned-unit computation before cancellation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedSectionsRightUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsRightUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.mixedSections_right_unit_normalization",
+  "statement": "theorem mixedSections_right_unit_normalization\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I\n    let F := DerivedCategory.Qh.obj K\n    let Df := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let Dfg := RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom\n    let HX := RingedSpace.globalSectionsFunctor X.toRingedSpace\n    let HY := RingedSpace.globalSectionsFunctor Y.toRingedSpace\n    let HZ := RingedSpace.globalSectionsFunctor Z.toRingedSpace\n    let Sf := ModuleCat.restrictScalars.{u}\n      (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))\n      (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom\n    let Sg := ModuleCat.restrictScalars.{u}\n      (R := (moduleRings Z.toRingedSpace).obj.obj (op ⊤))\n      (S := (moduleRings Y.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom\n    let e := schemeNormalizedDirectImageCompIso f g\n    let p := HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K) ≫\n      (schemeDerivedGlobalSections Z).map (Dfg.rightDerivedFunctorUnit.app K) ≫\n      (schemeDerivedGlobalSections Z).map (e.inv.app F)\n    let b := Sg.mapDerivedCategoryFactorsh.inv.app\n        ((HY.mapHomotopyCategory (.up ℤ)).obj ((Df.mapHomotopyCategory (.up ℤ)).obj K)) ≫\n      (schemeGlobalScalarRestriction g).map\n        (Sf.mapDerivedCategoryFactorsh.inv.app ((HX.mapHomotopyCategory (.up ℤ)).obj K)) ≫\n      (schemeGlobalScalarRestriction g).map\n        ((schemeGlobalScalarRestriction f).map (HX.rightDerivedFunctorUnit.app K))\n    p ≫ (schemeDerivedGlobalSections Z).map (e.hom.app F) ≫\n      (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫\n      (schemeGlobalScalarRestrictionCompIso f g).hom.app\n        ((schemeDerivedGlobalSections X).obj F) = b",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T165648-L-1810468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T165648-L-1810468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

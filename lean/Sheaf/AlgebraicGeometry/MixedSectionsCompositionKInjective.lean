@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate
 import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.MixedSectionsLeftUnitNormalization
+import Sheaf.AlgebraicGeometry.MixedSectionsRightUnitNormalization
 
 /-! # Mixed Leray composition on K-injective complexes
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
@@ -67,6 +69,19 @@ theorem mixedSections_composition_coherence_on_kInjective
         (mixedGlobalSectionsDirectImageIso (f ≫ g)).hom.app F ≫
         (schemeGlobalScalarRestrictionCompIso f g).hom.app
           ((schemeDerivedGlobalSections X).obj F) := by
-  sorry
+  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj I
+  let Dfg := RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom
+  let HZ := RingedSpace.globalSectionsFunctor Z.toRingedSpace
+  let e := schemeNormalizedDirectImageCompIso f g
+  let a := HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K)
+  let t := Dfg.rightDerivedFunctorUnit.app K
+  have : IsIso a := isIso_directImage_globalSections_unit_on_kInjective (f ≫ g) I
+  have : IsIso t := inferInstance
+  let p := a ≫ (schemeDerivedGlobalSections Z).map t ≫
+    (schemeDerivedGlobalSections Z).map (e.inv.app (DerivedCategory.Qh.obj K))
+  have : IsIso p := by dsimp [p]; infer_instance
+  apply (cancel_epi p).1
+  exact (mixedSections_left_unit_normalization f g I).trans
+    (mixedSections_right_unit_normalization f g I).symm
 
 end AlgebraicGeometry
