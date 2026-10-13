@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-affine-perfect-homotopy-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine calculation, rewriting derived Hom as homotopy classes and descending the finite component data",
+   "via": [
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent of homotopies between affine perfect chain maps",
+ "statement": "Let I be a directed preorder, F : I → CRing a functor, i₀ ∈ I, and A the colimit of F [def-weil-pbc-category-colimit]. Let E₀ and K₀ be cochain complexes of F(i₀)-modules [def-pc-cochain-complex-modules], each zero outside a finite interval and with each term finitely generated and projective. For i ≥ i₀ write Eᵢ and Kᵢ for their termwise scalar extensions along F(i₀ → i), and E and K for their termwise extensions along the colimit inclusion F(i₀) → A. For base-change maps between these complexes, use the canonical associativity transport [def-pc-complex-scalar-extension-hom]. Given i ≥ i₀ and chain maps f,g : Eᵢ → Kᵢ whose scalar extensions to A are homotopic, there exists j ≥ i and a homotopy between the scalar extensions of f and g to Eⱼ → Kⱼ.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules",
+  "def-pc-complex-scalar-extension-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose a homotopy over A. Its degree-minus-one components have source Eⁿ and target Kⁿ⁻¹ and only finitely many components can be nonzero. Finite projectivity implies finite presentation by Mathlib Module.finitePresentation_of_projective. Descend these components by [lem-pc-fp-module-map-descent-affine] and take a common upper stage above i. In a preorder the same finite-presentation proof applies, using the elementwise colimit criterion [lem-pc-filtered-colimit-commrings-elementwise]; no use of antisymmetry is made. To use the stated partial-order theorem literally, quotient I by mutual comparability and select representatives. The resulting partial-order category is equivalent to I; F sends mutually comparable indices to inverse isomorphisms, so transport F and its colimit across this equivalence, apply the partial-order theorem, and transport the finite-data result back. Directedness supplies an upper bound with the original requested index.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the stage where the components are defined, the homotopy equations fⁿ - gⁿ = d_K sⁿ + sⁿ⁺¹ d_E hold over A. Apply equality detection to each of the finitely many nontrivial equations, and take a common later upper bound j. Put zero components outside the support and away from the required degree-minus-one shape. The homotopy identities then hold in every degree. Canonical associativity transport identifies the two endpoint maps with scalarExtensionHom, giving the required Nonempty Homotopy at j.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between scalar extensions of bounded complexes of finite projective modules to a filtered ring colimit descends to some stage",
+   "date": "2026-10-13",
+   "results": "localCohomology.diagram, CategoryTheory.ProjectiveResolution.π', localCohomology.ofDiagram, Rep.standardComplex.x_projective, CategoryTheory.ProjectiveResolution.extMk_surjective, HomologicalComplex.extend.leftHomologyData_π, IsAdicComplete.StrictMono.factorPow_comp_extend, ComplexShape.Embedding.homRestrict_comp_extendMap",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom, Homotopy",
+   "date": "2026-10-13",
+   "results": "service unavailable: ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*descent|chainMap.*descent",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chain maps and homotopies of bounded finite projective complexes descend along a filtered colimit of rings",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectHomColimit",
+  "by": "worker",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffinePerfectHomotopyDescent",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectHomotopyDescent.lean",
+  "declaration": "CochainComplex.affine_perfect_homotopy_descent",
+  "statement": "theorem affine_perfect_homotopy_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (i₀ : I) (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) (hE : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n)) ∧ ∀ n : ℤ, Module.Finite (F.obj i₀) (E₀.X n) ∧ Module.Projective (F.obj i₀) (E₀.X n)) (hK : (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K₀.X n)) ∧ ∀ n : ℤ, Module.Finite (F.obj i₀) (K₀.X n) ∧ Module.Projective (F.obj i₀) (K₀.X n)) (i : Set.Ici i₀) (f g : ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex (.up ℤ)).obj E₀ ⟶ ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex (.up ℤ)).obj K₀) (h : Nonempty (Homotopy (scalarExtensionHom (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom (colimit.ι F i₀).hom (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm) E₀ K₀ f) (scalarExtensionHom (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom (colimit.ι F i₀).hom (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm) E₀ K₀ g))) : ∃ (j : Set.Ici i₀) (hij : i ≤ j), Nonempty (Homotopy (scalarExtensionHom (F.map (homOfLE i.property)).hom (F.map (homOfLE hij)).hom (F.map (homOfLE j.property)).hom (congrArg CommRingCat.Hom.hom (F.map_comp (homOfLE i.property) (homOfLE hij))) E₀ K₀ f) (scalarExtensionHom (F.map (homOfLE i.property)).hom (F.map (homOfLE hij)).hom (F.map (homOfLE j.property)).hom (congrArg CommRingCat.Hom.hom (F.map_comp (homOfLE i.property) (homOfLE hij))) E₀ K₀ g))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031537-L-3570228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031537-L-3570228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

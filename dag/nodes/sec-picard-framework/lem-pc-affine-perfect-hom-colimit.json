@@ -23,51 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Replace the derived Hom groups by the zeroth cohomology of the ordinary Hom complexes Hom_{A_i}^\\bullet(E_i,K_i) and Hom_A^\\bullet(E,K). Each E_i is bounded above with projective terms, and each K_i is bounded below, so the one-point affine specialization [lem-sc-affine-projective-complex-derived-hom] identifies these ordinary Hom complexes with the derived Hom objects R Hom_{A_i}(E_i,K_i) and R Hom_A(E,K). On the one-point ringed site with structure ring R the global sections functor is the identity of R-modules, so H^0 of the point of an object of D(R) is the zeroth cohomology of any representing complex, and [lem-pur-rhom-global-sections] gives H^0(R Hom_R(L,M)) = Hom_{D(R)}(L,M); hence Hom_{D(A_i)}(E_i,K_i)=H^0(Hom_{A_i}^\\bullet(E_i,K_i)) and Hom_{D(A)}(E,K)=H^0(Hom_A^\\bullet(E,K)), compatibly with scalar extension. The bounded finite-projective complexes K_i are K-flat by [lem-pc-module-bounded-flat-kflat], so the displayed tensor complexes represent their derived scalar extensions.",
+   "text": "Scalar extension preserves projectivity by the extension/restriction adjunction and preserves zero terms. Thus every extended E₀ is bounded above and projective. Apply [lem-pc-ring-derived-map-representative], Mathlib IsKProjective.Qh_map_bijective, to represent derived maps by chain maps and detect equality by homotopies. The private helpers prove these facts directly using the quotient comparison natural isomorphism.",
    "uses": [
-    "lem-sc-affine-projective-complex-derived-hom",
-    "lem-pur-rhom-global-sections",
-    "lem-pc-module-bounded-flat-kflat"
+    "lem-pc-ring-derived-map-representative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine case"
-   }
+   "elementary": true
   },
   {
-   "text": "In each degree n, the Hom complex is a finite product over the finitely many degrees p in which E_0^p is nonzero, of Hom_{A_i}(E_0^p\\otimes_{A_0}A_i,K_0^{p+n}\\otimes_{A_0}A_i). Each E_0^p and K_0^{p+n} is finite projective and hence finitely presented. The index set I carries the order i \\le j used for the stages, and a filtered preordered set is a directed set, so (A_i) is a directed system of commutative rings as required by [lem-pc-fp-module-map-descent-affine]. That statement therefore says that every A-linear component map E^p\\to K^{p+n} is the scalar extension of a map at one sufficiently late stage, and that two stage maps become equal at a later stage exactly when their scalar extensions to A agree. Since the differentials of the stage Hom complexes are the scalar extensions of those over A_0, the canonical map from the filtered colimit of the stage Hom complexes to Hom_A^\\bullet(E,K) is an isomorphism degreewise and commutes with differentials.",
+   "text": "Descend a chain map through finite-presentation component data and descend a homotopy relation at a later stage. These are the two finite-data affine statements in the accompanying modules.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-homotopy-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For a filtered colimit of modules, a cycle in the colimit Hom complex is represented by a cycle at some stage: its differential is zero in the colimit, so the finite-presentation equality from Step 2 makes that differential zero after passing to a later stage. Likewise, two stage cycles have equal classes in the colimit exactly when their difference is the differential of a stage element after a later enlargement, again by the equality clause in Step 2. Thus the canonical degreewise isomorphism of Step 2 induces an isomorphism on zeroth cohomology, which is the asserted canonical map colim_i Hom_{D(A_i)}(E_i,K_i) ≅ Hom_{D(A)}(E,K).",
+   "text": "Use the transition and canonical equations to identify the resulting map with the given colimit comparison, proving surjectivity and injectivity.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-homotopy-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine calculation and conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-projective-complex-derived-hom",
-  "lem-pur-rhom-global-sections",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-affine-perfect-chain-map-descent",
+  "lem-pc-affine-perfect-homotopy-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE"
+  "place": "Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE, affine proof"
  },
  "mathlib_searches": [
   {
@@ -169,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031537-L-3570228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
