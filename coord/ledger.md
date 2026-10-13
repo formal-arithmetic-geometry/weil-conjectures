@@ -13861,3 +13861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/T2/Sheaf.RingTheory.KoszulIdealAlternatingProducts (stage 3; reviewer PASS; first push; landing 20261013T231546-L-1821439 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/U1/Sheaf.Algebra.Homology.TensorBicomplex (stage 3; reviewer PASS; first push; landing 20261013T231547-L-1821537 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (stage 3; reviewer PASS; first push; landing 20261013T231547-L-1821728 (proof); batch 20261013T231527; modules 1; new nodes 0)
+- 23:15 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261013T231548-L-1821837 (proof); batch 20261013T231527; modules 1; new nodes 0)
