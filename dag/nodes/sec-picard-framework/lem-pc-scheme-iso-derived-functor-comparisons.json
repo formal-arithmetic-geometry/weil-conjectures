@@ -16,44 +16,52 @@
  ],
  "proof": [
   {
-   "text": "For each scheme isomorphism the recorded equivalence is induced by exact underived module pushforward and its inverse. The supplied localization factorization identifies any a or b in the statement with this localized equivalence by uniqueness of localization.",
+   "text": "Construct the explicit module equivalence for a scheme isomorphism s from pushforward along s.hom and s.inv, using pushforwardComp, pushforwardCongr and pushforwardId for its unit and counit. Its forward functor F is exact. The exact-functor localization factorization identifies the supplied a.functor with F.mapDerivedCategory by Localization.liftNatIso. The inverse localization comparison for F is a right-derived unit, so right-derived uniqueness (the proved source interface F.rightDerivedFunctorIsoMapDerivedCategory) identifies this with schemeDerivedDirectImage s.hom. Apply the proved private iso_directImage helper to eX and eY.",
    "uses": [
-    "lem-pc-scheme-iso-derived-equivalence"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pc-derived-direct-image"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Underived isomorphism pushforward preserves tensor: on stalks restriction of scalars along an isomorphism of structure rings is an invertible tensor comparison. Its exact inverse tests acyclicity, and tensor comparisons identify tensoring an acyclic complex before and after pushforward, proving preservation of K-flatness. Compute the two derived tensors on K-flat resolutions and descend the underived comparisons and their inverses to obtain tau_a and tau_b, natural in both variables.",
+   "text": "For each s and supplied equivalence a, take the existing strong-monoidal pullback-across-universes functor L and its adjunction to schemeDerivedDirectImage s.hom. Transport its right side through iso_directImage to obtain L adjoint to a.functor. Since a.functor is an equivalence, this adjunction upgrades to an equivalence whose forward functor is L and inverse is a.functor. Equivalence.inverseMonoidal makes that inverse strong monoidal. Its inverse tensorator Functor.Monoidal.muNatIso.symm gives the tensor comparison. Apply this construction to eY,a,ha and eX,b,hb.",
    "uses": [
+    "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "The commuting square of scheme maps identifies (eY)_*;f* with g*;(eX)_* on modules. On a K-flat resolution both composites in the third assertion compute that same composite, because exact isomorphism pushforward preserves K-flatness. The left-derived universal property extends this comparison to alpha, including the inverse and naturality.",
+   "text": "Use derivedDirectImageComposition for g,eY.hom and eX.hom,f. Whisker the eY identification on the left by Rg, follow by the inverse g;eY composition comparison, transport along hcomm by eqToIso, then follow by the eX;f comparison and whisker the inverse eX identification on the right by Rf. This constructs beta: Rg followed by a.functor is isomorphic to b.functor followed by Rf.",
    "uses": [
-    "def-pc-derived-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact inverse equivalences preserve K-injectivity: the Hom complex from an acyclic complex is identified with the Hom complex from its exact inverse image. Compute direct images on K-injective resolutions. Direct-image composition and the commuting scheme square identify g_*;(eY)_* with (eX)_*;f_* before localization. The right-derived universal property and the supplied factorizations yield beta. Localization uniqueness allows the two independently chosen morphism universes, and the argument also applies to empty schemes and zero complexes.",
-   "uses": [
+    "lem-pc-derived-direct-image-composition",
     "def-pc-derived-direct-image"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Take the existing adjunctions Lf adjoint to Rf and Lg adjoint to Rg. Compose the latter after a.inverse adjoint to a.functor, and the former before b.inverse adjoint to b.functor. Mathlib conjugateIsoEquiv applied inversely to beta yields delta: Lf followed by b.inverse is isomorphic to a.inverse followed by Lg. Prewhisker delta by a.functor and postwhisker by b.functor, cancelling a.functor;a.inverse with a.unitIso.symm and b.inverse;b.functor with b.counitIso. The explicit associator/unitor chain in pullback_comparison yields a.functor;Lf isomorphic to Lg;b.functor. Pair the two tensor comparisons, this pullback comparison and beta. All constructions use only supplied localizations and work for independent morphism universes and empty schemes.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-scheme-iso-derived-equivalence",
-  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-derived-direct-image"
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/08EU",
-  "place": "J2 expansion of the scheme-isomorphism comparison part of the affine-local reduction, using the K-flat construction in Tag 06YI and the K-injective construction in Tag 079V."
+  "group": "H1",
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 08EU scheme-isomorphism transport, implemented using the existing derived adjunction of Tag 079W, the monoidal pullback comparison of Tag 079U, and direct-image composition of Tag 0D5T. Tensor preservation follows by inverting a monoidal equivalence; pullback-square transport follows by conjugating the direct-image-square comparison."
  },
  "mathlib_searches": [
   {
@@ -134,10 +142,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T145726-L-751363",
-  "kind": "interface",
+  "landing": "20261013T151700-L-924030",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
