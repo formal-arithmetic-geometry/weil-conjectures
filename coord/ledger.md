@@ -13413,3 +13413,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:02 L: merged deliver/U4/Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel (stage 3; reviewer PASS; first push; landing 20261013T190200-L-3223476 (interface); batch 20261013T190131; modules 3; new nodes 2)
 - 19:02 L: merged deliver/U4/Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport (stage 3; reviewer PASS; first push; landing 20261013T190200-L-3223592 (interface); batch 20261013T190131; modules 2; new nodes 2)
 - 19:02 L: merged deliver/V3/Sheaf.Algebra.Homology.HomologyEvaluationUniqueness (stage 3; reviewer PASS; first push; landing 20261013T190201-L-3223740 (interface); batch 20261013T190131; modules 3; new nodes 2)
+- 19:02 L: merged deliver/V3/Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit (stage 3; reviewer PASS; first push; landing 20261013T190201-L-3223984 (interface); batch 20261013T190131; modules 2; new nodes 1)

@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-derived-mayer-vietoris-open-composition-counit",
+ "kind": "statement",
+ "title": "Counit computation of the open composition comparison on a K-injective complex",
+ "statement": "Let $h:X\\to Y$ be a scheme morphism [def-pc-scheme], $U\\subseteq Y$ an arbitrary open, and suppose the derived module categories [def-pc-derived-category] on X, Y and every open of each exist in one morphism universe. Put $V=h^{-1}(U)$, $j_X:V\\to X$, $j_Y:U\\to Y$, and $g:V\\to U$. Let $L_X,L_Y$ be exact derived restrictions [def-pc-derived-open-restriction-maps], with their fixed derived adjunctions $a_X,a_Y$ [def-pc-derived-mayer-vietoris-canonical-data]. Write $F=Rh_*$, $G=Rg_*$, $R_X=Rj_{X*}$, $R_Y=Rj_{Y*}$ [def-pc-derived-direct-image]. Let $\\alpha:F L_Y\\cong L_X G$ be the fixed derived open-restriction comparison, and $\\beta:R_X F\\cong G R_Y$ the supplied isomorphism fixed by equality to the two normalized composition comparisons joined by $j_X h=g j_Y$, both from [def-pc-derived-mayer-vietoris-canonical-data], with juxtaposition in Lean functor order. For every K-injective cochain complex I of structure-sheaf modules on V [def-pur-kinjective-complex], with A=Q(I), one has $L_Y(\\beta_A)\\,\\varepsilon_{Y,G(A)}=\\alpha_{R_X(A)}\\,G(\\varepsilon_{X,A})$, in Lean composition order. No cover and no restriction unit on an object of X is present.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE (lemma-restrict-direct-image-open), 0D5T (lemma-derived-pushforward-composition) and 08BV (lemma-exact-sequence-j-star); official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the equality fixing beta to the canonical composition. Let jX and jY be the inverse-image and base open inclusions, g the restricted morphism, and I a K-injective complex on the inverse-image open. The adjunction of exact restriction with jX direct image shows that jX direct image preserves K-injectives (the proved Adjunction.preservesKInjectiveComplexes API). Therefore I and jX_*I compute the source direct images. Expand the two normalized composition comparisons. Their determining right-derived unit equations identify their composite, after restriction to U, with the localized sectionwise composition identification for jX followed by h = g followed by jY.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand schemeMVOpenRestrictionComparison into its four factors: the inverse exact-target composition comparison, the derived sectionwise identity, the K-injective-preserving composition comparison, and the exact-source localization comparison. The factorization equations for these right-derived comparisons identify it on jX_*I with the sectionwise identity of Tag 08FE. On every open W of U both composites of this identity and the underived counits evaluate to the same identification of sections of I on g inverse image W. The counits of restriction followed by open direct image are the canonical restriction identifications, so the equality is degreewise and commutes with the differentials.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the degreewise equality through the homotopy and derived quotient functors. Apply the counit factorization of the derived adjunction, Adjunction.derivedε_fac_app, to identify the localized counits with those of schemeMVAdjunction. Cancel the exact-restriction and right-derived computation factors. This gives the displayed counit square at Q(I), without any assertion about a restriction unit on X. For the empty open the target derived category is zero; for the full open the computation is the normalized composition identity.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE (lemma-restrict-direct-image-open), 0D5T (lemma-derived-pushforward-composition) and 08BV (lemma-exact-sequence-j-star); official Stacks pages read online",
+  "note": "Counit computation part of the original normalized-comparison argument; the extension to all derived objects and the unit triangle calculation are proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived direct image composition is compatible with the counit of restriction to an open subset",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived direct image composition is compatible with the counit of restriction to an open subset",
+   "results": "8 hits: Scheme.ofRestrict_toLRSHom_c_app, Scheme.Modules.restrictAdjunction_counit_app_app, Scheme.ofRestrict_app, Scheme.Modules.restrictFunctorComp, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctorComp_hom_app_app, Scheme.Modules.restrictAdjunction_unit_app_app, and Scheme.Modules.restrictAdjunction. Underived ingredients only.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|rightDerived.*counit|derived.*mate",
+   "results": "1 hit: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:125, Adjunction.derivedε_fac_app. Generic derived counit factorization; no comparison of these two fixed scheme isomorphisms.",
+   "date": "2026-10-14",
+   "verdict": "generic ingredient only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map: compatibility with individual open units and restrictions; normalized comparison computation before the unit and triangle-identity calculation",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-open-comparison-unit",
+    "lem-pc-derived-mayer-vietoris-direct-image-squares",
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisOpenCompositionCounit.lean",
+  "declaration": "AlgebraicGeometry.schemeMVOpenComposition_counit_Q",
+  "statement": "theorem schemeMVOpenComposition_counit_Q\n    (X Y : Scheme.{u}) (h : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ T : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    [∀ T : Y.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]\n    (U : Y.Opens)\n    (β : schemeDerivedDirectImage (h ⁻¹ᵁ U).ι ⋙ schemeDerivedDirectImage h ≅\n      schemeDerivedDirectImage (h ∣_ U) ⋙ schemeDerivedDirectImage U.ι)\n    (hβ : β = (schemeMVDirectImageComposition (h ⁻¹ᵁ U).ι h).symm ≪≫\n      eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h U).symm) ≪≫\n      schemeMVDirectImageComposition (h ∣_ U) U.ι)\n    (I : CochainComplex\n      (SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace)) ℤ)\n    [I.IsKInjective] :\n    (schemeMVDerivedRestriction Y U).map\n        (β.hom.app (DerivedCategory.Q.obj I)) ≫\n        (schemeMVAdjunction Y U).counit.app\n          ((schemeDerivedDirectImage (h ∣_ U)).obj (DerivedCategory.Q.obj I)) =\n      (schemeMVOpenRestrictionComparison h U).hom.app\n          ((schemeDerivedDirectImage (h ⁻¹ᵁ U).ι).obj (DerivedCategory.Q.obj I)) ≫\n        (schemeDerivedDirectImage (h ∣_ U)).map\n          ((schemeMVAdjunction X (h ⁻¹ᵁ U)).counit.app (DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T190201-L-3223984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T190201-L-3223984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
