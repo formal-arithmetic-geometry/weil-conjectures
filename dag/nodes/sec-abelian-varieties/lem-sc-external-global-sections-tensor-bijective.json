@@ -15,43 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Choose finite affine covers of X and Y. Affine diagonal makes their pairwise intersections affine. On each product of charts and each overlap, affine spectrum product, tensor-pullback sections and sheaf tensor sections identify T with the algebraic tensor section map. The unit and pure-tensor formulas make these maps restriction-compatible.",
+   "text": "Take the finite subcover of the canonical affine cover of Y. Apply isAffineHom_diagonal_iff to g and the top affine open in Spec k to prove that every pairwise overlap is affine.",
    "uses": [
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+    "lem-sc-picard-affine-diagonal-intersections"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a fixed affine V in Y, use the sheaf equalizer of the finite cover of X. Tensor over a field is exact and commutes with finite products, so this equalizer identifies sections on X times V with Gamma(X,F) tensor G(V). The comparisons commute with restriction in V.",
+   "text": "For every chart V and each overlap, regard V as an affine scheme and restrict G along its open immersion. Restriction preserves quasi-coherence. Apply the affine-second-factor theorem with X and F unchanged.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sc-scalar-global-sections-comparison"
+    "lem-sc-external-global-sections-tensor-affine-right",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the second finite sheaf equalizer on Y. Tensor with Gamma(X,F) again preserves its kernel and finite products. The resulting bijection equals T on pure tensors by the chart formulas, hence everywhere by tensor induction. Empty schemes and zero coefficients are included: the equalizers and their tensor products then have zero kernels.",
+   "text": "Apply finite-cover descent to the chart and overlap bijectivities, obtaining precisely bijectivity of the unchanged externalGlobalSectionsTensor map.",
    "uses": [
-    "def-sc-scalar-global-sections-comparison"
+    "lem-sc-external-global-sections-tensor-finite-cover"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-scalar-global-sections-comparison",
-  "def-weil-sheaf-of-modules-category",
+  "lem-sc-external-global-sections-tensor-affine-right",
+  "lem-sc-external-global-sections-tensor-finite-cover",
   "lem-sc-picard-affine-diagonal-intersections",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, explicit degree-zero section argument and omitted cup verification"
+  "place": "Tag 0BED, two finite-cover equalizers, now separated into affine-second-factor comparison and finite-cover descent"
  },
  "mathlib_searches": [
   {
@@ -156,9 +151,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T082342-L-1634842",
-  "kind": "interface"
+  "landing": "20261013T100004-L-2462149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

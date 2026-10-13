@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight
+import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCover
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
@@ -48,6 +52,26 @@ theorem externalGlobalSectionsTensor_bijective
     [CompactSpace X] [CompactSpace Y]
     [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]
     (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :
-    Function.Bijective (externalGlobalSectionsTensor f g F G) := by sorry
+    Function.Bijective (externalGlobalSectionsTensor f g F G) := by
+  classical
+  let C := Y.affineCover.finiteSubcover
+  let U : C.I₀ → Y.Opens := fun i ↦ (C.f i).opensRange
+  have hU (i : C.I₀) : IsAffineOpen (U i) := by
+    have : IsAffine (C.X i) := by
+      dsimp only [C]
+      rw [Scheme.OpenCover.finiteSubcover_X]
+      infer_instance
+    exact isAffineOpen_opensRange (C.f i)
+  have hUU (i j : C.I₀) : IsAffineOpen (U i ⊓ U j) :=
+    (isAffineHom_diagonal_iff (f := g)).mp inferInstance ⊤ (isAffineOpen_top _)
+      (U i) (by simp) (U j) (by simp) (hU i) (hU j)
+  have hlocal (V : Y.Opens) (hV : IsAffineOpen V) :
+      Function.Bijective (externalGlobalSectionsTensor f (V.ι ≫ g) F (G.restrict V.ι)) := by
+    have : IsAffine V.toScheme := hV
+    exact externalGlobalSectionsTensor_bijective_of_isAffine_right
+      k X V.toScheme f (V.ι ≫ g) F (G.restrict V.ι)
+  exact externalGlobalSectionsTensor_bijective_of_finite_cover k X Y f g F G
+    U C.iSup_opensRange (fun i ↦ hlocal (U i) (hU i))
+    (fun i j ↦ hlocal (U i ⊓ U j) (hUU i j))
 
 end AlgebraicGeometry.Scheme.Modules

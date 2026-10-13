@@ -1,0 +1,170 @@
+{
+ "id": "lem-sc-external-global-sections-tensor-affine-right",
+ "kind": "statement",
+ "title": "External tensor sections with affine second factor",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec} k$ and $g:Y\\to\\operatorname{Spec} k$ schemes [def-pc-scheme]. Assume $X$ is quasi-compact, the diagonal of $f$ is affine, and $Y$ is affine. For quasi-coherent module sheaves $F,G$ [pqf-def-coherent], the explicit external tensor map [def-sc-scalar-global-sections-comparison] $\\Gamma(X,F)\\otimes_k\\Gamma(Y,G)\\to\\Gamma(X\\times_kY,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech; degree-zero finite-cover argument"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-scalar-global-sections-comparison",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover of X. Its pairwise intersections are affine by the affine-diagonal criterion. On each chart and each overlap, the affine spectrum product, pullback-section, and sheaf-tensor-section comparisons identify the external coefficient sections with F(U) tensor_k G(Y). The pure-tensor formulas give the canonical map and commute with restrictions.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two sheaf equalizers to the cover of X and its product with Y. Tensor with G(Y) over the field preserves kernels and finite products (Mathlib Module.Flat.ker_lTensor_eq and tensor product finite-product comparisons). Thus the chart isomorphisms restrict to an isomorphism of global sections. Tensor induction and sheaf uniqueness identify it with the explicit external map. Empty schemes and zero modules give zero equalizers.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-field",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scalar-global-sections-comparison",
+  "def-weil-field",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, explicit ordinary-section equalizer argument; source also read at https://stacks.math.columbia.edu/tag/0BED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections external tensor product quasicoherent schemes over field degree zero Kunneth",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, PresheafOfModules.Monoidal.tensorObj, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, LightCondensed.instMonoidalLightCondSetLightCondModFree, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo",
+   "date": "2026-10-13",
+   "verdict": "No matching external-section theorem. Tensor/equalizer tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Function.Bijective",
+   "results": "12 hits: TensorProduct.map_bijective, LinearMap.lTensor_bij_iff_rTensor_bij, Algebra.TensorProduct.includeRight_bijective, Algebra.TensorProduct.includeLeft_bijective, LinearMap.mul'_bijective_of_surjective, Algebra.TensorProduct.map_bijective, IsAzumaya.bij, IsAzumaya.mk",
+   "date": "2026-10-13",
+   "verdict": "No matching external-section theorem. Tensor/equalizer tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*[Ss]ection|[Ss]ection.*external|tensor.*[Ee]qualizer",
+   "results": "21 hits: Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching external-section theorem. Tensor/equalizer tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections external tensor product of quasicoherent sheaves over a field degree zero Kunneth finite affine cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring global sections with a vector space commutes with descent along a finite open cover",
+   "results": "8 hits: TopCat.Sheaf.objSupIsoProdEqLocus and its component lemmas; Scheme.GlueData.sheafValGluedMk_val; ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: generic gluing tools, no assembled external comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ker_lTensor\"",
+   "results": "Module.Flat.ker_lTensor_eq (Mathlib.RingTheory.Flat.Equalizer)",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: tensor kernel tool, not either residual statement."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*tensor|tensor.*globalSections|sections.*equalizer",
+   "results": "Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory and Mathlib.Topology.Sheaves.SheafCondition.OpensLeCover",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: generic equalizer machinery; repository section/tensor search also found only affine chart tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorBijective",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero Kunneth step below the theorem-of-cube argument, split from the two finite-cover equalizers of lem-sc-external-global-sections-tensor-bijective",
+   "via": [
+    "lem-sc-external-global-sections-tensor-bijective",
+    "lem-sc-picard-external-cup-zero-tensor",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffineRight",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalGlobalSectionsTensorAffineRight.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalGlobalSectionsTensor_bijective_of_isAffine_right",
+  "statement": "theorem externalGlobalSectionsTensor_bijective_of_isAffine_right\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [IsAffineHom (pullback.diagonal f)] [IsAffine Y]\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :\n    Function.Bijective (externalGlobalSectionsTensor f g F G)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100004-L-2462149",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100004-L-2462149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
