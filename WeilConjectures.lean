@@ -2265,7 +2265,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AdicFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AdicFrobeniusLift
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AdicFrobeniusTrace
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AdicRange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AdicSystem
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve

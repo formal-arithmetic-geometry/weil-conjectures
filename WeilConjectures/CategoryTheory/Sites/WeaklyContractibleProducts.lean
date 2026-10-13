@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 
 If every object of a site is covered by weakly contractible objects, epimorphisms of sheaves of
 modules are detected by surjectivity on sections over weakly contractible objects. Since
-sections commute with products, products of epimorphisms are then epimorphisms, i.e.
-countable (indeed arbitrary) products are exact, and a tower of epimorphisms satisfies the
+sections commute with products, a tower of epimorphisms satisfies the
 Mittag-Leffler property `R¹ lim = 0`, in the form that `1 - t` is an epimorphism on a product
 of the tower (Stacks 0947, 091J).
 
@@ -23,8 +22,6 @@ of the tower (Stacks 0947, 091J).
 
 - `CategoryTheory.GrothendieckTopology.epi_iff_of_forall_exists`: epimorphisms of sheaves of
   modules are detected on sections over weakly contractible objects.
-- `CategoryTheory.GrothendieckTopology.hasExactLimitsOfShape_discrete_of_forall_exists`: products
-  of sheaves of modules are exact.
 - `CategoryTheory.GrothendieckTopology.epi_one_sub_of_forall_exists`: for a tower of
   epimorphisms `F`, the map `1 - t` on a product `∏ Fₙ` is an epimorphism.
 -/
@@ -57,28 +54,6 @@ lemma epi_iff_of_forall_exists {F G : Sheaf J (ModuleCat.{w} R)} (f : F ⟶ G) :
   rfl
 
 include hP hPW in
-/-- If every object of the site is covered by weakly contractible objects, products of sheaves
-of modules are exact: products of epimorphisms are epimorphisms, as can be checked on sections
-over weakly contractible objects, where they become products of surjections of modules. -/
-lemma hasExactLimitsOfShape_discrete_of_forall_exists (ι : Type*)
-    [HasLimitsOfShape (Discrete ι) (Sheaf J (ModuleCat.{w} R))]
-    [HasLimitsOfShape (Discrete ι) (ModuleCat.{w} R)]
-    [HasExactLimitsOfShape (Discrete ι) (ModuleCat.{w} R)] :
-    HasExactLimitsOfShape (Discrete ι) (Sheaf J (ModuleCat.{w} R)) := by
-  have : Functor.PreservesEpimorphisms (lim : (Discrete ι ⥤ Sheaf J (ModuleCat.{w} R)) ⥤ _) :=
-    ⟨fun {F G} α _ ↦ by
-      rw [epi_iff_of_forall_exists P hP hPW]
-      intro W hW
-      let E := sheafToPresheaf J (ModuleCat.{w} R) ⋙ (evaluation Cᵒᵖ (ModuleCat.{w} R)).obj (op W)
-      have : Epi (Functor.whiskerRight α E) := NatTrans.epi_of_epi_app fun j ↦
-        (epi_iff_of_forall_exists P hP hPW (α.app j)).1 inferInstance W hW
-      have h := (preservesLimitNatIso E).hom.naturality α
-      rw [← Iso.eq_comp_inv] at h
-      dsimp at h
-      exact h ▸ inferInstance⟩
-  exact hasExactLimitsOfShape_of_preservesEpi _ _
-
-include hP hPW in
 /-- **Mittag-Leffler for towers of epimorphisms.** If every object of the site is covered by
 weakly contractible objects, then for a tower `F` of sheaves of modules with epimorphic
 transitions, the map `1 - t` on a product `∏ Fₙ` is an epimorphism, where `t` has components
@@ -92,12 +67,13 @@ lemma epi_one_sub_of_forall_exists {F : ℕᵒᵖ ⥤ Sheaf J (ModuleCat.{w} R)}
   intro W hW
   let E := sheafToPresheaf J (ModuleCat.{w} R) ⋙ (evaluation Cᵒᵖ (ModuleCat.{w} R)).obj (op W)
   have hPf' : IsLimit (Fan.mk Pf.pt Pf.proj) :=
-    IsLimit.ofIsoLimit hPf (Cone.ext (Iso.refl _) (by rintro ⟨j⟩; simp))
+    IsLimit.ofIsoLimit hPf (Cone.ext (Iso.refl _) fun ⟨_⟩ ↦ (Category.id_comp _).symm)
   have := ModuleCat.epi_one_sub_of_epi (F := F ⋙ E)
     (isLimitFanMkObjOfIsLimit E _ _ hPf') (E.map t)
     (fun n ↦ by simpa [E] using congrArg E.map (ht n))
     (fun n ↦ (epi_iff_of_forall_exists P hP hPW _).1 (hF n) W hW)
-  rw [← E.map_id, ← E.map_sub] at this
+  change Epi (E.map (𝟙 Pf.pt - t))
+  rw [E.map_sub, E.map_id]
   exact this
 
 end CategoryTheory.GrothendieckTopology
