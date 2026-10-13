@@ -1,0 +1,181 @@
+{
+ "id": "new-affine-cohomology-section-equiv",
+ "kind": "statement",
+ "title": "Normalized affine Leray section equivalence before scalar extension",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes, and $F$ a quasi-coherent module on $X$ [def-pc-module-pullback]. Fix an injective resolution $I$ of $F$, a degree $p\\in\\mathbb N$, and an affine open $V\\subset S$. Put $U=f^{-1}V$, $A=\\Gamma(S,V)$, $h:U\\to\\operatorname{Spec}A$ the restricted morphism followed by the canonical affine chart, $N=F|_U$ computed by open-immersion pullback, and $P=R^pf_*F$. Let $R$ be any augmentation-preserving restricted resolution data for $I$ on $U$ [def-weil-pbc-flat-base-change-open-choices]. Let $E_M:H^p_{\\mathrm{Mod}}(U,M)\\simeq H^p(U,M)$ be a family of additive equivalences natural for all module morphisms, with module right-derived sections [pqf-def-cohomology] and the Ext cohomology model [def-pc-flat-cohomology-comparison]. Define $e_H$ by applying $E$ to the restriction of $F$ and transporting through the canonical restriction/pullback isomorphism. There is an $A$-linear equivalence $e:HOver(h,N,p)\\simeq_A\\Gamma(P,V)$ whose value on $\\xi$ equals the class map resolutionSectionClass for $R$, followed by the inverse resolution comparison for $f_*$, applied to $e_H^{-1}(\\xi)$. There is no base-change scheme, ring extension, second resolution or flatness hypothesis.\n\nExact Lean statement:\ntheorem exists_affine_cohomology_section_equiv {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F) (p : ℕ) (V : S.Opens) (hV : IsAffineOpen V) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) (E : ∀ M : (f ⁻¹ᵁ V).toScheme.Modules, ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj M) ≃+ H M p) (hE : ∀ (M M' : (f ⁻¹ᵁ V).toScheme.Modules) (φ : M ⟶ M') (x : (RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj M), E M' (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map φ).hom x) = H.map φ p (E M x)) : let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ let N := (pullback (f ⁻¹ᵁ V).ι).obj F let P := ((pushforward f).rightDerived p).obj F let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p := (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans (H.mapLinearEquiv ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p).toAddEquiv ∃ e : HOver h N p ≃ₗ[Γ(S, V)] Γ(P, V), ∀ xi : HOver h N p, e xi = (resolutionSectionClass R.resolution (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V) (eH.symm xi)",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F4",
+  "place": "Tags 01F4 (2), 01XJ (1), 01E4, 01E5 and 03FD; affine Leray edge and its resolution cocycle normalization"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "pqf-def-cohomology",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transport the supplied natural comparison E through Mathlib restrictFunctorIsoPullback using H.mapLinearEquiv. This is the displayed additive eH. Naturality hE for multiplication by global functions shows compatibility with the A-action through h; the cohomology map of an isomorphism is linear.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict f to f inverse V -> V. Ordinary higher images commute with open restriction and are quasi-coherent. Their positive cohomology on the affine scheme V vanishes. Apply the cocycle-normalized Leray degeneration theorem to obtain an invertible edge. Naturality for multiplication makes this edge linear over A=Gamma(S,V). Taking sections and using restrictAppIso identifies its target with Gamma(R^p f_*F,V).",
+   "uses": [
+    "lem-pc-higher-direct-image-open-restriction",
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-pc-affine-vanishing",
+    "lem-pc-leray-degenerate-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The presheaf description identifies the edge with the map induced by the homology projection and sectionCohomologyTheta. The augmentation and components equations of R identify the restricted resolution section complex with the original complex evaluated on f inverse V. Augmentation-preserving resolution comparisons compute the same derived class map, giving precisely resolutionSectionClass followed by the inverse I.isoRightDerivedObj. Compose this bijective linear edge with eH inverse. This proves the normalization for every xi, including p=0, the empty open and the zero module.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-pc-affine-vanishing",
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-ordinary-higher-image-quasi-coherent",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01F4, 01XJ, 01E4, 01E5 and 03FD",
+  "place": "Affine-local Leray comparison with augmentation-preserving resolution normalization; supplied natural source comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of inverse image of affine open is sections of higher direct image with scalar linearity",
+   "results": "Actual msearch: 8 hits; AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map, AlgebraicGeometry.Scheme.Modules.restrictFunctor. No normalized affine Leray section equivalence; TensorProduct.congr supplies the tensor-extension step in the parent.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.congr",
+   "results": "Actual msearch: 12 hits; TensorProduct.congr, TensorProduct.congr_refl_refl, TensorProduct.toLinearMap_congr, TensorProduct.congr_symm, LinearEquiv.lTensor_trans_rTensor, LinearEquiv.rTensor_trans_lTensor, TensorProduct.congr_tmul, TensorProduct.congr_trans. No normalized affine Leray section equivalence; TensorProduct.congr supplies the tensor-extension step in the parent.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|affine.*cohomology.*[Ee]quiv",
+   "results": "Actual msearch: 0 hits; . No normalized affine Leray section equivalence; TensorProduct.congr supplies the tensor-extension step in the parent.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine Leray comparison is a linear isomorphism from cohomology to sections of a higher direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward cohomology over an affine open computed by sections of a resolution",
+   "results": "Second reading actual msearch: 8 hits; CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforward_map_app. No exact normalized affine Leray equivalence.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "Second reading actual msearch: 8 hits; CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc. No exact normalized affine Leray equivalence.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheafification|sections.*rightDerived",
+   "results": "Second reading actual msearch: 0 hits; . No exact normalized affine Leray equivalence.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeAffineSource",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local reduction in the flat base-change input to the formal-functions stalk comparison: normalized source and target cohomology identifications before choosing a lift. Source affine dictionary: normalized affine Leray edge before tensor extension.",
+   "via": [
+    "new-flat-base-change-affine-source",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCohomologySectionEquiv.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_cohomology_section_equiv",
+  "statement": "theorem exists_affine_cohomology_section_equiv {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F) (p : ℕ) (V : S.Opens) (hV : IsAffineOpen V) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) (E : ∀ M : (f ⁻¹ᵁ V).toScheme.Modules, ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj M) ≃+ H M p) (hE : ∀ (M M' : (f ⁻¹ᵁ V).toScheme.Modules) (φ : M ⟶ M') (x : (RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj M), E M' (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map φ).hom x) = H.map φ p (E M x)) : let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ let N := (pullback (f ⁻¹ᵁ V).ι).obj F let P := ((pushforward f).rightDerived p).obj F let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p := (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans (H.mapLinearEquiv ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p).toAddEquiv ∃ e : HOver h N p ≃ₗ[Γ(S, V)] Γ(P, V), ∀ xi : HOver h N p, e xi = (resolutionSectionClass R.resolution (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V) (eH.symm xi)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T025308-L-3424620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T025308-L-3424620",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

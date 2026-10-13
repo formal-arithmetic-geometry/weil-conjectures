@@ -4,11 +4,8 @@ public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 @[expose] public section
@@ -19,6 +16,10 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
+set_option maxHeartbeats 1200000 in
+-- Comparing the explicit resolution class maps unfolds several homology transports.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
 Source: Stacks Project, Tags 02KH (first paragraph), 01XJ, 01E4 and 03FD.
 (blueprint: new-flat-base-change-affine-source)
@@ -70,5 +71,48 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
             (Scheme.Modules.Hom.app
               ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
               V (D.sourceClass p (eH.symm xi)))) := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
+  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
+  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
+  obtain ⟨E, hE⟩ :=
+    Scheme.Modules.exists_moduleCohomology_source_comparison (f ⁻¹ᵁ V).toScheme p
+  let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
+      ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+
+        Scheme.Modules.HOver h N p :=
+    (E ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
+      (Scheme.Modules.H.mapLinearEquiv
+        ((Scheme.Modules.restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p).toAddEquiv
+  obtain ⟨e, he⟩ :=
+    Scheme.Modules.exists_affine_cohomology_section_equiv f F I p V hV D.source E hE
+  have hP : P.IsQuasicoherent := ordinaryHigherImage_isQuasicoherent f F inferInstance p
+  let : ∀ G : S.Modules, Module Γ(S, V)
+      Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
+    fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
+  obtain ⟨c, hc, hs, ht, _⟩ :=
+    Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
+  let k : (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) →ₗ[Γ(S', W)]
+      Γ((Scheme.Modules.tensorPullback g).obj P, W) :=
+    { toFun := fun t ↦ c P hP ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t)
+      map_add' := by intro t t'; simp
+      map_smul' := by
+        intro b t
+        simpa only [LinearEquiv.apply_symm_apply, RingHom.id_apply] using
+          hs P hP b ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm t) }
+  let t : (Γ(S', W) ⊗[Γ(S, V)] Scheme.Modules.HOver h N p) ≃ₗ[Γ(S', W)]
+      (Γ(S', W) ⊗[Γ(S, V)] Γ(P, V)) :=
+    TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl Γ(S', W) Γ(S', W)) e
+  refine ⟨eH, k.comp t.toLinearMap, ?_, ?_⟩
+  · exact (hc P hP).comp
+      ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm.bijective.comp t.bijective)
+  · intro s xi
+    change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
+    have he' : e xi = D.sourceClass p (eH.symm xi) := he xi
+    exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
+      ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
+        (Scheme.Modules.Hom.app
+          ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
+          V z)) he')
 end AlgebraicGeometry
