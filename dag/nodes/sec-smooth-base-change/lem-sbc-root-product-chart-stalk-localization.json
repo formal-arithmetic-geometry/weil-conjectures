@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-root-product-chart-stalk-localization",
+ "kind": "statement",
+ "title": "Stalk localization of one factor of an etale root product chart",
+ "statement": "Let n:N\\to L be a morphism of schemes, R a commutative ring, phi:Spec R\\to L etale, x in N and y in Spec R with phi(y)=n(x). Let f belong to the prime y, and let e_k be positive integers for k in Fin m. Suppose an isomorphism alpha over Spec R identifies N times_L Spec R with the spectrum of the product of R[T]/(T^(e_k)-f) [def-weil-pbc-scheme-conventions, def-pc-fibre-product]. Set B=O_(N,x) and J=m_(L,n(x))B. There exist k in Fin m, a local commutative ring R0, f0 in its maximal ideal, a maximal prime P of D=R0[T]/(T^(e_k)-f0), and a flat local homomorphism beta:B\\to D_P with J D_P=m_R0 D_P. Both quotients are the concrete AdjoinRoot quotients. No section, DVR or generic cover is part of this assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYH: etale local root product description; Tag 0EYI: pointed etale neighborhood"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The residue fields of x and y have a common field extension, so the equality\nof their images gives a point z of the fibre product above both. Under alpha its\nprime in a finite product belongs to a unique factor k. Localize R at y, obtaining\nR0 and the image f0 of f, which belongs to its maximal ideal. Localization commutes\nwith the polynomial quotient and with passage to the chosen root factor. Thus the\nstalk at z is D_P for a prime P of R0[T]/(T^(e k)-f0) over the closed point of R0.\nThe root polynomial is monic because e k is positive, so D is finite integral over\nR0, and P is maximal. The projection to N is etale; its stalk map beta is local\nand flat. The local map on base stalks induced by phi is essentially etale, so the\nextended maximal ideal of O_(L,n x) is the maximal ideal of R0: its closed fibre is\na localization of a finite separable residue algebra, hence a field. The structural\nidentity for alpha gives a commuting square of these stalk maps. Extending the\nbase maximal-ideal equality through D_P yields J.map beta = m_R0 D_P. The case\nm=0 cannot have z, and no locality of the unlocalized root algebra is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tag 0EYH: etale local root product description; Tag 0EYI: pointed etale neighborhood"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalk of an etale chart given by a finite product of monic root algebras is a localization of one factor and extends the maximal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, Localization.AtPrime",
+   "results": "0 hits; top: ",
+   "date": "2026-10-13",
+   "verdict": "No matching chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rootProductChart|stalk.*localization.*root|root.*stalk.*localization",
+   "results": "0 hits; top: ",
+   "date": "2026-10-13",
+   "verdict": "No matching chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionLocalizedRootChart",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, tame root charts and transverse section: Tag 0EYH: etale local root product description; Tag 0EYI: pointed etale neighborhood",
+   "via": [
+    "lem-sbc-stalk-normalization-trait-section-localized-root-chart",
+    "lem-sbc-stalk-normalization-trait-section-root-presentation",
+    "lem-sbc-stalk-normalization-trait-section-chart-generic-factor",
+    "lem-sbc-stalk-normalization-trait-section-cyclic-data",
+    "lem-sbc-stalk-normalization-trait-section-maximal-ideal",
+    "lem-sbc-stalk-normalization-trait-section-unramified",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootProductChartStalkLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rootProductChart_stalk_localization",
+  "statement": "theorem rootProductChart_stalk_localization {L N : Scheme.{u}} (n : N ⟶ L)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (y : Spec R) (hφ : Etale φ)\n    (x : N) (hy : φ y = n x) (f : R) (hf : f ∈ y.asIdeal)\n    (m : ℕ) (e : Fin m → ℕ) (he : ∀ k, 0 < e k)\n    (α : pullback n φ ≅ Spec (CommRingCat.of (∀ k : Fin m,\n      AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f))))\n    (hα : α.hom ≫ Spec.map (CommRingCat.ofHom\n      (algebraMap R (∀ k : Fin m,\n        AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C f)))) =\n        pullback.snd n φ) :\n    let B := N.presheaf.stalk x\n    let J := (IsLocalRing.maximalIdeal (L.presheaf.stalk (n x))).map (n.stalkMap x).hom\n    ∃ (k : Fin m) (R₀ : CommRingCat.{u}) (_ : IsLocalRing R₀) (f₀ : R₀),\n      f₀ ∈ IsLocalRing.maximalIdeal R₀ ∧\n      let p := (Polynomial.X : Polynomial R₀) ^ e k - Polynomial.C f₀\n      let D := AdjoinRoot p\n      ∃ (P : Ideal D) (hP : P.IsMaximal),\n        letI : P.IsPrime := hP.isPrime\n        let E := Localization.AtPrime P\n        ∃ β : B →+* E, IsLocalHom β ∧ β.Flat ∧\n          J.map β = (IsLocalRing.maximalIdeal R₀).map\n            ((algebraMap D E).comp (AdjoinRoot.of p))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

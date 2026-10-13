@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-stalk-normalization-trait-divisor-charts",
+ "kind": "statement",
+ "title": "Tame trait charts with a specified divisor equation",
+ "statement": "Let S be a normal integral Noetherian quasi-separated scheme, c:C\\to S a quasi-compact quasi-separated smooth map with geometrically connected fibres, and sigma:S\\to C a section. Let G be finite with invertible order, and Z a finite etale G-torsor on the generic fibre C_eta. Let U contain eta and PA be a finite etale model of Z over C_U, with compatible generic-fibre pullback squares, and let seta be the generic section compatible with sigma [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms, def-pc-fibre-product]. Let s outside U be minimal under specialization among points outside U, with A=O_(S,s) a DVR. Put a:Spec A\\to S, L=C times_S Spec A, and n:N\\to L the concrete pullback of the relative normalization of PA\\to C; assume n finite. Write tau for the induced section of L. For every x of N above tau(m_A), there are R, an etale map phi:Spec R\\to L, a point y over n(x), a ring map rho:A\\to R, and a uniformizer varpi of A with m_A=(varpi), such that phi composed with L\\to Spec A is Spec rho and rho(varpi) belongs to y. There are m and positive integers e_k indexed by Fin m and an isomorphism over Spec R from N times_L Spec R to Spec of the product of R[T]/(T^(e_k)-rho(varpi)).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ, 0EYG and 0EYH: tame chart using the closed-fibre equation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Minimality of s outside U identifies the local generic restriction with the\npunctured trait. Choose a uniformizer of its DVR. Its pullback cuts out the closed\nfibre of the smooth total space and is a nonzerodivisor with regular quotient.\nThe stabilizer of each connected torsor component has order dividing the invertible\norder of G. The ramification and inseparable residue degrees divide that order, so\nthe cover is tame along the closed fibre. Apply 0EYG with this particular divisor\nequation, then 0EYH. If a chart initially uses a unit multiple of the equation,\nadjoin the required roots of the unit etale locally (the exponents are invertible)\nand rescale the roots. This gives the same equation rho(varpi) in every factor.\nNormalization commutes with trait localization and etale base change, identifying\nthese charts with the concrete n. Choose a chart over n(x), enumerate its factors\nby Fin m, and retain the structural equality over the chart. Since n(x) is on the\nclosed fibre, rho(varpi) belongs to the prime y. No stalk localization or generic\nsection factor is constructed in this theorem. Empty normalizations have no x.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J4",
+  "document": "Stacks Project",
+  "place": "Tags 0EYJ, 0EYG and 0EYH: tame chart using the closed-fibre equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tame normalization charts over a discrete valuation ring using the pullback of a uniformizer",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsLocalRing",
+   "results": "0 hits; top: ",
+   "date": "2026-10-13",
+   "verdict": "No matching chart theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*chart|chart.*uniformizer|transverse.*section",
+   "results": "0 hits; top: ",
+   "date": "2026-10-13",
+   "verdict": "No matching chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionLocalizedRootChart",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, tame root charts and transverse section: Tags 0EYJ, 0EYG and 0EYH: tame chart using the closed-fibre equation",
+   "via": [
+    "lem-sbc-stalk-normalization-trait-section-localized-root-chart",
+    "lem-sbc-stalk-normalization-trait-section-root-presentation",
+    "lem-sbc-stalk-normalization-trait-section-chart-generic-factor",
+    "lem-sbc-stalk-normalization-trait-section-cyclic-data",
+    "lem-sbc-stalk-normalization-trait-section-maximal-ideal",
+    "lem-sbc-stalk-normalization-trait-section-unramified",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitDivisorCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationTraitDivisorCharts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_trait_divisor_charts",
+  "statement": "theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdvr : IsDiscreteValuationRing (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    IsFinite n → ∀ x : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c a) : Scheme.{u}),\n      n x = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) →\n      ∃ (R : CommRingCat.{u}) (φ : Spec R ⟶ pullback c a) (y : Spec R)\n        (ρ : S.presheaf.stalk s →+* R) (ϖ : S.presheaf.stalk s),\n        Etale φ ∧ φ y = n x ∧\n        IsLocalRing.maximalIdeal (S.presheaf.stalk s) = Ideal.span {ϖ} ∧\n        φ ≫ pullback.snd c a = Spec.map (CommRingCat.ofHom ρ) ∧\n        ρ ϖ ∈ y.asIdeal ∧\n        ∃ (m : ℕ) (e : Fin m → ℕ), (∀ k, 0 < e k) ∧\n          ∃ α : pullback n φ ≅ Spec (CommRingCat.of (∀ k : Fin m,\n              AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C (ρ ϖ)))),\n            α.hom ≫ Spec.map (CommRingCat.ofHom\n              (algebraMap R (∀ k : Fin m,\n                AdjoinRoot ((Polynomial.X : Polynomial R) ^ e k - Polynomial.C (ρ ϖ))))) =\n              pullback.snd n φ",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466919",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T100020-L-2466919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

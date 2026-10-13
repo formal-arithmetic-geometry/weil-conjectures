@@ -21,6 +21,10 @@ public import Mathlib.RingTheory.AdjoinRoot
 
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitDivisorCharts
+import Sheaf.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization
+import Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor
+
 /-!
 # Localized tame root chart and its transverse generic factor
 
@@ -125,6 +129,34 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
               g ≫ pullback.snd Z.π (b ≫ sη) =
                 Spec.map (CommRingCat.ofHom (algebraMap K
                   (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e -
-                    Polynomial.C (π : K))))) := by sorry
+                    Polynomial.C (π : K))))) := by
+  classical
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  dsimp only
+  intro hn x hx
+  have hchart := GaloisCover.stalk_normalization_trait_divisor_charts
+      (S := S) (C := C) (Cη := Cη)
+      hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
+      s hs hmin hdvr
+  dsimp only at hchart
+  have hchartn := hchart hn
+  have hchartx := hchartn x
+  have hcharth := hchartx hx
+  obtain ⟨R, φ, y, ρ, ϖ₀, hdata⟩ := hcharth
+  obtain ⟨hφ, hy, hϖ₀, hρ, hf, m, e, he, α, hα⟩ := hdata
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+    (pullback.fst c (S.fromSpecStalk s))
+  have hlocal := rootProductChart_stalk_localization n R φ y hφ x hy
+    (ρ ϖ₀) hf m e he α hα
+  dsimp only at hlocal
+  obtain ⟨k, R₀, hR₀, f₀, hf₀, P, hP, β, hβ, hflat, hJ⟩ := hlocal
+  have hgeneric := GaloisCover.trait_divisor_chart_section_generic_factor
+    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
+    s hs hmin hdvr hn x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e he α hα k
+  exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, hgeneric⟩
+
 
 end AlgebraicGeometry.Scheme
