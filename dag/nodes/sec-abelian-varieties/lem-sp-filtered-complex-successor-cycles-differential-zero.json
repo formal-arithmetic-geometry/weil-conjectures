@@ -9,24 +9,22 @@
  },
  "proof": [
   {
-   "text": "Take unquotiented successor-cycle representatives R. Their graded image is the successor-cycle subobject, since the added next filtration step projects to zero. Thus the image factorization gives an epimorphism x onto successor cycles. The differential of R factors through F^(p+r+1), so its projection to gr^(p+r) is zero by the cokernel equation. Apply D.on_representatives with source x followed by hZ and zero target cycle. Cancel x to obtain the asserted zero composite.",
+   "text": "Apply the existing differential representative cover at r+1, with source pq and target k=pq+(r+1,-r). This gives an epimorphism x onto successor cycles, a source representative t, and a differential representative tprime in filtration degree p+r+1. Set j=pq+(r,1-r); k and j have the same total degree. Transport tprime to this degree and compose with the filtration inclusion F^(j.1+1) into F^(j.1). The resulting representative has zero graded projection by cokernel.condition. The source graded class is x followed by hZ, by Subobject.ofLE_arrow. Apply D.on_representatives with this source class and zero target cycle, then cancel the epimorphism x. This proves the requested zero equation at next pq, which equals j.",
    "uses": [
+    "lem-sp-filtered-complex-differential-representatives-cover",
     "lem-sp-filtered-complex-page-differential"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sp-filtered-complex-differential-representatives-cover",
   "lem-sp-filtered-complex-page-differential"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012K"
+  "place": "Tag 012K, displayed cycle and differential formulas; K3 reuses the representative cover at r+1."
  },
  "mathlib_searches": [
   {
@@ -118,10 +116,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T001613-L-2329994",
-  "kind": "interface",
+  "landing": "20261013T015600-L-3022542",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

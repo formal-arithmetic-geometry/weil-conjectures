@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 
 @[expose] public section
 universe v u
@@ -36,6 +37,50 @@ theorem filteredComplex_successor_cycles_differential_zero
       F.complexCycles pq.1 (pq.1 + pq.2) r) :
     (Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq) ≫
         D.page.d pq ((ComplexShape.up' (r, 1 - r)).next pq) = 0 := by
-  sorry
+  have _hr := hr
+  let j : ℤ × ℤ := pq + (r, 1 - r)
+  have hij : (ComplexShape.up' (r, 1 - r)).Rel pq j := rfl
+  rw [(ComplexShape.up' (r, 1 - r)).next_eq' hij]
+  let k : ℤ × ℤ := (j.1 + 1, j.2 - 1)
+  have hik : (ComplexShape.up' (r + 1, 1 - (r + 1))).Rel pq k := by
+    change pq + (r + 1, 1 - (r + 1)) = k
+    ext <;> dsimp [j, k] <;> omega
+  obtain ⟨A, t, t', x, y, hx, hdt, hsrc, htgt⟩ :=
+    filteredComplex_differential_representatives_cover K F (r + 1) pq k hik
+  have hn : k.1 + k.2 = j.1 + j.2 := by dsimp [j, k]; omega
+  have hex : ∃ s : A ⟶ (F.step k.1 : CochainComplex C ℤ).X (j.1 + j.2),
+      t ≫ (F.step pq.1).arrow.f (pq.1 + pq.2) ≫
+          K.d (pq.1 + pq.2) (j.1 + j.2) =
+        s ≫ (F.step k.1).arrow.f (j.1 + j.2) := by
+    rw [← hn]
+    exact ⟨t', hdt⟩
+  obtain ⟨t', hdt⟩ := hex
+  let inc := Subobject.ofLE (F.step (j.1 + 1)) (F.step j.1)
+    (F.antitone_step (by omega))
+  have hinc : inc.f (j.1 + j.2) ≫ (F.step j.1).arrow.f (j.1 + j.2) =
+      (F.step (j.1 + 1)).arrow.f (j.1 + j.2) := by
+    exact congrArg (fun φ : (F.step (j.1 + 1) : CochainComplex C ℤ) ⟶ K ↦
+      φ.f (j.1 + j.2)) (Subobject.ofLE_arrow _)
+  have hdt' : t ≫ (F.step pq.1).arrow.f (pq.1 + pq.2) ≫
+      K.d (pq.1 + pq.2) (j.1 + j.2) =
+      (t' ≫ inc.f (j.1 + j.2)) ≫ (F.step j.1).arrow.f (j.1 + j.2) := by
+    simpa only [Category.assoc, hinc] using hdt
+  have hsrc' : (x ≫ Subobject.ofLE _ _ hZ) ≫
+      (F.complexCycles pq.1 (pq.1 + pq.2) r).arrow =
+      t ≫ (F.complexQuotientπ pq.1 (pq.1 + 1) (by omega)).f (pq.1 + pq.2) := by
+    simpa only [Category.assoc, Subobject.ofLE_arrow] using hsrc
+  have hzero : (t' ≫ inc.f (j.1 + j.2)) ≫
+      (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2) = 0 := by
+    rw [Category.assoc]
+    have hg : inc.f (j.1 + j.2) ≫
+        (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2) = 0 := by
+      exact congrArg (fun φ : (F.step (j.1 + 1) : CochainComplex C ℤ) ⟶
+        F.gradedPiece j.1 ↦ φ.f (j.1 + j.2)) (cokernel.condition inc)
+    rw [hg, comp_zero]
+  apply (cancel_epi x).1
+  have hrep := D.on_representatives A pq j hij t (t' ≫ inc.f (j.1 + j.2))
+    (x ≫ Subobject.ofLE _ _ hZ) 0 hdt' hsrc' (by simpa using hzero.symm)
+  simpa only [Category.assoc, FilteredComplexPageDifferential.page,
+    zero_comp, comp_zero] using hrep
 
 end CategoryTheory
