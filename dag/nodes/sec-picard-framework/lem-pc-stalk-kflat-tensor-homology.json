@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-stalk-kflat-tensor-homology",
+ "kind": "statement",
+ "title": "K-flat tensor homology at a stalk after a ring isomorphism",
+ "statement": "Let Z be a ringed space, x a point, A a commutative ring and e:A≅O_Z,x a ring isomorphism. Fix a derived category of A-modules [def-pc-derived-category]. Let P be a K-flat cochain complex of O_Z-module sheaves [def-pc-kflat-complex]. Define S to be the actual module stalk functor [def-pc-module-stalk-functor] at x followed by restriction along e. For every O_Z-module sheaf F and integer i, the abelian-group stalk of H^i(Tot(P tensor F[0])) [def-pc-tensor-complex-sheaves] is isomorphic to the underlying abelian group of H^i(Q(S(P)) tensor-derived S(F)[0]). There is no boundedness condition, and S(F) is a constructed module, not an arbitrary existence witness.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YB, 08CG and 09U9; Modules Tag 01AG; derived tensor comparison as implemented by DerivedCategory.QObjTensorQObjIsoOfKFlatLeft in the source library."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-module-stalk-functor",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The stalk criterion makes P_x K-flat: tensoring any acyclic complex with it gives an acyclic complex.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along e and its inverse are inverse exact equivalences. The balanced tensor maps send m tensor n to m tensor n, with scalars interpreted via e; their inverses use e inverse, so they preserve total tensor and acyclicity. They therefore carry the K-flat stalk complex to the K-flat complex S(P). The same termwise equivalence carries F[0] to S(F)[0].",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use exactness of stalks to commute homology with the stalk functor. Use the natural stalk tensor complex isomorphism, and the termwise single comparison, to identify the transported stalk tensor complex with Tot(S(P) tensor S(F)[0]). Scalar restriction is exact and does not change the underlying abelian group.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-stalk-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source K-flat tensor model comparison to S(P) and S(F)[0]. Its first factor is K-flat; its second need not be flat. Compose with singleFunctorIsoCompQ and homologyFunctorFactors, apply degree-i homology and forget scalars. These compositions give the claimed isomorphism. Zero modules and zero rings satisfy the same identities; total complexes use sums, so unbounded complexes are allowed.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YB, 08CG and 09U9; Modules Tag 01AG; derived tensor comparison as implemented by DerivedCategory.QObjTensorQObjIsoOfKFlatLeft in the source library.",
+  "group": "M1",
+  "date": "2026-10-13",
+  "note": "Specialization and scalar-transport glue of the source argument, separated from the prescribed representative comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk homology tensor K-flat complex computes derived tensor",
+   "results": "Eight hits concerning flat tensor exactness and rank of tensor stalks; no derived tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "Component results only; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "Twelve hits including homologyFunctorFactors; these perform the final homology step but do not give the stalk tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "Component results only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*homology|homology.*stalk",
+   "results": "Four hits in Mathlib/Topology/Sheaves/Abelian.lean, supplying exactness of stalks.",
+   "date": "2026-10-13",
+   "verdict": "Component results only; no exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of tensor homology of a K-flat complex computes derived tensor after a ring isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTensorStalkGlobalHomology",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global stalk tensor computation in steps 2 and 3 of the relative tensor local model homology comparison, below the relative finite Tor verification in finite duality.",
+   "via": [
+    "lem-pc-relative-tensor-stalk-global-homology",
+    "lem-pc-relative-tensor-stalk-local-model-homology",
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.StalkKFlatTensorHomology",
+  "file": "lean/Sheaf/Algebra/Homology/StalkKFlatTensorHomology.lean",
+  "declaration": "stalk_kFlat_tensor_homology_iso",
+  "statement": "theorem stalk_kFlat_tensor_homology_iso\n    (Z : RingedSpace.{u}) (x : Z) (A : CommRingCat.{u})\n    (e : A ≅ Z.presheaf.stalk x)\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) :\n    let S := RingedSpace.moduleStalkFunctor Z x ⋙ ModuleCat.restrictScalars e.hom.hom\n    ∀ (F : SheafOfModules.{u} (moduleRings Z)) (i : ℤ),\n      Nonempty ((TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙\n        TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).obj\n          ((SheafOfModules.toSheaf _).obj\n            ((CochainComplex.mapBifunctor P\n              ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n              (@MonoidalCategory.curriedTensor _ _\n                (SheafOfModules.monoidalCategory Z.sheaf))).homology i)) ≅\n        (forget₂ (ModuleCat.{u} A) AddCommGrpCat.{u}).obj\n          ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj\n            (DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj P) ⊗\n              (DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (S.obj F))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125448-L-3875464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125448-L-3875464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

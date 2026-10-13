@@ -14,6 +14,13 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
+import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Algebra.Category.Grp.Colimits
+import Mathlib.Topology.Sheaves.Sheafify
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # RelativeTensorStalkGlobalHomology
 
@@ -27,6 +34,34 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 open CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem stalk_preservesFiniteLimits (Z : RingedSpace.{u}) (x : Z) :
+    PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Z x) := by
+  let A : ModuleCat.{u} (Z.presheaf.stalk x) ⥤ AddCommGrpCat.{u} :=
+    forget₂ (ModuleCat.{u} (Z.presheaf.stalk x)) AddCommGrpCat.{u}
+  have hb : PreservesFiniteLimits
+      (TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙
+        TopCat.Presheaf.stalkFunctor (X := Z.carrier) AddCommGrpCat.{u} x) := inferInstance
+  have : PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Z x ⋙ A) :=
+    comp_preservesFiniteLimits (SheafOfModules.toSheaf (moduleRings Z))
+      (TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙
+        TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x)
+  exact preservesFiniteLimits_of_reflects_of_preserves _ A
+
+private theorem stalk_preservesFiniteColimits (Z : RingedSpace.{u}) (x : Z) :
+    PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Z x) := by
+  let A : ModuleCat.{u} (Z.presheaf.stalk x) ⥤ AddCommGrpCat.{u} :=
+    forget₂ (ModuleCat.{u} (Z.presheaf.stalk x)) AddCommGrpCat.{u}
+  have : PreservesFiniteColimits (SheafOfModules.toSheaf.{u} (moduleRings Z)) :=
+    (CategoryTheory.moduleSheaves_colimits_forgetful.{u, u, u, u} (moduleRings Z)).2.2.1
+  have hb : PreservesFiniteColimits
+      (TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙
+        TopCat.Presheaf.stalkFunctor (X := Z.carrier) AddCommGrpCat.{u} x) := inferInstance
+  have : PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Z x ⋙ A) :=
+    comp_preservesFiniteColimits (SheafOfModules.toSheaf (moduleRings Z))
+      (TopCat.Sheaf.forget AddCommGrpCat.{u} Z.carrier ⋙
+        TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x)
+  exact preservesFiniteColimits_of_reflects_of_preserves _ A
 
 /-- Global stalk computation for a prescribed K-flat relative representative.
 Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG, 09U9;
@@ -80,6 +115,45 @@ theorem relativeTensor_stalk_global_homology_iso
                         (((RingedSpace.moduleStalkFunctor X.toRingedSpace y).mapHomologicalComplex
                           (.up ℤ)).obj K)) ⊗
                     (DerivedCategory.singleFunctor
-                      (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M))) := by sorry
+                      (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M))) := by
+  intro F
+  let Z : RingedSpace.{u} :=
+    { carrier := X.carrier
+      presheaf := (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj
+      IsSheaf := (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).property }
+  let k := TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f.base Y.presheaf y ≫
+    (TopCat.Presheaf.stalkFunctor CommRingCat.{u} y).map
+      (toSheafify (Opens.grothendieckTopology X)
+        ((TopCat.Presheaf.pullback CommRingCat.{u} f.base).obj Y.presheaf))
+  have : IsIso (TopCat.Presheaf.stalkPullbackHom CommRingCat.{u}
+      f.base Y.presheaf y) :=
+    (TopCat.Presheaf.stalkPullbackIso CommRingCat.{u} f.base Y.presheaf y).isIso_hom
+  have := TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso y CommRingCat.{u}
+    ((TopCat.Presheaf.pullback CommRingCat.{u} f.base).obj Y.presheaf)
+  have : IsIso k := inferInstance
+  let := RingedSpace.moduleStalkFunctor_preservesZeroMorphisms Z y
+  have : PreservesFiniteLimits (RingedSpace.moduleStalkFunctor Z y) :=
+    stalk_preservesFiniteLimits Z y
+  have : PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Z y) :=
+    stalk_preservesFiniteColimits Z y
+  have : (RingedSpace.moduleStalkFunctor Z y).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  let S := RingedSpace.moduleStalkFunctor Z y ⋙ ModuleCat.restrictScalars k.hom
+  let Sc := S.mapHomologicalComplex (.up ℤ)
+  let : QuasiIso q := hq
+  have : S.PreservesHomology := inferInstance
+  have : QuasiIso (Sc.map q) :=
+    HomologicalComplex.quasiIso_map_of_preservesHomology q S
+  let a := asIso (DerivedCategory.Q.map (Sc.map q))
+  obtain ⟨b⟩ := relative_inverseImage_stalk_restriction_iso f y K
+  let c := a ≪≫ DerivedCategory.Q.mapIso b
+  refine ⟨S.obj F, fun i ↦ ?_⟩
+  obtain ⟨d⟩ := stalk_kFlat_tensor_homology_iso Z y
+    (Y.presheaf.stalk (f y)) (asIso k) P hP F i
+  exact ⟨d ≪≫ (forget₂ (ModuleCat.{u} (Y.presheaf.stalk (f y)))
+    AddCommGrpCat.{u}).mapIso
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u} (Y.presheaf.stalk (f y))) i).mapIso
+        (tensorIso c (Iso.refl ((DerivedCategory.singleFunctor
+          (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj (S.obj F)))))⟩
 
 end AlgebraicGeometry.Scheme
