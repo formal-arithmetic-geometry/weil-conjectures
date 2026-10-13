@@ -171,53 +171,6 @@ theorem traceFunction_eq_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : �
       (X ↘ Spec (CommRingCat.of k₀)) (finitePointOfFieldPoint y)) e
   exact (e'.trace_frobeniusEnd_pow _).symm
 
-section UpperStar
-
-variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
-
-/-- The image of an `𝔽_{qⁿ}`-rational point under a morphism of `k₀`-schemes. -/
-noncomputable def _root_.AlgebraicGeometry.Scheme.Hom.mapFieldPoints (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] {K : Type u} [Field K] [Algebra k₀ K]
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :
-    (Y ↘ Spec (CommRingCat.of k₀)).fieldPoints K :=
-  ⟨y.1 ≫ φ, by rw [Category.assoc, comp_over]; exact y.2⟩
-
-/-- The trace function of a pullback `φ^* F` at a rational point `y` is that of `F` at the image
-`φ ∘ y`. -/
-theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l Y) (n : ℕ)
-    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    ((WeilSheaf.upperStar φ).obj F).traceFunction n y = F.traceFunction n (φ.mapFieldPoints y) := by
-  set z := finitePointOfFieldPoint y
-  have hx : (φ.mapFieldPoints y).1.base (IsLocalRing.closedPoint _) = φ.base z.1 := rfl
-  rw [traceFunction_eq_trace, F.traceFunction_eq_trace_frobeniusEnd_stalk_pow n _
-    ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩ hx,
-    LinearMap.trace_pow_eq_of_charpoly_eq (charpoly_frobeniusEnd_stalk_upperStar φ F z), ← pow_mul]
-  have hφ := comp_over φ (Spec (CommRingCat.of k₀))
-  have hdvd : (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1) ∣
-      (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 := by
-    have := Scheme.Hom.degreeOver_dvd_degreeOver_comp φ (Y ↘ Spec (CommRingCat.of k₀)) z.2
-    rwa [hφ] at this
-  have hdz := degreeOver_finitePointOfFieldPoint_dvd y
-  congr 2
-  obtain ⟨a, ha⟩ := hdvd
-  obtain ⟨b, hb⟩ := hdz
-  have hd0 : (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1) ≠ 0 :=
-    Scheme.Hom.degreeOver_ne_zero _ (Scheme.Hom.map_mem_finitePoints φ z.2)
-  have hz0 : (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 ≠ 0 :=
-    Scheme.Hom.degreeOver_ne_zero _ z.2
-  change (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 /
-      (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1) *
-      (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1) =
-    n / (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1)
-  rw [ha] at hb hz0 ⊢
-  conv_rhs => rw [hb]
-  conv_lhs => rw [hb]
-  rw [Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hd0), Nat.mul_div_cancel_left _
-    (Nat.pos_of_ne_zero hz0), mul_assoc, Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hd0)]
-
-end UpperStar
-
 end WeilSheaf
 
 end AlgebraicGeometry

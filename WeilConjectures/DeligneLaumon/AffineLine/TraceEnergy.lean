@@ -26,6 +26,7 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.StalkTensorTrace
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.TraceFunctionOps
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 public import WeilConjectures.WeilSheaf.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
@@ -769,7 +770,7 @@ theorem boundaryEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpe
 `j^* j_* M ≅ M`. -/
 theorem traceFunction_directImage_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ)
     (y : (D.U ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m)) :
-    D.directImage.traceFunction m (D.j.mapFieldPoints y) = D.sheaf.traceFunction m y := by
+    D.directImage.traceFunction m (D.j.mapFieldPoints _ y) = D.sheaf.traceFunction m y := by
   have h : D.directImage = (WeilSheaf.lowerStar D.j).obj D.sheaf := rfl
   rw [h, ← traceFunction_upperStar]
   exact traceFunction_eq_of_iso (upperStarDirectImageIso D.j D.sheaf) m y

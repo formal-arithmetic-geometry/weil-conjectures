@@ -160,7 +160,7 @@ theorem isZero_upperStar_boundarySheaf :
 private lemma exists_mapFieldPoints_eq {K : Type u} [Field K] [Algebra k₀ K]
     (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints K)
     (hy : y.1.base (IsLocalRing.closedPoint _) ∈ Set.range D.j.base) :
-    ∃ y' : (D.U ↘ Spec (CommRingCat.of k₀)).fieldPoints K, D.j.mapFieldPoints y' = y := by
+    ∃ y' : (D.U ↘ Spec (CommRingCat.of k₀)).fieldPoints K, D.j.mapFieldPoints _ y' = y := by
   obtain ⟨u, hu⟩ := hy
   have hr : Set.range y.1.base ⊆ Set.range D.j.base := by
     rintro _ ⟨z, rfl⟩
