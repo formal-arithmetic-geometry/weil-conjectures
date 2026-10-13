@@ -18,26 +18,40 @@
  },
  "proof": [
   {
-   "text": "Put E = c(O_Y) and F(K) = Lf*(K) tensor E. Compute derived pullback and\nthis tensor on K-flat representatives. Shifting these representatives gives\nF(K[n]) isomorphic to F(K)[n]; tensoring a cone gives the cone of the tensored\nmap, so F is exact. Restrict derived direct image to the quasi-coherent full\nsubcategory. Its shift comparison transports through adj to a comparison\nc(K[n]) isomorphic to c(K)[n]: apply adj to Hom(Rf*(M), K[n]), move the shift\nusing exactness of Rf*, and apply adj again. Yoneda supplies the comparison.\nThe right adjoint of an exact functor is exact for this comparison.\n\nThe projection map is the a-mate of inverse monoidal comparison followed by\nthe pullback counit. The hypothesis hτ identifies τ with the adj-mate of its\ninverse followed by tensoring the adj-counit at O_Y and the right unitor.\nCompute this composite on shifted K-flat representatives. Moving the shift\nthrough the tensor and pullback comparisons, use naturality of the counits\nand the adjunction triangle identities to obtain the same composite for K,\nshifted by n. Thus τ commutes with the constructed shift comparisons. Transport\nthese structures along the comparison isomorphisms for the specified monoidal\nstructure and adjunctions; the construction does not require canonical choices.\n\nTransport the three arrows of T through the given vertex isomorphisms to\nA, B, C, using the shifted first isomorphism on the connecting arrow. Since\nall vertices are quasi-coherent, this is a distinguished triangle of the full\nsubcategory. Apply the exact functors F and c and then the ambient inclusion\nto obtain distinguished triangles T₁ and T₂. Use τ at the three vertices as\nthe components of m. Naturality gives its first two commuting squares, and\nthe constructed shift compatibility gives the square for the connecting arrow.\nThe vertex isomorphisms from this transport are eF_i and ec_i. Conjugating the\ncomponents of m by these isomorphisms gives the three asserted formulas.\nZero triangles and zero components satisfy the same construction; no component\nof τ is assumed invertible.",
+   "text": "Prove integer shift stability of quasi-coherent cohomology by applying the shifted homology-functor comparison and transporting quasicoherence along the resulting sheaf isomorphism. Use the induced shifts on the full subcategory.",
    "uses": [
-    "def-pc-derived-direct-image",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-sc-right-adjoint-tensor-comparison-natural"
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the compatible exact structures theorem to the two ambient-valued comparison functors and the pinned transformation. Obtain their coherent shift structures, the compatibility of tau with shifts, and preservation of ambient distinguished triangles.",
+   "uses": [
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures"
    ],
    "elementary": false
+  },
+  {
+   "text": "Transport the three arrows of T to A,B,C through the given vertex isomorphisms. On the third arrow use the shifted first isomorphism followed by the inverse shift comparison of the quasi-coherent inclusion. Triangle.isoMk supplies an isomorphism from T to the ambient image of the transported triangle S, so that image is distinguished.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply both functors to S. Their images are distinguished by the structure theorem. Make the triangle morphism using the components of tau at A,B,C: naturality proves the first two squares, and NatTrans.shift_app_comm followed by naturality proves the third. The mapped triangles have exactly the required vertices, so take the six identity vertex isomorphisms and simplify the three component formulas.",
+   "uses": [
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-direct-image",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-sc-right-adjoint-tensor-comparison-natural"
+  "def-pc-derived-category",
+  "lem-sc-right-adjoint-tensor-compatible-exact-structures"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U and equation (48.8.0.1), expanded comparison compatibility; E3 second reading"
+  "place": "Tag 0A9U; N3 separates compatible exact structures and proves transport and all triangle-morphism squares using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -117,12 +131,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T232857-L-2041164",
+  "landing": "20261013T022421-L-3216326",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

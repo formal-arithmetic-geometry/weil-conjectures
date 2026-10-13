@@ -10675,3 +10675,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/N1/Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc (stage 3; reviewer PASS; after a return; landing 20261013T022419-L-3215850 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (stage 3; reviewer PASS; first push; landing 20261013T022420-L-3215982 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/N3/Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen (stage 3; reviewer PASS; first push; landing 20261013T022420-L-3216137 (interface); batch 20261013T022404; modules 3; new nodes 2)
+- 02:24 L: merged deliver/N3/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonTriangle (stage 3; reviewer PASS; first push; landing 20261013T022421-L-3216326 (interface); batch 20261013T022404; modules 2; new nodes 1)

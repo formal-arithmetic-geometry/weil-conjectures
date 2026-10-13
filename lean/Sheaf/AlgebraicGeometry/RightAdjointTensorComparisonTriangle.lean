@@ -10,12 +10,38 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.RightAdjointTensorCompatibleExactStructures
 
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+private theorem qc_shift (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    {K : schemeDerivedCategory X} (hK : schemeDerivedQCohProperty X K) (n : ℤ) :
+    schemeDerivedQCohProperty X (K⟦n⟧) := by
+  intro m
+  let e := ((DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).shiftIso n m (n + m) rfl).app K
+  exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    e.symm (hK (n + m))
+
+private theorem qc_stable (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
+    (schemeDerivedQCohProperty X).IsStableUnderShift ℤ :=
+  { isStableUnderShiftBy := fun n ↦ { le_shift := fun _K hK ↦ qc_shift X hK n } }
+
+private def triangleComparison
+    {D E : Type*} [Category D] [Category E] [HasShift D ℤ] [HasShift E ℤ]
+    (F G : D ⥤ E) [F.CommShift ℤ] [G.CommShift ℤ]
+    (t : F ⟶ G) [NatTrans.CommShift t ℤ] (S : Pretriangulated.Triangle D) :
+    F.mapTriangle.obj S ⟶ G.mapTriangle.obj S :=
+  Pretriangulated.Triangle.homMk _ _ (t.app S.obj₁) (t.app S.obj₂) (t.app S.obj₃)
+    (t.naturality S.mor₁) (t.naturality S.mor₂) (by
+      dsimp [Functor.mapTriangle, Pretriangulated.Triangle.mk]
+      rw [Category.assoc, NatTrans.shift_app_comm, ← Category.assoc, t.naturality, Category.assoc])
 
 /-- Distinguished triangle diagram for the pinned right-adjoint tensor comparison.
 Source: Stacks Project, Tag 0A9U, triangulated-subcategory argument, and
@@ -102,6 +128,38 @@ theorem rightAdjointTensorComparison_triangle
           (ec₃ : T₂.obj₃ ≅ (c.obj C).obj),
           m.hom₁ = eF₁.hom ≫ (τ.app A).hom ≫ ec₁.inv ∧
           m.hom₂ = eF₂.hom ≫ (τ.app B).hom ≫ ec₂.inv ∧
-          m.hom₃ = eF₃.hom ≫ (τ.app C).hom ≫ ec₃.inv) := by sorry
+          m.hom₃ = eF₃.hom ≫ (τ.app C).hom ≫ ec₃.inv) := by
+  classical
+  let : (schemeDerivedQCohProperty Y).IsStableUnderShift ℤ := qc_stable Y
+  let F := (schemeDerivedQCohProperty Z).lift
+    ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙
+      tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+    (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩)) ⋙ (schemeDerivedQCohProperty Z).ι
+  let G := c ⋙ (schemeDerivedQCohProperty Z).ι
+  let t : F ⟶ G := Functor.whiskerRight τ (schemeDerivedQCohProperty Z).ι
+  obtain ⟨sF, sG, ht, hexact⟩ :=
+    rightAdjointTensor_compatibleExactStructures f hRf hO hTensor a c adj τ hτ
+  let := sF
+  let := sG
+  let : NatTrans.CommShift t ℤ := ht
+  intro A B C T hT ⟨eA⟩ ⟨eB⟩ ⟨eC⟩
+  let I := (schemeDerivedQCohProperty Y).ι
+  let S : Pretriangulated.Triangle (schemeDerivedQCohCategory Y) :=
+    Pretriangulated.Triangle.mk (X := A) (Y := B) (Z := C)
+      (ObjectProperty.homMk (eA.inv ≫ T.mor₁ ≫ eB.hom))
+      (ObjectProperty.homMk (eB.inv ≫ T.mor₂ ≫ eC.hom))
+      (ObjectProperty.homMk (eC.inv ≫ T.mor₃ ≫ eA.hom⟦(1 : ℤ)⟧' ≫
+        (I.commShiftIso (1 : ℤ)).inv.app A))
+  have e : T ≅ I.mapTriangle.obj S :=
+    Pretriangulated.Triangle.isoMk _ _ eA eB eC
+      (by simp [S, I, Functor.mapTriangle, Pretriangulated.Triangle.mk])
+      (by simp [S, I, Functor.mapTriangle, Pretriangulated.Triangle.mk])
+      (by simp [S, I, Functor.mapTriangle, Pretriangulated.Triangle.mk])
+  have hS : I.mapTriangle.obj S ∈ Pretriangulated.distinguishedTriangles :=
+    Pretriangulated.isomorphic_distinguished T hT _ e.symm
+  obtain ⟨hF, hG⟩ := hexact S hS
+  refine ⟨F.mapTriangle.obj S, G.mapTriangle.obj S, triangleComparison F G t S,
+    hF, hG, Iso.refl _, Iso.refl _, Iso.refl _, Iso.refl _, Iso.refl _, Iso.refl _, ?_⟩
+  simp [triangleComparison, t, S, G, Functor.mapTriangle, Pretriangulated.Triangle.mk]
 
 end AlgebraicGeometry
