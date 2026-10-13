@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-pullback-tensor-unit-section",
+ "kind": "statement",
+ "title": "Single-pullback cotensorator on adjunction-unit tensor sections",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $U$ an open of $X$, $s\\in\\Gamma(U,M)$ and $t\\in\\Gamma(U,N)$. For the fixed monoidal pullback [lem-pc-scheme-pullback-monoidal-existing] and its canonical adjunction unit $\\eta$, the cotensorator $\\delta_f$ sends $\\eta_{M\\otimes N}(s\\otimes t)$ over $f^{-1}U$ to $\\eta_M(s)\\otimes\\eta_N(t)$, with section tensors as in [def-pur-sheaf-tensor-product]. This asserts only a section formula for one morphism, not composition or unit-object coherence.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Definition 6.26.1(2), extension-of-scalars pullback formula; Lemma 6.26.2, Tag 0096, canonical pullback-pushforward adjunction. The single-morphism elementary-section calculation is transported by the fixed pullbackMonoidal localization construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-scheme-pullback-monoidal-existing"
+ ],
+ "proof": [
+  {
+   "text": "On presheaves, the pullback cotensorator is adjoint to the pushforward tensorator. The adjunction unit inserts scalar 1 and the pushforward tensorator preserves a pure tensor under restriction of scalars. Hence δ sends 1 tensor (s tensor t) to (1 tensor s) tensor (1 tensor t). Sheafification sends elementary tensors to tmulSection. Its comparison with pullback is defined by uniqueness of left adjoints and identifies the adjunction units. The monoidal localization construction of the fixed pullback instance transports precisely this cotensorator; its section formula therefore descends to the displayed equality. This works for arbitrary opens and sections, including zero sections, zero rings, empty opens and identity arrows.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Single-morphism elementary-section calculation using Tag 0095 tensor formula and Tag 0096 adjunction; transported by the fixed monoidal localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules on a scheme, the fixed monoidal pullback cotensorator applied to the adjunction unit on a tensor of sections equals the tensor of the two pulled back unit sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tmulSection",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tmulSection'",
+   "date": "2026-10-13",
+   "verdict": "No exact match. The general adjunction tensor law requires a compatible sheaf pushforward lax structure, not available for this fixed pullback. Local ModulePullbackTensor uses a different tensorPullback and tensorComparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback cotensorator sends pullback unit of elementary tensor section to tensor of pullback units",
+   "results": "8 hits; CategoryTheory.Over.monObjMkPullbackSnd_one, AlgebraicGeometry.Scheme.monObjAsOverPullback_one, CategoryTheory.Over.ε_pullback_left, CategoryTheory.Over.grpObjMkPullbackSnd_one, CategoryTheory.Over.μ_pullback_left_snd, CategoryTheory.Over.μ_pullback_left_fst_snd, CategoryTheory.Over.μ_pullback_left_fst_fst, CategoryTheory.Over.tensorHom_left_snd; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match. The general adjunction tensor law requires a compatible sheaf pushforward lax structure, not available for this fixed pullback. Local ModulePullbackTensor uses a different tensorPullback and tensorComparison."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*tensor.*(pullback|δ)|pullback.*tmul|tensor.*hom_ext",
+   "results": "25 hits; Mathlib/Algebra/Category/AlgCat/TensorAlgebra.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Basic.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match. The general adjunction tensor law requires a compatible sheaf pushforward lax structure, not available for this fixed pullback. Local ModulePullbackTensor uses a different tensorPullback and tensorComparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackTensorComposition",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Elementary section formula for one pullback, used to prove ordinary pullback tensor composition in the pairing coherence reduction.",
+   "via": [
+    "lem-sc-picard-pairing-composition",
+    "lem-sc-picard-pairing-pullback-coherence",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackTensorUnitSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackTensorUnitSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback_δ_app_unit_tmulSection",
+  "statement": "theorem pullback_δ_app_unit_tmulSection\n    {X Y : Scheme.{u}} (f : Y ⟶ X) (M N : X.Modules) (U : X.Opens)\n    (s : Γ(M, U)) (t : Γ(N, U)) :\n    (Functor.OplaxMonoidal.δ (pullback f) M N).app (f ⁻¹ᵁ U)\n        (pullbackUnitApp f (M ⊗ N) U (tmulSection s t)) =\n      tmulSection (pullbackUnitApp f M U s) (pullbackUnitApp f N U t)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T122228-L-3590967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T122228-L-3590967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

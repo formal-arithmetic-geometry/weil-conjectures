@@ -12394,3 +12394,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:18 L: merged deliver/V4/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison (stage 3; reviewer PASS; first push; landing 20261013T121841-L-3558710 (interface); batch 20261013T121838; modules 2; new nodes 1)
 - 12:18 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedInverseImage (stage 3; reviewer PASS; first push; landing 20261013T121842-L-3558897 (interface); batch 20261013T121838; modules 3; new nodes 2)
 - 12:22 L: merged deliver/C3/Sheaf.FieldTheory.TriangularFieldModelData (stage 3; reviewer PASS; first push; landing 20261013T122227-L-3590768 (interface); batch 20261013T122226; modules 3; new nodes 2)
+- 12:22 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PullbackTensorComposition (stage 3; reviewer PASS; first push; landing 20261013T122228-L-3590967 (interface); batch 20261013T122226; modules 2; new nodes 1)
