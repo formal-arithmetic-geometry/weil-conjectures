@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import Mathlib.RingTheory.Flat.Stability
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 
 /-! # Tensor exactness on principal opens
@@ -83,6 +85,54 @@ theorem affine_open_localized_tensor_exact
       ∀ N : ModuleCat.{u} (Localization.Away f), ∀ i : ℤ, i < a →
         (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj
           (((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex
-            (.up ℤ)).obj P)).ExactAt i := by sorry
+            (.up ℤ)).obj P)).ExactAt i := by
+  have _hcompact := hU
+  intro f hf N i hi
+  let Q := ((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex
+    (.up ℤ)).obj P
+  let := HasDerivedCategory.standard (ModuleCat.{u} (Localization.Away f))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))
+  have hsheaf := principal_localization_sheaf_tor_bounds A P U a b hamp f hf
+  have hsheaf' : ∀ G : SheafOfModules.{u}
+      (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace),
+      ∀ j : ℤ, j < a ∨ max a b < j →
+        schemeDerivedTensorCohomologyVanishes (Spec (.of (Localization.Away f)))
+          (DerivedCategory.Q.obj
+            ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))
+              (SheafOfModules.{u}
+                (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) _ _ _ _
+              (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩
+              (ComplexShape.up ℤ)).obj Q)) G j := by
+    intro G j hj
+    exact hsheaf G j (hj.imp id (fun h ↦ lt_of_le_of_lt (le_max_right a b) h))
+  have htor := (affine_torAmplitude_iff (Localization.Away f) Q a (max a b)
+    (le_max_left a b)).mp hsheaf'
+  have hbounded : ∃ n : ℤ, ∀ j : ℤ, n < j → IsZero (Q.X j) := by
+    obtain ⟨n, hn⟩ := hP
+    exact ⟨n, fun j hj ↦ (ModuleCat.localizedModuleFunctor (Submonoid.powers f)).map_isZero
+      (hn j hj)⟩
+  have hflat : ∀ j : ℤ, Module.Flat (Localization.Away f) (Q.X j) := by
+    intro j
+    have : Module.Free A (P.X j) := (hfree j).1
+    change Module.Flat (Localization.Away f)
+      ((P.X j).localizedModule (Submonoid.powers f))
+    exact Module.Flat.of_isLocalizedModule (Localization.Away f) (Submonoid.powers f)
+      ((P.X j).localizedModuleMkLinearMap (Submonoid.powers f))
+  have hk : (HomologicalComplex.quasiIso (ModuleCat.{u} (Localization.Away f))
+      (.up ℤ)).kFlat Q := by
+    rw [← HomotopyCategory.kFlat_quotient_obj_iff]
+    apply (HomotopyCategory.kFlat_iff_preserves_acyclic _).2
+    intro L hL
+    obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective L
+    have hz := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2
+      (CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat Q hbounded hflat
+        L ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic L).1 hL))
+    exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hz, hz⟩
+  have hGE := (htor N).1
+  have hGE' := DerivedCategory.TStructure.t.isGE_of_iso
+    (DerivedCategory.QObjTensorSingleFunctorObjIso Q hk N) a
+  have hQGE := (DerivedCategory.isGE_Q_obj_iff _ a).mp hGE'
+  exact (CochainComplex.isGE_iff _ a).mp hQGE i hi
 
 end AlgebraicGeometry

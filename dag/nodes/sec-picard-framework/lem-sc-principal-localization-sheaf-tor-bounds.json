@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-principal-localization-sheaf-tor-bounds",
+ "kind": "statement",
+ "title": "Sheaf Tor bounds pass to termwise principal localization",
+ "statement": "Let $A$ be a commutative ring, let $P$ be any cochain complex of $A$-modules [def-pc-cochain-complex-modules], and let $U$ be an open subscheme of $\\operatorname{Spec}(A)$ [def-pc-scheme]. Choose derived categories for $\\operatorname{Spec}(A)$, $U$, and $\\operatorname{Spec}(A_f)$ [def-pc-derived-category]. Let $a,b$ be integers. Suppose the derived restriction $E_U$ to $U$ of the termwise associated-sheaf complex of $P$ satisfies $H^i(E_U\\otimes^{\\mathbf L}G)=0$ for every module sheaf $G$ on $U$ and every $i<a$ or $b<i$, as expressed by [def-pc-derived-tensor-cohomology-vanishes]. For every $f\\in A$ with $D(f)\\subseteq U$, let $P_f$ be the termwise localization defined by Mathlib's ModuleCat.localizedModuleFunctor at the powers of $f$. Then $H^i(\\widetilde{P_f}\\otimes^{\\mathbf L}H)=0$ for every module sheaf $H$ on $\\operatorname{Spec}(A_f)$ and every $i<a$ or $b<i$, in the same vanishing predicate. No boundedness, freeness, quasi-compactness, or ordering condition on $a,b$ is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09U8",
+  "place": "Lemma 20.48.4, statement and proof (open-immersion specialization), combined with Tag 08DW(2), affine derived pullback"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-scheme",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For j:D(f) -> U, test the bound on U against the ordinary direct image j_*H of an arbitrary module sheaf H on D(f). The open-immersion restriction counit identifies its restriction with H. Exact restriction commutes with cohomology and with derived tensor by the open-restriction tensor comparison, so the same interval bounds the restriction of E_U tensored with every H. The ordinary direct image need not be exact: it is only used to provide a sheaf to test. This is the open-immersion case of Tag 09U8.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify D(f) with Spec(A_f). The composite restriction of tilde(P) is derived pullback along A -> A_f. The affine derived-pullback comparison identifies it with tilde of derived localization of P. Localization is exact on modules, so the termwise localization Q preserves quasi-isomorphisms and represents derived localization for arbitrary P. The canonical Shrink equivalences in ModuleCat.localizedModuleFunctor commute with its maps and hence with every differential. Transport across the affine scheme isomorphism and these complex isomorphisms identifies the cohomology vanishing with the stated predicate for Q(tilde(Q)).",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09U8",
+  "place": "Open-immersion case; explicit direct-image testing argument as in the parent node, with Tag 08DW(2) affine localization computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of a sheaf complex restricted to an open containing D(f) implies the same sheaf Tor bounds for tilde of its localized module complex",
+   "results": "Eight t-structure declarations, including DerivedCategory.isGE_Q_obj_iff and isLE_Q_obj_iff. None provides the sheaf open-restriction/localization comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedModuleFunctor|derivedTensor_openRestriction_iso",
+   "results": "Fifteen Mathlib localization hits, including localizedModuleFunctor_map_exact and preservation of finite limits/colimits; no sheaf Tor-bound transport. Local library reads find affine comparison and private helpers in TorAmplitudeOpenLocal, but no public theorem providing this conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a sheaf complex restricted to an open containing D(f) implies the same sheaf Tor bounds for tilde of its localized module complex",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenLocalizedTensorExact",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EG lower truncation paragraph: restrict the Tor interval to a principal affine open before applying affine tensor computation",
+   "via": [
+    "lem-sc-affine-open-localized-tensor-exact",
+    "lem-sc-affine-truncation-kernel-flat",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalLocalizationSheafTorBounds.lean",
+  "declaration": "AlgebraicGeometry.principal_localization_sheaf_tor_bounds",
+  "statement": "theorem principal_localization_sheaf_tor_bounds\n    (A : Type u) [CommRing A]\n    (P : CochainComplex (ModuleCat.{u} A) ℤ)\n    (U : (Spec (.of A)).Opens)\n    [HasDerivedCategory.{wX}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{wU}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (a b : ℤ)\n    (hamp : ∀ G : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace),\n      ∀ i : ℤ, i < a ∨ b < i →\n        schemeDerivedTensorCohomologyVanishes U.toScheme\n          ((@Functor.mapDerivedCategory\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _\n            (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) _ _ _\n            ((SheafOfModules.overFunctor.{u}\n                (moduleRings (Spec (.of A)).toRingedSpace) U) ⋙\n              Equivalence.functor\n                (C := SheafOfModules.{u}\n                  ((moduleRings (Spec (.of A)).toRingedSpace).over U))\n                (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n                (Scheme.Modules.overEquiv U))\n            (Functor.additive_of_preserves_binary_products _)\n            (comp_preservesFiniteLimits _ _) (comp_preservesFiniteColimits _ _)).obj\n            (DerivedCategory.Q.obj\n              ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n                (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _\n                (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩\n                (ComplexShape.up ℤ)).obj P))) G i)\n    (f : A) (hf : PrimeSpectrum.basicOpen f ≤ U)\n    [HasDerivedCategory.{wF}\n      (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))] :\n    ∀ G : SheafOfModules.{u}\n        (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace),\n      ∀ i : ℤ, i < a ∨ b < i →\n        schemeDerivedTensorCohomologyVanishes (Spec (.of (Localization.Away f)))\n          (DerivedCategory.Q.obj\n            ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))\n              (SheafOfModules.{u}\n                (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) _ _ _ _\n              (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩\n              (ComplexShape.up ℤ)).obj\n              (((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex\n                (.up ℤ)).obj P))) G i",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T095926-L-2450184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T095926-L-2450184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
