@@ -45,6 +45,65 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
+private theorem restriction_generators {X Y : Scheme.{u}} (F : Y.Modules)
+    (j : X ⟶ Y) [IsOpenImmersion j] (V : X.Opens)
+    (h : ∀ s : F.val.obj (op (j ''ᵁ V)),
+      ∃ (c : Y.ringCatSheaf.obj.obj (op (j ''ᵁ V)))
+        (t : F.val.obj (op (j ''ᵁ ⊤))),
+        s = c • F.val.map (homOfLE (j.image_mono (show V ≤ ⊤ from le_top))).op t) :
+    Submodule.span (X.ringCatSheaf.obj.obj (op V))
+      (Set.range ((Scheme.Modules.restrict F j).val.map V.leTop.op)) = ⊤ := by
+  apply top_unique
+  intro s hs
+  obtain ⟨c, t, ht⟩ := h s
+  have hsmul : c • F.val.map (homOfLE (j.image_mono (show V ≤ ⊤ from le_top))).op t =
+      (j.appIso V).hom c • (Scheme.Modules.restrict F j).val.map V.leTop.op t := by
+    have he := Scheme.Modules.smul_restrictAppIso_inv_apply j F V c
+      (F.val.map (homOfLE (j.image_mono (show V ≤ ⊤ from le_top))).op t)
+    change c • F.val.map (homOfLE (j.image_mono (show V ≤ ⊤ from le_top))).op t =
+      (j.appIso V).hom c • (Scheme.Modules.restrict F j).val.map V.leTop.op t at he
+    exact he
+  rw [ht, hsmul]
+  exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨t, rfl⟩)
+
+private theorem restriction_generators_of_image_eq {X Y : Scheme.{u}} (F : Y.Modules)
+    (j : X ⟶ Y) [IsOpenImmersion j] (V : X.Opens) {A B : Y.Opens}
+    (hA : j ''ᵁ V = A) (hB : j ''ᵁ ⊤ = B) (i : A ≤ B)
+    (h : ∀ s : F.val.obj (op A),
+      ∃ (c : Y.ringCatSheaf.obj.obj (op A)) (t : F.val.obj (op B)),
+        s = c • F.val.map (homOfLE i).op t) :
+    Submodule.span (X.ringCatSheaf.obj.obj (op V))
+      (Set.range ((Scheme.Modules.restrict F j).val.map V.leTop.op)) = ⊤ := by
+  subst A B
+  exact restriction_generators F j V h
+
+private theorem principalOpen_chart (f : Fidx) (r : R[f]) :
+    ∃ g : Fidx, D[f].ι ''ᵁ
+      ((basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom ⁻¹ᵁ
+        PrimeSpectrum.basicOpen r) = D[g] := by
+  obtain ⟨n, a, ha, rfl⟩ := HomogeneousLocalization.Away.mk_surjective 𝒜 f.property.2 r
+  let g : Fidx := ⟨(f.val.1 * a, f.val.2 + n * f.val.2),
+    ⟨by omega, SetLike.mul_mem_graded f.property.2 ha⟩⟩
+  refine ⟨g, ?_⟩
+  have hbase (x : D[f]) :
+      (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom x =
+        (ProjectiveSpectrum.Proj.toSpec 𝒜 f.val.1).base x := by
+    rfl
+  have hopen :
+      (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom ⁻¹ᵁ
+        PrimeSpectrum.basicOpen (HomogeneousLocalization.Away.mk 𝒜 f.property.2 n a ha) =
+      D[f].ι ⁻¹ᵁ basicOpen 𝒜 a := by
+    ext x
+    change (HomogeneousLocalization.Away.mk 𝒜 f.property.2 n a ha) ∉
+      ((basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom x).asIdeal ↔
+        a ∉ x.val.asHomogeneousIdeal
+    rw [hbase]
+    exact (ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply 𝒜 x
+      ⟨n • f.val.2, ⟨a, ha⟩, ⟨f.val.1 ^ n, SetLike.pow_mem_graded n f.property.2⟩,
+        ⟨n, rfl⟩⟩).not
+  rw [hopen, Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+    ← basicOpen_mul]
+
 /-- Restrictions of whole-chart sections generate the sections on each principal open.
 
 Source: Stacks Project, Constructions, Lemma 01M7, and Schemes, Lemma 01HV.
@@ -94,6 +153,33 @@ theorem gradedModuleChart_basisComparison_fixed_generators
       let E := Scheme.Modules.restrict F D[f].ι
       let B := Set.range (fun r : R[f] ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)
       ∀ V : B, Submodule.span (D[f].toScheme.ringCatSheaf.obj.obj (op V.val))
-        (Set.range (E.val.map V.val.leTop.op)) = ⊤ := by sorry
+        (Set.range (E.val.map V.val.leTop.op)) = ⊤ := by
+  classical
+  dsimp
+  intro V
+  obtain ⟨r, hr⟩ := V.property
+  obtain ⟨g, hg⟩ := principalOpen_chart 𝒜 f r
+  have hgV : D[f].ι ''ᵁ V.val = D[g] := by rw [← hr]; exact hg
+  have i : D[g] ≤ D[f] := hgV ▸ D[f].ι_image_le V.val
+  have hgen (s : F.val.obj (op D[g])) :
+      ∃ (c : (Proj 𝒜).ringCatSheaf.obj.obj (op D[g]))
+        (t : F.val.obj (op D[f])), s = c • F.val.map (homOfLE i).op t := by
+    obtain ⟨x, hx⟩ := (theta f g i).surjective (alpha g s)
+    obtain ⟨q, t, hq⟩ :
+        ∃ (q : Z f) (t : Submonoid.powers (U f g)), LocalizedModule.mk q t = x := by
+      induction x using LocalizedModule.induction_on with
+      | h q t => exact ⟨q, t, rfl⟩
+    let c : Localization.Away (U f g) := Localization.mk 1 t
+    have hc : c • mk q 1 = x := by
+      rw [LocalizedModule.mk_smul_mk, one_smul, mul_one]
+      exact hq
+    have heq : s = (awayToSection 𝒜 g.val.1 (thetaS f g i c)) •
+        F.val.map (homOfLE i).op ((alpha f).symm q) := by
+      apply (alpha g).injective
+      rw [hscalar, hrestriction, (alpha f).apply_symm_apply]
+      rw [← (htheta f g i).2.1 q, ← (htheta f g i).2.2 c (mk q 1), hc, hx]
+    exact ⟨_, _, heq⟩
+  exact restriction_generators_of_image_eq F D[f].ι V.val hgV
+    D[f].ι_image_top i hgen
 
 end AlgebraicGeometry.Proj

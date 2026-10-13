@@ -13,21 +13,31 @@
  ],
  "proof": [
   {
-   "text": "Represent a principal open by a positive homogeneous chart using the chart-intersection formula. By alpha, hrestriction and theta, each section is a localized fraction of a whole-chart section. The scalar denominator is invertible in the section ring, so these restrictions span.",
+   "text": "Use HomogeneousLocalization.Away.mk_surjective to write the principal-open parameter as a/f^n. The pointwise formula ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply identifies its preimage in the fixed chart with the preimage of D_+(a). The image under the chart inclusion is D_+(f) intersect D_+(a), hence D_+(f*a). This is a positive-degree homogeneous chart, of degree deg(f)+n*deg(f). No nonzero or nonempty-open assumption is used.",
    "uses": [
     "lem-weil-pbc-proj-basic-open-intersection"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a section s on D_+(f*a), take a preimage x of alpha(s) under theta. LocalizedModule.induction_on represents x as q/t. The scalar c=1/t satisfies c*mk(q,1)=x by LocalizedModule.mk_smul_mk. The supplied semilinearity, value on mk(q,1), scalar compatibility of alpha, and restriction compatibility of alpha show s=awayToSection(thetaS(c))*restriction(alpha_f.inverse(q)). Thus each section is a single scalar multiple of a restricted whole-chart section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an open immersion j, Scheme.Modules.smul_restrictAppIso_inv_apply transports the preceding scalar-multiple description to the restricted module sheaf, sending the scalar through j.appIso. Each generator lies in the span of the restriction range, and closure under scalar multiplication proves span=top. Substitute the geometric image equality and the identity that the image of the whole chart is D_+(f).",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-proj-basic-open-intersection"
  ],
  "proof_origin": {
-  "by": "M4 second reader",
+  "by": "R4 worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Lemmas 01M4 and 01MB; generator argument from localization fractions",
-  "note": "Strict local construction or generation step, without restriction naturality; replaces the rejected arbitrary-bijection compatibility statement."
+  "place": "Lemmas 01M4, 01M7 and 01MB; localized-fraction generator argument",
+  "note": "Complete Lean proof: direct homogeneous-fraction chart presentation, localized fraction as one scalar multiple, and restriction scalar transport. No associated-sheaf comparison or new intermediate theorem is needed."
  },
  "mathlib_searches": [
   {
@@ -102,10 +112,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T011931-L-2764733",
-  "kind": "interface",
+  "landing": "20261013T024046-L-3338408",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
