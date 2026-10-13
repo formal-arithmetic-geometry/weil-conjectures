@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-picard-external-right-rectangle-symmetry",
+ "kind": "statement",
+ "title": "Natural symmetry of external coefficient section functors",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of schemes [def-pc-scheme], $A\\subseteq X$ and $B\\subseteq Y$ opens, and $F$ an $\\mathcal O_X$-module. Set $P=X\\times_kY$ and $Q=Y\\times_kX$. For an $\\mathcal O_Y$-module $G$, form $R(G)=\\Gamma(\\operatorname{pr}_{1,P}^{-1}A\\cap\\operatorname{pr}_{2,P}^{-1}B,\\operatorname{pr}_{1,P}^*F\\otimes\\operatorname{pr}_{2,P}^*G)_k$ and $L(G)=\\Gamma(\\operatorname{pr}_{1,Q}^{-1}B\\cap\\operatorname{pr}_{2,Q}^{-1}A,\\operatorname{pr}_{1,Q}^*G\\otimes\\operatorname{pr}_{2,Q}^*F)_k$, where pullback is tensorPullback [def-pc-module-pullback], tensor is [def-pur-sheaf-tensor-product], and scalar sections use [def-sc-field-linear-module-cohomology-operations]. The functor $L$ is the section composite of the external coefficient functor of [lem-sc-picard-external-affine-rectangle-exact] on the swapped factors. Then the two functors $R,L:Y.\\mathrm{Modules}\\to\\mathrm{ModuleCat}(k)$ are naturally isomorphic. There is no short exact sequence in this statement and no affineness, quasi-coherence, covering or diagonal hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, right-variable coefficient argument after equation-kunneth-on-cech; symmetry of factor products and tensor. Pullback composition: Sheaves Tag 0097; tensor compatibility: Modules Tag 01CD; isomorphism restriction: Sheaves Tag 00A0. Read online 2026-10-13."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-picard-external-affine-rectangle-exact"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical pullbackSymmetry f g : P=X times_k Y iso Q=Y times_k X. Its equations with the two projections show that the inverse image of the transposed rectangle on Q is the original rectangle on P. Pullback condition also identifies the two structure morphisms to Spec k. These are direct pullback universal-property equations and inverse-image identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary O_Y-module G, pull back the external coefficient pr1_Q^*G tensor pr2_Q^*F along the transposition. The natural pullback composition isomorphisms identify its two factors with pr2_P^*G and pr1_P^*F, and pullback compatibility with tensor identifies their tensor product. Apply tensor braiding to obtain pr1_P^*F tensor pr2_P^*G. Braiding is natural in G and involutive.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An isomorphism of schemes is an open immersion, so module pullback is restriction along that isomorphism, naturally in the coefficient. Evaluate the module isomorphism of the preceding step on the original rectangle and use section transport to identify it with sections on the transposed rectangle. Restrict scalars to k; the structure-map identity from the first step proves k-linearity. Compose the naturality squares from pullback composition, tensor comparison, braiding and section transport to obtain the natural isomorphism in the statement. Their inverses give its inverse. No affine, quasi-coherent or exactness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Right-variable coefficient diagram; symmetry comparison isolated by V4 using Tags 0097, 01CD and 00A0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of external tensor product section functors under swapping the two factors of a scheme fiber product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturally identify sections of external tensor products on a rectangle with the transposed rectangle by pullback symmetry and tensor braiding",
+   "results": "Hits: ModuleCat.MonoidalCategory.braiding_inv_apply, ModuleCat.MonoidalCategory.tensorμ_eq_tensorTensorTensorComm, ModuleCat.MonoidalCategory.braiding_hom_apply, ModuleCat.MonoidalCategory.tensorμ_apply, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_symm_tmul, TensorProduct.comm",
+   "date": "2026-10-13",
+   "verdict": "No complete section-functor comparison found; partial symmetry tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackSymmetry",
+   "results": "Hits: CategoryTheory.Limits.pullbackSymmetry, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd, CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst, CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst_assoc, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd_assoc, CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst_assoc",
+   "date": "2026-10-13",
+   "verdict": "No complete section-functor comparison found; partial symmetry tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "picardExternal.*symmetry|rectangle.*symmetry|external.*transpose",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No complete section-functor comparison found; partial symmetry tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalRightCechProductExact",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-external-right-cech-exact-product",
+   "place": "Reuse the existing left affine-rectangle exactness via transposition and tensor symmetry"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalRightRectangleSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalRightRectangleSymmetry.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternal_right_rectangle_symmetry",
+  "statement": "theorem picardExternal_right_rectangle_symmetry\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (A : X.Opens) (B : Y.Opens) (F : X.Modules) :\n    Nonempty ((tensorPullback (pullback.snd f g) ⋙\n        tensorLeft ((tensorPullback (pullback.fst f g)).obj F) ⋙\n        picardScalarSectionsFunctor (pullback.fst f g ≫ f)\n          (pullback.fst f g ⁻¹ᵁ A ⊓ pullback.snd f g ⁻¹ᵁ B)) ≅\n      (picardExternalCoefficientFunctor g f F ⋙\n        picardScalarSectionsFunctor (pullback.fst g f ≫ g)\n          (pullback.fst g f ⁻¹ᵁ B ⊓ pullback.snd g f ⁻¹ᵁ A)))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T124317-L-3778370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T124317-L-3778370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
