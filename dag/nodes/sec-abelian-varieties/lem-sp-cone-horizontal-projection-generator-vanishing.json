@@ -13,22 +13,51 @@
  },
  "proof": [
   {
-   "text": "write `e = (-1)^p`. A valid summand of total degree `m` and horizontal\nindex `h` has vertical degree `m-h`. The total differential sends it to the\nsum of the horizontal term in column `h+1` and `(-1)^h` times the vertical\nterm in column `h`. Total maps preserve `h`. The projection is zero on every\ncolumn except `p`, so if `h>p` all terms on both sides vanish. If `h=p`,\nthe horizontal term vanishes and the vertical coefficient is `e`.\nUse the source/target biproduct decomposition of each cone. On column `p`,\nthe total-map cone differential has blocks `-e*d_A`, `f`, and `e*d_B`.\nThe column cone shifted by `-p` has blocks `-e*d_A`, `e*f`, and `e*d_B`.\nThe projection has source block `e` and target block `1`. On a source\nsummand, applying the projection before the shifted differential therefore\nhas source block `-e^2*d_A` and target block `e^2*f`; applying the total-map\ncone differential before the projection has blocks `-e^2*d_A` and `f`.\nThese agree because `e^2=1`. On a target summand both composites are\n`e*d_B`. Their difference is consequently zero on both kinds of generator.\nAll identifications here are the canonical degree-equality isomorphisms\nappearing in `horizontalExtendedProjection` and `coneHorizontalProjection`.\nIf `m<0`, the extended summand inclusion is zero. If `m>=0` but `h>m`,\n`ιTotalOrZero` is zero since `h + (m.toNat-h) != m.toNat`. This covers invalid\nsummands. At `n=p-1`, only the source generator in vertical degree zero\ncan survive; the same source-block calculation applies. Below `n=p-1`,\nboth generators with `h>=p` vanish. Thus the argument covers every integer\ndegree, including the extension-by-zero boundary.",
+   "text": "Use the cone biproduct decomposition to compute the projection on a source inclusion as (-1)^p times the source column projection and on a target inclusion as the target column projection.",
+   "uses": [
+    "def-sp-cone-horizontal-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1, and Lemma 12.25.1(1) (label lemma-double-complex); explicit projection refinement."
+   }
+  },
+  {
+   "text": "On a source generator expand homotopyCofiber.inlX_d before and after projection, transporting the successor degree by XIsoOfEq. Apply horizontalProjection_tail_differential to the source-total differential block and horizontalProjection_naturality to the f block. The shift coefficient is (-p).negOnePow=(-1)^p, and (-1)^p times itself is 1, so the two composites agree.",
    "uses": [
     "def-sp-cone-horizontal-projection",
-    "lem-sp-cone-horizontal-step-stable"
+    "lem-sp-horizontal-projection-tail-differential",
+    "lem-sp-horizontal-projection-naturality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1, and Lemma 12.25.1(1) (label lemma-double-complex); explicit projection refinement."
+   }
+  },
+  {
+   "text": "On a target generator use mappingCone.inr_f_d and Hom.comm. Apply horizontalProjection_tail_differential to identify the projected total differential with (-1)^p times the column differential, exactly the shift coefficient. Finally distribute composition over subtraction, use sub_eq_zero, and combine the source and target generator results.",
+   "uses": [
+    "def-sp-cone-horizontal-projection",
+    "lem-sp-horizontal-projection-tail-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1, and Lemma 12.25.1(1) (label lemma-double-complex); explicit projection refinement."
+   }
   }
  ],
  "proof_deps": [
   "def-sp-cone-horizontal-projection",
-  "lem-sp-cone-horizontal-step-stable"
+  "lem-sp-horizontal-projection-tail-differential",
+  "lem-sp-horizontal-projection-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/012X",
-  "place": "First horizontal filtration and Lemma 12.25.1(1); explicit generator sign calculation"
+  "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1, and Lemma 12.25.1(1) (label lemma-double-complex); explicit projection refinement."
  },
  "mathlib_searches": [
   {
@@ -240,9 +269,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T000042-L-2230632",
+  "landing": "20261013T032957-L-3674390",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
