@@ -1,0 +1,166 @@
+{
+ "id": "lem-sc-tensor-homology-product-span",
+ "kind": "statement",
+ "title": "Product classes span total tensor homology over a field",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A,B$ be integer-indexed cochain complexes of $k$-vector spaces whose terms vanish below some integer. Set $T=\\operatorname{Tot}(A\\otimes_k B)$ with direct-sum terms and differential $d_A\\otimes 1+(-1)^p1\\otimes d_B$. For every integer $n$, $H^n(T)$ is spanned over $k$ by classes $[z]$ where $z$ is a total cycle whose inclusion is the summand tensor $a\\otimes b$ for some cycles $a\\in Z^p(A)$ and $b\\in Z^q(B)$ with $p+q=n$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma varieties-lemma-kunneth, tensor-total Cech step and field-linear algebra Kunneth identification; complement and contraction argument in steps 1 and 2 of lem-sc-qcoh-cech-total-tensor-iso"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Every vector space is projective and injective over a field by semisimplicity. Split each homology quotient by Projective.factorThru and extend it to full terms by Injective.factorThru. Their composite defines a cochain endomorphism e whose values lie in cycles and whose induced homology maps are identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the split-category null-homotopy theorem to e-id, whose homology maps vanish. Thus e is homotopic to id, for each factor complex.",
+   "uses": [
+    "lem-pc-split-category-null-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the two endomorphisms using mapBifunctorMap. Mathlib mapBifunctorMapHomotopy₁ and mapBifunctorMapHomotopy₂ give a homotopy to the identity of the total complex, so its homology map is the identity. Each tensor of its output factors is a tensor of cycles; the total outgoing differential therefore vanishes. Lift this map to total cycles.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let V be the span of product cycle classes. The composite from the total degree-n term through the lifted cycle map, the homology quotient, and the quotient by V vanishes: check each summand on pure tensors, where its image belongs to the generating set by construction. Homology naturality and the identity action on homology then show that the composite of the homology projection with the quotient by V vanishes. Since the homology projection is surjective, every homology class lies in V. All arguments use finite-support colimits and adjacent differentials; no lower bound or dimension hypothesis is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-split-category-null-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma varieties-lemma-kunneth, tensor-total Cech step and field-linear algebra Kunneth identification; complement and contraction argument in steps 1 and 2 of lem-sc-qcoh-cech-total-tensor-iso",
+  "note": "B4 complete Lean proof of the field-linear splitting argument; source context checked at https://stacks.math.columbia.edu/tag/0BED. The split-category theorem is a proved generic tool, not a replacement for a blueprint unit step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth tensor product cochain complexes vector spaces homology bijective",
+   "results": "Hits: CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CochainComplex.HomComplex.CohomologyClass.toHom_bijective, Rep.torIso, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.HomComplex.homologyAddEquiv, groupHomologyIsoTor, CochainComplex.ConnectData.homologyIsoPos, CochainComplex.cm5b.instQuasiIsoIntP; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctor, Function.Bijective",
+   "results": "Hits: ; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|tensor.*homology|homology.*tensor",
+   "results": "Hits: Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection from total tensor complex homology to direct sum of tensor products of homology over a field",
+   "results": "Hits: Rep.torIso, groupHomologyIso, groupHomologyIsoTor, HomologicalComplex.coinvariantsTensorObj, HomologicalComplex.ιTensorObj, Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso, groupHomology.inhomogeneousChainsIso, HomologicalComplex.HasGoodTensor₁₂; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homology, Submodule.span",
+   "results": "Hits: ; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*homology|homology.*mapBifunctor",
+   "results": "Hits: ; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of total tensor complex over field generated by tensors of cocycles, projection onto tensor homology classes",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of the tensor total complex of vector spaces is spanned by tensors of cycles",
+   "results": "Hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasTensor, TensorProduct.exists_eq_tmul_of_forall, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.ιTensorObj; no matching total-tensor homology statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TensorHomologyMapBijective",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Field-linear Kunneth step: Product classes span total tensor homology over a field",
+   "via": [
+    "lem-sc-tensor-homology-map-bijective",
+    "lem-sc-qcoh-cech-total-tensor-iso",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorHomologyProductSpan",
+  "file": "lean/Sheaf/Algebra/Homology/TensorHomologyProductSpan.lean",
+  "declaration": "HomologicalComplex.tensor_homology_product_span",
+  "statement": "theorem tensor_homology_product_span {k : Type u} [Field k]\n    (A B : CochainComplex (ModuleCat.{u} k) ℤ)\n    (hA : ∃ m : ℤ, ∀ p : ℤ, p < m → IsZero (A.X p))\n    (hB : ∃ m : ℤ, ∀ q : ℤ, q < m → IsZero (B.X q)) (n : ℤ) :\n    Submodule.span k {x | ∃ (s : {pq : ℤ × ℤ // pq.1 + pq.2 = n})\n        (a : A.cycles s.1.1) (b : B.cycles s.1.2)\n        (z : (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))\n          (ComplexShape.up ℤ)).cycles n),\n        (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))\n          (ComplexShape.up ℤ)).iCycles n z =\n          ιMapBifunctor A B (curriedTensor (ModuleCat.{u} k)) (ComplexShape.up ℤ)\n            s.1.1 s.1.2 n s.2\n            ((A.iCycles s.1.1 a) ⊗ₜ[k] (B.iCycles s.1.2 b)) ∧\n        x = (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))\n          (ComplexShape.up ℤ)).homologyπ n z} = ⊤",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082331-L-1630992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T082331-L-1630992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

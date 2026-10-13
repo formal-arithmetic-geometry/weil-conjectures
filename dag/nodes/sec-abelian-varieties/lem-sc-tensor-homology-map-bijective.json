@@ -12,32 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Choose complements of boundaries in cycles and of cycles in each degree of A and B. The outgoing differential restricts to an isomorphism from the latter complement to the next boundary space: its kernel is zero and its image is the full differential image.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the tensor homology coordinate map r. The canonical representative equation for f and the equation for r imply r∘f=id on tensors of homology classes: lift each factor to a cycle using surjectivity of homologyπ, and obtain the total-cycle lift from the existing tensor homology pairing theorem. Pure-tensor and direct-sum extensionality extend this equation to the full source. Hence f is injective.",
+   "uses": [
+    "lem-sc-tensor-homology-coordinates",
+    "lem-sc-tensor-homology-pairing"
+   ],
+   "elementary": false
   },
   {
-   "text": "These complements split each complex into a zero-differential homology-representative subcomplex H and a contractible subcomplex E. On E use the inverse of the restricted differential as contracting homotopy, zero on the complementary summand.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Distribute these two splittings over tensor products and the total direct sums. On E_A tensor H_B and E_A tensor E_B use h_A tensor 1; the mixed coefficients (-1)^(p-1) and (-1)^p cancel. On H_A tensor E_B use (-1)^p times 1 tensor h_B; the mixed coefficients (-1)^p and (-1)^(p+1) cancel. Thus all these summands are contractible.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Only H_A tensor H_B survives, with zero differential. Identify its degree-n space with the direct sum of H^p(A) tensor H^q(B), and its homology with H^n(T). The surviving inclusion acts on classes by the equation assumed for f. Cycle representatives surject onto each homology module; pure tensors and direct-sum inclusions generate the source. Therefore f equals the bijective inclusion-induced map.",
-   "uses": [],
-   "elementary": true
+   "text": "Product cycle classes span the total homology. Each generator is in the range of f by its assumed representative equation. Therefore the range contains the full span, which is top, so f is surjective. Combine this with injectivity.",
+   "uses": [
+    "lem-sc-tensor-homology-product-span"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-tensor-homology-coordinates",
+  "lem-sc-tensor-homology-product-span",
+  "lem-sc-tensor-homology-pairing"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Lemma varieties-lemma-kunneth, tensor-total Cech step and field-linear algebra Kunneth identification; complement and contraction argument in steps 1 and 2 of lem-sc-qcoh-cech-total-tensor-iso",
-  "note": "V3 formalization of the parent node argument; representative descent additionally follows the explicit construction in Tag 068G."
+  "note": "B4 complete proof: left inverse from tensor homology coordinates and surjectivity from product-class spanning, both proved in this delivery. No new sorry; the field-linear complement argument is implemented via a homotopic cycle-valued projector and Mathlib tensor homotopies. Repair: the total-cycle lift comes from the existing public tensor_homology_pairing theorem, avoiding its duplicated private helper."
  },
  "mathlib_searches": [
   {
@@ -136,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261013T015620-L-3029160",
+  "landing": "20261013T082331-L-1630992",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

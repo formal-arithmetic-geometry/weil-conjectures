@@ -11,6 +11,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.DirectSum.Module
 
+import Sheaf.Algebra.Homology.TensorHomologyCoordinates
+import Sheaf.Algebra.Homology.TensorHomologyProductSpan
+import Sheaf.Algebra.Homology.TensorHomologyPairing
+
 /-!
 # Bijectivity of the canonical tensor homology map over a field
 
@@ -76,6 +80,34 @@ theorem tensor_homology_map_bijective {k : Type u} [Field k]
           ((A.homologyπ s.1.1 a) ⊗ₜ[k] (B.homologyπ s.1.2 b))) =
           (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))
             (ComplexShape.up ℤ)).homologyπ n z) :
-    Function.Bijective f := by sorry
+    Function.Bijective f := by
+  classical
+  obtain ⟨r, hr⟩ := tensor_homology_coordinates A B n
+  have hrf : r.comp f = LinearMap.id := by
+    apply DirectSum.linearMap_ext
+    intro s
+    apply TensorProduct.ext
+    apply LinearMap.ext
+    intro a
+    apply LinearMap.ext
+    intro b
+    obtain ⟨a, rfl⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ s.1.1)).mp
+      inferInstance a
+    obtain ⟨b, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ s.1.2)).mp
+      inferInstance b
+    obtain ⟨c, hc⟩ := tensor_homology_pairing A B s.1.1 s.1.2 n s.2
+    obtain ⟨z, hz, _⟩ := hc a b
+    change r (f (DirectSum.lof k _ _ s
+      ((A.homologyπ s.1.1 a) ⊗ₜ[k] (B.homologyπ s.1.2 b)))) = _
+    rw [hf s a b z hz, hr s a b z hz]
+    rfl
+  refine ⟨Function.LeftInverse.injective (fun x ↦ congrArg (fun g ↦ g x) hrf), ?_⟩
+  apply LinearMap.range_eq_top.mp
+  apply top_unique
+  rw [← tensor_homology_product_span A B hA hB n]
+  apply Submodule.span_le.mpr
+  rintro x ⟨s, a, b, z, hz, rfl⟩
+  exact ⟨DirectSum.lof k _ _ s
+    ((A.homologyπ s.1.1 a) ⊗ₜ[k] (B.homologyπ s.1.2 b)), hf s a b z hz⟩
 
 end HomologicalComplex
