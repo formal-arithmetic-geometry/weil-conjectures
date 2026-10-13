@@ -13,38 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Localize A[X] at nonzero coefficients. The extension of r is a nonzero prime in K[X], hence maximal. Identify its residue field with kappa(r); reduction by its monic generator shows finiteness over K.",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
+   "text": "Embed A into kappa(r) using the zero contraction and lift the embedding to K = Frac(A). For x the residue of X, choose a nonzero f in r. Evaluation of f at x is zero, so x is algebraic over A and over K. The intermediate field K(x) is finite-dimensional by Mathlib IntermediateField.finiteDimensional_adjoin. Each polynomial residue lies in K(x), by polynomial induction. Every element of kappa(r) is a fraction of polynomial residues, by IsFractionRing.div_surjective for A[X]/r; hence K(x) is all of kappa(r). Module.Finite.trans then proves that L is finite over K.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "Choose a finite K-basis of L integral over A by clearing denominators (Mathlib FiniteDimensional.exists_is_basis_integral). Its generated subalgebra B is finite over A.",
+   "text": "Use Mathlib FiniteDimensional.exists_is_basis_integral to choose a finite K-basis e of L consisting of elements integral over A. Define B = Algebra.adjoin A (Set.range e). The finite-integral-generation lemma proves Module.Finite A B. For z in L, IsLocalization.exist_integer_multiples_of_finite clears the coordinates e.repr z by one nonzero d in A. The basis expansion gives d*z = sum_i a_i*e_i in B. The image of d is nonzero, and z = (d*z)/d. Thus IsFractionRing.of_field proves that L is a fraction field of B.",
    "uses": [
     "lem-weil-pbc-finite-of-integral-generators"
    ],
    "elementary": false
   },
   {
-   "text": "Clear denominators in coordinates to show L is the fraction field of B. Let s be the kernel of evaluation of B[X] at the image of X. Primality and zero contraction follow from the embedding in L; a nonzero polynomial in r stays nonzero in B[X] and belongs to s.",
+   "text": "Let g = aeval x : B[X] to L, with x now the image of X in L, and s = ker(g). Its primality follows because L is a field. Polynomial algebra-homomorphism extensionality shows g(map(A to B)(f)) equals the original image of f for every f in A[X]. A nonzero f in r remains nonzero after the injective coefficient map and belongs to s; therefore s is nonzero. Evaluation on constant polynomials is the inclusion B into L, so s contracts to zero.",
    "uses": [],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "The embedded quotient B[X]/s contains B and has fraction field L. Uniqueness of fraction fields gives the B-algebra equivalence kappa(s) to L, compatible with evaluation on all polynomials. Transport the fraction-field structure back along this equivalence.",
+   "text": "The residue-field universal property Ideal.ResidueField.liftₐ extends g to a B-algebra map phi : kappa(s) to L, since its kernel is s and every polynomial outside s evaluates to a nonzero element of the field. It is injective as a field homomorphism. Each z in L is a fraction of two elements of B; the same fraction of their constant residues maps to z, proving surjectivity. Let e be AlgEquiv.ofBijective phi. Transport the fraction-field structure along e.symm using IsFractionRing.of_algEquiv. The defining computation rule Ideal.ResidueField.liftₐ_algebraMap and the previously proved polynomial evaluation identity give the required compatibility.",
    "uses": [],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-of-integral-generators",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
+  "lem-weil-pbc-finite-of-integral-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
+  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), first paragraph; direct algebraicity and fraction-generation proof in Q1 replaces localization of the polynomial prime. Checked against https://stacks.math.columbia.edu/tag/07PU on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -121,10 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T015600-L-3022642",
-  "kind": "interface",
+  "landing": "20261013T031548-L-3572960",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
