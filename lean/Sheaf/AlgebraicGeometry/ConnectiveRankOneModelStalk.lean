@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.RankOneResidueStalkComponent
+import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # The local stalk calculation for a connective rank-one model
 
@@ -24,6 +24,61 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem strictlyPerfect_single_restricted_unit (S : Scheme.{u}) (U : S.Opens) :
+    Scheme.IsStrictlyPerfect S U
+      ((CochainComplex.singleFunctor
+        (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj
+          ((SheafOfModules.overFunctor.{u}
+            (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf))) := by
+  classical
+  let R := (moduleRings S.toRingedSpace).over U
+  let M := (SheafOfModules.overFunctor.{u}
+    (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf)
+  let A := (CochainComplex.singleFunctor (SheafOfModules.{u} R) 0).obj M
+  refine ⟨⟨0, 0, fun n hn ↦ ?_⟩, ?_⟩
+  · exact HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)
+  · intro n
+    by_cases hn : n = 0
+    · subst n
+      let e : A.X 0 ≅ SheafOfModules.free (R := R) (ULift.{u} (Fin 1)) :=
+        HomologicalComplex.singleObjXSelf (.up ℤ) 0 M ≪≫
+          (coproductUniqueIso (fun _ : ULift.{u} (Fin 1) ↦ SheafOfModules.unit R)).symm
+      exact ⟨1, e.hom, e.inv, e.hom_inv_id⟩
+    · have hz : IsZero (A.X n) :=
+        HomologicalComplex.isZero_single_obj_X _ _ _ _ hn
+      exact ⟨0, 0, 0, by simpa using (hz.eq_of_src (0 : A.X n ⟶ A.X n) (𝟙 _))⟩
+
+private theorem epi_homologyMap_of_epi_component_zero_outgoing
+    {A B : CochainComplex AddCommGrpCat.{u} ℤ} (α : A ⟶ B)
+    (hA : IsZero (A.X 1)) [Epi (α.f 0)] :
+    Epi (HomologicalComplex.homologyMap α 0) := by
+  have hdA : A.d 0 1 = 0 := hA.eq_of_tgt _ _
+  have hdB : B.d 0 1 = 0 := by
+    apply (cancel_epi (α.f 0)).mp
+    rw [α.comm 0 1, hdA, zero_comp, comp_zero]
+  have : IsIso (A.iCycles 0) := A.isIso_iCycles 0 1 (by simp) hdA
+  have : IsIso (B.iCycles 0) := B.isIso_iCycles 0 1 (by simp) hdB
+  have hc : Epi (HomologicalComplex.cyclesMap α 0 ≫ B.iCycles 0) := by
+    rw [HomologicalComplex.cyclesMap_i]
+    infer_instance
+  have : Epi (HomologicalComplex.cyclesMap α 0) :=
+    (epi_comp_iff_of_isIso _ _).mp hc
+  apply ShortComplex.epi_homologyMap_of_epi_cyclesMap'
+  change Epi (HomologicalComplex.cyclesMap α 0)
+  infer_instance
+
+private theorem epi_map_of_natIso {C : Type*} [Category C]
+    {F G : C ⥤ AddCommGrpCat.{u}} (t : F ≅ G) {X Y : C} (f : X ⟶ Y)
+    [Epi (G.map f)] : Epi (F.map f) := by
+  have hfac : F.map f = (t.app X).hom ≫ G.map f ≫ (t.app Y).inv := by
+    apply (cancel_mono (t.app Y).hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact t.hom.naturality f
+  rw [hfac]
+  infer_instance
+
+set_option maxHeartbeats 800000 in
+-- The composed homology/stalk functors require substantial definitional-equality checking.
 /-- The local unit calculation for an already supplied strictly perfect representative.
 Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD.
 (blueprint: lem-sc-connective-rank-one-model-stalk).
@@ -69,6 +124,52 @@ theorem surjective_stalk_homology_of_connective_rank_one_model (S : Scheme.{u})
         ((derivedPullback (S.fromSpecResidueField s)).map a))) :
     Function.Surjective (Scheme.Modules.Hom.stalkLinearMap
       ((DerivedCategory.homologyFunctor
-        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map a) s) := by sorry
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map a) s) := by
+  let r := SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U
+  let M := SheafOfModules.unit S.ringCatSheaf
+  let A := (CochainComplex.singleFunctor
+    (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj (r.obj M)
+  let c : r.mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅
+      DerivedCategory.Q.obj A :=
+    (r.mapDerivedCategorySingleFunctor 0).app M ≪≫
+      (DerivedCategory.singleFunctorIsoCompQ _ 0).app (r.obj M)
+  obtain ⟨α, hα⟩ := Scheme.perfect_affine_map_representative S U hU A P
+    (strictlyPerfect_single_restricted_unit S U) hP
+    (c.inv ≫ r.mapDerivedCategory.map a ≫ e.hom)
+  let F := localizedModuleStalk S U ⟨s, hs⟩
+  obtain ⟨hadd, hlim, hcolim, hst⟩ :=
+    localized_homology_stalk_comparison S U ⟨s, hs⟩
+  have := hadd
+  have := hlim
+  have := hcolim
+  have hf : IsIso (F.map (α.f 0)) :=
+    isIso_localized_stalk_component_of_residue_homology S E a s U hs P hP
+      hnegative hzero e ha c α hα
+  let T := F.mapHomologicalComplex (.up ℤ)
+  have hA : IsZero ((T.obj A).X 1) := F.map_isZero
+    (HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega))
+  have : Epi ((T.map α).f 0) := by
+    change Epi (F.map (α.f 0))
+    infer_instance
+  have hαH : Epi (HomologicalComplex.homologyMap (T.map α) 0) :=
+    epi_homologyMap_of_epi_component_zero_outgoing (T.map α) hA
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0 ⋙ F
+  let b := Functor.isoWhiskerRight (DerivedCategory.homologyFunctorFactors _ 0) F ≪≫
+    (F.mapHomologicalComplexHomologyIso (.up ℤ) 0).symm
+  have : Epi ((F.mapHomologicalComplex (.up ℤ) ⋙
+      HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℤ) 0).map α) := hαH
+  have hQ : Epi (H.map (DerivedCategory.Q.map α)) := epi_map_of_natIso b α
+  have hr : Epi (H.map (r.mapDerivedCategory.map a)) := by
+    rw [hα, Functor.map_comp, Functor.map_comp] at hQ
+    exact (epi_comp_iff_of_isIso _ _).mp
+      ((epi_comp_iff_of_epi _ _).mp hQ)
+  obtain ⟨t⟩ := hst 0
+  let G := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0 ⋙
+      Scheme.Modules.toPresheaf S ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} s
+  have : Epi ((r.mapDerivedCategory ⋙ H).map a) := hr
+  have hg : Epi (G.map a) := epi_map_of_natIso t a
+  exact (AddCommGrpCat.epi_iff_surjective (G.map a)).mp hg
 
 end AlgebraicGeometry

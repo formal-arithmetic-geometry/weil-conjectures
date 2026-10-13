@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-localized-homology-stalk-comparison",
+ "kind": "statement",
+ "title": "Exact localized module stalks and natural derived homology comparison",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $U$ be an open of $S$, with a point $s\\in U$. Write $r$ for restriction of module sheaves to the localized site over $U$, and $F$ for the canonical module equivalence to the open subscheme followed by forgetting to abelian presheaves and taking the stalk at $s$. Then $F$ is additive and preserves finite limits and finite colimits. Given derived categories [def-pc-derived-category] for $S$ and every localized site, for every integer $n$ there is a natural isomorphism from $H^n(-)_s$ to $F(H^n(r^D(-)))$. This comparison holds for every derived object and every arrow, without perfectness or a residue hypothesis.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01AF (section-kernels), 01AG (lemma-abelian), and 0098 (stalk restriction)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The module-sheaf forgetful functor to abelian sheaves preserves finite limits and colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Stalks of abelian sheaves are exact by the instances in Mathlib.Topology.Sheaves.Abelian. Compose with the canonical equivalence from the localized site to the open subscheme; an equivalence preserves these limits and colimits. Additivity follows from preservation of binary products.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Functor.mapDerivedCategoryHomologyFunctorIso for exact restriction. Whisker Scheme.Modules.overFunctorEquiv and Scheme.Modules.restrictStalkNatIso by the global homology functor. Compose these natural isomorphisms with the exact-restriction homology comparison. This gives the displayed natural isomorphism in each integer degree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 01AF (section-kernels), 01AG (lemma-abelian), and 0098 (stalk restriction)",
+  "note": "Agent elaboration of the local calculation using the recorded Lean interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to an open subset followed by a stalk functor commutes naturally with derived category homology",
+   "results": "Found 8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_assoc, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_assoc, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc",
+   "date": "2026-10-13",
+   "verdict": "component API only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalRing.*isUnit|isUnit.*residue|ResidueField.*isUnit",
+   "results": "Found 25 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/LinearAlgebra/SymplecticGroup.lean, Mathlib/Algebra/Order/Ring/StandardPart.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/MvPowerSeries/Inverse.lean, Mathlib/RingTheory/MvPowerSeries/Inverse.lean",
+   "date": "2026-10-13",
+   "verdict": "component API only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|overFunctorEquiv|stalkFunctor.*PreservesFinite",
+   "results": "Found 8 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "component API only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localized module stalks commute naturally with derived homology and preserve finite limits and finite colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConnectiveRankOneModelStalk",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field; Tag 0E62, local unit argument, with the fixed model shape of Tag 0BCD; exact restriction and homology-stalk transport",
+   "via": [
+    "lem-sc-connective-rank-one-model-stalk",
+    "lem-sc-perfect-local-degree-zero-unit",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedHomologyStalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedHomologyStalkComparison.lean",
+  "declaration": "AlgebraicGeometry.localized_homology_stalk_comparison",
+  "statement": "theorem localized_homology_stalk_comparison (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (U : S.Opens) (s : U.toScheme) :\n    (localizedModuleStalk S U s).Additive ∧\n    PreservesFiniteLimits (localizedModuleStalk S U s) ∧\n    PreservesFiniteColimits (localizedModuleStalk S U s) ∧\n    ∀ n : ℤ, Nonempty\n      ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) n ⋙\n        Scheme.Modules.toPresheaf S ⋙ TopCat.Presheaf.stalkFunctor _ s.val) ≅\n      ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory ⋙\n        DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) n ⋙\n        localizedModuleStalk S U s))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T034214-L-3768681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T034214-L-3768681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
