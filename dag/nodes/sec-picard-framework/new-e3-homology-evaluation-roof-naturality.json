@@ -30,38 +30,36 @@
  ],
  "proof": [
   {
-   "text": "On the ringed site put Z=Hom(L,K). Evaluate a Z cocycle of degree n on an L cycle of degree -n using the supplied projection and its differential identity. The differential equation makes the value a K cycle. Evaluation of a Hom boundary on a cycle, or of a Hom cycle on a source boundary, gives a K boundary with the integer sign. Lift through the kernel defining K-cycles and descend through the two homology cokernels. Currying constructs h:H^n(Z)->Hom(H^(-n)(L),H^0(K)). Tensoring preserves cokernels because it is a left adjoint. This construction does not use a scheme or an arbitrary existence witness.",
+   "text": "Adapt the already proved private cycle-pairing arguments of Sheaf.Algebra.Homology.HomologyEvaluationCycleExistence to an arbitrary small ringed site. Use the supplied differential identity to lift evaluation to K cycles, and prove separately that Hom boundaries and source boundaries evaluate to K boundaries. Apply HomologicalComplex.homologyIsCokernel in the Hom variable. In the source variable use SheafOfModules.tensorHomEquiv and CokernelCofork.mapIsColimit for tensorRight, a colimit-preserving left adjoint, to descend to source homology. This proves cyclePairing_descend, producing h and its cycle lift k with both factorization equations. All helpers are proved locally, with no new sorry.",
    "uses": [
-    "lem-sc-hom-complex-projections",
     "def-pur-sheaf-hom",
     "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
   },
   {
-   "text": "Write Qmap and Pmap for the homology maps induced by Hom(q,K) and Hom(p,K). The assumed component maps are natural under precomposition, so evaluation of a precomposed cocycle on z equals evaluation of the original cocycle on q(z) or p(z). The two identities for d imply g followed by Hom(H(q),1)=Qmap followed by h. The two identities for c give f followed by Hom(H(p),1)=Pmap followed by h. Cancel the epimorphism from Hom cycles to homology, and test the internal-Hom maps on locally lifted source cycles. The required equalities on representatives hold by the factorization identities; separatedness glues them. These arguments do not assume pointwise surjectivity of homology maps.",
+   "text": "Prove cyclePairing_naturality from the single supplied precomposition identity: first cancel homObjMap(identity,K.iCycles), which is monic because internal Hom is a right adjoint. The cycle factorization equations, cyclesMap_i and the component identity give d;Hom(cyclesMap q,identity)=cyclesMap Hom(q,K);k. Then cancel the epimorphism from Hom cycles to homology and the monomorphism Hom(L.homologyPi,identity). The latter follows by uncurrying and cancellation of the epimorphism tensorRight.map L.homologyPi. Rewrite both homology factorization equations and homologyPi_naturality to conclude g;Hom(H(q),identity)=Qmap;h. Repeat for p and f. No local section lifts or pointwise surjectivity are used.",
    "uses": [
-    "lem-sc-hom-complex-projections",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
   },
   {
-   "text": "Compose the second identity on the left with the inverse of Pmap and substitute into the first. This is the stated common-source equation. Invertibility of Pmap is the only extra hypothesis; q,p themselves need not be quasi-isomorphisms, and K need not be K-injective. Zero homology and empty sites give the same cancellation identities.",
+   "text": "Rewrite the two naturality equations into the desired roof identity. IsIso.inv_hom_id_assoc cancels the inverse of Pmap against Pmap. The original statement and its only invertibility assumption are unchanged.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-hom-complex-projections"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "E3 second reader",
+  "group": "V2",
   "date": "2026-10-14",
-  "description": "Strict subargument of roof comparison, replacing a false universal square; expanded from the cited Hom differential and restriction constructions."
+  "description": "Generalized the proved categorical cycle evaluation helpers in HomologyEvaluationCycleExistence to a small ringed site; proved cycle and homology naturality by categorical mono/epi cancellation, and assembled the roof equation. Sources: Stacks 0A8X and 03EO."
  },
  "mathlib_searches": [
   {
@@ -127,12 +125,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
+  "reviewer": "X-8d378",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T211057-L-389969",
+  "landing": "20261013T222421-L-1229357",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered theorem matches the node and recorded original signature; categorical descent and naturality match the updated proof; compilation and all 17 axiom checks pass."
  },
  "lean": {
   "existing": false,
