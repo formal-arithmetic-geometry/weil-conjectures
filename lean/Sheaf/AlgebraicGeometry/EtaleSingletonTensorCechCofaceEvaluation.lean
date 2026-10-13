@@ -19,6 +19,22 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
+private theorem singletonCoface_projection (X : Scheme.{u}) (U : X.Etale)
+    (V : Over U) (G : (Over U)ᵒᵖ ⥤ AddCommGrpCat.{u + 1})
+    (n : ℕ) (j : Fin (n + 2))
+    (s : ((cechComplexFunctor (fun _ : Fin 1 ↦ V)).obj G).X n) :
+    Pi.π (fun _ : Fin (n + 2) → Fin 1 ↦
+      G.obj (op (∏ᶜ (fun _ : Fin (n + 2) ↦ V)))) (fun _ ↦ 0)
+      (((FormalCoproduct.cosimplicialObjectFunctor
+        (FormalCoproduct.mk _ (fun _ : Fin 1 ↦ V)).cech).obj G).δ j s) =
+    G.map (Pi.lift (fun k : Fin (n + 1) ↦
+      Pi.π (fun _ : Fin (n + 2) ↦ V) (j.succAbove k))).op
+      (Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦
+        G.obj (op (∏ᶜ (fun _ : Fin (n + 1) ↦ V)))) (fun _ ↦ 0) s) := by
+  dsimp only [CosimplicialObject.δ, FormalCoproduct.cosimplicialObjectFunctor_obj_map]
+  erw [Pi.lift_π_apply]
+  rfl
+
 /-- Raw categorical coface projection, before evaluating lifted sections.
 (blueprint: new-etale-singleton-tensor-cech-coface-raw-projection)
 Proof: unfold the formal coproduct coface and apply the product projection equation. -/
@@ -36,11 +52,24 @@ theorem singletonTensorCech_coface_raw_projection
     Pi.π (fun _ : Fin (n + 2) → Fin 1 ↦ G.obj (op P)) (fun _ ↦ 0)
         ((singletonTensorCechCosimplicial X F U W g).δ j s) =
       G.map f.op (Pi.π (fun _ : Fin (n + 1) → Fin 1 ↦ G.obj (op Q)) (fun _ ↦ 0) s) := by
-  sorry
+  intro G P Q f
+  exact singletonCoface_projection X U (Over.mk g) G n j s
 
 /-- Downstairs evaluation of the raw coface map is restriction.
+Source: Stacks Project, Tags 03P2 and 03DR, the restriction formula for tensor sections.
 (blueprint: new-etale-singleton-tensor-cech-coface-map-down)
-Proof: apply the lifted tensor section restriction evaluation and remove ULift. -/
+
+Proof: the opposite of the forgetful functor sends `f.op` to `f.left.op`.
+The underlying presheaf of `etaleTensorSectionsSheaf F` is
+`etaleTensorSectionsPresheaf F`, whose map at this arrow is exactly
+`etaleTensorSectionsRestriction F f.left`. Composing the sheaf with
+`AddCommGrpCat.uliftFunctor` lifts this homomorphism: it sends a lifted
+section `t` to `ULift.up (etaleTensorSectionsRestriction F f.left t.down)`.
+The two displayed source projections have the same constant family of
+lifted section groups, so their values agree. Apply the lifted-map equation
+at that projected section and take `ULift.down`. This argument applies to
+any over-category arrow; the coface product map is its stated instance.
+It also applies at degree zero and when the section group is zero. -/
 theorem singletonTensorCech_coface_map_down
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

@@ -14,20 +14,22 @@
  },
  "proof": [
   {
-   "text": "unfold the formal-coproduct Čech face. Its index map sends a tuple t\nof length n+2 to t composed with j.succAbove. Its component is Pi.lift of\nthe retained product projections. The extension of a presheaf to formal\ncoproducts sends this face to Pi.lift of the source projection followed by\nrestriction along that component. Composing with the projection at the\nconstant-zero tuple and applying Pi.lift_π selects that restriction. The\nsource tuple is again constant zero. The lifted tensor-section presheaf\nmaps the component by ULift of etaleTensorSectionsRestriction, so taking\ndown gives the displayed equation. This is a statement about every section,\nnot about comparison maps or tensors. For n=0 it gives the two projection\nrestrictions; on zero section groups both sides are zero.",
+   "text": "Apply singletonTensorCech_coface_raw_projection, then apply congrArg ULift.down. Compose the resulting equality with singletonTensorCech_coface_map_down. The two source projections and the displayed target projection agree definitionally with the lifted tensor-section groups.",
    "uses": [
-    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+    "new-etale-singleton-tensor-cech-coface-raw-projection",
+    "new-etale-singleton-tensor-cech-coface-map-down"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+  "new-etale-singleton-tensor-cech-coface-raw-projection",
+  "new-etale-singleton-tensor-cech-coface-map-down"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "U1 stage 3 second reading",
   "document": "Stacks Project",
-  "place": "Explicit part of the original coface node proof, using Tags 03P2 and 03DR, both read on 2026-10-13."
+  "place": "Tags 03P2 and 03DR; explicit categorical calculation using Mathlib Pi.lift_π_apply and the library tensor-section definitions. The map-down calculation remains open."
  },
  "mathlib_searches": [
   {
@@ -111,17 +113,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T190158-L-3222793",
+  "landing": "20261013T222418-L-1228233",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.singletonTensorCech_coface_evaluation"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.singletonTensorCech_coface_map_down",
-   "AlgebraicGeometry.Scheme.singletonTensorCech_coface_raw_projection"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
