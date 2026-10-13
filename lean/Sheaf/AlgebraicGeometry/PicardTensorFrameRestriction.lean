@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PicardTensorFrameCoordinates
 public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
+import Sheaf.AlgebraicGeometry.PicardTensorFrameRestrictionNormalized
+import Sheaf.AlgebraicGeometry.PicardTensorFrameRestrictionEvaluation
 
 /-! # Residue naturality of explicit rank-one tensor coordinates
 
@@ -68,7 +70,10 @@ theorem picardTensorFrame_restriction
           V.ι (W.fromSpecResidueField w) (W.homOfLE hVU)
           (picardResidueLift W w U hwU) (picardResidueLift_comp W w V hwV) hs f)) =
       W.evaluation V w hwV
-        (V.topIso.hom (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q f)) :=
-  by sorry
+        (V.topIso.hom (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q f)) := by
+  rw [picardTensorFrame_restriction_normalized]
+  have he := picardResidueLift_appTop_eval W w V hwV
+    (V.topIso.hom (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q f))
+  simpa only [Iso.hom_inv_id_apply] using he
 
 end AlgebraicGeometry.Scheme

@@ -12820,3 +12820,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:29 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalHomAlgebraization (stage 3; reviewer PASS; first push; landing 20261013T142903-L-500326 (interface); batch 20261013T142848; modules 2; new nodes 1)
 - 14:29 L: merged deliver/S3/Sheaf.Algebra.Homology.TensorTotalExtendNaturalIso (stage 3; reviewer PASS; first push; landing 20261013T142904-L-500438 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:29 L: merged deliver/S3/Sheaf.AlgebraicGeometry.KoszulSelfExtConormalLocalAlignment (stage 3; reviewer PASS; first push; landing 20261013T142904-L-500544 (interface); batch 20261013T142848; modules 2; new nodes 1)
+- 14:29 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PicardTensorFrameRestriction (stage 3; reviewer PASS; first push; landing 20261013T142904-L-500701 (interface); batch 20261013T142848; modules 3; new nodes 2)
