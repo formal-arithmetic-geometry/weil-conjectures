@@ -12740,3 +12740,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths (stage 3; reviewer PASS; first push; landing 20261013T140826-L-316342 (interface); batch 20261013T140810; modules 2; new nodes 1)
 - 14:08 L: merged deliver/T2/Sheaf.AlgebraicGeometry.PicardLeftCechCupConstruction (stage 3; reviewer PASS; first push; landing 20261013T140826-L-316541 (interface); batch 20261013T140810; modules 4; new nodes 3)
 - 14:08 L: merged deliver/T3/Sheaf.AlgebraicGeometry.ProjectionMateAffineChartTransport (stage 3; reviewer PASS; first push; landing 20261013T140827-L-316716 (interface); batch 20261013T140810; modules 2; new nodes 1)
+- 14:08 L: merged deliver/T3/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective (stage 3; reviewer PASS; first push; landing 20261013T140827-L-316949 (proof); batch 20261013T140810; modules 1; new nodes 0)

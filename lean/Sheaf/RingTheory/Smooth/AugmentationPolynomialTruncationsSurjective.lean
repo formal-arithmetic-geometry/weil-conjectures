@@ -37,6 +37,79 @@ theorem bijective_augmented_polynomial_truncations_surjective
     ∀ k : ℕ, Function.Surjective
       (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ k) f
         ((pow_le_pow_left' hf k).trans (Ideal.le_comap_pow f.toRingHom k))) := by
-  sorry
+  let I := RingHom.ker ε.toRingHom
+  have first : ∀ c : C, ∃ p : MvPolynomial (Fin n) B, c - f p ∈ I ^ 2 := by
+    intro c
+    obtain ⟨q, hq⟩ := h₂ (Ideal.Quotient.mk (I ^ 2) c)
+    obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective q
+    refine ⟨p, ?_⟩
+    have hp : f p - c ∈ I ^ 2 := Ideal.Quotient.eq.1 hq
+    simpa only [neg_sub] using (I ^ 2).neg_mem hp
+  have graded : ∀ k : ℕ, ∀ c ∈ I ^ k,
+      ∃ p : MvPolynomial (Fin n) B, c - f p ∈ I ^ (k + 1) := by
+    intro k
+    induction k with
+    | zero =>
+      intro c hc
+      refine ⟨MvPolynomial.C (ε c), ?_⟩
+      simp only [zero_add, pow_one, I, RingHom.mem_ker, map_sub]
+      change ε c - ε (f (MvPolynomial.C (ε c))) = 0
+      rw [show f (MvPolynomial.C (ε c)) = algebraMap B C (ε c) from f.commutes (ε c)]
+      simp
+    | succ k ih =>
+      intro c hc
+      rw [pow_succ] at hc
+      refine Submodule.mul_induction_on hc ?_ ?_
+      · intro a ha b hb
+        obtain ⟨p, hp⟩ := ih a ha
+        obtain ⟨q, hq⟩ := first b
+        have hfp : f p ∈ I ^ k := by
+          have hdiff : a - (a - f p) ∈ I ^ k :=
+            (I ^ k).sub_mem ha ((Ideal.pow_le_pow_right (Nat.le_succ k)) hp)
+          simpa only [sub_sub_cancel] using hdiff
+        refine ⟨p * q, ?_⟩
+        have hleft : (a - f p) * b ∈ I ^ (k + 1 + 1) := by
+          rw [pow_succ]
+          exact Ideal.mul_mem_mul hp hb
+        have hright : f p * (b - f q) ∈ I ^ (k + 1 + 1) := by
+          rw [show k + 1 + 1 = k + 2 by omega, pow_add]
+          exact Ideal.mul_mem_mul hfp hq
+        have heq : a * b - f (p * q) = (a - f p) * b + f p * (b - f q) := by
+          rw [map_mul]
+          ring
+        rw [heq]
+        exact (I ^ (k + 1 + 1)).add_mem hleft hright
+      · intro a b ha hb
+        obtain ⟨p, hp⟩ := ha
+        obtain ⟨q, hq⟩ := hb
+        refine ⟨p + q, ?_⟩
+        have heq : a + b - f (p + q) = (a - f p) + (b - f q) := by
+          rw [map_add]
+          ring
+        rw [heq]
+        exact (I ^ (k + 1 + 1)).add_mem hp hq
+  have approx : ∀ k : ℕ, ∀ c : C,
+      ∃ p : MvPolynomial (Fin n) B, c - f p ∈ I ^ k := by
+    intro k
+    induction k with
+    | zero =>
+      intro c
+      exact ⟨0, by simp [I]⟩
+    | succ k ih =>
+      intro c
+      obtain ⟨p, hp⟩ := ih c
+      obtain ⟨q, hq⟩ := graded k (c - f p) hp
+      refine ⟨p + q, ?_⟩
+      have heq : c - f (p + q) = c - f p - f q := by
+        rw [map_add]
+        ring
+      rwa [heq]
+  intro k y
+  obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective y
+  obtain ⟨p, hp⟩ := approx k c
+  refine ⟨Ideal.Quotient.mk _ p, ?_⟩
+  rw [Ideal.quotient_map_mkₐ]
+  apply Ideal.Quotient.eq.2
+  simpa only [neg_sub] using (I ^ k).neg_mem hp
 
 end Algebra
