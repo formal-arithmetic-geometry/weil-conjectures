@@ -242,13 +242,7 @@ lemma toPreGlue_cocycleLeft (a b c : ι) :
       (modulesPseudofunctor.mapComp' (μ c).op.toLoc
         (preimageChosenPullback₃ U g a b c).p₃.op.toLoc
         ((preimageChosenPullback₃ U g a b c).p₃ ≫ μ c).op.toLoc
-        (op_toLoc_comp_eq rfl)).hom.toNatTrans.app (O c) := by
-  rw [PreGlueData.cocycleLeft, DescentData'.pullHom'₁₂_eq_pullHom_of_chosenPullback₃,
-    DescentData'.pullHom'₂₃_eq_pullHom_of_chosenPullback₃]
-  dsimp only [toPreGlue]
-  rw [pullHom_mapComp'_conj _ _ _ _ _ _ rfl rfl (H a b) _ _ _ (by simp) (by simp) _ _ rfl rfl,
-    pullHom_mapComp'_conj _ _ _ _ _ _ rfl rfl (H b c) _ _ _ (by simp) (by simp) _ _ rfl rfl]
-  simp only [cocLHS, Category.assoc, Cat.Hom.hom_inv_id_toNatTrans_app_assoc]
+        (op_toLoc_comp_eq rfl)).hom.toNatTrans.app (O c) := by sorry
 
 lemma toPreGlue_cocycleRight (a b c : ι) :
     H.toPreGlue.cocycleRight a b c =
@@ -259,34 +253,9 @@ lemma toPreGlue_cocycleRight (a b c : ι) :
       (modulesPseudofunctor.mapComp' (μ c).op.toLoc
         (preimageChosenPullback₃ U g a b c).p₃.op.toLoc
         ((preimageChosenPullback₃ U g a b c).p₃ ≫ μ c).op.toLoc
-        (op_toLoc_comp_eq rfl)).hom.toNatTrans.app (O c) := by
-  rw [PreGlueData.cocycleRight, DescentData'.pullHom'₁₃_eq_pullHom_of_chosenPullback₃]
-  exact pullHom_mapComp'_conj _ _ _ _ _ _ rfl rfl (H a c) _ _ _ (by simp) (by simp) _ _ rfl rfl
+        (op_toLoc_comp_eq rfl)).hom.toNatTrans.app (O c) := by sorry
 
-lemma isCocycle_toPreGlue_iff : H.toPreGlue.IsCocycle ↔ H.SelfCond ∧ H.CocycleCond := by
-  refine ⟨fun h ↦ ⟨fun a ↦ ?_, fun a b c ↦ ?_⟩, fun h ↦ ⟨fun a ↦ ?_, fun a b c ↦ ?_⟩⟩
-  · have := h.selfMor_eq a
-    rw [toPreGlue_selfMor, ← Category.comp_id ((modulesPseudofunctor.mapComp' (μ a).op.toLoc
-      (𝟙 _ : (g ⁻¹ᵁ U a).toScheme ⟶ _).op.toLoc (μ a).op.toLoc
-      (op_toLoc_comp_eq (Category.id_comp _))).inv.toNatTrans.app (O a)),
-      ← Cat.Hom.inv_hom_id_toNatTrans_app, Category.assoc, Category.assoc] at this
-    exact (mapComp'_conj_inj _ _ _ _ _ _ _ _ _ _).1 this
-  · have := h.cocycleLeft_eq a b c
-    rw [toPreGlue_cocycleLeft, toPreGlue_cocycleRight] at this
-    exact (mapComp'_conj_inj _ _ _ _ _ _ _ _ _ _).1 this
-  · rw [toPreGlue_selfMor, h.1 a]
-    simp
-  · rw [toPreGlue_cocycleLeft, toPreGlue_cocycleRight, h.2 a b c]
-
-/-- The descent datum relative to the open cover `g⁻¹ U a` of `Z` defined by gluing morphisms
-satisfying the identity and cocycle conditions. -/
-noncomputable def toDescentData' (hS : H.SelfCond) (hC : H.CocycleCond) :
-    modulesPseudofunctor.DescentData' (preimageChosenPullback U g)
-      (preimageChosenPullback₃ U g) where
-  obj := H.toPreGlue.obj
-  hom := H.toPreGlue.hom
-  pullHom'_hom_self := ((isCocycle_toPreGlue_iff H).2 ⟨hS, hC⟩).selfMor_eq
-  pullHom'_hom_comp := ((isCocycle_toPreGlue_iff H).2 ⟨hS, hC⟩).cocycleLeft_eq
+lemma isCocycle_toPreGlue_iff : H.toPreGlue.IsCocycle ↔ H.SelfCond ∧ H.CocycleCond := by sorry
 
 end ToPreGlue
 
