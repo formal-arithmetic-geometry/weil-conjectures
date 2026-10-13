@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-pbc-completed-pullback",
-   "place": "Detailed form, comparison with Stacks 099N: passage from the completed coefficient sheaf A_T to the constant Noetherian coefficient sheaf used by Stacks. Foundational input: strict-tower-homotopy-limit.",
+   "place": "Detailed form, comparison with Stacks 099N: foundational strict-tower homotopy-limit input, including the pro-zero cone criterion and functoriality.",
    "via": [
     "lem-weil-pbc-constant-completion-equivalence"
    ]
@@ -22,11 +22,108 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pur-kinjective-complex",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-inverse-system",
+  "def-weil-category-product",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $\\mathcal C\\times\\mathbf N_{\\geq1}$ the arrows $(U,n)\\to(V,m)$ equal to arrows $U\\to V$ when $n\\leq m$, and none otherwise; coverings are precisely the coverings in $\\mathcal C$ at a fixed index. Put $\\mathcal O^{\\mathrm{tow}}(U,n)=\\mathcal O(U)$. The sheaf condition is the sheaf condition separately at each index, and restriction along $(U,n)\\to(U,n+1)$ supplies the tower transition. Thus sheaves of $\\mathcal O^{\\mathrm{tow}}$-modules are exactly strict towers of $\\mathcal O$-modules, including their morphisms. The tower site is small and its coefficient sheaf is commutative. Apply [prop-pur-kinjective-resolutions-exist] on this site to obtain a functorial K-injective resolution $X_\\bullet\\to I_\\bullet$ with injective terms. The tower category and its evaluations are abelian and exact by [lem-weil-tower-category-levelwise-abelian]. Inverse limit is additive and is right adjoint to the exact constant-tower functor: a map from a constant tower to $T_\\bullet$ is precisely a compatible family of maps into $T_n$. Termwise inverse limit commutes with shifts and mapping cones, since it commutes with finite biproducts; it preserves chain homotopies by applying inverse limit to the homotopy equations. Consequently it defines an exact functor $K(\\operatorname{Tow}(\\mathcal A))\\to D(\\mathcal A)$ [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-kinjective-total-derived] to obtain its total right derived functor, computed by $Q(\\varprojlim I_n)$. This is an exact functor by [lem-pc-right-derived-functor-triangulated]. The formula holds for every K-injective tower representative: [lem-weil-pbc-kinjective-hom-derived] identifies two such representatives by a unique homotopy class of homotopy equivalences, and additive inverse limit preserves that equivalence.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits); Tag 0941 (lemma-derived-limit-is-ok), first proof paragraph; derived.tex Tags 070K (lemma-enough-K-injectives-implies) and 070I (lemma-K-injective)."
+   }
+  },
+  {
+   "text": "Each evaluated complex $I_n$ is K-injective by [lem-weil-tower-evaluation-kinjective]. Products of module sheaves exist sectionwise: $P(U)=\\prod_n F_n(U)$ with coordinatewise restrictions and module action is a sheaf, because a matching family glues uniquely in each coordinate. Hence [lem-pc-ringed-space-product-kinjective], whose statement is for any abelian category, shows that $P=\\prod_n I_n$ represents $\\prod_n^D X_n$. For an injective tower object $J$, let $T_n(F)$ be $F$ at indices $1,\\ldots,n$, with identity transitions there, and zero above $n$. Maps $T_n(F)\\to J$ correspond to maps $F\\to J_n$. The natural inclusion $T_n(F)\\hookrightarrow T_{n+1}(F)$ is monic by [lem-weil-tower-category-levelwise-abelian]. By the definition of injectivity [def-sp-injective-resolutions], with $F=J_n$, the map corresponding to $\\mathrm{id}_{J_n}$ extends across this inclusion, giving a section $\\sigma_n:J_n\\to J_{n+1}$ of the transition $q_n:J_{n+1}\\to J_n$. Apply this to $J=I^r_\\bullet$ in each degree $r$. For sections $x=(x_n)$ of $P^r$ over any $U$, set $y_1=0$ and recursively $y_{n+1}=\\sigma_n(y_n-x_n)$. Then $y_n-q_n y_{n+1}=x_n$, so $1-s:P^r\\to P^r$ is surjective on sections. Its kernel is exactly the compatible-sequence sheaf $L^r=\\varprojlim_n I_n^r$. Thus $0\\to L\\to P\\xrightarrow{1-s}P\\to0$ is degreewise short exact. The natural triangle of this short exact sequence is distinguished by [lem-weil-pbc-complex-ses-triangle]; its first vertex is $R\\lim X_\\bullet$ by Step 1 and its middle vertices are the derived products just established.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), proof: injective transitions, exact left adjoint to evaluation, and the short exact product sequence; derived.tex Tag 0BK6 (lemma-product-K-injective)."
+   }
+  },
+  {
+   "text": "The middle arrow of Step 2 satisfies $\\mathrm{pr}_n(1-s)=\\mathrm{pr}_n-q_n\\mathrm{pr}_{n+1}$, which is precisely the endomorphism of [def-weil-derived-limit]. For a strict chain map $v:X_\\bullet\\to Y_\\bullet$, use the functorial tower-site resolutions of Step 1 to obtain $I(v):I(X)_\\bullet\\to I(Y)_\\bullet$. The tower-map equation $I(v)_n q_n=q'_n I(v)_{n+1}$ gives $(\\prod_n I(v)_n)(1-s)=(1-s')(\\prod_n I(v)_n)$ after every projection. The restriction of this product map to compatible sequences is $\\varprojlim I(v)_n$. These three maps form a morphism of the short exact sequences in Step 2, so their localized maps, including the connecting arrows, form a morphism of distinguished triangles by the naturality clause of [lem-weil-pbc-complex-ses-triangle]. Its first map is the canonical $R\\lim(v)$ of Step 1. For morphisms in the derived tower category, [lem-weil-pbc-kinjective-hom-derived] represents them by unique homotopy classes between K-injective towers; the displayed construction respects homotopies and therefore is natural on that category. This proves the asserted natural Roos triangle without choosing a nonunique map between unrelated homotopy limits.",
+   "uses": [
+    "def-weil-derived-limit",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits) and Tag 0941 (lemma-derived-limit-is-ok); natural short-exact-sequence triangle, derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)."
+   }
+  },
+  {
+   "text": "Suppose the evaluated tower is pro-zero in $D(\\mathcal A)$. Write $P=\\prod_n^D X_n$ and $s:P\\to P$ for its shift endomorphism. For each $n$ choose $r_n\\geq1$ such that $\\mathrm{pr}_n s^{r_n}=0$: a zero transition $X_m\\to X_n$ gives $r_n=m-n$ when $m>n$, and if $m=n$ then $X_n=0$ and take $r_n=1$. Define $t:P\\to P$ by $\\mathrm{pr}_n t=\\sum_{k=0}^{r_n-1}\\mathrm{pr}_n s^k$, using the product universal property [def-weil-category-product]. All later summands vanish, so these finite sums are unchanged upon increasing $r_n$. Telescoping gives $\\mathrm{pr}_n t(1-s)=\\mathrm{pr}_n$. Also $f_n\\mathrm{pr}_{n+1}t=\\sum_{k=1}^{r_{n+1}}\\mathrm{pr}_n s^k=\\sum_{k\\geq1}\\mathrm{pr}_n s^k$ (a finite sum), since $\\mathrm{pr}_n s^{r_{n+1}+1}=f_n\\mathrm{pr}_{n+1}s^{r_{n+1}}=0$. Hence $\\mathrm{pr}_n(1-s)t=\\mathrm{pr}_n$, and $t$ is a two-sided inverse of $1-s$. In the Roos triangle $H\\xrightarrow{p}P\\xrightarrow{1-s}P\\xrightarrow{\\delta}H[1]$, consecutive composites are zero [lem-weil-pbc-hom-into-triangle-exact], so $p=0$ and $\\delta=0$ because $1-s$ is invertible. Rotate the triangle backwards [def-weil-triangulated-category] to $P[-1]\\xrightarrow{-\\delta[-1]}H\\xrightarrow{p}P\\to P$. Exactness of $\\operatorname{Hom}(H,-)$ at $H$ [lem-weil-pbc-hom-into-triangle-exact] factors $\\mathrm{id}_H$ through $-\\delta[-1]=0$. Thus $\\mathrm{id}_H=0$ and $H=R\\lim X_\\bullet$ is a zero object. This is a coordinatewise finite calculation, requiring no uniform nilpotence bound or exactness of products.",
+   "uses": [
+    "def-weil-category-product",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9L (lemma-pro-isomorphism-Rlim), pro-zero case; explicit finite-series calculation in the Roos triangle of derived.tex Tag 08TC (definition-derived-limit)."
+   }
+  },
+  {
+   "text": "For a strict chain map $v:X_\\bullet\\to Y_\\bullet$, its mapping cone $C(v)$ is formed in the tower category; evaluation gives $C(v)_n=C(v_n)$ by the degreewise biproduct-and-differential formula [def-weil-abstract-derived-category]. The cone triangle $X_\\bullet\\xrightarrow{v}Y_\\bullet\\to C(v)\\to X_\\bullet[1]$ is distinguished. Exactness of $R\\lim$ from Step 1, supplied by [lem-pc-right-derived-functor-triangulated], gives a distinguished triangle whose first arrow is the canonical $u=R\\lim(v)$. Under the hypothesis on the cone tower, Step 4 makes its third vertex zero. Put $A=R\\lim X_\\bullet$ and $B=R\\lim Y_\\bullet$. Exactness of $\\operatorname{Hom}(B,-)$ in $A\\xrightarrow{u}B\\to0\\to A[1]$ [lem-weil-pbc-hom-into-triangle-exact] gives $r:B\\to A$ with $ur=\\mathrm{id}_B$. Apply the same exactness statement to the backwards rotated triangle $0[-1]\\to A\\xrightarrow{u}B\\to0$ [def-weil-triangulated-category]: $u(ru-\\mathrm{id}_A)=0$ implies that $ru-\\mathrm{id}_A$ factors through $0[-1]$, so it is zero. Therefore $r$ is a two-sided inverse and the canonical $R\\lim(v)$ is an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), exact total derived inverse limit; derived.tex Tags 0149 (lemma-representable-homological) and 0145 (definition-triangulated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940 (section-derived-limits), especially Tag 0941 (lemma-derived-limit-is-ok), with Tag 0H9L for pro-zero towers"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,12 +169,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-constant-completion-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "worker": "stage1",
+  "summary": "Five steps construct the total derived inverse limit on the small tower site, prove the injective-transition product sequence, establish naturality from functorial K-injective resolutions, give the coordinatewise finite-series inverse for pro-zero towers, and use exactness on the strict cone triangle. All inputs are existing nodes; no new nodes remain.",
+  "blueprint": "Realizes the foundational strict-tower-homotopy-limit sentence in def-weil-pbc-completed-pullback, including its strict functoriality and pro-zero consequence.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "The small ringed tower site needs functorial unbounded K-injective resolutions with injective terms; no proper-base-change-unit statement supplies this generic small-site theorem."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Step 2 uses its generic theorem that termwise products of K-injective complexes represent derived products; no proper-base-change-unit node supplies this abelian-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-fdd0ba3cb",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-fdd0ba3cb (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but Step 2 uses the unsplit off-unit node lem-pc-ringed-space-product-kinjective without declaring it in split_report.tool_uses. Added the corrected full DAG JSON under fixes/dag/nodes/sec-proper-base-change/ and documented all checks in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
