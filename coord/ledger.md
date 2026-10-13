@@ -10934,3 +10934,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/M2/Sheaf.RepresentationTheory.LocallyConstantCochainsDegreewiseExact (stage 3; reviewer PASS; first push; landing 20261013T033005-L-3677508 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit (stage 3; reviewer PASS; first push; landing 20261013T033006-L-3677686 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor (stage 3; reviewer PASS; first push; landing 20261013T033006-L-3677858 (proof); batch 20261013T032954; modules 1; new nodes 0)
+- 03:30 L: merged deliver/S2/Sheaf.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedding (stage 3; reviewer PASS; first push; landing 20261013T033006-L-3677987 (proof); batch 20261013T032954; modules 1; new nodes 0)

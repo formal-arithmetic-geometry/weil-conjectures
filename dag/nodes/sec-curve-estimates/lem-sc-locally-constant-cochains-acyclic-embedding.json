@@ -14,20 +14,32 @@
  ],
  "proof": [
   {
-   "text": "Construct D(E(M)) as LC(G,E(M)) with pointwise integer module structure and\nright translation rho(h)f(x)=f(x*h). Every function has a finite clopen partition.\nCompactness and continuity of multiplication give a common identity neighborhood\npreserving that partition under right translation. A compact Hausdorff totally\ndisconnected group has an open subgroup inside that neighborhood. Thus stabilizers\nare open and D(E(M)) is a discrete representation. The orbit map m to (x to rho(x)m)\nis locally constant, integer-linear and equivariant; evaluation at 1 is its left\ninverse, so it is monic. Take N=E.inverse.obj D(E(M)) and transport the orbit map via\nthe unit and counit of E. These are specified constructions, not arbitrary existence\nchoices. Transport the coordinates of C(N) through the counit to cochains with values\nin LC(G,E(M)). For a degree n+1 cochain F put h_n(F)(g)(x)=F(x,g)(1).\nThis is locally constant in x. For local constancy in g with the whole function of x\nfixed, cover the compact x factor by finitely many product neighborhoods on which F\nis constant and intersect their g neighborhoods. The contraction is additive.\nExpand d_n h_n F and h_(n+1) d_(n+1) F at g,x using the differential equation.\nThe action face uses right translation. Their sum is F(g)(x): the merged first face\ncancels the extra translation term, each interior merged face cancels with the\nopposite sign, and the final deletion terms cancel. This includes n=0.\nConsequently every positive-degree cocycle F is d(h(F)), and conversely every boundary\nis a cocycle. The coordinate equivalences transport this equality of kernel and image\nto exactness of C(N) in every positive degree. The coefficient equation identifies\ntransport under the counit. The orbit map remains monic under the equivalence.",
+   "text": "Construct integerCoinduced G E(M) as the actual locally constant function group with right translation. The proved open-normal right-invariance theorem supplies an open subgroup contained in the stabilizer of every function; Subgroup.isOpen_of_openSubgroup then makes the whole stabilizer open. Construct the orbit function x ↦ rho(x)m: the preimage of the open stabilizer of m under y ↦ x⁻¹y proves local constancy. The resulting integerOrbitMap is linear and equivariant. Evaluation at 1 shows cancellation of morphisms, proving it monic. Set N = E.inverse.obj D and f = E.unitIso.hom followed by E.inverse.map of the orbit map. Functorial preservation of monomorphisms proves Mono f.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "def-exc-discrete-modules-category",
+    "lem-exc-coinduced-functions-open-stabilizer"
    ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the evaluation contraction privately in this module for every additive coefficient group V and any additive differential satisfying the displayed formula. Define h_n(F)(g)(x) = F(cons x g)(1) directly. Continuous insertion proves local constancy in x. For local constancy as a whole function of x, the open equality locus in G^n times G and isCompact_univ.eventually_forall_of_forall_eventually give one neighborhood of g working for all x. Prove additivity pointwise. Prove the two Fin.contractNth insertion identities by Fin.cases. Expand d h + h d pointwise, split the second sum with Fin.sum_univ_succ, and rewrite pow_succ and zsmul. Each inserted merge and deletion term has the opposite sign; abel finishes the identity. This also proves the degree-one case n=0.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the counit isomorphism E(E.inverse D) ≅ D to give an additive coefficient equivalence q. Postcompose locally constant cochains with q and compose with e to obtain coordinate equivalences t in every degree. Conjugate the differential by t. The assumed hd, additivity of q, and Rep.hom_comm_apply for the counit show exactly the right-translation differential formula needed by the proved contraction. For n=k+1 and a cocycle x, apply the contraction identity to t(x); the transported outgoing differential is zero. Therefore x is the incoming differential of t_k.symm(h_k(t(x))). HomologicalComplex.exactAt_iff' and ShortComplex.ab_exact_iff give ExactAt (k+1). No coefficient-map naturality assumption is needed for this objectwise construction.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category"
+  "def-exc-discrete-modules-category",
+  "lem-exc-coinduced-functions-open-stabilizer"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG and the parent node proof, specialized to integer coefficients."
+  "place": "Tag 0DVG, displayed differential and final profinite comparison; explicit right-translation embedding, compactness argument and evaluation contraction from the original node plan, formalized and completed by S2."
  },
  "mathlib_searches": [
   {
@@ -102,10 +114,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T011925-L-2762594",
-  "kind": "interface",
+  "landing": "20261013T033006-L-3677987",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
