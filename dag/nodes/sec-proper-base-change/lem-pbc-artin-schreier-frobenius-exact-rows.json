@@ -17,50 +17,63 @@
  ],
  "proof": [
   {
-   "text": "Construct the lifted additive structure sheaves G and G′ and their Artin--Schreier exact rows. Identify the inverse image of the prime constant sheaf with the constant sheaf on C′, and transport its inclusion to i′. The structural ring map induces q. Both composites from the inverse-image constant sheaf to G′ send a prime-field section to the same constant function; the sheafification universal property gives (upperStar i) followed by q = i′.",
+   "text": "Construct G and G' explicitly as lifted tensor-section structure sheaves. Characteristic p on k maps to zero in global sections on C and then C'. Use the section-data theorem on both schemes and its separate exactness theorem to obtain wp, wp', i and i_0 with the required formulas and exactness.",
    "uses": [
-    "lem-sc-as-sequence"
+    "lem-sc-artin-schreier-scheme-section-data",
+    "lem-sc-artin-schreier-scheme-section-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Properness and smooth connectedness identify global functions with the algebraically closed field, and x^p-x is surjective on that field. Apply the degree-zero comparison, natural in wp, to obtain surjectivity of H^0(wp). The same argument applies to C′: properness and smoothness are stable under base change, and connectedness over an algebraically closed field is geometric connectedness. The Ext/derived comparison transports degree-zero epimorphy to the specified Sheaf.H model. The dimension-zero case is Spec k and obeys the same argument.",
+   "text": "Apply the specified-row pullback compatibility theorem to obtain q, i', its zero composite, short exactness, both sheaf squares, and the adjoint pullback section formula.",
    "uses": [
-    "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-pbc-artin-schreier-pullback-rows"
    ],
    "elementary": false
   },
   {
-   "text": "For dimension one, use the additive scalar model as V with its finite-dimensionality. Define F by the cohomology map of the sectionwise p-th-power endomorphism. For the scalar sheaf map mu_c, the equality mu_c followed by Frobenius = Frobenius followed by mu_(c^p) holds on all sections. Applying additive cohomology proves p-semilinearity. Additivity proves b(H^1(wp)(x))=F(b(x))-b(x). In dimension zero take V=H^1(C,O_C)=0; its unique Frobenius is semilinear.",
+   "text": "Apply additive scalar base change to obtain V, finite-dimensionality, b, b', scalar sheaf maps, and the canonical cohomology pullback formula.",
    "uses": [
-    "lem-sc-additive-cohomology-finite-scalar-model"
+    "lem-pbc-additive-scalar-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Use flat coherent base change and the etale/Zariski comparison to construct b′:H^1(C′,G′) to k′ tensor V. In the finite affine-cover Cech complexes, scalar extension sends a cochain s to 1 tensor s and structure-ring pullback sends s^p to its pullback to the p-th power. The Cech comparisons commute with these additive maps; Frobenius need not be O-linear. Transport the induced Frobenius on C′ through b′ to F′. This gives semilinearity, F′(1 tensor v)=1 tensor F(v), the formula for wp′, and the canonical pullback formula b′(H^1(q)(pullback(x)))=1 tensor b(x). The same construction works for the zero module. No calculation of the kernel of F-1, and no invariance of fixed points, occurs in this step.",
+   "text": "The private proved helper exists_frobenius_model constructs phi=wp+id and checks its section formula phi(x)=x^p. Conjugate H^1(phi) by b to an additive map psi. For scalar sheaf maps mu_c and mu_(c^p), ring-map preservation of powers proves mu_c followed by phi equals phi followed by mu_(c^p). Cohomology functoriality and scalar compatibility make psi Frobenius-semilinear, giving F. Additivity gives the formula H^1(wp)=F-id. Apply the identical proved helper on C' using b' to obtain F'.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Functoriality of cohomology pullback and the wp-square give compatibility of H^1(wp) and H^1(wp'). For v=b(x), rewrite this equality using b', the two F-id formulas, and the canonical pullback formula. Distribute tensor over subtraction and cancel the common 1 tensor v term to obtain F'(1 tensor v)=1 tensor F(v). Surjectivity of b covers all v.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The private proved helper surjective_sheafH_zero uses smoothness to get regularity and reducedness. The existing global-sections bijectivity theorem for a proper connected reduced scheme over an algebraically closed field identifies global functions with k; the field Artin--Schreier map is onto. Evaluate at the terminal etale object and use the natural Sheaf.H.equiv_0 to prove H^0(wp) surjective directly in the Ext model. Smoothness and properness persist under the displayed pullback; connectedness over the algebraically closed field is geometric connectedness, so C' is connected. Repeat the same helper on C'. This also handles dimension zero.",
    "uses": [
-    "lem-sc-flat-base-change-coherent",
-    "lem-sc-etale-zariski-qcoh-comparison",
-    "lem-pc-cech-computes"
+    "lem-sc-artin-schreier-k",
+    "lem-weil-separably-closed-geometrically-connected"
    ],
    "elementary": false
+  },
+  {
+   "text": "Assemble V, F, F', the explicit sheaves, specified maps, additive equivalences, short exactness and degree-zero surjectivity into the unchanged existential conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-as-sequence",
-  "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "lem-sc-additive-cohomology-finite-scalar-model",
-  "lem-sc-flat-base-change-coherent",
-  "lem-sc-etale-zariski-qcoh-comparison",
-  "lem-pc-cech-computes"
+  "lem-pbc-additive-scalar-base-change",
+  "lem-pbc-artin-schreier-pullback-rows",
+  "lem-sc-artin-schreier-k",
+  "lem-sc-artin-schreier-scheme-section-data",
+  "lem-sc-artin-schreier-scheme-section-exact",
+  "lem-weil-separably-closed-geometrically-connected"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0A3P",
-  "place": "proof, coherent cohomology comparison and Artin--Schreier exact rows; Tag 02KH, canonical flat base change; Section 0A3J, Artin--Schreier sequence"
+  "place": "proof, Artin--Schreier rows and coherent flat base change; Lean reduction by J1, with directly proved semilinearity, compatibility cancellation and Ext degree-zero surjectivity"
  },
  "mathlib_searches": [
   {
@@ -147,9 +160,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T002010-L-2358657",
+  "landing": "20261013T031542-L-3571512",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

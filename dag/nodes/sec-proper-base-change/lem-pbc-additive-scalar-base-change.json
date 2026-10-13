@@ -1,0 +1,148 @@
+{
+ "id": "lem-pbc-additive-scalar-base-change",
+ "kind": "statement",
+ "title": "Scalar-compatible canonical base change for additive first cohomology",
+ "statement": "Let $k\\to k'$ be an algebra map of algebraically closed fields. Let $f:C\\to\\operatorname{Spec}k$ be smooth, proper and connected with dimension at most one [def-sc-curves, def-weil-proper-morphism], and let $C'$ with maps $f',j$ be its displayed cartesian base change. Let $G,G'$ be abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] equipped with natural additive section equivalences $a,a'$ to the regular functions on every etale object. Let $q:j^*G\\to G'$ have adjoint whose section formula under $a,a'$ is ring pullback along $U\\times_C C'\\to U$ [def-weil-pbc-inverse-image]. There are a finite-dimensional $k$-module $V$ and additive equivalences $b:H^1(G)\\simeq V$, $b':H^1(G')\\simeq k'\\otimes_k V$ [def-weil-pbc-etale-cohomology]. For each $c\\in k$ there is an endomorphism of $G$ which acts on sections by multiplication by the structural image of $c$, and whose cohomology map becomes multiplication by $c$ under $b$; the same holds for $c\\in k'$ and $G'$ under $b'$. The structural image on $U$ is the composite $k\\simeq\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to\\Gamma(C,\\mathcal O)\\to\\Gamma(U,\\mathcal O)$, and analogously on $C'$. Moreover $b'(H^1(q)(j^*x))=1\\otimes b(x)$ for all $x\\in H^1(G)$, where $j^*x$ is the canonical cohomology pullback. No Frobenius endomorphism or Artin--Schreier row is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A3P",
+  "place": "first sentence of proof; Tags 03P2, etale/Zariski comparison; 02O6, proper coherent finiteness; 02KH, canonical flat base change and affine-cover proof"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The natural section equivalences identify G and G' with the lifted additive structure sheaves. Use etale/Zariski quasi-coherent comparison and the natural Ext/derived comparison to identify their H^1 with coherent structure-sheaf H^1. Proper coherent finiteness gives a finite-dimensional k-module V and its additive comparison b.",
+   "uses": [
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate multiplication by each structural scalar on regular functions to sheaf maps mu_c. Their naturality follows from the structure morphism triangle. The zero, identity, addition and multiplication identities hold sectionwise. The cohomology comparison natural in module maps carries H^1(mu_c) to scalar multiplication on V. Perform the same construction on C'.",
+   "uses": [
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flat coherent base change to the structure module and transport it to the displayed cartesian square, with tensor factors interchanged. Compose with etale/Zariski and Ext/derived comparisons to obtain b'. Scalar naturality identifies each H^1(mu_c) with the k' action.",
+   "uses": [
+    "lem-sc-flat-base-change-coherent",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite affine cover of the proper, hence separated and quasi-compact curve and its pullback cover. The adjoint formula for q gives the canonical cochain map s to 1 tensor s on sections and all intersections. Flat tensoring commutes with kernels and images. The natural Cech/cohomology comparisons therefore yield b'(H^1(q)(pullback x))=1 tensor b(x), in the specified Ext model. For dimension zero both coherent H^1 groups vanish, so the same construction gives zero modules.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "lem-sc-flat-base-change-coherent",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cech-computes",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A3P",
+  "place": "first sentence of proof; Tags 03P2, etale/Zariski comparison; 02O6, proper coherent finiteness; 02KH, canonical flat base change and affine-cover proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension isomorphism on coherent sheaf cohomology commutes with pullback from a field extension",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pushforwardCongr.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv, TensorProduct",
+   "results": "12 hits; TensorProduct.comm, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_tmul, TensorProduct.equivOfCompatibleSMul, TensorProduct.comm_symm_tmul, TensorProduct.comm_comm, TensorProduct.lift.equiv.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|H.*baseChange",
+   "results": "25 hits; Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/BilinearForm/TensorProduct.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar compatible canonical flat base change of first cohomology of the additive structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierFrobeniusExactRows",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Characteristic-p proper base change: Scalar-compatible canonical base change for additive first cohomology",
+   "via": [
+    "lem-pbc-artin-schreier-frobenius-exact-rows",
+    "lem-pbc-artin-schreier-prime-base-change-model",
+    "lem-sc-artin-schreier-base-change-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveScalarBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveScalarBaseChange.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_additive_scalar_base_change",
+  "statement": "theorem exists_additive_scalar_base_change\n    {k k' : Type u}\n    [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [IsCurve f] [Smooth f] [ConnectedSpace C] [IsProper f]\n    {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (G' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (a' : ∀ U : C'.Etaleᵒᵖ, G'.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (ha' : ∀ (U V : C'.Etaleᵒᵖ) (g : U ⟶ V) (x : G'.obj.obj U),\n      a' V (G'.obj.map g x) = g.unop.left.appTop (a' U x))\n    (q : (Etale.upperStar AddCommGrpCat.{u + 1} ι').obj G ⟶ G')\n    (hq : (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n        a' (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ ι').obj U.unop))\n          (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ι').homEquiv\n            G G' q).hom.app U x) =\n          (Limits.pullback.fst U.unop.hom ι').appTop (a U x))) :\n    ∃ (V : ModuleCat.{u + 1} k) (_ : FiniteDimensional k V)\n      (b : Sheaf.H G 1 ≃+ V) (b' : Sheaf.H G' 1 ≃+ (k' ⊗[k] V)),\n      (∀ c : k, ∃ μ : G ⟶ G,\n        (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n          let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)\n          a U (μ.hom.app U x) = a U x * ρ c) ∧\n        ∀ x : Sheaf.H G 1,\n          b (Sheaf.H.map μ 1 x) = c • b x) ∧\n      (∀ c : k', ∃ μ : G' ⟶ G',\n        (∀ (U : C'.Etaleᵒᵖ) (x : G'.obj.obj U),\n          let ρ : k' →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f'.appTop.hom.comp (Scheme.ΓSpecIso (.of k')).inv.hom)\n          a' U (μ.hom.app U x) = a' U x * ρ c) ∧\n        ∀ x : Sheaf.H G' 1,\n          b' (Sheaf.H.map μ 1 x) = c • b' x) ∧\n      ∀ x, b' (Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) = 1 ⊗ₜ[k] b x",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031542-L-3571512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031542-L-3571512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

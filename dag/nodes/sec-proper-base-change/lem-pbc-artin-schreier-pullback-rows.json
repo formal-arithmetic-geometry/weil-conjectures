@@ -1,0 +1,138 @@
+{
+ "id": "lem-pbc-artin-schreier-pullback-rows",
+ "kind": "statement",
+ "title": "Pullback compatibility for specified Artin--Schreier rows",
+ "statement": "Let $j:C'\\to C$ be a morphism of schemes [def-pc-scheme] and $p$ a prime. Let $G,G'$ be abelian sheaves on their small etale sites [def-weil-pbc-abelian-etale-sheaves], with additive equivalences $a_U:G(U)\\simeq\\Gamma(U,\\mathcal O_U)$ and $a'_U:G'(U)\\simeq\\Gamma(U,\\mathcal O_U)$ commuting with every restriction. Suppose endomorphisms $w,w'$ act by $x^p-x$ under these equivalences, and morphisms $i:\\underline{\\mathbb Z/p}_C\\to G$, $i_0:\\underline{\\mathbb Z/p}_{C'}\\to G'$ send a constant class $c$ on the constant-presheaf sheafification unit to the natural-number image of $c.val$ [def-sc-constant-sheaves, def-weil-pbc-sheafification]. Suppose $i_0w'=0$ and the second short complex is short exact [def-weil-pbc-exact-sequence]. Then there are $q:j^*G\\to G'$ and $i':j^*\\underline{\\mathbb Z/p}_C\\to G'$ with $i'w'=0$, whose short complex is short exact, such that $(j^*i)q=i'$ and $(j^*w)q=qw'$. Under the inverse/direct image adjunction [def-weil-pbc-inverse-image], the adjoint of $q$ sends $x\\in G(U)$ to the element identified by $a'$ with the pullback of $a_U(x)$ along $U\\times_C C'\\to U$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A3J",
+  "place": "opening Artin--Schreier sequence, functoriality of its section maps under ring pullback"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Define the adjoint t:G to j_*G' on U by conjugating the regular-function pullback U times_C C' to U by a and a'. Pullback functoriality and the naturality of a and a' prove the presheaf naturality square, giving a sheaf morphism. Its adjoint q has the asserted section formula.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ring pullback preserves powers and subtraction. Evaluate w followed by t and t followed by j_*w' at every U and use injectivity of a' to equate them. The adjunction transports this equality to (j^*w)q=qw'.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical constant-sheaf isomorphism e:j^*constant Z/p to constant Z/p on C', and set i'=e followed by i_0. The comparison e agrees with the constant-presheaf unit. Both adjoint composites of (j^*i)q and i' send c to the natural-number image of c.val, since ring pullback preserves natural casts. Sheafification hom-ext and adjunction injectivity give (j^*i)q=i'.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associativity and i_0w'=0 give i'w'=0. The short complex is isomorphic to the given exact complex by e on its first term and identity on the other two; short exactness transports along this isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A3J",
+  "place": "opening Artin--Schreier sequence, functoriality of its section maps under ring pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of structure sheaf additive groups canonical morphism commuting with ring powers",
+   "results": "8 hits; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.comap, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits; CategoryTheory.ShortComplex.ShortExact, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.Splitting.shortExact, CategoryTheory.ShortComplex.ShortExact.op, CategoryTheory.ShortComplex.shortExact_iff_op, CategoryTheory.ShortComplex.ShortExact.epi_g, CategoryTheory.ShortComplex.ShortExact.mono_f, CategoryTheory.ShortComplex.shortExact_of_iso.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar.*constant|baseChange.*cohomology|cohomology.*baseChange|sheaf.*pullback",
+   "results": "14 hits; Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean.  General ring/sheaf pullback, exactness or tensor-product tools only; no exact statement with the specified etale section/cohomology compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of Artin Schreier exact rows along morphisms of schemes preserves regular function maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierFrobeniusExactRows",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Characteristic-p proper base change: Pullback compatibility for specified Artin--Schreier rows",
+   "via": [
+    "lem-pbc-artin-schreier-frobenius-exact-rows",
+    "lem-pbc-artin-schreier-prime-base-change-model",
+    "lem-sc-artin-schreier-base-change-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierPullbackRows.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_artinSchreier_pullback_rows",
+  "statement": "theorem exists_artinSchreier_pullback_rows\n    {C C' : Scheme.{u}} (ι' : C' ⟶ C) (p : ℕ) [Fact p.Prime]\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (G' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (a' : ∀ U : C'.Etaleᵒᵖ, G'.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (ha' : ∀ (U V : C'.Etaleᵒᵖ) (g : U ⟶ V) (x : G'.obj.obj U),\n      a' V (G'.obj.map g x) = g.unop.left.appTop (a' U x))\n    (wp : G ⟶ G) (wp' : G' ⟶ G')\n    (hwp : ∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n      a U (wp.hom.app U x) = (a U x) ^ p - a U x)\n    (hwp' : ∀ (U : C'.Etaleᵒᵖ) (x : G'.obj.obj U),\n      a' U (wp'.hom.app U x) = (a' U x) ^ p - a' U x)\n    (i : C.constantZMod p ⟶ G) (i0 : C'.constantZMod p ⟶ G')\n    (hi : ∀ (U : C.Etaleᵒᵖ) (c : ZMod p),\n      a U (i.hom.app U\n        ((toSheafify C.smallEtaleTopology\n          ((Functor.const C.Etaleᵒᵖ).obj\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =\n        (c.val : Γ(U.unop.left, ⊤)))\n    (hi0 : ∀ (U : C'.Etaleᵒᵖ) (c : ZMod p),\n      a' U (i0.hom.app U\n        ((toSheafify C'.smallEtaleTopology\n          ((Functor.const C'.Etaleᵒᵖ).obj\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =\n        (c.val : Γ(U.unop.left, ⊤)))\n    (z0 : i0 ≫ wp' = 0) (hs0 : (ShortComplex.mk i0 wp' z0).ShortExact) :\n    ∃ (q : (Etale.upperStar AddCommGrpCat.{u + 1} ι').obj G ⟶ G')\n      (i' : (Etale.upperStar AddCommGrpCat.{u + 1} ι').obj (C.constantZMod p) ⟶ G')\n      (z' : i' ≫ wp' = 0),\n      (ShortComplex.mk i' wp' z').ShortExact ∧\n      (Etale.upperStar AddCommGrpCat.{u + 1} ι').map i ≫ q = i' ∧\n      (Etale.upperStar AddCommGrpCat.{u + 1} ι').map wp ≫ q = q ≫ wp' ∧\n      (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n        a' (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ ι').obj U.unop))\n          (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ι').homEquiv\n            G G' q).hom.app U x) =\n          (Limits.pullback.fst U.unop.hom ι').appTop (a U x))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031542-L-3571512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T031542-L-3571512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
