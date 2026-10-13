@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-picard-external-right-cech-exact-product",
+ "kind": "statement",
+ "title": "Product right Cech exactness",
+ "statement": "Let k be a field, X and Y schemes over Spec k with affine relative diagonals, U and V finite indexed families of affine opens of X and Y, F a quasi-coherent module on X, and S a short exact sequence of quasi-coherent modules on Y. Then S.map(picardRightProductCechFunctor f g U V F) of [def-sc-picard-external-right-cech-models] is short exact. No cover condition is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, coefficient diagram following equation-kunneth-on-cech, right-variable version; https://stacks.math.columbia.edu/tag/0BED read by second reader"
+ },
+ "stmt_deps": [
+  "def-sc-picard-external-right-cech-models",
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Every tuple intersection on each factor is affine by repeated binary intersection, since tuples in Cech degree n have n+1 entries. Quasi-coherent sections of S on the right intersection are short exact by left exactness and H^1 vanishing of S.X₁.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tuple intersection in the product cover is the fibre product of the factor intersections. The affine fibre-product, pullback and tensor section formulas naturally identify external coefficient sections with the tensor over k of the two factor section spaces.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the right section sequences with the fixed left section space over k and take the finite product over tuples. Tensor over a field is exact, as are finite products and sums of vector spaces. Extension by zero adds zero sequences in negative degrees. Apply degreewise short exactness of complexes. Empty tuple-index sets give zero terms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-affine-diagonal-intersections",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, right-variable component of the coefficient diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequences preserved by Cech sections on affine opens and tensor total complexes over a field",
+   "results": "Eight hits, principally MayerVietorisSquare.shortComplex_shortExact and affine transition-limit section lemmas; no fixed coefficient Cech functor exactness theorem.",
+   "date": "2026-10-13",
+   "verdict": "No matching component theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "Twelve generic hits: ShortExact, Splitting.shortExact, shortExact_of_iso, shortExact_iff_of_iso, splittingOfInjective and op/unop lemmas. None establishes the required coefficient section exactness.",
+   "date": "2026-10-13",
+   "verdict": "No matching fixed right Cech theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_cechComplex; shortExact_iff_degreewise_shortExact; shortExact in PicardExternalCupLeftCechExact, TotalComplex and Bifunctor",
+   "results": "TopCat.Sheaf.shortExact_cechComplex requires sectionwise surjectivity for abelian sheaves. HomologicalComplex.shortExact_iff_degreewise_shortExact supplies the final generic step. The left coefficient theorem is still sorry and fixes finite subcovers, unlike these arbitrary finite families. TotalComplex and Bifunctor do not give the needed affine coefficient result.",
+   "date": "2026-10-13",
+   "verdict": "Generic final tools found; no duplicate component statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of quasi coherent modules on affine intersections sends a short exact sequence to a degreewise short exact sequence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalRightCechExact",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-external-right-cech-exact",
+   "place": "Product conjunct of the short exact coefficient diagram"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalRightCechProductExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalRightCechProductExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternal_right_cech_product_exact",
+  "statement": "theorem picardExternal_right_cech_product_exact\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    {ι κ : Type w} [Finite ι] [Finite κ]\n    (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hU : ∀ i, IsAffineOpen (U i)) (hV : ∀ j, IsAffineOpen (V j))\n    (F : X.Modules) [F.IsQuasicoherent]\n    (S : ShortComplex Y.Modules) (hS : S.ShortExact)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent] :\n    (S.map (picardRightProductCechFunctor f g U V F)).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T111915-L-3059923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T111915-L-3059923",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

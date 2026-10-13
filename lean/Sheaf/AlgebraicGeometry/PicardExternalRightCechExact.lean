@@ -6,6 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
+import Sheaf.AlgebraicGeometry.PicardExternalRightCechTensorExact
+import Sheaf.AlgebraicGeometry.PicardExternalRightCechProductExact
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Exactness of the fixed right-coefficient Cech sequences
@@ -52,6 +54,9 @@ theorem picardExternal_right_cech_exact
     (S : ShortComplex Y.Modules) (hS : S.ShortExact)
     [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]
     : (S.map (picardRightTensorCechFunctor f g U V F)).ShortExact ∧
-      (S.map (picardRightProductCechFunctor f g U V F)).ShortExact := by sorry
+      (S.map (picardRightProductCechFunctor f g U V F)).ShortExact := by
+  constructor
+  · exact picardExternal_right_cech_tensor_exact f g U V hU hV F S hS
+  · exact picardExternal_right_cech_product_exact f g U V hU hV F S hS
 
 end AlgebraicGeometry.Scheme.Modules
