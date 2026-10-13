@@ -20,7 +20,7 @@
    "elementary": true
   },
   {
-   "text": "Construct the common abelian skyscraper presheaf for an arbitrary coefficient type with an abelian-group structure. Apply TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing. For each membership proof in the union, choose an index whose open contains x and take that section value. Pairwise compatibility on intersections proves each restriction equation. Any other gluing has the same value by its restriction to the chosen member. If x is absent from the union, the section domain is empty, including for an empty cover. The bundled stalk-module presheaf and its sheaf theorem specialize this common construction.",
+   "text": "Apply TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing directly to the abelian presheaf of the stalk module. For each membership proof in the union, choose an index whose open contains x and take that section value. Pairwise compatibility on intersections proves each restriction equation. Any other gluing has the same value by its restriction to the chosen member. If x is absent from the union, the section domain is empty, including for an empty cover.",
    "uses": [],
    "elementary": true
   },
@@ -34,7 +34,7 @@
  "proof_origin": {
   "by": "R4",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 009A (4); common raw-coefficient abelian presheaf and unique-gluing proof, with bundled module specialization"
+  "place": "Tag 009A (4); direct stalk-module abelian presheaf and unique-gluing proof"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -147,13 +147,10 @@
    "SheafOfModules.ringedModuleSkyscraperMap_id",
    "SheafOfModules.ringedModuleSkyscraperMap_comp",
    "SheafOfModules.ringedModuleSkyscraperFunctor",
-   "SheafOfModules.ringedModuleSkyscraperFunctor_additive",
-   "SheafOfModules.ringedSkyscraperSectionsType",
-   "SheafOfModules.ringedSkyscraperPresheafAbOfType",
-   "SheafOfModules.ringedSkyscraperPresheafAbOfType_isSheaf"
+   "SheafOfModules.ringedModuleSkyscraperFunctor_additive"
   ],
   "file": "lean/Sheaf/Topology/RingedModuleSkyscraper.lean",
-  "statement": "def ringedModuleSkyscraperFunctor : ModuleCat.{u_sky} (X.presheaf.stalk x) ⥤ SheafOfModules.{u_sky, u_sky} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf)",
+  "statement": "def ringedModuleSkyscraperFunctor : ModuleCat.{u_sky} (X.presheaf.stalk x) ⥤ SheafOfModules.{u_sky} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf)",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
@@ -178,11 +175,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-41a6a",
-  "group": "R4",
+  "reviewer": "X-242f1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T201808-L-3976507",
+  "landing": "20261013T231540-L-1819098",
   "kind": "interface",
-  "note": "independent Codex review: Delivered construction and proofs match def-pc-ringed-module-skyscraper and its change record; signatures, axioms, node fields, report, earlier repair, and downstream compilation verified."
+  "note": "independent Codex review: Delivered module and node match the recorded changes; delivery and all five direct importers compile cleanly."
  }
 }
