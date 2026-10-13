@@ -8,6 +8,10 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
+import Sheaf.AlgebraicGeometry.AffineHomComparisonLeft
+import Sheaf.AlgebraicGeometry.AffineHomComparisonRight
+import Sheaf.AlgebraicGeometry.AffineHomComparisonRankOne
+
 /-! # Natural affine Hom comparison maps
 
 Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ.
@@ -53,6 +57,10 @@ theorem exists_affine_hom_comparison_maps {Y : Scheme.{u}} (U : Y.affineOpens) :
         c M N ≫ SheafOfModules.homObjMap (R := U.1.toScheme.toRingedSpace.sheaf)
           (𝟙 (T.obj M)) (T.map g) =
         T.map (ModuleCat.ofHom (Linear.rightComp A M g)) ≫ c M N') ∧
-      (∀ N : ModuleCat.{u} A, IsIso (c (ModuleCat.of A A) N)) := by sorry
+      (∀ N : ModuleCat.{u} A, IsIso (c (ModuleCat.of A A) N)) := by
+  rw [← affineHomComparisonFunctor_eq U]
+  dsimp only
+  exact ⟨affineHomComparison U, affineHomComparison_chart_left U,
+    affineHomComparison_chart_right U, affineHomComparison_chart_rankone U⟩
 
 end AlgebraicGeometry

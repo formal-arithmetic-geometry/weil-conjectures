@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-k4-affine-hom-comparison-right",
+ "kind": "statement",
+ "title": "Covariant naturality of the normalized affine Hom comparison",
+ "statement": "Let Y be a scheme, U an affine open, A=Gamma(Y,U), T the associated-sheaf functor transported along isoSpec, and c the comparison uniquely normalized on global generators [lem-sc-k4-affine-hom-generator-extension]. For A-modules M, N, Nprime and every g:N->Nprime, c(M,N) followed by internalHom(id,T(g)) equals T of postcomposition by g followed by c(M,Nprime).",
+ "stmt_deps": [
+  "lem-sc-k4-affine-hom-generator-extension"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "Lemma-spec-sheaves (4)-(5), Hom functoriality and rank-one evaluation."
+ },
+ "proof": [
+  {
+   "text": "Precompose the desired equation with each global generator h of Hom_A(M,N). Generator normalization and functoriality identify its two sides with the section corresponding to T(h ≫ g). The internal-Hom section correspondence respects composition. The chart's tilde adjunction detects maps from an associated module on all its global generators, so the two maps agree. No finite-presentation or quasi-coherence assumption on internal Hom is used, and zero rings and zero modules are included.",
+   "uses": [
+    "lem-sc-k4-affine-hom-generator-extension",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-k4-affine-hom-generator-extension",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Codex",
+  "group": "K4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/01HV",
+   "place": "Lemma-spec-sheaves (4)-(5), Hom functoriality and rank-one evaluation."
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the internal Hom sheaf from the correspondence between sheaf morphisms and global sections",
+   "results": "Eight results for general sheaf global-section naturality; no exact module-valued Hom comparison. Direct source reading supplied InternalHom homObjSectionsEquiv and InternalHomFree homObjUnitIso.",
+   "date": "2026-10-14",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ringLmapEquivSelf",
+   "results": "Three matches: ringLmapEquivSelf and its application and inverse formulas. This is the module evaluation equivalence, not the affine comparison.",
+   "date": "2026-10-14",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjSectionsEquiv|homObjUnitIso",
+   "results": "msearch grep returned zero Mathlib hits. Direct rg in lean/WeilConjectures found the proved InternalHom and InternalHomFree APIs.",
+   "date": "2026-10-14",
+   "verdict": "ingredients, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical natural comparison from the associated sheaf of module Hom to the internal Hom sheaf on an affine scheme, isomorphic for the rank-one source",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomComparisonMaps",
+  "date": "2026-10-14",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine Right specialization of the generator calculus.",
+   "via": [
+    "lem-sc-k3-affine-hom-comparison-maps",
+    "lem-sc-affine-finite-free-coefficient-comparisons",
+    "new-g3-affine-koszul-signed-dual-coefficient-square",
+    "lem-sc-affine-koszul-hom-coefficient-complex-square",
+    "new-j3-koszul-ext-coefficient-stalk-model",
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHomComparisonRight",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHomComparisonRight.lean",
+  "declaration": "AlgebraicGeometry.affineHomComparison_chart_right",
+  "statement": "theorem affineHomComparison_chart_right {Y : Scheme.{u}} (U : Y.affineOpens)\n    :\n    ∀ (M N N' : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (g : N ⟶ N'),\n        (affineHomComparison U) M N ≫ SheafOfModules.homObjMap (R :=\n          U.1.toScheme.toRingedSpace.sheaf)\n          (𝟙 ((affineHomComparisonFunctor U).obj M)) ((affineHomComparisonFunctor U).map g) =\n        (affineHomComparisonFunctor U).map (ModuleCat.ofHom (Linear.rightComp (Γ(Y, U.1) : Type u)\n          M g)) ≫ (affineHomComparison U) M N'",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T201759-L-3973042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T201759-L-3973042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
