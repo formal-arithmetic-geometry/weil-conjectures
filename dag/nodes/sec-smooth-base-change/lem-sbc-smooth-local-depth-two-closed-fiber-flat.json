@@ -1,0 +1,131 @@
+{
+ "id": "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+ "kind": "statement",
+ "title": "Flatness at a specified closed boundary point of the closed fibre",
+ "statement": "Let $A$ be a Noetherian local ring of depth at least two with closed point $a$ [def-weil-pbc-noetherian-ring, def-weil-affine-spectrum, def-weil-pbc-depth]. Let $q:L\\to\\operatorname{Spec}A$ be smooth [def-sbc-smooth-morphisms]. Let $U\\subset L$ be open, contain every point not lying over $a$, and have dense inverse image in the scheme-theoretic closed fibre $L_a$ [def-weil-pbc-scheme-conventions, def-pc-fibre-product]. Let $p:E\\to L$ be finite and etale over $U$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Suppose $\\operatorname{depth}\\mathcal O_{E,z}\\ge2$ for every $z$ with $p(z)\\notin U$. For a closed point $x\\in L_a$ whose image $y\\in L$ does not belong to $U$, and any $z\\in E$ with $p(z)=y$, the local ring map $\\mathcal O_{L,y}\\to\\mathcal O_{E,z}$ is flat [def-weil-flat-morphism]. No flatness away from this specified target point is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB (pione-lemma-purity-smooth-over-depth2), proof from the choice of a closed point through formal completion and descent; Tags 0EY6(2),(a),(b), 07NE, 057G, 05D5, 00MB, 0EYA and 0337"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The fibre is locally of finite type over the residue field. Closedness\nof x therefore makes its residue extension finite. Realize that extension\nby a finite flat local extension A to A' (07NE), and use the smooth etale\nslice (057G) to obtain, after a further flat local base change, a section\nthrough x. The new local base is Noetherian and has depth at least two by\nthe flat local depth formula (0337). Choose a smooth affine chart through\nthe section point and complete in the section ideal. Tag 05D5 identifies\nthe result with A'[[x_1,...,x_d]], and 00MB makes the completion map flat.\nThe inverse image of U contains every point away from the closed base\npoint. If d is zero, the section point is generic in its closed fibre;\nfibrewise density then puts it in U, contradicting hout. If d is positive,\nthe prime m(A') times the power-series ring maps to a generic point of the\nclosed fibre and thus belongs to the inverse image of U. Tag 0EYA extends\nthe finite etale restriction to a finite etale cover of the completion.\nSmoothness and 0337 give depth at least two on the target boundary. The\nboundary depth of E identifies the supplied p with the unique depth-two\nfinite extension (0EY6(2)); that identification commutes with the two flat\nbase changes and completion (0EY6(a),(b)). Thus the completed p is flat.\nCompletion localized at the section point is faithfully flat, since the\nsection ideal is contained in its maximal ideal. Descent of flatness gives\nflatness of every local ring map over x, including the specified z.\nThe finite flat local extensions used above are faithfully flat, so the\nsame descent gives the assertion before those base changes. Empty E has\nno z; no global flat locus argument is used in this local statement.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "G2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB (pione-lemma-purity-smooth-over-depth2), proof from the choice of a closed point through formal completion and descent; Tags 0EY6(2),(a),(b), 07NE, 057G, 05D5, 00MB, 0EYA and 0337"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphism flat at closed boundary point smooth local depth two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism etale on dense open smooth scheme over local ring depth two flat",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.etale_iff_formallyUnramified_and_smooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, RingHom.Etale.toAlgebra",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*[Ee]tale|[Ee]tale.*depth|purity.*[Ff]lat|[Ff]lat.*purity",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFiniteFlat",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of the spreading proof: finite depth-two extension and its local completion calculation; Flatness at a specified closed boundary point of the closed fibre",
+   "via": [
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoClosedFiberFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothLocalDepthTwoClosedFiberFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.flat_stalk_of_smooth_local_depth_two_closed_fiber",
+  "statement": "theorem flat_stalk_of_smooth_local_depth_two_closed_fiber\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (U : L.Opens)\n    (haway : ∀ y : L, q y ≠ IsLocalRing.closedPoint A → y ∈ U)\n    (hclosed : Dense (↑((q.fiberι (IsLocalRing.closedPoint A)) ⁻¹ᵁ U) :\n      Set (q.fiber (IsLocalRing.closedPoint A))))\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    {E : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ U)]\n    (hboundary : ∀ z : E, p z ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))\n    (x : q.fiber (IsLocalRing.closedPoint A)) (hx : IsClosed ({x} : Set _))\n    (hout : q.fiberι (IsLocalRing.closedPoint A) x ∉ U)\n    (z : E) (hz : p z = q.fiberι (IsLocalRing.closedPoint A) x) :\n    (p.stalkMap z).hom.Flat",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T045529-L-128912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T045529-L-128912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

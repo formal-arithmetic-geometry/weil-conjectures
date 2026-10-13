@@ -1,0 +1,146 @@
+{
+ "id": "lem-sbc-finite-flat-target-locus",
+ "kind": "statement",
+ "title": "Openness of the target flat locus of a finite morphism",
+ "statement": "Let $L$ be a locally Noetherian scheme [pqf-def-locnoeth] and $p:E\\to L$ a finite morphism of schemes [def-weil-pbc-scheme-conventions, def-weil-finite-integral-morphism]. The subset $F=\\{y\\in L\\mid\\text{for every }z\\in E\\text{ with }p(z)=y,\\ \\mathcal O_{L,y}\\to\\mathcal O_{E,z}\\text{ is flat}\\}$ is open [def-weil-flat-morphism]. The condition is vacuous when the fibre over $y$ is empty. No quasi-compactness of $L$ is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00RC (theorem-openness-flatness) and 01WM (integral morphisms are affine and universally closed)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an affine finite-type morphism Spec S to Spec R with R Noetherian, transport its stalk map to the localized ring homomorphism using Scheme.arrowStalkMapSpecIso. The localization flatness equivalence identifies its flatness with Module.Flat R (Localization.AtPrime q). Apply PrimeSpectrum.isOpen_setOf_flat_localization, whose basic-neighbourhood input is the cited Noetherian flat locus theorem.",
+   "uses": [
+    "lem-weil-pbc-noetherian-flat-locus-neighborhood"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary E and L, choose an affine target neighbourhood U of p(z). Finiteness makes its inverse image affine. Apply the affine calculation to p restricted to U, then transport each stalk map through morphismRestrictStalkMap. Open immersion of the inverse image into E sends the resulting open to an open source neighbourhood. These neighbourhoods prove the source flat-stalk locus is open.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite morphism is integral, hence closed by the integral/universally-closed equivalence. Its image of the closed complement of the source flat locus is closed. By direct set logic, the complement of that image is exactly F. Take its open complement.",
+   "uses": [
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "pqf-lem-integral-univclosed"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "G2",
+  "document": "Stacks Project",
+  "place": "Tags 00RC (theorem-openness-flatness) and 01WM (integral morphisms are affine and universally closed)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat locus of finite morphism open noetherian scheme closed points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flatness locus is open for finite type algebra over noetherian ring",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.HasGoingDown.of_flat, RingHom.Flat.propertyIsLocal, RingHom.Flat.ofLocalizationSpanTarget, Module.freeLocus_eq_univ, Module.flat_of_localized_span, Algebra.isOpen_smoothLocus",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Ll]ocus|[Jj]acobson.*[Cc]losed",
+   "results": "13 hits: Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/TensorProduct/IncludeLeftSubRight.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact scheme-level match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFiniteFlat",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two paragraph of the spreading proof: finite depth-two extension and its local completion calculation; Openness of the target flat locus of a finite morphism",
+   "via": [
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatTargetLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteFlatTargetLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isOpen_setOf_finite_flat_stalks",
+  "statement": "theorem isOpen_setOf_finite_flat_stalks\n    {E L : Scheme.{u}} (p : E ⟶ L) [IsFinite p] [IsLocallyNoetherian L] :\n    IsOpen {y : L | ∀ z : E, p z = y → (p.stalkMap z).hom.Flat}",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T045529-L-128912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T045529-L-128912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
