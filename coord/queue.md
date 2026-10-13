@@ -1,6 +1,6 @@
 # Work queue
 
-134 items; claim with `tools/claim.py next <group> [--stage N]`.
+130 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (134)
+## Stage 3: modules to prove (130)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -85,14 +85,13 @@
 | `Sheaf.Paper.CechRefinementResolutionBeta` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackKFlatConeCounitEquality` | 27 | 1 | proof |
 | `Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation` | 27 | 1 | proof |
+| `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HorizontalOrdinaryForwardFixedPasting` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
-| `Sheaf.Paper.ModuleCupSinglePairingHomology` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport` | 29 | 1 | proof |
-| `Sheaf.Paper.ModuleCupDerivedClassComparison` | 29 | 1 | proof |
 | `Sheaf.Paper.ModuleCupKInjectiveTarget` | 29 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeTildeMateFactorization` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare` | 30 | 1 | proof |
@@ -102,18 +101,15 @@
 | `Sheaf.AlgebraicGeometry.OpenRestrictedTensorCoordinateData` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
-| `Sheaf.Paper.ModuleCupDerivedHomologyTensor` | 30 | 1 | proof |
 | `Sheaf.Algebra.Homology.ResidueKernelUnitMinorPivot` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumStalkCoordinateData` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenOrdinaryTensorPureGermCoordinates` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux` | 31 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenStalkRepresentativeCoherence` | 31 | 1 | proof |
-| `Sheaf.Paper.ModuleCupShiftedUnitTensor` | 31 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeExists` | 32 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.DualRetractionKey` | 32 | 1 | proof |
-| `Sheaf.Paper.ModuleCupHomologyRepresentability` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LocalKoszulAugmentedCarrier` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoordinateSquares` | 33 | 1 | proof |
