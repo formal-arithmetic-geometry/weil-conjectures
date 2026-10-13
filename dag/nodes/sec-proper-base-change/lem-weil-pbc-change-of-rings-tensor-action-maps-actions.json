@@ -16,12 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Proof: put P₀ = P restricted to O_Y and K = C.toModule.val tensor P₀.val.\nGive K the two B-actions b(c tensor p) = c tensor bp and\nb(c tensor p) = phi(b)c tensor p. The first respects O_Y-balancing by\ncommutativity of B and the scalar-tower identity; the second respects it\nbecause phi is an O_Y-algebra morphism. Restrictions commute with each\naction by naturality of phi and semilinearity of the module restrictions.\nSheafify each B-module presheaf. After restriction to O_Y both associated\nmodule sheaves identify with the O_Y-sheafification of K: the underlying\nadditive sheafification is the same and the O_Y-action is uniquely determined\nby its restriction to the sheafification unit. Transport the B-actions\nthrough these identifications to S = C.toModule tensor P₀. Their pairings\nB.toModule.val times S.val are O_Y-bilinear and natural. Apply the sectionwise\ntensor universal property and then the sheafification adjunction to obtain\na and d. The identifications preserve the units, so on the indicated double\npure tensors their values are c tensor bp and phi(b)c tensor p. The universal\nproperties apply to empty opens and zero modules without extra hypotheses.",
+   "text": "Construct a presheaf morphism from a natural O_Y-bilinear pairing by the sectionwise tensor universal property. Extend it through sheafification using its adjunction; the unit equation gives its value on pure tensors.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply this construction to (b,p) ↦ b • p and (b,c) ↦ phi(b)c. Bilinearity follows from commutativity, mul_smul, and the equation B.hom ≫ phi.right = C.hom. Naturality follows from the module restriction scalar law and naturality of phi.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define a as inverse associator, braiding on B tensor C, associator, and id_C tensor act. Define d as inverse associator followed by mul tensor id_P. TensorSection computes all these maps on pure tensor sections, yielding the required two formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -31,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules), change of rings assertion; Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules); explicit tensor-balancing argument in steps 1-4 of lem-weil-pbc-change-of-rings-tensor-relation-presentation; H3 separates the action construction from the presheaf comparison"
+  "place": "Stacks Tags 01SB and 0089; G4 direct bilinear-pairing construction using tensor sheafification and monoidal coherence, all steps proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -116,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-64f11",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T025302-L-3422872",
+  "landing": "20261013T082347-L-1636594",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and both action formulas with the node; verified proof metadata and unit route, clean compilation of the delivery and sole direct importer ChangeOfRingsTensorActionMapsCore, and only standard axioms for both proved declarations."
  }
 }
