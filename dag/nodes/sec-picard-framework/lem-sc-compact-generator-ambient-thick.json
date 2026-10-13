@@ -14,28 +14,29 @@
  },
  "proof": [
   {
-   "text": "Lift the supplied tower to the full triangulated subcategory A. Each attaching cofan point belongs to A by its distinguished triangle and the adjacent tower terms. The point of the final coproduct belongs to A by closure under universe-w coproducts after reindexing the countable family by ULift natural numbers. Ambient colimit universal properties restrict to the full subcategory. The inclusion respects shifts and triangles. Reindex the countable cofan by ULift natural numbers in universe w; only the explicitly supplied coproducts are involved.",
+   "text": "Reindex the supplied ambient cofan by ULift natural numbers in universe w. Closure under these colimits puts its point in A. Restrict its universal property to A.FullSubcategory by constructing the desc morphisms and checking uniqueness on underlying arrows. The resulting coproduct-point isomorphism identifies identity minus the canonical transition shift with the supplied identity minus s. Lift the telescope triangle, correcting its last arrow by the inclusion commShiftIso, and transport it along this coproduct isomorphism.",
    "uses": [
     "def-weil-triangulated-category"
    ],
    "elementary": true
   },
   {
-   "text": "Compact Hom commutes with the sequential homotopy colimit by compact_hom_hocolim. Thus the identity of P factors through one of the supplied finite stages. If the selected stage is the initial zero stage then P is zero; otherwise discard the zero stage and rotate the transition triangles to the form of the finite-stage factorization theorem. For the nonzero-stage case, use the tail starting at X_1: the first triangle and X_0=0 identify X_1 with B_0. Inverse rotation of each later triangle gives B_n[-1] to X_n to X_(n+1) to B_n. Since shifts are equivalences they preserve the supplied colimiting cofans, and each B_n[-1] is a coproduct of shifts of G. These give precisely the initial-term and transition hypotheses of compact_factorThrough_thickClosure.",
+   "text": "Apply compact_hom_hocolim to P and the sequence of internal tower objects. Surjectivity of its comparison map represents the identity of P by an element of the colimit of Hom groups. Types.jointly_surjective' gives one stage and a map f from P to that stage; the comparison equations give f followed by the stage inclusion and q equal to the identity of P.",
    "uses": [
     "lem-pc-compact-hom-hocolim"
    ],
    "elementary": false
   },
   {
-   "text": "Apply compact_factorThrough_thickClosure to the resulting map from P into the selected stage, for the singleton compact family G. It factors through an object Q in the thick envelope of a finite sum of copies of G. This envelope is contained in the singleton envelope of G. Composing back to P exhibits P as a retract of Q.",
+   "text": "The initial internal stage is zero, hence isomorphic to the empty coproduct of shifts of G. Each attaching point B_n belongs to A by the distinguished triangle and its two adjacent stages. Restrict the ambient attaching cofan using the shift-commutation isomorphisms to obtain B_n isomorphic to an internal coproduct of shifts of G. Lift the stage triangle and inverse-rotate it. Its first vertex is B_n[-1], a coproduct of shifts G[m_i-1], using sigmaComparison for the shift equivalence and shiftFunctorAdd. Apply compact_factorThrough_thickClosure to the unchanged tower, singleton family G indexed by PUnit in universe w, compact object P, and the map f. This gives P to Q to X_n with composite f, where Q is in the internal thick envelope of a finite sum of copies of G. No tail or zero-stage case split is needed.",
    "uses": [
-    "lem-sc-supported-factor-through-thick"
+    "lem-sc-supported-factor-through-thick",
+    "def-weil-triangulated-category"
    ],
    "elementary": false
   },
   {
-   "text": "The inclusion of A preserves the finite operations defining a triangulated envelope: shifts, finite biproducts, distinguished triangles and retract equations. Therefore the ambient object Q lies in the ambient singleton envelope of G, and its retract P lies there as well. In the zero case, the zero object belongs to the envelope of the singleton G.",
+   "text": "Let R be the inverse image under the inclusion of the ambient singleton thick envelope of G. The inclusion is triangulated and maps retract equations, so R is triangulated and retract-closed. R contains G; its closure under finite products and the biproduct isomorphism put every finite coproduct of G in R, including the empty one. The universal property triangEnvelope_le_iff now implies R(Q). Compose Q to X_n with the supplied stage inclusion and q. The factorization equation and the identity equation from compact Hom exhibit P as an ambient retract of Q. Ambient retract closure proves the conclusion.",
    "uses": [
     "def-pc-thick-closure"
    ],
@@ -44,10 +45,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B3",
+  "group": "F3",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/09SP",
-  "place": "Finite-stage factorization after compact Hom commutes with the supplied telescope; full-subcategory transport"
+  "place": "Tag 09SP finite-stage factorization combined with Tag 094A compact Hom for the supplied telescope; full-subcategory transport proved in Lean; zero initial stage treated as an empty coproduct"
  },
  "mathlib_searches": [
   {
@@ -125,10 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T045512-L-124453",
-  "kind": "interface",
+  "landing": "20261013T060416-L-582781",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
