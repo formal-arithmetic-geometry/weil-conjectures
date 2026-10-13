@@ -12785,3 +12785,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:18 L: returned deliver/B2/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-d2ca7, head d2ca7a152) C1: In dag/nodes/sec-smooth-purity/lem-etale-proper-derived-direct-image-adjoint.json)
 - 14:19 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferential (reviewer RETURN: (reviewer X-fa190, head fa190913b) H1 / review point 4: The new sorry theorem is in the item's module rather than its ow)
 - 14:22 L: returned deliver/G4/Sheaf.Paper.ModuleCupNaiveDerivedCompatibility (reviewer RETURN: (reviewer X-c21c2, head c21c2ee3b) C1/C4: dag/nodes/sec-abelian-varieties/lem-sc-module-cup-kinjective-target.json uses )
+- 14:27 L: returned deliver/H2/Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison (reviewer RETURN: (reviewer X-a2a6e, head a2a6ef486) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Re)
