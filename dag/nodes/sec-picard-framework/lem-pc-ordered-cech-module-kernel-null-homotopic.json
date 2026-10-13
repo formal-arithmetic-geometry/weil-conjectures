@@ -13,40 +13,40 @@
  },
  "proof": [
   {
-   "text": "For each base open B use e to identify the full cochains with sections on all tuples of W intersected with the inverse image of B. Use the explicit finite-intersection SiteCechComplex, with intersection projections and their unique index maps. Apply the first and second sorting identities: dH+Hd=id-kappa and dJ+Jd=kappa-P. The sum has boundary id-P.",
+   "text": "Obtain the cochain endomorphism P characterized by the finite signed full-coordinate formula, and a homotopy from identity to P. The formula uniquely specifies P, so no arbitrary geometric data is selected.",
    "uses": [
-    "lem-pc-alternating-cech-first-sorting-identity",
-    "lem-pc-alternating-cech-second-sorting-identity",
-    "def-pc-ordered-cech-module-coordinates"
+    "lem-pc-ordered-cech-module-projection-lift",
+    "lem-pc-ordered-cech-module-projection-homotopy"
    ],
    "elementary": false
   },
   {
-   "text": "The increasing coordinate vanishing of g means P after g is zero. In the finite sum defining P, an injective tuple has its unique sorted increasing coordinate, transported by an isomorphism and multiplied by its sign; a noninjective tuple has zero projection. Each coordinate of P after g therefore vanishes. The cochain-map equation of g gives d((H+J)g)+((H+J)g)d=g.",
+   "text": "For each nonnegative degree, open and section g(s), each increasing permutation summand in the full-coordinate formula is zero by hg, while the other summands are zero by their filters. Hence every full coordinate of P(g(s)) vanishes. Evaluated product projections are jointly injective by the preserved limit; cancel e and extendXIso to get P(g(s))=0. Negative-degree terms are zero by extension. Morphism extensionality gives g composed with P equals zero.",
    "uses": [
-    "def-pc-ordered-cech-module-coordinates"
+    "def-pc-ordered-cech-module-coordinates",
+    "lem-pc-ordered-cech-module-projection-lift"
    ],
    "elementary": true
   },
   {
-   "text": "The two sorting operators are explicit finite sums of restrictions and integer signs. Naturality of e transports restriction compatibility to D. In each summand hlinear identifies the local scalar with its restriction to the same intersection, so the transported operators are locally linear. Thus these coordinate operators assemble module-sheaf homotopy components. Extend them by zero over negative degrees; the zero incoming component in degree zero agrees with the natural-degree sorting identities. This is a null homotopy of g. For r=0 all objects are zero; for p+1>r ordered coordinates are empty but the sorting equations remain valid.",
+   "text": "Precompose the homotopy identity~P by g, and rewrite g composed with identity as g and g composed with P as zero. This yields the requested null homotopy.",
    "uses": [
-    "def-pc-ordered-cech-module-coordinates"
+    "lem-pc-ordered-cech-module-projection-homotopy"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ordered-cech-module-coordinates",
-  "lem-pc-alternating-cech-first-sorting-identity",
-  "lem-pc-alternating-cech-second-sorting-identity"
+  "lem-pc-ordered-cech-module-projection-lift",
+  "lem-pc-ordered-cech-module-projection-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "K2",
+  "agent": "N2",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2",
-  "note": "Module-sheaf assembly of the cited explicit restrictions and sorting formulas."
+  "place": "Tags 01FK and 01FM, equations 20.23.6.1 and 20.23.6.2",
+  "note": "Compiled kernel argument from the two separate assembly lemmas; joint injectivity, permutation-sum vanishing and homotopy composition proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -140,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T054224-L-444913",
+  "landing": "20261013T065113-L-900082",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

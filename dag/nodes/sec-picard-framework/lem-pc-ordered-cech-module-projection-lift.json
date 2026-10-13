@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-ordered-cech-module-projection-lift",
+ "kind": "statement",
+ "title": "Signed projection lift for module Cech cochains",
+ "statement": "With schemes X', T', f':X'→T', a module sheaf M [def-weil-sheaf-of-modules-category], a finite family W, a nonnegative complex D and term identifications e, differential compatibility hd and local scalar compatibility hlinear as in [def-pc-ordered-cech-module-coordinates], there exists a cochain endomorphism P of L=(f'_*D)^ext whose full tuple coordinate at y on B equals the sum over permutations σ with y∘σ strictly increasing of sign(σ) times the restriction of the ordered coordinate q(s) at y∘σ to (product W_y)×f'^(-1)B. The restriction arrow is the canonical arrow from the full product intersection to the ordered intersection. All other summands are zero. Full tuple coordinates use e after extendXIso. This formula and the zero negative terms determine P uniquely. No homotopy and no kernel-vanishing hypothesis is asserted.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ordered-cech-module-coordinates"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FK, signed extension; Tag 01FM, projection cπ"
+ },
+ "proof": [
+  {
+   "text": "Define the natural-degree full tuple maps by the finite signed extension formula. Transport by the inverse of e. Naturality of e and restrictions makes the maps natural; hlinear makes every summand locally linear because both scalar maps land on the same intersection. Thus they assemble module-sheaf morphisms.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the finite filtered sum with the existing signedCechExtension: injective tuples have one increasing sorting permutation and repeated tuples have none. Use signedCechExtension_differential for differential compatibility, then hd, pushforward and extension by zero. The construction satisfies the displayed coordinate formula, including empty families and degrees exceeding r.",
+   "uses": [
+    "def-pc-ordered-cech-module-coordinates",
+    "lem-pc-signed-cech-extension-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordered-cech-module-coordinates",
+  "lem-pc-signed-cech-extension-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 01FK and 01FM",
+  "note": "Module-sheaf assembly of the explicit signed restrictions; a strictly separate step of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed extension of increasing Cech cochains defines a locally linear projection homotopic to identity",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural locally linear sorting homotopy for ordered Cech complexes of module sheaves",
+   "results": "Only Dold-Kan summand and map lemmas were returned. They concern simplicial normalization, not the local module action or ordered Cech coordinates.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy.compLeft",
+   "results": "Generic Homotopy.compLeft composes an existing homotopy with a cochain map; it does not construct the signed projection or its locally linear homotopy.",
+   "date": "2026-10-13",
+   "verdict": "generic composition tool"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Hh]omotopy|[Ss]igned.*[Ee]xtension|to_product_injective_of_isLimit",
+   "results": "Mathlib Concrete.to_product_injective_of_isLimit supplies coordinate injectivity. Repository AlternatingCechKernelNullHomotopic and both sorting identities work in AddCommGrpCat and do not assemble module-sheaf maps.",
+   "date": "2026-10-13",
+   "verdict": "additive identities only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrderedCechModuleKernelNullHomotopic",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordered-cech-module-kernel-null-homotopic",
+   "place": "Proof step 2; finite signed projection and module-sheaf assembly",
+   "via": [
+    "lem-pc-ordered-cech-module-kernel-null-homotopic",
+    "lem-pc-ordered-cech-module-comparison",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrderedCechModuleProjectionLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrderedCechModuleProjectionLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.orderedCech_module_projection_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.orderedCechFullCoordinate",
+   "AlgebraicGeometry.Scheme.Modules.orderedCechProjectionOpenMap",
+   "AlgebraicGeometry.Scheme.Modules.IsOrderedCechModuleProjection",
+   "AlgebraicGeometry.Scheme.Modules.orderedCech_module_projection_exists"
+  ],
+  "statement": "theorem orderedCech_module_projection_exists {X' T' : Scheme.{u}} (f' : X' ⟶ T')\n    (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (D : CochainComplex X'.Modules ℕ)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor W₀).obj\n          ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor W₀).obj\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n              M.presheafModuleCat)).d p (p + 1))\n    (hlinear : ∀ (p : ℕ) (y : Fin (p + 1) → ULift.{u} (Fin r)) (B : X'.Opens),\n        let c : Γ(D.X p, B) → Γ(M, (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B) :=\n          fun s ↦ ((e p).hom ≫ Pi.π (fun y : Fin (p + 1) → ULift.{u} (Fin r) ↦\n            ((prod.functor (C := X'.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj\n                M.presheafModuleCat).obj\n                (op (∏ᶜ fun l ↦ W₀ (y l)))) y).app (op B) s\n        ∀ (a : Γ(X', B)) (s : Γ(D.X p, B)),\n          c (a • s) = X'.presheaf.map (prod.snd :\n            (∏ᶜ fun l ↦ W₀ (y l)) ⨯ B ⟶ B).op a • c s)\n    : ∃ P : ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend\n      ComplexShape.embeddingUpNat) ⟶\n      ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend\n      ComplexShape.embeddingUpNat),\n      IsOrderedCechModuleProjection f' M W₀ D e P",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T065113-L-900082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T065113-L-900082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
