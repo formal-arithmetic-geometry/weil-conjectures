@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-picard-universal-rank-match-fixed-rank-retrocompact",
+ "kind": "statement",
+ "title": "Retrocompactness of a fixed-rank universal Picard point locus",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation, and let $E$ be a finite locally free module on $X$. For $r\\in\\mathbb N$, the subset of $S$ consisting of points $s$ such that $R(f,E,\\operatorname{Spec}\\kappa(s)\\to S)$ [def-sc-picard-universal-rank-match] holds and the tensor pullback of $E$ to $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ is finite locally free of rank $r$ is retrocompact: its intersection with every quasi-compact open subset of $S$ is quasi-compact. No representing scheme, connected fibres or surjectivity of $f$ is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Tag 0BDP, first three proof paragraphs: rank decomposition and perfect direct images"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-universal-rank-match",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open U, the inverse image is quasi-compact and E has finitely many open-and-closed rank loci. Since f is flat and locally finitely presented it is open, and since it is proper it is closed. The images of the finitely many rank loci are therefore clopen in U. Subtract the images of all ranks different from r and intersect with the image of f to obtain the clopen nonempty constant-r fibre locus. The complement of the image of f is the clopen empty-fibre locus. No connectedness is assumed, and the images of different ranks need not be disjoint.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-weil-flat-morphism",
+    "def-weil-proper-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply perfect direct image and arbitrary base change to E and its dual: both are finitely presented and relatively flat because E is finite locally free and f is flat. Their degree-zero derived fibres compute ordinary direct images on residue fields. The jump-locus theorem makes their dimension-r level sets locally constructible.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-jump-loci"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the nonempty constant-r fibre locus, simultaneous dimension r of those two degree-zero fibres is equivalent to the universal rank condition over Spec kappa(s). To prove universality, take finite-free residue models of the two perfect complexes on the one-point scheme. Negative terms vanish; the degree-zero term has rank r and its outgoing matrix is zero over the field, so remains zero under every further base change. Thus degree-zero cohomology is free of rank r on each such base change. The pullback of E retains rank r. Conversely, evaluating the universal condition at the identity gives those dimensions, and the nonempty fibre makes its chosen rank equal to r.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-pc-rf-perfect-base-change",
+    "def-sc-picard-universal-rank-match"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjoin the empty-fibre locus: it satisfies the universal condition with rank zero, while E on an empty fibre has every fixed rank r. The resulting fixed-rank point locus is locally constructible on U, hence constructible on the affine U. A constructible subset of an affine scheme is a finite union of differences of compact opens, each a closed subset of a compact open, hence compact. Every compact open of S is a finite union of affine opens; compactness for each piece and finite union give retrocompactness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-jump-loci",
+  "lem-sc-perfect-finite-free-residue-model",
+  "def-sc-picard-universal-rank-match"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Tag 0BDP, first three proof paragraphs: rank decomposition and perfect direct images"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over an affine base open a finite locally free module in a proper flat finitely presented family has finitely many possible constant fibre ranks, and its universal matching direct image rank locus of fixed rank is retrocompact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(fibre|fiber).*rank|rank.*(fibre|fiber).*finite|[Rr]ank.*[Rr]etrocompact",
+   "results": "0 hits: ; no theorem about the stated Picard point locus.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The set of points at which a sheaf on the fibre and its two direct images universally have the same fixed rank is retrocompact",
+   "results": "8 hits: AlgebraicGeometry.isRetrocompact_basicOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; no theorem about the stated Picard point locus.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are only finitely many constant fibre ranks of a finite locally free sheaf in a proper family over an affine scheme",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; no theorem about the stated Picard point locus.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusQuasiCompact",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: use Tag 0BDP to obtain the universal locally closed subscheme; quasi-compactness of the fixed-rank pieces in the rank decomposition",
+   "via": [
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-universal-rank-match-locus-qc"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFixedRankRetrocompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalRankMatchFixedRankRetrocompact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardUniversalRankMatch_fixedRank_retrocompact",
+  "statement": "theorem picardUniversalRankMatch_fixedRank_retrocompact {X S : Scheme.{u}}\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (r : ℕ) :\n    IsRetrocompact {s : S | PicardUniversalRankMatch f E (S.fromSpecResidueField s) ∧\n      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r}",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T010614-L-2670563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T010614-L-2670563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

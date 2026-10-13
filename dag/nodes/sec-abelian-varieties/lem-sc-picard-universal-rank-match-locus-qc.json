@@ -10,16 +10,33 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Only finitely many rank components meet a quasi-compact target open. On each such component, the finitely presented rank loci for the module and its dual, and their fibre product, are quasi-compact. The pieces glue by the universal property, and a finite union of quasi-compact pieces is quasi-compact; quasi-compactness of an immersion is local on the target.",
+   "text": "A point s is in the image of j exactly when its residue-field morphism factors through j: use the proved Scheme.exists_comp_eq_of_mem_range for the forward implication, and evaluate a factorization at the closed point for the reverse. Applying hchar identifies this image with the residue-field universal rank-matching point locus.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an affine open U of S, obtain the finite set R of ranks covering all rank-matching points in U. For every r in R, retrocompactness of the fixed-rank point locus makes its intersection with U compact.",
+   "uses": [
+    "lem-sc-picard-universal-rank-match-finite-ranks",
+    "lem-sc-picard-universal-rank-match-fixed-rank-retrocompact"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Prove in Lean that the image under j of its inverse image of U equals the union over r in R of the fixed-rank point loci intersected with U. The forward inclusion uses the finite-rank coverage, and the reverse uses the image characterization. The finite union is compact. Since an immersion is a topological embedding, compactness of this image is equivalent to compactness of the inverse image. Apply Mathlib quasiCompact_iff_forall_isAffineOpen to conclude.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-picard-universal-rank-match-finite-ranks",
+  "lem-sc-picard-universal-rank-match-fixed-rank-retrocompact"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "rank decomposition and finiteness paragraphs"
+  "place": "Tag 0BDP, first three proof paragraphs: rank decomposition and perfect direct images",
+  "note": "Stage-3 reduction E3: finite rank coverage, fixed-rank retrocompactness, residue-field image identification and finite union; the last two parts are complete Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -83,12 +100,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T225327-L-1812149",
+  "landing": "20261013T010614-L-2670563",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
