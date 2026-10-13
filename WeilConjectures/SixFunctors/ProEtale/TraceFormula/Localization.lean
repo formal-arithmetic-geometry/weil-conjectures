@@ -254,7 +254,8 @@ trace class gives
 
 in the group of Borel-Moore sections `A_F ⟶ ω_F` on the fixed scheme `F`. The lifts `Φ_Z`
 and `Φ_U` of `Φ_m` are data because the project cannot construct restrictions of `Φ_m` to
-a closed or open subscheme (blueprint: `sk-i-additivity`). -/
+a closed or open subscheme (blueprint: `prop-trf-trace-class-additivity`, subsection
+`sk-i-additivity`). -/
 theorem traceClass_graph_eq_traceClass_add_traceClass (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
     (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) {Z U : Scheme.{u}}

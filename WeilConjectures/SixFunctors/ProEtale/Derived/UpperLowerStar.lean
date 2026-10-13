@@ -243,7 +243,8 @@ noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅
 `f = g`. -/
 noncomputable def leftDerivedUpperStarCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     L((f)^*[A]) ≅ L((g)^*[A]) :=
-  eqToIso (by rw [h])
+  -- not `eqToIso`: the kernel would compare `Lf^*` and `Lg^*` when reducing the transport
+  h ▸ Iso.refl _
 
 @[simp]
 lemma leftDerivedUpperStarCongr_rfl {X Y : Scheme.{u}} {f : X ⟶ Y} :

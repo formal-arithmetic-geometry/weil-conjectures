@@ -350,7 +350,7 @@ on `Z = Y × X` (`GeometricOperations.supportedClass`), and
 `GeometricOperations.pairingOfSquare` contracts them, through the projection formula,
 `!`-base change, the two Verdier evaluations and `ω_Y ⊠ ω_X ⟶ ω_Z`, to a Borel-Moore
 section `⟨u, v⟩_LV : A_E ⟶ ω_E` on the intersection `E = E(C, D)`
-(blueprint: `sk-d-pairing`). -/
+(blueprint: `def-trf-supported-pairing`, subsection `sk-d-pairing`). -/
 noncomputable def supportedPairing (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) [IsGeometric c.str] [IsGeometric d.str] (hK : G.ctf X K)
     (hL : G.ctf Y L) [HasCompactification c.toProd] [HasCompactification d.toProdSwap]
@@ -383,7 +383,11 @@ end Pairing
 `F = C ×_{X × X} X` of `Correspondence.isPullback_fixι_toProd` (blueprint:
 `sk-d-trace-class`). It is the construction of the Lefschetz-Verdier pairing `⟨u, 1_K⟩_LV`
 with the fixed scheme `F` in place of the intersection `E(C, X)`; the comparison with
-`supportedPairing` along `F ≅ E(C, X)` is not formalised. -/
+`supportedPairing` along `F ≅ E(C, X)` is not formalised.
+
+All trace theorems of the trace formula use this pairing form. The blueprint defines the trace
+class through the trace map of external duality, `Correspondence.verdierTraceClass`; the
+comparison of the two, blueprint `lem-trf-trace-class-diagonal-pairing`, is not formalised. -/
 noncomputable def traceClass [HasCompactification aX] [s.IsSpecOfField] [QuasiCompact aX]
     (c : Correspondence aX aX K K) [IsGeometric c.str] (hK : G.ctf X K)
     [HasCompactification c.toProd] :
@@ -433,7 +437,8 @@ theorem integral_traceClass_eq_trace [s.IsSpecOfField]
 disjoint union `E = ∐_{β ∈ B} β` of clopen subschemes and `E` is geometric and proper over
 `s`, then the integral of the section is the sum of its local terms, `∫_E α = ∑_β LT_β(α)`.
 In particular this applies to the Lefschetz-Verdier pairing `α = ⟨u, v⟩_LV`; the empty support
-gives the empty sum `0` (blueprint: `sk-p-local`). -/
+gives the empty sum `0` (blueprint: `lem-trf-integration-component-sum`, with the local terms
+in the idempotent form `∫_E e_β · α` of `localTerm`; subsection `sk-p-local`). -/
 theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [IsGeometric aE]
     [HasCompactification aE] [IsProper aE] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}}
     (j : ∀ i, B i ⟶ E)
@@ -441,8 +446,51 @@ theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [IsGeometric a
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
     (hcover : ⋃ i, Set.range (j i).base = Set.univ)
     (α : G.borelMooreSections aE) :
-    G.integral aE α = ∑ i, G.localTerm aE (j i) (hclosed i) α :=
-  sorry
+    G.integral aE α = ∑ i, G.localTerm aE (j i) (hclosed i) α := by
+  have h := NatTrans.congr_app (sum_clopenIdempotent A j hclosed hdisj hcover) (𝟙_ _)
+  rw [NatTrans.app_sum, NatTrans.id_app] at h
+  have h' : (∑ i, (clopenIdempotent A (j i) (hclosed i)).app (𝟙_ _)) ≫ α = α := by
+    rw [h]
+    exact Category.id_comp α
+  conv_lhs => rw [← h']
+  simp only [localTerm, integral, borelMoorePushforward, Preadditive.sum_comp,
+    Preadditive.comp_sum, Functor.map_sum, Category.assoc]
+
+
+section LocalTermPair
+
+variable [IsGeometric aX] [IsGeometric aY] [HasCompactification aX] [HasCompactification aY]
+  [s.IsSpecOfField] [QuasiCompact aX] [QuasiCompact aY]
+  (c : Correspondence aX aY K L) (d : Correspondence aY aX L K) [IsGeometric c.str]
+  [IsGeometric d.str] (hK : G.ctf X K) (hL : G.ctf Y L) [HasCompactification c.toProd]
+  [HasCompactification d.toProdSwap] [HasCompactification (pullback.fst c.toProd d.toProdSwap)]
+  [IsGeometric (c.intersectionStr d)] [HasCompactification (c.intersectionStr d)]
+  [IsProper (c.intersectionStr d)]
+
+/-- Blueprint `def-trf-local-term-pair`: the local term `LT_B(u, v) = LT_B(⟨u, v⟩_LV)` of an
+opposite pair `(C, c, u)`, `(D, d, v)` along a clopen piece `j_B : B ⟶ E(C, D)` of the
+intersection support, when `E(C, D)` is proper over `s`: the local term
+`GeometricOperations.localTerm` of the Lefschetz-Verdier pairing. -/
+noncomputable def localTermPair {B : Scheme.{u}} (jB : B ⟶ c.intersection d)
+    [IsOpenImmersion jB] (hB : IsClosed (Set.range jB.base)) :
+    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
+  G.localTerm (c.intersectionStr d) jB hB (G.supportedPairing c d hK hL)
+
+omit [IsGeometric aX] [IsGeometric aY] in
+/-- Blueprint `prop-trf-pairing-local-decomposition`: if the intersection support `E(C, D)` of
+an opposite pair is proper over `s` and a finite disjoint union of clopen pieces `β`, the
+integral of the Lefschetz-Verdier pairing is the sum of the local terms of the pair,
+`∫_E ⟨u, v⟩_LV = ∑_β LT_β(u, v)` (the empty union gives `0`). -/
+theorem integral_supportedPairing_eq_sum_localTermPair {ι : Type u} [Fintype ι]
+    {B : ι → Scheme.{u}} (j : ∀ i, B i ⟶ c.intersection d) [∀ i, IsOpenImmersion (j i)]
+    (hclosed : ∀ i, IsClosed (Set.range (j i).base))
+    (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
+    (hcover : ⋃ i, Set.range (j i).base = Set.univ) :
+    G.integral (c.intersectionStr d) (G.supportedPairing c d hK hL) =
+      ∑ i, G.localTermPair c d hK hL (j i) (hclosed i) :=
+  G.integral_eq_sum_localTerm _ j hclosed hdisj hcover _
+
+end LocalTermPair
 
 end GeometricOperations
 

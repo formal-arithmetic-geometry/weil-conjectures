@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
 
@@ -257,8 +260,56 @@ lemma coeffIterate_succ (m : ℕ) :
 `leftDerivedUpperStarComp` with `leftDerivedUpperStarId`. -/
 lemma coeffIterate_one :
     W.coeffIterate 1 =
-      (leftDerivedUpperStarCongr A W.frobeniusIterate_one).hom.app W.obj ≫ W.coeff :=
-  sorry
+      (leftDerivedUpperStarCongr A W.frobeniusIterate_one).hom.app W.obj ≫ W.coeff := by
+  have h := leftDerivedUpperStarComp_id_right_app (A := A) W.frobenius W.obj
+  rw [coeffIterate_succ, coeffIterate_zero]
+  erw [reassoc_of% h]
+  rw [leftDerivedUpperStarCongr_hom_app_trans_assoc]
+
+/-- `Φ_{m + n} = Φ_n ≫ Φ_m`. -/
+lemma frobeniusIterate_add (m n : ℕ) :
+    W.frobeniusIterate (m + n) = W.frobeniusIterate n ≫ W.frobeniusIterate m := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [← Nat.add_assoc, frobeniusIterate_succ, ih, frobeniusIterate_succ,
+      Category.assoc]
+
+/-- The recursion of `coeffIterate` at `m + (n + 1)`, with the transport along
+`Φ_{m + (n + 1)} = Φ₁ ≫ Φ_{m + n}`. -/
+lemma coeffIterate_add_succ (m n : ℕ)
+    (e : W.frobeniusIterate (m + (n + 1)) = W.frobenius ≫ W.frobeniusIterate (m + n)) :
+    W.coeffIterate (m + (n + 1)) =
+      (leftDerivedUpperStarCongr A e).hom.app W.obj ≫
+        (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate (m + n))).hom.app W.obj ≫
+        ((upperStar A W.frobenius).leftDerivedFunctor).map (W.coeffIterate (m + n)) ≫
+        W.coeff :=
+  W.coeffIterate_succ (m + n)
+
+/-- Blueprint `lem-trf-iterated-weil-cocycle`: the cocycle identity
+`φ_{m + n} = φ_n ∘ LΦ_n^* φ_m` for the iterates of the Frobenius coefficient morphism, read
+through the composition isomorphism `LΦ_{m + n}^* ≃ LΦ_n^* LΦ_m^*` of `Φ_{m + n} = Φ_n ≫ Φ_m`. -/
+lemma coeffIterate_add (m n : ℕ) :
+    W.coeffIterate (m + n) =
+      (leftDerivedUpperStarCongr A (W.frobeniusIterate_add m n)).hom.app W.obj ≫
+        (leftDerivedUpperStarComp A (W.frobeniusIterate n) (W.frobeniusIterate m)).hom.app
+          W.obj ≫
+        ((upperStar A (W.frobeniusIterate n)).leftDerivedFunctor).map (W.coeffIterate m) ≫
+        W.coeffIterate n := by
+  induction n with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_left_app (A := A) (W.frobeniusIterate m) W.obj
+    have nat := (leftDerivedUpperStarId A X).hom.naturality (W.coeffIterate m)
+    change W.coeffIterate m = (leftDerivedUpperStarCongr A _).hom.app W.obj ≫
+      (leftDerivedUpperStarComp A (𝟙 X) (W.frobeniusIterate m)).hom.app W.obj ≫
+      ((upperStar A (𝟙 X)).leftDerivedFunctor).map (W.coeffIterate m) ≫
+      (leftDerivedUpperStarId A X).hom.app W.obj
+    dsimp only [Functor.id_obj, Functor.id_map] at nat
+    rw [nat, reassoc_of% h, leftDerivedUpperStarCongr_hom_app_trans_assoc]
+    exact (Category.id_comp _).symm
+  | succ n ih =>
+    rw [coeffIterate_add_succ W m n (W.frobeniusIterate_succ (m + n)), ih,
+      coeffIterate_succ W n]
+    exact leftDerivedUpperStarComp_cocycle_aux _ _ _ _ _ _ _
 
 /-- The iterates of an invertible Frobenius coefficient morphism are invertible. -/
 instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m) := by
@@ -280,6 +331,18 @@ noncomputable abbrev graph (G : GeometricOperations A s) [IsGeometric aX] (hW : 
     (m : ℕ) : Correspondence aX aX W.obj W.obj :=
   Correspondence.ofGraph G aX W.obj hW (W.frobeniusIterate m) (W.frobeniusIterate_comp m)
     (W.coeffIterate m)
+
+/-- Blueprint `def-trf-frobenius-coefficient-morphism` (4): the *global operator* in degree `m`
+of the Frobenius coefficient morphism `φ` of a Weil complex, `F_{c,m}(φ) = T_{c_m}(φ_m)` on
+`RΓ_c(X, K) = Ra_{X!} K`: the global operator of the graph correspondence
+`c_m = (id_X, Φ_m)` with coefficient map `φ_m` (`WeilComplex.graph`), defined when `Φ_m` is
+proper (for the model Frobenius it is finite). Items (1)–(3) of the blueprint definition are
+`WeilComplex.coeff`, `WeilComplex.coeffIterate` and `WeilComplex.graph`. -/
+noncomputable def globalFrobenius (G : GeometricOperations A s) [IsGeometric aX]
+    [HasCompactification aX] (hW : G.ctf X W.obj) (m : ℕ) [IsProper (W.frobeniusIterate m)] :
+    (rightDerivedLowerShriek A aX).obj W.obj ⟶ (rightDerivedLowerShriek A aX).obj W.obj :=
+  haveI : IsProper (W.graph G hW m).snd := ‹IsProper (W.frobeniusIterate m)›
+  Correspondence.globalOperator G (W.graph G hW m) hW
 
 end Graph
 
@@ -306,8 +369,61 @@ lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ)
     W.stalkFrobenius m x (W.comp_frobeniusIterate_of_comp_frobenius hx m) =
       let F : End (((upperStar A x).leftDerivedFunctor).obj W.obj) :=
         W.stalkFrobenius 1 x (W.comp_frobeniusIterate_of_comp_frobenius hx 1)
-      F ^ m :=
-  sorry
+      F ^ m := by
+  induction m with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_right_app (A := A) x W.obj
+    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫
+        (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
+        ((upperStar A x).leftDerivedFunctor).map ((leftDerivedUpperStarId A X).hom.app W.obj) =
+      𝟙 _
+    rw [h, leftDerivedUpperStarCongr_inv_app, leftDerivedUpperStarCongr_hom_app_trans,
+      leftDerivedUpperStarCongr_hom_app_self]
+  | succ m ih =>
+    simp only at ih ⊢
+    rw [pow_succ', End.mul_def, ← ih]
+    simp only [stalkFrobenius]
+    rw [coeffIterate_succ W m, coeffIterate_one]
+    exact leftDerivedUpperStarComp_stalk_aux (W.frobeniusIterate_succ m) W.frobeniusIterate_one
+      _ _ _ _ _
+
+/-- A point fixed by `Φ_d` is fixed by every `Φ_{d n}`. -/
+lemma comp_frobeniusIterate_mul {x : s ⟶ X} {d : ℕ} (hx : x ≫ W.frobeniusIterate d = x)
+    (n : ℕ) : x ≫ W.frobeniusIterate (d * n) = x := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [Nat.mul_succ, frobeniusIterate_add, ← Category.assoc, hx, ih]
+
+/-- Part of blueprint `lem-trf-frobenius-degree-formula`: at a point `x` fixed by `Φ_d` (a
+point over a closed point of degree `d`), the stalk Frobenius of `φ_{d n}` is the `n`-th power of
+the one-circuit stalk Frobenius `F_{x,d}`: `F_{x, d n} = F_{x,d}^n`. -/
+lemma stalkFrobenius_mul_eq_pow {x : s ⟶ X} {d : ℕ} (hx : x ≫ W.frobeniusIterate d = x)
+    (n : ℕ) :
+    W.stalkFrobenius (d * n) x (W.comp_frobeniusIterate_mul hx n) =
+      let F : End (((upperStar A x).leftDerivedFunctor).obj W.obj) := W.stalkFrobenius d x hx
+      F ^ n := by
+  induction n with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_right_app (A := A) x W.obj
+    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫
+        (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
+        ((upperStar A x).leftDerivedFunctor).map ((leftDerivedUpperStarId A X).hom.app W.obj) =
+      𝟙 _
+    rw [h, leftDerivedUpperStarCongr_inv_app, leftDerivedUpperStarCongr_hom_app_trans,
+      leftDerivedUpperStarCongr_hom_app_self]
+  | succ n ih =>
+    simp only at ih ⊢
+    rw [pow_succ', End.mul_def, ← ih]
+    simp only [stalkFrobenius]
+    change _ ≫ _ ≫ ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate (d * n + d)) = _
+    rw [coeffIterate_add W (d * n) d]
+    have := leftDerivedUpperStarComp_stalk_aux (A := A) (x := x)
+      (W.frobeniusIterate_add (d * n) d) (rfl : W.frobeniusIterate d = _)
+      (W.comp_frobeniusIterate_mul hx (n + 1)) (W.comp_frobeniusIterate_mul hx n) hx
+      (W.coeffIterate (d * n)) (W.coeffIterate d)
+    simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+      at this
+    exact this
 
 /-- The Frobenius coefficient morphism of the pullback `Lf^* K` along a morphism
 `f : Y ⟶ X` that intertwines an endomorphism `g : Y ⟶ Y` with `Φ_m`,
@@ -496,6 +612,42 @@ theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ
     isPullback_relativeFrobenius hX hfp h₀ (pow_comp_eq_of_comp_eq (hFX.comp_eq gX) m) _
       (pow_comp_eq_of_comp_eq hΦXa m) (pow_comp_eq_comp_pow hΦX m) hYm⟩
 
+/-- Blueprint `lem-trf-frobenius-open-square`: the Frobenius preserves an open subscheme defined
+over the finite field. Let `j : X ⟶ Y` be the base change along `σ : s₀ ⟶ Spec k` of an open
+immersion `j₀ : X₀ ⟶ Y₀` of schemes over a finite field `k`, and let `Φ_X`, `Φ_Y` be the base
+changes of the `#k`-power Frobenii of `X₀`, `Y₀`. Then for every `m` the square
+
+```
+  X ──Φ_X^m──▶ X
+  │j           │j
+  ▼            ▼
+  Y ──Φ_Y^m──▶ Y
+```
+
+is Cartesian. (For automorphisms in place of `Φ^m`, such as the Galois Frobenius `g^m`, every
+commutative square of this shape is Cartesian.) -/
+theorem isPullback_frobenius_pow_of_isOpenImmersion (hX : IsPullback pX aX gX σ)
+    (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
+    (hFY : FY.IsFrobenius (Nat.card k)) (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY)
+    (hΦX : ΦX ≫ pX = pX ≫ FX) (hΦY : ΦY ≫ pY = pY ≫ FY) {j₀ : X₀ ⟶ Y₀} [IsOpenImmersion j₀]
+    {j : X ⟶ Y} (hj : IsPullback pX j j₀ pY) (hja : j ≫ aY = aX) (m : ℕ) :
+    IsPullback (End.asHom (End.of ΦX ^ m)) j j (End.asHom (End.of ΦY ^ m)) := by
+  have hw : j ≫ ΦY = ΦX ≫ j := comp_eq_comp_of_isPullback hY
+    (hFX.comp_eq_comp gX hFY j₀) hΦXa hΦYa hΦX hΦY hj.w.symm hja
+  have h₀ : IsPullback FX j₀ j₀ FY :=
+    hFY.isPullback_of_isOpenImmersion gY j₀ (hFX.comp_eq_comp gX hFY j₀).symm
+  have h₁ : IsPullback ΦX j j ΦY := by
+    refine IsPullback.of_right ?_ hw.symm hj
+    rw [hΦX, hΦY]
+    exact hj.paste_horiz h₀
+  induction m with
+  | zero =>
+    simp only [pow_zero, End.one_def]
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+  | succ m ih =>
+    rw [pow_succ, pow_succ, End.mul_def, End.mul_def]
+    exact h₁.paste_horiz ih
+
 end Model
 
 /-- The relative Frobenius of an affine morphism. Let `g : R ⟶ S` be a ring map and `φ_R`, `φ_S`
@@ -641,7 +793,8 @@ with `f' = pullback.fst g_Y f` and `p = pullback.snd g_Y f`. It is the natural t
 
 For the Frobenius square of a Weil complex this is the Weil comparison `θ_{f,m}` with
 `g_X = Φ_{X,m}`, `g_Y = Φ_{Y,m}` and `r = r_m`, and it is invertible when `r` is a finite
-universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`). -/
+universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`,
+`def-trf-weil-shriek-pushforward` (1)). -/
 noncomputable def lowerShriekExchange (G : GeometricOperations A s) {aX : X ⟶ s} {aY : Y ⟶ s}
     [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
     (gX : X ⟶ X) (gY : Y ⟶ Y) (hgX : gX ≫ aX = aX) (hgY : gY ≫ aY = aY)
@@ -712,7 +865,8 @@ noncomputable def WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilCompl
 
 /-- The `!`-pushforward of a Weil complex `(K, φ)` with `K ∈ Dᵇctf(X)` along a morphism
 `f : X ⟶ Y` of geometric schemes compatible with the Frobenius morphisms: the Weil complex
-`L = Rf_! K` on `Y` with coefficient map `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
+`L = Rf_! K` on `Y` with coefficient map `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`,
+`def-trf-weil-shriek-pushforward` (2)). -/
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
     (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (hW : G.ctf X W.obj)
     [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
@@ -746,5 +900,131 @@ instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
   infer_instance
 
 end
+
+
+namespace StrictWeilComplex
+
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+open Limits in
+/-- The Weil complex underlying a strict Weil complex `(K, φ)` for an automorphism `g` of `X`:
+the Frobenius `g` and the coefficient morphism `φ : Lg^* K ⟶ K`, over the terminal scheme,
+since `g` need not be a morphism over any other base (for the geometric Frobenius `g_γ` of the
+blueprint it acts on the scalar field). -/
+noncomputable def toWeilComplex {g : X ≅ X} (K : StrictWeilComplex A g) :
+    WeilComplex (A := A) (terminal.from X) where
+  frobenius := g.hom
+  frobenius_comp := terminal.hom_ext _ _
+  obj := (DerivedCategoryFiniteTor.ι A X).obj K.obj
+  coeff := K.frobenius.hom
+
+variable {g : X ≅ X} (K : StrictWeilComplex A g)
+
+/-- Blueprint `def-trf-iterated-weil-map`: the *iterated Weil isomorphism*
+`φ^[m] = φ ∘ Lg^* φ ∘ ⋯ ∘ L(g^{m-1})^* φ : L(g^m)^* K ⟶ K` of a strict Weil complex `(K, φ)`,
+where `g^m` is `K.toWeilComplex.frobeniusIterate m`: the iterates of the coefficient morphism
+of the underlying Weil complex. It is invertible (`isIso_iteratedWeilMap`). -/
+noncomputable def iteratedWeilMap (m : ℕ) :
+    ((upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor).obj
+        ((DerivedCategoryFiniteTor.ι A X).obj K.obj) ⟶
+      (DerivedCategoryFiniteTor.ι A X).obj K.obj :=
+  K.toWeilComplex.coeffIterate m
+
+instance isIso_iteratedWeilMap (m : ℕ) : IsIso (K.iteratedWeilMap m) :=
+  haveI : IsIso K.toWeilComplex.coeff := inferInstanceAs (IsIso K.frobenius.hom)
+  inferInstanceAs (IsIso (K.toWeilComplex.coeffIterate m))
+
+/-- Blueprint `lem-trf-iterated-weil-cocycle`: the cocycle identity
+`φ^[m + n] = φ^[n] ∘ L(g^n)^* φ^[m]` for the iterated Weil isomorphism of a strict Weil complex,
+after the composition isomorphism `L(g^{m + n})^* ≃ L(g^n)^* L(g^m)^*` of `g^{m + n} = g^n g^m`. -/
+lemma iteratedWeilMap_add (m n : ℕ) :
+    K.iteratedWeilMap (m + n) =
+      (leftDerivedUpperStarCongr A (K.toWeilComplex.frobeniusIterate_add m n)).hom.app _ ≫
+        (leftDerivedUpperStarComp A (K.toWeilComplex.frobeniusIterate n)
+          (K.toWeilComplex.frobeniusIterate m)).hom.app _ ≫
+        ((upperStar A (K.toWeilComplex.frobeniusIterate n)).leftDerivedFunctor).map
+          (K.iteratedWeilMap m) ≫
+        K.iteratedWeilMap n :=
+  K.toWeilComplex.coeffIterate_add m n
+
+/-- Blueprint `def-trf-iterated-weil-map`: the *scheme-Frobenius map*
+`u_m = φ^[m] ∘ κ^{(m)}_K : LΦ_m^* K ⟶ K` of a strict Weil complex, for a natural isomorphism
+`κ^{(m)} : LΦ_m^* ≃ L(g^m)^*` comparing the pullbacks along the scheme Frobenius `Φ_m` and the
+geometric Frobenius `g^m` (blueprint `prop-trf-scheme-galois-comparison`, which constructs it
+for the model Frobenius; it is an argument here). -/
+noncomputable def schemeFrobeniusMap (m : ℕ) {Φ : X ⟶ X}
+    (κ : (upperStar A Φ).leftDerivedFunctor ≅
+      (upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor) :
+    ((upperStar A Φ).leftDerivedFunctor).obj ((DerivedCategoryFiniteTor.ι A X).obj K.obj) ⟶
+      (DerivedCategoryFiniteTor.ι A X).obj K.obj :=
+  κ.hom.app _ ≫ K.iteratedWeilMap m
+
+instance isIso_schemeFrobeniusMap (m : ℕ) {Φ : X ⟶ X}
+    (κ : (upperStar A Φ).leftDerivedFunctor ≅
+      (upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor) :
+    IsIso (K.schemeFrobeniusMap m κ) := by
+  dsimp only [schemeFrobeniusMap]
+  infer_instance
+
+/-- Blueprint `def-trf-weil-extension-zero`: the *Weil extension by zero* of a strict Weil
+complex `(K, φ)` on `X` along a morphism `j : X ⟶ Y` of geometric schemes (an open immersion in
+the blueprint) intertwining automorphisms `g_X`, `g_Y` (the Galois Frobenii in the blueprint):
+the strict Weil complex `(Rj_! K, φ̄)` on `Y` with
+
+```
+  φ̄ : Lg_Y^* Rj_! K ≃ Rj_! Lg_X^* K ──Rj_! φ──▶ Rj_! K,
+```
+
+whose first isomorphism is the `!`-base change of the package for the Cartesian square
+`g_X ≫ j = j ≫ g_Y` (Cartesian because `g_X`, `g_Y` are isomorphisms; for the scheme Frobenius
+see `isPullback_frobenius_pow_of_isOpenImmersion`). It is again a strict Weil complex. -/
+noncomputable def extensionByZero [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+    (G : GeometricOperations A s) {Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} (j : X ⟶ Y)
+    (hj : j ≫ aY = aX) [IsGeometric aY] [IsGeometric aX] [HasCompactification j] {gY : Y ≅ Y}
+    (hg : g.hom ≫ j = j ≫ gY.hom) (hgX : IsGeometricHom s g.hom)
+    (hgY : IsGeometricHom s gY.hom) : StrictWeilComplex A gY where
+  obj := ⟨(rightDerivedLowerShriek A j).obj ((DerivedCategoryFiniteTor.ι A X).obj K.obj),
+    G.ctf_lowerShriek j (.mk hj) K.obj.property⟩
+  frobenius :=
+    (DerivedCategory.constructibleFiniteTor A Y).ι.mapIso
+        ((G.baseChange (IsPullback.of_horiz_isIso ⟨hg⟩) (.mk hj) hgY (.mk hj) hgX).app K.obj) ≪≫
+      (rightDerivedLowerShriek A j).mapIso K.frobenius
+
+end StrictWeilComplex
+
+namespace GeometricOperations
+
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+/-- The identification `Ly^* A ≃ A_T` is compatible with transport along `y = x`. -/
+lemma leftDerivedUpperStarCongr_inv_app_upperStarUnit_hom (G : GeometricOperations A s)
+    {T : Scheme.{u}} {x y : T ⟶ X} (e : y = x) :
+    (leftDerivedUpperStarCongr A e).inv.app (𝟙_ _) ≫ (G.upperStarUnit y).hom =
+      (G.upperStarUnit x).hom := by
+  subst e
+  simp
+
+/-- Blueprint `cor-trf-constant-stalk-trace`: for the constant complex `K = A_X` with the
+canonical coefficient map `u : Lh^* A_X ≃ A_X` (`GeometricOperations.upperStarUnit`), the stalk
+endomorphism `A ≃ Lx^* A_X ≃ Lx^* Lh^* A_X ──Lx^* u──▶ Lx^* A_X` at every point `x` fixed by
+`h` is the identity, so its categorical trace is `1`. -/
+theorem trace_stalk_upperStarUnit (G : GeometricOperations A s) (h : X ⟶ X) (x : s ⟶ X)
+    (hx : x ≫ h = x) [HasRightDual (((upperStar A x).leftDerivedFunctor).obj (𝟙_ _))] :
+    MonoidalCategory.trace ((leftDerivedUpperStarCongr A hx).inv.app (𝟙_ _) ≫
+        (leftDerivedUpperStarComp A x h).hom.app (𝟙_ _) ≫
+        ((upperStar A x).leftDerivedFunctor).map (G.upperStarUnit h).hom) = 𝟙 _ := by
+  have key : (leftDerivedUpperStarComp A x h).hom.app (𝟙_ _) ≫
+      ((upperStar A x).leftDerivedFunctor).map (G.upperStarUnit h).hom =
+      (G.upperStarUnit (x ≫ h)).hom ≫ (G.upperStarUnit x).inv := by
+    rw [Iso.eq_comp_inv, upperStarUnit, upperStarUnit, upperStarUnit, Iso.symm_hom,
+      Iso.symm_hom, Iso.symm_hom, G.upperStarUnit_comp, Category.assoc]
+  rw [key, ← Category.assoc, G.leftDerivedUpperStarCongr_inv_app_upperStarUnit_hom hx,
+    Iso.hom_inv_id, MonoidalCategory.trace_eq_of_iso (G.upperStarUnit x) (𝟙 _) (𝟙 _) (by simp),
+    MonoidalCategory.trace_id_tensorUnit]
+
+end GeometricOperations
 
 end AlgebraicGeometry.ProEtale

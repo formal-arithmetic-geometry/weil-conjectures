@@ -21,6 +21,8 @@ public import Mathlib.Tactic.LinearCombination
   `∏ (1 - c X)` is the generating series of the power sums `∑ cⁿ`.
 - `PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg` — if all power sums of a multiset of
   complex numbers are nonnegative reals, so are all coefficients of `∏ (1 - c X)⁻¹`.
+- `PowerSeries.X_mul_derivative_inv` — the logarithmic derivative of an inverse is the negative
+  of the logarithmic derivative.
 -/
 
 @[expose] public section
@@ -108,5 +110,14 @@ theorem coeff_inv_prod_one_sub_C_mul_X_nonneg (s : Multiset ℂ)
       field_simp
     rw [hk]
     exact mul_nonneg (Complex.zero_le_real.2 (by positivity)) hsum
+
+/-- The logarithmic derivative of the inverse of an invertible power series over a field is the
+negative of its logarithmic derivative: if `X f' = a f`, then `X (f⁻¹)' = -a f⁻¹`. -/
+theorem X_mul_derivative_inv {K : Type*} [Field K] {f a : K⟦X⟧}
+    (h : X * d⁄dX K f = a * f) (hf : constantCoeff f ≠ 0) :
+    X * d⁄dX K f⁻¹ = -a * f⁻¹ := by
+  have hmul : f * f⁻¹ = 1 := PowerSeries.mul_inv_cancel _ hf
+  rw [derivative_inv']
+  linear_combination (-(f⁻¹ ^ 2)) * h + (-a * f⁻¹) * hmul
 
 end PowerSeries
