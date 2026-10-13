@@ -24,20 +24,41 @@
  ],
  "proof": [
   {
-   "text": "This is the induction argument of Step 11 of the parent node, establishing the A and I recurrences, monicity, image equality, and alpha compatibility.",
+   "text": "Construct I recursively from identity maps and the canonical derived-D image inclusions of [def-sp-exact-couple]. Construct A recursively by appending the incoming original alpha to the shifted n-fold incoming power. Induction and associativity give the required recurrence prepending alpha; all endpoint transports follow from integer arithmetic.",
    "uses": [
-    "lem-sp-derived-couple-exact"
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on n to prove monicity of I: the base is an identity and each successor is a composite of an image inclusion, an isomorphism transporting its endpoint, and the previous mono. The alpha_comm equation in DerivedMaps of [def-sp-exact-couple], composed with the previous I, proves the alpha compatibility equation by induction.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on n for equality of image subobjects. Both base maps are isomorphisms, so their images are top. For the successor let a be the incoming alpha of page n. The epimorphism factorThruImage a followed by I(n+1) is a followed by the endpoint transport and I(n). Image subobjects are unchanged by precomposition with an epimorphism in an abelian category [def-sp-abelian]. Apply the compatibility equation to replace this by I(n) at the incoming bidegree followed by the original incoming alpha. Factoring each morphism through its epimorphic image projection shows that equal image subobjects give equal images after postcomposition. Use the inductive equality and the appended-alpha recurrence to obtain the image of A(n+1). Source/library details: Mathlib image.fac and imageSubobject_arrow_comp; WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits.imageSubobject_comp_of_epi.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-abelian"
    ],
    "elementary": false
+  },
+  {
+   "text": "Assemble the explicitly constructed families, their recurrences, monicity, image equalities, and compatibility into the seven conjunctions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-derived-couple-exact"
+  "def-sp-exact-couple",
+  "def-sp-abelian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+  "place": "Definition 12.21.3 (011S) and Remark 12.21.5 (0AMJ), iterated images and restricted alpha. Direct induction written by R2 using the existing DerivedMaps.alpha_comm equation and epi-image factorizations; online Stacks tags consulted because the literature file is absent on this machine."
  },
  "mathlib_searches": [
   {
@@ -155,12 +176,12 @@
   "note": "Abelian C, s:ℕ, X:BigradedExactCouple C s (bidegrees, 3 complexes, 3 exactness); clause 1 kernel/pullback and image identities (incoming form reindexed to outgoing target over all p,q); clause 2 f(ker d)≤im α, g→cycles, d∘d=0, π∘ĝ kills ker ᾱ, existence + per-map uniqueness from alpha_comm/f_comm/g_comm (fixed); clause 3 DerivedMaps exactness type s+1; clause 4 A=α^n, I mono, im I=im A, α_r restriction, E_{r+1} cycles/boundaries, degrees by pageCouple types"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T231641-L-1963887",
+  "landing": "20261013T003201-L-2429997",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

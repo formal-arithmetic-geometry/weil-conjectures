@@ -10302,3 +10302,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:32 L: merged deliver/P4/Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread (stage 3; reviewer PASS; first push; landing 20261013T003200-L-2429639 (interface); batch 20261013T003152; modules 4; new nodes 3)
 - 00:32 L: merged deliver/Q1/Sheaf.Algebra.Homology.OpenCoverMateModuleShortExactCore (stage 3; reviewer PASS; first push; landing 20261013T003200-L-2429752 (interface); batch 20261013T003152; modules 2; new nodes 1)
 - 00:32 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.HigherDirectImageAffineBasisVanishing (stage 3; reviewer PASS; first push; landing 20261013T003200-L-2429900 (proof); batch 20261013T003152; modules 1; new nodes 0)
+- 00:32 L: merged deliver/R2/Sheaf.CategoryTheory.DerivedCoupleExact (stage 3; reviewer PASS; first push; landing 20261013T003201-L-2429997 (proof); batch 20261013T003152; modules 1; new nodes 0)
