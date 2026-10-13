@@ -27,50 +27,34 @@
  ],
  "proof": [
   {
-   "text": "Let $I_S$ be the category with objects the elements $s\\in S$ and, for $s,t\\in S$, a morphism $t:s\\to st$, composition being multiplication. It is filtered: $s$ and $s'$ both map to $ss'$, and if $t,t':s\\to s'$ are parallel then $s(t-t')=0$, so the composites of $t,t'$ with $s:s'\\to s's$ agree. Let $N_s=B$ for every $s$, with $t:s\\to st$ acting as multiplication by $t$ (an $R$-linear chain map of complexes concentrated in degree $0$); the maps $\\iota_s:B\\to C$, $b\\mapsto b/s$, are compatible and identify $C=S^{-1}B$ with $\\varinjlim_{I_S}N_s$ (every element of $C$ is some $b/s$, and $b/s=0$ iff $ub=0$ for some $u\\in S$, i.e. $b$ dies at the stage $us$). By [lem-pc-filtered-colimit-derived-tensor] the maps $H^i(M\\otimes_R^{\\mathbf L}\\iota_s)$ induce an isomorphism $\\varinjlim_{I_S}H^i(M\\otimes_R^{\\mathbf L}B)\\to H^i(M\\otimes_R^{\\mathbf L}C)$ of $A$-modules, natural in $M$, where the transition map for $t:s\\to st$ is $H^i$ of the endomorphism of $M\\otimes_R^{\\mathbf L}B$ induced by multiplication by $t$ on $B$, i.e. the action of $t\\in B$ [lem-pc-balanced-derived-tensor-model], whose models are those of [lem-pc-derived-tensor-second-factor-functor] (2).",
+   "text": "For any R-complex K, baseChangeMap is flatHomologyMap followed by homology of extendCompIso [def-pc-ring-tensor-cohomology]. Flatness gives preservesFiniteLimits_extendScalars_of_flat; extension of scalars preserves cokernels as a left adjoint. Therefore flatHomologyMap is the inverse of ShortComplex.mapHomologyIso and is invertible. The second factor is the homology of an isomorphism and is invertible as well. Specialize K to the R-resolution of the restricted A-complex M. No localization assumption is needed for this step.",
    "uses": [
-    "lem-pc-filtered-colimit-derived-tensor",
-    "lem-pc-balanced-derived-tensor-model",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "def-pc-ring-tensor-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 06YR and 06Y6, filtered-colimit model for the localized second factor"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $H=H^i(M\\otimes_R^{\\mathbf L}B)$, a $B$-module via the action of Step 1, and $\\varphi=H^i(M\\otimes_R^{\\mathbf L}\\iota_1):H\\to H^i(M\\otimes_R^{\\mathbf L}C)$, the map induced by $B\\to C$. The colimit over $I_S$ of copies of $H$ with transition maps multiplication by $t$ is $S^{-1}H=H\\otimes_B C$, the element $x$ at stage $s$ going to $x\\otimes(1/s)$ (the same elementwise verification as in Step 1). Since $\\iota_s=\\mu_{1/s}\\circ\\iota_1$ with $\\mu_{1/s}$ multiplication by $1/s$ on $C$, functoriality gives $H^i(M\\otimes_R^{\\mathbf L}\\iota_s)(x)=(1/s)\\cdot\\varphi(x)$ for the $C$-action of [lem-pc-balanced-derived-tensor-model]; hence the isomorphism of Step 1 is the canonical map $H\\otimes_B C\\to H^i(M\\otimes_R^{\\mathbf L}C)$, $x\\otimes c\\mapsto c\\cdot\\varphi(x)$, which is therefore bijective. It is $C$-linear by construction and $A$-linear (hence $A\\otimes_R C$-linear) and natural in $M$ by the naturality in $M$ of Step 1, the $A$-action being induced by the endomorphisms of $M$ given by multiplication by $a\\in A$. Flatness of $B\\to C$ [def-weil-pbc-flat-ring-map] holds for every localization and is not otherwise used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, localization colimit and flat base-change cohomology"
-   }
+   "text": "For a chain map f:K→L, ShortComplex.mapHomologyIso_inv_naturality identifies the scalar extension of H(extend(R,B)(f)) followed by flatHomologyMap at L with flatHomologyMap at K followed by H(extend(B,C)(extend(R,B)(f))). Naturality of extendCompIso and functoriality of homology then give E(H(extend(R,B)(f))) b_L = b_K H(extend(R,C)(f)). Apply this to resolution(R).map(restrict(R,A).map(f)) for naturality in M. Apply the same equation to a times the identity of M for compatibility with the A-action. C-linearity and the restricted B-action are built into the ModuleCat C morphisms.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": false
   },
   {
-   "text": "Write $c_{R'}:M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R R')$ for the comparison map, $R'=B,C$. By [lem-pc-derived-tensor-action-naturality], for a K-flat resolution $P\\to M$ over $A$ and $F\\to R'$ over $R$, $c_{R'}$ is represented by $\\operatorname{Tot}(P\\otimes_R F)\\to\\operatorname{Tot}(P\\otimes_R R')=P\\otimes_A(A\\otimes_R R')$ induced by $F\\to R'$, and $H^i(c_{R'})$ is $A\\otimes_R R'$-linear. This is the value at $R'$ of the canonical transformation from the left derived functor $-\\otimes_R^{\\mathbf L}P$ of [lem-pc-derived-tensor-second-factor-functor] (2) to the functor $E\\mapsto\\operatorname{Tot}(E\\otimes_R P)$ on complexes of $R$-modules (a left derived functor comes with this transformation, and clause (2) says it is computed on K-flat resolutions), so it is natural with respect to the chain map $B\\to C$: $H^i(c_C)\\circ\\varphi=\\psi\\circ H^i(c_B)$, where $\\psi:H^i(P\\otimes_R B)\\to H^i(P\\otimes_R C)$ is induced by $B\\to C$, i.e. by $A\\otimes_R B\\to A\\otimes_R C$. In the square of the statement all four maps are $C$-linear (the two maps out of a $-\\otimes_B C$ by construction, $H^i(c_C)$ by the cited linearity, the isomorphism by Step 2), and $H^i(M\\otimes_R^{\\mathbf L}B)\\otimes_B C$ is generated over $C$ by the elements $x\\otimes1$, on which the two composites are $H^i(c_C)(\\varphi(x))$ and $\\psi(H^i(c_B)(x))$; so the square commutes.",
+   "text": "Let K=restrict(R,A)(resolution(A)(M)), q=resolution(R)(restrict(R,A)(augmentation(A)_M)), and p=augmentation(R)_K. Let l_B,l_C be cohomology of their scalar extensions of q, and r_B,r_C those of p. By spanLeft_isIso [def-pc-ring-tensor-cohomology], l_B and l_C are invertible. The preceding chain-map naturality gives E(l_B) b_source = b_middle l_C and E(r_B) b_target = b_middle r_C. The comparison map is l_B inverse followed by r_B. Precompose the required square with the invertible E(l_B). Its left side reduces to E(r_B) b_target; its right side reduces using the first equation and l_C l_C inverse = identity to b_middle r_C. These agree by the second equation. Cancelling E(l_B) proves the comparison square.",
    "uses": [
-    "lem-pc-derived-tensor-action-naturality",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "def-pc-ring-tensor-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, functoriality and comparison-map equation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-filtered-colimit-derived-tensor",
-  "lem-pc-balanced-derived-tensor-model",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pc-derived-tensor-action-naturality"
+  "def-pc-ring-tensor-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 06YR and 06Y6"
+  "place": "Tag 06Y6 and comparison-map; shorter proof through exact scalar extension and naturality of the existing comparison span (H1, 2026-10-13)"
  },
  "mathlib_searches": [
   {
@@ -157,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T082348-L-1636883",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
