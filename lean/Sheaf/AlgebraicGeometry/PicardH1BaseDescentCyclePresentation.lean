@@ -16,9 +16,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.PicardH1BaseDescentLocalModel
+import Sheaf.AlgebraicGeometry.PicardScalarModelCyclesRealization
 
 /-! # A degree-zero cycle presentation for the Picard H¹ argument
 
@@ -31,6 +30,8 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 800000 in
+-- Comparing the dependent section types and local model uses extra elaboration heartbeats.
 /-- The local perfect-complex argument supplies a scalar degree-zero term, its
 outgoing differential vector `d`, and a joint degree-one map `b` with injective residue map,
 annihilating `d`. Degree-zero cycles on every smaller open give sections compatibly
@@ -115,6 +116,42 @@ theorem picard_h1_base_descent_cycle_presentation {X S : Scheme.{v}} (f : X ⟶ 
                           (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app
                             ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
                               (Opposite.op ⊤) σ)) =
-                    c.symm (W.evaluation V w hwV a) := by sorry
+                    c.symm (W.evaluation V w hwV a) := by
+  classical
+  let : ∀ Y : Scheme.{v},
+      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) :=
+    fun Y ↦ HasDerivedCategory.standard
+      (SheafOfModules.{v} (moduleRings Y.toRingedSpace))
+  let : ∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
+      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U)) :=
+    fun Y U ↦ HasDerivedCategory.standard
+      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))
+  obtain ⟨U, hwU, hU, m, q, d, b, K, hK, hneg, e0, e1, hE, hd, hdw, hbd,
+      α, β, hcompare⟩ :=
+    picard_h1_base_descent_local_model f Xi fi ui hui hO hOi L W k w s hw hLi hLs
+  let p := RingHom.ker (W.evaluation U w hwU).hom
+  have hp : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
+  let : p.IsPrime := hp
+  have hb : Function.Injective (b.baseChange p.ResidueField) := by
+    intro x y hxy
+    apply α.injective
+    apply hH
+    calc
+      _ = β ((b.baseChange p.ResidueField) x) := (hcompare x).symm
+      _ = β ((b.baseChange p.ResidueField) y) := congrArg β hxy
+      _ = _ := hcompare y
+  obtain ⟨c, hcycles⟩ :=
+    picard_scalar_model_cycles_realization f L W k w U hwU hU m d K hK hneg
+      e0 e1 hE hd hdw
+  refine ⟨U, hwU, m, q, d, b, hp, hb, hbd, c, ?_⟩
+  intro V hwV hVU
+  obtain ⟨j, hj, e, hsection⟩ := hcycles V hwV hVU
+  refine ⟨j, hj, e, ?_⟩
+  intro a ha
+  apply hsection a
+  funext i
+  change a * W.presheaf.map (homOfLE hVU).op (d i) = 0
+  rw [mul_comm]
+  exact ha i
 
 end AlgebraicGeometry.Scheme

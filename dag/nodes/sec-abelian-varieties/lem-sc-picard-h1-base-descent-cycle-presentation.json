@@ -21,60 +21,33 @@
  },
  "proof": [
   {
-   "text": "Base change to W and identify marked residue fields. Universal structure pushforward implies that each flat source and target is surjective: an empty residue fibre would have zero pushforward, contrary to the unit isomorphism from the nonzero residue structure module. Therefore these maps are faithfully flat, and the finite locally free descended target modules have rank one. Trivialize them on a common affine neighbourhood and use hLs to trivialize the source residue bundle.",
+   "text": "Choose the standard derived localizations of the module categories, and apply the local-model theorem to obtain U,K,e0,e1,hE,d,b and the comparison square alpha,beta. The evaluation kernel is prime by Mathlib RingHom.ker_isPrime.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-module-pullback",
-    "def-sc-invertible-module",
-    "def-amb-finite-locally-free-module",
-    "def-weil-residue-field"
+    "lem-sc-picard-h1-base-descent-local-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply perfect direct-image base change to L and the target bundles, then choose finite-free residue models. Their negative terms vanish and their degree-zero terms have rank one. Take common affine refinements. Represent the derived pullback arrows between these fixed models by chain maps using the affine strictly perfect map representative theorem.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-finite-free-residue-model",
-    "lem-pc-perfect-affine-map-representative"
-   ],
-   "elementary": false
+   "text": "Prove injectivity of b tensor kappa(p). If its values on x,y agree, apply beta and the comparison square to see that every structure H-one pullback of alpha(x) and alpha(y) agrees. Apply hH, then alpha.injective, to obtain x=y. This argument applies also to the empty family and zero rank.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The global trivializing sections on the targets give degree-zero cycles whose residue coefficients are nonzero. Invert these coefficients near w to conclude that all target degree-zero differentials vanish. Let d be the source degree-zero differential of 1, and let b be the finite joint degree-one map, expressed in finite free bases. The chain equations imply b(d)=0. After identifying the source fibre bundle with the structure module, hH identifies its residue map with an injective map. The evaluation kernel p is prime and its residue field agrees with kappa(w), since U is affine.",
+   "text": "Apply the fixed-model cycle realization theorem to U,K,e0,e1,hE,d. It gives c, j, e and the section comparison for every smaller V. The coordinate hypotheses d_i restricted times a=0 imply the vector equation a times restricted d=0 by function extensionality and commutativity. Use that equation in the realization theorem and assemble the asserted witnesses.",
    "uses": [
-    "def-sc-structure-sheaf-cohomology-pullback",
-    "def-weil-residue-field"
+    "lem-sc-picard-scalar-model-cycles-realization"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use the chosen fibre generator and universal structure pushforward to identify its global section group additively with kappa(w), giving c. For every smaller open V and scalar a annihilated by the restricted d, the degree-zero cycle gives a section through the perfect direct-image comparison. Derived base change computes its residue as c inverse of evaluation(a). The canonical residue-fibre inclusion hits all points above w; composition of module pullbacks gives e and the canonical adjunction unit realizes section restriction. No localization of b, vanishing of d, or lift of arbitrary residue scalars is asserted here.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "def-pc-module-pullback",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-base-change"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-module-pullback",
-  "def-sc-invertible-module",
-  "def-amb-finite-locally-free-module",
-  "def-weil-residue-field",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-pc-perfect-affine-map-representative",
-  "def-sc-structure-sheaf-cohomology-pullback",
-  "lem-pc-module-pullback-adjunction"
+  "lem-sc-picard-h1-base-descent-local-model",
+  "lem-sc-picard-scalar-model-cycles-realization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0BF2, finite-free models and chain maps before the degree-one minor localization; canonical degree-zero base-change comparison"
+  "document": "Stacks Project, More on Morphisms",
+  "place": "Tag 0BF2; A2 Lean reduction into the local finite-free comparison square and fixed-model cycle realization, with injectivity and scalar-vector conversion proved directly"
  },
  "mathlib_searches": [
   {
@@ -148,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T040759-L-3952259",
+  "landing": "20261013T054208-L-440350",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
