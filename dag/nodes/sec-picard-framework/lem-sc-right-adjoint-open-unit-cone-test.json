@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-right-adjoint-open-unit-cone-test",
+ "kind": "statement",
+ "title": "Pointwise supported-cone test for the right-adjoint open unit",
+ "statement": "Let f:X\\to Y be a morphism of quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], let V\\subseteq Y be quasi-compact open, and U=f^{-1}(V). In the shared derived categories [def-pc-derived-category, def-pc-derived-direct-image], let a be right adjoint to the quasi-coherent lift of Rf_*, supplied with its preservation-of-quasi-coherence proof. Supply the derived open restriction adjunction j^*\\dashv Rj_* [def-pc-derived-open-restriction-maps] and a proof that Rj_*j^* preserves quasi-coherent objects. For each K\\in D_QCoh(Y) there exists Q\\in D_QCoh(Y) such that j^*Q is zero, Q is bounded below whenever K is, and j_U^*a(K\\to Rj_*j^*K) is an isomorphism if and only if j_U^*a(Q) is zero. The map is the supplied adjunction unit, lifted to the quasi-coherent category.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G, lemma-when-sheafy (Lemma 48.4.3), proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "For a given quasi-coherent derived object K, use [lem-sc-open-restriction-support-triangle] to obtain a distinguished triangle for its constructed open adjunction, with quasi-coherent cone Q, zero cohomology stalks on V, and a lower bound on Q whenever K has a lower bound. Exact restriction commutes with homology; restriction has zero cohomology precisely when those stalks are zero. The latter equivalence is proved here by the open stalk isomorphisms, sheaf section extensionality, and DerivedCategory.isIso_iff. The proved restriction_zero_iff_stalks helper is public so the support-extension module imports and reuses it.",
+   "uses": [
+    "lem-sc-open-restriction-support-triangle",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the constructed adjunction ra and the supplied adjOpen, form their leftAdjointUniq isomorphism. Applying Rj_* to its component gives an automorphism e of the second vertex. The unit uniqueness equation is ra.unit.app K composed with e.hom = adjOpen.unit.app K. Replace the second triangle arrow by e.inv composed with the original second arrow. Triangle.isoMk transports distinguishedness, preserving the same Q and its bound.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize [lem-pc-supported-qcoh-triangulated] to the whole scheme to give the triangulated quasi-coherent categories. The derived direct image is exact by [lem-pc-right-derived-functor-triangulated], and its full-subcategory lift is exact. Mathlib Adjunction.rightAdjointCommShift and commShift_of_leftAdjoint construct the compatible shifts on a; Adjunction.isTriangulated_rightAdjoint then gives its exactness. Apply a, the exact inclusion, and exact restriction to U to the transported full-subcategory triangle. Mathlib Triangle.isZero₃_iff_isIso₁ gives precisely the pointwise test.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-open-restriction-support-triangle",
+  "def-pc-derived-open-restriction-maps",
+  "def-weil-triangulated-category",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G, lemma-when-sheafy (Lemma 48.4.3), proof",
+  "note": "Formalization of the indicated part of the Stacks proof, using the existing support-triangle statement and Mathlib triangle/adjunction APIs. Returned-delivery repair: expose the existing restriction_zero_iff_stalks helper for reuse without changing its binders or proposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived right adjoint open unit cone isomorphism support bounded below coproducts",
+   "results": "Service returned Internal Server Error; no usable answer.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact right adjoint preserves support on all complexes if preserves coproducts and support on bounded below complexes",
+   "results": "Eight hits about complex support embeddings, isGE_Q_obj_iff, isLE_Q_obj_iff and exact_tfae; none gives the scheme support criterion or the supported generation implication.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.isZero₃_iff_isIso₁",
+   "results": "One hit: the general distinguished-triangle zero/isomorphism test. It is used after constructing and transporting the scheme support triangle; it does not supply that construction or the support generation implication.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*bounded|bounded.*support|isZero₃_iff_isIso₁",
+   "results": "The capped output consists of unrelated bounded-support analysis and topology declarations; a separate direct source read confirms the triangle zero/isomorphism API. No scheme theorem matching the new statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointOpenSupportCriterion",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the restriction-compatibility reduction through the support criterion: the supported cone of the open unit",
+   "via": [
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointOpenUnitConeTest",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointOpenUnitConeTest.lean",
+  "declaration": "AlgebraicGeometry.rightAdjoint_open_unit_cone_test",
+  "statement": "theorem rightAdjoint_open_unit_cone_test\n    {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (f : X ⟶ Y) (V : Y.Opens) (hV : IsCompact (V : Set Y))\n    (U : X.Opens) (_hU : U = f ⁻¹ᵁ V)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    (hpush : ∀ K : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj K.obj))\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (adj : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hpush ⊣ a)\n    (adjOpen : (schemeOpenRestriction Y V).mapDerivedCategory ⊣ schemeDerivedDirectImage\n          V.ι)\n    (hopen : ∀ K : schemeDerivedQCohCategory Y,\n      schemeDerivedQCohProperty Y\n        ((schemeDerivedDirectImage V.ι).obj\n          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj)))\n    (K : schemeDerivedQCohCategory Y) :\n    ∃ Q : schemeDerivedQCohCategory Y,\n      IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj Q.obj) ∧\n      ((∃ n : ℤ, K.obj.IsGE n) → ∃ n : ℤ, Q.obj.IsGE n) ∧\n      (IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map\n      ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)\n        (Y := ⟨(schemeDerivedDirectImage V.ι).obj\n          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩)\n        (adjOpen.unit.app K.obj))))) ↔\n        IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj Q).obj))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

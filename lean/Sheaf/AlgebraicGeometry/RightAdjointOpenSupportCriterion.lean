@@ -9,9 +9,11 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.OpenRestrictionSupportTriangle
-import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.RightAdjointOpenUnitConeTest
+import Sheaf.AlgebraicGeometry.RightAdjointOpenSupportOfBounded
 
 /-!
 # Support criterion for restriction of a right adjoint to an open
@@ -32,7 +34,66 @@ noncomputable section
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option synthInstance.maxSize 2048 in
+private theorem supported_unit_isIso_iff
+    {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    [CompactSpace Y] [QuasiSeparatedSpace Y]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (f : X ⟶ Y) (V : Y.Opens) (_hV : IsCompact (V : Set Y))
+    (U : X.Opens) (_hU : U = f ⁻¹ᵁ V)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
+    (hpush : ∀ K : schemeDerivedQCohCategory X,
+      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj K.obj))
+    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
+    (adj : (schemeDerivedQCohProperty Y).lift
+      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hpush ⊣ a)
+    (adjOpen : (schemeOpenRestriction Y V).mapDerivedCategory ⊣ schemeDerivedDirectImage
+          V.ι)
+    (hopen : ∀ K : schemeDerivedQCohCategory Y,
+      schemeDerivedQCohProperty Y
+        ((schemeDerivedDirectImage V.ι).obj
+          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj)))
+    (K : schemeDerivedQCohCategory Y)
+    (hK : IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj)) :
+    IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map
+      ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)
+        (Y := ⟨(schemeDerivedDirectImage V.ι).obj
+          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩)
+        (adjOpen.unit.app K.obj))))) ↔
+      IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj K).obj) := by
+  have : a.Additive := adj.right_adjoint_additive
+  have ht := (schemeDerivedDirectImage V.ι).map_isZero hK
+  have ht' : IsZero (⟨(schemeDerivedDirectImage V.ι).obj
+      ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩ :
+        schemeDerivedQCohCategory Y) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (schemeDerivedQCohProperty Y).ι.map_injective
+    simpa using ht.eq_of_src (𝟙 _) 0
+  have htarget := (schemeOpenRestriction X U).mapDerivedCategory.map_isZero
+    ((schemeDerivedQCohProperty X).ι.map_isZero (a.map_isZero ht'))
+  constructor
+  · intro hi
+    let := hi
+    exact htarget.of_iso (asIso ((schemeOpenRestriction X U).mapDerivedCategory.map
+      ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)
+        (Y := ⟨(schemeDerivedDirectImage V.ι).obj
+          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩)
+        (adjOpen.unit.app K.obj))))))
+  · intro hz
+    exact IsZero.isIso hz htarget _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 1600000 in
+-- The statement repeats transported derived restriction and full-subcategory lifts.
 /-- Restriction of the right adjoint is compatible with the open square precisely when
 it preserves complexes supported on the closed complements.
 Source: Stacks Project, Tag 0E4G, Lemma 48.4.3, parts (1)--(3)
@@ -280,6 +341,46 @@ theorem rightAdjoint_open_support_criterion
         (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))))) := by
-  sorry
+  have htest := rightAdjoint_open_unit_cone_test f V hV U hU hpush a adj adjOpen hopen
+  have hsupported := supported_unit_isIso_iff f V hV U hU hpush a adj adjOpen hopen
+  have hb : (∀ K : schemeDerivedQCohCategory Y,
+      (∃ n : ℤ, K.obj.IsGE n) → IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map
+      ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)
+        (Y := ⟨(schemeDerivedDirectImage V.ι).obj
+          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩)
+        (adjOpen.unit.app K.obj)))))) ↔
+      (∀ Q : schemeDerivedQCohCategory Y,
+        (∃ n : ℤ, Q.obj.IsGE n) →
+        IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj Q.obj) →
+        IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj Q).obj)) := by
+    constructor
+    · intro hi Q hQ hz
+      exact (hsupported Q hz).mp (hi Q hQ)
+    · intro hz K hK
+      obtain ⟨Q, hQ, hbound, hiff⟩ := htest K
+      exact hiff.mpr (hz Q (hbound hK) hQ)
+  have hu : (∀ K : schemeDerivedQCohCategory Y,
+      IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map
+      ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)
+        (Y := ⟨(schemeDerivedDirectImage V.ι).obj
+          ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hopen K⟩)
+        (adjOpen.unit.app K.obj)))))) ↔
+      (∀ Q : schemeDerivedQCohCategory Y,
+        IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj Q.obj) →
+        IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj Q).obj)) := by
+    constructor
+    · intro hi Q hz
+      exact (hsupported Q hz).mp (hi Q)
+    · intro hz K
+      obtain ⟨Q, hQ, _, hiff⟩ := htest K
+      exact hiff.mpr (hz Q hQ)
+  refine ⟨hb, hu, ?_⟩
+  intro hsum
+  constructor
+  · intro hi
+    apply hu.mpr
+    exact rightAdjoint_open_support_of_bounded f V hV U hU hpush a adj hsum (hb.mp hi)
+  · intro hi K _
+    exact hi K
 
 end AlgebraicGeometry

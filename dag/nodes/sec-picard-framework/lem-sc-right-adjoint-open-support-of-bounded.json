@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-right-adjoint-open-support-of-bounded",
+ "kind": "statement",
+ "title": "Extending bounded support preservation using sums",
+ "statement": "Let f:X\\to Y be a morphism of quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], let V\\subseteq Y be quasi-compact open and U=f^{-1}(V). In the shared quasi-coherent derived categories [def-pc-derived-category, def-pc-derived-direct-image], let a be right adjoint to the supplied quasi-coherent lift of Rf_*. Suppose a preserves all set-indexed coproducts. Suppose for every bounded-below Q\\in D_QCoh(Y), zero restriction Q|_V implies zero restriction a(Q)|_U [def-pc-derived-open-restriction-maps]. Then the same implication holds for every Q\\in D_QCoh(Y), without a lower bound.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G, lemma-when-sheafy (Lemma 48.4.3), proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-derived-open-localization-universe] to supply open-site localizations in the ambient Hom universe. Apply [lem-sc-supported-derived-generated-perfect] to T=Y\\V: obtain the perfect supported generator E and, for every supported Q, its zero-starting transition triangles and telescope triangle.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe",
+    "lem-sc-supported-derived-generated-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack perfectness to obtain strictly perfect local representatives. For each point choose one neighbourhood and the finite lower degree bound of its representative. Quasi-compactness gives a finite subcover; choose the minimum bound (zero for an empty cover). Exact restriction commutes with cohomology. Below that bound cohomology restricts to zero on the cover, hence is zero by sheaf separatedness. Thus E is bounded below and the bounded support hypothesis kills j_U^*a(E).",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Give the quasi-coherent derived categories their inherited triangulated structures using [lem-pc-supported-qcoh-triangulated] at the whole space. The lift of Rf_* is exact by [lem-pc-right-derived-functor-triangulated], so the adjoint shift construction and Mathlib Adjunction.isTriangulated_rightAdjoint make a exact. Therefore the kernel of a followed by ambient inclusion and restriction to U is closed under shifts, triangles, and retracts. Coproducts agree with the ambient coproducts by [lem-pc-derived-qcoh-closed-coproducts] and [lem-pc-derived-ambient-has-coproducts]. The hypothesis on a, exact restriction as a left adjoint, and this agreement show closure of the kernel under all set-indexed coproducts. The colimit universal property explicitly lifts ambient cofans to the full subcategory. Transport countable coproduct preservation and quasi-coherence closure along the discrete equivalence from ULift ℕ to ℕ, so the telescope uses exactly the sums supplied by the Type u hypothesis.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-pc-derived-ambient-has-coproducts",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All sums of shifts of E therefore lie in the kernel. Induction through the transition triangles, starting from zero, puts every stage in the kernel. Both copies of the coproduct of the stages in the telescope triangle lie in it. The third-term triangle zero criterion then kills Q. Input support is exactly vanishing of restriction, using the shared restriction_zero_iff_stalks theorem in [lem-sc-right-adjoint-open-unit-cone-test], rather than reproving the stalk equivalence. This proves support preservation for every supported Q.",
+   "uses": [
+    "lem-sc-supported-derived-generated-perfect",
+    "def-weil-triangulated-category",
+    "lem-sc-right-adjoint-open-unit-cone-test"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-localization-universe",
+  "lem-sc-supported-derived-generated-perfect",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-derived-ambient-has-coproducts",
+  "def-weil-triangulated-category",
+  "lem-sc-right-adjoint-open-unit-cone-test"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G, lemma-when-sheafy (Lemma 48.4.3), proof",
+  "note": "Complete Lean formalization of the perfect-generator/telescope argument of Tag 0E4G(3), including the finite-cover lower bound and transport of countable coproducts across universes. Returned-delivery repair: reuse the cone-test module’s restriction/stalk theorem and remove the duplicate proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived right adjoint open unit cone isomorphism support bounded below coproducts",
+   "results": "Service returned Internal Server Error; no usable answer.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact right adjoint preserves support on all complexes if preserves coproducts and support on bounded below complexes",
+   "results": "Eight hits about complex support embeddings, isGE_Q_obj_iff, isLE_Q_obj_iff and exact_tfae; none gives the scheme support criterion or the supported generation implication.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.isZero₃_iff_isIso₁",
+   "results": "One hit: the general distinguished-triangle zero/isomorphism test. It is used after constructing and transporting the scheme support triangle; it does not supply that construction or the support generation implication.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*bounded|bounded.*support|isZero₃_iff_isIso₁",
+   "results": "The capped output consists of unrelated bounded-support analysis and topology declarations; a separate direct source read confirms the triangle zero/isomorphism API. No scheme theorem matching the new statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointOpenSupportCriterion",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the restriction-compatibility reduction through the support criterion: direct-sum extension from bounded-below support to all supported complexes",
+   "via": [
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointOpenSupportOfBounded",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointOpenSupportOfBounded.lean",
+  "declaration": "AlgebraicGeometry.rightAdjoint_open_support_of_bounded",
+  "statement": "theorem rightAdjoint_open_support_of_bounded\n    {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (f : X ⟶ Y) (V : Y.Opens) (hV : IsCompact (V : Set Y))\n    (U : X.Opens) (_hU : U = f ⁻¹ᵁ V)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    (hpush : ∀ K : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj K.obj))\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (adj : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hpush ⊣ a)\n    (hsum : ∀ I : Type u, PreservesColimitsOfShape (Discrete I) a)\n    (hb : ∀ Q : schemeDerivedQCohCategory Y,\n      (∃ n : ℤ, Q.obj.IsGE n) →\n      IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj Q.obj) →\n      IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj Q).obj)) :\n    ∀ Q : schemeDerivedQCohCategory Y,\n      IsZero ((schemeOpenRestriction Y V).mapDerivedCategory.obj Q.obj) →\n      IsZero ((schemeOpenRestriction X U).mapDerivedCategory.obj (a.obj Q).obj)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095932-L-2452303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
