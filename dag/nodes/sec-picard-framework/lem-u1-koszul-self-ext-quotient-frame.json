@@ -1,0 +1,141 @@
+{
+ "id": "lem-u1-koszul-self-ext-quotient-frame",
+ "kind": "statement",
+ "title": "Affine self Ext frame over the quotient structure module",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Let U be an affine open, n,m natural numbers, and f:Fin(m)\\to\\Gamma(Y,U) a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] generating i.ker.ideal(U) [def-sbc-closed-immersion-ideal-sheaf]. Put B=i_*\\mathcal O_Z and G=H^n(R\\mathcal Hom_Y(B,B)) [def-pc-derived-category, def-pur-derived-internal-hom]. Then G restricted to the over-U site is isomorphic to the coproduct of copies of B restricted to that site, indexed by ULift of n-element subsets of Fin(m). Coproduct means categorical direct sum in module sheaves [def-weil-sheaf-of-modules-category]. No pullback or conormal identification is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Lemma 48.15.4, zero-differential Hom calculation"
+ },
+ "proof": [
+  {
+   "text": "Construct the actual augmented Koszul projective resolution of A/I, where A=Gamma(Y,U) and I=i.ker.ideal(U); identify the inverse-image affine chart as Spec(A/I) and sheafify the augmentation. Reindex by embeddingDownNat. The exterior basis makes every term finite free, and terms outside degrees -m through zero vanish.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict derived internal Hom and compute it using the bounded-above finite-free Hom model into the quotient single complex. Precomposition with the Koszul boundary has coefficients f_j, all zero in A/I, so the induced differential is zero. The degree-n term is the dual exterior basis with coefficients A/I. Its coordinate maps commute with localization: a linear functional is sent to its values on the wedge basis, and restriction localizes those values. Hence sheafification gives the coproduct of B indexed by n-element subsets. For derived universes use the same K-injective model. The index is empty above m and a singleton at zero; zero quotient rings and m=0 are allowed.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Affine calculation separated from tensor descent",
+  "agent": "U1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul regular quotient self Ext is free on exterior wedge subsets",
+   "results": "8 hits: exteriorPower.presentation.isPresentationCore, Algebra.SubmersivePresentation.free_kaehlerDifferential, Algebra.SubmersivePresentation.free_cotangent, ExteriorAlgebra, Algebra.FormallySmooth.projective_kaehlerDifferential, exteriorPower.presentation, Algebra.Generators.instFreeCotangentSpaceToExtension, exteriorPower.presentation_R. No exact local-frame comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.free",
+   "results": "12 hits: SheafOfModules.free, SheafOfModules.freeSection, SheafOfModules.freeFunctor_obj, SheafOfModules.ιFree, SheafOfModules.freeMap, SheafOfModules.freeHomEquiv, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeFunctor_map. No exact local-frame comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*self.*ext|self.*ext.*free",
+   "results": "0 hits: . No matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular quotient self Ext is free on exterior wedge subsets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext step: the finite free chart obtained from the affine Koszul zero-differential Hom computation before taking stalks; Affine self Ext frame over the quotient structure module",
+   "via": [
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtQuotientFrame.lean",
+  "declaration": "AlgebraicGeometry.koszul_self_ext_quotient_frame",
+  "statement": "theorem koszul_self_ext_quotient_frame\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (U : Y.affineOpens) (n : ℕ)\n    (m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    Nonempty (G.over U.1 ≅\n      (∐ fun _ : ULift.{u} (Set.powersetCard (Fin m) n) ↦ B).over U.1)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T132437-L-4128493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T132437-L-4128493",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

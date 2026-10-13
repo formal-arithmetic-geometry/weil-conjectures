@@ -14,10 +14,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame
+import Sheaf.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
 
 /-! # A finite free chart for self Ext after tensor pullback
 
@@ -82,6 +80,10 @@ theorem koszulRegularImmersion_self_ext_pullback_local_frame
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj
         (H.obj (op (S.obj B), S.obj B))
     Nonempty ((((Scheme.Modules.tensorPullback i).obj G).over (i ⁻¹ᵁ U.1)) ≅
-      SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n))) := by sorry
+      SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n))) := by
+  classical
+  dsimp only
+  obtain ⟨e⟩ := koszul_self_ext_quotient_frame i U n m f hf hreg
+  exact closedImmersion_quotient_frame_pullback i U.1 _ _ e
 
 end AlgebraicGeometry

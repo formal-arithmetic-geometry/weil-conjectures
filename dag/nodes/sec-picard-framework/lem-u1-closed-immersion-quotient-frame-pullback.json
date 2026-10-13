@@ -1,0 +1,141 @@
+{
+ "id": "lem-u1-closed-immersion-quotient-frame-pullback",
+ "kind": "statement",
+ "title": "Tensor pullback of a local quotient-module frame",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], U an open of Y, J a type in the scheme universe, and G an O_Y-module sheaf [def-weil-sheaf-of-modules-category]. Put B=i_*\\mathcal O_Z. Given an isomorphism on the over-U site from G to the coproduct of J copies of B, the restriction of the ordinary tensor pullback i^*G [def-pc-module-pullback] to the over-i^{-1}(U) site is isomorphic to the free structure module on J. There is no Koszul sequence, derived category, or cohomology in this assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08KS",
+  "place": "Counit of closed-immersion module adjunction; tensor formula Definition 6.26.1 (0095)"
+ },
+ "proof": [
+  {
+   "text": "Compare tensor pullback with canonical scheme pullback by uniqueness of left adjoints to the same pushforward. Use the canonical pullback composition isomorphisms and morphismRestrict_ι to construct the natural isomorphism between tensor pullback followed by restriction to i^{-1}(U) and restriction to U followed by pullback along i restricted to U.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The existing closed-immersion full-faithfulness theorem gives an invertible counit on the structure module. Thus tensor pullback of B=i_*O_Z is isomorphic to O_Z. It preserves coproducts as a left adjoint. Compose PreservesCoproduct.iso with Sigma.mapIso of the counit isomorphism to identify tensor pullback of the coproduct of J copies of B with the free sheaf on J.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the supplied over-site isomorphism through overEquiv to the restricted scheme. Pull it back along the restricted immersion and compare restriction after tensor pullback on both its endpoints using the natural isomorphism from step 1. Restrict the global free frame of step 2 using restrictFreeIso. Finally apply the inverse overIsoFreeEquiv to obtain the claimed frame on the over site. All these are isomorphism compositions and work for empty indexing types and empty opens.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08KS",
+  "place": "Counit isomorphism; actual Lean proof via left-adjoint uniqueness, coproduct preservation and the scheme open restriction equivalence",
+  "agent": "U1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of pushforward structure sheaf along closed immersion is structure sheaf and preserves local quotient module frames",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction. No exact local-frame comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp. No exact local-frame comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback.*free|tensorPullback.*coproduct|tensorPullback.*pushforward",
+   "results": "0 hits: . No matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor pullback along a closed immersion transports a local direct sum of quotient structure modules to a free structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtPullbackLocalFrame",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Self-coefficient Ext step: the finite free chart obtained from the affine Koszul zero-differential Hom computation before taking stalks; Tensor pullback of a local quotient-module frame",
+   "via": [
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-sc-koszul-self-ext-exterior",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionQuotientFramePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionQuotientFramePullback.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_quotient_frame_pullback",
+  "statement": "theorem closedImmersion_quotient_frame_pullback\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.Opens) (J : Type u) (G : Y.Modules)\n    (e : G.over U ≅\n      (∐ fun _ : J ↦ (Scheme.Modules.pushforward i).obj\n        (SheafOfModules.unit Z.ringCatSheaf)).over U) :\n    Nonempty (((Scheme.Modules.tensorPullback i).obj G).over (i ⁻¹ᵁ U) ≅\n      SheafOfModules.free J)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T132437-L-4128493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T132437-L-4128493",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
