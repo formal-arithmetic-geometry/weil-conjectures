@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.AlgebraicGeometry.PerfectHomOpenStagePresentation
 
 /-! # Recognition of a single-open Hom colimit comparison
 
@@ -74,6 +76,39 @@ theorem perfect_hom_open_colimit_local_comparison
     let T := (preadditiveCoyoneda.obj (Opposite.op P)).shift (0 : ℤ) ⋙
       AddCommGrpCat.uliftFunctor.{u}
     PerfectHomLocalComparison R c i X s₀ W
-      (colimit.desc (F ⋙ H ⋙ T) ((H ⋙ T).mapCocone d)) := by sorry
+      (colimit.desc (F ⋙ H ⋙ T) ((H ⋙ T).mapCocone d)) := by
+  dsimp
+  let H := schemeMVDerivedRestriction Y (t ⁻¹ᵁ W) ⋙
+    schemeDerivedDirectImage (t ⁻¹ᵁ W).ι
+  let T := (preadditiveCoyoneda.obj (Opposite.op P)).shift (0 : ℤ) ⋙
+    AddCommGrpCat.uliftFunctor.{u}
+  let K := F ⋙ H ⋙ T
+  let dK := (H ⋙ T).mapCocone d
+  obtain ⟨Z, k, hkI, hk, s', hs', hsL, hsC, hsQ, hD, P', Q', hP', hQ',
+    e, b, he, hb⟩ := perfect_hom_open_stage_presentation R c i X s₀ W hW
+      Y t ht s hs P Q hP hQ F d h (0 : ℤ)
+  have : IsDirected (Set.Ici i) (· ≤ ·) := ⟨fun j l ↦ by
+    obtain ⟨a, hja, hla⟩ := exists_ge_ge j.val l.val
+    exact ⟨⟨a, j.property.trans hja⟩, hja, hla⟩⟩
+  have : Nonempty (Set.Ici i) := ⟨⟨i, le_rfl⟩⟩
+  have : CategoryTheory.IsFiltered (Set.Ici i) := inferInstance
+  let G := forget AddCommGrpCat.{max u w}
+  have : PreservesFilteredColimitsOfSize.{max u w, max u w} G := inferInstance
+  have : PreservesFilteredColimitsOfSize.{u, u} G :=
+    preservesFilteredColimitsOfSize_shrink G
+  have : PreservesColimit K G := inferInstance
+  let D := G.mapCocone (colimit.cocone K)
+  refine ⟨Z, k, hkI, hk, s', hs', hsL, hsC, hsQ, hD, P', Q', hP', hQ',
+    K ⋙ G, D, isColimitOfPreserves G (colimit.isColimit K),
+    (fun j ↦ Equiv.ulift.trans (e j)), ?_, Equiv.refl _,
+    Equiv.ulift.trans b, ?_⟩
+  · intro j l hjl f
+    change e l (f.down ≫ (H.map (F.map (homOfLE hjl)))⟦(0 : ℤ)⟧') = _
+    exact he j l hjl f.down
+  · intro j f
+    change (Equiv.ulift.trans b) ((colimit.desc K dK) ((colimit.ι K j) f)) = _
+    rw [← ConcreteCategory.comp_apply, colimit.ι_desc]
+    change b (f.down ≫ (H.map (d.ι.app j))⟦(0 : ℤ)⟧') = _
+    exact hb j f.down
 
 end AlgebraicGeometry
