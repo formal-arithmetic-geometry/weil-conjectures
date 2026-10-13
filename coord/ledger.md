@@ -13168,3 +13168,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:40 L: merged deliver/A2/Sheaf.AlgebraicGeometry.SelfExtTorDualChart (stage 3; reviewer PASS; first push; landing 20261013T164045-L-1667042 (interface); batch 20261013T164043; modules 3; new nodes 2)
 - 16:40 L: merged deliver/D3/Sheaf.Paper.ModuleCupGodementIteratePairingsCanonical (stage 3; reviewer PASS; first push; landing 20261013T164045-L-1667143 (interface); batch 20261013T164043; modules 3; new nodes 2)
 - 16:40 L: merged deliver/D4/Sheaf.Paper.ModuleCupGodementIteratePairingsCanonicalCollapse (stage 3; reviewer PASS; first push; landing 20261013T164046-L-1667393 (proof); batch 20261013T164043; modules 1; new nodes 0)
+- 16:40 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ModuleUnitLocalSupport (stage 3; reviewer PASS; first push; landing 20261013T164046-L-1667598 (proof); batch 20261013T164043; modules 1; new nodes 0)

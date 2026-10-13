@@ -15,22 +15,21 @@
  "unit": "sk-thm-p1",
  "proof": [
   {
-   "text": "Express the free sheaf on I as the filtered colimit of the free sheaves on finite subsets S of I. A compatible cocone gives one map from the unit for each basis index through its singleton stage; compatibility on unions identifies its restrictions on each finite S, and the free coproduct universal property proves existence and uniqueness of the induced map. This is also obtained from Mathlib CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone by transport from its finite indexing types to the corresponding finite subsets of I.",
+   "text": "The diagram of finite subsets S of I viewed as types, with subtype-inclusion transition maps, has colimit I. Define the descent map from a cocone by sending i through the singleton {i}. Naturality for {i} contained in S gives the factorization law, and testing on singleton stages gives uniqueness. Apply Mathlib SheafOfModules.freeFunctor, which preserves colimits and takes inclusions to freeMap, to obtain the colimit cocone of finite free sheaves over V. This is finiteSubsetIsColimit in the delivered module.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
   },
   {
-   "text": "Restrict the finite-subcoproduct diagram to U. Restriction preserves colimits. Taking the stalk at x preserves this filtered colimit, by module_stalk_filtered_colimit (transport along the equivalence between the localized site and the open subscheme U). The underlying module forgetful functor preserves filtered colimits, so the germ of the section associated to b comes from a finite stage S.",
+   "text": "For any colimit cocone c of module sheaves over V, form the presheaf colimit P of the underlying diagram. The module sheafification adjunction, its invertible counit, and preservation of colimits by its left adjoint give an isomorphism from the sheafification of P to c.pt. Unit naturality, cocone compatibility, and the triangle identity identify the canonical presheaf comparison k with the unit followed by the underlying isomorphism. Mathlib Presheaf.isLocallySurjective_toSheafify' proves local surjectivity of this comparison; composition with an isomorphism preserves it. All these claims are proved in the private helper colimit_comparison_locally_surjective; no project theorem about stalks or restriction colimits is needed.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-stalk-filtered-colimit"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Represent the lifted germ by a section over a neighbourhood W contained in U. Equality between the germ of its image and the original section allows shrinking W so their restrictions are equal. Convert this lifted section into a morphism from the unit over W by unitHomEquiv. Its composite with the restricted basis inclusion is the restriction of b, because unitHomEquiv is injective and both sides give the same section. If I is empty, choose S empty and W = U; the target is zero. There is no simultaneous shrinking or assembly for several basis elements in this lemma.",
+   "text": "Evaluate b on 1 at the terminal object of Over U, giving a section over U in Over V. The locally surjective comparison has a covering image sieve for this section. Translate the over-site covering sieve into a covering sieve of U with GrothendieckTopology.mem_over_iff, and choose W containing x. Its lifted presheaf section comes from a stage i by sectionwise preservation of colimits by PresheafOfModules.evaluation and filtered-colimit preservation by the module forgetful functor, followed by Types.jointly_surjective. The chosen element of stage i on W defines a compatible family by restriction from the terminal object of Over W, hence a morphism a via unitHomEquiv. The presheaf-colimit factorization equation and naturality of b identify the value on 1 of a composed with the stage coprojection with that of b restricted to W. Maps from the unit are determined by this value, because all their associated sections are restrictions of the terminal one. Apply this completely proved generic private helper exists_unit_local_colimit_lift to the finite-free colimit cocone of step 1 and rewrite its coprojection using freeFunctor_map. This proves the stated finite-support factorization, including empty I.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
@@ -38,14 +37,12 @@
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-stalk-filtered-colimit"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project, Sheaves of Modules",
-  "place": "Modules, Lemma 01BB, first paragraph of the proof, specialized to one section of a free module sheaf; Lemma 01AH (2). https://stacks.math.columbia.edu/tag/01BB and https://stacks.math.columbia.edu/tag/01AH."
+  "place": "E2 formalization of the one-section local lifting step in Tag 01BB, first paragraph, using the sheafification description of colimits in Tag 01AH (2) instead of the stalk description. The type-colimit singleton construction and the adjunction comparison are proved explicitly in Lean."
  },
  "mathlib_searches": [
   {
@@ -141,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T161321-L-1423982",
-  "kind": "interface",
+  "landing": "20261013T164046-L-1667598",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
