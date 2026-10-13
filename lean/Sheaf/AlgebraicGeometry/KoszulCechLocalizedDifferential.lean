@@ -5,9 +5,8 @@ Authors: SHEAF group T3
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleHomComplex
-public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.KoszulCechLocalizedEvaluation
+import Sheaf.AlgebraicGeometry.KoszulCechLocalizedBoundary
 
 /-! # The differential identity for signed localized Koszul evaluation
 
@@ -28,57 +27,9 @@ namespace AlgebraicGeometry
 variable (A : Type uK) [CommRing A]
 variable (S : SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) (s : A)
 
-/-- Inverse to multiplication by s^e on sections over D(s).
-Source: Stacks, Tag 08D0 (blueprint: lem-sc-koszul-cech-localized-differential).
-The inverse is constructed from Mathlib's proved invertibility of s on D(s). -/
-noncomputable def koszulCechScalarDivision (e : ℕ) :
-    ((affineOpenSections A (PrimeSpectrum.basicOpen s)).obj S) ≃ₗ[A]
-      ((affineOpenSections A (PrimeSpectrum.basicOpen s)).obj S) := by
-  let N := (affineOpenSections A (PrimeSpectrum.basicOpen s)).obj S
-  have hu : IsUnit (algebraMap A (Module.End A (↑N)) s) :=
-    Scheme.Modules.isUnit_algebraMap_end_of_le_basicOpen (M := S) s le_rfl
-  exact (LinearEquiv.ofBijective (algebraMap A (Module.End A (↑N)) (s ^ e))
-    ((Module.End.isUnit_iff _).mp (by simpa only [map_pow] using hu.pow e))).symm
-
 variable (r : ℕ) (f : Fin r → A)
 variable (F : CochainComplex
   (SheafOfModules.{uK} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
-
-/-- Signed restriction of evaluation followed by division by the principal product.
-Source: Stacks, Tags 08D0 and 08D1
-(blueprint: lem-sc-koszul-cech-localized-differential).
-The parameter B supplies the vectors to evaluate on, independently of total degree.
-Linearity follows from linearity of cochains, restrictions and scalar division. -/
-noncomputable def koszulCechLocalizedDegreeMap (e : ℕ) (n : ℤ)
-    (B : ∀ J : {J : Finset (Fin r) // J.Nonempty},
-      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).X
-        (1 - (J.val.card : ℤ))) :
-    ModuleCat.of A (CochainComplex.HomComplex.Cochain
-      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat)
-      (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F) n) ⟶
-        principalCechTerms r f F n :=
-  ModuleCat.ofHom
-    { toFun := fun z J ↦
-        (Int.negOnePow
-          ((J.val.card - 1 : ℕ) * (n + 1 - (J.val.card : ℤ)) +
-            ((J.val.card - 1) * (J.val.card - 2) / 2 : ℕ))) •
-          koszulCechScalarDivision A (F.X (n + 1 - (J.val.card : ℤ))) (∏ j ∈ J.val, f j) (e + 1)
-            ((modulesSpecToSheaf.obj (F.X (n + 1 - (J.val.card : ℤ)))).obj.map
-              (homOfLE (le_top : principalCechIntersection r f J.val ≤ ⊤)).op
-              ((z.v (1 - (J.val.card : ℤ)) (n + 1 - (J.val.card : ℤ)) (by ring)) (B J)))
-      map_add' := by
-        intro z z'
-        funext J
-        simp only [CochainComplex.HomComplex.Cochain.add_v, ModuleCat.hom_add,
-          LinearMap.add_apply,
-          map_add, smul_add, Pi.add_apply]
-      map_smul' := by
-        intro a z
-        funext J
-        simp only [CochainComplex.HomComplex.Cochain.smul_v, ModuleCat.hom_smul,
-          LinearMap.smul_apply,
-          map_smul, Pi.smul_apply, RingHom.id_apply]
-        exact smul_comm _ _ _ }
 
 /-- The explicit localized degree maps commute with adjacent differentials when B
 is the ordered exterior basis transported into the extended Koszul tail.
@@ -122,6 +73,59 @@ theorem koszulCechLocalizedDegreeMap_comm (e : ℕ)
       (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)).d
         n (n + 1) ≫ koszulCechLocalizedDegreeMap A r f F e (n + 1) B =
       koszulCechLocalizedDegreeMap A r f F e n B ≫ (principalCechTotal r f F).d
-        n (n + 1) := by sorry
+        n (n + 1) := by
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro z
+  funext J
+  simp only [principalCechTotal, CochainComplex.of_d, ModuleCat.comp_apply]
+  change koszulCechLocalizedDegreeMap A r f F e (n + 1) B
+    (CochainComplex.HomComplex.δ n (n + 1) z) J =
+    (principalCechDifferential_exists r f F n).choose
+      (koszulCechLocalizedDegreeMap A r f F e n B z) J
+  rw [(principalCechDifferential_exists r f F n).choose_spec]
+  change
+    (Int.negOnePow
+      ((J.val.card - 1 : ℕ) * ((n + 1) + 1 - (J.val.card : ℤ)) +
+        ((J.val.card - 1) * (J.val.card - 2) / 2 : ℕ))) •
+      koszulCechScalarDivision A (F.X ((n + 1) + 1 - (J.val.card : ℤ)))
+        (∏ j ∈ J.val, f j) (e + 1)
+        ((modulesSpecToSheaf.obj (F.X ((n + 1) + 1 - (J.val.card : ℤ)))).obj.map
+          (homOfLE (le_top : principalCechIntersection r f J.val ≤ ⊤)).op
+          (((CochainComplex.HomComplex.δ n (n + 1) z).v
+            (1 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ)) (by ring)) (B J))) = _
+  rw [CochainComplex.HomComplex.δ_v n (n + 1) rfl z
+    (1 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ)) (by ring)
+    (n + 1 - (J.val.card : ℤ)) (2 - (J.val.card : ℤ)) (by ring) (by ring)]
+  simp only [ModuleCat.hom_add, LinearMap.add_apply, map_add, smul_add]
+  change _ = _ + _
+  apply congrArg₂ (· + ·)
+  · change _ = (-1 : A) ^ (J.val.card - 1) •
+      (affineOpenSections A (principalCechIntersection r f J.val)).map
+        (F.d (n + 1 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ)))
+        (koszulCechLocalizedDegreeMap A r f F e n B z J)
+    exact koszulCechLocalized_vertical A r f F e n J
+      ((z.v (1 - (J.val.card : ℤ)) (n + 1 - (J.val.card : ℤ)) (by ring)) (B J))
+  · by_cases hcard : J.val.card = 1
+    · have hd :
+          ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat).d
+            (1 - (J.val.card : ℤ)) (2 - (J.val.card : ℤ)) = 0 := by
+        have h0 : 1 - (J.val.card : ℤ) = 0 := by omega
+        have h1 : 2 - (J.val.card : ℤ) = 1 := by omega
+        rw [h0, h1]
+        exact
+          (koszulOpenTail A r f e).extend_d_from_eq_zero
+            ComplexShape.embeddingDownNat 0 1 0
+            (by simp [ComplexShape.embeddingDownNat_f])
+            (by simp [ComplexShape.down_Rel])
+      have he : ∀ j : J.val, ¬ (J.val.erase j.val).Nonempty := by
+        intro j h
+        have hc := Finset.card_erase_add_one j.property
+        have hp := Finset.card_pos.mpr h
+        omega
+      simp only [hd, smul_zero, Limits.zero_comp, ModuleCat.hom_zero,
+        LinearMap.zero_apply, map_zero, he, dite_false, Finset.sum_const_zero, id_eq]
+    · have hp := Finset.card_pos.mpr J.property
+      exact koszulCechLocalized_boundary A r f F e B hB n z J (by omega)
 
 end AlgebraicGeometry

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-koszul-cech-localized-vertical",
+ "kind": "lemma",
+ "title": "Coefficient differential term of signed localized Koszul evaluation",
+ "statement": "Let A be a commutative ring, f:Fin(r)→A, and F an arbitrary integer cochain complex of module sheaves on Spec(A) [def-pc-cochain-complex-modules]. Let J be nonempty, p=|J|-1, q=n-p, a_J=prod(j in J) f(j), and S(p,n)=p*(n-p)+p*(p-1)/2. On sections over D(a_J), let D_(S,a_J,e+1) be the inverse of scalar multiplication by a_J^(e+1). For every x in Γ(Spec(A),F^q), signed localized restriction of d_F(x), with sign (-1)^S(p,n+1), equals (-1)^p d_F applied to signed localized restriction of x, with sign (-1)^S(p,n). The unsigned division and signed degree maps [def-sc-module-total-hom-complex, def-sc-koszul-open-system, def-sc-principal-open-alternating-total] are the existing concrete definitions, relocated without changes.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Stacks Project Tags 08D0 and 08D1, read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1; fraction differential calculation and coefficient naturality with totalization signs."
+ },
+ "proof": [
+  {
+   "text": "Restriction is natural for every coefficient sheaf morphism. Multiplication by the principal product commutes with A-linear section maps. Apply the scalar equivalence inverse injectivity to deduce that its inverse also commutes with them.",
+   "uses": [
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand S(p,n+1)=S(p,n)+p by ring arithmetic. negOnePow_add and cast_negOnePow_natCast identify the extra factor with (-1)^p. Linearity moves the old sign through d_F.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Stacks Project Tags 08D0 and 08D1, read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1; fraction differential calculation and coefficient naturality with totalization signs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction and inverse scalar multiplication commute with the coefficient differential on sheaf sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul Hom cochain evaluation localization Cech differential",
+   "results": "8 hits, including HomComplex.δ and δ_hom, but no fraction evaluation or localized boundary calculation. δ_v supplies the combination formula used in the item.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.δ_v",
+   "results": "One hit: the component expansion of the Hom differential, used in the item. It gives neither localization cancellation nor coefficient naturality.",
+   "date": "2026-10-13",
+   "verdict": "component tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "contractLeft.*ιMulti|koszulBoundary.*ιMulti|ScalarDivision.*natural",
+   "results": "No hits from msearch grep. Direct rg of Koszul/Cech modules: localized evaluation definitions exist only in the item; the old source contraction_formula is private and is an ingredient, not either localized identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulCechLocalizedDifferential",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-cech-localized-differential",
+   "place": "Independent vertical term of the adjacent differential calculation.",
+   "via": [
+    "lem-sc-koszul-cech-localized-differential"
+   ]
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechLocalizedEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechLocalizedEvaluation.lean",
+  "declaration": "AlgebraicGeometry.koszulCechLocalized_vertical",
+  "statement": "theorem koszulCechLocalized_vertical (e : ℕ) (n : ℤ) (J : {J : Finset (Fin r) // J.Nonempty}) (x : (affineOpenSections A ⊤).obj (F.X (n + 1 - (J.val.card : ℤ)))) : (Int.negOnePow ((J.val.card - 1 : ℕ) * ((n + 1) + 1 - (J.val.card : ℤ)) + ((J.val.card - 1) * (J.val.card - 2) / 2 : ℕ))) • koszulCechScalarDivision A (F.X ((n + 1) + 1 - (J.val.card : ℤ))) (∏ j ∈ J.val, f j) (e + 1) ((modulesSpecToSheaf.obj (F.X ((n + 1) + 1 - (J.val.card : ℤ)))).obj.map (homOfLE (le_top : principalCechIntersection r f J.val ≤ ⊤)).op ((affineOpenSections A ⊤).map (F.d (n + 1 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ))) x)) = (-1 : A) ^ (J.val.card - 1) • (affineOpenSections A (principalCechIntersection r f J.val)).map (F.d (n + 1 - (J.val.card : ℤ)) ((n + 1) + 1 - (J.val.card : ℤ))) ((Int.negOnePow ((J.val.card - 1 : ℕ) * (n + 1 - (J.val.card : ℤ)) + ((J.val.card - 1) * (J.val.card - 2) / 2 : ℕ))) • koszulCechScalarDivision A (F.X (n + 1 - (J.val.card : ℤ))) (∏ j ∈ J.val, f j) (e + 1) ((modulesSpecToSheaf.obj (F.X (n + 1 - (J.val.card : ℤ)))).obj.map (homOfLE (le_top : principalCechIntersection r f J.val ≤ ⊤)).op x))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.koszulCechScalarDivision",
+   "AlgebraicGeometry.koszulCechLocalizedDegreeMap",
+   "AlgebraicGeometry.koszulCechLocalized_vertical"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d959f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T113342-L-3183419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d959f",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T113342-L-3183419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean statements, relocated definitions, proof decomposition, DAG records and report; all three delivered modules and direct importer KoszulCechComparisonConstruction compile cleanly; axiom probes show only permitted axioms and the declared remaining sorry."
+ }
+}
