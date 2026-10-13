@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-restricted-fibre-cohen-macaulay-locus-open",
+ "kind": "statement",
+ "title": "Openness of the restricted fibre Cohen-Macaulay locus",
+ "statement": "Let f:X→T be a scheme morphism [def-pc-scheme] and U an open of T. Suppose f restricted over U is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. The set of points y of X such that f(y) lies in U and depth [def-weil-pbc-depth] of the local ring of the fibre X_{f(y)} at y [def-pc-scheme-fibre; def-weil-pbc-module-stalk] equals its ring Krull dimension [def-weil-pbc-krull-dimension-ring] is open in X.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 045U (1), (2); depth criterion for Noetherian local rings (00N8)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Form the restriction of f over U. Identify its fibres with the original fibres using the restriction pullback square and the open-immersion residue-field isomorphisms. These are scheme isomorphisms and identify the corresponding local rings as local rings, so preserve regular-sequence depth and Krull dimension. Fibres are locally Noetherian by the restricted-fibre theorem. Thus the displayed depth equality is precisely the Cohen-Macaulay condition on a fibre stalk.",
+   "uses": [
+    "lem-sbc-restricted-fibre-locally-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Stacks 045U (1), (2) to the restricted flat locally finitely presented morphism: its fibre Cohen-Macaulay locus is open. Map it into X by the source restriction open immersion; the image is open and consists exactly of points with f(y) in U and the displayed depth equality. This also applies when the locus or the base open is empty.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-fibre-locally-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent C3",
+  "document": "Stacks Project",
+  "place": "Tags 045U (1), (2); depth criterion for Noetherian local rings (00N8); open-restriction and depth formulations expanded from the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cohen Macaulay locus of a flat locally finitely presented scheme morphism is open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cohen Macaulay locus of a flat locally finitely presented morphism is open, where a local ring is Cohen Macaulay when depth equals Krull dimension",
+   "date": "2026-10-13",
+   "results": "8 hits including Algebra.isOpen_smoothLocus, Algebra.isOpen_etaleLocus, Algebra.isOpen_unramifiedLocus and AlgebraicGeometry.UniversallyOpen.of_flat.",
+   "verdict": "No matching Cohen-Macaulay locus theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|cohen.?macaulay|Equidimensional|equidimensional|PureRelative|pureRelative in Mathlib AlgebraicGeometry and RingTheory and library Sheaf/WeilConjectures",
+   "date": "2026-10-13",
+   "results": "Mathlib AlgebraicCycle/Basic only mentions equidimensionality; library has depth results but no Cohen-Macaulay locus theorem. DAG tags 045U and 02NM occur only in this item and its parent. Blueprint search Cohen-Macaulay returns zero nodes.",
+   "verdict": "No existing matching declaration or node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFibreDimensionNearZeroDimensionalStalk",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the Cohen-Macaulay locus and pure-relative-dimension pieces used for constant fibre dimension near a generic point; Tags 045U (1), (2); depth criterion for Noetherian local rings (00N8)",
+   "via": [
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedFibreCohenMacaulayLocus.lean",
+  "declaration": "AlgebraicGeometry.isOpen_fibre_depth_eq_ringKrullDim_over_restrict",
+  "statement": "theorem isOpen_fibre_depth_eq_ringKrullDim_over_restrict\n    {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :\n    IsOpen {y : X | f y ∈ U ∧\n      (IsLocalRing.depth (R := (f.fiber (f y)).presheaf.stalk (f.asFiber y))\n        ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) : WithBot ℕ∞) =\n          ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))}",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T140813-L-311647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T140813-L-311647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

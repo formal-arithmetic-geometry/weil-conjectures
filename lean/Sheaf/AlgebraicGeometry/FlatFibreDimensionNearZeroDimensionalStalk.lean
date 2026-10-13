@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.RestrictedFibreLocallyNoetherian
+import Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus
+import Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-! # Constant fibre dimension near a zero-dimensional fibre stalk
 
@@ -35,8 +38,9 @@ Proof: Restrict f over U. Identify its fibre at f(x) with the original fibre, us
 the pullback square for restriction and the residue-field isomorphism at a point
 of an open subscheme. This identifies the fibre stalk at x with the given stalk.
 The fibre is locally of finite type over a field, hence locally Noetherian. Its
-zero-dimensional local ring at x is Artinian and Cohen-Macaulay: the empty regular
-sequence has maximal possible length zero. By Tag 045U the Cohen-Macaulay locus is
+local ring at x has depth at most its Krull dimension by the depth-support bound.
+Its dimension is zero and depth is nonnegative, so its depth equals its dimension;
+thus this Noetherian local ring is Cohen-Macaulay. By Tag 045U the Cohen-Macaulay locus is
 open. Restrict to that locus; the resulting morphism is flat, locally finitely
 presented and has Cohen-Macaulay fibres. Tag 02NM decomposes this locus into open
 and closed pieces of relative dimension n. Take the piece containing x, and map
@@ -55,6 +59,28 @@ theorem exists_constant_fibre_dimension_neighbourhood_of_stalk_dimension_zero
     (hdim : ringKrullDim ((f.fiber (f x)).presheaf.stalk (f.asFiber x)) = 0) :
     ∃ (n : ℕ) (V : X.Opens), x ∈ V ∧
       ∀ y ∈ V, f y ∈ U ∧ topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by
-  sorry
+  have : IsLocallyNoetherian (f.fiber (f x)) :=
+    isLocallyNoetherian_fibre_of_finite_presentation_restrict f U (f x) hx
+  have hdepth :
+      (IsLocalRing.depth (R := (f.fiber (f x)).presheaf.stalk (f.asFiber x))
+        ((f.fiber (f x)).presheaf.stalk (f.asFiber x)) : WithBot ℕ∞) =
+          ringKrullDim ((f.fiber (f x)).presheaf.stalk (f.asFiber x)) := by
+    apply le_antisymm
+    · simpa only [Module.supportDim_self_eq_ringKrullDim] using
+        IsLocalRing.depth_le_supportDim
+          (R := (f.fiber (f x)).presheaf.stalk (f.asFiber x))
+          ((f.fiber (f x)).presheaf.stalk (f.asFiber x))
+    · rw [hdim]
+      exact WithBot.coe_le_coe.mpr zero_le
+  let W : X.Opens := ⟨_, isOpen_fibre_depth_eq_ringKrullDim_over_restrict f U⟩
+  have hxW : x ∈ W := ⟨hx, hdepth⟩
+  obtain ⟨V, hcover, _, hV⟩ :=
+    exists_fibre_dimension_open_partition_of_depth_eq_ringKrullDim f U W
+      (fun _ hy => hy)
+  have hxcover : x ∈ ⨆ n, V n := hcover.symm ▸ hxW
+  obtain ⟨n, hxn⟩ := TopologicalSpace.Opens.mem_iSup.mp hxcover
+  refine ⟨n, V n, hxn, fun y hy => ⟨?_, hV n y hy⟩⟩
+  have hyW : y ∈ W := hcover ▸ TopologicalSpace.Opens.mem_iSup.mpr ⟨n, hy⟩
+  exact hyW.1
 
 end AlgebraicGeometry
