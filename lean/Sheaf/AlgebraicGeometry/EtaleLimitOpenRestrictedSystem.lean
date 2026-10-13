@@ -6,6 +6,8 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone
+import WeilConjectures.SixFunctors.BaseChange.Pasting
+import Sheaf.AlgebraicGeometry.EtaleOpenSquareDiagramIdentity
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Explicit restriction of a coherent system to inverse-image opens
@@ -129,6 +131,73 @@ noncomputable abbrev tailOpenLimitIso {I : Type u} [Preorder I]
       (((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι ≫ c.π.app (op j.val))
       (by simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι])).app (F j.val)
 
+set_option backward.isDefEq.respectTransparency true in
+private theorem openSquareCoefficient_composition
+    {X Y Z X' Y' Z' : Scheme.{u}}
+    (f : Y ⟶ X) (k : Z ⟶ Y) (a : X' ⟶ X) (b : Y' ⟶ Y) (d : Z' ⟶ Z)
+    (g : Y' ⟶ X') (l : Z' ⟶ Y')
+    (h₁ : b ≫ f = g ≫ a) (h₂ : d ≫ k = l ≫ b)
+    (q : Z ⟶ X) (r : Z' ⟶ X') (hq : q = k ≫ f) (hr : r = l ≫ g)
+    (h : d ≫ q = r ≫ a)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (H : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (φ : (upperStar AddCommGrpCat.{u + 1} f).obj F ⟶ G)
+    (ψ : (upperStar AddCommGrpCat.{u + 1} k).obj G ⟶ H) :
+    openSquareCoefficient q a d r h F H
+      ((upperStarComp AddCommGrpCat.{u + 1} k f q hq).hom.app F ≫
+        (upperStar AddCommGrpCat.{u + 1} k).map φ ≫ ψ) =
+    (upperStarComp AddCommGrpCat.{u + 1} l g r hr).hom.app
+        ((upperStar AddCommGrpCat.{u + 1} a).obj F) ≫
+      (upperStar AddCommGrpCat.{u + 1} l).map
+        (openSquareCoefficient f a b g h₁ F G φ) ≫
+      openSquareCoefficient k b d l h₂ G H ψ := by
+  cases hq
+  cases hr
+  have hp := congrArg (fun t => t.app F)
+    (squareUpperStarIso_paste_vert_hom AddCommGrpCat.{u + 1}
+      (CommSq.mk h₂) (CommSq.mk h₁) (CommSq.mk h))
+  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.comp_app, TwoSquare.vComp_app, Functor.comp_obj] at hp
+  change (squareUpperStarIso AddCommGrpCat.{u + 1} (CommSq.mk h)).hom.app F ≫
+      (upperStar AddCommGrpCat.{u + 1} d).map
+        ((upperStarComp AddCommGrpCat.{u + 1} k f).hom.app F ≫
+          (upperStar AddCommGrpCat.{u + 1} k).map φ ≫ ψ) = _
+  rw [hp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Category.id_comp]
+  unfold openSquareCoefficient
+  change _ = (upperStarComp AddCommGrpCat.{u + 1} l g).hom.app _ ≫
+    (upperStar AddCommGrpCat.{u + 1} l).map
+      ((squareUpperStarIso AddCommGrpCat.{u + 1} (CommSq.mk h₁)).hom.app F ≫
+        (upperStar AddCommGrpCat.{u + 1} b).map φ) ≫
+      (squareUpperStarIso AddCommGrpCat.{u + 1} (CommSq.mk h₂)).hom.app G ≫
+        (upperStar AddCommGrpCat.{u + 1} d).map ψ
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  have hn := (squareUpperStarIso AddCommGrpCat.{u + 1} (CommSq.mk h₂)).hom.naturality φ
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem openSquareCoefficient_iso
+    {X Y X' Y' : Scheme.{u}} (f : Y ⟶ X) (a : X' ⟶ X) (b : Y' ⟶ Y)
+    (g : Y' ⟶ X') (h : b ≫ f = g ≫ a)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (G L : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (e : G ≅ (upperStar AddCommGrpCat.{u + 1} f).obj F) (ψ : G ⟶ L) :
+    openSquareCoefficient f a b g h F L (e.inv ≫ ψ) =
+      ((upperStar AddCommGrpCat.{u + 1} b).mapIso e ≪≫
+        (upperStarComp AddCommGrpCat.{u + 1} b f).symm.app F ≪≫
+        (upperStarComp AddCommGrpCat.{u + 1} g a (b ≫ f) h).app F).inv ≫
+          (upperStar AddCommGrpCat.{u + 1} b).map ψ := by
+  simp only [openSquareCoefficient, Iso.trans_inv, Functor.mapIso_inv,
+    Functor.map_comp, Category.assoc]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
 /-- Restriction preserves the coherence of a system of inverse-image coefficients.
 
 Source: Stacks Project, Tag 09YQ, coherent systems; inverse-image composition.
@@ -203,6 +272,62 @@ theorem tailOpenRestrictedSystem_coherence
         AddCommGrpCat.ofHom (cohomologyMap (cE.π.app (op j)) (F' j) 0) ≫
           AddCommGrpCat.ofHom (Sheaf.H.map ((eG' j).inv ≫
             R.map (L.ι.app j.val)) 0)) := by
-  sorry
+  intro E cE F' φ' R G' eG'
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro j
+    exact openSquareCoefficient_diagram_identity D E
+      Subtype.val (fun j => (tailStageOpen D g₀ W j).ι) F φ hidentity
+      (fun j => by
+        simp only [E, tailOpenDiagram, tailStageOpenMap, Scheme.Hom.resLE_comp_ι])
+      F' (fun _ => rfl) (fun j => φ' (𝟙 j)) (fun _ => HEq.rfl) j
+  · intro i j k f g
+    dsimp only [φ']
+    unfold tailOpenCoefficient
+    rw [show homOfLE (show i.val ≤ k.val from (f ≫ g).le) =
+      homOfLE (show i.val ≤ j.val from f.le) ≫
+        homOfLE (show j.val ≤ k.val from g.le) from Subsingleton.elim _ _]
+    simp only [hcomposition]
+    exact openSquareCoefficient_composition _ _ _ _ _ _ _ _ _ _ _
+      (D.map_comp _ _) ((tailOpenDiagram D g₀ W).map_comp g.op f.op) _ _ _ _ _ _
+  · intro i j f
+    let f₀ : i.val ⟶ j.val := homOfLE (show i.val ≤ j.val from f.le)
+    have h₁ : (tailStageOpen D g₀ W j).ι ≫ D.map f₀.op =
+        tailStageOpenMap D g₀ W f ≫ (tailStageOpen D g₀ W i).ι := by
+      simp only [tailStageOpenMap, Scheme.Hom.resLE_comp_ι]
+      rfl
+    have h₂ : ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι ≫ c.π.app (op j.val) =
+        tailLimitOpenMap D c g₀ W j ≫ (tailStageOpen D g₀ W j).ι := by
+      simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι]
+    have h₃ : ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι ≫ c.π.app (op i.val) =
+        tailLimitOpenMap D c g₀ W i ≫ (tailStageOpen D g₀ W i).ι := by
+      simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι]
+    have hp := openSquareCoefficient_composition (D.map f₀.op) (c.π.app (op j.val))
+      (tailStageOpen D g₀ W i).ι (tailStageOpen D g₀ W j).ι
+      ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι
+      (tailStageOpenMap D g₀ W f) (tailLimitOpenMap D c g₀ W j) h₁ h₂
+      (c.π.app (op i.val)) (tailLimitOpenMap D c g₀ W i)
+      (c.w f₀.op).symm ((tailOpenCone D c g₀ W).w f.op).symm h₃
+      (F i.val) (F j.val) (G.obj j.val) (φ f₀) (eG j.val).inv
+    have he : (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j.val))
+        (D.map f₀.op) (c.π.app (op i.val)) (c.w f₀.op).symm).hom.app (F i.val) ≫
+        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j.val))).map (φ f₀) ≫
+          (eG j.val).inv = (eG i.val).inv ≫ G.map f₀ := by
+      rw [hG]
+      simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+    rw [he, openSquareCoefficient_iso] at hp
+    have hj := openSquareCoefficient_iso (c.π.app (op j.val))
+      (tailStageOpen D g₀ W j).ι ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι
+      (tailLimitOpenMap D c g₀ W j) h₂ (F j.val) (G.obj j.val) (G.obj j.val)
+      (eG j.val) (𝟙 _)
+    simp only [Category.comp_id, CategoryTheory.Functor.map_id] at hj
+    rw [hj] at hp
+    have hp' : (tailOpenLimitIso D c g₀ W F G eG i).inv ≫
+        (upperStar AddCommGrpCat.{u + 1} ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ W).ι).map
+          (G.map f₀) = _ := hp
+    rw [Iso.inv_comp_eq] at hp'
+    exact hp'
+  · intro L j
+    unfold tailOpenCohomologyLeg
+    rw [openSquareCoefficient_iso]
 
 end AlgebraicGeometry.Etale
