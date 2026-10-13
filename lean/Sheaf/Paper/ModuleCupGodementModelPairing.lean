@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.ModuleCupGodementModel
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
+import Sheaf.Paper.ModuleCupGodementModelsExist
+import Sheaf.Paper.ModuleCupGodementPairingForModels
 
 /-! # Multiplicative Godement models -/
 
@@ -69,7 +71,17 @@ theorem moduleCup_godement_model_pairing (X : Scheme.{u}) (F G : X.Modules) :
           (((alternatingCofaceMapComplex X.Modules).obj C).extendXIso
           ComplexShape.embeddingUpNat (i := 0) rfl).inv).val.app (op V)
           (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y)) =
-        (c.f 0).val.app (op V) (tmulSection x y) := by sorry
+        (c.f 0).val.app (op V) (tmulSection x y) := by
+  obtain ⟨A, a, hA, sA⟩ := moduleCup_godement_models_exist X F
+  obtain ⟨B, b, hB, sB⟩ := moduleCup_godement_models_exist X G
+  obtain ⟨C, c, hC, sC⟩ := moduleCup_godement_models_exist X (F ⊗ G)
+  obtain ⟨μ, hμ⟩ :=
+    moduleCup_godement_pairing_for_models X F G A B C a b c hA hB hC sA sB sC
+  refine ⟨A, B, C, a, b, c, μ, hA, hB, hC, ?_⟩
+  intro V x y
+  have h := congrArg (fun f ↦ f.app V (tmulSection x y)) hμ
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, tensorHom_app_tmulSection] at h
+  exact h
 
 end
 end AlgebraicGeometry.Scheme.Modules

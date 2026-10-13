@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-module-cup-godement-model-pairing-pairing",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Tensor multiplication for concrete Godement models",
+ "statement": "Let $X$ be a scheme, $F,G$ module sheaves, and let $A,B,C$ with augmentations $a,b,c$ be ModuleCupGodementModel objects for $F,G,F\\otimes G$, respectively [def-sc-module-cup-godement-model]. Assume each also satisfies ModuleCupGodementCodegeneracies for the corresponding coefficient sheaf [def-sc-module-cup-godement-codegeneracies]. There exists a cosimplicial morphism $\\mu:A\\otimes B\\to C$ whose degree-zero map, transported from the cosimplicial terms to their extended alternating complexes, satisfies $(a^0\\otimes b^0)\\,\\mu^0=c^0$. The domain uses the canonical degree-zero identification $F[0]^0\\otimes G[0]^0=(F\\otimes G)[0]^0$. This asserts a pairing for given canonical models, and constructs no models or augmentations.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution, construction preceding Lemma 20.30.1; Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof": [
+  {
+   "text": "Define beta(F,G):T(F) tensor T(G) to T(F tensor G) by the O(U)-bilinear assignment on each open U that sends a pair of sections to their pointwise tensor at each x in U followed by the stalk tensor map. This commutes with restriction, so the universal property of the sheafified tensor product gives a sheaf morphism. On two germs its x-coordinate is their tensor germ, proving compatibility with the monad unit.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For multiplication compatibility project to each skyscraper coordinate x and evaluate stalk representatives on a common open neighbourhood. Either composite first evaluates the two outer sections at x and then tensors the resulting inner values. Hence the two values agree; stalk representatives and product projections detect the equality. Define beta_0 as the coefficient identity and beta_(k+1) as beta(T^k F,T^k G) followed by T(beta_k). Induction gives commutation with each unit insertion and multiplication insertion.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport beta_(n+1) through the term equalities of A,B,C. The model coface equations and the prescribed codegeneracy equations give commutation with the generating simplex maps, so these components define mu. Equality proofs in the two model predicates agree by proof irrelevance. Substitute the three degree-zero augmentation equations into unit compatibility for beta_1 and cancel the term and extension isomorphisms. The two single-object identifications tensor to the single-object identification for F tensor G, giving the required morphism equality. Empty products and zero sheaves satisfy the same formulas.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-codegeneracies",
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof_origin": {
+  "by": "Q1 stage-3 worker; explicit coordinate formulas and monad argument",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution, construction preceding Lemma 20.30.1; Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementModelPairing",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-godement-model-pairing",
+   "place": "Tensor multiplication for concrete Godement models",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cosimplicial object from a monad and natural tensor multiplication Godement stalk sheaves",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.GrothendieckTopology.Point.sheafFiber, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheaf_μ, smoothSheafCommRing.forgetStalk",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact Godement construction match; use the existing skyscraper and tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cosimplicial\", \"monad\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact Godement construction match; use the existing skyscraper and tensor APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|Monad.*cosimplicial|cosimplicial.*Monad",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact Godement construction match; use the existing skyscraper and tensor APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monad on sheaves of modules gives a cosimplicial Godement resolution with tensor multiplication",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementPairingForModels",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementPairingForModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_pairing_for_models",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_pairing_for_models"
+  ],
+  "statement": "theorem moduleCup_godement_pairing_for_models (X : Scheme.{u}) (F G : X.Modules)\n    (A B C : CosimplicialObject X.Modules)\n    (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶\n      (((alternatingCofaceMapComplex X.Modules).obj A).extend\n        ComplexShape.embeddingUpNat))\n    (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶\n      (((alternatingCofaceMapComplex X.Modules).obj B).extend\n        ComplexShape.embeddingUpNat))\n    (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶\n      (((alternatingCofaceMapComplex X.Modules).obj C).extend\n        ComplexShape.embeddingUpNat))\n    (hA : ModuleCupGodementModel X F A a)\n    (hB : ModuleCupGodementModel X G B b)\n    (hC : ModuleCupGodementModel X (F ⊗ G) C c)\n    (sA : ModuleCupGodementCodegeneracies X F A)\n    (sB : ModuleCupGodementCodegeneracies X G B)\n    (sC : ModuleCupGodementCodegeneracies X (F ⊗ G) C) :\n    ∃ μ : CategoryTheory.Monoidal.FunctorCategory.tensorObj\n        (C := SimplexCategory) (D := X.Modules) A B ⟶ C,\n      ((a.f 0) ⊗ₘ (b.f 0)) ≫\n        ((((alternatingCofaceMapComplex X.Modules).obj A).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).hom ⊗ₘ\n          (((alternatingCofaceMapComplex X.Modules).obj B).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).hom) ≫ μ.app ⦋0⦌ ≫\n          (((alternatingCofaceMapComplex X.Modules).obj C).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).inv = c.f 0",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T145123-L-696931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T145123-L-696931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
