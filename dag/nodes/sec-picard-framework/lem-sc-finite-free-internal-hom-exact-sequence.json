@@ -13,21 +13,42 @@
  ],
  "proof": [
   {
-   "text": "choose the displayed finite free basis. On each localized site, evaluate a linear map on its basis to identify internal Hom with a finite product of the target module, with the necessary universe lift. Under this identification both maps become coordinatewise maps. Finite products preserve exact sequences in module sheaves: a cycle is a finite tuple of cycles; exactness of the original sequence supplies a local preimage of each coordinate. Refine the finitely many coverings together and assemble these preimages into the tuple giving a boundary. The universe lift changes neither the underlying sections nor this local exactness criterion. For rank zero, all three internal Homs are zero and the assertion is immediate.",
+   "text": "Obtain left exact abelian sheafification in section universes w and max(u,v,w) from the existing weak sheafification and locally-bijective characterization. This supplies the abelian module-sheaf categories and the exact forgetful functors used below.",
+   "uses": [
+    "lem-sc-weak-sheafify-addcommgrp-left-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove restriction to Over U preserves finite limits by sectionwise evaluation. For every fixed source P, the evaluated internal Hom functor, followed by forgetting the module structure, is naturally the composite of sheaf-to-presheaf restriction and coyoneda from P restricted to Over U. These functors preserve finite limits. Reflect the limit through the module forgetful functor, sectionwise evaluations, and the fully faithful inclusion of sheaves. Thus internal Hom from P preserves finite limits, without any freeness assumption.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an epi f:M→N, the exact forgetful functor to abelian sheaves shows that f is locally surjective. Given a section φ of Hom(P,N) over U, evaluate φ on the finite basis b_i=ιFree_i≫e.inv. Intersect the finitely many image sieves, a covering also for the empty index set. On every arrow k:V→U in this covering, choose lifts m_i of the basis images. Form the actual restricted morphism ψ=Σ_i G(p_i.val)≫unitLift(m_i), where G is restriction to Over V and p_i=e.hom≫freeπ_i. Naturality and linearity show unitLift(m_i)≫G(f.val)=G(b_i.val)≫φ|V. The identity Σ_i p_i≫b_i=id_P, obtained from the existing sum_freeπ_ιFree lemma, proves ψ≫f=φ|V. Consequently Hom(P,f) is locally surjective and hence epi.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels to F=homFunctor(R).obj(op P). Exact.map transports hS to S.map F, and the functorial zero equation of S.map F supplies the existential witness. Its maps are definitionally the two homObjMap maps in the statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-weil-sheaf-of-modules-category"
+  "lem-sc-weak-sheafify-addcommgrp-left-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "description": "P2 made the two steps of the existing bounded-above finite-free Hom proof plan explicit, preserving the signed descending local lifting route. Tags 0GM8/0GM7 supply the application; the detailed proof here is agent-written."
+  "description": "A2: Lean proof using sectionwise coyoneda for kernel preservation, explicit finite-basis local lifting for epimorphisms, and Mathlib preservation of homology. Only the weak-to-left-exact sheafification implication remains as a new named theorem."
  },
  "mathlib_searches": [
   {
@@ -105,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T045548-L-133665",
+  "landing": "20261013T095925-L-2449813",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

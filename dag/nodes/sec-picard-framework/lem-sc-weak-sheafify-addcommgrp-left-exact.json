@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-weak-sheafify-addcommgrp-left-exact",
+ "kind": "statement",
+ "title": "Existing abelian sheafification is left exact from locally bijective units",
+ "statement": "Let $(\\mathcal C,J)$ be a site [def-weil-pbc-sites-and-cohomology], with object universe u and arrow universe v. Suppose the inclusion of sheaves of abelian groups with values in universe w into presheaves admits a left adjoint [def-weil-pbc-sheafification], and the maps inverted by this left adjoint are exactly the locally injective and locally surjective maps. Then that left adjoint preserves finite limits. No size relation among u, v, w is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 00WJ, exactness of sheafification; Tag 03CN, proof of assertion (1) for abelian presheaves. The finite-refinement argument adapts these proofs to an already existing reflector in an arbitrary section universe."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Finite limits of abelian presheaves are sectionwise. For a finite category K and a diagram D, the units give a comparison from lim D to the limit of the underlying sheafified diagram. To lift a section of the target locally, intersect the finite collection of image sieves for its components. Choose lifts on each arrow in that covering. For each of the finitely many diagram arrows, the two corresponding lifted components have the same image under the unit; its local injectivity yields a covering on which the compatibility equation holds. Refine all these coverings together. The compatible lifts define a section of lim D, proving local surjectivity of the comparison. Local injectivity follows by refining the finitely many equality sieves of components. The empty diagram is the terminal object, already a sheaf. The target limit is a sheaf, because the inclusion creates limits. WEqualsLocallyBijective says sheafification inverts the comparison. The counit on its target is an isomorphism, so the canonical finite-limit comparison for the given reflector is an isomorphism. Hence its left adjoint preserves finite limits, which with HasWeakSheafify gives HasSheafify. This argument uses only finite refinement, not existence of limits over coverings in the smaller universe.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "A2, finite local lifting and equality refinement argument from Stacks 00WJ and 03CN, specialized to an existing abelian reflector without a site-size assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weak sheafification of abelian presheaves that inverts exactly locally bijective maps preserves finite limits",
+   "results": "Internal Server Error from service",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Grothendieck topology, a weak sheafification functor for abelian groups which inverts exactly locally bijective maps preserves finite limits",
+   "results": "preservesFiniteLimits_sheafification; preservesFiniteLimits_presheafToSheaf; HasSheafify.isLeftExact. The first two require the concrete plus construction size/limit assumptions; the last assumes HasSheafify already.",
+   "date": "2026-10-13",
+   "verdict": "no matching implication from HasWeakSheafify and WEqualsLocallyBijective"
+  },
+  {
+   "tool": "grep",
+   "query": "HasWeakSheafify; HasSheafify; preservesFiniteLimits in Mathlib CategoryTheory/Sites/Sheafification, LeftExact, LocallyBijective; WeilConjectures CategoryTheory/GrothendieckAbelian/HasSheafify; lean/Sheaf sheafification modules",
+   "results": "Sheafification: HasSheafify.mk'; LocallyBijective: W_iff_isLocallyBijective and locally bijective units. LeftExact uses concrete construction size hypotheses; GrothendieckAbelian requires essentially-small site. No implication under the exact hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeInternalHomExactSequence",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "finite-free Hom exactness: abelian sheafification needed for the local exactness criterion",
+   "via": [
+    "lem-sc-finite-free-internal-hom-exact-sequence",
+    "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "lem-sc-derived-hom-finite-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/WeakSheafifyAddCommGrpLeftExact.lean",
+  "declaration": "CategoryTheory.hasSheafify_addCommGrp_of_weak",
+  "statement": "theorem hasSheafify_addCommGrp_of_weak {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasWeakSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}] : HasSheafify J AddCommGrpCat.{w}",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T095925-L-2449813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T095925-L-2449813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
