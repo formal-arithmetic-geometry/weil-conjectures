@@ -7,8 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Sheaf.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackMate
 
 /-! # Affine extension and sections with independent localization universes
 Source: Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7.
@@ -61,6 +60,14 @@ theorem exists_mixedExtensionSectionsUnit
       (mixedGlobalExtensionAdjunction g).unit.app ((schemeDerivedGlobalSections Y).obj Q) ≫
           (schemeGlobalScalarRestriction g).map a.hom =
         (schemeDerivedGlobalSections Y).map ((schemeHomPullbackAdjunction g).unit.app Q) ≫
-          (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q) := by sorry
+          (mixedGlobalSectionsDirectImageIso g).hom.app ((derivedPullback g).obj Q) := by
+  obtain ⟨a, ha⟩ := exists_mixedAffineSectionsPullbackMate g Q hQ
+  refine ⟨a, ?_⟩
+  have h := ha ((derivedPullback g).obj Q) (𝟙 _)
+  rw [(schemeHomPullbackAdjunction g).homEquiv_id] at h
+  erw [(schemeDerivedGlobalSections Y').map_id, Category.comp_id] at h
+  have h' := congrArg ((mixedGlobalExtensionAdjunction g).homEquiv _ _) h
+  rw [Equiv.apply_symm_apply, (mixedGlobalExtensionAdjunction g).homEquiv_unit] at h'
+  exact h'.symm
 
 end AlgebraicGeometry

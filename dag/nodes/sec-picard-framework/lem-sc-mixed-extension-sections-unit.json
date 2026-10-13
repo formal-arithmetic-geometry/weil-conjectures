@@ -17,41 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Identify both affine schemes with their canonical spectra. Apply the affine quasi-coherent derived equivalence to Q and represent its inverse by a K-flat module complex. Exact tilde gives Q and its K-flat representative.",
+   "text": "Apply exists_mixedAffineSectionsPullbackMate g Q hQ to obtain a and its compatibility with every sheaf pullback adjunct. This existing independent-universe affine comparison is used only in its identity-morphism case.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-sc-mixed-affine-sections-pullback-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the natural tilde/pullback formula on the K-flat representative. Derived sections and the affine counit identify its pullback with derived extension of its module of sections.",
+   "text": "Specialize the compatibility to L = derivedPullback(g)(Q) and theta = identity. The sheaf hom-equivalence sends identity to its unit; derived global sections maps identity to identity. Thus the scalar transpose of Gamma_Y(unit_g(Q)) followed by the normalized Leray comparison equals a.hom.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-global-hom-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The extension and tensor-pullback adjunction units agree on the complexes. Descend through each localization and compare left adjoints to the fixed scalar restriction. This transports the comparison to mixedGlobalExtensionAdjunction including its unit. The normalized right-derived-unit equation identifies its right comparison with mixedGlobalSectionsDirectImageIso g. Thus obtain precisely the asserted unit equality, without equating the localization universes.",
+   "text": "Apply the fixed scalar-adjunction hom-equivalence to this equality. Its apply_symm_apply identity and its formula as unit followed by scalar restriction give precisely the requested unit equation, with the same isomorphism a and independent localization universes.",
    "uses": [
-    "lem-sc-mixed-global-extension-adjunction",
-    "lem-sc-mixed-global-sections-direct-image-iso"
+    "lem-sc-mixed-global-extension-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-sc-mixed-global-extension-adjunction",
-  "lem-sc-mixed-global-sections-direct-image-iso"
+  "lem-sc-mixed-affine-sections-pullback-mate",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-mixed-global-extension-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V4",
+  "group": "B3",
   "date": "2026-10-13",
-  "note": "Explicit intermediate step of the parent proof; cited Stacks sources read online, refining their constructions to pinned Lean comparisons and independent localization universes."
+  "note": "Second reading: use the identity-theta case of the existing independent-universe affine sections pullback-mate theorem and the two adjunction hom-equivalence identities. No new hole or node."
  },
  "mathlib_searches": [
   {
@@ -139,9 +135,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T113357-L-3188895",
-  "kind": "interface"
+  "landing": "20261013T120251-L-3428752",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
