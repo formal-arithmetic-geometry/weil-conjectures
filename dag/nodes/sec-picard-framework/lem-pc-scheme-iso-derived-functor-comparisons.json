@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-scheme-iso-derived-functor-comparisons",
+ "kind": "statement",
+ "title": "Derived tensor, pullback and direct-image comparisons for a scheme-isomorphism square",
+ "statement": "Let X,Y,X',Y' be schemes [def-pc-scheme], with chosen derived categories [def-pc-derived-category] of X,Y in a common morphism universe w and of X',Y' in a common independently chosen universe w'. Use the recorded tensors [def-pc-scheme-derived-tensor-structure], pullbacks [def-pc-derived-pullback] and direct images [def-pc-derived-direct-image]. Let f:X\\to Y, g:X'\\to Y', e_X:X'\\cong X, e_Y:Y'\\cong Y satisfy g;e_Y=e_X;f. Let a:D(Y')\\simeq D(Y), b:D(X')\\simeq D(X) be supplied equivalences, together with natural isomorphisms Q;a \\cong (e_Y)_*^{complex};Q and Q;b \\cong (e_X)_*^{complex};Q. Here Q is complex localization and the complex functors apply underived module pushforward in every degree and to every differential. Then there are natural isomorphisms tensor_{Y'};a \\cong (a\\times a);tensor_Y, tensor_{X'};b \\cong (b\\times b);tensor_X, a;Lf^* \\cong Lg^*;b, and Rg_*;a \\cong b;Rf_*. There are no supplied adjunctions, tensor-pullback comparisons, coefficients, quasi-coherence assumptions, or projection-mate assertions.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change, first sentence of proof, scheme-isomorphism comparison part of the affine-local reduction; expanded by cohomology.tex Tags 06YI (derived-pullback) and 079V (unbounded)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme isomorphism the recorded equivalence is induced by exact underived module pushforward and its inverse. The supplied localization factorization identifies any a or b in the statement with this localized equivalence by uniqueness of localization.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Underived isomorphism pushforward preserves tensor: on stalks restriction of scalars along an isomorphism of structure rings is an invertible tensor comparison. Its exact inverse tests acyclicity, and tensor comparisons identify tensoring an acyclic complex before and after pushforward, proving preservation of K-flatness. Compute the two derived tensors on K-flat resolutions and descend the underived comparisons and their inverses to obtain tau_a and tau_b, natural in both variables.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The commuting square of scheme maps identifies (eY)_*;f* with g*;(eX)_* on modules. On a K-flat resolution both composites in the third assertion compute that same composite, because exact isomorphism pushforward preserves K-flatness. The left-derived universal property extends this comparison to alpha, including the inverse and naturality.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse equivalences preserve K-injectivity: the Hom complex from an acyclic complex is identified with the Hom complex from its exact inverse image. Compute direct images on K-injective resolutions. Direct-image composition and the commuting scheme square identify g_*;(eY)_* with (eX)_*;f_* before localization. The right-derived universal property and the supplied factorizations yield beta. Localization uniqueness allows the two independently chosen morphism universes, and the argument also applies to empty schemes and zero complexes.",
+   "uses": [
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-iso-derived-equivalence",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "J2 expansion of the scheme-isomorphism comparison part of the affine-local reduction, using the K-flat construction in Tag 06YI and the K-injective construction in Tag 079V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism pushforward on derived categories commutes with tensor pullback and direct image",
+   "results": "8 hits: underived Scheme.Modules.pushforwardComp, its component formulas and SheafOfModules.pushforwardNatIso/Congr. No scheme-derived tensor or pullback comparison for supplied localization equivalences.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "10 hits: categorical conjugateIsoEquiv and hom/inv formulas, including the bicategory variants. None gives the required geometric tensor and derived-functor comparisons.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(Iso|iso).*(tensor|pushforward)|pushforward.*tensor",
+   "results": "0 Mathlib hits. Local repository search also found only underived projection formulas, same-universe derived pullback composition, and standard-localization monoidal comparison; no exact simultaneous comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor pullback and direct image commute with pushforward along scheme isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionMateSchemeIsoTransport",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0A9Q Hom chain, fourth equality: the derived projection formula; projection formula affine reduction, generators and closure; comparison on one affine chart before invoking the affine theorem; specifically conjugation across the two scheme-isomorphism sides of the chart square; specifically the tensor, pullback and direct-image functor comparisons before transporting an adjunction or computing a mate.",
+   "via": [
+    "lem-pc-projection-mate-scheme-iso-transport",
+    "lem-pc-qcqs-projection-mate-affine-descent",
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-global-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoDerivedFunctorComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoDerivedFunctorComparisons.lean",
+  "declaration": "AlgebraicGeometry.schemeIso_derived_functor_comparisons",
+  "statement": "theorem schemeIso_derived_functor_comparisons\n    (X Y X' Y' : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{w'} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))]\n    [HasDerivedCategory.{w'} (SheafOfModules.{u} (moduleRings Y'.toRingedSpace))]\n    (f : X ⟶ Y) (g : X' ⟶ Y') (eX : X' ≅ X) (eY : Y' ≅ Y)\n    (hcomm : g ≫ eY.hom = eX.hom ≫ f)\n    (a : schemeDerivedCategory Y' ≌ schemeDerivedCategory Y)\n    (b : schemeDerivedCategory X' ≌ schemeDerivedCategory X)\n    (ha : DerivedCategory.Q ⋙ a.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings Y'.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward eY.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (hb : DerivedCategory.Q ⋙ b.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X'.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward eX.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) :\n    Nonempty (tensor (schemeDerivedCategory Y') ⋙ a.functor ≅\n      a.functor.prod a.functor ⋙ tensor (schemeDerivedCategory Y)) ∧\n    Nonempty (tensor (schemeDerivedCategory X') ⋙ b.functor ≅\n      b.functor.prod b.functor ⋙ tensor (schemeDerivedCategory X)) ∧\n    Nonempty (a.functor ⋙ derivedPullback f ≅ derivedPullback g ⋙ b.functor) ∧\n    Nonempty (schemeDerivedDirectImage g ⋙ a.functor ≅\n      b.functor ⋙ schemeDerivedDirectImage f)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T145726-L-751363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T145726-L-751363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
