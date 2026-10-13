@@ -20,81 +20,33 @@
  },
  "proof": [
   {
-   "text": "Starting from the given flat polynomial chart and coefficient solution, geometric regularity makes L regular, so its embedding dimension d equals its Krull dimension; the closed fibre of the flat local polynomial chart is the residue field of L. Use the flat height formula and regularity of the polynomial source to choose polynomial representatives of a regular system of d parameters in its source and L. The finite presentation f and generator membership in D₀ give the factorization of A through D₀ by injectivity of the flat local coefficient map.",
+   "text": "Apply the polynomial-kernel-parameters theorem with e=c*8, positive because c>0. It chooses uP in the contracted prime generating its localized maximal ideal, regular in L, and supplies the first/square kernel equality on the iterated polynomial ring P[t].",
    "uses": [
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-flat-height-formula",
-    "lem-weil-pbc-field-regular-ring",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-regular-ring-smooth-ascent",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-finitely-presented-algebra"
+    "lem-weil-pbc-popescu-polynomial-kernel-parameters"
    ],
    "elementary": false
   },
   {
-   "text": "Put R=k[y,t_0,...,t_(d-1)] and send X_i in S to u_i t_i. Permutations of the parameters are regular in P₀, so the u_i t_i form a regular sequence after inverting k[y] outside p. Successively apply regular-sequence powers and Ogoma on R/((u_jt_j)^e:j<i), multiplying u_i by elements outside p, to equalize the first and square kernels. Earlier equalities are unchanged and parameter generation is preserved.",
+   "text": "Apply the fixed-parameter coefficient induction to those uP. Retain tLambda, ell, the Lambda kernel equality, and the local Artinian coefficient ring and all maps, units and coefficients.",
    "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-regular-sequence-polynomial-variables",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma",
-    "def-weil-pbc-regular-sequence"
+    "lem-weil-pbc-popescu-coefficient-induction"
    ],
    "elementary": false
   },
   {
-   "text": "Inductively construct δ_i outside q and λ_ij in Λ inside an enlarged Artinian coefficient solution D′. Faithful-flat contraction writes u_i^N=sum a_j d_j in D′. Lift d_j into L and correct the error in m_L^(n-N), then multiply by u_i^N so u_i^(2N)=sum a_j w_j with the prescribed residue classes. Choose a common denominator s₀ with w_j=u_j/s₀, and s₁ outside q killing s₀u_i^(2N)-sum u_j a_j. Set s=s₀s₁ and μ_j=s^(2N-1)s₁u_j: then (su_i)^(2N)=sum μ_j a_j and μ_j/s^(2N)=w_j. Enlarge by 07FI to include a positive power of s, replacing s by s^r and μ_j by s^(2N(r-1))μ_j. These replacements preserve both identities; the residue of the new μ_j is (s^r)^(2N)u_i^N d_j in the enlarged coefficient ring. Apply Ogoma on Λ/((δ_ju_j)^e:j<i) and enlarge again by 07FI to include a suitable power (s′)^q. Take δ_i=(s′)^q s and λ_ij=(s′)^(2Nq)μ_j. This gives the relation in Λ, equal first/square kernels, and coefficient membership, preserving earlier conditions.",
-   "uses": [
-    "lem-weil-pbc-popescu-enlarge-solution-modulo",
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Retain the explicit polynomial chart R=P[t] reindexed by Fin(m₀+d), and its evaluation maps. Compose the coefficient tower with the localization B→P_(p₀)/p₀^n. Shrink the smooth finite-presentation model and its fraction localization to Type(max u v), transporting the B-algebra structure, A-map, flat local map, units and coefficient identities. This produces the coefficient system, without forming H or the polynomial quotient equivalence.",
-   "uses": [
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false
+   "text": "Set m=d+m0 and use renameEquiv for Fin(d+m0) equivalent to Fin d plus Fin m0, followed by sumAlgEquiv, to obtain E:R equivalent to P[t]. Put rho_i=E inverse(C(uP_i)t_i). Define R to Lambda by evaluation composed with E, S to R by aeval rho, and S to Lambda by their composite; IsScalarTower.of_algHom and the composition equality give all scalar towers. Evaluation of rho is phi0(uP_i)tLambda_i, so the power relations and prime membership follow. For each preceding ideal, E maps its generating set exactly to the corresponding set in P[t]. Use Ideal.quotientEquiv to transport multiplication and its square, proving the R kernel equality. Rewrite the Lambda preceding ideal using the evaluation identity and identify the R action with its Lambda algebra-map action, yielding its kernel equality. Evaluation after E inverse on constants and variables gives the required chart compatibility. Retain the coefficient data unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "lem-weil-pbc-flat-height-formula",
-  "lem-weil-pbc-field-regular-ring",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-regular-ring-smooth-ascent",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-weil-pbc-regular-sequence-polynomial-variables",
-  "lem-weil-pbc-regular-sequence-powers",
-  "lem-weil-pbc-ogoma",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-popescu-enlarge-solution-modulo",
-  "lem-weil-pbc-essentially-smooth-composition",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-essentially-smooth-ring-map"
+  "lem-weil-pbc-popescu-polynomial-kernel-parameters",
+  "lem-weil-pbc-popescu-coefficient-induction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma 07FJ, lemma-resolve-general"
+  "place": "Lemma 07FJ, item-choose-pii, item-modify-pii, item-choose-deltai and item-set-map-R; explicit polynomial reindexing and quotient transport formalized by A3"
  },
  "mathlib_searches": [
   {
@@ -177,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T100126-L-2487062",
+  "landing": "20261013T111835-L-3046469",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

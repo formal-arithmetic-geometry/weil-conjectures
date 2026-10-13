@@ -12081,3 +12081,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:03 L: returned deliver/J4/Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest (reviewer RETURN: (reviewer X-c775f, head c775f588f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.To)
 - 11:04 L: returned deliver/C1/Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonRetraction (reviewer RETURN: (reviewer X-77573, head 775732514) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Al)
 - 11:18 L: merged deliver/A2/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (stage 3; reviewer PASS; first push; landing 20261013T111835-L-3046278 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/A3/Sheaf.RingTheory.PopescuCoefficientRescaling (stage 3; reviewer PASS; first push; landing 20261013T111835-L-3046469 (interface); batch 20261013T111833; modules 3; new nodes 2)

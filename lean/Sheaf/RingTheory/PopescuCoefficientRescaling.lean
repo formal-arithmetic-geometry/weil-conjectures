@@ -10,13 +10,8 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.PopescuPolynomialKernelParameters
+import Sheaf.RingTheory.PopescuCoefficientInduction
 
 /-!
 # Rescaled parameters and Artinian coefficient lifts
@@ -32,6 +27,39 @@ set_option autoImplicit false
 
 universe u v w
 namespace Algebra
+
+private theorem kernel_equiv
+    {R T : Type*} [CommRing R] [CommRing T] {d : ℕ}
+    (E : R ≃+* T) (rho : Fin d → R) (e : ℕ)
+    (h : ∀ (i : Fin d)
+      (x : T ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = E (rho j) ^ e}),
+      E (rho i) • x = 0 ↔ E (rho i) ^ 2 • x = 0) :
+    ∀ (i : Fin d)
+      (x : R ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = rho j ^ e}),
+      rho i • x = 0 ↔ rho i ^ 2 • x = 0 := by
+  intro i x
+  let I : Ideal R := Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = rho j ^ e}
+  let J : Ideal T := Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = E (rho j) ^ e}
+  have hIJ : J = I.map E.toRingHom := by
+    dsimp [I, J]
+    rw [Ideal.map_span]
+    congr 1
+    ext y
+    constructor
+    · rintro ⟨j, hj, rfl⟩
+      exact ⟨rho j ^ e, ⟨j, hj, rfl⟩, by simp⟩
+    · rintro ⟨z, ⟨j, hj, rfl⟩, rfl⟩
+      exact ⟨j, hj, by simp⟩
+  let Q := Ideal.quotientEquiv I J E hIJ
+  have hmap (a : R) (z : R ⧸ I) : Q (a • z) = E a • Q z := by
+    obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective z
+    simp only [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul]
+    simp only [Q, Ideal.quotientEquiv_mk, map_mul]
+  have hzero (z : R ⧸ I) : Q z = 0 ↔ z = 0 := by
+    rw [← map_zero Q, Q.injective.eq_iff]
+  have hmain := h i (Q x)
+  rw [← hmap, ← map_pow, ← hmap, hzero, hzero] at hmain
+  exact hmain
 
 /-- Construct the rescaled parameters and their coefficient lifts, before forming the
 polynomial quotient chart. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ
@@ -175,6 +203,101 @@ theorem exists_popescu_coefficient_rescaling
             Ideal.Quotient.mk K (algebraMap Λ L (φ₀ z))) ∧
           (∀ i, g (δ i : D) = Ideal.Quotient.mk K (algebraMap Λ L (tΛ i))) ∧
           (∀ x, g (f₀ x) = Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
-          (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+          (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  classical
+  obtain ⟨uP, huP, hspan, hsequence, hkernel⟩ :=
+    exists_popescu_polynomial_kernel_parameters q hreg d hd (c * 8)
+      (Nat.mul_pos hc (by decide)) m₀ φ₀ ψ₀ hψ₀ hideal₀ hflat₀
+  obtain ⟨tΛ, ell, htΛ, heq, hkernelΛ, hcoeff⟩ :=
+    exists_popescu_coefficient_induction p hp α q hreg N hN hpower d s a ha c hc
+      r f hf m₀ φ₀ ψ₀ hψ₀ hideal₀ hflat₀ D₀ g₀ hsmooth₀ hgflat₀ hfactor₀ hinc₀
+      uP huP hspan hsequence
+  let P := MvPolynomial (Fin m₀) k
+  let T := MvPolynomial (Fin d) P
+  let R := MvPolynomial (Fin (d + m₀)) k
+  let S := MvPolynomial (Fin d) k
+  let E : R ≃ₐ[k] T :=
+    (MvPolynomial.renameEquiv k (finSumFinEquiv.symm : Fin (d + m₀) ≃
+      Fin d ⊕ Fin m₀)).trans (MvPolynomial.sumAlgEquiv k (Fin d) (Fin m₀))
+  let ev : T →ₐ[k] Λ :=
+    { MvPolynomial.eval₂Hom φ₀.toRingHom tΛ with
+      commutes' := by
+        intro x
+        change MvPolynomial.eval₂Hom φ₀.toRingHom tΛ (MvPolynomial.C (MvPolynomial.C x)) =
+          algebraMap k Λ x
+        simp }
+  let rho : Fin d → R := fun i ↦ E.symm (MvPolynomial.C (uP i) * MvPolynomial.X i)
+  let sr : S →ₐ[k] R := MvPolynomial.aeval rho
+  let rl : R →ₐ[k] Λ := ev.comp E.toAlgHom
+  let sl : S →ₐ[k] Λ := rl.comp sr
+  let algRΛ : Algebra R Λ := rl.toRingHom.toAlgebra
+  let algSR : Algebra S R := sr.toRingHom.toAlgebra
+  let algSΛ : Algebra S Λ := sl.toRingHom.toAlgebra
+  have hkRΛ : IsScalarTower k R Λ := IsScalarTower.of_algHom rl
+  have hkSR : IsScalarTower k S R := IsScalarTower.of_algHom sr
+  have hkSΛ : IsScalarTower k S Λ := IsScalarTower.of_algHom sl
+  have hSRΛ : IsScalarTower S R Λ := IsScalarTower.of_algebraMap_eq fun x ↦ rfl
+  have hrho (i : Fin d) : E (rho i) = MvPolynomial.C (uP i) * MvPolynomial.X i :=
+    E.apply_symm_apply _
+  have hrl (i : Fin d) : algebraMap R Λ (rho i) = φ₀ (uP i) * tΛ i := by
+    change ev (E (rho i)) = _
+    rw [hrho]
+    change (MvPolynomial.eval₂Hom φ₀.toRingHom tΛ)
+      (MvPolynomial.C (uP i) * MvPolynomial.X i) = _
+    rw [map_mul, MvPolynomial.eval₂Hom_C, MvPolynomial.eval₂Hom_X']
+    rfl
+  have hsl (i : Fin d) : algebraMap S Λ (MvPolynomial.X i) = φ₀ (uP i) * tΛ i := by
+    change rl (sr (MvPolynomial.X i)) = _
+    change rl (MvPolynomial.aeval rho (MvPolynomial.X i)) = _
+    rw [MvPolynomial.aeval_X]
+    exact hrl i
+  refine ⟨d + m₀, algRΛ, hkRΛ, algSR, hkSR, algSΛ, hSRΛ, hkSΛ,
+    ell, rho, ?_, ?_, ?_, ?_, ?_, E, uP, tΛ, huP, hspan, htΛ, hrho, ?_, ?_, hcoeff⟩
+  · funext i
+    change rho i = sr (MvPolynomial.X i)
+    exact (MvPolynomial.aeval_X rho i).symm
+  · intro i
+    rw [hsl]
+    exact heq i
+  · intro i
+    rw [hrl]
+    exact q.asIdeal.mul_mem_right _ (huP i)
+  · apply kernel_equiv E.toRingEquiv rho (c * 8)
+    change ∀ (i : Fin d)
+      (x : T ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = E (rho j) ^ (c * 8)}),
+      E (rho i) • x = 0 ↔ E (rho i) ^ 2 • x = 0
+    intro i
+    have hI : Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧
+        y = E (rho j) ^ (c * 8)} =
+        Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧
+          y = (MvPolynomial.C (uP j) * MvPolynomial.X j) ^ (c * 8)} := by
+      congr 1
+      ext y
+      simp only [hrho]
+    rw [hI]
+    intro x
+    simpa only [hrho] using hkernel i x
+  · intro i
+    have hI : Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧
+        y = algebraMap R Λ (rho j) ^ (c * 8)} =
+        Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧
+          y = (φ₀ (uP j) * tΛ j) ^ (c * 8)} := by
+      congr 1
+      ext y
+      simp only [hrl]
+    rw [hI]
+    intro x
+    rw [← IsScalarTower.algebraMap_smul Λ (rho i),
+      ← IsScalarTower.algebraMap_smul Λ (rho i ^ 2), map_pow, hrl]
+    exact hkernelΛ i x
+  · intro z
+    change ev (E (E.symm (MvPolynomial.C z))) = φ₀ z
+    rw [E.apply_symm_apply]
+    exact MvPolynomial.eval₂Hom_C φ₀.toRingHom tΛ z
+  · intro i
+    change ev (E (E.symm (MvPolynomial.X i))) = tΛ i
+    rw [E.apply_symm_apply]
+    exact MvPolynomial.eval₂Hom_X' φ₀.toRingHom tΛ i
+
 
 end Algebra
