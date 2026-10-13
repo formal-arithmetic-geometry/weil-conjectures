@@ -298,7 +298,8 @@ def TraceFormula (G : GeometricOperations A s) {aX : X ⟶ s} [IsGeometric aX]
     [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ)
     [IsProper (W.graph G hW m).snd] : Prop :=
   ∀ [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
-    [∀ x : s ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
+    [∀ x : {x : s ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
+      HasRightDual (((upperStar A x.1).leftDerivedFunctor).obj W.obj)]
     [Fintype {x : s ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x}],
     MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hW m) hW) =
       ∑ x : {x : s ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
@@ -390,18 +391,24 @@ theorem traceFormula_of_isCompl {Ω : Type u} [Field Ω]
     (hU : (W.upperStarPull j hj frobU sqU).TraceFormula G (G.ctf_upperStar j (.mk hj) hW) m)
     (hZ : (W.upperStarPull i hi frobZ sqZ).TraceFormula G (G.ctf_upperStar i (.mk hi) hW) m) :
     W.TraceFormula G hW m := by
-  intro _ _ _
+  intro _ hX _
   have hbij := W.bijective_sumElim_compFixedPoint j i hj hi hcompl frobU frobZ sqU sqZ m
-  have (y : Spec (.of Ω) ⟶ U) :
-      HasRightDual (((upperStar A y).leftDerivedFunctor).obj
+  have (y : {y : Spec (.of Ω) ⟶ U // y ≫ aU = 𝟙 _ ∧
+      y ≫ (W.upperStarPull j hj frobU sqU).frobeniusIterate m = y}) :
+      HasRightDual (((upperStar A y.1).leftDerivedFunctor).obj
         (W.upperStarPull j hj frobU sqU).obj) :=
-    { rightDual := HasRightDual.rightDual (((upperStar A (y ≫ j)).leftDerivedFunctor).obj W.obj)
-      exact := exactPairingCongrLeft ((leftDerivedUpperStarComp A y j).app W.obj).symm }
-  have (z : Spec (.of Ω) ⟶ Z) :
-      HasRightDual (((upperStar A z).leftDerivedFunctor).obj
+    have : HasRightDual (((upperStar A (y.1 ≫ j)).leftDerivedFunctor).obj W.obj) :=
+      hX (W.compFixedPoint j hj frobU sqU m y)
+    { rightDual := HasRightDual.rightDual (((upperStar A (y.1 ≫ j)).leftDerivedFunctor).obj W.obj)
+      exact := exactPairingCongrLeft ((leftDerivedUpperStarComp A y.1 j).app W.obj).symm }
+  have (z : {z : Spec (.of Ω) ⟶ Z // z ≫ aZ = 𝟙 _ ∧
+      z ≫ (W.upperStarPull i hi frobZ sqZ).frobeniusIterate m = z}) :
+      HasRightDual (((upperStar A z.1).leftDerivedFunctor).obj
         (W.upperStarPull i hi frobZ sqZ).obj) :=
-    { rightDual := HasRightDual.rightDual (((upperStar A (z ≫ i)).leftDerivedFunctor).obj W.obj)
-      exact := exactPairingCongrLeft ((leftDerivedUpperStarComp A z i).app W.obj).symm }
+    have : HasRightDual (((upperStar A (z.1 ≫ i)).leftDerivedFunctor).obj W.obj) :=
+      hX (W.compFixedPoint i hi frobZ sqZ m z)
+    { rightDual := HasRightDual.rightDual (((upperStar A (z.1 ≫ i)).leftDerivedFunctor).obj W.obj)
+      exact := exactPairingCongrLeft ((leftDerivedUpperStarComp A z.1 i).app W.obj).symm }
   have := Fintype.ofInjective _ (W.compFixedPoint_injective j hj frobU sqU m)
   have := Fintype.ofInjective _ (W.compFixedPoint_injective i hi frobZ sqZ m)
   rw [trace_globalOperator_eq_trace_add_trace G j i hj hi hcompl W hW frobU frobZ sqU sqZ m, hU,
@@ -418,8 +425,12 @@ theorem traceFormula_of_isCompl {Ω : Type u} [Field Ω]
   refine Fintype.sum_bijective _ hbij _ _ fun y ↦ ?_
   rcases y with y | z
   · simp only [Sum.elim_inl]
+    let : HasRightDual (((upperStar A (y.1 ≫ j)).leftDerivedFunctor).obj W.obj) :=
+      hX (W.compFixedPoint j hj frobU sqU m y)
     exact W.trace_stalkFrobenius_upperStarPull j hj frobU sqU m y.1 y.2.2
   · simp only [Sum.elim_inr]
+    let : HasRightDual (((upperStar A (z.1 ≫ i)).leftDerivedFunctor).obj W.obj) :=
+      hX (W.compFixedPoint i hi frobZ sqZ m z)
     exact W.trace_stalkFrobenius_upperStarPull i hi frobZ sqZ m z.1 z.2.2
 
 end WeilComplex

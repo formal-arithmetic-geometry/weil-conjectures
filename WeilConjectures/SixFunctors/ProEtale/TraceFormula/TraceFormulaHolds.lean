@@ -63,8 +63,14 @@ variable {A} {k : Type u} [Field k] [Finite k]
 
 /-- The trace formula is invariant under isomorphisms of models. -/
 theorem TraceFormulaHolds.of_iso {X₀ X₀' : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)}
-    (e : X₀' ≅ X₀) (h : TraceFormulaHolds A f₀) : TraceFormulaHolds A (e.hom ≫ f₀) :=
-  sorry
+    (e : X₀' ≅ X₀) (h : TraceFormulaHolds A f₀) : TraceFormulaHolds A (e.hom ≫ f₀) := by
+  intro Ω _ _ G X aX _ _ W σ p hΦ hctf m hm _
+  refine h G (σ := σ) (p := p ≫ e.hom) ⟨hΦ.isPullback.of_iso (Iso.refl _) e (Iso.refl _)
+    (Iso.refl _) (by simp) (by simp) (by simp) (by simp), ?_⟩ hctf m hm
+  obtain ⟨F₀, hF, hc⟩ := hΦ.exists_isFrobenius
+  refine ⟨e.inv ≫ F₀ ≫ e.hom, fun R t φ hφ ↦ ?_, by simp [reassoc_of% hc]⟩
+  rw [← Category.assoc t, ← Category.assoc, hF (t ≫ e.inv) φ hφ]
+  simp
 
 /-- Step 1 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace
 formula for finite models `X₀ ⟶ Spec k`. The geometric base change `X` is a finite disjoint union
@@ -88,7 +94,42 @@ formula for closed subschemes of the affine line `𝔸¹_k`. A closed subscheme 
 line itself if `I = 0` (Step 2), and finite over `k` otherwise (Step 1). -/
 theorem traceFormulaHolds_of_isClosedImmersion_affineLine {Z₀ : Scheme.{u}}
     (i : Z₀ ⟶ 𝔸(PUnit.{u + 1}; Spec (.of k))) [IsClosedImmersion i] :
-    TraceFormulaHolds A (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) :=
-  sorry
+    TraceFormulaHolds A (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) := by
+  have := isAffine_of_isAffineHom i
+  obtain hinj | hinj := em (Function.Injective (MvPolynomial.eval₂Hom
+    ((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom
+      fun j ↦ i.appTop (AffineSpace.coord (Spec (.of k)) j)))
+  · rw [AffineSpace.eval₂Hom_appTop_coord, RingHom.coe_comp] at hinj
+    have : IsIso i := IsClosedImmersion.isIso_of_injective_of_isAffine
+      (hinj.of_comp_right (AffineSpace.bijective_eval₂Hom_coord _).2)
+    apply TraceFormulaHolds.of_iso (asIso i)
+    apply traceFormulaHolds_affineLine
+  rw [injective_iff_map_eq_zero] at hinj
+  push Not at hinj
+  obtain ⟨p, hp, hp0⟩ := hinj
+  let := ((Scheme.ΓSpecIso (.of k)).inv ≫
+    (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom.toAlgebra
+  set x := i.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit)
+  have hx : _root_.IsIntegral k x := by
+    refine IsAlgebraic.isIntegral ⟨MvPolynomial.uniqueAlgEquiv k PUnit p, 
+      (map_ne_zero_iff _ (AlgEquiv.injective _)).mpr hp0, ?_⟩
+    rw [Polynomial.aeval_def]
+    exact (MvPolynomial.eval₂_uniqueAlgEquiv (a := fun _ ↦ x)).trans hp
+  have hadj : Algebra.adjoin k {x} = ⊤ := by
+    refine eq_top_iff.mpr fun y _ ↦ ?_
+    obtain ⟨q, rfl⟩ := AffineSpace.surjective_eval₂Hom_appTop_coord i y
+    exact Algebra.adjoin_mono (Set.range_subset_singleton.mpr rfl)
+      ((Algebra.adjoin_range_eq_range_aeval k fun _ : PUnit.{u + 1} ↦ x).ge ⟨q, rfl⟩)
+  have hfin : ((Scheme.ΓSpecIso (.of k)).inv ≫
+      (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom.Finite := by
+    rw [RingHom.Finite, Module.finite_def, ← Algebra.top_toSubmodule, ← hadj]
+    exact hx.fg_adjoin_singleton
+  have : IsFinite (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) := by
+    refine (HasAffineProperty.iff_of_isAffine (P := @IsFinite)).mpr ⟨inferInstance, ?_⟩
+    rw [← (Scheme.ΓSpecIso (.of k)).hom_inv_id_assoc
+      (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop, CommRingCat.hom_comp]
+    exact hfin.comp (RingHom.Finite.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).hom).2)
+  apply traceFormulaHolds_of_isFinite
 
 end AlgebraicGeometry.ProEtale

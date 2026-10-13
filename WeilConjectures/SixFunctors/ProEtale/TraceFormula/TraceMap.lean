@@ -129,7 +129,13 @@ variable [DerivedBraiding A] (G : GeometricOperations A s) {X : Scheme.{u}} {aX 
 /-- Blueprint `def-trf-trace-class`: the *Verdier trace class* `Tr_c(u) : A_F ⟶ ω_F` of an
 endocorrespondence on the fixed scheme `F = Fix(c)`: the mate `ũ : A_C ⟶ H_c(K)` of the
 coefficient map followed by the trace map `𝔱_{c,K}` of external duality, read on `F` through
-the adjunction `Li_F^* ⊣ Ri_{F*}` (`GeometricOperations.verdierTraceClassOf`). -/
+the adjunction `Li_F^* ⊣ Ri_{F*}` (`GeometricOperations.verdierTraceClassOf`).
+
+This is the definition of blueprint `def-trf-trace-class` through the trace map of external
+duality. The trace theorems of the trace formula (proper compatibility, local terms) are stated
+for the pairing form `GeometricOperations.traceClass`, the Lefschetz–Verdier pairing
+`⟨u, 1_K⟩_LV` on the fixed scheme; the comparison of the two, blueprint
+`lem-trf-trace-class-diagonal-pairing`, is not formalised. -/
 noncomputable def verdierTraceClass : G.borelMooreSections c.fixStr :=
   haveI : IsGeometric ((c.fixι ≫ c.fst) ≫ aX) :=
     IsGeometric.of_eq (a := c.fixStr) (by simp [fixStr, c.fst_comp])

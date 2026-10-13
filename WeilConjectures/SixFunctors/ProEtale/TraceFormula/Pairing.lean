@@ -383,7 +383,11 @@ end Pairing
 `F = C ×_{X × X} X` of `Correspondence.isPullback_fixι_toProd` (blueprint:
 `sk-d-trace-class`). It is the construction of the Lefschetz-Verdier pairing `⟨u, 1_K⟩_LV`
 with the fixed scheme `F` in place of the intersection `E(C, X)`; the comparison with
-`supportedPairing` along `F ≅ E(C, X)` is not formalised. -/
+`supportedPairing` along `F ≅ E(C, X)` is not formalised.
+
+All trace theorems of the trace formula use this pairing form. The blueprint defines the trace
+class through the trace map of external duality, `Correspondence.verdierTraceClass`; the
+comparison of the two, blueprint `lem-trf-trace-class-diagonal-pairing`, is not formalised. -/
 noncomputable def traceClass [HasCompactification aX] [s.IsSpecOfField] [QuasiCompact aX]
     (c : Correspondence aX aX K K) [IsGeometric c.str] (hK : G.ctf X K)
     [HasCompactification c.toProd] :

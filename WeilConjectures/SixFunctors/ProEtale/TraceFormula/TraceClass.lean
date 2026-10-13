@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 
 /-!
@@ -41,25 +43,6 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s : Scheme.{u}}
-
-/-- A morphism `f : A ⟶ B` between objects of a full subcategory `P` such that postcomposition
-with `f` is a bijection `Hom(Q, A) ≃ Hom(Q, B)` for every `Q` in `P` is an isomorphism. -/
-lemma _root_.CategoryTheory.ObjectProperty.isIso_of_bijective_comp {D : Type*} [Category D]
-    (P : ObjectProperty D) {X Y : D} (hX : P X) (hY : P Y) (f : X ⟶ Y)
-    (h : ∀ Q, P Q → Function.Bijective fun g : Q ⟶ X ↦ g ≫ f) : IsIso f := by
-  obtain ⟨g, hg⟩ := (h Y hY).2 (𝟙 Y)
-  refine ⟨g, (h X hX).1 ?_, hg⟩
-  simp only [Category.assoc, hg, Category.comp_id, Category.id_comp]
-
-omit [Etale.HasBoundedBelowUpperShrieks A] in
-/-- The internal hom out of isomorphic objects: `RHom(X, Y) ≃ RHom(X', Y)` for `X ≅ X'`. -/
-@[simps]
-noncomputable def ihomIsoOfIsoLeft {D : Type*} [Category D] [MonoidalCategory D]
-    [MonoidalClosed D] {X X' : D} (e : X ≅ X') (Y : D) : (ihom X).obj Y ≅ (ihom X').obj Y where
-  hom := (pre e.inv).app Y
-  inv := (pre e.hom).app Y
-  hom_inv_id := by rw [← NatTrans.comp_app, ← pre_map, e.hom_inv_id, pre_id]; rfl
-  inv_hom_id := by rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id]; rfl
 
 namespace GeometricOperations
 
