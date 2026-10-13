@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tag 0B91 clause (2), Tag 08HY canonical adjunction mate, Tag 0D5S derived composition; extraction of steps 1 and 3 of lem-sc-picard-direct-image-test-sections"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-pc-derived-direct-image",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-picard-derived-model-sections"
+ ],
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-picard-direct-image-section-naturality",
+ "title": "Natural cohomological section comparison under successive base change",
+ "statement": "Fix shared derived-category localizations [def-pc-derived-category]. Let f:X→S be flat proper locally of finite presentation [def-weil-flat-morphism,def-weil-proper-morphism,def-sbc-locally-finite-presentation], let L be invertible [def-sc-invertible-module], and let k:W→S be any scheme morphism. Put E=R(pr_W)_*((pr_X^*L)[0]) on W [def-pc-derived-direct-image,def-pc-base-change,def-pc-module-pullback]. There is a family of additive equivalences q_t:P(E,t)≃Γ(X×_S T,L_T) for all t:T→W, where P and its restriction are [def-sc-picard-derived-model-sections]. For i:T′→T, t′:T′→W and h:i≫t=t′, take any j:X×_S T′→X×_S T whose first projection equals pr_X and whose second projection equals pr_T′≫i. Let c:P_prX′≅P_prX⋙P_j be the inverse mate of the canonical pushforward composition followed by transport along j≫pr_X=pr_X′, using the adjunctions pinned by [lem-pc-module-pullback-adjunction]. Then (c.app L).inv, applied at top after the presheaf restriction from j inverse top to top of the tensor-adjunction unit on q_t(ξ), equals q_t′ of the derived restriction of ξ. There is no assertion about the image of j, no residue point, and no open neighbourhood in this lemma.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The cohomological comparison in steps 1 and 3 of lem-sc-picard-direct-image-test-sections, arising from arbitrary base change in the H1-descent argument",
+   "via": [
+    "lem-sc-picard-direct-image-test-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Use invertibility and flatness of f to see that pr_X^*L is finitely presented and flat over W. Canonical arbitrary base change identifies Lt^*E with the direct image of L_T[0]. Derived pullback of the structure sheaf is the structure sheaf. The canonical derived adjunction, full faithfulness of the single functor, and evaluation on 1 at top give the additive equivalences q_t. Use the derived adjunction obtained from the same tensor adjunction as the canonical base-change map, not an independently chosen adjunction.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-derived-pullback-structure-sheaf-local",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-sc-invertible-module",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection equations determine j by the pullback universal property. The canonical inverse mate of pushforward composition gives c. Naturality of the derived adjunction identifies the transposes after base change; the canonical degree-zero mate square identifies the result with the ordinary tensor adjunction unit. Associativity of the chosen derived composition comparisons identifies the restriction with picardDerivedModelRestriction. Evaluating the equality of module morphisms on the unit at top and restricting j inverse top to top gives the displayed equality. No nonempty fibre is used.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-sc-picard-derived-model-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
+  "place": "Tags 0B91 clause (2), 08HY and 0D5S; cohomological part separated from the geometric residue-fibre argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat base change yields a natural additive equivalence between derived morphisms from the structure sheaf and global sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a proper flat direct image identifies morphisms from the structure sheaf with global sections naturally under base change",
+   "results": "Eight hits: Modules.pullbackPushforwardAdjunction, pullback, pullbackComp, and SheafOfModules.pullbackObjUnitToUnit, among others. No result supplies the chosen derived comparison and its naturality.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "Six hits including unitHomEquiv, its composition and evaluation formulas, and pushforwardSections_unitHomEquiv. These supply evaluation, not the derived base-change comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|range_fst|tensorPullbackCompositionIso",
+   "results": "25 hits including SheafOfModules.unitHomEquiv and Scheme.Pullback.range_fst. Local rg also finds perfect_derivedDirectImage_baseChange, canonicalDegreeZeroMateSquare, and the target, but no complete natural section comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageTestSections",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-direct-image",
+  "def-sc-invertible-module",
+  "def-sc-picard-derived-model-sections",
+  "lem-pc-canonical-degree-zero-mate-square",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-pullback-structure-sheaf-local"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageSectionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageSectionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_direct_image_section_naturality",
+  "statement": "theorem picard_direct_image_section_naturality\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    ∃ q : ∀ {T : Scheme.{v}} (t : T ⟶ W),\n        picardDerivedModelSections E t ≃+\n          Γ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L, ⊤),\n      ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n        (h : i ≫ t = t')\n        (j : pullback f (t' ≫ k) ⟶ pullback f (t ≫ k)),\n        ∀ (hj₁ : j ≫ pullback.fst f (t ≫ k) = pullback.fst f (t' ≫ k)),\n          j ≫ pullback.snd f (t ≫ k) = pullback.snd f (t' ≫ k) ≫ i →\n          let c := (conjugateIsoEquiv\n            ((Classical.choose (Modules.exists_tensorPullbackAdjunction\n              (pullback.fst f (t ≫ k)))).comp\n                (Classical.choose (Modules.exists_tensorPullbackAdjunction j)))\n            (Classical.choose (Modules.exists_tensorPullbackAdjunction\n              (pullback.fst f (t' ≫ k))))).symm\n            (Modules.pushforwardComp j (pullback.fst f (t ≫ k)) ≪≫\n              Modules.pushforwardCongr hj₁)\n          ∀ ξ : picardDerivedModelSections E t,\n            (c.app L).inv.app ⊤\n              (((Modules.tensorPullback j).obj\n                ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L)).presheaf.map\n                  (homOfLE j.preimage_top.ge).op\n                    (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app\n                      ((Modules.tensorPullback (pullback.fst f (t ≫ k))).obj L)).val.app\n                        (Opposite.op ⊤) (q t ξ))) =\n              q t' (picardDerivedModelRestriction E i t t' h ξ)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T111858-L-3054546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

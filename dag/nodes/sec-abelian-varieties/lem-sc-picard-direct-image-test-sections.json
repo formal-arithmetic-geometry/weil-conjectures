@@ -39,53 +39,44 @@
  ],
  "proof": [
   {
-   "text": "Invertible L is finitely presented and is flat relative to the flat f, and this remains true after base change to W. Apply canonical arbitrary base change to E for each t:T→W. Derived pullback of L_W[0] is L_T[0] since L_W is flat. Identify Lt*(O_W[0]) with O_T[0]. Derived adjunction, full faithfulness of the single functor, and evaluation of a module morphism on the unit section give the additive equivalence q_t.",
+   "text": "Obtain the additive equivalences and their successive-base-change naturality from lem-sc-picard-direct-image-section-naturality. This leaves only the residue-fibre geometry and the concrete coefficient comparison to assemble.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-derived-pullback-structure-sheaf-local",
-    "def-pc-derived-direct-image",
-    "def-sc-invertible-module"
+    "lem-sc-picard-direct-image-section-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Factor the residue point through V by the open immersion lift and use the fibre-product universal property to construct j. The residue fibre projection has image exactly the points above w, so j hits all such points. The two maps to X agree; tensor-pullback composition therefore gives e.",
+   "text": "Let i be picardResidueLift and define j by pullback.lift of the first projection and the second projection followed by i. The lift equations give both projection identities. Cancel the right pullback square with IsPullback.of_right to show j is itself a base-change projection. The residue point has image {w}; injectivity of the open immersion gives the neighbourhood point in the image of i. Scheme.Pullback.range_fst and the isomorphism to the chosen pullback now lift every point above w.",
    "uses": [
     "def-sc-picard-derived-model-sections",
     "def-pc-base-change",
-    "def-weil-residue-field",
-    "lem-pc-module-pullback-identity-composition"
+    "def-weil-residue-field"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The canonical mate square identifies restriction of the derived test morphism with the ordinary adjunction unit on q_V(ξ). Its degree-zero computation is the canonical degree-zero mate square. Canonical derived composition is exactly the conjugation used in r; tensor-pullback composition transports the coefficient module by e. Evaluation at top and restriction from j inverse top to top produce the displayed equality.",
+   "text": "Construct the coefficient isomorphism as the inverse component at L of the inverse mate of pushforwardComp followed by pushforwardCongr for the first projection identity, using the pinned tensor adjunctions. Apply the naturality assertion to i, the two base maps, j, and its two projection identities. The supplied equality of the residue lift composite is exactly the one in the target restriction.",
    "uses": [
-    "def-sc-picard-derived-model-sections",
-    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-sc-picard-direct-image-section-naturality",
     "lem-pc-module-pullback-adjunction",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-module-pullback-identity-composition",
+    "def-sc-picard-derived-model-sections"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-base-change",
-  "def-pc-derived-direct-image",
-  "def-sc-invertible-module",
   "def-sc-picard-derived-model-sections",
   "def-weil-residue-field",
-  "lem-pc-canonical-degree-zero-mate-square",
   "lem-pc-module-pullback-adjunction",
   "lem-pc-module-pullback-identity-composition",
-  "lem-pc-rf-perfect-base-change",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-pullback-structure-sheaf-local"
+  "lem-sc-picard-direct-image-section-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Derived Categories of Schemes and Cohomology of Sheaves",
-  "place": "Tags 0B91 and 08HY, arbitrary base change and its adjunction mate; residue-fibre image and Tag 0D5S composition"
+  "document": "Stacks Project and Mathlib scheme pullbacks",
+  "place": "Tags 01IQ, 0096, 0B91 and 08HY; cohomological steps isolated and residue-fibre geometry proved using IsPullback.of_right and Scheme.Pullback.range_fst"
  },
  "mathlib_searches": [
   {
@@ -156,9 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T100121-L-2485300",
-  "kind": "interface"
+  "landing": "20261013T111858-L-3054546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
