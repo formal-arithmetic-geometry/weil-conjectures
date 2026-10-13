@@ -1,0 +1,149 @@
+{
+ "id": "new-finite-normal-dense-etale-stalk-going-down",
+ "kind": "statement",
+ "title": "Stalk going down for a finite normal map with dense etale source open",
+ "statement": "Let X and Y be schemes, Y locally Noetherian, and f : X -> Y finite [def-weil-finite-integral-morphism]. Assume every stalk of X and Y is a domain and integrally closed [def-weil-pbc-normal-ring]. Let V be an open of Y such that its inverse image is dense in X and the restriction of f over V is etale [def-weil-etale-morphism]. Then for each x in X the local ring map O(Y,f(x)) -> O(X,x) has the going-down property: each prime below the contraction of a source prime lifts to a prime below that source prime.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00H8 (going down), 0357 (normal components), 01UA (openness of flat locally finitely presented maps); affine component argument in the proof of the supplied normalization boundary dimension transfer."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to a normal integral affine component of the target around f(x). Finiteness makes its preimage affine and locally Noetherian. Normal components are open and closed, and there are finitely many in this quasi-compact preimage. Its section ring decomposes into their normal domain section rings as in normal_sections_finite_product (Tag 0357).",
+   "uses": [
+    "lem-sbc-normal-sections-finite-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Density of the etale source open ensures that it meets every nonempty source component. The etale morphism on this open is flat and locally finitely presented, hence open (Mathlib AlgebraicGeometry.Morphisms.UniversallyOpen, instance Flat.universallyOpen; Tag 01UA). Its component image is a nonempty open of the integral target component and is dense. Thus the finite map on each component is dominant; the corresponding map of domains is injective and integral.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normal-domain integral going-down instance (Tag 00H8) to each injective component algebra. Given primes in the localized target beneath the contraction of a localized source prime, contract them to the affine rings and apply going down inside the corresponding source prime. The resulting smaller prime is disjoint from the complement of the point prime and survives localization. Extension-contraction of prime ideals identifies its contraction with the prescribed localized target prime. Affine stalk localization isomorphisms transport this HasGoingDown property to f.stalkMap x. Empty source schemes have no points, so this case is vacuous.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normal-sections-finite-product",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-going-down-normal-integral"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J3",
+  "document": "Stacks Project",
+  "place": "Tags 00H8 (going down), 0357 (normal components), 01UA (openness of flat locally finitely presented maps); affine component argument in the proof of the supplied normalization boundary dimension transfer.",
+  "note": "Assembly of normal-component decomposition, etale openness, and domain going down, including localization at source and target primes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite map between locally Noetherian normal schemes that is etale over an open with dense inverse image satisfies going down on stalk maps",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a normal scheme induces going down on stalks and preserves local Krull dimension lower bounds",
+   "results": "Eight normalization construction and integral/dominant morphism hits; no stalk going-down result.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.HasGoingDown, ringKrullDim",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*going[Dd]own|[Gg]oing[Dd]own.*normal|stalk.*[Gg]oing[Dd]own",
+   "results": "No hits via msearch. Direct rg found Mathlib ring going-down instances and generalizing-map API, but no scheme stalk theorem. Whole DAG and blueprint search found no matching node; blueprint_refs search going down returned zero imported blueprint matches.",
+   "date": "2026-10-13",
+   "verdict": "new scheme-level glue needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoTransfer",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit sk-prop-input-spreading, Extension in depth >=2 and the local computation: transfer of boundary local dimension along the finite localized normalization, by going down on normal affine components.",
+   "via": [
+    "new-stalk-normalization-boundary-dimension-two-transfer",
+    "lem-sbc-stalk-normalization-boundary-dimension-two",
+    "lem-sbc-stalk-normalization-formal-boundary-depths",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteNormalDenseEtaleGoingDown.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_normal_dense_etale_stalk_goingDown",
+  "statement": "theorem finite_normal_dense_etale_stalk_goingDown {X Y : Scheme.{u}}\n    [IsLocallyNoetherian Y] (f : X ⟶ Y) [IsFinite f]\n    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧\n      IsIntegrallyClosed (Y.presheaf.stalk y))\n    (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧\n      IsIntegrallyClosed (X.presheaf.stalk x))\n    (V : Y.Opens) (hdense : Dense (↑(f ⁻¹ᵁ V) : Set X))\n    (hetale : Etale (f ∣_ V)) (x : X) :\n    letI := (f.stalkMap x).hom.toAlgebra\n    Algebra.HasGoingDown (Y.presheaf.stalk (f x)) (X.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T151133-L-876935",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T151133-L-876935",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
