@@ -15,28 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Write B = A[[x_1,...,x_d]], I = (x_1,...,x_d), and U = Spec A minus its closed point.\nThe thickenings V_n of U in V have structure sheaves O_V/I^n. Depth at least two\nand Hartogs (0BK0) give Gamma(U,O_U) = A. Each B/I^n is finite free over A, on\nmonomials of degree less than n. Thus lim Gamma(V_n,O_V_n) = B.\nThe map Gamma(V,O_V) to this limit is injective: Krull intersection shows that\na section with zero formal restriction has zero germ at every point of U.\nThe associated primes of B are pB, for associated primes p of A, by the flat\nlocal depth formula. Such p differ from the maximal ideal because depth A is\npositive; pB specializes to pB + I, a point of U. Hence the section vanishes\nat every associated point of V, so it vanishes. The composition from B through\nGamma(V,O_V) to the limit is the canonical isomorphism; both maps are therefore\nisomorphisms. For a finite locally free E on the Noetherian quasi-affine V,\nglobal generation of E dual gives an embedding E into O^r with locally free\ncokernel Q. Embed Q into O^s similarly. The sequence 0 -> E -> O^r -> O^s\nremains exact on every V_n. Sections and inverse limits preserve its kernel,\nso the comparison for O gives Gamma(V,E) = lim Gamma(V_n,E|V_n). Apply this\nto internal Hom bundles to obtain bijectivity of completion on module maps.",
+   "text": "For each n apply finiteEtale_adic_unique_lift to constantCoeff, which is surjective via constant power series, and the given restricted morphism. Choose the uniquely determined lift g_n and retain its over-V and restriction equalities.",
    "uses": [
-    "lem-sbc-depth-two-hartogs-restriction",
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-sbc-finite-etale-adic-unique-lift"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Given a morphism of the restricted finite etale covers on U, formal etaleness\nlifts it uniquely to every V_n, and uniqueness makes these lifts compatible.\nThey give a compatible system of maps on the finite locally free direct-image\nalgebras. Surjectivity of the internal Hom comparison lifts the underlying\nmodule map to V. Injectivity of the comparison for the tensor square of the\nsource algebra and for the unit module verifies multiplication and the unit:\nthe two required equalities already hold on all V_n. The lifted map is thus\nan algebra map. Relative Spec gives a cover morphism restricting to the given\none. This argument also includes empty covers and variable ranks.",
+   "text": "Show coverTransition_n followed by g_(n+1) has the same over-V and zero-section equalities as g_n. The first equality follows from the projection identity, the second from zeroMap_n followed by coverTransition_n = zeroMap_(n+1). Uniqueness of the n-stage lift therefore gives compatibility.",
+   "uses": [
+    "lem-sbc-finite-etale-adic-unique-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply formal Hom algebraization to the compatible family to obtain psi:P -> Q over V matching every g_n.",
+   "uses": [
+    "lem-sbc-power-series-punctured-formal-hom-algebraization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package psi as a morphism of finite étale covers. Compare its pullback with the supplied morphism using the two pullback projections. For the first projection, insert zeroMap_0 followed by coverMap_0 and use the n=0 algebraization and lift equalities. For the second projection use the over-base equality of the supplied morphism. Pullback extensionality and FiniteEtale.hom_ext finish.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-depth-two-hartogs-restriction",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-finite-etale-adic-unique-lift",
+  "lem-sbc-power-series-punctured-formal-hom-algebraization"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G2",
-  "document": "literature/stacks-project/",
-  "place": "Tag 0EY9 (Lemma 58.26.1), with Tags 0BK0, 0EKP and 0EL8"
+  "by": "V2",
+  "document": "Stacks Project",
+  "place": "Tags 0EY9 and 0EL8; explicit compatible finite-stage lifts from 0BQB, followed by algebraization and pullback projection comparison"
  },
  "mathlib_searches": [
   {
@@ -116,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T125446-L-3874904",
+  "landing": "20261013T134402-L-96544",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

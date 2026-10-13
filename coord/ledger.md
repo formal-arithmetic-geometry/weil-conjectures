@@ -12679,3 +12679,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:44 L: merged deliver/K1/Sheaf.AlgebraicGeometry.RelativeMVRestrictionSecond (stage 3; reviewer PASS; first push; landing 20261013T134401-L-96057 (interface); batch 20261013T134357; modules 3; new nodes 2)
 - 13:44 L: merged deliver/K3/Sheaf.AlgebraicGeometry.PicardLeftCechCupHomology (stage 3; reviewer PASS; first push; landing 20261013T134401-L-96226 (interface); batch 20261013T134357; modules 3; new nodes 2)
 - 13:44 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationHomology (stage 3; reviewer PASS; first push; landing 20261013T134402-L-96412 (interface); batch 20261013T134357; modules 2; new nodes 1)
+- 13:44 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionSurjective (stage 3; reviewer PASS; first push; landing 20261013T134402-L-96544 (interface); batch 20261013T134357; modules 3; new nodes 2)

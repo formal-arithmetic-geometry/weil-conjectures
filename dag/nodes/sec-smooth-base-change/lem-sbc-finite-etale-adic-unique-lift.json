@@ -1,0 +1,123 @@
+{
+ "id": "lem-sbc-finite-etale-adic-unique-lift",
+ "kind": "statement",
+ "title": "Unique finite étale morphism lifting to quotient-power thickenings",
+ "statement": "Let $f:R\\to S$ be a surjective homomorphism of commutative rings, $I=\\ker(f)$, $z:\\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)$ the induced morphism, and $V\\subseteq\\operatorname{Spec}(R)$ an open [def-weil-pbc-scheme-conventions]. Let $P,Q$ be finite étale covers of $V$ [def-weil-pbc-finite-etale-category]. Set $U=z^{-1}(V)$. For each $n\\geq0$ put $B_n=R/I^{n+1}$, let $j_n:\\operatorname{Spec}(B_n)\\to\\operatorname{Spec}(R)$ be the quotient immersion, and let $P_n=P\\times_{\\operatorname{Spec}(R)}\\operatorname{Spec}(B_n)$, with projection $p_n:P_n\\to P$. Factoring $f$ through $B_n$ induces $k_n:P\\times_V U\\to P_n$. For every $U$-morphism $\\varphi:P|_U\\to Q|_U$ and every $n$, there is a unique scheme morphism $g_n:P_n\\to Q$ such that $g_n$ is over $V$ and $g_n\\circ k_n=\\operatorname{pr}_Q\\circ\\varphi$. No Noetherian, local-ring or depth hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BQB (Lemma 58.8.3) and 0EL8 (Lemma 58.17.1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Surjectivity identifies S with R/I. The factor Spec S -> Spec(R/I^(n+1)) is a closed immersion with nilpotent ideal I/I^(n+1). Restriction to the preimage of V and pullback by P preserve this finite-order thickening; its source is P restricted to U and its target is P_n.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On affine opens of V, finite morphisms are affine, and Q is represented by a formally étale algebra. The given map on the quotient lifts uniquely through the nilpotent ideal by successive square-zero lifting (equivalently the fully faithful part of Tag 0BQB). This produces a map P_n -> Q over each affine open of V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of the affine lifts makes their restrictions agree on every overlap, after covering the overlap by affine opens. Glue the scheme morphisms. Their being over V and their restriction equality are local equalities. The same affine uniqueness proves global uniqueness. Empty opens and empty covers are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "V2",
+  "document": "Stacks Project",
+  "place": "Tags 0BQB (Lemma 58.8.3) and 0EL8 (Lemma 58.17.1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite etale morphism lifts uniquely through every nilpotent closed immersion",
+   "results": "Internal Server Error; search unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale cover morphisms lift uniquely across nilpotent closed immersions and formal completions",
+   "results": "8 results: IsEtale.of_comp, IsEtale.instFormallyUnramified, and StandardEtalePair lift/hom lemmas; no scheme-level unique lift",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale",
+   "results": "12 results including the class and Algebra.Etale.formallyEtale; ring-level formal étaleness does not supply the global scheme lift",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtale.*pullback|nilpotent.*[Ff]ull|completion.*[Ff]ull",
+   "results": "0 matches in the prescribed Mathlib/upstream search",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionSurjective",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the nilpotent lifting step within the use of Tag 0EY9; original surjectivity node proof step 2 before algebraization.",
+   "via": [
+    "lem-sbc-power-series-punctured-section-surjective",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat",
+    "lem-sbc-power-series-punctured-section-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleAdicUniqueLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_adic_unique_lift",
+  "statement": "theorem finiteEtale_adic_unique_lift\n    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)\n    (hf : Function.Surjective f) (V : (Spec (.of R)).Opens)\n    (P Q : V.toScheme.FiniteEtale)\n    (φ : (FiniteEtale.pullback ((Spec.map (CommRingCat.ofHom f)) ∣_ V)).obj P ⟶\n      (FiniteEtale.pullback ((Spec.map (CommRingCat.ofHom f)) ∣_ V)).obj Q)\n    (n : ℕ) :\n    ∃! g : FiniteEtale.Adic.cover f V P n ⟶ Q.obj.left,\n      g ≫ Q.obj.hom = FiniteEtale.Adic.coverMap f V P n ≫ P.obj.hom ∧\n      FiniteEtale.Adic.zeroMap f V P n ≫ g =\n        φ.hom.left ≫ pullback.fst Q.obj.hom\n          ((Spec.map (CommRingCat.ofHom f)) ∣_ V)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T134402-L-96544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T134402-L-96544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

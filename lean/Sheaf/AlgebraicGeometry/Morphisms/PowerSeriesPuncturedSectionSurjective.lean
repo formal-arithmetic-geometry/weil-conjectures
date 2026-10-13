@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Sheaf.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalHomAlgebraization
 
 /-!
 # Surjectivity of restriction on the punctured power-series section
@@ -69,6 +68,37 @@ theorem finiteEtale_powerSeries_punctured_section_restriction_surjective
     let z := Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))
     ∀ P Q : V.toScheme.FiniteEtale,
       Function.Surjective ((FiniteEtale.pullback (z ∣_ V)).map (X := P) (Y := Q)) := by
-  sorry
+  classical
+  dsimp only
+  intro P Q φ
+  let f := MvPowerSeries.constantCoeff (σ := Fin d) (R := A)
+  have hf : Function.Surjective f := by
+    intro a
+    exact ⟨MvPowerSeries.C (σ := Fin d) a, by simp [f]⟩
+  have hlift (n : ℕ) := finiteEtale_adic_unique_lift f hf V P Q φ n
+  choose g hg huniq using hlift
+  have hcompat (n : ℕ) :
+      FiniteEtale.Adic.coverTransition f V P n ≫ g (n + 1) = g n := by
+    apply huniq n
+    constructor
+    · rw [Category.assoc, (hg (n + 1)).1, ← Category.assoc,
+        FiniteEtale.Adic.coverTransition_coverMap]
+    · rw [← Category.assoc, FiniteEtale.Adic.zeroMap_coverTransition, (hg (n + 1)).2]
+  obtain ⟨ψ, hψ, hformal⟩ :=
+    finiteEtale_powerSeries_punctured_formal_hom_algebraization
+      A hdepth d hd V hV P Q g (fun n ↦ (hg n).1) hcompat
+  let Ψ : P ⟶ Q := ObjectProperty.homMk (MorphismProperty.Over.homMk ψ hψ)
+  refine ⟨Ψ, ?_⟩
+  apply FiniteEtale.hom_ext
+  apply CategoryTheory.Limits.pullback.hom_ext
+  · simp only [FiniteEtale.pullback_map_hom_left,
+      CategoryTheory.Limits.pullback.lift_fst]
+    change CategoryTheory.Limits.pullback.fst _ _ ≫ ψ = _
+    rw [← FiniteEtale.Adic.zeroMap_coverMap f V P 0, Category.assoc, hformal 0]
+    exact (hg 0).2
+  · simpa only [FiniteEtale.pullback_map_hom_left,
+      CategoryTheory.Limits.pullback.lift_snd, Category.comp_id,
+      FiniteEtale.pullback_obj_obj_hom] using
+        (FiniteEtale.hom_left_comp φ).symm
 
 end AlgebraicGeometry.Scheme

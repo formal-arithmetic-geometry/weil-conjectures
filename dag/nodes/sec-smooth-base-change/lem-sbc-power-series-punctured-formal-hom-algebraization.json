@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-power-series-punctured-formal-hom-algebraization",
+ "kind": "statement",
+ "title": "Algebraization of compatible formal morphisms on a punctured power-series open",
+ "statement": "Let $A$ be a Noetherian local ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], $d>0$, $B=A[[x_1,\\ldots,x_d]]$ [def-weil-pbc-multivariate-power-series], $f:B\\to A$ the constant-coefficient map, $I=\\ker(f)$, and $z:\\operatorname{Spec}(A)\\to\\operatorname{Spec}(B)$ the zero section. Let $V\\subseteq\\operatorname{Spec}(B)$ be open with $z^{-1}(V)=\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m_A\\}$ [def-weil-pbc-scheme-conventions]. Let $P,Q$ be finite étale covers of $V$ [def-weil-pbc-finite-etale-category]. For $n\\geq0$ put $P_n=P\\times_{\\operatorname{Spec}(B)}\\operatorname{Spec}(B/I^{n+1})$ and write $p_n:P_n\\to P$ for the projection. The quotient maps induce $t_n:P_n\\to P_{n+1}$. Suppose a family of scheme morphisms $g_n:P_n\\to Q$ is over $V$ and satisfies $g_{n+1}\\circ t_n=g_n$ for every $n$. Then there is a morphism $\\psi:P\\to Q$ over $V$ such that $\\psi\\circ p_n=g_n$ for every $n$. A compatible family on every thickening is an input; no map on the zero section is an input.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EY9 (Lemma 58.26.1), 0BK0, 0EKP (Lemma 52.15.1), and 0EL8 (Lemma 58.17.1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Write B = A[[x_1,...,x_d]], I = (x_1,...,x_d), and U = Spec A minus its closed point.\nThe thickenings V_n of U in V have structure sheaves O_V/I^n. Depth at least two\nand Hartogs (0BK0) give Gamma(U,O_U) = A. Each B/I^n is finite free over A, on\nmonomials of degree less than n. Thus lim Gamma(V_n,O_V_n) = B.\nThe map Gamma(V,O_V) to this limit is injective: Krull intersection shows that\na section with zero formal restriction has zero germ at every point of U.\nThe associated primes of B are pB, for associated primes p of A, by the flat\nlocal depth formula. Such p differ from the maximal ideal because depth A is\npositive; pB specializes to pB + I, a point of U. Hence the section vanishes\nat every associated point of V, so it vanishes. The composition from B through\nGamma(V,O_V) to the limit is the canonical isomorphism; both maps are therefore\nisomorphisms. For a finite locally free E on the Noetherian quasi-affine V,\nglobal generation of E dual gives an embedding E into O^r with locally free\ncokernel Q. Embed Q into O^s similarly. The sequence 0 -> E -> O^r -> O^s\nremains exact on every V_n. Sections and inverse limits preserve its kernel,\nso the comparison for O gives Gamma(V,E) = lim Gamma(V_n,E|V_n). Apply this\nto internal Hom bundles to obtain bijectivity of completion on module maps.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n, finiteness makes P_n and Q finite affine over the thickening of V. The V-morphism g_n gives a map from the finite locally free direct-image algebra of Q to that of P after quotient by I^(n+1). Compatibility gives a formal map of these algebras. The internal Hom completion comparison from the preceding step lifts its underlying module map to V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication and unit are equalities between module maps out of the tensor square of the source algebra and the unit module. Both hold on every thickening. Injectivity of the corresponding Hom completion comparisons proves them on V. Relative Spec therefore gives a scheme morphism psi:P -> Q over V, whose restriction to each P_n is g_n. This step uses no lifting from the zero section.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-hartogs-restriction",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "V2",
+  "document": "Stacks Project",
+  "place": "Tags 0EY9 (Lemma 58.26.1), 0BK0, 0EKP (Lemma 52.15.1), and 0EL8 (Lemma 58.17.1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion is fully faithful on finite locally free modules on a quasi affine scheme when global sections equal the inverse limit of sections on thickenings",
+   "results": "Internal Server Error; search unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible morphisms between finite locally free algebras on all infinitesimal thickenings algebraize on a quasi affine scheme with complete global sections",
+   "results": "8 hits, on formally unramified maps and affine morphism properties; no completion Hom comparison or formal morphism algebraization",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Hh]om|[Hh]om.*completion|adic.*lift",
+   "results": "25 hits on number-field/topological completions and p-adic lifts; none on formal coherent-module Hom comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionSurjective",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: completion full faithfulness within Tag 0EY9; original surjectivity node proof step 1 and the module-map/algebra-map part of step 2.",
+   "via": [
+    "lem-sbc-power-series-punctured-section-surjective",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat",
+    "lem-sbc-power-series-punctured-section-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalHomAlgebraization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedFormalHomAlgebraization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_powerSeries_punctured_formal_hom_algebraization",
+  "statement": "theorem finiteEtale_powerSeries_punctured_formal_hom_algebraization\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (P Q : V.toScheme.FiniteEtale)\n    (g : ∀ n : ℕ, FiniteEtale.Adic.cover\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n ⟶ Q.obj.left)\n    (hover : ∀ n, g n ≫ Q.obj.hom = FiniteEtale.Adic.coverMap\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n ≫ P.obj.hom)\n    (hcompat : ∀ n, FiniteEtale.Adic.coverTransition\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n ≫ g (n + 1) = g n) :\n    ∃ φ : P.obj.left ⟶ Q.obj.left, φ ≫ Q.obj.hom = P.obj.hom ∧\n      ∀ n, FiniteEtale.Adic.coverMap\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V P n ≫ φ = g n",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T134402-L-96544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T134402-L-96544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
