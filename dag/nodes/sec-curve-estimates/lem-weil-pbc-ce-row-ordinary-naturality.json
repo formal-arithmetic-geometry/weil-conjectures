@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-ce-row-ordinary-naturality",
+ "kind": "statement",
+ "title": "Ordinary cohomology comparison on arbitrary augmented injective rows",
+ "statement": "Let $f:Y\\to X$ be a scheme morphism [def-weil-pbc-scheme-conventions], $G,G\\prime$ abelian etale sheaves on $X,Y$ [def-weil-pbc-etale-sheaves], $R,R\\prime$ nonnegative injective resolutions [def-sp-injective-resolutions], and $v:f^*G\\to G\\prime$ [def-weil-pbc-inverse-image]. A row comparison $\\phi:f^*R\\to R\\prime$ intertwines the degree-zero augmentations with $v$. Apply the global-sections pullback unit degreewise and then $\\phi$ to form ceRowSectionsMap [lem-weil-pbc-ce-total-sections-comparison]. For each $p\\in\\mathbb N$, the isomorphism ceRowOrdinaryIso from homology of sections of the row to $H^p(X,G)$ is explicitly the inverse of Ext/resolution evaluation at 1, transported through extension by zero [def-weil-pbc-ext-resolution-sections-iso]. Its square with the homology map of ceRowSectionsMap and the composite $H^p(v)\\circ\\mathrm{cohomologyMap}(f,G,p)$ [def-weil-pbc-cohomology-pullback] commutes. The construction cePresentationRow packages the actual terms and augmentation of a given CE presentation, without choosing data.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 012K, 06XR and 01F8; ordinary Ext comparison in step 3 of lem-weil-pbc-ce-normalized-representative-cohomology"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Extend the two nonnegative injective rows and their comparison by zero. The canonical map-extend comparison identifies the resulting sections map with the extension of ceRowSectionsMap. Compute Ext pullback on a cocycle from the constant integer sheaf, then compose with the coefficient map. The augmentation equation identifies this with the cocycle of the supplied row comparison: compare with the chosen resolution of the pulled-back sheaf, use injectivity of the target to lift the coefficient map, and use uniqueness of augmentation-compatible comparisons up to homotopy. This uses no injectivity of the pulled-back row.",
+   "uses": [
+    "lem-weil-pbc-ext-pullback-resolution-sections",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at 1 commutes with inverse image via the constant-sheaf transpose and with postcomposition via the adjunction. It therefore identifies the Ext cocycle map with the sections row map. Coboundaries map to coboundaries. Descend to homology and transport through mapExtendIso and extendHomologyIso; expand the explicit ceRowOrdinaryIso. The square holds in degree zero as well, and for zero sheaves and empty schemes.",
+   "uses": [
+    "def-weil-pbc-ext-resolution-sections-iso",
+    "lem-weil-pbc-constant-sheaf-pullback-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-weil-pbc-constant-sheaf-pullback-transpose",
+  "lem-weil-pbc-ext-pullback-resolution-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tags 015J, 015K, 012K, 06XR and 01F8; ordinary Ext comparison in step 3 of lem-weil-pbc-ce-normalized-representative-cohomology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg normalized pages row homology naturality of ordinary sheaf cohomology injective resolution",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Ext cohomology comparison with homology of global sections of arbitrary injective resolutions under scheme pullback and coefficient map",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "verdict": "No exact match. The existing resolution and homology comparisons are tools, but do not give this CE row representative statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match. The existing resolution and homology comparisons are tools, but do not give this CE row representative statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ext.*mapExactFunctor.*cocycle|extAddEquivCohomologyClass.*naturality",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match. The existing resolution and homology comparisons are tools, but do not give this CE row representative statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections homology computes Ext with constant integers independently of an injective resolution and comparison chain map",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extMk; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass; CategoryTheory.InjectiveResolution.extMk_surjective; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass",
+   "verdict": "Second reading: these are component tools, not the scheme-pullback or signed CE compatibility statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCENormalizedRepresentativeCohomology",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercohomology-uniform-bound",
+   "place": "Tags 015J, 015K, 012K, 06XR and 01F8; ordinary Ext comparison in step 3 of lem-weil-pbc-ce-normalized-representative-cohomology",
+   "via": [
+    "lem-weil-pbc-ce-normalized-representative-cohomology",
+    "lem-weil-pbc-ce-prescribed-normalized-first-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCERowOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/EtaleCERowOrdinaryComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.ceRowOrdinaryIso_naturality",
+  "statement": "theorem ceRowOrdinaryIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n    (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})\n    (R : InjectiveResolution G) (R' : InjectiveResolution G')\n    (v : (upperStar AddCommGrpCat.{uNatural + 1} f).obj G ⟶ G')\n    (φ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj R.cocomplex ⟶ R'.cocomplex)\n    (hφ : (upperStar AddCommGrpCat.{uNatural + 1} f).map\n        ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 G).inv ≫ R.ι.f 0) ≫\n          φ.f 0 =\n      v ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 G').inv ≫ R'.ι.f 0)\n    (p : ℕ) :\n    HomologicalComplex.homologyMap (ceRowSectionsMap f φ) p ≫\n        (ceRowOrdinaryIso Y G' R' p).hom =\n      (ceRowOrdinaryIso X G R p).hom ≫\n        AddCommGrpCat.ofHom ((Sheaf.H.map v p).comp (cohomologyMap f G p))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-51c15",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T134102-L-72090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-51c15",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T134102-L-72090",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and proof dependencies with all three node records; verified unchanged existing interface, concrete definitions, expected axioms, clean compilation of all delivered modules and the sole direct importer Sheaf.Paper.EtaleCEPrescribedNormalizedFirstPages."
+ }
+}

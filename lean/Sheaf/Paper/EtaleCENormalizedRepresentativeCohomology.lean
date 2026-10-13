@@ -5,8 +5,9 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.Paper.EtaleCEStationaryPageNaturality
+public import Sheaf.Paper.EtaleCETotalSections
 public import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import Sheaf.Paper.EtaleCENormalizedRowRepresentatives
 
 /-! # Normalized CE cohomology on representatives
 
@@ -20,6 +21,8 @@ universe uNatural
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Prescribed normalized CE presentations compute pullback on individual cycle
@@ -159,6 +162,43 @@ theorem exists_etaleCE_normalized_representative_cohomology
                 (cohomologyMap f (K.obj.X q) p)) =
           z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫
             (j Y L 1 (by omega)).inv.f (q, (p : ℤ)) ≫
-              (D'.firstPageIso p q).hom := by sorry
+              (D'.firstPageIso p q).hom := by
+  classical
+  obtain ⟨P, δ, j, e, hI, hn, he, hc⟩ :=
+    exists_etaleCE_normalized_row_representatives I a hbelow hrows hterms hhorizontal hquasi
+  refine ⟨P, δ, j, hI, hn, ?_⟩
+  intro X Y f K L v D D' φ hφ u hu b A p q x y z z' hxy hz hz'
+  have hrow := ceRowOrdinaryIso_naturality f (K.obj.X q) (L.obj.X q)
+    (cePresentationRow D q) (cePresentationRow D' q) (v.f q) (φ.f q) (hφ q) p
+  have hrep := hc f K L v φ hφ u hu A p q x y z z' hxy hz hz'
+  have hsrc := he X K p q
+  have htgt := he Y L p q
+  calc
+    _ = (z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫
+        (e X K p q).hom) ≫ (ceRowOrdinaryIso X (K.obj.X q)
+          (cePresentationRow D q) p).hom ≫
+        AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
+          (cohomologyMap f (K.obj.X q) p)) := by
+      with_unfolding_all
+        simpa only [Category.assoc] using congrArg
+          (fun t ↦ z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫ t ≫
+            AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
+              (cohomologyMap f (K.obj.X q) p))) hsrc
+    _ = (z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫
+        (e X K p q).hom) ≫ HomologicalComplex.homologyMap
+          (ceRowSectionsMap f (φ.f q)) p ≫
+        (ceRowOrdinaryIso Y (L.obj.X q) (cePresentationRow D' q) p).hom := by
+      rw [hrow]
+    _ = (z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫
+        (e Y L p q).hom) ≫
+        (ceRowOrdinaryIso Y (L.obj.X q) (cePresentationRow D' q) p).hom := by
+      with_unfolding_all
+        simpa only [Category.assoc] using congrArg
+          (fun t ↦ t ≫ (ceRowOrdinaryIso Y (L.obj.X q) (cePresentationRow D' q) p).hom) hrep
+    _ = _ := by
+      with_unfolding_all
+        simpa only [Category.assoc] using (congrArg
+          (fun t ↦ z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫ t)
+          htgt).symm
 
 end AlgebraicGeometry.Etale
