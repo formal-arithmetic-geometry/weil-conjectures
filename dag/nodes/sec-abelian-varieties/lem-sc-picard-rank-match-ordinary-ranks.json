@@ -16,33 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Apply R to the identity of T. Use identity and composition of tensor pullbacks and the isomorphism of fibre products induced by id_T followed by g=g to identify its first two rank tests with restrictions of M. Fixed-rank local frames on these neighbourhoods give finite local freeness of M.",
+   "text": "Apply universal rank matching to any h:Tprime to T and choose the E or dual direct-image rank witness according to hF. Tensor pullback along an open inclusion is isomorphic to Mathlib pullback by uniqueness of left adjoints. The neighbourhoods cover Tprime, so finite local freeness descends by Modules.isFiniteLocallyFree_of_isOpenImmersion. Taking h=id gives finite local freeness of M.",
    "uses": [
     "def-sc-picard-universal-rank-match",
+    "def-amb-finite-locally-free-module",
     "lem-pc-module-pullback-identity-composition"
    ],
    "elementary": false
   },
   {
-   "text": "At s retain an identity-test neighbourhood V and rank r. Separate its empty-fibre and nonempty-fibre parts. The empty-fibre locus is clopen by properness and flat finite presentation; on that part all direct images after further base change are zero, so choose rank zero.",
-   "uses": [
-    "lem-sc-picard-fiber-rank-clopen"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On the nonempty-fibre part apply R after every k:Y to V at each y. The third rank tests have ranks r and n on the same pulled-back E. A point of the fibre after a common residue-field extension makes the local ring nonzero, and comparison of the two finite free frames gives r=n. Equivalently the existing stalk-finrank comparison supplies this rank equality for the ordinary source and target. The dual frames have the same rank. This gives rank r on each test neighbourhood.",
+   "text": "At s retain the identity-test neighbourhood U and its rank r for the appropriate direct image. For k:Y to U, pullback preserves rank r and tensor-pullback composition identifies its pullback with P=(k followed by U inclusion)^*M. Associativity of the pullback squares and equivalence along the canonical fibre-product isomorphism identify Q, the iterated ordinary image, with the composite direct image. The preceding local argument makes Q finite locally free.",
    "uses": [
     "def-sc-picard-universal-rank-match",
-    "lem-sc-picard-base-change-stalk-finrank-eq",
-    "lem-sc-finite-locally-free-stalk-finrank"
+    "def-amb-finite-locally-free-module",
+    "lem-pc-module-pullback-identity-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical isomorphism from the iterated fibre product to X times_S Y and tensor-pullback composition identify its direct image with the further test in R. Transport the local rank-r frames and glue using locality of fixed-rank finite local freeness. Empty Y is vacuous and zero rank uses empty frames.",
+   "text": "The existing Picard stalk-finrank comparison gives finrank Q_y=finrank P_y=r at every y. To conclude fixed rank r for Q, choose any finite local frame near y with index I. Open restriction preserves stalk finrank: the restriction-stalk additive isomorphism is semilinear over the inverse structure-ring stalk isomorphism, as checked on germs; Mathlib rank_eq_of_equiv_equiv preserves its rank. The fixed-rank stalk theorem applied to the restricted frame gives card I=r. Reindex each frame by Fin r and glue with isFiniteLocallyFreeOfRank_of_restrict_iso_free. Empty Y is handled by the empty covering, and r=0 by the empty frame.",
    "uses": [
-    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-picard-base-change-stalk-finrank-eq",
+    "lem-sc-finite-locally-free-stalk-finrank",
     "def-amb-finite-locally-free-module"
    ],
    "elementary": false
@@ -53,14 +48,13 @@
   "def-sc-picard-universal-rank-match",
   "lem-pc-module-pullback-identity-composition",
   "lem-sc-finite-locally-free-stalk-finrank",
-  "lem-sc-picard-base-change-stalk-finrank-eq",
-  "lem-sc-picard-fiber-rank-clopen"
+  "lem-sc-picard-base-change-stalk-finrank-eq"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "steps 1 and 2: identity tests, nonempty-fibre rank propagation, and iterated ordinary images",
-  "note": "B3 expands the indicated step of the existing truncation-data argument."
+  "place": "ordinary direct-image fixed-rank reduction in the first three proof paragraphs",
+  "note": "T1: use existing stalk-finrank equality; finite local freeness, iterated-image transport, restriction finrank, and constant-rank gluing are proved directly in Lean. No canonical base-change isomorphism is assumed."
  },
  "mathlib_searches": [
   {
@@ -170,9 +164,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T062516-L-731308",
-  "kind": "interface"
+  "landing": "20261013T072406-L-1125223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
