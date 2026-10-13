@@ -13,24 +13,33 @@
  },
  "proof": [
   {
-   "text": "Lift each conormal entry to I. The Koszul complex on the resulting tuple has free terms. Lift its quotient augmentation to a projective resolution degree by degree using projectivity and exactness (Tag 00LS). After tensoring by A/I its differentials vanish, so the standard wedge defines a cycle.",
+   "text": "Use the exterior basis of the finite free module to make every Koszul term projective. The boundary_wedge contraction formula shows the degree-zero quotient augmentation kills the first differential, since every entry lies in I. Projective.factorThru lifts degree zero; P.exact₀.liftFromProjective lifts degree one. ChainComplex.mkHom constructs successive lifts through P.exact_succ: the preceding square and d_comp_d show each composite is in the required kernel.",
+   "uses": [
+    "new-q2-koszul-generator-chain-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the quotient tensor complex, prove each differential is zero. On pure wedges, boundary_wedge expresses it as a sum whose coefficients are ideal elements; move each coefficient to the A/I tensor factor and reduce it to zero. Extend by span induction. Off the complex shape the differential is zero. The inverse of iCyclesIso provides the cycle representing the standard top wedge, including degree zero.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Apply both normalization hypotheses to the same tuple, lift and cycle, and cancel the resolution isomorphism. Pure wedges span over A/I; surjectivity of A -> A/I converts their scalar multiples into A-scalar multiples, on which A-linearity propagates equality. Degree zero uses the empty tuple and its unit wedge.",
+   "text": "Lift any tuple of conormal elements using toCotangent_surjective. Apply the two normalization hypotheses with this tuple, the same resolution lift and the standard basis vectors; their images under isoLeftDerivedObj coincide, so injectivity gives equality on the pure wedge. Pure wedges span by exteriorPower.ιMulti_span. Span induction extends equality through zero and addition; for an A/I scalar choose a representative in A and use A-linearity. This gives equality of ModuleCat morphisms.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-q2-koszul-generator-chain-map"
+ ],
  "proof_origin": {
   "by": "worker",
-  "agent": "V4",
+  "agent": "C4",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/00LS",
-   "place": "comparison of free complexes with resolutions, followed by exterior generation"
+   "place": "comparison of free complexes with resolutions, followed by exterior generation; contraction formula from new-q2-koszul-generator-chain-map"
   }
  },
  "mathlib_searches": [
@@ -105,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c10b9",
-  "group": "V4",
+  "reviewer": "COMPILER",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T201812-L-3978170",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered modules and both direct importers compile cleanly; target theorem statement is unchanged, moved declarations retain identical signatures/bodies, proofs and DAG/report/change record agree, and only allowed sorryAx remains in the two named intermediate theorem statements."
+  "landing": "20261013T215558-L-895423",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
