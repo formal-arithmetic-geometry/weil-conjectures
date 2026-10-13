@@ -329,6 +329,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorPullback
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.DepthTwo
