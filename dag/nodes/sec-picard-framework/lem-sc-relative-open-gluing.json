@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-relative-open-gluing",
+ "kind": "statement",
+ "title": "Derived gluing over a relative two-open union",
+ "statement": "Let X be a scheme [def-pc-scheme], W and V opens of X, and Y = W union V. Fix derived categories [def-pc-derived-category] with common Hom universe w on X, W, V, W intersect V and Y. Let A be an object of D(O_W), B an object of D(O_V), and E an object of D(O_X), with no perfectness or support conditions. Write L, JW and JV for direct derived restriction from X to Y, W and V, and PW, PV, SW and SV for relative derived restrictions from Y to W and V and from W and V to W intersect V [def-pc-derived-open-restriction-maps]. Let kW : L followed by PW isomorphic to JW, kV : L followed by PV isomorphic to JV, sW : JW followed by SW isomorphic to restriction to W intersect V, and sV : JV followed by SV isomorphic to that same restriction be the canonical comparisons of that definition. For an isomorphism c : SW(A) isomorphic to SV(B), and maps a : A to JW(E), b : B to JV(E), suppose SW(a) followed by sW(E) equals c followed by SV(b) followed by sV(E). Then there exist F in D(O_Y), alpha : F to L(E), and isomorphisms iW : PW(F) isomorphic to A, iV : PV(F) isomorphic to B such that PW(alpha) followed by kW(E) equals iW followed by a and PV(alpha) followed by kV(E) equals iV followed by b. No quasi-compactness, closed support, boundedness or nonemptiness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "cohomology.tex, lemma-glue, applied to Y = W union V with canonical restriction transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Set Y = W union V and pull W and V back along Y.ι to opens U and Z of Y. They cover Y. Their open subschemes, and their intersection, are canonically isomorphic to W, V and W intersect V. Supply any additional fixed-Hom-universe localizations by lem-pc-open-derived-localization-adjunction and its derived-open-localization prerequisite, and transport A, B and c along the exact module equivalences for these isomorphisms. The canonical overMapCompOverEquiv, overFunctorEquiv and restrictFunctorComp comparisons descend to derived categories; their naturality identifies the restrictions of L(E) with JW(E) and JV(E) and their further restrictions with the same overlap object. Unit/counit identities identify the transported compatibility equation with the equation involving sW and sV.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe",
+    "lem-pc-open-derived-localization-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sc-derived-open-gluing on Y to these two covering opens, the transported local objects and overlap isomorphism, target L(E), and transported compatible maps. Obtain F, alpha and its two local identifications. Transport the identifications back along the derived equivalences, and compose the equations with kW and kV. Naturality gives the two displayed relative restriction equations. Empty opens and empty Y satisfy the same construction because the pulled-back opens still cover.",
+   "uses": [
+    "lem-sc-derived-open-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-sc-derived-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "cohomology.tex, lemma-glue; ambient relative functor transport written explicitly by A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing derived complexes on two open subsets and local perfectness",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData; no theorem with the relative derived gluing interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overMap",
+   "results": "8 hits: SheafOfModules.overMap, SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks, SheafOfModules.overMapPushforwardAdj, SheafOfModules.overMapUnitIso, SheafOfModules.overFunctorMap, SheafOfModules.overMapUnitIso_hom_val_app_hom_apply, SheafOfModules.overMapUnitIso_inv_val_app_hom_apply, AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv; no theorem with the relative derived gluing interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_open_gluing|overMapCompOverEquiv",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; no theorem with the relative derived gluing interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue derived objects and compatible maps on the union of two open subsets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedRelativeOpenGluing",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing of supported perfect objects: isolate the underlying gluing and compatible morphism construction",
+   "via": [
+    "lem-sc-supported-relative-open-gluing",
+    "lem-sc-supported-map-affine-union-gluing",
+    "lem-sc-supported-map-affine-attachment",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeOpenGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeOpenGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_relative_open_gluing",
+  "statement": "theorem exists_relative_open_gluing\n    (X : Scheme.{u}) (W V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]\n    (A : schemeDerivedCategory W.toScheme) (B : schemeDerivedCategory V.toScheme) :\n    let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let PW := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory\n    let PV := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)\n    let sW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let sV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    ∀ (c : SW.obj A ≅ SV.obj B) (E : schemeDerivedCategory X)\n      (a : A ⟶ JW.obj E) (b : B ⟶ JV.obj E),\n      SW.map a ≫ sW.hom.app E = c.hom ≫ SV.map b ≫ sV.hom.app E →\n      ∃ (F : schemeDerivedCategory (W ⊔ V).toScheme) (α : F ⟶ L.obj E),\n        ∃ (iW : PW.obj F ≅ A) (iV : PV.obj F ≅ B),\n          PW.map α ≫ kW.hom.app E = iW.hom ≫ a ∧\n          PV.map α ≫ kV.hom.app E = iV.hom ≫ b",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-757b3",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T065057-L-896205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-757b3",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T065057-L-896205",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with both node statements, proof records and Stacks 08DG/08CM; compiled both modules and SupportedMapAffineUnionGluing; verified axioms."
+ }
+}

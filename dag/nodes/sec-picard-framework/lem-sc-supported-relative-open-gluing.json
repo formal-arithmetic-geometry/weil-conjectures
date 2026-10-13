@@ -15,30 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Pull W and V back to opens of Y. They cover Y and their open subschemes and intersection are canonically isomorphic to W,V,W intersect V. The exact module over-equivalences and restriction composition comparisons transport A,B,c,E,a,b and the compatibility equation to these opens of Y. Obtain any needed fixed-universe localizations by [lem-pc-open-derived-localization-adjunction]. Apply [lem-sc-derived-open-gluing] on Y to obtain the glued object, local identifications and morphism. Transport them back to PW and PV to obtain the two stated equations.",
+   "text": "Apply lem-sc-relative-open-gluing to A, B, c, E, a, b and the given compatibility equation. Obtain F, alpha, iW and iV and both map equations, without any assertion of perfectness or support.",
    "uses": [
-    "lem-pc-open-derived-localization-adjunction",
-    "lem-sc-derived-open-gluing"
+    "lem-sc-relative-open-gluing"
    ],
    "elementary": false
   },
   {
-   "text": "At a point of Y choose W or V containing it. Transport a strictly perfect neighbourhood model of A or B through the corresponding open-scheme equivalence and the gluing isomorphism. Restricting its neighbourhood and preserving boundedness and finite-free retracts yields a model of F, hence perfectness by [def-pc-perfect-complex]. Exact restriction/homology and the restriction stalk isomorphism identify each homology stalk of F with that of A or B. Off T it is zero by the corresponding hypothesis. Empty members and empty Y obey the same covering argument.",
+   "text": "Compare each relative exact restriction with restriction along the open immersion X.homOfLE using Modules.overMapCompOverEquiv and the counit of Modules.overEquiv. Derive this natural isomorphism and compose it with iW or iV. At a point x of Y, choose W or V containing its ambient point. Choose a strictly perfect model of the corresponding A or B. Take the image of its neighbourhood under the open immersion into Y and its canonical isoImage. Compose overEquiv, restriction along isoImage.inv and inverse overEquiv to transport the model termwise. The equivalence preserves zero objects, finite coproducts of the unit module and the retract equations, hence strict perfectness. The restriction composition and localization comparisons identify its derived object with F restricted to that neighbourhood. This supplies exactly IsPerfect Y F. The private local_perfect_of_open_immersion proves this construction in Lean.",
    "uses": [
     "def-pc-perfect-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each degree and point of Y outside T, again choose W or V containing the point. Apply homology and then the stalk functor to the corresponding local isomorphism. Compose with mapDerivedCategoryHomologyFunctorIso and Modules.restrictStalkNatIso to identify this local homology stalk with that of F at x. Transport Subsingleton along the resulting additive equivalence from hAT or hBT. This is the private stalk_subsingleton_of_open_immersion, and yields the required support statement. Combine perfectness, support, the same local isomorphisms and the two map equations. The pointwise argument includes empty cover members and the empty union.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-pc-open-derived-localization-adjunction",
-  "lem-sc-derived-open-gluing"
+  "lem-sc-relative-open-gluing",
+  "def-pc-perfect-complex"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "https://stacks.math.columbia.edu/tag/09IM",
-  "place": "Two-open construction; explicit relative restriction transport as detailed in the Lean docstring"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DG",
+  "place": "A3: underlying gluing separated; perfectness by Definition 08CM and termwise model transport; support by exact homology/stalk comparisons, all local steps proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -111,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-757b3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T045549-L-134127",
+  "landing": "20261013T065057-L-896205",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with both node statements, proof records and Stacks 08DG/08CM; compiled both modules and SupportedMapAffineUnionGluing; verified axioms."
  }
 }
