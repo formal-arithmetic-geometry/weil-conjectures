@@ -1,0 +1,107 @@
+{
+ "id": "new-e1-koszul-augmentation-lift-exists",
+ "kind": "statement",
+ "title": "Koszul augmentation lifts without regularity",
+ "statement": "For a commutative ring A, ideal I, finite tuple g in I and projective resolution P of A/I, there is a chain map from the Koszul complex of g to P whose degree-zero augmentation is I.mkQ composed with exteriorPower.zeroEquiv. The tuple need not generate I and need not be regular.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "Lemma 10.71.4, part (1), inductive free-complex comparison"
+ },
+ "proof": [
+  {
+   "text": "Each Koszul term is an exterior power of a finite free module, hence projective. The degree-one boundary evaluated under zeroEquiv is the linear combination of the tuple elements, so the quotient augmentation kills it.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the augmentation through P.pi in degree zero using Projective.factorThru. P.exact_0 lifts the first differential to degree one. In each subsequent degree the preceding chain-map equation and d squared equal to zero put the required map in the cycles; P.exact_succ and projectivity lift it one degree further. ChainComplex.mkHom assembles these maps and its degree-zero equation gives the requested augmentation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E1",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/00LS",
+   "place": "Lemma 10.71.4, part (1), inductive free-complex comparison"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain complex of free modules maps to a projective resolution extending an augmentation",
+   "results": "Internal Server Error",
+   "verdict": "unavailable; no mathematical verdict",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a bounded below chain complex of projective modules to a projective resolution",
+   "results": "ProjectiveResolution.ofComplex, complex, of, projective, projectiveResolution, self",
+   "verdict": "Projective-resolution lifting is a tool; the source here is not assumed exact",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "ChainComplex.mkHom|liftFromProjective|def lift",
+   "results": "ProjectiveResolution.lift and liftFSucc implement inductive lifting from a source resolution; ShortComplex.Exact.liftFromProjective is available",
+   "verdict": "Use these tools, adapting the construction to a nonexact Koszul source",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparisonTateConstruction",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison-tate-construction",
+   "place": "Koszul augmentation lifts without regularity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulAugmentationLiftExists",
+  "file": "lean/Sheaf/RingTheory/KoszulAugmentationLiftExists.lean",
+  "declaration": "AlgebraicGeometry.koszul_augmentation_lift_exists",
+  "statement": "theorem koszul_augmentation_lift_exists (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (g : Fin r → I) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) : ∃ a : ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)) ⟶ P.complex, a.f 0 ≫ P.π.f 0 = ModuleCat.ofHom (I.mkQ.comp (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215601-L-896627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215601-L-896627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

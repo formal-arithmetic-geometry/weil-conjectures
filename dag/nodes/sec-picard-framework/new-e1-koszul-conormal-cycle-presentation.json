@@ -1,0 +1,122 @@
+{
+ "id": "new-e1-koszul-conormal-cycle-presentation",
+ "kind": "statement",
+ "title": "Koszul wedge cycles present the exterior conormal",
+ "statement": "For a commutative ring A, ideal I and degree n, let S be the concrete type of all finite tuples g in I, vectors v for a degree-n Koszul wedge and quotient-tensored Koszul cycles z with iCycles(z)=wedge(v) tensor 1. The A-linear map from S ->0 A to the exterior conormal [new-r4-conormal-exterior-module] sending each generator to the wedge of the conormal classes of the g-linear combinations of v is surjective.",
+ "stmt_deps": [
+  "new-r4-conormal-exterior-module",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0623",
+  "place": "Koszul complex after quotient base change; exterior-power universal property"
+ },
+ "proof": [
+  {
+   "text": "The contraction formula for the Koszul differential [lem-weil-pbc-koszul-differential] expresses the boundary of a wedge as a sum of wedges multiplied by linear combinations of the tuple elements. Each coefficient lies in I, so tensoring with A/I kills all differentials.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift each vector of a conormal wedge to I using toCotangent_surjective; take the tuple of these lifts and its standard basis wedge. The inverse of iCyclesIso supplies an actual cycle, whose generator evaluates to the original conormal wedge.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use exteriorPower.iotaMulti_span and Submodule.span_induction. The zero and sum cases are linearity. In the scalar case lift a coefficient in A/I to A by quotient surjectivity and multiply the preimage by that lift.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E1",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0623",
+   "place": "Koszul complex after quotient base change; exterior-power universal property"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Wedges of conormal classes lifted from ideal elements span the exterior power over the quotient ring",
+   "results": "Internal Server Error",
+   "verdict": "unavailable; no mathematical verdict",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.ιMulti_span",
+   "results": "exteriorPower.ιMulti_span",
+   "verdict": "Use as the spanning tool; the cycle presentation is proved here",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "ιMulti_span|toCotangent_surjective",
+   "results": "ExteriorPower.Basic.ιMulti_span and Ideal.Cotangent.toCotangent_surjective",
+   "verdict": "Tools for the construction and induction; no exact Koszul cycle-presentation statement",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparisonTateConstruction",
+  "date": "2026-10-14",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison-tate-construction",
+   "place": "Koszul wedge cycles present the exterior conormal",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulConormalCyclePresentation",
+  "file": "lean/Sheaf/RingTheory/KoszulConormalCyclePresentation.lean",
+  "declaration": "AlgebraicGeometry.koszulConormalCyclePresentation_surjective",
+  "statement": "theorem koszulConormalCyclePresentation_surjective (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) : Function.Surjective (koszulConormalCyclePresentation A I n)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.koszulConormalCyclePresentation_surjective",
+   "AlgebraicGeometry.KoszulConormalWedgeCycle",
+   "AlgebraicGeometry.koszulConormalCyclePresentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215601-L-896627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T215601-L-896627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
