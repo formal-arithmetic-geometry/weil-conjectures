@@ -10319,3 +10319,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:37 L: returned deliver/T1/Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionZero (reviewer RETURN: (reviewer X-0641d, head 0641d81a9) C (brief point 6): In dag/nodes/sec-proper-base-change/lem-weil-pbc-well-ordered-unio)
 - 00:37 L: returned deliver/Y2/Sheaf.LinearAlgebra.SymmetricAlgebra.Graded (reviewer RETURN: (reviewer X-62526, head 625260282) H8/E5: In lean/Sheaf/LinearAlgebra/SymmetricAlgebra/Graded.lean, replace the entire g)
 - 00:40 L: returned deliver/C3/Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounits (reviewer RETURN: (the landing tools, head 61b30b660) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 00:40 L: returned deliver/G3/Sheaf.RingTheory.PopescuSpecialChartPolynomial (reviewer RETURN: (the landing tools, head 7ae4d59f8) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
