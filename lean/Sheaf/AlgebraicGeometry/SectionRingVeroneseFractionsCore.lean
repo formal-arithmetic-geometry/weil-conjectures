@@ -64,20 +64,19 @@ theorem sectionRing_veronese_fraction_core
             L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))) =
       HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n
         ξ.val ξ.property := by
-  refine ⟨⟨?_, ?_⟩, ?_⟩
-  · exact (QuotientAddGroup.injective_lift_iff _ _ _).mpr
-      (sectionRingVeroneseFractionMap_kernel X L d s)
-  · exact QuotientAddGroup.lift_surjective_of_surjective _ _
-      (sectionRingVeroneseFractionMap_surjective X L d s) _
-  · intro n ξ
-    simp only [sectionRingVeroneseFractionCanonicalMap, sectionFraction]
-    change sectionRingVeroneseFractionMap X L d s
-      (DirectSum.of
-        (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
-        ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) = _
-    simp only [sectionRingVeroneseFractionMap, DirectSum.toAddMonoid_of,
-      AddMonoidHom.comp_apply]
-    rw [sectionRingVeroneseNumerator_cancel X L d n ξ]
-    rfl
+  refine ⟨(QuotientAddGroup.liftEquiv
+    (sectionFractionRelations (L.tensorPow d) (𝟙_ X.Modules) (s.val d)).toAddSubgroup
+    (sectionRingVeroneseFractionMap_surjective X L d s)
+    (sectionRingVeroneseFractionMap_kernel X L d s)).bijective, ?_⟩
+  intro n ξ
+  simp only [sectionRingVeroneseFractionCanonicalMap, sectionFraction]
+  change sectionRingVeroneseFractionMap X L d s
+    (DirectSum.of
+      (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
+      ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) = _
+  simp only [sectionRingVeroneseFractionMap, DirectSum.toAddMonoid_of,
+    AddMonoidHom.comp_apply]
+  rw [sectionRingVeroneseNumerator_cancel X L d n ξ]
+  rfl
 
 end AlgebraicGeometry.Scheme.Modules
