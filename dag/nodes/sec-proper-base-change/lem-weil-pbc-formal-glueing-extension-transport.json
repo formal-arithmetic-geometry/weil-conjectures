@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-extension-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 05ER, proposition-equivalence, proof, third paragraph, reconstruction of Can(E) -> X; part of steps 7–11 of the formal-glueing equivalence used in finite-etale lifting",
+   "via": [
+    "lem-weil-pbc-formal-glueing-essential-surjectivity",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transport a glueing morphism across localized isomorphisms",
+ "statement": "Let $R,S$ be commutative rings, $\\varphi:R\\to S$ any ring map, $t\\in\\mathbf N$, and $f:\\operatorname{Fin}(t)\\to R$. Let $\\mathrm{Can}:\\mathrm{Mod}_R\\to\\mathrm{Glue}(\\varphi,f)$ [def-weil-pbc-formal-glueing-data] have at every $M$ the prime module $S\\otimes_R M$ [def-weil-module-base-change], chart modules $M_{f_i}$ [def-weil-pbc-module-localization-away], and actual canonical comparison and interchange linear maps, through bundled module equalities and heterogeneous linear-map equalities. All modules lie in universe $\\max(u,v,w)$, with $R,S$ in universes $u,v$. Let $H,E$ be $R$-modules, $X$ a glueing datum, $\\psi:\\mathrm{Can}(H)\\to X$ a glueing morphism with bijective chart maps, $j:H\\to E$ an $R$-linear map whose localizations $j_{f_i}$ are bijective, and $\\theta:S\\otimes_R E\\overset\\sim\\longrightarrow X.M'$ an $S$-linear equivalence. Assume $\\theta\\circ(S\\otimes_R j)=\\psi'$ via the canonical prime-module identification. Then there is a glueing morphism $\\Phi:\\mathrm{Can}(E)\\to X$ whose prime map and every chart map are bijective. No flatness, ideal-quotient comparison, or assumption about Can on morphisms is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 05ER, proposition-equivalence, proof, third paragraph, reconstruction of Can(E) -> X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Define the prime component by theta, transported along the prime-module equality, and the ith chart component by psi_i composed with j_fi inverse, transported along the chart-module equalities. They are bijective. Scalar extension and localization preserve the inverse identities, by their fraction and tensor formulas.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the prime compatibility equation with the localization of S tensor j. Canonical comparison identifies this map with S tensor j_fi, hence it is bijective. Naturality of comparison, checked on (s tensor h)/f_i^e, and theta composed with S tensor j = psi prime reduce both sides to psi prime compatibility. Cancellation proves the desired equation.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-module-base-change",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the overlap equation at (i,k) with j localized first at f_i and then at f_k. This is bijective. Naturality of interchange, checked on (h/f_i^a)/f_k^b, and the inverse identity for j_fi reduce both sides to psi overlap compatibility. Cancel the bijection. The components and these two equations bundle to Phi. An empty chart family needs only theta.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-formal-glueing-canonical-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 05ER, proposition-equivalence, proof, third paragraph, reconstruction of Can(E) -> X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport formal gluing module morphism along injection that is bijective after localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal gluing data compatible morphism chart maps along localized linear equivalence",
+   "results": "8 hits: TopCat.GlueData.MkCore.cocycle, CategoryTheory.GlueData.glue_condition_apply, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.Scheme.GlueData.glue_condition, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_π, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.GlueData.ι_isoCarrier_inv",
+   "date": "2026-10-13",
+   "verdict": "no exact match for this formal-glueing step"
+  },
+  {
+   "tool": "grep",
+   "query": "compare.*naturality|swap.*naturality|glueing|gluing",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match for this formal-glueing step"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.map_injective",
+   "results": "1 hits: IsLocalizedModule.map_injective",
+   "date": "2026-10-13",
+   "verdict": "no exact match for this formal-glueing step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingEssentialSurjectivity",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingExtensionTransport",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingExtensionTransport.lean",
+  "declaration": "FormalGlueing.exists_extension_transport",
+  "statement": "theorem exists_extension_transport {R : Type u} {S : Type v}\n    [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)\n    (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)\n    (hobj : (∀ M : ModuleCat.{max u v w} R,\n        (Can.obj M).M' = extend φ M ∧\n        (∀ i : Fin t, (Can.obj M).M i =\n          ModuleCat.of (Localization.Away (f i)) (LocalizedModule.Away (f i) M)) ∧\n        (∀ i : Fin t, HEq ((Can.obj M).alpha i).toLinearMap (compare φ (f i) M)) ∧\n        (∀ i j : Fin t,\n          HEq ((Can.obj M).alpha_overlap i j).toLinearMap (swap (f i) (f j) M))))\n    (H E : ModuleCat.{max u v w} R) (X : Data.{u, v, max u v w} φ f)\n    (ψ : Can.obj H ⟶ X) (j : H →ₗ[R] E)\n    (θ : extend φ E ≃ₗ[S] X.M')\n    (hj : ∀ i, Function.Bijective (localMap (f i) j))\n    (hψ : ∀ i, Function.Bijective (ψ.chart i))\n    (hθ : HEq (θ.toLinearMap.comp (extendMap φ j)) ψ.prime) :\n    ∃ Φ : Can.obj E ⟶ X,\n      Function.Bijective Φ.prime ∧ ∀ i, Function.Bijective (Φ.chart i)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T111839-L-3048109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T111839-L-3048109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
