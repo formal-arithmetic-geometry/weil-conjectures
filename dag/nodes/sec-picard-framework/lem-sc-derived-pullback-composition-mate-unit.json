@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-derived-pullback-composition-mate-unit",
+ "kind": "statement",
+ "title": "Unit normalization of the pullback composition mate",
+ "statement": "Fix unbounded derived categories of module sheaves on every scheme [def-pc-derived-category]. For schemes X,Y,Z [def-pc-scheme] and morphisms f:X→Y and g:Y→Z, let p(f,g):Lg* followed by Lf* ≅ L(fg)* be the fixed comparison of [lem-pc-ringed-spaces-derived-pullback-composition], and a(t) the pinned adjunction of [lem-pc-global-hom-adjunction, def-pc-derived-base-change-map]. For every homotopy complex K of O_X-modules, the right-derived unit for (fg)_* followed by the component at QK of conjugateEquiv(a(fg),a(g).comp(a(f)),p(f,g).hom) equals the unit for g_* at f_*K followed by Rg_* of the unit for f_* at K. The right-derived units are those of [def-pc-ringed-spaces-derived-direct-image]. No square, direct-image composition comparison, flatness, boundedness or preservation of K-injectives is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-global-hom-adjunction",
+  "def-pc-derived-base-change-map",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W (lemma-adjoint), 0D5S (lemma-derived-pullback-composition) and 0D5T (lemma-derived-pushforward-composition); single-pair normalization step of lem-sc-derived-direct-image-square-mate. The cited tag pages were read online."
+ },
+ "proof": [
+  {
+   "text": "Let ε be the left-derived counits selected with p. The factorization equation for p says that Q(p.hom) followed by ε(fg) equals the successive ε(g) and ε(f), followed by the homotopy image of the underived tensor-pullback composition comparison.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Hom equivalence normalization of the pinned a(t) identifies the mate, across localization, of ε(t) with the recorded right-derived unit β(t). Indeed evaluate the normalization at the underived counit; the underived adjunct of that counit is the identity. Paste the two resulting mate squares for g and f. Mathlib mateEquiv_hcomp identifies their mate with the pasted β(g) and Rg*(β(f)).",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underived tensor comparison is defined as the inverse conjugate of pushforwardComp. On homotopy categories its conjugate is the corresponding direct-image composition identification: pass to complex representatives and check degreewise units, counits and the underived conjugacy equation. The identification is the identity on sections over inverse-image opens, so its homotopy and localized components are identities.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the factorization of the first step using the preceding compatible mate squares. mateEquiv_conjugateEquiv_vcomp and conjugateEquiv_mateEquiv_vcomp identify the two sides with β(fg) followed by the derived mate of p.hom, and the pasted right-derived units, respectively. Evaluating this equality at K gives the claimed equation. The mate calculation uses no resolution or cancellation hypothesis; it applies to identity morphisms, zero complexes and empty schemes. To justify using the pinned Hom normalization on arbitrary derived test maps, choose a K-flat representative of their source and replace the intermediate complex of a localization roof by a K-flat resolution. Invertibility of the left-derived counits on these representatives (and their successive pullbacks), naturality, and inversion of localized quasi-isomorphisms extend the computation to all roofs. Yoneda then gives the component equation. The earlier assertion that no resolution is used referred only to the formal mate-pasting calculation, not to this extension of the representative formula.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R3",
+  "date": "2026-10-13",
+  "note": "Detailed mate-pasting expansion of the normalization step already in the parent proof, from the cited Stacks adjunction and composition results; not claimed as a verbatim statement of Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mates of derived adjunctions compatible with composition and derived functor units",
+   "results": "Service unavailable: Internal Server Error. Other kinds were run.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mates of composition isomorphisms for derived adjunctions",
+   "results": "Eight generic mate and conjugate-pasting results, including mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_comp_assoc and mateEquiv_hcomp; none states the scheme normalization equation.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "Twelve generic conjugation results; no pinned scheme derived composition normalization.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp",
+   "results": "Twenty-five Mathlib matches include generic conjugateEquiv_comp and underived pullbackComp conjugacy; no derived scheme normalization. The source CompConjugate theorem additionally requires exact left adjoints and preservation of K-injective complexes.",
+   "date": "2026-10-13",
+   "verdict": "no applicable direct theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sc-derived-direct-image-square-mate, proof: transpose the chosen pullback comparison counit equation to obtain the right-derived unit equation, restricted to one composable pair. No imported blueprint ancestor is recorded for this module-created node.",
+   "via": [
+    "lem-sc-derived-direct-image-square-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionMateUnit.lean",
+  "declaration": "AlgebraicGeometry.derivedPullbackComposition_mate_unit",
+  "statement": "theorem derivedPullbackComposition_mate_unit\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (ComplexShape.up ℤ)) :\n    let p : ∀ {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C),\n        derivedPullback t ⋙ derivedPullback s ≅ derivedPullback (s ≫ t) :=\n      @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n        (conjugateEquiv (schemeHomPullbackAdjunction.{u, w} (f ≫ g))\n          ((schemeHomPullbackAdjunction.{u, w} g).comp (schemeHomPullbackAdjunction.{u, w} f))\n          (p f g).hom).app (DerivedCategory.Qh.obj K) =\n      (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n            (ComplexShape.up ℤ)).obj K) ≫\n        (schemeDerivedDirectImage g).map\n          ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T152019-L-954396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T152019-L-954396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

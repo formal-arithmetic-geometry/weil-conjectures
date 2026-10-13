@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit
 
 /-! # Normalized direct-image square as a pullback mate
 Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
@@ -69,6 +70,40 @@ theorem derivedDirectImage_square_mate
       schemeNormalizedDirectImageCompIso f' g
     conjugateEquiv ((a f).comp (a gX)) ((a g).comp (a f')) k.hom =
       e₁.hom ≫ eqToHom (congrArg (fun t ↦ schemeDerivedDirectImage t) h) ≫ e₂.inv := by
-  sorry
+  let a := fun {A D : Scheme.{u}} (t : A ⟶ D) ↦ schemeHomPullbackAdjunction t
+  let p : ∀ {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C),
+      derivedPullback t ⋙ derivedPullback s ≅ derivedPullback (s ≫ t) :=
+    @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))
+  have hc {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
+      conjugateEquiv (a (s ≫ t)) ((a t).comp (a s)) (p s t).hom =
+        (schemeNormalizedDirectImageCompIso s t).inv := by
+    apply (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctor
+      |>.rightDerived_ext
+        (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit
+        (HomotopyCategory.quasiIso _ (.up ℤ))
+    apply NatTrans.ext
+    funext K
+    exact (derivedPullbackComposition_mate_unit s t K).trans
+      ((Classical.choose_spec (RingedSpace.exists_derivedModuleDirectImageComposition
+        s.toLRSHom.toShHom t.toLRSHom.toShHom)) K).symm
+  have hi {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C) :
+      conjugateEquiv ((a t).comp (a s)) (a (s ≫ t)) (p s t).inv =
+        (schemeNormalizedDirectImageCompIso s t).hom := by
+    have he : conjugateIsoEquiv (a (s ≫ t)) ((a t).comp (a s)) (p s t) =
+        (schemeNormalizedDirectImageCompIso s t).symm := Iso.ext (hc s t)
+    exact congrArg Iso.inv he
+  have he {A B : Scheme.{u}} (s t : A ⟶ B) (e : s = t) :
+      conjugateEquiv (a s) (a t)
+        (eqToHom (congrArg (fun z ↦ derivedPullback z) e.symm)) =
+          eqToHom (congrArg (fun z ↦ schemeDerivedDirectImage z) e) := by
+    subst t
+    simp
+  change conjugateEquiv ((a f).comp (a gX)) ((a g).comp (a f'))
+    ((p f' g).hom ≫ eqToHom (congrArg (fun t ↦ derivedPullback t) h.symm) ≫
+      (p gX f).inv) = _
+  rw [← Category.assoc, ← conjugateEquiv_comp _ (a (gX ≫ f))]
+  rw [← conjugateEquiv_comp _ (a (f' ≫ g))]
+  rw [hi, hc, he _ _ h]
 
 end AlgebraicGeometry
