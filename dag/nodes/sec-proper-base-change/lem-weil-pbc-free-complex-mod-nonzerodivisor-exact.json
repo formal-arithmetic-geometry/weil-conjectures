@@ -33,65 +33,26 @@
  ],
  "proof": [
   {
-   "text": "(The complex as a cochain complex of $R$-modules.) The category $\\Mod(R)$ of $R$-modules is abelian, with the usual kernels, cokernels and images [lem-weil-pbc-ring-modules-enough-injectives]. Put $F_i=R^{\\oplus n_i}$ ($0\\le i\\le e$) and reindex the given complex as a cochain complex $K$ of $R$-modules indexed by $\\mathbf N$: $K^j=F_{e-j}$ for $0\\le j\\le e$, $K^j=0$ for $j>e$, with $d^j=\\varphi_{e-j}:K^j\\to K^{j+1}$ for $0\\le j\\le e-1$ and $d^j=0$ for $j\\ge e$; $d^{j+1}\\circ d^j=\\varphi_{e-j-1}\\circ\\varphi_{e-j}=0$ for $0\\le j\\le e-2$ by hypothesis, and the other composites have a zero factor. Its cohomology is $H^j(K)=\\ker d^j/\\operatorname{im}d^{j-1}$ ($d^{-1}=0$), i.e. $H^{e-i}(K)=\\ker\\varphi_i/\\operatorname{im}\\varphi_{i+1}=:H_i(F_\\bullet)$ for $1\\le i\\le e$, with $\\varphi_{e+1}=0$. By the definition of exactness [def-weil-pbc-exact-sequence] (in $\\Mod(R)$: $\\operatorname{im}=\\ker$ as submodules), the complex $0\\to F_e\\to\\cdots\\to F_0$ is exact at $F_i$ iff $\\ker\\varphi_i=\\operatorname{im}\\varphi_{i+1}$ (for $i=e$: iff $\\varphi_e$ is injective, the incoming arrow being $0\\to F_e$), i.e. iff $H_i(F_\\bullet)=0$. So the hypothesis says $H_i(F_\\bullet)=0$ for $1\\le i\\le e$.",
-   "uses": [
-    "lem-weil-pbc-ring-modules-enough-injectives",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Denote $F_\\bullet$ the complex with terms $F_i=R^{n_i}$ and differential given by $\\varphi_i$'; Situation 00MS (situation-complex, line 24576)"
-   }
+   "text": "For consecutive matrices A and B with Function.Exact A.mulVec B.mulVec, lift a reduced A-cycle v to w using surjectivity of the coordinate quotient map. Since q(Aw)=0, Ideal.Quotient.eq_zero_iff_mem and Ideal.mem_span_singleton give Aw=x t coordinatewise. Exactness implies B(Aw)=0, so x Bt=0. Cancel the nonzerodivisor x coordinatewise to obtain Bt=0, and use exactness to write t=Az. Then w-x z is an A-cycle reducing to v. This is the fully proved private helper lift_reduced_cycle; matrix reduction commutes with mulVec by RingHom.map_mulVec.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "(The short exact sequence $0\\to F_\\bullet\\xrightarrow{x}F_\\bullet\\to F_\\bullet/xF_\\bullet\\to0$.) Let $\\mu_i:F_i\\to F_i$ be multiplication by $x$. Since each $\\varphi_i$ is $R$-linear, $\\varphi_i\\circ\\mu_i=\\mu_{i-1}\\circ\\varphi_i$, so $\\mu$ is a morphism of complexes $K\\to K$. It is injective in each degree: if $x(a_1,\\dots,a_{n_i})=0$ in the free module $F_i=R^{\\oplus n_i}$ [def-weil-pbc-free-module] then $xa_k=0$ for each coordinate, so $a_k=0$ as $x$ is a nonzerodivisor of $R$. Let $\\pi_i:F_i\\to\\bar R^{\\oplus n_i}$ reduce each coordinate modulo $x$; it is $R$-linear and surjective, and its kernel is the set of vectors with all coordinates in $xR$, which is $xF_i=\\operatorname{im}\\mu_i$. If $A_i=(a^{(i)}_{kl})$ is the matrix [def-weil-matrix] of $\\varphi_i$ (so $\\varphi_i(e_l)=\\sum_k a^{(i)}_{kl}f_k$ for the standard bases), then $\\pi_{i-1}(\\varphi_i(e_l))=\\sum_k\\overline{a^{(i)}_{kl}}\\,\\bar f_k=\\bar\\varphi_i(\\pi_i(e_l))$, hence $\\pi_{i-1}\\circ\\varphi_i=\\bar\\varphi_i\\circ\\pi_i$ by linearity. Consequently $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}\\circ\\pi_{i+1}=\\pi_{i-1}\\circ\\varphi_i\\circ\\varphi_{i+1}=0$, and $\\pi_{i+1}$ being surjective, $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}=0$: the reduced sequence is a complex. Regard it as a cochain complex $\\bar K$ of $R$-modules, $\\bar K^j=\\bar R^{\\oplus n_{e-j}}$ ($0\\le j\\le e$), $\\bar K^j=0$ ($j>e$), $\\bar d^j=\\bar\\varphi_{e-j}$ ($0\\le j\\le e-1$), $\\bar d^j=0$ otherwise. Then $\\pi:K\\to\\bar K$ is a morphism of complexes, $\\pi\\circ\\mu=0$, and in every degree $0\\to K^j\\xrightarrow{\\mu}K^j\\xrightarrow{\\pi}\\bar K^j\\to0$ is a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence] ($\\mu$ injective, $\\ker\\pi=\\operatorname{im}\\mu$, $\\pi$ surjective; trivially in degrees $j>e$).",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-matrix",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Then we have a short exact sequence of complexes $0\\to F_\\bullet\\xrightarrow{x}F_\\bullet\\to F_\\bullet/xF_\\bullet\\to0$' (injectivity of $x$ written out from the hypothesis that $x$ is a nonzerodivisor; $F_i/xF_i\\cong\\bar R^{n_i}$ with the reduced matrices written out)"
-   }
+   "text": "Apply the cycle-lifting helper at degree e using exactness at e-1. If two reduced vectors have the same image under the reduced top matrix, their difference is a cycle. Lift that difference to a cycle for the original top matrix; hinjective forces the lift to be zero. Thus the reduced difference is zero and the reduced top matrix is injective.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "(Long exact sequence.) Apply the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] in the abelian category $\\Mod(R)$ [lem-weil-pbc-ring-modules-enough-injectives] to the degreewise short exact sequence $0\\to K\\xrightarrow{\\mu}K\\xrightarrow{\\pi}\\bar K\\to0$ of Step 2: for every $j\\ge0$ the sequence $H^j(K)\\xrightarrow{H^j(\\pi)}H^j(\\bar K)\\xrightarrow{\\delta^j}H^{j+1}(K)$ is exact. Let $2\\le i\\le e$ and $j=e-i$, so $0\\le j\\le e-2$. Then $H^j(K)=H_i(F_\\bullet)=0$ and $H^{j+1}(K)=H_{i-1}(F_\\bullet)=0$ by Step 1, since $i\\ge1$ and $i-1\\ge1$. Exactness at $H^j(\\bar K)$ gives $H^j(\\bar K)=\\ker\\delta^j=\\operatorname{im}H^j(\\pi)=0$.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-ring-modules-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'Applying the snake lemma we get a long exact sequence $H_i(F_\\bullet)\\xrightarrow{x}H_i(F_\\bullet)\\to H_i(F_\\bullet/xF_\\bullet)\\to H_{i-1}(F_\\bullet)\\xrightarrow{x}H_{i-1}(F_\\bullet)$. The lemma follows.' (the vanishing for $2\\le i\\le e$ written out)"
-   }
-  },
-  {
-   "text": "(Conclusion.) For $2\\le i\\le e$, Step 3 gives $0=H^{e-i}(\\bar K)=\\ker\\bar\\varphi_i/\\operatorname{im}\\bar\\varphi_{i+1}$ (with $\\bar\\varphi_{e+1}=0$), so $\\ker\\bar\\varphi_i=\\operatorname{im}\\bar\\varphi_{i+1}$ as subsets of $\\bar R^{\\oplus n_i}$; kernels and images of the $\\bar R$-linear maps $\\bar\\varphi_i$ are the same sets whether these maps are viewed as $R$- or $\\bar R$-linear. By the definition [def-weil-pbc-exact-sequence], the complex $0\\to\\bar R^{\\oplus n_e}\\xrightarrow{\\bar\\varphi_e}\\cdots\\xrightarrow{\\bar\\varphi_2}\\bar R^{\\oplus n_1}$ is exact at $\\bar R^{\\oplus n_i}$ for $i=e,\\dots,2$ (at $\\bar R^{\\oplus n_e}$ this says $\\bar\\varphi_e$ is injective). The hypotheses that $R$ is local and $x\\in\\mathfrak m$ are not used.",
-   "uses": [
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766, proof lines 24776-24790): 'The lemma follows.'"
-   }
+   "text": "For 2 <= i < e, use the helper and exactness at i-1 to lift any reduced cycle to an original cycle. Exactness at i supplies a preimage under phi_(i+1); its reduction maps to the original reduced cycle. For the converse inclusion, lift a reduced boundary preimage coordinatewise, apply hcomplex, and commute reduction with both matrix maps. This proves the required Function.Exact at every interior degree. The original theorem signature is unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-ring-modules-enough-injectives",
-  "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-free-module",
-  "def-weil-matrix",
-  "lem-weil-pbc-complex-ses-homology-long-exact"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766) and its proof (lines 24776-24790), in Situation Tag 00MS (situation-complex, line 24576) of Section Tag 00MR (section-complex-exact, line 24570)"
+  "place": "Algebra, Lemma Tag 00MZ (lemma-div-x-exact-one-less, line 24766) and its proof (lines 24776-24790), in Situation Tag 00MS (situation-complex, line 24576) of Section Tag 00MR (section-complex-exact, line 24570); coordinate cycle-lifting presentation of the snake-lemma argument, written by F4 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -190,5 +151,15 @@
   "group": "M1",
   "result": "fix",
   "note": "local R, e>=2, Fin(n i) coordinate modules with Matrix.mulVec maps as the G1 citer 00N1 spells them, hcomplex/hexact on 1<=i<e, injectivity at n_e, x in m, nonzerodivisor now x ∈ nonZeroDivisors R, R/xR with entrywise-reduced matrices, conclusion injective at bar n_e and Function.Exact for 2<=i<e; one universe, no hollow hypothesis"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8663f",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T002357-L-2376469",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module compiles; theorem declaration matches the node, proof has allowed axioms only, and the sole direct importer compiles against narrowed imports."
  }
 }
