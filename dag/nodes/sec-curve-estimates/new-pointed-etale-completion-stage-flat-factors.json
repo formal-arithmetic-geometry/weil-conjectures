@@ -1,0 +1,98 @@
+{
+ "id": "new-pointed-etale-completion-stage-flat-factors",
+ "kind": "statement",
+ "title": "Flatness of the two factors in the pointed etale completion map",
+ "statement": "For the pointed etale colimit cocone, each stage-to-colimit map and the colimit-to-adic-completion map at the extended maximal ideal is flat.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ, proof of (c), paragraph beginning To finish the proof of (c)"
+ },
+ "stmt_deps": [
+  "lem-sc-pointed-etale-completion-stage-flat"
+ ],
+ "proof": [
+  {
+   "text": "Identify pointed etale stages with residue triples, apply the triple completion flatness theorem, and use flatness of filtered etale transition maps.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-etale-triple-to-sh-completion-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triple-to-sh-completion-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LJ"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PointedEtaleCompletionStageFlat",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-sc-pointed-etale-completion-stage-flat"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PointedEtaleCompletionStageFlat",
+  "file": "lean/Sheaf/RingTheory/PointedEtaleCompletionStageFlat.lean",
+  "declaration": "Algebra.pointedEtale_completion_stage_flat_factors",
+  "statement": "theorem pointedEtale_completion_stage_flat_factors\n    (R K : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K]\n    [Algebra (IsLocalRing.ResidueField R) K]\n    [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K]\n    [IsScalarTower R (IsLocalRing.ResidueField R) K]\n    (c : Cocone ((ObjectProperty.ι\n      (fun X : Over (CommAlgCat.of R K) ↦ Etale R X.left)) ⋙\n        Over.forget (CommAlgCat.of R K)))\n    (hc : IsColimit c)\n    (t : ObjectProperty.FullSubcategory\n      (fun X : Over (CommAlgCat.of R K) ↦ Etale R X.left)) :\n    (c.ι.app t).hom.toRingHom.Flat ∧\n      (algebraMap c.pt\n        (AdicCompletion ((IsLocalRing.maximalIdeal R).map (algebraMap R c.pt)) c.pt)).Flat",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "RingHom.Flat.comp",
+   "results": "found",
+   "date": "2026-10-13",
+   "verdict": "confirmed"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat.comp",
+   "results": "found",
+   "date": "2026-10-13",
+   "verdict": "confirmed"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.comp",
+   "results": "found",
+   "date": "2026-10-13",
+   "verdict": "confirmed"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307408",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T155946-L-1307408",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
