@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.MixedGlobalExtension
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+import Sheaf.AlgebraicGeometry.AffineSectionsUnitTransport
 
 /-! # Sections comparison on ordinary affine chart complexes
 Source: Stacks Project, Tag 06Z0.
@@ -62,6 +63,31 @@ theorem mixedAffineChart_sectionsComplexUnit_isIso (S : Scheme.{u}) [IsAffine S]
     (P : CochainComplex (ModuleCat.{u} Γ(S, ⊤)) ℤ) :
     IsIso (mixedSectionsComplexUnit S
       ((((tilde.functor Γ(S, ⊤)) ⋙
-        Scheme.Modules.restrictFunctor S.toSpecΓ).mapHomologicalComplex (.up ℤ)).obj P)) := by sorry
+        Scheme.Modules.restrictFunctor S.toSpecΓ).mapHomologicalComplex (.up ℤ)).obj P)) := by
+  let T := tilde.functor Γ(S, ⊤)
+  let E := Scheme.Modules.restrictFunctor S.toSpecΓ
+  let : E.Additive := Functor.additive_of_iso
+    (Scheme.Modules.restrictFunctorIsoPullback S.toSpecΓ).symm
+  let : T.Additive := by dsimp [T]; infer_instance
+  let G := RingedSpace.globalSectionsFunctor (Spec Γ(S, ⊤)).toRingedSpace ⋙
+    ModuleCat.restrictScalars (Scheme.ΓSpecIso Γ(S, ⊤)).inv.hom
+  have hspec : IsIso (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((T.mapHomologicalComplex (.up ℤ)).obj P))) := by
+    exact (NatTrans.isIso_app_iff_of_iso G.rightDerivedFunctorUnit
+      ((T.mapHomotopyCategoryFactors (.up ℤ)).app P).symm).mpr
+        (affineTildeDerivedSectionsUnit_isIso Γ(S, ⊤)
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+  have hchart := affineSectionsUnit_transport S
+    ((T.mapHomologicalComplex (.up ℤ)).obj P) hspec
+  have hcomp := (Functor.mapHomologicalComplexCompIso (Iso.refl (T ⋙ E)) (.up ℤ)).app P
+  have hunit : IsIso
+      ((RingedSpace.globalSectionsFunctor S.toRingedSpace).rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((T ⋙ E).mapHomologicalComplex (.up ℤ)).obj P))) := by
+    exact (NatTrans.isIso_app_iff_of_iso _
+      ((HomotopyCategory.quotient _ (.up ℤ)).mapIso hcomp.symm)).mpr hchart
+  dsimp [mixedSectionsComplexUnit]
+  infer_instance
 
 end AlgebraicGeometry

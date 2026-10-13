@@ -13001,3 +13001,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:34 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsStep (stage 3; reviewer PASS; first push; landing 20261013T153458-L-1084326 (proof); batch 20261013T153456; modules 1; new nodes 0)
 - 15:34 L: merged deliver/A4/Sheaf.RingTheory.CanonicalLocalizedApproximationLimit (stage 3; reviewer PASS; first push; landing 20261013T153458-L-1084423 (proof); batch 20261013T153456; modules 1; new nodes 0)
 - 15:34 L: merged deliver/E1/Sheaf.RingTheory.LocalizedModuleColimitComparison (stage 3; reviewer PASS; first push; landing 20261013T153458-L-1084570 (proof); batch 20261013T153456; modules 1; new nodes 0)
+- 15:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.MixedAffineSectionsComplexUnit (stage 3; reviewer PASS; first push; landing 20261013T153459-L-1084852 (interface); batch 20261013T153456; modules 2; new nodes 1)
