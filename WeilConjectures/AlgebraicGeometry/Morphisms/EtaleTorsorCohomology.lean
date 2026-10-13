@@ -26,9 +26,11 @@ section.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.EtaleTorsor.pullbackSheafTorsor`: for an `M`-torsor `P` over `Y`
-  and `f : Y' ⟶ Y`, the sheaf of lifts `U ⟶ P` of `U ⟶ Y' ⟶ Y` on the small étale site of
-  `Y'`, as a torsor under `U ↦ C(U, M)`.
+- `AlgebraicGeometry.Etale.pullbackSection`: the pullback of sections along `f : Y' ⟶ Y`,
+  through the unit of the adjunction `f^* ⊣ f_*`.
+- `AlgebraicGeometry.Scheme.EtaleTorsor.toPullbackLifts`: the identification of the torsor of
+  lifts of `f` to `P` (`AlgebraicGeometry.Scheme.EtaleTorsor.pullbackSheafTorsor`) with the
+  torsor of local lifts of the pulled-back section.
 
 ## Main statements
 
@@ -116,7 +118,7 @@ lemma pullbackSection_comp_upperStar_map {G' : Sheaf Y.smallEtaleTopology AddCom
     (congr_arg (fun g ↦ g.hom.app (op V))
       ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.naturality φ)).symm
   rw [pullbackSection, pullbackSection, Category.assoc,
-    ← ((upperStar AddCommGrpCat.{u + 1} f).map φ).hom.naturality k.op, ← Category.assoc, hu,
+    ((upperStar AddCommGrpCat.{u + 1} f).map φ).hom.naturality k.op, ← Category.assoc, hu,
     Category.assoc]
 
 lemma pullbackSection_natural {G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
@@ -181,6 +183,7 @@ lemma upperStarConstantSheafIso_hom_pullbackSection (X : AddCommGrpCat.{u + 1}) 
       X x := by
   rw [← unit_comp_pullbackSection_comp_upperStarConstantSheafIso_hom f X,
     ConcreteCategory.comp_apply, ConcreteCategory.comp_apply]
+  rfl
 
 end PullbackSection
 
@@ -247,6 +250,7 @@ noncomputable abbrev constSection (V : Y.Etale) (m : M) :
     ((constantSheafAdj Y.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).unit.app
       (AddCommGrpCat.of M) m)
 
+omit [Finite M] in
 /-- The isomorphism of the constant sheaf with the sheaf of continuous functions sends the
 constant section `m` to the constant function `m`. -/
 lemma constantSheafIsoContinuousMapSheaf_hom_constSection [TopologicalSpace M]
@@ -256,10 +260,8 @@ lemma constantSheafIsoContinuousMapSheaf_hom_constSection [TopologicalSpace M]
   have hu : (constantSheafAdj Y.smallEtaleTopology AddCommGrpCat.{u + 1}
       terminalIsTerminal).unit.app (AddCommGrpCat.of M) m =
       (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj
-        (AddCommGrpCat.of M))).app (op (⊤_ Y.Etale)) m := by
-    first
-    | rfl
-    | simp [constantSheafAdj, Adjunction.comp_unit_app]
+        (AddCommGrpCat.of M))).app (op (⊤_ Y.Etale)) m :=
+    rfl
   have h := ConcreteCategory.congr_hom (congr_arg (fun g ↦ g.app (op (⊤_ Y.Etale)))
     (Etale.toSheafify_constantSheafToContinuousMapSheaf Y M)) m
   rw [constSection, ← ConcreteCategory.comp_apply,
@@ -271,13 +273,33 @@ lemma constantSheafIsoContinuousMapSheaf_hom_constSection [TopologicalSpace M]
 action of `m`. -/
 lemma toSheafTorsor_vadd_constSection (t : EtaleTorsor M Y) (m : M) :
     t.toSheafTorsor.vadd (op t.toEtale) (constSection t.toEtale m) ⟨𝟙 _⟩ = ⟨t.vaddEtale m⟩ := by
-  letI : TopologicalSpace M := ⊥
-  haveI : DiscreteTopology M := ⟨rfl⟩
+  let _ : TopologicalSpace M := ⊥
+  have : DiscreteTopology M := ⟨rfl⟩
   have h : t.toSheafTorsor.vadd (op t.toEtale) (constSection t.toEtale m) ⟨𝟙 _⟩ =
       ⟨t.smulHom ((Etale.constantSheafIsoContinuousMapSheaf Y M).hom.hom.app _
         (constSection t.toEtale m)) (𝟙 _)⟩ := rfl
   rw [h, constantSheafIsoContinuousMapSheaf_hom_constSection]
   exact ULift.ext _ _ (etaleHom_ext ((t.smulHom_const m _).trans (Category.id_comp _)))
+
+section PullbackSequence
+
+variable {X I Q : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} {ι : X ⟶ I} {d : I ⟶ Q}
+  {w : ι ≫ d = 0} {Y' : Scheme.{u}}
+
+/-- The short exact sequence `0 → f^*X → f^*I → f^*Q → 0` obtained by pulling back a short exact
+sequence of abelian sheaves along `f : Y' ⟶ Y`. -/
+lemma shortExact_upperStar (hS : (ShortComplex.mk ι d w).ShortExact) (f : Y' ⟶ Y) :
+    (ShortComplex.mk ((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι)
+      ((Etale.upperStar AddCommGrpCat.{u + 1} f).map d)
+      (by rw [← Functor.map_comp, w, Functor.map_zero])).ShortExact :=
+  hS.map_of_exact (Etale.upperStar AddCommGrpCat.{u + 1} f)
+
+/-- The pullback `s' ∈ Γ(Y', f^*Q)` of a global section `s` of `Q`. -/
+noncomputable abbrev pullbackGlobalSection (s : Q.obj.obj (op (⊤_ Y.Etale))) (f : Y' ⟶ Y) :
+    ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj Q).obj.obj (op (⊤_ Y'.Etale)) :=
+  Etale.pullbackSection f Q (Etale.terminalToEtale f) s
+
+end PullbackSequence
 
 section Naturality
 
@@ -294,6 +316,7 @@ under the identification of `t` with the torsor of local lifts of `s`. -/
 noncomputable def tautologicalLift : I.obj.obj (op t.toEtale) :=
   (e.iso.hom.hom.app (op t.toEtale) ⟨𝟙 _⟩).1
 
+omit [TopologicalSpace M] [DiscreteTopology M] in
 lemma map_vaddEtale_tautologicalLift (m : M) :
     I.obj.map (t.vaddEtale m).op (tautologicalLift hS s t e) =
       tautologicalLift hS s t e + ι.hom.app _ (constSection t.toEtale m) := by
@@ -304,21 +327,9 @@ lemma map_vaddEtale_tautologicalLift (m : M) :
   simp only [ConcreteCategory.comp_apply] at h₂
   have h₃ : t.toSheafTorsor.sheaf.obj.map (t.vaddEtale m).op
       (⟨𝟙 _⟩ : ULift.{u + 1} (t.toEtale ⟶ t.toEtale)) = ⟨t.vaddEtale m⟩ :=
-    ULift.ext _ _ (Category.comp_id _)
+    ULift.ext _ _ (Category.comp_id (t.vaddEtale m))
   rw [h₃, h₁] at h₂
   exact (congr_arg Subtype.val h₂).symm
-
-/-- The short exact sequence `0 → f^*M → f^*I → f^*Q → 0`. -/
-lemma shortExact_upperStar :
-    (ShortComplex.mk ((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι)
-      ((Etale.upperStar AddCommGrpCat.{u + 1} f).map d)
-      (by rw [← Functor.map_comp, w, Functor.map_zero])).ShortExact :=
-  hS.map_of_exact (Etale.upperStar AddCommGrpCat.{u + 1} f)
-
-/-- The pullback `s' ∈ Γ(Y', f^*Q)` of the global section `s`. -/
-noncomputable abbrev pullbackGlobalSection :
-    ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj Q).obj.obj (op (⊤_ Y'.Etale)) :=
-  Etale.pullbackSection f Q (Etale.terminalToEtale f) s
 
 /-- The isomorphism `f^* M ≅ (U ↦ C(U, M))` on the small étale site of `Y'`. -/
 noncomputable abbrev upperStarIso :
@@ -386,10 +397,11 @@ lemma toPullbackLifts_app_val (U : Y'.Etaleᵒᵖ) (φ : (t.pullbackSheafTorsor 
       Etale.pullbackSection f I φ.down (tautologicalLift hS s t e) :=
   rfl
 
-omit [TopologicalSpace M] [DiscreteTopology M] in
+omit [Finite M] in
 lemma pullbackLifts_vadd_val (U : Y'.Etaleᵒᵖ) (a : C(U.unop.left, M))
     (x : (pullbackLifts hS s f).sheaf.obj.obj U) :
-    ((pullbackLifts hS s f).vadd U a x).1 = x.1 +
+    ((pullbackLifts hS s f).vadd U a x).1 =
+      (show ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj I).obj.obj U from x.1) +
       ((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι).hom.app U
         ((upperStarIso f).inv.hom.app U a) :=
   rfl
@@ -400,7 +412,7 @@ lemma toPullbackLifts_vadd (U : Y'.Etaleᵒᵖ) (a : C(U.unop.left, M))
       (pullbackLifts hS s f).vadd U a ((toPullbackLifts hS s t e f).hom.app U φ) := by
   apply Subtype.ext
   rw [pullbackLifts_vadd_val, toPullbackLifts_app_val, toPullbackLifts_app_val]
-  rw [← sub_eq_zero]
+  refine (@sub_eq_zero (((Etale.upperStar AddCommGrpCat.{u + 1} f).obj I).obj.obj U) _ _ _).1 ?_
   refine Etale.eq_zero_of_forall_map_eq_zero _ (fun m : M ↦ Etale.fiberι a m)
     (fun x ↦ ⟨a x, ⟨x, rfl⟩, Scheme.Opens.ι_apply _ _⟩) _ fun m ↦ ?_
   have hw : Etale.fiberι a m ≫ t.pullbackSmulHom f a φ.down =
@@ -411,22 +423,25 @@ lemma toPullbackLifts_vadd (U : Y'.Etaleᵒᵖ) (a : C(U.unop.left, M))
     rfl
   have ha : (Etale.continuousMapSheaf Y' M).obj.map (Etale.fiberι a m).op a =
       ContinuousMap.const _ m := by
-    ext x
+    refine ContinuousMap.ext fun x ↦ ?_
     exact x.2
   have hφ : ((t.pullbackSheafTorsor f).vadd U a φ).down = t.pullbackSmulHom f a φ.down := rfl
+  have h₁ := ConcreteCategory.congr_hom
+    (((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι).hom.naturality (Etale.fiberι a m).op)
+    ((upperStarIso f).inv.hom.app U a)
+  have h₂ := ConcreteCategory.congr_hom
+    ((upperStarIso f).inv.hom.naturality (Etale.fiberι a m).op) a
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h₁ h₂
+  rw [ha] at h₂
   rw [map_sub, map_add, hφ, Etale.map_pullbackSection, hw, ← Category.assoc,
     ← Etale.pullbackSection_map, map_vaddEtale_tautologicalLift, map_add,
-    Etale.map_pullbackSection, ← Etale.pullbackSection_natural,
-    ← ConcreteCategory.comp_apply ((upperStarIso f).inv.hom.app U),
-    ← ConcreteCategory.comp_apply _ (((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι).hom.app U),
-    ← ((Etale.upperStar AddCommGrpCat.{u + 1} f).map ι).hom.naturality,
-    ← Category.assoc, ← (upperStarIso f).inv.hom.naturality, Category.assoc,
-    ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, ha,
-    pullbackSection_constSection]
-  abel
+    Etale.map_pullbackSection, ← Etale.pullbackSection_natural, pullbackSection_constSection]
+  erw [← h₁, ← h₂]
+  exact sub_self _
 
 /-- The torsor of lifts of `f` to `P` is isomorphic to the torsor of local lifts of `s'`. -/
-lemma pullbackSheafTorsor_equiv_pullbackLifts :
+lemma pullbackSheafTorsor_equiv_pullbackLifts
+    (e : Sheaf.Torsor.Iso t.toSheafTorsor (Sheaf.Torsor.lifts terminalIsTerminal hS s)) :
     t.pullbackSheafTorsor f ≈ pullbackLifts hS s f :=
   ⟨Sheaf.Torsor.Iso.ofHom (toPullbackLifts hS s t e f) (toPullbackLifts_vadd hS s t e f)⟩
 
@@ -473,9 +488,9 @@ theorem exists_forall_cohomologyMap_eq_zero_iff
       (AddCommGrpCat.of M)) 1) :
     ∃ t : EtaleTorsor M Y, ∀ ⦃Y' : Scheme.{u}⦄ (f : Y' ⟶ Y),
       Etale.cohomologyMap f _ 1 ξ = 0 ↔ ∃ s : Y' ⟶ t.P, s ≫ t.π = f := by
-  letI : TopologicalSpace M := ⊥
-  haveI : DiscreteTopology M := ⟨rfl⟩
-  obtain ⟨q, hq⟩ := (bijective_classH1 M Y).2 ξ
+  let _ : TopologicalSpace M := ⊥
+  have : DiscreteTopology M := ⟨rfl⟩
+  obtain ⟨q, hq⟩ := (bijective_classH1 (M := M) (Y := Y)).2 ξ
   induction q using Quotient.inductionOn with | h t => ?_
   have hS := Sheaf.Torsor.injectiveSequence_shortExact
     ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))
@@ -486,7 +501,7 @@ theorem exists_forall_cohomologyMap_eq_zero_iff
   refine ⟨t, fun Y' f ↦ ?_⟩
   rw [hξ, cohomologyMap_δ, ← AddMonoidHom.mem_ker, Sheaf.H.ker_δ, AddMonoidHom.mem_range,
     ← nonempty_pullbackSheafTorsor_iff,
-    Sheaf.Torsor.nonempty_iff_of_equiv (pullbackSheafTorsor_equiv_pullbackLifts hS s t e f)]
-  exact (Sheaf.Torsor.nonempty_lifts_iff terminalIsTerminal _ _).symm
+    Sheaf.Torsor.nonempty_iff_of_equiv (pullbackSheafTorsor_equiv_pullbackLifts hS s t f e)]
+  exact (Sheaf.Torsor.nonempty_lifts_iff terminalIsTerminal (shortExact_upperStar hS f) _).symm
 
 end AlgebraicGeometry.Scheme.EtaleTorsor

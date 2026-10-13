@@ -74,11 +74,7 @@ lemma Etale.glueHom_const {U W : X.Etale} (c : M) (g : M → (U ⟶ W)) :
 lemma Etale.comp_glueHom {U V W : X.Etale} (h : V ⟶ U) (a : C(U.left, M))
     (g : M → (U ⟶ W)) :
     h ≫ Etale.glueHom a g = Etale.glueHom (a.comp h.left.base.hom) fun m ↦ h ≫ g m := by
-  refine EtaleTorsor.etaleHom_ext ?_
-  change h.left ≫ U.left.glueOfContinuousMap a _ =
-    V.left.glueOfContinuousMap _ fun m ↦ (h ≫ g m).left
-  rw [Scheme.comp_glueOfContinuousMap]
-  rfl
+  exact EtaleTorsor.etaleHom_ext ((Scheme.comp_glueOfContinuousMap h.left a _).trans rfl)
 
 /-- The open fibre `a⁻¹(m)` of a continuous function `a : U → M` on an object `U` of the small
 étale site, as an object of the small étale site. -/
@@ -223,11 +219,9 @@ lemma pullbackSmulHom_add {U : Y'.Etale} (a b : C(U.left, M)) (φ : U ⟶ t.pull
   have hb : U.left.fiberOpens (a.prodMk b) (m, n) ≤ U.left.fiberOpens b n :=
     fun x hx ↦ (Prod.ext_iff.1 hx).2
   have hab : U.left.fiberOpens (a.prodMk b) (m, n) ≤ U.left.fiberOpens (a + b) (m + n) :=
-    fun x hx ↦ by
-      have h₁ : a x = m := ha hx
-      have h₂ : b x = n := hb hx
-      change a x + b x = m + n
-      rw [h₁, h₂]
+    fun x hx ↦ (Scheme.mem_fiberOpens _ _ _).2 (by
+      rw [ContinuousMap.add_apply, (Scheme.mem_fiberOpens _ _ _).1 (ha hx),
+        (Scheme.mem_fiberOpens _ _ _).1 (hb hx)])
   rw [ι_pullbackSmulHom_left_of_le f t _ _ hab, ι_pullbackSmulHom_left_of_le f t _ _ ha,
     reassoc_of% (ι_pullbackSmulHom_left_of_le f t b φ hb), add_comm, pullbackVadd_add,
     MorphismProperty.Comma.comp_left]
@@ -290,9 +284,7 @@ noncomputable def pullbackSheafTorsor :
     (Equiv.ulift.symm.bijective).comp (t.bijective_pullbackSmulHom f φ.down)
   nonemptySieve_mem U := by
     have := t.surjective
-    have : Surjective (t.pullbackEtale f).hom := by
-      change Surjective (pullback.snd t.π f)
-      infer_instance
+    have : Surjective (t.pullbackEtale f).hom := inferInstanceAs (Surjective (pullback.snd t.π f))
     let V : Y'.Etale := Etale.mk (pullback.fst U.hom (t.pullbackEtale f).hom ≫ U.hom)
     let ι : V ⟶ U := MorphismProperty.Over.homMk (pullback.fst U.hom _) rfl
     refine Y'.smallEtaleTopology.superset_covering ?_
