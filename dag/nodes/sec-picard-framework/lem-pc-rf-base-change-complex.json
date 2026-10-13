@@ -28,47 +28,52 @@
  ],
  "proof": [
   {
-   "text": "The single-complex base-change criterion [lem-pc-rf-base-change-single-complex-criterion] applies to the qcqs morphism f, the arbitrary E in D_QCoh, and the bounded-above quasi-coherent complex G, once its stated stalkwise base-change condition is verified.",
+   "text": "Use the chosen cartesian square sq and its canonical stalk algebra structures. The four algebra-map equations follow by reflexivity and the restriction equations of exists_tensorMap. Apply derivedPullback_torIndependent_flat_complex to the actual cohomologyModel for G at every point. Then counit_stalkCondition_of_localizedComparison transports those isomorphisms to the coordinate-based StalkCondition required by singleComplexBaseChangeCriterion.",
    "uses": [
-    "lem-pc-rf-base-change-single-complex-criterion"
+    "lem-pc-derived-pullback-tor-independent-flat-complex",
+    "lem-pc-counit-stalk-condition-from-localized-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 0DJ9 and 0DJA part (1) (lemma-single-complex-base-change, lemma-single-complex-base-change-condition-inherited)"
-   }
+   "elementary": false
   },
   {
-   "text": "Because every term of G is flat over S, the stalkwise flat-complex lemma [lem-pc-derived-pullback-tor-independent-flat-complex] verifies exactly that condition: at each x' and degree i the displayed stalkwise base-change map (Tag 0DJ8, condition (1)) is an isomorphism.",
+   "text": "Convert hbounded to G.IsStrictlyLE using Mathlib CochainComplex.isStrictlyLE_iff. Obtain a canonical tensor comparison from exists_canonicalPullbackTensorComparison and apply singleComplexBaseChangeCriterion to E,hE,G, the boundedness, quasi-coherence, and the stalk condition.",
    "uses": [
-    "lem-pc-derived-pullback-tor-independent-flat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A1D (lemma-base-change-tensor), proof paragraph checking the condition on stalks"
-   }
-  },
-  {
-   "text": "Substituting this verified stalkwise condition into the criterion yields the canonical isomorphism Lg^*Rf_*(E\\otimes^L G^\\bullet)\\cong Rf_{T,*}(L(g')^*E\\otimes^L(g')^*G^\\bullet).",
-   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
     "lem-pc-rf-base-change-single-complex-criterion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A1D (lemma-base-change-tensor)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorCounit_oneKFlat_coordinates to P,G and the canonical comparison. Transport its source and target isomorphisms along e using tensorIso and functor mapIso. Naturality of the canonical tensor comparison cancels e.inv followed by e.hom and gives the local counit compatibility at E.",
+   "uses": [
+    "lem-pc-tensor-counit-one-kflat-coordinates",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of the recorded schemeDerivedBaseChangeMap from its defining adjunction transpose: the naturality of the two derived-pullback composition isomorphisms, the equality-induced functor isomorphism, and the adjunction counit combine into the naturality square. Adjunction.homEquiv_naturality_left and homEquiv_naturality_right transpose it. Rewrite the criterion using the compatibility of step 3, cancel the mapped target isomorphism, use base-change naturality at the source identification, and cancel its mapped isomorphism. The resulting base-change-map/counit composite is invertible. Precomposing with the map of the arbitrary isomorphism α gives the exact stated conclusion.",
+   "uses": [
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-derived-pullback-tor-independent-flat-complex",
+  "lem-pc-counit-stalk-condition-from-localized-comparison",
+  "def-pc-derived-pullback-tensor-comparison",
   "lem-pc-rf-base-change-single-complex-criterion",
-  "lem-pc-derived-pullback-tor-independent-flat-complex"
+  "lem-pc-tensor-counit-one-kflat-coordinates",
+  "def-pc-derived-base-change-map"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "T4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.26.4, Tag 0A1D"
+  "place": "Tag 0A1D (lemma-base-change-tensor), via Tags 0DJ8, 0DJ9, 0DJA and the tensor coordinate comparison of cohomology.tex Tag 079U",
+  "note": "The original three-step criterion route is retained; two explicit representative-transport interfaces are separated, and naturality and cancellation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -156,5 +161,15 @@
   "group": "R1",
   "result": "fix",
   "note": "qcqs f instances; E with hE schemeDerivedQCohProperty (D_QCoh); G bounded above (hbounded), termwise quasi-coherent (hqc) and IsFlatOver f (hflat); arbitrary g with pullback square; conclusion IsIso of schemeDerivedBaseChangeMap at Tot(P⊗G) then Rf_T* of SingleComplexBaseChange.counit, transported along α; fixed: dropped φ/hφ (Classical.choose of sorried module_pullback_tensor), β and two Prop instance binders, all postcomposed isomorphisms irrelevant to IsIso; stmt_deps additions checked (used or cited in docstring, as in 64cb2bb5b), check_dag 0 cycles; node JSON diff touches only stmt_deps and lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T040802-L-3953194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
