@@ -24,54 +24,46 @@
  ],
  "proof": [
   {
-   "text": "Because the complex is bounded, only finitely many degrees contain terms. Its terms, differentials, and the finitely many equations that consecutive differentials compose to zero form finite module-and-map data; this is just the definition of a bounded complex.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.2, Tag 01ZR, finite bounded range of terms and maps"
-   }
-  },
-  {
-   "text": "Apply part (1) of lem-pc-fp-module-map-descent to each of the finitely many nonzero terms G^r, obtaining models G^r_j with isomorphisms \\alpha_r:(G^r_j)_X\\cong G^r; since I is directed and pullbacks of models are again models, all may be taken at one common stage j. For each r, apply part (2) to the fixed models G^r_j, G^{r+1}_j and the map \\alpha_{r+1}^{-1}\\circ d^r\\circ\\alpha_r:(G^r_j)_X\\to(G^{r+1}_j)_X, and again pass to one common later stage. This gives maps d^r_j:G^r_j\\to G^{r+1}_j between the same model of each term (so consecutive differentials share the model of their common term) with \\alpha_{r+1}\\circ(d^r_j)_X=d^r\\circ\\alpha_r.",
+   "text": "Use bounded_graded_module_map_descent on G.X and the successive differentials G.d n (n+1), retaining the fixed bounds a,b. This gives common models F, maps delta and comparison isomorphisms e, without square-zero relations.",
    "uses": [
-    "lem-pc-fp-module-map-descent"
+    "lem-pc-bounded-graded-module-map-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.2, Tag 01ZR, descent of finitely presented modules, maps, and relations"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply finite relation descent to the finitely many equations saying that each consecutive pair of descended differentials has composite zero. After one further stage these equations hold on X_j, because their base changes are the corresponding zero composites in G^\\bullet.",
+   "text": "Conjugate the base-changed composites delta_n delta_{n+1} through e_{n+2}. Naturality of the map comparisons and G.d_comp_d show that they vanish. Enumerate n in [a,b] by Fin(card N), and all source and target degrees by the finite lifted interval [a,b+2]. Apply finiteRelation_module_map_descent to these composites and zero.",
    "uses": [
     "lem-pc-fp-relation-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.2, Tag 01ZR, descent of the finite relation data"
-   }
+   "elementary": false
   },
   {
-   "text": "The descended terms and differentials therefore form a bounded complex H_j^\\bullet=(G^r_j,d^r_j) of finitely presented quasi-coherent \\mathcal{O}_{X_j}-modules. The termwise isomorphisms \\alpha_r commute with every differential by construction in Step 2, so they assemble to an isomorphism of complexes from the base change of H_j^\\bullet to G^\\bullet.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.2, Tag 01ZR, assembly of the descended finite complex"
-   }
+   "text": "Pull F and delta to the stage supplied by finite relation descent. The enumerated squares are zero there; outside [a,b] the source F_n is zero. Functoriality and preservation of zero maps give square-zero successive maps in every degree. CochainComplex.of builds H.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback preserves the zero terms and finite presentations, hence boundedness and quasi-coherence. The cone equation identifies the composite baseChangeMap with the map to the original stage. Tensor pullback composition gives the new termwise isomorphisms; its naturality transfers the differential comparisons. For nonadjacent degrees both complex differentials vanish by shape.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent",
-  "lem-pc-fp-relation-descent"
+  "def-pc-module-pullback",
+  "lem-pc-bounded-graded-module-map-descent",
+  "lem-pc-fp-relation-descent",
+  "lem-pc-tensor-pullback-finite-presentation"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma 32.10.2, Tag 01ZR"
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Lemma 32.10.2, finite module/map/relation argument",
+  "note": "X3 Lean proof: bounded graded descent, finite relations, CochainComplex.of, naturality of tensor-pullback composition"
  },
  "mathlib_searches": [
   {
@@ -157,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T122445-L-3610301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
