@@ -15,22 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Use bijectivity of the inverse of the explicit quotient equivalence for the first conjunct. For each homogeneous numerator, apply sectionRingVeroneseFractionEquiv to both sides of the desired canonical-map formula. Its inverse cancels on the left. The existing sectionRing_veronese_fraction_formula computes its value on the right; use the symmetric equality. Thus the bijection is explicitly certified to send [n, ξ] to ξ/s^n.",
+   "text": "Define the canonical map by descending the explicit direct-sum numerator-to-fraction map through the section-fraction relation subgroup. The kernel equality gives injectivity of the quotient lift, and surjectivity of the numerator map gives surjectivity of the quotient lift.",
    "uses": [
-    "lem-sc-section-ring-veronese-fractions-formula"
+    "lem-sc-section-ring-veronese-fraction-kernel",
+    "def-sc-section-ring-veronese-fraction-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the quotient lift on a homogeneous fraction generator. The lift computation reduces to the direct-sum summand formula, and sectionRingVeroneseNumerator_cancel cancels the tensor-power identification, yielding the displayed fraction.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-section-ring-veronese-fractions-formula"
+  "lem-sc-section-ring-veronese-fraction-kernel",
+  "def-sc-section-ring-veronese-fraction-map"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Y3",
+  "group": "K2",
   "date": "2026-10-14",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Repair #1428: retain bijectivity and explicitly certify the canonical forward map on homogeneous fraction generators, using the constructed equivalence and its existing inverse generator formula."
+  "place": "Repair #1428; direct quotient descent of the explicit canonical fraction map and its generator computation."
  },
  "mathlib_searches": [
   {
@@ -107,12 +116,12 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-0f9f3",
-  "group": "Y3",
+  "reviewer": "X-0b1df",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T215617-L-903340",
+  "landing": "20261013T224511-L-1471557",
   "kind": "interface",
-  "note": "independent Codex review: Delivered theorem, node, change record, report, direct importer, and compilation match the documented strengthened statement and proof."
+  "note": "independent Codex review: Delivered Lean matches the node and recorded proof dependencies; signatures are unchanged, old and new maps are definitionally equal by rfl, delivery and sole direct importer compile cleanly, and axioms are only propext, Classical.choice, Quot.sound."
  },
  "statement_change": {
   "date": "2026-10-14",

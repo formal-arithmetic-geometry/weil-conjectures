@@ -6,15 +6,15 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula
+public import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel
 public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-! # Bijection for Veronese section fractions
 
 The canonical map from the section-fraction presentation, sending a class
-`[n, ξ]` to the homogeneous fraction `ξ / s^n`, is the inverse of the
-constructed Veronese fraction equivalence.
+`[n, ξ]` to the homogeneous fraction `ξ / s^n`, is constructed by descending
+the explicit numerator map through the section-fraction relations.
 Source: Stacks Project, Properties, Tags 0B5L, 01PW, and 01Q1.
 -/
 
@@ -25,23 +25,32 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical map from section-fraction classes to homogeneous fractions. -/
+/-- The canonical map from section-fraction classes to homogeneous fractions.
+Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
+(blueprint: lem-sc-section-ring-veronese-fractions-core)
+Descend the explicit direct-sum numerator map to the quotient by section-fraction
+relations. The proved kernel equality makes this well-defined; constructing the
+map itself does not require choosing an inverse or proving surjectivity.
+-/
 noncomputable def sectionRingVeroneseFractionCanonicalMap
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) :
     SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d) →+
       HomogeneousLocalization.Away (sectionRingGrade L) s.val :=
-  (sectionRingVeroneseFractionEquiv X L d s).symm.toAddMonoidHom
+  QuotientAddGroup.lift
+    (sectionFractionRelations (L.tensorPow d) (𝟙_ X.Modules) (s.val d)).toAddSubgroup
+    (sectionRingVeroneseFractionMap X L d s)
+    (sectionRingVeroneseFractionMap_kernel X L d s).le
 
 /-- The canonical Veronese fraction map is bijective.
 Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
 (blueprint: lem-sc-section-ring-veronese-fractions-core)
-The map sends the class represented by a numerator `ξ` in degree `n` to the
-homogeneous localization fraction `ξ / s^n`.  It is the inverse of the
-explicit quotient equivalence, so its bijectivity follows from that construction.
-For the generator computation, apply the equivalence to both sides, cancel the
-inverse on the left, and use `sectionRing_veronese_fraction_formula` on the right.
-This identifies the bijection with the specified map on every fraction generator.
+The map descends the explicit numerator-to-fraction map through the section-fraction
+relations. Its kernel is precisely the relation subgroup, which gives injectivity
+of the descended map. Surjectivity follows from the surjectivity of the numerator
+map. On a fraction generator the quotient lift evaluates to the numerator map;
+its summand formula and the tensor-power cancellation identity give exactly `ξ/s^n`.
+The construction and proof also apply when `d=0`, `n=0`, or `s` is zero or nilpotent.
 -/
 theorem sectionRing_veronese_fraction_core
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
@@ -55,13 +64,20 @@ theorem sectionRing_veronese_fraction_core
             L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))) =
       HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n
         ξ.val ξ.property := by
-  refine ⟨(sectionRingVeroneseFractionEquiv X L d s).symm.bijective, ?_⟩
-  intro n ξ
-  apply (sectionRingVeroneseFractionEquiv X L d s).injective
-  change (sectionRingVeroneseFractionEquiv X L d s)
-    ((sectionRingVeroneseFractionEquiv X L d s).symm _) = _
-  rw [AddEquiv.apply_symm_apply]
-  exact (sectionRing_veronese_fraction_formula X L d s
-    (sectionRingVeroneseFractionEquiv X L d s) rfl n ξ).symm
+  refine ⟨⟨?_, ?_⟩, ?_⟩
+  · exact (QuotientAddGroup.injective_lift_iff _ _ _).mpr
+      (sectionRingVeroneseFractionMap_kernel X L d s)
+  · exact QuotientAddGroup.lift_surjective_of_surjective _ _
+      (sectionRingVeroneseFractionMap_surjective X L d s) _
+  · intro n ξ
+    simp only [sectionRingVeroneseFractionCanonicalMap, sectionFraction]
+    change sectionRingVeroneseFractionMap X L d s
+      (DirectSum.of
+        (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
+        ((sectionRingVeroneseNumeratorIso X L d n).hom.app ⊤ (ξ.val (n • d)))) = _
+    simp only [sectionRingVeroneseFractionMap, DirectSum.toAddMonoid_of,
+      AddMonoidHom.comp_apply]
+    rw [sectionRingVeroneseNumerator_cancel X L d n ξ]
+    rfl
 
 end AlgebraicGeometry.Scheme.Modules
