@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-qcoh-alternating-cech-resolution-quasi-iso",
+ "kind": "statement",
+ "title": "Finite affine-cover alternating totalization of a quasi-coherent resolution",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $r\\geq0$, and $U:\\operatorname{Fin}(r)\\to X_{\\mathrm{open}}$ a family with $\\bigcup_i U_i=X$. Suppose every intersection indexed by a nonempty tuple, allowing repetitions and empty opens, is affine. Let $F,J$ be unbounded cochain complexes of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules], every term of $F$ quasi-coherent [pqf-def-coherent], and $J$ K-injective [def-pur-kinjective-complex]. For every quasi-isomorphism $i:F\\to J$, the morphism $T_U(i):T_U(F)\\to T_U(J)$ of the actual alternating total functor [def-sc-alternating-cech-total-complex] is a quasi-isomorphism. This assertion is about a specified cochain map, without localization or comparison-map data.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 08C2, affine-basis case using Cohomology of Schemes, Lemma 01XB; parent proof Steps 2--3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-pur-kinjective-complex",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restrict i to every nonempty intersection. Restriction is exact and preserves K-injectivity. The affine quasi-coherent derived equivalence identifies ordinary sections of the termwise quasi-coherent complex with derived sections, compatibly with the ordinary-to-derived unit; the unbounded acyclic comparison removes the negative tail. The K-injective computation of derived sections then identifies the section map of i with this unit and proves it is a quasi-isomorphism. Quasi-coherent kernels and cokernels ensure that cohomology and good truncations remain quasi-coherent.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-qcoh-acyclic-derived-sections-comparison",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The products over increasing tuples in each Cech degree are finite. Kernels and images commute with these finite products of modules, so every column map is a quasi-isomorphism. The actual integer double complexes have zero columns outside 0 through r-1: negative columns are extended by zero and no strictly increasing (p+1)-tuple exists when p is at least r. Apply the existing upstream finite-column total comparison theorem with bounds 0 and r-1. Its finite induction on the stupid column filtration proves that T_U(i) is a quasi-isomorphism directly, without spectral sequences or page induction. When r=0 both totals vanish and the theorem also allows the empty interval.",
+   "uses": [
+    "lem-sc-integer-finite-column-total-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-integer-finite-column-total-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 08C2, affine-basis case using Cohomology of Schemes, Lemma 01XB; parent proof Steps 2--3; explicit module-valued finite-column argument and homotopy transport by D3; second reading replaces the spectral comparison step by the existing upstream finite-column total comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Alternating Cech total complex computes unbounded derived global sections of quasi coherent complex",
+   "results": "{\"t\": \"2026-10-13T06:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"Alternating Cech total complex computes unbounded derived global sections of quasi coherent complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.Q\"], \"digest\": \"b172219fd19bbccc\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorObjQIso",
+   "results": "{\"t\": \"2026-10-13T06:27:20Z\", \"tool\": \"loogle\", \"query\": \"Functor.rightDerivedFunctorObjQIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.rightDerivedFunctorObjQIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite open covering the alternating Cech augmentation of a K injective complex is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-13T06:38:08Z\", \"tool\": \"leansearch\", \"query\": \"For a finite open covering the alternating Cech augmentation of a K injective complex is a quasi isomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; unavailable, no mathematical verdict; independent leanfinder, loogle and source grep performed",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech totalization of a K injective resolution of an unbounded quasi coherent complex is a quasi isomorphism on affine intersections",
+   "results": "{\"t\": \"2026-10-13T06:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"Cech totalization of a K injective resolution of an unbounded quasi coherent complex is a quasi isomorphism on affine intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.cm5b\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\"], \"digest\": \"e73be8b0da4c1568\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map, QuasiIso",
+   "results": "{\"t\": \"2026-10-13T06:38:09Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex₂.total.map, QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(quasiIso|quasi.isomorphism|KInjective)|(quasiIso|KInjective).*cech",
+   "results": "{\"t\": \"2026-10-13T06:41:25Z\", \"tool\": \"grep\", \"query\": \"cech.*(quasiIso|quasi.isomorphism|KInjective)|(quasiIso|KInjective).*cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map on sections of an unbounded complex of quasi coherent sheaves to a K injective resolution on an affine scheme is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-13T06:41:25Z\", \"tool\": \"leansearch\", \"query\": \"The map on sections of an unbounded complex of quasi coherent sheaves to a K injective resolution on an affine scheme is a quasi isomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; unavailable, no mathematical verdict; independent leanfinder, loogle and source grep performed",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-13T06:41:26Z\", \"tool\": \"leanfinder\", \"query\": \"Finite alternating Cech augmentation of a K injective complex is a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"ChainComplex.quasiIsoAt₀_iff\"], \"digest\": \"3a2d397c8c2d2191\"}",
+   "date": "2026-10-13",
+   "verdict": "no exact match: returned declarations do not state the finite-cover alternating-total assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: comparison of the alternating Cech complex with derived sections on the principal-open cover; Cohomology, Lemma 08C2, affine-basis case using Cohomology of Schemes, Lemma 01XB; parent proof Steps 2--3",
+   "via": [
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohAlternatingCechResolutionQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.qcoh_alternatingCech_resolution_quasiIso",
+  "statement": "theorem qcoh_alternatingCech_resolution_quasiIso (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤) (hAffine : ∀ (p : ℕ) (t : Fin (p + 1) → Fin r), IsAffineOpen (⨅ k, U (t k))) (F J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) [J.IsKInjective] (i : F ⟶ J) [QuasiIso i] : QuasiIso ((alternatingCechTotalFunctor U).map i)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T072342-L-1116600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T072342-L-1116600",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -28,87 +28,47 @@
  ],
  "proof": [
   {
-   "text": "For each degree q, the augmented alternating Cech complex of the sheaf F^q is exact: on an open U_i containing a given point, insertion of the index i gives a contracting homotopy. Since the cover is finite, the Cech direction is bounded (the terms vanish for p >= r), so these augmentations assemble naturally into a bounded filtration of the total complex.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 08C2, proof of the alternating Cech resolution"
-   }
-  },
-  {
-   "text": "For every nonempty intersection U_J, the scheme U_J is affine. Termwise affine quasi-coherent sheaf/module equivalence identifies F^\\bullet|_{U_J} with the sheaf associated to its complex of sections, and the derived global-sections quasi-inverse therefore identifies RΓ(U_J,F^\\bullet|_{U_J}) with Γ(U_J,F^\\bullet|_{U_J}). Equivalently, the cohomology of this section complex is Γ(U_J,H^q(F^\\bullet)) in every degree, naturally in F^\\bullet and in restriction maps.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-sc-qcoh-acyclic-derived-sections-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 08C2, hypothesis (3) from Cohomology of Schemes, Lemma 01XB"
-   }
-  },
-  {
-   "text": "Choose a functorial K-injective resolution F^\\bullet\\to I^\\bullet with every term I^q an injective O_U-module, by [prop-pur-kinjective-resolutions-exist] (U has a set of opens, so its site is small); by [def-pc-ringed-spaces-derived-direct-image] (with g the structure morphism to the one-point ringed space with ring \\Gamma(U,O_U)), R\\Gamma(U,F^\\bullet) is represented by \\Gamma(U,I^\\bullet), for any K-injective resolution. For each intersection U_J, the restriction I^\\bullet|_{U_J} is K-injective by [lem-sc-derived-k-injective-restrict-open], so F^\\bullet|_{U_J}\\to I^\\bullet|_{U_J} is a K-injective resolution and R\\Gamma(U_J,F^\\bullet|_{U_J}) is represented by \\Gamma(U_J,I^\\bullet); by Step 2 (U_J affine) the induced map \\Gamma(U_J,F^\\bullet)\\to\\Gamma(U_J,I^\\bullet) is a quasi-isomorphism, and so is the finite product over J with |J|=p+1. Filter Tot(Cech_alt(U,F^\\bullet)) and Tot(Cech_alt(U,I^\\bullet)) by Cech degree (columns p\\ge p_0); these filtrations are finite (r members, columns 0\\le p\\le r-1) and the map Tot(Cech_alt(F^\\bullet))\\toTot(Cech_alt(I^\\bullet)) induced by F^\\bullet\\to I^\\bullet respects them, with graded pieces the above products of quasi-isomorphisms (shifted by p). By [thm-sp-spectral-object-yields] the map induces a morphism of convergent spectral sequences, an isomorphism on E_1 hence on E_2, hence on E_\\infty by [lem-sp-page-induction]; so it is an isomorphism on the finite graded pieces of H^n, hence on H^n by [lem-sp-finite-filtration-induction]: the left arrow is a quasi-isomorphism.",
+   "text": "Use the existing functorial K-injective resolution I and its natural quasi-isomorphism eta. Write A=Q Gamma, B=Q T_U, and D=R Gamma Q as functors on complexes. Let a:A to B be the localized augmentation and b:A to D the derived-functor unit transported through quotientCompQhIso. On every K-injective J, b_J is exactly the inverse of rightDerivedFunctorObjQIso(J). The augmentation lemma makes I(a) invertible, and D(eta) is invertible because eta is a quasi-isomorphism. Define the natural transformation beta=B(eta), followed by inverse I(a), followed by I(b), followed by inverse D(eta). All inverses are of explicit natural transformations, and no arbitrary existence witness is chosen.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-sc-derived-k-injective-restrict-open",
-    "thm-sp-spectral-object-yields",
-    "lem-sp-page-induction",
-    "lem-sp-finite-filtration-induction"
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss)"
-   }
+   "elementary": false
   },
   {
-   "text": "The right arrow \\Gamma(U,I^\\bullet)\\toTot(Cech_alt(U,I^\\bullet)) is the augmentation into column p=0. For each q, I^q is an injective O_U-module on the scheme U, so its ordered Cech complex for \\mathcal U has \\check H^p(\\mathcal U,I^q)=0 for p>0 by [lem-weil-pbc-module-injective-open-cover-cech-acyclic], and \\check H^0(\\mathcal U,I^q)=I^q(U) by the sheaf axiom; by [lem-pc-alternating-cech-computes] the same holds for the alternating Cech complex, i.e. each row 0\\to\\Gamma(U,I^q)\\to Cech_alt^0(\\mathcal U,I^q)\\to\\cdots\\to Cech_alt^{r-1}(\\mathcal U,I^q)\\to0 is exact. The cone of the right arrow is (up to shift and sign) the total complex of the augmented double complex, which has these exact rows and only the finitely many columns p=-1,\\dots,r-1. Such a total complex is acyclic by the elementary staircase chase: given a cocycle, its component in the top column r-1 is a row boundary, so subtracting the total differential of a cochain in column r-2 removes it; descending column by column the cocycle becomes cohomologous to one concentrated in column -1, which then vanishes as the augmentation is injective; so every cocycle is a coboundary. Hence the right arrow is a quasi-isomorphism. The two quasi-isomorphisms give the zigzag Tot(Cech_alt(F^\\bullet))\\toTot(Cech_alt(I^\\bullet))\\leftarrow\\Gamma(U,I^\\bullet), which represents R\\Gamma(U,F^\\bullet) by Step 3; the composite of the left arrow with the inverse of the right arrow is by definition the canonical map, and it is an isomorphism in D(\\Gamma(U,O_U)).",
+   "text": "Prove a_K followed by beta_K equals b_K, for every complex K: compose with the invertible D(eta_K), use naturality of a at eta_K to cancel a_IK, and use naturality of b at eta_K. For K-injective J, cancellation by the invertible a_J and b_J equals epsilon_J inverse gives beta_J followed by epsilon_J followed by a_J equals identity. Naturality of beta at any K-injective resolution i:K to J now proves the defining comparison equation. Hence beta_F exists and satisfies IsAlternatingCechDerivedComparison through every resolution.",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-pc-alternating-cech-computes"
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss); injective modules are Cech acyclic (Cohomology, Lemma 01EV)"
-   }
+   "elementary": true
   },
   {
-   "text": "Functoriality and independence of the resolution: the resolution F^\\bullet\\mapsto I^\\bullet of [prop-pur-kinjective-resolutions-exist] is a functor with a natural transformation from the identity, and both arrows of the zigzag are natural in the pair (F^\\bullet\\to I^\\bullet), so for a morphism F^\\bullet\\to G^\\bullet the zigzags form a commutative diagram and the isomorphism is natural in F^\\bullet. For another K-injective resolution F^\\bullet\\to J^\\bullet with injective terms, the comparison I^\\bullet\\to J^\\bullet under F^\\bullet of [def-pc-ringed-spaces-derived-direct-image] exists and is unique up to homotopy by [lem-weil-pbc-kinjective-hom-derived] (equivalently [lem-sc-kinjective-quasi-iso-comparison]) and is a homotopy equivalence, and it is compatible with both arrows of the zigzag; hence the isomorphism does not depend on the chosen resolution. The cases r=0 and F^\\bullet=0 give zero total complexes and zero derived sections, agreeing with the same construction.",
+   "text": "For quasi-coherent F, the affine-cover resolution lemma makes B(eta_F) invertible. The remaining three factors in beta_F are invertible: I(a) by augmentation, I(b) by the unit computation on the K-injective resolution, and D(eta) by localization. Thus beta_F is invertible.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sc-kinjective-quasi-iso-comparison"
+    "lem-sc-qcoh-alternating-cech-resolution-quasi-iso",
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 08C2, functoriality clause; Perfect, Lemma 08D2"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Every other comparison gamma on a complex K equals beta_K. Apply their defining equations to eta_K:K to I(K), then cancel D(eta_K), epsilon_IK and a_IK, each invertible. Consequently every comparison on F is invertible. For any g:F to G and supplied comparisons, replace them by beta_F and beta_G using uniqueness, and apply naturality of the constructed natural transformation beta. No homotopy choice or additional naturality lemma is needed for this categorical glue.",
+   "uses": [
+    "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-sc-qcoh-acyclic-derived-sections-comparison",
   "prop-pur-kinjective-resolutions-exist",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sc-derived-k-injective-restrict-open",
-  "thm-sp-spectral-object-yields",
-  "lem-sp-page-induction",
-  "lem-sp-finite-filtration-induction",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "lem-pc-alternating-cech-computes",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-kinjective-quasi-iso-comparison"
+  "lem-sc-kinjective-alternating-cech-augmentation-quasi-iso",
+  "lem-sc-qcoh-alternating-cech-resolution-quasi-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss), with affine-intersection hypothesis supplied by Lemma 01XB"
+  "place": "Cohomology, Lemmas 08C1 and 08C2; D3 explicit natural-transformation construction, universal resolution equation, uniqueness and naturality, reducing analytic Steps 2--5 to two named quasi-isomorphism lemmas"
  },
  "mathlib_searches": [
   {
@@ -273,5 +233,15 @@
    "def-pc-derived-category",
    "def-pc-derived-direct-image"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T072342-L-1116600",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
