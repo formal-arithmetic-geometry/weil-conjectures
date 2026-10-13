@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-proper-flat-open-square-mate-isiso",
+ "kind": "statement",
+ "title": "Proper-flat canonical open-square mate invertibility",
+ "statement": "Let f:X→Y be a proper, flat, locally finitely presented morphism of schemes [def-weil-pbc-scheme-conventions, def-weil-proper-morphism, def-weil-flat-morphism], with Y quasi-compact and quasi-separated. Fix derived module categories for every scheme in one universe [def-pc-derived-category], and an affine open W of Y. Write X_W=X×_Y W [def-pc-fibre-product]. Let a and b be any right adjoints to the canonical lifts of Rf_* and R(f_W)_* to the quasi-coherent derived categories, with supplied adjunctions [def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint]. Suppose the canonical ordinary derived base-change map for this pullback square is an isomorphism on every quasi-coherent derived input [def-pc-derived-base-change-map]. For each K in D_QCoh(Y), the canonical duality mate L(j_X)^*a(K)→b(Lj^*K) [def-sc-duality-equation-base-change-map] is an isomorphism. Here j:W→Y is the open inclusion and j_X:X_W→X the first projection. Neither Y nor X is assumed affine; empty W and all unbounded K are allowed.",
+ "source": {
+  "document": "Stacks Project, Duality for Schemes and Cohomology of Sheaves",
+  "place": "duality.tex, Tags 0E4J and 0A9L (equation-sheafy); Tag 0E9S"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Exact open restriction agrees with derived pullback: identify tensor pullback with module restriction by uniqueness of its left adjunction and use uniqueness of the left-derived functor. The open pullback is identified with f inverse(W) by its two projections. The affine open and its proper inverse image are quasi-compact.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proper_flat_rightAdjoint_restriction_open to the canonical lift of Rf_* and to an identity base-change square. Its first clause makes restriction of a applied to the open unit invertible, for every unbounded K. The open direct-image preserves quasi-coherent cohomology, so that the unit target is in the required full subcategory.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct-image restriction and composition give the invertible conjugate comparison a Rj_* ≅ Ri_* b. Under the chosen adjunctions the canonical mate is exactly restricted a of the unit, followed by restriction of the inverse conjugate, followed by the open counit. The last two maps are isomorphisms: the conjugate is invertible by the assumed ordinary base change, and open direct image is fully faithful. Transport across the projection isomorphism and uniqueness of right adjoints to the supplied b and adjunction. Thus the full mate is invertible, including for empty W.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-direct-image-composition",
+    "def-sc-duality-equation-base-change-map",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback",
+  "def-sc-duality-equation-base-change-map",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-proper-flat-right-adjoint-restriction-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0E4J, 0A9L and 0E9S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper flat right adjoint base change to an affine open is an isomorphism",
+   "results": "HTTP Internal Server Error; LeanSearch unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint base change along an open immersion is an isomorphism for proper flat schemes",
+   "results": "Eight hits including underived Scheme.Modules.restrictFunctorIsoPullback and instIsIsoFunctorCounitRestrictAdjunction; no derived right-adjoint mate theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*open|mateEquiv_hcomp|conjugateEquiv_comp",
+   "results": "Mathlib generic mateEquiv_hcomp and conjugateEquiv_comp; no proper-flat derived open-square invertibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointMateNewBaseOpen",
+  "group": "H4",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Reduction to affine bases in the proper-flat right-adjoint base-change formula used in the diagonal counit identity: compatibility of the canonical mate with affine open restriction (Remark 48.6.1). The open-square invertibility step.",
+   "via": [
+    "lem-sc-right-adjoint-mate-new-base-open",
+    "lem-sc-proper-flat-right-adjoint-chart-mate-comparison",
+    "lem-sc-proper-flat-right-adjoint-basechange-chart",
+    "lem-sc-proper-flat-right-adjoint-basechange-global",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatOpenSquareMateIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatOpenSquareMateIso.lean",
+  "declaration": "AlgebraicGeometry.proper_flat_openSquare_mate_isIso",
+  "statement": "theorem proper_flat_openSquare_mate_isIso\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y : Scheme.{u}}\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    (W : Y.Opens) [IsAffine W.toScheme]\n    (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory W.toScheme ⥤ schemeDerivedQCohCategory (pullback f W.ι))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty W.toScheme).lift\n      ((schemeDerivedQCohProperty (pullback f W.ι)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f W.ι)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f W.ι)) _ _ _ _\n          (pullback.snd f W.ι) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f W.ι) W.ι (pullback.fst f W.ι)\n        pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y) :\n    IsIso (@dualityEquationBaseChangeMap _ X Y W.toScheme\n      (QuasiCompact.compactSpace_of_compactSpace f)\n      (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n      f W.ι a a' adjf adjf' hβ K)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T100007-L-2463244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
