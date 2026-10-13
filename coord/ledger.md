@@ -10983,3 +10983,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:52 L: batch 20261013T034159 dependency take-out
 - 03:59 L: returned deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore (reviewer RETURN: (reviewer X-310b9, head 310b91a61) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
 - 04:07 L: returned deliver/J3/Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility (reviewer RETURN: (the landing tools, head 8973b8798) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 04:07 L: returned deliver/N3/Sheaf.AlgebraicGeometry.AnnihilatorQuasicoherent (reviewer RETURN: (the landing tools, head 9bbd23097) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
