@@ -6,8 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.Cohomology.InverseImageCoefficientComposition
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullbackComposition
 
 /-! # Transport of ordinary unit cohomology across a displayed cartesian square
 
@@ -55,6 +54,20 @@ theorem exists_cartesian_unit_cohomology_transport
             ((SheafOfModules.toSheaf C.ringCatSheaf).obj
               (SheafOfModules.unit C.ringCatSheaf)) n x)) =
           H.baseChangeLinear (S := k') f (SheafOfModules.unit C.ringCatSheaf) n x :=
-  by sorry
+  by
+    let d := h.isoPullback.hom
+    have hd : d ≫ baseChangeSnd (S := k') f = f' := h.isoPullback_hom_snd
+    let M := baseChangedModule (S := k') f (SheafOfModules.unit C.ringCatSheaf)
+    let e : M ≅ SheafOfModules.unit (baseChangedScheme (S := k') f).ringCatSheaf :=
+      pullbackObjUnitIso (baseChangeFst (S := k') f)
+    let L := unitCohomologyPullbackLinear (baseChangeSnd (S := k') f) f' d hd M
+      (e.hom ≫ SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom) n
+    have hb : Function.Bijective L :=
+      unitCohomologyPullbackLinear_bijective _ _ _ _ _ e n
+    let E := LinearEquiv.ofBijective L hb
+    refine ⟨E.symm, fun x ↦ ?_⟩
+    apply E.injective
+    rw [E.apply_symm_apply]
+    exact (cartesian_unit_cohomology_pullback_comp f h n x).symm
 
 end AlgebraicGeometry.Scheme.Modules

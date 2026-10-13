@@ -1,0 +1,162 @@
+{
+ "id": "lem-pbc-cartesian-unit-cohomology-pullback-comp",
+ "kind": "statement",
+ "title": "Composition identity for the specified forward cartesian unit-cohomology map",
+ "statement": "Let k→kprime be a commutative-ring algebra map, f:C→Spec k, and h display a cartesian square Cprime with projections iotaprime and fprime [def-pc-base-change]. Set d=h.isoPullback.hom, M=(O_C)_{kprime}, and e=pullbackObjUnitIso(baseChangeFst f). The forward map L=unitCohomologyPullbackLinear(baseChangeSnd f,fprime,d,hd,M,e.hom followed by unitToPushforwardObjUnit d,n) [def-pbc-unit-cohomology-pullback-linear] satisfies L(H.baseChangeLinear(f,O_C,n)(x)) equal to ordinary structural pullback of x along iotaprime for every x∈HOver(f,O_C,n) [def-pc-flat-cohomology-comparison]. This is an equality for a specified map, with no existence or bijectivity conclusion.",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison",
+  "def-pbc-unit-cohomology-pullback-linear"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; exact inverse-image action on Ext, and Mathlib adjunction and unit pullback APIs"
+ },
+ "proof": [
+  {
+   "text": "Use the first projection identity d followed by baseChangeFst equals iotaprime. The unit-pullback adjunction identity identifies baseChangeUnit followed by pushforward of e.hom with the structural unit map. Naturality moves e through the adjoint coefficient map; structural maps compose on every open. Apply coefficientUnit_comp to identify composite adjoint coefficient maps.",
+   "uses": [
+    "lem-pc-coefficient-unit-composition",
+    "def-pbc-unit-cohomology-pullback-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-integer comparisons compose with the same inverse-image comparison by uniqueness of left-adjoint comparisons. Functoriality of exact-functor action on Ext and associativity of Ext composition identify the composite cohomology map with structural pullback. This proves compatibility without using bijectivity.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-pbc-unit-cohomology-pullback-linear"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-unit-cohomology-pullback-linear",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "The explicit Ext comparison, naturality and functoriality; the complete argument is in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitIso|IsPullback.isoPullback",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback along an isomorphism of schemes is bijective and respects the module scalar action",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.mapFunctor_bijective",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'CategoryTheory.Sheaf.H.mapFunctor_bijective'",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing the structure sheaf cohomology base change map with cohomology pullback along the canonical isomorphism for a cartesian square equals structural pullback",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst', SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of composition of exact inverse image on Ext cohomology of sheaves with the canonical constant integer comparison and adjoint coefficient maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The linear cohomology pullback along a scheme isomorphism with coefficients identified with the structure sheaf is bijective",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "unitCohomologyPullbackLinear|cartesian_unit_cohomology_pullback_comp|H.mapFunctor_bijective in lean/; unitToPushforwardObjUnit|pullbackObjUnitIso|IsPullback.isoPullback in Mathlib",
+   "date": "2026-10-13",
+   "results": "No existing defined linear map or its composition theorem. Upstream Sheaf.H.mapFunctor_bijective supplies the abstract equivalence part, not coefficient invertibility; coefficientUnit_comp supplies coefficient composition, not the full cohomology comparison.",
+   "verdict": "No duplicate; use the found APIs in the reductions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Ordinary unit-cohomology transport used in characteristic-p Artin-Schreier comparison: construction and functoriality, below the curve unit route.",
+   "via": [
+    "lem-pbc-cartesian-unit-cohomology-transport",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CartesianUnitCohomologyPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cartesian_unit_cohomology_pullback_comp",
+  "statement": "theorem cartesian_unit_cohomology_pullback_comp {k k' : Type u} [CommRing k] [CommRing k'] [Algebra k k'] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (n : ℕ) (x : HOver f (SheafOfModules.unit C.ringCatSheaf) n) : unitCohomologyPullbackLinear (baseChangeSnd (S := k') f) f' h.isoPullback.hom h.isoPullback_hom_snd (baseChangedModule (S := k') f (SheafOfModules.unit C.ringCatSheaf)) ((pullbackObjUnitIso (baseChangeFst (S := k') f)).hom ≫ SheafOfModules.unitToPushforwardObjUnit h.isoPullback.hom.toRingCatSheafHom) n (H.baseChangeLinear (S := k') f (SheafOfModules.unit C.ringCatSheaf) n x) = Sheaf.H.map (coeff ι' (SheafOfModules.unitToPushforwardObjUnit ι'.toRingCatSheafHom)) n (Sheaf.H.mapFunctor (invImage ι') (constIso ι').symm ((SheafOfModules.toSheaf C.ringCatSheaf).obj (SheafOfModules.unit C.ringCatSheaf)) n x)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e4303",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e4303",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519488",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged transport theorem and explicit-map reduction with the DAG nodes and dependencies; all three modules compile without warnings, and axioms match the two documented lower holes. The disputed arbitrary-equivalence statement is absent."
+ }
+}

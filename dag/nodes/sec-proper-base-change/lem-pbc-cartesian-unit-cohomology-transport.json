@@ -14,37 +14,38 @@
  ],
  "proof": [
   {
-   "text": "The universal property gives an isomorphism d from Cprime to the categorical base change commuting with both projections. The adjoint structure-sheaf map from the ordinary canonical pullback of O_C to the unit module is an isomorphism. Its adjunction identity identifies baseChangeUnit followed by its pushforward with unitToPushforwardObjUnit. Use the ordinary pullbackObjUnitIso, the Mathlib clause of the cited node.",
+   "text": "Use h.isoPullback.hom and its second projection identity. Form the real linear map L from categorical-base-change cohomology to displayed unit cohomology using the ordinary pullbackObjUnitIso and the structural unit map.",
    "uses": [
-    "lem-weil-pbc-module-pullback-structure-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Invert the cohomology map of the unit-module isomorphism and transport cohomology along d inverse, producing the additive equivalence t. On sections the second projection identity identifies pullback of the structural kprime scalar with the scalar on the categorical base change. Naturality for multiplication and Sheaf.H.map proves kprime-linearity.",
-   "uses": [
+    "def-pbc-unit-cohomology-pullback-linear",
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The first projection identity gives d inverse followed by iota prime equal to baseChangeFst. Coefficient-unit composition identifies the adjoint coefficient maps after the unit-module isomorphism. The constant-integer comparisons are unique adjunction comparisons and compose with the same inverse-image comparison. Exact-functor action on Ext and associativity of Ext composition identify the two pullback maps, giving the equality with H.baseChangeLinear. No tensor exactness, flatness, separatedness or compactness is used.",
+   "text": "Apply bijectivity of specified unit-cohomology transport along the scheme isomorphism to L, then form the inverse LinearEquiv.ofBijective L hb.",
    "uses": [
-    "lem-pc-coefficient-unit-composition",
-    "def-pc-flat-cohomology-comparison"
+    "lem-pbc-unit-cohomology-pullback-linear-bijective"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply injectivity of the forward equivalence to the desired inverse-transport identity. Its inverse cancels; the remaining identity is exactly the forward cartesian cohomology composition theorem.",
+   "uses": [
+    "lem-pbc-cartesian-unit-cohomology-pullback-comp"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pbc-unit-cohomology-pullback-linear",
   "def-pc-flat-cohomology-comparison",
-  "lem-pc-coefficient-unit-composition",
-  "lem-weil-pbc-module-pullback-structure-sheaf"
+  "lem-pbc-cartesian-unit-cohomology-pullback-comp",
+  "lem-pbc-unit-cohomology-pullback-linear-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "cohomology-equation-functorial; Tag 02KH, coherent-lemma-flat-base-change-cohomology, untensored map construction; Mathlib Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit"
+  "place": "Explicit forward cohomology map, inversion of its bijectivity, and the composition identity; second reading by N4."
  },
  "mathlib_searches": [
   {
@@ -131,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-e4303",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T082338-L-1633199",
+  "landing": "20261013T162411-L-1519488",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged transport theorem and explicit-map reduction with the DAG nodes and dependencies; all three modules compile without warnings, and axioms match the two documented lower holes. The disputed arbitrary-equivalence statement is absent."
  }
 }

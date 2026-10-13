@@ -1,0 +1,150 @@
+{
+ "id": "def-pbc-unit-cohomology-pullback-linear",
+ "kind": "definition",
+ "title": "Explicit linear cohomology pullback over a common affine base",
+ "statement": "Let R be a commutative ring, X and Y schemes [def-pc-scheme], f:Y→Spec R and fprime:X→Spec R, d:X→Y with d followed by f equal to fprime, M a module on Y, and phi:M→d_*O_X. Define a linear map HOver(f,M,n)→HOver(fprime,O_X,n) [def-pc-flat-cohomology-comparison] by the exact inverse-image Ext map with inverse constant-integer comparison, followed by Sheaf.H.map of coeff d phi. The map is R-linear by coefficient naturality and the structural-scalar identity from d followed by f equal to fprime; it is defined without any choice of an equivalence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; exact inverse-image action on Ext, and Mathlib adjunction and unit pullback APIs"
+ },
+ "proof": [
+  {
+   "text": "Construct the cohomology comparison using cohomologyComparisonLinear. Apply appTop to the equation d followed by f equals fprime to identify structural scalars. coeff_naturality and smulHom_naturality establish linearity.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "The explicit Ext comparison, naturality and functoriality; the complete argument is in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitIso|IsPullback.isoPullback",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback along an isomorphism of schemes is bijective and respects the module scalar action",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.mapFunctor_bijective",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'CategoryTheory.Sheaf.H.mapFunctor_bijective'",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing the structure sheaf cohomology base change map with cohomology pullback along the canonical isomorphism for a cartesian square equals structural pullback",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst', SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd",
+   "verdict": "Generic inverse-image, unit and adjunction APIs only; no complete statement of the defined linear map or its composition identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of composition of exact inverse image on Ext cohomology of sheaves with the canonical constant integer comparison and adjoint coefficient maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The linear cohomology pullback along a scheme isomorphism with coefficients identified with the structure sheaf is bijective",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "unitCohomologyPullbackLinear|cartesian_unit_cohomology_pullback_comp|H.mapFunctor_bijective in lean/; unitToPushforwardObjUnit|pullbackObjUnitIso|IsPullback.isoPullback in Mathlib",
+   "date": "2026-10-13",
+   "results": "No existing defined linear map or its composition theorem. Upstream Sheaf.H.mapFunctor_bijective supplies the abstract equivalence part, not coefficient invertibility; coefficientUnit_comp supplies coefficient composition, not the full cohomology comparison.",
+   "verdict": "No duplicate; use the found APIs in the reductions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Ordinary unit-cohomology transport used in characteristic-p Artin-Schreier comparison: construction and functoriality, below the curve unit route.",
+   "via": [
+    "lem-pbc-cartesian-unit-cohomology-transport",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.UnitCohomologyPullbackLinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/UnitCohomologyPullbackLinear.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unitCohomologyPullbackLinear",
+  "statement": "def unitCohomologyPullbackLinear {R : Type u} [CommRing R] {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of R)) (f' : X ⟶ Spec (.of R)) (d : X ⟶ Y) (hd : d ≫ f = f') (M : Y.Modules) (φ : M ⟶ (pushforward d).obj (SheafOfModules.unit X.ringCatSheaf)) (n : ℕ) : HOver f M n →ₗ[R] HOver f' (SheafOfModules.unit X.ringCatSheaf) n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e4303",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e4303",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519488",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged transport theorem and explicit-map reduction with the DAG nodes and dependencies; all three modules compile without warnings, and axioms match the two documented lower holes. The disputed arbitrary-equivalence statement is absent."
+ }
+}
