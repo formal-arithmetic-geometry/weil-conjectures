@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ, affine support paragraph; Tag 06Z0 exact associated sheaf"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "new-affine-restricted-homology-support",
+ "title": "Support of an ordinary affine module identified with restricted cohomology",
+ "statement": "Let X be a scheme with the derived categories of module sheaves and over-sites [def-pc-derived-category], f a compatible global section [def-sc-derived-global-scalar], Eprime a quasi-coherent derived object with cohomology stalks zero outside V(f), U an affine open, k and i integers, and N a module over Gamma(U,O). If affinePerfectSheafification(N) [lem-pc-affine-perfect-module-model] is isomorphic to the i-th homology of derived over-site restriction of Eprime[k], then D(f|U) is disjoint from Module.support Gamma(U,O) N.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-affine-perfect-module-model",
+  "def-sc-derived-global-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Apply the inverse over-site equivalence to the given sheaf isomorphism and compose with exact restriction/homology comparison and overFunctorEquiv. This gives an isomorphism from chart restriction of tilde N to open restriction of H^i(Eprime[k]). The homology shiftIso identifies this with H^(k+i)(Eprime).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a prime p in D(f|U), take y=isoSpec.inv(p). Section compatibility f.property and Scheme.basicOpen_res, together with fromSpec_preimage_basicOpen, imply y.val is outside global V(f). The given support makes the stalk of H^(k+i)(Eprime) there zero. Apply restrictStalkNatIso to the sheaf isomorphism and chart inverse identity to get a zero stalk of tilde N at p. Its localization property and IsLocalizedModule.eq_zero_iff give annihilators in the prime complement for every element. LocalizedModule.subsingleton_iff and Module.notMem_support_iff now show p is not in support.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-13",
+  "note": "Complete Lean proof using exact restriction/homology and stalk isomorphisms, section compatibility and the prime localization of tilde stalks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "support of module whose tilde is restricted cohomology disjoint from scalar basic open",
+   "date": "2026-10-13",
+   "results": "LocalizedModule.subsingleton_iff_disjoint; RingedSpace.mem_zeroLocus_iff",
+   "verdict": "components only; no exact support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.notMem_support_iff",
+   "date": "2026-10-13",
+   "results": "Module.notMem_support_iff",
+   "verdict": "components only; no exact support comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|notMem_support_iff",
+   "date": "2026-10-13",
+   "results": "Modules.restrictStalkNatIso in Modules/Sheaf.lean; Module.notMem_support_iff in RingTheory/Support.lean",
+   "verdict": "components only; no exact support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The support of an affine module with zero associated sheaf stalks on a basic open is disjoint from that basic open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenSupportedModelTorsion",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-open-supported-model-torsion",
+   "place": "proof steps 2 and prime-localization part of step 3"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRestrictedHomologySupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRestrictedHomologySupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_restricted_homology_support",
+  "statement": "theorem affine_restricted_homology_support\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (f : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}))\n    (E' : schemeDerivedQCohCategory X)\n    (hSupport : ∀ (i : ℤ) (x : X), x ∉ X.zeroLocus (U := ⊤) {f.val (op ⊤)} →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E'.obj).val.presheaf x)))\n    (U : X.Opens) (hU : IsAffineOpen U) (k : ℤ)\n    (i : ℤ) (N : ModuleCat.{u} (X.sheaf.obj.obj (op U)))\n    (hN : Nonempty ((affinePerfectSheafification X U hU).obj N ≅\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) i).obj\n        ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n          (E'.obj⟦k⟧)))) :\n    Disjoint (↑(PrimeSpectrum.basicOpen (R := (X.sheaf.obj.obj (op U) : Type u))\n      (f.val (op U)))) (Module.support (X.sheaf.obj.obj (op U)) N)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
