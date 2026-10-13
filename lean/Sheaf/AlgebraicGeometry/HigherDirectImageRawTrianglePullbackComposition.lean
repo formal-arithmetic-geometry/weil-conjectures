@@ -111,6 +111,7 @@ theorem higherDirectImageRawTrianglePullback_comp
     have := Functor.plusCompIso_commShift (b)^*[ModuleCat.{u + 1} Λ] (a)^*[ModuleCat.{u + 1} Λ]
     dsimp only [upperStarPlusComp, Iso.trans_hom]
     infer_instance
+  set_option backward.isDefEq.respectTransparency false in
   exact rawTriangleMap_comp
     (freeSheaf Λ S) (h)^*[ModuleCat.{u + 1} Λ]
     (b ≫ h)^*[ModuleCat.{u + 1} Λ] (a ≫ b ≫ h)^*[ModuleCat.{u + 1} Λ]
