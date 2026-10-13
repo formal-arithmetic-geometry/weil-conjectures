@@ -14,30 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Jacobi-Zariski for F_p -> A -> K, the vanishing of H1(K/F_p), and H1(K/A) = m_A/m_A^2 give a short exact conormal row. The connecting-map naturality theorem identifies its first arrow with f mod m^2 -> 1 tensor df. Repeat this construction for B and L.",
+   "text": "For F_p -> A -> K, prime-field H1 vanishing and the two middle Jacobi-Zariski exactness assertions make δ injective. Use the surjective presentation of A -> K and h1CotangentEquivCotangent to identify its domain with the local conormal space. Compose the inverse equivalence with the presentation cotangentComplex; this gives an injective conormal arrow and exactness with mapBaseChange. The same argument applies to B -> L. The maps to the field differentials are surjective.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
     "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-jacobi-zariski-middle-exactness",
     "lem-weil-pbc-jacobi-zariski-surjection-h1",
-    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the lower row with L over K: field extensions are flat. Tensor cancellation gives its middle term L tensor_A Omega[A/F_p]. The local homomorphism induces alpha on conormal spaces and gamma on field differentials. Naturality gives the square for alpha and beta. The square for beta and gamma commutes on 1 tensor da by compatibility with the residue map; these generators span the tensor differential modules.",
+   "text": "Tensor the A conormal row with L over K using field flatness. Tensor cancellation gives its middle term L tensor_A Omega[A/F_p]. Define b as the base change of the residue differential quotient composed with inverse cancellation; define a by cancellation after base change of the conormal arrow. On universal differential generators, d beta = gamma b: both send 1 tensor da to d of the image in L. Hence beta a takes values in ker d = range c. Define alpha by factoring beta a through the inverse of the injective map c onto its range. Its left square commutes by the inverse law; connecting-map naturality is not needed.",
    "uses": [
     "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality"
+    "def-weil-pbc-kahler-differentials"
    ],
    "elementary": false
   },
   {
-   "text": "Jacobi-Zariski for F_p -> K -> L and H1(L/F_p)=0 identify ker gamma with H1(L/K); right exactness identifies coker gamma with Omega[L/K]. Apply the snake lemma to the two short exact conormal rows and transport its maps through these equivalences. Its endpoint injection and surjection and its four internal exactness assertions are precisely the conclusion.",
+   "text": "For F_p -> K -> L, prime-field H1 vanishing and middle Jacobi-Zariski exactness identify H1(L/K) linearly with ker gamma. Right exactness of differentials and the first isomorphism theorem identify coker gamma with Omega[L/K].",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
     "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-jacobi-zariski-middle-exactness",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib Algebra.Module.SnakeLemma.δ′ and exact_δ′_right/left to construct the connecting map ker gamma -> coker alpha and prove exactness on both sides. Construct the kernel restrictions and the cokernel quotient maps explicitly. Injectivity of the upper conormal arrow proves injection of ker alpha -> ker beta; a lift along the upper exact row proves exactness at ker beta. Lift along the lower exact row to prove exactness at coker beta, and lower-row surjectivity proves surjection onto coker gamma. Transport the middle kernel and terminal cokernel through the two field linear equivalences to obtain the stated sequence.",
+   "uses": [
     "lem-weil-pbc-snake-lemma-modules"
    ],
    "elementary": false
@@ -47,16 +52,17 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-  "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-jacobi-zariski-middle-exactness",
   "lem-weil-pbc-jacobi-zariski-surjection-h1",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
   "lem-weil-pbc-snake-lemma-modules"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "E4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07E5, proof of (2) => (4), big conormal diagram and the Jacobi-Zariski identification of the field-comparison defects; original item steps 5-7"
+  "place": "Tag 07E5 big conormal diagram; direct Mathlib middle Jacobi-Zariski exactness, and the conormal map constructed by factoring through the injective lower conormal arrow."
  },
  "mathlib_searches": [
   {
@@ -135,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T095948-L-2457160",
-  "kind": "interface",
+  "landing": "20261013T111843-L-3049603",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

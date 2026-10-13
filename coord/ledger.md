@@ -12102,3 +12102,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/E2/Sheaf.FieldTheory.IntersectionSubfieldsSubspace (stage 3; reviewer PASS; first push; landing 20261013T111842-L-3049206 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/E2/Sheaf.FieldTheory.PIndependentDifferentialsIndependent (stage 3; reviewer PASS; first push; landing 20261013T111843-L-3049353 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ResolutionSectionsHomologyScalar (stage 3; reviewer PASS; first push; landing 20261013T111843-L-3049480 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/E4/Sheaf.RingTheory.ResidueConormalSnakeSequence (stage 3; reviewer PASS; first push; landing 20261013T111843-L-3049603 (proof); batch 20261013T111833; modules 1; new nodes 0)
