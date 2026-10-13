@@ -16,11 +16,13 @@
  ],
  "proof": [
   {
-   "text": "Transpose under the pinned derived adjunction for f′. Use its compatibility with the ordinary tensor adjunction, left-derived counits and right-derived units to expand both sides. The universal-property characterization of the derived composition comparison replaces successive counits by the composite counit, and the square identifies those composites. Naturality and both triangle identities leave the ordinary base-change map. Descend the termwise exchange to homotopy categories and localize, then transpose back.",
+   "text": "Use the ordinary homotopy counit transpose and the pullback-only localization square. The existing pinned derived Hom equivalence applied to the ordinary f counit gives derived counit compatibility. Naturality of the derived pullback square moves Lf′*Lg*(the right-derived unit) across that square. The counit compatibility and the two intermediate identities identify the transpose. Naturality of the pinned f′ Hom equivalence and its compatibility with localization then give the asserted equation. The private exchange_unit_of_counit helper proves this categorical calculation completely in Lean.",
    "uses": [
     "def-pc-derived-base-change-map",
     "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-weil-pbc-module-base-change-map-open-restriction"
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-pc-homotopy-pullback-square-localization",
+    "lem-pc-homotopy-base-change-counit"
    ],
    "elementary": false
   }
@@ -28,12 +30,14 @@
  "proof_deps": [
   "def-pc-derived-base-change-map",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-pc-homotopy-pullback-square-localization",
+  "lem-pc-homotopy-base-change-counit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Cohomology and Derived Categories",
-  "place": "Tag 08HY, remark-base-change, mate description; Tag 09T5, lemma-derived-adjoint-functors, compatibility via Tag 0DVC (lemma-pre-derived-adjoint-functors). Step 3 of lem-pc-affine-alternating-cech-pinned-mate."
+  "place": "Tags 08HY, 0D5S and 0DVC; original node argument, decomposed into independent pullback localization and ordinary homotopy mate identities."
  },
  "mathlib_searches": [
   {
@@ -114,12 +118,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T230757-L-1908806",
+  "landing": "20261013T142852-L-495894",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
