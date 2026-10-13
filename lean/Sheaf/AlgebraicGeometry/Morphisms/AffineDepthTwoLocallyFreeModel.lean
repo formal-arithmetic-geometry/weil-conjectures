@@ -13,6 +13,9 @@ public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore
 import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
+import Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # A coherent depth-two model of a finite locally free module on an affine open
 
@@ -74,9 +77,29 @@ theorem exists_affine_depth_two_locally_free_model
           (2 : ℕ∞) ≤ IsLocalRing.depth (R := (Spec A).presheaf.stalk x)
             (TopCat.Presheaf.stalk (C := Ab.{u}) H.val.presheaf x)) ∧
       Nonempty (Modules.restrict H W.ι ≅ P) := by
-  obtain ⟨H, hHqc, hHfin, hHres⟩ :=
+  obtain ⟨H₀, hHqc, hHfin, ⟨e₀⟩⟩ :=
     exists_affine_locally_free_model_core A W P
-  refine ⟨H, hHqc, hHfin, ?_, hHres⟩
-  exact affine_depth_two_boundary_property A W hboundary H hHqc hHfin
+  have : H₀.IsQuasicoherent := hHqc
+  have : Module.Finite Γ(Spec A, ⊤) Γ(H₀, ⊤) :=
+    hHfin ⊤ (isAffineOpen_top (Spec A))
+  let M := (moduleSpecΓFunctor (R := A)).obj H₀
+  have : Module.Finite A M := Modules.finite_sections_top_of_finite H₀
+  let D := ModuleCat.of A (Module.Dual A (Module.Dual A M))
+  have : Module.Finite A D := inferInstance
+  let H := tilde D
+  have hqc : H.IsQuasicoherent := inferInstance
+  have : Module.Finite A Γ(H, ⊤) :=
+    Module.Finite.equiv (tilde.isoTop D).toLinearEquiv
+  have : H.IsFinitePresentation := Modules.isFinitePresentation_of_finite H
+  have hfin (V : (Spec A).Opens) (hV : IsAffineOpen V) :
+      Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V)) :=
+    Modules.finite_sections_of_isFinitePresentation H hV
+  have : IsIso H₀.fromTildeΓ := Modules.isIso_fromTildeΓ_of_isQuasicoherent H₀
+  let e : Modules.restrict (tilde M) W.ι ≅ P :=
+    (Modules.restrictFunctor W.ι).mapIso (asIso H₀.fromTildeΓ) ≪≫ e₀
+  have hres : Nonempty (Modules.restrict H W.ι ≅ P) :=
+    affine_double_dual_restriction A W M P e
+  refine ⟨H, hqc, hfin, ?_, hres⟩
+  exact affine_depth_two_boundary_property A W hboundary M
 
 end AlgebraicGeometry.Scheme

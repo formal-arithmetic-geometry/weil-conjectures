@@ -1,0 +1,100 @@
+{
+ "id": "new-affine-double-dual-restriction",
+ "kind": "statement",
+ "title": "Finite double dual preserves a finite locally free restriction",
+ "statement": "theorem affine_double_dual_restriction\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (M : ModuleCat.{u} A) [Module.Finite A M]\n    (P : W.toScheme.Modules) [P.IsFiniteLocallyFree]\n    (e : Modules.restrict (tilde M) W.ι ≅ P) :\n    Nonempty (Modules.restrict\n      (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))) W.ι ≅ P)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0583, 0EY6 proof of (1)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Both M and its first dual are finitely presented by Noetherianity. On each basic affine open inside W apply localization-Hom twice. The resulting canonical comparisons identify the restriction of the actual double-dual associated sheaf with the sheaf double dual of the restriction of tilde M.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the given restriction isomorphism to P through the two dual functors. Evaluation to the double dual is an isomorphism for a finite locally free module, checked on finite free trivializations. The canonical comparisons commute with restriction, and hence glue on overlaps to the desired isomorphism. This has no depth hypothesis or conclusion.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tags 0583, 0EY6 proof of (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of Hom for finitely presented modules and restriction of double dual sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf of a finite module dual is sheaf internal Hom and double dual preserves locally free restriction",
+   "results": "freeHomEquiv and sheafifyHomEquiv component lemmas; no exact double-dual restriction or stalk result.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*depth|depth.*dual; isLocalizedModule_mapExtendScalars; finite_sections_of_isFinitePresentation",
+   "results": "No dual-depth theorem; Mathlib finite-presentation localization-Hom API and WeilConjectures finite affine section API found and used.",
+   "date": "2026-10-13",
+   "verdict": "Use existing component lemmas; no exact theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-depth-two-locally-free-model",
+   "place": "structural double-dual repair, reviewer X-7ea0b"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDoubleDualRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_double_dual_restriction",
+  "statement": "theorem affine_double_dual_restriction\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (W : (Spec A).Opens)\n    (M : ModuleCat.{u} A) [Module.Finite A M]\n    (P : W.toScheme.Modules) [P.IsFiniteLocallyFree]\n    (e : Modules.restrict (tilde M) W.ι ≅ P) :\n    Nonempty (Modules.restrict\n      (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))) W.ι ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes; all five modules and the sole direct importer compile cleanly; the original caller fails as reported, the adaptation preserves its signature, and axiom checks show only permitted axioms plus expected sorryAx in the caller."
+ }
+}

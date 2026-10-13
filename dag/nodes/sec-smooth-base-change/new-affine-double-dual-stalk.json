@@ -1,0 +1,100 @@
+{
+ "id": "new-affine-double-dual-stalk",
+ "kind": "statement",
+ "title": "Stalk comparison for the actual affine double dual",
+ "statement": "theorem affine_double_dual_stalk\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (M : ModuleCat.{u} A)\n    [Module.Finite A M] (x : Spec A) :\n    ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n        (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x),\n      letI := hfinite\n      Nonempty\n        (TopCat.Presheaf.stalk (C := Ab.{u})\n            (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))).val.presheaf x\n          ≃ₗ[(Spec A).presheaf.stalk x]\n            Module.Dual ((Spec A).presheaf.stalk x)\n              (Module.Dual ((Spec A).presheaf.stalk x)\n                (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x)))",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01HV(7), 0583"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Equip the structure stalk with its canonical A-algebra structure. Use the associated-sheaf toStalk localization map; localization of finite modules proves finiteness of the stalk of tilde M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a finite module over a Noetherian ring, finite presentation makes the localized map on Hom into the local ring a module localization. Its universal property gives a linear equivalence from the stalk of the dual sheaf to the local dual of the stalk. Extend scalars on this equivalence to the structure stalk. Apply twice and compose with the inverse transpose of the first equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tags 01HV(7), 0583"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of Hom for finitely presented modules and restriction of double dual sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf of a finite module dual is sheaf internal Hom and double dual preserves locally free restriction",
+   "results": "freeHomEquiv and sheafifyHomEquiv component lemmas; no exact double-dual restriction or stalk result.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*depth|depth.*dual; isLocalizedModule_mapExtendScalars; finite_sections_of_isFinitePresentation",
+   "results": "No dual-depth theorem; Mathlib finite-presentation localization-Hom API and WeilConjectures finite affine section API found and used.",
+   "date": "2026-10-13",
+   "verdict": "Use existing component lemmas; no exact theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-depth-two-boundary-property",
+   "place": "structural double-dual repair, reviewer X-7ea0b"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDoubleDualStalk.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_double_dual_stalk",
+  "statement": "theorem affine_double_dual_stalk\n    (A : CommRingCat.{u}) [IsNoetherianRing A] (M : ModuleCat.{u} A)\n    [Module.Finite A M] (x : Spec A) :\n    ∃ hfinite : Module.Finite ((Spec A).presheaf.stalk x)\n        (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x),\n      letI := hfinite\n      Nonempty\n        (TopCat.Presheaf.stalk (C := Ab.{u})\n            (tilde (ModuleCat.of A (Module.Dual A (Module.Dual A M)))).val.presheaf x\n          ≃ₗ[(Spec A).presheaf.stalk x]\n            Module.Dual ((Spec A).presheaf.stalk x)\n              (Module.Dual ((Spec A).presheaf.stalk x)\n                (TopCat.Presheaf.stalk (C := Ab.{u}) (tilde M).val.presheaf x)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes; all five modules and the sole direct importer compile cleanly; the original caller fails as reported, the adaptation preserves its signature, and axiom checks show only permitted axioms plus expected sorryAx in the caller."
+ }
+}

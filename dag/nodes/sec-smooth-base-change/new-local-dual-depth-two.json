@@ -1,0 +1,107 @@
+{
+ "id": "new-local-dual-depth-two",
+ "kind": "statement",
+ "title": "Depth two for a finite local dual",
+ "statement": "theorem dual_depth_ge_two (R : Type u) [CommRing R] [IsNoetherianRing R]\n    [IsLocalRing R] (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N]\n    (hR : (2 : ℕ∞) ≤ depth (R := R) R) :\n    (2 : ℕ∞) ≤ depth (R := R) (Module.Dual R N)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0AV5(2), 0EBA and 0EY6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Extract a length at least two regular sequence from the depth supremum and take its first two elements x,y in the maximal ideal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Multiplication by x is injective on Hom(N,R) pointwise. If y*f belongs to x Hom(N,R), regularity of y modulo x forces all f(n) into xR. Invert the injective multiplication-by-x equivalence R to xR, corestrict f and compose with the inverse. This produces a linear quotient f prime and proves y regular modulo x on the dual.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The dual is finite by Noetherianity. If nonzero, Nakayama converts the weakly regular pair in the maximal ideal into a regular sequence, so its length bounds depth below. If the dual is zero, its depth is infinity by the definition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E1",
+  "document": "Stacks Project",
+  "place": "Tags 0AV5(2), 0EBA and 0EY6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of Hom for finitely presented modules and restriction of double dual sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module double dual over local noetherian ring has depth at least two if ring has depth at least two",
+   "results": "Krull-dimension and regular-sequence component lemmas; no exact local dual-depth result.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; proved directly from regular sequences and Nakayama."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*depth|depth.*dual; isLocalizedModule_mapExtendScalars; finite_sections_of_isFinitePresentation",
+   "results": "No dual-depth theorem; Mathlib finite-presentation localization-Hom API and WeilConjectures finite affine section API found and used.",
+   "date": "2026-10-13",
+   "verdict": "Use existing component lemmas; no exact theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-depth-two-boundary-property",
+   "place": "structural double-dual repair, reviewer X-7ea0b"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DualDepthTwo",
+  "file": "lean/Sheaf/RingTheory/DualDepthTwo.lean",
+  "declaration": "IsLocalRing.dual_depth_ge_two",
+  "statement": "theorem dual_depth_ge_two (R : Type u) [CommRing R] [IsNoetherianRing R]\n    [IsLocalRing R] (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N]\n    (hR : (2 : ℕ∞) ≤ depth (R := R) R) :\n    (2 : ℕ∞) ≤ depth (R := R) (Module.Dual R N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c910a",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T134800-L-129498",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes; all five modules and the sole direct importer compile cleanly; the original caller fails as reported, the adaptation preserves its signature, and axiom checks show only permitted axioms plus expected sorryAx in the caller."
+ }
+}
