@@ -11,6 +11,9 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Algebra.ZMod
+import Sheaf.RingTheory.PBasisComplementMonomialBasis
+import Sheaf.RingTheory.PowerSeriesResidueMonomialBasis
+import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # A finite basis containing one for the p-basis coefficient subring
@@ -66,6 +69,26 @@ theorem powerSeriesSubringFiniteBasis
         (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →
           (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :
     ∃ (d : ℕ) (b : Module.Basis (Fin d) S
-      (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) (i : Fin d), b i = 1 := by sorry
+      (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) (i : Fin d), b i = 1 := by
+  classical
+  obtain ⟨b, hb⟩ := pBasisComplementMonomialBasis p k I t hpb J kJ hkJ
+  obtain ⟨B, hB⟩ := powerSeriesResidueMonomialBasis p (Fact.out : p.Prime).pos
+    k kJ (J → Fin p) b n m S hS
+  let z : Fin p := ⟨0, (Fact.out : p.Prime).pos⟩
+  let q : (J → Fin p) × (Fin n → Fin p) × (Fin m → Fin p) :=
+    (fun _ ↦ z, fun _ ↦ z, fun _ ↦ z)
+  have hb0 : b (0 : J → Fin p) = 1 := by
+    rw [hb]
+    simp
+  have hbq : b q.1 = 1 := by
+    rw [show q.1 = (0 : J → Fin p) by ext x; simp [q, z]]
+    exact hb0
+  have hB0 : B q = 1 := by
+    rw [hB]
+    rw [hbq]
+    simp [q, z]
+  let e := Fintype.equivFin ((J → Fin p) × (Fin n → Fin p) × (Fin m → Fin p))
+  refine ⟨_, B.reindex e, e q, ?_⟩
+  simpa using hB0
 
 end RingTheory

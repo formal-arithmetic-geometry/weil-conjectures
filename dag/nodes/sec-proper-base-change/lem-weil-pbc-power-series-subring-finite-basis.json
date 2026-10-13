@@ -14,31 +14,27 @@
  ],
  "proof": [
   {
-   "text": "The k^p-span of bounded p-basis monomials avoiding J is exactly kJ. Products reduce exponents modulo p; a nonzero element lies in a finite-dimensional subring on finitely many generators, whose injective multiplication map is surjective and supplies its inverse. Splitting supports into J and its complement, uniqueness of the original p-basis coordinates gives the bounded J-monomial kJ-basis of k. See the full proof in the declaration docstring.",
+   "text": "Apply the complementary p-basis theorem to obtain the kJ-basis indexed by functions J -> Fin p. Apply the general residue-monomial basis theorem with that finite coefficient basis and the subring characterized by hS.",
    "uses": [
-    "def-weil-pbc-free-module"
+    "lem-weil-pbc-p-basis-complement-monomial-basis",
+    "lem-weil-pbc-power-series-residue-monomial-basis"
    ],
    "elementary": false
   },
   {
-   "text": "Divide each x and y exponent by p with remainder. Group coefficients in the finite field basis from the preceding step. Each grouped column has p-divisible exponents and coefficients in kJ, hence belongs to S. Only finitely many polynomial columns occur. Comparing coefficients proves independence and spanning of the monomials t^E x^e y^g with E supported in J and all exponents below p. Their index set is finite and contains the monomial 1. Enumerate by Fin d. See the complete construction and uniqueness argument in the docstring.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": false
+   "text": "Use the zero functions in all three factors. The coefficient monomial is the empty product 1, and all variable powers have exponent zero, so the corresponding residue-basis vector is 1. Reindex this finite product using Fintype.equivFin and transport this equality through Basis.reindex.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-multivariate-power-series",
-  "def-weil-pbc-mv-polynomial-ring"
+  "lem-weil-pbc-p-basis-complement-monomial-basis",
+  "lem-weil-pbc-power-series-residue-monomial-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P5 proof; parent steps 3--5, explicit coefficient and bounded-monomial arguments expanded in Lean docstring"
+  "place": "Tag 07P5 proof, explicit coefficient and residue-monomial construction"
  },
  "mathlib_searches": [
   {
@@ -108,12 +104,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T211615-L-1057568",
+  "landing": "20261013T111853-L-3052825",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

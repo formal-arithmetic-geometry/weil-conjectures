@@ -1,0 +1,135 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P5 proof, explicit bounded-monomial and residue grouping arguments"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "For every series exponent a and polynomial exponent g divide all coordinates by the positive integer p to get a=p*A+e and g=p*G+h with residues below p. Expand the coefficient at (a,g) uniquely in the supplied K-basis b. For each triple (q,e,h) form a column whose coefficient at (p*A,p*G) is the q coordinate of the coefficient at (p*A+e,p*G+h), and is zero at all other exponents.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The column has coefficients in K and exponents divisible by p, so lies in S by hS. It is a polynomial: its possible polynomial exponents G are quotients of the finitely many polynomial exponents of the original element. Since Q and both residue sets are finite, only finitely many columns are needed. Multiplication by the displayed residue monomials shifts each column back to its original exponents; coefficientwise comparison proves spanning.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In a finite relation of these monomials over S, compare the coefficient at (p*A+e,p*G+h). Divisibility of the column supports selects exactly the terms with residues (e,h). The resulting relation in b has coefficients in K, so every coordinate is zero. Varying all exponents and using hS proves each column is zero. Thus the monomials are independent and spanning, yielding a basis with the displayed values.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P5 proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite basis of a coefficient field extension gives a monomial basis of a power series polynomial ring over the subring with p-divisible exponents",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite basis for multivariate power series over a subring with exponents divisible by p and coefficients in a subfield",
+   "results": "PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, MvPowerSeries.LinearTopology.mem_basis_iff, MvPowerSeries.LinearTopology.basis, PowerSeries.coeff_subst_finite, MvPowerSeries.HasSubst.coeff_zero, PowerSeries.fg_iff_of_isPrime, PowerSeries.IsWeierstrassDivisorAt.divCoeff, MvPowerSeries.toSubring (actual search digest 7facc31bf3b76f93)",
+   "date": "2026-10-13",
+   "verdict": "no exact match; returned declarations concern different bases or coefficient expansion alone"
+  },
+  {
+   "tool": "grep",
+   "query": "basis|residue|expand",
+   "results": "Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/RingTheory/MvPowerSeries/Evaluation.lean, Mathlib/RingTheory/MvPowerSeries/Expand.lean (actual search digest ec621dd4a5cca72b)",
+   "date": "2026-10-13",
+   "verdict": "no exact match; returned declarations concern different bases or coefficient expansion alone"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, via Tag 07P5: coefficient grouping by exponent residues in parent explicit basis argument, step 2",
+   "via": [
+    "lem-weil-pbc-power-series-subring-finite-basis",
+    "lem-weil-pbc-power-series-ring-subfields",
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PowerSeriesSubringFiniteBasis",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "id": "lem-weil-pbc-power-series-residue-monomial-basis",
+ "title": "Residue monomials give a basis",
+ "statement": "Let $p>0$ be a natural number, $k$ a field, $K\\subset k$ a subfield [def-weil-field], $Q$ a finite set, and $b:Q\\to k$ a $K$-basis [def-weil-pbc-free-module]. Let $n,m\\ge0$ and $A=k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_m]$ [def-weil-pbc-multivariate-power-series, def-weil-pbc-mv-polynomial-ring]. Let $S\\subset A$ be a subring consisting exactly of elements whose coefficients lie in $K$ and whose nonzero coefficients have each series and polynomial exponent divisible by $p$. Then $A$ has an $S$-basis indexed by $Q\\times\\{0,\\ldots,p-1\\}^n\\times\\{0,\\ldots,p-1\\}^m$, whose value at $(q,e,h)$ is $b(q)\\prod_i x_i^{e_i}\\prod_j y_j^{h_j}$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PowerSeriesResidueMonomialBasis",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesResidueMonomialBasis.lean",
+  "declaration": "RingTheory.powerSeriesResidueMonomialBasis",
+  "statement": "theorem powerSeriesResidueMonomialBasis\n    (p : ℕ) (hp : 0 < p)\n    (k : Type u) [Field k] (K : Subfield k)\n    (Q : Type v) [Finite Q] (b : Module.Basis Q K k)\n    (n m : ℕ)\n    (S : Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))\n    (hS : ∀ f, f ∈ S ↔\n      ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ),\n        MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ K ∧\n        (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 →\n          (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) :\n    ∃ B : Module.Basis (Q × (Fin n → Fin p) × (Fin m → Fin p)) S\n      (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)),\n      ∀ q, B q =\n        MvPolynomial.C (MvPowerSeries.C (b q.1) *\n          ∏ i : Fin n, MvPowerSeries.X i ^ (q.2.1 i : ℕ)) *\n        ∏ j : Fin m, MvPolynomial.X j ^ (q.2.2 j : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T111853-L-3052825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T111853-L-3052825",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
