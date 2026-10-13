@@ -16,28 +16,39 @@
  },
  "proof": [
   {
-   "text": "Use isoSpec naturality to construct the stalk ring coordinates; use the pullback-stalk comparison for q and the balanced tensor map d tensor x to eD(d) tensor q(x) for t. Tensor induction in every degree and naturality of pullback germs under the adjunction mate alpha identify both sides of the chain coherence. The differential commutes by naturality, so these are coherent chain isomorphisms.",
+   "text": "Obtain the four ring coordinates, q, their ring compatibility equations, and the pure-tensor formula for the fixed additive chain isomorphism H from the generator-coordinate lemma.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-pc-iso-pullback-stalk-cohomology",
-    "def-pc-tensor-pullback-composition-iso"
+    "lem-pc-affine-spectrum-tensor-generator-coordinates"
    ],
    "elementary": false
+  },
+  {
+   "text": "In each degree, prove H(r v)=eD(r) H(v) by tensor induction. The zero and sum cases follow from additivity. On d tensor x, scalar multiplication is (r d) tensor x; the generator formula and multiplicativity of eD give eD(r d) tensor q(x)=eD(r) times (eD(d) tensor q(x)). Use ModuleCat.isoMk to lift each additive component isomorphism to a D-linear component isomorphism into restriction of scalars. The differentials commute because H is already a chain map. HomologicalComplex.Hom.isoOfComponents assembles t, whose pure-tensor formula is the generator formula.",
+   "uses": [
+    "lem-pc-affine-spectrum-tensor-generator-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "After forgetting scalars and using the canonical complex-functor composition identification, the constructed t is H by component extensionality. Postcompose with the spectrum tensorStalkIso. Its inverse in the definition of H cancels, leaving exactly the stated chain coherence equation.",
+   "uses": [
+    "lem-pc-iso-pullback-stalk-cohomology",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-iso-pullback-stalk-cohomology",
-  "def-pc-tensor-pullback-composition-iso"
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-affine-spectrum-tensor-generator-coordinates",
+  "lem-pc-iso-pullback-stalk-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0098",
-  "place": "Canonical stalk-ring and input-complex coordinates; termwise balanced tensor construction; chain coherence from the pinned pullback adjunction units and their composition mate."
+  "place": "B2: construct the linear tensor comparison from the fixed additive comparison using tensor induction; chain compatibility and coherence follow by extensionality and inverse cancellation. Geometric pure-tensor coordinates remain a separate sublemma."
  },
  "mathlib_searches": [
   {
@@ -154,11 +165,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-9dc96",
-  "group": "U4",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T222420-L-1229109",
+  "landing": "20261013T231529-L-1814751",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; changed statements match the recorded change, existing signatures remain intact, the direct importer compiles, and all remaining sorry/dependency records are documented."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
