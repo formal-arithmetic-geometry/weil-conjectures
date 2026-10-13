@@ -7,10 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.HomComplexRestrictOpen
-import Sheaf.AlgebraicGeometry.HomComplexRestrictScheme
-import Sheaf.AlgebraicGeometry.InternalHomOverEquiv
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.HomologyEvaluationRestrictionComparison
+import Sheaf.Algebra.Homology.HomologyEvaluationRoofNaturality
 
 /-! # Compatibility of homology evaluation with a quasi-isomorphism roof
 
@@ -35,6 +34,8 @@ private theorem homComplex_precomp_homology_isIso
   let : QuasiIso (((homComplexFunctor (R := R)).map t.op).app K) := h
   infer_instance
 
+set_option maxHeartbeats 400000 in
+-- Comparing the restricted Hom components elaborates several chosen product signatures.
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
 invertibility hypothesis on the model evaluation is used.
@@ -101,6 +102,75 @@ theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
             (E.homology (-n)) (K.homology 0),
         (((Scheme.Modules.restrictFunctor V.ι).map e).over W) ≫ b.hom =
           a.hom ≫ f := by
-  sorry
+  dsimp only
+  intro f c hc hc'
+  have : ((moduleOpenOverComplexFunctor X V W).obj J).IsKInjective := hI
+  have : QuasiIso q := hq
+  have : QuasiIso p := hp
+  let Qmap : (homComplex (R := V.toScheme.sheaf.over W)
+      ((moduleOpenOverComplexFunctor X V W).obj T)
+      ((moduleOpenOverComplexFunctor X V W).obj J)).homology n ⟶
+      (homComplex (R := V.toScheme.sheaf.over W) L
+        ((moduleOpenOverComplexFunctor X V W).obj J)).homology n :=
+    HomologicalComplex.homologyMap
+    (((homComplexFunctor (R := V.toScheme.sheaf.over W)).map q.op).app
+      ((moduleOpenOverComplexFunctor X V W).obj J)) n
+  let Pmap : (homComplex (R := V.toScheme.sheaf.over W) E
+      ((moduleOpenOverComplexFunctor X V W).obj J)).homology n ⟶
+      (homComplex (R := V.toScheme.sheaf.over W) L
+        ((moduleOpenOverComplexFunctor X V W).obj J)).homology n :=
+    HomologicalComplex.homologyMap
+    (((homComplexFunctor (R := V.toScheme.sheaf.over W)).map p.op).app
+      ((moduleOpenOverComplexFunctor X V W).obj J)) n
+  have : IsIso Qmap :=
+    homComplex_precomp_homology_isIso (R := V.toScheme.sheaf.over W)
+      (K := ((moduleOpenOverComplexFunctor X V W).obj J)) q n
+  have : IsIso Pmap :=
+    homComplex_precomp_homology_isIso (R := V.toScheme.sheaf.over W)
+      (K := ((moduleOpenOverComplexFunctor X V W).obj J)) p n
+  obtain ⟨a₀, b₀, g, d, hd, hd', h₀⟩ :=
+    homologyEvaluation_restriction_comparison X T J n e he V W
+  let bq : SheafOfModules.homObj (R := V.toScheme.sheaf.over W)
+      (((moduleOpenOverComplexFunctor X V W).obj T).homology (-n))
+      (((moduleOpenOverComplexFunctor X V W).obj J).homology 0) ≅
+      SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (L.homology (-n))
+        (((moduleOpenOverComplexFunctor X V W).obj J).homology 0) :=
+    (((SheafOfModules.homFunctor (V.toScheme.sheaf.over W)).mapIso
+    (asIso (HomologicalComplex.homologyMap q (-n))).op).app
+      (((moduleOpenOverComplexFunctor X V W).obj J).homology 0))
+  let bp : SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (E.homology (-n))
+      (((moduleOpenOverComplexFunctor X V W).obj J).homology 0) ≅
+      SheafOfModules.homObj (R := V.toScheme.sheaf.over W) (L.homology (-n))
+        (((moduleOpenOverComplexFunctor X V W).obj J).homology 0) :=
+    (((SheafOfModules.homFunctor (V.toScheme.sheaf.over W)).mapIso
+    (asIso (HomologicalComplex.homologyMap p (-n))).op).app
+      (((moduleOpenOverComplexFunctor X V W).obj J).homology 0))
+  have hs : g ≫ bq.hom = Qmap ≫ inv Pmap ≫ f ≫ bp.hom := by
+    exact homologyEvaluation_roof_naturality (R := V.toScheme.sheaf.over W)
+      ((moduleOpenOverComplexFunctor X V W).obj T) E L
+      ((moduleOpenOverComplexFunctor X V W).obj J)
+      (Classical.choose (homComplex_projections_exists (R := V.toScheme.sheaf.over W)))
+      (Classical.choose_spec
+        (homComplex_projections_exists (R := V.toScheme.sheaf.over W))).2.1
+      (Classical.choose_spec
+        (homComplex_projections_exists (R := V.toScheme.sheaf.over W))).2.2
+      n q p g d f c hd hd' hc hc'
+  have compose_square {M₁ N₁ U₁ V₁ P₁ Q₁ Z₁ Y₁ :
+      SheafOfModules.{u} (V.toScheme.ringCatSheaf.over W)}
+      (e : M₁ ⟶ N₁) (g : U₁ ⟶ V₁) (f : P₁ ⟶ Q₁)
+      (a₀ : M₁ ≅ U₁) (b₀ : N₁ ≅ V₁) (aq : U₁ ≅ Z₁) (ap : P₁ ≅ Z₁)
+      (bq : V₁ ≅ Y₁) (bp : Q₁ ≅ Y₁)
+      (h₀ : e ≫ b₀.hom = a₀.hom ≫ g)
+      (hs : g ≫ bq.hom = aq.hom ≫ ap.inv ≫ f ≫ bp.hom) :
+      e ≫ (b₀ ≪≫ bq ≪≫ bp.symm).hom =
+        (a₀ ≪≫ aq ≪≫ ap.symm).hom ≫ f := by
+    simp only [Iso.trans_hom, Iso.symm_hom]
+    calc
+      _ = ((e ≫ b₀.hom) ≫ bq.hom) ≫ bp.inv := by simp only [Category.assoc]
+      _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
+      _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  refine ⟨a₀ ≪≫ asIso Qmap ≪≫ (asIso Pmap).symm, b₀ ≪≫ bq ≪≫ bp.symm, ?_⟩
+  exact compose_square (((Scheme.Modules.restrictFunctor V.ι).map e).over W)
+    g f a₀ b₀ (asIso Qmap) (asIso Pmap) bq bp h₀ hs
 
 end CategoryTheory

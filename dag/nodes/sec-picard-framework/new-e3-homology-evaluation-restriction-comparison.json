@@ -1,0 +1,158 @@
+{
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local zero-differential Koszul self-Ext calculation: Open restriction transports cycle-compatible homology evaluation",
+   "via": [
+    "new-b2-homology-evaluation-local-iso-core",
+    "new-b2-homology-evaluation-local-iso",
+    "lem-sc-homology-evaluation-formal-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "new-e3-homology-evaluation-restriction-comparison",
+ "title": "Open restriction transports cycle-compatible homology evaluation",
+ "statement": "Let X be a scheme, T,J integer cochain complexes of X-modules, n an integer, and e:H^n(Hom(T,J))->Hom(H^(-n)(T),H^0(J)) satisfying IsHomologyEvaluation [new-b2-homology-evaluation-definitions]. For opens V of X and W of V.toScheme, let F be moduleOpenOverComplexFunctor, A=F(T), K=F(J), Q=Hom(A,K) [def-pur-hom-complex], and pi its fixed (-n,0) product projection [lem-sc-hom-complex-projections]. There exist a:F(H^n(Hom(T,J))) iso H^n(Q), b:F(Hom(H^(-n)(T),H^0(J))) iso Hom(H^(-n)(A),H^0(K)), g:H^n(Q)->Hom(H^(-n)(A),H^0(K)), and d:Z^n(Q)->Hom(Z^(-n)(A),Z^0(K)). They satisfy d;Hom(1,iCycles_K)=iCycles_Q;pi;Hom(iCycles_A,1), d;Hom(1,homologyPi_K)=homologyPi_Q;g;Hom(homologyPi_A,1), and F(e);b.hom=a.hom;g. There is no roof or K-injectivity assumption.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8X",
+  "place": "Hom complexes, differential and precomposition; Tag 08DL for the restriction comparison."
+ },
+ "stmt_deps": [
+  "new-b2-homology-evaluation-definitions",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Write A=F(T), K=F(J), Q=Hom(A,K), with F the two-step restriction. Construct the Hom comparison degreewise from fixed product projections and the natural local-map internal-Hom identifications. Use preservation of products by restriction and by the open equivalence. Checking each projection with the Hom differential equation gives a chain isomorphism whose projections preserve evaluation, not merely an abstract isomorphism of complexes.",
+   "uses": [
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sc-hom-complex-restrict-scheme",
+    "lem-sc-internal-hom-over-equiv",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction is exact: overFunctor preserves finite limits and colimits, and overEquiv is an equivalence. Apply the homology comparison to the preceding chain isomorphism to obtain a. Use the local internal-Hom comparison and the homology comparisons for T,J to obtain b. Set g=a.inv followed by F(e) followed by b.hom, so the asserted square holds by cancellation.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-internal-hom-over-equiv",
+    "def-pur-sheaf-hom",
+    "new-b2-homology-evaluation-definitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the degree-n projection to Q-cycles and A-cycles. The Hom differential evaluated on these cycles vanishes in K degree one. The kernel universal property gives a morphism d to Hom(A-cycles,K-cycles) and the first identity. Evaluate the second identity on each local pair of cycles. The projection-compatible restriction comparison carries this pair to ambient cycles, and he identifies its g-value with the K-homology class of the constructed K-cycle. Internal-Hom extensionality and sheaf separatedness prove the identity. Empty opens and zero complexes use exactly the same construction.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-sheaf-hom",
+    "new-b2-homology-evaluation-definitions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-restrict-open",
+  "lem-sc-hom-complex-restrict-scheme",
+  "lem-sc-internal-hom-over-equiv",
+  "new-b2-homology-evaluation-definitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E3 second reader",
+  "date": "2026-10-14",
+  "description": "Strict subargument of roof comparison, replacing a false universal square; expanded from the cited Hom differential and restriction constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, CategoryTheory.IsIso",
+   "date": "2026-10-14",
+   "results": "HomologicalComplex.instIsIsoHomologyMap, HomologicalComplex.homologyMap_inv, instIsIsoHomologyMapOfQuasiIsoAt, quasiIsoAt_iff_isIso_homologyMap, HomologicalComplex.isIso_homologyMap_shortComplexTruncLE_g, HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃",
+   "verdict": "No exact match to sheaf Hom cycle evaluation restriction or common-source naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "homObjMap.*homologyMap|homologyEvaluation.*restrict|evaluation.*precomp",
+   "date": "2026-10-14",
+   "results": "No matches.",
+   "verdict": "No exact match to sheaf Hom cycle evaluation restriction or common-source naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a sheaf internal Hom complex pairs naturally with source cohomology by evaluating cocycles",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, CochainComplex.HomComplex.CohomologyClass, CategoryTheory.Sheaf.H, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CochainComplex.HomComplex.leftHomologyData'_H_coe",
+   "verdict": "No exact match to sheaf Hom cycle evaluation restriction or common-source naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ, HomologicalComplex.homologyMap",
+   "date": "2026-10-14",
+   "results": "HomologicalComplex.homologyπ_naturality, HomologicalComplex.homologyπ_naturality_assoc",
+   "verdict": "No exact match to sheaf Hom cycle evaluation restriction or common-source naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "overHomObjIso|homologyEvaluation_unique|homologyEvaluation_of_projections",
+   "date": "2026-10-14",
+   "results": "No matches.",
+   "verdict": "No exact match to sheaf Hom cycle evaluation restriction or common-source naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation pairing on cohomology of internal Hom complexes is natural in the source and commutes with open restriction",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomologyEvaluationRoofComparison",
+  "date": "2026-10-14",
+  "group": "E3"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T211057-L-389969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T211057-L-389969",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomologyEvaluationRestrictionComparison",
+  "file": "lean/Sheaf/Algebra/Homology/HomologyEvaluationRestrictionComparison.lean",
+  "declaration": "CategoryTheory.homologyEvaluation_restriction_comparison",
+  "statement": "theorem homologyEvaluation_restriction_comparison (X : Scheme.{u})\n    (T J : CochainComplex X.Modules ℤ) (n : ℤ)\n    (e : (homComplex (R := X.sheaf) T J).homology n ⟶\n      SheafOfModules.homObj (R := X.sheaf) (T.homology (-n)) (J.homology 0))\n    (he : IsHomologyEvaluation X T J n e) (V : X.Opens) (W : V.toScheme.Opens) :\n    let A := (moduleOpenOverComplexFunctor X V W).obj T\n    let K := (moduleOpenOverComplexFunctor X V W).obj J\n    let Q := homComplex (R := V.toScheme.sheaf.over W) A K\n    let π := (Classical.choose\n      (homComplex_projections_exists (R := V.toScheme.sheaf.over W)))\n      A K n (-n) 0 (by omega)\n    ∃ a : ((Scheme.Modules.restrictFunctor V.ι).obj\n        ((homComplex (R := X.sheaf) T J).homology n)).over W ≅ Q.homology n,\n      ∃ b : ((Scheme.Modules.restrictFunctor V.ι).obj\n          (SheafOfModules.homObj (R := X.sheaf)\n            (T.homology (-n)) (J.homology 0))).over W ≅\n          SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.homology (-n)) (K.homology 0),\n        ∃ g : Q.homology n ⟶ SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n            (A.homology (-n)) (K.homology 0),\n          ∃ d : Q.cycles n ⟶ SheafOfModules.homObj (R := V.toScheme.sheaf.over W)\n              (A.cycles (-n)) (K.cycles 0),\n            d ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W)\n                (𝟙 _) (K.iCycles 0) =\n              Q.iCycles n ≫ π ≫ SheafOfModules.homObjMap\n                (R := V.toScheme.sheaf.over W) (A.iCycles (-n)) (𝟙 _) ∧\n            d ≫ SheafOfModules.homObjMap (R := V.toScheme.sheaf.over W)\n                (𝟙 _) (K.homologyπ 0) =\n              Q.homologyπ n ≫ g ≫ SheafOfModules.homObjMap\n                (R := V.toScheme.sheaf.over W) (A.homologyπ (-n)) (𝟙 _) ∧\n            (((Scheme.Modules.restrictFunctor V.ι).map e).over W) ≫ b.hom =\n              a.hom ≫ g",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-14"
+ }
+}
