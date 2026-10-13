@@ -16,22 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the local tower of stalk rings and identify the closed-fibre map with the canonical polynomial chart map; apply base change and localization for the forward direction.",
+   "text": "For the affine finitely presented chart e, identify stalk flatness on spectra with flatness of the source prime localization over the base ring, using localization invariance of flatness and the Spec stalk isomorphisms. Apply lem-weil-pbc-openness-of-flatness with the source ring as its own module. Transport through the affine scheme isomorphisms to obtain the open V of points where the stalk map of e is flat. The restriction V -> affine space is flat by the stalk criterion.",
    "uses": [
-    "lem-sbc-polynomial-chart-canonical-fibre-stalk",
-    "lem-weil-pbc-criterion-flatness-fibre"
+    "lem-weil-pbc-openness-of-flatness"
    ],
    "elementary": false
+  },
+  {
+   "text": "Base change the flat restriction V -> affine space along the inclusion of the affine-space fibre. The point lying over x belongs to this open pullback because x belongs to V. Pullback pasting identifies the restricted fibre projection with this flat base change. The inclusion of the open pullback has an isomorphism on stalks, so cancel this isomorphism to obtain flatness of the unrestricted fibre projection at the point over x. This uses Mathlib Flat.stalkMap, pullback stability of Flat, and RingHom.Flat.respectsIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical chart fibre construction: the two pullback isomorphisms send the open fibre point to a point whose projection to U is x, by the pullback projection identities and fiberι_fiberHomeo_symm. Their stalk maps are isomorphisms, so the fibreMap stalk is flat. Compose with the inverse of the open fibre inclusion stalk map and the point-equality stalk isomorphism in the definition of PolynomialChart.stalkMap. Bijective ring maps are flat and compositions of flat ring maps are flat, proving the asserted canonical map is flat.",
+   "uses": [
+    "lem-sbc-polynomial-chart-canonical-fibre-stalk"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sbc-polynomial-chart-canonical-fibre-stalk",
-  "lem-weil-pbc-criterion-flatness-fibre"
+  "lem-weil-pbc-openness-of-flatness"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 00R7 and 00RH"
+  "place": "Tag 00RH, using openness of the flat locus (Tag 00RC) and pullback stability"
  },
  "mathlib_searches": [
   {
@@ -159,10 +170,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T171509-L-1980487",
-  "kind": "interface",
+  "landing": "20261013T181110-L-2603716",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
