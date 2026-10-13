@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof paragraph 1: affine weakly contractible hypercover construction in the 09A3 argument; choose a covering family of affine weakly contractible objects before forming finite coproducts.",
+   "place": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers.",
    "via": [
     "lem-weil-pbc-proetale-qc-affine-contractible-cover",
     "lem-weil-pbc-proetale-affine-acyclic-hypercover",
@@ -26,41 +26,154 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $u:U\\to X$ be the object in the statement. Choose an arbitrary affine open cover $U=\\bigcup_{j\\in J}T_j$, writing $T_j=\\operatorname{Spec}A_j$. The affine basis property follows from the locally affine definition of a scheme [def-pc-scheme]: restrict an affine chart around each point to principal opens contained in a prescribed neighborhood. Take $J$ to be a set of such opens of the $\\mathcal U$-small scheme $U$. There is no finiteness assertion for $J$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens"
+   }
+  },
+  {
+   "text": "For each $j$ choose an infinite $\\mathcal U$-small cardinal $\\kappa_j\\geq |A_j|$. Apply [lem-weil-pbc-wcontractible-ring-extension] to obtain $A_j\\to D_j$, and set $V_j=\\operatorname{Spec}D_j$ with the induced map $p_j:V_j\\to T_j$. Retain all clauses: $p_j$ is a one-member pro-etale covering, $D_j$ has the splitting property, and $|D_j|\\leq\\kappa_j^{2^{2^{2^{\\kappa_j}}}}$.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-ring-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0983, proposition-find-w-contractible, and 0984, remark-size-w-contractible"
+   }
+  },
+  {
+   "text": "The bound in step 2 is $\\mathcal U$-small: Grothendieck universes are closed under power sets and function sets, so the iterated powers and cardinal exponentiation remain below the universe bound [def-weil-size-convention]. Replace $D_j$ by an isomorphic ring on a subset of a set of that bounded cardinality. Its prime ideals are subsets of $D_j$, and the topology and structure sheaf are built from subsets, localizations (quotients of pairs), and sets of functions; all these sets lie in $\\mathcal U$. Hence $V_j$ is a $\\mathcal U$-small affine scheme [def-weil-affine-spectrum]. The family indexed by $J$ is formed inside $\\mathcal V$. Use representatives in the chosen skeleton, conjugating every map by the representing isomorphisms. This uses the bounded witness explicitly, rather than an arbitrary existential witness.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-wcontractible-ring-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0984, remark-size-w-contractible; Tag 098I, lemma-get-many-weakly-contractible, size paragraph (universe form of its bound argument)"
+   }
+  },
+  {
+   "text": "The open immersion $i_j:T_j\\to U$ is etale by [lem-weil-pbc-open-immersion-etale], hence flat by [def-weil-etale-morphism]. Its diagonal is an isomorphism: the fibre product of an open subset with itself over $U$ is that open subset, by the open-subscheme definition [def-weil-open-immersion]. An isomorphism is flat since its local-ring maps are isomorphisms. Thus $i_j$ is weakly etale by [def-weil-weakly-etale-morphism]. By [lem-weil-pbc-ind-etale-stability], $p_j$ is weakly etale and the composites $i_jp_j$ and $u i_jp_j$ are weakly etale. Step 3 and the definition [def-weil-pbc-proetale-site] now make $V_j\\to X$ an object of the full small site and $V_j\\to U$ a morphism there.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "def-weil-open-immersion",
+    "def-weil-weakly-etale-morphism",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098I, lemma-get-many-weakly-contractible, construction; composition: more-morphisms.tex Tag 094T, lemma-composition-weakly-etale"
+   }
+  },
+  {
+   "text": "Fix an affine open $W\\subseteq U$. Cover $W$ by affine opens $W_a$ subordinate to the open cover $(W\\cap T_j)_j$: the affine basis gives $W_a\\subseteq W\\cap T_{j(a)}$. The affine scheme $W$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so finitely many of these OPEN subsets $W_a$ cover $W$. Apply the one-member covering clause of [lem-weil-pbc-wcontractible-ring-extension] to $p_{j(a)}$ and the affine open $W_a\\subseteq T_{j(a)}$. The definition [def-weil-pbc-proetale-covering] gives finitely many affine opens $Z_{a,b}\\subseteq V_{j(a)}$ whose images under $p_{j(a)}$ have union exactly $W_a$. Taking all these finitely many $Z_{a,b}$, their images under the composites have union $W$. Together with step 4 this is precisely the pro-etale covering criterion for $(V_j\\to U)_j$. Neither $W\\cap T_j$ nor an arbitrary image upstairs is assumed affine or open. If $W$ is empty, take no witnesses.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098I, lemma-get-many-weakly-contractible; Tag 0989, definition-fpqc-covering; affine quasi-compactness: algebra.tex Tag 00E8, lemma-quasi-compact"
+   }
+  },
+  {
+   "text": "For each $j$, the splitting clause for $D_j$ from [lem-weil-pbc-wcontractible-ring-extension] and the already verified full-site object $V_j\\to X$ satisfy all hypotheses of [lem-weil-pbc-wcontractible-affine-weakly-contractible]. Therefore every sheaf epimorphism $F\\to G$ on $X_{\\mathrm{proet}}$ is surjective on evaluation at $V_j$. Each $V_j$ is affine, and step 5 gives a covering family in this same site. This proves the requested statement for arbitrary $U$. The empty object is covered by the empty family.",
+   "uses": [
+    "lem-weil-pbc-wcontractible-ring-extension",
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible, (1) implies (2); Tag 0990, lemma-proetale-enough-w-contractible"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-wcontractible-ring-extension",
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0983, 0984, 098H, 098I and 0990; expanded finite affine-open witness argument and Grothendieck-universe version of the size argument"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "pro etale site enough affine weakly contractible objects",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+   "tool": "leanfinder",
+   "query": "Every weakly etale scheme over X has a covering by affine objects projective for sheaves of sets on X pro etale",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-13",
+   "verdict": "no match: Mathlib defines pro-etale topology but has no theorem furnishing affine w-contractible covers"
   },
   {
    "tool": "leanfinder",
-   "query": "The small proetale site has enough affine objects whose representable sheaves are projective",
-   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, Profinite.instEnoughProjectives, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
-   "date": "2026-10-14",
-   "verdict": "no match: none asserts affine weakly contractible covering families in the small pro-etale site"
+   "query": "Small proetale topology enough weakly contractible affine objects",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-13",
+   "verdict": "no match: Mathlib defines pro-etale topology but has no theorem furnishing affine w-contractible covers"
   },
   {
    "tool": "loogle",
-   "query": "\"Projective\", \"Sheaf\"",
-   "results": "12 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
-   "date": "2026-10-14",
-   "verdict": "no match: none asserts affine weakly contractible covering families in the small pro-etale site"
+   "query": "\"Scheme\", \"Projective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no match: Mathlib defines pro-etale topology but has no theorem furnishing affine w-contractible covers"
   },
   {
    "tool": "grep",
-   "query": "WeaklyContractible|WContractible|w.contractible|weakly.contractible",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: none asserts affine weakly contractible covering families in the small pro-etale site"
+   "query": "pro.?etale|weakly.?etale",
+   "results": "20 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-13",
+   "verdict": "no match: Mathlib defines pro-etale topology but has no theorem furnishing affine w-contractible covers"
+  },
+  {
+   "tool": "grep",
+   "query": "contractible|projective|enough",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; source subdirectory AlgebraicGeometry/Sites",
+   "date": "2026-10-13",
+   "verdict": "no match: Mathlib defines pro-etale topology but has no theorem furnishing affine w-contractible covers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The small pro etale site has enough affine weakly contractible objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-proetale-qc-affine-contractible-cover",
   "by": "worker",
@@ -76,5 +189,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "worker": "stage1",
+  "summary": "Repair all six return findings: retain arbitrary affine covers, use finite OPEN subcovers of affine test opens and the bounded ring node covering clause, cite composition stability and correct notions, add the 0984 cardinal bound, correct 098H source, restore full ancestry and complete sandbox metadata. The item statement is unchanged.",
+  "blueprint": "Proof, sole paragraph: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; subordinate pro-etale coefficient-continuity tool reached through prop-weil-pbc-qbar-condensed-basechange-compatibility, bounded-below coproducts, affine acyclic hypercovers, and qc affine contractible covers. The blueprint paragraph itself does not mention hypercovers.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-992378c50",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-992378c50 (reviewer sub-agent of L); spot-checked: The mathematics and six-step route check out against Tags 0981, 0983, 0984, 098H, 098I, 0990, and Sites 090K/090L, with edge cases and duplicate searches reviewed. Both new nodes omit required created.by/date/group, merged_into, and lean_audit metadata; corrected whole JSON files are in fixes/dag/nodes/sec-proper-base-change/.; 2 file(s) fixed by the reviewer"
  }
 }
