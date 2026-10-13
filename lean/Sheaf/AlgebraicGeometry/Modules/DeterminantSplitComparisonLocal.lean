@@ -60,7 +60,7 @@ theorem determinant_split_comparison_local {X : Scheme.{v}}
   refine ⟨V, hVU, hxV,
     (fun W hW ↦ LinearEquiv.ofBijective (d W (hW.trans hVU)) (hbij W hW)), ?_⟩
   intro W hW a b
-  simpa using hd W (hW.trans hVU) a b
+  exact hd W (hW.trans hVU) a b
 
 /-- Converting a natural family of linear maps to equal linear equivalences preserves naturality.
 Source: blueprint, Riemann--Roch determinant paragraph
