@@ -6,9 +6,6 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-!
 # Equivariant locally constant sections are a sheaf
