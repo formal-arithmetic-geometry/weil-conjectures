@@ -11183,3 +11183,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/U3/Sheaf.RingTheory.SyntomicPresentationLocalKernel (stage 3; reviewer PASS; first push; landing 20261013T045609-L-138775 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:56 L: merged deliver/V1/Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech (stage 3; reviewer PASS; first push; landing 20261013T045610-L-138941 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:56 L: merged deliver/V1/Sheaf.AlgebraicGeometry.BasicOpenTildeScalarIso (stage 3; reviewer PASS; first push; landing 20261013T045610-L-139051 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:56 L: merged deliver/V2/Sheaf.Algebra.Homology.ConeHorizontalProjectionKernel (stage 3; reviewer PASS; first push; landing 20261013T045611-L-139199 (proof); batch 20261013T045507; modules 1; new nodes 0)
