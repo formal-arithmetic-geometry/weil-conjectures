@@ -16,27 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Restriction of sections from an intersection with a deleted index to the\nfull intersection commutes with restrictAppIso and with the pullback unit.\nThus the explicitly defined section maps commute with the source restriction\nand the support restriction on the target. Take mates under the composed\nadjunction. Naturality of the hom equivalence on both sides gives equality of\nmodule morphisms after the coefficient restriction. Evaluate on B and use\nnaturality of the support identifications. Their equality morphisms and the\ninclusions of supports compose to the single inclusion displayed here, by\nproof irrelevance in the poset of opens. For empty opens the same identities\nhold; for an empty tuple family there is no face to check.",
+   "text": "Construct the restriction morphism between the two supported direct images by presheaf restriction on each base open. Its linearity follows from the module restriction law and composition of the structural ring maps; naturality follows from composition of presheaf restrictions.",
    "uses": [
-    "lem-pc-coefficient-section-map-linear",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-module-pullback"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compare the explicit coefficient section linear maps before taking mates. Restriction of the source sections commutes with restrictAppIso and with the pullback unit, by naturality of that unit. Collapse the subsequent restriction composites using functoriality and uniqueness of morphisms between opens.",
+   "uses": [
+    "lem-pc-coefficient-section-map-linear"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Adjunction.homEquiv_naturality_right_square to the composed tilde/Gamma and pullback/pushforward adjunctions. Evaluate the resulting morphism equality on the base open and the input section. Compose the support identifications with the restrictions; both composites are the same morphism in the opposite poset of opens.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-coefficient-section-map-linear",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-module-pullback"
+  "lem-pc-coefficient-section-map-linear",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
   "place": "Tag 02KE, termwise Cech map, with the adjunction details supplied explicitly",
-  "note": "N4: explicit mate construction and its separate scalar, generator and face calculations."
+  "note": "N4 second reading: prove the section restriction square, transfer it to mates by adjunction naturality, and identify the support restriction composites. Mathlib module pullback is used directly; the tensorPullback construction is not needed."
  },
  "mathlib_searches": [
   {
@@ -137,8 +147,8 @@
   "reviewer": "COMPILER",
   "group": "N4",
   "result": "pass",
-  "landing": "20261013T100044-L-2473620",
-  "kind": "interface",
+  "landing": "20261013T124313-L-3777266",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
