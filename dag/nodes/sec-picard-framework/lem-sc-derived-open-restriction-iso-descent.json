@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-derived-open-restriction-iso-descent",
+ "kind": "statement",
+ "title": "Isomorphism descent through exact derived open restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open subscheme, and choose derived module categories [def-pc-derived-category] with Hom universe $w$ on $X$ and $U$. Put $R=(\\operatorname{schemeOpenRestriction} X U).\\operatorname{mapDerivedCategory}$, the exact derived open restriction of [def-pc-derived-open-restriction-maps]. Let $E$ be any category and let $F,G:D(\\mathcal O_U)\\to E$ be functors. For every natural isomorphism $\\alpha:F\\circ R\\cong G\\circ R$, there exists a natural isomorphism $\\beta:F\\cong G$ whose precomposition with $R$ is exactly $\\alpha$. No nonemptiness or strict inclusion condition is imposed on $U$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BT",
+  "place": "cohomology.tex, lemma-adjoint-lower-shriek-restrict; agent-written formal localization expansion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Apply schemeDerivedOpenRestriction_isLocalization to X and U. Precomposition with this localization is fully faithful by Localization.fullyFaithfulWhiskeringLeft. Its preimageIso applied to alpha gives beta. Evaluate map_preimage alpha.hom componentwise and use isomorphism extensionality to obtain the exact whiskering equality. Empty and whole opens require no separate hypotheses.",
+   "uses": [
+    "lem-pc-derived-open-restriction-is-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-restriction-is-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/08BT",
+  "place": "cohomology.tex, lemma-adjoint-lower-shriek-restrict; agent-written formal localization expansion",
+  "note": "Second reading uses the existing proved schemeDerivedOpenRestriction_isLocalization instead of repeating its exact-adjunction localization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphisms descend through exact derived restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphisms descend through exact derived restriction to an open subscheme",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ofRestrict_appIso; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.morphismRestrictRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app; AlgebraicGeometry.Scheme.Opens.ι_appIso",
+   "verdict": "ingredients only; no exact derived open-restriction descent statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "verdict": "ingredients only; no exact derived open-restriction descent statement"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overMapComp|isLocalization_rightAdjoint",
+   "date": "2026-10-14",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean; Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/Topology/Convenient/Localization.lean",
+   "verdict": "ingredients only; no exact derived open-restriction descent statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence",
+  "date": "2026-10-14",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing in the relative gluing step: transport to inverse image covering opens of W union V.",
+   "via": [
+    "lem-sc-open-union-restriction-comparison-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionIsoDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derived_open_restriction_iso_descent",
+  "statement": "theorem derived_open_restriction_iso_descent\n    (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    {E : Type z} [Category.{v} E]\n    (F G : schemeDerivedCategory U.toScheme ⥤ E)\n    (alpha : (schemeOpenRestriction X U).mapDerivedCategory ⋙ F ≅\n      (schemeOpenRestriction X U).mapDerivedCategory ⋙ G) :\n    ∃ beta : F ≅ G,\n      Functor.isoWhiskerLeft (schemeOpenRestriction X U).mapDerivedCategory beta = alpha",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165644-L-1808889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T165644-L-1808889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

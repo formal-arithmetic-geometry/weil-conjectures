@@ -14,33 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Exact extension by zero is left adjoint to restriction. Restricting extension by zero is the identity. Derive the adjunction and its invertible unit using exactness and mapDerivedCategory functoriality, and transport across overEquiv. Thus RU is a localization (Mathlib Adjunction.isLocalization_rightAdjoint').",
+   "text": "Construct qI from the functor associator, qIY whiskered by ambient restriction L, and the canonical ambient intersection composition isomorphism. For the W chain form bWL by tU followed by qI, and bWR by qW, kW and sW. These are two explicit isomorphisms from L-precomposed functors to direct ambient intersection restriction. Descend bWL followed by the inverse of bWR first through L to aW, then through RU to cW. Repeat independently through L and RT to cV using the same qI.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-open-extension-restriction-iso"
+    "lem-sc-derived-open-restriction-iso-descent",
+    "def-pc-derived-open-restriction-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Canonical restriction composition identifies PW followed by SW with PI. Combine this comparison with qW, qIY and tU to obtain an isomorphism RU followed by SU followed by eI with RU followed by eW followed by SW. Localization.fullyFaithfulWhiskeringLeft descends it uniquely to cW. Repeat on the V chain with the same supplied qIY and eI to obtain cV. Underived threefold restriction coherence is checked on sections by cancelling overEquiv units and counits and applying overFunctorMap. Derive this equality using mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac and Localization.natTrans_ext. Substitute it into the defining equation of c to obtain the asserted ambient pasting. Define qI using the functor associator, whisker qIY with L, and compose with the ambient direct comparison kI. Its components are qIY(LG) followed by kI(G), proving the asserted identities.",
-   "uses": [
-    "def-pc-derived-open-restriction-maps"
-   ],
-   "elementary": false
+   "text": "Evaluate the two descent identities at G. They identify cW(RU(LG)) followed by bWR(G) with bWL(G), and the V analogue. Expand the explicit associators and whiskered comparisons. Precompose the W identity with eI(tU(LG) inverse), cancel the mapped tU inverse/hom pair, and obtain qI(G). The same cancellation using tT proves the V equation. The existential conjunction follows with these cW,cV,qI.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-derived-open-restriction-iso-descent",
   "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Y3",
-  "date": "2026-10-13",
+  "group": "K3",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/08BW",
-  "place": "cohomology.tex, lemma-mayer-vietoris-hom; explicit restriction comparison expansion using Mathlib.AlgebraicGeometry.Modules.Sheaf; derived extension-by-zero adjunction from Tag 08BT, lemma-adjoint-lower-shriek-restrict",
-  "note": "Agent-written explicit expansion of the restriction comparison argument, not a verbatim assertion of Tag 08BW."
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom; two-stage descent of ambient comparison isomorphisms",
+  "note": "Shorter categorical descent route: no separate nested-open composition coherence lemma is needed. Unit statement and realized steps are unchanged."
  },
  "mathlib_searches": [
   {
@@ -117,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T152731-L-1016160",
+  "landing": "20261013T165644-L-1808889",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
