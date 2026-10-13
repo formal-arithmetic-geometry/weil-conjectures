@@ -170,6 +170,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf (sq : IsPullback e h
   have : QuasiCompact h := MorphismProperty.of_isPullback sq ‹_›
   have : QuasiSeparated h := MorphismProperty.of_isPullback sq ‹_›
   obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ := Scheme.IsTorsionModuleSheaf.exists_isColimit Λ F
+  have : EssentiallySmall.{u + 1} J := essentiallySmallSelf.{u + 1} J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ g q J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ h q J
   have : PreservesColimitsOfSize.{0, 0} ((p)^*[ModuleCat.{u + 1} Λ]) :=

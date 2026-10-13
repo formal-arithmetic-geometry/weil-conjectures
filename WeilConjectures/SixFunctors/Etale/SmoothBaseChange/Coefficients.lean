@@ -320,6 +320,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_forall_nsmul_eq_zero (sq : IsPullba
   have : QuasiSeparated h := MorphismProperty.of_isPullback sq ‹_›
   obtain ⟨J, _, _, D, c, hc, rfl, hD⟩ :=
     Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit Λ S F
+  have : EssentiallySmall.{u + 1} J := essentiallySmallSelf.{u + 1} J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ g q J
   have := Etale.preservesColimitsOfShape_higherDirectImage Λ h q J
   have : PreservesColimitsOfSize.{0, 0} ((p)^*[ModuleCat.{u + 1} Λ]) :=

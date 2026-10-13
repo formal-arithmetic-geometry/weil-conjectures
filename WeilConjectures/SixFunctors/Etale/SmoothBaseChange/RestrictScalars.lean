@@ -6,26 +6,25 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsAcyclic
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
-# Restriction of scalars and derived direct images
+# Restriction of scalars, pullbacks and base change maps
 
-Let `φ : Λ →+* Λ'` be a morphism of rings and `g : T ⟶ S` a morphism of schemes. Restriction
-of scalars along `φ` commutes with the direct image `g_*` on étale sheaves (both are computed
-objectwise), and it sends injective sheaves of `Λ'`-modules to `g_*`-acyclic sheaves of
-`Λ`-modules (`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj_of_injective`).
-Hence it commutes with the derived direct images on the bounded below derived categories:
-the cohomology of a sheaf of modules does not depend on the coefficient ring.
+Let `φ : Λ →+* Λ'` be a morphism of rings. Restriction of scalars along `φ` commutes with the
+direct image (`AlgebraicGeometry.Etale.lowerStarCompRestrictScalarsIso`) and with the derived
+direct image (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`). This file
+shows that it also commutes with pullbacks and with the base change map of a commutative square,
+so that the base change map of a sheaf of `Λ'`-modules may be computed over `Λ`.
 
-## Main definitions
+## Main statements
 
-- `AlgebraicGeometry.Etale.rightDerivedLowerStarRestrictScalars`: the isomorphism
-  `res (R g_* K) ≅ R g_* (res K)`.
-- `AlgebraicGeometry.Etale.higherDirectImageRestrictScalarsIso`: the isomorphism
-  `res (R^q g_* F) ≅ R^q g_* (res F)`.
+- `AlgebraicGeometry.Etale.upperStarRestrictScalars`: the comparison `f^* ∘ res ⟶ res ∘ f^*`,
+  an isomorphism by `AlgebraicGeometry.Etale.isIso_upperStarRestrictScalars`.
+- `AlgebraicGeometry.Etale.baseChangeMap_restrictScalars`: restriction of scalars commutes with
+  the underived base change map of a commutative square.
 -/
 
 @[expose] public section
@@ -40,86 +39,23 @@ namespace AlgebraicGeometry.Etale
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
 
-section DirectImage
-
-variable {T S : Scheme.{u}} (g : T ⟶ S)
-
-/-- Restriction of scalars commutes with the direct image, both being computed objectwise. -/
-noncomputable def lowerStarCompRestrictScalarsIso :
-    (g)_*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars S.smallEtaleTopology φ ≅
-      Sheaf.restrictScalars T.smallEtaleTopology φ ⋙ (g)_*[ModuleCat.{u + 1} Λ] :=
-  Iso.refl _
-
-/-- Restriction of scalars commutes with the derived direct image: the base change morphism
-`res (R g_* K) ⟶ R g_* (res K)` of `CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange`
-attached to `AlgebraicGeometry.Etale.lowerStarCompRestrictScalarsIso`. It is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`). -/
-noncomputable abbrev rightDerivedLowerStarRestrictScalars :
-    R+((g)_*[ModuleCat.{u + 1} Λ']) ⋙
-        (Sheaf.restrictScalars S.smallEtaleTopology φ).mapDerivedCategoryPlus ⟶
-      (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlus ⋙
-        R+((g)_*[ModuleCat.{u + 1} Λ]) :=
-  Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompRestrictScalarsIso φ g).hom
-
-instance isIso_rightDerivedLowerStarRestrictScalars :
-    IsIso (rightDerivedLowerStarRestrictScalars φ g) :=
-  Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
-    (lowerStarCompRestrictScalarsIso φ g)
-    (fun I _ ↦ rightAcyclic_lowerStar_restrictScalars_obj_of_injective φ g I)
-
-end DirectImage
+/-- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`, for the unfolded
+base change morphism. -/
+instance isIso_rightDerivedFunctorPlusBaseChange_lowerStarCompRestrictScalarsIso
+    {T S : Scheme.{u}} (g : T ⟶ S) :
+    IsIso (Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompRestrictScalarsIso φ g).hom) :=
+  isIso_rightDerivedLowerStarRestrictScalars φ g
 
 section UpperStar
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The pullback `f^*` commutes with restriction of scalars: the mate, for the adjunctions
-`f^* ⊣ f_*` over `Λ'` and over `Λ`, of `AlgebraicGeometry.Etale.lowerStarCompRestrictScalarsIso`.
-It is an isomorphism (`AlgebraicGeometry.Etale.isIso_upperStarRestrictScalars`). -/
-noncomputable def upperStarRestrictScalars :
-    TwoSquare (Sheaf.restrictScalars Y.smallEtaleTopology φ) (f)^*[ModuleCat.{u + 1} Λ']
-      (f)^*[ModuleCat.{u + 1} Λ] (Sheaf.restrictScalars X.smallEtaleTopology φ) :=
-  (mateEquiv (upperStarLowerStarAdjunction _ f) (upperStarLowerStarAdjunction _ f)).symm
-    (lowerStarCompRestrictScalarsIso φ f).hom
-
+/-- The mate of `AlgebraicGeometry.Etale.upperStarRestrictScalars` is the identification
+`f_* ∘ res = res ∘ f_*`. -/
 lemma mateEquiv_upperStarRestrictScalars :
     mateEquiv (upperStarLowerStarAdjunction _ f) (upperStarLowerStarAdjunction _ f)
       (upperStarRestrictScalars φ f) = (lowerStarCompRestrictScalarsIso φ f).hom :=
   Equiv.apply_symm_apply _ _
-
-/-- The mate, for the adjunctions `res ⊣ coext`, of the equality `res ∘ f_* = f_* ∘ res` is
-the equality `coext ∘ f_* = f_* ∘ coext`. -/
-lemma mateEquiv_restrictCoextendScalarsAdj_lowerStarCompRestrictScalarsIso :
-    (mateEquiv (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ)
-      (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ)
-      (lowerStarCompRestrictScalarsIso φ f).hom).natTrans =
-      (lowerStarCompCoextendScalarsIso φ f).inv := by
-  refine NatTrans.ext (funext fun M ↦ ?_)
-  simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
-    lowerStarCompRestrictScalarsIso, lowerStarCompCoextendScalarsIso, Iso.refl_hom, Iso.refl_inv,
-    NatTrans.id_app, CategoryTheory.Functor.map_id]
-  exact (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).right_triangle_components
-    ((f)_*[ModuleCat.{u + 1} Λ].obj M)
-
-instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ f).natTrans := by
-  have h := iterated_mateEquiv_conjugateEquiv (upperStarLowerStarAdjunction _ f)
-    (upperStarLowerStarAdjunction _ f) (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ)
-    (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ) (upperStarRestrictScalars φ f)
-  rw [mateEquiv_upperStarRestrictScalars,
-    mateEquiv_restrictCoextendScalarsAdj_lowerStarCompRestrictScalarsIso] at h
-  have : IsIso (conjugateEquiv ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).comp
-      (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ))
-      ((Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).comp
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f))
-        (upperStarRestrictScalars φ f)) := by
-    rw [← h]
-    infer_instance
-  exact conjugateEquiv_of_iso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).comp
-    (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ))
-    ((Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).comp
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)) _
 
 /-- The unit of `f^* ⊣ f_*` is compatible with restriction of scalars. -/
 @[reassoc]

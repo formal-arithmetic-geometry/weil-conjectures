@@ -36,7 +36,7 @@ variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
 
 /-- `NatTrans.mapHomotopyCategoryPlus` of a right whiskering is the image of
 `NatTrans.mapHomotopyCategoryPlus`, modulo `Functor.mapHomotopyCategoryPlusCompIso`. -/
-lemma mapHomotopyCategoryPlus_whiskerRight_app {F₁ F₂ : C ⥤ D} [F₁.Additive] [F₂.Additive]
+lemma mapHomotopyCategoryPlusCompIso_whiskerRight_app {F₁ F₂ : C ⥤ D} [F₁.Additive] [F₂.Additive]
     (τ : F₁ ⟶ F₂) (G : D ⥤ E) [G.Additive] (K : HomotopyCategory.Plus C) :
     (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F₁ ⋙ G))).hom.app K ≫
         (NatTrans.mapHomotopyCategoryPlus (Functor.whiskerRight τ G)).app K =
@@ -57,7 +57,7 @@ lemma mapHomotopyCategoryPlus_whiskerRight_app {F₁ F₂ : C ⥤ D} [F₁.Addit
 
 /-- `NatTrans.mapHomotopyCategoryPlus` of a left whiskering, modulo the composition
 isomorphisms `Functor.mapHomotopyCategoryPlusCompIso`. -/
-lemma mapHomotopyCategoryPlus_whiskerLeft_app (F : C ⥤ D) [F.Additive] {G₁ G₂ : D ⥤ E}
+lemma mapHomotopyCategoryPlusCompIso_whiskerLeft_app (F : C ⥤ D) [F.Additive] {G₁ G₂ : D ⥤ E}
     [G₁.Additive] [G₂.Additive] (τ : G₁ ⟶ G₂) (K : HomotopyCategory.Plus C) :
     (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G₁))).hom.app K ≫
         (NatTrans.mapHomotopyCategoryPlus (Functor.whiskerLeft F τ)).app K =
@@ -165,8 +165,8 @@ lemma rightDerivedFunctorPlusBaseChange_naturality (e : G ⋙ γ ⟶ β ⋙ G')
         (NatTrans.mapHomotopyCategoryPlus e₂).app K := by
     have h₁ := congr_app (congrArg NatTrans.mapHomotopyCategoryPlus h) K
     simp only [NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app] at h₁
-    have h₂ := NatTrans.mapHomotopyCategoryPlus_whiskerRight_app v.hom G' K
-    have h₃ := NatTrans.mapHomotopyCategoryPlus_whiskerLeft_app G u.hom K
+    have h₂ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerRight_app v.hom G' K
+    have h₃ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerLeft_app G u.hom K
     rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
       Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app] at h₂ h₃
     erw [id_comp, comp_id] at h₂ h₃
@@ -254,8 +254,8 @@ lemma rightDerivedFunctorPlusBaseChange_paste (e₁ : G₁ ⋙ γ₁ ⟶ β₁ �
   have hK : (NatTrans.mapHomotopyCategoryPlus (baseChangePaste e₁ e₂)).app K =
       γ₂.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus e₁).app K) ≫
         (NatTrans.mapHomotopyCategoryPlus e₂).app (β₁.mapHomotopyCategoryPlus.obj K) := by
-    have h₂ := NatTrans.mapHomotopyCategoryPlus_whiskerRight_app e₁ γ₂ K
-    have h₃ := NatTrans.mapHomotopyCategoryPlus_whiskerLeft_app β₁ e₂ K
+    have h₂ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerRight_app e₁ γ₂ K
+    have h₃ := NatTrans.mapHomotopyCategoryPlusCompIso_whiskerLeft_app β₁ e₂ K
     rw [Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
       Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app] at h₂ h₃
     erw [id_comp, comp_id] at h₂ h₃
