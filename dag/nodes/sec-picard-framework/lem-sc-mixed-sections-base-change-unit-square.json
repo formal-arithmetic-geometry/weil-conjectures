@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-mixed-sections-base-change-unit-square",
+ "kind": "statement",
+ "title": "Derived sections of the base-change unit square with independent universes",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\prime\\to Y$ be arbitrary scheme morphisms [def-pc-scheme], and form their pullback with projections $f\\prime,g_X$ [def-pc-fibre-product]. Let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. Put $G_Z=R\\Gamma_Z$ and let $c_h:Rh_*;G_{target}\\cong G_{source};S_h$ be the fixed normalized Leray comparisons [lem-sc-mixed-global-sections-direct-image-iso]. Let $q:S_{g_X};S_f\\cong S_{f\\prime};S_g$ be the identity scalar-square comparison. Then $G_Y(\\eta_g(Rf_*E));(c_g)_{Lg^*Rf_*E};S_g(G_{Y\\prime}(BC_E);(c_{f\\prime})_{Lg_X^*E})=(c_f)_E;S_f(G_X(\\eta_{g_X}(E));(c_{g_X})_{Lg_X^*E});q_{G_{X\\prime}(Lg_X^*E)}$, with $BC_E$ the canonical map [def-pc-derived-base-change-map]. No affine, quasi-coherence, flatness or invertibility hypothesis is made; the two localization universes are independent.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY (counit description of base change), Lemma 0D5T (canonical direct-image composition)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso"
+ ],
+ "proof": [
+  {
+   "text": "Expand canonical base change as the f-prime adjunct of pullback composition followed by pullback of the counit for f. Transpose with the g-unit, move units by naturality, and cancel the f-unit and counit by the triangle identity. The remaining sheaf map is the g_X-unit followed by the canonical derived direct-image composition comparison.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived sections. On underived sections the Leray comparisons are identity, and the two scalar actions agree by pullback.condition. The right-derived-unit equations for Leray and composition identify both pasted comparisons on K-injective representatives, then on the full derived categories by right-derived uniqueness. The identity scalar comparison is schemeGlobalScalarSquareIso, giving the displayed equation.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "def-pc-global-hom-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "def-pc-global-hom-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "date": "2026-10-13",
+  "note": "Explicit intermediate step of the parent proof; cited Stacks sources read online, refining their constructions to pinned Lean comparisons and independent localization universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine derived global sections pullback scalar extension adjunction unit compatibility",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections on affine schemes commute with derived pullback and intertwine the base change mate with scalar extension adjunction",
+   "results": "Eight hits, including Scheme.Modules.pullbackPushforwardAdjunction and conjugateEquiv_pullbackComp_inv; no independent-universe derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "Twelve general adjunction/Hom-equivalence declarations; no derived affine sections comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.*[Uu]nit|[Mm]ixed.*[Ss]ections|exists_.*ExtensionSectionsUnit",
+   "results": "msearch grep of Mathlib returned only NumberField.mixedEmbedding.unitSMul; direct project rg found equal-universe AffineExtensionSectionsUnit and AffineSectionsBaseChangeUnitSquare, whose hypotheses cannot instantiate independent localization universes. Blueprint searches returned no matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA7 canonical comparison: Derived sections of the base-change unit square with independent universes",
+   "via": [
+    "lem-sc-mixed-affine-sections-base-change-mate",
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedSectionsBaseChangeUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.mixedSectionsBaseChange_unit_square",
+  "statement": "theorem mixedSectionsBaseChange_unit_square\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (E : schemeDerivedCategory X) :\n    (schemeDerivedGlobalSections Y).map\n        ((schemeHomPullbackAdjunction g).unit.app ((schemeDerivedDirectImage f).obj E)) ≫\n      (mixedGlobalSectionsDirectImageIso g).hom.app\n        ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≫\n      (schemeGlobalScalarRestriction g).map\n        ((schemeDerivedGlobalSections Y').map\n            (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n              (pullback.fst f g) pullback.condition E) ≫\n          (mixedGlobalSectionsDirectImageIso (pullback.snd f g)).hom.app\n            ((derivedPullback (pullback.fst f g)).obj E)) =\n      (mixedGlobalSectionsDirectImageIso f).hom.app E ≫\n        (schemeGlobalScalarRestriction f).map\n          ((schemeDerivedGlobalSections X).map\n              ((schemeHomPullbackAdjunction (pullback.fst f g)).unit.app E) ≫\n            (mixedGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app\n              ((derivedPullback (pullback.fst f g)).obj E)) ≫\n        (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition).hom.app\n            ((schemeDerivedGlobalSections (pullback f g)).obj\n              ((derivedPullback (pullback.fst f g)).obj E))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T113357-L-3188895",
+  "kind": "interface"
+ }
+}
