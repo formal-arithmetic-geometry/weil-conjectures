@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-module-cup-godement-stalk-contraction",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Contracting homotopy of each augmented Godement stalk complex",
+ "statement": "For every scheme $X$, module sheaf $F$, cosimplicial module object $A$ and augmentation $a:F[0]\\to K(A)$ satisfying ModuleCupGodementModel, and every point $x$ of $X$, the map of stalk complexes induced by $a$ is a homotopy equivalence. Its inverse and homotopies are induced by evaluation of the corresponding stalk-product coordinate. No global quasi-isomorphism or flasqueness is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution; Lemma 20.30.1 (0FKS); monad multiplication and tensor compatibility: Banerjee, arXiv:1004.1491, section 1.1.4, pp. 15--16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Project T(H) to the skyscraper at x, apply the module stalk functor at x, then use skyscraperStalkEval. The resulting e_H:(T(H))_x to H_x satisfies e_H unit_H=id by the germ and evaluation identities. Naturality in H implies that inner unit insertions commute with e, with their indices reduced by one; the outer insertion followed by e is the identity.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport evaluation through the term equalities of ModuleCupGodementModel. In positive degree pair adjacent terms in the alternating sum of cofaces, leaving d h+h d=id. In degree zero the remaining term is id-a r, where r is evaluation in degree zero; r a=id by the unit identity. Negative degrees are zero and all maps there are zero. The same identities say r is a chain map. They give the two homotopies required for a homotopy equivalence whose forward map is the stalk augmentation.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof_origin": {
+  "by": "R4 stage-3 worker; explicit Lean product-of-module-stalks construction and adaptation of the cited proof",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "construction and Lemma 20.30.1; Banerjee section 1.1.4"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCosimplicialInput",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Godement augmented stalk contraction, before reflecting homology isomorphisms",
+   "via": [
+    "lem-sc-module-cup-godement-cosimplicial-input",
+    "lem-sc-module-cup-godement-aw",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement cosimplicial resolutions of sheaves of modules are flasque and exact and have a pointwise tensor multiplication",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated Godement monad gives an augmented cosimplicial resolution with natural pointwise tensor multiplication",
+   "results": "Augmented cosimplicial whiskering and group-resolution extra-degeneracy APIs; no Godement module construction or pairing.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"skyscraper\", \"IsFlasque\"",
+   "results": "isFlasque_skyscraperSheaf_of_hasZeroObject and isFlasque_skyscraperSheaf_of_epi_from; these concern the general categorical skyscraper, not the module stalk product.",
+   "date": "2026-10-13",
+   "verdict": "individual skyscraper infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "godement|Godement|IsFlasque.*prod|IsFlasque.*pi",
+   "results": "Flasque definition and individual skyscraper flasqueness in Mathlib/Topology/Sheaves/Flasque.lean; no product-of-module-stalks statement. Direct rg on the source library additionally found skyscraper, skyscraperStalkEval, toSkyscraper, and skyscraperHomEquiv in FlatPullbackStalk.lean.",
+   "date": "2026-10-13",
+   "verdict": "use existing skyscraper construction; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementStalkContraction",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementStalkContraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_stalk_contraction",
+  "statement": "theorem moduleCup_godement_stalk_contraction (X : Scheme.{u}) (F : X.Modules)\n    (A : CosimplicialObject X.Modules)\n    (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶\n      (((alternatingCofaceMapComplex X.Modules).obj A).extend\n        ComplexShape.embeddingUpNat))\n    (h : ModuleCupGodementModel X F A a) (x : X) :\n    HomologicalComplex.homotopyEquivalences\n      (ModuleCat.{u} (X.presheaf.stalk x)) (.up ℤ)\n      (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n        (.up ℤ)).map a)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-module-cup-godement-object-flasque",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Flasqueness of the product of module stalk skyscrapers",
+ "statement": "For every scheme $X$ and module sheaf $F$, the abelian sheaf underlying $T(F)=\\prod_{x\\in X} i_{x,*}F_x$ is flasque, including for empty schemes and zero sheaves.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution; Lemma 20.30.1 (0FKS); monad multiplication and tensor compatibility: Banerjee, arXiv:1004.1491, section 1.1.4, pp. 15--16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of module sheaves on an open preserves products. The product comparison and Types.productIso identify sections with families of skyscraper sections. The projection compatibility identifies restriction with coordinatewise restriction. Extend a family on a smaller open by zero at each point outside it, and transport it back through the product comparison. This explicitly lifts any section, so the underlying abelian restriction is surjective and hence epi.",
+   "uses": [
+    "def-sc-module-cup-godement-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof_origin": {
+  "by": "R4 stage-3 worker; explicit Lean product-of-module-stalks construction and adaptation of the cited proof",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "construction and Lemma 20.30.1; Banerjee section 1.1.4"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCosimplicialInput",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Flasqueness of the product of module stalk skyscrapers",
+   "via": [
+    "lem-sc-module-cup-godement-cosimplicial-input",
+    "lem-sc-module-cup-godement-aw",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement cosimplicial resolutions of sheaves of modules are flasque and exact and have a pointwise tensor multiplication",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated Godement monad gives an augmented cosimplicial resolution with natural pointwise tensor multiplication",
+   "results": "Augmented cosimplicial whiskering and group-resolution extra-degeneracy APIs; no Godement module construction or pairing.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"skyscraper\", \"IsFlasque\"",
+   "results": "isFlasque_skyscraperSheaf_of_hasZeroObject and isFlasque_skyscraperSheaf_of_epi_from; these concern the general categorical skyscraper, not the module stalk product.",
+   "date": "2026-10-13",
+   "verdict": "individual skyscraper infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "godement|Godement|IsFlasque.*prod|IsFlasque.*pi",
+   "results": "Flasque definition and individual skyscraper flasqueness in Mathlib/Topology/Sheaves/Flasque.lean; no product-of-module-stalks statement. Direct rg on the source library additionally found skyscraper, skyscraperStalkEval, toSkyscraper, and skyscraperHomEquiv in FlatPullbackStalk.lean.",
+   "date": "2026-10-13",
+   "verdict": "use existing skyscraper construction; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementObjectFlasque",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementObjectFlasque.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_object_flasque",
+  "statement": "theorem moduleCup_godement_object_flasque (X : Scheme.{u}) (F : X.Modules) :\n    TopCat.Sheaf.IsFlasque\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj\n        (moduleCup_godementObject X F))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

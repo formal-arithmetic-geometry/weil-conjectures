@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-module-cup-godement-model-pairing",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Multiplicative cosimplicial Godement models",
+ "statement": "For every scheme $X$ and module sheaves $F,G$, there exist cosimplicial objects $A,B,C$, augmentations $a:F[0]\\to K(A)$, $b:G[0]\\to K(B)$, $c:(F\\otimes G)[0]\\to K(C)$, and a pointwise tensor morphism $\\mu:A\\otimes B\\to C$. Each augmented object satisfies the concrete term, coface and germ-unit predicate ModuleCupGodementModel, and the degree-zero pairing takes tensor products of augmented sections to the augmentation of their tensor product. Here $K$ is the alternating coface complex extended by zero. No quasi-isomorphism or flasqueness is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution; Lemma 20.30.1 (0FKS); monad multiplication and tensor compatibility: Banerjee, arXiv:1004.1491, section 1.1.4, pp. 15--16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct the product-of-stalks adjunction, whose unit is the germ map and whose counit is stalk evaluation. Its monad gives terms T^(n+1)(F), unit-insertion cofaces and multiplication codegeneracies. The adjunction identities establish the cosimplicial identities and give the displayed model equations. The germ unit defines the cochain augmentation because its composites with the first two cofaces agree.",
+   "uses": [
+    "def-sc-module-cup-godement-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coordinatewise tensor products of stalks, followed by the stalk tensor comparison, define T(F) tensor T(G) to T(F tensor G). Units and evaluations commute with this multiplication: both composites send germs to the tensor of the same two germs. Iteration therefore commutes with every coface and codegeneracy and supplies the cosimplicial morphism. Its degree-zero germ identity transports along the extension isomorphisms to the required section equality. Empty products and zero sheaves obey the same identities.",
+   "uses": [
+    "def-sc-module-cup-godement-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model"
+ ],
+ "proof_origin": {
+  "by": "R4 stage-3 worker; explicit Lean product-of-module-stalks construction and adaptation of the cited proof",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "construction and Lemma 20.30.1; Banerjee section 1.1.4"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementCosimplicialInput",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Multiplicative cosimplicial Godement models",
+   "via": [
+    "lem-sc-module-cup-godement-cosimplicial-input",
+    "lem-sc-module-cup-godement-aw",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement cosimplicial resolutions of sheaves of modules are flasque and exact and have a pointwise tensor multiplication",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated Godement monad gives an augmented cosimplicial resolution with natural pointwise tensor multiplication",
+   "results": "Augmented cosimplicial whiskering and group-resolution extra-degeneracy APIs; no Godement module construction or pairing.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"skyscraper\", \"IsFlasque\"",
+   "results": "isFlasque_skyscraperSheaf_of_hasZeroObject and isFlasque_skyscraperSheaf_of_epi_from; these concern the general categorical skyscraper, not the module stalk product.",
+   "date": "2026-10-13",
+   "verdict": "individual skyscraper infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "godement|Godement|IsFlasque.*prod|IsFlasque.*pi",
+   "results": "Flasque definition and individual skyscraper flasqueness in Mathlib/Topology/Sheaves/Flasque.lean; no product-of-module-stalks statement. Direct rg on the source library additionally found skyscraper, skyscraperStalkEval, toSkyscraper, and skyscraperHomEquiv in FlatPullbackStalk.lean.",
+   "date": "2026-10-13",
+   "verdict": "use existing skyscraper construction; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementModelPairing",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementModelPairing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_model_pairing",
+  "statement": "theorem moduleCup_godement_model_pairing (X : Scheme.{u}) (F G : X.Modules) :\n    ∃ (A B C : CosimplicialObject X.Modules)\n      (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶\n        (((alternatingCofaceMapComplex X.Modules).obj A).extend\n          ComplexShape.embeddingUpNat))\n      (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶\n        (((alternatingCofaceMapComplex X.Modules).obj B).extend\n          ComplexShape.embeddingUpNat))\n      (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶\n        (((alternatingCofaceMapComplex X.Modules).obj C).extend\n          ComplexShape.embeddingUpNat))\n      (μ : CategoryTheory.Monoidal.FunctorCategory.tensorObj\n        (C := SimplexCategory) (D := X.Modules) A B ⟶ C),\n      ModuleCupGodementModel X F A a ∧ ModuleCupGodementModel X G B b ∧\n      ModuleCupGodementModel X (F ⊗ G) C c ∧\n      ∀ (V : X.Opens)\n        (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F).X 0, V))\n        (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G).X 0, V)),\n        (((((alternatingCofaceMapComplex X.Modules).obj A).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).hom ⊗ₘ\n          (((alternatingCofaceMapComplex X.Modules).obj B).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).hom) ≫ μ.app ⦋0⦌ ≫\n          (((alternatingCofaceMapComplex X.Modules).obj C).extendXIso\n          ComplexShape.embeddingUpNat (i := 0) rfl).inv).val.app (op V)\n          (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y)) =\n        (c.f 0).val.app (op V) (tmulSection x y)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T140825-L-315952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
