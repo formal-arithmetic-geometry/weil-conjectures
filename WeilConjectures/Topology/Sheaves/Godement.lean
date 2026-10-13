@@ -62,10 +62,10 @@ instance isFlasque_godement (S : X → Type u) [∀ x, AddCommGroup (S x)] :
 @[simps]
 noncomputable def godementMap {S T : X → Type u} [∀ x, AddCommGroup (S x)]
     [∀ x, AddCommGroup (T x)] (f : ∀ x, S x →+ T x) : godement S ⟶ godement T where
-  app W := AddCommGrpCat.ofHom
+  app _ := AddCommGrpCat.ofHom
     { toFun := fun s x ↦ f x.1 (s x)
       map_zero' := funext fun x ↦ (f x.1).map_zero
-      map_add' := fun s t ↦ funext fun x ↦ (f x.1).map_add _ _ }
+      map_add' := fun _ _ ↦ funext fun x ↦ (f x.1).map_add _ _ }
   naturality _ _ _ := rfl
 
 end TopCat.Presheaf

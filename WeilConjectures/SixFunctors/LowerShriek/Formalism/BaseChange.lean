@@ -448,10 +448,11 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
       (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
         (F.sh c.i).map ((F.pbId X).hom.app K))
     simp only [Functor.map_comp, Category.assoc] at hm' hinv
-    simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
-      Adjunction.left_triangle_components_assoc]
-    rw [reassoc_of% hm']
-    exact hinv
+    simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality]
+    rw [reassoc_of% hm', hinv]
+    congr 1
+    erw [(F.adj r'.hom).counit_naturality_assoc,
+      (F.adj r'.hom).left_triangle_components_assoc]
   sorry
 
 end ShriekBaseChange

@@ -150,6 +150,7 @@ lemma functor_map_mkHom {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n) (hY 
     F.functor.map (mkHom n hX hY u) =
       mkHom (X := F.functor.obj X) (Y := F.functor.obj Y) n hX hY (F.mapAt u) := rfl
 
+omit [IsDirectedOrder I] in
 lemma mapAt_map {i n : I} {hi : i ≤ n} {x y : C i} (f : x ⟶ y) :
     F.mapAt (hi := hi) (hj := hi) ((S.T hi).map f) = (S'.T hi).map ((F.Φ i).map f) := by
   have := (F.β hi).hom.naturality f
@@ -183,6 +184,7 @@ attribute [reassoc] Hom.comm
 
 variable {F} {G H : Morphism S S'}
 
+omit [IsDirectedOrder I] in
 lemma Hom.comm_inv (τ : Hom F G) {i j : I} (h : i ≤ j) (x : C i) :
     (F.β h).inv.app x ≫ (S'.T h).map ((τ.τ i).app x) =
       (τ.τ j).app ((S.T h).obj x) ≫ (G.β h).inv.app x := by
@@ -190,6 +192,7 @@ lemma Hom.comm_inv (τ : Hom F G) {i j : I} (h : i ≤ j) (x : C i) :
     Iso.hom_inv_id_app]
   erw [Category.comp_id]
 
+omit [IsDirectedOrder I] in
 lemma Hom.mapAt_naturality (τ : Hom F G) {i j n : I} {hi : i ≤ n} {hj : j ≤ n} {x : C i}
     {y : C j} (u : (S.T hi).obj x ⟶ (S.T hj).obj y) :
     F.mapAt u ≫ (S'.T hj).map ((τ.τ j).app y) = (S'.T hi).map ((τ.τ i).app x) ≫ G.mapAt u := by
@@ -292,7 +295,7 @@ def comp (F : Morphism S S') (G : Morphism S' S'') : Morphism S S'' where
     dsimp
     simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
     conv_rhs => rw [← reassoc_of% e₁, ← Functor.map_comp, ← e₂]
-    simp only [Functor.map_comp, Category.assoc]
+    simp only [Functor.map_comp]
     rw [reassoc_of% n₁]
 
 variable [IsDirectedOrder I]
@@ -307,7 +310,7 @@ noncomputable def functorIdIso : (id S).functor ≅ 𝟭 S.PairCategory :=
       simp only [Iso.refl_hom, comp_id, id_comp, Functor.id_map]
       rw [functor_map_mkHom]
       congr 1
-      simp only [mapAt, id_Φ, id_β, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
+      simp only [mapAt, id_β, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
       erw [Category.id_comp, Category.comp_id]
       rfl)
 
@@ -326,7 +329,11 @@ noncomputable def functorCompIso (F : Morphism S S') (G : Morphism S' S'') :
       simp only [Iso.refl_hom, comp_id, id_comp, Functor.comp_map]
       rw [functor_map_mkHom, functor_map_mkHom, functor_map_mkHom]
       congr 1
-      simp [mapAt]
+      simp only [mapAt, Functor.comp_obj, comp_β, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+        Iso.symm_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.associator_hom_app,
+        Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app, comp_id,
+        id_comp, Iso.trans_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv, Category.assoc,
+        Functor.isoWhiskerLeft_inv, Functor.map_comp]
       erw [Category.id_comp, Category.id_comp]
       rfl)
 

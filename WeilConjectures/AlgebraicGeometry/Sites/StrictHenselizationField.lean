@@ -64,7 +64,8 @@ set_option backward.isDefEq.respectTransparency false in
 neighbourhood with value zero is killed by an element `g` with nonzero value, `R` being a
 reduced artinian ring; and `g` becomes a unit on the neighbourhood `Spec R[1/g]`. -/
 theorem strictHenselizationEval_injective_of_field :
-    Function.Injective (strictHenselizationEval (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))) := by
+    Function.Injective
+      (strictHenselizationEval (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))) := by
   refine (injective_iff_map_eq_zero _).2 fun a ha ↦ ?_
   obtain ⟨N, hN⟩ := exists_specPointedEtaleNeighborhood_forall_mem_range 1 (fun _ ↦ a)
   obtain ⟨c, rfl⟩ := hN 0
@@ -72,7 +73,7 @@ theorem strictHenselizationEval_injective_of_field :
   -- the ring of the neighbourhood is an étale `K`-algebra
   let φ : CommRingCat.of K ⟶ N.R := Spec.preimage N.hom
   have hφ : Spec.map φ = N.hom := Spec.map_preimage _
-  letI := φ.hom.toAlgebra
+  let := φ.hom.toAlgebra
   have : Algebra.Etale K N.R := by
     have h := N.etale
     rw [← hφ, HasRingHomProperty.Spec_iff (P := @Etale)] at h
@@ -88,7 +89,7 @@ theorem strictHenselizationEval_injective_of_field :
     have h0 : c ^ n * g = 0 := by
       simp only [g]
       rw [mul_sub, mul_one, ← mul_assoc, ← pow_succ, hy, sub_self]
-    calc (c * g) ^ (n + 1) = (c ^ n * g) * (c * g ^ n) := by ring
+    calc (c * g) ^ (n + 1) = (c ^ n * g) * (c * g ^ n) := by ring_nf
       _ = 0 := by rw [h0, zero_mul]
   have hg : N.pt g ≠ 0 := by simp [g, ha]
   obtain ⟨N', u, t, hu, ht, htu, -⟩ := N.exists_standardEtale

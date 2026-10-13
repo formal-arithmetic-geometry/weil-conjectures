@@ -32,11 +32,12 @@ variable {X : TopCat.{u}}
 
 section Supported
 
-variable {F G : TopCat.Sheaf AddCommGrpCat.{u} X}
+variable {F G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
 
 /-- An abelian sheaf `F` on `X` is supported in `Z`: the support of every section of `F` is
 contained in `Z`. -/
-def IsSupportedIn (F : TopCat.Sheaf AddCommGrpCat.{u} X) (Z : Set X) : Prop :=
+def IsSupportedIn (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    (Z : Set X) : Prop :=
   ∀ ⦃V : Opens X⦄ (s : F.obj.obj (op V)), sectionSupport F s ⊆ Z
 
 lemma IsSupportedIn.isZero (hF : IsSupportedIn F ∅) : IsZero F := by
@@ -44,11 +45,42 @@ lemma IsSupportedIn.isZero (hF : IsSupportedIn F ∅) : IsZero F := by
   ext V s
   exact eq_zero_of_sectionSupport_eq_empty s (Set.subset_empty_iff.1 (hF s))
 
+/-- The cohomology of a zero abelian sheaf vanishes. -/
+lemma subsingleton_H_of_isZero (hF : IsZero F) (n : ℕ) : Subsingleton (Sheaf.H F n) :=
+  ⟨fun x y ↦ by
+    rw [← Sheaf.H.map_id_apply x, ← Sheaf.H.map_id_apply y, hF.eq_of_src (𝟙 F) 0,
+      Sheaf.H.map_apply, Sheaf.H.map_apply]
+    simp⟩
+
+/-- If `ψ : F ⟶ Q` has a retraction and `Hⁿ(ψ)` vanishes, then `Hⁿ(F) = 0`. -/
+lemma subsingleton_H_of_comp_eq_id {Q : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} {ψ : F ⟶ Q} {φ : Q ⟶ F} (hψ : ψ ≫ φ = 𝟙 F) {n : ℕ}
+    (h : ∀ x : Sheaf.H F n, Sheaf.H.map ψ n x = 0) : Subsingleton (Sheaf.H F n) :=
+  subsingleton_of_forall_eq 0 fun x ↦ by
+    rw [← Sheaf.H.map_id_apply x, ← hψ, Sheaf.H.map_comp_apply, h, map_zero]
+
+/-- A map of abelian sheaves induces the zero map on `Hⁿ` when `Hⁿ` of its source vanishes. -/
+lemma H_map_eq_zero_of_subsingleton (f : F ⟶ G) {n : ℕ} (h : Subsingleton (Sheaf.H F n))
+    (y : Sheaf.H F n) : Sheaf.H.map f n y = 0 := by
+  rw [h.elim y 0, map_zero]
+
+/-- If `f ≫ g = 0`, then `g` kills the image under `f` of every section. -/
+lemma app_app_eq_zero_of_comp_eq_zero {H : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}} {f : F ⟶ G} {g : G ⟶ H} (h : f ≫ g = 0) {V : Opens X}
+    (t : F.obj.obj (op V)) : g.hom.app (op V) (f.hom.app (op V) t) = 0 := by
+  rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, h]
+  rfl
+
 lemma kernel_ι_app_apply (ψ : F ⟶ G) {V : Opens X} (t : (kernel ψ).obj.obj (op V)) :
-    ψ.hom.app (op V) ((kernel.ι ψ).hom.app (op V) t) = 0 := by
-  have h := congr_arg (fun f ↦ f.hom.app (op V)) (kernel.condition ψ)
-  have := ConcreteCategory.congr_hom h t
-  simpa using this
+    ψ.hom.app (op V) ((kernel.ι ψ).hom.app (op V) t) = 0 :=
+  app_app_eq_zero_of_comp_eq_zero (kernel.condition ψ) t
+
+/-- A morphism of abelian sheaves vanishing on all sections is zero. -/
+lemma eq_zero_of_app_eq_zero {f : F ⟶ G}
+    (h : ∀ (V : Opens X) (s : F.obj.obj (op V)), f.hom.app (op V) s = 0) : f = 0 := by
+  ext V s
+  exact (h V.unop s).trans rfl
 
 lemma sectionSupport_kernel_ι (ψ : F ⟶ G) {V : Opens X} (t : (kernel ψ).obj.obj (op V)) :
     sectionSupport (kernel ψ) t = sectionSupport F ((kernel.ι ψ).hom.app (op V) t) :=
@@ -58,11 +90,12 @@ end Supported
 
 section Colimit
 
-variable (F : TopCat.Sheaf AddCommGrpCat.{u} X)
+variable (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
 
 /-- The subsheaf `F_Z ⊆ F` of the sections of `F` supported in `Z`: the kernel of the map from
 `F` to the product of its stalks at the points off `Z`. -/
-noncomputable abbrev supportedIn (Z : Set X) : TopCat.Sheaf AddCommGrpCat.{u} X :=
+noncomputable abbrev supportedIn (Z : Set X) :
+    CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
   kernel (toGodementOn Zᶜ F)
 
 lemma isSupportedIn_supportedIn (Z : Set X) : IsSupportedIn (supportedIn F Z) Z := by
@@ -79,9 +112,9 @@ lemma toGodementOn_app_eq_zero_of_subset {Z : Set X} {V : Opens X} (s : F.obj.ob
 /-- The inclusion `F_Z ⟶ F_Z'` for `Z ⊆ Z'`. -/
 noncomputable def supportedInMap {Z Z' : Set X} (h : Z ⊆ Z') :
     supportedIn F Z ⟶ supportedIn F Z' :=
-  kernel.lift _ (kernel.ι _) (by
-    ext V t
-    refine (toGodementOn_app_eq_zero_of_subset _ ?_).trans (map_zero _).symm
+  kernel.lift _ (kernel.ι _) (eq_zero_of_app_eq_zero fun V t ↦ by
+    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]
+    refine toGodementOn_app_eq_zero_of_subset _ ?_
     rw [← sectionSupport_kernel_ι]
     exact (isSupportedIn_supportedIn F Z t).trans h)
 
@@ -93,11 +126,12 @@ lemma supportedInMap_ι {Z Z' : Set X} (h : Z ⊆ Z') :
 /-- The diagram `Z ↦ F_Z` of the subsheaves of sections supported in the members of a family
 `𝒵` of subsets of `X`. -/
 @[simps]
-noncomputable def supportedInFunctor (𝒵 : Set (Set X)) : 𝒵 ⥤ TopCat.Sheaf AddCommGrpCat.{u} X where
+noncomputable def supportedInFunctor (𝒵 : Set (Set X)) :
+    𝒵 ⥤ CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} where
   obj Z := supportedIn F Z.1
   map h := supportedInMap F (leOfHom h)
-  map_id _ := by ext1; simp
-  map_comp _ _ := by ext1; simp
+  map_id _ := (cancel_mono (kernel.ι _)).1 (by simp)
+  map_comp _ _ := (cancel_mono (kernel.ι _)).1 (by simp)
 
 variable [NoetherianSpace X]
 
@@ -113,51 +147,43 @@ lemma subsingleton_H_of_directedOn {𝒵 : Set (Set X)} (hne : 𝒵.Nonempty)
   have : IsDirectedOrder 𝒵 := ⟨fun a b ↦ by
     obtain ⟨c, hc, hac, hbc⟩ := hdir a.1 a.2 b.1 b.2
     exact ⟨⟨c, hc⟩, hac, hbc⟩⟩
-  let D := supportedInFunctor F 𝒵
+  let D : 𝒵 ⥤ TopCat.Sheaf AddCommGrpCat.{u} X := supportedInFunctor F 𝒵
   let c : Cocone D :=
     { pt := F
-      ι := { app Z := kernel.ι _ } }
-  let φ := colimit.desc D c
-  have hφ (Z : 𝒵) {V : Opens X} (t : (D.obj Z).obj.obj (op V)) :
-      φ.hom.app (op V) ((colimit.ι D Z).hom.app (op V) t) = (kernel.ι _).hom.app (op V) t := by
-    have h := congr_arg (fun f ↦ f.hom.app (op V)) (colimit.ι_desc c Z)
-    exact ConcreteCategory.congr_hom h t
-  have : Mono φ := by
-    have : ∀ V, Mono (φ.hom.app V) := fun V ↦ by
-      refine (AddCommGrpCat.mono_iff_injective _).2 ((injective_iff_map_eq_zero _).2 ?_)
-      intro x hx
-      obtain ⟨Z, t, rfl⟩ := exists_app_eq_of_isColimit (colimit.isColimit D) (U := V.unop) x
-      rw [hφ] at hx
-      rw [(injective_iff_map_eq_zero _).1 (injective_app_of_mono _ _) t hx, map_zero]
-    have : Mono φ.hom := NatTrans.mono_of_mono_app _
-    exact (sheafToPresheaf _ _).mono_of_mono_map this
-  have : Epi φ := by
-    have : ∀ V, Epi (φ.hom.app V) := fun V ↦ by
-      refine (AddCommGrpCat.epi_iff_surjective _).2 fun s ↦ ?_
-      obtain ⟨Z, hZ, hs⟩ := hF (V := V.unop) s
+      ι :=
+        { app Z := kernel.ι (toGodementOn (Z.1)ᶜ F)
+          naturality _ _ h := (supportedInMap_ι F (leOfHom h)).trans (Category.comp_id _).symm } }
+  let φ : colimit D ⟶ F := colimit.desc D c
+  have hφ (Z : 𝒵) {V : Opens X} (t : (supportedIn F Z.1).obj.obj (op V)) :
+      φ.hom.app (op V) (((colimit.cocone D).ι.app Z).hom.app (op V) t) =
+        (kernel.ι (toGodementOn (Z.1)ᶜ F)).hom.app (op V) t :=
+    ConcreteCategory.congr_hom (congr_arg (fun f ↦ f.hom.app (op V)) (colimit.ι_desc c Z)) t
+  have hbij (V : Opens X) : Function.Bijective (φ.hom.app (op V)) := by
+    refine ⟨(injective_iff_map_eq_zero _).2 fun x hx ↦ ?_, fun s ↦ ?_⟩
+    · obtain ⟨Z, t, rfl⟩ := exists_app_eq_of_isColimit (colimit.isColimit D) x
+      obtain rfl : t = 0 := (injective_iff_map_eq_zero _).1
+        (injective_app_of_mono (F := supportedIn F Z.1) (kernel.ι _) _) t
+        ((hφ Z t).symm.trans hx)
+      exact map_zero _
+    · obtain ⟨Z, hZ, hs⟩ := hF s
       obtain ⟨t, rfl⟩ := exists_kernel_ι_app_eq _ s (toGodementOn_app_eq_zero_of_subset s hs)
-      exact ⟨(colimit.ι D ⟨Z, hZ⟩).hom.app V t, hφ ⟨Z, hZ⟩ t⟩
-    have : Epi φ.hom := NatTrans.epi_of_epi_app _
-    exact (sheafToPresheaf _ _).epi_of_epi_map this
-  have : IsIso φ := isIso_of_mono_of_epi φ
-  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  obtain ⟨Z, y, hy⟩ := (hColimitProp n D).1 (Sheaf.H.map (inv φ) n x)
-  have := hH Z.1 Z.2
-  have hy0 : y = 0 := Subsingleton.elim _ _
-  rw [hy0, map_zero] at hy
-  rw [← Sheaf.H.map_id_apply x, ← IsIso.inv_hom_id φ, Sheaf.H.map_comp_apply, ← hy, map_zero]
+      exact ⟨((colimit.cocone D).ι.app ⟨Z, hZ⟩).hom.app (op V) t, hφ ⟨Z, hZ⟩ t⟩
+  have (V : (Opens X)ᵒᵖ) :
+      IsIso (((sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).map φ).app V) :=
+    (ConcreteCategory.isIso_iff_bijective _).2 (hbij V.unop)
+  have : IsIso ((sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).map φ) :=
+    NatIso.isIso_of_isIso_app _
+  obtain ⟨ψ, -, hψ⟩ := ((fullyFaithfulSheafToPresheaf _ _).isIso_of_isIso_map φ).out
+  refine subsingleton_H_of_comp_eq_id hψ fun x ↦ ?_
+  obtain ⟨Z, y, hy⟩ := (hColimitProp n D).1 (Sheaf.H.map ψ n x)
+  exact hy.symm.trans (H_map_eq_zero_of_subsingleton (colimit.ι D Z) (hH Z.1 Z.2) y)
 
 end Colimit
 
 section Vanishing
 
-variable {F G H : TopCat.Sheaf AddCommGrpCat.{u} X} {Z : Set X} {E : Finset X}
-
-lemma app_app_eq_zero_of_comp_eq_zero {f : F ⟶ G} {g : G ⟶ H} (h : f ≫ g = 0) {V : Opens X}
-    (t : F.obj.obj (op V)) : g.hom.app (op V) (f.hom.app (op V) t) = 0 := by
-  have h' := congr_arg (fun f ↦ f.hom.app (op V)) h
-  have := ConcreteCategory.congr_hom h' t
-  simpa using this
+variable {F G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
+  {Z : Set X} {E : Finset X}
 
 /-- A section of a sheaf supported in a closed set `Z = ⋃_{η ∈ E} closure {η}` (with `E`
 irredundant), whose germs vanish at the points of `E`, has its support in a closed subset of `Z`
@@ -184,20 +210,20 @@ lemma sectionSupport_cokernel_subset (hZ : IsClosed Z) (hZE : Z = ⋃ η ∈ E, 
   intro x ⟨hxV, hx⟩
   by_contra hxZE
   refine hx ((germ_eq_zero_iff c hxV).2 ?_)
-  set φ := toGodementOn (E : Set X) F
-  obtain ⟨W, hxW, i, g, hg⟩ := exists_mem_forall_exists_app_eq_of_epi (cokernel.π φ) c hxV
+  obtain ⟨W, hxW, i, g, hg⟩ := exists_mem_forall_exists_app_eq_of_epi (cokernel.π _) c hxV
   suffices ∃ (W' : Opens X) (_ : x ∈ W') (i' : W' ⟶ W) (s : F.obj.obj (op W')),
-      φ.hom.app (op W') s = (godementOn (E : Set X) F).obj.map i'.op g by
+      (toGodementOn (E : Set X) F).hom.app (op W') s = (godementOn (E : Set X) F).obj.map i'.op g by
     obtain ⟨W', hxW', i', s, hs⟩ := this
     refine ⟨W', hxW', i' ≫ i, ?_⟩
     rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, ← hg,
       ← NatTrans.naturality_apply, ← hs]
-    exact app_app_eq_zero_of_comp_eq_zero (cokernel.condition φ) s
+    exact app_app_eq_zero_of_comp_eq_zero (cokernel.condition _) s
   have hEZ : (E : Set X) ⊆ Z := fun η hη ↦ hZE ▸ Set.mem_biUnion hη (subset_closure rfl)
   rcases not_and_or.1 hxZE with hxZ | hxE
   · refine ⟨W ⊓ ⟨Zᶜ, hZ.isOpen_compl⟩, ⟨hxW, hxZ⟩, homOfLE inf_le_left, 0, ?_⟩
     rw [map_zero]
-    refine (godementOn_eq_zero _ (Set.disjoint_left.2 fun y hy hyE ↦ hy.2 (hEZ hyE))).symm
+    exact (godementOn_eq_zero (V := W ⊓ ⟨Zᶜ, hZ.isOpen_compl⟩) _
+      (Set.disjoint_left.2 fun y hy hyE ↦ hy.2 (hEZ hyE))).symm
   rw [not_not] at hxE
   let T : Set X := ⋃ η' ∈ E.filter (fun η' ↦ x ∉ closure {η'}), closure {η'}
   have hT : IsClosed T :=
@@ -224,8 +250,9 @@ variable [NoetherianSpace X] [QuasiSober X]
 space, if `F` is supported in a closed set `Z` of dimension `< n`, then `Hᵠ(X, F) = 0` for all
 `q ≥ n`. -/
 theorem subsingleton_H_of_isSupportedIn (n : ℕ) :
-    ∀ (Z : Set X), IsClosed Z → DimLT Z n → ∀ (F : TopCat.Sheaf AddCommGrpCat.{u} X),
-      IsSupportedIn F Z → ∀ q, n ≤ q → Subsingleton (Sheaf.H F q) := by
+    ∀ (Z : Set X), IsClosed Z → DimLT Z n →
+      ∀ (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}),
+        IsSupportedIn F Z → ∀ q, n ≤ q → Subsingleton (Sheaf.H F q) := by
   induction n with
   | zero =>
     intro Z hZ hd F hF q _
@@ -239,7 +266,7 @@ theorem subsingleton_H_of_isSupportedIn (n : ℕ) :
     have hdir : DirectedOn (· ⊆ ·) 𝒵 := fun A hA B hB ↦ ⟨A ∪ B, ⟨hA.1.union hB.1,
       Set.union_subset hA.2.1 hB.2.1, fun η hη h ↦ h.elim (hA.2.2 η hη) (hB.2.2 η hη)⟩,
       Set.subset_union_left, Set.subset_union_right⟩
-    have h𝒵 (G : TopCat.Sheaf AddCommGrpCat.{u} X)
+    have h𝒵 (G : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
         (hG : ∀ ⦃V : Opens X⦄ (s : G.obj.obj (op V)), ∃ Z' ∈ 𝒵, sectionSupport G s ⊆ Z')
         (p : ℕ) (hp : n ≤ p) : Subsingleton (Sheaf.H G p) :=
       subsingleton_H_of_directedOn G hne hdir hG p fun Z' hZ' ↦
@@ -258,17 +285,19 @@ theorem subsingleton_H_of_isSupportedIn (n : ℕ) :
         ∃ Z' ∈ 𝒵, sectionSupport (kernel g) t ⊆ Z' := by
       rw [sectionSupport_kernel_ι]
       refine exists_closed_of_sectionSupport hF hZ hZE hE _ ?_
-      have h0 : kernel.ι g ≫ φ = 0 := by
-        rw [← Abelian.image.fac φ, kernel.condition_assoc, zero_comp]
+      have h0 : kernel.ι g ≫ φ = 0 :=
+        (congrArg (kernel.ι g ≫ ·) (Abelian.image.fac φ : g ≫ Abelian.image.ι φ = φ).symm).trans
+          (by rw [← Category.assoc, kernel.condition, zero_comp])
       exact (toGodementOn_app_eq_zero_iff _).1 (app_app_eq_zero_of_comp_eq_zero h0 t)
     have hCs ⦃V : Opens X⦄ (c : (cokernel φ).obj.obj (op V)) :
         ∃ Z' ∈ 𝒵, sectionSupport (cokernel φ) c ⊆ Z' :=
       exists_closed_of_sectionSupport
-        (fun _ c' ↦ (sectionSupport_cokernel_subset hZ hZE hE c').trans Set.diff_subset)
+        (fun _ c' ↦ (sectionSupport_cokernel_subset hZ hZE hE c').trans Set.sdiff_subset)
         hZ hZE hE c fun η hη h ↦ (sectionSupport_cokernel_subset hZ hZE hE c h).2 hη
     have hK : Subsingleton (Sheaf.H (kernel g) (q + 1)) := h𝒵 _ hKs _ (by omega)
     have hC : Subsingleton (Sheaf.H (cokernel φ) q) := h𝒵 _ hCs _ (by omega)
-    have hG : Subsingleton (Sheaf.H S₂.X₂ (q + 1)) := IsFlasque.subsingleton_H q _
+    have hG : Subsingleton (Sheaf.H S₂.X₂ (q + 1)) :=
+      IsFlasque.subsingleton_H q (godementOn (E : Set X) F)
     have hI : Subsingleton (Sheaf.H (Abelian.image φ) (q + 1)) := by
       refine subsingleton_of_forall_eq 0 fun x ↦ ?_
       obtain ⟨y, rfl⟩ := Sheaf.H.δSucc_surjective hS₂ q x

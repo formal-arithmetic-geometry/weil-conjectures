@@ -279,8 +279,8 @@ lemma hColimitProp_zero (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HColimitP
     refine ⟨j', a, (Sheaf.H.equiv₀ _ isTerminalTop).injective ?_⟩
     rw [← Sheaf.H.equiv₀_naturality, map_zero, ha, map_zero]
 
--- The elaboration of the many cohomology maps between sheaves on `X` is slow.
 set_option maxHeartbeats 1600000 in
+-- The elaboration of the many cohomology maps between sheaves on `X` is slow.
 /-- The dimension shifting step: if `Hⁿ` commutes with all filtered colimits, so does `Hⁿ⁺¹`,
 on the first term of a short exact sequence of diagrams whose middle term is pointwise flasque.
 -/

@@ -54,7 +54,8 @@ theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : S
     (f : X ⟶ S) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (hq : q ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
   let e : (R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≅
       (_root_.DerivedCategory.singleFunctor _ 0).obj ((f)_*[ModuleCat.{u + 1} Λ].obj F) :=
     (Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory _ f).app _ ≪≫
@@ -85,6 +86,7 @@ theorem isConstructibleSheaf_lowerStar_of_isFinite {k : Type u} [Field k] {X S :
   exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isFinite f F, fun q hq ↦
     isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite f F q hq.ne'⟩
 
+omit [Finite Λ] in
 /-- Blueprint `lem-fin-closed-immersion`: Closed immersions preserve constructibility.
 
 Let `i : Z ⟶ X` be a closed immersion and `G` a constructible sheaf of `Λ`-modules on `Z_ét`.
