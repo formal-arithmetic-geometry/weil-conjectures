@@ -12355,3 +12355,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:59 L: merged deliver/U3/Sheaf.Paper.ModuleCupPairingExists (stage 3; reviewer PASS; first push; landing 20261013T115954-L-3403918 (proof); batch 20261013T115950; modules 1; new nodes 0)
 - 11:59 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle (stage 3; reviewer PASS; first push; landing 20261013T115954-L-3404111 (interface); batch 20261013T115950; modules 1; new nodes 0; change records: coord/changes/glued-model-chart-pullback-core.md)
 - 12:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.MixedExtensionSectionsUnit (stage 3; reviewer PASS; first push; landing 20261013T120251-L-3428752 (proof); batch 20261013T120249; modules 1; new nodes 0)
+- 12:02 L: merged deliver/U3/Sheaf.RingTheory.FiniteRankDefectDerivation (stage 3; reviewer PASS; first push; landing 20261013T120252-L-3428896 (interface); batch 20261013T120249; modules 2; new nodes 1)

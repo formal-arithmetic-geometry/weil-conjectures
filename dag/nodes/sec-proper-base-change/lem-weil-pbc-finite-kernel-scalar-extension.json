@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-finite-kernel-scalar-extension",
+ "kind": "statement",
+ "title": "Extension through a scalar-extension map with finite kernel, up to finite rank over the base field",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension], let $V$ be a $k$-vector space, and let $W,M$ be $K$-vector spaces regarded also as $k$-vector spaces by restriction of scalars. Let $\\phi:K\\otimes_k V\\to W$ be $K$-linear, where scalar extension is as in [def-weil-vector-space-scalar-extension]. Assume $\\ker\\phi$ is finite dimensional over $K$ [def-weil-finite-dimensional-subspace]. For every $k$-linear map $\\ell:V\\to M$ there exist a $K$-linear map $g:W\\to M$ and a finite subset $f\\subseteq M$ such that $\\ell(v)-g(\\phi(1\\otimes v))\\in\\operatorname{span}_k(f)$ for every $v\\in V$. Here the span consists of finite $k$-linear combinations of elements of $f$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG, proof paragraphs choosing J0 and extending the independent differential images; https://stacks.math.columbia.edu/tag/07FG. The linear-algebra argument is stated for general vector spaces."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Choose a k-basis b of V by Module.Free.chooseBasis. Its scalar extension B=b.baseChange K is a K-basis of K tensor_k V, by Mathlib Module.Basis.baseChange.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By Submodule.FG.of_finite, choose a finite set t spanning ker(phi). Put s equal to the union of the supports of B.repr(z) for z in t. Module.Basis.mem_span_image shows each generator belongs to span_K(B(s)), and Submodule.span_le gives ker(phi) contained in that span.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The B-images of s and its complement span disjoint subspaces by LinearIndependent.disjoint_span_image. Restrict the basis to the complement and apply LinearIndependent.map, using this disjointness and the kernel bound. Hence the phi-images of the complementary basis elements are independent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Module.Basis.span gives a basis of the span of those images. Its constr map sends phi(B_j) to ell(b_j). LinearMap.exists_extend extends this map to a K-linear g on W; evaluation of the extension identity gives g(phi(B_j))=ell(b_j) outside s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The map delta(v)=ell(v)-g(phi(1 tensor v)) is k-linear by scalar-tower compatibility. Let f be the finite image of s under j maps to delta(b_j). Each delta(b_j) lies in span_k(f): for j in s it is a generator, and outside s it is zero. Since b spans V, Submodule.span_le applied to the inverse image of span_k(f) proves the assertion for every v.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-13",
+  "place": "General linear-algebra version of the finite-support argument of Tag 07FG, proved in Lean from Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear map extends through a scalar extension with finite dimensional kernel up to finite rank over the original field",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend linear map after scalar extension with finite dimensional kernel up to finite rank error",
+   "results": "Eight hits: Baer extension constructions, LinearMap.exists_extend_of_notMem, and a continuous finite-dimensional extension theorem. No finite-error theorem. LinearMap.exists_extend is used for the independent complementary images.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, Module.Finite",
+   "results": "Twelve hits, including rank-nullity and finite-dimensional disjoint-kernel lemmas; no scalar-extension finite-error result.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Dd]erivation|[Dd]erivation.*finite",
+   "results": "Eight hits: Lie derivations, characteristic-zero differential fields, and geometric Lie groups; no finite-error differential-extension theorem. Local basis API search found Module.Basis.mem_span_image, LinearIndependent.disjoint_span_image, and LinearMap.exists_extend, which the proof uses.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteRankDefectDerivation",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FG coefficient-field claim: finite support J0 of the differential kernel, independent complementary differential images, and finite span of the corrected values; steps 2--3 of lem-weil-pbc-finite-rank-defect-derivation.",
+   "via": [
+    "lem-weil-pbc-finite-rank-defect-derivation",
+    "lem-weil-pbc-finite-rank-coefficient-correction",
+    "lem-weil-pbc-nilpotent-coefficient-adjustment",
+    "lem-weil-pbc-artinian-coefficient-presentation",
+    "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteKernelScalarExtension",
+  "file": "lean/Sheaf/RingTheory/FiniteKernelScalarExtension.lean",
+  "declaration": "LinearMap.exists_extension_finite_error",
+  "statement": "theorem exists_extension_finite_error\n    (k : Type u) [Field k] (K : Type v) [Field K] [Algebra k K]\n    (V : Type w) [AddCommGroup V] [Module k V]\n    (W : Type x) [AddCommGroup W] [Module k W] [Module K W] [IsScalarTower k K W]\n    (M : Type y) [AddCommGroup M] [Module k M] [Module K M] [IsScalarTower k K M]\n    (phi : K ⊗[k] V →ₗ[K] W) (hphi : Module.Finite K phi.ker)\n    (ell : V →ₗ[k] M) :\n    ∃ (g : W →ₗ[K] M) (f : Finset M),\n      ∀ v : V, ell v - g (phi (1 ⊗ₜ[k] v)) ∈ Submodule.span k (f : Set M)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T120252-L-3428896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T120252-L-3428896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
