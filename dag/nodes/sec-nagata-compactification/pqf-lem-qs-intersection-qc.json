@@ -18,36 +18,29 @@
  ],
  "proof": [
   {
-   "text": "By the finite-affine-cover theorem, each quasi-compact open U and V is a finite union of affine opens, say U = union_i U_i and V = union_j V_j.",
-   "uses": [
-    "lem-pqf-finite-affine-cover-qc-open"
-   ],
+   "text": "Convert the hypothesis QuasiSeparated (terminal.from X) to QuasiSeparatedSpace X using the reverse implication of Mathlib AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
-    "place": "theorem isCompact_iff_finite_and_eq_biUnion_affineOpens, lines 85-89"
+    "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+    "place": "quasiSeparatedSpace_iff_quasiSeparated, lines 133-135"
    }
   },
   {
-   "text": "The intersection U intersect V is the finite union of the opens U_i intersect V_j. Each U_i intersect V_j is quasi-compact by clause (1) of the affine-cover criterion for quasi-separatedness [lem-weil-pbc-quasi-separated-affine-cover-criterion], since X is quasi-separated and U_i, V_j are affine opens; finite unions of quasi-compact subsets are quasi-compact. Therefore U intersect V is quasi-compact; it is open because it is an intersection of opens.",
-   "uses": [
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
-   ],
-   "elementary": true,
+   "text": "Convert CompactSpace U.toScheme and CompactSpace V.toScheme into compactness of their underlying subsets using isCompact_iff_compactSpace. Apply QuasiSeparatedSpace.inter_isCompact with U.isOpen and V.isOpen. Convert the resulting compactness of the intersection back to CompactSpace (U inf V).toScheme using isCompact_iff_compactSpace; the underlying subtypes and topologies agree definitionally.",
+   "uses": [],
+   "elementary": false,
    "source": {
-    "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
-    "place": "theorem quasiSeparatedSpace_iff_forall_affineOpens, lines 56-64"
+    "document": "Mathlib/Topology/QuasiSeparated.lean",
+    "place": "QuasiSeparatedSpace.inter_isCompact, lines 45-50; Mathlib/Topology/Compactness/Compact.lean, isCompact_iff_compactSpace, line 1057"
    }
   }
  ],
- "proof_deps": [
-  "lem-pqf-finite-affine-cover-qc-open",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-qs-intersection-qc.md",
-  "place": "## Proof"
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "place": "quasiSeparatedSpace_iff_quasiSeparated combined with Mathlib/Topology/QuasiSeparated.lean QuasiSeparatedSpace.inter_isCompact and isCompact_iff_compactSpace; direct implementation of the equivalent route already recorded in the declaration docstring."
  },
  "mathlib_searches": [
   {
@@ -149,5 +142,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T054229-L-446577",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

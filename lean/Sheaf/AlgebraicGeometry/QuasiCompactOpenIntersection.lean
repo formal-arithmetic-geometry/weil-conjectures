@@ -42,6 +42,11 @@ theorem compactSpace_inter_of_quasiSeparated (X : Scheme.{u})
     [QuasiSeparated (terminal.from X)] (U V : X.Opens)
     [CompactSpace U.toScheme] [CompactSpace V.toScheme] :
     CompactSpace (U ⊓ V).toScheme := by
-  sorry
+  have : QuasiSeparatedSpace X :=
+    (quasiSeparatedSpace_iff_quasiSeparated X).mpr inferInstance
+  exact isCompact_iff_compactSpace.mp
+    (QuasiSeparatedSpace.inter_isCompact (U : Set X) (V : Set X)
+      U.isOpen (isCompact_iff_compactSpace.mpr (inferInstance : CompactSpace U.toScheme))
+      V.isOpen (isCompact_iff_compactSpace.mpr (inferInstance : CompactSpace V.toScheme)))
 
 end AlgebraicGeometry
