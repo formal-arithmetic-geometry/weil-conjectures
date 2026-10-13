@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-formal-associated-graded-multiplication",
+ "kind": "statement",
+ "title": "Restriction-compatible bilinear multiplication on successive ideal-power quotients",
+ "statement": "Let $X$ be a scheme and $I$ its quasi-coherent ideal sheaf. Put $B_r=I^r/I^{r+1}$ with projections $\\pi_r$, as in [def-weil-pbc-formal-kernel-graded-pieces]. There exist $\\mathcal O_X(U)$-bilinear maps $\\mu_{m,n,U}:B_m(U)\\times B_n(U)\\to B_{m+n}(U)$ for all natural numbers $m,n$ and opens $U$, compatible with restriction to smaller opens. For every $a\\in I^m(U)$ and $b\\in I^n(U)$ there is $c\\in I^{m+n}(U)$ whose inclusion in $\\mathcal O_X(U)$ is the product of the inclusions of $a,b$, and $\\mu_{m,n,U}(\\pi_m(a),\\pi_n(b))=\\pi_{m+n}(c)$. No algebra laws or unit are part of this statement.",
+ "stmt_deps": [
+  "def-weil-pbc-formal-kernel-graded-pieces"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z (lemma-graded-module), the associated graded algebra in the statement; construction expanded from affine tensor and quotient descriptions in Schemes Tags 01I8 and 01IC. Read online at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/01IC."
+ },
+ "proof": [
+  {
+   "text": "On every affine open identify the positive power section ranges with ideal powers and the quotient sections with their module quotients, using the affine product/quotient theorem. For degree zero the power inclusion is the identity. Products land in degree m+n; changing representatives by the next ideal powers changes their product by the next ideal power. Thus multiplication descends bilinearly.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inclusions, quotient projections and ring multiplication commute with restrictions. Locally lift both quotient sections on affine covers and glue the independent local products; check equality on affine refinements of overlaps. The sheaf condition gives unique glued sections. This proves bilinearity and naturality. For actual power sections, the ring product locally lifts to the target power inclusion. That inclusion is monic by induction on ideal powers, so the lifts agree and glue to c. The quotient identity holds locally and hence globally. Empty opens, the zero and unit ideals, and zero degrees follow by the same argument.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z, construction of its associated graded algebra; affine descent and representative-independence expanded from the parent node, retaining its route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally surjective quotient morphism of sheaves of modules and bilinear multiplication on successive ideal-power quotients",
+   "results": "msearch.py returned UNAVAILABLE: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of quotient ideal sheaves I^m modulo I^(m+1) defines the associated graded commutative sheaf algebra",
+   "results": "Eight results: Proj.mul_apply, ProjectiveSpectrum.Proj.structureSheaf, Proj.pow_apply, structurePresheafInCommRing, SectionSubring.mul_mem, commRingStructureSheafInTypeObj, structureSheafInType, localCohomology. Their signatures concern projective spectra or local cohomology, not quotient ideal-sheaf multiplication on an arbitrary scheme.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient, LinearMap",
+   "results": "Zero hits; unknown identifier Ideal.Quotient. Not used as evidence of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|AssociatedGraded|graded.*quotient",
+   "results": "msearch.py returned zero hits. Local rg of associatedGraded|AssociatedGraded in Mathlib also returned no results. Local library search found the parent, FormalKernelGradedPieces and downstream uses, but no quotient multiplication theorem. Blueprint search for associated graded found only exact couples; multiplication also found the unquotiented Rees algebra, which does not state this theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bilinear maps between sheaves of modules induced by multiplication on quotient modules of an ideal filtration",
+   "results": "Second reader: eight hits concern localCohomology, adic transition maps, factorPow and Hausdorffification. No homogeneous ideal-quotient sheaf multiplication.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.mkQ, LinearMap",
+   "results": "Second reader: mkQ_surjective, linearMap_qext, liftQ_mkQ and quotient factorization lemmas are algebraic tools; they do not construct the natural sheaf multiplication.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(bilinear|mul)|lift₂|liftQ",
+   "results": "Second reader: algebraic quotient and liftQ uses in RingTheory; no scheme ideal-quotient sheaf construction. Local rg on Sheaf and WeilConjectures found no duplicate. The existing Rees component theorem is for coefficients of an ideal pulled back from an affine base and unquotiented powers, not this operation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedAlgebraExists",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Construction of multiplication on the associated graded ideal algebra in the graded-kernel construction used in finite etale lifting; parent node steps 1 and 2, before checking the algebra laws.",
+   "via": [
+    "lem-weil-pbc-formal-associated-graded-algebra-exists",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalAssociatedGradedMultiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalAssociatedGradedMultiplication.lean",
+  "declaration": "AlgebraicGeometry.formalAssociatedGraded_multiplication_exists",
+  "statement": "theorem formalAssociatedGraded_multiplication_exists {X : Scheme.{u}}\n    (I : X.IdealSheafData) :\n    ∃ mu : ∀ (m n : ℕ) (U : X.Opens),\n      (formalAssociatedGradedPiece I m).val.obj (op U) →ₗ[Γ(X, U)]\n        (formalAssociatedGradedPiece I n).val.obj (op U) →ₗ[Γ(X, U)]\n          (formalAssociatedGradedPiece I (m + n)).val.obj (op U),\n      (∀ (m n : ℕ) (U V : X.Opens) (h : V ≤ U)\n        (a : (formalAssociatedGradedPiece I m).val.obj (op U))\n        (b : (formalAssociatedGradedPiece I n).val.obj (op U)),\n        (formalAssociatedGradedPiece I (m + n)).val.map (homOfLE h).op (mu m n U a b) =\n          mu m n V ((formalAssociatedGradedPiece I m).val.map (homOfLE h).op a)\n            ((formalAssociatedGradedPiece I n).val.map (homOfLE h).op b)) ∧\n      (∀ (m n : ℕ) (U : X.Opens)\n        (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n        (b : (Scheme.idealSheafPower I.toModulesι n).1.val.obj (op U)),\n        ∃ c : (Scheme.idealSheafPower I.toModulesι (m + n)).1.val.obj (op U),\n          (Scheme.idealSheafPower I.toModulesι (m + n)).2.val.app (op U) c =\n            (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) *\n              (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι n).2.val.app (op U) b)) ∧\n          mu m n U ((formalAssociatedGradedπ I m).val.app (op U) a)\n            ((formalAssociatedGradedπ I n).val.app (op U) b) =\n              (formalAssociatedGradedπ I (m + n)).val.app (op U) c)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T045528-L-128616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T045528-L-128616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
