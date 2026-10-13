@@ -6,6 +6,8 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareData
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareTransport
 
 /-! # Shift square for localized tensor comparison
 
@@ -33,6 +35,9 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
+-- Preserve the existing derived-category hypothesis even though this reduction does not use it.
+set_option linter.unusedSectionVars false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The comparison arrows for U and its inverse shift are conjugate.
 Source: Stacks Project, Tag 0DJA(1), via Tag 0BYJ and the tensor shift maps.
 
@@ -71,6 +76,49 @@ theorem exists_localizedTensorComparison_shift_square
       ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i =
     eS.inv ≫ (mV.localizedComparison (i + n) ≫ HomologicalComplex.homologyMap
       ((Functor.Monoidal.μIso F (U⟦-n⟧) Q).inv ≫ (F.obj (U⟦-n⟧) ◁ t)) (i + n)) ≫
-        eT.hom := by sorry
+        eT.hom := by
+  intro F
+  let e : ((U⟦-n⟧) ⊗ Q) ≅ (U ⊗ Q)⟦-n⟧ :=
+    CochainComplex.mapBifunctorShift₁Iso U Q (curriedTensor (ModuleCat.{u} A)) (-n)
+  let eK : F.obj ((U⟦-n⟧) ⊗ Q) ≅ (F.obj (U ⊗ Q))⟦-n⟧ :=
+    F.mapIso e ≪≫ (F.commShiftIso (-n)).app (U ⊗ Q)
+  let eT : F.obj (U⟦-n⟧) ⊗ N ≅ (F.obj U ⊗ N)⟦-n⟧ :=
+    tensorIso ((F.commShiftIso (-n)).app U) (Iso.refl N) ≪≫
+    CochainComplex.mapBifunctorShift₁Iso (F.obj U) N (curriedTensor (ModuleCat.{u} C)) (-n)
+  let shK : ((F.obj (U ⊗ Q))⟦-n⟧).homology (i + n) ≅
+      (F.obj (U ⊗ Q)).homology i :=
+    (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} C) (-n) (i + n) i
+      (by omega)).app (F.obj (U ⊗ Q))
+  let shT : ((F.obj U ⊗ N)⟦-n⟧).homology (i + n) ≅
+      (F.obj U ⊗ N).homology i :=
+    (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} C) (-n) (i + n) i
+      (by omega)).app (F.obj U ⊗ N)
+  let H := HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) (i + n)
+  obtain ⟨mV, eS, hmodel⟩ := exists_shift_square_data R A B C
+    (U ⊗ Q) ((U⟦-n⟧) ⊗ Q) n e mU i
+  refine ⟨mV, eS, H.mapIso eT ≪≫ shT, ?_⟩
+  let f := (Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)
+  let fV := (Functor.Monoidal.μIso F (U⟦-n⟧) Q).inv ≫ (F.obj (U⟦-n⟧) ◁ t)
+  have hcomplex : fV ≫ eT.hom = eK.hom ≫ f⟦-n⟧' := by
+    simpa only [F, fV, f, eT, eK, e, Iso.trans_hom, Functor.mapIso_hom,
+      Category.assoc] using
+      localizedTensorComparison_shift_transport R A B C U Q N n t
+  have hshift : H.map (f⟦-n⟧') ≫ shT.hom =
+      shK.hom ≫ HomologicalComplex.homologyMap f i :=
+    (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} C) (-n) (i + n) i
+      (by omega)).hom.naturality f
+  have hsquare : HomologicalComplex.homologyMap fV (i + n) ≫
+      (H.mapIso eT ≪≫ shT).hom =
+      (H.mapIso eK ≪≫ shK).hom ≫ HomologicalComplex.homologyMap f i := by
+    change H.map fV ≫ (H.map eT.hom ≫ shT.hom) =
+      (H.map eK.hom ≫ shK.hom) ≫ HomologicalComplex.homologyMap f i
+    rw [← Category.assoc, ← H.map_comp, hcomplex, H.map_comp, Category.assoc,
+      hshift, Category.assoc]
+  change mU.localizedComparison i ≫ HomologicalComplex.homologyMap f i = _
+  change mU.localizedComparison i = eS.inv ≫ mV.localizedComparison (i + n) ≫
+    (H.mapIso eK ≪≫ shK).hom at hmodel
+  rw [hmodel]
+  simp only [Category.assoc]
+  rw [← hsquare]
 
 end ModuleCat

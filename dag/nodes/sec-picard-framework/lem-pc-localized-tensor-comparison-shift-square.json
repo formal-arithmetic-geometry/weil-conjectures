@@ -18,7 +18,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), explicit inverse-shift comparison transport"
+  "place": "Tags 0DJA(1), 0BYJ, 06Y6 and 08IB; model transport and ordinary tensor shift square"
  },
  "created": {
   "by": "worker",
@@ -73,33 +73,32 @@
  ],
  "proof": [
   {
-   "text": "Use CochainComplex.mapBifunctorShift₁Iso on U,Q at -n, and the additive scalar-extension shift isomorphisms, to identify U[-n] tensor Q with (U tensor Q)[-n] and its scalar extensions. Retain mU.derived, mU.counit and mU.universal. Uniqueness of the total left derived functor supplies its shift comparison compatible with the counit. Reindex mU.cohomology by j -> j-n and use this derived shift comparison to define the cohomologyIso for the new complex. Naturality in multiplication by a in A and B-linearity preserve the E-action and prove cohomologyIso_smul.",
+   "text": "Use the canonical first-variable tensor shift e:U[-n] tensor Q to (U tensor Q)[-n]. Apply model transport to K=U tensor Q and L=U[-n] tensor Q to obtain mV, eS and the localization comparison equation with the prescribed target homology shift eH.",
    "uses": [
-    "def-pc-localized-tensor-comparison-property",
+    "lem-pc-localized-tensor-comparison-shift-square-data",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Transport ordinaryIso and ordinaryToLocalized through the scalar-extension shift isomorphisms and the tensor shift isomorphism. Their generator formulas are unchanged. Define comparison using comparison_eq, with the transported cohomologyIso and counit. Naturality under multiplication by A shows it is E-linear. Define localizedComparison by extension/restriction adjunction; its unit identity is localized_eq. These constructions give the model mV; no arbitrary model existence witness is selected.",
+   "text": "Construct the scalar-extension tensor shift eT on the target F(U) tensor N. Use the ordinary tensor comparison square for t. Apply the degree-(i+n) homology functor and Mathlib cohomology-shift naturality to obtain the ordinary comparison homology square.",
    "uses": [
-    "def-pc-localized-tensor-comparison-property",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-localized-tensor-comparison-shift-square-transport",
+    "def-pc-localized-tensor-comparison-property"
    ],
    "elementary": false
   },
   {
-   "text": "At j=i+n the cohomology shift comparison identifies the reindexed E-cohomology with mU.cohomology i; apply extension to C to obtain eS. Apply the cohomology shift map to the first-variable tensor shift and the scalar-extension shift map to obtain eT. Naturality of tensor shift in t and compatibility with the monoidal comparison of F give the target square. Counit shift compatibility, comparison_eq and transposition through localized_eq give the source square. Compose the two squares and cancel inverse shift isomorphisms to get the stated conjugacy. The first-variable tensor shift has no extra signs. For n=0 these are the zero-shift comparisons; for zero complexes or t=0 the same naturality equations apply.",
-   "uses": [
-    "def-pc-localized-tensor-comparison-property",
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
+   "text": "Compose the model transport equation with the ordinary comparison homology square and reassociate. The resulting equation has witnesses mV, eS and the homology of the canonical target tensor shift followed by degree reindexing.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
   "def-pc-localized-tensor-comparison-property",
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-localized-tensor-comparison-shift-square-data",
+  "lem-pc-localized-tensor-comparison-shift-square-transport"
  ],
  "lean": {
   "existing": false,
@@ -125,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T190153-L-3220602",
+  "landing": "20261013T201814-L-3979105",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

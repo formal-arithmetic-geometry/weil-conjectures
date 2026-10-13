@@ -1,0 +1,108 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-shift-square-transport",
+ "kind": "statement",
+ "title": "Ordinary scalar-extension tensor comparison commutes with first-variable shifts",
+ "statement": "Let R,A,B,C be commutative rings, A and B R-algebras and C an algebra over A tensor_R B. Use tensor and coefficient conventions from [def-pc-localized-tensor-comparison-property]. Let F be termwise extension from A to C. For A-complexes U,Q, a C-complex N, an integer n and a complex map t:F(Q) to N, put f=mu_F(U,Q)^(-1) then F(U) tensor t and fV=mu_F(U[-n],Q)^(-1) then F(U[-n]) tensor t. Let eK:F(U[-n] tensor Q) to F(U tensor Q)[-n] be F applied to the first-variable tensor shift followed by scalar-extension shift. Let eT:F(U[-n]) tensor N to (F(U) tensor N)[-n] be scalar-extension shift tensored with N, followed by first-variable tensor shift. Then fV followed by eT equals eK followed by f[-n]. This is a square of ordinary complex maps and uses no derived tensor cohomology model.",
+ "stmt_deps": [
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BYJ; first-variable tensor shift in Tag 0DJA(1)"
+ },
+ "proof": [
+  {
+   "text": "Take the flip in the first complex variable of mapBifunctorComparisonNatTrans for the oplax monoidal scalar-extension map. Compose it with the tensor natural transformation induced by t. The upstream commShift_mapBifunctorComparisonNatTrans_flipApp and Mathlib tensor shift instances make the composite commute with shifts. NatTrans.shift_app_comm at U and -n gives the square; identify its components with the inverse monoidal comparison and tensoring by t.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BYJ; first-variable tensor shift in Tag 0DJA(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a derived scalar extension cohomology model and its counit comparison across a shifted isomorphism of complexes",
+   "results": "Eight Ext and group-cohomology hits; none transports BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorShift₁Iso",
+   "results": "Canonical shift isomorphism, naturality and commShiftIso_map₂CochainComplex_flip component lemmas exist.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "map_ιMapBifunctor_mapBifunctorComparisonX; shift.*model; commShift_mapBifunctorComparisonNatTrans_flipApp",
+   "results": "No model transport in Sheaf. Upstream WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift contains the generic comparison shift instance, used for the ordinary square.",
+   "date": "2026-10-14",
+   "verdict": "generic comparison compatibility found; no specialized model transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "shifted cohomology model transport",
+   "results": "Earlier worker reported service unavailable; second reader used the available LeanFinder, Loogle and grep search tools.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquare",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-shift-square",
+   "place": "Naturality of the ordinary tensor comparison square"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareTransport",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonShiftSquareTransport.lean",
+  "declaration": "ModuleCat.localizedTensorComparison_shift_transport",
+  "statement": "theorem localizedTensorComparison_shift_transport\n    (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ) (n : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∀ (t : F.obj Q ⟶ N),\n    let eK := F.mapIso (CochainComplex.mapBifunctorShift₁Iso U Q\n      (curriedTensor (ModuleCat.{u} A)) (-n)) ≪≫ (F.commShiftIso (-n)).app (U ⊗ Q)\n    let eT := tensorIso ((F.commShiftIso (-n)).app U) (Iso.refl N) ≪≫\n      CochainComplex.mapBifunctorShift₁Iso (F.obj U) N\n        (curriedTensor (ModuleCat.{u} C)) (-n)\n    (Functor.Monoidal.μIso F (U⟦-n⟧) Q).inv ≫ (F.obj (U⟦-n⟧) ◁ t) ≫ eT.hom =\n      eK.hom ≫ ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t))⟦-n⟧'",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3979105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3979105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

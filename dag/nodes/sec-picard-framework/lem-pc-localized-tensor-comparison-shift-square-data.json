@@ -1,0 +1,108 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-shift-square-data",
+ "kind": "statement",
+ "title": "Transport of a localized derived tensor model through a shifted complex isomorphism",
+ "statement": "Let R,A,B,C be commutative rings in one universe, A and B R-algebras and C an algebra over E=A tensor_R B, with derived categories of R- and B-modules. Models and their maps are those of [def-pc-base-derived-tensor-cohomology-model]. For A-complexes K,L, integers n,i, an A-linear complex isomorphism e:L to K[-n], and a model mK of K, let F be termwise extension from A to C. Let eH:H^(i+n)(F(L)) to H^i(F(K)) be the prescribed isomorphism obtained by applying F to e, then the canonical scalar-extension shift isomorphism, then the cohomology reindexing -n+(i+n)=i. There exist a model mL of L and a C-linear isomorphism eS:C tensor_E mL.cohomology(i+n) to C tensor_E mK.cohomology(i) such that mK.localizedComparison(i)=eS^(-1) then mL.localizedComparison(i+n) then eH. No tensor decomposition of K and no further target complex or comparison map t is assumed.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Y6 and 08IB; integer shifts as in Tag 0DJA(1)"
+ },
+ "proof": [
+  {
+   "text": "Retain mK.derived, mK.counit and mK.universal. The additive scalar extension functor commutes with shifts; uniqueness in the derived universal property supplies its counit-compatible derived shift comparison. Reindex mK.cohomology by j-n. Use restriction of e and the derived and cohomology shift comparisons to construct cohomologyIso; naturality in multiplication by A proves cohomologyIso_smul. Transport ordinaryIso using e and the scalar-extension shift map, and construct ordinaryToLocalized by its coefficient formula. Define comparison by the counit equation and localizedComparison by extension/restriction adjunction. These explicit constructions give all model fields and the prescribed homology square. At j=i+n the source reindexing gives eS. No arbitrary model-existence witness is chosen.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 06Y6 and 08IB; integer shifts as in Tag 0DJA(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a derived scalar extension cohomology model and its counit comparison across a shifted isomorphism of complexes",
+   "results": "Eight Ext and group-cohomology hits; none transports BaseDerivedTensorCohomologyModel.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorShift₁Iso",
+   "results": "Canonical shift isomorphism, naturality and commShiftIso_map₂CochainComplex_flip component lemmas exist.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "map_ιMapBifunctor_mapBifunctorComparisonX; shift.*model; commShift_mapBifunctorComparisonNatTrans_flipApp",
+   "results": "No model transport in Sheaf. Upstream WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift contains the generic comparison shift instance, used for the ordinary square.",
+   "date": "2026-10-14",
+   "verdict": "generic comparison compatibility found; no specialized model transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "shifted cohomology model transport",
+   "results": "Earlier worker reported service unavailable; second reader used the available LeanFinder, Loogle and grep search tools.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquare",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-localized-tensor-comparison-shift-square",
+   "place": "Shift transport of the derived source comparison"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonShiftSquareData",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonShiftSquareData.lean",
+  "declaration": "ModuleCat.exists_shift_square_data",
+  "statement": "theorem exists_shift_square_data\n    (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)\n    (mK : BaseDerivedTensorCohomologyModel R A B K C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let eH := (HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) (i + n)).mapIso\n      (F.mapIso e ≪≫ (F.commShiftIso (-n)).app K) ≪≫\n      (CochainComplex.ShiftSequence.shiftIso (ModuleCat.{u} C) (-n) (i + n) i\n        (by omega)).app (F.obj K)\n    ∃ (mL : BaseDerivedTensorCohomologyModel R A B L C)\n      (eS : (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mL.cohomology (i + n)) ≅\n        (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mK.cohomology i)),\n    mK.localizedComparison i = eS.inv ≫ mL.localizedComparison (i + n) ≫ eH.hom",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3979105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3979105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
