@@ -12756,3 +12756,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/F1/Sheaf.Algebra.Homology.FiniteStripConeFiltration (stage 3; reviewer PASS; first push; landing 20261013T141525-L-378626 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetComparison (stage 3; reviewer PASS; first push; landing 20261013T141525-L-378725 (interface); batch 20261013T141520; modules 3; new nodes 2)
 - 14:15 L: merged deliver/G2/Sheaf.AlgebraicGeometry.CoefficientIntersectionSectionModel (stage 3; reviewer PASS; first push; landing 20261013T141525-L-378831 (proof); batch 20261013T141520; modules 1; new nodes 0)
+- 14:15 L: merged deliver/G4/Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived (stage 3; reviewer PASS; first push; landing 20261013T141526-L-378929 (proof); batch 20261013T141520; modules 1; new nodes 0)
