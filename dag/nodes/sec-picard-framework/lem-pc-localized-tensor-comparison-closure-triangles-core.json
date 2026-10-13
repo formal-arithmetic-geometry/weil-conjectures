@@ -13,22 +13,59 @@
  },
  "proof": [
   {
-   "text": "Tensor the distinguished triangle with U and apply the base-derived tensor model. Flat scalar extension gives exactness of the source sequence, while the K-flat representative computes the target sequence. The canonical associator and counit make the comparisons a morphism of long exact cohomology sequences. Apply the five lemma to the five consecutive terms around degree i; the outer maps come from the hypotheses on the first two vertices and their shifts.",
+   "text": "Construct K-flat representatives U1 and U2 of T.obj1 and T.obj2 using the already proved source-library ModuleCat.hasFunctorialFlatResolution instance, the reduced resolution functor and kFlat_resolutionFunctor_obj. Compose Q of its quasi-isomorphism with Q.objObjPreimageIso. The private helper exists_kFlat_representative converts the source-library K-flat predicate to the explicit acyclic tensor predicate via the homotopy quotient characterization.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-kflat-derived-tensor-associator"
+    "def-pc-module-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain base-derived models m1 and m2 for U1 tensor Q and U2 tensor Q from nonempty_baseDerivedTensorCohomologyModel.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the exact five-term diagram construction with these representatives and models and the prescribed third representative U, model mU and degree i. It supplies two exact rows, a morphism phi and arrow isomorphisms identifying all five components with the actual comparison composites.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-triangle-five-term-diagram"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate h1 and h2 at U1 and U2, their representative isomorphisms and K-flatness proofs, and their models, in degrees i and i+1. Transport these four IsIso proofs to components 0,1,3,4 using Arrow.isIso_iff_isIso_of_isIso.",
+   "uses": [
+    "def-pc-localized-tensor-comparison-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Mathlib five lemma to the exact rows and phi. Components 0 and 4 are respectively epi and mono because they are isomorphisms; components 1 and 3 are isomorphisms. This proves component 2 is invertible.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport invertibility of component 2 along its arrow isomorphism to the displayed comparison for the prescribed U and mU. No hypothesis or conclusion of the original statement changes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
   "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-kflat-derived-tensor-associator"
+  "lem-pc-localized-tensor-comparison-triangle-five-term-diagram",
+  "def-pc-localized-tensor-comparison-property",
+  "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), five-lemma step"
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 0BYJ; exact five-term diagram reduction and Mathlib five lemma, M1 stage 3"
  },
  "mathlib_searches": [
   {
@@ -102,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T181102-L-2601465",
+  "landing": "20261013T190145-L-3217659",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
