@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-flat-closed-fibre-interior",
+ "kind": "statement",
+ "title": "Flat closed subfamilies preserve empty generic fibre interior",
+ "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme], $f:X\\to T$ a locally finite type quasi-compact morphism [def-weil-finite-type-morphism], and $i:Z\\to X$ a closed immersion [def-weil-closed-immersion]. Let $\\eta$ be a generic point of $T$, and let $U\\subset T$ be an open containing $\\eta$. Assume that the restrictions of $f$ and $f\\circ i$ to $U$ are flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. If the inverse image of the range of $i$ in the ordinary generic fibre [def-pc-scheme-fibre] has empty interior, then its inverse image in every ordinary fibre over $t\\in U$ has empty interior.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054X, proof after applying generic flatness; Tag 03HV, generalizations lift along flat maps; Tag 054U, fibre dimension along specialization from a fibre component generic point."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Work over U. A nonempty interior of the closed fibre contains the generic point xi of an ambient fibre component. It is generic in a closed-fibre component as well, since the closed set contains a neighbourhood of xi. Lift eta specializing to t along the flat closed-family map to obtain xi_prime specializing to xi over eta (Tag 03HV, Mathlib Flat.generalizingMap). Tag 054U applied to the two flat locally finitely presented maps identifies their dimensions at xi_prime in the generic fibres with their equal dimensions at xi in the special fibres. A component of the closed generic fibre at xi_prime then has the dimension of the ambient generic fibre there. In a finite type scheme over a field, a closed subset containing no ambient component has strictly smaller local dimension at every one of its points. This contradicts empty generic interior. Therefore every closed fibre has empty interior; empty fibres are immediate. This is precisely the second paragraph of Tag 054X, with its generic-flatness preparation supplied as hypotheses.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 054X, second proof paragraph, with Tags 03HV and 054U read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme flat and locally finitely presented over an integral scheme with nowhere dense generic fibre has nowhere dense fibres everywhere",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a flat locally finitely presented closed subfamily has empty interior in the generic fibre of a flat family over an integral base then it has empty interior in every fibre",
+   "digest": "35ac901aa355162b",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.instIsDominantιCoborderRange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.codisjoint_zeroLocus, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints; no matching fibre-interior persistence theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*dim|dim.*fiber|generalizingMap",
+   "digest": "e238ae78687b8fdf",
+   "date": "2026-10-13",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean; no matching fibre-interior persistence theorem.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericOpenFibreDensity",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: spreading the generic closed-fibre geometry; the Tag 054X density argument after the generic-flatness preparation.",
+   "via": [
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatClosedFibreInterior",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatClosedFibreInterior.lean",
+  "declaration": "AlgebraicGeometry.interior_fibre_closed_eq_empty_of_flat_restrict",
+  "statement": "theorem interior_fibre_closed_eq_empty_of_flat_restrict\n    {Z X T : Scheme.{u}} [IsIntegral T]\n    (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (η : T) (hη : IsGenericPoint η Set.univ)\n    (U : T.Opens) (hηU : η ∈ U)\n    [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]\n    [Flat ((i ≫ f) ∣_ U)] [LocallyOfFinitePresentation ((i ≫ f) ∣_ U)]\n    (hgeneric : interior ((f.fiberι η) ⁻¹' Set.range i) = ∅) :\n    ∀ t ∈ U, interior ((f.fiberι t) ⁻¹' Set.range i) = ∅",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100158-L-2496331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T100158-L-2496331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

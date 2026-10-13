@@ -13,30 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Give the closed complement Z = X \\ W its reduced induced scheme structure. The generic density hypothesis says Z_eta is nowhere dense in X_eta. Reduce T and base change X and Z; the reduction map and its base changes are universal homeomorphisms, so all fibrewise topological density assertions are unchanged. The reduced irreducible base is integral. Apply generic flat finite presentation to X and Z and intersect the two resulting nonempty base opens. Each contains the generic point.",
+   "text": "Use the nilradical subschemes of X and T. Their closed immersions are surjective embeddings and thus homeomorphisms. The reduced source map factors explicitly through the reduced base by liftNilradical. Transport the generic point using the base embedding specialization equivalence; its existence makes the reduced base integral. The factor map is locally of finite type and quasi-compact by cancellation against the reduction closed immersion. Construct the reduced closed complement of the inverse image of W using Scheme.Opens.closedComplement. Fibre density is preserved by the explicit homeomorphisms obtained from Scheme.Hom.fiberHomeo and restriction of the source homeomorphism to set-theoretic fibres.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply generic flat finite presentation to the reduced source map and to its closed-complement map. Both nonempty opens contain the generic point. Intersect them and transport flatness and local finite presentation to the intersection using morphismRestrictRestrict and locality at the target.",
    "uses": [
     "lem-sbc-generic-flat-finite-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Follow Tag 054X on this common open. If Z_t has nonempty interior in X_t, take the generic point xi of a fibre component contained in that interior. Flatness of Z lifts the generalization eta of t to xi_prime in Z_eta (Tag 03HV). Apply Tag 054U to X and Z along xi_prime specializing to xi: xi is a generic point of a component in both fibres, and their fibre dimensions at xi agree. Their generic fibre dimensions at xi_prime therefore agree. A component of Z_eta through xi_prime has the dimension of X_eta there, contradicting nowhere density of Z_eta in the finite type scheme over the field kappa(eta). Hence Z_t has empty interior in each fibre.",
-   "uses": [],
-   "elementary": false
+   "text": "The range of the constructed closed complement is the complement of the open. Convert generic density to empty interior using interior_eq_empty_iff_dense_compl. Apply the flat closed-fibre interior theorem on the chosen intersection and convert its conclusion back to density.",
+   "uses": [
+    "lem-sbc-flat-closed-fibre-interior"
+   ],
+   "elementary": true
   },
   {
-   "text": "The fibrewise complement of Z_t is i_t inverse image W and is open dense. Transport the common base open back through the reduction homeomorphism. This gives the required open containing eta. If a fibre is empty, its empty subset is dense and the conclusion holds as well.",
+   "text": "Take the image of the intersection open under the reduced-base homeomorphism. This is an open containing the original generic point. For each point in its image, transport the density conclusion from its preimage point using the already proved fibre homeomorphism equivalence. Empty fibres are covered by the same equivalence and complement calculation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-flat-finite-presentation"
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-flat-closed-fibre-interior"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 054X, proof read online; its closed-complement reformulation. Tags 03HV and 054U checked online."
+  "place": "Tag 054X, closed-complement proof; source and base nilradical subschemes replace the base-change reduction without changing fibre topology. The preparation and transport steps are proved in Lean; the dimension contradiction is isolated."
  },
  "mathlib_searches": [
   {
@@ -123,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T082344-L-1635292",
+  "landing": "20261013T100158-L-2496331",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
