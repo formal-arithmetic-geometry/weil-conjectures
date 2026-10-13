@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Sheaf.AlgebraicGeometry.CompactObjectPerfectWitness
+import Sheaf.AlgebraicGeometry.ProperPerfectTransportCompact
 
 /-! # Compactness preserved by proper perfect pushforward
 
@@ -67,6 +68,15 @@ theorem properPerfect_preserves_compact
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y
     ∀ P : schemeDerivedQCohCategory X, IsCompactObject P → IsCompactObject (R.obj P) := by
-  sorry
+  dsimp
+  set_option linter.style.haveILetI false in
+    letI : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  intro P hP
+  obtain ⟨hX, hY, hPerf⟩ := compactObject_perfect_witness (X := X) (Y := Y) P hP
+  set_option linter.style.haveILetI false in
+    letI := hX
+  set_option linter.style.haveILetI false in
+    letI := hY
+  exact properPerfect_transport_compact f hTor R eR P hPerf
 
 end AlgebraicGeometry
