@@ -23,58 +23,36 @@
  ],
  "proof": [
   {
-   "text": "Write p_j : F(j) \\to X for the natural maps supplied by essential constancy. The canonical map from the filtered colimit sends the class of a morphism f : Y \\to F(j) to p_j composed with f; naturality of the p_j makes this independent of the representative and defines a map into Hom_C(Y,X).",
+   "text": "Use the cocone p selected from the essential-constancy witness, and unpack its section s at j0 and its factorization clause [def-pc-essentially-constant-ind-diagram]. The given canonical descent is already well-defined by Mathlib Functor.descColimitType and coconeTypesEquiv; its component at j sends f to f composed with p_j.",
    "uses": [
     "def-pc-essentially-constant-ind-diagram"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
+    "place": "Tags 05PU(1) and 05PY, implication (1) to (2)"
    }
   },
   {
-   "text": "For surjectivity, let g : Y \\to X. The chosen section s : X \\to F(j0) gives the representative s composed with g at j0, and p_{j0} composed with s is the identity of X, so its image is g.",
+   "text": "Apply Mathlib CategoryTheory.Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered' to reduce injectivity to two arrows f,f' from Y to F(j) at the SAME stage j with equal composites into X. The factorization clause provides k and b:j->k with F(b)=p_j composed with s composed with F(a). Associativity and congruence of postcomposition with s composed with F(a) turn the assumed equality into f composed with F(b)=f' composed with F(b), exactly the criterion. No separate common-stage or coequalization construction is needed.",
    "uses": [
     "def-pc-essentially-constant-ind-diagram"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515, first equality"
-   }
-  },
-  {
-   "text": "For injectivity, suppose f : Y \\to F(j) and f' : Y \\to F(j') have equal images in Hom_C(Y,X), so p_j composed with f equals p_{j'} composed with f'. Choose, by filteredness, an index k receiving maps from j, j' and j0. Applying filteredness once more if needed lets the factorization clause of the definition be used for both transition maps into one common stage k.",
-   "uses": [
-    "def-pc-essentially-constant-ind-diagram"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
+    "place": "Tags 05PU(1) and 05PY, implication (1) to (2)"
    }
   },
   {
-   "text": "At that common stage, the two transition composites are respectively (F(j0) \\to F(k)) composed with s composed with p_j and (F(j0) \\to F(k)) composed with s composed with p_{j'}. Postcomposing f and f' therefore gives equal arrows because p_j composed with f equals p_{j'} composed with f'. The two representatives agree at a later stage and define the same colimit class, proving injectivity.",
-   "uses": [
-    "def-pc-essentially-constant-ind-diagram"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 05PY, characterization of essentially constant ind-diagrams"
-   }
-  },
-  {
-   "text": "The construction is compatible with postcomposition in Y and with morphisms of essentially constant diagrams, so the resulting bijection is the stated canonical one.",
+   "text": "Apply Mathlib CategoryTheory.Functor.CoconeTypes.descColimitType_surjective_iff. For any g:Y->X use g composed with s at j0. Associativity and s composed with p_j0=id_X give its image g. Combine injectivity and surjectivity to obtain the canonical bijection.",
    "uses": [
     "def-pc-essentially-constant-ind-diagram"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 05PU(1) and 05PY, implication (1) to (2)"
    }
   }
  ],
@@ -82,9 +60,9 @@
   "def-pc-essentially-constant-ind-diagram"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, proof line 9515; Categories Tag 05PY"
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 05PU(1) and 05PY, implication (1) to (2); S3 Lean proof using Mathlib same-stage filtered-colimit injectivity criterion, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -171,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T100125-L-2486846",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

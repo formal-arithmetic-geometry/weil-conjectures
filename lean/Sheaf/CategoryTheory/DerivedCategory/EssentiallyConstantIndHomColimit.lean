@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 public import Mathlib.CategoryTheory.Yoneda
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
+import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-!
 # Hom into an essentially constant ind-diagram
@@ -51,6 +52,24 @@ theorem essentiallyConstantInd_hom_colimit_bijective
       ((F ⋙ coyoneda.obj (op Y)).descColimitType
         ((F ⋙ coyoneda.obj (op Y)).coconeTypesEquiv.symm
           ((coyoneda.obj (op Y)).mapCocone { pt := X, ι := h.2.choose }))) := by
-  sorry
+  classical
+  have : IsFiltered J := h.1
+  obtain ⟨j₀, s, hs, hfactor⟩ := h.2.choose_spec
+  constructor
+  · apply (Functor.CoconeTypes.descColimitType_injective_iff_of_isFiltered' _).2
+    intro j f f' he
+    change f ≫ h.2.choose.app j = f' ≫ h.2.choose.app j at he
+    obtain ⟨k, a, b, hb⟩ := hfactor j
+    refine ⟨k, b, ?_⟩
+    change f ≫ F.map b = f' ≫ F.map b
+    rw [hb]
+    exact (Category.assoc f _ _).symm.trans
+      ((congrArg (fun t : Y ⟶ X ↦ t ≫ (s ≫ F.map a)) he).trans
+        (Category.assoc f' _ _))
+  · apply (Functor.CoconeTypes.descColimitType_surjective_iff _).2
+    intro g
+    refine ⟨j₀, g ≫ s, ?_⟩
+    change (g ≫ s) ≫ h.2.choose.app j₀ = g
+    simp only [Category.assoc, hs, Category.comp_id]
 
 end CategoryTheory
