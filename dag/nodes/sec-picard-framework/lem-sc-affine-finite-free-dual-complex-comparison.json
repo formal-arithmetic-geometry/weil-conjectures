@@ -15,35 +15,44 @@
  },
  "proof": [
   {
-   "text": "Choose finite bases in each degree. Over D(g), localized basis evaluations identify the internal dual of the associated sheaf with the associated sheaf of the module dual. Restriction localizes each evaluation, so the maps glue and are inverse. The description by evaluation is basis-independent.",
+   "text": "Choose the closed library basis Free.chooseBasis of each free finite term. Construct affineBasisSheafIso from the basis representation, tildeFinsupp and restriction of free sheaves. Construct affineBasisDualIso from the dual-basis representation and the closed homObjFreeUnitIso. These are actual isomorphism constructions, using no unproved theorem to supply data. Apply affineBasisDualIso_naturality to each chain boundary.",
    "uses": [
-    "def-sc-signed-sheaf-dual-complex",
-    "def-sc-signed-module-dual-complex"
+    "lem-sc-affine-finite-free-dual-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Precomposition on each side is the transpose of the same localized matrix of each boundary, so the identifications commute with boundaries. The signs -(-1)^q and (-1)^(q+1) agree. The extension isomorphisms identify degree -q of K with K_q; negative dual degrees are zero on both sides. These degree isomorphisms yield the complex isomorphism and transport along U.isoSpec preserves it.",
+   "text": "The private generic lemma signed_dual_iso_of_components assembles any natural family of term comparisons through an additive functor. In degree q≥0 conjugate each term comparison by mapIso of the canonical extendXIso for the chain extension at -q and the dual extension at q. In degree n<0 both terms are zero: use isZero_extend_X, map_isZero and the additive contravariant internal Hom functor to form the unique zero-object isomorphism.",
    "uses": [
     "def-sc-signed-sheaf-dual-complex",
     "def-sc-signed-module-dual-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For successive nonnegative degrees, extend_d_eq gives both differentials conjugated by their degree extension isomorphisms. The scalar identity (-1)^(q+1)=-(-1)^q is proved by ModuleCat.hom_ext, and map_units_smul transports it through the additive functor. Functoriality and inverse identities cancel the extension maps; naturality of the term comparison gives the remaining equation. For negative source degree, every composite from its zero object is equal. HomologicalComplex.Hom.isoOfComponents produces the required complex isomorphism.",
+   "uses": [
+    "lem-sc-affine-finite-free-dual-naturality",
+    "def-sc-signed-sheaf-dual-complex",
+    "def-sc-signed-module-dual-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-affine-finite-free-dual-naturality",
   "def-sc-signed-sheaf-dual-complex",
   "def-sc-signed-module-dual-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "S4",
+  "agent": "W3",
   "date": "2026-10-13",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
    "place": "Tag 0BQZ, lemma-regular-immersion-ext, signed finite free Hom computation; https://stacks.math.columbia.edu/tag/0BQZ"
   },
-  "note": "Stage-3 construction and reduction of the finite free affine Koszul Hom comparison."
+  "note": "Explicit finite-basis term isomorphisms and generic additive-functor complex assembly. Only naturality of the explicit term construction is split off; extension indexing, negative-degree zeros, signs, and assembly are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -120,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T123211-L-3678761",
+  "landing": "20261013T132738-L-4152706",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

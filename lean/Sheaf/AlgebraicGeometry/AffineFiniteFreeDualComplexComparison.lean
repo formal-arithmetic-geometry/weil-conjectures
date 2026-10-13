@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.HomComplexToSingle
 public import Sheaf.Algebra.Homology.SignedModuleDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality
+import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Associated sheafification of finite free signed duals
 
@@ -21,6 +23,126 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem signed_dual_iso_of_components
+    {A : Type u} [CommRing A] {C : Type u} [Category.{u} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    {R : Sheaf J CommRingCat.{u}}
+    (T : ModuleCat.{u} A ⥤ SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (hT : T.Additive)
+    (K : ChainComplex (ModuleCat.{u} A) ℕ)
+    (O : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    (e0 : ∀ q : ℕ, SheafOfModules.homObj (R := R) (T.obj (K.X q)) O ≅
+      T.obj (ModuleCat.of A (K.X q ⟶ ModuleCat.of A A)))
+    (h0 : ∀ q : ℕ,
+      SheafOfModules.homObjMap (R := R) (T.map (K.d (q + 1) q)) (𝟙 O) ≫
+        (e0 (q + 1)).hom = (e0 q).hom ≫
+          T.map (ModuleCat.ofHom (Linear.leftComp A (ModuleCat.of A A)
+            (K.d (q + 1) q)))) :
+    Nonempty (signedSheafDualComplex (R := R)
+      ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        (K.extend ComplexShape.embeddingDownNat)) O ≅
+      (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+        (ModuleCat.signedDualCochainComplex K)) := by
+  classical
+  let L := K.extend ComplexShape.embeddingDownNat
+  let B := CochainComplex.of
+    (fun q ↦ ModuleCat.of A (K.X q ⟶ ModuleCat.of A A))
+    (fun q ↦ ModuleCat.ofHom ((-1 : A) ^ (q + 1) •
+      Linear.leftComp A (ModuleCat.of A A) (K.d (q + 1) q)))
+    (ModuleCat.signedDualBoundary_comp K)
+  let D := B.extend ComplexShape.embeddingUpNat
+  let E := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj L
+  let F := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj D
+  let H := (SheafOfModules.homFunctor R).flip.obj O
+  let a (q : ℕ) : L.X (-(q : ℤ)) ≅ K.X q :=
+    K.extendXIso ComplexShape.embeddingDownNat rfl
+  let c (q : ℕ) : D.X (q : ℤ) ≅
+      ModuleCat.of A (K.X q ⟶ ModuleCat.of A A) :=
+    B.extendXIso ComplexShape.embeddingUpNat rfl
+  let ep (q : ℕ) : (signedSheafDualComplex (R := R)
+      E O).X (q : ℤ) ≅ F.X (q : ℤ) :=
+    H.mapIso (T.mapIso (a q)).symm.op ≪≫
+      e0 q ≪≫ T.mapIso (c q).symm
+  have hz (n : ℤ) (hn : n < 0) :
+      CategoryTheory.Limits.IsZero ((signedSheafDualComplex (R := R) E O).X n) := by
+    have hL : CategoryTheory.Limits.IsZero (L.X (-n)) := K.isZero_extend_X _ _ (by
+      intro q
+      simp only [ComplexShape.embeddingDownNat_f]
+      omega)
+    exact H.map_isZero ((T.map_isZero hL).op)
+  have hzF (n : ℤ) (hn : n < 0) : CategoryTheory.Limits.IsZero (F.X n) := by
+    exact T.map_isZero (HomologicalComplex.isZero_extend_X _ _ _ (by
+      intro q
+      simp only [ComplexShape.embeddingUpNat_f]
+      omega))
+  let e (n : ℤ) :
+      (signedSheafDualComplex (R := R) E O).X n ≅ F.X n :=
+    match n with
+    | .ofNat q => ep q
+    | .negSucc q => (hz _ (by omega)).iso (hzF _ (by omega))
+  refine ⟨HomologicalComplex.Hom.isoOfComponents e ?_⟩
+  intro n m hnm
+  have hm : m = n + 1 := hnm.symm
+  subst m
+  cases n with
+  | negSucc q => exact (hz _ (by omega)).eq_of_src _ _
+  | ofNat q =>
+    simp only [e]
+    change (ep q).hom ≫ F.d (q : ℤ) ((q : ℤ) + 1) =
+      (signedSheafDualComplex (R := R) E O).d
+        (q : ℤ) ((q : ℤ) + 1) ≫ (ep (q + 1)).hom
+    let δ := ModuleCat.ofHom (Linear.leftComp A (ModuleCat.of A A) (K.d (q + 1) q))
+    have hd : D.d (q : ℤ) ((q : ℤ) + 1) =
+        (c q).hom ≫ ModuleCat.ofHom ((-1 : A) ^ (q + 1) •
+          Linear.leftComp A (ModuleCat.of A A) (K.d (q + 1) q)) ≫ (c (q + 1)).inv := by
+      simpa only [B, CochainComplex.of_d] using
+        (B.extend_d_eq ComplexShape.embeddingUpNat
+          (i := q) (j := q + 1) (i' := (q : ℤ)) (j' := (q : ℤ) + 1) rfl (by simp))
+    have hl : L.d (-((q : ℤ) + 1)) (-(q : ℤ)) =
+        (a (q + 1)).hom ≫ K.d (q + 1) q ≫ (a q).inv := by
+      exact K.extend_d_eq ComplexShape.embeddingDownNat (by simp) rfl
+    have hs : ModuleCat.ofHom ((-1 : A) ^ (q + 1) •
+        Linear.leftComp A (ModuleCat.of A A) (K.d (q + 1) q)) =
+        (-(q : ℤ).negOnePow) • δ := by
+      apply ModuleCat.hom_ext
+      ext f x
+      simp [δ, Units.smul_def, pow_succ,
+        Linear.leftComp]
+    have hdS : (signedSheafDualComplex (R := R) E O).d (q : ℤ) ((q : ℤ) + 1) =
+        -(q : ℤ).negOnePow • SheafOfModules.homObjMap (R := R)
+          (T.map (L.d (-((q : ℤ) + 1)) (-(q : ℤ)))) (𝟙 O) :=
+      by
+        simp only [signedSheafDualComplex, CochainComplex.of_d]
+        rfl
+    rw [hdS]
+    change (ep q).hom ≫ T.map (D.d (q : ℤ) ((q : ℤ) + 1)) =
+      (-(q : ℤ).negOnePow • SheafOfModules.homObjMap (R := R)
+        (T.map (L.d (-((q : ℤ) + 1)) (-(q : ℤ)))) (𝟙 O)) ≫ (ep (q + 1)).hom
+    rw [hd, hs, hl]
+    dsimp only [ep, Iso.trans, Functor.mapIso, Iso.symm, Iso.op]
+    simp only [Functor.map_comp, Functor.map_units_smul, Category.assoc]
+    change (H.map (T.map (a q).inv).op ≫ (e0 q).hom ≫ T.map (c q).inv) ≫
+        T.map (c q).hom ≫ (-(q : ℤ).negOnePow • T.map δ) ≫ T.map (c (q + 1)).inv =
+      (-(q : ℤ).negOnePow • H.map
+        (T.map (a (q + 1)).hom ≫ T.map (K.d (q + 1) q) ≫ T.map (a q).inv).op) ≫
+        H.map (T.map (a (q + 1)).inv).op ≫ (e0 (q + 1)).hom ≫ T.map (c (q + 1)).inv
+    simp only [op_comp, Functor.map_comp, Category.assoc,
+      Linear.units_smul_comp, Linear.comp_units_smul, Iso.map_inv_hom_id_assoc]
+    have ha : H.map (T.map (a (q + 1)).hom).op ≫
+        H.map (T.map (a (q + 1)).inv).op = 𝟙 _ :=
+      (H.mapIso (T.mapIso (a (q + 1))).op).hom_inv_id
+    rw [← Category.assoc (H.map (T.map (a (q + 1)).hom).op)
+      (H.map (T.map (a (q + 1)).inv).op) _, ha, Category.id_comp]
+    have hn : H.map (T.map (K.d (q + 1) q)).op ≫ (e0 (q + 1)).hom =
+        (e0 q).hom ≫ T.map δ := h0 q
+    rw [← Category.assoc (H.map (T.map (K.d (q + 1) q)).op) (e0 (q + 1)).hom _, hn]
+    erw [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Sheafification and transport to an affine open commute with signed duals
 of degreewise finite free chain complexes.
 
@@ -57,6 +179,20 @@ theorem affine_finite_free_dual_complex_comparison
     Nonempty (signedSheafDualComplex (R := U.1.toScheme.toRingedSpace.sheaf) E
       (SheafOfModules.unit U.1.toScheme.ringCatSheaf) ≅
       (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        (ModuleCat.signedDualCochainComplex K)) := by sorry
+        (ModuleCat.signedDualCochainComplex K)) := by
+  classical
+  let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom
+  have : (tilde.functor Γ(Y, U.1)).Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have : (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive := ⟨by intros; rfl⟩
+  have hT : T.Additive := inferInstanceAs
+    (tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).Additive
+  have (q : ℕ) : Module.Free Γ(Y, U.1) (K.X q) := hfree q
+  have (q : ℕ) : Module.Finite Γ(Y, U.1) (K.X q) := hfinite q
+  let b (q : ℕ) := Module.Free.chooseBasis Γ(Y, U.1) (K.X q)
+  exact signed_dual_iso_of_components (R := U.1.toScheme.toRingedSpace.sheaf) T hT K
+    (SheafOfModules.unit U.1.toScheme.ringCatSheaf)
+    (fun q ↦ affineBasisDualIso U (K.X q) (b q))
+    (fun q ↦ affineBasisDualIso_naturality U (K.X q) (K.X (q + 1))
+      (b q) (b (q + 1)) (K.d (q + 1) q))
 
 end AlgebraicGeometry

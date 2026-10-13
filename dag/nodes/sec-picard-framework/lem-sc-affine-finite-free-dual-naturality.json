@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-affine-finite-free-dual-naturality",
+ "kind": "statement",
+ "title": "Explicit finite basis affine dual comparisons commute with precomposition",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an affine open, A=Γ(Y,U), and T the associated sheaf functor followed by transport along U.isoSpec. Let M,N be A-modules with specified finite bases bM indexed by I and bN indexed by J. Define eM:Hom(T(M),O_U) ≅ T(Hom_A(M,A)) by transporting M to the free sheaf using bM, using the canonical internal dual of the free sheaf, and transporting the dual-basis representation back to the associated sheaf of the module dual; define eN similarly. For every A-linear map f:N→M, precomposition by T(f) followed by eN equals eM followed by T(precomposition by f). Bases may have different index sets, including empty sets; A may be the zero ring. The data of both isomorphisms are constructed from the specified bases and closed library constructions, independently of the theorem.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, parts (4)-(5) and functoriality; finite basis evaluation calculation in the local finite free Hom computation of duality.tex, Tag 0BQZ. Read at https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/0BQZ."
+ },
+ "proof": [
+  {
+   "text": "Use Tag 01HV(4)-(5) to identify sections on a principal open with localizations and all restrictions with localization maps. The explicit tildeFinsupp and restrictFreeIso comparisons carry the given basis vectors to the localized free generators. The canonical homObjFreeUnitIso records evaluation on those generators. Basis.dualBasis_repr identifies the module dual coordinates with the same evaluations.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write f in the two finite bases with matrix (a_ij). Both composites in the naturality equation send the evaluation vector (v_i) to (sum_i a_ij v_i)_j. This is a finite sum; localization preserves it. Thus the two maps agree on each principal open, including empty bases and the zero ring.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The principal opens are a basis. Apply the sheaf property to equality on this basis, and transport the equality along U.isoSpec. No assertion about complexes or their differential signs occurs in this lemma.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W3",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/schemes.tex",
+   "place": "Tag 01HV, parts (4)-(5) and functoriality; finite basis evaluation calculation in the local finite free Hom computation of duality.tex, Tag 0BQZ. Read at https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/0BQZ."
+  },
+  "note": "Finite evaluation and matrix calculation made explicit from the affine localization statements and the cited local Hom computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf of the dual of a finite free module is the internal sheaf Hom to the structure sheaf, natural under precomposition",
+   "results": "Eight hits: freeHomEquiv, unitHomEquiv and ModuleCat.tilde; none is the dual comparison or its naturality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObjFreeUnitIso",
+   "results": "Zero hits; remote Loogle does not index this source-library declaration. Local source was read and used to construct the term isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*homObj|homObj.*tilde; finite free dual (blueprint_refs.py search)",
+   "results": "No affine tilde/internal Hom naturality lemma found in Mathlib or the library. The blueprint search found zero nodes. The existing parent compares entire complexes, not individual linear maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free module dual sheafification comparison is natural for precomposition",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreeDualComplexComparison",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Local finite free Hom complex calculation: naturality of the degreewise basis evaluation identification, the first step and boundary-compatibility part of lem-sc-affine-finite-free-dual-complex-comparison.",
+   "via": [
+    "lem-sc-affine-finite-free-dual-complex-comparison",
+    "lem-sc-affine-koszul-hom-complex-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteFreeDualNaturality.lean",
+  "declaration": "AlgebraicGeometry.affineBasisDualIso_naturality",
+  "statement": "theorem affineBasisDualIso_naturality {Y : Scheme.{u}} (U : Y.affineOpens)\n    (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Fintype I] [Fintype J]\n    (bM : Basis I Γ(Y, U.1) M) (bN : Basis J Γ(Y, U.1) N) (f : N ⟶ M) :\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    SheafOfModules.homObjMap (R := U.1.toScheme.toRingedSpace.sheaf)\n        (T.map f) (𝟙 (SheafOfModules.unit U.1.toScheme.ringCatSheaf)) ≫\n      (affineBasisDualIso U N bN).hom =\n    (affineBasisDualIso U M bM).hom ≫\n      T.map (ModuleCat.ofHom (Linear.leftComp Γ(Y, U.1)\n        (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) f))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T132738-L-4152706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T132738-L-4152706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
