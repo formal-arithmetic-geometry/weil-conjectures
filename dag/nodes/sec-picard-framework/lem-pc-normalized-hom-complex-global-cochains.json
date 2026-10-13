@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-normalized-hom-complex-global-cochains",
+ "kind": "theorem",
+ "title": "Explicit normalized global-cochain comparison",
+ "statement": "Let (C,J) be a site and R a sheaf of commutative rings. Let A,B be integer-indexed complexes of R-module sheaves [def-pur-hom-complex]. The explicit normalizedHomGlobalCochains equivalence sends a map s from the rank-one free module sheaf to Hom(A,B)^n to the ordinary cochain whose (p,q) component, p+n=q, is the morphism associated to s followed by the product projection exposed by homComplex_projections_exists. Its inverse is the unique product lift of the inverse internal-Hom section equivalences. This additive equivalence commutes with the ordinary cochain differential in all pairs of degrees. No cocycle or quotient restriction is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8Z (equation-global-cohomology-hom-complex), using the product and differential of Section 0A8X"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof": [
+  {
+   "text": "Use the product projections of the chosen homComplex_exists record. On each factor, unitHomEquiv and homObjSectionsEquiv identify maps from the rank-one free sheaf with morphisms of module sheaves. The product universal property gives the explicit inverse and both inverse identities.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Hom differential projection formula to each component. Composition of internal-Hom sections becomes composition of morphisms, so the formula is the ordinary cochain differential. Nonconsecutive degrees give zero by the complex shape.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8Z (equation-global-cohomology-hom-complex), using the product and differential of Section 0A8X; explicit construction and proof written by B2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections sheaf Hom complex cochains tensor Hom normalized evaluation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor Hom adjunction chain maps modulo chain homotopy",
+   "results": "HomologicalComplex.tensorHom; HomologicalComplex.ιTensorObj; HomotopyCategory.instLinear; Homotopy.map_eq_of_inverts_homotopyEquivalences; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv; DerivedCategory.Q_map_eq_of_homotopy; HomologicalComplex.HasTensor; Rep.standardComplex.εToSingle₀_comp_eq; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fan.IsLimit.lift",
+   "results": "CategoryTheory.Limits.Fan.IsLimit.lift; CategoryTheory.Limits.Fan.IsLimit.fac; CategoryTheory.Limits.Fan.IsLimit.fac_assoc; CategoryTheory.Limits.Multifork.toPiFork_π_app_zero; CategoryTheory.Limits.Multifork.pi_condition; CategoryTheory.Limits.Multifork.pi_condition_assoc; CategoryTheory.Limits.Multifork.toPiFork_π_app_one; CategoryTheory.Limits.MulticospanIndex.multiforkEquivPiFork_functor_obj_π_app; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*tensor|homTensorDegreewiseMap|equivHomotopy",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The degreewise tensor-Hom comparison and its normalized passage to global cochains in lem-pc-normalized-homotopy-tensor-hom",
+   "via": [
+    "lem-pc-normalized-homotopy-tensor-hom",
+    "lem-pc-canonical-derived-tensor-hom-map-bijective",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.NormalizedHomComplexGlobalCochains",
+  "file": "lean/Sheaf/Algebra/Homology/NormalizedHomComplexGlobalCochains.lean",
+  "declaration": "CategoryTheory.normalizedHomGlobalCochains_comm",
+  "declarations": [
+   "CategoryTheory.normalizedHomFactorEquiv",
+   "CategoryTheory.normalizedHomFactorEquiv_comp",
+   "CategoryTheory.normalizedHomGlobalCochainsOfFan",
+   "CategoryTheory.normalizedHomProjection",
+   "CategoryTheory.normalizedHomProjection_isLimit",
+   "CategoryTheory.normalizedHomGlobalCochains",
+   "CategoryTheory.normalizedHomGlobalCochains_v",
+   "CategoryTheory.normalizedHomGlobalCochainsOfFan_comm",
+   "CategoryTheory.normalizedHomGlobalCochains_comm"
+  ],
+  "statement": "theorem normalizedHomGlobalCochains_comm\n    (R : Sheaf J CommRingCat.{u}) (A B : CochainComplex Mod ℤ)\n    (i j : ℤ) (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X i) :\n    normalizedHomGlobalCochains R A B j (s ≫ (homComplex (R := R) A B).d i j) =\n      CochainComplex.HomComplex.δ i j (normalizedHomGlobalCochains R A B i s)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

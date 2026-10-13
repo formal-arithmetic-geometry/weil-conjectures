@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-normalized-tensor-hom-cochain-components",
+ "kind": "theorem",
+ "title": "Pure-tensor component formula for the constructed cochain comparison",
+ "statement": "Let X be a scheme and P,L,I integer-indexed O_X-module complexes [def-pc-cochain-complex-modules]. For an arbitrary degree-zero cochain c from P to Hom(L,I) [def-pur-hom-complex], restrict the degree-n component of the constructed normalizedTensorHomCochains X P L I 0 c [lem-pc-normalized-tensor-hom-cochains] to the summand P^p tensor L^r of Tot(P tensor L), p+r=n [def-pc-tensor-complex-sheaves]. This restriction equals the ordinary sheaf symmetry P^p tensor L^r to L^r tensor P^p followed by the inverse sheaf tensor-Hom adjunction applied to c^p followed by homTensorProjection of the r-factor [lem-pc-sheaf-modules-tensor-closed]. This is only a degree-zero cochain component equation: no cocycle, differential, bijection, or homotopy descent is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90 (lemma-compose), degreewise evaluation; sheaf tensor-Hom adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-normalized-tensor-hom-cochains",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "Apply the explicit normalized global-cochain component formula on the input and output of the degreewise map. Its defining HomTensorCurryCondition evaluates the restriction to the tensor summand as c at x, then its r-projection evaluated at y.",
+   "uses": [
+    "lem-pc-normalized-hom-complex-global-cochains",
+    "lem-sc-hom-tensor-degreewise",
+    "lem-pc-normalized-tensor-hom-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the inverse sheaf tensor-Hom adjunction through presheaf uncurrying and sheafification. After symmetry its evaluation on x tensor y is the same expression. Equality on localized pure tensors implies equality before sheafification by the tensor universal property, and then equality of sheaf morphisms by the sheafification adjunction.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-normalized-hom-complex-global-cochains",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-pc-normalized-tensor-hom-cochains",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90 (lemma-compose), degreewise evaluation and sheaf tensor-Hom adjunction; natural-language reduction documented by B2, with the Lean component proof still open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections sheaf Hom complex cochains tensor Hom normalized evaluation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor Hom adjunction chain maps modulo chain homotopy",
+   "results": "HomologicalComplex.tensorHom; HomologicalComplex.ιTensorObj; HomotopyCategory.instLinear; Homotopy.map_eq_of_inverts_homotopyEquivalences; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv; DerivedCategory.Q_map_eq_of_homotopy; HomologicalComplex.HasTensor; Rep.standardComplex.εToSingle₀_comp_eq; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fan.IsLimit.lift",
+   "results": "CategoryTheory.Limits.Fan.IsLimit.lift; CategoryTheory.Limits.Fan.IsLimit.fac; CategoryTheory.Limits.Fan.IsLimit.fac_assoc; CategoryTheory.Limits.Multifork.toPiFork_π_app_zero; CategoryTheory.Limits.Multifork.pi_condition; CategoryTheory.Limits.Multifork.pi_condition_assoc; CategoryTheory.Limits.Multifork.toPiFork_π_app_one; CategoryTheory.Limits.MulticospanIndex.multiforkEquivPiFork_functor_obj_π_app; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*tensor|homTensorDegreewiseMap|equivHomotopy",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; no exact normalized comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedHomotopyTensorHom",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The degreewise tensor-Hom comparison and its normalized passage to global cochains in lem-pc-normalized-homotopy-tensor-hom",
+   "via": [
+    "lem-pc-normalized-homotopy-tensor-hom",
+    "lem-pc-canonical-derived-tensor-hom-map-bijective",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedTensorHomCochainComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedTensorHomCochainComponents.lean",
+  "declaration": "AlgebraicGeometry.normalizedTensorHomCochains_component",
+  "declarations": [
+   "AlgebraicGeometry.normalizedTensorHomCochains_component"
+  ],
+  "statement": "theorem normalizedTensorHomCochains_component (X : Scheme.{u})\n    (P L I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (c : Cochain P (homComplex (R := X.sheaf) L I) 0)\n    (p r n : ℤ) (h : p + r = n) (h' : r + p = n) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := SheafOfModules.symmetricCategory X.sheaf\n    HomologicalComplex.ιMapBifunctor P L (curriedTensor _) (.up ℤ) p r n h ≫\n        (normalizedTensorHomCochains X P L I 0 c).v n n (add_zero n) =\n      (β_ (P.X p) (L.X r)).hom ≫\n        (SheafOfModules.tensorHomEquiv (L.X r) (P.X p) (I.X n)).symm\n          (c.v p p (add_zero p) ≫ homTensorProjection X.sheaf L I p r n h')",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T082330-L-1630580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
