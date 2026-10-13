@@ -12729,3 +12729,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:08 L: merged deliver/N1/Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSections (stage 3; reviewer PASS; first push; landing 20261013T140821-L-314634 (interface); batch 20261013T140810; modules 4; new nodes 3)
 - 14:08 L: merged deliver/N4/Sheaf.AlgebraicGeometry.RadicialSeparatingGenericField (stage 3; reviewer PASS; first push; landing 20261013T140822-L-314847 (interface); batch 20261013T140810; modules 4; new nodes 3)
 - 14:08 L: merged deliver/P1/Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels (stage 3; reviewer PASS; first push; landing 20261013T140822-L-314982 (interface); batch 20261013T140810; modules 5; new nodes 4)
+- 14:08 L: merged deliver/P1/Sheaf.AlgebraicGeometry.AffinePerfectChainHomPresentation (stage 3; reviewer PASS; first push; landing 20261013T140823-L-315147 (interface); batch 20261013T140810; modules 3; new nodes 2)

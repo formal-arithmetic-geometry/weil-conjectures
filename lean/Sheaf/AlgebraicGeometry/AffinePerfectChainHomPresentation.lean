@@ -12,14 +12,9 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
+
+import Sheaf.AlgebraicGeometry.ScalarExtensionChainHomDiagram
+import Sheaf.AlgebraicGeometry.AffinePerfectChainGeometricModels
 
 /-! # Chain-level affine perfect Hom comparison
 
@@ -134,6 +129,25 @@ theorem exists_affinePerfectChainHomPresentation
           limit (d.ι.app j ((ident j).symm (DerivedCategory.Q.map f))) =
             perfectLimitMap R c s j.val.property
               (stage j ((ident j).symm (DerivedCategory.Q.map f)))) := by
-  sorry
+  obtain ⟨F, E, K, hE, hK, stage, limit, hstage, hlimit⟩ :=
+    exists_affinePerfectChainGeometricModels R c hc i Y s P Q hP hQ
+  obtain ⟨H, ident, d, e, htransition, hcanonical⟩ :=
+    exists_scalarExtensionChainHomDiagram i F E K hE
+  refine ⟨F, E, K, hE, hK, H, ident, d, e,
+    (fun j ↦ (ident j).trans (stage j)), e.trans limit,
+    htransition, hcanonical, ?_, ?_⟩
+  · intro j k hjk f
+    change stage k (ident k (H.map (homOfLE hjk)
+      ((ident j).symm (DerivedCategory.Q.map f)))) =
+      perfectStageMap R s j.val.property hjk
+        (stage j (ident j ((ident j).symm (DerivedCategory.Q.map f))))
+    simp only [Equiv.apply_symm_apply]
+    exact (congrArg (stage k) (htransition j k hjk f)).trans (hstage j k hjk f)
+  · intro j f
+    change limit (e (d.ι.app j ((ident j).symm (DerivedCategory.Q.map f)))) =
+      perfectLimitMap R c s j.val.property
+        (stage j (ident j ((ident j).symm (DerivedCategory.Q.map f))))
+    simp only [Equiv.apply_symm_apply]
+    exact (congrArg limit (hcanonical j f)).trans (hlimit j f)
 
 end AlgebraicGeometry
