@@ -6,8 +6,8 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RectangleQCohComparisonLifts
+import Sheaf.AlgebraicGeometry.RectangleQCohOrdinaryCompatibility
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
@@ -23,6 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
+-- The fixed signature names hL and hs, although the conclusion does not depend on their proofs.
+set_option linter.unusedVariables false in
 /-- Direct-image and base comparisons compatible with a fixed canonical upper comparison.
 Source: Stacks Project, Tags 0ATM (ordinary base-change pasting), 08HY (the counit
 formula), 0D5S (pullback composition), and 0D5T (direct-image composition).
@@ -97,6 +99,49 @@ theorem rectangle_ordinary_geometric_direct
     ∃ (p : L ⋙ Q ≅ P) (b : B ≅ H),
       (∀ E : schemeDerivedQCohCategory X,
         Q.map (s.hom.app E) ≫ δ.app E =
-          p.hom.app (U.obj E) ≫ α.app E ≫ b.hom.app ((qcDirectImage f).obj E)) := by sorry
+          p.hom.app (U.obj E) ≫ α.app E ≫ b.hom.app ((qcDirectImage f).obj E)) := by
+  classical
+  intro U L V P Q B H α δ s hL hs
+  obtain ⟨p, b, hp, hb⟩ := rectangle_qcoh_comparison_lifts f g h k hk₁ hk₂
+  refine ⟨p, b, ?_⟩
+  intro E
+  let β := qcBaseChange f (h ≫ g)
+  let βS := qcBaseChange f g
+  let βI := @qcBaseChange _ (pullback f g) S T _
+    (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+    (pullback.snd f g) _ _ h
+  let γ := (qcPullback h).map (βS.app E) ≫ βI.app ((qcPullback (pullback.fst f g)).obj E)
+  have hOrd : β.app E ≫ p.inv.app (U.obj E) ≫ Q.map (s.hom.app E) =
+      b.hom.app ((qcDirectImage f).obj E) ≫ γ :=
+    rectangle_qcoh_ordinary_compatibility f g h k hk₁ hk₂ s hL hs p b hp hb E
+  have iβ : IsIso β := by
+    have : ∀ E, IsIso (β.app E) := fun E ↦
+      @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _
+        (schemeDerivedQCohProperty T).fullyFaithfulι _ _ (β.app E) (hβ E)
+    exact NatIso.isIso_of_isIso_app β
+  have iβS : IsIso βS := by
+    have : ∀ E, IsIso (βS.app E) := fun E ↦
+      @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _
+        (schemeDerivedQCohProperty S).fullyFaithfulι _ _ (βS.app E) (hβS E)
+    exact NatIso.isIso_of_isIso_app βS
+  have iβI : IsIso βI := by
+    have : ∀ E, IsIso (βI.app E) := fun E ↦
+      @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _
+        (schemeDerivedQCohProperty T).fullyFaithfulι _ _ (βI.app E) (hβI E)
+    exact NatIso.isIso_of_isIso_app βI
+  have : IsIso γ := by dsimp only [γ]; infer_instance
+  have hα : α.app E = inv (β.app E) := by
+    change (inv β).app E = _
+    exact NatIso.isIso_inv_app β E
+  have hδ : δ.app E = inv γ := by
+    simp only [δ, TwoSquare.hComp_app, qcInverseBaseChange, NatIso.isIso_inv_app,
+      γ, βI, βS, IsIso.inv_comp, Functor.map_inv]
+  rw [hα, hδ]
+  apply (cancel_mono γ).mp
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [← hOrd]
+  simp only [← Category.assoc, IsIso.inv_hom_id, Category.comp_id, Iso.hom_inv_id_app]
+  exact (Category.id_comp (Q.map (s.hom.app E))).symm
+
 
 end AlgebraicGeometry
