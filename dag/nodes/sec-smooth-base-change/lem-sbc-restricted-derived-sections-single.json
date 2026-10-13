@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-restricted-derived-sections-single",
+ "kind": "statement",
+ "title": "Single comparison for restricted derived sections before homology",
+ "statement": "Let $S,Y,Y\\prime,a,h,h\\prime,U,q,r,r\\prime,T_h,T_{h\\prime},\\delta$ be the schemes, morphisms and explicitly constructed derived section transformation of [lem-sbc-restricted-derived-section-zero-comparison], with $a\\gg h=h\\prime$, $q=U\\times_S a$ and $U\\to S$ etale. Let $F,F\\prime$ be abelian etale sheaves on $Y,Y\\prime$ and $\\phi:a^*F\\to F\\prime$. Put $R=r^*F$ and $K=R[0]$. Let $s_F:T_h(F[0])\\cong R\\Gamma(U\\times_S Y,QK)$ be the single comparison [def-sbc-raw-restricted-cohomology-comparison-map], and similarly $s_{F\\prime}$. Let $c_a$ be the exact inverse-image single comparison and let $\\rho:q^*r^*F\\to r\\prime{}^*F\\prime$ be the explicit restricted coefficient map [def-sbc-raw-affine-restricted-cohomology]. Then $\\delta_{F[0]}\\gg T_{h\\prime}(c_a\\gg\\phi[0])\\gg s_{F\\prime}=s_F\\gg\\operatorname{derivedSectionPullback}(q)_{QK}\\gg R\\Gamma(U\\times_S Y\\prime)(b_{q,K}\\gg Q(c_{q,R}\\gg\\rho[0]))$, where $b_{q,K}:D(q^*)(QK)\\to Q(q^*K)$ is the localization factorization and $c_{q,R}:q^*(R[0])\\to(q^*R)[0]$ is the complex single comparison. This is an equality in the derived category of abelian groups, before any shift or homology is applied.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07A6",
+  "place": "Tags 07A6, 0D6F and 03Q8; explicit compatibility calculation in the parent shifted-single proof."
+ },
+ "stmt_deps": [
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand the transformation as the derived unit and Leray, followed by the\nrestriction-composition isomorphism. Move the source single comparison past the\nunit and Leray using naturality. On the actual single complex, factorization of\nexact inverse image through Q identifies the resulting map with the derived\nunit and Leray followed by mapDerivedCategoryFactors. The restriction comparison\non the single is Q of mapCochainComplexSingleFunctor followed by the single of\nupperStarComp(q,r) inverse and upperStarComp(r',a). Its naturality for the arbitrary\ncoefficient map supplies the last factor r'^* phi. Compose and cancel the single\ncomparison inverses. No coefficient is assumed invertible; the zero sheaf and\nempty scheme give the same identities. No shift or homology comparison is used.",
+   "uses": [
+    "lem-sbc-restricted-derived-section-zero-comparison",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent W3",
+  "document": "Stacks Project and parent proof plan",
+  "place": "Expanded compatibility calculation; the sources give the derived adjunction and restriction constructions."
+ },
+ "mathlib_searches": [
+  {
+   "date": "2026-10-13",
+   "tool": "leansearch",
+   "query": "Exact inverse image composition comparison on single complexes in the derived category",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "date": "2026-10-13",
+   "tool": "leanfinder",
+   "query": "Exact inverse image derived composition comparison on single complexes",
+   "results": "Eight hits including Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ and Functor.mapDerivedCategoryFactorsh_hom_app; no composite restricted coefficient identity.",
+   "verdict": "no exact match"
+  },
+  {
+   "date": "2026-10-13",
+   "tool": "grep",
+   "query": "mapDerivedCategory.*single|single.*mapDerivedCategory",
+   "results": "Ten Mathlib hits in ExactFunctor.lean and Ext/Map.lean, including mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app; the individual comparison is available, not the full restriction identity.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Shifted-single comparison in the higher-direct-image limit proof; unshifted single and restricted coefficient comparison before homology.",
+   "via": [
+    "lem-sbc-restricted-derived-section-shift-comparison",
+    "lem-sbc-restricted-derived-evaluation-pullback",
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedDerivedSectionsSingle.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedDerivedSections_single",
+  "statement": "theorem restrictedDerivedSections_single {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : (upperStar AddCommGrpCat.{v + 1} a).obj F ⟶ F') (U : S.Etale) :\n    let q := rawAffineRestrictedMap a h h' w U\n    let r := Limits.pullback.snd U.hom h\n    let r' := Limits.pullback.snd U.hom h'\n    let R := (upperStar AddCommGrpCat.{v + 1} r).obj F\n    let τ := Functor.whiskerLeft\n      (DerivedCategory.Plus.ι ⋙\n        D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)))\n      (derivedSectionPullback (rawAffineRestrictedMap a h h' w U)) ≫\n    Functor.whiskerRight\n      (Functor.whiskerLeft DerivedCategory.Plus.ι\n        (derivedRestrictionIso a h h' w U).hom)\n      (rightDerivedGlobalSections AddCommGrpCat.{v + 1} (Limits.pullback U.hom h'))\n    τ.app ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫\n      (sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U)).map\n        (((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫\n          (DerivedCategory.Plus.singleFunctor _ 0).map φ) ≫\n      (Evaluation.singleIso (upperStar AddCommGrpCat.{v + 1} r')\n        (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}) F').hom =\n    (Evaluation.singleIso (upperStar AddCommGrpCat.{v + 1} r)\n      (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1}) F).hom ≫\n      (derivedSectionPullback q).app\n        (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj R)) ≫\n      (rightDerivedGlobalSections AddCommGrpCat.{v + 1} (Limits.pullback U.hom h')).map\n        ((upperStar AddCommGrpCat.{v + 1} q).mapDerivedCategoryFactors.hom.app\n            ((CochainComplex.singleFunctor _ 0).obj R) ≫\n          DerivedCategory.Q.map\n            (((upperStar AddCommGrpCat.{v + 1} q).mapCochainComplexSingleFunctor 0).hom.app R ≫\n              (CochainComplex.singleFunctor _ 0).map\n                (rawAffineRestrictedCoefficient a h h' w F F' φ U)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T054245-L-451674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T054245-L-451674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

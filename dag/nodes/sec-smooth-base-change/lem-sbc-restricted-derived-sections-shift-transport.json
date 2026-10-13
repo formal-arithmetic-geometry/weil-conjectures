@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-restricted-derived-sections-shift-transport",
+ "kind": "statement",
+ "title": "Transport of restricted section pullback through the shift comparison",
+ "statement": "Let $S,Y,Y\\prime$ be schemes, $a:Y\\prime\\to Y$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$, and $w:a\\gg h=h\\prime$. Let $U\\to S$ be etale, $p\\in\\mathbb N$, and $F,F\\prime$ abelian etale sheaves. Put $K=F[0]$, $K\\prime=F\\prime[0]$, $L=D^+(a^*)$, and let $f:L(K)\\to K\\prime$ be any derived morphism. Let $T,T\\prime$ be restriction followed by derived sections [def-sbc-raw-restricted-cohomology-comparison-map], $e_F,e_{F\\prime}$ their single-complex comparisons, and $s_F,s_{F\\prime}$ their shifted zeroth-homology comparisons. Let $\\tau:T\\to LT\\prime$ be the explicitly constructed derived section pullback before homology [lem-sbc-restricted-derived-section-zero-comparison]. Then $H^0(\\tau_{K[p]})\\gg H^0(T\\prime(c_{L,p,K}\\gg f[p]))\\gg s_{F\\prime}.\\mathrm{hom}=s_F.\\mathrm{hom}\\gg H^p(e_F.\\mathrm{inv}\\gg\\tau_K\\gg T\\prime(f)\\gg e_{F\\prime}.\\mathrm{hom})$, where $c$ is the canonical shift comparison. The conclusion computes no restricted coefficient or cohomology pullback map and makes no assumption that $f$ is the image of a sheaf morphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07A6",
+  "place": "Tags 07A6, 0D6F and 03Q8; explicit compatibility calculation in the parent shifted-single proof."
+ },
+ "stmt_deps": [
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write T and T' for restriction followed by derived global sections, L for\nD+(a^*), and tau for the derived pullback followed by the restriction-composition\ncomparison. The inverse-image adjunction on complexes is degreewise, so its unit\ncommutes with shifts. Localize that equality. The Leray comparison commutes with\nshifts because it is characterized by the composite right-derived unit, whose\nfactors commute with shifts. The comparison q^*r^* = r'^*a^* is induced from exact\nfunctors on complexes and also commutes with shifts. Whiskering and composing\nthese equalities proves shift compatibility of tau for the canonical composite\nshift structures on T and L followed by T'. Apply this identity at F[0].\nNaturality of the target shift comparison moves the arbitrary shifted morphism f\npast that comparison. Naturality of the homology shift isomorphism then identifies\nH^0 of the shifted composite with H^p of tau at F[0] followed by T'(f).\nExpand both shiftIso maps into their functor shift, homology shift and single\ncomparisons. Insert the inverse of the source single comparison immediately\nbefore the unshifted map; its product with that single comparison is the identity.\nAssociativity and functoriality give the displayed conjugation formula. This\nargument does not compute the unshifted map on any coefficient morphism and\nworks for any f, for p=0, and for an empty restricted scheme.",
+   "uses": [
+    "lem-sbc-restricted-derived-section-zero-comparison",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent W3",
+  "document": "Stacks Project and parent proof plan",
+  "place": "The shift-coherence part of the parent proof, with arbitrary unshifted derived morphism and conjugation by the single comparison."
+ },
+ "mathlib_searches": [
+  {
+   "date": "2026-10-13",
+   "tool": "leansearch",
+   "query": "Derived global sections pullback natural transformation commutes with shift",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "date": "2026-10-13",
+   "tool": "leanfinder",
+   "query": "Shift compatibility of derived global sections pullback and cohomology of single sheaves",
+   "results": "Eight sheaf-of-modules pullback comparison results, including pullbackObjFreeIso_hom_naturality and pullbackComp; no restricted derived-sections shift theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "date": "2026-10-13",
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_fac|mapDerivedCategoryCompIso_fac|commShift_rightDerivedFunctorCompIso",
+   "results": "msearch.py Mathlib search: 0 hits. Local source search found rightDerivedFunctor/AdjunctionShift.lean composition shift lemma, with additional unit-compatibility requirements.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Shift-coherence step of the shifted-single comparison, before identifying the unshifted coefficient map.",
+   "via": [
+    "lem-sbc-restricted-derived-section-shift-comparison",
+    "lem-sbc-restricted-derived-evaluation-pullback",
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedDerivedSectionsShiftTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedDerivedSections_shiftTransport",
+  "statement": "theorem restrictedDerivedSections_shiftTransport {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (f : D+(upperStar AddCommGrpCat.{v + 1} a).obj\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ⟶\n        (DerivedCategory.Plus.singleFunctor _ 0).obj F') (U : S.Etale) :\n    let T' := sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F\n    let τ := Functor.whiskerLeft\n      (DerivedCategory.Plus.ι ⋙\n        D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)))\n      (derivedSectionPullback (rawAffineRestrictedMap a h h' w U)) ≫\n      Functor.whiskerRight\n        (Functor.whiskerLeft DerivedCategory.Plus.ι\n          (derivedRestrictionIso a h h' w U).hom)\n        (rightDerivedGlobalSections AddCommGrpCat.{v + 1} (Limits.pullback U.hom h'))\n    let e := Evaluation.singleIso\n      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h))\n      (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1}) F\n    let e' := Evaluation.singleIso\n      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h'))\n      (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}) F'\n    (restrictedSectionPullback a h h' w U).app (K⟦(p : ℤ)⟧) ≫\n      (T' ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n        ((D+(upperStar AddCommGrpCat.{v + 1} a).commShiftIso (p : ℤ)).hom.app K ≫\n          (shiftFunctor _ (p : ℤ)).map f) ≫ (shiftIso h' p F' U).hom =\n      (shiftIso h p F U).hom ≫\n        (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).map\n          (e.inv ≫ τ.app K ≫ T'.map f ≫ e'.hom)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T054245-L-451674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T054245-L-451674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11318,3 +11318,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/V3/Sheaf.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching (stage 3; reviewer PASS; after a return; landing 20261013T054243-L-451253 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/W2/Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra (stage 3; reviewer PASS; first push; landing 20261013T054244-L-451434 (interface); batch 20261013T054206; modules 5; new nodes 4)
 - 05:42 L: merged deliver/W3/Sheaf.AlgebraicGeometry.CanonicalStructureMapBaseChange (stage 3; reviewer PASS; first push; landing 20261013T054244-L-451568 (interface); batch 20261013T054206; modules 2; new nodes 1)
+- 05:42 L: merged deliver/W3/Sheaf.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison (stage 3; reviewer PASS; first push; landing 20261013T054245-L-451674 (interface); batch 20261013T054206; modules 3; new nodes 2)

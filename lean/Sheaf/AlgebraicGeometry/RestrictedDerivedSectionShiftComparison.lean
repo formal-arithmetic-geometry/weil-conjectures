@@ -6,6 +6,8 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
+import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport
+import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionsSingle
 
 /-! # The shifted single comparison for restricted derived section pullback
 
@@ -21,6 +23,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
+set_option maxHeartbeats 800000 in -- Elaborating the explicit derived functors needs this budget.
 /-- On a shifted single sheaf, the constructed natural pullback is the explicitly
 constructed restricted cohomology map.
 Source: Stacks Project, Tags 07A6 and 0D6F; Tag 03Q8 for restriction of cohomology.
@@ -56,6 +59,52 @@ theorem restrictedSectionPullback_shift {S Y Y' : Scheme.{v}}
               (((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryPlusSingleFunctor 0).hom.app
                   F ≫ (DerivedCategory.Plus.singleFunctor _ 0).map φ)) ≫
         (shiftIso h' p F' U).hom =
-      (shiftIso h p F U).hom ≫ rawAffineRestrictedCohomologyMap a h h' w p F F' φ U := by sorry
+      (shiftIso h p F U).hom ≫ rawAffineRestrictedCohomologyMap a h h' w p F F' φ U := by
+  let L := D+(upperStar AddCommGrpCat.{v + 1} a)
+  let T := Evaluation.functor
+      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h))
+      (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1})
+  let T' := Evaluation.functor
+      (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h'))
+      (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1})
+  let τ : T ⟶ L ⋙ T' := Functor.whiskerLeft
+      (DerivedCategory.Plus.ι ⋙
+        D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)))
+      (derivedSectionPullback (rawAffineRestrictedMap a h h' w U)) ≫
+    Functor.whiskerRight
+      (Functor.whiskerLeft DerivedCategory.Plus.ι
+        (derivedRestrictionIso a h h' w U).hom)
+      (rightDerivedGlobalSections AddCommGrpCat.{v + 1} (Limits.pullback U.hom h'))
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+  let K' := (DerivedCategory.Plus.singleFunctor _ 0).obj F'
+  let f : L.obj K ⟶ K' :=
+    ((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map φ
+  let e' := Evaluation.singleIso
+    (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h'))
+    (Sheaf.Γ (Limits.pullback U.hom h').smallEtaleTopology AddCommGrpCat.{v + 1}) F'
+  have hs := restrictedDerivedSections_single a h h' w F F' φ U
+  dsimp only at hs
+  change τ.app K ≫ T'.map f ≫ e'.hom = _ at hs
+  let e := Evaluation.singleIso
+    (upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h))
+    (Sheaf.Γ (Limits.pullback U.hom h).smallEtaleTopology AddCommGrpCat.{v + 1}) F
+  have hr : (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).map
+      (τ.app K ≫ T'.map f ≫ e'.hom) =
+      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).map e.hom ≫
+        rawAffineRestrictedCohomologyMap a h h' w p F F' φ U := by
+    rw [hs]
+    simp only [e, rawAffineRestrictedCohomologyMap, rawAffineComplexPullback,
+      derivedSectionPullback, cohomology, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, NatTrans.comp_app, Functor.comp_map,
+      Functor.map_comp, Category.assoc]
+  rw [restrictedDerivedSections_shiftTransport a h h' w p F F' f U]
+  change (shiftIso h p F U).hom ≫
+      (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} (p : ℤ)).map
+        (e.inv ≫ τ.app K ≫ T'.map f ≫ e'.hom) =
+    (shiftIso h p F U).hom ≫ rawAffineRestrictedCohomologyMap a h h' w p F F' φ U
+  rw [Functor.map_comp, hr]
+  simp only [← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 end AlgebraicGeometry.Etale.RawRestrictedComparison
