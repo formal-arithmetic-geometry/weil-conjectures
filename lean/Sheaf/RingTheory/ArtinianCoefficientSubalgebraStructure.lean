@@ -6,6 +6,7 @@ Authors: SHEAF group P4
 module
 
 public import Sheaf.RingTheory.ArtinianCoefficientPresentation
+import Mathlib.RingTheory.HopkinsLevitzki
 
 /-!
 # Structure of finite coefficient subalgebras
@@ -63,6 +64,96 @@ theorem artinian_coefficient_subalgebra_structure
         Ideal.comap (artinianCoefficientSubalgebra k Λ σ t s).val.toRingHom
           (IsLocalRing.maximalIdeal Λ) ∧
       Nonempty (@IsLocalRing.ResidueField (artinianCoefficientSubalgebra k Λ σ t s) _ hA
-        ≃ₐ[k] IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ))) := by sorry
+        ≃ₐ[k] IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ))) := by
+  classical
+  -- The section supplies an F-algebra structure; it need not respect k.
+  let F := IntermediateField.adjoin k (s : Set (IsLocalRing.ResidueField Λ))
+  let C := artinianCoefficientSubalgebra k Λ σ t s
+  let φ : F →+* Λ := σ.comp F.subtype
+  let : Algebra F Λ := φ.toAlgebra
+  let B := Algebra.adjoin F (t : Set Λ)
+  have hBC : B.toSubring = C.toSubring := by
+    change (Algebra.adjoin F (t : Set Λ)).toSubring =
+      (Algebra.adjoin k ((t : Set Λ) ∪ σ '' (F : Set _))).toSubring
+    rw [Algebra.adjoin_eq_ring_closure, Algebra.adjoin_eq_ring_closure]
+    apply le_antisymm
+    · apply Subring.closure_le.mpr
+      rintro x (⟨a, rfl⟩ | hx)
+      · exact Subring.subset_closure (Or.inr (Or.inr ⟨a, a.property, rfl⟩))
+      · exact Subring.subset_closure (Or.inr (Or.inl hx))
+    · apply Subring.closure_le.mpr
+      rintro x (⟨a, rfl⟩ | hx | ⟨a, ha, rfl⟩)
+      · exact (Subring.closure_le.mpr (fun x hx ↦ by
+          rcases hx with hx | ⟨a, ha, rfl⟩
+          · exact Subring.subset_closure (Or.inr hx)
+          · exact Subring.subset_closure (Or.inl ⟨⟨a, ha⟩, rfl⟩))) (hc a)
+      · exact Subring.subset_closure (Or.inr hx)
+      · exact Subring.subset_closure (Or.inl ⟨⟨a, ha⟩, rfl⟩)
+  obtain ⟨n, hn⟩ := (isArtinianRing_iff_isNilpotent_maximalIdeal Λ).mp
+    (inferInstance : IsArtinianRing Λ)
+  have hnpos : 0 < n := by
+    by_contra h
+    have hnzero : n = 0 := by omega
+    have : (⊤ : Ideal Λ) = ⊥ := by
+      subst n
+      simpa only [pow_zero, Ideal.one_eq_top, Ideal.zero_eq_bot] using hn
+    exact top_ne_bot this
+  have hi : ∀ x ∈ (t : Set Λ), IsIntegral F x := by
+    intro x hx
+    apply IsIntegral.of_pow hnpos
+    have hz : x ^ n = 0 := by
+      have hmem := Ideal.pow_mem_pow (ht hx) n
+      simpa [hn] using hmem
+    rw [hz]
+    exact isIntegral_zero
+  let : Module.Finite F B := Algebra.finite_adjoin_of_finite_of_isIntegral t.finite_toSet hi
+  have hB : IsArtinianRing B := IsArtinianRing.of_finite F B
+  let e : B ≃+* C := RingEquiv.subringCongr hBC
+  have hC : IsArtinianRing C := e.isArtinianRing
+  let : IsArtinianRing C := hC
+  -- In an Artinian ring, a non-zero-divisor is a unit.
+  have hu : ∀ x : C, IsUnit (x : Λ) → IsUnit x := by
+    intro x hx
+    apply IsArtinianRing.isUnit_of_mem_nonZeroDivisors
+    exact mem_nonZeroDivisors_of_injective
+      (f := C.val.toRingHom) (show Function.Injective C.val from Subtype.val_injective)
+      hx.mem_nonZeroDivisors
+  let hlocal : IsLocalRing C := IsLocalRing.of_isUnit_or_isUnit_one_sub_self fun x ↦ by
+    rcases IsLocalRing.isUnit_or_isUnit_one_sub_self (x : Λ) with hx | hx
+    · exact Or.inl (hu x hx)
+    · exact Or.inr (hu (1 - x) hx)
+  refine ⟨hlocal, hC, ?_, ?_⟩
+  · ext x
+    change ¬ IsUnit x ↔ ¬ IsUnit (x : Λ)
+    exact not_congr ⟨fun hx ↦ hx.map C.val.toRingHom, hu x⟩
+  · -- Ambient reduction respects k and has image exactly F.
+    have hr : ∀ x : Λ, x ∈ C → IsLocalRing.residue Λ x ∈ F := by
+      intro x hx
+      change x ∈ Algebra.adjoin k _ at hx
+      induction hx using Algebra.adjoin_induction with
+      | mem x hx =>
+        rcases hx with hx | ⟨a, ha, rfl⟩
+        · rw [(IsLocalRing.residue_eq_zero_iff x).mpr (ht hx)]
+          exact F.zero_mem
+        · simpa using (RingHom.congr_fun hσ a ▸ ha)
+      | algebraMap a =>
+        exact F.algebraMap_mem a
+      | add x y _ _ hx hy =>
+        simpa only [map_add] using F.add_mem hx hy
+      | mul x y _ _ hx hy =>
+        simpa only [map_mul] using F.mul_mem hx hy
+    let f : C →ₐ[k] F :=
+      { toRingHom := ((IsLocalRing.residue Λ).comp C.val.toRingHom).codRestrict
+          F.toSubring (fun x ↦ hr x x.property)
+        commutes' := fun a ↦ Subtype.ext (by rfl) }
+    have hsurj : Function.Surjective f := by
+      intro a
+      have ha : σ a ∈ C := Algebra.subset_adjoin (Or.inr ⟨a, a.property, rfl⟩)
+      refine ⟨⟨σ a, ha⟩, Subtype.ext ?_⟩
+      exact RingHom.congr_fun hσ a
+    have hker : RingHom.ker f.toRingHom = IsLocalRing.maximalIdeal C :=
+      IsLocalRing.ker_eq_maximalIdeal f.toRingHom hsurj
+    exact ⟨(Ideal.quotientEquivAlgOfEq k hker.symm).trans
+      (Ideal.quotientKerAlgEquivOfSurjective hsurj)⟩
 
 end Algebra
