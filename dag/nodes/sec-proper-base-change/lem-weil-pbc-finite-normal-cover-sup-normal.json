@@ -23,21 +23,21 @@
  "statement": "Let A be a domain and K its fraction field. Let s be a finite set of A-subalgebras of K all contained in the integral closure of A in K. Suppose for every prime p of A, some C in s has integrally closed localizations at every prime of C contracting to p. Then every prime localization of the supremum S of s is integrally closed. No Noetherian hypothesis, local-approximation hypothesis, or finite-module hypothesis is needed for this algebraic step.",
  "proof": [
   {
-   "text": "Finset.sup_le gives S contained in the integral closure; hence its elements are integral over A. For q in Spec S, contract to p in Spec A and choose C in s by the covering hypothesis. The inclusion C -> S exists by Finset.le_sup. Its contraction r of q is prime, lies over p by functoriality of contraction, and C_r is integrally closed by the hypothesis.",
+   "text": "Let B be the finite supremum. Finset.sup_le and le_integralClosure_iff_isIntegral show that B is integral over A. Contract q in Spec B to p in Spec A. Choose C in s by hcover and use Finset.le_sup for C contained in B. Contract q along Subalgebra.inclusion to r in Spec C; Ideal.comap_comap shows r lies over p, so C_r is integrally closed.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "A lies in C inside K, so K is the fraction field of C and of C_r. Every element of S is integral over A and thus over C_r. Localizing S at C minus r yields an integral extension T of C_r embedded in K, since the denominators are units of C_r. Every element of T is integral over C_r, hence normality of C_r identifies T with C_r inside K. This is the defining property isIntegrallyClosed_iff, together with integrality of sums and products and localization universal properties.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "C minus r maps into S minus q. Thus S_q is a further localization of T = C_r, at nonzero denominators. Normality of localizations gives IsIntegrallyClosed S_q.",
+   "text": "The anonymous instance for (S : Subalgebra A K) in Mathlib.RingTheory.Localization.AsSubring identifies K as a fraction field of each intermediate subalgebra. The fraction-field clause of the localization-normal-domain lemma identifies K as the fraction field of C_r and B_q, using IsFractionRing.isFractionRing_of_isDomain_of_isLocalization and the algebra structures induced by Localization.mapToFractionRing; this fraction-field argument requires no global normality of C or B. If z in K is integral over A, IsIntegral.tower_top makes z integral over C_r. IsIntegrallyClosed.algebraMap_eq_of_integral gives y in C_r mapping to z. IsLocalization.exists_mk'_eq and mk'_spec write y=c/t and show t*z=c for c in C and t outside r.",
    "uses": [
     "lem-weil-pbc-localization-normal-domain"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For x in K integral over B_q, Mathlib IsIntegral.exists_multiple_integral_of_isLocalization clears the monic equation, producing d outside q such that d*x is integral over B. isIntegral_trans makes d*x integral over A. Step 2 gives t outside r such that t*d*x belongs to C, hence to B. The inclusion sends t outside q by the definition r=comap(q). The product of this image with d is outside q, so IsLocalization.mk' with numerator t*d*x and denominator t*d represents x in B_q. IsLocalization.lift_mk'_spec verifies the equality in K. isIntegrallyClosed_iff then proves that B_q is integrally closed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -46,7 +46,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 0333, reverse implication, final localization argument",
+  "place": "Algebra, Tag 0333, reverse implication, final paragraph; the normality transfer is implemented by clearing two denominators inside the common fraction field",
   "url": "https://stacks.math.columbia.edu/tag/0333"
  },
  "mathlib_searches": [
@@ -116,8 +116,8 @@
   "reviewer": "COMPILER",
   "group": "T2",
   "result": "pass",
-  "landing": "20261013T011936-L-2766394",
-  "kind": "interface",
+  "landing": "20261013T022430-L-3219945",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
