@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+import Sheaf.AlgebraicGeometry.AffineSheafificationTensorVanishingTest
 
 /-! # Tor bounds for an affine module model
 
@@ -56,6 +58,14 @@ theorem finiteTorAmplitude_of_affine_sheafification (S : Scheme.{u})
           (((affinePerfectSheafification S U hU).mapHomologicalComplex (.up ℤ)).obj P)))
     (hTor : HasFiniteTorDimension S K) :
     ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn
-      (ModuleCat.{u} (S.presheaf.obj (.op U))) a b (DerivedCategory.Q.obj P) := by sorry
+      (ModuleCat.{u} (S.presheaf.obj (.op U))) a b (DerivedCategory.Q.obj P) := by
+  let : HasDerivedCategory.{u + 1} (SheafOfModules.{u}
+      (moduleRings (Spec (S.presheaf.obj (.op U))).toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  obtain ⟨a, b, hab, hvan⟩ := hTor
+  refine ⟨a, b, hab, (affine_torAmplitude_iff (S.presheaf.obj (.op U)) P a b hab).mp ?_⟩
+  intro G i hi
+  exact affine_sheafification_tensor_vanishing_test S U hU K P hP G i
+    (hvan ((Modules.pushforward (hU.isoSpec.inv ≫ U.ι)).obj G) i hi)
 
 end AlgebraicGeometry.Scheme
