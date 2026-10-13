@@ -21,24 +21,23 @@
  ],
  "proof": [
   {
-   "text": "Use the exact sequence of the Koszul complexes over R and R/I. Given a degree-one lift of an element in the intersection, its reduction is a cycle; H₁-vanishing makes it a boundary. Lift that boundary and subtract it, leaving coefficients in I and the same element in the generated ideal.",
-   "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-weil-pbc-koszul-regular-sequence",
-    "lem-weil-pbc-regular-sequence-koszul-regular"
-   ],
-   "elementary": false
+   "text": "Restrict the regularity hypothesis from the quotient ring to R using Mathlib RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff. Apply RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last to the exact sequence 0 → I → R → R/I → 0. Exactness of 0 → I is LinearMap.exact_zero_iff_injective and subtype_injective; exactness at R is LinearMap.exact_subtype_mkQ, and the quotient map is surjective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x ∈ I ∩ Ideal.ofList gs, let xi be x viewed as an element of I. Since x belongs to Ideal.ofList gs, its class in R / ((Ideal.ofList gs) • R) is zero. Exactness of the induced maps gives that the class of xi in I / ((Ideal.ofList gs) • I) is in the image of the zero map, hence is zero. Submodule.Quotient.mk_eq_zero gives xi ∈ (Ideal.ofList gs) • I; Submodule.mem_smul_top_iff identifies this with x ∈ (Ideal.ofList gs) • I inside R. Ideal.smul_eq_mul and commutativity give x ∈ I * Ideal.ofList gs.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-koszul-complex",
-  "def-weil-pbc-koszul-regular-sequence",
-  "lem-weil-pbc-regular-sequence-koszul-regular"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0665 proof"
+  "by": "worker",
+  "group": "S2",
+  "date": "2026-10-13",
+  "document": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "place": "map_first_exact_on_four_term_right_exact_of_isSMulRegular_last (lines 550–569), applied to 0 → I → R → R/I; direct exact-sequence proof of the inclusion of Stacks Tag 0665"
  },
  "mathlib_searches": [
   {
@@ -98,10 +97,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T054229-L-446690",
-  "kind": "interface",
+  "landing": "20261013T072405-L-1124863",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
