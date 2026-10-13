@@ -10859,3 +10859,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/E4/Sheaf.RepresentationTheory.OpenStabilizerAdjunction (stage 3; reviewer PASS; first push; landing 20261013T031536-L-3569940 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/F1/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative (stage 3; reviewer PASS; first push; landing 20261013T031536-L-3570063 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffinePerfectHomColimit (stage 3; reviewer PASS; first push; landing 20261013T031537-L-3570228 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffinePerfectMapLift (stage 3; reviewer PASS; first push; landing 20261013T031538-L-3570402 (interface); batch 20261013T031526; modules 3; new nodes 2)

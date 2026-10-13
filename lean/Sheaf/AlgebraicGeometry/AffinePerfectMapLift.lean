@@ -8,12 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof
 import Sheaf.AlgebraicGeometry.PerfectDerivedTensor
-import Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom
-import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.AlgebraicGeometry.DerivedTensorStalkVanishing
 
 /-! # Affine lifting of maps from perfect complexes
 
@@ -105,7 +103,31 @@ theorem exists_perfect_map_lift_of_isAffine
             (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj A).val.presheaf x))) →
         ∀ (n : ℤ) (x : X), x ∉ T →
           Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
-            (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj A').val.presheaf x)) :=
-  sorry
+            (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj A').val.presheaf x)) := by
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := (SheafOfModules.tensorClosed X.sheaf).1.some
+  let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
+  let G := (DerivedCategory.Q (C := C)).objPreimage A
+  obtain ⟨P, q, hP, _hflat, hq, _hepi⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) G
+  let : QuasiIso q := hq
+  let eA : DerivedCategory.Q.obj P ≅ A :=
+    asIso (DerivedCategory.Q.map q) ≪≫ (DerivedCategory.Q (C := C)).objObjPreimageIso A
+  obtain ⟨J, hJ, hI, u, γ, bU, hβ, hγ⟩ :=
+    exists_affine_perfect_tensor_roof X U hU E' A hA α P hP eA
+  let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J
+    (MonoidalCategory.curriedTensor _))
+  let β : B ⟶ A := DerivedCategory.Q.map
+    (HomologicalComplex.mapBifunctorMap (𝟙 P) u (MonoidalCategory.curriedTensor _)
+      (ComplexShape.up ℤ)) ≫
+    DerivedCategory.Q.map (HomologicalComplex.rightUnitor P).hom ≫ eA.hom
+  refine ⟨B, DerivedCategory.Q.obj J, β, γ, ?_, hI, ?_, ⟨bU, hβ, hγ⟩, ?_⟩
+  · exact perfect_derivedTensor X A (DerivedCategory.Q.obj J) hA hI P J hP hJ
+      eA (Iso.refl _)
+  · refine ⟨P, J, hP, hJ, eA, Iso.refl _, Iso.refl _, u, ?_⟩
+    change β = 𝟙 B ≫ β
+    exact (Category.id_comp β).symm
+  · intro T _hT hT n x hx
+    exact derived_tensor_stalk_vanishing X A P J eA hJ x (fun m ↦ hT m x hx) n
 
 end AlgebraicGeometry.Scheme

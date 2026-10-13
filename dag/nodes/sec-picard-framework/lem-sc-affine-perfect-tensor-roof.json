@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-affine-perfect-tensor-roof",
+ "kind": "statement",
+ "title": "Koszul tensor roof for a morphism on an affine open",
+ "statement": "Let X be affine [def-pc-scheme], U a quasi-compact open, E' in D_QCoh(O_X) [def-pc-derived-category], and A perfect [def-pc-perfect-complex]. Fix a K-flat cochain complex P [def-pc-kflat-complex] and an isomorphism e_A:Q(P) ≅ A. For any morphism alpha:A|_U → E'|_U, there exist a K-flat complex J with Q(J) perfect and a chain augmentation u:J → O_X[0]. Put B=Q(Tot(P tensor J)) and beta=Q(id_P tensor u) followed by the right unitor and e_A. Then there exist gamma:B → E' and b_U:B|_U ≅ A|_U with b_U.hom=beta|_U and alpha=b_U.inv followed by gamma|_U. Neither perfectness of B nor its support is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EH, proof of Lemma 36.13.7, construction of the Koszul tensor and its two maps; Tag 06YD for K-flatness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Since A is perfect and E' lies in D_QCoh(O_X), the object R:=R\\mathcal Hom_{O_X}(A,E') lies in D_QCoh(O_X) [lem-sc-rhom-supported-qcoherent] (no boundedness of E' is needed for a perfect source). Its restriction to U is canonically R|_U\\cong R\\mathcal Hom_{O_U}(A|_U,E'|_U) [lem-sc-derived-internal-hom-restrict-open], and applying the global-sections statement [lem-pur-rhom-global-sections] to the ringed space (U,O_U) (the site of opens of U) gives H^0(U,R|_U)\\cong Hom_{D(O_U)}(A|_U,E'|_U). Let s\\in H^0(U,R|_U) be the element corresponding to \\alpha.",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since U is quasi-compact and the principal opens form a basis of X, write U=D(f_1)\\cup\\cdots\\cup D(f_r). Apply the representability proposition [lem-sc-affine-perfect-open-represent-cohomology] to E=R, which lies in D_QCoh(O_X) by Step 1: there are e\\ge1 and a morphism \\xi:I_e\\to R whose image in H^0(U,R|_U) is s, i.e. \\xi|_U\\circ(u_e|_U)^{-1}=s under Hom_{D(O_U)}(O_U,R|_U)=H^0(U,R|_U); moreover I_e is perfect and u_e|_U is an isomorphism.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the actual associated-sheaf Koszul tail J, transported along the affine scheme isomorphism. Its canonical augmentation is a chain map to O_X[0]. Its bounded finite locally free terms make J K-flat by the bounded-above flat criterion. Compute derived tensor-Hom on the given K-flat P and J; transpose xi to gamma. Tensor u with id_P and follow by the right unitor and e_A to obtain beta. Restriction preserves these computations; the inverse augmentation and adjunction naturality identify gamma|_U composed with beta|_U inverse with alpha. These give b_U and the two equations, without any assertion about perfection or support of B.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-sc-affine-perfect-derived-tensor-hom",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-rhom-supported-qcoherent",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-sc-affine-perfect-derived-tensor-hom",
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 08EH, proof of Lemma 36.13.7, construction of the Koszul tensor and its two maps; Tag 06YD for K-flatness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lift morphism from perfect complex on quasi compact open after tensor augmentation",
+   "results": "Eight hits on affine transition limits and derived fractions, none matching the Koszul tensor construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPerfect",
+   "results": "0 hits: unknown identifier IsPerfect.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_affine_perfect_tensor_roof|derived_tensor_stalk_vanishing",
+   "results": "msearch: 0 hits. Local rg found only the assigned theorem and its callers, and the existing support and tensor interfaces.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lift map from perfect complex on quasi compact open using a Koszul augmentation",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle and local source search instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectMapLift",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-perfect-map-lift",
+   "place": "Stage-3 K-flat-model decomposition",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectTensorRoof.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_tensor_roof",
+  "statement": "theorem exists_affine_perfect_tensor_roof\n    (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))]\n    (E' : schemeDerivedQCohCategory X) (A : schemeDerivedCategory X) (hA : IsPerfect X A)\n    (α : ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj A ⟶\n        ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj E'.obj)\n    (P : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (eA : DerivedCategory.Q.obj P ≅ A) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,\n      CochainComplex.IsKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧\n      ∃ u : J ⟶ HomologicalComplex.tensorUnit\n          (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ),\n        let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _))\n        let β : B ⟶ A := DerivedCategory.Q.map\n          (HomologicalComplex.mapBifunctorMap (𝟙 P) u (curriedTensor _) (ComplexShape.up ℤ)) ≫\n          DerivedCategory.Q.map (HomologicalComplex.rightUnitor P).hom ≫ eA.hom\n        let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory\n        ∃ (γ : B ⟶ E'.obj) (bU : R.obj B ≅ R.obj A),\n          bU.hom = R.map β ∧ α = bU.inv ≫ R.map γ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

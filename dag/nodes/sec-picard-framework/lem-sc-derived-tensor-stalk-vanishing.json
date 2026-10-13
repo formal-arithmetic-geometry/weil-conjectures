@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-derived-tensor-stalk-vanishing",
+ "kind": "statement",
+ "title": "K-flat tensor preserves cohomological vanishing at a point",
+ "statement": "Let X be a scheme [def-pc-scheme], A in D(O_X) [def-pc-derived-category], P and J cochain complexes [def-pc-cochain-complex-modules], e_A:Q(P) ≅ A, and J K-flat [def-pc-kflat-complex]. At any point x of X, if every cohomology sheaf of A has zero stalk at x, then every cohomology sheaf of Q(Tot(P tensor J)) [def-pc-tensor-complex-sheaves] has zero stalk at x. No K-flatness of P, perfectness, affine hypothesis, or closed subset is needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YB; exactness of stalks and the support argument accompanying Tag 08EH"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The module stalk functor is exact: the sheaf-to-abelian-sheaf functor preserves finite limits and colimits, and the abelian sheaf stalk functor is exact by Mathlib. Reflect through the faithful module-to-abelian-group functor. Its homology comparison and the homology factors of Q transport the hypothesis along e_A to acyclicity of the stalk complex P_x.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the forward stalk K-flat criterion to J and the acyclic complex P_x. Thus Tot(P_x tensor J_x) is acyclic.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the stalk-total-tensor isomorphism to transfer acyclicity to the stalk of Tot(P tensor J). Exactness of the stalk functor, its homology comparison and the Q homology factors identify its zero homology with the cohomology stalks of Q(Tot(P tensor J)). In ModuleCat, a zero object has a subsingleton underlying type.",
+   "uses": [
+    "lem-pc-stalk-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 06YB; exactness of stalks and the support argument accompanying Tag 08EH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor of K flat complexes preserves zero cohomology stalk",
+   "results": "Eight flat-module exactness and Tor results; no derived sheaf stalk vanishing statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ExactAt.isZero_homology",
+   "results": "One hit, used in the proof to convert acyclicity to zero homology.",
+   "date": "2026-10-13",
+   "verdict": "useful tool, not a complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_affine_perfect_tensor_roof|derived_tensor_stalk_vanishing",
+   "results": "msearch: 0 hits. Local rg found only the assigned theorem and its callers, and the existing support and tensor interfaces.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat tensor preserves vanishing of cohomology at a stalk",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle and local source search instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectMapLift",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-perfect-map-lift",
+   "place": "Stage-3 K-flat-model decomposition",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorStalkVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorStalkVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derived_tensor_stalk_vanishing",
+  "statement": "theorem derived_tensor_stalk_vanishing\n    (X : Scheme.{uX})\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    (A : schemeDerivedCategory X)\n    (P J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)\n    (eA : DerivedCategory.Q.obj P ≅ A)\n    (hJ : CochainComplex.IsKFlat (R := X.sheaf) J) (x : X)\n    (hx : ∀ n : ℤ, Subsingleton (↑(TopCat.Presheaf.stalk\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj A).val.presheaf x))) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    ∀ n : ℤ, Subsingleton (↑(TopCat.Presheaf.stalk\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj\n        (DerivedCategory.Q.obj\n          (CochainComplex.mapBifunctor P J (curriedTensor _)))).val.presheaf x))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
