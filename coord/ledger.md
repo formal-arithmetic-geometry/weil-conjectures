@@ -10943,3 +10943,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/V3/Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation (stage 3; reviewer PASS; first push; landing 20261013T033009-L-3678947 (interface); batch 20261013T032954; modules 3; new nodes 2)
 - 03:30 L: merged deliver/V4/Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyBounded (stage 3; reviewer PASS; first push; landing 20261013T033010-L-3679082 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/W2/Sheaf.RingTheory.GenericFlatness (stage 3; reviewer PASS; first push; landing 20261013T033010-L-3679254 (proof); batch 20261013T032954; modules 1; new nodes 0)
+- 03:30 L: merged deliver/W2/Sheaf.RingTheory.KoszulConormalTopHomologyPos (stage 3; reviewer PASS; after a return; landing 20261013T033010-L-3679377 (proof); batch 20261013T032954; modules 1; new nodes 0)
