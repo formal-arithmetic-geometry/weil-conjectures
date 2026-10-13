@@ -661,6 +661,7 @@ public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.CrossIdeal
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
+public import WeilConjectures.AlgebraicGeometry.TorsionAbelianBaseChange
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
