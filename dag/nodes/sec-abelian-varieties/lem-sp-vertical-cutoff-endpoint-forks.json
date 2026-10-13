@@ -13,23 +13,33 @@
  },
  "proof": [
   {
-   "text": "Use the cochain truncation formulas of Tag 0118. Write E for L extended by zero and B for its upper cutoff at b-1. In degree a-1, the inclusion B -> E is invertible because a-1 < b-1; in degree a it is monomorphic. The lower cutoff at a-1 identifies its boundary object with cycles of E at a-1, hence with the kernel of E.d(a-1,a). The factorization equation hg identifies g with that cycles inclusion into B. Transport the cycles kernel fork through the degree-(a-1) isomorphism; postcomposition of B.d with the monomorphic inclusion at a detects its zero composites, giving the first kernel fork.",
+   "text": "Use the already proved private coordinate lemmas CochainComplex.truncLEXIsoCycles_comp_iCycles from UpperTruncationStepSES and inclusion_f_isIso from VerticalCutoffComparisonEpi (proof-only import all VerticalCutoffComparisonEpi exposes these helpers and its dependencies). Transport Mathlib cyclesIsKernel through truncLEXIsoCycles at a-1 to obtain upper_boundary_kernel. In nested_upper_kernel, cancel the monomorphic upper inclusion at a and use chain-map compatibility to identify zero composites. Transport the fork through the invertible upper inclusion at a-1. The factorization equation hg determines its inclusion; IsKernel.isoKernel transports the source coordinate. All transports and zero equations are proved locally, with no new assumption.",
    "uses": [
     "def-sp-double-complex-vertical-window",
-    "lem-sp-double-complex-vertical-tower-maps"
+    "lem-sp-double-complex-vertical-tower-maps",
+    "lem-weil-pbc-truncation-step-ses",
+    "lem-sp-vertical-cutoff-comparison-epi"
    ],
    "elementary": false
   },
   {
-   "text": "If a < b-1, both B and E agree at a. The lower projection at a is E.pOpcycles a, which is the cokernel of E.d(a-1,a). Upper truncation does not change this coordinate, so transport E.opcyclesIsCokernel along the truncation coordinate isomorphisms. If a=b-1, B at a is E.cycles a. In this case the window coordinate is E.homology a: taking cycles of the lower truncation at a computes cycles modulo the preceding image. The map is E.homologyπ a, which is the cokernel of E.toCycles(a-1,a). The differential of B into its cycles boundary is exactly that toCycles map after the invertible degree-(a-1) inclusion. Transport E.homologyIsCokernel to obtain the second fork.",
+   "text": "For the lower boundary use the proved private CochainComplex.pi_f_self from LowerTruncationTransitionKernel to identify the projection with pOpcycles followed by the inverse boundary isomorphism. Transport Mathlib opcyclesIsCokernel through that isomorphism. For the adjacent-endpoint case, cycles_lower_boundary_cokernel proves that cyclesMap of the lower projection equals homologyπ followed by an isomorphism: the lower projection is a quasi-isomorphism at a, and the lower truncation has zero incoming differential, making its homologyπ invertible. Homology naturality gives the identification. Transport Mathlib homologyIsCokernel through this target isomorphism.",
    "uses": [
-    "def-sp-double-complex-vertical-window",
-    "lem-sp-double-complex-vertical-tower-maps"
+    "lem-pc-lower-truncation-transition-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "The component zero-composite equations follow from the two forks, or from the chain-map identities and the zero degree-a term of the lower cutoff and zero degree-(a-1) term of the window. Since a>0, restriction keeps both integer boundary degrees, which become a.toNat-1 and a.toNat. This includes a=1, adjacent endpoints b=a+1, the zero complex, and zero differentials.",
+   "text": "In upper_projection_cokernel split a<t versus t=a, where t=b-1. Below t, transport the preceding opcycles cokernel through the upper inclusions in the source and target; inclusion naturality identifies the resulting map. At t=a, identify the upper-boundary objects with cycles, derive the differential-to-cycles formula by cancelling iCycles, and use the proved private truncLEXIsoCycles_naturality from UpperTruncationStepSES. Transport the cyclesMap cokernel of the preceding step through both upper-boundary isomorphisms. The local cokernel_post_iso helper implements target transport. Every helper in this module is proved.",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses",
+    "lem-pc-lower-truncation-transition-kernel",
+    "lem-sp-vertical-cutoff-comparison-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let m=a.toNat-1 and n=a.toNat. Positivity gives the embedding equalities m maps to a-1 and n maps to a. Use restrictionXIso, restriction_d_eq and restrictionMap_f' to transport both integer forks to these natural-number degrees. Evaluate hg at m and cancel the extension coordinate isomorphism to obtain the kernel inclusion equation. Cancel the restriction coordinate isomorphisms to compare zero composites. Combine the two universal properties and their zero equations into the unchanged conjunction.",
    "uses": [
     "def-sp-double-complex-vertical-window",
     "lem-sp-double-complex-vertical-tower-maps"
@@ -39,12 +49,15 @@
  ],
  "proof_deps": [
   "def-sp-double-complex-vertical-window",
-  "lem-sp-double-complex-vertical-tower-maps"
+  "lem-sp-double-complex-vertical-tower-maps",
+  "lem-weil-pbc-truncation-step-ses",
+  "lem-sp-vertical-cutoff-comparison-epi",
+  "lem-pc-lower-truncation-transition-kernel"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0118",
-  "place": "homology-section-truncations, cochain canonical truncations (3) and (4), specialized to the boundary of the upper cutoff."
+  "place": "homology-section-truncations, cochain canonical truncations (3) and (4); G2 formalizes the boundary-coordinate and restriction transports using proved library helpers and Mathlib universal properties."
  },
  "mathlib_searches": [
   {
@@ -241,10 +254,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T054241-L-450556",
-  "kind": "interface",
+  "landing": "20261013T065102-L-897642",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
