@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-exact-functor-stupid-tail-triangle",
+ "kind": "statement",
+ "title": "Kernel triangle of the stupid tail under an exact functor",
+ "statement": "Let C,D be abelian categories with derived categories and R:C to D an additive exact functor [def-sp-abelian, def-weil-abstract-derived-category]. Let K be an integer cochain complex, and suppose R(K) is exact in all degrees at most r. Set T to the stupid tail of K in degrees at least r and M to the kernel of R(d^r). There exist morphisms making a distinguished triangle single(M,r) to D(R)(Q(T)) to D(R)(Q(K)) to single(M,r)[1] [def-weil-triangulated-category]. No boundedness, finiteness, or perfectness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, proof of Lemma 36.13.6, finite-free lift and stupid truncation; read online at https://stacks.math.columbia.edu/tag/08EG"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the inclusion of the explicit stupid tail T into K from the termwise truncation isomorphisms above r and zero maps below r. The complex shape and zero source in discarded degrees prove that it commutes with differentials. Map it by R, giving j:S to L with isomorphisms in each degree at least r.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The canonical good-truncation sequence S.truncLE(r) to S to B is degreewise short exact. Apply [lem-weil-pbc-complex-ses-triangle]. The first complex has support exactly in degree r: its term there is cycles(S,r). The kernel universal property and j in degrees r,r+1 identify this term with M. Evaluate the single-complex isomorphism and map it to the derived category.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical map B to S.truncGE(r+1) is a quasi-isomorphism. The map induced by j from this good truncation to L.truncGE(r+1) is a quasi-isomorphism, since all three components computing homology in each degree above r are isomorphisms. Exactness through r makes the projection L to L.truncGE(r+1) a quasi-isomorphism. Compose these isomorphisms after localization and the exact-functor comparison to identify B with D(R)(Q(K)); identify the middle term similarly. Conjugate all three arrows of the SES triangle by these isomorphisms and use isomorphic_distinguished. This is implemented entirely in Lean with Mathlib truncation and kernel lemmas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, proof of Lemma 36.13.6, finite-free lift and stupid truncation; read online at https://stacks.math.columbia.edu/tag/08EG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stupid truncation triangle kernel single complex exact below cutoff",
+   "results": "8 hits: CochainComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside, HomologicalComplex.isZero_stupidTrunc_X, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat, HomologicalComplex.shortComplexTruncLE_shortExact_δ_eq_zero, CochainComplex.shortComplexTruncLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stupid truncation triangle kernel single complex exact below cutoff",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES_distinguished",
+   "results": "1 hits: DerivedCategory.triangleOfSES_distinguished",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stupidTrunc.*triangle|triangle.*stupidTrunc",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: finite-free affine lift and low truncation; Kernel triangle of the stupid tail under an exact functor",
+   "via": [
+    "lem-sc-affine-perfect-low-truncation-triangle",
+    "lem-sc-affine-perfect-plus-locally-free",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExactFunctorStupidTailTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactFunctorStupidTailTriangle.lean",
+  "declaration": "DerivedCategory.exactFunctor_stupidTail_triangle",
+  "statement": "theorem exactFunctor_stupidTail_triangle\n    {C : Type u₁} [Category.{v₁} C] [Abelian C]\n    {D : Type u₂} [Category.{v₂} D] [Abelian D]\n    [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]\n    (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n    (K : CochainComplex C ℤ) (r : ℤ)\n    (hexact : ∀ i : ℤ, i ≤ r →\n      ((R.mapHomologicalComplex (.up ℤ)).obj K).ExactAt i) :\n    ∃ (i : (singleFunctor D r).obj (kernel (R.map (K.d r (r + 1)))) ⟶\n          R.mapDerivedCategory.obj (Q.obj (K.stupidTrunc (ComplexShape.embeddingUpIntGE r))))\n      (p : R.mapDerivedCategory.obj (Q.obj\n          (K.stupidTrunc (ComplexShape.embeddingUpIntGE r))) ⟶ R.mapDerivedCategory.obj (Q.obj K))\n      (δ : R.mapDerivedCategory.obj (Q.obj K) ⟶\n          ((singleFunctor D r).obj (kernel (R.map (K.d r (r + 1)))))⟦(1 : ℤ)⟧),\n      Triangle.mk i p δ ∈ distTriang (DerivedCategory D)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

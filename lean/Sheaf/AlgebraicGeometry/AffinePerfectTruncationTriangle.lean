@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree
-import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import Sheaf.AlgebraicGeometry.AffineLiftEventualFreeKernels
+import Sheaf.AlgebraicGeometry.FiniteFreeStupidTailPerfect
+import Sheaf.AlgebraicGeometry.ExactFunctorStupidTailTriangle
 
 /-! # Arbitrarily low perfect truncation triangles on affine schemes
 
@@ -94,6 +94,27 @@ theorem exists_low_perfect_truncation_triangle
                   (Modules.overEquiv U)).mapDerivedCategory.obj P ⟶ F)
             (δ : F ⟶ ((DerivedCategory.singleFunctor _ r).obj M)⟦(1 : ℤ)⟧),
             Triangle.mk i p δ ∈ distTriang (schemeDerivedCategory U.toScheme) := by
-  sorry
+  classical
+  let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Modules.overEquiv U)
+  obtain ⟨N, hN⟩ := affine_lift_eventual_free_kernels X U hU F hF K hbounded hfree hrep
+  refine ⟨N, ?_⟩
+  intro r hr
+  obtain ⟨hexact, hM⟩ := hN r hr
+  let M := kernel (R.map (K.d r (r + 1)))
+  let P := DerivedCategory.Q.obj (K.stupidTrunc (ComplexShape.embeddingUpIntGE r))
+  have hP : IsPerfect X P := finiteFree_stupidTail_isPerfect X K hbounded hfree r
+  obtain ⟨i, p, δ, ht⟩ := DerivedCategory.exactFunctor_stupidTail_triangle R K r hexact
+  obtain ⟨e⟩ := hrep
+  refine ⟨M, hM, P, hP, i, p ≫ e.hom, e.inv ≫ δ, ?_⟩
+  apply isomorphic_distinguished _ ht _
+  refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm ?_ ?_ ?_
+  · simp
+  · simp
+  · simp
+
 
 end AlgebraicGeometry.Scheme

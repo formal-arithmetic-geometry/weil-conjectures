@@ -11694,3 +11694,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/Q2/Sheaf.RingTheory.WellOrderedPresentationComponentData (stage 3; reviewer PASS; first push; landing 20261013T082405-L-1644984 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing (stage 3; reviewer PASS; after a return; landing 20261013T082406-L-1645201 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily (stage 3; reviewer PASS; first push; landing 20261013T082406-L-1645306 (proof); batch 20261013T082326; modules 1; new nodes 1)
+- 08:24 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle (stage 3; reviewer PASS; first push; landing 20261013T082406-L-1645406 (interface); batch 20261013T082326; modules 4; new nodes 3)

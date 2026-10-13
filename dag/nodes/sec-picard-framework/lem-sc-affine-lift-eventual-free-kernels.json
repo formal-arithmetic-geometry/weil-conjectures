@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-affine-lift-eventual-free-kernels",
+ "kind": "statement",
+ "title": "Eventual exactness and finite locally free kernels of an affine lift",
+ "statement": "Let X be an affine scheme [def-pc-scheme], U a quasi-compact open, F a perfect object of D(O_U) [def-pc-derived-category, def-pc-perfect-complex], and K a bounded-above complex of finite free O_X-modules whose derived restriction represents F. Write R for restriction of module sheaves to U. There is an integer N such that, for every r at most N, R(K) is exact in every degree at most r and the kernel of R(d^r) is finite locally free [def-sc-finite-locally-free-sheaf]. This only concerns the restricted complex; no equality of image and kernel on X is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, proof of Lemma 36.13.6, finite-free lift and stupid truncation; read online at https://stacks.math.columbia.edu/tag/08EG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-perfect-pseudo-coherent-locally-finite-tor] to F. Quasi-compactness gives a global Tor interval [a,b] by [lem-pc-quasi-compact-finite-tor-dimension]. Tensoring with the structure sheaf then gives vanishing of ordinary cohomology below a; exact restriction and the supplied representation transfer this to R(K).",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-pc-quasi-compact-finite-tor-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify X with Spec of its global sections, transporting K and U along that scheme isomorphism. Apply [lem-pc-affine-finite-free-sheaf-complex-lift] to the transported K. This gives a bounded-above finite-free module complex whose associated sheaf complex is isomorphic to K. The affine tilde/sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] carries the termwise maps and their kernels and images compatibly.",
+   "uses": [
+    "lem-pc-affine-finite-free-sheaf-complex-lift",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each r at most N=a-1, apply [lem-sc-affine-truncation-kernel-finite-locally-free] using this model and the common Tor interval. Its restricted image identifies with the outgoing kernel on U and is finite locally free. Transport this property back through the termwise and scheme-isomorphism comparisons. Ordinary cohomology vanishing gives exactness in every degree i at most r. For U empty all restricted sheaves are zero; take N=0 and use the rank-zero sheaf.",
+   "uses": [
+    "lem-sc-affine-truncation-kernel-finite-locally-free"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-free-sheaf-complex-lift",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-quasi-compact-finite-tor-dimension",
+  "lem-sc-affine-truncation-kernel-finite-locally-free",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EG, proof of Lemma 36.13.6, finite-free lift and stupid truncation; read online at https://stacks.math.columbia.edu/tag/08EG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "low kernels finite locally free of bounded above finite free complex representing perfect on quasi compact open affine",
+   "results": "8 hits: AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "low kernels finite locally free of bounded above finite free complex representing perfect on quasi compact open affine",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ExactAt",
+   "results": "12 hits: HomologicalComplex.ExactAt, HomologicalComplex.acyclic_iff, HomologicalComplex.ExactAt.of_isZero, HomologicalComplex.exactAt_iff, HomologicalComplex.ExactAt.isZero_homology, HomologicalComplex.exactAt_iff_isZero_homology, HomologicalComplex.ExactAt.of_iso, HomologicalComplex.exactAt_iff'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncationKernel_finiteLocallyFree",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: finite-free affine lift and low truncation; Eventual exactness and finite locally free kernels of an affine lift",
+   "via": [
+    "lem-sc-affine-perfect-low-truncation-triangle",
+    "lem-sc-affine-perfect-plus-locally-free",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLiftEventualFreeKernels",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLiftEventualFreeKernels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_lift_eventual_free_kernels",
+  "statement": "theorem affine_lift_eventual_free_kernels\n    (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F)\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hbounded : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (K.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (K.X i ≅ SheafOfModules.free\n      (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin r))))\n    (hrep : Nonempty\n      (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj K) ≅ F)) :\n    let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)\n    ∃ N : ℤ, ∀ r : ℤ, r ≤ N →\n      (∀ i : ℤ, i ≤ r → ((R.mapHomologicalComplex (.up ℤ)).obj K).ExactAt i) ∧\n      (kernel (R.map (K.d r (r + 1)))).IsFiniteLocallyFree",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T082406-L-1645406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
