@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-affine-completion-baseChange-unit",
+ "kind": "statement",
+ "title": "Sheaf completion inverts the adic base-change unit on arbitrary modules",
+ "statement": "Let X be affine Noetherian and J ideal sheaf data. Put A=Γ(X,⊤), I=J(⊤), S=AdicCompletion I A. Let L be tilde followed by pullback along X≅Spec A and C be L followed by formal completion along J. For every A-module T, C sends the linear tensor unit T→S⊗T, x↦1⊗x, to an isomorphism of inverse systems. No finite generation of T is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine construction, using Algebra Tag 05GG and Schemes Tags 01I7, 01IC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For every positive n the finitely generated ideal completion quotient comparison gives A/I^n ≅ S/I^n S. Tensoring and right exactness identify T/I^n T with (S tensor T)/I^n(S tensor T), through the tensor unit.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of tilde identifies these module quotients with sheaf formal quotients. Pullback along the affine scheme isomorphism transports the ideal to J. Thus each component of C(unit) is invertible; the componentwise criterion makes the natural transformation invertible.",
+   "uses": [
+    "lem-weil-pbc-formal-module-quotient-affine-projection",
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-formal-module-quotient-affine-projection",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine construction; the component comparisons are written out in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The map from an arbitrary module T to S tensor T along the adic completion induces an isomorphism modulo every positive power of the ideal",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian requires finite T, so does not supply this assertion",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.quotient",
+   "results": "Unknown identifier; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(ker|quotient)|baseChange.*[Qq]uotient|quotient.*[Tt]ensor",
+   "results": "AdicCompletion.pow_smul_top_eq_ker_eval; TensorProduct.Quotient and RightExactness provide algebraic tools, no sheaf quotient-system comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product adic completion ring quotient arbitrary module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledAffineCandidate",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine construction and finiteness parts of Tag 0889(1); candidate proof step 3",
+   "via": [
+    "lem-weil-pbc-torsion-controlled-affine-candidate",
+    "lem-weil-pbc-torsion-controlled-affine-algebraization",
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCompletionBaseChangeUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCompletionBaseChangeUnit.lean",
+  "declaration": "AlgebraicGeometry.affine_completion_baseChange_unit",
+  "statement": "theorem affine_completion_baseChange_unit\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData) :\n    let A := Γ(X, ⊤)\n    let I := J.ideal ⟨⊤, isAffineOpen_top X⟩\n    let S := AdicCompletion I A\n    let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom\n    let C := L ⋙ formalCompletionFunctor J\n    ∀ T : ModuleCat.{u} A,\n      IsIso (C.map (ModuleCat.ofHom (TensorProduct.mk A S T (1 : S))))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T062529-L-735202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T062529-L-735202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
