@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives
-import Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
+import Sheaf.AlgebraicGeometry.KoszulOpenExponentOneUnit
 
 /-! # Structure evaluation with a single Koszul normalization
 
@@ -74,6 +74,10 @@ theorem koszulOpen_structure_evaluation
         (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),
         b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧
       b (koszulOpenStructure A) (𝟙 _) =
-        H.map (G.map (koszulOpenUnit A r f 0)) (c 0) := by sorry
+        H.map (G.map (koszulOpenUnit A r f 0)) (c 0) := by
+  obtain ⟨b, hb, hunit⟩ := derivedOpenStructure_evaluation_unit.{u, w, v}
+    A (koszulOpen A r f)
+  refine ⟨b, hb, ?_⟩
+  exact hunit.trans (koszulOpen_exponent_one_unit.{u, w, v} A r f).symm
 
 end AlgebraicGeometry
