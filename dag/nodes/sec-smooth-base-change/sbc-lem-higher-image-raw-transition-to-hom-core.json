@@ -1,0 +1,102 @@
+{
+ "id": "sbc-lem-higher-image-raw-transition-to-hom-core",
+ "kind": "statement",
+ "title": "Morphism-level raw transition comparison",
+ "statement": "Under the hypotheses of sbc-lem-higher-image-raw-transition-to-hom, the two natural morphisms from the raw presheaf at U to the higher direct image target are equal before applying them to z.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Expand the canonical comparison and transition maps and use naturality of the derived adjunction unit and the triangle identity, together with functoriality of homology and the shift comparison.",
+   "uses": [
+    "sbc-lem-higher-image-raw-triangle-restriction",
+    "def-sbc-module-higher-image-transitions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived adjunction unit and homology shift comparison",
+   "results": "No matching theorem for this fixed higher direct image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.whiskerLeft preadditiveYoneda homologyFunctor",
+   "results": "Generic functor naturality results only; no fixed comparison theorem.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageRawTransition_toHom_core homologyFunctor",
+   "results": "No existing declaration in lean/ or Mathlib.",
+   "verdict": "no match",
+   "date": "2026-10-14"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom",
+  "date": "2026-10-14",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-transition-to-hom"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawTransitionToHomCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawTransition_toHom_core",
+  "statement": "theorem higherDirectImageRawTransition_toHom_core (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (v : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') (U : S.Etale) : (higherDirectImagePresheafToHom Λ h' q K').app (op U) ∘ (higherDirectImageRawTrianglePullback Λ a h h' w q K K' v U) = (higherDirectImagePresheafToHom Λ h q K).app (op U) ≫ (Functor.whiskerLeft (freeSheaf Λ S).op (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ q).map (lowerStarPlusTransition Λ a h h' w K ≫ R+((h')_*[ModuleCat.{u + 1} Λ]).map v)))).app (op U)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T222404-L-1223262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T222404-L-1223262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

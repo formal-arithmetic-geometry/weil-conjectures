@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHomCore
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import
@@ -57,6 +58,9 @@ theorem higherDirectImageRawTransition_toHom
       (higherDirectImagePresheafToHom Λ h q K).app (op U) z ≫
         (DerivedCategory.Plus.homologyFunctor _ q).map
           (lowerStarPlusTransition Λ a h h' w K ≫
-            R+((h')_*[ModuleCat.{u + 1} Λ]).map v) := by sorry
+            R+((h')_*[ModuleCat.{u + 1} Λ]).map v) := by
+  have H := higherDirectImageRawTransition_toHom_core Λ a h h' w q K K' v U
+  have Hz := congrArg (fun f => f z) H
+  exact Hz
 
 end AlgebraicGeometry.Etale
