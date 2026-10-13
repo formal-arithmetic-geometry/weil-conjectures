@@ -80,7 +80,7 @@ theorem tensorClosed (R : Sheaf J CommRingCat.{u}) :
   · intro F F' G G' H H' f g h t
     rw [tensorHom_def, Category.assoc, tensorHomEquiv_whiskerRight_comp,
       tensorHomEquiv_whiskerLeft_comp, tensorHomEquiv_comp_homObjMap]
-    simp only [homObjMap_comp_homObjMap, Category.assoc,
-      Category.comp_id]
+    -- Reassociate the induced internal-Hom maps and cancel identities.
+    simp only [Category.assoc, homObjMap_comp_homObjMap, Category.comp_id]
 
 end SheafOfModules
