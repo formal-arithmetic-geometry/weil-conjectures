@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 
+import Sheaf.RingTheory.PolynomialLocalIdealRelationFiniteStage
+
 /-! # Finite-coefficient descent for localized weakly regular sequences
 
 Source: Stacks Project, Algebra, Tag 00SV, filtered-colimit paragraphs of the proof,
@@ -21,6 +23,15 @@ and Tag 00DB (exactness of filtered colimits).
 universe u
 
 namespace RingTheory.Sequence
+
+private theorem regular_quotient_iff_ideal_cancel
+    {A : Type*} [CommRing A] (I : Ideal A) (a : A) :
+    IsSMulRegular (A ⧸ (I • ⊤ : Submodule A A)) a ↔
+      ∀ x : A, a * x ∈ I → x ∈ I := by
+  change IsSMulRegular (A ⧸ (I * ⊤ : Ideal A)) a ↔ _
+  rw [Ideal.mul_top]
+  simpa only [smul_eq_mul] using
+    (isSMulRegular_quotient_iff_mem_of_smul_mem (I : Submodule A A) a)
 
 /-- Weak regularity in polynomial local rings passes from all finite type coefficient
 subrings containing a fixed finite type subring to the full coefficient ring.
@@ -59,6 +70,35 @@ theorem isWeaklyRegular_polynomial_local_of_finiteType_subrings
             (Localization.AtPrime (Q.comap (MvPolynomial.map B.subtype)))))) :
     IsWeaklyRegular (Localization.AtPrime Q)
       ((List.ofFn (fun i ↦ MvPolynomial.map R₀.subtype (f₀ i))).map
-        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q))) := by sorry
+        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q))) := by
+  constructor
+  intro i hi
+  apply (regular_quotient_iff_ideal_cancel _ _).mpr
+  intro x hx
+  have hic : i < c := by simpa using hi
+  obtain ⟨B, hB, hft, φ, hφ, y, hy, hrel⟩ :=
+    exists_finiteType_subring_local_ideal_relation R₀ hR₀
+      ((List.ofFn f₀).take i) (f₀ ⟨i, hic⟩) Q x (by
+        simpa only [List.getElem_map, List.getElem_ofFn, List.map_take,
+          List.map_map, List.map_ofFn, Function.comp_def] using hx)
+  have hreg := (hstage B hB hft).regular_mod_prev i (by simpa using hic)
+  have hymem := (regular_quotient_iff_ideal_cancel _ _).mp hreg y (by
+    simpa only [List.getElem_map, List.getElem_ofFn, List.map_take,
+      List.map_map, List.map_ofFn, Function.comp_def] using hrel)
+  have hmaps :
+      (((List.ofFn (fun j ↦ MvPolynomial.map (Subring.inclusion hB) (f₀ j))).map
+        (algebraMap (MvPolynomial (Fin n) B)
+          (Localization.AtPrime (Q.comap (MvPolynomial.map B.subtype))))).map φ) =
+      ((List.ofFn (fun j ↦ MvPolynomial.map R₀.subtype (f₀ j))).map
+        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q))) := by
+    simp only [List.map_ofFn]
+    congr 1
+    funext j
+    dsimp only [Function.comp_def]
+    rw [hφ, MvPolynomial.map_map]
+    rfl
+  have hmem := Ideal.mem_map_of_mem φ hymem
+  rw [Ideal.map_ofList, List.map_take, hmaps, hy] at hmem
+  exact hmem
 
 end RingTheory.Sequence

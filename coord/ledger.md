@@ -11197,3 +11197,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ModulePullbackComparisonIsoTransport (stage 3; reviewer PASS; first push; landing 20261013T045617-L-140660 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension (stage 3; reviewer PASS; first push; landing 20261013T045618-L-140791 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:56 L: merged deliver/X2/Sheaf.Paper.EtaleCECoherentPrescribedResolutions (stage 3; reviewer PASS; first push; landing 20261013T045618-L-140899 (interface); batch 20261013T045507; modules 2; new nodes 1)
+- 04:56 L: merged deliver/X2/Sheaf.RingTheory.PolynomialLocalWeakRegularSequenceDescent (stage 3; reviewer PASS; first push; landing 20261013T045619-L-141012 (interface); batch 20261013T045507; modules 2; new nodes 1)
