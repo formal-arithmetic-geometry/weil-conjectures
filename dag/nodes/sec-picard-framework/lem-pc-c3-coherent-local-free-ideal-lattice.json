@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-c3-coherent-local-free-ideal-lattice",
+ "kind": "statement",
+ "title": "Extension of a supplied finite closed free local map",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], i:Z -> X a closed immersion [def-weil-closed-immersion], F a coherent O_X-module [pqf-def-coherent, def-weil-sheaf-of-modules-category], r a natural number, U an open of X, and phi:(i_*(O_Z^{direct sum r}))|U -> F|U a given map. There is a coherent ideal I on Z [def-sbc-ideal-sheaf-powers] such that the natural inclusion j:i_*(I^{direct sum r}) -> i_*(O_Z^{direct sum r}) is invertible on U, and there is a global map alpha:i_*(I^{direct sum r}) -> F satisfying alpha|U = (j|U) followed by phi. Z need not be integral, U may be empty, and phi need not be injective or invertible.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01YB",
+  "place": "Tag 01YB extension clause, used on a finite closed free source as in Tag 01YE, last paragraph; affine closed-pushforward calculation of Tag 01QY."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "The closed free source H=i_*(O_Z^{direct sum r}) is coherent: over an affine Spec A where Z is cut out by L it has sections (A/L)^r. These are finite A-modules, and closed pushforward preserves quasi-coherence.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let K be the reduced ideal of X minus U. Apply the ideal-power extension theorem to the given map H|U -> F|U, obtaining K^n H -> F which agrees with phi on U.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-coherent-homs-over-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine Spec A, K^n H has sections (K(A)^n (A/L))^r. The ideals K(A)^n (A/L) commute with localization and glue to a quasi-coherent ideal I on Z, the nth power of the extended ideal K O_Z. Since Z is Noetherian, I is coherent. For n=0 use O_Z. These affine identifications glue compatibly with inclusions and identify K^n H with i_*(I^{direct sum r}).",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since K is the unit ideal on U, I is the unit ideal on the inverse image of U, so j|U is invertible. Transport the extended map along the identification to obtain alpha and its equality on U. The same computation handles r=0, empty U, and U=X without any generic-point assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-coherent-homs-over-open",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "C3",
+  "date": "2026-10-13",
+  "based_on": "Stacks Project source, opened online; explicit affine compatibility and edge-case details supplied by C3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extend an isomorphism of coherent sheaves on an open subset from an ideal multiple of a finite free closed pushforward",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "Internal Server Error; search unavailable",
+    "top": []
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend local isomorphism from closed pushforward finite free sheaf to coherent module by multiplying source with an ideal",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+     "SheafOfModules.IsFinitePresentation"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "no exact local-model or finite closed-source extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*extend|extend.*ideal",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "Mathlib search; also inspected Sheaf and WeilConjectures declarations and blueprint searches",
+    "top": []
+   },
+   "date": "2026-10-13",
+   "verdict": "local_closed_ideal_map_extension handles rank one; exists_generic_ideal_extension works on an integral scheme, not on an ambient closed free source. Neither states this finite-rank agreement and invertible inclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentGenericFilteredSource",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 01YE construction in step 1 of lem-pc-s3-coherent-generic-filtered-source; Tag 01YB extension clause, used on a finite closed free source as in Tag 01YE, last paragraph; affine closed-pushforward calculation of Tag 01QY. No imported blueprint ancestor is recorded for the parent, whose created.item is a module name.",
+   "via": [
+    "lem-pc-s3-coherent-generic-filtered-source"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentLocalFreeIdealLattice",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentLocalFreeIdealLattice.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_local_free_ideal_lattice",
+  "statement": "theorem coherent_local_free_ideal_lattice\n    {X Z : Scheme.{u}} [IsNoetherian X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (r : ℕ) (U : X.Opens)\n    (φ : (restrictFunctor U.ι).obj\n        ((pushforward i).obj (∐ fun _ : Fin r => SheafOfModules.unit Z.ringCatSheaf)) ⟶\n      (restrictFunctor U.ι).obj F) :\n    ∃ (I : Z.IdealSheafData),\n      RingedSpace.IsCoherent Z.toRingedSpace I.toModules ∧\n      IsIso ((restrictFunctor U.ι).map\n        ((pushforward i).map (Sigma.desc (fun j : Fin r ↦ I.toModulesι ≫\n          Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) j)))) ∧\n      ∃ (α : (pushforward i).obj (∐ fun _ : Fin r => I.toModules) ⟶ F),\n        (restrictFunctor U.ι).map α =\n          (restrictFunctor U.ι).map\n            ((pushforward i).map (Sigma.desc (fun j : Fin r ↦ I.toModulesι ≫\n          Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) j))) ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072339-L-1115271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T072339-L-1115271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

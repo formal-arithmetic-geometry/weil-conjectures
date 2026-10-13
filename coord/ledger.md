@@ -11499,3 +11499,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/A4/Sheaf.AlgebraicGeometry.PerfectTensorFiniteRelativeTor (stage 3; reviewer PASS; first push; landing 20261013T072338-L-1114868 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/B3/Sheaf.RingTheory.ConePseudoCoherent (stage 3; reviewer PASS; first push; landing 20261013T072338-L-1114967 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/C1/Sheaf.AlgebraicGeometry.FormalMapTorsionFiniteDetection (stage 3; reviewer PASS; after a return; landing 20261013T072339-L-1115110 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/C3/Sheaf.AlgebraicGeometry.CoherentGenericFilteredSource (stage 3; reviewer PASS; after a return; landing 20261013T072339-L-1115271 (interface); batch 20261013T072335; modules 3; new nodes 2)

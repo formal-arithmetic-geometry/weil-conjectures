@@ -21,39 +21,59 @@
  ],
  "proof": [
   {
-   "text": "Apply the generic-point ideal inclusion to obtain r, a coherent ideal I on Z, and a mono alpha from A = i_*(I^{direct sum r}) into F, invertible on a neighbourhood W of xi = i(eta).",
+   "text": "Construct the local free model using maximal-ideal annihilation. Extend its specific isomorphism from a coherent ideal-sum lattice, keeping agreement and invertibility of the lattice inclusion on the same open.",
    "uses": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+    "lem-pc-c3-coherent-generic-local-free-model",
+    "lem-pc-c3-coherent-local-free-ideal-lattice"
    ],
    "elementary": false
   },
   {
-   "text": "The restriction isomorphism induces a bijective stalk map at xi. If I were zero, every summand, the finite coproduct, its pushforward and its stalk would be zero, contradicting hx. Thus I is nonzero. Finite-sum coherence and finite closed-pushforward coherence make A coherent.",
+   "text": "The agreement and the two restricted isomorphisms make alpha invertible on that open, hence bijective on the generic stalk. Prove the generalized finite-sum vanishing lemma: a map into a pushed finite sum of ideals with zero generic stalk is zero. Compare the pushed coproduct with the biproduct of pushed ideals. For every coordinate, embed the ideal into the structure sheaf, represent a zero generic germ on a smaller open, and use injectivity of integral restrictions to kill the original section. Finite biproduct projections detect zero maps, including the empty sum. Apply this generalized lemma directly to the kernel inclusion, whose generic stalk map is zero by cancellation against the generic isomorphism. Thus alpha is mono. All these steps are proved in Lean with no new hole; no duplicate rank-one theorem is declared.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If I=0, or if r=0, the pushed finite sum and its generic stalk are zero. Surjectivity contradicts hx. Thus I is nonzero and r is positive.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Closed Z is Noetherian. Coherence of I gives quasi-coherence; qcqs pushforward preserves it. A summand injects into the finite sum and then into F. Therefore the pushed ideal is coherent by the quasi-coherent submodule criterion, without using the finite-pushforward-coherence module.",
    "uses": [
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-    "lem-weil-pbc-finite-pushforward-coherent"
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the ideal-sum filtration theorem to the nonzero coherent ideal I on integral Z. It filters A by the first k summands, with each quotient i_*I. Keep the mono alpha, and take the surjectivity clause of its bijective generic stalk map. No cokernel or support assertion is needed.",
+   "text": "Induct on r using the zero-sum filtration and the pushforward successor-sum comparison. At the successor step append the coherent pushed ideal using Z,i,I as the final integral quotient witness. The resulting filtration implies coherence of its whole source, by its top endpoint and coherence invariant under isomorphism. Return that source, alpha, its proved mono property and generic surjectivity.",
    "uses": [
-    "lem-weil-pbc-coherent-integral-filtration-ideal-sum"
+    "lem-weil-pbc-coherent-integral-filtration-ideal-sum-zero",
+    "new-pushforward-fin-sum-succ-iso",
+    "new-coherent-integral-filtration-biproduct-succ",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-coherent-integral-filtration-ideal-sum",
-  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-  "lem-weil-pbc-finite-pushforward-coherent"
+  "lem-pc-c3-coherent-generic-local-free-model",
+  "lem-pc-c3-coherent-local-free-ideal-lattice",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-integral-filtration-ideal-sum-zero",
+  "new-pushforward-fin-sum-succ-iso",
+  "new-coherent-integral-filtration-biproduct-succ",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "R1",
+  "agent": "C3",
   "date": "2026-10-13",
-  "based_on": "Construction part of 01YE and the source filtration in the final paragraph of 01YF, separated from the cokernel/support argument."
+  "based_on": "Tags 01YE and 01YF; two strictly partial local construction statements, with generic injectivity, coherence and filtration assembled in Lean. Avoid the source import cycle through finite pushforward and higher direct images. Repair of d243fb710 return: generalize the private rank-one vanishing helper in place to finite ideal sums and use it directly on the kernel; the existing rank-one theorem is private and cannot be imported for reuse."
  },
  "mathlib_searches": [
   {
@@ -161,9 +181,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T045555-L-135575",
+  "landing": "20261013T072339-L-1115271",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
