@@ -1,0 +1,126 @@
+{
+ "id": "new-sc-scalar-unit-pullback-naturality",
+ "kind": "statement",
+ "title": "Pullback compatibility of the explicit unit comparison map",
+ "statement": "Let k be a field and a:Y→X a morphism over k, with structure morphisms f and g and a≫f=g. The explicitly constructed additive maps scalarUnitAbelianComparison X and scalarUnitAbelianComparison Y [new-sc-scalar-unit-comparison-family] intertwine scalarCohomologyPullback followed by scalarCohomologyMap of tensorPullbackObjUnitToUnit [def-sc-field-linear-module-cohomology-operations, lem-weil-pbc-module-pullback-structure-sheaf] with structureSheafCohomologyPullback [def-sc-structure-sheaf-cohomology-pullback]. No arbitrary comparison family is quantified, and no bijectivity assertion is included.",
+ "stmt_deps": [
+  "new-sc-scalar-unit-comparison-family",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "source": {
+  "document": "stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD and Tag 01F7"
+ },
+ "proof": [
+  {
+   "text": "On common unit-module resolutions, the explicit comparison map is evaluation at 1 on the underlying additive sections complex. Forgotten injectives are acyclic for abelian sections.",
+   "uses": [
+    "new-sc-scalar-unit-comparison-family",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the adjoint structure map through resolutions, resolving the pushforward as necessary. The scalar inverse-image Ext operation and coefficient map induce the lifted sections map. The tensor-unit adjunction equation identifies its coefficient with the structure map. Forgetting scalars and precomposing with the integer-unit class produces the abelian inverse-image Ext pullback from the same lifted map. Homotopy independence gives equality for every class.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-sc-scalar-unit-comparison-family",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "Y2 second reading",
+  "document": "Stacks Project, sites-cohomology.tex; cohomology.tex",
+  "place": "Tag 03FD; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; explicit Ext comparison reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module sheaves and evaluating at one identifies module Ext with abelian sheaf cohomology naturally under pullback",
+   "results": "service unavailable: Internal Server Error; leanfinder, loogle and source grep used instead",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext forgetting module sheaves precomposition integer unit gives cohomology comparison",
+   "results": "Sheaf.H, cohomologyPresheafFunctor, extEquivCohomologyClass_symm_mk_hom and precompOfLinear; no bijectivity or scheme-pullback comparison for this explicit map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapExtAddHom",
+   "results": "Found mapExtAddHom (used in construction) and bijectivity for fully faithful functors preserving injectives. Forgetting modules is not fully faithful and does not preserve injectives, so those bijectivity lemmas do not apply.",
+   "date": "2026-10-13",
+   "verdict": "construction matched; no applicable comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(forget|toSheaf)|mapExtAddHom|moduleExtEquiv",
+   "results": "Mathlib mapExtAddHom and upstream moduleExtEquiv; source and lean/Sheaf searches found coefficient naturality, and fixed-scheme zariskiModuleAbelianCohomologyNatural but neither required explicit-map statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-scalar-unit-cohomology-pullback-comparison",
+   "place": "decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUnitCohomologyPullbackNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scalar_unit_cohomology_pullback_naturality",
+  "statement": "theorem scalar_unit_cohomology_pullback_naturality (k : Type u) [Field k]\n    {X Y : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))\n    (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g)\n    (x : scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 1) :\n    scalarUnitAbelianComparison Y\n      (scalarCohomologyMap g (tensorPullbackObjUnitToUnit a) 1\n        (scalarCohomologyPullback f g a h (SheafOfModules.unit X.ringCatSheaf) 1 x)) =\n      structureSheafCohomologyPullback a 1 (scalarUnitAbelianComparison X x)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

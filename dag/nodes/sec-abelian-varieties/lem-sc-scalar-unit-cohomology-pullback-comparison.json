@@ -16,33 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Compute both cohomologies by the same sections complex of an injective unit-module resolution. Forgotten injectives are acyclic for abelian sections. Restriction of scalars preserves underlying additive groups. The constant-integer sheaf adjunction identifies terminal-open abelian cohomology with Sheaf.H. Use these common-resolution equivalences simultaneously for every scheme.",
+   "text": "Use the explicitly constructed scalarUnitAbelianComparison X for every X. Bijectivity constructs the additive equivalences with AddEquiv.ofBijective; restriction of scalars changes no carrier or addition.",
    "uses": [
-    "lem-sc-module-abelian-zariski-cohomology",
-    "def-sc-field-linear-module-cohomology-operations"
+    "new-sc-scalar-unit-comparison-family"
    ],
    "elementary": false
   },
   {
-   "text": "Lift the adjoint structure-sheaf map to the resolutions. The scalar inverse-image Ext construction, followed by the adjoint tensor-pullback unit map, represents this lift on sections; after forgetting scalars the abelian inverse-image Ext construction represents the same lift. The adjunction unit equation identifies the coefficient map with the structure-sheaf map. Independence of lifts up to homotopy yields the displayed naturality for the single family of common-resolution comparisons.",
+   "text": "Apply pullback compatibility of that explicit map pointwise. AddEquiv.ofBijective retains the same forward function, so the equality is precisely the required naturality square.",
    "uses": [
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "def-sc-field-linear-module-cohomology-operations",
-    "def-sc-structure-sheaf-cohomology-pullback"
+    "new-sc-scalar-unit-pullback-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-module-abelian-zariski-cohomology",
-  "def-sc-field-linear-module-cohomology-operations",
-  "lem-weil-pbc-module-pullback-structure-sheaf",
-  "def-sc-structure-sheaf-cohomology-pullback"
+  "new-sc-scalar-unit-comparison-family",
+  "new-sc-scalar-unit-pullback-naturality"
  ],
  "proof_origin": {
-  "by": "agent H2",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex",
-  "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; expansion of the parent node proof steps"
+  "by": "Y2 second reading",
+  "document": "Stacks Project, Tags 03FD and 01F7",
+  "place": "Explicit comparison map, split into bijectivity and pullback compatibility; assembly using AddEquiv.ofBijective"
  },
  "mathlib_searches": [
   {
@@ -121,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T045531-L-129335",
+  "landing": "20261013T060431-L-586707",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

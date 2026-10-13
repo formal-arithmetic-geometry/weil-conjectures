@@ -1,0 +1,120 @@
+{
+ "id": "new-sc-scalar-unit-comparison-family",
+ "kind": "statement",
+ "title": "Bijectivity of the explicit unit module-to-abelian comparison",
+ "statement": "For any scheme X, the additive map scalarUnitAbelianComparison X from degree-one module cohomology of the unit module [def-sc-field-linear-module-cohomology-operations] to abelian structure-sheaf cohomology [def-sc-structure-sheaf-cohomology-pullback] is bijective. This map is constructed by moduleExtEquiv, exact forgetting to abelian sheaves, and precomposition with the degree-zero constant-integer class corresponding to the section 1. It makes no assertion about pullbacks or about arbitrary equivalences.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "source": {
+  "document": "stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD and Tag 01F7"
+ },
+ "proof": [
+  {
+   "text": "Resolve the unit module by injectives. Exact forgetting and acyclicity of forgotten injectives show that its underlying additive sections complex computes both cohomologies.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cocycle characterization of moduleExtEquiv evaluates at the unit section 1. Under the constant-integer sheaf adjunction, precomposition with the class of 1 evaluates the forgotten cocycle at the same section. Thus the explicitly defined map is the common-resolution homology isomorphism.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "Y2 second reading",
+  "document": "Stacks Project, sites-cohomology.tex; cohomology.tex",
+  "place": "Tag 03FD; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; explicit Ext comparison reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module sheaves and evaluating at one identifies module Ext with abelian sheaf cohomology naturally under pullback",
+   "results": "service unavailable: Internal Server Error; leanfinder, loogle and source grep used instead",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext forgetting module sheaves precomposition integer unit gives cohomology comparison",
+   "results": "Sheaf.H, cohomologyPresheafFunctor, extEquivCohomologyClass_symm_mk_hom and precompOfLinear; no bijectivity or scheme-pullback comparison for this explicit map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapExtAddHom",
+   "results": "Found mapExtAddHom (used in construction) and bijectivity for fully faithful functors preserving injectives. Forgetting modules is not fully faithful and does not preserve injectives, so those bijectivity lemmas do not apply.",
+   "date": "2026-10-13",
+   "verdict": "construction matched; no applicable comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(forget|toSheaf)|mapExtAddHom|moduleExtEquiv",
+   "results": "Mathlib mapExtAddHom and upstream moduleExtEquiv; source and lean/Sheaf searches found coefficient naturality, and fixed-scheme zariskiModuleAbelianCohomologyNatural but neither required explicit-map statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-scalar-unit-cohomology-pullback-comparison",
+   "place": "decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUnitCohomologyComparisonFamily.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scalar_unit_abelian_comparison_bijective",
+  "statement": "theorem scalar_unit_abelian_comparison_bijective (X : Scheme.{u}) :\n    Function.Bijective (scalarUnitAbelianComparison X)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T060431-L-586707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

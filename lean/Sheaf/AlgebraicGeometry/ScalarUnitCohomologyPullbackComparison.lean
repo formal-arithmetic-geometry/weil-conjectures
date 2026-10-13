@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality
 
 /-! # Module-to-abelian comparison for structure-sheaf pullbacks
 
@@ -54,6 +54,11 @@ theorem scalar_unit_cohomology_pullback_comparison (k : Type u) [Field k] :
         e Y g (scalarCohomologyMap g (tensorPullbackObjUnitToUnit a) 1
           (scalarCohomologyPullback f g a h (SheafOfModules.unit X.ringCatSheaf) 1 x)) =
             structureSheafCohomologyPullback a 1 (e X f x) := by
-  sorry
+  let e := fun (X : Scheme.{u}) (_f : X ⟶ Spec (CommRingCat.of k)) ↦
+    AddEquiv.ofBijective (scalarUnitAbelianComparison X)
+      (scalar_unit_abelian_comparison_bijective X)
+  refine ⟨e, ?_⟩
+  intro X Y f g a h x
+  exact scalar_unit_cohomology_pullback_naturality k f g a h x
 
 end AlgebraicGeometry.Scheme
