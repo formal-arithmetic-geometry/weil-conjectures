@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeBaseCoordinates
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeTopIso
 
 /-! # Coordinate naturality of the derived base-change mate
 
@@ -65,6 +67,52 @@ theorem exists_derivedBaseChange_coordinate_naturality
               k.hom.app ((derivedPullback g').obj E) ≫
               T.map ((schemeDerivedDirectImage q).map (j.hom.app E)) =
             a.hom.app E ≫ T.map
-              (schemeDerivedBaseChangeMap fA q gA p pullback.condition E) := by sorry
+              (schemeDerivedBaseChangeMap fA q gA p pullback.condition E) := by
+  classical
+  dsimp only
+  let fA := f ≫ eS.hom
+  let gA := eT.inv ≫ g ≫ eS.hom
+  let p := pullback.fst fA gA
+  let q := pullback.snd fA gA
+  let T := schemeDerivedDirectImage eT.inv
+  have sqA : IsPullback g' (f' ≫ eT.hom) fA gA := by
+    apply sq.of_iso (Iso.refl X') (Iso.refl X) eT eS
+    · simp
+    · simp
+    · simp [fA]
+    · simp [gA]
+  let e := sqA.isoPullback
+  have hp : e.hom ≫ p = g' := sqA.isoPullback_hom_fst
+  have hq : e.hom ≫ q = f' ≫ eT.hom := sqA.isoPullback_hom_snd
+  obtain ⟨b, a, hb⟩ :=
+    exists_derivedBaseChange_base_coordinates f g g' f' sq.w eS eT sqA.w
+  obtain ⟨j, k₀, hk⟩ :=
+    exists_derivedBaseChange_top_iso fA gA p q pullback.condition e g'
+      (f' ≫ eT.hom) hp hq sqA.w
+  let k := b ≪≫ Functor.isoWhiskerRight k₀ T ≪≫
+    Functor.associator (schemeDerivedDirectImage e.hom) (schemeDerivedDirectImage q) T
+  refine ⟨e, hp, hq, j, k, a, ?_⟩
+  intro E
+  dsimp only [k, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.associator_hom_app]
+  simp only [Category.comp_id, Category.assoc]
+  calc
+    _ = (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
+          b.hom.app ((derivedPullback g').obj E)) ≫
+        T.map (k₀.hom.app ((derivedPullback g').obj E)) ≫
+        T.map ((schemeDerivedDirectImage q).map (j.hom.app E)) := by
+      simp only [Category.assoc]
+      rfl
+    _ = (a.hom.app E ≫ T.map
+          (schemeDerivedBaseChangeMap fA (f' ≫ eT.hom) gA g' sqA.w E)) ≫
+        T.map (k₀.hom.app ((derivedPullback g').obj E)) ≫
+        T.map ((schemeDerivedDirectImage q).map (j.hom.app E)) := by rw [hb E]
+    _ = a.hom.app E ≫ T.map
+        (schemeDerivedBaseChangeMap fA (f' ≫ eT.hom) gA g' sqA.w E ≫
+          k₀.hom.app ((derivedPullback g').obj E) ≫
+          (schemeDerivedDirectImage q).map (j.hom.app E)) := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [hk E]
+
 
 end AlgebraicGeometry
