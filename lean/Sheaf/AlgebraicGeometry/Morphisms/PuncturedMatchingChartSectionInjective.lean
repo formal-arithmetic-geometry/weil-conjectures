@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
 import Sheaf.RingTheory.FormalGlueingH0Localization
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionLeftInverse
 
 /-! # Vanishing of a localized matching numerator
 
@@ -56,6 +57,12 @@ theorem puncturedMatching_chart_section_injective
     let ρ := ((ΓSpecIso D.matchingRing).inv ≫
       (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom
     let ψ := (D.puncturedMap ∣_ W).appTop.hom
-    ∀ b : D.matchingRing, ψ (ρ b) = 0 → ρ b = 0 := by sorry
+    ∀ b : D.matchingRing, ψ (ρ b) = 0 → ρ b = 0 := by
+  dsimp only
+  obtain ⟨g, hg⟩ := puncturedMatching_chart_restriction_leftInverse hU D f hf
+  intro b hb
+  have h := hg b
+  rw [hb, map_zero] at h
+  exact h.symm
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-punctured-matching-chart-restriction-left-inverse",
+ "kind": "statement",
+ "title": "Left inverse for the punctured matching chart restriction",
+ "statement": "In the notation of the punctured matching chart, the section map induced by the punctured comparison admits a ring-homomorphic left inverse on the image of the matching-ring restriction.",
+ "stmt_deps": [
+  "def-sbc-punctured-completion-matching-sections"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLH and 05ER, localized affine chart comparison."
+ },
+ "proof": [
+  {
+   "text": "The formal-gluing H0 localization comparison identifies the matching numerator with its punctured chart pullback; the inverse of this identification gives the required ring homomorphism.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-H0-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-glueing-H0-localization"
+ ],
+ "proof_origin": {
+  "kind": "split",
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0BLH and 05ER."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ring homomorphism left inverse section map",
+   "results": "No exact match found in Mathlib or repository.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.LeftInverse RingHom",
+   "results": "Generic left-inverse lemmas only; no geometric comparison.",
+   "date": "2026-10-14",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "punctured matching chart restriction left inverse",
+   "results": "No exact match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ring homomorphism left inverse on sections",
+   "results": "No exact match; search service unavailable.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartSectionInjective",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-punctured-matching-chart-kernel-torsion-injectivity",
+   "place": "localized chart comparison"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartRestrictionLeftInverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedMatchingChartRestrictionLeftInverse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.puncturedMatching_chart_restriction_leftInverse",
+  "statement": "theorem puncturedMatching_chart_restriction_leftInverse\n    {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (f : A) (hf :\n      (PrimeSpectrum.basicOpen f : (Spec (.of A)).Opens) ≤ U) :\n    let W := (D.modelMap ∣_ U) ⁻¹ᵁ (U.ι ⁻¹ᵁ PrimeSpectrum.basicOpen f)\n    let ρ := ((ΓSpecIso D.matchingRing).inv ≫\n      (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom\n    let ψ := (D.puncturedMap ∣_ W).appTop.hom\n    ∃ g : Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) →+* Γ(W.toScheme, ⊤),\n      ∀ b : D.matchingRing, g (ψ (ρ b)) = ρ b",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201742-L-3966958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T201742-L-3966958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
