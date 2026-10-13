@@ -8,6 +8,13 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Sheaf.Algebra.Homology.LargeFilteredFreeResolution
+import Sheaf.Algebra.Homology.FilteredFreeKProjective
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 
 /-! # Canonical completion of the derived tensor row
 
@@ -55,6 +62,81 @@ theorem baseDerivedExtension_coherent_triangle_distinguished
     (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ) ⋙
       HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙
       L).mapTriangle.obj T) ∈
-      Pretriangulated.distinguishedTriangles := by sorry
+      Pretriangulated.distinguishedTriangles := by
+  classical
+  let C := ModuleCat.{u} R
+  let D := ModuleCat.{u} B
+  let W := HomotopyCategory.quasiIso C (.up ℤ)
+  let Q := DerivedCategory.Qh (C := C)
+  let F := (extendScalars.{u, u, u} (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙
+    (DerivedCategory.Qh : HomotopyCategory D (.up ℤ) ⥤ _)
+  let H := HomotopyCategory.quotient C (.up ℤ)
+  let P : Set (HomotopyCategory C (.up ℤ)) :=
+    {X | ∃ K : CochainComplex C ℤ, K.IsKProjective ∧ H.obj K = X}
+  have hresolution (E : CochainComplex C ℤ) :
+      ∃ (K : CochainComplex C ℤ) (s : K ⟶ E), QuasiIso s ∧ K.IsKProjective := by
+    obtain ⟨K, s, hs, Fil, ι, step, hz, hm, hc, he, hsp, hq⟩ :=
+      CochainComplex.exists_large_filtered_free_resolution.{u, u} E
+    exact ⟨K, s, hs,
+      CochainComplex.isKProjective_of_filtered_free K Fil ι step hz hm hc he hsp hq⟩
+  obtain ⟨hleft, hright, htri, hsat, htwo, _, _, _, _⟩ :=
+    HomotopyCategory.quasiIso_saturated_triangulated C
+  let : W.HasRightCalculusOfFractions := hright
+  let : W.HasTwoOutOfThreeProperty := htwo
+  have hS : W.IsSaturatedTriangulatedMultiplicativeSystem :=
+    ⟨⟨⟨hleft, hright⟩, fun _ _ _ _ h g f ↦ hsat _ _ _ _ g h f⟩, htri⟩
+  have hres (X : HomotopyCategory C (.up ℤ)) :
+      ∃ (X' : HomotopyCategory C (.up ℤ)) (s : X' ⟶ X), X' ∈ P ∧ W s := by
+    obtain ⟨E, rfl⟩ := X.quotient_obj_surjective
+    obtain ⟨K, s, hs, hK⟩ := hresolution E
+    refine ⟨(HomotopyCategory.quotient C (.up ℤ)).obj K,
+      (HomotopyCategory.quotient C (.up ℤ)).map s, ⟨K, hK, rfl⟩, ?_⟩
+    dsimp only [W]
+    rw [HomotopyCategory.quotient_map_mem_quasiIso_iff,
+      HomologicalComplex.mem_quasiIso_iff]
+    exact hs
+  have hinv (X Y : HomotopyCategory C (.up ℤ)) (s : X ⟶ Y)
+      (hX : X ∈ P) (hY : Y ∈ P) (hs : W s) : IsIso (F.map s) := by
+    obtain ⟨K, hK, rfl⟩ := hX
+    obtain ⟨K', hK', rfl⟩ := hY
+    let := hK
+    let := hK'
+    obtain ⟨a, rfl⟩ := H.map_surjective s
+    dsimp only [W, H] at hs
+    rw [HomotopyCategory.quotient_map_mem_quasiIso_iff,
+      HomologicalComplex.mem_quasiIso_iff] at hs
+    have ha := (CochainComplex.IsKProjective.quasiIso_iff a).1 hs
+    have : IsIso (H.map a) :=
+      (HomologicalComplex.isIso_quotient_map_iff_homotopyEquivalences a).2 ha
+    infer_instance
+  have hdefined (X : HomotopyCategory C (.up ℤ)) :
+      F.IsTriangulatedLeftDerivedDefinedAt W hS X := by
+    obtain ⟨Y, _, hc, _, _⟩ :=
+      Functor.resolvingClass_essentialConstancy W F P hres hinv X
+    exact ⟨Y, hc⟩
+  have hkan : L.IsRightKanExtension ε :=
+    Functor.IsLeftDerivedFunctor.isRightKanExtension L ε W
+  have : (Q ⋙ L).IsTriangulated := by
+    constructor
+    intro T₀ hT₀
+    exact Functor.leftDerived_kan_map_source_distinguished
+      (HomotopyCategory C (.up ℤ)) (DerivedCategory D) (DerivedCategory C)
+      F W hS Q L ε hkan hdefined inferInstance T₀ hT₀
+  have := Localization.essSurj_mapArrow Q W
+  have : L.IsTriangulated := Functor.isTriangulated_of_precomp Q L
+  let G := restrictScalars.{u} (algebraMap R A)
+  let e : DerivedCategory.Q ⋙ G.mapDerivedCategory ⋙ L ≅
+      G.mapHomologicalComplex (.up ℤ) ⋙ HomotopyCategory.quotient C (.up ℤ) ⋙ Q ⋙ L :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight G.mapDerivedCategoryFactors L ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C).symm L ≪≫
+          Functor.associator _ _ _)
+  have : NatTrans.CommShift e.hom ℤ := by dsimp [e]; infer_instance
+  have ht := (G.mapDerivedCategory ⋙ L).map_distinguished _ hT
+  exact Pretriangulated.isomorphic_distinguished _ ht _
+    ((Functor.mapTriangleIso e).symm.app T ≪≫
+      (Functor.mapTriangleCompIso DerivedCategory.Q (G.mapDerivedCategory ⋙ L)).app T)
 
 end ModuleCat
