@@ -206,6 +206,10 @@ def inflight_files() -> set[str]:
 def prune_check(D: dict) -> str | None:
     """tools/import_prune_check.py for every module, against the library with the delivery's files in place (what
     land.sh and land_set.sh check after writing). None, or the findings."""
+    if os.environ.get("SHEAF_SKIP_PRUNE") == "1":
+        # the human, 2026-10-13 17:55 +08: land the waiting deliveries at once and let the global build judge;
+        # what breaks it is taken out and repaired (repair_queue) - faster than a per-delivery library scan
+        return None
     with tempfile.TemporaryDirectory(prefix="sheaf-batch-") as td:
         td = pathlib.Path(td); ov = td / "lean"; ov.mkdir()
         src = [str(li.LEAN / d) for d in li.library_dirs() if (li.LEAN / d).is_dir()] + [str(p) for p in li.LEAN.glob("*.lean")]
