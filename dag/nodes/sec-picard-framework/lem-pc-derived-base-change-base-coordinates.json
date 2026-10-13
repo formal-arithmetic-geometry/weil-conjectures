@@ -16,39 +16,34 @@
  ],
  "proof": [
   {
-   "text": "Use the chosen coherent pullback comparisons and identity comparisons to exhibit the pullbacks along each scheme isomorphism and its inverse as inverse equivalences. The pinned adjunction identifies direct image along the inverse with pullback along the isomorphism, using uniqueness of right adjoints and the associated unit/counit identities.",
+   "text": "Postcompose f and g with eS.hom. The original square equality composed with eS.hom gives the intermediate commutative square. Apply the codomain-isomorphism transport law to get aS and beta_original = aS followed by beta_intermediate.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-derived-base-change-codomain-iso"
    ],
    "elementary": false
   },
   {
-   "text": "The right-adjoint mate of the pullback comparison for fprime followed by eT, followed by the inverse-equivalence comparison, gives b. The right-adjoint comparison for f followed by eS, the pullback comparison for eT.inv followed by g and eS, and the inverse-equivalence counits for eS and eT give a.",
+   "text": "Apply the domain-isomorphism transport law to the intermediate square and eT, using hA, to get b and aT with beta_intermediate followed by b = aT followed by R(eT.inv) of beta_final.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-derived-base-change-domain-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the equivalence along eT and transpose under the pinned adjunction for fprime followed by eT. Expand each base-change map as pullback of the counit. The composite-adjunction counit formula splits off the eS counit; its inverse-equivalence counit cancels the eS factor of a. The mate defining b cancels the eT factor. Pullback associativity and unit laws identify both transposes with Lgprime of the counit of f. Faithfulness and injectivity of the Hom equivalence give equality for all E.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
+   "text": "Set a=aS followed by aT, retain b, and substitute the two equalities. Associativity of morphisms and the component formula for a composite natural isomorphism give the required equation for every E.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-derived-base-change-codomain-iso",
+  "lem-pc-derived-base-change-domain-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
   "place": "Remark 20.28.3, counit description; Lemmas 20.27.2 (0D5S) and 20.28.2 (0D5T), composition",
-  "note": "P1 makes explicit the two restricted coordinate transports in the original node; complete argument in the theorem docstring."
+  "note": "N1: change the common codomain first and the base-source second; the Lean proof composes these two strictly restricted coordinate transports."
  },
  "mathlib_searches": [
   {
@@ -175,9 +170,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T045547-L-133504",
+  "landing": "20261013T100037-L-2471582",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

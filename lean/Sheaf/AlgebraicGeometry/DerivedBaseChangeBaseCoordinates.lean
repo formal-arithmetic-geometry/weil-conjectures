@@ -6,6 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeCodomainIso
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeDomainIso
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Transport of the derived mate in its base coordinates
@@ -71,6 +73,23 @@ theorem exists_derivedBaseChange_base_coordinates
         schemeDerivedBaseChangeMap f f' g g' h E ≫
             b.hom.app ((derivedPullback g').obj E) =
           a.hom.app E ≫ T.map
-            (schemeDerivedBaseChangeMap fA (f' ≫ eT.hom) gA g' hA E) := by sorry
+            (schemeDerivedBaseChangeMap fA (f' ≫ eT.hom) gA g' hA E) := by
+  have hS : g' ≫ (f ≫ eS.hom) = f' ≫ (g ≫ eS.hom) := by
+    simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ eS.hom) h
+  obtain ⟨aS, haS⟩ := exists_derivedBaseChange_codomain_iso f g g' f' h eS hS
+  obtain ⟨b, aT, haT⟩ := exists_derivedBaseChange_domain_iso
+    (f ≫ eS.hom) (g ≫ eS.hom) g' f' hS eT hA
+  refine ⟨b, aS ≪≫ aT, ?_⟩
+  intro E
+  calc
+    _ = (aS.hom.app E ≫
+        schemeDerivedBaseChangeMap (f ≫ eS.hom) f' (g ≫ eS.hom) g' hS E) ≫
+        b.hom.app ((derivedPullback g').obj E) := by rw [haS E]
+    _ = aS.hom.app E ≫ (aT.hom.app E ≫ (schemeDerivedDirectImage eT.inv).map
+        (schemeDerivedBaseChangeMap (f ≫ eS.hom) (f' ≫ eT.hom)
+          (eT.inv ≫ g ≫ eS.hom) g' hA E)) := by
+      rw [Category.assoc, haT E]
+    _ = _ := by simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+
 
 end AlgebraicGeometry
