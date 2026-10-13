@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyBaseChangeSquare
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
 
 /-! # Kernel of additive cohomology tensor pullback -/
 
@@ -83,6 +85,28 @@ theorem additive_cohomology_tensor_kernel
     (β : (k' ⊗[k] Sheaf.H G 1) →ₗ[k'] Sheaf.H G' 1)
     (hβ : ∀ (b : k') (x : Sheaf.H G 1),
       β (b ⊗ₜ[k] x) = b • Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) :
-    ∀ z, β z = 0 → z = 0 := by sorry
+    ∀ z, β z = 0 → z = 0 := by
+  classical
+  let : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  obtain ⟨e, e', he⟩ := Scheme.Modules.exists_additive_cohomology_baseChange_square
+    f h 1 G G' a a' ha ha' q hq hscalar hscalar'
+  let t := TensorProduct.AlgebraTensorModule.congr (LinearEquiv.refl k' k') e
+  let M := SheafOfModules.unit C.ringCatSheaf
+  let : M.IsQuasicoherent := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  have hcomm : e'.toLinearMap.comp β =
+      (Scheme.Modules.H.baseChange (S := k') f M 1).comp t.toLinearMap := by
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro b x
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, hβ, map_smul, he]
+    rfl
+  have hinj := (Scheme.Modules.H.baseChange_bijective_of_isSeparated
+    (S := k') f M 1).injective
+  intro z hz
+  apply t.injective
+  apply hinj
+  have hc := LinearMap.congr_fun hcomm z
+  change e' (β z) = Scheme.Modules.H.baseChange (S := k') f M 1 (t z) at hc
+  simpa only [hz, map_zero] using hc.symm
+
 
 end AlgebraicGeometry.IsCurve

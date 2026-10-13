@@ -15,40 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Identify G and G' with the lifted associated structure sheaves by their natural section coordinates. The section scalar formulas determine the scalar endomorphisms uniquely, so the scalar-natural coefficient and etale/Zariski comparisons give the structural scalar actions on cohomology.",
+   "text": "Obtain the two structural linear comparisons and their untensored pullback equality from the additive cohomology base-change square. Compactness follows from quasi-compactness of the curve morphism over the affine field spectrum.",
    "uses": [
-    "lem-sc-etale-tensor-unit-sections-natural",
-    "lem-sc-etale-qcoherent-source-comparison-natural"
+    "lem-pbc-additive-cohomology-base-change-square"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose a finite affine cover of C; quasi-compactness and separatedness follow from IsCurve. All finite intersections and their inverse images on C' are affine. Affine tensor sections identify the pulled-back Cech complex with k' tensor the original. The adjoint section formula hq and the natural inverse-image Cech comparison identify the induced cohomology map with H(q) after canonical etale Ext pullback. Its tensor-linear extension is β because the two maps agree on all pure tensors.",
-   "uses": [
-    "lem-pc-flat-cech-base-change",
-    "lem-pc-affine-cech-inverse-image"
-   ],
-   "elementary": false
+   "text": "Tensor the source linear equivalence with the identity of kprime using AlgebraTensorModule.congr. Tensor extensionality and hbeta identify eprime composed with beta with the ordinary H.baseChange composed with this tensor equivalence. On b tensor x this equality is the scalar multiple of the untensored square.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Tensoring over the field k is exact, so cycles and boundaries of the tensor complex are the tensors of the original cycles and boundaries. Under the natural Cech comparisons a class in the kernel of β is a tensor-boundary and hence zero in tensor homology. This proves triviality of the kernel. The unique isomorphism to the categorical pullback transports the construction to the displayed square.",
+   "text": "The unit module is quasi-coherent and the field extension is flat. Apply separated flat cohomology base change to obtain injectivity of ordinary H.baseChange. If beta z is zero, the commuting equality implies its tensor-coordinate image maps to zero. Injectivity of H.baseChange, then of the tensor equivalence, implies z is zero.",
    "uses": [
-    "lem-pc-flat-cech-cohomology-square"
+    "lem-pc-flat-cohomology-separated"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-cech-inverse-image",
-  "lem-pc-flat-cech-base-change",
-  "lem-pc-flat-cech-cohomology-square",
-  "lem-sc-etale-qcoherent-source-comparison-natural",
-  "lem-sc-etale-tensor-unit-sections-natural"
+  "lem-pbc-additive-cohomology-base-change-square",
+  "lem-pc-flat-cohomology-separated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Separated-case Cech proof, kernel component, with coefficient/etale comparison from 03P2."
+  "place": "E2: use existing separated flat cohomology base change after a coordinate-normalized untensored etale/Zariski square; combine by tensor extensionality and injectivity."
  },
  "mathlib_searches": [
   {
@@ -148,9 +141,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T054245-L-451773",
+  "landing": "20261013T062519-L-732081",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
