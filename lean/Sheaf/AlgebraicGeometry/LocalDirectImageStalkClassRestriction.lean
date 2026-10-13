@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassMap
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassTopComparison
+import Sheaf.AlgebraicGeometry.TargetSectionClassRestriction
 
 /-! # Restriction compatibility of the local stalk class map
 
@@ -29,23 +31,10 @@ an arbitrary supplied target resolution after restriction to the inverse-image o
 Source: Stacks Project, Lemma 20.7.3 (Tag 01E4) and Remark 20.14.2 (Tag 01FB).
 (blueprint: lem-weil-pbc-local-direct-image-stalk-class-restriction)
 
-Proof: Write F' for the tensor pullback and W for the inverse-image open. Choose the
-fixed injective resolution R used by localDirectImage_stalk_class. Lift the identity
-of F' from R to K; its augmentation equation makes the lift unique up to homotopy.
-Restrict this lift to W and compare with D.target.resolution using the inverse of
-D.target.comparison. The equation D.target.augmentation makes the resulting lift
-an augmented lift of the restriction unit. In the construction of the cohomology
-restriction map, compute using this lift followed by an injective replacement of
-the pushed restricted resolution. Its section map is a quasi-isomorphism (01EZ);
-cancel that map and its inverse on homology, as in 01FB. Independence of the choices
-then identifies this computation with moduleCohomologyFMap. Degreewise, the equation
-D.target.components identifies the section map with restriction of K. Naturality
-of evaluation and its homology comparison, of the sheafification unit and counit
-in sectionCohomologyTheta, and of isoRightDerivedObj identifies D.targetClass of
-the restricted class with restriction of the top class computed from R. Taking
-the germ cancels restriction from top to V. This proves the equality, for every
-global class eta, including degree zero and zero modules. Neither surjectivity of
-restriction nor an inverse to the stalk class map is used. -/
+Proof: The top-comparison theorem identifies the defined class with the top-open
+germ computed with the supplied resolution K. The fixed-resolution restriction
+theorem identifies that same top-open germ with the germ of D.targetClass after
+the cohomology restriction map. Transitivity combines the two equalities. -/
 theorem localDirectImage_stalk_class_restriction
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) (F : X.Modules) (p : ℕ)
     (I : InjectiveResolution F)
@@ -71,6 +60,8 @@ theorem localDirectImage_stalk_class_restriction
             ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
               ((Scheme.Modules.tensorPullback
                 (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p eta)) := by
-  sorry
+  have htop := localDirectImage_stalk_class_top_comparison f y F p K eta
+  have hrestriction := D.targetClass_restriction p y hy eta
+  exact htop.trans hrestriction
 
 end AlgebraicGeometry

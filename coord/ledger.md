@@ -11270,3 +11270,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/K3/Sheaf.Algebra.Homology.HomTensorCurryNaturalPure (stage 3; reviewer PASS; first push; landing 20261013T054224-L-445021 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology (stage 3; reviewer PASS; first push; landing 20261013T054225-L-445166 (interface); batch 20261013T054206; modules 5; new nodes 4)
 - 05:42 L: merged deliver/M1/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle (stage 3; reviewer PASS; first push; landing 20261013T054225-L-445299 (interface); batch 20261013T054206; modules 3; new nodes 2)
+- 05:42 L: merged deliver/M2/Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassRestriction (stage 3; reviewer PASS; first push; landing 20261013T054226-L-445427 (interface); batch 20261013T054206; modules 3; new nodes 2)

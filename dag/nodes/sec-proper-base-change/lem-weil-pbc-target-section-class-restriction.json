@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-target-section-class-restriction",
+ "kind": "statement",
+ "title": "Germ compatibility of the target section class with a fixed resolution",
+ "statement": "Let $f:X\\to S$ and $g:S\\prime\\to S$ be scheme morphisms, $F$ an $\\mathcal O_X$-module, $I$ an injective resolution of $F$, $K$ an injective resolution of $G=(\\operatorname{pr}_X)^*F$, $V\\subseteq S$ open, $y\\in V$, and $D$ choices of [def-weil-pbc-flat-base-change-open-choices]. Set $h=\\operatorname{pr}_{S\\prime}$ and $W=\\operatorname{pr}_X^{-1}(f^{-1}V)$. For every $p\\in\\mathbf N$ and $\\eta\\in H^p(S\\prime\\times_S X,G)$, the top germ at $y$ in $g_*R^ph_*G$ of the top section class computed with $K$ equals the germ over $V$ of $D.\\mathrm{targetClass}_p$ applied to the restriction of $\\eta$ to $W$. The top section class is resolutionSectionClass of [def-weil-pbc-flat-base-change-open-choices] using $K,h_*K$, the top open and the degreewise identity, followed by the inverse right-derived resolution comparison. The restriction is the restriction-unit cohomology map of [def-weil-pbc-module-cohomology-fmap], and targetClass is [def-weil-pbc-flat-base-change-resolution-construction]. This formula holds with K fixed; it has no comparison with a separately chosen global resolution or with the defined localDirectImage_stalk_class map.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3 (01E4), restriction maps; Remark 20.14.2 (01FB), calculation through an augmented lift"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Restrict K to W and use D.target.comparison.inv. Its augmentation identity and naturality of the restriction unit give an augmented lift into the pushed restricted resolution.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve that pushed restricted resolution into an injective complex lambda. Choose beta to be lambda after the augmented lift. By the sections quasi-isomorphism theorem the map induced by lambda is invertible; its inverse cancels the lambda factor. Independence of choices identifies the result with moduleCohomologyRestriction.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "D.target.components identifies the remaining section-complex map with restriction. Transport its open using flatBaseChangeOpenEquality. Naturality of evaluation homology and the presheaf sectionCohomologyTheta makes this restriction commute with the section class. Naturality of the module morphism isoRightDerivedObj.inv finishes the morphism equality. Evaluate the morphism equality at eta. Compose with the germ at V in g_*R^ph_*G; Mathlib TopCat.Presheaf.germ_res_apply cancels the top-to-V restriction. The result is the stated equality of germs.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3 (01E4), restriction maps; Remark 20.14.2 (01FB), calculation through an augmented lift; the augmentation and naturality glue is spelled out by M2.; evaluate the restriction square and apply presheaf germ compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology class map into a higher direct image is independent of the injective resolution and commutes with restrictions to opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the canonical map from section complex cohomology to the cohomology sheaf; independence of injective resolution of higher direct image",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, CategoryTheory.Sheaf.ΓRes_naturality, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓObjEquivHom_naturality",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the specified section-class comparison; naturality lemmas are ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj\"",
+   "results": "5 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the specified section-class comparison; naturality lemmas are ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|sectionCohomologyTheta|localDirectImage_stalk_class",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the specified section-class comparison; naturality lemmas are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "augmented chain homotopy equivalence induces natural comparison of higher direct image sections with restriction",
+   "results": "Rep.standardComplex.εToSingle₀_comp_eq; ComplexShape.Embedding.extendHomotopyFunctorFactors; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι_assoc",
+   "date": "2026-10-13",
+   "verdict": "Second reading: comparison and naturality ingredients only; no matching section-class theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "Second reading: comparison and naturality ingredients only; no matching section-class theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "germ_res|isoRightDerivedObj_inv_naturality",
+   "results": "Mathlib/Topology/Sheaves/EtaleSpace.lean; Mathlib/Topology/Sheaves/Skyscraper.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Sheafify.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: comparison and naturality ingredients only; no matching section-class theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassRestriction",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-local-direct-image-stalk-cohomology",
+   "place": "Restriction compatibility of the specified local class map: Lemma 20.7.3 (01E4), restriction maps; Remark 20.14.2 (01FB), calculation through an augmented lift",
+   "via": [
+    "lem-weil-pbc-local-direct-image-stalk-class-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TargetSectionClassRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TargetSectionClassRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.FlatBaseChangeOpenChoices.targetClass_restriction",
+  "statement": "theorem FlatBaseChangeOpenChoices.targetClass_restriction {X S S' : Scheme.{u}}\n    {f : X ⟶ S} {g : S' ⟶ S} {F : X.Modules} {I : InjectiveResolution F}\n    {K : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)}\n    {V : S.Opens} (D : FlatBaseChangeOpenChoices f g F I K V) (p : ℕ)\n    (y : S) (hy : y ∈ V)\n    (eta : (RingedSpace.moduleCohomology (Limits.pullback g f).toRingedSpace p).obj\n      ((tensorPullback (pullback.snd g f)).obj F)) :\n    TopCat.Presheaf.germ\n      ((pushforward g).obj\n        (((pushforward (pullback.fst g f)).rightDerived p).obj\n          ((tensorPullback (pullback.snd g f)).obj F))).presheaf ⊤ y (by trivial)\n      (Hom.app (K.isoRightDerivedObj (pushforward (pullback.fst g f)) p).inv ⊤\n        (resolutionSectionClass K\n          (((pushforward (pullback.fst g f)).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj K.cocomplex) ⊤ (Iso.refl _) p eta)) =\n    TopCat.Presheaf.germ\n      ((pushforward g).obj\n        (((pushforward (pullback.fst g f)).rightDerived p).obj\n          ((tensorPullback (pullback.snd g f)).obj F))).presheaf V y hy\n      (D.targetClass p\n        (moduleCohomologyFMap ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι\n          ((restrictAdjunction ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app\n            ((tensorPullback (pullback.snd g f)).obj F)) p eta))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
