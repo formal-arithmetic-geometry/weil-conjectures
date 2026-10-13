@@ -16,28 +16,31 @@
  },
  "proof": [
   {
-   "text": "The degreewise hypothesis gives equality of the canonical additive chain composites by HomologicalComplex.Hom.ext. Apply homologyMap and its composition formula. ShortComplex.mapHomologyIso naturality moves both forgetful homology factors across tensorStalkIso.",
+   "text": "Construct the termwise inverse pinned tensor comparison a and its additive stalk chain composite rho with gamma. Apply HomologicalComplex.Hom.ext and function extensionality to the given degreewise equality, obtaining tau followed by the forgotten ambient tensorStalkIso equals the forgotten restricted tensorStalkIso followed by rho. Apply homologyMap and homologyMap_comp.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition"
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-open-pinned-single-tensor-restriction-iso"
    ],
    "elementary": true
   },
   {
-   "text": "Expand beta as Qh of the inverse pinned homotopy comparison followed by the inverse exact restriction factor. quotientCompQhIso naturality and mapDerivedCategoryFactorsh identify it with localization of the termwise inverse comparison. comparisonStalkHomologyIso_naturality identifies its stalk cohomology with homology of the stalk chain map.",
+   "text": "Rewrite beta using openTensorRestriction_representative. Apply openStalk_representative_coherence to a, which identifies the beta and nu composite with homology of rho and the specified endpoint factors.",
    "uses": [
+    "lem-pc-open-tensor-restriction-representative",
+    "lem-pc-open-stalk-representative-coherence",
     "def-pc-single-complex-open-tensor-restriction-iso",
-    "def-pc-open-pinned-single-tensor-restriction-iso",
-    "lem-pc-stalk-comparison-source-transport"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Expand nu and use mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac and mapDerivedCategoryHomologyFunctorIso_hom_app_Q to identify its value on the representative with homology of gamma. The factorization isomorphisms cancel. The chain-square homology equality, composed with inverse comparisonStalkHomologyIso at the two endpoints, is the conclusion.",
-   "uses": [
     "def-pc-open-derived-additive-stalk-iso",
     "lem-pc-stalk-comparison-source-transport"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use ShortComplex.mapHomologyIso_inv_naturality at restricted tensorStalkIso and mapHomologyIso_hom_naturality at ambient tensorStalkIso. The proved private categorical assembly lemma composes these two equations with the homology chain-square equality and the representative coherence equality. Rewrite the two forgetful maps of composites using map_comp to obtain the statement unchanged.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -45,15 +48,17 @@
   "def-pc-open-pinned-single-tensor-restriction-iso",
   "def-pc-single-complex-base-change-stalk-condition",
   "def-pc-single-complex-open-tensor-restriction-iso",
+  "lem-pc-open-stalk-representative-coherence",
+  "lem-pc-open-tensor-restriction-representative",
   "lem-pc-stalk-comparison-source-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N2",
+  "group": "C3",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0098",
-  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW.",
-  "note": "Second reader repaired the reduction: canonical degreewise chain square, then exact homology factorization."
+  "document": "https://stacks.math.columbia.edu/tag/015F",
+  "place": "Parent plan steps 1–3; explicit Mathlib homology naturality and exact localization factorization.",
+  "note": "The chain-square and homology assembly are proved in Lean; the representative coherence is isolated independently, without tensor data or tau."
  },
  "mathlib_searches": [
   {
@@ -129,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-04f94",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T190149-L-3219181",
+  "landing": "20261013T215557-L-895137",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files and DAG records match the packet; all compile, the direct importer compiles, and axioms are within the allowed set plus the documented sorryAx."
  }
 }

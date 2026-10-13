@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-open-tensor-restriction-representative",
+ "kind": "statement",
+ "title": "Representative formula for ordinary tensor restriction",
+ "statement": "For schemes X,X prime, a morphism g prime, opens U,U prime, a commuting restriction j:U prime to U, and any cochain complex P on X, use the pinned ordinary tensor restriction iso [def-pc-open-pinned-single-tensor-restriction-iso] and the exact open restriction [def-pc-derived-open-restriction-maps]. The map beta [def-pc-single-complex-open-tensor-restriction-iso] equals Q applied to the termwise inverse pinned tensor restriction map, followed by the inverse exact restriction localization factor at g prime star P. This is an equality before stalks or homology and needs no cartesian square or K-flatness.",
+ "stmt_deps": [
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-open-tensor-restriction-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015F",
+  "place": "Derived Categories, Lemma 13.16.9 (exact functors on representatives); Tags 0098 and 08DW for stalk/open comparisons. Detailed coherence identities: Mathlib Algebra/Homology/DerivedCategory/ExactFunctor.lean and HomotopyCategory.lean; lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean."
+ },
+ "proof": [
+  {
+   "text": "For additive functors F,G,T,R with R exact and e:F composed R iso G composed T, at the homotopy quotient of P, mapHomotopyCategoryCompIso(e) inverse followed by the identity composition factor equals the quotient of the termwise map e inverse. This follows by expanding the quotient lift and cancelling the identity component.",
+   "uses": [
+    "def-pc-open-pinned-single-tensor-restriction-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use mapDerivedCategoryFactorsh_hom_app for R at F(P). Its quotient-comparison components and the homotopy quotient lift have identity components on representatives, so its hom component equals mapDerivedCategoryFactors.hom; cancellation gives the inverse identity. Apply quotientCompQhIso_hom_naturality to the termwise map, then postcompose by that inverse factor. Specialize F to ambient tensor pullback, G to source open restriction, T to restricted tensor pullback, and R to target open restriction.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "def-pc-single-complex-open-tensor-restriction-iso",
+    "def-pc-open-pinned-single-tensor-restriction-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-open-pinned-single-tensor-restriction-iso",
+  "def-pc-single-complex-open-tensor-restriction-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/015F",
+  "place": "The explicit exact localization factorization identities in the Lean sources named above.",
+  "note": "Makes steps 2 and 3 of the parent plan into independent representative coherence statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact derived functor natural isomorphism commutes with homology of representative complexes",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology map naturality additive functor map homology isomorphism commutative square",
+   "date": "2026-10-14",
+   "results": "ShortComplex.mapHomologyIso_hom_naturality, inv_naturality and homologyMap_mapNatTrans.",
+   "verdict": "Constituents only, not the project-specific exact localization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\", \"homologyMap\"",
+   "date": "2026-10-14",
+   "results": "No hits.",
+   "verdict": "No ready-made representative formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh_hom_app|mapHomotopyCategoryCompIso|mapHomologyIso_inv_naturality",
+   "date": "2026-10-14",
+   "results": "Mathlib exact and homotopy factorization equations and ShortComplex homology naturality; source exact-functor composition/natural-isomorphism factorization equations. Blueprint searches for stalk representative and exact localization found no duplicate.",
+   "verdict": "Use these constituents; no existing declaration states the full comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermEquation",
+  "date": "2026-10-14",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-ordinary-tensor-germ-transport",
+   "place": "Ordinary open tensor-stalk argument, exact localization and additive stalk homology comparison.",
+   "via": [
+    "lem-pc-open-ordinary-tensor-germ-equation",
+    "lem-pc-open-ordinary-tensor-germ-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenTensorRestrictionRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenTensorRestrictionRepresentative.lean",
+  "declaration": "AlgebraicGeometry.openTensorRestriction_representative",
+  "statement": "theorem openTensorRestriction_representative [d : ∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme) (hj : j ≫ U.ι = U'.ι ≫ g') (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : letI : (schemeOpenRestriction X U).Additive := schemeOpenRestriction_additive X U letI : (schemeOpenRestriction X' U').Additive := schemeOpenRestriction_additive X' U' letI : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive := fun k ↦ tensorPullbackAdditive k letI : (Scheme.Modules.tensorPullback g').Additive := tensorPullbackAdditive g' letI : (Scheme.Modules.tensorPullback j).Additive := tensorPullbackAdditive j letI : (schemeOpenRestriction X U).PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ letI : (schemeOpenRestriction X' U').PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ letI : (Scheme.Modules.tensorPullback g').PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ letI : (Scheme.Modules.tensorPullback j).PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_additive _ let e : Scheme.Modules.tensorPullback g' ⋙ schemeOpenRestriction X' U' ≅ schemeOpenRestriction X U ⋙ Scheme.Modules.tensorPullback j := openPinnedTensorRestrictionIso g' U U' j hj let a := (NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app P let N : CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P singleComplexOpenTensorRestrictionMap g' U U' j hj P = DerivedCategory.Q.map a ≫ (schemeOpenRestriction X' U').mapDerivedCategoryFactors.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04f94",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T215557-L-895137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-04f94",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T215557-L-895137",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG records match the packet; all compile, the direct importer compiles, and axioms are within the allowed set plus the documented sorryAx."
+ }
+}

@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenTensorRestrictionIso
 public import Sheaf.AlgebraicGeometry.OpenDerivedAdditiveStalkIso
+import Sheaf.AlgebraicGeometry.OpenStalkRepresentativeCoherence
+import Sheaf.AlgebraicGeometry.OpenTensorRestrictionRepresentative
 
 @[expose] public section
 set_option autoImplicit false
@@ -13,6 +15,23 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry
 open SingleComplexBaseChange
+private theorem assemble_homology_transport
+    {D : Type*} [Category D]
+    {A B C E Z A' B' C' E' C₁ E₁ : D}
+    {p : A ⟶ B} {x : B ⟶ C} {b : C ⟶ E} {ν : E ⟶ Z}
+    {a : B ⟶ B'} {q : B' ⟶ E'} {c : E' ⟶ E₁} {d : E₁ ⟶ Z}
+    {u : A ⟶ A'} {l : A' ⟶ B'} {v : A' ⟶ C'} {w : C' ⟶ E'}
+    {t : C' ⟶ C₁} {r : C₁ ⟶ E₁}
+    (hc : x ≫ b ≫ ν = a ≫ q ≫ c ≫ d)
+    (h₀ : p ≫ a = u ≫ l) (h : v ≫ w = l ≫ q) (h₁ : w ≫ c = t ≫ r) :
+    p ≫ x ≫ b ≫ ν = u ≫ v ≫ t ≫ r ≫ d := by
+  rw [hc, reassoc_of% h₀, ← reassoc_of% h, reassoc_of% h₁]
+
+attribute [local irreducible] tensorStalkIso tensorComplex openPinnedTensorRestrictionIso
+attribute [local irreducible] openDerivedAdditiveStalkIso comparisonStalkHomologyIso
+
+set_option maxHeartbeats 1200000 in
+-- The homology comparisons involve several composed functors and localization factors.
 /-- A degreewise canonical open tensor-stalk square induces the homology square.
 
 Proof: the hypothesis is an equality in every degree of the two additive chain
@@ -90,6 +109,73 @@ theorem openOrdinaryTensor_germ_transport_equation
             (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =
         ((T₀.sc i).mapHomologyIso F₀).inv ≫
           HomologicalComplex.homologyMap τ.hom i ≫ ((T.sc i).mapHomologyIso F).hom ≫
-            F.map k := by sorry
+            F.map k := by
+  dsimp only
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  have : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive :=
+    schemeOpenRestriction_additive X (f ⁻¹ᵁ V)
+  have : (schemeOpenRestriction X (f ⁻¹ᵁ V)).PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  have : (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).Additive :=
+    schemeOpenRestriction_additive X' (f' ⁻¹ᵁ V')
+  have : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z),
+      (Scheme.Modules.tensorPullback k).Additive := fun k ↦ tensorPullbackAdditive k
+  let Q₀ := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P
+  let N₀ : CochainComplex
+      (SheafOfModules.{u} (moduleRings (f' ⁻¹ᵁ V').toScheme.toRingedSpace)) ℤ :=
+    ((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q₀
+  let N : CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ :=
+    ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
+  let L₀ := RingedSpace.moduleStalkFunctor (f' ⁻¹ᵁ V').toScheme.toRingedSpace z
+  let L := RingedSpace.moduleStalkFunctor X'.toRingedSpace z.val
+  let F₀ := forget₂ (ModuleCat.{u} (C z)) AddCommGrpCat.{u}
+  let F := forget₂ (ModuleCat.{u} (C z.val)) AddCommGrpCat.{u}
+  let γ : schemeOpenRestriction X' (f' ⁻¹ᵁ V') ⋙ L₀ ⋙ F₀ ≅ L ⋙ F :=
+    Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv (f' ⁻¹ᵁ V'))
+      (L₀ ⋙ F₀) ≪≫ Scheme.Modules.restrictStalkNatIso (f' ⁻¹ᵁ V').ι z
+  let a : N₀ ⟶ ((schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapHomologicalComplex
+      (.up ℤ)).obj N :=
+    (NatTrans.mapHomologicalComplex
+      (openPinnedTensorRestrictionIso g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj).inv (.up ℤ)).app P
+  let ρ := (F₀.mapHomologicalComplex (.up ℤ)).map
+      ((L₀.mapHomologicalComplex (.up ℤ)).map a) ≫
+    (NatTrans.mapHomologicalComplex γ.hom (.up ℤ)).app N
+  intro τ hτ
+  let T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
+  let T := tensorComplex f f' g g' sq z.val P
+  let e₀ := tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
+  let e := tensorStalkIso f f' g g' sq z.val P
+  have hchain : τ.hom ≫ (F.mapHomologicalComplex (.up ℤ)).map e.hom =
+      (F₀.mapHomologicalComplex (.up ℤ)).map e₀.hom ≫ ρ := by
+    apply HomologicalComplex.Hom.ext
+    funext n
+    exact hτ n
+  have hhom := congrArg (fun t ↦ HomologicalComplex.homologyMap t i) hchain
+  rw [HomologicalComplex.homologyMap_comp, HomologicalComplex.homologyMap_comp] at hhom
+  have hc := openStalk_representative_coherence X' (f' ⁻¹ᵁ V') z i N₀ N a
+  have hβ : singleComplexOpenTensorRestrictionMap g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj P =
+      DerivedCategory.Q.map a ≫
+        (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategoryFactors.inv.app N := by
+    exact openTensorRestriction_representative g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj P
+  dsimp only at hc
+  rw [← hβ] at hc
+  have hn₀ := ShortComplex.mapHomologyIso_inv_naturality
+    ((HomologicalComplex.shortComplexFunctor _ (.up ℤ) i).map e₀.hom) F₀
+  have hn := ShortComplex.mapHomologyIso_hom_naturality
+    ((HomologicalComplex.shortComplexFunctor _ (.up ℤ) i).map e.hom) F
+  change F₀.map (HomologicalComplex.homologyMap e₀.hom i) ≫
+      ((((L₀.mapHomologicalComplex (.up ℤ)).obj N₀).sc i).mapHomologyIso F₀).inv =
+    ((T₀.sc i).mapHomologyIso F₀).inv ≫
+      HomologicalComplex.homologyMap ((F₀.mapHomologicalComplex (.up ℤ)).map e₀.hom) i
+    at hn₀
+  change HomologicalComplex.homologyMap
+      ((F.mapHomologicalComplex (.up ℤ)).map e.hom) i ≫
+      ((((L.mapHomologicalComplex (.up ℤ)).obj N).sc i).mapHomologyIso F).hom =
+    ((T.sc i).mapHomologyIso F).hom ≫
+      F.map (HomologicalComplex.homologyMap e.hom i) at hn
+  have hresult := assemble_homology_transport hc hn₀ hhom hn
+  erw [F₀.map_comp, F.map_comp]
+  exact hresult
+
 
 end AlgebraicGeometry
