@@ -28,47 +28,38 @@
  ],
  "proof": [
   {
-   "text": "Fix an open subscheme U⊆Y and put V=f^{-1}U. By the definition of the underived direct image, Γ(U,(f_U)_*G)=Γ(V,G) naturally for every O_V-module sheaf G; this is the degree-zero section identity used in Tag 08D5.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5, proof of part (2), displayed identity Γ(U,f_*G)=Γ(f^{-1}U,G)"
-   }
+   "text": "Put V=f^{-1}U and g=f_U. Let F be module direct image along g, G be abelian-group sections on U, and H be abelian-group sections on V. The identity H=F followed by G is definitional: inverse image preserves the top open and forgetting the scalar restriction leaves the underlying abelian group unchanged.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-open-module-derived-sections"
+   ],
+   "elementary": true
   },
   {
-   "text": "Let P be the one-point ringed space (pt,Z) with structure sheaf the ring Z, so Mod(Z_P)=Ab. Let π_U:(U,O_U)→P and π_V:(V,O_V)→P be the morphisms of ringed spaces [def-weil-locally-ringed-space-morphism] given by the constant map and the unique ring maps Z→O_U(U), Z→O_V(V). Uniqueness of ring maps out of Z gives π_V=π_U∘f_U as ringed-space morphisms (f_U is a morphism of schemes, hence of ringed spaces). By the direct image of [def-pc-ringed-spaces-derived-direct-image], (π_U)_*G=Γ(U,G) and (π_V)_*G=Γ(V,G); since R(π_U)_* is computed by applying (π_U)_* to any K-injective resolution, as is RΓ(U,-), we have RΓ(U,-)=R(π_U)_* and RΓ(V,-)=R(π_V)_* as functors to D(Ab). (Note P is not a scheme, and the structure morphism U→Spec Z would not do: its derived direct image lands in D(O_{Spec Z}), not in complexes of abelian groups.)",
+   "text": "Apply isIso_directImage_globalSections_unit_on_kInjective to g and any K-injective complex I on V. This gives invertibility of the module-valued global-sections unit at F(I). Choose the standard derived category for modules over Gamma(U,O_U), an auxiliary category only. Forgetting these modules to abelian groups is exact. The composite right-derived unit is therefore invertible, using isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact and its descent factorization; cancel its invertible descent comparison. Since module-valued global sections followed by forgetting is definitionally G, the G unit at F(I) is invertible.",
    "uses": [
-    "def-weil-locally-ringed-space-morphism",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-pc-direct-image-global-sections-kinjective-acyclic"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5T context: direct image to a one-point ringed space is global sections"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pc-ringed-spaces-derived-direct-image-composition] to the composable morphisms of ringed spaces V→U→P (f_U then π_U). It gives R(π_U)_*∘R(f_U)_*≅R(π_U∘f_U)_*=R(π_V)_*. Evaluating at E|_V and using Step 2 yields RΓ(U,R(f_U)_*(E|_V))≅RΓ(V,E|_V), naturally in E; the identification is compatible with restriction to smaller opens U'⊆U by construction, giving naturality in U.",
+   "text": "Form rightDerivedFunctorCompUnit F G. On a K-injective complex its factors are the invertible G unit from Step 2 and G applied to the invertible F unit. The K-injective localizer criterion makes RF followed by RG a right derived functor of F followed by G. Right-derived uniqueness gives RF followed by RG isomorphic to RH. Whisker this natural isomorphism by the derived exact restriction from X to V, obtaining exactly the stated functor isomorphism with all four localization universes independent.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "def-pc-derived-open-restriction-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5T (lemma-derived-pushforward-composition), applied to V→U→(pt,Z)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "def-weil-locally-ringed-space-morphism",
-  "def-pc-ringed-spaces-derived-direct-image"
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-open-module-derived-sections",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic",
+  "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D5, proof of part (2); derived mechanism via Tag 0D5T for V→U→(pt,Z)"
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T composition mechanism and perfect.tex Tag 08D5(2); M4 Lean realization via existing module-valued global-sections acyclicity, exact forgetting, and right-derived uniqueness"
  },
  "mathlib_searches": [
   {
@@ -182,5 +173,15 @@
    "def-pc-derived-direct-image",
    "def-sc-sheaf-cohomology-functor"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T201802-L-3974390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

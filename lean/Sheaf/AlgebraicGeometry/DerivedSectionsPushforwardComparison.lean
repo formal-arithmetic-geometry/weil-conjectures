@@ -7,8 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.Topology.OpenModuleDerivedSections
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Derived sections of a derived direct image
 
@@ -25,6 +26,68 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option autoImplicit false
+
+-- Exact forgetting to abelian groups transports invertibility of the derived unit.
+private theorem unit_isIso_comp_of_exact
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+    [CategoryTheory.Limits.PreservesFiniteLimits G]
+    [CategoryTheory.Limits.PreservesFiniteColimits G]
+    (J : HomotopyCategory C (ComplexShape.up ℤ))
+    [IsIso (F.rightDerivedFunctorUnit.app J)] :
+    IsIso ((F ⋙ G).rightDerivedFunctorUnit.app J) := by
+  let β := Functor.rightDerivedFunctorCompUnit F G
+  have := Functor.isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact F G
+  let δ := (F ⋙ G).rightDerivedFunctor.rightDerivedDesc
+    (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) β
+  have : IsIso δ :=
+    (Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc (F ⋙ G).rightDerivedFunctor
+      (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+      (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) β).mp inferInstance
+  have hβ : IsIso (β.app J) := by
+    dsimp [β, Functor.rightDerivedFunctorCompUnit]
+    infer_instance
+  have h : (F ⋙ G).rightDerivedFunctorUnit.app J ≫ δ.app (DerivedCategory.Qh.obj J) =
+      β.app J := Functor.rightDerived_fac_app _ _ _ _ _ _
+  have : IsIso ((F ⋙ G).rightDerivedFunctorUnit.app J ≫
+      δ.app (DerivedCategory.Qh.obj J)) := by rw [h]; exact hβ
+  exact IsIso.of_isIso_comp_right ((F ⋙ G).rightDerivedFunctorUnit.app J)
+    (δ.app (DerivedCategory.Qh.obj J))
+
+-- Right-derived uniqueness needs only acyclicity, not preservation of K-injectivity.
+private theorem derivedSectionsCompositionOfAcyclic
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) [F.Additive] [G.Additive] [H.Additive]
+    (hcomp : H = F ⋙ G)
+    (h : ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
+      IsIso (G.rightDerivedFunctorUnit.app
+        ((F.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj I)))) :
+    Nonempty (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅ H.rightDerivedFunctor) := by
+  subst H
+  let β := Functor.rightDerivedFunctorCompUnit F G
+  have : (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).IsRightDerivedFunctor β
+      (HomotopyCategory.quasiIso C (.up ℤ)) := by
+    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
+      ((F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
+        _ (fun J ↦ ?_)
+    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
+    change IsIso (β.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I))
+    have := h I
+    dsimp [β, Functor.rightDerivedFunctorCompUnit]
+    infer_instance
+  exact ⟨(Functor.rightDerivedUnique (F ⋙ G).rightDerivedFunctor
+    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
+    (F ⋙ G).rightDerivedFunctorUnit β (HomotopyCategory.quasiIso C (.up ℤ))).symm⟩
 
 /-- For an open `U` of the target of `f`, derived global sections of the derived
 pushforward of `E` restricted to `f⁻¹(U)` agree naturally with derived global sections
@@ -60,6 +123,29 @@ theorem derivedSectionsPushforwardComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
           RingedSpace.openModuleDerivedSections U.toScheme.toRingedSpace ⊤) ≅
         ((schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory ⋙
           RingedSpace.openModuleDerivedSections (f ⁻¹ᵁ U).toScheme.toRingedSpace ⊤)) := by
-  sorry
+  let V := (f ⁻¹ᵁ U).toScheme
+  let g := morphismRestrict f U
+  let F := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
+  let G := RingedSpace.openModuleSections U.toScheme.toRingedSpace ⊤
+  let H := RingedSpace.openModuleSections V.toRingedSpace ⊤
+  let M := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace
+  let A := forget₂
+    (ModuleCat.{u} ((moduleRings U.toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))
+    AddCommGrpCat.{u}
+  let _ := HasDerivedCategory.standard
+    (ModuleCat.{u} ((moduleRings U.toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))
+  have h : ∀ (I : CochainComplex (SheafOfModules.{u} (moduleRings V.toRingedSpace)) ℤ)
+      [I.IsKInjective], IsIso (G.rightDerivedFunctorUnit.app
+        ((F.mapHomotopyCategory (.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj I))) := by
+    intro I hI
+    let J := (F.mapHomotopyCategory (.up ℤ)).obj
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj I)
+    let _ : IsIso (M.rightDerivedFunctorUnit.app J) :=
+      isIso_directImage_globalSections_unit_on_kInjective g I
+    exact unit_isIso_comp_of_exact M A J
+  have e₀ : H = F ⋙ G := rfl
+  obtain ⟨e⟩ := derivedSectionsCompositionOfAcyclic F G H e₀ h
+  exact ⟨Functor.isoWhiskerLeft (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory e⟩
 
 end AlgebraicGeometry
