@@ -19,36 +19,41 @@
  },
  "proof": [
   {
-   "text": "Module naturality of the assumed boundary and of cohomology restriction commutes with transition multiplication. Extend the maps to direct sums and descend to quotient fraction presentations; this gives a,b,d and the four generator formulas.",
+   "text": "Construct the additive inclusion of each numerator group into its direct sum quotient. A natural transformation of open module cohomology commutes with tensor-section multiplication by naturality. Extend its numerator maps using DirectSum.toAddMonoid; every generating fraction relation maps to zero by that naturality and the defining quotient relation. Descend with QuotientAddGroup.lift. Take the product of the two restriction maps for a, the difference of the intersection restriction maps composed with projections for b, and the descended delta for d. Their four prescribed formulas follow by evaluation on direct-sum generators and additivity.",
    "uses": [
     "def-sc-cohomology-fraction-presentation",
     "def-sc-open-module-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The tensor-power multiplication identities make this presentation the sequential direct limit over the nonnegative twists. Move a finite sum to a common denominator. A fraction is zero exactly when a further transition kills its numerator: express membership in the generated subgroup by finitely many relations and move all of them to one sufficiently large denominator, where they cancel.",
+   "text": "The quotient relations directly identify [n,xi] with [n+b,s^b xi]. Quotient induction and DirectSum.induction_on show that every fraction is represented by one numerator: for a sum of representatives in degrees n,m move both to n+m and add their numerators. The same padding gives a common denominator for a pair of fractions over different opens. A zero numerator class is killed by a later transition by the proved eventual-zero criterion.",
    "uses": [
-    "def-sc-cohomology-fraction-presentation"
+    "def-sc-cohomology-fraction-presentation",
+    "lem-sc-cohomology-fraction-eventually-zero"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Represent a class in the kernel at a single denominator, then increase the denominator until its image is zero. At that twist use the assumed exactness to choose a preimage; its fraction is a preimage of the original class. For the product term move both components to the same denominator first. Conversely the composites vanish on each numerator by the assumed exactness, hence on the quotient. Apply the same eventual-zero criterion and degree-zero injectivity to prove injectivity of a_0.",
+   "text": "For exactness at the product term, choose a common denominator, apply the eventual-zero criterion to the difference of the restricted numerators, and use naturality to move the original pair to that denominator. The assumed first exactness supplies its preimage. For exactness at the intersection term, kill the delta numerator, move the original numerator by naturality, and apply the assumed second exactness. At the union term, successively kill the U and V restrictions; naturality preserves the already-zero U restriction. The assumed third exactness supplies a delta preimage. These numerator preimages yield fraction preimages by the generator formulas and transition relation. Conversely the assumed composites vanish on numerators, hence on all fractions by single-numerator representations. To prove injectivity of a at degree zero, kill both restrictions successively, use the assumed degree-zero injectivity against the zero numerator, and conclude that the original fraction is zero.",
    "uses": [
-    "def-sc-cohomology-fraction-presentation"
+    "def-sc-cohomology-fraction-presentation",
+    "def-sc-open-module-cohomology",
+    "lem-sc-cohomology-fraction-eventually-zero"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-cohomology-fraction-presentation",
-  "def-sc-open-module-cohomology"
+  "def-sc-open-module-cohomology",
+  "lem-sc-cohomology-fraction-eventually-zero"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality",
+  "note": "B3: complete Lean construction, common-denominator argument, kernel lifting and injectivity; the new eventual-zero theorem is also completely proved."
  },
  "mathlib_searches": [
   {
@@ -130,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T212720-L-1130689",
+  "landing": "20261013T031529-L-3567959",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

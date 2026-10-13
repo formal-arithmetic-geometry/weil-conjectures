@@ -10843,3 +10843,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition (stage 3; reviewer PASS; first push; landing 20261013T031528-L-3567356 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.PullbackStalkGermAction (stage 3; reviewer PASS; first push; landing 20261013T031528-L-3567563 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/A4/Sheaf.Algebra.Homology.HomTensorNaturalityComponent (stage 3; reviewer PASS; first push; landing 20261013T031529-L-3567700 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/B3/Sheaf.Paper.CohomologyFractionMayerVietorisExact (stage 3; reviewer PASS; after a return; landing 20261013T031529-L-3567959 (interface); batch 20261013T031526; modules 2; new nodes 1)
