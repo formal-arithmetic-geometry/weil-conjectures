@@ -70,6 +70,9 @@ the exchange morphism is an isomorphism
 - `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`:
   the stalk of the exchange morphism of `ℙ¹` at a geometric point is the pullback map between
   the cohomologies of two projective lines over separably closed fields.
+- `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
+  strict-local exchange, its case over strictly henselian local bases, and
+  `AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal`.
 
 ## References
 
@@ -265,7 +268,7 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
   rw [← Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
   exact (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).1 this q
 
-/-- **The exchange morphism of `ℙ¹` on a geometric stalk.** Let
+/-- **The exchange morphism of `ℙ¹` at a geometric point, up to isomorphism.** Let
 
 ```
 X' --g'--> ℙ¹_S
@@ -275,40 +278,24 @@ v            v
 T ----g----> S
 ```
 
-be cartesian, let `F` be a torsion sheaf of `Λ`-modules on `ℙ¹_S` and `q ≥ 0`. Let
-`τ : Spec k' ⟶ T` and `σ : Spec k ⟶ S` be geometric points whose fields are algebraic over
-the residue fields of their images — so that `k` and `k'` are the residue fields of the strict
-henselisations of `S` at `σ` and of `T` at `τ` — and let `ι : Spec k' ⟶ Spec k` be compatible
-with `g`. Then the stalk at `τ` of the degree-`q` exchange morphism
-`g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` (`AlgebraicGeometry.Etale.baseChangeHomologyMap`) is, up to
-isomorphisms of its source and target, the pullback map
-`Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`.
+be cartesian, `F` a torsion sheaf of `Λ`-modules on `ℙ¹_S`, `q ≥ 0`, and let
+`τ : Spec k' ⟶ T`, `σ : Spec k ⟶ S` be geometric points (`k`, `k'` separably closed) together
+with `ι : Spec k' ⟶ Spec k` such that `ι ≫ σ = τ ≫ g`. Then there are isomorphisms `e₁`, `e₂`
+identifying the stalk at `τ` of the degree-`q` exchange morphism
+`g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` with the pullback map `Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)`.
 
-**Form of the statement.** The blueprint identifies the two stalks with the cohomologies of
-the closed fibres through the canonical maps `ρ ∘ Φ`. This statement only asserts that
-*some* isomorphisms `e₁`, `e₂` make the square commute, which is weaker: the project has no
-edge map yet comparing the higher direct images `Rᵠp_*`, defined as homology in
-`DerivedCategory.Plus`, with the `Ext`-groups `CategoryTheory.Sheaf.H`, so the canonical maps
-cannot be stated. In this weak form the hypotheses `hσ` and `hτ` are not needed.
-
-**Proof.** The target stalk is `Hᵠ(ℙ¹_{k'}, F|)`
+The target stalk is `Hᵠ(ℙ¹_{k'}, F|)`
 (`AlgebraicGeometry.Etale.nonempty_addEquiv_sheafFiber_higherDirectImage_projectiveLine`),
-which is `e₂`. The stalk map is bijective
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`, proved independently of
-this statement from the injective acyclicity of `ℙ¹`), and so is the pullback map
-(`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`); `e₁` is the isomorphism
-making the square commute.
-(blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) -/
-theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
+which gives `e₂`. The stalk map is bijective
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), and so is the pullback
+map (`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`); `e₁` is the
+isomorphism making the square commute. -/
+theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_of_isSepClosed
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
     (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k))
     (hι : ι ≫ σ = τ ≫ g)
-    (_hσ : ∃ (s : S) (φ : S.residueField s ⟶ .of k),
-      φ.hom.IsIntegral ∧ Spec.map φ ≫ S.fromSpecResidueField s = σ)
-    (_hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
-      φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
@@ -347,5 +334,165 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     fun x ↦ ?_⟩
   rw [AddEquiv.trans_apply, AddEquiv.trans_apply]
   exact (AddEquiv.ofBijective_apply_symm_apply _ hc).symm
+
+/-- **The exchange morphism of `ℙ¹` on a geometric stalk.** Let
+
+```
+X' --g'--> ℙ¹_S
+|            |
+f'           p
+v            v
+T ----g----> S
+```
+
+be cartesian, let `F` be a torsion sheaf of `Λ`-modules on `ℙ¹_S` and `q ≥ 0`. Let
+`τ : Spec k' ⟶ T` and `σ : Spec k ⟶ S` be geometric points whose fields are algebraic over
+the residue fields of their images — so that `k` and `k'` are the residue fields of the strict
+henselisations of `S` at `σ` and of `T` at `τ` — and let `ι : Spec k' ⟶ Spec k` be compatible
+with `g`. Then the stalk at `τ` of the degree-`q` exchange morphism
+`g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` (`AlgebraicGeometry.Etale.baseChangeHomologyMap`) is, up to
+isomorphisms of its source and target, the pullback map
+`Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`.
+
+**Form of the statement.** The blueprint identifies the two stalks with the cohomologies of
+the closed fibres through the canonical maps `ρ ∘ Φ`. This statement only asserts that
+*some* isomorphisms `e₁`, `e₂` make the square commute, which is weaker: the project has no
+edge map yet comparing the higher direct images `Rᵠp_*`, defined as homology in
+`DerivedCategory.Plus`, with the `Ext`-groups `CategoryTheory.Sheaf.H`, so the canonical maps
+cannot be stated. In this weak form the hypotheses `hσ` and `hτ` are not needed, and the
+statement is
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_of_isSepClosed`.
+Its proof uses that the exchange morphism is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), which is proved
+independently from the injective acyclicity of `ℙ¹`, itself computed on geometric stalks.
+(blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) -/
+theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
+    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
+    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
+    {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
+    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k))
+    (hι : ι ≫ σ = τ ≫ g)
+    (_hσ : ∃ (s : S) (φ : S.residueField s ⟶ .of k),
+      φ.hom.IsIntegral ∧ Spec.map φ ≫ S.fromSpecResidueField s = σ)
+    (_hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'),
+      φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
+    (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionModuleSheaf F] (q : ℕ) :
+    ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+          ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+
+        Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q)
+      (e₂ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+          ((Etale.baseChangeTargetFunctor Λ g' f' q).obj F) ≃+
+        Sheaf.H ((ProjectiveSpace.map _ ι)^*[AddCommGrpCat.{u + 1}].obj
+          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F))) q),
+      ∀ x, e₂ ((((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+          (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
+        Etale.cohomologyMap (ProjectiveSpace.map _ ι)
+          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
+  Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_of_isSepClosed Λ sq σ τ ι hι F q
+
+section StrictLocalExchange
+
+variable {A B : Type u} [CommRing A] [HenselianLocalRing A]
+  [IsSepClosed (IsLocalRing.ResidueField A)]
+  [CommRing B] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField B)]
+  (φ : A →+* B) [IsLocalHom φ]
+
+  (φ : A →+* B) [IsLocalHom φ]
+
+/-- **The strict-local exchange for `ℙ¹`.** Let `φ : A ⟶ B` be a local morphism of strictly
+henselian local rings, with residue fields `κ_A`, `κ_B` and induced map `κ_A ⟶ κ_B`, and
+consider the cartesian square
+```
+ℙ¹_B --g'--> ℙ¹_A
+ |            |
+ v            v
+Spec B -g-> Spec A
+```
+Let `F` be a torsion sheaf of `Λ`-modules on `ℙ¹_A` and `q ≥ 0`. Then the stalk at the closed
+geometric point `Spec κ_B ⟶ Spec B` of the degree-`q` exchange morphism
+`g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F` is, up to isomorphisms of its source and target, the pullback
+map `Hᵠ(ℙ¹_{κ_A}, F₀) ⟶ Hᵠ(ℙ¹_{κ_B}, F₀|)` along `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}`. The isomorphisms are
+the strictly henselian comparisons on the two closed fibres.
+
+**Form of the statement.** The blueprint asks for the canonical restriction maps. This
+statement only asserts that *some* isomorphisms `e₁`, `e₂` make the square commute, which is
+weaker, for the same reason as
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`:
+the project has no edge map yet comparing the stalks of the higher direct images `Rᵠp_*`
+(homology in `DerivedCategory.Plus`) with the `Ext`-groups `CategoryTheory.Sheaf.H`. It is the
+case `σ = Spec κ_A`, `τ = Spec κ_B` of
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_of_isSepClosed`.
+(blueprint: `prop-weil-pbc-strict-local-exchange`) -/
+theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
+    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionModuleSheaf F] (q : ℕ) :
+    ∃ (e₁ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).obj
+          ((Etale.baseChangeSourceFunctor Λ (Spec.map (CommRingCat.ofHom φ))
+            (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) q).obj F) ≃+
+        Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
+            ModuleCat.{u + 1} Λ].obj F)) q)
+      (e₂ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).obj
+          ((Etale.baseChangeTargetFunctor Λ (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom φ)))
+            (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B)) q).obj F) ≃+
+        Sheaf.H ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom
+            (IsLocalRing.ResidueField.map φ))))^*[AddCommGrpCat.{u + 1}].obj
+          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+            ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
+              ModuleCat.{u + 1} Λ].obj F))) q),
+      ∀ x, e₂ ((((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ
+            (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)).hom x) =
+        Etale.cohomologyMap (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom
+            (IsLocalRing.ResidueField.map φ))))
+          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+            ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
+              ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
+  Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_of_isSepClosed Λ
+    (ProjectiveSpace.isPullback_map _ _) _ _ _
+    (by
+      rw [← Spec.map_comp, ← Spec.map_comp]
+      congr 1
+      ext a
+      exact IsLocalRing.ResidueField.map_residue φ a) F q
+
+/-- If the residue field map `κ_A ⟶ κ_B` of a local morphism of strictly henselian local
+rings is an isomorphism, the stalk at the closed geometric point of `Spec B` of the
+exchange morphism of `ℙ¹` is an isomorphism. This is the second assertion of the
+blueprint node `prop-weil-pbc-strict-local-exchange`, deduced from
+`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
+pullback along the isomorphism `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}` is bijective on cohomology. -/
+theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
+    (hφ : Function.Bijective (IsLocalRing.ResidueField.map φ))
+    (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionModuleSheaf F] (q : ℕ) :
+    IsIso (((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ
+        (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)) := by
+  obtain ⟨e₁, e₂, he⟩ := Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
+    Λ φ F q
+  have : IsIso (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hφ
+  have : IsIso (ProjectiveSpace.map (ULift.{u} (Fin 2))
+      (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))) :=
+    ⟨ProjectiveSpace.map _ (inv (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))),
+      by rw [← ProjectiveSpace.map_comp, IsIso.hom_inv_id, ProjectiveSpace.map_id],
+      by rw [← ProjectiveSpace.map_comp, IsIso.inv_hom_id, ProjectiveSpace.map_id]⟩
+  rw [ConcreteCategory.isIso_iff_bijective, ← e₂.bijective.of_comp_iff']
+  have hfun : e₂ ∘ _ = Etale.cohomologyMap (ProjectiveSpace.map (ULift.{u} (Fin 2))
+      (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ))))
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
+          ModuleCat.{u + 1} Λ].obj F)) q ∘ e₁ := funext he
+  rw [hfun]
+  exact (Etale.cohomologyMap_bijective _ _ q).comp e₁.bijective
+
+end StrictLocalExchange
 
 end AlgebraicGeometry

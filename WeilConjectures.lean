@@ -2127,6 +2127,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLin
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClosed
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictHenselizationStalk
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.CohomologyStageContinuity

@@ -32,16 +32,12 @@ The proof first treats a single torsion sheaf `F` on `ℙ¹_S`: the degreewise e
 `g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F` are isomorphisms
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`). There
-the exchange morphism is checked at every geometric point, since geometric stalks are
-conservative; by
-`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`, the
-stalk is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between two separably closed
-fields. That map is bijective by the invariance of the cohomology of a curve under extension
-of separably closed base fields. The strictly henselian route of
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian`
-(Mayer–Vietoris on the two standard charts, finite étale lifting) is not used by the Lean
-proof; it is the intended proof of the `sorry`ed stalk statement, through the comparison of
-`ℙ¹` over a strictly henselian ring with its closed fibre.
+they are deduced from the injective acyclicity of `p`, which is checked on geometric stalks:
+at a geometric point `Spec Ω ⟶ T`, the stalk of `Rᵠp'_* g'⁻¹ F` is `Hᵠ(ℙ¹_Ω, F|)`, by the
+strict henselisation stalk formula, the comparison of `ℙ¹` over a strictly henselian ring
+with its closed fibre
+(`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian`) and the
+invariance of the cohomology of a proper curve under extension of separably closed fields.
 
 Complexes are then reached by truncation dévissage
 (`AlgebraicGeometry.Etale.isIso_baseChange_app_projectiveLine`): both sides of the derived
