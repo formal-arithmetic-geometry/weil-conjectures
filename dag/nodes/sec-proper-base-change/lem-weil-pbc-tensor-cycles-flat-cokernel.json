@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-tensor-cycles-flat-cokernel",
+ "kind": "statement",
+ "title": "Finite coefficient expression for tensor cycles with flat cokernel",
+ "statement": "Let $R\\to A\\to B$ be a compatible tower of commutative rings and let $X\\xrightarrow{d}Y\\xrightarrow{q}Z\\to0$ be an exact sequence of $R$-modules [def-weil-pbc-exact-sequence]. Suppose $A\\otimes_R Z$ is flat over $A$ [def-weil-pbc-flat-ring-map]. For every $z\\in X\\otimes_R B$ satisfying $(d\\otimes1)(z)=0$, there exist $n\\ge0$, elements $x_i\\in X\\otimes_R A$ with $(d\\otimes1)(x_i)=0$, and $b_i\\in B$ such that $z=\\sum_{i<n}(1\\otimes(b_i\\cdot(A\\to B)))(x_i)$. The map on coefficients sends $a$ to $b_i\\,\\operatorname{image}(a)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MM, lemma-surjective-on-tor-one, the kernel base-change paragraph (read at https://stacks.math.columbia.edu/tag/00MM)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Tensor the exact pair d,q with A. Mathlib lTensor_exact and lTensor_surjective give dA,qA exact with qA surjective. Set I=range(dA), K=ker(dA), and dI=dA.rangeRestrict. The pairs K.subtype,dI and I.subtype,qA are exact and dI is surjective.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness of A tensor Z and LinearMap.lTensor_injective_of_exact_of_flat make I.subtype.lTensor B injective. Let eX and eY be AlgebraTensorModule.cancelBaseChange. Pure tensor calculations show these equivalences intertwine dA.lTensor B with d.baseChange B. Thus w=eX.symm(comm(z)) is killed by dA.lTensor B, and injectivity implies dI.lTensor B kills w. Tensor right exactness on K → A tensor X → I gives v in B tensor_A K with image w.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use TensorProduct.exists_finset to write v as a finite sum of pure tensors, indexed by Fin(card S) via Fintype.equivFin. Commute each A tensor X kernel element to obtain x_i in X tensor A. The kernel condition gives the required cycle equations. Applying comm composed with cancelBaseChange to the tensor sum gives the displayed formula; verify the coefficient formula by tensor induction and Algebra.smul_def.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-flat-quotient-tensor-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MM, kernel base-change paragraph; fully formalized by T2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact sequence tensor flat cokernel lifts kernel cycles after base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an exact sequence X to Y to Z to zero with Z tensor A flat, every cycle in X tensor B is a finite B linear combination of coefficient images of cycles in X tensor A",
+   "results": "['Module.Flat.lTensor_shortComplex_exact', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_exact', 'Module.FaithfullyFlat.range_le_ker_of_exact_rTensor', 'Module.Flat.rTensor_exact', \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", 'Module.Flat.iff_lTensor_exact'] ",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas found; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lTensor_injective_of_exact_of_flat",
+   "results": "['LinearMap.lTensor_injective_of_exact_of_flat'] ",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_cycles_flat|cancelBaseChange|lTensor_injective_of_exact_of_flat",
+   "results": "['Mathlib/LinearAlgebra/TensorProduct/Tower.lean', 'Mathlib/LinearAlgebra/TensorProduct/Tower.lean', 'Mathlib/LinearAlgebra/TensorProduct/Tower.lean', 'Mathlib/LinearAlgebra/TensorProduct/Tower.lean', 'Mathlib/LinearAlgebra/TensorProduct/Tower.lean', 'Mathlib/LinearAlgebra/TensorProduct/Quotient.lean'] ",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas found; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorOneSurjectiveFlatMiddle",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity argument; Tag 00MM kernel base-change subargument",
+   "via": [
+    "lem-weil-pbc-tor-one-surjective-flat-middle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorCyclesFlatCokernel",
+  "file": "lean/Sheaf/RingTheory/TensorCyclesFlatCokernel.lean",
+  "declaration": "CategoryTheory.tensor_cycles_flat_cokernel",
+  "statement": "theorem tensor_cycles_flat_cokernel\n    (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]\n    [Algebra R A] [Algebra R B] [Algebra A B] [IsScalarTower R A B]\n    (X Y Z : ModuleCat.{u} R) (d : X ⟶ Y) (q : Y ⟶ Z)\n    (hexact : Function.Exact d q) (hq : Function.Surjective q)\n    (hflat : Module.Flat A (A ⊗[R] Z))\n    (z : X ⊗ ModuleCat.of R B) (hz : (d ▷ ModuleCat.of R B) z = 0) :\n    ∃ (n : ℕ) (x : Fin n → X ⊗ ModuleCat.of R A) (b : Fin n → B),\n      (∀ i, (d ▷ ModuleCat.of R A) (x i) = 0) ∧\n      z = ∑ i, (X ◁ ModuleCat.ofHom\n        ((Algebra.lsmul R R B (b i)).comp\n          (IsScalarTower.toAlgHom R A B).toLinearMap)) (x i)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T111927-L-3064442",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T111927-L-3064442",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

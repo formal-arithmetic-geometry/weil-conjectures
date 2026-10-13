@@ -33,7 +33,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a free resolution $\\cdots\\to F_2\\to F_1\\to F_0\\to M\\to0$ over $R$. The complexes $F_\\bullet\\otimes_R A$ and $F_\\bullet\\otimes_R B$ compute the two Tor groups in the statement by [def-weil-pbc-tor-modules]. Put $K_A=\\ker(F_1\\otimes_R A\\to F_0\\otimes_R A)$ and define $K_B$ similarly; then $\\operatorname{Tor}_1^R(M,A)$ and $\\operatorname{Tor}_1^R(M,B)$ are the corresponding cycle modules modulo the images of $F_2$.",
+   "text": "Compute Tor using the chosen projective resolution P of M and its tensor complexes KA and KB. Lift the given Tor element to a cycle of KB using the epimorphism homologyπ, after transporting through P.isoLeftDerivedObj. The augmentation P₁ → P₀ → M is exact and its final arrow is surjective.",
    "uses": [
     "def-weil-pbc-tor-modules",
     "def-weil-pbc-exact-sequence"
@@ -41,20 +41,17 @@
    "elementary": false
   },
   {
-   "text": "Put $I=\\operatorname{im}(F_1\\otimes_R A\\to F_0\\otimes_R A)$. The exact augmented sequence splits at $I$ into $0\\to K_A\\to F_1\\otimes_R A\\to I\\to0$ and $0\\to I\\to F_0\\otimes_R A\\to M\\otimes_R A\\to0$. Since $M\\otimes_R A$ is flat over $A$, [lem-weil-pbc-flat-quotient-tensor-injective] applied to the second short exact sequence makes $I\\otimes_A B\\to F_0\\otimes_R B$ injective. By [lem-weil-pbc-tensor-right-exact] applied to the first, $K_A\\otimes_A B\\to F_1\\otimes_R B\\to I\\otimes_A B\\to0$ is exact. The identifications $(F_i\\otimes_R A)\\otimes_A B\\cong F_i\\otimes_R B$ identify the latter map with the map induced by $F_1\\otimes_R B\\to F_0\\otimes_R B$; therefore the image of $K_A\\otimes_A B$ is $K_B$ and the induced map $K_A\\otimes_A B\\twoheadrightarrow K_B$ is surjective.",
+   "text": "Apply tensor_cycles_flat_cokernel to that exact augmented presentation and the flatness hypothesis. Express the degree-one cycle over B as a finite sum of coefficient images of degree-one cycles over A, each multiplied by its specified coefficient bᵢ.",
    "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-weil-pbc-tensor-cycles-flat-cokernel",
+    "def-weil-pbc-flat-ring-map"
    ],
    "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-tensor-right-exact], tensoring the quotient presentation $F_2\\otimes_R A\\to K_A\\to\\operatorname{Tor}_1^R(M,A)\\to0$ with $B$ gives a quotient of $K_A\\otimes_A B$ identified with $\\operatorname{Tor}_1^R(M,A)\\otimes_A B$. The map $F_2\\otimes_R B\\to K_B$ is the base change of the corresponding map over $A$, so the surjection $K_A\\otimes_A B\\twoheadrightarrow K_B$ descends to a surjection on these quotients. The $A$-module structure on $\\operatorname{Tor}_1^R(M,A)$ is the functorial one in the second variable; on pure tensors the induced map sends $\\bar k\\otimes b$ to the class of $b\\bar k$, hence this descended map is the natural map $\\operatorname{Tor}_1^R(M,A)\\otimes_A B\\to\\operatorname{Tor}_1^R(M,B)$ from [def-weil-pbc-tor-modules]. It is therefore surjective. Lean interface repair R1: torOneModule is constructed by applying the second-variable Tor functor to multiplication endomorphisms. torOneCoefficientMap is that functor applied to the algebra map. torOneBaseChange is the balanced tensor lift of (t,b) ↦ b • torOneCoefficientMap(t), with B-linearity and its pure-tensor formula proved. The surjectivity argument above remains to be formalized; no proof of that argument is claimed. The canonical module laws use additivity of the coefficient functor [lem-weil-pbc-tor-one-second-additive]; its restriction-of-scalars compatibility uses R-linearity [lem-weil-pbc-tor-one-second-linear]. These supporting results are already proved in this module, independently of the remaining surjectivity hole.",
+   "text": "Regard each lifted cycle xᵢ as an element cᵢ of KA.cycles using moduleCatCyclesIso.inv. Naturality of iCycles and its injectivity identify the original KB cycle with the sum of cyclesMap(φᵢ)(cᵢ), where φᵢ is the tensor chain map induced by coefficient multiplication composed with A → B. Take aᵢ = isoLeftDerivedObj.inv(homologyπ(cᵢ)). The tensor sum Σ aᵢ ⊗ bᵢ maps to the prescribed Tor element: torOneBaseChange_tmul, functoriality, ProjectiveResolution.leftDerived_app_eq, the inverse identities of the resolution comparison isomorphisms, and homologyπ_naturality give the equality term by term. This proves surjectivity without any new unproved statement.",
    "uses": [
     "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-tensor-right-exact",
     "lem-weil-pbc-tor-one-second-additive",
     "lem-weil-pbc-tor-one-second-linear"
    ],
@@ -64,16 +61,15 @@
  "proof_deps": [
   "def-weil-pbc-tor-modules",
   "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-tensor-cycles-flat-cokernel",
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-tensor-right-exact",
   "lem-weil-pbc-tor-one-second-additive",
   "lem-weil-pbc-tor-one-second-linear"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00MM (lemma-surjective-on-tor-one), lines 23846--23880"
+  "place": "Tag 00MM (lemma-surjective-on-tor-one); formalized by T2 using projectiveResolution, tensor cycle lifting and naturality of left-derived comparison."
  },
  "mathlib_searches": [
   {
@@ -178,11 +174,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-46e11",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T100110-L-2481592",
+  "landing": "20261013T111927-L-3064442",
   "kind": "interface",
-  "note": "independent Codex review: Canonical Tor actions and base-change map match the node and Stacks Tag 00MM; both new instance nodes match their Lean declarations. Compilation is clean; all 19 axiom checks pass, with sorryAx only for the documented remaining surjectivity hole. No targets changed, direct importers, or mechanical findings."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
