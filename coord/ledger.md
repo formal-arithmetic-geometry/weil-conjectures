@@ -12654,3 +12654,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ModuleGeneratingSectionsCompactSelection (stage 3; reviewer PASS; first push; landing 20261013T133229-L-473 (interface); batch 20261013T133222; modules 2; new nodes 1)
 - 13:32 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AlternatingCechSheafDegreeZeroFactorization (stage 3; reviewer PASS; first push; landing 20261013T133229-L-580 (interface); batch 20261013T133222; modules 3; new nodes 2)
 - 13:37 L: merged deliver/C3/Sheaf.AlgebraicGeometry.RelativeFlatOpenScalarRestriction (stage 3; reviewer PASS; first push; landing 20261013T133743-L-43763 (interface); batch 20261013T133742; modules 3; new nodes 2)
+- 13:37 L: merged deliver/D4/Sheaf.RingTheory.PopescuUnitResidueExtension (stage 3; reviewer PASS; first push; landing 20261013T133743-L-43877 (interface); batch 20261013T133742; modules 3; new nodes 2)
