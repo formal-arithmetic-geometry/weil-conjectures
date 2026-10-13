@@ -13637,3 +13637,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:55 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Morphisms.PuncturedDvrNormalizationStalkDomain (stage 3; reviewer PASS; first push; landing 20261013T215555-L-894391 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:55 L: merged deliver/C3/Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyCofan (stage 3; reviewer PASS; first push; landing 20261013T215555-L-894497 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:55 L: merged deliver/C3/Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyTriangleRows (stage 3; reviewer PASS; first push; landing 20261013T215556-L-894605 (interface); batch 20261013T215553; modules 3; new nodes 2)
+- 21:55 L: merged deliver/C3/Sheaf.Algebra.Homology.BaseDerivedTensorOrdinaryShiftModel (stage 3; reviewer PASS; first push; landing 20261013T215556-L-894723 (interface); batch 20261013T215553; modules 2; new nodes 1)
