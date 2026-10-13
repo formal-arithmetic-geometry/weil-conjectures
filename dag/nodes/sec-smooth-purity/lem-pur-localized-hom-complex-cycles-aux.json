@@ -12,20 +12,33 @@
  },
  "proof": [
   {
-   "text": "Proof: apply section evaluation at U to the product cone specified by\n`homComplex_exists`. The forgetful functor from sheaves of modules and evaluation\nof presheaves preserve products, as does the forgetful functor from modules to\nabelian groups. Sections of the internal Hom at U are natural linear maps of\nrestricted modules on C/U. Thus a section of degree n is a family of maps\nL^p|U to I^(p+n)|U, with components given by the chosen projections. For n = 0,\nthe differential formula is d_I f - f d_L. Its vanishing says precisely that the\nfamily is a chain map (the non-successive chain-map equations are zero by the\ncomplex shape). The cycle inclusion identifies cycles with the kernel of this\ndifferential. Send a cycle to the resulting chain map. Conversely, assemble the\ncomponents of a chain map using the sectionwise product universal property; its\nchain-map equations put it in that kernel, hence yield a unique cycle. These\nconstructions are inverse because the product projections are jointly injective\nand the cycle inclusion is injective. The definition of the forward construction\ngives the displayed component formula. All products are indexed by integers;\nno finite-support or boundedness condition enters.",
+   "text": "Obtain the forward function and its prescribed projection formula.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-pur-localized-hom-complex-cycles-forward"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the bijectivity criterion to that function and its formula.",
+   "uses": [
+    "lem-pur-localized-hom-complex-cycles-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Equiv.ofBijective; its forward function is definitionally the original function, so the same formula proves the conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex"
+  "lem-pur-localized-hom-complex-cycles-forward",
+  "lem-pur-localized-hom-complex-cycles-bijective"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero), verified online; second-reader decomposition of the two original proof steps"
+  "place": "Tag 0A8X construction preceding 0A8Y; second reading by F1: forward function and bijectivity, assembled by Equiv.ofBijective"
  },
  "mathlib_searches": [
   {
@@ -107,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4cc3b",
-  "group": "P3",
+  "reviewer": "X-d73a9",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T135301-L-1684750",
+  "landing": "20261013T003156-L-2428452",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and Stacks 0A8X/0A8Y; all three modules and sole direct importer RhomIntoKInjectiveLocal compile cleanly; axioms are standard plus sorryAx from the two reported auxiliary holes."
+  "note": "independent Codex review: Matched delivered Lean signatures, proof dependencies and remaining-hole arguments with their DAG nodes and Stacks 0A8X; compilation and axiom checks passed."
  }
 }

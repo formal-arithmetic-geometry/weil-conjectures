@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.Functor
 
+import Sheaf.Algebra.Homology.LocalizedHomComplexCyclesForward
+import Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective
+
 /-!
 # Canonical localized chain maps from section cocycles
 
@@ -25,6 +28,8 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+set_option maxHeartbeats 400000 in
+-- Comparing the evaluated complexes in the two auxiliary statements exceeds the default limit.
 /-- Degree-zero sections that are cocycles are exactly chain maps on the slice site.
 Source: Stacks Project, Tag 0A8X (Hom complexes), leading to Equation 0A8Y
 (blueprint: lem-pur-localized-hom-complex-cycles-aux).
@@ -67,6 +72,12 @@ theorem localizedHomComplex_cycles_aux
     ∃ e : S.cycles 0 ≃ (res.obj L ⟶ res.obj I),
       (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),
         ((e z).f p).val.app W =
-          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) := by sorry
+          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) := by
+  intro R₀ H π S res
+  classical
+  obtain ⟨f, hf⟩ := localizedHomComplex_cycles_forward (C := C) J R U L I hzero
+  have hbij := localizedHomComplex_cycles_bijective (C := C) J R U L I hzero f hf
+  refine ⟨Equiv.ofBijective f hbij, ?_⟩
+  exact hf
 
 end CategoryTheory
