@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsActions
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsMap
 
 @[expose] public section
 universe u
@@ -99,6 +101,31 @@ theorem exists_changeOfRings_tensor_action_maps_core (Y : Scheme.{u})
       (g : tensorObj C.toModule ((SheafOfModules.restrictScalars (𝓻 B.hom)).obj P) ⟶
       (SheafOfModules.restrictScalars (𝓻 C.hom)).obj
         (SheafOfModules.changeOfRings.{u, u, u} φ.right P)),
-      ChangeOfRingsTensorActionFormulas Y B C φ P a d g := by sorry
+      ChangeOfRingsTensorActionFormulas Y B C φ P a d g := by
+  obtain ⟨a, d, ha, hd⟩ :=
+    exists_changeOfRings_tensor_action_maps_actions Y B C φ P
+  let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
+  let T := (SheafOfModules.restrictScalars (𝓻 C.hom)).obj
+    (SheafOfModules.changeOfRings.{u, u, u} φ.right P)
+  let := presheafMonoidalCategory Y
+  obtain ⟨h, hh⟩ := exists_changeOfRings_tensor_presheaf_map Y B C φ P
+  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
+  let g := (SheafOfModules.tensorObjIsoSheafification C.toModule P₀).hom ≫
+    (adj.homEquiv _ T).symm h
+  refine ⟨a, d, g, ha, hd, ?_⟩
+  intro W c p
+  have he := (adj.homEquiv _ T).apply_symm_apply h
+  have he' := congrArg (fun q ↦ q.app (op W)
+    (c ⊗ₜ[Y.presheaf.obj (op W)] p)) he
+  dsimp [g, tmulSection]
+  rw [Hom.comp_app, ConcreteCategory.comp_apply]
+  have hi := inv_app_hom_app_apply_of_iso
+    (SheafOfModules.tensorObjIsoSheafification C.toModule P₀).symm
+    ((toSheafifyTensor C.toModule P₀).app (op W)
+      (c ⊗ₜ[Y.presheaf.obj (op W)] p))
+  dsimp only [Iso.symm_hom, Iso.symm_inv] at hi
+  erw [hi]
+  rw [Adjunction.homEquiv_unit] at he'
+  exact he'.trans (hh W c p)
 
 end AlgebraicGeometry.Scheme.Modules
