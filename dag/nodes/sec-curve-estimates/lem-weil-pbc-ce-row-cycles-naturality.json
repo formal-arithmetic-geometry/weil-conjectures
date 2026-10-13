@@ -15,34 +15,42 @@
  ],
  "proof": [
   {
-   "text": "In degree q+p the second step is the finite sum of diagonal summands with complex index at least q. The quotient by the next step leaves precisely the row term of index q and resolution degree p. The canonical graded row comparison identifies the cycle subobjects with row cycles, and is normalized by the diagonal inclusion.",
+   "text": "Construct the total projection onto the (p,q) summand followed by the extension-by-zero comparison. The coproduct equations give identity on the row inclusion and zero on every summand of second index different from q. The finite-image-supremum factorization lemma shows the projection kills step q+1. Evaluation preserves cokernels, so the projection descends to the degreewise graded quotient. The canonical rowCycleClass_arrow and rowCycleStep_arrow equations then show that the inverse rowCyclesIso followed by iCycles recovers this projection on every filtered cycle representative.",
    "uses": [
-    "lem-sp-second-filtration-row-graded-cycles",
+    "def-sp-double-complex-total",
     "def-weil-pbc-ce-canonical-row-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Project the equality relating x and y onto the surviving diagonal summand. Transport the given u summand equation using totalSectionsIso_formula and ceSectionsUnit naturality. This gives the degree-p map of ceRowSectionsMap f (phi.f q). The equations for z and zprime identify the same projections with their cycle-subobject inclusions. Monicity of the target row iCycles then proves the equality of cycles after the inverse canonical cycle comparisons. All other summands die in the quotient, and extension by zero kills negative resolution terms. The argument applies to p=0, empty diagonals and zero rows.",
+   "text": "For each nonnegative diagonal, use totalSectionsIso_formula, naturality of ceSectionsUnit, the given diagonal equation hu, and cancellation of the target totalSectionsIso to prove that b carries the row inclusion through the degreewise ceRowSectionsMap. Test b followed by the target row projection on all total coprojections. The q summand gives the row map; every other second index gives zero. Negative resolution summands are zero by extension by zero. Joint epimorphy of the total inclusions proves the projection naturality equation.",
    "uses": [
     "lem-weil-pbc-ce-total-sections-comparison",
-    "lem-weil-pbc-ce-row-ordinary-naturality"
+    "lem-weil-pbc-ce-row-ordinary-naturality",
+    "def-sp-double-complex-total"
    ],
    "elementary": false
+  },
+  {
+   "text": "Cancel the target monic iCycles. Its naturality moves cyclesMap to the degreewise row map. Substitute the representative projection formula on the source and target, use projection naturality, and postcompose the supplied equality between x and y with the target projection. This yields the claimed equality without passing to homology.",
+   "uses": [
+    "def-weil-pbc-ce-canonical-row-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sp-double-complex-total",
   "def-weil-pbc-ce-canonical-row-comparison",
-  "lem-sp-second-filtration-row-graded-cycles",
   "lem-weil-pbc-ce-row-ordinary-naturality",
   "lem-weil-pbc-ce-total-sections-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C3",
+  "group": "S2",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 015J, 015K and 012K",
-  "place": "Normalized CE pages and signed row representatives"
+  "document": "Stacks Project, Tags 0130, 012K, 015J and 015K",
+  "place": "Direct projection proof expanding the diagonal representative argument; Tag 0130 omits its proof."
  },
  "mathlib_searches": [
   {
@@ -116,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T142852-L-496113",
-  "kind": "interface",
+  "landing": "20261013T145728-L-751922",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

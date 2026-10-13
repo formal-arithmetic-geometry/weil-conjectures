@@ -12897,3 +12897,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/J4/Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChange (stage 3; reviewer PASS; first push; landing 20261013T145727-L-751536 (interface); batch 20261013T145721; modules 3; new nodes 2)
 - 14:57 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PinnedBaseChangeMateShifts (stage 3; reviewer PASS; first push; landing 20261013T145727-L-751682 (interface); batch 20261013T145721; modules 3; new nodes 2)
 - 14:57 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleSingletonTensorPureImage (stage 3; reviewer PASS; first push; landing 20261013T145727-L-751806 (proof); batch 20261013T145721; modules 1; new nodes 0)
+- 14:57 L: merged deliver/S2/Sheaf.Paper.EtaleCERowCyclesNaturality (stage 3; reviewer PASS; first push; landing 20261013T145728-L-751922 (proof); batch 20261013T145721; modules 1; new nodes 0)
