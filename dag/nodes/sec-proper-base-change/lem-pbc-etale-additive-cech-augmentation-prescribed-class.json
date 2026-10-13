@@ -1,0 +1,134 @@
+{
+ "id": "lem-pbc-etale-additive-cech-augmentation-prescribed-class",
+ "kind": "statement",
+ "title": "Cech augmentation compatibility for a prescribed target global class",
+ "statement": "Let $g:Y\\to X$ be a scheme morphism [def-pc-scheme], $\\iota$ a finite index type, and $U_i\\subset X,V_i\\subset Y$ open families such that $\\bigcap_l V_{y(l)}\\subset g^{-1}(\\bigcap_l U_{y(l)})$ for every tuple. Let $I,J$ be injective resolutions [def-sp-injective-resolutions] of the lifted additive structure sheaves [def-sc-etale-additive-structure-restriction], with canonical comparisons $c_X,c_Y$ [def-weil-pbc-etale-resolution-section-canonical-comparison]. Write $G_I,G_J$ for their global section complexes and $T_U,T_V$ for their Cech total complexes, with augmentations $\\alpha_U,\\beta_U,\\alpha_V,\\beta_V$ [def-pbc-etale-additive-cech-normalization]. Fix $n\\ge0$, coefficient Cech cycles $z,z\\prime$ [lem-pc-flat-cech-base-change] such that every coordinate of $z\\prime$ is the structural pullback of the corresponding coordinate of $z$, restricted along the tuple inclusion. Suppose $s\\in Z^n(G_I)$ and $t_\\alpha,t_\\beta\\in Z^n(T_U)$ satisfy $i(t_\\alpha)=\\alpha_U(i(s))$, $i(t_\\beta)=\\beta_U(i(z))$, and $[t_\\alpha]=[t_\\beta]$. Let $s\\prime\\in Z^n(G_J)$ be supplied and assume $c_Y([s\\prime])=H^n(q_g)(\\operatorname{cohomologyMap}(g)(c_X([s])))$, where $q_g$ is the adjoint of the structural additive coefficient map [def-weil-pbc-inverse-image,def-weil-pbc-etale-cohomology]. Then there exist $t\\prime_\\alpha,t\\prime_\\beta\\in Z^n(T_V)$ with $i(t\\prime_\\alpha)=\\alpha_V(i(s\\prime))$, $i(t\\prime_\\beta)=\\beta_V(i(z\\prime))$, and $[t\\prime_\\alpha]=[t\\prime_\\beta]$. No covering hypothesis or edge equivalence is assumed. The global cycle and its class equation are hypotheses, not conclusions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, explicit augmented double-complex maps (without inverting alpha); Tag 01FB resolution comparisons; Tag 03P2 coefficient sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact inverse image to I. Its augmented complex is still exact,\nalthough its terms need not be injective. Extend the adjoint coefficient morphism\ninto J degree by degree using injectivity of the terms of J: first extend across\nthe degree-zero augmentation, then factor through each differential's image and\nextend across its inclusion into the next term. Adjunction gives a complex map\nfrom I into the direct image of J preserving the coefficient augmentation.\nEvaluate this map at the terminal object and restrict to the terminal pullback\nto obtain the global section map T. On each tuple intersection, evaluate the same\nmap and restrict along hinter. Naturality with respect to deleting entries of a\ntuple gives the horizontal complex equation; the resolution-map equation gives\nthe vertical one. Hence these components define a map of the double complexes\nand of their totals, R. For alpha, the restriction square gives\nR(alpha(s)) = alpha(T(s)). For beta, the degree-zero augmentation equation and\nthe identification of coefficient sections in Tag 03P2 give exactly structural\npullback followed by restriction. The coordinate hypothesis therefore gives\nR(beta(z)) = beta(z'). Applying homologyMap(R) to heq equates the target alpha\nclass of T(s) and the target beta class. The canonical global-cocycle comparison,\nresolutionSection_canonical_transfer for inverse image, and naturality of extMk\nfor the adjoint coefficient morphism identify the class of T(s) with the right\nside of hclass. Thus hclass and injectivity of cY.globalEquiv show that s' and\nT(s) differ by a global boundary. Alpha is a complex map (its horizontal\ncomponent is zero by the alternating restriction identity), so their alpha\nimages differ by a total boundary. Beta also takes cycles to cycles: its\nhorizontal differential is the coefficient Cech differential, and its vertical\ndifferential vanishes by the resolution augmentation equation. Take the unique\ncycle lifts of alpha(s') and beta(z') through iCycles; the preceding boundary\ncalculation gives equality of their total homology classes. No augmentation is\ninverted, and no cover or acyclicity on opens is needed. For degree zero the\nboundary argument is equality of cycles. Empty index sets give zero total\ncomplexes; empty schemes and empty intersections likewise introduce no extra\nhypothesis.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization",
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+ ],
+ "proof_origin": {
+  "by": "E3 second reader (agent-written refinement)",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "The double-complex construction, using a direct augmentation-preserving comparison and a supplied target class; the no-cover extension is justified by the explicit chain map and boundary argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*(refin|natural)|cyclesMap_i|homologyπ_naturality",
+   "results": "{\"t\": \"2026-10-13T12:45:55Z\", \"tool\": \"grep\", \"query\": \"cech.*(refin|natural)|cyclesMap_i|homologyπ_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\", \"Mathlib/Algebra/Homology/SingleHomology.lean\"], \"digest\": \"38f00aa26e6f9173\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic resolution/homology API only; no exact prescribed-class augmentation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\", \"Epi\"",
+   "results": "{\"t\": \"2026-10-13T12:45:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"homologyπ\\\", \\\"Epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.instEpiLeftHomologyπ\", \"CategoryTheory.ShortComplex.instEpiHomologyπ\", \"CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.homologyπ_isoHomology_inv\", \"CategoryTheory.ShortComplex.HomologyData.ofEpiMonoFactorisation.homologyπ_isoHomology_inv_assoc\", \"HomologicalComplex.instEpiHomologyπ\", \"SSetPair.instEpiHomologyπOfNatNat\"], \"digest\": \"683375605eaf9abd\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic resolution/homology API only; no exact prescribed-class augmentation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Cech double complex augmentation under a map of injective resolutions and refinement of open families",
+   "results": "{\"t\": \"2026-10-13T12:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of Cech double complex augmentation under a map of injective resolutions and refinement of open families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'\", \"CategoryTheory.InjectiveResolution.iso_inv_naturality\", \"CategoryTheory.InjectiveResolution.Hom.ι_comp_hom\", \"CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\"], \"digest\": \"fac69c28affb0f71\"}",
+   "date": "2026-10-13",
+   "verdict": "Generic resolution/homology API only; no exact prescribed-class augmentation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech augmentation naturality for a prescribed cohomology class under pullback of sheaves",
+   "results": "{\"t\": \"2026-10-13T12:46:59Z\", \"tool\": \"leansearch\", \"query\": \"Cech augmentation naturality for a prescribed cohomology class under pullback of sheaves\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison: transport the equal augmentation classes after choosing the prescribed target global class.",
+   "via": [
+    "lem-pbc-etale-additive-cech-augmentation-transfer",
+    "lem-pbc-etale-additive-cech-normalized-inverse-image",
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationPrescribedClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechAugmentationPrescribedClass.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleAdditiveCech_augmentation_prescribed_class",
+  "statement": "theorem etaleAdditiveCech_augmentation_prescribed_class\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (J : InjectiveResolution Y.etaleAdditiveSheaf)\n    (cX : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)\n    (cY : Etale.ResolutionSectionCanonicalComparison Y.etaleAdditiveSheaf J)\n    (n : ℕ)\n    (z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n)\n    (z' : (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).cycles n)\n    (hcoords : ∀ y : Fin (n + 1) → ι,\n            cechCoordinate Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf) n y\n                ((cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') =\n              (show Y.Modules from SheafOfModules.unit Y.ringCatSheaf).presheaf.map\n                (homOfLE (hinter n y)).op\n                ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app\n                  (op (⨅ l, U (y l)))\n                  (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y\n                    ((cechOver X.toSpecΓ U\n                      (SheafOfModules.unit X.ringCatSheaf)).iCycles n z))))\n    (s : (additiveCechGlobal I).cycles n)\n    (tα tβ : (additiveCechTotal U I).cycles n)\n    (hα : (additiveCechTotal U I).iCycles n tα =\n      additiveCechAlpha U I n ((additiveCechGlobal I).iCycles n s))\n    (hβ : (additiveCechTotal U I).iCycles n tβ = additiveCechBeta U I n\n      ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z))\n    (heq : (additiveCechTotal U I).homologyπ n tα =\n      (additiveCechTotal U I).homologyπ n tβ)\n    (s' : (additiveCechGlobal J).cycles n)\n    (hclass : cY.globalEquiv n ((additiveCechGlobal J).homologyπ n s') =\n        Sheaf.H.map\n          (((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm\n            (Scheme.etaleAdditiveSheafToLowerStar g)) n\n          (Etale.cohomologyMap g X.etaleAdditiveSheaf n\n            (cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s)))) :\n    ∃ (tα' tβ' : (additiveCechTotal V J).cycles n),\n      (additiveCechTotal V J).iCycles n tα' =\n        additiveCechAlpha V J n ((additiveCechGlobal J).iCycles n s') ∧\n      (additiveCechTotal V J).iCycles n tβ' = additiveCechBeta V J n\n        ((cechOver Y.toSpecΓ V\n          (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') ∧\n      (additiveCechTotal V J).homologyπ n tα' =\n        (additiveCechTotal V J).homologyπ n tβ'",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874604",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T125445-L-3874604",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

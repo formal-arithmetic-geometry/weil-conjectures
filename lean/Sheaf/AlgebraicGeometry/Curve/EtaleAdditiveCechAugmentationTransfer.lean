@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationPrescribedClass
 
 /-! # Transport of equal additive Čech augmentation classes
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1. -/
@@ -92,6 +92,21 @@ theorem etaleAdditiveCech_augmentation_transfer
           (((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm
             (Scheme.etaleAdditiveSheafToLowerStar g)) n
           (Etale.cohomologyMap g X.etaleAdditiveSheaf n
-            (cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s))) := by sorry
+            (cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s))) := by
+  let x := Sheaf.H.map
+    (((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm
+      (Scheme.etaleAdditiveSheafToLowerStar g)) n
+    (Etale.cohomologyMap g X.etaleAdditiveSheaf n
+      (cX.globalEquiv n ((additiveCechGlobal I).homologyπ n s)))
+  obtain ⟨s', hs'⟩ :=
+    (AddCommGrpCat.epi_iff_surjective ((additiveCechGlobal J).homologyπ n)).mp
+      inferInstance ((cY.globalEquiv n).symm x)
+  have hclass : cY.globalEquiv n ((additiveCechGlobal J).homologyπ n s') = x := by
+    rw [hs']
+    exact (cY.globalEquiv n).apply_symm_apply x
+  obtain ⟨tα', tβ', hα', hβ', heq'⟩ :=
+    etaleAdditiveCech_augmentation_prescribed_class g U V hinter I J cX cY n z z'
+      hcoords s tα tβ hα hβ heq s' hclass
+  exact ⟨s', tα', tβ', hα', hβ', heq', hclass⟩
 
 end AlgebraicGeometry.Scheme.Modules
