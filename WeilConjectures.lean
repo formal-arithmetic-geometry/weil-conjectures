@@ -2068,6 +2068,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Additivity
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AffineLine
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AffineReduction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
@@ -2084,8 +2085,10 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ModelRestriction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Perfectness
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperCurve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.PushforwardFibres
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.PushforwardStep
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.RelativeAffineLine
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceClass
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceFormulaHolds

@@ -79,58 +79,12 @@ of local Artinian schemes, `RΓ_c(X, K)` is the sum of the geometric stalks by t
 invariance, and the global operator is a block matrix whose diagonal blocks are the stalk
 Frobenius maps at the fixed points. -/
 theorem traceFormulaHolds_of_isFinite {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k)) [IsFinite f₀] :
-    TraceFormulaHolds A f₀ :=
-  sorry
-
-/-- Step 2 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace
-formula for the affine line `𝔸¹_k`, through its compactification `𝔸¹ ⊆ ℙ¹`
-(blueprint `lem-trf-compactification-graph-operator`), the Lefschetz–Verdier formula on `ℙ¹`
-and the Frobenius local terms on the smooth curve `ℙ¹`. -/
-theorem traceFormulaHolds_affineLine :
-    TraceFormulaHolds A (𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) :=
-  sorry
-
-/-- Step 3 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace
-formula for closed subschemes of the affine line `𝔸¹_k`. A closed subscheme `Spec k[t]/I` is the
-line itself if `I = 0` (Step 2), and finite over `k` otherwise (Step 1). -/
-theorem traceFormulaHolds_of_isClosedImmersion_affineLine {Z₀ : Scheme.{u}}
-    (i : Z₀ ⟶ 𝔸(PUnit.{u + 1}; Spec (.of k))) [IsClosedImmersion i] :
-    TraceFormulaHolds A (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) := by
-  have := isAffine_of_isAffineHom i
-  obtain hinj | hinj := em (Function.Injective (MvPolynomial.eval₂Hom
-    ((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom
-      fun j ↦ i.appTop (AffineSpace.coord (Spec (.of k)) j)))
-  · rw [AffineSpace.eval₂Hom_appTop_coord, RingHom.coe_comp] at hinj
-    have : IsIso i := IsClosedImmersion.isIso_of_injective_of_isAffine
-      (hinj.of_comp_right (AffineSpace.bijective_eval₂Hom_coord _).2)
-    apply TraceFormulaHolds.of_iso (asIso i)
-    apply traceFormulaHolds_affineLine
-  rw [injective_iff_map_eq_zero] at hinj
-  push Not at hinj
-  obtain ⟨p, hp, hp0⟩ := hinj
-  let := ((Scheme.ΓSpecIso (.of k)).inv ≫
-    (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom.toAlgebra
-  set x := i.appTop (AffineSpace.coord (Spec (.of k)) PUnit.unit)
-  have hx : _root_.IsIntegral k x := by
-    refine IsAlgebraic.isIntegral ⟨MvPolynomial.uniqueAlgEquiv k PUnit p, 
-      (map_ne_zero_iff _ (AlgEquiv.injective _)).mpr hp0, ?_⟩
-    rw [Polynomial.aeval_def]
-    exact (MvPolynomial.eval₂_uniqueAlgEquiv (a := fun _ ↦ x)).trans hp
-  have hadj : Algebra.adjoin k {x} = ⊤ := by
-    refine eq_top_iff.mpr fun y _ ↦ ?_
-    obtain ⟨q, rfl⟩ := AffineSpace.surjective_eval₂Hom_appTop_coord i y
-    exact Algebra.adjoin_mono (Set.range_subset_singleton.mpr rfl)
-      ((Algebra.adjoin_range_eq_range_aeval k fun _ : PUnit.{u + 1} ↦ x).ge ⟨q, rfl⟩)
-  have hfin : ((Scheme.ΓSpecIso (.of k)).inv ≫
-      (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop).hom.Finite := by
-    rw [RingHom.Finite, Module.finite_def, ← Algebra.top_toSubmodule, ← hadj]
-    exact hx.fg_adjoin_singleton
-  have : IsFinite (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)) := by
-    refine (HasAffineProperty.iff_of_isAffine (P := @IsFinite)).mpr ⟨inferInstance, ?_⟩
-    rw [← (Scheme.ΓSpecIso (.of k)).hom_inv_id_assoc
-      (i ≫ 𝔸(PUnit.{u + 1}; Spec (.of k)) ↘ Spec (.of k)).appTop, CommRingCat.hom_comp]
-    exact hfin.comp (RingHom.Finite.of_surjective _
-      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).hom).2)
-  apply traceFormulaHolds_of_isFinite
+    TraceFormulaHolds A f₀ := by
+  intro Ω _ _ G X aX _ _ W σ p hΦ hctf m _ _
+  have : IsFinite aX := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+  have := WeilComplex.IsModelFrobenius.isUniversalHomeomorphism_frobeniusIterate W hΦ m
+  apply WeilComplex.traceFormula_of_iterate G W hctf m
+  apply WeilComplex.traceFormula_one_of_isFinite G (W.iterate m) hctf
+  exact (W.frobeniusIterate m).isHomeomorph.bijective
 
 end AlgebraicGeometry.ProEtale
