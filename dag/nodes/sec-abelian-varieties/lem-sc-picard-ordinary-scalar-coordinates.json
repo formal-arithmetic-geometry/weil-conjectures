@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-picard-ordinary-scalar-coordinates",
+ "kind": "statement",
+ "title": "Ordinary scalar cycle coordinates and evaluation",
+ "statement": "Let W be a scheme, w∈U an affine open, m a natural number, and d a vector in Γ(W,U)^m. Let K be a strictly perfect complex on the localized site over U [def-pc-perfect-complex], with section bases e0:Γ(K^0)≃Γ(W,U) and e1:Γ(K^1)≃Γ(W,U)^m. Assume e1(d_K^0(e0 inverse(a)))=a d for all a and every d_i evaluates to zero in κ(w) [def-weil-residue-field]. Put p:Spec κ(w)→U equal to the open lift [def-sc-picard-derived-model-sections], and use ordinary tensor pullbacks and cycles G_K of [def-sc-picard-ordinary-model-cycles]. There is an additive equivalence b from raw morphisms Hom(t*O_W,p*A(K^0)), t:Spec κ(w)→W, to κ(w). Every such morphism lies in G_K(t,p). For every neighbourhood V⊆U of w, every equality p_V;(V→U)=p, and every a∈Γ(W,V) with a(d|V)=0, there exists x∈G_K(V.ι,V→U) whose ordinary restriction along p_V has b-coordinate a(w). No derived-category instance, derived object, or negative-degree vanishing is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, degree-zero cycle lifting; Tag 06Z0, ordinary affine tilde/Gamma adjunction in its proof; Tag 0096, tensor adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-weil-residue-field",
+  "def-sc-picard-derived-model-sections",
+  "def-sc-picard-ordinary-model-cycles"
+ ],
+ "proof": [
+  {
+   "text": "The terms of K are retracts of finite free sheaves and therefore quasi-coherent. Apply the ordinary affine tilde/Gamma adjunction on U to sheafify the supplied section bases. In these bases hd identifies the sheaf differential with the vector d. Only this ordinary adjunction is required; the affine derived equivalence is unnecessary.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical tensor-unit comparison identifies the source t*O_W with O_T. Tensor pullback of the sheaf bases gives coordinates for maps from this source. At the residue point the coordinates of the differential are all zero by hdw, so every raw morphism is a cycle. Evaluation of its scalar defines the additive equivalence b with κ(w).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-weil-residue-field",
+    "def-sc-picard-ordinary-model-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each V, let x be the morphism from the structure sheaf specified by the scalar a in the pulled-back e0 basis. The outgoing differential has coordinates a(d|V), so x is a cycle. On pullback to Spec κ(w), its scalar is evaluated at w. The pinned tensor adjunction and its conjugate composition comparison show that this is the raw restriction in the statement. Hence b of that restriction equals a(w). The case m=0 has zero outgoing module; the same construction works on nonaffine V because sheaf bases restrict.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-weil-residue-field",
+    "def-sc-picard-ordinary-model-cycles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-picard-ordinary-model-cycles",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, degree-zero cycle lifting; Tag 06Z0, ordinary affine tilde/Gamma adjunction in its proof; Tag 0096, tensor adjunction",
+  "description": "H1 formalization of the indicated part of the original scalar-cycle argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine quasi coherent module basis global sections sheafifies and evaluates scalar cycles at a residue point",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine quasi coherent sections basis scalar morphism tensor pullback residue evaluation",
+   "results": "Eight hits including ModuleCat.Tilde.res_const, Modules.map_smul and Tilde.res_apply; none states the simultaneous coordinate calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromTilde|unitHomEquiv|evaluation",
+   "results": "Twenty-five broad Mathlib hits; refined local rg found Modules.unitHomEquiv, isIso_fromTildeΓ_of_isQuasicoherent, sectionsLinearEquivOfOverIsoFree and appLinearEquivOfIso. These are ingredients, not the residue-cycle statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, degree-zero cycle lifting: Tag 0BF2, degree-zero cycle lifting; Tag 06Z0, ordinary affine tilde/Gamma adjunction in its proof; Tag 0096, tensor adjunction",
+   "via": [
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardOrdinaryScalarCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardOrdinaryScalarCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_ordinary_scalar_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picard_ordinary_scalar_coordinates"
+  ],
+  "statement": "theorem picard_ordinary_scalar_coordinates\n    (W : Scheme.{v}) (w : W)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (m : ℕ) (d : Fin m → Γ(W, U))\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K)\n    (e0 : (K.X 0).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] Γ(W, U))\n    (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U)))\n    (hd : ∀ a : Γ(W, U), e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm a)) = a • d)\n    (hdw : ∀ i, W.evaluation U w hwU (d i) = 0) :\n    let p := picardResidueLift W w U hwU\n    ∃ b : ((Modules.tensorPullback (W.fromSpecResidueField w)).obj\n        (SheafOfModules.unit (moduleRings W.toRingedSpace)) ⟶\n          (Modules.tensorPullback p).obj ((Modules.overEquiv U).functor.obj (K.X 0))) ≃+\n            W.residueField w,\n      (∀ f, f ∈ picardOrdinaryModelCycles W U K (W.fromSpecResidueField w) p) ∧\n      ∀ (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U)\n        (hs : picardResidueLift W w V hwV ≫ W.homOfLE hVU = p) (a : Γ(W, V)),\n        (a • (fun i ↦ W.presheaf.map (homOfLE hVU).op (d i)) = 0) →\n        ∃ x : picardOrdinaryModelCycles W U K V.ι (W.homOfLE hVU),\n          b (picardOrdinaryModelRestriction W U K (picardResidueLift W w V hwV)\n            V.ι (W.fromSpecResidueField w) (W.homOfLE hVU) p\n            (picardResidueLift_comp W w V hwV) hs x.val) =\n              W.evaluation V w hwV a",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

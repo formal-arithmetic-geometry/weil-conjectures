@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
+
+import Sheaf.AlgebraicGeometry.PicardConnectiveModelComparison
+import Sheaf.AlgebraicGeometry.PicardOrdinaryScalarCoordinates
 
 /-! # Scalar cycles as derived test sections
 
@@ -28,20 +28,20 @@ strictly perfect model. No direct image or family of line bundles occurs in this
 Source: Stacks Project, Tag 0BF2, degree-zero cycle calculation; Tags 08C4 and 0D5S.
 (blueprint: lem-sc-picard-scalar-derived-cycles)
 
-Proof: On the affine U, the finite-projective terms of K are quasi-coherent. The affine
-module equivalence sheafifies e0 and e1, and hd identifies the degree-zero differential
-with the vector d. Strictly perfect complexes are K-flat. Termwise pullback therefore
-computes derived pullback on every smaller open and on the residue spectrum. It remains
-connective, so degree-zero hypercohomology is the global sections of the kernel of the
-outgoing differential: the spectral sequence has only its (0,0) term in total degree zero.
-This is also the group of derived morphisms from the degree-zero structure sheaf. On V,
-every scalar cycle supplies such a morphism, with no boundaries in degree zero. On the
-residue spectrum hdw kills the differential, and e0 identifies all such morphisms with
-the residue field. Pullback of the representing morphism is evaluation of its scalar.
-The canonical composition comparison is computed on these K-flat representatives, so
-conjugating by it is precisely picardDerivedModelRestriction. Transport throughout by
-hE gives the stated c and lifts. The fixed hE makes c independent of V. Rank m=0 has
-zero outgoing differential and satisfies the same argument; w excludes empty V and U. -/
+Proof: Apply picard_connective_model_comparison to the fixed model isomorphism hE.
+It supplies simultaneous additive equivalences q from derived test sections to ordinary
+cycles on all schemes factoring through U, compatible with the canonical composition
+restriction. Apply picard_ordinary_scalar_coordinates to the section bases and hd.
+It gives a raw residue coordinate equivalence b, proves that every residue morphism
+is a cycle using hdw, and constructs a local ordinary cycle x for each annihilating
+scalar a, with restricted b-coordinate a(w). Restrict b to the residue cycles subgroup;
+its inverse sends a scalar z to the cycle with raw representative b.symm z. Compose
+with q at the residue point to obtain c. The factorization of the residue point through
+V and then U equals the direct factorization through U, since U.ι is mono. Put ξ=q_V.symm x.
+Naturality of q identifies its derived restriction with the ordinary restriction of x.
+The coordinate equality gives c of this restriction equal to a(w); injectivity of c
+then gives the asserted equality with c.symm(a(w)). The fixed model makes c independent
+of V. Rank m=0 has zero outgoing differential; w excludes empty V and U. -/
 theorem picard_scalar_derived_cycles
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -66,6 +66,37 @@ theorem picard_scalar_derived_cycles
         ∃ ξ : picardDerivedModelSections E V.ι,
           picardDerivedModelRestriction E (picardResidueLift W w V hwV) V.ι
               (W.fromSpecResidueField w) (picardResidueLift_comp W w V hwV) ξ =
-            c.symm (W.evaluation V w hwV a) := by sorry
+            c.symm (W.evaluation V w hwV a) := by
+  classical
+  obtain ⟨q, hq⟩ := picard_connective_model_comparison W E U K hK hneg hE
+  obtain ⟨b, hb, hlift⟩ :=
+    picard_ordinary_scalar_coordinates W w U hwU hU m d K hK e0 e1 hd hdw
+  let p := picardResidueLift W w U hwU
+  let qκ := q (W.fromSpecResidueField w) p (picardResidueLift_comp W w U hwU)
+  let bκ : picardOrdinaryModelCycles W U K (W.fromSpecResidueField w) p ≃+
+      W.residueField w :=
+    { toFun := fun x ↦ b x.val
+      invFun := fun a ↦ ⟨b.symm a, hb _⟩
+      left_inv := fun x ↦ Subtype.ext (b.symm_apply_apply x.val)
+      right_inv := fun a ↦ b.apply_symm_apply a
+      map_add' := fun x y ↦ b.map_add x.val y.val }
+  refine ⟨qκ.trans bκ, ?_⟩
+  intro V hwV hVU a ha
+  have hVUι : W.homOfLE hVU ≫ U.ι = V.ι := by simp
+  have hp : picardResidueLift W w V hwV ≫ W.homOfLE hVU = p := by
+    apply (cancel_mono U.ι).1
+    rw [Category.assoc, hVUι, picardResidueLift_comp, picardResidueLift_comp]
+  obtain ⟨x, hx⟩ := hlift V hwV hVU hp a ha
+  let qV := q V.ι (W.homOfLE hVU) hVUι
+  refine ⟨qV.symm x, ?_⟩
+  apply (qκ.trans bκ).injective
+  rw [AddEquiv.apply_symm_apply]
+  change b (qκ (picardDerivedModelRestriction E (picardResidueLift W w V hwV)
+    V.ι (W.fromSpecResidueField w) (picardResidueLift_comp W w V hwV)
+      (qV.symm x))).val = _
+  rw [hq (picardResidueLift W w V hwV) V.ι (W.fromSpecResidueField w)
+    (W.homOfLE hVU) p (picardResidueLift_comp W w V hwV) hp hVUι
+    (picardResidueLift_comp W w U hwU)]
+  simpa only [qV, AddEquiv.apply_symm_apply] using hx
 
 end AlgebraicGeometry.Scheme

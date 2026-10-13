@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-picard-connective-model-comparison",
+ "kind": "statement",
+ "title": "Connective derived test sections are ordinary cycles naturally",
+ "statement": "Choose the shared derived localizations of [def-pc-derived-category]. Let W be a scheme, U an open, E in D(O_W), and K a strictly perfect complex on the localized site over U [def-pc-perfect-complex], with K^i zero for i<0 and E|U isomorphic to QK. For G_K and its raw restriction of [def-sc-picard-ordinary-model-cycles], there exists a simultaneous family of additive equivalences q(t,s,h):P(E,t)≃G_K(t,s), for every scheme T and maps t:T→W, s:T→U and factorization h:s;U.ι=t. Here P and its restriction are [def-sc-picard-derived-model-sections]. For every i:T′→T and compatible maps t,t′,s,s′ with i;t=t′ and i;s=s′, applying q to the defined derived restriction of a test section has underlying raw morphism equal to the defined ordinary restriction of its q-coordinate.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S, K-flat computation and composition; Tag 05RR, connective maps"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-picard-derived-model-sections",
+  "def-sc-picard-ordinary-model-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Use Modules.overEquiv U and Modules.overFunctorEquiv to transport K to a complex on U and its representing isomorphism to the derived open restriction of E. Terms are retracts of finite free modules, so flat, and the complex is bounded. The bounded-flat comparison computes its pullback termwise on every T. Pullback of the source single structure sheaf is likewise computed termwise.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-sc-derived-pullback-structure-sheaf-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved connective-single Hom bijectivity to the two termwise representatives. Identify a chain map from the single degree-zero object with its component in degree zero; the only chain-map condition is f followed by the outgoing differential equals zero. Additivity makes this the equivalence with G_K. Choose hE once for the entire family.",
+   "uses": [
+    "lem-sc-connective-single-hom",
+    "def-sc-picard-ordinary-model-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-flat representatives, the canonical derived composition comparison is induced by the underived pullback comparisons and the left-derived counits. Naturality of these counits identifies conjugation of the derived morphism with c_t.hom followed by pullback of the raw morphism followed by c_s.inv. Include the equality transports for t and s. This is exactly the equality of underlying elements in the statement.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-sc-picard-derived-model-sections",
+    "def-sc-picard-ordinary-model-cycles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-picard-derived-model-sections",
+  "def-sc-picard-ordinary-model-cycles",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-connective-single-hom",
+  "lem-sc-derived-pullback-structure-sheaf-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S, K-flat computation and composition; Tag 05RR, connective maps",
+  "description": "H1 formalization of the indicated part of the original scalar-cycle argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from the structure sheaf into a connective strictly perfect complex equal ordinary global cycles naturally under pullback",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connective derived pullback ordinary degree zero cycles natural composition comparison",
+   "results": "Eight hits including liftCycles_shift_homologyπ, isoHomologyπ₀_inv_naturality and homologyFunctorFactors; none identifies this sheaf model with the defined canonical restriction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flatComplexDerivedPullback|overFunctorEquiv|mkHomFromSingle",
+   "results": "Twelve Mathlib hits including overFunctorEquiv and mkHomFromSingle; local source search also found flatComplexDerivedPullback and the private openRestriction_iso in FiniteFreeResidueModelPullback. The latter only supplies object comparisons and has no naturality assertion.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, degree-zero cycle lifting: Tags 06YJ and 0D5S, K-flat computation and composition; Tag 05RR, connective maps",
+   "via": [
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardConnectiveModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardConnectiveModelComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_connective_model_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picard_connective_model_comparison"
+  ],
+  "statement": "theorem picard_connective_model_comparison\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect W U K) (hneg : ∀ i : ℤ, i < 0 → IsZero (K.X i))\n    (hE : Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅\n        DerivedCategory.Q.obj K)) :\n    ∃ q : ∀ {T : Scheme.{v}} (t : T ⟶ W) (s : T ⟶ U.toScheme),\n        s ≫ U.ι = t →\n          picardDerivedModelSections E t ≃+ picardOrdinaryModelCycles W U K t s,\n      ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n        (s : T ⟶ U.toScheme) (s' : T' ⟶ U.toScheme)\n        (ht : i ≫ t = t') (hs : i ≫ s = s')\n        (hf : s ≫ U.ι = t) (hf' : s' ≫ U.ι = t')\n        (ξ : picardDerivedModelSections E t),\n        (q t' s' hf' (picardDerivedModelRestriction E i t t' ht ξ)).val =\n          picardOrdinaryModelRestriction W U K i t t' s s' ht hs\n            (q t s hf ξ).val",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T111851-L-3052194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

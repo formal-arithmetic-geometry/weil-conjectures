@@ -32,46 +32,39 @@
  ],
  "proof": [
   {
-   "text": "The strictly perfect terms are retracts of finite free modules, hence quasi-coherent and flat. On affine U, the affine quasi-coherent equivalence sheafifies the supplied section bases. Thus the degree-zero differential is the scalar vector d.",
+   "text": "Apply picard_connective_model_comparison to the fixed hE, obtaining additive equivalences q for every factorization through U, natural for ordinary raw pullback restriction. No scalar assumptions enter this step.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-sc-picard-connective-model-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use boundedness and flatness to compute derived pullback termwise. On V and on the residue spectrum the complex is still zero in negative degrees. Its degree-zero hypercohomology, or equivalently Hom from the structure sheaf in degree zero, consists of global cycles with no incoming boundaries. Every annihilating scalar therefore defines ξ, and hdw identifies residue cycles with κ(w). Transport these identifications using the fixed hE.",
+   "text": "Apply picard_ordinary_scalar_coordinates to e0,e1,hd,hdw. It gives an additive coordinate equivalence b on all raw residue morphisms, proves every such morphism is a cycle, and supplies local ordinary cycles with the evaluated scalar coordinate. No derived object enters this step.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-sc-derived-pullback-structure-sheaf-local",
-    "def-pc-derived-category"
+    "lem-sc-picard-ordinary-scalar-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback of these cycle representatives evaluates their scalar at w. The canonical derived composition comparison is computed by these same K-flat representatives, so its conjugation is the defined restriction r. This proves the equality for every V with the one residue equivalence c. Rank zero has the zero outgoing differential; no lift of an arbitrary residue scalar is asserted.",
+   "text": "Restrict b to the residue cycles subgroup; its inverse sends a to the subtype element (b inverse(a),hb). Compose this additive equivalence with q at the residue point to obtain c. For V⊆U, the two residue lifts agree after composition to U because U.ι is mono. Pull an ordinary cycle x back through q_V inverse. Naturality of q and the ordinary coordinate equality show c of its derived restriction is a(w). Injectivity of c proves the required equality with c inverse(a(w)). All this glue is proved in the delivered Lean.",
    "uses": [
-    "def-sc-picard-derived-model-sections",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-weil-residue-field"
+    "def-sc-picard-ordinary-model-cycles",
+    "def-sc-picard-derived-model-sections"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
   "def-sc-picard-derived-model-sections",
-  "def-weil-residue-field",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-derived-pullback-structure-sheaf-local"
+  "def-sc-picard-ordinary-model-cycles",
+  "lem-sc-picard-connective-model-comparison",
+  "lem-sc-picard-ordinary-scalar-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, More on Morphisms and Cohomology of Sheaves",
-  "place": "Tag 0BF2, degree-zero cycle lifting; Tags 08C4, 0D5S and 06YJ, bounded flat computation and composition"
+  "document": "Stacks Project",
+  "place": "Tag 0BF2, degree-zero cycle lifting; Tags 06YJ, 0D5S and 0096",
+  "description": "H1 separates the generic derived-to-ordinary comparison from the ordinary affine scalar calculation; the combining proof is complete Lean."
  },
  "mathlib_searches": [
   {
@@ -142,9 +135,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T100121-L-2485300",
-  "kind": "interface"
+  "landing": "20261013T111851-L-3052194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
