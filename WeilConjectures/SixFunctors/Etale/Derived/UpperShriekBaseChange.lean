@@ -273,7 +273,8 @@ lemma twoSquare_inv_rightDerivedLowerShriekBaseChangeMap
       inv (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
         (HasCompactification.compactification f)) := by
     refine IsIso.inv_eq_of_hom_inv_id ?_
-    rw [rightDerivedLowerShriekBaseChangeMap, Category.assoc, ← Category.assoc (Functor.whiskerLeft _ _),
+    rw [rightDerivedLowerShriekBaseChangeMap, Category.assoc,
+      ← Category.assoc (Functor.whiskerLeft _ _),
       ← Functor.whiskerLeft_comp, Iso.hom_inv_id, Functor.whiskerLeft_id', Category.id_comp,
       IsIso.hom_inv_id]
   rw [hinv, inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
@@ -281,8 +282,7 @@ lemma twoSquare_inv_rightDerivedLowerShriekBaseChangeMap
   simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.natTrans, TwoSquare.mk,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.refl_hom,
     NatTrans.id_app]
-  trace_state
-  sorry
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Blueprint `cor-exc-base-change-reduces-to-proper`: Base change for a general morphism
 reduces to the proper part.
@@ -318,7 +318,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
       (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq)]
     [IsIso (mateEquiv adjp adjp' (TwoSquare.mk _ _ _ _ (inv (derivedBaseChangeMap
       (ModuleCat.{u + 1} Λ)
-      (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq)))).natTrans] :
+      (IsPullback.of_hasPullback (HasCompactification.compactification f).g
+        g).toCommSq)))).natTrans] :
     IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
   set c := HasCompactification.compactification f
   set c' := c.ofIsPullback sq
@@ -333,7 +334,33 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (IsPullback.of_hasPullback c.g g).toCommSq))
   -- the mate of the extension-by-zero square is invertible
   have hθ : IsIso (mateEquiv adjJ adjJ' α).natTrans := by
-    sorry
+    let τ : L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙ L((c'.i)^*[ModuleCat.{u + 1} Λ]) ≅
+        L((c.i)^*[ModuleCat.{u + 1} Λ]) ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) :=
+      (leftDerivedUpperStarComp _ c'.i (pullback.fst c.g g) (g' ≫ c.i)
+        (by simp [c'])).symm ≪≫ leftDerivedUpperStarComp _ g' c.i
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro N
+    have hε : IsIso ((L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙
+        L((c'.i)^*[ModuleCat.{u + 1} Λ])).map (adjJ.counit.app N)) := by
+      have hj : IsIso (L((c.i)^*[ModuleCat.{u + 1} Λ]).map (adjJ.counit.app N)) := by
+        have h := adjJ.right_triangle_components N
+        have : IsIso (adjJ.unit.app (L((c.i)^*[ModuleCat.{u + 1} Λ]).obj N) ≫
+            L((c.i)^*[ModuleCat.{u + 1} Λ]).map (adjJ.counit.app N)) := by
+          rw [h]
+          exact IsIso.id _
+        exact IsIso.of_isIso_comp_left (adjJ.unit.app _) _
+      have h := τ.hom.naturality (adjJ.counit.app N)
+      simp only [Functor.id_obj] at h
+      have : IsIso ((L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙
+          L((c'.i)^*[ModuleCat.{u + 1} Λ])).map (adjJ.counit.app N) ≫ τ.hom.app N) := by
+        rw [h, Functor.comp_map]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ (τ.hom.app N)
+    simp only [TwoSquare.natTrans, mateEquiv_apply]
+    dsimp
+    simp only [Category.id_comp, Category.comp_id]
+    exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance
+      (@IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance hε)
   -- the mate of `Ex_!(c)⁻¹` for the composite adjunctions is invertible
   have hc : IsIso (mateEquiv (adjJ.comp adjp) (adjJ'.comp adjp')
       (TwoSquare.vComp α β')).natTrans := by
@@ -345,9 +372,9 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (rightDerivedUpperShriekAdjunction _ f) (adjJ'.comp adjp')
     (rightDerivedUpperShriekAdjunction _ f') (Iso.refl (R(f)_![ModuleCat.{u + 1} Λ]))
     (rightDerivedLowerShriekIso Λ c') (TwoSquare.vComp α β')
-  convert this using 2
-  trace_state
-  sorry
+  unfold rightDerivedUpperShriekBaseChangeMap
+  rw [twoSquare_inv_rightDerivedLowerShriekBaseChangeMap]
+  exact this
 
 end ReductionToProper
 
