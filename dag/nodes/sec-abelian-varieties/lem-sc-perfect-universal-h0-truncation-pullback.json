@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-perfect-universal-h0-truncation-pullback",
+ "kind": "statement",
+ "title": "Canonical truncation commutes with pullback on universally free lowest-cohomology charts",
+ "statement": "Let S be a scheme [def-pc-scheme] and K a perfect object [def-pc-perfect-complex] of D(O_S) [def-pc-derived-category]. Assume H^i(Lk^*K)=0 for every scheme Y, k:Y→S and i<0, using [def-pc-derived-pullback]. Assume each s∈S has an open neighbourhood U and r∈ℕ such that H^0(L(k≫U.ι)^*K) is finite locally free of rank r [def-amb-finite-locally-free-module] for every scheme Y and k:Y→U. Let M be an O_S-module and a:M[0]→K a derived morphism with H^0(a) an isomorphism. Then for every scheme Y and k:Y→S, H^0(Lk^*a) is an isomorphism. This is a statement about the specified derived morphism, not merely existence of an object isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "matrix-chart proof and canonical pullback clause; Tags 0BCD, 08CR, 06YD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose U,r at s and test the universal condition at the residue field of s. In the finite-free residue model the first term has rank r, and all negative terms vanish by the negative fibre hypothesis. Shrink into U and an affine chart.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity test makes H0(K) locally free of rank r. Trivialize its inclusion into the first rank-r free term. Its cokernel has zero dual by the square-injective-free-map lemma. Each coordinate of the outgoing differential factors through that cokernel, hence vanishes. Consequently d0=0, including over nonreduced rings.",
+   "uses": [
+    "lem-sc-square-injective-free-map-dual-coker-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The H0 isomorphism identifies M with this first free term. On an affine subchart represent a by an actual chain map of bounded finite-free complexes. Its degree-zero component is its H0 map, hence invertible. Termwise pullback computes derived pullback, retains d0=0 and no negative terms, and takes that component to an isomorphism.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse images of the model charts cover Y. Restriction is exact and commutes with derived pullback, so H0(Lk*a) is locally the map just computed. Open-cover detection gives the global isomorphism; rank zero and empty schemes need no exception.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-square-injective-free-map-dual-coker-zero",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "matrix-chart proof and canonical pullback clause; Tags 0BCD, 08CR, 06YD",
+  "note": "F4 expanded the canonical-map part of the matrix-chart argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical truncation of a perfect complex universally locally free degree zero cohomology commutes with pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex with universally locally free lowest cohomology of fixed rank canonical truncation inclusion commutes with derived pullback",
+   "results": "8 hits: pullback of free sheaves and cochain truncation naturality; no canonical universal-H0 criterion",
+   "date": "2026-10-13",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"IsIso\"",
+   "results": "ShortComplex.isIso_homologyFunctor_map_of_epi_of_isIso_of_mono",
+   "date": "2026-10-13",
+   "verdict": "generic tool, not the derived scheme criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*[Hh]omology|[Hh]omology.*perfect|baseChange.*surjective",
+   "results": "25 hits, mainly scheme morphism properties and linear algebra base change",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail",
+   "via": [
+    "lem-sc-picard-base-change-stalk-surjective",
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectUniversalH0TruncationPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectUniversalH0TruncationPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_universalH0_truncation_pullback_isIso",
+  "statement": "theorem perfect_universalH0_truncation_pullback_isIso\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (K : schemeDerivedCategory S) (hK : IsPerfect S K)\n    (hnegative : ∀ (Y : Scheme.{u}) (k : Y ⟶ S) (i : ℤ), i < 0 →\n      IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj\n          ((derivedPullback k).obj K)))\n    (hloc : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ r : ℕ,\n      ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme),\n        SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((derivedPullback (k ≫ U.ι)).obj K)) r)\n    (M : S.Modules)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj M ⟶ K)\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map a))\n    {Y : Scheme.{u}} (k : Y ⟶ S) :\n    IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map\n        ((derivedPullback k).map a))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T015552-L-3019860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T015552-L-3019860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

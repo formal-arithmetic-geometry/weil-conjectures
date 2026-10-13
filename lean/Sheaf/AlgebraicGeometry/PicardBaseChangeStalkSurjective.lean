@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData
+import Sheaf.AlgebraicGeometry.PerfectUniversalH0TruncationPullback
 
 /-! # Stalk surjectivity of canonical Picard base change
 
@@ -68,6 +70,41 @@ theorem picardRankMatch_baseChange_stalk_surjective {X S T : Scheme.{u}} (f : X 
       ((Modules.moduleBaseChangeMap (pullback.snd f g)
         (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)
         pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj F)).stalkLinearMap t)
-    := by sorry
+    := by
+  classical
+  let : ∀ Y : Scheme.{u},
+      HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    fun Y ↦ HasDerivedCategory.standard _
+  let : ∀ U : T.Opens, HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U)) :=
+    fun U ↦ HasDerivedCategory.standard _
+  obtain ⟨K, a, hK, hnegative, hloc, ha, hcomp⟩ :=
+    picardRankMatch_derived_truncation_data f E g hR F hF
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) 0
+  let M := (Modules.pushforward (pullback.snd f g)).obj
+    ((Modules.tensorPullback (pullback.fst f g)).obj F)
+  let c := H.map ((derivedPullback h).map a)
+  have : IsIso c :=
+    perfect_universalH0_truncation_pullback_isIso T K hK hnegative hloc M a ha h
+  obtain ⟨e0, e1, hc⟩ := hcomp T' h
+  let B := SheafOfModules.forget T'.ringCatSheaf ⋙
+    PresheafOfModules.toPresheaf T'.ringCatSheaf.obj ⋙
+      TopCat.Presheaf.stalkFunctor Ab.{u} t
+  let beta := Modules.moduleBaseChangeMap (pullback.snd f g)
+    (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)
+    pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj F)
+  have hstalk : B.map beta ≫ B.map e1.inv = B.map e0.hom ≫ B.map c := by
+    simpa only [Functor.map_comp] using congrArg (fun q ↦ B.map q) hc
+  change Function.Surjective (B.map beta)
+  intro y
+  obtain ⟨z, hz⟩ := (ConcreteCategory.bijective_of_isIso (B.map c)).2 (B.map e1.inv y)
+  obtain ⟨x, hx⟩ := (ConcreteCategory.bijective_of_isIso (B.map e0.hom)).2 z
+  refine ⟨x, (ConcreteCategory.bijective_of_isIso (B.map e1.inv)).1 ?_⟩
+  have heq := congrArg (fun q ↦ q x) hstalk
+  calc
+    B.map e1.inv (B.map beta x) = B.map c (B.map e0.hom x) := heq
+    _ = B.map c z := congrArg (fun q ↦ B.map c q) hx
+    _ = B.map e1.inv y := hz
 
 end AlgebraicGeometry.Scheme

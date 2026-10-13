@@ -10542,3 +10542,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/F3/Sheaf.CategoryTheory.ColimitSiteRawSectionMatchingLift (stage 3; reviewer PASS; first push; landing 20261013T015551-L-3019253 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.Modules.DeterminantLiftWedgeKernel (stage 3; reviewer PASS; first push; landing 20261013T015551-L-3019478 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelData (stage 3; reviewer PASS; first push; landing 20261013T015552-L-3019655 (interface); batch 20261013T015540; modules 3; new nodes 2)
+- 01:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective (stage 3; reviewer PASS; first push; landing 20261013T015552-L-3019860 (interface); batch 20261013T015540; modules 3; new nodes 2)

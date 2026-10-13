@@ -18,52 +18,34 @@
  ],
  "proof": [
   {
-   "text": "Over a common-rank neighbourhood the proper flat finite-presentation morphism has perfect derived direct images for E and its dual, with arbitrary canonical derived base change. Their Tor amplitude starts at zero because every base-changed direct image has no negative cohomology.",
+   "text": "Choose the standard derived localizations. Obtain the connective perfect K, truncation map a, universal rank charts, and the exact canonical-comparison equality from the derived-data lemma.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "def-sc-picard-universal-rank-match"
+    "lem-sc-picard-rank-match-derived-truncation-data"
    ],
    "elementary": false
   },
   {
-   "text": "Use residue-field tests of the universal rank condition and the residue-model construction of the lowest-cohomology locus. The first term has rank r and all negative terms vanish. The universal condition makes the outgoing degree-zero matrix zero. Scalar extension of H^0 and H^0 after scalar extension are then the same first free term; the natural comparison is the identity, hence surjective.",
+   "text": "Apply the perfect universal-H0 truncation criterion to get invertibility of H0(Lh*a).",
    "uses": [
-    "lem-sc-perfect-h0-locally-closed",
-    "lem-sc-perfect-finite-free-residue-model"
+    "lem-sc-perfect-universal-h0-truncation-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Identify this specific comparison with the adjoint-defined ordinary base-change map: transpose under tensor pullback adjoint to pushforward and use naturality and triangle identities. The result is exactly the unit, pushforward composition and square-commutation composite in moduleBaseChangeMap, with pullback associativity comparisons.",
-   "uses": [
-    "lem-weil-pbc-module-base-change-map-open-restriction",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Open restriction of the canonical map agrees with the restricted square map. Taking the stalk at t turns the local identity calculation into surjectivity of beta_t for either F. Rank zero and empty bases introduce no exception.",
-   "uses": [
-    "lem-weil-pbc-module-base-change-map-open-restriction"
-   ],
-   "elementary": false
+   "text": "Pass the comparison equality through the forgetful stalk functor. Its maps on e0,e1 and H0(Lh*a) are bijective. For a target germ y, lift e1.inv(y) through H0(Lh*a), then through e0.hom; the comparison equality and injectivity of e1.inv show this germ maps to y under beta. The forgetful stalk map is definitionally the underlying function of stalkLinearMap.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-rf-perfect-base-change",
-  "def-sc-picard-universal-rank-match",
-  "lem-sc-perfect-h0-locally-closed",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-weil-pbc-module-base-change-map-open-restriction",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-pc-module-pullback-adjunction"
+  "lem-sc-perfect-universal-h0-truncation-pullback",
+  "lem-sc-picard-rank-match-derived-truncation-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "omitted base-change detail; Tags 0B91(2), 0BDL (matrix-zero residue model), 08HY (canonical comparison)",
-  "note": "Q1 expanded the omitted detail, separating stalk ranks from canonical surjectivity."
+  "place": "omitted base-change detail, reduced to canonical derived truncation data and matrix-chart criterion by F4",
+  "note": "The actual Lean proof transports surjectivity through the exact canonical comparison equality; no arbitrary object isomorphism is substituted for beta."
  },
  "mathlib_searches": [
   {
@@ -133,12 +115,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261012T223413-L-1639409",
+  "landing": "20261013T015552-L-3019860",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
