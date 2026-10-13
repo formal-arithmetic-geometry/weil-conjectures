@@ -22,45 +22,38 @@
  },
  "proof": [
   {
-   "text": "Sheafify projective quotient resolutions on each affine chart to compute the restriction of the fixed K-flat derived tensor. The quotient scalar action identifies ordinary pullback with the same Tor module on the closed chart.",
+   "text": "Obtain compatible undualized local affine comparison maps phi_U with their coordinate squares. No arbitrary local coordinate data is selected into a definition.",
    "uses": [
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-n1-self-tor-compatible-affine-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the tensor-pulled kernel with the conormal module and commute exterior powers with affine sheafification.",
+   "text": "The inverse images of all affine opens cover Z: every image point lies in an affine open of Y. Apply existsUnique_hom_of_cover at the top open, using the component compatibility on pullback overlaps. Turn the over-top morphism into a global module morphism tau by taking its components on W mapping to the top open. Naturality of the over-top map proves naturality of tau. The gluing equations identify tau.over(O_U) with phi_U.",
    "uses": [
-    "lem-sc-affine-open-kernel-conormal-sections"
+    "lem-pur-sheaf-hom-cover-gluing"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the normalized algebraic comparison. Its resolution-independent normalization gives equality on basic open overlaps, so the maps glue to tau.",
+   "text": "Rewrite each local normalization using the proven tau.over(O_U)=phi_U. Apply the proved one-chart square dualization theorem for arbitrary V, giving the original affine dual factorization.",
    "uses": [
-    "new-r4-self-tor-conormal-comparison"
+    "new-n1-self-tor-chart-square-dualization"
    ],
    "elementary": false
-  },
-  {
-   "text": "Dualize its chart coordinate square, then restrict to V and W. These functors preserve the coordinate isomorphisms and yield the displayed equality.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-open-kernel-conormal-sections",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "new-r4-self-tor-conormal-comparison"
+  "new-n1-self-tor-compatible-affine-maps",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "new-n1-self-tor-chart-square-dualization"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "R4",
+  "by": "agent",
+  "agent": "N1",
   "date": "2026-10-14",
-  "based_on": {
-   "document": "https://stacks.math.columbia.edu/tag/09PQ",
-   "place": "lemma-divided-powers-on-tor; Tags 062I and 06YH for conormal and derived tensor"
-  }
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Original affine comparison plan, with global gluing implemented by the proved HomCoverGluing theorem (Tags 03EM/04TQ) and chart duality proved componentwise from Tag 01CM."
  },
  "mathlib_searches": [
   {
@@ -132,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T181120-L-2606540",
+  "landing": "20261013T190147-L-3218715",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

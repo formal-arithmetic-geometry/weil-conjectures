@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.SelfTorChartSquareDualization
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # Chart factorizations of the canonical exterior-to-self-Tor comparison
 
@@ -82,6 +84,55 @@ theorem selfTor_conormal_dual_chart_iso
               (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf
                 ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))).over W)),
           ((Scheme.Modules.restrictFunctor V.ι).map (Scheme.Modules.dualMap τ)).over W =
-            a.hom ≫ F.map c.op ≫ b.hom := by sorry
+            a.hom ≫ F.map c.op ≫ b.hom := by
+  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+  let S := DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+  let Q := (Scheme.Modules.tensorPullback i).obj
+    ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
+        (S.obj B ⊗ S.obj B))
+  let E := Scheme.Modules.exteriorSheaf
+    ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n
+  obtain ⟨φ, hφ, hcompatible⟩ := exists_compatible_affine_selfTor_maps i n
+  let O (U : Y.affineOpens) : Z.Opens := i ⁻¹ᵁ U.1
+  let f (U : Y.affineOpens) : O U ⟶ (⊤ : Z.Opens) := homOfLE le_top
+  have hcover : Sieve.ofArrows O f ∈ Opens.grothendieckTopology Z (⊤ : Z.Opens) := by
+    rw [Opens.mem_grothendieckTopology]
+    intro x _
+    have hx : i x ∈ (⨆ U : Y.affineOpens, U.1) := by
+      rw [iSup_affineOpens_eq_top Y]
+      trivial
+    obtain ⟨U, hU⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    exact ⟨O U, f U, Sieve.ofArrows_mk O f U, hU⟩
+  obtain ⟨α, hα, _⟩ := SheafOfModules.existsUnique_hom_of_cover
+    Z.presheaf Z.ringCatSheaf.property E Q (⊤ : Z.Opens) Y.affineOpens O f hcover φ
+    (fun U U' W a ↦ hcompatible U U' W
+      (a ≫ pullback.fst (f U) (f U')) (a ≫ pullback.snd (f U) (f U')))
+  let τ : E ⟶ Q :=
+    { val :=
+      { app := fun W ↦ α.val.app (op (Over.mk (homOfLE le_top : W.unop ⟶ ⊤)))
+        naturality := by
+          intro W W' g
+          exact α.val.naturality
+            (Over.homMk g.unop (Subsingleton.elim _ _) :
+              Over.mk (homOfLE le_top : W'.unop ⟶ ⊤) ⟶
+                Over.mk (homOfLE le_top : W.unop ⟶ ⊤)).op } }
+  have hτ (U : Y.affineOpens) : τ.over (O U) = φ U := by
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro W
+    change α.val.app (op (Over.mk (homOfLE le_top : W.unop.left ⟶ ⊤))) =
+      (φ U).val.app W
+    have he : (homOfLE le_top : W.unop.left ⟶ (⊤ : Z.Opens)) =
+        W.unop.hom ≫ f U := Subsingleton.elim _ _
+    rw [he]
+    exact hα U W.unop.left W.unop.hom
+  refine ⟨τ, ?_⟩
+  intro V U
+  have hnormalized : IsAffineSelfTorChartMap i U n E Q (τ.over (O U)) := by
+    rw [hτ U]
+    exact hφ U
+  exact selfTor_affine_chart_square_dualization i U n E Q τ hnormalized V
 
 end AlgebraicGeometry
