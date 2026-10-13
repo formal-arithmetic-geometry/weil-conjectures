@@ -1,0 +1,172 @@
+{
+ "id": "lem-pc-inverse-image-locally-split-sections",
+ "kind": "statement",
+ "title": "Inverse image of a locally split sequence is sectionwise surjective",
+ "statement": "Let g : Y → X be a scheme morphism [def-pc-scheme], T a short exact sequence of abelian sheaves on X, W an open of X such that the restriction of T.f to W is a split monomorphism, and B an open of Y contained in g⁻¹(W). The inverse-image quotient map [def-pc-flat-cohomology-comparison] is surjective on sections over B. There is no cover hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "dag/nodes/sec-picard-framework/lem-pc-cech-cover-relative-effacement.json",
+  "place": "Inverse-image splitting paragraph, expanded using Mathlib sheafPullbackIso and ShortComplex.Splitting.ofExactOfRetraction."
+ },
+ "proof": [
+  {
+   "text": "Mathlib sheafPullbackIso identifies open restriction with inverse image along the inclusion. It preserves limits; the pullback adjunction makes it a left adjoint, hence it preserves colimits. ShortExact.map_of_exact therefore preserves the short exact sequence on W. Splitting.ofExactOfRetraction supplies a splitting from the assumed retraction and exactness, hence a split quotient map.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the continuous map p : B → W explicitly by b ↦ g(b), using hB. The two composites into X are definitionally equal. Compose the pullback adjunctions and use leftAdjointUniq to obtain pullbackCompIso. Whisker this with the two open-restriction isomorphisms to identify W-restriction followed by p-pullback with g-pullback followed by B-restriction. Naturality conjugates the two quotient morphisms. Functors and conjugation by isomorphisms preserve split epimorphisms.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget to presheaves and evaluate at the top open of B. This preserves the split epimorphism. AddCommGrpCat.epi_iff_surjective gives surjectivity. The image of the top open under the subtype inclusion is B, as proved elementwise in htop, so this is exactly the required section map. Empty B or W is included without extra assumptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-picard-framework/lem-pc-cech-cover-relative-effacement.json",
+  "place": "Kernel-checked Lean proof using the Mathlib declarations named in the steps; no sorry in this module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally split short exact sequences of abelian sheaves stay split after inverse image and are surjective on sections inside the splitting opens",
+   "results": {
+    "t": "2026-10-12T22:55:44Z",
+    "tool": "leansearch",
+    "query": "Locally split short exact sequences of abelian sheaves stay split after inverse image and are surjective on sections inside the splitting opens",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "Service unavailable; no conclusion from this search."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of a locally split short exact sequence of abelian sheaves is split and surjective on sections inside the preimage open",
+   "results": {
+    "t": "2026-10-12T23:40:56Z",
+    "tool": "leanfinder",
+    "query": "An inverse image of a locally split short exact sequence of abelian sheaves is split and surjective on sections inside the preimage open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.restrictHomEquivOfIsLocallySurjective",
+     "CategoryTheory.ShortComplex.ShortExact.splittingOfInjective",
+     "CategoryTheory.ShortComplex.Splitting.ofExactOfSection",
+     "CategoryTheory.ShortComplex.Splitting.ofExactOfRetraction",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+     "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective",
+     "CategoryTheory.Sheaf.isLocallySurjective_sheafToPresheaf_map_iff",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact"
+    ],
+    "digest": "1ce4ece30b1be5e5"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem; relevant primitives inspected and used."
+  },
+  {
+   "tool": "grep",
+   "query": "splitEpi|splitMono|sheafPullbackIso|cech.*acyclic",
+   "results": {
+    "t": "2026-10-13T00:57:12Z",
+    "tool": "grep",
+    "query": "splitEpi|splitMono|sheafPullbackIso|cech.*acyclic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean",
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "50942c50a39cf83d"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact matching theorem; relevant primitives inspected and used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-cover-relative-effacement",
+   "place": "relative effacement"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.InverseImageLocallySplitSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/InverseImageLocallySplitSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.inverseImage_surjective_sections_of_localSplit",
+  "statement": "theorem inverseImage_surjective_sections_of_localSplit\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact) (W : X.Opens)\n    (hsplit : IsSplitMono (W.sheafRestrict.map T.f))\n    (B : Y.Opens) (hB : B ≤ g ⁻¹ᵁ W) :\n    Function.Surjective (((invImage g).map T.g).hom.app (op B))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T022433-L-3222527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T022433-L-3222527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

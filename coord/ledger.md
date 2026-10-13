@@ -10707,3 +10707,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/U2/Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized (stage 3; reviewer PASS; first push; landing 20261013T022432-L-3221761 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/V2/Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction (stage 3; reviewer PASS; first push; landing 20261013T022433-L-3221999 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange (stage 3; reviewer PASS; first push; landing 20261013T022433-L-3222259 (interface); batch 20261013T022404; modules 3; new nodes 2)
+- 02:24 L: merged deliver/V4/Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement (stage 3; reviewer PASS; first push; landing 20261013T022433-L-3222527 (interface); batch 20261013T022404; modules 3; new nodes 2)

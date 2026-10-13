@@ -14,24 +14,28 @@
  },
  "proof": [
   {
-   "text": "Set E to the product, over i, of the direct image of F restricted to U i,\nand embed F by its restriction maps. This map is monic because the U i cover X.\nLet Q be its cokernel. On U i, projection to the i-th factor retracts F → E,\nso the cokernel sequence splits on U i and on every tuple intersection contained\nin U i. Hence E → Q is surjective on all nonempty tuple sections. Exact inverse\nimage preserves the sequence and its splitting on preimages of U i. Every\nV-tuple intersection lies in the preimage of its first U-member, so the pulled\nback quotient map is also surjective on all V-tuple sections. In the Čech\ncomplex of each direct-image factor, insert i at the front of a tuple; the\nalternating face identity gives dh + hd = id in positive degrees. The Čech\ncomplex of E is the product of these complexes; products of abelian groups are\nexact, so E has zero positive Čech cohomology. The long exact sequence of the\nsectionwise short exact Čech complexes therefore makes every positive connecting\nmap surjective. For an empty index, hcover forces X empty; Y is empty too and\nthe zero short exact sequence has every required property.",
+   "text": "Apply exists_cechCoverRelativeEffacement_core to U, hcover and F, obtaining T, its short exactness, U-tuple section surjectivity, local splitting on each U_i and surjective connecting maps.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-flat-cohomology-comparison",
-    "def-pc-cech-comparison-system"
+    "lem-pc-cech-cover-relative-effacement-core"
    ],
    "elementary": false
+  },
+  {
+   "text": "For k and y : Fin(k+1) → ι take W = U(y(0)). The assumed hinter bounds the V-tuple intersection by the preimage of the U-tuple intersection; monotonicity of preimage and iInf_le at 0 bound this by g⁻¹(W). Apply inverseImage_surjective_sections_of_localSplit to T, W and that V-tuple intersection, using the local split monomorphism supplied by the core. Assemble the original unchanged conclusion. If ι is empty there are no y; every other tuple has its first index 0.",
+   "uses": [
+    "lem-pc-inverse-image-locally-split-sections"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-flat-cohomology-comparison",
-  "def-pc-cech-comparison-system"
+  "lem-pc-cech-cover-relative-effacement-core",
+  "lem-pc-inverse-image-locally-split-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Expansion of the assigned node plan, with the relative-effacement induction."
+  "document": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechCoverRelativeEffacement.lean",
+  "place": "V4 reduction to cover-only effacement and the proved inverse-image local splitting lemma; the core is still sorry."
  },
  "mathlib_searches": [
   {
@@ -150,12 +154,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T223413-L-1639538",
+  "landing": "20261013T022433-L-3222527",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
