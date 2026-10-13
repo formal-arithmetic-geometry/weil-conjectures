@@ -13352,3 +13352,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:41 L: batch 20261013T181050 dependency take-out
 - 18:43 L: returned deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureCompatibility (reviewer RETURN: (reviewer X-77e71, head 77e71f69b) E2: The theorem left as sorry is false. In lean/Sheaf/AlgebraicGeometry/Morphisms/Aff)
 - 18:54 L: returned deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric (reviewer RETURN: (reviewer X-ca043, head ca0433689) E2 (brief §4): FixedOrbitData permits false orbit data. Counterexample: R = H = C = ℚ)
+- 19:01 L: returned deliver/C1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (reviewer RETURN: (the landing tools, head b8d401ae3) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PicardScalarCechExternalCup.)
