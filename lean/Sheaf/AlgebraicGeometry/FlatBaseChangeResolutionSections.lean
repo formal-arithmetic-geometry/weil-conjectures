@@ -6,12 +6,8 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
-import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.FlatPullbackHomologySections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology
 
 /-! # FlatBaseChangeResolutionSections
 
@@ -69,6 +65,10 @@ theorem flatBaseChangeResolutionBeta_sections {X S S' : Scheme.{uBC}} (f : X ⟶
         D.targetClass p
           (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
             ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi) := by
-  sorry
+  intro V D xi
+  have h := flatBaseChangeResolutionBeta_openMap_sections f g I J t p V D xi
+  have hm := ConcreteCategory.congr_hom
+    (flatBaseChangeRestrictedLift_homology f g I J t ht p V D) xi
+  exact h.trans (congrArg (fun x ↦ D.targetClass p x) hm)
 
 end AlgebraicGeometry.Scheme.Modules

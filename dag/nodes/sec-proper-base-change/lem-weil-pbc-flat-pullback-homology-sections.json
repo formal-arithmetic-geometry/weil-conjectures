@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-flat-pullback-homology-sections",
+ "kind": "statement",
+ "title": "The homology mate acts through the constructed open cohomology map",
+ "statement": "Let $f:X\\to S$ and $g:S′\\to S$ be morphisms of schemes with $g$ and the second pullback projection $g′$ flat. Let $F$ be a module sheaf on $X$, $I$ an injective resolution of $F$, $J$ an injective resolution of $(g′)^*F$, and $t:I\\to g′_*J$ any complex map. For each $p\\ge0$, open $V\\subset S$, choices $D:FlatBaseChangeOpenChoices(f,g,F,I,J,V)$ and class $\\xi\\in H^p(f^{-1}V,F)$, the section map of the adjoint of flatBaseChangeResolutionBeta sends D.sourceClass(p,xi) to D.targetClass(p,flatBaseChangeResolutionOpenMap(f,g,I,J,t,p,V,D)(xi)). No augmentation hypothesis on t is needed. The constructions are [def-weil-pbc-flat-base-change-resolution-construction], [def-weil-pbc-flat-base-change-open-choices], and [def-weil-pbc-flat-base-change-resolution-open-map].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01EZ, 01E4; section formula split from lem-weil-pbc-flat-base-change-resolution-sections"
+ },
+ "stmt_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-open-map",
+  "def-weil-pbc-flat-base-change-resolution-construction"
+ ],
+ "proof": [
+  {
+   "text": "Flatness makes tensor pullback exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective]. Thus kernels, images and homology of K commute with tensor pullback. The inverse comparison in b is this exact homology comparison.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cycle s in K(V), the adjunction identity says that the unit followed by g_*c sends s to q(s), degreewise. Passing through the preserved kernel and homology quotient therefore sends its cycle class to the class of q(s). This uses only the defining adjunction identity and the universal properties of kernel and quotient.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map theta is the sheafification of cycle classes with its canonical homology comparison [def-weil-pbc-flat-base-change-open-choices]. Naturality of sheafification and the evaluation comparison takes the preceding equality on cycle representatives to the displayed equality. Every element of section-complex homology is represented by a cycle, so this establishes equality of the additive group morphisms.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the constructed open map [def-weil-pbc-flat-base-change-resolution-open-map], cancel the inverse target section/resolution comparison against the one in targetClass. In sourceClass and beta cancel the inverse source derived-image comparison using naturality of the tensor adjunction. The remaining equality is the cycle-class identity established in the preceding steps. This argument uses no augmentation and no moduleCohomologyFMap.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-open-map",
+    "def-weil-pbc-flat-base-change-resolution-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-open-map",
+  "def-weil-pbc-flat-base-change-resolution-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01EZ, 01E4; detailed resolution/section comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology map flat pullback and section cohomology adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat pullback homology section cocycle map adjunction",
+   "results": "8 hits: groupCohomology.toCocycles_comp_isoCocycles₁_hom, groupCohomology.isoCocycles₁_inv_comp_iCocycles, CochainComplex.HomComplex.leftHomologyData'_π, groupCohomology.isoCocycles₁_hom_comp_i, groupCohomology.mapCocycles₁_comp_i, CochainComplex.HomComplex.leftHomologyData', groupCohomology.isoCocycles₁_inv_comp_iCocycles_apply, groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap_mapNatTrans\"",
+   "results": "1 hits: CategoryTheory.ShortComplex.homologyMap_mapNatTrans",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|sectionCohomologyTheta",
+   "results": "Two hits in ShortComplex/PreservesHomology.lean, lines 725 and 922: homologyMap_mapNatTrans.",
+   "date": "2026-10-13",
+   "verdict": "Generic homology naturality; the scheme section comparison is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint homology map unit naturality short complex",
+   "results": "Second reader: NatTrans.app_homology, ShortComplex.homologyMap_mapNatTrans, and Adjunction.unit_naturality; generic naturality ingredients, no complete section formula or restricted-lift comparison.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; exact pullback plus sheafification and restriction transports still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "Second reader: InjectiveResolution.isoRightDerivedObj_hom_naturality and its reassociated form in Mathlib.CategoryTheory.Abelian.RightDerived.",
+   "date": "2026-10-13",
+   "verdict": "Resolution transport ingredient only; does not identify the restricted lift or the homology mate on sections."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|sectionCohomologyTheta|flatBaseChangeResolution; homologyMap_mapNatTrans; searched lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Second reader: HigherDirectImageResolutionNaturality proves coefficient naturality, with private theta naturality helpers; ShortComplexSectionComparison proves a sheafification/evaluation comparison; ModuleCohomologyFMapFunctorial proves independence. None states either new obligation.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate or direct shorter proof; existing ingredients support the two documented arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "lem-weil-pbc-flat-base-change-map-sections: Section formula for a fixed augmented lift: Flat pullback homology mates on section classes",
+   "via": [
+    "lem-weil-pbc-flat-base-change-resolution-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatPullbackHomologySections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPullbackHomologySections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_openMap_sections",
+  "statement": "theorem flatBaseChangeResolutionBeta_openMap_sections {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (p : ℕ) :\n    ∀ (V : S.Opens)\n        (D : FlatBaseChangeOpenChoices f g F I J V)\n        (xi : (forget₂ _ AddCommGrpCat.{uBC}).obj\n          ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F))),\n        Hom.app ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv _ _\n          (flatBaseChangeResolutionBeta f g I J t p)) V\n          (D.sourceClass p xi) =\n        D.targetClass p\n          (flatBaseChangeResolutionOpenMap f g I J t p V D xi)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

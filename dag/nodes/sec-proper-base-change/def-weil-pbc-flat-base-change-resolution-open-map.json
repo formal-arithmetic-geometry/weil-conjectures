@@ -1,0 +1,126 @@
+{
+ "id": "def-weil-pbc-flat-base-change-resolution-open-map",
+ "kind": "definition",
+ "title": "Open cohomology map of a fixed resolution lift",
+ "statement": "For scheme morphisms f:X to S and g:S′ to S, a module sheaf F, injective resolutions I of F and J of g′^*F, any complex map t:I to g′_*J, an integer p at least zero, an open V of S and D:FlatBaseChangeOpenChoices(f,g,F,I,J,V), define flatBaseChangeResolutionOpenMap by rS.hom followed by H^p of the section-complex map of flatBaseChangeResolutionQ, followed by rT.inv. Here rS and rT are the isomorphisms from cohomology of the restricted modules to homology of sections of the original resolutions, obtained by composing the canonical isoRightDerivedObj, the inverse forgetful homology comparison, and H^p of D.source.sections or D.target.sections (the latter transported through flatBaseChangeOpenEquality). These are actual specified isomorphisms; no arbitrary existence witness is chosen. The constructions are [def-weil-pbc-flat-base-change-resolution-construction] and [def-weil-pbc-flat-base-change-open-choices].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01EZ, 01E4; section formula split from lem-weil-pbc-flat-base-change-resolution-sections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology map flat pullback and section cohomology adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat pullback homology section cocycle map adjunction",
+   "results": "8 hits: groupCohomology.toCocycles_comp_isoCocycles₁_hom, groupCohomology.isoCocycles₁_inv_comp_iCocycles, CochainComplex.HomComplex.leftHomologyData'_π, groupCohomology.isoCocycles₁_hom_comp_i, groupCohomology.mapCocycles₁_comp_i, CochainComplex.HomComplex.leftHomologyData', groupCohomology.isoCocycles₁_inv_comp_iCocycles_apply, groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap_mapNatTrans\"",
+   "results": "1 hits: CategoryTheory.ShortComplex.homologyMap_mapNatTrans",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_mapNatTrans|sectionCohomologyTheta",
+   "results": "Two hits in ShortComplex/PreservesHomology.lean, lines 725 and 922: homologyMap_mapNatTrans.",
+   "date": "2026-10-13",
+   "verdict": "Generic homology naturality; the scheme section comparison is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint homology map unit naturality short complex",
+   "results": "Second reader: NatTrans.app_homology, ShortComplex.homologyMap_mapNatTrans, and Adjunction.unit_naturality; generic naturality ingredients, no complete section formula or restricted-lift comparison.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; exact pullback plus sheafification and restriction transports still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "Second reader: InjectiveResolution.isoRightDerivedObj_hom_naturality and its reassociated form in Mathlib.CategoryTheory.Abelian.RightDerived.",
+   "date": "2026-10-13",
+   "verdict": "Resolution transport ingredient only; does not identify the restricted lift or the homology mate on sections."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|sectionCohomologyTheta|flatBaseChangeResolution; homologyMap_mapNatTrans; searched lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Second reader: HigherDirectImageResolutionNaturality proves coefficient naturality, with private theta naturality helpers; ShortComplexSectionComparison proves a sheafification/evaluation comparison; ModuleCohomologyFMapFunctorial proves independence. None states either new obligation.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate or direct shorter proof; existing ingredients support the two documented arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Section formula for a fixed augmented lift: canonical map of its section-complex homology",
+   "via": [
+    "lem-weil-pbc-flat-base-change-resolution-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionOpenMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionOpenMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionOpenMap",
+  "statement": "def flatBaseChangeResolutionOpenMap {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S)\n    {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (p : ℕ) (V : S.Opens) (D : FlatBaseChangeOpenChoices f g F I J V) :\n    (forget₂ _ AddCommGrpCat.{uBC}).obj\n      ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n        ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ⟶\n    (forget₂ _ AddCommGrpCat.{uBC}).obj\n      ((RingedSpace.moduleCohomology\n        ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)).toScheme.toRingedSpace p).obj\n          ((restrictFunctor ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).obj\n            ((tensorPullback (pullback.snd g f)).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

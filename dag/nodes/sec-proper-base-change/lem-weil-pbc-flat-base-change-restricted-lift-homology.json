@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-restricted-lift-homology",
+ "kind": "statement",
+ "title": "The restricted augmented lift computes the cohomology h-map",
+ "statement": "Let $f:X\\to S$ and $g:S′\\to S$ be scheme morphisms, $F$ a module sheaf on $X$, $I$ an injective resolution of $F$, $J$ an injective resolution of $(g′)^*F$, and $t:I\\to g′_*J$ a complex map lifting the tensor-adjunction unit, with $g′$ the second pullback projection. For every $p\\ge0$, open $V\\subset S$ and choices $D:FlatBaseChangeOpenChoices(f,g,F,I,J,V)$, the constructed flatBaseChangeResolutionOpenMap equals moduleCohomologyFMap of the restricted projection h on $g′^{-1}(f^{-1}V)$ with map D.psi. No flatness is needed. The constructions are [def-weil-pbc-flat-base-change-resolution-open-map], [def-weil-pbc-flat-base-change-open-choices], and [def-weil-pbc-module-cohomology-fmap].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01EZ, 01E4; section formula split from lem-weil-pbc-flat-base-change-resolution-sections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-flat-base-change-resolution-open-map"
+ ],
+ "proof": [
+  {
+   "text": "Restrict t to U. Conjugate with the augmentation-preserving comparison isomorphisms D.source.comparison and D.target.comparison and the restriction/direct-image comparison. Their augmentation identities and D.unit_square give a map from the restricted source resolution into h_* of the restricted target resolution, with augmentation D.psi.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-flat-base-change-resolution-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Replace the pushed target complex by a complex of injectives using [lem-weil-pbc-complex-injective-resolution-mono], extending by zero and truncating to natural indices as in the construction [def-weil-pbc-module-cohomology-fmap]. Take lambda composed with the restricted lift for the horizontal map in ModuleCohomologyFMapData. Sections of lambda are a quasi-isomorphism by [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso]. The formula defining the cohomology map cancels its homology map against its inverse. Independence [lem-weil-pbc-module-cohomology-fmap-functorial] compares this choice with the recorded moduleCohomologyFMap.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "D.source.components and D.target.components identify the maps on section complexes degreewise with restriction of t. The sectionwise pushforward square in flatBaseChangeResolutionQ and flatBaseChangeOpenEquality identify their codomain with sections of f′_*J on g^{-1}V. After cancelling lambda the remaining maps are precisely r_S, H(q_V), and r_T.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the equality of section-complex homology maps with the inverse target cohomology comparison. The target comparison cancels and the source and target maps are exactly those defining [def-weil-pbc-flat-base-change-resolution-open-map]. This gives equality with moduleCohomologyFMap as asserted.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-open-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "def-weil-pbc-flat-base-change-resolution-open-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01EZ, 01E4; detailed resolution/section comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology map flat pullback and section cohomology adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restricted augmented injective resolution computes map on sheaf module cohomology",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.Hom.hom'_f, CategoryTheory.InjectiveResolution.Hom.hom', CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.descFOne, CategoryTheory.InjectiveResolution.Hom.ι_comp_hom, CategoryTheory.InjectiveResolution.desc, CategoryTheory.InjectiveResolution.desc_commutes",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "InjectiveResolution.*homology|homology.*InjectiveResolution",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; no theorem with the stated scheme-module section comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint homology map unit naturality short complex",
+   "results": "Second reader: NatTrans.app_homology, ShortComplex.homologyMap_mapNatTrans, and Adjunction.unit_naturality; generic naturality ingredients, no complete section formula or restricted-lift comparison.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; exact pullback plus sheafification and restriction transports still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "Second reader: InjectiveResolution.isoRightDerivedObj_hom_naturality and its reassociated form in Mathlib.CategoryTheory.Abelian.RightDerived.",
+   "date": "2026-10-13",
+   "verdict": "Resolution transport ingredient only; does not identify the restricted lift or the homology mate on sections."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|sectionCohomologyTheta|flatBaseChangeResolution; homologyMap_mapNatTrans; searched lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "results": "Second reader: HigherDirectImageResolutionNaturality proves coefficient naturality, with private theta naturality helpers; ShortComplexSectionComparison proves a sheafification/evaluation comparison; ModuleCohomologyFMapFunctorial proves independence. None states either new obligation.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate or direct shorter proof; existing ingredients support the two documented arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "lem-weil-pbc-flat-base-change-map-sections: Section formula for a fixed augmented lift: The restricted augmented lift computes the cohomology h-map",
+   "via": [
+    "lem-weil-pbc-flat-base-change-resolution-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeRestrictedLiftHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeRestrictedLift_homology",
+  "statement": "theorem flatBaseChangeRestrictedLift_homology {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S)\n    {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0))\n    (p : ℕ) (V : S.Opens) (D : FlatBaseChangeOpenChoices f g F I J V) :\n    flatBaseChangeResolutionOpenMap f g I J t p V D =\n      moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)\n        ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T113336-L-3181261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
