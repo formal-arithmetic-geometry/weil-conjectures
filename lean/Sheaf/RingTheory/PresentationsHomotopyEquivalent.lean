@@ -22,6 +22,18 @@ open TensorProduct
 
 namespace Algebra.Extension
 
+-- Lift the polynomial variables through the chosen section of the target extension.
+private theorem polynomialPresentation_hom_nonempty
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
+    {V : Type w} (β : MvPolynomial V R →ₐ[R] S) (hβ : Function.Surjective β)
+    (Q : Extension.{w'} R S) : Nonempty ((ofSurjective β hβ).Hom Q) := by
+  classical
+  refine ⟨Hom.ofAlgHom (MvPolynomial.aeval (fun i ↦ Q.σ (β (MvPolynomial.X i)))) ?_⟩
+  apply MvPolynomial.algHom_ext
+  intro i
+  simp
+  rfl
+
 /-- Two polynomial presentations of the same algebra have homotopy equivalent naive cotangent
 complexes. Source: Stacks Project, Algebra, Tags 00S0 and 00S1
 (blueprint: lem-weil-pbc-nl-presentations-homotopy-equivalent).
@@ -86,6 +98,25 @@ theorem presentations_homotopy_equivalent
           h' ∘ₗ (ofSurjective α' hα').cotangentComplex ∧
         LinearMap.id - CotangentSpace.map φ ∘ₗ CotangentSpace.map ψ =
           (ofSurjective α' hα').cotangentComplex ∘ₗ h' := by
-  sorry
+  classical
+  let P := ofSurjective α hα
+  let P' := ofSurjective α' hα'
+  refine ⟨fun f ↦ cotangentComplex_mk _ f,
+    fun f ↦ cotangentComplex_mk _ f, polynomialPresentation_hom_nonempty α hα P',
+    polynomialPresentation_hom_nonempty α' hα' P, ?_⟩
+  intro φ ψ
+  refine ⟨(Hom.id P).sub (ψ.comp φ), (Hom.id P').sub (φ.comp ψ), ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · exact (CotangentSpace.map_comp_cotangentComplex φ).symm
+  · exact (CotangentSpace.map_comp_cotangentComplex ψ).symm
+  · simpa only [Cotangent.map_id, Cotangent.map_comp, LinearMap.restrictScalars_self]
+      using Cotangent.map_sub_map (Hom.id P) (ψ.comp φ)
+  · simpa only [CotangentSpace.map_id, CotangentSpace.map_comp,
+      LinearMap.restrictScalars_self]
+      using CotangentSpace.map_sub_map (Hom.id P) (ψ.comp φ)
+  · simpa only [Cotangent.map_id, Cotangent.map_comp, LinearMap.restrictScalars_self]
+      using Cotangent.map_sub_map (Hom.id P') (φ.comp ψ)
+  · simpa only [CotangentSpace.map_id, CotangentSpace.map_comp,
+      LinearMap.restrictScalars_self]
+      using CotangentSpace.map_sub_map (Hom.id P') (φ.comp ψ)
 
 end Algebra.Extension

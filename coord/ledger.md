@@ -11678,3 +11678,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/N3/Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel (stage 3; reviewer PASS; first push; landing 20261013T082358-L-1641414 (interface); batch 20261013T082326; modules 4; new nodes 3)
 - 08:23 L: merged deliver/N4/Sheaf.Algebra.Homology.AffinePerfectChainMapDescent (stage 3; reviewer PASS; first push; landing 20261013T082359-L-1641614 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/N4/Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel (stage 3; reviewer PASS; first push; landing 20261013T082359-L-1641765 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:24 L: merged deliver/N4/Sheaf.RingTheory.PresentationsHomotopyEquivalent (stage 3; reviewer PASS; first push; landing 20261013T082400-L-1641883 (proof); batch 20261013T082326; modules 1; new nodes 0)
