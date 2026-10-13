@@ -6,11 +6,11 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
-import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
+import Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal
+import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Strong monoidal descent of open restriction
 Source: Stacks Project, Tags 06YH and 079U.
@@ -46,27 +46,22 @@ local instance openRestrictionMonoidalStandardDerived (X : Scheme.{u}) (U : X.Op
 Source: Stacks Project, cohomology.tex, Tags 06YH and 079U.
 (blueprint: lem-pc-open-restriction-derived-monoidal).
 
-Proof: give ordinary restriction followed by the over-equivalence the monoidal
-structure transported from Scheme.Modules.pullbackMonoidal U.ι along
-Scheme.Modules.overFunctorEquiv U and restrictFunctorIsoPullback U.ι.
-Resolve the two tensor inputs by K-flat complexes. Their restrictions are K-flat
-by lem-pc-open-restriction-kflat-model. The ordinary tensorators, summed over
-p + q = n, give the total-complex comparison of
-lem-pc-open-restriction-total-tensor, natural by
-lem-pc-open-restriction-tensor-natural. Localize and use the factorization
-isomorphisms of both exact functors to identify their composite with R.
-Common K-flat resolutions make these comparisons independent of representatives
-and natural for roofs. The tensor unit is the structure sheaf in degree zero;
-ordinary restriction identifies it with the structure sheaf on U.toScheme.
-The module monoidal structure satisfies associativity and the two unit laws.
-On total complexes these equations hold on each coproduct inclusion, with the
-same associators and signs; localization preserves the equations. Check them
-on K-flat representatives and transport to arbitrary objects by naturality.
-The tensor and unit comparisons are invertible, hence give R.Monoidal.
-Localization's universal property applies separately to the source, over-site,
-and standard open-scheme localizations, so no equality of their morphism
-universes is required. For the empty open the module and complex comparisons
-are between zero objects; zero inputs also satisfy these equations. -/
+Proof: identify tensor pullback along U.ι with ordinary restriction by
+uniqueness of left adjoints to pushforward. Compose with overFunctorEquiv to
+identify it with the exact over-site restriction followed by overEquiv.
+Transport finite-limit and finite-colimit preservation through this isomorphism.
+The exact tensor pullback's mapDerivedCategory is a left derived functor,
+with mapDerivedCategoryFactorsh as its invertible counit. The transported
+pullback across universes has its left-derived counit by
+exists_derivedPullbackAcrossUniverses_leftDerived. Uniqueness of left derived
+functors identifies the two. Derive the module isomorphism and use
+mapDerivedCategoryCompIso to identify the displayed composite R with this
+transported pullback. Compose the strong monoidal standard-localization
+comparisons with the standard derived pullback monoidal model, then transport
+the resulting monoidal structure along the comparison to R. All these are
+functor isomorphisms, so both unit equations, associativity, and invertibility
+are preserved. The construction uses each localization's own universe and
+applies without change to the empty open and zero complexes. -/
 theorem exists_openRestriction_derivedMonoidal (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)
@@ -77,6 +72,50 @@ theorem exists_openRestriction_derivedMonoidal (X : Scheme.{u})
       (Scheme.Modules.overEquiv U)).mapDerivedCategory
     let R := (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E
-    Nonempty R.Monoidal := by sorry
+    Nonempty R.Monoidal := by
+  classical
+  dsimp only
+  let O := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  let A : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
+    (Scheme.Modules.overEquiv U).functor
+  let R := O ⋙ A
+  let P : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
+    Scheme.Modules.tensorPullback U.ι
+  let η : P ≅ Scheme.Modules.restrictFunctor U.ι :=
+    (Scheme.Modules.nonempty_tensorPullbackAdjunction U.ι).some.leftAdjointUniq
+      (Scheme.Modules.restrictAdjunction U.ι)
+  let θ : R ≅ P := Scheme.Modules.overFunctorEquiv U ≪≫ η.symm
+  have : PreservesFiniteLimits P := preservesFiniteLimits_of_natIso θ
+  have : PreservesFiniteColimits P := preservesFiniteColimits_of_natIso θ
+  obtain ⟨ε, hε⟩ := exists_derivedPullbackAcrossUniverses_leftDerived U.ι P
+    (fun _ ↦ rfl) (by
+      intros
+      simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+      rfl)
+  let W := HomotopyCategory.quasiIso
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)
+  have : (derivedPullbackAcrossUniverses U.ι).IsLeftDerivedFunctor ε W := hε
+  have : P.mapDerivedCategory.IsLeftDerivedFunctor P.mapDerivedCategoryFactorsh.hom W :=
+    Functor.isLeftDerivedFunctor_of_inverts W _ P.mapDerivedCategoryFactorsh
+  let e : O.mapDerivedCategory ⋙ A.mapDerivedCategory ≅
+      derivedPullbackAcrossUniverses U.ι :=
+    (Functor.mapDerivedCategoryCompIso O A).symm ≪≫
+      Functor.mapDerivedCategoryNatIso θ ≪≫
+        Functor.leftDerivedUnique (derivedPullbackAcrossUniverses U.ι) P.mapDerivedCategory
+          P.mapDerivedCategoryFactorsh.hom ε W
+  obtain ⟨mX⟩ := exists_schemeDerivedStandardEquivalence_monoidal X
+  obtain ⟨mU⟩ := exists_schemeDerivedStandardEquivalence_monoidal U.toScheme
+  let := mX.toMonoidal
+  let := mU.toMonoidal
+  let := (schemeDerivedStandardEquivalence U.toScheme).inverseMonoidal
+  obtain ⟨m, _⟩ := @exists_derivedPullbackMonoidalModel U.toScheme X U.ι
+    (HasDerivedCategory.standard _) (HasDerivedCategory.standard _)
+  let := m.toMonoidal
+  let : (derivedPullbackAcrossUniverses U.ι).Monoidal := by
+    unfold derivedPullbackAcrossUniverses
+    infer_instance
+  exact ⟨Functor.Monoidal.transport e.symm⟩
 
 end AlgebraicGeometry

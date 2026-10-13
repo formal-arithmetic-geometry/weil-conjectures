@@ -15,56 +15,46 @@
  },
  "proof": [
   {
-   "text": "Transport Scheme.Modules.pullbackMonoidal along overFunctorEquiv and restrictFunctorIsoPullback to obtain the ordinary coherent monoidal restriction functor, including its structure-sheaf unit.",
+   "text": "Identify tensorPullback U.ι with restrictFunctor U.ι using uniqueness of left adjoints to pushforward; overFunctorEquiv then identifies the exact composite R = overFunctor ⋙ overEquiv.functor with tensor pullback. Transport finite-limit and finite-colimit preservation along this natural isomorphism.",
    "uses": [
-    "lem-pc-adjoint-module-pullback-monoidal",
+    "def-pc-module-pullback",
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Resolve both tensor inputs by K-flat complexes. Restriction preserves K-flatness. Sum the ordinary coherent tensorators over each p+q=n; preservation of coproducts and tensor naturality identify both total differentials. The maps and inverse maps form natural total-complex comparisons.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-open-restriction-kflat-model",
-    "lem-pc-open-restriction-total-tensor",
-    "lem-pc-open-restriction-tensor-natural"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use mapDerivedCategoryFactors for restriction and the equivalence separately to descend these comparisons to the specified composite R. Common K-flat resolutions identify any two choices and prove naturality for roofs. Each localization has its own universal factorization, so the morphism universes need not coincide.",
+   "text": "Apply Mathlib Functor.isLeftDerivedFunctor_of_inverts to the exact pullback factorization mapDerivedCategoryFactorsh. Use the across-universes left-derived counit and Functor.leftDerivedUnique to identify exact mapDerivedCategory with derivedPullbackAcrossUniverses U.ι. Compose mapDerivedCategoryCompIso and mapDerivedCategoryNatIso of the module comparison to obtain an isomorphism from the displayed derived composite to the transported pullback.",
    "uses": [
     "def-pc-derived-category",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-kflat-resolution"
+    "lem-sc-derived-pullback-across-universes-left-derived",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "The associativity and both unit equations hold on each coproduct inclusion of the total complex because they are the equations of the ordinary coherent monoidal restriction. Equality of these components gives equality of complex maps. Localization preserves equality; naturality transports the equations from K-flat representatives to every object. The structure sheaf in degree zero supplies the invertible unit. Together with the invertible tensor comparisons this gives R.Monoidal, including for the empty open and zero complexes.",
+   "text": "Take CoreMonoidal structures on the source and target standard-localization equivalences, induce the inverse-equivalence monoidal structure, and compose them with the standard derivedPullback monoidal model. Unfold derivedPullbackAcrossUniverses and use composition of strong monoidal functors. Transport this structure to the displayed derived composite via Functor.Monoidal.transport of the inverse comparison.",
    "uses": [
-    "lem-pc-adjoint-module-pullback-monoidal",
-    "def-pc-scheme-derived-tensor-structure"
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-sc-standard-derived-equivalence-monoidal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-category",
+  "def-pc-derived-pullback-monoidal-model",
+  "def-pc-module-pullback",
   "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-adjoint-module-pullback-monoidal",
-  "lem-pc-kflat-resolution",
-  "lem-pc-open-restriction-kflat-model",
-  "lem-pc-open-restriction-tensor-natural",
-  "lem-pc-open-restriction-total-tensor",
+  "lem-sc-derived-pullback-across-universes-left-derived",
+  "lem-sc-standard-derived-equivalence-monoidal",
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 06YH (definition-derived-tor), 079U (lemma-pullback-tensor-product)",
-  "description": "H4 read the Stacks source (downloaded into its scratchpad) and wrote the explicit localization/adjunction argument. This is a strictly smaller part of the parent; no replacement of the unit route."
+  "place": "Tags 079U (derived pullback tensor product), 05RU (localization uniqueness, derived.tex)",
+  "description": "H4 second reading: exact restriction and the transported pullback are identified by left-derived uniqueness, and the existing standard monoidal model is transported along this isomorphism. No new holes or change of unit route."
  },
  "mathlib_searches": [
   {
@@ -154,8 +144,8 @@
   "reviewer": "COMPILER",
   "group": "H4",
   "result": "pass",
-  "landing": "20261013T150351-L-809497",
-  "kind": "interface",
+  "landing": "20261013T153221-L-1059647",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
