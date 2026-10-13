@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 /-! # Lifting quasi-coherent derived objects from a quasi-compact open
@@ -56,7 +56,31 @@ theorem exists_qc_derived_lift_of_isCompact_open
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-            (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E'.obj ≅ E.obj) :=
-  sorry
+            (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E'.obj ≅ E.obj) := by
+  classical
+  let : CompactSpace U := isCompact_iff_compactSpace.mp hU
+  have : QuasiCompact U.ι := inferInstance
+  have : QuasiSeparated U.ι := inferInstance
+  let F := RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom
+  let G := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)
+  -- Implement the restriction step directly using the underived open counit.
+  have e : F ⋙ G ≅ 𝟭 (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := by
+    refine Functor.isoWhiskerLeft F (Scheme.Modules.overFunctorEquiv U) ≪≫ ?_
+    exact Scheme.Modules.restrictFunctorAdjCounitIso U.ι
+  -- Exact restriction commutes with right derivation, so derive this counit.
+  let eD : F.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
+      𝟭 (schemeDerivedCategory U.toScheme) :=
+    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F G).symm ≪≫
+      Functor.rightDerivedFunctorNatIso e ≪≫
+      Functor.rightDerivedFunctorIsoMapDerivedCategory
+        (𝟭 (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+  refine ⟨⟨(schemeDerivedDirectImage U.ι).obj E.obj,
+    schemeDerivedDirectImage_preserves_QCoh U.ι E.obj E.property⟩, ?_⟩
+  exact ⟨eD.app E.obj⟩
 
 end AlgebraicGeometry

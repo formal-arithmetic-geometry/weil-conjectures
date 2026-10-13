@@ -25,36 +25,33 @@
  ],
  "proof": [
   {
-   "text": "Let j:U\\hookrightarrow X be the open immersion. It is quasi-compact: if W\\subseteq X is affine open, then j^{-1}(W)=U\\cap W; writing U=U_1\\cup\\dots\\cup U_n with U_i affine (U is quasi-compact), each U_i\\cap W is affine because the affine scheme X is separated, so U\\cap W is quasi-compact. It is quasi-separated, since every open immersion is separated. For E in D_{\\mathrm{QCoh}}(\\mathcal O_U), define E'=Rj_*E. The derived direct-image preservation theorem [lem-pc-derived-direct-image-preserves-qcoh] applied to the quasi-compact quasi-separated morphism j gives E' in D_{\\mathrm{QCoh}}(\\mathcal O_X).",
+   "text": "Put j = U.ι. The compactness hypothesis gives CompactSpace U by isCompact_iff_compactSpace. Since the affine scheme X is quasi-separated, Mathlib quasiCompact_of_compactSpace supplies QuasiCompact j; an open immersion is quasi-separated. Let E' be the explicit object Rj_*E. Apply [lem-pc-derived-direct-image-preserves-qcoh] to E.property to equip this object with quasi-coherent cohomology.",
    "uses": [
     "lem-pc-derived-direct-image-preserves-qcoh"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EE proof, invocation of Lemma lemma-lift-quasi-coherent; Lemma 08D5(1)"
+    "place": "Tag 08EE proof, invocation of Lemma lemma-lift-quasi-coherent"
    }
   },
   {
-   "text": "The restriction-comparison isomorphism [lem-pc-restrict-derived-direct-image-open], applied with f=j and the open V=U\\subseteq X, has j^{-1}(U)=U and induced morphism g=\\mathrm{id}_U, so it gives (Rj_*E)|_U\\cong R(\\mathrm{id}_U)_*(E)=E. Thus E'|_U\\cong E, proving the assertion.",
-   "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
-   ],
-   "elementary": false,
+   "text": "Let F be moduleDirectImage j and G be overFunctor U followed by the canonical overEquiv U. Mathlib Scheme.Modules.overFunctorEquiv identifies G with restrictFunctor j, and Scheme.Modules.restrictFunctorAdjCounitIso gives F composed with G isomorphic to the identity. Derive this underived natural isomorphism using the proved source-library API: the inverse of rightDerivedFunctorCompMapDerivedCategoryIso F G, followed by rightDerivedFunctorNatIso, then rightDerivedFunctorIsoMapDerivedCategory for the identity and mapDerivedCategoryIdIso. These four isomorphisms identify Rj_* followed by derived restriction with the identity. Evaluate at E.obj and pair this isomorphism with the quasi-coherent object of step 1. This treats the empty open and the whole open without a separate case and uses no choices of objects from unproved existence statements.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08EE proof, invocation of Lemma lemma-lift-quasi-coherent; restriction is right inverse to Rj_*"
+    "place": "Tag 08ED, lemma-lift-quasi-coherent; restriction is right inverse to Rj_*; generic derivation glue in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-derived-direct-image-preserves-qcoh"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EE, Lemma 36.13.5 (lemma-lift-quasi-coherent)"
+  "place": "Tag 08ED, lemma-lift-quasi-coherent, invoked in Tag 08EE; derive the Mathlib open counit directly using the proved RightDerivedFunctor.MapDerivedCategory API"
  },
  "mathlib_searches": [
   {
@@ -144,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T072412-L-1126834",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

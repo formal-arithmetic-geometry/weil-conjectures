@@ -11579,3 +11579,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/V1/Sheaf.CategoryTheory.RightLocalizationHomColimit (stage 3; reviewer PASS; first push; landing 20261013T072411-L-1126489 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:24 L: merged deliver/V3/Sheaf.AlgebraicGeometry.PicardH1BaseDescentLocalModel (stage 3; reviewer PASS; first push; landing 20261013T072411-L-1126632 (interface); batch 20261013T072335; modules 3; new nodes 2)
 - 07:24 L: merged deliver/W2/Sheaf.AlgebraicGeometry.HigherDirectImageResolutionNaturality (stage 3; reviewer PASS; first push; landing 20261013T072411-L-1126731 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:24 L: merged deliver/W4/Sheaf.AlgebraicGeometry.QcOpenDerivedLift (stage 3; reviewer PASS; first push; landing 20261013T072412-L-1126834 (proof); batch 20261013T072335; modules 1; new nodes 0)
