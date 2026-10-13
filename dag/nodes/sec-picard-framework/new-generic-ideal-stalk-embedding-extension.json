@@ -17,44 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Closed pushforward of the structure module is coherent. Extend the prescribed linear stalk map to an open neighbourhood of the generic image.",
+   "text": "Let H = i_* O_W. It is quasi-coherent by qcqs pushforward. On an affine open U of X, H(U) is the quotient Gamma(W,i^-1 U) of Gamma(X,U), so it is cyclic and finite. The affine finite-type criterion and the locally Noetherian coherence criterion imply H is coherent. This is the proved private helper coherent_closed_pushforward_unit, and does not use the general finite-pushforward coherence theorem.",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-coherent",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_open_hom_of_coherent_stalk_map to the prescribed stalk map psi using coherence of H and G. It gives U containing i(eta), a restricted morphism phi, and the elementwise stalk equality transported by restrictStalkNatIso.",
+   "uses": [
     "lem-weil-pbc-coherent-stalk-map-extends"
    ],
    "elementary": false
   },
   {
-   "text": "Take the reduced ideal of the complement and clear denominators by extending the local map from a power of that ideal times the source. Affine section calculations identify this source with the pushforward of its image ideal J on W. At the generic point this ideal is the unit ideal, so J is nonzero and the extended stalk map is the prescribed map composed with the ideal inclusion.",
+   "text": "Apply local_closed_ideal_map_extension to phi. Obtain J != 0 and alpha from i_*J to G whose restriction equals the restricted ideal inclusion followed by phi. Naturality of the restriction-stalk isomorphisms, both their hom and inv, transports this equality to the asserted equality alpha_eta = inclusion_eta followed by psi.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-coherent-homs-over-open",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "lem-pc-local-closed-ideal-map-extension"
    ],
    "elementary": false
   },
   {
-   "text": "The coherent kernel descends to a quasi-coherent submodule of J on W, since the defining ideal of W annihilates it. Its generic stalk is zero by injectivity of the prescribed map. On each nonempty affine open its sections inject into the fraction field, so they vanish. Thus the kernel is zero and the extension is mono.",
-   "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
-   ],
-   "elementary": false
+   "text": "The pushed ideal inclusion is injective on every open, by injective_toModulesι_app evaluated on inverse-image opens. Mathlib stalkFunctor_map_injective_of_app_injective makes its generic stalk injective. The stalk equality and hpsi make alpha generically injective. For any f:F -> i_*J with zero generic stalk, compose with the ideal inclusion into i_*O_W. On an open U whose inverse image is nonempty, the generic point of W belongs to i^-1 U. Vanishing of the generic germ gives zero after restricting to a smaller ambient neighborhood; its inverse image still contains eta. The integral-scheme restriction map on functions is injective, so the original section is zero. Sheaf section extensionality handles empty opens as well. Sectionwise injectivity of J -> O_W then gives f = 0. Apply this to kernel.ι alpha: functoriality and cancellation by the injective alpha_eta make its generic stalk zero. Thus kernel.ι alpha is zero, and Abelian.mono_of_kernel_ι_eq_zero proves Mono alpha. All these steps are proved private helpers or Mathlib results; no coherent-kernel descent is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-coherent-stalk-map-extends",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-coherent-homs-over-open",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+  "lem-pc-local-closed-ideal-map-extension"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project, coherent.tex",
-  "place": "Generic ideal-lattice argument of Tags 01YH and 01YE"
+  "by": "agent",
+  "document": "Stacks Project, Tags 01Y4, 01YB, 01YE",
+  "place": "P2 formal reduction: affine cyclic coherence, local ideal extension, restriction-stalk naturality, and direct integral restriction injectivity"
  },
  "mathlib_searches": [
   {
@@ -256,9 +257,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T024032-L-3333840",
+  "landing": "20261013T045548-L-133804",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

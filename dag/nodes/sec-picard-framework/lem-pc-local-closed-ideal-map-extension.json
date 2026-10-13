@@ -1,0 +1,274 @@
+{
+ "id": "lem-pc-local-closed-ideal-map-extension",
+ "kind": "statement",
+ "title": "Clear denominators for a local map from a closed structure module",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme], and let $G$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Let $\\eta$ be the generic point of $W$, and let $U\\subseteq X$ be open with $i(\\eta)\\in U$. For any morphism $\\varphi:(i_*\\mathcal O_W)|_U\\to G|_U$ [def-pc-module-pullback, def-weil-sheaf-of-modules-category], there are a nonzero quasi-coherent ideal $J\\subseteq\\mathcal O_W$ and a morphism $\\alpha:i_*J\\to G$ such that $\\alpha|_U=(i_*(J\\hookrightarrow\\mathcal O_W))|_U$ followed by $\\varphi$. No injectivity hypothesis or monomorphism conclusion is imposed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (lemma-homs-over-open), and the last paragraph of Tag 01YE; affine closed-pushforward comparison from Tag 01QY."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Let I be the reduced ideal of X minus U. Its restriction to U is the unit ideal. The closed structure pushforward H is coherent by qcqs pushforward, cyclic affine sections of the closed quotient, the affine finite-type criterion, and the locally Noetherian coherence criterion.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Tag 01YB to H and G. It gives n >= 0 and chi:I^n H -> G whose restriction, after the product inclusion, agrees with phi on U. G is quasi-coherent by coherence and the Noetherian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-coherent-homs-over-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine Spec A of X with W given by A/K and I by L, the sections of I^n H are L^n (A/K). They are the image ideal of L^n in A/K, commute with localization, and thus glue to an ideal J on W. Equivalently J = (I O_W)^n, taking J = O_W at n = 0. The affine ideal-power image comparison identifies i_*J with I^n H and commutes with the inclusions into H. Compose this isomorphism with chi to get alpha; restricting the inclusion identity to U gives the asserted equality.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since i(eta) lies in U, I has unit stalk there, so J has full generic stalk. On an integral scheme the generic local ring is a nonzero field, and the integral ideal generic-stalk criterion gives J != 0. This also covers n = 0 and the zero local map: nonzeroness concerns J, not alpha.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-homs-over-open",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01YB, 01YE and 01QY",
+  "place": "Ideal-power extension adapted to the ambient closed structure pushforward; affine quotient calculation identifies the source ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a prescribed generic stalk morphism from a structure sheaf to a coherent sheaf by restricting to a nonzero ideal",
+   "results": {
+    "t": "2026-10-13T02:44:39Z",
+    "tool": "leanfinder",
+    "query": "Extend a prescribed generic stalk morphism from a structure sheaf to a coherent sheaf by restricting to a nonzero ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.exists_const",
+     "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux",
+     "ModuleCat.Tilde.toStalk",
+     "AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero",
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+     "ModuleCat.Tilde.toOpen_germ_apply",
+     "ModuleCat.Tilde.localizationToStalk_mk",
+     "ModuleCat.Tilde.toOpen_germ"
+    ],
+    "digest": "baf840388e3e5478"
+   },
+   "date": "2026-10-13",
+   "verdict": "Hits are germ/localization or unrelated generic results, not this extension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Function.Injective",
+   "results": {
+    "t": "2026-10-13T02:45:01Z",
+    "tool": "loogle",
+    "query": "SheafOfModules, Function.Injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching local closed ideal extension theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(mono|injective)|stalk.*extend",
+   "results": {
+    "t": "2026-10-13T02:45:01Z",
+    "tool": "grep",
+    "query": "generic.*(mono|injective)|stalk.*extend",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Dynamics/SymbolicDynamics/Basic.lean",
+     "Mathlib/Order/Filter/Map.lean",
+     "Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean",
+     "Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean",
+     "Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean",
+     "Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean",
+     "Mathlib/RingTheory/MvPolynomial/FreeCommRing.lean"
+    ],
+    "digest": "43ab083663a1815e"
+   },
+   "date": "2026-10-13",
+   "verdict": "Hits are germ/localization or unrelated generic results, not this extension statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the restriction of a closed pushforward structure sheaf to a coherent sheaf on an open neighborhood extends globally from a nonzero ideal on the integral closed subscheme",
+   "results": {
+    "t": "2026-10-13T03:11:51Z",
+    "tool": "leansearch",
+    "query": "A morphism from the restriction of a closed pushforward structure sheaf to a coherent sheaf on an open neighborhood extends globally from a nonzero ideal on the integral closed subscheme",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(extend|extension)|extend.*ideal",
+   "results": {
+    "t": "2026-10-13T03:11:51Z",
+    "tool": "grep",
+    "query": "ideal.*(extend|extension)|extend.*ideal",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching local closed ideal extension theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of quasi-coherent modules defined on an open subset extends to a morphism from a power of the ideal of its closed complement",
+   "results": {
+    "t": "2026-10-13T04:04:35Z",
+    "tool": "leanfinder",
+    "query": "A morphism of quasi-coherent modules defined on an open subset extends to a morphism from a power of the ideal of its closed complement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.exists_const",
+     "ModuleCat.Tilde.res_const",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+     "ModuleCat.Tilde.toOpen",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+     "ModuleCat.Tilde.res_apply",
+     "ModuleCat.Tilde.sectionsSubmodule"
+    ],
+    "digest": "f1c14ea611003569"
+   },
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: hits do not state local closed-pushforward ideal extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\"",
+   "results": {
+    "t": "2026-10-13T04:04:36Z",
+    "tool": "loogle",
+    "query": "\"IsCoherent\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Topology.IsCoherentWith",
+     "Topology.IsCoherentWith.isOpen_of_forall_induced",
+     "Topology.IsCoherentWith.mk",
+     "Topology.IsCoherentWith.mono",
+     "Topology.IsCoherentWith.of_continuous_prop",
+     "Topology.IsCoherentWith.of_nhds",
+     "Topology.IsCoherentWith.continuous_iff",
+     "Topology.IsCoherentWith.of_seq"
+    ],
+    "digest": "bca54bd798c1145c"
+   },
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: hits do not state local closed-pushforward ideal extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Integral-ideal devissage underlying the proper coherence proof: the generic ideal inclusion denominator-clearing step (Tags 01YB and 01YE).",
+   "via": [
+    "new-generic-ideal-stalk-embedding-extension",
+    "lem-pc-r2-rank-one-generic-ideal-inclusion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalClosedIdealMapExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalClosedIdealMapExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.local_closed_ideal_map_extension",
+  "statement": "theorem local_closed_ideal_map_extension\n    {X W : Scheme.{u}} [IsNoetherian X]\n    (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (U : X.Opens) (hx : i.base (genericPoint W) ∈ U)\n    (φ : (restrictFunctor U.ι).obj\n        ((pushforward i).obj (SheafOfModules.unit W.ringCatSheaf)) ⟶\n      (restrictFunctor U.ι).obj G) :\n    ∃ (J : W.IdealSheafData), J ≠ ⊥ ∧\n      ∃ (α : (pushforward i).obj J.toModules ⟶ G),\n        (restrictFunctor U.ι).map α =\n          (restrictFunctor U.ι).map ((pushforward i).map J.toModulesι) ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T045548-L-133804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T045548-L-133804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
