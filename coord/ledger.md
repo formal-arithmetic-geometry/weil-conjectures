@@ -12450,3 +12450,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:32 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.AffinePolynomialLocalizedFiniteProjectiveDimension (stage 3; reviewer PASS; first push; landing 20261013T123213-L-3679861 (interface); batch 20261013T123200; modules 3; new nodes 2)
 - 12:35 L: merged deliver/B4/Sheaf.AlgebraicGeometry.ScalarCupZeroGlobalSections (stage 3; reviewer PASS; first push; landing 20261013T123541-L-3710211 (interface); batch 20261013T123540; modules 3; new nodes 2)
 - 12:35 L: merged deliver/C1/Sheaf.AlgebraicGeometry.PicardOrdinaryScalarCoordinates (stage 3; reviewer PASS; first push; landing 20261013T123542-L-3710327 (interface); batch 20261013T123540; modules 2; new nodes 1)
+- 12:35 L: merged deliver/E1/Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos (stage 3; reviewer PASS; first push; landing 20261013T123542-L-3710508 (interface); batch 20261013T123540; modules 4; new nodes 3)

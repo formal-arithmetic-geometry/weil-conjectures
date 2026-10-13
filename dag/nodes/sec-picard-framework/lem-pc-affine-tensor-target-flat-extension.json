@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-affine-tensor-target-flat-extension",
+ "kind": "statement",
+ "title": "Flat extension of prescribed ordinary tensor cohomology lifts",
+ "statement": "Let R,A,B,D be commutative rings, A and B be R-algebras, D an A-algebra, and i an integer. Let T be a functor from unbounded A-complexes to C-modules, where C=A tensor_R B, with a natural B-linear restriction isomorphism to target R A B i [def-pc-ring-tensor-cohomology]. Assume multiplication by a tensor 1 on T corresponds to target.map of a times the identity of the input complex. For any flat ring map f:C to D with f(a tensor 1)=algebraMap A D a, T followed by extension along f is naturally isomorphic to degree-i homology of the functorial A-K-flat resolution followed by termwise extension from A to D. No localization or source comparison is assumed.",
+ "stmt_deps": [
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJ8, affine displayed localization identity; Tags 00DL, 00CS, 06Y6"
+ },
+ "proof": [
+  {
+   "text": "in every degree, the balanced tensor identification sends b tensor x to\n(1 tensor b) tensor x and its inverse sends (a tensor b) tensor x to b tensor ax.\nThese maps commute with the differential and all morphisms of A-complexes.\nApplied to the functorial resolution, they identify target with restriction of\nhomology of P tensor_A (A tensor_R B). The supplied eT identifies the underlying\nB-module of T with this homology. The equation hT identifies its A-action with\nthat on P; the two tensor-factor actions determine the entire tensor-algebra\nmodule structure. Thus eT upgrades to the tensor-algebra cohomology identification.\nFlat scalar extension along f is exact, so its natural homology comparison is\ninvertible. Finally tensor associativity identifies D tensor_C (C tensor_A P)\nwith D tensor_A P, where C = A tensor_R B. The equation hfA says the resulting\nA-to-D scalar map is the given algebra map. Compose these natural isomorphisms.\nThis argument needs no primes, no global-to-local source comparison, and no\nflatness of B over R. The zero complex and identity coefficient extension satisfy\nthe same formula; degrees are arbitrary integers, with no boundedness assumed.",
+   "uses": [
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0DJ8, 00DL, 00CS; explicit prescribed-lift transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism homology scalar extension localization tensor product exact functor",
+   "results": "ModuleCat.localizedModule_functor_map_exact and exact-functor Ext maps; no prescribed tensor-cohomology lift transport result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars; RingHom.Flat",
+   "results": "extendScalarsComp, extendScalarsId, and local properties of RingHom.Flat. These do not supply the coefficient-map identification or the prescribed cohomology-lift isomorphisms.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|localization.*[Cc]ohomology",
+   "results": "ShortComplex.mapHomologyIso supplies the exact-functor comparison; project derivedTensor_localization_cohomology has a balanced derived model interface rather than prescribed lifts. Local search also read BaseTensorOrdinaryIso and Localization/BaseChange.",
+   "date": "2026-10-13",
+   "verdict": "use as indicated in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of scalars commutes naturally with cohomology of complexes and localization of tensor product rings is flat",
+   "results": "Unavailable: Internal Server Error. Other search services and local Mathlib sources were checked.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tensor-cohomology-localization-isos",
+   "place": "Split the global-to-local comparison, coefficient flatness, and local target identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTensorTargetFlatExtension",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTensorTargetFlatExtension.lean",
+  "declaration": "RingTensorCohomology.affineTensorTarget_flat_extension",
+  "statement": "theorem affineTensorTarget_flat_extension\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B] [Algebra A D] (i : ℤ)\n    (T : CochainComplex (ModuleCat.{u} A) ℤ ⥤ ModuleCat.{u} (A ⊗[R] B))\n    (eT : T ⋙ ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom ≅\n      target R A B i)\n    (hT : ∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (a : A) (x : T.obj M),\n      eT.hom.app M ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • x) =\n        (target R A B i).map (a • 𝟙 M) (eT.hom.app M x))\n    (f : (A ⊗[R] B) →+* D) (hf : f.Flat)\n    (hfA : ∀ a : A,\n      f (Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) = algebraMap A D a) :\n    Nonempty (T ⋙ ModuleCat.extendScalars f ≅\n      resolution A ⋙ extend A D ⋙\n        HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T123542-L-3710508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T123542-L-3710508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

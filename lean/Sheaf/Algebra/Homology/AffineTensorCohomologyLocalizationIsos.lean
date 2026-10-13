@@ -8,9 +8,9 @@ module
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.Algebra.Module.LocalizedModule.Exact
+import Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationSquare
+import Sheaf.Algebra.Homology.AffineTensorLocalizationFlat
+import Sheaf.Algebra.Homology.AffineTensorTargetFlatExtension
 
 /-! # Affine tensor cohomology: localization isomorphisms
 
@@ -124,6 +124,20 @@ theorem affineTensorCohomology_localization
             Nonempty (Tl ⋙ ModuleCat.extendScalars f ≅
               resolution Aq ⋙ extend Aq D ⋙
                 HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i) := by
-  sorry
+  obtain ⟨alpha, beta, hAlpha, hBeta, hcomm⟩ :=
+    affineTensorCohomology_localization_square R A B i S T eS eT c hS hT hc q'
+      Rp Aq Bp D _hB f _hfA _hfB Sl Tl eSl eTl cl hSl hTl hcl
+  have hf : f.Flat := affineTensorLocalization_flat R A B q' Rp Aq Bp D _hB f _hfA _hfB
+  have htarget := affineTensorTarget_flat_extension Rp Aq Bp D i Tl eTl hTl f hf _hfA
+  let alphaIso : S ⋙ ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D) ≅
+      extend A Aq ⋙ Sl ⋙ ModuleCat.extendScalars f :=
+    NatIso.ofComponents alpha (fun g ↦ hAlpha _ _ g)
+  let betaIso : T ⋙ ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D) ≅
+      extend A Aq ⋙ Tl ⋙ ModuleCat.extendScalars f :=
+    NatIso.ofComponents beta (fun g ↦ hBeta _ _ g)
+  refine ⟨alphaIso, betaIso, ?_, htarget⟩
+  apply NatTrans.ext
+  funext M
+  exact hcomm M
 
 end RingTensorCohomology

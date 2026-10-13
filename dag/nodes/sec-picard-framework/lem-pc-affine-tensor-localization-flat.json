@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-affine-tensor-localization-flat",
+ "kind": "statement",
+ "title": "Flatness of the local affine tensor coefficient map",
+ "statement": "Let R,A,B be commutative R-algebras and qprime a prime of C=A tensor_R B. Let Rp,Aq,Bp,D be localizations at the contracted primes and qprime, respectively, with the canonical scalar towers and structure maps specified as in lem-pc-affine-tensor-cohomology-localization-isos. A ring homomorphism f:Aq tensor_Rp Bp to D agreeing with the prescribed Aq and Bp structure maps is flat. This assertion needs no complex or cohomology lift.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJ8, affine displayed localization identity; Tags 00DL, 00CS, 06Y6"
+ },
+ "proof": [
+  {
+   "text": "put C = A tensor_R B. First localize C by the multiplicative set generated\nby a tensor 1 for a outside the contraction to A and 1 tensor b for b outside\nthe contraction to B. The tensor-localization universal property identifies this\nring with Aq tensor_R Bp. All elements of R outside its contracted prime already\nbecome units in both factors, so changing the tensor base from R to Rp identifies\nthis ring with Aq tensor_Rp Bp. Every inverted element is outside qprime. The\nuniversal property of successive localization therefore identifies D with the\nlocalization of this ring at the image of C minus qprime. The specified equations\non f, hB and the scalar towers identify its structure map with f: they agree on\nboth tensor factors, and extension to the local factors is unique. Localization\nis flat (equivalently its scalar extension on modules is exact), so f is flat.\nIdentity localizations give the identity flat map. Empty prime spectra have no\nqprime and impose no assertion; no injectivity of localization maps is used.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0DJ8, 00DL, 00CS; explicit prescribed-lift transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism homology scalar extension localization tensor product exact functor",
+   "results": "ModuleCat.localizedModule_functor_map_exact and exact-functor Ext maps; no prescribed tensor-cohomology lift transport result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars; RingHom.Flat",
+   "results": "extendScalarsComp, extendScalarsId, and local properties of RingHom.Flat. These do not supply the coefficient-map identification or the prescribed cohomology-lift isomorphisms.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|localization.*[Cc]ohomology",
+   "results": "ShortComplex.mapHomologyIso supplies the exact-functor comparison; project derivedTensor_localization_cohomology has a balanced derived model interface rather than prescribed lifts. Local search also read BaseTensorOrdinaryIso and Localization/BaseChange.",
+   "date": "2026-10-13",
+   "verdict": "use as indicated in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of scalars commutes naturally with cohomology of complexes and localization of tensor product rings is flat",
+   "results": "Unavailable: Internal Server Error. Other search services and local Mathlib sources were checked.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-tensor-cohomology-localization-isos",
+   "place": "Split the global-to-local comparison, coefficient flatness, and local target identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineTensorLocalizationFlat",
+  "file": "lean/Sheaf/Algebra/Homology/AffineTensorLocalizationFlat.lean",
+  "declaration": "RingTensorCohomology.affineTensorLocalization_flat",
+  "statement": "theorem affineTensorLocalization_flat\n    (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]\n    [Algebra R A] [Algebra R B]\n    (q' : PrimeSpectrum (A ⊗[R] B))\n        (Rp Aq Bp D : Type u) [CommRing Rp] [CommRing Aq] [CommRing Bp] [CommRing D]\n        [Algebra R Rp] [Algebra A Aq] [Algebra B Bp] [Algebra (A ⊗[R] B) D]\n        [IsLocalization.AtPrime Rp (q'.asIdeal.comap (algebraMap R (A ⊗[R] B)))]\n        [IsLocalization.AtPrime Aq (q'.asIdeal.comap (algebraMap A (A ⊗[R] B)))]\n        [IsLocalization.AtPrime Bp (q'.asIdeal.comap\n          Algebra.TensorProduct.includeRight.toRingHom)]\n        [IsLocalization.AtPrime D q'.asIdeal]\n        [Algebra R Aq] [Algebra R Bp] [Algebra Rp Aq] [Algebra Rp Bp]\n        [IsScalarTower R A Aq] [IsScalarTower R B Bp]\n        [IsScalarTower R Rp Aq] [IsScalarTower R Rp Bp]\n        [Algebra A D] [Algebra B D] [Algebra Aq D] [Algebra Bp D]\n        [IsScalarTower A (A ⊗[R] B) D]\n        [IsScalarTower A Aq D]\n        (_hB : ∀ b : B, algebraMap B D b =\n          algebraMap (A ⊗[R] B) D (Algebra.TensorProduct.includeRight b))\n        [IsScalarTower B Bp D]\n        (f : (Aq ⊗[Rp] Bp) →+* D)\n        (_hfA : ∀ a : Aq,\n          f (Algebra.TensorProduct.includeLeft (S := Rp) a : Aq ⊗[Rp] Bp) = algebraMap Aq D a)\n        (_hfB : ∀ b : Bp, f (Algebra.TensorProduct.includeRight b) = algebraMap Bp D b)\n    : f.Flat",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T123542-L-3710508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T123542-L-3710508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
