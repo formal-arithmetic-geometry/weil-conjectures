@@ -14,12 +14,18 @@
  },
  "proof": [
   {
-   "text": "Transport both supported degrees through extendXIso; the differential is minus koszulBoundary. Include exterior powers in the exterior algebra. Obtain the explicit contraction formula from the proved ExteriorAlgebra.koszul_differential by its uniqueness clause. For the increasing enumeration of J, delete position i using Fin.succAbove. Finset.orderEmbOfFin_unique identifies this enumeration with the increasing enumeration of J.erase j. The image of Finset.Iio i under the original enumeration is J.filter (< j), so its cardinality is i.val. Reindex the sum by Finset.orderIsoOfFin. Apply the linear component of z; card_erase_add_one identifies the source degrees and principalCech_erase_degree identifies the target degrees, giving the displayed eqToHom. Linearity distributes the negative, sum and coefficients.",
+   "text": "Apply the proved ExteriorAlgebra.boundary_wedge in Sheaf.RingTheory.KoszulGeneratorChainMap. For an increasing enumeration of a finite subset, Finset.orderEmbOfFin_unique identifies its composition with Fin.succAbove with the increasing enumeration of the erased subset. Identify the subset of smaller elements with the image of Finset.Iio of the position and count it. Reindex the contraction sum by Finset.orderIsoOfFin, evaluate linearCombination on each standard basis vector, and remove the extra even sign exponent. These steps are proved by the private helpers ordered_erase, ordered_position, and boundary_sorted.",
+   "uses": [
+    "new-q2-koszul-generator-chain-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write card(J)=k+2. Reindex the given basis identities using equality elimination, then use HomologicalComplex.extend_d_eq and ChainComplex.of_d to transport the negative tail boundary to minus koszulBoundary at k+1. Apply boundary_sorted and linearity of extendXIso.inv and z.v to distribute the negative, finite sum, and scalar coefficients. Every erased subset has cardinality k+1 and hence is nonempty. Reindex its given basis identity at k and use equality elimination in the private evaluate_extend_transport helper with principalCech_erase_degree to obtain exactly the displayed coefficient eqToHom.",
    "uses": [
     "def-sc-koszul-open-system",
     "def-sc-module-total-hom-complex",
-    "def-sc-principal-open-alternating-total",
-    "lem-weil-pbc-koszul-differential"
+    "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
   }
@@ -28,12 +34,12 @@
   "def-sc-koszul-open-system",
   "def-sc-module-total-hom-complex",
   "def-sc-principal-open-alternating-total",
-  "lem-weil-pbc-koszul-differential"
+  "new-q2-koszul-generator-chain-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Stacks Project Tag 08D0, first differential calculation, and Tag 08D1, Hom complex degree conventions; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1."
+  "place": "Stacks Project Tag 08D0, first differential calculation, and Tag 08D1, Hom complex degree conventions; read at https://stacks.math.columbia.edu/tag/08D0 and https://stacks.math.columbia.edu/tag/08D1. Lean proof by group X2: sorted contraction formula and supported-degree transport, using the existing boundary_wedge theorem."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -109,10 +115,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T124318-L-3778668",
-  "kind": "interface",
+  "landing": "20261013T130753-L-3987348",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
