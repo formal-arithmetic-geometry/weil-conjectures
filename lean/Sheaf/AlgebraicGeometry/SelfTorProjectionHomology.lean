@@ -1,0 +1,41 @@
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
+import Sheaf.Topology.ClosedImmersionPushforwardExact
+
+@[expose] public section
+set_option autoImplicit false
+universe u w
+open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
+namespace AlgebraicGeometry
+
+/-- Projection-formula and representative-comparison step for self-Tor.
+
+This is the intermediate statement used to separate the qcqs projection formula
+from the final choice of the literal termwise pullback representative.  Its
+proof is the derived projection formula, exactness of closed-immersion
+pushforward, and transport along the displayed complex isomorphism.
+(blueprint: lem-pc-self-tor-projection-homology). -/
+theorem nonempty_selfTor_projection_homology
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [IsClosedImmersion i] [(Scheme.Modules.tensorPullback i).Additive]
+    (P : CochainComplex Y.Modules ℤ)
+    (a : P ⟶ (HomologicalComplex.single Y.Modules (.up ℤ) 0).obj
+      ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))
+    (hP : CochainComplex.IsKFlatResolution (R := Y.sheaf) a)
+    (k : ℤ) (Q : CochainComplex Z.Modules ℤ)
+    (e : Q ≅ ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P) :
+    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+    let S := DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+    Nonempty (((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ≅
+      (Scheme.Modules.pushforward i).obj (Q.homology k)) := by
+  sorry
+
+end AlgebraicGeometry

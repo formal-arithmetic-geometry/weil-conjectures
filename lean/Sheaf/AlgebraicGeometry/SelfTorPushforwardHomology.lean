@@ -9,8 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
-import Sheaf.Topology.ClosedImmersionPushforwardExact
+import Sheaf.AlgebraicGeometry.SelfTorProjectionHomology
 
 /-! # Closed-immersion self-Tor on fixed resolution representatives
 
@@ -62,6 +61,8 @@ theorem nonempty_selfTor_pushforward_homology
     let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
     Nonempty (((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ≅
-      (Scheme.Modules.pushforward i).obj (T.homology k)) := by sorry
+      (Scheme.Modules.pushforward i).obj (T.homology k)) := by
+  dsimp
+  exact nonempty_selfTor_projection_homology i P a hP k _ (Iso.refl _)
 
 end AlgebraicGeometry

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-self-tor-projection-homology",
+ "kind": "statement",
+ "title": "Self-Tor projection and representative-comparison homology step",
+ "statement": "Under the hypotheses of lem-pc-self-tor-pushforward-homology, for any complex Q on Z equipped with an isomorphism from Q to the termwise tensor pullback T of P, the degree-k homology of the derived tensor square of the pushed-forward structure sheaf is isomorphic to the pushforward of the degree-k homology of Q.",
+ "stmt_deps": [
+  "lem-pc-self-tor-pushforward-homology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Derived Categories of Schemes, Lemma 36.22.1, together with Tags 068G and 08KS"
+ },
+ "proof": [
+  {
+   "text": "Apply the qcqs derived projection formula to the closed immersion, identify the derived pullback of the pushed-forward structure sheaf with the chosen K-flat representative, and use exactness of closed-immersion pushforward to commute homology with pushforward. Transport along the supplied complex isomorphism Q ≅ T.",
+   "uses": [
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-sc-closed-immersion-pushforward-exact",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-qcqs-derived-projection-iso-universes",
+  "lem-sc-closed-immersion-pushforward-exact",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/08EU",
+   "place": "projection formula and K-flat representative comparison"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived projection formula closed immersion homology pushforward",
+   "results": "No exact match; service search found no declaration.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived projection formula closed immersion homology pushforward",
+   "results": "No exact match; only generic projection and homology declarations.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory homologyFunctor tensor pushforward",
+   "results": "No exact scheme-derived self-Tor match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "selfTor projection homology pushforward",
+   "results": "Only this project theorem and related self-Ext statements.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-self-tor-pushforward-homology",
+   "place": "projection-formula and representative-comparison step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfTorProjectionHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorProjectionHomology.lean",
+  "declaration": "AlgebraicGeometry.nonempty_selfTor_projection_homology",
+  "statement": "theorem nonempty_selfTor_projection_homology {Z Y : Scheme.{u}} (i : Z ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [IsClosedImmersion i] [(Scheme.Modules.tensorPullback i).Additive] (P : CochainComplex Y.Modules ℤ) (a : P ⟶ (HomologicalComplex.single Y.Modules (.up ℤ) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) (hP : CochainComplex.IsKFlatResolution (R := Y.sheaf) a) (k : ℤ) (Q : CochainComplex Z.Modules ℤ) (e : Q ≅ ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P) : let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) let S := DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0 Nonempty (((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj (S.obj B ⊗ S.obj B)) ≅ (Scheme.Modules.pushforward i).obj (Q.homology k))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T211120-L-397334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

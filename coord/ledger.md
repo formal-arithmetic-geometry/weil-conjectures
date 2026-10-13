@@ -13606,3 +13606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:11 L: merged deliver/U4/Sheaf.AlgebraicGeometry.PolynomialChartStalkFlatComparisonReverseAux (stage 3; reviewer PASS; first push; landing 20261013T211118-L-396658 (interface); batch 20261013T211049; modules 3; new nodes 2)
 - 21:11 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkResidueSeparable (stage 3; reviewer PASS; first push; landing 20261013T211119-L-396967 (interface); batch 20261013T211049; modules 2; new nodes 1)
 - 21:11 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SelfExtPushforwardHomology (stage 3; reviewer PASS; first push; landing 20261013T211119-L-397112 (interface); batch 20261013T211049; modules 3; new nodes 2)
+- 21:11 L: merged deliver/V2/Sheaf.AlgebraicGeometry.SelfTorPushforwardHomology (stage 3; reviewer PASS; first push; landing 20261013T211120-L-397334 (interface); batch 20261013T211049; modules 2; new nodes 1)
