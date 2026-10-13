@@ -14,29 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Put Z = W intersection U. Restrict the map on W to Z. Identify its source with the free module of the same fixed rank n, using preservation of finite coproducts and the structure sheaf; transitivity identifies the target with the restriction of F from U. Apply the hypothesis on U only to this rank-n map.",
+   "text": "Let V be the preimage of W in U and Z its image in X; Z = W intersection U. Restrict the map f using overMap for Z -> W. Compose the equivalence between modules on the slice over Z and modules on Z.toScheme, restriction along U.ι.isoImage V, and the inverse open-slice equivalence for V. The structure-module isomorphism and mapFreeIso identify the source with the rank-n free module. The overFunctorMap, restriction composition, and isoImage identities identify the target with (F|U).over V. Define g by composing those isomorphisms with the image of f; apply hK V g.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-coherent-kernel-condition-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "The sectionwise kernel formula in Modules, section-kernels, identifies its kernel with the restriction of kernel f. Transfer its finite local generators through the equivalence between opens and the slice site and the iterated-slice equivalence: corresponding open neighbourhoods cover, the free-module epimorphisms are transported by the equivalences, and their finite index types are unchanged. This gives finite type of the restriction of kernel f to the object Z -> W.",
+   "text": "The finiteType_equivOver, finiteType_restrict, and finiteType_equivOverInverse helpers proved in the kernel-condition restriction module transfer finite type of kernel g back through the equivalence. Prove that overMap preserves this kernel by evaluating its image cone at every slice object and using preservation of kernels by evaluation and restriction of scalars. PreservesKernel.iso and kernel.mapIso identify the image of kernel f with kernel g; the equivalence unit and finiteType_of_iso give finite type of overMap(kernel f).",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-coherent-kernel-condition-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the iterated-slice equivalence for D = (Z -> W). Its pushforward equivalence identifies overMap(kernel f) with (kernel f).over D sectionwise. The finiteType_pushforward_leftAdjoint helper transfers its finite generators through that equivalence, and finiteType_of_iso gives finite type of (kernel f).over D. The equality Z = W intersection U and proof irrelevance for morphisms of opens identify D with the slice object in the conclusion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-coherent-kernel-condition-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-coherent-kernel-condition-restriction",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); explicit restriction and site-comparison detail of the parent gluing argument"
+  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); Q4 Lean proof using the already-proved site-transport helpers of CoherentKernelConditionRestriction"
  },
  "mathlib_searches": [
   {
@@ -112,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-706f3",
-  "group": "K4",
+  "reviewer": "COMPILER",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T011929-L-2763847",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, the universe change record, source statements, report, axiom checks, and clean compilation of both modules and the sole direct importer."
+  "landing": "20261013T082407-L-1645512",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
