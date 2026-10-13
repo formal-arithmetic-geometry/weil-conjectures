@@ -2134,7 +2134,6 @@ public import WeilConjectures.SixFunctors.Etale.CompatiblePullbackSheafSystem
 public import WeilConjectures.SixFunctors.Etale.ConstantModCharPFiniteSumColimit
 public import WeilConjectures.SixFunctors.Etale.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.SixFunctors.Etale.ConstantModuleSheavesForgetColimits
-public import WeilConjectures.SixFunctors.Etale.ConstantPullbackIdentityCoherence
 public import WeilConjectures.SixFunctors.Etale.ConstantPullbackUnitContinuousMap
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions

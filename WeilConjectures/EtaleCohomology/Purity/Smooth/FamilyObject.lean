@@ -49,6 +49,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : 
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-lem-geometry` (1), the fibre over `t = 0`: the restriction of the family
 object along the zero section is the section invariant of the normal cone with its zero
 section,
@@ -74,6 +75,7 @@ variable {d : ℕ} (g : V ⟶ B) [IsSeparated g] [SmoothOfRelativeDimension d g]
   [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) [IsClosedImmersion s]
 
 include d in
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-lem-geometry` (3), the punctured trivialisation: over the punctured line
 `j : 𝔾_{m,B} ⊆ 𝔸¹_B` the family object `ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` is
 pulled back from the base,
@@ -116,6 +118,7 @@ variable (n : Type u) (B : Scheme.{u}) {d : ℕ} [IsSeparated (𝔸(n; B) ↘ B)
   [HasInvertibleExponent Λ 𝔸(n; B)]
 
 include d in
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair: for the zero section
 `0` of `𝔸^n_B ⟶ B`, the deformation space is `𝔸^n_{𝔸¹_B}`
 (`AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`), so the family object is
