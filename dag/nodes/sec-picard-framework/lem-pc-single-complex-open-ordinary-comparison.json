@@ -17,49 +17,41 @@
  },
  "proof": [
   {
-   "text": "Identify the four open stalk rings with the original stalk rings using open immersion stalk maps. Composition of stalk maps and the commuting inclusion equations identify all structure maps and the map out of the tensor algebra. The restriction-stalk isomorphism identifies the input complexes semilinearly.",
+   "text": "Apply ordinary open germ transport to obtain the four compatible ring isomorphisms, the semilinear input complex isomorphism alpha, the pure-tensor chain isomorphism tau and its target-path homology compatibility.",
    "uses": [
-    "lem-pc-open-restriction-stalk-extension-iso",
+    "lem-pc-open-ordinary-tensor-germ-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficient-ring transport to the two cohomologyModel objects and those ring and chain isomorphisms. Obtain l and the square for the localizedComparison maps before the ordinary stalk identifications.",
+   "uses": [
+    "lem-pc-base-derived-tensor-ring-transport",
     "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the universal left-derived scalar extension through the exact ring equivalences. Apply cohomology; naturality for multiplication and cohomologyIso_smul give the tensor-algebra action. Extend to the last stalk ring and forget scalars, giving the additive source isomorphism.",
+   "text": "Expand comparisonIntoTensorPullback as localizedComparison followed by tensorStalkIso homology and the inverse stalk homology factor. Compose the scalar square with the ambient target factor, substitute the ordinary target-path equation and reassociate. This is the required square with l.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-stalk-comparison-source-transport"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The equations comparison_eq and localized_eq identify both comparison maps through the transported counit. The ordinary restriction comparison sends germ tensors to the same germ tensors. TensorStalkIso and the exact stalk homology factors therefore identify the target path with beta followed by the constructed additive stalk comparison, proving the square. Reuse its general comparisonIntoTensorPullback definition, which has no affine hypothesis; the affine spectrum comparison theorem itself is not used.",
-   "uses": [
-    "def-pc-single-complex-open-tensor-restriction-iso",
-    "def-pc-open-derived-additive-stalk-iso",
-    "def-pc-base-derived-tensor-cohomology-model",
-    "def-pc-single-complex-base-change-stalk-condition",
     "lem-pc-affine-spectrum-ordinary-comparison-square"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-open-derived-additive-stalk-iso",
   "def-pc-single-complex-base-change-stalk-condition",
-  "def-pc-single-complex-open-tensor-restriction-iso",
   "lem-pc-affine-spectrum-ordinary-comparison-square",
-  "lem-pc-open-restriction-stalk-extension-iso",
-  "lem-pc-stalk-comparison-source-transport"
+  "lem-pc-base-derived-tensor-ring-transport",
+  "lem-pc-open-ordinary-tensor-germ-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q3",
+  "group": "K4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0DJ7",
   "place": "Original termwise comparison steps 1 (stalk rings) and 2, and the ordinary part of step 3; Tag 0DJ7 equation-bc, Tag 0DJ9 locality and Tag 0098 stalks",
-  "note": "Expansion of the original termwise comparison plan using existing pinned ordinary restriction data."
+  "note": "Compiled reduction through general coefficient transport and ordinary germ compatibility; expand tensorComplex and algebraMap_toAlgebra, compose the two squares, and reassociate."
  },
  "mathlib_searches": [
   {
@@ -162,9 +154,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T165649-L-1810710",
+  "landing": "20261013T181112-L-2604150",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

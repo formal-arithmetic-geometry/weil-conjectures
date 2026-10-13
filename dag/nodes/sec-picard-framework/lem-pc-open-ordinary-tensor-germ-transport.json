@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-open-ordinary-tensor-germ-transport",
+ "kind": "statement",
+ "title": "Ordinary open tensor restriction in compatible additive germ coordinates",
+ "statement": "Let f:X to S, f prime:X prime to S prime, g:S prime to S and g prime:X prime to X form a cartesian square of schemes. Let V and V prime be opens of S and S prime with V prime contained in g inverse V. Set U=f inverse V and U prime=f prime inverse V prime. Let j:U prime to U commute with the inclusions and g prime, and suppose j, the two restrictions of f and f prime, and g restricted to V prime form a cartesian square. Choose derived categories of sheaves of modules on every scheme. For any cochain complex P of structure-sheaf modules on X, point z of U prime, and integer i, let Q0 be the literal termwise open restriction of P. The four stalk rings and ordinary tensor complexes are those of [def-pc-single-complex-base-change-stalk-condition]. There are isomorphisms eR,eA,eB,eC between the four restricted and ambient stalk rings, commuting with both base stalk maps and both maps to the final stalk ring. There are underlying additive chain isomorphisms alpha of the input stalk complexes and tau of the ordinary tensor complexes. Alpha is semilinear over eA and tau sends c0 tensor q0 to eC(c0) tensor alpha(q0). The restricted tensorStalkIso homology and inverse comparisonStalkHomologyIso, followed by stalk cohomology of [def-pc-single-complex-open-tensor-restriction-iso] and [def-pc-open-derived-additive-stalk-iso], equal the inverse forgetful homology factor, homology of tau, the ambient forgetful homology factor and the ambient tensorStalkIso homology and inverse comparisonStalkHomologyIso. This is exclusively an ordinary tensor-stalk statement and contains no base-derived tensor cohomology model or localized comparison.",
+ "stmt_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-tensor-restriction-iso",
+  "def-pc-open-derived-additive-stalk-iso",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW."
+ },
+ "proof": [
+  {
+   "text": "The inverse four open-immersion stalk maps and the point equalities of the restriction squares supply eR,eA,eB,eC. Use stalkMap_comp and stalkMap_congr_hom to verify the four algebra map equations.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The same-germ restriction-stalk isomorphism, composed with overFunctorEquiv, supplies alpha. Represent the scalar and section on their common open to prove semilinearity. Naturality gives the chain equation. Define tau by the displayed pure-tensor formula. Balancedness follows from the A-map equation; the inverse uses the inverse maps. Tensor induction proves the inverse equations and naturality proves the differential equation.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-extension-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The germ formula for tensorStalkIso identifies ordinary pullback stalks. Expand the four factors of the adjunction-mate openPinnedTensorRestrictionIso; their units send a germ tensor to the same germ tensor, giving precisely tau. Localize and use the exact restriction and stalk homology factors to identify beta and nu. Naturality of these factors gives the equation.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-single-complex-open-tensor-restriction-iso",
+    "def-pc-open-derived-additive-stalk-iso",
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-derived-additive-stalk-iso",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-tensor-restriction-iso",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "sheaves.tex, lemma-stalk-pullback-modules (Tag 0098); perfect.tex, equation-bc (Tag 0DJ7), ordinary target path; cohomology.tex, exact localization Tags 08HY and 08DW.",
+  "note": "Coefficient transport and germ compatibility from the original plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology comparison commutes with open restriction of schemes",
+   "date": "2026-10-14",
+   "results": "Scheme.Hom.map_appLE and appLE_map naturality lemmas.",
+   "verdict": "No comparison for the base-derived tensor model or its localized map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"ringEquiv\"",
+   "date": "2026-10-14",
+   "results": "ModuleCat.restrictScalarsEquivalenceOfRingEquiv and restrictScalars_isEquivalence_of_ringEquiv.",
+   "verdict": "Exact coefficient equivalences only; no localized comparison compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "baseDerivedTensor.*transport|comparison.*[Rr]ingEquiv",
+   "date": "2026-10-14",
+   "results": "No Mathlib matches. SourceTransport changes the input in one fixed square.",
+   "verdict": "No exact match; two separate parts are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary pullback tensor stalk comparison commutes with open restriction of schemes",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenOrdinaryComparison",
+  "date": "2026-10-14",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The base-change assertion is lem-pc-rf-base-change-flat-module: open locality of the stalk comparison, original ordinary-comparison step 3.",
+   "via": [
+    "lem-pc-single-complex-open-termwise-comparison",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenOrdinaryTensorGermTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenOrdinaryTensorGermTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_openOrdinaryTensor_germ_transport",
+  "statement": "theorem exists_openOrdinaryTensor_germ_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V)\n    (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme)\n    (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')\n    (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV'))\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ) :\n    letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).Additive :=\n      schemeOpenRestriction_additive X (f ⁻¹ᵁ V)\n    letI : (schemeOpenRestriction X (f ⁻¹ᵁ V)).PreservesZeroMorphisms :=\n      Functor.preservesZeroMorphisms_of_additive _\n    let Q₀ := ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapHomologicalComplex (.up ℤ)).obj P\n    let R₀ := R (f ∣_ V) j z\n    let A₀ := A j z\n    let B₀ := B (f' ∣_ V') z\n    let C₀ := C z\n    let R₁ := R f g' z.val\n    let A₁ := A g' z.val\n    let B₁ := B f' z.val\n    let C₁ := C z.val\n    letI := leftAlgebra (f ∣_ V) j z\n    letI := rightAlgebra (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z\n    letI := (tensorMap (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z).toAlgebra\n    letI := leftAlgebra f g' z.val\n    letI := rightAlgebra f f' g g' sq z.val\n    letI := (tensorMap f f' g g' sq z.val).toAlgebra\n    let K₀ := stalkComplex j z Q₀\n    let K := stalkComplex g' z.val P\n    let T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀\n    let T := tensorComplex f f' g g' sq z.val P\n    let F₀ := forget₂ (ModuleCat.{u} C₀) AddCommGrpCat.{u}\n    let F := forget₂ (ModuleCat.{u} C₁) AddCommGrpCat.{u}\n    let H₀ := comparisonStalkCohomology (f' ⁻¹ᵁ V').toScheme z i\n    let β := singleComplexOpenTensorRestrictionMap g' (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj P\n    let ν := openDerivedAdditiveStalkIso X' (f' ⁻¹ᵁ V') z i\n    let k₀ := HomologicalComplex.homologyMap\n      (tensorStalkIso (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀).hom i ≫\n      (comparisonStalkHomologyIso (f' ⁻¹ᵁ V').toScheme z\n        (((Scheme.Modules.tensorPullback j).mapHomologicalComplex (.up ℤ)).obj Q₀) i).inv\n    let k := HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z.val P).hom i ≫\n      (comparisonStalkHomologyIso X' z.val\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv\n    ∃ (eR : R₀ ≃+* R₁) (eA : A₀ ≃+* A₁) (eB : B₀ ≃+* B₁) (eC : C₀ ≃+* C₁),\n      eA.toRingHom.comp (algebraMap R₀ A₀) = (algebraMap R₁ A₁).comp eR.toRingHom ∧\n      eB.toRingHom.comp (algebraMap R₀ B₀) = (algebraMap R₁ B₁).comp eR.toRingHom ∧\n      eC.toRingHom.comp ((algebraMap (A₀ ⊗[R₀] B₀) C₀).comp\n        (algebraMap A₀ (A₀ ⊗[R₀] B₀))) =\n        ((algebraMap (A₁ ⊗[R₁] B₁) C₁).comp\n          (algebraMap A₁ (A₁ ⊗[R₁] B₁))).comp eA.toRingHom ∧\n      eC.toRingHom.comp ((algebraMap (A₀ ⊗[R₀] B₀) C₀).comp\n        Algebra.TensorProduct.includeRight.toRingHom) =\n        ((algebraMap (A₁ ⊗[R₁] B₁) C₁).comp\n          Algebra.TensorProduct.includeRight.toRingHom).comp eB.toRingHom ∧\n      ∃ α : ((forget₂ (ModuleCat.{u} A₀) AddCommGrpCat.{u}).mapHomologicalComplex\n          (.up ℤ)).obj K₀ ≅\n          ((forget₂ (ModuleCat.{u} A₁) AddCommGrpCat.{u}).mapHomologicalComplex\n            (.up ℤ)).obj K,\n        (∀ (n : ℤ) (a : A₀) (q : K₀.X n),\n          α.hom.f n (a • q) = eA a • (show K.X n from α.hom.f n q)) ∧\n        ∃ τ : (F₀.mapHomologicalComplex (.up ℤ)).obj T₀ ≅\n            (F.mapHomologicalComplex (.up ℤ)).obj T,\n          (∀ (n : ℤ) (c : C₀) (q : K₀.X n),\n            τ.hom.f n (c ⊗ₜ[A₀,(algebraMap (A₀ ⊗[R₀] B₀) C₀).comp\n                (algebraMap A₀ (A₀ ⊗[R₀] B₀))] q) =\n              eC c ⊗ₜ[A₁,(algebraMap (A₁ ⊗[R₁] B₁) C₁).comp\n                (algebraMap A₁ (A₁ ⊗[R₁] B₁))] (show K.X n from α.hom.f n q)) ∧\n          F₀.map k₀ ≫ F₀.map (H₀.map β) ≫\n              ν.hom.app (DerivedCategory.Q.obj\n                (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)) =\n            ((T₀.sc i).mapHomologyIso F₀).inv ≫\n              HomologicalComplex.homologyMap τ.hom i ≫ ((T.sc i).mapHomologyIso F).hom ≫\n                F.map k",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T181112-L-2604150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T181112-L-2604150",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
