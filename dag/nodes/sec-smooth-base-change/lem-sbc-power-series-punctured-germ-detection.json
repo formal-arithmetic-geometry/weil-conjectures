@@ -1,0 +1,150 @@
+{
+ "id": "lem-sbc-power-series-punctured-germ-detection",
+ "kind": "statement",
+ "title": "Germ detection on the punctured power-series zero section",
+ "statement": "Let $A$ be a Noetherian commutative local ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth]. Let $d>0$, set $B=A[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series], and let $z:\\operatorname{Spec}A\\to Y=\\operatorname{Spec}B$ be induced by constant coefficient [def-weil-pbc-scheme-conventions]. Let $V\\subset Y$ be open with $z^{-1}(V)=\\operatorname{Spec}A\\setminus\\{\\mathfrak m_A\\}$. Write $U=z^{-1}(V)$ and $z_V:U\\to V$ for the restriction of $z$. For $x\\in U$, write $g_x:\\Gamma(V,\\mathcal O_V)\\to\\mathcal O_{V,z_V(x)}$ for the germ map. If $s\\in\\Gamma(V,\\mathcal O_V)$ satisfies $g_x(s)=0$ for every $x\\in U$, then $s=0$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), omitted injectivity detail in the first comparison, expanded using Tags 0312, 0BK4 and 0311"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Flat base change along the constants inclusion gives Ass_B(B) as the union of Ass_B(B/pB) over p in Ass_A(A). Since p is finitely generated, coefficientwise reduction identifies B/pB with (A/p)[[X_1,...,X_d]]: a series with coefficients in p is a finite linear combination of constant generators of p, by coefficientwise lifting. The quotient is a domain, so its only associated prime as a B-module is pB.",
+   "uses": [
+    "lem-sbc-mv-power-series-constants-flat",
+    "lem-weil-pbc-associated-primes-flat-base-change",
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associated-prime depth bound excludes p=m_A, since dim(A/m_A)=0. The point pB specializes to pB+I=z(p). By hV this specialization lies in V, hence so does pB. Its germ of s is the image of the zero germ at z(p) under the specialization map of stalks, and is zero.",
+   "uses": [
+    "lem-weil-pbc-depth-le-dim-associated-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cover V by principal affine opens of Y contained in V. B is Noetherian, and the associated primes of each principal localization are the localizations of associated primes of B that avoid its denominator. Thus all associated localizations of the section on such an open vanish. The injection into the product of the associated-prime localizations makes that section zero. The affine opens cover V, so the sheaf condition gives s=0. The canonical affine-open stalk localization identification supplies the ring germ maps; associated-prime localization here is Mathlib Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule (AssociatedPrime/Localization.lean:118).",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-mv-power-series-constants-flat",
+  "lem-weil-pbc-associated-primes-flat-base-change",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), omitted injectivity detail in the first comparison, expanded using Tags 0312, 0BK4 and 0311; coefficient and associated-point details written out by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of the structure sheaf on an open in Spec of a power series ring vanishes if its germs at all points of the punctured zero section vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of the structure sheaf is zero if it vanishes at all associated points on a Noetherian scheme",
+   "results": "8 hits: exists_of_res_zero_of_qcqs_of_top; exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; basicOpen_eq_bot_iff_forall_evaluation_eq_zero; germ_eq_zero_of_pow_mul_eq_zero; exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; exists_of_res_zero_of_qcqs; evaluation_eq_zero_iff_notMem_basicOpen; IsReduced.component_reduced. None gives punctured zero-section germ detection.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "powerSeries.*punctured.*germ|germ.*powerSeries.*punctured",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGlobalSections",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local computation, formal splitting paragraph: full faithfulness for the power-series open (0EY9); the structure-sheaf comparison in the proof of 0EY9 supplies connectedness for its uniqueness part. Specifically: Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), omitted injectivity detail in the first comparison, expanded using Tags 0312, 0BK4 and 0311",
+   "via": [
+    "lem-sbc-power-series-punctured-global-sections",
+    "lem-sbc-power-series-punctured-section-injective",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat",
+    "lem-sbc-power-series-punctured-section-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGermDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedGermDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.eq_zero_of_powerSeries_punctured_germs",
+  "statement": "theorem eq_zero_of_powerSeries_punctured_germs\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin d)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (s : Γ(V.toScheme, ⊤))\n    (hs : ∀ x :\n      ((Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) ⁻¹ᵁ V).toScheme,\n      (V.toScheme.presheaf.Γgerm\n        ((Spec.map (CommRingCat.ofHom\n          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A))) ∣_ V) x)).hom s = 0) :\n    s = 0",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T140817-L-312868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T140817-L-312868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
