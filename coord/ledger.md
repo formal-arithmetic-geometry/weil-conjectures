@@ -13182,7 +13182,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:46 L: returned deliver/U2/Sheaf.AlgebraicGeometry.StandardFlatSingleBaseChange (reviewer RETURN: (reviewer X-ab187, head ab187914e) D1: `standard_flat_single_baseChange_iso_hom` is propositionally equivalent to the ta)
 - 16:56 L: returned deliver/T2/Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit (reviewer RETURN: (reviewer X-09060, head 090609efc) E2: `isomorphic_single_tensor_counit_transport_equation` universally quantifies `(t :)
 - 16:56 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FinitePresentationOverlapDiagonalEventually (stage 3; reviewer PASS; first push; landing 20261013T165637-L-1806701 (interface); batch 20261013T165635; modules 2; new nodes 1)
-- 16:56 L: merged deliver/A4/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; first push; landing 20261013T165637-L-1806853 (interface); batch 20261013T165635; modules 3; new nodes 2; change records: coord/changes/picardScalarCech_externalCup_core.md)
 - 16:56 L: merged deliver/B3/Sheaf.RingTheory.FiniteProjectiveCokernelLocalization (stage 3; reviewer PASS; first push; landing 20261013T165638-L-1806958 (proof); batch 20261013T165635; modules 1; new nodes 0)
 - 16:56 L: merged deliver/C3/Sheaf.AlgebraicGeometry.Modules.QuasiAffineLocallyFreeEmbedding (stage 3; reviewer PASS; first push; landing 20261013T165638-L-1807120 (interface); batch 20261013T165635; modules 3; new nodes 2)
 - 16:56 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootDomainEtale (stage 3; reviewer PASS; first push; landing 20261013T165639-L-1807227 (interface); batch 20261013T165635; modules 1; new nodes 0; change records: coord/changes/StrictLocalRootDomainEtale-imports.md)
@@ -13202,7 +13201,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/M3/Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat (stage 3; reviewer PASS; first push; landing 20261013T165645-L-1809284 (interface); batch 20261013T165635; modules 2; new nodes 1)
 - 16:56 L: merged deliver/N2/Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections (stage 3; reviewer PASS; after a return; landing 20261013T165645-L-1809450 (interface); batch 20261013T165635; modules 2; new nodes 1; change records: coord/changes/raw-mate-sections-proof-settings.md)
 - 16:56 L: merged deliver/N3/Sheaf.Algebra.Homology.UniversalH0SplitFactorization (stage 3; reviewer PASS; first push; landing 20261013T165646-L-1809612 (interface); batch 20261013T165635; modules 3; new nodes 1; change records: coord/changes/universalH0-split-factorization-section.md)
-- 16:56 L: merged deliver/N3/Sheaf.Paper.CechCupResolutionRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T165646-L-1809724 (interface); batch 20261013T165635; modules 4; new nodes 3)
 - 16:56 L: merged deliver/N3/Sheaf.Paper.CechRefinementComparisonSquare (stage 3; reviewer PASS; first push; landing 20261013T165646-L-1809827 (interface); batch 20261013T165635; modules 2; new nodes 1)
 - 16:56 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapInjective (stage 3; reviewer PASS; first push; landing 20261013T165647-L-1810040 (interface); batch 20261013T165635; modules 3; new nodes 2)
 - 16:56 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurjective (stage 3; reviewer PASS; first push; landing 20261013T165647-L-1810221 (interface); batch 20261013T165635; modules 2; new nodes 1)
@@ -13218,3 +13216,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/V3/Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeCounit (stage 3; reviewer PASS; first push; landing 20261013T165652-L-1811756 (interface); batch 20261013T165635; modules 3; new nodes 2)
 - 16:58 L: returned deliver/M1/Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi (reviewer RETURN: (reviewer X-a3be6, head a3be65f87) F2: coord/reports/M1/Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi.md:97, r)
 - 17:02 L: returned deliver/J2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (reviewer RETURN: (reviewer X-1c4fa, head 1c4facdac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pi)
+
+- 01:08 L: batch 20261013T165635 dependency take-out
