@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-popescu-flat-coordinates-setup",
+ "kind": "statement",
+ "title": "Localized quotient setup",
+ "statement": "Let k be a field of characteristic p > 0, Λ a Noetherian geometrically regular k-algebra [def-weil-pbc-g-ring], q a prime ideal, and n ≥ 1. Set L = Λ_q [def-weil-pbc-localization-at-prime], J = qL, and B = L/J^n. Then B is Artinian and local with maximal ideal the image of J, and H1Cotangent k (ResidueField B) is finite over ResidueField B [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH, first paragraph of proof; Tag 07E5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Localize Λ at q. L is Noetherian local with maximal ideal J. Purely inseparable base change commutes with localization, so localization of regular rings gives geometric regularity of L.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-of-regular-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The characteristic p of a field is prime since p > 0. Apply the geometric-regularity injectivity theorem to L. Its residue cotangent homology injects into J/J², which is finite dimensional because J is finitely generated.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-h1-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since n ≥ 1, J^n is proper with radical J. The quotient B is Noetherian local of dimension zero, hence Artinian, with maximal ideal the image of J. The third isomorphism theorem identifies its residue field as a k-algebra with the residue field of L. H1Cotangent functoriality for this isomorphism and its inverse transports finiteness.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometrically-regular-h1-injective",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH, first paragraph of proof; Tag 07E5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "H1Cotangent|quotient_artinian_of_mem_minimalPrimes",
+   "results": "Hits: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean. These supply conormal finiteness or individual cotangent facts, not the entire localized-quotient setup.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The residue field first cotangent homology of a geometrically regular Noetherian algebra localized at a prime is finite dimensional",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite cotangent homology of the residue field of a regular local algebra",
+   "results": "Hits: IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.finrank_cotangentSpace_eq_zero, IsLocalRing.finrank_cotangentSpace_le_one_iff, IsLocalRing.finrank_CotangentSpace_eq_one, Algebra.Extension.Cotangent.finite, IsLocalRing.ResidueField.finite_of_module_finite, IsLocalRing.instFiniteResidueField. These supply conormal finiteness or individual cotangent facts, not the entire localized-quotient setup.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuFlatCoordinatesA0",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-flat-coordinates",
+   "place": "localized quotient and residue homology setup in the first paragraph of Tag 07FH",
+   "via": [
+    "lem-weil-pbc-popescu-flat-coordinates-a0"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuFlatCoordinatesSetup",
+  "file": "lean/Sheaf/RingTheory/PopescuFlatCoordinatesSetup.lean",
+  "declaration": "Algebra.popescu_flat_coordinates_setup",
+  "statement": "theorem popescu_flat_coordinates_setup\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]\n    (n : ℕ) (hn : 1 ≤ n) :\n    ∃ hArt : IsArtinianRing (Localization.AtPrime q ⧸\n        (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n),\n      ∃ hLoc : IsLocalRing (Localization.AtPrime q ⧸\n        (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n),\n      IsLocalRing.maximalIdeal (Localization.AtPrime q ⧸\n        (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) =\n        (q.map (algebraMap Λ (Localization.AtPrime q))).map\n          (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) ∧\n      Module.Finite (IsLocalRing.ResidueField\n        (Localization.AtPrime q ⧸\n          (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))\n        (H1Cotangent k (IsLocalRing.ResidueField\n          (Localization.AtPrime q ⧸\n            (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T010613-L-2670122",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T010613-L-2670122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

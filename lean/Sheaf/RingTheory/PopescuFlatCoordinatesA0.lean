@@ -2,8 +2,7 @@ module
 public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.ArtinianFlatSubalgebras
-import Sheaf.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.PopescuFlatCoordinatesSetup
 
 @[expose] public section
 set_option autoImplicit false
@@ -42,6 +41,35 @@ theorem exists_popescu_admissible_containing_finset
       A.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map
         (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))) ∧
       ∀ e ∈ E, e ∈ A := by
-  sorry
+  let B := Localization.AtPrime q ⧸
+    (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n
+  obtain ⟨hArt, hLoc, hMax, hFin⟩ :=
+    popescu_flat_coordinates_setup k Λ p hp hreg q n hn
+  let : IsArtinianRing B := hArt
+  let : IsLocalRing B := hLoc
+  obtain ⟨S, hdir, hcover, hprops, _⟩ :=
+    exists_directed_artinian_flat_subalgebras.{u, v, 0} k B p hp hFin
+  have hnonempty : S.Nonempty := by
+    obtain ⟨A, hA, hmem⟩ := hcover (0 : B)
+    exact ⟨A, hA⟩
+  have hfin : ∃ A ∈ S, ∀ e ∈ E, e ∈ A := by
+    classical
+    induction E using Finset.induction_on with
+    | empty =>
+        obtain ⟨A, hA⟩ := hnonempty
+        exact ⟨A, hA, by simp⟩
+    | @insert x s hx ih =>
+        obtain ⟨A, hA, hs⟩ := ih
+        obtain ⟨A', hA', hxA'⟩ := hcover x
+        obtain ⟨C, hC, hAC, hA'C⟩ := hdir A hA A' hA'
+        exact ⟨C, hC, fun e he ↦ by
+          by_cases heq : e = x
+          · simpa [heq] using hA'C hxA'
+          · exact hAC (hs e (Finset.mem_of_mem_insert_of_ne he heq))⟩
+  obtain ⟨A, hA, hE⟩ := hfin
+  obtain ⟨hAloc, hAart, hAflat, hm, hAeft⟩ := hprops A hA
+  let : IsLocalRing A := hAloc
+  refine ⟨A, hAloc, ?_, hE⟩
+  exact ⟨hAart, hAeft, ⟨hAloc, hAflat, hm.trans hMax⟩⟩
 
 end Algebra
