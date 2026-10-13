@@ -26,21 +26,13 @@ namespace Module
 Source: Stacks Project, Algebra, Lemma 0310 (1), lines 15393-15410.
 (blueprint: lem-weil-pbc-associated-prime-localize-at-prime)
 
-If `Ann_T(z) = q`, localization at the prime `q` has annihilator `q T_q` for `z/1`.
-The node's proof proceeds as follows.
-
-1. Choose `z` with annihilator `q`. The map `T → P`, `a ↦ a • z`, has kernel `q`,
-   so it induces an injection `T/q → P`.
-2. Localize at `T \ q`. Exactness (`lem-weil-pbc-localization-module-exact`) preserves
-   this injection; the localized zero module is zero. Fractions and their maps use
-   `def-weil-pbc-module-localization`.
-3. For a fraction `a/s`, injectivity says `(a/s) • (z/1) = 0` exactly when `a/s = 0`
-   in the localized quotient. This holds exactly when some `t ∉ q` has `t*a ∈ q`,
-   hence, by primality, exactly when `a ∈ q`. These fractions form the extended ideal:
-   each is `(a/1)*(1/s)`, and finite sums of generators have numerator in `q`.
-4. By `def-weil-pbc-localization-at-prime`, the extended ideal is maximal, hence prime.
-   Step 3 identifies it with the annihilator of `z/1`, proving association and the
-   stated annihilator equality for every witness `z`. -/
+If `Ann_T(z) = q`, the contraction of the annihilator of `z/1` consists of the
+scalars `a` for which some `t ∉ q` kills `a • z`. Equivalently, `t * a ∈ q` for
+some `t ∉ q`, which by primality is equivalent to `a ∈ q`. The localization ideal
+correspondence (`IsLocalization.map_under`) then identifies the annihilator with
+`q T_q`. Finally, this extended ideal is prime, and any witness for the original
+association supplies a witness for the localized association. This computes the
+annihilator directly using the zero-fraction criterion, without exactness. -/
 theorem associated_prime_localize_at_prime
     {T : Type u} [CommRing T] {P : Type v} [AddCommGroup P] [Module T P]
     {q : Ideal T} [hq : q.IsPrime]
@@ -51,6 +43,35 @@ theorem associated_prime_localize_at_prime
     ∀ z : P, (⊥ : Submodule T P).colon {z} = q →
       (⊥ : Submodule (Localization.AtPrime q) (LocalizedModule.AtPrime q P)).colon
           {LocalizedModule.mk z 1} = q.map (algebraMap T (Localization.AtPrime q)) := by
-  sorry
+  have hann : ∀ z : P, (⊥ : Submodule T P).colon {z} = q →
+      (⊥ : Submodule (Localization.AtPrime q) (LocalizedModule.AtPrime q P)).colon
+          {LocalizedModule.mk z 1} = q.map (algebraMap T (Localization.AtPrime q)) := by
+    intro z hz
+    let J := (⊥ : Submodule (Localization.AtPrime q)
+      (LocalizedModule.AtPrime q P)).colon {LocalizedModule.mk z 1}
+    have hcontract : J.under T = q := by
+      ext a
+      change algebraMap T (Localization.AtPrime q) a ∈ J ↔ a ∈ q
+      simp only [J, Submodule.mem_colon_singleton, Submodule.mem_bot, algebraMap_smul]
+      rw [← LocalizedModule.mkLinearMap_apply, ← LinearMap.map_smul]
+      rw [← LinearMap.mem_ker, LocalizedModule.mem_ker_mkLinearMap_iff]
+      constructor
+      · rintro ⟨t, ht, htz⟩
+        have hta : t * a ∈ q := by
+          rw [← hz, Submodule.mem_colon_singleton, Submodule.mem_bot, mul_smul]
+          exact htz
+        exact (hq.mem_or_mem hta).resolve_left ht
+      · intro ha
+        refine ⟨1, q.primeCompl.one_mem, ?_⟩
+        have haz : a • z = 0 := by
+          simpa only [Submodule.mem_colon_singleton, Submodule.mem_bot] using
+            (show a ∈ (⊥ : Submodule T P).colon {z} from hz.symm ▸ ha)
+        simp [haz]
+    exact (IsLocalization.map_under q.primeCompl (Localization.AtPrime q) J).symm.trans
+      (congrArg (Ideal.map (algebraMap T (Localization.AtPrime q))) hcontract)
+  refine ⟨?_, hann⟩
+  rcases hqmem with ⟨_, z, hz⟩
+  exact ⟨Ideal.isPrime_map_of_isLocalizationAtPrime q le_rfl,
+    LocalizedModule.mk z 1, (hann z hz.symm).symm⟩
 
 end Module
