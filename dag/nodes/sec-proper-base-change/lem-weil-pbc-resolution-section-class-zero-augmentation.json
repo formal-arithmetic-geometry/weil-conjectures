@@ -14,31 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Expand both augmentations by InjectiveResolution.toRightDerivedZero_eq and cancel the inverse derived-resolution comparison. R.augmentation and R.components at zero identify the section cycle with the augmentation in I of the section corresponding to s.",
+   "text": "For any short complex and a homology-preserving functor, derive compatibility of mapHomologyIso with the cycles-to-homology projection from the left homology data. For a left exact right adjoint and a natural-number complex, the incoming degree-zero differential vanishes. Apply adjunction naturality and the triangle identity to show that the adjoint of the exact left-adjoint homology comparison followed by the counit equals the right-adjoint degree-zero homology comparison. Specialize this proved private calculation to sheafification and forgetful functors to identify sectionCohomologyTheta in degree zero.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate R.augmentation at the whole restricted open and substitute R.components at zero. Naturality of the original augmentation for the inclusion-image-top equality gives equality of the two section maps into degree-zero resolution terms. Cancel the monic evaluated cycles inclusion and use naturality of the cycles-to-homology projection to transport this equality through the three homology comparisons. These are proved private categorical helpers, not new assumptions.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the source degree-zero augmentation using InjectiveResolution.toRightDerivedZero_eq and cancel its inverse resolution comparison against the hom comparison in resolutionSectionClass. Expand the direct-image augmentation by the same formula. Substitute the degree-zero theta identity and the homology transport equality, append the inverse target resolution comparison, and evaluate the resulting morphism equality on s.",
    "uses": [
     "def-weil-pbc-flat-base-change-open-choices",
     "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The sheafification counit defining sectionCohomologyTheta carries this cycle class to its homology-sheaf class. Naturality of the cycles-to-homology map and exact sheafification, evaluated at V, therefore identify it with the direct-image augmentation. Reinsert the inverse resolution comparison to obtain the equality.",
-   "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-weil-pbc-higher-direct-image-presheaf"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-higher-direct-image-presheaf"
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Explicit degree-zero calculation from the cited source; online tag page read."
+  "place": "Tag 01E4 (lemma-describe-higher-direct-images), online tag page read; explicit Lean degree-zero calculation using kernel functoriality, adjunction triangle identity and Mathlib RightDerived.lean."
  },
  "mathlib_searches": [
   {
@@ -128,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-fed17",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T095938-L-2453885",
+  "landing": "20261013T130752-L-3987134",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature matches the node; proof and metadata agree. Delivered module compiles cleanly with only propext, Classical.choice, and Quot.sound; new attributes are section-local."
  }
 }
