@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.LimitModuleModuleData
 
 /-!
 # Descent of a local algebra and a presented module along a given local-ring system
@@ -144,6 +144,15 @@ theorem exists_limit_module_essentially_finite_presentation_over_system
                   (letI := (κ i).toAlgebra
                    ∃ e : T ⊗[B.obj i] D.obj i ≃ₗ[T] N,
                      ∀ (y : T) (x : D.obj i), e (y ⊗ₜ[B.obj i] x) = y • ν i x)) := by
-  sorry
+  obtain ⟨i₀, B, β, hcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
+      hτfinite, hτcomp, hτnat⟩ :=
+    exists_limit_module_ring_data F c hc hF hcLocal T τ P W f hf hT
+  obtain ⟨D, δ, hDcol, ν, hMod, hνδ, hνsmul, hνmap, hDfinite, hDpres, hDB,
+      hDT⟩ :=
+    exists_limit_module_module_data F c hc hF hcLocal T τ N s t H hN κ τ₀ hκ
+      hτlocal hτfinite hτcomp hτnat
+  exact ⟨i₀, B, β, hcol, κ, hκ, hBlocal, hκlocal, hBmap, τ₀, hτlocal,
+    hτfinite, hτcomp, hτnat, D, δ, hDcol, ν, hMod, hνδ, hνsmul, hνmap,
+    hDfinite, hDpres, hDB, hDT⟩
 
 end RingHom

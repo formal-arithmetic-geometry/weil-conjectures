@@ -34,109 +34,26 @@
  ],
  "proof": [
   {
-   "text": "Write $T\\cong B_{\\mathfrak q}$, with $B=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ and $\\mathfrak q$ the inverse image of the maximal ideal of $T$ in $B$. Indeed the given localization of a finitely presented algebra is local; every element outside that inverse image already becomes a unit, so localization once more at this prime changes nothing. The local map $A\\to T$ gives $\\mathfrak q\\cap A=\\mathfrak m_A$. The finitely many coefficients of the $f_j$ have representatives in a common $A_{\\lambda_1}$; let $f_{j,\\lambda}$ be their images for $\\lambda\\ge\\lambda_1$, put $B_\\lambda=A_\\lambda[x_1,\\ldots,x_n]/(f_{1,\\lambda},\\ldots,f_{m,\\lambda})$, and let $\\mathfrak q_\\lambda$ be the inverse image of $\\mathfrak q$ under $B_\\lambda\\to B$. Since $A_\\lambda\\to A$ is local and $\\mathfrak q\\cap A=\\mathfrak m_A$, the contraction of $\\mathfrak q_\\lambda$ to $A_\\lambda$ is its maximal ideal. Thus $T_\\lambda=(B_\\lambda)_{\\mathfrak q_\\lambda}$ is a local $A_\\lambda$-algebra, essentially of finite type, and the induced maps to later stages and to $T$ are local.",
+   "text": "Apply the ring descent component to obtain the tail system of local rings and maps. Apply the module continuation component to that data and the given presentation of N. The resulting witnesses and conjuncts are exactly the target conclusion, so assemble them in order.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-essentially-finite-type-algebra",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-ring",
+    "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma Tag 00QV (lemma-limit-essentially-finite-presentation), construction of the $f_{j,\\lambda}$ and $\\mathfrak q_\\lambda$; Lemma Tag 00QX, first paragraph of proof"
-   }
-  },
-  {
-   "text": "Polynomial scalar extension and quotient base change identify $B_\\lambda\\otimes_{A_\\lambda}A_\\mu$ with $B_\\mu$, and $B_\\lambda\\otimes_{A_\\lambda}A$ with $B$. Hence $B$ is the directed colimit of the $B_\\lambda$: every polynomial has finitely many coefficients and comes from one stage. If a polynomial class from a stage vanishes in $B$, write its image in $A[x_1,\\ldots,x_n]$ as a finite sum $\\sum_j h_jf_j$; move the finitely many coefficients of the $h_j$ to a common later stage, then move once more so each coefficient equality in this polynomial identity holds there. The class vanishes at that stage. These two elementwise conditions make $B$ the colimit of the $B_\\lambda$ in abelian groups by [lem-weil-pbc-filtered-colimit-modules-criterion] with scalar ring $\\mathbb Z$; for a cocone of commutative rings the induced additive map from $B$ sends $1$ to $1$ and is multiplicative, since any two elements of $B$ come from one stage, so $B$ is the colimit in commutative rings. Applying the filtered-colimit theorem for localization at a prime to the compatible primes $\\mathfrak q_\\lambda$ yields $T=\\varinjlim T_\\lambda$; the tail above $\\lambda_1$ is cofinal because the index set is directed.",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-filtered-colimit-rings-zero",
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-filtered-colimit-modules-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma Tag 00QV, final sentence ('We leave it to the reader to see that this works'); Lemma Tag 00D6 (lemma-directed-colimit)"
-   }
-  },
-  {
-   "text": "For $\\lambda\\le\\mu$, base change of the localization $B_\\lambda\\to(B_\\lambda)_{\\mathfrak q_\\lambda}$ identifies $T_\\lambda\\otimes_{A_\\lambda}A_\\mu$ with the localization of $B_\\mu$ at the image of $B_\\lambda\\setminus\\mathfrak q_\\lambda$. That image misses $\\mathfrak q_\\mu$ by the definition of the inverse-image prime. Localizing this intermediate ring at the image of $B_\\mu\\setminus\\mathfrak q_\\mu$ gives $(B_\\mu)_{\\mathfrak q_\\mu}=T_\\mu$, so its canonical map to $T_\\mu$ is a localization. The identical argument with $A$ in place of $A_\\mu$ gives the required localization $T_\\lambda\\otimes_{A_\\lambda}A\\to T$.",
-   "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00QV, clause (4) and omitted final verification; Lemma Tag 00QX, clause (5)"
-   }
-  },
-  {
-   "text": "Choose the given presentation $T^{\\oplus s}\\xrightarrow{H}T^{\\oplus t}\\to N\\to0$. Each of the finitely many entries of its $t\\times s$ matrix $H$ comes from some $T_\\lambda$, since $T$ is their directed colimit. Move to one common stage $\\lambda_0\\ge\\lambda_1$ and choose a matrix $H_{\\lambda_0}$ mapping to $H$; let $H_\\lambda$ be its image and $N_\\lambda=\\operatorname{coker}(T_\\lambda^{\\oplus s}\\xrightarrow{H_\\lambda}T_\\lambda^{\\oplus t})$ for $\\lambda\\ge\\lambda_0$. The maps of presentations induce compatible semilinear maps $n_{\\mu\\lambda}$ and $\\nu_\\lambda$, and the presentation shows that every $N_\\lambda$ is finitely generated.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma Tag 00QX, presentation matrix $A_{\\lambda_2}$ and definition of $M_\\lambda$"
-   }
-  },
-  {
-   "text": "Tensor the presentation of $N_\\lambda$ with $T_\\mu$ over $T_\\lambda$. Tensor is right exact, and the resulting map between free $T_\\mu$-modules has matrix $H_\\mu$ entry by entry. Its cokernel is therefore $N_\\mu$, and the induced map $N_\\lambda\\otimes_{T_\\lambda}T_\\mu\\to N_\\mu$ is an isomorphism. Replacing $T_\\mu$ by $T$ gives $N_\\lambda\\otimes_{T_\\lambda}T\\cong N$, because the matrix then is $H$.",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-module-base-change-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma Tag 00QX, omitted verification after the definition of $M_\\lambda$; Lemma Tag 00R1, conclusion $M=M_\\lambda\\otimes_{S_\\lambda}S$"
-   }
-  },
-  {
-   "text": "Finally the compatible modules $N_\\lambda$ have colimit $N$ as abelian groups. Every element of $N$ is represented by a finite vector of elements of $T$, hence by a vector at one common stage, so it comes from some $N_\\lambda$. If a vector class from $N_\\lambda$ maps to zero in $N$, its vector in $T^{\\oplus t}$ is a linear combination of the finitely many columns of $H$; move the finitely many coefficients of that combination to one later stage. Each coordinate equality then holds at a further stage by the zero criterion for the directed colimit $T=\\varinjlim T_\\lambda$, so the class already vanishes in some later $N_\\mu$. These two elementwise conditions give the colimit universal property in abelian groups by [lem-weil-pbc-filtered-colimit-modules-criterion] applied with the fixed scalar ring $\\mathbb Z$ (every $N_\\lambda$, $N$, and additive transition map is canonically a $\\mathbb Z$-module/map); all the claimed compatibility follows from the presentations.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero",
-    "lem-weil-pbc-filtered-colimit-modules-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Proof of Lemma Tag 00QX, omitted verification of clause (1); Lemma Tag 00D6 (lemma-directed-colimit) and Lemma Tag 00D7 (lemma-zero-directed-limit)"
+    "document": "lean/Sheaf/RingTheory/LimitModuleEssentiallyFinitePresentationOverSystem.lean",
+    "place": "proof of exists_limit_module_essentially_finite_presentation_over_system"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-essentially-finite-type-algebra",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-module-base-change-universal-property",
-  "lem-weil-pbc-filtered-colimit-modules-criterion"
+  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-ring",
+  "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemmas 00QV and 00QX"
+  "by": "stage3-worker",
+  "document": "lean/Sheaf/RingTheory/LimitModuleEssentiallyFinitePresentationOverSystem.lean",
+  "place": "composition of the ring and module split theorems"
  },
  "mathlib_searches": [
   {
@@ -237,5 +154,15 @@
   "group": "G1",
   "result": "fix",
   "note": "directed set Preorder+Nonempty+IsDirected, local system F with local transitions hF, local colimit cocone hc/hcLocal, local tau, T=W^-1 P with P fp (hf,hT), N=coker H; tail i0, B/beta/kappa ring colimit, D/delta/nu AddCommGrp colimit, tau0 local EssFiniteType compat, module family tied by nu and n semilinearity, (3) same s,t cokernel + Module.Finite, (4)(5) tensor ring maps on pure tensors + IsLocalization, module base-change equivs; FIX index universe w -> u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T215605-L-898310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
