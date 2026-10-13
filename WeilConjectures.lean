@@ -244,7 +244,6 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
-public import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
 public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.Divisor.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Divisor.Image
@@ -2016,6 +2015,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
+public import WeilConjectures.SixFunctors.BaseChange.DerivedTermwise
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
 public import WeilConjectures.SixFunctors.BaseChange.Etale
