@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapAwayOfPuncturedIso
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPuncturedIso
 
 /-! # Local torsion for the completed matching-ring kernel
 
@@ -49,6 +51,23 @@ theorem completedRingMap_kernel_local_torsion
       ∃ (t : ℕ) (f : Fin t → A),
         IsLocalRing.maximalIdeal A = Ideal.span (Set.range f) ∧
           ∀ i, ∃ e : ℕ,
-            ((D.baseMap ≫ pushout.inl _ _).hom (f i)) ^ e * x = 0 := by sorry
+            ((D.baseMap ≫ pushout.inl _ _).hom (f i)) ^ e * x = 0 := by
+  intro x hx
+  have : IsIso D.puncturedMap := D.puncturedMap_isIso hU
+  obtain ⟨t, f, hf⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    (Ideal.fg_of_isNoetherianRing (IsLocalRing.maximalIdeal A))
+  refine ⟨t, f, hf.symm, ?_⟩
+  intro i
+  have hfi : f i ∈ IsLocalRing.maximalIdeal A := by
+    rw [← hf]
+    exact Ideal.subset_span ⟨i, rfl⟩
+  have hbasic : (PrimeSpectrum.basicOpen (f i) : (Spec (.of A)).Opens) ≤ U := by
+    intro p hp
+    apply (hU p).2
+    intro heq
+    subst p
+    exact hp hfi
+  have hbij := D.completedRingMap_away_bijective_of_puncturedMap_isIso (f i) hbasic
+  exact Localization.awayMap_injective_iff.mp hbij.1 x hx
 
 end AlgebraicGeometry.Scheme.CompletionGluingData

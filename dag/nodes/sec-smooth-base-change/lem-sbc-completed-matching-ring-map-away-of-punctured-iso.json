@@ -1,0 +1,162 @@
+{
+ "id": "lem-sbc-completed-matching-ring-map-away-of-punctured-iso",
+ "kind": "lemma",
+ "title": "Completed matching comparison on principal opens from the punctured isomorphism",
+ "statement": "Let A be a commutative local ring with maximal ideal m, C its m-adic completion, U an open subset of Spec A, q:Y→U any scheme morphism and s:E→Spec C a finite morphism [def-weil-finite-integral-morphism]. Let D be completion overlap data, with its actual matching ring B and punctured comparison Y→(Spec B)×_Spec(A)U [def-sbc-punctured-completion-matching-sections]. Assume this punctured comparison is an isomorphism. Let P=B pushout_A C, psi:P→Gamma(E) the completed matching comparison [def-sbc-completed-matching-ring-map], and j:A→P the structural map through B. For any f in A such that D(f) is contained in U, the induced map P localized away from j(f)→Gamma(E) localized away from psi(j(f)) [def-weil-ring-localization-away] is bijective. No Noetherianity, punctured-spectrum condition on U, or finiteness of q is assumed.",
+ "stmt_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLH (completion overlap) and 05ER (proposition-equivalence, second paragraph, localized comparison); the geometric base-change assembly from an assumed punctured comparison is written and proved by G4."
+ },
+ "proof": [
+  {
+   "text": "By naturality of the Spec–Gamma unit and the ring-pullback condition, the two maps from the overlap to Spec B obtained via Y and via E agree. Transport the pullback of q and the restricted completion map along D.overlapIso and the assumed isomorphism D.puncturedMap. Paste the restriction square of Spec B→Spec A. This gives the pullback square with source the completed inverse image of U and projections to Spec B and the completed inverse image of U in Spec C.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put P=B pushout_A C and k=E.toSpecGamma≫Spec.map(completedRingMap). The two defining pushout equations and unit naturality show that k followed by the Spec B projection is D.fromCompleted, and k followed by the Spec C projection is s. Mathlib isPullback_SpecMap_pushout gives the corresponding pullback square for Spec P. Restrict this square over the completed inverse image of U. Pullback cancellation (IsPullback.of_right) compares it with the square in step 1; its other horizontal arrow is an identity. Hence the restricted k is an isomorphism.",
+   "uses": [
+    "def-sbc-completed-matching-ring-map",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since s is finite over the affine Spec C, E is affine and E.toSpecGamma is an isomorphism. Cancel its restriction from the restricted k to obtain an isomorphism for Spec.map(completedRingMap) over the inverse image of U in Spec P. The pushout condition identifies the preimage of D(f) through the Spec C route with the basic open of j(f) through the Spec B route. Containment D(f)≤U therefore lets us restrict this isomorphism further to D(j(f)); restriction twice is identified with one restriction by morphismRestrictRestrict.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sbc-completed-matching-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib SpecMapRestrictBasicOpenIso to identify this restricted Spec map with Spec.map of Localization.awayMap of the original ring map at j(f). Apply isIso_SpecMap_iff to obtain the required bijection. These are canonical constructions and work also for empty principal opens and zero localization rings.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-pc-fibre-product",
+  "def-sbc-completed-matching-ring-map",
+  "def-weil-finite-integral-morphism",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "G4",
+  "document": "Stacks Project",
+  "place": "Tag 05ER second paragraph, applied to the explicit scheme overlap in Tag 0BLH; categorical assembly formalized by G4 using Mathlib pullback pasting and SpecMapRestrictBasicOpenIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change of an isomorphism on a principal open induces an isomorphism of localized ring pushouts",
+   "results": "Eight hits, including Algebra.isLocalization_iff_isPushout and CommRingCat.isPushout_of_isLocalization; no completion-overlap comparison theorem.",
+   "date": "2026-10-14",
+   "verdict": "Generic localization/base-change tools only; scheme assembly proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.awayMap, Function.Bijective",
+   "results": "Five hits, including Localization.awayMap_bijective_of_dvd; none supplies the bijection from a punctured scheme comparison.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "puncturedMap|completedRingMap_away|away_bijective_of_punctured",
+   "results": "msearch found zero Mathlib hits. Local rg in lean/Sheaf and lean/WeilConjectures found the existing punctured comparison and no away-map base-change bridge. Blueprint searches for punctured completion and matching ring found zero matches.",
+   "date": "2026-10-14",
+   "verdict": "Reuse puncturedMap_isIso upstream of this bridge; no duplicate bridge."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme comparison that is an isomorphism over an open remains an isomorphism after base change and localization at a principal open contained in that open",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapKernelLocalTorsion",
+  "date": "2026-10-14",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completed matching-ring comparison: kernel torsion, using the principal-open localization assertion of 05ER after the punctured comparison.",
+   "via": [
+    "lem-sbc-completed-matching-ring-map-kernel-local-torsion",
+    "lem-sbc-completed-matching-ring-map-kernel-torsion",
+    "lem-sbc-completed-matching-ring-map-injective",
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapAwayOfPuncturedIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedMatchingRingMapAwayOfPuncturedIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.completedRingMap_away_bijective_of_puncturedMap_isIso",
+  "statement": "theorem completedRingMap_away_bijective_of_puncturedMap_isIso\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme}\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) [IsIso D.puncturedMap]\n    (f : A) (hf : (PrimeSpectrum.basicOpen f : (Spec (.of A)).Opens) ≤ U) :\n    Function.Bijective (Localization.awayMap D.completedRingMap.hom\n      ((D.baseMap ≫ pushout.inl _ _).hom f))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181058-L-2599762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T181058-L-2599762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
