@@ -1,7 +1,8 @@
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.AffinePushoutRingAffineSections
+import Mathlib.Algebra.Category.Ring.Constructions
 set_option linter.style.longLine false
 set_option linter.style.whitespace false
 @[expose] public section
@@ -37,7 +38,7 @@ Proof: identify sections on the affine inverse image with the tensor product of 
  inclusion gives `δ`; the counit triangle gives `ε (δ c) = c`, and pure tensors
  generate the tensor product, yielding the displayed finite-sum formula.  This
  calculation is valid for zero rings and empty affine opens as well. -/
- theorem affine_pushout_ring_section_presentation [IsAffineHom f]
+theorem affine_pushout_ring_section_presentation [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u})
     (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)
     (hring : IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀)
@@ -48,6 +49,42 @@ Proof: identify sections on the affine inverse image with the tensor product of 
       (∀ r : B.obj.obj (op (f ⁻¹ᵁ V)),
         ∃ l : List (Γ(U, f ⁻¹ᵁ V) × Γ(U, f ⁻¹ᵁ V)),
           r = (l.map fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom x.1 * δ x.2).sum) := by
-  sorry
+  classical
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Opens.map f.base) CommRingCat.{u} (Opens.grothendieckTopology X)
+    (Opens.grothendieckTopology U)
+  let δ : Γ(U, f ⁻¹ᵁ V) →+* B.obj.obj (op (f ⁻¹ᵁ V)) :=
+    (t.hom.app (op (f ⁻¹ᵁ V))).hom.comp ((adj.unit.app A).hom.app (op V)).hom
+  refine ⟨δ, ?_, ?_⟩
+  · intro c
+    have ht := congrArg (fun q ↦ q.hom.app (op (f ⁻¹ᵁ V)) (
+      (adj.unit.app A).hom.app (op V) c)) hring.2.2
+    have hu := (adj.homEquiv A U.sheaf).apply_symm_apply (𝟙 A)
+    rw [Adjunction.homEquiv_unit] at hu
+    have hv := congrArg (fun q ↦ q.hom.app (op V) c) hu
+    exact ht.trans hv
+  · let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+    have hs := affine_pushout_ring_affine_sections f B b t hring.1 V hV
+    let ht := CommRingCat.isPushout_tensorProduct
+      Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V)
+    let e := (ht.isoIsPushout _ _ hs).commRingCatIsoToRingEquiv
+    have hl (c : Γ(U, f ⁻¹ᵁ V)) :
+        e (c ⊗ₜ[Γ(X, V)] 1) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c := by
+      exact congrArg (fun q ↦ q.hom c) (IsPushout.inl_isoIsPushout_hom _ _ ht hs)
+    have hr (d : Γ(U, f ⁻¹ᵁ V)) : e (1 ⊗ₜ[Γ(X, V)] d) = δ d := by
+      exact congrArg (fun q ↦ q.hom d) (IsPushout.inr_isoIsPushout_hom _ _ ht hs)
+    have htmul (c d : Γ(U, f ⁻¹ᵁ V)) :
+        e (c ⊗ₜ[Γ(X, V)] d) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c * δ d := by
+      rw [← hl c, ← hr d, ← map_mul]
+      simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+    intro r
+    obtain ⟨x, rfl⟩ := e.surjective r
+    induction x using TensorProduct.induction_on with
+    | zero => exact ⟨[], by simp⟩
+    | tmul c d => exact ⟨[(c, d)], by simpa using htmul c d⟩
+    | add x y hx hy =>
+      obtain ⟨l, hl⟩ := hx
+      obtain ⟨m, hm⟩ := hy
+      exact ⟨l ++ m, by simp [map_add, hl, hm]⟩
 end
 end AlgebraicGeometry.Scheme.Modules
