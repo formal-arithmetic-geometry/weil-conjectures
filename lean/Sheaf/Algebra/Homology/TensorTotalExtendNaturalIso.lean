@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 
 public import Mathlib.Algebra.Homology.Embedding.Extend
+import Sheaf.Algebra.Homology.TensorTotalExtendNat
 
 /-! # Normalized extension of natural tensor totals
 
@@ -62,6 +63,24 @@ theorem tensorTotal_extend_natural_iso {k : Type w} [Field k]
               ((B.extendXIso E (i := i.val.2) rfl).inv b))) =
           (T.extendXIso E (i := n) rfl).inv
             (ιMapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)
-              i.val.1 i.val.2 n i.property (a ⊗ₜ[k] b)) := by sorry
+              i.val.1 i.val.2 n i.property (a ⊗ₜ[k] b)) := by
+  classical
+  obtain ⟨s, hs⟩ := tensorTotal_extend_nat A B
+  refine ⟨s, ?_⟩
+  intro n i a b
+  rcases i with ⟨⟨p, q⟩, hi⟩
+  dsimp only at hi a b ⊢
+  subst n
+  have h := congrArg (fun f ↦ f
+    (((A.extendXIso ComplexShape.embeddingUpNat (i := p) rfl).inv a) ⊗ₜ[k]
+      ((B.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).inv b))) (hs p q)
+  simp only [ModuleCat.comp_apply] at h
+  erw [ModuleCat.MonoidalCategory.tensorHom_tmul,
+    ModuleCat.hom_inv_apply, ModuleCat.hom_inv_apply] at h
+  have h' := congrArg
+    (((mapBifunctor A B (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ)).extendXIso
+      ComplexShape.embeddingUpNat (i := p + q) rfl).inv) h
+  erw [ModuleCat.inv_hom_apply] at h'
+  exact h'
 
 end HomologicalComplex
