@@ -13,27 +13,38 @@
  ],
  "proof": [
   {
-   "text": "For each open the concatenated wedge is multilinear and alternating separately in the two blocks. Apply the two exterior-power universal properties and then the tensor-product universal property to obtain a linear map from the tensor of sectionwise exterior powers.",
+   "text": "Use multiplication in the exterior algebra to construct a bilinear map from degree r and degree s to degree r+s. Since the degree-n exterior power is the nth power of the range of the degree-one inclusion, pow_add and Submodule.mul_mem_mul show that products lie in degree r+s. Compose in the first factor with exteriorPower.map induced by f and in the output with the target sheafification unit. ExteriorAlgebra.ιMulti_mul_ιMulti and exteriorPower.map_apply_ιMulti give precisely the concatenated pure-wedge formula.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compose with the unit into the target exterior sheaf. Naturality of f and the exterior restrictions proves compatibility with restrictions on pure wedges, hence on their spans and tensor products. Extend both source factors through sheafification by local representatives: separatedness of the target identifies values on different representatives and overlaps. The tensor sheaf universal property gives psi and the required pure-wedge formula.",
+   "text": "Verify restriction compatibility on two pure wedges, using the defining restriction formula of exteriorSheafRestriction_existsUnique, naturality of f, and naturality of the target sheafification unit. Fin.addCases verifies the two blocks of the concatenated tuple. Apply Submodule.span_induction first to the second exterior factor and then to the first, using exteriorPower.ιMulti_span. Additivity and semilinearity of all restriction maps extend compatibility to arbitrary sections of both exterior presheaves.",
    "uses": [
     "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity ring morphism is locally injective and locally surjective. Apply existsUnique_bilinear_sheafification_extension to the natural bilinear family into the target exterior sheaf, obtaining a natural bilinear family on the two exterior sheaves with its unit equation. Apply tensor_bilinear_universal to obtain the desired tensor-sheaf morphism. Compose its pure-tensor formula, the bilinear extension unit equation, and the sectionwise wedge formula. Substitute t=r+s at the beginning, so Fin.cast ht becomes the identity. No exactness, local freeness, or rank bound is used, and the construction includes empty blocks.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-sheaf-exterior-power"
+  "def-sc-sheaf-exterior-power",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
  ],
  "proof_origin": {
-  "by": "agent H2",
+  "by": "worker M1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts; explicit details following the preserved determinant proof in lem-sc-determinant-wedge-morphism"
+  "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
+  "note": "The sectionwise bilinear map is explicit exterior-algebra multiplication. The descent and tensor universal properties use the already-proved generic library declarations; no change to the determinant argument or unit route."
  },
  "mathlib_searches": [
   {
@@ -114,10 +125,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T004024-L-2491292",
-  "kind": "interface",
+  "landing": "20261013T031544-L-3571982",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
