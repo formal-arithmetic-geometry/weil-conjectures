@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenStageData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenStageMaps
 
 /-! # Local presentations of shifted open Hom systems
 
@@ -97,6 +99,25 @@ theorem perfect_hom_open_stage_presentation
           perfectStageMap R s' j.property hjl (e j f)) ∧
       (∀ (j : Set.Ici i) (f : P ⟶ (H.obj (F.obj j))⟦n⟧),
         b (f ≫ (H.map (d.ι.app j))⟦n⟧') =
-          perfectLimitMap R c s' j.property (e j f)) := by sorry
+          perfectLimitMap R c s' j.property (e j f)) := by
+  classical
+  dsimp
+  let B := t ⁻¹ᵁ W
+  have hcomp : QuasiCompact (t ≫ s₀) := hs ▸ inferInstance
+  have : QuasiCompact t := QuasiCompact.of_comp t s₀
+  have hB : IsCompact (B : Set Y) := t.isCompact_preimage hW
+  let : CompactSpace B.toScheme := isCompact_iff_compactSpace.mp hB
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated s
+  have : QuasiCompact B.ι := inferInstance
+  obtain ⟨hcat, hp', hq'⟩ := Scheme.perfect_hom_open_stage_data Y B P Q hP hQ n
+  let := hcat
+  refine ⟨B.toScheme, B.ι ≫ t, inferInstance, ?_, B.ι ≫ s, ?_,
+    inferInstance, inferInstance, inferInstance, hcat,
+    ((schemeMVDerivedRestriction Y B).obj P)⟦-n⟧,
+    (schemeMVDerivedRestriction Y B).obj Q, hp', hq', ?_⟩
+  · rw [Scheme.Hom.opensRange_comp, Scheme.Opens.opensRange_ι,
+      Scheme.Hom.image_preimage_eq_opensRange_inf, inf_eq_right.mpr ht]
+  · rw [hs, Category.assoc]
+  · exact perfect_hom_open_stage_maps R c i X s₀ W hW Y t ht s hs P Q hP hQ F d h n
 
 end AlgebraicGeometry

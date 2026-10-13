@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-perfect-hom-open-stage-data",
+ "kind": "lemma",
+ "title": "Geometric and perfect-object data for an open stage",
+ "statement": "For any open B of Y and perfect P,Q, construct localized derived categories on B.toScheme and prove that the specified exact restriction of Q and the shift by -n of the exact restriction of P are perfect. The global derived categories and localized categories on Y are supplied; the open categories are constructed by transport along Modules.overEquiv. [def-pc-derived-category, def-pc-perfect-complex, def-pc-derived-mayer-vietoris-canonical-data].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09UA; Cohomology of Sheaves Tag 08CM"
+ },
+ "proof": [
+  {
+   "text": "For each open T of B.toScheme, transport the supplied localization on T.toScheme along the exact Modules.overEquiv T: use the mapped complex equivalence followed by Q as localization. This is a fully proved private helper copied from PerfectRestrictionClassesSmall; no unproved existence theorem supplies data.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction is derived pullback by left-derived uniqueness and restrictFunctorIsoPullback. Apply derivedPullback_preserve_perfect to P and Q and transport the resulting local models across the comparison. Shift P′ by -n using the same local retract models with translated finite bounds.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "def-pc-perfect-complex",
+    "def-pc-derived-mayer-vietoris-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "def-pc-perfect-complex",
+  "lem-pc-derived-pullback-perfect"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09UA; proved using derivedPullback_preserve_perfect, exact derived uniqueness, and explicit localization transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*restrict|restrict.*perfect",
+   "results": "Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean, Mathlib/LinearAlgebra/RootSystem/BaseChange.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "verdict": "no exact match; generic comparison APIs reused",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived restriction to an open subscheme preserves perfect complexes and integer shifts",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "verdict": "no exact match; generic comparison APIs reused",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "verdict": "no exact match; generic comparison APIs reused",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact derived restriction to an open subscheme preserves perfect complexes and integer shifts",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomOpenStagePresentation",
+  "date": "2026-10-14",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-hom-open-stage-presentation"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomOpenStageData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomOpenStageData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_hom_open_stage_data",
+  "statement": "theorem perfect_hom_open_stage_data\n    (Y : Scheme.{u})\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ B : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over B))]\n    (B : Y.Opens) (P Q : schemeDerivedCategory Y)\n    (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q) (n : ℤ) :\n    ∃ hcat : ∀ T : B.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings B.toScheme.toRingedSpace).over T)),\n      let := hcat\n      B.toScheme.IsPerfect (((schemeMVDerivedRestriction Y B).obj P)⟦-n⟧) ∧\n      B.toScheme.IsPerfect ((schemeMVDerivedRestriction Y B).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T211121-L-397718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T211121-L-397718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
