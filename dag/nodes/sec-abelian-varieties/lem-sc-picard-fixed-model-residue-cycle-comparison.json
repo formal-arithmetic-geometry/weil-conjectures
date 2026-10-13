@@ -1,0 +1,194 @@
+{
+ "id": "lem-sc-picard-fixed-model-residue-cycle-comparison",
+ "kind": "statement",
+ "title": "Picard fixed models: geometric comparison restricted to target cycles",
+ "statement": "Let f:X to S and fi:Xi to S, i in Fin n, be flat proper locally of finite presentation, with ui:Xi to X over S. Assume the structure adjunction unit of f is universally an isomorphism. Let L be invertible, k:W to S an immersion, w in an affine open U of W, s=k(w), and suppose L_s descends from a finite locally free module on Spec kappa(s). Supply trivializations of each ui-pullback coefficient over Xi times S U. Supply a connective strictly perfect source model K of Rf_W L_W, a basis e1 of its degree-one sections of rank m, and connective strictly perfect target models C_i of Rfi_W(ui^*L)_W, with C_i.d(0,1)=0. With p the kernel of evaluation A=Gamma(W,U) to kappa(w), assume all source section differentials vanish after tensoring with kappa(p). Let Z_i be the kernel of the target residue section differential in degree one. There exist alpha:kappa(p) tensor A^m additively equivalent to H^1(X_s,O), derived arrows a_i:Q(K) to Q(C_i), and additive maps beta_i:Z_i to H^1(Xi_s,O). For every i, every chain representative phi of a_i, and every z in the source coordinate tensor, the residue of Gamma(phi^1) composed with e1 inverse sends z into Z_i, and beta_i of this cycle is ui_s pullback of alpha(z). No map from the entire degree-one target term, no projection onto Z_i, and no product gamma is asserted. Geometry and model notions are [def-pc-base-change, def-pc-derived-category, def-pc-derived-direct-image, def-pc-module-pullback, def-pc-perfect-complex, def-sbc-locally-finite-presentation, def-sc-invertible-module, def-sc-structure-sheaf-cohomology-pullback, def-weil-flat-morphism, def-weil-proper-morphism, def-weil-residue-field, def-amb-finite-locally-free-module, lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "Stacks Project, More on Morphisms and Derived Categories of Schemes",
+  "place": "Tag 0BF2, functoriality of E to E_i and pullback of the source fibre trivialization; Tag 0B91, arbitrary derived base change"
+ },
+ "proof": [
+  {
+   "text": "Construct the canonical derived coefficient pullback arrow for each ui, restrict to U and conjugate using the supplied model isomorphisms. Naturality of the adjunction mate and derived base change gives the same residue arrow for every chain representative.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the universal structure unit at Spec kappa(s). An empty fibre would make its pushforward structure module zero, contradicting the nonzero field structure module. The descended finite locally free module has invertible pullback on this nonempty fibre; field pullback rank-one triviality gives its trivialization. Pull back this single trivialization to every target.",
+   "uses": [
+    "lem-sc-field-pullback-rank-one-trivial",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bounded flat models compute derived residue tensor. The affine residue point identifies kappa(p) with kappa(w); the immersion identifies kappa(w) with kappa(s). Base change and affine cohomology comparison identify source model residue homology with H^1(X_s,O). Source minimality identifies degree-one homology with its full degree-one term. Tensor e1 inverse and compose to obtain alpha. Since the target incoming differential is zero, its degree-one homology is its outgoing kernel Z_i, giving beta_i there.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-cohomology-sections-affine-base",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chain-map equation and the zero source residue differential put each degree-one image in Z_i. Naturality of localization, derived base change and the affine cohomology comparison identify beta_i of this cycle with the structure-sheaf cohomology pullback of alpha(z). The common source coefficient trivialization makes all coefficient maps compatible.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-pc-cohomology-sections-affine-base",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-residue-field",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-field-pullback-rank-one-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-14",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0BF2 functoriality of coefficients and Tag 0B91 derived base change; restriction to degree-one cycles before linear extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "picard_fixed_model",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact affine residue model statement; use the listed algebraic tools."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_comp|linearProjOfIsCompl|exists_isCompl",
+   "results": "25 hits: Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+   "date": "2026-10-14",
+   "verdict": "General projection and base-change tools exist; no geometric residue comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.linearProjOfIsCompl",
+   "results": "1 hits: Submodule.linearProjOfIsCompl",
+   "date": "2026-10-14",
+   "verdict": "No exact affine residue model statement; use the listed algebraic tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strictly perfect affine complex residue cohomology natural pullback geometric fibre comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+   "date": "2026-10-14",
+   "verdict": "No exact affine residue model statement; use the listed algebraic tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine strictly perfect complex term ranks equal derived residue Betti numbers imply zero residue differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_homology_add_finrank_range|residue.*homology|homology.*residue",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact affine residue model statement; use the listed algebraic tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback natural comparison from first residue cycles of a perfect affine direct image model to geometric fibre structure sheaf cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine free complex term dimensions equal residue homology dimensions all differentials zero",
+   "results": "8 hits: HomologicalComplex.Acyclic, HomologicalComplex.toCycles_eq_zero, HomologicalComplex.isZero_single_obj_homology, ChainComplex.alternatingConstHomologyDataZero, ChainComplex.alternatingConst_exactAt, ChainComplex.exactAt_succ_single_obj, HomologicalComplex.acyclic_of_isZero, HomologicalComplex.acyclic_iff",
+   "date": "2026-10-14",
+   "verdict": "No exact affine residue model statement; use the listed algebraic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardFixedModelResidueDerivedComparison",
+  "date": "2026-10-14",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 fixed source residue model and functorial H-one comparison, before extending cycle maps to target terms",
+   "via": [
+    "lem-sc-picard-fixed-model-residue-derived-comparison",
+    "lem-sc-picard-fixed-model-residue-chain-comparison",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardFixedModelResidueCycleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFixedModelResidueCycleComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_fixed_model_residue_cycle_comparison",
+  "statement": "theorem picard_fixed_model_residue_cycle_comparison [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N)) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (htrivial : ∀ i, Nonempty ((Modules.tensorPullback (pullback.fst (fi i) (U.ι ≫ k))).obj ((Modules.tensorPullback (ui i)).obj L) ≅ SheafOfModules.unit (pullback (fi i) (U.ι ≫ k)).ringCatSheaf)) (m : ℕ) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hnegative : ∀ j : ℤ, j < 0 → IsZero (K.X j)) (e1 : (K.X 1).val.obj (.op (Over.mk (𝟙 U))) ≃ₗ[Γ(W, U)] (Fin m → Γ(W, U))) (hE : Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K)) (C : Fin n → CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hC : ∀ i, IsStrictlyPerfect W U (C i)) (hCnegative : ∀ i j, j < 0 → IsZero ((C i).X j)) (hCzero : ∀ i, (C i).d 0 1 = 0) (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) (hreszero : let p := RingHom.ker (W.evaluation U w hwU).hom letI : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom ∀ j : ℤ, (show (K.X j).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)] (K.X (j + 1)).val.obj (.op (Over.mk (𝟙 U))) from ((K.d j (j + 1)).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField = 0) : let p := RingHom.ker (W.evaluation U w hwU).hom letI : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom let Z := fun i ↦ LinearMap.ker ((show ((C i).X 1).val.obj (.op (Over.mk (𝟙 U))) →ₗ[Γ(W, U)] ((C i).X 2).val.obj (.op (Over.mk (𝟙 U))) from (((C i).d 1 2).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField) ∃ (α : (p.ResidueField ⊗[Γ(W, U)] (Fin m → Γ(W, U))) ≃+ Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) (a : ∀ i, DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj (C i)) (β : ∀ i, Z i →+ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1), ∀ i (φ : K ⟶ C i), DerivedCategory.Q.map φ = a i → let b := (((φ.f 1).val.app (.op (Over.mk (𝟙 U)))).hom).comp e1.symm.toLinearMap ∀ z, ∃ hz : b.baseChange p.ResidueField z ∈ Z i, β i ⟨b.baseChange p.ResidueField z, hz⟩ = structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 (α z)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T201805-L-3975661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T201805-L-3975661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

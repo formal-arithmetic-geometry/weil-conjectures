@@ -19,9 +19,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.AffineBettiModelResidueMinimality
+import Sheaf.AlgebraicGeometry.PicardFixedModelResidueCycleComparison
+import Sheaf.LinearAlgebra.ResidueCycleProductComparison
 /-! # Fixed-affine models used in the Picard comparison
 
 Source: Stacks Project, Tag 0BF2.
@@ -35,6 +35,10 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 600000 in
+-- The derived model signatures require substantial elaboration of pullback functors.
 /-- Derived arrows and compatible residue identifications for the fixed Picard models.
 Source: Stacks Project, Tag 0BF2; Tags 08CR and 0B91.
 (blueprint: lem-sc-picard-fixed-model-residue-derived-comparison)
@@ -132,6 +136,64 @@ theorem picard_fixed_model_residue_derived_comparison
         structureSheafCohomologyPullback
           (((Over.pullback (S.fromSpecResidueField s)).map
             (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-              (ui i) (hui i))).left) 1 (α z) := by sorry
+              (ui i) (hui i))).left) 1 (α z) := by
+  classical
+  let p := RingHom.ker (W.evaluation U w hwU).hom
+  let : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
+  have hreszero := affine_betti_model_residue_minimality W
+    ((schemeDerivedDirectImage (pullback.snd f k)).obj
+      ((DerivedCategory.singleFunctor
+        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
+          ((Modules.tensorPullback (pullback.fst f k)).obj L)))
+    w U hwU hU K hK.1 hrank hE
+  let : Module Γ(W, U) ((K.X 1).val.obj (.op (Over.mk (𝟙 U)))) := inferInstance
+  let : Module Γ(W, U)
+      (∀ i, ((C i).X 1).val.obj (.op (Over.mk (𝟙 U)))) := inferInstance
+  let comparison := picard_fixed_model_residue_cycle_comparison
+    f Xi fi ui hui hO L W k w s hw hLs U hwU hU htrivial m K hK hnegative
+    e1 hE C hC hCnegative hCzero hCi hreszero
+  let α := Classical.choose comparison
+  have ca := Classical.choose_spec comparison
+  let a := Classical.choose ca
+  have cb := Classical.choose_spec ca
+  let β := Classical.choose cb
+  have hβ := Classical.choose_spec cb
+  let M : Fin n → Type v := fun i ↦ ((C i).X 1).val.obj (.op (Over.mk (𝟙 U)))
+  let : ∀ i, AddCommGroup (M i) := fun i ↦ inferInstance
+  let : ∀ i, Module Γ(W, U) (M i) := fun i ↦ inferInstance
+  let Z : ∀ i, Submodule p.ResidueField (p.ResidueField ⊗[Γ(W, U)] M i) :=
+    fun i ↦ LinearMap.ker
+      ((show M i →ₗ[Γ(W, U)] ((C i).X 2).val.obj (.op (Over.mk (𝟙 U))) from
+        (((C i).d 1 2).val.app (.op (Over.mk (𝟙 U)))).hom).baseChange p.ResidueField)
+  let H : Fin n → Type v := fun i ↦ Sheaf.H.{v, v, v, v}
+    (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1
+  let : ∀ i, AddCommGroup (H i) := fun i ↦ inferInstance
+  let : ∀ i, Module Γ(W, U) (M i) := fun i ↦ inferInstance
+  let β' : ∀ i, Z i →+ H i := β
+  let A : Type v := Γ(W, U)
+  let κ : Type v := p.ResidueField
+  let cA : CommRing A := inferInstance
+  let cκ : Field κ := inferInstance
+  let aκ : Algebra A κ := inferInstance
+  let cM : ∀ i, AddCommGroup (M i) := fun i ↦ inferInstance
+  let mM : ∀ i, Module A (M i) := fun i ↦ inferInstance
+  let cH : ∀ i, AddCommGroup (H i) := fun i ↦ inferInstance
+  let b : ∀ i, (K ⟶ C i) → (Fin m → Γ(W, U)) →ₗ[Γ(W, U)] M i :=
+    fun i φ ↦ ((φ.f 1).val.app (.op (Over.mk (𝟙 U)))).hom.comp e1.symm.toLinearMap
+  let h : ∀ i, (K ⟶ C i) → Prop := fun i φ ↦ DerivedCategory.Q.map φ = a i
+  let c : ∀ i, (p.ResidueField ⊗[Γ(W, U)] (Fin m → Γ(W, U))) → H i :=
+    fun i z ↦ structureSheafCohomologyPullback
+      (((Over.pullback (S.fromSpecResidueField s)).map
+        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+          (ui i) (hui i))).left) 1 (α z)
+  have hc : ∀ i φ, h i φ → ∀ z, ∃ hz : (b i φ).baseChange p.ResidueField z ∈ Z i,
+      β' i ⟨(b i φ).baseChange p.ResidueField z, hz⟩ = c i z := hβ
+  have ex := @residue_cycle_product_comparison A κ cA cκ aκ
+    (Fin n) (Fin m → A) inferInstance inferInstance (fun i ↦ M i) cM mM
+    H cH (fun i ↦ K ⟶ C i) Z β' b h c hc
+  let γ := Classical.choose ex
+  have hγ := Classical.choose_spec ex
+  exact ⟨α, a, γ, hγ⟩
+
 
 end AlgebraicGeometry.Scheme
