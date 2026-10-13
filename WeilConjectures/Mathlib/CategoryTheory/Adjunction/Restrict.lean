@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-!
 # Mates of restricted adjunctions
@@ -26,6 +27,8 @@ the restriction of the mate of `α`.
   `CategoryTheory.Adjunction.map_restrictFullyFaithful_ofNatIsoLeft_counit_app`: the unit and the
   counit of a restriction of an adjunction transported along an isomorphism of left adjoints, in
   the form required by `CategoryTheory.map_mateEquiv_app_of_restrict`.
+- `CategoryTheory.ObjectProperty.liftFullSubcategoryAdjunction`: an adjunction `L ⊣ R` restricts
+  to full subcategories `P` and `Q` preserved by `L` and `R`, with the same unit and counit.
 -/
 
 @[expose] public section
@@ -119,3 +122,48 @@ lemma map_restrictFullyFaithful_ofNatIsoLeft_counit_app (adj : L ⊣ R) (e : L �
 end Adjunction
 
 end CategoryTheory
+universe v v' u u'
+
+open CategoryTheory
+
+namespace CategoryTheory.ObjectProperty
+
+variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+  {P : ObjectProperty C} {Q : ObjectProperty D} {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+  (hL : ∀ X, P X → Q (L.obj X)) (hR : ∀ Y, Q Y → P (R.obj Y))
+
+/-- An adjunction `L ⊣ R` restricts to full subcategories `P` and `Q` preserved by `L` and `R`,
+with the same unit and counit. -/
+def liftFullSubcategoryAdjunction :
+    P.liftFullSubcategory Q L hL ⊣ Q.liftFullSubcategory P R hR :=
+  Adjunction.mkOfUnitCounit
+    { unit :=
+        { app X := P.homMk (adj.unit.app X.obj)
+          naturality _ _ f := P.hom_ext (adj.unit.naturality f.hom) }
+      counit :=
+        { app Y := Q.homMk (adj.counit.app Y.obj)
+          naturality _ _ f := Q.hom_ext (adj.counit.naturality f.hom) }
+      left_triangle := NatTrans.ext (funext fun X ↦ Q.hom_ext (by
+        simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+          Functor.associator_hom_app, FullSubcategory.comp_hom,
+          liftFullSubcategory_map, homMk_hom, Category.id_comp]
+        exact adj.left_triangle_components X.obj))
+      right_triangle := NatTrans.ext (funext fun Y ↦ P.hom_ext (by
+        simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+          Functor.associator_inv_app, FullSubcategory.comp_hom,
+          liftFullSubcategory_map, homMk_hom, Category.id_comp]
+        exact adj.right_triangle_components Y.obj)) }
+
+/-- The unit of `liftFullSubcategoryAdjunction` is the unit of `L ⊣ R`. -/
+@[simp]
+lemma liftFullSubcategoryAdjunction_unit_app_hom (X : P.FullSubcategory) :
+    ((liftFullSubcategoryAdjunction adj hL hR).unit.app X).hom = adj.unit.app X.obj :=
+  rfl
+
+/-- The counit of `liftFullSubcategoryAdjunction` is the counit of `L ⊣ R`. -/
+@[simp]
+lemma liftFullSubcategoryAdjunction_counit_app_hom (Y : Q.FullSubcategory) :
+    ((liftFullSubcategoryAdjunction adj hL hR).counit.app Y).hom = adj.counit.app Y.obj :=
+  rfl
+
+end CategoryTheory.ObjectProperty

@@ -9,9 +9,12 @@ public import Mathlib.RepresentationTheory.Coinvariants
 public import Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
+public import WeilConjectures.WeilSheaf.Curve
 
 /-!
 # The ingredients of the Rankin–Selberg bound
@@ -40,10 +43,11 @@ is used here in its place. The numerator `det (1 - F T ∣ H_c¹ (U, ℱ))` of t
 asserted to be some polynomial, which is all that the Rankin–Selberg argument uses.
 
 The Euler product identity `AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` is the
-Grothendieck–Lefschetz trace formula for the lisse sheaf attached to a representation of the
-Weil group of the étale fundamental group (`AlgebraicGeometry.WeilGroup`), which is not
-available. It needs `ℓ ≠ char 𝔽_q`: for `ℓ = p` the `L`-function of a `p`-adic character of
-infinite geometric image, such as that of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
+Grothendieck–Lefschetz trace formula for the lisse Weil sheaf attached to the representation
+(`AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse`), in the sheaf form
+`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`. It needs `ℓ ≠ char 𝔽_q`:
+for `ℓ = p` the `L`-function of a `p`-adic character of infinite geometric image, such as that
+of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
 
 ## Main definitions
 
@@ -118,8 +122,8 @@ theorem sq_mem_localEigenvalues_tprod_self {x : C.finitePoints} {α : PadicAlgCl
     (show (α, α) ∈ _ ×ˢ _ from Multiset.mem_product.2 ⟨hα, hα⟩)
 
 /-- Mapping the pairwise products of two multisets along a ring homomorphism. -/
-private theorem map_map_product_mul {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S)
-    (s t : Multiset R) :
+theorem _root_.Multiset.map_map_product_mul {R S : Type*} [CommRing R] [CommRing S]
+    (f : R →+* S) (s t : Multiset R) :
     ((s ×ˢ t).map fun a ↦ a.1 * a.2).map f = ((s.map f) ×ˢ (t.map f)).map fun a ↦ a.1 * a.2 := by
   induction s using Multiset.induction_on with
   | empty => simp
@@ -133,7 +137,7 @@ local eigenvalues consists of the pairwise products of two conjugation-stable mu
 theorem IsReal.tprod (hρ : W.IsReal l ρ ι) (hσ : W.IsReal l σ ι) :
     W.IsReal l (ρ.tprod σ) ι := by
   refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
-  rw [localEigenvalues_tprod, map_map_product_mul, map_map_product_mul,
+  rw [localEigenvalues_tprod, Multiset.map_map_product_mul, Multiset.map_map_product_mul,
     hρ.map_conj_localEigenvalues, hσ.map_conj_localEigenvalues]
 
 /-- The tensor square `ℱ ⊗ ℱ` of a sheaf with weights at most `β` has weights at most `2 β`. -/
@@ -231,7 +235,8 @@ open scoped ComplexOrder
 
 /-- The power sums of the pairwise products of two multisets are the products of their power
 sums. -/
-private theorem sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Multiset R) (n : ℕ) :
+theorem _root_.Multiset.sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Multiset R)
+    (n : ℕ) :
     ((((s ×ˢ t).map fun a ↦ a.1 * a.2)).map (· ^ n)).sum =
       (s.map (· ^ n)).sum * (t.map (· ^ n)).sum := by
   induction s using Multiset.induction_on with
@@ -242,35 +247,26 @@ private theorem sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Mult
     congr 1
     simp [Multiset.map_map, mul_pow, Multiset.sum_map_mul_left]
 
-/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive.
-
-If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
-square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
-`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
-`AlgebraicGeometry.WeilGroup.IsReal.tprod`. The blueprint states this for all even tensor
-powers; the Rankin–Selberg argument here only uses tensor squares, iterated.
-
-Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
-`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
-eigenvalue multiset of `ℱ` is stable under complex conjugation, and the formal identity
-`det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`
+/-- An inverse local factor `ι P_x (σ, T ^ e_x)⁻¹` has nonnegative real coefficients as soon as
+all power sums `∑ (ι α) ^ n` of the complex local eigenvalues of `σ` at `x` are nonnegative:
+the formal identity `det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`
 (`PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg`) turns nonnegative power sums into
-nonnegative coefficients. Substituting `T ^ e_x` for `T` preserves nonnegativity. -/
-theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
-    (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
+nonnegative coefficients, and substituting `T ^ e_x` for `T` preserves nonnegativity. -/
+theorem hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg (x : C.finitePoints)
+    (hsum : ∀ n : ℕ, 0 ≤ (((W.localEigenvalues l σ x).map ι).map (· ^ n)).sum) :
+    (W.eulerFactor l σ ι x).HasNonnegCoeffs := by
   set e := p.degreeOver x.1
   have he : e ≠ 0 := p.degreeOver_ne_zero x.2
-  set A := (W.localEigenvalues l ρ x).map ι
-  set M := (W.localEigenvalues l (ρ.tprod ρ) x).map ι
+  set M := (W.localEigenvalues l σ x).map ι
   set P : ℂ⟦X⟧ := (M.map fun c ↦ 1 - PowerSeries.C c * X).prod
   have hP : constantCoeff P = 1 := by
     simp only [P, map_multiset_prod, Multiset.map_map]
     exact Multiset.prod_eq_one fun a ha ↦ by
       obtain ⟨c, -, rfl⟩ := Multiset.mem_map.1 ha
       simp
-  have hcoe : (((W.localPolynomial l (ρ.tprod ρ) x).map ι).comp (Polynomial.X ^ e) : ℂ⟦X⟧) =
+  have hcoe : (((W.localPolynomial l σ x).map ι).comp (Polynomial.X ^ e) : ℂ⟦X⟧) =
       expand e he P := by
-    have hQ : (((W.localPolynomial l (ρ.tprod ρ) x).map ι : Polynomial ℂ) : ℂ⟦X⟧) = P := by
+    have hQ : (((W.localPolynomial l σ x).map ι : Polynomial ℂ) : ℂ⟦X⟧) = P := by
       rw [map_localPolynomial, ← Polynomial.coeToPowerSeries.ringHom_apply, map_multiset_prod,
         Multiset.map_map]
       exact congrArg _ (Multiset.map_congr rfl fun c _ ↦ by simp)
@@ -278,26 +274,48 @@ theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
     rw [Polynomial.coeff_coe, ← Polynomial.expand_eq_comp_X_pow,
       Polynomial.coeff_expand (Nat.pos_of_ne_zero he), PowerSeries.coeff_expand, ← hQ]
     split_ifs <;> simp [Polynomial.coeff_coe]
-  have hinv : W.eulerFactor l (ρ.tprod ρ) ι x = expand e he P⁻¹ := by
+  have hinv : W.eulerFactor l σ ι x = expand e he P⁻¹ := by
     rw [eulerFactor, hcoe]
     refine ((PowerSeries.eq_inv_iff_mul_eq_one (by simp [hP])).2 ?_).symm
     rw [← map_mul, PowerSeries.inv_mul_cancel _ (by simp [hP]), map_one]
-  -- the power sums of `M` are squares of real numbers
-  have hsum (n : ℕ) : 0 ≤ (M.map (· ^ n)).sum := by
-    have hM : M = (A ×ˢ A).map fun a ↦ a.1 * a.2 := by
-      simp only [M, A, localEigenvalues_tprod, map_map_product_mul]
-    have hA : A.map (starRingEnd ℂ) = A := hρ.map_conj_localEigenvalues ι x
-    have ht : (starRingEnd ℂ) (A.map (· ^ n)).sum = (A.map (· ^ n)).sum := by
-      conv_rhs => rw [← hA]
-      simp [map_multiset_sum, Multiset.map_map]
-    rw [hM, sum_map_pow_map_product_mul, ← Complex.conj_eq_iff_re.1 ht, ← Complex.ofReal_mul]
-    exact Complex.zero_le_real.2 (mul_self_nonneg _)
   rw [hinv, hasNonnegCoeffs_iff]
   intro n
   rw [PowerSeries.coeff_expand]
   split_ifs
   · exact coeff_inv_prod_one_sub_C_mul_X_nonneg M (fun n _ ↦ hsum n) _
   · exact le_rfl
+
+/-- The power sums of the complex local eigenvalues of an `ι`-real representation are real. -/
+theorem IsReal.conj_sum_map_pow_localEigenvalues (hρ : W.IsReal l ρ ι) (x : C.finitePoints)
+    (n : ℕ) : (starRingEnd ℂ) (((W.localEigenvalues l ρ x).map ι).map (· ^ n)).sum =
+      (((W.localEigenvalues l ρ x).map ι).map (· ^ n)).sum := by
+  have hA : ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
+      (W.localEigenvalues l ρ x).map ι := hρ.map_conj_localEigenvalues ι x
+  conv_rhs => rw [← hA]
+  simp [map_multiset_sum, Multiset.map_map]
+
+/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive,
+for the tensor square.
+
+If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
+square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
+`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
+`AlgebraicGeometry.WeilGroup.IsReal.tprod`. The case of all even tensor powers is
+`AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower`; the Rankin–Selberg
+argument here only uses tensor squares, iterated.
+
+Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
+`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
+eigenvalue multiset of `ℱ` is stable under complex conjugation
+(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
+    (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
+  refine hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg ι x fun n ↦ ?_
+  rw [localEigenvalues_tprod, Multiset.map_map_product_mul,
+    Multiset.sum_map_pow_map_product_mul,
+    ← Complex.conj_eq_iff_re.1 (hρ.conj_sum_map_pow_localEigenvalues ι x n),
+    ← Complex.ofReal_mul]
+  exact Complex.zero_le_real.2 (mul_self_nonneg _)
 
 end Positivity
 
@@ -445,6 +463,7 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
   field_simp
   ring
 
+open scoped PowerSeries.WithPiTopology in
 /-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on it.
@@ -456,13 +475,61 @@ is only recorded as some polynomial `P`.
 
 This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
 together with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`) and the coinvariant description of
-`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`. It needs the trace formula, which is not
-available; see the implementation notes. -/
+`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`, applied to the lisse Weil sheaf attached to `ρ`
+(`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`). -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *
       (((W.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ) = P := by
-  sorry
+  classical
+  let _ : C.Over (Spec (.of K)) := ⟨p⟩
+  have _ : IsCurve (C ↘ Spec (.of K)) := ‹IsCurve p›
+  have _ : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
+  have _ : GeometricallyConnected (C ↘ Spec (.of K)) := ‹GeometricallyConnected p›
+  obtain ⟨F, hF, hst, f, hf⟩ := exists_weilSheaf_of_isLisse (W := W) hρ
+  obtain ⟨e₂⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two F hF
+  -- the Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)` is `compactTopFrobenius`
+  have hq : ((Nat.card K : PadicAlgCl l) ^ (-(-1 : ℤ))) ≠ 0 :=
+    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
+  have h₂ : (F.compactlySupportedCohomology 2).localPolynomial =
+      (W.compactTopFrobenius l ρ).charpolyRev := by
+    rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+      ← e₂.charpoly_frobeniusEnd]
+    refine congrArg _ (LinearMap.charpoly_eq_of_comp_eq f (LinearMap.ext fun v ↦ ?_))
+    have key := FrobeniusModule.frobeniusEnd_rescale_apply (M := F.geometricCoinvariants hF) hq v
+    rw [LinearMap.comp_apply, LinearMap.comp_apply]
+    refine (congrArg f key).trans ?_
+    rw [map_smul, FrobeniusModule.frobeniusEnd_apply, hf, compactTopFrobenius,
+      LinearMap.smul_apply, neg_neg, zpow_one]
+    rfl
+  -- the Euler product converges to `ι (det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²))`
+  have hprod : HasProd (W.eulerFactor l ρ ι) (PowerSeries.map ι
+      (((F.compactlySupportedCohomology 1).localPolynomial : PowerSeries (PadicAlgCl l)) *
+        ((F.compactlySupportedCohomology 2).localPolynomial : PowerSeries (PadicAlgCl l))⁻¹)) := by
+    rw [HasProd, PowerSeries.WithPiTopology.tendsto_iff_coeff_tendsto]
+    intro n
+    refine tendsto_nhds_of_eventually_eq ?_
+    filter_upwards [Filter.eventually_ge_atTop (p.finite_setOf_degreeOver_le n).toFinset]
+      with s hs
+    rw [PowerSeries.coeff_map, ← WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq F hF n s
+      fun x hx ↦ hs ((p.finite_setOf_degreeOver_le n).mem_toFinset.2 hx), ← PowerSeries.coeff_map,
+      map_prod (PowerSeries.map ι)]
+    refine congrArg (PowerSeries.coeff n) (Finset.prod_congr rfl fun x _ ↦ ?_)
+    have hx : (F.stalk x).localPolynomial = W.localPolynomial l ρ x := by
+      rw [FrobeniusModule.localPolynomial, localPolynomial, LinearMap.charpolyRev_def,
+        LinearMap.charpolyRev_def, hst x]
+    rw [eulerFactor, PowerSeries.map_inv, ← Polynomial.polynomial_map_coe, hx,
+      Polynomial.map_comp, Polynomial.map_pow, Polynomial.map_X]
+    rfl
+  refine ⟨(F.compactlySupportedCohomology 1).localPolynomial.map ι, ?_⟩
+  have h₀ : PowerSeries.constantCoeff
+      ((F.compactlySupportedCohomology 2).localPolynomial : PowerSeries (PadicAlgCl l)) ≠ 0 := by
+    rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+      FrobeniusModule.localPolynomial, LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  rw [eulerSeries, hprod.tprod_eq, ← h₂, Polynomial.polynomial_map_coe,
+    Polynomial.polynomial_map_coe, ← map_mul, mul_assoc, PowerSeries.inv_mul_cancel _ h₀,
+    mul_one]
 
 end TopCohomology
 
