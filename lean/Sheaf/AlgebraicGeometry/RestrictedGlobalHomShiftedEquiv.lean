@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.AlgebraicGeometry.GlobalHomShiftedHypercohomology
 
 /-! # Shifted Hom as cohomology of restricted global derived Hom
 Source: Stacks Project, Cohomology on Sites, Tag 08JA; Cohomology, Tag 0B6A.
@@ -18,6 +19,35 @@ set_option autoImplicit false
 universe u w wA
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
+
+private noncomputable def restrictionCohomologyEquiv
+    {A B : Type u} [CommRing A] [CommRing B]
+    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
+    [HasDerivedCategory.{wA} (ModuleCat.{u} B)]
+    (r : A →+* B) (k : ℤ) (K : DerivedCategory (ModuleCat.{u} B)) :
+    ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) k).obj
+      ((ModuleCat.restrictScalars.{u} r).mapDerivedCategory.obj K)) ≃+
+        ((DerivedCategory.homologyFunctor (ModuleCat.{u} B) k).obj K) :=
+  let i :=
+    ((ModuleCat.restrictScalars.{u} r).mapDerivedCategoryHomologyFunctorIso k).symm.app K
+  i.toLinearEquiv.toAddEquiv
+
+private theorem restrictionCohomologyEquiv_naturality
+    {A B : Type u} [CommRing A] [CommRing B]
+    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
+    [HasDerivedCategory.{wA} (ModuleCat.{u} B)]
+    (r : A →+* B) (k : ℤ) {K L : DerivedCategory (ModuleCat.{u} B)} (q : K ⟶ L)
+    (x : ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) k).obj
+      ((ModuleCat.restrictScalars.{u} r).mapDerivedCategory.obj K))) :
+    restrictionCohomologyEquiv r k L
+      (((DerivedCategory.homologyFunctor (ModuleCat.{u} A) k).map
+        ((ModuleCat.restrictScalars.{u} r).mapDerivedCategory.map q)) x) =
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u} B) k).map q)
+        (restrictionCohomologyEquiv r k K x) := by
+  have h :=
+    ((ModuleCat.restrictScalars.{u} r).mapDerivedCategoryHomologyFunctorIso k).inv.naturality q
+  exact congrArg (fun z ↦ z x) h
+
 
 /-- The shifted-Hom/cohomology identification, including the action of a morphism
 in the second entry. Exact scalar restriction changes the ring action, not the
@@ -57,6 +87,30 @@ theorem restrictedGlobalHom_shiftedHom_equiv
             (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) (n - m)).map
               ((schemeGlobalScalarRestriction f).map
                 ((schemeGlobalDerivedHom X).map ((𝟙 P).op, q)))) x) =
-          e P Q m n x ≫ q⟦n⟧' := by sorry
+          e P Q m n x ≫ q⟦n⟧' := by
+  obtain ⟨c, hc⟩ := schemeGlobalHom_shiftedHypercohomology_equiv.{u, w, wA} X
+  obtain ⟨d, hd⟩ := rhom_global_sections.{u, w} (_root_.Opens.grothendieckTopology X)
+    X.sheaf
+  let a (P Q : schemeDerivedCategory X) (m n : ℤ) :=
+    restrictionCohomologyEquiv f.appTop.hom (n - m)
+      ((schemeGlobalDerivedHom X).obj (op P, Q))
+  refine ⟨fun P Q m n ↦ (a P Q m n).trans
+    ((c P Q m n).trans (d (op (P⟦m⟧), Q⟦n⟧))), ?_⟩
+  intro P Q Q' m n q x
+  have ha := restrictionCohomologyEquiv_naturality f.appTop.hom (n - m)
+    ((schemeGlobalDerivedHom X).map
+      (X := (op P, Q)) (Y := (op P, Q')) ((𝟙 P).op, q)) x
+  exact (congrArg (fun z ↦ d (op (P⟦m⟧), Q'⟦n⟧) (c P Q' m n z)) ha).trans
+    ((congrArg (d (op (P⟦m⟧), Q'⟦n⟧))
+      (hc P Q Q' m n q (a P Q m n x))).trans
+        (by
+          have h := hd (op (P⟦m⟧), Q⟦n⟧) (op (P⟦m⟧), Q'⟦n⟧)
+            ((𝟙 (P⟦m⟧)).op, (shiftFunctor (schemeDerivedCategory X) n).map q)
+            (c P Q m n (a P Q m n x))
+          dsimp only at h
+          simp only [Quiver.Hom.unop_op, Category.id_comp] at h
+          simp only [AddEquiv.trans_apply]
+          convert h using 1
+          all_goals rfl))
 
 end AlgebraicGeometry

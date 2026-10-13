@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-global-hom-shifted-hypercohomology",
+ "kind": "statement",
+ "title": "Shifted global Hom cohomology and site hypercohomology comparison",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and $P,Q$ objects of $D(O_X)$ [def-pc-derived-category]. For all integers $m,n$ there are additive equivalences $c:H^{n-m}(R\\Gamma(X,RHom(P,Q)))\\simeq H^0(X,RHom(P[m],Q[n]))$, between the underlying global module cohomology group [def-pc-global-derived-rhom] and site hypercohomology [def-pur-ringed-site-zeroth-hypercohomology, def-pur-derived-internal-hom]. For every $q:Q\\to Q\\prime$ and class $x$, $c_{P,Q\\prime,m,n}(H^{n-m}(R\\Gamma RHom(P,q))(x))=H^0(X,RHom(id_{P[m]},q[n]))(c_{P,Q,m,n}(x))$. No boundedness or quasi-coherence is assumed; sheaf and module localization universes are independent.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, proof of Lemma 21.35.1; cohomology.tex Tag 0B6A, Section 20.44"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom",
+  "def-pur-derived-internal-hom",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat representative L of P and a K-injective representative I of Q. Compute internal Hom by Hom(L,I), independent of choices, using the internal-Hom representative comparison and quasi-isomorphism invariance. The Hom complex is K-injective and hence termwise global sections compute derived global sections.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Shifts preserve K-flatness and K-injectivity by shifting the acyclic test complex in the defining conditions. In degree k, reindex Hom(L[m],I[n]) from p to p+m and multiply by (-1)^(m*k), identifying it with Hom(L,I)[n-m]. The differentials differ before multiplication by (-1)^m; the adjacent-degree factors rectify this. Thus H^0 of shifted global Hom is H^(n-m) of unshifted global Hom, naturally in the second argument.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at 1 gives an additive isomorphism between the underlying group of global sections and Hom_O(O,-); its inverse sends s to multiplication by s. These commute with differentials and sheaf maps. Compute both right derived functors on the K-injective Hom complex and take cohomology. Transport through resolution comparisons; all maps commute with shifted representative morphisms, giving the asserted naturality for derived q.",
+   "uses": [
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "def-pc-global-derived-rhom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JA, proof of Lemma 21.35.1; cohomology.tex Tag 0B6A, Section 20.44"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology global sections internal Hom shifts comparison hypercohomology",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology global derived internal Hom shifts natural additive equivalence derived morphisms",
+   "results": "HomComplex.CohomologyClass.homAddEquiv and toSmallShiftedHom concern abstract Hom-complex groups, not the global-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"homologyFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom.*[Ss]hift|[Ss]hift.*derivedInternalHom|restrictScalars.*[Hh]omology",
+   "results": "No derivedInternalHom shift comparison. Exact scalar restriction homology comparison exists in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor and is used directly in the parent proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match for new comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedGlobalHomShiftedEquiv",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The shifted global RHom cohomology identification: representative shift and global-section comparison, before identifying H^0 with derived morphisms.",
+   "via": [
+    "lem-sc-restricted-global-hom-shifted-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomShiftedHypercohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomShiftedHypercohomology.lean",
+  "declaration": "AlgebraicGeometry.schemeGlobalHom_shiftedHypercohomology_equiv",
+  "statement": "theorem schemeGlobalHom_shiftedHypercohomology_equiv\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]\n    (X : Scheme.{u}) :\n    ∃ c : ∀ (P Q : schemeDerivedCategory X) (m n : ℤ),\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (n - m)).obj\n          ((schemeGlobalDerivedHom X).obj (op P, Q))) ≃+\n        ((ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf).obj\n          ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj\n            (op (P⟦m⟧), Q⟦n⟧))),\n      ∀ (P Q Q' : schemeDerivedCategory X) (m n : ℤ) (q : Q ⟶ Q')\n        (x : ((DerivedCategory.homologyFunctor\n          (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (n - m)).obj\n            ((schemeGlobalDerivedHom X).obj (op P, Q)))),\n        c P Q' m n\n          (((DerivedCategory.homologyFunctor\n            (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) (n - m)).map\n              ((schemeGlobalDerivedHom X).map ((𝟙 P).op, q))) x) =\n          (ringedSiteZerothHypercohomology (Opens.grothendieckTopology X) X.sheaf).map\n            ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map\n              ((𝟙 (P⟦m⟧)).op, q⟦n⟧')) (c P Q m n x)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2463950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T100010-L-2463950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

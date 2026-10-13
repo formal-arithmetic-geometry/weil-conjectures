@@ -14,25 +14,35 @@
  ],
  "proof": [
   {
-   "text": "Compute internal RHom using a K-flat source and K-injective target. Apply the natural global RHom/derived Hom identification to the shifted representatives. Degree n-m cocycles modulo boundaries are maps P[m] to Q[n].",
-   "uses": [
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false
+   "text": "Apply the inverse cohomology component of ModuleCat.restrictScalars(f.appTop.hom).mapDerivedCategoryHomologyFunctorIso (n-m). Its linear equivalence gives an additive equivalence a from restricted cohomology to the underlying unrestricted cohomology group. Naturality follows by applying the inverse natural transformation equation to x.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Exact scalar restriction leaves the underlying group unchanged and commutes with cohomology. Postcomposition with q commutes with the representative maps, shifts and localization, giving the asserted naturality.",
-   "uses": [],
+   "text": "Apply the shifted global-section/hypercohomology comparison c to P,Q,m,n. Apply rhom_global_sections on the small opens site of X, with structure sheaf X.sheaf, to obtain d. Define e = a.trans (c.trans d), evaluating d on (P[m],Q[n]).",
+   "uses": [
+    "lem-sc-global-hom-shifted-hypercohomology",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose naturality of a with c and d by congrArg; compose naturality of c with d; specialize naturality of d to (id_(P[m]).op,q[n]). Precomposition by the identity disappears, giving e(x) ≫ q[n]. Combine by equality transitivity.",
+   "uses": [
+    "lem-sc-global-hom-shifted-hypercohomology",
+    "lem-pur-rhom-global-sections"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-global-hom-shifted-hypercohomology",
   "lem-pur-rhom-global-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JA, lemma-internal-hom, global statement; cohomology.tex, Tag 0B6A"
+  "place": "Tag 08JA, proof of Lemma 21.35.1; cohomology.tex Tag 0B6A, Section 20.44"
  },
  "mathlib_searches": [
   {
@@ -124,10 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-f26bb",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T082420-L-1650363",
-  "kind": "interface"
+  "landing": "20261013T100010-L-2463950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
