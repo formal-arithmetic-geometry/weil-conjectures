@@ -12,23 +12,39 @@
  },
  "proof": [
   {
-   "text": "Put T = scalarInverseImage t and u = scalarInverseUnitIso t. For fixed A the components δ_{A,M} form a natural transformation from tensorLeft A followed by T to T followed by tensorLeft (TA), by δ_natural_right. The morphisms φ tensor id form a second natural transformation from tensorLeft (TA) to tensorLeft A'. Apply these transformations termwise to complexes. Exactness of all functors ensures that they descend through quasi-isomorphism localization; the termwise maps commute with shifts. Naturality on the shifted morphism representing b therefore gives T(tensorLeft A b), postcomposed by δ_{A,B} and φ tensor id, equal to δ_{A,1_X} followed by φ tensor id, then tensorLeft A' of Tb, in Ext. Postcompose by A' tensor ψ. Tensor functors preserve degree-zero maps and Ext composition. Insert u.hom followed by u.inv = id at the intermediate factor T1_X: after tensorLeft A', this places u.hom in the source comparison and u.inv before Tb. Associativity of Ext composition gives exactly the displayed formula, with no use of a or p or the first-factor formula. Every inserted map has degree zero. In q=0 the calculation is ordinary δ naturality, tensor bifunctoriality, and u.hom_inv_id; for zero sheaves or empty schemes the same identities hold.",
+   "text": "For exact functors F,G and a natural transformation tau, prove Ext naturality by induction on the degree. In degree zero use mk0_bijective and ordinary naturality. For a positive degree embed the target into its injective object and use covariant_sequence_exact1 and eq_zero_of_injective to write the class as a smaller-degree class composed with the short exact sequence class. Map this composition by F and G, apply extClass_naturality to the short-complex morphism induced by tau, and use the induction hypothesis and associativity. Mathlib GrothendieckAxioms.Sheaf, ModuleCat.AB and GrothendieckCategory.EnoughInjectives supply enough injectives for scalar sheaves.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Specialize exactFunctorCompositionComparison with the identity natural isomorphism to identify mapping by a composite with successive mapping. Form the natural transformation from tensorLeft A followed by inverse image T to T followed by tensorLeft A-prime with components delta(A,M) followed by phi tensor identity. Its naturality is delta_natural_right and whisker_exchange. Apply the preceding Ext naturality to b.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor phi tensor psi into phi tensor identity followed by tensorLeft A-prime applied to psi. Rewrite degree-zero Ext composition and functorial transport, then use the naturality equality. Reassociate the right side until its adjacent degree-zero maps compose; tensorHom_comp_tensorHom and u.hom_inv_id cancel the unit maps. The resulting morphism is delta followed by phi tensor identity, giving the left side. This includes q=0, empty schemes and zero sheaves without extra assumptions.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations"
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "E2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.; second tensor transport. The local literature checkout is absent; official tag pages were read.",
-  "note": "Strict factor of the existing node argument; exact-functor naturality written out through shifted morphisms."
+  "note": "Lean proof: Ext naturality by dimension shifting; existing composition comparison; tensor bifunctoriality and unit cancellation."
  },
  "mathlib_searches": [
   {
@@ -111,10 +127,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T100121-L-2485574",
-  "kind": "interface",
+  "landing": "20261013T113339-L-3182359",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
