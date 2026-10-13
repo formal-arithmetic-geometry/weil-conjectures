@@ -13,39 +13,41 @@
  ],
  "proof": [
   {
-   "text": "For each i put L_i = kernel(p_i then phi restricted to V_i). The composite L_i -> free(I_i) -> F restricted to V_i is killed by phi, hence factors through kernel(phi restricted to V_i). Sectionwise kernels identify this latter module with the restriction of kernel phi. These identifications are valid on iterated slices because they only forget an intermediate inclusion of opens.",
+   "text": "Work on the open slice over U. The private over_preserves_kernel helper proves that overFunctor preserves the kernel of phi: reflect the mapped kernel cone through SheafOfModules.forget and evaluate on each object of the slice; the resulting cone is the original kernel cone mapped by evaluation followed by restriction of scalars along the identity. Mathlib evaluation preserves finite limits. This identifies the restricted kernel with kernel(phi.over V).",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
   },
   {
-   "text": "The factor L_i -> kernel(phi restricted to V_i) is epi. Given a section of the latter kernel, local lifting through p_i supplies preimages of its underlying F section. The image of each preimage under the composite is zero, so the preimage is a section of L_i. Thus every section of the kernel lifts locally through the factor, which is exactly the epimorphism criterion. This is the local lifting argument of the cited node applied to the open ringed space underlying V_i.",
+   "text": "For a commutative square p then f = g then j in any abelian category, with p epi and j mono, the private epi_kernel_of_epi helper proves kernel.map g f p j comm is epi. Refine a map into kernel f so that its composite with kernel.ι f lifts through p. Its lift a satisfies a then g then j = 0; cancel the mono j to show a then g = 0. Factor a through kernel g, and cancel kernel.ι f to check the lifting equation. Apply this general square lemma with g = p then f and j the identity. This directly supplies the local kernel quotient without importing the ringed-space section-lifting theorem.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Push finite local generating families of L_i through this epimorphism. They generate kernel(phi restricted to V_i), proving it finite type by the image lemma. Refine the covering family V_i by the finite generating covers just obtained. Composition of coverings gives a cover of U. The forgetful identification of successive slices transports each generating family to the restriction of kernel phi on that cover, with the same finite index set and epimorphism. These form LocalGeneratorsData.IsFiniteType for kernel phi, hence kernel phi is finite type. No finiteness of I_i is used; an empty cover only occurs over the empty open and gives the vacuous finite type condition.",
-   "uses": [
-    "lem-weil-pbc-module-finite-type-image-extension",
-    "pqf-def-coherent",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The private finiteType_of_epi helper works for an arbitrary category site, with independent coefficient, object and morphism universes (not just a small site in the coefficient universe). It pushes local generating families through restrictions of an epimorphism using Mathlib GeneratingSections.ofEpi. The restriction functor is a left adjoint (overPushforwardOverAdj), hence preserves epimorphisms; the finite generating index sets are unchanged. Apply this to the preceding epi and to the inverse kernel restriction isomorphism. The hypothesis h supplies the finite type source on each member of the chosen cover.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private finiteType_of_cover helper permits an arbitrary covering-index universe. Choose finite local generators on each member of the cover and index the flattened cover by the dependent sum of their index types. Mathlib CoversTop.over proves that it covers. pushforwardPushforwardEquivalence for Over.iteratedSliceEquiv transports the generators from the twice-restricted module; its counit identifies this with the once-restricted module. GeneratingSections.map and ofEpi preserve the finite index type. Shrink the resulting LocalGeneratorsData to the site universe using LocalGeneratorsData.shrink; each generating family is one of the original finite families. These data prove that kernel phi is finite type. Empty covers and empty generating families are included by these constructions. The public theorem specializes the generic private finiteType_kernel_of_local_generators helper, with explicit sheafification instances on the iterated slices.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-module-finite-type-image-extension",
-  "pqf-def-coherent"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (2), second paragraph: kernel is the image of the composite from local free relations; Lemma 01B7 (lemma-extension-finite-type), part (1), and Definition 01B5 (definition-finite-type). Verified at https://stacks.math.columbia.edu/tag/01BY."
+  "place": "Modules, Lemma 01BY (2), kernel as the image of the local relation kernel; Lemma 01B7 (1) and Definition 01B5. Repair by B2, 2026-10-13: generalized the three previously duplicate private helpers in place (arbitrary category/universes for finite type quotients, epi/mono commutative squares for kernel epis, arbitrary covering-index universe for descent), with all proofs from Mathlib and no new imports or holes."
  },
  "mathlib_searches": [
   {
@@ -123,10 +125,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T000049-L-2232653",
-  "kind": "interface",
+  "landing": "20261013T045512-L-124292",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
