@@ -26,59 +26,47 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-perfect-pseudo-coherent-locally-finite-tor], the perfect object K is pseudo-coherent and, on a neighbourhood of every point, has Tor amplitude in some interval [a,b].",
+   "text": "Reuse the existing private hasDerivedCategory_of_equivalence theorem from SchemeIsoDerivedLocalizations via import all. Transport the chosen derived localizations from localized open sites to open subschemes through Modules.overEquiv without increasing the Hom universe; the reused helper constructs this localization explicitly.",
    "uses": [
-    "lem-pc-perfect-pseudo-coherent-locally-finite-tor"
+    "lem-pc-scheme-iso-derived-localizations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CQ (cohomology-lemma-perfect), implication (1) => (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "The direct-summand decomposition and [lem-pc-pseudo-coherent-summand] imply that L (and similarly M) is pseudo-coherent.",
+   "text": "Apply lem-pc-perfect-pseudo-coherent-locally-finite-tor to obtain pseudo-coherence and local Tor bounds for K; apply lem-pc-pseudo-coherent-summand to obtain pseudo-coherence of L and M.",
    "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
     "lem-pc-pseudo-coherent-summand"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CE (pseudo-coherent complexes are closed under direct summands)"
-   }
+   "elementary": false
   },
   {
-   "text": "On each neighbourhood from Step 1, the Tor-amplitude bound for K passes to the direct summand L (and M) by the additivity and direct-summand statement of Tag 08CK: tensoring with any module gives a direct-sum decomposition, so vanishing outside [a,b] is inherited by each summand.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CK (finite Tor dimension is preserved by direct summands)"
-   }
-  },
-  {
-   "text": "On each such neighbourhood, L is pseudo-coherent and has finite Tor dimension, so [lem-pc-pseudo-coherent-finite-tor-perfect] makes L perfect there. Perfectness is local by [def-pc-perfect-complex], hence L is perfect on X; the same argument gives the conclusion for M.",
+   "text": "Compose the biproduct inclusions and projections with the isomorphism K = L plus M to form retracts of K. Derived open pullback preserves these retract equations. On each Tor neighbourhood, apply lem-pc-derived-tensor-vanishing-retract degree by degree to retain the same interval for each summand.",
    "uses": [
-    "lem-pc-pseudo-coherent-finite-tor-perfect",
-    "def-pc-perfect-complex"
+    "lem-pc-derived-tensor-vanishing-retract"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CS (lemma-summands-perfect), proof, using Tag 08CQ"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-pc-pseudo-coherent-locally-finite-tor-perfect to each summand, using its pseudo-coherence and the local Tor bounds just proved.",
+   "uses": [
+    "lem-pc-pseudo-coherent-locally-finite-tor-perfect"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-scheme-iso-derived-localizations",
   "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
   "lem-pc-pseudo-coherent-summand",
-  "lem-pc-pseudo-coherent-finite-tor-perfect",
-  "def-pc-perfect-complex"
+  "lem-pc-derived-tensor-vanishing-retract",
+  "lem-pc-pseudo-coherent-locally-finite-tor-perfect"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08CS (lemma-summands-perfect)"
+  "place": "Tag 08CS (lemma-summands-perfect), via Tags 08CQ and 08CK",
+  "note": "Q1 Lean reduction: explicit derived retracts and local affine finite-projective construction; one local affine Tor-transfer hole. Second reading removes the copied localization helper and reuses SchemeIsoDerivedLocalizations.hasDerivedCategory_of_equivalence."
  },
  "mathlib_searches": [
   {
@@ -156,5 +144,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

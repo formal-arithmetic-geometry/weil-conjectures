@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-derived-tensor-vanishing-retract",
+ "kind": "statement",
+ "title": "Derived tensor cohomology vanishing passes to retracts",
+ "statement": "Let X be a scheme [def-pc-scheme] and E,K objects of its derived category [def-pc-derived-category]. Suppose there are maps i:E\\to K and r:K\\to E with i followed by r equal to the identity of E. For any module sheaf G and integer n, if H^n(K\\otimes^L G) vanishes in the sense of [def-pc-derived-tensor-cohomology-vanishes], then H^n(E\\otimes^L G) vanishes in the same sense.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CK (lemma-summands-tor-amplitude)"
+ },
+ "proof": [
+  {
+   "text": "Import the existing private tensor_vanishes_iff theorem from the module of lem-pc-tor-amplitude-open-local using import all. This K-flat comparison identifies the vanishing predicate with zero homology of the derived tensor object; do not duplicate its exists_kFlat_model, tensor_model_iso, or tensor_vanishes_iff helpers.",
+   "uses": [
+    "lem-pc-tor-amplitude-open-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensor-right by G[0] and then the n-th homology functor to the retract. Its identity factors through the zero homology object for K, so is zero. The K-flat comparison converts this zero object back to the existential vanishing predicate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tor-amplitude-open-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CK (lemma-summands-tor-amplitude)",
+  "note": "Lean realization by Q1, repaired after the duplicate-helper return: reuse TorAmplitudeOpenLocal.tensor_vanishes_iff by import all; the retraction argument remains unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor cohomology vanishing is preserved by retracts",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology vanishing is preserved by retracts",
+   "results": "8 hits; Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, groupCohomology.isIso_δ_of_isZero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, groupCohomologyIsoExt, groupCohomology.map_cochainsFunctor_shortExact, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*retract|retract.*tensor",
+   "results": "0 hits; ; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSummand",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect",
+   "via": [
+    "lem-pc-perfect-summand",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorVanishingRetract",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorVanishingRetract.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedTensorCohomologyVanishes_of_retract",
+  "statement": "theorem schemeDerivedTensorCohomologyVanishes_of_retract (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E K : schemeDerivedCategory X) (r : Retract E K) (G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ) (hK : schemeDerivedTensorCohomologyVanishes X K G i) : schemeDerivedTensorCohomologyVanishes X E G i",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-pseudo-coherent-locally-finite-tor-perfect",
+ "kind": "statement",
+ "title": "Pseudo-coherent complexes of locally finite Tor dimension are perfect",
+ "statement": "Let X be a scheme [def-pc-scheme] and E an object of D(\\mathcal O_X) [def-pc-derived-category]. If E is pseudo-coherent [def-pur-pseudo-coherent-complex] and locally has finite Tor dimension [def-pc-locally-finite-tor-dimension], then E is perfect [def-pc-perfect-complex].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-locally-finite-tor-dimension",
+  "def-pc-perfect-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CQ (cohomology-lemma-perfect), implication (2) to (1)"
+ },
+ "proof": [
+  {
+   "text": "At each point intersect a pseudo-coherent finite-free model neighbourhood with a Tor neighbourhood. Refine their intersection to an affine open. Exact restriction preserves the model, its upper bound and free terms. Reuse the existing private affine_finiteFree_model theorem from PerfectOfPseudoCoherentFiniteTorDimension via import all to lift this model to a bounded-above finite-free ring complex.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-pseudo-coherent-finite-tor-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ring complex is pseudo-coherent by its own bounded-above finite-free representative. Transfer the local Tor bound using lem-pc-affine-local-sheafification-tor-amplitude, and apply lem-pc-ring-pseudo-coherent-finite-tor-perfect.",
+   "uses": [
+    "lem-pc-affine-local-sheafification-tor-amplitude",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the existing private affine_projective_strictlyPerfect theorem from PerfectOfPseudoCoherentFiniteTorDimension via import all: finite projectives split off finite free modules, and sheafification preserves the splitting and bounded zero terms. The affine localized derived comparison transports the derived isomorphism back to the original local model, witnessing perfectness at each point.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-pseudo-coherent-finite-tor-perfect",
+    "lem-pc-affine-localized-derived-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-pseudo-coherent-finite-tor-perfect",
+  "lem-pc-affine-local-sheafification-tor-amplitude",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "def-pc-perfect-complex",
+  "lem-pc-affine-localized-derived-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CQ (cohomology-lemma-perfect), implication (2) to (1)",
+  "note": "Lean realization by Q1; Stacks tag pages and cohomology.tex/perfect.tex source read in the sandbox scratchpad. Repair of return 88e3f33e7: reuse the existing private affine-model and projective-sheafification theorems through import all; no duplicate helper declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex of sheaves with locally finite Tor dimension is perfect",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex of sheaves with locally finite Tor dimension is perfect",
+   "results": "8 hits; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.IsFiniteType, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|HasLocallyFiniteTorDimension|schemeDerivedTensorCohomologyVanishes",
+   "results": "25 hits; Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSummand",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect",
+   "via": [
+    "lem-pc-perfect-summand",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentLocallyFiniteTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOfPseudoCoherentLocallyFiniteTor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isPerfect_of_isPseudoCoherent_of_hasLocallyFiniteTorDimension",
+  "statement": "theorem isPerfect_of_isPseudoCoherent_of_hasLocallyFiniteTorDimension (S : Scheme.{uP}) [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{wP} (SheafOfModules.{uP} ((moduleRings S.toRingedSpace).over U))] [∀ W : S.Opens, HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings W.toScheme.toRingedSpace))] (K : schemeDerivedCategory S) (hK : IsPseudoCoherent S K) (hTor : HasLocallyFiniteTorDimension S K) : IsPerfect S K",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

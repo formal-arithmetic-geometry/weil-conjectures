@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-affine-local-sheafification-tor-amplitude",
+ "kind": "statement",
+ "title": "Local Tor bounds pass to affine module models",
+ "statement": "Let S be a scheme [def-pc-scheme], U an affine open of S, W an open containing U, and K in D(\\mathcal O_S) [def-pc-derived-category]. Let P be a complex of modules over R=\\Gamma(U,\\mathcal O_S) whose termwise affine associated sheaf complex represents K restricted to U, through [lem-pc-affine-perfect-module-model]. If the derived restriction of K to W [def-pc-derived-pullback] has finite Tor dimension [def-pc-finite-tor-dimension], then Q(P) has Tor amplitude in some finite interval: for every R-module N its derived tensor with N[0] has cohomology only in that interval.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-affine-perfect-module-model",
+  "def-pc-derived-pullback",
+  "def-pc-finite-tor-dimension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08CG, 08E9(1), 08DX(2), and 09U8, affine restriction of a Tor interval"
+ },
+ "proof": [
+  {
+   "text": "Choose the global Tor interval on W. For a module sheaf G on U, test with its direct image on W and restrict the derived tensor back to U. Exact open restriction commutes with derived tensor and homology, and restriction of the direct image is G. Derived pullback restriction comparisons identify the object with K restricted to U. Thus the same interval works for every G.",
+   "uses": [
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the object and tensor computations along the exact over-site equivalence and affine spectrum isomorphism. The representing isomorphism identifies it with the associated complex of P. Apply the affine Tor-amplitude criterion; testing associated sheaves of all ring modules and faithfulness detects vanishing of ring cohomology.",
+   "uses": [
+    "lem-pc-affine-tor-amplitude-criterion",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08CG, 08E9(1), 08DX(2), and 09U8, affine restriction of a Tor interval",
+  "note": "Lean realization by Q1; Stacks tag pages and cohomology.tex/perfect.tex source read in the sandbox scratchpad."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine module model of a derived sheaf complex inherits Tor bounds from an open neighbourhood",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine module model of a derived sheaf complex inherits Tor bounds from an open neighbourhood",
+   "results": "8 hits; DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, DerivedCategory.IsGE; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorDimension",
+   "results": "0 hits; ; no exact match for the scheme-derived statement",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSummand",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect",
+   "via": [
+    "lem-pc-perfect-summand",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalSheafificationTorAmplitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalSheafificationTorAmplitude.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTorAmplitude_of_affine_sheafification_of_open_tor",
+  "statement": "theorem finiteTorAmplitude_of_affine_sheafification_of_open_tor (S : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ V : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over V))] (U : S.Opens) (hU : IsAffineOpen U) [HasDerivedCategory.{wR} (ModuleCat.{u} (S.presheaf.obj (.op U)))] (K : schemeDerivedCategory S) (P : CochainComplex (ModuleCat.{u} (S.presheaf.obj (.op U))) ℤ) (hP : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj (((affinePerfectSheafification S U hU).mapHomologicalComplex (.up ℤ)).obj P))) (W : S.Opens) (hUW : U ≤ W) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (hTor : HasFiniteTorDimension W.toScheme ((derivedPullback W.ι).obj K)) : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} (S.presheaf.obj (.op U))) a b (DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
