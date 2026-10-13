@@ -1,0 +1,136 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedGlobalHomBaseChangeExchange",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-mixed-global-sections-base-change-mate",
+ "title": "Mixed-universe leray transfers the base-change mate of a map of sheaf complexes",
+ "statement": "Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of schemes [def-pc-scheme], with $X'=X\\times_Y Y'$ and projections $g_X:X'\\to X$, $f':X'\\to Y'$ [def-pc-fibre-product]. Use the derived categories [def-pc-derived-category], $Lh^*$ [def-pc-derived-pullback], $Rh_*$ [def-pc-derived-direct-image], and canonical adjunctions and base-change map $\\beta:L g^*R f_*\\to R f'_*L g_X^*$ [def-pc-derived-base-change-map]. Write $G_Z=R\\Gamma(Z,-)$ [def-pc-global-derived-rhom], $S_h$ for exact restriction of global scalars, $e_h:G_SRh_*\\cong S_hG_T$ for the canonical Leray comparison [lem-sc-mixed-global-sections-direct-image-iso], and $s:S_fS_{g_X}\\cong S_gS_{f'}$ for the scalar-square identification [def-pc-global-hom-pullback-comparison]. If $E\\in D(\\mathcal O_X)$, $E'\\in D(\\mathcal O_{X'})$, and $a:L g_X^*E\\to E'$ is any morphism, write $\\operatorname{adj}_h$ for the Hom bijection from $Lh^*\\dashv Rh_*$. Then $$S_f\\bigl(G_X(\\operatorname{adj}_{g_X}(a));e_{g_X}(E')\\bigr);s_{G_{X'}E'};S_g(e_{f'}^{-1}(E'))=e_f^{-1}(E);G_Y\\bigl(\\operatorname{adj}_g(\\beta_E;Rf'_*(a))\\bigr);e_g(Rf'_*E').$$ This is an identity for arbitrary sheaf complexes and maps; no internal-Hom or tensor-Hom input, and no isomorphism hypothesis on beta or a, is present. Sheaf localization universe w and module localization universe wA are independent.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "def-pc-global-derived-rhom",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "def-pc-global-hom-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply mixedSectionsBaseChange_unit_square to E and precompose with inverse Leray for f. The inverse-hom identity cancels its Leray component. This gives the desired transport equation when a is the identity.",
+   "uses": [
+    "lem-sc-mixed-sections-base-change-unit-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel postcomposition by restricted Leray for f-prime at E-prime. Write each adjunction Hom transpose as its unit followed by direct image. Use Leray naturality at a, and naturality of the scalar-square isomorphism at global sections of a. These identify the general left path with the unit left path followed by the twice-restricted global sections of a. Naturality of Leray for g and f-prime identifies the right path with the unit right path followed by the same map. Substitute the unit equality and apply functoriality and associativity.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "def-pc-global-hom-pullback-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-hom-pullback-comparison",
+  "lem-sc-mixed-global-sections-direct-image-iso",
+  "lem-sc-mixed-sections-base-change-unit-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, lemma-more-base-change, passage to global Hom in the final comparison diagrams; cohomology.tex Remark 08HY and Lemma 0D5T"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "A3",
+  "date": "2026-10-13",
+  "note": "Proved in Lean from the existing mixed unit-square declaration using Leray and scalar-square naturality and cancellation. Stacks Tags 08HY and 0D5T read online."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final compatibility diagrams: Mixed-universe leray transfers the base-change mate of a map of sheaf complexes",
+   "via": [
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leray global sections canonical base change mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray global sections base change adjunction mate scalar restriction",
+   "results": "Eight underived module pullback adjunction hits, including SheafOfModules.PullbackConstruction.adjunction and Scheme.Modules.pullbackPushforwardAdjunction; no derived Leray mate identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*baseChange|baseChange.*globalSections|Leray.*mate",
+   "results": "0 Mathlib hits from msearch. Repository search found the existing single-universe analogue lem-sc-global-sections-base-change-mate; its signature does not apply to the fixed mixed comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no exact mixed comparison match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedGlobalSectionsBaseChangeMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedGlobalSectionsBaseChangeMate.lean",
+  "declaration": "AlgebraicGeometry.mixedGlobalSections_baseChange_mate",
+  "statement": "theorem mixedGlobalSections_baseChange_mate\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (E : schemeDerivedCategory X) (E' : schemeDerivedCategory (pullback f g))\n    (a : (derivedPullback (pullback.fst f g)).obj E ⟶ E') :\n    (schemeGlobalScalarRestriction f).map\n        ((schemeDerivedGlobalSections X).map\n          ((schemeHomPullbackAdjunction (pullback.fst f g)).homEquiv _ _ a) ≫\n          (mixedGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app E') ≫\n      (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition).hom.app ((schemeDerivedGlobalSections (pullback f g)).obj E') ≫\n      (schemeGlobalScalarRestriction g).map\n        ((mixedGlobalSectionsDirectImageIso (pullback.snd f g)).inv.app E') =\n    (mixedGlobalSectionsDirectImageIso f).inv.app E ≫\n      (schemeDerivedGlobalSections Y).map\n        ((schemeHomPullbackAdjunction g).homEquiv _ _\n          (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n            pullback.condition E ≫\n            (schemeDerivedDirectImage (pullback.snd f g)).map a)) ≫\n      (mixedGlobalSectionsDirectImageIso g).hom.app\n        ((schemeDerivedDirectImage (pullback.snd f g)).obj E')",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T123202-L-3675525",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T123202-L-3675525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,26 +14,43 @@
  ],
  "proof": [
   {
-   "text": "Expand the pullback and direct-image Hom comparisons as evaluation mates. Transpose both paths under the canonical tensor-Hom and pullback/direct-image bijections. Expand the base-change mate as the canonical pullback composition isomorphism followed by the counit. Counit naturality and the triangle identity identify the two tensor-evaluation composites. On K-flat representatives the tensorators respect composition since both are ordinary tensor pullback; their localization equations transport the equality. Leray respects composition by uniqueness of the right-derived comparison with the same unit, giving exactly the canonical scalar square. This gives the exchange identity with β_M in the first entry and β_N in the second.",
+   "text": "Define p as pulled-back evaluation transposed under the pinned tensor-Hom equivalence, H as internal Hom, and c as the mixed direct-image comparison. Apply mixedInternalHom_baseChange_exchange to obtain the exchange identity in the sheaf derived category of Y′. This identity has no module-category or global-sections input.",
    "uses": [
-    "lem-sc-mixed-hom-tensor-pullback-iso",
-    "lem-sc-mixed-global-sections-direct-image-iso",
-    "lem-sc-mixed-hom-direct-image-comparison",
-    "def-pc-derived-base-change-map"
+    "lem-sc-mixed-internal-hom-base-change-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply mixedGlobalSections_baseChange_mate to E=H_X(M,N), E′=H_X′(Lg_X M,Lg_X N), and a=p_gX. This rewrites the scalar-square and inverse-Leray part of the left path as inverse Leray at f, global sections of the g-adjoint of beta_E followed by Rf′(a), and Leray at g.",
+   "uses": [
+    "lem-sc-mixed-global-sections-base-change-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose this equality with restricted global sections of c_f′ followed by Hom(beta_M,identity). Naturality of Leray and of adjunction homEquiv moves that postcomposition inside the g-adjoint. Substitute the sheaf exchange identity, then use homEquiv naturality in its source to extract c_f. Move Hom(identity,beta_N) back outside by Leray naturality. Functor.map_comp and associativity identify exactly the two displayed mixed global Hom composites. The private generic globalMate_postcomp and globalMate_exchange prove these steps.",
+   "uses": [
+    "lem-sc-mixed-global-sections-direct-image-iso",
+    "lem-sc-mixed-hom-direct-image-comparison",
+    "lem-sc-flat-affine-global-hom-comparison",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-flat-affine-global-hom-comparison",
+  "lem-sc-mixed-global-sections-base-change-mate",
   "lem-sc-mixed-global-sections-direct-image-iso",
   "lem-sc-mixed-hom-direct-image-comparison",
-  "def-pc-derived-base-change-map"
+  "lem-sc-mixed-internal-hom-base-change-exchange"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8, final compatibility diagrams; Tags 08I3 and 0B6I"
+  "by": "agent",
+  "group": "A3",
+  "date": "2026-10-13",
+  "note": "Decomposition of the evaluation-mate and Leray plan. Generic adjunction/naturality glue adapted from the single-universe GlobalHomBaseChangeExchange proof. The new mixed Leray transport is proved from the existing unit-square declaration; only internal Hom exchange remains sorry."
  },
  "mathlib_searches": [
   {
@@ -109,9 +126,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T113345-L-3184745",
-  "kind": "interface"
+  "landing": "20261013T123202-L-3675525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
