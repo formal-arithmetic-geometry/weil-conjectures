@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-principal-open-cech-coordinate-map",
+ "kind": "statement",
+ "title": "Subset Cech total construction and coefficient-map coordinates",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], $r\\geq0$, $f:\\operatorname{Fin}(r)\\to A$, $V=\\bigcup_iD(f_i)$ and $D_S=D(\\prod_{j\\in S}f_j)$. Let $J,I$ be arbitrary integer-indexed cochain complexes of module sheaves [def-pc-cochain-complex-modules] and $g:J\\to I$ a chain map. Suppose $T$ is a complex of $A$-modules with degreewise isomorphisms $\\tau_n:T^n\\cong\\prod_{\\varnothing\\ne S\\subseteq\\operatorname{Fin}(r)}\\Gamma(D_S,J^{n+1-|S|})$. Its differential has vertical term $(-1)^{|S|-1}d_J$ and horizontal term the sum over $j\\in S$ of restriction from $D_{S\\setminus\\{j\\}}$, with sign $(-1)^{|\\{i\\in S:i<j\\}|}$; empty deletions contribute zero. Supply a complex $K_1$ and degreewise isomorphisms $\\sigma_{1,n}:K_1^n\\cong\\Gamma(V,I^n)$ identifying its differential with that of $I$. All restriction inequalities and coefficient-degree transports are exactly those displayed in the Lean signature. Then there exist a complex $T_1$, isomorphisms $\\tau_{1,n}:T_1^n\\cong\\prod_{\\varnothing\\ne S\\subseteq\\operatorname{Fin}(r)}\\Gamma(D_S,I^{n+1-|S|})$, and chain maps $\\alpha_1:K_1\\to T_1$ and $b:T\\to T_1$. The differential of $T_1$ has the same signed formula with $I$ replacing $J$, $\\alpha_1$ is singleton restriction and zero elsewhere, and the $S$-coordinate of $b$ in total degree $n$ is section evaluation of $g^{n+1-|S|}$. No source section complex, source augmentation, section comparison map, injectivity, K-injectivity, homotopy, quasi-isomorphism, or commutative-square assumption or conclusion occurs.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, lemma-alternating-cech-complex-complex; equation (20.40.0.1) and the omitted verification of functoriality and compatibilities"
+ },
+ "proof": [
+  {
+   "text": "Define the degree-n term of T₁ as the finite product of sections of I in degree n+1-card(S). Its differential is the specified A-linear signed sum. For its square, vertical compositions vanish by d²=0. In the two horizontal sums, pair the two orders of deleting distinct indices: restrictions and coefficient transports agree, while the position of the larger index changes by one when the smaller index is deleted. The signs are opposite. Terms involving an empty deletion vanish. Mixed vertical-horizontal terms cancel because restriction is natural with respect to the coefficient differential, and the vertical exponent changes by one on a nonempty deletion. This constructs the complex and τ₁, taken to be identity in these coordinates.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Define α₁ degreewise using σ₁ followed by restriction and coefficient transport on singleton coordinates, and zero on all other coordinates. A singleton has no nonempty deletion, so its chain-map equation is the supplied section differential equation and restriction naturality. For a two-element subset, the two restrictions of the same section to the same intersection have opposite signs and cancel. For larger subsets all singleton components that could occur are zero. Thus α₁ is a chain map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Define b degreewise by τ followed by section evaluation of the corresponding component of g on each subset. Linearity is coordinatewise. The chain-map equation for g commutes with the vertical terms. Naturality of its module-sheaf components commutes with the horizontal restriction terms; equality induction commutes with coefficient degree transports. This gives exactly the stated component formula for b. For r=0 the subset index is empty and the product is the zero module; all equations are vacuous. Empty intersections and repetitions preserve the same calculations.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, lemma-alternating-cech-complex-complex; equation (20.40.0.1) and the omitted verification of functoriality and compatibilities",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite alternating Cech total complex naturality in morphisms of coefficient complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite alternating Cech totalization is functorial in coefficient chain maps and its augmentation is natural",
+   "results": "AlgebraicTopology.map_alternatingFaceMapComplex and AlternatingFaceMapComplex.ε; these concern simplicial chain complexes, not the displayed unbounded subset-coordinate cochain totalization.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Nn]atur|[Nn]atur.*Cech|cech.*total|total.*cech",
+   "results": "Mathlib/AlgebraicTopology/CechNerve.lean has naturality of nerve equivalences, no subset-coordinate total construction. The local PrincipalOpenCechTotal has the relevant concrete construction but imports the current item transitively, preventing its use here. Blueprint search Cech returned nine nodes, none stating this coordinate-map conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no directly usable existing declaration; importing PrincipalOpenCechTotal creates a cycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map",
+   "results": "Second reader H2: total.map, totalFunctor_map, total.map_comp, and ιTotal_map. These require a bicomplex already constructed; they do not supply the signed subset-coordinate complex or singleton augmentation. LeanFinder independently returned the same generic total-map infrastructure.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no directly applicable coordinate-construction theorem"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechInjectiveComparison",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite principal-open Cech comparison, Step 2: construction of the subset total and its natural augmentation square",
+   "via": [
+    "lem-sc-principal-open-cech-injective-comparison",
+    "lem-sc-principal-open-cech-homology-injective",
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechCoordinateMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechCoordinateMap.lean",
+  "declaration": "AlgebraicGeometry.principalOpenCech_coordinate_map_exists",
+  "statement": "theorem principalOpenCech_coordinate_map_exists\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (I : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (g : J ⟶ I) :\n    let V : (Spec (.of A)).Opens := ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)\n    let D : Finset (Fin r) → (Spec (.of A)).Opens :=\n      fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j)\n    ∀ (T : CochainComplex (ModuleCat.{u} A) ℤ)\n      (τ : ∀ n : ℤ, T.X n ≅ ModuleCat.of A\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))))\n      (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (hls : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → D S.val ≤ V)\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (hes : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → ∀ n : ℤ,\n        n = n + 1 - (S.val.card : ℤ))\n      (K₁ : CochainComplex (ModuleCat.{u} A) ℤ)\n      (σ₁ : ∀ n : ℤ, K₁.X n ≅ (modulesSpecToSheaf.obj (I.X n)).obj.obj (op V)),\n      (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ (n + 1)).hom (T.d n (n + 1) s) S =\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) ((τ n).hom s S) +\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) ((τ n).hom s ⟨S.val.erase j.val, h⟩))\n          else 0) →\n      (∀ (n : ℤ) (s : K₁.X n),\n        (σ₁ (n + 1)).hom (K₁.d n (n + 1) s) =\n          (modulesSpecToSheaf.map (I.d n (n + 1))).hom.app (op V) ((σ₁ n).hom s)) →\n      ∃ (T₁ : CochainComplex (ModuleCat.{u} A) ℤ)\n      (τ₁ : ∀ n : ℤ, T₁.X n ≅ ModuleCat.of A\n        (∀ S : {S : Finset (Fin r) // S.Nonempty},\n          (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val))))\n        (α₁ : K₁ ⟶ T₁) (b : T ⟶ T₁),\n      (∀ (n : ℤ) (s : T₁.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ₁ (n + 1)).hom (T₁.d n (n + 1) s) S =\n          (-1 : A) ^ (S.val.card - 1) •\n            (modulesSpecToSheaf.map\n              (I.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app\n                (op (D S.val)) ((τ₁ n).hom s S) +\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (I.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg I.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val))) ((τ₁ n).hom s ⟨S.val.erase j.val, h⟩))\n          else 0) ∧\n      (∀ (n : ℤ) (s : K₁.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ₁ n).hom (α₁.f n s) S = if h : S.val.card = 1 then\n          (modulesSpecToSheaf.obj (I.X (n + 1 - (S.val.card : ℤ)))).obj.map\n            (homOfLE (hls S h)).op\n            ((modulesSpecToSheaf.map (eqToHom (congrArg I.X (hes S h n)))).hom.app\n              (op V) ((σ₁ n).hom s)) else 0) ∧\n      (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}),\n        (τ₁ n).hom (b.f n s) S =\n          (modulesSpecToSheaf.map (g.f (n + 1 - (S.val.card : ℤ)))).hom.app\n            (op (D S.val)) ((τ n).hom s S))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b04e3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140818-L-313342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b04e3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T140818-L-313342",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, delivered files, DAG/report, full compilation, axiom checks, and direct importer compilation all satisfy the stage-3 review brief."
+ }
+}

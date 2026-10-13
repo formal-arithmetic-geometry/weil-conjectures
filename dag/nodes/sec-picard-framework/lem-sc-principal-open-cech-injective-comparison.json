@@ -15,27 +15,37 @@
  },
  "proof": [
   {
-   "text": "Choose a degreewise-injective K-injective resolution J → I from prop-pur-kinjective-resolutions-exist. The comparison is a homotopy equivalence by the quasi-isomorphism criterion between K-injectives. Evaluation on V preserves the inverse and both homotopies, so its section comparison is a homotopy equivalence.",
+   "text": "Install SheafOfModules.isGrothendieckAbelian for the structure sheaf and use the existing functorial kInjectiveResolutionFunctor and toKInjectiveResolution. The resolution map g is a quasi-isomorphism, its target I is K-injective and its terms are injective. By CochainComplex.IsKInjective.quasiIso_iff obtain a homotopy equivalence with hom=g.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
     "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false
   },
   {
-   "text": "Construct K₁ by section evaluation of I with A scalars, and T₁ by the finite subset product in each displayed degree. Use the signed differential of the statement. Pairs of horizontal deletions cancel; coefficient squares are zero; naturality cancels the horizontal-vertical cross terms. Singleton restrictions and zero on larger subsets define α₁. Naturality verifies its chain-map equation. Conjugate the section comparison by σ, and assemble coefficient comparison maps in the τ coordinates to obtain a and b. Restriction naturality proves the chain-map equations and the augmentation square. The source map a has the homotopy inverse supplied in Step 1 and hence is a quasi-isomorphism. These constructions also work when r=0, since sections on V=empty and all subset products are zero.",
+   "text": "Define the additive section-evaluation functor E on V using modulesSpecToSheaf and set K₁ to E applied degreewise to I. The supplied σ and section differential equation give a chain isomorphism c:K ≅ E(J) using HomologicalComplex.Hom.isoOfComponents. Define a=c.hom ≫ E(g). Functor.mapHomotopyEquiv applies E to the inverse and homotopies; its quasiIso_hom proves E(g) is a quasi-isomorphism. Compose with the chain isomorphism to prove QuasiIso a. The identity coordinates σ₁ and the construction of a give the section and comparison-coordinate equations by reflexivity.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the arbitrary-coefficient coordinate construction to J,I,g,T,τ and the explicitly constructed K₁,σ₁. It supplies T₁,τ₁,α₁,b, the signed total differential and singleton augmentation equations, and the component formula for b. Prove the augmentation square in Lean: cancel τ₁ degreewise and evaluate each subset. On a singleton, substitute the coordinate formulas and the section comparison equation for a. The naturality square of g and restriction commutes after transport of coefficient degrees, proved by equality induction. On a larger subset both singleton augmentations vanish and g sends zero to zero. Combine the constructed witnesses, this square, the injectivity of the terms of I, the section equation for K₁ and the proved QuasiIso a.",
+   "uses": [
+    "lem-sc-principal-open-cech-coordinate-map"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-principal-open-cech-coordinate-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08C1, lemma-alternating-cech-complex-complex, finite augmented rows and K-injective comparison"
+  "place": "Tag 08C1 finite comparison, with source-library functorial degreewise-injective resolutions and Mathlib homotopy-equivalence preservation under additive functors"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -124,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-b04e3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T131952-L-4088561",
+  "landing": "20261013T140818-L-313342",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery packet, delivered files, DAG/report, full compilation, axiom checks, and direct importer compilation all satisfy the stage-3 review brief."
  }
 }
