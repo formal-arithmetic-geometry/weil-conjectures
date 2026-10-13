@@ -1,0 +1,125 @@
+{
+ "id": "new-sbc-structure-base-change-sections-naturality",
+ "kind": "statement",
+ "title": "Canonical structure-sheaf comparisons commute with maps of squares",
+ "statement": "Let $p:X\\to Y$, $q:A\\to B$, $t:C\\to D$, $g:B\\to Y$, $h:D\\to Y$, $k:A\\to X$ and $l:C\\to X$ be scheme maps [def-weil-pbc-scheme-conventions] satisfying $k;p=q;g$ and $l;p=t;h$. Let $v:D\\to B$ and $w:C\\to A$ satisfy $v;g=h$, $w;k=l$, and $w;q=t;v$. Let $b:g^*p_*\\mathcal O_X\\to q_*\\mathcal O_A$ and $b^{\\prime}:h^*p_*\\mathcal O_X\\to t_*\\mathcal O_C$ [def-weil-sheaf-of-modules-category] equal the canonical adjoints of restriction along $k$ and $l$, transported through the pushforward composition comparisons. Write $T$ for the section transport [def-sbc-pullback-section-factorization]. For every $x\\in\\Gamma(g^*p_*\\mathcal O_X)$ and $a\\in\\Gamma(A,\\mathcal O_A)$ with $b(x)=a$, one has $b^{\\prime}(Tx)=w^\\sharp(a)$. No cartesianness or invertibility is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-pullback-section-factorization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KG, canonical affine tensor comparison; Tag 01CA, tensor functoriality and associativity."
+ },
+ "proof": [
+  {
+   "text": "Unfold the constructed pullbackSectionFactorization section map as the adjunction unit followed by the composition comparison.",
+   "uses": [
+    "def-sbc-pullback-section-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the specified defining equalities of b and b′. Apply the adjunction homEquiv to the corresponding sheaf identity, and use naturality of its units and the pullback composition comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two adjoints are restrictions from O_X to O_C. Use w;k=l and w;q=t;v, and coherence of pushforward composition comparisons, to identify them.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity of homEquiv gives the sheaf identity. Evaluation at the top open gives the displayed formula with pullbackΓ and w.appTop. Replace b(x) by the prescribed section a using the image equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-pullback-section-factorization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "D4",
+  "document": "Stacks Project",
+  "place": "Tags 02KG and 01CA; explicit categorical reduction of the tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*naturality|naturality.*baseChange",
+   "date": "2026-10-14",
+   "results": "No matches.",
+   "verdict": "Related API, no theorem with this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf affine base change comparison natural with respect to morphisms of commuting squares on sections",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change mate structure sheaf comparison commutes with a map of base change squares",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc",
+   "verdict": "Related API, no theorem with this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/StructureBaseChangeSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.structure_baseChange_sections_naturality",
+  "statement": "theorem structure_baseChange_sections_naturality\n    {X Y A B C D : Scheme.{u}}\n    (p : X ⟶ Y) (q : A ⟶ B) (t : C ⟶ D)\n    (g : B ⟶ Y) (h : D ⟶ Y) (k : A ⟶ X) (l : C ⟶ X)\n    (sq : k ≫ p = q ≫ g) (sq' : l ≫ p = t ≫ h)\n    (v : D ⟶ B) (w : C ⟶ A)\n    (vg : v ≫ g = h) (wk : w ≫ k = l) (wq : w ≫ q = t ≫ v)\n    (b : (pullback g).obj ((pushforward p).obj (unit X)) ⟶\n      (pushforward q).obj (unit A))\n    (b' : (pullback h).obj ((pushforward p).obj (unit X)) ⟶\n      (pushforward t).obj (unit C))\n    (hb : b = ((pullbackPushforwardAdjunction g).homEquiv _ _).symm\n      ((pushforward p).map (unitToPushforwardObjUnit k.toRingCatSheafHom) ≫\n        (pushforwardComp k p).hom.app (unit A) ≫\n        (pushforwardCongr sq).hom.app (unit A) ≫\n        (pushforwardComp q g).inv.app (unit A)))\n    (hb' : b' = ((pullbackPushforwardAdjunction h).homEquiv _ _).symm\n      ((pushforward p).map (unitToPushforwardObjUnit l.toRingCatSheafHom) ≫\n        (pushforwardComp l p).hom.app (unit C) ≫\n        (pushforwardCongr sq').hom.app (unit C) ≫\n        (pushforwardComp t h).inv.app (unit C)))\n    (x : Γ((pullback g).obj ((pushforward p).obj (unit X)), ⊤))\n    (a : Γ(A, ⊤)) (hx : Hom.app b ⊤ x = a) :\n    Hom.app b' ⊤ (pullbackSectionFactorization g h v vg ((pushforward p).obj (unit X)) x) =\n      w.appTop a",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

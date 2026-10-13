@@ -1,0 +1,126 @@
+{
+ "id": "new-sbc-pullback-free-coordinates-naturality",
+ "kind": "statement",
+ "title": "Finite free coordinates commute with pullback through a factorization",
+ "statement": "Let $X,Y,Z$ be schemes [def-weil-pbc-scheme-conventions], $g:Y\\to X$, $h:Z\\to X$ and $v:Z\\to Y$ with $v;g=h$. Let $M$ be an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], $r\\in\\mathbb N$, and $\\alpha:M\\to\\mathcal O_X^r$ [def-weil-pbc-free-module]. Write $T$ for the canonical section transport [def-sbc-pullback-section-factorization]. For every $x\\in\\Gamma(g^*M)$ and $i\\in\\{0,\\ldots,r-1\\}$, the $i$-th coordinate of $h^*\\alpha(Tx)$ under the canonical free pullback comparison is $v^\\sharp$ of the $i$-th coordinate of $g^*\\alpha(x)$. No affine, finite etale, or inverse hypothesis is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-sbc-pullback-section-factorization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01CA, tensor functoriality and associativity."
+ },
+ "proof": [
+  {
+   "text": "Unfold the constructed pullbackSectionFactorization section map as the adjunction unit followed by the composition comparison.",
+   "uses": [
+    "def-sbc-pullback-section-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Move α across the pullback composition comparison by naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Move the pulled-back α across the adjunction unit by naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the composite free pullback comparison on pure tensors s⊗(t⊗e_i) with st e_i, then project to coordinate i. On the unit sheaf the section pullback is v.appTop.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-pullback-section-factorization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "D4",
+  "document": "Stacks Project",
+  "place": "Tags 02KG and 01CA; explicit categorical reduction of the tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*free.*comp|free.*pullback.*comp",
+   "date": "2026-10-14",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "verdict": "Related API, no theorem with this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a section through a factorization commutes with finite free coordinate projections",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of free module pullback comparison with composition and global section restriction",
+   "date": "2026-10-14",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.map_ιFree_mapFree_hom",
+   "verdict": "Related API, no theorem with this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/PullbackFreeCoordinatesNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback_free_coordinates_naturality",
+  "statement": "theorem pullback_free_coordinates_naturality\n    {X Y Z : Scheme.{u}} (g : Y ⟶ X) (h : Z ⟶ X) (v : Z ⟶ Y)\n    (hv : v ≫ g = h) (M : X.Modules) (r : ℕ)\n    (α : M ⟶ free (R := X.ringCatSheaf) (ULift.{u} (Fin r)))\n    (x : Γ((pullback g).obj M, ⊤)) (i : Fin r) :\n    freeSectionsEquiv (ULift.{u} (Fin r))\n      (((pullback h).map α ≫ (pullbackFreeIso h (ULift.{u} (Fin r))).hom).app ⊤\n        (pullbackSectionFactorization g h v hv M x)) (ULift.up i) =\n      v.appTop (freeSectionsEquiv (ULift.{u} (Fin r))\n        (((pullback g).map α ≫ (pullbackFreeIso g (ULift.{u} (Fin r))).hom).app ⊤ x)\n          (ULift.up i))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

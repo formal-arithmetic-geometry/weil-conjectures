@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality
+import Sheaf.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality
+import Sheaf.AlgebraicGeometry.Modules.CanonicalStructureBaseChangeIsIso
+import Sheaf.AlgebraicGeometry.Modules.PullbackSectionFactorization
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-! # Canonical affine base change of finite étale section coordinates
 
@@ -63,6 +68,7 @@ def coordinates {r : ℕ}
       (Modules.pullbackFreeIso (pullback.fst V.ι (baseMap f n))
         (ULift.{u} (Fin r))).hom).app ⊤ (liftSection f V P n a)) (ULift.up i)
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Bundled-function form of the transition identity.
 (Source: Stacks Project, Tag 02KG.)
 (blueprint: new-sbc-finite-etale-adic-pushforward-coordinates-core)
@@ -79,7 +85,71 @@ theorem pushforward_coordinates_transition_fun :
               (by rw [Category.assoc, baseTransition_comp_baseMap]
                   exact pullback.condition)).appTop
                 (coordinates f V P α (n + 1) a i)) := by
-  sorry
+  intro r α n a
+  let v := pullback.lift (pullback.fst V.ι (baseMap f n))
+    (pullback.snd V.ι (baseMap f n) ≫ baseTransition f n)
+    (by rw [Category.assoc, baseTransition_comp_baseMap]; exact pullback.condition)
+  have hv : v ≫ pullback.fst V.ι (baseMap f (n + 1)) =
+      pullback.fst V.ι (baseMap f n) := by simp [v]
+  have : IsFinite P.obj.hom := P.property
+  have hbc (m : ℕ) : Function.Bijective ((pushforwardComparison f V P m).app ⊤) := by
+    have sq : IsPullback (coverMap f V P m) (coverToBase f V P m) P.obj.hom
+        (pullback.fst V.ι (baseMap f m)) := by
+      refine IsPullback.of_bot ?_ (by simp [coverToBase])
+        (IsPullback.of_hasPullback V.ι (baseMap f m))
+      simpa only [coverToBase, pullback.lift_snd, coverMap, cover] using
+        (IsPullback.of_hasPullback (P.obj.hom ≫ V.ι) (baseMap f m))
+    have : IsIso (pushforwardComparison f V P m) :=
+      Modules.canonical_structure_baseChange_isIso P.obj.hom (coverToBase f V P m)
+        (pullback.fst V.ι (baseMap f m)) (coverMap f V P m) sq
+    exact ConcreteCategory.bijective_of_isIso _
+  have hb0c := hbc n
+  have hb1c := hbc (n + 1)
+  generalize hb0 : pushforwardComparison f V P n = b0 at hb0c
+  generalize hb1 : pushforwardComparison f V P (n + 1) = b1 at hb1c
+  obtain ⟨x, hx⟩ := hb1c.surjective a
+  let y := Modules.pullbackSectionFactorization
+    (pullback.fst V.ι (baseMap f (n + 1))) (pullback.fst V.ι (baseMap f n)) v hv
+    ((Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left)) x
+  have hy : Modules.Hom.app b0 ⊤ y = (coverTransition f V P n).appTop a := by
+    have hw : coverTransition f V P n ≫ coverToBase f V P (n + 1) =
+        coverToBase f V P n ≫ v := by
+      apply pullback.hom_ext <;> simp [coverToBase, coverTransition, v, coverMap,
+        Category.assoc]
+    have hn := @Modules.structure_baseChange_sections_naturality
+      P.obj.left V.toScheme (cover f V P (n + 1))
+      (Limits.pullback V.ι (baseMap f (n + 1)))
+      (cover f V P n) (Limits.pullback V.ι (baseMap f n)) P.obj.hom
+      (coverToBase f V P (n + 1)) (coverToBase f V P n)
+      (pullback.fst V.ι (baseMap f (n + 1))) (pullback.fst V.ι (baseMap f n))
+      (coverMap f V P (n + 1)) (coverMap f V P n)
+      (by simp [coverToBase]) (by simp [coverToBase])
+      v (coverTransition f V P n) hv (coverTransition_coverMap f V P n) hw
+      b1 b0 hb1.symm hb0.symm x a hx
+    exact hn
+  have hl0 : liftSection f V P n (Modules.Hom.app b0 ⊤ y) = y := by
+    unfold liftSection
+    rw [hb0]
+    exact Function.leftInverse_invFun hb0c.injective y
+  have hl : liftSection f V P n ((coverTransition f V P n).appTop a) = y :=
+    (congrArg (liftSection f V P n) hy.symm).trans hl0
+  have hl1 : liftSection f V P (n + 1) a = x := by
+    unfold liftSection
+    rw [hb1, ← hx]
+    exact Function.leftInverse_invFun hb1c.injective x
+  funext i
+  have hc := Modules.pullback_free_coordinates_naturality
+    (pullback.fst V.ι (baseMap f (n + 1))) (pullback.fst V.ι (baseMap f n))
+    v hv ((Modules.pushforward P.obj.hom).obj (Modules.unit P.obj.left)) r α x i
+  let c0 := fun z ↦ Modules.freeSectionsEquiv (ULift.{u} (Fin r))
+    (((Modules.pullback (pullback.fst V.ι (baseMap f n))).map α ≫
+      (Modules.pullbackFreeIso (pullback.fst V.ι (baseMap f n))
+        (ULift.{u} (Fin r))).hom).app ⊤ z) (ULift.up i)
+  let c1 := fun z ↦ v.appTop (Modules.freeSectionsEquiv (ULift.{u} (Fin r))
+    (((Modules.pullback (pullback.fst V.ι (baseMap f (n + 1)))).map α ≫
+      (Modules.pullbackFreeIso (pullback.fst V.ι (baseMap f (n + 1)))
+        (ULift.{u} (Fin r))).hom).app ⊤ z) (ULift.up i))
+  exact (congrArg c0 hl).trans (hc.trans (congrArg c1 hl1.symm))
 
 /-- Coordinates from the canonical finite affine base-change comparison are natural
 under successive thickenings.

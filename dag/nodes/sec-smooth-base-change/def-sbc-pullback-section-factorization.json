@@ -1,0 +1,107 @@
+{
+ "id": "def-sbc-pullback-section-factorization",
+ "kind": "definition",
+ "title": "Canonical section transport through a factorization of scheme maps",
+ "statement": "Let $X,Y,Z$ be schemes [def-weil-pbc-scheme-conventions], $g:Y\\to X$, $h:Z\\to X$ and $v:Z\\to Y$ with $v;g=h$. For an $\\mathcal O_X$-module $M$ [def-weil-sheaf-of-modules-category], define $T_{g,h,v}:\\Gamma(g^*M)\\to\\Gamma(h^*M)$ as the pullback adjunction unit along $v$ followed by the canonical composition comparison $v^*g^*M\\cong h^*M$. This is the explicit constructed section map pullbackSectionFactorization.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01CA, functoriality and associativity of tensor pullback; pullback adjunction unit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "D4",
+  "document": "Stacks Project",
+  "place": "Tag 01CA; explicit composition of existing pullback unit and composition maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackCompOfEq|pullbackΓ",
+   "date": "2026-10-14",
+   "results": "No matches.",
+   "verdict": "Existing component constructions, no packaged section map through a factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical map on global sections from pullback along a composite through the unit and the composition isomorphism",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a pulled back module transported along a factorization by pullback composition comparison",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_assoc",
+   "verdict": "Existing component constructions, no packaged section map through a factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  },
+  "master": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.PullbackSectionFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/PullbackSectionFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullbackSectionFactorization",
+  "statement": "def pullbackSectionFactorization\n    {X Y Z : Scheme.{u}} (g : Y ⟶ X) (h : Z ⟶ X) (v : Z ⟶ Y)\n    (hv : v ≫ g = h) (M : X.Modules) :\n    Γ((pullback g).obj M, ⊤) → Γ((pullback h).obj M, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

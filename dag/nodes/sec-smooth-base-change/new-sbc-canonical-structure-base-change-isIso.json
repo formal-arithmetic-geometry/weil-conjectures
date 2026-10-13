@@ -1,0 +1,121 @@
+{
+ "id": "new-sbc-canonical-structure-base-change-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the canonical structure-sheaf base-change adjoint",
+ "statement": "Let $k:X^{\\prime}\\to X$, $q:X^{\\prime}\\to Y^{\\prime}$, $p:X\\to Y$ and $g:Y^{\\prime}\\to Y$ be a cartesian square of schemes [def-weil-pbc-scheme-conventions], with $p$ affine. The canonical map $g^*(p_*\\mathcal O_X)\\to q_*\\mathcal O_{X^{\\prime}}$ [def-weil-sheaf-of-modules-category], defined as the adjoint of restriction along $k$ transported through the pushforward composition comparisons, is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02KG, canonical affine tensor comparison; Tag 01CA, tensor functoriality and associativity."
+ },
+ "proof": [
+  {
+   "text": "Compare the standard and tensor pullback adjunctions by uniqueness of left adjoints.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the comparison with the composition of that isomorphism, the affine base-change map, and the pushed-forward tensor pullback-of-unit map by applying homEquiv and its naturality.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change-isIso",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each factor is an isomorphism by affine quasi-coherent base change and the tensor pullback unit characterization. Their composition is therefore invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-pushforward-base-change-isIso",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "D4",
+  "document": "Stacks Project",
+  "place": "Tags 02KG and 01CA; explicit categorical reduction of the tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*isIso|isIso.*baseChange",
+   "date": "2026-10-14",
+   "results": "Mathlib/AlgebraicGeometry/Gluing.lean",
+   "verdict": "Related API, no theorem with this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine structure sheaf base change adjoint to restriction is an isomorphism",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.arrowIsoΓSpecOfIsAffine; AlgebraicGeometry.IsAffineOpen.fromSpec_app_self; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply; AlgebraicGeometry.IsAffineOpen.isoSpec_hom_appTop; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso",
+   "verdict": "Related API, no theorem with this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine structure sheaf base change adjoint to restriction is an isomorphism",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates",
+  "date": "2026-10-14",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite locally free direct image and its finite scalar coordinates in the Tag 0EKP comparison.",
+   "via": [
+    "new-finite-etale-adic-sections-kernel",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.CanonicalStructureBaseChangeIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/CanonicalStructureBaseChangeIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonical_structure_baseChange_isIso",
+  "statement": "theorem canonical_structure_baseChange_isIso {X Y X' Y' : Scheme.{u}}\n    (p : X ⟶ Y) (q : X' ⟶ Y') (g : Y' ⟶ Y) (k : X' ⟶ X)\n    (sq : IsPullback k q p g) [IsAffineHom p] :\n    IsIso (((pullbackPushforwardAdjunction g).homEquiv _ _).symm\n      ((pushforward p).map (SheafOfModules.unitToPushforwardObjUnit k.toRingCatSheafHom) ≫\n        (pushforwardComp k p).hom.app (unit X') ≫\n        (pushforwardCongr sq.w).hom.app (unit X') ≫\n        (pushforwardComp q g).inv.app (unit X')))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
