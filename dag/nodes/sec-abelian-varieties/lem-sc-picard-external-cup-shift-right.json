@@ -17,60 +17,48 @@
  ],
  "proof": [
   {
-   "text": "For the coefficient being shifted, equip the scheme with its given k-structure, embed the module in an acyclic quasi-coherent E, and take the quasi-coherent cokernel Q. The long exact module cohomology sequence identifies H^p(Q) with H^(p+1) of the original module for p>0. For d<p one has p>0 and d+1<p+1, so Q has bound d. E also has bound d. This includes d=0 and zero modules.",
+   "text": "Give Y its k-structure via g and use the existing quasi-coherent acyclic embedding to obtain a mono i:G -> E with E acyclic. The actual cokernel Q=cokernel i is quasi-coherent. Construct the short exact cokernel sequence.",
    "uses": [
     "lem-sc-picard-qcoh-universal-delta-embedding",
-    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For d<p, acyclicity implies H^p(E)=0 since p>=1. The existing right-derived long exact sequence applied to the cokernel sequence is exact at H^p(Q). Its preceding object H^p(E) is zero and its next object H^(p+1)(G) is zero by hG and d+1<p+1. Thus both maps at H^p(Q) are zero; ShortComplex.Exact.isZero_X2 makes H^p(Q) zero. This proves bound d for E and Q, including d=0.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
     "def-sc-ringed-space-module-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Choose finite affine covers and the product cover. Sections on affine intersections are exact on quasi-coherent modules; the section pullback and tensor formulas identify product sections with tensors of factor sections. Field tensor is exact. Hence the signed refinement/cup comparisons form a map of short exact sequences of complexes, in the coefficient being shifted. The affine Cech comparisons and their naturality identify the long exact homology ladder with the external cup comparison, including connecting maps.",
+   "text": "Obtain normalized cochain realizations cE and cQ from the existing cochain existence theorem. Apply the supplied induction hypothesis to E and Q using their bound-d proofs; their homology maps are invertible in every natural degree.",
    "uses": [
-    "pqf-lem-affine-vanishing",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-cech-comparison-natural",
-    "lem-sc-picard-cech-cup-pullback-compat"
+    "lem-sc-picard-external-cup-cochain"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take normalized realizations for E and Q from the cochain existence theorem and apply the supplied bound-d induction hypothesis to both in every natural degree. Tensor Kunneth cycle spanning and normalization identify their homology maps with the transported Cech comparisons. The five lemma makes the comparison for the original coefficient invertible. The same spanning and normalization argument identifies any specified c with that comparison, so H(c) is invertible. This proves exactly one successor step and does not assume the conclusion for unbounded coefficients.",
+   "text": "Apply the proved right short-exact transfer to the cokernel sequence and c,cE,cQ. Its geometric exact ladder and Mathlib five-lemma proof give invertibility of H^n(c). No target or coefficient statement is changed.",
    "uses": [
-    "lem-sc-picard-external-cup-cochain",
-    "lem-sc-picard-kunneth-resolution-model",
-    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+    "lem-sc-picard-external-cup-right-short-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-ringed-space-module-cohomology",
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-cech-comparison-map-naturality",
-  "lem-sc-cech-comparison-natural",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
   "lem-sc-picard-external-cup-cochain",
-  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-external-cup-right-short-exact",
   "lem-sc-picard-qcoh-universal-delta-embedding",
-  "lem-sc-qcoh-cech-total-tensor-nat-iso",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "pqf-def-coherent",
-  "pqf-lem-affine-vanishing"
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, lemma-kunneth; F1 made the acyclic base and individual bounded dimension-shifting steps explicit, including transport to arbitrary normalized resolution-model maps."
+  "place": "Tag 0BED: C3 formalized the acyclic embedding, cokernel bound via existing right-derived long exactness, normalized realizations and induction. The geometric exact ladder is isolated as a new theorem; the five-lemma transfer is proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -151,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T045524-L-127495",
+  "landing": "20261013T060412-L-581650",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
