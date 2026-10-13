@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Category.ModuleCat.Free
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Sheaf.RingTheory.FiniteConeCycleAttachment
 
 /-!
 # One descending finite free extension
@@ -62,6 +65,23 @@ theorem exists_finiteFree_cone_extension (R : Type u) [CommRing R] [Small.{v} R]
       (∀ i : ℤ, n - 1 ≤ i → IsZero
         ((homologyFunctor (ModuleCat.{v} R) i).obj
           (Q.obj (CochainComplex.mappingCone g)))) ∧
-      j ≫ g = f ∧ (∀ i : ℤ, n ≤ i → IsIso (j.f i)) := by sorry
+      j ≫ g = f ∧ (∀ i : ℤ, n ≤ i → IsIso (j.f i)) := by
+  classical
+  let D := CochainComplex.mappingCone f
+  let eH : ((homologyFunctor (ModuleCat.{v} R) (n - 1)).obj (Q.obj D)) ≅
+      D.homology (n - 1) := (homologyFunctorFactors (ModuleCat.{v} R) (n - 1)).app D
+  have : Module.Finite R ((homologyFunctor (ModuleCat.{v} R) (n - 1)).obj (Q.obj D)) :=
+    hfinite
+  have : Module.Finite R (D.homology (n - 1)) := Module.Finite.equiv eH.toLinearEquiv
+  obtain ⟨k, p, hp⟩ := Module.Finite.exists_fin' R (D.homology (n - 1))
+  let P := ModuleCat.of R (Shrink.{v} (Fin k → R))
+  let e := Shrink.linearEquiv.{v} R (Fin k → R)
+  let π : P ⟶ D.homology (n - 1) := ModuleCat.ofHom (p.comp e.toLinearMap)
+  have : Epi π := (ModuleCat.epi_iff_surjective π).2 (hp.comp e.surjective)
+  let q : P ⟶ D.cycles (n - 1) := Projective.factorThru π (D.homologyπ (n - 1))
+  have hq : Epi (q ≫ D.homologyπ (n - 1)) := by
+    rw [Projective.factorThru_comp]
+    infer_instance
+  exact exists_finiteFree_cone_cycle_attachment R C F f b n hn hlow hupp hfree hvan P q hq
 
 end DerivedCategory

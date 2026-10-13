@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-ring-finite-cone-cycle-attachment",
+ "kind": "statement",
+ "title": "Attach supplied finite free generators of cone cohomology",
+ "statement": "Let $R$ be a commutative ring small in $v$, with derived category as in [def-weil-abstract-derived-category]. Let $f:F\\to C$ be a map of cochain complexes of $R$-modules in $v$, and $n,b\\in\\mathbb Z$ with $n\\le b+1$. Suppose $F$ is zero below $n$ and above $b$, its terms are finite free, and $H^i(Q(\\operatorname{Cone}(f)))=0$ for $i\\ge n$. Put $D=\\operatorname{Cone}(f)$ and let $Z^{n-1}(D)$ be the kernel of its outgoing differential. Given a finite free module $P$ in $v$ and $q:P\\to Z^{n-1}(D)$ such that $P\\xrightarrow{q} Z^{n-1}(D)\\to H^{n-1}(D)$ is surjective, there exist $G,g:G\\to C,j:F\\to G$ with $G$ zero below $n-1$ and above $b$, all its terms finite free, $H^i(Q(\\operatorname{Cone}(g)))=0$ for $i\\ge n-1$, $g\\circ j=f$, and $j^i$ invertible for $i\\ge n$. All objects remain in $v$. This statement assumes actual generating cycles and does not select them from a finite homology hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064U, proof of (2) implies (1), one descending induction step, cone-cycle formulation; https://stacks.math.columbia.edu/tag/064U"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Compose q with the cycle inclusion and project its components to F^n and C^(n-1), obtaining a and c. The cone cycle equations give d_F a=0 and f a+d_C c=0. Define G to be P in degree n-1, F in degrees at least n, and zero below; its added differential is a. Define g=-c in degree n-1 and f elsewhere, and j as the retained identities and the unique maps from zero below n. Check the complex and chain-map identities with the two cycle equations. The bound n≤b+1, finiteness and freeness of P and the old terms give the bounds and finite freeness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The cone of g has the same terms and outgoing differentials as D in degrees at least n-1. The boundaries in degree n-1 are the old boundaries plus the image of q (up to sign), since the new P term contributes from cone degree n-2. Thus H^(n-1)(Cone(g)) is the cokernel of q followed by the old homology projection, hence zero. All higher homology is unchanged. Transport to derived homology with homologyFunctorFactors.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064U, proof of (2) implies (1), one descending induction step, cone-cycle formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Attach a finite free module in one degree to a cochain complex along generators in the cycles of a mapping cone to kill cohomology",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b, CochainComplex.IsKInjective, CochainComplex.cm5b.I, CochainComplex.cm5b.i, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI. None states attachment along a supplied cycle family.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"cycles\"",
+   "results": "0 hits: . None states attachment along a supplied cycle family.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*cycles|cycles.*finiteFree|attach.*cycles|cycles.*attach",
+   "results": "0 hits: . None states attachment along a supplied cycle family.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Attach a finite free module to cone cycles generating cohomology to extend a bounded finite free complex by one degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteConeFreeExtension",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "m-pseudo-coherence induction: Tag 064U, proof of (2) implies (1), one descending induction step, cone-cycle formulation; attachment after the generating cone cycles have been supplied",
+   "via": [
+    "lem-pc-ring-finite-cone-free-extension",
+    "lem-pc-ring-finite-cone-free-model",
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-pc-ring-pseudo-coherent-localization-glue"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteConeCycleAttachment",
+  "file": "lean/Sheaf/RingTheory/FiniteConeCycleAttachment.lean",
+  "declaration": "DerivedCategory.exists_finiteFree_cone_cycle_attachment",
+  "statement": "theorem exists_finiteFree_cone_cycle_attachment (R : Type u) [CommRing R] [Small.{v} R]\n    [HasDerivedCategory.{w} (ModuleCat.{v} R)]\n    (C F : CochainComplex (ModuleCat.{v} R) ℤ) (f : F ⟶ C) (b n : ℤ)\n    (hn : n ≤ b + 1) (hlow : F.IsStrictlyGE n) (hupp : F.IsStrictlyLE b)\n    (hfree : ∀ i : ℤ, Module.Free R (F.X i) ∧ Module.Finite R (F.X i))\n    (hvan : ∀ i : ℤ, n ≤ i → IsZero\n      ((homologyFunctor (ModuleCat.{v} R) i).obj (Q.obj (CochainComplex.mappingCone f))))\n    (P : ModuleCat.{v} R) [Module.Free R P] [Module.Finite R P]\n    (q : P ⟶ (CochainComplex.mappingCone f).cycles (n - 1))\n    (hq : Epi (q ≫ (CochainComplex.mappingCone f).homologyπ (n - 1))) :\n    ∃ (G : CochainComplex (ModuleCat.{v} R) ℤ) (g : G ⟶ C) (j : F ⟶ G),\n      G.IsStrictlyGE (n - 1) ∧ G.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Free R (G.X i) ∧ Module.Finite R (G.X i)) ∧\n      (∀ i : ℤ, n - 1 ≤ i → IsZero\n        ((homologyFunctor (ModuleCat.{v} R) i).obj\n          (Q.obj (CochainComplex.mappingCone g)))) ∧\n      j ≫ g = f ∧ (∀ i : ℤ, n ≤ i → IsIso (j.f i))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T003201-L-2430264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T003201-L-2430264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

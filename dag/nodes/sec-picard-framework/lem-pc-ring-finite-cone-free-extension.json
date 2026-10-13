@@ -12,20 +12,20 @@
  ],
  "proof": [
   {
-   "text": "Choose finitely many generating classes of H^(n-1)(Cone(f)) and cycle representatives (a,c) in F^n direct sum C^(n-1). Their equations d_F a=0 and f a+d_C c=0 allow a finite free module on this list in degree n-1 with differential a and augmentation -c. Keep old degrees at least n, put zero below n-1, and use the inclusion j of F. The cycle equations prove the differential and augmentation identities. The ring smallness permits a finite free carrier built from Shrink R in v.",
+   "text": "Use homologyFunctorFactors to transport the finite derived homology hypothesis to D.homology(n-1), where D=mappingCone f. Module.Finite.exists_fin' supplies a finite free surjection p:(Fin k→R)→H^(n-1)(D). Construct P=Shrink.{v}(Fin k→R) and compose p with Shrink.linearEquiv to obtain an epimorphism π:P→H^(n-1)(D). Free modules are projective, so Projective.factorThru lifts π through the epimorphism D.homologyπ(n-1) to an actual cycle map q. Projective.factorThru_comp proves q followed by the homology projection is epi. All choices here come from proved Mathlib theorems.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "In the new cone the old degree-(n-1) cohomology classes all become boundaries, because the generators added in degree n-1 of G contribute their chosen cone cycles as boundaries from degree n-2. Higher cone cohomology does not change. Thus the new cone vanishes at and above n-1; alternatively use [lem-sf-derived-homology-long-exact] and the cycle representatives to check that H^n(g) is invertible and H^(n-1)(g) is surjective. The inclusion is the identity in degrees at least n and respects the augmentation. Since n≤b+1, the sole added degree n-1 is at most b. Empty generators handle a zero obstruction and the zero ring.",
+   "text": "Apply [lem-pc-ring-finite-cone-cycle-attachment] to the constructed P and q, its finite free instances, the proved generating epimorphism, and the unchanged old bounds and cone vanishing hypotheses. This gives G,g,j and all requested properties. The remaining hole is only attachment along supplied cycles, not the finite-generator selection and lifting step.",
    "uses": [
-    "lem-sf-derived-homology-long-exact"
+    "lem-pc-ring-finite-cone-cycle-attachment"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-derived-homology-long-exact"
+  "lem-pc-ring-finite-cone-cycle-attachment"
  ],
  "proof_origin": {
   "by": "document",
@@ -106,12 +106,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T225319-L-1809408",
+  "landing": "20261013T003201-L-2430264",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
