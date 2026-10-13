@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-hom-tensor-iterated-differential-component",
+ "kind": "statement",
+ "title": "Component formula for the curried iterated Hom differential",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-differential",
+   "place": "iterated Hom differential, one product component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "For any cochain complexes K,L,M of sheaf modules over R and integers n,t, put T=Tot(K tensor L). The iterated Hom differential from n to n+1 followed by the chosen currying map and the projection to internal Hom(T^t,M^(t+n+1)) equals the degree-n currying map followed by its t-th projection and postcomposition with d_M, minus (-1)^n times the degree-n currying map followed by its (t+1)-st projection and precomposition with d_T. This is an identity in one internal Hom factor, not an equality into the full Hom complex.",
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90)"
+ },
+ "proof": [
+  {
+   "text": "Expand the outer and inner Hom differentials on localized pure tensors in the summand K^p tensor L^q, p+q=t. The defining currying equation yields d_M(f(x)(y))-(-1)^(p+n)f(x)(d_L y)-(-1)^n f(d_K x)(y). The total tensor differential sends x tensor y to d_K x tensor y+(-1)^p x tensor d_L y. The integer sign addition identity equates these expressions with the displayed postcomposition and signed precomposition terms. Bilinearity extends the equality before sheafification; the sheafification adjunction and coproduct property extend it to the total tensor term, and equality on all localized sites gives equality in this internal Hom factor.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, with the component sign calculation of More on Algebra Tag 0A5Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, applying the referenced More on Algebra Tag 0A5Y calculation on localized sites"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The iterated Hom differential after currying has a component given by postcomposition with the target differential minus signed precomposition with the total tensor differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying between iterated internal Hom of sheaf module cochain complexes and Hom of total tensor commutes with differential evaluated on sections",
+   "results": "SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints_symm_comp, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-13",
+   "verdict": "No exact component formula for the chosen sheaf Hom/currying construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fan.IsLimit.hom_ext",
+   "results": "CategoryTheory.Limits.Fan.IsLimit.hom_ext",
+   "date": "2026-10-13",
+   "verdict": "No exact component formula for the chosen sheaf Hom/currying construction."
+  },
+  {
+   "tool": "grep",
+   "query": "curry.*δ|uncurry.*δ|homObjMap_app_apply",
+   "results": "No matches in Mathlib/Algebra/Homology.",
+   "date": "2026-10-13",
+   "verdict": "No exact component formula for the chosen sheaf Hom/currying construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferential",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorDifferentialComponent",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorDifferentialComponent.lean",
+  "declaration": "CategoryTheory.homTensorDegreewiseMap_iteratedDifferential_component",
+  "statement": "theorem homTensorDegreewiseMap_iteratedDifferential_component\n    (K L M : CochainComplex Mod ℤ) (n t : ℤ) :\n    letI := SheafOfModules.monoidalCategory R\n    let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)\n    (homComplex (R := R) K (homComplex (R := R) L M)).d n (n + 1) ≫\n        homTensorDegreewiseMap R K L M (n + 1) ≫\n          homTensorProjection R T M (n + 1) t (t + (n + 1)) rfl =\n      (homTensorDegreewiseMap R K L M n ≫\n        homTensorProjection R T M n t (t + n) rfl ≫\n          SheafOfModules.homObjMap (R := R) (𝟙 (T.X t)) (M.d (t + n) (t + (n + 1)))) -\n      n.negOnePow • (homTensorDegreewiseMap R K L M n ≫\n        homTensorProjection R T M n (t + 1) (t + (n + 1)) (by omega) ≫\n          SheafOfModules.homObjMap (R := R) (T.d t (t + 1)) (𝟙 (M.X (t + (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3026831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3026831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
