@@ -10849,3 +10849,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/C1/Sheaf.RingTheory.PopescuAppendFlatParameters (stage 3; reviewer PASS; first push; landing 20261013T031531-L-3568424 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/C2/Sheaf.CategoryTheory.ColimitSiteAbelianFiniteFamilyStabilizationNonempty (stage 3; reviewer PASS; after a return; landing 20261013T031531-L-3568592 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/C3/Sheaf.CategoryTheory.ColimitSiteRawSectionRelations (stage 3; reviewer PASS; first push; landing 20261013T031532-L-3568738 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/C4/Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong (stage 3; reviewer PASS; first push; landing 20261013T031532-L-3568891 (proof); batch 20261013T031526; modules 1; new nodes 0)
