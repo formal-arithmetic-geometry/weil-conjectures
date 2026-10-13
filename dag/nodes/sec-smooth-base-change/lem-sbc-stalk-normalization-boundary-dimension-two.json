@@ -1,0 +1,152 @@
+{
+ "id": "lem-sbc-stalk-normalization-boundary-dimension-two",
+ "kind": "statement",
+ "title": "Boundary dimension of the finite localized relative normalization",
+ "statement": "Let S be an integral Noetherian quasi-separated scheme with integrally closed stalks [def-weil-pbc-scheme-conventions]. Let c:C→S be quasi-compact, quasi-separated and smooth [def-sbc-smooth-morphisms]. Let U be an open of S and PA a finite etale cover of C_U=c inverse(U). Let s outside U be minimal under specialization in S minus U, and assume depth O(S,s) ≥ 2 [def-weil-pbc-depth]. Put a:Spec O(S,s)→S, L=C times_S Spec O(S,s), and let n:N→L be the pullback to L of the concrete relative normalization of PA→C [def-pc-fibre-product]. If n is finite, then for every z in N with n(z) outside the inverse image of C_U in L, the Krull dimension of O(N,z) is at least two.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, local claim before the formal test; Tags 0337, 00LK, 033C and 00H8, dimension and going-down calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Use minimality of s and the specialization of every point of Spec O(S,s) to its closed point to identify the boundary of L=C times_S Spec O(S,s) with its closed fibre. At every such target point the smooth projection is flat and local on stalks. The closed-point base stalk is O(S,s), so the flat local depth formula gives target depth at least two. The depth bound by support dimension, specialized to the ring itself, gives target Krull dimension at least two.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Smooth ascent of normality over the normal local base makes the affine components of L normal domains. The localized relative normalization has normal domain stalks and a dense inverse image of C_U. Its irreducible components dominate the corresponding components of L: their generic points lie in the dense open, where the finite etale map has open image, so their contractions are target generic points. On an affine chart of L the finite algebra decomposes into its finitely many normal domain components; each component is an integral extension of the normal target domain with injective structure map.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-sbc-stalk-normalization-normal-dense"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a boundary point z of N, choose the normal affine target component and the finite normal domain component containing z as in the previous step. A strict prime chain of length two ending at the target prime exists by the target dimension bound. Going down for the integral extension lifts it successively to a chain ending at the source prime. Contractions distinguish adjacent lifted primes, so the lifted chain is strict. Affine stalks are the prime localizations, giving the asserted source dimension bound. The conclusion for an empty normalization is vacuous.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-normal-dense",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-smooth-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, local claim; Tags 0337, 00LK, 033C and 00H8. Affine component and strict-chain assembly written by T2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat coefficient map from a Noetherian ring to multivariate power series ring and depth of boundary normalization stalks",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat, AdicCompletion.flat_of_isNoetherian, PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime, RingTheory.Sequence.IsWeaklyRegular.of_flat, PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem",
+   "date": "2026-10-13",
+   "verdict": "No exact boundary-dimension theorem; ring going-down and height lemmas are ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.C",
+   "results": "12 hits: MvPowerSeries.C, MvPowerSeries.constantCoeff_comp_C, MvPowerSeries.C_injective, MvPowerSeries.C_surjective, MvPowerSeries.c_eq_algebraMap, MvPowerSeries.constantCoeff_C, MvPowerSeries.C_inj, MvPolynomial.coe_C",
+   "date": "2026-10-13",
+   "verdict": "No exact boundary-dimension theorem; ring going-down and height lemmas are ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*normal.*height|normal.*boundary.*dimension",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact boundary-dimension theorem; ring going-down and height lemmas are ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a finite normalization at points above a codimension two boundary over a normal base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of source stalk of finite normalization is at least the dimension of target stalk over a normal scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization",
+   "date": "2026-10-13",
+   "verdict": "No exact boundary-dimension theorem; ring going-down and height lemmas are ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height, Algebra.HasGoingDown",
+   "results": "1 hits: Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown",
+   "date": "2026-10-13",
+   "verdict": "No exact boundary-dimension theorem; ring going-down and height lemmas are ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit sk-prop-input-spreading, Extension in depth >=2 and the local computation: boundary dimension of the localized normalization before the formal test.",
+   "via": [
+    "lem-sbc-stalk-normalization-formal-boundary-depths",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwo.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_boundary_dimension_two",
+  "statement": "theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ z : (pullback\n      (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) : Scheme.{u}),\n      n z ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤ ringKrullDim\n        ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n          (pullback.fst c a) : Scheme.{u}).presheaf.stalk z)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T140826-L-316342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T140826-L-316342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

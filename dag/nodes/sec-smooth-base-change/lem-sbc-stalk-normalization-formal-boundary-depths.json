@@ -17,27 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Minimality identifies the local base open with the punctured spectrum\nof A. The localized normalization is normal and its open preimage is dense.\nSmooth flat local maps make boundary target points have height at least two,\nusing the depth hypothesis on A and the flat local depth formula. Going down\nfor the finite integral extension of normal domains gives height at least two\nat its boundary source points. Normal Serre S2 then gives source depth at least\ntwo. Flat base change by t induces flat local maps on source stalks, so the\nflat local depth formula preserves this bound. Each stalk of the split finite\ncoproduct is a stalk of one copy of T. The Noetherian power-series ring is flat\nover A, and the base equation makes the complement of V lie over the closed\npoint of A. The flat local depth formula therefore gives depth at least two\nfor these stalks as well. The argument includes d = 0; a trivial group has\none summand. These bounds do not identify either cover on V.",
+   "text": "Apply the boundary-dimension lemma to the original finite localized normalization. Use its normal-domain stalks and the normal local depth-two theorem to obtain depth at least two at its boundary points. For the fixed flat formal test, pullback.fst is flat. The pullback equation sends a boundary point on F to a boundary point on the normalization. The proved private helper depth_le_of_flat_stalk applies the flat local depth formula, transferring the depth bound to F.",
    "uses": [
-    "lem-sbc-stalk-normalization-normal-dense",
-    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-sbc-stalk-normalization-boundary-dimension-two",
+    "lem-sbc-stalk-normalization-normal-part",
     "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-going-down-normal-integral"
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient projection b from the finite-variable power-series spectrum is flat by constants_flat. Minimality of s, the pullback condition and the specified base equation show that every point outside V maps under b to the closed point of Spec O(S,s). Transport the base depth bound across stalkClosedPointIso using the flat local depth formula, and apply the flat-stalk depth helper to b. This proves depth at least two on the formal spectrum outside V, including d=0.",
+   "uses": [
+    "lem-sbc-mv-power-series-constants-flat",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coproduct fold p is flat, since each summand map is an identity; it is locally of finite type by source locality. Thus its source is locally Noetherian. Apply depth_le_of_flat_stalk to p and the formal-spectrum boundary bound from the previous step. Pair this coproduct bound with the F bound. An empty finite indexing type gives an empty coproduct, so this argument includes the empty and trivial-group cases.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-stalk-normalization-normal-dense",
+  "lem-sbc-mv-power-series-constants-flat",
+  "lem-sbc-stalk-normalization-boundary-dimension-two",
+  "lem-sbc-stalk-normalization-normal-part",
   "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-normal-local-depth-two",
-  "lem-weil-pbc-going-down-normal-integral"
+  "lem-weil-pbc-normal-local-depth-two"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "S4",
+  "by": "T2",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ, final local calculation; Tags 0EY6, 0EY9, 0337, 031S"
+  "place": "Tags 0EYJ, 0337, 031S and 0EYA. Boundary dimension split off; normal S2 and both flat depth transports assembled in Lean."
  },
  "mathlib_searches": [
   {
@@ -124,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T134803-L-130281",
+  "landing": "20261013T140826-L-316342",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
