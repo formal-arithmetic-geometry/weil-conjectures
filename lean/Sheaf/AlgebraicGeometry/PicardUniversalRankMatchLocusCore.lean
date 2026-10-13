@@ -5,6 +5,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -25,5 +26,9 @@ theorem exists_picardUniversalRankMatchLocus_core {X S : Scheme.{u}} (f : X ⟶ 
     (E : X.Modules) [E.IsFiniteLocallyFree] :
     ∃ (W : Scheme.{u}) (j : W ⟶ S),
       IsImmersion j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S),
-        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g := by sorry
+        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g := by
+  obtain ⟨W, j, hj, hW⟩ := exists_picardUniversalRankMatchLocus_core_rank f hO E
+  refine ⟨W, j, hj, ?_⟩
+  intro T g
+  rw [hW g, picardUniversalRankMatchCoreCondition_iff f E g]
 end AlgebraicGeometry.Scheme
