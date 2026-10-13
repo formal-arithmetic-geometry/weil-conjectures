@@ -12,34 +12,37 @@
  ],
  "proof": [
   {
-   "text": "Form the actual polynomial quotient by the monic equations X_i^p-a_i. Successive monic polynomial division gives an A-basis consisting of monomials with all exponents less than p: division gives spanning, and the unique reduced remainder gives independence. In particular the coefficient map is injective, and B is finite free and integral over A.",
+   "text": "Let K be the residue field of A and Ω its algebraic closure. Compose the residue map with K → Ω. By IsAlgClosed.exists_pow_nat_eq choose roots α_i of the images of a_i. MvPolynomial.eval₂Hom at α_i annihilates every generator X_i^p-a_i and therefore the entire defining ideal, by Ideal.span_le. Ideal.Quotient.lift gives a homomorphism g:B → Ω. Since Ω is a field, g.domain_nontrivial makes B nontrivial. The composite A → B → Ω equals A → K → Ω on every coefficient.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-finite-algebra-is-integral"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Every maximal ideal of B contracts to m_A, by [lem-weil-pbc-finite-algebra-local-radical]. The closed fibre is K[X_i]/(X_i^p-a_bar_i). Every residue field of this finite-dimensional K-algebra embeds into an algebraic closure of K, since it is a finite extension. Frobenius injectivity makes the value of each variable unique, so all such evaluations have the same kernel; the closed fibre has at most one prime. Lying over supplies a prime over m_A by [lem-weil-pbc-integral-injective-lying-over]. Consequently B has exactly one maximal ideal, hence is local. Its contraction is m_A, which proves that A → B is local. For n=0 the quotient is A.",
+   "text": "The map F_p → A → B gives characteristic p on nontrivial B, by CharP.of_ringHom_of_ne_zero. Each defining relation gives q(X_i)^p = a_i. Prove that every b in B has b^p in the coefficient image: lift b along the quotient map and use MvPolynomial.induction_on. Constants use map_pow; sums use add_pow_char; multiplication by X_i uses mul_pow and the defining relation. No finite-freeness, integral extension, or prime-ideal argument is needed.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-local-radical",
-    "lem-weil-pbc-integral-injective-lying-over",
-    "lem-weil-pbc-finite-dimensional-domain-is-field"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For b in B choose c in A with c mapped to b^p. IsLocalRing.isUnit_or_isUnit_one_sub_self applied to c gives that c or 1-c is a unit. Their images are b^p and (1-b)^p, respectively, using sub_pow_char. Apply isUnit_pow_iff, since p>0, to conclude that b or 1-b is a unit. IsLocalRing.of_isUnit_or_isUnit_one_sub_self gives locality of B. No variable occurs in this criterion, so the empty family is included.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Suppose the image of x in B is a unit. Its image under g is a unit in Ω and hence is nonzero. If the residue of x in K were zero, the composite identity on coefficients would make this image zero. Thus the residue is nonzero, and IsLocalRing.residue_ne_zero_iff_isUnit shows that x is a unit. This is exactly IsLocalHom.map_nonunit for A → B.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-finite-algebra-local-radical",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
-  "lem-weil-pbc-integral-injective-lying-over"
+  "def-weil-pbc-mv-polynomial-ring"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07E5, proof of (2) => (4); read at https://stacks.math.columbia.edu/tag/07E5 because the local literature checkout is absent. The local quotient argument is the general finite p-root version of the local-base-change construction, expanded by P3 using monic division, integral contraction and Frobenius uniqueness."
+  "place": "Tag 07E5, construction of A' in (2) => (4), with the power-in-coefficient-image observation of Algebra Tag 0BR8. P4 gives a shorter direct unit-criterion proof, using Mathlib's algebraic closure, polynomial induction, Frobenius identities, and local-ring criterion. Both source tags were read online on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -128,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T082401-L-1642632",
-  "kind": "interface",
+  "landing": "20261013T100055-L-2476860",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

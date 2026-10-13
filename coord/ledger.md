@@ -11929,3 +11929,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/P4/Sheaf.AlgebraicGeometry.DerivedPullbackTensorShift (stage 3; reviewer PASS; first push; landing 20261013T100053-L-2476186 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 10:00 L: merged deliver/P4/Sheaf.RingTheory.FlatModuleTensorModel (stage 3; reviewer PASS; first push; landing 20261013T100054-L-2476383 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/P4/Sheaf.RingTheory.FpModuleTensorModelComparison (stage 3; reviewer PASS; first push; landing 20261013T100055-L-2476642 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:00 L: merged deliver/P4/Sheaf.RingTheory.PthRootAlgebraLocal (stage 3; reviewer PASS; first push; landing 20261013T100055-L-2476860 (proof); batch 20261013T095923; modules 1; new nodes 0)
