@@ -20,6 +20,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparison
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixed
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
@@ -36,6 +38,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 600000 in
+-- The two auxiliary comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The residue homology quotients of strictly perfect direct-image models identify
@@ -116,6 +120,14 @@ theorem picard_residue_homology_geometric_naturality
             structureSheafCohomologyPullback
               (((Over.pullback (S.fromSpecResidueField s)).map
                 (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                  (ui i) (hui i))).left) 1 (eK z) := by sorry
+                  (ui i) (hui i))).left) 1 (eK z) := by
+  classical
+  obtain ⟨eK, eC, _⟩ :=
+    picard_residue_homology_geometric_comparison f Xi fi ui hui L W k w s hw τ U hwU hU p hp K
+      hK hE C hC hCi
+  obtain ⟨a, ha⟩ :=
+    picard_residue_homology_geometric_naturality_fixed f Xi fi ui hui L W k w s hw τ U hwU hU p hp K
+      hK hE C hC hCi eK eC
+  exact ⟨eK, eC, a, ha⟩
 
 end AlgebraicGeometry.Scheme
