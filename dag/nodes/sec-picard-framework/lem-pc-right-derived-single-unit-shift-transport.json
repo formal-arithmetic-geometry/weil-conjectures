@@ -13,29 +13,32 @@
  ],
  "proof": [
   {
-   "text": "Use naturality of the right-derived unit along the inverse shift identification single_n X → single_0 X[-n]. Apply Functor.commShift_rightDerivedFunctorPlusUnit at -n. The single/quotient identifications are canonical and natural, so transporting the target produces the inverse single shift and RG.commShiftIso, the first two factors of c. Compatibility of singleMapHomologicalComplex with shift transports the source to the mapped-single comparison followed by inverse single shift on C.",
+   "text": "Use the proved single/quotient inverse shift comparison and mapped-single inverse shift comparison. Naturality of the derived unit along the inverse single shift and NatTrans.shift_app_comm for the unit give the derived-level square. Functor.commShiftIso_hom_naturality moves the degree-zero single/quotient comparison through RG. Expand rightDerivedPlusSingleUnit and cancel the mapped-single hom/inverse under the shift functor.",
    "uses": [
+    "lem-pc-single-quotient-inverse-shift",
+    "lem-pc-mapped-single-inverse-shift",
+    "lem-sbc-right-derived-single-unit-homology-comparison",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply H^n and naturality of the homology shift isomorphism at (-n,n,0), obtaining the final factors of c and d. After transport, the degree-zero unit with the mapped-single and single/quotient identifications is exactly rightDerivedPlusSingleUnit. Both degree-zero identifications are included in its definition. This proves the displayed equation without the homology projection or any classical augmentation comparison.",
-   "uses": [
-    "lem-sbc-right-derived-single-unit-homology-comparison"
-   ],
-   "elementary": false
+   "text": "Apply H^n to the derived-level square and compose with H₀.shiftIso(-n,n,0). Naturality of this homology shift comparison applied to rightDerivedPlusSingleUnit identifies the right-hand composite. Expand the whiskered isomorphisms c and d to obtain exactly the original statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-sbc-right-derived-single-unit-homology-comparison"
+  "lem-pc-single-quotient-inverse-shift",
+  "lem-pc-mapped-single-inverse-shift",
+  "lem-sbc-right-derived-single-unit-homology-comparison",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
   "place": "Functor.commShift_rightDerivedFunctorPlusUnit, lines 245–281; parent proof step 1, single-object specialization. Also Mathlib SingleFunctors and Functor.ShiftSequence naturality.",
-  "note": "Specialization of the parent shift/naturality calculation; the source cycles calculation is realized by the delivered Lean proof."
+  "note": "R3 complete Lean proof, using the proved source and target inverse-shift coherence equations, unit naturality and CommShift, and homology shift naturality. No new sorry."
  },
  "mathlib_searches": [
   {
@@ -113,9 +116,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T031534-L-3569398",
+  "landing": "20261013T111918-L-3061397",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-single-quotient-inverse-shift",
+ "kind": "statement",
+ "title": "Single/quotient comparison and inverse single shift",
+ "statement": "Let B be an abelian category with a chosen derived category [def-weil-abstract-derived-category], X an object of B and n a natural number. Let K_i be the bounded-below homotopy single object on X in degree i, let e_i : single_i(X) ≅ Qh(K_i) be the canonical single/quotient comparison, and let h : K_n → K_0[-n] be the inverse single shift. Then e_n inverse followed by the inverse single shift in D⁺(B) equals Qh(h), followed by Qh.commShiftIso(-n) hom at K_0 and the shift by -n of e_0 inverse. These are morphisms from Qh(K_n) to single_0(X)[-n].",
+ "source": {
+  "document": "Mathlib canonical single, quotient, and shift constructions",
+  "place": "Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean: lift.shiftIso and map_lift_shiftIso_hom_app; Mathlib/CategoryTheory/Shift/CommShift.lean: OfComp.map_iso_hom_app; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean: singleFunctors and singleFunctorIsoCompQ."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The single/quotient comparison e_i is the identity: apply the faithful derived inclusion, unfold preimageIso, and the quotient comparison has identity components.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the faithful derived inclusion. Expand the inverse SingleFunctors.lift shift through its whiskering preimage, and expand the ambient single functors as postcomposition by Qh. Compute the inclusion image of the bounded-below Qh shift via Functor.CommShift.OfComp.map_iso_hom_app. Expand the homotopy single shift by the same inverse-lift formula. The inclusion shift comparison and its inverse cancel under Qh; the remaining composites agree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib canonical single, quotient, and shift constructions",
+  "place": "Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean: lift.shiftIso and map_lift_shiftIso_hom_app; Mathlib/CategoryTheory/Shift/CommShift.lean: OfComp.map_iso_hom_app; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean: singleFunctors and singleFunctorIsoCompQ.",
+  "note": "Complete Lean proof by R3; no postponed lemma or new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical single quotient comparison commutes with inverse single shift",
+   "results": "UNAVAILABLE: Internal Server Error from the service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical single quotient comparison commutes with inverse single shift",
+   "results": "Found the constituent single-functor, mapped-single, quotient and shift isomorphisms, but no exact bounded-below comparison equation.",
+   "date": "2026-10-13",
+   "verdict": "Supporting lemmas are used in the complete proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SingleFunctors.lift",
+   "results": "Found the construction and component lemmas; no exact inverse-single-shift compatibility statement.",
+   "date": "2026-10-13",
+   "verdict": "Read and used the constituent declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "SingleFunctors.lift|postcomp_shiftIso_inv_app|OfComp.map_iso_hom_app",
+   "results": "Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean: lift.shiftIso and map_lift_shiftIso_hom_app; Mathlib/CategoryTheory/Shift/CommShift.lean: OfComp.map_iso_hom_app; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean: singleFunctors and singleFunctorIsoCompQ. Blueprint search found no duplicate (the one single-shift result is an unrelated adic truncation proposition).",
+   "date": "2026-10-13",
+   "verdict": "No duplicate statement; the delivered proof uses these constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedSingleUnitShiftTransport",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Inverse single-shift coherence in the canonical derived-unit normalization.",
+   "via": [
+    "lem-pc-right-derived-single-unit-shift-transport",
+    "lem-pc-right-derived-canonical-single-unit-shift",
+    "lem-pc-right-derived-canonical-single-unit",
+    "lem-pc-right-derived-unit-single-degree",
+    "lem-pc-hypercohomology-left-edge-single-aux",
+    "lem-pc-hypercohomology-left-edge-single",
+    "lem-pc-hypercohomology-edge-cocycle-canonical",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SingleQuotientInverseShift",
+  "file": "lean/Sheaf/CategoryTheory/SingleQuotientInverseShift.lean",
+  "declaration": "CategoryTheory.Functor.single_quotient_inverse_shift",
+  "statement": "theorem single_quotient_inverse_shift (X : B) (n : ℕ) :\n    let e (i : ℤ) : (DerivedCategory.Plus.singleFunctor B i).obj X ≅\n        DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor B i).obj X) :=\n      DerivedCategory.Plus.ι.preimageIso\n      ((DerivedCategory.singleFunctorIsoCompQ B i).app X ≪≫\n        (DerivedCategory.quotientCompQhIso B).symm.app _)\n    let K₀ := (HomotopyCategory.Plus.singleFunctor B 0).obj X\n    let h := ((HomotopyCategory.Plus.singleFunctors B).shiftIso\n      (-(n : ℤ)) n 0 (by simp)).inv.app X\n    (e n).inv ≫ ((DerivedCategory.Plus.singleFunctors B).shiftIso\n      (-(n : ℤ)) n 0 (by simp)).inv.app X =\n    DerivedCategory.Plus.Qh.map h ≫\n      (DerivedCategory.Plus.Qh.commShiftIso (-(n : ℤ))).hom.app K₀ ≫\n      ((e 0).inv)⟦-(n : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111918-L-3061397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T111918-L-3061397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
