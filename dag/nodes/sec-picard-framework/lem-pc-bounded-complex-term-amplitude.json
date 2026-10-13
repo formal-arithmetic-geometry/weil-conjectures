@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-bounded-complex-term-amplitude",
+ "kind": "statement",
+ "title": "Bounded complexes inherit a common amplitude from their terms in their actual degrees",
+ "statement": "Let $R$ be a commutative ring, $K^\\bullet$ a cochain complex of $R$-modules [def-pc-cochain-complex-modules], and $r,s,a,b\\in\\mathbf Z$. In a chosen derived category [def-pc-derived-category], assume $K^n=0$ for $n<r$ or $s<n$. For each $r\\le n\\le s$, assume the module $K^n$ placed in cochain degree $n$ has Tor amplitude $[a,b]$, meaning that its derived tensor with every module in degree zero has zero cohomology outside $[a,b]$. Then $K^\\bullet$ has Tor amplitude $[a,b]$ in the same sense. No ordering of either pair of endpoints, flatness, or finite generation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For any extension-closed, isomorphism-closed object property on the homotopy category containing zero, induct on the width of a bounded complex using its degreewise split stupid-truncation triangle. The one-term complex is isomorphic to the single complex in its actual degree. The two truncations have smaller width and their surviving terms are isomorphic to original terms. For an empty interval all terms are zero and hence the complex is zero. This induction is written and proved as bounded_mem_of_single_terms with the proved upstream stupid-truncation, splitting, and single-complex isomorphisms.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  },
+  {
+   "text": "Fix a test module M. Choose a K-flat homotopy representative P of M[0]. The derived tensor functor with Qh(P), with its representative-dependent shift comparison, is triangulated by the proved upstream isTriangulated_tensorRightQhObj. Pull the two homology bounds back along Qh followed by this functor. Their intersection contains zero and is extension closed by the canonical t-structure. Apply the proved induction and transport through Qh(P) ≅ M[0] and quotientCompQhIso. No global tensor-shift instance with a tied derived/Grothendieck universe is used.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K.",
+  "group": "K3",
+  "date": "2026-10-13",
+  "note": "Source argument specialized to the actual Lean interfaces; the bounded induction is proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose terms have Tor dimension at most d has Tor amplitude r minus d through s",
+   "results": "8 hits: DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.IsLE, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor commutes with arbitrary direct sums and vanishes on retracts of free modules after restricting scalars",
+   "results": "8 hits: Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.torIso, Rep.Tor_obj, Module.Projective.tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective modules after restriction of scalars inherit the Tor dimension of the algebra; a bounded complex inherits the Tor amplitude of its terms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|Tor.*restrict|Tor.*coproduct",
+   "results": "10 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/CochainComplexOpposite.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Bounded-model Tor amplitude step below the proper perfect pushforward proof: Bounded complexes inherit a common amplitude from their terms in their actual degrees.",
+   "via": [
+    "lem-pc-bounded-projective-restriction-tor-amplitude",
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedComplexTermAmplitude",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedComplexTermAmplitude.lean",
+  "declaration": "CochainComplex.bounded_torAmplitude_of_single_terms",
+  "statement": "theorem bounded_torAmplitude_of_single_terms\n    {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    (K : CochainComplex (ModuleCat.{u} R) ℤ) (r s a b : ℤ)\n    (hdegrees : ∀ n : ℤ, n < r ∨ s < n → IsZero (K.X n))\n    (hterms : ∀ n : ℤ, r ≤ n → n ≤ s →\n      DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b\n        ((DerivedCategory.singleFunctor (ModuleCat.{u} R) n).obj (K.X n))) :\n    DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b (DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T115027-L-3325135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T115027-L-3325135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

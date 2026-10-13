@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-projective-restriction-tor-bound",
+ "kind": "statement",
+ "title": "Restricted projective modules inherit the regular algebra Tor bound",
+ "statement": "Let $A,B$ be commutative rings, $\\rho:A\\to B$ a ring map, $E$ a projective $B$-module (maps out of $E$ lift across surjections), and $d\\in\\mathbf N$. If $\\operatorname{Tor}^A_j(B,M)=0$ for every $A$-module $M$ and every $j>d$, with $B$ restricted along $\\rho$ [def-weil-pbc-tor-modules], then $\\operatorname{Tor}^A_j(E,M)=0$ for every $M$ and $j>d$, with $E$ likewise restricted. The Tor functor is derived in its first argument. No finiteness condition is imposed on $E$ or $\\rho$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "The free B-module on the underlying set of E surjects onto E by sending the basis vector indexed by x to x. Projectivity supplies a splitting. Scalar restriction retains the splitting, and the restricted free module is the direct sum of copies of restricted B, even for an infinite basis.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  },
+  {
+   "text": "Use the natural symmetry of Tor to resolve the test module M. Tensoring its projective resolution with a direct sum of copies of restricted B commutes with that direct sum. Direct sums of modules are exact, so homology commutes with them. The Tor of the restricted free module is therefore a direct sum of the assumed zero Tor groups of B in degrees j>d. Transport this vanishing through the symmetry isomorphism.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  },
+  {
+   "text": "Apply the fixed-second-argument left-derived tensor functor to the restricted split maps. Their composite is the identity by functoriality, so Tor of E is a retract of Tor of the restricted free module. A retract of a zero object is zero.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K.",
+  "group": "K3",
+  "date": "2026-10-13",
+  "note": "Source argument specialized to the actual Lean interfaces; the bounded induction is proved in this delivery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose terms have Tor dimension at most d has Tor amplitude r minus d through s",
+   "results": "8 hits: DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.IsLE, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor commutes with arbitrary direct sums and vanishes on retracts of free modules after restricting scalars",
+   "results": "8 hits: Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.torIso, Rep.Tor_obj, Module.Projective.tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective modules after restriction of scalars inherit the Tor dimension of the algebra; a bounded complex inherits the Tor amplitude of its terms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|Tor.*restrict|Tor.*coproduct",
+   "results": "10 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Algebra/Homology/CochainComplexOpposite.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component declarations only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Bounded-model Tor amplitude step below the proper perfect pushforward proof: Restricted projective modules inherit the regular algebra Tor bound.",
+   "via": [
+    "lem-pc-bounded-projective-restriction-tor-amplitude",
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ProjectiveRestrictionTorBound",
+  "file": "lean/Sheaf/Algebra/Homology/ProjectiveRestrictionTorBound.lean",
+  "declaration": "ModuleCat.projective_restriction_tor_bound",
+  "statement": "theorem projective_restriction_tor_bound\n    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)\n    (E : ModuleCat.{u} B) (hE : Projective E) (d : ℕ)\n    (hTor : ∀ M : ModuleCat.{u} A, ∀ j : ℕ, d < j →\n      IsZero (((Tor' (ModuleCat.{u} A) j).obj\n        ((restrictScalars ρ).obj (of B B))).obj M)) :\n    ∀ M : ModuleCat.{u} A, ∀ j : ℕ, d < j →\n      IsZero (((Tor' (ModuleCat.{u} A) j).obj ((restrictScalars ρ).obj E)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T115027-L-3325135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T115027-L-3325135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

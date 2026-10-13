@@ -14,50 +14,51 @@
  ],
  "proof": [
   {
-   "text": "For an A-module M choose a free resolution F concentrated in nonpositive cochain degrees. It is bounded above and flat, hence K-flat, so Tot(C restricted to A tensor_A F) computes the derived tensor. The tensor balancing isomorphism identifies this double complex with C tensor_B (B tensor_A F). Its column in C-degree p has homology C^p tensor_B Tor^A_{-q}(B,M): tensor_B with a projective B-module is exact. This is zero for q>0 or q<-d by the resolution and assumed Tor bound.",
+   "text": "Apply projective_restriction_tor_bound separately to each projective B-term of C. This gives the uniform Tor_j vanishing for all restricted terms and all j>d.",
    "uses": [
-    "def-weil-pbc-tor-modules",
-    "lem-pc-module-bounded-flat-kflat"
+    "lem-pc-projective-restriction-tor-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
-   }
-  },
-  {
-   "text": "Filter the total complex by C-degree. Since C has only finitely many nonzero degrees, this is a finite filtration and its spectral sequence converges with E1^{p,q} the column homology just computed. For n<r-d or s<n and p+q=n, either p lies outside [r,s] and the whole column is zero, or q lies outside [-d,0] and E1 is zero. Later pages are subquotients, so every associated graded piece of H^n is zero. A finite filtration with zero graded pieces is zero. This proves the required bound for each M.",
-   "uses": [
-    "thm-sp-spectral-object-yields"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
-   }
-  },
-  {
-   "text": "If r>s, for each integer t either t<r or s<t; hence all C terms vanish. The double complex is zero, so the same conclusion holds in every degree. This also covers zero rings, zero modules, and empty support intervals.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  },
+  {
+   "text": "The proved private single_torAmplitude_of_Tor helper uses an A-projective resolution of a module E, extended into cochain degrees n-j. Its terms are flat and it is bounded above, so upstream kFlat_of_isStrictlyLE_of_flat makes it K-flat. QObjTensorSingleFunctorObjIso computes its derived tensor. The mapExtendFunctorNatIso, extendHomologyIso and ProjectiveResolution.isoLeftDerivedObj identify degree n-j homology with Tor_j(E,M); above n the tensor complex is zero. Thus E in degree n has amplitude [n-d,n]. Widen to [r-d,s] for each r ≤ n ≤ s by arithmetic.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
+   }
+  },
+  {
+   "text": "Scalar restriction preserves zero objects, so the restricted complex has the same degree bounds. Apply the proved bounded_torAmplitude_of_single_terms to the term bounds just obtained. Its finite stupid-truncation induction also covers r>s.",
+   "uses": [
+    "lem-pc-bounded-complex-term-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-tor-modules",
-  "lem-pc-module-bounded-flat-kflat",
-  "thm-sp-spectral-object-yields"
+  "lem-pc-bounded-complex-term-amplitude",
+  "lem-pc-projective-restriction-tor-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H.",
-  "group": "H3",
+  "place": "Tag 066H, lemma-tor-amplitude-finite-complex; Tags 066K, lemma-tor-amplitude-change-rings, and 0655. Sources checked at https://stacks.math.columbia.edu/tag/066H and https://stacks.math.columbia.edu/tag/066K.",
+  "group": "K3",
   "date": "2026-10-13",
-  "note": "Complete source argument specialized and expanded by H3."
+  "note": "Replaced the planned spectral sequence by a fully proved finite stupid-truncation induction, with the projective-resolution Tor-to-amplitude calculation proved locally. Only the restricted-projective-module Tor bound is split off."
  },
  "mathlib_searches": [
   {
@@ -159,11 +160,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8d8c0",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T100005-L-2462550",
+  "landing": "20261013T115027-L-3325135",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures with their nodes, the reduction with its dependencies and sources, and the import change with its record; delivered modules and sole direct importer PerfectRelativeTensorLocallyBounded compile cleanly, with expected axioms. Accepted as a decomposition leaving two named lower holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
