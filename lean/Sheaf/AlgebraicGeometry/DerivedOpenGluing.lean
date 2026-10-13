@@ -6,8 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
+import Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
@@ -27,6 +27,23 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem compatible_composites
+    {C CU CV CW : Type*} [Category C] [Category CU] [Category CV] [Category CW]
+    (RU : C ⥤ CU) (RV : C ⥤ CV) (RW : C ⥤ CW)
+    (SU : CU ⥤ CW) (SV : CV ⥤ CW)
+    (eU : RU ⋙ SU ≅ RW) (eV : RV ⋙ SV ≅ RW)
+    {F E : C} {A : CU} {B : CV}
+    (iU : RU.obj F ≅ A) (iV : RV.obj F ≅ B) (c : SU.obj A ≅ SV.obj B)
+    (ht : eU.inv.app F ≫ SU.map iU.hom ≫ c.hom = eV.inv.app F ≫ SV.map iV.hom)
+    (a : A ⟶ RU.obj E) (b : B ⟶ RV.obj E)
+    (hab : SU.map a ≫ eU.hom.app E = c.hom ≫ SV.map b ≫ eV.hom.app E) :
+    eU.inv.app F ≫ SU.map (iU.hom ≫ a) ≫ eU.hom.app E =
+      eV.inv.app F ≫ SV.map (iV.hom ≫ b) ≫ eV.hom.app E := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hab]
+  simpa only [Category.assoc] using
+    congrArg (fun t => t ≫ SV.map b ≫ eV.hom.app E) ht
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
@@ -267,6 +284,12 @@ theorem derived_open_gluing
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
             (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
             (Scheme.Modules.overEquiv V)).mapDerivedCategory.map f = iV.hom ≫ b := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  have h := derived_open_gluing_objects.{u, w} X U V hcover A B c
+  obtain ⟨F, iU, iV, ht⟩ := h
+  refine ⟨F, iU, iV, ht, ?_⟩
+  intro E a b hab
+  apply scheme_derived_hom_gluing.{u, w} X U V hcover F E (iU.hom ≫ a) (iV.hom ≫ b)
+  exact compatible_composites _ _ _ _ _ _ _ iU iV c ht a b hab
 
 end AlgebraicGeometry

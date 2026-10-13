@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-scheme-derived-hom-gluing",
+ "kind": "statement",
+ "title": "Lifting compatible local morphisms between global derived objects",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V$ opens with $U\\cup V=X$, and fix derived categories of module sheaves on $X,U,V,W=U\\cap V$ in morphism universe $w$ [def-pc-derived-category]. Let $R_U,R_V,R_W$ be the derived restrictions defined by overFunctor followed by overEquiv; let $S_U,S_V$ be derived restriction to $W$ from the two open subschemes and $\\alpha_U:R_US_U\\cong R_W$, $\\alpha_V:R_VS_V\\cong R_W$ their canonical comparisons. For global objects $F,E$ and maps $a:R_UF\\to R_UE$, $b:R_VF\\to R_VE$ satisfying $\\alpha_U(F)^{-1}S_U(a)\\alpha_U(E)=\\alpha_V(F)^{-1}S_V(b)\\alpha_V(E)$, there exists $f:F\\to E$ with $R_U(f)=a$ and $R_V(f)=b$. No local objects A,B or transition c are assumed or constructed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW; Mayer-Vietoris lifting of compatible local maps, step 4 of lem-sc-derived-open-gluing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the localized-site derived categories in universe w by transporting the actual scheme localization along the equivalences on cochain complexes. Its functor is e_T.mapHomologicalComplex followed by Q. IsLocalization.of_equivalence_source proves it localizes quasi-isomorphisms. This is explicit data, not a witness chosen from an existence assertion.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport a and b back through the full-faithful derived open equivalences, conjugating by mapDerivedCategoryCompIso. Apply the restriction-transport identity on each side. Cancel the overlap comparison isomorphisms and use faithfulness of its derived equivalence to obtain equality of the two localized Hom restrictions.",
+   "uses": [
+    "lem-sc-scheme-derived-hom-restriction-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derived_hom_mayer_vietoris to F,E. Equality of the two restrictions says their difference is zero. Exactness at the pair of local Hom groups gives f whose two localized restrictions equal the transported pair.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map these equalities forward through the derived equivalences. map_preimage cancels the transported Hom maps; naturality of mapDerivedCategoryCompIso and cancellation of its components identify the scheme restrictions of f with a and b.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-sc-scheme-derived-hom-restriction-transport",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW; Mayer-Vietoris lifting of compatible local maps, step 4 of lem-sc-derived-open-gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris exactness lifts compatible local morphisms between global derived objects",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible local morphisms of two global derived objects lift on a two open cover",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, TopCat.Sheaf.interUnionPullbackConeLift, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext, TopCat.Sheaf.interUnionPullbackConeLift_left, TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.existsUnique_gluing'",
+   "verdict": "No exact match; the returned underived gluing/restriction results do not state the derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*(glue|gluing|[Rr]estriction)|mapDerivedCategoryCompIso|mapDerivedCategoryNatIso",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match; the returned underived gluing/restriction results do not state the derived assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenGluing",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Mayer-Vietoris lifting of compatible local maps, step 4 of lem-sc-derived-open-gluing",
+   "via": [
+    "lem-sc-derived-open-gluing",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedHomGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedHomGluing.lean",
+  "declaration": "AlgebraicGeometry.scheme_derived_hom_gluing",
+  "statement": "theorem scheme_derived_hom_gluing\n    (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]\n    (F E : schemeDerivedCategory X) :\n    let R_U := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R_V := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n            (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv V)).mapDerivedCategory\n    let S_U := (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_left) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n            (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv (U ⊓ V))).mapDerivedCategory\n    let S_V := (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n            (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv V) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_right) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n            (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv (U ⊓ V))).mapDerivedCategory\n    let eU := ((Functor.mapDerivedCategoryCompIso\n          (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U))\n          (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_left) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n            (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫\n        Functor.mapDerivedCategoryNatIso\n          (Functor.associator _ _ _ ≪≫\n          Functor.isoWhiskerLeft\n            (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)\n            ((Functor.associator _ _ _).symm ≪≫\n              Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).unitIso.symm _ ≪≫\n                Functor.leftUnitor _) ≪≫\n          (Functor.associator _ _ _).symm ≪≫\n          Functor.isoWhiskerRight\n            (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_left))\n            (Equivalence.functor\n              (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n              (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n              (Scheme.Modules.overEquiv (U ⊓ V)))))\n    let eV := ((Functor.mapDerivedCategoryCompIso\n          (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n            (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv V))\n          (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))\n            (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv V) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_right) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n            (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv (U ⊓ V)))).symm ≪≫\n        Functor.mapDerivedCategoryNatIso\n          (Functor.associator _ _ _ ≪≫\n          Functor.isoWhiskerLeft\n            (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V)\n            ((Functor.associator _ _ _).symm ≪≫\n              Functor.isoWhiskerRight (Scheme.Modules.overEquiv V).unitIso.symm _ ≪≫\n                Functor.leftUnitor _) ≪≫\n          (Functor.associator _ _ _).symm ≪≫\n          Functor.isoWhiskerRight\n            (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE inf_le_right))\n            (Equivalence.functor\n              (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (U ⊓ V)))\n              (D := SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))\n              (Scheme.Modules.overEquiv (U ⊓ V)))))\n    ∀ (a : R_U.obj F ⟶ R_U.obj E) (b : R_V.obj F ⟶ R_V.obj E),\n      eU.inv.app F ≫ S_U.map a ≫ eU.hom.app E =\n        eV.inv.app F ≫ S_V.map b ≫ eV.hom.app E →\n      ∃ (f : F ⟶ E), R_U.map f = a ∧ R_V.map f = b",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

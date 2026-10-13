@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-scheme-derived-hom-restriction-transport",
+ "kind": "statement",
+ "title": "Transport of derived local Hom restriction to open subschemes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $W\\subseteq U$ opens with inclusion $i$, and fix derived categories in morphism universe $w$ for module sheaves on $X,U,W$ and on the localized sites over $U,W$ [def-pc-derived-category]. Let $r_T$ denote overFunctor and $e_T$ the exact open-site equivalence overEquiv. Put $R_T=D(r_Te_T)$, $S=D(e_U^{-1}\\operatorname{overMap}(i)e_W)$, let $\\alpha:R_US\\cong R_W$ be the canonical comparison induced by the unit of $e_U$ and overFunctorMap, and let $q_T:R_T\\cong D(r_T)D(e_T)$ be mapDerivedCategoryCompIso. For $F,E\\in D(\\mathcal O_X)$ and $a:R_UF\\to R_UE$, put $a_0=D(e_U)^{-1}(q_U(F)^{-1}a q_U(E))$, using the full-faithful preimage on Hom. Then $\\alpha(F)^{-1}S(a)\\alpha(E)=q_W(F)D(e_W)(\\operatorname{derivedOpenHomRestriction}(X,i,a_0))q_W(E)^{-1}$ [lem-sc-derived-hom-mayer-vietoris]. Products in this formula follow Lean composition order from left to right.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW; canonical Hom restriction under the localized-site/open-subscheme equivalence, used in step 4 of lem-sc-derived-open-gluing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write r_U,r_W for localized-site restrictions, t for overMap, e_U,e_W for the exact open-site equivalences, and S for e_U^{-1}te_W. Write q_U=D(r_Ue_U)\\cong D(r_U)D(e_U) and q_W similarly. Pull the local morphism a back to a_0=D(e_U)^{-1}(q_U^{-1}a q_U), using full faithfulness, so D(e_U)(a_0)=q_U^{-1}a q_U.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let d:D(r_U)D(t)\\cong D(r_W) be the comparison defined by mapDerivedCategoryCompIso inverse followed by mapDerivedCategoryNatIso(overFunctorMap). Define k:D(e_U)D(S)\\cong D(t)D(e_W) by the derived composition comparisons and the underived unit e_Ue_U^{-1}\\cong id. The canonical scheme comparison alpha equals the path q_U whiskered with D(S), then k whiskered with D(r_U), then d whiskered with D(e_W), then q_W^{-1}, with associators inserted. To verify this equality precompose with the localization Q. mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac reduce its components to the original unit and overFunctorMap on cochain complexes; unit cancellation and associativity give equality there. Full faithfulness of precomposition along Q gives equality of the natural transformations.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of k to a_0, substitute D(e_U)(a_0)=q_U^{-1}a q_U, and use the comparison equality from the preceding step. Cancel each q_U and its inverse. The remaining conjugation is q_W D(e_W)(d^{-1}D(t)(a_0)d) q_W^{-1}. By its definition, d^{-1}D(t)(a_0)d is derivedOpenHomRestriction(X,i,a_0). This is the displayed statement. No covering or nonemptiness assumption occurs.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BW; canonical Hom restriction under the localized-site/open-subscheme equivalence, used in step 4 of lem-sc-derived-open-gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of derived category morphisms is compatible with equivalence of sheaves on an open subscheme",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction of morphisms commutes with transporting sheaves along equivalences of open subscheme and localized sites",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.ofRestrict_appLE, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app",
+   "verdict": "No exact match; the returned underived gluing/restriction results do not state the derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*(glue|gluing|[Rr]estriction)|mapDerivedCategoryCompIso|mapDerivedCategoryNatIso",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match; the returned underived gluing/restriction results do not state the derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "date": "2026-10-13",
+   "results": "1 hits: SheafOfModules.overFunctorMap",
+   "verdict": "No exact match; the returned underived gluing/restriction results do not state the derived assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenGluing",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "canonical Hom restriction under the localized-site/open-subscheme equivalence, used in step 4 of lem-sc-derived-open-gluing",
+   "via": [
+    "lem-sc-derived-open-gluing",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedHomRestrictionTransport.lean",
+  "declaration": "AlgebraicGeometry.scheme_derived_hom_restriction_transport",
+  "statement": "theorem scheme_derived_hom_restriction_transport\n    (X : Scheme.{u}) (U W : X.Opens) (i : W ⟶ U)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (F E : schemeDerivedCategory X) :\n    let R_U := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let S_U := (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))\n            (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv W)).mapDerivedCategory\n    let eU := ((Functor.mapDerivedCategoryCompIso\n          (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U))\n          (Equivalence.inverse\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv U) ⋙\n          SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))\n            (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))\n            (Scheme.Modules.overEquiv W))).symm ≪≫\n        Functor.mapDerivedCategoryNatIso\n          (Functor.associator _ _ _ ≪≫\n          Functor.isoWhiskerLeft\n            (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)\n            ((Functor.associator _ _ _).symm ≪≫\n              Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).unitIso.symm _ ≪≫\n                Functor.leftUnitor _) ≪≫\n          (Functor.associator _ _ _).symm ≪≫\n          Functor.isoWhiskerRight\n            (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i)\n            (Equivalence.functor\n              (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))\n              (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))\n              (Scheme.Modules.overEquiv W))))\n    let e := Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    let eW := Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))\n      (D := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv W)\n    let qU := Functor.mapDerivedCategoryCompIso\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) e\n    let qW := Functor.mapDerivedCategoryCompIso\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W) eW\n    ∀ (a : R_U.obj F ⟶ R_U.obj E),\n      eU.inv.app F ≫ S_U.map a ≫ eU.hom.app E =\n        qW.hom.app F ≫ eW.mapDerivedCategory.map\n          (derivedOpenHomRestriction X.toRingedSpace i\n            (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫\n          qW.inv.app E",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T040756-L-3951170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
