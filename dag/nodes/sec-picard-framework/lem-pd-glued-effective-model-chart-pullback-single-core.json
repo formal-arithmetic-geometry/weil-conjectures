@@ -2,7 +2,7 @@
  "id": "lem-pd-glued-effective-model-chart-pullback-single-core",
  "kind": "statement",
  "title": "Core chart-square verification for one glued chart",
- "statement": "Under the local cartesian square, open immersion, over-map compatibility, and chart commutativity hypotheses, the cone formed by the chosen chart maps is a limit cone for the corresponding square [lem-pd-glued-effective-model-chart-pullback-single].",
+ "statement": "Under the local cartesian square, open immersion, over-map compatibility, chart commutativity, and inverse-image equality q₀⁻¹(range(jᵢ)) = Uᵢ, the chart cone is a limit cone. The inverse-image equality is essential.",
  "stmt_deps": [],
  "source": {
   "document": "Stacks Project",
@@ -10,16 +10,16 @@
  },
  "proof": [
   {
-   "text": "Use the open immersion and compatibility equations to identify the local square, then apply the scheme-gluing universal property to assemble the local pullback identifications.",
+   "text": "Apply Mathlib IsOpenImmersion.isPullback to the commuting square, using Scheme.Opens.opensRange_ι and the inverse-image equality. Extract the limit cone with IsPullback.isLimit'.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project",
-  "place": "Descent, Tag 0AP4"
+  "by": "agent",
+  "document": "Mathlib.AlgebraicGeometry.OpenImmersion",
+  "place": "IsOpenImmersion.isPullback and Scheme.Opens.opensRange_ι"
  },
  "mathlib_searches": [
   {
@@ -68,7 +68,7 @@
   "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle",
   "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelChartPullbackSingle.lean",
   "declaration": "CategoryTheory.Over.DescentDatum.glued_model_chart_pullback_core",
-  "statement": "theorem glued_model_chart_pullback_core -- STATEMENT-DISPUTED: the stated hypotheses do not force the chart square to -- be cartesian; a chart may be empty while other charts cover the glued model. {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X} {I : Type u} (U : I → V.left.Opens) (W : I → Over Y) (q : ∀ i, (U i).toScheme ⟶ (W i).left) (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left) (j : ∀ i, (W i).left ⟶ W₀.left) (i : I) (hcart : IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p) (hopen : IsOpenImmersion (j i)) (hover : j i ≫ W₀.hom = (W i).hom) (hcomm : q i ≫ j i = (U i).ι ≫ q₀) : Nonempty (IsLimit (PullbackCone.mk (q i) (U i).ι hcomm))",
+  "statement": "theorem glued_model_chart_pullback_core\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    {I : Type u} (U : I → V.left.Opens) (W : I → Over Y)\n    (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left)\n    (j : ∀ i, (W i).left ⟶ W₀.left) (i : I)\n    (hcart : IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hopen : IsOpenImmersion (j i))\n    (hover : j i ≫ W₀.hom = (W i).hom)\n    (hcomm : q i ≫ j i = (U i).ι ≫ q₀)\n    (hpreimage : q₀ ⁻¹ᵁ (j i).opensRange = U i) :\n    Nonempty (IsLimit (PullbackCone.mk (q i) (U i).ι hcomm))",
   "branch": "sheaf-dag",
   "by": "T4",
   "date": "2026-10-13"
@@ -86,11 +86,35 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "X-808d3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T001228-L-2305995",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T115954-L-3404111",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG nodes, change record, and report matched against the review packet, baseline declarations, and successful lcompile checks"
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "Y3 stage 2",
+  "old_statement": "Under the local cartesian square, open immersion, over-map compatibility, and chart commutativity hypotheses, the cone formed by the chosen chart maps is a limit cone for the corresponding square [lem-pd-glued-effective-model-chart-pullback-single].",
+  "what": "The original statement has a compiled two-component counterexample. Add the missing inverse-image equality and prove the corrected open-subscheme statement; leave the false caller disputed, with its signature unchanged.",
+  "source": {
+   "document": "Mathlib.AlgebraicGeometry.OpenImmersion",
+   "place": "IsOpenImmersion.isPullback"
+  },
+  "citers": [
+   {
+    "id": "lem-pd-glued-effective-model-chart-pullback-single",
+    "holds": false,
+    "note": "The original implication is false; its hypotheses do not establish the required inverse-image equality. The caller remains explicitly disputed."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use the open immersion and compatibility equations to identify the local square, then apply the scheme-gluing universal property to assemble the local pullback identifications.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }
