@@ -29,9 +29,44 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 07MB, cohomology-equation-needs-signs: degree-zero sheaf specialization and Leibniz"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Evaluate the categorical Cech differential through cechComplexFunctorIso and cechComplex_d_apply. Composition of restrictions identifies a twice restricted section with restriction along the composite face. Tensor restriction is compatible with tmulSection_map. These identities are proved by the private equiv_d, faceSection_comp, faceSection_d and faceSection_cup helpers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At a fixed tuple, split the alternating sum over p+q+2 omitted vertices into the first p+1 and the last q+1 vertices using Fin.sum_univ_add. The first block is the front differential without its last term; the second is the back differential without its first term. The omitted last front term and first back term are the same tensor section with opposite signs. The private aw_sum proves this finite-sum identity, and equality of the face-index functions is proved with Fin.ext and omega. This proves cechCupCochain_leibniz.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction maps are linear over global sections and tensor sections are bilinear. Through the cochain equivalences these give a bilinear cochain map cechCupLinear. The Leibniz formula shows that two cycles multiply to a cycle; restrict the pairing to the kernel modules to obtain cechCupCycles.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Products with boundaries are boundaries. In degree zero the incoming map is zero by the complex shape. In positive left degree p+1, Leibniz applied to a predecessor and a right cycle gives d(a cup b)=da cup b. In positive right degree q+1, apply Leibniz to a left cycle and a predecessor, then multiply by (-1)^p; the sign squares to one. Transport the target degree and use cycle_mem_range_of_d to exhibit the boundary preimages.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The cycle-class linear map is surjective, and its kernel is the range of the incoming differential, by moduleCatHomologyIso and Submodule.Quotient.mk_eq_zero. Compose cechCupCycles with the target class map, use LinearMap.liftQ2 (Lean spelling liftQ₂) to descend through both boundary submodules, and transport along moduleCatHomologyIso. The private bilinear_homology_desc constructs this map and proves its value on cycle classes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The constructed map satisfies IsCechCupProduct because a target cycle with the specified underlying section equals cechCupCycles of the two input cycles. Every class in each input homology module has a cycle representative; applying the prescribed cycle values to those representatives and linear-map extensionality proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 07MB, cohomology-equation-needs-signs; its degree-zero specialization, with the finite-sum and quotient details formalized by T2"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -113,5 +148,15 @@
   "group": "T1",
   "result": "pass",
   "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045605-L-137768",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
