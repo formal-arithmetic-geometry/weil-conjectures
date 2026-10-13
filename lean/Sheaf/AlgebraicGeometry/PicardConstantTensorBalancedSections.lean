@@ -6,6 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor
+import Sheaf.AlgebraicGeometry.PicardConstantScalarExtensionSections
 
 /-! # Balanced sections of scalar-extended constant tensor coefficients
 
@@ -19,7 +20,8 @@ open CategoryTheory Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 set_option autoImplicit false
-
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Scalar extension followed by tensoring with `G` has the usual balanced sections.
 Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
 (blueprint: lem-sc-picard-constant-tensor-balanced-sections).
@@ -61,6 +63,71 @@ theorem exists_picard_constant_tensor_balanced_sections
           (x : (picardConstantSectionsTensor k Y g M G).obj U),
         e V.unop ((picardConstantSectionsTensor k Y g M G).map i x) =
           ((scalarPresheaf g G ⋙ MonoidalCategory.tensorLeft M).map i) (e U.unop x)) := by
-  sorry
+  classical
+  let tmul (V : Y.Opens) (a : Γ(Y, V)) (s : M) :
+      (ModuleCat.extendScalars (scalarMap g V)).obj M := by
+    let : Module k Γ(Y, V) := Module.compHom _ (scalarMap g V)
+    exact TensorProduct.tmul k a s
+  obtain ⟨q, hq⟩ := exists_picard_constant_scalar_extension_sections k Y g M
+  let P := (PresheafOfModules.pullback (picardConstantRingMap k Y g)).obj
+    (picardConstantVector k Y M)
+  let e (V : Y.Opens) :
+      (picardConstantSectionsTensor k Y g M G).obj (op V) ≃+
+        (M ⊗[k] scalarObj g G (op V)) := by
+    let : Algebra k Γ(Y, V) := (scalarMap g V).toAlgebra
+    let : Module k (G.val.obj (op V)) := Module.compHom _ (scalarMap g V)
+    let : IsScalarTower k Γ(Y, V) (G.val.obj (op V)) :=
+      IsScalarTower.of_algebraMap_smul (fun a t ↦ rfl)
+    exact (TensorProduct.congr (q V).symm (LinearEquiv.refl _ _)).toAddEquiv.trans
+      ((TensorProduct.comm Γ(Y, V) _ _).toAddEquiv.trans
+        ((TensorProduct.AlgebraTensorModule.cancelBaseChange
+          k Γ(Y, V) Γ(Y, V) (G.val.obj (op V)) M).toAddEquiv.trans
+            (TensorProduct.comm k _ _).toAddEquiv))
+  have he (V : Y.Opens) (a : Γ(Y, V)) (s : M) (t : G.val.obj (op V)) :
+      e V ((q V (tmul V a s)) ⊗ₜ[Γ(Y, V)] t) =
+        s ⊗ₜ[k] (show scalarObj g G (op V) from a • t) := by
+    let : Algebra k Γ(Y, V) := (scalarMap g V).toAlgebra
+    let : Module k (G.val.obj (op V)) := Module.compHom _ (scalarMap g V)
+    let : IsScalarTower k Γ(Y, V) (G.val.obj (op V)) :=
+      IsScalarTower.of_algebraMap_smul (fun a t ↦ rfl)
+    simp [e, tmul]
+    rfl
+  refine ⟨e, ?_, ?_⟩
+  · intro V a s t
+    have hi : (e V).symm (s ⊗ₜ[k] t) =
+        (q V (tmul V 1 s)) ⊗ₜ[Γ(Y, V)]
+          (show G.val.obj (op V) from t) := by
+      apply (e V).injective
+      simp only [AddEquiv.apply_symm_apply, he, one_smul]
+    rw [hi]
+    change e V (a • (_ ⊗ₜ[Γ(Y, V)] _)) = _
+    rw [← TensorProduct.tmul_smul]
+    simpa only [one_smul] using he V 1 s (a • (show G.val.obj (op V) from t))
+  · intro U V i x
+    change e V.unop ((MonoidalCategory.tensorObj P G.val).map i x) = _
+    induction x using TensorProduct.induction_on with
+    | zero =>
+      simp only [map_zero]
+    | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
+    | tmul p t =>
+      obtain ⟨z, rfl⟩ := (q U.unop).surjective p
+      induction z using TensorProduct.induction_on with
+      | zero =>
+        simp only [map_zero, TensorProduct.zero_tmul]
+      | add z z' hz hz' =>
+        simpa only [map_add, TensorProduct.add_tmul] using congrArg₂ (· + ·) hz hz'
+      | tmul a s =>
+        change e V.unop (P.map i (q U.unop (tmul U.unop a s))
+          ⊗ₜ[Γ(Y, V.unop)] G.val.map i t) = _
+        rw [hq, he]
+        change _ = ((scalarPresheaf g G ⋙ MonoidalCategory.tensorLeft M).map i)
+          (e U.unop ((q U.unop (tmul U.unop a s))
+            ⊗ₜ[Γ(Y, U.unop)] t))
+        rw [he]
+        change s ⊗ₜ[k] (show scalarObj g G V from
+            (Y.presheaf.map i a) • G.val.map i t) =
+          s ⊗ₜ[k] (show scalarObj g G V from G.val.map i (a • t))
+        rw [G.val.map_smul]
+        rfl
 
 end AlgebraicGeometry.Scheme.Modules
