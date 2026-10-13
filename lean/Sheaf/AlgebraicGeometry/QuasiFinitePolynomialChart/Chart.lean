@@ -6,6 +6,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
+import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
+import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
+import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.LocalizedChart
+
 @[expose] public section
 
 universe u
@@ -13,6 +17,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /- The polynomial chart produced by the affine quasi-finite theorem. -/
+set_option linter.unusedVariables false in
 /-- A prescribed natural fibre dimension yields a quasi-finite polynomial chart.
 
 Source: Stacks Project Tag 00QE and its affine translation in Tag 00RH.
@@ -42,6 +47,16 @@ theorem exists_quasiFinite_polynomial_chart_data
       (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T),
       LocallyOfFinitePresentation e ∧ LocallyQuasiFinite e ∧
       e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = U.ι ≫ f := by
-  sorry
+  let : Algebra Γ(T, ⊤) Γ(X, ⊤) := f.appTop.hom.toAlgebra
+  let : Algebra.FinitePresentation Γ(T, ⊤) Γ(X, ⊤) := f.finitePresentation_appTop
+  let : Algebra.FiniteType Γ(T, ⊤) Γ(X, ⊤) := inferInstance
+  let q : PrimeSpectrum Γ(X, ⊤) := X.isoSpec.hom y
+  have hdim' := (affine_coordinate_fibre_dimension_eq f y).symm.trans hdim
+  obtain ⟨g, hg, φ, hft, hq⟩ :=
+    Algebra.exists_quasiFinite_over_polynomial_algebra Γ(T, ⊤) Γ(X, ⊤) q n hdim'
+  obtain ⟨e, hefp, heqf, he⟩ := exists_chart_of_localized_polynomial_map f rfl g n φ hft hq
+  refine ⟨X.basicOpen g, inferInstance, ?_, e, hefp, heqf, he⟩
+  rw [← X.map_PrimeSpectrum_basicOpen_of_affine]
+  exact hg
 
 end AlgebraicGeometry

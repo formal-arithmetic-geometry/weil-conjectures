@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-localized-polynomial-map-chart",
+ "kind": "statement",
+ "title": "Realize a supplied localized polynomial algebra map as a scheme chart",
+ "statement": "Let X and T be affine schemes [def-pc-scheme, def-weil-affine-spectrum] and f : X → T locally of finite presentation [def-sbc-locally-finite-presentation]. Put A = Γ(T, O_T), B = Γ(X, O_X), and equip B with an A-algebra structure whose structure map is the map on sections of f. Let g be an element of B, n a natural number, and φ : A[t_1,...,t_n] → B[1/g] an A-algebra map [def-weil-pbc-mv-polynomial-ring, def-weil-ring-localization-away]. Suppose this map is of finite type and is quasi-finite at every prime of B[1/g] [def-weil-pbc-ring-map-quasi-finite-at-prime]. Then there is a locally finitely presented, Mathlib-locally-quasi-finite morphism e : D(g) → A^n_T [def-nagata-relative-affine-space] whose composite with projection is D(g).ι followed by f. Here D(g) is the fixed basic open of X; no point or dimension hypothesis is made.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-nagata-relative-affine-space"
+ ],
+ "source": {
+  "document": "Stacks Project, https://stacks.math.columbia.edu/tag/00QE",
+  "place": "Tag 00QE conclusion, used in the first reduction of the proof of Tag 00RH; principal open identification Tag 00E4. Finite presentation is the affine criterion in Mathlib and RingHom.FinitePresentation.of_comp_finiteType."
+ },
+ "proof": [
+  {
+   "text": "Set U=D(g). Mathlib isLocalization_away_of_isAffine identifies Γ(X,U) as a localization of B away from g, and IsLocalization.algEquiv supplies the canonical B-algebra equivalence E from B[1/g]. Rename ULift(Fin n) to Fin n by MvPolynomial.renameEquiv. Compose its ring homomorphism with φ and E, obtaining ψ. Define e as U.isoSpec.hom, followed by Spec(ψ), followed by the inverse affine-space isomorphism. All data is explicitly constructed.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-ring-localization-away",
+    "def-nagata-relative-affine-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every base prime p, quasi-finiteness at each q over p says that every corresponding singleton in Spec(κ(p) tensor_A B[1/g]) is open. The fibre spectrum is thus discrete and, as a spectrum, compact, hence finite. PrimeSpectrum.preimageHomeomorphFiber transfers finiteness to each contraction fibre. Algebra.QuasiFinite.iff_finite_comap_preimage_singleton gives RingHom.QuasiFinite φ. Compose with the two ring equivalences and apply the affine quasi-finiteness criterion. Scheme isomorphisms preserve local quasi-finiteness, giving it for e. This argument is the proved private helper quasiFinite_of_primewise.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structure map A→B is finitely presented by f.finitePresentation_appTop. A principal localization B→B[1/g] is finitely presented, hence so is their composite. Algebra compatibility identifies that composite with φ composed with the constants inclusion A→A[t]. The latter inclusion is finite type; RingHom.FinitePresentation.of_comp_finiteType yields finite presentation of φ. Composing with the two ring equivalences and applying LocallyOfFinitePresentation.SpecMap_iff gives local finite presentation of e.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constants commute with the variable-renaming equivalence, φ and E. Thus ψ composed with C is the restriction of f.appTop to U. Applying Spec, AffineSpace.isoOfIsAffine_inv_over, Scheme.isoSpec_inv_naturality and IsAffineOpen.fromSpec_toSpecΓ proves e followed by the affine-space projection equals U.ι followed by f. This also works when g=0 or n=0.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-affine-space",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib and the cited Stacks Project pages",
+  "place": "Implementation of the affine translation of Tag 00QE; the full Lean proof is supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spectrum of a quasi finite finitely presented polynomial algebra map to a localization gives a quasi finite morphism to affine space on a basic open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite presentation scheme morphism quasi finite map to polynomial affine space around a point of fiber dimension n",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "verdict": "Related components found; no single theorem states this bridge. Proved from the components."
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp_finiteType|isoOfIsAffine|isLocalization_away_of_isAffine",
+   "date": "2026-10-13",
+   "results": "15 hits: Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FiniteType.lean, Mathlib/RingTheory/FiniteType.lean, Mathlib/RingTheory/FiniteType.lean",
+   "verdict": "Related components found; no single theorem states this bridge. Proved from the components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-quasi-finite-polynomial-chart",
+   "place": "The geometric realization of the localized polynomial map produced by Tag 00QE",
+   "via": [
+    "lem-sbc-quasi-finite-polynomial-chart-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.LocalizedChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFinitePolynomialChart/LocalizedChart.lean",
+  "declaration": "AlgebraicGeometry.exists_chart_of_localized_polynomial_map",
+  "statement": "theorem exists_chart_of_localized_polynomial_map\n    {X T : Scheme.{u}} [IsAffine X] [IsAffine T]\n    (f : X ⟶ T) [LocallyOfFinitePresentation f]\n    [Algebra Γ(T, ⊤) Γ(X, ⊤)]\n    (halg : algebraMap Γ(T, ⊤) Γ(X, ⊤) = f.appTop.hom)\n    (g : Γ(X, ⊤)) (n : ℕ)\n    (φ : MvPolynomial (Fin n) Γ(T, ⊤) →ₐ[Γ(T, ⊤)] Localization.Away g)\n    (hft : @Algebra.FiniteType (MvPolynomial (Fin n) Γ(T, ⊤)) (Localization.Away g)\n      _ _ φ.toRingHom.toAlgebra)\n    (hq : ∀ q : PrimeSpectrum (Localization.Away g),\n      @Algebra.IsQuasiFiniteAtPrime (MvPolynomial (Fin n) Γ(T, ⊤)) (Localization.Away g)\n        _ _ φ.toRingHom.toAlgebra hft q) :\n    ∃ e : (X.basicOpen g).toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T,\n      LocallyOfFinitePresentation e ∧ LocallyQuasiFinite e ∧\n      e ≫ (AffineSpace (ULift.{u} (Fin n)) T ↘ T) = (X.basicOpen g).ι ≫ f",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T162412-L-1520060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T162412-L-1520060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

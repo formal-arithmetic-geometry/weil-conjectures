@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-affine-coordinate-fibre-dimension",
+ "kind": "statement",
+ "title": "Affine coordinate rings preserve local fibre dimension",
+ "statement": "Let X and T be affine schemes [def-pc-scheme, def-weil-affine-spectrum], f : X → T a morphism and y a point of X. Put A = Γ(T, O_T), B = Γ(X, O_X), with the A-algebra structure on B induced by f. Let q be the prime of B corresponding to y under the canonical affine isomorphism and p its contraction to A. The local topological Krull dimension [def-kun-topological-dimension-at-point] of the scheme fibre of f at its distinguished point over y [def-pc-scheme-fibre] equals the local topological Krull dimension of Spec(κ(p) tensor_A B) at the prime corresponding to q under PrimeSpectrum.preimageHomeomorphFiber. There is no finite-type or finite-dimension hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "source": {
+  "document": "Stacks Project, https://stacks.math.columbia.edu/tag/00E6",
+  "place": "Remark 00E6 (fundamental diagram and topology of fibre spectra), together with Tag 01I4; Mathlib AlgebraicGeometry/Fiber.lean:103 and AffineScheme.lean:72"
+ },
+ "proof": [
+  {
+   "text": "For an inducing map g, restriction to the inverse image of any open neighbourhood is inducing, hence its Krull dimension is at most that of the neighbourhood. Taking infima gives dimAt(x) ≤ dimAt(g(x)). Applying this to a homeomorphism and its inverse gives equality. This is proved by the private helpers dimensionAt_inducing_le and dimensionAt_homeomorph, using IsInducing.restrictPreimage and IsInducing.topologicalKrullDim_le.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homeomorphism f.fiberHomeo(f(y)) takes f.asFiber(y) to (y,rfl) in the set-theoretic fibre. Naturality of X.isoSpec identifies contraction of its image point with T.isoSpec(f(x)). Restrict the canonical affine homeomorphism to the fibres using Homeomorph.subtype; injectivity of T.isoSpec proves the membership equivalence. It carries (y,rfl) to (q,rfl).",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "PrimeSpectrum.preimageHomeomorphFiber identifies this set-theoretic ring-map fibre with Spec(κ(p) tensor_A B), taking (q,rfl) to its canonical fibre prime. Apply the local-dimension equality of step 1 to the three homeomorphisms and concatenate the equalities.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-affine-spectrum",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib and the cited Stacks Project pages",
+  "place": "Implementation of the affine translation of Tag 00QE; the full Lean proof is supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local dimension at a point is invariant under a homeomorphism of topological spaces",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of scheme theoretic fiber at a point equals the dimension of the spectrum of the fiber of its coordinate ring map",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Hom.asFiber, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, PrimeSpectrum.preimageEquivFiber, PrimeSpectrum.preimageHomeomorphFiber",
+   "verdict": "Related components found; no single theorem states this bridge. Proved from the components."
+  },
+  {
+   "tool": "grep",
+   "query": "fiberHomeo|preimageHomeomorphFiber|isoSpec_hom_naturality",
+   "date": "2026-10-13",
+   "results": "14 hits: Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "verdict": "Related components found; no single theorem states this bridge. Proved from the components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart",
+  "date": "2026-10-14",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-quasi-finite-polynomial-chart",
+   "place": "The fibre-dimension comparison in the affine polynomial-chart argument, before applying Tag 00QE",
+   "via": [
+    "lem-sbc-quasi-finite-polynomial-chart-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFinitePolynomialChart/CoordinateFibreDimension.lean",
+  "declaration": "AlgebraicGeometry.affine_coordinate_fibre_dimension_eq",
+  "statement": "theorem affine_coordinate_fibre_dimension_eq\n    {X T : Scheme.{u}} [IsAffine X] [IsAffine T] (f : X ⟶ T) (y : X) :\n    let : Algebra Γ(T, ⊤) Γ(X, ⊤) := f.appTop.hom.toAlgebra\n    let q : PrimeSpectrum Γ(X, ⊤) := X.isoSpec.hom y\n    topologicalKrullDimAt (f.asFiber y) =\n      topologicalKrullDimAt\n        ((PrimeSpectrum.preimageHomeomorphFiber Γ(T, ⊤) Γ(X, ⊤)\n          (q.comap (algebraMap Γ(T, ⊤) Γ(X, ⊤)))) ⟨q, rfl⟩)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T162412-L-1520060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T162412-L-1520060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
