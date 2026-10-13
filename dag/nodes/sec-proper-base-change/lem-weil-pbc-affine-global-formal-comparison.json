@@ -14,39 +14,59 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical affine chart and transport top sections and the top ideal. The top-ideal identity is verified by ext_of_isAffine and isoSpec.inv.appTop=GammaSpecIso.inv. Apply the natural affine Spec transport on the top open, identifying its open subscheme with X via the top immersion. Compose the resulting equivalence with the inverse of the Spec finite-completed-module equivalence. This gives E from finite S-modules to coherent formal systems.",
+   "text": "Put A=Gamma(X,top), I=J(top), e=X.isoSpec and K=J.comap e.inv. Cancel e.hom.appTop to prove e.inv.appTop=GammaSpecIso.inv, then use ext_of_isAffine and ideal_top_comap_of_isAffine to prove K=ofIdealTop (I.map GammaSpecIso.inv). Comap composition gives K.comap e.hom=J. The affine component is Noetherian by Mathlib IsLocallyNoetherian.component_noetherian.",
    "uses": [
-    "lem-weil-pbc-formal-affine-spec-transport",
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_formalSystemsPullback in both directions to get P and Q together with equations for their underlying system functors. Whisker tensor-pullback composition and identity isomorphisms by the inverse-system functor. The equations for P and Q identify their underlying composites with the identity. Lift these isomorphisms through the fully faithful inclusions and form T=Equivalence.mk P Q. Apply coherentFormalModules_affine to A,I,K. Its inverse followed by T.inverse is the required E.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-pc-module-pullback-identity-composition",
     "lem-weil-pbc-coherent-formal-modules-affine"
    ],
    "elementary": false
   },
   {
-   "text": "The Spec inverse comparison is the sheaf quotient system of the restricted finite completed module. On each level n+1, the affine quotient comparison identifies the sheaf quotient C(Q)_n with the chart pullback of tilde(Q/I^(n+1)Q), including its projection. Finite S-modules are complete, as incorporated in the Spec equivalence. The quotient comparisons transport its inverse realization to X. Naturality for transition maps and module maps follows by precomposing with the quotient projection, which is epimorphic, and cancelling it. These levelwise comparisons form beta:E.functor followed by the formal inclusion isomorphic to R followed by C.",
+   "text": "For a quasi-coherent sheaf, modulePullbackIdealPowerProductImage identifies the target power-product inclusion with the image of the pulled-back source inclusion. Subobject.isoOfMkEqMk, cokernel.mapIso, cokernelImageι and preservation of cokernels give the quotient isomorphism. Its composite with the quotient projection is the pulled-back projection. Precompose with the epimorphic quotient projection to prove compatibility both with lower powers and with sheaf maps. Assemble these as a natural completion/pullback comparison for H=R followed by tilde. Every tilde sheaf is quasi-coherent, even when the restricted completed module is not finite over A. Whisker the Spec inverse comparison by termwise tensor pullback, rewrite the inclusion equation for Q, and compose with this completion comparison. Uniqueness of left adjoints identifies tensor pullback with Scheme.Modules.pullback and gives beta.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-affine-formal-quotient-comparison"
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-coherent-formal-modules-affine"
    ],
    "elementary": false
   },
   {
-   "text": "The Spec equivalence supplies natural limiting cones on the section systems, with vertex the restricted S-module. Transport these cones using the Spec-transport section isomorphism. Restriction along topIso.inv and the top-open identification cancels, giving A-module cones on the actual top sections on X. The limit universal property identifies each cone vertex with the categorical limit, giving gamma:R isomorphic to E.functor followed by the formal inclusion, top section diagrams and lim. To verify naturality compose with every projection; the equations follow from naturality of the supplied cones and transported section isomorphisms, and jointly monomorphic projections give equality. The same calculations work for I=0, I=A, the empty scheme and zero modules.",
+   "text": "Pushforward along e.hom and e.inv gives an equivalence on module sheaves. Its adjunction and the tensor-pullback adjunction identify tensorPullback e.inv with pushforward e.hom. GammaSpecIso.inv followed by e.hom.appTop is the identity, so ModuleCat.restrictScalarsComp' identifies its Spec sections with actual top sections on X, naturally. Whisker by inverse systems and the formal inclusion; use the equation for P to obtain d:IX followed by W is isomorphic to P followed by IY and Spec section diagrams. Whisker d by Q and cancel Q followed by P using the already constructed ambient counit v. This gives dQ:Q followed by IX and W is isomorphic to IY followed by Spec section diagrams.",
    "uses": [
-    "lem-weil-pbc-formal-affine-spec-transport",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-formal-systems-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each Spec formal module F, the supplied limiting cone gives a canonical isomorphism from the restricted E.functor(F) to the categorical limit of its Spec section diagram. These form a natural isomorphism: compose the naturality equation with each limit projection, rewrite limMap_pi and conePointUniqueUpToIso_hom_comp, and apply the supplied cone naturality hn. Whisker by the inverse Spec equivalence, compose with its counit under R, and compose with the inverse of dQ after lim to obtain gamma. All constructions use unrestricted ideals and arbitrary affine schemes, including zero ideals, unit ideals and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-formal-affine-spec-transport",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-pc-module-pullback-identity-composition",
   "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-affine-formal-quotient-comparison"
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 087W and natural affine chart transport; source checked online on 2026-10-13"
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-13",
+  "based_on": "Stacks 087W, 01IB and completion results referenced there; explicit Lean proof using formal-system pullback, its adjunction, the ideal-power product image comparison, and naturality of supplied limit cones. Official 087W, 01IB and 00MA pages checked during this work."
  },
  "mathlib_searches": [
   {
@@ -136,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T100132-L-2488904",
-  "kind": "interface",
+  "landing": "20261013T111854-L-3053289",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
