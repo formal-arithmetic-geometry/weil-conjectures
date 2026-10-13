@@ -12243,3 +12243,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 19:32 L: batch 20261013T111833 dependency take-out
 - 11:33 L: returned deliver/P2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension (reviewer RETURN: (the landing tools, head 9ace0f42f) the delivery did not land: lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNor)
+- 11:33 L: returned deliver/U2/Sheaf.RingTheory.FormalGlueingMapToAlgebraization (reviewer RETURN: (the landing tools, head f81597377) the delivery did not land: lean/Sheaf/RingTheory/FormalGlueingReplacePrime.lean chan)
