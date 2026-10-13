@@ -14,28 +14,26 @@
  ],
  "proof": [
   {
-   "text": "Restrict K to W and use D.target.comparison.inv. Its augmentation identity and naturality of the restriction unit give an augmented lift into the pushed restricted resolution.",
+   "text": "Apply restrictedResolution_cohomology to K and D.target. It computes restriction on raw section-complex cohomology with the fixed resolution. Transport the inverse-image open using flatBaseChangeOpenEquality.",
    "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "def-weil-pbc-module-cohomology-fmap"
+    "lem-weil-pbc-restricted-resolution-cohomology",
+    "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
   },
   {
-   "text": "Resolve that pushed restricted resolution into an injective complex lambda. Choose beta to be lambda after the augmented lift. By the sections quasi-isomorphism theorem the map induced by lambda is invertible; its inverse cancels the lambda factor. Independence of choices identifies the result with moduleCohomologyRestriction.",
+   "text": "For the pushforward complex L, apply Mathlib NatTrans.app_homology to the evaluation restriction transformation. Short-complex extensionality identifies the resulting homology map with restriction of the section complex. Naturality of sectionCohomologyTheta then proves the section-class restriction square. Compose the raw comparison with this square.",
    "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-flat-base-change-resolution-construction"
    ],
    "elementary": false
   },
   {
-   "text": "D.target.components identifies the remaining section-complex map with restriction. Transport its open using flatBaseChangeOpenEquality. Naturality of evaluation homology and the presheaf sectionCohomologyTheta makes this restriction commute with the section class. Naturality of the module morphism isoRightDerivedObj.inv finishes the morphism equality. Evaluate the morphism equality at eta. Compose with the germ at V in g_*R^ph_*G; Mathlib TopCat.Presheaf.germ_res_apply cancels the top-to-V restriction. The result is the stated equality of germs.",
+   "text": "Naturality of the presheaf map underlying isoRightDerivedObj.inv commutes its section maps with restriction. Evaluate the resulting morphism equality at eta. Applying the germ over V and Mathlib TopCat.Presheaf.germ_res_apply yields the unchanged displayed germ equality.",
    "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "def-weil-pbc-flat-base-change-resolution-construction",
-    "lem-weil-pbc-derived-functor-map-via-lift"
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-pbc-flat-base-change-resolution-construction"
    ],
    "elementary": false
   }
@@ -43,15 +41,13 @@
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
   "def-weil-pbc-flat-base-change-resolution-construction",
-  "def-weil-pbc-module-cohomology-fmap",
   "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
-  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
+  "lem-weil-pbc-restricted-resolution-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3 (01E4), restriction maps; Remark 20.14.2 (01FB), calculation through an augmented lift; the augmentation and naturality glue is spelled out by M2.; evaluate the restriction square and apply presheaf germ compatibility."
+  "place": "Y3: restriction is computed by the new general raw-cohomology theorem; evaluation homology naturality, theta naturality, derived-comparison presheaf naturality, and germ_res_apply complete the original statement."
  },
  "mathlib_searches": [
   {
@@ -149,9 +145,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T054226-L-445427",
+  "landing": "20261013T072413-L-1127138",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
