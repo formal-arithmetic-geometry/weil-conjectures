@@ -1,0 +1,180 @@
+{
+ "id": "lem-sc-derived-pullback-tensor-unit-shift",
+ "kind": "statement",
+ "title": "Exact pullback shift from tensor with the translated unit",
+ "statement": "Let f: Z -> Y be proper between Noetherian schemes [def-pc-scheme, def-weil-proper-morphism], with derived categories [def-pc-derived-category] in one localization universe, the recorded tensor [def-pc-scheme-derived-tensor-structure] and derived pullback F [def-pc-derived-pullback]. Supply any strong monoidal structure on F, with inverse tensorator delta. Write c_X(K) for the explicit translated-unit isomorphism [def-sc-scheme-canonical-shift-unit-iso]. There exist a coherent integer-shift structure s on F and an isomorphism e: F(O_Y[1]) -> O_Z[1] such that F with s is triangulated and, for every K in D(O_Y), s(1)_K is F(c_Y(K)^-1); delta_(O_Y[1],K); (e tensor id_(F K)); c_Z(F K). No tensorator-shift square is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-weil-proper-morphism",
+  "def-sc-scheme-canonical-shift-unit-iso"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Exact K-flat derived pullback; translated-unit construction of the parent plan (08EU)"
+ },
+ "proof": [
+  {
+   "text": "Represent the unit by the structure sheaf in degree zero and its translate\nby that complex translated by one. Termwise tensor pullback of this K-flat complex\nis the structure sheaf of Z translated by one. The comparison with derived pullback\nand the supplied monoidal unit isomorphism give e. On a K-flat complex P, rewrite\nP[1] as O_Y[1] tensor P using the first-variable Koszul map and the left unitor.\nApply the supplied inverse tensorator and e, then undo this rewrite over Z. This\nis the displayed composite. Naturality follows from the tensorator, Koszul map\nand left unitor. Iterate this comparison for positive integers, use its inverse\nfor negative integers and the canonical zero comparison at zero. Associativity\nof composition and the shift addition isomorphisms give the addition equations;\nthe zero equations are the unitor equations. Termwise tensor pullback takes the\nmapping cone of a map of K-flat resolutions to its mapping cone. The translated\nunit comparison identifies the third map, so the induced triangle is\ndistinguished. Descend through the K-flat localization; every distinguished\ntriangle is isomorphic to one of these cone triangles. This proves exactness for\nthis shift structure. The formula and coherence hold also for the zero complex\nand the zero category on an empty scheme. No choice from this existence theorem\nis used to define any data: the comparison above was constructed explicitly.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback",
+    "def-pc-kflat-complex",
+    "def-weil-proper-morphism",
+    "def-sc-scheme-canonical-shift-unit-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-weil-proper-morphism",
+  "def-sc-scheme-canonical-shift-unit-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "Exactness from 06YJ; transport for a supplied monoidal structure expanded from parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor derived pullback commutes with tensor shifts exact triangulated",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Functor.commShiftPullback, CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp, CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt, CategoryTheory.Functor.mapTriangleCommShiftIso, CategoryTheory.Functor.commShiftPullback_iso_eq, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.Functor.isTriangulated_iff_comp_right",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*[Ii]nt|[Ii]nt.*CommShift",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*associator|associator.*commShift|translated.*unit",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor shift via translated unit compatible with tensor associator",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.HasShift.shiftMonoidal, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_map, CategoryTheory.instMonoidalDiscreteFunctorShiftMonoidalFunctor, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality_left",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.MonoidalCategory.associator_naturality_left",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor translation expressed as tensor with the translated unit, compatible with associativity",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact shift comparison for derived pullback induced by a supplied strong monoidal structure and an isomorphism on the translated unit",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCanonicalTensorShiftOne",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Translated-unit and associativity parts of the parent proof",
+   "via": [
+    "lem-sc-derived-pullback-canonical-tensor-shift-one",
+    "lem-sc-derived-monoidal-pullback-unital-shift",
+    "lem-sc-pinned-projection-counit-exact-shift",
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorUnitShift.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedPullback_tensorUnitShift",
+  "statement": "theorem exists_derivedPullback_tensorUnitShift {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [Functor.Monoidal (derivedPullback f)] : ∃ (sF : (derivedPullback f).CommShift ℤ) (e : (derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅ (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧), letI := sF (derivedPullback f).IsTriangulated ∧ ∀ K : schemeDerivedCategory Y, ((derivedPullback f).commShiftIso (1 : ℤ)).hom.app K = (derivedPullbackTensorUnitShiftIso f e K).hom",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.derivedPullbackTensorUnitShiftIso",
+   "AlgebraicGeometry.exists_derivedPullback_tensorUnitShift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T145117-L-695131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T145117-L-695131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
