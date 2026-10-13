@@ -6,9 +6,8 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.RestrictedAffineCoefficientSystem
+import Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 
 /-! # Geometric complex system for restricted cohomology
 
@@ -24,6 +23,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+-- The existential conclusion records properties that later binders need not reference.
+set_option linter.unusedVariables false in
 /-- The restricted-cohomology diagram comes from a qcqs scheme limit and
 single complexes with a common lower bound, before any comparison with raw Hom.
 Source: Stacks Project, Tag 09Z1 proof, before applying cohomology continuity;
@@ -151,6 +152,41 @@ theorem exists_restricted_affine_complex_system {S : Scheme.{v}}
           (D.obj (op i.unop.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop.unop))) p
           (F i.unop.unop) (colimit H)
           ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U t) := by
-  sorry
+  obtain ⟨D', c', hc', compact, quasiSeparated, affine, K, ψ, hid, hcomp, hbelow,
+    G, eG, hG, L, hL, hbelowL, r, rL, hr⟩ := exists_restricted_affine_coefficient_system
+      D c hc F φ hφid hφcomp H eH hH p U
+  have hKplus (i : Iᵒᵖ) : CochainComplex.plus _ (K i) :=
+    ⟨0, (CochainComplex.isStrictlyGE_iff _ 0).2 (hbelow i)⟩
+  have hLplus : CochainComplex.plus _ L.pt :=
+    ⟨0, (CochainComplex.isStrictlyGE_iff _ 0).2 hbelowL⟩
+  obtain ⟨hmid, hmcomp, hb⟩ := rawAffineComplex_system_map_coherence
+    D' c' K hKplus ψ hid hcomp G eG hG L hLplus (p : ℤ)
+  let T : (Iᵒᵖ)ᵒᵖ ⥤ AddCommGrpCat.{v + 1} :=
+    { obj := fun i ↦
+        (cohomology AddCommGrpCat.{v + 1} (D'.obj i.unop) (p : ℤ)).obj
+          (DerivedCategory.Q.obj (K i.unop))
+      map := fun f ↦ rawAffineComplexPullback (p : ℤ) (D'.map f.unop) (K _) ≫
+        (cohomology AddCommGrpCat.{v + 1} (D'.obj _) (p : ℤ)).map
+          (DerivedCategory.Q.map (ψ f.unop))
+      map_id := fun i ↦ hmid i.unop
+      map_comp := fun f g ↦ hmcomp _ _ _ f.unop g.unop }
+  let B : Cocone T :=
+    { pt := (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).obj
+        (DerivedCategory.Q.obj L.pt)
+      ι :=
+        { app := fun i ↦ rawAffineComplexPullback (p : ℤ) (c'.π.app i.unop) (K _) ≫
+            (cohomology AddCommGrpCat.{v + 1} c'.pt (p : ℤ)).map
+              (DerivedCategory.Q.map ((eG i.unop).inv ≫ L.ι.app i))
+          naturality := fun i j f ↦ by
+            simpa [T] using hb i.unop j.unop f.unop } }
+  refine ⟨D', c', hc', compact, quasiSeparated, affine, K, ψ, hid, hcomp, hbelow,
+    G, eG, hG, T, (fun i ↦ Iso.refl _), ?_, L, hL, B, Iso.refl _, ?_,
+    (fun i ↦ r i.unop), rL, ?_⟩
+  · intro i j f
+    simp [T]
+  · intro i
+    simp [B]
+  · intro i t
+    exact congrArg (fun a ↦ a t) (hr i.unop)
 
 end AlgebraicGeometry.Etale

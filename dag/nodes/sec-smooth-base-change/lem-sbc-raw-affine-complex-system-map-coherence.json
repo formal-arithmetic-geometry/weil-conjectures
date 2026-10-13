@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-raw-affine-complex-system-map-coherence",
+ "kind": "statement",
+ "title": "Identity, composition and cone equations of canonical complex cohomology maps",
+ "statement": "Let J be a small category, D:J\\to Sch a scheme diagram and c a cone. Let K_i be bounded-below complexes of abelian etale sheaves on D_i and psi_f:D(f)^*K_i\\to K_j for f:j\\to i, satisfying the inverse-image identity and composition comparisons explicitly in lean.statement. Let G:J^op\\to Complex(Sh(c.pt)) and eG_i:G_i\\simeq c.pi_i^*K_i satisfy the displayed canonical transition equation, and L a cocone of G whose vertex complex is bounded below. Fix p in Z. Set m_f=P_p(D(f),K_i) followed by H^p(Q psi_f), where P_p is rawAffineComplexPullback [def-sbc-raw-affine-restricted-cohomology]. Set b_i=P_p(c.pi_i,K_i) followed by H^p(Q(eG_i.inv followed by L.iota_i)). Then m_id=id, m_(g followed by f)=m_f followed by m_g, and m_f followed by b_j=b_i. No limiting or colimiting universal property is assumed; the bounds are exactly those needed to apply [lem-weil-pbc-derived-cohomology-pullback-laws].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EZM",
+  "place": "Tag 0EZM canonical maps; derived.tex Tags 015M and 05T2, composition of derived comparisons; sites.tex Tag 03CB"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-derived-cohomology-pullback-laws"
+ ],
+ "proof": [
+  {
+   "text": "Define pairMap(f,K,L,a,p) as rawAffineComplexPullback(p,f,K) followed by H^p(Qa). Expand its definition to verify the formula required by derivedEtaleCohomology_pullback_laws.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing public derivedEtaleCohomology_pullback_laws theorem to pairMap and its formula proof. Package the stage complexes and cocone vertex as CochainComplex.Plus using their supplied bounds. Its identity and composition conclusions give pair-map identity and composition. No exact-functor factorization or unit/Leray lemma is proved again.",
+   "uses": [
+    "lem-weil-pbc-derived-cohomology-pullback-laws"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport pairMap across equality of scheme morphisms by substitution. Use hidentity and hcomposition to specialize the preceding laws to m_i. For b_i, precompose the coefficient cocone naturality equation with eG_i.inv and rewrite hG, cancelling eG_i.inv followed by eG_i.hom. Use the pairMap composition equation for D.map f followed by c.pi_j, with c.w identifying the composite with c.pi_i. Substitute the resulting coefficient equality. Only the supplied boundedness is used, through the existing pullback-law theorem; no geometric limit, coefficient colimit or continuity assumption is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-weil-pbc-derived-cohomology-pullback-laws"
+ ],
+ "proof_origin": {
+  "by": "agent Q1",
+  "document": "Stacks Project",
+  "place": "Repair: reuse the public bounded-below derived cohomology pullback laws for the coefficient-system stage and vertex complexes; then use equality transport and coefficient cocone naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict sheaves in an inverse scheme system to an affine etale base change, form single complexes, and preserve their coefficient colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity composition and cocone coherence of hypercohomology pullback along scheme morphisms",
+   "results": "8 hits: CategoryTheory.Precoverage.ZeroHypercover.f_glueMorphisms_assoc, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle",
+   "date": "2026-10-13",
+   "verdict": "no complete match; signatures read and existing components used"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits.*pullback|pullback.*preservesLimits|PreservesColimits.*singleFunctor",
+   "results": "16 hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/MorphismProperty/Representable.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no complete match; signatures read and existing components used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystem",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1 proof, base change to affine U and restricted cohomology; Tag 0EZM canonical complex cocone; parent proof steps 1 and 2",
+   "via": [
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawAffineComplexSystemMapCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawAffineComplex_system_map_coherence",
+  "statement": "theorem rawAffineComplex_system_map_coherence {J : Type v} [SmallCategory J]\n    (D : J ⥤ Scheme.{v}) (c : Cone D)\n    (K : ∀ i : J, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{v + 1}) ℤ)\n    (hK : ∀ i : J, CochainComplex.plus _ (K i))\n    (ψ : ∀ {i j : J} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{v + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i) ⟶ K j)\n    (hidentity : ∀ i : J, ψ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (K i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (K i))\n    (hcomposition : ∀ (i j k : J) (f : j ⟶ i) (g : k ⟶ j),\n      ψ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)\n    (G : (J)ᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (eG : ∀ i : J, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{v + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (K i))\n    (hG : ∀ (i j : J) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{v + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (K i) ≫\n        ((upperStar AddCommGrpCat.{v + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : CochainComplex.plus _ L.pt) (p : ℤ) :\n    let m := fun {i j : J} (f : j ⟶ i) ↦\n      rawAffineComplexPullback p (D.map f) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} (D.obj j) p).map\n          (DerivedCategory.Q.map (ψ f))\n    let b := fun i : J ↦\n      rawAffineComplexPullback p (c.π.app i) (K i) ≫\n        (cohomology AddCommGrpCat.{v + 1} c.pt p).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))\n    (∀ i : J, m (𝟙 i) = 𝟙 _) ∧\n      (∀ (i j k : J) (f : j ⟶ i) (g : k ⟶ j), m (g ≫ f) = m f ≫ m g) ∧\n      (∀ (i j : J) (f : j ⟶ i), m f ≫ b j = b i)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T045551-L-134476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T045551-L-134476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
