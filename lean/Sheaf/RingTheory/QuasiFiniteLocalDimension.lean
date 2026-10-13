@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Ideal.Height
+import Mathlib.RingTheory.ZariskisMainTheorem
 import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
@@ -49,8 +50,9 @@ theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
       ringKrullDim (Localization.AtPrime (q.comap (algebraMap R S)).asIdeal) := by
   let T := integralClosure R S
   let q' := q.asIdeal.under T
+  have _ := zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
   have hmain : ZariskisMainProperty R q.asIdeal :=
-    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
+    ZariskisMainProperty.of_finiteType q.asIdeal
   obtain ⟨r, hrq, hrT, hr⟩ := zariskisMainProperty_iff.mp hmain
   have hsat : T.saturation (q.asIdeal.primeCompl ⊓ T.toSubmonoid) (by simp) = ⊤ := by
     apply top_le_iff.mp

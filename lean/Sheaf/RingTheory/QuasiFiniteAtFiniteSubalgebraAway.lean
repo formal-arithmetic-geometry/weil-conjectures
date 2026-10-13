@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.ZariskisMainTheorem
 import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
@@ -52,8 +53,9 @@ theorem exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime
     ∃ S' : Subalgebra R S, Module.Finite R S' ∧
       ∃ g : S', g.1 ∉ q.asIdeal ∧
         Function.Bijective (Localization.awayMap S'.val.toRingHom g) := by
+  have _ := zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
   have H : ZariskisMainProperty R q.asIdeal :=
-    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q hq
+    ZariskisMainProperty.of_finiteType q.asIdeal
   obtain ⟨S', hS', g, hg, hbij⟩ :=
     H.exists_fg_and_exists_notMem_and_awayMap_bijective q.asIdeal
   exact ⟨S', Module.Finite.of_fg hS', g, hg, hbij⟩

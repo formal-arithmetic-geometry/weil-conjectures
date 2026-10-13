@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Let q be the given prime and p its contraction. The definition [def-weil-pbc-ring-map-quasi-finite-at-prime] gives an open singleton at the canonical point of Spec(κ(p) ⊗[R] S). Using PrimeSpectrum.preimageHomeomorphFiber R S p, transport this singleton to the topological fibre of Spec S → Spec R: rewrite openness by Homeomorph.isOpen_image and Set.image_singleton. Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber (Mathlib/RingTheory/ZariskisMainTheorem.lean:742-752) then supplies the instance Algebra.QuasiFiniteAt R q. No extra hypothesis is introduced.",
+   "text": "Let q be the given prime and p its contraction. The definition [def-weil-pbc-ring-map-quasi-finite-at-prime] gives an open singleton at the canonical point of Spec(κ(p) ⊗[R] S). Using PrimeSpectrum.preimageHomeomorphFiber R S p, transport this singleton to the topological fibre of Spec S → Spec R: rewrite openness by Homeomorph.isOpen_image and Set.image_singleton. Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber (Mathlib/RingTheory/ZariskisMainTheorem.lean:742-752) then supplies the instance Algebra.QuasiFiniteAt R q. No extra hypothesis is introduced. This conversion is implemented by Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime in Sheaf.RingTheory.ZariskisMainAway; it returns only QuasiFiniteAt, not the duplicate localization conclusion.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "def-weil-pbc-finite-type-algebra"
@@ -57,10 +57,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C1",
+  "group": "K2",
   "date": "2026-10-14",
   "document": "Mathlib/RingTheory/ZariskisMainTheorem.lean",
-  "place": "Stacks 00Q9 as proved by Mathlib Algebra.ZariskisMainProperty.of_finiteType; the hypothesis conversion is now performed in the direct callers rather than a duplicate wrapper."
+  "place": "The fibre hypothesis conversion is the repaired Sheaf helper; each direct caller applies Algebra.ZariskisMainProperty.of_finiteType. The node statement and proof dependencies are unchanged."
  },
  "mathlib_searches": [
   {
@@ -149,7 +149,7 @@
   "by": "C1",
   "date": "2026-10-14",
   "existing": true,
-  "how": "The conclusion unfolds to the unchanged node statement. The existing IsQuasiFiniteAtPrime hypothesis is converted to Algebra.QuasiFiniteAt in each caller by the fibre homeomorphism and QuasiFiniteAt.of_isOpen_singleton_fiber; see the proof steps. The obsolete duplicate Sheaf declaration is removed."
+  "how": "The conclusion unfolds to the unchanged node statement. Each caller obtains Algebra.QuasiFiniteAt from the repaired conversion-only helper Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime, then applies this Mathlib declaration directly. The duplicate Sheaf conclusion is removed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -162,11 +162,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2cadd",
-  "group": "C1",
+  "reviewer": "X-87e58",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T211054-L-388715",
+  "landing": "20261013T215607-L-899022",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules compile; original callers fail on the changed PrimeSpectrum interface and adapted callers compile; signatures, forced edits, DAG records, report, and axioms verified."
+  "note": "independent Codex review: Matched the delivered modules and node record against the packet, compiled all adaptations and four direct importers, and verified allowed axioms only."
  }
 }
