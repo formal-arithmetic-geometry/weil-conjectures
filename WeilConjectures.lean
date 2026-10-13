@@ -1071,6 +1071,7 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 public import WeilConjectures.ConstructibleSheaf.Restriction
+public import WeilConjectures.ConstructibleSheaf.Serre
 public import WeilConjectures.ConstructibleSheaf.Simple
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.ConstructibleSheaf.SubobjectNoetherian
