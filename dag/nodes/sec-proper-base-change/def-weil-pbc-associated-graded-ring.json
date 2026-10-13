@@ -31,9 +31,30 @@
   "def-weil-pbc-quotient-module",
   "def-weil-pbc-direct-sum-modules"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Construct the pieces as submodule quotients, the direct sum, and the bilinear representative product via LinearMap.mk₂. Prove its left and right quotient-kernel conditions by Ideal.mul_mem_mul, pow_add and quotient membership; lift the product using LinearMap.liftQ₂.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the graded ring with the existing unit, associativity and commutativity theorems; these four named theorems remain open. Obtain the direct-sum ring from DirectSum.commRing. The unit formula is definitional, and homogeneous multiplication follows from DirectSum.of_mul_of and the quotient lift computation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the degree-zero ring homomorphism using the homogeneous product formula. Its kernel contains J because the degree-zero quotient class is zero exactly on J. Factor through A/J using Ideal.Quotient.lift and use RingHom.toAlgebra. The homogeneous scalar-action formula remains open. The homogeneous-ideal definition tests every direct-sum component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: the ring $\\bigoplus I^n/I^{n+1}$, the map $R/I[T_1,\\ldots,T_t]\\to\\bigoplus I^n/I^{n+1}$ and the ideal $\\bigoplus J\\cap I^n/J\\cap I^{n+1}$ in it; no labelled definition in Stacks. Notation $\\text{Gr}_I(A)=\\bigoplus I^n/I^{n+1}$: Artin approximation, Section 07XA (artin-section-approximation), artin.tex line 1268. Homogeneous ideal: Algebra, Section 00JM (section-proj, line 13365), lines 13368-13372 (an ideal that is a graded submodule; equivalently, containing the homogeneous components of its elements).",
+  "note": "B4 stage-3 partial realization: six named holes closed; five existing holes remain; no new statement or definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -150,5 +171,15 @@
   "group": "F1",
   "result": "fix",
   "note": "Mathlib has no associated graded ring (only Ideal.Filtration, IsRingFiltration); A CommRing, J ideal, pieces J^n/J^(n+1) as Submodule quotients, direct sum over N incl. n=0, unit 1 mod J in degree 0, homogeneous product ab mod J^(n+m+1), A/J-algebra via iota_0, homogeneous ideal clause; fixed choose-based CommRing instance diamond with a real DirectSum.GCommRing"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T153219-L-1059141",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

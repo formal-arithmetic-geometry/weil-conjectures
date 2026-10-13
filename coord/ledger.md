@@ -12983,3 +12983,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:27 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteOrderApproximation (stage 3; reviewer PASS; first push; landing 20261013T152730-L-1015933 (interface); batch 20261013T152726; modules 3; new nodes 2)
 - 15:27 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonDiagram (stage 3; reviewer PASS; first push; landing 20261013T152731-L-1016160 (interface); batch 20261013T152726; modules 3; new nodes 2)
 - 15:29 L: returned deliver/B2/Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRestriction (reviewer RETURN: (reviewer X-13c29, head 13c29f2c0) H10: In lean/Sheaf/AlgebraicGeometry/EtaleSingletonTensorNormalizedRestriction.lean, )
+- 15:32 L: merged deliver/B4/Sheaf.RingTheory.AssociatedGradedRing (stage 3; reviewer PASS; first push; landing 20261013T153219-L-1059141 (proof); batch 20261013T153218; modules 1; new nodes 0)

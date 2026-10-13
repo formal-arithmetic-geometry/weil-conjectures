@@ -65,7 +65,15 @@ vanishes (Stacks, Algebra, Lemma 05GH). Proof: `J^(n+1) J^m = J^(n+m+1)`, so
 `ab ∈ J^(n+m+1)` and its class in `J^(n+m)/J^(n+m+1)` is zero. -/
 theorem associatedGradedMulAux_left (J : Ideal A) (n m : ℕ) :
     Submodule.comap (J ^ n).subtype (J ^ (n + 1)) ≤
-      (associatedGradedMulAux J n m).ker := by sorry
+      (associatedGradedMulAux J n m).ker := by
+  intro a ha
+  apply LinearMap.mem_ker.mpr
+  ext b
+  apply (Submodule.Quotient.mk_eq_zero _).mpr
+  change a.1 * b.1 ∈ J ^ (n + m + 1)
+  change a.1 ∈ J ^ (n + 1) at ha
+  have hab := Ideal.mul_mem_mul ha b.2
+  simpa [← pow_add, Nat.add_right_comm] using hab
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The product of a
 representative in `J^n` with one in `J^(m+1)` lies in `J^(n+m+1)`, so its class
@@ -73,7 +81,15 @@ vanishes (Stacks, Algebra, Lemma 05GH). Proof: `J^n J^(m+1) = J^(n+m+1)`, so
 `ab ∈ J^(n+m+1)` and its class in `J^(n+m)/J^(n+m+1)` is zero. -/
 theorem associatedGradedMulAux_right (J : Ideal A) (n m : ℕ) :
     Submodule.comap (J ^ m).subtype (J ^ (m + 1)) ≤
-      (associatedGradedMulAux J n m).flip.ker := by sorry
+      (associatedGradedMulAux J n m).flip.ker := by
+  intro b hb
+  apply LinearMap.mem_ker.mpr
+  ext a
+  apply (Submodule.Quotient.mk_eq_zero _).mpr
+  change a.1 * b.1 ∈ J ^ (n + m + 1)
+  change b.1 ∈ J ^ (m + 1) at hb
+  have hab := Ideal.mul_mem_mul a.2 hb
+  simpa [← pow_add, Nat.add_assoc] using hab
 
 /-- (blueprint: def-weil-pbc-associated-graded-ring) The biadditive map
 `μ_{n,m} : J^n/J^(n+1) × J^m/J^(m+1) → J^(n+m)/J^(n+m+1)`,
@@ -161,7 +177,8 @@ the definition of the unit of the direct sum. -/
 theorem associatedGraded_one (J : Ideal A) :
     (1 : associatedGraded J) =
       DirectSum.of (fun n : ℕ => associatedGradedPiece J n) 0
-        (Submodule.Quotient.mk (⟨1, by simp⟩ : (J ^ 0 : Ideal A))) := by sorry
+        (Submodule.Quotient.mk (⟨1, by simp⟩ : (J ^ 0 : Ideal A))) := by
+  rfl
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) Products of
 homogeneous classes are classes of products (Stacks, Algebra, Lemma 05GH).
@@ -178,7 +195,9 @@ theorem associatedGraded_mul (J : Ideal A) (n m : ℕ)
       (Submodule.Quotient.mk
         (⟨a.1 * b.1, by
           simpa [pow_add] using Ideal.mul_mem_mul a.2 b.2⟩ :
-          (J ^ (n + m) : Ideal A))) := by sorry
+          (J ^ (n + m) : Ideal A))) := by
+  rw [DirectSum.of_mul_of]
+  rfl
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The degree-zero
 inclusion `a ↦ ι_0(a mod J)` is multiplicative (Stacks, Algebra, Lemma 05GH).
@@ -190,7 +209,9 @@ theorem associatedGraded_of_zero_mul (J : Ideal A) (a b : A) :
       DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0
           (Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) *
         DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0
-          (Submodule.Quotient.mk (⟨b, by simp⟩ : (J ^ 0 : Ideal A))) := by sorry
+          (Submodule.Quotient.mk (⟨b, by simp⟩ : (J ^ 0 : Ideal A))) := by
+  rw [DirectSum.of_mul_of]
+  congr 1
 
 /-- (blueprint: def-weil-pbc-associated-graded-ring) The ring homomorphism
 `A → gr_J(A)`, `a ↦ ι_0(a mod J)` (Stacks, Algebra, Lemma 05GH). -/
@@ -212,7 +233,15 @@ noncomputable def associatedGradedRingHom (J : Ideal A) :
 `A → gr_J(A)` vanishes on `J` (Stacks, Algebra, Lemma 05GH). Proof: for
 `a ∈ J = J^1` the class of `a` in `J^0/J^1` is zero. -/
 theorem associatedGradedRingHom_ker (J : Ideal A) :
-    ∀ a ∈ J, associatedGradedRingHom J a = 0 := by sorry
+    ∀ a ∈ J, associatedGradedRingHom J a = 0 := by
+  intro a ha
+  rw [show associatedGradedRingHom J a =
+      DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0
+        (Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) by rfl]
+  rw [← map_zero (DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0)]
+  congr 1
+  apply (Submodule.Quotient.mk_eq_zero _).2
+  simpa [pow_succ, pow_zero] using ha
 
 /-- (blueprint: def-weil-pbc-associated-graded-ring) The `A/J`-algebra
 structure through the degree-zero inclusion `ι_0 : A/J → gr_J(A)` (Stacks,
