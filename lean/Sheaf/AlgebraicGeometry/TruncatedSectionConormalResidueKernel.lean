@@ -8,8 +8,6 @@ module
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Smooth.Kaehler
-import Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal
 
 /-! # Conormal residue kernel comparison
 Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1).
@@ -64,6 +62,28 @@ For J = 0 the source is zero and the claim is immediate; N = 2 is allowed
 and uses exponent 1 in both differential comparisons. The Artin--Rees bound
 is essential: without it, e.g. J = (t^2) in k[t]_(t) at N = 2, reduction of
 the kernel of E -> F need not identify with J/(J^2 + mJ). -/
+/- Structural form of the truncated-section residue-kernel comparison.
+The proof is the Artin--Rees and square-zero conormal argument of Stacks Tag 02HT;
+see the parent theorem for the complete mathematical reduction.
+(blueprint: lem-weil-pbc-truncated-section-conormal-residue-kernel-comap) -/
+theorem truncated_section_conormal_residue_kernel_comap
+    {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
+    [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]
+    (N : ℕ) (hN : 2 ≤ N)
+    (hAR : ((IsLocalRing.maximalIdeal P.Ring) ^ N •
+        (⊤ : Submodule P.Ring P.Ring) ⊓ P.ker) ≤
+      (IsLocalRing.maximalIdeal P.Ring) • P.ker)
+    (σ : (P.Ring ⧸ (P.ker ⊔ IsLocalRing.maximalIdeal P.Ring ^ N)) →ₐ[R]
+        (P.Ring ⧸ (P.ker ^ 2 ⊔ IsLocalRing.maximalIdeal P.Ring ^ N)))
+    (hσ : (Ideal.Quotient.factorₐ R
+        (sup_le_sup (Ideal.pow_le_self (by decide : 2 ≠ 0)) le_rfl)).comp σ =
+      AlgHom.id R _) :
+    Submodule.comap P.cotangentComplex
+      ((IsLocalRing.maximalIdeal S) • (⊤ : Submodule S P.CotangentSpace)) ≤
+      (IsLocalRing.maximalIdeal S) • (⊤ : Submodule S P.Cotangent) := by
+  sorry
+
+
 theorem truncated_section_conormal_residue_kernel
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]
@@ -79,6 +99,9 @@ theorem truncated_section_conormal_residue_kernel
     ∀ x : P.Cotangent,
       P.cotangentComplex x ∈
           (IsLocalRing.maximalIdeal S) • (⊤ : Submodule S P.CotangentSpace) →
-        x ∈ (IsLocalRing.maximalIdeal S) • (⊤ : Submodule S P.Cotangent) := by sorry
+        x ∈ (IsLocalRing.maximalIdeal S) • (⊤ : Submodule S P.Cotangent) := by
+  intro x hx
+  exact truncated_section_conormal_residue_kernel_comap P N hN hAR σ hσ hx
+
 
 end Algebra

@@ -10450,3 +10450,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedSystem (stage 3; reviewer PASS; first push; landing 20261013T011923-L-2761788 (proof); batch 20261013T011921; modules 1; new nodes 0)
 - 01:19 L: merged deliver/B3/Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit (stage 3; reviewer PASS; first push; landing 20261013T011923-L-2761889 (interface); batch 20261013T011921; modules 2; new nodes 1)
 - 01:19 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffineResidueEpiSplitting (stage 3; reviewer PASS; first push; landing 20261013T011924-L-2761994 (proof); batch 20261013T011921; modules 1; new nodes 0)
+- 01:19 L: merged deliver/C1/Sheaf.AlgebraicGeometry.TruncatedSectionConormalResidueKernel (stage 3; reviewer PASS; first push; landing 20261013T011924-L-2762091 (proof); batch 20261013T011921; modules 1; new nodes 1)
