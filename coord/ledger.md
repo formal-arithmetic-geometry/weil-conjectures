@@ -13317,3 +13317,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/M1/Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageBoundary (stage 3; reviewer PASS; first push; landing 20261013T181112-L-2604325 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:11 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Modules.QuasiAffineFiniteFreeQuotient (stage 3; reviewer PASS; first push; landing 20261013T181113-L-2604437 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/M2/Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCounit (stage 3; reviewer PASS; first push; landing 20261013T181114-L-2604603 (interface); batch 20261013T181050; modules 2; new nodes 1)
+- 18:11 L: merged deliver/M3/Sheaf.AlgebraicGeometry.AffineSpectrumPullbackSquareCoherence (stage 3; reviewer PASS; first push; landing 20261013T181114-L-2604725 (proof); batch 20261013T181050; modules 1; new nodes 0)
