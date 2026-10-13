@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-koszul-complementary-equivalences",
+ "kind": "statement",
+ "title": "Signed complementary Koszul equivalences",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$, and $f:\\operatorname{Fin}(r)\\to A$. Write $K=K_A(f)$ [def-weil-pbc-koszul-complex] and let $D$ be its signed dual cochain complex [def-sc-koszul-dual-complex]. There are $A$-linear equivalences $e_j:D^j\\cong K_{r-j}$ for every $0\\le j\\le r$ such that, for every $j<r$ and $x\\in D^j$, $e_{j+1}(\\delta_j x)=d_{r-j}(e_j x)$. No Koszul-regularity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, local signed dual Koszul computation; read at https://stacks.math.columbia.edu/tag/0BQZ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put E=A^r with its ordered standard basis and w=e_0 wedge ... wedge e_(r-1). For each 0<=j<=r let P_j(x,y) be the coefficient of w in x wedge y, where x has degree j and y has degree r-j. The finite exterior-power bases show that this pairing is perfect: the functional dual to e_S maps to sign(S,S-complement)e_(S-complement). Indeed its pairing with e_T is zero for T different from S, and one for T=S. Extending linearly defines an invertible T'_j: Hom_A(wedge^j E,A) -> wedge^(r-j) E.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Contraction d is a graded derivation. For x in wedge^(j+1) E and y in wedge^(r-j) E their wedge is zero in degree r+1. Applying d gives P_j(dx,y)=(-1)^j P_(j+1)(x,dy). The signed dual differential delta_j(phi)=(-1)^(j+1)phi composed with d therefore satisfies T'_(j+1)delta_j=-dT'_j, since equality can be checked by pairing with every x. Define T_j=(-1)^j T'_j. Multiplication by these unit signs preserves invertibility and gives T_(j+1)delta_j=dT_j. Take e j hj=T_j. For r=0 only evaluation at the ordered degree-zero wedge remains; there is no differential square. This proof uses no regularity or nontriviality assumption and works over the zero ring.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "def-sc-koszul-dual-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H1",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, lemma-regular-immersion-ext, local signed dual Koszul computation; read at https://stacks.math.columbia.edu/tag/0BQZ"
+  },
+  "note": "Expanded the complementary contraction argument of Tag 0BQZ in the library conventions: wedge coefficient pairing gives the unsigned anticommutation, and T_j=(-1)^j T'_j corrects it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Complementary wedge pairing identifies cycles and boundaries in a dual Koszul complex with those of the original Koszul complex",
+   "results": "Service unavailable: Internal Server Error. No conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear equivalences between dual exterior powers of a finite free module and complementary exterior powers commuting with the signed Koszul contraction differential",
+   "results": "Eight hits, including exteriorPower.pairingDual, alternatingMapLinearEquiv and liftAlternatingEquiv. Read Pairing.lean:64-74: pairingDual concerns same-degree exterior powers of the dual, not complementary powers, and supplies no differential compatibility. No match to the stated signed equivalences.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul; complementary.*Koszul; contractLeft.*prod; contractLeft.*ιMulti; complementary.*cycles in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search Koszul",
+   "results": "Mathlib has no Koszul theory (RegularSequence.lean TODO). Existing KoszulDualBelowTopHomology and its downstream comparison modules require the vanishing currently under proof; they cannot supply the comparison. The exterior basis and Koszul differential declarations provide the construction ingredients, but no existing node states signed complementary equivalences. Blueprint search returned ten unrelated completion, purity or supertrace nodes. Read the current source proof of Stacks duality.tex, lemma-regular-immersion-ext, complementary contraction map and sign correction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulDualBelowTopHomology",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The complementary contraction calculation in the affine diagonal Koszul argument: degreewise equivalences and their differential compatibility, before the use of regularity.",
+   "via": [
+    "lem-sc-koszul-dual-below-top-homology",
+    "new-s3-koszul-conormal-comparison-quasi-iso",
+    "lem-sc-koszul-conormal-comparison-existence",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulComplementaryEquivalences",
+  "file": "lean/Sheaf/RingTheory/KoszulComplementaryEquivalences.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_complementary_equivalences",
+  "statement": "theorem exists_koszul_complementary_equivalences\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :\n    ∃ e : ∀ (j : ℕ), j ≤ r →\n        (koszulDualComplex A r f).X j ≃ₗ[A] (koszulComplex A r f).X (r - j),\n      ∀ (j : ℕ) (hj : j < r) (x : (koszulDualComplex A r f).X j),\n        e (j + 1) (by omega) ((koszulDualComplex A r f).d j (j + 1) x) =\n          (koszulComplex A r f).d (r - j) (r - (j + 1))\n            (e j (Nat.le_of_lt hj) x)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T015556-L-3021286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13,38 +13,49 @@
  ],
  "proof": [
   {
-   "text": "For the ordered standard basis of E=A^r, send the dual of each n-element ordered basis wedge to its complementary (r-n)-element wedge with the permutation sign. These give linear isomorphisms in degrees 0 through r. Evaluate the contraction differential on basis wedges; the signed dual differential corresponds to the reversed contraction differential up to a degree-dependent sign. Starting with sign 1 in degree zero, rescale recursively by unit signs so each differential square commutes. Terms beyond r vanish by the exterior-power basis.",
+   "text": "Obtain the regularity-free signed complementary term equivalences e_j and commuting differential squares. This is the first, algebraic part of the source argument, without passing to homology.",
    "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-sc-koszul-dual-complex",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "lem-sc-exterior-power-dual-pairing"
+    "lem-sc-koszul-complementary-equivalences"
    ],
    "elementary": false
   },
   {
-   "text": "Transport degree-n cohomology along these isomorphisms. It is degree-(r-n) homology of the original Koszul complex. Since n<r, this index is positive and Koszul-regularity makes it zero. When r=0 no such n exists; the construction remains valid over the zero ring.",
+   "text": "For 0<n<r, Koszul regularity makes K exact in the positive degree r-n. If x is a dual cocycle, its image e_n(x) is a Koszul cycle by the commuting square in degree n. Exactness gives a preimage y in K_(r-n+1). Its preimage under e_(n-1) is a dual cochain whose boundary is x by the commuting square in degree n-1 and injectivity of e_n. Use the ModuleCat elementwise exactness criterion to conclude exactness, then zero homology. Natural-number predecessor and successor identities follow from n<r.",
    "uses": [
-    "def-weil-pbc-koszul-regular-sequence"
+    "lem-sc-koszul-complementary-equivalences",
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For n=0, r>0 and regularity makes K exact at r. The commuting square sends a dual degree-zero cocycle x to a degree-r Koszul cycle. Any incoming witness lies in wedge^(r+1) A^r, which is zero: its exterior basis is indexed by (r+1)-element subsets of Fin r, an empty type. Thus e_0(x)=0 and injectivity gives x=0, establishing dual exactness at zero. When r=0 no n<r exists; no nontriviality hypothesis was used.",
+   "uses": [
+    "lem-sc-koszul-complementary-equivalences",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-complex",
   "def-sc-koszul-dual-complex",
-  "lem-weil-pbc-exterior-power-free-basis",
-  "lem-sc-exterior-power-dual-pairing",
-  "def-weil-pbc-koszul-regular-sequence"
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-koszul-complementary-equivalences",
+  "lem-weil-pbc-exterior-power-free-basis"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "D3",
+  "agent": "H1",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
    "place": "Tag 0BQZ, lemma-regular-immersion-ext, local signed dual Koszul computation; read at https://stacks.math.columbia.edu/tag/0BQZ"
   },
-  "note": "Expanded the local computation of Tag 0BQZ in the recorded finite exterior-power and signed differential conventions."
+  "note": "Lean proves exactness and vanishing by elementwise transport along the degreewise complementary equivalences. The zero-degree boundary is proved from the empty exterior basis; only construction and differential compatibility of the signed equivalences remain a new item."
  },
  "mathlib_searches": [
   {
@@ -127,12 +138,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T230754-L-1907628",
+  "landing": "20261013T015556-L-3021286",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
