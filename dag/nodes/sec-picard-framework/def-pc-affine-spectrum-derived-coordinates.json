@@ -1,0 +1,108 @@
+{
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a derived category object and a coefficient morphism along the inverse canonical isomorphism of an affine scheme to Spec of its global sections",
+   "results": "8 hits, including arrowIsoSpecΓOfIsAffine and Scheme.isoSpec_inv_naturality-related affine declarations. These give scheme coordinates, but no derived coefficient transport or stalk/base-change naturality statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical transport of derived coefficient objects and stalk tensor comparisons to affine spectrum coordinates",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSpec_inv_naturality|StalkCondition|schemeDerivedBaseChangeMap",
+   "results": "3 Mathlib hits in AffineScheme.lean (77, 475, 489), providing inverse spectrum naturality. No Mathlib derived stalk-condition or base-change transport declaration. Local rg on both library roots finds fixed-square coordinate invariance and one-base domain transport, neither the four-scheme spectrum transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexAffineSpectrumCoordinates",
+  "group": "Q3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "def-pc-affine-spectrum-derived-coordinates",
+ "kind": "definition",
+ "title": "Explicit derived coefficients in affine spectrum coordinates",
+ "statement": "Let $X,X\\prime$ be affine schemes [def-pc-scheme], let $g\\prime:X\\prime\\to X$, let $K\\in D(\\mathcal O_X)$ and $K\\prime\\in D(\\mathcal O_{X\\prime})$ [def-pc-derived-category], and let $\\phi:L(g\\prime)^*K\\to K\\prime$ [def-pc-derived-pullback]. For each affine scheme $Y$, let $t_Y:Y\\cong\\operatorname{Spec}\\Gamma(Y,\\mathcal O_Y)$ be the canonical spectrum isomorphism. Set $K_0=L(t_X^{-1})^*K$ and $K_0\\prime=L(t_{X\\prime}^{-1})^*K\\prime$. Write $g_0\\prime=\\operatorname{Spec}(g\\prime.\\mathrm{appTop})$. Naturality gives $g_0\\prime t_X^{-1}=t_{X\\prime}^{-1}g\\prime$. The canonical composition comparisons [lem-pc-ringed-spaces-derived-pullback-composition] therefore define $a:L(g_0\\prime)^*L(t_X^{-1})^*\\cong L(t_{X\\prime}^{-1})^*L(g\\prime)^*$. Define $\\phi_0=a_K;L(t_{X\\prime}^{-1})^*(\\phi)$. These are constructions of objects and morphisms, with no data chosen from mere existence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine spectrum reduction: pullback along inverse canonical spectrum isomorphisms; composition in Tag 0D5S"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "lemma-single-complex-base-change-condition, affine spectrum reduction: pullback along inverse canonical spectrum isomorphisms; composition in Tag 0D5S",
+   "via": [
+    "lem-pc-single-complex-affine-spectrum-coordinates",
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumDerivedCoordinates.lean",
+  "declaration": "AlgebraicGeometry.affineSpectrumDerivedObject",
+  "statement": "def affineSpectrumDerivedObject (X : Scheme.{u}) [IsAffine X]\n    (K : schemeDerivedCategory X) : schemeDerivedCategory (Spec Γ(X, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.affineSpectrumDerivedObject",
+   "AlgebraicGeometry.affineSpectrumDerivedPullbackIso",
+   "AlgebraicGeometry.affineSpectrumDerivedMorphism"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T111914-L-3059814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T111914-L-3059814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a derived category object and a coefficient morphism along the inverse canonical isomorphism of an affine scheme to Spec of its global sections",
+   "results": "8 hits, including arrowIsoSpecΓOfIsAffine and Scheme.isoSpec_inv_naturality-related affine declarations. These give scheme coordinates, but no derived coefficient transport or stalk/base-change naturality statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical transport of derived coefficient objects and stalk tensor comparisons to affine spectrum coordinates",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSpec_inv_naturality|StalkCondition|schemeDerivedBaseChangeMap",
+   "results": "3 Mathlib hits in AffineScheme.lean (77, 475, 489), providing inverse spectrum naturality. No Mathlib derived stalk-condition or base-change transport declaration. Local rg on both library roots finds fixed-square coordinate invariance and one-base domain transport, neither the four-scheme spectrum transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexAffineSpectrumCoordinates",
+  "group": "Q3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pc-affine-spectrum-base-change-comparison",
+ "kind": "statement",
+ "title": "Base-change mate for explicit affine spectrum coefficients",
+ "statement": "Let $f:X\\to S,f\\prime:X\\prime\\to S\\prime,g:S\\prime\\to S,g\\prime:X\\prime\\to X$ form a cartesian square of affine schemes [def-pc-scheme] and fix a pullback proof for the square of their spectrum maps $f_0,f_0\\prime,g_0,g_0\\prime$. For $K\\in D(\\mathcal O_X),K\\prime\\in D(\\mathcal O_{X\\prime})$ and $\\phi:L(g\\prime)^*K\\to K\\prime$ [def-pc-derived-category, def-pc-derived-pullback], construct $K_0,K_0\\prime,\\phi_0$ by [def-pc-affine-spectrum-derived-coordinates]. Let $t:S\\prime\\to\\operatorname{Spec}\\Gamma(S\\prime,\\mathcal O_{S\\prime})$ be canonical. There exist $e_L:Lg^*Rf_*K\\cong Lt^*Lg_0^*Rf_{0*}K_0$ and $e_R:Rf\\prime_*K\\prime\\cong Lt^*Rf_{0*}\\prime K_0\\prime$ with $\\mathrm{BC}(K);Rf\\prime_*(\\phi)=e_L;Lt^*(\\mathrm{BC}_0(K_0);Rf_{0*}\\prime(\\phi_0));e_R^{-1}$, for the canonical comparison [def-pc-derived-base-change-map, def-pc-derived-direct-image]. No quasi-coherence, stalk condition, flatness or boundedness is assumed. No invertibility of the base-change map is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine reduction: identification of the actual comparison; Tag 08HY counit construction and Tag 0D5S coherence"
+ },
+ "proof": [
+  {
+   "text": "For each canonical spectrum isomorphism tY, composition with its inverse and the identity comparison exhibit LtY and L(tY inverse) as inverse equivalences. The pinned derived adjunction identifies RtY with inverse-isomorphism pullback. Naturality of spectrum maps and composition identify Rf(K) with LtS Rf0(K0); applying Lg and composition gives eL. The same construction for fprime gives eR.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the canonical base-change map as the transpose of the square pullback comparison followed by Lgprime of the counit of f. Associativity and unit laws of the pullback comparisons identify the square comparison with its spectrum counterpart. Naturality of the pinned counits and Hom transpose identifies the mates under eL and eR. Naturality in the coefficient morphism phi then appends the transported coefficient map, which is exactly phi0 by its construction. Rearrange using eR inverse to get the equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-base-change-map",
+  "def-pc-affine-spectrum-derived-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, affine reduction: identification of the actual comparison; Tag 08HY counit construction and Tag 0D5S coherence"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "lemma-single-complex-base-change-condition, affine reduction: identification of the actual comparison; Tag 08HY counit construction and Tag 0D5S coherence",
+   "via": [
+    "lem-pc-single-complex-affine-spectrum-coordinates",
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumBaseChangeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumBaseChangeComparison.lean",
+  "declaration": "AlgebraicGeometry.affineSpectrumCoordinates_comparison",
+  "statement": "theorem affineSpectrumCoordinates_comparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') :\n    let K0 := affineSpectrumDerivedObject X K\n    let K0' := affineSpectrumDerivedObject X' K'\n    let φ0 := affineSpectrumDerivedMorphism g' K K' φ\n    ∃ (eL : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj K) ≅\n        (derivedPullback S'.toSpecΓ).obj\n          ((derivedPullback (Spec.map g.appTop)).obj\n            ((schemeDerivedDirectImage (Spec.map f.appTop)).obj K0)))\n      (eR : (schemeDerivedDirectImage f').obj K' ≅\n        (derivedPullback S'.toSpecΓ).obj\n          ((schemeDerivedDirectImage (Spec.map f'.appTop)).obj K0')),\n      schemeDerivedBaseChangeMap f f' g g' sq.w K ≫\n          (schemeDerivedDirectImage f').map φ =\n        eL.hom ≫ (derivedPullback S'.toSpecΓ).map\n          (schemeDerivedBaseChangeMap\n              (Spec.map f.appTop) (Spec.map f'.appTop)\n              (Spec.map g.appTop) (Spec.map g'.appTop) sq0.w K0 ≫\n            (schemeDerivedDirectImage (Spec.map f'.appTop)).map φ0) ≫ eR.inv",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T111914-L-3059814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T111914-L-3059814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

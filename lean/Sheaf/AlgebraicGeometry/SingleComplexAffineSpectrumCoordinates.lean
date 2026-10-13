@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.AffineSpectrumStalkCondition
+import Sheaf.AlgebraicGeometry.AffineSpectrumBaseChangeComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Spectrum coordinates for a single-complex affine square
 
@@ -79,6 +82,18 @@ theorem exists_singleComplexAffineSpectrumCoordinates
             (schemeDerivedDirectImage f').map φ =
           eL.hom ≫ (derivedPullback S'.toSpecΓ).map
             (schemeDerivedBaseChangeMap f0 f0' g0 g0' sq0.w K0 ≫
-              (schemeDerivedDirectImage f0').map φ0) ≫ eR.inv := by sorry
+              (schemeDerivedDirectImage f0').map φ0) ≫ eR.inv := by
+  dsimp
+  let K0 := affineSpectrumDerivedObject X K
+  let K0' := affineSpectrumDerivedObject X' K'
+  let φ0 := affineSpectrumDerivedMorphism g' K K' φ
+  have hK0 : schemeDerivedQCohProperty (Spec Γ(X, ⊤)) K0 :=
+    (derivedPullback_tensor_preserve_QCoh X.isoSpec.inv).1 K hK
+  have hK0' : schemeDerivedQCohProperty (Spec Γ(X', ⊤)) K0' :=
+    (derivedPullback_tensor_preserve_QCoh X'.isoSpec.inv).1 K' hK'
+  have hst := affineSpectrumCoordinates_stalkCondition f f' g g' sq sq0 K K' φ
+  obtain ⟨eL, eR, heq⟩ :=
+    affineSpectrumCoordinates_comparison f f' g g' sq sq0 K K' φ
+  exact ⟨K0, K0', φ0, hK0, hK0', hst, eL, eR, heq⟩
 
 end AlgebraicGeometry
