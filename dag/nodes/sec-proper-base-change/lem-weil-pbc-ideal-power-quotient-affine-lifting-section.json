@@ -18,45 +18,46 @@
  ],
  "proof": [
   {
-   "text": "On the single affine open V, identify the monic finite-type quasi-coherent ideal with a finitely generated ideal J of R=Gamma(V,O_X), F with M~, and P_n with (J^n)~. Finite generation of J^n implies localization of its annihilator equals the annihilator of the localized ideal: clear one denominator for each of finitely many generators, and take their maximum. The sectionwise hann and monicity therefore identify A_n|V with Ann_M(J^n)~. The affine cokernel theorem identifies Q_n|V with (M/Ann_M(J^n))~.",
+   "text": "Apply the affine denominator-map construction to obtain n, K, and f:P_n(V)->F(V)/K with its restriction formula on global affine sections, and quasi-coherence of P_n.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-ideal-power-affine-denominator-map"
    ],
    "elementary": false
   },
   {
-   "text": "Choose J=(f_1,...,f_t). Write s on D(f_i) as x_i/f_i^k, k positive, and clear all overlap relations by one e. Replacing x_i by f_i^e x_i and k by k+e gives f_j^k x_i=f_i^k x_j. Set d=t(k-1)+1 and K={x: f_i^k x=0 for all i}. Every degree-d monomial contains f_i^k. Map it to the remaining monomial times x_i modulo K. For a relation, multiplying its proposed image by each f_j^k gives the original relation times x_j, hence zero. Changing the chosen index is handled by the same calculation. Thus the formula descends to J^d -> M/K, and K is contained in Ann_M(J^d) by the monomial bound. Compose to M/Ann_M(J^d).",
+   "text": "Since K is contained in the range of a_n(V), a_n followed by pi_n = 0 shows K is contained in the kernel of pi_n(V). Descend pi_n(V) through K by Submodule.liftQ and compose with f. Naturality of pi_n and surjectivity of the quotient projection turn the representative formula into the scalar formula for this composed linear map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the composed linear map to phi:P_n|V -> Q_n|V with its prescribed value on V.",
    "uses": [
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-affine-section-linear-map-extension"
    ],
    "elementary": false
   },
   {
-   "text": "The affine tilde functor turns this linear map into a morphism over V. Evaluation on D(f_i) is x_i/f_i^k because phi(f_i^d)=f_i^(d-k)x_i (t>=1 gives d>=k). The localized unit is the restriction of one d, by monicity and hone. Sheaf separation and naturality give the identity on all W inside U intersect V. For t=0 the complement is empty, use d=1 and the zero map. Empty affine opens are included. For the unit ideal degree zero and the section morphism suffice.",
+   "text": "For a section b on W inside U intersect V, choose around each point a principal open D(r) inside W. Quasi-coherence supplies k and c in P_n(V) with c|D(r)=r^k b|D(r). Naturality of phi and its value on V give the scalar formula for c|D(r); linearity and naturality of j_n give the formula for r^k b|D(r). The restricted r is a unit, so cancel its kth power. Sheaf separation gives the formula for b on W. Empty W is included by separation.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-affine-module-basic-open-localization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the scalar formula to the restriction of one n. Naturality of j_n and hone make its image equal to 1 on W. Scalar multiplication by 1 and naturality of pi_n give the required identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "def-weil-pbc-module-localization-away"
+  "lem-weil-pbc-ideal-power-affine-denominator-map",
+  "lem-weil-pbc-affine-section-linear-map-extension",
+  "lem-weil-pbc-affine-module-basic-open-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+  "place": "Lemmas 01PM and 01PQ; quotient descent and principal-open scalar-identity argument formalized by J1 using the proved upstream affine localization lemma."
  },
  "mathlib_searches": [
   {
@@ -161,9 +162,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T100142-L-2491649",
+  "landing": "20261013T113343-L-3184257",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
