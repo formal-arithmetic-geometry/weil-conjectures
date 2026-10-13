@@ -2,6 +2,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Mathlib.RingTheory.LocalRing.Module
+import Mathlib.RingTheory.Flat.Stability
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -20,5 +22,18 @@ theorem residue_kernel_unit_minor_base_change_free
     Module.Free (Localization.AtPrime 𝔭)
       ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj X) ∧
     Module.Free (Localization.AtPrime 𝔭)
-      ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y) := by sorry
+      ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y) := by
+  let := hfX
+  let := hfY
+  let := hpX
+  let := hpY
+  constructor
+  · dsimp [extendScalars, ExtendScalars.obj', restrictScalars, RestrictScalars.obj']
+    let : Algebra R (Localization.AtPrime 𝔭) :=
+      (algebraMap R (Localization.AtPrime 𝔭)).toAlgebra
+    exact Module.free_of_flat_of_isLocalRing
+  · dsimp [extendScalars, ExtendScalars.obj', restrictScalars, RestrictScalars.obj']
+    let : Algebra R (Localization.AtPrime 𝔭) :=
+      (algebraMap R (Localization.AtPrime 𝔭)).toAlgebra
+    exact Module.free_of_flat_of_isLocalRing
 end ModuleCat

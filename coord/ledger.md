@@ -13478,3 +13478,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Modules.PullbackFreeCoordinatesNaturality (stage 3; reviewer PASS; first push; landing 20261013T201751-L-3969910 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:17 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Modules.StructureBaseChangeSectionsNaturality (stage 3; reviewer PASS; first push; landing 20261013T201752-L-3970017 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:17 L: merged deliver/H2/Sheaf.Algebra.Homology.ResidueKernelLocalizedCokernelTransport (stage 3; reviewer PASS; first push; landing 20261013T201752-L-3970162 (proof); batch 20261013T201736; modules 1; new nodes 1)
+- 20:17 L: merged deliver/H2/Sheaf.Algebra.Homology.ResidueKernelUnitMinorBaseChangeFree (stage 3; reviewer PASS; first push; landing 20261013T201752-L-3970408 (proof); batch 20261013T201736; modules 1; new nodes 0)
