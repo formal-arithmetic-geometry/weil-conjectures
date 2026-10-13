@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedGenerators
 
 /-!
 # Principal-open section comparison for a graded-module chart
@@ -110,7 +112,47 @@ theorem gradedModuleChart_basisComparison_fixed
           D[f].toScheme.ringCatSheaf.obj.obj (op U.val)]
           G.val.obj (op U.val),
         ∀ (U V : B) (i : V.val ≤ U.val) (s : E.val.obj (op U.val)),
-          l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s) := by sorry
-
+          l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s) := by
+  classical
+  have naturality {X : Scheme.{u}} (E G : X.Modules) (B : Set X.Opens)
+      (a : E.val.obj (op ⊤) →+ G.val.obj (op ⊤))
+      (l : ∀ V : B, E.val.obj (op V.val) →ₗ[X.ringCatSheaf.obj.obj (op V.val)]
+        G.val.obj (op V.val))
+      (hnormalize : ∀ (V : B) (s : E.val.obj (op ⊤)),
+        l V (E.val.map V.val.leTop.op s) = G.val.map V.val.leTop.op (a s))
+      (hspan : ∀ V : B, Submodule.span (X.ringCatSheaf.obj.obj (op V.val))
+        (Set.range (E.val.map V.val.leTop.op)) = ⊤)
+      (V W : B) (i : W.val ≤ V.val) (s : E.val.obj (op V.val)) :
+      l W (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l V s) := by
+    have hs : s ∈ Submodule.span (X.ringCatSheaf.obj.obj (op V.val))
+        (Set.range (E.val.map V.val.leTop.op)) := by
+      rw [hspan V]
+      trivial
+    induction hs using Submodule.span_induction with
+    | mem x hx =>
+        obtain ⟨t, rfl⟩ := hx
+        have hE : E.val.map (homOfLE i).op (E.val.map V.val.leTop.op t) =
+            E.val.map W.val.leTop.op t :=
+          (E.val.map_comp_apply V.val.leTop.op (homOfLE i).op t).symm
+        calc
+          l W (E.val.map (homOfLE i).op (E.val.map V.val.leTop.op t)) =
+              l W (E.val.map W.val.leTop.op t) := congrArg (l W) hE
+          _ = G.val.map W.val.leTop.op (a t) := hnormalize W t
+          _ = G.val.map (homOfLE i).op (G.val.map V.val.leTop.op (a t)) :=
+            G.val.map_comp_apply V.val.leTop.op (homOfLE i).op (a t)
+          _ = G.val.map (homOfLE i).op (l V (E.val.map V.val.leTop.op t)) :=
+            congrArg (G.val.map (homOfLE i).op) (hnormalize V t).symm
+    | zero => simp only [map_zero]
+    | add x y hx hy ihx ihy => simp only [map_add, ihx, ihy]
+    | smul r x hx ih =>
+        rw [E.val.map_smul, (l W).map_smul, (l V).map_smul, G.val.map_smul, ih]
+  dsimp
+  obtain ⟨a, hmaps⟩ := gradedModuleChart_basisComparison_fixed_core 𝒜 Z rhoS rho U hU
+    theta thetaS htheta hcanonical F alpha hscalar hrestriction f
+  choose l hl hnormalize using hmaps
+  refine ⟨fun V ↦ LinearEquiv.ofBijective (l V) (hl V), ?_⟩
+  exact naturality _ _ _ a l hnormalize
+    (gradedModuleChart_basisComparison_fixed_generators 𝒜 Z rhoS rho U hU
+      theta thetaS htheta hcanonical F alpha hscalar hrestriction f)
 
 end AlgebraicGeometry.Proj
