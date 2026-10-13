@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-coherent-map-completion-torsion-kernel-reflection",
+ "kind": "statement",
+ "title": "Fixed-thickening completion reflects a quantitative coherent kernel torsion bound",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $I,K$ quasi-coherent ideal sheaves [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], and $q,s\\geq1$. Put $Z=V(K^q)$. Assume for every Noetherian instance on $Z$ that completion with respect to $I\\mathcal O_Z$ [def-nagata-extended-ideal] is an equivalence. Let $F,G$ be coherent $\\mathcal O_X$-modules and $a:F\\to G$ a morphism [def-weil-pbc-coherent-formal-module]. Assume $K^qF=K^qG=0$. If for every $n\\geq0$ the ordinary sheaf kernel and cokernel of $a\\bmod I^{n+1}:F/I^{n+1}F\\to G/I^{n+1}G$ are killed by $K^s$, then $K^{2s}$ kills the ordinary sheaf kernel of $a$. Ideal products and reductions have their shared image/cokernel definitions [def-weil-pbc-coherent-formal-module].",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-nagata-extended-ideal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), bound K^(4t); verified at https://stacks.math.columbia.edu/tag/088A and https://stacks.math.columbia.edu/tag/0888"
+ },
+ "proof": [
+  {
+   "text": "Put Z=V(K^q). Its closed immersion into the Noetherian scheme X has Noetherian source. The coherent closed-pushforward equivalence descends F,G,a to Z. Its natural completion comparison and the ideal-power pushforward comparison transfer the component bounds to the completion of this descended map with respect to I O_Z, using the ideal K O_Z.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-completion",
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fixed-exponent affine-limit annihilation statement to the descended completed map. On each affine of Z, the s-th power kills every component kernel and cokernel, so the 2s-th power kills the kernel of the inverse-limit map. The affine formal-module equivalence identifies this with the kernel of the completed map.",
+   "uses": [
+    "lem-weil-pbc-formal-annihilation-affine-limit",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completion of finite modules is naturally tensoring with the completed ring, which is flat. Thus it preserves the kernel of the descended coherent map and the image of the ideal-action map on that kernel. The affine ideal-product calculation identifies the completed image with the product by the extended 2s-th ideal power, which is zero by the preceding bound. Therefore the completion of this coherent product is zero on every affine and hence globally.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed global completion equivalence on Z reflects zero objects, so the coherent product itself is zero. Exact closed pushforward identifies the descended kernel with the ordinary sheaf kernel of a; its ideal-power comparison identifies the zero product with K^(2s) kernel(a) on X.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-completion",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-formal-annihilation-affine-limit",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), second application of Remark 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), bound K^(4t); verified at https://stacks.math.columbia.edu/tag/088A and https://stacks.math.columbia.edu/tag/0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion equivalence reflects ideal power annihilation of the kernel of a coherent map on a closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ideal annihilation of kernel reflected by completion equivalence",
+   "results": "8 ring-level hits: IsPrecomplete, IsAdicComplete.toIsPrecomplete, IsAdicComplete, isPrecomplete_iff, isAdicComplete_iff, AdicCompletion.of_bijective_iff, AdicCompletion.of_inj, AdicCompletion.map_injective. None is the global fixed-thickening reflection statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilat.*completion|completion.*annihilat",
+   "results": "msearch: 0 hits. Local searches of both Lean roots and DAG found the parent torsion theorem and its two conjunct obligations, not a generic reflection theorem. Blueprint search completion torsion kernel returned 0 matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_kernel",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 088A, proof: second application of Remark 0888, reflecting the K^(2t) component bound to the K^(4t) coherent kernel bound",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-torsion-kernel",
+    "lem-weil-pbc-devissage-second-adic-system-core",
+    "lem-weil-pbc-devissage-second-adic-system",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentMapCompletionTorsionKernelReflection.lean",
+  "declaration": "AlgebraicGeometry.coherentMap_completion_torsion_kernel_reflection",
+  "statement": "theorem coherentMap_completion_torsion_kernel_reflection\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (q : ℕ) (hq : 1 ≤ q)\n    (hcompletion : ∀ (hZ : IsNoetherian (K ^ q).subscheme),\n      Functor.IsEquivalence\n        (@completion ((K ^ q).subscheme) hZ (I.comap (K ^ q).subschemeι)))\n    (F G : CoherentModules X) (a : F ⟶ G)\n    (hF : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2 F.obj))\n    (hG : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι q).2 G.obj))\n    (s : ℕ) (hs : 1 ≤ s)\n    (h : ∀ n : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2\n        (kernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1))))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2\n        (cokernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))))) :\n    IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * s)).2\n      (kernel a.hom))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T015619-L-3028705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T015619-L-3028705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

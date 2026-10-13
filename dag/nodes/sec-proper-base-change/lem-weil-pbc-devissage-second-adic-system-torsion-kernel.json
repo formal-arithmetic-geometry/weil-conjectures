@@ -16,25 +16,40 @@
  },
  "proof": [
   {
-   "text": "Use scalar reverse maps on affine sections, transport through the comparison square, pass to inverse limits, and reflect zero through the closed-immersion completion equivalence.",
+   "text": "For each n, package the coherent source and target of alpha_n as coherent modules and apply coherentMap_reduction_torsion with reduction ideal K, annihilating ideal K and level e. This gives exponent 2t for both ordinary kernels and cokernels after reduction modulo K^(e+1).",
    "uses": [
-    "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
-    "lem-weil-pbc-formal-systems-annihilated-by-power",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "lem-weil-pbc-coherent-map-reduction-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply kernel.mapIso and cokernel.mapIso to the isomorphisms sigma_(e,n), theta_(e,n) and the supplied square. Naturality of ideal products transports the zero products from the reduced alpha_n to delta_e modulo I^(n+1). The proved private helper obtains this naturality from formalModuleQuotient_factor and cancels the isomorphism.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The K-adic conditions annihilate the coherent source and target of delta_e by K^(e+1). Apply coherentMap_completion_torsion_kernel_reflection on that fixed thickening with s=2t, using hthick at e+1. Rewrite 2*(2t)=4t.",
+   "uses": [
+    "lem-weil-pbc-coherent-map-completion-torsion-kernel-reflection",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
-  "lem-weil-pbc-formal-systems-annihilated-by-power",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-map-completion-torsion-kernel-reflection",
+  "lem-weil-pbc-coherent-map-reduction-torsion"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "V1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tags 088A and 0888",
-  "note": "Strict conjunct split."
+  "place": "Tags 088A and 0888, two quantitative estimates; verified at https://stacks.math.columbia.edu/tag/088A and https://stacks.math.columbia.edu/tag/0888",
+  "note": "Lean reduction, comparison-square transport and application of fixed-thickening reflection; one strictly smaller geometric obligation remains."
  },
  "mathlib_searches": [
   {
@@ -108,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T231634-L-1961922",
+  "landing": "20261013T015619-L-3028705",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

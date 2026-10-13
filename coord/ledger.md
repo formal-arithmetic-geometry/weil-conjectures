@@ -10605,3 +10605,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:56 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ArtinianLiftingTruncatedSection (stage 3; reviewer PASS; first push; landing 20261013T015618-L-3028260 (interface); batch 20261013T015540; modules 2; new nodes 1)
 - 01:56 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ChangeOfRingsTensorBalancingExists (stage 3; reviewer PASS; first push; landing 20261013T015618-L-3028364 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:56 L: merged deliver/V1/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapCompData (stage 3; reviewer PASS; after a return; landing 20261013T015619-L-3028470 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:56 L: merged deliver/V1/Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_kernel (stage 3; reviewer PASS; first push; landing 20261013T015619-L-3028705 (interface); batch 20261013T015540; modules 2; new nodes 1)
