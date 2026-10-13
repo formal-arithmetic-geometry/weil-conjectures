@@ -70,6 +70,8 @@ variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {X : Scheme.{u}} {S : Adi
   [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
   {Φ : X ⟶ X} {hΦ : Φ ≫ aX = aX} (F : S.FrobeniusSystem Φ hΦ)
 
+omit [IsSepClosed k] [IsGeometric aX] [HasCompactification aX] [∀ n, Finite (R ⧸ I ^ n)]
+  [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 /-- The stalk Frobenius of the Weil complex `(L_n, ψ_n)` is computed from the iterates
 `ψ_{n,m}`. -/
 lemma weilComplex_stalkFrobenius (n m : ℕ) (x : Spec (.of k) ⟶ X)
@@ -132,6 +134,7 @@ variable [∀ n, DerivedBraiding (ModuleCat.{u + 1} (R ⧸ I ^ n))]
   (hα : ∀ n : ℕ, IsCoefficientChange (levelρ I n) _ _
     (compactCoefficientIso (levelρ I n) aX (δ n) (αs n)))
 
+omit [IsSepClosed k] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 /-- The global Frobenius operator `F_{c,m}(ψ_n) = T_{c_m}(ψ_{n,m})` of the Weil complex
 `(L_n, ψ_n)`, the global operator of its graph correspondence `c_m = (𝟙, Φ^m)`, is the proper
 pullback along `Φ^m` followed by `Ra_{X!} ψ_{n,m}`. -/
@@ -143,7 +146,7 @@ lemma globalOperator_weilComplex_graph (n : ℕ) :
       (G n).properPullback (endPow Φ m) (endPow_comp hΦ m) (S.constructibleFiniteTor n) ≫
         (rightDerivedLowerShriek (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).map
           (iterCoeff Φ (F.coeff n) m) := by
-  haveI : IsProper ((F.weilComplex n).frobeniusIterate m) := ‹IsProper (endPow Φ m)›
+  have : IsProper ((F.weilComplex n).frobeniusIterate m) := ‹IsProper (endPow Φ m)›
   rw [Correspondence.globalOperator_ofGraph, weilComplex_coeffIterate]
   rfl
 
@@ -190,6 +193,7 @@ variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} [IsLocalRing R] [IsAdicCo
   (T : ModuleCat.NormalizedPerfectTower (levelπ I) (levelρ I) (levelπ_eq I))
   {c : Cone T.restrict} (hc : IsHomotopyLimit c)
 
+omit [IsAdicComplete I R] in
 include hϖ in
 lemma isLocalRing_quotient_pow_of_mem (hI : I = Ideal.span {ϖ}) (n : ℕ) :
     IsLocalRing (R ⧸ I ^ (n + 1)) :=

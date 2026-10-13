@@ -110,6 +110,7 @@ def IsProperPullbackCompatible
     (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) aX).map η ≫ δ.hom.app K' ≫
       (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ).map (G'.properPullback h hh hK')
 
+omit [IsGeometric aX] [HasCompactification aX] in
 /-- The iterates `Φ^m` of an endomorphism over `s` are endomorphisms over `s`. -/
 lemma endPow_comp {Φ : X ⟶ X} (hΦ : Φ ≫ aX = aX) (m : ℕ) : endPow Φ m ≫ aX = aX := by
   induction m with
