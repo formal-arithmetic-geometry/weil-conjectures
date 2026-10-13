@@ -10520,3 +10520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: returned deliver/Y3/Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor (reviewer RETURN: (the landing tools, head f56aa8a44) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 01:55 L: merged deliver/A2/Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact (stage 3; reviewer PASS; first push; landing 20261013T015542-L-3016126 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/A3/Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineProjections (stage 3; reviewer PASS; first push; landing 20261013T015542-L-3016235 (interface); batch 20261013T015540; modules 2; new nodes 1)
+- 01:55 L: merged deliver/A4/Sheaf.AlgebraicGeometry.PushforwardSupportClosed (stage 3; reviewer PASS; first push; landing 20261013T015542-L-3016360 (proof); batch 20261013T015540; modules 1; new nodes 0)

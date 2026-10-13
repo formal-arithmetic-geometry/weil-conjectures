@@ -13,29 +13,58 @@
  ],
  "proof": [
   {
-   "text": "Since q is proper and Z Noetherian, Y is Noetherian. Proper coherent pushforward is coherent by Tag 02O5. On Z it is quasi-coherent of finite type by Tag 01XZ, so Tag 056J gives a closed support D.",
+   "text": "Properness and the locally Noetherian target make Y locally Noetherian. Apply the coherent/quasi-coherent finite-type equivalence to F. To supply finite presentation for the higher-direct-image theorem, choose finite local generators, reindex their indices by ULift (Fin n), and apply the kernel clause of coherence. The already proved isFinitePresentation_of_generators_kernel helper in CoherentFiniteTypeLocallyNoetherian gives presentations on this cover; Mathlib locality descends them. This is written in Lean as a generic local argument to avoid expensive unfolding of the concrete scheme sheaf in elaboration.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing Grothendieck-abelian instance for Y.Modules to obtain injective resolutions. In degree zero apply isFinitePresentation_higherDirectImage and isQuasicoherent_higherDirectImage. The pushforward is left exact, so Mathlib rightDerivedZeroIsoSelf identifies its degree-zero right derived functor with the ordinary pushforward. Transport finite presentation and quasi-coherence along this isomorphism.",
    "uses": [
     "lem-pc-coherent-hi",
-    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite presentation implies finite type. Apply finite_type_module_support_closed to the ordinary pushforward and use its last conjunct as the closedness proof for D, whose underlying set is exactly the set of points with nonsubsingleton stalk.",
+   "uses": [
     "lem-weil-pbc-finite-type-module-support-closed"
    ],
    "elementary": false
   },
   {
-   "text": "Properness makes q(C) closed. For x outside q(C), put V = Z minus q(C). By hC every stalk of F on q inverse image V is zero. Any two sections on an open there have equal germs, hence agree locally and then globally by sheaf separatedness. Thus q_*F has singleton sections on every open inside V. Shrink a representative of any germ at x by intersecting with V; all such germs agree, so the pushforward stalk is zero. Contraposition gives D contained in q(C). This includes the zero module and empty source or target.",
-   "uses": [],
+   "text": "Properness makes q a closed map. For x outside q(C), let V be the open complement of q(C). For every open U contained in V and y in its inverse image, y is outside C; the support equality hC therefore makes the stalk F_y subsingleton. By section_ext, all sections of F on the inverse image of U agree. Thus every section module of q_*F on an open contained in V is subsingleton.",
+   "uses": [
+    "lem-weil-pbc-sheaf-sections-determined-by-germs",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent any two pushforward stalk elements at x by germs on opens U and W contained in V using exists_le_germ_eq. Their restrictions to U intersect W agree by the preceding subsingleton result. Twice apply germ_res_apply to identify their germs. Hence the stalk is subsingleton outside q(C); contraposition proves D is contained in q(C). The argument works for empty opens and zero sheaves as well.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-coherent-hi",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-finite-type-module-support-closed"
+  "pqf-def-coherent",
+  "lem-pc-coherent-hi",
+  "lem-pc-sections-higher-direct-image-quasi-coherent",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E, support of H paragraph; Tag 02O5"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088E",
+  "place": "Support of H paragraph, using the existing degree-zero case of 02O5 and finite-type support closedness. Lean implementation by A4, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -117,13 +146,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261012T225256-L-1800381",
-  "kind": "interface",
+  "landing": "20261013T015542-L-3016360",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
