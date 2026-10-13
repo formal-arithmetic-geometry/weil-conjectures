@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-cartesian-flat-single-termwise-comparison",
+ "kind": "statement",
+ "title": "Termwise comparison after cartesian flat base change",
+ "statement": "Let f:X\\to S and p:Y\\to W be quasi-compact quasi-separated morphisms of schemes [def-pc-scheme], where W is an open of a scheme T. Let U be an open of S and V an open of U. Let M be a quasi-coherent module on Y flat over p [pqf-def-coherent, def-pc-scheme-module-flat-over], and F any module on X. Suppose g:V\\to W and q:X\\times_S V\\to Y form a cartesian square [def-pc-fibre-product], and q^*M is isomorphic to the restriction of F [def-pc-module-pullback]. Supply independent derived localizations on X,S,T,Y,W,U and all localized sites of U [def-pc-derived-category]. Let L be additive and isomorphic to tensor pullback along V\\to W\\to T followed by the inverse localized-site equivalence. For every bounded-above finite-free complex P on T whose exact restriction to W represents Rp_*M[0] [def-pc-derived-direct-image, def-pc-derived-open-restriction-maps], the exact localized restriction to V of (Rf_*F[0])|_U is isomorphic to Q(L(P)), with L acting termwise. No Noetherian model or coherent source is asserted or required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A1D, 06YD, 06YJ and 08FE"
+ },
+ "proof": [
+  {
+   "text": "Use open direct-image restriction for f on V\to U\to S. The given sheaf isomorphism replaces the restricted F by q^*M in the pullback source.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relatively flat tensor base change to p, the perfect unit and the single complex M[0]. The cartesian square gives the comparison between the resulting image and Lg^*Rp_*M[0]; compose with the given representative isomorphism.",
+   "uses": [
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-free terms are flat and the bounded-above complex is K-flat. Compute derived pullback termwise, compose ordinary pullbacks along g and W inclusion, and transport through the exact localized-site equivalence. Localization uniqueness compares independent universes and a common K-injective resolution compares direct-image constructions. Compose these isomorphisms.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-rf-base-change-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0A1D, 06YD, 06YJ and 08FE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of proper finitely presented morphism and flat finitely presented sheaf derived pullback comparison",
+   "results": "8 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.flat_appLE; no exact geometric single-sheaf descent or derived comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*descent|cartesian.*single.*termwise",
+   "results": "1 hits: Mathlib/RingTheory/Smooth/Flat.lean; no exact geometric single-sheaf descent or derived comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian descent of proper morphism with relatively flat finitely presented sheaf and derived cartesian termwise pullback comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatSingleOpenNoetherianComparison",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "termwise comparison step",
+   "via": [
+    "lem-pc-proper-flat-single-open-noetherian-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartesianFlatSingleTermwiseComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartesianFlatSingleTermwiseComparison.lean",
+  "declaration": "AlgebraicGeometry.cartesian_flat_single_termwise_comparison",
+  "statement": "theorem cartesian_flat_single_termwise_comparison {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{wT} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (F : X.Modules) (U : S.Opens) [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (V : U.toScheme.Opens) (W : T.Opens) [HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (p : Y ⟶ W.toScheme) [QuasiCompact p] [QuasiSeparated p] (M : Y.Modules) [M.IsQuasicoherent] (hM : M.IsFlatOver p) (g : V.toScheme ⟶ W.toScheme) (q : pullback f (V.ι ≫ U.ι) ⟶ Y) (sq : IsPullback q (pullback.snd f (V.ι ≫ U.ι)) p g) (eM : Nonempty (Scheme.Modules.tensorPullbackObj q M ≅ Scheme.Modules.tensorPullbackObj (pullback.fst f (V.ι ≫ U.ι)) F)) (L : T.Modules ⥤ SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V)) (eL : Nonempty (L ≅ Scheme.Modules.tensorPullback (g ≫ W.ι) ⋙ (Scheme.Modules.overEquiv V).inverse)) [L.Additive] (P : CochainComplex T.Modules ℤ) (hP : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i)) (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free (R := moduleRings T.toRingedSpace) (ULift.{u} (Fin r)))) (eP : Nonempty ((schemeOpenRestriction T W).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅ (schemeDerivedDirectImage p).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M))) : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.obj ((schemeOpenRestriction S U).mapDerivedCategory.obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F))) ≅ DerivedCategory.Q.obj ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-scheme-module-flat-over",
+  "pqf-def-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T111936-L-3067908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T111936-L-3067908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

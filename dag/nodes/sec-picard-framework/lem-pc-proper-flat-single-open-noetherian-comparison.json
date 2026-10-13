@@ -21,56 +21,38 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood V of x in U. Restrict the tensor data E=O_X and G=F[0] to its inverse image. Properness makes the support of F proper over the base. Write the affine ring as the filtered colimit of finitely generated Z-subalgebras and use noetherian_approximation_data to descend the morphism, the perfect unit and the bounded flat proper-support complex. Enlarge the stage further using eventual properness to make the descended morphism proper. Use standard derived localizations in universe u+1 on all auxiliary schemes and localized sites. Set T=Spec of the stage ring and W=top, with the canonical total-open identification. The descended morphism p:Y→W is finitely presented; W is Noetherian and T affine, and W is compact.",
+   "text": "Apply geometric single-module Noetherian descent to obtain V,T,W,Y,p,M,g,q, with Y Noetherian, M finitely presented and relatively flat, the cartesian square and its module identification. Choose the standard derived localization on T,W,Y and all localized sites of W.",
    "uses": [
-    "lem-pc-proper-support-affine-tensor-restriction",
-    "lem-pc-noetherian-approximation-data",
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-eventually-proper",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    "lem-pc-proper-flat-single-noetherian-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Let A be the descended perfect tensor bounded-complex object on Y. Finite presentation and quasi-compactness over the Noetherian W make Y Noetherian. Finitely presented terms are coherent. Apply perfect_tensor_bounded_coherent to obtain bounded coherent source cohomology. Package these two source hypotheses on A, and the properness of p already obtained in the approximation step, without asserting any property of Rp_*A.",
+   "text": "Construct A=M[0]. Its cohomology vanishes below and above zero by the canonical t-structure. Its zeroth cohomology is M by the single-functor homology isomorphism. The other cohomology sheaves are zero, hence finite locally free of rank zero and finitely presented. Finite-presentation modules on the Noetherian scheme Y are quasi-coherent of finite type and thus coherent. This proves the bounds and coherence without descending a perfect factor or using the perfect-tensor bounded-coherent lemma.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-perfect-tensor-bounded-coherent"
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "Let g:V→W be the comparison and L=tensorPullback(g≫W.ι) followed by the inverse localized-site equivalence. The tensor-pullback adjunction gives additivity; the equivalence is exact and additive. Given any bounded-above finite-free P on T with its restriction representing Rp_*A, its terms are flat and P is K-flat. Compute derived pullback termwise. Relatively flat derived base change applied to the descended tensor data and the descended object/complex identifications gives the original image on V. Compose with open direct-image restriction. Localization uniqueness identifies Q-images under the independent supplied localizations: both right-derived images are computed from the same K-injective resolution, and exact site equivalences descend along Q. This constructs the comparison for every such P, without constructing or postulating a P. Empty U has no x; zero F descends zero tensor data.",
+   "text": "Construct L as ordinary tensor pullback along g followed by W inclusion, composed with the inverse localized-site equivalence. The tensor-pullback adjunction and exact equivalence prove additivity. Apply cartesian flat single termwise comparison to each supplied P and its representative isomorphism. Package the constructed object, functor, geometric data and proved cohomology properties.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-rf-base-change-complex",
-    "lem-pc-restrict-derived-direct-image-open",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-pc-cartesian-flat-single-termwise-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-module-pullback",
-  "def-pc-perfect-complex",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-noetherian-approximation-data",
-  "lem-pc-perfect-tensor-bounded-coherent",
-  "lem-pc-proper-support-affine-tensor-restriction",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-rf-base-change-complex",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-eventually-proper",
-  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-pc-cartesian-flat-single-termwise-comparison",
+  "lem-pc-proper-flat-single-noetherian-descent",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0A1H, approximation paragraph specialized to E=O_X and G=F[0]; typed source/termwise comparison decomposition by R2"
+  "place": "Tag 0A1H geometric single-module approximation; Tag 01XZ and single-degree homology instead of the perfect-tensor source-cohomology route; Tags 0A1D, 06YD, 06YJ and 08FE for the split termwise comparison; Lean assembly by V2"
  },
  "mathlib_searches": [
   {
@@ -160,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T100111-L-2482090",
+  "landing": "20261013T111936-L-3067908",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
