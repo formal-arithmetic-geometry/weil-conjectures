@@ -8,8 +8,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Ring.Limits
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafifyBilinearExtExistence
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafifyBilinearExtUniqueness
 
 /-!
 # Extension of bilinear maps through module sheafification

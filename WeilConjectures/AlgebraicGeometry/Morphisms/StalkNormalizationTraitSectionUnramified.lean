@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionMaximalIdeal
-import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionResidueSeparable
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionSeparable
 import WeilConjectures.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 
 /-!
