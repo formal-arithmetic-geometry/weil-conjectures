@@ -13,30 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Fix a test h:Tprime->T and tprime in Tprime. Choose V containing h(tprime) with R_1 on V. The inverse-image open Vprime contains tprime, and h restricts to a morphism Vprime->V. Apply R_1 on V to this map and the corresponding point. It supplies an open U in Vprime, a natural number r, and the two rank-r witnesses.",
+   "text": "Fix h:Tprime->T and t in Tprime. Choose V with h(t) in V from hlocal. Let A=h^{-1}(V) and v=h restricted to V. Apply the universal single-rank predicate on V to v and the point (t,htA), obtaining U, rank r, and both rank witnesses. Rewrite the two test morphisms using morphismRestrict_ι, transporting equality explicitly by congrArg to avoid dependent pullback-instance rewriting.",
    "uses": [
     "def-sc-picard-universal-single-rank-match"
    ],
    "elementary": true
   },
   {
-   "text": "Regard U as an open in Tprime by its image under the open immersion Vprime->Tprime. Open base change identifies the direct image restricted to Vprime with the direct image on the corresponding cartesian square: both have the same sections on each open. Tensor pullback composes up to its canonical adjunction isomorphism. Applying these isomorphisms and restricting to U transports both witnesses to the defining witnesses in Tprime. The point lies in this U. Since h and tprime were arbitrary the condition holds; empty tests have no points.",
+   "text": "Set j=U.ι followed by A.ι and W=j.opensRange. Mathlib IsOpenImmersion.isoOfRangeEq identifies U with W, with inverse e.inv and e.inv followed by j equal to W.ι. The chosen point of U maps to t, so t belongs to W. Construct jX between X_A and X_Tprime by pullback.lift. IsPullback.of_right verifies the open base-change square, and MorphismProperty.of_isPullback makes jX an open immersion. The private pushforward_restrict_square proves the sectionwise restriction/direct-image comparison using SheafOfModules.pushforwardComp and pushforwardCongr₂ and the equality of inverse-image/image opens. Identify tensor pullback with Mathlib pullback by uniqueness of left adjoints, and with restriction along open immersions. Compose this comparison with tensor pullback composition [lem-pc-module-pullback-identity-composition] to obtain directImageOpenIso. Transport the direct-image witness through this isomorphism and tensorPullbackComp to get rank r after tensor pullback by j. Pull back once more by e.inv and use e.inv followed by j = W.ι. Rank preservation here is the proved source-library instance Scheme.Modules.isFiniteLocallyFreeOfRank_pullback, transported through the tensor/abstract-pullback isomorphism; rank is invariant under sheaf isomorphisms. Reuse the already proved private tensorIso and tensorRankComp from PicardUniversalRankMatchConjunction via a proof-only import all; no duplicate rank-preservation theorem is declared.",
    "uses": [
     "lem-pc-module-pullback-identity-composition",
-    "def-sc-picard-universal-single-rank-match"
+    "lem-sc-picard-universal-rank-match-conjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the reference witness, construct q:X_W->X_U by pullback.lift with first projection unchanged and second projection followed by e.inv. The equation e.inv followed by U.ι followed by A.ι = W.ι verifies the lift's commutativity. Then q followed by the first projection of X_U is the first projection of X_W. Rank preservation under pullback and tensor pullback composition [lem-pc-module-pullback-identity-composition] transport the reference rank-r witness along q. The open W and the two transported witnesses satisfy the definition [def-sc-picard-universal-single-rank-match]. Empty test schemes have no points to check; no finiteness or flatness hypothesis is used. The tensorRankComp used here is the existing private theorem of PicardUniversalRankMatchConjunction, not a local reproof.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "def-sc-picard-universal-single-rank-match",
+    "lem-sc-picard-universal-rank-match-conjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-picard-universal-single-rank-match",
-  "lem-pc-module-pullback-identity-composition"
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-picard-universal-rank-match-conjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
   "place": "first three proof paragraphs: local finite locally free rank conditions, with ordinary open base change",
-  "note": "V2 spells out the corresponding local step of Tags 0BDP and 0BDL; the unit route is unchanged."
+  "note": "U3 makes the original open-base-change plan into Lean, using the sectionwise private helper of WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections and the proved rank-pullback instance of WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank. No unit route is bypassed. Repair: import all PicardUniversalRankMatchConjunction to reuse its private tensorIso and tensorRankComp, removing the duplicate local tensorIso, tensorRank and tensorRankComp."
  },
  "mathlib_searches": [
   {
@@ -120,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T045613-L-139716",
-  "kind": "interface",
+  "landing": "20261013T100149-L-2493699",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
