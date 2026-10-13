@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
+import Sheaf.RingTheory.ComparisonTensorLocalSystem
+
 /-! # Coherent cocones for a base-changed tensor comparison
 
 Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ;
@@ -199,6 +201,51 @@ theorem exists_comparison_tensor_cocones
                     (Algebra.TensorProduct.includeLeftRingHom (R := P)
                       (A := ↥(F.obj j.val) ⊗[F.obj i₀] B₀) (B := Q)) =
                     (Algebra.TensorProduct.map (Algebra.ofId (F.obj j.val) (F.obj j.val))
-                      φ₀).toRingHom) := by sorry
+                      φ₀).toRingHom) := by
+  classical
+  obtain ⟨aPs, D, E, α, d, c, cD, cE, dLim, cLim, μs,
+      hμs, hcD, hDt, hcE, hEt, hpush, hcompat, hQ⟩ :=
+    exists_comparison_tensor_local_system F i₀ B₀ C₀ φ₀ P Q aP i hi aPi μB hμB ψ hψ
+  refine ⟨aPs, D, E, α, d, c, cD, cE, dLim, cLim, μs,
+    hμs, hcD, hDt, hcE, hEt, ?_, hpush, hcompat⟩
+  intro j
+  let := (colimit.ι F i₀).hom.toAlgebra
+  let := (F.map (homOfLE (hi.trans j.property))).hom.toAlgebra
+  let := aP
+  let := aPs j
+  have hcomp :
+      (cLim.toRingHom.comp ((cE.ι.app j).hom.comp (α.app j).hom)).comp
+        (d j).symm.toRingHom =
+      ζ.comp (Algebra.TensorProduct.map (μs j) (AlgHom.id P Q)).toRingHom := by
+    apply Algebra.TensorProduct.ringHom_ext
+    · apply RingHom.ext
+      intro b
+      have hc := DFunLike.congr_fun (hcE j)
+        ((α.app j).hom ((d j).symm (b ⊗ₜ[P] 1)))
+      have hb := DFunLike.congr_fun (hcompat j) b
+      have hd := DFunLike.congr_fun he (μs j b)
+      have hm := DFunLike.congr_fun (hμs j) b
+      simp only [RingHom.comp_apply, RingEquiv.toRingHom_eq_coe,
+        RingEquiv.coe_toRingHom, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom,
+        Algebra.TensorProduct.includeLeftRingHom_apply] at hc hb hd hm
+      change cLim ((cE.ι.app j).hom ((α.app j).hom
+        ((d j).symm (b ⊗ₜ[P] 1)))) = ζ (μs j b ⊗ₜ[P] 1)
+      erw [hc, hb, hd, hm]
+      clear hc hb hd hm
+      induction b with
+      | zero => simp
+      | tmul a b => simp
+      | add b₁ b₂ h₁ h₂ => simp only [map_add, h₁, h₂]
+    · apply RingHom.ext
+      intro q
+      have hq := hQ j q
+      have hl := DFunLike.congr_fun hlim (1 ⊗ₜ[P] q)
+      simpa using hq.trans hl
+  apply RingHom.ext
+  intro z
+  have hz := DFunLike.congr_fun hcomp (d j z)
+  have hd := DFunLike.congr_fun (hcD j) z
+  simpa using hz.trans (congrArg ζ hd.symm)
+
 
 end RingHom
