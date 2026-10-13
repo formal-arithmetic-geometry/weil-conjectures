@@ -12805,3 +12805,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: merged deliver/G3/Sheaf.RingTheory.PopescuTranscendentalResidueEnlargement (stage 3; reviewer PASS; first push; landing 20261013T142857-L-497922 (interface); batch 20261013T142848; modules 3; new nodes 2)
 - 14:28 L: merged deliver/G4/Sheaf.AlgebraicGeometry.FinitePresentationOverlapMapLifting (stage 3; reviewer PASS; first push; landing 20261013T142857-L-498116 (interface); batch 20261013T142848; modules 3; new nodes 2)
 - 14:28 L: merged deliver/H3/Sheaf.AlgebraicGeometry.MixedSectionsSquareComparisonCoherence (stage 3; reviewer PASS; first push; landing 20261013T142858-L-498265 (interface); batch 20261013T142848; modules 3; new nodes 2)
+- 14:28 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientColumns (stage 3; reviewer PASS; first push; landing 20261013T142858-L-498443 (proof); batch 20261013T142848; modules 1; new nodes 0)

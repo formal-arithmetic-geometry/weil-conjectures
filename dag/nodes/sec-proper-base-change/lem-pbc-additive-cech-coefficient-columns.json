@@ -15,7 +15,19 @@
  },
  "proof": [
   {
-   "text": "Identify additive structural sections naturally with the lifted tensor sections of the unit, then apply finite affine tensor Cech vanishing and the Cech vanishing criterion to obtain positive derived-evaluation vanishing on every affine tuple intersection.",
+   "text": "Construct the coefficient-section isomorphism in each Cech degree using preservation of products by scalar forgetting and ULift, followed by the lifted inverse of restrictFunctorΓ on each tuple product. The projection equation for this isomorphism identifies its composite with the evaluated I.ι.f 0 with the prescribed additiveCechCoefficientMap. This calculation is proved by Pi.mapIso_hom_π, piComparison_comp_π, and product projection extensionality in Lean. No finiteness, separatedness, affineness, or covering assumption is needed for this step.",
+   "uses": [
+    "lem-pbc-additive-cech-coefficient-horizontal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Degree-n Cech evaluation preserves finite limits: identify it naturally with restriction to the discrete tuple family followed by lim. Compose it with sheaf-to-presheaf and restriction along the open inclusion. Map I.isLimitKernelFork through this left exact functor, then transport the resulting kernel fork across the preceding coefficient-section isomorphism. Thus the fixed augmentation is a mono and exact with the next vertical differential. CochainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros give quasi-isomorphism in degree zero. This entire step is proved in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use exists_etaleTensorUnit_sections_natural to obtain natural additive unit tensor-section coordinates. A generic coordinate isomorphism, proved directly from those coordinates, identifies the lifted tensor-section sheaf with X.etaleAdditiveSheaf. Apply the finite-affine Cech vanishing theorem for the unit to the finite affine etale basis, and then the Cech vanishing criterion. Transport the resulting positive derived-evaluation vanishing along the coordinate sheaf isomorphism. All coordinate constructions and this application are proved in Lean.",
    "uses": [
     "lem-sc-etale-tensor-unit-sections-natural",
     "new-etale-affine-tensor-cech-vanishing",
@@ -24,20 +36,24 @@
    "elementary": false
   },
   {
-   "text": "The evaluated injective resolution has degree-zero homology identified canonically by its augmentation with coefficient sections, by left exactness. The categorical product of tuple opens equals their infimum, so the stated intersections are affine. Products of abelian groups are exact; take the product over tuples and commute the scalar forgetful functor and ULift with the finite ordinary coefficient product. In degree zero the map is exactly the prescribed coordinate map; positive source and target homology vanish. This proves quasi-isomorphism of the fromSingle₀Equiv augmentation, including empty tuple families and empty intersections.",
-   "uses": [],
+   "text": "The intersection hypothesis with k=0 and a constant tuple gives that each U j is affine. The additive open inclusion followed by forgetting is definitionally the restriction functor. Apply etale_affineOpenCech_resolution_columns with the preceding derived-evaluation vanishing to obtain zero positive homology of every vertical column. The single-degree source is exact at every positive degree; quasiIsoAt_iff_exactAt now gives the remaining degrees. Assemble the degree-zero and positive-degree cases with the QuasiIso constructor. This uses no covering hypothesis and includes the empty tuple family.",
+   "uses": [
+    "lem-sc-etale-affine-open-cech-resolution-columns"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pbc-additive-cech-coefficient-horizontal",
   "lem-sc-etale-tensor-unit-sections-natural",
   "new-etale-affine-tensor-cech-vanishing",
-  "lem-weil-pbc-cech-vanishing-criterion"
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-sc-etale-affine-open-cech-resolution-columns"
  ],
  "proof_origin": {
-  "by": "U3 worker",
+  "by": "K4 worker",
   "document": "https://stacks.math.columbia.edu/tag/03P2",
-  "place": "Theorem 59.22.4 and Tag 01EQ beta; fixed Lean coordinate formulation."
+  "place": "Affine Cech acyclicity; Tag 01EQ, fixed beta column augmentation. Degree-zero kernel transport and positive-degree assembly proved in Lean using existing project declarations."
  },
  "mathlib_searches": [
   {
@@ -114,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T135102-L-155708",
-  "kind": "interface",
+  "landing": "20261013T142858-L-498443",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
