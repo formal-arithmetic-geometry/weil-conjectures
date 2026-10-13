@@ -12056,3 +12056,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/W4/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesFiniteEtaleExtension (stage 3; reviewer PASS; after a return; landing 20261013T100216-L-2501588 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:02 L: merged deliver/X2/Sheaf.Algebra.Homology.AcyclicLiftTailExtension (stage 3; reviewer PASS; first push; landing 20261013T100216-L-2501788 (interface); batch 20261013T095923; modules 4; new nodes 3)
 - 10:02 L: merged deliver/X2/Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel (stage 3; reviewer PASS; first push; landing 20261013T100217-L-2501999 (interface); batch 20261013T095923; modules 3; new nodes 2)
+- 10:02 L: merged deliver/X2/Sheaf.Algebra.Homology.AffineDifferentialColimitDescent (stage 3; reviewer PASS; after a return; landing 20261013T100218-L-2502193 (interface); batch 20261013T095923; modules 3; new nodes 2)
