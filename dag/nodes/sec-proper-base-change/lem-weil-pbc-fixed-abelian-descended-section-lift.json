@@ -1,0 +1,140 @@
+{
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-weil-pbc-fixed-abelian-descended-section-lift",
+ "kind": "statement",
+ "title": "Lifting a fixed abelian inverse-image section on a descended object",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse system of quasi-compact quasi-separated schemes with affine transition maps, and $(X,\\pi)$ a limit cone [def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-pbc-category-colimit]. Write $B_q$ for base change on the small étale category, $q^*$ for inverse image on abelian sheaves, and $\\eta_{q,H}(T):H(T)\\to(q^*H)(B_qT)$ for its evaluated unit [def-weil-pbc-etale-site, def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. Fix $i_0\\in I$ and a quasi-compact quasi-separated étale object $T_0$ over $D_{i_0}$. For $J=\\{j\\in I\\mid i_0\\le j\\}$ put $T_j=B_{p_{ji_0}}T_0$ and $T_X=B_{\\pi_{i_0}}T_0$ [def-pc-fibre-product]. Suppose given isomorphisms $\\gamma_a:B_{p_{kj}}T_j\\simeq T_k$ and $\\delta_j:B_{\\pi_j}T_j\\simeq T_X$, whose first projections to $T_0$ equal the corresponding iterated first projections (and whose base projections agree because these are arrows over the base). Fix $i\\in J$, one abelian sheaf $H$ on $D_i$, and $y\\in(\\pi_i^*H)(B_{\\pi_i}T_i)$. Then there are $k\\in J$, $a:i\\to k$, and $s\\in(p_{ki}^*H)(B_{p_{ki}}T_i)$ such that\n$$\n(\\pi_i^*H)(\\beta_a)\\bigl(\\chi_{a,H}^{-1}(B_{\\pi_k}B_{p_{ki}}T_i)(\\eta_{\\pi_k,p_{ki}^*H}(B_{p_{ki}}T_i)(s))\\bigr)=y.\n$$\nHere $\\chi_{a,H}:\\pi_i^*H\\simeq\\pi_k^*p_{ki}^*H$ is the canonical inverse-image composition isomorphism, and $\\beta_a= B_{\\pi_k}(\\gamma_a^{-1})\\circ\\delta_k^{-1}\\circ\\delta_i:B_{\\pi_i}T_i\\to B_{\\pi_k}B_{p_{ki}}T_i$. The notation $(\\pi_i^*H)(\\beta_a)$ denotes contravariant restriction along $\\beta_a$. Only one coefficient sheaf occurs; there is no varying system of coefficient sheaves or colimit cocone of such sheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Sites Tags 09YM (inverse-image section formula), 09YN (lemma-colimit, inner colimit); Étale Cohomology Tag 09YQ, degree-zero affine-site realization."
+ },
+ "proof": [
+  {
+   "text": "Restrict to the upper tail of i, which is directed and cofinal. Base change T_i to this tail. Affine projections preserve its qcqs property. The full affine étale site of the limit is the colimit of the full affine stage sites.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the full affine étale topos comparison. For the single sheaf H, the inverse-image section formula on the colimit site gives a filtered colimit of sections of p_ki^*H on B_pki T_i. Its coprojections are the units for pi_k followed by the inverse-image composition comparison. Therefore an affine limit section has a stage representative. The first-projection hypotheses identify beta with the pullback-pasting comparison by uniqueness of arrows of pullbacks.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For qcqs T_i use a finite affine cover and finite affine covers of the pairwise intersections. Represent each cover restriction at a stage. The equality criterion for the same filtered section colimits makes the finitely many overlap equalities hold at one later stage. The stage sheaf condition glues the matching family; separatedness identifies its limit image with y. Equivalently, the finite-cover section-colimit theorem commutes these finite matching equalizers with the filtered colimit. Empty covers produce zero sections.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 09YM, 09YN and 09YQ",
+  "place": "Fixed-coefficient inner colimit in 09YN, with finite affine-cover descent; extracted from the scalar representative proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of inverse image of an abelian etale sheaf on qcqs objects over an inverse limit of schemes lift to a finite stage",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of inverse image etale abelian sheaf over inverse limit lift to a stage",
+   "date": "2026-10-12",
+   "results": "StandardEtalePair.homEquiv_symm_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, CategoryTheory.evalEquiv_symm_apply",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitComparison|inverse.*image.*section|sections.*isColimit",
+   "date": "2026-10-13",
+   "results": "No matching declarations found.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 3 of the injective-restriction acyclicity plan: the fixed-coefficient inner section colimit used in scalar continuity for the finite Čech comparison.",
+   "via": [
+    "lem-weil-pbc-etale-limit-scalar-section-representatives",
+    "lem-weil-pbc-etale-limit-finite-cech-colimit",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-of-sites-sections"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedAbelianDescendedSectionLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedAbelianDescendedSectionLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.fixed_abelian_descended_section_lift",
+  "statement": "theorem fixed_abelian_descended_section_lift\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (i₀ : I) (T₀ : (D.obj (op i₀)).Etale)\n    [CompactSpace T₀.left] [QuasiSeparatedSpace T₀.left] :\n    let J := {j : I // i₀ ≤ j}\n    let Tj := fun j : J ↦\n      (MorphismProperty.Over.pullback @Etale ⊤\n        (D.map (homOfLE j.property).op)).obj T₀\n    let Tlim := (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj T₀\n    ∀ (γ : ∀ (j k : J) (a : j ⟶ k),\n        (MorphismProperty.Over.pullback @Etale ⊤\n          (D.map (show j.val ⟶ k.val from a).op)).obj (Tj j) ≅ Tj k)\n      (δ : ∀ j : J,\n        (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op j.val))).obj (Tj j) ≅ Tlim),\n      (∀ (j k : J) (a : j ⟶ k),\n        (γ j k a).hom.left ≫ pullback.fst T₀.hom (D.map (homOfLE k.property).op) =\n          pullback.fst (Tj j).hom (D.map (show j.val ⟶ k.val from a).op) ≫\n            pullback.fst T₀.hom (D.map (homOfLE j.property).op)) →\n      (∀ j : J,\n        (δ j).hom.left ≫ pullback.fst T₀.hom (c.π.app (op i₀)) =\n          pullback.fst (Tj j).hom (c.π.app (op j.val)) ≫\n            pullback.fst T₀.hom (D.map (homOfLE j.property).op)) →\n    ∀ (i : J) (H : Sheaf (D.obj (op i.val)).smallEtaleTopology AddCommGrpCat.{u + 1})\n      (y : ((upperStar AddCommGrpCat.{u + 1} (c.π.app (op i.val))).obj H).obj.obj\n        (op ((MorphismProperty.Over.pullback @Etale ⊤\n          (c.π.app (op i.val))).obj (Tj i)))),\n      ∃ (k : J) (a : i ⟶ k)\n        (s : ((upperStar AddCommGrpCat.{u + 1}\n          (D.map (show i.val ⟶ k.val from a).op)).obj H).obj.obj\n            (op ((MorphismProperty.Over.pullback @Etale ⊤\n              (D.map (show i.val ⟶ k.val from a).op)).obj (Tj i)))),\n        (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n          (c.π.app (op k.val))).unit.app\n            ((upperStar AddCommGrpCat.{u + 1}\n              (D.map (show i.val ⟶ k.val from a).op)).obj H)).hom.app\n                (op ((MorphismProperty.Over.pullback @Etale ⊤\n                  (D.map (show i.val ⟶ k.val from a).op)).obj (Tj i))) ≫\n          ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op k.val))\n            (D.map (show i.val ⟶ k.val from a).op) (c.π.app (op i.val))\n              (c.w (show i.val ⟶ k.val from a).op).symm).inv.app H).hom.app\n                (op ((MorphismProperty.Over.pullback @Etale ⊤\n                  (c.π.app (op k.val))).obj\n                    ((MorphismProperty.Over.pullback @Etale ⊤\n                      (D.map (show i.val ⟶ k.val from a).op)).obj (Tj i)))) ≫\n          ((upperStar AddCommGrpCat.{u + 1} (c.π.app (op i.val))).obj H).obj.map\n            ((δ i).hom ≫ (δ k).inv ≫\n              (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op k.val))).map\n                (γ i k a).inv).op) s = y",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022426-L-3218028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T022426-L-3218028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
