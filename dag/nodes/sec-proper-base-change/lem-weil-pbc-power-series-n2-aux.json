@@ -21,34 +21,50 @@
  ],
  "proof": [
   {
-   "text": "Take the integral closure R' of R in its fraction field. The N-2 hypothesis makes R' finite over R; it is Noetherian, normal, and N-2. The coefficientwise generators make R'[[x]] finite over R[[x]]. Tate's complete-principal criterion applied to x, using the quotient R' and x-adic completeness, gives that R'[[x]] is N-2. Descent along the finite domain extension R[[x]] ⊂ R'[[x]] gives the result.",
+   "text": "Put A = integralClosure R (FractionRing R). Applying hR to the fraction field makes A finite over R. Mathlib IsNoetherianRing.of_finite and integralClosure.isIntegrallyClosedOfFiniteExtension give that A is Noetherian and normal; it is a domain as a subalgebra of a field. The coefficient inclusion is injective, so N-2 ascends to A by the finite-domain-extension lemma.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-n2-ascends-finite-domain-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove coefficientwise finiteness in the private Lean helper finite_power_series_extension. Choose a finite generating family s_i of A over R. For a series f and each k, express its coefficient as sum_i c_{k,i} s_i. Form the scalar series g_i with coefficient c_{k,i} at k. Equality of coefficients proves f = sum_i g_i C(s_i), so the constant series C(s_i) generate A[[x]] over R[[x]]. This is an explicit proof, with no postponed lemma.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The normal-power-series theorem makes A[[x]] normal, and Mathlib supplies its Noetherian and x-adic completeness instances. In the private helper isN2_quotient_X, identify A[[x]]/(x) with A: Ideal.mem_span_singleton and PowerSeries.X_dvd_iff identify (x) with the kernel of constantCoeff, which is surjective since constantCoeff(C(a)) = a. RingHom.quotientKerEquivOfSurjective gives the equivalence. Its inverse is an injective finite algebra map, so the finite-domain-extension ascent theorem transfers N-2 to the quotient. The prime-ideal theorem PowerSeries.span_X_isPrime supplies its domain instance. Tate's principal-complete criterion, applied to x = PowerSeries.X, now gives N-2 of A[[x]].",
    "uses": [
     "lem-weil-pbc-power-series-normal-domain",
-    "lem-weil-pbc-tate-n2-complete-principal",
-    "lem-weil-pbc-n2-descends-finite-domain-extension",
-    "lem-weil-pbc-power-series-quotient-variables",
     "lem-weil-pbc-power-series-variables-complete",
     "lem-weil-pbc-n2-ascends-finite-domain-extension",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-integral-closure-finite-extension-normal"
+    "lem-weil-pbc-tate-n2-complete-principal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficientwise map R[[x]] to A[[x]] is injective by PowerSeries.map_injective applied to the coefficient inclusion. Apply the finite-domain-extension descent theorem with the finiteness proved in the second step, and N-2 of A[[x]] from the third step, to conclude N-2 of R[[x]].",
+   "uses": [
+    "lem-weil-pbc-n2-descends-finite-domain-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-power-series-normal-domain",
-  "lem-weil-pbc-tate-n2-complete-principal",
-  "lem-weil-pbc-n2-descends-finite-domain-extension",
-  "lem-weil-pbc-power-series-quotient-variables",
-  "lem-weil-pbc-power-series-variables-complete",
-  "lem-weil-pbc-n2-ascends-finite-domain-extension",
   "lem-weil-pbc-finite-algebra-noetherian",
-  "lem-weil-pbc-integral-closure-finite-extension-normal"
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-n2-ascends-finite-domain-extension",
+  "lem-weil-pbc-power-series-normal-domain",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-tate-n2-complete-principal",
+  "lem-weil-pbc-n2-descends-finite-domain-extension"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 032Q (lemma-power-series-over-N-2), proof"
+  "place": "Algebra, Lemma Tag 032Q (lemma-power-series-over-N-2), proof; Lean realization by H4, with coefficientwise finiteness and the one-variable quotient proved directly"
  },
  "mathlib_searches": [
   {
@@ -108,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T004336-L-2509862",
-  "kind": "interface",
+  "landing": "20261013T024036-L-3334862",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
