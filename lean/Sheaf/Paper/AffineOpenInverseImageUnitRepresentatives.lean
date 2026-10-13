@@ -9,6 +9,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
+import Sheaf.Paper.AffineOpenInverseImageFiniteLocalLifts
+import Sheaf.Paper.AffineOpenInverseImageCompatibleRefinement
+import Mathlib.CategoryTheory.Sites.Whiskering
+
 /-! # Unit representatives of inverse-image sections -/
 
 @[expose] public section
@@ -21,36 +25,22 @@ Source: Stacks Project, Sites, Tag 0A35, construction and adjunction verificatio
 Étale Cohomology, Tag 0EYL; Tag 03Q6, degree-zero proof steps (1)--(3).
 (blueprint: affine-open-inverse-image-unit-representatives).
 
-Proof: Choose a stage j0 and pass to the cofiltered category of arrows to j0.
-Its projection is initial, and reindexing by a directed order preserves the limit.
-All stages and transitions are affine. Work on the affine étale sites over D(j0).
-Use the canonical pullback associators and unit isomorphisms throughout; their
-coherence follows from the pullback universal property. Equivalently, replace the
-fibred diagram by a strict equivalent diagram before forming its colimit site.
-This replacement changes neither sheaves nor the specified adjunction units.
-For a limit-site object presented at a stage, take the filtered colimit of sections
-of the later inverse images of the restriction of F to D(j0). Descent of objects,
-arrows, equality and finite covering families (0EYL) defines restrictions independently
-of presentations. Refine a cover by a finite affine cover, possible because its target is affine.
-The finite products and equalizer in its sheaf condition commute with this filtered
-colimit; equality of finitely many overlap sections is witnessed at a common later stage.
-Thus this prescription is a sheaf on the affine basis of the limit.
-The adjunction calculation of 0A35 identifies this sheaf with inverse image.
-Localization along the open immersions D(k) to X identifies stage inverse images with
-restriction of F, compatibly with units. The unique isomorphism of left adjoints to
-p_* identifies the constructed inverse image with H and carries its unit to hH.unit.
-The limit is affine; evaluate at its terminal affine étale object. The section t
-therefore comes from an inverse-image section at a stage. At that stage, restriction
-identifies it with a section b of F on an étale X-object U. The terminal projection
-and the base-change universal property give ψ : T to p^*U. The unit equations in
-0A35 and naturality give the displayed representative equation.
-This assertion concerns the inverse-image/sheafification step only: it does not require
-U to be one of the prescribed D(j), and does not assert any geometric factorization
-of ψ through such an object. That factorization is a separate finite-presentation result.
-An empty limit is handled by descending its finite empty cover; zero coefficients
-have only the zero section; singleton systems reduce to localization restriction.
-Only uniquely characterized adjunction comparisons are used; no arbitrary sheaf data
-is selected from an unproved existence assertion. -/
+Proof: Obtain a finite affine covering at a stage with local unit lifts of t.
+Pass to a later covering refinement where these sections are compatible.
+Forget F to a sheaf of sets and apply its sheaf condition to glue the restricted
+sections to z on D(k). The cone projection gives the canonical terminal arrow
+sigma to p^*D(k). Since D(k) is open in X, its structure map is a monomorphism.
+Its pullback is a monomorphism too, so the terminal covering maps followed by
+sigma equal the pullbacks of the stage covering maps. Unit naturality first
+identifies the restrictions of the unit image of z with the units of the glued
+local sections, and then with the restrictions of the original local lifts.
+The refinement equation identifies these with the restrictions of t.
+Separatedness on the terminal covering proves equality globally. Take U=D(k),
+psi=sigma and b=z. All the gluing and naturality calculations are proved here;
+the finite local lifting and eventual compatibility steps are separate lemmas.
+The same sheaf-condition proof handles empty covers, and zero coefficients and
+singleton systems need no additional cases. No sheaf or other definition is
+chosen from an unproved mere-existence theorem. -/
 theorem affineOpenSections_inverse_image_unit_representatives
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)
@@ -66,4 +56,60 @@ theorem affineOpenSections_inverse_image_unit_representatives
     (t : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt)))) :
     ∃ (U : X.Etale) (ψ : Scheme.Etale.mk (𝟙 c.pt) ⟶ p.Etale.obj U)
       (b : F.obj.obj (op U)),
-      (H.obj F).obj.map ψ.op ((hH.unit.app F).hom.app (op U) b) = t := by sorry
+      (H.obj F).obj.map ψ.op ((hH.unit.app F).hom.app (op U) b) = t := by
+  classical
+  obtain ⟨j, B, hB, V, v, s, π, hV, hv, hπ, hs⟩ :=
+    affineOpenSections_inverse_image_finite_local_lifts D c p hp hc H hH F t
+  let : Finite B := hB
+  obtain ⟨k, _, V', v', γ, π', _, hv', hπ', hγ, hcompat⟩ :=
+    affineOpenSections_inverse_image_compatible_refinement
+      D c p hp hc H hH F t j B V v s π hV hv hπ hs
+  let G := (sheafCompose X.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).obj F
+  let x (b : B) : PUnit.{u + 2} ⟶ G.obj.obj (op (V' b)) :=
+    TypeCat.ofHom (fun _ ↦ F.obj.map (γ b).op (s b))
+  have hx : ∀ ⦃W : X.Etale⦄ ⦃b b' : B⦄ (a : W ⟶ V' b) (a' : W ⟶ V' b'),
+      a ≫ v' b = a' ≫ v' b' → x b ≫ G.obj.map a.op = x b' ≫ G.obj.map a'.op := by
+    intro W b b' a a' ha
+    ext z
+    exact hcompat a a' ha
+  obtain ⟨y, hy, _⟩ := G.property.existsUnique_amalgamation_ofArrows v' hv' x hx
+  let z : F.obj.obj (op (D.obj k)) := y PUnit.unit
+  have hz (b : B) : F.obj.map (v' b).op z = F.obj.map (γ b).op (s b) :=
+    ConcreteCategory.congr_hom (hy b) PUnit.unit
+  let σ : Scheme.Etale.mk (𝟙 c.pt) ⟶ p.Etale.obj (D.obj k) :=
+    MorphismProperty.Over.homMk
+      (pullback.lift (c.π.app k) (𝟙 c.pt) (by
+        change c.π.app k ≫ (D.obj k).hom = 𝟙 c.pt ≫ p
+        simpa only [Category.id_comp] using hp k))
+      (by exact pullback.lift_snd _ _ _)
+  have hσ (b : B) : π' b ≫ σ = p.Etale.map (v' b) := by
+    apply MorphismProperty.Over.Hom.ext
+    apply (cancel_mono (pullback.snd (D.obj k).hom p)).mp
+    exact (MorphismProperty.Over.w (π' b ≫ σ)).trans
+      (MorphismProperty.Over.w (p.Etale.map (v' b))).symm
+  refine ⟨D.obj k, σ, z, ?_⟩
+  let M := (sheafCompose c.pt.smallEtaleTopology
+    (forget AddCommGrpCat.{u + 1})).obj (H.obj F)
+  have he :
+      TypeCat.ofHom (fun _ : PUnit.{u + 2} ↦
+        (H.obj F).obj.map σ.op ((hH.unit.app F).hom.app (op (D.obj k)) z)) =
+      TypeCat.ofHom (fun _ : PUnit.{u + 2} ↦ t) := by
+    apply M.property.hom_ext_ofArrows π' hπ'
+    intro b
+    ext q
+    change (H.obj F).obj.map (π' b).op
+        ((H.obj F).obj.map σ.op ((hH.unit.app F).hom.app (op (D.obj k)) z)) =
+      (H.obj F).obj.map (π' b).op t
+    rw [← Functor.map_comp_apply, ← op_comp, hσ]
+    have hn := (hH.unit.app F).hom.naturality_apply (v' b).op z
+    change (hH.unit.app F).hom.app (op (V' b)) (F.obj.map (v' b).op z) =
+      (H.obj F).obj.map (p.Etale.map (v' b)).op
+        ((hH.unit.app F).hom.app (op (D.obj k)) z) at hn
+    rw [← hn, hz]
+    have hg := (hH.unit.app F).hom.naturality_apply (γ b).op (s b)
+    change (hH.unit.app F).hom.app (op (V' b)) (F.obj.map (γ b).op (s b)) =
+      (H.obj F).obj.map (p.Etale.map (γ b)).op
+        ((hH.unit.app F).hom.app (op (V b)) (s b)) at hg
+    rw [hg, ← hs b, ← Functor.map_comp_apply, ← op_comp, hγ b]
+  exact ConcreteCategory.congr_hom he PUnit.unit
+

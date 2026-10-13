@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-affine-open-inverse-image-compatible-refinement",
+ "kind": "statement",
+ "title": "Eventual compatible refinement of finite local unit lifts",
+ "statement": "Let X be a scheme [def-pc-scheme], J a small cofiltered category [def-weil-pbc-category-colimit], and D:J→X_et a diagram of etale objects [def-weil-pbc-etale-site] whose terms are affine [def-weil-pbc-scheme-conventions] and whose structure maps to X are open immersions [def-weil-open-immersion]. Let c be a limiting cone of the underlying scheme diagram and p:c.pt→X satisfy c.π_j followed by D(j).hom = p for every j. Let H be a left adjoint to p_* with specified adjunction hH [def-weil-pbc-direct-image], F an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], and t a section of H(F) on the terminal etale object T=(c.pt,id). Write p* for actual base change [def-pc-fibre-product] and η for the specified adjunction unit. Fix a stage j, a finite possibly empty set B, affine etale X-objects V_b, a covering v_b:V_b→D(j), sections s_b in F(V_b), and a covering π_b:p*V_b→T with H(F)(π_b)(t)=η_F(V_b)(s_b). There exist k, f:k→j, etale X-objects V′_b, arrows v′_b:V′_b→D(k), γ_b:V′_b→V_b and π′_b:p*V′_b→T such that v′_b followed by D(f) equals γ_b followed by v_b; both v′ and π′ are covering families; p*(γ_b) followed by π_b equals π′_b; and the restrictions F(γ_b)(s_b) are compatible: for every etale X-object W and arrows a:W→V′_b, a′:W→V′_b′ with a followed by v′_b equal to a′ followed by v′_b′, their further restrictions to W are equal. No global section or amalgamation is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09XM",
+  "place": "Equality-open argument in the proof; 03Q6 proof steps (2)-(4), applied to the finitely many overlap differences"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For every ordered pair b,b′ form the affine overlap V_b×_{D(j)}V_b′ and take the difference of the two restricted sections. Unit naturality makes its inverse-image unit zero: both terms are restrictions of t along the same terminal arrow. Localize H(F) to the base-changed overlap. The localization adjunction composed with hH, with the canonical pullback-composition comparison on its right adjoint, is the inverse-image adjunction there. Thus the zero-neighbourhood theorem supplies an open in this overlap containing the image of its limit pullback on which the difference restricts to zero.",
+   "uses": [
+    "lem-weil-pbc-etale-section-zero-neighbourhood",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the cofiltered tail over j, base-change each overlap along the stage maps. These affine schemes have affine transition maps and are compact; their cone with point the limit pullback of the overlap is limiting by the pullback universal property. Apply the eventual containment theorem to its agreement open, obtaining a stage killing the overlap difference. There are finitely many ordered pairs. Cofilteredness supplies a common refinement and equalizes their arrows to j; pulling back zero restrictions preserves zero. For B empty use k=j and f=id.",
+   "uses": [
+    "lem-weil-pbc-limit-image-contained-in-open",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual pullbacks V′_b=V_b×_{D(j)}D(k), with v′ and γ their projections, and π′=p*(γ) followed by π. Base-change stability gives the stage cover. Canonical pullback comparisons and the fact that p factors through the open monomorphism D(k) identify the limit cover with the original cover, so π′ covers T. The projection equations give the displayed commutative square. Every pair of arrows with equal composites factors through the pairwise overlap, and restricting its zero difference proves compatibility. Empty overlaps have unique sections, including zero-coefficient and singleton cases.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-section-zero-neighbourhood",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-limit-image-contained-in-open",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-base-change-continuous"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09XM",
+  "place": "Specialization of the cited local-section and finite-descent arguments to the affine open system with a supplied adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of etale sheaf sections agreeing after inverse image to an affine limit becomes compatible on a later open stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of etale sheaf sections agreeing after inverse image to an affine limit becomes compatible on a later open stage",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-13",
+   "verdict": "no exact match: geometric or structure-sheaf results do not assert this local section step"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual.*[Ee]qual|[Ee]qual.*[Ss]tage|exists_map_eq_top",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match: geometric or structure-sheaf results do not assert this local section step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOpenInverseImageUnitRepresentatives",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Strictly henselian local-ring comparison in the Tag 09AX effacement argument: degree-zero continuity on affine Zariski neighbourhoods, Descent of affine-limit sections; Unit representatives of terminal inverse-image sections; eventual agreement of finitely many local representatives before sheaf gluing",
+   "via": [
+    "affine-open-inverse-image-unit-representatives",
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+    "new-local-stalk-sections-cocone-colimit",
+    "new-local-stalk-sections-canonical-colimit",
+    "affine-open-sections-canonical-colimit-core",
+    "affine-open-sections-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOpenInverseImageCompatibleRefinement",
+  "file": "lean/Sheaf/Paper/AffineOpenInverseImageCompatibleRefinement.lean",
+  "declaration": "affineOpenSections_inverse_image_compatible_refinement",
+  "statement": "theorem affineOpenSections_inverse_image_compatible_refinement\n    {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]\n    (D : J ⥤ X.Etale)\n    [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom]\n    (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X))\n    (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p)\n    (hc : IsLimit c)\n    (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hH : H ⊣ p.Etale.sheafPushforwardContinuous\n      AddCommGrpCat.{u + 1} X.smallEtaleTopology c.pt.smallEtaleTopology)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (t : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))\n    (j : J) (B : Type (u + 1)) [Finite B]\n    (V : B → X.Etale) (v : ∀ b, V b ⟶ D.obj j)\n    (s : ∀ b, F.obj.obj (op (V b)))\n    (π : ∀ b, p.Etale.obj (V b) ⟶ Scheme.Etale.mk (𝟙 c.pt))\n    (hV : ∀ b, IsAffine (V b).left)\n    (hv : Sieve.ofArrows V v ∈ X.smallEtaleTopology (D.obj j))\n    (hπ : Sieve.ofArrows (fun b ↦ p.Etale.obj (V b)) π ∈\n      c.pt.smallEtaleTopology (Scheme.Etale.mk (𝟙 c.pt)))\n    (hs : ∀ b, (H.obj F).obj.map (π b).op t =\n      (hH.unit.app F).hom.app (op (V b)) (s b)) :\n    ∃ (k : J) (f : k ⟶ j) (V' : B → X.Etale)\n      (v' : ∀ b, V' b ⟶ D.obj k) (γ : ∀ b, V' b ⟶ V b)\n      (π' : ∀ b, p.Etale.obj (V' b) ⟶ Scheme.Etale.mk (𝟙 c.pt)),\n      (∀ b, v' b ≫ D.map f = γ b ≫ v b) ∧\n      Sieve.ofArrows V' v' ∈ X.smallEtaleTopology (D.obj k) ∧\n      Sieve.ofArrows (fun b ↦ p.Etale.obj (V' b)) π' ∈\n        c.pt.smallEtaleTopology (Scheme.Etale.mk (𝟙 c.pt)) ∧\n      (∀ b, p.Etale.map (γ b) ≫ π b = π' b) ∧\n      ∀ ⦃W : X.Etale⦄ ⦃b b' : B⦄ (a : W ⟶ V' b) (a' : W ⟶ V' b'),\n        a ≫ v' b = a' ≫ v' b' →\n        F.obj.map a.op (F.obj.map (γ b).op (s b)) =\n          F.obj.map a'.op (F.obj.map (γ b').op (s b'))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T111942-L-3069942",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T111942-L-3069942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

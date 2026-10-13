@@ -12238,3 +12238,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffineCoverModuleTensorFlatCriterion (stage 3; reviewer PASS; first push; landing 20261013T111940-L-3069401 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffineOpenPerfectSourceModel (stage 3; reviewer PASS; first push; landing 20261013T111941-L-3069635 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/W4/Sheaf.AlgebraicGeometry.SupportedOverlapRestrictionData (stage 3; reviewer PASS; first push; landing 20261013T111941-L-3069740 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/W4/Sheaf.Paper.AffineOpenInverseImageUnitRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T111942-L-3069942 (interface); batch 20261013T111833; modules 3; new nodes 2)
