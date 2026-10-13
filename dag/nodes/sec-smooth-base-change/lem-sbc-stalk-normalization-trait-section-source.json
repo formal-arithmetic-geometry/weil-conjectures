@@ -15,23 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Minimality of s makes the inverse image of U the punctured local\nspectrum. Its normal Noetherian local domain A has positive dimension:\na zero-dimensional local domain is a field, in which case s is the generic\npoint, contradicting hs and hηU. The dimension bound therefore makes A a\nDVR. Smoothness makes the total space regular, and its closed fibre a\nregular Cartier divisor. Extend the G-action to the punctured cover by\nnormal generic full faithfulness. A rational point and its G-translates\nsplit the entire generic section fibre. Stabilizer ramification indices\ndivide |G| and are invertible, so tame normalization has the standard\nforms of Tags 0EYG and 0EYH. Pulling these forms back along the section\nsends the divisor equation to a uniformizer. The split generic section\nfibre forces every ramification exponent to be one, by Tag 0EYI(2).\nThus the finite normalization is etale at every point above the closed\nsection point. Integral closure commutes with localization, identifying\nthis normalization with n. For each such point restrict to a source open\nwhere n is etale. Disconnected covers use their stabilizers componentwise;\nan empty fibre makes the conclusion vacuous.",
+   "text": "Prove the local stalk is not a field: if it were a field, its spectrum would be a singleton. The generic point of S is in the range of fromSpecStalk s since it specializes to s, while the closed point maps to s. Thus s is the generic point, contradicting hs and hηU. The dimension bound gives Krull dimension at most one; together with normality and Noetherianity it makes the stalk a Dedekind domain. The local nonfield Dedekind-domain characterization gives a DVR. This is the fully proved private Lean lemma stalk_dvr using Mathlib Stalk, KrullDimension.Basic and DiscreteValuationRing.TFAE.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the tame normalization flatness statement with this DVR stalk. It uses no section and supplies Flat n on the entire local normalization.",
    "uses": [
-    "lem-sbc-normal-integral-generic-hom-full",
-    "lem-sbc-generic-fibre-action-extension"
+    "lem-sbc-stalk-normalization-trait-flat"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the split-section unramifiedness statement with the same DVR stalk to obtain a source open V containing x with FormallyUnramified (V.ι ≫ n).",
+   "uses": [
+    "lem-sbc-stalk-normalization-trait-section-unramified"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The local total space is locally Noetherian: its base is the spectrum of a Noetherian stalk, and it is the base change of a smooth morphism. Finiteness of n gives locally finite type, hence locally finite presentation over that target. Open inclusions are flat and locally of finite presentation, so V.ι ≫ n is flat and locally of finite presentation. Apply Mathlib Etale.of_formallyUnramified_of_flat to obtain the required Etale (V.ι ≫ n).",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normal-integral-generic-hom-full",
-  "lem-sbc-generic-fibre-action-extension"
+  "lem-sbc-stalk-normalization-trait-flat",
+  "lem-sbc-stalk-normalization-trait-section-unramified"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "N1",
+  "by": "Y2",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ (pione-lemma-extend-covering), first paragraph; Tags 0EYG, 0EYH and 0EYI(2)"
+  "place": "Tags 0EYH (flatness), 0EYI(2) (split-section ramification test) and 0EYJ (trait reduction); assembled with Mathlib DVR characterization and flat/formally-unramified etale criterion"
  },
  "mathlib_searches": [
   {
@@ -116,12 +132,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T214711-L-1271624",
+  "landing": "20261013T002012-L-2359367",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -15,8 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.KrullDimension.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitFlat
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionUnramified
 
 /-!
 # Source etaleness over the local section in the trait case
@@ -29,6 +30,33 @@ Source: Stacks Project, Tags 0EYJ, 0EYG, 0EYH and 0EYI.
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+private theorem stalk_dvr {S : Scheme.{u}} [IsNoetherian S] [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    (U : S.Opens) (hηU : genericPoint S ∈ U) (s : S) (hs : s ∉ U)
+    (hdim : ringKrullDim (S.presheaf.stalk s) < (2 : WithBot ℕ∞)) :
+    IsDiscreteValuationRing (S.presheaf.stalk s) := by
+  have hfield : ¬ IsField (S.presheaf.stalk s) := by
+    intro h
+    let : Field (S.presheaf.stalk s) := h.toField
+    have hgen : genericPoint S ⤳ s :=
+      (genericPoint_spec S).specializes_iff_mem.mpr (Set.mem_univ s)
+    have hmem : genericPoint S ∈ Set.range (S.fromSpecStalk s) := by
+      rw [S.range_fromSpecStalk]
+      exact hgen
+    obtain ⟨y, hy⟩ := hmem
+    have hyclosed : y = IsLocalRing.closedPoint (S.presheaf.stalk s) :=
+      (inferInstance : Subsingleton (PrimeSpectrum (S.presheaf.stalk s))).elim _ _
+    rw [hyclosed, S.fromSpecStalk_closedPoint] at hy
+    exact hs (hy.symm ▸ hηU)
+  let : IsIntegrallyClosed (S.presheaf.stalk s) := hS s
+  let : Ring.KrullDimLE 1 (S.presheaf.stalk s) := Ring.krullDimLE_iff.mpr
+    (ENat.WithBot.lt_add_one_iff.mp (by norm_num; exact hdim))
+  let : Ring.DimensionLEOne (S.presheaf.stalk s) :=
+    ⟨fun hp hprime ↦ hprime.isMaximal_of_ne_bot hp⟩
+  let : IsDedekindDomain (S.presheaf.stalk s) := {}
+  exact ((IsDiscreteValuationRing.TFAE (S.presheaf.stalk s) hfield).out 2 0).mp
+    (show IsDedekindDomain (S.presheaf.stalk s) from inferInstance)
 
 /-- Every point of the finite local normalization above the closed section point
 has a source open neighbourhood on which the normalization map is etale,
@@ -86,6 +114,24 @@ theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}
       (pullback.fst c a) : Scheme.{u}),
       n x = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) →
       ∃ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
-        (pullback.fst c a)).Opens, x ∈ V ∧ Etale (V.ι ≫ n) := by sorry
+        (pullback.fst c a)).Opens, x ∈ V ∧ Etale (V.ι ≫ n) := by
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  have hdvr := stalk_dvr hS U hηU s hs hdim
+  dsimp only
+  intro hn x hx
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+    (pullback.fst c (S.fromSpecStalk s))
+  let : IsFinite n := hn
+  let : Flat n := GaloisCover.stalk_normalization_trait_flat
+    hS c G hG q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn
+  obtain ⟨V, hxV, hV⟩ := GaloisCover.stalk_normalization_trait_section_unramified
+    hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+    s hs hmin hdvr hn x hx
+  let : FormallyUnramified (V.ι ≫ n) := hV
+  refine ⟨V, hxV, ?_⟩
+  exact Etale.of_formallyUnramified_of_flat (V.ι ≫ n)
 
 end AlgebraicGeometry.Scheme
