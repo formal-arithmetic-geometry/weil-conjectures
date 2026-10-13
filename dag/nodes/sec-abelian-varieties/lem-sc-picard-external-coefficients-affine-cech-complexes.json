@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-picard-external-coefficients-affine-cech-complexes",
+ "kind": "statement",
+ "title": "PicardExternalCoefficientsAffineCechComplexes",
+ "statement": "Let k be a field [def-weil-field], f:X -> Spec(k), g:Y -> Spec(k) scheme morphisms [def-pc-scheme], and F,G quasi-coherent modules [pqf-def-coherent]. Let I be a finite index type and U:I -> Opens(X) a family with every nonempty finite intersection affine. No covering condition is imposed. Let V be an affine open of Y, Z=X times_Spec(k) Y, W=pr2 inverse V, E=(externalCupCoefficients f g F G)|W [def-sc-field-linear-module-cohomology-operations], and U_i'=W.ι inverse(pr1 inverse U_i). Form the native module-valued Cech complex B=Cech(U',E) [def-sc-module-cech-comparison]. Let C be Cech(U,F) restricted from Gamma(X,O) to k along scalarMap f top, and N=scalarObj(V.ι composed with g)(G|V)(top). There exists an isomorphism of additive-group cochain complexes between B after forgetting its Gamma(W,O) action and the termwise tensorRight(N) of C after forgetting its k action. No cohomology identification is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Lemma 33.29.1 (varieties-lemma-kunneth), affine-open paragraph and equality of Cech complexes after Let V be an affine open; checked online 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cech-comparison",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put Z=X times_Spec(k) Y, W=pr2 inverse V and E=(pr1^*F tensor pr2^*G)|W. The cover family on W is U_i'=W.ι inverse(pr1 inverse U_i). An intersection is U_intersection times V; both factors are affine. The open-immersion pullback/restriction comparison, its unit equation and pullback composition identify the restricted external coefficients with the external coefficients for F restricted to the intersection and G restricted to V.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the intersection put A=Gamma(U_intersection,O), B=Gamma(V,O), M=F(U_intersection), N=G(V). Affine pullback sections and tensor sections identify the target section module with the tensor over A tensor_k B of the scalar extensions of M,N. The map (m tensor b) tensor (a tensor n) to (a*m) tensor (b*n) and inverse m tensor n to (m tensor 1) tensor (1 tensor n) are well-defined by the balance relations. Tensor induction proves both inverse identities. The recorded pure-tensor formulas identify these maps with the pullback units and tensor section map. For a face inclusion let r be restriction of F-sections. The inverse chart map sends m tensor n to the tensor section of the two pullback-unit sections. Restriction of that section is the tensor of the unit applied to r(m) and the unit applied to n, by naturality of the pullback units and the tensor-section restriction formula. The forward chart map therefore gives r(m) tensor n. Tensor induction extends this equation to every section, so all face squares commute, including repeated indices.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each degree n, Fin(n+1)->I is finite. The map from tensor of the finite product sends a tuple tensor t to its coordinate tensors. Its inverse is the sum of the finitely many coordinate inclusions. Tensor induction and coordinate extensionality prove both inverse identities. Apply these maps to the chart section comparisons. Each face square commutes, so additivity makes the finite alternating sums agree; the degreewise maps and their inverses form an isomorphism of additive-group complexes. Scalar restriction does not change these groups or differentials. Empty index types, empty intersections, empty V and zero coefficients give zero terms. No covering condition or cohomology assertion is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Lemma 33.29.1 (varieties-lemma-kunneth), affine-open paragraph and equality of Cech complexes after Let V be an affine open; checked online 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex for external tensor coefficients on X times an affine open is the termwise tensor of the Cech complex of X with sections on that affine open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech complex for external tensor coefficients on X times an affine open is the termwise tensor of the Cech complex of X with sections on that affine open",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.Sheaf.tensorProd_isSheaf, HomologicalComplex.ιTensorObj, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+   "date": "2026-10-13",
+   "verdict": "No geometric external-coefficient Cech comparison; searched all Mathlib. Source/library searches find Kunneth modules above the item and affine section ingredients, not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "external.*cech|cech.*external|external.*cohom|cohom.*external",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No geometric external-coefficient Cech comparison; searched all Mathlib. Source/library searches find Kunneth modules above the item and affine section ingredients, not this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineLocalCohomology",
+  "group": "P3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED affine-right Cech calculation within the external coefficient direct image argument",
+   "via": [
+    "lem-sc-picard-external-coefficients-affine-local-cohomology",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechComplexes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCupCoefficients_affine_cech_complexes",
+  "statement": "theorem picardExternalCupCoefficients_affine_cech_complexes\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]\n    {ι : Type w} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (V : Y.Opens) (hV : IsAffineOpen V) :\n    let Z := Limits.pullback f g\n    let W : Z.Opens := (pullback.snd f g) ⁻¹ᵁ V\n    let E := (externalCupCoefficients f g F G).restrict W.ι\n    let U' : ι → W.toScheme.Opens := fun i ↦ W.ι ⁻¹ᵁ ((pullback.fst f g) ⁻¹ᵁ U i)\n    let B := (cechComplexFunctor U').obj E.presheafModuleCat\n    let R := ModuleCat.restrictScalars (scalarMap f ⊤)\n    let C := (R.mapHomologicalComplex (.up ℕ)).obj\n      ((cechComplexFunctor U).obj F.presheafModuleCat)\n    let T := tensorRight (scalarObj (V.ι ≫ g) (G.restrict V.ι) (Opposite.op ⊤))\n    Nonempty\n        (((forget₂ (ModuleCat.{w} Γ(W.toScheme, ⊤)) AddCommGrpCat.{w}).mapHomologicalComplex\n            (.up ℕ)).obj B ≅\n          ((forget₂ (ModuleCat.{w} k) AddCommGrpCat.{w}).mapHomologicalComplex\n            (.up ℕ)).obj ((T.mapHomologicalComplex (.up ℕ)).obj C))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T123548-L-3712244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
