@@ -24,9 +24,91 @@
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On the slice over $U$, write $F_f=R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],K|_U)$. Localization at zero is the zero module, so $F_0=0$ by the Hom-complex formula. Thus $0\\in S_K(U)$.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "For $f\\in S_K(U)$ and $a\\in\\mathcal O(U)$ apply the localization internal-Hom identity with $P=\\mathcal O_U[1/f]$ and localizing section $a$. It gives $F_{af}\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/a],F_f)=0$. This also applies when either section is zero; in particular $a=-1$ proves closure under negatives.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-rhom-calculus",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "For $f,g\\in S_K(U)$ put $h=f+g$. For each $V\\to U$ take $R=\\mathcal O(V)[1/h]$. The images of $f,g$ generate its unit ideal because $f/h+g/h=1$. The standard-covering gluing statement gives injectivity and middle exactness of $0\\to R\\to R[1/f]\\oplus R[1/g]\\to R[1/(fg)]$, with diagonal and difference maps. For surjectivity, represent an element of the last term as $z/(fg)^n$, increasing $n$ to be positive. The binomial expansion of $(f/h+g/h)^{2n-1}=1$ gives $u f^n+v g^n=1$ for some $u,v\\in R$. The pair $(vz/f^n,-uz/g^n)$ maps to $z/(fg)^n$. Sheafifying this sectionwise exact sequence gives $0\\to\\mathcal O_U[1/h]\\to\\mathcal O_U[1/(fh)]\\oplus\\mathcal O_U[1/(gh)]\\to\\mathcal O_U[1/(fgh)]\\to0$; iterated localization agrees with localization at the product by its universal property.",
+   "uses": [
+    "lem-weil-pbc-standard-covering-glue",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_U[1/h]$, $B=\\mathcal O_U[1/(fh)]\\oplus\\mathcal O_U[1/(gh)]$, $D=\\mathcal O_U[1/(fgh)]$, and let $i:A\\to B$ be the injection of step 3. In degree-zero complexes its cone $T=C(i)$ is $A\\xrightarrow{i}B$ in degrees $-1,0$. The projection $T\\to D[0]$ is a quasi-isomorphism: its degree $-1$ cohomology is $\\ker i=0$, and its degree $0$ cohomology is $\\operatorname{coker}i=D$. Choose a K-injective representative $I^\\bullet$ of $K|_U$, and write $H(X)=\\mathcal Hom^\\bullet(X,I^\\bullet)$. The quasi-isomorphism clause of the derived internal-Hom definition gives a quasi-isomorphism $H(D)\\to H(T)$. Step 2 gives $F_{fh}=F_{gh}=F_{fgh}=0$ (multipliers $h,h,gh$ respectively), so $H(T)$ and $H(B)=H(\\mathcal O_U[1/(fh)])\\oplus H(\\mathcal O_U[1/(gh)])$ are acyclic. The degreewise split sequence $0\\to B\\to T\\to A[1]\\to0$ gives $0\\to H(A[1])\\to H(T)\\to H(B)\\to0$, also degreewise split: restriction to the graded summand $B$ is surjective, with kernel the maps factoring through the graded quotient $A[1]$, and the Hom differential preserves this kernel. Its kernel is acyclic by the following local boundary chase. For a closed local section $x$ of the kernel, acyclicity of $H(T)$ gives locally $y$ with $dy=x$; its image $\\bar y$ is closed in $H(B)$, so locally $\\bar y=dz$. Lift $z$ using the degreewise splitting; then $y-d\\widetilde z$ lies in the kernel and has differential $x$. Thus $H(A[1])$ has zero cohomology sheaves. Its degree $n$ term is $\\mathcal Hom(A,I^{n-1})$, with the differential of $I$, so its cohomology is that of $H(A)$ shifted by one degree. Therefore $F_h=0$ and $f+g\\in S_K(U)$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "For any arrow $V\\to U$, the restriction identity for localization internal Hom gives $F_f|_V\\cong F_{f|_V}$. Hence membership is preserved by restriction. Conversely, suppose $f|_{U_i}\\in S_K(U_i)$ for a covering family of $U$. Then $F_f|_{U_i}=0$ for all $i$. Slice restriction is evaluation of module sheaves on objects lying over $U_i$, so preserves kernels and the locally defined images; it therefore commutes with cohomology. Every cohomology sheaf of $F_f$ restricts to zero on the cover. A section of such a sheaf over any $V\\to U$ vanishes on the pulled-back covering sieve and is zero by the uniqueness axiom for a sheaf. Thus all cohomology sheaves vanish, the representative complex is quasi-isomorphic to zero, and $F_f=0$. A compatible family in $S_K$ glues uniquely in $\\mathcal O$, and this local criterion puts its glued section in $S_K$. Together with steps 1--4 this proves that $S_K$ is a sheaf of ideals.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-rhom-calculus",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "On a slice where $b_1,\\ldots,b_r$ generate the ideal sheaf and belong to $S_K$, a section of the generated ideal is locally a finite sum $\\sum_i a_i b_i$. Step 2 puts each summand in $S_K$, and repeated application of step 4 puts the sum in $S_K$. Step 5 glues the local membership. For $r=0$ the generated ideal is zero and step 1 applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-localization-rhom-calculus",
+  "lem-weil-pbc-standard-covering-glue",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with the omitted sheaf verification written out using Tag 08JB"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +151,45 @@
    "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"58\", \"text\": \"namespace localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"92\", \"text\": \"in an ideal `J`, `localCohomology` and `localCohomology.ofSelfLERadical`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"94\", \"text\": \"/-- `localCohomology.ofDiagram I i` is the functor sending a module `M` over a commutative\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"146\", \"text\": \"end localCohomology\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"149\", \"text\": \"the powers of `J` (`localCohomology`), then in terms of *all* ideals with radical\"}",
    "date": "2026-10-14",
    "verdict": "no match: the local-cohomology implementation defines Ext colimits of ordinary modules, not derived localization Hom for module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elements f such that derived internal Hom from the localization O[1/f] into K vanishes form a sheaf of ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.sectionsSubmodule\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens (PrimeSpectrum R))ᵒᵖ) →\\n        Submodule (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U))\\n          ((x : ↥(Opposite.unop U)) → ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For a commutative ring $ R $, module $ M $, and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the submodule of the product $ \\\\prod_{\\\\mathfrak{p} \\\\in U} M_{\\\\mathfrak{p}} $ co\"}\n  {\"name\": \"ModuleCat.Tilde.isFraction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      {U : TopologicalSpace.Opens (PrimeSpectrum R)} → ((𝔭 : ↥U) → ModuleCat.Tilde.Localizations M ↑𝔭) → Prop\", \"doc\": \"A function $ f $ assigning to each point $ \\\\mathfrak{p} $ in an open set $ U \\\\subseteq \\\\operatorname{Spec}(R) $ an element of the localized module $ M_{\\\\mathfrak{p}} $ satisfies this condition if ther\"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → ModuleCat.Tilde.Localizations M ↑x),\\n  (ModuleCat.Tilde.isLocallyFraction M).pred f =\\n    ∀ (y : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑y ∈ V),\\n          ∃ i m s,\\n \", \"doc\": \"For any open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ f $ of the sheaf associated to an $ R $-module $ M $ over $ U $ satisfies the predic\"}\n  {\"name\": \"ModuleCat.Tilde.const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      ↑M →\\n        (r : R) →\\n          (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) →\\n            (∀ x ∈ U, r ∈ x.asIdeal.primeCompl) → ↑(M.tildeInModuleCat.obj (Opposite.op U))\", \"doc\": \"Given an $R$-module $M$, an element $m \\\\in M$, an element $r \\\\in R$, and an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$ such that $r$ lies in the complement of every prime ideal corresponding to \"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} → [inst : CommRing R] → (M : ModuleCat R) → TopCat.LocalPredicate (ModuleCat.Tilde.Localizations M)\", \"doc\": \"The local predicate on localized module sections over $\\\\operatorname{Spec}(R)$ obtained by sheafifying the prelocal predicate that a section is locally expressible as a fraction $m/s$ with $m \\\\in M$ a\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)} →\\n      ((x : ↥U) → AlgebraicGeometry.StructureSheaf.Localizations R ↑x) → Prop\", \"doc\": \"A function $ f $ defined on an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is called a fraction if there exist elements $ r, s \\\\in R $ such that for every prime ideal $ \\\\mathfra\"}\n  {\"name\": \"ModuleCat.Tilde.const_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (m : ↑M) (r : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, r ∈ x.asIdeal.primeCompl)\\n  (x : ↥U), ↑(ModuleCat.Tilde.const M m r U hu) x = LocalizedModule.mk m ⟨r, ⋯⟩\", \"doc\": \"For an $R$-module $M$, element $m \\\\in M$, invertible element $r \\\\in R$ over an open subset $U \\\\subseteq \\\\operatorname{Spec}(R)$, and point $x \\\\in U$, the evaluation of the constant section $\\\\widetilde\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: signatures concern ordinary local fractions, generators, or local cohomology of ring modules, not vanishing derived internal Hom on a general ringed site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completeness for local sections is closed under sums and scalar multiples",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.generators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this function assigns to each inde\"}\n  {\"name\": \"ModuleCat.Tilde.sectionsSubmodule\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens (PrimeSpectrum R))ᵒᵖ) →\\n        Submodule (↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj U))\\n          ((x : ↥(Opposite.unop U)) → ModuleCat.Tilde.Localizations M ↑x)\", \"doc\": \"For a commutative ring $ R $, module $ M $, and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the submodule of the product $ \\\\prod_{\\\\mathfrak{p} \\\\in U} M_{\\\\mathfrak{p}} $ co\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.s\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a sheaf $M$ of modules over $R$, this function assigns to each index in the index set $I$ a \"}\n  {\"name\": \"SheafOfModules.GeneratingSections.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the index set\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this type represents data providin\"}\n  {\"name\": \"SheafOfModules.GeneratingSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the generatin\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        SheafOfModules R →\\n          [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [∀ (X : C), (J.over X\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$, this type represents data providin\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this component $X$ of the local ge\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: signatures concern ordinary local fractions, generators, or local cohomology of ring modules, not vanishing derived internal Hom on a general ringed site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localCohomology\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"localCohomology.SelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : Type u\", \"doc\": \"The full subcategory of all ideals with radical containing `J` \"}\n  {\"name\": \"localCohomology.instCategorySelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u_1} [CommRing R] (J : Ideal R) : CategoryTheory.Category.{u_1, u_1} (localCohomology.SelfLERadical J)\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.SelfLERadical.inhabited\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : Inhabited (localCohomology.SelfLERadical J)\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.idealPowersToSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor ℕᵒᵖ (localCohomology.SelfLERadical J)\", \"doc\": \"Lifting `idealPowersDiagram J` from a diagram valued in `ideals R` to a diagram\\nvalued in `SelfLERadical J`. \"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"`localCohomology J i` is `i`-th the local cohomology module of a module `M` over\\na commutative ring `R` with support in the ideal `J` of `R`, defined as the direct limit\\nof `Ext^i(R/J^t, M)` over all \"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Local cohomology as the direct limit of `Ext^i(R/J', M)` over *all* ideals `J'` with radical\\ncontaining `J`. \"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J : Ideal R} [hR : IsNoetherian R R] : (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"The diagram of powers of `J` is initial in the diagram of all ideals with\\nradical containing `J`. This uses Noetherianness. \"}\n  {\"name\": \"localCohomology.SelfLERadical.cast\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : CategoryTheory.Functor (localCohomology.SelfLERadical J) (localCohomology.SelfLERadical K)\", \"doc\": \"Casting from the full subcategory of ideals with radical containing `J` to the full\\nsubcategory of ideals with radical containing `K`. \"}\n  {\"name\": \"localCohomology.SelfLERadical.castEquivalence\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : localCohomology.SelfLERadical J ≌ localCohomology.SelfLERadical K\", \"doc\": \"The equivalence of categories `SelfLERadical J ≌ SelfLERadical K`\\nwhen `J.radical = K.radical`. \"}\n  {\"name\": \"localCohomology.SelfLERadical.cast_isEquivalence\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} (hJK : J.radical = K.radical) : (localCohomology.SelfLERadical.cast hJK).IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"localCohomology.idealPowersDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor ℕᵒᵖ (Ideal R)\", \"doc\": \"The functor sending a natural number `i` to the `i`-th power of the ideal `J` \"}\n  {\"name\": \"localCohomology.selfLERadicalDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) : CategoryTheory.Functor (localCohomology.SelfLERadical J) (Ideal R)\", \"doc\": \"The diagram of all ideals with radical containing `J`, represented as a functor.\\nThis is the \\\"largest\\\" diagram that computes local cohomology with support in `J`. \"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match: signatures concern ordinary local fractions, generators, or local cohomology of ring modules, not vanishing derived internal Hom on a general ringed site"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet.*ideal|ideal.*derived.?complet",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match: signatures concern ordinary local fractions, generators, or local cohomology of ring modules, not vanishing derived internal Hom on a general ringed site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elements with vanishing derived Hom from their localizations form an ideal sheaf",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-koszul-completion-reflector",
   "by": "worker",
@@ -87,5 +204,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+  "worker": "stage1",
+  "summary": "Followed 0998 using existing localization calculus; wrote binary localization surjectivity and sheaf locality. Second reading removed the unnecessary general triangle node and proved the needed degree-zero Hom-cone calculation with a local boundary chase. No statement correction or Lean attachment.",
+  "blueprint": "Detailed form, final paragraph: \"namely $Lf^*$ followed by derived completion\"; testing local derived completeness for all sections of the generated ideal. Steps 1--5 establish all-section locality; step 6 supplies the locally generated ideal test."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-e808ac126",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-e808ac126 (reviewer sub-agent of L); spot-checked: Read all six steps and cited statements against Stacks 0996–0998, 08J9–08JC, 00EJ and module-sheaf sources. Surjectivity, Hom-cone acyclicity and sheaf locality check out for unbounded complexes and varying coefficients. No new nodes, duplicates or repairs. review.md records edge cases, route checks and inherited cycles; no downstream target comparison is certified."
  }
 }
