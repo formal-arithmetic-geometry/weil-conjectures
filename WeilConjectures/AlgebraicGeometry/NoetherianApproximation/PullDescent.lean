@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Mathlib.CategoryTheory.Sites.Descent.DescentData
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 
 /-!
 # Descent data obtained by pulling back gluing data along a morphism
@@ -28,31 +29,6 @@ cocycle conditions only hold after passing to a later stage.
 universe u
 
 open CategoryTheory Limits Opposite Pseudofunctor LocallyDiscreteOpToCat
-
-namespace CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
-
-variable {C : Type*} [Category* C] {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}
-
-set_option backward.isDefEq.respectTransparency false in
-@[reassoc]
-lemma pullHom_comp ⦃X₁ X₂ X₃ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄ ⦃M₂ : F.obj (.mk (op X₂))⦄
-    ⦃M₃ : F.obj (.mk (op X₃))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃f₂ : Y ⟶ X₂⦄ ⦃f₃ : Y ⟶ X₃⦄
-    (φ : (F.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (F.map f₂.op.toLoc).toFunctor.obj M₂)
-    (ψ : (F.map f₂.op.toLoc).toFunctor.obj M₂ ⟶ (F.map f₃.op.toLoc).toFunctor.obj M₃) ⦃Y' : C⦄
-    (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂) (gf₃ : Y' ⟶ X₃) (hgf₁ : g ≫ f₁ = gf₁)
-    (hgf₂ : g ≫ f₂ = gf₂) (hgf₃ : g ≫ f₃ = gf₃) :
-    pullHom (φ ≫ ψ) g gf₁ gf₃ hgf₁ hgf₃ =
-      pullHom φ g gf₁ gf₂ hgf₁ hgf₂ ≫ pullHom ψ g gf₂ gf₃ hgf₂ hgf₃ := by
-  simp [pullHom]
-
-set_option backward.isDefEq.respectTransparency false in
-@[simp]
-lemma pullHom_id' ⦃X₁ : C⦄ ⦃M₁ : F.obj (.mk (op X₁))⦄ ⦃Y : C⦄ ⦃f₁ : Y ⟶ X₁⦄ ⦃Y' : C⦄
-    (g : Y' ⟶ Y) (gf₁ : Y' ⟶ X₁) (hgf₁ : g ≫ f₁ = gf₁) :
-    pullHom (𝟙 ((F.map f₁.op.toLoc).toFunctor.obj M₁)) g gf₁ gf₁ hgf₁ hgf₁ = 𝟙 _ := by
-  simp [pullHom]
-
-end CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat
 
 namespace AlgebraicGeometry.Scheme.Modules
 

@@ -75,7 +75,7 @@ theorem exists_tensorQuotientSpanEquiv {R S : Type*} [CommRing R] [CommRing S] [
     apply le_antisymm
     · rintro _ ⟨x, ⟨y, rfl⟩, rfl⟩
       induction y using TensorProduct.induction_on with
-      | zero => simpa using L.zero_mem
+      | zero => simp
       | tmul s k =>
         obtain ⟨k, hk⟩ := k
         have := L.smul_mem s (hK k hk)

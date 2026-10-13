@@ -45,7 +45,7 @@ namespace Scheme.Hom.DeformationToNormalConeData
 
 open _root_.AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}} {d : ℕ}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
@@ -66,7 +66,7 @@ end Scheme.Hom.DeformationToNormalConeData
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}}
 
 section Construction
 
@@ -156,7 +156,8 @@ family object is the constant Tate twist,
 
 where `0^* ω = Λ(c)[2c]` is vector-bundle purity for the trivial bundle
 (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`). -/
-theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist.IsNormalized Λ]
+theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist Λ]
+    [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
     [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
     [SmoothOfRelativeDimension c (𝔸(ULift.{u} (Fin c); B) ↘ B)]

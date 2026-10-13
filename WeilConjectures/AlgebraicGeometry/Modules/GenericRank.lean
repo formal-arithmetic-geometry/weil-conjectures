@@ -117,7 +117,7 @@ theorem exists_basis_stalk_of_over_iso_free {x : X} (hx : x ∈ Y) :
       · intro j _ hji
         rw [show i₁ = homOfLE (leOfHom i₁) from rfl, presheaf_map_homOfLE_map_homOfLE,
           sectionsLinearEquivOfOverIsoFree_frameSection]
-        simp [Pi.single_apply, Ne.symm hji]
+        simp [Ne.symm hji]
       · simp
     rw [hgi, ← TopCat.Presheaf.germ_res_apply X.presheaf i₁ x hxW', hc, map_zero]
   have hsp : ⊤ ≤ Submodule.span (X.presheaf.stalk x) (Set.range v) := by
@@ -133,11 +133,13 @@ theorem exists_basis_stalk_of_over_iso_free {x : X} (hx : x ∈ Y) :
     exact (TopCat.Presheaf.germ_res_apply _ _ _ _ _).symm
   exact ⟨Module.Basis.mk hli hsp, fun i ↦ Module.Basis.mk_apply hli hsp i⟩
 
-include e in
+omit [DecidableEq I] in
 /-- If `M.over Y ≅ 𝒪_Y^I`, then for `x ∈ Y` the stalk `M_x` is free of rank `|I|`. -/
-theorem finrank_stalk_of_over_iso_free {x : X} (hx : x ∈ Y) :
-    Module.finrank (X.presheaf.stalk x) (M.presheaf.stalk x) = Fintype.card I :=
-  Module.finrank_eq_card_basis (exists_basis_stalk_of_over_iso_free e hx).choose
+theorem finrank_stalk_of_over_iso_free (h : Nonempty (M.over Y ≅ SheafOfModules.free I)) {x : X}
+    (hx : x ∈ Y) : Module.finrank (X.presheaf.stalk x) (M.presheaf.stalk x) = Fintype.card I := by
+  classical
+  obtain ⟨e⟩ := h
+  exact Module.finrank_eq_card_basis (exists_basis_stalk_of_over_iso_free e hx).choose
 
 end StalkBasis
 
@@ -160,7 +162,7 @@ lemma genericPoint_mem {U : X.Opens} {x : X} (hx : x ∈ U) : genericPoint X ∈
 theorem rank_eq_card_of_over_iso_free {M : X.Modules} {Y : X.Opens} {I : Type u} [Fintype I]
     (e : M.over Y ≅ SheafOfModules.free I) {x : X} (hx : x ∈ Y) : M.rank = Fintype.card I := by
   classical
-  exact finrank_stalk_of_over_iso_free e (genericPoint_mem hx)
+  exact finrank_stalk_of_over_iso_free ⟨e⟩ (genericPoint_mem hx)
 
 /-- A finite locally free module of rank `r` on an irreducible scheme has rank `r`. -/
 theorem rank_eq_of_isFiniteLocallyFreeOfRank (M : X.Modules) {r : ℕ}

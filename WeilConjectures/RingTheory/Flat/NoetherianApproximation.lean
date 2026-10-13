@@ -553,6 +553,7 @@ theorem isOpen_setOf_flat_localizedModule_baseChange [Algebra.FiniteType R₀ S�
   exact ⟨PrimeSpectrum.basicOpen g, fun Q' hQ' ↦ hopen Q'.asIdeal hQ',
     PrimeSpectrum.isOpen_basicOpen, hg⟩
 
+omit [Module R₀ M₀] [IsScalarTower R₀ S₀ M₀] in
 /-- The primes of `A ⊗[R₀] S₀` lying over the flat locus of a noetherian subalgebra `R` of `A`
 form an open set. -/
 theorem isOpen_setOf_flat_localizedModule_comap [Algebra.FiniteType R₀ S₀]
@@ -602,8 +603,8 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
--- The proof is long and elaborates many tensor product instances.
 set_option maxHeartbeats 1000000 in
+-- The proof is long and elaborates many tensor product instances.
 /-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
 Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
 `R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
