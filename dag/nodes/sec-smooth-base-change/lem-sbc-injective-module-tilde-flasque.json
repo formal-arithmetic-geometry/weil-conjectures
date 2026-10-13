@@ -13,29 +13,35 @@
  },
  "proof": [
   {
-   "text": "Spec R is Noetherian. Under the exact equivalence of R-modules with quasi-coherent sheaves on Spec R, M corresponds to an injective quasi-coherent sheaf. Tag 09T2 shows this sheaf is flasque: extend a section on an open to a morphism from a power of the coherent ideal defining its complement, then use injectivity to extend along that ideal into the structure sheaf.",
+   "text": "On Spec R form the ideal-sheaf data I of the reduced closed complement of U. Apply quasicoherent_open_section_ideal_extension to tilde M and s. This supplies a power K = I^n and alpha:K.toModules -> tilde M whose restriction is multiplication by s. Transport the global ideal K(top) along GammaSpecIso.inv to J <= R. The injective global inclusion has range J, so LinearEquiv.ofInjective identifies its source with J. Compose the inverse equivalence, alpha on global sections, and tilde.isoTop.inv to obtain phi:J -> M. Naturality and tilde.toOpen_res give tilde.toOpen M U (phi a) = a*s. The support formula for K shows J is not contained in any prime of U; the zeroth power has empty support.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-scheme-conventions"
+    "lem-pc-quasicoherent-open-section-ideal-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Given V contained in U, first extend its section globally and then restrict to U. Forgetting to R-modules does not change the underlying restriction functions. ModuleCat.epi_iff_surjective translates this into TopCat.Presheaf.IsFlasque for the presheaf in the statement. The empty open has only the zero section.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "text": "The inclusion J -> R is monic by ModuleCat.mono_iff_injective. Injective.factors extends phi to psi:R -> M. Put m=psi(1). Linearity and the factorization identity give a*m=phi(a), hence a*tilde.toOpen M U(m)=a*s for every a in J.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At each x in U choose a in J outside x.asIdeal. On V=U intersect D(a), the scalar a acts injectively by Scheme.Modules.isSMulRegular_of_le_basicOpen. Restrict the preceding scalar equality and cancel a on V. TopCat.Presheaf.IsSheaf.section_ext therefore gives tilde.toOpen M U(m)=s. This proves global extension on every open, including the empty open where the local equality condition is vacuous.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a restriction U -> V in the opposite opens category, extend a section on V globally and restrict that global section to U. The equation tilde.toOpen_res verifies that it maps to the prescribed section on V. ModuleCat.epi_iff_surjective converts these surjections into the epi field of TopCat.Presheaf.IsFlasque.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-scheme-conventions"
+  "lem-pc-quasicoherent-open-section-ideal-extension"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 09T2, Lemma 36.8.1; affine equivalence between modules and quasi-coherent sheaves"
+  "place": "Tag 09T2, proof of Lemma 36.8.1, using Tag 01YB through the existing quasicoherent_open_section_ideal_extension theorem; affine coordinate conversion, injective factorization, local scalar cancellation and arbitrary-open restriction written in Lean by T2."
  },
  "mathlib_searches": [
   {
@@ -124,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T231538-L-1818258",
-  "kind": "interface",
+  "landing": "20261013T234522-L-2167580",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
