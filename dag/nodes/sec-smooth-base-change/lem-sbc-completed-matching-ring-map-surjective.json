@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-completed-matching-ring-map-surjective",
+ "kind": "statement",
+ "title": "CompletedMatchingRingMapSurjective",
+ "statement": "Let A be a Noetherian commutative local ring [def-weil-pbc-noetherian-ring], U the open consisting exactly of the points other than its closed point, and C its maximal-ideal completion. Let q:Y\\to U and s:E\\to\\operatorname{Spec} C be finite [def-weil-finite-integral-morphism], and D an overlap identification [def-sbc-punctured-completion-matching-sections]. The canonical map B\\otimes_A C\\to\\Gamma(E), with B the matching ring and map as in [def-sbc-completed-matching-ring-map], is surjective.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLH, 05ER (the comparison, kernel and cokernel arguments), 05EU (algebra structure)"
+ },
+ "stmt_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many generators f_i of the maximal ideal.\nTheir principal opens cover U\nby hU. The finite affine charts of q give B_i, and finite s gives B' = Γ(E).\nThe overlap isomorphism and the transition maps yield the gluing object of\nTag 05ER. The sheaf equalizer identifies its H⁰ with matchingRing. Completion\nis flat and is an isomorphism modulo the maximal ideal. In the proof of 05ER,\nthe localized comparison is invertible, and its cokernel is (Q,0,0,0), with\nQ maximal-ideal-power torsion. Lemma 15.91.8 lifts the extension of Q by\nH⁰ tensor_A C to an extension of Q by H⁰ over A. The resulting module has\ncanonical gluing object equal to the given one. Applying H⁰ and its canonical\nidentification forces Q = 0. Therefore H⁰ tensor_A C → B' is surjective.\nBy Tag 05EU this map is the algebra map completedRingMap, characterized by\nthe second projection and the C-structure. For empty U, A is Artinian and\ncomplete and the comparison is the identity; zero algebras satisfy the same\ncokernel argument. -/",
+   "uses": [
+    "def-sbc-completed-matching-ring-map",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-completed-matching-ring-map",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "H2",
+  "document": "Stacks Project",
+  "place": "Tags 05ER and 05EU, as applied in 0BLH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Matching finite algebras on the punctured local spectrum and its completion tensor comparison is bijective",
+   "results": "Eight hits about integral closure tensor products and products of localizations, all with different statements.",
+   "date": "2026-10-14",
+   "verdict": "No exact matching-sections comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Spec, IsPullback",
+   "results": "Unknown identifier Scheme.Spec; no hits.",
+   "date": "2026-10-14",
+   "verdict": "Local source search finds the affine pushout API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from matching sections tensor the completion to the completed finite algebra is injective and surjective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*matching|matching.*completion|completedMap",
+   "results": "msearch zero hits; local rg finds the current holed comparisons and matching construction, and Mathlib isPullback_SpecMap_pushout.",
+   "date": "2026-10-14",
+   "verdict": "No algebra comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completed matching-ring comparison: CompletedMatchingRingMapSurjective",
+   "via": [
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedMatchingRingMapSurjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.completedRingMap_surjective",
+  "statement": "theorem completedRingMap_surjective {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A] {U : (Spec (.of A)).Opens} (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A) {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q] {E : Scheme.{u}} {s : E ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s] (D : CompletionGluingData A U q E s) : Function.Surjective D.completedRingMap",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T162410-L-1519171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T162410-L-1519171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "def-sbc-completed-matching-ring-map",
+ "kind": "definition",
+ "title": "CompletedMatchingRingMap",
+ "statement": "Let A be a commutative local ring, C its maximal-ideal completion [def-weil-pbc-adic-completion], and D the matching-sections datum for U, q:Y\\to U and s:E\\to\\operatorname{Spec} C [def-sbc-punctured-completion-matching-sections]. Put B=D.matchingRing, with base map b:A\\to B and second projection p:B\\to\\Gamma(E). The completed matching-ring map B\\amalg_A C\\to\\Gamma(E) is the ring pushout map induced by p and the C-structure of E. The ring pushout is the tensor product B\\otimes_A C, dual to the affine scheme fibre product [def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BLH, 05ER (the comparison, kernel and cokernel arguments), 05EU (algebra structure)"
+ },
+ "stmt_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "H2",
+  "document": "Stacks Project",
+  "place": "Tags 05ER and 05EU, as applied in 0BLH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Matching finite algebras on the punctured local spectrum and its completion tensor comparison is bijective",
+   "results": "Eight hits about integral closure tensor products and products of localizations, all with different statements.",
+   "date": "2026-10-14",
+   "verdict": "No exact matching-sections comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Spec, IsPullback",
+   "results": "Unknown identifier Scheme.Spec; no hits.",
+   "date": "2026-10-14",
+   "verdict": "Local source search finds the affine pushout API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from matching sections tensor the completion to the completed finite algebra is injective and surjective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*matching|matching.*completion|completedMap",
+   "results": "msearch zero hits; local rg finds the current holed comparisons and matching construction, and Mathlib isPullback_SpecMap_pushout.",
+   "date": "2026-10-14",
+   "verdict": "No algebra comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso",
+  "date": "2026-10-14",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Completed matching-ring comparison: CompletedMatchingRingMap",
+   "via": [
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CompletedMatchingRingMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.completedRingMap",
+  "statement": "def completedRingMap : pushout D.baseMap (CommRingCat.ofHom (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ⟶ Γ(E, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T162410-L-1519171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T162410-L-1519171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

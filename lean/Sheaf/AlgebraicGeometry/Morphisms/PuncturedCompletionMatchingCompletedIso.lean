@@ -6,6 +6,8 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapInjective
+import Sheaf.AlgebraicGeometry.Morphisms.CompletedMatchingRingMapSurjective
 
 /-! # The completed comparison for matching sections
 
@@ -47,6 +49,30 @@ theorem completedMap_isIso
     {E : Scheme.{u}} {s : E ⟶ Spec
       (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]
     (D : CompletionGluingData A U q E s) :
-    IsIso D.completedMap := by sorry
+    IsIso D.completedMap := by
+  have hbij : Function.Bijective D.completedRingMap :=
+    ⟨D.completedRingMap_injective hU, D.completedRingMap_surjective hU⟩
+  have : IsIso D.completedRingMap :=
+    (ConcreteCategory.isIso_iff_bijective D.completedRingMap).mpr hbij
+  have : IsAffine E := isAffine_of_isAffineHom s
+  let H := isPullback_SpecMap_pushout D.baseMap (CommRingCat.ofHom
+    (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))
+  have heq : D.completedMap = E.toSpecΓ ≫ Spec.map D.completedRingMap ≫
+      H.isoPullback.hom := by
+    simp only [completedMap, modelMap, completionSpecMap]
+    apply pullback.hom_ext
+    · simp only [pullback.lift_fst, Category.assoc,
+        H.isoPullback_hom_fst]
+      rw [← Spec.map_comp]
+      simp only [completedRingMap, pushout.inl_desc]
+      rfl
+    · simp only [pullback.lift_snd, Category.assoc,
+        H.isoPullback_hom_snd]
+      rw [← Spec.map_comp]
+      simp only [completedRingMap, pushout.inr_desc]
+      rw [Spec.map_comp, ← Category.assoc, ← toSpecΓ_naturality, Category.assoc,
+        toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
+  rw [heq]
+  infer_instance
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
