@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
+import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Noetherianity and strict henselization
@@ -42,6 +44,28 @@ theorem isNoetherianRing_iff_isStrictHenselization
     [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K]
     [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) :
     IsNoetherianRing R ↔ IsNoetherianRing C := by
-  sorry
+  constructor
+  · intro hR
+    have := hR
+    obtain ⟨hn, _, hf⟩ := strictHenselization_completion_noetherian_faithfullyFlat R K C hC
+    let D := AdicCompletion ((IsLocalRing.maximalIdeal R).map (algebraMap R C)) C
+    have : IsNoetherianRing D := hn
+    have : Module.FaithfullyFlat C D := hf
+    exact Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat
+      (R := C) (A := D) (M := C)
+      (isNoetherian_of_linearEquiv (Algebra.TensorProduct.rid C D D).symm.toLinearEquiv)
+  · intro hCnoeth
+    have := hCnoeth
+    obtain ⟨p, hp, a, hs, ι, ⟨hc⟩, hρ⟩ := hC.triples_presentation R K C
+    let := a
+    have := hs
+    have hflat := AlgebraicGeometry.Scheme.strictHenselization_faithfullyFlat
+      (CommRingCat.of R) p hp K (CategoryTheory.Limits.Cocone.mk (CommRingCat.of C) ι)
+      hc (CommRingCat.ofHom (algebraMap R C)) hρ
+    have : Module.FaithfullyFlat R C :=
+      (RingHom.faithfullyFlat_algebraMap_iff).mp hflat
+    exact Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat
+      (R := R) (A := C) (M := R)
+      (isNoetherian_of_linearEquiv (Algebra.TensorProduct.rid R C C).symm.toLinearEquiv)
 
 end Algebra
