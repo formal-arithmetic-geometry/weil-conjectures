@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-module-finite-type-affine-capture",
+ "kind": "statement",
+ "title": "Finite-type capture on a compact open inside an affine open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $V$ an affine open, and $K\\subseteq V$ a quasi-compact open [def-weil-pbc-quasi-compact-scheme]. Let $H$ be a quasi-coherent module [def-weil-sheaf-of-modules-category, pqf-def-coherent] whose restriction to $K$ is of finite type [def-weil-pbc-module-finite-type-presentation]. There exists a quasi-coherent finite-type module $Q$ on $V$ and a monomorphism $\\iota:Q\\to H|_V$ such that $\\iota|_K$ is an isomorphism. No module on a larger union is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (label lemma-extend), proof: affine finite-numerator argument using Lemma 01PB (lemma-finite-type-module); read at https://stacks.math.columbia.edu/tag/01PF"
+ },
+ "proof": [
+  {
+   "text": "Identify the restriction of H to the affine open V with the associated module of its sections M. For each point of K choose a principal open D(f) contained in K. Finite type restricts to D(f); the affine criterion makes M_f finitely generated. Compactness of K gives a finite such cover.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite generating families for these localized modules and write each generator as m/f^n. Let N be the submodule of M spanned by all their numerators. For every cover member N_f -> M_f is injective by exactness of localization and surjective because its image contains each chosen generator. Associate sheaves and use the counit isomorphism to obtain a monomorphism Q -> H restricted to V. N is finitely generated, so Q is quasi-coherent and finite type.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inclusion is an isomorphism on the principal cover, hence on K: inverse images of sections glue uniquely, and injectivity follows by separation. Transfer to the slice site Over V. For empty K take the zero submodule and an empty generating family.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (label lemma-extend), proof: affine finite-numerator argument using Lemma 01PB (lemma-finite-type-module); read at https://stacks.math.columbia.edu/tag/01PF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module on an affine scheme has a finite type submodule equal to it on a quasi compact open where it is finite type",
+   "results": "Service unavailable: Internal Server Error. No absence verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent module of finite type on a quasi compact open extends to a finite type submodule on its union with an affine open",
+   "results": "LocalGeneratorsData, GeneratingSections and IsFiniteType results; no finite-type affine capture or union theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsheaf|finiteType.*submodule|finiteType.*affine",
+   "results": "Mathlib has no finite-type affine submodule capture; source FiniteTypeExtension is for ideal sheaves, not arbitrary modules.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineUnion",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine-union construction, finite-numerator steps 1 and 2",
+   "via": [
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineCapture",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeAffineCapture.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteType_affine_capture",
+  "statement": "theorem exists_finiteType_affine_capture\n    (X : Scheme.{u}) (V : X.affineOpens) (K : X.Opens)\n    (hK : IsCompact (K : Set X)) (hKV : K ≤ V.1)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent]\n    [(H.over K).IsFiniteType] :\n    ∃ Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V.1),\n      Q.IsQuasicoherent ∧ Q.IsFiniteType ∧ ∃ (ι : Q ⟶ H.over V.1),\n        Mono ι ∧ IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace)\n          (homOfLE hKV)).map ι)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T082355-L-1639702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T082355-L-1639702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
