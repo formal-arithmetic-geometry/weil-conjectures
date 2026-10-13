@@ -12086,3 +12086,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart (stage 3; reviewer PASS; first push; landing 20261013T111836-L-3046893 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/B4/Sheaf.AlgebraicGeometry.RelativeOpenDifferenceDiagram (stage 3; reviewer PASS; first push; landing 20261013T111836-L-3047119 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:18 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AlternatingCechSheafInsertionIdentities (stage 3; reviewer PASS; first push; landing 20261013T111837-L-3047262 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:18 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorSectionsSpan (stage 3; reviewer PASS; first push; landing 20261013T111837-L-3047444 (proof); batch 20261013T111833; modules 1; new nodes 0)
