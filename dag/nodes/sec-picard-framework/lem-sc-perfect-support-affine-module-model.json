@@ -16,36 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-open-derived-restriction-comparison] to restrict quasi-coherence and stalkwise support to U.toScheme. Perfectness restricts by intersecting its strictly-perfect neighbourhoods with U, restricting the bounded models and their finite-free retractions. Apply the shift homology isomorphism to restrict the same support condition to Eprime[k]. Identify the affine U with Spec of A using its affine presentation. The exact scheme-isomorphism transport and the localized-site equivalence preserve these properties.",
-   "uses": [
-    "lem-pc-open-derived-restriction-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use [lem-pc-affine-qcoh-derived-equivalence] followed by the inverse scheme and localized-site comparisons to obtain a full additive functor F. Use [lem-pc-perfect-affine-bounded-projective] on the restricted E to obtain P, its bounds and finite projective terms, and eP. For the restricted shifted target take its inverse-equivalence image M and the counit eM. No derived Hom annihilation is asserted or used.",
+   "text": "Construct F as mapDerivedCategory of the explicit affinePerfectSheafification. Prove tilde preserves monomorphisms by localization injectivity, then use its additive left adjoint structure to prove exactness; restriction and the over-site equivalence are exact. F is additive. Compose the affine derived equivalence and affine localized-site transport, including the full quasi-coherent inclusion, to obtain a full functor G. Their comparisons identify Q followed by G with Q of sheafification. Descend this comparison through localization to G isomorphic to F, and transfer fullness along it.",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-perfect-affine-bounded-projective"
+    "lem-pc-affine-localized-site-derived-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Under the exact associated-sheaf equivalence, cohomology of M is the module corresponding to the restricted cohomology sheaf. All its stalks on D(f|U) vanish. Its localization at f|U is therefore zero, so the localization zero criterion kills each module element by some power. Associated sheaf and both exact transports multiply sections by the image of the scalar, so their complex-level scalar identity passes through localization. Compose this identity with eP.hom to get the displayed compatibility for every global a. The empty affine has zero section ring and zero module categories, so the zero models and functor satisfy the same clauses.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply affine_open_perfect_source_model to F and mapDerivedCategoryFactors, obtaining P, its bounds, finite projective terms and eP. Independently apply affine_open_supported_target_model to the same F and comparison, obtaining M, elementwise torsion and eM. Neither lemma contains the other part of the conclusion.",
+   "uses": [
+    "lem-sc-affine-open-perfect-source-model",
+    "lem-sc-affine-open-supported-target-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package P, M, F, the proved Full and Additive instances, and the model witnesses. Apply affine_open_realization_scalar to the specific P and eP for each a. This gives the remaining displayed scalar equality.",
+   "uses": [
+    "lem-sc-affine-open-realization-scalar"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-derived-restriction-comparison",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-perfect-affine-bounded-projective"
+  "lem-pc-affine-localized-site-derived-transport",
+  "lem-sc-affine-open-perfect-source-model",
+  "lem-sc-affine-open-supported-target-model",
+  "lem-sc-affine-open-realization-scalar"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Y3",
+  "group": "X3",
   "date": "2026-10-13",
-  "note": "Stage-3 decomposition of the Stacks 08EJ affine proof; explicit model comparison and ring Hom induction are independent remaining tasks."
+  "note": "Compiling Lean reduction: exact realization, additivity and fullness proved; source, supported target and scalar comparison split into independent new statements."
  },
  "mathlib_searches": [
   {
@@ -144,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T082426-L-1652309",
+  "landing": "20261013T100220-L-2502922",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
