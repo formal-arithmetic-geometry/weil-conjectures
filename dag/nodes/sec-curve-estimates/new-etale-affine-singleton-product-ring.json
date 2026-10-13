@@ -1,0 +1,111 @@
+{
+ "id": "new-etale-affine-singleton-product-ring",
+ "kind": "statement",
+ "title": "Ring of an affine singleton product",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "statement": "Let $X$ be a scheme, $U,W$ affine objects of its small etale site, and $g:W\\to U$ a morphism [new-etale-affine-singleton-tensor-degree-comparison-hom-normalization]. For $n\\in\\mathbf N$ let $P$ be the product of $n+1$ copies of $W$ over $U$, let $A=\\Gamma(U,\\mathcal O_U)$, $B=\\Gamma(W,\\mathcal O_W)$, and $C=\\Gamma(P,\\mathcal O_P)$, with algebra structures induced by the structure maps. Then $P$ is affine and there is an $A$-linear equivalence $\\bigotimes_{k\\in\\operatorname{Fin}(n+1),A} B\\cong C$ taking an indexed pure tensor $(b_k)_k$ to $\\prod_k\\pi_k^*(b_k)$, where $\\pi_k:P\\to W$ is the $k$-th projection.",
+ "stmt_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I4 and 01JQ"
+ },
+ "proof": [
+  {
+   "text": "Proof: take affine spectrum charts for U and W.  For one factor the product is W\nand the single-factor indexed tensor power is B.  Add one factor at a time using\nSpec(B) × Spec(C) = Spec(B tensor C) over Spec(A).  Associativity of tensor products\nand the universal property of the indexed tensor product identify the resulting\nring with the indexed tensor power.  The binary spectrum formula identifies each\nprojection with the corresponding tensor-factor inclusion.  Multiplying those\ninclusions gives the displayed pure-tensor equation.  The spectrum charts also\nprove affineness.  The induction starts with one factor, including n = 0; the zero\nring and the empty affine scheme require no extra hypotheses.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 03P2 affine calculation expanded using the cited geometric lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ring of global sections of finite fiber product of affine schemes indexed tensor product",
+   "results": "Eight hits, including binary pullbackSpecIso; no indexed comparison.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.pullbackSpecIso",
+   "results": "Binary spectrum isomorphism and projection formulas.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "PiTensorProduct.*Spec|Spec.*PiTensorProduct",
+   "results": "Only TensorPower documentation; no indexed affine comparison.",
+   "date": "2026-10-13",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functions on affine fibre products and sections of pullbacks of quasi coherent modules as tensor products",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeKernel",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine proof of lem-sc-etale-affine-qcoherent: identify the singleton tensor-section Cech complex with the Amitsur complex.",
+   "via": [
+    "new-etale-affine-singleton-tensor-degree-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonProductRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonProductRing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonProduct_affine_ring",
+  "statement": "theorem singletonProduct_affine_ring\n    (X : Scheme.{u}) (U W : X.Etale) (g : W ⟶ U)\n    (hU : IsAffine U.left) (hW : IsAffine W.left) (n : ℕ) :\n    letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra\n    let P := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)\n    letI : Algebra Γ(U.left, ⊤) Γ(P.left.left, ⊤) := P.hom.left.appTop.hom.toAlgebra\n    IsAffine P.left.left ∧\n      ∃ e : (⨂[Γ(U.left, ⊤)] (_ : Fin (n + 1)), Γ(W.left, ⊤)) ≃ₗ[Γ(U.left, ⊤)]\n        Γ(P.left.left, ⊤),\n        ∀ b : Fin (n + 1) → Γ(W.left, ⊤),\n          e (PiTensorProduct.tprod Γ(U.left, ⊤) b) =\n            ∏ k : Fin (n + 1),\n              (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop (b k)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T095930-L-2451490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T095930-L-2451490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
