@@ -11,14 +11,14 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "## Proof, first sentence: \"the descent formula preserves this property through the common-stage colimit of [def-weil-pbc-qbar-category]\"; exact ambient scalar changes and coherence required for the condensed common-stage construction (source master TwoColimit supplies the actual condensed categories).",
+   "place": "Proof of thm-weil-pbc-qbar, first sentence: the descent formula preserves properties through the common-stage colimit; exact scalar changes, coherence, and colimit tensor identities are the required coefficient calculus.",
    "via": []
   },
   "same_as": []
  },
  "kind": "statement",
  "title": "Exact condensed coefficient changes and their derived tensor calculus",
- "statement": "Fix a prime $\\ell$ [def-weil-l-adic-numbers], an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-algebraic-closure], and a scheme $T$ [def-pc-scheme] whose underlying space is noetherian (every ascending chain of open subsets stabilizes). For finite intermediate fields $E\\subseteq\\Omega$ [def-weil-finite-subextension-directed-set], put $E_T^c=p_T^*C(-,E)$ using [def-weil-pbc-condensed-e-module-category]. Put $\\Omega_T^c=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ with image in one finite intermediate field. A module sheaf is constructible if it has a finite locally closed stratification on each stratum of which it is pro-etale locally the cokernel of a map between finite rank free modules over the restricted coefficient ring. For every finite $E\\subseteq F\\subseteq\\Omega$, the underlying $E_T^c$-module of $F_T^c$ is finite free of rank $[F:E]$. For $B=F_T^c$ or $B=\\Omega_T^c$, extension of scalars $B\\otimes_{E_T^c}-$ on all module sheaves is exact and left adjoint to exact restriction of scalars $U_{B/E}$. Its derived functor is computed by termwise tensor on any representing complex, preserves distinguished triangles and shifts, and has the natural adjunction $$\\operatorname{Hom}_{D(B)}(B\\otimes_{E_T^c}^L K,L)\\cong\\operatorname{Hom}_{D(E_T^c)}(K,U_{B/E}L).$$ For finite $E\\subseteq F\\subseteq G$ and also $G=\\Omega$, tensor multiplication gives natural comparisons $$G_T^c\\otimes_{F_T^c}^L(F_T^c\\otimes_{E_T^c}^L K)\\cong G_T^c\\otimes_{E_T^c}^L K.$$ Together with the unit comparison for $E=F$, these satisfy the unit and pentagon identities and the analogous identities for shifts. Under restriction to $E_T^c$-modules, tensor commutes with the coefficient colimit: if $\\Omega_T^c\\cong\\varinjlim_{F\\supseteq E}F_T^c$, then $\\varinjlim_{F\\supseteq E}(F_T^c\\otimes_{E_T^c}P)\\cong\\Omega_T^c\\otimes_{E_T^c}P$ naturally for every module sheaf $P$.",
+ "statement": "Fix a prime $\\ell$ [def-weil-l-adic-numbers], an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-algebraic-closure], and a scheme $T$ [def-pc-scheme] whose underlying space is noetherian (every ascending chain of open subsets stabilizes). For finite intermediate fields $E\\subseteq\\Omega$ [def-weil-finite-subextension-directed-set], put $E_T^c=p_T^*C(-,E)$ using [def-weil-pbc-condensed-e-module-category]. Put $\\Omega_T^c=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ with image in one finite intermediate field. Write $\\mathcal C_T^c(E)$ for the full bounded constructible subcategory of $D(\\operatorname{Mod}_{E_T^c})$ defined in [def-weil-pbc-condensed-e-module-category]: cohomology vanishes outside a finite interval, and each cohomology sheaf has a finite locally closed stratification on whose strata it is pro-etale locally the cokernel of a map between finite rank free coefficient modules. Define $\\mathcal C_T^c(\\Omega)$ by the identical condition with coefficient ring $\\Omega_T^c$. These are the master BoundedConstructible module-object categories, with no derived completeness condition. The adjunction below is on the ambient unbounded derived categories. For every finite $E\\subseteq F\\subseteq\\Omega$, the underlying $E_T^c$-module of $F_T^c$ is finite free of rank $[F:E]$. For $B=F_T^c$ or $B=\\Omega_T^c$, extension of scalars $B\\otimes_{E_T^c}-$ on all module sheaves is exact and left adjoint to exact restriction of scalars $U_{B/E}$. Its derived functor is computed by termwise tensor on any representing complex, preserves distinguished triangles and shifts, and has the natural adjunction $$\\operatorname{Hom}_{D(B)}(B\\otimes_{E_T^c}^L K,L)\\cong\\operatorname{Hom}_{D(E_T^c)}(K,U_{B/E}L).$$ For finite $E\\subseteq F\\subseteq G$ and also $G=\\Omega$, tensor multiplication gives natural comparisons $$G_T^c\\otimes_{F_T^c}^L(F_T^c\\otimes_{E_T^c}^L K)\\cong G_T^c\\otimes_{E_T^c}^L K.$$ Together with the unit comparison for $E=F$, these satisfy the unit and pentagon identities and the analogous identities for shifts. Under restriction to $E_T^c$-modules, tensor commutes with the coefficient colimit: if $\\Omega_T^c\\cong\\varinjlim_{F\\supseteq E}F_T^c$, then $\\varinjlim_{F\\supseteq E}(F_T^c\\otimes_{E_T^c}P)\\cong\\Omega_T^c\\otimes_{E_T^c}P$ naturally for every module sheaf $P$.",
  "source": {
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
   "place": "module docstring A0.2 and Flat section; derived transitivity in TwoColimit.lean ExtendScalars section; ordinary module tensor adjunction and associativity"
@@ -30,11 +30,144 @@
   "def-weil-pbc-condensed-e-module-category",
   "def-weil-size-convention",
   "def-weil-abstract-derived-category",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an $E$-basis $b_1,\\ldots,b_n$ of $F$, $n=[F:E]$. The map $E^n\\to F$, $(x_i)\\mapsto\\sum_i x_ib_i$, is a $\\mathbf Q_\\ell$-linear equivalence between finite-dimensional Hausdorff topological $\\mathbf Q_\\ell$-vector spaces. The completeness and nontrivial norm of $\\mathbf Q_\\ell$ in [def-weil-l-adic-numbers] meet the hypotheses of [lem-weil-pbc-finite-dimensional-linear-homeomorphism], so both this map and its coordinate inverse are continuous. Postcomposition on every profinite test set gives mutually inverse $\\underline E$-linear maps $C(-,E)^n\\cong C(-,F)$, commuting with restrictions. By the exact strong monoidal inverse image of [lem-weil-pbc-profinite-point-pullback], applying $p_T^*$ preserves this module isomorphism and finite direct sums. Hence $F_T^c\\cong(E_T^c)^n$ as $E_T^c$-modules. No claim that evaluation on arbitrary pro-etale objects preserves epimorphisms is used.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "A0.2 finite-basis argument; exact read-only master checkout Compatibility.lean lines 39-43"
+   }
+  },
+  {
+   "text": "Put $A=E_T^c$ and let $A\\to B$ be either coefficient inclusion. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to the identity geometric morphism of the pro-etale topos and ring map $A\\to B$: $B\\otimes_A-$ is left adjoint to scalar restriction $U_{B/A}$. Its unit is $p\\mapsto1\\otimes p$ and counit is $b\\otimes l\\mapsto bl$, induced from the balanced sectionwise maps and sheafification in [def-weil-presheaf-modules-sheafification]. By [lem-weil-pbc-module-sheaves-colimits-forgetful](1), exactness of a sequence of $A$- or $B$-modules is detected on the underlying abelian sheaves. Restriction changes only the action and is therefore exact. For finite $F/E$, the isomorphism from step 1 identifies the underlying $A$-module of $B\\otimes_A P$ with $P^n$; the tensor unit and additivity in [lem-pc-sheaf-modules-tensor-closed] justify this identification. Finite direct sums preserve short exact sequences in an abelian category (kernels and cokernels of a finite block diagonal map are the direct sums of the individual kernels and cokernels). Thus finite-stage scalar extension is exact.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ (lemma-adjointness-tensor-restrict), 03DA (lemma-abelian), 03EO (lemma-internal-hom-adjoint-tensor)"
+   }
+  },
+  {
+   "text": "For fixed finite $E$, use the small poset of finite $F\\supseteq E$, in the universes of [def-weil-size-convention]. It is nonempty and directed by composita as in [def-weil-finite-subextension-directed-set]; it is cofinal in all finite intermediate fields since $H\\subseteq EH$. On each profinite $S$, $\\underline\\Omega(S)$ is exactly the directed union of $C(S,F)$: a continuous map whose values lie in $F$ is continuous as an $F$-valued map since $F$ has its subspace topology. This union is already a sheaf on the finite-cover basis of $\\mathbf{Prof}$: finitely many sections to be glued lie in one compositum $H$, their equalities on overlaps hold as $H$-valued functions because the inclusions are injective, and the sheaf $C(-,H)$ supplies the unique glue. Consequently a compatible family of sheaf maps out of the finite stages defines a unique map out of this sectionwise union, proving the abelian-sheaf colimit universal property. By [lem-weil-pbc-profinite-point-pullback] and [lem-weil-pbc-left-adjoint-preserves-colimits], its image under the left adjoint $p_T^*$ is the colimit cocone $\\Omega_T^c=\\varinjlim_{F\\supseteq E}F_T^c$ in abelian sheaves. By [lem-weil-pbc-module-sheaves-colimits-forgetful](2),(3), the same cocone is the colimit in $A$-module sheaves: the $A$-action on it agrees with the given coefficient action since on each coprojection it is multiplication by the image of $A$, and the underlying colimit coprojections jointly detect morphisms.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-finite-subextension-directed-set",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "RingObj section, isColimitPadicAlgClRingObjCocone; master FiniteSubextension.lean module docstring and definition of the finite-intermediate-field-valued ring"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-module-filtered-colimits-tensor] to degree-zero complexes $F_T^c$ and $P$ on a small site equivalent to $T_{\\mathrm{proet}}$, as prescribed by [def-weil-size-convention]. Its degree-zero comparison and step 3 give $\\varinjlim_F(F_T^c\\otimes_A P)\\cong\\Omega_T^c\\otimes_A P$ in $A$-module sheaves, with the canonical maps induced by $F_T^c\\to\\Omega_T^c$. This proves the stated colimit-tensor comparison without any conditional preservation lemma. For a short exact sequence $0\\to P\\to Q\\to R\\to0$ of $A$-modules, step 2 gives a compatible filtered diagram of short exact sequences $0\\to F_T^c\\otimes_A P\\to F_T^c\\otimes_A Q\\to F_T^c\\otimes_A R\\to0$, all regarded as $A$-modules. Filtered colimits of these sequences are exact by [lem-pc-module-filtered-colimits-tensor]; alternatively this is [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] after applying the exact colimit-preserving forgetful functor [lem-weil-pbc-module-sheaves-colimits-forgetful](1),(3). The preceding tensor comparisons identify the resulting sequence with tensoring by $\\Omega_T^c$. Forgetful exactness detects exactness in $\\Omega_T^c$-modules as well. Therefore $\\Omega_T^c$ is flat over $A$ and its scalar-extension functor is exact. This is a sheaf-level argument, not a pointwise exactness assertion.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits), 03EP (lemma-tensor-commute-colimits), 03EU (lemma-colimits-flat), 03CO (lemma-limits-colimits-abelian-sheaves)"
+   }
+  },
+  {
+   "text": "Both scalar extension and restriction are additive exact functors by steps 2 and 4. Apply [lem-weil-pbc-exact-functor-derived-factorization] to each: their termwise complex functors invert quasi-isomorphisms and descend to triangulated functors with the stated shift comparisons. Apply [lem-weil-pbc-exact-functor-derived-functor](1) to identify the scalar-extension descent with its total left derived functor. Thus any representing complex, not merely a K-flat one, computes $B\\otimes_A^L K$, and it preserves distinguished triangles and all shifts. The shift identification in degree $r$ is the identity on $B\\otimes_A K^{r+n}$ with differential $(-1)^n(1\\otimes d_K^{r+n})$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); exact-functor localization and cone/shift comparisons"
+   }
+  },
+  {
+   "text": "The sheaf adjunction from step 2 gives a termwise adjunction on complexes: the formulas $\\eta_K^r(k)=1\\otimes k$ and $\\epsilon_L^r(b\\otimes l)=bl$ commute with differentials and satisfy the two triangle identities in each degree. After localization, use [lem-weil-pbc-localization-universal-property](2) to descend these natural transformations to $\\mathrm{id}\\to U_D T_D$ and $T_D U_D\\to\\mathrm{id}$, where $T_D$ and $U_D$ are the descended functors of step 5. Clause (3) detects equality on complexes, so the triangle identities remain valid. An adjunction is explicitly recovered: a morphism $f:T_DK\\to L$ is sent to $U_D(f)\\eta_K$, and $g:K\\to U_DL$ is sent to $\\epsilon_L T_D(g)$; the triangle identities make these maps mutually inverse. This gives the displayed derived Hom bijection and its naturality for all unbounded $K,L$, with no assumption that scalar restriction preserves bounded constructibility.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Localization universal property, Tags 05RR/05RU; exact adjunction descended by its unit and counit"
+   }
+  },
+  {
+   "text": "For ring sheaves $A\\to B\\to C$, define $\\alpha_P:C\\otimes_B(B\\otimes_A P)\\to C\\otimes_A P$ by $c\\otimes(b\\otimes p)\\mapsto cb\\otimes p$, and its inverse by $c\\otimes p\\mapsto c\\otimes(1\\otimes p)$. Each formula is additive and balanced over the indicated ring: the outer $B$-relation becomes $(cb_0)b=c(b_0b)$, and the inner $A$-relation becomes $(cb)a\\otimes p=cb\\otimes ap$; the inverse respects $A$-balancing because $ca\\otimes(1\\otimes p)=c\\otimes(a\\otimes p)=c\\otimes(1\\otimes ap)$. These sectionwise balanced maps commute with restriction, so the tensor definition [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification] give unique sheaf maps. Their composites are identities: on generators one composite fixes $c\\otimes p$, and the other sends $c\\otimes(b\\otimes p)$ to $cb\\otimes(1\\otimes p)=c\\otimes(b\\otimes p)$. Applying the same maps degreewise gives natural chain isomorphisms. For the coefficient tower, exactness from steps 2 and 4 allows their descent to the derived isomorphisms by [lem-weil-pbc-localization-universal-property](2). This treats finite $G$ and $G=\\Omega$ with the same formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (sheaf tensor construction), 03CY (sheafification-presheaf-modules); master TwoColimit.lean ExtendScalars section, derivedExtendScalarsCompIso"
+   }
+  },
+  {
+   "text": "The sheaf tensor coherence is supplied by [lem-pc-sheaf-modules-tensor-closed], which states that the site-module tensor and its canonical constraints form a symmetric monoidal category; equality of the specific scalar-transitivity maps is checked using the generators and sheafification universal property of step 7. The unit $A\\otimes_A P\\to P$ sends $a\\otimes p$ to $ap$, with inverse $p\\mapsto1\\otimes p$. Inserting this unit before or after $\\alpha$ has the same value $cb\\otimes p$: in the former case $c\\otimes(b\\otimes(a\\otimes p))$ maps to $cba\\otimes p$, and in the latter it maps to $cb\\otimes ap=cba\\otimes p$. For $A\\to B\\to C\\to D$, the two transitivity composites on $d\\otimes(c\\otimes(b\\otimes p))$ are $d\\otimes(cb\\otimes p)\\mapsto dcb\\otimes p$ and $dc\\otimes(b\\otimes p)\\mapsto(d c)b\\otimes p$. For one more coefficient ring $H$, every path around the pentagon sends $h\\otimes(d\\otimes(c\\otimes(b\\otimes p)))$ to $hdcb\\otimes p$ by associativity of ring multiplication. Naturality in $P\\to P\\prime$ holds because either route sends $c\\otimes(b\\otimes p)$ to $cb\\otimes f(p)$. These calculations specify maps out of the iterated presheaf tensor, and uniqueness of sheafification extends their equalities to the sheaf tensors; global sheaf sections are not asserted to be finite sums of global pure tensors. Finally these degreewise transformations commute with the identity shift comparisons of [lem-weil-pbc-exact-functor-derived-factorization]: in degree $r$, shifting by $n$ gives exactly the same multiplication on $p\\in P^{r+n}$ and both differentials carry the same sign $(-1)^n$. No coefficient factor has a nonzero cohomological degree, so no further Koszul sign occurs. By [lem-weil-pbc-localization-universal-property](2),(3), all unit, pentagon, naturality and shift equations descend, and equalities of descended transformations are detected on complexes. This establishes the required derived coherence, rather than assuming it from an equality of individual pure tensors in a derived category.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RR/05RU (derived localization); sites-modules.tex Tags 03EK, 03CY, 03EO; master TwoColimit.lean ExtendScalars comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-numbers",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-size-convention",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "A0.2 and Flat sections; explicit sheaf-level colimit, unit/counit and coherence proofs filling the sorried master inputs"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -84,10 +217,59 @@
    "results": "0 hits: ; ",
    "date": "2026-10-14",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact extension of scalars condensed p-adic module sheaves finite free",
+   "results": "CondensedMod.IsSolid, Condensed.profiniteSolid, Condensed.profiniteFree; no exact coefficient calculus",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-14",
+   "verdict": "generalization: ordinary modules only"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|padicSubfieldRingObjMap [Mathlib/Algebra/Category/ModuleCat]",
+   "results": "8 ordinary ModuleCat hits, no condensed coefficient theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|natTrans_ext",
+   "results": "12 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean; ",
+   "date": "2026-10-14",
+   "verdict": "supporting match: existing lem-weil-pbc-localization-universal-property already records these declarations; not a match for the full coefficient item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between functors out of a localization descend uniquely by fully faithful precomposition",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "1 hits: CategoryTheory.Localization.fullyFaithfulWhiskeringLeft; ",
+   "date": "2026-10-14",
+   "verdict": "supporting match: existing lem-weil-pbc-localization-universal-property already records these declarations; not a match for the full coefficient item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a localization functor is fully faithful on functor categories; natural transformations descend uniquely",
+   "results": "8 hits: CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor', CategoryTheory.Localization.full_whiskeringLeft, CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.Construction.NatTransExtension.app, CategoryTheory.Localization.whiskeringLeftFunctor'_eq, CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.uniq, CategoryTheory.Localization.fac, CategoryTheory.Localization.Construction.natTransExtension; ",
+   "date": "2026-10-14",
+   "verdict": "supporting match: existing lem-weil-pbc-localization-universal-property already records these declarations; not a match for the full coefficient item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "lean_audit": {
   "master": {
@@ -96,5 +278,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "worker": "stage1",
+  "summary": "Repair: remove all three new interface nodes; prove finite-stage freeness using continuity of basis coordinates, prove Omega flatness through exact filtered colimits of module sheaves, construct the derived adjunction via localized unit/counit, and verify all coherence diagrams before descent. Replace the incomplete constructible-category clause by the exact master BoundedConstructible full subcategory.",
+  "blueprint": "thm-weil-pbc-qbar proof: coefficient extension and comparison identities supporting common-stage descent; no change to the proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic site-module tensor and exact filtered-colimit calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic exact-functor, topological-vector-space or inverse-image calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic site-module tensor and exact filtered-colimit calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic site-module tensor and exact filtered-colimit calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor, topological-vector-space or inverse-image calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact-functor, topological-vector-space or inverse-image calculus used with its full stated hypotheses; no node of this coefficient item supplies this general result and no unit-route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-size-convention",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-6741e6f99",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-6741e6f99 (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, every cited node statement, and the exact master and Stacks sources. The mathematics and coefficient category/base-change morphism agree with the sources. One citation gap was repaired: step 1 now cites def-weil-pbc-condensed-e-module-category for the normed/topological coefficient-field structure it uses. Corrected DAG JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-condensed-flat-coefficient-calculus.json; review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
