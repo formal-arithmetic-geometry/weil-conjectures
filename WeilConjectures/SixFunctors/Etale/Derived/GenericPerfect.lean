@@ -139,6 +139,52 @@ theorem exists_dense_open_exactPairing {X : Scheme.{u}} [IsNoetherian X]
     have := isFiniteLocallyConstantSheaf_ihom_unit_of_flat (P'.X (-n)) (hP'f (-n))
     exact IsFiniteLocallyConstantSheaf.isConstructibleSheaf this
 
+omit [Finite Λ] in
+/-- On a nonempty noetherian scheme with a single point every constructible sheaf is finite
+locally constant: it is so on a dense open, which is the whole scheme. -/
+lemma isFiniteLocallyConstantSheaf_of_subsingleton {X : Scheme.{u}} [IsNoetherian X]
+    [Subsingleton X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf F] : IsFiniteLocallyConstantSheaf F := by
+  obtain ⟨U, hU, hUl⟩ := IsConstructibleSheaf.exists_dense_open F
+  by_cases hX : IsEmpty X
+  · exact IsFiniteLocallyConstantSheaf.of_isZero (Etale.isZero_sheaf_of_isEmpty _)
+  rw [not_isEmpty_iff] at hX
+  have hU' : (U : Set X) = Set.univ := by
+    obtain ⟨x, hx⟩ := hU.nonempty
+    exact Set.eq_univ_of_forall fun y ↦ Subsingleton.elim x y ▸ hx
+  have := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (𝟙 X) U.ι
+    (by simp [hU']) F
+  exact IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStarId _ X).app F)
+
+/-- **Perfectness at a point**: on a nonempty noetherian scheme with a single point (for
+instance the spectrum of a field), every object of `Dctf(X, Λ)` is dualizable. It is
+represented by a bounded complex of flat constructible, hence lisse flat, sheaves, which are
+dualizable (`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`). This is
+the geometric form of blueprint `lem-weil-coefficient-frobenius`: a finite-Tor point complex is
+perfect. -/
+theorem isDualizable_of_constructibleFiniteTor_of_subsingleton {X : Scheme.{u}} [IsNoetherian X]
+    [Subsingleton X]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) : IsDualizable K := by
+  obtain ⟨a, b, ⟨⟨hbc, -⟩, hta⟩⟩ :=
+    (exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor K).2 hK
+  obtain ⟨P, ⟨hPz, hPflat⟩, hPc, ⟨e⟩⟩ := (hasTorAmplitudeIn_iff_exists_flatConstructibleModel
+    Λ a (max a b) (le_max_left a b) K hbc).1
+    (hasTorAmplitudeIn_of_torAmplitudeIn (hta.mono le_rfl (le_max_right a b)))
+  have : CochainComplex.IsStrictlyGE P a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun i hi ↦ hPz i (.inl hi)
+  have : CochainComplex.IsStrictlyLE P (max a b) := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun i hi ↦ hPz i (.inr hi)
+  refine IsDualizable.of_iso e.symm (_root_.DerivedCategory.isDualizable_Q_obj P a (max a b)
+    fun n ↦ ?_)
+  have := hPc n
+  have := isFiniteLocallyConstantSheaf_of_subsingleton Λ (P.X n)
+  exact ⟨@HasRightDual.mk _ _ _ _ ((ihom (P.X n)).obj (𝟙_ _))
+    (letI := exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf (P.X n) (hPflat n);
+      BraidedCategory.exactPairing_swap _ _)⟩
+
 end Etale
 
 end AlgebraicGeometry
