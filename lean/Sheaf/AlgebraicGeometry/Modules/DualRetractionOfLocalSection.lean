@@ -6,6 +6,8 @@ Authors: SHEAF group K4
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import Sheaf.AlgebraicGeometry.InternalHomRestrictScheme
+import Sheaf.AlgebraicGeometry.Modules.DualRetractionKey
 
 @[expose] public section
 
@@ -32,6 +34,14 @@ theorem isSplitMono_restrict_dualMap_of_local_section
     {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)
     (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)
     (hs : s ≫ (restrictFunctor U.ι).map f = 𝟙 _) :
-    IsSplitMono ((restrictFunctor U.ι).map (dualMap f))  := by sorry
+    IsSplitMono ((restrictFunctor U.ι).map (dualMap f))  := by
+  let F := restrictFunctor U.ι
+  obtain ⟨e, he⟩ := internalHom_restrict_scheme U
+  let r : F.obj (dual P) ⟶ F.obj (dual Q) :=
+    (e P (SheafOfModules.unit X.ringCatSheaf)).hom ≫
+      SheafOfModules.homObjMap (R := U.toScheme.toRingedSpace.sheaf) s (𝟙 _) ≫
+      (e Q (SheafOfModules.unit X.ringCatSheaf)).inv
+  refine IsSplitMono.mk ⟨⟨r, ?_⟩⟩
+  exact dual_retraction_key f U s e hs
 
 end AlgebraicGeometry.Scheme.Modules

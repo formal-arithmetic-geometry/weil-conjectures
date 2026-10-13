@@ -13445,3 +13445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:15 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-d76fc, head d76fc4358) C5/G1: In lean/Sheaf/Algebra/Homology/FlatIteratedScalarExtensionHomologySquare.lean:)
 - 20:17 L: returned deliver/Y3/Sheaf.Paper.CupCechTotalCochainPairing (reviewer RETURN: (the landing tools, head 35e975263) the delivery did not land: lean/Sheaf/Paper/CupCechTotalCochainPairing.lean changed )
 - 20:17 L: merged deliver/A2/Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTransposePasting (stage 3; reviewer PASS; first push; landing 20261013T201738-L-3965222 (interface); batch 20261013T201736; modules 4; new nodes 5)
+- 20:17 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Modules.DualRetractionOfLocalSection (stage 3; reviewer PASS; first push; landing 20261013T201738-L-3965382 (interface); batch 20261013T201736; modules 2; new nodes 1)
