@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-e4-affine-restricted-twist-fixed-degree",
+ "kind": "statement",
+ "title": "Fixed-degree affine-local twist cohomology vanishing",
+ "statement": "Let S be Noetherian [pqf-def-locnoeth], f:X -> S proper [def-weil-proper-morphism], F a quasi-coherent coherent module [pqf-def-coherent], L invertible [def-sc-invertible-module], and V an affine open of S such that L restricted to f inverse-image V is ample [def-weil-pbc-ample-invertible-module]. Fix a natural number q>0. There exists n0 in N such that for every n>=n0 the degree-q module cohomology [pqf-def-cohomology] of (F tensor L^n) restricted to f inverse-image V is zero. The restriction and tensor powers have their ordinary meanings; only one positive cohomological degree is fixed, and no higher direct image or threshold uniform in degree occurs in the conclusion.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 0B5T (4), proof by residue classes, applied in Tag 02O1 after restricting to an affine base"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to Y=f inverse-image V and g:Y -> V. Properness is stable under base change; V is affine Noetherian. Restriction preserves coherence and the given hypothesis supplies an ample invertible module. Identify V with Spec of its sections.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a positive power d of the ample module and an immersion into projective space over the affine Noetherian base. Since the source is proper and projective space separated, the immersion is proper and hence closed. For each residue r<d the coefficient F restricted tensor the rth power of L restricted is coherent: locally the invertible factor is trivial. Over the locally Noetherian source this coefficient is quasi-coherent and finitely presented. Apply the Noetherian-ring closed-immersion Serre theorem to this coefficient and i^*O(t). Tensor exponent laws and the isomorphism L^d = i^*O(1) identify that twist with F tensor L^(dt+r). Its fixed degree-q cohomology vanishes for t above the residue threshold. A finite maximum T of the residue thresholds gives threshold d*T, since division of n>=d*T by d yields n=dt+r with t>=T.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-serre-vanishing",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open restriction commutes with tensor products and tensor powers. Transport vanishing to the restricted ambient twist by this coefficient isomorphism. If the source is empty all cohomology objects are zero, so choose threshold zero.",
+   "uses": [
+    "def-sc-tensor-power-open-restriction-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "lem-pc-proper-base-change",
+  "lem-pc-twist-tensor",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-closed-immersion-serre-vanishing",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-over-separated",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 0B5T, proof of (4), and Tag 02O1, affine-local reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre.*vanishing|exists_isZero_moduleCohomology_tensorPow",
+   "date": "2026-10-13",
+   "results": "No Mathlib match; existing Sheaf CoherentSerreVanishing and source Cohomology.Serre are cyclic as Lean imports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed positive cohomology degree sufficiently high ample twists of a coherent module have zero cohomology",
+   "date": "2026-10-13",
+   "results": "Eight results on derived-category degree bounds, no ample twisting theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre vanishing fixed positive degree ample coherent sheaf",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsZero",
+   "date": "2026-10-13",
+   "results": "Only isZero_ellAdicSheaf_of_isEmpty, no match."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*cohomology|cohomology.*ample|tensorPow.*IsZero",
+   "date": "2026-10-13",
+   "results": "Second reader: no Mathlib match. Source Cohomology.Serre projective theorem assumes a field; the ring-general ClosedImmersionSerreVanishing theorem is the appropriate planned residue-class input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenTwistVanishingIndependent",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 02O5 proof, graph twist step: fixed-degree Serre vanishing on each affine inverse image, before finite degree and affine-cover maxima",
+   "via": [
+    "lem-pc-q3-affine-open-twist-vanishing-independent",
+    "lem-pc-m1-projective-graph-twist-vanishing",
+    "lem-pc-q2-chow-twist-finite-cohomology",
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRestrictedTwistVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRestrictedTwistVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_restricted_twist_moduleCohomology_degree",
+  "statement": "theorem exists_isZero_restricted_twist_moduleCohomology_degree\n    {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f]\n    (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (L : X.Modules) [L.IsInvertible] (V : S.Opens) (hV : IsAffineOpen V)\n    (hL : ∃ h : (L.restrict (f ⁻¹ᵁ V).ι).IsInvertible,\n      @IsAmple (f ⁻¹ᵁ V).toScheme (L.restrict (f ⁻¹ᵁ V).ι) h)\n    (q : ℕ) (hq : 0 < q) :\n    ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n →\n      IsZero ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace q).obj\n        ((F ⊗ L.tensorPow n).restrict (f ⁻¹ᵁ V).ι))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T095945-L-2455972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T095945-L-2455972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

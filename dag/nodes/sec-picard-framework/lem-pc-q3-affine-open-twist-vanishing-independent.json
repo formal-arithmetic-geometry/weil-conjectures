@@ -18,43 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Restrict the proper morphism to the specified affine open V. Its base is affine Noetherian and its source locally Noetherian. Restriction preserves coherence and quasi-coherence. The hypothesis supplies the ample invertible restriction of L. Apply affine-base Serre vanishing to F restricted to this source. A finite affine cover of the quasi-compact separated source bounds all quasi-coherent cohomology by its Cech complex; take the maximum of the bounds in the finitely many positive degrees. The empty source gives threshold zero.",
+   "text": "The acyclic local uniform qcqs degree-bound theorem gives a neighborhood and a coefficient-independent bound at each point of the affine base V. Compactness gives a finite subcover; its finite maximum gives a global coefficient-independent degree bound d for the restricted morphism. Apply fixed-degree affine Serre vanishing to the restrictions of F and L in each positive degree below d. Degree zero imposes no condition. Take the sum of these finitely many twist thresholds; this sum dominates each threshold.",
    "uses": [
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-coherent-serre-vanishing"
+    "lem-pc-e4-affine-restricted-twist-fixed-degree",
+    "lem-pc-local-uniform-higher-direct-image-bound"
    ],
    "elementary": false
   },
   {
-   "text": "The affine-base comparison identifies module cohomology with sections of each higher direct image. Higher images are quasi-coherent; the affine tilde/global-sections correspondence detects the zero module from zero sections. Thus the higher images over V vanish with that threshold.",
+   "text": "For degrees at least the bound, use the coefficient-independent higher-direct-image bound just constructed. In the remaining positive degrees compare module cohomology with source H and affine sections of the higher direct image. Quasi-coherence follows from the qcqs higher-image theorem. Restrict the higher image along the affine base isomorphism to Spec of its global sections; the tilde counit shows it is zero because its global sections are zero. Restrict back along the inverse isomorphism.",
    "uses": [
+    "lem-sc-module-cohomology-source-comparison",
     "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-finite-support-hi",
+    "lem-pc-sections-higher-direct-image-quasi-coherent",
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction of derived direct image to V and exactness of open restriction identify these higher images with the restrictions in the conclusion. Restriction commutes with tensor products and powers; transport the vanishing along these isomorphisms. This is only a statement for one affine open; no global threshold is chosen.",
+   "text": "The ordinary higher-direct-image open-restriction isomorphism transports this vanishing to the original higher image restricted to V.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-higher-direct-image-open-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-base-change",
-  "lem-weil-pbc-coherent-serre-vanishing",
   "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-finite-support-hi",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-e4-affine-restricted-twist-fixed-degree",
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-pc-local-uniform-higher-direct-image-bound",
+  "lem-pc-sections-higher-direct-image-quasi-coherent",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, coherent.tex",
-  "place": "Tag 02O1, Lemma 30.16.2, affine-local proof; Tag 0B5T (4), with the finite Cech cohomological-degree bound",
-  "note": "Extracted strictly the affine-local part of Tag 02O1. The existing RelativeSerreVanishing and CoherentSerreVanishing module imports reach the parent graph-vanishing item through proper coherence and cannot be imported here; the proof must use an independent acyclic implementation of the stated affine Serre step."
+  "document": "Stacks Project, Tags 02O1, 0B5T, 01XJ, 01E1",
+  "place": "Affine-local vanishing; fixed-degree thresholds combined using finite support",
+  "note": "E4 reduction: one fixed-degree cohomology hole; the finite maximum, affine zero detection and ordinary open restriction are proved in Lean. The original CoherentSerreVanishing import is cyclic."
  },
  "mathlib_searches": [
   {
@@ -174,9 +176,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T082406-L-1645201",
+  "landing": "20261013T095945-L-2455972",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
