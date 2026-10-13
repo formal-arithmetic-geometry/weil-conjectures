@@ -17,37 +17,37 @@
  },
  "proof": [
   {
-   "text": "On the upper tail of j, pass to the partial-order quotient. The inverse images of the selected chart are affine by stability of affine morphisms under base change. Their rings are the chart ring tensored with the base-ring system; the ring at the limit is their filtered colimit. Under the affine module equivalence, restrict Fj and Gj to finitely presented modules and identify all further pullbacks with extension of scalars. The limit restriction of φ becomes a map of their scalar extensions.",
+   "text": "Restrict Fj and Gj to the supplied affine chart by ordinary module pullback. The proved source-library pullback instances preserve finite presentation and quasi-coherence. Conjugate the limit restriction of phi by the direct cover tensor comparison to give an ordinary chart map psi.",
    "uses": [
-    "def-pc-fibre-product",
-    "pqf-def-coherent"
+    "pqf-def-coherent",
+    "def-pc-open-cover-tensor-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the map clause of ModuleCat.finitePresentation_descent_directedColimit to these fixed chart modules. Transport its stage map back through the affine module equivalence. Naturality of restriction and the canonical extension-of-scalars composition comparison identify the commuting square with the stated equation using tensorPullbackCompositionIso and openCoverTensorPullbackComparison. The nonempty upper tail supplied by j, empty charts and zero modules cause no exception.",
+   "text": "Apply affine_chart_ordinary_map_descent to those two chart modules and psi to obtain k, j <= k, an ordinary stage chart map s and its ordinary recovery equation. The cone naturality and baseChangeMap_comp establish the ambient triangle. Conjugate s by the stage cover comparison, giving an explicit r. Apply chart_tensor_pullback_lift_transport to the triangle and the recovery equation for s. This is the desired equation for r; construct the required existential witnesses.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine",
-    "def-pc-tensor-pullback-composition-iso",
-    "def-pc-open-cover-tensor-pullback-comparison"
+    "lem-pc-affine-chart-ordinary-map-descent",
+    "lem-pc-chart-tensor-pullback-lift-transport",
+    "def-pc-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
+  "def-pc-base-change",
   "def-pc-open-cover-tensor-pullback-comparison",
-  "def-pc-tensor-pullback-composition-iso",
-  "lem-pc-fp-module-map-descent-affine",
+  "lem-pc-affine-chart-ordinary-map-descent",
+  "lem-pc-chart-tensor-pullback-lift-transport",
   "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C4",
+  "group": "F4",
   "date": "2026-10-14",
   "document": "Stacks Project",
-  "place": "Tag 01ZR, first proof, affine case; Tag 05N7 (2); the finite-stage lifting part of lem-pc-rf-perfect-base-change, Noetherian approximation",
-  "note": "The source gives the affine argument and functorial pullback. The displayed canonical-comparison details are expanded by C4; source read online at the cited tag pages."
+  "place": "Tags 01ZR, 05N7 (2), 0095 and 0096",
+  "note": "Lean reduction separates ordinary affine Hom descent from finiteness-free canonical comparison transport. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -127,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "X-2d627",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T172652-L-2098293",
+  "landing": "20261013T201748-L-3969017",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
  }
 }

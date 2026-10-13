@@ -1,0 +1,102 @@
+{
+ "id": "def-pc-chart-ordinary-map-recovery",
+ "kind": "definition",
+ "title": "Ordinary recovery equation on iterated pullback charts",
+ "statement": "For scheme morphisms q:Y to X, p:Z to Y and q0:Z to X with p composed with q equal to q0 [def-pc-scheme], an open cover U of X, an index a, modules M,N on U(a), a map psi between their ordinary pullbacks on the direct chart over Z, and a map s between their ordinary pullbacks on the chart over Y, chartOrdinaryMapRecovery means the following equation. Let Uk=U pulled back along q, V=Uk pulled back along p and W=U pulled back along q0. The canonical pullback lift v:V(a) to W(a) has projections V(a) to Z and the composite chart projection V(a) to U(a) [def-pc-fibre-product]. Write d for pullbackComp for v and the direct chart projection, followed by pullbackCongr of its second projection equation and the inverse of pullbackComp for the two successive chart projections. The predicate is d inverse at M composed with the v-pullback of psi composed with d at N equals the chart pullback of s. This is a constructed equation, with no existence assertion or choice of a module map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096; explicit comparison equation from the affine case of Tag 01ZR expanded by F4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096",
+  "note": "Real construction of the ordinary pullback recovery equation; irreducible to avoid repeated elaboration of adjunction comparison terms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Recovery of an ordinary sheaf module map on iterated pullback charts by pullback composition isomorphisms",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "Found Scheme.Modules.pullbackComp, pseudofunctor_associativity and conjugateEquiv_pullbackComp_inv. These supply ordinary composition but do not define the chart recovery equation.",
+   "date": "2026-10-14",
+   "verdict": "No exact recovery predicate; construct it from these comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackCongr",
+   "results": "Mathlib pullback composition and congruence definitions found; no chartOrdinaryMapRecovery. The source comparisons are used in the actual construction.",
+   "date": "2026-10-14",
+   "verdict": "No exact recovery predicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStage",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tags 0095 and 0096, functoriality and composition of pullback; categorical coherence expanded by F4",
+   "via": [
+    "lem-pc-fp-one-chart-map-lift-at-stage",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChartOrdinaryMapRecovery",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartOrdinaryMapRecovery.lean",
+  "declaration": "AlgebraicGeometry.chartOrdinaryMapRecovery",
+  "statement": "def chartOrdinaryMapRecovery\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)\n    (M N : (U.X a).Modules)\n    (ψ : (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj M ⟶\n      (Scheme.Modules.pullback (U.pullbackHom q₀ a)).obj N)\n    (s : (Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n      (Scheme.Modules.pullback (U.pullbackHom q a)).obj N) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
+ }
+}

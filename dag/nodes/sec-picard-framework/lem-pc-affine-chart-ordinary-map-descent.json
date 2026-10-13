@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-affine-chart-ordinary-map-descent",
+ "kind": "statement",
+ "title": "Ordinary Hom descent for fixed modules on an affine chart",
+ "statement": "Let I be a directed preorder, R a functor from I to commutative rings and c a limit cone of its opposite Spec diagram with affine vertex. Fix i <= j, a morphism f from Xi to Spec R(i), an open cover U of Xj = Xi times over Spec R(i) Spec R(j), and a selected affine chart U(a) [def-pc-scheme, def-pc-base-change]. Let M,N be finitely presented quasi-coherent modules on U(a) [pqf-def-coherent]. Let q0 be the induced map from the limit base change X to Xj and let psi be a morphism between the ordinary pullbacks of M,N along the chart projection from (U pulled back along q0)(a). There is k >= j and a map s between their ordinary pullbacks on (U pulled back to Xk)(a). On the iterated chart over X, the further ordinary pullback of s equals the pullback of psi along the canonical map v to the direct limit chart, conjugated by the ordinary composition comparison d. Here v has first projection the iterated chart map to X and second projection the composite of the two chart projections to U(a); d is pullbackComp for v and the direct chart projection, followed by pullbackCongr of its second-projection equation and the inverse of pullbackComp for the two successive chart projections. No ambient sheaves or tensor comparison occur in this assertion. The ordinary recovery predicate is the explicitly defined equation [def-pc-chart-ordinary-map-recovery].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-chart-ordinary-map-recovery"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01ZR, affine first proof, and 05N7 (2)"
+ },
+ "proof": [
+  {
+   "text": "Restrict to the upper tail of j and its partial-order quotient. Pull back the selected affine chart to each stage and to the cone vertex. Affine base change and pullback pasting identify these affine schemes with the base changes of the fixed chart over Spec R(j). Their coordinate rings are the chart ring tensored with the base rings, and the limit chart ring is their filtered colimit. Quasi-coherent sheaves identify with modules over these rings, finite presentation passes to global sections, and ordinary sheaf pullback identifies with scalar extension.",
+   "uses": [
+    "def-pc-fibre-product",
+    "pqf-def-coherent",
+    "def-pc-chart-ordinary-map-recovery"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the map clause of finitePresentation_descent_directedColimit to the fixed chart modules. Its pure-tensor normalization identifies the resulting comparison with ordinary pullback composition. Transport the stage map back through the fully faithful affine sheaf functor. Pull back its recovery equation along the canonical pullback lift v. The second projection of v gives d and the displayed equality. The upper tail is nonempty because it contains j; quotienting equivalent indices preserves the diagram colimit. Empty charts and zero modules require no exception.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-chart-ordinary-map-recovery",
+  "def-pc-fibre-product",
+  "lem-pc-fp-module-map-descent-affine",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 01ZR, affine first proof, and 05N7 (2)",
+  "note": "Source tags read online; explicit pullback comparison normalization expanded by F4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation morphisms of quasi coherent modules descend along affine inverse limits",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between finitely presented quasi coherent modules on an affine inverse limit descend to a finite stage",
+   "results": "Ring-section limit lemmas in AffineTransitionLimit and local presentation lemmas; no exact Hom descent theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*descent|pullbackComp.*assoc|leftAdjointCompIso_assoc in both library roots and Mathlib modules and pullback files",
+   "results": "Sheaf.Algebra.FinitePresentationColimit supplies algebraic Hom descent; Modules.FiniteDescent supplies pullback finite presentation; Scheme.Modules.pseudofunctor_associativity gives ordinary associativity. No exact ordinary chart descent or mixed tensor chart transport statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStage",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tags 01ZR, affine first proof, and 05N7 (2)",
+   "via": [
+    "lem-pc-fp-one-chart-map-lift-at-stage",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartOrdinaryMapDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartOrdinaryMapDescent.lean",
+  "declaration": "AlgebraicGeometry.affine_chart_ordinary_map_descent",
+  "statement": "theorem affine_chart_ordinary_map_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    (a : U.I₀) (ha : IsAffine (U.X a))\n    (M N : (U.X a).Modules)\n    (hM : M.IsFinitePresentation) (hMq : M.IsQuasicoherent)\n    (hN : N.IsFinitePresentation) (hNq : N.IsQuasicoherent)\n    (ψ : (Scheme.Modules.pullback\n          (U.pullbackHom (baseChangeMap f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) a)).obj M ⟶\n        (Scheme.Modules.pullback\n          (U.pullbackHom (baseChangeMap f\n            (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n            (T' := Over.mk (c.π.app (op i)))\n            (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))) a)).obj N) :\n    ∃ (k : I) (hjk : j ≤ k),\n      let q := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let p := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))\n      let q₀ := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n      let w : p ≫ q = q₀ := by\n        rw [← baseChangeMap_comp]\n        congr 1\n        ext\n        simpa using c.w (homOfLE hjk).op\n      ∃ s : (Scheme.Modules.pullback (U.pullbackHom q a)).obj M ⟶\n          (Scheme.Modules.pullback (U.pullbackHom q a)).obj N,\n        chartOrdinaryMapRecovery q p q₀ w U a M N ψ s",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
+ }
+}

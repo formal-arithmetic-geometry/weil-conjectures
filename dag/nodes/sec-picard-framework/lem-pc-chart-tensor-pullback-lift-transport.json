@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-chart-tensor-pullback-lift-transport",
+ "kind": "statement",
+ "title": "Ordinary-to-tensor transport of a chart lift for a scheme triangle",
+ "statement": "Let q:Y to X, p:Z to Y and q0:Z to X be scheme morphisms with p composed with q equal to q0, let U be an open cover of X, a an index, F,G arbitrary modules on X, and phi a morphism between their tensor pullbacks along q0 [def-pc-scheme, def-pc-tensor-pullback-composition-iso]. Write Uk for the cover pulled back along q, V for Uk pulled back along p, and W for U pulled back along q0. Let v:V(a) to W(a) be the pullback lift with projections V(a) to Z and the composite chart projection V(a) to U(a). Let d be the ordinary pullback composition comparison obtained from v's second-projection equation. Let psi be restriction of phi conjugated by openCoverTensorPullbackComparison for q0 [def-pc-open-cover-tensor-pullback-comparison]. Suppose an ordinary map s between the stage pullbacks of the restrictions of F,G to U(a) has further pullback equal to the v-pullback of psi conjugated by d. Conjugate s by openCoverTensorPullbackComparison for q to give r on Uk(a). Then r satisfies the recovery equation on V(a) using openCoverTensorPullbackComparison for p and tensorPullbackCompositionIso for the triangle. No affine, finite-presentation, quasi-coherence, directed-index or limit assumption is required. The ordinary recovery predicate is the explicitly defined equation [def-pc-chart-ordinary-map-recovery].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-chart-ordinary-map-recovery"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality and composition of pullback; categorical coherence expanded by F4"
+ },
+ "proof": [
+  {
+   "text": "Use the unique left-adjoint comparison to identify each tensor pullback with ordinary pullback to the same pushforward. The tensor composition comparison is the mate of pushforward composition, and the cover comparison is ordinary composition followed by that same left-adjoint comparison.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "def-pc-open-cover-tensor-pullback-comparison",
+    "def-pc-chart-ordinary-map-recovery"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback lift v has second projection the composite chart projection. Ordinary pullback associativity and the naturality of pullbackCongr identify the comparisons around this cartesian triangle. Transport ordinary associativity through the left-adjoint comparisons (equivalently apply leftAdjointCompIso_assoc to the pushforward composition comparisons). Naturality moves s through the stage comparison; substitute its supplied recovery equation and cancel adjacent inverse isomorphisms. The remaining composite is precisely the asserted tensor recovery equation, including identity morphisms, empty schemes and zero modules.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-chart-ordinary-map-recovery",
+  "def-pc-fibre-product",
+  "def-pc-open-cover-tensor-pullback-comparison",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 0095 and 0096, functoriality and composition of pullback; categorical coherence expanded by F4",
+  "note": "Source tags read online; explicit pullback comparison normalization expanded by F4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation morphisms of quasi coherent modules descend along affine inverse limits",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of ordinary and tensor pullback composition and restriction to a base changed open cover",
+   "results": "Scheme.Pullback projection equations for open covers; no mixed ordinary/tensor sheaf chart lift coherence theorem. Existing OpenCoverMapLiftTransport handles persistence of an already tensor-coordinate lift, not this ordinary-to-tensor transport.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*descent|pullbackComp.*assoc|leftAdjointCompIso_assoc in both library roots and Mathlib modules and pullback files",
+   "results": "Sheaf.Algebra.FinitePresentationColimit supplies algebraic Hom descent; Modules.FiniteDescent supplies pullback finite presentation; Scheme.Modules.pseudofunctor_associativity gives ordinary associativity. No exact ordinary chart descent or mixed tensor chart transport statement.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStage",
+  "date": "2026-10-14",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tags 0095 and 0096, functoriality and composition of pullback; categorical coherence expanded by F4",
+   "via": [
+    "lem-pc-fp-one-chart-map-lift-at-stage",
+    "lem-pc-fp-one-chart-map-lift",
+    "lem-pc-fp-local-map-lifts",
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartTensorPullbackLiftTransport.lean",
+  "declaration": "AlgebraicGeometry.chart_tensor_pullback_lift_transport",
+  "statement": "theorem chart_tensor_pullback_lift_transport\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)\n    (F G : X.Modules)\n    (φ : (Scheme.Modules.tensorPullback q₀).obj F ⟶\n      (Scheme.Modules.tensorPullback q₀).obj G) :\n      let Uk : Y.OpenCover.{u} := U.pullback₁ q\n      let V : Z.OpenCover.{u} := Uk.pullback₁ p\n      let W : Z.OpenCover.{u} := U.pullback₁ q₀\n      let t₀ := Scheme.Modules.openCoverTensorPullbackComparison q₀ U a\n      let ψ := t₀.hom.app F ≫ (Scheme.Modules.pullback (W.f a)).map φ ≫ t₀.inv.app G\n      ∀ s : (Scheme.Modules.pullback (U.pullbackHom q a)).obj\n          ((Scheme.Modules.pullback (U.f a)).obj F) ⟶\n        (Scheme.Modules.pullback (U.pullbackHom q a)).obj\n          ((Scheme.Modules.pullback (U.f a)).obj G),\n        chartOrdinaryMapRecovery q p q₀ w U a\n          ((Scheme.Modules.pullback (U.f a)).obj F)\n          ((Scheme.Modules.pullback (U.f a)).obj G) ψ s →\n        let tq := Scheme.Modules.openCoverTensorPullbackComparison q U a\n        let r := tq.inv.app F ≫ s ≫ tq.hom.app G\n        let tp := Scheme.Modules.openCoverTensorPullbackComparison p Uk a\n        let e := Scheme.Modules.tensorPullbackCompositionIso p q q₀ w\n        tp.inv.app ((Scheme.Modules.tensorPullback q).obj F) ≫\n            (Scheme.Modules.pullback (Uk.pullbackHom p a)).map r ≫\n            tp.hom.app ((Scheme.Modules.tensorPullback q).obj G) =\n          (Scheme.Modules.pullback (V.f a)).map\n            (e.inv.app F ≫ φ ≫ e.hom.app G)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2d627",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T201748-L-3969017",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records; all four modules and direct importer Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift compile without warnings; axiom checks match the two reported sorry lemmas."
+ }
+}

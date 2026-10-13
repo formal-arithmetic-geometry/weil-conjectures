@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.AffineChartOrdinaryMapDescent
+import Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # A lift at one stage on one affine chart
 
@@ -21,8 +23,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
+attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
+  Scheme.Modules.openCoverTensorPullbackComparison
+
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- A restricted limit morphism lifts at one stage of the affine chart system.
 Source: Stacks Project, Tag 01ZR, first proof; Tag 05N7 (2).
 (blueprint: lem-pc-fp-one-chart-map-lift-at-stage).
@@ -111,6 +117,47 @@ theorem finitePresentation_one_chart_map_lift_at_stage
         t.inv.app (A.obj Fj) ≫ (Scheme.Modules.pullback
           (U.pullbackHom p a)).map r ≫ t.hom.app (A.obj Gj) =
         (Scheme.Modules.pullback (V.f a)).map
-          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj) := by sorry
+          (e.inv.app Fj ≫ φ ≫ e.hom.app Gj) := by
+  let q₀ := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (c.π.app (op i)))
+    (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))
+  let W := Uj.pullback₁ q₀
+  let t₀ := Scheme.Modules.openCoverTensorPullbackComparison q₀ Uj a
+  let M := (Scheme.Modules.pullback (Uj.f a)).obj Fj
+  let N := (Scheme.Modules.pullback (Uj.f a)).obj Gj
+  let ψ := t₀.hom.app Fj ≫ (Scheme.Modules.pullback (W.f a)).map φ ≫ t₀.inv.app Gj
+  have : Fj.IsFinitePresentation := hF
+  have : Gj.IsFinitePresentation := hG
+  have : Fj.IsQuasicoherent := hFq
+  have : Gj.IsQuasicoherent := hGq
+  obtain ⟨k, hjk, s, hs⟩ := affine_chart_ordinary_map_descent
+    R c hc i f j hij Uj a ha M N (by infer_instance)
+      (by infer_instance) (by infer_instance)
+      (by infer_instance) ψ
+  refine ⟨k, hjk, ?_⟩
+  let q := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
+    (Over.homMk (Spec.map (R.map (homOfLE hjk)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
+  let p := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
+    (T' := Over.mk (c.π.app (op i)))
+    (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))
+  have w : p ≫ q = q₀ := by
+    rw [← baseChangeMap_comp]
+    congr 1
+    ext
+    simpa using c.w (homOfLE hjk).op
+  let tq := Scheme.Modules.openCoverTensorPullbackComparison q Uj a
+  refine ⟨tq.inv.app Fj ≫ s ≫ tq.hom.app Gj, ?_⟩
+  have H₀ := chart_tensor_pullback_lift_transport q p q₀ w Uj a Fj Gj φ
+  have H₁ := H₀ s
+  have H := H₁ hs
+  dsimp only [q, p, q₀, w, tq] at H
+  dsimp only [Scheme.Modules.moduleBaseChange]
+  exact H
+
 
 end AlgebraicGeometry
