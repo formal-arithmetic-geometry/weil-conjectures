@@ -26,33 +26,30 @@
  ],
  "proof": [
   {
-   "text": "Induct to identify B_r(p,q) with initialG of ker(alphaIter r p q), using iterated image epimorphisms e_r, their canonical inclusions from pageCouple_image_prefix, and DerivedMaps.g_comm/alpha_comm. At a successor, exactness identifies incoming differential images with derived g_r of ker derived alpha_r. Lift representatives along e_r after refinement; the difference from their initial-g image is an old boundary, handled by induction. Conversely a lift killed by alphaIter(r+1) maps to a differential boundary. This is the full finite-boundary chase detailed in the theorem docstring.",
+   "text": "Apply the finite boundary formula finiteBoundary_alphaKernel at each natural index. Induct on r using the consecutive cocone equation to identify the transported structure map j_p with alphaIter r followed by the transported cocone map at p-r. Its kernel therefore contains the alphaIter kernel, so every boundary is below initialG(ker j_p).",
    "uses": [
-    "def-sp-exact-couple",
     "def-sp-convergence",
-    "lem-sp-derived-couple-image-prefix",
-    "lem-sp-abelian-refinements"
+    "lem-sp-finite-boundary-alpha-kernel"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Iterate the cocone equation. For all r, ker alphaIter r is contained in ker j_p. For all r with p-r <= the left bound, the tail map is invertible, so these kernels are equal. The boundary range is therefore bounded above by initialG(ker j_p) and contains this eventual value; uniqueness of its LUB proves equality with L.B.",
+   "text": "Choose a left-tail bound a for total degree p+q, and r=(p-a).toNat. Then p-r<=a. The transported tail map is invertible, so postcomposition does not change the alphaIter kernel. The r-th boundary therefore equals initialG(ker j_p). Use L.B_lub to bound L.B above by that value and below by the r-th boundary; antisymmetry concludes.",
    "uses": [
-    "def-sp-convergence"
+    "def-sp-convergence",
+    "lem-sp-finite-boundary-alpha-kernel"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
   "def-sp-convergence",
-  "lem-sp-derived-couple-image-prefix",
-  "lem-sp-abelian-refinements"
+  "lem-sp-finite-boundary-alpha-kernel"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 011T finite cycle/boundary formulas; Tag 012W finite-tail motivation. Direct proof/expanded induction written by F2; sources read online in second reading because literature is absent locally."
+  "place": "Tags 011T and 012W; K1 formalized the cocone iteration, kernel containment/cancellation, natural-number tail bound and LUB argument. The finite-boundary induction is isolated as lem-sp-finite-boundary-alpha-kernel."
  },
  "mathlib_searches": [
   {
@@ -118,9 +115,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T022412-L-3212499",
+  "landing": "20261013T033003-L-3676826",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

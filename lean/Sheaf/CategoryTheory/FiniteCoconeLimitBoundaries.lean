@@ -6,6 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel
 
 /-! # Finite-tail limiting subobjects
 
@@ -18,6 +19,51 @@ Source: Stacks Project, Tag 011T, exact-couple cycle and boundary formulas.
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
+
+private theorem alphaIter_cocone
+    {C : Type u} [Category.{v} C] [Abelian C] (X : BigradedExactCouple C 0)
+    (n : ℤ) (A : AlphaColimit X n) (r : ℕ) (p q : ℤ) (hn : p + q = n) :
+    X.alphaIter r p q ≫ eqToHom (by congr 1; omega) ≫ A.ι (p - r) =
+      eqToHom (by congr 1; omega) ≫ A.ι p := by
+  induction r generalizing p q with
+  | zero =>
+    apply eq_of_heq
+    simp only [alphaIter, eqToHom_trans_assoc,
+      eqToHom_comp_heq_iff, heq_eqToHom_comp_iff]
+    congr! 1
+    omega
+  | succ r ih =>
+    have htail : X.alphaIter r (p - 1) (q + 1) ≫
+        eqToHom (by congr 1 <;> omega) ≫ A.ι (p - (r + 1 : ℕ)) =
+        eqToHom (by congr 1; omega) ≫ A.ι (p - 1) := by
+      have hh := ih (p - 1) (q + 1) (by omega)
+      apply eq_of_heq
+      have hleft : X.alphaIter r (p - 1) (q + 1) ≫
+          eqToHom (by congr 1 <;> omega) ≫ A.ι (p - (r + 1 : ℕ)) ≍
+          X.alphaIter r (p - 1) (q + 1) ≫
+            eqToHom (by congr 1; omega) ≫ A.ι (p - 1 - r) := by
+        apply heq_comp rfl rfl rfl HEq.rfl
+        simp only [eqToHom_comp_heq_iff, heq_eqToHom_comp_iff]
+        congr! 1
+        omega
+      exact hleft.trans (heq_of_eq hh)
+    simp only [alphaIter, Category.assoc, eqToHom_trans_assoc]
+    rw [htail]
+    apply eq_of_heq
+    have hm : X.alpha p q ≫ eqToHom (by congr 1; omega) ≫ A.ι (p - 1) ≍
+        X.alphaDiagonal n (p - 1) ≫ A.ι (p - 1) := by
+      dsimp [alphaDiagonal]
+      simp only [Category.assoc]
+      apply heq_comp (f := X.alpha p q)
+        (f' := X.alpha (p - 1 + 1) (n - (p - 1 + 1)))
+        (by congr 1 <;> omega) (by congr 1 <;> omega) rfl
+      · congr! 1 <;> omega
+      · simp only [eqToHom_comp_heq_iff, heq_eqToHom_comp_iff]
+        rfl
+    apply (hm.trans (heq_of_eq (A.comm (p - 1)))).trans
+    rw [heq_eqToHom_comp_iff]
+    congr! 1
+    omega
 
 /-- An invertible left cocone tail identifies limiting boundaries with g of its kernel.
 Source: Stacks Project, Tag 011T, formula for boundaries; Tag 012W, lower-tail argument.
@@ -63,6 +109,35 @@ theorem finiteCocone_limitBoundaries
     (hleft : ∀ n : ℤ, ∃ a : ℤ, ∀ P : ℤ, P ≤ a → IsIso ((A n).ι P))
     (L : X.LimitSubobjects) (p q : ℤ) :
     L.B p q = (Subobject.«exists» (X.initialG p q)).obj
-      (kernelSubobject (eqToHom (by congr 1; omega) ≫ (A (p + q)).ι p)) := by sorry
+      (kernelSubobject (eqToHom (by congr 1; omega) ≫ (A (p + q)).ι p)) := by
+  let j : X.D p q ⟶ (A (p + q)).obj :=
+    eqToHom (by congr 1; omega) ≫ (A (p + q)).ι p
+  let S := (Subobject.«exists» (X.initialG p q)).obj (kernelSubobject j)
+  let c (r : ℕ) : X.D (p - r) (q + r) ⟶ (A (p + q)).obj :=
+    eqToHom (by congr 1; omega) ≫ (A (p + q)).ι (p - r)
+  have hc (r : ℕ) : X.alphaIter r p q ≫ c r = j :=
+    alphaIter_cocone X (p + q) (A (p + q)) r p q rfl
+  have hle (r : ℕ) : X.cycleBoundaryTower.B r p q ≤ S := by
+    rw [finiteBoundary_alphaKernel]
+    apply (Subobject.«exists» (X.initialG p q)).monotone
+    simpa only [hc r] using kernelSubobject_comp_le (X.alphaIter r p q) (c r)
+  obtain ⟨a, ha⟩ := hleft (p + q)
+  let r := (p - a).toNat
+  have hr : p - (r : ℤ) ≤ a := by dsimp [r]; omega
+  have hi : IsIso ((A (p + q)).ι (p - r)) := ha _ hr
+  let := hi
+  have hmono : Mono (c r) := by dsimp [c]; infer_instance
+  let := hmono
+  have heq : X.cycleBoundaryTower.B r p q = S := by
+    rw [finiteBoundary_alphaKernel]
+    dsimp [S]
+    congr 1
+    symm
+    simpa only [hc r] using kernelSubobject_comp_mono (X.alphaIter r p q) (c r)
+  change L.B p q = S
+  apply le_antisymm
+  · exact (L.B_lub p q).2 (by rintro _ ⟨t, rfl⟩; exact hle t)
+  · rw [← heq]
+    exact (L.B_lub p q).1 ⟨r, rfl⟩
 
 end CategoryTheory.BigradedExactCouple

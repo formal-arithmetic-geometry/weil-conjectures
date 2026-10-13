@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-finite-boundary-alpha-kernel",
+ "kind": "statement",
+ "title": "Finite exact-couple boundaries as initial g-images of iterated alpha kernels",
+ "statement": "Let $C$ be an abelian category and $X$ a type-zero bigraded exact couple [def-sp-exact-couple]. Write $T$ for its canonical cycle-boundary tower, $\\alpha^r_{p,q}:D^{p,q}\\to D^{p-r,q+r}$ for its outgoing alpha iterate, and $g_{p,q}:D^{p,q}\\to E^{p,q}$ for its transported initial g [def-sp-convergence]. For every $r\\in\\mathbb N$ and $p,q\\in\\mathbb Z$, $T.B_r(p,q)=g_{p,q}(\\ker\\alpha^r_{p,q})$ as subobjects of $E^{p,q}$. No diagonal cocone or tail assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 011T, finite boundary formula; Tag 0AMJ, shifted exact-couple boundary formula"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Induct on r. At zero alphaIter is invertible and both boundary subobjects are zero. At a successor, use the canonical derived-D mono inclusions and iterated image epimorphisms. Their composite is alphaIter r; the derived alpha restriction gives the next iterate, and the derived g restriction identifies its image with the projected initial g. The projection and cycle-lift recurrences establish these identities by induction.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "lem-sp-derived-couple-image-prefix"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness identifies the incoming differential image with derived g of the derived alpha kernel. Lift a successor-boundary representative through this image and then through the iterated image epimorphism, after epimorphic refinement. Its lift is killed by alphaIter(r+1). Subtract its initial g-image: the difference has zero projection, lies in the old boundary, and by induction is the initial g-image of a lift killed by alphaIter r. Add the lifts. Conversely a lift killed by alphaIter(r+1) maps into the derived alpha kernel, hence into an incoming differential boundary under derived g. Its initial g-image belongs to the successor pullback. Factorization descends along epimorphisms because a subobject is the kernel of its cokernel. These inclusions prove the equality.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "lem-sp-derived-couple-image-prefix",
+  "lem-sp-abelian-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011T and 0AMJ state the formula; expanded finite-boundary induction from the parent node, adapted by K1. Sources read online because the local literature file is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact couple finite boundaries image of g restricted to kernel of iterated alpha",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, Function.Exact.rangeFactorization, CategoryTheory.ShortComplex.Exact.ab_range_eq_ker, SnakeLemma.δ_aux, Function.Exact.addMonoidHom_rangeRestrict, CategoryTheory.ShortComplex.ab_exact_iff_ker_le_range, Function.Exact.iff_rangeFactorization, Function.Exact.linearMap_rangeRestrict",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundar.*alpha|alpha.*boundar",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite exact couple boundaries image of kernel of iterated alpha",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Finite-filtration convergence argument: finite-boundary formula preceding lower-tail stabilization, step 1 of lem-sp-finite-cocone-limit-boundaries.",
+   "via": [
+    "lem-sp-finite-cocone-limit-boundaries",
+    "thm-sp-spectral-object-yields-canonical-pages",
+    "lem-sp-finite-cocone-exact-couple",
+    "lem-sp-finite-cocone-weak-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel",
+  "file": "lean/Sheaf/CategoryTheory/FiniteBoundaryAlphaKernel.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteBoundary_alphaKernel",
+  "statement": "theorem finiteBoundary_alphaKernel\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (X : BigradedExactCouple C 0) (r : ℕ) (p q : ℤ) :\n    X.cycleBoundaryTower.B r p q =\n      (Subobject.«exists» (X.initialG p q)).obj (kernelSubobject (X.alphaIter r p q))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T033003-L-3676826",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T033003-L-3676826",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
