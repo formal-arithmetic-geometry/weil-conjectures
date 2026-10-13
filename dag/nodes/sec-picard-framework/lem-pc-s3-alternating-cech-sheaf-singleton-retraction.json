@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Project the degree-zero product of intersection presheaves to the singleton\nwhose unique index is i. On a test open V contained in U i, its intersection with\nU i is V, so the singleton restriction is identified with the identity of G(V).\nThese identifications are linear and natural under restrictions. Sheafify the\nprojection and restrict it to U i. Sheafification of G.val is identified with G\nby the sheafification counit, inverse to its unit on sheaves. Thus projection\nfollowing augmentation is the identity. Extend to integer degrees: degree zero\nis unchanged, up to the canonical extendXIso and its functorial image. Transport\nthe preceding retraction across these isomorphisms. For r=0 there is no i; for an\nempty U i all the modules in question are zero and the assertion still holds.",
+   "text": "Prove continuity of the intersection functor V ↦ V ∩ U i: factor it, up to the natural isomorphism of opens given by set extensionality, as the inverse-image functor for U i → X followed by the open-image functor. Both functors are continuous for the opens sites, and Mathlib Functor.isContinuous_of_iso transfers continuity to the intersection functor. This property applies to sheaves with arbitrary coefficient categories; specialize Functor.op_comp_isSheaf to the underlying abelian-group sheaf of G to form the module sheaf H. Project the degree-zero presheaf product to the singleton i. The augmentation followed by this projection is the restriction unit b : G → H. After restriction to U i, b is an isomorphism, since each test open is contained in U i. Apply sheafification to the projection and compose with its counit at H. Adjunction naturality and the right triangle identity identify the augmentation composite with b. Compose with the inverse of restricted b to obtain a left inverse in natural degree zero. Transport this left inverse through extendXIso to integer degree zero. No index exists when r = 0; the argument also applies to empty U i.",
    "uses": [
     "def-pc-s3-alternating-cech-sheaf-construction"
    ],
@@ -25,7 +25,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 02FU insertion; Tag 01FM ordered convention; detailed ordered adaptation and retraction adjustment by F4"
+  "place": "Tag 02FU insertion; Tag 01FM ordered convention; C1 repair generalizes the duplicated sheafness helper to continuity of the intersection functor, followed by Mathlib op_comp_isSheaf, adjunction naturality and extendXIso transport"
  },
  "mathlib_searches": [
   {
@@ -109,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "X-030ee",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T095952-L-2458444",
+  "landing": "20261013T120800-L-3469765",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and node matched the recorded statement; all delivered files and the direct importer compiled, with axioms limited to propext, Classical.choice, and Quot.sound."
  }
 }
