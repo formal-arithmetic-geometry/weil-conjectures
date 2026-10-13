@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+import Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare
 
 /-! # The underived open counit square
 
@@ -24,6 +25,64 @@ noncomputable section
 namespace AlgebraicGeometry
 
 
+section
+
+universe v
+
+variable {A B C D : Type u} [Category.{v} A] [Category.{v} B]
+  [Category.{v} C] [Category.{v} D]
+  [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive D]
+  {LX : A ⥤ B} {RX : B ⥤ A} {LY : C ⥤ D} {RY : D ⥤ C}
+  {F : A ⥤ C} {G : B ⥤ D}
+  [LX.Additive] [RX.Additive] [LY.Additive] [RY.Additive]
+  [F.Additive] [G.Additive]
+  [(HomotopyCategory.quotient A (.up ℤ)).IsLocalization
+    (HomologicalComplex.homotopyEquivalences A (.up ℤ))]
+  [(HomotopyCategory.quotient B (.up ℤ)).IsLocalization
+    (HomologicalComplex.homotopyEquivalences B (.up ℤ))]
+  [(HomotopyCategory.quotient C (.up ℤ)).IsLocalization
+    (HomologicalComplex.homotopyEquivalences C (.up ℤ))]
+  [(HomotopyCategory.quotient D (.up ℤ)).IsLocalization
+    (HomologicalComplex.homotopyEquivalences D (.up ℤ))]
+private theorem lift_open_counit_square (aX : LX ⊣ RX) (aY : LY ⊣ RY)
+    (α : F ⋙ LY ≅ LX ⋙ G) (β : RX ⋙ F ≅ G ⋙ RY)
+    (h : ∀ M, LY.map (β.hom.app M) ≫ aY.counit.app (G.obj M) =
+      α.hom.app (RX.obj M) ≫ G.map (aX.counit.app M))
+    (K : HomotopyCategory B (.up ℤ)) :
+    (LY.mapHomotopyCategory (.up ℤ)).map
+        ((Functor.mapHomotopyCategoryCompIso β (.up ℤ) ≪≫
+          (Functor.mapHomotopyCategoryCompIso (Iso.refl (G ⋙ RY)) (.up ℤ)).symm).hom.app K) ≫
+        (aY.mapHomotopyCategory (.up ℤ)).counit.app
+          ((G.mapHomotopyCategory (.up ℤ)).obj K) =
+      (Functor.mapHomotopyCategoryCompIso α (.up ℤ) ≪≫
+        (Functor.mapHomotopyCategoryCompIso (Iso.refl (LX ⋙ G)) (.up ℤ)).symm).hom.app
+          ((RX.mapHomotopyCategory (.up ℤ)).obj K) ≫
+        (G.mapHomotopyCategory (.up ℤ)).map
+          ((aX.mapHomotopyCategory (.up ℤ)).counit.app K) := by
+  obtain ⟨M, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  have hY := Adjunction.mapHomotopyCategory_counit_app_quotient (.up ℤ) aY
+    ((G.mapHomologicalComplex (.up ℤ)).obj M)
+  erw [hY, Adjunction.mapHomotopyCategory_counit_app_quotient]
+  change (HomotopyCategory.quotient D (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient D (.up ℤ)).map _ =
+    (HomotopyCategory.quotient D (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient D (.up ℤ)).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  ext n
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    Functor.mapHomologicalComplexCompIso_hom_app_f,
+    Functor.mapHomologicalComplexCompIso_inv_app_f,
+    Adjunction.mapHomologicalComplex_counit_app_f, Iso.refl_inv, NatTrans.id_app]
+  change LY.map (β.hom.app (M.X n) ≫ 𝟙 _) ≫
+      aY.counit.app (G.obj (M.X n)) =
+    (α.hom.app (RX.obj (M.X n)) ≫ 𝟙 _) ≫ G.map (aX.counit.app (M.X n))
+  rw [Category.comp_id, Category.comp_id]
+  exact h (M.X n)
+
+end
+
+set_option linter.unusedVariables false in
 /-- The sectionwise comparison square respects the two underived open counits,
 after passage to the homotopy category.
 Source: Stacks Tags 08FE and 08BV.
@@ -56,6 +115,15 @@ theorem schemeMVUnderivedOpenCounit_square
       (schemeMVHomotopyOpenRestriction h U).hom.app
           ((RX.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
         (G.mapHomotopyCategory (ComplexShape.up ℤ)).map
-          ((schemeMVHomotopyOpenAdjunction X (h ⁻¹ᵁ U)).counit.app K) := by sorry
+          ((schemeMVHomotopyOpenAdjunction X (h ⁻¹ᵁ U)).counit.app K) := by
+  let aX : schemeOpenRestriction X (h ⁻¹ᵁ U) ⊣
+      RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom :=
+    schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)
+  let aY : schemeOpenRestriction Y U ⊣
+      RingedSpace.moduleDirectImage U.ι.toLRSHom.toShHom :=
+    schemeOpenModuleAdjunction Y U
+  exact lift_open_counit_square aX aY
+    (schemeMVUnderivedOpenRestriction h U) (schemeMVUnderivedOpenComposition h U)
+    (schemeMVOrdinaryOpenCounit_square X Y h U) K
 
 end AlgebraicGeometry

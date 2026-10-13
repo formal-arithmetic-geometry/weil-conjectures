@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-mayer-vietoris-ordinary-open-counit-square",
+ "kind": "statement",
+ "title": "Ordinary module open comparisons respect the open counits",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $U\\subseteq Y$ an arbitrary open, $V=h^{-1}U$, $g:V\\to U$ the restricted morphism, and $j_X:V\\to X$, $j_Y:U\\to Y$ the inclusions. Let $L_X,L_Y$ be schemeOpenRestriction, $R_X,R_Y$ the module direct images along the inclusions, and $G=g_*$. Let $\\beta:R_Xh_*\\cong GR_Y$ and $\\alpha:h_*L_Y\\cong L_XG$ be the fixed UNDERIVED ordinary-module comparisons [def-pc-derived-mayer-vietoris-open-counit-model], and let $\\varepsilon_X,\\varepsilon_Y$ be the ordinary open adjunction counits [def-pc-kinjective-mayer-vietoris-data]. For every ordinary sheaf of modules $M$ on $V$, $L_Y(\\beta_M);\\varepsilon_{Y,GM}=\\alpha_{R_XM};G(\\varepsilon_{X,M})$. This is an equality of sheaf-module morphisms, with no complex or homotopy category in its statement.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 08FE, proof: the underived open restriction/direct-image identity; Tag 08BV, open restriction maps. Official pages https://stacks.math.columbia.edu/tag/08FE and https://stacks.math.columbia.edu/tag/08BV read 2026-10-14. The counit normalization calculation expands the existing parent proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport from schemeOpenRestriction to restrictFunctor using overFunctorEquiv. The definition of schemeOpenModuleAdjunction is ofNatIsoLeft with the inverse of this equivalence, so its counit is overFunctorEquiv.hom followed by restrictAdjunction.counit. Naturality moves the Y equivalence past the comparison; the X inverse/hom cancel. It suffices to verify the resulting restrictFunctor square on sections.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an open W of U, the composition comparison has section maps given by identity, restriction along the equality of inverse-image opens from morphismRestrict_ι, and identity. The Y counit uses the equality j_Y inverse image (j_Y image W) = W. The restriction comparison uses image_morphismRestrict_preimage to identify h inverse image (j_Y image W) with j_X image (g inverse image W); its pushforwardCongr₂ component is the presheaf restriction along this equality. Applying G to the X counit then restricts along j_X inverse image (j_X image (g inverse image W)) = g inverse image W. In both cases the resulting map on an element is M.presheaf.map of the equality arrow between the common source open and g inverse image W. Functoriality combines the restrictions and thinness identifies the arrows.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extensionality on opens and on section elements proves equality of the sheaf-module morphisms. Undo the overFunctorEquiv transport. The preimage identities also hold for the empty and full opens; the argument imposes no assumptions on h or M.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 08FE and 08BV; sectionwise calculation in the existing parent proof",
+  "note": "Only the ordinary-module equality is postponed; the complete degreewise and homotopy-quotient descent is proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction direct image open immersion counit compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of direct image along an open immersion counit commutative square",
+   "results": "OpenImmersion app_ΓIso_hom, map_ΓIso_hom, map_ΓIso_hom_assoc, appIso_hom and related ring-section formulas; no fixed ordinary-module comparison square.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_counit_app_app|mapHomotopyCategoryCompIso",
+   "results": "Scheme.Modules.restrictAdjunction_counit_app_app in Mathlib.AlgebraicGeometry.Modules.Sheaf; mapHomotopyCategoryCompIso in Mathlib.Algebra.Homology.HomotopyCategory. No ordinary comparison square.",
+   "date": "2026-10-14",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare",
+  "date": "2026-10-14",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-mayer-vietoris-underived-open-counit-square",
+   "place": "proof: sectionwise ordinary-module counit computation, before applying the termwise functors and homotopy quotient",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryOpenCounitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryOpenCounitSquare.lean",
+  "declaration": "AlgebraicGeometry.schemeMVOrdinaryOpenCounit_square",
+  "statement": "theorem schemeMVOrdinaryOpenCounit_square (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens) (M : SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace)) : (schemeOpenRestriction Y U).map ((schemeMVUnderivedOpenComposition h U).hom.app M) ≫ (schemeOpenModuleAdjunction Y U).counit.app ((RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).obj M) = (schemeMVUnderivedOpenRestriction h U).hom.app ((RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom).obj M) ≫ (RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom).map ((schemeOpenModuleAdjunction X (h ⁻¹ᵁ U)).counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-108bb",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222422-L-1229689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-108bb",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T222422-L-1229689",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered Lean files, DAG nodes, report, and direct importer compiled and matched the review rules"
+ }
+}
