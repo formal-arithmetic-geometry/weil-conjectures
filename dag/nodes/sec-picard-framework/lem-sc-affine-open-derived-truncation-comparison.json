@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-affine-open-derived-truncation-comparison",
+ "kind": "statement",
+ "title": "Derived lower truncation comparison for evaluation on an affine open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open of $X$, and $I$ an unbounded cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules] with quasi-coherent homology in every degree [def-pc-derived-category]. Write $S_U$ for evaluation at $U$, valued in $\\mathcal O_X(U)$-modules, and $Q$ for localization in the derived category [def-weil-abstract-derived-category]. For every $n\\in\\mathbf Z$, the canonical map $H^n(RS_U(QI))\\to H^n(RS_U(\\tau_{\\ge n}QI))$ is an isomorphism. The truncation is the canonical truncation for the standard t-structure [def-weil-t-structure]. No K-injectivity of $I$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08D4; official tag pages read online on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-t-structure"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation followed by forgetting scalars preserves countable products, since module sheaf limits are computed sectionwise. Affine-open vanishing gives R^p of this functor equal to zero on quasi-coherent modules for p >= 1.",
+   "uses": [
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Homology factors through Q, and canonical truncation preserves quasi-coherent cohomology (zero modules included). Apply the unbounded cohomological bound with N=1 to truncLT n QI, supported in degrees <= n-1. Its derived cohomology vanishes in degrees n and n+1.",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right derived functor preserves the distinguished truncation triangle. Its homology sequence with zero endpoints makes the canonical projection invertible. Exact scalar forgetting commutes with deriving and homology and reflects isomorphisms, giving the claimed module-valued assertion.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08D4; official tag pages read online on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K injective complex quasicoherent cohomology on affine opens homology of sections comparison isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any affine open derived evaluation of the canonical lower truncation projection of a complex with quasicoherent cohomology induces a homology isomorphism in the cutoff degree",
+   "results": "CochainComplex.quasiIso_truncGEMap_iff and quasiIso_truncLEMap_iff, plus generic truncation quasi-isomorphism statements. None proves the affine derived-evaluation claim.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.desc.*homologyData|isIso.*truncGE|truncGE.*isIso",
+   "results": "Generic truncation isomorphism and quasi-isomorphism declarations in Mathlib; no derived affine-evaluation theorem. The project AffineDerivedSectionsTruncationIso is a similar theorem for Spec with transported scalars, whose proof supplies the present route.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: canonical affine cohomology calculation; Derived lower truncation comparison for evaluation on an affine open",
+   "via": [
+    "new-affine-algebra-kinjective-cycle-class-epi",
+    "new-affine-algebra-canonical-comparison-identification",
+    "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenDerivedTruncationComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenDerivedTruncationComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_open_derived_truncation_comparison",
+  "statement": "theorem affine_open_derived_truncation_comparison\n    (X : Scheme.{v})\n    [HasDerivedCategory.{w} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    (U : X.Opens) (hU : IsAffineOpen U)\n    [HasDerivedCategory.{w'}\n      (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op U)))]\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ) :\n    IsIso ((DerivedCategory.homologyFunctor\n      (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op U))) n).map\n        ((SheafOfModules.forget (moduleRings X.toRingedSpace) ⋙\n          PresheafOfModules.evaluation (moduleRings X.toRingedSpace).obj\n            (op U)).rightDerivedFunctor.map\n          ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj I))))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T082334-L-1631922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T082334-L-1631922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

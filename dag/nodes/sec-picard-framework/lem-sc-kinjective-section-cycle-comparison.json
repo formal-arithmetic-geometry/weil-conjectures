@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-kinjective-section-cycle-comparison",
+ "kind": "statement",
+ "title": "Canonical cycle quotient comparison from derived lower truncation",
+ "statement": "Let $C,D$ be abelian categories [def-sp-abelian] with chosen derived categories [def-weil-abstract-derived-category], with enough injectives and K-injective resolutions in $C$. Let $F:C\\to D$ be additive and left exact [def-sp-left-exact-additive], and $I$ a K-injective cochain complex [def-pur-kinjective-complex]. For $n\\in\\mathbf Z$, suppose $H^n(RF(QI))\\to H^n(RF(\\tau_{\\ge n}QI))$ is an isomorphism, where $Q$ is localization and truncation is canonical [def-weil-t-structure]. Write $h$ for the left part of the chosen degree-n homology data: $h.i:h.K\\to I^n$ is the kernel of $d^n$, $h.f\\prime:I^{n-1}\\to h.K$ is the induced boundary map, and $h.\\pi:h.K\\to h.H$ is its cokernel. Then the canonical map $\\operatorname{coker}(F(h.f\\prime))\\to F(h.H)$ induced by $F(h.\\pi)$ is an isomorphism. This is a statement about this actual cokernel-descending map, not the existence of an unrelated isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08D4; official tag pages read online on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "def-pur-kinjective-complex",
+  "def-weil-t-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put A=truncLE n I and B=truncGE n A. Kernel preservation identifies H^n(F(A)) with H^n(F(I)). The derived comparison for I is invertible because a quasi-isomorphism between K-injectives is a homotopy equivalence, preserved by additive F.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Left exactness gives the upper-truncation isomorphism on H^n after deriving. Naturality makes the derived comparison for A invertible. The assumed lower-truncation isomorphism, transported through upper truncation, identifies H^n(RF(QA)) with H^n(RF(QB)). Bottom derived cohomology of B is F(H^n(I)).",
+   "uses": [
+    "new-qcoh-sections-left-exact-bottom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the natural comparison square for A to B, the degree-n map is the projection from cycles to homology. Kernel uniqueness identifies the cycles of F(I) with F(h.K); their boundaries are the image of F(h.f\\prime), so their quotient is the displayed cokernel. Its induced map is the composite isomorphism above: both have composite F(h.pi) with cokernel.pi, and cokernel uniqueness forces equality. Empty or zero objects and all integer degrees require no extra hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "new-qcoh-sections-left-exact-bottom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08D4; official tag pages read online on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor on a K injective complex has canonical section cycle quotient isomorphism when the derived lower truncation projection induces a homology isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a left exact additive functor and a K injective complex, canonical cokernel of mapped boundaries to mapped cycles computes mapped homology if derived lower truncation induces homology isomorphism",
+   "results": "Generic homological functors, homologyFunctorFactors, and exact functors preserving homology. No left-exact K-injective canonical quotient comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.desc.*homologyData|isIso.*truncGE|truncGE.*isIso",
+   "results": "Generic truncation isomorphism and quasi-isomorphism declarations in Mathlib; no derived affine-evaluation theorem. The project AffineDerivedSectionsTruncationIso is a similar theorem for Spec with transported scalars, whose proof supplies the present route.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCycleClassEpi",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence: canonical affine cohomology calculation; Canonical cycle quotient comparison from derived lower truncation",
+   "via": [
+    "new-affine-algebra-kinjective-cycle-class-epi",
+    "new-affine-algebra-canonical-comparison-identification",
+    "lem-sc-affine-algebra-counit-homology-comparison-isIso",
+    "new-affine-algebra-kinjective-counit-compatibility",
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "lem-sc-affine-algebra-exact-derived-counit-iso",
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KInjectiveSectionCycleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/KInjectiveSectionCycleComparison.lean",
+  "declaration": "AlgebraicGeometry.kInjective_section_cycle_comparison",
+  "statement": "theorem kInjective_section_cycle_comparison\n    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]\n    (I : CochainComplex C ℤ) [I.IsKInjective] (n : ℤ)\n    (h : IsIso ((DerivedCategory.homologyFunctor D n).map\n      (F.rightDerivedFunctor.map\n        ((DerivedCategory.TStructure.t.truncGEπ n).app (DerivedCategory.Q.obj I))))) :\n    IsIso (cokernel.desc (F.map (I.sc n).homologyData.left.f')\n      (F.map (I.sc n).homologyData.left.π) (by\n        rw [← F.map_comp, (I.sc n).homologyData.left.f'_π, F.map_zero]))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T082334-L-1631922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T082334-L-1631922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
