@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Finite projective summands inherit Tor acyclicity
@@ -59,6 +60,45 @@ theorem finiteProjective_tor_acyclic
           (@ModuleCat.of R _ P inferInstance
             (Module.compHom P (algebraMap R A)))).obj
         (ModuleCat.of R B)) := by
-  sorry
+  classical
+  let : Module R P := Module.compHom P (algebraMap R A)
+  let : IsScalarTower R A P := IsScalarTower.of_compHom R A P
+  intro i hi
+  let F := ((MonoidalCategory.tensoringRight (ModuleCat R)).obj
+    (ModuleCat.of R B)).leftDerived i
+  -- Lifts of a sum and sums of lifts agree up to homotopy.
+  have : (projectiveResolutions (ModuleCat R)).Additive := by
+    constructor
+    intro X Y a b
+    change (HomotopyCategory.quotient _ _).map (ProjectiveResolution.lift (a + b) _ _) =
+      (HomotopyCategory.quotient _ _).map (ProjectiveResolution.lift a _ _) +
+      (HomotopyCategory.quotient _ _).map (ProjectiveResolution.lift b _ _)
+    rw [← Functor.map_add]
+    apply HomotopyCategory.eq_of_homotopy
+    apply ProjectiveResolution.liftHomotopy (a + b)
+    · simp
+    · simp [Preadditive.add_comp, Preadditive.comp_add]
+  have : F.Additive := by
+    dsimp [F, Functor.leftDerived, Functor.leftDerivedToHomotopyCategory]
+    infer_instance
+  change IsZero (F.obj (ModuleCat.of R P))
+  have hA : IsZero (F.obj (ModuleCat.of R A)) := hTor i hi
+  -- The splitting expresses the identity as a finite sum of maps factoring through A.
+  let f : Fin m → (ModuleCat.of R P ⟶ ModuleCat.of R A) := fun j ↦
+    ModuleCat.ofHom (((LinearMap.proj j).comp s).restrictScalars R)
+  let g : Fin m → (ModuleCat.of R A ⟶ ModuleCat.of R P) := fun j ↦
+    ModuleCat.ofHom ((r.comp (LinearMap.single A (fun _ : Fin m ↦ A) j)).restrictScalars R)
+  have hsum : ∑ j, f j ≫ g j = 𝟙 (ModuleCat.of R P) := by
+    ext x
+    change (∑ j, f j ≫ g j).hom x = x
+    simp only [ModuleCat.hom_sum, LinearMap.sum_apply]
+    change (∑ j, r (Pi.single j (s x j))) = x
+    rw [← map_sum, LinearMap.sum_single_apply]
+    exact LinearMap.congr_fun hsplit x
+  apply (IsZero.iff_id_eq_zero _).2
+  rw [← F.map_id, ← hsum, F.map_sum]
+  apply Finset.sum_eq_zero
+  intro j _
+  rw [F.map_comp, hA.eq_of_tgt (F.map (f j)) 0, zero_comp]
 
 end CategoryTheory

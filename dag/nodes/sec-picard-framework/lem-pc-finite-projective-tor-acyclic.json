@@ -24,35 +24,34 @@
  ],
  "proof": [
   {
-   "text": "For each i>0, compute Tor_i^R(A^m,B) using the finite direct sum of m copies of a projective resolution of A. Tensoring this resolution with B and taking homology commute with finite direct sums, so Tor_i^R(A^m,B) is the direct sum of m copies of Tor_i^R(A,B), hence is zero by the hypothesis.",
+   "text": "Fix i > 0. Regard Tor_i^R(-,B) as the left-derived functor F of tensoring on the right with B [def-weil-pbc-tor-modules]. The projective-resolution functor is additive: the chosen lift of a+b is homotopic to the sum of the chosen lifts of a and b, by ProjectiveResolution.liftHomotopy. Composing it with the additive mapHomotopyCategory and homology functors makes F additive.",
    "uses": [
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose $A$-linear maps $s\\colon P\\to A^m$ and $r\\colon A^m\\to P$ with $r\\circ s=\\mathrm{id}_P$. Functoriality of $\\operatorname{Tor}$ in its first module [def-weil-pbc-tor-modules] carries these to maps $\\operatorname{Tor}_i^R(P,B)\\to\\operatorname{Tor}_i^R(A^m,B)\\to\\operatorname{Tor}_i^R(P,B)$ whose composite is the identity. Thus $\\operatorname{Tor}_i^R(P,B)$ is a direct summand of the zero module $\\operatorname{Tor}_i^R(A^m,B)$ (Step 1), and is therefore zero for every $i>0$.",
+   "text": "For j in Fin m, restrict to R the A-linear maps f_j = proj_j composed with s and g_j = r composed with single_j. The sum of f_j followed by g_j is the identity on P: evaluated on x, the sum is r(sum_j single_j(s(x)_j)) = r(s(x)) = x by hsplit. This calculation also applies when m=0, with the empty sum.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "By additivity and functoriality [def-weil-pbc-tor-modules], id_{F(P)} is the sum of F(f_j) followed by F(g_j). Each F(f_j) has target F(A), which is zero by hTor i, so every summand is zero. The identity on F(P) is zero, hence F(P) is a zero object. Since i>0 was arbitrary this proves the assertion.",
    "uses": [
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-tor-modules"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+  "place": "Tag 08IB, lemma-compare-base-change; coordinate form of the finite-sum and split-retract argument, using Mathlib liftHomotopy to prove additivity."
  },
  "mathlib_searches": [
   {
@@ -138,5 +137,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T072412-L-1126932",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
