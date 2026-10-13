@@ -13,36 +13,42 @@
  },
  "proof": [
   {
-   "text": "Principal opens D(f) contained in U form a basis and cover U. For each such f the restriction of tilde M to Spec A_f identifies with the associated sheaf of M_f by the localization description of associated sheaves.",
-   "uses": [
-    "lem-weil-pbc-tilde-principal-localization-transport"
-   ],
-   "elementary": false,
+   "text": "For each point x of U choose D(f) containing x and contained in U using PrimeSpectrum.isBasis_basic_opens. Factor Spec A_f -> Spec A through U by IsOpenImmersion.lift. The private proved helper sectionsLocalizationEquiv identifies global sections of the restricted tilde M with M_f: tilde.toOpen is a localization map, the section carrier under restriction is unchanged, restrictAppIso_smul_Spec identifies its scalar action, and IsLocalizedModule.iso.extendScalarsOfIsLocalization gives the A_f-linear equivalence. Transfer finiteness and projectivity along this equivalence. This implements the principal localization step directly without the affine-isomorphism transport node.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01HV, associated modules on affine schemes, localization on standard opens"
+    "place": "Tag 01HV, localization of associated modules on standard opens"
    }
   },
   {
-   "text": "By hypothesis M_f is finite projective. Apply lem-weil-pbc-finite-projective-standard-free-cover over A_f. Its finite standard cover has finite free iterated localizations of M. Associated sheaf commutes with these localizations and sends finite free modules to finite free sheaves. The composite opens cover U, so the definition of finite local freeness gives the conclusion. Empty U uses an empty cover and zero modules have rank zero.",
+   "text": "Apply [lem-weil-pbc-finite-projective-standard-free-cover] to the global sections on Spec A_f. PrimeSpectrum.iSup_basicOpen_eq_top_iff makes the resulting basic opens cover. At a chosen point select a member and its finite chooseBasis. The already proved source-library theorem Scheme.Modules.nonempty_restrict_iso_free_of_localizedModule turns that basis into a free sheaf restriction. This is the private proved helper exists_free_neighborhood_of_projective_sections.",
    "uses": [
     "lem-weil-pbc-finite-projective-standard-free-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NX, (2) implies (7); used sheaf-locally in perfect.tex Tag 08EG"
+    "place": "Tag 00NX, (2) implies (7)"
+   }
+  },
+  {
+   "text": "Compose each free neighbourhood map with the lifted Spec A_f -> U. Its image contains x, so the neighbourhoods indexed by points of U cover U. restrictFunctorComp and restrictFunctorCongr identify the composite restriction with the free sheaf. Apply the proved source-library criterion Scheme.Modules.isFiniteLocallyFree_of_restrict_iso_free and transport along overFunctorEquiv U. All ranks are finite, may vary, and empty U supplies an empty point-indexed cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EG, local freeness paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-tilde-principal-localization-transport",
   "lem-weil-pbc-finite-projective-standard-free-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00NX, (2) implies (7); used sheaf-locally in perfect.tex Tag 08EG"
+  "place": "Tag 00NX and schemes.tex Tag 01HV; Lean implementation of the stated localization, standard-free-cover, and covering argument using proved source-library tools"
  },
  "mathlib_searches": [
   {
@@ -117,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T100045-L-2473873",
-  "kind": "interface",
+  "landing": "20261013T111935-L-3067612",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
