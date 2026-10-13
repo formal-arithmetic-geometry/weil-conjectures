@@ -6,6 +6,8 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.Algebra.Homology.FiniteStripConeGradedMap
+import Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi
+import Sheaf.Algebra.Homology.FiniteStripConeGradedMapMono
 
 /-! # Invertibility of the surviving diagonal map
 Source: Stacks Project, Homology, Tag 0133; finite-strip cone refinement, step 3.
@@ -49,6 +51,10 @@ theorem finiteStripGradedMap_isIso
           (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫
             (CochainComplex.mappingCone.inr b).f n) else ⊥))
     (p n : ℤ) : IsIso (finiteStripGradedMap K r hsupport A b f F hsteps p n) := by
-  sorry
+  have : Epi (finiteStripGradedMap K r hsupport A b f F hsteps p n) :=
+    finiteStripGradedMap_epi K r hsupport A b f F hsteps p n
+  have : Mono (finiteStripGradedMap K r hsupport A b f F hsteps p n) :=
+    finiteStripGradedMap_mono K r hsupport A b f F hsteps p n
+  apply isIso_of_mono_of_epi
 
 end HomologicalComplex₂

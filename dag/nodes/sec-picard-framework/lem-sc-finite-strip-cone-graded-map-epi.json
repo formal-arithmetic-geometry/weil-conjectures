@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-finite-strip-cone-graded-map-epi",
+ "kind": "lemma",
+ "title": "Finite-strip graded map is epi",
+ "statement": "Let C be an abelian category and K an integer commuting double cochain complex with total [def-sp-double-complex-total]. Let r be natural and assume K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, b:A→Tot(K), and f_p:single(A.X p,0)→K.flip.X p for every integer p. Let F be a decreasing filtration of Cone(b) [def-sp-filtered-complex-subquotients], whose degree-n step p is the join of the source image when p<=n+1 and the target diagonal images indexed by 0<=i<r and p<=n-i. The canonical map [def-sc-finite-strip-cone-graded-map] from Cone(f_p)^(n-p) to gr_F^p Cone(b)^n is epic for all integer p,n. No augmentation or differential identification hypothesis is needed.",
+ "stmt_deps": [
+  "def-sc-finite-strip-cone-graded-map"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4 second-variable variant; explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3"
+ },
+ "proof": [
+  {
+   "text": "Proof: write the ambient cone in degree n as the biproduct of A.X (n+1)\nand the total diagonal coproduct. The given hsteps identifies the current tail\nwith the sum of its supported generators. Suppose two arrows out of its graded\nquotient agree after the displayed map. Precompose their difference with the\nquotient projection, which is epic. On target generators with vertical index p,\nthe difference vanishes by the assumed equality after the row inclusion. Target\ngenerators with vertical index strictly greater than p lie in the next tail and\nare killed by the quotient; these are all remaining target generators. The source\ngenerator survives only when n+1=p and is then the source summand of the row cone;\nwhen n+1>p it lies in the next tail. The source single object is zero in all other\ndegrees. Thus the difference vanishes on every generator of the current tail,\nso the two arrows agree. Unsupported horizontal summands are zero by hsupport.\nThis proves epimorphy also for r=0 and when n-p lies outside the strip.",
+   "uses": [
+    "def-sc-finite-strip-cone-graded-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-strip-cone-graded-map"
+ ],
+ "proof_origin": "R4 stage-3 decomposition of the parent diagonal quotient argument into cancellation on generators and a left inverse.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism from direct summands onto quotient by complementary direct summands",
+   "results": "8 hits: ModuleCat.epi_as_hom''_mkQ, LinearMap.surjective_comp_linearProjOfIsCompl, Submodule.linearProjOfIsCompl_surjective, Submodule.linearProjOfIsCompl_comp_surjective_of_exact, Submodule.quotientEquivOfIsCompl, Submodule.mk_quotientEquivOfIsCompl_apply, LinearMap.surjective_comp_subtype_of_isComplemented, Submodule.quotientEquivOfIsCompl_apply_mk_coe",
+   "date": "2026-10-13",
+   "verdict": "No existing finite-strip graded comparison. ModuleCat and Submodule results specialize to modules; generic biproduct cokernel isomorphisms require identifying the consecutive tails with complementary summands, the remaining argument here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Mono, cokernel.π",
+   "results": "0 hits:  (loogle: unknown identifier 'Mono')",
+   "date": "2026-10-13",
+   "verdict": "No existing finite-strip graded comparison. ModuleCat and Submodule results specialize to modules; generic biproduct cokernel isomorphisms require identifying the consecutive tails with complementary summands, the remaining argument here."
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobject.*sup|cokernelBiprodInrIso|SplitMono",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean, Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/DoldKan/Normalized.lean",
+   "date": "2026-10-13",
+   "verdict": "No existing finite-strip graded comparison. ModuleCat and Submodule results specialize to modules; generic biproduct cokernel isomorphisms require identifying the consecutive tails with complementary summands, the remaining argument here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono, CategoryTheory.Limits.cokernel.π",
+   "results": "12 hits: CategoryTheory.Limits.eq_zero_of_mono_cokernel, CategoryTheory.Limits.cokernel_not_mono_of_nonzero, CategoryTheory.Limits.cokernel.of_kernel_of_mono, CategoryTheory.Abelian.mono_factorThruImage, CategoryTheory.NonPreadditiveAbelian.isIso_factorThruImage, CategoryTheory.Abelian.isIso_factorThruImage, CategoryTheory.Abelian.monoLift, CategoryTheory.Abelian.isLimitMapConeOfKernelForkOfι",
+   "date": "2026-10-13",
+   "verdict": "No existing finite-strip graded comparison. ModuleCat and Submodule results specialize to modules; generic biproduct cokernel isomorphisms require identifying the consecutive tails with complementary summands, the remaining argument here."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelBiprodInrIso|cokernelBiproductFromSubtypeIso|epi_of_imageSubobject",
+   "results": "2 hits: Mathlib/CategoryTheory/Limits/Shapes/BinaryBiproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "date": "2026-10-13",
+   "verdict": "No existing finite-strip graded comparison. ModuleCat and Submodule results specialize to modules; generic biproduct cokernel isomorphisms require identifying the consecutive tails with complementary summands, the remaining argument here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category the inclusion of a direct summand followed by quotient by its complement is monic and epic.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteStripConeGradedMapIsIso",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-strip-cone-filtration",
+   "place": "step 3, surviving diagonal quotient and its differential"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeGradedMapEpi.lean",
+  "declaration": "HomologicalComplex₂.finiteStripGradedMap_epi",
+  "statement": "theorem finiteStripGradedMap_epi\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ) (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) : Epi (finiteStripGradedMap K r hsupport A b f F hsteps p n)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T155939-L-1304509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T155939-L-1304509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
