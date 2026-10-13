@@ -98,7 +98,8 @@ private theorem tensorComparison_of_kflat
       ∀ K M : B, good K → good M →
         L.map (Functor.LaxMonoidal.μ Q (q K) (q M)) ≫ α.app (q K ⊗ q M) ≫
           R.map ((τ.app (q K)).app (q M)) =
-        (δ (Q.obj (q K)) (Q.obj (q M))).hom ≫ (α.app (q K) ⊗ₘ α.app (q M)) ≫
+        (δ (Q.obj (q K)) (Q.obj (q M))).hom ≫
+          (α.app (q K) ⊗ₘ α.app (q M)) ≫
           Functor.LaxMonoidal.μ R (Ph.obj (q K)) (Ph.obj (q M)) := by
   classical
   let F := Ph ⋙ R
@@ -173,6 +174,54 @@ private theorem tensorComparison_of_kflat
     rw [hβV, hβU, hτ, Category.assoc] at heq
     exact heq.symm
 
+private theorem tensorComparison_of_additive_monoidal
+    {A B : Type*} [Category* A] [Category* B]
+    [Abelian A] [Abelian B]
+    [MonoidalCategory A] [MonoidalCategory B]
+    [SymmetricCategory A] [SymmetricCategory B]
+    [MonoidalPreadditive A] [MonoidalPreadditive B]
+    [MonoidalClosed A] [MonoidalClosed B]
+    [IsGrothendieckAbelian A] [IsGrothendieckAbelian B]
+    [HasColimitsOfSize.{0, 0} A] [HasColimitsOfSize.{0, 0} B]
+    [Abelian.HasFunctorialFlatResolution A] [Abelian.HasFunctorialFlatResolution B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (P : A ⥤ B) [P.Additive] [P.Monoidal] [P.IsLeftAdjoint]
+    (L : DerivedCategory A ⥤ DerivedCategory B)
+    (α : DerivedCategory.Qh ⋙ L ⟶ P.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (hα : ∀ K, (HomotopyCategory.quasiIso A (.up ℤ)).kFlat K → IsIso (α.app K))
+    (hPh : ∀ K, (HomotopyCategory.quasiIso A (.up ℤ)).kFlat K →
+      (HomotopyCategory.quasiIso B (.up ℤ)).kFlat
+        ((P.mapHomotopyCategory (.up ℤ)).obj K)) :
+    ∃ δ : ∀ K M, L.obj (K ⊗ M) ≅ L.obj K ⊗ L.obj M,
+      (∀ K K' M M' (f : K ⟶ K') (g : M ⟶ M'),
+        L.map (f ⊗ₘ g) ≫ (δ K' M').hom =
+          (δ K M).hom ≫ (L.map f ⊗ₘ L.map g)) ∧
+      ∀ K M : HomotopyCategory A (.up ℤ),
+        L.map (Functor.LaxMonoidal.μ DerivedCategory.Qh K M) ≫ α.app (K ⊗ M) ≫
+          DerivedCategory.Qh.map
+            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) P).app K).app M) =
+          (δ (DerivedCategory.Qh.obj K) (DerivedCategory.Qh.obj M)).hom ≫
+            (α.app K ⊗ₘ α.app M) ≫
+              Functor.LaxMonoidal.μ DerivedCategory.Qh
+                ((P.mapHomotopyCategory (.up ℤ)).obj K)
+                ((P.mapHomotopyCategory (.up ℤ)).obj M) := by
+  classical
+  have (Z : A) : PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj Z) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft Z)
+      (NatIso.ofComponents (fun Y ↦ β_ Z Y) (by intros; simp [curriedTensor]))
+  have (Z : B) : PreservesColimitsOfShape ℤ ((curriedTensor B).flip.obj Z) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft Z)
+      (NatIso.ofComponents (fun Y ↦ β_ Z Y) (by intros; simp [curriedTensor]))
+  simpa using (tensorComparison_of_kflat
+    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh DerivedCategory.Qh
+    (P.mapHomotopyCategory (.up ℤ)) L α hα
+    (fun K M hK _ ↦ DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+      DerivedCategory.Qh _ K M hK)
+    (fun K M hK _ ↦ DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+      DerivedCategory.Qh _ _ _ (hPh K hK))
+    (HomotopyCategory A (.up ℤ)) id (fun _ ↦ True)
+    (Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) P))
+
 /-- Descend the tensor comparison once the derived pair is fixed.
 Source: Stacks Project, Tag 079U; uniqueness of left derived bifunctors.
 (blueprint: lem-sc-global-tensor-pullback-tensor-descent)
@@ -187,8 +236,9 @@ an isomorphism between their underived bifunctors. Uniqueness of left derived
 bifunctors yields U isomorphic to V. Naturality in each argument gives simultaneous
 tensor naturality. The defining counit equation gives exactly the normalization
 on quotient cochain objects. This works for zero objects and unbounded complexes.
-The private generic tensorComparison_of_kflat above proves the abstract descent;
-its concrete monoidal-instance specialization is the remaining glue. -/
+The private generic tensorComparison_of_kflat above proves the abstract descent.
+The additive monoidal specialization registers the K-flat derivability prerequisites;
+applying it to modules and sheaves gives the asserted quotient normalization. -/
 theorem globalTensorPullback_tensorDescent
     (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -222,7 +272,15 @@ theorem globalTensorPullback_tensorDescent
                      Functor.LaxMonoidal.μ DerivedCategory.Qh
                        ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj K')
                        ((P.mapHomotopyCategory (ComplexShape.up ℤ)).obj M')) := by
-  sorry
+  classical
+  have : IsGrothendieckAbelian.{u}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  obtain ⟨δ, hδ, hnorm⟩ := tensorComparison_of_additive_monoidal P L α hα hPh
+  refine ⟨δ, hδ, ?_⟩
+  intro K M _ _
+  exact hnorm ((HomotopyCategory.quotient _ _).obj K)
+    ((HomotopyCategory.quotient _ _).obj M)
 
 end
 end AlgebraicGeometry.Scheme.Modules
