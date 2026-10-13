@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Sheaf.RingTheory.Derivation.PowerSeriesPolynomialNormalization
+import Sheaf.RingTheory.Derivation.PowerSeriesPolynomialDifferential
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Coefficient preparation for detecting derivations
@@ -57,6 +61,47 @@ theorem exists_finite_coefficient_derivation
     ∃ A : Subring B, Algebra.FiniteType A B ∧
       ∃ δ : Derivation ℤ M M,
         (∀ a : A, δ (algebraMap B M a) = 0) ∧ δ (algebraMap B M f) ≠ 0 := by
-  sorry
+  classical
+  let : CharP M p := charP_of_injective_ringHom (IsFractionRing.injective B M) p
+  have hf : ¬ ∃ x : M, x ^ p = algebraMap B M f := by
+    rintro ⟨x, hx⟩
+    apply hD
+    rw [← hx, D.leibniz_pow, ← Nat.cast_smul_eq_nsmul M, CharP.cast_eq_zero]
+    simp
+  obtain ⟨C, hC, k, hk, n, m, hkp, ⟨e⟩, K, hK, aCK, hfrac, aKM, htower, hdim⟩ :=
+    exists_powerSeries_polynomial_normalization p B M R₀
+  let := hk
+  let := hkp
+  let := hK
+  let := aCK
+  let := hfrac
+  let := aKM
+  let : Algebra C M := ((algebraMap B M).comp C.subtype).toAlgebra
+  let := htower
+  let := hdim
+  obtain ⟨A, hfinite, hdiff⟩ :=
+    KaehlerDifferential.exists_finite_subring_nonzero_differential
+      p k n m C e K M (algebraMap B M f) hf
+  let : Algebra A M := ((algebraMap C M).comp A.subtype).toAlgebra
+  obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero M hdiff
+  let δ : Derivation ℤ M M := (φ.compDer (KaehlerDifferential.D A M)).restrictScalars ℤ
+  let A' : Subring B := A.map C.subtype
+  let eA : A ≃+* A' := A.equivMapOfInjective C.subtype Subtype.val_injective
+  have hAC : A.subtype.FiniteType := by
+    let : Module.Finite A C := hfinite
+    exact (RingHom.finiteType_algebraMap).mpr inferInstance
+  have hCB : C.subtype.FiniteType := (RingHom.finiteType_algebraMap).mpr hC
+  have hcomp : (A'.subtype.comp eA.toRingHom).FiniteType := by
+    convert hCB.comp hAC using 1
+    ext a
+    rfl
+  have hA' : Algebra.FiniteType A' B :=
+    (RingHom.finiteType_algebraMap).mp (RingHom.FiniteType.of_comp_finiteType hcomp)
+  refine ⟨A', hA', δ, ?_, hφ⟩
+  intro a
+  obtain ⟨b, hb⟩ := eA.surjective a
+  subst a
+  change φ (KaehlerDifferential.D A M (algebraMap A M b)) = 0
+  rw [Derivation.map_algebraMap, map_zero]
 
 end Derivation

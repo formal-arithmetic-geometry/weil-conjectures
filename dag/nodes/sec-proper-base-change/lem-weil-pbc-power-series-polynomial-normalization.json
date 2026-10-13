@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-power-series-polynomial-normalization",
+ "kind": "statement",
+ "title": "Power-series polynomial normalization with finite fraction-field extension",
+ "statement": "Let $p$ be prime, $B$ a characteristic-$p$ domain, and $M$ its fraction field [def-weil-pbc-localization-at-prime]. Let $R_0$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring complete for its maximal ideal [def-weil-pbc-adically-complete-ring], with $B$ a finite type $R_0$-algebra [def-weil-pbc-finite-type-algebra]. There exist a subring $C\\subset B$, a field $k$ of characteristic $p$, and integers $n,m\\geq0$, such that $B$ is finite type over $C$ and $C$ is isomorphic to the polynomial ring $k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_m]$ [def-weil-pbc-multivariate-power-series, def-weil-pbc-mv-polynomial-ring]. There is a fraction field $K$ of $C$ and an embedding $K\\to M$ extending $C\\hookrightarrow B\\hookrightarrow M$ such that $M/K$ is a finite field extension [def-pc-field-extension].",
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-field-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PH (lemma-find-D), first two proof paragraphs; Algebra Tags 0325, 032D and 07NA"
+ },
+ "proof": [
+  {
+   "text": "Replace R0 by its image R in B, isomorphic to R0 modulo the prime kernel. The quotient is proper, Noetherian, local and complete. Transfer these properties across the quotient-range ring equivalence. Finite type descends from R0 to its image by the finite-type ring-map composition criterion.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the complete-local-domain regular-subring theorem to R. Its subring S has characteristic p. Exclude the Cohen-ring case: if its prime integer q were not divisible by p it would be a unit in characteristic p, contrary to membership in the maximal ideal. If p divides q then q=0, making the maximal ideal zero, contrary to the discrete valuation ring not being a field. Hence S is a power series ring over a field k, and its coefficient-field embedding gives characteristic p for k. Since R is finite over S and B finite type over R, B is finite type over S.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalization to the injective S-to-B map. The range C of the injective polynomial evaluation is a polynomial ring over S, contains S, and is contained in a subalgebra B0 finite over C. B0[1/g] maps bijectively to B[1/g] for nonzero g in S. The finite S-algebra generators of B still generate over C.",
+   "uses": [
+    "lem-weil-pbc-noether-normalization-over-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Surjectivity after inverting g gives, for every b in B, an element b0 in B0 and j with b0=g^j*b. For a fraction a/b in M, choose a0=g^i*a and b0=g^j*b in B0; then a/b=(a0*g^j)/(b0*g^i). The denominator is nonzero since B is a domain and g,b are nonzero. This proves M is also the fraction field of B0. Finiteness of B0 over C gives integrality, hence algebraicity of M over C and over K=Frac(C). Because B is finite type over C and M is a localization of B, M is essentially finite type over C, hence over K. An algebraic essentially finite type field extension is finite-dimensional (Mathlib Algebra.finite_of_essFiniteType_of_isAlgebraic). Equip K-to-M with FractionRing.liftAlgebra; the lift has the required scalar tower.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-noether-normalization-over-domain",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PH (lemma-find-D), first two proof paragraphs; Algebra Tags 0325, 032D and 07NA; the fraction-field version of the source argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type domain over complete local ring power series normalization and finite coefficient subring nonzero differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type domain over a complete noetherian local ring of prime characteristic contains a polynomial subring over power series with finite extension of fraction fields",
+   "results": "FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc; PowerSeries.isNoetherianRing; PowerSeries.fg_iff_of_isPrime; Polynomial.not_quasiFiniteAt; FunctionField.ringOfIntegers.not_isField; FunctionField.ringOfIntegers.instIsDomainSubtypeMemSubalgebraPolynomial; Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing; LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "powerSeries.*normalization|finite_subring_nonzero|KaehlerDifferential.*finite",
+   "results": "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Kaehler/Basic.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Derivation.FiniteCoefficientPreparation",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07PH (lemma-find-D), first two proof paragraphs; Algebra Tags 0325, 032D and 07NA",
+   "via": [
+    "lem-weil-pbc-finite-coefficient-detecting-derivation",
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Derivation.PowerSeriesPolynomialNormalization",
+  "file": "lean/Sheaf/RingTheory/Derivation/PowerSeriesPolynomialNormalization.lean",
+  "declaration": "Derivation.exists_powerSeries_polynomial_normalization",
+  "statement": "theorem exists_powerSeries_polynomial_normalization\n    (p : ℕ) [Fact p.Prime]\n    (B : Type u) [CommRing B] [IsDomain B] [CharP B p]\n    (M : Type v) [Field M] [Algebra B M] [IsFractionRing B M]\n    (R₀ : Type w) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]\n    [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]\n    [Algebra R₀ B] [Algebra.FiniteType R₀ B] :\n    ∃ C : Subring B, Algebra.FiniteType C B ∧\n      ∃ (k : Type u) (hk : Field k), letI := hk\n        ∃ n m : ℕ, CharP k p ∧\n          Nonempty (C ≃+* MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) ∧\n          ∃ (K : Type u) (hK : Field K), letI := hK\n            ∃ aCK : Algebra C K, letI := aCK\n              ∃ hfrac : IsFractionRing C K, letI := hfrac\n                ∃ aKM : Algebra K M, letI := aKM\n                  letI : Algebra C M := ((algebraMap B M).comp C.subtype).toAlgebra\n                  IsScalarTower C K M ∧ FiniteDimensional K M",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T040806-L-3954503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T040806-L-3954503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

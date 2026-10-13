@@ -11046,3 +11046,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/W2/Sheaf.AlgebraicGeometry.PicardFiberRankClopen (stage 3; reviewer PASS; first push; landing 20261013T040805-L-3954149 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:08 L: merged deliver/W3/Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsMap (stage 3; reviewer PASS; first push; landing 20261013T040805-L-3954297 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:08 L: merged deliver/W4/Sheaf.AlgebraicGeometry.DiagonalConormalAffineDerivationSpan (stage 3; reviewer PASS; first push; landing 20261013T040806-L-3954403 (interface); batch 20261013T040738; modules 2; new nodes 1)
+- 04:08 L: merged deliver/W4/Sheaf.RingTheory.Derivation.FiniteCoefficientPreparation (stage 3; reviewer PASS; first push; landing 20261013T040806-L-3954503 (interface); batch 20261013T040738; modules 3; new nodes 2)
