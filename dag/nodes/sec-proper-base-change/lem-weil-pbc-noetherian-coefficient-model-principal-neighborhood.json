@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-noetherian-coefficient-model-principal-neighborhood",
+ "kind": "statement",
+ "title": "Bounded principal neighbourhood in a coefficient model",
+ "statement": "Let $R$ be a commutative ring, $n,c\\in\\mathbf N$ and $f_i\\in R[x_1,\\ldots,x_n]$ for $i\\in\\operatorname{Fin}(c)$ [def-weil-pbc-mv-polynomial-ring]. Suppose this specified presentation is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. Let $R_0\\subseteq R$ be any subring and $f_{0,i}\\in R_0[x_1,\\ldots,x_n]$ with coefficientwise images $f_i$. Write $S_0=R_0[x]/(f_0)$ and $S=R[x]/(f)$. For every prime $q$ of $S$ [def-weil-affine-spectrum] there is $G\\in R_0[x]$ whose image in $S$ avoids $q$, and such that every nonzero fibre of $R_0\\to(S_0)_{\\bar G}$ [def-weil-ring-localization-away, def-weil-pbc-localization-at-prime] has spectrum of topological Krull dimension at most $n-c$ [def-kun-topological-krull-dimension]. No finite-type assumption on $R_0$ is needed; $S_0$ is finite type over it.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-kun-topological-krull-dimension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00SU, first paragraph; original approximation split steps 1-3 (Tag 00SU; source read at https://stacks.math.columbia.edu/tag/00SU)"
+ },
+ "proof": [
+  {
+   "text": "Use Presentation.naive(f₀).baseChange R and the equality of mapped relations to construct S ≃ R ⊗[R₀] S₀. Contract q to q₀ in S₀ and p in R, and set p₀ to the contraction of p to R₀; quotient-map commutation identifies p₀ with the contraction of q₀.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prime q supplies a nonzero fibre at p by PrimeSpectrum.nontrivial_iff_mem_rangeComap. The presentation hypothesis gives its dimension n-c. ResidueField.map defines κ(p₀) → κ(p), and two cancelBaseChange equivalences identify this fibre with κ(p) ⊗[κ(p₀)] (p₀.Fiber S₀). The residue-field base-changed naive presentation is finite presentation, hence finite type. Apply the existing global field-extension dimension theorem and homeomorphism invariance to conclude dim Spec(p₀.Fiber S₀)=n-c.",
+   "uses": [
+    "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre point Q corresponding to q₀ has local dimension bounded above by the global dimension via the supremum formula. Each open neighbourhood contains Q, hence the closure of its singleton is a nonempty irreducible closed subset; Order.krullDim_nonneg shows its dimension is nonnegative. Thus the local dimension is neither bottom nor infinity and equals a natural d ≤ n-c. Apply exists_away_fibre_dimension_le at q₀ to get g avoiding q₀ with localized fibre bound d.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-fibre-dimension-neighborhood"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift g to G by Ideal.Quotient.mk_surjective. Contraction along the explicit quotient map gives avoidance upstairs. Rewrite the localized bounds with this lift and compose the bound d with d ≤ n-c. If S=0 there is no prime q and the assertion is vacuous.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-fibre-dimension-neighborhood"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00SU, first paragraph; original approximation split steps 1-3; R3 formalizes the specified part of the existing six-step split"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descend a finite principal open cover and its fibre dimension bound to a finitely generated subring",
+   "results": "Service unavailable on 2026-10-13; attempted search recorded in searches.jsonl. No absence conclusion from this service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded principal-open cover of a polynomial quotient descends to a finite type coefficient subring preserving fibre dimension bounds",
+   "results": "Standard smooth presentations, Polynomial.not_quasiFiniteAt, Noether normalization, Chevalley polynomial complexity; none states bounded-cover descent or the coefficient-model neighbourhood.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteType_model_of_bounded_principal_cover|exists_coefficient_model_principal_neighborhood|exists_subalgebra_fg; rg coefficient_model|bounded_principal_cover lean/WeilConjectures lean/Sheaf/Paper; blueprint_refs.py search bounded principal cover / coefficient neighbourhood",
+   "results": "Mathlib Smooth.NoetherianDescent descends smooth algebras, which requires smoothness absent here. No matching library or blueprint declaration. Existing FibreDimensionNeighborhood and DimensionPreservedFieldExtension supply the pointwise part.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use the existing neighbourhood and dimension lemmas in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NoetherianApproximation",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Algebra, proof of Tag 00SU, first paragraph; original approximation split steps 1-3; within step 7 of thm-weil-pbc-finite-etale-lifting through Tag 00SU",
+   "via": [
+    "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+    "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "lem-weil-pbc-relative-global-complete-intersection-flat",
+    "lem-weil-pbc-equation-count-fibre-dimension-flat",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NoetherianCoefficientNeighborhood",
+  "file": "lean/Sheaf/Paper/NoetherianCoefficientNeighborhood.lean",
+  "declaration": "Algebra.exists_coefficient_model_principal_neighborhood",
+  "statement": "theorem exists_coefficient_model_principal_neighborhood (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (h : IsRelativeGlobalCompleteIntersectionPresentation f) (R₀ : Subring R) (f₀ : Fin c → MvPolynomial (Fin n) R₀) (hf₀ : ∀ i, MvPolynomial.map R₀.subtype (f₀ i) = f i) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) : ∃ G : MvPolynomial (Fin n) R₀, Ideal.Quotient.mk (Ideal.span (Set.range f)) (MvPolynomial.map R₀.subtype G) ∉ q.asIdeal ∧ ∀ (p₀ : Ideal R₀) [p₀.IsPrime], Nontrivial (p₀.Fiber (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f₀)) G))) → topologicalKrullDim (PrimeSpectrum (p₀.Fiber (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f₀)) G)))) ≤ ((n - c : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T045558-L-136300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T045558-L-136300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
