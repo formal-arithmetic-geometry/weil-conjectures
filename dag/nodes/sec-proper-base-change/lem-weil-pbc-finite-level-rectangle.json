@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-weil-pbc-finite-level-rectangle",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lemma-weil-pbc-level-map-rectangle"
+  ]
  },
  "kind": "statement",
  "title": "Finite-level exchange rectangle",
@@ -30,20 +32,47 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-four-corners"
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-four-arrows",
+  "lemma-weil-pbc-perfect-projection-formula"
  ],
  "proof": [
   {
-   "text": "The two routes around the rectangle are both the level-$n$ reduction of the\nbase-change mate, computed through the projection-formula isomorphisms on\nthe two sides; naturality of the perfect-coefficient projection-formula map\nwith respect to the base-change mate makes them equal, with the arrows of\n[def-weil-pbc-four-arrows].",
+   "text": "Fix an index $n\\geq1$ of the adic tower and use the Cartesian square and complex $K$ of [def-weil-pbc-four-corners]. Write $E=Lg'^*K$, $K_n=K\\otimes_A^LP_n$, and use the specified identification $E_n\\simeq E\\otimes_A^LP_n$. By [def-weil-pbc-adic-coefficient-datum], $P_n=A/I^n$ is perfect, and its pullback to $Y' is the corresponding perfect finite coefficient object. By [def-weil-pbc-four-arrows], $h_n=Lg_n^*\\pi_{f,K,P_n}$ and $h'_n=\\pi_{f',E,P_n}$ on these corners. The isomorphism assertion in [lemma-weil-pbc-perfect-projection-formula], applied to $(f,K)$ and $(f',E)$, gives these horizontal isomorphisms. The same arrow definition specifies $v_n$ as $\\operatorname{Ex}^A_K\\otimes^L1_{P_n}$ preceded by the canonical identification $A_n\\simeq(Lg^*Rf_*K)\\otimes_A^LP_n$, and specifies $v'_n$ as the canonical finite-coefficient exchange map $\\operatorname{Ex}_{\\square,K_n}$; the etale-origin witness supplies its invertibility. Thus the vertical arrows are the specified exchange maps, not arbitrary isomorphisms witnessing proper base change.",
    "uses": [
-    "def-weil-pbc-four-arrows"
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-four-arrows",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "def-weil-pbc-adic-coefficient-datum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 0944, lemma-projection-formula; Tag 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "Apply the Cartesian-square clause of [lemma-weil-pbc-projection-formula-base-change-naturality] with its complex $K$ equal to the present $K$ and its coefficient $Q=P_n$. Use [def-weil-pbc-ambient-ringed-exchange] for the canonical exchange transformation and [def-weil-pbc-four-corners] to identify the two targets by $Lg'^*K_n=E_n\\simeq E\\otimes_A^LP_n$, and [def-weil-pbc-four-arrows] to identify the arrows, in particular the witness-transported $v'_n$ with the same canonical $\\operatorname{Ex}_{\\square,K_n}$. Its first route is $A_n\\xrightarrow{Lg_n^*\\pi_{f,K,P_n}}B_n\\xrightarrow{\\operatorname{Ex}_{K_n}}D_n$, hence is $v'_nh_n$. Its second route is $A_n\\xrightarrow{\\sim}(Lg^*Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\operatorname{Ex}^A_K\\otimes1}(Rf'_*E)\\otimes_A^LP_n=C_n\\xrightarrow{\\pi_{f',E,P_n}}D_n$, hence is $h'_nv_n$. The cited equality of these routes proves $v'_nh_n=h'_nv_n$. All target identifications here are the ones fixed in the corner and arrow definitions; no separate choice of a finite-level base-change isomorphism is made.",
+   "uses": [
+    "lemma-weil-pbc-projection-formula-base-change-naturality",
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-four-arrows",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram (general compatibility supplied by the cited existing naturality node)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-ambient-ringed-exchange",
   "def-weil-pbc-four-arrows",
-  "lemma-weil-pbc-perfect-projection-formula"
+  "def-weil-pbc-four-corners",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lemma-weil-pbc-projection-formula-base-change-naturality"
  ],
  "proof_origin": {
   "by": "agent",
@@ -52,7 +81,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -87,5 +116,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-level-rectangle",
+  "worker": "stage1",
+  "summary": "Audited the imported finite-level rectangle against the Stacks compatibility of projection formula and base change. No new node was needed: the existing projection-formula/base-change naturality lemma gives the required general rectangle, while the existing four-corners, four-arrows, and perfect projection-formula nodes supply the objects and maps. Filled the blueprint ancestry and same-as duplicate reference, and expanded the proof into two source-backed steps. Second reading made the coefficient specialization and both composites explicit, and expanded the arrow citation to include the vertical maps.",
+  "blueprint": "Realizes the blueprint proof sentence identifying the rectangle with the finite-level instance of Stacks Remark 21.50.2, using the four-corners/four-arrows construction and projection-formula compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-9bc9c8007",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9bc9c8007 (reviewer sub-agent of L); spot-checked: The rectangle and Stacks 0E48 specialization are mathematically correct. The submitted proof omitted the adic-datum citation establishing P_n perfect and did not explicitly identify the witness-transported v'_n with the canonical ringed-topos exchange used by naturality. Corrected DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-level-rectangle.json; review.md records source checks, edge cases, and duplicate analysis.; 1 file(s) fixed by the reviewer"
+ }
 }
