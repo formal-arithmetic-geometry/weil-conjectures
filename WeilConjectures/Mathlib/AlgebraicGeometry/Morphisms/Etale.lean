@@ -89,7 +89,8 @@ open CategoryTheory Limits TensorProduct Topology
 
 namespace AlgebraicGeometry
 
-/-- **Étale morphisms lift locally along a closed immersion.** If `i : Z ⟶ X` is a closed
+/-- Blueprint `lemma-openclosed-etale-lifts-locally`: **Étale morphisms lift locally along a
+closed immersion.** If `i : Z ⟶ X` is a closed
 immersion and `p : W ⟶ Z` is étale, then every point `w` of `W` has an open neighbourhood `W₀`
 which is the base change along `i` of a scheme `V` étale over `X`, in a way compatible with `p`:
 the square
@@ -201,7 +202,9 @@ theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z
   rw [Scheme.Hom.resLE_comp_ι] at hpaste
   exact ⟨W.basicOpen a, hw₀, Spec (CommRingCat.of T), _, inferInstance, _, hpaste⟩
 
-/-- The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
+/-- Blueprint `lemma-openclosed-etale-lifts-locally`, pointed form.
+
+The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
 `i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is étale and `s : Spec Ω ⟶ W` is a point of `W`
 with values in a field `Ω`, then there is an étale morphism `q : V ⟶ X` together with a morphism
 `g : V ×[X] Z ⟶ W` over `Z` through which `s` factors. -/
