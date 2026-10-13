@@ -1,6 +1,6 @@
 # Work queue
 
-684 items; claim with `tools/claim.py next <group> [--stage N]`.
+683 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (654)
+## Stage 3: modules to prove (653)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -298,7 +298,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.CategoryTheory.FiniteCoconeWeakMaps` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.FinitePageImageQuotient` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.TriangulatedHomColimitComparison` | 17 | 1 | proof |
-| `Sheaf.FieldTheory.MatrixDescentInvariantsSpan` | 17 | 1 | proof |
 | `Sheaf.Paper.EtaleCECoherentFirstPageLifts` | 17 | 1 | proof |
 | `Sheaf.Paper.EtaleCEStationaryPageNaturality` | 17 | 1 | proof |
 | `Sheaf.Paper.FiniteFreeKernelIdealFiltration` | 17 | 1 | proof |
