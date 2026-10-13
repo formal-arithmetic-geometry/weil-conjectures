@@ -2,6 +2,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.PinnedBaseChangeMateShifts
+import Sheaf.AlgebraicGeometry.PinnedSingleTensorShifts
 
 /-! # Shift covariance of the pinned single-complex base-change composite
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
@@ -100,6 +102,48 @@ theorem pinned_single_base_change_shift
     ∀ G : X.Modules,
       H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h n G) ≫ b.hom.app G =
         a.hom.app G ≫ (shiftFunctor D (-n)).map
-          (H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h 0 G)) := by sorry
+          (H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h 0 G)) := by
+  set_option backward.defeqAttrib.useBackward true in
+    dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+    obtain ⟨s, hs⟩ := exists_pinned_pullback_counit_shifts.{u, w}
+    let := s g
+    let := s g'
+    obtain ⟨τ, hτ, hτshift⟩ :=
+      exists_pinned_base_change_mate_shifts.{u, w} s hs f g g' f' h
+    have := hτshift
+    obtain ⟨c, hc⟩ := exists_pinned_single_tensor_shifts.{u, w} g' (s g') (hs g')
+    let F := DerivedCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    let T := (DerivedCategory.singleFunctors
+      (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp
+        (Scheme.Modules.tensorPullback g')
+    let β : F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g) ⟶
+        T.postcomp (schemeDerivedDirectImage f') :=
+      SingleFunctors.postcompNatTrans F τ ≫
+        (F.postcompPostcompIso (derivedPullback g') (schemeDerivedDirectImage f')).inv ≫
+        SingleFunctors.postcompHom c (schemeDerivedDirectImage f')
+    let βH := SingleFunctors.postcompHom β H
+    let a := ((F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g)).postcomp H).shiftIso
+      (-n) n 0 (by omega) |>.symm
+    let b := ((T.postcomp (schemeDerivedDirectImage f')).postcomp H).shiftIso
+      (-n) n 0 (by omega) |>.symm
+    refine ⟨a, b, ?_⟩
+    intro G
+    have hb := congr_app (βH.comm (-n) n 0 (by omega)) G
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hb
+    have hβ (i : ℤ) : (βH.hom i).app G =
+        H.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' h i G) := by
+      change H.map (τ.app ((F.functor i).obj G) ≫ 𝟙 _ ≫
+        (schemeDerivedDirectImage f').map ((c.hom i).app G)) = _
+      simp only [Category.id_comp]
+      rw [hτ, hc]
+      rfl
+    rw [hβ n, hβ 0] at hb
+    apply (cancel_epi
+      ((((F.postcomp (schemeDerivedDirectImage f ⋙ derivedPullback g)).postcomp H).shiftIso
+        (-n) n 0 (by omega)).hom.app G)).1
+    dsimp only [a, b, Iso.symm_hom]
+    simp only [Iso.hom_inv_id_app_assoc]
+    rw [← Category.assoc, hb, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
 end AlgebraicGeometry

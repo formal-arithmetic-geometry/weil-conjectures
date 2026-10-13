@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-pinned-base-change-mate-shifts",
+ "kind": "statement",
+ "title": "The pinned derived base-change mate commutes with shifts",
+ "statement": "For a commutative square of schemes [def-pc-fibre-product], with chosen derived categories [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback], fix a family of pullback shift comparisons compatible with the composition-pinned counits as in [lem-pc-pinned-pullback-counit-shifts]. The maps of [def-pc-derived-base-change-map] form a natural transformation from Rf_* followed by Lg^* to Lg′^* followed by Rf′_*, and this transformation commutes with every integer shift, using these pullback comparisons and the recorded right-derived direct-image comparisons.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Canonical base-change mate; Tag 0D5S derived pullback composition; Mathlib/CategoryTheory/Shift/SingleFunctors.lean and Mathlib/Algebra/Homology/DerivedCategory/Basic.lean. Shift verification written by N1."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "lem-pc-pinned-pullback-counit-shifts",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Each composition comparison is a left-derived lift of termwise tensor reassociation. Reassociation commutes with shifts on complexes. The assumed compatibility of the selected counits identifies the two shifted lifts; uniqueness proves compatibility of the comparison and its inverse.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-pinned-pullback-counit-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective representatives the right-derived unit is the termwise map followed by localization, and its transported shift comparison therefore gives a shift-compatible unit. The Hom-equivalence normalization in the base-change construction relates the selected adjunction to this unit and the selected left-derived counit. Applying this normalization to the termwise shifted Hom equivalence gives compatibility of the derived adjunction unit and counit. Naturality of these factors gives the stated transformation. Compose their shift equations with those of the composition comparisons in the defining mate and cancel inverse comparisons to prove its NatTrans.CommShift equation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-pinned-pullback-counit-shifts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-pinned-pullback-counit-shifts",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "The pinned derived base-change mate commutes with shifts; detailed shift verification of the canonical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived counit compatible shift functor",
+   "results": "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift",
+   "results": "loogle: unknown identifier 'NatTrans.CommShift'",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Ss]hift|commShift.*[Cc]ounit",
+   "results": "Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Pullback.lean",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change mate and pinned left derived counits commute with integer shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction transpose natural transformation compatible integer shift",
+   "results": "Adjunction.shift_counit_app_assoc; Adjunction.LeftAdjointCommShift.iso_hom_app_assoc; Adjunction.unit_app_commShiftIso_hom_app",
+   "date": "2026-10-13",
+   "verdict": "These require compatible adjunction shifts; they do not pin the chosen derived adjunction to the recorded counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift",
+   "results": "Adjunction.CommShift; commShift_of_leftAdjoint; commShift_of_rightAdjoint; CommShift.mk'; commShift_unit; commShift_counit",
+   "date": "2026-10-13",
+   "verdict": "Useful generic constituent results, not the specified mate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ss]hift|[Ss]hift.*baseChange|homEquiv.*shift",
+   "results": "ShiftedHom.homEquiv; DerivedCategory.Ext.Basic; rg on library found Etale.commShift_baseChange in WeilConjectures.SixFunctors.BaseChange.DerivedComparison",
+   "date": "2026-10-13",
+   "verdict": "The étale theorem is for another bounded-below construction, not this unbounded tensor-pullback mate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Open pinned comparison: Shift covariance of the pinned single-complex base-change composite; The pinned derived base-change mate commutes with shifts",
+   "via": [
+    "lem-pc-pinned-single-base-change-shift",
+    "lem-pc-open-pinned-single-degree-square",
+    "stage3-open-fixed-counits-compatibility",
+    "lem-pc-base-change-open-fixed-counits",
+    "lem-pc-canonical-module-base-change-open-comparison-compat",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedBaseChangeMateShifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedBaseChangeMateShifts.lean",
+  "declaration": "AlgebraicGeometry.exists_pinned_base_change_mate_shifts",
+  "statement": "theorem exists_pinned_base_change_mate_shifts\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    (s : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (derivedPullback.{u, w} f).CommShift ℤ)\n    (hs : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),\n      letI := s f\n      NatTrans.CommShift (pinnedPullbackCounit.{u, w} f) ℤ)\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g) :\n    letI := s g\n    letI := s g'\n    ∃ τ : schemeDerivedDirectImage.{u, w, w} f ⋙ derivedPullback.{u, w} g ⟶\n        derivedPullback.{u, w} g' ⋙ schemeDerivedDirectImage.{u, w, w} f',\n      (∀ E, τ.app E = schemeDerivedBaseChangeMap.{u, w} f f' g g' h E) ∧\n        NatTrans.CommShift τ ℤ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.exists_pinned_base_change_mate_shifts"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T141530-L-380289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T141530-L-380289",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

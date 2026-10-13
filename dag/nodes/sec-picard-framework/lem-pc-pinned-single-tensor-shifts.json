@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-pinned-single-tensor-shifts",
+ "kind": "statement",
+ "title": "The pinned tensor counit is a morphism of single-functor families",
+ "statement": "For a morphism g′ of schemes with chosen derived categories [def-pc-derived-category] and additive tensor pullback [def-pc-module-pullback], give Lg′^* coherent integer shifts compatible with the selected counit of [lem-pc-ringed-spaces-derived-pullback-composition]. Its counit on the degree-n single complex followed by the actual termwise mapped-single comparison defines a morphism of integer SingleFunctors families from the derived single family followed by Lg′^* to tensor pullback followed by the derived single family. Every component equals this explicit composite; no flatness or boundedness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Canonical base-change mate; Tag 0D5S derived pullback composition; Mathlib/CategoryTheory/Shift/SingleFunctors.lean and Mathlib/Algebra/Homology/DerivedCategory/Basic.lean. Shift verification written by N1."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use the termwise mapped-single isomorphism in each degree. Its shift equation is Functor.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app; cancellation of the shift comparison proves that these isomorphisms form a SingleFunctors isomorphism on cochain complexes.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Pass this family isomorphism through the homotopy quotient using the shift-compatible mapHomotopyCategoryFactors comparison, then through Qh. Whisker the selected counit by the homotopy single family; its assumed CommShift gives a family morphism. Compose these morphisms and the family associators. Their components are the selected counit followed by Qh of the actual termwise mapped-single comparison, by expansion of the quotient factorization. This gives the required family morphism and all its component identities.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "The pinned tensor counit is a morphism of single-functor families; detailed shift verification of the canonical constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived single functor integer shift natural isomorphism",
+   "results": "DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.mapCochainComplexShiftIso, DerivedCategory.singleFunctorsPostcompQIso_hom_hom, CochainComplex.singleFunctors, CategoryTheory.SingleFunctors.shiftIso",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SingleFunctors",
+   "results": "CategoryTheory.SingleFunctors, CategoryTheory.SingleFunctors.instCategory, CategoryTheory.SingleFunctors.functor, CategoryTheory.SingleFunctors.Hom, CategoryTheory.SingleFunctors.Hom.id, CategoryTheory.SingleFunctors.evaluation, CategoryTheory.SingleFunctors.postcomp, CategoryTheory.SingleFunctors.Hom.comp",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctors|commShiftIso",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-13",
+   "verdict": "Constituent constructions; no exact matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapped single complex comparison is a morphism of single functor families compatible with shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Open pinned comparison: Shift covariance of the pinned single-complex base-change composite; The pinned tensor counit is a morphism of single-functor families",
+   "via": [
+    "lem-pc-pinned-single-base-change-shift",
+    "lem-pc-open-pinned-single-degree-square",
+    "stage3-open-fixed-counits-compatibility",
+    "lem-pc-base-change-open-fixed-counits",
+    "lem-pc-canonical-module-base-change-open-comparison-compat",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedSingleTensorShifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedSingleTensorShifts.lean",
+  "declaration": "AlgebraicGeometry.exists_pinned_single_tensor_shifts",
+  "statement": "theorem exists_pinned_single_tensor_shifts\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X) (s : (derivedPullback.{u, w} g').CommShift ℤ)\n    (hs : letI := s; NatTrans.CommShift (pinnedPullbackCounit.{u, w} g') ℤ) :\n    letI := s\n    ∃ τ : (DerivedCategory.singleFunctors\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))).postcomp\n          (derivedPullback.{u, w} g') ⟶\n      (DerivedCategory.singleFunctors\n        (SheafOfModules.{u} (moduleRings X'.toRingedSpace))).precomp\n          (Scheme.Modules.tensorPullback g'),\n      ∀ n G, (τ.hom n).app G = pinnedSingleTensorCounit.{u, w} g' n G",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.SingleFunctors.precomp",
+   "CategoryTheory.SingleFunctors.postcompHom",
+   "CategoryTheory.SingleFunctors.postcompNatTrans",
+   "CategoryTheory.SingleFunctors.precompPostcompIso",
+   "CategoryTheory.SingleFunctors.mappedCochainSingleIso",
+   "CategoryTheory.SingleFunctors.mappedHomotopySingleIso",
+   "CategoryTheory.SingleFunctors.mappedHomotopySingleIso_hom_app",
+   "AlgebraicGeometry.pinnedSingleTensorCounit",
+   "AlgebraicGeometry.exists_pinned_single_tensor_shifts"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T141530-L-380289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T141530-L-380289",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12766,3 +12766,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap (stage 3; reviewer PASS; first push; landing 20261013T141529-L-379792 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Morphisms.BoundaryLocalizedFiniteDetector (stage 3; reviewer PASS; first push; landing 20261013T141529-L-379894 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel (stage 3; reviewer PASS; first push; landing 20261013T141530-L-380040 (proof); batch 20261013T141520; modules 1; new nodes 0)
+- 14:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift (stage 3; reviewer PASS; first push; landing 20261013T141530-L-380289 (interface); batch 20261013T141520; modules 4; new nodes 3)
