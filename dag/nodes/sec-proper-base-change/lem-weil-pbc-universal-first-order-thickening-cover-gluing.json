@@ -1,0 +1,181 @@
+{
+ "id": "lem-weil-pbc-universal-first-order-thickening-cover-gluing",
+ "kind": "statement",
+ "title": "Universal lifting from glued thickening charts",
+ "statement": "Let h : Z → X be a morphism of schemes and C an open cover of Z indexed in the schemes universe. Suppose explicit schemes Z′_k and maps i_k : C_k → Z′_k, h′_k : Z′_k → X are supplied and each is a universal first order thickening over X for C.f_k ≫ h [def-weil-pbc-universal-first-order-thickening]. Then there exist W, j : Z → W and p : W → X such that j with p is a universal first order thickening of h. No formal unramifiedness is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3"
+ },
+ "proof": [
+  {
+   "text": "Apply the glued-atlas construction to obtain W, j, p and an open cover D of W, with j first order, j ≫ p = h, and universality on each chart. It remains to prove the universal property for arbitrary tests.",
+   "uses": [
+    "lem-weil-pbc-universal-first-order-thickening-glued-atlas",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a test t : T → T′, b : T′ → X and a : T → Z whose composite a ≫ j lands in one chart of D, factor a ≫ j uniquely through that open immersion and lift a into the pullback source chart. Local universality gives a lift into the chart and hence into W. Any competing lift into W also lands in the chart, since t is surjective on points; cancellation of the chart inclusion and local uniqueness identify it with the constructed lift.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any test thickening t, the first clause of universalFirstOrderThickening_open_pieces gives uniqueness of an open with specified inverse image. The complement of the closed image of t and the empty open have the same empty inverse image; uniqueness makes that complement empty. Thus t is surjective, and its closed embedding is a homeomorphism. Transfer the inverse-image cover of T induced by a ≫ j and D to T′. Restricted tests are first order by the same existing theorem. The single-chart uniqueness argument then proves equality locally, hence globally.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On this transferred test cover, the single-chart lifting argument supplies local solutions. On pairwise overlaps pull back t along the open intersection; the closed immersion and square-zero condition persist, the latter by restriction of kernel ideals. Global uniqueness from the previous step identifies the two restricted solutions. Glue the local morphisms into W; both triangle identities follow from equality after restriction to the respective covers of T′ and T. The uniqueness already proved gives the unique lift. Together with the glued-atlas clauses this is the claimed universal thickening.",
+   "uses": [
+    "lem-weil-pbc-thickening-open-restriction",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-first-order-thickening-glued-atlas",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-thickening-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal first order thickenings on an open cover of a scheme glue to a universal first order thickening",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing schemes that are universal first order thickenings on an open cover, using uniqueness on intersections, constructs a global thickening with universal charts",
+   "results": "Scheme.GlueData, glued, gluedScheme, Cover.gluedCover, RelativeGluingData.glued, LocalRepresentability.glueData_U. Generic gluing tools, no assertion about universal first order thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Thickening\"",
+   "results": "Only Metric.thickening, Metric.cthickening and uniform-space thickening declarations; no scheme thickening gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universalFirstOrderThickening|UniversalFirstOrderThickening|thickening.*glu|glu.*thickening",
+   "results": "msearch grep: zero Mathlib hits. Direct rg over lean/Sheaf and lean/WeilConjectures finds the affine spectrum construction and open-pieces theorem, but no gluing theorem with local universal charts as input. Blueprint search thickening finds four imported nodes, none stating this gluing lemma.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero closed immersions and universal infinitesimal extensions descend along open covers",
+   "results": "Second reader: generic scheme gluing, relative gluing and open immersion tools; no universal thickening atlas theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "Second reader: GlueData, glued, openCover, canonical immersions and pullback cone; no square-zero universal-chart construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent|square.zero|GlueData; source: square.zero|nilpotent|thickening|universal.*extension",
+   "results": "Second reader: generic Mathlib glue data and source dual-number constructions; no atlas theorem for arbitrary supplied local universal thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningAffineLocal",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential surjectivity: the universal-thickening construction in the proof of Stacks 04F3, reached through the formally-unramified conormal route. Universal lifting from glued thickening charts",
+   "via": [
+    "lem-weil-pbc-universal-first-order-thickening-affine-local",
+    "lem-weil-pbc-universal-first-order-thickening-exists-existence",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningCoverGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalFirstOrderThickeningCoverGluing.lean",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_glue",
+  "statement": "theorem universalFirstOrderThickening_glue\n    {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})\n    (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)\n    (h' : ∀ k, Z' k ⟶ X)\n    (H : ∀ k, IsUniversalFirstOrderThickening (C.f k ≫ h) (i k) (h' k)) :\n    ∃ (W : Scheme.{u}) (j : Z ⟶ W) (p : W ⟶ X),\n      IsUniversalFirstOrderThickening h j p",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024053-L-3340711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T024053-L-3340711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -45,22 +45,44 @@
  "statement": "For a formally unramified morphism h : Z ⟶ X of schemes, there exist Z', i and h' with IsFirstOrderThickening i, i ≫ h' = h, and the universal lifting property for affine test schemes T and T'.",
  "proof": [
   {
-   "text": "Construct the square-zero thickenings on an affine open cover and glue them using uniqueness on overlaps; verify lifting for affine tests.",
+   "text": "For a morphism of affine schemes, take the formally unramified map on global sections. Use the ring universal first order thickening theorem and then the spectrum theorem to obtain a universal thickening over the spectrum of the base ring. Transport along the canonical affine-spectrum isomorphisms: precomposing the immersion with a source isomorphism does not change its kernel, and the lifting triangles transport by cancellation of these isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ring-universal-first-order-thickening",
+    "lem-weil-pbc-universal-thickening-affine-case"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the affine cover of X back along h and refine by affine covers. Formal unramifiedness is stable under base change and composition with open immersions, so the affine construction supplies universal thickenings on the refined charts. To enlarge the base along an open immersion s, transport the lifting property along s.isoOpensRange, then apply the third clause of universalFirstOrderThickening_open_pieces. This reuses the existing open-base enlargement theorem without reproving surjectivity of test thickenings.",
    "uses": [
     "lem-weil-pbc-universal-thickening-affine-case",
+    "lem-weil-pbc-ring-universal-first-order-thickening",
+    "def-sbc-first-order-thickening",
     "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting explicit local universal thickenings are input to the cover-gluing theorem. Obtain a global universal thickening and restrict its test quantifiers to affine test schemes. This proves the original statement with its signature unchanged.",
+   "uses": [
+    "lem-weil-pbc-universal-first-order-thickening-cover-gluing",
+    "def-weil-pbc-universal-first-order-thickening"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-ring-universal-first-order-thickening",
   "lem-weil-pbc-universal-thickening-affine-case",
-  "lem-weil-pbc-universal-thickening-open-pieces"
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "lem-weil-pbc-universal-first-order-thickening-cover-gluing",
+  "def-weil-pbc-universal-first-order-thickening"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 04F3, affine construction"
+  "place": "Tag 04F3 (lemma-universal-thickening), proof, fourth and fifth paragraphs; read at https://stacks.math.columbia.edu/tag/04F3"
  },
  "lean": {
   "existing": false,
@@ -94,12 +116,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261012T225321-L-1810246",
+  "landing": "20261013T024053-L-3340711",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
