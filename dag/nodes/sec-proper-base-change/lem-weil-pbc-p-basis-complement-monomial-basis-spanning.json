@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Put F = F_p(k^p). All elements of F lie in kJ since the latter contains\np-th powers and the prime field. Expand x in the given F-basis, with finitely\nmany nonzero coordinates. Split each bounded exponent function into its restriction\nto J and to I minus J. The complementary monomial belongs to kJ, since each\nof its generators lies there. Its product with the original F-coordinate is\ntherefore a kJ coefficient. Group the finitely many terms by their restriction\nto J. This expresses x in the kJ-span of the displayed J monomials. For empty\nJ this also shows kJ = k, and the only displayed monomial is 1.",
+   "text": "Put F = F_p(k^p). By the closure universal property, F is contained in kJ:\nprime-field elements are natural-number casts and pth powers are generators of kJ.\nFor a bounded finitely supported exponent E, use Finsupp.filter to partition E\nbetween J and its complement. The complementary product belongs to kJ by closure\nunder powers and finite products. The J part equals the displayed monomial indexed\nby i ↦ E(i) in Fin p, using the exponent bounds and extending its support to J with\nzero exponents. Their product belongs to the kJ-span by scalar multiplication.\nExpand any x using the given F-basis and its finitely supported coordinate vector.\nEach summand belongs to the kJ-span because its F-coordinate belongs to kJ; closure\nunder finite sums finishes the proof. No grouping of repeated J restrictions is\nneeded. This also handles empty J, empty I, and zero exponents.",
    "uses": [
     "def-weil-field",
     "def-weil-pbc-free-module"
@@ -31,7 +31,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P5 proof"
+  "place": "Tag 07P5 proof, bounded-monomial splitting; formalized directly using Mathlib Finsupp.filter and Module.Basis.linearCombination_repr by M4"
  },
  "blueprint": {
   "is": null,
@@ -102,10 +102,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T123208-L-3677678",
-  "kind": "interface",
+  "landing": "20261013T125012-L-3837626",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -37,6 +37,53 @@ theorem pBasisComplementMonomialBasis_spanning
     (hkJ : kJ = Subfield.closure
       (Set.range (fun x : k ↦ x ^ p) ∪ {x : k | ∃ i : I, i ∉ J ∧ t i = x})) :
     ⊤ ≤ Submodule.span kJ (Set.range (fun E : J → Fin p ↦ ∏ i : J, t i ^ (E i : ℕ))) := by
-  sorry
+  classical
+  let F := IntermediateField.adjoin (ZMod p) (Set.range (fun x : k ↦ x ^ p))
+  have hF : F.toSubfield ≤ kJ := by
+    change Subfield.closure _ ≤ kJ
+    apply Subfield.closure_le.mpr
+    rintro x (⟨a, rfl⟩ | hx)
+    · rw [← ZMod.natCast_zmod_val a, map_natCast]
+      exact natCast_mem kJ _
+    · rw [hkJ]
+      exact Subfield.subset_closure (Or.inl hx)
+  let S := Submodule.span kJ
+    (Set.range (fun E : J → Fin p ↦ ∏ i : J, t i ^ (E i : ℕ)))
+  have hm (E : {E : I →₀ ℕ // ∀ i : I, E i < p}) :
+      (E : I →₀ ℕ).prod (fun i e ↦ t i ^ e) ∈ S := by
+    let e : J → Fin p := fun i ↦ ⟨E.val i, E.property i⟩
+    let c := (E.val.filter (fun i ↦ i ∉ J)).prod (fun i n ↦ t i ^ n)
+    have hc : c ∈ kJ := by
+      apply kJ.prod_mem
+      intro i hi
+      rw [Finsupp.support_filter, Finset.mem_filter] at hi
+      apply kJ.pow_mem
+      rw [hkJ]
+      exact Subfield.subset_closure (Or.inr ⟨i, hi.2, rfl⟩)
+    have hsplit : E.val.prod (fun i n ↦ t i ^ n) =
+        (∏ i : J, t i ^ (e i : ℕ)) * c := by
+      rw [← Finsupp.prod_filter_mul_prod_filter_not (fun i ↦ i ∈ J)]
+      congr 1
+      rw [Finsupp.prod_of_support_subset _ (s := J)]
+      · change (∏ i ∈ J, t i ^ (E.val.filter (fun i ↦ i ∈ J)) i) =
+          ∏ i : J, t i ^ E.val i
+        rw [Finset.prod_coe_sort J (fun i : I ↦ t i ^ E.val i)]
+        apply Finset.prod_congr rfl
+        intro i hi
+        rw [Finsupp.filter_apply_pos _ _ hi]
+      · intro i hi
+        exact (Finset.mem_filter.mp hi).2
+      · intro i hi
+        exact pow_zero _
+    rw [hsplit, mul_comm]
+    exact S.smul_mem (⟨c, hc⟩ : kJ) (Submodule.subset_span ⟨e, rfl⟩)
+  obtain ⟨b, hb⟩ := hpb
+  intro x _
+  rw [← b.linearCombination_repr x, Finsupp.linearCombination_apply, Finsupp.sum]
+  apply S.sum_mem
+  intro E hE
+  change (b.repr x E : k) * b E ∈ S
+  rw [hb E]
+  exact S.smul_mem (⟨(b.repr x E : k), hF (b.repr x E).property⟩ : kJ) (hm E)
 
 end RingTheory

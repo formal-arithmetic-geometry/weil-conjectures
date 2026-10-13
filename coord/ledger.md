@@ -12515,3 +12515,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:50 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicCharts (stage 3; reviewer PASS; first push; landing 20261013T125011-L-3837291 (interface); batch 20261013T125004; modules 3; new nodes 2)
 - 12:50 L: merged deliver/M1/Sheaf.Paper.ModuleCupGodementPairing (stage 3; reviewer PASS; first push; landing 20261013T125011-L-3837418 (interface); batch 20261013T125004; modules 3; new nodes 2)
 - 12:50 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsRestrictionComparisonLeft (stage 3; reviewer PASS; first push; landing 20261013T125012-L-3837525 (interface); batch 20261013T125004; modules 2; new nodes 1)
+- 12:50 L: merged deliver/M4/Sheaf.RingTheory.PBasisComplementMonomialBasisSpanning (stage 3; reviewer PASS; first push; landing 20261013T125012-L-3837626 (proof); batch 20261013T125004; modules 1; new nodes 0)
