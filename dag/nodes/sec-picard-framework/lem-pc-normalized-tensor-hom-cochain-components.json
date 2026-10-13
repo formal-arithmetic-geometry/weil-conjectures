@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the explicit normalized global-cochain component formula on the input and output of the degreewise map. Its defining HomTensorCurryCondition evaluates the restriction to the tensor summand as c at x, then its r-projection evaluated at y.",
+   "text": "Prove the global-cochain component calculation over an abstract site and ring sheaf for an arbitrary degreewise map satisfying HomTensorCurryCondition. Eliminate the input cochain using surjectivity of normalizedHomGlobalCochains, so its preimage section is an abstract variable; cancel symm_apply_apply and rewrite both components using normalizedHomGlobalCochains_v. Keep both projection APIs locally irreducible and identify them once using the proved generic normalized_projection_eq. Reindex the degreewise pure-tensor equation by substitution and apply it directly at the identity slice object, without duplicating its evaluation terms. The public theorem specializes this proved generic calculation to homTensorDegreewiseMap and its specification.",
    "uses": [
     "lem-pc-normalized-hom-complex-global-cochains",
     "lem-sc-hom-tensor-degreewise",
@@ -25,9 +25,11 @@
    "elementary": false
   },
   {
-   "text": "Expand the inverse sheaf tensor-Hom adjunction through presheaf uncurrying and sheafification. After symmetry its evaluation on x tensor y is the same expression. Equality on localized pure tensors implies equality before sheafification by the tensor universal property, and then equality of sheaf morphisms by the sheafification adjunction.",
+   "text": "Prove the sheaf tensor comparison respects braiding using braiding naturality and the braided sheafification tensorator. Apply the underlying sheafification-unit naturality to get the corresponding equation for homTensorCurrySectionMap. The tensorHomEquiv inverse identity, rewritten with tensorHomEquiv_val, identifies its presheaf pullback with presheaf uncurrying. To prove equality of sheaf tensor maps, precompose with the inverse tensor comparison, use injectivity of the sheafification homEquiv, and test the resulting presheaf linear maps on pure tensors. Proved generic evaluation lemmas expose the normalized factor and braided presheaf uncurrying before specializing module arguments. After explicitly exposing composition, their evaluations reduce to the degreewise equation from step 1. Monoidal structures and normalized equivalences are locally irreducible to avoid repeated expansion. The final step directly applies the reindexed equation without duplicating its local evaluations. These are ten proved private helpers; no intermediate admission is used.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed"
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-hom"
    ],
    "elementary": false
   }
@@ -36,14 +38,16 @@
   "lem-pc-normalized-hom-complex-global-cochains",
   "lem-sc-hom-tensor-degreewise",
   "lem-pc-normalized-tensor-hom-cochains",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-hom"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B2",
-  "date": "2026-10-13",
+  "group": "G1",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90 (lemma-compose), degreewise evaluation and sheaf tensor-Hom adjunction; natural-language reduction documented by B2, with the Lean component proof still open"
+  "place": "Tag 0A90 (lemma-compose), with the tensor sheafification adjunction of sites-modules.tex Tag 03CY; Lean proof uses the existing upstream tensorHomEquiv and braided sheafification API."
  },
  "mathlib_searches": [
   {
@@ -132,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-80875",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T082330-L-1630580",
+  "landing": "20261013T224509-L-1470705",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and DAG node match the original target statement; proof, imports, scoped interface changes, and recorded dependencies compile cleanly, with the direct importer verified in the packet."
  }
 }
