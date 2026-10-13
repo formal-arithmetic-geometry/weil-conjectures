@@ -10362,3 +10362,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:43 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative (stage 3; reviewer PASS; first push; landing 20261013T004336-L-2509762 (proof); batch 20261013T004330; modules 1; new nodes 0)
 - 00:43 L: merged deliver/R1/Sheaf.RingTheory.PowerSeriesN2 (stage 3; reviewer PASS; first push; landing 20261013T004336-L-2509862 (interface); batch 20261013T004330; modules 2; new nodes 1)
 - 00:43 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback (stage 3; reviewer PASS; first push; landing 20261013T004336-L-2509963 (proof); batch 20261013T004330; modules 1; new nodes 0)
+- 00:43 L: merged deliver/U1/Sheaf.RingTheory.CompatibleRingTowerRecursion (stage 3; reviewer PASS; first push; landing 20261013T004337-L-2510060 (proof); batch 20261013T004330; modules 1; new nodes 0)

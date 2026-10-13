@@ -10,15 +10,52 @@
  },
  "proof": [
   {
-   "text": "Choose a well-order on I and a base stage from hbase. Use ordinary well-founded recursion on a fixed type of records. A record stores its stage carrier, ring and R-algebra structures, its map to K, and, for every index of I, an incoming algebra map with its domain carrier and structures. At index i, test whether the earlier records form a coherent diagram: their incoming-map domains must agree with the stored earlier stages, their maps must satisfy the identity and composition laws, and their maps to K must commute. If they do, and there are predecessors, apply hstep to that diagram on the strict initial segment and x = q i. Store the resulting stage and cocone maps. If there are no predecessors, apply hstep to the singleton base diagram and x = q i. Fill unused incoming-map entries with the identity of the new stage. If the earlier records are incoherent, use the base record as a default. Fix these choices before recursing. All records form a type in universe w+1 (or larger to hold the parameters), so well-founded recursion applies without increasing any carrier's universe. By well-founded induction the default branch is never used. The cocone equations give composition with all preceding transitions and compatibility with K; identities give the diagonal maps. The domains stored in the new record are exactly the previously chosen carriers. Thus the recursively chosen records give one coherent diagram. The new stage satisfies P and contains q i by hstep. This also covers finite orders, orders with limit stages, and the empty order (where the final diagram is empty). Choices are made inside this existence proof, not used to define any ring.",
+   "text": "Choose a linear order on I with well-founded strict order using exists_wellFoundedLT, and obtain a base ring stage from hbase.",
    "uses": [
-    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "fourth proof paragraph (well-ordering and coherent transfinite recursion); https://stacks.math.columbia.edu/tag/03C3"
+   }
+  },
+  {
+   "text": "Package each stage as its Type w carrier, ring and R-algebra structures and map to K. Package a record as a stage and one tagged source stage and incoming algebra map for every index. RecordGood asserts P, that q i is in the image, that strict predecessor source tags agree, that incoming maps commute with K, and their composition law for two strict predecessors. Source transports cancel by equality induction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "fourth proof paragraph (well-ordering and coherent transfinite recursion); https://stacks.math.columbia.edu/tag/03C3"
+   }
+  },
+  {
+   "text": "Given locally good predecessor records at i, recover the coherent diagram indexed by {j // j < i}: diagonal maps are identities, strict maps are transported incoming maps. The earlier RecordGood equations give the DirectedSystem and K-compatibility laws, including equality cases. If this index type is nonempty, apply hstep to that diagram and q i. If it is empty, apply hstep to the constant singleton diagram on ULift Unit with the base ring and identity maps. Store the resulting stage and cocone in extendRecord, filling unused incoming entries with identities. Reading back a stored map cancels the two opposite source transports, so the cocone equations prove RecordGood for the new record.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "fourth proof paragraph (well-ordering and coherent transfinite recursion); https://stacks.math.columbia.edu/tag/03C3"
+   }
+  },
+  {
+   "text": "Use the proved private coherentChoice lemma on the fixed record type. Its recursive functional chooses a record satisfying the local predicate whenever one exists and otherwise returns the base record. WellFoundedLT.fix defines the family, fix_eq supplies the recursion equation, and well-founded induction proves that the local extension argument applies at every index, so every chosen record is good and the default is never needed.",
+   "uses": [
     "lem-weil-pbc-transfinite-recursion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
+    "place": "fourth proof paragraph (well-ordering and coherent transfinite recursion); https://stacks.math.columbia.edu/tag/03C3"
+   }
+  },
+  {
+   "text": "Project carriers, ring and algebra structures, and maps to K from the good family. Define transition maps by identities on the diagonal and by incoming maps at strict pairs. Strict composition is RecordGood at the last stage; equality cases reduce to identities. The same split proves compatibility with K. P and image containment are the first two clauses of RecordGood. No nonemptiness of I is required, and the construction retains all carriers in Type w.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "fourth proof paragraph (well-ordering and coherent transfinite recursion); https://stacks.math.columbia.edu/tag/03C3"
    }
   }
  ],
@@ -27,9 +64,9 @@
   "lem-weil-pbc-transfinite-recursion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
+  "place": "Formalized the fixed-record well-founded recursion argument from the existing node and Tag 03C3; U1, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -106,13 +143,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-34994",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T234226-L-2127186",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T004337-L-2510060",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and node diff matched the recorded proof-only changes; delivery and direct importer compiled cleanly, with permitted axioms only."
  }
 }
