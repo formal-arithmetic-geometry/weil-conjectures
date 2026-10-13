@@ -1,0 +1,132 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "status": "split",
+ "kind": "statement",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RadicialSeparatingGenericField",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 0559 second proof: GenericFibreDominantField; affine steps before geometric reducedness",
+   "via": [
+    "lem-sbc-radicial-separating-generic-field",
+    "lem-sbc-radicial-reduced-flat-generic-fibre",
+    "lem-sbc-radicial-preparation-construction",
+    "lem-sbc-radicial-generic-reduced-preparation",
+    "lem-sbc-generic-radicial-geometrically-reduced-model",
+    "lem-sbc-affine-source-geometric-irreducibility-shrink",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0559, 030R and 04KM"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project",
+  "place": "Tags 0559 and 030R"
+ },
+ "proof_deps": [],
+ "id": "lem-sbc-generic-fibre-dominant-field",
+ "title": "Generic-fibre dominant field",
+ "statement": "Let Z and S be affine schemes in universe u, Z reduced and S integral. Let g: Z to S be flat and locally of finite presentation, eta a generic point of S, and assume the eta fibre is geometrically irreducible. There exist a field L in universe u and a kappa(eta)-algebra structure on L such that the top intermediate field of L/kappa(eta) is finitely generated, and a scheme-theoretically dominant map j: Spec L to the eta fibre of g. The composite of j with the fibre projection is Spec of the displayed algebra map. No base extension, new base scheme, or separability assertion is included.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreDominantField",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreDominantField.lean",
+  "declaration": "AlgebraicGeometry.exists_generic_fibre_dominant_field",
+  "statement": "theorem exists_generic_fibre_dominant_field\n    {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]\n    (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (g.fiberToSpecResidueField η)) :\n    ∃ (L : Type u) (hL : Field L) (aL : Algebra (S.residueField η) L),\n      letI := hL\n      letI := aL\n      (⊤ : IntermediateField (S.residueField η) L).FG ∧\n      ∃ j : Spec (.of L) ⟶ g.fiber η,\n        IsSchemeTheoreticallyDominant j ∧\n        j ≫ g.fiberToSpecResidueField η =\n          Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "identify S and Z with Spec A and Spec B. At the generic point the base residue field\nis Frac A, and the fibre ring is B localized at the nonzero elements of A. Localization\npreserves reducedness. Geometric irreducibility implies irreducibility and nonemptiness,\nso this reduced ring is a nonzero domain. Take its actual fraction field L. Finite\npresentation gives a finite set of algebra generators of the fibre ring; they also generate\nL as a field. The injection of the fibre ring into its fraction field gives a\nscheme-theoretically dominant spectrum map j. Its composite to the base spectrum is the\nspectrum of the induced field algebra map by contravariant functoriality.\nThe empty fibre is excluded by geometric irreducibility; a zero-dimensional fibre gives\nits ordinary finite function field. No geometrically reduced hypothesis is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A reduced affine scheme over an integral base with geometrically irreducible generic fibre has a finitely generated function field",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:32:06Z\", \"tool\": \"leansearch\", \"query\": \"A reduced affine scheme over an integral base with geometrically irreducible generic fibre has a finitely generated function field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine reduced scheme over an integral base has a finitely generated generic function field with a scheme theoretically dominant spectrum map",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:24:50Z\", \"tool\": \"leanfinder\", \"query\": \"An affine reduced scheme over an integral base has a finitely generated generic function field with a scheme theoretically dominant spectrum map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"6433fdf70d67b87c\"}",
+   "digest": "6433fdf70d67b87c",
+   "verdict": "Related API only; no exact match for the combined scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "residueFieldMap|radicial.*field|generic.*functionField",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:24:51Z\", \"tool\": \"grep\", \"query\": \"residueFieldMap|radicial.*field|generic.*functionField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\"], \"digest\": \"f3d542b0dc25952f\"}",
+   "digest": "f3d542b0dc25952f",
+   "verdict": "Related API only; no exact match for the combined scheme statement."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T140822-L-314847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T140822-L-314847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

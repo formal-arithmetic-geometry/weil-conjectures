@@ -13,6 +13,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Sheaf.FieldTheory.SeparableExtension
 
 import Sheaf.FieldTheory.MakeSeparablyGenerated
+import Sheaf.AlgebraicGeometry.GenericFibreDominantField
+import Sheaf.AlgebraicGeometry.PurelyInseparableGenericBaseSpread
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding
 
 /-! # A separating generic field after a radicial base extension
 
@@ -68,6 +71,30 @@ theorem exists_radicial_separating_generic_field
             Algebra.IsSeparablyGenerated (S'.residueField η') F ∧
             h ≫ ((pullback g q).nilradical.subschemeι ≫
               pullback.snd g q).fiberToSpecResidueField η' =
-                Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') F)) := by sorry
+                Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') F)) := by
+  classical
+  obtain ⟨L, hL, aL, hfg, j, hj, hjbase⟩ :=
+    exists_generic_fibre_dominant_field g η hη hgeom
+  let _ := hL
+  let _ := aL
+  obtain ⟨k', hk', akk', E, hE, aLE, akE, hfin, hpure, _, _, hsep, hsquare⟩ :=
+    FieldExtension.exists_finitePurelyInseparable_separablyGenerated
+      (S.residueField η) L hfg
+  let _ := hk'
+  let _ := akk'
+  let _ := hE
+  let _ := aLE
+  let _ := akE
+  have _ := hfin
+  have _ := hpure
+  obtain ⟨S', q, hA, hI, hU, η', hq, hη', e, he⟩ :=
+    exists_purely_inseparable_generic_base_spread η hη k'
+  have _ := hA
+  have _ := hI
+  obtain ⟨aE, h, hdom, hsep', hbase⟩ :=
+    exists_reduced_generic_fibre_field_embedding g q η η' hq hη' L k' E
+      j hj hjbase e he hsquare hsep
+  let _ := aE
+  exact ⟨S', q, hA, hI, hU, η', hq, E, hE, aE, h, hdom, inferInstance, hsep', hbase⟩
 
 end AlgebraicGeometry

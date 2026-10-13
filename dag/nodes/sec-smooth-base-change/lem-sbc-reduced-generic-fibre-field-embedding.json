@@ -1,0 +1,132 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "status": "split",
+ "kind": "statement",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RadicialSeparatingGenericField",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 0559 second proof: ReducedGenericFibreFieldEmbedding; affine steps before geometric reducedness",
+   "via": [
+    "lem-sbc-radicial-separating-generic-field",
+    "lem-sbc-radicial-reduced-flat-generic-fibre",
+    "lem-sbc-radicial-preparation-construction",
+    "lem-sbc-radicial-generic-reduced-preparation",
+    "lem-sbc-generic-radicial-geometrically-reduced-model",
+    "lem-sbc-affine-source-geometric-irreducibility-shrink",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0559, 030R and 04KM"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project",
+  "place": "Tags 0559 and 030R"
+ },
+ "proof_deps": [],
+ "id": "lem-sbc-reduced-generic-fibre-field-embedding",
+ "title": "Reduced generic-fibre field embedding",
+ "statement": "Let Z, S and S-prime be affine schemes in universe u, with S-prime integral. Let g: Z to S and q: S-prime to S be morphisms, eta in S, and eta-prime a generic point of S-prime mapping to eta. Let L, k-prime and E be fields in universe u with algebra structures kappa(eta) to L, kappa(eta) to k-prime, L to E and k-prime to E. Assume k-prime/kappa(eta) is finite purely inseparable and the two composites kappa(eta) to E coincide. Suppose j: Spec L to the eta fibre of g is scheme-theoretically dominant and its base composite is Spec of the algebra map. Suppose a ring equivalence e: kappa(eta-prime) to k-prime identifies the q residue field map with the specified base extension. If E/k-prime is separably generated, then E admits a kappa(eta-prime)-algebra structure and a scheme-theoretically dominant map h: Spec E to the eta-prime fibre of the canonical reduction of Z times_S S-prime. The extension E/kappa(eta-prime) is separably generated, and h followed by the reduced fibre projection equals Spec of its algebra map. No base scheme, field, or purely inseparable extension is constructed by this theorem.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedGenericFibreFieldEmbedding.lean",
+  "declaration": "AlgebraicGeometry.exists_reduced_generic_fibre_field_embedding",
+  "statement": "theorem exists_reduced_generic_fibre_field_embedding\n    {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']\n    (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)\n    (hη' : IsGenericPoint η' Set.univ)\n    (L k' E : Type u) [Field L] [Field k'] [Field E]\n    [Algebra (S.residueField η) L] [Algebra (S.residueField η) k']\n    [Algebra L E] [Algebra k' E]\n    [Module.Finite (S.residueField η) k'] [IsPurelyInseparable (S.residueField η) k']\n    (j : Spec (.of L) ⟶ g.fiber η) (hj : IsSchemeTheoreticallyDominant j)\n    (hjbase : j ≫ g.fiberToSpecResidueField η =\n      Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L)))\n    (e : S'.residueField η' ≃+* k')\n    (he : e.toRingHom.comp\n      (((S.residueFieldCongr hq).inv ≫ q.residueFieldMap η').hom) =\n        algebraMap (S.residueField η) k')\n    (hsquare : (algebraMap k' E).comp (algebraMap (S.residueField η) k') =\n      (algebraMap L E).comp (algebraMap (S.residueField η) L))\n    (hsep : Algebra.IsSeparablyGenerated k' E) :\n    ∃ aE : Algebra (S'.residueField η') E,\n      letI := aE\n      ∃ h : Spec (.of E) ⟶\n          ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',\n        IsSchemeTheoreticallyDominant h ∧\n        Algebra.IsSeparablyGenerated (S'.residueField η') E ∧\n        h ≫ ((pullback g q).nilradical.subschemeι ≫\n          pullback.snd g q).fiberToSpecResidueField η' =\n            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "both original fibre and reduced pullback fibre are affine. Write C for the original\nfibre ring and k for its base field. Scheme-theoretic dominance of j gives an injection\nC -> L. Flatness of k'/k preserves this injection after tensoring. Since k'/k is finite\npurely inseparable, L tensor_k k' is an Artinian local ring whose reduction is a field.\nThe compatible maps into E give a unital homomorphism of this tensor ring into E. Its\nkernel is its unique prime, hence its nilradical, so its reduced map is injective.\nAn injective ring map induces an injection on reductions by detection of nilpotence.\nBecause S-prime is integral and eta-prime is generic, passage to its residue field is localization. Localization commutes with reduction, identifying the reduced pullback fibre ring with\n(C tensor_k k')_red. Compose these injections to get its injection into E. Its spectrum\nmap is scheme-theoretically dominant and respects the base algebra maps by construction.\nTransport the E/k' transcendence basis and separability across e to obtain separable\n generation over kappa(eta'). This construction works also for identity base extension;\nit imposes no reducedness or finite presentation assumption on the original family.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme theoretically dominant generic field map induces a dominant map on the reduced generic fibre after a purely inseparable base extension",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:34:34Z\", \"tool\": \"leansearch\", \"query\": \"A scheme theoretically dominant generic field map induces a dominant map on the reduced generic fibre after a purely inseparable base extension\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injection from an affine generic fibre ring into a field remains injective on reductions after finite purely inseparable base change",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:34:33Z\", \"tool\": \"leanfinder\", \"query\": \"An injection from an affine generic fibre ring into a field remains injective on reductions after finite purely inseparable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.injective_comp_algebraMap\", \"IsPurelyInseparable.injective_restrictDomain\", \"Algebra.IsGeometricallyReduced.of_injective\", \"WeierstrassCurve.Affine.Point.map_injective\", \"IsPurelyInseparable.of_injective_comp_algebraMap\", \"AlgHom.IsArithFrobAt.restrict_injective\", \"WeierstrassCurve.Affine.CoordinateRing.map_injective\", \"Algebra.Extension.σ_injective\"], \"digest\": \"3ed394a75cfbc582\"}",
+   "digest": "3ed394a75cfbc582",
+   "verdict": "Related API only; no exact match for the combined scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPurelyInseparable|nilradical.*[Ll]ocal|[Ll]ocal.*nilradical",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T13:32:07Z\", \"tool\": \"grep\", \"query\": \"IsPurelyInseparable|nilradical.*[Ll]ocal|[Ll]ocal.*nilradical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\"], \"digest\": \"08a91df94a7948fb\"}",
+   "digest": "08a91df94a7948fb",
+   "verdict": "Related API only; no exact match for the combined scheme statement."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T140822-L-314847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T140822-L-314847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
