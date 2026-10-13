@@ -14,34 +14,37 @@
  },
  "proof": [
   {
-   "text": "Fix an injective resolution I. The constant integer sheaf adjunction evaluated at 1 identifies its Hom complex with the global section complex, including the differentials. Pass to cocycles modulo coboundaries and use InjectiveResolution.extAddEquivCohomologyClass to get an additive isomorphism e from Ext to section-complex homology. Its cocycle formula is extEquivCohomologyClass_extMk; monicity of iCycles identifies the specified cycle z uniquely.",
+   "text": "Fix the chosen injective resolution I of F. Apply new-abelian-resolution-sections-iso to obtain the canonical section-homology isomorphism e with its Ext cocycle formula. The hypothesis hα makes H^q(alpha_I) invertible. Define c = H^q(beta_I), followed by the inverse of H^q(alpha_I), followed by e. This is a composite of additive morphisms.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction",
+    "new-abelian-resolution-sections-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other resolution J use Mathlib InjectiveResolution.homotopyEquiv J I, whose forward map lifts the identity. The global-section functor sends this homotopy equivalence to one, so its homology map s is invertible (Functor.mapHomotopyEquiv and HomotopyEquiv.toHomologyIso). Define t on total homology by applying the Cech functor, flipping and totalizing the resolution map. Prove alpha_J followed by the total map equals the sections map followed by alpha_I using restriction naturality and HomologicalComplex₂.ιTotal_map. Prove beta_J followed by the total map equals beta_I using the augmentation identity in degree zero. Taking homology gives H(alpha_J)t=sH(alpha_I) and H(beta_J)t=H(beta_I). The first equation and hα show t is invertible.",
    "uses": [
     "def-pc-abelian-cech-comparison-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Define c as homologyMap(beta), inverse homologyMap(alpha), and inverse e. The supplied quasi-isomorphism hypothesis ensures that homologyMap(alpha) is invertible. The cocycle formula for e proves the quotient equation on I.",
+   "text": "Given x,a,ha,z on J in IsAbelianCechComparison, transport z to the section cycles of I. Adjunction.homEquiv_naturality_right and cyclesMap_i show that its underlying section is the image of a composed with the resolution map. Apply the cocycle formula for e. InjectiveResolution.extMk_comp_mk₀ and the identity law on Ext show the Ext class is still J.extMk a. Hence c(x)=J.extMk a implies that this transported homology class is inverse H(alpha_I)(H(beta_I)(x)), by injectivity of e. Apply the augmentation squares and homologyπ_naturality to the proposed equation on J, then cancel the invertible t. This proves the equation for every supplied resolution and representative, without a covering assumption.",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For another resolution J lift the identity of F to I -> J. Naturality of restrictions and the augmentation identity give commuting alpha and beta squares. InjectiveResolution.extMk_comp_mk₀ with the identity gives compatibility of e with the section homology map, so that map is invertible. The alpha square then makes the total homology map invertible. Transport the equation on I and cancel the total map to get the equation on J for all x, a, ha and z. No cover assumption or finiteness enters this argument.",
-   "uses": [
-    "def-pc-abelian-cech-comparison-construction"
+    "def-pc-abelian-cech-comparison-construction",
+    "new-abelian-resolution-sections-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-abelian-cech-comparison-construction"
+  "def-pc-abelian-cech-comparison-construction",
+  "new-abelian-resolution-sections-iso"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2"
+  "place": "Lemma 20.11.2, augmentation quotient; A3 explicit resolution transport via a homotopy equivalence J -> I"
  },
  "mathlib_searches": [
   {
@@ -145,9 +148,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T010615-L-2671111",
+  "landing": "20261013T025256-L-3421140",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

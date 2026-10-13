@@ -1,0 +1,130 @@
+{
+ "id": "new-abelian-resolution-sections-iso",
+ "kind": "statement",
+ "title": "Injective-resolution section homology and Ext, with the cocycle formula",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an abelian sheaf [def-sc-topological-abelian-cohomology], $I$ an injective resolution of $F$ [def-sp-injective-resolutions], and $q\\in\\mathbb N$. Let $A=\\Gamma(X,I^\\bullet)$ be the section complex of [def-pc-abelian-cech-comparison-construction]. There is an additive isomorphism $e:H^q(A)\\simeq H^q(X,F)$, where the latter is Ext from the constant integer sheaf. For every cocycle $a:\\mathbf Z_X\\to I^q$ and every $z\\in Z^q(A)$ such that evaluating the constant-sheaf adjunction image of $a$ at the lifted integer $1$ equals $i_{Z^q(A)}(z)$, one has $e([z])=\\operatorname{extMk}_I(a)$. No open cover or augmentation quasi-isomorphism is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-injective-resolutions",
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, identification of RΓ with section homology of an injective resolution; explicit Ext computation supplied by Mathlib CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass"
+ },
+ "proof": [
+  {
+   "text": "Define the additive Hom/section equivalence by constantSheafAdj.homAddEquiv followed by AddCommGrpCat.uliftZMultiplesAddEquiv. Its value is evaluation at the lifted integer 1. Adjunction.homEquiv_naturality_right shows it commutes with every sheaf morphism.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend I.cocomplex by zero to I.cochainComplex, indexed by the integers. Cochain.fromSingleEquiv identifies degree-n Hom cochains out of the constant integer sheaf placed in degree zero with maps to I.cochainComplex.X n. Compose with the Hom/section equivalence degreewise. Cochain.δ_fromSingleMk and naturality verify differential compatibility, giving an isomorphism of complexes. HomologicalComplex.mapExtendIso identifies its target with the extension by zero of the natural-number section complex A.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose extendHomologyIso inverse, the inverse isomorphism induced on homology, HomComplex.homologyAddEquiv, and InjectiveResolution.extAddEquivCohomologyClass inverse. This is e. For the cocycle formula take the canonical Hom cocycle Cocycle.fromSingleMk of a composed with the inverse cochainComplexXIso. Its class is I.extMk a by definition. The leftHomologyData cycles and homology projection identities compute this class. Monicity of iCycles, the degreewise complex isomorphism formula, and the supplied section equality identify its image with extendCyclesIso inverse applied to z. Apply homologyπ_extendHomologyIso_inv and homologyπ_naturality and cancel the inverse cycle maps. This proves e([z])=I.extMk a, including q=0, the zero sheaf and the empty space.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2 resolution computation, expanded by A3 with Mathlib Hom-complex APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "homology of global sections of an injective resolution is Ext from the constant integer sheaf",
+   "results": "{\"t\": \"2026-10-13T01:10:01Z\", \"tool\": \"leanfinder\", \"query\": \"homology of global sections of an injective resolution is Ext from the constant integer sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extMk_hom\"], \"digest\": \"d363c79828cdd2bf\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact section-homology comparison; Mathlib Ext and Hom-complex APIs are used in the complete proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "results": "{\"t\": \"2026-10-13T01:10:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply\", \"CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_symm_apply\", \"CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_apply\"], \"digest\": \"79e4a92b8da3b988\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact section-homology comparison; Mathlib Ext and Hom-complex APIs are used in the complete proof."
+  },
+  {
+   "tool": "grep",
+   "query": "extAddEquivCohomologyClass|homologyMap.*constantSheaf",
+   "results": "{\"t\": \"2026-10-13T01:10:02Z\", \"tool\": \"grep\", \"query\": \"extAddEquivCohomologyClass|homologyMap.*constantSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\"], \"digest\": \"18e92d8630420871\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact section-homology comparison; Mathlib Ext and Hom-complex APIs are used in the complete proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections homology injective resolution Ext constant integer sheaf",
+   "results": "{\"t\": \"2026-10-13T01:14:45Z\", \"tool\": \"leansearch\", \"query\": \"global sections homology injective resolution Ext constant integer sheaf\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonCore",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Separated-case Cech paragraph: resolution-section identification for the augmented double-complex comparison, expanded in new-abelian-cech-comparison-core proof step 1",
+   "via": [
+    "lem-pc-cech-comparison-system-existence",
+    "lem-pc-abelian-cech-comparison-maps",
+    "new-abelian-cech-comparison-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianResolutionSectionsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianResolutionSectionsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_abelianResolutionSectionsIso",
+  "statement": "theorem exists_abelianResolutionSectionsIso\n    {X : Scheme.{u}}\n    {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}\n    (I : InjectiveResolution F) (q : ℕ) :\n    ∃ e : (abelianCechSections I).homology q ≅\n      (Sheaf.functorH (Opens.grothendieckTopology X) q).obj F,\n      ∀ (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n        (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I.cocomplex.X q)\n        (ha : a ≫ I.cocomplex.d q (q + 1) = 0)\n        (z : (abelianCechSections I).cycles q),\n        ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n          isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n            (abelianCechSections I).iCycles q z →\n        e.hom ((abelianCechSections I).homologyπ q z) = I.extMk a (q + 1) rfl ha",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T025256-L-3421140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T025256-L-3421140",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
