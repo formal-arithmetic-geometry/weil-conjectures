@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-normal-dense-open-integral-section",
+ "kind": "statement",
+ "title": "Integral sections on a dense open of a normal locally Noetherian scheme extend",
+ "statement": "Let X be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring] whose local rings are integrally closed domains [def-weil-pbc-normal-ring]. Let V be a dense open subset of X and U an affine open subset of X. Give the ring of sections on V intersect U its algebra structure over the sections on U by restriction. Every section s on V intersect U that is integral over the ring of sections on U is the restriction of a section t on U. Neither X nor U needs to be nonempty or connected.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0357 (normal integral components), 0AB1 (integral elements in a normal function field), and the sheaf axiom; https://stacks.math.columbia.edu/tag/0357 and https://stacks.math.columbia.edu/tag/0AB1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "First work on an integral scheme with integrally closed stalks. For nonempty opens W contained in U, the generic germ maps sections on W injectively to the function field. The restriction map from U to W commutes with generic germs. Map the monic equation for s along this algebra map; the resulting germ g is integral over the sections on U, and hence over each stalk at a point of U. Each such stalk is integrally closed in its fraction field, which is the function field, so g lies in its image. Apply [lem-sc-function-field-sections-glue] to produce a section on U with generic germ g. Injectivity of generic germs proves that it restricts to s on W. This is the private integral_section_extends proof.",
+   "uses": [
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A locally Noetherian scheme is locally connected by the already proved source-library instance IsLocallyNoetherian.locallyConnectedSpace. Its connected components are open. For the component C of a point, transfer the domain and integral-closedness hypotheses through the stalk isomorphisms of C into X. Apply the already proved source-library irreducibleSpace_of_isDomain_stalk to this nonempty connected locally Noetherian scheme. Reducedness follows from reduced stalks, and reducedness plus irreducibility gives integrality. These are direct applications of proved source and Mathlib declarations, recorded in the private component_isIntegral proof; no component decomposition is assumed or left unproved.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each x in U, let C be its open connected component and T the intersection of C with U. Density of V ensures the nonempty open T meets V. Restrict s and its monic equation to C; IsIntegral.map_of_comp_eq applies because naturality of restriction gives the commuting square of ring maps. Apply step 1 on the integral normal scheme C to extend the section from its intersection with V and U to its intersection with U. Sections of an open subscheme are sections on its image, so this gives a section on T. This is integral_section_extends_locally.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stalk domain hypotheses make X reduced. The dense open immersion V into X is dominant, hence scheme-theoretically dominant; Mathlib Scheme.Hom.app_injective gives injectivity on all section rings. In particular, restriction from any open T contained in U to its intersection with V is injective. The local extensions in step 3 agree on overlaps, since their restrictions there to V are restrictions of s. The sheaf axiom existsUnique_gluing glues these local sections over U. Local equality after restriction to V identifies the restriction of the glued section with s. When U is empty, the indexed family has no members and the same sheaf gluing proof gives the unique section, without selecting any point.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-function-field-sections-glue"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0357 and 0AB1; componentwise generic-germ integral-closure argument with sheaf gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections integral over a normal scheme extend from a dense open subset",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral section on a dense open of a normal locally Noetherian scheme extends to a section on every open subset",
+   "results": "IsIntegral.component_integral, integral open-subscheme instances, normalization instances, and normalize_finite_fraction_representation. None is the extension statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Opens.ι, IsIntegral",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_germToFunctionField_eq|irreducibleSpace_of_isDomain_stalk|IsIntegral.map_of_comp_eq; integral sections dense open in library and DAG",
+   "results": "Mathlib has IsIntegral.map_of_comp_eq and Scheme.Hom.app_injective. The source library has exists_germToFunctionField_eq and irreducibleSpace_of_isDomain_stalk, used in the complete proof. No declaration states the extension result. Blueprint search integral section dense open returned no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use existing ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Integral-closure comparison of the finite normal model with a common dense open: the integral-section surjectivity part of lem-sbc-normalization-dense-open.",
+   "via": [
+    "lem-sbc-normalization-dense-open",
+    "lem-sbc-finite-normal-dense-open-iso",
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalDenseOpenIntegralSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_integral_section_denseOpen",
+  "statement": "theorem exists_integral_section_denseOpen\n    {X : Scheme.{u}} [IsLocallyNoetherian X]\n    (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧\n      IsIntegrallyClosed (X.presheaf.stalk z))\n    (V : X.Opens) (hV : Dense (V : Set X))\n    (U : X.Opens) (_hU : IsAffineOpen U)\n    (s : Γ(V, V.ι ⁻¹ᵁ U))\n    (hs : letI := (V.ι.app U).hom.toAlgebra; _root_.IsIntegral Γ(X, U) s) :\n    ∃ t : Γ(X, U), V.ι.app U t = s",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T031549-L-3573459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T031549-L-3573459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,17 +15,31 @@
  ],
  "proof": [
   {
-   "text": "This is local on X. On an affine open Spec A, the Noetherian normal ring A is a finite product of integrally closed domains A_i (0357). The intersection of V with each Spec A_i is a nonempty open, since V is dense. It therefore contains the generic point. Its section ring embeds in Frac(A_i), by restriction to the generic point: sections on an integral scheme are determined by their generic germ. Every section integral over A_i then lies in A_i by integral closedness. Conversely, every element of A_i gives an integral section. Taking the finite product shows that the integral closure of A in the sections on V intersect Spec A is exactly A. The relative normalization over Spec A is the spectrum of this integral closure (035I), so its canonical map to Spec A is an isomorphism. These local assertions show the canonical map is an isomorphism on X. Empty affine opens contribute the zero ring; if X is empty the same assertion holds. No nonemptiness of X is needed.",
+   "text": "The domain stalks imply reduced stalks and hence reducedness of X. The dense open immersion V into X is dominant, and therefore scheme-theoretically dominant. Mathlib Scheme.Hom.app_injective gives injectivity of restriction on every open. Thus the algebra map from sections on an affine U to their integral closure in sections on V intersect U is injective.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sbc-normal-dense-open-integral-section] to each element of this integral closure. It is integral by its subtype membership, and the extension lemma supplies an element of the sections on U with the same restriction. Subtype.ext identifies the two integral-closure elements. The algebra map to the integral closure is therefore surjective as well.",
+   "uses": [
+    "lem-sbc-normal-dense-open-integral-section"
+   ],
    "elementary": false
+  },
+  {
+   "text": "On an affine U, Mathlib Hom.fromNormalization_app expresses the section map of the canonical normalization morphism as the bijective algebra map followed by the inverse normalizationObjIso. RingEquiv.ofBijective makes the algebra map a ring isomorphism, so this section map is an isomorphism. The normalization morphism is integral, hence affine; isIso_morphismRestrict_iff_isIso_app proves that its restriction over U is an isomorphism. Finally apply target locality for isomorphisms to the affine open cover iSup_affineOpens_eq_top. This includes empty affine opens and the empty scheme.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-normal-dense-open-integral-section"
+ ],
  "proof_origin": {
   "kind": "from-document",
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0357, 035I and 0AB1; affine integral-closure argument"
+  "place": "Tags 0357, 035I and 0AB1; integral-section extension plus Mathlib affine normalization and target locality"
  },
  "mathlib_searches": [
   {
@@ -110,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T010611-L-2669226",
+  "landing": "20261013T031549-L-3573459",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
