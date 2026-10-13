@@ -20,40 +20,41 @@
  ],
  "proof": [
   {
-   "text": "Work over an affine open $V=\\operatorname{Spec}(A)\\subset S$ and\nput $X_V=f^{-1}(V)$. The fixed projective embedding restricts to\n$X_V\\hookrightarrow\\mathbf P^n_A$. By\n[lem-pc-projective-coherent-finiteness], the modules\n$M^q=H^q(X_V,\\mathcal F)$ are finite over $A$ and vanish for $q>n$.",
+   "text": "The already proved coherence declaration is unchanged: the composite of the closed immersion with projective projection is proper and locally of finite presentation over the locally Noetherian base, so the existing proper coherence theorem applies.",
+   "uses": [
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For vanishing, fix any affine open U of S and restrict the embedding using ProjectiveSpace.liftBaseChange. Its cartesian square makes this a closed immersion. The affine scheme U is isomorphic to Spec Gamma(U,top); the projective-space map induced by that isomorphism is a closed immersion by base change. Compose to obtain the required closed embedding of f^{-1}U over Spec Gamma(U,top). Apply subsingleton_H_of_isClosedImmersion to the restricted quasi-coherent module.",
    "uses": [
     "lem-pc-projective-coherent-finiteness"
    ],
    "elementary": false
   },
   {
-   "text": "Since $f$ is projective, $f_V:X_V\\to V$ is quasi-compact and separated, and restriction to the open $V$ commutes with higher direct images: $R^qf_*\\mathcal F|_V=R^q(f_V)_*(\\mathcal F|_{X_V})$ (restriction to an open is exact and preserves injective modules). By [lem-pc-cohomology-sections-affine-base], applied to $f_V$ over the affine $V$,\n\n$$\n\\Gamma\\bigl(V,R^qf_*\\mathcal F|_V\\bigr)\\cong H^q(X_V,\\mathcal F)=M^q .\n$$",
+   "text": "Compare this cohomology with open module cohomology and then with sections of R^q f_* F over U. They are subsingleton. Quasi-coherence makes the zero endomorphism epi from surjectivity of all affine-cover section maps; cancellation gives id=0 and IsZero.",
    "uses": [
-    "lem-pc-cohomology-sections-affine-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By [lem-pc-finite-support-hi], $R^qf_*\\mathcal F|_V$ is quasi-coherent, so by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) the counit identifies it with $\\widetilde{M^q}$. A surjection $A^{r}\\twoheadrightarrow M^q$ (step 1) gives a surjection $\\mathcal O_V^{\\oplus r}\\twoheadrightarrow\\widetilde{M^q}$, so $\\widetilde{M^q}$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth], $V$ being Noetherian. For $q>n$, $M^q=0$ gives $R^qf_*\\mathcal F|_V=0$. Since the affine opens $V$ cover $S$, the statement follows on $S$.",
-   "uses": [
-    "lem-pc-finite-support-hi",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-pqf-open-module-cohomology-comparison",
+    "lem-pc-affine-open-higher-direct-image-sections-iso",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-coherent-hi",
   "lem-pc-projective-coherent-finiteness",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-finite-support-hi",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-pqf-open-module-cohomology-comparison",
+  "lem-pc-affine-open-higher-direct-image-sections-iso",
+  "lem-pc-sections-higher-direct-image-quasi-coherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coherent-higher-images.md",
-  "place": "## Proof"
+  "document": "Lean sandbox delivery J2",
+  "place": "Compiled proof in WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "note": "2026-10-13: route updated to match the compiled Lean, with unchanged signatures."
  },
  "mathlib_searches": [
   {
@@ -219,5 +220,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

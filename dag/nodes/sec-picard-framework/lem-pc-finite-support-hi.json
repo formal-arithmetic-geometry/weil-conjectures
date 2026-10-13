@@ -26,73 +26,38 @@
  ],
  "proof": [
   {
-   "text": "To prove (1), restrict the derived direct image to an affine open $V\\subseteq S$ using [lem-pc-restrict-derived-direct-image-open]. On the affine base $S$, apply [lem-sc-invert-s-cohomology-induction] to the property that every $R^if_*\\mathcal G$ is quasi-coherent for every quasi-coherent $\\mathcal G$ on a quasi-compact open. On an affine open $U$, [lem-pc-affine-morphism-hi] gives the assertion in degree zero and the cited cohomology-presheaf statement together with [lem-pc-affine-vanishing] gives vanishing in positive degrees. For $U\\cup V$ (with $U$ quasi-compact, $V$ affine, $a,b,c,g$ the restrictions of $f$ to $U,V,U\\cap V,U\\cup V$ and $\\mathcal G$ quasi-coherent on $U\\cup V$), apply [lem-sc-mayer-vietoris-open-cover] to the cover of $g^{-1}(T)$ by $a^{-1}(T)$ and $b^{-1}(T)$ for every open $T\\subseteq S$; by its naturality in inclusions of open covers these long exact sequences form a long exact sequence of presheaves of $\\mathcal O_S$-modules $T\\mapsto H^p(g^{-1}(T),\\mathcal G)$, etc. Sheafification is exact [lem-weil-pbc-module-presheaf-sheafification-exact] and by [lem-weil-pbc-higher-direct-image-presheaf] it turns these presheaves into $R^pg_*\\mathcal G$, $R^pa_*(\\mathcal G|_U)\\oplus R^pb_*(\\mathcal G|_V)$, $R^pc_*(\\mathcal G|_{U\\cap V})$, giving the relative Mayer--Vietoris long exact sequence, which expresses each cohomology sheaf as an extension of kernels and cokernels of maps between the corresponding quasi-coherent sheaves; kernels and cokernels are checked on affine opens, and [lem-pc-quasi-coherent-extension] gives quasi-coherence of the extensions. This proves (1) locally on $S$ and hence globally.",
+   "text": "Choose affine neighbourhoods U_t of all points of T. Their inverse images are quasi-compact and quasi-separated because f is qcqs. Apply the uniform affine-pullback cohomology bound to each inverse-image scheme, independently of the coefficient module.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-sc-invert-s-cohomology-induction",
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-pc-affine-vanishing",
-    "lem-sc-mayer-vietoris-open-cover",
-    "lem-weil-pbc-module-presheaf-sheafification-exact",
-    "lem-pc-quasi-coherent-extension"
+    "lem-pc-j2-uniform-affine-pullback-cohomology-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 30.4.5, Tag 01XJ (1), using Lemma 08DR and Lemma 01EB"
-   }
+   "elementary": false
   },
   {
-   "text": "For the uniform bound, when $S$ is affine define $P(U)$ for a quasi-compact open $U\\subseteq X$ to mean: there is an integer $n_U$ such that for every affine $S'\\to S$ and every quasi-coherent module $\\mathcal G$ on $S'\\times_S U$, one has $H^p(S'\\times_S U,\\mathcal G)=0$ for all $p\\ge n_U$. If $U$ is affine, then every $S'\\times_S U$ is affine, so [lem-pc-affine-vanishing] gives $n_U=1$. If $U$ is quasi-compact and $V$ is affine, then $(U\\cup V)'=U'\\cup V'$ and $(U\\cap V)'=U'\\cap V'$; applying [lem-sc-mayer-vietoris-open-cover] to the base-changed cover and the induction bounds gives the gluing property with bound one larger than the maximum. Thus [lem-sc-invert-s-cohomology-induction] gives $P(X)$.",
-   "uses": [
-    "lem-pc-affine-vanishing",
-    "lem-sc-mayer-vietoris-open-cover",
-    "lem-sc-invert-s-cohomology-induction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 30.4.5, Tag 01XJ, finite affine-cover induction"
-   }
+   "text": "Compactness of T selects finitely many U_t. Take N to be the maximum of their bounds (Finset.sup, including empty T). For any cartesian base change, cover T-prime by all affine opens V lying in the inverse image of one selected U_t. The restricted cartesian square gives an affine morphism f-prime^{-1}V -> f^{-1}U_t: it is the base change of V -> U_t, a morphism between affine schemes. The chosen bound therefore makes H^p(f-prime^{-1}V,F-prime) subsingleton for p>=N.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For a quasi-compact base $S$, choose a finite affine cover $S=\\bigcup_j S_j$ and apply Step 2 to each restricted morphism over $S_j$; let $n$ be the maximum of the finitely many bounds. For any base change $S'\\to S$, cover $S'$ by affine opens contained in the inverse images of the $S_j$. Each such affine open maps to one affine $S_j$, so Step 2 gives vanishing in degrees $p\\ge n$ for every quasi-coherent module on its inverse image. These opens form a basis, and hence the same $n$ works for every $S'\\to S$.",
+   "text": "The open-module-cohomology comparison identifies the vanishing group with the right-derived sections over f-prime^{-1}V. The affine-open higher-direct-image sections isomorphism identifies it with sections of R^p f-prime_* F-prime over V. Quasi-coherence and surjectivity of the zero endomorphism on this affine cover imply it is epi; cancelling it shows id=0, hence the sheaf is zero.",
    "uses": [
-    "lem-sc-invert-s-cohomology-induction"
+    "lem-pqf-open-module-cohomology-comparison",
+    "lem-pc-affine-open-higher-direct-image-sections-iso",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 30.4.5, Tag 01XJ, quasi-compact-base and arbitrary-base-change conclusion"
-   }
-  },
-  {
-   "text": "Fix a point $y\\in S'$. The affine open neighborhoods $V\\subseteq S'$ of $y$ contained in some $g^{-1}(S_j)$ are cofinal among all open neighborhoods of $y$ (Step 3). For such $V$, $f'^{-1}(V)=V\\times_SX=V\\times_{S_j}f^{-1}(S_j)$, so Step 2 for $f^{-1}(S_j)\\to S_j$ with the affine base change $V\\to S_j$ gives $H^p(f'^{-1}(V),\\mathcal F'|_{f'^{-1}(V)})=0$ for $p\\ge n$. Hence the filtered colimit of these groups over this cofinal system is zero. The stalk isomorphism in [lem-weil-pbc-higher-direct-image-presheaf] identifies this colimit with $(R^pf'_*\\mathcal F')_y$, so every stalk vanishes and therefore $R^pf'_*\\mathcal F'=0$.",
-   "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 30.4.5, Tag 01XJ, final base-change vanishing via Lemma 01E4 stalk description"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-sc-invert-s-cohomology-induction",
-  "lem-pc-affine-morphism-hi",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-pc-affine-vanishing",
-  "lem-sc-mayer-vietoris-open-cover",
-  "lem-pc-quasi-coherent-extension",
-  "lem-weil-pbc-module-presheaf-sheafification-exact"
+  "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+  "lem-pqf-open-module-cohomology-comparison",
+  "lem-pc-affine-open-higher-direct-image-sections-iso",
+  "lem-pc-sections-higher-direct-image-quasi-coherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
-  "place": "## Proof"
+  "document": "Lean sandbox delivery J2",
+  "place": "Compiled proof in WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "note": "2026-10-13: route updated to match the compiled Lean, with unchanged signatures."
  },
  "mathlib_searches": [
   {
@@ -249,5 +214,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

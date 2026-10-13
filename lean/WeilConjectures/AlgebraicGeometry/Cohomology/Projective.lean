@@ -8,18 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
-import Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.UniformAffinePullbackCohomologyBound
+import Sheaf.AlgebraicGeometry.ProjectiveAffineFiniteCohomologyIndependent
+import Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 
 /-!
@@ -70,11 +63,15 @@ quasi-separated, with `T` quasi-compact. There is an integer `n` such that `R^p 
 all `p ≥ n`, all base changes `f' : X' ⟶ T'` of `f` along morphisms `g : T' ⟶ T`, and all
 quasi-coherent `𝒪_{X'}`-modules `ℱ'`.
 
-Over an affine open of `T`, cover `X` by `t` affine opens with affine pairwise intersections
-refined as necessary; induction on `t` with the Mayer–Vietoris sequence for `U₁` and
-`U₂ ∪ ⋯ ∪ U_t` gives `n = t`, and the base change of the covering is again such a covering
-of `X'` [Stacks, Tag 01XJ]. Quasi-coherence of the `R^p f_* ℱ`, the first part of the blueprint
-lemma, is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`.
+Source: Stacks Project, Tag 01XJ, proof of (3). On each affine open `U` of `T`,
+quasi-compact-open induction bounds cohomology after every affine morphism to `f⁻¹(U)`:
+the affine case vanishes in positive degrees, and Mayer–Vietoris glues three bounds by
+`max (max a b) c + 1`. Choose a finite affine cover of `T` and take the maximum bound.
+After arbitrary base change, affine opens `V` mapping into a selected `U` cover `T'`;
+the map `f'⁻¹(V) ⟶ f⁻¹(U)` is affine as a base change of the affine morphism `V ⟶ U`.
+Apply its bound, the open cohomology comparison and the affine-open sections comparison.
+The resulting higher direct image has zero sections on this affine cover. Quasi-coherence
+makes its zero endomorphism epi, so cancellation gives `id = 0` and the sheaf is zero.
 
 (blueprint: `lem-pc-finite-support-hi`) -/
 theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X ⟶ T)
@@ -82,8 +79,70 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
     ∃ n : ℕ, ∀ {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
       [HasInjectiveResolutions X'.Modules], IsPullback g' f' f g →
       ∀ (ℱ' : X'.Modules) [SheafOfModules.IsQuasicoherent (R := X'.ringCatSheaf) ℱ'],
-      ∀ p ≥ n, IsZero ((higherDirectImage f' p).obj ℱ') :=
-  sorry
+      ∀ p ≥ n, IsZero ((higherDirectImage f' p).obj ℱ') := by
+  classical
+  choose U hU ht htop using fun t : T ↦ exists_isAffineOpen_mem_and_subset
+    (show t ∈ (⊤ : T.Opens) from trivial)
+  have bounds (t : T) : ∃ n : ℕ,
+      ∀ {Y : Scheme.{u}} (h : Y ⟶ (f ⁻¹ᵁ U t).toScheme) [IsAffineHom h]
+        (F : Y.Modules) [F.IsQuasicoherent], ∀ p : ℕ, n ≤ p → Subsingleton (F.H p) := by
+    have : IsAffine (U t).toScheme := hU t
+    have : CompactSpace (f ⁻¹ᵁ U t).toScheme :=
+      QuasiCompact.compactSpace_of_compactSpace (f ∣_ U t)
+    have : QuasiSeparatedSpace (f ⁻¹ᵁ U t).toScheme :=
+      quasiSeparatedSpace_of_quasiSeparated (f ∣_ U t)
+    exact exists_uniform_affine_pullback_openCohomology_bound _
+  choose n hn using bounds
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover (fun t ↦ (U t : Set T))
+    (fun t ↦ (U t).isOpen) (fun t _ ↦ Set.mem_iUnion.mpr ⟨t, ht t⟩)
+  refine ⟨s.sup n, ?_⟩
+  intro T' X' g g' f' _ sq F' _ p hp
+  have : QuasiCompact f' := MorphismProperty.of_isPullback sq inferInstance
+  have : QuasiSeparated f' := MorphismProperty.of_isPullback sq inferInstance
+  let M := (higherDirectImage f' p).obj F'
+  have : M.IsQuasicoherent := isQuasicoherent_higherDirectImage f' F' p
+  let J := Σ t : s, {V : T'.affineOpens // V.1 ≤ g ⁻¹ᵁ U t}
+  let W : J → T'.Opens := fun j ↦ j.2.1.1
+  have hcov : ⨆ j, W j = ⊤ := by
+    apply eq_top_iff.mpr
+    intro x _
+    obtain ⟨t, hts, hxt⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ (g x)))
+    obtain ⟨V, hV, hxV, hVU⟩ := exists_isAffineOpen_mem_and_subset
+      (show x ∈ g ⁻¹ᵁ U t from hxt)
+    exact TopologicalSpace.Opens.mem_iSup.mpr
+      ⟨⟨⟨t, hts⟩, ⟨⟨V, hV⟩, hVU⟩⟩, hxV⟩
+  have hsections (j : J) : Subsingleton Γ(M, W j) := by
+    let t : T := j.1
+    let V : T'.Opens := W j
+    have hV : IsAffineOpen V := j.2.1.2
+    have hVU : V ≤ g ⁻¹ᵁ U t := j.2.2
+    let UX := f ⁻¹ᵁ U t
+    let UY := f' ⁻¹ᵁ V
+    have hUY : UY ≤ g' ⁻¹ᵁ UX := by
+      change f' ⁻¹ᵁ V ≤ g' ⁻¹ᵁ (f ⁻¹ᵁ U t)
+      rw [← Scheme.Hom.comp_preimage, sq.w, Scheme.Hom.comp_preimage]
+      exact f'.preimage_mono hVU
+    let h := g'.resLE UX UY hUY
+    have hsq := Scheme.Hom.isPullback_resLE sq hVU
+      (show UX ≤ f ⁻¹ᵁ U t from le_rfl)
+      (show UY = g' ⁻¹ᵁ UX ⊓ f' ⁻¹ᵁ V from (inf_eq_right.mpr hUY).symm)
+    have : IsAffine (U t).toScheme := hU t
+    have : IsAffine V.toScheme := hV
+    have : IsAffineHom h := MorphismProperty.of_isPullback hsq.flip inferInstance
+    let F := (restrictFunctor UY.ι).obj F'
+    have : F.IsQuasicoherent := isQuasicoherent_restrictFunctor UY.ι F'
+    have hz : Subsingleton (F.H p) := hn t h F p
+      ((Finset.le_sup j.1.property).trans hp)
+    obtain ⟨b⟩ := nonempty_openModuleCohomology_addEquiv_restrict_H X' F' UY p
+    obtain ⟨c⟩ := nonempty_affineOpen_higherDirectImage_sections_iso f' V hV F'
+      inferInstance p
+    exact ⟨fun x y ↦ c.addCommGroupIsoToAddEquiv.symm.injective
+      (b.injective (hz.elim _ _))⟩
+  have : Epi (0 : M ⟶ M) := epi_of_surjective_app 0 W
+    (fun j ↦ j.2.1.2) hcov (fun j x ↦ ⟨0, (hsections j).elim _ _⟩)
+  apply (IsZero.iff_id_eq_zero M).mpr
+  apply (cancel_epi (0 : M ⟶ M)).mp
+  simp
 
 /-- The cohomology of a sheaf of modules on a scheme `X` with a morphism `f : X ⟶ Spec A` is an
 `A`-module, by restriction of scalars of the `Γ(X, ⊤)`-module structure along
@@ -106,6 +165,9 @@ and `ℱ` a coherent module on `ℙⁿ_A`. Then each `H^q(ℙⁿ_A, ℱ)` is a f
 By descending induction on `q`, for all coherent modules at once: for `q > n` the cohomology
 vanishes; in general, a surjection `ℰ ⟶ ℱ` from a finite sum `ℰ` of twists `𝒪(m)` with coherent
 kernel `𝒦` gives an exact sequence `H^q(ℰ) ⟶ H^q(ℱ) ⟶ H^{q+1}(𝒦)` whose outer terms are finite.
+The proof reuses this induction in `finite_H_projective_affine_independent` for the identity
+embedding, and transports scalars along `Γ(Spec A, ⊤) ≅ A` by an identity semilinear surjection.
+Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
 
 (blueprint: `lem-pc-projective-space-coherent-finiteness`) -/
 theorem ProjectiveSpace.finite_H (A : Type u) [CommRing A] [IsNoetherianRing A]
@@ -113,15 +175,37 @@ theorem ProjectiveSpace.finite_H (A : Type u) [CommRing A] [IsNoetherianRing A]
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] (q : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
-    Module.Finite A (ℱ.H q) :=
-  sorry
+    Module.Finite A (ℱ.H q) := by
+  classical
+  let T := Spec (.of A)
+  have : IsNoetherianRing Γ(T, ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let : Module Γ(T, ⊤) (ℱ.H q) :=
+    Module.compHom _ (ℙ(n; T) ↘ T).appTop.hom
+  have : Module.Finite Γ(T, ⊤) (ℱ.H q) := by
+    simpa using finite_H_projective_affine_independent n (𝟙 (ℙ(n; T))) ℱ q
+  let := moduleHOfSpec (ℙ(n; T) ↘ T) ℱ q
+  let e := (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv
+  let f : ℱ.H q →ₛₗ[e.toRingHom] ℱ.H q :=
+    { toFun := id
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ by
+        change (ℙ(n; T) ↘ T).appTop a • x =
+          (ℙ(n; T) ↘ T).appTop ((Scheme.ΓSpecIso (.of A)).inv
+            ((Scheme.ΓSpecIso (.of A)).hom a)) • x
+        rw [Iso.hom_inv_id_apply] }
+  exact Module.Finite.of_surjective f Function.surjective_id
 
 variable {X : Scheme.{u}}
 
 /-- **Coherent cohomology of a projective scheme over a noetherian ring.** Let `A` be
 noetherian, `i : X ⟶ ℙⁿ_A` a closed immersion and `ℱ` a coherent `𝒪_X`-module. Then each
-`H^q(X, ℱ)` is a finite `A`-module: `i_* ℱ` is coherent with the same cohomology as `ℱ`, and
-`AlgebraicGeometry.ProjectiveSpace.finite_H` applies to it.
+`H^q(X, ℱ)` is a finite `A`-module. Apply the independent affine-base projective finiteness
+argument to `i`, which uses the finite-source twist cohomology segment and descending induction.
+The action in that theorem is through `Γ(Spec A, ⊤)`. The identity map on `H^q(X, ℱ)` is
+semilinear along `Γ(Spec A, ⊤) ≅ A`; its scalar identity is the inverse law of `ΓSpecIso`.
+Transport finite generation through this surjection to obtain precisely `moduleHOfSpec`.
+Source: Stacks Project, Tag 01YS, Lemma 30.14.1 (3).
 
 (blueprint: `lem-pc-projective-coherent-finiteness`) -/
 theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
@@ -129,8 +213,26 @@ theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     letI := moduleHOfSpec (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
-    Module.Finite A (ℱ.H q) :=
-  sorry
+    Module.Finite A (ℱ.H q) := by
+  classical
+  let T := Spec (.of A)
+  have : IsNoetherianRing Γ(T, ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let : Module Γ(T, ⊤) (ℱ.H q) :=
+    Module.compHom _ (i ≫ (ℙ(n; T) ↘ T)).appTop.hom
+  have : Module.Finite Γ(T, ⊤) (ℱ.H q) :=
+    finite_H_projective_affine_independent n i ℱ q
+  let := moduleHOfSpec (i ≫ ℙ(n; T) ↘ T) ℱ q
+  let e := (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv
+  let f : ℱ.H q →ₛₗ[e.toRingHom] ℱ.H q :=
+    { toFun := id
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun a x ↦ by
+        change (i ≫ (ℙ(n; T) ↘ T)).appTop a • x =
+          (i ≫ (ℙ(n; T) ↘ T)).appTop ((Scheme.ΓSpecIso (.of A)).inv
+            ((Scheme.ΓSpecIso (.of A)).hom a)) • x
+        rw [Iso.hom_inv_id_apply] }
+  exact Module.Finite.of_surjective f Function.surjective_id
 
 /-- **Vanishing of the cohomology of a projective scheme above the dimension.** Let
 `i : X ⟶ ℙᵈ_A` be a closed immersion, `ℙᵈ_A = ℙ(n; Spec A)` with `Nat.card n = d + 1`, and
@@ -143,8 +245,22 @@ This is the vanishing clause of the blueprint lemma.
 theorem Scheme.Modules.subsingleton_H_of_isClosedImmersion (A : Type u) [CommRing A]
     (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {d : ℕ} (hn : Nat.card n = d + 1)
-    {q : ℕ} (hq : d < q) : Subsingleton (ℱ.H q) :=
-  sorry
+    {q : ℕ} (hq : d < q) : Subsingleton (ℱ.H q) := by
+  have : ((pushforward i).obj ℱ).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_isAffineHom i ℱ
+  have : Subsingleton (((pushforward i).obj ℱ).H q) :=
+    ProjectiveSpace.subsingleton_H_of_lt n A hn ((pushforward i).obj ℱ) hq
+  obtain ⟨e⟩ := nonempty_functorH_iso_pushforwardAb_of_isAffineHom i q
+  let F : (cechAcyclicOnAffines X).FullSubcategory :=
+    ⟨(SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ,
+      cechAcyclicOnAffines_of_isQuasicoherent ℱ⟩
+  let a := (e.app F).addCommGroupIsoToAddEquiv
+  have ht : Subsingleton (Sheaf.H
+      ((TopCat.Sheaf.pushforwardAb i.base).obj
+        ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ)) q) := by
+    change Subsingleton (((pushforward i).obj ℱ).H q)
+    infer_instance
+  exact ⟨fun x y ↦ a.injective (ht.elim (a x) (a y))⟩
 
 namespace Scheme.Modules
 
@@ -181,8 +297,42 @@ are the sheaves associated with the `H^q(f⁻¹(Spec A), ℱ)`, which vanish by
 
 (blueprint: `lem-pc-projective-coherent-higher-images`) -/
 theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n = d + 1)
-    {q : ℕ} (hq : d < q) : IsZero ((higherDirectImage f q).obj ℱ) :=
-  sorry
+    {q : ℕ} (hq : d < q) : IsZero ((higherDirectImage f q).obj ℱ) := by
+  classical
+  subst hi
+  let f := i ≫ ℙ(n; S) ↘ S
+  let M := (higherDirectImage f q).obj ℱ
+  have : M.IsQuasicoherent := isQuasicoherent_higherDirectImage f ℱ q
+  have hsections (U : S.affineOpens) : Subsingleton Γ(M, U.1) := by
+    let V := f ⁻¹ᵁ U.1
+    let T := U.1.toScheme
+    let a := f ∣_ U.1
+    have : IsAffine T := U.2
+    let w : a ≫ U.1.ι = (V.ι ≫ i) ≫ ℙ(n; S) ↘ S := by
+      simpa only [Category.assoc] using (isPullback_morphismRestrict f U.1).w
+    let j := ProjectiveSpace.liftBaseChange a (V.ι ≫ i) w
+    have : IsClosedImmersion j := MorphismProperty.of_isPullback
+      (ProjectiveSpace.isPullback_liftBaseChange a
+        (isPullback_morphismRestrict f U.1).flip w) inferInstance
+    let e := T.isoSpec
+    have : IsClosedImmersion (ProjectiveSpace.map n e.hom) :=
+      MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map n e.hom).flip inferInstance
+    let j' := j ≫ ProjectiveSpace.map n e.hom
+    let F := (restrictFunctor V.ι).obj ℱ
+    have : F.IsQuasicoherent := isQuasicoherent_restrictFunctor V.ι ℱ
+    have hz : Subsingleton (F.H q) :=
+      subsingleton_H_of_isClosedImmersion (Γ(T, ⊤)) j' F hn hq
+    obtain ⟨b⟩ := nonempty_openModuleCohomology_addEquiv_restrict_H X ℱ V q
+    obtain ⟨c⟩ := nonempty_affineOpen_higherDirectImage_sections_iso f U.1 U.2 ℱ
+      inferInstance q
+    exact ⟨fun x y ↦ c.addCommGroupIsoToAddEquiv.symm.injective
+      (b.injective (hz.elim _ _))⟩
+  have : Epi (0 : M ⟶ M) := epi_of_surjective_app 0
+    (fun U : S.affineOpens ↦ U.1) (fun U ↦ U.2) (iSup_affineOpens_eq_top S)
+    (fun U x ↦ ⟨0, (hsections U).elim _ _⟩)
+  apply (IsZero.iff_id_eq_zero M).mpr
+  apply (cancel_epi (0 : M ⟶ M)).mp
+  simp
 
 end Scheme.Modules
 

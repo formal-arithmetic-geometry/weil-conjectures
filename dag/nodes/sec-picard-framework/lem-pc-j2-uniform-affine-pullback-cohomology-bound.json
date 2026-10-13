@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+ "kind": "statement",
+ "title": "Uniform cohomology bound under affine morphisms",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-pc-morphism-conventions]. There is $n\\in\\mathbb N$ such that, for every affine morphism $h:Y\\to X$ [pqf-def-affine-morphism], every quasi-coherent $\\mathcal O_Y$-module $F$ [pqf-def-coherent], and every $p\\ge n$, the additive group $H^p(Y,F)$ [pqf-def-cohomology] is zero. The bound is independent of $Y,h,F$.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XJ, lemma-quasi-coherence-higher-direct-images, proof of (3), finite affine-cover argument; Tag 08DR induction principle"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-affine-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply quasi-compact-open induction to P(W): there is n_W bounding H^p(h^{-1}W,F) for every affine h:Y->X and quasi-coherent F on Y. If W is affine, h^{-1}W is affine by the definition of affine morphism. Affine-open vanishing supplies n_W=1.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given bounds a,b,c for A,B,A intersection B, take max(max(a,b),c)+1 for A union B. Write p=q+1. Both degree-p groups on the inverse images of A and B vanish, and the degree-q group on their intersection vanishes. Mayer-Vietoris exactness makes every union class the image of an intersection class, hence zero. Preimage preserves unions and intersections. This proves the induction gluing hypothesis uniformly in h and F. The Lean induction step applies the existing public RingedSpace.module_mayerVietoris directly; it declares no duplicate private union theorem.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take W=top. Compute open module cohomology at top using one injective module resolution. Its section complex is the forgetful image of the module global-section complex; exact forgetful functor preserves homology. Transport zero cohomology to module right-derived sections and then along the additive source-cohomology comparison to H^p(Y,F).",
+   "uses": [
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invert-s-cohomology-induction",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-mayer-vietoris-ringed-space",
+  "lem-sc-module-cohomology-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01XJ, proof of (3), realized using the 08DR open induction and 01EB Mayer-Vietoris",
+  "note": "J2 wrote and compiled the complete Lean proof; no local sorry. Landing-return repair removes the duplicate private union helper and applies the existing public RingedSpace.module_mayerVietoris directly in the induction step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniform cohomological bound quasi compact quasi separated scheme affine morphism pullback quasi coherent modules",
+   "results": "Eight hits about affine transition limits and affine-open pullback compactness; no cohomology-bound match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAffineHom",
+   "results": "0 hits; unknown identifier IsAffineHom",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology.*bound|bound.*IsAffineHom",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound for quasi coherent sheaf cohomology after affine morphisms to a quasi compact quasi separated scheme",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Proof Step 2: the uniform finite affine-cover cohomology bound preserved under affine base changes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniformAffinePullbackCohomologyBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniformAffinePullbackCohomologyBound.lean",
+  "declaration": "AlgebraicGeometry.exists_uniform_affine_pullback_openCohomology_bound",
+  "statement": "theorem exists_uniform_affine_pullback_openCohomology_bound (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X] :\n    ∃ n : ℕ, ∀ {Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h]\n      (F : Y.Modules) [F.IsQuasicoherent], ∀ p : ℕ, n ≤ p →\n        Subsingleton (F.H p)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,32 +19,33 @@
  ],
  "proof": [
   {
-   "text": "By [def-pc-projective-morphism], choose a closed immersion $i:X\\hookrightarrow\\mathbf P^n_A$ over $\\operatorname{Spec}(A)$ whose composite with the structural projection is the given projective morphism. The standard opens of $\\mathbf P^n_A$ are affine polynomial charts by [def-pc-proj], so $\\mathbf P^n_A$ is of finite type over the Noetherian scheme $\\operatorname{Spec}(A)$; [lem-weil-pbc-finite-type-over-noetherian] therefore makes $\\mathbf P^n_A$ Noetherian and hence locally Noetherian. A closed immersion is locally of finite type, so [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. Thus [lem-pc-closed-immersion-coherent-cohomology] applies: $i_*\\mathcal F$ is coherent on $\\mathbf P^n_A$ and $H^q(\\mathbf P^n_A,i_*\\mathcal F)\\cong H^q(X,\\mathcal F)$ for every $q$. The finiteness statement [lem-pc-projective-space-coherent-finiteness] applied to $i_*\\mathcal F$ gives that $H^q(X,\\mathcal F)$ is a finite $A$-module. For the vanishing clause, let $j:X\\hookrightarrow\\mathbf P^m_A$ be any embedding, i.e. a closed immersion over $\\operatorname{Spec}(A)$ as in [def-pc-projective-morphism] (not necessarily the $i$ chosen above). The same argument with $j$ in place of $i$ ($\\mathbf P^m_A$ is Noetherian by the chart argument, and $X$ is locally Noetherian as shown) lets [lem-pc-closed-immersion-coherent-cohomology] give that $j_*\\mathcal F$ is coherent, hence quasi-coherent, with $H^q(X,\\mathcal F)\\cong H^q(\\mathbf P^m_A,j_*\\mathcal F)$; for $q>m$, [lem-pc-projective-space-cohomology-bound] makes the right side zero, hence $H^q(X,\\mathcal F)=0$ (equivalently, its additive group is subsingleton).",
+   "text": "For finiteness, apply finite_H_projective_affine_independent to the specified closed embedding over T=Spec A. Convert its Gamma(T,top)-finiteness to A-finiteness by the identity semilinear map along GammaSpecIso, whose linearity follows from its inverse law.",
    "uses": [
-    "def-pc-projective-morphism",
-    "def-pc-proj",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "pqf-lem-locnoeth-lft",
-    "lem-pc-closed-immersion-coherent-cohomology",
-    "lem-pc-projective-space-coherent-finiteness",
-    "lem-pc-projective-space-cohomology-bound"
+    "lem-pc-m1-projective-affine-finite-cohomology-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For vanishing only quasi-coherence is needed: affine pushforward of F along i is quasi-coherent. The projective-space cohomology bound makes H^q(i_*F) subsingleton. The affine-pushforward abelian-cohomology comparison, applied to F as a Cech-acyclic sheaf, injects H^q(F) into this group; hence H^q(F) is subsingleton. This does not require a field or a Noetherian ring.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-projective-space-cohomology-bound",
+    "lem-pc-closed-immersion-coherent-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-projective-morphism",
-  "def-pc-proj",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-lem-locnoeth-lft",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-pc-projective-space-coherent-finiteness",
-  "lem-pc-projective-space-cohomology-bound"
+  "lem-pc-m1-projective-affine-finite-cohomology-independent",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-closed-immersion-coherent-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coherent-finiteness.md",
-  "place": "## Proof"
+  "document": "Lean sandbox delivery J2",
+  "place": "Compiled proof in WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "note": "2026-10-13: route updated to match the compiled Lean, with unchanged signatures."
  },
  "mathlib_searches": [
   {
@@ -176,5 +177,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

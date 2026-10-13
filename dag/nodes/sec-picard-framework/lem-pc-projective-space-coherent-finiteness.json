@@ -18,34 +18,26 @@
  ],
  "proof": [
   {
-   "text": "We descend on $q$, proving the assertion for all coherent modules\nat once. For $q>n$ it follows from\n[lem-pc-projective-space-cohomology-bound].\nSuppose it is known in degree $q+1$ for every coherent module.\nFor a given $\\mathcal F$, choose the exact sequence\n$0\\to\\mathcal K\\to\\mathcal E\\to\\mathcal F\\to0$ of\n[lem-pc-projective-space-twist-quotient], with $\\mathcal E$\na finite sum of twists and $\\mathcal K$ coherent.\nThe long exact sequence of [pqf-def-cohomology] contains\n\n$$\nH^q(P,\\mathcal E)\\longrightarrow H^q(P,\\mathcal F)\n\\longrightarrow H^{q+1}(P,\\mathcal K).\n$$",
+   "text": "Apply finite_H_projective_affine_independent to the identity embedding of projective space over T=Spec A. This is the existing descending-induction argument from the finite-source twist segment and alternating-Cech vanishing, not proper coherence.",
    "uses": [
-    "lem-pc-projective-space-cohomology-bound",
-    "lem-pc-projective-space-twist-quotient",
-    "pqf-def-cohomology"
+    "lem-pc-m1-projective-affine-finite-cohomology-independent"
    ],
    "elementary": false
   },
   {
-   "text": "The first term is finite by\n[lem-pc-projective-space-twist-cohomology]; the last is finite\nby the induction hypothesis applied to $\\mathcal K$.\nThe middle term is an extension of a quotient of the first term\nby a submodule of the last. Quotients and extensions of finite\nmodules are finite; the submodule is finite because $A$ is\nNoetherian. This proves the induction step, including $q=0$.",
-   "uses": [
-    "lem-pc-projective-space-twist-cohomology",
-    "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": false
+   "text": "Gamma(Spec A,top) is Noetherian via GammaSpecIso. Transport finiteness along Gamma(Spec A,top) -> A using the identity on H^q as a semilinear surjection. Its scalar compatibility is GammaSpecIso.hom_inv_id_apply and the definition of moduleHOfSpec. Module.Finite.of_surjective gives the required A-finiteness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-projective-space-cohomology-bound",
-  "lem-pc-projective-space-twist-quotient",
-  "pqf-def-cohomology",
-  "lem-pc-projective-space-twist-cohomology",
-  "lem-weil-pbc-noetherian-submodule-finite"
+  "lem-pc-m1-projective-affine-finite-cohomology-independent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-space-coherent-finiteness.md",
-  "place": "## Proof"
+  "document": "Lean sandbox delivery J2",
+  "place": "Compiled proof in WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "note": "2026-10-13: route updated to match the compiled Lean, with unchanged signatures."
  },
  "mathlib_searches": [
   {
@@ -185,5 +177,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100014-L-2465154",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
