@@ -116,6 +116,7 @@ end Twist
 
 /-! ### The diagonal -/
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
@@ -134,6 +135,7 @@ theorem nonempty_iso_dualizingComplex_pullbackFst :
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) f
   exact ⟨(rightDerivedUpperShriek _ (pullback.fst f f)).mapIso ι.symm ≪≫ (e.app (𝟙_ _)).symm⟩
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
@@ -148,6 +150,7 @@ theorem nonempty_iso_dualizingComplex_pullbackSnd :
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) f
   exact ⟨(rightDerivedUpperShriek _ (pullback.snd f f)).mapIso ι.symm ≪≫ (e.app (𝟙_ _)).symm⟩
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
