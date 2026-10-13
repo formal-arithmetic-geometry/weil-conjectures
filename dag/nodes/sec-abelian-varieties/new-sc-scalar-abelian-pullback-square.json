@@ -15,29 +15,40 @@
  },
  "proof": [
   {
-   "text": "Form the canonical comparison from abelian inverse image of the underlying\nscalar sheaf to the underlying sheaf of scalar inverse image. Its adjunct is the\nforgotten scalar adjunction unit; it is an isomorphism because both inverse images\nhave the same stalks and forgetting scalars commutes with filtered colimits.\nInvert this comparison to obtain c, naturally in the coefficient sheaf. The\nconstant-sheaf adjunction identifies its unit component: the integer generator\nmaps to the scalar section 1, scalarInverseUnitIso transports the scalar section\n1 to the same section on Y, and scalarAbelianIntegerIso transports the integer\ngenerator to that section. Equality under the sections adjunction gives the first\n(degree-zero) equation. For the second equation apply the abelian inverse-image\nadjunction. The characterization in exists_scalarPullbackCoefficient identifies\nits sectionwise adjunct with the tensor adjunction unit. Postcomposition with\ntensorPullbackObjUnitToUnit gives the original structure-sheaf morphism, by\ntensorPullbackObjUnitToUnit_isIso. This is the adjunct defining\nscalarAbelianStructureCoefficient. Injectivity of the adjunction equivalence gives\nthe equation. These are sheaf-map and degree-zero identities, with no higher\ncohomology class, module Ext comparison, or resolution choices. On the empty\nscheme all involved sections and identities are zero; no nonemptiness is needed.",
+   "text": "Obtain the canonical comparison with its adjunction and integer-unit sheaf-map equations. Apply Ext.mk₀ to the integer-unit equation, use mk₀_homEquiv₀_apply, mapExactFunctor_mk₀ and mk₀_comp_mk₀ to obtain the degree-zero Ext equation.",
    "uses": [
-    "new-sc-scalar-abelian-ext-factorization",
-    "def-sc-field-linear-module-cohomology-operations",
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "def-sc-structure-sheaf-cohomology-pullback"
+    "new-sc-scalar-forget-pullback-adjunction",
+    "new-sc-scalar-abelian-ext-factorization"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For the coefficient equality, cancel the inverse component of c and apply injectivity of the abelian inverse-image adjunction. Its coherence identifies the left adjunct with the forgotten scalar adjunct, which scalar_structure_coefficient_adjunct identifies with a.c. The right adjunct is a.c by the defining homEquiv.symm formula for scalarAbelianStructureCoefficient.",
+   "uses": [
+    "new-sc-scalar-forget-pullback-adjunction",
+    "new-sc-scalar-structure-coefficient-adjunct",
+    "def-sc-structure-sheaf-cohomology-pullback",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "new-sc-scalar-abelian-ext-factorization",
   "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback",
   "lem-weil-pbc-module-pullback-structure-sheaf",
-  "def-sc-structure-sheaf-cohomology-pullback"
+  "new-sc-scalar-abelian-ext-factorization",
+  "new-sc-scalar-forget-pullback-adjunction",
+  "new-sc-scalar-structure-coefficient-adjunct"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
+  "group": "S4",
   "date": "2026-10-13",
-  "document": "Stacks Project, Tags 03FD, 01F7, 0096",
-  "place": "Tag 01F7, functorial cohomology maps; Tag 0096, tensor inverse-image adjunction",
-  "note": "Specialized to the explicit Lean definitions; strict part of the parent argument."
+  "document": "Stacks Project, Tags 0096 and 01F7",
+  "place": "Canonical comparison and adjunct of the structure coefficient",
+  "note": "Explicit reduction via degree-zero Ext calculus and adjunction injectivity; coefficient adjunct proved from existing declarations."
  },
  "mathlib_searches": [
   {
@@ -119,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
+  "reviewer": "X-29b3c",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T100222-L-2503249",
+  "landing": "20261013T130752-L-3986965",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG nodes; existing signatures unchanged, all delivered modules and the sole direct importer compile, and axiom checks match the documented remaining obligation."
  }
 }

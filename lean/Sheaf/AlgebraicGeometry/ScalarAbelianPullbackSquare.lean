@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction
+import Sheaf.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
 
 /-! # The underlying abelian square for scalar inverse image
 
@@ -24,6 +26,7 @@ open Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] Sheaf.monoidalCategory
+attribute [local irreducible] scalarAbelianUnitClass scalarInverseImage
 local instance (k : Type u) [Field k] (X : Scheme.{u}) : HasExt.{u + 1} (KSheaf X k) :=
   HasExt.standard _
 
@@ -118,6 +121,20 @@ theorem scalar_abelian_pullback_square (k : Type u) [Field k]
           (scalarPullbackCoefficient f g a h (SheafOfModules.unit X.ringCatSheaf) ≫
             scalarHom g (tensorPullbackObjUnitToUnit a)) =
         c.hom.app (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf)) ≫
-          scalarAbelianStructureCoefficient a := by sorry
+          scalarAbelianStructureCoefficient a := by
+  obtain ⟨c, hadj, hunit⟩ := scalar_forget_pullback_adjunction k a
+  refine ⟨c, ?_, ?_⟩
+  · rw [← Abelian.Ext.mk₀_homEquiv₀_apply (scalarAbelianUnitClass k Y),
+      ← Abelian.Ext.mk₀_homEquiv₀_apply (scalarAbelianUnitClass k X),
+      Abelian.Ext.mapExactFunctor_mk₀, Abelian.Ext.mk₀_comp_mk₀,
+      Abelian.Ext.mk₀_comp_mk₀, Abelian.Ext.mk₀_comp_mk₀]
+    exact congrArg Abelian.Ext.mk₀ (by simpa only [Category.assoc] using hunit)
+  · apply (Iso.inv_comp_eq (c.app _)).mp
+    apply (((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv
+      _ _).injective
+    exact (hadj _ _ _).trans ((scalar_structure_coefficient_adjunct k f g a h).trans
+      ((((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv
+        _ _).apply_symm_apply _).symm)
+
 
 end AlgebraicGeometry.Scheme

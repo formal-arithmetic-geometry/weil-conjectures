@@ -1,0 +1,124 @@
+{
+ "id": "new-sc-scalar-forget-pullback-adjunction",
+ "kind": "statement",
+ "title": "Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence",
+ "statement": "Let k be a field, X and Y schemes, and a:Y → X any morphism. Let U_X,U_Y forget scalar actions on k-sheaves [new-sc-scalar-abelian-ext-factorization], and let L_k,L_ab be inverse image [def-sc-field-linear-module-cohomology-operations]. There is a natural isomorphism c:L_k ⋙ U_Y ≅ U_X ⋙ L_ab such that for every k-sheaf F on X, G on Y, and q:L_k(F) → G, the abelian adjunct of c⁻¹_F followed by U_Y(q) equals U_X of the scalar adjunct of q. Furthermore the integer-unit sheaf map on Y followed by the forgotten inverse scalar tensor-unit comparison and c at the tensor unit equals the constant-integer inverse-image comparison followed by L_ab of the integer-unit map on X. Here integer-unit maps are homEquiv₀ of the explicitly defined degree-zero classes. No structure-sheaf coefficient equation is asserted.",
+ "stmt_deps": [
+  "new-sc-scalar-abelian-ext-factorization",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 (lemma-pullback-pushforward-adjoint) and 01F7 (cohomology-equation-functorial); specialization to the explicit Lean constructions"
+ },
+ "proof": [
+  {
+   "text": "Adjunct the forgotten scalar inverse-image unit to obtain a natural map\nfrom abelian inverse image to forgotten scalar inverse image. On every stalk this\nis the map identifying the same filtered colimit of underlying abelian groups,\nsince forgetting a field action preserves filtered colimits. It is therefore an\nisomorphism; invert it to obtain c. Naturality and the adjunction triangle identity\ngive the first equation for every q. For the integer-unit equation, pass through\nthe constant-integer sections adjunction: both maps carry the integer generator\nto the scalar section 1. The constant-sheaf pullback comparison carries this same\nsection to 1, and the definition of scalarInverseUnitIso is its scalar analogue.\nEquality on the generator proves equality of the sheaf maps. This proof works\nfor zero sheaves, the empty scheme, and fields of every characteristic.",
+   "uses": [
+    "new-sc-scalar-abelian-ext-factorization",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-sc-scalar-abelian-ext-factorization",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-13",
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 and 01F7",
+  "note": "Strict part of the parent comparison argument; edge cases checked in the docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image sheaves commutes with forgetting module scalars by adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting scalar actions commutes with inverse image of sheaves of modules",
+   "results": "8 hits: SheafOfModules.fullyFaithfulForget_preimage_val, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat_map_val, SheafOfModules.restrictScalars_obj_val, SheafOfModules.toSheaf_map_val, SheafOfModules.restrictScalars, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompos|[Cc]ompos.*sheafPullback",
+   "results": "1 hits: Mathlib/Topology/Sheaves/Functors.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Kunneth degree-one argument: canonical scalar-forgetful inverse-image square",
+   "via": [
+    "new-sc-scalar-abelian-pullback-square",
+    "new-sc-scalar-unit-pullback-naturality",
+    "lem-sc-scalar-unit-cohomology-pullback-comparison",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarForgetPullbackAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scalar_forget_pullback_adjunction",
+  "statement": "theorem scalar_forget_pullback_adjunction (k : Type u) [Field k]\n    {X Y : Scheme.{u}} (a : Y ⟶ X) :\n    let L := (Opens.map a.base).sheafPullback AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n    ∃ c : scalarInverseImage (k := k) a ⋙ scalarAbelianForget k Y ≅\n        scalarAbelianForget k X ⋙ L,\n      (∀ (F : KSheaf X k) (G : KSheaf Y k)\n        (q : (scalarInverseImage a).obj F ⟶ G),\n        (((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv\n          _ _) (c.inv.app F ≫ (scalarAbelianForget k Y).map q) =\n        (scalarAbelianForget k X).map\n          ((((Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{u} k) _ _).homEquiv\n            _ _) q)) ∧\n      Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k Y) ≫\n          (scalarAbelianForget k Y).map (scalarInverseUnitIso a).inv ≫\n          c.hom.app (𝟙_ (KSheaf X k)) =\n        (((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)\n          isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))).hom ≫\n        L.map (Abelian.Ext.homEquiv₀ (scalarAbelianUnitClass k X))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-29b3c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T130752-L-3986965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-29b3c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T130752-L-3986965",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG nodes; existing signatures unchanged, all delivered modules and the sole direct importer compile, and axiom checks match the documented remaining obligation."
+ }
+}

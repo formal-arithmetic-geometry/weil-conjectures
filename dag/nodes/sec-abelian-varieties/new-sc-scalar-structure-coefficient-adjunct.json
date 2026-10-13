@@ -1,0 +1,127 @@
+{
+ "id": "new-sc-scalar-structure-coefficient-adjunct",
+ "kind": "statement",
+ "title": "Scalar structure coefficient has the original structure-sheaf adjunct",
+ "statement": "Let k be a field, f:X → Spec k and g:Y → Spec k structure morphisms, and a:Y → X with a followed by f equal to g [def-sc-field-linear-module-cohomology-operations]. Compose scalarPullbackCoefficient for the unit O_X-module with scalarHom of tensorPullbackObjUnitToUnit [lem-weil-pbc-module-pullback-structure-sheaf]. Its scalar inverse-image adjunct, after forgetting scalar actions [new-sc-scalar-abelian-ext-factorization], equals the original structure-sheaf morphism a.c with its ring actions forgotten. This is an equality of sheaf morphisms O_X → a_*O_Y; it contains no inverse-image comparison isomorphism or Ext identity.",
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "new-sc-scalar-abelian-ext-factorization"
+ ],
+ "source": {
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 (lemma-pullback-pushforward-adjoint) and 01F7 (cohomology-equation-functorial); specialization to the explicit Lean constructions"
+ },
+ "proof": [
+  {
+   "text": "Apply naturality on the target of the scalar inverse-image adjunction.\nThe characterization of scalarPullbackCoefficient says sectionwise that its\nadjunct is the unit of the tensor pullback adjunction. After postcomposition by\ntensorPullbackObjUnitToUnit, the second equation of\ntensorPullbackObjUnitToUnit_isIso identifies this composite with the structure\nsheaf map. Forgetting the scalar action changes neither sections nor maps.\nSheaf-map extensionality proves the result. No stalk, nonempty-open, or\ncharacteristic assumption enters this calculation.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "new-sc-scalar-abelian-ext-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "new-sc-scalar-abelian-ext-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-13",
+  "document": "Stacks Project, sheaves.tex; cohomology.tex",
+  "place": "Tags 0096 and 01F7",
+  "note": "Strict part of the parent comparison argument; edge cases checked in the docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image sheaves commutes with forgetting module scalars by adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting scalar actions commutes with inverse image of sheaves of modules",
+   "results": "8 hits: SheafOfModules.fullyFaithfulForget_preimage_val, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat_map_val, SheafOfModules.restrictScalars_obj_val, SheafOfModules.toSheaf_map_val, SheafOfModules.restrictScalars, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompos|[Cc]ompos.*sheafPullback",
+   "results": "1 hits: Mathlib/Topology/Sheaves/Functors.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Kunneth degree-one argument: canonical scalar-forgetful inverse-image square",
+   "via": [
+    "new-sc-scalar-abelian-pullback-square",
+    "new-sc-scalar-unit-pullback-naturality",
+    "lem-sc-scalar-unit-cohomology-pullback-comparison",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarStructureCoefficientAdjunct",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarStructureCoefficientAdjunct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scalar_structure_coefficient_adjunct",
+  "statement": "theorem scalar_structure_coefficient_adjunct (k : Type u) [Field k] {X Y : Scheme.{u}} (f : X ⟶\n    Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g) :\n    (scalarAbelianForget k X).map ((((Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{u}\n    k) _ _).homEquiv _ _) (scalarPullbackCoefficient f g a h (SheafOfModules.unit\n    X.ringCatSheaf) ≫ scalarHom g (tensorPullbackObjUnitToUnit a))) = (show structureSheafAb X ⟶\n    ((Opens.map a.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology\n    X) (Opens.grothendieckTopology Y)).obj (structureSheafAb Y) from ⟨Functor.whiskerRight a.c\n    (forget₂ CommRingCat RingCat.{u} ⋙ forget₂ RingCat AddCommGrpCat.{u})⟩)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-29b3c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T130752-L-3986965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-29b3c",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T130752-L-3986965",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG nodes; existing signatures unchanged, all delivered modules and the sole direct importer compile, and axiom checks match the documented remaining obligation."
+ }
+}
