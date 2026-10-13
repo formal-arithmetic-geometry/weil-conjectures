@@ -11507,3 +11507,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/D2/Sheaf.AlgebraicGeometry.PerfectThickClosure (stage 3; reviewer PASS; after a return; landing 20261013T072342-L-1116155 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/D2/Sheaf.Paper.TotalResolutionCycleFiniteSupport (stage 3; reviewer PASS; first push; landing 20261013T072342-L-1116399 (proof); batch 20261013T072335; modules 1; new nodes 0)
 - 07:23 L: merged deliver/D3/Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections (stage 3; reviewer PASS; first push; landing 20261013T072342-L-1116600 (interface); batch 20261013T072335; modules 3; new nodes 2)
+- 07:23 L: merged deliver/D4/Sheaf.AlgebraicGeometry.StalkFiniteFree (stage 3; reviewer PASS; after a return; landing 20261013T072343-L-1116865 (proof); batch 20261013T072335; modules 1; new nodes 0)
