@@ -1,0 +1,144 @@
+{
+ "id": "lem-sbc-finite-flat-codimension-one-etale-neighbourhood",
+ "kind": "statement",
+ "title": "Local codimension-one ramification criterion for a finite flat morphism",
+ "statement": "Let $X,Y$ be locally Noetherian schemes [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], and let $f:X\\to Y$ be finite and flat [def-weil-finite-integral-morphism, def-weil-flat-morphism]. Let $x\\in X$ with $0<\\dim\\mathcal O_{X,x}$, where dimension is Krull dimension [def-weil-pbc-krull-dimension-ring]. Suppose that for every $x'\\in X$ specializing to $x$ with $\\dim\\mathcal O_{X,x'}=1$, there is an open neighbourhood $V\\subseteq X$ of $x'$ such that $V\\to Y$ is formally unramified [def-weil-pbc-formally-unramified-morphism]. Then there is an open neighbourhood $W\\subseteq X$ of $x$ such that $W\\to Y$ is etale [def-weil-etale-morphism].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BJH (pione-lemma-ramification-quasi-finite-flat), finite-morphism specialization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Positive local dimension means x is not the generic point of an irreducible component. Since f is finite it is quasi-finite. A supplied formally unramified neighbourhood at each dimension-one generalization expresses unramifiedness there. These are precisely the hypotheses of Stacks 0BJH, specialized to finite morphisms.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-pbc-formally-unramified-morphism",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proof of 0BJH works etale locally at x and f(x) so that x is the unique point above f(x). Etale localization (Stacks 02LK) preserves local dimensions and unramifiedness, and etaleness descends. A finite flat map over a locally Noetherian target is finite locally free. Its discriminant defines a locally principal closed branch locus on the target. If f(x) belongs to it, equality of source and target local dimensions (Stacks 00ON) and Stacks 0BJG give a dimension-one generalization y′ in that locus, even when the discriminant vanishes identically. Choose a ramified x′ above y′. Closedness of a finite map and uniqueness of the point in the original fibre force x′ to specialize to x. For a finite flat map the local dimensions at x′ and y′ agree. Thus x′ contradicts the dimension-one unramifiedness hypothesis. Therefore the map is etale at x. Openness of the etale locus supplies the asserted source neighbourhood. This is the complete discriminant argument of the cited source; its formalization is the remaining hole.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "Y3",
+  "document": "Stacks Project",
+  "place": "Tag 0BJH; proof read from https://stacks.math.columbia.edu/tag/0BJH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified",
+   "results": "12 hits: AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-13",
+   "verdict": "no matching local ramification criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite flat morphism etale in codimension one with source boundary depth two is etale",
+   "results": "8 hits: Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.toAlgebra, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-13",
+   "verdict": "no matching local ramification criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|depth.*etale|ramification.*flat",
+   "results": "8 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean",
+   "date": "2026-10-13",
+   "verdict": "no matching local ramification criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat morphism of locally Noetherian schemes is etale at a nongeneric point if it is unramified at every dimension one generalization",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-two extension paragraph: the extension is etale exactly where it is flat (0EY6(3)); local ramification step using 0BJH.",
+   "via": [
+    "lem-sbc-flat-depth-two-finite-formally-unramified",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtaleNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteFlatCodimensionOneEtaleNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_neighbourhood_of_finite_flat_of_codimension_one",
+  "statement": "theorem exists_etale_neighbourhood_of_finite_flat_of_codimension_one\n    {X Y : Scheme.{u}} [IsLocallyNoetherian X] [IsLocallyNoetherian Y]\n    (f : X ⟶ Y) [IsFinite f] [Flat f] (x : X)\n    (hpos : (0 : WithBot ℕ∞) < ringKrullDim (X.presheaf.stalk x))\n    (hunram : ∀ x' : X, Specializes x' x →\n      ringKrullDim (X.presheaf.stalk x') = 1 →\n      ∃ V : X.Opens, x' ∈ V ∧ FormallyUnramified (V.ι ≫ f)) :\n    ∃ V : X.Opens, x ∈ V ∧ Etale (V.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T033013-L-3680041",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T033013-L-3680041",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
