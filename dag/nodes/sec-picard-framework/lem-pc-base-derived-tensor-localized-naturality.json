@@ -1,0 +1,158 @@
+{
+ "id": "lem-pc-base-derived-tensor-localized-naturality",
+ "kind": "statement",
+ "title": "Algebraic naturality of the localized base-derived tensor comparison",
+ "statement": "Let $R,A,B,D$ be commutative rings, with $R$-algebra structures on $A,B$ and an $(A\\otimes_R B)$-algebra structure on $D$ [def-weil-module-base-change, def-weil-pbc-module-tensor-product]. Use derived categories [def-weil-abstract-derived-category] of modules over all four rings. Let $P,Q$ be cochain complexes of $A$-modules [def-pc-cochain-complex-modules], and $M,N$ base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model] for $P,Q$ with coefficients $B,D$. Let $L:D(A)\\to D(D)$ with universal left-derived counit $\\epsilon$ derive extension along $A\\to A\\otimes_R B\\to D$, and suppose $\\epsilon_P,\\epsilon_Q$ are invertible. Write $s_P:H^i(L(Q(P)))\\cong H^i(P\\otimes_A D)$ and $s_Q$ for the counit isomorphisms including the specified localization factors. Let $a:Q(P)\\cong Q(Q)$ be an isomorphism in $D(A)$ and $i\\in\\mathbf Z$. Define $v:M_i\\cong N_i$ as a B-linear isomorphism by exact restriction of $a$ from A to R, the localization-factor identifications of the model inputs, applying M.derived, the unique counit-compatible natural isomorphism M.derived to N.derived, applying degree-i homology, and the two model cohomology identifications. For every $(A\\otimes_R B)$-linear isomorphism $e:M_i\\cong N_i$ whose restriction to B is v, the equality $M.c_i;s_P^{-1};H^i(L(a))=(D\\otimes_{A\\otimes_R B}e);N.c_i;s_Q^{-1}$ holds as a D-linear equality. Here c denotes localizedComparison. There is no flatness, K-flatness or invertibility hypothesis on c.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-derived-base-change (Tag 06Y6), derived change of rings; perfect.tex equation-bc (Tag 0DJ7)"
+ },
+ "proof": [
+  {
+   "text": "Derived tensor functoriality and the coefficient-extension chain map give the natural comparison from base-derived tensor after exact restriction to derived A-to-D extension. Choose K-flat resolutions to construct the comparison and descend through localization. Its naturality is for arbitrary derived A-linear morphisms, not just chain maps.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unique counit-compatible isomorphism between the models identifies the source transport with baseTensorSourceIso. Apply homology. The equations comparison_eq and the generator formulas for ordinaryIso and ordinaryToLocalized identify the model maps with the canonical comparison.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use localized_eq and extension/restriction adjunction to transpose the preceding naturality square. Restriction to B is faithful, so the given e is the prescribed tensor-algebra transport. Conjugate the targets by the scalarExtensionHomologyIso from the invertible counits.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-derived-base-change (Tag 06Y6), derived change of rings; perfect.tex equation-bc (Tag 0DJ7)",
+  "note": "Detailed interface specialization of the parent proof plan; proof left for stage 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor cohomology comparison for K-flat complexes under derived isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.Tor'_obj_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-13",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|tensorStalkIso|comparisonIntoPullback",
+   "date": "2026-10-13",
+   "results": "0 hits: . No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized derived tensor cohomology comparison is natural under derived morphisms and scalar extension",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks of derived sheaf pullback is naturally isomorphic to derived extension of scalars on stalk complexes",
+   "date": "2026-10-13",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc, TopCat.Presheaf.stalkPushforward, ModuleCat.Tilde.stalkIso_hom, TopCat.Presheaf.germ_stalkPullbackHom. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|leftDerivedNatTrans",
+   "date": "2026-10-13",
+   "results": "15 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Canonical stalkwise base-change comparison: derived scalar-extension naturality in the equation-bc map (0DJ7); parent naturality proof step 2",
+   "via": [
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorLocalizedNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorLocalizedNaturality.lean",
+  "declaration": "ModuleCat.baseDerivedTensor_localized_naturality",
+  "declarations": [
+   "ModuleCat.scalarExtensionHomologyIso",
+   "ModuleCat.baseTensorInputIso",
+   "ModuleCat.baseTensorSourceIso",
+   "ModuleCat.baseDerivedTensor_localized_naturality"
+  ],
+  "statement": "theorem baseDerivedTensor_localized_naturality {P Q : CochainComplex (ModuleCat.{u} A) ℤ} (M : BaseDerivedTensorCohomologyModel R A B P D) (N : BaseDerivedTensorCohomologyModel R A B Q D) (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} D)) (ε : DerivedCategory.Qh ⋙ L ⟶ (extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) (hcP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (hcQ : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))) (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) (e : M.cohomology i ≅ N.cohomology i) (he : (restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom = (baseTensorSourceIso R A B D M N a i).hom) : M.localizedComparison i ≫ (scalarExtensionHomologyIso _ L ε P hcP i).inv ≫ (DerivedCategory.homologyFunctor _ i).map (L.map a.hom) = (extendScalars.{u, u, u} (algebraMap (A ⊗[R] B) D)).map e.hom ≫ N.localizedComparison i ≫ (scalarExtensionHomologyIso _ L ε Q hcQ i).inv",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

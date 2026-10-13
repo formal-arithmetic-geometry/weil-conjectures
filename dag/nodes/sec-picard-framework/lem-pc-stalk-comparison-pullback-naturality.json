@@ -17,45 +17,40 @@
  },
  "proof": [
   {
-   "text": "The K-flat stalk criterion makes the stalks of P and Q A-K-flat, so their ordinary A-to-C extensions compute A-derived extension. The degreewise tensorStalkIso identifies these complexes with stalks of ordinary sheaf pullback. Localize and use the universal derived pullback counits to identify them with the derived stalks of L(g')^*Q(P) and L(g')^*Q(Q).",
+   "text": "Apply exists_stalkDerivedExtensionComparison to obtain the derived A-to-C extension L, its counit epsilon, and the natural pullback-stalk identification j. Obtain the invertible stalk counits and their homology computation on P and Q.",
    "uses": [
-    "lem-pc-kflat-stalk-criterion",
-    "def-pc-derived-pullback",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "lem-pc-stalk-derived-extension-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical transformation from base-derived tensor to A-derived extension comes from scalar extension and tensor associativity. Its chain-level naturality descends through localization, hence applies to a without a chain-map representative. Apply cohomology, and compare the two base-derived models by their unique counit-compatible identification. comparison_eq identifies their comparisons with the counits; localized_eq characterizes their scalar-extension transposes.",
+   "text": "Transport a to the derived A-stalk isomorphism b using the exact-stalk factors. Unfold the model input and derived-functor identifications to identify comparisonSourceUnderlyingIso with baseTensorSourceIso. Apply algebraic localized naturality to the models, b and the supplied tensor-algebra lift e.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-localized-naturality",
     "lem-pc-stalk-comparison-source-transport"
    ],
    "elementary": false
   },
   {
-   "text": "The tensorStalkIso components are fixed by the shared natural pullback-stalk isomorphism, so their cohomology identifications are natural. The localization factors are natural as well. Compose these equations with the inverse counits in comparisonIntoPullback. Faithfulness of restriction to B identifies the supplied e with the canonical transport. Extend e to C and use the adjunction equation to obtain the stated square.",
+   "text": "Naturality of j and cancellation of the exact-stalk factors show L(b);kQ=kP;stalk(Lpullback(a)). Apply homology, postcompose algebraic naturality with H(kQ), and substitute both counit computation equations. Associativity gives comparisonIntoPullback_naturality unchanged.",
    "uses": [
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-pc-stalk-comparison-source-transport"
+    "lem-pc-stalk-derived-extension-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-derived-pullback",
-  "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-stalk-comparison-source-transport"
+  "lem-pc-base-derived-tensor-localized-naturality",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-derived-extension-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G3",
+  "group": "K4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7), with Tags 06Y6 and 06YB",
-  "note": "Decomposition into coefficient linearity and pullback naturality; the coordinate normalization and invertibility glue are complete Lean proofs."
+  "place": "equation-bc (Tag 0DJ7), with More on Algebra Tag 06Y6 and Cohomology Tag 06YB",
+  "note": "Separate algebraic comparison naturality from derived pullback-stalk identification; combine by naturality and localization-factor cancellation."
  },
  "mathlib_searches": [
   {
@@ -114,7 +109,7 @@
    "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoPullback",
    "AlgebraicGeometry.SingleComplexBaseChange.comparisonIntoPullback_naturality"
   ],
-  "statement": "theorem comparisonIntoPullback_naturality (z : X')\n    (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (hQ : Q.IsKFlat)\n    (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))\n    (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))\n    (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z))\n    ∀ e : (cohomologyModel f f' g g' sq z P).cohomology i ≅\n        (cohomologyModel f f' g g' sq z Q).cohomology i,\n      (ModuleCat.restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom =\n        (comparisonSourceUnderlyingIso f f' g g' sq z P Q a i).hom →\n      comparisonIntoPullback f f' g g' sq z P hcP i ≫\n        (comparisonStalkCohomology X' z i).map ((derivedPullback g').map a.hom) =\n      (ModuleCat.extendScalars.{u, u, u}\n        (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z))).map e.hom ≫\n        comparisonIntoPullback f f' g g' sq z Q hcQ i",
+  "statement": "theorem comparisonIntoPullback_naturality (z : X') (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsKFlat) (hQ : Q.IsKFlat) (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (hcQ : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj Q))) (a : DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj Q) (i : ℤ) : letI := leftAlgebra f g' z letI := rightAlgebra f f' g g' sq z letI := (tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (R f g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (B f' z)) ∀ e : (cohomologyModel f f' g g' sq z P).cohomology i ≅ (cohomologyModel f f' g g' sq z Q).cohomology i, (ModuleCat.restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map e.hom = (comparisonSourceUnderlyingIso f f' g g' sq z P Q a i).hom → comparisonIntoPullback f f' g g' sq z P hcP i ≫ (comparisonStalkCohomology X' z i).map ((derivedPullback g').map a.hom) = (ModuleCat.extendScalars.{u, u, u} (algebraMap (A g' z ⊗[R f g' z] B f' z) (C z))).map e.hom ≫ comparisonIntoPullback f f' g g' sq z Q hcQ i",
   "branch": "sheaf-dag",
   "by": "G3",
   "date": "2026-10-13"
@@ -133,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T082347-L-1636347",
+  "landing": "20261013T100027-L-2468492",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

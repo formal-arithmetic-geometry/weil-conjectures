@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-stalk-derived-extension-comparison",
+ "kind": "statement",
+ "title": "Derived stalk pullback as scalar extension with counit computation",
+ "statement": "Let $f:X\\to S$, $f':X'\\to S'$, $g:S'\\to S$, $g':X'\\to X$ be a cartesian square of schemes [def-pc-scheme, def-pc-base-change], with chosen derived categories of module sheaves [def-pc-derived-category]. Fix $z\\in X'$ and the actual stalk rings $R,A,B,C$ and their algebra maps from [def-pc-single-complex-base-change-stalk-condition]. There exist a functor $L:D(A)\\to D(C)$, a universal left-derived counit $\\epsilon$ for ordinary extension along $A\\to A\\otimes_R B\\to C$, and a natural isomorphism $j:(-)_{g'z}\\circ L\\cong L(g')^*\\circ(-)_z$ (composition written in application order), where exact derived stalks are those of [lem-pc-stalk-comparison-source-transport]. For every K-flat sheaf complex $P$ with invertible recorded pullback counit, the scalar-extension counit is invertible at $P_{g'z}$. For every $i\\in\\mathbf Z$, if $s_P:H^i(L(Q(P_{g'z})))\\cong H^i(P_{g'z}\\otimes_A C)$ is its counit homology identification including localization factors, and $k_P=L$ applied to the inverse exact-stalk localization factor followed by $j_{Q(P)}$, then $s_P^{-1};H^i(k_P)$ equals homology of the specified tensorStalkIso, followed by the inverse comparisonStalkHomologyIso and derived-stalk cohomology of the inverse sheaf pullback counit. The statement contains no base-derived model comparison or source cohomology transport.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-base-derived-tensor-localized-naturality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7); Cohomology Tags 06YB and 0D5S; More on Algebra Tag 06Y6"
+ },
+ "proof": [
+  {
+   "text": "Derive scalar extension along the actual stalk map by K-flat module resolutions. The universal counit is invertible on K-flat stalk complexes. K-flatness of the stalks follows from the stalk criterion.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-flat sheaf representatives, the canonical degreewise tensorStalkIso identifies scalar extension of the stalk with the stalk of ordinary sheaf pullback. These representatives compute derived pullback through its invertible counit. Localize the natural identification and its inverse on this resolving class to obtain j.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take degree-i homology. Compatibility with both universal counits and the exact-stalk localization factors is the displayed computation equation. The scalar side is scalarExtensionHomologyIso; the sheaf side is comparisonStalkHomologyIso.",
+   "uses": [
+    "lem-pc-stalk-comparison-source-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-stalk-comparison-source-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "equation-bc preceding Tag 0DJ8 (Tag 0DJ7); Cohomology Tags 06YB and 0D5S; More on Algebra Tag 06Y6",
+  "note": "Detailed interface specialization of the parent proof plan; proof left for stage 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor cohomology comparison for K-flat complexes under derived isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.Tor'_obj_map, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "date": "2026-10-13",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|tensorStalkIso|comparisonIntoPullback",
+   "date": "2026-10-13",
+   "results": "0 hits: . No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized derived tensor cohomology comparison is natural under derived morphisms and scalar extension",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking stalks of derived sheaf pullback is naturally isomorphic to derived extension of scalars on stalk complexes",
+   "date": "2026-10-13",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc, TopCat.Presheaf.stalkPushforward, ModuleCat.Tilde.stalkIso_hom, TopCat.Presheaf.germ_stalkPullbackHom. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|leftDerivedNatTrans",
+   "date": "2026-10-13",
+   "results": "15 hits: Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean. No exact match for the stated model/stalk interface.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkComparisonPullbackNaturality",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Canonical stalkwise base-change comparison: derived pullback-stalk identification in the equation-bc map (0DJ7); parent naturality proof steps 1 and 3",
+   "via": [
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparison.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_stalkDerivedExtensionComparison",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.exists_stalkDerivedExtensionComparison"
+  ],
+  "statement": "theorem exists_stalkDerivedExtensionComparison (z : X') : letI := leftAlgebra f g' z letI := rightAlgebra f f' g g' sq z letI := (tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (A g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (C z)) ∃ (L : DerivedCategory (ModuleCat.{u} (A g' z)) ⥤ DerivedCategory (ModuleCat.{u} (C z))) (ε : DerivedCategory.Qh ⋙ L ⟶ (ModuleCat.extendScalars.{u, u, u} ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{u} (A g' z)) (.up ℤ)) ∧ ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ≅ derivedPullback g' ⋙ comparisonDerivedStalk X' z, ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : P.IsKFlat) (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))), ∃ hsP : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (stalkComplex g' z P))), ∀ i : ℤ, (ModuleCat.scalarExtensionHomologyIso (A := A g' z) (D := C z) _ L ε (stalkComplex g' z P) hsP i).inv ≫ (DerivedCategory.homologyFunctor _ i).map (L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapDerivedCategoryFactors.inv.app P) ≫ j.hom.app (DerivedCategory.Q.obj P)) = HomologicalComplex.homologyMap (tensorStalkIso f f' g g' sq z P).hom i ≫ (comparisonStalkHomologyIso X' z (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv ≫ (comparisonStalkCohomology X' z i).map (inv ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T100027-L-2468492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
