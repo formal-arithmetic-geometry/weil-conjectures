@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.FullyFaithful
 
 /-!
 # Unique finite étale morphism lifts to quotient-power thickenings
@@ -116,6 +117,23 @@ end AlgebraicGeometry.Scheme.FiniteEtale.Adic
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem etaleUniversalHomeomorphismLift
+    {X Y Z' Z : Scheme.{u}} (i : Z' ⟶ Z) [IsUniversalHomeomorphism i] (p : X ⟶ Y) [Etale p]
+    (a : Z' ⟶ X) (b : Z ⟶ Y) (h : a ≫ p = i ≫ b) :
+    ∃ g : Z ⟶ X, g ≫ p = b ∧ i ≫ g = a  := by
+  let v := pullback.snd p b
+  let a₀ : Z' ⟶ pullback p b := pullback.lift a i h
+  let a' : Z' ⟶ pullback v i := pullback.lift a₀ (𝟙 Z') (by simp [a₀, v])
+  obtain ⟨g, hg, _⟩ := Scheme.Hom.existsUnique_of_isPullback i (𝟙 Z) v
+    IsPullback.of_id_snd (IsPullback.of_hasPullback v i) a' (by simp [a'])
+  refine ⟨g ≫ pullback.fst p b, ?_, ?_⟩
+  · rw [Category.assoc, pullback.condition, ← Category.assoc, hg.1]
+    simp
+  · have hga : i ≫ g = a₀ := by simpa [a'] using hg.2
+    rw [← Category.assoc, hga]
+    simp [a₀]
+
+
 /-- A map of finite étale covers on a quotient section lifts uniquely to each
 quotient-power thickening.
 
@@ -144,6 +162,70 @@ theorem finiteEtale_adic_unique_lift
       g ≫ Q.obj.hom = FiniteEtale.Adic.coverMap f V P n ≫ P.obj.hom ∧
       FiniteEtale.Adic.zeroMap f V P n ≫ g =
         φ.hom.left ≫ pullback.fst Q.obj.hom
-          ((Spec.map (CommRingCat.ofHom f)) ∣_ V) := by sorry
+          ((Spec.map (CommRingCat.ofHom f)) ∣_ V) := by
+  let q := Ideal.Quotient.lift (FiniteEtale.Adic.ideal f n) f
+    (fun _a ha ↦ (Ideal.pow_le_self (Nat.succ_ne_zero n)) ha)
+  have hq : Function.Surjective q := by
+    intro s
+    obtain ⟨r, rfl⟩ := hf s
+    exact ⟨Ideal.Quotient.mk _ r, rfl⟩
+  have hker : IsNilpotent (RingHom.ker q) := by
+    refine ⟨n + 1, ?_⟩
+    rw [show RingHom.ker q = (RingHom.ker f).map
+      (Ideal.Quotient.mk (FiniteEtale.Adic.ideal f n)) from
+        Ideal.ker_quotient_lift f _]
+    rw [← Ideal.map_pow, Ideal.map_quotient_self]
+    rfl
+  have hpull : IsPullback (FiniteEtale.Adic.zeroMap f V P n)
+      (pullback.snd P.obj.hom ((Spec.map (CommRingCat.ofHom f)) ∣_ V) ≫
+        ((Spec.map (CommRingCat.ofHom f)) ⁻¹ᵁ V).ι)
+      (pullback.snd (P.obj.hom ≫ V.ι) (FiniteEtale.Adic.baseMap f n))
+      (FiniteEtale.Adic.baseZero f n) := by
+    have houter := ((IsPullback.of_hasPullback P.obj.hom
+      ((Spec.map (CommRingCat.ofHom f)) ∣_ V)).flip.paste_horiz
+        (isPullback_morphismRestrict (Spec.map (CommRingCat.ofHom f)) V).flip).flip
+    refine IsPullback.of_right ?_ ?_
+      (IsPullback.of_hasPullback (P.obj.hom ≫ V.ι) (FiniteEtale.Adic.baseMap f n))
+    · change IsPullback (FiniteEtale.Adic.zeroMap f V P n ≫
+        FiniteEtale.Adic.coverMap f V P n) _ _ _
+      rw [FiniteEtale.Adic.zeroMap_coverMap, FiniteEtale.Adic.baseZero_comp_baseMap]
+      exact houter
+    · simp [FiniteEtale.Adic.zeroMap, Category.assoc]
+  have : IsClosedImmersion (FiniteEtale.Adic.baseZero f n) :=
+    IsClosedImmersion.spec_of_surjective (CommRingCat.ofHom q) hq
+  have : Surjective (FiniteEtale.Adic.baseZero f n) := by
+    constructor
+    intro x
+    change ∃ y : PrimeSpectrum S, PrimeSpectrum.comap q y = x
+    rw [← Set.mem_range, range_comap_of_surjective S q hq]
+    change RingHom.ker q ≤ x.asIdeal
+    obtain ⟨m, hm⟩ := hker
+    intro r hr
+    apply x.isPrime.mem_of_pow_mem m
+    have hzero : r ^ m = 0 := by
+      have hh := Ideal.pow_mem_pow hr m
+      rwa [hm, Ideal.zero_eq_bot, Ideal.mem_bot] at hh
+    rw [hzero]
+    exact Ideal.zero_mem _
+  have : IsUniversalHomeomorphism (FiniteEtale.Adic.baseZero f n) := inferInstance
+  have : IsUniversalHomeomorphism (FiniteEtale.Adic.zeroMap f V P n) :=
+    MorphismProperty.of_isPullback hpull.flip inferInstance
+  have : Etale Q.obj.hom := Q.obj.prop
+  have hφ : (φ.hom.left ≫ pullback.fst Q.obj.hom
+      ((Spec.map (CommRingCat.ofHom f)) ∣_ V)) ≫ Q.obj.hom =
+      FiniteEtale.Adic.zeroMap f V P n ≫
+        (FiniteEtale.Adic.coverMap f V P n ≫ P.obj.hom) := by
+    rw [Category.assoc, pullback.condition, ← Category.assoc,
+      ← FiniteEtale.pullback_obj_obj_hom, FiniteEtale.hom_left_comp]
+    rw [← Category.assoc, FiniteEtale.Adic.zeroMap_coverMap]
+    exact pullback.condition.symm
+  obtain ⟨g, hg, hg₀⟩ := etaleUniversalHomeomorphismLift
+    (FiniteEtale.Adic.zeroMap f V P n) Q.obj.hom _ _ hφ
+  refine ⟨g, ⟨hg, hg₀⟩, ?_⟩
+  intro g' hg'
+  exact Scheme.Hom.ext_of_surjective_of_formallyUnramified
+    (FiniteEtale.Adic.zeroMap f V P n) Q.obj.hom
+    (hg'.1.trans hg.symm) (hg'.2.trans hg₀.symm)
+
 
 end AlgebraicGeometry.Scheme
