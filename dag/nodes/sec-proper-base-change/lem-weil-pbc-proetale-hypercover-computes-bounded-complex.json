@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof paragraph 1: coefficient-extension coproduct continuity; natural total-complex model in the 09A3 argument before commuting direct sums",
+   "place": "Proof paragraph 1: scalar-compatible finite-stage exchange maps; coefficient-extension coproduct continuity in the 09A3 argument, as expanded by lem-weil-pbc-proetale-bounded-below-coproducts",
    "via": [
     "lem-weil-pbc-proetale-bounded-below-coproducts",
     "prop-weil-pbc-qbar-condensed-basechange-compatibility"
@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Acyclic pro-etale hypercover model for a bounded-below module complex",
- "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site and universes [def-weil-pbc-proetale-site] [def-weil-size-convention]. Let $R$ be a sheaf of commutative rings on that site, $W$ a site object, and $U_\\bullet\\to W$ a hypercover whose terms are weakly contractible, with these notions as in [lem-weil-pbc-proetale-affine-acyclic-hypercover]. Let $E^\\bullet$ be a complex of sheaves of $R$-modules [def-weil-sheaf-of-modules-category] with $E^q=0$ for $q<N$, for some integer $N$. Define the total complex of $B^{p,q}=E^q(U_p)$, $p\\geq0$, by $\\operatorname{Tot}(B)^r=\\bigoplus_{p+q=r,\\,p\\geq0}E^q(U_p)$ and differential $\\delta+(-1)^p d_E$ on $B^{p,q}$, where $\\delta=\\sum_{j=0}^{p+1}(-1)^j d_j^*$ is the alternating face restriction. Each displayed sum is finite because $N\\leq q\\leq r$. Then there is an isomorphism in $D(R(W)\\text{-}\\operatorname{Mod})$ [def-weil-abstract-derived-category], natural in $E^\\bullet$, $$\\operatorname{Tot}(B)\\simeq R\\Gamma(W,QE^\\bullet).$$ Here $Q$ is localization at quasi-isomorphisms and $R\\Gamma(W,-)$ means derived evaluation: replace $E^\\bullet$ by a bounded-below complex $J^\\bullet$ of injective module sheaves and a quasi-isomorphism $E^\\bullet\\to J^\\bullet$, and take $J^\\bullet(W)$. Existence of such representatives and their K-injectivity are as in [lem-weil-pbc-dplus-injective-representative]. In particular every quasi-isomorphism of bounded-below complexes induces a quasi-isomorphism of these total complexes.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with small pro-etale site and universes [def-weil-pbc-proetale-site] [def-weil-size-convention]. Let $R$ be a sheaf of commutative rings on that site, $W$ a site object, and $U_\\bullet\\to W$ a hypercover whose terms are weakly contractible, with these notions as in [lem-weil-pbc-proetale-affine-acyclic-hypercover]. Let $E^\\bullet$ be a complex of sheaves of $R$-modules [def-weil-sheaf-of-modules-category] with $E^q=0$ for $q<N$, for some integer $N$. Define the total complex of $B^{p,q}=E^q(U_p)$, $p\\geq0$, by $\\operatorname{Tot}(B)^r=\\bigoplus_{p+q=r,\\,p\\geq0}E^q(U_p)$ and differential $\\delta+(-1)^p d_E$ on $B^{p,q}$, where $\\delta=\\sum_{j=0}^{p+1}(-1)^j d_j^*$ is the alternating face restriction. Each displayed sum is finite because $N\\leq q\\leq r$. Then there is an isomorphism in $D(R(W)\\text{-}\\operatorname{Mod})$ [def-weil-abstract-derived-category], natural in $E^\\bullet$, $$\\operatorname{Tot}(B)\\simeq R\\Gamma(W,QE^\\bullet).$$ Here $Q$ is localization at quasi-isomorphisms and $R\\Gamma(W,-)$ means derived evaluation: replace $E^\\bullet$ by a bounded-below complex $J^\\bullet$ of injective module sheaves and a quasi-isomorphism $E^\\bullet\\to J^\\bullet$, and take $J^\\bullet(W)$. Existence of such chain-level resolutions and their K-injectivity are as in [lem-sc-bounded-below-injective-resolution]. In particular every quasi-isomorphism of bounded-below complexes induces a quasi-isomorphism of these total complexes.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09A2, label lemma-compute-cohomology; ringed-module version of its injective-resolution double-complex proof, using exact evaluation at weakly contractible terms (sites-cohomology.tex Tag 0946, label lemma-w-contractible)"
@@ -26,12 +26,129 @@
   "lem-weil-pbc-proetale-affine-acyclic-hypercover",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-dplus-injective-representative"
+  "lem-sc-bounded-below-injective-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Put $A=R(W)$ and write $T(E)=\\operatorname{Tot}(E^q(U_p))$. Regard each section module as an $A$-module via $U_p\\to W$. Semilinearity of restriction gives $A$-linearity of the face maps, since all faces are over $W$. The simplicial identities pair the terms of $\\delta^2$ with opposite signs; naturality of $d_E$ gives $\\delta d_E=d_E\\delta$. Thus $(\\delta+(-1)^p d_E)^2=0$: the mixed terms have coefficients $(-1)^p$ and $(-1)^{p+1}$. There are at most $r-N+1$ nonzero summands in total degree $r$, and none when $r<N$. Coefficient chain maps act on each summand and commute with both differentials. This defines the additive total functor $T$ and its chain maps.",
+   "uses": [
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, label lemma-compute-cohomology; explicit total signs"
+   }
+  },
+  {
+   "text": "Evaluation at each $U_p$ is exact on module sheaves. Indeed the kernel and cokernel descriptions for module sheaves identify them after forgetting coefficients with those for abelian sheaves. A module epimorphism therefore induces an abelian-sheaf epimorphism, which is locally surjective by the abelian-sheaf epimorphism criterion. The set-sheaf epimorphism criterion turns the same local lifts into an epimorphism of underlying set sheaves. Weak contractibility then makes evaluation of this map surjective at $U_p$. Evaluation preserves kernels because these are computed sectionwise. Consequently it preserves short exact sequences, cycles, boundaries and cohomology. In particular a quasi-isomorphism $E\\to F$ induces a quasi-isomorphism $E(U_p)\\to F(U_p)$ for every $p$. This argument uses the definition of weak contractibility, not the existence or affineness clause of the hypercover node.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, label lemma-w-contractible, part (1), with module kernels/cokernels Tag 03DA and epimorphism criteria Tags 03CN, 00WN"
+   }
+  },
+  {
+   "text": "Apply the general small-ringed-site bounded-below resolution theorem to choose a chain quasi-isomorphism $i:E\\to J$, with $J$ bounded below, termwise injective and K-injective. Its smallness hypothesis is exactly the chosen site/universe convention. This theorem supplies a chain map, whereas an abstract isomorphism of objects of $D^+$ alone would not. Choose a common lower bound $M$ for $E$ and $J$. For the double complexes below reindex the coefficient coordinate by $t=q-M\\geq0$, retaining the original differential, so total degree $n=p+t$ corresponds to original degree $n+M$. This is relabelling the complexes, not application of a signed derived shift.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, second proof paragraph; derived.tex Tag 013K, label lemma-injective-resolutions-exist, part (3)"
+   }
+  },
+  {
+   "text": "Set $B_E^{p,t}=E^{t+M}(U_p)$ and $B_J^{p,t}=J^{t+M}(U_p)$. The bicomplex map induced by $i$ is a quasi-isomorphism in each vertical complex at fixed $p$, by step 2. Apply the first-quadrant total comparison to the transposed bicomplexes, whose resolution columns at fixed $p$ are these vertical complexes. The signed interchange $x\\mapsto(-1)^{pt}x$ identifies their total complexes with the original ones: changing $p$ to $p+1$ changes this sign by $(-1)^t$, and changing $t$ to $t+1$ changes it by $(-1)^p$, precisely the factors interchanging $d_1+(-1)^p d_2$ and $d_2+(-1)^t d_1$. It also commutes with the map induced by $i$. Undo the degree relabelling. Hence $\\beta=T(i):T(E)\\to T(J)$ is a quasi-isomorphism of $A$-module complexes.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, second proof paragraph; homology.tex Tag 0132, label lemma-first-quadrant-ss, first filtration"
+   }
+  },
+  {
+   "text": "For each $q$, apply the ringed-hypercover injective augmentation theorem to $I=J^q$. The small pro-etale site has representable sheaves as in the cited hypercover notion, and $U_\\bullet\\to W$ is the given all-degree hypercover. The theorem gives the canonical row quasi-isomorphism $J^q(W)[0]\\to(J^q(U_p),\\delta)_{p\\geq0}$ in $A$-modules. It requires module injectivity only; no assertion that the underlying abelian sheaf of $J^q$ is injective is made. This yields $H^0=J^q(W)$ through restriction and $H^p=0$ for $p>0$.",
+   "uses": [
+    "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+    "lem-weil-pbc-proetale-affine-acyclic-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GE and 01GW, labels lemma-acyclic-hypercover-sheaves and lemma-injective-trivial-cech; module-coefficient Hom argument"
+   }
+  },
+  {
+   "text": "Form the first-quadrant bicomplex $S$ with $S^{0,t}=J^{t+M}(W)$ and $S^{p,t}=0$ for $p>0$, with vertical differential $d_J$. Restriction into $U_0$ gives a bicomplex map $S\\to B_J$: the two restrictions to $U_1$ agree because both structural maps compose to $U_1\\to W$, so $\\delta^0$ kills the augmentation; it also commutes with $d_J$. At each fixed $t$ its horizontal complex map is the row quasi-isomorphism of step 5. These are exactly the $\\mathrm{flip}.X\\,t$ complexes in the cited comparison theorem. Thus its total map is a quasi-isomorphism. Since $\\operatorname{Tot}(S)=J(W)$ after the degree relabelling, this is the restriction augmentation $\\alpha:J(W)\\to T(J)$, supported in $p=0$. In $D(A\\text{-}\\operatorname{Mod})$ both $Q\\alpha$ and $Q\\beta$ are invertible, so $c_E=(Q\\alpha)^{-1}\\circ Q\\beta:T(E)\\xrightarrow{\\sim}J(W)=R\\Gamma(W,QE)$ is the asserted isomorphism.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, final proof paragraph; homology.tex Tag 0132, second filtration"
+   }
+  },
+  {
+   "text": "Check independence and naturality on morphisms rather than merely on cohomology groups. For a coefficient chain map $f:E\\to F$ and resolutions $i_E:E\\to J_E$, $i_F:F\\to J_F$, the localization-Hom bijection into the K-injective target $J_F$ represents $(Qi_F)(Qf)(Qi_E)^{-1}$ by a chain map $a:J_E\\to J_F$, unique up to homotopy. Injectivity of that bijection says $a i_E$ and $i_F f$ are homotopic. If $h$ is such a coefficient homotopy, its total homotopy on $E^q(U_p)$ is $H=(-1)^p h(U_p)$. In $d_T H+H d_T$ the horizontal terms cancel, since restriction commutes with $h$ and the signs are $(-1)^p$ and $(-1)^{p+1}$; the vertical terms are $d h+h d$. Hence $T(a)\\beta_E$ and $\\beta_F T(f)$ agree after localization. Evaluation carries $h$ to $h(W)$, so it also respects homotopies. The augmentation is strictly natural: $T(a)\\alpha_E=\\alpha_F a(W)$, since both components are restriction composed with $a$. Inverting the two augmentations gives $Qa(W)c_E=c_F QT(f)$. Here $Qa(W)$ is the resolution representative of $R\\Gamma(W,Qf)$. Taking $f=1_E$ with two choices of resolution proves independence of $c_E$ and of the morphism representative; applying the same bijection to composites and identities proves functoriality. No functorial choice of injective resolutions is needed.",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-pur-kinjective-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, label lemma-K-injective; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Qh_map_bijective, lines 41-46; explicit total homotopy sign calculation"
+   }
+  },
+  {
+   "text": "Finally let $f:E\\to F$ be any quasi-isomorphism between bounded-below coefficient complexes. Choose a common lower bound for both complexes, allowing their originally given bounds to differ. Step 2 makes every vertical section-complex map a quasi-isomorphism. Repeat the transposition and finite-diagonal comparison of step 4 directly on $f$ to obtain that $T(f)$ is a quasi-isomorphism. Thus the last assertion follows at chain level and does not require a converse claim about arbitrary isomorphisms in a derived category.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A2, quasi-isomorphism comparison in the second proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-affine-acyclic-hypercover",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-weil-size-convention",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+  "def-weil-abstract-derived-category",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A2, label lemma-compute-cohomology: its two double-complex comparisons, with explicit ringed-module coefficients and K-injective comparison naturality"
+ },
+ "status": "split",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,6 +177,48 @@
    "results": "service unavailable: Internal Server Error; 0 hits. Executed through msearch.py by the maintainer reader; log stored within this isolated review.",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex of module sheaves on a site is computed by the total complex of sections on a hypercover of weakly contractible objects",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.isSheaf_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.Sheaf.H, CategoryTheory.Presheaf.isSheaf_iff_of_isGeneratedByOneHypercovers, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern finite-degree hypercover sheaf conditions, generic injective resolutions, or local injectivity of maps, not all-degree hypercover descent for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological descent: derived global sections of a bounded below complex are the totalization of sections on an acyclic hypercover",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CochainComplex.HomComplex.leftHomologyData', CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.cm5b",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern finite-degree hypercover sheaf conditions, generic injective resolutions, or local injectivity of maps, not all-degree hypercover descent for module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypercover\"",
+   "results": "12 hits: CategoryTheory.PreZeroHypercover, CategoryTheory.PreZeroHypercover.empty, CategoryTheory.Precoverage.ZeroHypercover, CategoryTheory.PreZeroHypercover.HasPullbacks, CategoryTheory.PreZeroHypercover.I₀, CategoryTheory.PreZeroHypercover.instCategory, CategoryTheory.PreZeroHypercover.presieve₀, CategoryTheory.PreZeroHypercover.shrink",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern finite-degree hypercover sheaf conditions, generic injective resolutions, or local injectivity of maps, not all-degree hypercover descent for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|weaklyContractible",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/MorphismProperty/LocalClosure.lean, Mathlib/CategoryTheory/MorphismProperty/LocalClosure.lean, Mathlib/CategoryTheory/MorphismProperty/LocalClosure.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern finite-degree hypercover sheaf conditions, generic injective resolutions, or local injectivity of maps, not all-degree hypercover descent for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|hypercover",
+   "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: these hits concern finite-degree hypercover sheaf conditions, generic injective resolutions, or local injectivity of maps, not all-degree hypercover descent for module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly contractible hypercover sections total complex computes bounded below derived evaluation of module sheaves",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
@@ -78,5 +237,46 @@
    "state": "none"
   }
  },
- "merged_into": null
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-proetale-hypercover-computes-bounded-complex",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 09A2 into exact evaluation, a chain-level injective replacement, the two signed total comparisons, and homotopy-level resolution independence and naturality. Reused existing generic total-comparison and resolution nodes; added only injective module-sheaf hypercover augmentation. Corrected the resolution reference without changing hypotheses or conclusions.",
+  "blueprint": [
+   "Proof paragraph 1: scalar-compatible finite-stage exchange maps; coefficient-extension coproduct continuity in the 09A3 argument, as expanded by lem-weil-pbc-proetale-bounded-below-coproducts"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Small-ringed-site chain resolution; the unit's D+ representative node gives only an abstract derived isomorphism."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic finite-diagonal homological comparison used in both filtrations; this is an auxiliary tool within the 09A2 route."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Generic site epimorphism criterion needed to apply weak contractibility to module epimorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic sheaf-of-sets epimorphism criterion needed to use the definition of weak contractibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-3756ce0d9",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-3756ce0d9 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all cited statements, sources and route. The eight-step argument and ringed-module analogue of Stacks 01GE/01GW are sound. Corrected missing definition citations and incomplete new-node metadata in fixes; review.md records source checks, edge cases, accepted tool uses and an inherited dependency cycle. No target or coefficient comparison was weakened or assumed.; 1 file(s) fixed by the reviewer"
+ }
 }
