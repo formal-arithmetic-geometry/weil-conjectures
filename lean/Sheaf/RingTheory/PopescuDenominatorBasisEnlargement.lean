@@ -9,14 +9,11 @@ public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.LocalDimensionZeroHenselian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.RingTheory.PopescuUnscaledUnitBasis
+import Mathlib.LinearAlgebra.Basis.SMul
+import Mathlib.Logic.Equiv.Fin.Basic
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Differential basis enlargement after clearing denominators
@@ -32,6 +29,40 @@ universe u v
 
 namespace Algebra
 
+/-- Frobenius turns a multiplicative inverse modulo nilpotents into an actual power
+in the subring. The returned element is a p-th power of a unit. -/
+private theorem capture_unit_power
+    {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S)
+    (p : ℕ) [CharP S p] [Fact p.Prime]
+    (x : S) (Q : ℕ) (hQ : 1 ≤ Q) (z : Rˣ)
+    (hz : IsNilpotent (f (z : R) * x ^ Q - 1)) :
+    ∃ (N : ℕ) (_ : 1 ≤ N) (d : Rˣ), f ((d : R) ^ p) = x ^ N := by
+  obtain ⟨r, hr⟩ := hz
+  have hp : 1 < p := (Fact.out : p.Prime).one_lt
+  have hpow : r ≤ p ^ (r + 1) :=
+    (Nat.le_succ r).trans (Nat.lt_pow_self hp).le
+  have hzero : (f (z : R) * x ^ Q - 1) ^ (p ^ (r + 1)) = 0 :=
+    pow_eq_zero_of_le hpow hr
+  have hone : f (z : R) ^ (p ^ (r + 1)) * x ^ (Q * p ^ (r + 1)) = 1 := by
+    have h := sub_pow_char_pow (f (z : R) * x ^ Q) 1 (p := p) (r + 1)
+    rw [hzero, one_pow, mul_pow, ← pow_mul] at h
+    exact (sub_eq_zero.mp h.symm)
+  refine ⟨Q * p ^ (r + 1), Nat.one_le_iff_ne_zero.mpr
+    (Nat.mul_ne_zero (Nat.one_le_iff_ne_zero.mp hQ) (pow_ne_zero _ (Fact.out : p.Prime).ne_zero)),
+    z⁻¹ ^ (p ^ r), ?_⟩
+  have hinv : f ((z⁻¹ : Rˣ) : R) * f (z : R) = 1 := by
+    rw [← map_mul, Units.inv_mul, map_one]
+  have hcancel : f ((z⁻¹ : Rˣ) : R) ^ (p ^ (r + 1)) *
+      f (z : R) ^ (p ^ (r + 1)) = 1 := by
+    rw [← mul_pow, hinv, one_pow]
+  calc
+    f (((z⁻¹ ^ (p ^ r) : Rˣ) : R) ^ p) =
+        f ((z⁻¹ : Rˣ) : R) ^ (p ^ (r + 1)) := by
+      simp only [Units.val_pow_eq_pow_val, map_pow, ← pow_mul, pow_succ]
+    _ = f ((z⁻¹ : Rˣ) : R) ^ (p ^ (r + 1)) *
+        (f (z : R) ^ (p ^ (r + 1)) * x ^ (Q * p ^ (r + 1))) := by rw [hone, mul_one]
+    _ = x ^ (Q * p ^ (r + 1)) := by rw [← mul_assoc, hcancel, one_mul]
+
 /-- Given a residue differential basis whose lifts have a common denominator, enlarge the
 admissible subalgebra so that it captures a positive power of that denominator and has a
 residue differential basis lifted from the original ring. No ideal generators are chosen.
@@ -39,46 +70,24 @@ Source: Stacks Project, proofs of Tags 07FH and 07FI, and steps 5–14 of
 lem-weil-pbc-popescu-quotient-basis-enlargement.
 (blueprint: lem-weil-pbc-popescu-denominator-basis-enlargement).
 
-Proof: Write L = Λ_q, J = qL, B = L/J^n, F₀ = A₀/m₀, K = B/m_B, x = π(s), and
-α = residue_B(x). Since n ≥ 1, B is Artinian local with maximal ideal JB, and s ∉ q
-makes x a unit, hence α ≠ 0. Admissibility gives m₀B = m_B; contraction and maximality
-then identify m₀ with A₀ ∩ m_B. This embeds F₀ into K and makes the inclusion local.
-Put c_j = residue_A₀(a₀ j), so the hypotheses say dc_j form a basis over F₀.
+Proof: Apply `exists_popescu_unscaled_unit_basis` to obtain an admissible A
+containing A₀, a positive Q and a unit z of A such that z π(s)^Q - 1 is nilpotent,
+and an unscaled residue differential basis. The basis has the original residue
+differentials on its left summand and lifts of π(s) on its right summand.
 
-If α is transcendental over F₀, localize A₀[T] at the preimage of m_B under evaluation
-T ↦ x. Modulo m₀ this prime is zero in F₀[T], so the resulting ring D has residue
-field F₀(T), maximal ideal m₀D, and is Artinian local. Evaluation extends to a local
-map D → B. The Noetherian fibre flatness criterion applies to A₀ → D → B: B is flat
-over A₀ and the fibre D/m₀D is a field, hence its module B/m₀B is flat. Thus D → B
-is flat, faithfully flat, and injective. Its image A contains A₀ and x, is Artinian
-local and flat into B, and m_A B = m_B. Its residue field F₀(α) is finitely generated
-over k; the Artinian local essentially-finite-type residue criterion makes A
-essentially of finite type over k. Polynomial and localization formulas for Kähler
-differentials give the basis dc_j together with dα over F₀(α).
+For ε = z π(s)^Q - 1 choose r with ε^r = 0. Since p is prime, r ≤ p^(r+1).
+Frobenius gives z^(p^(r+1)) π(s)^(Q p^(r+1)) = 1. Set N = Q p^(r+1) ≥ 1 and
+c = (z⁻¹^(p^r))^p in A. Cancellation proves c = π(s)^N in the ambient ring.
+This explicit c is a p-th power of a unit, so its residue γ is a nonzero unit and
+dγ = 0. This Frobenius argument is proved in `capture_unit_power`.
 
-If α is algebraic over F₀, choose Q = p^e so β = α^Q is separable over F₀. The finite
-separable field F₀(β) lifts, by the henselian finite étale equivalence for A₀, to a
-finite étale Artinian local A₀-algebra D with maximal ideal m₀D. Base change to B,
-use the residue embedding F₀(β) → K to select the prime with residue K, and apply
-the henselian étale retraction for B. This yields a local map D → B extending A₀
-and inducing that residue embedding. The same fibre criterion makes it flat and
-injective. Its image A is admissible by the same residue finite-type criterion.
-Finite separable base change for differentials gives the basis dc_j over F₀(β).
-
-To capture a power in this case, lift β⁻¹ to a unit y of A. Then y x^Q = 1 + ε with
-ε ∈ m_B. Choose a p-power q' ≥ max(n,p). Frobenius and m_B^n = 0 give
-(y x^Q)^q' = 1, so x^(Qq') = y^(-q') ∈ A. Put N = Qq'. In the transcendental
-case put N = p. In both cases N ≥ 1 and γ = x^N belongs to A and is a unit of B.
-Its differential in the residue field of A vanishes: γ = α^p in the transcendental
-case, and γ = β^q' in the separable case, with p dividing the relevant exponent.
-
-Set xs_j = μ_j s^(N-1). The denominator equations give π(xs_j) = a₀_j γ ∈ A.
-Their residue differentials are γ dc_j, so scaling by the nonzero scalar γ preserves
-the basis. In the transcendental case append s, whose differential is dα; scale
-only the original basis vectors. These xs and their explicitly specified images in
-A give the required differential basis and the element c = x^N. The empty initial
-basis is allowed: in the separable case it remains empty, and in the transcendental
-case the only added vector is dα. -/
+For every original index j take a_j = inclusion(a₀ j) c and xs_j = μ_j s^(N-1).
+The common-denominator equations and N ≥ 1 prove a_j = π(xs_j). The Leibniz rule
+and dγ = 0 give d(residue a_j) = γ d(residue inclusion(a₀ j)). Scale the left
+basis vectors by γ and leave the right basis vectors unchanged, using
+`Module.Basis.isUnitSMul`. On the right use the supplied lifts of π(s) and take
+xs_j = s. Reindex the resulting sum-indexed basis with `finSumFinEquiv`.
+The construction permits either summand to be empty and also works for N = 1. -/
 theorem exists_popescu_denominator_basis_enlargement
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)
@@ -118,6 +127,69 @@ theorem exists_popescu_denominator_basis_enlargement
           ∃ b : Module.Basis (Fin t) (IsLocalRing.ResidueField A)
               (KaehlerDifferential k (IsLocalRing.ResidueField A)),
             ∀ j, b j = KaehlerDifferential.D k (IsLocalRing.ResidueField A)
-              (IsLocalRing.residue A (a j)) := by sorry
+              (IsLocalRing.residue A (a j)) := by
+  classical
+  obtain ⟨A, hlocal, hle, hA, Q, hQ, z, hz, m, y, hy, b, hbL, hbR⟩ :=
+    exists_popescu_unscaled_unit_basis k Λ p hp q n hn A₀ hA₀ t₀ a₀ b₀ hb₀ s hs
+  let B := Localization.AtPrime q ⧸
+    (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n
+  let π : Λ →+* B :=
+    (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)).comp
+      (algebraMap Λ (Localization.AtPrime q))
+  have : Nontrivial B :=
+    (show Function.Injective (A.val : A → B) from Subtype.val_injective).nontrivial
+  have : Fact p.Prime := ⟨CharP.char_prime_of_ne_zero k hp.ne'⟩
+  have : CharP B p := charP_of_injective_algebraMap (algebraMap k B).injective p
+  have : CharP (IsLocalRing.ResidueField A) p :=
+    charP_of_injective_algebraMap (algebraMap k (IsLocalRing.ResidueField A)).injective p
+  obtain ⟨N, hN, d, hc⟩ := capture_unit_power A.val.toRingHom p (π s) Q hQ z hz
+  let c : A := (d : A) ^ p
+  have hcu : IsUnit c := (d.isUnit).pow p
+  have hDc : KaehlerDifferential.D k (IsLocalRing.ResidueField A)
+      (IsLocalRing.residue A c) = 0 := by
+    simp only [c, map_pow, Derivation.leibniz_pow,
+      ← Nat.cast_smul_eq_nsmul (IsLocalRing.ResidueField A),
+      CharP.cast_eq_zero (IsLocalRing.ResidueField A) p, zero_smul]
+  let aL : Fin t₀ → A := fun j => Subalgebra.inclusion hle (a₀ j) * c
+  have haL (j : Fin t₀) : (aL j : B) = π (μ j * s ^ (N - 1)) := by
+    change (a₀ j : B) * (c : B) = _
+    have hμ' : π (μ j) = (a₀ j : B) * π s := hμ j
+    have hc' : (c : B) = π s ^ N := hc
+    rw [hc', map_mul, map_pow, hμ']
+    rw [mul_assoc, ← pow_succ', Nat.sub_add_cancel hN]
+  let xs' : Fin t₀ ⊕ Fin m → Λ := Sum.elim (fun j => μ j * s ^ (N - 1)) (fun _ => s)
+  let a' : Fin t₀ ⊕ Fin m → A := Sum.elim aL y
+  have ha' (j : Fin t₀ ⊕ Fin m) : (a' j : B) = π (xs' j) := by
+    cases j with
+    | inl j => exact haL j
+    | inr j => exact hy j
+  let γ := IsLocalRing.residue A c
+  have hγ : IsUnit γ := hcu.map (IsLocalRing.residue A)
+  let w : Fin t₀ ⊕ Fin m → IsLocalRing.ResidueField A :=
+    Sum.elim (fun _ => γ) (fun _ => 1)
+  have hw (j : Fin t₀ ⊕ Fin m) : IsUnit (w j) := by
+    cases j with
+    | inl j => exact hγ
+    | inr j => exact isUnit_one
+  let b' := b.isUnitSMul hw
+  have hb' (j : Fin t₀ ⊕ Fin m) : b' j =
+      KaehlerDifferential.D k (IsLocalRing.ResidueField A) (IsLocalRing.residue A (a' j)) := by
+    rw [Module.Basis.isUnitSMul_apply]
+    cases j with
+    | inl j =>
+      rw [hbL]
+      simp only [a', Sum.elim_inl, aL, map_mul, Derivation.leibniz, hDc,
+        smul_zero]
+      rfl
+    | inr j =>
+      simp only [w, Sum.elim_inr, one_smul, a']
+      exact hbR j
+  let e : Fin t₀ ⊕ Fin m ≃ Fin (t₀ + m) := finSumFinEquiv
+  refine ⟨A, hlocal, hle, hA, N, hN, c, hc, t₀ + m,
+    xs' ∘ e.symm, a' ∘ e.symm, ?_, b'.reindex e, ?_⟩
+  · intro j
+    exact ha' (e.symm j)
+  · intro j
+    simpa only [Module.Basis.reindex_apply, Function.comp_apply] using hb' (e.symm j)
 
 end Algebra

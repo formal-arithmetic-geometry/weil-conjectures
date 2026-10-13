@@ -1,0 +1,273 @@
+{
+ "id": "lem-weil-pbc-popescu-unscaled-unit-basis",
+ "kind": "statement",
+ "title": "Unscaled residue differential basis and a residue inverse after adjoining one unit",
+ "statement": "Let k be a field of characteristic p > 0, Λ a Noetherian k-algebra [def-weil-pbc-noetherian-ring], q a prime ideal, n ≥ 1, L = Λ_q [def-weil-pbc-localization-at-prime], J = qL, B = L/J^n, and π : Λ → B the canonical map. Let A₀ ⊆ B be an admissible local k-subalgebra [def-weil-pbc-popescu-admissible-subalgebra]. Let a₀ : Fin t₀ → A₀ and let b₀ be an F₀-basis of Ω[F₀/k] [def-weil-pbc-kahler-differentials], where F₀ is the residue field of A₀, such that b₀ j = d(residue_A₀(a₀ j)). Let s ∈ Λ \\ q. There exist an admissible local k-subalgebra A ⊆ B and an inclusion hle : A₀ ≤ A, an integer Q ≥ 1, a unit z ∈ A× with (z π(s)^Q - 1) nilpotent in B, an integer m ≥ 0, elements y : Fin m → A whose images in B all equal π(s), and a basis b of Ω[F/k] over the residue field F of A indexed by Fin t₀ ⊕ Fin m. For each j in Fin t₀, b(inl j) = d(residue_A(inclusion_hle(a₀ j))); for each j in Fin m, b(inr j) = d(residue_A(y j)). There is no numerator family, no actual denominator power in A, and no basis lifted from Λ in this statement.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Write L = Λ_q, J = qL, B = L/J^n. As n ≥ 1, B is Artinian local, with maximal ideal JB and nilpotence exponent n. The admissibility identity m₀B = m_B identifies m₀ with A₀ ∩ m_B, so the residue field F₀ embeds into K. The element s maps to a unit x, and α = residue_B(x) is nonzero. The given basis b₀ identifies dc_j as a basis of Ω[F₀/k]; the given basis and its lifts are hypotheses, so no numerator or denominator selection is needed here. The residue field F₀ is essentially of finite type over k as a quotient of A₀, hence is finitely generated as a field over k.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "def-weil-pbc-popescu-admissible-subalgebra",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "Let α be the nonzero residue of x in K. If α is transcendental over F₀, perform the polynomial localization construction below. If it is algebraic, choose a positive p-power Q such that β = α^Q is separable over F₀ and perform the finite étale construction below. In either case the required output before clearing denominators is an admissible A containing A₀, a unit z with z x^Q - 1 nilpotent, and a basis consisting of the original residue differentials and, only in the transcendental case, dα. No numerator family or power of x in A is asserted here.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-separable-first-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case T: the ring $D'$ (as in 07FI, case transcendental).* Let $\\theta:A_0[t]\\to\\bar\\Lambda$ be the $A_0$-algebra map with $t\\mapsto\\bar s$ and $\\mathfrak n=\\theta^{-1}(\\bar{\\mathfrak m})$. Since $A_0\\subseteq\\bar\\Lambda$ is local, $\\mathfrak m_{A_0}[t]\\subseteq\\mathfrak n$, and modulo $\\mathfrak m_{A_0}[t]$ the map $A_0[t]\\to K$ is $F_0[t]\\to K$, $t\\mapsto\\alpha$, which is injective as $\\alpha$ is transcendental over $F_0$; so $\\mathfrak n=\\mathfrak m_{A_0}[t]$, a prime ideal ($A_0[t]/\\mathfrak n=F_0[t]$ is a domain). Let $D'=A_0[t]_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime]. $A_0[t]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and so is $D'$ [lem-weil-pbc-localization-noetherian]. $D'/\\mathfrak m_{A_0}D'=(F_0[t])_{(0)}=F_0(t)$ is a field and $\\mathfrak m_{A_0}D'$ is nilpotent ($\\mathfrak m_{A_0}$ is, step 1), so $\\mathfrak m_{A_0}D'$ lies in every prime of $D'$ and is the maximal ideal of the local ring $D'$; $D'$ is Artinian local [lem-weil-pbc-noetherian-local-quotient-artinian-local] (with $K=0$ there), with residue field $F_0(t)$, and $A_0\\to D'$ is local. Every element of $A_0[t]\\setminus\\mathfrak n$ maps outside $\\bar{\\mathfrak m}$, i.e. to a unit of $\\bar\\Lambda$, so $\\theta$ extends to $\\psi':D'\\to\\bar\\Lambda$ [def-weil-pbc-localization-at-prime], local ($\\psi'^{-1}(\\bar{\\mathfrak m})=\\mathfrak nD'$), restricting to the inclusion on $A_0$, with $\\psi'(t/1)=\\bar s$; on residue fields it is $F_0(t)\\to K$, $t\\mapsto\\alpha$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case T: $A=\\psi'(D')$ is admissible.* Apply [lem-weil-pbc-criterion-flatness-fibre-noetherian] to $R=A_0$, $S=D'$, $S'=M=\\bar\\Lambda$: Noetherian local rings (steps 1, 3) and local homomorphisms; $M$ is generated by $1$ and nonzero; $M/\\mathfrak m_{A_0}M$ is a vector space over the field $D'/\\mathfrak m_{A_0}D'$, hence free and flat [def-weil-pbc-flat-ring-map]; $M$ is flat over $A_0$ ($A_0$ admissible). So $\\psi'$ is flat; being local it is faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat] and so injective [lem-weil-pbc-faithfully-flat-ideal-contraction] ($I=0$). Let $A=\\psi'(D')\\cong D'$, a $k$-subalgebra of $\\bar\\Lambda$ containing $A_0=\\psi'(A_0)$ and $\\bar s$: it is Artinian local, $A\\to\\bar\\Lambda$ is flat, and $\\mathfrak m_A\\bar\\Lambda=\\mathfrak m_{A_0}\\bar\\Lambda=\\bar{\\mathfrak m}$. Its residue field $F\\subseteq K$ is the image of $F_0(t)$, i.e. $F=F_0(\\alpha)\\cong F_0(t)$ ($t\\mapsto\\alpha$), finitely generated over $k$ (by $\\alpha$ and generators of $F_0$ from the initial setup). Writing $F=k(e_1,\\dots,e_v)$, $F=W^{-1}k[e_1,\\dots,e_v]$ with $W$ the nonzero elements of the domain $k[e_1,\\dots,e_v]$, so $k\\to F$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra] [def-weil-pbc-finite-type-algebra], and by [lem-weil-pbc-artinian-local-essentially-finite-type-residue] $A$ is essentially of finite type over $k$. So $A$ is admissible, $A_0\\subseteq A$, $\\bar s\\in A$. Since the maximal ideal of A is the contraction of the ambient maximal ideal, x is a unit of A. Take Q = 1 and z = x⁻¹. Then z x^Q - 1 = 0 is nilpotent.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-artinian-local-essentially-finite-type-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case T: a basis of $\\Omega_{F/k}$.* By [lem-weil-pbc-kahler-differentials-polynomial-extension] ($R=k$, $A=F_0$, $e=1$) $\\Omega_{F_0[t]/k}\\cong(F_0[t]\\otimes_{F_0}\\Omega_{F_0/k})\\oplus F_0[t]\\,\\mathrm dt$ via $b\\otimes\\mathrm dc\\mapsto b\\,\\mathrm dc$; as $\\mathrm dc_1,\\dots,\\mathrm dc_t$ is an $F_0$-basis of $\\Omega_{F_0/k}$ , $\\mathrm dc_1,\\dots,\\mathrm dc_t,\\mathrm dt$ is an $F_0[t]$-basis of $\\Omega_{F_0[t]/k}$ [def-weil-pbc-kahler-differentials]. $F_0(t)$ is the localization of $F_0[t]$ at its nonzero elements, so by [lem-weil-pbc-kahler-differentials-localization] $\\Omega_{F_0(t)/k}$ is the localization of $\\Omega_{F_0[t]/k}$ and $\\mathrm dc_1,\\dots,\\mathrm dc_t,\\mathrm dt$ is an $F_0(t)$-basis of it. Transporting along the $k$-algebra isomorphism $F_0(t)\\cong F$, $t\\mapsto\\alpha$, identity on $F_0$, $\\mathrm dc_1,\\dots,\\mathrm dc_t,\\mathrm d\\alpha$ is an $F$-basis of $\\Omega_{F/k}$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case S: the field $F_1=F_0(\\beta)$ (as in 07FI, case algebraic).* $\\alpha$ is algebraic over $F_0$, so $F_0(\\alpha)/F_0$ is an algebraic extension and by [lem-weil-pbc-separable-first-purely-inseparable] there is $Q=p^e$ ($e\\ge0$) with $\\beta:=\\alpha^Q$ separable over $F_0$ [def-weil-pbc-separable-algebraic-extension]; $\\beta\\neq0$. Let $F_1=F_0(\\beta)\\subseteq K$; it is generated by $\\beta$, so $F_1\\cong F_0[T]/(\\bar g)$, $\\bar g$ the minimal polynomial of $\\beta$, is finite over $F_0$, and as the elements of $F_1$ separable over $F_0$ form a subfield containing $F_0$ and $\\beta$ [lem-weil-pbc-separable-first-purely-inseparable], $F_1/F_0$ is finite and separable algebraic. Hence $F_1$ is a finite etale $F_0$-algebra, by Algebra.Etale.of_finite_of_isSeparable [lem-weil-pbc-finite-separable-extension-etale]. $A_0$ and $\\bar\\Lambda$ are local rings whose only prime is the maximal ideal [lem-weil-pbc-artinian-local-unique-prime], have nilpotent maximal ideals and hence are henselian [lem-weil-pbc-henselian-of-nil-maximal-ideal]. By the essential surjectivity in [lem-weil-pbc-henselian-finite-etale-equivalence] for $A_0$ and the finite etale $F_0$-algebra $F_1$ there is a finite etale $A_0$-algebra $D'$ with an $F_0$-algebra isomorphism $D'/\\mathfrak m_{A_0}D'\\cong F_1$. $D'$ is finite over $A_0$, hence Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]; $\\mathfrak m_{A_0}D'$ is nilpotent with quotient a field, so it is the maximal ideal of the local ring $D'$, which is Artinian [lem-weil-pbc-noetherian-local-quotient-artinian-local] with residue field $F_1$, and $A_0\\to D'$ is local.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case S: a factorization $A_0\\to D'\\to\\bar\\Lambda$ (Stacks: 'since $\\bar\\Lambda$ is henselian and $F(\\alpha^q)$ is contained in its residue field we can find a factorization').* Let $\\rho:D'\\to F_1\\subseteq K$ be the residue map composed with the isomorphism above; on $A_0$ it is the residue map $A_0\\to F_0\\subseteq K$. Let $C=D'\\otimes_{A_0}\\bar\\Lambda$; $\\bar\\Lambda\\to C$, $x\\mapsto1\\otimes x$, is etale [lem-weil-pbc-etale-ring-base-change]. The maps $\\rho$ and $x\\mapsto\\hat x$ are ring maps $D'\\to K$, $\\bar\\Lambda\\to K$ agreeing on $A_0$, so they define a ring map $\\chi:C\\to K$, $d\\otimes x\\mapsto\\rho(d)\\hat x$, surjective (already on $1\\otimes\\bar\\Lambda$). Its kernel $\\mathfrak q'$ is a prime of $C$ lying over $\\bar{\\mathfrak m}$, and $K=\\bar\\Lambda/\\bar{\\mathfrak m}\\to C/\\mathfrak q'\\cong K$ is the identity, an isomorphism. By [lem-weil-pbc-henselian-etale-retraction] ($\\bar\\Lambda$ henselian by the preceding construction) there is a $\\bar\\Lambda$-algebra map $\\sigma:C\\to\\bar\\Lambda$ with $\\sigma^{-1}(\\bar{\\mathfrak m})=\\mathfrak q'$. Put $\\psi'(d)=\\sigma(d\\otimes1)$. For $a\\in A_0$, $\\psi'(a)=\\sigma(1\\otimes a)=a$, so $\\psi'$ restricts to the inclusion on $A_0$. Reducing $\\sigma$ modulo $\\bar{\\mathfrak m}$ gives a $K$-algebra map $C/\\mathfrak q'\\to K$, which is the inverse of the isomorphism $K\\to C/\\mathfrak q'$; hence $\\widehat{\\psi'(d)}=\\chi(d\\otimes1)=\\rho(d)$ for $d\\in D'$. So $\\psi'$ is local ($\\psi'^{-1}(\\bar{\\mathfrak m})$ is a prime of $D'$, i.e. $\\mathfrak m_{A_0}D'$, by [lem-weil-pbc-artinian-local-unique-prime]) and induces on residue fields the inclusion $F_1\\subseteq K$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-artinian-local-unique-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "*Case S: $A=\\psi'(D')$ is admissible and a residue inverse.* As in the transcendental case, [lem-weil-pbc-criterion-flatness-fibre-noetherian] for $A_0\\to D'\\to\\bar\\Lambda$ and $M=\\bar\\Lambda$ ($M/\\mathfrak m_{A_0}M$ is a vector space over the field $D'/\\mathfrak m_{A_0}D'\\cong F_1$, hence flat [def-weil-pbc-flat-ring-map]; $M$ flat over $A_0$) shows that $\\psi'$ is flat; it is local, hence faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat] and injective [lem-weil-pbc-faithfully-flat-ideal-contraction]. $A=\\psi'(D')\\cong D'$ is a $k$-subalgebra of $\\bar\\Lambda$ containing $A_0$, Artinian local, flat into $\\bar\\Lambda$, with $\\mathfrak m_A\\bar\\Lambda=\\mathfrak m_{A_0}\\bar\\Lambda=\\bar{\\mathfrak m}$ and residue field $F=F_1=F_0(\\beta)\\subseteq K$, finitely generated over $k$; as in the transcendental case, $k\\to F$ is essentially of finite type [def-weil-pbc-essentially-finite-type-algebra] [def-weil-pbc-finite-type-algebra] and so is $k\\to A$ [lem-weil-pbc-artinian-local-essentially-finite-type-residue]. So $A$ is admissible and $A_0\\subseteq A$. Lift β⁻¹ through A → F to z ∈ A. Its residue is nonzero, so z is a unit of A. The residue of z x^Q - 1 in K is β⁻¹β - 1 = 0. It therefore belongs to m_B, and its n-th power is zero because m_B^n = 0. This supplies the required nilpotent error without capturing any actual power of x in A.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-artinian-local-essentially-finite-type-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  },
+  {
+   "text": "In the algebraic case the residue field F of A is F₀(β), finite separable over F₀. The canonical differential isomorphism F ⊗[F₀] Ω[F₀/k] ≃ Ω[F/k] is supplied by [lem-weil-pbc-separable-algebraic-differentials-base-change], using Mathlib KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale. Extend b₀ by scalars and transport it along this equivalence. The formula on 1 ⊗ dc_j identifies its vectors with d(residue_A(inclusion(a₀ j))). Take m = 0 and the empty family y. In the transcendental case use the polynomial-localization basis above with m = 1 and y₀ = x. Reindex the old and new vectors by Fin t₀ ⊕ Fin m; this also covers t₀ = 0.",
+   "uses": [
+    "lem-weil-pbc-separable-algebraic-differentials-base-change",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-artinian-local-essentially-finite-type-residue",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-separable-algebraic-differentials-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tags 07FH and 07FI; geometric enlargement in steps 1, 3–10 of lem-weil-pbc-popescu-denominator-basis-enlargement, before Frobenius capture and numerator clearing. The source is also available at https://stacks.math.columbia.edu/tag/07FI and https://stacks.math.columbia.edu/tag/07FH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artinian local subalgebra enlargement with a unit and basis of Kahler differentials of its residue field",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No verdict assigned.",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An admissible Artinian local subalgebra can be enlarged to contain a power of a unit and a residue differential basis",
+   "results": "Local maximal-ideal nilpotence and cotangent-space results only; no admissible enlargement theorem.",
+   "date": "2026-10-13",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.unitsSMul",
+   "results": "Basis.unitsSMul, isUnitSMul and their application formulas handle the final scaling; they do not construct the geometric enlargement.",
+   "date": "2026-10-13",
+   "verdict": "Supporting results only."
+  },
+  {
+   "tool": "grep",
+   "query": "admissible.*(basis|enlarg)|enlarg.*(basis|subalgebra)|subalgebra.*enlarg; tensorKaehlerEquivOfFormallyEtale",
+   "results": "No geometric enlargement theorem in Mathlib/RingTheory or the source library. Mathlib/RingTheory/Etale/Kaehler.lean provides the exact separable differential base-change isomorphism, already attached to lem-weil-pbc-separable-algebraic-differentials-base-change.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; use the existing differential base-change node instead of the full homology sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuDenominatorBasisEnlargement",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); through the denominator and differential enlargement of steps 5–14 of the quotient-basis node; geometric construction before the Frobenius and denominator calculations",
+   "via": [
+    "lem-weil-pbc-popescu-denominator-basis-enlargement",
+    "lem-weil-pbc-popescu-quotient-basis-enlargement",
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuUnscaledUnitBasis",
+  "file": "lean/Sheaf/RingTheory/PopescuUnscaledUnitBasis.lean",
+  "declaration": "Algebra.exists_popescu_unscaled_unit_basis",
+  "statement": "theorem exists_popescu_unscaled_unit_basis\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (q : Ideal Λ) [q.IsPrime] (n : ℕ) (hn : 1 ≤ n)\n    (A₀ : Subalgebra k (Localization.AtPrime q ⧸\n      (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) [IsLocalRing A₀]\n    (hA₀ : A₀.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map\n      (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))))\n    (t₀ : ℕ) (a₀ : Fin t₀ → A₀)\n    (b₀ : Module.Basis (Fin t₀) (IsLocalRing.ResidueField A₀)\n      (KaehlerDifferential k (IsLocalRing.ResidueField A₀)))\n    (hb₀ : ∀ j, b₀ j = KaehlerDifferential.D k (IsLocalRing.ResidueField A₀)\n      (IsLocalRing.residue A₀ (a₀ j)))\n    (s : Λ) (hs : s ∉ q) :\n    ∃ (A : Subalgebra k (Localization.AtPrime q ⧸\n        (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) (_ : IsLocalRing A),\n      ∃ hle : A₀ ≤ A,\n      A.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map\n        (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))) ∧\n      ∃ (Q : ℕ) (_ : 1 ≤ Q) (z : Aˣ),\n        IsNilpotent (((z : A) : Localization.AtPrime q ⧸\n            (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) *\n          (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)\n            (algebraMap Λ (Localization.AtPrime q) s)) ^ Q - 1) ∧\n        ∃ (m : ℕ) (y : Fin m → A),\n          (∀ j, (y j : Localization.AtPrime q ⧸\n            (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) =\n            Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)\n              (algebraMap Λ (Localization.AtPrime q) s)) ∧\n          ∃ b : Module.Basis (Fin t₀ ⊕ Fin m) (IsLocalRing.ResidueField A)\n              (KaehlerDifferential k (IsLocalRing.ResidueField A)),\n            (∀ j, b (Sum.inl j) = KaehlerDifferential.D k (IsLocalRing.ResidueField A)\n              (IsLocalRing.residue A (Subalgebra.inclusion hle (a₀ j)))) ∧\n            (∀ j, b (Sum.inr j) = KaehlerDifferential.D k (IsLocalRing.ResidueField A)\n              (IsLocalRing.residue A (y j)))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T115431-L-3359577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T115431-L-3359577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
