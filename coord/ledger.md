@@ -13626,3 +13626,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:40 L: batch 20261013T211049 dependency take-out
 - 21:41 L: returned deliver/R3/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (reviewer RETURN: (reviewer X-a498c, head a498cd05c) H10: Add the forced adaptation in lean/Sheaf/AlgebraicGeometry/AffineGlobalHomBaseCha)
 - 21:44 L: returned deliver/C1/Sheaf.AlgebraicGeometry.LocalKoszulAugmentedCarrier (reviewer RETURN: (reviewer X-d31e4, head d31e4e84f) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Lo)
+- 21:45 L: returned deliver/P2/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal (reviewer RETURN: (reviewer X-635ad, head 635ada2a6) H7: In coord/changes/determinant-split-restriction-right-inverse.md, under ## Old, re)
