@@ -1,0 +1,168 @@
+{
+ "id": "lem-sc-p1-horseshoe-derived-triangle-comparison",
+ "kind": "statement",
+ "title": "Fixed horseshoe comparison of derived triangles",
+ "statement": "Let $A,B$ be abelian categories [def-sp-abelian], with derived categories [def-weil-abstract-derived-category], and suppose $A$ has enough injectives [def-sp-injective-resolutions]. Let $v:A\\to B$ be additive and left exact [def-sp-left-exact-additive]. For a short exact sequence $S:0\\to X_1\\to X_2\\to X_3\\to0$, take arbitrary injective resolutions $I_1,I_2,I_3$ and maps $\\alpha:I_1\\to I_2$, $\\beta:I_2\\to I_3$ with $\\beta\\alpha=0$, commuting augmentation squares, and short exact rows in every nonnegative degree. Suppose their termwise image $H=v(I_1\\to I_2\\to I_3)$ is short exact and its extension by zero $EH$ is short exact. There exists a triangle morphism $\\tau:Rv(S[0])\\to Q(EH)$, the latter being the derived triangle of the image sequence [lem-weil-pbc-complex-ses-triangle]. For every $n\\geq0$ its endpoint homology maps obey $e_{H_1}^n\\circ H^n(\\tau_1)=j_{I_1}^n\\circ\\theta_{X_1}^n$ and $e_{H_3}^n\\circ H^n(\\tau_3)=j_{I_3}^n\\circ\\theta_{X_3}^n$. Here $e$ is the canonical localization/extension homology identification [lem-sc-p1-nat-complex-derived-boundary], $\\theta_X^n:H^n(Rv(X[0]))\\simeq R^nv(X)$ is the canonical single-object identification [lem-sp-derived-functor-single-identification], and $j_{I_i}^n:R^nv(X_i)\\simeq H^n(v(I_i))$ is the injective-resolution identification. No delta-functor is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q, 05TE and 015B: item proof Steps 1-4, fixed resolution triangle comparison before homology naturality"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Extend the resolutions and maps by zero. Split each row using injectivity of the first term. The split connecting chain map is s then d then pi; its cone comparison, whose third map is minus projection, fixes its sign.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-weil-pbc-degreewise-split-derived-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible augmentation quasi-isomorphisms transport the resolution triangle to a distinguished triangle on the single objects. Hom_D(X_1[1],X_3) vanishes by computation into the bounded below injective resolution of X_3 in the homotopy category: the supports are disjoint. Third-map uniqueness identifies the transported map with the canonical single-triangle boundary.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the right derived functor and its unit on bounded below injectives. Naturality identifies the first two maps with termwise images. Compatibility with shifts identifies the third map with the image of s d pi, since both shifted differentials are -v(d). The degreewise split triangle of the image sequence is therefore the image triangle. The three comparison components give a morphism to the canonical derived SES triangle.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each endpoint compare the given injective resolution with the chosen resolution by a lift of its identity augmentation. Naturality of the derived unit, localization homology, and extendHomologyIso shows that H^n of the comparison followed by the extension/localization homology identification equals theta_X followed by isoRightDerivedObj. Lifts are homotopic so this does not depend on the lift.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-functor-single-identification",
+    "lem-sc-p1-nat-complex-derived-boundary"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sc-p1-nat-complex-derived-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q1 stage-3 worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q, 05TE and 015B: item proof Steps 1-4, fixed resolution triangle comparison before homology naturality",
+  "note": "Detailed Lean comparison following the cited sources and pinned Mathlib APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor of short exact sequence triangle is isomorphic to the triangle of a horseshoe injective resolution",
+   "results": "8 hits: triangleOfSESIso, singleTriangleIso, isoRightDerivedObj, mappingCone.mapTrianglehIso; none states the fixed-horseshoe derived-functor comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSES\"",
+   "results": "12 hits: derived SES triangle, its objects, maps, distinguishedness and naturality; no right-derived horseshoe comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Tt]riangle|horseshoe.*[Tt]riangle",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the derived image of the triangle of a short exact sequence is isomorphic to the triangle of a termwise image horseshoe injective resolution",
+   "results": "Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+   "via": [
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeDerivedTriangleComparison.lean",
+  "declaration": "CategoryTheory.horseshoe_derived_triangle_comparison",
+  "statement": "theorem horseshoe_derived_triangle_comparison\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]\n    [EnoughInjectives A] [Category.{v₂} B] [Abelian B]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]\n    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]\n    (S : ShortComplex A) (hS : S.ShortExact)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (_hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι)\n    (_hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι)\n    (_hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact)\n    (hvH : ((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact)\n    (hExt : (((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).map\n      (ComplexShape.embeddingUpNat.extendFunctor B)).ShortExact) :\n    ∃ τ : ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj\n        hS.singleTrianglePlus) ⟶ DerivedCategory.triangleOfSES hExt,\n      (∀ n : ℕ,\n        (DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₁ ≫\n            (natComplexDerivedHomologyIso\n              ((v.mapHomologicalComplex _).obj IA.cocomplex) n).hom =\n          (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ n).hom ≫\n            (IA.isoRightDerivedObj v n).hom) ∧\n      (∀ n : ℕ,\n        (DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₃ ≫\n            (natComplexDerivedHomologyIso\n              ((v.mapHomologicalComplex _).obj IC.cocomplex) n).hom =\n          (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₃ n).hom ≫\n            (IC.isoRightDerivedObj v n).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T072402-L-1124066",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T072402-L-1124066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

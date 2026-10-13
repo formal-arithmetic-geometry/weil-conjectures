@@ -9,8 +9,7 @@ public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
-import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison
 
 /-!
 # Right-derived connecting maps and the derived triangle
@@ -27,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The horseshoe connecting morphisms for a left exact functor agree, under the
 canonical single-object identifications, with the connecting morphisms in the
 homology sequence of the image of the distinguished triangle of a short exact
@@ -95,6 +95,38 @@ theorem rightDerived_triangle_connecting
               ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj
                 hS.singleTrianglePlus)
               (n : ℤ) (n + 1) (by omega)) := by
-  sorry
+  obtain ⟨G, hF, hG⟩ := exists_horseshoe_rightDerived_deltaFunctor v
+  refine ⟨G, hF, hG, ?_⟩
+  intro S hS n
+  obtain ⟨IA, IB, IC, α, β, hιA, hιB, hαβ, hrows⟩ :=
+    InjectiveResolution.exists_horseshoe_resolutions S hS
+  have hH k := (hrows k).1
+  obtain ⟨hvH, hδ⟩ := hG S hS IA IB IC α β hαβ hιA hιB hH
+  obtain ⟨hExt, hboundary⟩ := natComplex_boundary_derived _ hvH
+  obtain ⟨τ, hτ₁, hτ₃⟩ := horseshoe_derived_triangle_comparison v S hS
+    IA IB IC α β hαβ hιA hιB hH hvH hExt
+  have hnat := (DerivedCategory.homologyFunctor B 0).homologySequenceδ_naturality
+    _ _ τ (n : ℤ) (n + 1) (by omega)
+  symm at hnat
+  change DerivedCategory.HomologySequence.δ _ (n : ℤ) (n + 1) rfl ≫
+      (DerivedCategory.homologyFunctor B (n + 1)).map τ.hom₁ =
+    (DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₃ ≫
+      DerivedCategory.HomologySequence.δ _ (n : ℤ) (n + 1) rfl at hnat
+  have hτ₁n := hτ₁ (n + 1)
+  have hcompare := congrArg
+    (fun f ↦ f ≫ (natComplexDerivedHomologyIso
+      ((v.mapHomologicalComplex _).obj IA.cocomplex) (n + 1)).hom) hnat
+  simp only [Category.assoc] at hcompare ⊢
+  erw [hτ₁n, hboundary n] at hcompare
+  erw [← Category.assoc ((DerivedCategory.homologyFunctor B (n : ℤ)).map τ.hom₃),
+    hτ₃ n] at hcompare
+  rw [← Category.assoc, hδ n]
+  apply (cancel_mono (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso
+    S.X₁ (n + 1)).hom).1
+  apply (cancel_mono (IA.isoRightDerivedObj v (n + 1)).hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [Category.assoc] at hcompare
+  erw [hcompare]
+  simp only [Iso.inv_hom_id_assoc]
 
 end CategoryTheory

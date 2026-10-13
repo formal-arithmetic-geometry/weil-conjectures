@@ -33,88 +33,49 @@
  ],
  "proof": [
   {
-   "text": "Choose the horseshoe resolution $H=(I_A^\\bullet,I_B^\\bullet,I_C^\\bullet,\\alpha,\\beta)$ of $S$ supplied by [lem-weil-pbc-horseshoe-delta-functor] and [lem-weil-pbc-injective-resolution-ses]. Since each $I_A^n$ is injective, each degreewise short exact sequence splits; choose $\\pi^n,s^n$. The degreewise-split connecting-morphism lemma gives the chain map $\\delta=\\pi d_{I_B}s:I_C^\\bullet\\to I_A^\\bullet[1]$, and the complex long exact sequence gives the horseshoe maps after applying $v$.",
+   "text": "Use exists_horseshoe_rightDerived_deltaFunctor v to obtain G, hF and the comparison with every compatible horseshoe. This supplies the entire first conjunct unchanged.",
    "uses": [
-    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-horseshoe-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each S and n choose horseshoe resolutions using exists_horseshoe_resolutions. Apply the comparison already supplied by G to obtain exactness hvH of the termwise image and its snake-boundary formula.",
+   "uses": [
     "lem-weil-pbc-injective-resolution-ses",
-    "lem-weil-pbc-degreewise-split-connecting-morphism",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-weil-pbc-horseshoe-delta-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TE; Homology Tags 0117 and 011J"
-   }
+   "elementary": false
   },
   {
-   "text": "The degreewise-split triangle node [lem-weil-pbc-degreewise-split-derived-triangle] identifies $I_A^\\bullet\\to I_B^\\bullet\\to I_C^\\bullet\\xrightarrow{\\delta}I_A^\\bullet[1]$ with the cone triangle (whose third map is $-p$) and hence fixes the sign. By the connecting-formula node [lem-weil-pbc-complex-ses-connecting-formula], the homology connecting map of $0\\to v(I_A^\\bullet)\\to v(I_B^\\bullet)\\to v(I_C^\\bullet)\\to0$ is represented on a cocycle $z$ by $v(\\pi^{n+1}d_{I_B} s^n z)$.",
+   "text": "The proved natComplex_boundary_derived gives short exactness of the extended image and identifies its derived triangle boundary with hvH.delta. The fixed-horseshoe comparison supplies a triangle morphism whose endpoint homology maps are the prescribed canonical isomorphisms.",
    "uses": [
-    "lem-weil-pbc-degreewise-split-derived-triangle",
-    "lem-weil-pbc-complex-ses-connecting-formula",
-    "def-weil-abstract-derived-category"
+    "lem-sc-p1-nat-complex-derived-boundary",
+    "lem-sc-p1-horseshoe-derived-triangle-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014Q; Homology Tag 011J (with Tag 0117 for the long exact sequence)"
-   }
+   "elementary": false
   },
   {
-   "text": "The injective resolutions $s_A:A\\to I_A^\\bullet$, $s_B:B\\to I_B^\\bullet$, $s_C:C\\to I_C^\\bullet$ of the horseshoe, regarded as morphisms of complexes $A[0]\\to I_A^\\bullet$, $B[0]\\to I_B^\\bullet$, $C[0]\\to I_C^\\bullet$, are quasi-isomorphisms [def-sp-injective-resolutions] and satisfy $\\alpha^0s_A=s_Bf$, $\\beta^0s_B=s_Cg$ [lem-weil-pbc-horseshoe-delta-functor]; so $Q(s_A),Q(s_B),Q(s_C)$ are isomorphisms of $D(\\mathcal A)$ [def-weil-abstract-derived-category], and with $w':=Q(s_A)[1]^{-1}\\circ Q(\\delta)\\circ Q(s_C):C[0]\\to A[0][1]$ the triple $(Q(s_A),Q(s_B),Q(s_C))$ is an isomorphism from the triangle $A[0]\\xrightarrow{f}B[0]\\xrightarrow{g}C[0]\\xrightarrow{w'}A[0][1]$ to the distinguished triangle $I_A^\\bullet\\to I_B^\\bullet\\to I_C^\\bullet\\xrightarrow{\\delta}I_A^\\bullet[1]$ of Step 2. Hence the former triangle is distinguished (distinguished triangles are closed under isomorphism [def-weil-triangulated-category]). Moreover $\\operatorname{Hom}_{D(\\mathcal A)}(A[0][1],C[0])=0$: as $C[0]\\cong I_C^\\bullet$ in $D(\\mathcal A)$ and $I_C^\\bullet$ is K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], this group is $\\operatorname{Hom}_{K(\\mathcal A)}(A[0][1],I_C^\\bullet)$ [lem-weil-pbc-kinjective-hom-derived], and a morphism of complexes from a complex concentrated in degree $-1$ to a complex concentrated in degrees $\\ge0$ is zero. By [lem-weil-pbc-triangle-morphism-extension](3) the third morphism completing $A[0]\\xrightarrow{f}B[0]\\xrightarrow{g}C[0]$ to a distinguished triangle is therefore unique, so $w'$ is the morphism $w$ of the triangle of $S$ of [lem-sf-derived-ses-triangle]: $w=Q(s_A)[1]^{-1}\\circ Q(\\delta)\\circ Q(s_C)$ with $\\delta=\\pi d_{I_B}s$ of Step 1, with no sign.",
+   "text": "Apply Functor.homologySequenceδ_naturality to that actual triangle morphism. Postcompose by the endpoint extension homology isomorphism and substitute the endpoint identities and the proved boundary formula. Rewrite G.delta by its horseshoe equation. Cancel the two target endpoint isomorphisms and cancel theta at the source by its inverse. Associativity and inverse/hom identities give exactly the second conjunct, including hF transports.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-horseshoe-delta-functor",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-triangle-morphism-extension",
-    "lem-sf-derived-ses-triangle"
+    "lem-sc-p1-nat-complex-derived-boundary",
+    "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "lem-weil-pbc-horseshoe-delta-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014I, 014Q and 05TE: comparison of the horseshoe triangle with the triangle of the short exact sequence"
-   }
-  },
-  {
-   "text": "Compute $Rv$ [lem-weil-pbc-derived-direct-image-triangulated] with the K-injective resolutions $A[0]\\to I_A^\\bullet$, $B[0]\\to I_B^\\bullet$, $C[0]\\to I_C^\\bullet$ of Step 3 (K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]) and $A[0][1]\\to I_A^\\bullet[1]$, so that $Rv(X[0])=v(I_X^\\bullet)$ and the shift isomorphism $\\sigma_{A[0]}$ is the identity of $v(I_A^\\bullet)[1]=v(I_A^\\bullet[1])$ (both differentials are $-v(d)$). By Step 3 the morphism of resolutions representing $w$ is $\\delta$, so $Rv(w)=v(\\delta)$, and $Rv$ carries the triangle of $S$ to the distinguished triangle $v(I_A^\\bullet)\\to v(I_B^\\bullet)\\to v(I_C^\\bullet)\\xrightarrow{v(\\delta)}v(I_A^\\bullet)[1]$ of $D^+(\\mathcal B)$. Its homology connecting map [lem-sf-derived-homology-long-exact] is $H^n(v(\\delta))$ followed by $H^n(v(I_A^\\bullet)[1])=H^{n+1}(v(I_A^\\bullet))$, the identity on cocycles since $(K[1])^n=K^{n+1}$ with differential $-d$ [def-weil-abstract-derived-category]; it sends the class of a cocycle $z$ to the class of $v(\\pi^{n+1})v(d_{I_B})v(s^n)z$, which by Step 2 is the horseshoe connecting map $\\partial^n_H$. Transporting by the canonical identifications $\\theta_X^n$ of [lem-sp-derived-functor-single-identification], induced by $Rv(X[0])\\cong v(I_X^\\bullet)$, gives $\\delta_S^n=\\theta_A^{n+1}\\circ\\partial_S^n\\circ(\\theta_C^n)^{-1}$, which is the asserted agreement.",
-   "uses": [
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-sf-derived-homology-long-exact",
-    "def-weil-abstract-derived-category",
-    "lem-sp-derived-functor-single-identification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TE and 015B"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-horseshoe-delta-functor",
   "lem-weil-pbc-injective-resolution-ses",
-  "lem-weil-pbc-degreewise-split-connecting-morphism",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-degreewise-split-derived-triangle",
-  "lem-weil-pbc-complex-ses-connecting-formula",
-  "def-weil-abstract-derived-category",
-  "def-sp-injective-resolutions",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-triangle-morphism-extension",
-  "lem-sf-derived-ses-triangle",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sp-derived-functor-single-identification"
+  "lem-sc-p1-nat-complex-derived-boundary",
+  "lem-sc-p1-horseshoe-derived-triangle-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "Q1 stage-3 worker",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05TE and 015B"
+  "place": "Tags 05TE and 015B; original fixed-horseshoe route, factored through a proved generic boundary comparison and a remaining triangle comparison"
  },
  "mathlib_searches": [
   {
@@ -232,5 +193,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T072402-L-1124066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

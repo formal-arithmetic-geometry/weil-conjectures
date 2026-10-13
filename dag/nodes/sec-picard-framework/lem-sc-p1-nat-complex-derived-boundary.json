@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-p1-nat-complex-derived-boundary",
+ "kind": "statement",
+ "title": "Nonnegative complex boundaries agree with derived triangle boundaries",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] with derived category and localization $Q$ [def-weil-abstract-derived-category]. Let $S=(K_1\\xrightarrow{f}K_2\\xrightarrow{g}K_3)$ be a short exact sequence of $\\mathbb N$-indexed cochain complexes. Write $E K$ for extension by zero to $\\mathbb Z$, and let $e_K^n:H^n(Q(EK))\\simeq H^n(K)$ be the composite of the canonical localization homology isomorphism and the extension homology isomorphism. Then $ES$ is short exact and, for every $n\\in\\mathbb N$, its derived triangle boundary [lem-weil-pbc-complex-ses-triangle] satisfies $e_{K_1}^{n+1}\\circ\\delta_{Q(ES)}^n=\\delta_S^n\\circ e_{K_3}^n$, where $\\delta_S$ is the snake homology boundary [lem-weil-pbc-complex-ses-homology-long-exact].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0117 (snake boundary and functoriality), together with derived.tex Tag 014Q (cone triangle)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "Extension preserves short exactness degreewise: in a nonnegative degree use ShortComplex.isoMk of the three extendXIso maps and the original exact row; in a negative degree use the splitting of the all-zero row. This is the private Lean lemma extension_shortExact.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pinned Mathlib mappingCone.homologySequenceδ_triangleh cone-boundary formula, cancel the homotopy homology factor isomorphisms, and localize it via shiftMap_homologyFunctor_map_Q. Precompose by Q of descShortComplex, a quasi-isomorphism, and cancel it. descShortComplex_triangleOfSESδ identifies the resulting map with the derived SES boundary. This is integer_boundary.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build an actual morphism of snake inputs from the extended sequence to the original one: its four rows use extendHomologyIso, extendOpcyclesIso, extendCyclesIso, and extendHomologyIso. Row commutativity follows from extension homology and cycle naturality; opcycle naturality is checked after the epimorphism pOpcycles. The first and last vertical squares are extendHomologyIso_hom_homologyι and homologyπ_extendHomologyIso_hom. For the middle square cancel pOpcycles and iCycles and use extend_d_eq. Apply ShortComplex.SnakeInput.naturality_δ. This is extension_boundary, valid also at n=0.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the integer boundary formula with the extension snake-boundary equality and unfold the explicitly constructed e_K^n. The proof is complete in Lean, with only propext, Classical.choice, and Quot.sound.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q1 stage-3 worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0117 (snake boundary and functoriality), together with derived.tex Tag 014Q (cone triangle)",
+  "note": "Detailed Lean comparison following the cited sources and pinned Mathlib APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero of nonnegative cochain complexes preserves snake lemma homology connecting morphism under extendHomologyIso",
+   "results": "Extension homology data and opcycles/cycles isomorphism lemmas; no boundary theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendHomologyIso\"",
+   "results": "11 hits, including extendHomologyIso_hom_naturality and compatibility with homologyι and homologyπ; no boundary theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*δ|δ.*extend|triangleOfSES.*δ",
+   "results": "25 hits; DerivedCategory.triangleOfSESδ and its naturality, no extension-boundary lemma.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero preserves the connecting morphism in the long exact cohomology sequence of a short exact sequence of nonnegative cochain complexes",
+   "results": "Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+   "via": [
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.NatComplexDerivedBoundary",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/NatComplexDerivedBoundary.lean",
+  "declaration": "CategoryTheory.natComplex_boundary_derived",
+  "statement": "theorem natComplex_boundary_derived\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (S : ShortComplex (CochainComplex C ℕ)) (hS : S.ShortExact) :\n    ∃ hExt : (S.map (ComplexShape.embeddingUpNat.extendFunctor C)).ShortExact,\n      ∀ n : ℕ,\n        DerivedCategory.HomologySequence.δ (DerivedCategory.triangleOfSES hExt)\n            (n : ℤ) (n + 1) (by omega) ≫\n            (natComplexDerivedHomologyIso S.X₁ (n + 1)).hom =\n          (natComplexDerivedHomologyIso S.X₃ n).hom ≫ hS.δ n (n + 1) rfl",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.natComplexDerivedHomologyIso",
+   "CategoryTheory.natComplex_boundary_derived"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T072402-L-1124066",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T072402-L-1124066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
