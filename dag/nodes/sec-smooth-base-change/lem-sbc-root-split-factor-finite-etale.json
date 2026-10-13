@@ -1,0 +1,108 @@
+{
+ "id": "lem-sbc-root-split-factor-finite-etale",
+ "kind": "statement",
+ "title": "Finite etale descent from a punctured root splitting",
+ "statement": "Let $R$ be a commutative ring, $g\\in R$, and $n>0$ an integer invertible in $R$. Put $U=D(g)\\subset\\operatorname{Spec}R$ [def-weil-pbc-scheme-conventions]. Let $j:Y\\to U$ be a morphism and $p=j\\circ\\iota_U$. Put $A=R[T]/(T^n-g)$ and $V=D(g)\\subset\\operatorname{Spec}A$. Suppose $d\\in\\mathbb N$ and there is an isomorphism $Y\\times_{\\operatorname{Spec}R}V\\cong\\coprod_{\\operatorname{Fin}d}V$ [def-pc-fibre-product] whose composite with the fold is the second projection. Then $j$ is finite [def-weil-finite-integral-morphism] and etale [def-weil-etale-morphism].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured root cover in Tag 0EYG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Proof: On U=D(g), the algebra U[T]/(T^n-g) is finite free of positive rank n.\nIts root t is a unit since t^n=g, and n is a unit, so the derivative n*t^(n-1)\nis a unit. Thus the punctured root map V to U is finite etale and faithfully\nflat. The equation hj identifies the supplied pullback over Spec R with the\npullback of j over U. The equation for delta identifies its structural map\nwith the projection from d copies of V. That projection is finite etale,\nincluding d=0. Finiteness and etaleness descend along V to U by Tags 02LA\nand 02VN. Neither regularity nor a point on the divisor is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "document": "Stacks Project",
+  "place": "Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured root cover in Tag 0EYG",
+  "note": "Specialization of the sourced argument; the scheme and cyclic-action glue is written out in the docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite etale cover split by a Kummer root extension has intermediate root charts over a strict henselian regular local ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cover trivialized by a punctured root extension is finite etale over the basic open",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, StandardEtalePair.instEtaleRing, Algebra.etaleLocus, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.finitePresentation",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-level statement."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel|StrictlyHenselian|IsRegularLocalRing",
+   "results": "10 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-level statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: Tags 02LA and 02VN, finite and etale fpqc descent applied to the punctured root cover in Tag 0EYG",
+   "via": [
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitFactorFiniteEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitFactorFiniteEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_split_factor_finite_etale",
+  "statement": "theorem root_split_factor_finite_etale\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))\n    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    IsFinite j ∧ Etale j",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

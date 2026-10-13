@@ -12900,3 +12900,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/S2/Sheaf.Paper.EtaleCERowCyclesNaturality (stage 3; reviewer PASS; first push; landing 20261013T145728-L-751922 (proof); batch 20261013T145721; modules 1; new nodes 0)
 - 14:57 L: merged deliver/S3/Sheaf.AlgebraicGeometry.DerivedRestrictionEvaluationMatePostcompBijective (stage 3; reviewer PASS; first push; landing 20261013T145728-L-752038 (interface); batch 20261013T145721; modules 2; new nodes 1)
 - 14:57 L: merged deliver/S3/Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover (stage 3; reviewer PASS; first push; landing 20261013T145729-L-752165 (interface); batch 20261013T145721; modules 3; new nodes 2)
+- 14:57 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts (stage 3; reviewer PASS; first push; landing 20261013T145729-L-752344 (interface); batch 20261013T145721; modules 4; new nodes 3)

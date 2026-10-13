@@ -1,0 +1,106 @@
+{
+ "id": "lem-sbc-regular-divisor-strict-local-limit",
+ "kind": "statement",
+ "title": "Pointed regular strict local ind-etale limit of a divisor",
+ "statement": "Let $R$ be a commutative regular ring [def-weil-regular-scheme], let $g\\in R$ be a nonzerodivisor with regular quotient $R/(g)$, and let $y\\in\\operatorname{Spec}R$ contain $g$ [def-weil-pbc-scheme-conventions]. There are a commutative ring $H$ in the same universe and a ring homomorphism $\\iota:R\\to H$ which is ind-etale (a filtered colimit of etale $R$-algebras). The ring $H$ is strictly henselian local (henselian with separably closed residue field), $H$ and $H/(\\iota(g))$ are regular local, $\\iota(g)$ is a nonzerodivisor in the maximal ideal of $H$, and some point $x\\in\\operatorname{Spec}H$ maps to $y$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Localize R at y, choose a separable closure of its residue field, and\nform its strict henselization H as the filtered colimit of pointed etale\nneighbourhood algebras. Its structural map from R is ind-etale (localization\nis ind-etale, and so is this filtered etale colimit). H is strictly henselian\nlocal, and the contraction of its maximal ideal is y; take x to be its\nclosed point. The local ring of R at y is regular, so H is regular local\nby Tag 06LN. Flatness of R to H preserves injective multiplication by g.\nBecause g belongs to y, its image lies in the maximal ideal of H. The\nquotient H/(g) is the strict henselization of the localization of R/(g)\nat the image of y (Tag 05WS); it is regular local by Tag 06LN. These\nconstructions all stay in the universe of R using small representatives.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS",
+  "note": "Specialization of the sourced argument; the scheme and cyclic-action glue is written out in the docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite etale cover split by a Kummer root extension has intermediate root charts over a strict henselian regular local ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization of a regular local ring and of its quotient by a nonzerodivisor is regular local",
+   "results": "8 hits: HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing, HenselianLocalRing.TFAE, Field.henselian, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, PreTilt.isDomain, HenselianRing",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-level statement."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel|StrictlyHenselian|IsRegularLocalRing",
+   "results": "10 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-level statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverIndEtaleCharts",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case: Tag 0EYG, strict henselization paragraph; Tags 04GP, 04HX, 06LN and 05WS",
+   "via": [
+    "lem-sbc-root-split-cover-ind-etale-charts",
+    "lem-sbc-root-split-cover-on-divisor-charts",
+    "lem-sbc-root-split-cover-cyclic-chart-model",
+    "lem-sbc-root-split-cover-cyclic-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularDivisorStrictLocalLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.regular_divisor_strict_local_limit",
+  "statement": "theorem regular_divisor_strict_local_limit\n    (R : CommRingCat.{u}) (g : R) [IsRegularRing R]\n    (hg : IsSMulRegular R g) [IsRegularRing (R ⧸ Ideal.span {g})]\n    (y : Spec R) (hy : g ∈ y.asIdeal) :\n    ∃ (H : CommRingCat.{u}) (ι : R →+* H),\n      ι.IndEtale ∧\n      ∃ (hH : IsStrictlyHenselianLocalRing H),\n        IsRegularLocalRing H ∧ IsRegularLocalRing (H ⧸ Ideal.span {ι g}) ∧\n        IsSMulRegular H (ι g) ∧\n        ι g ∈ IsLocalRing.maximalIdeal H ∧\n        ∃ x : Spec H, (Spec.map (CommRingCat.ofHom ι)) x = y",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
