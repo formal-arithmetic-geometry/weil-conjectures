@@ -2031,6 +2031,7 @@ public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 public import WeilConjectures.RingTheory.Purity.FreeOfRegularPair
 public import WeilConjectures.RingTheory.Purity.NormalRegularPair
 public import WeilConjectures.RingTheory.Purity.UnramifiedOfRegularPair
+public import WeilConjectures.RingTheory.Purity.Saturation
 public import WeilConjectures.RingTheory.Purity.ZariskiNagata
 public import WeilConjectures.RingTheory.Regular.Hartogs
 public import WeilConjectures.RingTheory.RegularLocalRing.IsRegularRing
