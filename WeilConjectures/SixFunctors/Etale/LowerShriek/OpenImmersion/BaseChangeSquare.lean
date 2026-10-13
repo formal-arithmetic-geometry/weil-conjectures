@@ -115,7 +115,10 @@ noncomputable def Etale.openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j'
 /-- **Base change for the extension by zero along a cartesian square**: if the square
 `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions is cartesian, the base change map
 `j'_! g'^* ⟶ g''^* j_!` is an isomorphism, being the conjugate of the isomorphism
-`Etale.baseChangeMap A hsq.toCommSq.flip`. -/
+`Etale.baseChangeMap A hsq.toCommSq.flip`. Together with the exactness of `j_!`
+(`Etale.preservesFiniteLimits_openImmersionLowerShriek`, and `j_!` being a left adjoint) and
+its derived version `Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso` this is
+(blueprint: `sbc-prop-extension-by-zero-and-arbitrary-base-change`). -/
 lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     IsIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq) :=
   have := Etale.isIso_baseChangeMap_flip_of_isPullback A hsq

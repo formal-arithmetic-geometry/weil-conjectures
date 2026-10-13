@@ -67,7 +67,8 @@ omit [HasSmallSiteSheafify A] in
 /-- **`j^* i_* H` vanishes** when the ranges of `j` and `i` are disjoint. Its sections over
 `T : U.Etale` are `H(T ×_X Z) = H(∅)`, hence terminal, hence zero. This is
 `AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` transported along
-`AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`. -/
+`AlgebraicGeometry.Etale.upperStarIsoOpenImmersionRestriction`.
+(blueprint: `lemma-openclosed-vanishing-lowerstar`) -/
 lemma Etale.isZero_upperStar_lowerStar_of_disjoint_range
     (hji : Disjoint (Set.range j.base) (Set.range i.base))
     (H : Sheaf Z.smallEtaleTopology A) :
@@ -80,7 +81,8 @@ omit [HasSmallSiteSheafify A] in
 `i^* j_! G` is ever computed: the adjunctions `i^* ⊣ i_*` and `j_! ⊣ j^*` turn
 `Hom(i^* j_! G, H)` into `Hom(G, j^* i_* H)`, which is a singleton by
 `AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`. So `i^* j_! G` is
-initial, and an initial object of a category with zero morphisms is a zero object. -/
+initial, and an initial object of a category with zero morphisms is a zero object.
+(blueprint: `lemma-openclosed-vanishing-lowershriek`) -/
 lemma Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
     (hji : Disjoint (Set.range j.base) (Set.range i.base))
     (G : Sheaf U.smallEtaleTopology A) :

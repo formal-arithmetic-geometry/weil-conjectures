@@ -285,7 +285,8 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
 include hij in
 /-- **The extension by zero of a constructible sheaf along an open immersion is
 constructible**: its restriction to `U` is the sheaf itself, and its restriction to the
-complement `Z` vanishes. (blueprint: `lemma:constructible-lowerShriek-open`) -/
+complement `Z` vanishes.
+(blueprint: `lemma:constructible-lowerShriek-open`, `lem-fin-extension-by-zero`) -/
 theorem IsConstructibleSheaf.openImmersionLowerShriek (G : Sheaf U.smallEtaleTopology A)
     [IsConstructibleSheaf G] : IsConstructibleSheaf ((j)_!open[A].obj G) := by
   rw [isConstructibleSheaf_iff_upperStar j i hij]

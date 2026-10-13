@@ -67,6 +67,7 @@ variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z}
 `g' ≫ j = j' ≫ g''` of schemes with `j` and `j'` open immersions, the isomorphism
 `Dg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Dg''^*` of the functors induced on unbounded derived categories by
 the base change isomorphism `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap`.
+(blueprint: `sbc-prop-extension-by-zero-and-arbitrary-base-change`, case of complexes)
 
 ```
   D(U) --Dg'^*--> D(U')
