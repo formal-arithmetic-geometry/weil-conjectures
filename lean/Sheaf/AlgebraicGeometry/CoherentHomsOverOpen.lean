@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.CoherentArtinRees
@@ -149,7 +150,19 @@ theorem coherent_homs_over_open_extension {X : Scheme.{u}} [IsLocallyNoetherian 
         (SheafOfModules.overFunctor X.ringCatSheaf d.U).map
             (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ ψ =
           (SheafOfModules.overFunctor X.ringCatSheaf d.U).map χ := by
-  sorry
+  have _ := hG
+  intro ψ
+  obtain ⟨D, e, c, hcomp, hcoc, hbij⟩ := d.hcolim
+  obtain ⟨z, hz⟩ := hbij.2 ψ
+  let : PreservesFilteredColimitsOfSize.{0, 0} (CategoryTheory.forget AddCommGrpCat.{u}) :=
+    preservesFilteredColimitsOfSize_shrink _
+  obtain ⟨n, z, rfl⟩ := Concrete.colimit_exists_rep D z
+  refine ⟨n, (e n).hom z, ?_⟩
+  have he : (e n).inv ((e n).hom z) = z := by
+    exact ConcreteCategory.congr_hom (e n).hom_inv_id z
+  have hz' : c.app n z = ψ := by
+    simpa [← ConcreteCategory.comp_apply, colimit.ι_desc] using hz
+  simpa only [he, hz'] using hcoc n ((e n).hom z)
 
 theorem coherent_homs_over_open {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules)
