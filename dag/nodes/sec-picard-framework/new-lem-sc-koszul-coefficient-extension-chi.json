@@ -1,0 +1,153 @@
+{
+ "id": "new-lem-sc-koszul-coefficient-extension-chi",
+ "kind": "statement",
+ "title": "Coefficient extension cochain map",
+ "statement": "Let A be a commutative ring, I an ideal, r a natural number and f:Fin r -> A a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] with span(range f)=I. Let T be a submonoid and S an A-algebra localization at T, and assume span(range (A -> S composed with f))=IS. There exists an A-linear cochain map chi from the signed dual Koszul complex over A to the restricted signed dual Koszul complex over S [def-sc-koszul-dual-complex]. For every n, A-linear functional x on the nth Koszul term and n vectors v_i in A^r, evaluation of chi_n(x) on the wedge of their images equals the image in S of x evaluated on their wedge.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, finite free Koszul computation, localization of the coefficient formulas"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-koszul-dual-complex"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Write e_J for the increasing standard basis wedges of degree n. For a\nfunctional x, define its extension by sending e_J over S to the image of x(e_J).\nThe exterior basis makes this a unique S-linear functional, and the assignment\nis A-linear in x. Expanding any wedge in that basis expresses its coefficients\nas minors of the vector-coordinate matrix. Ring maps preserve these minors,\nwhich proves the evaluation formula. On a basis wedge the contraction is the\nalternating sum of f(i) times the wedge omitting i. Applying A -> S to this\nformula gives contraction for the image sequence. The signed dual differential\nis precomposition with this contraction times (-1)^(n+1); the ring map preserves\nthat sign. Thus the degreewise extensions commute with every differential and\nform chi. For n > r both exterior terms are zero; for n = 0 the single empty\nbasis wedge gives scalar extension A -> S. No regularity assumption is needed\nfor this component, though the common hypotheses are retained.",
+   "uses": [
+    "def-sc-koszul-dual-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, coefficient extension construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension of dual exterior powers and the determinant pairing under localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior powers commute with base change and determinant pairing commutes with localization",
+   "results": "exteriorPower.pairingDual_ιMulti_ιMulti; LinearEquiv.det_baseChange; IsBaseChange.det_endHom; LinearMap.det_baseChange; IsBaseChange.toDualBaseChange_tmul; LinearEquiv.transvection.baseChange; LinearMap.transvection.baseChange; Module.Dual.baseChange_baseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*localiz|Koszul.*[Bb]ase[Cc]hange|ext.*[Hh]omology",
+   "results": "Mathlib/RingTheory/Extension/ExtendScalars.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinear extension of a functional on an exterior power of a finite free module",
+   "results": "alternatingMapLinearEquiv, alternatingMapToDual, exteriorPower.map: useful generic tools, no cochain or conormal coefficient-extension theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.baseChange",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pairingDual|baseChange.*Dual|Dual.*baseChange|koszul.*[Mm]ap",
+   "results": "pairingDual_ιMulti_ιMulti and Module.Dual.baseChangeHom; neither supplies the signed cochain map or the conormal map and its evaluation formula. Also searched lean/Sheaf/RingTheory/Koszul* and lean/Sheaf/LinearAlgebra.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "contractLeft.*map|map.*contractLeft|exteriorPower.*baseChange|baseChange.*exteriorPower",
+   "results": "Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.pairingDual, RingHom",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism extends dual Koszul complexes degreewise and commutes with contraction differential",
+   "results": "KaehlerDifferential.map, CommRingCat.KaehlerDifferential.map, CommRingCat.KaehlerDifferential.map_d, HomologicalComplex.extend_op_d, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, Algebra.Extension.CotangentSpace.map_cotangentComplex, ExteriorAlgebra.toTrivSqZeroExt_comp_map",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulCoefficientExtension",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine dual Koszul calculation: Coefficient maps on the dual Koszul complex and conormal determinant",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulCoefficientExtensionChi",
+  "file": "lean/Sheaf/RingTheory/KoszulCoefficientExtensionChi.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_coefficient_extension_chi",
+  "statement": "theorem exists_koszul_coefficient_extension_chi\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)\n    (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S]\n    [IsLocalization T S]\n    (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S)) :\n  ∃ (χ : koszulDualComplex A r f ⟶\n    ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f))),\n  ∀ (n : ℕ) (x : (koszulComplex A r f).X n ⟶ ModuleCat.of A A)\n    (v : Fin n → (Fin r →₀ A)),\n    (χ.f n x).hom (exteriorPower.ιMulti S n\n      (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) =\n    algebraMap A S (x.hom (exteriorPower.ιMulti A n v))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d4d25",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T005854-L-2606112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d4d25",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T005854-L-2606112",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched the unchanged parent statement, component nodes, source constructions, proof metadata and report; all delivery modules and the direct importer compiled cleanly, and axiom checks showed only permitted axioms plus expected sorryAx."
+ }
+}

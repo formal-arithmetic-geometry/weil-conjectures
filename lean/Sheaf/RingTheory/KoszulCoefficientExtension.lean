@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.RingTheory.KoszulCoefficientExtensionChi
+import Sheaf.RingTheory.KoszulCoefficientExtensionNu
 
 /-! # Coefficient extension of the dual Koszul complex and normal determinant
 
@@ -50,7 +52,7 @@ theorem exists_koszul_coefficient_extension
     (q : (A ⧸ I) →+* (S ⧸ I.map (algebraMap A S)))
     (hq : ∀ b : A, q (Ideal.Quotient.mk I b) =
       Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S b)) :
-∃ (χ : koszulDualComplex A r f ⟶
+  ∃ (χ : koszulDualComplex A r f ⟶
     ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f)))
   (ν : koszulNormalDeterminant A I r →ₗ[A]
@@ -70,6 +72,9 @@ theorem exists_koszul_coefficient_extension
           ((v i).mapRange (algebraMap A S) (map_zero _)))) =
     q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w
       (exteriorPower.ιMulti (A ⧸ I) r
-        (fun i ↦ koszulConormalVector A I r f hf (v i))))) := by sorry
+        (fun i ↦ koszulConormalVector A I r f hf (v i))))) := by
+  obtain ⟨χ, hχ⟩ := exists_koszul_coefficient_extension_chi A I r f hreg hf T S hs
+  obtain ⟨ν, hν⟩ := exists_koszul_coefficient_extension_nu A I r f hreg hf T S hs q hq
+  exact ⟨χ, ν, hχ, hν⟩
 
 end ExteriorAlgebra

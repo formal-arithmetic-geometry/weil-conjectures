@@ -14,36 +14,22 @@
  ],
  "proof": [
   {
-   "text": "Extend dual exterior-basis coefficients via A -> S. The determinant formula gives evaluation on arbitrary image wedges. The Koszul differential has generator coefficients and the fixed degreewise sign, so these maps commute with the differential.",
+   "text": "Apply the cochain-map component to obtain chi and its degreewise evaluation formula; apply the independent normal-determinant component to obtain nu and its pairing formula. Pair the two witnesses and their two formulas.",
    "uses": [
-    "def-sc-koszul-dual-complex",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "lem-weil-pbc-koszul-differential"
+    "new-lem-sc-koszul-coefficient-extension-chi",
+    "new-lem-sc-koszul-coefficient-extension-nu"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Flatness of localization and flat base change preserve regularity. Obtain the conormal bases consisting of generator classes on both sides. Send coefficients of the dual conormal basis through q and take the top exterior power. Evaluation on image wedges is compatible by the determinant formula, since q sends generator coefficients to their quotient images. This is the map nu and gives exactly its evaluation formula. No comparison-square assertion is made.",
-   "uses": [
-    "lem-sc-koszul-regular-flat-base-change",
-    "lem-sc-koszul-conormal-basis",
-    "lem-sc-exterior-power-dual-pairing"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-koszul-dual-complex",
-  "lem-sc-exterior-power-dual-pairing",
-  "lem-sc-koszul-conormal-basis",
-  "lem-sc-koszul-regular-flat-base-change",
-  "lem-weil-pbc-exterior-power-free-basis",
-  "lem-weil-pbc-koszul-differential"
+  "new-lem-sc-koszul-coefficient-extension-chi",
+  "new-lem-sc-koszul-coefficient-extension-nu"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Lemma 48.15.5, finite free Koszul computation, localization of the coefficient formulas; the source argument made explicit in exterior basis coordinates"
+  "place": "B4 stage-3 decomposition into the independent cochain and normal determinant coefficient constructions"
  },
  "mathlib_searches": [
   {
@@ -96,7 +82,7 @@
   "module": "Sheaf.RingTheory.KoszulCoefficientExtension",
   "file": "lean/Sheaf/RingTheory/KoszulCoefficientExtension.lean",
   "declaration": "ExteriorAlgebra.exists_koszul_coefficient_extension",
-  "statement": "theorem exists_koszul_coefficient_extension (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S] [IsLocalization T S] (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S)) (q : (A ⧸ I) →+* (S ⧸ I.map (algebraMap A S))) (hq : ∀ b : A, q (Ideal.Quotient.mk I b) = Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S b)) : ∃ (χ : koszulDualComplex A r f ⟶ ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f))) (ν : koszulNormalDeterminant A I r →ₗ[A] (ModuleCat.restrictScalars (algebraMap A S)).obj (koszulNormalDeterminant S (I.map (algebraMap A S)) r)), (∀ (n : ℕ) (x : (koszulComplex A r f).X n ⟶ ModuleCat.of A A) (v : Fin n → (Fin r →₀ A)), (χ.f n x).hom (exteriorPower.ιMulti S n (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) = algebraMap A S (x.hom (exteriorPower.ιMulti A n v))) ∧ (∀ (w : koszulNormalDeterminant A I r) (v : Fin r → (Fin r →₀ A)), exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S)) (I.map (algebraMap A S)).Cotangent r (ν w) (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r (fun i ↦ koszulConormalVector S (I.map (algebraMap A S)) r (algebraMap A S ∘ f) hs ((v i).mapRange (algebraMap A S) (map_zero _)))) = q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w (exteriorPower.ιMulti (A ⧸ I) r (fun i ↦ koszulConormalVector A I r f hf (v i)))))",
+  "statement": "theorem exists_koszul_coefficient_extension\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)\n    (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S]\n    [IsLocalization T S]\n    (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S))\n    (q : (A ⧸ I) →+* (S ⧸ I.map (algebraMap A S)))\n    (hq : ∀ b : A, q (Ideal.Quotient.mk I b) =\n      Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S b)) :\n  ∃ (χ : koszulDualComplex A r f ⟶\n    ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f)))\n  (ν : koszulNormalDeterminant A I r →ₗ[A]\n    (ModuleCat.restrictScalars (algebraMap A S)).obj\n      (koszulNormalDeterminant S (I.map (algebraMap A S)) r)),\n  (∀ (n : ℕ) (x : (koszulComplex A r f).X n ⟶ ModuleCat.of A A)\n    (v : Fin n → (Fin r →₀ A)),\n    (χ.f n x).hom (exteriorPower.ιMulti S n\n      (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) =\n    algebraMap A S (x.hom (exteriorPower.ιMulti A n v))) ∧\n  (∀ (w : koszulNormalDeterminant A I r) (v : Fin r → (Fin r →₀ A)),\n    exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S))\n      (I.map (algebraMap A S)).Cotangent r (ν w)\n      (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r\n        (fun i ↦ koszulConormalVector S (I.map (algebraMap A S)) r\n          (algebraMap A S ∘ f) hs\n          ((v i).mapRange (algebraMap A S) (map_zero _)))) =\n    q (exteriorPower.pairingDual (A ⧸ I) I.Cotangent r w\n      (exteriorPower.ιMulti (A ⧸ I) r\n        (fun i ↦ koszulConormalVector A I r f hf (v i)))))",
   "branch": "sheaf-dag",
   "by": "V1",
   "date": "2026-10-13"
@@ -112,13 +98,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b3c5c",
-  "group": "V1",
+  "reviewer": "X-d4d25",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T223424-L-1643422",
+  "landing": "20261013T005854-L-2606112",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid."
+  "note": "independent Codex review: Delivered Lean matched the unchanged parent statement, component nodes, source constructions, proof metadata and report; all delivery modules and the direct importer compiled cleanly, and axiom checks showed only permitted axioms plus expected sorryAx."
  }
 }
