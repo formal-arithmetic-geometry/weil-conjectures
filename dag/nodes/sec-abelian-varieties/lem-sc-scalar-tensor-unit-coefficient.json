@@ -12,14 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Use the sheafification adjunction and monoidal tensorator of the sheaf inclusion to check the two maps on elementary tensors. The constant-sheaf adjunction defining the scalar-unit map makes its presheaf component send r to scalarMap(f,U)(r) on every open U. The coefficient map sends a pure tensor to tmulSection of its factors, by exists_scalarTensorCoefficient.",
+   "text": "Prove the scalar unit formula on every open: precompose the underlying scalarUnitMorphism with the lax monoidal unit of sheafToPresheaf. The sheafification adjunction unit_app_unit_comp_map_eta, followed by monoidal eta_epsilon, identifies this composite with the constant-presheaf adjoint of scalarUnitLinear. The counit of constantPresheafAdj restricts the global scalar section to the given open, giving scalarMap f U r.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
    "elementary": false
   },
   {
-   "text": "On s tensor r, the right module unitor after scalarTensorCoefficient returns scalarMap(f,U)(r) times s, which is r times s in the scalar module. On r tensor s, the left module unitor returns the same scalar multiple. The corresponding scalar unitors have these actions as well. Pure tensors generate the sectionwise tensor product. The sheafification adjunction and the unit coherence of the inclusion identify these sectionwise equalities with the claimed sheaf morphism equalities. The argument applies also to the zero module and empty scheme.",
+   "text": "For the right identity, cancel the inverse right unitor and apply faithfulness of sheafToPresheaf. LaxMonoidal.right_unitality_inv and tensorator naturality express the resulting presheaf map on a section s as the tensorator applied to s tensor the image of 1 under the scalar unit, followed by the tensor coefficient and module right unitor. The scalar unit formula and exists_scalarTensorCoefficient reduce this to the module right unitor on tmulSection s 1. The proved source-library rightUnitor_hom_app_tmulSection and one_smul give s. Repeat with left_unitality_inv and leftUnitor_hom_app_tmulSection for 1 tensor s. These are ordinary sectionwise equalities and require no nonzero sections, so include zero modules and the empty scheme.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
@@ -30,9 +30,9 @@
   "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof_origin": {
-  "by": "agent Q2",
-  "document": "Stacks Project, Cohomology; Mathlib Ext and tensor API",
-  "place": "Tags 01DZ and 0FKU, expanded specialization of the parent proof; explicit Lean proof where supplied"
+  "by": "agent S4",
+  "document": "Stacks Project, Modules and Cohomology; Mathlib monoidal adjunction API; WeilConjectures.AlgebraicGeometry.Modules.TensorSection",
+  "place": "Tags 0096, 01CA and 0FKU; explicit Lean proof using scalar-unit adjunction formula, inverse-unit coherence and sectionwise module-unit formulas"
  },
  "mathlib_searches": [
   {
@@ -112,10 +112,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T100101-L-2478571",
-  "kind": "interface",
+  "landing": "20261013T111923-L-3063324",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
