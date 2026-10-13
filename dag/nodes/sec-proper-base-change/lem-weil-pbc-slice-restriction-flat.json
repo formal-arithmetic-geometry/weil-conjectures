@@ -14,17 +14,72 @@
  },
  "kind": "statement",
  "title": "Flatness survives restriction to a slice",
- "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, let $U$ be an object of $\\mathcal C$, and let $\\mathcal F$ be a flat $\\mathcal O$-module [def-pc-flat-sheaf-modules]. Then the restriction $\\mathcal F|_U$ is a flat $\\mathcal O_U$-module on the slice site over $U$.",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, let $U$ be an object of $\\mathcal C$, and let $\\mathcal F$ be a flat $\\mathcal O$-module [def-pc-flat-sheaf-modules]. Then the restriction $\\mathcal F|_U$ is a flat $\\mathcal O_U$-module on the slice site over $U$ [def-pur-localized-ringed-site].",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 0E8J (lemma-restriction-flat)."
  },
  "stmt_deps": [
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take an arbitrary exact three-term complex $\\mathcal G_1\\to\\mathcal G_2\\to\\mathcal G_3$ of $\\mathcal O_U$-modules. Write $j_{U!}$ for the sheafified direct-sum extension of the cited exactness lemma. Its forward implication gives an exact complex $j_{U!}\\mathcal G_1\\to j_{U!}\\mathcal G_2\\to j_{U!}\\mathcal G_3$ of $\\mathcal O$-modules.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8J (lemma-restriction-flat)."
+   }
+  },
+  {
+   "text": "Flatness of $\\mathcal F$ means precisely that the functor $\\mathcal H\\mapsto\\mathcal H\\otimes_{\\mathcal O}\\mathcal F$ is exact. Apply that hypothesis to the complex in step 1: $(j_{U!}\\mathcal G_1)\\otimes\\mathcal F\\to(j_{U!}\\mathcal G_2)\\otimes\\mathcal F\\to(j_{U!}\\mathcal G_3)\\otimes\\mathcal F$ is exact.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8J (lemma-restriction-flat)."
+   }
+  },
+  {
+   "text": "For $i=1,2,3$ use the natural isomorphism $j_{U!}(\\mathcal G_i\\otimes_{\\mathcal O_U}\\mathcal F|_U)\\cong(j_{U!}\\mathcal G_i)\\otimes_{\\mathcal O}\\mathcal F$. Naturality in $\\mathcal G_i$ identifies each arrow induced by $a:\\mathcal G_i\\to\\mathcal G_{i+1}$: the isomorphism at $i+1$ composed with $j_{U!}(a\\otimes1)$ equals $(j_{U!}a\\otimes1)$ composed with the isomorphism at $i$. Thus the complex in step 2 is isomorphic to the extension by zero of the tensor complex on the slice, and the latter extended complex is exact.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8J (lemma-restriction-flat)."
+   }
+  },
+  {
+   "text": "Apply the reverse implication of the exactness lemma to conclude that $\\mathcal G_1\\otimes_{\\mathcal O_U}\\mathcal F|_U\\to\\mathcal G_2\\otimes_{\\mathcal O_U}\\mathcal F|_U\\to\\mathcal G_3\\otimes_{\\mathcal O_U}\\mathcal F|_U$ is exact. The original complex was arbitrary, including those with a zero end term, so tensoring with $\\mathcal F|_U$ is exact. By the definition of flatness on $(\\mathcal C/U,\\mathcal O_U)$ this is the conclusion.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-exactness",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8J (lemma-restriction-flat)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-slice-extension-exactness",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8J (lemma-restriction-flat)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,15 +115,65 @@
    "results": "Module.Flat.of_flat_tensorProduct; Module.FaithfullyFlat.toFlat; CategoryTheory.compatiblePreservingOfFlat; Module.Flat.of_ulift; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.trans; Module.Flat.iff_flat_tensorProduct; Module.flat_iff_of_isLocalization",
    "date": "2026-10-14",
    "verdict": "no match: read returned signatures; ordinary module flatness, underived module-sheaf functors, Ext-colimit local cohomology and generic categorical localization do not state this ringed-site assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat sheaf of modules on a ringed site stays flat when restricted to the slice site over any object",
+   "results": "Returned: Module.Flat.trans, AlgebraicGeometry.Flat.instResLE, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.Scheme.Hom.flat_appLE, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.flat_appLE, Module.flat_iff_of_isLocalization (8 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"flat\"",
+   "results": "Returned:  (0 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*restrict|restrict.*flat",
+   "results": "Returned: Mathlib/Algebra/Category/Ring/EqualizerPushout.lean (1 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to the slice site preserves flat sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact faithful extension by zero satisfying the projection formula implies restriction preserves tensor flat objects",
+   "results": "Returned: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact (8 hits). ",
+   "date": "2026-10-14",
+   "verdict": "no match: read returned signatures; no assertion about sheafified extension by zero for modules over a varying ring sheaf on an arbitrary slice site."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-slice-restriction-flat",
+  "worker": "stage1",
+  "summary": "Read Stacks 0E8J and its cited 0E8G and 0E8I. Split the actual argument into extension, tensoring by the flat module, natural tensor comparison, and reflection. Two new statement-only nodes retain the arbitrary ringed-site hypotheses; existing abelian-sheaf and geometric exactness statements do not cover them. Added the existing localized-ringed-site definition. No mathematical statement correction or attachment.",
+  "blueprint": "The final Stacks comparison of def-weil-pbc-completed-pullback, exposed through the constant-completion and flat-ringed-ideal-complete equivalences: the slice-flatness fact needed to apply the local extended Cech comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-7627fddb4",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-7627fddb4 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass: Tags 0E8G, 0E8I, and 0E8J match every statement, hypothesis, proof step, coefficient category, and edge case. Both new nodes omit required created.by/created.date, merged_into, and lean_audit fields. Corrected full JSON files are in fixes/dag/nodes/sec-proper-base-change/.; 2 file(s) fixed by the reviewer"
+ }
 }
