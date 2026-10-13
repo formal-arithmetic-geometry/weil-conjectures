@@ -113,3 +113,51 @@ theorem isIso_mateEquiv_app_of_isIso_mateEquiv_app [IsIso ϑ_D] [IsIso ϑ_C]
   exact isIso_of_reflects_iso _ R_D
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+
+section ProjectionMap
+
+open _root_.CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
+  {T_C : C ⥤ C ⥤ C} {T_D : D ⥤ D ⥤ D}
+  (φ : (postcompose₂.obj F).obj T_D ⟶ (((whiskeringLeft₂ C).obj F).obj F).obj T_C)
+  {L : D} {L' : C} (c : F.obj L ⟶ L') {T_D' : D ⥤ D} {T_C' : C ⥤ C}
+  (e_D : T_D' ≅ T_D.flip.obj L) (e_C : T_C' ≅ T_C.flip.obj L') (a : T_D' ⋙ F ⟶ F ⋙ T_C')
+
+/-- Let `a : F (T_D' X) ⟶ T_C' (F X)` be identified, through isomorphisms `T_D' ≅ T_D (-, L)` and
+`T_C' ≅ T_C (-, L')`, with the comparison `φ : F (T_D X L) ⟶ T_C (F X) (F L)` followed by a
+morphism `c : F L ⟶ L'`. Then the mate `T_D' (G M) ⟶ G (T_C' M)` of `a` is identified
+with the right adjoint projection map `T_D (G M) L ⟶ G (T_C M (F L))` followed by `G (T_C M c)`. -/
+lemma mateEquiv_app_comp_map_eq_rightAdjointProjectionMap
+    (h : ∀ X, a.app X ≫ e_C.hom.app (F.obj X) =
+      F.map (e_D.hom.app X) ≫ (φ.app X).app L ≫ (T_C.obj (F.obj X)).map c) (M : C) :
+    (mateEquiv adj adj a).app M ≫ G.map (e_C.hom.app M) =
+      e_D.hom.app (G.obj M) ≫ ((adj.rightAdjointProjectionMap φ).app M).app L ≫
+        G.map ((T_C.obj M).map c) := by
+  apply (adj.homEquiv _ _).symm.injective
+  have hm := mateEquiv_counit adj adj a M
+  have hT := (T_C.map (adj.counit.app M)).naturality c
+  have he := e_C.hom.naturality (adj.counit.app M)
+  dsimp at hm hT he
+  simp only [homEquiv_counit, Functor.map_comp, Category.assoc, counit_naturality]
+  rw [reassoc_of% hm, he, reassoc_of% (h (G.obj M)), hT,
+    map_rightAdjointProjectionMap_app_app_comp_counit_assoc]
+
+/-- With the notation of
+`CategoryTheory.Adjunction.mateEquiv_app_comp_map_eq_rightAdjointProjectionMap`, the mate of `a`
+is an isomorphism at `M` as soon as the projection map at `(M, L)` and `T_C M c` are. -/
+lemma isIso_mateEquiv_app_of_isIso_rightAdjointProjectionMap
+    (h : ∀ X, a.app X ≫ e_C.hom.app (F.obj X) =
+      F.map (e_D.hom.app X) ≫ (φ.app X).app L ≫ (T_C.obj (F.obj X)).map c) (M : C)
+    [IsIso (((adj.rightAdjointProjectionMap φ).app M).app L)] [IsIso ((T_C.obj M).map c)] :
+    IsIso ((mateEquiv adj adj a).app M) := by
+  have e := mateEquiv_app_comp_map_eq_rightAdjointProjectionMap adj φ c e_D e_C a h M
+  rw [← IsIso.eq_comp_inv] at e
+  rw [e]
+  infer_instance
+
+end ProjectionMap
+
+end CategoryTheory.Adjunction

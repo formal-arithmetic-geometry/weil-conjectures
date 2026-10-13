@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Sites.SheafAdjunctionUnitProjection
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
 
 /-!
@@ -32,7 +34,13 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Schem
 
 /-- **Extension of scalars is a tensor product**: the projection map `K ⊗ S_X ⟶ res (S ⊗_R K)`
 is an isomorphism. -/
-instance isIso_sheafExtendScalarsProjection : IsIso (sheafExtendScalarsProjection R S X) :=
-  sorry
+instance isIso_sheafExtendScalarsProjection : IsIso (sheafExtendScalarsProjection R S X) := by
+  have : (ProEt.topology X).PreservesSheafification
+      (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)) :=
+    Sheaf.preservesSheafification_of_adjunction _
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} (algebraMap R S))
+  rw [NatTrans.isIso_iff_isIso_app]
+  exact isIso_sheafAdjunction_unitProjection (ProEt.topology X)
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (algebraMap R S))
 
 end AlgebraicGeometry.ProEtale

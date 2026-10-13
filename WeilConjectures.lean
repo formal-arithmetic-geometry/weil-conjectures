@@ -17,6 +17,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictCoextendScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
@@ -745,6 +746,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
+public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
 public import WeilConjectures.CategoryTheory.ArrowProductTransitionsCocycleLaw
 public import WeilConjectures.CategoryTheory.ArrowProductTransitionsExistence
 public import WeilConjectures.CategoryTheory.ArrowsFunctor
@@ -968,6 +970,7 @@ public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
+public import WeilConjectures.CategoryTheory.Sites.SheafAdjunctionUnitProjection
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
@@ -1334,6 +1337,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.P
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ExtendScalars
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
@@ -2427,6 +2431,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorResolution
+public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitudeResidue
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar

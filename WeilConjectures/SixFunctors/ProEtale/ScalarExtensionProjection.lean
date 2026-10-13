@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictCoextendScalars
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 
 /-!
@@ -105,10 +107,73 @@ noncomputable def upperStarRestrictScalarsMap :
     (sheafExtendScalarsAdjunction (algebraMap R S) Y)
     (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv
 
+/-- Coextension of scalars commutes with the direct image `g_*`, both being computed
+objectwise. -/
+noncomputable def lowerStarCompSheafComposeCoextendScalarsIso :
+    ProEtale.lowerStar (ModuleCat.{u + 1} R) g ⋙
+        sheafCompose (ProEt.topology X)
+          (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} (algebraMap R S)) ≅
+      sheafCompose (ProEt.topology Y)
+          (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} (algebraMap R S)) ⋙
+        ProEtale.lowerStar (ModuleCat.{u + 1} S) g :=
+  Iso.refl _
+
+/-- The mate of the identification `coext ∘ g_* = g_* ∘ coext` along the adjunctions
+`res ⊣ coext` is the identification `g_* ∘ res = res ∘ g_*`. -/
+lemma mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso :
+    (mateEquiv (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Y) (algebraMap R S))
+      (Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) (algebraMap R S))).symm
+        (TwoSquare.mk _ _ _ _ (lowerStarCompSheafComposeCoextendScalarsIso R S g).inv) =
+      TwoSquare.mk _ _ _ _
+        (lowerStarCompSheafComposeRestrictScalarsIso (algebraMap R S) g).hom := by
+  ext G U : 4
+  simp only [Functor.comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, Functor.id_obj,
+    Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.associator_inv_app, Functor.associator_hom_app, CategoryTheory.Functor.map_id,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Category.comp_id, Category.id_comp,
+    ObjectProperty.FullSubcategory.comp_hom, sheafCompose_map_hom,
+    Sheaf.restrictCoextendScalarsAdj_counit_app_hom_app,
+    lowerStarCompSheafComposeCoextendScalarsIso, lowerStarCompSheafComposeRestrictScalarsIso,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
+  rw [ProEtale.lowerStar_map_hom_app, Sheaf.restrictCoextendScalarsAdj_unit_app_hom_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact (ModuleCat.restrictCoextendScalarsAdj.{u + 1} (algebraMap R S)).left_triangle_components _
+
 /-- The pullback commutes with restriction of scalars: the base change map
 `g^* (res M) ⟶ res (g^* M)` is an isomorphism. -/
-instance isIso_upperStarRestrictScalarsMap : IsIso (upperStarRestrictScalarsMap R S g) :=
-  sorry
+instance isIso_upperStarRestrictScalarsMap : IsIso (upperStarRestrictScalarsMap R S g) := by
+  have hA : (mateEquiv (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
+      (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)
+        (upperStarRestrictScalarsMap R S g)).natTrans =
+      conjugateEquiv ((sheafExtendScalarsAdjunction (algebraMap R S) X).comp
+          (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g))
+        ((ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).comp
+          (sheafExtendScalarsAdjunction (algebraMap R S) Y))
+        (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv :=
+    iterated_mateEquiv_conjugateEquiv _ _ _ _ _
+  rw [sheafExtendScalarsCompUpperStarIso, conjugateIsoEquiv_symm_apply_inv,
+    Equiv.apply_symm_apply] at hA
+  have h := iterated_mateEquiv_conjugateEquiv_symm
+    (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
+    (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)
+    (Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) (algebraMap R S))
+    (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Y) (algebraMap R S))
+    (TwoSquare.mk _ _ _ _ (lowerStarCompSheafComposeCoextendScalarsIso R S g).inv)
+  rw [mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso] at h
+  have h' : upperStarRestrictScalarsMap R S g =
+      (mateEquiv (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
+        (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)).symm
+        (TwoSquare.mk _ _ _ _
+          (lowerStarCompSheafComposeRestrictScalarsIso (algebraMap R S) g).hom) :=
+    (Equiv.eq_symm_apply _).2 hA
+  rw [h', h]
+  have : IsIso ((conjugateEquiv
+      ((ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g).comp
+        (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Y) (algebraMap R S)))
+      ((Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) (algebraMap R S)).comp
+        (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g))).symm
+      (lowerStarCompSheafComposeCoextendScalarsIso R S g).inv) := inferInstance
+  exact this
 
 /-- The isomorphism `g^* S_X ⟶ S_Y`: the base change map `g^* (res 𝟙_) ⟶ res (g^* 𝟙_)`
 followed by the unit comparison of the pullback. -/
@@ -144,7 +209,9 @@ lemma sheafExtendScalarsProjection_upperStar
         (_ ◁ upperStarSheafRestrictScalarsUnitMap R S g) ≫
         (sheafExtendScalarsProjection R S Y).app
           ((ProEtale.upperStar (ModuleCat.{u + 1} R) g).obj P) :=
-  sorry
+  (sheafExtendScalarsAdjunction (algebraMap R S) X).map_unitProjection_comp_mateEquiv
+    (sheafExtendScalarsAdjunction (algebraMap R S) Y) (sheafExtendScalarsCompUpperStarIso _ g)
+    (NatTrans.IsMonoidal.δ_comp_tensorHom _) P
 
 end Pullback
 
