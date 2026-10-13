@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-base-tensor-localization-homology-naturality",
+ "kind": "statement",
+ "title": "Ordinary tensor localization is natural on homology",
+ "statement": "Let R,Rp,A,B,D be commutative rings in one universe, with A and B algebras over R and Rp, D algebras over E=A tensor_R B and F=A tensor_Rp B and over B, and compatible scalar towers B→E→D and B→F→D. Choose derived categories of R-,Rp- and B-modules. Let Q be an A-cochain complex, i an integer and L,K base-derived tensor models over R,Rp [def-pc-base-derived-tensor-cohomology-model]. Put CL=E tensor_A Q, CK=F tensor_A Q, TL=D tensor_A Q via E, and TK=D tensor_A Q via F. Let tau:TL≅TK fix d tensor q and let psi between the B-restrictions of CL,CK fix (1 tensor b) tensor q in every degree. For every y in H^i(CL), homology of tau applied to homology of L.ordinaryToLocalized(y), transported through exact restriction E→D, equals homology of K.ordinaryToLocalized applied to homology of psi of y, transported through the inverse B-restriction homology isomorphism of CL and the forward one of CK, then through exact restriction F→D. No base localization hypothesis or comparison/cohomology-of-derived-functor map occurs in the identity.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine localization identity; More on Algebra, Tag 06Y6, lemma-derived-base-change, universal derived tensor comparison."
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof": [
+  {
+   "text": "Forget the scalar structures and prove the chain square ordinaryToLocalized(L);tau = forget(psi);ordinaryToLocalized(K). Use surjectivity of L.ordinaryIso in every degree and tensor induction on B tensor_R Q. On b tensor q, use ordinaryIso_tmul, both ordinaryToLocalized_tmul equations, hpsi and htau; the two images of b in D agree by the B scalar-tower equations. Zero and addition cases follow from additivity.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved forgetHomologyMap and forgetHomologyIso_comp helper API from SemilinearScalarExtensionHomologySquare, and ShortComplex.mapHomologyIso_hom_naturality for psi and tau. The B-restriction homology isomorphisms followed by forgetting equal the direct forgetful homology isomorphisms. Conjugating H(psi) therefore gives exactly the two restriction factors in the displayed formula. Apply homology to the chain square and compose these identities. Cancel the middle exact homology isomorphisms and evaluate at y.",
+   "uses": [
+    "lem-pc-semilinear-scalar-extension-homology-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-semilinear-scalar-extension-homology-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine localization identity; More on Algebra, Tag 06Y6, lemma-derived-base-change, universal derived tensor comparison.",
+  "note": "The explicit universal-counit and exact-homology calculations are proved in Lean; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of homology of ordinary tensor complexes under restriction of scalars and coefficient maps",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology naturality of restriction of scalars composed with forgetting module structures",
+   "results": "Eight restriction-composition and group homology hits; no exact ordinary tensor localization square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_hom_naturality|forgetHomologyMap",
+   "results": "Three hits in Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, at lines 616, 633 and 782. Repository search also finds the proved forgetHomologyMap and forgetHomologyIso_comp helpers in SemilinearScalarExtensionHomologySquare.",
+   "verdict": "Use these exact-homology naturality and coherence ingredients.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseLocalizationComparisonAux",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8 affine localization identity: the ordinary counit square and subsequent tensor coefficient extension.",
+   "via": [
+    "lem-pc-base-localization-comparison-aux",
+    "lem-pc-base-localization-comparison",
+    "lem-pc-derived-tensor-base-localization-models",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-derived-tensor-base-second-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorLocalizationHomologyNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorLocalizationHomologyNaturality.lean",
+  "declaration": "RingTensorCohomology.baseTensorLocalization_homology_naturality",
+  "statement": "theorem baseTensorLocalization_homology_naturality (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (τ : ((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q ≅ ((ModuleCat.extendScalars ((algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B)))).mapHomologicalComplex (.up ℤ)).obj Q) (hτ : ∀ (j : ℤ) (d : D) (x : Q.X j), τ.hom.f j (d ⊗ₜ[A,(algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] x) = d ⊗ₜ[A,(algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B))] x) : let CL := ((ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)).obj Q let CK := ((ModuleCat.extendScalars (algebraMap A (A ⊗[Rp] B))).mapHomologicalComplex (.up ℤ)).obj Q let TL := ((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q let TK := ((ModuleCat.extendScalars ((algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B)))).mapHomologicalComplex (.up ℤ)).obj Q let F := ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom let G := ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[Rp] A ⊗[Rp] B).toRingHom ∀ ψ : (F.mapHomologicalComplex (.up ℤ)).obj CL ⟶ (G.mapHomologicalComplex (.up ℤ)).obj CK, (∀ (j : ℤ) (b : B) (q : Q.X j), ψ.f j ((Algebra.TensorProduct.includeRight b : A ⊗[R] B) ⊗ₜ[A,algebraMap A (A ⊗[R] B)] q) = (Algebra.TensorProduct.includeRight b : A ⊗[Rp] B) ⊗ₜ[A,algebraMap A (A ⊗[Rp] B)] q) → ∀ y : CL.homology i, HomologicalComplex.homologyMap τ.hom i ((TL.sc i |>.mapHomologyIso (ModuleCat.restrictScalars (algebraMap (A ⊗[R] B) D))).hom (HomologicalComplex.homologyMap L.ordinaryToLocalized i y)) = (TK.sc i |>.mapHomologyIso (ModuleCat.restrictScalars (algebraMap (A ⊗[Rp] B) D))).hom (HomologicalComplex.homologyMap K.ordinaryToLocalized i ((CK.sc i |>.mapHomologyIso G).hom (HomologicalComplex.homologyMap ψ i ((CL.sc i |>.mapHomologyIso F).inv y))))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T231553-L-1824353",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T231553-L-1824353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

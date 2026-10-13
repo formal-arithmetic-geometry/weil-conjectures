@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-base-localization-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary comparison under localization of the tensor base",
+ "statement": "Let R, Rp, A, B, D be commutative rings in one universe, with R-algebras A, B, Rp, Rp-algebras A, B, and scalar towers R→Rp→A and R→Rp→B. Give D algebra structures over E=A tensor_R B and F=A tensor_Rp B and choose derived categories of R-, Rp- and B-modules. Let S be a submonoid of R with Rp its localization, i an integer, Q an A-cochain complex, and L,K base-derived tensor cohomology models over R,Rp [def-pc-base-derived-tensor-cohomology-model]. Set CL=E tensor_A Q and CK=F tensor_A Q, and let U,V restrict them along inclusion of B. There exists a B-linear chain map psi:U(CL)→V(CK) sending (1 tensor b) tensor q to (1 tensor b) tensor q in every degree. On degree-i homology its composite with the inverse restriction/homology isomorphism and L.comparison equals inverse restriction/homology applied to K.comparison of the canonical baseLocalizationCohomologyMap [lem-pc-base-localization-map]. The conclusion precedes all coefficient extension to D; no D scalar-tower, flatness or invertibility-of-comparison hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine localization identity; More on Algebra, Tag 06Y6, lemma-derived-base-change, universal derived tensor comparison."
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-localization-map",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct z from restrictionScalarsComp' and its complex map. Extend z to B and compose it with mapHomologicalComplexCompIso of baseLocalizationTensorIso; call this ordinary isomorphism sigma. Conjugate sigma by L.ordinaryIso.inv and K.ordinaryIso.hom to construct psi. The inverse/hom identity and ordinaryIso_tmul prove the generator formula; sigma itself fixes b tensor q by reduction.",
+   "uses": [
+    "lem-pc-base-localization-map",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install K.universal and apply Functor.leftDerived_fac to the universal lift eta=baseLocalizationDerivedMap. Evaluate the equation at the homotopy class of the Rp-restriction of Q. Expand baseLocalizationInputIso into Qh of z, the inverse homotopy factor, and the inverse derived factor. The derived factors cancel, the homotopy factor is the identity, and naturality of L.counit at z gives (L.derived(v);eta);K.counit = L.counit;Qh(sigma).",
+   "uses": [
+    "lem-pc-base-localization-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply B-linear degree-i derived homology to the preceding square. Naturality of homologyFunctorFactorsh and HomotopyCategory.homologyFunctorFactors converts its ordinary side to H(sigma). Substitute L.comparison_eq and K.comparison_eq, expand baseLocalizationCohomologyMap, and cancel K.cohomologyIso.inv/hom and L.ordinaryIso.hom/inv. This is the ordinary B-linear comparison square. Evaluate it at x to obtain the conclusion.",
+   "uses": [
+    "lem-pc-base-localization-map",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology",
+  "lem-pc-base-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine localization identity; More on Algebra, Tag 06Y6, lemma-derived-base-change, universal derived tensor comparison.",
+  "note": "The explicit universal-counit and exact-homology calculations are proved in Lean; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of tensor cohomology ordinary comparison under localization of the base ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary tensor derived counit compatibility under localization of the base ring",
+   "results": "Eight localization monoidal structure hits, including Localization.Monoidal.ε' and tensorBifunctorIso; no tensor-base counit comparison.",
+   "verdict": "No exact match.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "Twelve ordinary localization tensor lemmas, including algebraTensorEquiv and moduleTensorEquiv; these do not assert counit compatibility.",
+   "verdict": "Ordinary localization ingredients, not the desired square.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "baseLocalization.*comparison|localized_eq",
+   "results": "No Mathlib or upstream exact match. Repository search finds the current auxiliary and its parent, whose import of the auxiliary makes its use circular.",
+   "verdict": "No independent existing exact theorem.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseLocalizationComparisonAux",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8 affine localization identity: the ordinary counit square and subsequent tensor coefficient extension.",
+   "via": [
+    "lem-pc-base-localization-comparison-aux",
+    "lem-pc-base-localization-comparison",
+    "lem-pc-derived-tensor-base-localization-models",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-derived-tensor-base-second-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationOrdinaryComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationOrdinaryComparison.lean",
+  "declaration": "RingTensorCohomology.exists_baseLocalization_ordinaryComparison",
+  "statement": "theorem exists_baseLocalization_ordinaryComparison (S : Submonoid R) [IsLocalization S Rp] (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) : let CL := ((ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)).obj Q let CK := ((ModuleCat.extendScalars (algebraMap A (A ⊗[Rp] B))).mapHomologicalComplex (.up ℤ)).obj Q let F := ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom let G := ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[Rp] A ⊗[Rp] B).toRingHom ∃ ψ : (F.mapHomologicalComplex (.up ℤ)).obj CL ⟶ (G.mapHomologicalComplex (.up ℤ)).obj CK, (∀ (j : ℤ) (b : B) (q : Q.X j), ψ.f j ((Algebra.TensorProduct.includeRight b : A ⊗[R] B) ⊗ₜ[A,algebraMap A (A ⊗[R] B)] q) = (Algebra.TensorProduct.includeRight b : A ⊗[Rp] B) ⊗ₜ[A,algebraMap A (A ⊗[Rp] B)] q) ∧ ∀ x : L.cohomology i, HomologicalComplex.homologyMap ψ i ((CL.sc i |>.mapHomologyIso F).inv (L.comparison i x)) = (CK.sc i |>.mapHomologyIso G).inv (K.comparison i (baseLocalizationCohomologyMap R Rp B A D S Q L K i x))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T231553-L-1824353",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T231553-L-1824353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

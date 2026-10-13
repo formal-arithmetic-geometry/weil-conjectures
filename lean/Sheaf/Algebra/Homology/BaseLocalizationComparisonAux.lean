@@ -7,6 +7,8 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Sheaf.Algebra.Homology.BaseLocalizationMap
+import Sheaf.Algebra.Homology.BaseLocalizationOrdinaryComparison
+import Sheaf.Algebra.Homology.BaseTensorLocalizationHomologyNaturality
 
 /-! Generator calculation for base localization comparison.
 
@@ -36,6 +38,9 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
+set_option linter.unusedSectionVars false in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 include tRpA tRpB tAD tBD tApD tBpD in
 /-- The base-localization comparison identity on extension generators.
 Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
@@ -69,6 +74,30 @@ theorem baseLocalization_comparison_aux (S : Submonoid R) [IsLocalization S Rp]
         K.localizedComparison i
           ((1 : D) ⊗ₜ[A ⊗[Rp] B,algebraMap (A ⊗[Rp] B) D]
             (baseLocalizationCohomologyMap R Rp B A D S Q L K i x)) := by
-  sorry
+  obtain ⟨ψ, hψ, hcomp⟩ :=
+    exists_baseLocalization_ordinaryComparison R A B Rp D S i Q L K
+  intro x
+  have hL := congrArg (fun f ↦ f x) (L.localized_eq i)
+  have hK := congrArg (fun f ↦ f
+    (baseLocalizationCohomologyMap R Rp B A D S Q L K i x)) (K.localized_eq i)
+  simp only [ModuleCat.comp_apply,
+    ModuleCat.extendRestrictScalarsAdj_unit_app_apply] at hL hK
+  change L.localizedComparison i _ = _ at hL
+  change K.localizedComparison i _ = _ at hK
+  change HomologicalComplex.homologyMap τ.hom i
+    (L.localizedComparison i ((1 : D) ⊗ₜ[A ⊗[R] B,algebraMap (A ⊗[R] B) D] x)) = _
+  rw [hL, hK]
+  have hn := baseTensorLocalization_homology_naturality R A B Rp D i Q L K τ hτ ψ hψ
+    (L.comparison i x)
+  rw [hcomp x] at hn
+  let e := (((((ModuleCat.extendScalars (algebraMap A (A ⊗[Rp] B))).mapHomologicalComplex
+    (.up ℤ)).obj Q).sc i).mapHomologyIso
+      (ModuleCat.restrictScalars.{u}
+        (Algebra.TensorProduct.includeRight : B →ₐ[Rp] A ⊗[Rp] B).toRingHom))
+  have hi := ConcreteCategory.congr_hom e.inv_hom_id
+    (K.comparison i (baseLocalizationCohomologyMap R Rp B A D S Q L K i x))
+  simp only [ModuleCat.comp_apply, ModuleCat.id_apply] at hi
+  rw [hi] at hn
+  exact hn
 
 end RingTensorCohomology
