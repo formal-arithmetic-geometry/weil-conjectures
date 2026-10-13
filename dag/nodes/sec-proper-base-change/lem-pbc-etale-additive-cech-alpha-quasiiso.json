@@ -1,0 +1,136 @@
+{
+ "id": "lem-pbc-etale-additive-cech-alpha-quasiiso",
+ "kind": "statement",
+ "title": "Global additive Cech augmentation quasi-isomorphism",
+ "statement": "For any scheme X [def-pc-scheme], finite open cover U, and injective resolution I [def-sp-injective-resolutions] of the additive structure sheaf [def-sc-etale-additive-structure-restriction], there exists a chain map from additiveCechGlobal I to additiveCechTotal U I whose degree-n component is additiveCechAlpha U I n [def-pbc-etale-additive-cech-normalization], and this map is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, augmentation alpha"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Global restrictions commute with the resolution differential and with the\nalternating Cech cofaces. The latter cancel in horizontal degree zero, so the\ncomponents alpha form a chain map. The canonical open inclusion preserves\ncoverings and finite limits, and its value at top is terminal. Each injective\nresolution term therefore has a quasi-isomorphic augmented open-cover Cech row,\nby etaleOpenCechInjectiveAugmentation_quasiIso. Apply the first-quadrant column\naugmentation criterion, with Cech degree first, to these rows. Its component\nformula is precisely additiveCechAlpha, so the resulting map is a quasi-isomorphism.\nDegree zero uses sheaf gluing; empty covers force the scheme and its sections to\nbe empty and zero respectively, and repeated or empty intersections cause no change.",
+   "uses": [
+    "def-pbc-etale-additive-cech-normalization",
+    "lem-sc-etale-open-cech-injective-augmentation",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "lem-sc-etale-open-cech-injective-augmentation",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "E3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, augmentation alpha"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a quasi-isomorphism of complexes of additive groups lifts homology classes to cycles",
+   "results": "Eight generic quasi-isomorphism results, including quasiIsoAt_iff_isIso_homologyMap and isoOfQuasiIsoAt. No Cech-specific augmentation construction.",
+   "date": "2026-10-13",
+   "verdict": "Generic homology APIs are useful for the parent proof, but do not prove this augmentation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\"",
+   "results": "Twelve hits including leftHomologyπ_naturality and instEpiLeftHomologyπ.",
+   "date": "2026-10-13",
+   "verdict": "Useful generic cycle lifting and homology projection APIs; no explicit augmentation compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "cyclesMk|homologyπ_naturality",
+   "results": "HomologicalComplex.cyclesMk, HomologicalComplex.i_cyclesMk, ShortComplex.abCyclesIso_inv_apply_iCycles, and HomologicalComplex.homologyπ_naturality.",
+   "date": "2026-10-13",
+   "verdict": "These close the parent lifting argument once the augmentation step is stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "global section augmentation into the total Cech complex of an injective resolution is a quasi-isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex augmentation of an injective sheaf is a quasi-isomorphism",
+   "results": "Eight hits, including InjectiveResolution.quasiIso and instQuasiIsoIntι', but no explicit open-cover augmentation into a total complex.",
+   "date": "2026-10-13",
+   "verdict": "No replacement for either explicit augmentation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ιTotal\"",
+   "results": "Twelve generic total-complex inclusion/map identities.",
+   "date": "2026-10-13",
+   "verdict": "These provide total-complex tools, not the restriction chain map or coefficient closedness."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(augmentation|closed)|ιTotal.*[dD]",
+   "results": "Generic total-complex differential identities. Local rg also read EtaleOpenCechResolutionTotal and EtaleAdditiveCechAugmentationHomology. The former constructs a restriction map privately and exposes only a nonempty homology isomorphism; the latter assumes affine intersections. Neither supplies the prescribed augmentation interface under the present hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate of the new statements; completing them still requires compatibility of the explicit maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCycleRealization",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-etale-additive-cech-cycle-realization",
+   "place": "Lemma 20.11.2, augmentation alpha"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechAlphaQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleAdditiveCech_alpha_quasiIso",
+  "statement": "theorem etaleAdditiveCech_alpha_quasiIso\n    {X : Scheme.{u}} {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hcover : iSup U = ⊤) (I : InjectiveResolution X.etaleAdditiveSheaf) :\n    ∃ a : additiveCechGlobal I ⟶ additiveCechTotal U I,\n      (∀ n : ℕ, a.f n = additiveCechAlpha U I n) ∧ QuasiIso a",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T130032-L-3922743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T130032-L-3922743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

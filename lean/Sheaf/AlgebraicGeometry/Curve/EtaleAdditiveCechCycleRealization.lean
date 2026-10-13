@@ -5,8 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
-import Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAlphaQuasiIso
+import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaClosed
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Realizing additive Čech cycles in the augmented resolution total
 Source: Stacks Project, Tag 01EQ, Lemma 20.11.2. -/
@@ -53,6 +54,31 @@ theorem etaleAdditiveCech_cycle_realization
         ((cechOver X.toSpecΓ U
           (SheafOfModules.unit X.ringCatSheaf)).iCycles n z) ∧
       (additiveCechTotal U I).homologyπ n tα =
-        (additiveCechTotal U I).homologyπ n tβ := by sorry
+        (additiveCechTotal U I).homologyπ n tβ := by
+  classical
+  obtain ⟨a, ha, hq⟩ := etaleAdditiveCech_alpha_quasiIso U hcover I
+  have : QuasiIso a := hq
+  let T := additiveCechTotal U I
+  let G := additiveCechGlobal I
+  let x := additiveCechBeta U I n
+    ((cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).iCycles n z)
+  have hx : (T.sc n).g x = 0 := by
+    change T.d n ((ComplexShape.up ℕ).next n) x = 0
+    rw [(ComplexShape.up ℕ).next_eq' (by simp : (ComplexShape.up ℕ).Rel n (n + 1))]
+    exact etaleAdditiveCech_beta_closed U I n z
+  let tβ : T.cycles n := (T.sc n).abCyclesIso.inv ⟨x, hx⟩
+  have hβ : T.iCycles n tβ = x :=
+    (T.sc n).abCyclesIso_inv_apply_iCycles ⟨x, hx⟩
+  obtain ⟨c, hc⟩ := (AddCommGrpCat.epi_iff_surjective
+    (HomologicalComplex.homologyMap a n)).mp inferInstance (T.homologyπ n tβ)
+  obtain ⟨s, hs⟩ := (AddCommGrpCat.epi_iff_surjective
+    (G.homologyπ n)).mp inferInstance c
+  let tα := HomologicalComplex.cyclesMap a n s
+  refine ⟨s, tα, tβ, ?_, hβ, ?_⟩
+  · have h := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i a n) s
+    simpa only [ConcreteCategory.comp_apply, ha] using h
+  · have h := ConcreteCategory.congr_hom (HomologicalComplex.homologyπ_naturality a n) s
+    simp only [ConcreteCategory.comp_apply] at h
+    exact h.symm.trans (by rw [hs, hc])
 
 end AlgebraicGeometry.Scheme.Modules
