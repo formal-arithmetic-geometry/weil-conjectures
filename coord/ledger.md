@@ -12697,3 +12697,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:51 L: merged deliver/U3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T135102-L-155708 (interface); batch 20261013T135100; modules 3; new nodes 2)
 - 13:53 L: returned deliver/F2/Sheaf.AlgebraicGeometry.RightAdjointMateSchemeIsoTransportBase (reviewer RETURN: (reviewer X-96687, head 966876ae2) H9 / AGENTS.md §3: In lean/Sheaf/AlgebraicGeometry/RightAdjointMateSchemeIsoTransport)
 - 13:54 L: returned deliver/D2/Sheaf.Paper.FiniteStructureAlgebraLift (reviewer RETURN: (reviewer X-c57c6, head c57c6d111) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.FiniteStructur)
+- 14:01 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv (reviewer RETURN: (reviewer X-3f996, head 3f9965fce) B5: In dag/nodes/sec-curve-estimates/lem-sc-affine-top-tensor-sections.json, lines 12)
