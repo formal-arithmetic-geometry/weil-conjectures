@@ -6,8 +6,10 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.RingTheory.GlobalDimension
+import Sheaf.RingTheory.ProjectiveResolutionSuccSplice
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
+import Sheaf.RingTheory.WellOrderedUnionProjectivePresentation
 
 /-!
 # succ case of the well-ordered union argument
@@ -21,6 +23,7 @@ universe u v w
 
 namespace ModuleCat
 
+set_option linter.unusedVariables false in
 /-- Successor step in Auslander's well-ordered union argument.
 Source: Stacks Project, Algebra, Lemma 0D1U, the positive-bound case; Lemma 065S (1).
 (blueprint: lem-weil-pbc-well-ordered-union-succ-step).
@@ -87,6 +90,9 @@ theorem hasProjectiveResolutionLE_of_wellOrderedUnion_succ
       (ModuleCat.of R ((F e) ⧸
         ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) (n + 1)) :
     HasProjectiveResolutionLE M (n + 1) := by
-  sorry
+  obtain ⟨S, hSM, hS, hproj, hker⟩ :=
+    exists_shortExact_projective_middle_of_wellOrderedUnion_succ n hIH M F hF hcover hquot
+  rw [← hSM]
+  exact hasProjectiveResolutionLE_of_shortExact_projective_middle n S hS hproj hker
 
 end ModuleCat

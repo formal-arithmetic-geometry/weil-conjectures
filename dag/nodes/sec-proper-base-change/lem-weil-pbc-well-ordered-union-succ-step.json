@@ -10,7 +10,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 0D1U: source argument, with categorical projective presentations and shrinking for independent universes; D4, 2026-10-13"
+  "place": "Algebra, Lemma 0D1U: obtain the projective presentation and splice its kernel resolution; N1 second reading, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -64,48 +64,17 @@
  "statement": "Let R be a commutative ring and n a natural number. Assume that for every R-module N in universe v and every exhaustive monotone well-ordered filtration indexed in universe w, bounds n on the successive quotient projective resolutions imply a bound n on the resolution of N [def-weil-pbc-finite-global-dimension]. Let M have such a filtration F whose successive quotients instead have bounds n+1. Then M has a projective resolution of length at most n+1.",
  "proof": [
   {
-   "text": "For each successive quotient Q e choose the degree-zero projective presentation in its supplied resolution, using zero for zero Q e. Lift each presentation through F e → Q e by categorical projectivity. Sum the lifts into pi : P → M. Induction on e shows each partial sum maps onto F e. Distinct nonzero Q e admit distinct chosen elements of M, so active indices inject into M and the sum can be shrunk into universe v. Componentwise lifting proves P categorical-projective.",
+   "text": "Apply the filtration construction theorem to obtain a short exact sequence with projective middle term and kernel bounded by n; rewrite its codomain equality and apply the projective-presentation splicing theorem.",
    "uses": [
-    "def-weil-pbc-finite-global-dimension",
-    "def-weil-pbc-direct-sum-modules",
-    "lem-weil-pbc-ses-projective-quotient-splits",
-    "lem-weil-pbc-projective-direct-sum-family"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Filter K = ker pi by intersections G e with partial sums of P. Finite supports give exhaustion and identify predecessor sums with their union. The predecessor sum maps onto the predecessor union U e in M. The kernel sequence on successive quotients is therefore 0 → G e/G_{<e} → P e → Q e → 0. To prove middle exactness subtract a lift in the predecessor sum of the image of the chosen representative.",
-   "uses": [
-    "def-weil-pbc-quotient-module",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Dimension shift this projective presentation to bound the resolution of G e/G_{<e} by n, by the Schanuel proof of Stacks 065S (1). Use the supplied resolution of Q e, not a newly chosen arbitrary projective cover. The existing Lean SES-kernel lemma is restricted to module universe max u v; at unrestricted v the same proof must be formalized categorically. Apply the supplied induction hypothesis to K and G.",
-   "uses": [
-    "lem-weil-pbc-projective-dimension-ses-kernel",
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Append P → M to the shifted kernel resolution. The image at P is ker pi; injectivity of K → P preserves exactness at the preceding term. All subsequent terms and differentials are unchanged and all terms in degrees above n+1 are zero. For n=0 this is the two-term resolution.",
-   "uses": [
-    "def-weil-pbc-exact-sequence",
-    "def-weil-pbc-finite-global-dimension"
+    "lem-weil-pbc-well-ordered-union-succ-data",
+    "lem-weil-pbc-projective-resolution-succ-splice"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-sum-modules",
-  "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-finite-global-dimension",
-  "def-weil-pbc-quotient-module",
-  "lem-weil-pbc-projective-dimension-ses-kernel",
-  "lem-weil-pbc-projective-direct-sum-family",
-  "lem-weil-pbc-ses-projective-quotient-splits"
+  "lem-weil-pbc-well-ordered-union-succ-data",
+  "lem-weil-pbc-projective-resolution-succ-splice"
  ],
  "lean": {
   "existing": false,
@@ -128,12 +97,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T230754-L-1907773",
+  "landing": "20261013T022419-L-3215850",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
