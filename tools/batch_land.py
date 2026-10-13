@@ -1007,8 +1007,11 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
         withdraw(b, 'take-out conflict: ' + str(x), log); return
     for e in suspects:
         e['state'] = 'returned'; e['why'] = messages[key(e)]
-        e['repair'] = repair_jobs[key(e)]['id']
-        log('TAKEN OUT; REPAIR QUEUED', key(e), repair_jobs[key(e)]['group'], '|', messages[key(e)][:300])
+        job = repair_jobs.get(key(e))
+        if job is None:   # another group already holds the item (skipped in _undo_entries): its work stands
+            log('TAKEN OUT; HELD BY ANOTHER GROUP, NO REPAIR JOB', key(e), '|', messages[key(e)][:300]); continue
+        e['repair'] = job['id']
+        log('TAKEN OUT; REPAIR QUEUED', key(e), job['group'], '|', messages[key(e)][:300])
     defer_entries(deps)
     b['round'] += 1
     b['await_recovery'] = True
