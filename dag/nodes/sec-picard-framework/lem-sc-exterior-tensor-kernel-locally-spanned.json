@@ -13,20 +13,44 @@
  ],
  "proof": [
   {
-   "text": "Fix a point x. Exactness on stalks identifies C_x with B_x/im(f_x). Present exterior powers by their alternating multilinear generators and relations. Quotienting B_x by im(f_x) adds precisely the relations that wedges with an argument in im(f_x) vanish: multilinearity expands changes of representatives into these relations, so the resulting quotient has the universal property of the exterior power of C_x. Tensoring with the exterior power of A_x is right exact. Pure wedges span this first factor, so the tensor kernel is spanned by the displayed pure wedge tensors. Exterior powers and tensor products commute with stalks, since their presentations use finite sums and finite tuples and commute with filtered colimits and scalar extension. The formula for q identifies its stalk map with this quotient map. Express the germ of t as a finite linear combination of these generators. Represent the finitely many coefficients, wedge entries, and preimages under f_x on one common neighborhood V of x contained in U. Shrink V to make every equation c_j=f(d) hold for sections, and shrink once more to make the linear combination equal to the restriction of t. The resulting equality proves membership in the displayed span. The assumption s ≠ 0 excludes the degree-zero isomorphism case, handled separately by the caller. For r=0 the empty wedge generates the first factor. At a zero stalk ring all modules are zero; on an empty open there are no points to check.",
+   "text": "By naturality of the linear stalk map, q(t)=0 implies that the germ of t is in the stalk kernel. Apply lem-sc-exterior-tensor-stalk-kernel-span to put it in the stalk span of germs of sectionwise relations.",
+   "uses": [
+    "lem-sc-exterior-tensor-stalk-kernel-span",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The sectionwise relation spans are preserved by restriction. On a generator, naturality of f preserves c_j=f(d). Apply the existing public PresheafOfModules.naturality_apply and exteriorSheafRestriction_existsUnique results directly to the two exterior factors and combine with congrArg₂ and tmulSection_map. Extend to the span by zero, addition and semilinear scalar multiplication. This is relationSpan_map in the Lean proof; no separate exterior_section_map theorem is declared.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Induct on stalk span membership. A generator already has a local section representative in its span. Zero is represented on the full open. For sums intersect the two neighborhoods and restrict; for a stalk scalar choose a section representative and intersect its neighborhood with that of the vector. Germ restriction, additivity and scalar compatibility realize every resulting combination in a single sectionwise relation span. This is local_span_realization, fully proved in Lean.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The germ of the resulting local section equals the germ of t. The stalk equality criterion provides a smaller common neighborhood W of x on which their restrictions agree. Restriction stability puts t restricted to W in the relation span, and W is contained in U. This is locally_mem_of_germ_mem_span, fully proved in Lean.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-exterior-tensor-stalk-kernel-span",
+  "def-weil-pbc-module-stalk",
   "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "X3 stage3, agent expansion of the parent node proof",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Step 1 and finite-germ representation in step 2 of new-j1-exterior-tensor-kernel-relations"
+  "place": "Stalk algebra separated from the finite-span descent of the existing node plan; descent proved using Mathlib stalk and span APIs."
  },
  "mathlib_searches": [
   {
@@ -141,9 +165,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T045619-L-141135",
+  "landing": "20261013T065111-L-899633",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
