@@ -24,67 +24,59 @@
  },
  "proof": [
   {
-   "text": "Base change to W. The unit on every residue-field structure module excludes an empty fibre: pushforward from the empty scheme is zero whereas the field structure module is nonzero. At a point of each fibre, a local finite-free basis of the descended target module pulls back to a free basis; its dimension must be one since the pulled-back bundle is invertible. Thus its local rank at w is one. Choose common target trivializations and an affine neighbourhood. Over the source residue field, apply the field rank-one trivialization theorem to hLs, then identify the marked fields by the immersion.",
+   "text": "Apply picard_h1_common_minimal_model to obtain the common affine target trivializations and a bounded minimal source model, its section bases, derived comparison and residue differential identity.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-module-pullback",
-    "def-amb-finite-locally-free-module",
-    "def-sc-invertible-module",
-    "def-weil-residue-field",
-    "lem-sc-field-pullback-rank-one-trivial",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-picard-h1-common-minimal-model"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, More on Morphisms",
+    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
+   }
   },
   {
-   "text": "Invertible modules on the flat source and targets are finitely presented and relatively flat. Apply perfect direct-image base change and finite-free residue models to their derived direct images. Use a common affine refinement of these models; negative Betti numbers are zero, so all negative terms vanish. Degree zero has rank one. The residue dimension of each term equals its cohomology dimension, hence every residue differential vanishes. Choose section bases e0 and e1 of the source degrees zero and one and define d by the coordinates of d-zero(1). This yields hd and hdw, the strictly perfect K and its comparison hE.",
+   "text": "Each term-rank isomorphism makes K^j a finite-free retract, hence K is strictly perfect. In negative degrees the corresponding Betti number is zero; the free module on ULift(Fin 0) has zero identity by freeHomEquiv, so K^j is zero.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-finite-free-residue-model",
     "def-pc-perfect-complex",
-    "def-pc-derived-direct-image"
+    "def-sc-derived-fiber-betti"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project, More on Morphisms",
+    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
+   }
   },
   {
-   "text": "Represent each derived pullback arrow to the targets by an actual chain map. Each global target trivializing section gives a cycle whose coefficient has nonzero residue in the rank-one degree-zero term. Invert these finitely many coefficients on a smaller common affine neighbourhood. Their differentials are zero, so the target degree-zero differentials vanish. In finite-free degree-one bases form the joint map b. The chain equations give b(d)=0.",
+   "text": "Apply picard_h1_fixed_model_comparison to this same U,K,e0,e1 and the common target trivializations. It gives q,b, the annihilation identity, alpha,beta and the geometric degree-one square.",
    "uses": [
-    "lem-pc-perfect-affine-map-representative",
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-picard-h1-fixed-model-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, More on Morphisms",
+    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
+   }
   },
   {
-   "text": "The affine evaluation kernel is prime by RingHom.ker_isPrime, and its residue field is canonically kappa(w). Minimality identifies residue degree-one terms with fibre H-one. Use the source fibre generator to obtain alpha; on each target adjust its fibre trivialization by the scalar comparing it with the pulled-back source generator. Canonical base change and the affine higher-direct-image/cohomology comparison identify the residue chain maps with the canonical structure-sheaf H-one pullbacks, giving the displayed square with beta. For an empty target family use q=0 and the unique map; for m=0 alpha identifies the zero term with zero H-one. No joint-injectivity hypothesis is used.",
-   "uses": [
-    "def-weil-residue-field",
-    "def-sc-structure-sheaf-cohomology-pullback",
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-rf-perfect-base-change"
-   ],
-   "elementary": false
+   "text": "Define d=e1(d_K^0(e0 inverse(1))). Linearity of e0 inverse, the module differential and e1 proves e1(d_K^0(e0 inverse(a)))=a*d for every a. The residue vanishing identity is the minimal-model identity, and b(d)=0 is the comparison annihilation identity at a=1. Assemble all witnesses; no geometric or injectivity hypothesis changes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project, More on Morphisms",
+    "place": "Tag 0BF2, proof before the joint H-one injectivity argument; https://stacks.math.columbia.edu/tag/0BF2"
+   }
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
-  "def-pc-base-change",
-  "def-pc-derived-direct-image",
-  "def-pc-module-pullback",
   "def-pc-perfect-complex",
-  "def-sc-invertible-module",
-  "def-sc-structure-sheaf-cohomology-pullback",
-  "def-weil-residue-field",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-perfect-affine-map-representative",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-field-pullback-rank-one-trivial",
-  "lem-sc-perfect-finite-free-residue-model"
+  "def-sc-derived-fiber-betti",
+  "lem-sc-picard-h1-common-minimal-model",
+  "lem-sc-picard-h1-fixed-model-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, More on Morphisms",
-  "place": "Tag 0BF2; explicit interface and comparison details written by A2"
+  "place": "Tag 0BF2; Lean reduction through two geometric intermediates, with strict-perfect/negative-term and scalar calculations proved by V3"
  },
  "mathlib_searches": [
   {
@@ -159,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T054208-L-440350",
+  "landing": "20261013T072411-L-1126632",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

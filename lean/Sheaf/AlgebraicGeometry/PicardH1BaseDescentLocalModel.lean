@@ -18,11 +18,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
+import Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel
+import Sheaf.AlgebraicGeometry.PicardH1FixedModelComparison
 
 /-! # Local scalar models and degree-one comparison for Picard descent
 
@@ -37,39 +34,27 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 800000 in
+-- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
 assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
 Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
 0BCD and 08CR. (blueprint: lem-sc-picard-h1-base-descent-local-model)
 
-Proof: Base change to W. An empty residue fibre contradicts the structure adjunction
-unit isomorphism, so the flat source and targets are faithfully flat. At a point of
-any residue fibre a local free presentation of the descended module pulls back to a
-rank-one module over a nonzero residue field. Invariance of finite free rank makes its
-rank one. The local finite-free presentations therefore trivialize the target descended
-modules on neighbourhoods of w; intersect them and choose an affine neighbourhood.
-The immersion identifies κ(w) with κ(s). For the source fibre, use
-nonempty_iso_unit_of_invertible_field_pullback on the descended hLs module and the
-nonempty fibre to obtain a trivialization, and transport it to κ(w).
-Apply perfect direct-image base change and the minimal finite-free residue model
-lemma. Negative terms vanish and degree zero has rank one. Choose the global-section
-bases e0 and e1 of the source terms, and set d to the coordinates of d⁰(1).
-The residue differentials vanish, since the ranks of all terms are the fibre Betti
-numbers. Represent the derived arrows to the target models by chain maps. Their target
-trivializing sections are cycles and span the rank-one degree-zero terms after shrinking:
-the coefficient has nonzero residue and hence becomes invertible on a neighbourhood.
-Thus the target degree-zero differentials vanish. Their joint degree-one map is b and
-the chain equations give b d = 0. Minimality identifies the source residue degree-one
-term with fibre H¹; the fibre trivialization identifies that with structure-sheaf H¹,
-giving α. For each target compare the pullback of this fibre generator with its
-chosen trivialization; multiply its H¹ identification by the resulting nonzero residue
-scalar. This makes the coefficient pullback maps the structure-sheaf pullback maps.
-Take the finite product of these identifications to give β. Affineness
-identifies the residue field of the evaluation kernel with κ(w), and the immersion
-identifies κ(w) with κ(s). Naturality of canonical derived base change identifies the
-chain-map degree-one components with the displayed cohomology pullbacks, giving the
-square. If m or q is zero the corresponding free term is zero; for n = 0 use the zero
-joint target and its unique map. No injectivity is used in this construction. -/
+Proof: Apply picard_h1_common_minimal_model to choose a common affine U, target
+trivializations, and a bounded finite-free source complex with its term-rank
+isomorphisms, section bases, derived comparison, and vanishing residue differential.
+Each term-rank isomorphism exhibits the term as a finite-free retract, proving strict
+perfectness. For a negative degree the Betti number is zero, so the term is isomorphic
+to the free module on the empty type; its identity is zero by freeHomEquiv.
+Apply picard_h1_fixed_model_comparison to this fixed source complex and the supplied
+target trivializations. It constructs q, b, alpha, beta and the cohomology square, and
+asserts that b kills the image of the outgoing source differential. Define d to be
+the coordinates of the differential on e0 inverse(1). Linearity of e0 inverse, the
+module differential and e1 gives the formula for every scalar a. The residue equation
+is the one supplied by the minimal-model theorem, and b(d)=0 is the annihilation
+identity evaluated at 1. Assemble these witnesses. Empty free terms and the empty
+target family are covered by the two intermediate statements without case exclusions. -/
 theorem picard_h1_base_descent_local_model
     [∀ Y : Scheme.{v},
       HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
@@ -127,6 +112,36 @@ theorem picard_h1_base_descent_local_model
                 structureSheafCohomologyPullback
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                      (ui i) (hui i))).left) 1 (α z) := by sorry
+                      (ui i) (hui i))).left) 1 (α z) := by
+  obtain ⟨U, hwU, hU, htrivial, m, K, hbounded, hbetti, hrank, e0, e1, hE, hdw⟩ :=
+    picard_h1_common_minimal_model f Xi fi ui hui hO hOi L W k w s hw hLi hLs
+  have hK : IsStrictlyPerfect W U K := by
+    refine ⟨hbounded, fun j ↦ ?_⟩
+    obtain ⟨e⟩ := hrank j
+    exact ⟨_, e.hom, e.inv, e.hom_inv_id⟩
+  have hnegative : ∀ j : ℤ, j < 0 → IsZero (K.X j) := by
+    intro j hj
+    obtain ⟨e⟩ := hrank j
+    rw [hbetti j hj] at e
+    have hfree : IsZero (SheafOfModules.free
+        (R := (moduleRings W.toRingedSpace).over U)
+        (ULift.{v} (Fin 0))) := by
+      rw [IsZero.iff_id_eq_zero]
+      apply (SheafOfModules.freeHomEquiv _).injective
+      ext i
+      exact Fin.elim0 i.down
+    exact hfree.of_iso e
+  obtain ⟨q, b, hb, hcomparison⟩ :=
+    picard_h1_fixed_model_comparison f Xi fi ui hui hO hOi L W k w s hw hLs
+      U hwU hU htrivial m K hK hnegative hrank e0 e1 hE
+  let d := e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm 1))
+  refine ⟨U, hwU, hU, m, q, d, b, K, hK, hnegative, e0, e1, hE, ?_, hdw,
+    hb 1, hcomparison⟩
+  intro a
+  have ha : e0.symm a = a • e0.symm 1 := by
+    rw [← e0.symm.map_smul]
+    simp
+  rw [ha]
+  rw [map_smul, e1.map_smul]
 
 end AlgebraicGeometry.Scheme
