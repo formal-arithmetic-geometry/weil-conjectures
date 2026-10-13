@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-bottom-free-chain-pullback-square",
+ "kind": "statement",
+ "title": "Pullback square for a specified finite-free bottom chain map",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $X,Z\\in D(\\mathcal O_T)$ [def-pc-derived-category], $f:X\\to Z$ and $a\\in\\mathbf Z$. Choose derived categories for all schemes in one morphism universe. Let $W\\subset T$ be open, and let $A,B$ be bounded-above cochain complexes on $W$ [def-pc-cochain-complex-modules] with finite free terms [def-weil-pbc-free-module]. Suppose $A^{a-1}=B^{a-1}=0$, $d_A^a=d_B^a=0$, and $\\alpha:A\\to B$ has invertible component $\\alpha^a$. Fix $e_A:L(W\\hookrightarrow T)^*X\\cong Q(A)$ and $e_B:L(W\\hookrightarrow T)^*Z\\cong Q(B)$ [def-pc-derived-pullback], with $L(W\\hookrightarrow T)^*f\\,e_B=e_AQ(\\alpha)$. For every $g:T\\prime\\to T$ and $y\\in T\\prime$ with $g(y)\\in W$, there is an open $V$ containing $y$, complexes $P,Q$ of module sheaves on the localized site over $V$, with $P^{a-1}=Q^{a-1}=0$, $d_P^a=d_Q^a=0$, and a chain map $\\beta:P\\to Q$ with invertible $\\beta^a$, together with isomorphisms $e_P:H^a(Lg^*X)|_V\\cong H^a(P)$ and $e_Q:H^a(Lg^*Z)|_V\\cong H^a(Q)$ satisfying $H^a(Lg^*f)|_V\\,e_Q=e_PH^a(\\beta)$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation and naturality, with 06YD bounded-above flatness, 0D5S composition and 08DW restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Take V=g inverse-image W and h:V.toScheme -> W.toScheme. The point y belongs to V. Finite free terms are flat and bounded-above complexes are K-flat. Use the natural derived counit to compute pullback along h on both complexes. Naturality at alpha identifies the pullback of the given square with termwise pullback of alpha.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the termwise pulled-back complexes and chain map through the inverse of Modules.overEquiv V. Additivity and equivalence preserve zero objects and differentials. Functors preserve isomorphisms, so the degree-a component of the transported map beta is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify exact open restriction with derived open pullback by left-derived uniqueness. Combine this natural comparison with derived composition and open-restriction compatibility. Apply the natural derived homology comparison, the factorization of Q through homology of complexes, and the exact homology comparison for the open-site equivalence. They give eP, eQ and the displayed square for the specified arrow.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "K-flat computation and naturality, with 06YD bounded-above flatness, 0D5S composition and 08DW restriction",
+  "note": "K2 extracts a strict part of the fixed-arrow chart argument; not a restatement of the local pullback conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a single sheaf to a perfect complex with zero differential in its lowest degree remains invertible on lowest cohomology after derived pullback",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsIsoMapCochainComplexIntQ, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.isIso_liftCycles_iff, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.isKInjective_iff_of_iso",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and single-functor primitives only; no exact scheme-chart comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hits: DerivedCategory.singleFunctor, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.Q_obj_single_obj, DerivedCategory.singleFunctorIsoCompQ_hom_app, DerivedCategory.singleFunctorIsoCompQ_inv_app, DerivedCategory.Q_map_single_map",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and single-functor primitives only; no exact scheme-chart comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "zeroBottom|bottomChain|homologyMap.*ofZeros",
+   "results": "10 hits: Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and single-functor primitives only; no exact scheme-chart comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a sheaf in degree a to a cochain complex vanishing below a with zero differential at a is represented by a chain map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived pullback on bounded above finite free complexes gives a cohomology square for a specified chain map on an open subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.LeftHomologyMapData.ofZeros",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and single-functor primitives only; no exact scheme-chart comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategoryFactors|homologyFunctorFactors_hom_naturality",
+   "results": "19 hits: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic homology and single-functor primitives only; no exact scheme-chart comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Step 3 of lem-sc-zero-bottom-arrow-pullback-local: transport the specified finite-free chain square to an inverse-image open and apply homology.",
+   "via": [
+    "lem-sc-zero-bottom-arrow-pullback-local",
+    "lem-sc-local-zero-bottom-model-pullback",
+    "lem-sc-perfect-universal-lowest-cohomology-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BottomFreeChainPullbackSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/BottomFreeChainPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bottomFreeChain_pullback_square",
+  "statement": "theorem bottomFreeChain_pullback_square\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (T : Scheme.{u}) (X Z : schemeDerivedCategory T) (f : X ⟶ Z) (a : ℤ)\n    (W : T.Opens)\n    (A B : CochainComplex\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) ℤ)\n    (hAbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (A.X i))\n    (hBbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (B.X i))\n    (hAfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (A.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (hBfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (B.X i ≅ SheafOfModules.free\n      (R := moduleRings W.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (hAprev : IsZero (A.X (a - 1))) (hBprev : IsZero (B.X (a - 1)))\n    (hAzero : A.d a (a + 1) = 0) (hBzero : B.d a (a + 1) = 0)\n    (α : A ⟶ B) (hα : IsIso (α.f a))\n    (eA : (derivedPullback W.ι).obj X ≅ DerivedCategory.Q.obj A)\n    (eB : (derivedPullback W.ι).obj Z ≅ DerivedCategory.Q.obj B)\n    (hsquare : (derivedPullback W.ι).map f ≫ eB.hom =\n      eA.hom ≫ DerivedCategory.Q.map α)\n    (T' : Scheme.{u}) (g : T' ⟶ T) (y : T') (hy : g.base y ∈ W) :\n    ∃ V : T'.Opens, y ∈ V ∧\n      ∃ P Q : CochainComplex\n          (SheafOfModules.{u} ((moduleRings T'.toRingedSpace).over V)) ℤ,\n        IsZero (P.X (a - 1)) ∧ IsZero (Q.X (a - 1)) ∧\n        P.d a (a + 1) = 0 ∧ Q.d a (a + 1) = 0 ∧\n        ∃ β : P ⟶ Q, IsIso (β.f a) ∧\n          ∃ (eP : ((DerivedCategory.homologyFunctor\n                (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n              ((derivedPullback g).obj X)).over V ≅ P.homology a)\n            (eQ : ((DerivedCategory.homologyFunctor\n                (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n              ((derivedPullback g).obj Z)).over V ≅ Q.homology a),\n            (((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).map\n                ((derivedPullback g).map f)).over V) ≫ eQ.hom =\n                  eP.hom ≫ HomologicalComplex.homologyMap β a",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T113347-L-3185573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T113347-L-3185573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,41 +16,39 @@
  ],
  "proof": [
   {
-   "text": "Exact open restriction and e identify H^a(D)|U with H^a(K). The zero bottom differentials identify H^a(K) with K^a. The isomorphism on H^a(f) therefore identifies M|U with the finite free sheaf K^a. Refine U by affine opens and transport restrictions to their localized sites.",
+   "text": "Apply zeroBottomArrow_affine_chain_model at g(y). Obtain an affine chart W containing g(y), bounded-above finite-free complexes A,B, their chain map alpha invertible on degree-a homology, and the specified derived-arrow square.",
    "uses": [
-    "lem-pc-derived-open-pullback-homology"
+    "lem-sc-zero-bottom-arrow-affine-chain-model"
    ],
    "elementary": false
   },
   {
-   "text": "The single complex on M and K restricted to an affine refinement are strictly perfect, since K is bounded above and zero below a. Represent the conjugated restricted arrow f by a chain map alpha using the affine perfect-map representative theorem. Both short complexes at a have zero differentials. HomologyData.ofZeros and its map naturality identify H^a(alpha) with alpha.f a. The hypothesis on H^a(f) and exact restriction make alpha.f a invertible.",
+   "text": "The single-source terms outside a and the target terms below a are zero. Thus the incoming differentials at a vanish, and both outgoing differentials vanish. Use ShortComplex.LeftHomologyMapData.ofZeros and homologyMap_eq to prove that degree-a homology invertibility is equivalent to component invertibility; hence alpha.f a is invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply bottomFreeChain_pullback_square to the given chart square and invertible component. Obtain V containing y and a transported beta whose a-th component is invertible, together with a square identifying the specified restricted H^a(Lg*f) with H^a(beta).",
    "uses": [
-    "lem-pc-perfect-affine-map-representative",
-    "lem-pc-derived-open-pullback-homology"
+    "lem-sc-bottom-free-chain-pullback-square"
    ],
    "elementary": false
   },
   {
-   "text": "Finite free terms are flat and the complexes are bounded above. Compute their pullback along the inverse-image chart by the natural flat-complex counit. Its naturality computes the pullback of this specified chain map. Termwise pullback preserves zero objects, zero maps and invertible components. Its bottom homology map is therefore invertible. Derived composition and exact open restriction identify it with H^a(Lg*f) restricted to the inverse image of the affine chart containing g(y). This inverse image contains y, giving V. The arrow is fixed globally, so no compatibility of unrelated local object isomorphisms is required.",
-   "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-open-pullback-homology"
-   ],
-   "elementary": false
+   "text": "The same zero-differential calculation proves H^a(beta) invertible. Solve the comparison square as H^a(Lg*f)|V=eP.hom >> H^a(beta) >> eQ.inv. Composing isomorphisms proves the desired invertibility.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-open-pullback-homology",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-perfect-affine-map-representative",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-sc-zero-bottom-arrow-affine-chain-model",
+  "lem-sc-bottom-free-chain-pullback-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDL",
-  "place": "Pullback clause, computed using 06YD/06YJ, composition 0D5S, and affine chain representatives as in 08CR second proof",
-  "note": "M1 writes the fixed-arrow truncation reduction of the zero-matrix argument."
+  "place": "Fixed-arrow zero-bottom chart pullback, via affine chain realization and natural flat-complex transport",
+  "note": "K2 implements the two homology/component implications and the comparison-square conjugation in Lean; chart glue is split into named parts."
  },
  "mathlib_searches": [
   {
@@ -142,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T100029-L-2468950",
+  "landing": "20261013T113347-L-3185573",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
