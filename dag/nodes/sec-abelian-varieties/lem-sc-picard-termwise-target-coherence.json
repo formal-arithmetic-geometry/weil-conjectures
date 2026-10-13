@@ -92,42 +92,50 @@
  ],
  "proof": [
   {
-   "text": "Transport the strictly perfect model across the exact open-site equivalence; it remains bounded and each term is a finite-free retract, hence flat. Apply the bounded-flat counit.",
+   "text": "Transport the strictly perfect model K by the exact open-site equivalence. Its zero terms remain zero; map its finite-free retract diagrams and use preservation of coproducts and the structure-sheaf unit to prove each transported term flat. This is the private transported_model_flat proof.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-flat-complex-derived-pullback"
+    "def-pc-perfect-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Use compatibility with exact open restriction and the fixed representing isomorphism to construct b for each factorization through U.",
+   "text": "Construct the representing isomorphism on U.toScheme from singleComplexOpenPullbackIso, the composition isomorphism for exact derived functors, the given hE, and mapDerivedCategoryFactors. This is open_model_iso.",
    "uses": [
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "def-pc-single-complex-open-restriction-data"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use associativity of the pinned derived composition and its defining counit equation on the transported K-flat model. Naturality moves the fixed representing isomorphism across the square; equality transports agree by proof irrelevance.",
+   "text": "Apply flatComplexDerivedPullback to the transported bounded-above flat model. Identify its tensor functor by the object and map equations. leftDerived_fac_app and isLeftDerivedFunctor_iff_isIso_leftDerivedLift transport invertibility from this counit to the pinned counit. Unfold picardTermwiseCounit to obtain invertibility on complexes; this is pinned_counit_isIso.",
    "uses": [
+    "lem-pc-flat-complex-derived-pullback",
     "def-sc-picard-termwise-models",
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each factorization construct b by composing the inverse pinned derived composition comparison, derived pullback of the fixed open representing isomorphism, and asIso of the pinned counit. Apply the explicit-composite counit equation to the hom of that fixed representing isomorphism. The resulting equality is definitionally the required compatibility for b.",
+   "uses": [
+    "lem-sc-picard-termwise-composite-counit",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
+  "def-pc-single-complex-open-restriction-data",
   "def-sc-picard-termwise-models",
-  "lem-pc-derived-pullback-open-restriction-universes",
   "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-picard-termwise-composite-counit"
  ],
  "proof_origin": {
-  "by": "agent P2",
+  "by": "agent E2",
   "document": "Stacks Project",
   "place": "Tags 06YJ, 0D5S and 08DW",
-  "description": "Extracted the indicated part of the existing termwise comparison proof; the categorical combination is proved in Lean."
+  "description": "Explicitly construct the comparisons; prove bounded-flatness, pinned-counit invertibility, and the open representing isomorphism in Lean. Leave only the categorical equation for explicitly constructed composites as a separate theorem."
  },
  "lean": {
   "existing": false,
@@ -152,11 +160,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-17429",
-  "group": "P2",
+  "reviewer": "X-190ad",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T140823-L-315528",
+  "landing": "20261013T152728-L-1015127",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem and extracted definitions against the originals, coherence statements against their nodes and sources, and proof dependencies against the Lean; all four modules and the sole direct importer compiled cleanly, with permitted axioms only and expected sorryAx."
+  "note": "independent Codex review: Matched unchanged signatures and delivered Lean statements with their nodes, proof dependencies and pinned counit constructions; both modules and the sole direct importer compile cleanly with expected axioms."
  }
 }

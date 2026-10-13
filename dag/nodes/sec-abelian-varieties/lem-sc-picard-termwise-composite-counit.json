@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-picard-termwise-composite-counit",
+ "kind": "statement",
+ "title": "Composition equation for explicit Picard tensor counits",
+ "statement": "Fix derived categories on all schemes [def-pc-derived-category]. Let $W$ be a scheme [def-pc-scheme], $U\\subseteq W$ an open, $E\\in D(\\mathcal O_W)$, and $K$ any complex of modules on the open site. Set $P=\\operatorname{overEquiv}(U)(K)$, and let $e:L(U.\\iota)^*E\\to QP$ be any morphism. Use the pinned comparisons $c$ [lem-pc-ringed-spaces-derived-pullback-composition] and counits $\\eta$ [def-sc-picard-termwise-models]. For $s:T\\to U$ and $h:s;U.\\iota=t$, define the morphism $b_{t,s,h}=(c(s,U.\\iota);h)^{-1}_E;Ls^*(e);\\eta_s(P)$. For every $i:T\\prime\\to T$, $i;t=t\\prime$, $i;s=s\\prime$, and both factorizations through $U$, one has $b_{t\\prime,s\\prime,h\\prime};Q(w)= (c(i,t);(i;t=t\\prime))^{-1}_E;Li^*(b_{t,s,h});\\eta_i(P_s)$, where $P_s$ and $w:P_{s\\prime}\\cong i^*P_s$ are the explicitly defined termwise model and comparison [def-sc-picard-termwise-models]. No perfectness or invertibility hypothesis is imposed on $K$ or $e$. Derived pullbacks are those of [def-pc-derived-pullback].",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S; the counit equation for composition, expanded through the homotopy quotient"
+ },
+ "proof": [
+  {
+   "text": "Substitute t = s;U.ι, s′ = i;s and t′ = i;t. The remaining factorization proof is associativity; proof irrelevance identifies it with that proof, retaining its eqToIso as the associativity transport. Put P = overEquiv(U)(K). Evaluate the defining leftDerivedLift factorization of the pinned composition comparison on the homotopy class of P. Whisker with the quotient of complexes and use quotientCompQhIso and mapHomotopyCategoryFactors to rewrite the resulting components as picardTermwiseCounit. The underived comparison on complexes is the inverse of picardTermwiseModelRestrictionIso. Cancel these comparison isomorphisms to obtain the inverse-composition counit equation.",
+   "uses": [
+    "def-sc-picard-termwise-models",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the explicitly defined b. Naturality of the inverse composition comparison at e moves e past c(i,s).inv. Evaluate the associativity equation for c(i,s,U.ι) at E to identify the two inverse-composition paths, then substitute the counit equation from the first step and reassociate. No counit or e is canceled, so no invertibility assumption is used.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-termwise-models",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent E2",
+  "document": "Stacks Project",
+  "place": "Tags 06YJ and 0D5S",
+  "description": "Explicit categorical calculation underlying step 3 of the target-coherence node; the quotient and counit details are expanded by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived counit compatibility with composition of functors and homotopy localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor counit composition natural transformation coherence",
+   "results": "8 hits, including Functor.leftDerived_fac_app, leftDerivedNatTrans_fac, totalLeftDerivedCounit, and Adjunction.derived_counit. These supply the universal-property equation but not the transported Picard-complex calculation.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_fac_app",
+   "results": "1 hit: CategoryTheory.Functor.leftDerived_fac_app in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "picardTermwiseCounit|singleComplexOpenPullbackIso|leftDerived_fac_app",
+   "results": "msearch returned leftDerived_fac_app and its use in Derived.Adjunction; local rg found PicardTermwiseModels, the target and source coherence holes, and their uses in PicardTermwiseModelComparison. No duplicate of this equation for explicitly constructed composites. Blueprint search for counit composition returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardTermwiseTargetCoherence",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 degree-zero cycle lifting, composition compatibility of the termwise perfect target model; explicit counit calculation in target-coherence step 3",
+   "via": [
+    "lem-sc-picard-termwise-target-coherence",
+    "lem-sc-picard-termwise-model-comparison",
+    "lem-sc-picard-connective-model-comparison",
+    "lem-sc-picard-scalar-derived-cycles",
+    "lem-sc-picard-scalar-model-cycles-realization",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTermwiseCompositeCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_termwise_composite_counit",
+  "statement": "theorem picard_termwise_composite_counit\n    (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (e : (derivedPullback U.ι).obj E ⟶ DerivedCategory.Q.obj\n      (((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K)) :\n    let c : ∀ {X Y Z : Scheme.{v}} (f : X ⟶ Y) (g : Y ⟶ Z),\n        derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=\n      fun f g ↦ Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))) f g\n    let P := ((Modules.overEquiv U).functor.mapHomologicalComplex (.up ℤ)).obj K\n    let b : ∀ {T : Scheme.{v}} (t : T ⟶ W) (s : T ⟶ U.toScheme),\n        s ≫ U.ι = t → ((derivedPullback t).obj E ⟶\n          DerivedCategory.Q.obj (picardTermwiseModel W U K s)) :=\n      fun {T} t s hf ↦\n        ((c s U.ι ≪≫ eqToIso\n          (congrArg (fun g : T ⟶ W ↦ derivedPullback g) hf)).inv.app E) ≫\n        (derivedPullback s).map e ≫ (picardTermwiseCounit s).app P\n    ∀ {T T' : Scheme.{v}} (i : T' ⟶ T) (t : T ⟶ W) (t' : T' ⟶ W)\n      (s : T ⟶ U.toScheme) (s' : T' ⟶ U.toScheme)\n      (ht : i ≫ t = t') (hs : i ≫ s = s')\n      (hf : s ≫ U.ι = t) (hf' : s' ≫ U.ι = t'),\n      b t' s' hf' ≫\n          DerivedCategory.Q.map (picardTermwiseModelRestrictionIso W U K i s s' hs).hom =\n        ((c i t ≪≫ eqToIso\n          (congrArg (fun g : T' ⟶ W ↦ derivedPullback g) ht)).inv.app E) ≫\n          (derivedPullback i).map (b t s hf) ≫\n            (picardTermwiseCounit i).app (picardTermwiseModel W U K s)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-190ad",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T152728-L-1015127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-190ad",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T152728-L-1015127",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged signatures and delivered Lean statements with their nodes, proof dependencies and pinned counit constructions; both modules and the sole direct importer compile cleanly with expected axioms."
+ }
+}
