@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-affine-koszul-scalar-ext-comparison",
+ "kind": "statement",
+ "title": "Affine scalar Ext as associated dual Koszul homology",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], $U$ an affine open of $Y$, and $A=\\Gamma(Y,U)$. Write $I=i.\\mathrm{ker}.\\mathrm{ideal}(U)$ [def-sbc-closed-immersion-ideal-sheaf]. Let $n\\in\\mathbb N$ and $f:\\mathrm{Fin}(n)\\to A$ span $I$ and be Koszul-regular [def-weil-pbc-koszul-regular-sequence]. For an arbitrary supplied derived category universe on module sheaves of $Y$ [def-pc-derived-category], and every $q\\in\\mathbb Z$, set $F^q=H^q(R\\mathcal Hom_Y(i_*\\mathcal O_Z,\\mathcal O_Y))$ [def-pur-derived-internal-hom]. Then the restriction $F^q|_U$, expressed as a module sheaf on the over-$U$ site, is isomorphic to the associated sheaf of $H^q(K_A(f)^\\vee)$ [def-sc-koszul-dual-complex], transported along $U\\simeq\\operatorname{Spec}(A)$ and the over-site equivalence. Here $K_A(f)^\\vee$ is the recorded integer-indexed signed dual Koszul complex. There is no rank function, point, or restriction on $q$, and no pullback occurs in this assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-koszul-dual-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, proof of lemma-regular-immersion-ext, local finite free Hom computation; cohomology.tex Tag 08DM, Lemma 20.46.9"
+ },
+ "proof": [
+  {
+   "text": "The affine closed immersion identifies i^{-1}(U) with Spec(A/I) over Spec(A). The Koszul quotient augmentation is a quasi-isomorphism by regularity. Apply the affine quotient resolution sheafification lemma to its nonnegative chain form and extend to integer cochain degrees. Its terms are finite free exterior powers, zero above n; the extension gives zero positive cochain terms and a bounded finite free resolution of restricted i_*O_Z.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict derived internal Hom to U. The bounded finite free Hom model into O_U in degree zero computes the resulting object. On standard opens, finite free coordinates identify sheaf Hom of a resolution term into O_U with the associated module Hom into A. Only the target degree-zero factor contributes to each total Hom degree. In degree k≥0 its differential is signed precomposition (-1)^(k+1) with the Koszul boundary, precisely koszulDualBoundary; negative-degree terms are zero. These coordinate identifications commute with localization, hence glue and give an isomorphism of complexes with the associated integer-indexed dual Koszul complex.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associated sheafification is exact (its stalks are module localizations), so taking homology gives the associated sheaf of the module homology. Transport along the affine scheme isomorphism and the over-U module equivalence to obtain the displayed comparison. For the supplied derived universe, use the same K-injective resolution of the target in both that universe and the standard universe: derivedInternalHom_obj_iso identifies both cohomologies with the homology of the common Hom complex, so the comparison transports without assuming a derived category on U in the supplied universe. The empty sequence is the degree-zero structure sheaf and empty charts have the zero module category.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H2",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, proof of Lemma 48.15.5"
+  },
+  "note": "Source read at https://stacks.math.columbia.edu/tag/0BQZ; explicit coordinate and derived-universe glue expanded from the local Hom computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an affine chart a Koszul resolution computes sheaf Ext as the associated sheaf of dual Koszul complex cohomology",
+   "results": "UNAVAILABLE: Internal Server Error. Not evidence of absence; other services and local searches were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine Koszul regular closed immersion, restriction of derived internal Hom cohomology is the sheaf associated to dual Koszul complex homology",
+   "results": "8 hits on restriction, tilde restriction maps, and affine image maps; none compares scalar Ext with dual Koszul homology.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.functor",
+   "results": "12 hits: the tilde functor, full faithfulness, adjunction, additivity, unit and counit. No derived Koszul Hom comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*homology|homology.*koszul",
+   "results": "Only Mathlib.Algebra.Homology.LocalCohomology documentation. Source-library and Sheaf searches find the existing algebraic dual calculation, affine quotient resolution, and generic finite projective Hom model; none has this affine scalar Ext comparison. Whole-blueprint Koszul search has no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtOffRankStalk",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Scalar Koszul Ext comparison: affine finite free Hom and exact sheafification before the off-rank stalk calculation",
+   "via": [
+    "lem-sc-koszul-ext-off-rank-stalk",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulScalarExtComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_scalar_ext_comparison",
+  "statement": "theorem affine_koszul_scalar_ext_comparison\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (q : ℤ) :\n    let F : Y.Modules := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj\n        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),\n            (DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                (SheafOfModules.unit Y.ringCatSheaf)))\n    Nonempty (F.over U.1 ≅\n      (Scheme.Modules.overEquiv U.1).inverse.obj\n        ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj\n          ((ExteriorAlgebra.koszulDualCochainComplex (Γ(Y, U.1) : Type u) n f).homology q)))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T072351-L-1120076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T072351-L-1120076",
+  "kind": "interface"
+ }
+}
