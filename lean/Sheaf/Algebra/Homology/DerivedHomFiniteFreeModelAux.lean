@@ -6,6 +6,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 import Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import Sheaf.Algebra.Homology.HomComplexMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 @[expose] public section
 
@@ -36,6 +38,39 @@ theorem derivedInternalHom_of_boundedAbove_finiteFree_aux
     Nonempty (DerivedCategory.Q.obj (CategoryTheory.homComplex (R := U.sheaf) E G) ≅
       (CategoryTheory.derivedInternalHom (Opens.grothendieckTopology U) U.sheaf).obj
         (op (DerivedCategory.Q.obj E), DerivedCategory.Q.obj G)) := by
-  sorry
+  obtain ⟨M, hM⟩ := hGbounded
+  have hG : G.IsStrictlyGE M := (G.isStrictlyGE_iff M).mpr hM
+  obtain ⟨I, i, hi, ⟨N, hN⟩, _, hI⟩ :=
+    SheafOfModules.exists_boundedBelow_injective_resolution
+      (Opens.grothendieckTopology U) U.sheaf G ⟨M, hG⟩
+  have : QuasiIso i := hi
+  have : I.IsKInjective := hI
+  have hcone : (CochainComplex.mappingCone i).Acyclic :=
+    (CochainComplex.mappingCone.quasiIso_iff_acyclic i).mp hi
+  have hconebounded : ∃ L : ℤ, ∀ q : ℤ,
+      q < L → IsZero ((CochainComplex.mappingCone i).X q) := by
+    refine ⟨min (M - 1) N, ?_⟩
+    intro q hq
+    apply (CochainComplex.mappingCone.isZero_X_iff i q).mpr
+    exact ⟨hM (q + 1) (by omega),
+      (I.isStrictlyGE_iff N).mp hN q (by omega)⟩
+  have hHom := CochainComplex.acyclic_homComplex_of_boundedAbove_finiteFree
+    E (CochainComplex.mappingCone i) hEbounded hEfree hconebounded hcone
+  let f := ((CategoryTheory.homComplexFunctor (R := U.sheaf)).obj (op E)).map i
+  obtain ⟨econe⟩ := CategoryTheory.homComplex_mappingCone_iso
+    (Opens.grothendieckTopology U) U.sheaf E G I i
+  have hf : QuasiIso f := by
+    apply (CochainComplex.mappingCone.quasiIso_iff_acyclic f).mpr
+    intro n
+    exact (hHom n).of_iso econe.symm
+  have : IsIso (DerivedCategory.Q.map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).mpr hf
+  have : IsIso (DerivedCategory.Q.map i) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ i).mpr hi
+  obtain ⟨e⟩ := CategoryTheory.derivedInternalHom_obj_iso
+    (Opens.grothendieckTopology U) U.sheaf
+    (DerivedCategory.Q.obj E) (DerivedCategory.Q.obj G) E I
+    (Iso.refl _) (asIso (DerivedCategory.Q.map i)).symm
+  exact ⟨asIso (DerivedCategory.Q.map f) ≪≫ e.symm⟩
 
 end AlgebraicGeometry

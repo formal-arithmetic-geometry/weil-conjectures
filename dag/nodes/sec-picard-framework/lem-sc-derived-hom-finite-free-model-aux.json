@@ -23,38 +23,47 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded-below K-injective resolution of G.",
+   "text": "Choose M from hGbounded, convert it to G.IsStrictlyGE M with isStrictlyGE_iff, and apply exists_boundedBelow_injective_resolution to obtain i:G→I, QuasiIso i, a lower bound N for I, and I.IsKInjective.",
    "uses": [
     "lem-sc-bounded-below-injective-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Use acyclic Hom preservation for bounded-above finite-free E to compare Hom(E,G) and Hom(E,I).",
+   "text": "The cone of i is acyclic by quasiIso_iff_acyclic. Its degree q terms are G^(q+1) and I^q, so min(M−1,N) bounds it below, using mappingCone.isZero_X_iff.",
    "uses": [
-    "lem-sc-bounded-above-finite-free-hom-acyclic"
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply acyclic_homComplex_of_boundedAbove_finiteFree to E and cone(i). Transport exactness in each degree across homComplex_mappingCone_iso. The acyclic-cone criterion gives QuasiIso for the Hom map, and DerivedCategory.Q.map inverts it.",
+   "uses": [
+    "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "lem-sc-hom-complex-mapping-cone",
+    "lem-pur-quasi-iso-cone-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "Use the derived internal Hom computation and K-injective comparison to identify the localized Hom complex with derived internal Hom.",
+   "text": "Apply derivedInternalHom_obj_iso to E and the K-injective I, using the inverse of Q(i) as the representative isomorphism Q(I)≅Q(G). Compose its inverse with the isomorphism Q(Hom(E,G))≅Q(Hom(E,I)).",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-sc-kinjective-quasi-iso-comparison"
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-bounded-below-injective-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
   "lem-sc-bounded-above-finite-free-hom-acyclic",
-  "def-pur-derived-internal-hom",
-  "lem-sc-kinjective-quasi-iso-comparison"
+  "lem-sc-hom-complex-mapping-cone",
+  "def-pur-derived-internal-hom"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM8, case (2), and Section 08J7"
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7, K-injective representative computation, combined with the bounded acyclic Hom lemma and the explicit cone comparison; formalized by U2."
  },
  "mathlib_searches": [
   {
@@ -117,12 +126,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T184238-L-3994083",
+  "landing": "20261013T045608-L-138551",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

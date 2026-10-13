@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-hom-complex-mapping-cone",
+ "kind": "statement",
+ "title": "Internal Hom complexes commute with mapping cones",
+ "statement": "Let C be a small category, J a Grothendieck topology, and R a sheaf of commutative rings. For any integer-indexed cochain complexes E,G,I of R-modules and chain map f:G→I, cone(Hom(E,f)) is isomorphic to Hom(E,cone(f)) as a cochain complex. No boundedness, exactness or finite-freeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (the displayed internal Hom differential) and Section 08J7, proof of Lemma 21.35.4 (termwise split sequence argument)"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified product fans for Hom(E,G), Hom(E,I), and Hom(E,cone(f)). Construct the forward degree-n map by adding the first cone projection composed with each G-product projection and internal Hom of the cone inclusion to the analogous I term.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the inverse degree-n map by separating each Hom(E,cone(f)) component with internal Hom of the two cone projections, lifting to the G and I product fans, and composing these lifts with the two cone inclusions. Prove both inverse identities by the fan uniqueness and cone projection identities. Internal Hom is additive on postcomposition and takes zero postcomposition to zero; the two private helpers prove these sectionwise.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The constructed degreewise isomorphism satisfies exactly the product component equation of homComplex_mappingCone_differential, by the fan lift equation. Apply that lemma and HomologicalComplex.Hom.isoOfComponents to obtain the chain isomorphism.",
+   "uses": [
+    "lem-sc-hom-complex-mapping-cone-differential"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-mapping-cone-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit product and cone calculation of Sections 0A8X and 08J7, written and checked by U2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom complex in the second variable commutes with mapping cones",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal sheaf Hom complex commutes with the mapping cone of a chain map",
+   "results": "Hits: CochainComplex.mappingCone.inl_v_descCochain_v, CochainComplex.mappingCone.liftCochain_descCochain, CochainComplex.mappingCone.liftCochain_v_descCochain_v, CochainComplex.mappingCone.ofHom_desc, CochainComplex.mappingCone.inr_f_descCochain_v, CochainComplex.mappingCone.inl_v_triangle_mor₃_f, CochainComplex.mappingCone.inr_descCochain, CochainComplex.mappingCone.descCochain. None identifies the internal sheaf Hom mapping-cone comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"mappingCone\"",
+   "results": "Hits: . None identifies the internal sheaf Hom mapping-cone comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*mappingCone|mappingCone.*homComplex",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean. None identifies the internal sheaf Hom mapping-cone comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedHomFiniteFreeModelAux",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-finite-free-model",
+   "place": "injective-resolution comparison: identifying the cone of Hom(E,G)→Hom(E,I) with Hom(E,cone(G→I))",
+   "via": [
+    "lem-sc-derived-hom-finite-free-model-aux"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexMappingCone",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexMappingCone.lean",
+  "declaration": "CategoryTheory.homComplex_mappingCone_iso",
+  "statement": "theorem homComplex_mappingCone_iso\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    (E G I : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)\n    (f : G ⟶ I) :\n    Nonempty (CochainComplex.mappingCone\n        (((homComplexFunctor (R := R)).obj (op E)).map f) ≅\n      homComplex (R := R) E (CochainComplex.mappingCone f))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T045608-L-138551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T045608-L-138551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
