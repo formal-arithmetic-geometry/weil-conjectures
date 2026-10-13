@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-bilinear-action-exists",
+ "kind": "statement",
+ "title": "Natural bilinear maps on formal kernel pieces before the module laws",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal I$ a quasi-coherent ideal sheaf, and $F=(\\mathcal F_r)_{r\\geq 1}$ a coherent formal module [def-weil-pbc-coherent-formal-module]. Let $B_m=\\mathcal I^m/\\mathcal I^{m+1}$, $K_0=\\mathcal F_1$, $K_n=\\operatorname{Ker}(\\mathcal F_{n+1}\\to\\mathcal F_n)$ for $n>0$, and let $\\pi_m$ and $\\iota_n$ be the projections and inclusions [def-weil-pbc-formal-kernel-graded-pieces]. There exist $\\mathcal O_X(U)$-bilinear maps $\\mu_{m,n,U}:B_m(U)\\times K_n(U)\\to K_{m+n}(U)$ for all $m,n\\geq0$ and opens $U$, compatible with restriction. For every $a\\in\\mathcal I^m(U)$, $x\\in K_n(U)$ and $t\\in\\mathcal F_{m+n+1}(U)$ reducing to $\\iota_n(x)$ in $\\mathcal F_{n+1}(U)$, $\\iota_{m+n}(\\mu_{m,n,U}(\\pi_m(a),x))=a t$. No graded algebra structure, associativity or unit law is required or asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), its associated graded construction, and Section 0EHN; expanded local-lift argument. Source read at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN."
+ },
+ "proof": [
+  {
+   "text": "At each stalk use the ideal-product and quotient descriptions to induct through the adjacent quotient identifications of F. For r >= n >= 1 the reduction F_r to F_n is quotient by I^n. Its kernel is I^n F_r, and every transition is a sheaf epimorphism. The case of quotienting first by a higher power and then by a lower power is the usual iterated quotient identity.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a section of B_m locally to a in I^m and lift the inclusion of x in K_n locally to t in F_(m+n+1). For n>0, t reduces to zero in F_n and thus lies locally in I^n F_(m+n+1); for n=0 use I^0 F=F. Its product a t lies in I^(m+n) F_(m+n+1), so reduces to zero in F_(m+n) and factors uniquely through K_(m+n). The degree-zero case uses the identity inclusion. Changing t by I^(n+1), or a by I^(m+1), changes a t by I^(m+n+1) F_(m+n+1)=0.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Independence makes the local outputs agree on overlaps, so glue them using the sheaf axiom. Simultaneous local lifts show additivity and scalar linearity in both variables; the same construction commutes with restriction. If a lift t already exists on U, use its restrictions on the cover. Sheaf uniqueness then gives the displayed formula on U, without requiring arbitrary global sections to lift. Empty opens and zero modules give the unique section.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), its associated graded construction, and Section 0EHN; expanded local-lift argument. Source read at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN. Details expanded by K2; the associativity proof is checked by Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "associated graded ideal algebra acts on successive kernels of a coherent formal module",
+   "results": "Eight hits: Ideal.Filtration.submodule, Ideal.Filtration, IsModuleFiltration.toGradedSMul, Ideal.stableFiltration_N, AdicCompletion.submodule, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.stableFiltration_stable, Ideal.stableFiltration. These concern algebraic filtrations and completions, not the sheaf-level kernel action or its local-lift formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalKernel.*action|associatedGraded.*module",
+   "results": "No matching lines in Mathlib. Also searched both library roots and DAG for formal kernel bilinearity and associativity; found only the parent and associated graded structures, not these constituent statements.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bilinear sheaf action on successive kernels of an adic module is associative by lifting sections",
+   "results": "service unavailable: Internal Server Error; no absence verdict is claimed.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Associated graded kernel construction in finite etale lifting: local multiplication and descent of bilinear maps, before the algebra laws.",
+   "via": [
+    "lem-weil-pbc-formal-kernel-graded-action-exists",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalKernelBilinearActionExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelBilinearActionExists.lean",
+  "declaration": "AlgebraicGeometry.formalKernel_bilinear_action_exists",
+  "statement": "theorem formalKernel_bilinear_action_exists {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F : CoherentFormalModule X I) :\n    ∃ act : ∀ (m n : ℕ) (U : X.Opens),\n      (formalAssociatedGradedPiece I m).val.obj (op U) →ₗ[Γ(X, U)]\n        (formalKernelPiece F n).val.obj (op U) →ₗ[Γ(X, U)]\n          (formalKernelPiece F (m + n)).val.obj (op U),\n      (∀ (m n : ℕ) (U V : X.Opens) (h : V ≤ U)\n        (a : (formalAssociatedGradedPiece I m).val.obj (op U))\n        (x : (formalKernelPiece F n).val.obj (op U)),\n      (formalKernelPiece F (m + n)).val.map (homOfLE h).op (act m n U a x) =\n        act m n V ((formalAssociatedGradedPiece I m).val.map (homOfLE h).op a)\n          ((formalKernelPiece F n).val.map (homOfLE h).op x)) ∧\n      (∀ (m n : ℕ) (U : X.Opens)\n          (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n          (x : (formalKernelPiece F n).val.obj (op U))\n          (t : (F.obj.obj (op (m + n))).val.obj (op U)),\n          (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op U) t =\n            (formalKernelι F n).val.app (op U) x →\n          (formalKernelι F (m + n)).val.app (op U)\n            (act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) =\n              (@id Γ(X, U)\n                ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T045537-L-130855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T045537-L-130855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
