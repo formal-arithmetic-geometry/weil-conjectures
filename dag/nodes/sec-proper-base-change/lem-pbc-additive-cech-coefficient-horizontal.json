@@ -1,0 +1,115 @@
+{
+ "id": "lem-pbc-additive-cech-coefficient-horizontal",
+ "kind": "statement",
+ "title": "Fixed additive coefficient maps commute with horizontal differentials",
+ "statement": "For any scheme X, finite family U of opens and injective resolution I of the additive etale structure sheaf, let A be the ordinary unit Cech complex after forgetting scalars and applying ULift, and let c_n:A^n → D^{n,0} be the product of I.ι.f 0 applied to ULift of restrictFunctorΓ.inv of each ordinary unit section coordinate. Then c_n followed by the horizontal differential D^{n,0} → D^{m,0} equals A.d n m followed by c_m, for all n,m. No affine or cover condition is required.",
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine acyclicity and natural coefficient sections; Tag 01EQ, Lemma 20.11.2, beta augmentation."
+ },
+ "proof": [
+  {
+   "text": "Project to each tuple, expand both alternating sums, and use naturality of restrictFunctorΓ.inv and of I.ι.f 0 to commute the section restriction through the fixed coefficient maps. Additivity and functoriality of ULift then identify the sums. Nonadjacent differentials and empty tuple products are zero. The vertical annihilation equation is proved directly by evaluating I.ι_f_zero_comp_complex_d coordinatewise.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "U3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4 and Tag 01EQ beta; fixed Lean coordinate formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map from a cochain complex to the total of a first quadrant double complex induced by column quasi-isomorphisms is a quasi-isomorphism",
+   "results": "Eight results concerning quasi-isomorphisms and cones; no fixed additive coefficient comparison.",
+   "verdict": "Use the existing project first-quadrant augmentation criterion.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.totalFlipIso",
+   "results": "The total symmetry isomorphism and its total inclusion component equations.",
+   "verdict": "Use totalFlipIso and ιTotal_totalFlipIso_f_hom to preserve the prescribed beta coordinates.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented Cech resolution columns of the additive structure sheaf on affine open intersections are quasi-isomorphisms",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "verdict": "No verdict from this unavailable service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "additiveCechCoefficient|quasiIso_of_column_augmentation",
+   "results": "No existing fixed additive coefficient maps; ModuleCechBetaAffineQuasiIso uses a different module-sheaf resolution. EtaleAffineOpenCechResolutionColumns gives an abstract homology isomorphism rather than the fixed augmentation.",
+   "verdict": "State the horizontal equation and the fixed column augmentation separately, and prove totalization in the item.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Fixed additive coefficient maps commute with horizontal differentials",
+   "via": [
+    "lem-pbc-additive-cech-beta-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechCoefficientMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientMap_comm",
+  "statement": "theorem additiveCechCoefficientMap_comm {X : Scheme.{u}} {ι : Type u} [Finite ι]\n    (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (n m : ℕ) :\n    additiveCechCoefficientMap U I n ≫\n        ((etaleOpenCechResolutionDoubleComplex X (additiveCechOpenInclusion X) U I).flip.X\n          0).d n m =\n      (additiveCechCoefficientComplex U).d n m ≫ additiveCechCoefficientMap U I m",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientComplex",
+   "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientMap",
+   "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientMap_comm",
+   "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientMap_vertical"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T135102-L-155708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T135102-L-155708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

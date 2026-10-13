@@ -1,0 +1,123 @@
+{
+ "id": "lem-pbc-additive-cech-coefficient-columns",
+ "kind": "statement",
+ "title": "Fixed affine additive coefficient column augmentations are quasi-isomorphisms",
+ "statement": "Let X be separated and U a finite family of opens whose positive tuple intersections are affine. For any injective resolution I of the additive etale structure sheaf and any Cech degree n, the map from the lifted ordinary unit Cech term A^n concentrated in resolution degree zero to the actual vertical column D.X n, constructed by fromSingle₀Equiv from additiveCechCoefficientMap and its proved vertical annihilation equation, is a quasi-isomorphism. This states only a single-column comparison, not a totalization or existence of a chain map from A to Tot(D).",
+ "stmt_deps": [
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "lem-pc-flat-cech-base-change",
+  "lem-pbc-additive-cech-coefficient-horizontal"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, affine acyclicity and natural coefficient sections; Tag 01EQ, Lemma 20.11.2, beta augmentation."
+ },
+ "proof": [
+  {
+   "text": "Identify additive structural sections naturally with the lifted tensor sections of the unit, then apply finite affine tensor Cech vanishing and the Cech vanishing criterion to obtain positive derived-evaluation vanishing on every affine tuple intersection.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural",
+    "new-etale-affine-tensor-cech-vanishing",
+    "lem-weil-pbc-cech-vanishing-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluated injective resolution has degree-zero homology identified canonically by its augmentation with coefficient sections, by left exactness. The categorical product of tuple opens equals their infimum, so the stated intersections are affine. Products of abelian groups are exact; take the product over tuples and commute the scalar forgetful functor and ULift with the finite ordinary coefficient product. In degree zero the map is exactly the prescribed coordinate map; positive source and target homology vanish. This proves quasi-isomorphism of the fromSingle₀Equiv augmentation, including empty tuple families and empty intersections.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "new-etale-affine-tensor-cech-vanishing",
+  "lem-weil-pbc-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "U3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4 and Tag 01EQ beta; fixed Lean coordinate formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map from a cochain complex to the total of a first quadrant double complex induced by column quasi-isomorphisms is a quasi-isomorphism",
+   "results": "Eight results concerning quasi-isomorphisms and cones; no fixed additive coefficient comparison.",
+   "verdict": "Use the existing project first-quadrant augmentation criterion.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.totalFlipIso",
+   "results": "The total symmetry isomorphism and its total inclusion component equations.",
+   "verdict": "Use totalFlipIso and ιTotal_totalFlipIso_f_hom to preserve the prescribed beta coordinates.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented Cech resolution columns of the additive structure sheaf on affine open intersections are quasi-isomorphisms",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "verdict": "No verdict from this unavailable service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "additiveCechCoefficient|quasiIso_of_column_augmentation",
+   "results": "No existing fixed additive coefficient maps; ModuleCechBetaAffineQuasiIso uses a different module-sheaf resolution. EtaleAffineOpenCechResolutionColumns gives an abstract homology isomorphism rather than the fixed augmentation.",
+   "verdict": "State the horizontal equation and the fixed column augmentation separately, and prove totalization in the item.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechBetaQuasiIso",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Fixed affine additive coefficient column augmentations are quasi-isomorphisms",
+   "via": [
+    "lem-pbc-additive-cech-beta-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechCoefficientColumns.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCechCoefficientMap_column_quasiIso",
+  "statement": "theorem additiveCechCoefficientMap_column_quasiIso\n    (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]\n    (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :\n    QuasiIso\n      ((CochainComplex.fromSingle₀Equiv\n        ((etaleOpenCechResolutionDoubleComplex X (additiveCechOpenInclusion X) U I).X n)\n        ((additiveCechCoefficientComplex U).X n)).symm\n          ⟨additiveCechCoefficientMap U I n, additiveCechCoefficientMap_vertical U I n⟩)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T135102-L-155708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T135102-L-155708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
