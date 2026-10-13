@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
@@ -43,6 +44,7 @@ set_option synthInstance.maxHeartbeats 400000 in
 -- Elaborating simultaneous exact restriction comparisons needs this instance budget.
 set_option maxHeartbeats 1600000 in
 -- The dependent comparison diagram requires this elaboration budget.
+set_option linter.unusedVariables false in
 /-- Descend the prescribed overlap transition with coherent comparison data.
 This only concerns the two local objects and one overlap equation: it has no
 quantification over a global stage object or its realizations.
@@ -164,6 +166,8 @@ theorem perfect_overlap_transition_comparison
         (θV : d.toDiagram.HV.obj B' ≅ RV.obj E),
         d.toDiagram.γU.inv.app A' ≫ SP.map θU.hom ≫ τU.hom.app E =
           d.toDiagram.HW.map e.hom ≫ d.toDiagram.γV.inv.app B' ≫
-            SQ.map θV.hom ≫ τV.hom.app E := by sorry
+            SQ.map θV.hom ≫ τV.hom.app E := by
+  exact perfect_overlap_transition_comparison_core R c hc i Z t j hij
+    (by intro U V; exact ⟨j, le_rfl⟩)
 
 end AlgebraicGeometry

@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-perfect-overlap-transition-comparison-diagram-core",
+ "kind": "statement",
+ "title": "Core prescribed overlap transition construction",
+ "statement": "Let I be a directed preorder, R a diagram of commutative rings, c its colimit cocone, i an index, and t:Z to Spec R_i finitely presented. Use shared derived categories on schemes and localized open sites [def-pc-derived-category]. For j greater than or equal to i put Yj=Z base changed to R_j, X=Z base changed to c.pt and let gj:X to Yj be the canonical map. Let compact opens U,V cover Yj, let A,B be perfect derived objects on these opens [def-pc-perfect-complex], and let phiU,phiV identify their derived pullbacks with the exact restrictions of E on X [def-pc-derived-pullback, def-pc-derived-open-restriction-maps]. There exist k greater than or equal to j, with canonical f:Yk to Yj and g:X to Yk, a coherent diagram d:SchemeTwoOpenComparisonDiagram X Yk g (f inverse U) (f inverse V) (gj inverse U) (gj inverse V) [def-pc-two-open-comparison-diagram], an isomorphism e:SU A' to SV B' where A',B' are the f-pullbacks of A,B, and isomorphisms thetaU:d.HU A' to RU E and thetaV:d.HV B' to RV E such that gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. All restrictions and comparison maps are the exact ones fixed in the diagram structure. Only the local objects and their overlap equation occur; there is no quantification over a stage object or realizations. This is the core construction used before the target wrapper. The core theorem additionally assumes the stage-existence lemma: every pair of opens admits a later index. The wrapper supplies this by choosing the current index.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF two-open induction, paragraph descending the isomorphism c before Tag 08DG; Tag 09RE for morphism descent; 08DW and 0D5S for canonical coherence."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-two-open-comparison-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite stage, coherent comparison diagram, local isomorphism and transported overlap equation by the directed-tail descent argument in Tags 09RE and 09RF.",
+   "uses": [
+    "def-pc-two-open-comparison-diagram",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-two-open-comparison-diagram",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "B4",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "date": "2026-10-14",
+  "note": "Intermediate construction statement isolating the coherent overlap descent data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on two compact open subschemes have a prescribed overlap isomorphism descending over a filtered colimit of rings",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "12 hits: CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*(colimit|descen)|derived.*(pullback|restriction)",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram",
+  "date": "2026-10-14",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-overlap-transition-comparison-diagram",
+   "place": "Intermediate construction used by the target proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTransitionComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.perfect_overlap_transition_comparison_core",
+  "statement": "theorem perfect_overlap_transition_comparison_core\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (i : I) (Z : Scheme.{u}) (t : Z ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation t] [QuasiCompact t] [QuasiSeparated t]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (j : I) (hij : i ≤ j)\n    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),\n      ∃ k : I, j ≤ k)\n    :\n    let Yj := pullback t (Spec.map (R.map (homOfLE hij)))\n    let X := pullback t (Spec.map (c.ι.app i))\n    let gj := baseChangeMap t\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (Spec.map (c.ι.app i)))\n      (Over.homMk (Spec.map (c.ι.app j))\n        (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))\n    ∀ (U V : Yj.Opens) (hcover : U ⊔ V = ⊤)\n      (hU : IsCompact (U : Set Yj)) (hV : IsCompact (V : Set Yj))\n      (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)\n      (hA : U.toScheme.IsPerfect A) (hB : V.toScheme.IsPerfect B)\n      (E : schemeDerivedCategory X),\n    let instP : Category (schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme) := inferInstance\n    let instQ : Category (schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme) := inferInstance\n    let instX : Category (schemeDerivedCategory X) := inferInstance\n    let PU : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ U).toScheme :=\n      (schemeOpenRestriction X (gj ⁻¹ᵁ U)).mapDerivedCategory\n    let PV : schemeDerivedCategory X ⥤ schemeDerivedCategory (gj ⁻¹ᵁ V).toScheme :=\n      (schemeOpenRestriction X (gj ⁻¹ᵁ V)).mapDerivedCategory\n    ∀ (φU : (derivedPullback (gj ∣_ U)).obj A ≅\n        PU.obj E)\n      (φV : (derivedPullback (gj ∣_ V)).obj B ≅\n        PV.obj E),\n    ∃ (k : I) (hjk : j ≤ k),\n      let g := baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (T' := Over.mk (Spec.map (c.ι.app i)))\n        (Over.homMk (Spec.map (c.ι.app k))\n          (by dsimp; rw [← Spec.map_comp, c.w (homOfLE (hij.trans hjk))]))\n      let Yk := pullback t (Spec.map (R.map (homOfLE (hij.trans hjk))))\n      let f := baseChangeMap t\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n          (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))\n      let U' := f ⁻¹ᵁ U\n      let V' := f ⁻¹ᵁ V\n      let instY : Category (schemeDerivedCategory Yk) := inferInstance\n      let instU : Category (schemeDerivedCategory U'.toScheme) := inferInstance\n      let instV : Category (schemeDerivedCategory V'.toScheme) := inferInstance\n      let instW : Category (schemeDerivedCategory (U' ⊓ V').toScheme) := inferInstance\n      let A' : schemeDerivedCategory U'.toScheme := (derivedPullback (f ∣_ U)).obj A\n      let B' : schemeDerivedCategory V'.toScheme := (derivedPullback (f ∣_ V)).obj B\n      let SU : schemeDerivedCategory U'.toScheme ⥤\n          schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk\n        (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))).mapDerivedCategory\n      let SV : schemeDerivedCategory V'.toScheme ⥤\n          schemeDerivedCategory (U' ⊓ V').toScheme := (schemeOpenOverlapRestriction Yk\n        (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))).mapDerivedCategory\n      let TU : schemeDerivedCategory Yk ⥤ schemeDerivedCategory U'.toScheme :=\n        (schemeOpenRestriction Yk U').mapDerivedCategory\n      let TV : schemeDerivedCategory Yk ⥤ schemeDerivedCategory V'.toScheme :=\n        (schemeOpenRestriction Yk V').mapDerivedCategory\n      let TW : schemeDerivedCategory Yk ⥤ schemeDerivedCategory (U' ⊓ V').toScheme :=\n        (schemeOpenRestriction Yk (U' ⊓ V')).mapDerivedCategory\n      let αU : TU ⋙ SU ≅ TW := schemeDerivedOpenRestrictionCompIso Yk\n        (homOfLE (show U' ⊓ V' ≤ U' from inf_le_left))\n      let αV : TV ⋙ SV ≅ TW := schemeDerivedOpenRestrictionCompIso Yk\n        (homOfLE (show U' ⊓ V' ≤ V' from inf_le_right))\n      let P := gj ⁻¹ᵁ U\n      let Q := gj ⁻¹ᵁ V\n      let RU := (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) P).mapDerivedCategory\n      let RV := (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) Q).mapDerivedCategory\n      let RW := (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) (P ⊓ Q)).mapDerivedCategory\n      let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE (show P ⊓ Q ≤ P from inf_le_left))).mapDerivedCategory\n      let SQ := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE (show P ⊓ Q ≤ Q from inf_le_right))).mapDerivedCategory\n      let τU : RU ⋙ SP ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n        Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u}\n          (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ P from inf_le_left)))\n      let τV : RV ⋙ SQ ≅ RW := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n        Functor.mapDerivedCategoryNatIso (SheafOfModules.overFunctorMap.{u}\n          (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)))\n      ∃ (d : SchemeTwoOpenComparisonDiagram X Yk g U' V' P Q)\n        (e : SU.obj A' ≅ SV.obj B')\n        (θU : d.toDiagram.HU.obj A' ≅ RU.obj E)\n        (θV : d.toDiagram.HV.obj B' ≅ RV.obj E),\n        d.toDiagram.γU.inv.app A' ≫ SP.map θU.hom ≫ τU.hom.app E =\n          d.toDiagram.HW.map e.hom ≫ d.toDiagram.γV.inv.app B' ≫\n            SQ.map θV.hom ≫ τV.hom.app E",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T215554-L-894194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T215554-L-894194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

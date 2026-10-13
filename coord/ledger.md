@@ -13633,3 +13633,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:54 L: returned deliver/B4/Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates (reviewer RETURN: (reviewer X-0d1e0, head 0d1e02f58) H10: `python3 /home/ubuntu/weil-launcher/lcompile.py --all ...` times out on Sheaf.Al)
 - 21:55 L: returned deliver/J1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (reviewer RETURN: (the landing tools, head d72a1d8bc) the delivery did not land: lean/Sheaf/AlgebraicGeometry/PicardScalarCechExternalCup.)
 - 21:55 L: returned deliver/T3/Sheaf.Paper.CechCupResolutionRepresentatives (reviewer RETURN: (the landing tools, head 8bb0bbc36) the delivery did not land: missing import source modules: Sheaf.Paper.CechCupResolut)
+- 21:55 L: merged deliver/B4/Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram (stage 3; reviewer PASS; first push; landing 20261013T215554-L-894194 (interface); batch 20261013T215553; modules 2; new nodes 1)
