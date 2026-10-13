@@ -14,24 +14,35 @@
  ],
  "proof": [
   {
-   "text": "map the bounded-below composite through the inclusion and use its\ncompatibility with mapDerivedCategoryPlusFactorsh. The first factor is the\nhomotopy version of the exact comparison for U and cancels against its\ncomplex-level inverse, because the homotopy quotient comparison is identity.\nThe next factor is Q of the termwise underived exchange. The defining\nright-derived uniqueness isomorphism carries the bounded-below target unit to\nthe unbounded target unit; naturality carries the following target transport\nthrough this isomorphism, leaving its inverse as the last factor. The inverse\nexact pullback comparison maps to the unbounded inverse comparison. Full\nfaithfulness identifies the image of q'.inv with quotientCompQhIso.hom followed\nby q.inv. Insert the canonical quotient comparisons on D and its direct image\nto express these identities in the stated complex-level form. No target unit\nis inverted, so no acyclicity of the pulled-back complex is assumed.",
+   "text": "Form the bounded-below complex M = ιJ and its homotopy quotient H. For the exchange prefix, map both factors through DerivedCategory.Plus.ι, use ι_map_mapDerivedCategoryPlusFactorsh_hom_app and mapDerivedCategoryFactorsh_hom_app, and cancel the complex-level U comparison. The quotient comparisons and mapHomotopyCategoryFactors at a quotient complex are identity. The inclusion of NatTrans.mapHomotopyCategoryPlus is NatTrans.mapHomotopyCategory, hence the remaining exchange is Q of the complex-level exchange. This is the private exchange_localization_prefix calculation.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
     "def-weil-pbc-underived-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the suffix use the defining rightDerivedUnique unit compatibility for rightDerivedFunctorPlusCompatibility. Postcompose its hom identity with the inverse compatibility and use naturality of that inverse on the transport morphism. The inclusion of the inverse exact P comparison is its unbounded inverse, as follows by cancelling the corresponding hom comparison. Full faithfulness maps q′.inv to quotientCompQhIso.hom followed by q.inv. Expand the homotopy factorization at M; the quotient comparisons are identity and its inverse equals the complex-level inverse P comparison. This is the private target_unit_representative_transport calculation. No target unit is inverted.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the prefix equality with the included target suffix. Precompose the suffix equality with the unbounded exchange prefix. Compose these two equalities, expand functoriality, and reassociate to obtain the original displayed equality unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-local-injective-source-comparison",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "def-weil-pbc-underived-exchange"
+  "def-weil-pbc-underived-exchange",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
-  "by": "agent B2",
-  "document": "Stacks Project",
-  "place": "Tag 03Q9; expansion of the canonical localization and derived-unit comparisons"
+  "by": "agent F1",
+  "document": "Stacks Project; Mathlib and the source library canonical localization comparisons",
+  "place": "Tag 03Q9, theorem-higher-direct-images, final injective-complex paragraph; Functor.mapDerivedCategoryFactorsh_hom_app, Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app, NatTrans.ι_map_mapHomotopyCategoryPlus_app, and Functor.rightDerivedFunctorPlusCompatibility"
  },
  "mathlib_searches": [
   {
@@ -113,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T130347-L-3951668",
-  "kind": "interface",
+  "landing": "20261013T142855-L-496897",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
