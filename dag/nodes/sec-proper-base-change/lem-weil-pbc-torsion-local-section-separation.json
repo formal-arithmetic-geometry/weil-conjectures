@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-torsion-local-section-separation",
+ "kind": "lemma",
+ "title": "The local map to H and normalized quotient maps separate sections",
+ "statement": "Let $X$ be Noetherian, $J$ ideal sheaf data, $H$ coherent and $N$ a coherent formal module [def-weil-pbc-coherent-formal-module]. Let $(U_i)$ be arbitrary opens. Supply coherent $H_i=H|_{U_i}$, coherent $F_i$, maps $a_i:F_i\\to H_i$ with actual kernel and cokernel annihilated by a positive power of $J|_{U_i}$, and $\\beta_i:N|_{U_i}\\cong F_i^\\wedge$. Supply over-site modules $L_i$, isomorphisms $l_i:L_i\\cong F_i$, and maps $b_i:L_i\\to H|_{U_i}$ and $q_{i,n}:L_i\\to N_n|_{U_i}$ whose transfers are $l_i a_i$ and $l_i\\pi_{F_i,n}\\beta_{i,n}^{-1}$. For any $i$ and open $W\\subseteq U_i$, two sections of $L_i$ on $W$ with equal images under $b_i$ and every $q_{i,n}$ are equal. No map from $N$ to $H^\\wedge$, compatibility with such a map, or overlap comparison is required.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), omitted uniqueness verification via the Artin--Rees separation argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix i. From the supplied kernel bound obtain a level n for which ker(ai) maps monomorphically to Fi/J^(n+1)Fi. The open Ui is Noetherian, since open subspaces of a Noetherian space are compact and restriction is locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-coherent-map-torsion-completion-ext-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the over-site form c=(bi,qi,op n) mapping Li to the biproduct of H and N_n. To prove c monic, let d compose with c to zero. Its compositions with both projections vanish. Transfer d through overEquiv and li to v. The normalization equations give v ai=0 and v pi=0, cancelling beta inverse for the latter. Factor v through ker(ai). Cancel the Artin--Rees monomorphism, so this factor and v vanish. Faithfulness of overEquiv and invertibility of li give d=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation on W preserves monomorphisms. Evaluate c. Equality of its two projections follows from the assumed b and q equalities. The biproduct identity fst inl+snd inr=id, evaluated on these sections, shows their c-images equal. Cancel the evaluated monomorphism to obtain equality of sections.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-map-torsion-completion-ext-zero"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), omitted uniqueness verification via the Artin--Rees separation argument; explicit over-site argument and Lean assembly by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a coherent module map with ideal power torsion kernel is detected by the arrow and all adic quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of coherent module with power torsion kernel inject into target and adic quotients",
+   "results": "AdicCompletion.map_injective, AdicCompletion.of_injective, AdicCompletion.of_injective_iff, AdicCompletion.of_inj, Ideal.powQuotSuccInclusion_injective, AdicCompletion.map_exact, localCohomology, Hausdorffification",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level statement; use the library Artin--Rees and lifting interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*completion|completion.*torsion",
+   "results": "Mathlib/RingTheory/DedekindDomain/AdicValuation.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf-level statement; use the library Artin--Rees and lifting interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledOverlapCocycle",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0889(1), Zariski locality by uniqueness: The local map to H and normalized quotient maps separate sections",
+   "via": [
+    "new-stage3-torsion-controlled-overlap-cocycle",
+    "new-stage3-torsion-controlled-algebraization-local-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionLocalSectionSeparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionLocalSectionSeparation.lean",
+  "declaration": "AlgebraicGeometry.torsion_local_section_separation",
+  "statement": "theorem torsion_local_section_separation\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (ι : Type u) (U : ι → X.Opens)\n    (Hlocal : ∀ i, CoherentModules (U i).toScheme)\n    (hHlocal : ∀ i, (Hlocal i).obj = (Scheme.Modules.restrictFunctor (U i).ι).obj H.obj)\n    (Fi : ∀ i, CoherentModules (U i).toScheme)\n    (ai : ∀ i, Fi i ⟶ Hlocal i)\n    (βi : ∀ i, N.obj ⋙ Scheme.Modules.restrictFunctor (U i).ι ≅\n      formalCompletionSystem (J.comap (U i).ι) (Fi i).obj)\n    (hbound : ∀ i, ∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct\n        (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2 (kernel (ai i).hom)) ∧\n      IsZero (Scheme.idealModuleProduct\n        (Scheme.idealSheafPower (J.comap (U i).ι).toModulesι s).2 (cokernel (ai i).hom)))\n    (Li : ∀ i, SheafOfModules ((moduleRings X.toRingedSpace).over (U i)))\n    (li : ∀ i, (Scheme.Modules.overEquiv (U i)).functor.obj (Li i) ≅ (Fi i).obj)\n    (bi : ∀ i, Li i ⟶ H.obj.over (U i))\n    (qi : ∀ (i : ι) (n : ℕᵒᵖ), Li i ⟶ (N.obj.obj n).over (U i))\n    (hbi : (∀ i, (Scheme.Modules.overEquiv (U i)).functor.map (bi i) ≫\n        (Scheme.Modules.overFunctorEquiv (U i)).hom.app H.obj ≫\n          eqToHom (hHlocal i).symm = (li i).hom ≫ (ai i).hom))\n    (hqi : (∀ (i : ι) (n : ℕᵒᵖ), (Scheme.Modules.overEquiv (U i)).functor.map (qi i n) ≫\n        (Scheme.Modules.overFunctorEquiv (U i)).hom.app (N.obj.obj n) =\n          (li i).hom ≫ formalModuleQuotientπ (J.comap (U i).ι) (n.unop + 1) (Fi i).obj ≫\n            (βi i).inv.app n))\n    (i : ι) (W : X.Opens) (hi : W ≤ U i)\n    (x y : (Li i).val.obj (op (Over.mk (homOfLE hi))))\n    (hb : (bi i).val.app (op (Over.mk (homOfLE hi))) x =\n      (bi i).val.app (op (Over.mk (homOfLE hi))) y)\n    (hq : ∀ n : ℕᵒᵖ, (qi i n).val.app (op (Over.mk (homOfLE hi))) x =\n      (qi i n).val.app (op (Over.mk (homOfLE hi))) y) : x = y",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100131-L-2488429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T100131-L-2488429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

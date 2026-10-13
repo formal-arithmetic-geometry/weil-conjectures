@@ -12,32 +12,36 @@
  ],
  "proof": [
   {
-   "text": "On Ui intersect Uj transfer the supplied Li to the open subscheme and restrict\nli, ai, and βi. Open restriction preserves coherence and actual kernels and cokernels.\nIdeal powers and multiplication images restrict to those of the comapped ideal, so the\npositive annihilation bounds remain valid on the intersection. Normalized quotient\ncomparison identifies the completed local sources with the same restriction of N.\nTheir induced maps to the restriction of H agree: compose the quotient projections\nwith these maps, use hδ, and cancel the quotient epimorphisms. Torsion-controlled\ncompletion hom lifting gives a comparison and its inverse that respect the maps to H\nand induce the prescribed completed comparison. Completion extensionality with the\nmap to H identifies both composites with identities. Transfer this isomorphism through\noverEquiv to get θij. Its compatibility with bi is the lifting equation and its\ncompatibility with qi follows by precomposing the completion equation with quotientπ\nand hqi. On every triple intersection both composite and direct comparisons induce\nthe same completed comparison and map to H. Extensionality makes them equal; evaluating\non every contained open gives the displayed cocycle. This argument applies to arbitrary\nopen intersections, without assuming they are affine. For J=0 completion is identity;\nfor J=1 the annihilation bounds make the arrows isomorphisms, so comparison is via H;\nfor the empty index type the conclusion is vacuous.",
+   "text": "For every ordered pair of indices and every common open, choose the compatible map supplied by torsion_common_open_comparison_map. This is a map only; neither invertibility nor a cocycle is assumed.",
    "uses": [
-    "lem-weil-pbc-coherent-map-torsion-completion-ext",
-    "lem-weil-pbc-coherent-module-local-on-open-cover",
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-restriction-open-immersion-limits",
-    "lem-weil-pbc-torsion-controlled-completion-hom-lift-exists"
+    "lem-weil-pbc-torsion-common-open-comparison-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that each forward map followed by its reverse is the identity. Evaluate on an arbitrary over-site object, write its underlying open V and its inclusion into W, and compare sections. The forward and reverse b equations make the composite and identity have equal b-images; the two q equations make all their q-images equal. Apply torsion_local_section_separation on the target chart. Extensionality gives equality of sheaf morphisms.",
+   "uses": [
+    "lem-weil-pbc-torsion-local-section-separation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take W=Ui intersect Uj and package the forward and reverse maps, with both composite identities from the preceding step, into theta_ij. On any W contained in Ui, Uj and Uk, compare theta_ik with theta_ij followed by theta_jk sectionwise. Their b-images agree by two applications of b compatibility, and all q-images agree by two applications of q compatibility. Section separation on chart k gives equality; ModuleCat extensionality gives the cocycle. The remaining b and q clauses are the equations of the chosen common-open maps.",
+   "uses": [
+    "lem-weil-pbc-torsion-local-section-separation",
+    "lem-weil-pbc-torsion-common-open-comparison-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-map-torsion-completion-ext",
-  "lem-weil-pbc-coherent-module-local-on-open-cover",
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-restriction-open-immersion-limits",
-  "lem-weil-pbc-torsion-controlled-completion-hom-lift-exists"
+  "lem-weil-pbc-torsion-common-open-comparison-map",
+  "lem-weil-pbc-torsion-local-section-separation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), first sentence of the proof (Zariski locality via uniqueness); Sheaves Tags 00AL and 00AM; explicit interfaces and Lean assembly by E1"
+  "place": "Tag 0889(1), Zariski locality via uniqueness; section separation, inverse identities and cocycle assembled explicitly in Lean by T1"
  },
  "mathlib_searches": [
   {
@@ -114,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T072345-L-1117565",
+  "landing": "20261013T100131-L-2488429",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
