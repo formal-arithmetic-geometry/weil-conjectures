@@ -8,26 +8,51 @@
  ],
  "proof": [
   {
-   "text": "Proof: Stacks Tag 06Y6 computes derived extension on K-flat models and makes\nit an exact, hence additive, functor. The resolution augmentation identifies\nsource cohomology naturally with derived extension from R to B after restriction\nfrom A, followed by homology. Thus additivity transports to source. For target,\nordinary tensor associativity identifies B tensor_R P with\n(A tensor_R B) tensor_A P for the A-K-flat resolution P. The maps and inverses\nare given on pure tensors, so the identification is natural in P and hence M.\nThis identifies target cohomology with derived extension from A to A tensor_R B,\nfollowed by restriction to B and homology. These functors are additive, so\nadditivity transports to target by conjugation with the natural comparison.\nThe chosen resolution functor need not itself preserve addition. No flatness or\nboundedness assumption is needed, and the same comparisons apply to zero rings\nand zero complexes.",
+   "text": "Termwise extension from a commutative ring S to T preserves quasi-isomorphisms between S-K-flat complexes: use the proved scalarExtension_quasiIso_of_kFlat helper, which specializes mixedTensor_kFlat_quasiIso to the complex T in degree zero. For restriction from A to R followed by extension to B, use the ordinary tensor isomorphisms on P and Q. Their pure-tensor formulas give the commuting arrow square for any A-linear complex map. Extension from A to A tensor_R B preserves the K-flat quasi-isomorphism, and exact restriction to B preserves it; transport through that square.",
    "uses": [
-    "lem-pc-base-derived-extension-linear",
-    "def-pc-ring-tensor-cohomology",
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
     "lem-pc-base-tensor-ordinary-iso"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any additive module functor F preserving K-flat quasi-isomorphisms, form G=F.mapHomotopyCategory followed by Qh. Use as resolving class the homotopy objects represented by K-flat complexes. The chosen flat resolution and its augmentation establish the resolution hypothesis. The proved isIso_Qh_map_mapHomotopyCategory_map lemma gives the inversion hypothesis. Apply leftDerived_from_resolvingClass to obtain an exact, hence additive, derived functor L with counit invertible on the chosen resolutions.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the augmentation with the quotient and Qh. It is pointwise invertible because each augmentation is a quasi-isomorphism. Transport additivity of Qh composed with the quotient to the localized resolution, and compose with additive L. Whisker the derived counit with the resolution and quotient; its components are invertible by the resolving-class computation clause. Transport additivity again. Finally compose the natural homology factorization isomorphisms and mapHomotopyCategoryFactors, and transport additivity to resolution followed by termwise F and ordinary homology.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For source take F to be extension from R to B and precompose the generic additivity result with additive restriction from A to R. For target take F to be restriction from A to R followed by extension to B. The first step establishes both preservation hypotheses. Unfold the source and target functor definitions and assemble the two additive instances. No additivity of the chosen resolution is assumed.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology",
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-base-derived-extension-linear",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-base-tensor-ordinary-iso",
   "def-pc-ring-tensor-cohomology",
-  "lem-pc-base-tensor-ordinary-iso"
+  "lem-pur-left-derived-from-kflat-class"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F4",
-  "date": "2026-10-13",
-  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y6 and Tag 0DJ8"
+  "group": "G4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 06Y6, 06XN and 05SE; explicit natural-isomorphism transport through augmentation, counit and homology"
  },
  "mathlib_searches": [
   {
@@ -108,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T125009-L-3836414",
-  "kind": "interface",
+  "landing": "20261013T201751-L-3969808",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
