@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes",
+  "group": "G2",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-picard-external-coefficients-affine-cech-differential",
+ "title": "PicardExternalCoefficientsAffineCechDifferential",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ morphisms of schemes [def-pc-scheme], $F$ an $\\mathcal O_X$-module and $G$ an $\\mathcal O_Y$-module [def-weil-sheaf-of-modules-category], $U:I\\to\\operatorname{Opens}(X)$ an arbitrary family, and $V\\subseteq Y$ any open. Put $W=\\operatorname{pr}_2^{-1}V$, $E=(\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)|_W$ [def-sc-field-linear-module-cohomology-operations], $U'_i=W.\\iota^{-1}(\\operatorname{pr}_1^{-1}U_i)$, $L$ the additive-group native Cech complex of $E$ on $U'$, and $D$ the additive-group termwise tensor of the scalar-restricted Cech complex of $F$ on $U$ with $N=\\Gamma(V,G|_V)$ [def-sc-module-cech-comparison]. Suppose degreewise isomorphisms $e_n:D^n\\cong L^n$ are given and satisfy the pure-tensor section normalization defined by [lem-sc-picard-external-coefficients-affine-cech-terms]: each coordinate of $e_n(a\\otimes t)$ is the tensor section of the restricted pullback-unit images of the coordinate of $a$ and of $t$. Then $d_L^{n,m}\\circ e_n=e_m\\circ d_D^{n,m}$ for every pair related by the upward cochain shape. No finiteness of $I$, affine hypothesis, quasi-coherence, or covering condition is required. This statement asserts no existence of the degreewise isomorphisms.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cech-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-picard-external-coefficients-affine-cech-terms"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "varieties-lemma-kunneth, affine-open paragraph, equality of Cech complexes; face restriction compatibility, with Tag 01CD lemma-tensor-product-pullback"
+ },
+ "proof": [
+  {
+   "text": "Project to each tuple of length n+2. The Cech differential is its finite alternating face sum. On a tensor a tensor t, normalization gives a tensor section of pullback-unit sections. Restriction of a tensor section is the tensor of restricted sections. Pullback-unit naturality identifies the restricted first section with the unit applied to the face restriction of the coordinate of a; the second section is the unit of the same t restricted from V. Thus each face square commutes, including repeated indices. Additivity gives equality of alternating sums. Tensor induction extends to every tensor and coordinate extensionality gives the square. Non-adjacent differentials are zero by the shape. Empty tuples and zero sections satisfy these identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Details of differential compatibility in the equality after Let V be an affine open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism in each degree of a Cech complex tensor a fixed module, normalized on pure tensors, commutes with the alternating restriction differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized external tensor section maps commute with the alternating face restriction differential of the Cech complex",
+   "results": "8 hits: AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_comp_inclusionOfMooreComplexMap_assoc, AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality_assoc, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc, AlgebraicTopology.DoldKan.inclusionOfMooreComplexMap_comp_PInfty_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No geometric external-coefficient Cech statement among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*tensor|tensor.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No geometric external-coefficient Cech statement among these hits."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED affine-right Cech calculation: commutation with the finite alternating face differential",
+   "via": [
+    "lem-sc-picard-external-coefficients-affine-cech-complexes",
+    "lem-sc-picard-external-coefficients-affine-local-cohomology",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechDifferential.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardAffineCech_normalized_differential",
+  "statement": "theorem picardAffineCech_normalized_differential\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) (G : Y.Modules) {ι : Type w} (U : ι → X.Opens) (V : Y.Opens)\n    (e : ∀ n, (picardAffineCechRight f g F G U V).X n ≅\n      (picardAffineCechLeft f g F G U V).X n)\n    (he : PicardAffineCechNormalized f g F G U V e) :\n    ∀ n m, (ComplexShape.up ℕ).Rel n m →\n      (e n).hom ≫ (picardAffineCechLeft f g F G U V).d n m =\n        (picardAffineCechRight f g F G U V).d n m ≫ (e m).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T133745-L-44290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T133745-L-44290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

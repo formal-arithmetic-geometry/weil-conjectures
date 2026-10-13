@@ -1,0 +1,154 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComplexes",
+  "group": "G2",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-picard-external-coefficients-affine-cech-terms",
+ "title": "PicardExternalCoefficientsAffineCechTerms",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ morphisms of schemes [def-pc-scheme], and $F,G$ quasi-coherent modules [pqf-def-coherent]. Let $I$ be finite, $U:I\\to\\operatorname{Opens}(X)$ a family whose intersections $\\bigcap_l U_{y(l)}$ are affine for every $n\\geq0$ and $y:\\operatorname{Fin}(n+1)\\to I$, and $V$ an affine open of $Y$. No covering condition is imposed. Put $Z=X\\times_kY$, $W=\\operatorname{pr}_2^{-1}V$, $E=(\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)|_W$ [def-sc-field-linear-module-cohomology-operations], and $U'_i=W.\\iota^{-1}(\\operatorname{pr}_1^{-1}U_i)$. Let $L$ be the native Cech complex of $E$ on $U'$, with its scalar action forgotten [def-sc-module-cech-comparison], and let $D$ be the Cech complex of $F$ on $U$ with scalars restricted from $\\Gamma(X,\\mathcal O_X)$ to $k$, tensoring each term with $N=\\Gamma(V,G|_V)$, then forgetting scalars. There exist additive-group isomorphisms $e_n:D^n\\cong L^n$ for every $n$. They have the following normalization. For $a$ in the degree $n$ restricted Cech module, $t\\in N$, and a tuple $y$, the $y$ coordinate of $e_n(a\\otimes t)$ is the tensor section of the pullback-unit image of the $y$ coordinate of $a$ and the pullback-unit image of $t$, each restricted to the intersection $\\bigcap_l U'_{y(l)}$. Restriction sections are identified with sections on their image under $W.\\iota$; $t$ is identified with $G(V)$ under the restriction-section isomorphism. No differential or cohomology compatibility is asserted.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cech-comparison",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "varieties-lemma-kunneth, affine-open paragraph, equality of Cech complexes; termwise affine section and finite product comparison"
+ },
+ "proof": [
+  {
+   "text": "Put Z=X times_Spec(k) Y, W=pr2 inverse V and E=(pr1^*F tensor pr2^*G)|W. The cover family on W is U_i'=W.ι inverse(pr1 inverse U_i). An intersection is U_intersection times V; both factors are affine. The open-immersion pullback/restriction comparison, its unit equation and pullback composition identify the restricted external coefficients with the external coefficients for F restricted to the intersection and G restricted to V.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved externalGlobalSectionsTensor_bijective_of_isAffine to F restricted to the affine intersection and G restricted to V. The normalized open-immersion and pullback-composition comparisons of the preceding step transport this canonical map to the original restricted pullback-unit sections followed by tmulSection. Thus the chart comparison is an additive-group isomorphism with precisely the required pure-tensor formula; the affine tensor algebra calculation is reused, not reproved.",
+   "uses": [
+    "lem-sc-external-global-sections-tensor-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each degree n the tuple set Fin(n+1) to I is finite. Use Mathlib TensorProduct.piRight, conjugated by tensor commutativity, to identify (product M_y) tensor N with product (M_y tensor N). Its pure-tensor formula is coordinatewise tensoring. Compose with the chart comparisons and native Cech product-coordinate equivalences to obtain the asserted normalization. Empty tuple sets, empty intersections, empty V and zero coefficients obey the same formulas. No differential assertion is made.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-external-global-sections-tensor-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Details of termwise affine sections and finite products in the equality after Let V be an affine open"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine external tensor coefficients have sections tensor product on each Cech intersection, commuting with finite products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex tensor external product affine factor sections tensor finite products",
+   "results": "8 hits: SSet.Subcomplex.ofSimplexProd_eq_range, SSet.prodStdSimplex.objEquiv_map_apply, SSet.Subcomplex.range_tensorHom, AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, SSet.prodStdSimplex.objEquiv, HomologicalComplex.ιTensorObj, SSet.prodStdSimplex.instFiniteTensorObjObjSimplexCategoryStdSimplexMk, AlgebraicTopology.DoldKan.Γ₀.Obj.summand",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No geometric external-coefficient Cech statement among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*tensor|tensor.*cech",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No geometric external-coefficient Cech statement among these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piRight",
+   "results": "TensorProduct.piRight, piRight_apply, piRight_symm_apply, piRight_symm_single",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "Reuse the finite-product tensor equivalence; it does not supply the geometric chart transport or full normalized term comparison."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED affine-right Cech calculation: normalized degreewise tensor-section comparisons, without differentials",
+   "via": [
+    "lem-sc-picard-external-coefficients-affine-cech-complexes",
+    "lem-sc-picard-external-coefficients-affine-local-cohomology",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechTerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechTerms.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardAffineCech_normalized_terms",
+  "statement": "theorem picardAffineCech_normalized_terms [F.IsQuasicoherent] [G.IsQuasicoherent]\n    [Finite ι]\n    (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hV : IsAffineOpen V) :\n    ∃ e : ∀ n, (picardAffineCechRight f g F G U V).X n ≅\n      (picardAffineCechLeft f g F G U V).X n,\n      PicardAffineCechNormalized f g F G U V e",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T133745-L-44290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T133745-L-44290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

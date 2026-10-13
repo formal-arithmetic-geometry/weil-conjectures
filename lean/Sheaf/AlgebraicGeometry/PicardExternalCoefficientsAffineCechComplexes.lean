@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechDifferential
 
 /-! # The affine-right product-cover Cech calculation
 
@@ -76,6 +77,9 @@ theorem picardExternalCupCoefficients_affine_cech_complexes
         (((forget₂ (ModuleCat.{w} Γ(W.toScheme, ⊤)) AddCommGrpCat.{w}).mapHomologicalComplex
             (.up ℕ)).obj B ≅
           ((forget₂ (ModuleCat.{w} k) AddCommGrpCat.{w}).mapHomologicalComplex
-            (.up ℕ)).obj ((T.mapHomologicalComplex (.up ℕ)).obj C)) := by sorry
+            (.up ℕ)).obj ((T.mapHomologicalComplex (.up ℕ)).obj C)) := by
+  obtain ⟨e, he⟩ := picardAffineCech_normalized_terms f g F G U V hU hV
+  exact ⟨(HomologicalComplex.Hom.isoOfComponents e
+    (picardAffineCech_normalized_differential k X Y f g F G U V e he)).symm⟩
 
 end AlgebraicGeometry.Scheme.Modules
