@@ -9,12 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
-import WeilConjectures.SixFunctors.Finite.BaseChange
-import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
-import Sheaf.AlgebraicGeometry.FiniteCoverKillsConstantCohomology
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
-import Sheaf.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility
-import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement
 
 /-! # Effacing constructible finite module coefficients on a closed subscheme
 
@@ -65,6 +61,56 @@ theorem exists_constructible_module_mono_closed_cohomology_eq_zero
     ∃ (D : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (b : C ⟶ D),
       Mono b ∧ Sheaf.H.map (((i)^*[AddCommGrpCat.{u + 1}]).map
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map b))
-          q x = 0 := by sorry
+          q x = 0 := by
+  classical
+  let U := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  let V := (i)^*[AddCommGrpCat.{u + 1}]
+  let : U.Additive := { map_add := by intro F G α β; ext W; rfl }
+  obtain ⟨n, Y, f, hf, hfp, M, hM, φ, hφ⟩ :=
+    finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf Λ C hC
+  let A (j : Fin n) := (lowerStar (ModuleCat.{u + 1} Λ) (f j)).obj
+    ((constantSheaf (Y j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M j))
+  -- Kill the projected class by a cover of the corresponding finite source.
+  have hcover (j : Fin n) := by
+    have : IsFinite (f j) := hf j
+    have : LocallyOfFinitePresentation (f j) := hfp j
+    have : Finite (M j) := hM j
+    exact exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero
+      (f j) i Λ (M j) q hq
+        (Sheaf.H.map (V.map (U.map (φ ≫ biproduct.π A j))) q x)
+  choose Y' π hπ hsurj hπfp hkill using hcover
+  let B (j : Fin n) := (lowerStar (ModuleCat.{u + 1} Λ) (f j)).obj
+    ((lowerStar (ModuleCat.{u + 1} Λ) (π j)).obj
+      (((π j)^*[ModuleCat.{u + 1} Λ]).obj
+        ((constantSheaf (Y j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M j))))
+  let b (j : Fin n) : A j ⟶ B j :=
+    (lowerStar (ModuleCat.{u + 1} Λ) (f j)).map
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (π j)).unit.app
+        ((constantSheaf (Y j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M j)))
+  -- Surjectivity makes each unit monic; right adjoints preserve monomorphisms.
+  have hb (j : Fin n) : Mono (b j) := by
+    have := mono_unit_app_of_surjective Λ (π j) (hsurj j).surj
+      ((constantSheaf (Y j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M j))
+    dsimp only [b]
+    infer_instance
+  let : Mono φ := hφ
+  let : ∀ j, Mono (b j) := hb
+  refine ⟨⨁ B, φ ≫ biproduct.map b, inferInstance, ?_⟩
+  change Sheaf.H.map (V.map (U.map (φ ≫ biproduct.map b))) q x = 0
+  let z := Sheaf.H.map (V.map (U.map (φ ≫ biproduct.map b))) q x
+  have hz (j : Fin n) :
+      Sheaf.H.map (V.map (U.map (biproduct.π B j))) q z = 0 := by
+    dsimp only [z]
+    rw [← Sheaf.H.map_comp_apply, ← V.map_comp, ← U.map_comp,
+      Category.assoc, biproduct.map_π, ← Category.assoc,
+      U.map_comp, V.map_comp, Sheaf.H.map_comp_apply]
+    exact hkill j
+  -- After the additive restriction functor, the projections detect zero in cohomology.
+  apply (Abelian.Ext.addEquivBiproduct _
+    (isBilimitOfPreserves (U ⋙ V) (biproduct.isBilimit B)) q).injective
+  rw [map_zero]
+  funext j
+  exact hz j
 
 end AlgebraicGeometry.Etale

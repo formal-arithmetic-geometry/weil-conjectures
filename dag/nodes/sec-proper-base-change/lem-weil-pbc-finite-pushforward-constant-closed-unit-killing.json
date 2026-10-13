@@ -1,0 +1,233 @@
+{
+ "id": "lem-weil-pbc-finite-pushforward-constant-closed-unit-killing",
+ "kind": "statement",
+ "title": "Finite-cover unit kills a finite constant pushforward class on a closed subscheme",
+ "statement": "Let $X$ be an affine scheme [def-weil-affine-spectrum, def-weil-pbc-scheme-conventions], $f:Y\\to X$ finite [def-weil-finite-integral-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and $i:Z\\to X$ a closed immersion [def-weil-closed-immersion]. Let $\\Lambda$ be a finite commutative ring and $M$ a finite $\\Lambda$-module. Let $E=\\underline M$ be the constant module sheaf on $Y$ [def-weil-pbc-constant-sheaf, def-weil-pbc-etale-sheaves], and $U$ the forgetful functor to abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. For $q>0$ and $x\\in H^q(Z,i^{-1}U(f_*E))$ [def-weil-pbc-etale-cohomology, def-weil-pbc-inverse-image, def-weil-pbc-direct-image], there exist a scheme $Y\\prime$ and a finite surjective locally finitely presented morphism $\\pi:Y\\prime\\to Y$ [def-weil-surjective-morphism] with $H^q(i^{-1}U(f_*\\eta_{\\pi,E}))(x)=0$. Here $\\eta_{\\pi,E}:E\\to\\pi_*\\pi^{-1}E$ is the module-sheaf adjunction unit. No constructibility of the target sheaf is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-surjective-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09ZE, lemma-efface-cohomology-on-closed-by-finite-cover, constructible finite-pushforward paragraph; Tags 0959 and 09ZD (2)",
+  "url": "https://stacks.math.columbia.edu/tag/09ZE"
+ },
+ "proof": [
+  {
+   "text": "Let E be the constant module sheaf M on Y and G its underlying abelian sheaf. Y is affine since f is finite and X affine. Form YZ = Y times_X Z; iY:YZ to Y is a closed immersion. Forgetting coefficients commutes definitionally with direct image. constantCommuteCompose followed by upperStarConstantSheafIso identifies iY inverse image of G with the constant underlying abelian group of M.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite exchange and the finite-pushforward edge map to x, producing a class xi with coefficients iY inverse image of G on YZ. Transport xi by the constant comparison. Apply the finite constant-coefficient killing theorem to iY:YZ to Y, giving a finite surjective locally finitely presented pi:Yprime to Y whose base change kills the transported class.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of cohomological pullback and injectivity of cohomology maps of isomorphisms remove the constant comparisons and show that the pullback of xi itself is zero.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Paste the cartesian squares for f and pi. Unit/edge compatibility identifies the image of x under the pushed-forward abelian unit, after finite exchange and the finite edge map for the composite, with the zero pullback of xi. Exchange and edge maps are injective; cancel them and then the direct-image composition isomorphism. The pushed-forward abelian unit therefore kills x.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let a be the abelian adjunct of the forgotten module unit U(eta_module). The adjunction bijection gives eta_ab followed by pi_*a = U(eta_module). Push this equality forward by f, restrict by i, and apply H. The first factor kills x; the second factor sends zero to zero. Hence the pushed-forward module unit kills x.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lemma-constructible-pullback-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 09ZE, finite-pushforward paragraph; H2 module-unit factorization via the abelian adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a cohomology class of the finite direct image of a finite constant sheaf on a closed affine subscheme is killed by the pushforward of a finite cover adjunction unit",
+   "results": [],
+   "date": "2026-10-13",
+   "available": false,
+   "note": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite direct image of constant module sheaf cohomology killed by finite surjective cover unit",
+   "results": [
+    "SheafOfModules.IsFiniteType",
+    "CompHausLike.LocallyConstantModule.functor",
+    "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+    "SheafOfModules.GeneratingSections.IsFiniteType",
+    "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+    "SheafOfModules.Presentation.IsFinite",
+    "SheafOfModules.isFinitePresentation",
+    "SheafOfModules.LocalGeneratorsData.IsFiniteType"
+   ],
+   "date": "2026-10-13",
+   "available": true,
+   "note": "",
+   "verdict": "No exact component-unit killing theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward.*cohomology|cohomology.*finite.*pushforward",
+   "results": [],
+   "date": "2026-10-13",
+   "available": true,
+   "note": "",
+   "verdict": "No exact component-unit killing theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*unit.*cohomology|efface|addEquivBiproduct",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean"
+   ],
+   "date": "2026-10-13",
+   "available": true,
+   "note": "Independent second reading by H2; search logged in searches.jsonl.",
+   "verdict": "No component effacement theorem; generic Ext biproduct and adjunction primitives support the existing proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction unit effaces higher étale cohomology of a direct image along a finite scheme map",
+   "results": [
+    "AlgebraicGeometry.IsEtale.of_comp",
+    "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+    "Algebra.etaleLocus_eq_compl_support",
+    "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+    "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+    "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+   ],
+   "date": "2026-10-13",
+   "available": true,
+   "note": "Independent second reading by H2; search logged in searches.jsonl.",
+   "verdict": "No component effacement theorem; generic Ext biproduct and adjunction primitives support the existing proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": [
+    "CategoryTheory.Adjunction.homEquiv",
+    "CategoryTheory.Adjunction.mk'_homEquiv",
+    "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+    "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+    "CategoryTheory.Adjunction.representableBy_homEquiv",
+    "CategoryTheory.Adjunction.comp_homEquiv",
+    "CategoryTheory.Adjunction.homEquiv_apply",
+    "CategoryTheory.Adjunction.homEquiv_unit"
+   ],
+   "date": "2026-10-13",
+   "available": true,
+   "note": "Independent second reading by H2; search logged in searches.jsonl.",
+   "verdict": "No component effacement theorem; generic Ext biproduct and adjunction primitives support the existing proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleClosedEffacement",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "via": [
+    "lem-weil-pbc-constructible-module-closed-effacement",
+    "lem-weil-pbc-henselian-bounded-abelian-surjectivity",
+    "lem-weil-pbc-henselian-bounded-abelian-comparison-step"
+   ],
+   "place": "Tag 09ZE proof: a finite pushforward of a finite constant group is effaced by a finite surjective cover of its source"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardConstantClosedEffacement.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero",
+  "statement": "theorem exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero\n    {X Y Z : Scheme.{u}} [IsAffine X] (f : Y ⟶ X) [IsFinite f]\n    [LocallyOfFinitePresentation f] (i : Z ⟶ X) [IsClosedImmersion i]\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (M : ModuleCat.{u + 1} Λ) [Finite M] (q : ℕ) (hq : 0 < q)\n    (x : Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) q) :\n    ∃ (Y' : Scheme.{u}) (π : Y' ⟶ Y),\n      IsFinite π ∧ Surjective π ∧ LocallyOfFinitePresentation π ∧\n        Sheaf.H.map (((i)^*[AddCommGrpCat.{u + 1}]).map\n          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map\n            ((lowerStar (ModuleCat.{u + 1} Λ) f).map\n              ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit.app\n                ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))))\n          q x = 0",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T010615-L-2670976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T010615-L-2670976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
