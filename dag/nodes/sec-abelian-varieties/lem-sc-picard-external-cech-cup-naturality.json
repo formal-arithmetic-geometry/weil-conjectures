@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-picard-external-cech-cup-naturality",
+ "kind": "statement",
+ "title": "Right coefficient naturality from the external cup coordinates",
+ "statement": "With the data of [lem-sc-picard-external-cech-cup-component], let a:G→H be a right coefficient morphism. Any cochain maps cG and cH having the prescribed external Alexander--Whitney tuple coordinates satisfy mapBifunctorMap(id,Cech(a)) ≫ cH = cG ≫ Cech(id tensor tensorPullback(a)). This is a conditional equality and makes no existence assertion. No covering, quasi-coherence or finiteness hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech; Cohomology Tag 07MB; official tag pages read on 2026-10-13"
+ },
+ "stmt_deps": [
+  "lem-sc-picard-external-cech-cup-component",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Test the equality after each total-summand inclusion, then on pure tensors,\nthen on each product tuple. The Cech coefficient map is pointwise on tuples.\nNaturality of the pullback adjunction unit moves the coefficient morphism through\nthe pulled-back back-face section. Presheaf restriction naturality moves it\nthrough restriction, and tensor-section naturality moves it through the final\npairing. The front factor stays fixed. The two coordinate hypotheses thus give\nidentical sections. Pure tensors generate the tensor module, the summand maps are\njointly epimorphic by the coproduct universal property, and the coordinate\nprojections are jointly monomorphic by the product universal property. This\nproves equality in every degree and hence of cochain maps. Empty index sets and\nzero modules satisfy the same extensionality arguments.",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-external-cech-cup-component",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BED and 07MB; coordinate extensionality, scalar Cech maps, restriction and adjunction-unit naturality; complete Lean proof by V3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External Cech cup product cochain map for sheaves of modules",
+   "results": "Service unavailable: Internal Server Error. No search result was returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External Alexander Whitney cup cochain map natural in sheaf coefficients",
+   "results": "AlternatingCofaceMapComplex.map and group cohomology maps; no external cup construction.",
+   "date": "2026-10-13",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendMap_comp",
+   "results": "HomologicalComplex.extendMap_comp supplies the assembly after extension; it does not construct the external cup.",
+   "date": "2026-10-13",
+   "verdict": "Assembly tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*cup|cup.*cech|ι_mapBifunctorDesc",
+   "results": "ι_mapBifunctorDesc supplies degree-map inclusion equations. Project CechCupProduct handles same-cover coefficients over global sections, and CechRefinementCochainMap is additive after forgetting scalars. Neither directly supplies the external k-linear cochain map.",
+   "date": "2026-10-13",
+   "verdict": "No complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Coefficient naturality",
+   "via": [
+    "lem-sc-picard-external-right-cech-comparison",
+    "lem-sc-picard-right-cech-cup-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCechCupNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCechCupNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupComponent_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCechCupComponent_naturality"
+  ],
+  "statement": "theorem picardExternalCechCupComponent_naturality\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules)\n    {G H : Y.Modules} (a : G ⟶ H)\n    (cG : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ) ⟶\n      (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G))\n    (cH : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj H) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ) ⟶\n      (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F H))\n    (hG : IsPicardExternalCechCupComponent f g U V F G cG)\n    (hH : IsPicardExternalCechCupComponent f g U V F H cH) :\n    HomologicalComplex.mapBifunctorMap (𝟙 _) ((picardCechFunctor g V).map a)\n        (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) ≫ cH =\n      cG ≫ (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).map\n        ((tensorLeft ((tensorPullback (pullback.fst f g)).obj F)).map\n          ((tensorPullback (pullback.snd f g)).map a))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T125014-L-3838458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T125014-L-3838458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

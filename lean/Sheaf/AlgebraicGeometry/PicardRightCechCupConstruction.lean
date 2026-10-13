@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PicardExternalCechCupNaturality
 
 /-! # The right external Cech cup construction
 
@@ -115,7 +116,22 @@ theorem picardRightCechCup_exists
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens) (F : X.Modules) :
     ∃ θ : picardRightTensorCechFunctor f g U V F ⟶
-      picardRightProductCechFunctor f g U V F, IsPicardRightCechCup f g U V F θ := by sorry
+      picardRightProductCechFunctor f g U V F, IsPicardRightCechCup f g U V F θ := by
+  classical
+  choose c hc using (fun G ↦ picardExternalCechCupComponent_exists f g U V F G)
+  let θ : picardRightTensorCechFunctor f g U V F ⟶
+      picardRightProductCechFunctor f g U V F :=
+    { app := fun G ↦ HomologicalComplex.extendMap (c G) ComplexShape.embeddingUpNat
+      naturality := fun G H a ↦ by
+        change HomologicalComplex.extendMap _ ComplexShape.embeddingUpNat ≫
+            HomologicalComplex.extendMap _ ComplexShape.embeddingUpNat =
+          HomologicalComplex.extendMap _ ComplexShape.embeddingUpNat ≫
+            HomologicalComplex.extendMap _ ComplexShape.embeddingUpNat
+        rw [← HomologicalComplex.extendMap_comp, ← HomologicalComplex.extendMap_comp]
+        exact congrArg (fun b ↦ HomologicalComplex.extendMap b ComplexShape.embeddingUpNat)
+          (picardExternalCechCupComponent_naturality f g U V F a (c G) (c H) (hc G) (hc H)) }
+  refine ⟨θ, fun G ↦ ⟨c G, rfl, ?_⟩⟩
+  exact hc G
 
 end
 end AlgebraicGeometry.Scheme.Modules
