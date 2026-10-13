@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelLocallySpanned
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # A generator criterion for annihilating an exterior quotient kernel
@@ -21,6 +23,49 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 universe v
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorTensor_zero_mono {X : Scheme.{v}}
+    (A B C : X.Modules) (r : ℕ) (g : B ⟶ C)
+    (q : exteriorSheaf A r ⊗ exteriorSheaf B 0 ⟶
+      exteriorSheaf A r ⊗ exteriorSheaf C 0)
+    (hq : ∀ (U : X.Opens) (a : Fin r → A.val.obj (op U))
+      (c : Fin 0 → B.val.obj (op U)),
+      q.val.app (op U)
+        (tmulSection (exteriorSheafSection A r U a)
+          (exteriorSheafSection B 0 U c)) =
+        tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C 0)
+          (exteriorSheafSection A r U a)
+          (exteriorSheafSection C 0 U (fun i ↦ g.val.app (op U) (c i)))) :
+    Mono q := by
+  obtain ⟨eB, hB, _⟩ := exteriorSheaf_zero_iso B
+  obtain ⟨eC, hC, _⟩ := exteriorSheaf_zero_iso C
+  let e := eB ≪≫ eC.symm
+  have he (U : X.Opens) (c : Fin 0 → B.val.obj (op U)) :
+      e.hom.val.app (op U) (exteriorSheafSection B 0 U c) =
+        exteriorSheafSection C 0 U Fin.elim0 := by
+    have hc : c = Fin.elim0 := Subsingleton.elim _ _
+    subst c
+    change eC.inv.val.app (op U)
+      (eB.hom.val.app (op U) (exteriorSheafSection B 0 U Fin.elim0)) = _
+    rw [hB U, ← hC U]
+    exact congrArg
+      (fun f ↦ f.val.app (op U) (exteriorSheafSection C 0 U Fin.elim0))
+      eC.hom_inv_id
+  have hqe : q = (Iso.refl (exteriorSheaf A r) ⊗ᵢ e).hom := by
+    apply exteriorTensor_lift_hom_ext (𝟙 B) r 0
+    intro U a c
+    rw [hq]
+    have hc : (fun i ↦ g.val.app (op U) ((𝟙 B : B ⟶ B).val.app (op U) (c i))) =
+        (Fin.elim0 : Fin 0 → C.val.obj (op U)) := Subsingleton.elim _ _
+    rw [hc]
+    change _ = ((𝟙 (exteriorSheaf A r)) ⊗ₘ e.hom).app U _
+    rw [tensorHom_app_tmulSection]
+    change _ = tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf C 0)
+      (exteriorSheafSection A r U a) (e.hom.val.app (op U) _)
+    rw [he]
+  rw [hqe]
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A morphism kills the exterior quotient kernel if it kills the quotient relations.
@@ -61,6 +106,40 @@ theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}
       ψ.val.app (op U)
         (tmulSection (exteriorSheafSection A r U a)
           (exteriorSheafSection S.X₂ s U c)) = 0) :
-    kernel.ι q ≫ ψ = 0 := by sorry
+    kernel.ι q ≫ ψ = 0 := by
+  by_cases hs : s = 0
+  · subst s
+    have : Mono q := exteriorTensor_zero_mono A S.X₂ S.X₃ r S.g q hq
+    have hι : kernel.ι q = 0 := (cancel_mono q).mp (by simp)
+    rw [hι, zero_comp]
+  ext U k
+  change ψ.val.app (op U) ((kernel.ι q).val.app (op U) k) = 0
+  let t := (kernel.ι q).val.app (op U) k
+  have ht : q.val.app (op U) t = 0 := by
+    have h := congrArg
+      (fun f ↦ f.val.app (op U) k) (kernel.condition q)
+    exact h
+  apply D.isSheaf.section_ext
+  intro x hx
+  obtain ⟨V, hVU, hxV, hspan⟩ :=
+    exteriorTensor_kernel_locally_mem_span S hS A r s hs q hq U t ht x hx
+  refine ⟨V, hVU, hxV, ?_⟩
+  have hle : Submodule.span (X.presheaf.obj (op V))
+      {z | ∃ (a : Fin r → A.val.obj (op V))
+        (c : Fin s → S.X₂.val.obj (op V)) (j : Fin s)
+        (d : S.X₁.val.obj (op V)), c j = S.f.val.app (op V) d ∧
+          z = tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf S.X₂ s)
+            (exteriorSheafSection A r V a) (exteriorSheafSection S.X₂ s V c)} ≤
+      LinearMap.ker (ψ.val.app (op V)).hom := by
+    apply Submodule.span_le.mpr
+    rintro z ⟨a, c, j, d, hcd, rfl⟩
+    exact hzero V a c j d hcd
+  have hz := hle hspan
+  change ψ.val.app (op V)
+    ((exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s).val.map (homOfLE hVU).op t) = 0 at hz
+  change D.presheaf.map (homOfLE hVU).op (ψ.val.app (op U) t) =
+    D.presheaf.map (homOfLE hVU).op 0
+  have hn := PresheafOfModules.naturality_apply ψ.val (homOfLE hVU).op t
+  exact hn.symm.trans (hz.trans (map_zero (D.val.map (homOfLE hVU).op).hom).symm)
 
 end AlgebraicGeometry.Scheme.Modules
