@@ -10967,3 +10967,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:42 L: merged deliver/M4/Sheaf.AlgebraicGeometry.QuasicoherentSheafHom (stage 3; reviewer PASS; first push; landing 20261013T034207-L-3766968 (proof); batch 20261013T034159; modules 1; new nodes 0)
 - 03:42 L: merged deliver/N4/Sheaf.AlgebraicGeometry.FlatDerivedStructureUnitProperties (stage 3; reviewer PASS; first push; landing 20261013T034208-L-3767204 (interface); batch 20261013T034159; modules 2; new nodes 1)
 - 03:42 L: merged deliver/N4/Sheaf.RingTheory.PolynomialCompletedFibreCompatibleProduct (stage 3; reviewer PASS; first push; landing 20261013T034209-L-3767405 (proof); batch 20261013T034159; modules 1; new nodes 0)
+- 03:42 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale (stage 3; reviewer PASS; after a return; landing 20261013T034209-L-3767562 (interface); batch 20261013T034159; modules 2; new nodes 1)

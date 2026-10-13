@@ -14,8 +14,8 @@ public import Mathlib.AlgebraicGeometry.Normalization
 
 public import Sheaf.RingTheory.Depth
 
-import Sheaf.RingTheory.NormalLocalDepthTwo
 import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
 
 /-!
 # Purity turns flatness of a depth-two normalization into etaleness
@@ -30,6 +30,47 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+-- Normalization recovers the finite map on its original open, for any
+-- morphism property invariant under source isomorphisms.
+private theorem morphismProperty_normalization_restrict_iff
+    (p : MorphismProperty Scheme.{u}) [p.RespectsIso]
+    {P X : Scheme.{u}} (V : X.Opens)
+    (π : P ⟶ V.toScheme) [IsFinite π] [QuasiCompact V.ι] :
+    p ((π ≫ V.ι).fromNormalization ∣_ V) ↔ p π := by
+  let f := π ≫ V.ι
+  have hpb : IsPullback (𝟙 P) π f V.ι :=
+    IsPullback.of_horiz_isIso_mono ⟨by simp [f]⟩
+  have hfin : IsFinite (pullback.snd f V.ι) := by
+    rw [← MorphismProperty.cancel_left_of_respectsIso @IsFinite hpb.isoPullback.hom,
+      hpb.isoPullback_hom_snd]
+    infer_instance
+  rw [← p.cancel_left_of_respectsIso (pullbackRestrictIsoRestrict f.fromNormalization V).hom,
+    pullbackRestrictIsoRestrict_hom_morphismRestrict,
+    ← p.cancel_left_of_respectsIso (f.normalizationPullback V.ι),
+    Hom.normalizationPullback_snd,
+    ← p.cancel_left_of_respectsIso (pullback.snd f V.ι).toNormalization,
+    Hom.toNormalization_fromNormalization,
+    ← p.cancel_left_of_respectsIso hpb.isoPullback.hom, hpb.isoPullback_hom_snd]
+
+-- Restriction commutes with pullback for every property stable under base change.
+set_option backward.isDefEq.respectTransparency false in
+private theorem morphismProperty_pullback_restrict
+    (p : MorphismProperty Scheme.{u}) [p.IsStableUnderBaseChange]
+    {X Y T : Scheme.{u}} (f : X ⟶ Y) (g : T ⟶ Y) (U : Y.Opens) (hf : p (f ∣_ U)) :
+    p (pullback.snd f g ∣_ (g ⁻¹ᵁ U)) := by
+  let n := pullback.snd f g
+  have hp := Scheme.Hom.isPullback_resLE (IsPullback.of_hasPullback f g)
+    (US := U) (UT := g ⁻¹ᵁ U) (UX := f ⁻¹ᵁ U)
+    (UY := n ⁻¹ᵁ (g ⁻¹ᵁ U)) le_rfl le_rfl (by
+      rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, pullback.condition]
+      exact (inf_idem _).symm)
+  dsimp only [n] at hp
+  simp only [Scheme.Hom.resLE_eq_morphismRestrict] at hp
+  exact p.of_isPullback hp hf
+
+-- The unchanged statement includes normality and generic-density hypotheses;
+-- the flat source-open proof below does not need them.
+set_option linter.unusedVariables false in
 /-- On the finite local normalization, every flat source open is etale.
 No section, group action, or generic rational point is assumed.
 
@@ -37,29 +78,25 @@ Source: Stacks Project, Tag 0EY6, assertions (2) and (3); Tag 0EYJ,
 proof of the local claim, paragraph starting with depth(A) at least two.
 (blueprint: lem-sbc-stalk-normalization-flat-etale)
 
-Proof: Write A = O(S,s), L = C times_S Spec A and L° for the inverse image
-of U. Every point of Spec A maps to a generalization of s; minimality says
-its complement over U consists exactly of the closed point. Thus L minus
-L° is the closed fibre. Smoothness makes L flat over A. At each point y of
-the closed fibre, the flat local depth formula gives
-  depth(O(L,y)) = depth(A) + depth(O(L,y)/m_A O(L,y)) >= 2.
-The scheme L is Noetherian and normal: these properties follow respectively
-from finite type over A and smoothness over the normal local domain A.
-The generic-point condition makes L° dense, and the finite etale model on
-L° is normal. The normalization N is normal, and the pullback in the
-statement is its localization at s, hence normal too. At a point z over
-the closed fibre, going down over the normal base and incomparability for the integral
-normalization give equal heights of z and n(z), componentwise. The local
-rings therefore have equal dimension. This dimension is at least
-two, so normality gives depth(O(N,z)) >= 2. Over L° the normalization
-recovers the finite etale model, by integral closure of a normal finite
-algebra. Consequently N is the unique depth-two finite extension in
-Tag 0EY6(2). By Tag 0EY6(3), it is etale at a point exactly when it is flat
-there. If V to L is flat, N to L is flat at every point of V, since the
-open immersion V to N induces stalk isomorphisms. Therefore N to L is
-etale at every point of V. Etaleness is local on the source, and hence
-V to L is etale. Empty V gives the empty etale map; no connectedness of
-the finite cover is required. -/
+Proof: Write A = O(S,s), L = C times_S Spec A, and n for the finite
+pullback normalization. Let T be the inverse image of C_U in L and W its
+inverse image in the source open V. Over C_U, normalization recovers the
+original finite etale map: normalization commutes with the smooth open
+immersion, and a finite map is its own relative normalization. Pulling back
+and restricting gives etaleness of W to L.
+Every point of Spec A maps to a generalization of s. Minimality and s not
+in U therefore identify L minus T with the closed fibre over s. The
+composite r:V to L to Spec A is flat, since V to L is flat by hypothesis
+and L to Spec A is smooth. At x outside W, injectivity of fromSpecStalk
+and the pullback equation show that r(x) is the closed point of Spec A.
+Apply the flat local depth formula across the canonical base stalk isomorphism
+to obtain the base stalk depth bound from depth(A) >= 2.
+The flat local depth formula then gives depth(O(V,x)) >= depth(A) >= 2.
+The map V to L is locally of finite type and locally quasi-finite, being
+an open immersion followed by a finite map. Apply flat quasi-finite
+purity (Tag 0BJH, as in 0EY6(3)) to W and this boundary depth bound.
+Normality and generic density are not needed for this flat-source argument;
+the statement retains both hypotheses. Empty V is included. -/
 theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
@@ -78,6 +115,77 @@ theorem finiteEtale_stalk_normalization_etale_of_flat {S C : Scheme.{u}}
     let a := S.fromSpecStalk s
     let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)
     IsFinite n → ∀ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
-      (pullback.fst c a)).Opens, Flat (V.ι ≫ n) → Etale (V.ι ≫ n) := by sorry
+      (pullback.fst c a)).Opens, Flat (V.ι ≫ n) → Etale (V.ι ≫ n) := by
+  dsimp only
+  intro hn V hflat
+  have : IsFinite PA.obj.hom := PA.property
+  have : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let a := S.fromSpecStalk s
+  let l := pullback.fst c a
+  let q := pullback.snd c a
+  let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
+  let n := pullback.snd f.fromNormalization l
+  let N := pullback f.fromNormalization l
+  let T := l ⁻¹ᵁ (c ⁻¹ᵁ U)
+  let W := V.ι ⁻¹ᵁ (n ⁻¹ᵁ T)
+  have : IsFinite n := hn
+  have : Flat (V.ι ≫ n) := hflat
+  have : IsLocallyNoetherian (pullback c a) :=
+    LocallyOfFiniteType.isLocallyNoetherian q
+  have : IsLocallyNoetherian N := LocallyOfFiniteType.isLocallyNoetherian n
+  have hetT : Etale (n ∣_ T) := morphismProperty_pullback_restrict @Etale
+    f.fromNormalization l (c ⁻¹ᵁ U)
+    ((morphismProperty_normalization_restrict_iff @Etale (c ⁻¹ᵁ U) PA.obj.hom).mpr
+      (inferInstance : Etale PA.obj.hom))
+  have hetW : Etale (W.ι ≫ (V.ι ≫ n)) := by
+    let j := V.ι.resLE (n ⁻¹ᵁ T) W le_rfl
+    have : Etale j := inferInstance
+    have : Etale ((n ⁻¹ᵁ T).ι ≫ n) := by
+      rw [← morphismRestrict_ι]
+      infer_instance
+    have heq : W.ι ≫ V.ι = j ≫ (n ⁻¹ᵁ T).ι := by simp [j]
+    rw [← Category.assoc, heq, Category.assoc]
+    infer_instance
+  have hboundary : ∀ y : (pullback c a : Scheme.{u}),
+      y ∉ T ↔ (l ≫ c) y = s := by
+    intro y
+    constructor
+    · intro hy
+      apply hmin
+      · have hp := pullback.condition (f := c) (g := a)
+        change (l ≫ c) y ⤳ s
+        rw [hp]
+        exact ((IsLocalRing.specializes_closedPoint (q y)).map a.continuous).trans
+          (specializes_of_eq fromSpecStalk_closedPoint)
+      · exact hy
+    · intro hy hmem
+      exact hs (hy ▸ hmem)
+  apply etale_of_flat_quasiFinite_depth_two_boundary (V.ι ≫ n) W hetW
+  intro x hx
+  have hnot : n (V.ι x) ∉ T := hx
+  have hxs : (l ≫ c) (n (V.ι x)) = s := (hboundary _).mp hnot
+  let r := (V.ι ≫ n) ≫ q
+  have : Flat r := inferInstance
+  have hrx : r x = IsLocalRing.closedPoint (S.presheaf.stalk s) := by
+    apply a.isEmbedding.injective
+    change ((V.ι ≫ n) ≫ q ≫ a) x = a (IsLocalRing.closedPoint _)
+    rw [← pullback.condition]
+    simpa only [l, a, Hom.comp_apply, fromSpecStalk_closedPoint] using hxs
+  have hbase : (2 : ℕ∞) ≤ IsLocalRing.depth
+      (R := (Spec (S.presheaf.stalk s)).presheaf.stalk (r x))
+      ((Spec (S.presheaf.stalk s)).presheaf.stalk (r x)) := by
+    rw [hrx]
+    let e := (stalkClosedPointIso (S.presheaf.stalk s)).commRingCatIsoToRingEquiv.symm
+    have : IsLocalHom e.toRingHom := IsLocalHom.of_surjective _ e.surjective
+    obtain ⟨_, hlocal, _, he⟩ := IsLocalRing.depth_eq_add_of_flat_local e.toRingHom
+      (RingHom.Flat.of_bijective e.bijective)
+    rw [he]
+    exact hdepth.trans (le_add_right le_rfl)
+  obtain ⟨_, hlocal, _, hformula⟩ :=
+    IsLocalRing.depth_eq_add_of_flat_local (r.stalkMap x).hom (Flat.stalkMap r x)
+  rw [hformula]
+  exact hbase.trans (le_add_right le_rfl)
 
 end AlgebraicGeometry.Scheme

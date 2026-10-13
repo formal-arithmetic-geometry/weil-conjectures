@@ -15,23 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Write A = O(S,s), L = C times_S Spec A and L° for the inverse image\nof U. Every point of Spec A maps to a generalization of s; minimality says\nits complement over U consists exactly of the closed point. Thus L minus\nL° is the closed fibre. Smoothness makes L flat over A. At each point y of\nthe closed fibre, the flat local depth formula gives\n  depth(O(L,y)) = depth(A) + depth(O(L,y)/m_A O(L,y)) >= 2.\nThe scheme L is Noetherian and normal: these properties follow respectively\nfrom finite type over A and smoothness over the normal local domain A.\nThe generic-point condition makes L° dense, and the finite etale model on\nL° is normal. The normalization N is normal, and the pullback in the\nstatement is its localization at s, hence normal too. At a point z over\nthe closed fibre, going down over the normal base and incomparability for the integral\nnormalization give equal heights of z and n(z), componentwise. The local\nrings therefore have equal dimension. This dimension is at least\ntwo, so normality gives depth(O(N,z)) >= 2. Over L° the normalization\nrecovers the finite etale model, by integral closure of a normal finite\nalgebra. Consequently N is the unique depth-two finite extension in\nTag 0EY6(2). By Tag 0EY6(3), it is etale at a point exactly when it is flat\nthere. If V to L is flat, N to L is flat at every point of V, since the\nopen immersion V to N induces stalk isomorphisms. Therefore N to L is\netale at every point of V. Etaleness is local on the source, and hence\nV to L is etale. Empty V gives the empty etale map; no connectedness of\nthe finite cover is required.",
+   "text": "Put A=O(S,s), a=fromSpecStalk s, L=C times_S Spec A, l:L to C, q:L to Spec A, and n the finite pullback normalization. Let T=l inverse(C_U) and W=V inverse(n inverse T). Finite type over the Noetherian local base makes L locally Noetherian; finiteness of n makes its source, and hence V, locally Noetherian. The restriction of n to T is etale: normalization commutes with the smooth open immersion C_U to C, and the normalization of the finite map PA to C_U is isomorphic to that map. Pullback and restriction preserve etaleness. Thus W to L is etale. These steps are proved by two private generalized morphism-property helpers: restriction and pullback preserve any property stable under base change, and the restriction of the normalization has exactly the same isomorphism-invariant properties as the original finite map. Specialize them to Etale. No duplicate etale-only helper is declared.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every a(t) specializes to s. Minimality and s not in U give y outside T if and only if (l composed with c)(y)=s. If x lies in V outside W, the composite r:V to L to Spec A maps x to the closed point: use the pullback equation, a(closedPoint)=s and injectivity of a. Flatness of V to L and smoothness of L to Spec A make r flat. Its stalk map is therefore flat and local. Identify the base stalk at the closed point with A via the canonical ring isomorphism. Its ring map is flat by RingHom.Flat.of_bijective and local by IsLocalHom.of_surjective. Applying the existing flat local depth formula to this map gives that the base stalk depth is at least depth A. No private depth-transport or maximal-ideal helper is needed. The flat local depth formula then gives depth O(V,x)=depth A+depth(closed fibre stalk), so depth O(V,x) is at least two. This step is fully proved in Lean.",
    "uses": [
-    "lem-weil-pbc-flat-local-depth-formula",
-    "lem-weil-pbc-normal-local-depth-two"
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The morphism V to L is flat by hypothesis, locally of finite type and locally quasi-finite because it is an open immersion followed by a finite map. Apply flat quasi-finite purity to its etale source open W and the depth-two boundary just proved. This proves Etale(V to L). Normality and the generic-point hypothesis are unnecessary in this route, but the original statement is unchanged.",
+   "uses": [
+    "lem-sbc-flat-quasi-finite-depth-purity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-normal-local-depth-two"
+  "lem-sbc-flat-quasi-finite-depth-purity"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "R3",
+  "by": "Q4",
   "document": "Stacks Project",
-  "place": "Tag 0EY6(2),(3), applied in Tag 0EYJ, proof of the local claim, depth-two case"
+  "place": "Tag 0BJH, the purity criterion invoked in Tag 0EY6(3), with Tag 0337 for the flat source-open depth calculation",
+  "note": "Second-reading repair: eliminate the duplicate private depth-equality lemma, using the already imported flat local depth formula across the canonical stalk ring isomorphism instead. The two generalized morphism-property helpers, target signature and decomposition remain unchanged."
  },
  "mathlib_searches": [
   {
@@ -105,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261012T225327-L-1812050",
+  "landing": "20261013T034209-L-3767562",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
