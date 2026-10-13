@@ -1,0 +1,154 @@
+{
+ "id": "new-s1-local-koszul-augmented-carrier",
+ "kind": "statement",
+ "title": "Local augmented Koszul carrier",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion] with additive tensor pullback [def-pc-module-pullback]. Fix V open in Z and an affine open U in Y. Write A=Gamma(Y,U), I=ker(i)(U) [def-sbc-closed-immersion-ideal-sheaf]. Fix m and f:Fin(m)\\to A with span(range(f))=I, and a projective resolution Q of A/I whose chain complex equals the Koszul complex K(A,m,f) [new-j3-koszul-projective-resolution]. Let F be termwise restriction to U, S=(i_*O_Z)[0], and G be termwise tensor pullback along i followed by restriction to V and its over site W=V intersect i^{-1}(U) [lem-sc-homology-evaluation-formal-complex]. There exist a cochain complex K on Y [def-pc-cochain-complex-modules] and an augmentation b:F(K)\\to F(S) which is a K-flat resolution [def-pc-kflat-complex], such that G(K) has zero differentials, terms zero outside some finite integer interval, and in every degree a finite free basis over the localized ring sheaf. No input resolution P is involved, and no comparison roof is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "Local Koszul complex in the proof; Tag 068C finite-free quotient resolution; reindexing and chart pushforward provide a carrier on Y."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "lem-sc-homology-evaluation-formal-complex",
+  "new-j3-koszul-projective-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Identify the restricted closed subscheme with Spec(A/I) and apply exists_affine_quotient_sheafified_resolution to Q.complex and Q.pi. Reindex chain degree n as cochain degree -n, inserting zero in positive degrees. This gives B on U augmented quasi-isomorphically to F(S).",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using hQ, the exterior basis of A^m makes B^{-n} free of rank binomial(m,n), and exterior powers vanish above m. A bounded-above complex of flat module sheaves is K-flat. Put K equal to termwise pushforward of B along U.ι and use the natural isomorphism restricting that pushforward back to B to transport the augmentation and K-flatness; no exactness of pushforward is asserted.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On W the restriction of tensor pullback of K equals the restricted tensor pullback of B. Verify this termwise by the inverse-image and scalar-extension formula. Each f_j maps to zero in A/I since span(range f)=I, so each contraction differential becomes zero. Scalar extension and restriction preserve the displayed free bases and the bounds [-m,0]. Empty sequences give the unit in degree zero; empty charts and zero quotients give zero modules with the same constructions.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-sc-homology-evaluation-formal-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-homology-evaluation-formal-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S1",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "Local Koszul complex in the proof; Tag 068C finite-free quotient resolution; reindexing and chart pushforward provide a carrier on Y."
+  },
+  "note": "Strict component of split-local-tensor-finite-free. The module docstring gives the complete construction and edge cases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local restriction of two K flat resolutions gives a common quasi isomorphism roof after derived tensor pullback",
+   "results": "UNAVAILABLE: Internal Server Error. Supplemented by leanfinder, loogle and source grep.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat resolutions derived tensor pullback quasi isomorphism common roof local open restriction",
+   "results": "Eight hits on free pullback and exact tensor; no matching local Koszul carrier or augmented resolution roof.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"mapHomologicalComplex\"",
+   "results": "Twelve generic quasi-isomorphism localization, shifts and exact functor hits. No carrier construction or local augmented comparison theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*[Cc]omparison|[Cc]omparison.*KFlat|[Kk]oszul.*[Ss]heaf",
+   "results": "No Mathlib hits. Repository searches additionally found and read KoszulProjectiveResolution, AffineQuotientResolutionSheafification, IsKFlatRestriction, BoundedAboveFlatRingedSpaceKFlat, KFlatResolution and ChangeOfRingsKFlatQuasiIso. None states either new result.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded exterior power Koszul resolution sheaf quotient with zero differential after base change",
+   "results": "Eight cotangent-complex and Kaehler-differential hits; none constructs the augmented sheaf Koszul carrier.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*[Bb]asis|[Bb]asis.*exteriorPower|right_fac",
+   "results": "Found Module.Basis.exteriorPower in Mathlib.LinearAlgebra.ExteriorPower.Basis, the imported API for the exterior bases. It supplies only the algebraic basis calculation, not sheafification, augmentation or the local carrier.",
+   "verdict": "partial match",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalTensorFiniteFreeZeroModel",
+  "date": "2026-10-14",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "split-local-tensor-finite-free: Local augmented Koszul carrier",
+   "via": [
+    "split-local-tensor-finite-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalKoszulAugmentedCarrier",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalKoszulAugmentedCarrier.lean",
+  "declaration": "AlgebraicGeometry.exists_local_koszul_augmented_carrier",
+  "statement": "theorem exists_local_koszul_augmented_carrier\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [(Scheme.Modules.tensorPullback i).Additive]\n    (V : Z.Opens) (U : Y.affineOpens) (m : ℕ) (f : Fin m → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (Q : ProjectiveResolution (ModuleCat.of (Γ(Y, U.1) : Type u)\n      ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U)))\n    (hQ : Q.complex = ExteriorAlgebra.koszulComplex (Γ(Y, U.1) : Type u) m f) :\n    let F := (Scheme.Modules.restrictFunctor U.1.ι).mapHomologicalComplex (.up ℤ)\n    let S := (HomologicalComplex.single Y.Modules (.up ℤ) 0).obj\n      ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    let G := (Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ) ⋙\n      moduleOpenOverComplexFunctor Z V (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))\n    ∃ (K : CochainComplex Y.Modules ℤ) (b : F.obj K ⟶ F.obj S),\n      CochainComplex.IsKFlatResolution (R := U.1.toScheme.sheaf) b ∧\n      (∀ x y : ℤ, (G.obj K).d x y = 0) ∧\n      (∃ x y : ℤ, ∀ k : ℤ, k < x ∨ y < k → IsZero ((G.obj K).X k)) ∧\n      (∀ k : ℤ, ∃ r : ℕ, Nonempty ((G.obj K).X k ≅\n        SheafOfModules.free (R := V.toScheme.ringCatSheaf.over\n          (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))) (ULift.{u} (Fin r))))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T211112-L-394675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T211112-L-394675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

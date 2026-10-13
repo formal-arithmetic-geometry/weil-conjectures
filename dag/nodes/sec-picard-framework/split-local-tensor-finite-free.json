@@ -25,32 +25,55 @@
  },
  "proof": [
   {
-   "text": "Choose m,f from hU; use the Koszul projective resolution of A/I and reindex in nonpositive cochain degrees. Sheafify its augmentation on U, identifying the closed subscheme with Spec(A/I), to obtain a bounded finite-free resolution K of restricted i_*O_Z.",
+   "text": "Choose m,f,hf,hreg from hU and use exists_koszul_projective_resolution to obtain an actual ProjectiveResolution Q of the quotient with Q.complex equal to the Koszul complex.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-j3-koszul-projective-resolution"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restriction of the K-flat P is K-flat, as follows by exact extension by zero of acyclic test complexes and its tensor projection formula. P|U and K resolve the same quotient. Represent their derived isomorphism by a common K-flat roof. Tensor pullback preserves the quasi-isomorphisms in this roof since their cones are acyclic K-flat complexes. The pulled-back Koszul differential is zero because each f_j vanishes in A/I; the exterior bases have binomial(m,n) elements and the complex is supported in [-m,0]. Exact open and over-site restriction preserves the roof, bases, zero differentials and bounds. This proves precisely the finite-free zero model condition. The empty sequence, empty opens, and zero quotient are covered by the same construction.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply exists_local_koszul_augmented_carrier to Q and hQ, obtaining K, its local augmentation b to the restriction of i_*O_Z, local K-flatness, and bounded finite-free zero-differential data for its restricted tensor pullback.",
+   "uses": [
+    "new-s1-local-koszul-augmented-carrier"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction preserves quasi-isomorphisms by preservation of finite limits and colimits. Apply isKFlat_restrict to the K-flatness component of hP. These give the restricted augmentation F(a) as a K-flat resolution of the same F(S) as b.",
+   "uses": [
+    "lem-pc-kflat-open-restriction",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_local_kflat_tensor_roof with augmentations F(a) and b to obtain L,q,p and both quasi-isomorphisms. Use G(K) as E and combine the roof with the zero differentials, bounds and finite-free bases from the carrier theorem. This is exactly HasFiniteFreeZeroModel.",
+   "uses": [
+    "new-s1-local-kflat-tensor-roof",
+    "lem-sc-homology-evaluation-formal-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-kflat-open-restriction",
+  "lem-sc-homology-evaluation-formal-complex",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
   "new-j3-koszul-projective-resolution",
-  "lem-sc-affine-quotient-resolution-sheafification"
+  "new-s1-local-kflat-tensor-roof",
+  "new-s1-local-koszul-augmented-carrier"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "J4",
+  "agent": "S1",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "Koszul complex and quotient zero-differential computation in the proof; Tag 068C for the finite-free resolution of a Koszul-regular quotient. Derived-resolution comparison supplies the tensor version."
   },
-  "note": "Second reading removed the separate restriction hole and documented the tensor-only component; this is decomposition, not net hole reduction."
+  "note": "Compiled decomposition into independent Koszul carrier construction and local augmented K-flat comparison. Uses the existing Koszul resolution and restriction theorems directly; two new holes, not a net hole reduction."
  },
  "mathlib_searches": [
   {
@@ -120,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T201757-L-3972357",
+  "landing": "20261013T211112-L-394675",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

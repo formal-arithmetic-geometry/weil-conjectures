@@ -6,8 +6,11 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.AlgebraicGeometry.LocalKoszulAugmentedCarrier
+import Sheaf.AlgebraicGeometry.LocalKFlatTensorRoof
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import Sheaf.RingTheory.KoszulProjectiveResolution
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Local zero-differential tensor models
 
@@ -66,6 +69,26 @@ theorem local_tensor_has_finite_free_zero_model
       HasFiniteFreeZeroModel
         (V.toScheme.ringCatSheaf.over (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)))
         ((moduleOpenOverComplexFunctor Z V (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1))).obj T) := by
-  sorry
+  dsimp only
+  intro V U hU
+  obtain ⟨m, f, hf, hreg⟩ := hU
+  obtain ⟨Q, hQ⟩ := ExteriorAlgebra.exists_koszul_projective_resolution
+    (Γ(Y, U.1) : Type u) (i.ker.ideal U) m f hreg hf
+  obtain ⟨K, b, hK, hzero, hbound, hfree⟩ :=
+    exists_local_koszul_augmented_carrier i V U m f hf Q hQ
+  let F := (Scheme.Modules.restrictFunctor U.1.ι).mapHomologicalComplex (.up ℤ)
+  have : PreservesFiniteLimits (Scheme.Modules.restrictFunctor U.1.ι) := inferInstance
+  have : PreservesFiniteColimits (Scheme.Modules.restrictFunctor U.1.ι) := inferInstance
+  have : (Scheme.Modules.restrictFunctor U.1.ι).PreservesHomology := inferInstance
+  have : QuasiIso a := _hP.1
+  have hPa : CochainComplex.IsKFlatResolution (R := U.1.toScheme.sheaf) (F.map a) :=
+    by
+      refine ⟨?_, isKFlat_restrict U.1.ι P _hP.2⟩
+      change QuasiIso
+        (((Scheme.Modules.restrictFunctor U.1.ι).mapHomologicalComplex (.up ℤ)).map a)
+      infer_instance
+  obtain ⟨L, q, p, hq, hp⟩ :=
+    exists_local_kflat_tensor_roof i V U.1 P K _ (F.map a) b hPa hK
+  exact ⟨_, L, q, p, hq, hp, hzero, hbound, hfree⟩
 
 end AlgebraicGeometry
