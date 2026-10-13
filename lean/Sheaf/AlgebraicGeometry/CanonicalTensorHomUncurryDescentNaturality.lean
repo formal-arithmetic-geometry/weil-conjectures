@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDifferential
+import Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryChainNaturality
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # Naturality forced by componentwise uncurrying
 
@@ -23,6 +25,82 @@ noncomputable section
 universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
+
+private theorem derived_arrow_rep
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    {A B : DerivedCategory C} (a : A ⟶ B) :
+    ∃ (P Q : CochainComplex C ℤ) (g : P ⟶ Q)
+      (eP : DerivedCategory.Q.obj P ≅ A) (eQ : DerivedCategory.Q.obj Q ≅ B),
+      eP.hom ≫ a = DerivedCategory.Q.map g ≫ eQ.hom := by
+  let P := (DerivedCategory.Q (C := C)).objPreimage A
+  let Q := (DerivedCategory.Q (C := C)).objPreimage B
+  let eP := (DerivedCategory.Q (C := C)).objObjPreimageIso A
+  let eQ := (DerivedCategory.Q (C := C)).objObjPreimageIso B
+  obtain ⟨R, s, hs, g, hg⟩ := DerivedCategory.right_fac (eP.hom ≫ a ≫ eQ.inv)
+  let := hs
+  refine ⟨R, Q, g, asIso (DerivedCategory.Q.map s) ≪≫ eP, eQ, ?_⟩
+  have h := congrArg (fun f ↦ DerivedCategory.Q.map s ≫ f ≫ eQ.hom) hg
+  simpa [Category.assoc] using h
+
+private theorem naturality_transport
+    {D : Type*} [Category D] [MonoidalCategory D]
+    (H : Dᵒᵖ × D ⥤ D)
+    (t : ∀ K L M : D, (K ⟶ H.obj (op L, M)) → (K ⊗ L ⟶ M))
+    (hi : ∀ (K K' L L' M M' : D) (a : K' ≅ K) (b : L' ≅ L) (c : M ≅ M')
+      (f : K ⟶ H.obj (op L, M)),
+      t K' L' M' (a.hom ≫ f ≫ H.map (b.hom.op, c.hom)) =
+        (a.hom ⊗ₘ b.hom) ≫ t K L M f ≫ c.hom)
+    {K K' L L' M M' P P' N N' I I' : D}
+    (eK : P ≅ K) (eK' : P' ≅ K') (eL : N ≅ L) (eL' : N' ≅ L')
+    (eM : I ≅ M) (eM' : I' ≅ M')
+    (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
+    (a₀ : P' ⟶ P) (b₀ : N' ⟶ N) (c₀ : I ⟶ I')
+    (ha : eK'.hom ≫ a = a₀ ≫ eK.hom)
+    (hb : eL'.hom ≫ b = b₀ ≫ eL.hom)
+    (hc : eM.hom ≫ c = c₀ ≫ eM'.hom)
+    (hn : ∀ f : P ⟶ H.obj (op N, I),
+      t P' N' I' (a₀ ≫ f ≫ H.map (X := (op N, I)) (Y := (op N', I')) (b₀.op, c₀)) =
+        (a₀ ⊗ₘ b₀) ≫ t P N I f ≫ c₀)
+    (f : K ⟶ H.obj (op L, M)) :
+    t K' L' M' (a ≫ f ≫ H.map (b.op, c)) =
+      (a ⊗ₘ b) ≫ t K L M f ≫ c := by
+  have hc' : c ≫ eM'.inv = eM.inv ≫ c₀ := by
+    have h := congrArg (fun g ↦ eM.inv ≫ g ≫ eM'.inv) hc
+    simpa [Category.assoc] using h
+  have hm :
+      H.map (X := (op L, M)) (Y := (op L', M')) (b.op, c) ≫
+        H.map (X := (op L', M')) (Y := (op N', I')) (eL'.hom.op, eM'.inv) =
+      H.map (X := (op L, M)) (Y := (op N, I)) (eL.hom.op, eM.inv) ≫
+        H.map (X := (op N, I)) (Y := (op N', I')) (b₀.op, c₀) := by
+    rw [← H.map_comp, ← H.map_comp]
+    congr 1
+    ext
+    · exact congrArg Quiver.Hom.op hb
+    · exact hc'
+  have hinput : eK'.hom ≫ (a ≫ f ≫ H.map (X := (op L, M)) (Y := (op L', M')) (b.op, c)) ≫
+      H.map (X := (op L', M')) (Y := (op N', I')) (eL'.hom.op, eM'.inv) =
+      a₀ ≫ (eK.hom ≫ f ≫
+        H.map (X := (op L, M)) (Y := (op N, I)) (eL.hom.op, eM.inv)) ≫
+          H.map (X := (op N, I)) (Y := (op N', I')) (b₀.op, c₀) := by
+    simp only [Category.assoc]
+    rw [← Category.assoc eK'.hom a, ha]
+    simp only [Category.assoc]
+    rw [hm]
+  have h := hn (eK.hom ≫ f ≫
+    H.map (X := (op L, M)) (Y := (op N, I)) (eL.hom.op, eM.inv))
+  have ht := hi K' P' L' N' M' I' eK' eL' eM'.symm (a ≫ f ≫ H.map (b.op, c))
+  have hs := hi K P L N M I eK eL eM.symm f
+  dsimp only [Iso.symm_hom] at ht hs
+  simp only [Category.assoc] at hinput h ht hs
+  rw [← hinput, ht, hs] at h
+  have hab : (a₀ ⊗ₘ b₀) ≫ (eK.hom ⊗ₘ eL.hom) =
+      (eK'.hom ⊗ₘ eL'.hom) ≫ (a ⊗ₘ b) := by
+    rw [tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, ha, hb]
+  simp only [Category.assoc] at h
+  rw [← Category.assoc (a₀ ⊗ₘ b₀), hab] at h
+  apply (cancel_epi (eK'.hom ⊗ₘ eL'.hom)).mp
+  apply (cancel_mono eM'.inv).mp
+  simpa only [Category.assoc, hc'] using h
 
 /-- The representative localization equation forces three-variable naturality.
 Assume also transport along isomorphisms; this is essential when the chosen
@@ -81,6 +159,17 @@ theorem tensorHomUncurry_descent_natural (X : Scheme.{u})
       t K' L' M' (a ≫ f ≫
         (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
           X.toRingedSpace.sheaf).map (b.op, c)) =
-        (a ⊗ₘ b) ≫ t K L M f ≫ c := by sorry
+        (a ⊗ₘ b) ≫ t K L M f ≫ c := by
+  let := schemeDerivedTensorMonoidal X
+  have hn := tensorHomUncurry_chain_natural X t ht hi
+  intro K K' L L' M M' a b c f
+  obtain ⟨P', P, a₀, eK', eK, ha⟩ := derived_arrow_rep a
+  obtain ⟨N', N, b₀, eL', eL, hb⟩ := derived_arrow_rep b
+  obtain ⟨I, I', c₀, eM, eM', hc⟩ := derived_arrow_rep c
+  exact naturality_transport
+    (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+      X.toRingedSpace.sheaf) t hi eK eK' eL eL' eM eM'
+    a b c (DerivedCategory.Q.map a₀) (DerivedCategory.Q.map b₀) (DerivedCategory.Q.map c₀)
+    ha hb hc (hn P P' N N' I I' a₀ b₀ c₀) f
 
 end AlgebraicGeometry

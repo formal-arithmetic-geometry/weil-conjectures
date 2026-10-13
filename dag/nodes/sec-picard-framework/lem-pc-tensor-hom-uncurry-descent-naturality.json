@@ -13,32 +13,39 @@
  ],
  "proof": [
   {
-   "text": "Choose K-flat representatives for the four source objects K,K',L,L',\nand the functorial K-injective models for M and M'. Represent maps between them\nby roofs, using common K-flat resolutions for source denominators. Maps to a\nK-injective complex are actual chain maps modulo homotopy. On these models,\nrestrict the two uncurried chain maps to every total tensor summand. Naturality\nof the sheaf tensor-Hom adjunction and of the Hom product projections identifies\nboth sides with evaluation after precomposition in P and L and postcomposition\nin I(M). The coproduct universal property proves equality of the chain maps.\nApply Q and the assumed representative equation to these chain maps. Naturality\nof Q's lax tensor map, of the derived Hom localization factorization, and of the\nfunctorial resolution map gives the claimed equality on representatives.\nUse the assumed isomorphism transport to cancel the localized quasi-isomorphisms\nin the roofs and the representative isomorphisms to obtain the equation for\narbitrary derived maps a,b,c. Homotopy invariance ensures that none of the roof\nchoices affects the calculation. The identity and zero-map cases obey the same\ncomponent equation, without boundedness assumptions.",
+   "text": "Apply lem-pc-tensor-hom-uncurry-chain-naturality to obtain simultaneous naturality for Q-images of actual chain maps, with arbitrary derived input f. This retains the componentwise evaluation calculation and K-flat/K-injective route of the original proof.",
    "uses": [
-    "lem-pc-tensor-hom-uncurry-differential",
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-pc-tensor-hom-uncurry-chain-naturality"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each of a, b, c separately, choose source and target complex representatives using essential surjectivity of Q. Conjugate the arrow by the endpoint isomorphisms and apply Mathlib DerivedCategory.right_fac, the cochain specialization of right-fraction representation. If the conjugated arrow is inv(Qs) followed by Qg, absorb the invertible Qs into the source endpoint isomorphism. This produces a chain map and two endpoint isomorphisms with commuting arrow square. No chosen complex is defined from a holed existence theorem: the representatives and fractions are local witnesses in a proof.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport f to the source representatives by eK.hom followed by f followed by RHom(eL.hom,eM.inv). The arrow squares and the functor map_comp law show that pre/postcomposing this input by the three chain maps equals transporting the original transformed input. Apply chain-map naturality, then apply hi once to the source value and once to the target value. The tensor interchange law identifies the two tensor composites. Cancel the tensor of the source endpoint isomorphisms on the left and the target endpoint inverse on the right. This gives precisely the asserted equality for arbitrary a,b,c. This is the private naturality_transport proof; it uses no linearity or bijectivity of t.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-tensor-hom-uncurry-differential",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-tensor-hom-uncurry-chain-naturality",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E3",
+  "group": "W3",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; component calculation expanded by worker"
+  "place": "Tags 08DJ, 0A90, 0A96; categorical roof transport proved in Lean using Mathlib DerivedCategory.right_fac"
  },
  "mathlib_searches": [
   {
@@ -194,9 +201,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T045523-L-127105",
+  "landing": "20261013T060430-L-586328",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
