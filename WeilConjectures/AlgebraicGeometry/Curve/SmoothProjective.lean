@@ -92,7 +92,6 @@ theorem Scheme.Hom.isOfRelativeDimension_of_smoothOfRelativeDimension (f : X ⟶
 
 end RelativeDimension
 
-
 section Curve
 
 variable {K : Type u} [Field K] {X : Scheme.{u}}

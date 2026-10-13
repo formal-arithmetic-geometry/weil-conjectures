@@ -7,8 +7,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
-public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence
-public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExists
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearUnique
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRepresentatives
 public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTop
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
