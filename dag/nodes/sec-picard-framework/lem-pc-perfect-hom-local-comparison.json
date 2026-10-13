@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-perfect-hom-local-comparison",
+ "kind": "statement",
+ "title": "Local continuity implies bijectivity of products of pinned comparisons",
+ "statement": "Assume the directed index I, ring diagram R, cocone c, stage i and structure map s₀:X→Spec(R_i) of [def-pc-perfect-hom-continuity-on]. If PerfectHomLocalMap(U,V,m) holds [def-pc-perfect-hom-local-map], and PerfectHomContinuityOn holds on U,V,U∩V, then the underlying function m is bijective.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step; https://stacks.math.columbia.edu/tag/09RE checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-hom-local-map",
+  "def-pc-perfect-hom-continuity-on"
+ ],
+ "proof": [
+  {
+   "text": "For a basic map open its local presentation. Use the corresponding continuity hypothesis at its presenting scheme and perfect pair. Every source colimit element has a representative. Move two representatives to a common stage. If their images under m agree, the pinning equations identify the limit Hom images. The eventual-equality clause gives equality at a later stage; injectivity of ident and the cocone equations give equality in d.pt, then injectivity of a gives equality in the source.",
+   "uses": [
+    "def-pc-perfect-hom-local-comparison",
+    "def-pc-perfect-hom-continuity-on",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a desired target element use the representative clause starting at i on its image under b. Pull the stage Hom representative back with ident⁻¹ and then with a⁻¹. The pinning equation and injectivity of b give the required preimage. This also handles empty Hom sets.",
+   "uses": [
+    "def-pc-perfect-hom-continuity-on",
+    "def-pc-perfect-hom-local-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the local-map construction. Products preserve injectivity componentwise and preserve surjectivity by choosing the two preimages. Composition with equivalences preserves bijectivity.",
+   "uses": [
+    "def-pc-perfect-hom-local-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-hom-continuity-on",
+  "def-pc-perfect-hom-local-comparison",
+  "def-pc-perfect-hom-local-map",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step",
+  "note": "Explicit intermediate construction or recognition step of the existing comparison plan; no unit route changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local Hom filtered colimit comparison is bijective for perfect complexes",
+   "results": "UNAVAILABLE: Internal Server Error. Other searches and local source inspection were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes Hom filtered colimit Mayer Vietoris exact comparison",
+   "results": "MayerVietorisSquare.shortComplex_exact and HomologicalComplex.ab5OfSize, but no pinned scheme-derived Hom functor or local comparison recognition. Loogle for CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff found the generic set-colimit equality criterion; this is not the scheme comparison statement.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomMap|perfectStageMap|PerfectHomLocalComparison|perfect_hom_stage_colimit; blueprint filtered Hom, local continuity, Hom colimit, Mayer-Vietoris",
+   "results": "PerfectHomTransport supplies canonical maps, their composition and limit compatibility; no stage Hom functor or local recognition predicate/theorem exists. Blueprint searches found no matching imported node.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE, Mayer--Vietoris induction step; full-faithfulness via Mayer--Vietoris Hom continuity",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-comparison",
+    "lem-pc-perfect-hom-continuity-union",
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomLocalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.PerfectHomLocalMap.bijective",
+  "statement": "theorem PerfectHomLocalMap.bijective [IsDirected I (· ≤ ·)] (U V : X.Opens)\n    {α β : Type (max u w)} {m : α → β}\n    (hm : PerfectHomLocalMap R c i X s₀ U V m)\n    (hU : PerfectHomContinuityOn R c i X s₀ U)\n    (hV : PerfectHomContinuityOn R c i X s₀ V)\n    (hUV : PerfectHomContinuityOn R c i X s₀ (U ⊓ V)) : Function.Bijective m",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

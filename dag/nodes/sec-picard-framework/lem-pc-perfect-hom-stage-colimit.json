@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-perfect-hom-stage-colimit",
+ "kind": "statement",
+ "title": "The functor and colimit of stage Hom sets",
+ "statement": "For any preordered set I, diagram R:I→CommRing, i∈I, scheme Y with s:Y→Spec(R_i), and P,Q in its derived category [def-pc-derived-category], assuming all scheme derived categories exist, there are H:tail(≥i)→Type(max u w), a colimit cocone d and ident_j:H_j≃Hom(P_j,Q_j), where P_j,Q_j are the derived pullbacks [def-pc-derived-pullback]. Under ident, H.map(j≤k) is exactly perfectStageMap [lem-pc-perfect-hom-transport]. No directedness, finite presentation, perfectness or continuity is assumed. Colimits are in the sense of [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, filtered Hom system; Tag 0D5S, identity and composition coherence; https://stacks.math.columbia.edu/tag/09RE checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-perfect-hom-transport",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Transport along an identity is idempotent by perfectHomMap_trans. It is injective: baseChangeMap sends identities to identities, and the derived pullback of an identity is naturally isomorphic to the identity functor by exists_derivedPullbackComposition. Faithfulness therefore makes its map on Hom injective; conjugation by isomorphisms preserves this. An injective idempotent is the identity.",
+   "uses": [
+    "lem-pc-perfect-hom-transport",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define H_j as ULift of the stage Hom set and define its maps using perfectStageMap. The preceding argument gives map_id. For map_comp apply perfectHomMap_trans, then equality of the two Over arrows follows by extensionality, Spec.map_comp and R.map_comp. Define ident as Equiv.ulift.",
+   "uses": [
+    "lem-pc-perfect-hom-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the ordinary Type colimit cocone and colimit.isColimit. The transition equation is definitional. This constructs all data and needs no arbitrary witness of geometric existence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, filtered Hom system; Tag 0D5S, identity and composition coherence",
+  "note": "Explicit intermediate construction or recognition step of the existing comparison plan; no unit route changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local Hom filtered colimit comparison is bijective for perfect complexes",
+   "results": "UNAVAILABLE: Internal Server Error. Other searches and local source inspection were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes Hom filtered colimit Mayer Vietoris exact comparison",
+   "results": "MayerVietorisSquare.shortComplex_exact and HomologicalComplex.ab5OfSize, but no pinned scheme-derived Hom functor or local comparison recognition. Loogle for CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff found the generic set-colimit equality criterion; this is not the scheme comparison statement.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomMap|perfectStageMap|PerfectHomLocalComparison|perfect_hom_stage_colimit; blueprint filtered Hom, local continuity, Hom colimit, Mayer-Vietoris",
+   "results": "PerfectHomTransport supplies canonical maps, their composition and limit compatibility; no stage Hom functor or local recognition predicate/theorem exists. Blueprint searches found no matching imported node.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE, filtered Hom system; Tag 0D5S, identity and composition coherence; full-faithfulness via Mayer--Vietoris Hom continuity",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-comparison",
+    "lem-pc-perfect-hom-continuity-union",
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomStageColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomStageColimit.lean",
+  "declaration": "AlgebraicGeometry.perfect_hom_stage_colimit",
+  "statement": "theorem perfect_hom_stage_colimit\n    {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (i : I)\n    (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (P Q : schemeDerivedCategory Y) :\n    ∃ (H : Set.Ici i ⥤ Type (max u w)) (d : Cocone H),\n      Nonempty (IsColimit d) ∧\n      ∃ (ident : ∀ j : Set.Ici i, H.obj j ≃\n          ((derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj P ⟶\n           (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.property))))).obj Q)),\n        (∀ (j k : Set.Ici i) (hjk : j ≤ k) (f : H.obj j),\n          ident k (H.map (homOfLE hjk) f) =\n            perfectStageMap R s j.property hjk (ident j f))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

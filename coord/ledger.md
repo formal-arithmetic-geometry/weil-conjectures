@@ -12547,3 +12547,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:00 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CanonicalTensorModelInputNaturality (stage 3; reviewer PASS; first push; landing 20261013T130032-L-3922565 (proof); batch 20261013T130030; modules 1; new nodes 0)
 - 13:00 L: merged deliver/E3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCycleRealization (stage 3; reviewer PASS; first push; landing 20261013T130032-L-3922743 (interface); batch 20261013T130030; modules 3; new nodes 2)
 - 13:00 L: merged deliver/E4/Sheaf.AlgebraicGeometry.PicardRightCechCupHomology (stage 3; reviewer PASS; first push; landing 20261013T130033-L-3922856 (interface); batch 20261013T130030; modules 2; new nodes 1)
+- 13:00 L: merged deliver/F2/Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison (stage 3; reviewer PASS; first push; landing 20261013T130033-L-3923061 (interface); batch 20261013T130030; modules 4; new nodes 5)

@@ -1,0 +1,106 @@
+{
+ "id": "def-pc-perfect-hom-local-map",
+ "kind": "definition",
+ "title": "Maps built from the three local Hom comparisons",
+ "statement": "For the data of [def-pc-perfect-hom-local-comparison] and opens U,V of X, PerfectHomLocalMap(U,V,m) is the inductively generated predicate on functions: a map with a pinned local comparison presentation on U, V or U∩V is basic; the binary product of two generated maps is generated; and conjugation of a generated map by any equivalences of its source and target is generated. There are no other constructors and no invertibility assertions.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step; https://stacks.math.columbia.edu/tag/09RE checked 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-hom-local-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE, Mayer--Vietoris induction step",
+  "note": "Explicit intermediate construction or recognition step of the existing comparison plan; no unit route changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local Hom filtered colimit comparison is bijective for perfect complexes",
+   "results": "UNAVAILABLE: Internal Server Error. Other searches and local source inspection were used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes Hom filtered colimit Mayer Vietoris exact comparison",
+   "results": "MayerVietorisSquare.shortComplex_exact and HomologicalComplex.ab5OfSize, but no pinned scheme-derived Hom functor or local comparison recognition. Loogle for CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff found the generic set-colimit equality criterion; this is not the scheme comparison statement.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "perfectHomMap|perfectStageMap|PerfectHomLocalComparison|perfect_hom_stage_colimit; blueprint filtered Hom, local continuity, Hom colimit, Mayer-Vietoris",
+   "results": "PerfectHomTransport supplies canonical maps, their composition and limit compatibility; no stage Hom functor or local recognition predicate/theorem exists. Blueprint searches found no matching imported node.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE, Mayer--Vietoris induction step; full-faithfulness via Mayer--Vietoris Hom continuity",
+   "via": [
+    "lem-pc-perfect-hom-mayer-vietoris-comparison",
+    "lem-pc-perfect-hom-continuity-union",
+    "lem-pc-perfect-hom-continuity",
+    "lem-pc-perfect-descend-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomLocalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.PerfectHomLocalMap",
+  "statement": "inductive PerfectHomLocalMap (U V : X.Opens) :\n    {α β : Type (max u w)} → (α → β) → Prop",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T130033-L-3923061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,14 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectHomContinuityOn
 public import Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.AlgebraicGeometry.PerfectThickClosure
-import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+
+import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisLocalRows
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
 /-! # The five-term comparison diagram for perfect Hom continuity
 
@@ -108,6 +104,18 @@ theorem perfect_hom_mayerVietoris_comparison
           IsIso (ComposableArrows.app' φ 3) ∧ IsIso (ComposableArrows.app' φ 4) ∧
           ∀ (j : Set.Ici i) (f : H.obj j),
             b ((ComposableArrows.app' φ 2) (a (d.ι.app j f))) =
-              perfectLimitMap R c s j.property (ident j f) := by sorry
+              perfectLimitMap R c s j.property (ident j f) := by
+  obtain ⟨H, d, ⟨hd⟩, ident, htransition⟩ := perfect_hom_stage_colimit R i Y s P Q
+  obtain ⟨A, B, φ, a, b, hA, hB, h0, h1, h3, h4, hpin⟩ :=
+    perfect_hom_mayerVietoris_local_rows R c hc i X s₀ U V hU hV
+      Y t ht s hs P Q hP hQ H d hd ident htransition
+  have hbij {α β : Type (max u w)} {m : α → β}
+      (hm : PerfectHomLocalMap R c i X s₀ U V m) : Function.Bijective m :=
+    PerfectHomLocalMap.bijective R c i X s₀ U V hm hcontU hcontV hcontUV
+  refine ⟨H, d, ⟨hd⟩, ident, htransition, A, B, φ, a, b, hA, hB, ?_, ?_, ?_, ?_, hpin⟩
+  · exact (ConcreteCategory.isIso_iff_bijective _).2 (hbij h0)
+  · exact (ConcreteCategory.isIso_iff_bijective _).2 (hbij h1)
+  · exact (ConcreteCategory.isIso_iff_bijective _).2 (hbij h3)
+  · exact (ConcreteCategory.isIso_iff_bijective _).2 (hbij h4)
 
 end AlgebraicGeometry
