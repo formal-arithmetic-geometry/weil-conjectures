@@ -1,0 +1,111 @@
+{
+ "id": "def-sbc-raw-scalar-source-factors",
+ "kind": "definition",
+ "title": "AlgebraicGeometry.Etale.scalarSourceFactor",
+ "statement": "For a commutative ring Λ in Type(u+1), schemes S,Y,Y′, arrows a:Y′→Y, h:Y→S, h′:Y′→S with a≫h=h′, a Λ-module sheaf L on S, an abelian sheaf E on S and t:E→forget(L), construct the degree-zero scalar source factor single(h* t≫scalar pullback) followed by the inverse forgetting single comparison [def-sbc-raw-module-scalar-pullback-comparison]. Construct also the module and abelian source factors single(upperStarComp.hom) followed by the corresponding inverse pullback single comparison [lem-weil-pbc-inverse-image-composition].",
+ "source": {
+  "document": "proof of lem-sbc-raw-scalar-source-square",
+  "place": "stage-3 intermediate"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "stage-3 reduction",
+  "place": "generic derived source-square calculation"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquare",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSourceFactors.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarSourceFactor",
+  "by": "N4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarSourceFactor",
+   "AlgebraicGeometry.Etale.moduleSourceFactor",
+   "AlgebraicGeometry.Etale.abelianSourceFactor"
+  ],
+  "statement": "def scalarSourceFactor (Λ : Type (u + 1)) [CommRing Λ] {S Y : Scheme.{u}} (h : Y ⟶ S) (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (E : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (t : E ⟶ (RawModuleScalarComparison.forget Λ S).obj L) : (DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{u + 1} h).obj E) ⟶ (RawModuleScalarComparison.forget Λ Y).mapDerivedCategoryPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) h).obj L))",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact additive functor on derived categories preserves single complexes and composition comparisons",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. No negative verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functor derived single complex comparison compatible with composition and natural isomorphisms",
+   "date": "2026-10-14",
+   "results": "Eight hits include mapDerivedCategorySingleFunctor and mapDerivedCategoryFactors; none states the whole source square. Used the exact-functor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Unknown identifier; the project extension is found by local rg."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*composition|plus_single_comp|plus_single_natIso",
+   "date": "2026-10-14",
+   "results": "Nine msearch matches concern scalar module operations rather than this square. Local rg finds proved private single-complex calculations in EtalePullbackSingleComp and scalar_unit in RawModuleFreeSourceHomBijective; these are reused as proved private helpers."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-source-square",
+   "place": "intermediate part of the source-square proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

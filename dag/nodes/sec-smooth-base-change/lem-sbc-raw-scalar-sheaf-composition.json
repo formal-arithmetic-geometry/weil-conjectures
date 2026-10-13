@@ -1,0 +1,121 @@
+{
+ "id": "lem-sbc-raw-scalar-sheaf-composition",
+ "kind": "statement",
+ "title": "Scalar forgetting commutes with inverse-image composition on sheaves",
+ "statement": "For [def-sbc-raw-module-scalar-pullback-comparison], let Λ be a commutative ring in Type(u+1), S,Y,Y' schemes in universe u, a:Y'→Y, h:Y→S and h':Y'→S with a≫h=h'. Let L be an étale Λ-module sheaf on S and V_X the scalar-forgetting functor [def-sbc-raw-module-scalar-pullback-comparison]. Write p_f=(pullbackIso Λ f).inv and k_C=upperStarComp C a h h' w.symm [lem-weil-pbc-inverse-image-composition]. Then p_h'(L) ≫ V_Y'(k_Module.hom(L)) = k_Ab.hom(V_S L) ≫ a*_Ab(p_h(L)) ≫ p_a(h*_Module L). This is an equation of sheaf morphisms, before applying single complexes or deriving.",
+ "source": {
+  "document": "Stacks Project; Mathlib; proof of lem-sbc-raw-scalar-source-square",
+  "place": "Tag 03D7; Functor.leftKanExtensionCompIsoOfPreserves_inv_fac; sheafComposeNatTrans_fac; upperStarComp unit equation"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand the canonical scalar comparison into the Kan-extension and sheafification isomorphisms. Their unit equations show that the abelian pullback unit followed by the forgotten comparison equals the forgotten module pullback unit. Apply the adjunction hom equivalence for h′ to the proposed composition equation. The unit form of upperStarComp turns both composites into successive units. Naturality of lowerStarComp moves the two scalar comparison maps past the direct-image composition isomorphism. Naturality of the a-unit moves the h-comparison across it; apply the scalar unit equations for a and h. Scalar forgetting commutes definitionally with pushforwards and their pullback-pasting comparison. Thus both adjoints are identical and injectivity gives the equation.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "Stacks Project; Mathlib; proof of lem-sbc-raw-scalar-source-square",
+  "place": "Tag 03D7; Functor.leftKanExtensionCompIsoOfPreserves_inv_fac; sheafComposeNatTrans_fac; upperStarComp unit equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact additive functor on derived categories preserves single complexes and composition comparisons",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. No negative verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functor derived single complex comparison compatible with composition and natural isomorphisms",
+   "date": "2026-10-14",
+   "results": "Eight hits include mapDerivedCategorySingleFunctor and mapDerivedCategoryFactors; none states the whole source square. Used the exact-functor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Unknown identifier; the project extension is found by local rg."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*composition|plus_single_comp|plus_single_natIso",
+   "date": "2026-10-14",
+   "results": "Nine msearch matches concern scalar module operations rather than this square. Local rg finds proved private single-complex calculations in EtalePullbackSingleComp and scalar_unit in RawModuleFreeSourceHomBijective; these are reused as proved private helpers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquare",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-source-square",
+   "place": "intermediate part of the source-square proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSheafComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSheafComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_sheaf_composition",
+  "statement": "theorem rawModuleScalar_sheaf_composition (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : RawModuleScalarComparison.pullback Λ h' L ≫ (RawModuleScalarComparison.forget Λ Y').map ((upperStarComp (ModuleCat.{u + 1} Λ) a h h' w.symm).hom.app L) = (upperStarComp AddCommGrpCat.{u + 1} a h h' w.symm).hom.app ((RawModuleScalarComparison.forget Λ S).obj L) ≫ (upperStar AddCommGrpCat.{u + 1} a).map (RawModuleScalarComparison.pullback Λ h L) ≫ RawModuleScalarComparison.pullback Λ a ((upperStar (ModuleCat.{u + 1} Λ) h).obj L)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rawModuleScalar_sheaf_composition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

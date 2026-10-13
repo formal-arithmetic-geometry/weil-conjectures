@@ -1,0 +1,112 @@
+{
+ "id": "lem-sbc-raw-scalar-source-square-core",
+ "kind": "statement",
+ "title": "CategoryTheory.Functor.plus_single_source_square_core",
+ "statement": "Let C,D,E,B be abelian categories with derived categories. Let M:C→D, V′:D→B, V:C→E and H:E→B be additive functors preserving finite limits and colimits, and e:M⋙V′≅V⋙H. Fix n∈ℤ, objects LA∈D, LB∈C, EA∈B, EB∈E and maps m:LA→M(LB), k:EA→H(EB), cA:EA→V′(LA), cB:EB→V(LB). Suppose cA≫V′(m)=k≫H(cB)≫e⁻¹(LB). Write sF for the canonical degree-n single-complex comparison D⁺F(F-domain[n])≅F(F-domain)[n], and d=(derived-composition(M,V′))⁻¹≫D⁺e≫derived-composition(V,H). Then (single(cA)≫sV′⁻¹(LA))≫D⁺V′(single(m)≫sM⁻¹(LB))=(single(k)≫sH⁻¹(EB))≫D⁺H(single(cB)≫sV⁻¹(LB))≫d⁻¹(LB[n]).",
+ "source": {
+  "document": "Mathlib; WeilConjectures; EtalePullbackSingleComp",
+  "place": "DerivedCategory.ExactFunctor factorization equations; EtalePullbackSingleComp private single-complex calculations"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "On a single cochain complex the composition and natural-isomorphism comparison equations agree in degree n, and all other components factor through zero objects. Apply localization Q and its factorization naturality to prove the corresponding derived equations. Reflect these equations through the fully faithful bounded-below inclusion. Compose the three equations to obtain the hom form of the single-complex compatibility for d. Postcompose the asserted source square with d.hom and then with H(sV.hom) followed by sH.hom; these maps are isomorphisms. Naturality of sV′ and sH cancels the single comparisons. Functoriality of single reduces the result to the assumed source equation postcomposed with e.hom; cancel e.inv followed by e.hom.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-14",
+  "document": "stage-3 reduction",
+  "place": "generic derived source-square calculation"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquare",
+  "date": "2026-10-14",
+  "group": "N4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquareCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSourceSquareCore.lean",
+  "declaration": "CategoryTheory.Functor.plus_single_source_square_core",
+  "by": "N4",
+  "date": "2026-10-14",
+  "declarations": [
+   "CategoryTheory.Functor.plus_single_source_square_core"
+  ],
+  "statement": "theorem plus_single_source_square_core (M : C ⥤ D) (V' : D ⥤ B) (V : C ⥤ E) (H : E ⥤ B) [M.Additive] [V'.Additive] [V.Additive] [H.Additive] [PreservesFiniteLimits M] [PreservesFiniteColimits M] [PreservesFiniteLimits V'] [PreservesFiniteColimits V'] [PreservesFiniteLimits V] [PreservesFiniteColimits V] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : M ⋙ V' ≅ V ⋙ H) (n : ℤ) {LA : D} {LB : C} {EA : B} {EB : E} (m : LA ⟶ M.obj LB) (k : EA ⟶ H.obj EB) (cA : EA ⟶ V'.obj LA) (cB : EB ⟶ V.obj LB) (hs : cA ≫ V'.map m = k ≫ H.map cB ≫ e.inv.app LB) : ((DerivedCategory.Plus.singleFunctor B n).map cA ≫ (V'.mapDerivedCategoryPlusSingleFunctor n).inv.app LA) ≫ V'.mapDerivedCategoryPlus.map ((DerivedCategory.Plus.singleFunctor D n).map m ≫ (M.mapDerivedCategoryPlusSingleFunctor n).inv.app LB) = ((DerivedCategory.Plus.singleFunctor B n).map k ≫ (H.mapDerivedCategoryPlusSingleFunctor n).inv.app EB) ≫ H.mapDerivedCategoryPlus.map ((DerivedCategory.Plus.singleFunctor E n).map cB ≫ (V.mapDerivedCategoryPlusSingleFunctor n).inv.app LB) ≫ ((mapDerivedCategoryPlusCompIso M V').symm ≪≫ mapDerivedCategoryPlusNatIso e ≪≫ mapDerivedCategoryPlusCompIso V H).inv.app ((DerivedCategory.Plus.singleFunctor C n).obj LB)",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact additive functor on derived categories preserves single complexes and composition comparisons",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: Internal Server Error. No negative verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functor derived single complex comparison compatible with composition and natural isomorphisms",
+   "date": "2026-10-14",
+   "results": "Eight hits include mapDerivedCategorySingleFunctor and mapDerivedCategoryFactors; none states the whole source square. Used the exact-functor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryPlusSingleFunctor",
+   "date": "2026-10-14",
+   "results": "Unknown identifier; the project extension is found by local rg."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*composition|plus_single_comp|plus_single_natIso",
+   "date": "2026-10-14",
+   "results": "Nine msearch matches concern scalar module operations rather than this square. Local rg finds proved private single-complex calculations in EtalePullbackSingleComp and scalar_unit in RawModuleFreeSourceHomBijective; these are reused as proved private helpers."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-source-square",
+   "place": "intermediate part of the source-square proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
