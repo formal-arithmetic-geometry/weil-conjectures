@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.CoefficientSourceAffineTensorPresentation
+import Sheaf.AlgebraicGeometry.CoefficientTargetAffineTensorPresentation
 import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
@@ -23,6 +25,10 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- The coefficient functor and section scalar structures require repeated definitional transport.
 /-- A coefficient comparison morphism with the unit formula is bijective on affine opens.
 This is a single-open statement: no tuples, face maps, or gluing are involved.
 Source: Stacks Project, Tag 02KG (Lemma 30.5.1); Tags 01I9 and 01IA.
@@ -63,7 +69,71 @@ theorem coefficientComparison_affine_bijective {X T : Scheme.{u}} (f : X ⟶ T)
           (q.app ⊤ (coefficientGenerator g _ s)) =
         M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ ⊤ ≤ W)).op
           (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s)) →
-      ∀ B : T'.Opens, IsAffineOpen B → Function.Bijective (q.app B) := by sorry
+      ∀ B : T'.Opens, IsAffineOpen B → Function.Bijective (q.app B) := by
+  classical
+  dsimp only
+  intro q hq B hB
+  let N := (ModuleCat.restrictScalars
+    (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+      ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)).obj
+        ((F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat.obj (op Z))
+  let P := (pullback g).obj ((pullback U.toScheme.toSpecΓ).obj (tilde N))
+  let M := (pullback g').obj F
+  let Q := (pushforward (W.ι ≫ f')).obj (M.restrict W.ι)
+  change P ⟶ Q at q
+  change ∀ s : N, (coefficientSupportIso f' M W ⊤).hom
+    (q.app ⊤ (coefficientGenerator g N s)) =
+    M.presheaf.map (homOfLE (inf_le_left : W ⊓ f' ⁻¹ᵁ ⊤ ≤ W)).op
+      (coefficientPullbackGenerator F (f ⁻¹ᵁ U) Z g' W hW s) at hq
+  let : Algebra Γ(U.toScheme, ⊤) Γ(T', B) :=
+    (g.appLE ⊤ B (by simp)).hom.toAlgebra
+  obtain ⟨a, ha⟩ := exists_coefficientSource_affine_tensor_presentation g N B hB
+  obtain ⟨b, hb⟩ := exists_coefficientTarget_affine_tensor_presentation
+    f F U hU Z hZ g g' f' sq W hW B hB
+  have hgen (s : N) :
+      q.app B (a.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s)) =
+        b.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) := by
+    have hs : a.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) =
+        P.presheaf.map (homOfLE le_top).op (coefficientGenerator g N s) := by
+      apply a.injective
+      rw [a.apply_symm_apply, ha]
+    rw [hs]
+    apply (ConcreteCategory.bijective_of_isIso (coefficientSupportIso f' M W B).hom).1
+    have hn := congrArg (fun k ↦ k (coefficientGenerator g N s))
+      (q.mapPresheaf.naturality (homOfLE (le_top : B ≤ ⊤)).op)
+    simp only [ConcreteCategory.comp_apply] at hn
+    change q.app B (P.presheaf.map (homOfLE le_top).op
+        (coefficientGenerator g N s)) =
+      Q.presheaf.map (homOfLE le_top).op
+        (q.app ⊤ (coefficientGenerator g N s)) at hn
+    rw [hn, coefficientSupportIso_naturality, hq, hb]
+    simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    rfl
+  let qlin : Γ(P, B) →ₗ[Γ(T', B)] Γ(Q, B) := (q.val.app (op B)).hom
+  change Γ(P, B) ≃ₗ[Γ(T', B)] (TensorProduct Γ(U.toScheme, ⊤) Γ(T', B) N) at a
+  change Γ(Q, B) ≃ₗ[Γ(T', B)] (TensorProduct Γ(U.toScheme, ⊤) Γ(T', B) N) at b
+  change ∀ s : N, qlin (a.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s)) =
+    b.symm (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) at hgen
+  have hcompare (t : TensorProduct Γ(U.toScheme, ⊤) Γ(T', B) N) :
+      qlin (a.symm t) = b.symm t := by
+    induction t using TensorProduct.induction_on with
+    | zero =>
+      rw [a.symm.map_zero, b.symm.map_zero]
+      exact qlin.map_zero
+    | tmul r s =>
+      have ht : TensorProduct.tmul Γ(U.toScheme, ⊤) r s =
+          r • (TensorProduct.tmul Γ(U.toScheme, ⊤) (1 : Γ(T', B)) s) := by
+        simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      rw [ht, a.symm.map_smul, qlin.map_smul, hgen, b.symm.map_smul]
+    | add t t' ht ht' =>
+      rw [a.symm.map_add, qlin.map_add, ht, ht', b.symm.map_add]
+  have heq : (fun x ↦ q.app B x) = fun x ↦ b.symm (a x) := by
+    funext x
+    change qlin x = b.symm (a x)
+    simpa only [a.symm_apply_apply] using hcompare (a x)
+  change Function.Bijective (fun x ↦ q.app B x)
+  rw [heq]
+  exact b.symm.bijective.comp a.bijective
 
 end
 end AlgebraicGeometry.Scheme.Modules

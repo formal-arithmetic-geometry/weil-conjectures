@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-coefficient-source-affine-tensor-presentation",
+ "kind": "statement",
+ "title": "Unit-compatible tensor presentation of associated-module source sections",
+ "statement": "Let S and Sprime be schemes [def-pc-scheme], g:Sprime -> S a morphism, N a module over A=Gamma(S,O), and B an affine open of Sprime. Use the standard module pullback [def-pc-module-pullback] and associated module [lem-weil-pbc-spec-module-tilde-sections]. Put R=Gamma(B,O) with A-algebra structure g.appLE top B, and P=g^*(S.toSpecGamma)^*(tilde N). There exists an R-linear equivalence e:Gamma(B,P) -> R tensor_A N taking the restriction to B of coefficientGenerator(g,N,s) [lem-pc-finite-affine-cech-coefficient-comparison-map] to 1 tensor s for every s in N. No affineness of S or Sprime and no comparison morphism is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-finite-affine-cech-coefficient-comparison-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I9 (Lemma 26.7.3), 01IA (Lemma 26.7.4)"
+ },
+ "proof": [
+  {
+   "text": "Compose g with S.toSpecGamma and restrict to the affine scheme B. Pullback\ncomposition is the unique isomorphism of left adjoints compatible with their units.\nThe affine pullback section formula for this composite identifies the sections with\nR tensor_A N, where A = Gamma(S,O) and R = Gamma(B,O). The ring map A -> R is\ng.appLE top B: the canonical GammaSpecIso cancels the chart's scalar map. The unit\nof the tilde/Gamma adjunction sends s to tilde.toOpen N top s. Compatibility of\ncomposite pullback units therefore sends the displayed coefficientGenerator,\nrestricted to B, to 1 tensor s. Swap tensor factors if the section formula is\nwritten N tensor_A R. The formula and equivalence are also valid for B empty\nor N zero, since both sides then have the corresponding zero module.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Affine tensor calculation of Tags 01I9, 01IA",
+  "note": "M2: standard-unit and open-restriction transport supplied explicitly from the parent plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a pulled back associated module on an affine open are extension of scalars with unit tensor generators",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On affine opens a morphism from the pullback of an associated module to the pushforward of a quasi-coherent pullback is bijective if it agrees on unit generators",
+   "results": "Found SheafOfModules.bijective_pushforwardSections and Scheme.Modules.Hom.isIso_iff_isIso_app, neither supplies a unit-compatible tensor section presentation.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span, LinearMap",
+   "results": "Found linear-combination spanning lemmas; none supplies the geometric presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientGenerator|exists.*tensorPullback.*sections|toOpen|span in lean/Sheaf, lean/WeilConjectures and Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "ModulePullbackAffineSections uses tensorPullback with an existential adjunction unit, not the displayed standard pullback unit. Tilde has isoTop and the tilde/Gamma adjunction. AffinePushforwardBaseChange gives a standard spectral tensor calculation, not these open-restricted presentations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme pullback quasicoherent module sections extension scalars canonical unit",
+   "results": "Second reader: pullbackPushforwardAdjunction, pullbackObjFreeIso and related units, not the affine-open tensor presentation.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "results": "Second reader: pullback composition and adjunction comparisons supply unit transport, not the full section presentation.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor/pullback, tilde/base, fromTildeΓ in lean/Sheaf and lean/WeilConjectures; read Modules/PullbackTilde.lean",
+   "results": "Second reader: tildePullbackΓEquiv_one_tmul and pullbackSpecΓEquiv_one_tmul give the spectral standard-unit formulas; extending to arbitrary affine charts still needs the composition, restriction and scalar transport stated here. No duplicate affine-open presentation.",
+   "date": "2026-10-13",
+   "verdict": "related formulas, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonBijective",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), affine coefficient tensor calculation: associated-module source",
+   "via": [
+    "lem-pc-finite-affine-cech-coefficient-comparison-bijective",
+    "lem-pc-finite-affine-cech-coefficient-base-change",
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientSourceAffineTensorPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientSourceAffineTensorPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coefficientSource_affine_tensor_presentation",
+  "statement": "theorem exists_coefficientSource_affine_tensor_presentation\n    {S S' : Scheme.{u}} (g : S' ⟶ S) (N : ModuleCat.{u} Γ(S, ⊤))\n    (B : S'.Opens) (hB : IsAffineOpen B) :\n    letI : Algebra Γ(S, ⊤) Γ(S', B) := (g.appLE ⊤ B (by simp)).hom.toAlgebra\n    let P := (pullback g).obj ((pullback S.toSpecΓ).obj (tilde N))\n    ∃ e : Γ(P, B) ≃ₗ[Γ(S', B)] (Γ(S', B) ⊗[Γ(S, ⊤)] N),\n      ∀ s : N, e (P.presheaf.map (homOfLE le_top).op\n        (coefficientGenerator g N s)) = (1 : Γ(S', B)) ⊗ₜ[Γ(S, ⊤)] s",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T100030-L-2469397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T100030-L-2469397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
