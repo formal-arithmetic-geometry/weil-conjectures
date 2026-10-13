@@ -14,39 +14,44 @@
  },
  "proof": [
   {
-   "text": "The regular A=f_*O_U module restricted along O_X → A is the module pushforward of the regular O_U module, with identical section objects and scalar actions. Apply the pushout tensor cancellation comparison κ to this regular A-module; the comparison requires no affineness.",
+   "text": "Let A=f_*O_U and G be its regular module. Restriction along O_X→A is definitionally the pushforward of the regular O_U module. Apply affine_module_tensor_baseChange to G and obtain P, its object equality, the cancellation natural isomorphism κ and its canonical-unit formula. No affine hypothesis is used.",
    "uses": [
     "lem-weil-pbc-affine-module-tensor-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the inverse image of the regular A-module with the regular inverse-image ring module. Compare the underlying additive sheaves by the inverse-image universal property; the unit is additive and respects multiplication. Transport the regular action and use uniqueness of extension of the scalar operation, checked on unit images, to identify it with the canonical inverseImageModule action. This yields an IA-linear identification that carries the additive unit of d to its ring unit.",
+   "text": "Apply exists_inverseImage_regularModule_iso to f and A. This yields the IA-linear regular-module comparison q, whose hom carries the additive inverse-image unit to the ring inverse-image unit.",
    "uses": [
-    "def-pc-topological-inverse-image-module",
-    "lem-pc-inverse-image-operation-ext"
+    "stage3-inverse-image-regular-module"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the regular IA-module along t. On the tensor presheaf the maps z tensor a ↦ z*t(a) and z ↦ z tensor 1 are B-linear and inverse: balancing moves t(a) between factors, and multiplication by one is the identity. Their naturality gives inverse maps after sheafification. Restrict scalars along b and compose with κ inverse to obtain e. Its unit formula sends the pullback unit of d to 1*t(η_A(d)) = t(η_A(d)). The same maps apply to the zero algebra and empty open.",
+   "text": "For a ring-sheaf map t:IA→B, use the sectionwise tensor right-unitor AlgebraTensorModule.rid, with formula z tensor a ↦ z*t(a). Naturality on one tensor a follows from naturality of t, and ModuleCat.ExtendScalars.hom_ext gives naturality on all tensors. PresheafOfModules.isoMk and the module sheafification functor turn these sectionwise isomorphisms into a sheaf-module isomorphism. The sheafification counit is invertible since the regular B-module is already a sheaf; the right triangle identity gives the formula after sheafification. Extension of q is obtained by sectionwise extendScalars.mapIso and sheafification; unit naturality supplies its tensor formula.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-affine-module-tensor-base-change"
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compose κ inverse with the restriction along b of the object equality for P and the two regular-module isomorphisms. For each V and d, the κ-unit formula gives the sheafification of 1 tensor η_Ab(d). Naturality of the extended q turns this into 1 tensor q(η_Ab(d)). The regular extension comparison maps it to 1*t(q(η_Ab(d)))=t(η_ring(d)). This is the required section formula for the same isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-module-tensor-base-change",
+    "stage3-inverse-image-regular-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-module-tensor-base-change",
-  "def-pc-topological-inverse-image-module",
-  "lem-pc-inverse-image-operation-ext",
+  "stage3-inverse-image-regular-module",
   "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01SB and 008A",
-  "place": "Expanded regular-module specialization of the scalar-extension construction, step 2 of the affine section injectivity argument"
+  "document": "Stacks Project, Tags 01SB, 008X and 008A; Mathlib tensor and sheafification universal properties",
+  "place": "D2 Lean proof: specialize cancellation to the regular module, construct scalar extension with the tensor right-unitor, and preserve units through the inverse-image comparison"
  },
  "mathlib_searches": [
   {
@@ -129,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T040757-L-3951747",
+  "landing": "20261013T060413-L-581912",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
