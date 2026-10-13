@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
 
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionPresentation
+
 /-! # Gluing flat counit presentations
 
 Source: Stacks Project, Tags 0DJ9 and 08DR.
@@ -61,6 +63,11 @@ theorem standardSingleFlatCounitOnOpen_union
     (hPU : StandardSingleFlatCounitOnOpen p g U)
     (hPV : StandardSingleFlatCounitOnOpen p g V)
     (hPUV : StandardSingleFlatCounitOnOpen p g (U ⊓ V)) :
-    StandardSingleFlatCounitOnOpen p g (U ⊔ V) := by sorry
+    StandardSingleFlatCounitOnOpen p g (U ⊔ V) := by
+  intro N _ hN
+  let _ := hU
+  let _ := hV
+  exact standardSingleFlatCounitPresentation_union_of_open_presentations
+    p g U V N hN hPU hPV hPUV
 
 end AlgebraicGeometry
