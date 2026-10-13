@@ -38,79 +38,56 @@
  ],
  "proof": [
   {
-   "text": "Bottom row (the Jacobi-Zariski sequence of $\\mathbf F_p\\to k\\to K$). Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] with $A=\\mathbf F_p$, $B=k$, $C=K$ and $\\varphi:k\\to K$ the structure map ($K=A/\\mathfrak m$ is a $k$-algebra through $k\\to A\\to K$). Its exact sequence contains $$H_1(L_{K/k})\\xrightarrow{\\ \\partial_k\\ }K\\otimes_k\\Omega_{k/\\mathbf F_p}\\xrightarrow{\\ w_k\\ }\\Omega_{K/\\mathbf F_p},\\qquad w_k(x\\otimes\\mathrm ds)=x\\,\\mathrm d(s\\cdot1_K),$$ exact at the middle term: $\\ker w_k=\\operatorname{im}\\partial_k$. (This is the lower row of the source's diagram, read at $\\Omega_{k/\\mathbf F_p}\\otimes_kK$; the identification $K\\otimes_k\\Omega_{k/\\mathbf F_p}\\cong\\Omega_{k/\\mathbf F_p}\\otimes_kK$, $x\\otimes\\omega\\mapsto\\omega\\otimes x$, is used silently below.)",
+   "text": "The conormal equivalence in the statement is injective. Consequently, injectivity of γ implies injectivity of v = H1Cotangent.map k A K K: if v(h)=v(h′), applying that equivalence gives γ(h)=γ(h′).",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, first diagram (lower row) and the Jacobi-Zariski sequence it produces (Algebra, Lemma Tag 00S2)"
-   }
+   "elementary": true
   },
   {
-   "text": "Top row is injective on the left. Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] with $A=\\mathbf F_p$, $B=A$, $C=K$, $\\varphi:A\\to K$ the quotient map: the part $H_1(L_{K/\\mathbf F_p})\\xrightarrow{v_A}H_1(L_{K/A})\\xrightarrow{\\partial_A}K\\otimes_A\\Omega_{A/\\mathbf F_p}$ is exact at $H_1(L_{K/A})$, so $\\ker\\partial_A=\\operatorname{im}v_A$. The field $K$ receives the field $k$ of characteristic $p$, so $K$ has characteristic $p$ [def-pc-field-characteristic] and [lem-weil-pbc-field-char-p-h1-cotangent-vanishing] gives $H_1(L_{K/\\mathbf F_p})=0$; hence $\\partial_A$ is injective. By the case $S=B$ of [lem-weil-pbc-jacobi-zariski-connecting-map-naturality] (with $R=\\mathbf F_p$, $B=A$, $I=\\mathfrak m$, $C=K$) we have $\\delta\\circ\\theta=\\partial_A$, where $\\theta:H_1(L_{K/A})\\xrightarrow{\\sim}\\mathfrak m/\\mathfrak m^2$ is the isomorphism of [lem-weil-pbc-jacobi-zariski-surjection-h1] and $\\delta:\\mathfrak m/\\mathfrak m^2\\to K\\otimes_A\\Omega_{A/\\mathbf F_p}$, $f\\bmod\\mathfrak m^2\\mapsto1\\otimes\\mathrm df$. Since $\\theta$ is bijective and $\\partial_A$ injective, $\\delta=\\partial_A\\circ\\theta^{-1}$ is injective. (This is the upper row of the source's diagram, exact on the left because $H_1(L_{K/\\mathbf F_p})=0$ by Algebra, Proposition Tag 0322, and with first term $H_1(L_{K/A})=\\mathfrak m/\\mathfrak m^2$ by Algebra, Lemma Tag 07BP.)",
+   "text": "Transfer characteristic p from k to K along the injective field algebra map. Apply the field prime-characteristic vanishing theorem; uniqueness of a ZMod p algebra structure identifies its algebra with the inherited residue-field algebra. Apply the first middle-exactness assertion to ZMod p → A → K. Its map v has subsingleton domain, so its range is zero, the kernel of ∂A is zero, and ∂A is injective.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
     "def-pc-field-characteristic",
     "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+    "lem-weil-pbc-jacobi-zariski-middle-exactness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, upper row of the second diagram; 'We have used that H_1(L_{K/A}) = m/m^2 and that H_1(L_{K/F_p}) = 0 as K/F_p is separable'"
-   }
+   "elementary": false
   },
   {
-   "text": "The left square commutes. Apply [lem-weil-pbc-jacobi-zariski-connecting-map-naturality] with $R=\\mathbf F_p$, $S=k$, $B=A$, $I=\\mathfrak m$, $C=K$: with $\\iota:H_1(L_{K/k})\\to H_1(L_{K/A})$ the map induced by the morphism of presentations $k[K]\\to A[K]$ over the square $k\\to A$, $\\mathrm{id}_K$ [lem-weil-pbc-nl-presentation-h1-functoriality], $\\theta$ as in step 2, $\\partial_k$ the connecting map of step 1, and $c:K\\otimes_k\\Omega_{k/\\mathbf F_p}\\to K\\otimes_A\\Omega_{A/\\mathbf F_p}$, $x\\otimes\\mathrm ds\\mapsto x\\otimes\\mathrm d(s\\cdot1_A)$, it gives $\\delta\\circ\\theta\\circ\\iota=c\\circ\\partial_k$. By the definition in the statement, $\\gamma=\\theta\\circ\\iota$ (the same $\\iota$ and the same $\\theta$ of [lem-weil-pbc-jacobi-zariski-surjection-h1]), and $c$ is $\\lambda$ after the identification of step 1 ($\\lambda(\\mathrm ds\\otimes x)=\\mathrm d(s\\cdot1_A)\\otimes x$). Hence $$\\delta\\circ\\gamma=\\lambda\\circ\\partial_k .$$",
+   "text": "Apply connecting-map naturality with R=ZMod p, S=k, B=A and I=maximalIdeal A. Its two identities imply ∂A composed with v equals c composed with ∂k by associativity. The target lambdaMap sends x tensor y to x tensor map(y): first use IsBaseChange.lift_eq at 1 tensor y, then K-linearity. The specified generator formula for c identifies it with lambdaMap; tensor extensionality and the surjective linear combination of universal differentials reduce this equality to x tensor D(s). Thus ∂A composed with v equals lambdaMap composed with ∂k.",
    "uses": [
     "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-    "lem-weil-pbc-nl-presentation-h1-functoriality",
-    "lem-weil-pbc-jacobi-zariski-surjection-h1"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, second diagram, left square ('to get a commutative diagram')"
-   }
-  },
-  {
-   "text": "The middle square commutes: with $w_A:K\\otimes_A\\Omega_{A/\\mathbf F_p}\\to\\Omega_{K/\\mathbf F_p}$, $x\\otimes\\mathrm da\\mapsto x\\,\\mathrm d\\bar a$, the map $w$ of [lem-weil-pbc-jacobi-zariski-homology-sequence] for $\\mathbf F_p\\to A\\to K$ (the map $u$ of the source's upper row $\\Omega_{A/\\mathbf F_p}\\otimes_AK\\to\\Omega_{K/\\mathbf F_p}$), we have $w_A\\circ\\lambda=w_k$. Both sides are $K$-linear and, on the generators $x\\otimes\\mathrm ds$ ($x\\in K$, $s\\in k$), $w_A(\\lambda(x\\otimes\\mathrm ds))=w_A(x\\otimes\\mathrm d(s\\cdot1_A))=x\\,\\mathrm d(\\overline{s\\cdot1_A})=x\\,\\mathrm d(s\\cdot1_K)=w_k(x\\otimes\\mathrm ds)$, since the image of $s\\cdot1_A$ in $K=A/\\mathfrak m$ is $s\\cdot1_K$; the elements $\\mathrm ds$ generate $\\Omega_{k/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials], so these generators span $K\\otimes_k\\Omega_{k/\\mathbf F_p}$.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
     "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, second diagram, middle square (the vertical arrow $\\Omega_{K/\\mathbf F_p}\\to\\Omega_{K/\\mathbf F_p}$ is the identity)"
-   }
+   "elementary": true
   },
   {
-   "text": "Diagram chase (direction (3) $\\Rightarrow$ (4) of 'the kernels ... have the same dimension', written without dimensions). Let $x\\in\\Omega_{k/\\mathbf F_p}\\otimes_kK$ with $\\lambda(x)=0$. By step 4, $w_k(x)=w_A(\\lambda(x))=0$, so by step 1 $x=\\partial_k(h)$ for some $h\\in H_1(L_{K/k})$. By step 3, $\\delta(\\gamma(h))=\\lambda(\\partial_k(h))=\\lambda(x)=0$; $\\delta$ is injective by step 2, so $\\gamma(h)=0$; $\\gamma$ is injective by hypothesis, so $h=0$ and $x=\\partial_k(0)=0$. Hence $\\lambda$ is injective. (The regularity of $A$ and the Noetherian hypothesis, present in (3) and (4) of 07E5, are not used.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795, last sentence 'Thus it is clear that the kernels of H_1(L_{K/k}) -> m/m^2 and Omega_{k/F_p} (x)_k K -> Omega_{A/F_p} (x)_A K have the same dimension'"
-   }
+   "text": "The right square commutes: wA composed with lambdaMap equals wk. The universal property of differentials reduces the equality of the differential maps to D(s), where compatibility of k → A → K gives identical values. Tensor extensionality and the pure-tensor formula give the equality on all tensors.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For x with lambdaMap(x)=0 the right square gives wk(x)=0. The second middle-exactness assertion for ZMod p → k → K supplies h with ∂k(h)=x. The left square gives ∂A(v(h))=0. Injectivity of ∂A and then v implies h=0, hence x=0. The kernel of lambdaMap is zero, which is equivalent to injectivity.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-middle-exactness"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
   "def-pc-field-characteristic",
   "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "lem-weil-pbc-jacobi-zariski-middle-exactness",
   "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-  "lem-weil-pbc-jacobi-zariski-surjection-h1",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
   "def-weil-pbc-kahler-differentials"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker G1 stage 3",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Proposition Tag 07E5 (proposition-characterization-geometrically-regular), proof, paragraph 'Equivalence of (3) and (4)', lines 8763-8795"
+  "place": "Tag 07E5, equivalence of (3) and (4), using only Mathlib middle exactness from Tag 00S2 and the existing connecting-map naturality and prime-characteristic vanishing theorems"
  },
  "mathlib_searches": [
   {
@@ -183,5 +160,15 @@
   "group": "C1",
   "result": "fix",
   "note": "k field, char p as [Fact p.Prime][CharP k p] (fixed from 0<p); A Noetherian local k-algebra; K = ResidueField A; gamma = h1CotangentEquivCotangent ∘ H1Cotangent.map k A K K verbatim J1 f19521d3d; lambda base-change lift checked on 1⊗da ↦ 1⊗d(a·1_A); injective gamma → injective lambda"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095955-L-2459308",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

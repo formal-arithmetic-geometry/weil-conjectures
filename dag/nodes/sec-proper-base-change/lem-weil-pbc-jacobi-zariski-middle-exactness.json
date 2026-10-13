@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-jacobi-zariski-middle-exactness",
+ "kind": "statement",
+ "title": "The two middle exactness assertions of Jacobi–Zariski",
+ "statement": "Let $R\\to S\\to T$ be homomorphisms of commutative rings, with compatible algebra structures. Let $H_1(L_{T/R})$ and $H_1(L_{T/S})$ be the first homologies of the canonical naive cotangent complexes [def-weil-pbc-smooth-ring-map], and let $v:H_1(L_{T/R})\\to H_1(L_{T/S})$ be the map changing coefficients in the canonical presentations $R[T]\\to S[T]$ [lem-weil-pbc-nl-presentation-h1-functoriality]. Let $\\Omega$ and $\\mathrm d$ be the universal differentials [def-weil-pbc-kahler-differentials]. Let $\\partial:H_1(L_{T/S})\\to T\\otimes_S\\Omega_{S/R}$ be the canonical Jacobi–Zariski connecting map: on a cycle represented by $g=\\sum_\\alpha s_\\alpha[t]^\\alpha$ in the kernel of $S[T]\\to T$, it sends its class to $\\sum_\\alpha \\operatorname{ev}([t]^\\alpha)\\otimes\\mathrm d s_\\alpha$. Let $w:T\\otimes_S\\Omega_{S/R}\\to\\Omega_{T/R}$ send $t\\otimes\\mathrm ds$ to $t\\,\\mathrm d(\\overline s)$. Then $\\ker\\partial=\\operatorname{im}v$ and $\\ker w=\\operatorname{im}\\partial$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), exactness at H1(L_{T/S}) and T tensor_S Omega_{S/R}; verified at https://stacks.math.columbia.edu/tag/00S2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib Algebra.H1Cotangent.exact_map_δ and Algebra.H1Cotangent.exact_δ_mapBaseChange, respectively, to the given tower. These have exactly the canonical coefficient-change map, the coefficient-derivative connecting map, and the base-changed universal differential map specified in the statement. One already-proved Mathlib theorem supplies each assertion; no left term, Tor assertion, or auxiliary presentation comparison is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00S2, the two middle terms, as implemented by Mathlib.RingTheory.Kaehler.JacobiZariski"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sequence H1 of the cotangent complex for a tower of ring algebras to tensor product of Kahler differentials is exact",
+   "results": "UNAVAILABLE: service unavailable, Internal Server Error; no verdict assigned",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of a map on cotangent homology implies injectivity of base changed Kahler differentials using the Jacobi Zariski exact sequence",
+   "results": "Generators.CotangentSpace.map_toComp_injective and Extension.h1Cotangentι_injective; direct exactness results found by Loogle",
+   "date": "2026-10-13",
+   "verdict": "Search succeeded; adjacent exactness checked by Loogle and source reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "results": "Algebra.H1Cotangent.exact_δ_mapBaseChange in Mathlib.RingTheory.Kaehler.JacobiZariski, with precisely Function.Exact δ mapBaseChange for a compatible commutative-ring tower",
+   "date": "2026-10-13",
+   "verdict": "Exact match for the second assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exact_map_δ|exact_δ_mapBaseChange Mathlib/RingTheory/Kaehler/JacobiZariski.lean; rg matching declarations in dag/nodes and Jacobi in imported blueprint",
+   "results": "Mathlib lines 548 and 556 give both assertions. Existing lem-weil-pbc-jacobi-zariski-homology-sequence is strictly larger (left term and Tor criterion); no node states just these two general assertions. The quotient-smooth and field-tower nodes impose additional hypotheses. Blueprint search has no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "One Mathlib lemma per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.H1Cotangent.exact_map_δ, Algebra.H1Cotangent.exact_δ_mapBaseChange",
+  "file": "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+  "line": 548,
+  "how": "Exact match, one already-proved theorem per clause. The second theorem is at line 556. The coefficient formula follows from Generators.H1Cotangent.δ_eq_δAux and δAux_monomial, as used in the existing homology-sequence and naturality modules."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07E5 equivalence of (3) and (4), the Jacobi–Zariski diagram; steps 1 and 2 of the characteristic-p differential-injectivity node",
+   "via": [
+    "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+    "lem-weil-pbc-fs-adic-field-differentials-injective",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.Kaehler.JacobiZariski",
+  "declaration": "Algebra.H1Cotangent.exact_map_δ",
+  "declarations": [
+   "Algebra.H1Cotangent.exact_map_δ",
+   "Algebra.H1Cotangent.exact_δ_mapBaseChange"
+  ],
+  "statement": "lemma H1Cotangent.exact_map_δ : Function.Exact (map R S T T) (δ R S T)",
+  "branch": "mathlib",
+  "by": "G1",
+  "date": "2026-10-13",
+  "note": "Variables R, S, T and the commutative-ring algebra tower are declared in the surrounding section. The second clause is lemma H1Cotangent.exact_δ_mapBaseChange : Function.Exact (δ R S T) (mapBaseChange R S T). Existing Mathlib statements only; no new Lean module."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095955-L-2459308",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095955-L-2459308",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
