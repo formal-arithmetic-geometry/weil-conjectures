@@ -35,7 +35,7 @@ variable (f : X ⟶ T) (ℱ : X.Modules)
 
 section Coherence
 
-variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+variable [IsProper f] [QuasiCompact f]
   [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
 
 /-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With

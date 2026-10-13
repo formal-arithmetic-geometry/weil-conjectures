@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 
 /-!
 # The Euler characteristic of a coherent module on a proper scheme is well defined
@@ -34,15 +35,20 @@ variable (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 include k in
 /-- **Well-definedness of the Euler characteristic.** For a quasi-coherent module `ℱ` on a
 scheme proper over a field `k`, only finitely many cohomology groups `H^q(X, ℱ)` are nonzero
-(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isProper`). For coherent `ℱ`
-each `H^q(X, ℱ)` is moreover finite-dimensional over `k`
+(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). For
+coherent `ℱ` each `H^q(X, ℱ)` is moreover finite-dimensional over `k`
 (`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`).
 
 (blueprint: `lem-pc-euler-characteristic-well-defined`, `rem-ptr-pc-euler-characteristic-13`) -/
 theorem finite_setOf_nontrivial_H_of_isProper (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     {q : ℕ | Nontrivial (ℱ.H q)}.Finite := by
-  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H_of_isProper (k := k) ℱ
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsSeparated (CategoryTheory.Limits.terminal.from X) := by
+    rw [← CategoryTheory.Limits.terminal.comp_from (X ↘ Spec (.of k))]
+    infer_instance
+  obtain ⟨D, hD'⟩ := exists_forall_subsingleton_H_of_isQuasicoherent (X := X)
+  have hD := hD' ℱ
   refine (Set.finite_Iic D).subset fun q hq ↦ ?_
   by_contra h
   have := hD q (not_le.mp h)
