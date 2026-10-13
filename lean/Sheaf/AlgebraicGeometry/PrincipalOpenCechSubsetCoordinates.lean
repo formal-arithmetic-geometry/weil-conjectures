@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenSectionTransport
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionBijective
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionDifferential
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation
 
 /-! # Subset coordinates for the alternating tuple total
 
@@ -108,6 +111,29 @@ theorem principalOpenCech_subset_coordinates
                   AddCommGrpCat).obj
                     ((RingedSpace.globalSectionsFunctor V.toScheme.toRingedSpace).obj
                       (R.obj (J.X n)))
-                exact (principalOpenSectionTransport A V (J.X n)).hom s)) := by sorry
+                exact (principalOpenSectionTransport A V (J.X n)).hom s)) := by
+  intro V D T τ hle hls he hes hdT
+  let F := forget₂ (ModuleCat.{u} A) AddCommGrpCat
+  let b (n : ℤ) := F.mapIso (τ n) ≪≫ principalSubsetInsertionIso A r f J n
+  refine ⟨b, ?_, ?_⟩
+  · intro n
+    apply ConcreteCategory.hom_ext
+    intro s
+    change (principalSubsetTotal A r f J).d n (n + 1)
+      (principalSubsetInsertion A r f J n ((τ n).hom s)) =
+        principalSubsetInsertion A r f J (n + 1) ((τ (n + 1)).hom (T.d n (n + 1) s))
+    rw [principalSubsetInsertion_differential A r f J hle he]
+    congr 1
+    funext S
+    exact (hdT n s S).symm
+  · intro n s
+    change principalSubsetInsertion A r f J n
+      ((τ n).hom ((τ n).inv (fun S ↦ if h : S.val.card = 1 then
+        (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map
+          (homOfLE (hls S h)).op
+          ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app
+            (op V) s) else 0))) = _
+    rw [Iso.inv_hom_id_apply]
+    exact principalSubsetInsertion_augmentation A r f J hls hes n s
 
 end AlgebraicGeometry
