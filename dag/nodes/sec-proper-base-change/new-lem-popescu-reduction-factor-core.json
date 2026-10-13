@@ -10,16 +10,48 @@
  },
  "proof": [
   {
-   "text": "Apply the finite-presentation factorization criterion to the filtered colimit of standard smooth algebras and retain the stage and factor maps.",
+   "text": "Base change finite presentation along R -> R/I and use Algebra.TensorProduct.quotIdealMapEquivQuotTensor to identify the result with A/IA. Construct the reduced map by the quotient universal property and extend scalars along the surjection R -> R/I.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Replace the reduced source by a finite polynomial quotient over R/I, using Algebra.FinitePresentation.iff, and ULift this quotient and the base into the diagram universe. The explicit equivalence between CommAlgCat over R/I and commutative rings under the lifted base, followed by the under-category forgetful functor, preserves the filtered colimit. Apply RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit to the lifted source, and transfer the stage map back along the source equivalence. The chosen stage is standard smooth by the given diagram hypothesis; no increase in the target diagram universe is required.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the chosen standard smooth stage its A/IA-algebra structure through the factor map. It is finitely presented over R/I, while A/IA is finite type over R/I, so Algebra.FinitePresentation.of_restrict_scalars_finitePresentation yields finite presentation over A/IA. Apply the proved private general lifting lemma exists_lifted_presentation, which works for any finitely presented A/IA-algebra C and any ring map to Lambda/I Lambda compatible with phi on A. It chooses Presentation.exists_presentation_fin, lifts each relation coefficientwise by MvPolynomial.map_surjective, and lifts variable images by quotient surjectivity. Polynomial induction proves compatibility of evaluation and reduction; the relations therefore evaluate into I Lambda. The helper returns an A/IA-algebra equivalence of the reduced presentation quotient with C, without smoothness assumptions. Restrict that equivalence to R/I and transport the standard smoothness of this particular stage.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved private exists_sum_of_mem_ringHom_map, valid for every ring homomorphism f and image ideal I.map f, to f = algebraMap R Lambda. Its proof uses Finsupp.mem_ideal_span_range_iff_exists_finsupp and enumeration of finite support to express each lifted relation evaluation as a finite sum of epsilon_ij * mu_ij with epsilon_ij in I. Construct the existing explicit PopescuCorrectionQuotient, with old variables sent to their lifted images and correction variables sent to mu_ij. Evaluation kills each corrected relation by these finite-sum identities. Descend evaluation to the quotient and define the inclusion of A via constant polynomials. Extensionality on A proves the composite is phi, and the finitely generated relation ideal gives finite presentation of the quotient over R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Algebra.nonempty_popescuCorrectionQuotient_reduction_equiv to identify the reduction of the explicit corrected quotient with a finite polynomial extension of the reduced stage presentation. The source-library MvPolynomial.isStandardSmoothOfRelativeDimension instance makes this extension standard smooth over that presentation. Algebra.IsStandardSmooth.trans makes it standard smooth over R/I, and Algebra.IsStandardSmooth.of_algEquiv transfers this to the corrected reduction. The ULift of the finite correction-variable set fixes the carrier universe at max u v w. These constructions allow empty lists, the zero ring and I=top, and require no nilpotence assumption.",
+   "uses": [
+    "lem-weil-pbc-popescu-correction-reduction-equiv"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-popescu-correction-reduction-equiv"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07CK"
+  "place": "Tag 07CK (lemma-lift-once), construction of A-prime through the displayed reduction isomorphism; finite-presentation stage argument adapted from Algebra.exists_smooth_factorization_of_ind_smooth, with a small polynomial quotient to accommodate arbitrary source universes; repair of duplicate-helper rejection: general coefficientwise presentation lifting for arbitrary reduced algebras and finite-sum membership for arbitrary ring homomorphisms",
+  "group": "M2",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -87,10 +119,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T010624-L-2674216",
-  "kind": "interface",
+  "landing": "20261013T040751-L-3949868",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
