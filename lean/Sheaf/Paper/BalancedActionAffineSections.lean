@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Sheaf.Paper.BalancedActionAffineOpen
+import Sheaf.Paper.AffineBaseChangeSectionsInduction
 
 /-! # Balanced actions on affine sections of the direct-image algebra
 
@@ -65,6 +67,59 @@ theorem balancedAction_affine_sections
       (∀ (U : X.affineOpens) (b : B) (x : M.val.obj (op U.val)),
         tau U (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U.val))).op
           (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =
-            (rho b).val.app (op U.val) x) := by sorry
+            (rho b).val.app (op U.val) x) := by
+  classical
+  dsimp only
+  let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let Y := pullback f g
+  let pi : Y ⟶ X := pullback.fst f g
+  let fB : Y ⟶ Spec (.of B) := pullback.snd f g
+  let C := (TopCat.Sheaf.pushforward CommRingCat.{u} pi.base).obj Y.sheaf
+  have hex (U : X.affineOpens) := balancedAction_affine_open f M hM rho hscalar U
+  let tau := fun U ↦ Classical.choose (hex U)
+  have ht (U : X.affineOpens) := Classical.choose_spec (hex U)
+  have hd (U : X.affineOpens) := (ht U).1.1
+  have hb (U : X.affineOpens) := (ht U).1.2
+  refine ⟨tau, ⟨?_, hd, hb⟩, ?_⟩
+  · intro U V i r x
+    have hn : ∀ r : C.obj.obj (op V.val), ∀ x : M.val.obj (op V.val),
+        M.val.map i.op (tau V r x) =
+          tau U (C.obj.map i.op r) (M.val.map i.op x) := by
+      apply affineBaseChange_sections_induction f V
+      · intro d x
+        rw [hd V]
+        have he := (CategoryTheory.congr_fun (pi.naturality i.op) d).symm
+        change C.obj.map i.op (pi.app V.val d) =
+          pi.app U.val (X.presheaf.map i.op d) at he
+        rw [he, hd U]
+        exact M.val.map_smul i.op d x
+      · intro b x
+        rw [hb V]
+        have he : C.obj.map i.op
+            (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ V.val))).op
+              (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) =
+            Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U.val))).op
+              (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b) := by
+          change Y.presheaf.map _ (Y.presheaf.map _ _) = _
+          rw [← CommRingCat.comp_apply, ← Y.presheaf.map_comp]
+          rfl
+        rw [he, hb U]
+        exact (PresheafOfModules.naturality_apply (rho b).val i.op x).symm
+      · intro r s hr hs x
+        rw [map_add, map_add, map_add]
+        change M.val.map i.op (tau V r x + tau V s x) =
+          tau U (C.obj.map i.op r) (M.val.map i.op x) +
+            tau U (C.obj.map i.op s) (M.val.map i.op x)
+        rw [map_add, hr, hs]
+      · intro r s hr hs x
+        rw [map_mul, map_mul, map_mul]
+        change M.val.map i.op (tau V r (tau V s x)) =
+          tau U (C.obj.map i.op r) (tau U (C.obj.map i.op s) (M.val.map i.op x))
+        rw [hr, hs]
+    exact hn r x
+  · intro tau' ht'
+    funext U
+    exact (ht U).2 (tau' U) ⟨ht'.2.1 U, ht'.2.2 U⟩
+
 
 end AlgebraicGeometry
