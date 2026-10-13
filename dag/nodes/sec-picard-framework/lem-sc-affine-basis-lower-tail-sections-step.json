@@ -18,40 +18,57 @@
  },
  "proof": [
   {
-   "text": "Apply the successive lower-truncation triangle to E: its first object is H^(-n)(E)[n], and its middle arrow is the specified canonical transition.",
+   "text": "For any module M and natural q, use the open-restriction module-cohomology isomorphism at V, then the module-cohomology-source comparison on V.toScheme. If H^(q+1)(V,M|V) is subsingleton, the additive equivalence makes the module cohomology subsingleton; exact scalar forgetting gives a zero abelian object, and the open-restriction isomorphism transports zero to (G.rightDerived (q+1)).obj M. This is the proved private helper evaluation_rightDerived_isZero.",
    "uses": [
-    "lem-pc-derived-lower-truncation-step-triangle"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction and source comparison identify positive derived sections on V of H^(-n)(E) with the given H groups if -n<a; otherwise the sheaf is zero. The hypothesis at W=V applies.",
-   "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pc-open-restriction-module-cohomology",
     "lem-sc-module-cohomology-source-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derived sections to the triangle. The shifted-single and homology-shift isomorphisms identify the two endpoint groups with positive derived sections in degrees n+i and n+i+1, since n>=1-i. Both endpoints vanish; exactness makes the transition monic and epic, hence an isomorphism.",
+   "text": "Put M=H^(-n)(tau_<a QF). If -n<a, the homology map of truncLT inclusion is invertible; compose its associated isomorphism with homologyFunctorFactors to identify M with F.homology (-n). Apply the preceding helper to hhomology at W=V, and transport along rightDerived applied to this isomorphism. Otherwise the t-structure support bound makes M zero, and the additive right derived functor preserves zero. Thus (G.rightDerived (q+1)).obj M is zero for every natural q.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j with n+j>=1 let q=(n+j).toNat-1. Integer arithmetic gives n+j=q+1. The singleFunctorIsoCompQ, commShiftIso of the unbounded right derived functor, homology shiftIso, and homologyRightDerivedFunctorObjSingleFunctorIso identify degree-j homology of RG(Q(M[0])[n]) with R^(q+1)G(M). The latter is zero by the preceding calculation. This applies to j=i and j=i+1 because n>=1-i.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sp-derived-functor-single-identification",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the distinguished lower-truncation step triangle of E at n, whose middle arrow is exactly natTransTruncGEOfLE (-n) (-n+1). Map it through the triangulated functor G.rightDerivedFunctor. Its first-object homology vanishes in degrees i and i+1 by the previous step. Apply DerivedCategory.isIso_homologyMap_mor₂, the monic-and-epic consequence of the long exact homology sequence, to obtain the displayed isomorphism.",
    "uses": [
     "lem-pc-derived-lower-truncation-step-triangle",
-    "lem-sc-module-cohomology-source-comparison"
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-open-restriction-module-cohomology",
+  "lem-sc-module-cohomology-source-comparison",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-right-derived-functor-triangulated",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-cohomology-shift",
   "lem-pc-derived-lower-truncation-step-triangle",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-sc-module-cohomology-source-comparison"
+  "lem-sf-derived-homology-long-exact"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M1",
+  "group": "A4",
   "date": "2026-10-13",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D4, proof of (2), using the acyclicity assumption instead of quasi-coherence; cohomology.tex Tag 0BKT"
+  "document": "Stacks Project, Tags 08D4, 0BKT and 01E1; existing Lean comparison declarations",
+  "place": "08D4 proof of (2), successive truncation triangle and endpoint calculation; 01E1 restriction comparison; 0BKT basis-acyclic homology hypothesis"
  },
  "mathlib_searches": [
   {
@@ -158,10 +175,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T151134-L-877320",
-  "kind": "interface",
+  "landing": "20261013T153458-L-1084326",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
