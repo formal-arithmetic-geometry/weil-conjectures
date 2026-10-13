@@ -15,53 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Express each f_i as a combination of g_j, giving t with linearCombination(g) composed with t = linearCombination(f). Exterior powers of t commute with Koszul contraction, as checked on exterior generators, and form a chain map extending the identity in degree zero. It intertwines the normalized augmentations.",
+   "text": "Choose a coefficient vector for each f_i in span(range g), and assemble them as a linear map t. The generator chain-map theorem supplies U commuting with augmentations and identifies its top component with exteriorPower.map r t.",
    "uses": [
-    "def-weil-pbc-koszul-complex"
+    "new-q2-koszul-generator-chain-map"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Write E_f=K(f).extend embeddingDownNat and u:E_f to E_g for the exterior-power chain map of step 1, so u followed by epsilon_g equals epsilon_f. Finite exterior bases make each natural-number term of K(f) free and hence projective; alternatively use P.complex=K(f) and P.projective from new-j3-koszul-projective-resolution. The integer extension is zero above 0 and has projective terms below 0, including its zero terms. Apply CochainComplex.isKProjective_of_projective at bound 0, recorded in lem-sc-bounded-above-projective-kprojective (also the extension instance at HomotopyCategory/KProjective.lean:126). Now cancel the common isomorphism given by the derived single shift on the right of heq. Precompose with Q(epsilon_f); functoriality and epsilon_f=u followed by epsilon_g cancel Q(epsilon_g) with its inverse and give Q(z_f)=Q(u followed by z_g). Through quotientCompQhIso and its naturality this is equality of Qh applied to the two homotopy classes with common source E_f and target single(A,-r). Apply injectivity of CochainComplex.IsKProjective.Qh_map_bijective, recorded in lem-pc-ring-derived-map-representative, to reflect it to equality of those homotopy classes. One can extract the homotopy by HomotopyCategory.homotopyOfEq. More explicitly, shift both maps to T[r] for T=single(A,0), obtain degree-r cocycles c_f and c_pull via Cocycle.equivHomShift, and use toHom_mk and toHom_bijective to get [c_f]-[c_pull]=0. CohomologyClass.mk_sub and mk_eq_zero_iff imply c_f-c_pull is a coboundary. For r>0, Cocycle.toSingleMk_mem_coboundaries_iff at p=-r and p1=1-r extracts b:E_f^(1-r) to A with E_f.d(-r,1-r) followed by b equal to the transported top component difference. Thus in natural-number coordinates it is d_(r,r-1) followed by b, or equivalently a signed L-boundary after absorbing the unit (-1)^r into b. Every evaluated value is in I: Koszul contraction is a sum with factors f_i. For r=0, E_f^1=0, so the extracted component is zero without introducing a nonexistent natural-number degree -1. No inverse generator matrix and no existence-only Ext/homology equivalence are used.",
+   "text": "Cancel the common derived single-shift isomorphism. Precompose with Q(epsilon_f), use U followed by epsilon_g = epsilon_f, functoriality and the quasi-isomorphism inverses to derive Q(z_f)=Q(U followed by z_g). Apply the equal-derived-top-evaluation theorem and the top equation for U.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "lem-sc-bounded-above-projective-kprojective",
-    "lem-pc-ring-derived-map-representative",
-    "lem-sc-hom-cocycle-homotopy-quotient-formulas",
-    "lem-sc-hom-single-cocycle-component-formulas",
-    "def-sc-koszul-dual-complex",
-    "def-weil-pbc-koszul-complex"
+    "new-q2-koszul-derived-top-evaluation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Normalization makes the comparison kill that coboundary, by reduction modulo I. Under change of generators c_g composed with t=c_f: apply the injective cotangent-to-quotient-square map and the generator-functional equality. On each wedge normalization of phi on pullback equals normalization of psi. The conormal basis makes the exterior-dual pairing injective, giving equality of comparison values. Empty sequences and zero quotient cases are included.",
+   "text": "The conormal map for f is surjective, and conormal(g) composed with t equals conormal(f), detected by cotangentToQuotientSquare_injective. The conormal basis makes the exterior-dual pairing injective. Evaluate the two normalized comparisons on lifts of arbitrary conormal wedges, use exteriorPower.map_apply_ιMulti and the modulo-I equality, and conclude their values agree.",
    "uses": [
     "def-sc-koszul-conormal-comparison",
     "lem-sc-koszul-conormal-basis",
     "lem-sc-exterior-power-dual-pairing"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-koszul-conormal-comparison",
-  "def-sc-koszul-dual-complex",
-  "def-weil-pbc-koszul-complex",
-  "lem-pc-ring-derived-map-representative",
-  "lem-sc-bounded-above-projective-kprojective",
   "lem-sc-exterior-power-dual-pairing",
-  "lem-sc-hom-cocycle-homotopy-quotient-formulas",
-  "lem-sc-hom-single-cocycle-component-formulas",
   "lem-sc-koszul-conormal-basis",
-  "lem-weil-pbc-exterior-power-free-basis",
-  "new-j3-koszul-projective-resolution"
+  "new-q2-koszul-derived-top-evaluation",
+  "new-q2-koszul-generator-chain-map"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Repair of X-06699 C3/C4: cancel the augmentation and shift, reflect equality through Qh_map_bijective for the explicitly K-projective integer Koszul complex, and extract the top coboundary using HomComplex quotient/component formulas."
+  "place": "Q2 complete Lean proof: exterior-power generator chain map; cancellation in D(A); direct Homotopy.comm top-component computation; determinant normalization and injective conormal pairing. No HomComplex cocycle quotients or chosen projective resolution."
  },
  "mathlib_searches": [
   {
@@ -137,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b4752",
-  "group": "A4",
+  "reviewer": "COMPILER",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T045510-L-124009",
+  "landing": "20261013T072403-L-1124165",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, cited Mathlib APIs, Stacks sources, change record, report, earlier return repairs, compilation and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

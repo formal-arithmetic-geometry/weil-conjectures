@@ -10,6 +10,12 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 
+import Sheaf.RingTheory.KoszulGeneratorChainMap
+import Sheaf.RingTheory.KoszulDerivedTopEvaluation
+import Sheaf.RingTheory.KoszulConormalBasis
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Mathlib.LinearAlgebra.Dual.Basis
+
 /-! # Koszul roofs and normalized comparisons
 
 Source: Stacks Project, Tags 0BQZ and 0BQY, local finite free Koszul computation.
@@ -22,6 +28,88 @@ universe u
 open CategoryTheory
 
 namespace ExteriorAlgebra
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pairingDual_injective_of_basis
+    {R M : Type u} [CommRing R] [AddCommGroup M] [Module R M]
+    {r : ℕ} (b : Module.Basis (Fin r) R M) (n : ℕ) :
+    Function.Injective (exteriorPower.pairingDual R M n) := by
+  classical
+  let bd := b.dualBasis.exteriorPower n
+  have hc (s : Set.powersetCard (Fin r) n) :
+      bd.coord s = (exteriorPower.pairingDual R M n).flip
+        ((b.exteriorPower n) s) := by
+    apply bd.ext
+    intro t
+    simp only [Module.Basis.coord_apply, Module.Basis.repr_self,
+      Finsupp.single_apply, LinearMap.flip_apply]
+    simp only [bd, exteriorPower.basis_apply]
+    change (if t = s then 1 else 0) =
+      exteriorPower.pairingDual R M n
+        (exteriorPower.ιMulti_family R n b.dualBasis t)
+        (exteriorPower.ιMulti_family R n b s)
+    by_cases h : t = s
+    · subst t
+      simpa [exteriorPower.ιMultiDual, Module.Basis.dualBasis_apply] using
+        (exteriorPower.ιMultiDual_apply_diag R n b s).symm
+    · simpa [h, exteriorPower.ιMultiDual, Module.Basis.dualBasis_apply] using
+        (exteriorPower.ιMultiDual_apply_nondiag R n b t s h).symm
+  intro w w' h
+  apply bd.repr.injective
+  ext s
+  change bd.coord s w = bd.coord s w'
+  rw [hc]
+  exact DFunLike.congr_fun h _
+
+private theorem conormalVector_comp
+    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)
+    (hf : Ideal.span (Set.range f) = I) (hg : Ideal.span (Set.range g) = I)
+    (t : (Fin r →₀ A) →ₗ[A] (Fin r →₀ A))
+    (ht : (Finsupp.linearCombination A g).comp t = Finsupp.linearCombination A f) :
+    (koszulConormalVector A I r g hg).comp t = koszulConormalVector A I r f hf := by
+  have heval (k : Fin r → A) (hk : Ideal.span (Set.range k) = I)
+      (v : Fin r →₀ A) :
+      I.cotangentToQuotientSquare (koszulConormalVector A I r k hk v) =
+        (I ^ 2).mkQ (Finsupp.linearCombination A k v) := by
+    simp only [koszulConormalVector, Finsupp.linearCombination_apply,
+      map_finsuppSum, map_smul, Ideal.toCotangent_to_quotient_square,
+      Submodule.mkQ_apply]
+  apply LinearMap.ext
+  intro v
+  apply I.cotangentToQuotientSquare_injective
+  simp only [LinearMap.comp_apply]
+  rw [heval, heval]
+  exact congrArg ((I ^ 2).mkQ) (LinearMap.congr_fun ht v)
+
+private theorem conormalVector_surjective
+    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
+    (hf : Ideal.span (Set.range f) = I) :
+    Function.Surjective (koszulConormalVector A I r f hf) := by
+  have hspan : Submodule.span A
+      (Set.range (fun i ↦ I.toCotangent
+        ⟨f i, hf ▸ Ideal.subset_span (Set.mem_range_self i)⟩)) = ⊤ := by
+    apply top_unique
+    intro y _
+    obtain ⟨x, rfl⟩ := I.toCotangent_surjective y
+    have hx : (x : A) ∈ Ideal.span (Set.range f) := hf.symm ▸ x.property
+    refine Submodule.span_induction
+      (p := fun z hz ↦ I.toCotangent ⟨z, hf ▸ hz⟩ ∈ _)
+      ?_ ?_ ?_ ?_ hx
+    · rintro z ⟨j, rfl⟩
+      exact Submodule.subset_span (Set.mem_range_self j)
+    · change I.toCotangent 0 ∈ _
+      rw [map_zero]
+      exact Submodule.zero_mem _
+    · intro x y hx hy hxx hyy
+      change I.toCotangent (⟨x, hf ▸ hx⟩ + ⟨y, hf ▸ hy⟩) ∈ _
+      rw [map_add]
+      exact Submodule.add_mem _ hxx hyy
+    · intro a x hx hxx
+      change I.toCotangent (a • ⟨x, hf ▸ hx⟩) ∈ _
+      rw [map_smul]
+      exact Submodule.smul_mem _ a hxx
+  apply LinearMap.range_eq_top.mp
+  simpa only [koszulConormalVector, Finsupp.range_linearCombination] using hspan
 
 /-- Equal roofs have the same normalized conormal value on different generators.
 Source: Stacks Project, Tags 0BQY and 0BQZ, determinant classes and the map on
@@ -107,6 +195,91 @@ theorem koszul_roof_comparison_independent
       ComplexShape.embeddingDownNat (i := r) rfl).inv ≫ zg.f (-(r : ℤ)) ≫
         (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
           (ModuleCat.of A A)).hom)) := by
-  sorry
+  classical
+  have _ := hregg
+  have hmem (i : Fin r) : f i ∈ Submodule.span A (Set.range g) := by
+    change f i ∈ Ideal.span (Set.range g)
+    rw [hg, ← hf]
+    exact Ideal.subset_span (Set.mem_range_self i)
+  have hex (i : Fin r) : ∃ v : Fin r →₀ A, Finsupp.linearCombination A g v = f i := by
+    rw [← Finsupp.range_linearCombination] at hmem
+    exact hmem i
+  choose a ha using hex
+  let t := Finsupp.linearCombination A a
+  have ht : (Finsupp.linearCombination A g).comp t = Finsupp.linearCombination A f := by
+    apply Finsupp.lhom_ext
+    intro i c
+    simp [t, ha]
+  obtain ⟨U, hU, hUt⟩ := exists_koszul_generator_chain_map A I r f g t ht
+    εf εg haugf haugg
+  have heq' : inv (DerivedCategory.Q.map εf) ≫ DerivedCategory.Q.map zf =
+      inv (DerivedCategory.Q.map εg) ≫ DerivedCategory.Q.map zg := by
+    apply (cancel_mono
+      (((DerivedCategory.singleFunctors (ModuleCat A)).shiftIso
+        (r : ℤ) (-(r : ℤ)) 0 (add_neg_cancel (r : ℤ))).inv.app
+          (ModuleCat.of A A))).mp
+    simpa only [Category.assoc] using heq
+  have hz : DerivedCategory.Q.map zf = DerivedCategory.Q.map (U ≫ zg) := by
+    have hh := congrArg (fun k ↦ DerivedCategory.Q.map εf ≫ k) heq'
+    simp only [IsIso.hom_inv_id_assoc] at hh
+    rw [← hU, Functor.map_comp, Category.assoc, IsIso.hom_inv_id_assoc] at hh
+    simpa only [Functor.map_comp] using hh
+  have hev := koszul_derived_top_evaluation_eq A I r f hf zf (U ≫ zg) hz
+  obtain ⟨b, _hb⟩ := exists_koszul_conormal_basis A I r f hregf hf
+  apply pairingDual_injective_of_basis b r
+  apply exteriorPower.linearMap_ext
+  ext v
+  choose w hw using fun i ↦ conormalVector_surjective A I r f hf (v i)
+  have hc := conormalVector_comp A I r f g hf hg t ht
+  have hwv : (fun i ↦ koszulConormalVector A I r f hf (w i)) = v := funext hw
+  have hv : (fun i ↦ koszulConormalVector A I r g hg (t (w i))) = v := by
+    funext i
+    exact (LinearMap.congr_fun hc (w i)).trans (hw i)
+  have heval := hev w
+  have htop :
+      ((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat
+        (i := r) rfl).inv ≫ (U ≫ zg).f (-(r : ℤ)) =
+      ModuleCat.ofHom (exteriorPower.map r t) ≫
+        ((koszulComplex A r g).extendXIso ComplexShape.embeddingDownNat
+          (i := r) rfl).inv ≫ zg.f (-(r : ℤ)) := by
+    rw [HomologicalComplex.comp_f, ← Category.assoc, hUt, Category.assoc]
+  have heval' :
+      Ideal.Quotient.mk I
+        ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+          (ModuleCat.of A A)).hom
+          (zf.f (-(r : ℤ)) (((koszulComplex A r f).extendXIso
+            ComplexShape.embeddingDownNat (i := r) rfl).inv
+              (exteriorPower.ιMulti A r w)))) =
+      Ideal.Quotient.mk I
+        ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+          (ModuleCat.of A A)).hom
+          (zg.f (-(r : ℤ)) (((koszulComplex A r g).extendXIso
+            ComplexShape.embeddingDownNat (i := r) rfl).inv
+              (exteriorPower.ιMulti A r (fun i ↦ t (w i)))))) := by
+    have hh := congrArg (fun k ↦ k (exteriorPower.ιMulti A r w)) htop
+    change (U ≫ zg).f (-(r : ℤ))
+        (((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat
+          (i := r) rfl).inv (exteriorPower.ιMulti A r w)) =
+      zg.f (-(r : ℤ))
+        (((koszulComplex A r g).extendXIso ComplexShape.embeddingDownNat
+          (i := r) rfl).inv (exteriorPower.map r t (exteriorPower.ιMulti A r w))) at hh
+    rw [exteriorPower.map_apply_ιMulti] at hh
+    exact heval.trans (congrArg (fun x ↦ Ideal.Quotient.mk I
+      ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+        (ModuleCat.of A A)).hom x)) hh)
+  have hp := hφ
+    (((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat
+      (i := r) rfl).inv ≫ zf.f (-(r : ℤ)) ≫
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+        (ModuleCat.of A A)).hom) w
+  have hq := hψ
+    (((koszulComplex A r g).extendXIso ComplexShape.embeddingDownNat
+      (i := r) rfl).inv ≫ zg.f (-(r : ℤ)) ≫
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
+        (ModuleCat.of A A)).hom) (fun i ↦ t (w i))
+  rw [hwv] at hp
+  rw [hv] at hq
+  exact hp.trans ((congrArg (fun x ↦ (-1 : A ⧸ I) ^ (r * (r - 1) / 2) * x)
+    heval').trans hq.symm)
 
 end ExteriorAlgebra
