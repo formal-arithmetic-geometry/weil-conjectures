@@ -4,13 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.KoszulComplex
-public import Mathlib.RingTheory.Ideal.Cotangent
-public import Mathlib.Algebra.Category.ModuleCat.Projective
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-public import Mathlib.CategoryTheory.Monoidal.Tor
-public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Sheaf.RingTheory.SelfTorConormalComparisonPredicate
+import Sheaf.RingTheory.SelfTorConormalComparisonExistence
+import Sheaf.RingTheory.SelfTorConormalComparisonUnique
 
 /-! # The normalized exterior-to-self-Tor map
 
@@ -23,41 +19,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
-
-/-- The exterior conormal, regarded as a module over the ambient ring.
-Source: Stacks Project, Tag 062I.
-(blueprint: new-r4-self-tor-conormal-comparison). -/
-noncomputable abbrev conormalExteriorModule (A : Type u) [CommRing A]
-    (I : Ideal A) (n : ℕ) : ModuleCat.{u} A :=
-  (ModuleCat.restrictScalars (Ideal.Quotient.mk I)).obj
-    (ModuleCat.of (A ⧸ I) (⋀[A ⧸ I]^n I.Cotangent))
-
-/-- Koszul normalization of the comparison. For every tuple of ideal elements, lift
-its Koszul augmentation to any projective resolution of the quotient. A degree-n wedge,
-after tensoring with the quotient, is a cycle. Its image in resolution homology is
-the value of the comparison on the wedge of the corresponding conormal classes.
-This fixes the comparison, since these wedges generate the exterior power.
-Source: Stacks Project, Tags 09PQ and 062I.
-(blueprint: new-r4-self-tor-conormal-comparison). -/
-def IsSelfTorConormalComparison (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
-    (c : conormalExteriorModule A I n ⟶
-      ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj
-        (ModuleCat.of A (A ⧸ I))) : Prop :=
-  ∀ (r : ℕ) (g : Fin r → I) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))
-    (a : ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)) ⟶ P.complex),
-    a.f 0 ≫ P.π.f 0 =
-      ModuleCat.ofHom (I.mkQ.comp
-        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap) →
-    let K := ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A))
-    let T := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)
-    ∀ (v : Fin n → (Fin r →₀ A)) (z : (T.obj K).cycles n),
-      (T.obj K).iCycles n z =
-        (exteriorPower.ιMulti A n v) ⊗ₜ[A] (1 : A ⧸ I) →
-      (P.isoLeftDerivedObj (tensorRight (ModuleCat.of A (A ⧸ I))) n).hom
-          (c (exteriorPower.ιMulti (A ⧸ I) n
-            (fun j ↦ I.toCotangent (Finsupp.linearCombination A g (v j))))) =
-        ((HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.down ℕ) n).map
-          (T.map a)) ((T.obj K).homologyπ n z)
 
 /-- There is a unique comparison with Koszul normalization, without regularity assumptions.
 
@@ -84,7 +45,9 @@ theorem existsUnique_selfTor_conormal_comparison (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) :
     ∃! c : conormalExteriorModule A I n ⟶
       ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj
-        (ModuleCat.of A (A ⧸ I)), IsSelfTorConormalComparison A I n c := by sorry
+        (ModuleCat.of A (A ⧸ I)), IsSelfTorConormalComparison A I n c := by
+  obtain ⟨c, hc⟩ := selfTorConormalComparison_exists A I n
+  exact ⟨c, hc, fun d hd => (selfTorConormalComparison_unique A I n c d hc hd).symm⟩
 
 /-- The actual normalized exterior-to-self-Tor comparison. The theorem used to select it
 fixes its value on all pure wedges, and determines it uniquely.

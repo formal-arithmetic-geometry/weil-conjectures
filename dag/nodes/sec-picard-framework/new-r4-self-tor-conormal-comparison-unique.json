@@ -1,0 +1,115 @@
+{
+ "id": "new-r4-self-tor-conormal-comparison-unique",
+ "kind": "statement",
+ "title": "Uniqueness of normalized self-Tor comparison",
+ "statement": "For every commutative ring A, ideal I and natural number n, any two A-linear morphisms from [new-r4-conormal-exterior-module] to Tor_n^A(A/I,A/I) satisfying [new-r4-self-tor-conormal-predicate] are equal.",
+ "stmt_deps": [
+  "new-r4-conormal-exterior-module",
+  "new-r4-self-tor-conormal-predicate"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00LS",
+  "place": "comparison of free complexes with resolutions, followed by exterior generation"
+ },
+ "proof": [
+  {
+   "text": "Lift each conormal entry to I. The Koszul complex on the resulting tuple has free terms. Lift its quotient augmentation to a projective resolution degree by degree using projectivity and exactness (Tag 00LS). After tensoring by A/I its differentials vanish, so the standard wedge defines a cycle.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply both normalization hypotheses to the same tuple, lift and cycle, and cancel the resolution isomorphism. Pure wedges span over A/I; surjectivity of A -> A/I converts their scalar multiples into A-scalar multiples, on which A-linearity propagates equality. Degree zero uses the empty tuple and its unit wedge.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/00LS",
+   "place": "comparison of free complexes with resolutions, followed by exterior generation"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical alternating multiplication of degree one Tor classes induces a map from the exterior power of I modulo I squared to Tor of a quotient ring with itself",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from an exterior power is determined by its values on wedges; lift a bounded below complex of projective modules to a projective resolution",
+   "results": "8 hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, Rep.standardComplex.x_projective, CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CategoryTheory.ProjectiveResolution.lift, CategoryTheory.ProjectiveResolution.of_def",
+   "date": "2026-10-14",
+   "verdict": "tool lemmas only; no normalized comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.ιMulti",
+   "results": "12 hits: exteriorPower.ιMulti, exteriorPower.ιMulti_apply_coe, exteriorPower.map_comp_ιMulti, exteriorPower.linearMap_ext, exteriorPower.linearMap_ext_iff, exteriorPower.ιMulti_span, exteriorPower.ιMulti_span_of_span, exteriorPower.presentation_var",
+   "date": "2026-10-14",
+   "verdict": "tool lemmas only; no normalized comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b.*(exterior|cotangent|conormal)|(exterior|cotangent|conormal).*\\bTor\\b",
+   "results": "0 hits in Mathlib source",
+   "date": "2026-10-14",
+   "verdict": "no Tor/exterior or Tor/conormal comparison match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SelfTorConormalComparison",
+  "date": "2026-10-14",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-r4-self-tor-conormal-comparison",
+   "place": "intermediate result",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SelfTorConormalComparisonUnique",
+  "file": "lean/Sheaf/RingTheory/SelfTorConormalComparisonUnique.lean",
+  "declaration": "AlgebraicGeometry.selfTorConormalComparison_unique",
+  "statement": "theorem selfTorConormalComparison_unique (A : Type u) [CommRing A]\n    (I : Ideal A) (n : ℕ)\n    (c d : conormalExteriorModule A I n ⟶\n      ((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj\n        (ModuleCat.of A (A ⧸ I)))\n    (hc : IsSelfTorConormalComparison A I n c)\n    (hd : IsSelfTorConormalComparison A I n d) : c = d",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c10b9",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T201812-L-3978170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c10b9",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T201812-L-3978170",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and both direct importers compile cleanly; target theorem statement is unchanged, moved declarations retain identical signatures/bodies, proofs and DAG/report/change record agree, and only allowed sorryAx remains in the two named intermediate theorem statements."
+ }
+}
