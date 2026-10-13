@@ -12,33 +12,43 @@
  ],
  "proof": [
   {
-   "text": "Evaluation on each affine open V preserves limits. The unique isomorphism of limiting cones carries the evaluated canonical projection to the canonical projection of the evaluated tower. Apply the affine projection theorem to obtain surjectivity and the kernel formula J(V)^(n+1) times the entire section limit.",
+   "text": "For each affine open V, transport coherentFormalModule_affine_projections through preservesLimitIso for the evaluation functor. The projection on sheaf sections is surjective, and its kernel is J(V)^(n+1) times all sections of the sheaf limit. This transport uses the comparison projection equation and the comap of ideal multiples under a linear isomorphism.",
    "uses": [
     "lem-weil-pbc-formal-module-affine-projections"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the ideal-power clauses of ideal_times_quasiCoherent_affine_sections to the quasi-coherent unit sheaf: on each affine V the range of the power inclusion is J(V)^(n+1). Multiplication followed by the limit projection vanishes on pure tensor germs, since the ideal power annihilates the level. Pure tensors generate tensor stalks, so the composite sheaf morphism is zero and its sheaf image lies in the kernel. Conversely every affine kernel section is a finite sum of ideal-power scalars times limit sections by the affine kernel formula. Lift its scalars through the power inclusion and form pure tensor sections, yielding a preimage under multiplication. The kernel therefore lies in the image locally, and the two subsheaves coincide. This argument neither assumes quasi-coherence of the limit nor assumes that evaluation preserves arbitrary sheaf images.",
+   "text": "Let p be the level projection, i the inclusion of the ideal-power product into the sheaf limit L, and q its cokernel projection. Apply formalModuleQuotient_factor to p with equal exponents n+1. The product on the target level is zero by the annihilation condition in the coherent formal module definition. Hence i followed by p is zero. This replaces the tensor-stalk argument for this inclusion.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient projection q kills J(V)^(n+1) times L(V). Indeed apply ideal_times_quasiCoherent_affine_sections to the unit sheaf to lift each ideal-power scalar through the power inclusion. Its product with an arbitrary section of L is the image of the corresponding pure tensor section under multiplication. Multiplication factors through i, so its composite with q is zero. Submodule.smul_le extends this to all ideal multiples. The affine kernel formula then shows kernel.ι p followed by q vanishes on every affine open, hence globally by applying the faithful SheafOfModules.toSheaf functor and the existing Mathlib TopCat.Sheaf.hom_ext theorem on the affine basis. No duplicate affine-separatedness helper is introduced. No quasi-coherence of L or preservation of sheaf images by evaluation is assumed.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Affine surjectivity makes the projection an epimorphism of sheaves. The kernel-image identification makes it a cokernel of the multiplication-image inclusion in this abelian category. Uniqueness of cokernels gives the isomorphism from the formalModuleQuotient cokernel, with its required projection equation. Empty opens, zero sheaves, J=0 and J=1 obey the same argument.",
+   "text": "Affine surjectivity implies p is locally surjective and therefore epi. Construct a from the formal quotient to the level using cokernel.desc i p, and b in the other direction by Abelian.epiDesc p q since kernel.ι p followed by q is zero. The equations q followed by a equals p and p followed by b equals q show a and b are inverse by cancelling the epimorphisms q and p. Their isomorphism satisfies exactly the required projection equation. All arguments include empty schemes and J=0 or J=1.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-formal-module-affine-projections",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W projection-kernel calculation; explicit affine-basis sheaf formulation"
+  "place": "Lemma 087W projection-kernel calculation and Lemma 088B; categorical refinement using ideal-product naturality, affine separatedness, and two cokernel descents; returned duplicate-helper repair uses the public Mathlib basis hom_ext theorem directly"
  },
  "mathlib_searches": [
   {
@@ -124,10 +134,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T025301-L-3422392",
-  "kind": "interface",
+  "landing": "20261013T054215-L-442295",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
