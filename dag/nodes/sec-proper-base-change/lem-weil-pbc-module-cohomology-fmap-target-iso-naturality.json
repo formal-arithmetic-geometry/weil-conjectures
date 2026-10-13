@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-target-iso-naturality",
+ "kind": "statement",
+ "title": "Target naturality of module cohomology maps for an isomorphism",
+ "statement": "Let X and Y be schemes, h : X -> Y, G an O_Y-module, F and F′ O_X-modules, phi : G -> h_*F, e : F ≅ F′ and p a natural number. The additive cohomology map moduleCohomologyFMap(h,phi,p), followed by H^p(X,e.hom), equals moduleCohomologyFMap(h,phi followed by h_*(e.hom),p). Cohomology and its h-map are those of [def-weil-pbc-module-cohomology-fmap].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F8 and Remark 01FB; resolution comparison using Derived Categories Tags 013P, 013S and 05TG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Choose the data D and E defining the two canonical maps. Lift e.hom between their target resolutions and id_G between their source resolutions, respecting augmentations.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend by zero to integer indices. K-injectivity of E.K and the quasi-isomorphism D.lambda give t : D.K -> E.K making the lambda square homotopy commutative. Compatibility of beta and the augmentation equations then give the beta square by uniqueness up to homotopy after the quasi-isomorphic source augmentation.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sections and homology to both homotopies. The canonical sections comparisons commute with the resolution lift by naturality of restrictions. Cancel the invertible vertical homology maps supplied by D and E, then transport through isoRightDerivedObj naturality for e.hom and id_G and the forgetful homology comparisons. Substituting the definition of map yields the claimed equality.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB; direct resolution-comparison argument expanded by Y2, without the cyclic h-map functoriality theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology map natural under target isomorphism",
+   "date": "2026-10-13",
+   "results": "service unavailable; no result",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology map target naturality isomorphism",
+   "date": "2026-10-13",
+   "results": "no exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "moduleCohomologyFMap",
+   "date": "2026-10-13",
+   "results": "no exact match",
+   "verdict": "project-specific"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap_target_naturality",
+   "date": "2026-10-13",
+   "results": "no declaration available without cyclic import",
+   "verdict": "not usable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution cohomology map commutes with isomorphism of coefficient sheaves",
+   "date": "2026-10-13",
+   "results": "8 hits: injective resolution hom components and group cohomology comparison maps, none for this scheme h-map",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq",
+   "date": "2026-10-13",
+   "results": "unknown identifier; verified locally in Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "outer adjunction reduction only"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj_hom_naturality; moduleCohomologyFMap; target coefficient naturality",
+   "date": "2026-10-13",
+   "results": "RightDerived.lean has the resolution transport. Sheaf ModuleCohomologyFMapFunctorial has target_naturality, but imports BasicProperties through BasicPropertiesRestriction; DataTargetNaturality imports Functorial. Both create an import cycle here. No independent target-isomorphism naturality declaration.",
+   "verdict": "existing broader result cannot be imported here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BasicPropertiesRestriction",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RestrictionNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_target_iso_naturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictionNaturality.lean",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13",
+  "existing": false,
+  "statement": "theorem moduleCohomologyFMap_target_iso_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)\n    {G : SheafOfModules.{u} Y.ringCatSheaf} {F F' : SheafOfModules.{u} X.ringCatSheaf}\n    (φ : G ⟶ (pushforward h).obj F) (e : F ≅ F') (p : ℕ) :\n    moduleCohomologyFMap h φ p ≫ (forget₂ _ AddCommGrpCat).map\n      ((RingedSpace.moduleCohomology X.toRingedSpace p).map e.hom) =\n      moduleCohomologyFMap h (φ ≫ (pushforward h).map e.hom) p"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-cohomology-fmap-basic-restriction",
+   "place": "intermediate target-naturality step",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T001618-L-2331922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T001618-L-2331922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
