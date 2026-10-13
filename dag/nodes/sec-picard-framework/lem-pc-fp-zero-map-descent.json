@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-fp-zero-map-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: descent of the bounded finitely presented flat complex (Tags 01ZR and 05LY), finite relations among differential data; vanishing of one difference map on finite affine charts",
+   "via": [
+    "lem-pc-fp-relation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Eventual vanishing of one finite type quasi-coherent module map",
+ "statement": "Let I be a directed preorder, R:I\\to\\mathrm{CRing} a diagram, and S=\\varprojlim_{k\\in I}\\operatorname{Spec}(R_k) an affine limit. Let f:X_i\\to\\operatorname{Spec}(R_i) be quasi-compact [def-pc-scheme], and j\\ge i. Put X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j) and X=X_i\\times_{\\operatorname{Spec}(R_i)}S [def-pc-base-change]. Let F_j be a finite type quasi-coherent module on X_j and G_j a finitely presented quasi-coherent module on X_j [pqf-def-coherent]. If a module map \\delta_j:F_j\\to G_j has zero tensor pullback to X, then there exist j\\prime\\ge j such that its tensor pullback to X_{j\\prime} is zero. No Noetherianity hypothesis or finite-presentation hypothesis on f is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The quasi-compact morphism f has quasi-compact source X_i since its target is affine. Choose a finite affine open cover of X_i. Inverse images of these opens in X_j, later X_l, and X are affine and cover, since all base change maps come from affine morphisms. The restricted source module is finitely generated and the restricted target module is finitely presented. A module map is zero if it is zero on every open of this cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+   }
+  },
+  {
+   "text": "Fix a. By [lem-weil-pbc-spec-colimit-limit] applied to the directed system (R_{j'})_{j'\\ge i}, \\operatorname{Spec}(\\varinjlim R_{j'}) with the induced maps is a limit of the system (S_{j'}); by uniqueness of limits it is identified with S=\\operatorname{Spec}R compatibly with the projections, so, taking global sections, R=\\varinjlim_{j'}R_{j'} as rings. Since A^a\\otimes_{R_i}- commutes with colimits, B^a=\\varinjlim_{j'\\ge j}B^a_{j'}. On U^a_j the source F_j corresponds to a finitely generated B^a_j-module M with generators s_1,\\dots,s_n, and the target G_j to a finitely presented B^a_j-module N=\\operatorname{coker}(P:(B^a_j)^m\\to(B^a_j)^p); the pullbacks to U^a_{j'} and U^a_X correspond to M\\otimes B^a_{j'}, N\\otimes B^a_{j'}=\\operatorname{coker}(P\\otimes B^a_{j'}) and similarly over B^a (right exactness of tensor product). Lift each \\delta_j(s_k) to v_k\\in(B^a_j)^p. Vanishing of the base change to X means that the image of v_k in (B^a)^p is P c_k for some c_k\\in(B^a)^m. By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise] for the directed set \\{j'\\ge j\\} (a filtered category) and directedness, all finitely many entries of all c_k lift to some B^a_{j'}, giving \\tilde c_k; each entry of v_k-P\\tilde c_k\\in(B^a_{j'})^p maps to 0 in B^a, so by clause (2) of the same statement (comparison with 0) it vanishes in some later B^a_{j''}, and by directedness one j'' serves for all of them. Then \\delta_{j''}(s_k\\otimes1)=0 for all k, and since the s_k\\otimes1 generate M\\otimes B^a_{j''}, \\delta_{j''} vanishes on U^a_{j''}.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+   }
+  },
+  {
+   "text": "Choose a common upper bound of the finitely many stages obtained for the affine cover. A zero linear map remains zero under tensor pullback. At this common stage the restricted map is therefore zero on every affine of the pulled-back cover, and hence the whole sheaf map is zero. This concerns one fixed map rather than a finite family of relations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a finite type quasi-coherent module to a finitely presented module that becomes zero on an affine inverse limit vanishes at a finite stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of morphisms of finitely presented quasi-coherent modules descends to a stage of an affine inverse limit",
+   "results": "exists_appTop_map_eq_zero_of_isAffine_of_isLimit and exists_app_map_eq_map_of_isLimit concern structure-sheaf sections; no scheme module-map vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback|finiteRelation|module.*descent; colimit.*Hom|Hom.*colimit|exists.*(eq|zero).*isLimit in Mathlib/AlgebraicGeometry/Modules and WeilConjectures/AlgebraicGeometry/Modules",
+   "results": "No eventual-vanishing theorem for scheme module maps. Sheaf.Algebra.FinitePresentationColimit gives the ring-level affine case but not its scheme transport/gluing. Blueprint searches for 01ZR and module map zero find no matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRelationDescent",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationZeroMapDescent.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_zero_map_descent",
+  "statement": "theorem finitePresentation_zero_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [QuasiCompact f] (j : I) (hij : i ≤ j) (F G : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules) (hF_ft : F.IsFiniteType) (hF_qc : F.IsQuasicoherent) (hG_fp : G.IsFinitePresentation) (hG_qc : G.IsQuasicoherent) (δ : F ⟶ G) (hδ : (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map δ = 0) : ∃ (j' : I) (hjj' : j ≤ j'), (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map δ = 0",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100048-L-2474554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100048-L-2474554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

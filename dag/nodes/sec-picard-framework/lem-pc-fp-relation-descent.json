@@ -28,56 +28,37 @@
  ],
  "proof": [
   {
-   "text": "Replace the finite collection of modules and maps by the finitely many source and target modules and maps that occur in the specified composites. The statement already supplies finitely presented models on X_j with the prescribed base-change identifications; where a composite passes through a model only up to the identification, part (2) of the module-and-map descent statement, applied to the fixed models, lets us assume after increasing j that every map in every composite is a map between the chosen models, with the prescribed base-change identifications.",
+   "text": "The supplied models and maps already are maps between fixed modules on X_j, so no object or map descent is needed. For each specified relation form delta_k=lhs_k-rhs_k. Tensor pullback is additive by its adjunction to additive pushforward and Mathlib Adjunction.left_adjoint_additive. The hypothesis makes its pullback zero. Finite presentation of the source implies finite type. Apply [lem-pc-fp-zero-map-descent] to obtain a stage where this one difference is zero. Additivity and sub_eq_zero recover equality of the two maps there.",
    "uses": [
-    "lem-pc-fp-module-map-descent"
+    "lem-pc-fp-zero-map-descent",
+    "def-pc-module-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (finite-presentation descent of modules and morphisms)"
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
    }
   },
   {
-   "text": "Fix one specified equality and let \\delta_j:F_j\\to G_j be the difference of its two composites, an \\mathcal{O}_{X_j}-linear map between finitely presented quasi-coherent models; pullback is additive and compatible with composition, so its base change to X is zero, and the same holds for its pullback \\delta_{j'} to X_{j'} for every j'\\ge j. Since X_i is of finite presentation over the affine S_i it is quasi-compact; choose a finite affine open cover U^1,\\dots,U^n of X_i, U^a=\\operatorname{Spec}A^a. Its inverse images in X_{j'} and X are the affine opens U^a_{j'}=\\operatorname{Spec}B^a_{j'}, B^a_{j'}=A^a\\otimes_{R_i}R_{j'}, and U^a_X=\\operatorname{Spec}B^a, B^a=A^a\\otimes_{R_i}R (fibre products of affines), and they cover. A map of sheaves vanishing on every member of an open cover vanishes; so it suffices to make \\delta_{j'} vanish on each U^a_{j'} at one stage. (The Noetherian hypothesis on the R_i is not used anywhere in this proof; it is carried only because the citing setting has it.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (affine case plus Zariski glueing, first proof)"
-   }
-  },
-  {
-   "text": "Fix a. By [lem-weil-pbc-spec-colimit-limit] applied to the directed system (R_{j'})_{j'\\ge i}, \\operatorname{Spec}(\\varinjlim R_{j'}) with the induced maps is a limit of the system (S_{j'}); by uniqueness of limits it is identified with S=\\operatorname{Spec}R compatibly with the projections, so, taking global sections, R=\\varinjlim_{j'}R_{j'} as rings. Since A^a\\otimes_{R_i}- commutes with colimits, B^a=\\varinjlim_{j'\\ge j}B^a_{j'}. On U^a_j the source F_j corresponds to a finitely generated B^a_j-module M with generators s_1,\\dots,s_n, and the target G_j to a finitely presented B^a_j-module N=\\operatorname{coker}(P:(B^a_j)^m\\to(B^a_j)^p); the pullbacks to U^a_{j'} and U^a_X correspond to M\\otimes B^a_{j'}, N\\otimes B^a_{j'}=\\operatorname{coker}(P\\otimes B^a_{j'}) and similarly over B^a (right exactness of tensor product). Lift each \\delta_j(s_k) to v_k\\in(B^a_j)^p. Vanishing of the base change to X means that the image of v_k in (B^a)^p is P c_k for some c_k\\in(B^a)^m. By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise] for the directed set \\{j'\\ge j\\} (a filtered category) and directedness, all finitely many entries of all c_k lift to some B^a_{j'}, giving \\tilde c_k; each entry of v_k-P\\tilde c_k\\in(B^a_{j'})^p maps to 0 in B^a, so by clause (2) of the same statement (comparison with 0) it vanishes in some later B^a_{j''}, and by directedness one j'' serves for all of them. Then \\delta_{j''}(s_k\\otimes1)=0 for all k, and since the s_k\\otimes1 generate M\\otimes B^a_{j''}, \\delta_{j''} vanishes on U^a_{j''}.",
+   "text": "Apply Finset.exists_le to j together with the finite image of all the chosen stages; the empty collection is included. Compose each individual stage transition with the transition to the common upper bound. Tensor-pullback composition gives a natural isomorphism between direct and successive pullback. Its naturality and cancellation identify the two pulled-back maps, so the equality at the individual stage persists at the common upper bound. Spec.map_comp and R.map_comp identify the composite transition with the transition stated in the conclusion.",
    "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), via Algebra, Lemma algebra-lemma-colimit-category-fp-modules"
-   }
-  },
-  {
-   "text": "There are finitely many affines U^a and finitely many specified equalities; by directedness choose one stage above all the stages found in the previous step. Vanishing on U^a_{j''} persists after pullback to any later stage, so at this common stage every difference map vanishes on every U^a, hence on X_j for the new j, i.e. all specified equalities hold on X_j.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), common stage"
+    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-fp-zero-map-descent",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR"
+  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
  },
  "mathlib_searches": [
   {
@@ -168,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T100048-L-2474554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
