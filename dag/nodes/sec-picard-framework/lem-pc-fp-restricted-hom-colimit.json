@@ -13,33 +13,32 @@
  ],
  "proof": [
   {
-   "text": "Take finite generators of M and finite generators of the relation kernel, using finite presentation. Write their images under h as finite sums of pure tensors. Lift the finitely many ring coefficients to one stage j above i, giving tentative generator images in Fj tensor N.",
+   "text": "Restrict the diagram to the nonempty directed upper tail of i. Regard each Fj tensor over Fi with N as an Fi-module. Tensor the Fi-algebra transition maps and coprojections with N; functoriality and cocone naturality give the directed-system and compatibility laws. The representation and eventual-zero clauses of directedColimitBaseChangeElementwise apply to this system.",
    "uses": [
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
    ],
    "elementary": false
   },
   {
-   "text": "The finitely many relation combinations of the tentative images become zero over A. Apply eventual finite tensor vanishing to these elements of Fj tensor N, using the canonical comparison of successive tensor products. Enlarge j once so that all relations vanish. The tentative images then induce an Fi-linear map a from M.",
+   "text": "Use Module.FinitePresentation.exists_fin to write M as a finite free module modulo a finitely generated submodule K. Represent the images of its finitely many basis vectors at stages, move them to a common upper bound, and extend by the basis universal property to a linear map a0. Equality with h after coprojection holds on the basis, hence everywhere. Each generator of K maps to zero in the final tensor module. The eventual-zero clause gives a later vanishing stage for each generator. Choose a common upper bound, transport a0 there, and use the directed-system law to kill every generator of K. The span criterion then kills K. Descend with Submodule.liftQ and compose with the presentation equivalence. This also handles empty bases and relation sets.",
    "uses": [
-    "lem-pc-finite-tensor-vanishing-colimit"
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
    ],
    "elementary": false
   },
   {
-   "text": "A comparison e with the stated unit-tensor formula agrees on arbitrary pure tensors by A-linearity, and hence on finite sums. Check e(h(x))=1 tensor a(x) on the chosen generators, then on their Fi-span, which is M.",
+   "text": "Convert the natural Fi-actions on the tensor modules to the displayed restriction-of-scalars actions using algebraMap_smul. For any comparison e satisfying the unit-tensor equation, tensor induction shows e sends the coprojection image of each stage tensor t to 1 tensor t: on a pure tensor use A-linearity, the unit-tensor equation, and tensor balancing; zero and addition are immediate. Apply this identity to the descended linear map and its coprojection equation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-filtered-colimit-commrings-elementwise",
-  "lem-pc-finite-tensor-vanishing-colimit"
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (3)"
+  "place": "Tag 05LI, algebra-lemma-module-map-property-in-colimit, proof of (3); R2 realizes the finite-presentation argument using the proved directed tensor base-change elementwise theorem."
  },
  "mathlib_searches": [
   {
@@ -108,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-54aec",
-  "group": "V4",
+  "reviewer": "COMPILER",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T100207-L-2499385",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures and proofs with their DAG nodes, the recorded universe correction, and Stacks sources https://stacks.math.columbia.edu/tag/05N7 and https://stacks.math.columbia.edu/tag/05LI; four delivery modules and seven direct importers compile cleanly; axiom checks agree with the two declared remaining holes."
+  "landing": "20261013T111916-L-3060257",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
