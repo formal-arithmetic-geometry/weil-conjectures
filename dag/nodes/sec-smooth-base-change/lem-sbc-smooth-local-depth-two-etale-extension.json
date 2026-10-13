@@ -19,26 +19,37 @@
  ],
  "proof": [
   {
-   "text": "The whole fibre at every s different from a lies in U, by haway. At a its inverse image is dense by hclosed. Therefore U is dense in each fibre. The stalk of Spec A at its closed point is canonically A, so depth A ≥ 2 ensures that a is not a point of base depth at most one. At every base point of depth at most one the whole fibre is in U.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply the extension argument of Tag 0EYB. Its depth test follows from the flat local depth formula 0337: outside U the total-space stalk has depth at least two. Construct the extension as the relative spectrum of the pushforward of f_* O_X, as in 0EY6; it is a finite algebra, reflexive as a module, and its formation commutes with flat base change. To check etaleness, enlarge U to the etale locus and suppose its complement is nonempty. Choose a base point minimal under generalization in its image, localize there, and choose a closed point of the complement in that fibre. A finite flat base change realizes its residue field, then an etale local slice provides a section through that point. Completing an affine smooth chart at the section gives A[[x_1,...,x_d]]. Fibrewise density forces d > 0 and puts the generic point of the special fibre in U. The power-series purity calculation (0EYA, Lemma 58.26.2) makes the base-changed extension etale. Flat descent contradicts membership of the chosen point in the complement. Thus the extension p is etale everywhere. Its restriction to U is f by construction, yielding e and its equation.",
+   "text": "Smoothness gives locally finite type, so L is locally Noetherian. For y outside U, contraposition of haway gives q(y) = a. Localization of A at its maximal ideal is A because the complement consists of units; compose atUnits with the structure-sheaf stalk isomorphism. A ring isomorphism preserves regular sequences, their membership in the maximal ideal and their lengths, so it preserves the defining depth bound. The flat local depth formula for the stalk map of q gives depth O(L,y) = depth A + depth of the closed fibre, hence depth O(L,y) at least two. This entire step is implemented in Lean; the private depth-transport lemmas are proved directly from the definition.",
    "uses": [
     "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite depth-two extension theorem to U and f, using the boundary depth bound just proved. Obtain finite p:E->L, depth at least two on its boundary stalks, and e:(p^-1 U)->X over U.",
+   "uses": [
+    "lem-sbc-depth-two-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation e.hom followed by f = p restricted to U makes p restricted to U etale, by composition of the isomorphism with f. Apply purity to this supplied finite p with its boundary depth condition and the original haway, hclosed and hdepth. Return E, p, finiteness, etaleness, and the same e with its equation.",
+   "uses": [
+    "lem-sbc-smooth-local-depth-two-finite-purity"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-finite-extension",
+  "lem-sbc-smooth-local-depth-two-finite-purity"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "E2",
+  "by": "J1",
   "document": "Stacks Project",
-  "place": "Tags 0EYB (Lemma 58.26.3), 0EY6 (Lemma 58.21.5), 0337; proof of step 2 of lem-sbc-finite-normal-depth-two-purity"
+  "place": "Tags 0EY6(1),(2), 0EYB proof, and 0337; Lean boundary-depth proof and assembly of finite construction and purity"
  },
  "mathlib_searches": [
   {
@@ -124,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T235110-L-2171388",
+  "landing": "20261013T005856-L-2606969",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

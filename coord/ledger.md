@@ -10384,3 +10384,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:58 L: merged deliver/D4/Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellation (stage 3; reviewer PASS; first push; landing 20261013T005855-L-2606492 (interface); batch 20261013T005852; modules 3; new nodes 2)
 - 00:58 L: merged deliver/F1/Sheaf.CategoryTheory.GrothendieckBottomEdgeSingleUnit (stage 3; reviewer PASS; first push; landing 20261013T005855-L-2606619 (proof); batch 20261013T005852; modules 1; new nodes 0)
 - 00:58 L: merged deliver/F4/Sheaf.RingTheory.KoszulConormalTopHomology (stage 3; reviewer PASS; first push; landing 20261013T005856-L-2606831 (interface); batch 20261013T005852; modules 3; new nodes 2)
+- 00:58 L: merged deliver/J1/Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoEtaleExtension (stage 3; reviewer PASS; first push; landing 20261013T005856-L-2606969 (interface); batch 20261013T005852; modules 3; new nodes 2)
