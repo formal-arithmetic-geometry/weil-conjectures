@@ -30,59 +30,39 @@
  ],
  "proof": [
   {
-   "text": "Restrict the cartesian square to compatible affine opens U=Spec B and U'=Spec A. The closed-immersion affine criterion identifies i' inverse image of U' with Spec(A/J), J=i'.ker.ideal U'. Open-preimage pullbacks and pasting preserve the cartesian square. Quotient base change then identifies i inverse image of U with Spec(B/JB) and its immersion ideal with JB.",
+   "text": "Obtain the normalized additive source coordinate eS from [lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates]. This isolates only the affine tensor/quotient construction, without a morphism c.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+    "lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Use affine conormal sections to identify the conormal of i' with J/J² on its chart. Use affine pullback sections for f to obtain the source as (B/JB) tensor over A/J with J/J². Since J annihilates J/J², the quotient tensor equivalence identifies this with B tensor over A with J/J². These give eS, as an equivalence of underlying sets. The conormal target is JB/(JB)². Multiplication B tensor_A A -> B identifies the extended ideal J.map(includeRight) with JB and induces an equivalence of its cotangent quotient with JB/(JB)². Compose its inverse with the target conormal section equivalence to obtain eT.",
+   "text": "Construct the target coordinate explicitly. IsPullback.of_isLimit and isoPullback identify i with the pullback projection up to an isomorphism. Kernel invariance and Mathlib ker_fst_of_isClosedImmersion give i.ker=i'.ker.comap g; [lem-pc-ideal-sheaf-comap-affine-extension] computes its ideal as JB. The B-algebra multiplication isomorphism B tensor_A A ≃ B carries J.map(includeRight) to JB. Ideal.mapCotangent for this algebra isomorphism and its inverse give mutually inverse cotangent maps, verified on ideal representatives using toCotangent_surjective. Compose its inverse with the inverse of [lem-weil-pbc-affine-conormal-sections] for i to obtain eT. Linearity and tensorCotangentHom_tmul give its normalization on b times an immersion-unit ideal section.",
    "uses": [
-    "lem-weil-pbc-affine-conormal-sections",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-tensor-over-quotient-ring"
+    "lem-pc-ideal-sheaf-comap-affine-extension",
+    "lem-weil-pbc-affine-conormal-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The affine canonical-map equation of conormal functoriality sends the pullback of the class of a in J to the class of its image in JB. Multiplication by b in B gives the class of b times that image. This equals tensorCotangentHom_tmul. The pure tensor classes b tensor class(a) generate the source by the affine pullback description, so additivity and tensor induction prove eT(c(s)) = tensorCotangentHom(eS(s)) for every section s.",
+   "text": "Apply the affine clause of [lem-weil-pbc-closed-immersion-conormal-functorial] to the ideal representative of a. Naturality of pushforwardComp followed by pushforwardCongr lets c commute past the composite source unit; naturality of c lets it commute past restriction. Thus c sends the source unit to the i-unit of an ideal section whose ambient value is g(a). Hom.app_smul and the two coordinate normalizations give the comparison on b tensor class(a). Every cotangent element has an ideal representative, and every ideal element has an ideal-sheaf section by range_toModulesι_app. TensorProduct.induction_on, using additivity in the zero and sum cases, extends the equation to every tensor. Substitute eS(s) and use eS.symm_apply_apply to conclude the original unchanged statement.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-conormal-functorial",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-weil-pbc-closed-immersion-conormal-functorial"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
   "lem-weil-pbc-affine-conormal-sections",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-tensor-over-quotient-ring",
   "lem-weil-pbc-closed-immersion-conormal-functorial"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "V4 stage 3 worker",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1); verified online at https://stacks.math.columbia.edu/tag/0473 and https://stacks.math.columbia.edu/tag/01JU"
+  "place": "Tag 0473, affine reduction; Tag 01R3 (2); Stacks Project Schemes Tag 01JU (1). Read at https://stacks.math.columbia.edu/tag/0473, https://stacks.math.columbia.edu/tag/01R3 and https://stacks.math.columbia.edu/tag/01JU."
  },
  "mathlib_searches": [
   {
@@ -157,12 +137,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T205632-L-933271",
+  "landing": "20261013T025311-L-3425943",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
