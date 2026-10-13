@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-direct-image-square-unit-transport",
+ "kind": "statement",
+ "title": "Equality transport of a single derived pushforward unit",
+ "statement": "Fix schemes A,B,C,D and derived-category instances [def-pc-derived-category]. Let s:A→B, t:B→D, q:A→C, r:C→D and h:s≫t=q≫r. Construct the ordinary comparison e from pushforwardComp(s,t), pushforwardCongr(h), and inverse pushforwardComp(q,r). Use the scheme derived direct images of [def-pc-derived-direct-image] and their defining right-derived units. For each homotopy complex K of module sheaves on A, the single right-derived unit for s≫t followed by equality transport of the derived direct image is the localization of e on homotopy complexes followed by the single right-derived unit for q≫r. Composite direct-image functors are identified by their definitional composition equality. No pullback adjunctions or composition mates occur. The full equation is lean.statement.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 0D5T, ordinary pushforward-composition normalization and equality transport of a single derived unit"
+ },
+ "proof": [
+  {
+   "text": "The pushforward composition isomorphisms are identity maps on sections over every open, by the Mathlib component formulas. They identify degreewise pushforward by two successive morphisms with pushforward by their composite, and hence give the same identification on homotopy complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the sectionwise identity formulas to identify pushforwardComp with the equality maps for the definitionally equal direct-image functors; their degreewise identity maps descend to identities under HomotopyCategory.quotient. The square comparison is then equality transport along h. Apply eqToHom_naturality to the family of right-derived units indexed by the composite scheme morphism. Its source equality map is Qh applied to the homotopy equality map, since functors preserve eqToHom. Additive structures are propositions, so their transports agree by proof irrelevance. Substitution gives exactly the displayed equality, for arbitrary complexes including zero and empty-scheme cases, without cancelling any unit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY and 0D5T, elementary normalization of the ordinary square before pasting composition mates",
+  "group": "V3",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor unit transport along equality of composite morphisms pushforward",
+   "results": "Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom and generic derived comparison factorization lemmas.",
+   "date": "2026-10-13",
+   "verdict": "Generic comparison laws, no exact equality-transport square statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "pushforwardComp, pushforward_id_comp, pushforward_comp_id, pushforward_assoc, pushforwardComp_hom_app_val_app, pushforwardComp_inv_app_val_app, conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-13",
+   "verdict": "The component formulas prove the ordinary comparison, but do not state derived-unit transport."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit.*congr|pushforwardCongr",
+   "results": "Scheme.Modules.pushforwardCongr and pushforwardCongr_hom_app_app; no rightDerivedFunctorUnit congruence lemma.",
+   "date": "2026-10-13",
+   "verdict": "Use pushforwardCongr for the explicit comparison; equality normalization still needs a separate lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality transport of a right derived functor unit across a commutative square of pushforward functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a family of morphisms along equality of its parameter commutes with equality isomorphisms",
+   "results": "CategoryTheory.dcongr_arg, congrArg_cast_hom_left/right and related generic transport lemmas.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: generic categorical equality transport, not the concrete ordinary comparison identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToHom_naturality",
+   "results": "One hit: CategoryTheory.eqToHom_naturality in Mathlib.CategoryTheory.EqToHom.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: supplies the final equality-family law, not normalization of pushforwardComp and pushforwardCongr on homotopy objects."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp.*eqTo|eqToHom_naturality|mapHomotopyCategory.*eqToHom",
+   "results": "Generic eqToHom_naturality and uses. Source searches also found identity composition comparison definitions and an analogous pullback equality argument in HomotopyPullbackSquareLocalization. No existing direct-image square-unit transport theorem.",
+   "date": "2026-10-14",
+   "verdict": "Second reading: no duplicate of the split-off theorem; the remaining normalization is a genuine strictly smaller step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPushforwardSquareMateUnit",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Equality-transport step of the derived sheaf square mate unit equation",
+   "via": [
+    "lem-pc-affine-sections-square-mate-path-unit",
+    "lem-pc-derived-pushforward-square-mate-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectImageSquareUnitTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageSquareUnitTransport.lean",
+  "declaration": "AlgebraicGeometry.directImageSquare_unit_transport",
+  "statement": "theorem directImageSquare_unit_transport {A B C D : Scheme.{u}}\n    (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r)\n    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :\n    (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n        (eqToHom (congrArg (fun v ↦ schemeDerivedDirectImage.{u, w} v) h)).app\n          (DerivedCategory.Qh.obj K) =\n      DerivedCategory.Qh.map\n          (((directImageSquareIso s t q r h).hom.mapHomotopyCategory (.up ℤ)).app K) ≫\n        (RingedSpace.moduleDirectImage (q ≫ r).toLRSHom.toShHom).rightDerivedFunctorUnit.app K",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aac2f",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T201811-L-3977748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-aac2f",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T201811-L-3977748",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signatures and delivered proofs with their nodes and dependencies; both modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms plus expected sorryAx."
+ }
+}

@@ -13,27 +13,39 @@
  },
  "proof": [
   {
-   "text": "Construct e from the canonical underived pushforwardComp for p,f, transport along pullback.condition, and the inverse pushforwardComp for q,g. Each acts as identity on sections at the whole open; the scalar actions agree by functoriality of the structure maps.",
-   "uses": [],
+   "text": "Construct the ordinary comparison from pushforwardComp, pushforwardCongr along the pullback condition, and inverse pushforwardComp. Apply the proved directImageSquareIso_top to obtain the whole-space section identity.",
+   "uses": [
+    "lem-pc-direct-image-square-unit-transport"
+   ],
    "elementary": true
   },
   {
-   "text": "Transpose the defining left-derived composition factorization under the pinned derived adjunctions. Their Hom equivalence equations identify the two successive pullback counits with the two successive direct-image units. The underived pullback composition map is itself the conjugate of pushforwardComp, so the underived maps in this transposition combine to e. Naturality moves the individual derived units to form the pasted units. The universal properties extend the resulting mate equation from the defining factorization to every homotopy-category object. No derived unit is cancelled.",
+   "text": "Apply derivedDirectImage_square_mate to the pullback square. The private canonical_adjoint_eq proves the equality of the two pinned adjunction names by reflexivity. The private canonical_conjugate_eq transports this equality through adjunction composition and conjugateEquiv by congrArg₂, avoiding repeated unfolding of the chosen adjunction data. Evaluate the resulting equality at Qh(J): delta is the first normalized composition comparison, equality transport of the composite derived direct image, and the inverse second comparison.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-sc-derived-direct-image-square-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the two inverse-comparison unit equations from exists_derivedModuleDirectImageComposition, through the proved normalized_unit helper. Keep J arbitrary. The proved generic square_paste helper rewrites the pasted first unit using its equation, substitutes the square-mate formula, and cancels the adjacent inverse/comparison isomorphisms. Apply directImageSquare_unit_transport, then the second inverse-comparison unit equation. Associativity gives the requested equation. Only isomorphisms are cancelled, never a derived unit.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-direct-image-square-unit-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "lem-pc-direct-image-square-unit-transport",
+  "lem-sc-derived-direct-image-square-mate",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY and 0D5T; isolated sheaf-level calculation from step 1 of lem-pc-affine-sections-square-mate-path-unit"
+  "place": "Tags 08HY and 0D5T; normalized square-mate and composition-unit pasting, with explicit congruence of the two pinned adjunction names and ordinary single-unit equality transport left separately."
  },
  "mathlib_searches": [
   {
@@ -109,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-91606",
-  "group": "T2",
+  "reviewer": "X-aac2f",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T151136-L-878245",
+  "landing": "20261013T201811-L-3977748",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, the affine pasting proof with its recorded dependencies, and the remaining sheaf mate equation with the pinned adjunctions; both delivered modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms and expected sorryAx."
+  "note": "independent Codex review: Matched unchanged theorem signatures and delivered proofs with their nodes and dependencies; both modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms plus expected sorryAx."
  }
 }
