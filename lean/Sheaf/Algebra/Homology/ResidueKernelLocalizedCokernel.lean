@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.Algebra.Homology.ResidueKernelLocalizedCokernelTransport
 
 @[expose] public section
 set_option autoImplicit false
@@ -36,6 +37,8 @@ theorem residue_kernel_localized_cokernel
       ≃ₗ[Localization.AtPrime 𝔭]
         (((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y)
           ⧸ LinearMap.range ((ModuleCat.extendScalars
-            (algebraMap R (Localization.AtPrime 𝔭))).map f).hom)) := by sorry
+            (algebraMap R (Localization.AtPrime 𝔭))).map f).hom)) := by
+  obtain ⟨e⟩ := localized_range_quotient_extendScalars R X Y f 𝔭
+  exact ⟨(localizedQuotientEquiv 𝔭.primeCompl (LinearMap.range f.hom)).symm.trans e⟩
 
 end ModuleCat
