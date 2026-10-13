@@ -13,12 +13,12 @@
  },
  "proof": [
   {
-   "text": "The pushforward composition isomorphisms are identity maps on sections over every open, by the Mathlib component formulas. They identify degreewise pushforward by two successive morphisms with pushforward by their composite, and hence give the same identification on homotopy complexes.",
+   "text": "Unfold directImageSquareIso and the scheme and sheaf pushforwardComp definitions: both composition comparisons are reflexive isomorphisms. In the private helper pushforwardCongr_eq, substitute the morphism equality and use extensionality on module sheaves and opens to identify pushforwardCongr.hom with eqToHom.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Use the sectionwise identity formulas to identify pushforwardComp with the equality maps for the definitionally equal direct-image functors; their degreewise identity maps descend to identities under HomotopyCategory.quotient. The square comparison is then equality transport along h. Apply eqToHom_naturality to the family of right-derived units indexed by the composite scheme morphism. Its source equality map is Qh applied to the homotopy equality map, since functors preserve eqToHom. Additive structures are propositions, so their transports agree by proof irrelevance. Substitution gives exactly the displayed equality, for arbitrary complexes including zero and empty-scheme cases, without cancelling any unit.",
+   "text": "Apply the private helper directImage_unit_congr to the two composite scheme morphisms and h. This helper is proved by substituting their equality, after which simp reduces both equality transports and the induced homotopy and localization maps to identities. No unit is cancelled and no acyclicity hypothesis is used. Local irreducibility settings keep chosen derived functors and Qh folded during elaboration.",
    "uses": [],
    "elementary": true
   }
@@ -27,8 +27,8 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HY and 0D5T, elementary normalization of the ordinary square before pasting composition mates",
-  "group": "V3",
+  "place": "Tags 08HY and 0D5T; elementary equality induction and normalization using Mathlib pushforward composition definitions",
+  "group": "F3",
   "date": "2026-10-14"
  },
  "mathlib_searches": [
@@ -127,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-aac2f",
-  "group": "V3",
+  "reviewer": "X-23ad0",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T201811-L-3977748",
+  "landing": "20261013T234508-L-2161819",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged theorem signatures and delivered proofs with their nodes and dependencies; both modules and the sole direct importer compile cleanly, and axiom probes show only permitted axioms plus expected sorryAx."
+  "note": "independent Codex review: Delivered module and its direct importer compile cleanly; proof, node, report, and scoped interface changes match the stated delivery requirements."
  }
 }

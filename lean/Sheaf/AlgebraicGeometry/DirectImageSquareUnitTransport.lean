@@ -52,11 +52,51 @@ theorem directImageSquareIso_top {A B C D : Scheme.{u}}
   simp
 
 
-variable [∀ Z : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+section EqualityTransport
+-- Keep the localization and its chosen right-derived units folded during comparison.
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
+  DerivedCategory.Qh
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem pushforwardCongr_eq {A D : Scheme.{u}}
+    (v v' : A ⟶ D) (h : v = v') :
+    (Scheme.Modules.pushforwardCongr h).hom =
+      eqToHom (congrArg
+        (fun f : A ⟶ D ↦ RingedSpace.moduleDirectImage f.toLRSHom.toShHom) h) := by
+  subst v'
+  ext M U
+  simp
+  rfl
+
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem directImage_unit_congr {A D : Scheme.{u}}
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings D.toRingedSpace))]
+    (v v' : A ⟶ D) (h : v = v')
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
+    (RingedSpace.moduleDirectImage v.toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫
+        (eqToHom (congrArg (fun f : A ⟶ D ↦ schemeDerivedDirectImage.{u, w} f) h)).app
+          (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map
+          ((NatTrans.mapHomotopyCategory (eqToHom (congrArg
+            (fun f : A ⟶ D ↦ RingedSpace.moduleDirectImage f.toLRSHom.toShHom) h))
+            (.up ℤ)).app K) ≫
+        (RingedSpace.moduleDirectImage v'.toLRSHom.toShHom).rightDerivedFunctorUnit.app K := by
+  subst v'
+  simp
+
+variable [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.lazyProjDelta false in
+set_option backward.isDefEq.lazyWhnfCore false in
 set_option maxHeartbeats 800000 in
 -- Matching the composite homotopy functors unfolds the sheaf scalar restrictions.
 /-- Equality transport of a single right-derived unit across the ordinary square.
@@ -92,6 +132,13 @@ theorem directImageSquare_unit_transport {A B C D : Scheme.{u}}
       DerivedCategory.Qh.map
           (((directImageSquareIso s t q r h).hom.mapHomotopyCategory (.up ℤ)).app K) ≫
         (RingedSpace.moduleDirectImage (q ≫ r).toLRSHom.toShHom).rightDerivedFunctorUnit.app K
-    := by sorry
+    := by
+  simp only [directImageSquareIso, Iso.trans_hom, Iso.symm_hom,
+    Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp,
+    Iso.refl_hom, Iso.refl_inv]
+  rw [pushforwardCongr_eq]
+  exact directImage_unit_congr (s ≫ t) (q ≫ r) h K
+
+end EqualityTransport
 
 end AlgebraicGeometry
