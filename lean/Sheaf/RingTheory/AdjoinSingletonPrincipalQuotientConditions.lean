@@ -12,11 +12,14 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.RingTheory.AdjoinSingletonAssociatedLocalization
+import Sheaf.RingTheory.AdjoinQuotientSurjective
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.FiniteOverNagata
-import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes
-import Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
 import Sheaf.RingTheory.NagataLocalization
-import WeilConjectures.AlgebraicGeometry.Regular
+import Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
+import Mathlib.RingTheory.Localization.Ideal
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Principal-quotient conditions for a fractional monogenic algebra
@@ -28,6 +31,38 @@ Source: Stacks Project, Algebra, Tag 0334, Step 5, properties (2), (3)(a), (3)(b
 @[expose] public section
 
 universe u v
+
+/-- Transport the Nagata property through a ring isomorphism, viewed as a finite map. -/
+private theorem nagata_of_equiv {B C : Type*} [CommRing B] [CommRing C]
+    (e : B ≃+* C) (hB : IsNagataRing B) : IsNagataRing C := by
+  let := e.toRingHom.toAlgebra
+  have : Module.Finite B C := RingHom.Finite.of_surjective e.toRingHom e.surjective
+  exact (finite_over_nagata_is_nagata B C hB).1
+
+/-- A prime quotient of the local monogenic algebra in which the generator dies is Nagata. -/
+private theorem adjoin_local_quotient_nagata (R : Type u) (K : Type v)
+    [CommRing R] [CommRing K] [Algebra R K] (hR : IsNagataRing R) (x : K)
+    (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsPrime]
+    (p : Ideal (Localization.AtPrime m))
+    (hx : algebraMap (Algebra.adjoin R ({x} : Set K)) (Localization.AtPrime m)
+      ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ ∈ p) :
+    IsNagataRing (Localization.AtPrime m ⧸ p) := by
+  let S := Algebra.adjoin R ({x} : Set K)
+  let A := Localization.AtPrime m
+  let q : Ideal S := p.under S
+  have hsurj : Function.Surjective (algebraMap R (S ⧸ q)) :=
+    adjoin_quotient_surjective R K ({x} : Set K) q
+      (fun y hy ↦ by obtain rfl := Set.mem_singleton_iff.mp hy; exact hx)
+  have : Module.Finite R (S ⧸ q) :=
+    Module.Finite.of_surjective (Algebra.linearMap R (S ⧸ q)) hsurj
+  have hq : IsNagataRing (S ⧸ q) := (finite_over_nagata_is_nagata R (S ⧸ q) hR).1
+  let T := Algebra.algebraMapSubmonoid (S ⧸ q) m.primeCompl
+  have hloc := (isNagataRing_localization (S ⧸ q) T hq).1
+  have heq : q.map (algebraMap S A) = p := IsLocalization.map_under m.primeCompl A p
+  have hcanonical : IsNagataRing (A ⧸ q.map (algebraMap S A)) :=
+    nagata_of_equiv (IsLocalization.algEquiv T (Localization T)
+      (A ⧸ q.map (algebraMap S A))).toRingEquiv hloc
+  exact nagata_of_equiv (Ideal.quotEquivOfEq heq) hcanonical
 
 /-- The nonzero generator in a maximal ideal satisfies the three quotient conditions
 of the analytic-unramifiedness criterion.
@@ -66,4 +101,67 @@ theorem adjoin_singleton_atPrime_principal_quotient_conditions
     (∀ p ∈ associatedPrimes A (A ⧸ Ideal.span {t}), (Ideal.span {t}).IsMinimalPrime p) ∧
     (∀ p : associatedPrimes A (A ⧸ Ideal.span {t}),
       IsRegularLocalRing (Localization.AtPrime p.1)) ∧
-    (∀ p ∈ associatedPrimes A (A ⧸ Ideal.span {t}), p.IsAnalyticallyUnramified) := by sorry
+    (∀ p ∈ associatedPrimes A (A ⧸ Ideal.span {t}), p.IsAnalyticallyUnramified) := by
+  dsimp only
+  let S := Algebra.adjoin R ({x} : Set K)
+  let A := Localization.AtPrime m
+  let tS : S := ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩
+  let t : A := algebraMap S A tS
+  have htS : tS ≠ 0 := fun h ↦ hx0 (congrArg (fun z : S ↦ (z : K)) h)
+  have ht : t ≠ 0 := fun h ↦ htS
+    ((IsLocalization.injective A m.primeCompl_le_nonZeroDivisors)
+      (by simpa only [map_zero] using h))
+  have hlocal (p : associatedPrimes A (A ⧸ Ideal.span {t})) :
+      p.1.height = 1 ∧ IsRegularLocalRing (Localization.AtPrime p.1) := by
+    obtain ⟨q, hq, hheight, ⟨e⟩⟩ := adjoin_singleton_associated_localization R K x hx0 m hx p
+    let : q.IsPrime := hq
+    have hdimq : ringKrullDim (Localization.AtPrime q) = 1 := by
+      rw [IsLocalization.AtPrime.ringKrullDim_eq_height q, hheight]
+      rfl
+    have hdim : ringKrullDim (Localization.AtPrime p.1) = 1 :=
+      e.ringKrullDim.trans hdimq
+    have hpheight : p.1.height = 1 := by
+      rw [IsLocalization.AtPrime.ringKrullDim_eq_height p.1] at hdim
+      exact_mod_cast hdim
+    let : IsIntegrallyClosed (Localization.AtPrime q) :=
+      isIntegrallyClosed_of_isLocalization _ q.primeCompl q.primeCompl_le_nonZeroDivisors
+    let : IsRegularLocalRing (Localization.AtPrime q) :=
+      IsRegularLocalRing.of_isIntegrallyClosed _ hdimq.le
+    exact ⟨hpheight, IsRegularLocalRing.of_ringEquiv e.symm⟩
+  have hle (p : Ideal A) (hp : p ∈ associatedPrimes A (A ⧸ Ideal.span {t})) :
+      Ideal.span {t} ≤ p := by
+    simpa only [Submodule.annihilator_top, Ideal.annihilator_quotient] using hp.annihilator_le
+  refine ⟨?_, fun p ↦ (hlocal p).2, ?_⟩
+  · intro p hp
+    let : p.IsPrime := hp.isPrime
+    refine ⟨⟨inferInstance, hle p hp⟩, ?_⟩
+    intro q hq hqp
+    let : q.IsPrime := hq.1
+    by_contra hpq
+    have hlt : q < p := lt_of_le_not_ge hqp hpq
+    have hqbot : q ≠ ⊥ := by
+      intro heq
+      have hmem : t ∈ q := hq.2 (Ideal.subset_span (Set.mem_singleton t))
+      exact ht (by simpa [heq] using hmem)
+    have hqheight : 1 ≤ q.height := Order.one_le_iff_ne_zero.mpr
+      (Ideal.height_eq_zero_iff_eq_bot.not.mpr hqbot)
+    have hbad := Ideal.height_add_one_le_of_lt_of_isPrime hlt
+    rw [(hlocal ⟨p, hp⟩).1] at hbad
+    have htwo : (2 : ℕ∞) ≤ q.height + 1 := by
+      calc
+        (2 : ℕ∞) = 1 + 1 := by norm_num
+        _ ≤ q.height + 1 := add_le_add hqheight le_rfl
+    have : (2 : ℕ∞) ≤ 1 := htwo.trans hbad
+    norm_num at this
+  · intro p hp
+    let : p.IsPrime := hp.isPrime
+    have hle : Ideal.span {algebraMap (Algebra.adjoin R ({x} : Set K))
+        (Localization.AtPrime m) ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩} ≤ p := by
+      simpa only [Submodule.annihilator_top, Ideal.annihilator_quotient] using hp.annihilator_le
+    have hxp := hle (Ideal.subset_span (Set.mem_singleton _))
+    let : IsLocalRing (Localization.AtPrime m ⧸ p) :=
+      IsLocalRing.of_surjective' _ Ideal.Quotient.mk_surjective
+    refine ⟨inferInstance, ?_⟩
+    rw [IsLocalRing.map_maximalIdeal_of_surjective _ Ideal.Quotient.mk_surjective]
+    exact isAnalyticallyUnramified_of_isNagataRing _
+      (adjoin_local_quotient_nagata R K hR x m p hxp)

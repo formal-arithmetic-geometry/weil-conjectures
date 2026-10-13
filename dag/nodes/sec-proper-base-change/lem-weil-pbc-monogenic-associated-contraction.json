@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-monogenic-associated-contraction",
+ "kind": "statement",
+ "title": "Contraction of associated primes of a fractional monogenic principal quotient",
+ "statement": "Let $R$ be a Noetherian normal domain [def-weil-pbc-noetherian-ring] [def-weil-pbc-normal-ring], $K$ its fraction field, and $x\\in K$ nonzero. Assume $S=R[x]$ is Noetherian, and let $m$ be a maximal ideal of $S$ containing $x$. Put $A=S_m$ [def-weil-pbc-localization-at-prime] and $t=x/1$. If $p$ is an associated prime of $A/tA$, meaning the annihilator of a nonzero class is $p$, then its contraction to $R$ is an associated prime of $R/J$, where $J=R\\cap xR$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, Step 5, paragraphs identifying S/xS = R/(R ∩ xR) and verifying (2), (3)(a); https://stacks.math.columbia.edu/tag/0334"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "The shared adjoin quotient-surjectivity theorem proves that the map R → S/xS is surjective: the generator maps to zero, and constants, sums and products lift.",
+   "uses": [
+    "lem-weil-pbc-adjoin-quotient-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To identify its kernel J, write r = x f(x). If r = 0 there is nothing to prove. Otherwise P = C r - X f vanishes at x, and reverse(P) vanishes at x inverse with leading coefficient r. The leading-coefficient integrality lemma gives that r/x is integral over R, and normality puts it in R. Conversely r = cx with c in R belongs to xS. The first isomorphism theorem gives R/J ≃ S/xS.",
+   "uses": [
+    "lem-weil-pbc-leading-coefficient-times-root-integral",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module A/tA is the localization of S/xS at m. Mathlib Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg contracts p to an associated prime qS of S/xS, using Noetherianity of S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose an annihilator witness for qS. Its annihilator over R is the contraction qS ∩ R by the scalar-tower identity. Transport this witness through the R-linear isomorphism R/J ≃ S/xS; its annihilator is unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-leading-coefficient-times-root-integral",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-adjoin-quotient-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Algebra, Tag 0334, Step 5; Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic; Mathlib.RingTheory.Ideal.AssociatedPrime.Localization",
+  "place": "Identify the quotient kernel by reversing C r - X f and applying leading-coefficient integrality; contract an associated prime of the localized finite quotient, then restrict and transport its annihilator witness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A valuation ring is maximal among local subrings of its fraction field which dominate it",
+   "results": "Service unavailable: Internal Server Error (previous sandbox search, 2026-10-12).",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "bijective_rangeRestrict_comp_of_valuationRing",
+   "results": "Exact general valuation-ring comparison found in Mathlib.RingTheory.Valuation.LocalSubring; no theorem for the whole fractional monogenic localization.",
+   "date": "2026-10-13",
+   "verdict": "use comparison as a proof ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_rangeRestrict_comp_of_valuationRing|comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg|eval₂_reverse_eq_zero_iff",
+   "results": "Found valuation-ring comparison, associated-prime contraction for localized finite modules, and polynomial-reversal root identity. These prove the glue; no whole-statement match.",
+   "date": "2026-10-12",
+   "verdict": "use ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contract an associated prime of a localized quotient module along an algebra map and identify the quotient R adjoin x modulo x with R modulo the intersection R and xR",
+   "results": "Eight hits, including comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg and preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule. The former is already used. No fractional monogenic quotient-kernel identification or full helper statement found.",
+   "date": "2026-10-13",
+   "verdict": "second reading: reuse the existing localization ingredient; retain the proved kernel and annihilator argument"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Tag 0334, Step 5, quotient comparison and the height-one localization argument verifying (2) and (3)(a)",
+   "via": [
+    "lem-weil-pbc-monogenic-principal-quotient-conditions",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinSingletonAssociatedContraction",
+  "file": "lean/Sheaf/RingTheory/AdjoinSingletonAssociatedContraction.lean",
+  "declaration": "adjoin_singleton_associated_contraction",
+  "statement": "theorem adjoin_singleton_associated_contraction (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (x : K) (hx0 : x ≠ 0) [IsNoetherianRing (Algebra.adjoin R ({x} : Set K))] (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] (_hx : (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set K)) ∈ m) (p : associatedPrimes (Localization.AtPrime m) (Localization.AtPrime m ⧸ Ideal.span {algebraMap (Algebra.adjoin R ({x} : Set K)) (Localization.AtPrime m) ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩})) : (p.1.under (Algebra.adjoin R ({x} : Set K))).under R ∈ associatedPrimes R (R ⧸ (Submodule.span R ({x} : Set K)).comap (Algebra.linearMap R K))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

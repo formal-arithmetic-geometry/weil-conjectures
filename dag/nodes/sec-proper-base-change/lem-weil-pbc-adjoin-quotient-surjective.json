@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-adjoin-quotient-surjective",
+ "kind": "statement",
+ "title": "Surjectivity of a quotient killing all adjoin generators",
+ "statement": "Let $R$ and $K$ be commutative rings, with an $R$-algebra structure on $K$, let $s$ be a subset of $K$, and put $S=R[s]$. If $q$ is an ideal of $S$ containing every element of $s$, then the algebra map $R \\to S/q$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, Step 5, surjectivity in the quotient presentation R[x]/xR[x] = R/J; elementary generalization to an arbitrary generating set."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Lift a quotient class to S. Induct on its adjoin membership: a generator maps to zero, constants lift to themselves, and sums and products lift using the corresponding operations on constants. This proves surjectivity. The argument includes the empty generating set and the zero quotient.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Algebra, Tag 0334, Step 5",
+  "place": "Generalization of the existing singleton quotient-map proof by adjoin induction, shared by both callers to remove duplicate private proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If an ideal of an algebra adjoin contains all generators, the algebra map from the base ring to its quotient is surjective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebra map from R to a quotient of Algebra.adjoin R s is surjective when every generator in s belongs to the quotient ideal",
+   "results": "Eight hits include generators algebraMap surjectivity, adjoinAlgebraMap_surjective, and Quotient.mkₐ_surjective; none states surjectivity from the base after killing all generators.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; elementary adjoin induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.adjoin, Function.Surjective",
+   "results": "Three hits: Minpoly.toAdjoin.surjective, adjoinAlgebraMap_surjective, QuadraticAlgebra.lift_surjective_iff; different maps and codomains.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|algebraMap.*surjective in Mathlib/RingTheory/Adjoin and Ideal/Quotient; adjoin_quotient_surjective|quotient_map_surjective in delivered modules",
+   "results": "Found the two duplicate private singleton proofs in this delivery. Replace both by this shared generalization. Mathlib adjoinAlgebraMap_surjective has an adjoin codomain rather than the whole quotient.",
+   "date": "2026-10-13",
+   "verdict": "consolidate duplicate proofs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Tag 0334, Step 5, surjectivity of the base map after killing the adjoin generator",
+   "via": [
+    "lem-weil-pbc-monogenic-principal-quotient-conditions",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinQuotientSurjective",
+  "file": "lean/Sheaf/RingTheory/AdjoinQuotientSurjective.lean",
+  "declaration": "adjoin_quotient_surjective",
+  "statement": "theorem adjoin_quotient_surjective (R : Type u) (K : Type v) [CommRing R] [CommRing K] [Algebra R K] (s : Set K) (q : Ideal (Algebra.adjoin R s)) (hs : ∀ x (hx : x ∈ s), (⟨x, Algebra.subset_adjoin hx⟩ : Algebra.adjoin R s) ∈ q) : Function.Surjective (algebraMap R (Algebra.adjoin R s ⧸ q))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

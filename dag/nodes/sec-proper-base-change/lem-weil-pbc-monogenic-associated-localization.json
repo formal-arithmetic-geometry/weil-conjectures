@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-monogenic-associated-localization",
+ "kind": "statement",
+ "title": "Associated localizations of a fractional monogenic algebra",
+ "statement": "Let $R$ be a Noetherian normal domain [def-weil-pbc-noetherian-ring] [def-weil-pbc-normal-ring], $K$ its fraction field, and $x\\in K$ nonzero. Assume $S=R[x]$ is Noetherian, and let $m$ be a maximal ideal of $S$ containing $x$. Put $A=S_m$ [def-weil-pbc-localization-at-prime] and $t=x/1$. For every associated prime $p$ of $A/tA$, there exists a prime $q$ of $R$ of height one and a ring isomorphism $A_p\\cong R_q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, Step 5, paragraphs identifying S/xS = R/(R ∩ xR) and verifying (2), (3)(a); https://stacks.math.columbia.edu/tag/0334"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Contract p to qS in S and then q in R. The associated-contraction theorem gives that q is associated to R/(R ∩ xR). The height part of Tag 031T gives q.height = 1.",
+   "uses": [
+    "lem-weil-pbc-monogenic-associated-contraction",
+    "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-height"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normality localizes. Thus B = R_q is a one-dimensional Noetherian normal local domain, hence a regular local DVR. The canonical localization map f : B → C = S_qS is local, since q is the contraction of qS.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify K with Frac(R). The inclusion S → Frac(R) is injective and sends every element outside qS to a nonzero element. Extend it to an injective map g : C → Frac(R). Localization extensionality gives g composed with f equal to the fraction-field inclusion of B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib bijective_rangeRestrict_comp_of_valuationRing to the local map f and the fraction-field embedding g. It gives a bijection from B to the range of g. Injectivity of g gives that f itself is bijective, hence B ≃ C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Iterated localization identifies A_p with S_qS, since qS is the contraction of p. Compose this equivalence with C ≃ B. All objects and maps are explicit; no arbitrary witness is chosen from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monogenic-associated-contraction",
+  "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-height",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Algebra, Tag 0334, Step 5; Mathlib.RingTheory.Valuation.LocalSubring and Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic",
+  "place": "Formal adaptation of the quotient and DVR comparison: reverse the polynomial to identify the kernel; use the maximality of valuation local subrings for the localization equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A valuation ring is maximal among local subrings of its fraction field which dominate it",
+   "results": "Service unavailable: Internal Server Error (previous sandbox search, 2026-10-12).",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "bijective_rangeRestrict_comp_of_valuationRing",
+   "results": "Exact general valuation-ring comparison found in Mathlib.RingTheory.Valuation.LocalSubring; no theorem for the whole fractional monogenic localization.",
+   "date": "2026-10-13",
+   "verdict": "use comparison as a proof ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "bijective_rangeRestrict_comp_of_valuationRing|comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg|eval₂_reverse_eq_zero_iff",
+   "results": "Found valuation-ring comparison, associated-prime contraction for localized finite modules, and polynomial-reversal root identity. These prove the glue; no whole-statement match.",
+   "date": "2026-10-12",
+   "verdict": "use ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Tag 0334, Step 5, quotient comparison and the height-one localization argument verifying (2) and (3)(a)",
+   "via": [
+    "lem-weil-pbc-monogenic-principal-quotient-conditions",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinSingletonAssociatedLocalization",
+  "file": "lean/Sheaf/RingTheory/AdjoinSingletonAssociatedLocalization.lean",
+  "declaration": "adjoin_singleton_associated_localization",
+  "statement": "theorem adjoin_singleton_associated_localization (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (x : K) (hx0 : x ≠ 0) [IsNoetherianRing (Algebra.adjoin R ({x} : Set K))] (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] (hx : (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set K)) ∈ m) (p : associatedPrimes (Localization.AtPrime m) (Localization.AtPrime m ⧸ Ideal.span {algebraMap (Algebra.adjoin R ({x} : Set K)) (Localization.AtPrime m) ⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩})) : ∃ (q : Ideal R) (_ : q.IsPrime), q.height = 1 ∧ Nonempty (Localization.AtPrime p.1 ≃+* Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T022406-L-3210226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
