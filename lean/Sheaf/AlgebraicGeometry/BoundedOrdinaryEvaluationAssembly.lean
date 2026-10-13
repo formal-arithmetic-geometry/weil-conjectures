@@ -5,27 +5,21 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Algebra.Homology.HomComplexProjections
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import Mathlib.Algebra.Homology.Single
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
+public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationSourceBiproduct
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationTargetBiproduct
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDiagonalBlock
 import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Finite-support assembly of ordinary evaluation
 
 Source: Stacks Project, Tags 08DQ and 08DM, finite total-complex calculation.
 (blueprint: lem-pc-bounded-ordinary-evaluation-assembly).
-
-The evaluation constructions are moved here without changing their definitions,
-so the assembly theorem can be imported without a cycle. The original module
-publicly reexports all of these declarations.
 -/
 
 @[expose] public section
 
+set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -38,90 +32,7 @@ open TopologicalSpace
 namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
-
-local instance localEvaluationPreadditive {C : Type u} [Category.{u} C]
-    {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) :
-    MonoidalPreadditive (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
-  Classical.choice (SheafOfModules.tensorClosed R).1
-
-/-- The existing module category on the localized site, written in the carrier form
-used by internal Hom. This is an abbreviation, not a different module category.
-Source: Stacks Project, Tag 08DL
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-abbrev localEvaluationModules (X : Scheme.{u}) (U : X.Opens) :=
-  SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U)
-    (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))
-
-/-- The structure sheaf in degree zero on the localized site.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def localEvaluationUnit (X : Scheme.{u}) (U : X.Opens) :
-    CochainComplex (localEvaluationModules X U) ℤ :=
-  (HomologicalComplex.single _ (.up ℤ) 0).obj (𝟙_ (localEvaluationModules X U))
-
-/-- The ordinary Hom dual, with its actual Hom-complex differential.
-Source: Stacks Project, Tag 08DM
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def localEvaluationDual (X : Scheme.{u}) (U : X.Opens)
-    (P : CochainComplex (localEvaluationModules X U) ℤ) :=
-  homComplex (R := X.sheaf.over U) P (localEvaluationUnit X U)
-
-/-- The total tensor with the ordinary Hom dual.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def localEvaluationTensor (X : Scheme.{u}) (U : X.Opens)
-    (P F : CochainComplex (localEvaluationModules X U) ℤ) :=
-  CochainComplex.mapBifunctor F (localEvaluationDual X U P) (curriedTensor _)
-
-/-- The specified product projection of the recorded Hom complex.
-Source: Stacks Project, Tag 08DM
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def localEvaluationProjection (X : Scheme.{u}) (U : X.Opens)
-    (P F : CochainComplex (localEvaluationModules X U) ℤ)
-    (n r s : ℤ) (h : r + n = s) :
-    (homComplex (R := X.sheaf.over U) P F).X n ⟶
-      SheafOfModules.homObj (R := X.sheaf.over U) (P.X r) (F.X s) :=
-  (Classical.choose (homComplex_projections_exists (R := X.sheaf.over U))) P F n r s h
-
-/-- The ordinary evaluation on a tensor summand, followed by a Hom projection.
-It is zero unless the dual degree cancels the input degree; otherwise it sends
-`y tensor phi` to `x ↦ y * phi(x)`, using the unit action on the second module.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def localEvaluationComponent (X : Scheme.{u}) (U : X.Opens)
-    (P F : CochainComplex (localEvaluationModules X U) ℤ)
-    (p q n r : ℤ) (hpq : p + q = n) :
-    F.X p ⊗ (localEvaluationDual X U P).X q ⟶
-      SheafOfModules.homObj (R := X.sheaf.over U) (P.X r) (F.X (r + n)) :=
-  if h : r + q = 0 then
-    SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _ _
-      ((β_ (P.X r) (F.X p ⊗ (localEvaluationDual X U P).X q)).hom ≫
-        (α_ (F.X p) ((localEvaluationDual X U P).X q) (P.X r)).hom ≫
-        F.X p ◁ ((β_ ((localEvaluationDual X U P).X q) (P.X r)).hom ≫
-          (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _
-            (𝟙_ (localEvaluationModules X U))).symm
-            (localEvaluationProjection X U P (localEvaluationUnit X U) q r 0 h ≫
-              SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r))
-                (HomologicalComplex.singleObjXSelf (.up ℤ) 0
-                  (𝟙_ (localEvaluationModules X U))).hom)) ≫
-        (ρ_ (F.X p)).hom ≫ (F.XIsoOfEq (by omega : p = r + n)).hom)
-  else 0
-
-/-- A chain map has the actual ordinary evaluation formula, with the tensor ordered
-as `F tensor Hom(P,O[0])`. This predicate specifies maps, not just objects.
-Source: Stacks Project, Tag 08DQ
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation). -/
-def IsLocalOrdinaryEvaluation (X : Scheme.{u}) (U : X.Opens)
-    (P F : CochainComplex (localEvaluationModules X U) ℤ)
-    (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F) : Prop :=
-  ∀ (p q n r : ℤ) (h : p + q = n),
-    HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)
-        (curriedTensor _) (.up ℤ) p q n h ≫ f.f n ≫
-      localEvaluationProjection X U P F n r (r + n) rfl =
-        localEvaluationComponent X U P F p q n r h
+attribute [local instance] localEvaluationPreadditive
 
 /-- Assemble evaluation from the degree-zero module comparisons.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`, and
@@ -150,6 +61,46 @@ theorem boundedOrdinaryEvaluation_degree (X : Scheme.{u}) (U : X.Opens)
       IsIso (SheafOfModules.moduleDualEvaluation (X.sheaf.over U) (P.X r) B))
     (n : ℤ)
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
-    (hf : IsLocalOrdinaryEvaluation X U P F f) : IsIso (f.f n) := by sorry
+    (hf : IsLocalOrdinaryEvaluation X U P F f) : IsIso (f.f n) := by
+  classical
+  obtain ⟨a, b, hab⟩ := hbounded
+  let S : ↥(Finset.Icc a b) → localEvaluationModules X U := fun r ↦
+    F.X (r.val + n) ⊗ (localEvaluationDual X U P).X (-r.val)
+  let T : ↥(Finset.Icc a b) → localEvaluationModules X U := fun r ↦
+    SheafOfModules.homObj (R := X.sheaf.over U) (P.X r.val) (F.X (r.val + n))
+  let d : ∀ r, S r ⟶ T r := fun r ↦
+    localEvaluationComponent X U P F (r.val + n) (-r.val) n r.val (by omega)
+  have hd (r : ↥(Finset.Icc a b)) : IsIso (d r) :=
+    ordinaryEvaluation_diagonal_block X U P F n r.val (hblocks r.val _)
+  obtain ⟨s, hs⟩ := ordinaryEvaluation_source_biproduct X U P F a b n hab
+  obtain ⟨t, ht⟩ := ordinaryEvaluation_target_biproduct X U P F a b n hab
+  have heq : s.hom ≫ f.f n ≫ t.hom = (biproduct.mapIso fun r ↦ asIso (d r)).hom := by
+    apply biproduct.hom_ext'
+    intro i
+    apply biproduct.hom_ext
+    intro j
+    simp only [Category.assoc]
+    rw [ht]
+    simp only [← Category.assoc]
+    rw [hs]
+    simp only [Category.assoc]
+    rw [hf]
+    by_cases hij : i = j
+    · subst j
+      simp [biproduct.mapIso_hom, d, S, T]
+    · have hne : j.val + -i.val ≠ 0 := by
+        intro h
+        apply hij
+        apply Subtype.ext
+        omega
+      simp only [localEvaluationComponent, dif_neg hne, biproduct.mapIso_hom,
+        biproduct.ι_map_assoc, asIso_hom]
+      change 0 = d i ≫ biproduct.ι T i ≫ biproduct.π T j
+      rw [biproduct.ι_π_ne T hij, comp_zero]
+  have hfactor : f.f n = s.inv ≫ (biproduct.mapIso fun r ↦ asIso (d r)).hom ≫ t.inv := by
+    rw [← heq]
+    simp
+  rw [hfactor]
+  infer_instance
 
 end AlgebraicGeometry

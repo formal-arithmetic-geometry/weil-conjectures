@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation; finite matrix proof formalized by J2"
  },
  "mathlib_searches": [
   {
@@ -103,34 +103,24 @@
  ],
  "proof": [
   {
-   "text": "Use homComplex_projections_exists to expose the product projections of the chosen Hom complex without reducing its full bifunctor existence statement. The product projections of Hom(P,S) identify its degree q with Hom(P^(-q),O_U): every other term of S is zero, internal Hom into zero is zero, and a product of one object with zero objects is that object by its universal property. Bounded support of P also makes this dual zero outside [-b,-a].",
+   "text": "Use the finite source and target biproduct isomorphisms, characterized by their inclusion and projection equations. Each diagonal component is invertible by the single-block lemma and hblocks.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-sc-hom-complex-projections"
+    "lem-pc-ordinary-evaluation-source-biproduct",
+    "lem-pc-ordinary-evaluation-target-biproduct",
+    "lem-pc-ordinary-evaluation-diagonal-block"
    ],
    "elementary": false
   },
   {
-   "text": "For fixed n, discard zero terms outside the finite support in the tensor coproduct and Hom product. Reindex by r=-q, p=r+n. The finite product and coproduct agree as a biproduct. The specified component equations make the transported f.f n diagonal, with r-th diagonal map the canonical module evaluation for E=P^r, B=F^(r+n), composed with tensor of the dual projection and the degree-equality transport. The supplied invertibility hypothesis, not a finite-projectivity inference, makes every diagonal map invertible.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the finite biproduct of the diagonal inverses and conjugate it by the source and target identifications. Inclusions and projections verify the two inverse equations blockwise; off-diagonal composites vanish and diagonal composites are identities. With empty support both objects are zero and the same equations hold.",
+   "text": "Check the transported map on every inclusion and projection. The evaluation hypothesis gives the component formula. Equal indices give the diagonal block and distinct indices give zero, since j-i is nonzero. Thus the transported map is the biproduct of the diagonal isomorphisms. Conjugating it by the two comparison isomorphisms proves the result, also for an empty interval.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-hom-complex",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sc-hom-complex-projections"
+  "lem-pc-ordinary-evaluation-source-biproduct",
+  "lem-pc-ordinary-evaluation-target-biproduct",
+  "lem-pc-ordinary-evaluation-diagonal-block"
  ],
  "lean": {
   "existing": false,
@@ -142,13 +132,6 @@
   "by": "C2",
   "date": "2026-10-13",
   "declarations": [
-   "AlgebraicGeometry.localEvaluationModules",
-   "AlgebraicGeometry.localEvaluationUnit",
-   "AlgebraicGeometry.localEvaluationDual",
-   "AlgebraicGeometry.localEvaluationTensor",
-   "AlgebraicGeometry.localEvaluationProjection",
-   "AlgebraicGeometry.localEvaluationComponent",
-   "AlgebraicGeometry.IsLocalOrdinaryEvaluation",
    "AlgebraicGeometry.boundedOrdinaryEvaluation_degree"
   ]
  },
@@ -165,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-632c3",
-  "group": "C2",
+  "reviewer": "X-4e924",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T045517-L-125548",
+  "landing": "20261013T100012-L-2464581",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, constructions and proof composition match the three nodes, source calculations, change record and report; compilation and reader-gate checks pass."
+  "note": "independent Codex review: Matched delivered Lean statements, definitions and proofs against the nodes, base interfaces, source calculations, change record and report; compilation and reader gate pass."
  }
 }

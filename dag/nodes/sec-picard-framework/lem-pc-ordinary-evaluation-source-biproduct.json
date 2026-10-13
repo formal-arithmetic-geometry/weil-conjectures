@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-ordinary-evaluation-source-biproduct",
+ "kind": "statement",
+ "title": "Finite biproduct decomposition of the tensor source",
+ "statement": "For a scheme X [def-pc-scheme], open U, cochain complexes P,F of module sheaves on U, and integers a,b,n, suppose P^r is zero for r<a or b<r. Put D=Hom(P,O_U[0]) [def-pc-ordinary-evaluation-data]. There is an isomorphism from the biproduct indexed by integers a<=r<=b of F^(r+n) tensor D^(-r) to degree n of Tot(F tensor D). Its composite with each biproduct inclusion is the total tensor inclusion for p=r+n and q=-r. No bound on F is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex, last two displayed sums and the final finite-free/direct-summand evaluation calculation; Tag 08DM, lemma-Rhom-strictly-perfect, finite sum versus product calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections",
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the Hom product projections to identify D^q with Hom(P^(-q),O_U), since every other target term of O_U[0] is zero. It follows that D^q is zero outside [-b,-a].",
+   "uses": [
+    "def-pc-ordinary-evaluation-data",
+    "lem-sc-hom-complex-projections",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the total tensor coproduct discard the zero summands, reindex by r=-q with p=r+n, and identify the finite coproduct with its biproduct. The inclusion equations characterize the resulting isomorphism. For an empty interval both source and target are zero.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-complex-projections"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex has a finite biproduct decomposition of the tensor with its ordinary internal Hom dual in each degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biproduct.map",
+   "results": "12 hits: CategoryTheory.Limits.biproduct.map, CategoryTheory.Limits.biproduct.map_epi, CategoryTheory.Limits.biproduct.map_mono, CategoryTheory.Limits.biproduct.map_eq_map', CategoryTheory.Limits.biproduct.mapIso_hom, CategoryTheory.Limits.biproduct.mapIso_inv, CategoryTheory.Limits.biproduct.map_π, CategoryTheory.Limits.biproduct.ι_map; no theorem for the specified ordinary evaluation projections or finite-support decompositions.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite support total tensor complex internal hom dual evaluation diagonal isomorphism",
+   "results": "8 hits: FDRep.dualTensorIsoLinHomAux, FDRep.dualTensorIsoLinHom, lTensorHomEquivHomLTensor, dualTensorHomEquiv, FDRep.dualTensorIsoLinHom_hom_hom, CharacterModule.dual_rTensor_conj_homEquiv, rTensorHomEquivHomRTensor, TensorProduct.dualDistrib; no theorem for the specified ordinary evaluation projections or finite-support decompositions.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(support|biproduct)|homComplex.*[Ii]so",
+   "results": "25 hits: Mathlib/Condensed/AB.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Geometry/Convex/ConvexSpace/Defs.lean, Mathlib/Geometry/Convex/ConvexSpace/Defs.lean, Mathlib/Geometry/Manifold/Algebra/Monoid.lean, Mathlib/Geometry/Manifold/Algebra/Monoid.lean, Mathlib/Geometry/Manifold/Algebra/Monoid.lean; no theorem for the specified ordinary evaluation projections or finite-support decompositions.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, final finite-free and retract calculation; Tag 08DM, lemma-Rhom-strictly-perfect; the strictly perfect local evaluation calculation in the tensor-Hom step of finite duality",
+   "via": [
+    "lem-pc-bounded-ordinary-evaluation-assembly"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationSourceBiproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationSourceBiproduct.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_source_biproduct",
+  "statement": "theorem ordinaryEvaluation_source_biproduct (X : Scheme.{u}) (U : X.Opens) (P F : CochainComplex (localEvaluationModules X U) ℤ) (a b n : ℤ) (hbounded : ∀ r : ℤ, r < a ∨ b < r → IsZero (P.X r)) : ∃ e : (⨁ fun r : ↥(Finset.Icc a b) ↦ F.X (r.val + n) ⊗ (localEvaluationDual X U P).X (-r.val)) ≅ (localEvaluationTensor X U P F).X n, ∀ r : ↥(Finset.Icc a b), biproduct.ι _ r ≫ e.hom = HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P) (curriedTensor _) (.up ℤ) (r.val + n) (-r.val) n (by change r.val + n + -r.val = n; omega)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4e924",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100012-L-2464581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4e924",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100012-L-2464581",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements, definitions and proofs against the nodes, base interfaces, source calculations, change record and report; compilation and reader gate pass."
+ }
+}
