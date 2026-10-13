@@ -44,8 +44,10 @@ The subsite is `AlgebraicGeometry.Scheme.AffineProEt X` with the topology
 `X` affine, an object `W` of it is an affine scheme whose structure map is ind-étale on global
 sections, that is, an affine scheme ind-étale over `X`. -/
 lemma AffineProEt.indEtale_appTop {X : Scheme.{u}} [IsAffine X] (W : X.AffineProEt) :
-    W.hom.appTop.hom.IndEtale :=
-  Scheme.AffineProEt.indEtale_appTop_of_proAffineEtale W.prop
+    W.hom.appTop.hom.IndEtale := by
+  have : IsAffine ((𝟭 Scheme).obj W.left) := inferInstanceAs (IsAffine W.left)
+  have : IsAffine ((Functor.fromPUnit X).obj W.right) := inferInstanceAs (IsAffine X)
+  exact Scheme.AffineProEt.indEtale_appTop_of_proAffineEtale W.prop
 
 /-- Conversely to `AlgebraicGeometry.ProEtale.AffineProEt.indEtale_appTop`, the spectrum of an
 ind-étale algebra over a ring `R` is an object of the affine ind-étale subsite of `Spec R`
@@ -126,7 +128,7 @@ theorem isIso_of_isIso_rightDerivedFunctorPlus_sectionsFunctor {X : Scheme.{u}}
   obtain ⟨M, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso C n
   let M' := (InjectiveObject.ι _).mapCochainComplexPlus.obj M
   refine IsZero.of_iso ?_ e.symm
-  rw [← DerivedCategory.Plus.ι.map_isZero_iff]
+  refine IsZero.of_full_of_faithful_of_isZero DerivedCategory.Plus.ι _ ?_
   refine IsZero.of_iso (DerivedCategory.isZero_Q_obj_of_exactAt M'.obj fun k ↦ ?_)
     ((DerivedCategory.quotientCompQhIso _).symm.app M'.obj)
   refine exactAt_of_exactAt_sectionsFunctor A _ _ fun W ↦ ?_
@@ -137,9 +139,11 @@ theorem isIso_of_isIso_rightDerivedFunctorPlus_sectionsFunctor {X : Scheme.{u}}
       ((HomotopyCategory.Plus.quotient _).obj M')) ≪≫ F.rightDerivedFunctorPlus.mapIso e)
   have h₂ : IsZero (DerivedCategory.Q.obj ((F.mapHomologicalComplex _).obj M'.obj)) :=
     (DerivedCategory.Plus.ι.map_isZero h₁).of_iso
-      ((DerivedCategory.quotientCompQhIso _).app _)
+      (((DerivedCategory.quotientCompQhIso _).app _).symm ≪≫
+        ((DerivedCategory.Plus.QhCompιIsoιCompQh A).app
+          (F.mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient _).obj M'))).symm)
   rw [HomologicalComplex.exactAt_iff_isZero_homology]
-  exact (DerivedCategory.Plus.ι.map_isZero h₂).of_iso
+  exact ((DerivedCategory.homologyFunctor A k).map_isZero h₂).of_iso
     ((DerivedCategory.homologyFunctorFactors _ k).app _).symm
 
 end AlgebraicGeometry.ProEtale

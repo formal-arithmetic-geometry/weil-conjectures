@@ -108,20 +108,11 @@ theorem isFinitelyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
     rw [hk]
     exact 𝒱.covers x
   obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isWContractibleRing (Sigma.desc v ≫ e.hom)
-  obtain ⟨Y, f, hf, hfS, hmono, hdisj⟩ :=
-    exists_disjoint_cover_of_comp_sigmaDesc_eq_id' v (e.hom ≫ s) ?_ S ?_
-  · let ε' : Fin (Nat.card 𝒱.I₀) ≃ ULift.{u} (Fin (Nat.card 𝒱.I₀)) := Equiv.ulift.symm
-    refine ⟨Fin (Nat.card 𝒱.I₀), fun k ↦ Y (ε' k), fun k ↦ f (ε' k),
-      ⟨inferInstance, ?_, fun k ↦ hmono _, fun i j hij Z a b hab ↦
-        hdisj _ _ (ε'.injective.ne hij) Z a b hab⟩, fun k ↦ hfS _⟩
-    refine (topology T).superset_covering (fun Z g hg ↦ ?_) hf
-    obtain ⟨_, c, _, ⟨k⟩, rfl⟩ := hg
-    obtain ⟨k', rfl⟩ := ε'.surjective k
-    exact Sieve.downward_closed _
-      (Sieve.ofArrows_mk (fun k ↦ Y (ε' k)) (fun k ↦ f (ε' k)) k') c
-  · rw [← cancel_mono e.hom, Category.assoc, Category.assoc, hs]
+  have hs' : (e.hom ≫ s) ≫ Sigma.desc v = 𝟙 _ := by
+    rw [← cancel_mono e.hom, Category.assoc, Category.assoc, hs]
     simp
-  · intro j Y b c hbc
+  have hS' (j : ULift.{u} (Fin (Nat.card 𝒱.I₀))) {Y : T.ProEt} (b : Y ⟶ W) (c : Y.left ⟶ _)
+      (hbc : c ≫ v j = b.left) : S b := by
     have ha' (i : 𝒰.I₀) : (a i).left = eqToHom (hZ i) ≫ 𝒰.f i := hZa i
     let d : Y.left ⟶ (Z (g.s₀ (ε j))).left := c ≫ g.h₀ (ε j) ≫ eqToHom (hZ _).symm
     have hd : d ≫ (a (g.s₀ (ε j))).left = b.left := by
@@ -134,6 +125,16 @@ theorem isFinitelyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
       MorphismProperty.Over.Hom.ext hd.symm
     rw [hb]
     exact S.downward_closed (hPS _ _ (ha _)) _
+  obtain ⟨Y, f, hf, hfS, hmono, hdisj⟩ :=
+    exists_disjoint_cover_of_comp_sigmaDesc_eq_id' v (e.hom ≫ s) hs' S hS'
+  let ε' : Fin (Nat.card 𝒱.I₀) ≃ ULift.{u} (Fin (Nat.card 𝒱.I₀)) := Equiv.ulift.symm
+  refine ⟨Fin (Nat.card 𝒱.I₀), fun k ↦ Y (ε' k), fun k ↦ f (ε' k),
+    ⟨inferInstance, ?_, fun k ↦ hmono _, fun i j hij Z a b hab ↦
+      hdisj _ _ (ε'.injective.ne hij) Z a b hab⟩, fun k ↦ hfS _⟩
+  refine (topology T).superset_covering (fun Z g hg ↦ ?_) hf
+  obtain ⟨_, c, _, ⟨k⟩, rfl⟩ := hg
+  obtain ⟨k', rfl⟩ := ε'.surjective k
+  exact Sieve.downward_closed _ (Sieve.ofArrows_mk _ (fun k ↦ f (ε' k)) k') c
 
 end ProEt
 

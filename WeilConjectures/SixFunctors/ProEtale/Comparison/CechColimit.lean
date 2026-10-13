@@ -72,6 +72,7 @@ theorem exactAt_cechComplex_comparisonUpperStar_obj {S : Scheme.{u}}
   have : HasFilteredColimitsOfSize.{u, u} A :=
     hasFilteredColimitsOfSize_of_univLE.{u, u, u + 1, u + 1}
   have : AB5OfSize.{u, u} A := AB5OfSize_of_univLE.{u, u, u + 1, u + 1} A
+  have : HasColimitsOfSize.{u, u} A := hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
   obtain ⟨J, _, _, pW, pU, hom, rfl⟩ := AffineProEt.exists_relativeLimitPresentation_hom _ q
   let T := AffineProEt.cechTower (q := hom.map) (presU := pU) (presW := pW) (fW := hom) rfl
   let G := ((comparisonUpperStar A S).obj I).obj
@@ -115,17 +116,17 @@ theorem exactAt_cechComplex_comparisonUpperStar_obj {S : Scheme.{u}}
   have hι (k : ℕ) (j : Jᵒᵖ) : (G.mapCocone (presentationCone (T k).presM).op).ι.app j ≫
       (T (k + 1)).pro.faceD (T k).pro G =
         (d k).app j ≫ (G.mapCocone (presentationCone (T (k + 1)).presM).op).ι.app j := by
-    simp only [Functor.mapCocone_ι_app, Cone.op_ι_app, presentationCone_π_app,
+    simp only [Functor.mapCocone_ι_app, Cone.op_ι, NatTrans.op_app, presentationCone_π_app,
       IsCechNerveAt.faceD, Preadditive.comp_sum, Preadditive.comp_zsmul, d, NatTrans.app_sum,
       NatTrans.app_zsmul, Preadditive.sum_comp, Preadditive.zsmul_comp]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     congr 1
-    rw [← G.map_comp, ← AffineProEt.CechTower.map_faceHom_map]
-    dsimp
-    rw [← G.map_comp, ← op_comp, ← op_comp, ← Functor.map_comp, ← Functor.map_comp,
-      RelativeLimitPresentation.Hom.map_π]
+    simp only [Functor.whiskerRight_app, NatTrans.op_app, ← G.map_comp, ← op_comp,
+      ← AffineProEt.CechTower.map_faceHom_map]
+    congr 2
+    rw [← Functor.map_comp, RelativeLimitPresentation.Hom.map_π, Functor.map_comp]
     rfl
-  have h := colim.exact_mapShortComplex Sh hSh (hc n) _ (hc (n + 1)) _ (hc (n + 2))
+  have h := colim.exact_mapShortComplex hSh (hc n) (hc (n + 1)) (hc (n + 2))
     ((T (n + 1)).pro.faceD (T n).pro G) ((T (n + 2)).pro.faceD (T (n + 1)).pro G)
     (hι n) (hι (n + 1))
   refine IsCechNerveAt.exactAt_of_exact_faceDShortComplex ((T (n + 2)).pro) ((T (n + 1)).pro)

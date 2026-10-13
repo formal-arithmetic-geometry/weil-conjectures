@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Sites.ArrowCechComplex
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.DenseSubsite.Basic
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
@@ -202,12 +203,13 @@ lemma exact_and_mono_map_sections {S : ShortComplex (Sheaf J A)} (hS : S.ShortEx
     (S.map (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op V))).Exact ∧
       Mono (S.f.hom.app (op V)) :=
   (Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono
-    (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op V))).1 inferInstance S hS
+    (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op V))).1
+      (comp_preservesFiniteLimits _ _) S hS
 
 lemma cechComplex_d_naturality {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) (n : ℕ) :
     φ.app (op (f.cechNerve.obj (op ⦋n⦌))) ≫ (f.cechComplex Q).d n (n + 1) =
       (f.cechComplex P).d n (n + 1) ≫ φ.app (op (f.cechNerve.obj (op ⦋n + 1⦌))) := by
-  simpa only [cechComplexFunctor_map_f] using ((f.cechComplexFunctor.map φ).comm n (n + 1)).symm
+  exact (f.cechComplexFunctor.map φ).comm n (n + 1)
 
 variable {f}
 
@@ -249,7 +251,7 @@ theorem epi_app_right_of_exactAt_cechComplex_one {S : ShortComplex (Sheaf J A)}
       t ≫ (f.cechComplex S.X₂.obj).d 0 1 := hE₁.lift_f _ hu
   have hcoc : u ≫ (f.cechComplex S.X₁.obj).d 1 2 = 0 := by
     rw [← cancel_mono (S.f.hom.app (op (f.cechNerve.obj (op ⦋2⦌)))), zero_comp,
-      Category.assoc, ← cechComplex_d_naturality (n := 1), ← Category.assoc, hu',
+      Category.assoc, ← cechComplex_d_naturality, ← Category.assoc, hu',
       Category.assoc,
       HomologicalComplex.d_comp_d, comp_zero]
   obtain ⟨T₂, π₂, _, v, hv⟩ := h₁.exact_up_to_refinements u hcoc
@@ -257,7 +259,7 @@ theorem epi_app_right_of_exactAt_cechComplex_one {S : ShortComplex (Sheaf J A)}
   -- the corrected lift is a Čech `0`-cocycle of `G₂`, hence a section over `V`
   let t' := π₂ ≫ t - v ≫ S.f.hom.app (op (f.cechNerve.obj (op ⦋0⦌)))
   have ht' : t' ≫ (f.cechComplex S.X₂.obj).d 0 1 = 0 := by
-    rw [Preadditive.sub_comp, Category.assoc, Category.assoc, cechComplex_d_naturality (n := 0),
+    rw [Preadditive.sub_comp, Category.assoc, Category.assoc, cechComplex_d_naturality,
       ← hu', ← Category.assoc, ← Category.assoc, hv, sub_self]
   obtain ⟨z, hz⟩ := exists_comp_map_cechNerveBase hf S.X₂.property t' ht'
   refine ⟨T₂, π₂ ≫ π₁, inferInstance, z, ?_⟩

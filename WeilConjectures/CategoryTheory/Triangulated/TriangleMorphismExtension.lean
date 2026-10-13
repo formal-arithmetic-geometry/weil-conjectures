@@ -20,6 +20,10 @@ and Corollaire 1.1.10 (ii), pp. 23–24
 
 - `triangle_morphism_extension` gives the extension, its equivalent square
   conditions, and the uniqueness assertions.
+
+The variant of TR3 starting from a commutative square on the second arrows (blueprint
+`lem-weil-pbc-tr3-second-square`) is Mathlib's
+`CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁`.
 -/
 
 @[expose] public section

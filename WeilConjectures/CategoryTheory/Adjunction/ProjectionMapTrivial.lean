@@ -50,14 +50,15 @@ lemma projectionMap_app_app_comp_map_of_trivial
   rw [unit_app_comp_map_projectionMap_app_app_assoc]
   have h₁ := adj.unit.naturality_assoc ((T.obj K).map (l.app M)) (G.map (ι.app _))
   dsimp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.comp_map] at h₁
-  rw [← h₁, hu, ← hδ, ← hu]
+  erw [← h₁]
+  rw [hu, ← hδ, ← hu]
   have h₂ := NatTrans.congr_app (δ.naturality (ι.app K)) M
   dsimp only [Functor.id_obj, Functor.comp_obj, NatTrans.comp_app, Functor.whiskeringLeft₂,
     Functor.postcompose₂, Functor.whiskeringLeft_obj_obj, Functor.whiskeringRight_obj_obj,
     Functor.comp_map, Functor.whiskeringRight_obj_map, Functor.whiskerRight_app,
     Functor.whiskeringLeft_obj_map, Functor.whiskerLeft_app] at h₂ ⊢
-  rw [← NatTrans.comp_app_assoc, ← T.map_comp, ← h₂]
-  simp only [projectionMapTranspose, NatTrans.comp_app, Category.assoc, T.map_comp]
-  rfl
+  rw [T.map_comp, NatTrans.comp_app, Category.assoc, h₂]
+  simp only [projectionMapTranspose, NatTrans.comp_app]
+  exact Category.assoc _ _ _
 
 end CategoryTheory.Adjunction

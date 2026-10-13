@@ -87,9 +87,11 @@ lemma inv_rightDerivedLowerStarProjectionMap_naturality_right
     inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) ≫
         ((-⊗ᴸ-(Y)[A]).obj (R((f)_*[A]).obj K)).map q =
       R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).obj K).map (L((f)^*[A]).map q)) ≫
-        inv (((rightDerivedLowerStarProjectionMap A f).app K).app P') := by
-  rw [IsIso.inv_comp_eq, reassoc_of% rightDerivedLowerStarProjectionMap_naturality_right,
-    IsIso.hom_inv_id, Category.comp_id]
+        (inv (((rightDerivedLowerStarProjectionMap A f).app K).app P') :) :=
+  (IsIso.eq_comp_inv (((rightDerivedLowerStarProjectionMap A f).app K).app P')).2
+    ((Category.assoc _ _ _).trans
+      ((IsIso.inv_comp_eq (((rightDerivedLowerStarProjectionMap A f).app K).app P)).2
+        (rightDerivedLowerStarProjectionMap_naturality_right A f K q)))
 
 /-- The projection maps `π_n : Rf_*K ⊗ᴸ Pₙ ⟶ Rf_*(K ⊗ᴸ Lf^*Pₙ)` along a tower of coefficients
 `P : ℕᵒᵖ ⥤ D(Y_proét)`, as a morphism of towers. -/
@@ -143,7 +145,7 @@ lemma inv_rightDerivedLowerStarProjectionMap_tower_comm
         ((-⊗ᴸ-(Y)[A]).obj (R((f)_*[A]).obj K)).map (P.map (homOfLE (Nat.le_succ n)).op) =
       R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
           (L((f)^*[A]).map (P.map (homOfLE (Nat.le_succ n)).op))) ≫
-        inv (((rightDerivedLowerStarProjectionMap A f).app K).app (P.obj (op n))) :=
+        (inv (((rightDerivedLowerStarProjectionMap A f).app K).app (P.obj (op n))) :) :=
   inv_rightDerivedLowerStarProjectionMap_naturality_right A f K _
 
 /-- The projection maps along a tower of coefficients `P` at which they are all invertible (for
@@ -209,9 +211,11 @@ lemma inv_rightDerivedLowerStarProjectionMap_naturality_left
     inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) ≫
         ((-⊗ᴸ-(Y)[A]).map (R((f)_*[A]).map φ)).app P =
       R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map φ).app (L((f)^*[A]).obj P)) ≫
-        inv (((rightDerivedLowerStarProjectionMap A f).app L).app P) := by
-  rw [IsIso.inv_comp_eq, reassoc_of% rightDerivedLowerStarProjectionMap_naturality_left,
-    IsIso.hom_inv_id, Category.comp_id]
+        (inv (((rightDerivedLowerStarProjectionMap A f).app L).app P) :) :=
+  (IsIso.eq_comp_inv (((rightDerivedLowerStarProjectionMap A f).app L).app P)).2
+    ((Category.assoc _ _ _).trans
+      ((IsIso.inv_comp_eq (((rightDerivedLowerStarProjectionMap A f).app K).app P)).2
+        (rightDerivedLowerStarProjectionMap_naturality_left A f φ P)))
 
 /-- **Operator naturality of the projection formula** (blueprint
 `lemma-weil-pbc-projection-formula-base-change-naturality`), for an endomorphism `φ` of `K` and
@@ -226,12 +230,12 @@ lemma rightDerivedLowerStarProjectionMap_endomorphism
       ((-⊗ᴸ-(Y)[A]).map (R((f)_*[A]).map φ)).app P ≫
         ((rightDerivedLowerStarProjectionMap A f).app K).app P ∧
     ∀ [IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app P)],
-      ((-⊗ᴸ-(Y)[A]).map (R((f)_*[A]).map φ)).app P ≫
-          inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) =
-        inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) ≫
-          R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map φ).app (L((f)^*[A]).obj P)) :=
+      inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) ≫
+          ((-⊗ᴸ-(Y)[A]).map (R((f)_*[A]).map φ)).app P =
+        R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map φ).app (L((f)^*[A]).obj P)) ≫
+          (inv (((rightDerivedLowerStarProjectionMap A f).app K).app P) :) :=
   ⟨(rightDerivedLowerStarProjectionMap_naturality_left A f φ P).symm,
-    (inv_rightDerivedLowerStarProjectionMap_naturality_left A f φ P).symm⟩
+    inv_rightDerivedLowerStarProjectionMap_naturality_left A f φ P⟩
 
 end Complex
 

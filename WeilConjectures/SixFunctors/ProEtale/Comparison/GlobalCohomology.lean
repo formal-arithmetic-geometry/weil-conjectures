@@ -40,14 +40,10 @@ instance preservesInjectiveObjects_comparisonLowerStar :
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (comparisonAdjunction A X)
 
-/-- The derived unit `K ⟶ Rν_* ν^* K` of the comparison adjunction is an isomorphism on the bounded
-below derived category of étale sheaves. -/
-instance isIso_comparisonAdjunction_derivedPlus_unit :
-    IsIso (comparisonAdjunction A X).derivedPlus.unit := by
-  have := isIso_comparisonAdjunction_unit A X
-  exact NatIso.isIso_of_isIso_app _ |>.mpr fun K ↦
-    (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
-      (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I) K
+-- The derived unit `K ⟶ Rν_* ν^* K` of the comparison adjunction is an isomorphism on the
+-- bounded below derived category of étale sheaves, see
+-- `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_derivedPlus_unit`.
+attribute [instance] isIso_comparisonAdjunction_derivedPlus_unit
 
 /-- The derived global sections of the pro-étale site factor through the derived restriction:
 `RΓ(X_proét, -) ≅ RΓ(X_ét, -) ∘ Rν_*` on bounded below complexes, since the global sections of a

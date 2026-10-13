@@ -67,7 +67,7 @@ noncomputable def twoTermComplexMap (a b c : R) (h : a = c * b) :
     (doubleXIso₁ _ up_rel_neg_one_zero (by omega)).inv
     (by
       rw [twoTermComplex_d]
-      simp [h, mul_smul])
+      simp [h, mul_smul, smul_comm b c])
     (by
       intro k hk
       rw [double_d_eq_zero₀ _ _ _ _ (by omega), comp_zero])
@@ -94,7 +94,7 @@ lemma twoTermComplexMap_one (a : R) :
 lemma twoTermComplexMap_comp (a b d c e : R) (h : a = c * b) (h' : b = e * d) :
     twoTermComplexMap A a b c h ≫ twoTermComplexMap A b d e h' =
       twoTermComplexMap A a d (c * e) (by rw [h, h', mul_assoc]) := by
-  ext <;> simp [mul_smul]
+  ext <;> simp [mul_smul, smul_comm e c]
 
 end TwoTerm
 

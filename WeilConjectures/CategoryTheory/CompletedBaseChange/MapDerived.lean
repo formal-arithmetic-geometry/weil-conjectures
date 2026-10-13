@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.CompletedBaseChange.Rectangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPasting
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-!
 # Base change squares of derived categories and of towers
@@ -90,7 +91,7 @@ def whiskeringRight (𝔄 : BaseChangeSquare C₁ C₂ C₃ C₄) :
   iso := NatIso.ofComponents (fun M ↦ Functor.isoWhiskerLeft M 𝔄.iso) (by
     intro M N φ
     ext j
-    exact (𝔄.iso.hom.naturality (φ.app j)).symm)
+    exact 𝔄.iso.hom.naturality (φ.app j))
 
 end WhiskeringRight
 

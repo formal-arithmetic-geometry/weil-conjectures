@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapTrivial
 public import WeilConjectures.SixFunctors.ProEtale.Derived.CompactifiedProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Id
 
@@ -28,7 +29,8 @@ blueprint `lemma-weil-pbc-projection-formula-identity-compactification`.
 The identification `(𝟙 X)_! ≅ 𝟭` is taken to be the one conjugate, along the adjunction
 `(𝟙 X)_! ⊣ (𝟙 X)^*`, to the identification `(𝟙 X)^* ≅ L(𝟙 X)^* ≅ 𝟭`; with this choice the unit
 of the adjunction becomes the identity. That `θ_1` is then the identity rests on the
-monoidality of `L(𝟙 X)^* ≅ 𝟭` (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_id_comp`)
+monoidality of `L(𝟙 X)^* ≅ 𝟭`
+(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_id_comp`)
 and the comparison of the composition isomorphism `L(𝟙 X ≫ f)^* ≅ Lf^* ⋙ L(𝟙 X)^*` with it
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp_hom_app_comp_leftDerivedUpperStarId_hom_app`).
 -/
@@ -98,26 +100,23 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_id_comp
       D((𝟙 X)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj E).map
           ((leftDerivedUpperStarId A X).hom.app M)) ≫
         (derivedOpenImmersionLowerShriekIdIso A X).hom.app (((-⊗ᴸ-(X)[A]).obj E).obj M) := by
-  let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction A (𝟙 X)
-  apply (adj.homEquiv _ _).injective
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
-  -- the right hand side
-  have hR := adj.unit.naturality_assoc (((-⊗ᴸ-(X)[A]).obj E).map
-    ((leftDerivedUpperStarId A X).hom.app M))
-    (D((𝟙 X)^*[A]).map ((derivedOpenImmersionLowerShriekIdIso A X).hom.app
-      (((-⊗ᴸ-(X)[A]).obj E).obj M)))
-  simp only [Functor.id_map, Functor.comp_map] at hR
-  erw [← hR, unit_app_comp_map_derivedOpenImmersionLowerShriekIdIso_hom_app]
-  -- the left hand side
-  erw [Adjunction.unit_app_comp_map_projectionMap_app_app_assoc]
-  have hτ := NatTrans.congr_app ((mapDerivedCategoryUpperStarDerivedTensorIso A (𝟙 X)).hom.naturality
-    ((derivedOpenImmersionLowerShriekIdIso A X).hom.app E)) M
-  simp only [NatTrans.comp_app] at hτ
-  dsimp only [Adjunction.projectionMapTranspose, NatTrans.comp_app]
-  erw [Category.assoc, ← hτ]
-  dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂]
-  trace_state
-  sorry
+  refine Adjunction.projectionMap_app_app_comp_map_of_trivial
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A (𝟙 X)) L((𝟙 X)^*[A]) (-⊗ᴸ-(X)[A])
+    (mapDerivedCategoryUpperStarDerivedTensorIso A (𝟙 X)).hom
+    (derivedOpenImmersionLowerShriekIdIso A X).hom (mapDerivedCategoryUpperStarIdIso A X).inv
+    (leftDerivedUpperStarId A X).hom
+    (unit_app_comp_map_derivedOpenImmersionLowerShriekIdIso_hom_app A X) (fun K N ↦ ?_) E M
+  dsimp [mapDerivedCategoryUpperStarIdIso, mapDerivedCategoryUpperStarDerivedTensorIso]
+  rw [← NatTrans.comp_app_assoc, ← Functor.map_comp, Category.assoc, Iso.hom_inv_id_app,
+    Category.comp_id, ← Category.assoc, ← Category.assoc]
+  congr 1
+  rw [← cancel_mono ((leftDerivedUpperStarId A X).hom.app _), Category.assoc, Category.assoc,
+    Iso.inv_hom_id_app]
+  erw [← leftDerivedUpperStarTensorComparison_id_comp A K N]
+  rw [← leftDerivedUpperStarTensorNatIso_hom, Iso.inv_hom_id_app_app_assoc]
+  erw [Category.comp_id, tensorHom_def, ← comp_whiskerRight_assoc,
+    Iso.inv_hom_id_app, id_whiskerRight, Category.id_comp]
+  rfl
 
 end Id
 
