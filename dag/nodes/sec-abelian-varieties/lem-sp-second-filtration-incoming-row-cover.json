@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-second-filtration-incoming-row-cover",
+ "kind": "statement",
+ "title": "An epimorphic row cover of the incoming second graded differential",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $\\mathcal B$ a Grothendieck abelian category [def-sp-grothendieck-abelian], and $F:\\mathcal A\\to\\mathcal B$ an additive functor [def-sp-left-exact-additive]. Let $I$ be a commuting bicomplex with complex degree in $\\mathbf Z$ and resolution degree in $\\mathbf N$ [def-sp-double-complex-total]. Set $R_s=F(I.X(s))$ and $J=\\operatorname{flip}(\\operatorname{mappedFunctor}(F)(I))$, extending the resolution degree by zero [def-sp-cartan-eilenberg-presentation]. Let $L$ be a decreasing filtration of $\\operatorname{Tot}(J)$ by subcomplexes [def-sp-filtration] whose degreewise steps agree with the second filtration of $J$. Fix $r\\in\\mathbf N$ with $0<r$, $s\\in\\mathbf Z$, and $n=s+r$. Write $m:(L^s\\operatorname{Tot}(J))^n\\to\\operatorname{Tot}(J)^n$ for the inclusion and $q:(L^s\\operatorname{Tot}(J))^n\\to(\\operatorname{gr}^s L)^n$ for the graded projection [def-sp-filtered-complex-subquotients]. Suppose $a:R_s^r\\to(L^s\\operatorname{Tot}(J))^n$ satisfies $a m=\\epsilon_r^{-1}\\iota_{r,s}$, where $\\epsilon_r$ is the canonical extension-by-zero term isomorphism and $\\iota_{r,s}$ is the diagonal total coprojection. Then there is an epimorphism $e:R_s^{\\operatorname{prev}(r)}\\to(\\operatorname{gr}^s L)^{n-1}$ satisfying $e\\delta=d_{R_s}^{\\operatorname{prev}(r),r}a q$, where $\\delta$ is the incoming differential of the graded complex. Here $\\operatorname{prev}$ is the predecessor for the shape $\\operatorname{up}\\mathbf N$, and $\\operatorname{prev}(r)=r-1$ because $r>0$. No assumption $s\\geq0$, cycle comparison, boundary subobject, or homology quotient is involved.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clause 2; https://stacks.math.columbia.edu/tag/0130"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "In total degree n-1, lift the distinguished diagonal inclusion with second coordinate s through L.step s. Its image belongs to the finite supremum over [s,n-1] because r>0. Compose the lift with the graded projection and with the inverse of the row extension isomorphism at prev r = r-1 to obtain e.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the total coproduct onto the distinguished summand. Every other summand in [s,n-1] belongs to step s+1, so this projection vanishes on that step and descends to the quotient. The descended projection and e are inverse: check identity on the distinguished inclusion and zero on all other generating inclusions, then cancel the epic quotient projection. Thus e is an isomorphism and is epic. The interval uses no sign assumption on s; a zero distinguished summand gives the unique zero-object isomorphism.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the total differential on the distinguished incoming diagonal inclusion. Its resolution component is the row differential, and its component raising s factors through step s+1 and is killed by the graded projection. The prescribed target lift a agrees with the canonical target lift by cancellation of the step mono. The extension isomorphisms then give e followed by the graded differential equal to the row differential followed by a and q.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clause 2; https://stacks.math.columbia.edu/tag/0130",
+  "note": "W3 expands the omitted proof of Tag 0130 clause 2 at the level of terms and an incoming differential; this is step 1 of the assigned boundary comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For the second filtration of a double complex the incoming row term covers the associated graded term and intertwines its differential",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an incoming differential under an isomorphism of graded complexes is the row boundary subobject",
+   "results": "Eight general homological-complex results, including dFrom_eq, dTo_eq, xPrevIso_comp_dTo, dFrom_comp_xNextIso and isoSc'; no normalized second-filtration incoming comparison.",
+   "date": "2026-10-13",
+   "verdict": "No match for the second-filtration comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "imageSubobject, CategoryTheory.Subobject.pullback",
+   "results": "Zero hits; unknown identifier imageSubobject.",
+   "date": "2026-10-13",
+   "verdict": "Query unavailable in the service index."
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobject.*comp|map.*imageSubobject",
+   "results": "Twelve general image-subobject hits; none identifies the incoming second graded differential. Repository rg also found the existing secondFiltration_graded, which requires first-quadrant vanishing in both indices and hence does not cover arbitrary s here.",
+   "date": "2026-10-13",
+   "verdict": "General subobject lemmas suffice for the final assembly, not the row differential square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SecondFiltrationRowBoundarySubobject",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 1, second-filtration first-page row identification: incoming graded differential and normalized diagonal lift",
+   "via": [
+    "lem-sp-second-filtration-row-boundary-subobject",
+    "lem-sp-second-filtration-row-cycle-comparison",
+    "lem-sp-second-filtration-signed-first-page"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SecondFiltrationIncomingRowCover",
+  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationIncomingRowCover.lean",
+  "declaration": "CategoryTheory.Functor.secondFiltration_incoming_row_cover",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13",
+  "statement": "theorem secondFiltration_incoming_row_cover\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p)\n    (r : ℕ) (s : ℤ) (hr : 0 < r)\n    (a : ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).X r ⟶\n      (L.step s : CochainComplex B ℤ).X (s + (r : ℤ)))\n    (ha : a ≫ (L.step s).arrow.f (s + (r : ℤ)) =\n      ((((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).extendXIso\n        ComplexShape.embeddingUpNat (by rfl)).inv ≫\n        (((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).ιTotal\n          (ComplexShape.up ℤ) (r : ℤ) s (s + (r : ℤ)) (by\n            change (r : ℤ) + s = s + (r : ℤ)\n            omega))) :\n    ∃ e : ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).X\n        ((ComplexShape.up ℕ).prev r) ⟶ (L.gradedPiece s).X (s + (r : ℤ) - 1),\n      Epi e ∧ e ≫ (L.gradedPiece s).d (s + (r : ℤ) - 1) (s + (r : ℤ)) =\n        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).d\n          ((ComplexShape.up ℕ).prev r) r ≫ a ≫\n          (L.complexQuotientπ s (s + 1) (by omega)).f (s + (r : ℤ))"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T022434-L-3222982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T022434-L-3222982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

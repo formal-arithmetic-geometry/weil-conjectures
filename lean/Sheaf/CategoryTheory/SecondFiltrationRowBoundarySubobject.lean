@@ -7,6 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import Sheaf.CategoryTheory.SecondFiltrationIncomingRowCover
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Row boundaries in the second graded filtration
 
@@ -21,6 +24,13 @@ universe uA vA uB vB
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
+
+private theorem map_image {C : Type*} [Category C] [Abelian C]
+    {X Y Z : C} (f : X ⟶ Y) (m : Y ⟶ Z) [Mono m] :
+    (Subobject.map m).obj (imageSubobject f) = imageSubobject (f ≫ m) := by
+  rw [← Subobject.exists_iso_map, Subobject.exists_obj_eq_imageSubobject,
+    ← imageSubobject_comp_of_epi (factorThruImageSubobject f),
+    ← Category.assoc, imageSubobject_arrow_comp]
 
 /-- Under the normalized cycle comparison the first-page boundary subobject is
 exactly the image of the incoming row differential into row cycles.
@@ -76,6 +86,100 @@ theorem secondFiltration_row_boundary_subobject
           (ComplexShape.up ℤ)) L s (s + (r : ℤ)) 1))) =
       imageSubobject
         (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).toCycles
-          ((ComplexShape.up ℕ).prev r) r) := by sorry
+          ((ComplexShape.up ℕ).prev r) r) := by
+  let J := ((CartanEilenbergPresentation.mappedFunctor F).obj I).flip
+  let R := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)
+  let n := s + (r : ℤ)
+  let m := (L.step s).arrow.f n
+  let z := (L.complexCycles s n 1).arrow
+  let q : (L.step s : CochainComplex B ℤ).X n ⟶ (L.gradedPiece s).X n :=
+    (L.complexQuotientπ s (s + 1) (by omega)).f n
+  have : Mono m := by
+    change Mono ((HomologicalComplex.eval B (ComplexShape.up ℤ) n).map (L.step s).arrow)
+    infer_instance
+  let j : R.X r ⟶ (J.total (ComplexShape.up ℤ)).X n :=
+    (R.extendXIso ComplexShape.embeddingUpNat (by rfl)).inv ≫
+      J.ιTotal (ComplexShape.up ℤ) (r : ℤ) s n (by dsimp [n]; omega)
+  have hi : imageSubobject (J.ιTotal (ComplexShape.up ℤ) (r : ℤ) s n
+      (by change (r : ℤ) + s = n; dsimp [n]; omega)) ≤ L.complexStep s n := by
+    rw [hL]
+    dsimp only [HomologicalComplex₂.secondFiltration]
+    have hmem : s ∈ Finset.Icc s n := Finset.mem_Icc.mpr ⟨le_rfl, by dsimp [n]; omega⟩
+    have hh := Finset.le_sup (f := fun i ↦ imageSubobject
+      (J.ιTotalOrZero (ComplexShape.up ℤ) (n - i) i n)) hmem
+    have hn : n - s = (r : ℤ) := by dsimp [n]; omega
+    rw [hn, J.ιTotalOrZero_eq (ComplexShape.up ℤ) (r : ℤ) s n
+      (by change (r : ℤ) + s = n; dsimp [n]; omega)] at hh
+    exact hh
+  have hj : imageSubobject j ≤ imageSubobject m :=
+    le_trans (imageSubobject_comp_le _ _) hi
+  have hfac : (Subobject.mk m).Factors j := by
+    rw [← imageSubobject_mono m]
+    apply Subobject.factors_of_le _ hj
+    simpa using imageSubobject_factors_comp_self j (𝟙 _)
+  obtain ⟨a, ha⟩ := (Subobject.mk_factors_iff m j).mp hfac
+  change R.X r ⟶ (L.step s : CochainComplex B ℤ).X n at a
+  change a ≫ m = j at ha
+  have ht' : R.iCycles r ≫ a = t := by
+    apply (cancel_mono m).1
+    rw [Category.assoc, ha]
+    exact ht.symm
+  have hB : L.complexBoundaries s n 1 =
+      imageSubobject (R.toCycles ((ComplexShape.up ℕ).prev r) r ≫ c.hom ≫ z) := by
+    rw [(L.filteredComplex_firstPage_cycles_boundaries s n).2]
+    by_cases hr : r = 0
+    · subst r
+      have hstep : L.complexStep s (s - 1) = ⊥ := by
+        rw [hL]
+        simp only [HomologicalComplex₂.secondFiltration,
+          Finset.Icc_eq_empty_of_lt (by omega : s - 1 < s), Finset.sup_empty]
+      let m₀ := (L.step s).arrow.f (s - 1)
+      have : Mono m₀ := by
+        change Mono ((HomologicalComplex.eval B (ComplexShape.up ℤ) (s - 1)).map
+          (L.step s).arrow)
+        infer_instance
+      have hm₀ : m₀ = 0 := by
+        apply (Subobject.bot_factors_iff_zero m₀).mp
+        rw [← hstep]
+        exact (Subobject.imageSubobject_le_iff m₀ _).mp le_rfl
+      have hz₀ := IsZero.of_mono_eq_zero m₀ hm₀
+      let q₀ : (L.step s : CochainComplex B ℤ).X (s - 1) ⟶
+          (L.gradedPiece s).X (s - 1) :=
+        (L.complexQuotientπ s (s + 1) (by omega)).f (s - 1)
+      have : Epi q₀ := by
+        change Epi ((HomologicalComplex.eval B (ComplexShape.up ℤ) (s - 1)).map
+          (cokernel.π (Subobject.ofLE (L.step (s + 1)) (L.step s)
+            (L.antitone_step (by omega)))))
+        infer_instance
+      have hgr := IsZero.of_epi q₀ hz₀
+      have hd : (L.gradedPiece s).d (n - 1) n = 0 := by
+        apply IsZero.eq_zero_of_src
+        simpa only [n, Nat.cast_zero, add_zero] using hgr
+      have htocycles : R.toCycles ((ComplexShape.up ℕ).prev 0) 0 = 0 := by
+        apply (cancel_mono (R.iCycles 0)).1
+        rw [HomologicalComplex.toCycles_i, zero_comp]
+        apply R.shape
+        simp
+      simp only [hd, htocycles, zero_comp, imageSubobject_zero]
+    obtain ⟨e, he, hδ⟩ :=
+      secondFiltration_incoming_row_cover F I L hL r s (Nat.pos_of_ne_zero hr) a ha
+    have : Epi e := he
+    rw [← imageSubobject_comp_of_epi e, hδ]
+    congr 1
+    change R.d ((ComplexShape.up ℕ).prev r) r ≫ a ≫ q =
+      R.toCycles ((ComplexShape.up ℕ).prev r) r ≫ c.hom ≫ z
+    rw [← HomologicalComplex.toCycles_i R ((ComplexShape.up ℕ).prev r) r,
+      Category.assoc, ← Category.assoc (R.iCycles r), ht']
+    exact congrArg (R.toCycles ((ComplexShape.up ℕ).prev r) r ≫ ·) hc.symm
+  have hmap : imageSubobject (Subobject.ofLE _ _
+      (filteredComplex_boundaries_le_cycles (J.total (ComplexShape.up ℤ)) L s n 1)) =
+      (Subobject.map c.hom).obj
+        (imageSubobject (R.toCycles ((ComplexShape.up ℕ).prev r) r)) := by
+    apply Subobject.map_obj_injective z
+    rw [map_image, Subobject.ofLE_arrow, map_image, map_image, Category.assoc, ← hB]
+    exact imageSubobject_mono (L.complexBoundaries s n 1).arrow |>.trans
+      (Subobject.mk_arrow _)
+  rw [hmap, Subobject.pullback_map_self]
+
 
 end CategoryTheory.Functor
