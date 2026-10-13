@@ -1,0 +1,183 @@
+{
+ "id": "lem-sp-filtered-complex-normalized-homology",
+ "kind": "statement",
+ "title": "Unique normalized successor homology comparison",
+ "statement": "Let $C$ be abelian [def-sp-abelian], $K$ an integer-indexed cochain complex, $F$ a decreasing filtration by subcomplexes [def-sp-filtration], $r\\ge1$, and $D$ representative differential data [lem-sp-filtered-complex-page-differential]. At every bidegree $a=(p,q)$ there is exactly one isomorphism $e:H(D.\\mathrm{page})^a\\cong Q_{r+1}^a$, where $Q_s^a=\\operatorname{coker}(B_s^{p,p+q}\\to Z_s^{p,p+q})$ [def-sp-filtered-complex-subquotients], with the following property: for every containment proof $h_Z:Z_{r+1}^{p,p+q}\\le Z_r^{p,p+q}$ and every map $f:Z_{r+1}^{p,p+q}\\to\\operatorname{cycles}(D.\\mathrm{page})^a$ satisfying $f\\iota_{\\mathrm{cycles}}=\\operatorname{ofLE}(h_Z)\\pi_r$, one has $f\\pi_H e=\\pi_{r+1}$.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; parent proof step 1, normalized quotient-of-quotients comparison; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "Monotonicity of the filtration and of pullback, image, intersection and sum gives the containment of successor cycles in current cycles.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The successor-cycle cover f is epic. Reuse the private pullback_kernel theorem from FilteredComplexPageHomology via a proof-only import all. The successor-boundary image formula then computes the kernel of f followed by the homology projection. The resulting exact short complex makes that composite a cokernel of the successor boundary inclusion.",
+   "uses": [
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-sp-filtered-complex-successor-boundaries-image",
+    "lem-sp-filtered-complex-page-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare this cokernel with the concrete successor page cokernel using their universal properties. The comparison satisfies the normalization. Monicity of the page cycle inclusion makes all f in the normalization equal; epimorphic cancellation proves uniqueness of the comparison.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-successor-boundaries-image",
+  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-sp-filtered-complex-page-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K; parent proof step 1, normalized quotient-of-quotients comparison",
+  "note": "Componentwise expansion of the explicit representative construction; no direct sums. The kernel pullback identity is reused from FilteredComplexPageHomology, not redeclared."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A filtered cochain complex gives a functorial spectral sequence on its cycle boundary quotient pages",
+   "date": "2026-10-13",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.shortComplexTruncLE, DerivedCategory.homologyFunctor, HomotopyCategory.spectralObjectMappingCone, HomologicalComplex.gradedHomologyFunctor, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.cm5b, HomotopyCategory.instIsHomologicalIntUpHomologyFunctor",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.Hom",
+   "date": "2026-10-13",
+   "results": "9 hits: CategoryTheory.SpectralSequence.Hom, CategoryTheory.SpectralSequence.Hom.hom, CategoryTheory.SpectralSequence.Hom.ext, CategoryTheory.SpectralSequence.Hom.ext_iff, CategoryTheory.SpectralSequence.comp_hom, CategoryTheory.SpectralSequence.comp_hom_assoc, CategoryTheory.SpectralSequence.Hom.comm, CategoryTheory.SpectralSequence.Hom.mk",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredQuotient|filteredComplex.*(functor|natural)|coconePointUniqueUpToIso",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology comparison of cycle boundary quotient pages of a filtered complex is natural under filtered cochain maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced morphism on subquotients of a decreasing filtered cochain complex",
+   "date": "2026-10-13",
+   "results": "Second reader: 8 hits; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CochainComplex.cm5b.fac, CochainComplex.cm5b, CochainComplex.cm5b.fac_assoc, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo, CochainComplex.cm5b.i_f_comp, CochainComplex.ConnectData.map_f, CochainComplex.ConnectData.map",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMap",
+   "date": "2026-10-13",
+   "results": "Second reader: 12 hits; HomologicalComplex.cyclesMap, HomologicalComplex.cyclesMap_id, HomologicalComplex.instIsIsoCyclesMap, HomologicalComplex.instMonoCyclesMapOfF, HomologicalComplex.cyclesMapIso_hom, HomologicalComplex.cyclesMapIso_inv, HomologicalComplex.cyclesFunctor_map, HomologicalComplex.cyclesMap_inv",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "Subobject.*(map|lift).*image|cokernel\\.map",
+   "date": "2026-10-13",
+   "results": "Second reader: 25 hits; Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of image subobjects induced by a commutative square",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.imageSubobjectMap_arrow; CategoryTheory.Limits.imageSubobjectMap; CategoryTheory.Limits.imageSubobjectMap_arrow_assoc; CategoryTheory.Limits.imageSubobjectIso_comp_image_map; CategoryTheory.Limits.imageMapComp; CategoryTheory.Limits.image_map_comp_imageSubobjectIso_inv; CategoryTheory.Limits.image.map_comp; CategoryTheory.Limits.image.map_homMk'_ι",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subobject.map",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Subobject.map'",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobjectMap",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "parent proof step 1, normalized quotient-of-quotients comparison",
+   "via": [
+    "lem-sp-filtered-quotient-canonical-functor",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexNormalizedHomology",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexNormalizedHomology.lean",
+  "declaration": "CategoryTheory.filteredComplex_normalized_homology",
+  "statement": "theorem filteredComplex_normalized_homology\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ) :\n    ∃! e : D.page.homology pq ≅ filteredComplexPageObject K F (r + 1) pq,\n      FilteredComplexHomologyNormalized K F r D pq e",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024054-L-3340967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024054-L-3340967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,9 @@ module
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
-import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover
-import Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImage
+import Sheaf.CategoryTheory.FilteredQuotientPageMaps
+import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
+import Sheaf.CategoryTheory.FilteredQuotientHomologyNaturality
 
 /-!
 # Functorial canonical quotient pages
@@ -24,6 +25,7 @@ universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Construct a functor on the concrete quotient pages with their representative differentials.
 Source: Stacks Project, Tag 012K, Lemmas 12.24.2 and 12.24.4.
 (blueprint: lem-sp-filtered-quotient-canonical-functor).
@@ -89,6 +91,42 @@ theorem filteredQuotient_canonical_functor
       (hk : cokernel.π (Subobject.ofLE _ _ (hBZ U p q r hr)) ≫ k =
         kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q r hr))),
         ((S.map t).hom r hr).f (p, q) ≫ (eZ V p q r hr).hom =
-          (eZ U p q r hr).hom ≫ k) := by sorry
+          (eZ U p q r hr).hom ≫ k) := by
+  classical
+  obtain ⟨m, ⟨hid, hcomp, hm⟩, _⟩ := filteredQuotient_page_maps D
+  have hex := fun U r hr pq ↦
+    filteredComplex_normalized_homology U.obj.obj U.obj.filtration r hr (D U r hr) pq
+  choose e he using fun U r hr pq ↦ (hex U r hr pq).exists
+  let E (U : ObjectProperty.FullSubcategory
+      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) :
+      CohomologicalSpectralSequence C 1 :=
+    { page := fun r hr ↦ (D U r hr).page
+      iso := fun r r' pq hrr' hr ↦ e U r hr pq ≪≫
+        eqToIso (congrArg (fun s ↦
+          filteredComplexPageObject U.obj.obj U.obj.filtration s pq) hrr') }
+  let S : ObjectProperty.FullSubcategory
+      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite) ⥤
+      CohomologicalSpectralSequence C 1 :=
+    { obj := E
+      map := fun {U V} t ↦
+        { hom := fun r hr ↦ m t r hr
+          comm := fun r r' pq hrr' hr ↦ by
+            subst r'
+            simpa only [E, Iso.trans_hom, eqToIso_refl, Iso.refl_hom, Category.comp_id] using
+              filteredQuotient_homology_naturality D m hm e he U V t r hr pq }
+      map_id := fun U ↦ by
+        apply SpectralSequence.hom_ext
+        intro r hr
+        exact hid U r hr
+      map_comp := fun {U V W} t t' ↦ by
+        apply SpectralSequence.hom_ext
+        intro r hr
+        exact hcomp U V W t t' r hr }
+  refine ⟨S, (fun U p q r hr ↦ Iso.refl _), ?_, ?_⟩
+  · intro U p q p' q' r hr
+    exact (Category.comp_id _).trans (Category.id_comp _).symm
+  · intro U V t p q r hr s g kz k hs hg hkz hk
+    simpa only [Iso.refl_hom, Category.comp_id, Category.id_comp] using
+      hm U V t r hr p q s g kz k hs hg hkz hk
 
 end CategoryTheory

@@ -1,0 +1,172 @@
+{
+ "id": "lem-sp-filtered-quotient-homology-naturality",
+ "kind": "statement",
+ "title": "Normalized homology comparisons are natural",
+ "statement": "Let $C$ be abelian [def-sp-abelian], $\\mathcal F$ the full category of finite decreasing filtered cochain complexes [def-sp-filtration], and $D(U,r)$ representative page differential data for every $U\\in\\mathcal F,r\\ge1$ [lem-sp-filtered-complex-page-differential]. Let $m(t,r)$ be any family of page chain maps satisfying the universal four-square property [lem-sp-filtered-quotient-page-maps]. For each $U,r,a$ let $e(U,r,a):H(D(U,r).\\mathrm{page})^a\\cong Q_{r+1}^a(U)$ satisfy the successor-representative normalization [lem-sp-filtered-complex-normalized-homology]. Then for each filtered map $t:U\\to V$ one has $H(m(t,r))^a e(V,r,a)=e(U,r,a)m(t,r+1)^a$.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; parent proof step 3, commutation with normalized homology comparisons; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-quotient-page-maps",
+  "lem-sp-filtered-complex-normalized-homology"
+ ],
+ "proof": [
+  {
+   "text": "Take the epic successor-cycle covers on U and V, and obtain a successor-cycle restriction compatible with the current cycle maps and successor page projections.",
+   "uses": [
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-sp-filtered-quotient-successor-cycle-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose with the source successor-cycle cover followed by the homology projection. Homology projection naturality and the first compatibility square, followed by target normalization, rewrite the left side to k followed by the successor projection. Source normalization and the second square give the same right side. Cancel the epic composite.",
+   "uses": [
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-sp-filtered-quotient-successor-cycle-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tag 012K; parent proof step 3, commutation with normalized homology comparisons",
+  "note": "Componentwise expansion of the explicit representative construction; no direct sums."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A filtered cochain complex gives a functorial spectral sequence on its cycle boundary quotient pages",
+   "date": "2026-10-13",
+   "results": "8 hits: HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.shortComplexTruncLE, DerivedCategory.homologyFunctor, HomotopyCategory.spectralObjectMappingCone, HomologicalComplex.gradedHomologyFunctor, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.cm5b, HomotopyCategory.instIsHomologicalIntUpHomologyFunctor",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.Hom",
+   "date": "2026-10-13",
+   "results": "9 hits: CategoryTheory.SpectralSequence.Hom, CategoryTheory.SpectralSequence.Hom.hom, CategoryTheory.SpectralSequence.Hom.ext, CategoryTheory.SpectralSequence.Hom.ext_iff, CategoryTheory.SpectralSequence.comp_hom, CategoryTheory.SpectralSequence.comp_hom_assoc, CategoryTheory.SpectralSequence.Hom.comm, CategoryTheory.SpectralSequence.Hom.mk",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredQuotient|filteredComplex.*(functor|natural)|coconePointUniqueUpToIso",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology comparison of cycle boundary quotient pages of a filtered complex is natural under filtered cochain maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced morphism on subquotients of a decreasing filtered cochain complex",
+   "date": "2026-10-13",
+   "results": "Second reader: 8 hits; CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CochainComplex.cm5b.fac, CochainComplex.cm5b, CochainComplex.cm5b.fac_assoc, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo, CochainComplex.cm5b.i_f_comp, CochainComplex.ConnectData.map_f, CochainComplex.ConnectData.map",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMap",
+   "date": "2026-10-13",
+   "results": "Second reader: 12 hits; HomologicalComplex.cyclesMap, HomologicalComplex.cyclesMap_id, HomologicalComplex.instIsIsoCyclesMap, HomologicalComplex.instMonoCyclesMapOfF, HomologicalComplex.cyclesMapIso_hom, HomologicalComplex.cyclesMapIso_inv, HomologicalComplex.cyclesFunctor_map, HomologicalComplex.cyclesMap_inv",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "Subobject.*(map|lift).*image|cokernel\\.map",
+   "date": "2026-10-13",
+   "results": "Second reader: 25 hits; Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of image subobjects induced by a commutative square",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.imageSubobjectMap_arrow; CategoryTheory.Limits.imageSubobjectMap; CategoryTheory.Limits.imageSubobjectMap_arrow_assoc; CategoryTheory.Limits.imageSubobjectIso_comp_image_map; CategoryTheory.Limits.imageMapComp; CategoryTheory.Limits.image_map_comp_imageSubobjectIso_inv; CategoryTheory.Limits.image.map_comp; CategoryTheory.Limits.image.map_homMk'_ι",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subobject.map",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Subobject.map'",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobjectMap",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientCanonicalFunctor",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "parent proof step 3, commutation with normalized homology comparisons",
+   "via": [
+    "lem-sp-filtered-quotient-canonical-functor",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredQuotientHomologyNaturality",
+  "file": "lean/Sheaf/CategoryTheory/FilteredQuotientHomologyNaturality.lean",
+  "declaration": "CategoryTheory.filteredQuotient_homology_naturality",
+  "statement": "theorem filteredQuotient_homology_naturality\n    (D : ∀ (U : ObjectProperty.FullSubcategory\n      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ) (_hr : 1 ≤ r),\n      FilteredComplexPageDifferential U.obj.obj U.obj.filtration r)\n    (m : ∀ {U V : ObjectProperty.FullSubcategory\n      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)}\n      (_t : U ⟶ V) (r : ℤ) (hr : 1 ≤ r),\n      (D U r hr).page ⟶ (D V r hr).page)\n    (hm : ∀ U V (t : U ⟶ V) r hr,\n      FilteredQuotientPageMapProperty (C := C) U V t r (D U r hr) (D V r hr) (m t r hr))\n    (e : ∀ (U : ObjectProperty.FullSubcategory\n      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n      (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ),\n      (D U r hr).page.homology pq ≅\n        filteredComplexPageObject U.obj.obj U.obj.filtration (r + 1) pq)\n    (he : ∀ (U : ObjectProperty.FullSubcategory\n      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n      (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ),\n      FilteredComplexHomologyNormalized (C := C) U.obj.obj U.obj.filtration r (D U r hr) pq\n        (e U r hr pq))\n    (U V : ObjectProperty.FullSubcategory\n      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))\n    (t : U ⟶ V) (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ) :\n    HomologicalComplex.homologyMap (m t r hr) pq ≫ (e V r hr pq).hom =\n      (e U r hr pq).hom ≫ (m t (r + 1) (le_trans hr (Int.le_add_one le_rfl))).f pq",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024054-L-3340967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024054-L-3340967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
