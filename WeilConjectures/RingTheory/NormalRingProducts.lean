@@ -112,42 +112,6 @@ theorem isIntegral_iff {I : Type w} [Finite I] {R : I → Type u} {S : I → Typ
           (algebraMap (R i) (S i)).comp (Pi.evalRingHom R i) := rfl
       rw [hcmap, ← Polynomial.eval₂_map, hmap]
       exact hev
-  classical
-  let : ∀ i, Algebra (R i) (S i) := fun i ↦ (φ i).toAlgebra
-  have hint (x : ∀ i, S i) := integral_pi_iff R S x
-  constructor
-  · ext x
-    simpa only [Subring.mem_iInf, Subring.mem_comap, Subalgebra.mem_toSubring,
-      mem_integralClosure_iff, Pi.evalRingHom_apply] using hint x
-  · intro hinj
-    rw [isIntegrallyClosedIn_iff]
-    constructor
-    · rintro ⟨_, hcl⟩ i
-      rw [isIntegrallyClosedIn_iff]
-      refine ⟨hinj i, ?_⟩
-      intro x hx
-      let y : ∀ j, S j := Pi.single i x
-      have hy : IsIntegral (∀ j, R j) y := by
-        apply (hint y).mpr
-        intro j
-        by_cases h : j = i
-        · subst j
-          simpa [y] using hx
-        · simpa [y, Pi.single_eq_of_ne h] using (isIntegral_zero : IsIntegral (R j) (0 : S j))
-      obtain ⟨r, hr⟩ := hcl hy
-      refine ⟨r i, ?_⟩
-      have hri : algebraMap (R i) (S i) (r i) = y i := congrFun hr i
-      simpa [y] using hri
-    · intro hcl
-      refine ⟨?_, ?_⟩
-      · intro a b hab
-        funext i
-        exact hinj i (congrFun hab i)
-      · intro x hx
-        have hc (i : I) : ∃ r : R i, algebraMap (R i) (S i) r = x i :=
-          ((isIntegrallyClosedIn_iff.mp (hcl i)).2 ((hint x).mp hx i))
-        choose r hr using hc
-        exact ⟨r, funext hr⟩
 
 end Pi
 
@@ -167,7 +131,7 @@ theorem integralClosure_pi {I : Type w} [Finite I]
           ∀ i, IsIntegrallyClosedIn (R i) (S i))) := by
   classical
   let : ∀ i, Algebra (R i) (S i) := fun i ↦ (φ i).toAlgebra
-  have hint (x : ∀ i, S i) := Pi.isIntegral_iff x
+  have hint (x : ∀ i, S i) := Pi.isIntegral_iff (R := R) (S := S) x
   constructor
   · ext x
     simpa only [Subring.mem_iInf, Subring.mem_comap, Subalgebra.mem_toSubring,

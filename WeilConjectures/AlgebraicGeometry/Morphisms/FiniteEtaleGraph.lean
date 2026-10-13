@@ -199,7 +199,9 @@ theorem Scheme.isPullback_graph_baseChange {Y Y₀ U V : Scheme.{u}} (p : U ⟶ 
   have hs₀ : s₀ ≫ pullback.snd q₀ p₀ = 𝟙 (pullback p i) := by simp [s₀]
   have hsq : s₀ ≫ j = pullback.fst p i ≫ s := by
     apply pullback.hom_ext
-    · simp [s₀, j, s] <;> exact Category.id_comp _
+    · simp [s₀, j, s]
+    · have hj : j ≫ pullback.snd q p = pullback.snd q₀ p₀ ≫ pullback.fst p i := by simp [j]
+      rw [Category.assoc, hj, reassoc_of% hs₀, Category.assoc, hs, Category.comp_id]
   have houter : IsPullback (s₀ ≫ pullback.snd q₀ p₀) (pullback.fst p i)
       (pullback.fst p i) (s ≫ pullback.snd q p) := by
     rw [hs, hs₀]
