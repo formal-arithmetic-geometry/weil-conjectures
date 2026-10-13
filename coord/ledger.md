@@ -12931,3 +12931,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: merged deliver/J4/Sheaf.AlgebraicGeometry.MixedAffineSectionsChartModelFactorization (stage 3; reviewer PASS; first push; landing 20261013T151133-L-877075 (interface); batch 20261013T151129; modules 4; new nodes 3)
 - 15:11 L: merged deliver/K2/Sheaf.Paper.ModuleCupGodementStalkContraction (stage 3; reviewer PASS; first push; landing 20261013T151134-L-877203 (proof); batch 20261013T151129; modules 1; new nodes 0)
 - 15:11 L: merged deliver/M1/Sheaf.AlgebraicGeometry.AffineBasisDerivedSectionsLowerTailVanishing (stage 3; reviewer PASS; first push; landing 20261013T151134-L-877320 (interface); batch 20261013T151129; modules 3; new nodes 2)
+- 15:11 L: merged deliver/M4/Sheaf.RingTheory.LocalizedApproximationCocones (stage 3; reviewer PASS; first push; landing 20261013T151135-L-877636 (interface); batch 20261013T151129; modules 2; new nodes 1)

@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-canonical-localized-approximation-limit",
+ "kind": "statement",
+ "title": "Base and module comparison for canonical localized approximation colimits",
+ "statement": "Let R→S be commutative rings and M an S-module with its restricted R-action. Let a nonempty directed preorder index compatible diagrams A→B and D of B_i-modules, with supplied ring and additive-group colimit cocones to common-universe ULifts of R, S and M [def-weil-pbc-category-colimit]. Assume the cocone ring square commutes and all original module transitions and coprojections are semilinear. For a prime q of S [def-weil-pbc-localization-at-prime], contract q along ULift.down to q′, and form the explicit fraction diagrams A_l=primeRingDiagram A (η≫κ) q′, B_l=primeRingDiagram B κ q′, D_l=primeModuleDiagram B κ q′ D hs [def-weil-pbc-module-localization]. Given a ring map ψ:colimit A_l→colimit B_l and a colimit B_l-module action on colimit D_l, assume ψ agrees with the localized stage ring maps on coprojections and the localized module coprojections are semilinear for that action. Then there is ρ:R→colimit A_l making colimit A_l an IsLocalization at the complement of q∩R. For the R-action on colimit D_l restricted first through ψ and then through ρ, there is an R-linear equivalence M_q ≃ colimit D_l. No locality, stage numerator-map, or stage module-comparison conclusion is part of this theorem.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RC first reduction paragraph; Tag 037D proof (localization and colimits); fraction details as in the parent node steps 1,2,3,5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "lem-pc-localized-approximation-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied ring colimit cocones to compare A and B with their chosen colimits. Contract q along ULift.down and the cocone maps. Apply filtered-colimit localization at a prime to each ring diagram and transport through the supplied colimit isomorphisms and the ULift ring equivalences. The compatible original ring square identifies the base prime with q∩R. This gives colimit A_l ≅ R_(q∩R) and colimit B_l ≅ S_q as ring comparisons, characterized by their numerator formulas.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical fraction maps D_l,i→M_q are induced by ULift.down composed with ν_i. They are well defined by semilinearity and contracted denominators. Cocone naturality holds on fractions. To lift m/s in M_q, lift m using the original additive colimit and s using the top ring colimit, then move both to a common stage. Since the image of the lifted denominator is s∉q, its stage denominator is outside the contracted prime. Thus every fraction has a stage representative.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If two stage fractions have equal image, first move to a common stage and write them x/s and y/t. Equality in M_q gives u∉q killing t·ν(x)−s·ν(y). Lift u to the top ring diagram, pass to a common later stage, and descend the zero relation in the supplied additive colimit by eventual equality. The lifted u remains outside every contracted prime. At that later stage the fraction relation holds, so the two fractions coincide. The elementwise filtered-colimit criterion, applied over ℤ to the additive groups, proves that this fraction cocone is a colimit and gives the additive comparison colimit D_l ≅ M_q.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied ψ has the coprojection formula, so after the ring comparisons it equals the canonical R_(q∩R)→S_q map by uniqueness of the ring-colimit mediator. Likewise any scalar and any module element can be lifted to a common localized stage. Their product is therefore determined by the supplied semilinearity equation, which identifies act with the fraction multiplication action of S_q after the additive comparison. Compose the inverse base ring comparison with R→R_(q∩R) to obtain ρ and its IsLocalization witness. The inverse additive comparison M_q→colimit D_l is R-linear because the original R-action is restricted from S by IsScalarTower, ψ matches the canonical localized ring map, and ρ matches R→R_(q∩R). This is the claimed linear equivalence.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "M4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RC first reduction and Tag 037D first paragraph; fraction and scalar details written out by M4. Source checked at the official Stacks pages and in a downloaded algebra.tex under the sandbox scratch directory."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization at contracted prime ideals commutes with directed colimits of rings and modules with varying scalar rings",
+   "results": "Service unavailable: Internal Server Error. Recorded by msearch.py in searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "Unavailable; no absence conclusion from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a directed system of rings and modules at contracted prime ideals gives localized colimits",
+   "results": "LocalizedModule.AtPrime, IsLocalizedModule.AtPrime, localization-localization results and local cohomology colimit instances. No compatible varying-ring module colimit comparison.",
+   "date": "2026-10-13",
+   "verdict": "No combined comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.linearEquiv",
+   "results": "IsLocalizedModule.linearEquiv, linearEquiv_of_isLocalizedModule_comp and numerator formulas. These compare two already known localizations of one module, not a colimit of modules with varying scalar rings.",
+   "date": "2026-10-13",
+   "verdict": "Useful localization uniqueness tools; not the stated colimit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*colimit|colimit.*localiz",
+   "results": "Mathlib.Algebra.Category.ModuleCat.Localization preserves finite colimits for localization at a fixed submonoid of a fixed ring. The other hits concern an affine Zariski site and categorical localization. Separate project-root grep found LocalizedApproximationColimits (ψ, act and flatness interface only), FiniteTypeApproximationFlatPoint (uses that interface), and LocalizedApproximationBaseChange (transition tensors).",
+   "date": "2026-10-13",
+   "verdict": "No comparison of directed module diagrams with varying scalar rings; use the existing project colimit interface and isolate the remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LocalizedApproximationCocones",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "First flat-point reduction in the proof of lemma-weil-pbc-h1-constructible-representation, via openness of flatness: the base and module colimit comparisons in Tag 00RC first reduction. Parent localized-approximation-cocones proof steps 2 and 4.",
+   "via": [
+    "lem-weil-pbc-localized-approximation-cocones",
+    "lem-weil-pbc-noetherian-approximation-localized-diagrams",
+    "lem-weil-pbc-integer-approximation-flat-point-stage",
+    "lem-weil-pbc-flat-point-noetherian-model",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CanonicalLocalizedApproximationLimit",
+  "file": "lean/Sheaf/RingTheory/CanonicalLocalizedApproximationLimit.lean",
+  "declaration": "Algebra.canonical_localized_approximation_limit",
+  "statement": "theorem canonical_localized_approximation_limit\n    (R : Type u) (S : Type v) (M : Type w)\n    [CommRing R] [CommRing S] [Algebra R S]\n    [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] :\n    let R' := ULift.{max u v w} R\n    let S' := ULift.{max u v w} S\n    let M' := ULift.{max u v w} M\n    letI : Algebra R' S' := ULift.algebra' R S'\n    ∀\n    {Λ : Type (max u v w)} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (A B : Λ ⥤ CommRingCat.{max u v w}) (η : A ⟶ B)\n      (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R'))\n      (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S'))\n      (D : Λ ⥤ AddCommGrpCat.{max u v w})\n      (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M'))\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hmodel :\n      -- (1) the three colimits, compatible with `R' → S'` and the module actions\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧\n      Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M') ν)) ∧\n      (∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R' S')) ∧\n      (∀ (i j : Λ) (h : i ≤ j) (y : B.obj i) (x : D.obj i),\n        (D.map (homOfLE h)).hom (y • x) =\n          (B.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧\n      (∀ i (y : B.obj i) (x : D.obj i),\n        (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) (y • x) =\n          (@CommRingCat.Hom.hom _ (CommRingCat.of S') (κ.app i)) y •\n            (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M') (ν.app i)) x))\n    (q : PrimeSpectrum S),\n    let q' : PrimeSpectrum S' := ⟨q.asIdeal.comap ULift.ringEquiv.toRingHom,\n      Ideal.IsPrime.comap _⟩\n    let hs := fun (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : D.obj i) ↦\n      hmodel.2.2.2.2.1 i j (leOfHom f) b x\n    let Aₗ := primeRingDiagram A (η ≫ κ) q'\n    let Bₗ := primeRingDiagram B κ q'\n    let Dₗ := primeModuleDiagram B κ q' D hs\n    ∀ (ψ : (colimit Aₗ : CommRingCat.{max u v w}) →+*\n        (colimit Bₗ : CommRingCat.{max u v w}))\n      (act : Module (colimit Bₗ : CommRingCat.{max u v w})\n        (colimit Dₗ : AddCommGrpCat.{max u v w})),\n      letI := act\n      (∀ i, ψ.comp (colimit.ι Aₗ i).hom =\n        (colimit.ι Bₗ i).hom.comp (primeDiagramHom A B η κ q' i)) →\n      (∀ (i : Λ) (b : Bₗ.obj i) (x : Dₗ.obj i),\n        (colimit.ι Dₗ i).hom (b • x) =\n          (colimit.ι Bₗ i).hom b • (colimit.ι Dₗ i).hom x) →\n      (∃ ρ : R →+* (colimit Aₗ : CommRingCat.{max u v w}),\n        letI := ρ.toAlgebra\n        letI := Module.compHom (colimit Dₗ : AddCommGrpCat.{max u v w}) ψ\n        letI := Module.compHom (colimit Dₗ : AddCommGrpCat.{max u v w}) ρ\n        IsLocalization (q.asIdeal.comap (algebraMap R S)).primeCompl\n          (colimit Aₗ : CommRingCat.{max u v w}) ∧\n        Nonempty (LocalizedModule q.asIdeal.primeCompl M ≃ₗ[R]\n          (colimit Dₗ : AddCommGrpCat.{max u v w})))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T151135-L-877636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T151135-L-877636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
