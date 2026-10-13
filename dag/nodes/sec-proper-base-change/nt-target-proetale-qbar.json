@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl",
- "statement": "For a prime ℓ and separated finite-type schemes X,Y,X′,Y′ over a field k of positive prime characteristic different from ℓ, let f,g,f′,g′ be k-morphisms forming a cartesian square with f proper. The bounded constructible pro-étale base-change natural transformation with coefficients in Profinite.padicAlgClRingObj ℓ, whose sections are continuous maps into finite subextensions of Q̄_ℓ, is an isomorphism of functors.",
+ "statement": "Let ℓ be a natural number with Fact ℓ.Prime, let k be a field with Fact (ringChar k).Prime and Fact (ringChar k ≠ ℓ), and let X,Y,X′,Y′ be schemes over Spec k whose structure morphisms are locally of finite type, quasi-compact, and separated. Let f : X ⟶ Y, g : Y′ ⟶ Y, f′ : X′ ⟶ Y′, and g′ : X′ ⟶ X be morphisms over Spec k, and let sq : IsPullback g′ f′ f g. If f is proper, then IsIso (boundedConstructibleBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ k sq.toCommSq), the base-change natural transformation between the bounded constructible pro-étale derived categories with condensed Q̄_ℓ coefficients.",
  "source": {
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
   "place": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl",
@@ -21,19 +21,77 @@
   "thm-weil-pbc-qbar",
   "thm-weil-pbc-complete-proetale",
   "thm-weil-pbc-finite-level-proetale",
-  "prop-weil-proet-finite-proper-base-change"
+  "prop-weil-proet-finite-proper-base-change",
+  "def-weil-pbc-condensed-e-module-category",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "prop-weil-pbc-qbar-condensed-basechange-compatibility"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Each structure morphism is finite type (locally finite type and quasi-compact). The field spectrum is noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes each corner noetherian, in particular topologically noetherian. For an arbitrary object $K$ of the condensed bounded constructible category on $X$, apply the object clause of [prop-weil-pbc-qbar-condensed-two-colimit] to choose a finite intermediate extension $E$ and $K_E\\in\\mathcal C_E^c(X)$ with an isomorphism $v:T_{E,\\Omega}^{X}K_E\\xrightarrow{\\sim}K$. The categories in this step are condensed module-object categories; no identification with a rationalized integral category is assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl; finite-coefficient and filtered-colimit proof route in the module docstring"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-condensed-e-realization] to the finite normed extension $E/\\mathbf Q_\\ell$ and all four separated finite-type $k$-schemes. Its equivalence $J_X$ gives $M\\in\\Dbc(X,E)$ and an isomorphism $w:J_XM\\xrightarrow{\\sim}K_E$. This rational category has the same objects as its integral category, so its stated exchange-identification clause applies to $M$. The rational exchange at $M$ is invertible by [thm-weil-pbc-finite-extension], since the square is cartesian and $f$ proper. The exchange-identification clause conjugates its image under $J_{Y'}$ to the specified condensed exchange $B_E(J_XM)$. A functor maps an inverse to an inverse, and composition with the comparison isomorphisms preserves invertibility. Naturality at $w$ then gives $B_E(K_E)= (r_{f',E}l_{g',E})(w)\\circ B_E(J_XM)\\circ ((l_{g,E}r_{f,E})(w))^{-1}$, hence $B_E(K_E)$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "thm-weil-pbc-finite-extension",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl; finite-coefficient and filtered-colimit proof route in the module docstring"
+   }
+  },
+  {
+   "text": "Use the explicitly stated proper pushforward comparison isomorphisms and exchange equation of [prop-weil-pbc-qbar-condensed-basechange-compatibility]. It gives $B_\\Omega(T_{E,\\Omega}^XK_E)=U_{K_E}\\circ T_{E,\\Omega}^{Y'}(B_E(K_E))\\circ S_{K_E}^{-1}$. Step 2 supplies an inverse to the middle factor, and scalar extension maps this inverse to its inverse. Thus this component has inverse $S_{K_E}\\circ T_{E,\\Omega}^{Y'}(B_E(K_E)^{-1})\\circ U_{K_E}^{-1}$. This uses no claim that pushforward comparison is invertible for a nonproper map.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl; finite-coefficient and filtered-colimit proof route in the module docstring"
+   }
+  },
+  {
+   "text": "Write $F=l_{g,\\Omega}r_{f,\\Omega}$ and $G=r_{f',\\Omega}l_{g',\\Omega}$. Naturality at the isomorphism $v$ of Step 1 gives $B_\\Omega(K)=G(v)\\circ B_\\Omega(T_{E,\\Omega}^XK_E)\\circ F(v)^{-1}$. Its inverse is $F(v)\\circ B_\\Omega(T_{E,\\Omega}^XK_E)^{-1}\\circ G(v)^{-1}$, as checked by cancellation. Consequently every component is invertible. Apply [lem-weil-pbc-nattrans-isIso-iff-app] to obtain the asserted isomorphism of natural transformations, with exactly the upstream condensed coefficient ring.",
+   "uses": [
+    "lem-weil-pbc-nattrans-isIso-iff-app"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/Proper.lean",
+    "place": "isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl; finite-coefficient and filtered-colimit proof route in the module docstring"
+   }
+  }
+ ],
  "proof_deps": [
-  "thm-weil-pbc-qbar",
-  "thm-weil-pbc-complete-proetale",
-  "thm-weil-pbc-finite-level-proetale",
-  "prop-weil-proet-finite-proper-base-change"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-weil-pbc-condensed-e-realization",
+  "thm-weil-pbc-finite-extension",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-qbar-condensed-basechange-compatibility",
+  "lem-weil-pbc-nattrans-isIso-iff-app"
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
+  "place": "## Proof; comparison with the upstream condensed-ring target"
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "launcher",
@@ -54,5 +112,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "nt-target-proetale-qbar",
+  "worker": "stage1",
+  "summary": "Second reading corrects the finite-category conflation. Descend a condensed object to finite condensed coefficients, use the existing finite realization and finite proper-base-change theorem there, extend the specified exchange using proper coefficient-change comparisons, then use naturality and the componentwise criterion. Removed the redundant uncommitted identification bridge.",
+  "blueprint": "Realizes thm-weil-pbc-qbar Proof paragraph 1: object descent to a finite coefficient stage, finite-stage invertibility, and preservation of that invertibility through coefficient extension. The archived condensed target additionally needs the explicit proper coefficient-change comparison obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-04a7924cd",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-04a7924cd (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. Both new unsplit nodes omitted required created.by/date, merged_into, and lean_audit metadata; corrected whole-file JSONs are under fixes/dag/nodes/sec-proper-base-change/. No nodes dropped.; 2 file(s) fixed by the reviewer"
  }
 }
