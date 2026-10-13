@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-tensor-hom-uncurry-component-naturality",
+ "kind": "statement",
+ "title": "Naturality of a single explicit tensor-Hom evaluation component",
+ "statement": "Let $X$ be a scheme and let $P,P\\prime,L,L\\prime,M,M\\prime$ be unbounded cochain complexes of $\\mathcal O_X$-modules. Let $I$ be the fixed functorial K-injective resolution and $U_{p,q,n}$ the explicitly uncurried component of [def-pc-canonical-derived-tensor-hom-model], using the Hom-complex projections of [def-pur-hom-complex]. Given chain maps $a:P\\prime\\to P$, $b:L\\prime\\to L$, $c:M\\to M\\prime$, and $\\phi:P\\to\\operatorname{HomComplex}(L,I(M))$, put $\\psi=a;\\phi;\\operatorname{HomComplex}(b,I(c))$. For all integers $p,q,n$ with $q+p=n$, one has $U_{p,q,n}(\\psi)=(a^p\\otimes b^q);U_{p,q,n}(\\phi);I(c)^n$. This is an equality of sheaf morphisms on one degree pair, without localization or flatness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, functorial Hom-total-tensor comparison; cohomology.tex Tag 08DJ, componentwise evaluation. Read online at https://stacks.math.columbia.edu/tag/0A90 and https://stacks.math.columbia.edu/tag/08DJ."
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the product-projection map equation in homComplex_exists to b and I(c), at Hom degree p and source degree q with q+p=n. Precompose by a.f p and phi.f p. This identifies the projected transformed input with a.f p;phi.f p;pi;homObjMap(b.f q,I(c).f n).",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-model",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse sheaf tensor-Hom equivalence. Its three naturality equations identify the inverse image of the transformed projection with (b.f q tensor a.f p) followed by the original inverse image and I(c).f n. Naturality of the braiding moves this tensor map across the symmetry and reverses its order. Unfold the component definition to obtain exactly the asserted equality. This calculation is valid for all integer degrees; identities preserve the component and zero input maps yield zero.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-model",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-model",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, spelling out the single-component functoriality calculation from the source sheaf tensor-Hom naturality lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a component of uncurrying a chain map into a sheaf internal Hom complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a component of uncurrying a chain map into a sheaf internal Hom complex",
+   "results": [
+    "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+    "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left"
+   ],
+   "date": "2026-10-13",
+   "verdict": "No match for the explicit Hom-complex component; these concern global sections."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTensorHomUncurryComponent_natural|uncurry.*natural",
+   "results": [
+    "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:170:uncurry_natural_right",
+    "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:175:uncurry_natural_left",
+    "Mathlib/CategoryTheory/Sites/Monoidal.lean:59"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Ordinary monoidal uncurrying naturality is an ingredient; no declaration for this chosen Hom-complex projection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvaluation",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Componentwise evaluation and functoriality in step 1 of lem-pc-tensor-hom-uncurry-localized-evaluation",
+   "via": [
+    "lem-pc-tensor-hom-uncurry-localized-evaluation",
+    "lem-pc-tensor-hom-uncurry-chain-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryComponentNaturality.lean",
+  "declaration": "AlgebraicGeometry.schemeTensorHomUncurryComponent_natural",
+  "statement": "theorem schemeTensorHomUncurryComponent_natural (X : Scheme.{u})\n    (P P' L L' M M' : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (a : P' ⟶ P) (b : L' ⟶ L) (c : M ⟶ M')\n    (φ : P ⟶ homComplex (R := X.sheaf) L\n      ((schemeHomKInjectiveResolution X).obj M))\n    (p q n : ℤ) (h : q + p = n) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    schemeTensorHomUncurryComponent X P' L' M'\n        (a ≫ φ ≫ (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))).map\n          (X := (op L, (schemeHomKInjectiveResolution X).obj M))\n          (Y := (op L', (schemeHomKInjectiveResolution X).obj M'))\n          (b.op, (schemeHomKInjectiveResolution X).map c)) p q n h =\n      (a.f p ⊗ₘ b.f q) ≫ schemeTensorHomUncurryComponent X P L M φ p q n h ≫\n        ((schemeHomKInjectiveResolution X).map c).f n",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100118-L-2484513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100118-L-2484513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
