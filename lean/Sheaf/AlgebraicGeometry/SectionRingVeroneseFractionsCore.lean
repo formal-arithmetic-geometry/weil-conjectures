@@ -69,7 +69,6 @@ theorem sectionRing_veronese_fraction_core
     (sectionRingVeroneseFractionMap_surjective X L d s)
     (sectionRingVeroneseFractionMap_kernel X L d s)).bijective, ?_⟩
   intro n ξ
-  simp only [sectionRingVeroneseFractionCanonicalMap, sectionFraction]
   change sectionRingVeroneseFractionMap X L d s
     (DirectSum.of
       (fun i : ℕ ↦ Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow i, ⊤)) n
