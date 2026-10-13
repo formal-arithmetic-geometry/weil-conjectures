@@ -6,9 +6,9 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.Algebra.Category.ModuleCat.Stalk
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import all Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 @[expose] public section
 universe u
 open CategoryTheory Opposite TopCat.Presheaf
@@ -25,5 +25,22 @@ theorem exists_affine_locally_free_model_core
       H.IsQuasicoherent ∧
       (∀ V : (Spec A).Opens, IsAffineOpen V →
         Module.Finite ((Spec A).presheaf.obj (op V)) (H.val.obj (op V))) ∧
-      Nonempty (Modules.restrict H W.ι ≅ P) := by sorry
+      Nonempty (Modules.restrict H W.ι ≅ P) := by
+  let G := (Modules.overEquiv W).inverse.obj P
+  have : G.IsFinitePresentation := finitePresentation_overEquiv_inverse (Spec A) W P
+  let F : (Spec A).Modules := SheafOfModules.unit (Spec A).ringCatSheaf
+  have : F.IsQuasicoherent := by
+    dsimp only [F]
+    apply SheafOfModules.isQuasicoherent_unit
+  obtain ⟨H, hH, φ, e, _⟩ := Modules.exists_finitePresentation_extension
+    (Spec A) W (TopologicalSpace.NoetherianSpace.isCompact _) F G 0
+  let _ := hH
+  refine ⟨H, inferInstance, ?_, ?_⟩
+  · intro V hV
+    have : Module.FinitePresentation ((Spec A).presheaf.obj (op V))
+        (H.val.obj (op V)) :=
+      Modules.finitePresentation_sections_of_isFinitePresentation H hV
+    infer_instance
+  · exact ⟨((Modules.overFunctorEquiv W).app H).symm ≪≫
+      (Modules.overEquiv W).functor.mapIso e ≪≫ (Modules.overEquiv W).counitIso.app P⟩
 end AlgebraicGeometry.Scheme

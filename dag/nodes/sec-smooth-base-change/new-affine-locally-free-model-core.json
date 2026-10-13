@@ -9,17 +9,46 @@
  },
  "proof": [
   {
-   "text": "Finite presentation extension and affine module identification produce H; transport the finite locally free restriction isomorphism.",
-   "uses": [],
+   "text": "Spec A is quasi-compact and quasi-separated. Noetherianity makes every open W compact. Transport P through the inverse of Modules.overEquiv W. Finite local freeness implies finite presentation. Reuse the proved private finitePresentation_overEquiv_inverse helper from Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology (the module of [lem-pc-perfect-noetherian-cohomology]), made available with a proof-only import all. Only this transport helper is used, not the perfect-complex cohomology theorem. The helper applies the existing finite-presentation pushforward theorem for a continuous, cocontinuous left adjoint and the inverse equivalence unit comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sc-finite-locally-free-sheaf",
+    "lem-pc-perfect-noetherian-cohomology"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply exists_finitePresentation_extension with ambient structure sheaf and the zero morphism, obtaining a finitely presented H and an isomorphism H.over W to the transported P. The ambient structure sheaf is quasicoherent by the existing isQuasicoherent_unit instance. H is quasicoherent because it is finitely presented.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each affine open V, apply finitePresentation_sections_of_isFinitePresentation to H. The existing instance from module finite presentation to module finiteness gives the required affine-section finiteness.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse of overFunctorEquiv W at H, the image of the over-site extension isomorphism under overEquiv W, and the equivalence counit at P. This gives H.restrict W.ι isomorphic to P. Package H and the three assertions.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-weil-pbc-module-finite-presentation-extension",
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "lem-pc-perfect-noetherian-cohomology"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "M3",
+  "by": "Q4",
   "document": "Stacks Project",
-  "place": "Tags 0G41(2), 0EY6"
+  "place": "Tag 0G41(2), using the existing Tag 01PI extension theorem; affine-section finiteness from WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent"
  },
  "status": "split",
  "created": {
@@ -84,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "X-baa5a",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T111903-L-3056389",
+  "landing": "20261013T130752-L-3986726",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with the node; checked import pruning, dependencies, report, and earlier repair. Delivered core and sole direct importer compile cleanly; axioms contain only the permitted three plus existing transitive sorryAx."
  }
 }
