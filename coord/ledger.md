@@ -13815,3 +13815,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: returned deliver/C1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility (reviewer RETURN: (reviewer X-5d940, head 5d9408cdd) E2: All three new component statements are false. Counterexample: set X = X' = S = S')
 
 - 07:08 L: batch 20261013T224504 dependency take-out
+- 23:12 L: returned deliver/C1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore (reviewer RETURN: (reviewer X-1349a, head 1349a3275) C5: In lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitUnionCore.lean delete the)
