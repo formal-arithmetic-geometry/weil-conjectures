@@ -33,20 +33,23 @@
  ],
  "proof": [
   {
-   "text": "Choose K-injective representatives \\mathcal I^\\bullet and \\mathcal J^\\bullet for E and F with injective terms [prop-pur-kinjective-resolutions-exist]. A morphism \\varphi:E\\to F is represented by a chain map u:\\mathcal I^\\bullet\\to\\mathcal J^\\bullet because maps into a K-injective complex compute morphisms in the derived category [lem-sc-kinjective-quasi-iso-comparison]. The degreewise sequences defining MV(E) and MV(F) are short exact: left exactness is the sheaf axiom, and surjectivity on the right holds over every open because restriction maps of injective modules are surjective [lem-sc-ringed-space-injective-restriction-surjective]. By [lem-sc-derived-k-injective-restrict-open] the restrictions of \\mathcal I^\\bullet and \\mathcal J^\\bullet to U, V and U\\cap V are K-injective, so j_{T,*}(u|_T) represents R(j_T)_*(\\varphi|_T) for T\\in\\{U,V,U\\cap V\\} [def-pc-derived-direct-image]. Restricting u to U, V and U\\cap V gives a morphism between the two short exact sequences. The naturality clause of [lem-weil-pbc-complex-ses-triangle] therefore gives a morphism of the two distinguished triangles, in particular \\varphi[1]\\circ\\delta_E=\\delta_F\\circ R(j_{UV})_*(\\varphi|_{U\\cap V}).",
+   "text": "Implemented clause (1): choose the functorial K-injective resolution with injective terms of a complex representing each derived object, and transport its localization back to that object. Fix the derived open restriction adjunctions. The concrete Mayer--Vietoris complex of def-pc-kinjective-mayer-vietoris-data is short exact by lem-pc-kinjective-mayer-vietoris-exact. Define the boundary using triangleOfSESδ and the inverse explicitly constructed intersection comparison of def-pc-open-image-complex-comparison-iso. The unit and nested restriction identities from lem-pc-open-image-complex-comparison-unit and lem-pc-open-image-complex-comparison-restriction, together with the localization biproduct comparison, give an isomorphism from triangleOfSES to the required triangle, proving distinguishedness. Represent every derived morphism between the resolutions by a chain map using lem-sc-kinjective-quasi-iso-comparison and fullness of the homotopy quotient. This chain map gives a morphism of the concrete short exact sequences. Naturality of the right-derived computation isomorphism gives naturality of the explicit intersection comparison. triangleOfSESδ_naturality from lem-weil-pbc-complex-ses-triangle then gives the boundary square. Transport through the two resolution isomorphisms. The first square is naturality of the adjunction units, and the second applies Mathlib NatTrans.naturality to the locally assembled scheme restriction natural transformation; its components reduce to the adjunction mate by Adjunction.homEquiv_unit. No separate generic mate-naturality theorem is declared. These three squares construct the triangle morphism with exactly the required components. This argument works for all derived objects, so the quasi-coherent hypotheses are not needed for this clause. Clause (2) remains unproved; the next two steps retain its plan.",
    "uses": [
-    "lem-sc-kinjective-quasi-iso-comparison",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-sc-derived-k-injective-restrict-open",
-    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-pc-kinjective-mayer-vietoris-data",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "def-pc-open-image-complex-comparison-iso",
+    "lem-pc-open-image-complex-comparison-unit",
+    "lem-pc-open-image-complex-comparison-restriction",
     "lem-weil-pbc-complex-ses-triangle",
-    "lem-sc-ringed-space-injective-restriction-surjective",
+    "def-pc-derived-open-restriction-maps",
     "def-pc-derived-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BV construction and functoriality of the short-exact-sequence triangle"
+    "place": "Tag 08BV construction from the degreewise short exact sequence of K-injective complexes; functoriality of the short-exact-sequence triangle"
    }
   },
   {
@@ -83,23 +86,29 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-kinjective-quasi-iso-comparison",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-derived-k-injective-restrict-open",
-  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-pc-kinjective-mayer-vietoris-exact",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-pc-open-image-complex-comparison-unit",
+  "lem-pc-open-image-complex-comparison-restriction",
   "lem-weil-pbc-complex-ses-triangle",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image",
   "lem-pc-right-derived-functor-triangulated",
   "lem-pc-derived-direct-image-composition",
   "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-k-injective-restrict-open",
   "lem-pc-derived-functor-termwise-split-ses-triangle",
-  "lem-sc-ringed-space-injective-restriction-surjective",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-pc-derived-direct-image"
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "B2",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV, with the direct-image comparison from Tag 0D5T and the relative application in Tag 0DJ9"
+  "place": "Tag 08BV and Mathlib triangleOfSESδ_naturality; unresolved direct-image plan uses Tags 0D5T and 0DJ9",
+  "note": "Clause (1) follows the source construction with explicit comparison isomorphisms; clause (2) remains sorry. No unit realization bypassed. Landing-return repair removes the duplicate private restriction_naturality helper and uses NatTrans.naturality directly in mv_comm₂."
  },
  "mathlib_searches": [
   {
@@ -293,5 +302,15 @@
   "group": "V1",
   "result": "fix",
   "note": "qcqs W, qc opens U V cover, QCoh E F, MV triangle maps = units/rho of landed triangle, clause (1) triangle morphism with three components, clause (2) h qcqs, qc preimages, Rh_* QCoh, distinguished image, triangle iso with id first component; fixed: nine free comparison iso binders tied to Classical.choice of the recorded composition/open-restriction declarations"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T095929-L-2451171",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
