@@ -16,36 +16,30 @@
  ],
  "proof": [
   {
-   "text": "The good truncation sequence gives Q(truncGE n I) as the canonical lower truncation of QI, with its projection commuting. Uniqueness of the truncation triangle supplies its isomorphism to tauGE n QI.",
+   "text": "Use t.descTruncGE on Q(I.πTruncGE n) to construct b: tauGE n QI → Q(truncGE n I). Its composite with the truncation projection equals Q(I.πTruncGE n). Test b on every homology degree. For i≥n, both projections induce isomorphisms, using isIso_homologyFunctor_map_truncGEπ_app and CochainComplex.quasiIsoAt_πTruncGE, so H^i(b) is invertible by cancellation. For i<n, both objects have zero homology. DerivedCategory.isIso_iff makes b invertible. Compose its inverse with quotientCompQhIso at truncGE n I, and use naturality of that comparison to get the commuting projection equality. This is the private helper lowerTruncationLocalization.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "On K=truncGE n I, upper truncation at n and negative vanishing reduce invertibility of H^n of the derived unit to the complex H^n(K) placed in degree n. Shift to zero, apply the single-object comparison normalized on the injective-resolution augmentation, and use that F preserves the augmentation kernel. Transport via bounded-below/unbounded derived compatibility.",
+   "text": "For a complex K strictly zero below n, every left homology datum of its degree-n short complex is preserved by F: the outgoing kernel is preserved by finite-limit preservation, and the incoming differential and hence its induced boundary map are zero, whose cokernel is preserved. This is preservesBottomHomology. Choose K → L via Mathlib CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective, with L strictly zero below the same n and all terms injective. By [lem-weil-pbc-bounded-below-injectives-kinjective], L is K-injective, so the actual derived unit at PL is invertible. ShortComplex.mapHomologyIso_hom_naturality and the original quasi-isomorphism show H^n(F(K → L)) is invertible. Localization shows Qh(P(K → L)) is invertible. Naturality of the actual right-derived unit therefore proves H^n of its component at PK invertible, by cancellation. This is isIsoBottomUnit, with no single-object, negative-vanishing, shift, or plus-compatibility argument.",
    "uses": [
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-sp-derived-functor-single-identification",
-    "src-right-derived-functor-plus-compatibility"
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
    ],
    "elementary": false
   },
   {
-   "text": "Define d by the homology factor isomorphisms at F(K), H^n of the unit at K, and H^n of RF of the canonical localization/truncation isomorphism. Naturality of the unit at P(I→K) and the homology factors, together with the commuting projection, proves the displayed factorization. All factors defining d are invertible; zero and negative cutoff cases need no exception.",
+   "text": "Put K=truncGE n I. Define d as the inverse homotopy and derived homology factor comparisons for F(K), followed by the isomorphism H^n of the actual derived unit at PK and H^n RF of the localization isomorphism of step 1. Naturality of both homology factor comparisons at F(I → K) and naturality of the actual derived unit at P(I → K), then the projection equality from step 1, prove the required equation by functoriality and associativity. All helper lemmas are proved privately in the same module, and the statement remains unchanged.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-sp-derived-functor-single-identification",
-  "src-right-derived-functor-plus-compatibility"
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Canonical kernel and derived-unit calculation of the parent, expanding Tags 05TC and 08D4 (1)."
+  "document": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+  "place": "exists_quasiIso_injective, mapHomologyIso_hom_naturality, isKInjective_of_injective; original Stacks Tag 05TC bottom-kernel calculation and derived-unit naturality, formalized by Y2 using these proved APIs."
  },
  "mathlib_searches": [
   {
@@ -120,10 +114,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T111847-L-3051090",
-  "kind": "interface",
+  "landing": "20261013T115035-L-3327869",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
