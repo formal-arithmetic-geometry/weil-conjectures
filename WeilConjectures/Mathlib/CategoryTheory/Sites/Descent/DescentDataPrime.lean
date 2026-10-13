@@ -328,6 +328,48 @@ theorem nonempty_map_iso_of_ofGlue {hself : GlueSelf (H := H) d hd₁ hd₂}
     rw [hε, Category.assoc, ← pullHom_comp, Iso.inv_hom_id, pullHom_id_eq_id, Category.comp_id]
   rw [hε', ← pullHom_comp_assoc, hl i j]
 
+section IsoGlueHom
+
+variable (sq) {N : F.obj (.mk (op S))}
+  (ε : ∀ i, (F.map (μ i).op.toLoc).toFunctor.obj (O i) ≅ (F.map (f i).op.toLoc).toFunctor.obj N)
+
+/-- The gluing morphisms induced by isomorphisms `ε i : (μ i)^* (O i) ≅ (f i)^* N`. -/
+noncomputable def isoGlueHom (i j : ι) :
+    (F.map ((sq i j).p₁ ≫ μ i).op.toLoc).toFunctor.obj (O i) ⟶
+      (F.map ((sq i j).p₂ ≫ μ j).op.toLoc).toFunctor.obj (O j) :=
+  pullHom (ε i).hom (sq i j).p₁ ((sq i j).p₁ ≫ μ i) (sq i j).p rfl (by simp) ≫
+    pullHom (ε j).inv (sq i j).p₂ (sq i j).p ((sq i j).p₂ ≫ μ j) (by simp) rfl
+
+variable {sq}
+
+lemma glueSelf_isoGlueHom (d : ∀ i, X i ⟶ (sq i i).pullback)
+    (hd₁ : ∀ i, d i ≫ (sq i i).p₁ = 𝟙 _) (hd₂ : ∀ i, d i ≫ (sq i i).p₂ = 𝟙 _) :
+    GlueSelf (H := isoGlueHom sq ε) d hd₁ hd₂ := fun i ↦ by
+  have hp : d i ≫ (sq i i).p = f i := by rw [← (sq i i).hp₁, reassoc_of% (hd₁ i)]
+  rw [isoGlueHom, pullHom_comp _ _ _ _ (f i) _ (by rw [reassoc_of% (hd₁ i)]) (by simp [hp])
+      (by rw [reassoc_of% (hd₂ i)]), pullHom_pullHom, pullHom_pullHom,
+    pullHom_congr_left _ (hd₁ i) _ _ _ _, pullHom_congr_left (ε i).inv (hd₂ i) _ _ _ _,
+    pullHom_id, pullHom_id, Iso.hom_inv_id]
+
+lemma glueCocycle_isoGlueHom : GlueCocycle sq₃ (isoGlueHom sq ε) := fun i₁ i₂ i₃ ↦ by
+  simp only [isoGlueHom]
+  rw [pullHom_comp _ _ _ _ (sq₃ i₁ i₂ i₃).p _ (ChosenPullback₃.p₁₂_p₁_assoc _ _) (by simp)
+      (ChosenPullback₃.p₁₂_p₂_assoc _ _),
+    pullHom_comp _ _ _ _ (sq₃ i₁ i₂ i₃).p _ (ChosenPullback₃.p₂₃_p₂_assoc _ _) (by simp)
+      (ChosenPullback₃.p₂₃_p₃_assoc _ _),
+    pullHom_comp _ _ _ _ (sq₃ i₁ i₂ i₃).p _ (ChosenPullback₃.p₁₃_p₁_assoc _ _) (by simp)
+      (ChosenPullback₃.p₁₃_p₃_assoc _ _)]
+  simp only [pullHom_pullHom, Category.assoc]
+  rw [pullHom_congr_left (ε i₂).inv (ChosenPullback₃.p₁₂_p₂ (sq₃ i₁ i₂ i₃)) _ _ _ _,
+    pullHom_congr_left (ε i₂).hom (ChosenPullback₃.p₂₃_p₂ (sq₃ i₁ i₂ i₃)) _ _ _ _,
+    ← pullHom_comp_assoc, Iso.inv_hom_id, pullHom_id_eq_id, Category.id_comp,
+    pullHom_congr_left (ε i₁).hom (ChosenPullback₃.p₁₂_p₁ (sq₃ i₁ i₂ i₃)) _ _ _ _,
+    pullHom_congr_left (ε i₁).hom (ChosenPullback₃.p₁₃_p₁ (sq₃ i₁ i₂ i₃)) _ _ _ _,
+    pullHom_congr_left (ε i₃).inv (ChosenPullback₃.p₂₃_p₃ (sq₃ i₁ i₂ i₃)) _ _ _ _,
+    pullHom_congr_left (ε i₃).inv (ChosenPullback₃.p₁₃_p₃ (sq₃ i₁ i₂ i₃)) _ _ _ _]
+
+end IsoGlueHom
+
 end DescentData'
 
 end CategoryTheory.Pseudofunctor
