@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-open-module-cohomology-local-iso",
+ "kind": "statement",
+ "title": "Open module cohomology inverts local isomorphisms",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "statement": "Let X be a ringed space [def-weil-locally-ringed-space-morphism], U an open subset, and f:M -> N a morphism of sheaves of O_X-modules [def-weil-sheaf-of-modules-category]. Suppose its restriction by the over-site functor overFunctor U is an isomorphism. Then for every p >= 0 the induced morphism H^p(U,M) -> H^p(U,N), using open module cohomology [def-sc-open-module-cohomology], is an isomorphism of additive groups. There are no compactness or coherence assumptions.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-open-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1, Lemma 20.7.1(1)-(2), locality of cohomology and its proof"
+ },
+ "proof": [
+  {
+   "text": "Choose injective resolutions I and J of M and N and the standard comparison cochain map phi lifting f. Obtain exactness of R = overFunctor U from open_restriction_adjunction_exact. Construct restricted resolutions explicitly, with cocomplex R(I), injective terms from restrict_injectiveResolution, and augmentation given by the inverse singleMapHomologicalComplex isomorphism followed by R(I.iota). Exactness makes the augmentations quasi-isomorphisms.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module category on the over-site has enough injectives by the proved upstream SheafOfModules.isGrothendieckAbelian and the Mathlib Grothendieck enough-injectives instance. R(phi) lifts R(f): applying R to desc_commutes_zero verifies the augmentation equation. InjectiveResolution.iso_hom_naturality identifies the image of R(phi) in the homotopy category with the chosen injective-resolution image of the isomorphism R(f), conjugated by comparison isomorphisms. Thus its image is an isomorphism.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let T be the additive functor of sections at the terminal object of Over U. Applying T on the homotopy category and then degree-p homology preserves the previous isomorphism. HomotopyCategory.homologyFunctorFactors transfers it to homology of the actual section complex. Sections at the terminal object after R are definitionally sections on U; their induced cochain maps are the same. Finally isoRightDerivedObj_hom_naturality identifies this homology map with openModuleCohomology.map f, conjugated by isomorphisms, and cancellation gives the result.",
+   "uses": [
+    "def-sc-open-module-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sp-injective-resolutions",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sc-open-module-cohomology",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1, proof via restriction of injective resolutions; Lean comparison-map proof by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology on an open sends a locally invertible sheaf morphism to a bijection",
+   "results": "Found local bijectivity and Scheme.Modules.Hom.isIso_iff_isIso_app; no statement about openModuleCohomology.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.ofBijective",
+   "results": "AddEquiv.ofBijective and its inverse laws construct the division once local cohomology bijectivity is established.",
+   "date": "2026-10-13",
+   "verdict": "Generic additive inverse construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology|rightDerived.*comp|iso_hom_naturality",
+   "results": "No duplicate local-isomorphism lemma. Mathlib InjectiveResolution.iso_hom_naturality and isoRightDerivedObj_hom_naturality, together with HomotopyCategory.homologyFunctorFactors, supply a complete proof. The proved upstream SheafOfModules.isGrothendieckAbelian supplies the over-site module-category instance without importing the stronger localized-generator statement.",
+   "date": "2026-10-13",
+   "verdict": "Proof assembled from existing proved infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor of sections on an open sends morphisms that are isomorphisms on that open to isomorphisms",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CohomologySectionDivision",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomology-section-division",
+   "place": "Proof step 2, local-isomorphism invariance of open cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.OpenModuleCohomologyLocalIso",
+  "file": "lean/Sheaf/Topology/OpenModuleCohomologyLocalIso.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.openModuleCohomology_map_isIso_of_overFunctor",
+  "statement": "theorem openModuleCohomology_map_isIso_of_overFunctor (X : RingedSpace.{u})\n    (U : Opens X) {M N : SheafOfModules.{u} (moduleRings X)} (f : M ⟶ N)\n    [IsIso ((SheafOfModules.overFunctor (moduleRings X) U).map f)] (p : ℕ) :\n    IsIso ((openModuleCohomology X p U).map f)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040757-L-3951489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T040757-L-3951489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
