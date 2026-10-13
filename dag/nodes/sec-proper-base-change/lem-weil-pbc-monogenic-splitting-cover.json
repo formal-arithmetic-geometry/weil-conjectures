@@ -1,0 +1,181 @@
+{
+ "id": "lem-weil-pbc-monogenic-splitting-cover",
+ "kind": "statement",
+ "title": "Finite localized splitting cover with maximal contractions and root witnesses",
+ "statement": "Let R be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring], K its fraction field, x in K, S=R[x], m a maximal ideal of S and A=S_m [def-weil-pbc-localization-at-prime]. There exist a normal Nagata domain Rprime, its fraction field Kprime, an element z of Kprime and a multiplicative subset M of T=Rprime[z] consisting of nonzero divisors, such that B=M^{-1}T admits an injective finite A-algebra map [def-weil-finitely-generated-module]. For every maximal ideal q of B, the contraction n0 to T is maximal, and some r in Rprime satisfies z-r in n0. Rprime and Kprime are in Type(max u v) when R and K are in Type u and Type v. No normal-open or local-presentation conclusion is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+ },
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak m$ and set $\\mathfrak n=R\\cap\\mathfrak m$. The field $\\kappa(\\mathfrak m)$ is generated as a $\\kappa(\\mathfrak n)$-algebra by the residue of $x$, because $S=R[x]$; it is finite over $\\kappa(\\mathfrak n)$ by [lem-weil-pbc-zariski-lemma]. Let $\\bar f(T)=T^d+\\sum_{i=1}^d\\bar c_iT^{d-i}\\in\\kappa(\\mathfrak n)[T]$ be the monic minimal polynomial of the residue of $x$. Lift each $\\bar c_i$ to a fraction $c_i/s_i\\in R_{\\mathfrak n}$ with $s_i\\in R\\setminus\\mathfrak n$; localize $R$ and $S$ at the product $s=\\prod_i s_i$, so all lifts lie in $R_s$. The resulting monic $f(T)\\in R_s[T]$ has $f(x)\\in\\mathfrak mS_s$, since its residue in $\\kappa(\\mathfrak m)$ is $\\bar f(\\bar x)=0$. The maximal ideal $\\mathfrak mS_s$ and its localization of $S$ still give the original $S_{\\mathfrak m}$.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+   }
+  },
+  {
+   "text": "Work over the localized $R_s$ and rename it $R$. Adjoin roots of $f$ successively to $K$; at most $d$ finite algebraic extensions give a finite splitting field $K''/K$. Let $R'$ be the integral closure of $R$ in $K''$. The Nagata property of $R$ [lem-weil-pbc-nagata-localization] makes $R'$ a finite $R$-module by the N-2 clause of [def-weil-pbc-nagata-ring] and [def-weil-pbc-japanese-domain]; it is a normal domain with fraction field $K''$ by [lem-weil-pbc-integral-closure-finite-extension-normal], and Nagata by [lem-weil-pbc-finite-over-nagata-nagata]. Every root of the monic polynomial $f$ is integral over $R$, so lies in $R'$ [def-weil-pbc-integral-closure]. Put $S'=R'[x]\\subset K''$. The same finitely many $R$-module generators of $R'$ generate $S'$ as an $S$-module, so $S\\subseteq S'$ is finite [def-weil-finitely-generated-module], hence integral by [lem-weil-pbc-finite-algebra-is-integral].",
+   "uses": [
+    "lem-weil-pbc-nagata-localization",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+   }
+  },
+  {
+   "text": "Let T=Rprime[z] in the splitting field L, and let M be the image of S minus m in T. This multiplicative subset avoids zero because all maps into L are injective. Set B=Localization M. After the denominator localization, T is finite over S_s, and s is already a unit in A=S_m. Localizing the finite extension therefore gives a finite injective map A to B. Every maximal ideal q of B contracts to the unique maximal ideal of the local ring A by integrality. Its contraction to T lies over the maximal ideal of S_s and is maximal by integrality of T over S_s. This proves the finite map, the nonzero-divisor condition on M and maximality of the contracted ideal.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+   }
+  },
+  {
+   "text": "For a maximal q of B, let n0 be its maximal contraction to T. The lifted polynomial evaluates at z into n0 and factors into linear terms z-r_i with r_i in Rprime. Its degree is positive, and a prime ideal containing the product contains one factor. Thus there exists r in Rprime such that z-r belongs to n0. This is the required root witness; shifting the generator and identifying the localizations are separate proved steps of the parent theorem.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-nagata-localization",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5: residue-polynomial lifting, finite splitting extension, integral closure and roots over maximal ideals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite integral cover of a fractional monogenic algebra over a Nagata ring with normal principal open",
+   "results": "IsIntegralClosure.finite, Ring.instFiniteNormalClosure_1, isAlmostIntegral_iff_isIntegral, Ring.instFiniteNormalClosure, Algebra.zariskisMainProperty_iff, IsAlmostIntegral.isIntegral, IsIntegralClosure.isNoetherianRing, integralClosure.isNoetherianRing; no theorem constructing this splitting cover and the root witnesses",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.adjoin, IsLocalization",
+   "results": "Algebra.EssFiniteType.cond, Algebra.EssFiniteType.mk, Algebra.essFiniteType_cond_iff, FractionalIdeal.isFractional_adjoin_integral, FractionalIdeal.adjoinIntegral_coe, multiple_mem_adjoin_of_mem_localization_adjoin, IsLocalization.exists_smul_mem_of_mem_adjoin, IsLocalization.lift_mem_adjoin_finsetIntegerMultiple; no theorem constructing this splitting cover and the root witnesses",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin.*singleton|isIntegrallyClosed.*[Ll]ocalization",
+   "results": "Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/Algebra/Algebra/NonUnitalSubalgebra.lean; no theorem constructing this splitting cover and the root witnesses",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normal Nagata splitting field monogenic finite extension local presentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonFiniteCoverCore",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Tag 0334, Step 5, from residue-polynomial lifting through finding a root in every maximal ideal of the finite splitting cover",
+   "via": [
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinSingletonSplittingCover",
+  "file": "lean/Sheaf/RingTheory/AdjoinSingletonSplittingCover.lean",
+  "declaration": "exists_adjoin_singleton_splitting_cover",
+  "statement": "theorem exists_adjoin_singleton_splitting_cover\n    (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]\n    [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)\n    (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] :\n    ∃ (R' K' : Type (max u v)) (_ : CommRing R') (_ : IsDomain R')\n      (_ : IsIntegrallyClosed R') (_ : Field K') (_ : Algebra R' K')\n      (_ : IsFractionRing R' K'),\n      IsNagataRing R' ∧ ∃ (z : K') (M : Submonoid (Algebra.adjoin R' ({z} : Set K'))),\n        M ≤ nonZeroDivisors (Algebra.adjoin R' ({z} : Set K')) ∧\n        ∃ (_ : Algebra (Localization.AtPrime m) (Localization M)),\n          Function.Injective (algebraMap (Localization.AtPrime m) (Localization M)) ∧\n          Module.Finite (Localization.AtPrime m) (Localization M) ∧\n          ∀ (q : Ideal (Localization M)) [q.IsMaximal],\n            (q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))\n              (Localization M))).IsMaximal ∧\n            ∃ r : R',\n              (⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩ :\n                Algebra.adjoin R' ({z} : Set K')) -\n                algebraMap R' (Algebra.adjoin R' ({z} : Set K')) r ∈\n                q.comap (algebraMap (Algebra.adjoin R' ({z} : Set K'))\n                  (Localization M))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f21a0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T004337-L-2510158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f21a0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T004337-L-2510158",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, Lean files, DAG nodes, change record, report, static checks, delivery compilation, and direct importer compilation all agree."
+ }
+}
