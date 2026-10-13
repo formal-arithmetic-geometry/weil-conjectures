@@ -1,16 +1,16 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group C1
+Authors: SHEAF groups C1 and F1
 -/
 module
 
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Defs
-import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
+import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.RingTheory.FlatAlgebraPowerBasis
 
 /-!
 # Fixed bases for strict henselization quotients
@@ -29,21 +29,16 @@ namespace Algebra
 Source: Stacks Project, Tag 07QM(4), using Tag 051F and flat base change Tag 00HI.
 (blueprint: lem-sc-strict-henselization-quotient-bases).
 
-Proof: At the closed point of Spec A, identify the scheme residue field with A/n.
-A pointed etale A-algebra S -> K determines the triple with prime ker(S -> K)
-and the induced residue embedding into K; conversely the triple gives that map.
-These constructions identify the diagrams defining IsStrictHenselization and the
-triples colimit. Uniqueness of colimits transports the triples properties to C.
-Choose a basis of K over A/n. The transported residue map identifies C/nC with K
-and makes C local; lift the basis vectors through that surjective map. Faithful flatness
-of strict henselization makes C flat over A. For each positive r, mapping ideal
-powers gives (n C)^r = n^r C. Consequently C/(n C)^r is a flat A/n^r-module by
-flat base change. The local ring A/n^r has nilpotent maximal ideal n/n^r; reducing
-this module modulo that ideal gives K, and the fixed lifts give its chosen basis.
-Apply Module.basis_iff_basisQuotient_of_nilpotent to obtain a basis on those lifts.
-Invert its representation map and restrict scalars to A to obtain e r, which
-sends each standard generator to the image of the fixed lift. The same lifts work
-for every r. No completion comparison is asserted here.
+Proof: Use the existing triples-presentation theorem to present C as a ring colimit
+with its original structural A-map. Faithful flatness of this colimit makes C flat
+as an A-module. The quotient C/nC is a vector space over the field A/n; choose any
+basis and lift its vectors through the surjective quotient map C -> C/nC. There is
+no need to identify this vector space with K. For each positive r, the generic
+flat-algebra power-basis lemma applies the nilpotent local basis criterion over
+A/n^r to these same lifts. Invert each basis representation and restrict scalars
+to A. Ideal.map_pow identifies n^r C with (nC)^r, so the quotient equivalence sends
+each standard generator to the class of its fixed lift. No completion comparison
+is asserted here.
 -/
 theorem strictHenselization_quotient_bases
     (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K]
@@ -58,6 +53,28 @@ theorem strictHenselization_quotient_bases
         e r hr (Finsupp.single i 1) =
           Ideal.Quotient.mk (((IsLocalRing.maximalIdeal A).map (algebraMap A C)) ^ r)
             (x i)) := by
-  sorry
+  classical
+  obtain ⟨p, hp, a, hsep, ι, ⟨hc⟩, hι⟩ := hC.triples_presentation A K C
+  let := a
+  have := hsep
+  have hflat := AlgebraicGeometry.Scheme.strictHenselization_faithfullyFlat
+    (CommRingCat.of A) p hp K _ hc (CommRingCat.ofHom (algebraMap A C)) hι
+  have : Module.Flat A C := RingHom.flat_algebraMap_iff.mp hflat.flat
+  let : Field (A ⧸ IsLocalRing.maximalIdeal A) := Ideal.Quotient.field _
+  let b := Module.Free.chooseBasis (A ⧸ IsLocalRing.maximalIdeal A)
+    (C ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A C))
+  choose x hx using fun i ↦ Ideal.Quotient.mk_surjective (b i)
+  have hb := fun r hr ↦ flatAlgebra_power_basis A C b x hx r hr
+  choose B hB using hb
+  let e := fun r hr ↦ ((B r hr).repr.symm.restrictScalars A).trans
+    (Ideal.quotientEquivAlgOfEq A
+      (Ideal.map_pow (algebraMap A C) (IsLocalRing.maximalIdeal A) r)).toLinearEquiv
+  refine ⟨_, x, e, ?_⟩
+  intro r hr i
+  change Ideal.quotientEquivAlgOfEq A
+    (Ideal.map_pow (algebraMap A C) (IsLocalRing.maximalIdeal A) r)
+    ((B r hr).repr.symm (Finsupp.single i 1)) = _
+  rw [Module.Basis.repr_symm_single_one, hB r hr i]
+  rfl
 
 end Algebra

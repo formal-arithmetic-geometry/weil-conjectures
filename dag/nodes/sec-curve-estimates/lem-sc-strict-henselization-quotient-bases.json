@@ -13,30 +13,37 @@
  },
  "proof": [
   {
-   "text": "Identify pointed etale algebras with residue triples: an algebra map to K determines its kernel prime and induced residue embedding, and a triple gives the original algebra map. At the closed point identify the scheme residue field with A/n. Uniqueness of colimits transports the triples properties to the colimit C in the definition of strict henselization. Its extended maximal ideal is nC, its residue field is K, and C is faithfully flat over A. Choose a k-basis of K and lift its vectors through C onto K.",
+   "text": "Apply IsStrictHenselization.triples_presentation to the given hC. This supplies a residue-triples cocone with vertex C and exactly the original structural A-map. Apply strictHenselization_faithfullyFlat to this cocone, then RingHom.flat_algebraMap_iff to get Module.Flat A C. Only flatness, not an identification of C/nC with K, is needed.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-triples-presentation",
     "lem-sc-strict-henselization-faithfully-flat"
    ],
    "elementary": false
   },
   {
-   "text": "For each positive r, ideal mapping commutes with powers, so (nC)^r=n^r C. Flat base change (Algebra Tag 00HI) makes C/(nC)^r flat over A/n^r. This ring is local with nilpotent maximal ideal n/n^r. Modulo this ideal the module is K with the previously chosen basis. Apply the flat nilpotent local basis criterion to the fixed lifts. Invert the resulting basis representation and restrict scalars to A to obtain e_r; its standard generators have the prescribed images.",
+   "text": "The canonical quotient C/nC is an A/n-vector space, so choose a basis with Module.Free.chooseBasis. Lift each vector using the surjectivity of C -> C/nC. This gives one index type X : Type u and one family x : X -> C, independent of r.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each r >= 1 apply the generic flat-algebra power-basis lemma to the chosen residue basis and its fixed lifts. Choose the bases of C/(n^r C) it supplies. Invert each basis representation and restrict its scalars from A/n^r to A. Compose with Ideal.quotientEquivAlgOfEq using Ideal.map_pow to replace n^r C by (nC)^r. Basis.repr_symm_single_one and the value property of each chosen basis give exactly the requested standard-generator equation.",
    "uses": [
-    "lem-weil-pbc-local-artinian-basis-when-flat"
+    "lem-sc-flat-algebra-power-basis"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-triples-presentation",
   "lem-sc-strict-henselization-faithfully-flat",
-  "lem-weil-pbc-local-artinian-basis-when-flat"
+  "lem-sc-flat-algebra-power-basis"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07QM (lemma-dumb-properties-henselization), part (4), using Algebra Tags 00HI and 051F"
+  "place": "Tag 07QM(4), proof; simplified by choosing a basis directly in C/nC instead of identifying it with K. The quotient-basis lifting is fully formalized using Tag 051F and flat base change."
  },
  "mathlib_searches": [
   {
@@ -107,9 +114,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T153500-L-1085283",
+  "landing": "20261013T155932-L-1302091",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

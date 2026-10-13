@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-flat-algebra-power-basis",
+ "kind": "statement",
+ "title": "Fixed residue basis lifts to every power quotient of a flat algebra",
+ "statement": "Let A be a commutative local ring with maximal ideal n, and let C be a flat A-algebra [def-weil-pbc-flat-ring-map]. For any index set X, any A/n-basis b of C/nC, and any family x : X -> C whose residue classes equal b, every positive integer r admits an A/n^r-basis of C/(n^r C) whose value at each i is the class of x(i). No Noetherianity, finite generation, or finiteness of X is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QM(4), proof, applying Algebra Tags 00HI and 051F to a flat algebra and fixed residue-basis lifts"
+ },
+ "proof": [
+  {
+   "text": "Write n = maximalIdeal A, I = n^r, R = A/I, M = C/(I C), N = C/nC. Positivity of r gives I <= n, hence I is proper and R is a nontrivial local ring. By map_maximalIdeal_of_surjective, maximalIdeal R = n.map (Quotient.mk I). Ideal.map_pow and map_quotient_self show its r-th power is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor identifies M with R tensor_A C as an R-module. Module.Flat.baseChange makes that tensor product flat; Flat.of_linearEquiv transfers flatness to M. This is the quotient-ring version of tensoring with A/I and flat base change.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let m = maximalIdeal R and Q = m times M. The third isomorphism theorem and the maximal-ideal equality give ek : R/m isomorphic to A/n. Give N its R-action via A/I -> C/nC and its R/m-action via ek. Quotient.factor gives a surjective R-linear f : M -> N. Ideal.smul_top_eq_map, the equality of the structural-map composites, Ideal.map_map and Quotient.factor_ker identify ker f with Q. The first isomorphism theorem therefore gives an R-linear M/Q -> N equivalence; extend scalars through the surjection R -> R/m to obtain an R/m-linear equivalence. Basis.mapCoeffs along ek.symm changes the scalar ring of the supplied basis b, without changing its vectors. Transport it backwards through the equivalence. Its vectors are the classes of the fixed lifts x, since the quotient factor map sends each class of x to its original residue class.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply basis_iff_basisQuotient_of_nilpotent to the flat R-module M, the nilpotence proved in step 1, and the family of classes of x in M. The transported residue basis from step 3 supplies its left-hand side, and its right-hand side is exactly the asserted basis of M over A/n^r with the prescribed values.",
+   "uses": [
+    "lem-weil-pbc-local-artinian-basis-when-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-local-artinian-basis-when-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QM(4), proof; generic quotient-algebra specialization of Tag 051F, with all quotient and scalar-compatibility maps formalized in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A basis of the residue quotient of a flat algebra lifts to a basis modulo every positive power of the maximal ideal",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra over a local ring has bases modulo every power of the maximal ideal on fixed lifts of a residue basis",
+   "results": "Found exists_basis_of_span_of_flat, exists_basis_of_basis_baseChange and IsLocalRing.basisQuotient; these impose finite presentation or finite free hypotheses, absent here. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Basis",
+   "results": "exists_basis_of_span_of_flat and nonempty_basis_of_flat_of_finrank_eq require finiteness.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*quotient|basis.*nilpotent|strict.?hensel in Mathlib and lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib LocalRing/Quotient has finite free basisQuotient; LocalRing/Module has finite presentation lifting results. Sheaf BasisIffBasisQuotientOfNilpotent supplies the needed generic nilpotent criterion, but no generic power-quotient version. The original strict-henselization quotient-bases theorem is the only fixed-all-powers version and has a sorry.",
+   "date": "2026-10-13",
+   "verdict": "no existing generic power-quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictHenselizationQuotientBases",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "boundary-stalk calculation: fixed bases of strict-henselization power quotients, generic flat-algebra lifting step",
+   "via": [
+    "lem-sc-strict-henselization-quotient-bases",
+    "lem-sc-strict-henselization-mod-power-free",
+    "lem-sc-strict-henselization-completion-flat-over-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatAlgebraPowerBasis",
+  "file": "lean/Sheaf/RingTheory/FlatAlgebraPowerBasis.lean",
+  "declaration": "Algebra.flatAlgebra_power_basis",
+  "statement": "theorem flatAlgebra_power_basis\n    (A : Type u) (C : Type v) [CommRing A] [IsLocalRing A]\n    [CommRing C] [Algebra A C] [Module.Flat A C]\n    {X : Type w}\n    (b : Module.Basis X (A ⧸ IsLocalRing.maximalIdeal A)\n      (C ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A C)))\n    (x : X → C)\n    (hx : ∀ i, Ideal.Quotient.mk\n      ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) (x i) = b i)\n    (r : ℕ) (hr : 1 ≤ r) :\n    ∃ b' : Module.Basis X (A ⧸ (IsLocalRing.maximalIdeal A) ^ r)\n      (C ⧸ ((IsLocalRing.maximalIdeal A) ^ r).map (algebraMap A C)),\n      ∀ i, b' i = Ideal.Quotient.mk\n        (((IsLocalRing.maximalIdeal A) ^ r).map (algebraMap A C)) (x i)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T155932-L-1302091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T155932-L-1302091",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
