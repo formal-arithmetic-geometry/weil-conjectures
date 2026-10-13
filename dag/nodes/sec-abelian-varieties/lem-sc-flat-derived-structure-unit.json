@@ -17,32 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Compute [def-pc-ringed-spaces-derived-direct-image] on $\\mathcal O_X[0]$ by a nonnegative injective resolution. Compose the single-complex ordinary structure map with the resolution augmentation and localize to obtain $a$. The source single-complex cohomology is $\\mathcal O_S$. Direct image is left exact; hence the resolution augmentation identifies $H^0(E)$ with $f_*\\mathcal O_X$, and its naturality gives the equation for $a$ and $e_0,e_1$.",
+   "text": "Construct a explicitly as single(f♯) followed by canonicalSingleDirectImageMap f O_X. Take e0 to be the single homology isomorphism and e1 to be homologyRightDerivedFunctorObjSingleFunctorIso followed by rightDerivedZeroIsoSelf. The module category has injective resolutions by its existing Grothendieck structure. canonicalDirectImageH0Unit and naturality of the single homology isomorphism prove H0(a) ≫ e1.hom = e0.hom ≫ f♯.",
    "uses": [
-    "def-pc-ringed-spaces-derived-direct-image"
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-pc-canonical-single-direct-image-comparison",
+    "lem-pc-canonical-direct-image-h0-unit",
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "The structure sheaf is relatively flat because $f$ is flat. Apply [lem-pc-relatively-flat-canonical-module-base-change] to the residue-field fibre square. Use [lem-weil-pbc-module-pullback-structure-sheaf] to identify the pulled-back structure sheaf with that on the fibre. Naturality of the canonical base-change mate identifies the pulled-back $a$ with the fibre structure map. A derived direct image of a sheaf has no negative cohomology. On the affine spectrum of a field, global sections detect isomorphisms of quasi-coherent modules. Thus the assumed isomorphism on fibre global functions implies that $H^0(Li_s^*a)$ is invertible.",
+   "text": "Apply flat_derived_structure_unit_properties to f. Its displayed map is definitionally the explicitly constructed a. Combine its negative-fibre vanishing and degree-zero fibre isomorphism with the proved comparison equation and the explicit isomorphisms.",
    "uses": [
-    "lem-pc-relatively-flat-canonical-module-base-change",
-    "lem-weil-pbc-module-pullback-structure-sheaf"
+    "flat-derived-structure-unit-properties"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pc-relatively-flat-canonical-module-base-change",
-  "lem-weil-pbc-module-pullback-structure-sheaf"
+  "flat-derived-structure-unit-properties",
+  "lem-pc-canonical-direct-image-h0-unit",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "N1",
+  "by": "agent",
+  "group": "E4",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, first paragraph; Tag 0A1D base change and Tag 0096 unit comparison"
+  "place": "Tags 0E62, 0A1D, 0096; canonical direct-image H0 unit and single-functor naturality",
+  "note": "Second reading repaired false arbitrary-map lemma and removed the redundant data hole. One fibre-properties hole remains: decomposition, not a completed proof."
  },
  "mathlib_searches": [
   {
@@ -112,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T225321-L-1810134",
+  "landing": "20261013T010614-L-2670697",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

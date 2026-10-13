@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnitProperties
 
 /-! # The derived structure unit and its degree-zero and fibre comparisons
 
@@ -70,6 +70,29 @@ theorem exists_flat_derived_structure_unit
       (∀ s : S, IsIso (f.fiberToSpecResidueField s).appTop →
         IsIso ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map
-            ((derivedPullback (S.fromSpecResidueField s)).map a))) := by sorry
+            ((derivedPullback (S.fromSpecResidueField s)).map a))) := by
+  classical
+  dsimp only
+  have : HasInjectiveResolutions X.Modules :=
+    inferInstanceAs (HasInjectiveResolutions
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+  let M := SheafOfModules.unit X.ringCatSheaf
+  let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0
+  let k := DerivedCategory.singleFunctorCompHomologyFunctorIso
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0
+  let a := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map
+      (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) ≫
+        Scheme.Modules.canonicalSingleDirectImageMap f M
+  let e₀ := k.app (SheafOfModules.unit S.ringCatSheaf)
+  let e₁ := F.homologyRightDerivedFunctorObjSingleFunctorIso M 0 ≪≫
+    (Scheme.Modules.pushforward f).rightDerivedZeroIsoSelf.app M
+  obtain ⟨hnegative, hfibre⟩ := flat_derived_structure_unit_properties f
+  refine ⟨a, e₀, e₁, ?_, hnegative, hfibre⟩
+  dsimp only [a, e₀, e₁, H, F, M]
+  rw [Functor.map_comp, Category.assoc, Scheme.Modules.canonicalDirectImageH0Unit]
+  exact k.hom.naturality (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)
 
 end AlgebraicGeometry
