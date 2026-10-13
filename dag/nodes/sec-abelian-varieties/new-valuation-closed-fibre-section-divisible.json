@@ -13,16 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Apply the valuation-ring closed-fibre vanishing theorem and identify the quotient kernel with multiplication by the chosen maximal-ideal element using the closed-immersion unit-quotient theorem and invertibility.",
-   "uses": [],
+   "text": "If A is a field, Ideal.algEquivResidueFieldOfField and Scheme.Spec.residueFieldIso make the closed-point residue-field map an isomorphism. Its pullback fibre inclusion is an isomorphism. Construct a pushforward equivalence using pushforwardComp, pushforwardCongr and pushforwardId. Mathlib Adjunction.unit_isIso_of_R_isEquivalence makes the chosen unit invertible. Cancel it on homOfGlobalSection L s to deduce s = 0, and choose pi = 0 and t = 0.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For non-field A, identify A/m with the ideal residue field using Ideal.bijective_algebraMap_quotient_residueField, and then with the scheme residue field using Scheme.Spec.residueFieldIso. The resulting pullback.map is an isomorphism over X. Compare unit kernels along it: transport the composite adjunction along pushforwardComp and pushforwardCongr, use Adjunction.unit_leftAdjointUniq_hom_app, and cancel the invertible target maps. Use this equivalence to supply the quotient-fibre vanishing hypothesis of exists_nonzero_maximalIdeal_section_eq_zero. Properness supplies QuasiCompact and QuasiSeparated. This gives a nonzero pi in m for which s vanishes modulo pi.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-sc-valuation-closed-fibre-section-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply principal_quotient_unit_kernel to pi. Express s as the morphism homOfGlobalSection L s from O_X to L; vanishing of its composite with the unit follows by restriction naturality and the section formula for homOfGlobalSection. KernelFork.IsLimit.lift' gives the unique lift through multiplication by pi. Evaluate the factorization on the global section 1 to obtain a section t and the equation pi t = s. Return pi, its maximal-ideal membership, and t. No integrality hypothesis is needed for this argument, but the existing statement keeps it unchanged.",
+   "uses": [
+    "lem-sc-principal-quotient-unit-kernel"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-sc-principal-quotient-unit-kernel",
+  "lem-sc-valuation-closed-fibre-section-vanishing"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-on-morphisms.tex",
-  "place": "More on Morphisms, Lemma 0EX8, general-case proof"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "General-case divisibility argument; R3 formalized the field case, fibre and adjunction comparisons, and kernel lifting, leaving the fixed-principal-quotient kernel as one simpler theorem."
  },
  "mathlib_searches": [
   {
@@ -87,12 +108,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T223419-L-1641785",
+  "landing": "20261013T005859-L-2607885",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
