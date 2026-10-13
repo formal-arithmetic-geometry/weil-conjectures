@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-principal-open-sections-resolution-quasi-iso",
+ "kind": "statement",
+ "title": "Basic-open sections compare a quasi-coherent complex with its K-injective resolution",
+ "statement": "Let $A$ be a commutative ring, $g\\in A$, and $F,J$ integer-indexed complexes of module sheaves on $\\operatorname{Spec}A$ [def-pc-derived-category]. Assume every $F^n$ is quasi-coherent [pqf-def-coherent], $J$ is K-injective, and $i:F\\to J$ is a quasi-isomorphism. Then the map of $A$-module complexes $\\Gamma(D(g),i)$, with sections and the $A$-action as in [def-sc-principal-open-alternating-total], is a quasi-isomorphism. No boundedness or quasi-coherence of the terms of $J$ is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C2, one-element affine cover; Tags 08BS and 08D2. Read at https://stacks.math.columbia.edu/tag/08C2 and /08D2; local TeX absent."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "pqf-def-coherent",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof": [
+  {
+   "text": "Restrict i to the affine basic open D(g). Restriction is exact and preserves K-injective complexes, so it is still a quasi-isomorphism into a K-injective complex.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the basis of all affine opens of D(g). Restriction preserves quasi-coherence. Kernels, images and cokernels of differentials of F are quasi-coherent, so the terms, differential cokernels and cohomology sheaves have vanishing positive cohomology on every member of this basis. All three acyclicity conditions and the basis-covering condition of Tag 08C2 hold.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the unbounded alternating Cech derived-section comparison on the restricted affine scheme with its one-element cover by itself. The total on this cover is the ordinary section complex. Its invertible comparison to derived sections is the map obtained by applying sections to a K-injective resolution. Initially compute with an injective-term K-injective resolution, then compare it with the given one by a homotopy equivalence. Additive sections preserve this homotopy equivalence, so the displayed map is a quasi-isomorphism for the given i.",
+   "uses": [
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars from O(D(g)) to A leaves the underlying cohomology groups and their maps unchanged. Therefore this is exactly the quasi-isomorphism of A-module complexes given by affineOpenSections. If D(g) is empty both complexes are zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-affine-vanishing",
+  "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C2 (lemma-alternating-cech-complex-complex-computes-cohomology), one-element affine cover; Tags 08BS and 08D2. Read at https://stacks.math.columbia.edu/tag/08C2 and /08D2; local TeX absent.; W3 explicit reconstruction of the comparison for the library maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections on a principal affine open of a quasi coherent complex preserve its quasi isomorphism to a K injective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections on an affine open of a termwise quasi coherent unbounded complex map to a K injective resolution quasi isomorphism",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.InjectiveResolution.quasiIso, CochainComplex.cm5b, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.I_X, CochainComplex.isKInjective_of_injective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*[Ss]ection|[Ss]ection.*quasiIso|[Aa]ffine.*[Qq]uasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalCechResolutionQuasiIso",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support argument: comparison of Koszul Hom with principal Cech derived sections",
+   "via": [
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenSectionsResolutionQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenSectionsResolutionQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.principalOpenSections_resolution_quasiIso",
+  "statement": "theorem principalOpenSections_resolution_quasiIso\n    (A : Type u) [CommRing A] (g : A)\n    (F J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)\n    [J.IsKInjective] (i : F ⟶ J) [QuasiIso i] :\n    QuasiIso (((affineOpenSections A (PrimeSpectrum.basicOpen g)).mapHomologicalComplex\n      (ComplexShape.up ℤ)).map i)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T031557-L-3576943",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T031557-L-3576943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,7 +1,9 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-import Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections
+import Sheaf.AlgebraicGeometry.PrincipalOpenSectionsResolutionQuasiIso
+import Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel
+import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Principal Čech totalization of a quasi-coherent resolution
 
@@ -47,6 +49,20 @@ theorem principalCech_resolution_quasiIso
     (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)
     [J.IsKInjective] (i : F ⟶ J) [QuasiIso i] :
     QuasiIso ((principalCechFunctor r f).map i) := by
-  sorry
+  have hsections (S : {S : Finset (Fin r) // S.Nonempty}) :
+      QuasiIso (((affineOpenSections A
+        (principalCechIntersection r f S.val)).mapHomologicalComplex
+          (ComplexShape.up ℤ)).map i) := by
+    exact principalOpenSections_resolution_quasiIso A (∏ j ∈ S.val, f j) F J hF i
+  obtain ⟨K, L, φ, hKge, hKle, hLge, hLle, hcolumns, ⟨e⟩⟩ :=
+    principalCech_finiteColumn_model A r f F J i
+  have := hKge
+  have := hKle
+  have := hLge
+  have := hLle
+  have htotal : QuasiIso (HomologicalComplex₂.total.map φ (ComplexShape.up ℤ)) :=
+    HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns φ 0 ((r : ℤ) - 1)
+      (fun p hp hp' ↦ hcolumns p hp hp' hsections)
+  exact (quasiIso_iff_of_arrow_mk_iso _ _ e).mpr htotal
 
 end AlgebraicGeometry
