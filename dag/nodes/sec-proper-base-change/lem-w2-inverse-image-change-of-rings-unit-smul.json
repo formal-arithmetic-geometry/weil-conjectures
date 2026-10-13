@@ -1,0 +1,118 @@
+{
+ "id": "lem-w2-inverse-image-change-of-rings-unit-smul",
+ "kind": "statement",
+ "title": "Scalar compatibility of the inverse-image change-of-rings unit",
+ "statement": "Let f:X→Y be a continuous map, A a sheaf of commutative rings on Y, B one on X, t:f⁻¹A→B, and G an A-module sheaf. For every open V of Y, c∈A(V), and n∈G(V), write W=f⁻¹V, eta and etaR for the additive and ring inverse-image units, and sh for the B-linear sheafification unit of sectionwise extension along t. Then t_W(etaR(c)) • sh(1 tensor eta(n)) = sh(1 tensor eta(c • n)). Inverse image and its module action are those of [def-pc-topological-inverse-image-module]; the extension tensor and sheafification are those of [def-pur-sheaf-tensor-product].",
+ "stmt_deps": [
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "Stacks Project, Sheaves on Spaces and Modules on Sites",
+  "place": "Tags 008X and 03EK; Morphisms Tag 01SB, tensor action calculation"
+ },
+ "proof": [
+  {
+   "text": "Use the semilinearity clause of Classical.choose_spec (exists_inverseImageModuleInstances f A G) for the actual canonical inverse-image section instances. Pull the target-ring scalar through the linear sheafification unit. ModuleCat.ExtendScalars.smul_tmul computes the target action; TensorProduct.tmul_smul and TensorProduct.smul_tmul' balance the inverse-image scalar between the two factors. The restricted scalar action is multiplication by t(r), and mul_one finishes.",
+   "uses": [
+    "def-pc-topological-inverse-image-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 008X, 03EK and 01SB",
+  "place": "Fully formalized inverse-image unit semilinearity and tensor balancing calculation (second reading by W2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image module unit followed by extension of scalars preserves scalar multiplication",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinearity of inverse image module unit followed by extension of scalars and sheafification",
+   "results": "PresheafOfModules.Sheafify.map_smul and neighbouring sheafification results; none gives this combined unit equation. Loogle finds ModuleCat.ExtendScalars.smul_tmul.",
+   "date": "2026-10-13",
+   "verdict": "related tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*unit.*smul|changeOfRings.*unit.*smul",
+   "results": "No Mathlib matches. Local project search finds exists_inverseImageModuleInstances, whose second conclusion is the inverse-image unit compatibility used in the written proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushoutModuleSectionPresentation",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof via affine module correspondence: canonical unit scalar compatibility in the second-action calculation of the affine first tensor section presentation",
+   "via": [
+    "lem-weil-pbc-affine-pushout-module-section-presentation",
+    "lem-weil-pbc-affine-pushout-first-tensor-sections",
+    "lem-weil-pbc-affine-tensor-unit-section-presentation",
+    "lem-weil-pbc-affine-module-tensor-unit-sections",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InverseImageChangeOfRingsUnitSmul",
+  "file": "lean/Sheaf/AlgebraicGeometry/InverseImageChangeOfRingsUnitSmul.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.inverseImage_changeOfRings_unit_smul",
+  "statement": "theorem inverseImage_changeOfRings_unit_smul\n    {X Y : TopCat.{u}} (f : X ⟶ Y) (A : Y.Sheaf CommRingCat.{u})\n    (B : X.Sheaf CommRingCat.{u}) (t : TopCat.Sheaf.inverseImageRing f A ⟶ B)\n    (G : SheafOfModules.{u}\n      ((sheafCompose (Opens.grothendieckTopology Y)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj A))\n    (V : (TopologicalSpace.Opens Y)ᵒᵖ) (c : A.obj.obj V) (n : G.val.obj V) :\n    let W := (Opens.map f).op.obj V\n    let eta := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Opens.map f) AddCommGrpCat.{u} (Opens.grothendieckTopology Y)\n        (Opens.grothendieckTopology X)).unit.app\n          ((SheafOfModules.toSheaf _).obj G)).hom.app V\n    let etaR := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Opens.map f) CommRingCat.{u} (Opens.grothendieckTopology Y)\n        (Opens.grothendieckTopology X)).unit.app A).hom.app V\n    let sh := ((PresheafOfModules.sheafificationAdjunction\n      (𝟙 ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).obj B).obj)).unit.app\n          (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t\n            (TopCat.Sheaf.inverseImageModule f A G))).app W\n    (t.hom.app W).hom (etaR c) •\n      sh ((1 : B.obj.obj W) ⊗ₜ[(TopCat.Sheaf.inverseImageRing f A).obj.obj W,\n        (t.hom.app W).hom] eta n) =\n      sh ((1 : B.obj.obj W) ⊗ₜ[(TopCat.Sheaf.inverseImageRing f A).obj.obj W,\n        (t.hom.app W).hom] eta (c • n))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fcc7b",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T082422-L-1651008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fcc7b",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T082422-L-1651008",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched the corrected nodes, declared canonical-delta change, forced adaptation, pruning report, and B9 repair; compilation and axiom checks passed."
+ }
+}

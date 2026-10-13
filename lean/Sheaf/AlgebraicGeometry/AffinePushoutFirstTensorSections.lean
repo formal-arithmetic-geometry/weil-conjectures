@@ -13,7 +13,8 @@ public import Mathlib.Algebra.BigOperators.Group.List.Basic
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionPresentation
+import Sheaf.AlgebraicGeometry.AffinePushoutRingAffineSections
+import Mathlib.Algebra.Category.Ring.Constructions
 import Sheaf.AlgebraicGeometry.AffinePushoutModuleSectionPresentation
 
 /-! # Affine pushout ring and first tensor sections
@@ -150,10 +151,47 @@ theorem affine_pushout_first_tensor_sections [IsAffineHom f]
   let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
   let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
     Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
-  obtain ⟨δ, hεδ, hgen⟩ :=
-    affine_pushout_ring_section_presentation f B b t ε hring V hV
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Opens.map f.base) CommRingCat.{u} (Opens.grothendieckTopology X)
+    (Opens.grothendieckTopology U)
+  let δ : Γ(U, f ⁻¹ᵁ V) →+* B.obj.obj (op (f ⁻¹ᵁ V)) :=
+    (t.hom.app (op (f ⁻¹ᵁ V))).hom.comp ((adj.unit.app A).hom.app (op V)).hom
+  have hεδ : ∀ c, (ε.hom.app (op (f ⁻¹ᵁ V))).hom (δ c) = c := by
+    intro c
+    have ht := congrArg (fun q ↦ q.hom.app (op (f ⁻¹ᵁ V)) (
+      (adj.unit.app A).hom.app (op V) c)) hring.2.2
+    have hu := (adj.homEquiv A U.sheaf).apply_symm_apply (𝟙 A)
+    rw [Adjunction.homEquiv_unit] at hu
+    have hv := congrArg (fun q ↦ q.hom.app (op V) c) hu
+    exact ht.trans hv
+  have hgen : ∀ r : B.obj.obj (op (f ⁻¹ᵁ V)),
+      ∃ l : List (Γ(U, f ⁻¹ᵁ V) × Γ(U, f ⁻¹ᵁ V)),
+        r = (l.map fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom x.1 * δ x.2).sum := by
+    let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+    have hs := affine_pushout_ring_affine_sections f B b t hring.1 V hV
+    let ht := CommRingCat.isPushout_tensorProduct
+      Γ(X, V) Γ(U, f ⁻¹ᵁ V) Γ(U, f ⁻¹ᵁ V)
+    let e := (ht.isoIsPushout _ _ hs).commRingCatIsoToRingEquiv
+    have hl (c : Γ(U, f ⁻¹ᵁ V)) :
+        e (c ⊗ₜ[Γ(X, V)] 1) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c := by
+      exact congrArg (fun q ↦ q.hom c) (IsPushout.inl_isoIsPushout_hom _ _ ht hs)
+    have hr (d : Γ(U, f ⁻¹ᵁ V)) : e (1 ⊗ₜ[Γ(X, V)] d) = δ d := by
+      exact congrArg (fun q ↦ q.hom d) (IsPushout.inr_isoIsPushout_hom _ _ ht hs)
+    have htmul (c d : Γ(U, f ⁻¹ᵁ V)) :
+        e (c ⊗ₜ[Γ(X, V)] d) = (b.hom.app (op (f ⁻¹ᵁ V))).hom c * δ d := by
+      rw [← hl c, ← hr d, ← map_mul]
+      simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+    intro r
+    obtain ⟨x, rfl⟩ := e.surjective r
+    induction x using TensorProduct.induction_on with
+    | zero => exact ⟨[], by simp⟩
+    | tmul c d => exact ⟨[(c, d)], by simpa using htmul c d⟩
+    | add x y hx hy =>
+      obtain ⟨l, hl⟩ := hx
+      obtain ⟨m, hm⟩ := hy
+      exact ⟨l ++ m, by simp [map_add, hl, hm]⟩
   obtain ⟨p, hpb, hpd, hpu⟩ :=
-    affine_pushout_module_section_presentation f B b t ε hring P pobj κ hP G hG V hV δ
+    affine_pushout_module_section_presentation f B b t ε hring P pobj κ hP G hG V hV δ rfl
   exact ⟨δ, hεδ, hgen, p, hpb, hpd, hpu⟩
 
 end
