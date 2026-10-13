@@ -644,11 +644,6 @@ namespace Representation.CompositionSeries
 variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
   [FiniteDimensional k V] {ρ : Representation k W V} (s : ρ.CompositionSeries)
 
-/-- A representation is equivalent to its top subrepresentation. -/
-private noncomputable def topEquiv (ρ : Representation k W V) :
-    ρ.Equiv (⊤ : Subrepresentation ρ).toRepresentation :=
-  (Subrepresentation.topSubquotientBotEquiv ρ).symm.trans (Subrepresentation.subquotientBotEquiv ⊤)
-
 omit [FiniteDimensional k V] in
 private theorem series_zero : s.series 0 = ⊥ :=
   s.head_eq
@@ -658,14 +653,14 @@ private theorem exteriorPower_le_of_eq_top {V' : Type*} [AddCommGroup V'] [Modul
     {σ : Representation k W V'} {A : Subrepresentation σ} (hA : A = ⊤) (n : ℕ) :
     ConstituentsLE (σ.exteriorPower n) (A.toRepresentation.exteriorPower n) := by
   subst hA
-  exact ConstituentsLE.of_equiv ((topEquiv σ).exteriorPower n)
+  exact ConstituentsLE.of_equiv (Subrepresentation.topEquiv.symm.exteriorPower n)
 
 omit [FiniteDimensional k V] in
 private theorem exteriorPower_ge_of_eq_top {V' : Type*} [AddCommGroup V'] [Module k V']
     {σ : Representation k W V'} {A : Subrepresentation σ} (hA : A = ⊤) (n : ℕ) :
     ConstituentsLE (A.toRepresentation.exteriorPower n) (σ.exteriorPower n) := by
   subst hA
-  exact ConstituentsLE.of_equiv ((topEquiv σ).exteriorPower n).symm
+  exact ConstituentsLE.of_equiv (Subrepresentation.topEquiv.exteriorPower n)
 
 /-- **The exterior powers of a representation and of its semisimplification have the same
 constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`.
