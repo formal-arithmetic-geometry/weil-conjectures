@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
+public import
+  WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-!

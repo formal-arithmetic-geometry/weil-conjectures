@@ -14,7 +14,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStru
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars

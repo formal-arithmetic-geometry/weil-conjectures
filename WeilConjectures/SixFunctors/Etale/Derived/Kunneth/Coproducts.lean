@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoyoneda
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 
 /-!
 # The unbounded derived base change map is computed by the underived one

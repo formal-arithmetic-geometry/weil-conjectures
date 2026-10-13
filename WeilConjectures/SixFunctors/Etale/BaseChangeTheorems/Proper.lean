@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTors
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 
 /-!
 
