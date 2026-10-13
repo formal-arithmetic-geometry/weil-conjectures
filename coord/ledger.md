@@ -13296,3 +13296,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:10 L: merged deliver/H2/Sheaf.AlgebraicGeometry.SchemeIsoInverseBaseChangeTransport (stage 3; reviewer PASS; first push; landing 20261013T181059-L-2600299 (proof); batch 20261013T181050; modules 1; new nodes 0)
 - 18:11 L: merged deliver/H4/Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentCore (stage 3; reviewer PASS; first push; landing 20261013T181100-L-2600496 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:11 L: merged deliver/H4/Sheaf.Paper.ModuleCupGodementTensorCoordinatesExists (stage 3; reviewer PASS; first push; landing 20261013T181101-L-2600848 (interface); batch 20261013T181050; modules 3; new nodes 2)
+- 18:11 L: merged deliver/H4/Sheaf.RingTheory.FilteredColimitPrimeChainDimensionBound (stage 3; reviewer PASS; first push; landing 20261013T181101-L-2601013 (proof); batch 20261013T181050; modules 1; new nodes 0)
