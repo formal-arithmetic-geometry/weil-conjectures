@@ -30,91 +30,81 @@
  ],
  "proof": [
   {
-   "text": "Choose alpha in E with E=L(alpha) by the finite separable primitive-element lemma. Let f be the minimal polynomial of alpha over L. The quotient description for a simple algebraic extension identifies L[T]/(f) with E, sending the class of T to alpha. The quotient has L-basis 1,T,...,T^(deg f-1), so deg f=[E:L].",
-   "uses": [
-    "lem-weil-pbc-finite-separable-extension-primitive-element",
-    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tags 030N and 09G1"
-   }
-  },
-  {
-   "text": "Write n=deg f and identify E with L[T]/(f) by Step 1, b=g(alpha) corresponding to the class of g in L[T]. Since f maps to 0 in E[T]/(f), the tensor universal property gives an L-algebra map psi: E tensor_L (L[T]/(f)) -> E[T]/(f) with psi(a tensor (g mod f)) = a g mod f. By Step 1, L[T]/(f) has L-basis 1,T,...,T^(n-1), so E tensor_L (L[T]/(f)) is a free E-module with basis 1 tensor T^i (i<n); E[T]/(f) is a free E-module with basis T^i (i<n) by division with remainder by the monic f. The E-linear map psi sends the first basis to the second, so it is an isomorphism, and a tensor b goes to a g mod f with g(alpha)=b.",
+   "text": "Construct the E-algebra map f:E tensor_L E -> (Q -> E) by AlgHom.pi of Algebra.TensorProduct.lift (AlgHom.id E E) q.toAlgHom. Its pure-tensor formula is definitionally f(a tensor b)(q)=a*q(b). Here E acts through the first factor. Dedekind independence, Mathlib linearIndependent_monoidHom restricted along the injective map from Q to multiplicative homomorphisms, gives E-linear independence of the functions q:E -> E. Mathlib span_flip_eq_top_iff_linearIndependent then says that the vectors (q(b))_q, as b runs over E, span E^Q. Each such vector is f(1 tensor b), so Submodule.span_le and LinearMap.range_eq_top prove that f is surjective.",
    "uses": [
     "lem-weil-pbc-algebra-tensor-pushout-universal-property"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "tensor product universal property and base change of a polynomial quotient"
+    "document": "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+    "place": "span_flip_eq_top_iff_linearIndependent; Mathlib/LinearAlgebra/LinearIndependent/Basic.lean, linearIndependent_monoidHom; Mathlib/RingTheory/TensorProduct/Maps.lean, Algebra.TensorProduct.lift"
    }
   },
   {
-   "text": "Because E/L is normal, every root of f in E is q(alpha) for an L-automorphism q by the conjugate-root lemma, and conversely every q(alpha) is a root. Separability makes these roots pairwise distinct; the finite Galois fixed-field lemma gives |Q|=[E:L]=deg f, and q is determined by q(alpha) because E=L(alpha), so these roots are exactly the |Q| elements indexed by Q. Thus f=product_{q in Q}(T-q(alpha)) in E[T].",
+   "text": "As E-vector spaces, the source has dimension [E:L] by Module.finrank_baseChange, and the target has dimension |Q| by Module.finrank_pi. IsGalois.card_aut_eq_finrank identifies these dimensions. LinearMap.injective_iff_surjective_of_finrank_eq_finrank turns surjectivity into injectivity. Apply AlgEquiv.ofBijective and restrictScalars L to get phi. Its pure-tensor formula is the formula already proved for f; no primitive element, polynomial quotient, root indexing, or CRT is needed.",
    "uses": [
-    "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
     "lem-weil-pbc-finite-galois-fixed-field"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tags 030N, 031D and 03SF, conjugates in a finite normal separable extension"
+    "document": "Mathlib/FieldTheory/Galois/Basic.lean",
+    "place": "IsGalois.card_aut_eq_finrank; Mathlib/LinearAlgebra/Dimension/Constructions.lean, Module.finrank_baseChange; Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean, LinearMap.injective_iff_surjective_of_finrank_eq_finrank"
    }
   },
   {
-   "text": "Apply the distinct-linear-factor Chinese-remainder isomorphism to f over E. It sends the class of a polynomial g(T) to (g(q(alpha)))_q. Combining this with the preceding tensor identification sends a tensor a tensor b to (a q(b))_q, proving that phi is an L-algebra isomorphism.",
+   "text": "The finite separable field extension gives Etale pi by Algebra.Etale.of_finite_of_isSeparable and HasRingHomProperty.Spec_iff. Stability under base change makes pullback.fst pi pi etale, and stability under composition makes its composite with pi etale. Form the site objects U and V. Construct p1 and p2 by MorphismProperty.Over.homMk from the pullback projections, using pullback.condition for p2. Construct sigma(q) from Spec q; q.commutes and Spec.map_comp prove it is over Spec L.",
    "uses": [
-    "lem-pc-polynomial-quotient-distinct-linear-crt"
+    "lem-weil-pbc-finite-separable-extension-etale"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00U3, Chinese-remainder factorization into distinct linear factors"
+    "document": "WeilConjectures/Mathlib/RingTheory/Etale/Field.lean",
+    "place": "Algebra.Etale.of_finite_of_isSeparable; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, etale base change and composition"
    }
   },
   {
-   "text": "The algebra isomorphism just proved gives the affine fibre-product decomposition and the labels of the two projections by the child affine consequence node.",
+   "text": "Apply finiteGaloisTensorCoproduct to phi and its pure-tensor formula, obtaining e:coprod_Q Spec E ~= W, with first projection identity and second projection Spec q on component q. Define j(q):U -> V by Sigma.ι q followed by e.hom. The first projection equation proves the required over-base equation. MorphismProperty.Over.Hom.ext gives j(q) then p1 = id and j(q) then p2 = sigma(q). These equations fix the orientation without an inverse automorphism.",
    "uses": [
     "lem-exc-finite-galois-algebra-tensor-decomposition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03SF, affine fibre-product/tensor correspondence"
+    "place": "Tag 03SF, affine Galois-cover decomposition; finiteGaloisTensorCoproduct projection formulas"
    }
   },
   {
-   "text": "The finite-separable-spectrum etale lemma makes Spec E and the finite coproduct decomposition etale over Spec L, so these are objects and morphisms of the small etale site. Apply the finite-coproduct sheaf-sections statement to the resulting open-and-closed coproduct. Its restriction bijection is beta, and the projection labels give beta(s|_{p_1})=(s)_q and beta(s|_{p_2})=((Spec q)^*s)_q.",
+   "text": "The underlying j(q) are monomorphisms, being coprojections followed by an isomorphism; the faithful forgetful functor reflects monomorphisms in the site. Scheme.ofArrows_mem_smallEtaleTopology_iff proves they cover: lift a point through e.hom, then use sigmaMk to find its component. Their ranges are disjoint: equality of image points cancels e.hom and sigmaι_eq_iff forces equal indices. Apply the proved Scheme.Etale.isIso_piLift_of_disjoint. Convert the categorical product into the type-theoretic product using Types.Small.productIso and equivShrink; Q is finite, so it is small in the sheaf value universe v even when u is larger. This gives bijectivity of s -> (F(j(q))(s))_q. Equiv.ofBijective defines beta with exactly this forward map.",
    "uses": [
-    "lem-exc-etale-coproduct-etale",
-    "lem-exc-finite-galois-sheaf-sections-coproduct",
-    "lem-exc-finite-galois-algebra-tensor-decomposition"
+    "lem-weil-pbc-disjoint-etale-sections-product"
    ],
    "elementary": false,
    "source": {
+    "document": "WeilConjectures/Mathlib/AlgebraicGeometry/Sites/EtaleDisjointCover.lean",
+    "place": "Scheme.Etale.isIso_piLift_of_disjoint; Mathlib/CategoryTheory/Limits/Types/Products.lean, Types.Small.productIso"
+   }
+  },
+  {
+   "text": "For restriction along p1 or p2, rewrite F(j(q))(F(pi)(s)) by functoriality as F(j(q) then pi)(s). The component equations give F(id)(s)=s for p1 and F(sigma(q))(s) for p2. Package phi, the etale proofs, p1, p2, sigma, and beta into the unchanged conjunction and existential statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03SF, finite Galois descent calculation"
+    "place": "Tag 03SF, projection-labelled finite Galois descent calculation"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-separable-extension-primitive-element",
-  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
   "lem-weil-pbc-finite-galois-fixed-field",
-  "lem-pc-polynomial-quotient-distinct-linear-crt",
-  "lem-exc-etale-coproduct-etale",
+  "lem-weil-pbc-finite-separable-extension-etale",
   "lem-exc-finite-galois-algebra-tensor-decomposition",
-  "lem-exc-finite-galois-sheaf-sections-coproduct"
+  "lem-weil-pbc-disjoint-etale-sections-product"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 03SF"
+  "by": "agent",
+  "document": "Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+  "place": "A2 stage 3, 2026-10-13: direct Dedekind-independence and dimension proof of the tensor isomorphism, followed by the existing affine coproduct theorem and proved disjoint-cover gluing; complete Lean proof in finiteGaloisTensorDecomposition."
  },
  "mathlib_searches": [
   {
@@ -226,5 +216,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T031528-L-3567356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
