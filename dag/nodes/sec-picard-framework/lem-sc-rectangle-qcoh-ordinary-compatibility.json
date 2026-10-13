@@ -17,12 +17,27 @@
  ],
  "proof": [
   {
-   "text": "Apply the faithful QCoh inclusion to the desired equality. Substitute the component formulas for p.inv and b.hom, and the given formula for s.hom. The upper-precomposition pasting law schemeDerivedBaseChange_pasting, transported along hk₁ and hk₂, identifies the outer base-change map followed by the unit for k and d.inv with the ordinary map for the pulled-back rectangle. To check this transport, eliminate the two equalities, commute d.inv past the inverse upper pullback comparison by naturality, and cancel d.hom/d.inv and the pullback comparison/inverse. The horizontal law schemeDerivedBaseChange_horizontal_pasting then identifies the successive inner and outer base-change maps with this rectangle map conjugated by c(h,g) and c(t,p). The latter comparison cancels the inverse present in s, giving the displayed equality. Reflect this equality through the faithful inclusion. No ordinary base-change invertibility is used: the result is the ordinary pasting step prior to inversion. The argument applies to zero objects, empty schemes, and identity arrows without extra assumptions.",
+   "text": "Apply the faithful QCoh inclusion to the desired equality. Use the supplied component formulas for p.inv and b.hom, and the formula hs for s.hom. The definitions of qcBaseChange and the restricted functor maps give the corresponding equality of ambient derived morphisms.",
+   "uses": [
+    "lem-sc-duality-base-change-inverse-square-mate",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply schemeDerivedBaseChange_pasting to the outer square precomposed with k. The proved private helper upper_pasting_transport takes the comparison and adjunction families explicitly, eliminates hk₁ and hk₂ in a generalized square, and reduces the equation to the supplied upper-pasting law. Its proved private cancellation helper commutes the inverse conjugate comparison past the functor map by naturality, then cancels the comparison hom/inv and the upper pullback hom/inv. Postcompose with direct image of the inverse inner upper comparison. By functoriality and associativity, this gives exactly the ambient left side as the base-change map of the pulled-back rectangle followed by that inverse comparison.",
    "uses": [
     "lem-pc-derived-base-change-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply schemeDerivedBaseChange_horizontal_pasting to the two canonical pullback squares. Precompose its equality with the inverse bottom comparison c(h,g), cancelling its hom component. The resulting equality identifies the rectangle map followed by direct image of the inverse inner upper comparison with the ambient right side. Compose with the preceding equality and reflect through the faithful inclusion. No ordinary base-change map is inverted, and the calculation applies equally to empty schemes, identity arrows, and zero objects.",
+   "uses": [
     "lem-pc-derived-base-change-horizontal-pasting",
     "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-base-change-map",
     "lem-sc-duality-base-change-inverse-square-mate"
    ],
    "elementary": false
@@ -37,10 +52,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K4",
+  "group": "G4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0ATM",
-  "note": "K4 strict intermediate step: comparison construction or ordinary pasting, without the final inversion."
+  "note": "Implemented the existing ordinary-pasting route, using fully proved private helpers for equality transport and comparison cancellation; proof dependencies unchanged."
  },
  "mathlib_searches": [
   {
@@ -118,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T190143-L-3217106",
-  "kind": "interface",
+  "landing": "20261013T211105-L-392308",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

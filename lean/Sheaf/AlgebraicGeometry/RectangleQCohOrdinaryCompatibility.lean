@@ -19,6 +19,77 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+private theorem cancel_pasting_comparison
+    {C D A : Type*} [Category* C] [Category* D] [Category* A]
+    (F : C ⥤ D) (H : D ⥤ A) (G : C ⥤ A) (d : G ≅ F ⋙ H)
+    {M N : C} (v : M ≅ N) {Z : A}
+    (outer : Z ⟶ G.obj N) (b : Z ⟶ H.obj (F.obj M))
+    (past : outer ≫ d.hom.app N ≫ H.map (F.map v.inv) = b) :
+    b ≫ d.inv.app M ≫ G.map v.hom = outer := by
+  rw [← past]
+  simp only [Category.assoc]
+  rw [← Functor.comp_map, d.inv.naturality_assoc]
+  simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.inv_hom_id]
+  rw [CategoryTheory.Functor.map_id, Category.comp_id]
+
+private theorem upper_pasting_transport
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X Y P S I : Scheme.{u}} (f : X ⟶ Y) (g : S ⟶ Y)
+    (p : P ⟶ X) (q : P ⟶ S) (hs : p ≫ f = q ≫ g) (t : I ⟶ P)
+    (p' : I ⟶ X) (q' : I ⟶ S) (hp : t ≫ p = p') (hq : t ≫ q = q')
+    (hs' : p' ≫ f = q' ≫ g)
+    (c : ∀ {A B C : Scheme.{u}} (r : A ⟶ B) (s : B ⟶ C),
+      derivedPullback s ⋙ derivedPullback r ≅ derivedPullback (r ≫ s))
+    (a : ∀ {A B : Scheme.{u}} (r : A ⟶ B),
+      derivedPullback r ⊣ schemeDerivedDirectImage r)
+    (past : ∀ E : schemeDerivedCategory X,
+      schemeDerivedBaseChangeMap f (t ≫ q) g (t ≫ p)
+          (by rw [Category.assoc, hs, Category.assoc]) E ≫
+        (conjugateIsoEquiv (a (t ≫ q)) ((a q).comp (a t)) (c t q)).hom.app
+          ((derivedPullback (t ≫ p)).obj E) ≫
+        (schemeDerivedDirectImage q).map
+          ((schemeDerivedDirectImage t).map ((c t p).inv.app E)) =
+      schemeDerivedBaseChangeMap f q g p hs E ≫
+        (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))) :
+    let d := conjugateIsoEquiv (a q') ((a q).comp (a t))
+      (c t q ≪≫ eqToIso (congrArg (fun r ↦ derivedPullback.{u, w} r) hq))
+    ∀ E : schemeDerivedCategory X,
+      schemeDerivedBaseChangeMap f q g p hs E ≫
+        (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E)) ≫
+        d.inv.app ((derivedPullback t).obj ((derivedPullback p).obj E)) ≫
+        (schemeDerivedDirectImage q').map
+          ((c t p).hom.app E ≫
+            eqToHom (congrArg (fun r ↦ (derivedPullback r).obj E) hp)) =
+      schemeDerivedBaseChangeMap f q' g p' hs' E := by
+  classical
+  subst p'
+  subst q'
+  intro d E
+  let d₀ := conjugateIsoEquiv (a (t ≫ q)) ((a q).comp (a t)) (c t q)
+  have hd : d = d₀ := by
+    simp only [d, d₀, eqToIso_refl, Iso.trans_refl]
+  rw [hd]
+  have past := past E
+  change schemeDerivedBaseChangeMap f (t ≫ q) g (t ≫ p) hs' E ≫
+      d₀.hom.app ((derivedPullback (t ≫ p)).obj E) ≫
+      (schemeDerivedDirectImage q).map
+        ((schemeDerivedDirectImage t).map ((c t p).inv.app E)) =
+    schemeDerivedBaseChangeMap f q g p hs E ≫
+      (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))
+    at past
+  simp only [eqToHom_refl, Category.comp_id]
+  simpa only [Category.assoc, Iso.app_hom, Functor.comp_obj] using
+    cancel_pasting_comparison
+    (schemeDerivedDirectImage t) (schemeDerivedDirectImage q)
+    (schemeDerivedDirectImage (t ≫ q)) d₀ ((c t p).app E)
+    (schemeDerivedBaseChangeMap f (t ≫ q) g (t ≫ p) hs' E)
+    (schemeDerivedBaseChangeMap f q g p hs E ≫
+      (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))) past
+
+
+set_option linter.unusedVariables false in
+-- Retain the original names of quantified proof binders that do not occur in the conclusion.
 /-- Ordinary base-change compatibility for the canonical comparison lifts.
 Source: Stacks Project, Tag 0ATM, and Tag 08HY.
 (blueprint: lem-sc-rectangle-qcoh-ordinary-compatibility)
@@ -94,6 +165,69 @@ theorem rectangle_qcoh_ordinary_compatibility
             (@qcBaseChange _ (pullback f g) S T _
               (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
               (pullback.snd f g) _ _ h).app ((qcPullback (pullback.fst f g)).obj E)
- := by sorry
+ := by
+  classical
+  intro U L V P Q B H c a d s hL hs p b hp hb E
+  apply (schemeDerivedQCohProperty T).ι.map_injective
+  simp only [Functor.map_comp]
+  rw [hp, hb]
+  have hsm := hs E
+  change (s.hom.app E).hom = _ at hsm
+  change schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)
+      (pullback.fst f (h ≫ g)) pullback.condition E.obj ≫
+      ((schemeDerivedDirectImage (pullback.snd f (h ≫ g))).map
+        ((a k).unit.app ((derivedPullback (pullback.fst f (h ≫ g))).obj E.obj)) ≫
+        d.inv.app ((derivedPullback k).obj
+          ((derivedPullback (pullback.fst f (h ≫ g))).obj E.obj))) ≫
+      (schemeDerivedDirectImage (pullback.snd (pullback.snd f g) h)).map
+        (s.hom.app E).hom = _
+  rw [hsm]
+  let t := pullback.fst (pullback.snd f g) h
+  let r := pullback.snd (pullback.snd f g) h
+  let x := pullback.fst f g
+  have ho : (t ≫ x) ≫ f = r ≫ (h ≫ g) := by
+    dsimp only [t, r, x]
+    rw [Category.assoc, pullback.condition,
+      ← Category.assoc, pullback.condition, Category.assoc]
+  have upper := upper_pasting_transport f (h ≫ g)
+    (pullback.fst f (h ≫ g)) (pullback.snd f (h ≫ g)) pullback.condition k
+    (t ≫ x) r hk₁ hk₂ ho c a
+    (schemeDerivedBaseChange_pasting f (h ≫ g)
+      (pullback.fst f (h ≫ g)) (pullback.snd f (h ≫ g)) pullback.condition k) E.obj
+  change schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)
+      (pullback.fst f (h ≫ g)) pullback.condition E.obj ≫
+      (schemeDerivedDirectImage (pullback.snd f (h ≫ g))).map
+        ((a k).unit.app ((derivedPullback (pullback.fst f (h ≫ g))).obj E.obj)) ≫
+      d.inv.app ((derivedPullback k).obj
+        ((derivedPullback (pullback.fst f (h ≫ g))).obj E.obj)) ≫
+      (schemeDerivedDirectImage r).map
+        ((c k (pullback.fst f (h ≫ g))).hom.app E.obj ≫
+          eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hk₁)) =
+    schemeDerivedBaseChangeMap f r (h ≫ g) (t ≫ x) ho E.obj at upper
+  have upper' := congrArg (fun z ↦ z ≫ (schemeDerivedDirectImage r).map
+    ((c t x).inv.app E.obj)) upper
+  change _ = (c h g).inv.app ((schemeDerivedDirectImage f).obj E.obj) ≫
+    (derivedPullback h).map (schemeDerivedBaseChangeMap f (pullback.snd f g) g x
+      pullback.condition E.obj) ≫
+    schemeDerivedBaseChangeMap (pullback.snd f g) r h t pullback.condition
+      ((derivedPullback x).obj E.obj)
+  have horizontal :
+      (derivedPullback h).map (schemeDerivedBaseChangeMap f (pullback.snd f g) g x
+          pullback.condition E.obj) ≫
+        schemeDerivedBaseChangeMap (pullback.snd f g) r h t pullback.condition
+          ((derivedPullback x).obj E.obj) =
+      (c h g).hom.app ((schemeDerivedDirectImage f).obj E.obj) ≫
+        schemeDerivedBaseChangeMap f r (h ≫ g) (t ≫ x) ho E.obj ≫
+        (schemeDerivedDirectImage r).map ((c t x).inv.app E.obj) := by
+    exact schemeDerivedBaseChange_horizontal_pasting f g h x (pullback.snd f g) t r
+      pullback.condition pullback.condition E.obj
+  have horizontal' := congrArg (fun z ↦
+    (c h g).inv.app ((schemeDerivedDirectImage f).obj E.obj) ≫ z) horizontal
+  simp only [Iso.inv_hom_id_app_assoc] at horizontal'
+  calc
+    _ = schemeDerivedBaseChangeMap f r (h ≫ g) (t ≫ x) ho E.obj ≫
+        (schemeDerivedDirectImage r).map ((c t x).inv.app E.obj) := by
+      simpa only [Functor.map_comp, Category.assoc] using upper'
+    _ = _ := horizontal'.symm
 
 end AlgebraicGeometry
