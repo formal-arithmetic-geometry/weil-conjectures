@@ -13440,3 +13440,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:55 L: returned deliver/H4/Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations (reviewer RETURN: (reviewer X-85d81, head 85d81d29c) Reader gate / forced adaptation: add ScalarUnitCohomologyPullbackNaturality.lean as a)
 - 19:56 L: returned deliver/N4/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-8cb69, head 8cb693e9d) C1/C4: In dag/nodes/sec-abelian-varieties/lem-sc-module-cup-derived-homology-tensor.j)
 - 19:59 L: returned deliver/A2/Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization (reviewer RETURN: (reviewer X-c6dc2, head c6dc22a59) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sc)
+- 20:06 L: returned deliver/M1/Sheaf.Paper.CechRefinementResolutionBeta (reviewer RETURN: (reviewer X-20216, head 20216302b) A — stages/3-proving-and-pruning.md §4 forbids splitting a proof to meet the compiler)
