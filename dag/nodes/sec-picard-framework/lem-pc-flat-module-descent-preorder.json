@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-flat-module-descent-preorder",
+ "kind": "statement",
+ "title": "Flat-module descent over a directed preorder in arbitrary cartesian models",
+ "statement": "Let $I$ be a directed preorder and $R:I\\to\\mathrm{CommRing}$ a diagram of Noetherian rings. Let $c$ be a limiting cone on $R^{\\mathrm{op}}\\circ\\operatorname{Spec}$, with affine vertex $S$ and projections $\\pi_i:S\\to\\operatorname{Spec}(R_i)$. Fix $i\\in I$, a finitely presented morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme, def-pc-morphism-conventions], and a finitely presented $\\mathcal O_{X_i}$-module $M$ [def-sc-finitely-presented-module]. Suppose $a:X\\to X_i$ and $b:X\\to S$ form a cartesian square with $f$ and $\\pi_i$ [def-pc-base-change], and $a^*M$ [def-pc-module-pullback] is flat over $S$ [def-pc-scheme-module-flat-over]. Then there are $j\\ge i$ such that for every $k\\ge j$ and every cartesian square $p:Y\\to X_i$, $q:Y\\to\\operatorname{Spec}(R_k)$ over $f$ and the transition $\\operatorname{Spec}(R_k)\\to\\operatorname{Spec}(R_i)$, the module $p^*M$ is flat over $\\operatorname{Spec}(R_k)$ via $q$. No proper-support hypothesis or conclusion is imposed.",
+ "source": {
+  "document": "Stacks Project, limits.tex; categories.tex; morphisms.tex; sheaves.tex",
+  "place": "Tags 05LY (lemma-descend-module-flat-finite-presentation), 0032 (lemma-directed-category-system), 01U8 (lemma-base-change-module-flat), 01JX and 0097; the preorder and cartesian-model extension of chosen-module proof steps 1 and 4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-sc-finitely-presented-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "First use the unique isomorphism between the given cartesian square and the canonical fibre product to compare flatness of tensor pullback. Its two projections agree with a and b. The cartesian-model comparison theorem identifies the affine-section modules over each affine base open, hence transfers the given IsFlatOver hypothesis to the canonical pullback.",
+   "uses": [
+    "lem-pc-pullback-model-flatness-comparison",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The object i makes I nonempty, and directedness makes its thin category filtered. Choose a final functor F:J -> I from a nonempty directed partial order. Finality gives t in J and i <= F(t). Pull M back to X_i times Spec R_{F(t)}. This module is finitely presented, and its structure map is finitely presented by base change. Restrict the spectrum diagram and cone along F.op. The opposite of a final functor is initial, so restriction preserves the given limiting cone. Tensor-pullback composition and cartesian pasting identify the limit module with the original limit pullback. Apply the cartesian-model comparison to transfer flatness.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "lem-weil-pbc-initial-functor-limit",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-pullback-model-flatness-comparison",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing partial-order flat-module descent theorem to this fixed module, the restricted diagram and its limiting cone. Choose its eventual stage s >= t and put j=F(s). Functoriality and i <= F(t) give i <= j. Its module is flat over Spec R_j.",
+   "uses": [
+    "lem-pc-flat-module-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any k >= j in I, base change from stage j along Spec(R_j -> R_k). Relative flatness is preserved by cartesian base change, and quasi-coherence is supplied by finite presentation. Tensor-pullback composition identifies this module with the pullback of M directly from stage i. Use cartesian-model flatness comparison to transfer to the given square p,q. This works for k outside the image of F; no choice of a lift of k is needed. Empty sources and the zero module cause no exception.",
+   "uses": [
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-pc-pullback-model-flatness-comparison",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Tags 05LY, 0032, 01U8, 01JX and 0097",
+  "place": "Flat-module descent after final directed-poset reindexing; cartesian-model comparison and preservation to arbitrary later original stages"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a finitely presented sheaf of modules descends to some stage in a directed inverse system of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a finitely presented module descends along a directed preorder of Noetherian affine bases and is independent of the cartesian pullback model",
+   "results": "Hits: AlgebraicGeometry.flat_iff, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instDescScheme, Algebra.Smooth.flat_of_isNoetherianRing. None states module flatness descent over an affine inverse system.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eventually.*isFlatOver|isFlatOver.*isPullback",
+   "results": "No matching Mathlib declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChosenModuleFlatProperStage",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: eventual flatness of one already chosen finitely presented term; chosen-module proof steps 1 and 4",
+   "via": [
+    "lem-pc-chosen-module-flat-proper-stage",
+    "lem-pc-chosen-complex-flat-proper-refinement",
+    "lem-pc-finite-flat-proper-support-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModuleDescentPreorder",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModuleDescentPreorder.lean",
+  "declaration": "AlgebraicGeometry.exists_eventually_isFlatOver_of_isPullback_limit_preorder",
+  "statement": "theorem exists_eventually_isFlatOver_of_isPullback_limit_preorder\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (M : Xi.Modules) [M.IsFinitePresentation]\n    {X : Scheme.{u}} (a : X ⟶ Xi) (b : X ⟶ c.pt)\n    (hcart : IsPullback a b f (c.π.app (op i)))\n    (hflat : ((Scheme.Modules.tensorPullback a).obj M).IsFlatOver b) :\n    ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k)\n      {Y : Scheme.{u}} (p : Y ⟶ Xi) (q : Y ⟶ Spec (R.obj k)),\n      IsPullback p q f (Spec.map (R.map (homOfLE (hij.trans hjk)))) →\n      ((Scheme.Modules.tensorPullback p).obj M).IsFlatOver q",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-pc-flat-module-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-pullback-model-flatness-comparison",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T111922-L-3062733",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T111922-L-3062733",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

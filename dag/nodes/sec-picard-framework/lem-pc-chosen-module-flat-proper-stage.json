@@ -17,45 +17,42 @@
  ],
  "proof": [
   {
-   "text": "For a partial order, work with the chosen module M on the finitely presented scheme X_j over Spec R_j. Pullback pasting identifies its tensor pullback to the limit with the displayed moduleBaseChange object. Apply eventual flatness to this particular module, not to an unspecified descended model.",
+   "text": "Put f_j = pullback.snd f (Spec(R_j -> R_i)). Its finite-presentation, quasi-compactness and quasi-separatedness follow by base change. The map from the displayed limit source to X_j is baseChangeMap, whose square with f_j and the cone projection at j is cartesian. Apply lem-pc-flat-module-descent-preorder to the fixed module M on X_j and this square. This gives k_f >= j and flatness in every cartesian model at every l >= k_f.",
    "uses": [
-    "lem-pc-flat-module-descent",
     "def-pc-base-change",
-    "lem-pc-module-pullback-identity-composition"
+    "lem-pc-flat-module-descent-preorder"
    ],
    "elementary": false
   },
   {
-   "text": "Apply proper-support descent to M at stage j. Finite presentation supplies quasi-coherence and finite type. The proper closed support condition is the one interpreted by Tag 0CYS in that descent theorem. Choose an upper bound of the flatness stage and the proper-support stage.",
+   "text": "Transfer proper support between cartesian models using their comparison isomorphism. In detail, tensor pullback along a cartesian square preserves proper support: pull the closed support back, identify its underlying set by the finite-type support-pullback theorem, base change a proper closed subscheme structure, and use independence of that structure. For the model comparison the upper map is an isomorphism and the lower map is the identity. Tensor-pullback composition and the projections of the comparison isomorphism identify the modules. Module isomorphisms preserve nonzero-stalk support because they induce isomorphisms on every stalk. Finite presentation of each pulled module follows by identifying tensor pullback with the native left adjoint, whose pullback preserves finite presentation. Apply proper-support descent to M on X_j in its canonical cartesian model, giving k_p >= j.",
    "uses": [
-    "lem-pc-proper-support-descent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At each subsequent stage, cartesian tensor pullback preserves relative flatness and proper support. Composition of tensor pullback and the pullback-pasting isomorphism identify its object with the direct base change of the fixed M from stage j. This establishes the properties for every later stage, independently of the choice of comparison isomorphisms.",
-   "uses": [
-    "lem-pc-tensor-pullback-flat-proper-support",
+    "lem-pc-proper-support-descent",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
     "lem-pc-module-pullback-identity-composition",
-    "def-pc-base-change"
+    "def-sc-finitely-presented-module",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "For a directed preorder I, it is nonempty since j is given. Choose a final directed poset with a functor to the thin filtered category I. Choose an object whose image is above j, and pull M to that image. Restriction along the final functor preserves the inverse limit. Apply the partial-order argument to this chosen pullback. Its image stage k is above j; for an arbitrary l above k in I, preservation under cartesian tensor pullback proves the desired properties at l. Such an l need not itself lie in the image of the final functor.",
+   "text": "Choose a directed common upper bound k of k_f and k_p. For l >= k the flatness conclusion applies directly to the baseChangeMap square from X_l to X_j. Transfer proper support at k_p to the chosen model X_{k_p} by the preceding comparison. Its module is finitely presented by tensor/native adjoint uniqueness. Preserve its proper support in the cartesian baseChangeMap square from X_l to X_{k_p}. The composition of the maps X_l -> X_{k_p} -> X_j equals X_l -> X_j, because the underlying spectrum maps compose and the functor baseChangeMap preserves composition. The tensor-pullback composition isomorphism identifies the resulting module with the direct pullback of M. Transfer proper support through this module isomorphism and pair it with flatness. Proof irrelevance identifies the proofs of j <= l in the two conclusions.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-pc-tensor-pullback-flat-proper-support",
+    "def-pc-base-change",
     "lem-pc-module-pullback-identity-composition",
-    "def-pc-base-change"
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-sc-finitely-presented-module",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
   "by": "document",
-  "document": "Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097",
-  "place": "Finite-stage enlargement of a fixed finitely presented module, and cartesian pullback preservation"
+  "document": "Stacks Project, Tags 05LY, 081G, 0CYL, 056J, 0097 and 0032",
+  "place": "Fixed-module flatness descent, proper-support descent and cartesian preservation; implemented with explicit cartesian-model and module-isomorphism transport"
  },
  "mathlib_searches": [
   {
@@ -104,11 +101,13 @@
  "unit": "sk-thm-picard-semicon",
  "proof_deps": [
   "def-pc-base-change",
-  "lem-pc-flat-module-descent",
+  "def-pc-module-pullback",
+  "def-sc-finitely-presented-module",
+  "lem-pc-flat-module-descent-preorder",
   "lem-pc-module-pullback-identity-composition",
   "lem-pc-proper-support-descent",
-  "lem-pc-tensor-pullback-flat-proper-support",
-  "lem-weil-pbc-filtered-category-exists-directed-final"
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-support-pullback-finite-type"
  ],
  "lean": {
   "existing": false,
@@ -134,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T100210-L-2500088",
+  "landing": "20261013T111922-L-3062733",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
