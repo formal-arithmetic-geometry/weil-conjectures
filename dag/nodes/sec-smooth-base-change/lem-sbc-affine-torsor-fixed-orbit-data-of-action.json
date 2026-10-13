@@ -1,0 +1,97 @@
+{
+ "id": "lem-sbc-affine-torsor-fixed-orbit-data-of-action",
+ "kind": "lemma",
+ "title": "Canonical orbit data of a finite action",
+ "statement": "For every finite group action A : G →* Equiv.Perm (Fin d), there exists D : FixedOrbitData G d with D.action = A.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF"
+ },
+ "proof": [
+  {
+   "text": "Pull the permutation action back to a Mathlib MulAction. Use MulAction.orbitRel, the finite quotient Q and Fintype.equivFin Q to index quotient representatives chosen by Quotient.out. Quotient.out_eq proves completeness and distinctness. Use Mathlib MulAction.stabilizer for each representative; its membership condition is definitionally the required specification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF",
+  "note": "Complete Lean proof using Mathlib orbit quotients and stabilizers, with no postponed theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite group action orbit representatives stabilizer",
+   "results": "No exact declaration found.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Fintype quotient orbit representative",
+   "results": "No exact declaration found.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit_data stabilizer action",
+   "results": "No existing declaration found.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-geometric",
+   "place": "canonical action orbit construction",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorFixedPunctureDescentGeometric.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fixedOrbitData_of_action",
+  "statement": "theorem fixedOrbitData_of_action\n    (G : Type u) [Group G] [Finite G] (d : ℕ) (A : G →* Equiv.Perm (Fin d)) :\n    ∃ D : FixedOrbitData G d, D.action = A",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3e7fd",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3e7fd",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221588",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and constructions with their nodes, change records, source arguments, and report; both modules and the direct importer AffineTorsorFixedPunctureDescentCore compile cleanly, as does outer descent; axiom checks match the two reported holes."
+ }
+}

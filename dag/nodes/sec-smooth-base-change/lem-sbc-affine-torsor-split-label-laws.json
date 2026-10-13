@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-affine-torsor-split-label-laws",
+ "kind": "statement",
+ "title": "Cocycle laws for labels in a pulled-back splitting",
+ "statement": "Let R,H be commutative rings, g in R, iota:R -> H, and C a domain H-algebra with h=iota(g) nonzero in C. Let rho be an H-algebra action of a group G on C. Let p:Y -> Spec R and t:T -> Spec R, with k:D(h) in Spec C -> T over Spec R. Suppose delta splits pullback p t into d copies of T over T. Define a(g,i) by precomposing the i-th pulled-back section with the restricted Spec map of rho(g inverse), lifting with k into pullback p t, applying delta, and reading the unique coproduct index at the zero prime. Then a(1,i)=i and a(gh,i)=a(g,a(h,i)).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03SF, finite Galois covers and permutation sets; connected-summand argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The principal open of Spec C is connected and nonempty because C is a domain and h is nonzero. Every section of the splitting pulled back along k has image in one coproduct summand; projection compatibility makes it the split section of that label. Read the label at the zero prime, exactly fixedPunctureLabel. The inverse deck map preserves the structural morphism to Spec H. Contravariance gives v(ab)=v(a) followed by v(b), and the identity and cocycle laws for the labels follow by precomposition and disjointness of the coproduct injections. No existence theorem chooses label data.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "document": "Stacks Project",
+  "place": "Tag 03SF",
+  "note": "Explicit section and label construction; only its cocycle proof is postponed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A splitting of a finite cover over a connected scheme induces an action on its finite set of sections",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a connected scheme to a finite disjoint union factors through one summand, giving a permutation action on split cover labels",
+   "results": "Eight results about sigma covers and indices; no exact law theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.mul_apply",
+   "results": "Equiv.Perm.mul_apply in Mathlib.Algebra.Group.End gives the permutation multiplication formula used in constructing the action.",
+   "date": "2026-10-14",
+   "verdict": "Ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaMk|resLE_comp_resLE|fixedPunctureDescentAction",
+   "results": "Mathlib supplies coproduct geometry and restriction composition. No existing declaration constructs this action.",
+   "date": "2026-10-14",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescentGeometric",
+  "group": "D3",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-torsor-fixed-puncture-geometric",
+   "place": "construct the descent action on split labels",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorSplitAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineTorsorSplitAction.lean",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-14",
+  "declaration": "AlgebraicGeometry.Scheme.fixedPunctureLabel_laws",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fixedPunctureDeck",
+   "AlgebraicGeometry.Scheme.fixedPunctureDeck_base",
+   "AlgebraicGeometry.Scheme.fixedPunctureGeneric",
+   "AlgebraicGeometry.Scheme.fixedSplitSection",
+   "AlgebraicGeometry.Scheme.fixedSplitSection_base",
+   "AlgebraicGeometry.Scheme.fixedSplitLabel",
+   "AlgebraicGeometry.Scheme.fixedPunctureLabel",
+   "AlgebraicGeometry.Scheme.fixedPunctureLabel_laws",
+   "AlgebraicGeometry.Scheme.fixedPunctureDescentAction"
+  ],
+  "statement": "theorem fixedPunctureLabel_laws\n    (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)\n    (C : Type u) [CommRing C] [Algebra H C] [IsDomain C]\n    (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)\n    (hρone : ρ 1 = AlgHom.id H C)\n    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))\n    (hne : algebraMap H C (ι g) ≠ 0)\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (T : Scheme.{u}) (t : T ⟶ Spec R)\n    (k : Scheme.Opens.toScheme (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ⟶ T)\n    (hk : k ≫ t = Scheme.Opens.ι (X := Spec (CommRingCat.of C))\n      (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H C)) ≫ Spec.map (CommRingCat.ofHom ι))\n    (d : ℕ) (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)\n    (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t) :\n    let a := fixedPunctureLabel R H g ι C G ρ hne p T t k hk d δ hδ\n    (∀ i, a 1 i = i) ∧ (∀ ζ ξ i, a (ζ * ξ) i = a ζ (a ξ i))"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3e7fd",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3e7fd",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T222400-L-1221588",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and constructions with their nodes, change records, source arguments, and report; both modules and the direct importer AffineTorsorFixedPunctureDescentCore compile cleanly, as does outer descent; axiom checks match the two reported holes."
+ }
+}
