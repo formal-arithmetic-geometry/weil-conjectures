@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-free-map-zero-locus",
+ "kind": "statement",
+ "title": "Finitely presented closed zero locus of an affine finite-free sheaf map",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme, def-weil-affine-spectrum], $M,N$ structure-sheaf modules with $M\\cong\\mathcal O_X^{\\oplus s}$ and $N\\cong\\mathcal O_X^{\\oplus n}$ [def-weil-pbc-free-module], and $d:M\\to N$. There is a closed immersion $i:Z\\to X$ [def-weil-closed-immersion], locally of finite presentation [def-sbc-locally-finite-presentation], such that every morphism $h:T\\to X$ factors through $i$ if and only if the ordinary pulled-back sheaf morphism $h^*d$ [def-pc-module-pullback] is zero.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "proof: the subscheme cut out by the finite matrix-entry ideal"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-free-module",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose the supplied free frames. Identify free sheaf morphisms with finite matrices of global sections using freeHomEquiv and freeSectionsEquiv. Form the ideal I spanned by the finitely many matrix entries; its finite generation is Submodule.fg_span.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct Z as Spec(Gamma(X,O_X)/I) and i as the quotient spectrum map followed by X.isoSpec.inv. Surjectivity gives a closed immersion. RingHom.FinitePresentation.of_surjective and LocallyOfFinitePresentation.SpecMap_iff give local finite presentation from finite generation of I.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback carries the free frames to free frames. freeMatrix_pullback identifies the new matrix with the entrywise global-sections map. Its vanishing is equivalent to I lying in the kernel of h.appTop.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A factorization annihilates I by the quotient map and naturality of GammaSpecIso. Conversely, Ideal.Quotient.lift constructs the ring map from the quotient, and T.toSpecGamma followed by Spec of that map constructs the factor. The identity follows from toSpecGamma naturality and the affine isoSpec identity. This works for arbitrary nonaffine T, empty matrices and zero rings.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-spec-quotient-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "proof: the finitely generated matrix-entry ideal and its quotient spectrum",
+  "note": "Fully proved in Lean using the explicit ideal quotient, freeMatrix_pullback and the Spec/global-sections adjunction for arbitrary source schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The vanishing locus of a morphism between finite free sheaves is a finitely presented closed subscheme representing zero pullbacks",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.specTargetImageIdeal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.Scheme.zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, AlgebraicGeometry.Scheme.ker_of_isAffine; no exact sheaf-theoretic statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeMatrix|kernel.*IsFiniteLocallyFreeOfRank|IsFiniteLocallyFreeOfRank.*kernel",
+   "results": "0 hits: ; no exact sheaf-theoretic statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between finite free sheaves on an affine scheme has a finitely presented closed zero locus representing vanishing of pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeKernelRankLocus",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "local matrix construction of the lowest-cohomology rank loci, after identifying lowest cohomology with a kernel",
+   "via": [
+    "lem-sc-affine-free-kernel-rank-locus",
+    "lem-sc-affine-free-lowest-matrix-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeMapZeroLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeMapZeroLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineFreeMapZeroLocus",
+  "statement": "theorem exists_affineFreeMapZeroLocus\n    (X : Scheme.{u}) [IsAffine X]\n    (M N : SheafOfModules.{u} X.ringCatSheaf) (d : M ⟶ N) (s n : ℕ)\n    (hM : Nonempty (M ≅ SheafOfModules.free\n      (R := X.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hN : Nonempty (N ≅ SheafOfModules.free\n      (R := X.ringCatSheaf) (ULift.{u} (Fin n)))) :\n    ∃ (Z : Scheme.{u}) (i : Z ⟶ X),\n      IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧\n      ∀ (T : Scheme.{u}) (h : T ⟶ X),\n        (∃ g : T ⟶ Z, g ≫ i = h) ↔ (Modules.pullback h).map d = 0",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T123210-L-3678617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T123210-L-3678617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
