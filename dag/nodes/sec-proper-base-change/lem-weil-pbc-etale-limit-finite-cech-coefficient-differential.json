@@ -20,38 +20,44 @@
  ],
  "proof": [
   {
-   "text": "For each deletion map between initial product objects, compare all retained projections. The identities hNj and hNlim identify its base changes with the corresponding maps between the actual stage and cone-point product objects. Both composites involving gamma or delta have the same first projection to W0 by hgamma or hdelta and the same structural morphism. Pullback uniqueness, or cartesian-square pasting, identifies them. This supplies the geometric square for each face.",
+   "text": "For every map between finite tuple index sets, use Pi.lift to define the initial nerve reindexing. The underlying product projections are jointly monic because Fin (r+1) is nonempty: use its zero coordinate to identify the structural arrows, then apply product extensionality in the over category. Apply hNj and hNlim to each retained projection to prove that the nerve isomorphisms intertwine reindexing with base change. This is the proved private helper nerve_iso_reindex.",
    "uses": [
     "def-weil-pbc-cech-complex",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Evaluate naturality of the adjunction unit at the face arrow. Apply naturality of phi, of eG inverse, and of each leg of L. Substitute the geometric square just proved. These equations say the prescribed tuple component commutes with restriction along the face. Cancel the presheaf image of eNj or eNlim, an isomorphism, and use product extensionality to get equality of the coface composites.",
+   "text": "Prove naturality of gamma and delta along the initial reindexing by pullback.hom_ext. For the first projection, substitute their prescribed first-projection identities and the pullback functor map formula. For the second projection, use that these are morphisms over the same target scheme. Conjugate this square with eNj and eNlim to obtain a compatible isomorphism from the pullback of each actual stage nerve to the actual target nerve. All geometric assertions are proved in private helpers pullback_transport_naturality and transport_square.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cech-complex"
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The differential d n (n+1) is the alternating sum of these coface maps; composition with an additive homomorphism preserves this finite sum and its integer signs. For r different from n+1 the shape-up differential is zero and both compositions are zero. For empty K there are no tuples in any degree and product extensionality is vacuous.",
+   "text": "Compose the adjunction unit with lowerStar of phi for transitions, and with lowerStar of eG.inv followed by the cocone leg for limit maps. This is a natural transformation of the underlying presheaves. The prescribed component equations, naturality at eNj.inv, and cancellation of the transported isomorphisms give the component equation for the conjugated nerve isomorphism. This is the proved private helper coefficient_transport_component.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the two cosimplicial maps after each tuple projection and cancel the presheaf image of the target nerve isomorphism. The geometric square and the coefficient natural transformation show naturality for every simplex arrow. Package the given degree maps as a natural transformation of cosimplicial objects and apply Mathlib alternatingCofaceMapComplex. Its cochain map comm equation supplies every pair of differential degrees, including the zero differentials. This is the proved private helper cech_map_of_transport. Apply it once to each transition and once to each cocone leg. Empty tuple sets require no separate hypothesis or case because product extensionality is vacuous.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cech-complex",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP, displayed Cech comparison; agent expansion of coefficient-data plan steps 1-2 (differential compatibility)."
+  "place": "Tag 09YP, displayed Cech comparison, and Tag 03AM; T3 Lean expansion using product and pullback uniqueness, coefficient naturality, and Mathlib alternatingCofaceMapComplex. All auxiliary statements are proved."
  },
  "mathlib_searches": [
   {
@@ -127,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T231636-L-1962474",
-  "kind": "interface",
+  "landing": "20261013T005055-L-2551525",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
