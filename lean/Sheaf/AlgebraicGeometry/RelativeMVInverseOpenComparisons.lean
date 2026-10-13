@@ -6,6 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVExactOpenComparison
+import Sheaf.AlgebraicGeometry.RelativeMVInverseOpenMate
 
 /-! # Inverse-image open comparisons with units, restrictions, and base change
 
@@ -81,6 +82,13 @@ theorem relativeMV_inverse_open_comparisons
       (∀ W : X.Opens,
         mvBaseChangeOpenMap f f' g g' hpull.w K K' φ W ≫ (e W).hom =
           ((derivedPullback g).mapIso (relativeMVExactOpenIso f W K)).hom ≫
-            (relativeMVLocalArrow f f' g g' hpull K K' φ W).hom) := by sorry
+            (relativeMVLocalArrow f f' g g' hpull K K' φ W).hom) := by
+  refine ⟨fun W ↦ relativeMVInverseOpenIso g' f' W K', ?_, ?_, ?_⟩
+  · intro W
+    exact relativeMVInverseOpenIso_unit g' f' W K'
+  · intro W U i
+    exact relativeMVInverseOpenIso_restriction g' f' i K'
+  · intro W
+    exact relativeMVInverseOpenIso_mate f f' g g' hpull K K' φ W
 
 end AlgebraicGeometry
