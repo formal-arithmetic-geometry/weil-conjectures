@@ -12881,3 +12881,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/T4/Sheaf.AlgebraicGeometry.RelativeMVConePresentation (stage 3; reviewer PASS; first push; landing 20261013T145124-L-697540 (interface); batch 20261013T145113; modules 3; new nodes 2)
 - 14:51 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus (stage 3; reviewer PASS; first push; landing 20261013T145125-L-697701 (interface); batch 20261013T145113; modules 2; new nodes 1)
 - 14:51 L: merged deliver/V2/Sheaf.Algebra.Homology.FiniteStripConeFiltration (stage 3; reviewer PASS; first push; landing 20261013T145125-L-697855 (interface); batch 20261013T145113; modules 2; new nodes 1)
+- 14:51 L: merged deliver/X3/Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart (stage 3; reviewer PASS; first push; landing 20261013T145126-L-698010 (proof); batch 20261013T145113; modules 1; new nodes 0)
