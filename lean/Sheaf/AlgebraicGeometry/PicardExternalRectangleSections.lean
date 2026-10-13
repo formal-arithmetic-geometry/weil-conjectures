@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
 public import Sheaf.AlgebraicGeometry.ExternalSectionsComponents
+import Sheaf.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The canonical external section map on a rectangle
 
@@ -155,7 +159,38 @@ theorem picardExternalRectangleSectionsMap_bijective
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)
     (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :
-    Function.Bijective (picardExternalRectangleSectionsMap f g U V F G) := by sorry
+    Function.Bijective (picardExternalRectangleSectionsMap f g U V F G) := by
+  classical
+  let W := pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V
+  let P := (tensorPullback (pullback.fst f g)).obj F
+  let Q := (tensorPullback (pullback.snd f g)).obj G
+  have hP : P.IsQuasicoherent := by
+    let e := (nonempty_tensorPullbackAdjunction (pullback.fst f g)).some.leftAdjointUniq
+      (pullbackPushforwardAdjunction (pullback.fst f g))
+    exact (SheafOfModules.isQuasicoherent (Limits.pullback f g).ringCatSheaf).prop_of_iso
+      (e.app F).symm (by infer_instance)
+  have hQ : Q.IsQuasicoherent := by
+    let e := (nonempty_tensorPullbackAdjunction (pullback.snd f g)).some.leftAdjointUniq
+      (pullbackPushforwardAdjunction (pullback.snd f g))
+    exact (SheafOfModules.isQuasicoherent (Limits.pullback f g).ringCatSheaf).prop_of_iso
+      (e.app G).symm (by infer_instance)
+  let := hP
+  let := hQ
+  have ht := (quasiCoherent_tensor_product_affine_sections P Q).2
+    W (isAffineOpen_preimage_inf_preimage_pullback f g hU hV)
+  obtain ⟨e, he⟩ := exists_affine_rectangle_projection_sections_tensor k X Y f g U V hU hV F G
+  have hc (z : scalarObj f F (op U) ⊗[k] scalarObj g G (op V)) :
+      tensorSectionsMap P Q W (e z) = picardExternalRectangleSectionsMap f g U V F G z := by
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul s t =>
+      rw [he, tensorSectionsMap_tmul]
+      rfl
+    | add z z' hz hz' => simp only [map_add, hz, hz']
+  have hc' : (tensorSectionsMap P Q W) ∘ e =
+      picardExternalRectangleSectionsMap f g U V F G := funext hc
+  rw [← hc']
+  exact ht.comp e.bijective
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-affine-rectangle-projection-sections-tensor",
+ "kind": "statement",
+ "title": "Ordinary projection-section tensor comparison on an affine rectangle",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ scheme morphisms [def-pc-scheme], $U\\subset X$ and $V\\subset Y$ affine opens, and $F,G$ quasi-coherent module sheaves [pqf-def-coherent]. Set $Z=X\\times_kY$ [def-pc-fibre-product] and $W=\\mathrm{pr}_1^{-1}U\\cap\\mathrm{pr}_2^{-1}V$. Pullback means tensorPullback [def-pc-module-pullback], with its actual adjunction unit [lem-pc-module-pullback-adjunction]. There is an additive equivalence $e:\\Gamma(F,U)\\otimes_k\\Gamma(G,V)\\simeq\\Gamma(\\mathrm{pr}_1^*F,W)\\otimes_{\\Gamma(Z,W)}\\Gamma(\\mathrm{pr}_2^*G,W)$ satisfying $e(s\\otimes t)=(\\mathrm{pr}_1^*s)|_W\\otimes(\\mathrm{pr}_2^*t)|_W$ for every $s,t$. The field actions are those of [def-sc-field-linear-module-cohomology-operations]. This compares ordinary section modules before applying the sheaf tensor-section map.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, affine computation before equation-kunneth-on-cech; expanded using Schemes Tags 01IA and 01I9"
+ },
+ "proof": [
+  {
+   "text": "Put W=pr1^{-1}U intersect pr2^{-1}V, A=Gamma(X,U), B=Gamma(Y,V), C=Gamma(X times_k Y,W), M=Gamma(F,U), N=Gamma(G,V). W is affine by isAffineOpen_preimage_inf_preimage_pullback. Apply Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff to the fibre-product square and the affine base top open. Transport the base along GammaSpecIso to show C is the pushout of A and B over k. The appLE composition identity shows the two algebra towers agree with the field scalar actions.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_tensorPullback_affine_sections to pr1 with U and W and to pr2 with V and W. Swap tensor factors to obtain C-linear bijections C tensor_A M to Gamma(pr1^*F,W) and C tensor_B N to Gamma(pr2^*G,W). LinearEquiv.ofBijective promotes these maps to equivalences. Their unit-tensor formulas follow from the existing comparison formulas at c=1.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose tensor commutativity over C, AlgebraTensorModule.cancelBaseChange A C C, tensor congruence with Algebra.IsPushout.cancelBaseChange k A B C N, commutativity over A, and AlgebraTensorModule.cancelBaseChange k A A. This gives d:(C tensor_A M) tensor_C (C tensor_B N) equiv M tensor_k N. Standard pure-tensor formulas show d((1 tensor s) tensor (1 tensor t))=s tensor t. Invert d and compose with the tensor congruence of the two projection comparisons. This constructs the asserted additive equivalence; its pure-tensor equation follows by applying d.injective and the formulas. These equivalences work over zero rings and for zero modules.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Affine computation, with explicit base-change cancellation; adapts the proved whole-affine argument in ExternalGlobalSectionsTensorAffine to affine opens"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|isAffineOpen.*(pullback|inf)",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dimension/Localization.lean",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No affine-open module section comparison; use existing ring and tensor equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product over the coordinate ring of an affine rectangle of the sections of both projection pullbacks is additively equivalent to the tensor product over the base field of the factor sections",
+   "results": "AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No affine-open module section comparison; use existing ring and tensor equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPushout, TensorProduct",
+   "results": "Algebra.IsPushout.equiv, TensorProduct.isPushout, TensorProduct.isPushout', Algebra.IsPushout.cancelBaseChangeAlg, Algebra.IsPushout.equiv_tmul, Algebra.IsPushout.equiv_symm_algebraMap_left, Algebra.IsPushout.equiv_symm_algebraMap_right, Algebra.IsPushout.cancelBaseChange",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No affine-open module section comparison; use existing ring and tensor equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive equivalence between the tensor product of projection pullback sections over the coordinate ring of an affine rectangle and the tensor product of sections on its factors over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalRectangleSections",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Affine rectangle comparison in the degree-zero Kunneth coefficient exactness argument",
+   "via": [
+    "lem-sc-picard-external-rectangle-sections-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRectangleProjectionSectionsTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_rectangle_projection_sections_tensor",
+  "statement": "theorem exists_affine_rectangle_projection_sections_tensor\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V)\n    (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] :\n    let W := pullback.fst f g ⁻¹ᵁ U ⊓ pullback.snd f g ⁻¹ᵁ V\n    ∃ e : (scalarObj f F (op U) ⊗[k] scalarObj g G (op V)) ≃+\n        (Γ((tensorPullback (pullback.fst f g)).obj F, W) ⊗[Γ(Limits.pullback f g, W)]\n          Γ((tensorPullback (pullback.snd f g)).obj G, W)),\n      ∀ (s : scalarObj f F (op U)) (t : scalarObj g G (op V)),\n        e (s ⊗ₜ[k] t) =\n          (((tensorPullback (pullback.fst f g)).obj F).presheaf.map\n            (homOfLE (show W ≤ pullback.fst f g ⁻¹ᵁ U from inf_le_left)).op\n            (((Classical.choose (exists_tensorPullbackAdjunction\n              (pullback.fst f g))).unit.app F).app U s)) ⊗ₜ[Γ(Limits.pullback f g, W)]\n            (((tensorPullback (pullback.snd f g)).obj G).presheaf.map\n            (homOfLE (show W ≤ pullback.snd f g ⁻¹ᵁ V from inf_le_right)).op\n            (((Classical.choose (exists_tensorPullbackAdjunction\n              (pullback.snd f g))).unit.app G).app V t))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T134802-L-130119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T134802-L-130119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
