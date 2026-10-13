@@ -12215,3 +12215,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/T4/Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjectionKernel (stage 3; reviewer PASS; first push; landing 20261013T111930-L-3065514 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/T4/Sheaf.AlgebraicGeometry.GlobalHomShiftedHypercohomology (stage 3; reviewer PASS; first push; landing 20261013T111930-L-3065680 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/U1/Sheaf.RingTheory.FormalGlueingLocalizedChartTuple (stage 3; reviewer PASS; first push; landing 20261013T111930-L-3065911 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/U1/Sheaf.RingTheory.IdealPowerHomLift (stage 3; reviewer PASS; first push; landing 20261013T111931-L-3066128 (proof); batch 20261013T111833; modules 1; new nodes 0)
