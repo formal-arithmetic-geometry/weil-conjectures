@@ -10828,3 +10828,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/U3/Sheaf.CategoryTheory.CartanEilenbergConeGradedShortComplex (stage 3; reviewer PASS; first push; landing 20261013T025309-L-3425145 (interface); batch 20261013T025255; modules 3; new nodes 2)
 - 02:53 L: merged deliver/U4/Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261013T025310-L-3425294 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:53 L: merged deliver/U4/Sheaf.AlgebraicGeometry.CoherentArtinRees (stage 3; reviewer PASS; after a return; landing 20261013T025310-L-3425522 (interface); batch 20261013T025255; modules 2; new nodes 1)
+- 02:53 L: merged deliver/V2/Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber (stage 3; reviewer PASS; first push; landing 20261013T025311-L-3425750 (interface); batch 20261013T025255; modules 3; new nodes 2)
