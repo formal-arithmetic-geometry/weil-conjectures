@@ -12,37 +12,50 @@
  },
  "proof": [
   {
-   "text": "Restriction along eR and eB gives inverse exact module equivalences. The R-algebra map equations identify the two extension functors on generators. Transport their universal left-derived functors and counits; uniqueness of left-derived functors yields the counit-compatible identification.",
+   "text": "Lift alpha to an A0-linear chain isomorphism into restriction along eA by constructing linear component equivalences from the given additive equivalences and h-alpha. Tensor induction, h-tau and multiplicativity of eC show that tau is eC-semilinear; lift it in the same way to t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the tensor-ring equivalence eE, the ordinary tensor chain isomorphism v fixed on generators, and the tensor-algebra cohomology isomorphism k with its ordinary comparison square. The ordinary comparison result permits the two original derived-category universes; no standard models or arbitrary chosen new data are used.",
+   "uses": [
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write a tensor b as (a tensor 1)(1 tensor b). The equations hCA and hCB show that eC preserves its image in the fourth ring. By tensor induction and the generator equation for eE, deduce eC composed with the tensor structural map equals the new structural map composed with eE. On r tensor x, ordinaryToLocalized_tmul, h-tau and the generator formula for v prove that the additive square from the ordinary tensor complexes to the localized complexes commutes. Tensor induction proves equality of chain maps.",
    "uses": [
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply cohomologyIso to the transported derived input isomorphism. Semilinearity of alpha and naturality for multiplication, followed by cohomologyIso_smul, identify the A action. B-linearity identifies the B action. Tensor induction gives semilinearity for the tensor-ring isomorphism. Extend this isomorphism to C using the two C-map equations and forget scalars to construct l.",
+   "text": "Apply the proved semilinear scalar-extension homology-square lemma to the ordinary cohomology square, the just-proved coefficient chain square, and the two localized_eq identities. It constructs the source scalar-extension isomorphism on tensors and yields the comparison square with exact restriction of scalars.",
    "uses": [
+    "lem-pc-semilinear-scalar-extension-homology-square",
     "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Use comparison_eq to identify the ordinary comparison with the transported counit. Transpose localized_eq through scalar-extension adjunction. The resulting ordinary chain map has tau's given formula on pure tensors, hence equals tau by tensor induction. Exact forgetful homology factors yield the asserted square.",
-   "uses": [
-    "def-pc-base-derived-tensor-cohomology-model"
-   ],
-   "elementary": false
+   "text": "Use exact forgetful homology naturality at t and coherence of restriction followed by forgetting with direct forgetting. The coherence is proved using left homology data and identity LeftHomologyMapData on cycles and homology. The forgetful image of t is the given tau. Postcompose the restricted square with the forward restriction homology factor, cancel its inverse, and substitute naturality. This is precisely the required additive square.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model"
+  "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-semilinear-scalar-extension-homology-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K4",
+  "group": "U4",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
-  "place": "more-algebra.tex, lemma-derived-base-change (Tag 06Y6); perfect.tex, equation-bc (Tag 0DJ7), coefficient transport in original ordinary-comparison plan steps 1 and 2.",
-  "note": "Coefficient transport and germ compatibility from the original plan."
+  "place": "Lemma 15.61.1; coefficient transport of the ordinary comparison followed by extension/restriction adjunction (Tag 05G3, Lemma 10.14.3).",
+  "note": "Repair of the returned import cycle: RingIsoNaturality already applies RingTransport and cannot be reused here. Replace it and the fixed-ring universe bridge by one strictly smaller ordinary ring-comparison theorem. The semilinear scalar-extension lemma and all tensor induction and homology coherence glue are fully proved in Lean. Existing signatures and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -120,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T181112-L-2604150",
+  "landing": "20261013T215615-L-902456",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-semilinear-scalar-extension-homology-square",
+ "kind": "statement",
+ "title": "Semilinear extension of an ordinary homology comparison square",
+ "statement": "Let f0:S0 to D0 and f:S to D be homomorphisms of commutative rings in one universe, and eS:S0 equiv S, eD:D0 equiv D commuting with f0,f [def-weil-module-base-change]. Let P0,P be modules, K0,K complexes over S0,S, and X0,X complexes over D0,D. Given semilinear complex isomorphisms s:K0 to restriction of K and t:X0 to restriction of X, a semilinear module isomorphism k:P0 to restriction of P, and coefficient chain maps delta0,delta whose underlying additive square with s,t commutes, fix degree i. Let a0:P0 to H^i(K0) and a:P to H^i(K) commute with k and H^i(s), using the inverse exact restriction factor. Let b0:D0 tensor_S0 P0 to H^i(X0) and b:D tensor_S P to H^i(X) have adjoint transposes a0;H^i(delta0);restriction homology factor and a;H^i(delta);restriction homology factor. There exists an additive isomorphism l between the two extended modules such that l;forget(b);inverse eD restriction homology factor equals forget(b0);forget(H^i(t)). There is no derived category and no flatness or invertibility assumption on any comparison.",
+ "stmt_deps": [
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05G3",
+  "place": "Section 10.14, Lemma 10.14.3 (extension/restriction adjunction); Tag 06Y6, ordinary comparison followed by coefficient extension. The explicit semilinear homology-square argument is written and fully proved by the worker."
+ },
+ "proof": [
+  {
+   "text": "Construct the scalar-extension isomorphism by TensorProduct.congr from the semilinear ring and module equivalences, sending d tensor p to eD(d) tensor k(p). Compatibility of f0,f gives balance, and tensor induction upgrades it to D0-linearity into eD restriction. The tensor inverse identities prove invertibility.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove exact restriction/forgetting homology coherence from LeftHomologyData.mapHomologyIso_eq and an identity LeftHomologyMapData on the two mapped presentations. Combine this coherence with ShortComplex.mapHomologyIso_hom_naturality to express homology of any semilinear map in additive coordinates.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Forget the ordinary square and the two adjoint equations, and use the preceding homology formula. Apply additive homology to the chain square. Compose these equations and cancel the exact homology isomorphisms, giving equality on unit tensors. ExtendScalars.hom_ext and the constructed isomorphism generator formula yield the D0-linear square. Forget it and cancel the eD restriction factor to get the statement.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/05G3",
+  "place": "Section 10.14, Lemma 10.14.3 (extension/restriction adjunction); Tag 06Y6, ordinary comparison followed by coefficient extension. The explicit semilinear homology-square argument is written and fully proved by the worker.",
+  "note": "Refinement below the coefficient-transport node; the fixed unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor ordinary comparison under ring isomorphisms",
+   "results": "Service unavailable: Internal Server Error.",
+   "available": false,
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived tensor comparison natural under compatible ring isomorphisms and independent choices of localization",
+   "results": "Tor_map, Tor_prime_map_app and localizer derived-functor comparison components, no exact tensor-algebra comparison transport statement.",
+   "verdict": "No exact match; universal-functor transport is still needed.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso_hom_naturality\"; \"extendRestrictScalarsAdj\"",
+   "results": "ShortComplex.mapHomologyIso_hom_naturality and scalar-extension adjunction, generator and composition formulas.",
+   "verdict": "Components used in the proved scalar-extension lemma, not the ordinary derived tensor transport statement.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*ring.*comparison|scalarExtension.*homology.*square; ring.transport|ringIso_square|comparison.*ring|ring.*comparison",
+   "results": "RingIsoNaturality applies the present item, so is cyclic. Existing ScalarExtensionHomologySquare is proved for a common target coefficient ring. No ordinary derived tensor ring comparison is stated.",
+   "verdict": "The ordinary lemma must be split off; the new semilinear scalar-extension result is proved directly from Mathlib for two isomorphic target rings.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorRingTransport",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Coefficient transport within the original affine ordinary-comparison steps 1 and 2.",
+   "via": [
+    "lem-pc-single-complex-open-ordinary-comparison",
+    "lem-pc-base-derived-tensor-ring-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SemilinearScalarExtensionHomologySquare",
+  "file": "lean/Sheaf/Algebra/Homology/SemilinearScalarExtensionHomologySquare.lean",
+  "declaration": "ModuleCat.exists_scalarExtension_homology_square",
+  "statement": "theorem exists_scalarExtension_homology_square\n    {S₀ S D₀ D : Type u}\n    [CommRing S₀] [CommRing S] [CommRing D₀] [CommRing D]\n    (f₀ : S₀ →+* D₀) (f : S →+* D)\n    (eS : S₀ ≃+* S) (eD : D₀ ≃+* D)\n    (hf : eD.toRingHom.comp f₀ = f.comp eS.toRingHom)\n    (P₀ : ModuleCat.{u} S₀) (P : ModuleCat.{u} S)\n    (K₀ : CochainComplex (ModuleCat.{u} S₀) ℤ)\n    (K : CochainComplex (ModuleCat.{u} S) ℤ)\n    (X₀ : CochainComplex (ModuleCat.{u} D₀) ℤ)\n    (X : CochainComplex (ModuleCat.{u} D) ℤ)\n    (s : K₀ ≅ ((restrictScalars.{u} eS.toRingHom).mapHomologicalComplex (.up ℤ)).obj K)\n    (t : X₀ ≅ ((restrictScalars.{u} eD.toRingHom).mapHomologicalComplex (.up ℤ)).obj X)\n    (k : P₀ ≅ (restrictScalars.{u} eS.toRingHom).obj P)\n    (δ₀ : K₀ ⟶ ((restrictScalars.{u} f₀).mapHomologicalComplex (.up ℤ)).obj X₀)\n    (δ : K ⟶ ((restrictScalars.{u} f).mapHomologicalComplex (.up ℤ)).obj X)\n    (hδ :\n      ((forget₂ (ModuleCat.{u} S₀) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map δ₀ ≫\n        ((forget₂ (ModuleCat.{u} D₀) AddCommGrpCat.{u}).mapHomologicalComplex\n          (.up ℤ)).map t.hom =\n      ((forget₂ (ModuleCat.{u} S₀) AddCommGrpCat.{u}).mapHomologicalComplex\n          (.up ℤ)).map s.hom ≫\n        ((forget₂ (ModuleCat.{u} S) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map δ)\n    (i : ℤ) (a₀ : P₀ ⟶ K₀.homology i) (a : P ⟶ K.homology i)\n    (ha : k.hom ≫ (restrictScalars.{u} eS.toRingHom).map a ≫\n        ((K.sc i).mapHomologyIso (restrictScalars.{u} eS.toRingHom)).inv =\n      a₀ ≫ HomologicalComplex.homologyMap s.hom i)\n    (b₀ : (extendScalars f₀).obj P₀ ⟶ X₀.homology i)\n    (b : (extendScalars f).obj P ⟶ X.homology i)\n    (hb₀ : (extendRestrictScalarsAdj f₀).unit.app P₀ ≫\n        (restrictScalars.{u} f₀).map b₀ =\n      a₀ ≫ HomologicalComplex.homologyMap δ₀ i ≫\n        ((X₀.sc i).mapHomologyIso (restrictScalars.{u} f₀)).hom)\n    (hb : (extendRestrictScalarsAdj f).unit.app P ≫\n        (restrictScalars.{u} f).map b =\n      a ≫ HomologicalComplex.homologyMap δ i ≫\n        ((X.sc i).mapHomologyIso (restrictScalars.{u} f)).hom) :\n    let F₀ := forget₂ (ModuleCat.{u} D₀) AddCommGrpCat.{u}\n    let F := forget₂ (ModuleCat.{u} D) AddCommGrpCat.{u}\n    ∃ l : F₀.obj ((extendScalars f₀).obj P₀) ≅ F.obj ((extendScalars f).obj P),\n      l.hom ≫ F.map b ≫ F₀.map ((X.sc i).mapHomologyIso\n          (restrictScalars.{u} eD.toRingHom)).inv =\n        F₀.map b₀ ≫ F₀.map (HomologicalComplex.homologyMap t.hom i)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T215615-L-902456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T215615-L-902456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
