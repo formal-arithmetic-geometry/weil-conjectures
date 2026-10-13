@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-rf-mv-base-change-first-two-squares",
+ "kind": "lemma",
+ "title": "Natural unit and restriction squares for relative base change",
+ "statement": "Let $X',X,S',S$ be schemes with a cartesian square $g':X'\\to X$, $f':X'\\to S'$, $f:X\\to S$, $g:S'\\to S$ [def-pc-scheme, def-pc-base-change]. Assume $S,S'$ affine and $f$ quasi-compact and quasi-separated. Assume the derived module categories of all schemes exist [def-pc-derived-category]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$, and $\\psi:Lg'^*K\\to K'$. Let $U,V\\subseteq X$ be quasi-compact opens covering $X$, with $U\\cap V$ quasi-compact. Put $W'=g'^{-1}W$, $F=Lg^*Rf_*$ and $G=Rf'_*$ [def-pc-derived-pullback, def-pc-derived-direct-image]. Use the fixed open adjunctions, triangles $T(\\delta),T'(\\delta')$ and maps $a_0,a_2,a_{UV}$ of [def-pc-rf-mv-base-change-components]. For every such $K,K',\\psi$, the first two squares commute: $F(T(0).\\mathrm{mor}_1);a_2=a_0;G(T'(0).\\mathrm{mor}_1)$ and $F(T(0).\\mathrm{mor}_2);a_{UV}=a_2;G(T'(0).\\mathrm{mor}_2)$. No connecting morphism is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, induction step; naturality of the relative Mayer--Vietoris triangles from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "1. Use the derived adjunctions and composition comparisons occurring literally\n   in schemeDerivedBaseChangeMap. For each open W, the isomorphism\n   mvPullbackOpenRestrictionIso is the path through pullback of the two open\n   immersions, with their pullback/restriction adjoint comparisons at the ends.\n   The unit and counit equations of these comparisons are proved as\n   mvOpenPullbackIso_unit and mvOpenPullbackIso_counit. Thus transposing the\n   pasted open map gives restriction of the transpose of ψ; no bare existence\n   isomorphism is substituted in this calculation.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Insert the adjunction unit on W on either side of that identity. The triangle\n   identities cancel its counit and naturality moves ψ through the remaining\n   unit. This proves F.map(unit_W) followed by the W component equals the\n   whole-space component followed by G.map(unit_W'). Prove it for U and V,\n   then assemble the two equalities using biproduct inclusion/projection laws.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. For W contained in U, expand schemeDerivedOpenDirectImageRestriction as\n   the mate of the restricted U counit. Apply the counit equation in step 1.\n   The two paths of pullback comparisons agree by the associativity law in\n   exists_derivedPullbackComposition; exact nested restriction has the same\n   underived composition. Naturality of the counit then gives the restriction\n   square, including its fixed canonical overlap identification. Apply this\n   separately to U intersect V contained in U and in V. Functor additivity\n   turns their pair of equalities into the difference square displayed here.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. The equations are natural in both objects and ψ since every step uses\n   natural transformations, their mates, and their composition laws. Affine\n   permanence supplies qcqs hypotheses if the calculation is made using\n   K-flat and K-injective representatives. No boundedness or flatness is used.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 induction step; expanded with canonical mate calculations from Tags 08HY and 0D5S and short exact sequence naturality from Tags 08BV and 08HZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change induces a morphism of Mayer Vietoris distinguished triangles",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-13",
+   "verdict": "Adjunction uniqueness used in explicit construction"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange.*mayerVietoris|leftAdjointUniq",
+   "results": "Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of connecting morphisms in Mayer Vietoris distinguished triangles under an adjunction of derived functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction step: naturality of the relative Mayer--Vietoris triangles for the two-open cover",
+   "via": [
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisSquares.lean",
+  "declaration": "AlgebraicGeometry.derivedBaseChange_mayerVietoris_firstTwoSquares",
+  "statement": "theorem derivedBaseChange_mayerVietoris_firstTwoSquares [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) : ∀ (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X'), schemeDerivedQCohProperty X K → schemeDerivedQCohProperty X' K' → ∀ ψ : (derivedPullback g').obj K ⟶ K', let adjU := mvOpenRestrictionAdjunction X U let adjV := mvOpenRestrictionAdjunction X V let adjUV := mvOpenRestrictionAdjunction X (U ⊓ V) let adjU' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U) let adjV' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V) let adjUV' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V)) let F := schemeDerivedDirectImage f ⋙ derivedPullback g let G := schemeDerivedDirectImage f' let a₀ := schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ G.map ψ let a₂ := mvBaseChangeMiddle f f' g g' hsq.w K K' ψ U V let a₃ := mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) let T := mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left) (homOfLE inf_le_right) adjU adjV adjUV K 0 let T' := mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U))) ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V))) adjU' adjV' adjUV' K' 0 F.map T.mor₁ ≫ a₂ = a₀ ≫ G.map T'.mor₁ ∧ F.map T.mor₂ ≫ a₃ = a₂ ≫ G.map T'.mor₂",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.derivedBaseChange_mayerVietoris_firstTwoSquares"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a65fd",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T142853-L-496277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a65fd",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T142853-L-496277",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, canonical constructions and assembly with the four node records, change records and Stacks sources; compilation and axiom probes passed; direct importers: none."
+ }
+}

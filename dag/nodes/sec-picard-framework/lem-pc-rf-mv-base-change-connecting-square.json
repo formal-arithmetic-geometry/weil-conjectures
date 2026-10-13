@@ -1,0 +1,165 @@
+{
+ "id": "lem-pc-rf-mv-base-change-connecting-square",
+ "kind": "lemma",
+ "title": "Compatible boundaries of relative Mayer Vietoris triangles",
+ "statement": "Let $X',X,S',S$ be schemes with a cartesian square $g':X'\\to X$, $f':X'\\to S'$, $f:X\\to S$, $g:S'\\to S$ [def-pc-scheme, def-pc-base-change]. Assume $S,S'$ affine and $f$ quasi-compact and quasi-separated. Assume the derived module categories of all schemes exist [def-pc-derived-category]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, $K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$, and $\\psi:Lg'^*K\\to K'$. Let $U,V\\subseteq X$ be quasi-compact opens covering $X$, with $U\\cap V$ quasi-compact. Put $W'=g'^{-1}W$, $F=Lg^*Rf_*$ and $G=Rf'_*$ [def-pc-derived-pullback, def-pc-derived-direct-image]. Use the fixed open adjunctions, triangles $T(\\delta),T'(\\delta')$ and maps $a_0,a_2,a_{UV}$ of [def-pc-rf-mv-base-change-components]. There exist connecting morphisms $\\delta:Rj_{U\\cap V,*}r_{U\\cap V}K\\to K[1]$, $\\delta':Rj_{(U\\cap V)',*}r_{(U\\cap V)'}K'\\to K'[1]$ and shift-commutation structures $c_F,c_G$ such that $T(\\delta),T'(\\delta')$ and their images $F(T(\\delta)),G(T'(\\delta'))$ are distinguished, and $F(\\delta);c_F(K);a_0[1]=a_{UV};G(\\delta');c_G(K')$. No first or second commutativity square or triangle morphism is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, induction step; naturality of the relative Mayer--Vietoris triangles from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
+ },
+ "stmt_deps": [
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "1. An affine-to-affine morphism g is affine, and so is g'. The base changes\n   f' and g' are qcqs. The qcqs sources X and X' and the inverse-image cover\n   satisfy the compactness hypotheses, including the overlap. Transpose ψ\n   under the pinned Lg'^* / Rg'_* adjunction; Rg'_*K' has quasi-coherent\n   cohomology by schemeDerivedDirectImage_preserves_QCoh.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Choose K-injective representatives with injective terms for K and K'. Use\n   schemeKInjective_mayerVietoris_presentation with the explicit adjunctions\n   mvOpenRestrictionAdjunction. For each W, the resulting complex is the\n   direct image of the restriction of the representative. Its two maps are\n   exactly the units and the difference of adjoint restrictions in this\n   statement. Apply triangleOfSES to obtain δ and δ' and distinguishedness.",
+   "uses": [
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Represent the transposed ψ by a chain map into a K-injective representative\n   of g'_* of the second representative. Restrict this one chain map to U,\n   V and their overlap. Together with the resolution comparison it gives a\n   morphism of short exact Mayer--Vietoris sequences. The connecting maps\n   commute by naturality of triangleOfSES. This uses a morphism of sequences,\n   rather than inferring a connecting square from two squares in a triangulated\n   category. The degreewise split presentation of the direct-image sequence\n   identifies its boundary with Rg'_*δ', as in the direct-image part of\n   schemeDerived_mayerVietoris_directImage.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. Identify all direct-image compositions by the right-adjoint mates of the\n   pinned pullback composition comparisons, not by independently selected\n   bare isomorphisms. The unit/counit equations of mvOpenPullbackIso and\n   associativity of those comparisons identify the restricted chain maps\n   with the transposes of mvBaseChangeOpenMap. Apply Rf_* and transpose the\n   full connecting equation under Lg^* / Rg_*. Naturality of the Hom equivalence\n   and its shift compatibility give precisely the final displayed equation.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "5. Derived pullback admits a triangulated shift structure by\n   exists_derivedPullback. Derived direct image is a triangulated right derived\n   functor. Compose these structures to obtain csF and csG; their mapTriangle\n   functors send the two distinguished triangles to distinguished triangles.\n   Empty opens, the zero object and redundant covers use the same sequences.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-base-change-map",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 induction step; expanded with canonical mate calculations from Tags 08HY and 0D5S and short exact sequence naturality from Tags 08BV and 08HZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change induces a morphism of Mayer Vietoris distinguished triangles",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-13",
+   "verdict": "Adjunction uniqueness used in explicit construction"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange.*mayerVietoris|leftAdjointUniq",
+   "results": "Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of connecting morphisms in Mayer Vietoris distinguished triangles under an adjunction of derived functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris",
+  "date": "2026-10-13",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction step: naturality of the relative Mayer--Vietoris triangles for the two-open cover",
+   "via": [
+    "lem-pc-rf-mv-triangle-naturality",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeMayerVietorisBoundary.lean",
+  "declaration": "AlgebraicGeometry.derivedBaseChange_mayerVietoris_connectingSquare",
+  "statement": "theorem derivedBaseChange_mayerVietoris_connectingSquare [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X') (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K') (ψ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) : ∃ (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧) (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶ K'⟦(1 : ℤ)⟧) (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ) (csG : (schemeDerivedDirectImage f').CommShift ℤ), let adjU := mvOpenRestrictionAdjunction X U let adjV := mvOpenRestrictionAdjunction X V let adjUV := mvOpenRestrictionAdjunction X (U ⊓ V) let adjU' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U) let adjV' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V) let adjUV' := mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V)) let F := schemeDerivedDirectImage f ⋙ derivedPullback g let G := schemeDerivedDirectImage f' let T := mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left) (homOfLE inf_le_right) adjU adjV adjUV K δ let T' := mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U))) ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V))) adjU' adjV' adjUV' K' δ' T ∈ distTriang (schemeDerivedCategory X) ∧ T' ∈ distTriang (schemeDerivedCategory X') ∧ (@Functor.mapTriangle _ _ _ _ _ _ F csF).obj T ∈ distTriang (schemeDerivedCategory S') ∧ (@Functor.mapTriangle _ _ _ _ _ _ G csG).obj T' ∈ distTriang (schemeDerivedCategory S') ∧ F.map δ ≫ (letI := csF; F.commShiftIso (1 : ℤ)).hom.app K ≫ (schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫ G.map ψ)⟦(1 : ℤ)⟧' = mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫ G.map δ' ≫ (letI := csG; G.commShiftIso (1 : ℤ)).hom.app K'",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.derivedBaseChange_mayerVietoris_connectingSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a65fd",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T142853-L-496277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a65fd",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T142853-L-496277",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, canonical constructions and assembly with the four node records, change records and Stacks sources; compilation and axiom probes passed; direct importers: none."
+ }
+}

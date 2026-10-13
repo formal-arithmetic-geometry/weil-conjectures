@@ -7,13 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+public import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisMaps
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisSquares
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 
 /-! # Base change and the relative Mayer--Vietoris triangle
 
@@ -29,17 +26,21 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 noncomputable section
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 200000 in
+-- The expanded triangle statement needs a larger elaboration budget.
 /-- Base change and a map on the pullback give a morphism of the two relative
 Mayer--Vietoris distinguished triangles, including their connecting morphisms.
 The middle component is characterized by its two projections, so no choice of a
-biproduct comparison is needed. The open components are expressed before the
+biproduct comparison is needed. The open pullback comparisons are explicit
+adjunction/composition constructions, not witnesses of bare existence.
+The open components are expressed before the
 canonical direct-image composition identifications: base change first for `f`,
 then for the open immersion, followed by the restricted map. Pasting of canonical
 base-change maps identifies these with the maps for `f|W` in the source.
@@ -47,24 +48,15 @@ base-change maps identifies these with the maps for `f|W` in the source.
 Source: Stacks Project, Tag 0DJ9, induction step; Cohomology, Tag 08BV
 (blueprint: lem-pc-rf-mv-triangle-naturality).
 Proof:
-1. Since the bases are affine, `g` and its base change `g'` are affine and hence
-   qcqs (lem-weil-pbc-morphism-affine-schemes-affine,
-   lem-weil-pbc-affine-morphism-permanence). The qcqs morphisms `f` and `f'` over
-   affine bases have qcqs sources (lem-weil-pbc-qcqs-over-affine). The inverse-image
-   cover has quasi-compact members and intersection. Apply
-   lem-pc-derived-mayer-vietoris-triangle twice. The exact functors `Lg* Rf*`
-   and `Rf'*` take these to distinguished triangles. Use
-   lem-pc-derived-direct-image-composition to identify the relative terms.
-2. Transpose the given map to `K → Rg'* K'` using
-   lem-pc-pre-derived-adjoint-functors-general. Its target has quasi-coherent
-   cohomology by lem-pc-derived-direct-image-preserves-qcoh. Restriction commutes
-   with these adjunctions. By def-pc-derived-base-change-map, the adjoints of the
-   four comparison maps are the direct images of these restricted maps followed
-   by the composition comparisons. Apply both parts of
-   lem-pc-derived-mayer-vietoris-functorial: naturality in the object, and
-   compatibility with `Rg'*`. Apply `Rf*` and transpose back. Naturality of the
-   adjunction bijection gives the first two commuting squares; its compatibility
-   with shift gives the connecting square. -/
+1. For the six explicitly constructed open adjunctions, the unit and restriction
+   squares are supplied by lem-pc-rf-mv-base-change-first-two-squares.
+2. Lemma lem-pc-rf-mv-base-change-connecting-square supplies distinguished
+   cover triangles, their distinguished images, and the connecting square.
+3. Use the whole-space, diagonal biproduct, and overlap maps as the three
+   components of TriangleMorphism. The three equations from steps 1 and 2
+   are exactly its commutativity fields. Distribute composition over the sum
+   defining the middle component. The identities inl/fst = id, inr/fst = 0,
+   inl/snd = 0 and inr/snd = id give its two prescribed projections. -/
 theorem derivedBaseChange_mayerVietoris_naturality
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -93,54 +85,29 @@ theorem derivedBaseChange_mayerVietoris_naturality
         ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶ K'⟦(1 : ℤ)⟧),
     ∃ (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ)
       (csG : (schemeDerivedDirectImage f').CommShift ℤ),
-      Triangle.mk (biprod.lift (adjU.unit.app K) (adjV.unit.app K))
-        (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
-            adjU adjUV K)
-          (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
-            adjV adjUV K))) δ ∈ distTriang (schemeDerivedCategory X) ∧
-      Triangle.mk (biprod.lift (adjU'.unit.app K') (adjV'.unit.app K'))
-        (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
-            adjU' adjUV' K')
-          (-(schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
-            adjV' adjUV' K'))) δ' ∈ distTriang (schemeDerivedCategory X') ∧
+      mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left)
+        (homOfLE inf_le_right) adjU adjV adjUV K δ ∈ distTriang (schemeDerivedCategory X) ∧
+      mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
+        ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
+        ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
+        adjU' adjV' adjUV' K' δ' ∈ distTriang (schemeDerivedCategory X') ∧
       (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f ⋙ derivedPullback g) csF).obj (
-        Triangle.mk (biprod.lift (adjU.unit.app K) (adjV.unit.app K))
-          (biprod.desc
-            (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
-              adjU adjUV K)
-            (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
-              adjV adjUV K))) δ) ∈ distTriang (schemeDerivedCategory S') ∧
+        mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left)
+        (homOfLE inf_le_right) adjU adjV adjUV K δ) ∈ distTriang (schemeDerivedCategory S') ∧
       (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f') csG).obj (
-        Triangle.mk (biprod.lift (adjU'.unit.app K') (adjV'.unit.app K'))
-          (biprod.desc
-            (schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
-              adjU' adjUV' K')
-            (-(schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
-              adjV' adjUV' K'))) δ') ∈ distTriang (schemeDerivedCategory S') ∧
+        mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
+        ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
+        ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
+        adjU' adjV' adjUV' K' δ') ∈ distTriang (schemeDerivedCategory S') ∧
       ∃ φ :
         (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f ⋙ derivedPullback g) csF).obj
-          (
-          Triangle.mk (biprod.lift (adjU.unit.app K) (adjV.unit.app K))
-            (biprod.desc
-              (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
-                adjU adjUV K)
-              (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
-                adjV adjUV K))) δ) ⟶
+          (mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left)
+        (homOfLE inf_le_right) adjU adjV adjUV K δ) ⟶
         (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f') csG).obj (
-          Triangle.mk (biprod.lift (adjU'.unit.app K') (adjV'.unit.app K'))
-            (biprod.desc
-              (schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
-                adjU' adjUV' K')
-              (-(schemeDerivedOpenDirectImageRestriction X'
-            ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
-                adjV' adjUV' K'))) δ'),
+          mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
+        ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
+        ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
+        adjU' adjV' adjUV' K' δ'),
         φ.hom₁ = schemeDerivedBaseChangeMap f f' g g' hsq.w K ≫
           (schemeDerivedDirectImage f').map ψ ∧
         ∃ aU : (schemeDerivedDirectImage f ⋙ derivedPullback g).obj
@@ -159,8 +126,7 @@ theorem derivedBaseChange_mayerVietoris_naturality
                     (Scheme.Hom.resLE_comp_ι g' le_rfl)
                     ((schemeOpenRestriction X U).mapDerivedCategory.obj K) ≫
                   (schemeDerivedDirectImage (g' ⁻¹ᵁ U).ι).map (
-                    (Classical.choice (derivedPullback_openRestriction_iso g'
-                      (g' ⁻¹ᵁ U) U le_rfl)).inv.app K ≫
+                    (mvPullbackOpenRestrictionIso g' U).inv.app K ≫
                     (schemeOpenRestriction X' (g' ⁻¹ᵁ U)).mapDerivedCategory.map ψ)) ∧
         ∃ aV : (schemeDerivedDirectImage f ⋙ derivedPullback g).obj
             ((schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction X V).mapDerivedCategory.obj
@@ -178,8 +144,7 @@ theorem derivedBaseChange_mayerVietoris_naturality
                     (Scheme.Hom.resLE_comp_ι g' le_rfl)
                     ((schemeOpenRestriction X V).mapDerivedCategory.obj K) ≫
                   (schemeDerivedDirectImage (g' ⁻¹ᵁ V).ι).map (
-                    (Classical.choice (derivedPullback_openRestriction_iso g'
-                      (g' ⁻¹ᵁ V) V le_rfl)).inv.app K ≫
+                    (mvPullbackOpenRestrictionIso g' V).inv.app K ≫
                     (schemeOpenRestriction X' (g' ⁻¹ᵁ V)).mapDerivedCategory.map ψ)) ∧
         ∃ aUV : (schemeDerivedDirectImage f ⋙ derivedPullback g).obj
             ((schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓
@@ -197,14 +162,73 @@ theorem derivedBaseChange_mayerVietoris_naturality
                     (Scheme.Hom.resLE_comp_ι g' le_rfl)
                     ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ≫
                   (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).map (
-                    (Classical.choice (derivedPullback_openRestriction_iso g'
-                      (g' ⁻¹ᵁ (U ⊓ V)) (U ⊓ V) le_rfl)).inv.app K ≫
+                    (mvPullbackOpenRestrictionIso g' (U ⊓ V)).inv.app K ≫
                     (schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.map ψ)) ∧
           φ.hom₂ ≫ (schemeDerivedDirectImage f').map biprod.fst =
             (schemeDerivedDirectImage f ⋙ derivedPullback g).map biprod.fst ≫ aU ∧
           φ.hom₂ ≫ (schemeDerivedDirectImage f').map biprod.snd =
             (schemeDerivedDirectImage f ⋙ derivedPullback g).map biprod.snd ≫ aV ∧
           φ.hom₃ = aUV := by
-  sorry
+  classical
+  let : Preadditive (schemeDerivedCategory X) := inferInstance
+  let : Preadditive (schemeDerivedCategory X') := inferInstance
+  let : Preadditive (schemeDerivedCategory S') := inferInstance
+  let : HasFiniteBiproducts (schemeDerivedCategory X) := inferInstance
+  let : HasFiniteBiproducts (schemeDerivedCategory X') := inferInstance
+  let adjU := mvOpenRestrictionAdjunction.{u, w} X U
+  let adjV := mvOpenRestrictionAdjunction.{u, w} X V
+  let adjUV := mvOpenRestrictionAdjunction.{u, w} X (U ⊓ V)
+  let adjU' := mvOpenRestrictionAdjunction.{u, w} X' (g' ⁻¹ᵁ U)
+  let adjV' := mvOpenRestrictionAdjunction.{u, w} X' (g' ⁻¹ᵁ V)
+  let adjUV' := mvOpenRestrictionAdjunction.{u, w} X' (g' ⁻¹ᵁ (U ⊓ V))
+  have hsquares := derivedBaseChange_mayerVietoris_firstTwoSquares.{u, w}
+    (X := X) (S := S) (X' := X') (S' := S') f f' g g' hsq U V hU hV hUV hcover
+  have hb :=
+    derivedBaseChange_mayerVietoris_connectingSquare.{u, w}
+      (X := X) (S := S) (X' := X') (S' := S') f f' g g' hsq K K' hK hK' ψ
+      U V hU hV hUV hcover
+  rcases hb with ⟨δ, δ', csF, csG, hT, hT', hFT, hGT', hδ⟩
+  let F := schemeDerivedDirectImage f ⋙ derivedPullback g
+  let G := schemeDerivedDirectImage f'
+  let : F.CommShift ℤ := csF
+  let : G.CommShift ℤ := csG
+  let T := mvBaseChangeTriangle.{u, w} X U V (U ⊓ V) (homOfLE inf_le_left)
+    (homOfLE inf_le_right) adjU adjV adjUV K δ
+  let T' := mvBaseChangeTriangle.{u, w} X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
+    ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
+    ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
+    adjU' adjV' adjUV' K' δ'
+  let a₀ := schemeDerivedBaseChangeMap.{u, w} f f' g g' hsq.w K ≫ G.map ψ
+  let a₂ := mvBaseChangeMiddle.{u, w} f f' g g' hsq.w K K' ψ U V
+  let aU := mvBaseChangeOpenMap.{u, w} f f' g g' hsq.w K K' ψ U
+  let aV := mvBaseChangeOpenMap.{u, w} f f' g g' hsq.w K K' ψ V
+  let aUV := mvBaseChangeOpenMap.{u, w} f f' g g' hsq.w K K' ψ (U ⊓ V)
+  have h12 := hsquares K K' hK hK' ψ
+  let φ : F.mapTriangle.obj T ⟶ G.mapTriangle.obj T' :=
+    { hom₁ := a₀
+      hom₂ := a₂
+      hom₃ := aUV
+      comm₁ := h12.1
+      comm₂ := h12.2
+      comm₃ := by
+        dsimp only [Functor.mapTriangle, T, T', mvBaseChangeTriangle, Triangle.mk, a₀, aUV, F, G]
+        simpa only [Functor.id_obj, Category.assoc] using hδ }
+  refine ⟨adjU, adjV, adjUV, δ, adjU', adjV', adjUV', δ', csF, csG,
+    hT, hT', hFT, hGT', φ, rfl, aU, rfl, aV, rfl, aUV, rfl, ?_, ?_, rfl⟩
+  · change a₂ ≫ G.map biprod.fst = F.map biprod.fst ≫ aU
+    dsimp only [a₂, mvBaseChangeMiddle, aU]
+    dsimp only [G]
+    simp only [Preadditive.add_comp, Category.assoc, ← Functor.map_comp,
+      biprod.inl_fst, biprod.inr_fst, (schemeDerivedDirectImage f').map_id,
+      (schemeDerivedDirectImage f').map_zero,
+      Category.comp_id, comp_zero, add_zero]
+    rfl
+  · change a₂ ≫ G.map biprod.snd = F.map biprod.snd ≫ aV
+    dsimp only [a₂, mvBaseChangeMiddle, aV, G]
+    simp only [Preadditive.add_comp, Category.assoc, ← Functor.map_comp,
+      biprod.inl_snd, biprod.inr_snd, (schemeDerivedDirectImage f').map_id,
+      (schemeDerivedDirectImage f').map_zero,
+      Category.comp_id, comp_zero, zero_add]
+    rfl
 
 end AlgebraicGeometry
