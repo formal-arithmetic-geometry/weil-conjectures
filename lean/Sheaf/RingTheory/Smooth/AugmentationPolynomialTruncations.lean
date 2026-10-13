@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective
+import Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsInjective
 
 /-!
 # Propagation of first-order augmented polynomial coordinates
@@ -53,6 +55,8 @@ theorem bijective_augmented_polynomial_truncations
     ∀ k : ℕ, Function.Bijective
       (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ k) f
         ((pow_le_pow_left' hf k).trans (Ideal.le_comap_pow f.toRingHom k))) := by
-  sorry
+  intro k
+  exact ⟨bijective_augmented_polynomial_truncations_injective B C ε n f hf h₂ k,
+    bijective_augmented_polynomial_truncations_surjective B C ε n f hf h₂.2 k⟩
 
 end Algebra

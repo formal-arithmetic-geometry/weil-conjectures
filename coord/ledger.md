@@ -12535,3 +12535,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:54 L: merged deliver/G2/Sheaf.Algebra.Homology.AffineTensorLocalizationFlat (stage 3; reviewer PASS; first push; landing 20261013T125446-L-3874711 (proof); batch 20261013T125443; modules 1; new nodes 0)
 - 12:54 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful (stage 3; reviewer PASS; first push; landing 20261013T125446-L-3874904 (interface); batch 20261013T125443; modules 3; new nodes 2)
 - 12:54 L: merged deliver/H4/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSplitFormalTest (stage 3; reviewer PASS; first push; landing 20261013T125447-L-3875012 (interface); batch 20261013T125443; modules 2; new nodes 1)
+- 12:54 L: merged deliver/K1/Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncations (stage 3; reviewer PASS; first push; landing 20261013T125447-L-3875209 (interface); batch 20261013T125443; modules 3; new nodes 2)

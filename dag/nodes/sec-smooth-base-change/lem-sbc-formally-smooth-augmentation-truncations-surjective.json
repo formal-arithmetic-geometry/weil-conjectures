@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-formally-smooth-augmentation-truncations-surjective",
+ "kind": "statement",
+ "title": "Induction of surjective maps on augmented polynomial truncations",
+ "statement": "Let B and C be commutative rings, C a B-algebra, ε : C → B a B-algebra augmentation, I = ker ε, n a natural number, P = B[X₁,…,Xₙ], and J its variables ideal. Let f : P → C be a B-algebra map with f(J) ⊆ I. Assume the induced P/J² → C/I² is surjective. Then each induced P/Jᵏ → C/Iᵏ is surjective, for every natural k. No formal smoothness is assumed.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05D5, induction on finite truncations"
+ },
+ "proof": [
+  {
+   "text": "Proof: Write I = ker ε and J for the variables ideal. Since f preserves augmentation,\nsurjectivity modulo I² implies that every element of I is congruent modulo I² to\nf(p) for some p in J: the constant coefficient of p must vanish. Therefore every\nproduct of r elements of I is congruent modulo I^(r+1) to an image of a product of\nr elements of J. Expanding finite sums gives the same assertion for every element\nof I^r. Here coefficients in C can be replaced by their augmentations in B, since\nthe difference is in I. Start at degree one, where constants represent every class\nbecause c - algebraMap B C (ε c) lies in I. Given a representative modulo I^r,\ncorrect its error in I^r by the polynomial just constructed to obtain a representative\nmodulo I^(r+1). Degree zero is the zero quotient. This induction proves surjectivity\nfor every r, including n = 0 and the zero base ring; formal smoothness is not used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "K1",
+  "document": "Stacks Project",
+  "place": "Tag 05D5, finite-truncation induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity on quotients by ideal powers follows from surjectivity modulo the ideal square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism surjective modulo the square of an ideal is surjective modulo every ideal power",
+   "results": "8 hits: adic completion surjectivity and FormallySmooth.comp_surjective; no exact truncation result",
+   "date": "2026-10-13",
+   "verdict": "supporting results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap, Function.Surjective",
+   "results": "Ideal.quotientMap_surjective requires surjectivity of f, unavailable here; localization result irrelevant",
+   "date": "2026-10-13",
+   "verdict": "supporting results only"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*surjective|surjective.*pow|FormallySmooth.*lift",
+   "results": "25 supporting quotient and formal smoothness API hits, no exact result",
+   "date": "2026-10-13",
+   "verdict": "supporting results only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncations",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 05D5 completion paragraph in the depth-two local computation; surjective of finite truncations",
+   "via": [
+    "lem-sbc-formally-smooth-augmentation-truncations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncationsSurjective",
+  "file": "lean/Sheaf/RingTheory/Smooth/AugmentationPolynomialTruncationsSurjective.lean",
+  "declaration": "Algebra.bijective_augmented_polynomial_truncations_surjective",
+  "statement": "theorem bijective_augmented_polynomial_truncations_surjective\n    (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]\n    (ε : C →ₐ[B] B) (n : ℕ)\n    (f : MvPolynomial (Fin n) B →ₐ[B] C)\n    (hf : MvPolynomial.idealOfVars (Fin n) B ≤\n      (RingHom.ker ε.toRingHom).comap f.toRingHom)\n    (h₂ : Function.Surjective\n      (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ 2) f\n        ((pow_le_pow_left' hf 2).trans (Ideal.le_comap_pow f.toRingHom 2)))) :\n    ∀ k : ℕ, Function.Surjective\n      (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ k) f\n        ((pow_le_pow_left' hf k).trans (Ideal.le_comap_pow f.toRingHom k)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T125447-L-3875209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T125447-L-3875209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
