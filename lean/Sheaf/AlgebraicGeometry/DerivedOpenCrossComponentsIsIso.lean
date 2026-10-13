@@ -6,7 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso
 
 /-! # Invertible cross components of the open difference map
 
@@ -27,6 +27,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+-- Keep the original, unused rW let-binding in the statement unchanged.
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
@@ -39,24 +41,15 @@ Source: Stacks Project, Cohomology, Tag 08DG (lemma-glue), the restriction of th
 second arrow to U and V; Tag 08FE (lemma-restrict-direct-image).
 (blueprint: lem-sc-derived-open-cross-components-iso).
 
-Proof: first use the derived adjunctions obtained from exact open restriction.
-The open pushforwards are fully faithful, so their derived counits are invertible.
-By Tag 08FE the restriction of RjV_* B to U identifies with the pushforward from
-W = U ∩ V to U of B restricted to W. The same identification applies to the
-restriction of RjW_* (sV B) to U. Under these comparisons the adjoint b of the
-overlap counit is the identity: at the underived level all maps evaluate on the
-same intersection open, and the unit and counit cancel by their triangle identity.
-Compute the derived comparison on K-injective resolutions. Open restrictions
-preserve K-injectivity, so the same sectionwise identity represents rU(b).
-Thus rU(b) is invertible. The symmetric calculation identifies rV(a) with the
-pushforward from W to V of c, followed by the corresponding invertible comparison.
-It is invertible because c is an isomorphism. For adjunctions other than the
-canonical derived adjunctions, uniqueness of adjoints identifies their counits
-with the canonical ones followed by natural automorphisms; naturality and the
-triangle identities show that the adjoint components change by automorphisms
-on their source and target. Invertibility therefore holds for the adjunctions
-specified in the statement. When either open or W is empty the same calculations
-take place in the zero derived category, and no covering premise is used. -/
+Proof: apply `derived_open_intersection_mate_isIso` with O = U, P = V,
+and W = U ∩ V to obtain invertibility of rU(b). For the other component let
+f be the adjW-adjoint of eU.inv followed by sU of the U counit, with target
+RjW_*(sU A). The same theorem with O = V and P = U proves invertibility
+of rV(f), using commutativity of intersection. Naturality of adjW.homEquiv
+in its target identifies a with f followed by RjW_*(c.hom). Restriction
+preserves this composition and both factors are isomorphisms, so rV(a)
+is invertible. The single-mate theorem accepts arbitrary adjunctions and
+empty opens; no covering hypothesis or separate adjunction comparison is needed. -/
 theorem derived_open_cross_components_isIso
     (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -87,6 +80,24 @@ theorem derived_open_cross_components_isIso
       (eU.inv.app AU ≫ sU.map (adjU.counit.app A) ≫ c.hom);
     let b := adjW.homEquiv BV (sV.obj B)
       (eV.inv.app BV ≫ sV.map (adjV.counit.app B));
-    IsIso (rU.map b) ∧ IsIso (rV.map a) := by sorry
+    IsIso (rU.map b) ∧ IsIso (rV.map a) := by
+  dsimp only
+  constructor
+  · exact derived_open_intersection_mate_isIso X U V (U ⊓ V) rfl
+      (homOfLE inf_le_right) adjV adjW B
+  · let sU := (schemeOpenOverlapRestriction X
+        (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory
+    let eU := schemeDerivedOpenRestrictionCompIso X
+      (homOfLE inf_le_left : U ⊓ V ⟶ U)
+    let f := adjW.homEquiv ((schemeDerivedDirectImage U.ι).obj A) (sU.obj A)
+      (eU.inv.app _ ≫ sU.map (adjU.counit.app A))
+    have hf : IsIso ((schemeOpenRestriction X V).mapDerivedCategory.map f) :=
+      derived_open_intersection_mate_isIso X V U (U ⊓ V) (inf_comm U V)
+        (homOfLE inf_le_left) adjU adjW A
+    rw [← Category.assoc, adjW.homEquiv_naturality_right, Functor.map_comp]
+    change IsIso ((schemeOpenRestriction X V).mapDerivedCategory.map f ≫
+      (schemeOpenRestriction X V).mapDerivedCategory.map
+        ((schemeDerivedDirectImage (U ⊓ V).ι).map c.hom))
+    infer_instance
 
 end AlgebraicGeometry

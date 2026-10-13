@@ -15,34 +15,33 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-pc-restrict-derived-direct-image-open] to the open immersions of V and W, restricting to U. Identify both rU(RV B) and rU(RW(sV B)) with the derived pushforward of sV B from W to U. At the underived level, the canonical restriction map is the identity on sections over intersection opens. The eV comparison is precisely the equivalence-unit comparison from [def-pc-derived-open-restriction-maps]. After inserting this comparison, the definition of b by adjunction gives that sectionwise map, by the unit-counit triangle identity. Compute with K-injective resolutions; [lem-sc-derived-k-injective-restrict-open] ensures that the restrictions are K-injective. Thus rU(b) corresponds to an identity map and is invertible.",
+   "text": "Apply derived_open_intersection_mate_isIso [lem-sc-derived-open-intersection-mate-iso] with O=U, P=V, W=U∩V, inclusion W→V, adjV, adjW, and B. Its conclusion is exactly IsIso(rU.map b).",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "def-pc-derived-open-restriction-maps",
-    "lem-sc-derived-k-injective-restrict-open"
+    "lem-sc-derived-open-intersection-mate-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Interchange U and V in the preceding calculation. The U component a adds the derived pushforward of c to the canonical overlap restriction map. Under the Tag 08FE comparisons, rV(a) is this pushforward of c followed by the same identity comparison. Since functors preserve isomorphisms, it is invertible. Arbitrary choices of the three adjunction structures differ from the canonical derived adjunctions by natural automorphisms of their right adjoints. The homEquiv formula and naturality conjugate each component by the corresponding automorphisms, preserving invertibility. Empty opens and empty intersections use the same identity calculation in the zero category; no use of U union V = X is made.",
+   "text": "Define f as the adjW transpose of eU inverse followed by sU.map(adjU.counit at A), with target R_W(sU A). Apply [lem-sc-derived-open-intersection-mate-iso] with O=V, P=U, W=U∩V and the equality inf_comm U V to obtain IsIso(rV.map f). By CategoryTheory.Adjunction.homEquiv_naturality_right, a=f followed by R_W.map(c.hom). Functor.map_comp identifies rV.map a with rV.map f followed by rV.map(R_W.map c.hom). The second factor is an isomorphism because c is, and functors preserve isomorphisms. Hence the composition is an isomorphism. This argument works for the supplied arbitrary adjunctions and includes empty opens without a covering premise.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-derived-open-intersection-mate-iso",
     "def-pc-derived-open-restriction-maps",
     "def-pc-derived-direct-image"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-open-intersection-mate-iso",
   "def-pc-derived-open-restriction-maps",
-  "lem-sc-derived-k-injective-restrict-open",
   "def-pc-derived-direct-image"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "F2",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/08DG",
-  "place": "Restriction calculation of lemma-glue, expanded via Tag 08FE and naturality of adjunction choices"
+  "place": "Restriction of the two difference-arrow summands; reuse the single intersection mate and factor the A component through direct image of c by adjunction naturality."
  },
  "mathlib_match": null,
  "status": "split",
@@ -112,10 +111,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261013T111836-L-3047119",
-  "kind": "interface",
+  "landing": "20261013T115023-L-3323772",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

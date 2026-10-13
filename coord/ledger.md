@@ -12310,3 +12310,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/C2/Sheaf.AlgebraicGeometry.CanonicalTensorHomIdentityEvaluationCoherence (stage 3; reviewer PASS; first push; landing 20261013T115022-L-3323341 (proof); batch 20261013T115020; modules 1; new nodes 0)
 - 11:50 L: merged deliver/E3/Sheaf.RingTheory.FiniteLocalizationFreeStep (stage 3; reviewer PASS; first push; landing 20261013T115022-L-3323486 (interface); batch 20261013T115020; modules 3; new nodes 2)
 - 11:50 L: merged deliver/E4/Sheaf.RingTheory.PthRootCotangentDimension (stage 3; reviewer PASS; first push; landing 20261013T115023-L-3323598 (interface); batch 20261013T115020; modules 4; new nodes 3)
+- 11:50 L: merged deliver/F2/Sheaf.AlgebraicGeometry.DerivedOpenCrossComponentsIsIso (stage 3; reviewer PASS; first push; landing 20261013T115023-L-3323772 (proof); batch 20261013T115020; modules 1; new nodes 0)
