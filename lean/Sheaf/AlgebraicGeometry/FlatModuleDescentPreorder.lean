@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage
+import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
+import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
 
 /-! # Flat-module descent over a directed preorder
 
@@ -59,6 +63,35 @@ theorem exists_eventually_isFlatOver_of_isPullback_limit_preorder
     ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k)
       {Y : Scheme.{u}} (p : Y ⟶ Xi) (q : Y ⟶ Spec (R.obj k)),
       IsPullback p q f (Spec.map (R.map (homOfLE (hij.trans hjk)))) →
-      ((Scheme.Modules.tensorPullback p).obj M).IsFlatOver q := by sorry
+      ((Scheme.Modules.tensorPullback p).obj M).IsFlatOver q := by
+  let ac := pullback.fst f (c.π.app (op i))
+  let bc := pullback.snd f (c.π.app (op i))
+  have hcanon : ((Scheme.Modules.tensorPullback ac).obj M).IsFlatOver bc := by
+    exact (isFlatOver_tensorPullback_iff_of_isPullback hcart
+      (IsPullback.of_hasPullback f (c.π.app (op i))) M).mp hflat
+  obtain ⟨j, hij, hj⟩ :=
+    exists_isFlatOver_of_isPullback_limit_preorder_stage R c hc i f M hcanon
+  refine ⟨j, hij, ?_⟩
+  intro k hjk Y p q hq
+  let gj := Spec.map (R.map (homOfLE hij))
+  let gk := Spec.map (R.map (homOfLE (hij.trans hjk)))
+  let t := Spec.map (R.map (homOfLE hjk))
+  let aj := pullback.fst f gj
+  let bj := pullback.snd f gj
+  let N := (Scheme.Modules.tensorPullback aj).obj M
+  have : N.IsFinitePresentation :=
+    Scheme.Modules.isFinitePresentation_tensorPullback aj M
+  have hN : N.IsFlatOver bj := hj
+  have hbase := relativelyFlat_module_pullback bj t N hN
+  let d := pullback.fst bj t
+  let e := pullback.snd bj t
+  have hpaste : IsPullback (d ≫ aj) e f gk := by
+    have h := (IsPullback.of_hasPullback bj t).paste_horiz
+      (IsPullback.of_hasPullback f gj)
+    simpa [d, e, aj, bj, gj, gk, t, ← Spec.map_comp, ← R.map_comp] using h
+  obtain ⟨δ⟩ := Scheme.Modules.nonempty_tensorPullbackComp d aj
+  have hcomp : ((Scheme.Modules.tensorPullback (d ≫ aj)).obj M).IsFlatOver e :=
+    flatOver_of_iso e (δ.app M) hbase
+  exact (isFlatOver_tensorPullback_iff_of_isPullback hpaste hq M).mp hcomp
 
 end AlgebraicGeometry

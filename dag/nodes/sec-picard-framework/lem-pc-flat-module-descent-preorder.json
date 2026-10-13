@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "First use the unique isomorphism between the given cartesian square and the canonical fibre product to compare flatness of tensor pullback. Its two projections agree with a and b. The cartesian-model comparison theorem identifies the affine-section modules over each affine base open, hence transfers the given IsFlatOver hypothesis to the canonical pullback.",
+   "text": "Compare the assumed cartesian model with the canonical limit pullback and transfer relative flatness.",
    "uses": [
     "lem-pc-pullback-model-flatness-comparison",
     "def-pc-base-change"
@@ -25,39 +25,28 @@
    "elementary": false
   },
   {
-   "text": "The object i makes I nonempty, and directedness makes its thin category filtered. Choose a final functor F:J -> I from a nonempty directed partial order. Finality gives t in J and i <= F(t). Pull M back to X_i times Spec R_{F(t)}. This module is finitely presented, and its structure map is finitely presented by base change. Restrict the spectrum diagram and cone along F.op. The opposite of a final functor is initial, so restriction preserves the given limiting cone. Tensor-pullback composition and cartesian pasting identify the limit module with the original limit pullback. Apply the cartesian-model comparison to transfer flatness.",
+   "text": "Apply one-stage preorder flat-module descent to get j >= i and flatness of the canonical pullback at j.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-initial-functor-limit",
+    "lem-pc-flat-module-descent-preorder-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k >= j pull the canonical stage-j module back along Spec(R_j -> R_k). Tensor pullback preserves finite presentation and thus quasi-coherence, so relative-flatness base change applies. Paste the two cartesian squares and use functoriality of R and Spec to identify the composite base transition. Tensor-pullback composition transports flatness to the direct composite pullback of M. Finally compare this cartesian model with the arbitrary given square p,q.",
+   "uses": [
     "lem-pc-tensor-pullback-finite-presentation",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-pullback-model-flatness-comparison",
-    "def-pc-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the existing partial-order flat-module descent theorem to this fixed module, the restricted diagram and its limiting cone. Choose its eventual stage s >= t and put j=F(s). Functoriality and i <= F(t) give i <= j. Its module is flat over Spec R_j.",
-   "uses": [
-    "lem-pc-flat-module-descent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For any k >= j in I, base change from stage j along Spec(R_j -> R_k). Relative flatness is preserved by cartesian base change, and quasi-coherence is supplied by finite presentation. Tensor-pullback composition identifies this module with the pullback of M directly from stage i. Use cartesian-model flatness comparison to transfer to the given square p,q. This works for k outside the image of F; no choice of a lift of k is needed. Empty sources and the zero module cause no exception.",
-   "uses": [
     "lem-pc-relatively-flat-module-pullback",
-    "lem-pc-pullback-model-flatness-comparison",
     "lem-pc-module-pullback-identity-composition",
+    "lem-pc-pullback-model-flatness-comparison",
     "def-pc-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project, Tags 05LY, 0032, 01U8, 01JX and 0097",
-  "place": "Flat-module descent after final directed-poset reindexing; cartesian-model comparison and preservation to arbitrary later original stages"
+  "by": "worker",
+  "document": "Stacks Project, Tags 05LY, 0032, 01U8, 01JX, 0097",
+  "place": "One-stage existence followed by proved base-change propagation and cartesian-model comparison"
  },
  "mathlib_searches": [
   {
@@ -117,13 +106,11 @@
  },
  "proof_deps": [
   "def-pc-base-change",
-  "lem-pc-flat-module-descent",
+  "lem-pc-flat-module-descent-preorder-stage",
   "lem-pc-module-pullback-identity-composition",
   "lem-pc-pullback-model-flatness-comparison",
   "lem-pc-relatively-flat-module-pullback",
-  "lem-pc-tensor-pullback-finite-presentation",
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-initial-functor-limit"
+  "lem-pc-tensor-pullback-finite-presentation"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -139,9 +126,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T111922-L-3062733",
+  "landing": "20261013T121224-L-3506619",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
