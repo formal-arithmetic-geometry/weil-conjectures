@@ -11316,3 +11316,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/V2/Sheaf.RingTheory.GeometricallyRegularOverFieldFlat (stage 3; reviewer PASS; first push; landing 20261013T054242-L-451021 (interface); batch 20261013T054206; modules 2; new nodes 1)
 - 05:42 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Morphisms.FiniteFlatCodimensionOneEtaleNeighbourhood (stage 3; reviewer PASS; first push; landing 20261013T054243-L-451120 (interface); batch 20261013T054206; modules 4; new nodes 3)
 - 05:42 L: merged deliver/V3/Sheaf.CategoryTheory.ColimitSiteAbelianPairwiseEventualMatching (stage 3; reviewer PASS; after a return; landing 20261013T054243-L-451253 (interface); batch 20261013T054206; modules 2; new nodes 1)
+- 05:42 L: merged deliver/W2/Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra (stage 3; reviewer PASS; first push; landing 20261013T054244-L-451434 (interface); batch 20261013T054206; modules 5; new nodes 4)

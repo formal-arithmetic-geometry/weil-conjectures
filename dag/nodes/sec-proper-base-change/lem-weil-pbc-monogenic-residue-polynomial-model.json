@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-monogenic-residue-polynomial-model",
+ "kind": "statement",
+ "title": "Monic residue relation in a localized monogenic presentation",
+ "statement": "Let $R$ be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring] in universe $u$, $K$ its fraction field in universe $v$, $x\\in K$, $S=R[x]$, and $m$ a maximal ideal of $S$. There exist $s\\in S\\setminus m$, a normal Nagata domain $A$ and fraction field $L$, both in universe $\\max(u,v)$, $y\\in L$, an isomorphism $e:S_s\\simeq A[y]$ [def-weil-ring-localization-away], and a monic polynomial $f\\in A[X]$ [def-weil-polynomial-ring] of positive degree such that $f(y)$ belongs to the extension of $m$ along $S\\to S_s\\xrightarrow{e}A[y]$. No splitting condition is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "proof": [
+  {
+   "text": "Obtain a positive-degree p with p(x) in m and leading coefficient a outside m. Then a is nonzero. Apply the compatible principal localization model to a.",
+   "uses": [
+    "lem-weil-pbc-monogenic-residue-leading-relation",
+    "lem-weil-pbc-monogenic-principal-localization-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map p by the injective coefficient map c and multiply it by C(u^-1), where u is the unit c(a). leadingCoeff_mul and leadingCoeff_map_of_injective prove monicity; natDegree_C_mul and natDegree_map_eq_of_injective preserve the positive degree. The coefficient and generator equations of e, hom_eval2, and eval2_map identify evaluation of the mapped polynomial with the image of p(x). Ideal.mem_map_of_mem and multiplication by the inverse coefficient prove evaluation membership.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monogenic-residue-leading-relation",
+  "lem-weil-pbc-monogenic-principal-localization-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monogenic algebra maximal ideal polynomial relation leading coefficient nonzero residue",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion taken.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monogenic algebra maximal ideal residue generator monic polynomial after principal localization",
+   "results": "Found integral-element ideal lemmas and universal factorization lemmas, no exact model result.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.leadingCoeff_map_of_injective",
+   "results": "Found exact lemma; used together with monicity and degree calculations.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(split|monic)|finite_split|residue.*polynomial",
+   "results": "Existing AdjoinSingleton cover modules depend on this item; no usable acyclic residue model. Mathlib polynomial normalization and evaluation lemmas are used directly.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-finite-split-algebra",
+   "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5",
+   "via": [
+    "lem-weil-pbc-monogenic-finite-split-algebra",
+    "lem-weil-pbc-monogenic-splitting-polynomial-cover",
+    "lem-weil-pbc-monogenic-splitting-cover",
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MonogenicResiduePolynomialModel",
+  "file": "lean/Sheaf/RingTheory/MonogenicResiduePolynomialModel.lean",
+  "declaration": "exists_monogenic_residue_polynomial_model",
+  "statement": "theorem exists_monogenic_residue_polynomial_model (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K) (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] : ∃ (s : Algebra.adjoin R ({x} : Set K)), s ∉ m ∧ ∃ (A L : Type (max u v)) (_ : CommRing A) (_ : IsDomain A) (_ : IsIntegrallyClosed A) (_ : Field L) (_ : Algebra A L) (_ : IsFractionRing A L), IsNagataRing A ∧ ∃ (y : L) (e : Localization.Away s ≃+* Algebra.adjoin A ({y} : Set L)) (f : Polynomial A), f.Monic ∧ 0 < f.natDegree ∧ Polynomial.aeval (⟨y, Algebra.subset_adjoin (Set.mem_singleton y)⟩ : Algebra.adjoin A ({y} : Set L)) f ∈ m.map (e.toRingHom.comp (algebraMap _ (Localization.Away s)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

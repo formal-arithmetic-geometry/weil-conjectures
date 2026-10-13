@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Polynomial.Splits
+import Sheaf.RingTheory.MonogenicResiduePolynomialModel
+import Sheaf.RingTheory.MonogenicRelationFiniteSplitting
 
 /-! # Finite split coefficient extension before maximal localization
 Source: Stacks Project, Algebra, Tag 0334, Step 5.
@@ -52,4 +54,20 @@ theorem exists_adjoin_singleton_finite_split_algebra
             Polynomial.aeval
               (⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩ :
                 Algebra.adjoin R' ({z} : Set K')) f ∈
-              m.map (g.comp (algebraMap _ (Localization.Away s))) := by sorry
+              m.map (g.comp (algebraMap _ (Localization.Away s))) := by
+  obtain ⟨s, hs, A, L, instCR, instD, instIC, instF, instA, instFR, hA, y, e, f,
+      hf, hd, heval⟩ := exists_monogenic_residue_polynomial_model R K hR x m
+  let : CommRing A := instCR
+  let : IsDomain A := instD
+  let : IsIntegrallyClosed A := instIC
+  let : Field L := instF
+  let : Algebra A L := instA
+  let : IsFractionRing A L := instFR
+  obtain ⟨R', K', instCR', instD', instIC', instF', instA', instFR', hR', z, g,
+      hg, hgf, f', hf', hd', hs', heval'⟩ :=
+    exists_monogenic_relation_finite_splitting A L hA y
+      (m.map (e.toRingHom.comp (algebraMap _ (Localization.Away s)))) f hf hd heval
+  refine ⟨s, hs, R', K', instCR', instD', instIC', instF', instA', instFR', hR', z,
+    g.comp e.toRingHom, hg.comp e.injective, hgf.comp e.finite, f', hf', hd', hs', ?_⟩
+  simpa only [Ideal.map_map, RingHom.comp_assoc] using heval'
+

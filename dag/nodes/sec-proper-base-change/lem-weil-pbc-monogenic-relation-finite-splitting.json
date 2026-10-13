@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-monogenic-relation-finite-splitting",
+ "kind": "statement",
+ "title": "Finite split coefficient extension of a given monic relation",
+ "statement": "Let $R$ be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring] and $K$ its fraction field, both in universe $u$. For $x\\in K$, put $S=R[x]$, and let $I$ be any ideal of $S$. Given a monic polynomial $f\\in R[X]$ [def-weil-polynomial-ring] of positive degree with $f(x)\\in I$, there exist a normal Nagata domain $R\\prime$ with fraction field $K\\prime$, both in universe $u$, $z\\in K\\prime$, an injective finite map $g:S\\to R\\prime[z]$ [def-weil-finitely-generated-module], and a monic positive-degree polynomial $f\\prime\\in R\\prime[X]$ which splits over $R\\prime$ and whose evaluation at $z$ belongs to $I R\\prime[z]$ along $g$. No maximality assumption on $I$ is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "proof": [
+  {
+   "text": "Let F=Frac(R), q the coefficient image of f, and L=q.SplittingField. Mathlib supplies a finite field extension and splitting of q. Put C=integralClosure R L. NagataDomainN2 supplies Module.Finite R C. Mathlib integral-closure finite-extension results make C normal with fraction field L; finite Nagata ascent makes C Nagata.",
+   "uses": [
+    "lem-weil-pbc-nagata-domain-n2",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map K into L through its fraction-field equivalence with F; let z be the image of x and restrict to an injective map g:S -> C[z]. The tensor map S tensor_R C -> C[z] is surjective: adjoin induction produces a preimage for z from x tensor 1 and for each coefficient from 1 tensor c. Module.Finite.base_change and of_surjective show g finite.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set fprime=f.map (algebraMap R C). Every root of its image in L lies in C by roots_mem_integralClosure. Splits.of_splits_map_of_injective descends splitting. The injective coefficient map preserves monicity and degree. aeval_map_algebraMap and aeval_algHom_apply identify fprime(z) with g(f(x)), which is in I.map g by mem_map_of_mem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite splitting field integral closure of Nagata ring monic polynomial",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion taken.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monic polynomial over a Nagata domain splitting in a finite integral extension",
+   "results": "Found monic splitting-extension lemmas; actual proof uses Polynomial.SplittingField.splits and integral-closure roots.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic.exists_splits_map",
+   "results": "Found finite free splitting ring theorem. It does not assert domain/normality, so use the finite splitting field and integral closure instead.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*adjoin|adjoin.*finite|splits.*integralClosure|roots.*isIntegral",
+   "results": "Found base-change finiteness in TensorProduct.Finite, roots_mem_integralClosure and Splits.of_splits_map_of_injective; used directly.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-finite-split-algebra",
+   "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5",
+   "via": [
+    "lem-weil-pbc-monogenic-finite-split-algebra",
+    "lem-weil-pbc-monogenic-splitting-polynomial-cover",
+    "lem-weil-pbc-monogenic-splitting-cover",
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MonogenicRelationFiniteSplitting",
+  "file": "lean/Sheaf/RingTheory/MonogenicRelationFiniteSplitting.lean",
+  "declaration": "exists_monogenic_relation_finite_splitting",
+  "statement": "theorem exists_monogenic_relation_finite_splitting (R : Type u) (K : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K) (I : Ideal (Algebra.adjoin R ({x} : Set K))) (f : Polynomial R) (hf : f.Monic) (hd : 0 < f.natDegree) (heval : Polynomial.aeval (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set K)) f ∈ I) : ∃ (R' K' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : IsIntegrallyClosed R') (_ : Field K') (_ : Algebra R' K') (_ : IsFractionRing R' K'), IsNagataRing R' ∧ ∃ (z : K') (g : Algebra.adjoin R ({x} : Set K) →+* Algebra.adjoin R' ({z} : Set K')), Function.Injective g ∧ g.Finite ∧ ∃ f' : Polynomial R', f'.Monic ∧ 0 < f'.natDegree ∧ f'.Splits ∧ Polynomial.aeval (⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩ : Algebra.adjoin R' ({z} : Set K')) f' ∈ I.map g",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

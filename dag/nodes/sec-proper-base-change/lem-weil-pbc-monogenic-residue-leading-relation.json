@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-monogenic-residue-leading-relation",
+ "kind": "statement",
+ "title": "Residue relation with nonvanishing leading coefficient",
+ "statement": "Let $R$ be a commutative ring and $B$ a commutative $R$-algebra, $x\\in B$, $S=R[x]\\subset B$, and $m$ a maximal ideal of $S$. There is a polynomial $p\\in R[X]$ [def-weil-polynomial-ring] of positive degree such that the image in $S$ of its leading coefficient does not belong to $m$, and $p(x)\\in m$. No domain, normality or Nagata hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "proof": [
+  {
+   "text": "Contract m to n in R and embed A=R/n in the field k=S/m. Extend this embedding across F=Frac(A). The finite-type R-algebra k is also finite type over F by restriction-of-scalars descent of generators. Apply Zariski's lemma to get Module.Finite F k.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib IsFractionRing.comap_isAlgebraic_iff makes k algebraic over A. Take a nonzero q over A annihilating the image of x. Its degree is positive by natDegree_pos_of_aeval_root and the injective map A -> k. Polynomial.exists_natDegree_eq_of_mem_lifts lifts q to p over R of the same degree. The equality on the coefficient at this degree shows that the leading coefficient of p is nonzero modulo n. Evaluation commutes with the quotient map, so p(x) is in m. These are the explicit Lean coefficient and evaluation calculations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monogenic algebra maximal ideal polynomial relation leading coefficient nonzero residue",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion taken.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "maximal ideal monogenic algebra generator algebraic residue field localization monic relation",
+   "results": "Residue-field instances and quotient residue field bijectivity found; no exact leading-relation result.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.leadingCoeff_map_of_injective",
+   "results": "Found exact coefficient-map lemma, used in polynomial normalization.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "isAlgebraic_iff|comap_isAlgebraic|map_surjective|exists_degree_eq_of_mem_lifts",
+   "results": "Found IsFractionRing.comap_isAlgebraic_iff, Polynomial.exists_natDegree_eq_of_mem_lifts, natDegree_pos_of_aeval_root and the finite-type Zariski lemma.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-finite-split-algebra",
+   "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5",
+   "via": [
+    "lem-weil-pbc-monogenic-finite-split-algebra",
+    "lem-weil-pbc-monogenic-splitting-polynomial-cover",
+    "lem-weil-pbc-monogenic-splitting-cover",
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MonogenicResidueLeadingRelation",
+  "file": "lean/Sheaf/RingTheory/MonogenicResidueLeadingRelation.lean",
+  "declaration": "exists_monogenic_residue_leading_relation",
+  "statement": "theorem exists_monogenic_residue_leading_relation (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] (x : B) (m : Ideal (Algebra.adjoin R ({x} : Set B))) [m.IsMaximal] : ∃ p : Polynomial R, 0 < p.natDegree ∧ algebraMap R (Algebra.adjoin R ({x} : Set B)) p.leadingCoeff ∉ m ∧ Polynomial.aeval (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set B)) p ∈ m",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

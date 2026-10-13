@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-monogenic-principal-localization-model",
+ "kind": "statement",
+ "title": "Compatible monogenic presentation after principal localization",
+ "statement": "Let $R$ be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring] in universe $u$, $K$ its fraction field in universe $v$, $x\\in K$, $S=R[x]$, and $a\\in R\\setminus\\{0\\}$. There exist a normal Nagata domain $A$ and fraction field $L$, both in universe $\\max(u,v)$, $y\\in L$, an injective map $c:R\\to A$ with $c(a)$ a unit, and an isomorphism $e:S_{a}\\simeq A[y]$ [def-weil-ring-localization-away]. For every $r\\in R$, $e(r/1)$ is the coefficient image of $c(r)$, and $e(x/1)=y$.",
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "proof": [
+  {
+   "text": "Let B=R_a. Domain and normality follow from the explicit Mathlib lemmas IsLocalization.Away.isDomain and isIntegrallyClosed_of_isLocalization; Tag 032U supplies Nagata. Embed B in K by mapToFractionRing and apply isFractionRing_of_isLocalization.",
+   "uses": [
+    "lem-weil-pbc-nagata-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set A=ULift B in universe max(u,v). Transport normality and the fraction-field property through ULift.ringEquiv. The bijective map B -> A is finite; finite Nagata ascent makes A Nagata. Set L=Frac(A) and use IsLocalization.algEquiv to identify K with L over A.",
+   "uses": [
+    "lem-weil-pbc-finite-over-nagata-nagata"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the field equivalence to g:S -> A[y]. Since g(a) is a unit, extend g to e0:S_a -> A[y]. IsLocalization.lift_injective_iff and the two injective embeddings show e0 injective. Map B to S_a by coefficient localization and then A to S_a by ULift.down. Localization ringHom_ext on R proves that its composite with e0 is the coefficient inclusion. The generator y is also in the range. Algebra.adjoin_induction proves surjectivity, so bundle e0 as a ring equivalence. The lift equations prove both compatibility identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-finite-over-nagata-nagata"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monogenic algebra maximal ideal polynomial relation leading coefficient nonzero residue",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion taken.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "principal localization monogenic algebra isomorphic to adjoin over localized coefficient ring",
+   "results": "Found Localization.awayEquivAdjoin and presentation of localization by an adjoined inverse; no exact compatible fractional-monogenic model.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.lift",
+   "results": "Found lift, lift_eq, lift_comp and liftAlgHom; lift and lift_eq used.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_of_base_ringEquiv|lift_injective_iff|ringHom_ext",
+   "results": "Found localization injectivity/extensionality; also searched AsSubring, FractionRing and IntegrallyClosed for fraction-field and ULift transport.",
+   "verdict": "partial matches",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonFiniteSplitAlgebra",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-finite-split-algebra",
+   "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5",
+   "via": [
+    "lem-weil-pbc-monogenic-finite-split-algebra",
+    "lem-weil-pbc-monogenic-splitting-polynomial-cover",
+    "lem-weil-pbc-monogenic-splitting-cover",
+    "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+    "lem-weil-pbc-monogenic-maximal-finite-cover",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MonogenicPrincipalLocalizationModel",
+  "file": "lean/Sheaf/RingTheory/MonogenicPrincipalLocalizationModel.lean",
+  "declaration": "exists_monogenic_principal_localization_model",
+  "statement": "theorem exists_monogenic_principal_localization_model (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K) (a : R) (ha : a ≠ 0) : ∃ (A L : Type (max u v)) (_ : CommRing A) (_ : IsDomain A) (_ : IsIntegrallyClosed A) (_ : Field L) (_ : Algebra A L) (_ : IsFractionRing A L), IsNagataRing A ∧ ∃ (y : L) (c : R →+* A), Function.Injective c ∧ IsUnit (c a) ∧ ∃ e : Localization.Away (algebraMap R (Algebra.adjoin R ({x} : Set K)) a) ≃+* Algebra.adjoin A ({y} : Set L), (∀ r : R, e (algebraMap _ _ (algebraMap R (Algebra.adjoin R ({x} : Set K)) r)) = algebraMap A _ (c r)) ∧ e (algebraMap _ _ (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set K))) = (⟨y, Algebra.subset_adjoin (Set.mem_singleton y)⟩ : Algebra.adjoin A ({y} : Set L))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T054244-L-451434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
