@@ -1,0 +1,164 @@
+{
+ "id": "lem-sbc-strict-hensel-root-tame-normalization",
+ "kind": "statement",
+ "title": "Finite tame normalization over a supplied root divisor",
+ "statement": "Let $i:U\\to L$ be a morphism of schemes [def-weil-pbc-scheme-conventions], $G$ a finite group and $W\\to U$ a finite etale $G$-torsor [def-sbc-normal-dominant-galois]. Let $R$ be a commutative regular ring [def-weil-regular-scheme], $\\varphi:\\operatorname{Spec}R\\to L$, and $f\\in R$ a nonzerodivisor with $R/(f)$ regular. Suppose $|G|$ is a unit in $R$. Assume $\\beta:U\\times_L\\operatorname{Spec}R\\cong D(f)$ commutes with the projection to $\\operatorname{Spec}R$ [def-pc-fibre-product]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ be a geometric point [def-weil-geometric-point], $H$ its canonical strict henselization coordinate-ring colimit [def-weil-pbc-strict-henselization-limit], and $b:R\\to H$ a map inducing its structural morphism [def-weil-pbc-strict-henselization-structural-map]. Put $g=b(f)$, $n_0=|G|$, $A=H[T]/(T^{n_0}-g)$, $N=\\operatorname{Spec}A$, $q:N\\to\\operatorname{Spec}H$ the algebra structural morphism, and $V=D(g)\\subset N$. Assume $g$ is not a unit. Suppose moreover that $N$ is locally Noetherian, and fix a regular integral scheme $D$ [def-pc-integral-scheme], an effective Cartier centre $j:D\\to N$ [def-nagata-effective-cartier-ideal] such that $z\\in V$ if and only if $z\\notin j(D)$ for every $z\\in N$, and a point $\\eta\\in D$ whose closure is all of $D$. Then there are a scheme $C$, a finite morphism $a:C\\to N$ [def-weil-finite-integral-morphism] etale over $V$ [def-weil-etale-morphism], an open $O\\subset N$ containing $j(\\eta)$ over which $a$ is etale, and an isomorphism $\\zeta:(a^{-1}V)\\cong W\\times_L V$ commuting with the projections to $V$. The map $V\\to L$ is $V\\hookrightarrow N\\xrightarrow q\\operatorname{Spec}H\\xrightarrow{\\operatorname{Spec}b}\\operatorname{Spec}R\\xrightarrow\\varphi L$. No divisor construction, purity or global etaleness is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), 0EYG (pione-lemma-abhyankar-one-divisor) and 0EYH (pione-lemma-extend-tame-covering-normal)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The canonical ring H and its quotient by g are regular local. Flatness preserves the regular g. The root ring is local with regular root coordinate and regular quotient; its generic divisor local ring is a DVR. The supplied regular integral Cartier divisor has the same support and is reduced, so its generic point agrees with that of the root divisor.",
+   "uses": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back W over D(f) using beta. Every connected generic component of this torsor has Galois group a stabilizer in G. The Galois degree formula of 09EB makes the ramification and residue degrees divide the stabilizer order and hence |G|. Invertibility excludes residue-characteristic factors, so the extension is tame. At the divisor generic point, adjoining the group-order root has ramification index |G|. Abhyankar 0BRM kills every component ramification index and gives separable residue extensions.",
+   "uses": [
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tame normalization 0EYH (pione-lemma-extend-tame-covering-normal) after the root base change. This gives finiteness and an identification over V. Abhyankar 0BRM gives etaleness over j(eta). The finite morphism is finitely presented over the Noetherian N. Its nonetale locus is closed, and its image is closed by finiteness and omits j(eta). Take O to be the complement of that image. The identification over V gives zeta and its projection equation.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-sbc-strict-hensel-regular-divisor-quotient"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F2",
+  "document": "Stacks Project",
+  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), 0EYG (pione-lemma-abhyankar-one-divisor) and 0EYH (pione-lemma-extend-tame-covering-normal)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEffectiveCartierCenter|normalization.*[Ff]inite|strictHenselization.*[Rr]egular",
+   "date": "2026-10-13",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/RingTheory/Valuation/Extension.lean, Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean",
+   "verdict": "No exact statement; only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular Cartier divisor in a root algebra over a strict henselization and finite tame normalization",
+   "date": "2026-10-13",
+   "results": "8 hits: Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt', Algebra.IsStandardEtale, PowerSeries.isDistinguishedAt_weierstrassDistinguished, Algebra.IsEtaleAt, StandardEtalePair, HenselianRing.is_henselian, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "verdict": "No exact statement; only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, Polynomial.Monic",
+   "date": "2026-10-13",
+   "results": "12 hits: AdjoinRoot.isIntegral_of_monic, AdjoinRoot.powerBasis', AdjoinRoot.isIntegral_root', AdjoinRoot.nontrivial_iff_of_monic, AdjoinRoot.powerBasis'_gen, AdjoinRoot.powerBasis'_dim, Polynomial.Monic.finite_adjoinRoot, Polynomial.Monic.free_adjoinRoot",
+   "verdict": "No exact statement; only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*quotient|quotient.*strictHensel|IsRegularRing.*strict",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact statement; only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization preserves regularity and quotient by a regular divisor",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of the strict henselization of a regular ring by a nonunit regular divisor is a regular local domain",
+   "date": "2026-10-13",
+   "results": "8 hits: PreTilt.isDomain, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal, HenselianLocalRing.TFAE, instIsFractionRingQuotientIdealResidueField, Field.henselian",
+   "verdict": "No exact statement; only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, IsDomain",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact statement; only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph, strictly henselian root calculation: kill ramification by the group-order root and normalize the punctured cover near the divisor generic point.",
+   "via": [
+    "lem-sbc-strict-hensel-root-purity-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootTameNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootTameNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.strict_hensel_root_tame_normalization",
+  "statement": "theorem GaloisCover.strict_hensel_root_tame_normalization\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → IsLocallyNoetherian N →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∃ (C : Scheme.{u}) (n : C ⟶ N),\n        IsFinite n ∧ Etale (n ∣_ V) ∧\n        ∃ (O : N.Opens), j η ∈ O ∧ Etale (n ∣_ O) ∧\n        ∃ ζ : (n ⁻¹ᵁ V).toScheme ≅\n            pullback (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ),\n          ζ.hom ≫ pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) =\n            n ∣_ V",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T145119-L-695797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T145119-L-695797",
+  "kind": "interface"
+ }
+}
