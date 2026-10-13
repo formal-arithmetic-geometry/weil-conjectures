@@ -13041,3 +13041,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:54 L: returned deliver/W3/Sheaf.RingTheory.EtaleTripleToStrictHenselizationCompletionFlat (reviewer RETURN: (reviewer X-7dda8, head 7dda86012) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.EtaleTrip)
 - 15:59 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction (stage 3; reviewer PASS; first push; landing 20261013T155928-L-1300907 (interface); batch 20261013T155927; modules 3; new nodes 2)
 - 15:59 L: merged deliver/B4/Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification (stage 3; reviewer PASS; first push; landing 20261013T155929-L-1301024 (interface); batch 20261013T155927; modules 2; new nodes 1)
+- 15:59 L: merged deliver/C1/Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullbackCore (stage 3; reviewer PASS; first push; landing 20261013T155929-L-1301174 (proof); batch 20261013T155927; modules 1; new nodes 0)

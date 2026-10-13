@@ -14,11 +14,23 @@
  },
  "proof": [
   {
-   "text": "Apply the two-open sheaf axiom to the intersections with T after the section-restriction comparison.",
+   "text": "At a test open T put P(A) = image under A.ι of its preimage of T. The direct image of overFunctorEquiv, evaluated at T and forgotten to types, gives a concrete equivalence e(A) from the transported image sections to M(P(A)). By lem-pc-open-module-image-section-restriction these equivalences conjugate every transported restriction into the ordinary restriction on P(A).",
    "uses": [
     "lem-pc-open-module-image-section-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "The image-preimage formula gives P(A) = A intersect T. Distributivity therefore identifies P(U union V) with P(U) union P(V), and associativity and idempotence identify P(U intersect V) with P(U) intersect P(V). Apply Mathlib TopCat.Sheaf.isLimitPullbackCone to the underlying sheaf of abelian groups of M and forget to types. The private helper ordinary_gluing_pullback specializes this proved Mathlib result using equality substitution for the union and intersection opens.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the compatibility equation by e(U intersect V). Types.exists_of_isPullback gives the ordinary amalgamation; apply the inverse of e(U union V). The section-restriction comparison and injectivity of e(U) and e(V) verify the two restriction equations. Types.ext_of_isPullback and injectivity of e(U union V) prove uniqueness. All comparisons are isomorphisms, so this also treats empty, coinciding, and nested opens.",
+   "uses": [
+    "lem-pc-open-module-image-section-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,10 +38,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
+  "group": "C1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "note": "Intermediate existence-and-uniqueness statement for parent pullback."
+  "place": "Tags 01EB and 08BV, sheaf gluing on a two-open union",
+  "note": "Complete Lean proof using the proved section-restriction comparison and existing Mathlib sheaf gluing and limit-reflection theorems. No new holes."
  },
  "mathlib_searches": [
   {
@@ -99,10 +112,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T153935-L-1123242",
-  "kind": "interface",
+  "landing": "20261013T155929-L-1301174",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

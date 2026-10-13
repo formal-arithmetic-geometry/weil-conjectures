@@ -14,22 +14,33 @@
  },
  "proof": [
   {
-   "text": "Use naturality and the module operations to assemble the sectionwise amalgamations into a sheaf morphism, then verify the pullback universal property.",
+   "text": "Prove the private helper imageRestriction_comp by sheaf-morphism extensionality. At a test open, apply the injective direct-image comparison at W; the section-restriction formula reduces composition of transported restrictions to PresheafOfModules.map_comp_apply and uniqueness of inclusion morphisms. Apply this twice to get commutativity of the square.",
    "uses": [
-    "lem-pc-open-union-module-image-pullback-core-sectionwise"
+    "lem-pc-open-module-image-section-restriction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each test open use the supplied hypothesis h, rather than invoke the sectionwise-gluing theorem: existence gives surjectivity onto compatible pairs, and uniqueness identifies any two sections with equal images. Together with commutativity, Mathlib Types.isPullback_iff gives the pullback after forgetting modules to types. IsPullback.of_map_of_faithful reflects it to the category of modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "PresheafOfModules.evaluationJointlyReflectsLimits assembles the evaluated pullback cones into a limiting cone of module presheaves; PullbackCone.isLimitMapConeEquiv identifies each evaluated cone with the corresponding pullback cone. Finally the fully faithful SheafOfModules.forget reflects the pullback to module sheaves. These are existing proved Mathlib limit-reflection results, so no intermediate existence or naturality theorem is left unproved.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-union-module-image-pullback-core-sectionwise"
+  "lem-pc-open-module-image-section-restriction"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
+  "group": "C1",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "note": "Intermediate existence-and-uniqueness statement for parent pullback."
+  "place": "Tags 01EB and 08BV, sheaf gluing on a two-open union",
+  "note": "Complete Lean proof using the proved section-restriction comparison and existing Mathlib sheaf gluing and limit-reflection theorems. No new holes."
  },
  "mathlib_searches": [
   {
@@ -99,10 +110,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T153935-L-1123242",
-  "kind": "interface",
+  "landing": "20261013T155929-L-1301174",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
