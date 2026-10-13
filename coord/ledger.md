@@ -13650,3 +13650,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:56 L: merged deliver/E1/Sheaf.RingTheory.SelfTorConormalComparisonTateConstruction (stage 3; reviewer PASS; first push; landing 20261013T215601-L-896627 (interface); batch 20261013T215553; modules 4; new nodes 3)
 - 21:56 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ConstantAbelianHigherDirectImageFilteredColimit (stage 3; reviewer PASS; first push; landing 20261013T215601-L-896862 (interface); batch 20261013T215553; modules 3; new nodes 2)
 - 21:56 L: merged deliver/E3/Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion (stage 3; reviewer PASS; first push; landing 20261013T215602-L-897109 (interface); batch 20261013T215553; modules 3; new nodes 2)
+- 21:56 L: merged deliver/F1/Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos (stage 3; reviewer PASS; first push; landing 20261013T215602-L-897314 (interface); batch 20261013T215553; modules 3; new nodes 2)

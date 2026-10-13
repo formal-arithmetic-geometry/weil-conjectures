@@ -12,10 +12,13 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.AlgebraicGeometry.AffineBaseChangeSchemeComparisons
+import Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons
 public import Sheaf.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import Sheaf.AlgebraicGeometry.AffineModelComparisonData
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
 
 /-! # Coherent geometric isomorphisms of specified affine models
 Source: Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S.
@@ -25,6 +28,32 @@ Source: Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S.
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+
+private theorem exists_pair_of_nonempty {A : Sort u} {B : A → Sort w}
+    (h : ∃ a, Nonempty (B a)) : ∃ a, ∃ _ : B a, True := by
+  obtain ⟨a, ⟨b⟩⟩ := h
+  exact ⟨a, b, trivial⟩
+
+/-- The upper support bound of a projective complex gives native K-flatness.
+Source: Stacks Project, Tag 064K; the proved upstream bounded-flat criterion. -/
+private theorem boundedProjective_isKFlat
+    {A : Type u} [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (M.X n))
+    (hproj : ∀ n : ℤ, Module.Projective A (M.X n)) :
+    (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M := by
+  obtain ⟨a, b, hb⟩ := hbounded
+  have : M.IsStrictlyLE b := (M.isStrictlyLE_iff b).2 (fun n hn ↦ hb n (Or.inr hn))
+  have (X : ModuleCat.{u} A) : PreservesColimitsOfShape ℤ
+      ((MonoidalCategory.curriedTensor (ModuleCat.{u} A)).flip.obj X) :=
+    inferInstanceAs (PreservesColimitsOfShape ℤ (MonoidalCategory.tensorRight X))
+  have : HasExactColimitsOfShape ℤ (ModuleCat.{u} A) :=
+    HasExactColimitsOfShape.of_domain_equivalence (ModuleCat.{u} A)
+      (AsSmall.equiv (C := ℤ)).symm
+  apply CochainComplex.kFlat_of_isStrictlyLE_of_flat M b
+  intro n
+  apply (ModuleCat.flat_iff_flat (M.X n)).2
+  have : Module.Projective A (M.X n) := hproj n
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -46,7 +75,7 @@ Proof:
    The colimit injections correspond to the prescribed arrows of pullbacks.
 3. Extend E₀ and K₀ along r and the subsequent structural maps. These remain
    bounded projective, hence termwise flat. The upper support bound and
-   acyclic_mapBifunctor_of_boundedAbove_flat (Tag 064K) imply K-flatness.
+   kFlat_of_isStrictlyLE_of_flat (Tag 064K) imply K-flatness.
    Termwise tilde/base-change, followed by
    the K-flat derived-pullback counit, supplies natural comparison isomorphisms.
    Compose with the pushout/pullback isomorphisms, with the localization comparison
@@ -101,6 +130,22 @@ theorem exists_affineBaseChangeModelComparisonIsos
     let r := affineBaseChangeInitialMap R i Y s t
     let E := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀
     let K := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀
-    affineModelComparisonData R c i Y s P Q F (colimit.cocone F) E K := by sorry
+    affineModelComparisonData R c i Y s P Q F (colimit.cocone F) E K := by
+  classical
+  let F := affineBaseChangeRingDiagram R i Y s t
+  let C := colimit.cocone F
+  let r := affineBaseChangeInitialMap R i Y s t
+  obtain ⟨σ, τ, hgeom⟩ := exists_affineBaseChangeSchemeComparisons R c hc i Y s t
+  let E := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀
+  let K := ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀
+  have hstage (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :=
+    exists_pair_of_nonempty (Scheme.exists_scheme_iso_derived_equivalence.{u, w, w} (σ j))
+  choose d hd htrivial using hstage
+  obtain ⟨dlim, ⟨hdlim⟩⟩ := Scheme.exists_scheme_iso_derived_equivalence.{u, w, w} τ
+  have hEf := boundedProjective_isKFlat E₀ hE.1 (fun n ↦ (hE.2 n).2)
+  have hKf := boundedProjective_isKFlat K₀ hK.1 (fun n ↦ (hK.2 n).2)
+  change affineModelComparisonData R c i Y s P Q F C E K
+  with_reducible exact (exists_affineBaseChangeModelIsosOfSchemeComparisons
+    R c i Y s t e he P Q E₀ K₀ hEf hKf hPE hQK F C r E K rfl rfl σ τ hgeom d dlim hd hdlim)
 
 end AlgebraicGeometry

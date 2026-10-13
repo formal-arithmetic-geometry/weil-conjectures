@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-affine-base-change-model-isos-of-scheme-comparisons",
+ "kind": "statement",
+ "title": "Model isomorphisms over fixed compatible scheme transports",
+ "statement": "Let I be a preorder, R:I→CommRing a diagram, c a cocone, i∈I, Y an affine scheme [def-pc-scheme], and s:Y→Spec R(i). Assume scheme derived categories [def-pc-derived-category], t:Spec Γ(Y)≅Y, and e:D(O_Spec Γ(Y))≌D(O_Y) with a natural localization comparison he:Q⋙e.functor≅(termwise pushforward along t.hom)⋙Q. Let P,Q∈D(O_Y), and E₀,K₀ complexes of Γ(Y)-modules satisfying the native K-flat predicate [def-pc-module-kflat-complex] (equivalently, tensoring any acyclic Γ(Y)-complex with either one and totalizing yields an acyclic complex) with specified isomorphisms e.inverse(P)≅Q(tilde E₀) and e.inverse(Q)≅Q(tilde K₀). Let F be ANY diagram of rings on the upper tail, C ANY cocone, and r:Γ(Y)→F(i). Specify complexes E,K and equalities E=r*E₀ and K=r*K₀. Specify stage and limit scheme isomorphisms σ,τ whose first projections equal Spec of the r-structural ring maps followed by t, and which commute with every finite and limit base-change arrow. Specify d(j) and dlim and localization comparisons hd,hdlim identifying these derived equivalences with termwise pushforward along σ(j).hom and τ.hom, as in [lem-pc-scheme-iso-derived-equivalence]. Then affineModelComparisonData(R,c,i,Y,s,P,Q,F,C,E,K) [def-pc-affine-model-comparison-data] holds, including the four model-to-geometric-pullback isomorphisms and the two conjugated scalarExtensionHom equations [def-pc-complex-scalar-extension-hom] for the pinned perfectStageMap/perfectLimitMap [lem-pc-perfect-hom-transport]. The natural construction uses the supplied derived transports as witnesses, though the conclusion only asserts the existing existential proposition. Neither directedness, a colimit property nor a categorical pushout construction of F is needed beyond the supplied compatible scheme identifications.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Lemma 36.3.8(2), Tag 09RE affine calculation and Tag 0D5S for composition; Tag 06Y1 for scalar extension of K-flat complexes"
+ },
+ "stmt_deps": [
+  "def-pc-affine-model-comparison-data",
+  "def-pc-complex-scalar-extension-hom",
+  "def-pc-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-scheme",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-scheme-iso-derived-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Use hEr,hKr to rewrite E,K to the specified scalar extensions. The native K-flat hypotheses imply the acyclic-tensor criterion by HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic. Apply acyclic_mapBifunctor_extendScalars_of_kFlat along r and each stage/cocone map; no boundedness, finite-generation or ring-map flatness is needed for this preservation.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-kflat-extension-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedPullback_tilde_kFlat_natIso on each structural ring map and reassociate scalar extensions with ModuleCat.extendScalarsComp. The first-projection equations identify the corresponding affine scheme morphisms with the geometric projections after σ or τ. Compose localization comparisons hd,hdlim,he with hPE,hQK and the counit of e to obtain the four model isomorphisms in the fixed target categories. Package these isomorphisms using the supplied d,dlim in the existing affineModelComparisonData proposition, rather than duplicating its expanded formula.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality at an arbitrary stage chain map f, using the affine comparison for the j→k or j→C.pt map, rather than requiring f to descend from Γ(Y). The transition equations for σ,τ identify those affine maps with geometric base-change arrows. Counit characterization identifies the composition comparisons with perfectHomComposition; scalar-extension associativity gives exactly scalarExtensionHom. Cancel comparison/inverse pairs to obtain the finite and limit identities. Zero rings and complexes and non-flat ring maps cause no exception.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-perfect-hom-transport",
+    "def-pc-complex-scalar-extension-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-complex-scalar-extension-hom",
+  "def-pc-module-kflat-complex",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-perfect-hom-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Lemma 36.3.8(2), Tag 09RE affine calculation and Tag 0D5S for composition; expansion of lem-pc-affine-base-change-model-comparison-isos into the categorical transport and complex comparison steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a K-flat complex of modules on affine schemes is extension of scalars, naturally on chain maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural affine derived pullback comparison on K-flat complexes compatible with composition and extension of scalars",
+   "results": "PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, flat_appLE, and generic sheaf pullback results",
+   "date": "2026-10-14",
+   "verdict": "No theorem combining diagram transports and bounded model isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "ModuleCat.extendScalarsComp, extendScalars_assoc, extendScalars_assoc' and homEquiv_extendScalarsComp",
+   "date": "2026-10-14",
+   "verdict": "Use natural scalar-extension associativity for the comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionHom|derivedPullback_tilde_kFlat_natIso|acyclic_mapBifunctor_of_boundedAbove_flat",
+   "results": "Existing ScalarExtensionHom, AffineDerivedPullbackTensorTilde, BoundedFlatKFlat and PerfectHomTransport modules provide the individual APIs; no combined model statement.",
+   "date": "2026-10-14",
+   "verdict": "Keep these dependencies for the model-comparison construction."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_of_isStrictlyLE_of_flat|kFlat_quotient_obj_iff|kFlat_iff_preserves_acyclic",
+   "results": "Proved upstream KFlat.lean contains all three; existing DAG def-pc-module-kflat-complex records the native predicate.",
+   "date": "2026-10-14",
+   "verdict": "Reuse the native predicate and bounded-flat theorem rather than expanding tensor totalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos",
+  "date": "2026-10-14",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-pc-affine-base-change-model-comparison-isos, proof steps 2–3",
+   "via": [
+    "lem-pc-affine-base-change-model-comparison-isos"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeModelIsosOfSchemeComparisons.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeModelIsosOfSchemeComparisons",
+  "statement": "theorem exists_affineBaseChangeModelIsosOfSchemeComparisons\n    {I : Type u} [Preorder I]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)\n    (i : I) (Y : Scheme.{u}) [IsAffine Y] (s : Y ⟶ Spec (R.obj i))\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (t : Spec (Scheme.Γ.obj (.op Y)) ≅ Y)\n    (e : schemeDerivedCategory (Spec (Scheme.Γ.obj (.op Y))) ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward t.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (P Q : schemeDerivedCategory Y)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (Scheme.Γ.obj (.op Y))) ℤ)\n    (hE : (HomologicalComplex.quasiIso (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n      (.up ℤ)).kFlat E₀)\n    (hK : (HomologicalComplex.quasiIso (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n      (.up ℤ)).kFlat K₀)\n    (hPE : e.inverse.obj P ≅ DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (Scheme.Γ.obj (.op Y)) ⥤\n                  SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n                  (tilde.functor (Scheme.Γ.obj (.op Y))))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj E₀))\n    (hQK : e.inverse.obj Q ≅ DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Scheme.Γ.obj (.op Y)))\n        (SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n        _ _ _ _ (@id (ModuleCat.{u} (Scheme.Γ.obj (.op Y)) ⥤\n                  SheafOfModules.{u} (moduleRings (Spec (Scheme.Γ.obj (.op Y))).toRingedSpace))\n                  (tilde.functor (Scheme.Γ.obj (.op Y))))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj K₀))\n    (F : Set.Ici i ⥤ CommRingCat.{u}) (C : Cocone F)\n    (r : Scheme.Γ.obj (.op Y) →+* F.obj ⟨i, le_rfl⟩)\n    (E K : CochainComplex (ModuleCat.{u} (F.obj ⟨i, le_rfl⟩)) ℤ)\n    (hEr : E = ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj E₀)\n    (hKr : K = ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj K₀)\n    (σ : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n      Spec (F.obj j.val) ≅ pullback s (Spec.map (R.map (homOfLE j.val.property))))\n    (τ : Spec C.pt ≅ pullback s (Spec.map (c.ι.app i)))\n    (hgeom :\n      (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n        (σ j).hom ≫ pullback.fst s (Spec.map (R.map (homOfLE j.val.property))) =\n          Spec.map (CommRingCat.ofHom r ≫ F.map (homOfLE j.property)) ≫ t.hom) ∧\n      (τ.hom ≫ pullback.fst s (Spec.map (c.ι.app i)) =\n        Spec.map (CommRingCat.ofHom r ≫ C.ι.app ⟨i, le_rfl⟩) ≫ t.hom) ∧\n      (∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k),\n        (σ k).hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE k.val.property))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjk)))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) =\n          Spec.map (F.map (homOfLE hjk)) ≫ (σ j).hom) ∧\n      (∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n        τ.hom ≫ baseChangeMap s\n          (T := Over.mk (Spec.map (R.map (homOfLE j.val.property))))\n          (T' := Over.mk (Spec.map (c.ι.app i)))\n          (Over.homMk (Spec.map (c.ι.app j.val))\n            (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.val.property)])) =\n          Spec.map (C.ι.app j.val) ≫ (σ j).hom))\n    (d : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n          schemeDerivedCategory (Spec (F.obj j.val)) ≌\n            schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE j.val.property)))))\n      (dlim : schemeDerivedCategory (Spec (C.pt)) ≌\n        schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))))\n    (hd : ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),\n      DerivedCategory.Q ⋙ (d j).functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec (F.obj j.val)).toRingedSpace))\n        (SheafOfModules.{u}\n          (moduleRings (pullback s (Spec.map (R.map (homOfLE j.val.property)))).toRingedSpace))\n        _ _ _ _\n        (SheafOfModules.pushforward (σ j).hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (hdlim : DerivedCategory.Q ⋙ dlim.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings (Spec C.pt).toRingedSpace))\n        (SheafOfModules.{u} (moduleRings (pullback s (Spec.map (c.ι.app i))).toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward τ.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) :\n    affineModelComparisonData R c i Y s P Q F C E K",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215602-L-897314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T215602-L-897314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
