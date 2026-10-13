@@ -6,6 +6,8 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
+import Sheaf.RingTheory.PopescuZeroBaseSingleChartPresentation
+import Sheaf.RingTheory.PolynomialLinearElimination
 
 /-! # Eliminating auxiliary variables in a single chart
 
@@ -59,6 +61,32 @@ theorem zero_base_single_chart_polynomial (R : Type a) (Cbar : Type c)
         Localization.Away (d.reducedElement k)) ≃ₐ[B]
       Localization.Away (Algebra.TensorProduct.includeRight (R := R) (A := B)
         (ULift.up (Ideal.Quotient.mk J (d.includeX (d.a k)))))) := by
-  sorry
+  classical
+  dsimp only
+  let K := B ⊗[R ⧸ Ideal.span ({π ^ 2} : Set R)]
+    Localization.Away (d.reducedElement k)
+  let γ := d.singleChartCoefficient B k
+  have ha : IsUnit (γ (d.a k)) := by
+    exact (IsLocalization.Away.algebraMap_isUnit
+      (S := Localization.Away (d.reducedElement k)) (d.reducedElement k)).map
+        (Algebra.TensorProduct.includeRight
+          (R := R ⧸ Ideal.span ({π ^ 2} : Set R)) (A := B)).toRingHom
+  obtain ⟨u, hu⟩ := ha
+  have hn : ∀ l : d.E k, ∀ j : d.E k,
+      γ (d.h k l j) = if l = j then (u : K) else 0 := by
+    intro l j
+    rw [hnorm k l l.property j]
+    by_cases hij : l = j
+    · subst j
+      simpa using hu.symm
+    · have hij' : (l : Fin d.m) ≠ (j : Fin d.m) := by
+        intro he
+        exact hij (Subtype.ext he)
+      simp [hij, hij']
+  obtain ⟨e⟩ := MvPolynomial.linear_elimination K (Fin d.m) (d.E k) u
+    (fun l j ↦ γ (d.h k l j)) hn
+  obtain ⟨e'⟩ := zero_base_single_chart_presentation R Cbar π d B hπ k
+  rw [hu] at e
+  exact ⟨(e.restrictScalars B).trans e'⟩
 
 end Algebra.PopescuLiftPresentation

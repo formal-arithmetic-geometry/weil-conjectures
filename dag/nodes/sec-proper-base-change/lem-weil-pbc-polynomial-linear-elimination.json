@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-polynomial-linear-elimination",
+ "kind": "statement",
+ "title": "Elimination of normalized linear polynomial variables",
+ "statement": "Let $K$ be a commutative ring, $\\sigma$ a type with decidable equality, $E\\subseteq\\sigma$ a finite subset, $a\\in K^\\times$, and $h:\\sigma\\times\\sigma\\to K$. Assume $h(l,j)=a\\delta_{lj}$ for $l,j\\in E$. In the polynomial ring [def-weil-pbc-mv-polynomial-ring] let $I=(aX_l-\\sum_{j\\in E}h(l,j)X_j:l\\in\\sigma)$. Then there exists a $K$-algebra isomorphism $K[X_j:j\\in E]\\cong K[X_l:l\\in\\sigma]/I$, with quotient understood as in [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Let q be the quotient map and define F on the free polynomial ring by F(X_j)=q(X_j). Define v_l=X_l for l in E and v_l=a inverse times sum over j in E of h(l,j)X_j otherwise. Evaluation at v defines G0 on the full polynomial ring.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For l in E normalization reduces the sum to a X_l; for l outside E multiply a by its inverse. Thus G0 kills every generator of I and hence I. It factors to G on the quotient.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "G F fixes all free variables and coefficients. For F G, the relation q(a X_l)=sum h(l,j) q(X_j) and invertibility of a show every complementary variable is fixed; free variables are fixed by construction. Polynomial extensionality and quotient surjectivity prove the two composites are identities.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "Details of the displayed calculation in Stacks Tag 07CP, written by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized quotient by linear equations with invertible leading coefficient is a polynomial algebra on the free variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of multivariate polynomial ring by relations expressing dependent variables as linear combinations of free variables is isomorphic to polynomial ring on free variables",
+   "results": "Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'; Algebra.PreSubmersivePresentation.naive_toPresentation; Algebra.Presentation.naive_toGenerators; Algebra.PreSubmersivePresentation.ofHasCoeffs_val; Algebra.PreSubmersivePresentation.naive; Algebra.Generators.naive_σ; MvPolynomial.quotientEquivQuotientMvPolynomial; Algebra.Presentation.naive_relation_apply",
+   "date": "2026-10-13",
+   "verdict": "General ingredients only; no exact single-chart calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*linear|linear.*quotient|eliminat.*variable",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Inertia.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/NumberTheory/RamificationInertia/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "General ingredients only; no exact single-chart calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuZeroBaseSingleChartPolynomial",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP: last line of the displayed single-chart calculation modulo pi, solving all complementary auxiliary variables",
+   "via": [
+    "lem-weil-pbc-popescu-zero-base-single-chart-polynomial",
+    "lem-weil-pbc-popescu-zero-base-chart-polynomial",
+    "lem-weil-pbc-popescu-lift-chart-fibres",
+    "lem-weil-pbc-popescu-lift-smooth-special",
+    "lem-weil-pbc-popescu-lift-smooth",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialLinearElimination",
+  "file": "lean/Sheaf/RingTheory/PolynomialLinearElimination.lean",
+  "declaration": "MvPolynomial.linear_elimination",
+  "statement": "theorem linear_elimination (K : Type u) [CommRing K] (σ : Type v) [DecidableEq σ] (E : Finset σ) (a : Kˣ) (h : σ → σ → K) (hnorm : ∀ l : E, ∀ j : E, h l j = if l = j then (a : K) else 0) : Nonempty (MvPolynomial E K ≃ₐ[K] (MvPolynomial σ K ⧸ Ideal.span (Set.range (fun l : σ ↦ C (a : K) * X l - ∑ j : E, C (h l j) * X (j : σ)))))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

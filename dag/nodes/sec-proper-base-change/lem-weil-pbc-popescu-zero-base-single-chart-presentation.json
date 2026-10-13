@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-popescu-zero-base-single-chart-presentation",
+ "kind": "statement",
+ "title": "Linear presentation of the scalar-extended single chart",
+ "statement": "Let $R,C$ be commutative rings, $\\pi\\in R$, $R_2=R/(\\pi^2)$, and $d$ polynomial data [lem-weil-pbc-popescu-lift-preparation], with $C$ an $R_2$-algebra. Let $B$ be a commutative $R$-algebra and compatible $R_2$-algebra, with $\\pi=0$ in $B$, and fix $k<d.r$. Put $Q=R[x_i,z_l]$, $J_k=(f_l-\\pi z_l,a_kz_l-\\sum_{j\\in E_k}h_{klj}z_j-\\pi g_{kl}:l<d.m)$, $A=R_2[x_i]/(\\overline f_l)$, and $\\alpha_k=\\overline a_k\\in A$. Set $K=B\\otimes_{R_2}A[1/\\alpha_k]$, and let $\\gamma:R[x_i]\\to K$ be coefficient reduction followed by quotient, localization, and right tensor inclusion. In $K[z_l]$ set $I_k=(\\gamma(a_k)z_l-\\sum_{j\\in E_k}\\gamma(h_{klj})z_j:l<d.m)$. Then $K[z_l]/I_k$ is isomorphic as a $B$-algebra to $(B\\otimes_R\\operatorname{ULift}(Q/J_k))[1/t]$, where $t=1\\otimes[a_k]$. Quotients and algebras are [def-weil-pbc-algebra-hom-quotient], polynomials [def-weil-pbc-mv-polynomial-ring], tensor products [def-weil-pbc-module-tensor-product], and localization [def-weil-ring-localization-away]. There is no normalization hypothesis on h.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Split x and z variables by polynomial evaluation. A map from B tensor_R ULift(Q/J_k) to a B-algebra T is exactly a choice of images of the x and z variables satisfying the equations. Since pi=0 in B, the u equations say f_l(x)=0 and chart equations say a_k(x)z_l=sum h_klj(x)z_j. This follows directly from the polynomial, quotient and tensor universal properties; the canonical ULift equivalence removes ULift.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient maps satisfying f_l=0 factor through B tensor_R2 A: first pi squared is killed in B, so reducing all coefficients modulo pi squared changes none of these maps, and then quotient by the reduced f_l. The forward and reverse coefficient maps agree on B and each x_i.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localizing at t requires the image of a_k to be invertible. Use the localization universal property to factor the coefficient maps uniquely through A[1/alpha_k] and then tensor with B. Thus the coefficient ring is K and its coefficient map is gamma, as constructed by singleChartCoefficient.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep every auxiliary variable and every resulting linear equation. Polynomial evaluation and the quotient universal property give the map from K[z]/I_k to the localized original quotient, and give the reverse map by sending every original variable to its coefficient image and every z to its quotient class. Both composites fix B, each original variable, every z, and the inverse of a_k. Polynomial, quotient, tensor and localization uniqueness prove they are identities. No variable elimination is done here.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "Details of the displayed calculation in Stacks Tag 07CP, written by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of polynomial quotient followed by localization is a polynomial quotient over the localized base change of the coefficient ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change and localization of a multivariate polynomial algebra quotient commute and give the quotient by the images of the defining relations",
+   "results": "Algebra.PreSubmersivePresentation.baseChange_toPresentation; Algebra.Presentation.baseChange_relation; Algebra.Presentation.baseChange; Algebra.PreSubmersivePresentation.baseChange; Algebra.Presentation.baseChange_toGenerators; Algebra.PreSubmersivePresentation.baseChange_ring; Algebra.SubmersivePresentation.baseChange; Algebra.Generators.baseChange",
+   "date": "2026-10-13",
+   "verdict": "General ingredients only; no exact single-chart calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ee]quiv|[Ee]quiv.*quotient|tensor.*[Ee]quiv",
+   "results": "Mathlib/RingTheory/Polynomial/Quotient.lean; Mathlib/RingTheory/Polynomial/Quotient.lean; Mathlib/RingTheory/Polynomial/Quotient.lean; Mathlib/RingTheory/Polynomial/Quotient.lean; Mathlib/RingTheory/Polynomial/Quotient.lean; Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean; Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean; Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean",
+   "date": "2026-10-13",
+   "verdict": "General ingredients only; no exact single-chart calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuZeroBaseSingleChartPolynomial",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP: first two lines of the displayed single-chart calculation modulo pi, before elimination of auxiliary variables",
+   "via": [
+    "lem-weil-pbc-popescu-zero-base-single-chart-polynomial",
+    "lem-weil-pbc-popescu-zero-base-chart-polynomial",
+    "lem-weil-pbc-popescu-lift-chart-fibres",
+    "lem-weil-pbc-popescu-lift-smooth-special",
+    "lem-weil-pbc-popescu-lift-smooth",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuZeroBaseSingleChartPresentation",
+  "file": "lean/Sheaf/RingTheory/PopescuZeroBaseSingleChartPresentation.lean",
+  "declaration": "Algebra.PopescuLiftPresentation.zero_base_single_chart_presentation",
+  "statement": "theorem zero_base_single_chart_presentation (R : Type a) (Cbar : Type c) [CommRing R] [CommRing Cbar] (π : R) [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar] (d : PopescuLiftPresentation R Cbar π) (B : Type b) [CommRing B] [Algebra R B] [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) B] [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) B] (hπ : algebraMap R B π = 0) (k : Fin d.r) : let J : Ideal d.polynomial := Ideal.span (Set.range (fun i : Fin d.m ⊕ Fin d.m ↦ match i with | .inl j => d.equation (.inl j) | .inr l => d.equation (.inr (k, l)))) Nonempty ((MvPolynomial (Fin d.m) (B ⊗[R ⧸ Ideal.span ({π ^ 2} : Set R)] Localization.Away (d.reducedElement k)) ⧸ d.singleChartLinearIdeal B k) ≃ₐ[B] Localization.Away (Algebra.TensorProduct.includeRight (R := R) (A := B) (ULift.up (Ideal.Quotient.mk J (d.includeX (d.a k))))))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
