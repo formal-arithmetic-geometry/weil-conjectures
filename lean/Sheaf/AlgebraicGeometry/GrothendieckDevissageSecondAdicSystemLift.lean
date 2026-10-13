@@ -84,9 +84,10 @@ theorem grothendieckDevissage_secondAdicSystem_lift
           formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =
         formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫
           (θ.hom.app (op e)).app (op n) := by
-  obtain ⟨N, δ, σ, _⟩ :=
+  obtain ⟨N, _, σ, _⟩ :=
     grothendieckDevissage_secondAdicSystem_lift_data I K M hthick H α θ hθ
-  refine ⟨N, δ, σ, ?_⟩
-  exact grothendieckDevissage_secondAdicSystem_lift_compatibility I K M H α θ δ σ
+  obtain ⟨δ, hδ⟩ :=
+    grothendieckDevissage_secondAdicSystem_lift_compatibility I K M hthick H α θ σ
+  exact ⟨N, δ, σ, hδ⟩
 
 end AlgebraicGeometry

@@ -1,99 +1,156 @@
 {
-  "kind": "statement",
-  "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A"
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A"
+ },
+ "status": "split",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, lemma-existence-tricky: supported completion equivalence and the maps G_e to H/K^e H; U3 repair of X-96860 review point 4; U3 repair of X-3f050 landing return: reuse the existing endpoint-transport helper instead of duplicating it"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic system algebraization",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
   },
-  "status": "split",
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A"
+  {
+   "tool": "loogle",
+   "query": "CoherentFormalModule completion equivalence",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "adic system algebraization",
-      "results": "no exact match",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CoherentFormalModule completion equivalence",
-      "results": "no exact match",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "grothendieckDevissage_secondAdicSystem_lift",
-      "results": "local declaration only",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-weil-pbc-devissage-second-adic-system-lift"
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift",
-    "date": "2026-10-13",
-    "group": "M3"
-  },
-  "id": "lem-weil-pbc-devissage-second-adic-system-lift-compatibility",
-  "title": "Compatibility of lifted maps",
-  "statement": "For algebraized data N, δ, σ, the comparison square commutes at every level.",
-  "stmt_deps": [
-    "lem-weil-pbc-devissage-second-adic-system-lift"
-  ],
-  "proof": [
-    {
-      "text": "The categorical construction and faithfulness argument of Tag 088A establishes the stated intermediate conclusion.",
-      "uses": [
-        "lem-weil-pbc-closed-immersion-coherent-equivalence"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
-  ],
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility",
-    "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemLiftCompatibility.lean",
-    "declaration": "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_lift_compatibility",
-    "statement": "theorem grothendieckDevissage_secondAdicSystem_lift_compatibility\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I)\n    (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    {N : CoherentFormalModule X K} (δ : N ⟶ (completion X K).obj H)\n    (σ : N.obj ⋙ formalCompletionFunctor I ≅\n      (M.obj ⋙ formalCompletionFunctor K).flip) :\n    ∀ e n : ℕ,\n      (σ.hom.app (op e)).app (op n) ≫\n          formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =\n        formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫\n          (θ.hom.app (op e)).app (op n)",
-    "branch": "sheaf-dag",
-    "by": "M3",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M3",
-    "result": "pass",
-    "landing": "20261012T232141-L-1993172",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M3",
-    "result": "pass",
-    "landing": "20261012T232141-L-1993172",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "tool": "grep",
+   "query": "grothendieckDevissage_secondAdicSystem_lift",
+   "results": "local declaration only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
   }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-devissage-second-adic-system-lift"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "id": "lem-weil-pbc-devissage-second-adic-system-lift-compatibility",
+ "title": "Compatibility of lifted maps",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth], let $I,K$ be quasi-coherent ideal sheaves [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], let $M$ be a coherent $I$-adic system [def-weil-pbc-coherent-formal-module], and $H$ a coherent module [pqf-def-coherent]. Assume for each $q\\ge1$ that completion on $V(K^q)$ with respect to $I\\mathcal O_{V(K^q)}$ [def-nagata-extended-ideal] is an equivalence, for every Noetherian instance. Given $\\alpha:M\\to\\widehat H_I$, a natural double-system isomorphism $\\theta_{e,n}:(H/K^{e+1}H)/I^{n+1}\\cong(H/I^{n+1}H)/K^{e+1}$, a coherent $K$-adic system $N$, and a doubly natural isomorphism $\\sigma_{e,n}:N_e/I^{n+1}N_e\\cong M_n/K^{e+1}M_n$, there exists $\\delta:N\\to\\widehat H_K$ such that for all $e,n\\ge0$, $\\sigma_{e,n}$ followed by $\\alpha_n$ modulo $K^{e+1}$ equals $\\delta_e$ modulo $I^{n+1}$ followed by $\\theta_{e,n}$. The map $\\delta$ is constructed by lifting, rather than supplied independently.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal"
+ ],
+ "proof": [
+  {
+   "text": "For coherent modules supported on a closed subscheme j, transport them through the coherent closed-pushforward equivalence. Closed pushforward is fully faithful, and the natural completion comparison identifies ambient I-completion with pushforward of completion on the subscheme. The assumed equivalence there gives a bijection on ambient completed Hom sets. Transport the bijection along the endpoint isomorphisms. This is supported_completion_bijective. Endpoint transport reuses the proved private map_bijective_of_isos in GrothendieckExistenceSupportedHom via import all; no proper-completion result or additional geometric hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For modules killed by possibly different positive K-powers, raise the two annihilating powers to their maximum using formalModuleQuotient_factor. Use the proved power_subobject and product_iso helpers of IdealPowerProductRestrictionZero to identify the recursively defined ideal powers with (K^q).toModules, hence with the kernel ideal of V(K^q). Apply the supported Hom bijection on that common thickening. This is torsion_completion_bijective.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "lem-weil-pbc-ideal-power-product-restriction-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set Q = completion_K(H). Form the morphism of double systems tau = sigma.hom followed by the flipped K-completion of alpha followed by theta.inv. Each term N_e and Q_e is coherent and annihilated by K^(e+1), by the defining coherent-adic conditions. Surjectivity of the supported Hom bijection lifts tau_e to d_e with completion_I(d_e) = tau_e. Injectivity specifies the lift uniquely.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an adjacent K-transition, complete the two composites involving the d_e. The functor composition law and the lifting equations reduce their equality to naturality of tau. The supported Hom bijection for N_(e+1) and Q_e is injective, hence the original composites agree. NatTrans.ofOpSequence assembles d into delta. Evaluate its lifting equation at n and compose with theta.hom; theta.inv_hom_id gives the comparison square.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemLiftCompatibility.lean",
+  "declaration": "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_lift_compatibility",
+  "statement": "theorem grothendieckDevissage_secondAdicSystem_lift_compatibility\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I)\n    (hthick : ∀ (e : ℕ), 1 ≤ e →\n      ∀ (hZ : IsNoetherian (K ^ e).subscheme),\n        Functor.IsEquivalence\n          (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι)))\n    (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    {N : CoherentFormalModule X K}\n    (σ : N.obj ⋙ formalCompletionFunctor I ≅\n      (M.obj ⋙ formalCompletionFunctor K).flip) :\n    ∃ (δ : N ⟶ (completion X K).obj H), ∀ e n : ℕ,\n      (σ.hom.app (op e)).app (op n) ≫\n          formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =\n        formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫\n          (θ.hom.app (op e)).app (op n)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T232141-L-1993172",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b434a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T072408-L-1125987",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched corrected nodes, declared interface repair, source construction, and minimal forced adaptation; compilation and axiom checks passed."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "U3 stage 2",
+  "old_statement": "For algebraized data N, δ, σ, the comparison square commutes at every level.",
+  "what": "Repair authorized by reviewer X-96860: the old assertion for arbitrary delta is false (alpha = zero and delta = identity on the zero-ideal completion of O_Spec(Q)). Add hthick verbatim from the construction caller, remove the input delta, and existentially construct delta with the same squares. The caller keeps its existing signature.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 088A, lemma-existence-tricky, construction of G_e and the maps to H/K^e H"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "lem-weil-pbc-devissage-second-adic-system-lift"
+  ],
+  "old_proof": [
+   {
+    "text": "The categorical construction and faithfulness argument of Tag 088A establishes the stated intermediate conclusion.",
+    "uses": [
+     "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-closed-immersion-coherent-equivalence"
+  ]
+ }
 }
