@@ -357,6 +357,48 @@ theorem Scheme.Modules.exists_isFinitePresentation_pullback_iso_of_isLimit [IsCo
       (g'f₁ := μ₂ a) (g'f₂ := μ₂ a) (hg'f₁ := by rw [← Category.assoc, ← hres, hμ₂₁])
       (hg'f₂ := by rw [← Category.assoc, ← hres, hμ₂₁]), htS a,
       pullHom_pullHom, pullHom_id_eq_id]
+  have hcoc₂ : DescentData'.GlueCocycle (preimageChosenPullback₃ U g₂) H₂ := fun a b d ↦ by
+    have hres : resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)) =
+        resTo (D.map (w₂ (.inr (a, b, d))).left)
+          (by rw [← D.map_comp, Over.w (w₂ (.inr (a, b, d)))]) (le_refl (U a ⊓ U b ⊓ U d)) ≫
+        (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)) := by
+      rw [opensDiagram_map_eq_resTo]
+      exact (resTo_resTo _ _ _ _
+        (by rw [← D.map_comp, ← Over.comp_left, ← hw₂ (.inr (a, b, d))]) _ _ _ _).symm
+    have h := htC (a, b, d)
+    dsimp only at h
+    rw [← DescentData'.pullHom_glueCocLHS (H := H₁) (sq' := preimageChosenPullback U g₂)
+        (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U g₂)
+        (r₂ := fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b)))
+        (hr₂₁ := resTo_p₁ U _ hv₂) (hr₂₂ := resTo_p₂ U _ hv₂) (hμ := hμ₂₁)
+        (r₃ := fun a b d ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)))
+        (h₁₂ := resTo_p₁₂ U _ hv₂) (h₂₃ := resTo_p₂₃ U _ hv₂) (hr₃₁ := resTo_p₁' U _ hv₂)
+        (hr₃₂ := resTo_p₂' U _ hv₂) (hr₃₃ := resTo_p₃' U _ hv₂),
+      ← DescentData'.pullHom_glueCocRHS (H := H₁) (sq' := preimageChosenPullback U g₂)
+        (sq₃ := preimageChosenPullback₃ U g₁) (sq₃' := preimageChosenPullback₃ U g₂)
+        (r₂ := fun a b ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b)))
+        (hr₂₁ := resTo_p₁ U _ hv₂) (hr₂₂ := resTo_p₂ U _ hv₂) (hμ := hμ₂₁)
+        (r₃ := fun a b d ↦ resTo (D.map v₂.left) hv₂ (le_refl (U a ⊓ U b ⊓ U d)))
+        (h₁₃ := resTo_p₁₃ U _ hv₂) (hr₃₁ := resTo_p₁' U _ hv₂) (hr₃₃ := resTo_p₃' U _ hv₂),
+      pullHom_congr_left _ hres, pullHom_congr_left _ hres]
+    have hy₁ : resTo (D.map (w₂ (.inr (a, b, d))).left)
+        (by rw [← D.map_comp, Over.w (w₂ (.inr (a, b, d)))]) (le_refl (U a ⊓ U b ⊓ U d)) ≫
+        ((opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)) ≫
+          (preimageChosenPullback₃ U g₁ a b d).p₁ ≫ μ₁ a) =
+        (preimageChosenPullback₃ U g₂ a b d).p₁ ≫ μ₂ a := by
+      rw [← Category.assoc, ← hres, ← hμ₂₁, ← Category.assoc, ← Category.assoc,
+        resTo_p₁' U _ hv₂]
+    have hy₃ : resTo (D.map (w₂ (.inr (a, b, d))).left)
+        (by rw [← D.map_comp, Over.w (w₂ (.inr (a, b, d)))]) (le_refl (U a ⊓ U b ⊓ U d)) ≫
+        ((opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)) ≫
+          (preimageChosenPullback₃ U g₁ a b d).p₃ ≫ μ₁ d) =
+        (preimageChosenPullback₃ U g₂ a b d).p₃ ≫ μ₂ d := by
+      rw [← Category.assoc, ← hres, ← hμ₂₁, ← Category.assoc, ← Category.assoc,
+        resTo_p₃' U _ hv₂]
+    rw [← pullHom_pullHom (g := (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)))
+        (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃),
+      ← pullHom_pullHom (g := (opensDiagram D i₀ (U a ⊓ U b ⊓ U d)).map (tC (a, b, d)))
+        (hgf₁ := rfl) (hgf₂ := rfl) (hg'f₁ := hy₁) (hg'f₂ := hy₃), h]
   sorry
 
 end AlgebraicGeometry
