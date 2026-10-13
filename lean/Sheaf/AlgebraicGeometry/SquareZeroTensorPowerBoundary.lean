@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.SectionBoundaryExact
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryLeibniz
 
 /-! # The square-zero formula for the canonical boundary of a tensor power
 
@@ -23,6 +24,52 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 universe u wC wD
+
+private theorem tensor_section_action_comp {Z : Scheme.{u}} (F N : Z.Modules)
+    (f : 𝟙_ Z.Modules ⟶ N) (e : ℕ) :
+    ((ρ_ F).inv ≫ F ◁ tensorPowSection f e) ≫ mulTensorPowSection f F e 1 =
+      (ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1) := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  change (((ρ_ F).inv ≫ F ◁ tensorPowSection f e) ≫
+    mulTensorPowSection f F e 1).app U.unop x =
+      ((ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1)).app U.unop x
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, rightUnitor_inv_comp_whiskerLeft_app,
+    mulTensorPowSection_app_tmulSection, rightUnitor_inv_comp_whiskerLeft_app]
+
+private theorem tensor_boundary_recurrence_formula {Z : Scheme.{u}} (F N : Z.Modules)
+    (f : 𝟙_ Z.Modules ⟶ N)
+    (c : ∀ e : ℕ, (RingedSpace.moduleCohomology Z.toRingedSpace 1).obj
+      (show Z.Modules from F ⊗ N.tensorPow e))
+    (hc : ∀ e : ℕ,
+      c (e + 1) = (RingedSpace.moduleCohomology Z.toRingedSpace 1).map
+        (mulTensorPowSection f F e 1) (c e) +
+        (RingedSpace.moduleCohomology Z.toRingedSpace 1).map
+          ((ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1))
+          ((RingedSpace.moduleCohomology Z.toRingedSpace 1).map (ρ_ F).hom (c 0))) :
+    ∀ e : ℕ, c e = (e + 1) •
+      (RingedSpace.moduleCohomology Z.toRingedSpace 1).map
+        ((ρ_ F).inv ≫ F ◁ tensorPowSection f e)
+        ((RingedSpace.moduleCohomology Z.toRingedSpace 1).map (ρ_ F).hom (c 0)) := by
+  let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
+  have hcomp (e : ℕ) :
+      H.map (mulTensorPowSection f F e 1)
+          (H.map ((ρ_ F).inv ≫ F ◁ tensorPowSection f e)
+            (H.map (ρ_ F).hom (c 0))) =
+        H.map ((ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1))
+          (H.map (ρ_ F).hom (c 0)) := by
+    rw [← ConcreteCategory.comp_apply, ← H.map_comp, tensor_section_action_comp]
+  intro e
+  induction e with
+  | zero =>
+    simp only [Nat.zero_add, one_nsmul, tensorPowSection_zero, whiskerLeft_id,
+      Category.comp_id]
+    rw [← ConcreteCategory.comp_apply, ← H.map_comp, Iso.hom_inv_id, H.map_id]
+    rfl
+  | succ e ih =>
+    rw [hc, ih, map_nsmul, hcomp, ← succ_nsmul]
 
 /-- The boundary of a section power is the corresponding multiple of its acted-on
 first obstruction. This is a formula for the canonical connecting map, with no lifting
@@ -82,6 +129,18 @@ theorem square_zero_tensor_power_boundary
                   ⊤ (1 : Γ(Z, ⊤))) =
               (e + 1) • b ((RingedSpace.moduleCohomology Z.toRingedSpace 1).map
                 ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection
-                  (((tensorPullback j).obj L).tensorPow n) s) e) xi) := by sorry
+                  (((tensorPullback j).obj L).tensorPow n) s) e) xi) := by
+  let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
+  let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
+  let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
+  let f := homOfGlobalSection N s
+  have h := exists_square_zero_tensor_boundary_leibniz.{u, wC, wD} j L hI n s hshort
+  rcases h with ⟨a, b, c, hboundary, hrec⟩
+  let xi := H.map (ρ_ F).hom (c 0)
+  refine ⟨xi, ?_⟩
+  intro e
+  refine ⟨a e, (b e).toAddMonoidHom, ?_⟩
+  have hc := tensor_boundary_recurrence_formula F N f c hrec e
+  exact (hboundary e).trans ((congrArg (b e) hc).trans (map_nsmul (b e) _ _))
 
 end AlgebraicGeometry.Scheme.Modules

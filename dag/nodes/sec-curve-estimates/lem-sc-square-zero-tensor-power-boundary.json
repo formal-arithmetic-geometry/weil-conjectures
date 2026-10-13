@@ -22,50 +22,30 @@
  },
  "proof": [
   {
-   "text": "Put N=j^*L. The closed-immersion ideal sequence tensored by the invertible L^d is exact, with kernel M_d=I tensor L^d and quotient j_*j^*(L^d), by the unit-quotient theorem. Pullback commutes with tensors, so identify the quotient with j_*(N^d). The ideal I and M_d are quasi-coherent, and I M_d=0 because I^2=0. The annihilated-module theorem identifies M_d with j_*G_d, where G_d=j^*M_d is quasi-coherent. The affine-morphism cohomology edge identifies H^1(X,M_d) with H^1(Z,G_d). The given section s of N^n has a connecting class xi in degree n. The given short-exact kernel sequences fix the canonical units and hence their canonical connecting maps; their short-exactness is redundant geometric data, supplied separately by the unit-quotient theorem.",
+   "text": "Use the transported graded Leibniz recurrence to obtain a_e, additive equivalences b_e, and c_e, with canonical boundary_e=b_e(c_e). Put xi=H^1(rho_F)(c_0).",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "lem-weil-pbc-invertible-pullback-tensor"
+    "lem-sc-square-zero-tensor-boundary-leibniz"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
-   }
+   "elementary": false
   },
   {
-   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K. Identify the ideal-tensor kernel with the categorical kernel of the canonical adjunction unit. The inverse cohomology comparison gives the additive map b from H^1(Z,F tensor N^e) to H^1(X,kernel eta_{n(e+1)}). Transport the canonical derivation identity to that kernel. The canonical boundary is the triangle boundary of [def-sc-module-cohomology-boundary], preceded by the degree-zero sections comparison of [lem-sc-module-section-boundary-exact]. No lifting is asserted.",
-   "uses": [
-    "lem-sc-boundary-derivation-square-zero",
-    "def-sc-module-cohomology-boundary",
-    "lem-sc-module-section-boundary-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology Lemma 0B8S, boundary derivation"
-   }
+   "text": "Prove that action_e followed by mulTensorPowSection f F e 1 equals action_(e+1). Extensionality reduces this to sections on every open, where rightUnitor_inv_comp_whiskerLeft_app and mulTensorPowSection_app_tmulSection compute both sides as x tensor s^(e+1). Functoriality transports the equality to H^1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on e to show c_e=(e+1) times H^1(action_e)(xi). At e=0 tensorPowSection f 0 is identity, so the right unitor and its inverse cancel on cohomology. For the successor, substitute the induction hypothesis into the two-term recurrence, use additivity to move the natural-number multiple through H^1(mulTensorPowSection), apply the preceding composition identity, and use succ_nsmul. Apply b_e and map_nsmul to finish; its underlying additive homomorphism is the map required in the original statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-sbc-ideal-sheaf-powers",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-sc-boundary-derivation-square-zero",
-  "def-sc-module-cohomology-boundary",
-  "lem-sc-module-section-boundary-exact"
+  "lem-sc-square-zero-tensor-boundary-leibniz"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
+  "place": "Stacks 09MS and 0B8S; Lean induction and tensor-action composition written by S3, with the geometric recurrence split off"
  },
  "mathlib_searches": [
   {
@@ -148,12 +128,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T225314-L-1807473",
+  "landing": "20261013T015614-L-3027133",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-square-zero-tensor-boundary-leibniz",
+ "kind": "statement",
+ "title": "Transported graded Leibniz recurrence for canonical square-zero tensor boundaries",
+ "statement": "Let j:Z -> X be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], L an invertible module [def-sc-invertible-module], I=j.ker [def-sbc-closed-immersion-ideal-sheaf], and I^2=0 [def-sbc-ideal-sheaf-powers]. Use tensor pullback and its canonical adjunction [def-pc-module-pullback, lem-pc-module-pullback-adjunction]. Assume the derived-category instances needed for the canonical section boundaries [def-weil-abstract-derived-category, lem-sc-module-section-boundary-exact], and assume every degree-d canonical unit kernel sequence is short exact. For n>=0 and a global section s of N=(j^*L)^n, put F=j^*(I tensor L^n), H=H^1(Z,-) [def-sc-ringed-space-module-cohomology], and f=homOfGlobalSection N s. There exist isomorphisms a_e:j^*(L^(n(e+1))) -> N^(e+1), additive equivalences b_e:H(F tensor N^e) -> H^1(X,kernel(unit_(n(e+1)))), and classes c_e in H(F tensor N^e), for every e>=0. The canonical boundary of (tensorPowSection f (e+1); a_e^-1)(1) is b_e(c_e). Moreover c_(e+1)=H(mulTensorPowSection f F e 1)(c_e)+H(rho_F^-1; id_F tensor tensorPowSection f (e+1))(H(rho_F)(c_0)). Here mulTensorPowSection multiplies the N^e factor by s, and rho_F:F tensor O_Z -> F is the right unitor. No closed exponent formula is asserted.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-quasi-coherent-sheaf",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-section-boundary-exact",
+  "def-sc-module-cohomology-boundary",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, equation (30.17.5.1) and the direct-sum exact sequence and derivation calculation following it; https://stacks.math.columbia.edu/tag/09MS; Tag 0B8S, https://stacks.math.columbia.edu/tag/0B8S"
+ },
+ "proof": [
+  {
+   "text": "Tensor the closed-immersion ideal sequence with each invertible L^d. The multiplication inclusion identifies I tensor L^d with the categorical kernel of the canonical tensor-pullback unit, and the unit-quotient theorem supplies its quotient. Compare tensor pullback and Mathlib pullback by uniqueness of left adjoints, and use their tensor-power comparisons and tensorPowMulIso to obtain the degree comparisons a_e. Include degree zero throughout.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal-tensor kernels are quasi-coherent and annihilated by I because I^2=0. The annihilated-module unit identifies each kernel with the pushforward of its pullback. The affine-morphism cohomology edge and the generic module-pullback tensor comparison (applied to the ideal-tensor module, which need not be invertible) identify the degree n(e+1) kernel cohomology with H^1(Z,F tensor N^e). Let b_e be the inverse additive equivalence, and let c_e be the inverse image under b_e of the canonical boundary of the section s^(e+1) transported by a_e; hence boundary_e=b_e(c_e). This determines c_e uniquely.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-sc-module-section-boundary-exact",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sum the ideal sequences in all nonnegative tensor degrees. Local frames identify the middle graded algebra with a polynomial algebra; thus it and the quotient are commutative. The summed kernel is square zero since each product has two ideal factors. Apply the square-zero boundary derivation theorem to s times s^(e+1), without inducting on e. Include and project graded summands to identify the degree n(e+2) boundary. Naturality transports its first term to H^1(mulTensorPowSection f F e 1)(c_e) and its second to H^1(rho_F^-1; id_F tensor tensorPowSection f (e+1))(H^1(rho_F)(c_0)). The degree-zero right unitor identifies F tensor N^0 with F. Comparison of resolution boundaries with the canonical triangle boundary gives precisely the displayed recurrence.",
+   "uses": [
+    "lem-sc-boundary-derivation-square-zero",
+    "def-sc-module-cohomology-boundary",
+    "lem-sc-module-section-boundary-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-boundary-derivation-square-zero",
+  "def-sc-module-cohomology-boundary",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, graded exact sequence; Cohomology Tag 0B8S, two-term Leibniz calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leibniz rule for canonical cohomology boundary of square zero sheaf of algebras",
+   "results": "msearch service unavailable: Internal Server Error. No verdict about existence from this unavailable service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical boundary of powers of a line bundle section on a square zero closed subscheme satisfies a graded Leibniz recurrence after transporting cohomology of its kernel",
+   "results": "Eight algebraic cotangent connecting-map results (Algebra.Generators.H1Cotangent.deltaAux_mul etc.), not a sheaf-cohomology recurrence. Search for power induction finds Derivation.leibniz_pow but no geometric comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleSectionBoundary|mulTensorPowSection|square_zero.*boundary|boundary.*derivation",
+   "results": "No hits in Mathlib for these geometric interfaces. Repository has the parent formula and Sheaf.Paper.BoundaryDerivationSquareZero, but no degreewise transported recurrence. ClearDenominators supplies the tensor-section multiplication identities. Blueprint search for boundary derivation has no matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorPowerBoundary",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Square-zero section-power obstruction step of the proof of ample invertible sheaf construction on proper dimension-one schemes: the two-term boundary Leibniz identity of Stacks 09MS before exponent induction.",
+   "via": [
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryLeibniz",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorBoundaryLeibniz.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_square_zero_tensor_boundary_leibniz",
+  "statement": "theorem exists_square_zero_tensor_boundary_leibniz {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (s : (((tensorPullback j).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤)) (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow d))).ShortExact) : let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n let H := RingedSpace.moduleCohomology Z.toRingedSpace 1 let f := homOfGlobalSection N s ∃ a : ∀ e : ℕ, (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅ N.tensorPow (e + 1), ∃ b : ∀ e : ℕ, H.obj (show Z.Modules from F ⊗ N.tensorPow e) ≃+ (RingedSpace.moduleCohomology X.toRingedSpace 1).obj (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))), ∃ c : ∀ e : ℕ, H.obj (show Z.Modules from F ⊗ N.tensorPow e), (∀ e : ℕ, RingedSpace.moduleSectionBoundary X.toRingedSpace (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1))) ((tensorPowSection f (e + 1) ≫ (a e).inv).app ⊤ (1 : Γ(Z, ⊤))) = b e (c e)) ∧ ∀ e : ℕ, c (e + 1) = H.map (mulTensorPowSection f F e 1) (c e) + H.map ((ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1)) (H.map (ρ_ F).hom (c 0))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3027133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T015614-L-3027133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
