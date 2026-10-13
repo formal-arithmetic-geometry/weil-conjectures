@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the natural mate transformation in M from naturality of t, the counit and the adjunction Hom equivalence. Exactness of the K-flat tensor and pullback and of derived direct image makes both functors exact. Compose with the given triangulated ambient realization of e.",
+   "text": "Construct suppliedMate as a natural transformation using the adjunction Hom-equivalence naturality square, the supplied tensorator naturality, and tensor interchange. Extract triangulatedness of derivedPullback from exists_derivedPullback. For each tensorRight, choose a K-flat representative and use the proved upstream commShiftTensorRightQhObj and isTriangulated_tensorRightQhObj, then transport the exact shift structure along the representative isomorphism with Functor.CommShift.ofIso. This avoids a Grothendieck instance in the independent localization universe. Give direct image the shift induced by the supplied adjunction and apply right-adjoint triangulatedness. Compose both exact functors with the supplied exact ambient realization of e.",
    "uses": [
     "def-pc-derived-pullback",
     "def-pc-scheme-derived-tensor-structure",
@@ -26,7 +26,7 @@
    "elementary": false
   },
   {
-   "text": "The equivalence e preserves coproducts and the quasi-coherent inclusion preserves ambient sums. Pullback preserves coproducts by p. Tensor preserves them and the quasi-coherent pullback/tensor outputs allow qcqs direct-image coproduct preservation. Thus a component on a sum is the sum of its invertible components; apply this after every shift.",
+   "text": "Replace the quantified isomorphism predicate by invertibility of the natural mate on the realized shifted objects, using NatTrans.isIso_app_iff_of_iso. The equivalence e preserves coproducts. DerivedQCohDirectSumsAux supplies ambient coproducts and quasi-coherent closure, so the quasi-coherent inclusion creates and preserves these coproducts. Pullback preserves coproducts as the supplied left adjoint; both tensorRight functors preserve them. Package each pulled-back and tensored object as a quasi-coherent object using derivedPullback_tensor_preserve_QCoh and canonical_derivedTensor_preserve_QCoh. Apply derivedDirectImagePreservesDirectSums to this family and transport the discrete diagram isomorphism to obtain coproduct preservation of the second composite. For every shift, map the supplied colimit cofan by the shift equivalence and apply isIso_app_coconePt_of_preservesColimit to the natural mate.",
    "uses": [
     "lem-pc-derived-qcoh-closed-coproducts",
     "lem-sc-derived-tensor-right-coproducts",
@@ -37,12 +37,12 @@
    "elementary": false
   },
   {
-   "text": "For each shift of a distinguished triangle, apply all ambient Hom(T,-) functors to both exact image sequences. Naturality at the triangle maps and the connecting maps provides the commuting vertical maps at F(K[n]), without requiring t to commute with an independently chosen shift comparison. The five lemma and Yoneda give invertibility at the third vertex for every shift. Explicitly the five vertices are Hom(T,F(A[n])), Hom(T,F(B[n])), Hom(T,F(C[n])), Hom(T,F(A[n+1])), Hom(T,F(B[n+1])), and likewise for the second functor. The first, second, fourth and fifth vertical maps are bijective by P(A) and P(B), so the ordinary five lemma gives the middle bijection. This is a formal exact-sequence argument once exactness in the first step is supplied.",
+   "text": "The private homological_triangle_comparison forms the five-term exact sequence from the distinguished triangle and its first two rotations, with arrows H(mor1), H(mor2), H(mor3), and H(-mor1[1]). The mate naturality supplies all four commuting squares, including the connecting arrow. Apply Mathlib Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono. Compose the two triangulated functors with every preadditiveCoyoneda functor and use Yoneda to detect invertibility. Apply this argument to every shifted distinguished triangle. The four outer components are invertible by the all-shifts hypotheses, transporting double shifts with shiftFunctorAdd. No shift compatibility of the supplied tensorator or natural mate is assumed.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "A retract induces a retract of the arrows by naturality, so an invertible component gives invertibility on the retract. Isomorphism transport follows from naturality, and the quantified isomorphisms in P are composed with this transport. The empty coproduct has zero vertices.",
+   "text": "For every shift map the supplied object retract through the shift functor and use NatTrans.retractArrowApp for the realized mate. Apply stability of the isomorphism morphism property under retracts. Transport back to the original quantified-isomorphism predicate. The coproduct argument already covers an empty index type.",
    "uses": [],
    "elementary": true
   }
@@ -61,7 +61,7 @@
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08EU, lemma-cohomology-base-change",
-  "note": "F1: the relevant step of the existing supplied-mate plan, including arbitrary p and t."
+  "note": "N2: complete Lean proof of all three closure properties from the recorded geometric preservation lemmas, proved upstream K-flat tensor exactness, and Mathlib five-lemma, colimit, Yoneda and retract tools; no new holes or statement changes."
  },
  "mathlib_searches": [
   {
@@ -141,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261013T095947-L-2456698",
-  "kind": "interface",
+  "landing": "20261013T113349-L-3186196",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
