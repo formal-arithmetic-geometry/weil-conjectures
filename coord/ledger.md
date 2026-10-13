@@ -12532,3 +12532,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:54 L: merged deliver/B3/Sheaf.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare (stage 3; reviewer PASS; first push; landing 20261013T125445-L-3874320 (interface); batch 20261013T125443; modules 2; new nodes 1)
 - 12:54 L: merged deliver/D3/Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares (stage 3; reviewer PASS; first push; landing 20261013T125445-L-3874447 (interface); batch 20261013T125443; modules 3; new nodes 2)
 - 12:54 L: merged deliver/E3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationTransfer (stage 3; reviewer PASS; first push; landing 20261013T125445-L-3874604 (interface); batch 20261013T125443; modules 2; new nodes 1)
+- 12:54 L: merged deliver/G2/Sheaf.Algebra.Homology.AffineTensorLocalizationFlat (stage 3; reviewer PASS; first push; landing 20261013T125446-L-3874711 (proof); batch 20261013T125443; modules 1; new nodes 0)

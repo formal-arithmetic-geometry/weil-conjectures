@@ -10,7 +10,6 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 
 import Mathlib.RingTheory.Localization.BaseChange
-
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-! # Flatness of the local affine tensor coefficient map
@@ -70,6 +69,83 @@ theorem affineTensorLocalization_flat
           f (Algebra.TensorProduct.includeLeft (S := Rp) a : Aq ⊗[Rp] Bp) = algebraMap Aq D a)
         (_hfB : ∀ b : Bp, f (Algebra.TensorProduct.includeRight b) = algebraMap Bp D b)
     : f.Flat := by
-  sorry
+  -- Work over R first; the localized base is removed by a canonical equivalence.
+  let C := A ⊗[R] B
+  let T₀ := Aq ⊗[R] B
+  let T₁ := Aq ⊗[R] Bp
+  let e := IsLocalization.algebraTensorEquiv
+    (q'.asIdeal.comap (algebraMap R C)).primeCompl Rp Aq Bp
+  let g : T₁ →+* D := f.comp e.symm.toRingHom
+  let j : T₀ →ₐ[R] T₁ := Algebra.TensorProduct.map (AlgHom.id R Aq)
+    (IsScalarTower.toAlgHom R B Bp)
+  let i : C →ₐ[R] T₀ := Algebra.TensorProduct.map
+    (IsScalarTower.toAlgHom R A Aq) (AlgHom.id R B)
+  let : Algebra C T₀ := i.toRingHom.toAlgebra
+  let : Algebra T₀ T₁ := j.toRingHom.toAlgebra
+  let : Algebra T₁ D := g.toAlgebra
+  let : Algebra T₀ D := (g.comp j.toRingHom).toAlgebra
+  have : IsScalarTower T₀ T₁ D := .of_algebraMap_eq' rfl
+  have : IsScalarTower Aq T₀ T₁ := .of_algebraMap_eq fun a ↦ by
+    simp [j, T₀, T₁, Algebra.TensorProduct.algebraMap_apply,
+      Algebra.TensorProduct.map_tmul, RingHom.algebraMap_toAlgebra]
+  have : IsScalarTower A C T₀ := .of_algebraMap_eq fun a ↦ by
+    simp [i, C, T₀, Algebra.TensorProduct.algebraMap_apply,
+      Algebra.TensorProduct.map_tmul, RingHom.algebraMap_toAlgebra]
+  -- The prescribed factor maps identify the composite with the given C-action.
+  have : IsScalarTower C T₀ D := by
+    apply IsScalarTower.of_algebraMap_eq
+    have hg_tmul (a : Aq) (b : Bp) : g (a ⊗ₜ[R] b) = f (a ⊗ₜ[Rp] b) := rfl
+    intro c
+    induction c using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b =>
+      change algebraMap C D (a ⊗ₜ[R] b) = g (j (i (a ⊗ₜ[R] b)))
+      rw [show i (a ⊗ₜ[R] b) = algebraMap A Aq a ⊗ₜ[R] b by rfl,
+        show j (algebraMap A Aq a ⊗ₜ[R] b) =
+          algebraMap A Aq a ⊗ₜ[R] algebraMap B Bp b by rfl, hg_tmul]
+      rw [show algebraMap A Aq a ⊗ₜ[Rp] algebraMap B Bp b =
+        Algebra.TensorProduct.includeLeft (S := Rp) (algebraMap A Aq a) *
+          Algebra.TensorProduct.includeRight (algebraMap B Bp b) by
+            simp [Algebra.TensorProduct.includeLeft_apply,
+              Algebra.TensorProduct.tmul_mul_tmul]]
+      rw [map_mul, _hfA, _hfB, ← IsScalarTower.algebraMap_apply A Aq D,
+        ← IsScalarTower.algebraMap_apply B Bp D, _hB,
+        IsScalarTower.algebraMap_apply A C D, ← map_mul]
+      simp [C, Algebra.TensorProduct.algebraMap_apply,
+        Algebra.TensorProduct.tmul_mul_tmul]
+    | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
+  -- Localize the first factor, then view the stalk as a further localization.
+  have : IsLocalization
+      (Algebra.algebraMapSubmonoid C
+        (q'.asIdeal.comap (algebraMap A C)).primeCompl) T₀ :=
+    IsLocalization.tensorProduct_tensorProduct R B
+      (q'.asIdeal.comap (algebraMap A C)).primeCompl Aq (by
+        ext b
+        change algebraMap A Aq 1 ⊗ₜ[R] b = 1 ⊗ₜ[R] b
+        rw [map_one])
+  have hle : Algebra.algebraMapSubmonoid C
+      (q'.asIdeal.comap (algebraMap A C)).primeCompl ≤ q'.asIdeal.primeCompl := by
+    rintro _ ⟨a, ha, rfl⟩
+    exact ha
+  have : IsLocalization
+      (q'.asIdeal.primeCompl.map (algebraMap C T₀)) D :=
+    IsLocalization.isLocalization_of_submonoid_le T₀ D _ _ hle
+  have hflat₀ : Module.Flat T₀ D :=
+    IsLocalization.flat D (q'.asIdeal.primeCompl.map (algebraMap C T₀))
+  -- Localizing the second factor preserves flatness over the coefficient ring.
+  have : IsLocalization
+      ((q'.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom).primeCompl.map
+        (Algebra.TensorProduct.includeRight (R := R) (A := Aq))) T₁ :=
+    IsLocalization.tensorProduct_tensorProduct_right R Aq
+      (q'.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom).primeCompl Bp (by
+        ext b
+        simp [j, T₀, T₁, Algebra.TensorProduct.map_tmul,
+          RingHom.algebraMap_toAlgebra])
+  have hflat₁ : Module.Flat T₁ D :=
+    (Module.flat_iff_of_isLocalization T₁
+      ((q'.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom).primeCompl.map
+        (Algebra.TensorProduct.includeRight (R := R) (A := Aq))) D).mpr hflat₀
+  have hg : g.Flat := (RingHom.flat_algebraMap_iff (R := T₁) (S := D)).mpr hflat₁
+  exact (RingHom.Flat.comp_iff_of_bijective_right e.symm.toRingEquiv.bijective).mp hg
 
 end RingTensorCohomology
