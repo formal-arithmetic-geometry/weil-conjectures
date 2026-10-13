@@ -29,6 +29,7 @@ namespace HomologicalComplex₂
 variable {R : Type u} [CommRing R]
 
 /-- The commuting tensor bicomplex, with terms `Pᵢ ⊗ Qⱼ` and no totalization signs.
+-- The construction is the canonical Mathlib bifunctor.
 Source: Stacks Project, Algebra, Tag 00M3, proof, first paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex) -/
 abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
