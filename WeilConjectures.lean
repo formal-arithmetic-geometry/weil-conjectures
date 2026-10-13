@@ -152,7 +152,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.CoefficientChange
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 public import WeilConjectures.AlgebraicGeometry.Curve.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenBaseChangeBoundary
 public import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenReduction
 public import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenTmp
 public import WeilConjectures.AlgebraicGeometry.Curve.Devissage
@@ -649,6 +651,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.FiniteFreeConstantMapEtale
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.GaloisCech
 public import WeilConjectures.AlgebraicGeometry.Sites.GenericStalkVanishingPropagation
+public import WeilConjectures.AlgebraicGeometry.Sites.GeometricPointFieldExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.GeometricStalkComparisonConstant
 public import WeilConjectures.AlgebraicGeometry.Sites.GeometricStalkMono
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
@@ -2308,6 +2311,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.IntegralComparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations

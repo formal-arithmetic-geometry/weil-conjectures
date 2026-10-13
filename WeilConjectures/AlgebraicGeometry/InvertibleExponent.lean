@@ -38,7 +38,11 @@ namespace AlgebraicGeometry
 The coefficient ring `Λ` *has invertible exponent on `X`* if some positive integer `n` with
 `n • Λ = 0` becomes a unit in `Γ(X, ⊤)`. For `Λ = A_{E,n}` this is the standing hypothesis
 `ℓ` invertible on `X` of the purity chapter; it is exactly what rules out the
-Artin–Schreier counterexamples in characteristic `p`. -/
+Artin–Schreier counterexamples in characteristic `p`. Together with `Finite Λ` it is the
+coefficient convention of the proper base change chapter: a finite ring annihilated by an
+`N` invertible on the schemes carrying coefficients, with the sheaf categories and derived
+categories `Sheaf X.smallEtaleTopology (ModuleCat Λ)`, `Etale.DerivedCategoryModule Λ X`.
+(blueprint: `sbc-def-coefficient-conventions`) -/
 class HasInvertibleExponent (Λ : Type*) [CommRing Λ] (X : Scheme.{u}) : Prop where
   /-- Some positive integer annihilating `Λ` is a unit in `Γ(X, ⊤)`. -/
   exists_isUnit_natCast : ∃ n : ℕ, 0 < n ∧ (n : Λ) = 0 ∧ IsUnit (n : Γ(X, ⊤))

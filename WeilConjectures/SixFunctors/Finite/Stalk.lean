@@ -162,7 +162,8 @@ omit [IsFinite f] in
 
 This bridges the concrete description of the stalk of a direct image, as a colimit along
 base change of pointed étale neighbourhoods, with the adjunction-theoretic description that
-the base change map `AlgebraicGeometry.Etale.baseChangeMap` is built from. -/
+the base change map `AlgebraicGeometry.Etale.baseChangeMap` is built from.
+(blueprint: `lem-weil-pbc-counit-stalk-germ-restriction`) -/
 lemma Etale.stalkRestrict_eq_counit (s : Spec (.of Ω) ⟶ X)
     (G : Sheaf X.smallEtaleTopology A) :
     Etale.stalkRestrict A f (s ≫ f) ⟨s, rfl⟩ G =
@@ -267,7 +268,8 @@ lemma Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict :
       (CategoryTheory.Over.OverMorphism.ext (s.unop.piecePt_comp_pieceIncl t))).op).symm
 
 /-- The stalk of `f_* G` at `y` is the product of the stalks of `G` at the geometric points
-over `y`, through the restriction maps `stalkRestrict`. -/
+over `y`, through the restriction maps `stalkRestrict`; the geometric fibre is finite
+(`Fintype (GeometricFiber f y)`). (blueprint: `lem-weil-pbc-finite-stalk-formula-restriction`) -/
 instance Etale.isIso_piLift_stalkRestrict :
     IsIso (Pi.lift fun t ↦ Etale.stalkRestrict A f y t G) := by
   have h := Etale.stalkIsoColimitSections_hom_comp_piLift_stalkRestrict A f y G
