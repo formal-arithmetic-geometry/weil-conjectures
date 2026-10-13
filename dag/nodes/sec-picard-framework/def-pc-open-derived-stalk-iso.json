@@ -1,0 +1,111 @@
+{
+ "id": "def-pc-open-derived-stalk-iso",
+ "kind": "definition",
+ "title": "Constructed additive derived stalk isomorphism for open immersions",
+ "statement": "Let j:X→Y be an open immersion of schemes [def-pc-scheme], x∈X, i∈ℤ, and fix derived categories [def-pc-derived-category] of sheaf modules on all schemes. Write H_Y for comparisonStalkCohomology Y (j x) i followed by forgetting to additive groups, and H_X analogously at x [lem-pc-stalk-comparison-source-transport]. Define openDerivedStalkIso(j,x,i):H_Y≅Lj*⋙H_X as follows. Identify tensorPullback j with the existing exact restrictFunctor j by uniqueness of its left adjunction to pushforward. The left-derived universal property [lem-pc-ringed-spaces-derived-pullback-composition] identifies derivedPullback j with restrictFunctor(j).mapDerivedCategory; call this openDerivedRestrictionIso. Its inverse, preceded by the exact-functor localization factor, defines openRestrictionRepresentativeIso(j,P):DQ(restrict(P))≅Lj*(DQ(P)). The exact module-stalk homology isomorphism, after forgetting scalars, identifies H_Y with sheaf homology followed by the additive stalk. Compose this with the inverse of restrictStalkNatIso, exact restriction's homology comparison, the inverse exact-stalk homology comparison on X, and the inverse derived-restriction comparison. This is the specified natural isomorphism, independent of every complex and every representing isomorphism. openRestrictionFunctor is only an abbreviation of the existing restriction with the common module-category spelling; its limits, colimits and additivity instances express exactness.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5U",
+  "place": "Section 20.32, opening paragraph: derived open pullback is exact restriction. Tag 0098, stalks of pullback; source-library mapDerivedCategoryHomologyFunctorIso."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an open immersion is exact and commutes naturally with derived stalk cohomology",
+   "results": "Service unavailable: Internal Server Error. No absence verdict is inferred.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction to an open immersion identifies derived stalk cohomology naturally with original stalk cohomology",
+   "results": "Eight hits, including Scheme.Modules.restrictStalkNatIso and its germ formulas. The ordinary additive restriction-stalk isomorphism is used in the explicit construction. No derived comparison-arrow square was found.",
+   "date": "2026-10-14",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictFunctor\"",
+   "results": "Twelve hits, including Scheme.Modules.restrictFunctor, restrictAdjunction and restrictFunctorIsoPullback. These ordinary restriction and adjunction declarations are used.",
+   "date": "2026-10-14",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|mapDerivedCategoryHomologyFunctorIso",
+   "results": "Mathlib grep returns the additive restriction-stalk isomorphism and its two germ formulas. Local rg in the source library finds mapDerivedCategoryHomologyFunctorIso and preservesLimitsOfSize_restrictFunctor. SingleComplexOpenRestrictionData constructs the analogous pullback comparison for inclusions; the new comparison handles an arbitrary open immersion, including the actual pullback projection. Blueprint search for restriction stalk returns no match.",
+   "date": "2026-10-14",
+   "verdict": "partial match used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictedComparisonCore",
+  "date": "2026-10-14",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-restricted-comparison-core",
+   "place": "Locality of the comparison: construct exact derived stalk restriction, then check the canonical restricted square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedStalkIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedStalkIso.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openDerivedStalkIso",
+  "statement": "def openDerivedStalkIso\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (x : X) (i : ℤ) :\n    comparisonStalkCohomology Y (j x) i ⋙\n        forget₂ (ModuleCat.{u} (Y.presheaf.stalk (j x))) AddCommGrpCat.{u} ≅\n      derivedPullback j ⋙ comparisonStalkCohomology X x i ⋙\n        forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) AddCommGrpCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.SingleComplexBaseChange.openRestrictionFunctor",
+   "AlgebraicGeometry.SingleComplexBaseChange.openRestrictionFunctor_limits",
+   "AlgebraicGeometry.SingleComplexBaseChange.openRestrictionFunctor_colimits",
+   "AlgebraicGeometry.SingleComplexBaseChange.openRestrictionFunctor_additive",
+   "AlgebraicGeometry.SingleComplexBaseChange.openDerivedRestrictionIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.openRestrictionRepresentativeIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.additiveStalkCohomologyIso",
+   "AlgebraicGeometry.SingleComplexBaseChange.openDerivedStalkIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T190142-L-3216944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T190142-L-3216944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
