@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-module-cup-godement-cosimplicial-exists",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Existence of the concrete Godement cosimplicial operators",
+ "statement": "There exist a cosimplicial object with Godement iterates, unit-insertion cofaces and multiplication codegeneracies.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution construction preceding Lemma 20.30.1"
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof": [
+  {
+   "text": "Construct the stalk/product-skyscraper adjunction. Identify its monad unit and multiplication with the concrete formulas by projection and stalk evaluation. The triangle identities and counit naturality give the unit and associativity laws. Insert the unit and multiplication in iterates; the monad identities imply the simplex relations, which extend these operators to a functor by the surjection/injection normal form. The degree terms and prescribed cofaces and codegeneracies follow from the construction.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof_origin": {
+  "by": "F1 stage-3 worker; independently checked and augmentation proved by F1 second reader",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution construction"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementModelsExist",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-godement-model-pairing-models-exist",
+   "place": "Existence of a single augmented concrete Godement model",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cosimplicial object from a monad",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cosimplicial\", \"monad\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "augment|cosimplicial",
+   "results": "generic augmentation declarations",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact Godement match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosimplicial object whose cofaces insert the unit of a monad and codegeneracies insert multiplication",
+   "results": "Generic cosimplicial operators and augment found; no concrete Godement realization",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No duplicate concrete Godement lemma; use generic API"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementCosimplicialExists",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementCosimplicialExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_cosimplicial_exists",
+  "statement": "theorem moduleCup_godement_cosimplicial_exists (X : Scheme.{u}) (F : X.Modules) :\n    ∃ (A : CosimplicialObject X.Modules)\n      (h : ∀ n : ℕ, A.obj ⦋n⦌ = moduleCup_godementIterate X F (n + 1)),\n      (∀ (n : ℕ) (i : Fin (n + 2)),\n        eqToHom (h n) ≫ moduleCup_godementInsert X F (n + 1) i =\n          A.map (SimplexCategory.δ i) ≫ eqToHom (h (n + 1))) ∧\n      (∀ (n : ℕ) (i : Fin (n + 1)),\n        eqToHom (h (n + 1)) ≫ moduleCup_godementCollapse X F n i =\n          A.map (SimplexCategory.σ i) ≫ eqToHom (h n))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T151659-L-923774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T151659-L-923774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

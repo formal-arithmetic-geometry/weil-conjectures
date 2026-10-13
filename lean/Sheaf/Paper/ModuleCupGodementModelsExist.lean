@@ -6,6 +6,8 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Paper.ModuleCupGodementCodegeneracies
+import Sheaf.Paper.ModuleCupGodementCosimplicialExists
+import Sheaf.Paper.ModuleCupGodementAugmentation
 
 /-! # Existence of an augmented Godement model -/
 
@@ -43,7 +45,10 @@ theorem moduleCup_godement_models_exist (X : Scheme.{u}) (F : X.Modules) :
       (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶
         (((alternatingCofaceMapComplex X.Modules).obj A).extend
           ComplexShape.embeddingUpNat)),
-      ModuleCupGodementModel X F A a ∧ ModuleCupGodementCodegeneracies X F A := by sorry
+      ModuleCupGodementModel X F A a ∧ ModuleCupGodementCodegeneracies X F A := by
+  obtain ⟨A, h, hδ, hσ⟩ := moduleCup_godement_cosimplicial_exists X F
+  obtain ⟨a, ha⟩ := moduleCup_godement_augmentation_exists X F A h hδ
+  exact ⟨A, a, ha, h, hσ⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
