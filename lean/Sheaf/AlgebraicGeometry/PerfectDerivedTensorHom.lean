@@ -56,6 +56,9 @@ theorem exists_perfectDerivedTensorHomEquiv (X : Scheme.{u})
           (g ≫ t ≫ (derivedInternalHom (Opens.grothendieckTopology X)
             X.sheaf).map (f.op, h)) =
           (f ⊗ₘ g) ≫ e A I hA hI E t ≫ h := by
-  sorry
+  obtain ⟨_, _, e, _, _, _, hn⟩ := scheme_derivedInternalHom_adjunction X
+  refine ⟨fun A I _ _ E ↦ e I A E, ?_⟩
+  intro A A' I I' E E' hA hA' hI hI' f g h t
+  exact hn I I' A A' E E' g f h t
 
 end AlgebraicGeometry
