@@ -12,23 +12,39 @@
  },
  "proof": [
   {
-   "text": "Put T = scalarInverseImage t, u = scalarInverseUnitIso t, and write δ for the canonical oplax tensor comparison. Consider the natural transformation from tensorRight 1_X followed by T to T followed by tensorRight 1_Y with component δ_{M,1_X} followed by id_{TM} tensor u.hom. Its naturality follows from δ_natural_left and bifunctoriality of tensor. Apply this transformation termwise to complexes, pass to localization, and use its commutation with shifts: the naturality square for the shifted morphism representing a is exactly the equality of the two Ext transports, with degree-zero components given by mk₀. The identity (u.inv followed by T(λ_{1_X}.inv) followed by δ_{1_X,1_X} followed by id tensor u.hom) = (λ_{1_Y}.inv followed by u.inv tensor id) identifies their source maps. To obtain it, the oplax right-unitor identity, together with λ_{1_X} = ρ_{1_X}, λ_{1_Y} = ρ_{1_Y} and naturality of ρ along u.inv, gives the same formula with its unit comparison η in place of u.hom; these maps agree because their adjoints under the inverse-image/direct-image adjunction are both the constant section 1 (expand the constant-sheaf adjunction defining u). Naturality of the unitors and tensor with φ, preservation of degree-zero morphisms by Ext transport, and associativity now insert φ on both sides. This proves the stated first-factor formula independently of any b or q. For p=0 all the Ext maps reduce to the same morphism coherence square; zero sheaves and empty schemes use the identical square.",
+   "text": "Apply [lem-weil-pbc-ext-exact-functor-identity-comparison] to tensorRight of the scalar tensor unit and rightUnitorNatIso. Postcompose with the inverse right unitor and cancel its hom-inv composite in Ext. Precompose with the inverse left unitor of the unit; unitors_equal cancels the source comparison. Thus the first transport on either scheme is a followed by Ext.mk₀ of the inverse right unitor, in every degree.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify scalarInverseUnitIso.hom with the canonical adjunction oplax unit. Precompose with inverse image of constantScalarUnitIso.hom, cancel the inverse isomorphism in the definition, and apply the composite constant-sheaf and inverse-image adjunction. Adjunction.homEquiv_leftAdjointUniq_hom_app identifies the constant-pullback comparison, while naturality of homEquiv identifies the other side with constantScalarUnitIso.hom followed by the lax pushforward unit. The sheafification adjunction monoidal unit identity shows that the adjoint of constantScalarUnitIso.hom is the component of the lax sheafToPresheaf unit. Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app equates those components on source and target. Injectivity of homEquiv and cancellation prove the unit identification. This is implemented in the proved private helper unitComparison.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
    "elementary": false
+  },
+  {
+   "text": "Replace both first transports by step 1. Ext transport preserves composition and mk₀; associate the degree-zero factors and combine them using mk₀_comp_mk₀. The remaining equality of morphisms is T(ρ_A.inv) followed by δ_{A,1} and φ tensor scalarInverseUnitIso.hom = φ followed by ρ_A′.inv. Replace the unit map using step 2, expand tensorHom_def′, and apply the oplax right-unitality identity followed by rightUnitor_inv_naturality. Applying mk₀ proves the equality. These identities include p=0, zero sheaves, zero φ, and empty schemes without additional hypotheses.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations"
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-ext-exact-functor-identity-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "U4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology Tags 01FD, 07MB, 0FKV; generic exact inverse-image and tensor pairing argument. Official text read at https://stacks.math.columbia.edu/tag/01F7 and the indicated tag pages.; first tensor transport. The local literature checkout is absent; official tag pages were read.",
-  "note": "Strict factor of the existing node argument; exact-functor naturality written out through shifted morphisms."
+  "note": "Compiled proof via the already proved Ext identity comparison and right unitors; the constant-sheaf adjunction unit identification is proved directly. No new holes."
  },
  "mathlib_searches": [
   {
@@ -111,10 +127,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T100121-L-2485574",
-  "kind": "interface",
+  "landing": "20261013T111935-L-3067416",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
