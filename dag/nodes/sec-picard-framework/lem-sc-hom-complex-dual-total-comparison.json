@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-hom-complex-dual-total-comparison",
+ "kind": "statement",
+ "title": "Signed Hom short-complex comparison with an opposite total",
+ "statement": "Let (C,J,R) be a ringed site [def-pur-sheaf-hom], and let E,A be integer-indexed cochain complexes of module sheaves [def-pc-cochain-complex-modules]. Let K be a commuting double cochain complex in the opposite category of module sheaves [def-sp-double-complex-total], with a total complex. Suppose isomorphisms e_(p,q): K^(p,q) ≅ op Hom(E^p,A^(-q)) identify the horizontal differential with the opposite of precomposition by d_E and the vertical differential with the opposite of postcomposition by d_A, for all indices. For every integer n, the short complex at n of the product Hom complex [def-pur-hom-complex] is isomorphic to the unop of the short complex at -n of Tot(K). No exactness, boundedness, freeness, or sheafification hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Section 0A8X, product Hom complex and signed differential; Tags 0GM7/0GM8, Hom calculation. Opposite-total comparison is the agent-written coordinate calculation below."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-pc-cochain-complex-modules",
+  "def-sp-double-complex-total",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unop the coproduct cocone defining total degree -n. It is a product cone. The bijection (p,q) with p+q=-n to p, with inverse p↦(p,-p-n), and the given isomorphisms e identify its factors with Hom(E^p,A^(p+n)). The product universal property of homComplex_exists gives isomorphisms of these degree objects, without boundedness.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiply coordinate p in degree n by the unit (-1)^(p*n+p*(p+1)/2). The integer p*(p+1) is even also for negative p. The sign ratio on increasing n is (-1)^p, while the ratio between coordinates (p+1,n) and (p,n+1) is (-1)^(n+1). The opposite total differential has horizontal coefficient 1 and vertical coefficient (-1)^p. Thus after unop and reversing degrees the two given differential formulas agree with the Hom differential d_A f-(-1)^n f d_E. Verify on each product projection, using the signed differential clause of homComplex_exists.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degreewise isomorphisms in degrees n-1,n,n+1 and their differential compatibility form a short-complex isomorphism from the Hom short complex at n to the unop of the total short complex at -n. Its inverse is induced by inverse degree isomorphisms. Empty and zero products satisfy the same universal property, so no separate nonemptiness condition is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "V3 coordinate reindexing and sign calculation for the product Hom differential specified in Section 0A8X. This isolates a comparison only; it does not assume or establish exactness of the columns."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The product internal Hom complex is isomorphic to the opposite total complex of the Hom bicomplex with reversed degrees",
+   "results": "Generic totalFlipIsoX, totalShift₂XIso and bifunctor flip formulas; no internal sheaf Hom comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"iso\", \"total\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Product Hom complex comparison with opposite coproduct total complex",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(total|Total)|[Tt]otal.*homComplex in Mathlib/Algebra/Homology and both library roots; blueprint search for Hom total comparison",
+   "results": "No matching declaration or blueprint node. HomComplex defines product terms and its signed differential; totalFlipIso and totalShift₂XIso concern different comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedHomExactColumns",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Parenthetical Ext-vanishing proof: bounded-above locally free Hom calculation, identifying signed Hom with a commuting bicomplex total.",
+   "via": [
+    "lem-sc-bounded-hom-exact-columns",
+    "lem-sc-bounded-above-finite-free-hom-acyclic",
+    "lem-sc-derived-hom-finite-free-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexDualTotalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexDualTotalComparison.lean",
+  "declaration": "CochainComplex.homComplex_sc_iso_dual_total",
+  "statement": "theorem homComplex_sc_iso_dual_total\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    {R : Sheaf J CommRingCat.{w}}\n    (E A : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (K : HomologicalComplex₂ (SheafOfModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))ᵒᵖ\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (e : ∀ p q : ℤ, (K.X p).X q ≅ op (SheafOfModules.homObj (E.X p) (A.X (-q))))\n    (h₁ : ∀ p p' q : ℤ,\n      (K.d p p').f q ≫ (e p' q).hom = (e p q).hom ≫\n        (SheafOfModules.homObjMap (E.d p p') (𝟙 (A.X (-q)))).op)\n    (h₂ : ∀ p q q' : ℤ,\n      (K.X p).d q q' ≫ (e p q').hom = (e p q).hom ≫\n        (SheafOfModules.homObjMap (𝟙 (E.X p)) (A.d (-q') (-q))).op)\n    (n : ℤ) :\n    Nonempty ((CategoryTheory.homComplex E A).sc n ≅\n      ((K.total (ComplexShape.up ℤ)).sc (-n)).unop)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74ce6",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T100202-L-2497602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-74ce6",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T100202-L-2497602",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proof route, comparison signs, and dependencies with both nodes; both modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus the documented comparison sorryAx."
+ }
+}

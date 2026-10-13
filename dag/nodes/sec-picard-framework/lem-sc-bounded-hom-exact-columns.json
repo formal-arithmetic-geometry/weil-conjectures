@@ -15,10 +15,26 @@
  ],
  "proof": [
   {
-   "text": "fix a degree n and bounds N for E and M for A. A total cocycle has components only for M-n ≤ p ≤ N. Set the degree n-1 primitive to zero above N and descend in p. If the equation at p+1 has been solved, subtract the signed precomposition of that primitive with d_E from the p-th cocycle component. The cocycle equation, the equation at p+1 and d_E squared equal to zero show that this obstruction lies in the kernel of postcomposition with d_A. Exactness of the internal-Hom column at q=p+n gives a local lift along d_A from degree q-1. Perform only the finitely many lifts with M-n+1 ≤ p ≤ N, taking a common refinement of their coverings. At p=M-n the column's incoming object is zero, so exactness forces the remaining obstruction to be zero. Below that degree both cocycle and primitive components vanish. Thus on the resulting covering the total differential of the primitive is the given cocycle. The local exactness criterion for module sheaves gives exactness in degree n; n was arbitrary. This uses the product and signed differential characterization of homComplex_exists, and is valid even if the interval of possible components is empty.",
+   "text": "Construct concretely the commuting bicomplex K in the opposite category with K^(p,q)=op Hom(E^p,A^(-q)), horizontal differential op of precomposition with d_E, and vertical differential op of postcomposition with d_A. Functoriality and d_E²=d_A²=0 prove the bicomplex identities. If E^p=0 then Hom(E^p,-)=0; if A^(-q)=0 then Hom(-,A^(-q))=0, so K is bounded above in its first index by N and uniformly in its second by -M. The finite-diagonal total exists.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-pc-cochain-complex-modules",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each column short complex is the opposite of the assumed exact internal-Hom short complex of A at -q; arithmetic identifies the adjacent negated indices. Hence every column of K is acyclic. Use the zero bicomplex Z and the zero map Z→K. Every column map is a quasi-isomorphism. The existing bounded-above columnwise total comparison therefore makes Tot(Z)→Tot(K) a quasi-isomorphism. Tot(Z) is zero, so Tot(K) is exact at every degree.",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "lem-pc-bounded-above-double-complex-total-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n, the signed opposite-total short-complex comparison identifies the Hom short complex at n with the unop of the total short complex at -n. Transport the exactness just proved through unop and this isomorphism. Thus the Hom complex is exact in every degree, hence acyclic.",
+   "uses": [
+    "lem-sc-hom-complex-dual-total-comparison",
     "def-pur-hom-complex",
     "def-pc-acyclic-complex-modules"
    ],
@@ -26,14 +42,17 @@
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
+  "def-pc-acyclic-complex-modules",
   "def-pc-cochain-complex-modules",
   "def-pur-hom-complex",
-  "def-pc-acyclic-complex-modules"
+  "def-pur-sheaf-hom",
+  "def-sp-double-complex-total",
+  "lem-pc-bounded-above-double-complex-total-comparison",
+  "lem-sc-hom-complex-dual-total-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "description": "P2 made the two steps of the existing bounded-above finite-free Hom proof plan explicit, preserving the signed descending local lifting route. Tags 0GM8/0GM7 supply the application; the detailed proof here is agent-written."
+  "description": "V3 uses the already proved bounded-above bicomplex column comparison after passing to opposite module sheaves and negating the second index; only the product/differential short-complex identification remains as its own node. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -110,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-74ce6",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T045548-L-133665",
+  "landing": "20261013T100202-L-2497602",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, proof route, comparison signs, and dependencies with both nodes; both modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus the documented comparison sorryAx."
  }
 }
