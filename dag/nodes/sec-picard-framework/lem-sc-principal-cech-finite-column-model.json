@@ -14,35 +14,44 @@
  ],
  "proof": [
   {
-   "text": "In column p in [0,r-1], use the finite product of the section complexes for subsets S of cardinality p+1; otherwise use zero. Horizontal maps are the alternating sums of restriction maps, and vertical maps are the coefficient differentials. The componentwise map induced by i gives a bicomplex map: two deletions cancel, and restrictions commute with coefficient differentials. This is the double-complex construction underlying the explicit total formula.",
+   "text": "Use the explicitly constructed B(F), B(G), and B(i); its product column objects and maps are definitionally the column functors. Horizontal square-zero is supplied by the cancellation lemma, while vertical compatibility and naturality are proved in the column construction.",
    "uses": [
-    "def-sc-principal-open-alternating-total",
-    "def-sp-double-complex-total"
+    "def-sc-principal-cech-columns",
+    "lem-sc-principal-cech-horizontal-square"
    ],
    "elementary": false
   },
   {
-   "text": "The absent columns give strict support. Products of module complexes have coordinatewise kernels and images, hence coordinatewise homology. For a finite family, choose preimages in each coordinate to see that the image of the differential is the product of the images. It follows that the product of the given section homology isomorphisms is an isomorphism on each column. Module categories have diagonal coproducts, hence the totals exist.",
-   "uses": [],
+   "text": "For each source and target bicomplex, apply isStrictlyGE_iff and isStrictlyLE_iff to the proved zero-column theorem: a nonempty subset has cardinality in [1,r]. This gives all four strict support clauses, including the empty cover.",
+   "uses": [
+    "def-sc-principal-cech-columns"
+   ],
    "elementary": true
   },
   {
-   "text": "Group the coordinates of principalCechTerms in total degree n by p=card(S)-1, putting each in bidegree (p,n-p). This is an invertible regrouping because only finitely many subsets exist. The inverse collects the summand coordinates. The standard total signs are epsilon1=1 and epsilon2=(-1)^p, so the differential equals the explicitly specified principalCechDifferentialValue. The componentwise map specification identifies the transported total map with principalCechFunctor.map i. Compose these chain isomorphisms with principalCechObjIso to obtain an arrow isomorphism. If r=0, the finite coordinate product and every column are zero; r=1 is the singleton section column.",
+   "text": "Apply the proved column quasi-isomorphism theorem. Its Lean proof uses additivity of homology to preserve finite products; the product comparison conjugates the column homology map to a product of isomorphisms.",
    "uses": [
-    "def-sc-principal-open-alternating-total",
-    "def-sp-double-complex-total"
+    "def-sc-principal-cech-columns"
    ],
    "elementary": false
+  },
+  {
+   "text": "Take the natural comparison with totalization and apply Arrow.isoOfNatIso at i. This supplies exactly the required arrow isomorphism for the explicit B(i).",
+   "uses": [
+    "lem-sc-principal-cech-bicomplex-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-principal-open-alternating-total",
-  "def-sp-double-complex-total"
+  "def-sc-principal-cech-columns",
+  "lem-sc-principal-cech-horizontal-square",
+  "lem-sc-principal-cech-bicomplex-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D1, proof: the alternating Cech double complex and total differential signs; Cohomology Section 20.25 and finite Cech-degree filtration of Tag 08C2. W3 explicit reconstruction of the comparison for the library maps"
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs; T2 explicit columns, support and homology-product proofs, with horizontal cancellation and coordinate total comparison split off"
  },
  "mathlib_searches": [
   {
@@ -123,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T031557-L-3576943",
+  "landing": "20261013T045604-L-137640",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-principal-cech-bicomplex-comparison",
+ "kind": "statement",
+ "title": "Natural comparison between the explicit principal Cech bicomplex total and the existing total functor",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$, and $f:\\operatorname{Fin}r\\to A$. Define $B(F)$ to be the integer-indexed bicomplex with columns $C_p(F)$ and horizontal maps $h_p(F)$ from [def-sc-principal-cech-columns], using their square-zero property [lem-sc-principal-cech-horizontal-square]. Define $B(i)$ by the product of the section maps in each column. Then there is a natural isomorphism of functors from integer-indexed complexes of module sheaves on $\\operatorname{Spec}A$ to integer-indexed $A$-module complexes, $\\operatorname{principalCechFunctor}(r,f)\\cong B\\,;\\,\\operatorname{Tot}$, where the left functor is [def-sc-principal-open-alternating-total] and $\\operatorname{Tot}$ is Mathlib's diagonal-coproduct total with differential $d_h+(-1)^p d_v$. No boundedness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs"
+ },
+ "stmt_deps": [
+  "def-sc-principal-open-alternating-total",
+  "def-sc-principal-cech-columns",
+  "lem-sc-principal-cech-horizontal-square",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Construct B(F) by CochainComplex.of with product column objects C_p(F), horizontal differential h_p(F), and the square-zero theorem. The vertical chain-map compatibility and naturality were proved in the explicit column construction. Define B(i) columnwise; naturality of h verifies its chain-map equation.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "lem-sc-principal-cech-horizontal-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In total degree n regroup the subset coordinates by p=card(S)-1 and q=n-p. The row index is empty outside 0,...,r-1, by nonempty cardinality and card(S)≤r. The diagonal coproduct is therefore a finite product of the degreewise section coordinates. Its degreewise inverse sends each coordinate to its unique column summand.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the differentials on the degreewise coordinates. Mathlib totalization has horizontal sign 1 and vertical sign (-1)^p, giving the same alternating restrictions and vertical differential as principalCechDifferentialValue. The specification of principalCechDifferential_exists identifies the chosen differential with this formula.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with principalCechObjIso. The coefficient map specification in principalCechFunctor_exists and the product-map formula show that the degreewise comparison commutes with all coefficient chain maps. Thus the chain isomorphisms form a natural isomorphism. For the empty cover both sides are zero.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-cech-columns",
+  "lem-sc-principal-cech-horizontal-square",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs; explicit reconstruction of the parent proof step 3, grouping coordinates by cardinality and checking the total differential signs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "alternating Cech total functor naturally isomorphic bicomplex total",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating Cech total functor naturally isomorphic bicomplex total",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicTopology.alternatingFaceMapComplexConst, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, AlgebraicTopology.DoldKan.Γ₀'CompNondegComplexFunctor, AlgebraicTopology.singularChainComplexFunctorIsoOfTotallyDisconnectedSpace, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex.ι_mapBifunctorFlipIso_hom, Rep.standardComplex.compForgetAugmentedIso, AlgebraicTopology.DoldKan.N₁Γ₀_app",
+   "verdict": "no exact match; generic infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Bb]icomplex|[Bb]icomplex.*Cech",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "principal Čech finite-column model: step 3, grouping coordinates by cardinality and checking the total differential signs",
+   "via": [
+    "lem-sc-principal-cech-finite-column-model",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalCechBicomplexComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechBicomplexComparison.lean",
+  "declaration": "AlgebraicGeometry.principalCechBicomplexComparison_exists",
+  "statement": "theorem principalCechBicomplexComparison_exists : Nonempty (principalCechFunctor r f ≅ principalCechBicomplexFunctor r f ⋙ HomologicalComplex₂.totalFunctor (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

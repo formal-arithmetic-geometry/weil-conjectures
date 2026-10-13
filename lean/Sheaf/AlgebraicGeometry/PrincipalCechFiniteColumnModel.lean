@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.PrincipalCechBicomplexComparison
 
 /-! # Finite-column bicomplex models for principal Čech maps
 
@@ -68,6 +69,23 @@ theorem principalCech_finiteColumn_model
               (ComplexShape.up ℤ)).map i)) → QuasiIso (φ.f p)) ∧
       Nonempty (Arrow.mk ((principalCechFunctor r f).map i) ≅
         Arrow.mk (HomologicalComplex₂.total.map φ (ComplexShape.up ℤ))) := by
-  sorry
+  refine ⟨principalCechBicomplex r f F, principalCechBicomplex r f G,
+    (principalCechBicomplexFunctor r f).map i, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · apply (CochainComplex.isStrictlyGE_iff _ 0).mpr
+    intro p hp
+    exact principalCechColumn_isZero r f p (Or.inl hp) F
+  · apply (CochainComplex.isStrictlyLE_iff _ ((r : ℤ) - 1)).mpr
+    intro p hp
+    exact principalCechColumn_isZero r f p (Or.inr hp) F
+  · apply (CochainComplex.isStrictlyGE_iff _ 0).mpr
+    intro p hp
+    exact principalCechColumn_isZero r f p (Or.inl hp) G
+  · apply (CochainComplex.isStrictlyLE_iff _ ((r : ℤ) - 1)).mpr
+    intro p hp
+    exact principalCechColumn_isZero r f p (Or.inr hp) G
+  · intro p _ _ hi
+    exact principalCechColumn_quasiIso r f p F G i hi
+  · obtain ⟨e⟩ := principalCechBicomplexComparison_exists r f
+    exact ⟨Arrow.isoOfNatIso e (Arrow.mk i)⟩
 
 end AlgebraicGeometry

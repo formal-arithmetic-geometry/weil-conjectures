@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-principal-cech-horizontal-square",
+ "kind": "statement",
+ "title": "Two horizontal principal Cech differentials compose to zero",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$, $f:\\operatorname{Fin}r\\to A$, and $F$ an integer-indexed complex of module sheaves on $\\operatorname{Spec}A$ [def-sc-principal-open-alternating-total]. For every integer $p$, the explicitly constructed alternating restriction maps of [def-sc-principal-cech-columns] satisfy $h_p(F)\\,;\\,h_{p+1}(F)=0$ as maps of $A$-module complexes. No boundedness or quasi-coherence assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs"
+ },
+ "stmt_deps": [
+  "def-sc-principal-open-alternating-total",
+  "def-sc-principal-cech-columns"
+ ],
+ "proof": [
+  {
+   "text": "Project to a subset S in horizontal degree p+2 and evaluate at a coefficient degree. Expand both sums using product projection identities. Each surviving term is indexed by an ordered pair of distinct deleted members a,b of S.",
+   "uses": [
+    "def-sc-principal-cech-columns"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pair (a,b) with (b,a). Presheaf functoriality identifies both composites with restriction from S minus {a,b} to S. For a<b, deleting a reduces the position of b by one, while deleting b leaves the position of a unchanged. Consequently the exponents differ by one and the signs are opposite. Empty twice-deleted subsets are omitted in both orders.",
+   "uses": [
+    "def-sc-principal-cech-columns"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The involution reversing deletion order has no fixed point. Cancel the paired terms. Product projections and degree evaluations detect equality, proving h_p followed by h_(p+1) is zero. Negative or absent rows have empty index types and require no extra hypothesis.",
+   "uses": [
+    "def-sc-principal-cech-columns"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-cech-columns"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs; explicit reconstruction of the parent proof step 1, two deletions cancel in pairs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "alternating Cech restriction differential squares to zero",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating Cech restriction differential squares to zero",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicTopology.AlternatingCofaceMapComplex.d_squared, AlgebraicTopology.AlternatingFaceMapComplex.d_squared, AlgebraicTopology.NormalizedMooreComplex.d_squared, ContinuousCohomology.MultiInd.d_comp_d, Rep.standardComplex.d_comp_ε, AlgebraicTopology.normalizedMooreComplex_objD, groupHomology.inhomogeneousChains.d_comp_d, AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq",
+   "verdict": "no exact match; generic infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*[Cc]ech|[Cc]ech.*alternating|principalCechHorizontal",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "principal Čech finite-column model: step 1, two deletions cancel in pairs",
+   "via": [
+    "lem-sc-principal-cech-finite-column-model",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalCechHorizontalSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechHorizontalSquare.lean",
+  "declaration": "AlgebraicGeometry.principalCechHorizontal_square",
+  "statement": "theorem principalCechHorizontal_square (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (F : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (p : ℤ) : (principalCechHorizontal r f p).app F ≫ (principalCechHorizontal r f (p + 1)).app F = 0",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

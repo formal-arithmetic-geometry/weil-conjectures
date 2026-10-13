@@ -1,0 +1,102 @@
+{
+ "id": "def-sc-principal-cech-columns",
+ "kind": "definition",
+ "title": "Explicit product columns and alternating restrictions for principal Cech complexes",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$ and $f:\\operatorname{Fin}r\\to A$. Use the section functors and principal intersections $D_S$ of [def-sc-principal-open-alternating-total]. For every $p\\in\\mathbb Z$ let $I_p$ be the finite type of nonempty subsets $S\\subseteq\\operatorname{Fin}r$ with $|S|=p+1$. Define the column functor $C_p(F)=\\prod_{S\\in I_p}\\Gamma(D_S,F^\\bullet)$ in the category of integer-indexed $A$-module complexes. Coefficient maps act by the categorical product of their section maps. Define $h_p:C_p\\to C_{p+1}$ as the natural transformation whose projection to $S\\in I_{p+1}$ is $\\sum_{j\\in S}(-1)^{|\\{k\\in S:k<j\\}|}\\operatorname{res}_{S\\setminus\\{j\\},S}\\circ\\pi_{S\\setminus\\{j\\}}$, omitting empty deletions. Restrictions are induced by the sheaf presheaf maps. This gives specified real constructions, including empty products in every absent row.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs"
+ },
+ "stmt_deps": [
+  "def-sc-principal-open-alternating-total"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "principal Cech product columns horizontal differential natural transformation",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "principal Cech product columns horizontal differential natural transformation",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Limits.SequentialProduct.functorMap, CategoryTheory.Limits.SequentialProduct.functorMap_commSq_succ, AlgebraicTopology.DoldKan.MorphComponents.φ, CategoryTheory.Limits.SequentialProduct.functorMap_commSq_aux, AlgebraicTopology.DoldKan.Γ₀.Obj.map, CategoryTheory.Limits.SequentialProduct.functorMap_commSq, CategoryTheory.Limits.SequentialProduct.functorObjProj_neg, CategoryTheory.cechNerveTerminalFrom",
+   "verdict": "no exact match; generic infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Cc]olumn|[Cc]olumn.*Cech",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalCechFiniteColumnModel",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "principal Čech finite-column model: step 1, product section columns and horizontal alternating restrictions",
+   "via": [
+    "lem-sc-principal-cech-finite-column-model",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalCechColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechColumns.lean",
+  "declaration": "AlgebraicGeometry.principalCechHorizontal",
+  "statement": "def principalCechHorizontal (p : ℤ) : principalCechColumnFunctor r f p ⟶ principalCechColumnFunctor r f (p + 1)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T045604-L-137640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
