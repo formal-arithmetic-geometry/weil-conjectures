@@ -1,150 +1,148 @@
 {
- "id": "lem-weil-pbc-flat-base-change-resolution-sections",
- "kind": "statement",
- "title": "Section formula for a fixed augmented lift",
- "statement": "For f:X→S, g:S′→S with g and g′ flat, F an O_X-module, injective resolutions I of F and J of g′^*F, an augmented lift t of η_F, and p≥0, the adjoint of flatBaseChangeResolutionBeta f g I J t p sends D.sourceClass p ξ to D.targetClass p of moduleCohomologyFMap h D.psi p ξ for every open V, every D:FlatBaseChangeOpenChoices f g F I J V and every ξ∈H^p(f⁻¹V,F). Here h=g′ restricted to g′⁻¹(f⁻¹V), and sourceClass, targetClass and Beta are the fixed constructions of [def-weil-pbc-flat-base-change-resolution-construction]; D is as in [def-weil-pbc-flat-base-change-open-choices] and moduleCohomologyFMap is [def-weil-pbc-module-cohomology-fmap].",
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 02N7, 01FB, 01E4; parent node steps 3–5"
- },
- "stmt_deps": [
-  "def-weil-pbc-flat-base-change-resolution-construction",
-  "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-module-cohomology-fmap"
- ],
- "proof": [
-  {
-   "text": "Factor sourceClass and targetClass into resolutionSectionHomology, sectionHomologyClass, and the inverse higher-direct-image resolution isomorphism. Apply adjunction naturality to factor the adjoint of Beta into the source resolution homomorphism, the adjoint of the homology map, and the pushed target inverse resolution isomorphism.",
-   "uses": [
-    "def-weil-pbc-flat-base-change-section-complex",
-    "def-weil-pbc-flat-base-change-resolution-construction"
-   ],
-   "elementary": true
+  "id": "lem-weil-pbc-flat-base-change-resolution-sections",
+  "kind": "statement",
+  "title": "Section formula for a fixed augmented lift",
+  "statement": "For f:X→S, g:S′→S with g and g′ flat, F an O_X-module, injective resolutions I of F and J of g′^*F, an augmented lift t of η_F, and p≥0, the adjoint of flatBaseChangeResolutionBeta f g I J t p sends D.sourceClass p ξ to D.targetClass p of moduleCohomologyFMap h D.psi p ξ for every open V, every D:FlatBaseChangeOpenChoices f g F I J V and every ξ∈H^p(f⁻¹V,F). Here h=g′ restricted to g′⁻¹(f⁻¹V), and sourceClass, targetClass and Beta are the fixed constructions of [def-weil-pbc-flat-base-change-resolution-construction]; D is as in [def-weil-pbc-flat-base-change-open-choices] and moduleCohomologyFMap is [def-weil-pbc-module-cohomology-fmap].",
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 02N7, 01FB, 01E4; parent node steps 3–5"
   },
-  {
-   "text": "Apply the general flat-pullback homology adjunction section formula to q=flatBaseChangeResolutionQ. Apply the restricted augmented lift homology equality to t and D. Cancel the source resolution inverse with its homomorphism, compose the two equalities, and retain the target inverse resolution comparison. Evaluate the resulting equality of additive-group morphisms at xi.",
-   "uses": [
-    "lem-weil-pbc-flat-pullback-homology-adjoint-sections",
-    "lem-weil-pbc-flat-base-change-restricted-lift-homology"
-   ],
-   "elementary": false
+  "stmt_deps": [
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-module-cohomology-fmap"
+  ],
+  "proof": [
+    {
+      "text": "Restrict t to U = f⁻¹V and use the augmentation-preserving comparisons\n in D to obtain a map of the source resolution into the direct image of the\n target resolution on W = g'⁻¹U. D.unit_square gives its augmentation equation\n with D.psi. Resolve that pushed complex by lambda into injectives. In the\n recorded construction of moduleCohomologyFMap choose lambda times the restricted\n lift as the horizontal map. Sections of lambda induce invertible homology maps\n (01EZ), so H(lambda) inverse times H(lambda t) equals H(t). Apply moduleCohomologyFMap_independent from [lem-weil-pbc-module-cohomology-fmap-functorial] to compare these choices with those defining the recorded map. Naturality of\n theta with respect to maps of section complexes transports this equation to\n the two resolutionSectionClass maps. Finally q is the adjoint of c, namely\n unit followed by g_*c. Exactness of g^* identifies its homology with pullback\n of homology; on each locally represented cocycle the adjoint of H(c) therefore\n sends its class to the class of q(s). Sheafification gives the same equality\n of sections. The isoRightDerivedObj maps in sourceClass, targetClass and beta\n transport that equality to precisely the displayed formula.",
+      "uses": [
+        "def-weil-pbc-module-cohomology-fmap",
+        "lem-weil-pbc-complex-injective-resolution-mono",
+        "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+        "lem-weil-pbc-higher-direct-image-presheaf",
+        "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+        "lem-weil-pbc-module-cohomology-fmap-functorial"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 02N7, 01FB, 01E4; the parent proof split, with degreewise lift construction using Mathlib InjectiveResolution.desc"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Extend an augmented injective resolution to a cochain map into a complex of injectives",
+      "results": "Service unavailable (Internal Server Error), 2026-10-12; no verdict recorded."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "injective resolution extend morphism to complex of injectives",
+      "results": "InjectiveResolution.desc, descFZero, descFOne, descFSucc; desc requires a target resolution rather than a general injective complex. Its degreewise method is usable and is implemented in augmentedLift.",
+      "date": "2026-10-12",
+      "verdict": "Partial match: direct construction for the lift, no match for resolution independence or the section formula."
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.mkHom",
+      "results": "mkHom and mkHom_f_0 provide the constructor and its degree-zero equation.",
+      "date": "2026-10-12",
+      "verdict": "Used for the proved lift."
+    },
+    {
+      "tool": "grep",
+      "query": "flatBaseChange|baseChangeMap; rg flatBaseChangeMap_sections|FlatBaseChangeOpenChoices lean/WeilConjectures lean/Sheaf",
+      "results": "No existing proof of the section theorem; existing restricted choices and section classes are in FlatBaseChangeOpenChoices and the parent module.",
+      "date": "2026-10-12",
+      "verdict": "No shorter route for the remaining three parts."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "cohomology homology adjunction base change naturality",
+      "results": "Results were group-cohomology formulas, with no scheme-module section formula for this resolution construction.",
+      "date": "2026-10-12",
+      "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"mapHomologyIso\"",
+      "results": "Found ShortComplex.mapHomologyIso_hom_naturality and its inverse form. These provide generic comparison naturality, not the restriction and adjunction section calculation.",
+      "date": "2026-10-12",
+      "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+    },
+    {
+      "tool": "grep",
+      "query": "ModuleCohomologyFMapData|sectionCohomologyTheta|resolutionSectionClass; local rg on lean/Sheaf and lean/WeilConjectures",
+      "results": "Found moduleCohomologyFMap_independent in ModuleCohomologyFMapFunctorial: use it for independence of the cohomology-map choice data. HigherDirectImagePresheaf supplies theta/sheafification; no complete fixed-lift section formula already exists.",
+      "date": "2026-10-12",
+      "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
+    "group": "R2",
+    "date": "2026-10-12"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-henselian-idempotent-lifting",
+      "place": "lem-weil-pbc-flat-base-change-map-sections: Section formula for a fixed augmented lift",
+      "via": [
+        "lem-weil-pbc-formal-functions-stalk",
+        "lem-weil-pbc-stein-fibre-idempotent-image",
+        "lem-weil-pbc-stein-normalized-fibre-idempotent",
+        "lem-weil-pbc-stein-factorization-affine",
+        "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+        "lem-weil-pbc-flat-base-change-map-sections"
+      ]
+    },
+    "same_as": null
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
+    "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionSections.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_sections",
+    "statement": "theorem flatBaseChangeResolutionBeta_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0))\n    (p : ℕ) :\n    ∀ (V : S.Opens)\n        (D : FlatBaseChangeOpenChoices f g F I J V)\n        (xi : (forget₂ _ AddCommGrpCat.{uBC}).obj\n          ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F))),\n        Hom.app ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv _ _\n          (flatBaseChangeResolutionBeta f g I J t p)) V\n          (D.sourceClass p xi) =\n        D.targetClass p\n          (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)\n            ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)",
+    "branch": "sheaf-dag",
+    "by": "R2",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-7c799",
+    "group": "R2",
+    "result": "pass",
+    "landing": "20261012T160142-L-2566203",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-7c799",
+    "group": "R2",
+    "result": "pass",
+    "landing": "20261012T160142-L-2566203",
+    "kind": "interface",
+    "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
   }
- ],
- "proof_deps": [
-  "def-weil-pbc-flat-base-change-section-complex",
-  "def-weil-pbc-flat-base-change-resolution-construction",
-  "lem-weil-pbc-flat-pullback-homology-adjoint-sections",
-  "lem-weil-pbc-flat-base-change-restricted-lift-homology"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01E4, 01FB and 02N7; N3 decomposition into restricted-lift homology and generic adjunction, with resolution-isomorphism cancellation proved in Lean"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Extend an augmented injective resolution to a cochain map into a complex of injectives",
-   "results": "Service unavailable (Internal Server Error), 2026-10-12; no verdict recorded."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "injective resolution extend morphism to complex of injectives",
-   "results": "InjectiveResolution.desc, descFZero, descFOne, descFSucc; desc requires a target resolution rather than a general injective complex. Its degreewise method is usable and is implemented in augmentedLift.",
-   "date": "2026-10-12",
-   "verdict": "Partial match: direct construction for the lift, no match for resolution independence or the section formula."
-  },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.mkHom",
-   "results": "mkHom and mkHom_f_0 provide the constructor and its degree-zero equation.",
-   "date": "2026-10-12",
-   "verdict": "Used for the proved lift."
-  },
-  {
-   "tool": "grep",
-   "query": "flatBaseChange|baseChangeMap; rg flatBaseChangeMap_sections|FlatBaseChangeOpenChoices lean/WeilConjectures lean/Sheaf",
-   "results": "No existing proof of the section theorem; existing restricted choices and section classes are in FlatBaseChangeOpenChoices and the parent module.",
-   "date": "2026-10-12",
-   "verdict": "No shorter route for the remaining three parts."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "cohomology homology adjunction base change naturality",
-   "results": "Results were group-cohomology formulas, with no scheme-module section formula for this resolution construction.",
-   "date": "2026-10-12",
-   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"mapHomologyIso\"",
-   "results": "Found ShortComplex.mapHomologyIso_hom_naturality and its inverse form. These provide generic comparison naturality, not the restriction and adjunction section calculation.",
-   "date": "2026-10-12",
-   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
-  },
-  {
-   "tool": "grep",
-   "query": "ModuleCohomologyFMapData|sectionCohomologyTheta|resolutionSectionClass; local rg on lean/Sheaf and lean/WeilConjectures",
-   "results": "Found moduleCohomologyFMap_independent in ModuleCohomologyFMapFunctorial: use it for independence of the cohomology-map choice data. HigherDirectImagePresheaf supplies theta/sheafification; no complete fixed-lift section formula already exists.",
-   "date": "2026-10-12",
-   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
-  "group": "R2",
-  "date": "2026-10-12"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "lem-weil-pbc-flat-base-change-map-sections: Section formula for a fixed augmented lift",
-   "via": [
-    "lem-weil-pbc-formal-functions-stalk",
-    "lem-weil-pbc-stein-fibre-idempotent-image",
-    "lem-weil-pbc-stein-normalized-fibre-idempotent",
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
-    "lem-weil-pbc-flat-base-change-map-sections"
-   ]
-  },
-  "same_as": null
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionSections.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_sections",
-  "statement": "theorem flatBaseChangeResolutionBeta_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0))\n    (p : ℕ) :\n    ∀ (V : S.Opens)\n        (D : FlatBaseChangeOpenChoices f g F I J V)\n        (xi : (forget₂ _ AddCommGrpCat.{uBC}).obj\n          ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj\n            ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F))),\n        Hom.app ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv _ _\n          (flatBaseChangeResolutionBeta f g I J t p)) V\n          (D.sourceClass p xi) =\n        D.targetClass p\n          (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)\n            ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)",
-  "branch": "sheaf-dag",
-  "by": "R2",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "X-7c799",
-  "group": "R2",
-  "result": "pass",
-  "landing": "20261012T160142-L-2566203",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261013T072400-L-1123218",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

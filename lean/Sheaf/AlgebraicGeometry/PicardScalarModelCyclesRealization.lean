@@ -14,8 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles
-import Sheaf.AlgebraicGeometry.PicardDirectImageTestSections
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 
 /-! # Realizing scalar cycles of a fixed perfect direct-image model
 
@@ -29,8 +29,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
--- Comparing the two derived Hom interfaces unfolds the chosen derived pullback functors.
 /-- A connective strictly perfect model with a scalar degree-zero basis realizes its
 scalar cycles as sections, compatibly with restriction to the marked residue fibre.
 This fixes a model; it constructs no degree-one map and assumes no H¹ injectivity.
@@ -105,22 +103,6 @@ theorem picard_scalar_model_cycles_realization
                           (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app
                             ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
                               (Opposite.op ⊤) σ)) =
-                    c.symm (W.evaluation V w hwV a) := by
-  classical
-  let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
-    ((DerivedCategory.singleFunctor
-      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
-        ((Modules.tensorPullback (pullback.fst f k)).obj L))
-  obtain ⟨c, hc⟩ := picard_scalar_derived_cycles W E w U hwU hU m d K hK hneg
-    e0 e1 hE hd hdw
-  obtain ⟨q, hq⟩ := picard_direct_image_test_sections f L W k w
-  refine ⟨(q (W.fromSpecResidueField w)).symm.trans c, ?_⟩
-  intro V hwV hVU
-  obtain ⟨j, hj, e, he⟩ := hq V hwV
-  refine ⟨j, hj, e, ?_⟩
-  intro a ha
-  obtain ⟨ξ, hξ⟩ := hc V hwV hVU a ha
-  refine ⟨q V.ι ξ, ?_⟩
-  exact (he ξ).trans (congrArg (q (W.fromSpecResidueField w)) hξ)
+                    c.symm (W.evaluation V w hwV a) := by sorry
 
 end AlgebraicGeometry.Scheme

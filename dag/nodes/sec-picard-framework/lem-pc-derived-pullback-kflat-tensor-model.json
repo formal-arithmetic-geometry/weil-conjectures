@@ -1,158 +1,154 @@
 {
- "id": "lem-pc-derived-pullback-kflat-tensor-model",
- "kind": "statement",
- "title": "Natural tensor comparison on K-flat cochain representatives before localization",
- "statement": "Let g:T\\to X be a morphism of schemes [def-pc-scheme], with recorded derived categories [def-pc-derived-category], tensors [def-pc-scheme-derived-tensor-structure] and derived pullback L [def-pc-derived-pullback]. Let F be an additive functor on module sheaves, with object equalities h_M:F(M)=g^*M and morphism equalities F(a)=h_M;g^*(a);h_N inverse for the tensor pullback [def-pc-module-pullback]. Let epsilon:Qh L\\to K(F) Qh exhibit L as a left-derived functor for quasi-isomorphisms. For each cochain pair P,N let phi(P,N):F Tot(P tensor N)\\cong Tot(FP tensor FN) be an isomorphism natural simultaneously in both complex maps, meaning F Tot(a tensor b);phi(P',N')=phi(P,N);Tot(Fa tensor Fb). Suppose epsilon_Tot(P tensor N);Q(phi(P,N)) is invertible on every K-flat pair [def-pc-kflat-complex]. Then there is an isomorphism e(P,N):L(QP) tensor L(QN)\\cong L(QP tensor QN) for every K-flat pair, satisfying e;L(mu_Q);epsilon_tensor;Q(phi)=(epsilon_P tensor epsilon_N);mu_Q(FP,FN), and simultaneously natural in all cochain maps between K-flat pairs. No localization of the K-flat subcategory, or comparison on arbitrary derived objects, is asserted.",
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-module-pullback",
-  "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
- ],
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, steps 1 and 2"
- },
- "proof": [
-  {
-   "text": "Identify the supplied additive F with the recorded tensor pullback. K-flat preservation identifies the images of K-flat complexes with K-flat complexes. Compare the supplied derived counit with the recorded K-flat computation by uniqueness of left-derived functors; it is invertible on K-flat objects.",
-   "uses": [
+  "id": "lem-pc-derived-pullback-kflat-tensor-model",
+  "kind": "statement",
+  "title": "Natural tensor comparison on K-flat cochain representatives before localization",
+  "statement": "Let g:T\\to X be a morphism of schemes [def-pc-scheme], with recorded derived categories [def-pc-derived-category], tensors [def-pc-scheme-derived-tensor-structure] and derived pullback L [def-pc-derived-pullback]. Let F be an additive functor on module sheaves, with object equalities h_M:F(M)=g^*M and morphism equalities F(a)=h_M;g^*(a);h_N inverse for the tensor pullback [def-pc-module-pullback]. Let epsilon:Qh L\\to K(F) Qh exhibit L as a left-derived functor for quasi-isomorphisms. For each cochain pair P,N let phi(P,N):F Tot(P tensor N)\\cong Tot(FP tensor FN) be an isomorphism natural simultaneously in both complex maps, meaning F Tot(a tensor b);phi(P',N')=phi(P,N);Tot(Fa tensor Fb). Suppose epsilon_Tot(P tensor N);Q(phi(P,N)) is invertible on every K-flat pair [def-pc-kflat-complex]. Then there is an isomorphism e(P,N):L(QP) tensor L(QN)\\cong L(QP tensor QN) for every K-flat pair, satisfying e;L(mu_Q);epsilon_tensor;Q(phi)=(epsilon_P tensor epsilon_N);mu_Q(FP,FN), and simultaneously natural in all cochain maps between K-flat pairs. No localization of the K-flat subcategory, or comparison on arbitrary derived objects, is asserted.",
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
     "def-pc-derived-pullback",
-    "lem-pc-kflat-pullback-preservation"
-   ],
-   "elementary": false
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-module-pullback",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+  ],
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, steps 1 and 2"
   },
-  {
-   "text": "For a K-flat pair the localization tensorator on X is invertible; the counits on each factor and the tensorator on the F-images are invertible by K-flat preservation and the K-flat tensor computation. Write A=L(mu_Q), B=epsilon_tensor;Q(phi), C=(epsilon_P tensor epsilon_N);mu_Q(FP,FN). The hypothesis gives invertibility of B. Form e=C;B inverse;A inverse, and cancellation proves e;A;B=C. No tensor-product K-flatness theorem is needed here because B invertibility is explicitly assumed.",
-   "uses": [
+  "proof": [
+    {
+      "text": "Identify the supplied additive F with the recorded tensor pullback. K-flat preservation identifies the images of K-flat complexes with K-flat complexes. Compare the supplied derived counit with the recorded K-flat computation by uniqueness of left-derived functors; it is invertible on K-flat objects.",
+      "uses": [
+        "def-pc-derived-pullback",
+        "lem-pc-kflat-pullback-preservation"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For a K-flat pair the localization tensorator on X is invertible; the counits on each factor and the tensorator on the F-images are invertible by K-flat preservation and the K-flat tensor computation. Write A=L(mu_Q), B=epsilon_tensor;Q(phi), C=(epsilon_P tensor epsilon_N);mu_Q(FP,FN). The hypothesis gives invertibility of B. Form e=C;B inverse;A inverse, and cancellation proves e;A;B=C. No tensor-product K-flatness theorem is needed here because B invertibility is explicitly assumed.",
+      "uses": [
+        "def-pc-scheme-derived-tensor-structure",
+        "lem-pc-kflat-pullback-preservation"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Use naturality of epsilon, phi and both localization tensorators to check the component formula is simultaneously natural in cochain maps. Postcompose both sides by the invertible target comparison and cancel. This stops before extending the family to derived bifunctors.",
+      "uses": [
+        "def-pc-derived-pullback",
+        "def-pc-scheme-derived-tensor-structure"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-pc-derived-pullback",
     "def-pc-scheme-derived-tensor-structure",
     "lem-pc-kflat-pullback-preservation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use naturality of epsilon, phi and both localization tensorators to check the component formula is simultaneously natural in cochain maps. Postcompose both sides by the invertible target comparison and cancel. This stops before extending the family to derived bifunctors.",
-   "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-kflat-pullback-preservation"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, steps 1 and 2",
-  "note": "Refinement of the parent proof. Stacks establishes the K-flat bifunctor comparison; the detailed coherence checks with the supplied counit and summand formula are written by this worker."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "natural isomorphism of bifunctors descends through localization in both variables",
-   "results": "8 hits: CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.lift₃NatIso, CategoryTheory.Localization.Lifting₃.bifunctorComp₂₃, CategoryTheory.Localization.lift₂_iso_hom_app_app₂, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.Lifting₃.bifunctorComp₁₂, CategoryTheory.Localization.lift₂_iso_hom_app_app₁, CategoryTheory.Localization.lift₃NatIso_hom",
-   "date": "2026-10-12",
-   "verdict": "Relevant generic tools, no exact match for the specialized statement"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Localization.lift₂NatIso",
-   "results": "3 hits: CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.lift₂NatIso_inv",
-   "date": "2026-10-12",
-   "verdict": "Relevant generic tools, no exact match for the specialized statement"
-  },
-  {
-   "tool": "grep",
-   "query": "leftDerived.*[Tt]ensor|lift₂NatIso",
-   "results": "10 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
-   "date": "2026-10-12",
-   "verdict": "Relevant generic tools, no exact match for the specialized statement"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived functor counit is invertible on K-flat complexes pullback and derived tensor",
-   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
-   "date": "2026-10-12",
-   "verdict": "Relevant generic tools, no exact match for the specialized statement"
-  },
-  {
-   "tool": "leansearch",
-   "query": "natural isomorphism bifunctors K-flat complexes localization",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent",
-  "date": "2026-10-13",
-  "group": "Q3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Parent comparison steps 1 and 2 and naturality on K-flat representatives only; before the localization step",
-   "via": [
-    "lem-pc-derived-pullback-tensor-comparison-descent",
-    "lem-pc-derived-pullback-monoidal-descent",
-    "def-pc-derived-pullback-monoidal-model",
-    "lem-pc-perfect-rhom-tensor-comparison",
-    "lem-pc-perfect-tensor-hom-duality",
-    "lem-sc-smooth-proper-tensor-perfect-case",
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "lem-sc-smooth-proper-relative-dualizing-general",
-    "lem-sc-smooth-proper-curve-dualizing",
-    "lem-sc-finite-duality-trace"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackKFlatTensorModel.lean",
-  "declaration": "AlgebraicGeometry.derivedPullback_kFlat_tensor_model",
-  "statement": "theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))\n    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)\n    (hmap : ∀ {M N} (a : M ⟶ N),\n      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫\n        eqToHom (hF N).symm)\n    [F.Additive]\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : (derivedPullback g).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))\n    (φ : ∀ P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n            (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅\n          CochainComplex.mapBifunctor\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _))\n    (hnatural : ∀ (P P' N N' : CochainComplex\n              (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n            (a : P ⟶ P') (b : N ⟶ N'),\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n              (HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (ComplexShape.up ℤ)) ≫\n              (φ P' N').hom =\n            (φ P N).hom ≫\n              HomologicalComplex.mapBifunctorMap\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map a)\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)\n                (ComplexShape.up ℤ))\n    (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n          CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N →\n            IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫\n              DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n                (φ P N).hom)))\n    : ∃ e : ∀ (P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ),\n        CochainComplex.IsKFlat (R := X.sheaf) P →\n        CochainComplex.IsKFlat (R := X.sheaf) N →\n          (((derivedPullback g).obj (DerivedCategory.Q.obj P) ⊗\n            (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≅\n          (derivedPullback g).obj (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N)),\n      (∀ (P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n        (hN : CochainComplex.IsKFlat (R := X.sheaf) N),\n        (e P N hP hN).hom ≫\n            (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫\n            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫\n            DerivedCategory.Q.map (φ P N).hom =\n          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ\n            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫\n            Functor.LaxMonoidal.μ DerivedCategory.Q\n              ((F.mapHomologicalComplex (.up ℤ)).obj P)\n              ((F.mapHomologicalComplex (.up ℤ)).obj N)) ∧\n      (∀ (P P' N N' : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n        (hP' : CochainComplex.IsKFlat (R := X.sheaf) P')\n        (hN : CochainComplex.IsKFlat (R := X.sheaf) N)\n        (hN' : CochainComplex.IsKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),\n        ((curriedTensorPre (derivedPullback g)).map (DerivedCategory.Q.map a)).app\n            (DerivedCategory.Q.obj N) ≫\n            ((curriedTensorPre (derivedPullback g)).obj (DerivedCategory.Q.obj P')).map\n              (DerivedCategory.Q.map b) ≫ (e P' N' hP' hN').hom =\n          (e P N hP hN).hom ≫\n            ((curriedTensorPost (derivedPullback g)).map (DerivedCategory.Q.map a)).app\n              (DerivedCategory.Q.obj N) ≫\n            ((curriedTensorPost (derivedPullback g)).obj (DerivedCategory.Q.obj P')).map\n              (DerivedCategory.Q.map b))",
-  "branch": "sheaf-dag",
-  "by": "Q3",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
-  "result": "pass",
-  "landing": "20261012T223413-L-1639741",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "E1",
-  "result": "pass",
-  "landing": "20261013T072344-L-1117424",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.derivedPullback_kFlat_tensor_model"
   ],
-  "sorry_after": []
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, steps 1 and 2",
+    "note": "Refinement of the parent proof. Stacks establishes the K-flat bifunctor comparison; the detailed coherence checks with the supplied counit and summand formula are written by this worker."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "natural isomorphism of bifunctors descends through localization in both variables",
+      "results": "8 hits: CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.lift₃NatIso, CategoryTheory.Localization.Lifting₃.bifunctorComp₂₃, CategoryTheory.Localization.lift₂_iso_hom_app_app₂, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.Lifting₃.bifunctorComp₁₂, CategoryTheory.Localization.lift₂_iso_hom_app_app₁, CategoryTheory.Localization.lift₃NatIso_hom",
+      "date": "2026-10-12",
+      "verdict": "Relevant generic tools, no exact match for the specialized statement"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Localization.lift₂NatIso",
+      "results": "3 hits: CategoryTheory.Localization.lift₂NatIso, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.lift₂NatIso_inv",
+      "date": "2026-10-12",
+      "verdict": "Relevant generic tools, no exact match for the specialized statement"
+    },
+    {
+      "tool": "grep",
+      "query": "leftDerived.*[Tt]ensor|lift₂NatIso",
+      "results": "10 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+      "date": "2026-10-12",
+      "verdict": "Relevant generic tools, no exact match for the specialized statement"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived functor counit is invertible on K-flat complexes pullback and derived tensor",
+      "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+      "date": "2026-10-12",
+      "verdict": "Relevant generic tools, no exact match for the specialized statement"
+    },
+    {
+      "tool": "leansearch",
+      "query": "natural isomorphism bifunctors K-flat complexes localization",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent",
+    "date": "2026-10-13",
+    "group": "Q3"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Parent comparison steps 1 and 2 and naturality on K-flat representatives only; before the localization step",
+      "via": [
+        "lem-pc-derived-pullback-tensor-comparison-descent",
+        "lem-pc-derived-pullback-monoidal-descent",
+        "def-pc-derived-pullback-monoidal-model",
+        "lem-pc-perfect-rhom-tensor-comparison",
+        "lem-pc-perfect-tensor-hom-duality",
+        "lem-sc-smooth-proper-tensor-perfect-case",
+        "lem-sc-smooth-proper-diagonal-tensor-formula",
+        "lem-sc-smooth-proper-relative-dualizing-general",
+        "lem-sc-smooth-proper-curve-dualizing",
+        "lem-sc-finite-duality-trace"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel",
+    "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackKFlatTensorModel.lean",
+    "declaration": "AlgebraicGeometry.derivedPullback_kFlat_tensor_model",
+    "statement": "theorem derivedPullback_kFlat_tensor_model {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))\n    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)\n    (hmap : ∀ {M N} (a : M ⟶ N),\n      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫\n        eqToHom (hF N).symm)\n    [F.Additive]\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : (derivedPullback g).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))\n    (φ : ∀ P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n            (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅\n          CochainComplex.mapBifunctor\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _))\n    (hnatural : ∀ (P P' N N' : CochainComplex\n              (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n            (a : P ⟶ P') (b : N ⟶ N'),\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n              (HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (ComplexShape.up ℤ)) ≫\n              (φ P' N').hom =\n            (φ P N).hom ≫\n              HomologicalComplex.mapBifunctorMap\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map a)\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _)\n                (ComplexShape.up ℤ))\n    (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n          CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N →\n            IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫\n              DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map\n                (φ P N).hom)))\n    : ∃ e : ∀ (P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ),\n        CochainComplex.IsKFlat (R := X.sheaf) P →\n        CochainComplex.IsKFlat (R := X.sheaf) N →\n          (((derivedPullback g).obj (DerivedCategory.Q.obj P) ⊗\n            (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≅\n          (derivedPullback g).obj (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N)),\n      (∀ (P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n        (hN : CochainComplex.IsKFlat (R := X.sheaf) N),\n        (e P N hP hN).hom ≫\n            (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫\n            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫\n            DerivedCategory.Q.map (φ P N).hom =\n          (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ\n            ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫\n            Functor.LaxMonoidal.μ DerivedCategory.Q\n              ((F.mapHomologicalComplex (.up ℤ)).obj P)\n              ((F.mapHomologicalComplex (.up ℤ)).obj N)) ∧\n      (∀ (P P' N N' : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ)\n        (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n        (hP' : CochainComplex.IsKFlat (R := X.sheaf) P')\n        (hN : CochainComplex.IsKFlat (R := X.sheaf) N)\n        (hN' : CochainComplex.IsKFlat (R := X.sheaf) N') (a : P ⟶ P') (b : N ⟶ N'),\n        ((curriedTensorPre (derivedPullback g)).map (DerivedCategory.Q.map a)).app\n            (DerivedCategory.Q.obj N) ≫\n            ((curriedTensorPre (derivedPullback g)).obj (DerivedCategory.Q.obj P')).map\n              (DerivedCategory.Q.map b) ≫ (e P' N' hP' hN').hom =\n          (e P N hP hN).hom ≫\n            ((curriedTensorPost (derivedPullback g)).map (DerivedCategory.Q.map a)).app\n              (DerivedCategory.Q.obj N) ≫\n            ((curriedTensorPost (derivedPullback g)).obj (DerivedCategory.Q.obj P')).map\n              (DerivedCategory.Q.map b))",
+    "branch": "sheaf-dag",
+    "by": "Q3",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Q3",
+    "result": "pass",
+    "landing": "20261012T223413-L-1639741",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Q3",
+    "result": "pass",
+    "landing": "20261012T223413-L-1639741",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

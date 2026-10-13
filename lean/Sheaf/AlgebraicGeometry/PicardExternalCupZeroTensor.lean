@@ -8,8 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorBijective
-import Sheaf.AlgebraicGeometry.ExternalCupZeroGlobalSections
 
 /-! # Degree-zero external tensor comparison
 
@@ -57,17 +55,6 @@ theorem picardExternalCup_zero_tensor
     : ∃ e : (scalarCohomology f F 0 ⊗[k] scalarCohomology g G 0) ≃ₗ[k]
         scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 0,
       ∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 0),
-        e (a ⊗ₜ[k] b) = externalCup f g F G 0 0 a b := by
-  let eF := scalarGlobalSectionsEquiv f F
-  let eG := scalarGlobalSectionsEquiv g G
-  let eP := scalarGlobalSectionsEquiv (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)
-  let eS := LinearEquiv.ofBijective (externalGlobalSectionsTensor f g F G)
-    (externalGlobalSectionsTensor_bijective k X Y f g F G)
-  refine ⟨((TensorProduct.congr eF eG).trans eS).trans eP.symm, ?_⟩
-  intro a b
-  apply eP.injective
-  simp only [LinearEquiv.trans_apply, LinearEquiv.apply_symm_apply,
-    TensorProduct.congr_tmul]
-  exact (externalCup_zero_globalSections k X Y f g F G a b).symm
+        e (a ⊗ₜ[k] b) = externalCup f g F G 0 0 a b := by sorry
 
 end AlgebraicGeometry.Scheme.Modules

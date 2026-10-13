@@ -1,131 +1,146 @@
 {
- "id": "lem-sc-picard-external-cup-zero-tensor",
- "kind": "statement",
- "title": "Degree-zero external tensor comparison",
- "statement": "Let $k$ be a field [def-weil-field] and $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ morphisms of schemes [def-pc-scheme]. Assume that $X,Y$ are quasi-compact and have affine diagonals, and that $F,G$ are quasi-coherent modules [pqf-def-coherent]. Write $H^0_k(f,F)$ for module right-derived global sections [def-sc-ringed-space-module-cohomology] with scalars restricted along $f$, and let $E=\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G$ and $\\operatorname{externalCup}$ be the specified scalar operations [def-sc-field-linear-module-cohomology-operations]. There exists a $k$-linear equivalence $e:H^0_k(f,F)\\otimes_k H^0_k(g,G)\\to H^0_k(f\\circ\\operatorname{pr}_1,E)$ such that $e(a\\otimes b)=\\operatorname{externalCup}(f,g,F,G,0,0,a,b)$ for every $a,b$. No positive-degree vanishing is assumed.",
- "source": {
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification"
- },
- "stmt_deps": [
-  "def-weil-field",
-  "def-pc-scheme",
-  "pqf-def-coherent",
-  "def-sc-ringed-space-module-cohomology",
-  "def-sc-field-linear-module-cohomology-operations"
- ],
- "proof": [
-  {
-   "text": "Use the canonical equivalences from scalar degree-zero cohomology to ordinary scalar sections. Tensor the two equivalences, compose with the explicit external-section map made into a linear equivalence by its bijectivity, then compose with the inverse comparison for the product coefficients.",
-   "uses": [
-    "def-sc-scalar-global-sections-comparison",
-    "lem-sc-external-global-sections-tensor-bijective"
-   ],
-   "elementary": true
+  "id": "lem-sc-picard-external-cup-zero-tensor",
+  "kind": "statement",
+  "title": "Degree-zero external tensor comparison",
+  "statement": "Let $k$ be a field [def-weil-field] and $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$ morphisms of schemes [def-pc-scheme]. Assume that $X,Y$ are quasi-compact and have affine diagonals, and that $F,G$ are quasi-coherent modules [pqf-def-coherent]. Write $H^0_k(f,F)$ for module right-derived global sections [def-sc-ringed-space-module-cohomology] with scalars restricted along $f$, and let $E=\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G$ and $\\operatorname{externalCup}$ be the specified scalar operations [def-sc-field-linear-module-cohomology-operations]. There exists a $k$-linear equivalence $e:H^0_k(f,F)\\otimes_k H^0_k(g,G)\\to H^0_k(f\\circ\\operatorname{pr}_1,E)$ such that $e(a\\otimes b)=\\operatorname{externalCup}(f,g,F,G,0,0,a,b)$ for every $a,b$. No positive-degree vanishing is assumed.",
+  "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification"
   },
-  {
-   "text": "Apply the injectivity of the product degree-zero comparison. The composite equivalence sends a pure tensor to T(d_f(a) tensor d_g(b)); the degree-zero cup section formula identifies this with d_product(externalCup(a,b)).",
-   "uses": [
-    "lem-sc-external-cup-zero-global-sections"
-   ],
-   "elementary": true
+  "stmt_deps": [
+    "def-weil-field",
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "def-sc-ringed-space-module-cohomology",
+    "def-sc-field-linear-module-cohomology-operations"
+  ],
+  "proof": [
+    {
+      "text": "Choose a finite affine cover of X. For affine V in Y identify sections of the external coefficients on U_i times V and on pairwise overlaps using the affine product, pullback and tensor section formulas. These identifications commute with restriction, and the sheaf equalizer therefore identifies sections on X times V with Gamma(X,F) tensor G(V). Tensor over a field is exact and commutes with the finite products used by the cover.",
+      "uses": [
+        "lem-sc-picard-affine-diagonal-intersections",
+        "lem-weil-pbc-fibre-product-affine-spectra",
+        "lem-weil-pbc-module-pullback-affine-sections",
+        "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the finite-affine-cover equalizer on Y to these natural identifications. Exactness of tensor with Gamma(X,F) identifies the kernel with Gamma(X,F) tensor Gamma(Y,G); no positive-degree acyclicity is used. Empty covers and zero coefficients yield zero on both sides.",
+      "uses": [
+        "lem-sc-picard-affine-diagonal-intersections"
+      ],
+      "elementary": true
+    },
+    {
+      "text": "Use degree-zero derived-global-sections comparison. The chartwise section formula takes s tensor t to the tensor of their projection pullbacks. The degree-zero Cech/sheaf cup compatibility, together with the scalar cohomology operation comparisons, identifies this with externalCup and gives the recorded formula on pure tensors.",
+      "uses": [
+        "lem-sc-picard-cech-cup-pullback-compat",
+        "def-sc-field-linear-module-cohomology-operations",
+        "lem-sc-cech-comparison-map-iso-affine"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and acyclic Leray base case; final degree-zero cup verification"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Global sections of the external tensor product of quasi coherent modules on quasi compact schemes with affine diagonal over a field are the tensor product of global sections",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Global sections of the external tensor product of quasi coherent modules are the tensor product of global sections over a field",
+      "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.Monoidal.tensorHom_app, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+      "date": "2026-10-13",
+      "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
+    },
+    {
+      "tool": "grep",
+      "query": "kunneth|acyclic",
+      "results": "0 hits: ",
+      "date": "2026-10-13",
+      "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.PicardExternalCupAcyclic",
+    "date": "2026-10-13",
+    "group": "C1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-sc-theorem-of-cube",
+      "place": "Tag 0BED acyclic base case and degree-zero cup verification in the quasi-coherent Kunneth argument used by the cube theorem",
+      "via": [
+        "lem-sc-picard-external-cup-acyclic",
+        "lem-sc-picard-external-cup-quasi-iso",
+        "lem-sc-picard-kunneth-cech-models",
+        "lem-sc-picard-kunneth-qcoh-iso-exists",
+        "lem-sc-picard-kunneth-qcoh",
+        "lem-sc-picard-h1-product-injective"
+      ]
+    },
+    "same_as": []
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor",
+    "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupZeroTensor.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_zero_tensor",
+    "statement": "theorem picardExternalCup_zero_tensor (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] : ∃ e : (scalarCohomology f F 0 ⊗[k] scalarCohomology g G 0) ≃ₗ[k] scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 0, ∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 0), e (a ⊗ₜ[k] b) = externalCup f g F G 0 0 a b",
+    "branch": "sheaf-dag",
+    "by": "C1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C1",
+    "result": "pass",
+    "landing": "20261013T060411-L-581369",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C1",
+    "result": "pass",
+    "landing": "20261013T060411-L-581369",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-sc-scalar-global-sections-comparison",
-  "lem-sc-external-cup-zero-global-sections",
-  "lem-sc-external-global-sections-tensor-bijective"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED: degree-zero global-section equalizers and pure-tensor cup verification, with explicit canonical comparison maps"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Global sections of the external tensor product of quasi coherent modules on quasi compact schemes with affine diagonal over a field are the tensor product of global sections",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Global sections of the external tensor product of quasi coherent modules are the tensor product of global sections over a field",
-   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.Monoidal.tensorHom_app, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree",
-   "date": "2026-10-13",
-   "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
-  },
-  {
-   "tool": "grep",
-   "query": "kunneth|acyclic",
-   "results": "0 hits: ",
-   "date": "2026-10-13",
-   "verdict": "No matching geometric theorem; hits are definitions or unrelated categories."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupAcyclic",
-  "date": "2026-10-13",
-  "group": "C1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-sc-theorem-of-cube",
-   "place": "Tag 0BED acyclic base case and degree-zero cup verification in the quasi-coherent Kunneth argument used by the cube theorem",
-   "via": [
-    "lem-sc-picard-external-cup-acyclic",
-    "lem-sc-picard-external-cup-quasi-iso",
-    "lem-sc-picard-kunneth-cech-models",
-    "lem-sc-picard-kunneth-qcoh-iso-exists",
-    "lem-sc-picard-kunneth-qcoh",
-    "lem-sc-picard-h1-product-injective"
-   ]
-  },
-  "same_as": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupZeroTensor",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupZeroTensor.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_zero_tensor",
-  "statement": "theorem picardExternalCup_zero_tensor (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] : ∃ e : (scalarCohomology f F 0 ⊗[k] scalarCohomology g G 0) ≃ₗ[k] scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 0, ∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 0), e (a ⊗ₜ[k] b) = externalCup f g F G 0 0 a b",
-  "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
-  "result": "pass",
-  "landing": "20261013T060411-L-581369",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
-  "result": "pass",
-  "landing": "20261013T072347-L-1118310",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
