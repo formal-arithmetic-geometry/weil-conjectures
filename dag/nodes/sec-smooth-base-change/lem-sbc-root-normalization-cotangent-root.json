@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-root-normalization-cotangent-root",
+ "kind": "statement",
+ "title": "Root class spans the normalized stalk cotangent space",
+ "statement": "Take i:U->L, a finite G-torsor W over U [def-sbc-normal-dominant-galois], Spec R->L and a cartesian chart beta identifying U times_L Spec R with D(f). Let b:R->H, H Noetherian [def-weil-pbc-noetherian-ring], g=b(f) regular, H/(g) a domain, and n=|G| a unit. Set A=H[t]/(t^n-g), N=Spec A and V=D(g). Suppose N locally Noetherian. Let p be the displayed pullback torsor over V [def-pc-fibre-product], finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism], a=p followed by V->N, and suppose its relative normalization [lem-weil-pbc-relative-normalization] finite. At any normalization point x whose base prime is (t), assume the base stalk is regular local [def-weil-regular-scheme]. Write C for the normalization stalk, m its maximal ideal, and tau for the image under the structural stalk map of the germ of the explicit root t. Then m is contained in (tau)+m^2. No divisor centre or generic point is in this assertion. Scheme and localization conventions are [def-weil-pbc-scheme-conventions, def-weil-pbc-localization-at-prime]; residue conventions are [def-weil-residue-field, def-weil-pbc-separable-algebraic-extension].",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-relative-normalization",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB, 0BRM, 09E7 and 0307; the index-one calculation, retained only modulo the square of the maximal ideal"
+ },
+ "proof": [
+  {
+   "text": "Write n=|G| and t for the root. The hypothesis identifies the base prime\nwith (t), so its stalk is A_(t). Since g is regular and H/(g) is a domain,\nH_(g) is a DVR with uniformizer g. The monic root algebra is free over H,\nthe equation t^n=g makes t regular, and A/(t)=H/(g). Thus the regular local\nring A_(t) is a DVR with uniformizer t, and its extension over H_(g) has\nramification index n. The cartesian chart beta restricts W to a G-torsor on\nD(f); localizing at (g) gives a G-torsor on the fraction field of H_(g).\nEach connected factor is Galois for its stabilizer subgroup in G. By 09EB,\nits ramification index divides the stabilizer order, which divides n, and\nits residue extension is separable because n is invertible. The factors are\ntame. Abhyankar 0BRM for the index-n root extension makes the normalized\nbase-change factors adically formally smooth. The index-one implication of\n09E7 says that the valuation of t in each factor is one. By 0307, localizing\nthe concrete relative normalization gives precisely these integral closures;\nfurther localization at x gives their DVR local rings, with the displayed\nstructural stalk map. Every element of their maximal ideal is therefore a\nmultiple of the image of t. Passing to the quotient by the square of that\nideal gives the asserted cotangent spanning statement. Only this first-order\nconclusion is retained; the caller uses Noetherianity and Nakayama to recover\nideal generation. No Cartier centre, divisor generic point, or comparison\nwith the base maximal ideal occurs in this statement. For n=1 the root base\nchange is the identity and the same tame calculation applies. Empty factors\nhave no x and give no assertion.",
+   "uses": [
+    "lem-sbc-normalization-stalk-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-stalk-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "kind": "written-by-agent",
+  "document": "Stacks Project",
+  "place": "Tags 09EB, 0BRM, 09E7 and 0307; the index-one calculation, retained only modulo the square of the maximal ideal; the explicit kernel/generic-point and Nakayama decomposition is written by G3.",
+  "agent": "G3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tame Galois torsor normalization after adjoining a root of a uniformizer has maximal ideal modulo its square spanned by that root",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable: HTTP Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After a group order root extension of a regular divisor, the root class spans the cotangent space of the normalized Galois torsor at the root prime",
+   "date": "2026-10-14",
+   "results": "Algebra.Generators.cotangentCompAwaySec, Algebra.Generators.cMulXSubOneCotangent, Algebra.Extension.Cotangent.span_eq_top_of_span_eq_ker, Algebra.SubmersivePresentation.sectionCotangent, Algebra.Generators.basisCotangentAway, Algebra.Generators.cotangentSpaceBasis, Algebra.Generators.cMulXSubOneCotangent_eq, Algebra.Generators.basisCotangentAway_apply",
+   "verdict": "No exact root-divisor normalization statement. Relevant general algebra/topology tools used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|map_eq_maximalIdeal|le_of_le_smul_of_le_jacobson_bot",
+   "date": "2026-10-14",
+   "results": "Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+   "verdict": "No exact root-divisor normalization statement. Relevant general algebra/topology tools used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericStalkMaximalIdeal",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait case, group-order root extension: Root class spans the normalized stalk cotangent space",
+   "via": [
+    "lem-sbc-root-normalization-generic-stalk-maximal-ideal",
+    "lem-sbc-root-normalization-generic-stalk-unramified"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationCotangentRoot",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootNormalizationCotangentRoot.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_normalization_cotangent_root",
+  "statement": "theorem root_normalization_cotangent_root\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R)\n      (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R)\n      (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (H : CommRingCat.{u}) [IsNoetherianRing H] (b : R ⟶ H)\n    (hG : IsUnit (Nat.card G : H)) (hg : IsSMulRegular H (b.hom f))\n    [IsDomain (H ⧸ Ideal.span {b.hom f})] :\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)} →\n      IsRegularLocalRing (N.presheaf.stalk (a.fromNormalization x)) →\n      let C := a.normalization.presheaf.stalk x\n      let m := IsLocalRing.maximalIdeal C\n      let t := AlgebraicGeometry.StructureSheaf.toStalk A (a.fromNormalization x)\n        (AdjoinRoot.root ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g))\n      m ≤ Ideal.span {(a.fromNormalization.stalkMap x).hom t} ⊔ m * m",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211104-L-392134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211104-L-392134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
