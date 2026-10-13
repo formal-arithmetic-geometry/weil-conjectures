@@ -19,33 +19,45 @@
  ],
  "proof": [
   {
-   "text": "Expand the pullback and direct-image global Hom comparisons as evaluation mates. Transpose under the pinned tensor-Hom and pullback/direct-image adjunctions. Naturality of evaluation and the definition of the canonical base-change transformation give the exchange square with beta in both Hom entries. Canonical tensor composition and Leray identifications identify the scalar paths with the scalar-square isomorphism.",
+   "text": "Prove naturality in the second Hom entry directly from the fixed constructions. For the pullback comparison, transpose under the pullback adjunction, then the tensor-Hom bijection. Tensor-Hom naturality and naturality of the inverse pullback-tensor comparison identify the resulting evaluation composites; apply global sections and Leray naturality. For direct image, use naturality of the chosen evaluation-mate natural transformation, apply global sections, and move the input map through the inverse Leray comparison. These are the proved private helpers pullbackMate_naturality, pullback_naturality and directImage_naturality.",
    "uses": [
-    "def-pc-derived-base-change-map",
+    "def-pc-canonical-derived-tensor-hom-bijection",
     "def-pc-global-hom-pullback-comparison",
     "lem-pc-global-hom-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Postcompose with Hom of t and e prime. Naturality moves these maps to the second Hom entry on the other side of the exchange square. The assumed equation beta_N followed by Rf prime(t) and e prime equals Lg*(e) replaces that entry by Lg*(e). Naturality of the pullback comparison moves e to the source. Finally cancel beta_M contravariantly; its inverse is the last factor in the statement.",
+   "text": "Apply the base-change exchange square at (M,N). Postcompose both paths with global Hom of (beta_M inverse, Rf prime(t) followed by e prime). Functoriality in the product category and beta_M inverse followed by beta_M = identity reduce the first Hom entry to the identity. The assumed counit equation replaces beta_N followed by Rf prime(t) and e prime with Lg*(e). This gives the equation core in the Lean proof.",
+   "uses": [
+    "lem-sc-global-hom-base-change-exchange",
+    "def-pc-global-derived-rhom",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scalar-square naturality moves Hom(1,t) through the scalar identification. Direct-image naturality moves it through d_f prime. Pullback-comparison naturality moves Hom(1,e) through p_g on the right. Combine the consecutive global Hom maps by functoriality; the resulting equation is precisely core, which proves the original assertion unchanged.",
    "uses": [
     "def-pc-global-hom-pullback-comparison",
+    "lem-pc-global-hom-adjunction",
     "def-pc-global-derived-rhom"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-global-derived-rhom",
+  "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-global-hom-pullback-comparison",
-  "lem-pc-global-hom-adjunction"
+  "lem-pc-global-hom-adjunction",
+  "lem-sc-global-hom-base-change-exchange",
+  "def-pc-global-derived-rhom",
+  "def-pc-derived-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8 final diagrams: explicit general counit-square formulation of the evaluation-mate calculation"
+  "place": "Tag 0AA8, lemma-more-base-change, final commutative diagrams; evaluation-mate comparisons of Tags 08I3 and 0B6I"
  },
  "mathlib_searches": [
   {
@@ -123,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T054224-L-444815",
+  "landing": "20261013T082400-L-1642277",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

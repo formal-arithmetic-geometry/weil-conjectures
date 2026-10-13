@@ -11680,3 +11680,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/N4/Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel (stage 3; reviewer PASS; first push; landing 20261013T082359-L-1641765 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/N4/Sheaf.RingTheory.PresentationsHomotopyEquivalent (stage 3; reviewer PASS; first push; landing 20261013T082400-L-1641883 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/P1/Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback (stage 3; reviewer PASS; first push; landing 20261013T082400-L-1642127 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.GlobalHomBaseChangeCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T082400-L-1642277 (interface); batch 20261013T082326; modules 2; new nodes 1)
