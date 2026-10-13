@@ -27,9 +27,29 @@
  ],
  "proof": [
   {
-   "text": "Cover Y by affine V and g inverse(V) by affine W in Y'. Restriction compatibility [lem-sc-proper-flat-right-adjoint-restriction-open] identifies right adjoints and, by Stacks Remark 48.6.1, the canonical mate map with those of the chart squares. Ordinary base change restricts to the charts. Apply the assumed affine-case assertion there. The resulting isomorphisms hold on f' inverse(W), which cover X'. On each cohomology sheaf the map is locally invertible, hence globally invertible, and cohomology detects isomorphisms in the derived category.",
+   "text": "Fix K. For each x in X prime choose an affine open V in Y containing g(f prime(x)), then an affine open W in g inverse(V) containing f prime(x), using Mathlib exists_isAffineOpen_mem_and_subset twice. The open f prime inverse(W) contains x.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB"
+   }
+  },
+  {
+   "text": "Apply proper_flat_rightAdjoint_baseChange_chart to V,W,K and the supplied affine-case hypothesis. This makes the ambient canonical morphism invertible on f prime inverse(W).",
    "uses": [
-    "lem-sc-proper-flat-right-adjoint-restriction-open"
+    "lem-sc-proper-flat-right-adjoint-basechange-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB"
+   }
+  },
+  {
+   "text": "Apply schemeDerived_isIso_of_openRestriction to the resulting pointwise open neighbourhoods. Reflect the ambient isomorphism through the fully faithful inclusion of D_QCoh(X prime).",
+   "uses": [
+    "lem-sc-derived-open-restriction-detects-iso"
    ],
    "elementary": false,
    "source": {
@@ -39,12 +59,13 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-proper-flat-right-adjoint-restriction-open"
+  "lem-sc-proper-flat-right-adjoint-basechange-chart",
+  "lem-sc-derived-open-restriction-detects-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AAB"
+  "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
  },
  "mathlib_searches": [
   {
@@ -131,12 +152,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T231633-L-1961621",
+  "landing": "20261013T015602-L-3023242",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

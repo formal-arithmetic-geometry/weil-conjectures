@@ -3,7 +3,8 @@ public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeChart
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -71,5 +72,20 @@ theorem proper_flat_rightAdjoint_baseChange_global
     ∀ K : schemeDerivedQCohCategory Y,
       IsIso (@dualityEquationBaseChangeMap _ X Y Y'
         (QuasiCompact.compactSpace_of_compactSpace f)
-        (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f g a a' adjf adjf' hβ K) := by sorry
+        (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f g a a' adjf adjf' hβ K) := by
+  intro K
+  have hlocal : IsIso ((schemeDerivedQCohProperty (pullback f g)).ι.map
+      (@dualityEquationBaseChangeMap _ X Y Y'
+        (QuasiCompact.compactSpace_of_compactSpace f)
+        (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f g a a' adjf adjf' hβ K)) := by
+    apply schemeDerived_isIso_of_openRestriction
+    intro x
+    obtain ⟨V, hV, hxV, _⟩ := exists_isAffineOpen_mem_and_subset
+      (X := Y) (x := g ((pullback.snd f g) x)) (U := ⊤) (by trivial)
+    obtain ⟨W, hW, hxW, hWV⟩ := exists_isAffineOpen_mem_and_subset
+      (X := Y') (U := g ⁻¹ᵁ V) hxV
+    refine ⟨(pullback.snd f g) ⁻¹ᵁ W, hxW, ?_⟩
+    exact proper_flat_rightAdjoint_baseChange_chart g f a a' adjf adjf' hβ haffine
+      K V hV W hW hWV
+  exact isIso_of_reflects_iso _ (schemeDerivedQCohProperty (pullback f g)).ι
 end AlgebraicGeometry

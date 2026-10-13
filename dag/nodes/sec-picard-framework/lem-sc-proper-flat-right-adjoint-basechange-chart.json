@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-proper-flat-right-adjoint-basechange-chart",
+ "kind": "statement",
+ "title": "Proper-flat right-adjoint base change on a single affine chart",
+ "statement": "Let f:X to Y be proper, flat and locally of finite presentation, Y and Y prime qcqs, g:Y prime to Y, and X prime=X times_Y Y prime [def-pc-fibre-product]. Use the shared derived categories [def-pc-derived-category], right adjoints a,a prime to the canonical lifted derived direct images, and ordinary base-change witnesses hβ for every object. Assume the affine-case assertion [lem-sc-proper-flat-right-adjoint-affine-basechange] for all affine base squares with these hypotheses. For K in D_QCoh(Y), affine opens V of Y and W of Y prime with W contained in g inverse(V), restriction of the ambient image of dualityEquationBaseChangeMap(f,g,K) [def-sc-duality-equation-base-change-map] to f prime inverse(W), using exact schemeOpenRestriction [def-pc-derived-open-restriction-maps], is invertible. No covering or global isomorphism conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "lem-sc-proper-flat-right-adjoint-affine-basechange",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "1. Let V and W be the given affine opens with W contained in g inverse(V). Set U=f inverse(V) and U prime=f prime inverse(W). The restricted proper-flat finitely presented maps are qcqs. The ordinary derived base-change map on the chart square is the restriction of beta after the canonical direct-image and pullback restriction comparisons, so hβ supplies its invertibility. Restriction also preserves quasi-coherent cohomology.\n\n2. Use proper_flat_rightAdjoint_restriction_open on f and f prime, with their given adjunctions and the canonical open restriction adjunctions, to make the open-unit arrows invertible. In equation (48.4.1.1), the other arrows come from right-adjoint uniqueness and the open counit and are canonical isomorphisms. Thus identify restriction of a(K) with the right adjoint for U to V applied to K restricted to V; do the same for a prime and W.\n\n3. Paste the two open squares horizontally with the original square. The mate construction is compatible with this pasting: the composite units and counits give the pasted mate, by the triangle identities; conjugation of invertible beta commutes with restriction and inversion. Remark 48.6.1 therefore identifies the restricted global map, up to the invertible comparisons of the preceding step, with the canonical mate for U to V and W to V. Apply haffine to that square and K restricted to V. Its mate is invertible, so the restricted global map is invertible. There is no descent or covering step in this assertion.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-restriction-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-right-adjoint-restriction-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB and Remark 48.6.1 (Tag 0E9S)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of proper flat right adjoint base change mate to affine charts",
+   "results": "8 underived restriction and scheme affine-chart hits, including Scheme.Modules.restrictAdjunction; no derived right-adjoint mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction",
+   "results": "12 generic adjunction equivalence and fully faithful functor results; none states the chart assertion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of the right adjoint base change map to affine opens is the chart base change map",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(restrict|affine)|base_change.*(restrict|affine)|restrict.*mate",
+   "results": "Read ProperFlatRightAdjointRestrictionOpen and DualityEquationBaseChangeMap. The former gives the open-unit isomorphism criterion, not comparison of the global mate to the affine chart mate. Underived module and etale mate comparisons use different carriers. Mathlib has no derived scheme right-adjoint chart theorem. Blueprint searches for 0E9S and restriction detects returned no matching nodes.",
+   "date": "2026-10-13",
+   "verdict": "no matching declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeGlobal",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proper-flat-right-adjoint-basechange",
+   "place": "Globality proof: affine restriction comparison and detection of isomorphisms on the covering preimages",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-basechange-global"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatRightAdjointBaseChangeChart.lean",
+  "declaration": "AlgebraicGeometry.proper_flat_rightAdjoint_baseChange_chart",
+  "statement": "theorem proper_flat_rightAdjoint_baseChange_chart\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' : Scheme.{u}}\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n          (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    (haffine : ∀ {X Y Y' : Scheme.{u}} [IsAffine Y] [IsAffine Y']\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y)\n    [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (a' : schemeDerivedQCohCategory Y' ⥤\n      schemeDerivedQCohCategory (pullback f g))\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)\n      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a)\n    (adjf' : (schemeDerivedQCohProperty Y').lift\n      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a')\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g\n        (pullback.fst f g) pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y),\n    IsIso (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K))\n    (K : schemeDerivedQCohCategory Y)\n    (V : Y.Opens) (hV : IsAffineOpen V)\n    (W : Y'.Opens) (hW : IsAffineOpen W) (hWV : W ≤ g ⁻¹ᵁ V) :\n    IsIso ((schemeOpenRestriction (pullback f g) ((pullback.snd f g) ⁻¹ᵁ W)).mapDerivedCategory.map\n      ((schemeDerivedQCohProperty (pullback f g)).ι.map\n        (@dualityEquationBaseChangeMap _ X Y Y'\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n          f g a a' adjf adjf' hβ K)))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T015602-L-3023242",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T015602-L-3023242",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

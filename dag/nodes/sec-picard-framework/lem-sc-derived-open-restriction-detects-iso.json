@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-derived-open-restriction-detects-iso",
+ "kind": "statement",
+ "title": "Open neighbourhood restrictions detect ambient derived isomorphisms",
+ "statement": "Let X be a scheme with shared derived categories on X and every open subscheme [def-pc-derived-category]. Let phi:A to B be any ambient derived morphism. If for every x in X there is an open U containing x such that exact derived restriction of phi to U [def-pc-derived-open-restriction-maps] is invertible, then phi is invertible. No qcqs, quasi-coherence or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB locality step; Tag 04TN sheaf locality, applied to each cohomology sheaf"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Index the cover by all opens U for which the exact derived restriction of phi is invertible. The pointwise neighbourhood assumption implies the supremum of these opens is top. This uses Opens.mem_iSup and does not choose any unproved object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB"
+   }
+  },
+  {
+   "text": "For each degree n use the proved source-library mapDerivedCategoryHomologyFunctorIso and NatIso.isIso_map_iff to make exact restriction of H^n(phi) invertible. Reflect this through the equivalence Scheme.Modules.overEquiv U to get invertibility of H^n(phi).over U.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AAB"
+   }
+  },
+  {
+   "text": "Apply sheaf_module_isIso_iff_isIso_over_open_cover to the degree-n morphism on this cover. Thus all homology morphisms are invertible. Mathlib DerivedCategory.isIso_iff gives invertibility of phi. Empty schemes and unbounded complexes are included.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 04TN (sheaf locality), applied degreewise"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB locality step; Tag 04TN sheaf locality, applied to each cohomology sheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived sheaf morphism invertible on an open neighbourhood of every point is invertible",
+   "results": "LeanFinder found sheaf locality, Scheme.Modules.Hom.isIso_iff_isIso_app, and dense-subsite results, but no exact derived-neighbourhood criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction",
+   "results": "12 generic adjunction equivalence and fully faithful functor results; none states the chart assertion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of the right adjoint base change map to affine opens is the chart base change map",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_open_restrictions|mapDerivedCategoryHomologyFunctorIso|sheaf_module_isIso_iff_isIso_over_open_cover",
+   "results": "Found proved private helpers in RelativelyFlatCanonicalModuleBaseChange and PerfectDirectImageBaseChange, and public two-open criterion DerivedRestrictionIsIsoOpenCover with over-site derived instances. Reuse their proved homology comparison and sheaf locality inputs for this arbitrary pointwise-cover criterion on open subschemes. No exact public theorem. Blueprint search restriction detects: zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no matching declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category morphism is an isomorphism if cohomology sheaf maps are locally isomorphisms on an open cover",
+   "results": "Second reading: eight sheaf-locality and quasi-isomorphism hits, including Sheaf.isLocallyBijective_iff_isIso and Functor.IsCoverDense.iso_of_restrict_iso; no exact ambient derived open-subscheme neighbourhood criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeGlobal",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proper-flat-right-adjoint-basechange",
+   "place": "Globality proof: affine restriction comparison and detection of isomorphisms on the covering preimages",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-basechange-global"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionDetectsIso.lean",
+  "declaration": "AlgebraicGeometry.schemeDerived_isIso_of_openRestriction",
+  "statement": "theorem schemeDerived_isIso_of_openRestriction\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X : Scheme.{u}} {A B : schemeDerivedCategory X} (φ : A ⟶ B)\n    (hlocal : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧\n      IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map φ)) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  {
+   "node": "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+   "why": "Generic proved sheaf locality criterion, applied as a black box to each cohomology morphism."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T015602-L-3023242",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T015602-L-3023242",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
