@@ -17,22 +17,31 @@
  ],
  "proof": [
   {
-   "text": "Use the converse compactness-to-perfectness criterion of Stacks Tag 09M1 in local derived models.",
+   "text": "Apply noetherian_open_derived_categories_exists separately to X and Y, obtaining local derived-category families hX and hY in the original Hom universes. Install hX as the local instance.",
    "uses": [
-    "lem-pc-derived-category-locally-small"
+    "lem-sc-derived-qcoh-compact-open-categories"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply compact_isPerfect_of_isNoetherian to P and its compactness proof. The coproduct instance is proof-irrelevant, and P.obj is P.1. Pair the resulting perfectness proof with hX and hY.",
+   "uses": [
+    "lem-sc-derived-qcoh-compact-is-perfect"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-category-locally-small"
+  "lem-sc-derived-qcoh-compact-open-categories",
+  "lem-sc-derived-qcoh-compact-is-perfect"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "E3",
-  "document": "https://stacks.math.columbia.edu/tag/0A9R",
-  "place": "Tags 09M1, 0B6G, 0A9R",
-  "note": "Strict intermediate part of target proof."
+  "by": "worker",
+  "group": "G4",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "Converse implication of Proposition perfect-proposition-compact-is-perfect",
+  "note": "Lean proof reuses the existing compact-to-perfect theorem after separately obtaining local derived-category families; no new statements."
  },
  "mathlib_searches": [
   {
@@ -104,10 +113,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T015548-L-3018313",
-  "kind": "interface",
+  "landing": "20261013T024034-L-3334532",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
