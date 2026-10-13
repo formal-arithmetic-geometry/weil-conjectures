@@ -17,20 +17,7 @@
  ],
  "proof": [
   {
-   "text": "On a local basis z of L inside U, write s=b z^d and t=c z^e. The free-generator hypothesis on s says b is a unit. Substitute exponent e and the homogeneous numerator t^d in hρ (using d*e=e*d). Coefficients of section-ring products are products, so this identifies ρ(t^d/s^e) with c^d/b^e.",
-   "uses": [
-    "def-sc-invertible-module",
-    "def-sc-local-free-generator",
-    "def-sc-invertible-section-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
-   }
-  },
-  {
-   "text": "The preimage of D_+(t) under the s-chart inclusion is the principal open of t^d/s^e (Mathlib Proj.awayι_preimage_basicOpen). The affine basic-open preimage formula and hq therefore identify its pullback with the unit locus of c^d/b^e. Since b is a unit and d>0, this equals the unit locus of c, even in rings with nilpotents.",
+   "text": "Identify the ambient second-chart preimage W with X.basicOpen(ρ(t^d/s^e)). Use Proj.awayι_preimage_basicOpen, basicOpen_eq_of_affine and Scheme.preimage_basicOpen_top. Evaluating hq at the localization element identifies the pulled-back section with U.topIso.inv(ρ(t^d/s^e)); U.ι_image_basicOpen_topIso_inv identifies its ambient image.",
    "uses": [
     "def-pc-proj",
     "lem-weil-pbc-morphism-into-affine-scheme"
@@ -42,10 +29,35 @@
    }
   },
   {
-   "text": "On that locus t is a unit multiple of the tensor power of the local basis, hence freely generates. The resulting multiplication maps and their inverses glue, because the multiplication map on each patch is induced by the same section t. This yields bijectivity on every subopen of W. If W is empty the section types are singletons.",
+   "text": "Reuse nonvanishing_power from SectionRingProjPreimageForward through a proof-only import all. Its already proved isomorphism transport, tensor nonvanishing, section-ring multiplication component and positive-power induction show that nonvanishing(s^n)=nonvanishing(s) for n>0. Do not duplicate those four helpers.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map-preimage-forward",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  },
+  {
+   "text": "For x in W, hs implies s generates at x, hence s^e is nonvanishing at x. Apply hρ to n=e and ξ=t^d, transporting d*e=e*d. The scalar ρ(t^d/s^e) is invertible on its basic open. Intersect this basic open with a generating neighbourhood of s^e; restrict the quotient equation there and use IsFreeGenerator.units_smul. This proves that t^d generates at x. Positive-power invariance with d>0 then shows that t generates at x.",
    "uses": [
     "def-sc-local-free-generator",
-    "def-sc-invertible-module"
+    "def-sc-invertible-section-ring",
+    "lem-sc-nonvanishing-iff-generates-at"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
+   }
+  },
+  {
+   "text": "Thus W is contained in generatingLocus(t). Restrict isFreeGenerator_generatingLocus along this inclusion and compose the two restriction maps. This gives exactly the required IsFreeGenerator statement on W, including an empty W.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-sc-section-generating-locus"
    ],
    "elementary": false,
    "source": {
@@ -56,16 +68,19 @@
  ],
  "proof_deps": [
   "def-pc-proj",
-  "def-sc-invertible-module",
-  "def-sc-invertible-section-ring",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-sc-ample-proj-canonical-map-preimage-forward",
   "def-sc-local-free-generator",
-  "lem-weil-pbc-morphism-into-affine-scheme"
+  "def-sc-invertible-section-ring",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-sc-section-generating-locus",
+  "def-sc-invertible-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
   "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)",
-  "note": "Y2 expansion of the chart-comparison argument, checked against the online Stacks texts of Tags 01N8 and 01NK."
+  "note": "T4 repair: complete Lean chart comparison proof, reusing the private nonvanishing_power theorem through import all SectionRingProjPreimageForward. Removed all four duplicate local proofs; the only local helper is unit-scalar generation. No new holes, statements, or axioms."
  },
  "mathlib_searches": [
   {
@@ -150,10 +165,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T022436-L-3223590",
-  "kind": "interface",
+  "landing": "20261013T034212-L-3768261",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
