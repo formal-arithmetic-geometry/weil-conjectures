@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-etale-open-qcoherent-identification-naturality",
+ "kind": "statement",
+ "title": "Naturality of explicit open tensor-section comparisons",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion] and $F$ any sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For an etale object $v:V\\to U$, let $d_v:\\Gamma(V,(v\\circ j)^*F)\\to\\Gamma(V,v^*(F|_U))$ be the isomorphism given by $c_{v,j}^{-1}$ followed by $v^*\\lambda_F$, evaluated on global sections. Here pullback is the tensor-formula pullback [def-pc-module-pullback], $c$ is the unit-normalized composition comparison and $\\rho$ denotes its section restrictions [lem-sc-etale-qcoherent-presheaf-functorial], and $\\lambda_F:j^*F\\to F|_U$ is the unique left-adjoint comparison intertwining the tensor-pullback and open-restriction adjunction units [lem-weil-pbc-open-immersion-module-pullback-restriction]. For every morphism $g:w\\to v$ of etale objects over $U$, write $j_!g$ for the same triangle over $X$, obtained by composing its structure arrows with $j$. Then $\\rho^F_{j_!g}\\,;\\,d_w=d_v\\,;\\,\\rho^{F|_U}_g$, where semicolon denotes composition in execution order. No quasi-coherence hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Stacks Descent 03DR (section-quasi-coherent-topologies, equation-quasi-coherent-presheaf), 03DU (definition-quasi-coherent-topologies), item 4; Sites 00XZ; the sectionwise argument in the original item proof[4]."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Expand the restrictions into section units, normalized composition maps, and triangle transports. Unit naturality moves the pullback of the open-restriction comparison past the section unit. Normalized composition associativity for g.left, v.hom, j moves the inverse v,j comparison past the composition map. Naturality of the composition comparison in the module moves the remaining open-restriction comparison across it. Triangle transports coincide by g.w and scheme associativity. Evaluate the resulting module equations at the whole source scheme.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "03DR equation-quasi-coherent-presheaf, functoriality under successive pullback; 03DU item 4; normalized composition and unit naturality give the displayed square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorSectionsComp|etaleTensorSections",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "verdict": "tools only; no exact naturality equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of normalized pullback composition on global sections under a commuting triangle of scheme morphisms",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc",
+   "verdict": "tools only; no exact naturality equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "verdict": "tools only; no exact naturality equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse composition comparison for pullback of modules commutes with restriction maps on global sections",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proper-case affine-local quasi-coherent identification over an open: the naturality square for its prescribed section components",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-over-open",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-weil-pbc-etale-open-qcoherent-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentificationNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenQuasiCoherentIdentificationNaturality.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenTensorSectionsComponent_naturality",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenTensorSectionsComponentIso",
+   "AlgebraicGeometry.etaleOpenTensorSectionsComponent_naturality"
+  ],
+  "statement": "theorem etaleOpenTensorSectionsComponent_naturality {X U : Scheme.{u}}\n    (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) {v w : U.Etale} (g : w ⟶ v) :\n    Scheme.Modules.etaleTensorSectionsRestriction F\n        ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).map g) ≫\n      (etaleOpenTensorSectionsComponentIso j F w).hom =\n    (etaleOpenTensorSectionsComponentIso j F v).hom ≫\n      Scheme.Modules.etaleTensorSectionsRestriction\n        ((Scheme.Modules.restrictFunctor j).obj F) g",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-10f1e",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T004026-L-2491763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-10f1e",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T004026-L-2491763",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, Lean modules, DAG records, report, and direct importers matched the stage-3 requirements; all compiled cleanly."
+ }
+}

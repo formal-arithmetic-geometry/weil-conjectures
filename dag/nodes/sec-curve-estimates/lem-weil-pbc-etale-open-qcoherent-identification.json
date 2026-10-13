@@ -19,28 +19,26 @@
  ],
  "proof": [
   {
-   "text": "Proof: for an etale v : V to U, restriction evaluates F_et at v composed with j, hence\nhas sections Gamma(V,(v composed with j)^*F). The inverse normalized composition\nisomorphism c_(v,j) identifies these with Gamma(V,v^*j^*F). The canonical adjunction\nuniqueness isomorphism identifies tensor pullback along j with restriction of F;\napplying v^* gives Gamma(V,v^*(F|_U)). These are exactly the prescribed components.\nEach component is invertible. For every morphism g of U-etale objects, the normalized\ncomposition law and unit naturality move these two maps across the section restriction\nrho_g; the two composites agree by associativity of normalized pullback composition\nand naturality of the restriction/pullback comparison. Consequently the components\nform a presheaf isomorphism, and therefore a sheaf isomorphism, since both presheaves\nare sheaves. The component formula also makes the isomorphism natural in F: all its\nmaps are components of natural isomorphisms of module functors, so a module morphism\ncommutes with them after evaluation. The empty open, identity open and zero module\nsatisfy the same formulas; no affine, finite-type or separation hypothesis is used.",
+   "text": "Construct each component explicitly by evaluating inverse normalized pullback composition followed by pullback of the canonical tensor/restriction comparison. Functor.mapIso proves each is invertible. The section naturality equation gives NatIso.ofComponents; ObjectProperty.isoMk lifts it between the two sheaves without sheafification. Its hom components are the prescribed formula by reflexivity.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-open-qcoherent-identification-naturality",
     "def-sc-etale-qcoherent-module",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-open-qcoherent-identification-naturality",
   "def-sc-etale-qcoherent-module",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Stacks Descent 03DR (section-quasi-coherent-topologies, equation-quasi-coherent-presheaf), 03DU (definition-quasi-coherent-topologies), item 4; Sites 00XZ; the sectionwise argument in the original item proof[4]."
+  "place": "03DR equation-quasi-coherent-presheaf; 03DU item 4. Explicit section components, one naturality obligation, and NatIso.ofComponents; P3 second reading."
  },
  "mathlib_searches": [
   {
@@ -131,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-d806e",
-  "group": "F2",
+  "reviewer": "X-10f1e",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T151907-L-2287849",
+  "landing": "20261013T004026-L-2491763",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
+  "note": "independent Codex review: Delivered packet, Lean modules, DAG records, report, and direct importers matched the stage-3 requirements; all compiled cleanly."
  }
 }

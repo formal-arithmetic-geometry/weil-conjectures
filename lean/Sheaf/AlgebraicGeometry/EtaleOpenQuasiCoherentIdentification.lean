@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentificationNaturality
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Quasi-coherent coefficients under restriction to an open etale site
 
@@ -70,6 +68,15 @@ theorem etaleTensorSectionsSheaf_openIdentification {X U : Scheme.{u}}
           ((Scheme.Modules.tensorPullback v.hom).map
             (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).leftAdjointUniq
               (Scheme.Modules.restrictAdjunction j)).hom.app F)).app ⊤ := by
-  sorry
+  let c := fun v : U.Etale ↦ etaleOpenTensorSectionsComponentIso j F v
+  let e : ((etaleOpenSmallRestriction j).obj
+      (Scheme.Modules.etaleTensorSectionsSheaf F)).obj ≅
+      (Scheme.Modules.etaleTensorSectionsSheaf
+        ((Scheme.Modules.restrictFunctor j).obj F)).obj :=
+    NatIso.ofComponents (fun v ↦ c v.unop)
+      (fun g ↦ etaleOpenTensorSectionsComponent_naturality j F g.unop)
+  refine ⟨ObjectProperty.isoMk _ e, ?_⟩
+  intro v
+  rfl
 
 end AlgebraicGeometry
