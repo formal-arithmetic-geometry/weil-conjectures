@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-local-bilinear-sheafification-tensor",
+ "kind": "statement",
+ "title": "Local bilinear presheaf pairings extend to sheaf tensor products",
+ "statement": "Let X be a scheme [def-pc-scheme], F and G presheaves of O_X-modules with their canonical sheafification units eta_F and eta_G [def-weil-presheaf-modules-sheafification], H an O_X-module sheaf [def-weil-sheaf-of-modules-category], and U an open of X. Suppose that for each W contained in U there is an O_X(W)-bilinear map b_W:F(W)×G(W)→H(W), and b commutes with every restriction between such opens. There exists a restriction-compatible family of O_X(W)-linear maps d_W:(F^# tensor G^#)(W)→H(W) [def-pur-sheaf-tensor-product] for W contained in U satisfying d_W(eta_F(x) tensor eta_G(y))=b_W(x,y). No uniqueness, local freeness, or rank hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: local exterior and tensor universal properties; extension through sheafification uses Stacks Project Tag 0GMW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For j:U→X put V(W)=j(image)(j(preimage)(W)) and K=j_*(H|U). Define beta_W(x,y)=b_V(W)(x|V(W),y|V(W)). The underlying sections K(W) are H(V(W)). Scheme.Hom.app_appIso_inv identifies the scalar action on K(W) with ordinary restriction from O_X(W). The map is therefore bilinear. The two inclusion composites V(Z)→W agree, so the presheaf composition laws and hb give naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity map of the structure-ring presheaf is locally injective and locally surjective. Apply existsUnique_bilinear_sheafification_extension to beta and K, obtaining gamma with its naturality and unit equations. Apply tensor_bilinear_universal to gamma to obtain phi:F^# tensor G^#→K.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For W≤U, Scheme.Hom.image_preimage_eq_opensRange_inf and Scheme.Opens.opensRange_ι give V(W)=W. The restriction-adjunction unit q:H→K at W is restriction along that equality, by restrictAdjunction_unit_app_app, hence bijective because functors preserve isomorphisms. Define e_W=LinearEquiv.ofBijective(q_W) and d_W=e_W.inverse composed with phi_W. Applying injective q_W to the pure tensor equation reduces it to the two universal-property unit equations and hb for V(W)≤W. Applying injective q_Z to naturality reduces it to naturality of q and phi, using e_W(e_W.inverse(z))=z.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "worker X2",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: local exterior and tensor universal properties; extension through sheafification uses Stacks Project Tag 0GMW",
+  "note": "Formal proof of the local extension part of the existing exterior tensor pairing plan, isolated as a reusable lemma; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a natural pairing on presheaves of exterior powers extends by sheafification to a tensor product of sheaves on an open subset",
+   "results": "Sheafify.smulCandidate and module sheafification scalar-action lemmas; no local bilinear tensor extension. Existing project global bilinear extension and tensor universal property used.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAdjunction\"",
+   "results": "restrictAdjunction, restrictAdjunction_unit_app_app and restrictAdjunction_counit_app_app, used for the open restriction transport. No bilinear extension statement.",
+   "verdict": "tools only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "bilinear.*sheafification|local.*bilinear.*tensor",
+   "results": "msearch Mathlib grep: zero hits. Repository rg finds the global SheafificationBilinearExtension and TensorBilinearUniversal modules, used here, but no local presheaf version.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A restriction compatible bilinear map of presheaves on an open subset extends to a tensor product of their sheafifications",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLocalPairing",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: extending the sectionwise exterior bilinear construction through sheafification and tensor",
+   "via": [
+    "lem-sc-exterior-tensor-local-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalBilinearSheafificationTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalBilinearSheafificationTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.local_bilinear_sheafification_tensor_extension",
+  "statement": "theorem local_bilinear_sheafification_tensor_extension {X : Scheme.{v}}\n    (F G : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj) (H : X.Modules)\n    (U : X.Opens)\n    (b : ∀ W : X.Opens, W ≤ U →\n      F.obj (op W) →ₗ[X.presheaf.obj (op W)]\n        G.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W))\n    (hb : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) x y,\n      b Z (hZW.trans hW) (F.map (homOfLE hZW).op x) (G.map (homOfLE hZW).op y) =\n        H.val.map (homOfLE hZW).op (b W hW x y)) :\n    let S : _root_.PresheafOfModules.{v} X.ringCatSheaf.obj ⥤ X.Modules :=\n      PresheafOfModules.sheafification.{v} (𝟙 X.ringCatSheaf.obj)\n    let η := (PresheafOfModules.sheafificationAdjunction.{v} (𝟙 X.ringCatSheaf.obj)).unit\n    ∃ d : ∀ W : X.Opens, W ≤ U →\n      (S.obj F ⊗ S.obj G).val.obj (op W) →ₗ[X.presheaf.obj (op W)] H.val.obj (op W),\n      (∀ W hW x y,\n        d W hW (tmulSection ((η.app F).app (op W) x) ((η.app G).app (op W) y)) =\n          b W hW x y) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        H.val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW) ((S.obj F ⊗ S.obj G).val.map (homOfLE hZW).op y))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T111943-L-3070201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T111943-L-3070201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
