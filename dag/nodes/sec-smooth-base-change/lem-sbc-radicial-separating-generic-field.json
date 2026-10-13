@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-radicial-separating-generic-field",
+ "kind": "statement",
+ "status": "split",
+ "title": "Radicial base extension with a separating generic field map",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 0559 second proof, the construction of A′ and the reduced generic function field prior to the geometric reducedness argument",
+   "via": [
+    "lem-sbc-radicial-reduced-flat-generic-fibre",
+    "lem-sbc-radicial-preparation-construction",
+    "lem-sbc-radicial-generic-reduced-preparation",
+    "lem-sbc-generic-radicial-geometrically-reduced-model",
+    "lem-sbc-affine-source-geometric-irreducibility-shrink",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "radicial.*separably|separably.*radicial|separablyGenerated.*[Rr]educ|[Rr]educ.*separablyGenerated",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:49:47Z\", \"tool\": \"grep\", \"query\": \"radicial.*separably|separably.*radicial|separablyGenerated.*[Rr]educ|[Rr]educ.*separablyGenerated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "Related geometric reducedness tools only; no radicial separating-field scheme construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced flat affine family over an integral affine base admits a finite radicial base extension whose reduced generic fibre embeds into a separably generated field",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:49:47Z\", \"tool\": \"leansearch\", \"query\": \"A reduced flat affine family over an integral affine base admits a finite radicial base extension whose reduced generic fibre embeds into a separably generated field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced flat affine family over an integral affine base admits a finite radicial base extension whose reduced generic fibre embeds into a separably generated field",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T12:49:47Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced flat affine family over an integral affine base admits a finite radicial base extension whose reduced generic fibre embeds into a separably generated field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"38f514198626fd5d\"}",
+   "digest": "38f514198626fd5d",
+   "verdict": "Related geometric reducedness tools only; no radicial separating-field scheme construction."
+  }
+ ],
+ "statement": "Let Z and S be affine schemes, with Z reduced [def-pc-reduced-scheme] and S integral [def-pc-integral-scheme]. Let g:Z→S be flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and let η be a generic point of S. Assume its fibre [def-pc-scheme-fibre] is geometrically irreducible [def-pc-geometrically-irreducible]. There exist an affine integral S′, a universal homeomorphism q:S′→S [def-weil-universal-homeomorphism], and a point η′ with q(η′)=η. Put Y=(Z×_S S′)_red, using the canonical nilradical reduction [def-weil-pbc-scheme-reduction, def-pc-fibre-product], and let p:Yη′→Spec κ(η′) be its fibre map. There exist a field F in the same universe as the schemes, a κ(η′)-algebra structure on F, and a quasi-compact scheme-theoretically dominant morphism h:Spec F→Yη′ such that F is separably generated over κ(η′) [def-weil-pbc-separable-field-extension] and h followed by p equals Spec of the field algebra map. Scheme-theoretic dominance means injectivity of the map on the structure sheaves. No geometric reducedness or genericity of η′ is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0559, second proof, finite radicial base construction; Tags 030R and 04KM"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write S=Spec A and Z=Spec B. The generic fibre ring B_K is the localization over the fraction field K of A, so is reduced; geometric irreducibility makes it a nonzero domain. Its fraction field L is finitely generated over K by finite presentation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite purely inseparable separably-generated field square, then replace the upper field by the compositum as in Tag 030R. A finitely generated separable subextension is separably generated. The reduced tensor F=(L tensor_K K′)_red is this field. Choose finite generators b_i of K′/K and multiply each by a nonzero denominator d_i so that its prime-power equation has coefficient in A. Let A′ be the actual A-subalgebra of K′ generated by these scaled elements. It is a finite domain with fraction field K′. Its integral radicial spectrum map q is surjective by lying over, and hence a universal homeomorphism. Lift η uniquely to η′; its residue field is K′.",
+   "uses": [
+    "lem-weil-pbc-make-separably-generated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduction commutes with localization, so Yη′ has coordinate ring (B tensor_A K′)_red. Tensoring B_K→L with K′ preserves injectivity by flatness of the field extension. Reducing an injection preserves injectivity because nilpotence is detected by an injective map. The resulting coordinate ring injection into F yields h:Spec F→Yη′ with zero kernel ideal sheaf. Both schemes are affine, making h quasi-compact. The field algebra compatibility gives h followed by p equal to Spec of the algebra map. In characteristic zero take K′=K. The nonempty generic fibre ensures all fraction fields are of nonzero domains.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-make-separably-generated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0559 and 030R",
+  "note": "Follows the affine radicial construction in the source, spelling out generator scaling, reduced tensor injection and the corresponding scheme-theoretically dominant morphism."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RadicialSeparatingGenericField",
+  "file": "lean/Sheaf/AlgebraicGeometry/RadicialSeparatingGenericField.lean",
+  "declaration": "AlgebraicGeometry.exists_radicial_separating_generic_field",
+  "statement": "theorem exists_radicial_separating_generic_field\n    {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]\n    (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    (hgeom : GeometricallyIrreducible (g.fiberToSpecResidueField η)) :\n    ∃ (S' : Scheme.{u}) (q : S' ⟶ S),\n      IsAffine S' ∧ IsIntegral S' ∧ IsUniversalHomeomorphism q ∧\n      ∃ η' : S', q η' = η ∧\n        ∃ (F : Type u) (hF : Field F) (aF : Algebra (S'.residueField η') F),\n          letI := hF\n          letI := aF\n          ∃ h : Spec (.of F) ⟶\n              ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',\n            IsSchemeTheoreticallyDominant h ∧ QuasiCompact h ∧\n            Algebra.IsSeparablyGenerated (S'.residueField η') F ∧\n            h ≫ ((pullback g q).nilradical.subschemeι ≫\n              pullback.snd g q).fiberToSpecResidueField η' =\n                Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') F))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T131328-L-4034824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T131328-L-4034824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
