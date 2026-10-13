@@ -1,0 +1,124 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-depth"
+ ],
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "id": "lem-sbc-fibre-cohen-macaulay-locus-open",
+ "title": "Openness of the unrestricted fibre Cohen-Macaulay locus",
+ "statement": "Let f:X→T be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. The set of y∈X for which the depth [def-weil-pbc-depth] of the local ring of the fibre X_{f(y)} at y [def-pc-scheme-fibre; def-weil-pbc-module-stalk] equals its ring Krull dimension [def-weil-pbc-krull-dimension-ring] is open in X.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 045U (1), (2), its affine openness input Tag 00RI, and Tag 00N8"
+ },
+ "proof": [
+  {
+   "text": "Cover the base by affine opens and then the inverse images by affine source opens. The flat locally finitely presented morphism on each such affine chart is a flat finitely presented ring map. Its fibres are of finite type over residue fields, hence locally Noetherian. The local ring at the point of a chart fibre agrees with the scheme fibre stalk.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the flat finitely presented affine algebra, Tag 00RI gives an open fibre Cohen-Macaulay locus. In these Noetherian local fibre rings the self-module Cohen-Macaulay condition of Tag 00N8 is precisely that regular-sequence depth equals Krull dimension. Thus the depth-equals-dimension locus is open on every affine chart. The chart opens agree because the condition is a property of the fibre local ring; their union is the desired locus. This is also the argument of Tag 045U (1), (2). The empty source gives the empty open set.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent P3",
+  "document": "Stacks Project",
+  "place": "Tag 045U (1), (2), following its affine input Tag 00RI; the depth formulation uses Tag 00N8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Openness of the Cohen Macaulay locus in fibres of a flat finitely presented scheme morphism",
+   "date": "2026-10-13",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre Cohen Macaulay locus of a flat locally finitely presented scheme morphism is open",
+   "date": "2026-10-13",
+   "results": "8 hits: UniversallyOpen.of_flat, smooth/unramified/etale algebra loci, and flatness interfaces.",
+   "verdict": "No matching Cohen-Macaulay locus theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|cohen.?macaulay",
+   "date": "2026-10-13",
+   "results": "0 Mathlib hits. Additional local rg over WeilConjectures found no matching theorem; Sheaf has only the present restricted locus and its dimension-decomposition users.",
+   "verdict": "No existing unrestricted fibre-locus declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedFibreCohenMacaulayLocus",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the fibre Cohen-Macaulay locus openness input, before transporting along an open base restriction; Tag 045U (1), (2).",
+   "via": [
+    "lem-sbc-restricted-fibre-cohen-macaulay-locus-open",
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreCohenMacaulayLocus.lean",
+  "declaration": "AlgebraicGeometry.isOpen_fibre_depth_eq_ringKrullDim",
+  "statement": "theorem isOpen_fibre_depth_eq_ringKrullDim\n    {X T : Scheme.{u}} (f : X ⟶ T) [Flat f] [LocallyOfFinitePresentation f] :\n    IsOpen {y : X |\n      (IsLocalRing.depth (R := (f.fiber (f y)).presheaf.stalk (f.asFiber y))\n        ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) : WithBot ℕ∞) =\n          ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))}",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T142900-L-499040",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T142900-L-499040",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
