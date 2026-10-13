@@ -19,7 +19,27 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use finite generation and the split injection to obtain finite presentation and projectivity. At the prime localization, use the local-ring lemma that a spanning family of a finitely presented flat module contains a basis; then spread the resulting basis by finite presentation and clear denominators.",
+   "text": "For the globally split helper, finite generation and Module.Projective.of_split give finite presentation. Localize at the prime, use Module.exists_basis_of_span_of_flat to select a subfamily, enumerate its image by Fin c, and bound c by m using injectivity of the selection and by n using the localized split injection and finrank. Module.FinitePresentation.exists_notMem_bijective spreads the prescribed linear-combination isomorphism to a principal neighborhood.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the globally split helper over B = A[1/b] to the images of x and the prime q = pB. The prime exists since b is outside p, and the localized family spans by span_eq_top_of_isLocalizedModule. This gives s outside q, a subset V, its enumeration e, and a prescribed basis over B[1/s].",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Write s * image(b)^k = image(t) using IsLocalization.Away.surj. If t were in p then s would be in q, since image(b)^k is a unit. Thus t is outside p. The elements image(t) and s are associated in B, so IsLocalization.Away.mul_of_associated identifies B[1/s] as a localization of A away from b*t.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the composite module map f followed by g, verify IsLocalizedModule.Away.mk at b*t. Multiplication by b*t is invertible over B[1/s]. For surjectivity, clear image(t)^i under g and b^j under f, then multiply the resulting lift by b^i*t^j to obtain denominator (b*t)^(i+j). For equality, clear image(t)^i under g and b^j under f and multiply the resulting equality by b^i*t^j.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use IsLocalizedModule.linearEquiv for the composite and canonical localization maps; extend it to the localized coefficient ring, map the basis, and change coefficients along IsLocalization.algEquiv. IsLocalizedModule.linearEquiv_apply proves that each selected original generator maps to its canonical localization, while V, c, e and their bounds remain unchanged.",
    "uses": [],
    "elementary": false
   }
@@ -85,13 +105,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T235558-L-2202472",
-  "kind": "interface",
+  "landing": "20261013T010619-L-2672576",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
