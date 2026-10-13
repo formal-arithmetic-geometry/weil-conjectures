@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeExistence
+import Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdgeCompatibility
 
 /-! # The affine derived edge before choosing module coordinates
 
@@ -83,6 +85,8 @@ theorem exists_affineDerivedPushforwardSheafEdge
           (((RingedSpace.moduleDirectImage
             (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj
-              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by sorry
+              ((F.mapHomologicalComplex (.up ℤ)).obj C))) := by
+  obtain ⟨ε⟩ := exists_affineDerivedPushforwardSheafEdge_existence A B φ i
+  exact ⟨ε, affineDerivedPushforwardSheafEdge_compatibility A B φ i ε⟩
 
 end AlgebraicGeometry
