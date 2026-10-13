@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
+import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESObjects
+import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility
 
 /-! # Chain-level comparison on a compact source-open union
 
@@ -89,6 +91,17 @@ theorem singleComplexOpenComparison_union_ses_presentation
       DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧
       DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom =
         e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧
-      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom := by sorry
+      DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom := by
+  classical
+  dsimp only
+  let a : X.Opens → Arrow (schemeDerivedCategory S') := fun Z ↦
+    Arrow.mk (singleComplexOpenComparison f f' g g' sq.w K K' φ Z)
+  obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP'⟩ :=
+    singleComplexOpenComparison_union_ses_objects f f' g g' sq K hK K' hK' φ U V
+      hUqc hVqc hUVqc
+  obtain ⟨h₁, h₂, h₃⟩ :=
+    singleComplexOpenComparison_union_ses_compatibility f f' g g' sq K hK K' hK' φ
+      U V hUqc hVqc hUVqc a P P' m e₁ e₂ e₃ e₁' e₂' e₃' hP hP'
+  exact ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', h₁, h₂, h₃⟩
 
 end AlgebraicGeometry

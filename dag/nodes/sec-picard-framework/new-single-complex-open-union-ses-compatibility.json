@@ -1,0 +1,110 @@
+{
+ "id": "new-single-complex-open-union-ses-compatibility",
+ "kind": "statement",
+ "title": "Compatibility component for union SES maps",
+ "statement": "theorem singleComplexOpenComparison_union_ses_compatibility\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) \n    (a : X.Opens → Arrow (schemeDerivedCategory S'))\n    (P P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n    (m : P ⟶ P')\n    (e₁ : DerivedCategory.Q.obj P.X₁ ≅ (a (U ⊔ V)).left)\n    (e₂ : DerivedCategory.Q.obj P.X₂ ≅ (a U).left ⊞ (a V).left)\n    (e₃ : DerivedCategory.Q.obj P.X₃ ≅ (a (U ⊓ V)).left)\n    (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ (a (U ⊔ V)).right)\n    (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (a U).right ⊞ (a V).right)\n    (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (a (U ⊓ V)).right)\n    (hP : P.ShortExact) (hP' : P'.ShortExact) :\n    DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧\n    DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom =\n      e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧\n    DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-open-comparison",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 08HZ, 08HY and 0DJ9, relative restriction sequence and coefficient comparison before passing to the derived triangle; functorial cylinder replacement as in Tags 013N and 013O. Online 08HZ, 08HY, 0DJ9 read on 2026-10-14."
+ },
+ "proof": [
+  {
+   "text": "Apply functoriality of the restriction rows and the cylinder construction to obtain the three conjugacy equations for the morphism of presentations.",
+   "uses": [
+    "lem-pc-cone-diagram-ses-presentation",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cone-diagram-ses-presentation",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex; literature/stacks-project/derived.tex",
+  "place": "Chain-level decomposition of the parent presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact restriction complexes on union of opens",
+   "results": "No exact construction found; proof requires geometric data.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping cylinder short exact complex derived category",
+   "results": "Only generic cylinder and SES lemmas; no exact union presentation.",
+   "date": "2026-10-14",
+   "verdict": "partial match only"
+  },
+  {
+   "tool": "grep",
+   "query": "SingleComplexOpenUnionSESPresentation ShortExact mapping cylinder",
+   "results": "No existing declaration for this relative construction.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESPresentation",
+  "date": "2026-10-14",
+  "group": "S4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenUnionSESCompatibility.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_union_ses_compatibility",
+  "statement": "theorem singleComplexOpenComparison_union_ses_compatibility\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))\n    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) \n    (a : X.Opens → Arrow (schemeDerivedCategory S'))\n    (P P' : ShortComplex (CochainComplex\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) ℤ))\n    (m : P ⟶ P')\n    (e₁ : DerivedCategory.Q.obj P.X₁ ≅ (a (U ⊔ V)).left)\n    (e₂ : DerivedCategory.Q.obj P.X₂ ≅ (a U).left ⊞ (a V).left)\n    (e₃ : DerivedCategory.Q.obj P.X₃ ≅ (a (U ⊓ V)).left)\n    (e₁' : DerivedCategory.Q.obj P'.X₁ ≅ (a (U ⊔ V)).right)\n    (e₂' : DerivedCategory.Q.obj P'.X₂ ≅ (a U).right ⊞ (a V).right)\n    (e₃' : DerivedCategory.Q.obj P'.X₃ ≅ (a (U ⊓ V)).right)\n    (hP : P.ShortExact) (hP' : P'.ShortExact) :\n    DerivedCategory.Q.map m.τ₁ ≫ e₁'.hom = e₁.hom ≫ (a (U ⊔ V)).hom ∧\n    DerivedCategory.Q.map m.τ₂ ≫ e₂'.hom =\n      e₂.hom ≫ biprod.map (a U).hom (a V).hom ∧\n    DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-single-complex-open-union-ses-presentation",
+   "place": "Decomposition of the chain-level union SES presentation before the target theorem.",
+   "via": [
+    "lem-pc-single-complex-open-union-ses-presentation"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T224519-L-1475453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T224519-L-1475453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
