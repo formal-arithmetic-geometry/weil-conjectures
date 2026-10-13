@@ -33,60 +33,48 @@
  ],
  "proof": [
   {
-   "text": "*The etale-local decomposition (Stacks 00UK).* Apply [lem-weil-pbc-finite-type-etale-finite-factor-decomposition] to the finite type map $R \\to S$ and the prime $\\mathfrak m$. We obtain an etale ring map $R \\to R'$, a prime $\\mathfrak m' \\subset R'$ over $\\mathfrak m$ with $\\kappa \\cong \\kappa(\\mathfrak m')$, and an $R'$-algebra isomorphism $R' \\otimes_R S \\cong A' \\times B'$, where $A'$ is finite as an $R'$-module and $R' \\to B'$ is not quasi-finite at any prime over $\\mathfrak m'$.",
+   "text": "Apply [lem-weil-pbc-finite-type-etale-finite-factor-decomposition] to S at the maximal ideal. Unpack the etale coefficient algebra R', its prime P over the maximal ideal, the finite factor A', the finite-type factor B', and the product equivalence e. Retain the residue-field bijectivity and the absence of quasi-finite points of B' over P.",
    "uses": [
     "lem-weil-pbc-finite-type-etale-finite-factor-decomposition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, first two sentences, applying Lemma Tag 00UK"
-   }
+   "elementary": false
   },
   {
-   "text": "*Retract the elementary etale extension.* The data $(R', \\mathfrak m')$ from step 1 satisfy the hypothesis of the statement, so there is an $R$-algebra homomorphism $\\tau : R' \\to R$ with $\\tau^{-1}(\\mathfrak m) = \\mathfrak m'$. (This corrects the reversed expression $\\mathfrak m = \\tau^{-1}(\\mathfrak m')$ printed in the source, which is ill-typed.)",
+   "text": "Lift R' to ULift in Type (max u v) and pull P back along the algebra equivalence. The two induced residue-field maps are inverse, as verified on coefficient elements by residue-field extensionality [def-weil-residue-field]. Compose the original residue-field bijection with this equivalence. Transport etaleness [def-weil-etale-morphism] and apply hR to the lifted algebra. Compose the resulting retraction with the inverse lift to get tau : R' -> R with P = tau^{-1}(m).",
    "uses": [
-    "def-weil-etale-morphism",
-    "def-weil-residue-field"
+    "def-weil-residue-field",
+    "def-weil-etale-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, sentence 'Apply (8) to get a retraction'"
-   }
+   "elementary": true
   },
   {
-   "text": "*Base change the product decomposition along the retraction.* Put $A = A' \\otimes_{R',\\tau} R$ and $B = B' \\otimes_{R',\\tau} R$. Tensor cancellation gives $S \\cong (R' \\otimes_R S) \\otimes_{R',\\tau} R$, and tensor product preserves the finite product $A' \\times B'$ (for two factors it is their direct sum as an $R'$-module, and the orthogonal idempotents $(1,0),(0,1)$ give the ring product after tensoring). Thus $S \\cong A \\times B$ as $R$-algebras. If $a'_1,\\ldots,a'_n$ generate $A'$ as an $R'$-module, then $a'_1 \\otimes 1,\\ldots,a'_n \\otimes 1$ generate $A$ as an $R$-module, so $A$ is finite. The projection $S \\to B$ induced by the displayed product is surjective, hence $B$ is a quotient of the finite type $R$-algebra $S$ and is finite type over $R$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, displayed tensor-product calculation; finiteness and finite type written out"
-   }
-  },
-  {
-   "text": "*The remaining factor has no quasi-finite point over $\\mathfrak m$.* The composite $R' \\xrightarrow{\\tau} R \\to \\kappa$ has kernel $\\mathfrak m' = \\tau^{-1}(\\mathfrak m)$, and the induced map $\\kappa(\\mathfrak m') \\to \\kappa$ is inverse to the isomorphism $\\kappa \\to \\kappa(\\mathfrak m')$ of step 1 (both composites are induced by the identity on $R$, hence are the identity). Tensor cancellation therefore gives an isomorphism of closed-fibre rings $B \\otimes_R \\kappa \\cong B' \\otimes_{R'} \\kappa(\\mathfrak m')$. Under the standard bijection between primes over the base prime and primes of the fibre ring, this isomorphism bijects primes of $B$ over $\\mathfrak m$ with primes of $B'$ over $\\mathfrak m'$ and is a homeomorphism on their fibre spectra. By [def-weil-pbc-ring-map-quasi-finite-at-prime], a finite type ring map is quasi-finite at such a prime exactly when its corresponding point of the fibre spectrum is isolated. Step 1 says no point on the right is isolated; hence $R \\to B$ is not quasi-finite at any prime over $\\mathfrak m$, as required.",
+   "text": "Give R its R'-algebra structure through tau, with scalar tower R -> R' -> R. Put A0 = R tensor_{R'} A' and B0 = R tensor_{R'} B'. Tensor cancellation [lem-weil-pbc-tensor-cancel-base-change], tensor congruence and binary product distribution [lem-weil-pbc-algebra-tensor-product-distributes-product] give S isomorphic to A0 times B0. Each projection is surjective from S, so both factors are Small in the universe of S; construct A and B by Shrink, transporting the product equivalence. Module finiteness of A0 is the base-change instance; transport it to A. The projection S -> B gives finite type of B.",
    "uses": [
-    "def-weil-pbc-ring-map-quasi-finite-at-prime",
-    "def-weil-residue-field"
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, final sentence 'which gives a decomposition as in (11)'; the omitted closed-fibre verification is written out, using the fibre-ring argument from the proof of Lemma Tag 00UK"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the fully proved [lem-weil-pbc-retraction-base-change-no-quasi-finite] to tau, P and the equivalence from B0 to B. It transports the absence of quasi-finite points of B' over P to B over m, completing the conjunction and existential witnesses.",
+   "uses": [
+    "lem-weil-pbc-retraction-base-change-no-quasi-finite"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-etale-finite-factor-decomposition",
-  "def-weil-etale-morphism",
   "def-weil-residue-field",
-  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-algebra-tensor-product-distributes-product",
+  "lem-weil-pbc-retraction-base-change-no-quasi-finite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, using Lemma Tag 00UK; the preservation of the non-quasi-finite condition under the retraction base change is the source's omitted verification and is written out via the closed-fibre isomorphism"
+  "place": "Algebra Tag 04GG, proof of (8) => (11), using Tag 00UK; F4 formalizes the tensor construction and universe adapters. The omitted closed-fibre verification is proved by restricting the spectrum embedding of the tensor quotient, instead of constructing a residue-field tensor equivalence. Source read online at https://stacks.math.columbia.edu/tag/04GG and https://stacks.math.columbia.edu/tag/00UK."
  },
  "mathlib_searches": [
   {
@@ -171,5 +159,15 @@
   "group": "E1",
   "result": "fix",
   "note": "local R; hR over etale R' : Type (max u v) (M1 c8ddf5893 spelling), prime over m, mapₐ bijective, τ with p = m.comap τ; S FiniteType; ∃ A B : Type v, B FiniteType, S ≃ₐ[R] A × B, Module.Finite R A, no prime of B over m quasi-finite (Algebra.IsQuasiFiniteAtPrime, #check'd); zero factors allowed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T111847-L-3050839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

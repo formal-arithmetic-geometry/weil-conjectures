@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-retraction-base-change-no-quasi-finite",
+ "kind": "statement",
+ "title": "A retraction base change preserves absence of quasi-finite closed-fibre points",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring, let $R'$ be a commutative $R$-algebra, and let $\\tau:R'\\to R$ be an $R$-algebra homomorphism. Let $P\\subset R'$ be a prime ideal satisfying $P=\\tau^{-1}(\\mathfrak m)$. Let $C$ be a finite-type $R'$-algebra [def-weil-pbc-finite-type-algebra], and let $B$ be a finite-type $R$-algebra. Give $R$ its $R'$-algebra structure via $\\tau$, and suppose there is an $R$-algebra isomorphism $R\\otimes_{R'}C\\cong B$ [def-weil-module-base-change]. If $R'\\to C$ is not quasi-finite at any prime over $P$ [def-weil-pbc-ring-map-quasi-finite-at-prime], then $R\\to B$ is not quasi-finite at any prime over $\\mathfrak m$. Neither $C$ nor $B$ is assumed nonzero, and the ring universes are independent.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GG, proof of (8) => (11), final sentence; the omitted fibre verification is expanded using the tensor quotient spectrum embedding. Source read at https://stacks.math.columbia.edu/tag/04GG."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-module-base-change",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Use the splitting tau(algebraMap(r)) = r to prove tau surjective. Mathlib Algebra.TensorProduct.includeRight_surjective makes C -> R tensor_{R'} C surjective. Compose with the given equivalence to obtain f : C -> B. PrimeSpectrum.isEmbedding_comap_of_surjective gives an embedding Spec B -> Spec C. The coefficient composite is f(algebraMap_{R',C}(a)) = algebraMap_{R,B}(tau(a)).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a prime q of C over P, extend C -> kappa(q) [def-weil-residue-field] to the tensor algebra. The R-coefficient map sends r to the residue of its image under R -> R' -> C. It is R'-linear because algebraMap(tau(a)) - a lies in ker(tau), hence in P and q. TensorProduct.lift supplies the extension. Compose with the inverse product-factor equivalence to get g : B -> kappa(q) with g o f equal to the residue map. Therefore ker(f) is contained in q. By range_comap_of_surjective, every such q belongs to the image of Spec B -> Spec C.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The preimage under Spec(f) of the fibre over P equals the fibre of Spec B over m: contraction of an ideal along the surjection tau is injective, and P = tau^{-1}(m). Restrict the spectrum embedding using Topology.IsEmbedding.homeomorphOfSubsetRange. This constructs a homeomorphism between the two fibres.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unfold [def-weil-pbc-ring-map-quasi-finite-at-prime] and use PrimeSpectrum.preimageHomeomorphFiber to identify quasi-finiteness with openness of a singleton in the fibre subspace. If q of B over m were quasi-finite, its open singleton would map through the restricted homeomorphism to an open singleton in the fibre of C over P. This contradicts the hypothesis on C. Empty fibre spectra and zero factors require no special case.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04GG, proof of (8) => (11), final sentence: omitted closed-fibre verification, fully formalized by F4 using spectrum embeddings of surjections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Absence of isolated prime spectrum fibre points is preserved by tensor base change along a retraction of the coefficient ring",
+   "results": "Service unavailable: Internal Server Error; launcher recorded UNAVAILABLE, 0 hits. No search verdict possible.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective split coefficient ring map, tensor base change identifies prime spectrum fibres and preserves the absence of quasi finite primes",
+   "results": "Algebra.QuasiFiniteAt.baseChange and of_surjectiveOnStalks_of_liesOver; RingHom.QuasiFinite.isStableUnderBaseChange. These concern Mathlib quasi-finiteness ascent, not the isolated-fibre predicate and non-quasi-finite descent here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.comap, Function.Surjective",
+   "results": "PrimeSpectrum.isEmbedding_comap_of_surjective, range_comap_of_surjective, PrimeSpectrum.comap_injective_of_surjective; used as ingredients of the proof, none states this theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt.*base|base.*QuasiFiniteAt|homeomorphOfSubsetRange|includeRight_surjective",
+   "results": "Algebra.QuasiFiniteAt.baseChange; Topology.IsEmbedding.homeomorphOfSubsetRange; Algebra.TensorProduct.includeRight_surjective. The latter two are used directly; no theorem matching the whole statement. Blueprint search for retraction base change quasi-finite returned 0 matches; existing QuasiFiniteAtPrime is the definition, not this transport theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 04GG (8) => (11), final sentence: preservation of the bad-factor condition after retraction base change",
+   "via": [
+    "lem-weil-pbc-etale-retraction-finite-type-splitting",
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RetractionBaseChangeNoQuasiFinite",
+  "file": "lean/Sheaf/RingTheory/RetractionBaseChangeNoQuasiFinite.lean",
+  "declaration": "Algebra.no_quasiFiniteAtPrime_of_retraction_baseChange",
+  "statement": "theorem no_quasiFiniteAtPrime_of_retraction_baseChange\n    {R : Type u} [CommRing R] [IsLocalRing R]\n    {R' : Type w} [CommRing R'] [Algebra R R']\n    (τ : R' →ₐ[R] R) (P : Ideal R') [P.IsPrime]\n    (hP : P = (IsLocalRing.maximalIdeal R).comap τ.toRingHom)\n    (C : Type x) [CommRing C] [Algebra R' C] [Algebra.FiniteType R' C]\n    (B : Type v) [CommRing B] [Algebra R B] [Algebra.FiniteType R B] :\n    letI : Algebra R' R := τ.toRingHom.toAlgebra\n    ∀ (_e : (R ⊗[R'] C) ≃ₐ[R] B),\n      (∀ q : PrimeSpectrum C, q.asIdeal.LiesOver P → ¬ IsQuasiFiniteAtPrime R' C q) →\n      ∀ q : PrimeSpectrum B,\n        q.comap (algebraMap R B) = IsLocalRing.maximalIdeal R →\n          ¬ IsQuasiFiniteAtPrime R B q",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T111847-L-3050839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T111847-L-3050839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
