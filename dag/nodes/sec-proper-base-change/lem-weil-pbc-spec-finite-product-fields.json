@@ -28,71 +28,38 @@
  ],
  "proof": [
   {
-   "text": "Notation. For $j=1,\\dots,n$ let $e_j\\in C$ be the element with $j$-th coordinate $1$ and all other coordinates $0$. Then $e_j^2=e_j$, $e_je_k=0$ for $j\\ne k$, $e_1+\\cdots+e_n=1$, $\\pi_j(e_j)=1$, and for $c=(c_1,\\dots,c_n)\\in C$ we have $ce_j=(0,\\dots,0,c_j,0,\\dots,0)$, so $c=\\sum_kce_k$ and $ce_j=0\\iff c_j=0\\iff c\\in\\mathfrak p_j$. Each $\\pi_j$ is a surjective ring homomorphism onto the field $L_j$, so $C/\\mathfrak p_j\\cong L_j$ is a field: $\\mathfrak p_j=\\ker\\pi_j$ is a maximal, in particular prime, ideal. The $\\mathfrak p_j$ are pairwise distinct: for $k\\ne j$ we have $e_j\\in\\mathfrak p_k$ (its $k$-th coordinate is $0$) but $e_j\\notin\\mathfrak p_j$ (its $j$-th coordinate is $1\\neq0$ in the field $L_j$). Finally, $\\mathfrak p_j=(e_k:k\\ne j)$: if $c_j=0$ then $c=\\sum_{k\\ne j}ce_k$, and conversely each $e_k$, $k\\ne j$, has $j$-th coordinate $0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00ED (lemma-spec-product), proof: the idempotents e_1=(1,0), e_2=(0,1) with 1=e_1+e_2; written out for n factors"
-   }
-  },
-  {
-   "text": "Clause 1. Let $\\mathfrak p\\subset C$ be a prime ideal (for $n=0$, $C$ is the zero ring, which has no prime ideal, and clauses 1-3 are empty; so let $n\\ge1$). Since $e_1+\\cdots+e_n=1\\notin\\mathfrak p$, some $e_j\\notin\\mathfrak p$. For every $k\\ne j$, $e_je_k=0\\in\\mathfrak p$ and $e_j\\notin\\mathfrak p$, so $e_k\\in\\mathfrak p$ as $\\mathfrak p$ is prime. Hence $\\mathfrak p\\supseteq(e_k:k\\ne j)=\\mathfrak p_j$ (step 1); since $\\mathfrak p_j$ is maximal and $\\mathfrak p\\ne C$, $\\mathfrak p=\\mathfrak p_j$. Together with step 1 (each $\\mathfrak p_j$ is prime and they are pairwise distinct), the primes of $C$ are exactly $\\mathfrak p_1,\\dots,\\mathfrak p_n$, and $\\operatorname{Spec}C$, whose points are the prime ideals of $C$ [def-weil-affine-spectrum], has exactly $n$ points. Moreover, by step 1, $e_j\\notin\\mathfrak p_k\\iff k=j$, i.e. the principal open $D(e_j)=\\{\\mathfrak p\\in\\operatorname{Spec}C:e_j\\notin\\mathfrak p\\}$ equals $\\{\\mathfrak p_j\\}$. (This is the statement of Lemma 00ED, $\\operatorname{Spec}(R_1\\times R_2)=\\operatorname{Spec}R_1\\amalg\\operatorname{Spec}R_2$, iterated, together with the fact that a field has the single prime ideal $(0)$, written out directly for $n$ factors.)",
+   "text": "For each field L_i, PrimeSpectrum (L_i) is a singleton with ideal zero. By Mathlib PrimeSpectrum.exists_comap_evalRingHom_eq, every prime of the finite product is the comap of a prime in a factor, hence the kernel of that projection. Conversely each such kernel is prime by Ideal.comap_isPrime. Injectivity of PrimeSpectrum.sigmaToPi distinguishes the factor indices and hence their kernels.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00EC (lemma-idempotent-spec: Spec R = D(e) ⊔ D(1-e), the image of an idempotent in a residue field is 0 or 1) and Lemma 00ED (lemma-spec-product)"
-   }
+   "elementary": true
   },
   {
-   "text": "Clause 2. In the Zariski topology of $\\operatorname{Spec}C$ [def-weil-affine-spectrum] every principal open $D(f)=\\{\\mathfrak p:f\\notin\\mathfrak p\\}$ is open, so by step 2 every singleton $\\{\\mathfrak p_j\\}=D(e_j)$ is open. Every subset of $\\operatorname{Spec}C=\\{\\mathfrak p_1,\\dots,\\mathfrak p_n\\}$ is the union of its singletons, hence open: the topology is discrete.",
+   "text": "Use PrimeSpectrum.sigmaToPiHomeo to identify the product spectrum with the disjoint union of the factor spectra. Each factor spectrum is a singleton. Equiv.sigmaUnique gives an equivalence with Fin n, and Nat.card_congr and Nat.card_fin give cardinality n. The disjoint union of singleton spaces is discrete, and the homeomorphism transfers discreteness. These arguments include n = 0: the empty sum corresponds to the spectrum of the zero ring.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00EC (D(e) open, with complement D(1-e))"
-   }
+   "elementary": true
   },
   {
-   "text": "$\\pi_j$ is a localization of $C$ at $e_j$. Regard $L_j$ as a $C$-algebra via $\\pi_j$. We check the characterization of a localization at one element in [def-weil-ring-localization-away]: (a) $\\pi_j(e_j)=1$ is a unit of $L_j$; (b) every element $x\\in L_j$ is $\\pi_j(c)\\cdot\\pi_j(e_j)^{-0}$ for $c=(0,\\dots,x,\\dots,0)$, since $\\pi_j$ is surjective; (c) $\\pi_j(c)=0\\iff c_j=0\\iff ce_j=0$ (step 1), and $e_j^kc=e_jc$ for $k\\ge1$, so $\\pi_j(c)=0$ iff $e_j^kc=0$ for some $k\\ge0$ (for $k=0$, $c=0$ gives $\\pi_j(c)=0$ too). Hence the induced map $C_{e_j}\\to L_j$, $c/e_j^m\\mapsto\\pi_j(c)$, is an isomorphism of $C$-algebras, i.e. $\\pi_j$ factors as $C\\to C_{e_j}\\xrightarrow{\\ \\sim\\ }L_j$. This is the claim $R_1=R_{e_1}$ that Stacks leaves to the reader in the proof of Lemma 00ED.",
+   "text": "For each projection, use the Mathlib AlgebraicGeometry.Limits instance instIsOpenImmersionMapOfHomForallEvalRingHom to get an open immersion. Its source has only the zero prime, so its image consists exactly of the projection kernel; the reverse inclusion is witnessed by the zero prime. Choose the actual open range f.opensRange. The canonical inclusion of this open subscheme has the same range as f, so IsOpenImmersion.isoOfRangeEq and isoOfRangeEq_hom_fac produce the required isomorphism and its factorization equation.",
    "uses": [
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00ED (lemma-spec-product), proof: 'We leave it to the reader to show that R_1 = R_{e_1} is the localization of R at e_1'"
-   }
-  },
-  {
-   "text": "Clause 3. By step 4, $\\pi_j=\\beta\\circ\\lambda$ with $\\lambda:C\\to C_{e_j}$ the localization map and $\\beta:C_{e_j}\\xrightarrow{\\sim}L_j$ a ring isomorphism. By functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], $\\operatorname{Spec}\\pi_j=\\operatorname{Spec}\\lambda\\circ\\operatorname{Spec}\\beta$, where $\\operatorname{Spec}\\beta$ is an isomorphism of schemes and $\\operatorname{Spec}\\lambda:\\operatorname{Spec}C_{e_j}\\to\\operatorname{Spec}C$ is an open immersion with image the principal open $D(e_j)$ [lem-weil-pbc-principal-localization-open-immersion]. An isomorphism followed by an open immersion is an open immersion [def-weil-open-immersion] (it is still a homeomorphism onto the same open subset, and the sheaf map $(\\operatorname{Spec}\\pi_j)^{-1}\\mathcal O_{\\operatorname{Spec}C}\\to\\mathcal O_{\\operatorname{Spec}L_j}$ is the composite of two isomorphisms), with the same image $D(e_j)=\\{\\mathfrak p_j\\}$ (step 2). (Directly: the single point $(0)$ of $\\operatorname{Spec}L_j$ [def-weil-affine-spectrum] maps to $\\pi_j^{-1}(0)=\\mathfrak p_j$.) Hence $\\operatorname{Spec}\\pi_j$ induces an isomorphism of $\\operatorname{Spec}L_j$ onto the open subscheme $\\{\\mathfrak p_j\\}$ of $\\operatorname{Spec}C$ (open by clause 2).",
-   "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
     "def-weil-affine-spectrum",
     "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00E4 (lemma-standard-open: Spec(R_f) -> D(f) is a homeomorphism), at the level of schemes; combined with Tag 00ED as in its proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
-  "def-weil-ring-localization-away",
-  "lem-weil-pbc-principal-localization-open-immersion",
   "def-weil-open-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00ED (lemma-spec-product) with its proof via Tag 00EC (lemma-idempotent-spec) and Tag 00E4 (lemma-standard-open); iterated to n factors and with the step R_1 = R_{e_1} left to the reader written out"
+  "place": "Lemma 00ED, specialized to fields; formal assembly from Mathlib PrimeSpectrum.sigmaToPiHomeo, exists_comap_evalRingHom_eq, and the projection open-immersion instance in AlgebraicGeometry.Limits. Checked and completed from the earlier H2 sandbox proof."
  },
  "mathlib_searches": [
   {
@@ -203,5 +170,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3c647",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T054218-L-443221",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and node matched against the base statement, proof route, imports, DAG fields, report, and direct importer; all compiled cleanly and axioms were allowed."
  }
 }

@@ -5,9 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Limits
-public import Mathlib.RingTheory.Spectrum.Prime.RingHom
-public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.AlgebraicGeometry.Restrict
+import Mathlib.AlgebraicGeometry.Limits
 
 @[expose] public section
 
@@ -66,6 +65,53 @@ theorem spec_finite_product_fields
           {p | p.asIdeal = Ideal.comap (Pi.evalRingHom L i) ⊥} ∧
         ∃ e : Spec (.of (L i)) ≅ U.toScheme,
           e.hom ≫ U.ι = Spec.map (CommRingCat.ofHom (Pi.evalRingHom L i))) := by
-  sorry
+  classical
+  have hbot (i : Fin n) (p : PrimeSpectrum (L i)) : p.asIdeal = ⊥ := by
+    rw [Subsingleton.elim p (⊥ : PrimeSpectrum (L i))]
+    rfl
+  have hprimes (p : Ideal (∀ i, L i)) : p.IsPrime ↔
+      ∃ i : Fin n, p = Ideal.comap (Pi.evalRingHom L i) ⊥ := by
+    constructor
+    · intro hp
+      obtain ⟨i, q, hq⟩ := PrimeSpectrum.exists_comap_evalRingHom_eq ⟨p, hp⟩
+      refine ⟨i, ?_⟩
+      have he := congrArg PrimeSpectrum.asIdeal hq
+      simpa [hbot i q] using he.symm
+    · rintro ⟨i, rfl⟩
+      exact Ideal.comap_isPrime (Pi.evalRingHom L i) ⊥
+  have hdistinct (i j : Fin n) (hij : i ≠ j) :
+      Ideal.comap (Pi.evalRingHom L i) ⊥ ≠
+        Ideal.comap (Pi.evalRingHom L j) ⊥ := by
+    intro h
+    have hs : PrimeSpectrum.sigmaToPi L ⟨i, ⊥⟩ =
+        PrimeSpectrum.sigmaToPi L ⟨j, ⊥⟩ := PrimeSpectrum.ext h
+    exact hij (congrArg Sigma.fst (PrimeSpectrum.sigmaToPi_injective L hs))
+  let e : PrimeSpectrum (∀ i, L i) ≃ Fin n :=
+    (PrimeSpectrum.sigmaToPiHomeo L).toEquiv.symm.trans
+      (Equiv.sigmaUnique (Fin n) (fun i ↦ PrimeSpectrum (L i)))
+  have hcard : Nat.card (PrimeSpectrum (∀ i, L i)) = n := by
+    rw [Nat.card_congr e, Nat.card_fin]
+  have hdiscrete : DiscreteTopology (PrimeSpectrum (∀ i, L i)) :=
+    (PrimeSpectrum.sigmaToPiHomeo L).discreteTopology
+  refine ⟨hprimes, hdistinct, hcard, hdiscrete, ?_⟩
+  intro i
+  let f := Spec.map (CommRingCat.ofHom (Pi.evalRingHom L i))
+  have hf : IsOpenImmersion f := inferInstance
+  have hrange : Set.range (fun x : PrimeSpectrum (L i) ↦ f.base x) =
+      {p | p.asIdeal = Ideal.comap (Pi.evalRingHom L i) ⊥} := by
+    ext p
+    constructor
+    · rintro ⟨x, rfl⟩
+      change Ideal.comap (Pi.evalRingHom L i) x.asIdeal = _
+      rw [hbot i x]
+    · intro hp
+      refine ⟨⊥, ?_⟩
+      exact PrimeSpectrum.ext hp.symm
+  refine ⟨hf, hrange, f.opensRange, hrange, ?_⟩
+  have he : Set.range f = Set.range f.opensRange.ι := by
+    rw [Scheme.Opens.range_ι]
+    rfl
+  exact ⟨IsOpenImmersion.isoOfRangeEq f f.opensRange.ι he,
+    IsOpenImmersion.isoOfRangeEq_hom_fac f f.opensRange.ι he⟩
 
 end AlgebraicGeometry
