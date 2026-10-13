@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Arrow
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
+import Sheaf.AlgebraicGeometry.RightAdjointMateNewBaseOpen
+import Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpen
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
 
 /-! # Comparison of the global right-adjoint mate with an open-chart mate
 
@@ -25,6 +27,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The two derived-category comparisons elaborate several large full-subcategory lifts.
 /-- Restriction of the global mate and pullback of the chart mate are isomorphic as
 arrows. This is a comparison statement, with no invertibility assumption on the chart
 mate and no affine-case base-change theorem as a hypothesis.
@@ -115,6 +119,56 @@ theorem proper_flat_rightAdjoint_chart_mate_comparison
         ((schemeDerivedQCohProperty (pullback (f ∣_ V) (g.resLE V W hWV))).ι.map
           (dualityEquationBaseChangeMap (f ∣_ V) (g.resLE V W hWV) b b' adjb adjb' hβV
             ⟨(derivedPullback V.ι).obj K.obj,
-              (derivedPullback_tensor_preserve_QCoh V.ι).1 K.obj K.property⟩)))) := by sorry
+              (derivedPullback_tensor_preserve_QCoh V.ι).1 K.obj K.property⟩)))) := by
+  classical
+  let gW : W.toScheme ⟶ Y := W.ι ≫ g
+  let s := pullback.snd f g ∣_ W
+  have hs : ((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.fst f g ≫ f = s ≫ gW := by
+    simp only [gW, s, ← Category.assoc, pullback.condition]
+    simp only [Category.assoc, morphismRestrict_ι]
+  let r := pullback.lift
+    (((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.fst f g) s hs
+  have hr₁ : r ≫ pullback.fst f gW =
+      ((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.fst f g := by
+    simp [r]
+  have hr₂ : r ≫ pullback.snd f gW ≫ W.ι =
+      ((pullback.snd f g) ⁻¹ᵁ W).ι ≫ pullback.snd f g := by
+    simp [r, s]
+  have hpb := (isPullback_morphismRestrict (pullback.snd f g) W).flip.paste_horiz
+    (IsPullback.of_hasPullback f g)
+  have hrIso : r = hpb.isoPullback.hom := by
+    apply pullback.hom_ext
+    · rw [hr₁]
+      exact hpb.isoPullback_hom_fst.symm
+    · simp only [r, pullback.lift_snd]
+      exact hpb.isoPullback_hom_snd.symm
+  have : IsIso r := by rw [hrIso]; infer_instance
+  let : QuasiSeparatedSpace (pullback f gW : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd f gW)
+  let FW := (schemeDerivedQCohProperty W.toScheme).lift
+    ((schemeDerivedQCohProperty (pullback f gW)).ι ⋙
+      schemeDerivedDirectImage (pullback.snd f gW)) (fun E ↦
+        (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ (pullback.snd f gW)).fst
+          E.obj E.property)
+  have : FW.IsLeftAdjoint :=
+    (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ (pullback.snd f gW)).choose_spec
+  let c := FW.rightAdjoint
+  let adjc := Adjunction.ofIsLeftAdjoint FW
+  have hβW := proper_flat_rightAdjoint_baseChange_hβ gW f
+  obtain ⟨eW⟩ := rightAdjoint_mate_newBase_open g f a a' adjf adjf' hβ K W
+    c adjc hβW r hr₁ hr₂
+  have hgW : gW = g.resLE V W hWV ≫ V.ι := by
+    simp [gW]
+  have hrq₁ : r ≫ pullback.fst f gW =
+      q ≫ pullback.fst (f ∣_ V) (g.resLE V W hWV) ≫ (f ⁻¹ᵁ V).ι := by
+    rw [hr₁, hq₁]
+  have hrq₂ : r ≫ pullback.snd f gW =
+      q ≫ pullback.snd (f ∣_ V) (g.resLE V W hWV) := by
+    apply (cancel_mono W.ι).mp
+    simpa only [Category.assoc] using hr₂.trans hq₂.symm
+  -- Transport the intermediate square along the restriction equation on its base map.
+  obtain ⟨eV⟩ := rightAdjoint_mate_oldBase_open f a adjf V gW (g.resLE V W hWV) hgW.symm
+    c adjc hβW K b b' adjb adjb' hβV r q hrq₁ hrq₂
+  exact ⟨eW ≪≫ eV⟩
 
 end AlgebraicGeometry

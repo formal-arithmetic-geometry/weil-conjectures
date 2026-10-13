@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-right-adjoint-mate-old-base-open",
+ "kind": "statement",
+ "title": "Compatibility of a right-adjoint mate with an open in the old base",
+ "statement": "Let f:X→Y be proper, flat and locally of finite presentation, with Y qcqs, and choose a right adjoint a to its canonical lifted derived direct image, with adjunction. Fix an affine open V⊂Y, put U=f⁻¹(V), and assume U qcqs. Let T be qcqs and g_V:T→V, g₀:T→Y satisfy g_V followed by V→Y equals g₀. Choose right adjoints c,b,b′ to the canonical lifted direct images X×_Y T→T, U→V and U×_V T→T, respectively, with their adjunctions. Assume ordinary derived base change for f along g₀ and f restricted to V along g_V. Fix K in D_QCoh(Y). For any scheme Z and maps r:Z→X×_Y T and q:Z→U×_V T, suppose their projections to X (using U→X for q) and T agree. Then the derived pullback along r of the ambient mate for f,g₀ at K is isomorphic as an arrow in D(O_Z) to the derived pullback along q of the ambient mate for U→V,g_V at LV* K. No new-base open and no invertibility of r,q or either mate are assumed. The categories, direct images, canonical mate and derived pullback are those of [def-pc-derived-category, def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint, def-sc-duality-equation-base-change-map, def-pc-derived-pullback]; restriction and ordinary base change are [def-pc-derived-open-restriction-maps, def-pc-derived-base-change-map], and schemes, properness, flatness and fibre products follow [def-weil-pbc-scheme-conventions, def-weil-proper-morphism, def-weil-flat-morphism, def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project, Duality for Schemes",
+  "place": "Remark 48.6.1 (Tag 0E9S), its one-open specialization; Lemma 48.5.2 (Tag 0ATR); Lemma 48.12.2 (Tag 0E4J)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The restriction square U→X over V→Y is cartesian. Since g₀ factors through V, pasting identifies X×_Y T with U×_V T. Cancel the mono U→X and use the supplied projection equations to identify r and q after this isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-sc-proper-flat-right-adjoint-restriction-open] for f and V. The invertible restricted open unit, open counit, and direct-image composition give the restriction comparison between a and b. Transport the direct images over T along the scheme isomorphism; right-adjoint uniqueness supplies the comparison between c and b′. Pullback composition gives the source comparison.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the mate for f,g₀ into its unit, inverse conjugate of ordinary base change and counit. In the factorization through V, composite adjunction units and counits match those of the two successive squares by their triangle identities. The ordinary base-change compositions agree; conjugation and inversion preserve the equality. Thus the mate for f,g₀ equals the mate for U→V,g_V composed with the invertible open comparison. This yields an arrow isomorphism over X×_Y T. Apply derived pullback along r, and the r,q projection equalities and pullback composition transport it to the asserted arrow isomorphism over Z. This is the old-base-open part of 0E9S and the composition calculation in 0ATR. Functors preserve isomorphisms, so r and q need not be isomorphisms.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-sc-duality-equation-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-proper-flat-right-adjoint-restriction-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Duality for Schemes",
+  "place": "Tags 0E9S, 0ATR and 0E4J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived right adjoint base change compatibility with restriction to an open subscheme",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical right adjoint base change mate compatible with restriction to open subschemes",
+   "results": "Eight underived scheme-module and open-immersion results; no derived mate comparison. Loogle for Adjunction and Arrow returned only four unrelated nerve/Leibniz adjunction results.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*restrict|restrict.*mate",
+   "results": "Three unrelated Mathlib hits. Library search finds generic mate whiskering and uniqueness lemmas, but no one-open derived scheme mate comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "second-reader",
+   "query": "Beck Chevalley pasting open immersion; Arrow.mk, Adjunction; BeckChevalley|mateEquiv_hcomp|conjugateEquiv.*comp",
+   "results": "LeanFinder found only underived restriction and pullback composition; Loogle found no match; grep found mateEquiv_hcomp, conjugateEquiv_comp and underived conjugation composition. These supply categorical ingredients but not the scheme-derived one-open comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointChartMateComparison",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Reduction to affine bases in the proper-flat right-adjoint base-change formula used in the diagonal counit identity: compatibility of the canonical mate with affine open restriction (Remark 48.6.1).",
+   "via": [
+    "lem-sc-proper-flat-right-adjoint-chart-mate-comparison",
+    "lem-sc-proper-flat-right-adjoint-basechange-chart",
+    "lem-sc-proper-flat-right-adjoint-basechange-global",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointMateOldBaseOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointMateOldBaseOpen.lean",
+  "declaration": "AlgebraicGeometry.rightAdjoint_mate_oldBase_open",
+  "statement": "theorem rightAdjoint_mate_oldBase_open\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y T Z : Scheme.{u}}\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace T] [QuasiSeparatedSpace T]\n    (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (adjf : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f _ _).fst E.obj E.property) ⊣ a)\n    (V : Y.Opens) [IsAffine V.toScheme]\n    [CompactSpace (f ⁻¹ᵁ V).toScheme] [QuasiSeparatedSpace (f ⁻¹ᵁ V).toScheme]\n    (g0 : T ⟶ Y) (gV : T ⟶ V.toScheme) (hg : gV ≫ V.ι = g0)\n    (c : schemeDerivedQCohCategory T ⥤\n      schemeDerivedQCohCategory (pullback f g0))\n    (adjc : (schemeDerivedQCohProperty T).lift\n      ((schemeDerivedQCohProperty (pullback f g0)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f g0)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g0)) _ _ _ _\n          (pullback.snd f g0) _ _).fst E.obj E.property) ⊣ c)\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g0) g0\n        (pullback.fst f g0) pullback.condition E.obj))\n    (K : schemeDerivedQCohCategory Y)\n    (b : schemeDerivedQCohCategory V.toScheme ⥤\n      schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme)\n    (b' : schemeDerivedQCohCategory T ⥤\n      schemeDerivedQCohCategory (pullback (f ∣_ V) gV))\n    (adjb : (schemeDerivedQCohProperty V.toScheme).lift\n      ((schemeDerivedQCohProperty (f ⁻¹ᵁ V).toScheme).ι ⋙\n        schemeDerivedDirectImage (f ∣_ V))\n      (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ (f ∣_ V)).fst\n        E.obj E.property) ⊣ b)\n    (adjb' : (schemeDerivedQCohProperty T).lift\n      ((schemeDerivedQCohProperty (pullback (f ∣_ V) gV)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd (f ∣_ V) gV))\n      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n        (quasiSeparatedSpace_of_quasiSeparated\n          (pullback.snd (f ∣_ V) gV)) _ _ _ _\n        (pullback.snd (f ∣_ V) gV) _ _).fst E.obj E.property) ⊣ b')\n    (hβV : ∀ E : schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme,\n      IsIso (schemeDerivedBaseChangeMap (f ∣_ V)\n        (pullback.snd (f ∣_ V) gV) gV\n        (pullback.fst (f ∣_ V) gV) pullback.condition E.obj))\n    (r : Z ⟶ pullback f g0)\n    (q : Z ⟶ pullback (f ∣_ V) gV)\n    (hrq₁ : r ≫ pullback.fst f g0 =\n      q ≫ pullback.fst (f ∣_ V) gV ≫ (f ⁻¹ᵁ V).ι)\n    (hrq₂ : r ≫ pullback.snd f g0 = q ≫ pullback.snd (f ∣_ V) gV) :\n    Nonempty (Arrow.mk ((derivedPullback r).map\n      ((schemeDerivedQCohProperty (pullback f g0)).ι.map\n        (@dualityEquationBaseChangeMap _ X Y T\n          (QuasiCompact.compactSpace_of_compactSpace f)\n          (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _\n          f g0 a c adjf adjc hβ K))) ≅\n      Arrow.mk ((derivedPullback q).map\n        ((schemeDerivedQCohProperty (pullback (f ∣_ V) gV)).ι.map\n          (dualityEquationBaseChangeMap (f ∣_ V) gV b b' adjb adjb' hβV\n            ⟨(derivedPullback V.ι).obj K.obj,\n              (derivedPullback_tensor_preserve_QCoh V.ι).1 K.obj K.property⟩))))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T082402-L-1643017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T082402-L-1643017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
