@@ -16,66 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Write S=A_q, C=P.Ring, J=ker(C -> S), m=maximalIdeal C, and n=maximalIdeal S. A surjection of local rings pulls n back to m, so J is contained in m. For each N>=1 form E_N=C/(J^2+m^N) and F_N=C/(J+m^N). These are nonzero Artinian local rings by [lem-weil-pbc-noetherian-local-quotient-artinian-local]; their quotient map has square-zero kernel. The natural map A -> S -> F_N pulls the maximal ideal back to q. The R-algebra structures give the required commuting square.",
+   "text": "Apply Ideal.exists_pow_inf_eq_pow_smul to J inside C for m = maximalIdeal C. Choose N = c+2. The Artin--Rees equality and monotonicity give m^N intersect J contained in m^2 J contained in mJ, while N >= 2 even if c = 0. This bound is proved directly in Lean.",
    "uses": [
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-artin-rees"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-artinian-ideal-length-one-filtration] to the kernel of E_N -> F_N. Quotient E_N by the filtration ideals, obtaining a finite chain of surjections with kernel of length one over the source ring. Every quotient stays Artinian local because its preimage ideal in C contains m^N and lies in m. Starting with A -> F_N, apply the hypothesis by descending induction. For each step the maximal ideal pulls back to the source maximal ideal, so the preimage in A stays q. The result is a lift s_N:A -> E_N over R.",
-   "uses": [
-    "lem-weil-pbc-artinian-ideal-length-one-filtration",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "An element of A outside q has image outside the maximal ideal of E_N, hence a unit by [lem-weil-pbc-local-ring-unit-criterion]. Localization gives an R-algebra map S -> E_N. It takes n into the maximal ideal, whose N-th power is zero, so quotient universality gives F_N=S/n^N -> E_N. Its composite with E_N -> F_N is the identity: the composite agrees with the identity on A, and maps out of this localization followed by a quotient are determined by A. Thus E_N -> F_N has an R-algebra section.",
-   "uses": [
-    "lem-weil-pbc-local-ring-unit-criterion",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-square-zero-section-conormal-retraction] to the section. It gives an F_N-linear left inverse to ker(E_N -> F_N) -> F_N tensor_(E_N) Omega(E_N/R).",
-   "uses": [
-    "lem-weil-pbc-square-zero-section-conormal-retraction",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By [lem-weil-pbc-artin-rees], choose c>=1 with m^N intersect J contained in m^(N-c) J for N>=c, and set N=c+1. Tensor the preceding left inverse with S/n. The modular law identifies the source as J/(J^2+(m^N intersect J)+mJ)=J/(J^2+mJ)=(J/J^2)/n(J/J^2). Apply [lem-weil-pbc-kahler-differentials-mod-power-ideal] to C,J with exponent 1 and to C/J^2, its maximal ideal with exponent N-1. Since N>=2, both applications are valid, and after tensoring with S/n the target is (S tensor_C Omega(C/R))/n(S tensor_C Omega(C/R)). The maps on classes of x in J both send x to dx, hence equal the reduction of P.cotangentComplex. The transported left inverse gives vk and the equation in the statement.",
-   "uses": [
-    "lem-weil-pbc-artin-rees",
-    "lem-weil-pbc-kahler-differentials-mod-power-ideal",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Test rings originally lie in Type u. Transport them and their maps to Type (max u v) with ULift ring equivalences. Surjectivity, module length one, local and Artinian instances, and both composite equations are invariant under these equivalences. Descend the resulting lifts. If J=0, the conormal module is zero and the conclusion is automatic; zero-variable presentations and arbitrary residue characteristic require no further assumptions.",
-   "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Obtain an R-algebra section of C/(J^2 + m^N) -> C/(J + m^N) from the length-one lifting tests by artinian_lifting_truncated_section, at N = c+2.",
+   "uses": [
+    "lem-weil-pbc-artinian-lifting-truncated-section"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply truncated_section_conormal_residue_kernel with the section and the bound. It gives delta(x) in nM implies x in nQ, namely injectivity of the induced quotient map Q/nQ -> M/nM.",
+   "uses": [
+    "lem-weil-pbc-truncated-section-conormal-residue-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved private helper residue_retraction_of_kernel forms the induced quotient map using Submodule.mapQ, proves injectivity by the kernel membership criterion, and extends scalars from S to the field k = S/n via LinearMap.extendScalarsOfSurjective. Mathlib IsSemisimpleModule.extension_property extends the identity on Q/nQ along this injection, producing its k-linear left inverse. Restricting scalars back to S and composing with the quotient projection gives the required equation on Q. No finite generation or freeness assumption is used.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-artinian-ideal-length-one-filtration",
-  "lem-weil-pbc-local-ring-unit-criterion",
-  "lem-weil-pbc-square-zero-section-conormal-retraction",
-  "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-artin-rees",
-  "lem-weil-pbc-kahler-differentials-mod-power-ideal"
+  "lem-weil-pbc-artinian-lifting-truncated-section",
+  "lem-weil-pbc-truncated-section-conormal-residue-kernel"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), Artinian quotients and last-paragraph comparison, specialized to N-c=1; verified at https://stacks.math.columbia.edu/tag/02HT"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/ArtinianLiftingConormalModMaximal.lean",
+  "place": "Artin--Rees at c+2, truncated sections, residue-kernel comparison and Mathlib semisimple extension property; follows Tag 02HT specialized to reduction modulo the maximal ideal"
  },
  "mathlib_searches": [
   {
@@ -147,12 +122,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T223402-L-1635701",
+  "landing": "20261013T000043-L-2231073",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
