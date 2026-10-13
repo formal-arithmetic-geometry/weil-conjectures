@@ -9,9 +9,7 @@ public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Finite
 public import Mathlib.FieldTheory.Separable
 
-import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
-import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
-import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
+import Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
 # Lifting a finite separable residue-field extension
@@ -49,6 +47,79 @@ theorem exists_finiteEtale_residueField_equiv_of_finite_separable
     [Algebra.IsSeparable (IsLocalRing.ResidueField R) L] :
     ∃ S : CommAlgCat.FiniteEtale.{max u v} R,
       Nonempty ((IsLocalRing.ResidueField R ⊗[R] S) ≃ₐ[IsLocalRing.ResidueField R] L) := by
-  sorry
+  -- Lift the minimal polynomial of a primitive element, then use its monic quotient.
+  -- Henselianity is not needed for this field-lifting step beyond the local-ring instance.
+  classical
+  let k : Type u := IsLocalRing.ResidueField R
+  have hetale (f : Polynomial R) (hf : f.Monic)
+      (hs : (f.map (IsLocalRing.residue R)).Separable) : Algebra.Etale R (AdjoinRoot f) := by
+    let := hf.finite_adjoinRoot
+    have hd : IsUnit (AdjoinRoot.mk f f.derivative) := by
+      by_contra hn
+      obtain ⟨q, hq, hle⟩ := Ideal.exists_le_maximal
+        (Ideal.span {AdjoinRoot.mk f f.derivative})
+        (fun h ↦ hn (Ideal.span_singleton_eq_top.mp h))
+      let := hq
+      have hc : q.comap (algebraMap R (AdjoinRoot f)) = IsLocalRing.maximalIdeal R :=
+        IsLocalRing.eq_maximalIdeal
+          (Ideal.isMaximal_comap_of_isIntegral_of_isMaximal q)
+      let φ : IsLocalRing.ResidueField R →+* AdjoinRoot f ⧸ q :=
+        Ideal.Quotient.lift _ ((Ideal.Quotient.mk q).comp (algebraMap R (AdjoinRoot f)))
+          (fun r hr ↦ Ideal.Quotient.eq_zero_iff_mem.mpr (by rwa [← hc] at hr))
+      have he (g : Polynomial R) :
+          (g.map (IsLocalRing.residue R)).eval₂ φ
+            (Ideal.Quotient.mk q (AdjoinRoot.root f)) =
+          Ideal.Quotient.mk q (AdjoinRoot.mk f g) := by
+        rw [Polynomial.eval₂_map]
+        change g.eval₂ ((Ideal.Quotient.mk q).comp (algebraMap R (AdjoinRoot f))) _ = _
+        rw [← Polynomial.hom_eval₂, ← Polynomial.aeval_def, AdjoinRoot.aeval_eq]
+      have hnz := hs.eval₂_derivative_ne_zero φ (x :=
+        Ideal.Quotient.mk q (AdjoinRoot.root f)) (by rw [he, AdjoinRoot.mk_self, map_zero])
+      rw [Polynomial.derivative_map, he] at hnz
+      exact hnz (Ideal.Quotient.eq_zero_iff_mem.mpr
+        (hle (Ideal.subset_span (by simp))))
+    let P : StandardEtalePair R := ⟨f, hf, f.derivative, ⟨1, 0, 1, by simp⟩⟩
+    have hm : P.HasMap (AdjoinRoot.root f) :=
+      ⟨by simp [P, AdjoinRoot.aeval_eq], by simpa [P, AdjoinRoot.aeval_eq] using hd⟩
+    let e : P.Ring ≃ₐ[R] AdjoinRoot f := .ofAlgHom
+      (P.lift (AdjoinRoot.root f) hm)
+      (AdjoinRoot.liftAlgHom f (Algebra.ofId R P.Ring) P.X P.hasMap_X.1)
+      (AdjoinRoot.algHom_ext (by simp [AdjoinRoot.liftAlgHom_root]))
+      (StandardEtalePair.hom_ext (by simp [AdjoinRoot.liftAlgHom_root]))
+    exact Algebra.Etale.of_equiv e
+  -- Base change commutes with adjoining a root; simplify the coefficient tensor product.
+  have hbaseChange (f : Polynomial R) :
+      Nonempty ((k ⊗[R] AdjoinRoot f) ≃ₐ[k] AdjoinRoot (f.map (algebraMap R k))) := by
+    let e := Algebra.TensorProduct.rid R k k
+    refine ⟨(AdjoinRoot.tensorAlgEquiv f _ rfl).trans
+      (AdjoinRoot.mapAlgEquiv e _ _ ?_)⟩
+    apply Associated.of_eq
+    rw [Polynomial.map_map]
+    congr 1
+    ext r
+    simp [e, Algebra.smul_def]
+  obtain ⟨α, hα⟩ := Field.exists_primitive_element k L
+  have hi : IsIntegral k α := Algebra.IsIntegral.isIntegral α
+  obtain ⟨f, hmap, -, hf⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
+    ((Polynomial.mem_lifts _).mpr
+      (Polynomial.map_surjective _ (IsLocalRing.residue_surjective (R := R)) (minpoly k α)))
+    (minpoly.monic hi)
+  have hs : (f.map (IsLocalRing.residue R)).Separable := by
+    rw [hmap]
+    exact Algebra.IsSeparable.isSeparable k α
+  let := hf.finite_adjoinRoot
+  let := hetale f hf hs
+  let A := ULift.{v} (AdjoinRoot f)
+  let : Module.Finite R A := Module.Finite.equiv (ULift.algEquiv.toLinearEquiv.symm)
+  let : Algebra.Etale R A := Algebra.Etale.of_equiv (ULift.algEquiv.symm)
+  refine ⟨CommAlgCat.FiniteEtale.of R A, ⟨?_⟩⟩
+  let e₁ : (k ⊗[R] A) ≃ₐ[k] (k ⊗[R] AdjoinRoot f) :=
+    Algebra.TensorProduct.congr (AlgEquiv.refl (R := k) (A₁ := k)) (ULift.algEquiv (R := R))
+  let e₂ := (hbaseChange f).some
+  let e₃ : AdjoinRoot (f.map (algebraMap R k)) ≃ₐ[k] AdjoinRoot (minpoly k α) :=
+    AdjoinRoot.algEquivOfEq _ _ _ hmap
+  exact e₁.trans (e₂.trans (e₃.trans
+    ((IntermediateField.adjoinRootEquivAdjoin k hi).trans
+      ((IntermediateField.equivOfEq hα).trans IntermediateField.topEquiv))))
 
 end CommAlgCat.FiniteEtale
