@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-derived-monoidal-pullback-unital-shift",
+ "kind": "statement",
+ "title": "Unital tensor shifts compatible with the specified derived pullback",
+ "statement": "Let $f:Z\\to Y$ be a proper morphism of Noetherian schemes [def-pc-scheme, def-weil-proper-morphism], with their derived categories in one localization universe [def-pc-derived-category], their recorded K-flat derived tensor [def-pc-scheme-derived-tensor-structure], and $L=Lf^*$ [def-pc-derived-pullback]. Equip $L$ with the supplied strong monoidal structure. There exist coherent integer-shift structures on $L$ and on every functor $-\\otimes M$ on both ambient derived categories. For these structures, $L$ and every $-\\otimes M$ on $D(\\mathcal O_Z)$ preserve distinguished triangles. On both schemes the natural transformation $-\\otimes b$ commutes with shifts for every morphism $b:M\\to N$. For every $M\\in D(\\mathcal O_Y)$ the inverse tensorator $L(K\\otimes M)\\to L(K)\\otimes L(M)$, natural in $K$, commutes with the composite shifts. The right-unitor natural transformation $-\\otimes\\mathcal O_Y\\to\\mathrm{id}$ commutes with shifts. No direct image, adjunction, projection isomorphism, map to the unit, or specified comparison transformation is part of this statement.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Proof, exactness of the composite tensor and pullback functors; expanded for the simultaneous unital shifts required by Tags 0A9U and 0A9S (equation-compare-with-pullback)."
+ },
+ "proof": [
+  {
+   "text": "On K-flat representative complexes the Koszul translation comparison for tensor in its first variable is natural in the fixed second factor. It sends the tensor of a cone triangle to the cone triangle of the tensored map. Its zero and addition identities descend through the recorded K-flat tensor localization. This constructs exact shifts on all tensorRight functors on both schemes, with shift compatibility of every tensorRight morphism. The complex right unitor intertwines translation, so its compatibility descends on Y as well.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute L by termwise tensor pullback of K-flat resolutions; its representative comparison with translation identifies image mapping-cone triangles. For the supplied monoidal structure, choose this comparison simultaneously with the tensor comparisons, expressing translation as tensor with the translated unit and using the inverse tensorator and unit isomorphism. The tensorator associativity equation supplies addition coherence; its unit equations supply zero coherence and preserve the right-unitor comparison on Y. Moving translation through the inverse tensorator gives its shift equation in the varying first factor. Descend these equations through K-flat localization.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Expansion of the representative-complex and monoidal-transport part of step 1 of lem-sc-pinned-projection-counit-exact-shift, with the base tensor morphism and right-unitor coherences made explicit. Direct-image exactness is omitted because Mathlib derives it by adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact derived pullback and tensor shifts compatible with the supplied monoidal tensorator and right unitor",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact derived pullback and tensor shifts compatible with the supplied monoidal tensorator, natural in the fixed tensor factor on both schemes, and compatible with the right unitor",
+   "date": "2026-10-13",
+   "results": "8 hits about Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, Scheme.Modules pseudofunctor unit equations, pullbackComp and monoidal pullbacks of schemes; none states compatible exact derived tensor and pullback shifts.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback_tensorShift|rightUnitor_commShift|commShift_of_tensorRight_fac",
+   "date": "2026-10-13",
+   "results": "Search service returned 0 hits. Local rg and source reads found AlgebraicGeometry.derivedPullback_tensorShift, which supplies tensor morphism compatibility only on Z and no right-unitor compatibility on Y. DerivedCategory.rightUnitor_commShift concerns the unit object for canonical tensor shifts; commShift_of_tensorRight_fac requires a factorization through the termwise oplax comparison not provided for the supplied arbitrary monoidal structure.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PinnedProjectionCounitExactShift",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Simultaneous geometric tensor and pullback shift construction in step 1 of lem-sc-pinned-projection-counit-exact-shift; base tensor morphism and right-unitor compatibility in step 2, before forming the inverse projection mate.",
+   "via": [
+    "lem-sc-pinned-projection-counit-exact-shift",
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMonoidalPullbackUnitalShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMonoidalPullbackUnitalShift.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedMonoidalPullback_unitalShift",
+  "statement": "theorem exists_derivedMonoidalPullback_unitalShift\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    ∃ (sL : (derivedPullback f).CommShift ℤ)\n      (sY : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ)\n      (sZ : ∀ M : schemeDerivedCategory Z, (tensorRight M).CommShift ℤ),\n      letI := sL\n      letI := sY\n      letI := sZ\n      (derivedPullback f).IsTriangulated ∧\n      (∀ M : schemeDerivedCategory Z, (tensorRight M).IsTriangulated) ∧\n      (∀ {M N : schemeDerivedCategory Y} (b : M ⟶ N),\n        NatTrans.CommShift ((curriedTensor (schemeDerivedCategory Y)).flip.map b) ℤ) ∧\n      (∀ {M N : schemeDerivedCategory Z} (b : M ⟶ N),\n        NatTrans.CommShift ((curriedTensor (schemeDerivedCategory Z)).flip.map b) ℤ) ∧\n      (∀ M : schemeDerivedCategory Y,\n        NatTrans.CommShift (F₁ := tensorRight M ⋙ derivedPullback f)\n          (F₂ := derivedPullback f ⋙ tensorRight ((derivedPullback f).obj M))\n          ((Functor.OplaxMonoidal.δNatTrans (derivedPullback f)).flipApp M) ℤ) ∧\n      NatTrans.CommShift (rightUnitorNatIso (schemeDerivedCategory Y)).hom ℤ",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100150-L-2493846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100150-L-2493846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

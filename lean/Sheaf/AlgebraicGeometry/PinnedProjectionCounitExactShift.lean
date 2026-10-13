@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.AlgebraicGeometry.DerivedMonoidalPullbackUnitalShift
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
+import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Exact shifts for a pinned projection followed by a counit
@@ -91,6 +95,95 @@ theorem pinnedProjectionCounit_exactShift
     ∃ (sQ : Q.CommShift ℤ) (sR : R.CommShift ℤ),
       letI := sQ
       letI := sR
-      Q.IsTriangulated ∧ R.IsTriangulated ∧ NatTrans.CommShift ν ℤ := by sorry
+      Q.IsTriangulated ∧ R.IsTriangulated ∧ NatTrans.CommShift ν ℤ := by
+  obtain ⟨sL, sY, sZ, hL, hTZ, hYmap, hZmap, hδ, hρ⟩ :=
+    exists_derivedMonoidalPullback_unitalShift f
+  let := sL
+  let := sY
+  let := sZ
+  have := hL
+  let := a.rightAdjointCommShift ℤ
+  have := a.commShift_of_leftAdjoint ℤ
+  have := a.isTriangulated_rightAdjoint
+  have := hTZ E.obj
+  let Q := (schemeDerivedQCohProperty Z).lift
+    ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙ tensorRight E.obj) hTensor
+  let R := (schemeDerivedQCohProperty Y).lift
+    ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage f) hRf
+  refine ⟨inferInstanceAs (Q.CommShift ℤ), inferInstanceAs (R.CommShift ℤ),
+    inferInstance, inferInstance, ?_⟩
+  let φ : (Functor.postcompose₂.obj (derivedPullback f)).obj
+      (curriedTensor (schemeDerivedCategory Y)).flip ⟶
+      (((Functor.whiskeringLeft₂ (schemeDerivedCategory Z)).obj
+        (derivedPullback f)).obj (derivedPullback f)).obj
+        (curriedTensor (schemeDerivedCategory Z)).flip :=
+    (flipFunctor _ _ _).map
+      (Functor.OplaxMonoidal.δNatTrans (derivedPullback f))
+  let p : tensorRight ((schemeDerivedDirectImage f).obj E.obj) ⟶
+      (derivedPullback f ⋙ tensorRight E.obj) ⋙ schemeDerivedDirectImage f :=
+    (a.rightAdjointProjectionMap φ).app E.obj
+  have hpshift : NatTrans.CommShift (F₁ :=
+      tensorRight ((schemeDerivedDirectImage f).obj E.obj))
+      (F₂ := (derivedPullback f ⋙ tensorRight E.obj) ⋙ schemeDerivedDirectImage f)
+      p ℤ := by
+    have := hδ ((schemeDerivedDirectImage f).obj E.obj)
+    have := hZmap (a.counit.app E.obj)
+    exact Adjunction.commShift_rightAdjointProjectionMap_app a φ E.obj
+  let ιY := (schemeDerivedQCohProperty Y).ι
+  let ιZ := (schemeDerivedQCohProperty Z).ι
+  let e : (Q ⋙ R) ⋙ ιY ≅
+      ιY ⋙ (derivedPullback f ⋙ tensorRight E.obj) ⋙ schemeDerivedDirectImage f :=
+    Functor.associator Q R ιY ≪≫
+      Functor.isoWhiskerLeft Q ((schemeDerivedQCohProperty Y).liftCompιIso
+        (ιZ ⋙ schemeDerivedDirectImage f) hRf) ≪≫
+      (Functor.associator Q ιZ (schemeDerivedDirectImage f)).symm ≪≫
+      Functor.isoWhiskerRight ((schemeDerivedQCohProperty Z).liftCompιIso
+        (ιY ⋙ derivedPullback f ⋙ tensorRight E.obj) hTensor)
+        (schemeDerivedDirectImage f) ≪≫
+      Functor.associator ιY (derivedPullback f ⋙ tensorRight E.obj)
+        (schemeDerivedDirectImage f)
+  have : NatTrans.CommShift e.hom ℤ := by
+    simp only [e, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
+    infer_instance
+  let t : ιY ⋙ tensorRight ((schemeDerivedDirectImage f).obj E.obj) ⟶
+      ιY ⋙ (derivedPullback f ⋙ tensorRight E.obj) ⋙ schemeDerivedDirectImage f :=
+    Functor.whiskerLeft ιY p
+  have : NatTrans.CommShift t ℤ := inferInstance
+  have ht (K : schemeDerivedQCohCategory Y) : IsIso (t.app K) := by
+    obtain ⟨pf, hpin, _⟩ := hν K
+    have heq : t.app K = pf.inv := by
+      simpa [t, p, φ, ιY, Adjunction.rightAdjointProjectionMap_app_app] using hpin.symm
+    rw [heq]
+    infer_instance
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  have : NatTrans.CommShift (inv t) ℤ := NatTrans.CommShift.of_isIso t ℤ
+  have := hρ
+  let c := (curriedTensor (schemeDerivedCategory Y)).flip.map ε.hom ≫
+    (rightUnitorNatIso (schemeDerivedCategory Y)).hom
+  have : NatTrans.CommShift c ℤ := by
+    have := hYmap ε.hom
+    infer_instance
+  have heq : Functor.whiskerRight ν ιY =
+      e.hom ≫ inv t ≫ Functor.whiskerLeft ιY c ≫
+        ιY.rightUnitor.hom ≫ ιY.leftUnitor.inv := by
+    ext K
+    obtain ⟨pf, hpin, hformula⟩ := hν K
+    have htp : t.app K = pf.inv := by
+      simpa [t, p, φ, ιY, Adjunction.rightAdjointProjectionMap_app_app] using hpin.symm
+    have hinv : (inv t).app K = pf.hom := by
+      apply (cancel_mono pf.inv).1
+      rw [← htp]
+      calc
+        (inv t).app K ≫ t.app K = 𝟙 _ := (asIso t).inv_hom_id_app K
+        _ = pf.hom ≫ t.app K := by
+          rw [htp, pf.hom_inv_id]
+          rfl
+    simpa [e, c, ιY, ιZ, hinv, ObjectProperty.liftCompιIso, Q, R, Category.id_comp]
+      using hformula
+  have : NatTrans.CommShift (Functor.whiskerRight ν ιY) ℤ := by
+    rw [heq]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerRight ν ιY
 
 end AlgebraicGeometry
