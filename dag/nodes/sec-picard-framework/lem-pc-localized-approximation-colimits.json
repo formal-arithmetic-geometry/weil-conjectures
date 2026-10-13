@@ -1,0 +1,158 @@
+{
+ "id": "lem-pc-localized-approximation-colimits",
+ "kind": "statement",
+ "title": "Scalar-compatible colimits of canonical localized approximation diagrams",
+ "statement": "Let R and S be commutative rings with a map R→S, M an S-module, and Λ a nonempty directed preorder. Let A,B:Λ→CommRing and D:Λ→AddCommGrp, with D_i a B_i-module, and η:A→B, π:A→const R, κ:B→const S, ν:D→const M. Assume these are colimit cocones, η_i followed by κ_i equals π_i followed by R→S, D transitions are semilinear over the B transitions, and ν_i(bx)=κ_i(b)ν_i(x). No finiteness or tensor base-change assumption is imposed. For q∈Spec S put q_i=κ_i⁻¹q and p_i=η_i⁻¹q_i. Define Aq_i=(A_i)_{p_i}, Bq_i=(B_i)_{q_i}, and Nq_i=(D_i)_{q_i}, with the explicitly constructed fraction transition maps. Then there exist a uniquely determined ring map ψ:colim Aq→colim Bq and uniquely determined colim Bq-module action on colim Nq such that ψ respects the localized stage maps and the colimit coprojections respect stage scalar multiplication. With that action restricted through ψ, colim Nq is flat over colim Aq if and only if M_q is flat over R_p, where p is the contraction of q in R and the R_p action comes from the canonical local map R_p→S_q. All colimits, localization and flatness use [def-weil-pbc-category-colimit], [def-weil-pbc-localization-at-prime], [def-weil-pbc-flat-ring-map]; primes are points of [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), first paragraph: localized system and its limit; Tag 037D, proof first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Contract q through κ_i and η_i. Cocone compatibility identifies the resulting A_i prime with the contraction of p=q∩R through π_i. Naturality makes the explicit fraction maps functorial. The localized stage map is Localization.localRingHom; its square commutes on numerators, hence on all fractions.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply localization-commutes-with-colimits to A and B, after transporting the supplied IsColimit cocones to canonical colimits. The canonical localized ring colimits are consequently isomorphic to R_p and S_q. Their isomorphisms are uniquely specified by their action on the original stage numerators.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A fraction of M_q has a numerator represented in D_i and denominator represented in B_j. Directedness places both at a common stage, where the denominator avoids the contracted prime. An equality of fractions has a multiplier outside q killing the cross difference. Represent that multiplier at another stage and descend its zero cross difference using the original additive-group colimit. Semilinearity preserves the cross difference under all transitions. Joint surjectivity and eventual equality identify the explicitly defined localized group diagram colimit with M_q.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the S_q-module action to the canonical group colimit through the comparison isomorphisms. On fractions, stage scalar multiplication gives exactly hlimitScalar. The localized stage maps induce ψ and hψ. Colimit joint surjectivity and passage to common stages uniquely determine both ψ and this action; no arbitrary data are selected.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fraction identities show that the two ring comparisons and the additive comparison intertwine ψ with R_p→S_q and the induced module actions. Transport of tensor maps along these isomorphisms preserves and reflects their injectivity; equivalently flatness is unchanged. This proves the displayed equivalence, with no flatness assumption.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), first paragraph: localized system and its limit; Tag 037D, proof first paragraph; source read online at https://stacks.math.columbia.edu/tag/02JO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization at compatible primes commutes with a filtered colimit of semilinear modules and rings",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of colimits of semilinear module diagrams at a contracted prime commutes with their scalar actions",
+   "results": "ModuleCat.localizedModuleFunctor preserves finite colimits; ModuleCat.HasColimit.coconePointSMul_apply and isColimitColimitCocone apply to fixed-ring linear diagrams. No match for varying-ring semilinear diagrams and the coupled localized colimit flatness comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*colimit|colimit.*localiz in Mathlib; localized colimit in Sheaf and WeilConjectures",
+   "results": "Mathlib.Algebra.Category.ModuleCat.Localization: fixed-ring finite-colimit preservation only. Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime handles the ring part, not semilinear module colimits or their scalar/flatness comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteTypeApproximationFlatPoint",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Flat-model approximation: Tag 02JO (1), first paragraph: localized system and its limit; Tag 037D, proof first paragraph",
+   "via": [
+    "lem-pc-finite-type-approximation-flat-point",
+    "lem-pc-finite-type-approximation-flat-loci",
+    "lem-pc-flat-module-tensor-model",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedApproximationColimits",
+  "file": "lean/Sheaf/RingTheory/LocalizedApproximationColimits.lean",
+  "declaration": "Algebra.localized_approximation_colimits",
+  "statement": "theorem localized_approximation_colimits\n    (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [AddCommGroup M] [Module S M]\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)\n    (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R))\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (D : Λ ⥤ AddCommGrpCat.{v})\n    (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M))\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hA : Nonempty (IsColimit (Cocone.mk (CommRingCat.of R) π)))\n    (hB : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ)))\n    (hD : Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)))\n    (hη : ∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R S))\n    (hs : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : D.obj i),\n      (D.map f).hom (b • x) = (B.map f).hom b • (D.map f).hom x)\n    (hν : ∀ i (b : B.obj i) (x : D.obj i),\n      (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (b • x) =\n        (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) b •\n          (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x)\n    (q : PrimeSpectrum S) :\n    let Aq := primeRingDiagram A (η ≫ κ) q\n    let Bq := primeRingDiagram B κ q\n    let Nq := primeModuleDiagram B κ q D hs\n    ∃ (ψ : (colimit Aq : CommRingCat.{u}) →+* (colimit Bq : CommRingCat.{u}))\n      (act : Module (colimit Bq : CommRingCat.{u})\n        (colimit Nq : AddCommGrpCat.{max u v})),\n      letI := act\n      (∀ i, ψ.comp (colimit.ι Aq i).hom =\n        (colimit.ι Bq i).hom.comp (primeDiagramHom A B η κ q i)) ∧\n      (∀ (i : Λ) (b : Bq.obj i) (x : Nq.obj i),\n        (colimit.ι Nq i).hom (b • x) =\n          (colimit.ι Bq i).hom b • (colimit.ι Nq i).hom x) ∧\n      ((letI := Module.compHom (colimit Nq : AddCommGrpCat.{max u v}) ψ\n        Module.Flat (colimit Aq : CommRingCat.{u}) (colimit Nq : AddCommGrpCat.{max u v})) ↔\n        @Module.Flat (Localization.AtPrime (q.asIdeal.comap (algebraMap R S)))\n          (LocalizedModule q.asIdeal.primeCompl M) _ _\n          (Module.compHom _ (Localization.localRingHom\n            (q.asIdeal.comap (algebraMap R S)) q.asIdeal (algebraMap R S) rfl)))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T132736-L-4151894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T132736-L-4151894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

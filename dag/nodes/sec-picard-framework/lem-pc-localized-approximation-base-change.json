@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-localized-approximation-base-change",
+ "kind": "statement",
+ "title": "Tensor base-change hypotheses after localization at contracted primes",
+ "statement": "Let Λ be a preorder, A,B:Λ→CommRing functors, η:A→B, and κ:B→const S a cocone to a commutative ring S. Let D:Λ→AddCommGrp, with D_i a B_i-module and D transitions semilinear over B transitions. For each i→j assume a ring isomorphism B_i⊗_{A_i}A_j≃B_j with value b⊗a↦B(i→j)(b)η_j(a), and a B_j-linear isomorphism B_j⊗_{B_i}D_i≃D_j with value b⊗x↦b D(i→j)(x). For q∈Spec S, set q_i=κ_i⁻¹q, p_i=η_i⁻¹q_i, Aq_i=(A_i)_{p_i}, Bq_i=(B_i)_{q_i}, and Nq_i=(D_i)_{q_i}, with canonical fraction maps. For every i→j there are a ring map t:Bq_i⊗_{Aq_i}Aq_j→Bq_j and a submonoid W of its source such that Bq_j is the localization at W and t(b⊗a)=Bq(i→j)(b)φ_j(a), where φ_j:Aq_j→Bq_j is the canonical local map. There is also a Bq_j-linear isomorphism Bq_j⊗_{Bq_i}Nq_i≃Nq_j sending b⊗x to b Nq(i→j)(x). There is no directedness, colimit, finiteness, or flatness assumption. Tensor and localization mean [def-weil-pbc-module-tensor-product] and [def-weil-pbc-localization-at-prime], and q is a point of [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), first paragraph: localized system; Tag 00QX, clauses (5) and (6)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The contractions of q give compatible primes p_i,q_i. The induced local ring homomorphisms have a commuting square, since η is natural; this follows by localization extension uniqueness on the original numerators.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For i→j localize B_i⊗_{A_i}A_j≃B_j first in the B_i factor away from q_i and then in the A_j factor away from p_j. Tensor-localization compatibility gives the tensor of the localized rings over A_i; since all elements away from p_i act invertibly, tensoring over A_i agrees with tensoring over (A_i)_{p_i}. Thus the tensor of the two localized rings is a localization of B_j at denominators avoiding q_j.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Further localize at the complement of q_j. The composite localization is (B_j)_{q_j}. Its preimage multiplicative set in the tensor of localized rings gives W and its canonical map gives t. Extension uniqueness proves the displayed formula on pure tensors, using the original transition tensor formula.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize B_j⊗_{B_i}D_i≃D_j at the complement of q_j. Elements outside q_i map outside q_j, so this factors through (D_i)_{q_i}. Tensor-localization compatibility and tensor cancellation identify the domain with (B_j)_{q_j}⊗_{(B_i)_{q_i}}(D_i)_{q_i}. The original pure-tensor formula gives the required linear equivalence and its pure-tensor formula.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-module-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-module-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), first paragraph: localized system; Tag 00QX, clauses (5) and (6); source read online at https://stacks.math.columbia.edu/tag/02JO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A localization at a prime of the tensor product is the localization of the tensor product of the local rings at contracted primes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a tensor base change isomorphism at compatible prime ideals gives a localization of tensor product of local rings and an isomorphism of localized modules",
+   "results": "IsLocalization.tensorProduct_tensorProduct, tensor, tensorRight, algebraTensorEquiv, and moduleTensorEquiv are relevant ingredients; none supplies the coupled statement with canonical transition fraction maps and formulas.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleTensorEquiv|instIsLocalizedModuleTensorProductMap|tensorProduct_tensorProduct in Mathlib.RingTheory.Localization.BaseChange; localRingHom and LocalizedModule in local library",
+   "results": "Mathlib localization base-change APIs and tensor cancellation provide separate ingredients. No existing coupled canonical prime-localized transition theorem. Blueprint searches for 02JO and 00QX found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteTypeApproximationFlatPoint",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Flat-model approximation: Tag 02JO (1), first paragraph: localized system; Tag 00QX, clauses (5) and (6)",
+   "via": [
+    "lem-pc-finite-type-approximation-flat-point",
+    "lem-pc-finite-type-approximation-flat-loci",
+    "lem-pc-flat-module-tensor-model",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedApproximationBaseChange",
+  "file": "lean/Sheaf/RingTheory/LocalizedApproximationBaseChange.lean",
+  "declaration": "Algebra.localized_approximation_baseChange",
+  "statement": "theorem localized_approximation_baseChange\n    {S : Type u} [CommRing S]\n    {Λ : Type u} [Preorder Λ]\n    (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (D : Λ ⥤ AddCommGrpCat.{v}) [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hs : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : D.obj i),\n      (D.map f).hom (b • x) = (B.map f).hom b • (D.map f).hom x)\n    (hring : ∀ (i j : Λ) (f : i ⟶ j),\n      letI := (η.app i).hom.toAlgebra\n      letI := (A.map f).hom.toAlgebra\n      ∃ e : B.obj i ⊗[A.obj i] A.obj j ≃+* B.obj j,\n        ∀ (x : B.obj i) (y : A.obj j),\n          e (x ⊗ₜ[A.obj i] y) = (B.map f).hom x * (η.app j).hom y)\n    (hmodule : ∀ (i j : Λ) (f : i ⟶ j),\n      letI := (B.map f).hom.toAlgebra\n      ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j,\n        ∀ (y : B.obj j) (x : D.obj i),\n          e (y ⊗ₜ[B.obj i] x) = y • (D.map f).hom x)\n    (q : PrimeSpectrum S) :\n    let Aq := primeRingDiagram A (η ≫ κ) q\n    let Bq := primeRingDiagram B κ q\n    let Nq := primeModuleDiagram B κ q D hs\n    (∀ (i j : Λ) (f : i ⟶ j),\n      letI := (primeDiagramHom A B η κ q i).toAlgebra\n      letI := (Aq.map f).hom.toAlgebra\n      ∃ (t : Bq.obj i ⊗[Aq.obj i] Aq.obj j →+* Bq.obj j)\n        (W : Submonoid (Bq.obj i ⊗[Aq.obj i] Aq.obj j)),\n        (∀ (b : Bq.obj i) (a : Aq.obj j),\n          t (b ⊗ₜ[Aq.obj i] a) =\n            (Bq.map f).hom b * primeDiagramHom A B η κ q j a) ∧\n        (letI := t.toAlgebra; IsLocalization W (Bq.obj j))) ∧\n    (∀ (i j : Λ) (f : i ⟶ j),\n      letI := (Bq.map f).hom.toAlgebra\n      ∃ e : Bq.obj j ⊗[Bq.obj i] Nq.obj i ≃ₗ[Bq.obj j] Nq.obj j,\n        ∀ (b : Bq.obj j) (x : Nq.obj i),\n          e (b ⊗ₜ[Bq.obj i] x) = b • (Nq.map f).hom x)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T132736-L-4151894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T132736-L-4151894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
