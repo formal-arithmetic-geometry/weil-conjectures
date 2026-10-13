@@ -6,6 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+import Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounit
+import Sheaf.Algebra.Homology.DerivedRestrictionHomologyFactors
 
 /-! # Transporting universal derived counits along coefficient equivalences
 
@@ -92,6 +94,51 @@ theorem exists_derivedExtension_ringEquiv_counit
         ∀ K : CochainComplex (ModuleCat.{u} R) ℤ,
           d.hom.app K ≫ U.map (c K) =
             c₀ (V.obj K) ≫ HomologicalComplex.homologyMap (t.hom.app K) i ≫
-              ((T.obj K).sc i |>.mapHomologyIso U).hom := by sorry
+              ((T.obj K).sc i |>.mapHomologyIso U).hom  := by
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      dsimp only
+      intro t _ht
+      obtain ⟨E, q, a, ha⟩ := exists_derivedExtension_ringEquiv_raw_counit
+        L₀ L ε₀ ε h₀ h eR eB hRB t
+      obtain ⟨z, hz⟩ := exists_derivedRestriction_homology_factors eB.toRingHom E i q
+      let H₀ := DerivedCategory.homologyFunctor (ModuleCat.{u} B₀) i
+      let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i
+      let U := restrictScalars.{u} eB.toRingHom
+      let J := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙ DerivedCategory.Qh ⋙ L
+      let d := Functor.isoWhiskerRight a H₀ ≪≫ Functor.isoWhiskerLeft J z
+      refine ⟨d, ?_⟩
+      intro K
+      let π := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)
+      let π₀ := HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)
+      let V := (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)
+      let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)
+      let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)
+      let S₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh
+      let F₀ := Functor.isoWhiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
+        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B₀) i) ≪≫
+        HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B₀) (.up ℤ) i
+      let F := Functor.isoWhiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
+        (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B) i) ≪≫
+        HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B) (.up ℤ) i
+      change (H₀.map (a.hom.app K) ≫ z.hom.app (J.obj K)) ≫
+          U.map (H.map (ε.app (π.obj K)) ≫ F.hom.app (T.obj K)) =
+        (H₀.map (ε₀.app (π₀.obj (V.obj K))) ≫ F₀.hom.app (T₀.obj (V.obj K))) ≫
+          HomologicalComplex.homologyMap (t.hom.app K) i ≫
+            (((T.obj K).sc i).mapHomologyIso U).hom
+      rw [Functor.map_comp]
+      simp only [Category.assoc]
+      have hn := z.hom.naturality (ε.app (π.obj K))
+      change H₀.map (E.map (ε.app (π.obj K))) ≫ z.hom.app _ =
+        z.hom.app (J.obj K) ≫ U.map (H.map (ε.app (π.obj K))) at hn
+      rw [← reassoc_of% hn]
+      erw [hz (T.obj K)]
+      have hh := congrArg H₀.map (ha K)
+      simp only [Functor.map_comp] at hh
+      erw [reassoc_of% hh]
+      have hf := F₀.hom.naturality (t.hom.app K)
+      change H₀.map (S₀.map (t.hom.app K)) ≫ F₀.hom.app _ =
+        F₀.hom.app (T₀.obj (V.obj K)) ≫ HomologicalComplex.homologyMap (t.hom.app K) i at hf
+      erw [reassoc_of% hf]
 
 end ModuleCat

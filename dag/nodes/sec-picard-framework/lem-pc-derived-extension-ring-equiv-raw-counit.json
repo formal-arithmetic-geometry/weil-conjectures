@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-derived-extension-ring-equiv-raw-counit",
+ "kind": "lemma",
+ "title": "Derived-category scalar-extension counit transport before homology",
+ "statement": "For compatible ring equivalences R₀≃R and B₀≃B, and universal left-derived scalar extensions L₀,L with counits ε₀,ε, let V,U be exact restriction and T₀,T termwise scalar extension. For any natural isomorphism t:V⋙T₀≅T⋙U_complex, there exist a functor E:D(B)→D(B₀), a factorization isomorphism q:S_B⋙E≅U_complex⋙S_B₀, and a natural isomorphism a:V⋙π₀⋙Qh⋙L₀≅π⋙Qh⋙L⋙E, such that a_K followed by E(ε_K) and q_TK equals ε₀_VK followed by S_B₀(t_K). Here S=π⋙Qh. Morphism universes w,w′ may differ. This statement concerns derived-category objects and morphisms only, without any cohomology degree or homology comparison. Uses [def-weil-abstract-derived-category] and [def-weil-module-base-change].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3."
+ },
+ "proof": [
+  {
+   "text": "Lift the exact restriction equivalences on homotopy categories through their localizations; localization uniqueness accommodates the two morphism universes. Choose the B-restriction lift E and its factorization q.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend t through the homotopy quotient. Transport L₀ and its counit along the lifted inverse R-restriction. Transport test transformations through the inverse equivalences to establish the right Kan extension property. Uniqueness with L then yields a; its universal counit equation gives the stated identity.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3.",
+  "note": "Formal decomposition: derived counit transport before homology, followed by proved homology descent and explicit naturality calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal left derived functors transport through exact equivalences and commute with their counits",
+   "results": "Unavailable: Internal Server Error. Other searches and local source inspection used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a universal left derived functor and its counit through equivalences of coefficient rings",
+   "results": "Functor.leftDerivedNatIso; isLeftDerivedFunctor_iff_of_iso; mapDerivedCategoryFactors and Factorsh.",
+   "verdict": "Generic ingredients, no assembled coefficient equivalence counit theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "Mathlib.CategoryTheory.Localization.Predicate: fullyFaithfulWhiskeringLeft.",
+   "verdict": "Provides the homology descent; not the universal derived transport.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|mapHomologicalComplexHomologyIso|exists_derivedExtension_ringEquiv_counit|leftDerivedNatIso",
+   "results": "Mathlib localization and homology APIs; WeilConjectures exact-functor homology comparison; no existing raw coefficient-equivalence counit theorem. Inspected BaseDerivedTensorCohomologyModelIndependence for leftDerivedNatIso usage.",
+   "verdict": "Homology step proved directly by full faithfulness; raw transport split separately.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivCounit",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Counit transport before homology (steps 1–2).",
+   "via": [
+    "lem-pc-derived-extension-ring-equiv-counit",
+    "lem-pc-base-derived-tensor-restricted-ring-comparison",
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+    "lem-pc-base-derived-tensor-ring-transport",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivRawCounit",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedExtensionRingEquivRawCounit.lean",
+  "declaration": "ModuleCat.exists_derivedExtension_ringEquiv_raw_counit",
+  "statement": "theorem exists_derivedExtension_ringEquiv_raw_counit\n    {R₀ B₀ R B : Type u}\n    [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]\n    [Algebra R₀ B₀] [Algebra R B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R₀)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (L₀ : DerivedCategory (ModuleCat.{u} R₀) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n    (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))\n    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶\n      (extendScalars (algebraMap R₀ B₀)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      (extendScalars (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (eR : R₀ ≃+* R) (eB : B₀ ≃+* B)\n    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =\n      (algebraMap R B).comp eR.toRingHom) :\n    let π₀ := HomotopyCategory.quotient (ModuleCat.{u} R₀) (.up ℤ)\n    let π := HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)\n    let S₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh\n    let S := HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh\n    let V := (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ)\n    let U := restrictScalars.{u} eB.toRingHom\n    let T₀ := (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ)\n    let T := (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ)\n    ∀ t : V ⋙ T₀ ≅ T ⋙ U.mapHomologicalComplex (.up ℤ),\n      ∃ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n        (q : S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀)\n        (a : V ⋙ π₀ ⋙ DerivedCategory.Qh ⋙ L₀ ≅ π ⋙ DerivedCategory.Qh ⋙ L ⋙ E),\n        ∀ K : CochainComplex (ModuleCat.{u} R) ℤ,\n          a.hom.app K ≫ E.map (ε.app (π.obj K)) ≫ q.hom.app (T.obj K) =\n            ε₀.app (π₀.obj (V.obj K)) ≫ S₀.map (t.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

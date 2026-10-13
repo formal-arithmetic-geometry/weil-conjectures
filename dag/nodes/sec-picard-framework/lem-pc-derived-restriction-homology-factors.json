@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-derived-restriction-homology-factors",
+ "kind": "lemma",
+ "title": "Homology compatibility of a localization factorization of restriction",
+ "statement": "Let B₀→B be any homomorphism of commutative rings, U its exact restriction functor, E:D(B)→D(B₀) a functor between chosen derived categories, and q:S_B⋙E≅U_complex⋙S_B₀ a localization factorization, where S=π⋙Qh. For any integer i, let H,H₀ be derived homology and F,F₀ the composite derived/homotopy factorization isomorphisms from S⋙H to complex homology. There exists z:E⋙H₀≅H⋙U such that z_SK followed by U(F_K) equals H₀(q_K), then F₀_UK, then the exact-restriction short-complex homology isomorphism. No scalar extension, universal counit, ring equivalence, or tensor generator condition is assumed. Uses [def-weil-abstract-derived-category].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05RR",
+  "place": "Section 13.11: localization and factorization of cohomology; exact restriction and the canonical short-complex homology comparison."
+ },
+ "proof": [
+  {
+   "text": "Build the natural complex-homology isomorphism C from short-complex mapHomologyIso U; short-complex homology naturality proves its naturality. Compose H₀(q), F₀, C and U(F) inverse to get e between the localized homology functors.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "S is a localization because π⋙Qh is naturally isomorphic to Q. Its whiskering functor is fully faithful. Take the fully faithful preimage isomorphism z of e; map_preimage gives its factorization equation. Cancel U(F) inverse followed by U(F) to obtain the displayed square.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/06Y6",
+  "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3.",
+  "note": "Formal decomposition: derived counit transport before homology, followed by proved homology descent and explicit naturality calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal left derived functors transport through exact equivalences and commute with their counits",
+   "results": "Unavailable: Internal Server Error. Other searches and local source inspection used.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a universal left derived functor and its counit through equivalences of coefficient rings",
+   "results": "Functor.leftDerivedNatIso; isLeftDerivedFunctor_iff_of_iso; mapDerivedCategoryFactors and Factorsh.",
+   "verdict": "Generic ingredients, no assembled coefficient equivalence counit theorem.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "Mathlib.CategoryTheory.Localization.Predicate: fullyFaithfulWhiskeringLeft.",
+   "verdict": "Provides the homology descent; not the universal derived transport.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|mapHomologicalComplexHomologyIso|exists_derivedExtension_ringEquiv_counit|leftDerivedNatIso",
+   "results": "Mathlib localization and homology APIs; WeilConjectures exact-functor homology comparison; no existing raw coefficient-equivalence counit theorem. Inspected BaseDerivedTensorCohomologyModelIndependence for leftDerivedNatIso usage.",
+   "verdict": "Homology step proved directly by full faithfulness; raw transport split separately.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedExtensionRingEquivCounit",
+  "date": "2026-10-14",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Raw counit square to homology (step 3).",
+   "via": [
+    "lem-pc-derived-extension-ring-equiv-counit",
+    "lem-pc-base-derived-tensor-restricted-ring-comparison",
+    "lem-pc-base-derived-tensor-ordinary-ring-comparison",
+    "lem-pc-base-derived-tensor-ring-transport",
+    "lem-pc-single-complex-open-ordinary-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedRestrictionHomologyFactors",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedRestrictionHomologyFactors.lean",
+  "declaration": "ModuleCat.exists_derivedRestriction_homology_factors",
+  "statement": "theorem exists_derivedRestriction_homology_factors\n    {B₀ B : Type u} [CommRing B₀] [CommRing B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]\n    [HasDerivedCategory.{w'} (ModuleCat.{u} B)]\n    (f : B₀ →+* B)\n    (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))\n    (i : ℤ) :\n    let S₀ := HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh\n    let S := HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh\n    let U := restrictScalars.{u} f\n    let H₀ := DerivedCategory.homologyFunctor (ModuleCat.{u} B₀) i\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} B) i\n    let F₀ := Functor.isoWhiskerLeft (HomotopyCategory.quotient _ (.up ℤ))\n      (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B₀) i) ≪≫\n      HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B₀) (.up ℤ) i\n    let F := Functor.isoWhiskerLeft (HomotopyCategory.quotient _ (.up ℤ))\n      (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{u} B) i) ≪≫\n      HomotopyCategory.homologyFunctorFactors (ModuleCat.{u} B) (.up ℤ) i\n    ∀ q : S ⋙ E ≅ U.mapHomologicalComplex (.up ℤ) ⋙ S₀,\n      ∃ z : E ⋙ H₀ ≅ H ⋙ U,\n        ∀ K : CochainComplex (ModuleCat.{u} B) ℤ,\n          z.hom.app (S.obj K) ≫ U.map (F.hom.app K) =\n            H₀.map (q.hom.app K) ≫\n              F₀.hom.app ((U.mapHomologicalComplex (.up ℤ)).obj K) ≫\n                ((K.sc i).mapHomologyIso U).hom",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261013T234507-L-2161573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13,41 +13,39 @@
  },
  "proof": [
   {
-   "text": "Termwise restriction and its inverse give exact homotopy equivalences preserving quasi-isomorphisms. Localization extends them to inverse equivalences of the chosen derived categories, including different morphism universes.",
+   "text": "Apply the raw derived counit transport to obtain E, its complex-localization factorization q, the natural isomorphism a, and its derived-category counit equation.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-module-base-change"
+    "lem-pc-derived-extension-ring-equiv-raw-counit"
    ],
    "elementary": false
   },
   {
-   "text": "The generator formula identifies t as ordinary tensor transport. Descend it to homotopy categories. Transport L0 and its counit through the derived equivalences; transport every test functor through inverse equivalences to verify its right Kan extension universal property. Uniqueness identifies the transported L0 with L, compatibly with counits.",
+   "text": "Apply the proved exact-restriction homology factorization theorem to E and q to obtain z with its factorization equation. Define d by whiskering a with H₀ and composing with z whiskered by the derived scalar-extension functor on complexes.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-module-base-change"
+    "lem-pc-derived-restriction-homology-factors"
    ],
    "elementary": false
   },
   {
-   "text": "Whisker with complex localization and apply homology. Exact restriction commutes with homology. The naturality of the derived/homotopy factorization isomorphisms turns counit compatibility into the displayed square for d.",
+   "text": "Use naturality of z at ε_K, the factorization equation for z at T(K), H₀ applied to the raw counit equation, and naturality of the composite derived/homotopy homology factorization at t_K. Associativity gives exactly the original displayed square.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-module-base-change"
+    "lem-pc-derived-extension-ring-equiv-raw-counit",
+    "lem-pc-derived-restriction-homology-factors"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-module-base-change"
+  "lem-pc-derived-extension-ring-equiv-raw-counit",
+  "lem-pc-derived-restriction-homology-factors"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "B2",
+  "group": "F3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/06Y6",
   "place": "Lemma 15.61.1 (Tag 06Y6), independence of derived choices; Tag 05RR, localization; original restricted-ring comparison proof steps 1--2 and the raw counit part of step 3.",
-  "note": "Coefficient-equivalence refinement of the cited construction; the proof steps spell out the universal-property and ordinary-homology bookkeeping."
+  "note": "Formal decomposition: derived counit transport before homology, followed by proved homology descent and explicit naturality calculation."
  },
  "mathlib_searches": [
   {
@@ -127,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261013T231528-L-1814595",
+  "landing": "20261013T234507-L-2161573",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
