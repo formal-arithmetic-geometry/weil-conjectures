@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-horizontal-inverse-square-fixed-pasting",
+ "kind": "statement",
+ "title": "Ordinary inverse-square pasting with fixed upper transport",
+ "statement": "Let f:X→Y be qcqs and X,Y,Y′,Z qcqs schemes, with g:Y′→Y and h:Z→Y′, in the QCoh derived categories [def-pc-derived-category, def-pc-derived-pullback, def-pc-derived-direct-image, lem-pc-qcqs-derived-direct-image-right-adjoint]. Set P=(X×_Y Y′)×_{Y′}Z, Q=X×_Y Z and e:P≅Q [def-pc-fibre-product]. Assume all three ordinary base-change squares [def-pc-derived-base-change-map] are invertible on QCoh inputs. Let τ be the rectangle inverse ordinary square and σ the horizontal paste of the two inverse ordinary squares of [lem-sc-duality-base-change-inverse-square-mate]. Let s:Lpr₁*Lg_X*≅Le*Lg_{X,Z}* be the QCoh lift of the fixed source comparison of [lem-sc-horizontal-duality-mate-comparisons], and b:Lh*Lg*≅L(h≫g)* its base composition comparison. Supply c,d and adjunctions U⊣c,V⊣d for U=R(Q→Z),V=R(P→Z). Let r:d≅c⋙Le* be horizontalMateRightAdjointIso, and κ=(mateEquiv adjc adjd).symm of r.inv followed by the inverse left unitor of d. For every E∈D_QCoh(X), V(s.hom_E)≫(τ≫ₕκ)_E=σ_E≫b.hom_(Rf E). No right adjoint to Rf or object of D_QCoh(Y) is supplied.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves and Duality for Schemes",
+  "place": "Remark 20.28.5, Tag 0ATM; Lemma 48.5.2, Tag 0ATR, comparison preceding second-mate composition"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-fibre-product",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "def-pc-derived-base-change-map",
+  "lem-sc-duality-base-change-inverse-square-mate",
+  "lem-sc-horizontal-duality-mate-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the ordinary rectangle transformation and the pasted pair under pullback along the outer upper projection. Substitute the counit formula defining schemeDerivedBaseChangeMap. Naturality moves the composition comparisons past the counit; associativity of the pinned pullback family for the base and upper chains, together with the two projection equations for e, identifies the transposes. Injectivity of the adjunction Hom equivalence gives ordinary horizontal pasting.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert only the ordinary base-change transformations. The direct-image comparison along e is conjugate to the pinned pullback comparison. For the supplied upper adjunctions U⊣c,V⊣d, rightAdjointUniq_hom_app_counit and the equivalence triangle identities show that this comparison has right mate r.inv. Thus it is κ, defined using the inverse mate equivalence. Whisker the inverse pasting identity by s and the base composition comparison b to obtain the displayed equality. All equations are identities of natural transformations; identity maps, zero objects and empty schemes require no extra hypotheses.",
+   "uses": [
+    "lem-sc-horizontal-duality-mate-comparisons",
+    "lem-sc-duality-base-change-inverse-square-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-horizontal-duality-mate-comparisons",
+  "lem-sc-duality-base-change-inverse-square-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "X2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Expanded the omitted verification in Tag 0ATM, using the fixed-comparison part of Tag 0ATR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change natural transformations compose for a rectangle of ringed spaces with canonical pullback composition isomorphisms",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport mate of horizontally pasted inverse base change squares along fixed adjunction isomorphisms",
+   "results": "mateEquiv_vcomp, mateEquiv_hcomp, mateEquiv_square and conjugateEquiv_mateEquiv_vcomp",
+   "verdict": "Generic mate identities do not prove the ordinary derived geometric pasting with these fixed comparisons.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*naturality|mateEquiv.*whisker|mateEquiv.*conjugate; rectangle|pasting|transport in the project",
+   "results": "Mathlib generic composition identities; schemeDerivedBaseChange_pasting is upper-left pasting; rectangle_inverseBaseChange_mate_transport has an unspecified target comparison. Blueprint search inverse square pasting found zero matches.",
+   "verdict": "No existing declaration of this fixed ordinary inverse-square identity.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HorizontalRectangleInverseMateFixedTransport",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0ATR proof: fixed comparison of the rectangle inverse ordinary square with the horizontally pasted inverse square.",
+   "via": [
+    "lem-sc-horizontal-rectangle-inverse-mate-fixed-transport",
+    "lem-sc-horizontal-duality-mate-commutativity",
+    "lem-sc-horizontal-duality-mate-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HorizontalInverseSquareFixedPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/HorizontalInverseSquareFixedPasting.lean",
+  "declaration": "AlgebraicGeometry.horizontal_inverse_square_fixed_pasting",
+  "statement": "theorem horizontal_inverse_square_fixed_pasting\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X Y Y' Z : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']\n    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (hβ : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition E.obj))\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (h : Z ⟶ Y')\n    (c : schemeDerivedQCohCategory Z ⥤\n      schemeDerivedQCohCategory (pullback f (h ≫ g)))\n    (adjc : (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty (pullback f (h ≫ g))).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f (h ≫ g))) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))) _ _ _ _\n          (pullback.snd f (h ≫ g)) _ _).fst E.obj E.property) ⊣ c)\n    (hβh : ∀ E : schemeDerivedQCohCategory X,\n      IsIso (schemeDerivedBaseChangeMap f (pullback.snd f (h ≫ g)) (h ≫ g)\n        (pullback.fst f (h ≫ g)) pullback.condition E.obj))\n    (d : schemeDerivedQCohCategory Z ⥤\n      schemeDerivedQCohCategory (pullback (pullback.snd f g) h))\n    (adjd : (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd (pullback.snd f g) h)) (fun E ↦\n        (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _\n          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h))\n          _ _ _ _ (pullback.snd (pullback.snd f g) h) _ _).fst E.obj E.property) ⊣ d)\n    (hβ₂ : ∀ E : schemeDerivedQCohCategory (pullback f g),\n      IsIso (schemeDerivedBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h\n        (pullback.fst (pullback.snd f g) h) pullback.condition E.obj)) :\n    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))\n    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=\n      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)\n    let s := horizontalMateComp (pullback.fst (pullback.snd f g) h) (pullback.fst f g) ≪≫\n      eqToIso (congrArg horizontalMatePullback\n        (pullbackLeftPullbackSndIso_hom_fst f g h).symm) ≪≫\n      (horizontalMateComp (pullbackLeftPullbackSndIso f g h).hom\n        (pullback.fst f (h ≫ g))).symm\n    let r := horizontalMateRightAdjointIso (pullbackLeftPullbackSndIso f g h)\n      (pullback.snd f (h ≫ g)) (pullback.snd (pullback.snd f g) h)\n      (pullbackLeftPullbackSndIso_hom_snd f g h) c d adjc adjd\n    let κ := (mateEquiv adjc adjd).symm\n      (r.inv ≫ (Functor.leftUnitor d).inv)\n    let τ := qcInverseBaseChange f (h ≫ g) hβh\n    let σ := qcInverseBaseChange f g hβ ≫ₕ\n      @qcInverseBaseChange _ (pullback f g) Y' Z _\n        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _\n        (pullback.snd f g) _ _ h hβ₂\n    ∀ E : schemeDerivedQCohCategory X,\n      (horizontalMatePushforward (pullback.snd (pullback.snd f g) h)).map\n          (s.hom.app E) ≫ (τ ≫ₕ κ).app E =\n        σ.app E ≫ (horizontalMateComp h g).hom.app\n          ((horizontalMatePushforward f).obj E)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T154359-L-1163827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T154359-L-1163827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
