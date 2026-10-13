@@ -15,12 +15,22 @@
  },
  "proof": [
   {
-   "text": "Expand the mate into the smaller restriction unit, the inverse\ncomposition comparison, the restricted larger counit, and the forward\ncomposition comparison. Insert overFunctorEquiv on both ends. Its inverse\nand forward components cancel. The unit and counit of overEquiv cancel by\nthe equivalence triangle identity, and overFunctorMap has identity section\ncomponents. The remaining ordinary unit and counit components are restriction\nmaps by restrictAdjunction_unit_app_app and restrictAdjunction_counit_app_app.\nFunctoriality combines them into the single restriction along\nW ∩ T ⊆ U ∩ T. The opens written as image-preimages below equal these\nintersections by image_preimage_eq_opensRange_inf and opensRange_ι.\nThis computation holds for all nested opens, including the empty and equal\nones, and uses no covering hypothesis or sheaf amalgamation.",
+   "text": "Form the restriction/direct-image objects from def-pc-derived-open-restriction-maps and def-pc-kinjective-mayer-vietoris-data. Conjugate schemeOpenModuleImageRestriction by the direct images of overFunctorEquiv to obtain a map f between ordinary restriction/direct images. Apply the already proved schemeOpenModuleImage_unit_restriction and expand only ofNatIsoLeft_unit. Cancel the inverse and forward comparison at W to obtain eta_U followed by f equals eta_W.",
    "uses": [
     "def-pc-kinjective-mayer-vietoris-data",
     "def-pc-derived-open-restriction-maps"
    ],
    "elementary": false
+  },
+  {
+   "text": "Put P = U intersect T and Q = W intersect T, expressed as image-preimage opens. Since W is contained in U, W intersect P equals Q. Evaluate the unit compatibility at P on the section b obtained from a by the U comparison. The ordinary unit components are restriction maps by Mathlib restrictAdjunction_unit_app_app. Naturality of f for P contained in T identifies f_P applied to restriction of b with restriction of f_T(b). The source restriction in this equation is exactly the source restriction in the evaluated unit identity, by proof irrelevance for inclusions of opens.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Combine the two equalities. The map from sections over Q to sections over W intersect P is an isomorphism, because those opens are equal; its inclusion is eqToHom of that equality. Cancel this map and combine the remaining restriction maps using PresheafOfModules.map_comp_apply. Cancel the inverse and forward U comparisons to identify f_T(b) with the transported nested-open restriction evaluated at a. This proves the stated formula, including empty and equal opens, without any cover or sheaf gluing hypothesis.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -30,7 +40,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV; U4 expansion of the concrete transported mate"
+  "place": "Tag 08BV, sectionwise restriction maps; G4 agent-written naturality argument using the proved unit compatibility and Mathlib presheaf functoriality"
  },
  "mathlib_searches": [
   {
@@ -121,10 +131,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T082418-L-1649699",
-  "kind": "interface",
+  "landing": "20261013T095956-L-2459830",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
