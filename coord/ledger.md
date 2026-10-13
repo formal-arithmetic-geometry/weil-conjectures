@@ -11232,3 +11232,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions (stage 3; reviewer PASS; first push; landing 20261013T054209-L-440790 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/B2/Sheaf.RepresentationTheory.LocallyConstantCochainsStructure (stage 3; reviewer PASS; first push; landing 20261013T054210-L-440944 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/B3/Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyFinite (stage 3; reviewer PASS; first push; landing 20261013T054210-L-441041 (proof); batch 20261013T054206; modules 1; new nodes 0)
+- 05:42 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ProperSupportDescent (stage 3; reviewer PASS; first push; landing 20261013T054211-L-441139 (proof); batch 20261013T054206; modules 1; new nodes 0)

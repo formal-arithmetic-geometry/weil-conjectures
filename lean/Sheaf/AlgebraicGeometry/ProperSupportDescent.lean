@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.Paper.SchemeTheoreticSupport
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Descent of proper module support
@@ -71,6 +72,83 @@ theorem exists_hasSupportProperOver_baseChange_of_isLimit
         (pullback.snd f (Spec.map (R.map (homOfLE hij))))
         ((Scheme.Modules.tensorPullback
           (pullback.fst f (Spec.map (R.map (homOfLE hij))))).obj Fi) := by
-  sorry
+  classical
+  obtain ⟨J, _, hJ, _, _, _, hsupport, _⟩ := Scheme.schemeTheoreticSupport Xi Fi
+  let z := J.subschemeι
+  let a := z ≫ f
+  have : IsClosedImmersion z := hJ
+  have : CompactSpace Xi := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace Xi := quasiSeparatedSpace_of_quasiSeparated f
+  have : CompactSpace J.subscheme := QuasiCompact.compactSpace_of_compactSpace z
+  have : QuasiSeparatedSpace J.subscheme := quasiSeparatedSpace_of_quasiSeparated z
+  have comparison {T : Scheme.{u}} (t : T ⟶ Spec (R.obj i)) :
+      Scheme.Modules.HasSupportProperOver (pullback.snd f t)
+        ((Scheme.Modules.tensorPullback (pullback.fst f t)).obj Fi) ↔
+      IsProper (pullback.snd a t) := by
+    let k : pullback a t ⟶ pullback f t :=
+      pullback.lift (pullback.fst a t ≫ z) (pullback.snd a t)
+        (by simpa [a, Category.assoc] using (pullback.condition (f := a) (g := t)))
+    have hkfst : k ≫ pullback.fst f t = pullback.fst a t ≫ z :=
+      pullback.lift_fst _ _ _
+    have hksnd : k ≫ pullback.snd f t = pullback.snd a t :=
+      pullback.lift_snd _ _ _
+    have H : IsPullback (pullback.fst a t) k z (pullback.fst f t) := by
+      apply IsPullback.of_bot (v₂₁ := pullback.snd f t) (v₂₂ := f)
+      · rw [hksnd]
+        exact IsPullback.of_hasPullback a t
+      · exact hkfst.symm
+      · exact IsPullback.of_hasPullback f t
+    have : IsClosedImmersion k :=
+      MorphismProperty.of_isPullback (P := @IsClosedImmersion) H inferInstance
+    have hr : Set.range k.base =
+        {x : ↥(pullback f t) | ¬ Subsingleton
+          (((Scheme.Modules.tensorPullback (pullback.fst f t)).obj Fi).presheaf.stalk x)} := by
+      rw [Scheme.range_snd_of_isPullback H, hsupport]
+      exact ((Scheme.Modules.finiteType_module_support_pullback Fi).2.2 _ _).2.symm
+    constructor
+    · rintro ⟨W, hW, hp⟩
+      have hp' := (Scheme.closed_subset_proper_over_base_properties
+        (pullback.snd f t) W).2.1.mp hp _ k (hr.trans hW.symm)
+      rwa [hksnd] at hp'
+    · intro hp
+      let W : TopologicalSpace.Closeds ↥(pullback f t) :=
+        ⟨Set.range k.base, k.isClosedEmbedding.isClosed_range⟩
+      refine ⟨W, hr, ?_⟩
+      apply (Scheme.closed_subset_proper_over_base_properties (pullback.snd f t) W).1.mpr
+      refine ⟨pullback a t, k, inferInstance, rfl, ?_⟩
+      rwa [hksnd]
+  have hp : IsProper (pullback.snd a (c.π.app (op i))) :=
+    (comparison _).mp hF
+  let D := R.op ⋙ Scheme.Spec
+  have {j k : Iᵒᵖ} (t : j ⟶ k) : IsAffineHom (D.map t) := by
+    dsimp [D]
+    infer_instance
+  have : CompactSpace (D.obj (op i)) := by dsimp [D]; infer_instance
+  have : QuasiSeparatedSpace (D.obj (op i)) := by dsimp [D]; infer_instance
+  let ψ := pullback.map a (c.π.app (op i)) (𝟙 (Spec (R.obj i)))
+    (c.π.app (op i)) a (𝟙 c.pt) (𝟙 (Spec (R.obj i)))
+    (Category.comp_id a) ((Category.comp_id _).trans (Category.id_comp _).symm)
+  have hψ : IsProper ψ := by
+    have he : ψ ≫ pullback.snd (𝟙 (Spec (R.obj i))) (c.π.app (op i)) =
+        pullback.snd a (c.π.app (op i)) := by
+      simp only [ψ, pullback.map, pullback.lift_snd]
+      exact Category.comp_id _
+    rw [← he] at hp
+    exact (MorphismProperty.cancel_right_of_respectsIso @IsProper _ _).mp hp
+  obtain ⟨j, hij, hj⟩ := exists_isProper_baseChange_of_isLimit D c hc i
+    a (𝟙 (Spec (R.obj i))) a (by simp) hψ
+  refine ⟨j, hij, (comparison _).mpr ?_⟩
+  have he :
+      (pullback.map a (D.map (homOfLE hij).op) (𝟙 (Spec (R.obj i)))
+        (D.map (homOfLE hij).op) a (𝟙 (D.obj (op j))) (𝟙 (Spec (R.obj i)))
+        (Category.comp_id a) (Category.comp_id _)) ≫
+        pullback.snd (𝟙 (Spec (R.obj i))) (D.map (homOfLE hij).op) =
+      pullback.snd a (D.map (homOfLE hij).op) := by
+    simp only [pullback.map, pullback.lift_snd]
+    exact Category.comp_id _
+  change IsProper (pullback.snd a (D.map (homOfLE hij).op))
+  rw [← he]
+  have := hj
+  infer_instance
 
 end AlgebraicGeometry
