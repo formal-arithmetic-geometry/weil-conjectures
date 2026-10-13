@@ -44,6 +44,10 @@ maps, additive maps and scalar compatibility preserve them. These descended
 coefficients and vectors give the stated factorization. Empty row or column
 sets are allowed, with empty sums equal to zero. No tensor-colimit or finite
 presentation theorem, nor Noetherian or local hypothesis, is needed. -/
+-- STATEMENT-DISPUTED: For independent indexing and ring universes, HasColimit A does
+-- not supply elementwise ring equality descent; a categorical colimit in the smaller
+-- ring universe need not be the algebraic direct limit. See report.md for a valuation
+-- domain counterexample and the proved, explicitly elementwise variant.
 theorem exists_stage_flat_relation_factorization
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})

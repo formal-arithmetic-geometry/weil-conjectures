@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-colimit-flat-relation-descent-elementwise",
+ "kind": "statement",
+ "title": "Finite flat relation descent for an elementwise ring colimit",
+ "statement": "Let $\\Lambda$ be a nonempty directed preorder, $A,B:\\Lambda\\to\\mathrm{CommRing}$ and $N:\\Lambda\\to\\mathrm{Ab}$ have categorical colimits [def-weil-pbc-category-colimit]. Require in addition that forgetting the ring structure of $A$ preserves its colimit. Give $N_i$ compatible $B_i$-module structures, compatible ring maps $\\varphi_i:A_i\\to B_i$, and a ring map $\\psi:A_\\infty\\to B_\\infty$ commuting with coprojections. Give $N_\\infty$ its compatible $B_\\infty$-module structure, flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. For any finite relation $\\sum_p\\varphi_i(a_p)x_p=0$, there exist a later stage $j$, a morphism $f:i\\to j$, an integer $m\\ge0$, and elements $c_{pq}\\in A_j$, $y_q\\in N_j$ such that $\\eta_f(x_p)=\\sum_q\\varphi_j(c_{pq})y_q$ and $\\sum_p\\alpha_f(a_p)c_{pq}=0$. The universes of the index, the rings, and the groups are independent; the preservation requirement is explicit.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00HK, 00D6, 00D7; finite-data argument underlying the tensor-colimit paragraph of Tag 00R6."
+ },
+ "proof": [
+  {
+   "text": "Map the stage relation into N_infty using the two scalar compatibilities. Apply the equational criterion to obtain a finite coefficient matrix C and vectors Y trivializing it.",
+   "uses": [
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicitly preserved ring colimit to represent every C_pq. Represent every Y_q in the additive-group colimit; for independent universes lift groups to the indexing universe, using preservation of all colimits by AddCommGrpCat.uliftFunctor. Choose a common upper stage containing i and all finite representatives.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The column sums map to zero in the ring colimit. The explicit preservation hypothesis permits the filtered ring equality criterion, so every column vanishes at some later stage. The row sums have the desired images in the group colimit, so every row equality holds at a later stage by additive-group equality descent. Choose one upper bound of all these stages.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport coefficients and vectors to this last stage. Ring homomorphisms preserve column sums and products. Additive transition maps preserve row sums; semilinearity and compatibility with phi rewrite their scalar terms. Thinness of the preorder identifies the composite transition morphisms. These give the two required families of equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-equational-criterion",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00HK and 00R6 finite-relation descent; 00D6 and 00D7 supply the elementwise colimit argument. Lean proof by V2, with an explicit ring preservation hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite relations in a flat filtered colimit of modules become trivial at a later stage",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of syzygies in a categorical colimit of commutative rings lifts to a later stage",
+   "results": "No exact theorem. Found Concrete.colimit_rep_eq_zero and ring finite-presentation descent tools; use Module.Flat.isTrivialRelation_of_sum_smul_eq_zero and Concrete elementwise colimit API.",
+   "date": "2026-10-14",
+   "verdict": "The argument is proved directly from Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit_exists_rep|colimit_rep_eq_iff_exists",
+   "results": "ConcreteCategory/Basic.lean supplies representative and equality APIs. Ring/FilteredColimits.lean gives the forgetful preservation instance only for sufficiently small indexing universes; Grp/Ulift.lean gives additive universe lifting.",
+   "date": "2026-10-14",
+   "verdict": "No exact stage-flat-factorization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitFlatRelationDescent",
+  "date": "2026-10-14",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-flat-relation-descent",
+   "place": "The same finite-data proof with its required elementwise ring-colimit assumption made explicit."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ColimitFlatRelationDescentElementwise",
+  "file": "lean/Sheaf/RingTheory/ColimitFlatRelationDescentElementwise.lean",
+  "declaration": "RingTheory.exists_stage_flat_relation_factorization_of_preserves",
+  "statement": "theorem exists_stage_flat_relation_factorization_of_preserves {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ] (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w}) (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N] [PreservesColimit A (forget CommRingCat.{v})] [∀ i, Module (B.obj i) (N.obj i)] (φ : ∀ i, A.obj i →+* B.obj i) (hcomm : ∀ (i j : Λ) (f : i ⟶ j), (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom) (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i), (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x) (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w})) (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i)) [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})] (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i), (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x) (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z})) (i : Λ) {ι : Type t} [Fintype ι] (a : ι → A.obj i) (x : ι → N.obj i) (hx : ∑ p, (φ i) (a p) • x p = 0) : ∃ (j : Λ) (f : i ⟶ j) (m : ℕ) (c : ι → Fin m → A.obj j) (y : Fin m → N.obj j), (∀ p, (N.map f).hom (x p) = ∑ q, (φ j) (c p q) • y q) ∧ (∀ q, ∑ p, (A.map f).hom (a p) * c p q = 0)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-7ce4a",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T163540-L-1621766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-7ce4a",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T163540-L-1621766",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the recorded node/report, compiled cleanly, preserved the target signature, and the new theorem uses only permitted axioms."
+ }
+}
