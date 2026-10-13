@@ -8,7 +8,7 @@ module
 public import Mathlib.RepresentationTheory.Rep.Basic
 public import Mathlib.RepresentationTheory.Subrepresentation
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
@@ -50,12 +50,12 @@ abbrev ofStableSubmodule (A : Rep.{w} k G) (S : Submodule k A)
 def ofStableSubmoduleInclusion (A : Rep.{w} k G) {S T : Submodule k A}
     (hS : ∀ (g : G), ∀ x ∈ S, A.ρ g x ∈ S) (hT : ∀ (g : G), ∀ x ∈ T, A.ρ g x ∈ T)
     (h : S ≤ T) : A.ofStableSubmodule S hS ⟶ A.ofStableSubmodule T hT :=
-  Rep.ofHom ((Submodule.inclusion h).intertwiningMap_of_isIntertwiningMap fun _ _ ↦ rfl)
+  Rep.ofHom ((Submodule.inclusion h).intertwiningMap_of_isIntertwiningMap _ _ fun _ _ ↦ rfl)
 
 /-- The inclusion of a `G`-stable submodule `S` into `A`, as a morphism in `Rep k G`. -/
 def ofStableSubmoduleSubtype (A : Rep.{w} k G) (S : Submodule k A)
     (hS : ∀ (g : G), ∀ x ∈ S, A.ρ g x ∈ S) : A.ofStableSubmodule S hS ⟶ A :=
-  Rep.ofHom (S.subtype.intertwiningMap_of_isIntertwiningMap fun _ _ ↦ rfl)
+  Rep.ofHom (S.subtype.intertwiningMap_of_isIntertwiningMap _ _ fun _ _ ↦ rfl)
 
 /-- If `p : Y ⟶ Z` in `Rep k G` is surjective with kernel the range of `f : X ⟶ Y`, then
 `cokernel f ≅ Z`. -/
@@ -103,8 +103,10 @@ theorem nonempty_cokernel_ofStableSubmoduleInclusion_iso_trivial (A : Rep.{w} k 
     have hv : (A.ofStableSubmodule T hT).ρ g v - v ∈ K := htriv g v v.2
     rw [← sub_eq_zero, ← map_sub, LinearMap.comp_apply, Submodule.mkQ_apply,
       (Submodule.Quotient.mk_eq_zero K).2 hv, map_zero]
-  refine ⟨cokernelIsoOfRangeEqKer _ (Rep.ofHom (π.intertwiningMap_of_isIntertwiningMap hπ))
+  refine ⟨cokernelIsoOfRangeEqKer _ (Rep.ofHom (π.intertwiningMap_of_isIntertwiningMap _ _
+    fun g v ↦ (hπ g v).trans (Representation.trivial_apply ..).symm))
     (e.surjective.comp K.mkQ_surjective) ?_⟩
+  change LinearMap.range (Submodule.inclusion hST) = LinearMap.ker π
   exact (Submodule.range_inclusion _ _ _).trans (by rw [LinearEquiv.ker_comp, Submodule.ker_mkQ])
 
 end Field
@@ -148,14 +150,15 @@ theorem exists_categorical_filtration_of_invariant_flag {ℓ : ℕ} [Fact ℓ.Pr
     have hb := b.2
     simp only [Nat.zero_min, hF0, Submodule.mem_bot] at ha hb
     rw [ha, hb]
-  · refine ⟨Rep.mkIso (Representation.Equiv.ofBijective
+  · refine ⟨Rep.mkIso (Representation.IntertwiningMap.ofBijective
       (M.ofStableSubmoduleSubtype (F (min n n)) (hB n)).hom ⟨Subtype.val_injective, ?_⟩)⟩
     intro x
-    refine ⟨⟨x, ?_⟩, rfl⟩
-    rw [min_self, hFn]
-    exact Submodule.mem_top
+    have hx : x ∈ F (min n n) := by
+      rw [min_self, hFn]
+      exact Submodule.mem_top
+    exact ⟨⟨x, hx⟩, rfl⟩
   · rw [Rep.mono_iff_injective]
-    exact Submodule.inclusion_injective _
+    exact Submodule.inclusion_injective (hBle i)
   · apply nonempty_cokernel_ofStableSubmoduleInclusion_iso_trivial
     · rw [min_eq_left hi.le, min_eq_left (by omega : i + 1 ≤ n), hrank i hi.le,
         hrank (i + 1) (by omega)]
