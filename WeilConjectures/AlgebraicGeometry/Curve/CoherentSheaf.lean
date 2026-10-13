@@ -26,9 +26,7 @@ this gives:
 
 * the quotient `ℱ / 𝒯` is finite locally free of rank `rk ℱ`
   (`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_torsionQuotient`);
-* `𝒯` vanishes on a nonempty open (`AlgebraicGeometry.Scheme.Modules.exists_isZero_restrict_torsion`),
-  hence has no higher cohomology if `X` is moreover proper
-  (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_torsion`).
+* `𝒯` vanishes at the generic point, so `rk (ℱ / 𝒯) = rk ℱ`.
 
 (blueprint: `lem-sc-riemann-roch`, `sk-thm-picard-rr`)
 -/
@@ -127,6 +125,8 @@ theorem torsion_sections_torsionQuotient_eq_bot (ℱ : X.Modules)
     exact ⟨x.1, x.2⟩
   have hS := shortExact_torsionShortComplex ℱ
   have := hS.mono_f
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (torsionShortComplex ℱ).X₁ :=
+    inferInstanceAs (SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (torsion ℱ))
   rw [eq_bot_iff]
   intro q hq
   obtain ⟨⟨a, ha⟩, haq⟩ := (Submodule.mem_torsion_iff q).mp hq
@@ -154,6 +154,7 @@ section Curve
 
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsIntegral X]
 
+omit [IsIntegral X] in
 variable (k) in
 include k in
 lemma isLocallyNoetherian_of_smoothOfRelativeDimension_one : IsLocallyNoetherian X := by
@@ -207,7 +208,9 @@ theorem isFiniteLocallyFreeOfRank_torsionQuotient (ℱ : X.Modules)
   have h := isFiniteLocallyFreeOfRank_rank (torsionQuotient ℱ)
   have : Subsingleton ((torsionShortComplex ℱ).X₁.presheaf.stalk (genericPoint X)) :=
     subsingleton_stalk_torsion ℱ
-  rwa [← rank_eq_of_shortExact_of_subsingleton (shortExact_torsionShortComplex ℱ)] at h
+  have hr : ℱ.rank = (torsionQuotient ℱ).rank :=
+    rank_eq_of_shortExact_of_subsingleton (shortExact_torsionShortComplex ℱ)
+  rwa [← hr] at h
 
 end Curve
 

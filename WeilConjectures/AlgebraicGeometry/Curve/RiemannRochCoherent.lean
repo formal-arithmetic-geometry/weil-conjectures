@@ -69,20 +69,20 @@ lemma isFreeGenerator_wedge_elim0 (M : X.Modules) (U : X.Opens) :
   refine isFreeGenerator_toSheafificationObj_app _ _ fun V hV x hx ↦ ⟨V, le_rfl, hx, ?_⟩
   erw [PresheafOfModules.exteriorPower_map_ιMulti]
   generalize (fun k ↦ M.val.restrictₛₗ (homOfLE (le_rfl.trans hV)).op (Fin.elim0 k)) = v
-  have h : (fun a : Γ(X, V) ↦ a • exteriorPower.ιMulti Γ(X, V) 0 v) =
-      (exteriorPower.zeroEquiv Γ(X, V) Γ(M, V)).symm := by
-    funext a
+  have h (a : Γ(X, V)) : a • exteriorPower.ιMulti Γ(X, V) 0 v =
+      (exteriorPower.zeroEquiv Γ(X, V) Γ(M, V)).symm a := by
     apply (exteriorPower.zeroEquiv Γ(X, V) Γ(M, V)).injective
-    rw [LinearEquiv.apply_symm_apply, map_smul, exteriorPower.zeroEquiv_ιMulti, smul_eq_mul,
-      mul_one]
-  rw [h]
-  exact (exteriorPower.zeroEquiv Γ(X, V) Γ(M, V)).symm.bijective
+    rw [LinearEquiv.apply_symm_apply, LinearEquiv.map_smul]
+    erw [exteriorPower.zeroEquiv_ιMulti]
+    rw [smul_eq_mul, mul_one]
+  convert (exteriorPower.zeroEquiv Γ(X, V) Γ(M, V)).symm.bijective using 1
+  exact funext h
 
 /-- **The zeroth exterior power is the structure sheaf**: `⋀⁰ M ≅ 𝒪_X`, the empty wedge product
 and `1` being global free generators. -/
 theorem nonempty_exteriorPower_zero_iso (M : X.Modules) :
     Nonempty (M.exteriorPower 0 ≅ 𝟙_ X.Modules) := by
-  refine nonempty_iso_of_isFreeGenerator (U := fun _ : PUnit ↦ (⊤ : X.Opens))
+  refine nonempty_iso_of_isFreeGenerator (U := fun _ : Unit ↦ (⊤ : X.Opens))
     (e := fun _ ↦ wedge (M := M) (Fin.elim0 : Fin 0 → Γ(M, ⊤)))
     (f := fun _ ↦ (1 : Γ(X, ⊤))) (iSup_const) (fun _ ↦ isFreeGenerator_wedge_elim0 M ⊤)
     ?_ (fun _ ↦ isFreeGenerator_one ⊤)
@@ -167,7 +167,7 @@ lemma isFinitePresentation_torsion (ℱ : X.Modules)
   have := isFinitePresentation_kernel (torsionπ ℱ)
   let e : torsion ℱ ≅ kernel (torsionπ ℱ) :=
     IsLimit.conePointUniqueUpToIso (shortExact_torsionShortComplex ℱ).fIsKernel
-      (kernelIsKernel _)
+      (limit.isLimit _)
   exact isFinitePresentation_of_iso e.symm
 
 omit [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
@@ -208,27 +208,28 @@ lemma locallyQuasiFinite_annihilatorIdealSheaf_torsion (ℱ : X.Modules)
   have := finite_sections_of_isFinitePresentation (torsion ℱ) hU
   obtain ⟨f, hfJ, hf⟩ :=
     Submodule.annihilator_top_inter_nonZeroDivisors (isTorsion_sections_torsion ℱ hU)
-  refine ⟨⟨⊤, isAffineOpen_top _⟩, ⟨_, hU.preimage J.subschemeι⟩, hdU, le_top, ?_⟩
-  rw [← Scheme.Hom.appLE_comp_appLE _ _ _ U _ le_top le_rfl, CommRingCat.hom_comp,
+  let U' : X.affineOpens := ⟨U, hU⟩
+  refine ⟨⟨⊤, isAffineOpen_top _⟩, ⟨_, U'.2.preimage J.subschemeι⟩, hdU, le_top, ?_⟩
+  rw [← Scheme.Hom.appLE_comp_appLE _ _ _ U'.1 _ le_top le_rfl, CommRingCat.hom_comp,
     ← Scheme.Hom.app_eq_appLE]
   refine RingHom.QuasiFinite.comp_of_ringKrullDim_le_one ?_ _ ?_ ?_ _
-    (J.subschemeι_app_surjective ⟨U, hU⟩) hf ?_
+    (J.subschemeι_app_surjective U') hf ?_
   · exact MulEquiv.isField (Field.toIsField k)
       (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.toMulEquiv
   · exact HasRingHomProperty.appLE (P := @LocallyOfFiniteType) p inferInstance
-      ⟨⊤, isAffineOpen_top _⟩ U le_top
+      ⟨⊤, isAffineOpen_top _⟩ U' le_top
   · rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
     exact (IsHomeomorph.topologicalKrullDim_eq _
       hU.isoSpec.hom.homeomorph.isHomeomorph).symm.le.trans
         ((topologicalKrullDim_subspace_le X U).trans (by exact_mod_cast hdim))
-  · rw [← RingHom.mem_ker, IdealSheafData.ker_subschemeι_app]
-    change f ∈ Module.annihilator Γ(X, U) Γ(torsion ℱ, U)
-    rw [← Submodule.annihilator_top]
+  · rw [← RingHom.mem_ker, IdealSheafData.ker_subschemeι_app _ U', annihilatorIdealSheaf_ideal,
+      ← Submodule.annihilator_top]
     exact hfJ
 
 variable [IsProper (X ↘ Spec (.of k))]
 
 variable (k) in
+include k in
 /-- **The torsion has no `H¹`.** For a coherent module `ℱ` on a smooth proper curve, the torsion
 subsheaf `𝒯` is killed by its annihilator `I`, so `𝒯 ≅ ι_* ι^* 𝒯` for the closed immersion
 `ι : V(I) ⟶ X`. The scheme `V(I)` is finite over `k`
@@ -251,11 +252,12 @@ theorem subsingleton_H_one_torsion (ℱ : X.Modules)
   have : IsAffine J.subscheme := isAffine_of_isAffineHom (J.subschemeι ≫ X ↘ Spec (.of k))
   let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
   have : J.subschemeι.IsOver (Spec (.of k)) := ⟨rfl⟩
-  have := subsingleton_H_succ_of_isAffine ((pullback J.subschemeι).obj (torsion ℱ)) 0
+  have h0 : Subsingleton (((pullback J.subschemeι).obj (torsion ℱ)).H 1) :=
+    subsingleton_H_succ_of_isAffine ((pullback J.subschemeι).obj (torsion ℱ)) 0
   obtain ⟨e'⟩ := nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k J.subschemeι 1
   let e₁ := (cohomologyFunctor k 1).mapIso (asIso (pullbackUnit J.subschemeι (torsion ℱ)))
   let e₂ := e'.app ⟨(pullback J.subschemeι).obj (torsion ℱ), inferInstance⟩
-  exact (e₁ ≪≫ e₂.symm).toLinearEquiv.toEquiv.subsingleton
+  exact @Equiv.subsingleton _ _ (e₁ ≪≫ e₂.symm).toLinearEquiv.toEquiv h0
 
 variable (k) in
 /-- **The Euler characteristic of the torsion is its number of sections**: `χ(𝒯) = h⁰(𝒯)`, as
@@ -371,16 +373,16 @@ theorem exists_shortExact_of_stalkLinearMap_ne_zero {r : ℕ} (E ℳ : X.Modules
   have := finiteDimensional_stalk_of_isFiniteLocallyFree E
   have := finiteDimensional_stalk_of_isFiniteLocallyFree ℳ
   have h1 : E.rank = (kernel g).rank + (torsionQuotient (cokernel φ)).rank :=
-    rank_eq_add_of_shortExact hS
+    rank_eq_add_of_shortExact (S := ShortComplex.mk (kernel.ι g) g (kernel.condition g)) hS
   let S₁ := ShortComplex.mk (kernel.ι (Abelian.factorThruImage φ)) (Abelian.factorThruImage φ)
     (kernel.condition _)
   have hS₁ : S₁.ShortExact := .mk' (ShortComplex.exact_kernel _) inferInstance inferInstance
   let S₂ := ShortComplex.mk (kernel.ι (cokernel.π φ)) (cokernel.π φ) (kernel.condition _)
   have hS₂ : S₂.ShortExact := .mk' (ShortComplex.exact_kernel _) inferInstance inferInstance
   have h2 : ℳ.rank = (kernel (Abelian.factorThruImage φ)).rank + (Abelian.image φ).rank :=
-    rank_eq_add_of_shortExact hS₁
+    rank_eq_add_of_shortExact (S := S₁) hS₁
   have h3 : E.rank = (Abelian.image φ).rank + (cokernel φ).rank :=
-    rank_eq_add_of_shortExact hS₂
+    rank_eq_add_of_shortExact (S := S₂) hS₂
   have hI : (Abelian.image φ).rank ≠ 0 := by
     intro h0
     obtain ⟨hinj, -, -⟩ := injective_surjective_exact_stalkLinearMap hS₂ (genericPoint X)
@@ -426,6 +428,7 @@ variable (k X) in
 bundle `𝒪_X(x)` of a closed point `x` has positive degree, hence is ample. -/
 lemma exists_isAmple : ∃ ℒ : X.Modules, IsAmple (X ↘ Spec (.of k)) ℒ := by
   have := GlobalSectionsBijective.nonempty (k := k) (X := X)
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   obtain ⟨x, -, hx⟩ := (isClosed_univ (X := X)).exists_closed_singleton Set.univ_nonempty
   set J := IdealSheafData.vanishingIdeal ⟨{x}, hx⟩
   have hJ : J.IsInvertible :=
@@ -437,12 +440,13 @@ lemma exists_isAmple : ∃ ℒ : X.Modules, IsAmple (X ↘ Spec (.of k)) ℒ := 
   have : Nonempty J.subscheme := by
     have hxJ : x ∈ J.support :=
       IdealSheafData.le_support_iff_le_vanishingIdeal.mpr le_rfl rfl
-    rw [← IdealSheafData.range_subschemeι] at hxJ
+    rw [← SetLike.mem_coe, ← IdealSheafData.range_subschemeι] at hxJ
     obtain ⟨y, -⟩ := hxJ
     exact ⟨y⟩
   exact_mod_cast Scheme.Hom.finrankΓ_pos_of_isFinite _
 
 variable (k) in
+include k in
 /-- **A nonzero coherent module receives a nonzero morphism from a line bundle.** For `ℒ` ample,
 `E ⊗ ℒ^{⊗ n}` is generated by global sections for `n ≫ 0` (Serre's theorem A), so some global
 section `s : 𝒪_X ⟶ E ⊗ ℒ^{⊗ n}` is nonzero, and `s ⊗ ℒ^{⊗ -n}` is a nonzero morphism
@@ -464,15 +468,17 @@ lemma exists_hom_ne_zero (E : X.Modules) [SheafOfModules.IsQuasicoherent (R := X
     intro h
     have : Epi ψ := G.epi
     rw [h] at this
-    exact hne (IsZero.of_epi_zero _ _)
+    exact hne (@IsZero.of_epi_zero _ _ _ _ _ this)
   obtain ⟨i, hi⟩ : ∃ i, SheafOfModules.ιFree i ≫ ψ ≠ 0 := by
     by_contra! h
     exact hψ (Cofan.IsColimit.hom_ext (SheafOfModules.isColimitFreeCofan _) _ _
-      fun i ↦ by rw [h i, comp_zero])
-  refine ⟨Pᵛ, inferInstance, (λ_ Pᵛ).inv ≫ ((SheafOfModules.ιFree i ≫ ψ) ▷ Pᵛ) ≫ eE.inv, ?_⟩
+      fun i ↦ (h i).trans comp_zero.symm)
+  let s : 𝟙_ X.Modules ⟶ E ⊗ P := SheafOfModules.ιFree i ≫ ψ
+  have hs : s ≠ 0 := hi
+  refine ⟨Pᵛ, inferInstance, (λ_ Pᵛ).inv ≫ (s ▷ Pᵛ) ≫ eE.inv, ?_⟩
   intro h
-  apply hi
-  have h' : (SheafOfModules.ιFree i ≫ ψ) ▷ Pᵛ = 0 := by
+  apply hs
+  have h' : s ▷ Pᵛ = 0 := by
     have := congrArg (fun f ↦ (λ_ Pᵛ).hom ≫ f ≫ eE.hom) h
     simpa using this
   apply (tensorRight Pᵛ).map_injective
@@ -520,7 +526,7 @@ theorem eulerChar_eq_degree_exteriorPower_add (r : ℕ) (E : X.Modules)
       hφ (eq_zero_of_stalkLinearMap_genericPoint_eq_zero
         (fun _ _ hs ↦ eq_zero_of_isTorsionSection hs) φ h)
     obtain ⟨L, Q, f, g, w, hS, hL, hQ⟩ :=
-      exists_shortExact_of_stalkLinearMap_ne_zero k E ℳ φ hφη
+      exists_shortExact_of_stalkLinearMap_ne_zero k (r := r) E ℳ φ hφη
     obtain ⟨e⟩ := nonempty_exteriorPower_iso_tensorObj hS (r := r)
     have : SheafOfModules.IsInvertible.{u, u, u} L :=
       (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one L).2 hL
@@ -530,8 +536,7 @@ theorem eulerChar_eq_degree_exteriorPower_add (r : ℕ) (E : X.Modules)
       (degree_congr k e).trans (degree_tensorObj L (Q.exteriorPower r))
     have := SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree L 1
     have := SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree Q r
-    have hχ : E.eulerChar k = L.eulerChar k + Q.eulerChar k :=
-      eulerChar_eq_add_of_shortExact_of_isCoherent k hS
+    have hχ := eulerChar_eq_add_of_shortExact_of_isCoherent k hS
     rw [hχ, eulerChar_eq_degree_add (k := k) L, ih Q, hdeg]
     push_cast
     ring
@@ -584,8 +589,7 @@ theorem eulerChar_eq_coherentDegree_add (ℱ : X.Modules)
   have := isFiniteLocallyFreeOfRank_torsionQuotient k ℱ
   have hS : (ShortComplex.mk (torsionι ℱ) (torsionπ ℱ) (cokernel.condition _)).ShortExact :=
     shortExact_torsionShortComplex ℱ
-  have hχ : ℱ.eulerChar k = (torsion ℱ).eulerChar k + (torsionQuotient ℱ).eulerChar k :=
-    eulerChar_eq_add_of_shortExact_of_isCoherent k hS
+  have hχ := eulerChar_eq_add_of_shortExact_of_isCoherent k hS
   rw [hχ, eulerChar_torsion k ℱ,
     eulerChar_eq_degree_exteriorPower_add k ℱ.rank (torsionQuotient ℱ), coherentDegree]
   ring
@@ -601,7 +605,7 @@ theorem coherentDegree_eq_degree (ℒ : X.Modules) [ℒ.IsInvertible] :
   have hℒ1 : ℒ.IsFiniteLocallyFreeOfRank 1 :=
     (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one ℒ).1 inferInstance
   have h := eulerChar_eq_coherentDegree_add k ℒ
-  rw [rank_eq_of_isFiniteLocallyFreeOfRank ℒ, eulerChar_eq_degree_add (k := k) ℒ] at h
+  rw [rank_eq_of_isFiniteLocallyFreeOfRank (r := 1) ℒ, eulerChar_eq_degree_add (k := k) ℒ] at h
   push_cast at h
   linarith
 
