@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00R0 (lemma-limit-finite-presentation, algebra.tex line 32567), clauses (1)-(4) (its proof: 'the non-local version of Lemma 00QV ... left to the reader'); clause (5) is the ring form of the 'in particular' $M=M_\\lambda\\otimes_{R_\\lambda}R$ of the next Lemma Tag 00R1 (lemma-limit-module-finite-presentation, line 32593)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-limit-finite-presentation-colimits",
+ "title": "Model colimit from a base colimit and final pushout squares",
+ "statement": "Let Λ be a small nonempty directed preorder, Rfun,Sfun : Λ → CommRing functors, η : Rfun → Sfun a natural transformation, cR,cS cocones, and φ : cR.pt → cS.pt a morphism. Assume that for every l the square (η_l,π_l,κ_l,φ) is a pushout and that cR is a colimit [def-weil-pbc-category-colimit]. Then cS is a colimit. No finite-type, finite-presentation, or transition-pushout assumption is needed.",
+ "proof": [
+  {
+   "text": "For a cocone s on Sfun, compose its natural transformation with η to obtain a cocone base(s) on Rfun. Let g = hcolR.desc(base(s)). Its factorization at l says η_l followed by s_l equals π_l followed by g. Apply IsPushout.desc at l to obtain d_l : cS.pt → s.pt, with κ_l d_l = s_l and φ d_l = g.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If l ≤ m, cocone naturality gives κ_l d_m = Sfun(l→m) κ_m d_m = Sfun(l→m) s_m = s_l. Both d_l and d_m also have φ-composite g, so IsPushout.hom_ext at l gives d_l = d_m. A common upper bound makes d_l = d_m for arbitrary l,m. Nonemptiness permits a chosen l₀, and d_l₀ therefore factors every leg.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For another factorization m, the κ_l₀-composite is prescribed. For every l, π_l φ m = η_l κ_l m = η_l s_l = π_l g. Base-colimit hom_ext implies φ m = g. Pushout hom_ext at l₀ now implies m = d_l₀. This supplies the desc, fac, uniq fields of IsColimit cS.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R0, non-local version of Tag 00QV; expanded proof of the indicated clauses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cocone of pushout squares over a directed preorder is a colimit if its base cocone is a colimit",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "colimit cocone preserved under cobase change pushout squares",
+   "results": "Hits include IsPushout.of_isColimit_cocone and pushout pasting lemmas. Their types concern individual span colimits, not transfer of a directed base cocone colimit.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*IsPushout|IsPushout.*IsColimit|tensorModelOfHasCoeffsEquiv|finiteTypeSubalgebra",
+   "results": "Read IsPushout.desc, inl_desc, inr_desc, hom_ext and IsColimit.fac/hom_ext. These prove the argument directly; no exact transfer theorem found.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.LimitFinitePresentation",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Step 2 of the ancestor's split (Stacks 0A5H, proof, second paragraph: finding a constructible sheaf map F → I); the Noetherian approximation input to lem-weil-pbc-colimit-flat-ring-map, decomposed into construction and model-colimit transfer.",
+   "via": [
+    "lem-weil-pbc-limit-finite-presentation",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.LimitFinitePresentation.Colimits",
+  "file": "lean/Sheaf/Algebra/LimitFinitePresentation/Colimits.lean",
+  "declaration": "Algebra.colimits_of_limit_finite_presentation_core",
+  "statement": "theorem colimits_of_limit_finite_presentation_core\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ]\n    [IsDirected Λ (fun a b => a ≤ b)]\n    {Rfun Sfun : Λ ⥤ CommRingCat} (η : Rfun ⟶ Sfun)\n    (cR : Cocone Rfun) (cS : Cocone Sfun) (φ : cR.pt ⟶ cS.pt)\n    (hpush : ∀ l, Nonempty (CategoryTheory.IsPushout (η.app l) (cR.ι.app l) (cS.ι.app l) φ))\n    (hcolR : IsColimit cR) : Nonempty (IsColimit cS)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-09aa4",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T024037-L-3335412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-09aa4",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T024037-L-3335412",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature, Core construction and Colimits proof with their nodes, source, dependencies, report and repaired provenance; verified compilation and axioms, including the direct importer."
+ }
+}

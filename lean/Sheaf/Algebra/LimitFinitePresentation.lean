@@ -8,11 +8,15 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Sheaf.Algebra.LimitFinitePresentation.Core
+import Sheaf.Algebra.LimitFinitePresentation.Colimits
 
 /-! # Noetherian approximation of a finitely presented ring map
 Source: literature/stacks-project/algebra.tex, Lemma Tag 00R0
 (blueprint: lem-weil-pbc-limit-finite-presentation).
 -/
+
+set_option linter.unusedVariables false
 
 @[expose] public section
 
@@ -71,6 +75,15 @@ theorem exists_limit_finite_presentation
           (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm))) ∧
       Nonempty (IsColimit cR) ∧ Nonempty (IsColimit cS)
 := by
-  sorry
+  obtain ⟨Λ, hpo, hne, hdir, Rfun, Sfun, η, cR, cS, hcore⟩ :=
+    exists_limit_finite_presentation_core φ hφ
+  rcases hcore with ⟨hR, hS, hcompat, hft, hRft, hpush, hfinal, hcolR⟩
+  let : Nonempty Λ := hne
+  let : IsDirected Λ (fun a b => a ≤ b) := hdir
+  have hcolS := colimits_of_limit_finite_presentation_core η cR cS
+    (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm)
+    (fun l => hfinal l hR hS) hcolR.some
+  exact ⟨Λ, hpo, hne, hdir, Rfun, Sfun, η, cR, cS, hR, hS, hcompat, hft,
+    hRft, hpush, hfinal, hcolR, hcolS⟩
 
 end Algebra
