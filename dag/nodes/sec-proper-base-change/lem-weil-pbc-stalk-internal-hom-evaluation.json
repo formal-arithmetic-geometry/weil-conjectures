@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-stalk-internal-hom-evaluation",
+ "kind": "statement",
+ "title": "Canonical linear evaluation of internal Hom on stalks",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $\\mathcal F,\\mathcal G$ module sheaves. Internal Hom is [def-pur-sheaf-hom], and the module stalks are [def-weil-pbc-module-stalk] with their functor [def-pc-module-stalk-functor]. For every $x\\in X$ there is an $\\mathcal O_{X,x}$-linear map $c:\\mathcal Hom(\\mathcal F,\\mathcal G)_x\\to\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal F_x,\\mathcal G_x)$ such that for any opens $x\\in V\\subseteq U$, local morphism $\\varphi:\\mathcal F|_U\\to\\mathcal G|_U$ and section $s\\in\\mathcal F(V)$, $c(\\varphi_x)(s_x)=(\\varphi_V(s))_x$. No finiteness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, proof; read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "On common smaller neighborhoods, naturality of a local morphism identifies the restriction of its evaluation with the evaluation of the restricted section.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If two local morphisms represent the same germ and two argument sections represent the same germ, shrink separately to witness these equalities, then intersect the two neighborhoods. The preceding restriction identity identifies the two output germs. Hence evaluation defines a function of the two germs.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent three additive arguments on one neighborhood, using exists_le_germ_eq twice. For a scalar and two arguments, first represent the scalar and then shrink twice. Sectionwise evaluation preserves addition in both arguments and scalar multiplication in both arguments, using homObjEvalId for scalar linearity in the morphism. The germ_smul formula transports these identities to stalks. Bundle this bilinear evaluation as the required linear map.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, proof; read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical evaluation of internal Hom of sheaves of modules on stalks",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical evaluation map from stalk of internal Hom to linear maps of stalk modules without finiteness assumptions",
+   "results": "Eight hits for ModuleCat.Tilde.toStalk and stalkToFiberLinearMap, which concern localization of modules over affine schemes, not internal-Hom evaluation.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ee]val|[Ee]val.*stalk",
+   "results": "Smooth sheaf evaluation and stalkToFiber occur; no module internal-Hom evaluation. Also read the internal-Hom source and stalk germ API.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Canonical linear evaluation of internal Hom on stalks in the proof of 01CP",
+   "via": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkInternalHomEvaluation.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_stalk_internalHom_linearMap",
+  "statement": "theorem exists_stalk_internalHom_linearMap : ∃ c : (moduleStalkFunctor X x).obj (F.homObj G) →ₗ[X.presheaf.stalk x] ((moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x] (moduleStalkFunctor X x).obj G), ∀ (U : Opens X) (hxU : x ∈ U) (φ : (F.homObj G).val.obj (op U)) (V : Opens X) (i : V ⟶ U) (hxV : x ∈ V) (s : F.val.obj (op V)), c (TopCat.Presheaf.germ (F.homObj G).val.presheaf U x hxU φ) (TopCat.Presheaf.germ F.val.presheaf V x hxV s) = TopCat.Presheaf.germ G.val.presheaf V x hxV (φ.app (op (Over.mk i)) s)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

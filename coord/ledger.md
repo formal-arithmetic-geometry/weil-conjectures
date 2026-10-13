@@ -10940,3 +10940,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:30 L: merged deliver/T1/Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel (stage 3; reviewer PASS; after a return; landing 20261013T033008-L-3678518 (interface); batch 20261013T032954; modules 4; new nodes 3)
 - 03:30 L: merged deliver/T2/Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom (stage 3; reviewer PASS; first push; landing 20261013T033008-L-3678659 (proof); batch 20261013T032954; modules 1; new nodes 0)
 - 03:30 L: merged deliver/T2/Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology (stage 3; reviewer PASS; first push; landing 20261013T033009-L-3678827 (proof); batch 20261013T032954; modules 1; new nodes 1)
+- 03:30 L: merged deliver/V3/Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation (stage 3; reviewer PASS; first push; landing 20261013T033009-L-3678947 (interface); batch 20261013T032954; modules 3; new nodes 2)

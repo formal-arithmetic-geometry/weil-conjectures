@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-stalk-kernel",
+ "kind": "statement",
+ "title": "Finite-presentation coordinate kernel on module stalks",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\mathcal F$ a finitely presented module sheaf [def-weil-pbc-module-finite-type-presentation], $\\mathcal G$ any module sheaf and $x\\in X$. Write $R=\\mathcal O_{X,x}$, $N=\\mathcal G_x$, and $H=\\mathcal Hom(\\mathcal F,\\mathcal G)_x$ [def-pur-sheaf-hom], with module stalks [def-weil-pbc-module-stalk], [def-pc-module-stalk-functor]. There exist an open $U\\ni x$, integers $m,n\\geq0$, sections $s_i\\in\\mathcal F(U)$, linear maps $a:R^m\\to R^n$, $b:R^n\\to\\mathcal F_x$, and $\\beta:H\\to N^n$ such that $b$ is surjective, $\\operatorname{Im}a=\\operatorname{Ker}b$, $b(e_i)=(s_i)_x$, and $\\beta$ is injective with image $\\operatorname{Ker}\\alpha$. Here $\\theta_k:\\operatorname{Hom}_R(R^k,N)\\to N^k$ sends a map to its values on the standard basis, and $\\alpha=\\theta_m\\circ(a^*)\\circ\\theta_n^{-1}$. For every open $W\\ni x$, local morphism $\\varphi$ over $W$, and $i<n$, $\\beta(\\varphi_x)_i=(\\varphi_{U\\cap W}(s_i|_{U\\cap W}))_x$. This statement constructs a finite presentation and sheaf-side kernel coordinates; it asserts no comparison isomorphism between $H$ and $\\operatorname{Hom}_R(\\mathcal F_x,N)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, proof; read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free presentation of F on a neighborhood U of x. Its generator images give the sections s_i. The cokernel presentation is right exact and remains so on stalks, yielding a surjective b and exact pair a,b.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-presentation internal-Hom kernel theorem on U, obtaining the injective coordinate evaluation into the finite product of G and the relation map.",
+   "uses": [
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Taking stalks preserves this kernel. A finite tuple of germs is represented on the intersection of finitely many neighborhoods; equality of such tuples is similarly checked after a finite intersection. These component-germ maps identify the stalks of finite free modules with R^k and of finite products of G with N^k. The relation map becomes theta_m composed with precomposition by a and theta_n inverse. Hence beta is injective and its range is the stated kernel.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-module-hom-left-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Neighborhoods inside U are cofinal, so restricted module stalks agree with original stalks. The local-morphism sections of internal Hom also agree under restriction. Take germs of the sectionwise coordinate formula on U intersect W; this gives the formula for beta for arbitrary W.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-module-hom-left-exact",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, lemma-stalk-internal-hom, proof; read at https://stacks.math.columbia.edu/tag/01CP on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local finite presentation identifies internal Hom stalk with finite kernel",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local finite presentation identifies the stalk of internal Hom with a kernel in finite products of stalks",
+   "results": "Eight hits concerning ModuleCat.Tilde localization stalk maps; none gives the ringed-space finite-coordinate kernel.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Kk]ernel|[Kk]ernel.*stalk",
+   "results": "One Mathlib hit in RingTheory/Finiteness/FinitePresentationLocal; no such sheaf kernel. Read HomFinitePresentationKernel and ModuleStalkExact in this library: they give the global sheaf kernel and exactness, but not the localized finite-coordinate stalk model.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP",
+   "via": [
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationStalkKernel.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_finitePresentation_stalk_kernel",
+  "statement": "theorem exists_finitePresentation_stalk_kernel (X : RingedSpace.{u}) (F G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) [SheafOfModules.IsFinitePresentation.{u} F] (x : X) : ∃ (U : Opens X) (hxU : x ∈ U) (m n : ℕ) (s : Fin n → F.val.obj (op U)) (a : (Fin m → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (Fin n → X.presheaf.stalk x)) (b : (Fin n → X.presheaf.stalk x) →ₗ[X.presheaf.stalk x] (moduleStalkFunctor X x).obj F) (β : (moduleStalkFunctor X x).obj (F.homObj G) →ₗ[X.presheaf.stalk x] (Fin n → (moduleStalkFunctor X x).obj G)), Function.Surjective b ∧ Function.Exact a b ∧ (∀ i, b (Pi.single i 1) = TopCat.Presheaf.germ F.val.presheaf U x hxU (s i)) ∧ Function.Injective β ∧ LinearMap.range β = LinearMap.ker (((LinearEquiv.piRing (X.presheaf.stalk x) ((moduleStalkFunctor X x).obj G) (Fin m) (X.presheaf.stalk x)).toLinearMap).comp ((LinearMap.lcomp (X.presheaf.stalk x) ((moduleStalkFunctor X x).obj G) a).comp (LinearEquiv.piRing (X.presheaf.stalk x) ((moduleStalkFunctor X x).obj G) (Fin n) (X.presheaf.stalk x)).symm.toLinearMap)) ∧ (∀ (W : Opens X) (hxW : x ∈ W) (φ : (F.homObj G).val.obj (op W)) (i : Fin n), β (TopCat.Presheaf.germ (F.homObj G).val.presheaf W x hxW φ) i = TopCat.Presheaf.germ G.val.presheaf (U ⊓ W) x ⟨hxU, hxW⟩ (φ.app (op (Over.mk (homOfLE inf_le_right : U ⊓ W ⟶ W))) (F.val.presheaf.map (homOfLE inf_le_left : U ⊓ W ⟶ U).op (s i))))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T033009-L-3678947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
