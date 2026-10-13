@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-frobenius-exchange-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-frobenius-tower-compatibility",
+   "place": "The equation for B follows by naturality of kappa_g and beta_f ...; the same argument for kappa_{g'}, beta_{f'}, and vartheta_{E,n} proves the equation for D.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-level exchange is the restricted ambient exchange",
+ "statement": "Let $\\Lambda,I,P_i=\\Lambda/I^i$ ($i\\geq1$), $K_i=K\\otimes^L_\\Lambda P_i$, and their transitions be the complete coefficient datum [def-weil-pbc-complete-coefficient-datum]. Let $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$, $g':X'\\to X$, and the automorphisms $\\operatorname{Fr}_T$ ($T=X,Y,X',Y'$) form a Frobenius-equivariant datum [def-weil-pbc-frobenius-tower-datum], including its chosen Cartesian Frobenius faces. Use the ordinary derived operations on the small pro-etale sites [def-weil-pbc-proetale-operations], with constant coefficient sheaves. For each $T$, let $\\operatorname{Res}_{i,T}:D(T_{\\mathrm{proet}},P_i)\\to D(T_{\\mathrm{proet}},\\Lambda)$ be termwise restriction of scalars along $\\Lambda_T\\to(P_i)_T$ [def-pc-sheaf-restrict-scalars]. For every edge $u:U\\to V$ among $f,f',g,g'$ and the Frobenius automorphisms, the canonical comparisons\n$$\\operatorname{Res}_{i,U}Lu^*_{P_i}\\cong Lu^*_{\\Lambda}\\operatorname{Res}_{i,V},\\qquad\n\\operatorname{Res}_{i,V}Ru_{*,P_i}\\cong Ru_{*,\\Lambda}\\operatorname{Res}_{i,U}$$\nare natural isomorphisms. Under them, restriction of scalars takes the derived pullback composition comparisons [lem-weil-pbc-proetale-derived-pullback-composition] to their $\\Lambda$-linear versions, and takes the canonical exchange transformation for either Frobenius face [def-weil-pbc-ambient-ringed-exchange] with coefficients $P_i$ to its $\\Lambda$-linear version. In particular, the finite-level maps $\\beta_{f,i}$ at $K_i$ and $\\beta_{f',M_i}$ at $M_i\\in D(X'_{\\mathrm{proet}},P_i)$ in the datum, and the pullback comparisons $\\kappa_g,\\kappa_{g'}$, agree after restriction with the corresponding ambient transformations. Writing $\\Phi_T=L\\operatorname{Fr}_T^*$ and suppressing these endpoint comparisons, for $m,n\\geq1$, every ambient morphism $u:K_m\\to K_n$, and every ambient morphism $s:M_m\\to M_n$, one has\n$$Rf_*\\Phi_X(u)\\,\\beta_{f,m}=\\beta_{f,n}\\,\\Phi_Y(Rf_*u),\\qquad\nRf'_*\\Phi_{X'}(s)\\,\\beta_{f',M_m}=\\beta_{f',M_n}\\,\\Phi_{Y'}(Rf'_*s).$$\nHere ambient means a morphism in the indicated derived category with coefficients $\\Lambda$, and the same ambient naturality applies to $\\kappa_g,\\kappa_{g'}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7 (remark-base-change), Tag 0D6D (lemma-derived-pullback-composition), Tag 0D6E (lemma-derived-pushforward-composition), and Tag 0D6J (lemma-modules-abelian-unbounded), part (3).",
+  "note": "Additional coefficient-restriction compatibility lemma for the naturality sentence in the master blueprint proof of lemma-weil-pbc-frobenius-tower-compatibility; not a verbatim Stacks theorem. For the unbounded direct-image comparison use 0D6E on the two factorizations (U,P_i)->(U,Lambda)->(V,Lambda) and (U,P_i)->(V,P_i)->(V,Lambda); the identity-topos coefficient pushforwards are exact restriction of scalars. Tag 0D6J gives the related comparison on forgetting to abelian sheaves. Pullbacks here are exact inverse images with transported constant actions; mate and pullback composition comparisons are those of 07A7 and 0D6D."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-frobenius-tower-datum",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change mate natural transformation commutes with forgetting module scalar action",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.RestrictionCoextensionAdj.unit'; ",
+   "date": "2026-10-14",
+   "verdict": "related module scalar-adjunction facts only; no pro-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"naturality\"",
+   "results": "8 hits: ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.restrictScalarsId'App_hom_naturality_assoc, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc; ",
+   "date": "2026-10-14",
+   "verdict": "related module scalar-adjunction facts only; no pro-etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|baseChange (subdirectory CategoryTheory/Adjunction)",
+   "results": "0 hits: ; ",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with unbounded derived direct image and base change mates on ringed topoi",
+   "results": "service unavailable: Internal Server Error (fresh maintainer query through msearch.py; raw record retained in review directory)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|baseChange (subdirectory Algebra/Category/ModuleCat)",
+   "results": "25 displayed hits, including Sheaf/ChangeOfRings.lean:36 (SheafOfModules.restrictScalars), ordinary module restriction pseudofunctors and scalar adjunctions; no unbounded pro-etale derived exchange comparison. Read Sheaf/ChangeOfRings.lean:24-85.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lemma-weil-pbc-frobenius-tower-compatibility",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

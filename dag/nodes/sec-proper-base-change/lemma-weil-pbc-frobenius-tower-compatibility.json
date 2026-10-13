@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-frobenius-tower-compatibility",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Frobenius compatibility with tower transitions",
@@ -13,27 +13,117 @@
   "place": "node lemma-weil-pbc-frobenius-tower-compatibility, order 1335"
  },
  "stmt_deps": [
-  "def-weil-pbc-frobenius-corner-structures"
+  "def-weil-pbc-frobenius-corner-structures",
+  "lemma-weil-pbc-frobenius-level-rectangle",
+  "lemma-weil-pbc-level-map-tower-compatibility"
  ],
  "proof": [
   {
-   "text": "The equation for $B$ follows by naturality of $\\kappa_g$ and $\\beta_f$ and\nthe defining equation\n$r_{n+1,n}\\vartheta_{n+1}=\\vartheta_n\\Phi_X(r_{n+1,n})$.\nThe same argument for $\\kappa_{g'}$, $\\beta_{f'}$, and\n$\\vartheta_{E,n}$ proves the equation for $D$. For $A$, combine\n$b_{n+1,n}h_{n+1}=h_na_{n+1,n}$ with the transport formula for\n$\\Theta_A$ and the equation for $B$; cancelling $h_n$ gives the first\ndisplayed equation. The equation for $C$ follows identically from\n$d_{n+1,n}h'_{n+1}=h'_nc_{n+1,n}$ and the equation for $D$. The finite Weil\nrectangle and the four transition equations now say precisely that every\nedge is a morphism of Weil towers.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $n\\geq1$, put $m=n+1$ and $r=r_{m,n}$. Work in the ambient derived categories of $\\Lambda$-modules: the reductions $K_i=K\\otimes^L_\\Lambda P_i$ and $r$ belong to this common category. The comparisons $\\kappa_g$ and $\\kappa_{g'}$ are isomorphisms of functors, obtained by composing the derived pullback composition isomorphisms for the commuting faces. By the finite-level exchange restriction lemma, the map $\\beta_f$ at each reduction is the restriction-of-scalars specialization of the ambient exchange for the Frobenius face, and this identification is natural in coefficient morphisms. Its explicit unit--composition--counit formula is a composite of natural transformations, so its naturality is the defining naturality equation, not projection-formula naturality. Put $F=Lg^*$, $H=Rf_*$, $\\kappa_i=\\kappa_{g,HK_i}$ and $\\beta_i=\\beta_{f,K_i}$. Naturality gives $H\\Phi_X(r)\\beta_m=\\beta_n\\Phi_Y(Hr)$ and $F\\Phi_Y(Hr)\\kappa_m=\\kappa_n\\Phi_{Y'}(FHr)$. Using $b_{m,n}=FHr$ and $r\\vartheta_m=\\vartheta_n\\Phi_X(r)$, compute\n$$\n\\begin{aligned}\nb_{m,n}\\Theta_{B,m}\n&=FH(r\\vartheta_m)F(\\beta_m)\\kappa_m\\\\\n&=FH(\\vartheta_n)F(H\\Phi_X(r)\\beta_m)\\kappa_m\\\\\n&=FH(\\vartheta_n)F(\\beta_n)F\\Phi_Y(Hr)\\kappa_m\\\\\n&=\\Theta_{B,n}\\Phi_{Y'}(b_{m,n}).\n\\end{aligned}\n$$",
+   "uses": [
+    "def-weil-pbc-frobenius-corner-structures",
+    "def-weil-pbc-frobenius-tower-datum",
+    "lemma-weil-pbc-level-map-tower-compatibility",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-frobenius-exchange-restriction",
+    "def-weil-pbc-complete-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-frobenius-tower-compatibility.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Put $G=L(g')^*$, $J=Rf'_*$, $s=G(r):E_m\\to E_n$ and $\\kappa'_i=\\kappa_{g',K_i}$. The functor isomorphism $\\kappa_{g'}$ has naturality equation $G\\Phi_X(r)\\kappa'_m=\\kappa'_n\\Phi_{X'}(s)$. Thus the induced Weil structures satisfy\n$$\ns\\vartheta_{E,m}=G(r\\vartheta_m)\\kappa'_m\n=G(\\vartheta_n)G\\Phi_X(r)\\kappa'_m\n=\\vartheta_{E,n}\\Phi_{X'}(s).\n$$\nBy the finite-level exchange restriction lemma, $\\gamma_i=\\beta_{f',E_i}$ is the restricted ambient exchange, and its coefficient-change identification is natural; hence $J\\Phi_{X'}(s)\\gamma_m=\\gamma_n\\Phi_{Y'}(Js)$. Since $d_{m,n}=Js$, the defining composite for D yields\n$$\n\\begin{aligned}\nd_{m,n}\\Theta_{D,m}\n&=J(s\\vartheta_{E,m})\\gamma_m\\\\\n&=J(\\vartheta_{E,n})J\\Phi_{X'}(s)\\gamma_m\\\\\n&=J(\\vartheta_{E,n})\\gamma_n\\Phi_{Y'}(Js)\n=\\Theta_{D,n}\\Phi_{Y'}(d_{m,n}).\n\\end{aligned}\n$$",
+   "uses": [
+    "def-weil-pbc-frobenius-corner-structures",
+    "def-weil-pbc-frobenius-tower-datum",
+    "lemma-weil-pbc-level-map-tower-compatibility",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-frobenius-exchange-restriction",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-frobenius-tower-compatibility.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Write $a=a_{m,n}$, $b=b_{m,n}$ and $\\Phi=\\Phi_{Y'}$. The transition lemma gives $bh_m=h_na$ and hence $ah_m^{-1}=h_n^{-1}b$. By the transport definition and step 1,\n$$\n\\begin{aligned}\na\\Theta_{A,m}\n&=h_n^{-1}b\\Theta_{B,m}\\Phi(h_m)\\\\\n&=h_n^{-1}\\Theta_{B,n}\\Phi(b)\\Phi(h_m)\\\\\n&=h_n^{-1}\\Theta_{B,n}\\Phi(h_n)\\Phi(a)\n=\\Theta_{A,n}\\Phi(a).\n\\end{aligned}\n$$\nOnly associativity, functoriality and the inverse identities for the displayed isomorphisms are used in this calculation.",
+   "uses": [
+    "def-weil-pbc-frobenius-corner-structures",
+    "lemma-weil-pbc-level-map-tower-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-frobenius-tower-compatibility.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Write $c=c_{m,n}$, $d=d_{m,n}$ and $\\Phi=\\Phi_{Y'}$. The transition lemma gives $dh'_m=h'_nc$, whence $c(h'_m)^{-1}=(h'_n)^{-1}d$. Using step 2 gives\n$$\n\\begin{aligned}\nc\\Theta_{C,m}\n&=(h'_n)^{-1}d\\Theta_{D,m}\\Phi(h'_m)\\\\\n&=(h'_n)^{-1}\\Theta_{D,n}\\Phi(d)\\Phi(h'_m)\\\\\n&=(h'_n)^{-1}\\Theta_{D,n}\\Phi(h'_n)\\Phi(c)\n=\\Theta_{C,n}\\Phi(c).\n\\end{aligned}\n$$\nFor each corner Z the proved equation $z_{m,n}\\Theta_{Z,m}=\\Theta_{Z,n}\\Phi(z_{m,n})$ is exactly the condition that the family $\\Theta_{Z,i}:\\Phi Z_i\\to Z_i$ be a tower map. The transition lemma states the four tower-map equations for $h,h',v,v'$. The finite Weil rectangle states, for each of these edges $e:Z\\to W$, $e_i\\Theta_{Z,i}=\\Theta_{W,i}\\Phi(e_i)$. Therefore each edge is a tower map whose components are Weil-equivariant, which is the asserted morphism of Weil towers. Compatibility for nonadjacent levels follows by composing the adjacent equations and using functoriality; the identity transition equation is immediate.",
+   "uses": [
+    "def-weil-pbc-frobenius-corner-structures",
+    "lemma-weil-pbc-frobenius-level-rectangle",
+    "lemma-weil-pbc-level-map-tower-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-frobenius-tower-compatibility.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-frobenius-corner-structures",
+  "def-weil-pbc-frobenius-tower-datum",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
   "lemma-weil-pbc-frobenius-level-rectangle",
-  "lemma-weil-pbc-level-map-tower-compatibility"
+  "lemma-weil-pbc-level-map-tower-compatibility",
+  "lem-weil-pbc-frobenius-exchange-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-frobenius-tower-compatibility.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius compatibility with tower transitions and four corner Weil structures",
+   "results": "WittVector.*frobenius declarations; no four-corner tower result",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.NatTrans and basic declarations",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*tower|tower.*Frobenius (subdirectory CategoryTheory)",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius compatibility with tower transitions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -62,5 +152,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-frobenius-tower-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded B and D naturality and A and C inverse-transport calculations, using one explicit coefficient-restriction comparison lemma for the Frobenius faces; no Mathlib leaves.",
+  "blueprint": "Realizes the single proof paragraph: first the B equation, then D, then transport to A and C, then the conclusion that the rectangle is a morphism of towers."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-a2f6e64a5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-a2f6e64a5 (reviewer sub-agent of L); spot-checked: Read the item and sole new node in full; verified all four calculations, cited statements, Stacks 07A7/0D6D/0D6E/0D6J, duplicate candidates and small cases. Saved corrected helper JSON completing metadata, search evidence and source attribution. Statements unchanged. Exact master target coefficients and base-change construction checked; no condensed-category comparison inferred from the seeded route. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
