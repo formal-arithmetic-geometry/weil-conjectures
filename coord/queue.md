@@ -1,49 +1,12 @@
 # Work queue
 
-172 items; claim with `tools/claim.py next <group> [--stage N]`.
+141 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (23)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `thm-weil-pbc-weak-etale-strict-local` | 5 | none |
-| `def-weil-pbc-ind-etale-algebra` | 6 | none |
-| `lem-weil-pbc-ind-etale-stability` | 6 | none |
-| `lem-weil-pbc-weak-etale-field` | 6 | none |
-| `lem-weil-pbc-weak-etale-integral-closure` | 6 | none |
-| `lem-weil-pbc-weak-etale-tor` | 7 | none |
-| `prop-weil-pbc-strict-local-exchange` | 1003 | sorry_here |
-| `lem-weil-pbc-horseshoe-correction` | 1007 | none |
-| `lemma-weil-pbc-curve-normalization-constant` | 1008 | sorry_here |
-| `lemma-weil-pbc-smooth-curve-artin-schreier` | 1008 | sorry_here |
-| `lemma-weil-pbc-smooth-curve-kummer-localization` | 1008 | sorry_here |
-| `lemma-weil-pbc-normalization-exact-sequence` | 1009 | sorry_here |
-| `lem-weil-pbc-associated-graded-ring-structure` | 1019 | none |
-| `lem-weil-pbc-thickening-system-pushforward-lifting-assembly` | 1022 | none |
-| `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
-| `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
-| `sbc-prop-extension-by-zero-and-arbitrary-base-change` | - | none |
-| `lem-pc-section-cohomology-untwisted-comparisons` | - | none |
-| `prop-nagata-relative-proj-functoriality` | - | none |
-| `def-nagata-relative-proj` | - | none |
-| `lemma-nagata-proj-chart-ring-cocycle` | - | none |
-| `lemma-nagata-relative-proj-exists` | - | none |
-| `lem-kun-fp-algebra-descent` | - | none |
 
-## Stage 2: nodes to state (8)
+## Stage 2: nodes to state (0)
 
-| node | distance to Mathlib | kind | blockers |
-|---|---|---|---|
-| `def-weil-cohomological-support` | 1 | state | 38 |
-| `def-weil-pure-dimension` | 1 | state | 11 |
-| `def-nagata-final-fp-envelope` | 4 | state | 5 |
-| `lem-weil-unique-subfield-of-closure` | 1 | state | 57 |
-| `lem-weil-geometrically-connected-algebraic-closure` | 1 | state | 11 |
-| `cor-weil-pbc-geometric-fiber-finite` | 1 | state | 0 |
-| `lem-weil-pbc-geometric-point-pullback-stalk` | 1 | state | 0 |
-| `lemma-nagata-final-open-immersion` | 3 | state | 0 |
-
-Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (141)
 
