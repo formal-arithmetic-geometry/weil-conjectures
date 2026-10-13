@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
 import Sheaf.CategoryTheory.Abelian.RHomDerivedRoofShift
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 

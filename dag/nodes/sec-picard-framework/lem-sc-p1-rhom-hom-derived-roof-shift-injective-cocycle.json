@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "parent Step 3, compatibility with a unit shift; Tags 06XR (1), 070I and 05TE"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "lem-sc-p1-rhom-hom-derived-roof",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-sc-p1-rhom-hom-derived-roof-shift-injective-cocycle",
+ "title": "Shift coherence on a single cocycle in an injective representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "parent Step 3, shift compatibility: original roof-shift node proof Step 1, compute on one cocycle in an injective complex",
+   "via": [
+    "lem-sc-p1-rhom-hom-derived-roof-shift",
+    "lem-sc-p1-rhom-hom-derived-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let C be an abelian category [def-sp-abelian] with enough injectives [def-sp-injective-resolutions], with chosen derived categories of C and abelian groups [def-weil-abstract-derived-category]. Put V=Hom(M,-) [def-sp-left-exact-additive], RV=R+V, H(j)=H^j, and S=M[0]. Let psi be additive equivalences H(j)(RV Z) ≃ Hom(S,Z[j]), satisfying the naturality and every-resolution roof equations written in [lem-sc-p1-rhom-hom-derived-roof]. For a bounded below degreewise injective complex I, put X=Q(I), K=I[1], J=V(K), and let f:M→K^n satisfy f d=0. Let a be the homology class of f, using the inverse of the concrete cycles isomorphism and the homology quotient map. Let q:quotient(K)≅quotient(I)[1] be the comparison formed from the inclusion of bounded below complexes, the homotopy quotient shift comparison, and the inverse inclusion of bounded below homotopy objects. Let e=Qh(q) followed by the shift comparison of Qh. Put b=H(n)(RV(e))(H(n)(unit_K)(homologyFunctorObjQIso(J,n)^{-1}(a))). Then psi_X^(n+1)(chi_X^n(b)) equals psi_(X[1])^n(b) followed by the shifted inclusion comparison and inverse shift-addition comparison, with chi exactly the homology shiftMap of the canonical shift comparison of RV followed by inclusion. This asserts the equation only for this explicitly constructed cocycle class, not for arbitrary classes or arbitrary derived objects.",
+ "proof": [
+  {
+   "text": " I and K = I[1] are bounded below complexes of injectives and hence are\nK-injective. Use their identity K-injective resolutions in hroof. If α is the\ncomplex comparison K.obj ≅ I.obj[1], the given cocycle f corresponds, via α and\nthe degreewise shift isomorphism, to a cocycle f' : M ⟶ I.obj.X (n+1).\nThe class b in the statement is the class of f on K, carried through the derived\nunit and the canonical quotient shift comparison e. The commShift property of\nthe derived unit identifies its image under the displayed homology shiftMap\nwith the class of f' on I, carried through the derived unit. The homology shift\nisomorphism sends f to f' without a sign: the shift is in the target complex,\nand the source is M concentrated in degree zero. Apply hroof for the identity\nresolutions of I and K to these two classes. Naturality along e gives the roof\nformula for the class b at X[1]. The resulting derived morphisms agree after\npostcomposition with the inclusion shift comparison and shift addition:\nshifting a morphism has unsigned components, and (I[1])[n] and I[n+1] both have\ndifferential (-1)^(n+1)d_I. The quotient comparisons in the roof formula commute\nwith shifts. Thus both sides are the localized morphism of the same cocycle f',\nwith the same quotient comparison appended. This argument concerns one cocycle;\nsurjectivity onto cohomology and transport to arbitrary derived objects are\nproved separately in the importing parent module.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "parent Step 3, compatibility with a unit shift; Tags 06XR (1), 070I and 05TE"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Parent first proof step, identity-resolution cocycle calculation; G1 spells out the comparison maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right derived Hom cocycle compatibility with unit shift on injective complexes",
+   "results": "Service returned Internal Server Error. No absence conclusion inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived cohomology Hom comparison commutes with shift of a bounded below injective complex",
+   "results": "Found CohomologyClass.toSmallShiftedHom_mk, bijective_toSmallShiftedHom_of_isKInjective and injective Ext comparisons. No theorem for the derived unit and its shiftMap.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.shiftMap",
+   "results": "Identifier unknown to search service; no usable result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*shift|commShift.*Unit|shiftMap",
+   "results": "ShiftSequence.shiftMap_comp and shiftMap_comp' handle transport. HomComplexShift constructs rightShift and equivHomShift. The library proves commShift_rightDerivedFunctorPlusUnit. No combined cocycle computation found.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RHomDerivedRoofShift",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.RHomDerivedRoofShiftInjective",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RHomDerivedRoofShiftInjective.lean",
+  "declaration": "CategoryTheory.Functor.rhom_hom_derived_roof_shift_injective_cocycle",
+  "statement": "theorem rhom_hom_derived_roof_shift_injective_cocycle\n    {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]\n    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) :\n    let V := preadditiveCoyoneda.obj (op M)\n    let RV := V.rightDerivedFunctorPlus\n    let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n\n    let S := (DerivedCategory.singleFunctor C 0).obj M\n    ∀ (ψ : ∀ (X : DerivedCategory.Plus C) (n : ℤ),\n        (H n).obj (RV.obj X) ≃+ (S ⟶ X.obj⟦n⟧))\n      (hnat : (∀ (X Y : DerivedCategory.Plus C) (g : X ⟶ Y) (n : ℤ)\n          (a : (H n).obj (RV.obj X)),\n        ψ Y n ((H n).map (RV.map g) a) =\n          ψ X n a ≫ ((DerivedCategory.Plus.ι (C := C)).map g)⟦n⟧'))\n      (hroof : (∀ (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj)\n          (hb : CochainComplex.plus C r.complex)\n          (_hi : ∀ k : ℤ, Injective (r.complex.X k)) (n : ℤ)\n          (f : M ⟶ r.complex.X n) (hf : f ≫ r.complex.d n (n + 1) = 0),\n        let I : CochainComplex.Plus C := ⟨r.complex, hb⟩\n        letI := r.quasiIso\n        let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅\n            (DerivedCategory.Plus.Q (C := C)).obj I :=\n          (DerivedCategory.Plus.ι (C := C)).preimageIso\n            ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫\n              asIso (DerivedCategory.Q.map r.map) ≪≫\n              (DerivedCategory.quotientCompQhIso C).app r.complex)\n        let J := V.rightDerivedComplexWithResolution K r\n        let a := J.homologyπ n ((J.sc n).abCyclesIso.inv\n          ⟨f, by\n            change f ≫ r.complex.d n ((ComplexShape.up ℤ).next n) = 0\n            rw [CochainComplex.next]\n            exact hf⟩)\n        let b := (DerivedCategory.Plus.homologyFunctorObjQIso\n          (V.mapCochainComplexPlus.obj I) n).inv a\n        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)\n        ψ ((DerivedCategory.Plus.Q (C := C)).obj K) n\n            ((H n).map (RV.map e.inv)\n              ((H n).map η b)) =\n          ShiftedHom.map (Cocycle.equivHomShift.symm\n              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫\n            (CategoryTheory.inv (DerivedCategory.Q.map r.map))⟦n⟧' ≫\n            ((DerivedCategory.quotientCompQhIso C).hom.app K.obj)⟦n⟧')),\n    ∀ (I : CochainComplex.Plus C) (_hi : ∀ k : ℤ, Injective (I.obj.X k)),\n      let X := (DerivedCategory.Plus.Q (C := C)).obj I\n      let K := I⟦(1 : ℤ)⟧\n      ∀ (n : ℤ) (f : M ⟶ K.obj.X n)\n        (hf : f ≫ K.obj.d n ((ComplexShape.up ℤ).next n) = 0),\n      let J := V.mapCochainComplexPlus.obj K\n      let a := J.obj.homologyπ n ((J.obj.sc n).abCyclesIso.inv ⟨f, hf⟩)\n      let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj K)\n      let q : (HomotopyCategory.Plus.quotient C).obj K ≅\n          ((HomotopyCategory.Plus.quotient C).obj I)⟦(1 : ℤ)⟧ :=\n        (HomotopyCategory.Plus.ι C).preimageIso\n          ((HomotopyCategory.quotient C (.up ℤ)).mapIso\n              (((CochainComplex.Plus.ι C).commShiftIso (1 : ℤ)).app I) ≪≫\n            ((HomotopyCategory.quotient C (.up ℤ)).commShiftIso (1 : ℤ)).app I.obj ≪≫\n            ((HomotopyCategory.Plus.ι C).commShiftIso (1 : ℤ)).symm.app\n              ((HomotopyCategory.Plus.quotient C).obj I))\n      let e := (DerivedCategory.Plus.Qh (C := C)).mapIso q ≪≫\n        ((DerivedCategory.Plus.Qh (C := C)).commShiftIso (1 : ℤ)).app\n          ((HomotopyCategory.Plus.quotient C).obj I)\n      let b := (H n).map (RV.map e.hom)\n        ((H n).map η ((DerivedCategory.Plus.homologyFunctorObjQIso J n).inv a))\n      ψ X (n + 1)\n          ((DerivedCategory.homologyFunctor AddCommGrpCat.{v} 0).shiftMap\n            (((RV ⋙ DerivedCategory.Plus.ι).commShiftIso (1 : ℤ)).hom.app X)\n            n (n + 1) (by omega) b) =\n        ψ (X⟦(1 : ℤ)⟧) n b ≫\n          (((DerivedCategory.Plus.ι (C := C)).commShiftIso (1 : ℤ)).hom.app X)⟦n⟧' ≫\n          (shiftFunctorAdd' (DerivedCategory C) 1 n (n + 1) (by omega)).inv.app X.obj",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-7baaa",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095954-L-2459150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-7baaa",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095954-L-2459150",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both nodes, the declared import change, and report; all delivered modules and direct importer RHomDerivedConnecting compile cleanly; original Connecting fails as reported, confirming the minimal forced adaptation; axioms are permitted with sorryAx for remaining holes."
+ }
+}
