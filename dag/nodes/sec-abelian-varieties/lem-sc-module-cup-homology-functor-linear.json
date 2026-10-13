@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-module-cup-homology-functor-linear",
+ "kind": "statement",
+ "title": "Linearity of derived module homology",
+ "statement": "Let k be a commutative ring and choose the derived category of ModuleCat k as in [def-weil-derived-category-cohomology-functor]. For every integer n, its degree-n homology functor is k-linear.",
+ "stmt_deps": [
+  "def-weil-derived-category-cohomology-functor"
+ ],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Localization/Linear.lean",
+  "place": "Localization.functor_linear_iff, line 79; Mathlib/Algebra/Homology/ShortComplex/Linear.lean, ShortComplex.homologyFunctor_linear, line 194"
+ },
+ "proof": [
+  {
+   "text": "The short-complex functor preserves scalars componentwise. Compose it with the k-linear short-complex homology functor. Use homologyFunctorFactors as the lifting isomorphism and Localization.functor_linear_iff to descend k-linearity to the derived homology functor.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-category-cohomology-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Localization/Linear.lean",
+  "place": "Localization.functor_linear_iff, line 79; Mathlib/Algebra/Homology/ShortComplex/Linear.lean, ShortComplex.homologyFunctor_linear, line 194",
+  "note": "M1 second-reading repair: explicit canonical evaluation; no arbitrary equivalence is normalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology functor of the derived category of modules is linear over the coefficient ring",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homology functor from the derived category of modules over a commutative ring is linear by descent along localization from the short complex homology functor",
+   "date": "2026-10-14",
+   "results": "DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instLinear; CategoryTheory.ShortComplex.homologyFunctor_linear; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; DerivedCategory.instLinearHomotopyCategoryIntUpQh; DerivedCategory.instLinearSingleFunctor; CategoryTheory.ShortComplex.rightHomologyFunctor_linear; CategoryTheory.ShortComplex.opcyclesFunctor_linear",
+   "verdict": "Related infrastructure; no exact declaration of this specialized construction or assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.functor_linear_iff",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Localization.functor_linear_iff",
+   "verdict": "Related infrastructure; no exact declaration of this specialized construction or assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor_linear|functor_linear_iff",
+   "date": "2026-10-14",
+   "results": "Mathlib/CategoryTheory/Localization/Linear.lean; Mathlib/CategoryTheory/Shift/Linear.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/ShortComplex/Linear.lean; Mathlib/Algebra/Homology/ShortComplex/Linear.lean; Mathlib/Algebra/Homology/ShortComplex/Linear.lean",
+   "verdict": "Related infrastructure; no exact declaration of this specialized construction or assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupHomologyRepresentability",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "General theorem of cube: derived module cup construction, shifted-free homology representability",
+   "via": [
+    "lem-sc-module-cup-homology-representability",
+    "lem-sc-module-cup-realization-evaluation",
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-derived-homology-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupHomologyFunctorLinear",
+  "file": "lean/Sheaf/Paper/ModuleCupHomologyFunctorLinear.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cupHomologyFunctor_linear",
+  "statement": "theorem cupHomologyFunctor_linear (n : ℤ) :\n    (DerivedCategory.homologyFunctor (ModuleCat.{u} k) n).Linear k",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T224514-L-1473237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T224514-L-1473237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

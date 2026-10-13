@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupHomologyRepresentability",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "General theorem of cube cohomological cup construction: comparison of products computed with acyclic resolutions; Natural tensor pairing on derived module homology with cycle normalization; Homology represented by the shifted free module with its cocycle formula",
+   "via": [
+    "lem-sc-module-cup-derived-homology-tensor",
+    "lem-sc-module-cup-equal-derived-maps-class",
+    "lem-sc-module-cup-realization-evaluation",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "lem-sc-module-cup-homology-representability",
+ "title": "Homology represented by the shifted free module with its cocycle formula",
+ "statement": "Let k be any commutative ring in universe u and choose the derived category of ModuleCat k in universe u [def-weil-derived-category-cohomology-functor]. Let S(n) be the single complex with free rank-one module k in integer degree n, equivalently k[-n]. There is a family of k-linear equivalences Hom_D(Q(S(n)),A) to H^n(A), for all derived objects A and all integers n, natural for postcomposition in A. If f:S(n) to K is a chain map and z is a degree-n cycle of K whose inclusion equals the value at 1 of f in degree n (transported through singleObjXSelf), the equivalence sends Q(f) to homologyFunctorFactors.inv applied to homology projection of z. This is exactly Nonempty CupHomologyRepresentability k.",
+ "stmt_deps": [
+  "def-weil-derived-category-cohomology-functor"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/064B",
+  "place": "Lemma 13.19.8: Hom from a bounded-above projective complex in the homotopy and derived categories; Tag 068G: cohomology classes represented by cocycles"
+ },
+ "proof": [
+  {
+   "text": "Use the explicitly constructed cupHomologyEvaluation map, whose linearity is proved by descending complex homology. Its bijectivity gives a LinearEquiv.ofBijective for each A and n; the inverse is uniquely determined by the concrete map.",
+   "uses": [
+    "def-sc-module-cup-homology-evaluation",
+    "lem-sc-module-cup-homology-evaluation-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functor.map_comp proves naturality for postcomposition. For the cocycle formula, naturality of homologyFunctorFactors.inv transports to homologyMap f. Rewrite the single-complex generator as homology projection of singleObjCyclesSelfIso.inv(1). The cyclesMap_i identity and injectivity of iCycles identify its image with the supplied cycle z. Homology projection naturality then gives exactly the stated on_cycles field.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "def-sc-module-cup-homology-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-homology-evaluation",
+  "lem-sc-module-cup-homology-evaluation-bijective",
+  "def-weil-derived-category-cohomology-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/064B",
+  "place": "Lemma 13.19.8; canonical evaluation on the homology generator and homology factorization naturality",
+  "note": "M1 returned-delivery repair: restore the unchanged N4 interface removed by red-build rollback, construct equivalences directly from canonical evaluation, and prove naturality and cocycle normalization; only evaluation bijectivity is postponed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology is represented by shifted free rank one modules in the derived category, compatibly with tensor cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a single free rank one module in the derived category is naturally isomorphic to homology with cocycle representative formula",
+   "results": "Eight hits: projective/injective Ext representative formulas and HomComplex.homologyAddEquiv, toSmallShiftedHom_mk. None has the stated ModuleCat homology linear equivalence with evaluation at 1.",
+   "date": "2026-10-14",
+   "verdict": "related infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mkHomFromSingle",
+   "results": "mkHomFromSingle, mkHomFromSingle_f, and evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply. These construct a cycle map but do not identify its derived homology class or normalize the shifted tensor.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*tensor|tensor.*single|homology.*equiv|equiv.*homology",
+   "results": "Search service: 25 group homology and representation hits, no exact theorem. Local sources: HomComplex.homologyAddEquiv, IsKProjective.Qh_map_bijective, isKProjective_of_projective, mapBifunctorSingle1Iso and FlatModel.QObjTensorQObjIsoOfKFlatLeft give the needed infrastructure but not the complete normalized interfaces. Existing DAG node lem-pc-ring-derived-map-representative covers the K-projective localization fact; lem-pc-module-bounded-flat-kflat and lem-pc-source-kflat-module-tensor-model cover the K-flat computation.",
+   "date": "2026-10-14",
+   "verdict": "no duplicate normalized interface"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupHomologyRepresentability",
+  "file": "lean/Sheaf/Paper/ModuleCupHomologyRepresentability.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cupHomologyRepresentability",
+  "statement": "theorem exists_cupHomologyRepresentability : Nonempty (CupHomologyRepresentability k)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T224514-L-1473237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T224514-L-1473237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
