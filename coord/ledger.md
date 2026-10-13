@@ -13818,3 +13818,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: returned deliver/C1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionCore (reviewer RETURN: (reviewer X-1349a, head 1349a3275) C5: In lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitUnionCore.lean delete the)
 - 23:15 L: merged deliver/B2/Sheaf.Algebra.Homology.BaseDerivedTensorRestrictedRingComparison (stage 3; reviewer PASS; first push; landing 20261013T231528-L-1814595 (interface); batch 20261013T231527; modules 4; new nodes 3)
 - 23:15 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoherentCoordinateData (stage 3; reviewer PASS; first push; landing 20261013T231529-L-1814751 (interface); batch 20261013T231527; modules 2; new nodes 1)
+- 23:15 L: merged deliver/B3/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261013T231529-L-1814945 (proof); batch 20261013T231527; modules 1; new nodes 0)
