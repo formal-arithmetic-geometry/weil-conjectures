@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-picard-direct-image-fibre-cohomology-negative",
+ "kind": "statement",
+ "title": "Negative residue cohomology of a proper flat line-bundle direct image",
+ "statement": "Let f:X→S be flat, proper and locally finitely presented. Let L be an invertible module on X. Fix derived-category localizations for every scheme. For any scheme W, morphism k:W→S, and w∈W, put E=R(f_W)_*(L_W[0]). Then H^j(Li_w^* E), evaluated on Spec kappa(w) and restricted to kappa(w) along GammaSpecIso, is a zero module for every j<0. No descent, structure-unit assumption, or immersion is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-base-change",
+  "def-pc-derived-direct-image",
+  "def-sc-derived-fiber-betti"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF2, displayed derived fibre equality before the first source complex; 0BF0; 0B91(2)"
+ },
+ "proof": [
+  {
+   "text": "Tensor pullback and ordinary pullback are the same left adjoint to pushforward. Transport invertibility of L_W through this isomorphism, giving finite local freeness and finite presentation. On affine opens, its sections are projective and flat over the structure ring; scalar-tower transitivity with flatness of f_W gives relative flatness. Derive additivity of every tensor pullback from its left adjunction and choose standard localizations for the open sites of W.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-invertible-sheaf-instance",
+    "lem-pc-finite-flat-affine-sections-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack the defining derived pullback comparison at the single complex. Form the canonical derived module base-change map at Spec kappa(w) and apply perfect_derivedDirectImage_baseChange to make it an isomorphism.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-derived-direct-image",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The isGE_rightDerivedFunctor_obj_singleFunctor corollary of the proved unbounded/bounded-below compatibility says that the right-derived image of the ordinary fibre module has no negative cohomology. Transport its zero homology along the base-change isomorphism. Evaluation sends its identity to zero; hence its global sections are subsingleton. Restriction of scalars changes only the action, so the derived fibre cohomology vector space is subsingleton, and thus a zero ModuleCat object.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-sc-derived-fiber-betti",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-pc-invertible-sheaf-instance",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-rf-perfect-base-change",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0BF2, displayed derived fibre equality before the first source complex; 0BF0; 0B91(2)",
+  "note": "Complete Lean proof from existing declarations; no remaining sorry or change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat direct image of an invertible sheaf has no negative derived residue cohomology and fibre H0 is the residue field when the fibre is trivial and pushforward of the structure sheaf is the structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Negative cohomology of the derived fibre of a proper direct image of a relatively flat line bundle vanishes",
+   "results": "DerivedCategory.isZero_of_isGE and CochainComplex.isZero_of_isGE give abstract vanishing but not the needed geometric base change identification. No exact comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat, IsZero",
+   "results": "No hits; service reported unknown identifier IsZero. Local source search confirms ModuleCat.isZero_iff_subsingleton.",
+   "date": "2026-10-13",
+   "verdict": "no geometric match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_eq|isZero.*subsingleton in Mathlib/Algebra/Category/ModuleCat; derivedFiberBetti|derivedFiberCohomology|fibre_homology_iso in lean/Sheaf and lean/WeilConjectures",
+   "results": "PicardFiberDirectImageRankConstructible has a private fibre_homology_iso with extra localization and additivity instances. DerivedResidueUnitBetti computes the structure single but not the descended line-bundle fibre. Neither applies directly; their constructions explain the two remaining steps. Mathlib ModuleCat/Basic.lean has isZero_iff_subsingleton; the other finrank matches in ModuleCat do not give geometric cohomology comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no directly applicable public theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology in negative degrees of right derived pushforward of a relatively flat sheaf after residue field base change",
+   "results": "Eight hits, including DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective and Functor.isZero_rightDerived_obj_injective_succ. These concern maps into injective singles and classical positive-degree derived functors; none identifies geometric derived residue cohomology.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageFibreBetti",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-direct-image-fibre-betti",
+   "place": "cohomology step before taking dimensions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardDirectImageFibreCohomologyNegative",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDirectImageFibreCohomologyNegative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_directImage_fibre_cohomology_negative",
+  "statement": "theorem picard_directImage_fibre_cohomology_negative\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{v}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) (w : W) :\n    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst f k)).obj L))\n    ∀ j : ℤ, j < 0 → IsZero (derivedFiberCohomology W E j w)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T125448-L-3875319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T125448-L-3875319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

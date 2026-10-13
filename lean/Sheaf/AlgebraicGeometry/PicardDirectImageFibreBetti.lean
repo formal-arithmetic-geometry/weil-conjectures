@@ -15,8 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.PicardDirectImageFibreCohomologyNegative
+import Sheaf.AlgebraicGeometry.PicardDirectImageFibreCohomologyZero
 
 /-! # Fibre Betti numbers for a descended line bundle
 
@@ -71,6 +71,15 @@ theorem picard_directImage_fibre_betti
         (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
           ((Modules.tensorPullback (pullback.fst f k)).obj L))
     (∀ j : ℤ, j < 0 → derivedFiberBetti W E j w = 0) ∧
-      derivedFiberBetti W E 0 w = 1 := by sorry
+      derivedFiberBetti W E 0 w = 1 := by
+  constructor
+  · intro j hj
+    have hz := picard_directImage_fibre_cohomology_negative f L W k w j hj
+    let : Subsingleton (derivedFiberCohomology W _ j w) :=
+      ModuleCat.isZero_iff_subsingleton.mp hz
+    exact Module.finrank_zero_of_subsingleton
+  · obtain ⟨e⟩ := picard_directImage_fibre_cohomology_zero f hO L W k w s hw hLs
+    exact e.toLinearEquiv.finrank_eq.trans (Module.finrank_self _)
+
 
 end AlgebraicGeometry.Scheme
