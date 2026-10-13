@@ -23,9 +23,124 @@
   "def-weil-pbc-condensed-e-module-category",
   "def-weil-pbc-cartesian-square"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an algebraic E-basis (b_i)_{i in I} of Ω. On any profinite S a section of underline Ω lies in a finite overfield F containing E. The E-linear coordinate map F ≅ E^[F:E] is a homeomorphism: view it as a Q_ell-linear equivalence and apply the finite-dimensional linear-homeomorphism leaf. The finitely many coordinates of a basis of F involve only finitely many b_i, so the section has a unique finite sum ∑ b_i a_i with continuous a_i:S→E. Conversely such a finite sum takes values in the finite compositum of the fields containing its finitely many b_i. These assignments commute with restrictions. The finite-support presheaf is a sheaf, since a finite jointly surjective cover uses only finitely many supports. Thus underline Ω ≅ ⊕_I underline E as modules. Apply the monoidal left adjoint p_T^* to get Ω_T^c ≅ ⊕_I E_T^c, compatibly for every T and every edge. This is a module identification only, not an identification of rings.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+    "def-weil-finite-subextension-directed-set",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  },
+  {
+   "text": "After forgetting the Ω-action, T_{E,Ω}^T M is ⊕_I M: the map on the i-th summand is m↦b_i⊗m and its inverse is the coordinate expansion from step 1. Tensor balancing proves the two composites are identities. Sheaf sums are exact (sectionwise module sums followed by exact sheafification), so this extension of scalars is exact and its derived functor is computed termwise. A local finite presentation (E_T^c)^m→(E_T^c)^n→M→0 tensors to the same finite presentation over Ω_T^c; its strata remain the same and cohomology commutes with the exact extension. Consequently T_{E,Ω} preserves bounded constructibility. Restriction of scalars V_T is exact, and preserves injectives: Hom_E(-,V_T J)=Hom_Ω(T_{E,Ω}(-),J) is exact for injective J. It also preserves K-injectives by the same adjunction on complexes, since exact scalar extension takes acyclic complexes to acyclic complexes.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  },
+  {
+   "text": "For h:T→U use the common coefficient identifications h^{-1}E_U^c=E_T^c and h^{-1}Ω_U^c=Ω_T^c. The pullback comparison α_h:T_T l_{h,E}→l_{h,Ω}T_U sends a simple tensor b⊗m to the identical tensor after inverse image, with inverse obtained by reversing this identification. This holds termwise because both pullback and scalar extension are exact; the coefficient inverse-image composition comparisons make α coherent with identity and composition of h. Restrictions V commute with pullbacks termwise. They commute with derived pushforwards by computing with a K-injective Ω-resolution, which remains K-injective after V by step 2: V_U r_{h,Ω}=r_{h,E} V_T. On each basis summand the canonical pushforward comparison δ_h:T_U r_{h,E}→r_{h,Ω}T_T is r_{h,E}(j_i), where j_i:K→V_T T_T K sends k to b_i⊗k. To verify this is the specified comparison, its adjunct under l_{h,Ω}⊣r_{h,Ω} is T_T(ε_{h,E})∘α_h^{-1} evaluated on r_{h,E}K; on a simple tensor this sends b_i⊗l_h r_h K to b_i⊗K by ε_h. The adjunction bijection therefore gives exactly r_h(j_i).",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  },
+  {
+   "text": "The morphisms f and f' are proper, the latter by proper base change. Therefore both are quasi-compact and quasi-separated: finite type includes quasi-compactness and their diagonals are closed immersions, hence affine and quasi-compact. The base change of either by an affine pro-etale object is still qcqs. Apply the pro-etale bounded-below coproduct node to the family consisting of copies of K, with its common lower bound. The E_T^c are sheaves of Q-algebras. Under step 1 and the exact conservative restriction V, δ_h is precisely ⊕_I r_{h,E}K→r_{h,E}(⊕_I K), by the summand calculation in step 3, so it is an isomorphism. This applies to h=f and f'. No assertion for arbitrary unbounded families or a general non-qcqs morphism is used.",
+   "uses": [
+    "lem-weil-pbc-proetale-bounded-below-coproducts",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "Stacks proetale.tex, Tag 09A3, lemma-quasi-compact-quasi-separated-commutes-direct-sums; bounded-below use only"
+   }
+  },
+  {
+   "text": "The finite-E condensed realization node gives preservation of C_E^c by each l_h and r_h. Step 2 gives preservation by T_{E,Ω}. The schemes are topologically noetherian: their finite-type structure maps are quasi-compact, and the locally noetherian finite-type node applies over Spec k; a finite affine noetherian cover gives a noetherian underlying space. To check preservation of C_Ω^c, take an arbitrary object L of that category. The object-descent clause of the condensed two-colimit node writes L≅T_{F,Ω}L_F for a finite F and L_F∈C_F^c. Apply step 3 for pullback and, for the proper edges f and f', step 4 for pushforward, with E replaced by F; they identify l_{h,Ω}L and r_{h,Ω}L with scalar extensions of the corresponding finite-F outputs. Those outputs are bounded constructible by realization, and their extensions are bounded constructible by step 2. Thus the comparisons used here restrict to the full bounded constructible subcategories. At K, S_K is l_{g,Ω}(δ_f)∘α_g and U_K is r_{f',Ω}(α_{g'})∘δ_{f'}; all their factors are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "def-weil-pbc-condensed-e-module-category",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  },
+  {
+   "text": "Keep the exact restriction/pullback and restriction/pushforward identifications from step 3. They identify V(η_{h,Ω}) and V(ε_{h,Ω}) with η_{h,E} and ε_{h,E} at the underlying objects: in the adjunction Hom bijection the identity of the underlying pullback has adjunct the underlying unit, and the identity of the underlying pushforward has adjunct the underlying counit. The comparison θ for the square is identified as well, since it compares termwise inverse images of the same composite scheme morphism using the coherent coefficient comparisons of the point-pullback node. Substitution in the specified three-factor formula gives V(B_Ω(L))=B_E(V_X L). This checks compatibility of the specified arrows, without presupposing any coefficient-exchange theorem.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  },
+  {
+   "text": "Use the basis inclusions j_i^X:K→V_X T_X K. After V_{Y'}, the i-th summand of S_K is l_{g,E}r_{f,E}(j_i^X), by α_g and the summand formula for δ_f. The i-th summand of U_K is r_{f',E}l_{g',E}(j_i^X), by δ_{f'} and α_{g'}. Naturality of B_E at j_i^X gives B_E(V_X T_X K)∘l_{g,E}r_{f,E}(j_i^X)=r_{f',E}l_{g',E}(j_i^X)∘B_E(K). Step 6 identifies the left exchange factor with V(B_Ω(T_X K)), and termwise scalar extension identifies V(T_{Y'}B_E(K)) with the sum of copies of B_E(K). These are exactly the desired two routes on each summand of their common source ⊕_I l_{g,E}r_{f,E}K. The coproduct universal property makes the routes equal after V, and faithful restriction gives equality before V. Neither B_E nor B_Ω was assumed invertible.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+    "place": "finite-to-Qbar transport paragraph; expanded coefficient and adjunction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-bounded-below-coproducts",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "Expanded coefficient-basis argument, bounded-below Stacks 09A3 continuity, and explicit restriction/summand calculation for the specified exchange"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "item": "nt-target-proetale-qbar",
@@ -94,5 +209,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-pbc-qbar-condensed-basechange-compatibility",
+  "worker": "stage1",
+  "summary": "Second reader repaired the unproved pushforward-isomorphy clause. A finite-support algebraic basis identifies the specified coefficient sheaf as a sheaf coproduct; bounded-below pro-etale coproduct continuity proves the canonical push comparison invertible. Object descent and finite-E realization give the constructible restrictions. Exact restriction and a summand-wise naturality calculation prove equality of the specified exchange arrows. Two new nodes, one a Mathlib leaf. Statement unchanged.",
+  "blueprint": "Realizes thm-weil-pbc-qbar proof paragraph 1, specifically the finite-to-Qbar condensed coefficient interface and scalar-compatible exchange maps."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-e1c97a6e7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-e1c97a6e7 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. The item preserves all hypotheses, coefficient categories, specified base-change morphism, and non-invertibility clauses. All seven proof steps, cited nodes, unit route, Stacks Tag 09A3 adaptation, Mathlib leaf, edge cases, and duplicate checks were verified. Review written to review.md; no repairs needed."
  }
 }
