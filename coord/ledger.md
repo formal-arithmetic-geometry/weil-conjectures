@@ -11579,3 +11579,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:44 L: returned deliver/C2/Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback (reviewer RETURN: (reviewer X-43451, head 434511728) H10: The required lcompile.py --all command on the delivered files timed out after 60)
 
 - 15:57 L: batch 20261013T072335 dependency take-out
+- 08:05 L: returned deliver/N3/Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition (reviewer RETURN: (reviewer X-3e46c, head 3e46c2222) C4: In dag/nodes/sec-picard-framework/lem-pc-single-complex-tensor-stalk-coordinates.)
