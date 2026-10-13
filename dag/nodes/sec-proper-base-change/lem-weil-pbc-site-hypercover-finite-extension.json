@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-qbar",
-   "place": "Proof paragraph 1: affine weakly contractible hypercover construction in the 09A3 argument; split-skeleton extension at each degree.",
+   "place": "Proof paragraph 1: \"at every finite stage it is an isomorphism by [thm-weil-pbc-finite-extension]\"; downstream categorical split-skeleton attachment used by the finite-basis hypercover construction along the recorded via chain.",
    "via": [
     "lem-weil-pbc-site-finite-basis-hypercover-existence",
     "lem-weil-pbc-proetale-affine-acyclic-hypercover",
@@ -26,9 +26,65 @@
   "def-weil-pbc-simplicial-coskeleton",
   "def-weil-pbc-formal-coproduct"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put h=n+1 and P_r={U_{r,i}}_{i∈N_r} for r≤n, P_h=V. For q≤n let H_q be the formal family of triples (r,σ,i), with σ:[q]↠[r] and i∈N_r. The split hypothesis gives a componentwise isomorphism E_q:H_q→K_q, whose component e_{σ,i} is K(σ)|_{U_{r,i}}. Set H_h to the displayed new family, also regarding V_j as the triple (h,id,j). Eventually transport the operators on H_q through E_q for q≤n, so the resulting L agrees exactly with K in those degrees. Each H_q has finite index set: N_r is a subset of finite I_r, and there are finitely many functions between any two finite ordinals.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, construction of the extension; Tag 0DAU, split decomposition"
+   }
+  },
+  {
+   "text": "For every α:[q]→[h] with q≤n define B_α:V→K_q as follows. Choose a missing value a of α and write α=δ_aβ; put B_α=K(β)v_a. For two missing values a<b, α factors through the injection κ omitting both a and b, say α=κγ. Writing κ=δ_aδ_{b-1}=δ_bδ_a gives K(β)v_a=K(γ) d_{b-1}v_a and K(β′)v_b=K(γ) d_a v_b. These agree by the defining equality of the limit M. For n=0 no map α:[q]→[1] with q≤0 can omit both values, so there is no independence condition. Moreover B_{αβ}=K(β)B_α whenever q,p≤n and β:[p]→[q], using the same missing value a. For a proper injection τ:[t]↪[h] write b_τ=B_τ; for an injection τ:[t]↪[r] with r≤n, write b_τ=K(τ)|_{P_r}. These are morphisms of formal families, including their index functions, and they obey b_{τη}=K(η)b_τ for injections η into [t]. Set b_id=id on P_r, including P_h.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, construction of faces from the boundary map"
+   }
+  },
+  {
+   "text": "Define F(α):H_b→H_a for EVERY order-preserving α:[a]→[b], a,b≤h. On a source summand (r,σ,i), factor σ α=τ ρ uniquely, where ρ:[a]↠[t] enumerates the image and τ:[t]↪[r] is its increasing inclusion. If t=h then a=b=r=h and σ=α=τ=ρ=id, so use the identity on V_i. Otherwise apply the component of b_τ to P_{r,i}, obtaining an index k of K_t and a map f:P_{r,i}→U_{t,k}. The split bijection writes k uniquely as K(λ)(j), λ:[t]↠[u], j∈N_u. Send this component to the summand (u,λρ,j) of H_a by e_{λ,j}^{-1}f. This includes maps into the new degree even when α is not surjective, and all nonidentity endomorphisms of [h]. For a,b≤n it is exactly E_a^{-1}K(α)E_b, because K(ρ)K(τ) applied to the source component is K(σα), and K(ρ)e_{λ,j}=e_{λρ,j}. The last equality also proves that a surjection α simply sends (r,σ,i) to (r,σα,i) with identity component.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, lemma-hypercovering-object, verification of simplicial identities and splitness; Tag 0DAU"
+   }
+  },
+  {
+   "text": "Check composition for α:[a]→[b] and β:[p]→[a] componentwise. In the notation of step 3, let k=K(λ)(j) be the index of b_τ(i). Factor ρβ=ηγ, with η:[s]↪[t], γ:[p]↠[s]. Then σαβ=(τη)γ is the image factorization for the composite, and b_{τη}(i)=K(η)b_τ(i) by step 2 (or functoriality of K when r≤n). The second operator, applied to the intermediate summand (u,λρ,j), factors λρβ: factor λη=ξζ, with ξ injective and ζ surjective, so its image factorization is ξ(ζγ). Since t,u,s≤n, functoriality in the old truncation gives K(η)e_{λ,j}=K(λη)|_{P_{u,j}}=K(ζ)K(ξ)|_{P_{u,j}}. If K(ξ)(j)=K(μ)(l), split normalization therefore makes the final label (w,μζγ,l) and final component e_{μ,l}^{-1}(K(ξ)|_{P_{u,j}}) e_{λ,j}^{-1}f on the two-step route. On the direct route K(η)f=K(ζ)(K(ξ)|_{P_{u,j}})e_{λ,j}^{-1}f; its normalization uses label μζ in degree s and e_{μζ,l}=K(ζ)e_{μ,l}, giving exactly the same final label and component. All these e-maps are the component isomorphisms supplied by the split hypothesis. The exceptional t=h case is an identity operator, and if the direct composite has image h then both factors are identities on [h]. Thus F(β)F(α)=F(αβ) in every case; the identity formula follows by normalizing σ itself. Transport F through E_q in degrees q≤n and the identity in degree h to obtain the required functor L. Surjections into degree h send the old normalized labels to (r,σα,i), with identity components, so their images are exactly all summands with r≤n and none in J. Every such summand is obtained using σ itself. Hence the new nondegenerate set is J and the split component maps are identities. Step 2 gives the prescribed faces on V, while step 3 in a lower target gives K(σδ_a) on each old degenerate summand. Finiteness follows from step 1. When n=0, L_1=V⨿K_0. When n=1, the three surjections give the families P_0 and two copies of P_1, so L_2=V⨿P_0⨿P_1⨿P_1; the actual number of old summands is |N_0|+2|N_1|, not necessarily three. Empty families, empty objects, and J=∅ require no change to any formula.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton",
+    "def-weil-pbc-formal-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 0DAV, final construction clauses; n=0 convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-coskeleton",
+  "def-weil-pbc-formal-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 0DAV (lemma-hypercovering-object), proof; Tag 0DAU (lemma-split)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,15 +113,51 @@
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a truncated split simplicial object by specifying the next nondegenerate objects and their compatible faces",
+   "results": "8 hits: CategoryTheory.SimplicialObject.Truncated.trunc, CategoryTheory.SimplicialObject.truncation, CategoryTheory.SimplicialObject.Truncated.sk, CategoryTheory.SimplicialObject.Truncated, CategoryTheory.SimplicialObject.instCategoryTruncated, CategoryTheory.SimplicialObject.sk, CategoryTheory.SimplicialObject.Truncated.cosk, CategoryTheory.SimplicialObject.Truncated.trunc_obj_obj",
+   "date": "2026-10-14",
+   "verdict": "no match: restrictions, full simplicial splitting, or split epimorphisms of the indexing category, not attachment of prescribed nondegenerate families"
+  },
+  {
+   "tool": "grep",
+   "query": "Splitting|split.*trunc|trunc.*split",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean, Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean, Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: restrictions, full simplicial splitting, or split epimorphisms of the indexing category, not attachment of prescribed nondegenerate families"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Truncated\", \"Split\"",
+   "results": "1 hits: SimplexCategory.Truncated.instSplitEpiCategory",
+   "date": "2026-10-14",
+   "verdict": "no match: restrictions, full simplicial splitting, or split epimorphisms of the indexing category, not attachment of prescribed nondegenerate families"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-site-finite-basis-hypercover-existence",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-site-hypercover-finite-extension",
+  "worker": "stage1",
+  "summary": "Repaired the omitted verification in Stacks 0DAV using normalized split coordinates: constructed compatible boundary operators, defined every ordinal operator (including maps into the new degree and its endomorphisms), and checked composition by explicit image factorization and cancellation of the split component isomorphisms. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the downstream split-skeleton attachment in the recorded via chain beneath thm-weil-pbc-qbar, whose proof paragraph 1 invokes the finite-stage isomorphism by thm-weil-pbc-finite-extension. The blueprint paragraph itself does not describe an affine hypercover construction."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-f3bc398cd",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-f3bc398cd (reviewer sub-agent of L); spot-checked: Mathematics, source checks, edge cases, route, duplicate search, and target coefficient/base-change signatures pass. The delivered node incorrectly records created.item as lem-weil-pbc-site-finite-basis-hypercover-existence; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-site-hypercover-finite-extension.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
