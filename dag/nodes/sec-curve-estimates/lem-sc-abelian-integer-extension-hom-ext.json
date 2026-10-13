@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-abelian-integer-extension-hom-ext",
+ "kind": "statement",
+ "title": "Integer extension maps determined by their unit image",
+ "statement": "Let X be a topological space, F an abelian sheaf, and U an open of X. Let E_U be the extension by zero to X of the constant integer sheaf on U [def-sc-abelian-open-extension-by-zero, def-weil-pbc-constant-sheaf]. Let e_U in E_U(U) be the canonical unit section obtained by applying the constant-presheaf sheafification unit to integer one and the canonical extension section. The evaluation map Hom(E_U,F) → F(U), f ↦ f_U(e_U), is injective. No nonempty, compactness or connectedness hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00A5 (extension by zero adjunction); https://stacks.math.columbia.edu/tag/00A5; integer generators used in Cohomology, Lemma 0A38, https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "stmt_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For x in U, the integer multiples of the canonical unit germ exhaust the source stalk by the integer-germ coordinates theorem. Naturality and additivity imply that two maps with the same unit image agree on this stalk.",
+   "uses": [
+    "lem-sc-abelian-open-extension-integer-germ-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x outside U the source stalk is zero by extension-by-zero stalks, so the two stalk maps agree there as well. Apply Mathlib TopCat.Presheaf.section_ext to images of arbitrary sections and then additive, natural-transformation and sheaf-map extensionality.",
+   "uses": [
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-open-extension-integer-germ-coordinates",
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00A5",
+  "place": "Extension-by-zero adjunction, specialized to constant integers; explicit unit compatibility as used in 0A38."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms out of extension by zero of the constant integer sheaf agreeing on the section one are equal",
+   "date": "2026-10-13",
+   "results": "8 results, including TopCat.Sheaf.hom_ext, TopCat.Presheaf.section_ext, CategoryTheory.Presheaf.IsSheaf.hom_ext. These detect equality on entire components or germs, not solely the integer-one image.",
+   "verdict": "No packaged exact result; section_ext is used after proving stalk-map equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheafAdj\"",
+   "date": "2026-10-13",
+   "results": "5 results, including CategoryTheory.constantSheafAdj and its counit formulas. The adjunction applies on the open subspace; our explicit slice extension still requires the extension-unit comparison.",
+   "verdict": "Useful universal property, but no exact theorem for the concrete extension unit. Reuse the existing germ-coordinate theorem for uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*homEquiv|sheafify_hom_ext|existsUnique_gluing",
+   "date": "2026-10-13",
+   "results": "20 Mathlib hits, including sheafify_hom_ext, existsUnique_gluing and GlobalSections homEquiv. Repository rg additionally found abelianOpenExtension_integer_germ_coordinates, abelianOpenExtensionByZero_stalks, and the private section construction in ConstantSubsheafQuotientGluing and AbelianSheafLocalIntegerGenerator.",
+   "verdict": "Reuse proved integer-germ coordinates and extension stalks for uniqueness, and the local-generator proof helpers for existence; no new sorry needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from extension by zero of the constant integer sheaf is uniquely determined by its image of the section one",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical conclusion drawn.",
+   "status": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafPositiveRefinementFactor",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-constant-subsheaf-positive-refinement-factor",
+   "place": "unit-section universal property substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianIntegerExtensionHomExt",
+  "file": "lean/Sheaf/Topology/AbelianIntegerExtensionHomExt.lean",
+  "declaration": "TopCat.Sheaf.abelianIntegerExtension_unit_injective",
+  "statement": "theorem abelianIntegerExtension_unit_injective\n    (X : TopCat.{u}) (F : Sheaf AddCommGrpCat.{u} X) (U : Opens X) :\n    Function.Injective (fun f : (abelianOpenExtensionByZero U).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ F ↦\n      f.hom.app (op U) (abelianOpenExtensionSection U\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) U le_rfl\n        ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n          ((Functor.const (Opens ((Opens.toTopCat X).obj U))ᵒᵖ).obj\n            (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n          (op ((Opens.map U.inclusion').obj U)) (ULift.up 1))))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T015608-L-3025324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T015608-L-3025324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

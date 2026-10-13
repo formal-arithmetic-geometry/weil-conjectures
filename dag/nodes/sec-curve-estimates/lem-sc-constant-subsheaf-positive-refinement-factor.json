@@ -13,20 +13,36 @@
  ],
  "proof": [
   {
-   "text": "On each U_i glue in the new coproduct the zero section on Z_i and sign_j times the unit of the j-th summand on A_j with parent j = i. Coverage and disjointness make this a compatible covering family. Send the old integer unit to that glued section using sheafification, the slice extension and the restriction counit, and take the coproduct of the resulting maps. Under Sigma.desc f the unit image restricts to s_i on every partition piece by the signed and zero equations, hence equals s_i by sheaf separation. A map from j_U! Z is determined by its unit section: integer multiplication and naturality determine the constant presheaf map, local integer representatives determine the sheafified map, and the slice direct-sum injections determine the extension map. Thus the old components agree with the composite, and coproduct extensionality proves the factorization.",
+   "text": "For each original i, cover U_i by Z_i and the refined A_j with parent j=i. In the refined coproduct assign zero on Z_i and sign_j times the j-th injected canonical unit on A_j. Pairwise disjointness makes all unequal-piece overlaps empty; equality of sections on the empty open follows from Mathlib section_ext. Mathlib existsUnique_gluing produces a section t_i.",
    "uses": [
     "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved section-lift theorem to obtain l_i : E_(U_i) → P with unit image t_i. Under Sigma.desc d.f its restrictions are zero on Z_i and sign_j times the unit image of f_j on A_j. The record equations hzero, hsigned and hs, naturality, and Mathlib eq_of_locally_eq identify its image with the original component unit image.",
+   "uses": [
+    "lem-sc-abelian-integer-extension-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unit-image injectivity identifies l_i followed by Sigma.desc d.f with the original component. Take Sigma.desc of these maps and use Sigma.ι_desc and Sigma.hom_ext to obtain the desired factorization, including empty original or refined families.",
+   "uses": [
+    "lem-sc-abelian-integer-extension-hom-ext"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-abelian-open-extension-by-zero"
+  "def-sc-abelian-open-extension-by-zero",
+  "lem-sc-abelian-integer-extension-hom-ext",
+  "lem-sc-abelian-integer-extension-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0A38",
-  "place": "First proof paragraph; explicit factorization by gluing and the universal property of extension by zero."
+  "place": "First proof paragraph; explicit signed-cover gluing, unit-section lifting, and stalkwise unit-image extensionality. Second reading Q3."
  },
  "mathlib_searches": [
   {
@@ -113,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T230751-L-1906756",
+  "landing": "20261013T015608-L-3025324",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
