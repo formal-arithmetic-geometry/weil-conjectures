@@ -10846,3 +10846,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/B3/Sheaf.Paper.CohomologyFractionMayerVietorisExact (stage 3; reviewer PASS; after a return; landing 20261013T031529-L-3567959 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/B3/Sheaf.RingTheory.LocalCompleteIntersectionPresentation (stage 3; reviewer PASS; first push; landing 20261013T031530-L-3568137 (interface); batch 20261013T031526; modules 3; new nodes 2)
 - 03:15 L: merged deliver/B4/Sheaf.RingTheory.ProjectiveSymmetricConormalReductionExact (stage 3; reviewer PASS; first push; landing 20261013T031530-L-3568269 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/C1/Sheaf.RingTheory.PopescuAppendFlatParameters (stage 3; reviewer PASS; first push; landing 20261013T031531-L-3568424 (interface); batch 20261013T031526; modules 3; new nodes 2)

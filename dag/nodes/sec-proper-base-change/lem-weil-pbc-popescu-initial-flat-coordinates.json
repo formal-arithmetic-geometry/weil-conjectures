@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-popescu-initial-flat-coordinates",
+ "kind": "statement",
+ "title": "Initial flat differential coordinates at a prime",
+ "statement": "Let $k$ be a field of characteristic $p>0$, $\\Lambda$ a Noetherian $k$-algebra [def-weil-pbc-noetherian-ring] geometrically regular over $k$ [def-weil-pbc-g-ring], and $q\\subset\\Lambda$ prime. Put $L=\\Lambda_q$, $K=\\kappa(q)$ [def-weil-pbc-localization-at-prime]. Let $F/k$ be a field extension [def-pc-field-extension] essentially of finite type [def-weil-pbc-essentially-finite-type-algebra] and $\\iota:F\\to K$ a $k$-algebra map. Fix $t\\ge0$, $x:\\operatorname{Fin}(t)\\to\\Lambda$, $a:\\operatorname{Fin}(t)\\to F$ with $\\iota(a_j)$ equal to the residue of $x_j/1$. Suppose $da_j$ is an $F$-basis of $\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials]. Put $\\varphi_0:k[X_j]\\to\\Lambda$, $X_j\\mapsto x_j$ [def-weil-pbc-mv-polynomial-ring], and $p_0=\\varphi_0^{-1}(q)$. The canonical local map $k[X_j]_{p_0}\\to L$ is flat [def-weil-pbc-flat-ring-map] and $L/p_0L$ is regular local [def-weil-regular-scheme].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E6, lemma-geometrically-regular-over-field; Tag 07FH, lemma-solution-modulo, first coordinate map"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Localize Λ at q. Localization preserves Noetherianity. For every finite purely inseparable k′/k explicitly construct k′⊗Λ → k′⊗Λ_q. Localization base change identifies the target as a localization at the image of q’s complement. Its prime localizations identify with prime localizations of the regular ring k′⊗Λ. Transport regular locality across these isomorphisms to prove geometric regularity of Λ_q.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let E be the field range of ι and e:F≃ₐ[k]E its canonical equivalence. Transfer essential finite type along this surjective map and use IntermediateField.essFiniteType_iff. The Kähler differential map induced by e is bijective: its kernel is the image of the kernel of the corresponding map on finitely supported functions, which is injective on indices and coefficients; surjectivity follows from surjectivity of e. Map b along this linear equivalence and transfer coefficients from F to E. The map_D formula gives d(e(a_j)). These constructions and their bijectivity are fully proved in Lean.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Positive characteristic of a field is prime. Apply 07E6 to Λ_q, the image field E, the transported basis, and the composite polynomial map X_j↦xs(j)/1. The residue equations are ha. Obtain flatness of its localization and a regular local closed fibre.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-over-field-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maximal ideal of Λ_q contracts to q. Its polynomial contraction is therefore q.comap(aeval xs). Transport the prime proof together with the existential localization map. Uniqueness of localization identifies this map with localRingHom, and its quotient ideal is definitionally the displayed composite-map ideal.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-geometrically-regular-over-field-flat",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07E6, lemma-geometrically-regular-over-field; Tag 07FH, lemma-solution-modulo, first coordinate map; explicit localization and fibre comparison details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A differential basis of a finitely generated residue subfield of a geometrically regular algebra defines a flat polynomial localization with regular local closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential basis in a finitely generated subfield of the residue field gives a flat map from a polynomial localization to a geometrically regular local algebra",
+   "results": "Candidates: Algebra.IsSmoothAt, Algebra.IsStandardSmooth, Algebra.Smooth, Algebra.Etale, RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, RingHom.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*regular|flat.*polynomialLocalization|parameter.*selection",
+   "results": "No matches in the Mathlib RingTheory source.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuAppendFlatParameters",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); coordinate construction (steps 1–9 of 07FH); fixed differential coordinates and parameter append for property (1); initial coordinate flatness",
+   "via": [
+    "lem-weil-pbc-popescu-append-flat-parameters",
+    "lem-weil-pbc-popescu-flat-coordinates-given-admissible",
+    "lem-weil-pbc-popescu-flat-coordinates",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuInitialFlatCoordinates",
+  "file": "lean/Sheaf/RingTheory/PopescuInitialFlatCoordinates.lean",
+  "declaration": "Algebra.popescu_initial_flat_coordinates",
+  "statement": "theorem popescu_initial_flat_coordinates\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]\n    (F : Type w) [Field F] [Algebra k F] [EssFiniteType k F]\n    (ι : F →ₐ[k] q.ResidueField)\n    (t : ℕ) (xs : Fin t → Λ) (a : Fin t → F)\n    (ha : ∀ j, ι (a j) = IsLocalRing.residue (Localization.AtPrime q)\n      (algebraMap Λ (Localization.AtPrime q) (xs j)))\n    (b : Module.Basis (Fin t) F (KaehlerDifferential k F))\n    (hb : ∀ j, b j = KaehlerDifferential.D k F (a j)) :\n    let φ₀ : MvPolynomial (Fin t) k →ₐ[k] Λ := MvPolynomial.aeval xs\n    (Localization.localRingHom (q.comap φ₀.toRingHom) q φ₀.toRingHom rfl).Flat ∧\n      IsRegularLocalRing (Localization.AtPrime q ⧸\n        (q.comap φ₀.toRingHom).map\n          ((algebraMap Λ (Localization.AtPrime q)).comp φ₀.toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T031531-L-3568424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T031531-L-3568424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

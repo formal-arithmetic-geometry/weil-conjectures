@@ -19,87 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Put L = Λ_q and K = κ(q). L is Noetherian, and geometrically regular over k: after each finite purely inseparable scalar extension, L is a localization of the corresponding scalar extension of Λ, which is regular. Base change of localization and preservation of regularity prove this.",
+   "text": "Apply popescu_initial_flat_coordinates. Its Lean proof localizes geometric regularity, transports the image field and differential basis, and uses 07E6, giving a flat initial map and a regular local closed fibre.",
    "uses": [
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-regular-ring"
+    "lem-weil-pbc-popescu-initial-flat-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Identify F with the image of its k-algebra embedding ι into K; field homomorphisms are injective. Essential finite type for a field extension is finite generation as a field (Mathlib IntermediateField.fg_top_iff), and this property and the given differential basis transport across the field algebra isomorphism. The polynomial map xs has exactly the prescribed residues ha. Apply lem-weil-pbc-geometrically-regular-over-field-flat to L, this image field and this basis. The first localized polynomial map is flat and its closed fibre S is regular local. The prime used there equals the contraction of q because qL contracts to q.",
+   "text": "Apply exists_flat_regular_fibre_parameter_selection to ys and the initial flatness and regular fibre. Obtain e,s, flatness of the canonical appended local map, and qL=I₀+span(ys(s_i)/1).",
    "uses": [
-    "lem-weil-pbc-geometrically-regular-over-field-flat",
-    "def-pc-field-extension",
-    "def-weil-pbc-essentially-finite-type-algebra",
-    "def-weil-pbc-kahler-differentials",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-flat-regular-fibre-parameter-selection"
    ],
    "elementary": false
   },
   {
-   "text": "The given ys generate qL, so their images generate the maximal ideal of S. Extract from their cotangent images a basis; its lifts are a subset indexed by s : Fin e → Fin r. Nakayama shows that they generate that maximal ideal. The basis size e is the embedding dimension, hence dim S, so the selected images form a regular system of parameters and, by lem-weil-pbc-regular-local-generators-regular-sequence, a regular sequence. This also permits the empty sequence when S is a field.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Define φ by evaluating the first t variables at xs and the last e at ys ∘ s, exactly Fin.addCases in Lean. Extend it to ψ by localization, since the complement of q.comap φ maps to units of L. Its restriction is the required composite. The extended contracted prime lies inside qL; it contains the first-coordinate ideal and the selected parameters, whose sum is qL by their generation of the maximal ideal of S. This gives the ideal equality.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-localization-at-prime"
-   ],
+   "text": "Define φ by aeval(Fin.addCases xs (ys∘s)) and take ψ=localRingHom; localRingHom_to_map proves its restriction. Let J be the appended contracted prime extended to L. Renaming the first variables via Fin.castAdd e proves I₀≤J. The selected generator ys(s_i)/1 is the image of X(Fin.natAdd t i), which lies in the contracted prime since ys(s_i)∈q; their span is contained in J. Generation gives qL≤J. Map the standard map-comap inclusion to get J≤qL. Antisymmetry proves equality, and the parameter selection gives flatness. These polynomial computations and ideal inclusions are fully written Lean proofs.",
+   "uses": [],
    "elementary": true
-  },
-  {
-   "text": "The closed fibre of the extended polynomial localization over the first polynomial localization is the polynomial ring on e variables over κ(p′), localized at the origin. Indeed the contracted prime contains all added variables, and their ideal in this fibre is already maximal. By lem-weil-pbc-polynomial-ring-origin-regular-local its localization is regular local of dimension e with these variables as parameters. Both polynomial localizations are Noetherian local and the induced maps are local.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-origin-regular-local",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The map of closed fibres sends the e parameters to the selected regular sequence in S; the quotient is its nonzero residue field. Apply lem-weil-pbc-flat-over-regular to obtain fibre flatness. Apply lem-weil-pbc-criterion-flatness-fibre-noetherian to the first polynomial localization, the extended localization, and L as a module over itself. Initial flatness comes from the second step, and L is finite and nonzero over itself. It follows that ψ is flat.",
-   "uses": [
-    "lem-weil-pbc-flat-over-regular",
-    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-field-extension",
-  "def-weil-pbc-essentially-finite-type-algebra",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-regular-sequence",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-over-regular",
-  "lem-weil-pbc-geometrically-regular-over-field-flat",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-of-regular-ring",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-polynomial-ring-origin-regular-local",
-  "lem-weil-pbc-regular-local-generators-regular-sequence"
+  "lem-weil-pbc-flat-regular-fibre-parameter-selection",
+  "lem-weil-pbc-popescu-initial-flat-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07FH proof, coordinate construction; explicit fibre-flatness details following Tag 07E6 and the existing parent plan, by J1"
+  "place": "Tag 07FH property (1); C1: initial coordinates proved from 07E6, parameter selection split off, explicit polynomial ideal comparison"
  },
  "mathlib_searches": [
   {
@@ -177,9 +123,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T005856-L-2607099",
+  "landing": "20261013T031531-L-3568424",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

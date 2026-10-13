@@ -11,11 +11,9 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.PopescuInitialFlatCoordinates
+import Sheaf.RingTheory.FlatRegularFibreParameterSelection
+import Mathlib.Algebra.MvPolynomial.Rename
 
 /-!
 # Appending parameters to a residue differential basis
@@ -86,6 +84,54 @@ theorem exists_popescu_append_flat_parameters
         q.map (algebraMap Λ (Localization.AtPrime q)) =
           (q.comap φ.toRingHom).map
             ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) ∧
-        ψ.Flat := by sorry
+        ψ.Flat := by
+  obtain ⟨hflat₀, hfibre₀⟩ :=
+    popescu_initial_flat_coordinates k Λ p hp hreg q F ι t xs a ha b hb
+  obtain ⟨e, s, hflat, hgen⟩ :=
+    exists_flat_regular_fibre_parameter_selection k Λ q t r xs ys hyq hys hflat₀ hfibre₀
+  let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=
+    MvPolynomial.aeval (Fin.addCases xs (fun i ↦ ys (s i)))
+  let g := (algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom
+  let J := (q.comap φ.toRingHom).map g
+  refine ⟨e, s, Localization.localRingHom (q.comap φ.toRingHom) q φ.toRingHom rfl,
+    ?_, ?_, hflat⟩
+  · apply RingHom.ext
+    intro f
+    exact Localization.localRingHom_to_map (q.comap φ.toRingHom) q φ.toRingHom rfl f
+  · change q.map (algebraMap Λ (Localization.AtPrime q)) = J
+    apply le_antisymm
+    · rw [hgen]
+      apply sup_le
+      · apply Ideal.map_le_iff_le_comap.mpr
+        intro f hf
+        have heval : φ (MvPolynomial.rename (Fin.castAdd e) f) =
+            MvPolynomial.aeval xs f := by
+          simp [φ, MvPolynomial.aeval_rename, Function.comp_def]
+        have hmem : MvPolynomial.rename (Fin.castAdd e) f ∈ q.comap φ.toRingHom := by
+          change φ (MvPolynomial.rename (Fin.castAdd e) f) ∈ q
+          rw [heval]
+          exact hf
+        have h := Ideal.mem_map_of_mem g hmem
+        change (algebraMap Λ (Localization.AtPrime q))
+          (φ (MvPolynomial.rename (Fin.castAdd e) f)) ∈ J at h
+        rw [heval] at h
+        exact h
+      · apply Ideal.span_le.mpr
+        rintro _ ⟨i, rfl⟩
+        have heval : φ (MvPolynomial.X (Fin.natAdd t i)) = ys (s i) := by
+          simp [φ]
+        have hmem : MvPolynomial.X (Fin.natAdd t i) ∈ q.comap φ.toRingHom := by
+          change φ (MvPolynomial.X (Fin.natAdd t i)) ∈ q
+          rw [heval]
+          exact hyq (s i)
+        have h := Ideal.mem_map_of_mem g hmem
+        change (algebraMap Λ (Localization.AtPrime q))
+          (φ (MvPolynomial.X (Fin.natAdd t i))) ∈ J at h
+        rw [heval] at h
+        exact h
+    · change (q.comap φ.toRingHom).map
+        ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) ≤ _
+      rw [← Ideal.map_map]
+      exact Ideal.map_mono Ideal.map_comap_le
 
 end Algebra
