@@ -13128,7 +13128,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:17 L: merged deliver/X3/Sheaf.AlgebraicGeometry.RestrictedOverSingleUnit (stage 3; reviewer PASS; first push; landing 20261013T161732-L-1461406 (interface); batch 20261013T161725; modules 1; new nodes 0; change records: coord/changes/restricted-over-single-unit-local-transparency.md)
 - 16:18 L: returned deliver/N2/Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections (reviewer RETURN: (reviewer X-2a5bf, head 2a5bfa215) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fl)
 - 16:23 L: returned deliver/K1/WeilConjectures.SixFunctors.Etale.Derived.UpperShriek (reviewer RETURN: (reviewer X-54178, head 541782cd0) H10 / reader gate: WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions exits 12)
-- 16:24 L: merged deliver/A2/Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518522 (proof); batch 20261013T162406; modules 1; new nodes 0)
 - 16:24 L: merged deliver/A4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518626 (interface); batch 20261013T162406; modules 2; new nodes 1)
 - 16:24 L: merged deliver/A4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPuncturedIso (stage 3; reviewer PASS; first push; landing 20261013T162408-L-1518728 (interface); batch 20261013T162406; modules 2; new nodes 1)
 - 16:24 L: merged deliver/B4/Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound (stage 3; reviewer PASS; first push; landing 20261013T162409-L-1518831 (interface); batch 20261013T162406; modules 2; new nodes 1)
@@ -13145,3 +13144,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:24 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart (stage 3; reviewer PASS; first push; landing 20261013T162414-L-1520594 (interface); batch 20261013T162406; modules 2; new nodes 1)
 - 16:27 L: returned deliver/J2/Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData (reviewer RETURN: (reviewer X-31256, head 31256f3cd) E2 (brief §4): mvBoundary_equation remains false. Take X=X'=P¹_Q, S=S'=Spec Q, f=f' t)
 - 16:27 L: returned deliver/B2/Sheaf.CategoryTheory.DerivedSourceComparisonInjective (reviewer RETURN: (reviewer X-5a4c5, head 5a4c5e766) H1 / brief point 4: Move sourceExtMap and derivedSourceComparison_ext_compatibility, )
+
+- 00:31 L: batch 20261013T162406 dependency take-out
