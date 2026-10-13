@@ -10,6 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
+import Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction
+import Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsStep
+import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import Sheaf.CategoryTheory.DerivedLimitEventuallyIso
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+
 /-! # Derived sections vanish above a lower tail with basis-acyclic homology
 
 Source: Stacks Project, Tag 0BKT (cohomology-over-U-trivial), applied to the
@@ -69,6 +76,89 @@ theorem affineBasisDerivedSections_lowerTail_isZero
         PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)
     IsZero ((DerivedCategory.homologyFunctor _ i).obj
       (S.rightDerivedFunctor.obj
-        ((DerivedCategory.TStructure.t.truncLT a).obj (DerivedCategory.Q.obj F)))) := by sorry
+        ((DerivedCategory.TStructure.t.truncLT a).obj (DerivedCategory.Q.obj F)))) := by
+  dsimp only
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)
+  let Vforget := forget₂
+    (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op V))) AddCommGrpCat.{u}
+  let : S.Additive := inferInstanceAs
+    ((SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙
+      PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)
+  let : HasDerivedCategory AddCommGrpCat.{u} := HasDerivedCategory.standard _
+  let G := S ⋙ Vforget
+  let t := DerivedCategory.TStructure.t (C := C)
+  let E := (t.truncLT a).obj (DerivedCategory.Q.obj F)
+  let H := G.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i
+  have hbase : IsZero (H.obj ((t.truncGE (-(-a))).obj E)) := by
+    have hz : IsZero ((t.truncGE a).obj E) :=
+      t.isZero_truncGE_obj_of_isLE (a - 1) a (by omega) E
+    have hz' := (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map_isZero
+      (G.isZero_rightDerivedFunctor_obj hz)
+    simpa only [H, Functor.comp_obj, neg_neg] using hz'
+  have hzero : ∀ n : ℤ, -a ≤ n → IsZero (H.obj ((t.truncGE (-n)).obj E)) := by
+    refine Int.leInduction (motive := fun n _ ↦
+      IsZero (H.obj ((t.truncGE (-n)).obj E))) hbase ?_
+    intro n hn ih
+    have hstep := affineBasisLowerTail_sections_step_isIso
+      X V hV F hhomology a i (n + 1) (by omega)
+    have htarget : IsZero (H.obj ((t.truncGE (-(n + 1) + 1)).obj E)) := by
+      simpa only [show -(n + 1) + 1 = -n by omega] using ih
+    have : IsIso (H.map ((t.natTransTruncGEOfLE (-(n + 1)) (-(n + 1) + 1)
+      (Int.le_add_one (le_refl (-(n + 1))))).app E)) := hstep
+    exact htarget.of_iso (asIso (H.map
+      ((t.natTransTruncGEOfLE (-(n + 1)) (-(n + 1) + 1)
+        (Int.le_add_one (le_refl (-(n + 1))))).app E)))
+  let T : ℕ → DerivedCategory AddCommGrpCat.{u} := fun n ↦
+    G.rightDerivedFunctor.obj ((t.truncGE (-(n : ℤ))).obj E)
+  let f : ∀ n : ℕ, T (n + 1) ⟶ T n := fun n ↦
+    G.rightDerivedFunctor.map ((t.natTransTruncGEOfLE
+      (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)
+  let K := Functor.ofOpSequence f
+  obtain ⟨δ, hδ⟩ := affineBasisLowerTail_sections_reconstruction X V hV F hhomology a
+  let p : G.rightDerivedFunctor.obj E ⟶ ∏ᶜ T := Pi.lift (fun n ↦
+    G.rightDerivedFunctor.map ((t.truncGEπ (-(n : ℤ))).app E))
+  obtain ⟨l, r, hmilnor, _⟩ := milnor_shortExact i
+  have hδ' : IsDerivedLimitTriangle
+      (fun n ↦ K.map (homOfLE (Nat.le_succ n)).op)
+      (G.rightDerivedFunctor.obj E) p δ := by
+    simpa only [K, Functor.ofOpSequence_map_homOfLE_succ] using hδ
+  obtain ⟨⟨hw, hexact⟩, _⟩ := hmilnor K (G.rightDerivedFunctor.obj E) p δ hδ'
+  let A := K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)
+  have hA : ∃ m : ℕ, ∀ n : ℕ, m ≤ n →
+      IsIso (A.map (homOfLE (Nat.le_succ n)).op) := by
+    refine ⟨(1 - i).toNat, ?_⟩
+    intro n hn
+    have hstep := affineBasisLowerTail_sections_step_isIso
+      X V hV F hhomology a (i - 1) ((n + 1 : ℕ) : ℤ) (by omega)
+    rw! [show -((n + 1 : ℕ) : ℤ) + 1 = -(n : ℤ) by omega] at hstep
+    simpa only [A, K, Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ,
+      f, t] using hstep
+  have hleft := isZero_firstDerivedLimit_of_eventually_isIso A hA
+  let B := K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i
+  have hright : IsZero (limit B) := by
+    rw [IsZero.iff_id_eq_zero]
+    apply limit.hom_ext
+    intro j
+    let n := max j.unop (-a).toNat
+    have hn : -a ≤ (n : ℤ) := by dsimp [n]; omega
+    have hBn : IsZero (B.obj (Opposite.op n)) := hzero n hn
+    have hπ : limit.π B (Opposite.op n) = 0 := hBn.eq_of_tgt _ _
+    have hw := limit.w B (homOfLE (show j.unop ≤ n by exact le_max_left _ _)).op
+    simpa only [hπ, zero_comp, Category.id_comp] using hw.symm
+  have hz := hexact.exact.isZero_X₂ (hleft.eq_of_src _ _) (hright.eq_of_tgt _ _)
+  let e := Functor.isoWhiskerRight
+    (S.rightDerivedFunctorCompMapDerivedCategoryIso Vforget)
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) ≪≫
+    Functor.isoWhiskerLeft S.rightDerivedFunctor
+      (Vforget.mapDerivedCategoryHomologyFunctorIso i).symm
+  have hzforget := hz.of_iso (e.app E).symm
+  change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+    (S.rightDerivedFunctor.obj E))
+  rw [IsZero.iff_id_eq_zero]
+  apply Vforget.map_injective
+  rw [Vforget.map_id, Vforget.map_zero]
+  exact (IsZero.iff_id_eq_zero _).mp hzforget
+
 
 end AlgebraicGeometry
