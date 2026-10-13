@@ -38,6 +38,10 @@ universe u
 
 open CategoryTheory Limits
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace FrobeniusModule
 
 variable {K : Type*} [Field K]
@@ -81,6 +85,8 @@ def withSheaf (D : LisseOnDenseOpen k₀ l) (G : WeilSheaf k₀ l D.U) (hG : G.I
 
 variable (ι : PadicAlgCl l →+* ℂ)
 
+set_option maxHeartbeats 400000 in
+-- Instance search for the structures over `Spec k₀` of the affine line is slow.
 /-- **Reduction to irreducible factors** (Step 3 of `thm-a1-line-middle-extension-upper`). Let
 `F = D.sheaf` be punctually `ι`-pure of weight `w` on the dense open `U₀` of the affine line,
 and let `F ≅ j'^* G` for a lisse Weil sheaf `G` on a `k₀`-scheme `W` with irreducible geometric
