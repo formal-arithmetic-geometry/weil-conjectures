@@ -13,36 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Since the closed point is not in D(f), f belongs to the maximal ideal. Choose a finite generating family of that ideal and append f. As in the proof of 0BLH, use the affine inverse images under q of these principal opens and the affine scheme E. The overlap isomorphism D.overlapIso identifies the completed localizations with the completed chart algebras and gives the overlap cocycle.",
+   "text": "The closed point is outside D(f), hence f is in the maximal ideal. Use fg_iff_exists_fin_generating_family on its Noetherian finite generation, and prepend f using Fin.cons. Its range is the old range with f inserted; the two span inclusions show that this enlarged family still generates the maximal ideal. Its index zero has parameter f.",
    "uses": [
-    "def-sbc-punctured-completion-matching-sections"
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_formalGlueingData_matching_chart to the enlarged generating family at index zero. Obtain the formal datum X, a linear equivalence b from H0 to the matching ring, and a linear equivalence c from the f-chart module to the section ring of puncturedMap inverse image of W. For each h, the chart realization gives psi(rho(b(h)))=c(h_0), and its scalar action is explicitly induced by psi composed with rho composed with baseMap.",
+   "uses": [
+    "lem-sbc-punctured-completion-formal-glueing-chart"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the sheaf equalizer on the finite principal-open cover of Y. A compatible tuple of chart sections is uniquely a section on Y; compatibility with the section on E is exactly the defining equality of the ring pullback B. This identifies the formal-gluing module H0 with the underlying module of B. Under this identification the f-chart projection is psi composed with rho, by appTop functoriality and the Spec–Γ adjunction, and multiplication by f is multiplication by b(f).",
+   "text": "AdicCompletion.flat_of_isNoetherian and RingHom.flat_algebraMap_iff give flatness of A to its maximal-ideal completion. For a chart section t, apply h0_chart_power_lift to c inverse of t to get n,h with h_0=f^n times c inverse of t. Choose b(h). The chart realization, c.map_smul and c.apply_symm_apply identify its image with f^n acting on t. Under the specified scalar action this is psi(rho(baseMap(f^n)))*t; map_pow gives psi(rho(baseMap(f)))^n*t.",
    "uses": [
-    "def-sbc-punctured-completion-matching-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Completion is flat for a Noetherian ring (Mathlib AdicCompletion.flat_of_isNoetherian). Apply the formal-gluing chart-power-lift theorem to the appended f-chart and the given section t. Translate the compatible family and scalar action under the equalizer identification of step 2 to get the required x and n. For a nilpotent f the chart is empty and the zero section lifts with n=0; zero component rings require no change.",
-   "uses": [
-    "lem-weil-pbc-formal-glueing-H0-chart-power-lift"
+    "lem-weil-pbc-formal-glueing-H0-chart-power-lift",
+    "lem-sbc-punctured-completion-formal-glueing-chart"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sbc-punctured-completion-formal-glueing-chart",
   "lem-weil-pbc-formal-glueing-H0-chart-power-lift"
  ],
  "proof_origin": {
   "kind": "split",
-  "by": "P1",
+  "by": "N1",
   "document": "Stacks Project",
-  "place": "Tags 0BLH and 05ER: geometric specialization of the formal-gluing chart comparison, denominator surjectivity."
+  "place": "Tags 0BLH and 05ER. The geometric chart/equalizer construction is isolated in lem-sbc-punctured-completion-formal-glueing-chart; Lean proves finite-generation reindexing, flatness specialization, application of h0_chart_power_lift and scalar transport."
  },
  "mathlib_searches": [
   {
@@ -115,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T181118-L-2606090",
+  "landing": "20261013T190146-L-3218412",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

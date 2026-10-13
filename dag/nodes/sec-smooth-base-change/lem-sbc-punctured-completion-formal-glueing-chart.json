@@ -1,0 +1,145 @@
+{
+ "id": "lem-sbc-punctured-completion-formal-glueing-chart",
+ "kind": "statement",
+ "title": "The matching-section sheaf equalizer realizes a formal gluing chart",
+ "statement": "Let $A$ be a commutative local ring with maximal ideal $\\mathfrak m$, $C$ its $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion], and $U\\subseteq\\operatorname{Spec}A$ the complement of its closed point. Let $q:Y\\to U$ and $s:E\\to\\operatorname{Spec}C$ be finite morphisms [def-weil-finite-integral-morphism]. Let $D$ be completion overlap data with matching ring $B$, base map $a:A\\to B$, model map $m:\\operatorname{Spec}B\\to\\operatorname{Spec}A$, and punctured map $p:Y\\to m^{-1}(U)$ [def-sbc-punctured-completion-matching-sections]. Fix $t\\in\\mathbb N$, $g:\\operatorname{Fin}t\\to A$ with $(g_j)=\\mathfrak m$, and $i\\in\\operatorname{Fin}t$. Put $W=(m|_U)^{-1}((U\\to\\operatorname{Spec}A)^{-1}(D(g_i)))$. Let $\\rho:B\\to\\Gamma(W,\\mathcal O)$ be restriction after the affine global-section isomorphism, and $\\psi:\\Gamma(W,\\mathcal O)\\to\\Gamma(p^{-1}(W),\\mathcal O)$ pullback along $p|_W$. Give $B$ its $A$-action via $a$, and the latter chart section ring its $A$-action via $\\psi\\rho a$. There exist formal gluing data $X$ for $A\\to C$ and $g$ [def-weil-pbc-formal-glueing-data], an $A$-linear equivalence $b:H^0(X)\\simeq B$ [def-weil-pbc-formal-glueing-H0], and an $A$-linear equivalence $c:X.M_i\\simeq\\Gamma(p^{-1}(W),\\mathcal O)$ from its chart module (viewed by restriction of scalars), such that $\\psi(\\rho(b(h)))=c(h_i)$ for every compatible tuple $h\\in H^0(X)$. This asserts a geometric identification, with no denominator-lifting or localization-surjectivity assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, proof, first two paragraphs (the affine chart datum); Tag 05EL, displayed definition of H0. Read at https://stacks.math.columbia.edu/tag/0BLH and https://stacks.math.columbia.edu/tag/05EL."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-formal-glueing-H0"
+ ],
+ "proof": [
+  {
+   "text": "For each g_j let Y_j be the inverse image under q of D(g_j) in U. Since the g_j span the maximal ideal, these principal opens cover U. Finite q makes each Y_j affine, and finite s makes E affine. Set the chart modules to their global section rings with their A[1/g_j]-actions, and the prime module to Gamma(E) with its completion action. Use affine principal-open localization and the affine tensor-product description of base change to identify the prime localizations with the extended chart modules via D.overlapIso. Restrictions to double charts give alpha_overlap. On numerators the square and cocycle identities are functoriality of restriction; the fact that overlapIso is over Spec C gives alpha_smul. These are exactly the fields of FormalGlueing.Data.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given h in H0, glue its chart sections to a global section of Y. Its prime/chart equations assert equality with its prime coordinate on the overlap; check on the principal-open cover and use sheaf separatedness. This pair is an element of the explicit pullback matching ring. Conversely, restrict a matching pair to all Y_j and retain its completed coordinate. The restrictions satisfy both compatibility equations. Sheaf uniqueness and pullback uniqueness show that the two operations are inverse; they preserve the structural A-actions. Thus they give the linear equivalence b from H0 to the matching ring.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-H0",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By puncturedMap_over and inverse-image functoriality, the chart Y_i identifies canonically with puncturedMap inverse image of W. Pullback of sections along this restriction isomorphism gives c. Functoriality of appTop and the Spec-Gamma adjunction identify psi(rho(b(h))) with c of the i-coordinate: the first pullback projection of b(h) is the glued Y section, and its restriction is the i-coordinate. The same equality on structural base elements identifies the A-action with multiplication by psi(rho(baseMap(a))), proving A-linearity for the explicitly stated action. Nilpotent generators give zero chart modules; empty U retains only the prime coordinate, with all chart restrictions zero.",
+   "uses": [
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-H0"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-pbc-formal-glueing-H0",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "N1",
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, proof, first two paragraphs (the affine chart datum); Tag 05EL, displayed definition of H0. Read at https://stacks.math.columbia.edu/tag/0BLH and https://stacks.math.columbia.edu/tag/05EL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine chart sections of a finite scheme over a punctured local spectrum and its completion identify compatible module tuples with matching sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no mathematical absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine chart sections of a finite scheme over a punctured local spectrum and its completion identify compatible module tuples with matching sections",
+   "results": "Eight results include AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, StructureSheaf.normalize_finite_fraction_representation, IsAffineOpen.basicOpenSectionsToAffine, and affine-section limit tools. None identifies this matching ring with FormalGlueing.h0 or its chart coordinate.",
+   "date": "2026-10-14",
+   "verdict": "no exact bridge among the returned hits"
+  },
+  {
+   "tool": "grep",
+   "query": "matchingRing|FormalGlueing|formalGlueing",
+   "results": "msearch grep returned zero Mathlib hits. Local rg of lean/Sheaf and lean/WeilConjectures found PuncturedCompletionFormalGlueingData, whose theorem exposes only the prime coordinate and does not constrain the chart coordinate or identify all of H0 with matchingRing. Blueprint searches for formal glueing and matching sections returned zero.",
+   "date": "2026-10-14",
+   "verdict": "no existing chart realization theorem; prime-coordinate theorem has insufficient interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedMatchingChartPowerLift",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The completion overlap matching algebra used in the punctured finite-model input; geometric affine chart/equalizer identification before denominator lifting, steps 1 and 2 of lem-sbc-punctured-matching-chart-power-lift.",
+   "via": [
+    "lem-sbc-punctured-matching-chart-power-lift",
+    "new-sbc-punctured-completion-matching-affine-sections-comparison",
+    "lem-sbc-punctured-completion-matching-affine-sections",
+    "lem-sbc-punctured-completion-matching-punctured-iso",
+    "lem-sbc-punctured-completion-finite-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_formalGlueingData_matching_chart",
+  "statement": "theorem exists_formalGlueingData_matching_chart\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (g : Fin t → A)\n    (hgen : Ideal.span (Set.range g) = IsLocalRing.maximalIdeal A) (i : Fin t) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let W := (D.modelMap ∣_ U) ⁻¹ᵁ (U.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (g i))\n    let ρ := ((ΓSpecIso D.matchingRing).inv ≫\n      (W.ι ≫ (D.modelMap ⁻¹ᵁ U).ι).appTop).hom\n    let ψ := (D.puncturedMap ∣_ W).appTop.hom\n    letI : Algebra A D.matchingRing := D.baseMap.hom.toAlgebra\n    letI : Algebra A Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤) :=\n      ((ψ.comp ρ).comp D.baseMap.hom).toAlgebra\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ g)\n      (b : FormalGlueing.h0 φ g X ≃ₗ[A] D.matchingRing)\n      (c : FormalGlueing.piece (g i) (X.M i) ≃ₗ[A]\n        Γ((D.puncturedMap ⁻¹ᵁ W).toScheme, ⊤)),\n      ∀ h, ψ (ρ (b h)) = c (h.val.2 i)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T190146-L-3218412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T190146-L-3218412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
