@@ -27,68 +27,60 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded complex P^\\bullet of finite projective A-modules representing E (the definition in the statement). Choose a K-flat resolution Q^\\bullet\\to K [lem-pc-kflat-resolution, def-pc-kflat-complex], and the K-injective resolution Q^\\bullet\\to I^\\bullet used in [def-pur-derived-internal-hom]. A bounded complex is bounded above and its terms are projective, so [lem-sc-bounded-above-projective-kprojective] makes P^\\bullet K-projective; applying Hom_A^\\bullet(P^\\bullet,-) to the acyclic cone of Q^\\bullet\\to I^\\bullet shows that Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\to Hom_A^\\bullet(P^\\bullet,I^\\bullet) is a quasi-isomorphism, so Hom_A^\\bullet(P^\\bullet,Q^\\bullet) represents RHom_A(E,K) [def-pur-derived-internal-hom].",
+   "text": "The model m already supplies the bounded finite-projective source P, K-flat target Q, representative isomorphisms, extended-source boundedness and projectivity, and source and target derived counit isomorphisms. ringRHomModelIso identifies both RHom expressions with their ordinary Hom models. The model-identification factors in perfectRHomBaseChangeMap are isomorphisms, as are the product-category representative maps and their functor images.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-sc-bounded-above-projective-kprojective",
-    "def-pur-derived-internal-hom"
+    "def-pc-perfect-rhom-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), bounded finite-projective model"
-   }
-  },
-  {
-   "text": "For a bounded finite-projective P^\\bullet, each degree of Hom_A^\\bullet(P^\\bullet,Q^\\bullet) is a finite product of terms Hom_A(P^i,Q^{i+n}). For every finite projective P^i, scalar extension gives the canonical isomorphism A'\\otimes_A Hom_A(P^i,Q^{i+n}) \\cong Hom_{A'}(A'\\otimes_A P^i,A'\\otimes_A Q^{i+n}); these degreewise isomorphisms commute with the differentials because they are induced by the same evaluation maps. Thus tensoring the Hom complex with A' identifies it with the Hom complex of A'\\otimes_A P^\\bullet and A'\\otimes_A Q^\\bullet. This is the finite-projective tensor-Hom calculation, including the zero and finite-free summand cases, written directly from the definitions.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), finite-projective tensor-Hom calculation"
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
    }
   },
   {
-   "text": "Hom_A^\\bullet(P^\\bullet,Q^\\bullet) is K-flat, so A'\\otimes_A Hom_A^\\bullet(P^\\bullet,Q^\\bullet) represents A'\\otimes_A^L RHom_A(E,K) [lem-pur-derived-change-of-rings]. Indeed, for finite projective P^i the natural map Hom_A(P^i,A)\\otimes_A M\\to Hom_A(P^i,M) is an isomorphism (true for A^n, hence for summands), so Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\cong Tot(P^\\vee\\otimes_A Q^\\bullet) with P^\\vee=Hom_A^\\bullet(P^\\bullet,A) a bounded complex of finite projective, hence flat, A-modules. For an acyclic F^\\bullet, Tot(F^\\bullet\\otimes Tot(P^\\vee\\otimes Q^\\bullet))\\cong Tot(Tot(F^\\bullet\\otimes P^\\vee)\\otimes Q^\\bullet); Tot(F^\\bullet\\otimes P^\\vee) is acyclic by [lem-pc-module-bounded-flat-kflat], hence so is the whole since Q^\\bullet is K-flat [def-pc-kflat-complex].",
+   "text": "Apply perfectRingHom_scalarExtension_isIso to P=m.source and Q=m.target, with m.bounded, m.projective and m.finite. This makes d.homMap P Q invertible and hence its image under DerivedCategory.Q invertible.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-module-bounded-flat-kflat",
-    "def-pc-kflat-complex"
+    "lem-pc-perfect-ring-hom-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), K-flatness of the Hom complex"
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
    }
   },
   {
-   "text": "By [lem-pur-derived-change-of-rings], A'\\otimes_A Q^\\bullet represents A'\\otimes_A^L K and A'\\otimes_A P^\\bullet (bounded, flat terms, K-flat by [lem-pc-module-bounded-flat-kflat]) represents A'\\otimes_A^L E. Each A'\\otimes_A P^i is finite projective over A' (a direct summand of a finite free module after scalar extension), so by [lem-sc-bounded-above-projective-kprojective] and the argument of Step 1 over A', Hom_{A'}^\\bullet(A'\\otimes_A P^\\bullet,A'\\otimes_A Q^\\bullet) represents RHom_{A'}(A'\\otimes_A^L E,A'\\otimes_A^L K) [def-pur-derived-internal-hom]. On these representatives the map induced by the functor A'\\otimes_A^L- (computed on the K-flat complexes P^\\bullet, Q^\\bullet by the termwise functor A'\\otimes_A-) is \\varphi\\mapsto 1\\otimes\\varphi, Hom_A^\\bullet(P^\\bullet,Q^\\bullet)\\to Hom_{A'}^\\bullet(A'\\otimes_AP^\\bullet,A'\\otimes_AQ^\\bullet), and its A'-linear extension, on the representative of Step 3, is the chain map a'\\otimes\\varphi\\mapsto a'(1\\otimes\\varphi), which is the isomorphism of Step 2. Hence the canonical map is an isomorphism.",
+   "text": "Apply perfectRingHom_isKFlat to the same P,Q and m.target_kFlat. The field d.counit_kFlat makes the counit on Hom(P,Q) invertible. The quotient factorization maps in ringDerivedExtensionCounit are images of isomorphisms, so their composite with this counit is also invertible.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-sc-bounded-above-projective-kprojective",
-    "def-pur-derived-internal-hom"
+    "lem-pc-perfect-ring-hom-kflat",
+    "def-pc-perfect-rhom-base-change-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A (label lemma-base-change-RHom), map (equation-base-change-RHom), clause (1), conclusion"
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
+   }
+  },
+  {
+   "text": "Unfold perfectRHomBaseChangeMap. All six factors are now isomorphisms: the source representative change, the source RHom model identification, the derived extension counit on Hom, Q of the normalized Hom-complex map, the inverse target RHom model identification, and the target representative change. Compose their inverses in reverse order, as supplied by the categorical IsIso composition instance. This proves the unchanged conclusion.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "lem-sc-bounded-above-projective-kprojective",
-  "def-pur-derived-internal-hom",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-module-bounded-flat-kflat"
+  "def-pc-perfect-rhom-base-change-map",
+  "lem-pc-perfect-ring-hom-scalar-extension",
+  "lem-pc-perfect-ring-hom-kflat"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AA7, label perfect-lemma-affine-morphism-and-hom-out-of-perfect, clause (1)"
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "0A6A clause (1); original four-step bounded finite-projective route, two chain-level steps split off and remaining categorical composition checked in Lean"
  },
  "mathlib_searches": [
   {
@@ -176,5 +168,15 @@
   "group": "Q1",
   "result": "fix",
   "note": "rings A,B and phi; one-object site modules; E perfect via m.source bounded+Finite+Projective+sourceIso; K arbitrary; RHom = derivedInternalHom on onePointRingSheaf; derived extension d pinned by changeOfRings obj/map eqs, IsLeftDerivedFunctor, homMap_pure; conclusion IsIso of the canonical composite"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T024050-L-3339857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

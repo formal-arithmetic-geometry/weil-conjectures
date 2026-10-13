@@ -6,11 +6,8 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.PerfectRingHomKFlat
+import Sheaf.Algebra.Homology.PerfectRingHomScalarExtension
 
 /-! # RHom base change for a perfect complex
 
@@ -65,6 +62,28 @@ theorem baseChangeRHomPerfect
     (d : RingRHomBaseChangeData φ) (E K : DerivedCategory (RingSiteModules A))
     (m : PerfectRHomBaseChangeModel d E K) :
     IsIso (perfectRHomBaseChangeMap d m) := by
-  sorry
+  have hHom := perfectRingHom_isKFlat m.source m.target m.bounded m.projective
+    m.finite m.target_kFlat
+  have := perfectRingHom_scalarExtension_isIso d m.source m.target m.bounded
+    m.projective m.finite
+  have := d.counit_kFlat _ hHom
+  have : IsIso (ringDerivedExtensionCounit d
+      (homComplex (R := CochainComplex.onePointRingSheaf A) m.source m.target)) := by
+    let := d.additive
+    unfold ringDerivedExtensionCounit
+    infer_instance
+  have := m.source_counit
+  have := m.target_counit
+  have : IsIso (m.sourceIso.op.hom, m.targetIso.symm.hom) :=
+    (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  let eP := d.derived.mapIso m.sourceIso.symm ≪≫
+    asIso (ringDerivedExtensionCounit d m.source)
+  let eQ := d.derived.mapIso m.targetIso.symm ≪≫
+    asIso (ringDerivedExtensionCounit d m.target)
+  have : IsIso (eP.op.hom, eQ.symm.hom) :=
+    (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  unfold perfectRHomBaseChangeMap
+  dsimp only
+  infer_instance
 
 end CategoryTheory

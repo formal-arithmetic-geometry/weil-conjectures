@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-perfect-ring-hom-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 clause (1), expanded 0A6A (1): finite-projective tensor-Hom calculation, parent step 2",
+   "via": [
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-projective Hom-complex scalar extension",
+ "statement": "Let A,B be commutative rings and phi:A -> B a ring homomorphism. Use the one-object ringed-site categories and normalized extension data d of [def-pc-perfect-rhom-base-change-map], including its pure-tensor equation on every Hom-complex product projection. Let P,Q be cochain complexes of A-module sheaves, with P bounded and with finite projective terms evaluated at the unique object. Then the chain map d.homMap(P,Q): B tensor_A Hom_A^\\bullet(P,Q) -> Hom_B^\\bullet(B tensor_A P,B tensor_A Q) is an isomorphism. No K-flatness of Q or flatness of B over A is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "At the unique object, sheaf scalar extension and sheaf internal Hom are ordinary scalar extension and module Hom. For P^p=A^r the canonical tensor-Hom map B tensor Hom_A(A^r,M) -> Hom_B(B^r,B tensor M) is the finite-coordinate isomorphism. For finite projective P^p, choose a splitting of it as a summand of A^r; extend the splitting to B and restrict the finite-coordinate map and its inverse to the corresponding Hom summands. This proves invertibility without any flatness assumption on B.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
+   }
+  },
+  {
+   "text": "In Hom(P,Q)^n, every factor outside the bounded interval for P is zero. The chosen infinite product therefore identifies with the finite product over that interval, and tensor distributes over this finite product. Compose this identification with the preceding finite-projective tensor-Hom isomorphisms. Its p-th product coordinate sends b tensor f, evaluated on c tensor x, to bc tensor f(x). The defining homMap_pure equation, generation by pure tensors, and joint injectivity of the product projections identify this degree map with (d.homMap P Q).f n.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
+   }
+  },
+  {
+   "text": "All degree components are isomorphisms. Inverting the chain-map equation shows their inverses commute with the differentials, so they assemble to the inverse chain map. Thus d.homMap P Q is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Expanded finite-projective representative argument for 0A6A (1); from parent proof steps 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of the Hom complex of a bounded finite projective complex is an isomorphism",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the Hom complex of a bounded finite projective complex is an isomorphism",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.ProjectiveResolution.isoExt; CochainComplex.isKProjective_iff_of_iso; CochainComplex.isKProjective_of_iso; HomologicalComplex.extendSingleIso; Rep.standardResolution.extIso; HomologicalComplex.extendSingleIso_hom_f; Rep.barResolution.extIso; ComplexShape.Embedding.isIso_liftExtend_f_iff",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hom.*kflat|kflat.*hom|baseChange.*Hom|Hom.*baseChange",
+   "date": "2026-10-13",
+   "results": "No matches in Mathlib/Algebra/Homology",
+   "verdict": "no match",
+   "sub": "Algebra/Homology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseChangeRHomPerfect",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectRingHomScalarExtension",
+  "declaration": "CategoryTheory.perfectRingHom_scalarExtension_isIso",
+  "declarations": [
+   "CategoryTheory.perfectRingHom_scalarExtension_isIso"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRingHomScalarExtension.lean",
+  "statement": "theorem perfectRingHom_scalarExtension_isIso {A B : Type u} [CommRing A] [CommRing B] {φ : A →+* B} [HasDerivedCategory.{w} (RingSiteModules A)] [HasDerivedCategory.{w} (RingSiteModules B)] (d : RingRHomBaseChangeData φ) (P Q : CochainComplex (RingSiteModules A) ℤ) (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) : IsIso (d.homMap P Q)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T024050-L-3339857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T024050-L-3339857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
