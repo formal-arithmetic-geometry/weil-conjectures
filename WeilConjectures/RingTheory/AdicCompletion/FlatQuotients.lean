@@ -44,9 +44,9 @@ theorem ker_evalₐ_eq_map_pow (hI : I.FG) (n : ℕ) :
   rw [← hx, pow_smul_top_eq_ker_eval hI, LinearMap.mem_ker]
   constructor
   · intro h
-    rw [← factor_evalₐ_eq_eval x h1, h, map_zero]
+    rw [← factor_evalₐ_eq_eval I x h1, h, _root_.map_zero]
   · intro h
-    rw [← factor_eval_eq_evalₐ x h2, h, map_zero]
+    rw [← factor_eval_eq_evalₐ I x h2, h, _root_.map_zero]
 
 /-- The isomorphism `Â / (I Â)ⁿ ≃ A / Iⁿ` induced by evaluation, for finitely generated `I`. -/
 noncomputable def quotientMapPowEquiv (hI : I.FG) (n : ℕ) :
@@ -71,11 +71,11 @@ theorem flat_quotients_of_flat_restriction (hI : I.FG) (f : AdicCompletion I A �
     Module.Flat (AdicCompletion I A ⧸ I.map (algebraMap A (AdicCompletion I A)) ^ n)
       (S ⧸ (I.map (algebraMap A (AdicCompletion I A)) ^ n • ⊤ :
         Submodule (AdicCompletion I A) S)) := by
-  letI := f.toAlgebra
+  let := f.toAlgebra
   set C := AdicCompletion I A
   set J := I.map (algebraMap A C)
   set g := f.comp (algebraMap A C)
-  letI := g.toAlgebra
+  let := g.toAlgebra
   -- flatness of `A / Iⁿ → S / Iⁿ S`
   have hflatA : (algebraMap (A ⧸ I ^ n) (S ⧸ (I ^ n).map (algebraMap A S))).Flat := by
     have : Module.Flat A S := hf
@@ -84,7 +84,7 @@ theorem flat_quotients_of_flat_restriction (hI : I.FG) (f : AdicCompletion I A �
       Module.Flat.of_linearEquiv e.toLinearEquiv
     exact RingHom.flat_algebraMap_iff.mpr this
   have hK : (I ^ n).map (algebraMap A S) = (J ^ n).map (algebraMap C S) := by
-    rw [J, ← Ideal.map_pow, Ideal.map_map]
+    rw [show J ^ n = (I ^ n).map (algebraMap A C) by rw [Ideal.map_pow], Ideal.map_map]
     rfl
   -- flatness of `C / Jⁿ → S / Jⁿ S`
   have hflatC : (algebraMap (C ⧸ J ^ n) (S ⧸ (J ^ n).map (algebraMap C S))).Flat := by
@@ -102,7 +102,8 @@ theorem flat_quotients_of_flat_restriction (hI : I.FG) (f : AdicCompletion I A �
       rw [quotientMapPowEquiv_mk, ← ha, Ideal.Quotient.algebraMap_quotient_map_quotient,
         Ideal.quotEquivOfEq_mk, Ideal.Quotient.eq]
       refine (Ideal.mem_map_of_mem (algebraMap C S) hx) |> fun h ↦ ?_
-      simpa [g, RingHom.algebraMap_toAlgebra] using h
+      simp only [g, RingHom.algebraMap_toAlgebra] at h ⊢
+      rwa [map_sub] at h
     rw [hcomp]
     exact RingHom.Flat.comp (.of_bijective (quotientMapPowEquiv hI n).bijective)
       (RingHom.Flat.comp hflatA (.of_bijective (Ideal.quotEquivOfEq hK).bijective))
