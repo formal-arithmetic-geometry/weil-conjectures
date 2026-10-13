@@ -13,21 +13,21 @@
  },
  "proof": [
   {
-   "text": "Set E_i = (j_i)_*(F|U_i), E = product_i E_i and f = the family of restriction-adjunction units. Projection to E_i followed by the restriction counit retracts f on U_i by the triangle identity. A section in the kernel of f vanishes on the cover, hence is zero by sheaf uniqueness. Thus f is monic. This is the explicit product construction in the source node; no data is chosen from a mere existence theorem.",
+   "text": "Construct the restriction adjunction by transporting Mathlib sheafPullbackIso. Define E_i = (j_i)_*(F|U_i), E = product_i E_i, and f = Pi.lift of the restriction-adjunction units. After restriction to U_i, the product projection followed by the adjunction counit retracts f by the triangle identity. A sheaf morphism zero on the cover is zero: evaluate on W intersection U_i and apply eq_of_locally_eq′ on W. Apply this to a morphism killed by f, cancel its locally split restrictions, and obtain Mono f. All objects are explicitly constructed.",
    "uses": [
     "def-pc-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "Take Q = cokernel f and the cokernel short exact sequence. Exact open restriction and the retraction split it on U_i. Restrict the quotient section to any tuple intersection contained in U_i to obtain sectionwise surjectivity. The empty index case forces X empty and the same sequence has only zero sheaves.",
+   "text": "Take the explicitly constructed cokernelSequence f; monicity of f and Mathlib cokernelSequence_exact give ShortExact. Restriction preserves finite limits, and its restriction adjunction gives preservation of finite colimits. ShortComplex.Splitting.ofExactOfRetraction splits the restricted exact sequence, making its quotient map split epi. Evaluate it on the preimage of any B contained in U_i; Opens.functor_map_eq_inf identifies the image open with B, giving surjectivity on B. Every nonempty tuple intersection is contained in U_(y 0). The arguments work without a nonempty index hypothesis; in the empty case all local conclusions are vacuous and sheaf uniqueness on the empty cover still applies.",
    "uses": [
     "def-pc-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "For the Čech complex with coefficients E_i, define the degree-lowering homotopy by inserting i at the front of every tuple. E_i(W)=F(W intersection U_i), so insertion does not change the section domain. In dh+hd the face deleting i is the identity and all other faces cancel in pairs. Take products of these homotopies to get zero positive cohomology for E. The long exact homology sequence of the tuplewise short exact Čech complexes makes each connecting map surjective. See the full formula and argument in the theorem docstring.",
+   "text": "For each E_i, preimage under j_i of W intersection U_i equals preimage of W. Its restriction map is therefore an isomorphism. Apply the already proved TopCat.Presheaf.exactAt_cechComplex_of_bijective, whose insertion-index contraction proves positive-degree exactness for this factor. Evaluation of a sheaf product and forgetting abelian groups preserve products; PreservesProduct.iso followed by Types.productIso identifies its sections with the dependent product of the factor sections. Project a cocycle to every factor, choose factor coboundaries from the proved factor exactness, and lift their tuplewise values through this product isomorphism. Naturality of the differential and injectivity of the product isomorphism prove this lift is a coboundary. Thus positive homology of E is zero. The tuplewise quotient surjectivity supplies shortExact_cechComplex; homology_exact₁, exact.epi_f and AddCommGrpCat.epi_iff_surjective prove each connecting map surjective.",
    "uses": [
     "def-pc-cech-comparison-system"
    ],
@@ -41,7 +41,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "dag/nodes/sec-picard-framework/lem-pc-cech-cover-relative-effacement.json",
-  "place": "Agent-written product, local splitting and Čech contraction paragraphs of the node proof, in the comparison context of Stacks Tags 01EQ and 01FD; not a statement of Tag 01FD."
+  "place": "Product, local splitting and contraction paragraphs, implemented in Lean by E1 using the proved insertion-index contraction and sectionwise product comparison."
  },
  "mathlib_searches": [
   {
@@ -163,10 +163,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T022433-L-3222527",
-  "kind": "interface",
+  "landing": "20261013T032958-L-3674793",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
