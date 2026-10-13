@@ -18,39 +18,44 @@
  ],
  "proof": [
   {
-   "text": "Apply the stalkwise Tor-amplitude criterion at u(x) and tensor with its residue field. The derived residue fibre has zero cohomology below a, hence beta_j(u(x))=0 for j<a. The supplied free-term isomorphisms show that P has zero terms in those degrees. This uses the Tor hypothesis only; the residue model is supplied as input.",
+   "text": "For each j<a apply lem-sc-residue-betti-zero-of-tensor-vanishing to S, E, U.ι(x) and the test hypothesis F -> hamp F j (Or.inl hj). The Betti number is zero. The free-term isomorphism hrank j identifies P.X j with a free sheaf on ULift (Fin 0). Its identity morphism is zero by freeHomEquiv, since that indexing type is empty; hence P.X j is zero.",
    "uses": [
-    "def-pc-derived-tensor-cohomology-vanishes",
-    "def-sc-derived-fiber-betti",
-    "lem-pc-tor-amplitude-open-local",
-    "lem-pc-affine-tor-amplitude-criterion"
+    "lem-sc-residue-betti-zero-of-tensor-vanishing",
+    "def-sc-derived-fiber-betti"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an affine open W containing u(x) inside O intersect U, and regard W as an open V of U. Restrict P from O to W and transport module sheaves from the over-site to W.toScheme by the canonical module equivalence. Both functors are exact, preserve zero objects and finite free sheaves with their indexing types, and preserve the upper degree bound. Exact restriction applied to the supplied derived isomorphism, and its comparison with derived pullback, produce L(u composed with v)^*E isomorphic to Q(K). The ranks remain the ranks at the original point u(x).",
+   "text": "Choose an affine open V of U.toScheme containing x inside the inverse image of O under U.ι, using the Mathlib affine-open basis. Put f=V.ι composed with U.ι. Its image is contained in O, so the open-immersion lift k:V.toScheme -> O.toScheme satisfies k composed with O.ι=f and is itself an open immersion. Set A=(Modules.overEquiv O).functor, R=Modules.restrictFunctor k, F=A followed by R, and K=F applied termwise to P. This is an actual construction of K from the supplied model. Exactness and preservation of free sheaves with their original indexing types give the upper bound, all prescribed ranks, and the zero terms below a.",
    "uses": [
     "def-weil-affine-spectrum",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the exact-open derived comparison for f by choosing a K-flat resolution P0 -> G of a representative G of E. The derived-pullback counit is invertible on P0. The tensor-pullback/restriction adjunction comparison, together with mapHomotopyCategoryFactors and quotientCompQhIso, identifies derivedPullback f applied to E with the exact restriction functor applied in the derived category. Next overFunctorEquiv O, restrictFunctorComp k O.ι and k composed with O.ι=f identify global restriction with overFunctor O followed by F. Apply the mapDerivedCategory natural-isomorphism and composition comparisons, map the supplied isomorphism e under F.mapDerivedCategory, and use mapDerivedCategoryFactors on P. This gives derivedPullback f E isomorphic to Q(K), completing the existential conjunction.",
+   "uses": [
+    "def-pc-derived-pullback",
     "def-pc-module-pullback",
-    "def-pc-derived-pullback"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-pullback",
-  "def-pc-derived-tensor-cohomology-vanishes",
   "def-pc-module-pullback",
   "def-sc-derived-fiber-betti",
   "def-weil-affine-spectrum",
-  "lem-pc-affine-tor-amplitude-criterion",
-  "lem-pc-tor-amplitude-open-local"
+  "lem-pc-kflat-resolution",
+  "lem-sc-residue-betti-zero-of-tensor-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDL",
-  "place": "local matrix-chart argument before gluing",
-  "note": "Isolates one strictly structural part of the local chart argument. Edge cases: empty schemes, rank zero and reversed Tor bounds are included."
+  "place": "affine finite-free model paragraph; Tag 09U9 for the residue Tor test and Tag 06YS for K-flat resolutions",
+  "note": "P3 implements the supplied-model restriction and proves the exact-open comparison directly. The universal residue test is separately proved. No change to the statement or unit route."
  },
  "mathlib_searches": [
   {
@@ -121,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-3be51",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T100048-L-2474674",
+  "landing": "20261013T115431-L-3359683",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG nodes, proofs, imports, report, and change record match the stated targets; both modules and the direct importer compile without errors or warnings."
  }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-residue-betti-zero-of-tensor-vanishing",
+ "kind": "statement",
+ "title": "Universal tensor vanishing forces the residue Betti number to vanish",
+ "statement": "Let S be a scheme [def-pc-scheme], E an object of D(O_S) [def-pc-derived-category], j an integer, and x a point of S. Suppose H^j(E tensor^L F)=0 for every O_S-module sheaf F [def-pc-derived-tensor-cohomology-vanishes]. Then beta_j(E,x)=0 [def-sc-derived-fiber-betti]. The assertion needs no finite-dimensionality, perfectness, boundedness, or affine-neighbourhood hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09U9",
+  "place": "Lemma 20.48.5, stalkwise Tor amplitude proof; Tags 06YI and 06YJ for the residue K-flat computation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "Let R=O_S,x and kappa=R/m_x. Construct the module skyscraper F at x with value kappa, with scalar action through the germ and residue maps. Apply the hypothesis to F, obtaining a K-flat P, Q(P) isomorphic to E, and zero degree-j cohomology of the total tensor with F in degree zero. The standard mapBifunctorSingle₂Iso identifies this total tensor with the complex obtained by tensoring every term of P with F.",
+   "uses": [
+    "def-pc-derived-tensor-cohomology-vanishes",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluation skyscraperStalkEval identifies F_x with kappa: every stalk element has a representative over a neighbourhood of x; equality of evaluations gives equality after restriction to the intersection of two such neighbourhoods, and every value has the constant representative on the whole scheme. Thus the evaluation linear map is bijective. Take stalks of the zero cohomology. Exactness gives cohomology of the stalk complex. The natural stalk-tensor comparison identifies termwise tensor with F followed by the stalk functor with stalk followed by tensor with kappa.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor commutation identifies the right-tensor functor with extension of scalars along R -> kappa followed by restriction of scalars to R. Apply this natural isomorphism termwise. Restriction of scalars preserves homology and has the same underlying additive group, so zero R-module cohomology implies zero kappa-module cohomology of P_x tensor kappa. The K-flat stalk-residue comparison identifies this with derivedFiberCohomology S E j x. Its underlying type is subsingleton, hence its finrank, namely derivedFiberBetti S E j x, is zero. No finiteness or bound is used.",
+   "uses": [
+    "lem-sc-kflat-stalk-residue-cohomology",
+    "def-sc-derived-fiber-betti"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-sc-derived-fiber-betti",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-kflat-stalk-residue-cohomology",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09U9",
+  "place": "fixed-degree consequence of the stalkwise Tor criterion",
+  "note": "P3 writes the fixed-degree argument using the concrete upstream skyscraper module, exact stalks, tensor comparison, and the existing K-flat residue comparison. Proof is complete in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If derived tensor cohomology vanishes for every sheaf of modules then the derived residue fibre cohomology vanishes in the same degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedFiberBetti|skyscraperStalkEval|residue.*tensor.*vanish",
+   "results": "0 hits: ; no matching universal residue Betti vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal vanishing of derived tensor cohomology of a sheaf complex implies that its derived residue fibre Betti number is zero",
+   "results": "8 hits: Rep.isZero_Tor_succ_of_projective, CochainComplex.isZero_of_isLE, CochainComplex.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero; no matching universal residue Betti vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LowestResidueModelWithinOpen",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "local affine finite-free matrix chart step of Tag 0BDL: terms below the lower Tor bound vanish",
+   "via": [
+    "lem-sc-lowest-residue-model-within-open",
+    "lem-sc-perfect-lowest-matrix-charts",
+    "lem-sc-perfect-lowest-matrix-closed-locus",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResidueBettiZeroOfTensorVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResidueBettiZeroOfTensorVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedFiberBetti_eq_zero_of_tensor_vanishes",
+  "statement": "theorem derivedFiberBetti_eq_zero_of_tensor_vanishes\n    (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory S) (j : ℤ) (x : S)\n    (h : ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace),\n      schemeDerivedTensorCohomologyVanishes S E F j) :\n    derivedFiberBetti S E j x = 0",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3be51",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T115431-L-3359683",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3be51",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T115431-L-3359683",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, proofs, imports, report, and change record match the stated targets; both modules and the direct importer compile without errors or warnings."
+ }
+}
