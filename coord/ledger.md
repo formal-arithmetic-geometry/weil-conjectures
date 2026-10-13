@@ -13288,3 +13288,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:10 L: merged deliver/D4/Sheaf.Paper.GlobalTensorPullbackDerivedData (stage 3; reviewer PASS; first push; landing 20261013T181054-L-2598598 (interface); batch 20261013T181050; modules 3; new nodes 2)
 - 18:10 L: merged deliver/E1/Sheaf.Paper.FiniteStructureProductCore (stage 3; reviewer PASS; first push; landing 20261013T181055-L-2598894 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:10 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup (stage 3; reviewer PASS; after a return; landing 20261013T181056-L-2599078 (proof); batch 20261013T181050; modules 1; new nodes 1)
+- 18:10 L: merged deliver/F4/Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureCoproduct (stage 3; reviewer PASS; first push; landing 20261013T181056-L-2599222 (proof); batch 20261013T181050; modules 1; new nodes 1)

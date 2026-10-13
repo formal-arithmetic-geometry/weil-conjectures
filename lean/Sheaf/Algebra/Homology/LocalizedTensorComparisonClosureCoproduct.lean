@@ -22,6 +22,29 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
+/-- Fixed representative, model, and degree component of coproduct closure.
+Source: Stacks Project, Tag 0DJA(1), coproduct component of the localizing argument.
+(blueprint: lem-pc-localized-tensor-comparison-closure-coproducts-fixed-degree). -/
+theorem localizedTensorComparisonProperty_closure_coproducts_fixed_degree
+    (hC : Module.Flat (A ⊗[R] B) C)
+    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
+      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)
+    {I : Type u} (G : I → DerivedCategory (ModuleCat.{u} A))
+    (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, G i ⟶ S)
+    (hc : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι))
+    (hs : ∀ i, localizedTensorComparisonProperty R A B C Q N t (G i))
+    (U : CochainComplex (ModuleCat.{u} A) ℤ)
+    (e : Nonempty (DerivedCategory.Q.obj U ≅ S))
+    (hU : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
+      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)
+    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :
+    let F := (extendScalars.{u, u, u}
+      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
+        (.up ℤ)
+    IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap
+      ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) := by sorry
+
+
 /-- The localized tensor comparison predicate is closed under coproducts.
 Source: Stacks Project, Tags 0DJA(1), 0BYJ and 09PB.
 
@@ -54,6 +77,9 @@ theorem localizedTensorComparisonProperty_closure_coproducts
       (S : DerivedCategory (ModuleCat.{u} A)) (ι : ∀ i, G i ⟶ S),
       CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.Cofan.mk S ι) →
       (∀ i, localizedTensorComparisonProperty R A B C Q N t (G i)) →
-      localizedTensorComparisonProperty R A B C Q N t S := by sorry
+      localizedTensorComparisonProperty R A B C Q N t S := by
+  intro I G S ι hc hs U e hU mU i
+  exact localizedTensorComparisonProperty_closure_coproducts_fixed_degree
+    R A B C Q N t hC hQ G S ι hc hs U e hU mU i
 
 end ModuleCat
