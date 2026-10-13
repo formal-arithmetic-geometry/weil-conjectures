@@ -52,7 +52,7 @@ steps recorded in the node proof (blueprint: lem-weil-pbc-cartier-equality).
 -/
 theorem cartier_equality
     (k K : Type*) [Field k] [Field K] [Algebra k K]
-    (hfg : (⊤ : IntermediateField k K).FG) :
+    (hfg : IntermediateField.FG (⊤ : IntermediateField k K)) :
     Module.Finite K (KaehlerDifferential k K) ∧
       Module.Finite K (Algebra.H1Cotangent k K) ∧
       Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) =

@@ -19,7 +19,7 @@
  },
  "kind": "statement",
  "title": "Cartier equality",
- "statement": "Let $K/k$ be a finitely generated field extension ($K=k(b_1,\\dots,b_m)$ for finitely many $b_i\\in K$). Then the $K$-vector spaces $\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials] and $H_1(L_{K/k})$ (first homology of the naive cotangent complex of the canonical presentation $k[K]\\to K$, [def-weil-pbc-smooth-ring-map]) are finite dimensional and $$\\operatorname{trdeg}_k(K)=\\dim_K\\Omega_{K/k}-\\dim_KH_1(L_{K/k}),$$ $\\operatorname{trdeg}$ the transcendence degree (the cardinality of a transcendence basis [def-weil-pbc-transcendence-basis]). In particular, if $K/k$ is finite then $\\dim_K\\Omega_{K/k}=\\dim_KH_1(L_{K/k})<\\infty$.",
+ "statement": "Let $K/k$ be a finitely generated field extension, expressed by `(\\top : IntermediateField k K).FG` ($K=k(b_1,\\dots,b_m)$ for finitely many $b_i\\in K$). Then the $K$-vector spaces $\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials] and $H_1(L_{K/k})$ (first homology of the naive cotangent complex of the canonical presentation $k[K]\\to K$, [def-weil-pbc-smooth-ring-map]) are finite dimensional and $$\\operatorname{trdeg}_k(K)=\\dim_K\\Omega_{K/k}-\\dim_KH_1(L_{K/k}),$$ $\\operatorname{trdeg}$ the transcendence degree (the cardinality of a transcendence basis [def-weil-pbc-transcendence-basis]). In particular, if $K/k$ is finite then $\\dim_K\\Omega_{K/k}=\\dim_KH_1(L_{K/k})<\\infty$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 07E1 (lemma-cartier-equality, line 8573) and its proof (lines 8580-8597, via Algebra Lemmas 07BV, 00S1, 00S7 and the dimension formula for a global complete intersection); tag verified in stacks-project/tags/tags (07E1,more-algebra-lemma-cartier-equality)"
@@ -160,7 +160,7 @@
   "module": "Sheaf.Paper.CartierEquality",
   "declaration": "cartier_equality",
   "file": "lean/Sheaf/Paper/CartierEquality.lean",
-  "statement": "theorem cartier_equality\n    (k K : Type*) [Field k] [Field K] [Algebra k K]\n    (hfg : (⊤ : IntermediateField k K).FG) :\n    Module.Finite K (KaehlerDifferential k K) ∧\n      Module.Finite K (Algebra.H1Cotangent k K) ∧\n      Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) =\n        Module.finrank K (KaehlerDifferential k K) ∧\n      (FiniteDimensional k K →\n        Module.finrank K (KaehlerDifferential k K) =\n          Module.finrank K (Algebra.H1Cotangent k K))",
+  "statement": "theorem cartier_equality\n    (k K : Type*) [Field k] [Field K] [Algebra k K]\n    (hfg : IntermediateField.FG (⊤ : IntermediateField k K)) :\n    Module.Finite K (KaehlerDifferential k K) ∧\n      Module.Finite K (Algebra.H1Cotangent k K) ∧\n      Algebra.trdeg k K + Module.finrank K (Algebra.H1Cotangent k K) =\n        Module.finrank K (KaehlerDifferential k K) ∧\n      (FiniteDimensional k K →\n        Module.finrank K (KaehlerDifferential k K) =\n          Module.finrank K (Algebra.H1Cotangent k K))",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
@@ -178,11 +178,28 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2308a",
-  "group": "V3",
+  "reviewer": "X-0e231",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T040804-L-3953930",
+  "landing": "20261013T201807-L-3976285",
   "kind": "interface",
-  "note": "independent Codex review: Delivered signatures match both nodes; the declared field-generation correction matches Stacks 07E1. Both modules and the direct importer compile cleanly; axioms and remaining holes meet stage-3 rules."
+  "note": "independent Codex review: Delivered CartierEquality module and node matched the packet; module and direct importer compiled, with permitted axioms only."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "Q4 stage 2",
+  "old_statement": "Let $K/k$ be a finitely generated field extension ($K=k(b_1,\\dots,b_m)$ for finitely many $b_i\\in K$). Then the $K$-vector spaces $\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials] and $H_1(L_{K/k})$ (first homology of the naive cotangent complex of the canonical presentation $k[K]\\to K$, [def-weil-pbc-smooth-ring-map]) are finite dimensional and $$\\operatorname{trdeg}_k(K)=\\dim_K\\Omega_{K/k}-\\dim_KH_1(L_{K/k}),$$ $\\operatorname{trdeg}$ the transcendence degree (the cardinality of a transcendence basis [def-weil-pbc-transcendence-basis]). In particular, if $K/k$ is finite then $\\dim_K\\Omega_{K/k}=\\dim_KH_1(L_{K/k})<\\infty$.",
+  "what": "Make the required finitely generated field-extension hypothesis explicit as `IntermediateField.FG (⊤ : IntermediateField k K)`, as requested by upstream review #1428. This is definitionally equivalent to the existing corrected hypothesis and leaves the mathematical assertion unchanged.",
+  "source": {
+   "document": "coord/upstream-review-20261013.md",
+   "place": "#1428, weakened statement: Cartier equality"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-pth-root-residue-dimension-balance",
+    "holds": true,
+    "note": "The caller passes IntermediateField.fg_top; the qualified FG hypothesis is definitionally equivalent."
+   }
+  ]
  }
 }
