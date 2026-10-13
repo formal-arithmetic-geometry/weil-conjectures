@@ -4,10 +4,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 
-import Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport
-import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelExists
+import Sheaf.AlgebraicGeometry.AffineOpenSupportedModelTorsion
 
 /-! # Supported target models on affine opens
 
@@ -61,6 +59,13 @@ theorem affine_open_supported_target_model
       ∃ M : DerivedCategory (ModuleCat.{u} A),
         (∀ (i : ℤ) (m : (DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj M),
           ∃ n : ℕ, (f.val (op U)) ^ n • m = 0) ∧
-        Nonempty (F.obj M ≅ R.obj (E'.obj⟦k⟧)) := by sorry
+        Nonempty (F.obj M ≅ R.obj (E'.obj⟦k⟧)) := by
+  dsimp
+  let : HasDerivedCategory.{u + 1} (ModuleCat.{u} (X.sheaf.obj.obj (op U))) :=
+    HasDerivedCategory.standard _
+  intro F hF
+  obtain ⟨M, hM⟩ := affine_open_supported_model_exists X E' U hU k F hF
+  have htor := affine_open_supported_model_torsion X f E' hSupport U hU k F hF M hM
+  exact ⟨M, htor, hM⟩
 
 end AlgebraicGeometry.Scheme

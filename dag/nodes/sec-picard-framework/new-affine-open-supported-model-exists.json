@@ -1,0 +1,140 @@
+{
+ "id": "new-affine-open-supported-model-exists",
+ "kind": "statement",
+ "title": "Affine open supported model existence",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with derived categories of module sheaves and of its localized open sites [def-pc-derived-category], and let $Eprime$ have quasi-coherent cohomology. For an affine open $U$ and integer $k$, put $A=\\Gamma(U,\\mathcal O_X)$, and let $R$ be derived over-site restriction. With a derived category of $A$-modules fixed, let $F:D(A)\\to D(\\mathcal O_X\\text{ over }U)$ have a natural isomorphism $F\\circ Q\\cong Q\\circ\\operatorname{affinePerfectSheafification}_*$ on complexes [lem-pc-affine-perfect-module-model]. Then there is $M\\in D(A)$ with $F(M)\\cong R(Eprime[k])$. No scalar, support, boundedness or perfectness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ, affine support paragraph; Tag 06Z0 exact associated sheaf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "The homology shift isomorphism preserves quasi-coherent cohomology. Apply exact open restriction and its module over-site equivalence [lem-pc-open-derived-restriction-comparison], then the inverse affine chart to obtain a quasi-coherent derived object K on Spec A. Restriction along the affine chart is an exact equivalence, preserving local quasi-coherent presentations.",
+   "uses": [
+    "lem-pc-open-derived-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse of [lem-pc-affine-qcoh-derived-equivalence] on K. Its counit supplies M and an isomorphism from derived tilde of M to K. Transport by the canonical affine-site equivalence of [lem-pc-affine-localized-site-derived-transport]. Its comparison identifies this transported functor on complexes with Q of affinePerfectSheafification.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-localized-site-derived-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two comparisons after Q and descend their natural isomorphism through the localization property (CategoryTheory.Localization.liftNatIso). Evaluating at M and composing with the transported counit yields F(M) isomorphic to R(Eprime[k]). Support and a scalar are not used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-derived-restriction-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-localized-site-derived-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "date": "2026-10-13",
+  "note": "Second reading: actual proper substatement of the target, with source-based proof steps; no claim that the new hole is closed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "essentialImage|mem_essImage|exists_pow_smul|away.*eq_zero",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "verdict": "components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every quasi-coherent object in the derived category on an affine scheme is in the essential image of the derived associated sheaf functor",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology modules of a complex have zero localization at a scalar when the stalks of its associated sheaf vanish on the corresponding basic open",
+   "date": "2026-10-13",
+   "results": "DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, ModuleCat.Tilde.smul_stalk_no_nonzero_divisor, Module.notMem_support_iff, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, LocalizedModule.subsingleton_iff_disjoint",
+   "verdict": "components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.liftNatIso",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Localization.liftNatIso'",
+   "verdict": "components only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenSupportedTargetModel",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, affine power-annihilation argument; affine paragraph: identify the affine restriction, its bounded projective source model and supported target module; compare scalars; supported target models on affine opens; affine derived preimage before the support calculation",
+   "via": [
+    "lem-sc-perfect-support-affine-module-model",
+    "lem-sc-perfect-support-affine-open-torsion",
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenSupportedModelExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenSupportedModelExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_open_supported_model_exists",
+  "statement": "theorem affine_open_supported_model_exists\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E' : schemeDerivedQCohCategory X)\n    (U : X.Opens) (hU : IsAffineOpen U) (k : ℤ)\n    [HasDerivedCategory.{u + 1} (ModuleCat.{u} (X.sheaf.obj.obj (op U)))]\n    (F : DerivedCategory (ModuleCat.{u} (X.sheaf.obj.obj (op U))) ⥤\n      DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)))\n    (hF : Nonempty (DerivedCategory.Q ⋙ F ≅\n      (affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ) ⋙\n        DerivedCategory.Q)) :\n    ∃ M : DerivedCategory (ModuleCat.{u} (X.sheaf.obj.obj (op U))),\n      Nonempty (F.obj M ≅\n        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n          (E'.obj⟦k⟧))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T111854-L-3053076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T111854-L-3053076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
