@@ -10646,3 +10646,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/C1/Sheaf.RingTheory.ArtinianSeparableResidueLiftCapture (stage 3; reviewer PASS; first push; landing 20261013T022407-L-3210860 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/C2/Sheaf.RingTheory.FiniteNormalCoverFamily (stage 3; reviewer PASS; first push; landing 20261013T022408-L-3211046 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/C4/Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal (stage 3; reviewer PASS; first push; landing 20261013T022408-L-3211188 (interface); batch 20261013T022404; modules 5; new nodes 4)
+- 02:24 L: merged deliver/C4/Sheaf.Paper.EtaleCECoherentFirstPageLifts (stage 3; reviewer PASS; first push; landing 20261013T022409-L-3211344 (interface); batch 20261013T022404; modules 3; new nodes 2)
