@@ -8,7 +8,8 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Mathlib.Topology.Sheaves.Module
+import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 
 /-! # Finite type of relations for a cokernel
 
@@ -21,8 +22,150 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
+-- These generator-transport helpers adapt the proved private helpers in
+-- CoherentKernelConditionRestriction to arbitrary ringed spaces.
+open SheafOfModules in
+private theorem finiteType_of_data
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M : SheafOfModules.{u} R}
+    (q : M.LocalGeneratorsData) [hq : q.IsFiniteType] : M.IsFiniteType := by
+  have : q.shrink.IsFiniteType :=
+    ⟨fun i ↦ hq.isFiniteType i.2.choose⟩
+  exact ⟨q.shrink, this⟩
+
+open SheafOfModules in
+private theorem finiteType_of_iso
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (e : M ≅ N)
+    [M.IsFiniteType] : N.IsFiniteType := by
+  obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData M
+  let q' : N.LocalGeneratorsData :=
+    { I := q.I
+      X := q.X
+      coversTop := q.coversTop
+      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+  have : q'.IsFiniteType := ⟨fun i ↦ by
+    have := hq.isFiniteType i
+    exact inferInstanceAs ((q.generators i).ofEpi _).IsFiniteType⟩
+  exact finiteType_of_data q'
+
+set_option backward.isDefEq.respectTransparency false in
+open SheafOfModules in
+private theorem finiteType_pushforward
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
+    {S : Sheaf K RingCat.{u}}
+    [∀ X, HasSheafify (K.over X) AddCommGrpCat.{u}]
+    [∀ X, (K.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (G : D ⥤ C) [G.IsContinuous K J] [G.IsCocontinuous K J]
+    (φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} K J).obj R)
+    (η : (pushforward.{u} φ).obj (unit R) ≅ unit S)
+    [∀ X, (Over.post G).IsContinuous (K.over X) (J.over (G.obj X))]
+    (h : ∀ (X : D) (Y : C) (f : G.obj X ⟶ Y),
+      PreservesColimitsOfSize.{u, u}
+        (pushforward.{u} (R := R.over Y) (F := Over.post (X := X) G ⋙ Over.map f)
+          (((Over.forget X).sheafPushforwardContinuous RingCat.{u} (K.over X) K).map φ)))
+    {M : SheafOfModules.{u} R} [M.IsFiniteType] :
+    ((pushforward.{u} φ).obj M).IsFiniteType := by
+  obtain ⟨P, hP⟩ := IsFiniteType.exists_localGeneratorsData M
+  let Q : ((pushforward.{u} φ).obj M).LocalGeneratorsData :=
+    { I := Σ (X : D) (i : P.I), G.obj X ⟶ P.X i
+      X i := i.1
+      coversTop Y := by
+        refine K.superset_covering ?_ (G.cover_lift K _ (P.coversTop (G.obj Y)))
+        intro Z g ⟨i, ⟨v⟩⟩
+        exact ⟨⟨Z, i, v⟩, ⟨𝟙 _⟩⟩
+      generators i := by
+        let overS : SheafOfModules.{u} S ⥤ SheafOfModules.{u} (S.over i.1) :=
+          pushforward (𝟙 _)
+        let G' := Over.post (X := i.1) G ⋙ Over.map i.2.2
+        let ψ : S.over i.1 ⟶
+            (G'.sheafPushforwardContinuous RingCat.{u} (K.over i.1)
+              (J.over (P.X i.2.1))).obj (R.over (P.X i.2.1)) :=
+          ((Over.forget i.1).sheafPushforwardContinuous RingCat.{u} (K.over i.1) K).map φ
+        let e : (pushforward.{u} (F := G') ψ).obj (unit (R.over (P.X i.2.1))) ≅
+            unit (S.over i.1) := overS.mapIso η
+        have : PreservesColimitsOfSize.{u, u} (pushforward.{u} (F := G') ψ) := h _ _ _
+        exact (P.generators i.2.1).map (pushforward.{u} (F := G') ψ) e.symm }
+  have : Q.IsFiniteType := ⟨fun i ↦ by
+    have := hP.isFiniteType i.2.1
+    dsimp [Q]
+    infer_instance⟩
+  exact finiteType_of_data Q
+
+open SheafOfModules in
+private theorem finiteType_pushforward_leftAdjoint
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ X, HasSheafify (J.over X) AddCommGrpCat.{u}]
+    [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
+    {S : Sheaf K RingCat.{u}}
+    [∀ X, HasSheafify (K.over X) AddCommGrpCat.{u}]
+    [∀ X, (K.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    (G : D ⥤ C) [G.IsContinuous K J] [G.IsCocontinuous K J]
+    (φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} K J).obj R)
+    (η : (pushforward.{u} φ).obj (unit R) ≅ unit S) [G.IsLeftAdjoint] [IsIso φ]
+    [∀ X, (Over.post G).IsContinuous (K.over X) (J.over (G.obj X))]
+    [HasPullbacks C] [HasPullbacks D]
+    {M : SheafOfModules.{u} R} [M.IsFiniteType] :
+    ((pushforward.{u} φ).obj M).IsFiniteType := by
+  apply +allowSynthFailures finiteType_pushforward G φ η _
+  intro X Y f
+  let G' := Over.post (X := X) G ⋙ Over.map f
+  have : G'.IsContinuous (K.over X) (J.over Y) :=
+    Functor.isContinuous_comp _ _ _ (J.over _) _
+  have : G'.IsCocontinuous (K.over X) (J.over Y) := isCocontinuous_comp _ _ _ (J.over _)
+  let a : S.over X ⟶
+      (G'.sheafPushforwardContinuous RingCat.{u} (K.over X) (J.over Y)).obj (R.over Y) :=
+    ((Over.forget X).sheafPushforwardContinuous RingCat.{u} (K.over X) K).map φ
+  have : (pushforward.{u} a).IsLeftAdjoint := isLeftAdjoint_pushforward_of_isIso a
+  infer_instance
+
 namespace AlgebraicGeometry.RingedSpace
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem finiteType_equivOver {X : RingedSpace.{u}} (U : TopologicalSpace.Opens X)
+    (M : SheafOfModules.{u} ((moduleRings X).over U)) [M.IsFiniteType] :
+    ((U.sheafOfModulesEquivOver (moduleRings X)).functor.obj M).IsFiniteType := by
+  let := U.instIsDenseSubsiteSubtypeMemOverGrothendieckTopologyOverInverseOverEquivalence
+  have (V : TopologicalSpace.Opens ↥U) : (Over.post U.overEquivalence.symm.functor).IsContinuous
+      ((Opens.grothendieckTopology ↥U).over V)
+      (((Opens.grothendieckTopology X).over U).over
+        (U.overEquivalence.symm.functor.obj V)) :=
+    Functor.IsCoverDense.isContinuous _ _ _
+      ((Functor.IsDenseSubsite.coverPreserving _ _ U.overEquivalence.symm.functor).overPost V)
+  change ((SheafOfModules.pushforward
+    (U.overPullbackSheafEquivOver.app (moduleRings X)).inv).obj M).IsFiniteType
+  exact finiteType_pushforward_leftAdjoint U.overEquivalence.symm.functor _ (Iso.refl _)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem finiteType_equivOverInverse {X : RingedSpace.{u}} (U : TopologicalSpace.Opens X)
+    (M : SheafOfModules.{u} (U.sheafRestrict.obj (moduleRings X))) [M.IsFiniteType] :
+    ((U.sheafOfModulesEquivOver (moduleRings X)).inverse.obj M).IsFiniteType := by
+  have (V : Over U) : (Over.post U.overEquivalence.functor).IsContinuous
+      (((Opens.grothendieckTopology X).over U).over V)
+      ((Opens.grothendieckTopology ↥U).over (U.overEquivalence.functor.obj V)) :=
+    Functor.IsCoverDense.isContinuous _ _ _
+      ((Functor.IsDenseSubsite.coverPreserving _ _ U.overEquivalence.functor).overPost V)
+  change ((SheafOfModules.pushforward
+    (U.sheafRestrictSheafEquivOver.app (moduleRings X)).inv).obj M).IsFiniteType
+  exact finiteType_pushforward_leftAdjoint U.overEquivalence.functor _
+    (U.sheafOfModulesEquivOverInverseUnit (moduleRings X))
+
+set_option maxHeartbeats 1200000 in
+-- Transport through the slice-site equivalence expands several nested module functors.
+set_option synthInstance.maxHeartbeats 200000 in
+set_option backward.isDefEq.respectTransparency false in
 /-- The relations of the quotient presentation are of finite type.
 Source: Stacks Project, Modules, Lemma 0H96, proof, lines 1440-1454
 (blueprint: lem-weil-pbc-module-finite-presentation-cokernel-kernel).
@@ -42,6 +185,67 @@ theorem kernel_composite_cokernel_isFiniteType
     (P : (H.over U).Presentation) [P.IsFinite] :
     (kernel (P.generators.π ≫
       (SheafOfModules.overFunctor (moduleRings X) U).map (cokernel.π f))).IsFiniteType := by
-  sorry
+  let R := moduleRings X
+  let A := SheafOfModules.overFunctor R U
+  let E := U.sheafOfModulesEquivOver R
+  let Y : RingedSpace := X.restrict U.isOpenEmbedding
+  -- The finite relation family generates the kernel of the presentation map.
+  have hP : (kernel P.generators.π).IsFiniteType := by
+    let q := P.relations.localGeneratorsData
+    have : q.IsFiniteType := by
+      refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := q) (fun i ↦ ?_)
+      dsimp only [q, SheafOfModules.GeneratingSections.localGeneratorsData]
+      infer_instance
+    exact finiteType_of_data (R := R.over U) q
+  have hG : (G.over U).IsFiniteType := by
+    exact finiteType_pushforward_leftAdjoint (Over.forget U) (𝟙 _) (Iso.refl _)
+  have : (E.functor.obj (G.over U)).IsFiniteType := finiteType_equivOver U _
+  have : (E.functor.obj (kernel P.generators.π)).IsFiniteType := finiteType_equivOver U _
+  let π := E.functor.map P.generators.π
+  let c := E.functor.map (A.map (cokernel.π f))
+  have : (kernel π).IsFiniteType :=
+    finiteType_of_iso (R := U.sheafRestrict.obj R)
+      (PreservesKernel.iso E.functor P.generators.π)
+  -- Exactness gives an epimorphism from the restricted source onto ker(c).
+  have hc : (kernel c).IsFiniteType := by
+    have he := ((ShortComplex.exact_cokernel f).map A).map E.functor
+    let T := ((ShortComplex.mk f (cokernel.π f) (by simp)).map A).map E.functor
+    have hep : Epi (kernel.lift T.g T.f T.zero) := he.epi_kernelLift
+    have : T.X₁.IsFiniteType := by
+      change (E.functor.obj (G.over U)).IsFiniteType
+      infer_instance
+    exact (finiteType_image_extension Y).1 (kernel.lift T.g T.f T.zero)
+  have : Epi π := by dsimp [π]; infer_instance
+  -- Since π is epi, the first three terms of the composition sequence are short exact.
+  have he := kernelCokernelCompSequence_exact π c
+  let S := he.sc 0 (by decide)
+  have hδ : kernelCokernelCompSequence.δ π c = 0 := by
+    have hπ : cokernel.π π = 0 := by
+      apply (cancel_epi π).mp
+      simp
+    simp [kernelCokernelCompSequence.δ_fac, hπ]
+  have hS : S.ShortExact := by
+    refine { exact := he.exact 0 (by decide), mono_f := ?_, epi_g := ?_ }
+    · change Mono ((kernelCokernelCompSequence π c).map' 0 1)
+      infer_instance
+    · exact ((he.sc 1 (by decide)).exact_iff_epi hδ).mp (he.exact 1 (by decide))
+  have : S.X₁.IsFiniteType := by
+    change (kernel π).IsFiniteType
+    infer_instance
+  have : S.X₃.IsFiniteType := hc
+  have hN : (kernel (π ≫ c)).IsFiniteType :=
+    (finiteType_image_extension Y).2.2 S hS
+  -- Transfer the finite-type conclusion back to the slice-site kernel.
+  have : (kernel (E.functor.map (P.generators.π ≫ A.map (cokernel.π f)))).IsFiniteType := by
+    simpa only [Functor.map_comp] using hN
+  have : (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f)))).IsFiniteType := by
+    exact finiteType_of_iso (R := U.sheafRestrict.obj R) (PreservesKernel.iso E.functor
+      (P.generators.π ≫ A.map (cokernel.π f))).symm
+  have : (E.inverse.obj
+      (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f))))).IsFiniteType :=
+    finiteType_equivOverInverse U _
+  exact finiteType_of_iso (R := R.over U)
+    (M := E.inverse.obj (E.functor.obj (kernel (P.generators.π ≫ A.map (cokernel.π f)))))
+    (E.unitIso.app (kernel (P.generators.π ≫ A.map (cokernel.π f)))).symm
 
 end AlgebraicGeometry.RingedSpace

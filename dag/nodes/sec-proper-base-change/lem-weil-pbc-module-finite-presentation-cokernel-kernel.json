@@ -15,28 +15,42 @@
  ],
  "proof": [
   {
-   "text": "The relations of P generate M = kernel(P.generators.π) by an epimorphism from a finite free module, so M is of finite type. Restrict G to U; finite type is preserved by restriction. The image I of f|U is an epi image of that finite-type source. Let N be the kernel of the composite generator map with c|U, where c is the cokernel map of f. The generator map restricts to N → I. It is epi because sections of I locally lift along the generator epi, and every such lift lies in N. Its kernel is M: all kernels are sectionwise, so the vanishing equation is exactly that of M. Hence 0 → M → N → I → 0 is short exact. Apply finite-type closure under extensions to obtain N of finite type. This is steps 3–5 of the original Stacks argument.",
+   "text": "The finite family P.relations gives finite local generators of kernel(P.generators.π) by the trivial-cover construction. Finite type is preserved by restriction and by the equivalence between the slice site Over U and the opens of U: pull back the generating cover, map each finite generator family through the corresponding colimit-preserving module functor, and use the unit isomorphism. These transport steps are proved as private Lean helpers, adapting the existing proved helpers in CoherentKernelConditionRestriction.",
    "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work on the restricted ringed space Y = X|U, using the module equivalence U.sheafOfModulesEquivOver. Write π for the transported presentation epimorphism and c for the transported restricted cokernel map. Exactness of f followed by cokernel.π f is preserved by the restriction and equivalence functors. The exact-iff-epi-kernel-lift lemma gives an epimorphism from the transported G|U onto kernel c. Its source is finite type by the preceding transport construction; the epi-image clause of finiteType_image_extension makes kernel c finite type. Preservation of kernels and invariance under isomorphisms make kernel π finite type as well.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
     "lem-weil-pbc-module-finite-type-image-extension",
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the snake-lemma composition sequence in Mathlib (kernelCokernelCompSequence_exact) to π and c. Its first three terms are kernel π, kernel(π ≫ c), and kernel c. The first map is mono. Since π is epi, its cokernel projection is zero; the connecting map δ = -kernel.ι c ≫ cokernel.π π is zero. Exactness at kernel c and exact_iff_epi show that the second map is epi. Thus the first three terms form a short exact sequence. Apply the extension clause of finiteType_image_extension to its finite-type endpoints. Finally transfer the middle kernel back using PreservesKernel.iso, the inverse open-site equivalence, and the equivalence unit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian",
     "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+    "lem-weil-pbc-module-finite-type-image-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-finite-type-image-extension",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
   "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-module-finite-type-image-extension",
   "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+  "lem-weil-pbc-snake-lemma-abelian"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 0H96 (label lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454; tag verified in stacks-project/tags/tags (0H96,modules-lemma-cokernel-finite-finite-presentation)"
+  "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof: finite type of the preimage N; categorical realization with Mathlib kernelCokernelCompSequence_exact (snake lemma, Homology 010H), and the original finite-type extension argument."
  },
  "mathlib_searches": [
   {
@@ -129,10 +143,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T011926-L-2762705",
-  "kind": "interface",
+  "landing": "20261013T024046-L-3338524",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

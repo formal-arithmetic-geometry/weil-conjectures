@@ -10764,3 +10764,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:40 L: merged deliver/R1/Sheaf.FieldTheory.PBasisDifferentialsBasis (stage 3; reviewer PASS; first push; landing 20261013T024045-L-3338092 (interface); batch 20261013T024029; modules 2; new nodes 1)
 - 02:40 L: merged deliver/R3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonCompat (stage 3; reviewer PASS; first push; landing 20261013T024045-L-3338260 (interface); batch 20261013T024029; modules 3; new nodes 2)
 - 02:40 L: merged deliver/R4/Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedGenerators (stage 3; reviewer PASS; first push; landing 20261013T024046-L-3338408 (proof); batch 20261013T024029; modules 1; new nodes 0)
+- 02:40 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernelKernel (stage 3; reviewer PASS; first push; landing 20261013T024046-L-3338524 (proof); batch 20261013T024029; modules 1; new nodes 0)
