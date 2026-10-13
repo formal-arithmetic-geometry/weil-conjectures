@@ -1,0 +1,150 @@
+{
+ "id": "lem-sbc-flat-dvr-special-fiber-cartier",
+ "kind": "statement",
+ "title": "Flat DVR special fibres are effective Cartier divisors",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], and let $q:L\\to\\operatorname{Spec}A$ be flat [def-weil-flat-morphism]. Then the canonical inclusion of the scheme-theoretic fibre [def-pc-scheme-fibre] at the closed point of $\\operatorname{Spec}A$ is an effective Cartier centre: its kernel is an effective Cartier ideal [def-nagata-effective-cartier-ideal]. The special fibre may be empty.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, first paragraph; Tag 02OO, case (6) (flat pullback of an effective Cartier divisor)"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Choose an irreducible uniformizer pi using IsDiscreteValuationRing.exists_irreducible. Its principal ideal is the maximal ideal by irreducible_iff_uniformizer, and pi is a nonzerodivisor in the domain A.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The residue-field inclusion is a closed immersion. Its kernel is the vanishing ideal of the closed point. On the top affine chart, use the Gamma-Spec isomorphism to identify this ideal with the comap of the maximal ideal. Regular principality is preserved by that ring isomorphism, so the kernel ideal sheaf is invertible.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The special fibre is the pullback along q of this residue-field inclusion. ker_fst_of_isClosedImmersion identifies its kernel with the comap of the invertible ideal. IsInvertible.comap_of_flat preserves invertibility; isEffectiveCartierCenter_iff_isInvertible_ker gives the conclusion.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-pc-scheme-fibre",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "Q1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, first paragraph; Tag 02OO, case (6) (flat pullback of an effective Cartier divisor)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the special fibre of a flat morphism over a discrete valuation ring is an effective Cartier divisor",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the special fibre of a flat morphism over a discrete valuation ring is an effective Cartier divisor",
+   "results": "Eight hits, including Flat.stalkMap and Flat.generalizingMap; no Cartier statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Ideal.span",
+   "results": "Four hits, including irreducible_iff_uniformizer and Irreducible.maximalIdeal_eq. Used the former in the proof.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEffectiveCartierCenter.*fiber|fiber.*IsEffectiveCartierCenter; regular principal flat pullback; blueprint_refs special fibre Cartier",
+   "results": "No Mathlib exact match. Project has IsInvertible.comap_of_flat, ker_fst_of_isClosedImmersion, and isEffectiveCartierCenter_iff_isInvertible_ker. No blueprint duplicate.",
+   "date": "2026-10-13",
+   "verdict": "assembled from existing ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrPuncturedCoverPurity",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ, first paragraph; Tag 02OO, case (6) (flat pullback of an effective Cartier divisor); the trait purity assembly in the proof of sbc-thm-spreading-finite-etale-galois",
+   "via": [
+    "lem-sbc-dvr-punctured-cover-purity",
+    "lem-sbc-trait-etale-extension",
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatDvrSpecialFiberCartier",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatDvrSpecialFiberCartier.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isEffectiveCartierCenter_specialFiber_of_flat",
+  "statement": "theorem isEffectiveCartierCenter_specialFiber_of_flat (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Flat q] : IsEffectiveCartierCenter (q.fiberι (IsLocalRing.closedPoint A))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

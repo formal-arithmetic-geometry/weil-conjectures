@@ -17,37 +17,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a uniformizer of the DVR A. Smoothness gives flatness, so its pullback defines the special fibre D as an effective Cartier divisor. The DVR is Noetherian; smoothness is locally of finite type, hence L is locally Noetherian. D is smooth over the residue field, so it is regular. This is the geometric setup in the first paragraph of Tag 0EYJ.",
+   "text": "Use the actual scheme-theoretic special fibre D=q.fiber s and inclusion i=q.fiberι s. Smoothness gives flatness, and lem-sbc-flat-dvr-special-fiber-cartier proves i effective Cartier. Local finite type over the Noetherian DVR makes L locally Noetherian. The fibre morphism to the residue field is smooth, so D is locally Noetherian and regular by IsRegular.of_smooth.",
    "uses": [
-    "def-sc-discrete-valuation-ring",
+    "lem-sbc-flat-dvr-special-fiber-cartier",
     "def-sbc-smooth-morphisms",
-    "def-weil-pbc-noetherian-ring"
+    "def-weil-pbc-noetherian-ring",
+    "lem-sc-smooth-regular"
    ],
    "elementary": false
   },
   {
-   "text": "The special fibre is geometrically connected and contains x, so it is connected and nonempty. A regular locally Noetherian scheme has disjoint open irreducible components: on each normal Noetherian affine chart the finitely many minimal-prime components cannot meet because the local rings are domains. Connectedness leaves one component, so D is integral. W meets D and hence contains its generic point. The finite etale model n on W extends the punctured cover near that point and witnesses absence of ramification there. This is the only codimension-one point of L on D, because D is an integral effective Cartier divisor. Thus the punctured cover is unramified over L in codimension one, as in the second paragraph of Tag 0EYJ.",
+   "text": "GeometricallyConnected gives ConnectedSpace of the special fibre. IsRegular.isIntegral makes it integral. range_fiberι and hV identify q⁻¹V with the complement of i. The point x lifts to a point y of D by range_fiberι and hqx. The generic point specializes to y; map this specialization along i and use mem_open W.isOpen to prove i(genericPoint D) belongs to W.",
    "uses": [
     "def-sbc-smooth-morphisms",
-    "def-weil-finite-integral-morphism",
-    "def-weil-etale-morphism"
+    "lem-sc-regular-connected-integral"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Tag 0EYE to L, its regular effective Cartier divisor D, and the finite etale cover n restricted to q⁻¹V=L\\D. It gives a finite etale p:E→L with the required restriction isomorphism. Orient that isomorphism from the restriction of N to that of E. The isomorphism is over the open, which gives the displayed composition equality. The theorem asserts existence; no definition chooses an arbitrary witness. The empty cover is included by Tag 0EYE.",
+   "text": "Apply exists_finite_etale_extension_of_regular_integral_divisor to D, i, q⁻¹V, n, and W with the Cartier, regularity, integrality, complement, and generic-point membership facts just proved. This gives exactly the required finite etale extension and over-open restriction isomorphism.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "def-weil-etale-morphism"
+    "lem-sbc-regular-integral-divisor-etale-purity"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "S3",
+  "by": "Q1",
   "document": "Stacks Project",
-  "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ (Lemma 58.31.8), first two paragraphs of the proof"
+  "place": "Tag 0EYJ, first two paragraphs; Tag 0EYE, via the regular-integral-divisor purity theorem. The Cartier pullback and generic-point assembly are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -111,11 +110,12 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "def-sc-discrete-valuation-ring",
+  "lem-sbc-flat-dvr-special-fiber-cartier",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-finite-integral-morphism",
-  "def-weil-etale-morphism"
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sbc-regular-integral-divisor-etale-purity"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -131,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T015614-L-3026987",
+  "landing": "20261013T031547-L-3572859",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

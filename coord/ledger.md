@@ -10878,3 +10878,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/M3/Sheaf.RingTheory.KoszulCoefficientExtensionNu (stage 3; reviewer PASS; after a return; landing 20261013T031546-L-3572431 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen (stage 3; reviewer PASS; first push; landing 20261013T031546-L-3572575 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/P4/Sheaf.AlgebraicGeometry.CoherentMapCompletionTorsionKernelReflection (stage 3; reviewer PASS; first push; landing 20261013T031547-L-3572705 (interface); batch 20261013T031526; modules 3; new nodes 2)
+- 03:15 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Morphisms.DvrPuncturedCoverPurity (stage 3; reviewer PASS; first push; landing 20261013T031547-L-3572859 (interface); batch 20261013T031526; modules 3; new nodes 2)

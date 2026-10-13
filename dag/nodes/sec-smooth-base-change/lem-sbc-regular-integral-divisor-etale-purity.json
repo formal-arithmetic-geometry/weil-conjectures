@@ -1,0 +1,156 @@
+{
+ "id": "lem-sbc-regular-integral-divisor-etale-purity",
+ "kind": "statement",
+ "title": "Etale purity across a regular integral Cartier divisor",
+ "statement": "Let $L$ be locally Noetherian and $i:D\\to L$ an effective Cartier centre [def-nagata-effective-cartier-ideal] with $D$ regular [def-weil-regular-scheme] and integral [def-pc-integral-scheme]. Let $U\\subseteq L$ be the open complement of the image of $i$. Let $n:N\\to L$ be finite [def-weil-finite-integral-morphism] and etale [def-weil-etale-morphism] over $U$. Suppose $W\\subseteq L$ is open, contains the image of the generic point of $D$, and $n$ is etale over $W$. Then there are a finite etale $p:E\\to L$ and an isomorphism $N|_U\\cong E|_U$ over $U$. No quasi-compactness, quasi-separatedness, or normality of $N$ is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ, second paragraph (generic-point unramifiedness)"
+ },
+ "stmt_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "An effective Cartier divisor is nowhere dense, so U is dense. At every point of D, the Noetherian local ring of L has regular quotient by the Cartier nonzerodivisor, so it is regular (Stacks 00NU). At the generic point the quotient is a field and the local ring is a DVR. At other points of the integral D the quotient has positive dimension and the local ring has dimension at least two. Thus the generic point of D is the only codimension-one point of L outside U.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-weil-regular-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction n over W is finite etale. Restrict further to the DVR at the image of the generic point of D. This finite etale model identifies on the fraction field with the restriction of n over U, so that punctured cover is unramified there. This verifies unramifiedness in codimension one at all points outside U.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Stacks Tag 0EYE to the regular effective Cartier divisor D and the finite etale cover n over U. This gives a finite etale p over L and an isomorphism of restrictions over U. Orient the isomorphism from N to E; the over-U condition is the displayed composition equality. The theorem applies also to the empty cover and requires only local Noetherianity.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-weil-regular-scheme",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "Q1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ, second paragraph (generic-point unramifiedness)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover extends across regular integral Cartier divisor when etale near generic point",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cover extends across regular Cartier divisor if unramified at generic points",
+   "results": "Eight hits about the etale locus and etale morphisms; no extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, AlgebraicGeometry.Etale",
+   "results": "Twelve hits, including base-change stability and multiplicativity of Etale; no purity theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|Cartier.*[Ee]tale|[Ee]tale.*Cartier; 0EYE in project; blueprint_refs 0EYE",
+   "results": "No Mathlib hits. Project 0EYE references are the parent or its ancestors, whose imports would be circular. No independent divisor extension statement or blueprint duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DvrPuncturedCoverPurity",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYE (Lemma 58.31.3); Tag 0EYJ, second paragraph (generic-point unramifiedness); the trait purity assembly in the proof of sbc-thm-spreading-finite-etale-galois",
+   "via": [
+    "lem-sbc-dvr-punctured-cover-purity",
+    "lem-sbc-trait-etale-extension",
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularIntegralDivisorEtalePurity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_regular_integral_divisor",
+  "statement": "theorem exists_finite_etale_extension_of_regular_integral_divisor {L D N : Scheme.{u}} [IsLocallyNoetherian L] [IsRegular D] [IsIntegral D] (i : D ⟶ L) (hi : IsEffectiveCartierCenter i) (U : L.Opens) (hU : ∀ z : L, z ∈ U ↔ z ∉ Set.range i) (n : N ⟶ L) [IsFinite n] (het : Etale (n ∣_ U)) (W : L.Opens) (hgeneric : i (genericPoint D) ∈ W) (hW : Etale (n ∣_ W)) : ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧ ∃ e : (n ⁻¹ᵁ U).toScheme ≅ (p ⁻¹ᵁ U).toScheme, e.hom ≫ (p ∣_ U) = n ∣_ U",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T031547-L-3572859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
