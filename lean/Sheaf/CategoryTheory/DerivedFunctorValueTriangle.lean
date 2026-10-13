@@ -6,9 +6,6 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Sheaf.CategoryTheory.LeftDerivedValueMorphism
-import Sheaf.CategoryTheory.DerivedFunctorShift
-import Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompletion
 import Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility
 
 @[expose] public section
@@ -97,10 +94,9 @@ theorem leftDerived_value_triangle_extension
             lh ≫ (shiftFunctor D (1 : ℤ)).map (uX.app s') ≫
               (F.commShiftIso (1 : ℤ)).inv.app s'.left) ∧
       Triangle.mk lf lg lh ∈ distTriang D  := by
-  obtain ⟨lh, hdist⟩ := leftDerived_value_triangle_extension_core F S hS T hT LX LY LZ hX hY hZ
-    uX uY uZ huX huY huZ lf lg hf hg
-  refine ⟨lh, ?_, hdist⟩
-  exact leftDerived_value_triangle_extension_compat F S hS T hT LX LY LZ hX hY hZ
-    uX uY uZ huX huY huZ lf lg hf hg lh hdist
+  obtain ⟨lh, hdist, hcompat⟩ :=
+    leftDerived_value_triangle_extension_compat F S hS T hT LX LY LZ hX hY hZ
+      uX uY uZ huX huY huZ lf lg hf hg
+  exact ⟨lh, hcompat, hdist⟩
 
 end CategoryTheory.Functor
