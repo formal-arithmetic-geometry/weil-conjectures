@@ -12,6 +12,10 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 
+import Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel
+import Sheaf.Algebra.Homology.ResidueKernelUnitMinorQuotient
+import Sheaf.Algebra.Homology.ResidueKernelLocalizedCokernel
+
 /-! # Unit-minor reduction for a residue rank-one kernel
 
 Source: Stacks Project, Tags 00O0 and 00NX, local matrix argument.
@@ -72,6 +76,15 @@ theorem residue_kernel_unit_minor
         LinearMap.ker ((ModuleCat.extendScalars
           (algebraMap R (Localization.AtPrime 𝔭))).map f).hom) ∧
       Nonempty (LocalizedModule 𝔭.primeCompl (Y ⧸ LinearMap.range f.hom)
-        ≃ₗ[Localization.AtPrime 𝔭] (C ⧸ LinearMap.range g)) := by sorry
+        ≃ₗ[Localization.AtPrime 𝔭] (C ⧸ LinearMap.range g)) := by
+  obtain ⟨U, C, g, hfree, eX, eY, hdiag⟩ :=
+    residue_kernel_unit_minor_normal_form R X Y f hfX hfY hpX hpY 𝔭 hres
+  obtain ⟨hker, hcoker⟩ := residue_kernel_unit_minor_quotient
+    (Localization.AtPrime 𝔭) _ _ U C
+    ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).map f).hom
+    g eX eY hdiag
+  obtain ⟨eLoc⟩ := residue_kernel_localized_cokernel R X Y f 𝔭
+  obtain ⟨eCoker⟩ := hcoker
+  exact ⟨C, g, hfree, hker, ⟨eLoc.trans eCoker⟩⟩
 
 end ModuleCat

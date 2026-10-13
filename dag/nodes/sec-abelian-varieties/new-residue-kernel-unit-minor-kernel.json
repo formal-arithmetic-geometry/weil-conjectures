@@ -1,0 +1,139 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2 fixed-affine normalization: the residue-field rank-(n-1) unit-minor step, before the local-ring kernel test eliminates the remaining differential. Component: Diagonal matrix normal form for a residue rank-one kernel.",
+   "via": [
+    "new-residue-kernel-unit-minor",
+    "new-universal-h0-cokernel-local-free",
+    "new-universal-h0-split-factorization",
+    "lem-sc-universal-h0-split-differential",
+    "lem-sc-connective-universal-h0-zero-differential",
+    "lem-sc-universal-h0-projective-normalization",
+    "lem-sc-picard-affine-target-normalization",
+    "lem-sc-picard-h1-fixed-model-comparison",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "id": "new-residue-kernel-unit-minor-kernel",
+ "kind": "statement",
+ "title": "Diagonal matrix normal form for a residue rank-one kernel",
+ "statement": "Let R be a commutative ring, X and Y finite projective R-modules, f:X→Y linear, and p a prime. Put A=R_p and κ=A/m. Suppose ker(f⊗κ) is linearly isomorphic to κ. There exist A-modules U,C, an A-linear map g:A→C with C free, and A-linear equivalences eX:X⊗A→U×A and eY:Y⊗A→U×C such that eY((f⊗A)(x))=((eX(x)).1,g((eX(x)).2)) for every x. No kernel or cokernel comparison is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00NX and 00O0, finite-projective local freeness and unit-minor proof; rank-(n-1) adaptation by K2."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Over A=R_p, finite projectivity gives finite freeness. This can be obtained directly from Mathlib Module.free_of_flat_of_isLocalRing, since base change preserves finiteness and projectivity implies flatness. Choose finite bases. Tensor associativity identifies the residue matrix of f⊗A with f⊗κ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If n is the source rank, rank-nullity over κ and the hypothesis show n≥1 and rank n-1. Choose n-1 independent columns and n-1 rows giving a nonsingular square minor. Its determinant lifts to a unit of A because its residue is nonzero. Permute those coordinates to the front.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Write the matrix [[B,b],[D,d]]. The source operation s(u,a)=(u-B⁻¹ba,a) and target operation t(y,z)=(B⁻¹y,z-DB⁻¹y) give t f s = diag(id,g), where g(a)=(d-DB⁻¹b)a. Let eX be s⁻¹ composed with the source coordinates and eY be t composed with the target coordinates. U is the selected coordinate module and C the remaining target coordinates, so C is free. Reversing the operations gives the inverses. When n=1, U=0 and B is empty; no inverse of a nonempty minor is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "Tags 00NX and 00O0, finite-projective local freeness and unit-minor proof; rank-(n-1) adaptation by K2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite projective map over a local ring with rank one residue kernel admits a diagonal identity block and one remaining source coordinate",
+   "results": "{\"t\": \"2026-10-13T17:54:16Z\", \"tool\": \"leansearch\", \"query\": \"A finite projective map over a local ring with rank one residue kernel admits a diagonal identity block and one remaining source coordinate\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map of finite free modules over a local ring with one dimensional residue kernel can be changed by bases into the direct sum of an identity and a map from the ring",
+   "results": "{\"t\": \"2026-10-13T17:42:14Z\", \"tool\": \"leanfinder\", \"query\": \"A linear map of finite free modules over a local ring with one dimensional residue kernel can be changed by bases into the direct sum of an identity and a map from the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.SmithNormalForm.repr_comp_embedding_eq_smul\", \"IsLocalRing.basisQuotient_repr\", \"LinearEquiv.mem_dilatransvections_iff_finrank\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.Basis.SmithNormalForm.coord_apply_embedding_eq_smul_coord\", \"Submodule.smithNormalFormCoeffs\", \"IsLocalRing.basisQuotient_apply\"], \"digest\": \"06f7f00a91290dbe\"}",
+   "date": "2026-10-14",
+   "verdict": "No exact normal form found. Basis lifting and PID normal forms do not state this reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.free_of_flat_of_isLocalRing",
+   "results": "{\"t\": \"2026-10-13T17:50:38Z\", \"tool\": \"loogle\", \"query\": \"Module.free_of_flat_of_isLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_isLocalRing\"], \"digest\": \"bd223f27ee00c2aa\"}",
+   "date": "2026-10-14",
+   "verdict": "Gives local freeness directly, so the old principal-open freeness node is unnecessary."
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor|prodMap.*ker|ker.*prodMap|normalForm",
+   "results": "{\"t\": \"2026-10-13T17:50:38Z\", \"tool\": \"grep\", \"query\": \"split_injective_iff_lTensor|prodMap.*ker|ker.*prodMap|normalForm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean\", \"Mathlib/LinearAlgebra/Prod.lean\", \"Mathlib/LinearAlgebra/Prod.lean\", \"Mathlib/LinearAlgebra/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"Mathlib/LinearAlgebra/FreeModule/Int.lean\"], \"digest\": \"d84016e3c9059096\"}",
+   "date": "2026-10-14",
+   "verdict": "ker_prodMap supports kernel computation, and split-injection criteria support matrix work; no exact residue rank-one normal form."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ResidueKernelUnitMinor",
+  "date": "2026-10-14",
+  "group": "K2"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T181108-L-2603170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T181108-L-2603170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel",
+  "file": "lean/Sheaf/Algebra/Homology/ResidueKernelUnitMinorKernel.lean",
+  "declaration": "ModuleCat.residue_kernel_unit_minor_normal_form",
+  "statement": "theorem residue_kernel_unit_minor_normal_form\n    (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)\n    (hfX : Module.Finite R X) (hfY : Module.Finite R Y)\n    (hpX : Module.Projective R X) (hpY : Module.Projective R Y)\n    (𝔭 : Ideal R) [𝔭.IsPrime]\n    (hres : Nonempty (LinearMap.ker ((ModuleCat.extendScalars\n      ((IsLocalRing.residue (Localization.AtPrime 𝔭)).comp\n        (algebraMap R (Localization.AtPrime 𝔭)))).map f).hom\n      ≃ₗ[IsLocalRing.ResidueField (Localization.AtPrime 𝔭)]\n        IsLocalRing.ResidueField (Localization.AtPrime 𝔭))) :\n    ∃ (U C : ModuleCat.{v} (Localization.AtPrime 𝔭))\n      (g : Localization.AtPrime 𝔭 →ₗ[Localization.AtPrime 𝔭] C),\n      Module.Free (Localization.AtPrime 𝔭) C ∧\n      ∃ (eX : ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj X)\n          ≃ₗ[Localization.AtPrime 𝔭] (U × Localization.AtPrime 𝔭))\n        (eY : ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).obj Y)\n          ≃ₗ[Localization.AtPrime 𝔭] (U × C)),\n        ∀ x, eY (((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime 𝔭))).map f).hom\n          x) = ((eX x).1, g (eX x).2)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-14"
+ }
+}

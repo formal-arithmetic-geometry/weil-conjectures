@@ -10,37 +10,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "By lem-weil-pbc-finite-projective-prime-local-free choose free principal-open neighborhoods for X and Y containing p, then localize further to A=R_p. Their finite bases localize to finite bases over A. Scalar extension with A identifies with localization (LocalizedModule.equivTensorProduct); tensor associativity identifies the residue map with scalar extension of the localized map.",
+   "text": "Obtain U,C,g,freedom of C and the two conjugating equivalences from residue_kernel_unit_minor_normal_form. This is only the matrix portion of the argument.",
    "uses": [
-    "lem-weil-pbc-finite-projective-prime-local-free"
+    "new-residue-kernel-unit-minor-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "In those bases let n be the source rank. The residue kernel is isomorphic to the field, so rank-nullity gives matrix rank n-1 and n>=1. Choose n-1 independent columns, and choose n-1 independent rows of their matrix. Their square determinant is nonzero in kappa. The lifted determinant is a unit of A, since its residue is nonzero. Permute the selected columns and rows to the front. The case n=1 uses the empty determinant 1.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the proved residue_kernel_unit_minor_quotient to the extended linear map and its actual diagonal identity. This gives the kernel identification and the cokernel identification over A.",
+   "uses": [
+    "new-residue-kernel-unit-minor-quotient"
+   ],
+   "elementary": false
   },
   {
-   "text": "Write the resulting map in blocks [[B,b],[D,d]], with B invertible. Apply source operation (u,a)->(u-B^{-1}b*a,a) and target operation (y,z)->(B^{-1}y,z-D*B^{-1}y). These are linear equivalences with inverses reversing the operations, and change the map to diag(id,g), where g(a)=(d-D*B^{-1}b)*a. Let C be the free module on the remaining target coordinates.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The kernel of diag(id,g) is exactly the pairs (0,a) with g(a)=0. Including these pairs and undoing the source equivalence gives ker(g) equivalent to the localized kernel. Projection of the normal-form target onto C/range(g) is surjective with kernel equal to range(diag(id,g)), since this range is precisely the pairs (u,g(a)). The first isomorphism theorem gives the cokernel equivalence. Finally localizedQuotientEquiv and the localized range identity identify this cokernel with LocalizedModule p.primeCompl (Y/range(f)).",
-   "uses": [],
-   "elementary": true
+   "text": "Compose the localized-cokernel comparison with the diagonal-form cokernel equivalence and package C,g,its freeness and both equivalences.",
+   "uses": [
+    "new-residue-kernel-localized-cokernel"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-projective-prime-local-free"
+  "new-residue-kernel-unit-minor-kernel",
+  "new-residue-kernel-unit-minor-quotient",
+  "new-residue-kernel-localized-cokernel"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "M3",
+  "group": "K2",
   "date": "2026-10-14",
-  "document": "Stacks Project",
-  "place": "Tags 00O0 and 00NX; the rank-(n-1) unit-minor adaptation of the proof of Lemma 10.79.4, with exact localization and scalar-extension comparisons."
+  "document": "Stacks Project and Mathlib",
+  "place": "00O0/00NX unit-minor reduction; proved diagonal kernel/cokernel computation and localization comparison as recorded in the new nodes."
  },
  "mathlib_searches": [
   {
@@ -139,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T172657-L-2100394",
+  "landing": "20261013T181108-L-2603170",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
