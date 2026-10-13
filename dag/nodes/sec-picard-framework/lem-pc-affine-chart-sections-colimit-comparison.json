@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-affine-chart-sections-colimit-comparison",
+ "kind": "statement",
+ "title": "Ring colimit and sections comparison for one affine chart",
+ "statement": "Under the scheme and base-change conventions of def-pc-scheme and def-pc-base-change, let I be a directed preorder, R its ring diagram and c an affine limiting spectrum cone. Fix i, a map Xi to Spec(R_i), an affine member of an open cover of Xi, and any module M on the ambient limit base change. Write Z for the fixed limit chart and N for the sections of the restriction of M to Z. There is a diagram F on the upper tail above i with colimit isomorphic to Gamma(Z), and for each stage j there are ring isomorphisms F(j) to the stage chart ring and Gamma(Z) to the iterated limit chart ring. The latter identifies the canonical colimit map with the chart pullback map after the stage comparison; extending N along it gives the sections of the restriction of M to the iterated chart. No finite-presentation assumption or stage model of N is asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof, affine case; schemes.tex Tag 01I6; https://stacks.math.columbia.edu/tag/01ZR and https://stacks.math.columbia.edu/tag/01I6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Index the stages by the upper tail above i. Form the diagram of the affine\nschemes obtained by pulling the fixed chart V.X a back along Spec(R_j) to Spec(R_i).\nThe maps are the unique maps of pullbacks induced by the transition maps of R;\nuniqueness proves their identity and composition laws. Applying global sections\ncontravariantly gives F. Pullback pasting gives the ring isomorphism e at each\nstage to the chart of the pulled-back cover. For any index k a common upper bound\nof i and k shows that the upper-tail inclusion is final; its opposite is initial.\nThus the original limit cone restricts to a limit on the upper tail. Lift this\ncone to schemes over Spec(R_i), using its cone equations. The base-change functor\nOver.pullback is a right adjoint, so preserves limits. Forgetting the over structure\npreserves this connected limit: the tail is nonempty and directed. All the resulting\ncharts are affine: the base maps have affine source\nand target. The affine spectrum/global-sections equivalence therefore identifies\nthe fixed limit chart ring with colimit F, giving q. Pullback pasting also gives\nan isomorphism from the iterated limit chart Y to the fixed limit chart Z. Its\nglobal-sections map is s; compatibility with the stage projection gives the stated\nring-map equation: if h : Y -> Z is this isomorphism and r_j : Z -> U.X a is\nthe stage projection, then h followed by r_j is U.pullbackHom p a. Thus applying\nglobal sections gives precisely colimit.ι F j followed by q.hom and s.hom.\nThe two maps from these limit charts to the ambient limit scheme commute with h.\nFunctoriality of module pullback consequently identifies the pullback of the\nrestriction on Z with the restriction on Y. Since\nthe chart comparison is an isomorphism, its sections are scalar extension along\ns.hom, giving the final module isomorphism. More explicitly, inverse image along h\nis reindexing opens, so its sections over top are the original sections over top.\nIts ring-sheaf comparison is invertible; extension along the induced ring isomorphism\nis transport of the module action. This uses no quasi-coherence. The upper tail\ncontains i; empty charts, zero rings, zero modules, and equivalent preorder indices\ncause no exception.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01ZR and 01I6",
+  "place": "Detailed chart and isomorphism-transport step of the affine argument, by W2; the source sketches the affine reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections ring of affine base change charts forms a directed colimit over inverse limit of schemes",
+   "results": "nonempty_isColimit_Γ_mapCocone and exists_appTop_π_eq_of_isAffine_of_isLimit in Mathlib.AlgebraicGeometry.AffineTransitionLimit; no fixed-cover iterated-chart comparison.",
+   "date": "2026-10-13",
+   "verdict": "supporting theorem, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Generic scalar extension declarations, no geometric chart comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_chart.*colimit|colimit.*chart",
+   "results": "No msearch hits. Local project rg has only the assigned chart-model statement; blueprint search affine chart has 14 unrelated imported nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of affine base change charts preserve directed inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error (msearch.py)",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationAffineChartSectionsModel",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-fp-affine-chart-sections-model",
+   "place": "First proof step: affine limit chart ring as a colimit and final pullback-pasting transport"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartSectionsColimitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartSectionsColimitComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_chart_sections_colimit_comparison",
+  "statement": "theorem exists_affine_chart_sections_colimit_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (M : (pullback f (c.π.app (op i))).Modules)\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    let W := V.pullback₁ (pullback.fst f (c.π.app (op i)))\n    let Z := W.X a\n    let N := ModuleCat.of Γ(Z, ⊤) Γ((Scheme.Modules.pullback (W.f a)).obj M, ⊤)\n    ∃ F : {j : I // i ≤ j} ⥤ CommRingCat.{u},\n      ∃ q : colimit F ≅ Γ(Z, ⊤),\n      ∀ j : {j : I // i ≤ j},\n        let U : (pullback f (Spec.map (R.map (homOfLE j.property)))).OpenCover.{u} :=\n          V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE j.property))))\n        let p := baseChangeMap f\n          (T := Over.mk (Spec.map (R.map (homOfLE j.property))))\n          (T' := Over.mk (c.π.app (op i)))\n          (Over.homMk (c.π.app (op j.val)) (c.w (homOfLE j.property).op))\n        let Y := (U.pullback₁ p).X a\n        let P := (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M\n        ∃ (e : F.obj j ≅ Γ(U.X a, ⊤)) (s : Γ(Z, ⊤) ≅ Γ(Y, ⊤)),\n          colimit.ι F j ≫ q.hom ≫ s.hom = e.hom ≫ (U.pullbackHom p a).appTop ∧\n          Nonempty ((ModuleCat.extendScalars s.hom.hom).obj N ≅\n            ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T134803-L-130762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T134803-L-130762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
