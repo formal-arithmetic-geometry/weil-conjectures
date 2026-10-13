@@ -12,20 +12,35 @@
  },
  "proof": [
   {
-   "text": "On a test open V contained in U i, for a tuple t not containing i,\ninsert i in its unique increasing position b. Project to that coordinate and\nmultiply by (-1)^b. The resulting intersection equals the old intersection\nsince V is contained in U i. For tuples containing i use zero. These linear maps\ncommute with restrictions. For a positive-degree tuple not containing i, deleting\nthe inserted i contributes the identity. Every other deletion in d h is paired\nwith insertion after deletion in h d; the two restrictions agree and their signs\nare opposite. For tuples containing i, only deletion of i contributes, with\nproduct of signs one. Sheafify these natural maps on the restricted site,\nusing the local sheafification identification with the restriction of the\nsheafified complex; additivity preserves the equation. Transport through\nextendXIso to integer degrees and put the maps equal to zero in negative degrees.\nFor empty test opens all modules vanish; r=0 has no i; degrees above the tuple\nlength have zero terms. This claim imposes no equation at degree zero.",
+   "text": "Use the individual differential inner-inverse theorem to choose s_k with d_k s_k d_k=d_k. Set q_k=s_{k-1}d_{k-1}, inserting the canonical equal-index isomorphism. The complex identity d squared equals zero gives q_k d_k=0. Define h_k=s_k(1-q_k). These choices are internal to the existential proof; no definition is made from an arbitrary existence witness.",
    "uses": [
-    "def-pc-s3-alternating-cech-sheaf-construction"
+    "def-pc-s3-alternating-cech-sheaf-construction",
+    "lem-pc-s3-alternating-cech-sheaf-differential-inner-inverse"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "At positive degree k, use local exactness. The kernel lift of the incoming differential is epi (Mathlib ShortComplex.Exact.epi_kernelLift). Cancel it to show that its inner inverse acts as the identity on cycles. Apply this to a=1-d_k s_k, whose composite with d_k is zero by the inner-inverse equation. Thus a q_k=a. The proved private helper exact_inner_inverse_on_cycles performs the kernel lifting and epi cancellation.",
+   "uses": [
+    "lem-pc-s3-alternating-cech-sheaf-local-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since q_{k-1}d_{k-1}=0, the incoming homotopy term is q_k. The outgoing term is d_k s_k(1-q_k). Expand a q_k=a to obtain d_k s_k-d_k s_k q_k+q_k=1. The Lean proof handles all equal-index transports with XIsoOfEq_hom_comp_d and d_comp_XIsoOfEq; no degree-zero equation is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-s3-alternating-cech-sheaf-construction"
+  "def-pc-s3-alternating-cech-sheaf-construction",
+  "lem-pc-s3-alternating-cech-sheaf-differential-inner-inverse",
+  "lem-pc-s3-alternating-cech-sheaf-local-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 02FU; local increasing-tuple adaptation by C2"
+  "place": "Tag 02FU local insertion, separated into exactness and inner inverses; C1 proved algebraic normalization of independent splittings using Mathlib ShortComplex.Exact.epi_kernelLift"
  },
  "mathlib_searches": [
   {
@@ -124,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T124308-L-3775348",
+  "landing": "20261013T131324-L-4033406",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

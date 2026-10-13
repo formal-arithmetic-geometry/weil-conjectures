@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-differential-inner-inverse",
+ "kind": "statement",
+ "title": "Individual local face differentials admit inner inverses",
+ "statement": "Let $X$ be a scheme, $r\\in\\mathbb N$, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$, $G$ an $\\mathcal O_X$-module, and $i\\in\\operatorname{Fin}(r)$. Let $C$ be the restriction to $U_i$ of the integer extension by zero of the alternating Čech sheaf complex [def-pc-s3-alternating-cech-sheaf-construction]. For each integer $k$ there exists a morphism $s:C^{k+1}\\to C^k$ such that $d_k s d_k=d_k$. There is no asserted relation between the choices for adjacent degrees and no assertion of exactness.",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU (cohomology-lemma-covering-resolution), Signed insertion applied only to boundaries in the local insertion computation; increasing tuples as in Tag 01FM"
+ },
+ "proof": [
+  {
+   "text": "For a nonnegative degree k, on each test open V contained in U i,\ndefine s from degree k+1 to k by signed insertion of i: the t-coordinate\nis zero when t contains i, and otherwise is (-1)^b times the coordinate\nindexed by t with i inserted in its increasing position b. The two\nintersection opens inside V coincide. These formulas are linear and commute\nwith restriction, giving a morphism of restricted module presheaves.\nApply this formula to d(x). Its differential is d(x): on an inserted tuple\nthis follows from d(d(x))=0 and the face deleting i; on a tuple containing i\nonly the face omitting i contributes, with sign squared one. Consequently\nd s d=d. This calculation only concerns boundaries, and does not assert\nan identity on arbitrary cochains or compare adjacent choices of s.\nThe intersection presheaves V ↦ G(V intersect W) are already sheaves,\nbeing direct images of restrictions to W. Their finite products are\nsheaves, so each term's sheafification unit is an isomorphism. Restrict\nthese units to U i; naturality identifies their differential with the\nrestricted sheafified differential. Lift the insertion map through the\nfully faithful forgetful functor and conjugate by these units. This\npreserves d s d=d. Transport through extendXIso in the three\noccurrences of d. For k<0 the differential is zero, since its source is\nan extension-by-zero term, and s=0 works. Empty opens and zero terms cause\nno exception; r=0 admits no index i.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU, local insertion formula restricted to increasing tuples; C1 extraction of signed insertion applied only to boundaries in the local insertion computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A contracting homotopy of an alternating Cech complex restricted to one open of the cover",
+   "results": "8 hits: AlgebraicTopology.DoldKan.homotopyPToId, AlgebraicTopology.DoldKan.homotopyPInftyToId, AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant, AlgebraicTopology.DoldKan.homotopyQToZero, AlgebraicTopology.DoldKan.Hσ, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, AlgebraicTopology.DoldKan.hσ', AlgebraicTopology.DoldKan.PInfty",
+   "date": "2026-10-13",
+   "verdict": "No direct match for local alternating exactness or inner inverses."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*homotopy|homotopy.*cech|positive.*contraction",
+   "results": "2 hits: Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean, Mathlib/Analysis/CStarAlgebra/ApproximateUnit.lean",
+   "date": "2026-10-13",
+   "verdict": "No direct match for local alternating exactness or inner inverses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating Cech complex restricted to one member is exact in positive degrees and its differentials admit generalized inverses",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafPositiveContraction",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Signed insertion applied only to boundaries in the local insertion computation in proof step 1 of lem-pc-s3-alternating-cech-sheaf-positive-contraction",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-positive-contraction",
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafDifferentialInnerInverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafDifferentialInnerInverse.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheaf_restrict_differential_inner_inverse",
+  "statement": "theorem alternatingCechSheaf_restrict_differential_inner_inverse\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)\n    (k : ℤ) :\n    let F := Scheme.Modules.restrictFunctor (U i).ι\n    let C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)\n    ∃ s : C.X (k + 1) ⟶ C.X k,\n      C.d k (k + 1) ≫ s ≫ C.d k (k + 1) = C.d k (k + 1)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T131324-L-4033406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
