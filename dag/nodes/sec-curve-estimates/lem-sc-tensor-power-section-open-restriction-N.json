@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-tensor-power-section-open-restriction-N",
+ "kind": "statement",
+ "title": "Canonical tensor-power restriction comparison preserves section powers",
+ "statement": "Let X be a scheme [def-pc-scheme], L any module sheaf [def-weil-sheaf-of-modules-category], s a global section and U an open. Let s_U be the inverse restrictionAppIso applied to the ordinary restriction of s. For every n≥0 and open V of U, the inverse power comparison P_(U.ι)(L,n) of [def-sc-tensor-power-open-restriction-comparisons], followed by the section isomorphism from [lem-weil-pbc-module-restriction-open-immersion-colimits], sends s_U^n(1) on V to s^n(1) on U.ι image V. No affine, invertible, quasi-coherent, nonvanishing or nonempty hypothesis is required.",
+ "stmt_deps": [
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex; properties.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback; Tag 01PW, restriction of section tensor powers in its proof. Read from https://stacks.math.columbia.edu/tag/01CD and https://stacks.math.columbia.edu/tag/01PW."
+ },
+ "proof": [
+  {
+   "text": "Induct on n in the constructed power comparison. The zero comparison is restrictUnitIso, whose inverse is the ring isomorphism and sends 1 to 1. In the successor, use tensorPowSectionOne_succ and the inverse pure-tensor formula for the tensor comparison to move the two factors separately. The inductive hypothesis handles the nth power. homOfGlobalSection_app_one and naturality of restriction identify the degree-one factor with s restricted to the image open. tensorPowSectionOne_succ then gives the ambient successor power.",
+   "uses": [
+    "def-sc-tensor-power-open-restriction-comparisons",
+    "lem-weil-pbc-module-restriction-tensor-comparison",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex; properties.tex",
+  "place": "Explicit restriction comparison argument by T1, expanding the functorial tensor-pullback comparison of Tag 01CD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"tensorPow\", \"map\"",
+   "results": "Hits: TensorPower.algebraMap₀, TensorPower.algebraMap₀_one, TensorPower.algebraMap₀_eq_smul_one, TensorPower.algebraMap₀_mul, TensorPower.mul_algebraMap₀, TensorPower.algebraMap₀_mul_algebraMap₀, TensorPower.gMul_eq_coe_linearMap, TensorPower.multilinearMapToDual; no exact theorem for recursively constructed sheaf tensor-power comparisons.",
+   "date": "2026-10-13",
+   "verdict": "partial match, no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of restriction of tensor powers of sheaves, preserving pure tensor sections",
+   "results": "Hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.monoidalCategoryStruct, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree; no exact theorem for recursively constructed sheaf tensor-power comparisons.",
+   "date": "2026-10-13",
+   "verdict": "partial match, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictUnitIso|tensorPowSectionOne|mulTensorPowSection",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean; no exact theorem for recursively constructed sheaf tensor-power comparisons.",
+   "date": "2026-10-13",
+   "verdict": "partial match, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of tensor powers of a section along an open immersion preserves multiplication transition morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestriction",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-tensor-power-section-open-restriction",
+   "place": "Canonical tensor-power restriction comparison and its section/multiplication compatibility, steps 1-3 of the parent proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPowerSectionOpenRestrictionN.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openRestrictionTensorPowIso_inv_section",
+  "statement": "theorem openRestrictionTensorPowIso_inv_section (X : Scheme.{u}) (L : X.Modules)\n    (s : Γ(L, ⊤)) (U : X.Opens) (n : ℕ) (V : U.toScheme.Opens) :\n    let sU : Γ(L.restrict U.ι, ⊤) :=\n      (L.restrictAppIso U.ι ⊤).inv (L.presheaf.map (homOfLE le_top).op s)\n    ((L.tensorPow n).restrictAppIso U.ι V).hom\n        ((openRestrictionTensorPowIso U.ι L n).inv.app V\n          (tensorPowSectionOne (homOfGlobalSection (L.restrict U.ι) sU) n V)) =\n      tensorPowSectionOne (homOfGlobalSection L s) n (U.ι ''ᵁ V)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T054238-L-449864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T054238-L-449864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
