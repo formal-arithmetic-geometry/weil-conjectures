@@ -9,43 +9,53 @@
  },
  "proof": [
   {
-   "text": "(A $p$-basis of $K$ and the basis of $\\Omega_{K/\\mathbf F_p}$.) The map $F:K\\to K$, $b\\mapsto b^p$, is a ring homomorphism ($(b+c)^p=b^p+c^p$ since $p$ divides $\\binom pj$ for $0<j<p$), injective as $K$ is a field, so $K^p=F(K)$ is a subfield of $K$ ($(b^p)^{-1}=(b^{-1})^p$); likewise $L^p$ is a subfield of $L$ for every field $L\\supseteq K$. The prime field $\\mathbf F_p\\subseteq K$ satisfies $c=c^p$ for $c\\in\\mathbf F_p$, so $\\mathbf F_p\\subseteq K^p$ and $\\mathbf F_pK^p=K^p$. By [lem-weil-pbc-p-basis-exists] applied to $K$ there is a family $(x_i)_{i\\in I}$ in $K$ whose monomials $x^E=\\prod_ix_i^{e_i}$ ($E=(e_i)_{i\\in I}$, $0\\le e_i<p$, almost all $e_i=0$) form a basis of $K$ over $K^p=\\mathbf F_pK^p$. By [lem-weil-pbc-p-basis-differentials-basis] for the extension $K/\\mathbf F_p$, $(\\mathrm dx_i)_{i\\in I}$ is a basis of the $K$-vector space $\\Omega_{K/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials].",
+   "text": "If the index type is empty, the intersection condition makes every element of K a p-th power. The p-th power derivation rule in characteristic p makes every absolute differential da zero. Since these generate the differential module, the entire module is zero.",
    "uses": [
-    "lem-weil-pbc-p-basis-exists",
-    "lem-weil-pbc-p-basis-differentials-basis",
     "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields, line 11458), proof of (1), first sentence ('Choose a p-basis {x_i} for K over F_p'), with Lemma Tag 07P2 (lemma-p-basis), (a) implies (b)"
+    "place": "Tag 07P4"
    }
   },
   {
-   "text": "(Proof of (1).) Let $\\omega\\in\\Omega_{K/\\mathbf F_p}$ map to zero in $\\Omega_{K/K_\\alpha}$ for every $\\alpha$, and suppose $\\omega\\ne0$. By Step 1 write $\\omega=\\sum_{i\\in I'}y_i\\,\\mathrm dx_i$ with $I'\\subseteq I$ finite and nonempty and all $y_i\\ne0$. Let $\\mathcal E$ be the finite set of families $E=(e_i)_{i\\in I'}$ with $0\\le e_i<p$, $N=|\\mathcal E|$; extending $E$ by zero outside $I'$, the $x^E$, $E\\in\\mathcal E$, are pairwise distinct members of the basis of Step 1, hence linearly independent over $K^p$. In particular, for $i_0\\in I'$, $1=x^0$ and $x_{i_0}$ are $K^p$-independent, so $x_{i_0}\\notin K^p$ and $K^p\\ne K$; by (ii) (an empty intersection of subfields of $K$ being $K$) $\\mathcal A$ is nonempty. Fix $\\alpha$. The image of $\\omega$ in $\\Omega_{K/K_\\alpha}$ is $\\sum_{i\\in I'}y_i\\,\\mathrm dx_i$ (the map is $K$-linear with $\\mathrm da\\mapsto\\mathrm da$) and is zero, with $y_i\\ne0$; so $(\\mathrm dx_i)_{i\\in I'}$ is linearly dependent in $\\Omega_{K/K_\\alpha}$. $K/K_\\alpha$ is an extension of fields of characteristic $p$ and $K_\\alpha K^p=K_\\alpha$ by (i); by [lem-weil-pbc-p-independent-differentials-independent] for $K/K_\\alpha$ and the family $(x_i)_{i\\in I'}$, this family is not $p$-independent over $K_\\alpha$: there are $a_E\\in K_\\alpha$ ($E\\in\\mathcal E$), not all zero, with $\\sum_Ea_Ex^E=0$. Let $V\\subseteq K^{\\oplus\\mathcal E}\\cong K^{\\oplus N}$ be the $K$-linear subspace of all $(a_E)_E$ with $\\sum_Ea_Ex^E=0$ (the kernel of a $K$-linear map). We have shown $V\\cap K_\\alpha^{\\oplus N}\\ne0$ for every $\\alpha\\in\\mathcal A$. The extension $K/K^p$, the nonempty family $(K_\\alpha)$ and $k=K^p$ satisfy (1)-(3) of [lem-weil-pbc-intersection-subfields-subspace] (these are (i)-(iii)), so $V\\cap(K^p)^{\\oplus N}\\ne0$: a nontrivial $K^p$-linear relation $\\sum_Ea_Ex^E=0$, contradicting the $K^p$-independence of the $x^E$, $E\\in\\mathcal E$. Hence $\\omega=0$.",
+   "text": "For a nonempty downward directed family of intermediate fields over a base field k with infimum k, every finite k-linearly independent family in K remains independent over some field of the family. Otherwise its K-linear relation subspace contains a nonzero vector over every field. Apply [lem-weil-pbc-intersection-subfields-subspace] to obtain a nonzero relation over k, contradicting independence. Enumerate any finite index type by Fin n; the empty finite family is independent over an arbitrary field of the nonempty family. Apply this observation over B = F_p K^p, extending the scalars of the given K_alpha; the hypotheses identify B with their infimum.",
    "uses": [
+    "lem-weil-pbc-intersection-subfields-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P4"
+   }
+  },
+  {
+   "text": "Choose a p-basis and its monomial basis by [lem-weil-pbc-p-basis-exists], and the associated differential basis by [lem-weil-pbc-p-basis-differentials-basis]. For omega take the finite support T of its differential-basis coordinates. Bounded monomials on T form a finite family: inject their exponents into T -> Fin p. Extend exponents by zero to the full p-basis index type; this embeds these monomials into the monomial basis, so they are B-independent. Step 2 gives an alpha over which they remain independent. Since K_alpha contains every p-th power, K_alpha K^p = K_alpha; scalar restriction to the bottom intermediate field gives the precise p-independence hypothesis. Apply [lem-weil-pbc-p-independent-differentials-independent] to obtain independent relative differentials on T. Map the finite coordinate expansion of omega to the relative differential module using K-linearity and map_D. Its image is zero by hypothesis, so every coordinate on T is zero. Coordinates outside T are zero by definition of support; injectivity of the basis representation gives omega = 0.",
+   "uses": [
+    "lem-weil-pbc-p-basis-exists",
+    "lem-weil-pbc-p-basis-differentials-basis",
     "lem-weil-pbc-p-independent-differentials-independent",
-    "lem-weil-pbc-intersection-subfields-subspace",
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields, line 11458), proof of (1) ('By Lemma 07P2 this means that for every alpha there exists a relation ... This is a contradiction by Lemma 07P3'); the use of 07P2 (1) implies (2) for K/K_alpha, the subspace V and the nonemptiness of the index set are written out"
+    "place": "Tag 07P4"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-p-basis-exists",
-  "lem-weil-pbc-p-basis-differentials-basis",
   "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-p-independent-differentials-independent",
-  "lem-weil-pbc-intersection-subfields-subspace"
+  "lem-weil-pbc-intersection-subfields-subspace",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-p-basis-exists",
+  "lem-weil-pbc-p-independent-differentials-independent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07P4"
+  "place": "Tag 07P4, proof of (1); contrapositive finite-relation formulation of Tag 07P3, with the empty-index case handled by the p-th power derivation rule."
  },
  "status": "split",
  "created": {
@@ -133,13 +143,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T213040-L-1151387",
-  "kind": "interface",
+  "landing": "20261013T115021-L-3323229",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
