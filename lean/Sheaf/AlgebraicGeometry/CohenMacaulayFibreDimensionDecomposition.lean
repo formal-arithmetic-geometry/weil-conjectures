@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.RingTheory.Depth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.EquidimensionalFibreOpenPartition
+import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 
 /-! # Relative dimension decomposition of a fibre Cohen-Macaulay open
 
@@ -51,6 +53,33 @@ theorem exists_fibre_dimension_open_partition_of_depth_eq_ringKrullDim
           ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y))) :
     ∃ V : ℕ → X.Opens, (⨆ n, V n) = W ∧
       Pairwise (fun m n => Disjoint (V m) (V n)) ∧
-      ∀ n y, y ∈ V n → topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by sorry
+      ∀ n y, y ∈ V n → topologicalKrullDimAt (f.asFiber y) = (n : WithBot ℕ∞) := by
+  obtain ⟨V, hcover, hdisj, hdim⟩ :=
+    exists_equidimensional_fibre_open_partition_of_depth_eq_ringKrullDim f U W hW
+  refine ⟨V, hcover, hdisj, ?_⟩
+  intro n y hy
+  have hyW : y ∈ W := hcover ▸ (le_iSup V n) hy
+  let tU : U := ⟨f y, (hW y hyW).1⟩
+  let q := CategoryTheory.Limits.pullback.map (f ∣_ U)
+    (U.toScheme.fromSpecResidueField tU) f
+    (T.fromSpecResidueField (U.ι tU)) (f ⁻¹ᵁ U).ι
+    (Spec.map (U.ι.residueFieldMap tU)) U.ι (by simp)
+    (by exact (Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField U.ι tU).symm)
+  have hsq := isPullback_fiberToSpecResidueField_of_isPullback
+    (isPullback_morphismRestrict f U).flip tU
+  have : IsIso q := hsq.isIso_fst_of_isIso
+  have : LocallyOfFiniteType ((f ∣_ U).fiberToSpecResidueField tU) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have heq : f.fiberToSpecResidueField (f y) =
+      inv q ≫ (f ∣_ U).fiberToSpecResidueField tU ≫
+        Spec.map (U.ι.residueFieldMap tU) := by
+    rw [← hsq.w, IsIso.inv_hom_id_assoc]
+    rfl
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField (f y)) := by
+    rw [heq]
+    infer_instance
+  exact topologicalKrullDimAt_eq_of_equidimensional_open
+    (f.fiberToSpecResidueField (f y)) ((f.fiberι (f y)) ⁻¹ᵁ V n) n
+    (hdim n (f y)) (f.asFiber y) (by simpa using hy)
 
 end AlgebraicGeometry

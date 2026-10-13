@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-equidimensional-open-local-dimension",
+ "kind": "statement",
+ "title": "Local dimension of a pure-dimensional locally algebraic open",
+ "statement": "Let $k$ be a field [def-weil-field], $Y$ a scheme [def-pc-scheme] with a locally finite type morphism $g:Y\\to\\operatorname{Spec}k$ [def-weil-finite-type-morphism], $O\\subseteq Y$ an open, and $n\\in\\mathbb N$. Suppose every irreducible component $C$ of $O$ [def-weil-irreducible-components] has topological Krull dimension $n$ [def-kun-topological-krull-dimension]. Then for every $x\\in O$ the local topological dimension of $Y$ at $x$ [def-kun-topological-dimension-at-point] is $n$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0A21 (lemma-dimension-locally-algebraic), parts (3), (5)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Regard O as an open subscheme locally of finite type over k. Choose an affine neighbourhood A of x in O. The components of A through x correspond to the components of O through x by intersection. Their dimensions remain n by Stacks 0A21 (3). Part (5) of the same source computes local dimension at x as the maximum of the dimensions of the components through x. At least one such component exists; all dimensions are n, so the maximum is n. The open-subspace equality transports this dimension from A to O and Y. The affine-neighbourhood argument needs only local finite type; empty O has no x.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "R4 second reader",
+  "document": "Stacks Project",
+  "place": "Tag 0A21 (3), (5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat finitely presented morphism with Cohen Macaulay fibres has open closed pure relative dimension strata",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an equidimensional scheme locally of finite type over a field the local topological dimension at every point equals the dimension of each irreducible component",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.Scheme.height_of_isClosed; AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero; Algebra.Presentation.localizationAway_dimension_zero; Module.rankAtStalk_self; Ring.KrullDimLE.of_isLocalization; Ring.krullDimLE_of_isLocalization_maximal; AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; IsLocalization.AtPrime.ringKrullDim_eq_height",
+   "verdict": "No exact matching declaration; the returned facts do not give this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|irreducibleComponents",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean",
+   "verdict": "No exact matching declaration; the returned facts do not give this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohenMacaulayFibreDimensionDecomposition",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the Cohen-Macaulay locus and pure-relative-dimension pieces used for constant fibre dimension near a generic point; Tags 02NM, 02NJ, 0A21 (3), (5); Local dimension of a pure-dimensional locally algebraic open",
+   "via": [
+    "lem-sbc-cohen-macaulay-fibre-dimension-decomposition",
+    "lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk",
+    "lem-sbc-flat-fibre-dimension-strata-core",
+    "lem-sbc-flat-fibre-dimension-strata",
+    "lem-sbc-flat-fibre-component-dimension-specialization-open",
+    "lem-sbc-flat-fibre-component-dimension-specialization",
+    "lem-sbc-flat-closed-fibre-interior",
+    "lem-sbc-generic-open-fibre-density",
+    "lem-sbc-generic-open-geometric-fibre-density",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquidimensionalOpenLocalDimension.lean",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_of_equidimensional_open",
+  "statement": "theorem topologicalKrullDimAt_eq_of_equidimensional_open\n    {k : Type u} [Field k] {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))\n    [LocallyOfFiniteType g] (O : Y.Opens) (n : ℕ)\n    (hdim : ∀ C ∈ irreducibleComponents ↥O, topologicalKrullDim C = (n : WithBot ℕ∞))\n    (x : Y) (hx : x ∈ O) : topologicalKrullDimAt x = (n : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T142902-L-499957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T142902-L-499957",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
