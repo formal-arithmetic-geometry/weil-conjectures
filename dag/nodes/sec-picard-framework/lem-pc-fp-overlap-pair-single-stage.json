@@ -17,24 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Quasi-separatedness makes the intersection of the two affine charts quasi-compact and quasi-separated. Choose finite affine covers of this overlap and of its refinement intersections. Conjugate the restrictions of the transition of M by e_a and e_b. Their coordinate rings at the limit are the directed colimits of the stage rings; quasi-coherent pullback is scalar extension. The map clause of affine finite-presentation descent lifts each map; its equality clause makes these lifts agree on all refinement intersections at a common stage. Glue by sheaf locality. Transport along the canonical chart maps and pullback-composition comparisons to obtain the stated square at that single stage. An empty overlap has its unique map. Use the partial-order quotient of the nonempty tail above j for a preorder.",
+   "text": "Construct the universal fixed overlap H and its structure map g to Spec Rj. Quasi-separatedness of Xj and affineness of U_b give quasi-compactness of U_b -> Xj, hence of H -> U_a. Composition and base change give that g is quasi-compact, quasi-separated and locally finitely presented. The restrictions F,G to the identity base change of H are finitely presented and quasi-coherent by pullback stability. Construct the conjugated limit transition theta explicitly on this model.",
    "uses": [
-    "def-pc-local-overlap-transitions",
-    "def-pc-overlap-pair-canonical-comparisons",
-    "lem-pc-fp-module-map-descent-affine"
+    "def-pc-morphism-conventions",
+    "pqf-def-coherent",
+    "lem-pc-overlap-pair-model-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_finitePresentation_local_map_datum to g, with original and starting index both j. It gives k >= j, compatible local maps psi on an open cover C, and their recovery equation for any global map alpha with restriction datum psi.",
+   "uses": [
+    "lem-pc-fp-local-map-datum"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use bijective_toDescentData_map_of_isOpenImmersion (Zariski morphism gluing) to obtain the unique global alpha with restriction psi. The recovery equations give equality of restrictions on the pulled-back limit cover. Injectivity of restriction and descent-data hom extensionality give the global recovery equation. Substitute the supplied equality with the canonical tensor composition comparison. This step uses the already proved ZariskiDescent declaration directly as elementary sheaf-morphism gluing; it does not apply the fpqc/quasi-coherent bijective_toDescentData_map declaration recorded by lem-pc-fpqc-descent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the explicit overlapPairMapOfModel(alpha) at this same k. Apply overlap_pair_square_of_model_recovery to the global recovery equation, obtaining the requested canonical square. No persistence assertion is used.",
+   "uses": [
+    "lem-pc-overlap-pair-model-transport",
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "lem-pc-overlap-pair-model-transport",
+  "lem-pc-fp-local-map-datum",
   "def-pc-local-overlap-transitions",
-  "def-pc-overlap-pair-canonical-comparisons",
-  "lem-pc-fp-module-map-descent-affine"
+  "def-pc-overlap-pair-canonical-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Tag 01ZR (2), first proof, lifting and gluing for one pair; Tag 05N7 (2), (3); explicit expansion of the original pair-map plan"
+  "place": "First proof: use existing local fixed-model map descent on the universal overlap, Zariski morphism gluing, and separate canonical transport"
  },
  "mathlib_searches": [
   {
@@ -113,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-267a0",
-  "group": "S2",
+  "reviewer": "COMPILER",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T163539-L-1621406",
+  "landing": "20261013T171514-L-1982296",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the node statements and compile, including both direct downstream importers against the relocated interfaces."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
