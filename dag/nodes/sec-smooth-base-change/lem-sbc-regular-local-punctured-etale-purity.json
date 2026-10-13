@@ -16,47 +16,39 @@
  },
  "proof": [
   {
-   "text": "Induct on the finite dimension. Regularity gives normality. For a connected cover, Tag 0BM9 constructs B as the integral closure of A in its finite separable function field, a finite normal domain extending the cover. Prove B etale; use finite disjoint unions for disconnected covers.",
+   "text": "Use the maximal ideal spanFinrank as the finite natural dimension and strongly induct on it. In dimension two obtain the finite flat model with depth-two boundary. Transfer etaleness from q to the restricted model via its over-U isomorphism and apply flat quasi-finite depth-two purity.",
    "uses": [
-    "lem-weil-pbc-regular-local-localization",
-    "lem-weil-pbc-regular-ring-normal",
-    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In dimension two, going down gives dimension two at maximal ideals of the finite normal algebra. Serre normality gives depth two there. Miracle flatness over the regular base makes the finite algebra flat. Tag 0BJH, the flat quasi-finite depth-two purity criterion, makes it etale.",
-   "uses": [
-    "lem-weil-pbc-going-down-normal-integral",
-    "lem-weil-pbc-serre-criterion-normal",
-    "lem-weil-pbc-miracle-flatness",
+    "lem-sbc-regular-local-dimension-two-punctured-flat-model",
     "lem-sbc-flat-quasi-finite-depth-purity"
    ],
    "elementary": false
   },
   {
-   "text": "In higher dimension choose a regular parameter f outside the square of the maximal ideal. The quotient is regular of dimension one less. Induction extends the restricted punctured cover over the quotient. Regular parameters give depth A equal to its dimension, hence at least three; f is a nonzerodivisor. These verify the hypotheses of Tag 0BLM, which lifts this extension to the original cover. Empty covers extend to the empty scheme.",
+   "text": "For dimension d at least three choose a minimal finite generating list rs of the maximal ideal. Its length is d by regularity. The generators theorem makes it regular and its quotient by the first generator f regular of dimension d-1. The regular sequence witnesses depth at least d, hence at least three. The quotient spectrum embeds into Spec A and sends its closed point to the closed point, so the inverse image of U is exactly its punctured spectrum.",
    "uses": [
     "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change q to this quotient punctured spectrum; finiteness and etaleness persist. Apply strong induction at dimension d-1 to the actual pullback and feed that extension to depth-three lifting. This finishes the inductive step, including empty covers.",
+   "uses": [
+    "lem-sbc-depth-three-punctured-etale-lifting"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-regular-local-localization",
-  "lem-weil-pbc-regular-ring-normal",
-  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-  "lem-weil-pbc-going-down-normal-integral",
-  "lem-weil-pbc-serre-criterion-normal",
-  "lem-weil-pbc-miracle-flatness",
+  "lem-sbc-regular-local-dimension-two-punctured-flat-model",
   "lem-sbc-flat-quasi-finite-depth-purity",
-  "lem-weil-pbc-regular-local-generators-regular-sequence"
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sbc-depth-three-punctured-etale-lifting"
  ],
  "proof_origin": {
-  "kind": "written-by-agent",
-  "by": "U1",
+  "kind": "from-source",
+  "by": "Q4",
   "document": "Stacks Project",
-  "place": "Tag 0BMA, pione-lemma-purity-regular, assertion (1); Tags 0BM9 and 0BLM for the normal-algebra and lifting criteria"
+  "place": "Tag 0BMA, dimension induction; dimension-two finite-flat construction and Tag 0BLM isolated as new intermediate statements; Lean performs depth, parameter quotient, base change and induction assembly."
  },
  "mathlib_searches": [
   {
@@ -129,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261013T133229-L-4194273",
+  "landing": "20261013T141531-L-380570",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

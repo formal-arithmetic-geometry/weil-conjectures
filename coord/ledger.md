@@ -12768,3 +12768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.PerfectDescentOpenEventualModel (stage 3; reviewer PASS; first push; landing 20261013T141530-L-380040 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PinnedSingleBaseChangeShift (stage 3; reviewer PASS; first push; landing 20261013T141530-L-380289 (interface); batch 20261013T141520; modules 4; new nodes 3)
 - 14:15 L: merged deliver/N2/Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport (stage 3; reviewer PASS; first push; landing 20261013T141531-L-380405 (proof); batch 20261013T141520; modules 1; new nodes 0)
+- 14:15 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.Morphisms.RegularLocalPuncturedEtalePurity (stage 3; reviewer PASS; first push; landing 20261013T141531-L-380570 (interface); batch 20261013T141520; modules 3; new nodes 2)

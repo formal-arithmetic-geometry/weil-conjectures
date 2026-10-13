@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-regular-local-dimension-two-punctured-flat-model",
+ "kind": "statement",
+ "title": "Finite flat model in regular local dimension two",
+ "statement": "Let A be a regular local ring [def-weil-regular-scheme] with Krull dimension two [def-weil-pbc-krull-dimension-ring]. Let U be the complement of the closed point in Spec A [def-weil-pbc-scheme-conventions], and q:Y → U a finite etale morphism [def-weil-finite-integral-morphism, def-weil-etale-morphism]. There exist a locally Noetherian scheme F and a finite flat map r:F → Spec A [def-weil-flat-morphism] such that every stalk at a point outside r⁻¹(U) has depth at least two [def-weil-pbc-depth], together with an isomorphism Y ≅ r⁻¹(U) over U.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-depth"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BMA, pione-lemma-purity-regular, dimension-two paragraph up to flatness; Tag 0BM9, pione-lemma-reformulate-purity-normal"
+ },
+ "proof": [
+  {
+   "text": "A is normal by regularity. Apply the construction of Tag 0BM9 (pione-lemma-reformulate-purity-normal): B = Gamma(Y,O_Y) is finite and normal, and its spectrum restricts to Y. On each integral component the finite separable generic field extension has a finite integral closure; normality identifies its localizations off the closed point with the cover algebra. Depth two identifies its global sections with B. Empty covers use the zero algebra.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Going down and finite integrality give dimension two at each maximal ideal of B. Serre S2 gives depth at least two at these normal localizations. Their finite closed fibre has dimension zero, so the dimension formula in miracle flatness holds. They are Cohen-Macaulay and miracle flatness makes each maximal localization flat over A. Local flatness detects flatness of B, giving a finite flat structure map r.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "F = Spec B is locally Noetherian since B is finite over the Noetherian ring A. A point outside r⁻¹(U) lies over the maximal ideal of A; integrality makes its prime maximal, so the depth bound just proved applies. The restriction identification supplied by 0BM9 is over U, hence yields the displayed morphism equality. For the empty scheme the depth condition is vacuous.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-serre-criterion-normal",
+  "lem-weil-pbc-miracle-flatness",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "Q4",
+  "document": "Stacks Project",
+  "place": "Tag 0BMA, pione-lemma-purity-regular, dimension-two paragraph up to flatness; Tag 0BM9, pione-lemma-reformulate-purity-normal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Over a two dimensional regular local ring every finite etale punctured cover has a finite flat extension with depth two at the closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a two dimensional regular local ring every finite etale punctured cover has a finite flat extension with depth two at the closed fibre",
+   "results": "8 hits: ['Algebra.IsEtaleAt', 'Algebra.exists_etale_of_isEtaleAt', 'Algebra.Etale.exists_subalgebra_fg', 'Algebra.IsEtaleAt.comp', 'Algebra.etaleLocus', 'Algebra.Etale.of_isLocalization_Away', 'RingHom.Etale.toAlgebra', 'Algebra.Etale.of_isLocalizationAway']",
+   "date": "2026-10-13",
+   "verdict": "No matching combined extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "punctured|purity|depth",
+   "results": "0 hits: []",
+   "date": "2026-10-13",
+   "verdict": "No matching combined extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularLocalPuncturedEtalePurity",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: purity extension across the regular special divisor; regular codimension-two boundary purity. Purity for the punctured spectrum of a regular local ring; Tag 0BMA, pione-lemma-purity-regular, dimension-two paragraph up to flatness; Tag 0BM9, pione-lemma-reformulate-purity-normal",
+   "via": [
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularLocalDimensionTwoPuncturedFlatModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularLocalDimensionTwoPuncturedFlatModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_flat_model_of_regular_local_dimension_two",
+  "statement": "theorem exists_finite_flat_model_of_regular_local_dimension_two (A : Type u) [CommRing A] [IsRegularLocalRing A] (hdim : ringKrullDim A = 2) (U : (Spec (.of A)).Opens) (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A) {Y : Scheme.{u}} (q : Y ⟶ U.toScheme) [IsFinite q] [Etale q] : ∃ (F : Scheme.{u}) (r : F ⟶ Spec (.of A)), IsLocallyNoetherian F ∧ IsFinite r ∧ Flat r ∧ (∀ x : F, x ∉ r ⁻¹ᵁ U → (2 : ℕ∞) ≤ IsLocalRing.depth (R := F.presheaf.stalk x) (F.presheaf.stalk x)) ∧ ∃ e : Y ≅ (r ⁻¹ᵁ U).toScheme, e.hom ≫ r ∣_ U = q",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T141531-L-380570",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T141531-L-380570",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
