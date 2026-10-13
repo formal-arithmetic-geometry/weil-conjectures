@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-open-union-image-complex-exact",
+ "kind": "statement",
+ "title": "Exact concrete open-image complex on an arbitrary union",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V\\subseteq X$ arbitrary opens, and $I$ a cochain complex of module sheaves [def-pc-cochain-complex-modules] such that $I^n$ is injective for every $n\\in\\mathbf Z$. Write $J_T$ for the constructed open-image complex and $\\rho_{T,W}:J_T\\to J_W$ for its fixed restriction morphisms [def-pc-kinjective-mayer-vietoris-data]. Define $f=(\\rho_{U\\cup V,U},\\rho_{U\\cup V,V}):J_{U\\cup V}\\to J_U\\oplus J_V$ and $g=(\\rho_{U,U\\cap V},-\\rho_{V,U\\cap V}):J_U\\oplus J_V\\to J_{U\\cap V}$. There exists a proof $h:f;g=0$ such that the short complex $\\operatorname{ShortComplex.mk}(f,g,h)$ is short exact. No K-injectivity or derived localization is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08BS (lemma-restrict-K-injective-to-open), and 079W (lemma-adjoint); displayed short exact complex on the union and its sectionwise exactness"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Identify the constructed open-image complex and its nested restriction maps [def-pc-kinjective-mayer-vietoris-data] degreewise on each test open Z with sections over intersections. The two iterated restrictions agree, so the lift of the union restrictions followed by the difference is zero.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheaf uniqueness and gluing for Z intersect U and Z intersect V covering Z intersect (U union V) give monicity and the kernel universal property in every degree. Injective restriction surjectivity [lem-sc-ringed-space-injective-restriction-surjective] lifts an overlap section to the U component and gives epicity of the difference. Transport via evaluation biproduct comparisons and use degreewise short exactness for homological complexes.",
+   "uses": [
+    "lem-sc-ringed-space-injective-restriction-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-sc-ringed-space-injective-restriction-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "note": "Adapted from Stacks Tags 08BV, 08BS and 079W; tag pages read directly because the local literature checkout contains only citation indexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris short exact complex of sheaves on the union of two opens",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact Mayer Vietoris sequence of complexes representing derived direct images for arbitrary open union",
+   "results": "Eight hits, chiefly GrothendieckTopology.MayerVietorisSquare.shortComplex and shortComplex_shortExact. These concern free additive sheaves associated to a site square, not the open-image complexes of module sheaves.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|shortComplex_shortExact|schemeMayerVietorisComplex_shortExact",
+   "results": "Mathlib.CategoryTheory.Sites.MayerVietorisSquare constructs a free additive sheaf short complex. The project KInjectiveMayerVietorisExact and Degreewise modules require U sup V = top and have first term I, rather than the image complex on the union.",
+   "date": "2026-10-13",
+   "verdict": "no arbitrary-union instance"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenUnionSESPresentation",
+  "group": "U3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, Mayer--Vietoris globalization of annihilation; scalar naturality of the overlap boundary; direct-image triangle realizing the Mayer-Vietoris boundary before taking Hom; short exact complex before triangle construction; Exact concrete open-image complex on an arbitrary union",
+   "via": [
+    "lem-sc-derived-open-union-ses-presentation",
+    "lem-sc-derived-open-union-adjunction-triangle",
+    "lem-sc-derived-open-hom-scalar-mayer-vietoris",
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenUnionImageComplexExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenUnionImageComplexExact.lean",
+  "declaration": "AlgebraicGeometry.schemeOpenUnionImageComplex_shortExact",
+  "statement": "theorem schemeOpenUnionImageComplex_shortExact\n    (X : Scheme.{u}) (U V : X.Opens)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hI : ∀ n : ℤ, Injective (I.X n)) :\n    let f := biprod.lift\n      (schemeOpenModuleImageComplexRestriction X (homOfLE (le_sup_left : U ≤ U ⊔ V)) I)\n      (schemeOpenModuleImageComplexRestriction X (homOfLE (le_sup_right : V ≤ U ⊔ V)) I)\n    let g := biprod.desc\n      (schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) I)\n      (-(schemeOpenModuleImageComplexRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V)) I))\n    ∃ h : f ≫ g = 0, (ShortComplex.mk f g h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T130036-L-3924157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T130036-L-3924157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

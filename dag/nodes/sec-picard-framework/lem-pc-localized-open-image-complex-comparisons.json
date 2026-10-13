@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-localized-open-image-complex-comparisons",
+ "kind": "statement",
+ "title": "Localized right-adjoint comparisons for every nested open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with derived localizations for its module sheaves and all localized open module sites in a common Hom universe [def-pc-derived-category]. Put $R_T=D(\\operatorname{overFunctor}_T)$, and give functors $G_T$ and adjunctions $a_T:R_T\\dashv G_T$. Let $I$ be a K-injective complex [def-pur-kinjective-complex], let $E\\in D(\\mathcal O_X)$, and give $e:Q(I)\\xrightarrow{\\sim}E$. For the constructed open-image complexes $J_T$ and fixed restrictions $\\rho_{T,W}$ [def-pc-kinjective-mayer-vietoris-data], there exist isomorphisms $e_T:Q(J_T)\\xrightarrow{\\sim}G_TR_T(E)$ for every open $T$. For every inclusion $i:W\\hookrightarrow T$, set $A=G_TR_T(E)$ and $\\beta_T=(a_T.\\operatorname{homEquiv}_{A,R_T(E)})^{-1}(1_A)$. Then $Q(\\rho_{T,W});e_W=e_T;a_W.\\operatorname{homEquiv}_{A,R_W(E)}(\\operatorname{derivedOpenHomRestriction}(i,\\beta_T))$ [lem-sc-derived-hom-mayer-vietoris]. No termwise injectivity, cover or sequence exactness is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08BS (lemma-restrict-K-injective-to-open), and 079W (lemma-adjoint); K-injective computation and natural derived adjunction, normalized by uniqueness of right adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-scheme",
+  "def-pur-kinjective-complex",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-open-derived-localization-adjunction] for the common Hom universe on each open subscheme. Compute direct image of the restricted K-injective representative using [def-pc-open-image-complex-comparison-iso]. The exact derived factorization [lem-weil-pbc-exact-functor-derived-factorization] carries the open-site equivalence to a derived equivalence. Uniqueness of right adjoints transports the comparison to the supplied G and adj, and apply the restriction of the representative isomorphism e.",
+   "uses": [
+    "lem-pc-open-derived-localization-adjunction",
+    "def-pc-open-image-complex-comparison-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-open-image-complex-comparison-restriction] for each nested inclusion. Exact derived composition identifies the transported nested comparison with derivedOpenHomRestriction. The unique right-adjoint comparison preserves counits and is natural; the transpose of identity is the supplied counit. Thus the localized concrete restriction is precisely the adj W transpose of the restricted transpose of identity. Naturality in e gives the claimed identity for E.",
+   "uses": [
+    "lem-pc-open-image-complex-comparison-restriction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-pc-open-image-complex-comparison-restriction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "note": "Adapted from Stacks Tags 08BV, 08BS and 079W; tag pages read directly because the local literature checkout contains only citation indexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K injective complex computes right adjoint of restriction to localized open site compatible with nested restriction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective complex restriction to an open computes arbitrary derived right adjoint compatible with nested restrictions",
+   "results": "Eight hits, including Scheme.Modules.instIsLeftAdjointRestrictFunctor and generic nonnegative right-derived statements. None compares unbounded open-image complexes with arbitrary localized-site adjunctions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|rightDerivedFunctorObjQIso|schemeOpenModuleImageComplex_comparisons",
+   "results": "Mathlib.CategoryTheory.Adjunction.Unique provides rightAdjointUniq and counit compatibility. Project comparisons use open-subscheme categories and schemeDerivedDirectImage, not the supplied localized-site G; the restriction-comparison theorem supplies the relevant geometric input.",
+   "date": "2026-10-13",
+   "verdict": "generic tools and open-scheme comparison only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenUnionSESPresentation",
+  "group": "U3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof, Mayer--Vietoris globalization of annihilation; scalar naturality of the overlap boundary; direct-image triangle realizing the Mayer-Vietoris boundary before taking Hom; short exact complex before triangle construction; Localized right-adjoint comparisons for every nested open",
+   "via": [
+    "lem-sc-derived-open-union-ses-presentation",
+    "lem-sc-derived-open-union-adjunction-triangle",
+    "lem-sc-derived-open-hom-scalar-mayer-vietoris",
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedOpenImageComplexComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedOpenImageComplexComparisons.lean",
+  "declaration": "AlgebraicGeometry.schemeOpenModuleImageComplex_localized_comparisons",
+  "statement": "theorem schemeOpenModuleImageComplex_localized_comparisons\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (G : ∀ W : X.Opens,\n      DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W)) ⥤\n        schemeDerivedCategory X)\n    (adj : ∀ W : X.Opens,\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory ⊣\n        G W)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective]\n    (E : schemeDerivedCategory X) (e : DerivedCategory.Q.obj I ≅ E) :\n    let R := fun W : X.Opens ↦\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory\n    ∃ eT : ∀ T : X.Opens, DerivedCategory.Q.obj (schemeOpenModuleImageComplex X T I) ≅\n        (G T).obj ((R T).obj E),\n      ∀ (T W : X.Opens) (i : W ⟶ T),\n        let A := (G T).obj ((R T).obj E)\n        let β := ((adj T).homEquiv A ((R T).obj E)).symm (𝟙 A)\n        DerivedCategory.Q.map (schemeOpenModuleImageComplexRestriction X i I) ≫\n            (eT W).hom =\n          (eT T).hom ≫ (adj W).homEquiv A ((R W).obj E)\n            (derivedOpenHomRestriction X.toRingedSpace i β)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T130036-L-3924157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T130036-L-3924157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
