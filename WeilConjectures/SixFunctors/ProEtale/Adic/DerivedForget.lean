@@ -43,7 +43,7 @@ lemma flat_sheaf_weilCoefficients {X : Scheme.{u}}
     essentiallySmall_of_small_of_locallySmall _
   exact ObjectProperty.prop_of_iso _
     (asIso ((sheafificationAdjunction (Scheme.ProEt.topology X) _).counit.app F))
-    (GrothendieckTopology.flat_presheafToSheaf_obj _ _ F.val
+    (GrothendieckTopology.flat_presheafToSheaf_obj _ _ F.obj
       fun _ ↦ (ModuleCat.flat_iff_flat _).2 inferInstance)
 
 instance (X : Scheme.{u}) : (Mod.free (adicConstantSheaf l X)).Additive :=

@@ -13,6 +13,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 
@@ -47,8 +51,8 @@ At the rational stage `E`, the cohomology of these complexes and of their duals 
 
 - `AlgebraicGeometry.Etale.rationalHomology_globalSections`.
 
-At `ℚ̄_ℓ`, for `ℓ` different from the characteristic of `k` and pro-étale complexes with
-constructible `ℓ`-adic cohomology sheaves:
+At `ℚ̄_ℓ`, for `k` algebraically closed, `ℓ` different from its characteristic and pro-étale
+complexes with constructible `ℓ`-adic cohomology sheaves:
 
 - `AlgebraicGeometry.ProEtale.isPerfect_compactlySupportedGlobalSections_adic`,
   `AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_adic`,
@@ -77,7 +81,14 @@ perfectness (`DerivedCategory.isPerfect_iff`).
 At `ℚ̄_ℓ` the coefficients are the pro-étale `ℚ̄_ℓ`-sheaves `WeilCoefficients l` of the Weil
 sheaf formalism, and bounded constructible means bounded with cohomology sheaves
 `ℓ`-adically constructible (`ProEtale.DerivedCategory.boundedAdicConstructible`),
-as in the definition of `AlgebraicGeometry.WeilComplex`.
+as in the definition of `AlgebraicGeometry.WeilComplex`. This stage is not deduced from the
+integral one (there is no comparison of `ℚ̄_ℓ,X`-modules with `ℓ`-adic towers in the
+repository) but proved directly, for `k` algebraically closed as in the blueprint setting
+`sk-def-set`: the derived pushforward to `Spec k` of an object of `D^b_c(X, ℚ̄_ℓ)` is in
+`D^b_c(Spec k, ℚ̄_ℓ)` by the pro-étale finiteness theorem
+(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`), and the global sections of such an
+object are perfect, the global sections functor on `Spec k` being exact and constructible
+sheaves on `Spec k` having finite dimensional global sections.
 -/
 
 @[expose] public section
@@ -332,43 +343,154 @@ end Integral
 
 end Etale
 
+/-- A module over `ULift ℚ̄_ℓ` whose underlying `ℚ̄_ℓ`-vector space is finite dimensional is a
+finite module. -/
+lemma WeilCoefficients.finite_of_finiteDimensional (l : ℕ) [Fact l.Prime]
+    (M : WeilCoefficients.{u} l) [h : FiniteDimensional (PadicAlgCl l) ((toModuleCat l).obj M)] :
+    Module.Finite (ULift.{u + 1} (PadicAlgCl l)) M := by
+  obtain ⟨s, hs⟩ := h.fg_top
+  refine ⟨⟨s, eq_top_iff.2 ?_⟩⟩
+  rintro x -
+  have hx : x ∈ Submodule.span (PadicAlgCl l) (s : Set ((toModuleCat l).obj M)) := hs ▸ trivial
+  induction hx using Submodule.span_induction with
+  | mem y hy => exact Submodule.subset_span hy
+  | zero => exact zero_mem _
+  | add _ _ _ _ h₁ h₂ => exact add_mem h₁ h₂
+  | smul c y _ hy => exact Submodule.smul_mem _ (ULift.up c) hy
+
 namespace ProEtale
+
+section Point
+
+variable (l : ℕ) [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K]
+
+/-- Over an algebraically closed field `K`, the global sections functor on pro-étale sheaves of
+`ℚ̄_ℓ`-modules on `Spec K` is exact. -/
+instance preservesFiniteColimits_Γ_of_isAlgClosed :
+    PreservesFiniteColimits
+      (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)) := by
+  have h := (Functor.preservesFiniteLimits_tfae
+    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 3 0
+  have h' := (Functor.preservesFiniteColimits_tfae
+    (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l))).out 0 3
+  exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
+
+/-- Over an algebraically closed field `K`: for `M ∈ D^b_c(Spec K, ℚ̄_ℓ)` the derived global
+sections of the underlying complex of sheaves of `ℚ̄_ℓ`-modules form a perfect complex. The
+global sections functor is exact, so `Hⁿ(RΓ(Spec K, M)) = Γ(Spec K, Hⁿ(M))`, which vanishes
+outside the amplitude of `M` and is finite dimensional, `Hⁿ(M)` being constructible
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.finiteDimensional_globalSections`). -/
+theorem isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed
+    (M : _root_.DerivedCategory (AdicSheaf l (Spec (.of K))))
+    (hM : DerivedCategory.boundedAdicConstructible l _ M) :
+    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) (Spec (.of K))).obj
+      ((AdicSheaf.forget _).mapDerivedCategory.obj M)).IsPerfect := by
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hM
+  have e (n : ℤ) : (_root_.DerivedCategory.homologyFunctor _ n).obj
+      ((rightDerivedGlobalSections (WeilCoefficients.{u} l) (Spec (.of K))).obj
+        ((AdicSheaf.forget _).mapDerivedCategory.obj M)) ≅
+      (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj
+        ((_root_.DerivedCategory.homologyFunctor _ n).obj M).X :=
+    (Functor.rightDerivedFunctorHomologyFunctorIso _ n).symm.app _ ≪≫
+      (Sheaf.Γ _ _).mapIso
+        (((AdicSheaf.forget _).mapDerivedCategoryHomologyFunctorIso n).app M).symm
+  rw [_root_.DerivedCategory.isPerfect_iff]
+  refine ⟨⟨a, b, ?_, ?_⟩, fun n ↦ ?_⟩
+  · rw [_root_.DerivedCategory.isGE_iff]
+    intro n hn
+    exact (Functor.map_isZero _ (Functor.map_isZero (AdicSheaf.forget _)
+      ((_root_.DerivedCategory.isGE_iff M a).1 ha n hn))).of_iso (e n)
+  · rw [_root_.DerivedCategory.isLE_iff]
+    intro n hn
+    exact (Functor.map_isZero _ (Functor.map_isZero (AdicSheaf.forget _)
+      ((_root_.DerivedCategory.isLE_iff M b).1 hb n hn))).of_iso (e n)
+  · have := IsAdicConstructibleSheaf.finiteDimensional_globalSections (hc n)
+    have := WeilCoefficients.finite_of_finiteDimensional l
+      ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of K))) (WeilCoefficients.{u} l)).obj
+        ((_root_.DerivedCategory.homologyFunctor _ n).obj M).X)
+    exact Module.Finite.equiv (e n).toLinearEquiv.symm
+
+end Point
 
 section Adic
 
-variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsSepClosed k] [Fact (ringChar k ≠ l)]
+variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsAlgClosed k] [Fact (ringChar k ≠ l)]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
+omit [IsSeparated aX] [LocallyOfFiniteType aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
-**`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of `k`.
-For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported
-cohomology `RΓ_c(X, K)` is a perfect complex of `ℚ̄_ℓ`-vector spaces: bounded with finite
-dimensional cohomology. The complex `K` is defined over the ring of integers of a finite
-extension `E/ℚ_ℓ`, and the statement follows from the integral stage
-`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral` by flat
-extension of scalars `𝒪_E → E → ℚ̄_ℓ`. -/
+**`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
+algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported cohomology
+`RΓ_c(X, K)` is a perfect complex of `ℚ̄_ℓ`-vector spaces: bounded with finite dimensional
+cohomology. For the compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`, the extension by zero
+`j_! K` is again in `D^b_c(X̄, ℚ̄_ℓ)`, hence so is `Rā_* j_! K ∈ D^b_c(Spec k, ℚ̄_ℓ)` by the
+finiteness theorem (`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`), all of this
+computed on the underlying sheaves of `ℚ̄_ℓ`-modules
+(`AlgebraicGeometry.ProEtale.mapDerivedCategoryForgetCompRightDerivedLowerStarIso`); and the
+global sections of an object of `D^b_c(Spec k, ℚ̄_ℓ)` are perfect
+(`AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed`). -/
 theorem isPerfect_compactlySupportedGlobalSections_adic
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
     ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj
-      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect :=
-  sorry
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect := by
+  let c := HasCompactification.compactification aX
+  have : IsProper c.g := c.isProper
+  have : IsOpenImmersion c.i := c.isOpenImmersion
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have hK' : DerivedCategory.boundedAdicConstructible l c.Z
+      ((c.i)_!ᵃ[l].mapDerivedCategory.obj K) :=
+    ⟨Functor.bounded_mapDerivedCategory_obj _ hK.1, fun n ↦
+      (adicConstructibleSheaf l c.Z).prop_of_iso
+        (((c.i)_!ᵃ[l].mapDerivedCategoryHomologyFunctorIso n).app K)
+        ((hK.2 n).openImmersionLowerShriek c.i)⟩
+  have hM : DerivedCategory.boundedAdicConstructible l (Spec (.of k))
+      ((c.g)_*ᵃ[l].rightDerivedFunctor.obj ((c.i)_!ᵃ[l].mapDerivedCategory.obj K)) :=
+    finiteLowerStar_of_bounded c.g
+      (fun _ hF ↦ finiteLowerStar_singleFunctor (𝟙 _) c.g (Fact.out : ringChar k ≠ l) hF)
+      _ hK'.1 hK'.2
+  have e₁ : (c.i)_!open[WeilCoefficients.{u} l].mapDerivedCategory.obj
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K) ≅
+      (ProEtale.AdicSheaf.forget c.Z).mapDerivedCategory.obj
+        ((c.i)_!ᵃ[l].mapDerivedCategory.obj K) :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm.app K ≪≫
+      (Functor.mapDerivedCategoryNatIso
+        (asIso (adicOpenImmersionLowerShriekComparison l c.i))).app K ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app K
+  exact (isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed l _ hM).of_iso
+    ((rightDerivedGlobalSections _ _).mapIso
+      (((mapDerivedCategoryForgetCompRightDerivedLowerStarIso l c.g).app _).symm ≪≫
+        ((c.g)_*[WeilCoefficients.{u} l]).rightDerivedFunctor.mapIso e₁.symm))
 
+omit [HasCompactification aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
-**`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of `k`.
-For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
-perfect complex of `ℚ̄_ℓ`-vector spaces, by flat extension of scalars from
-`AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral`. -/
+**`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
+algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
+perfect complex of `ℚ̄_ℓ`-vector spaces: `RΓ(X, K) ≅ RΓ(Spec k, Ra_{X*} K)` (Leray), and
+`Ra_{X*} K ∈ D^b_c(Spec k, ℚ̄_ℓ)` by the finiteness theorem
+(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`). -/
 theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
     ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj
-      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect :=
-  sorry
+      ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect := by
+  have hM : DerivedCategory.boundedAdicConstructible l (Spec (.of k))
+      ((aX)_*ᵃ[l].rightDerivedFunctor.obj K) :=
+    finiteLowerStar_of_bounded aX
+      (fun _ hF ↦ finiteLowerStar_singleFunctor (𝟙 _) aX (Fact.out : ringChar k ≠ l) hF)
+      _ hK.1 hK.2
+  have : ((aX)_*[WeilCoefficients.{u} l]).PreservesKInjectiveComplexes :=
+    (upperStarLowerStarAdjunction _ aX).preservesKInjectiveComplexes
+  exact (isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed l _ hM).of_iso
+    ((rightDerivedGlobalSections _ _).mapIso
+      ((mapDerivedCategoryForgetCompRightDerivedLowerStarIso l aX).app K).symm ≪≫
+      (Functor.rightDerivedFunctorCompIso' _ _
+        (globalSectionsLowerStarIso (WeilCoefficients.{u} l) aX)).app _)
 
+omit [IsSeparated aX] [LocallyOfFiniteType aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
 **The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
@@ -380,6 +502,7 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
       (𝟙_ _)).IsPerfect :=
   (isPerfect_compactlySupportedGlobalSections_adic l aX K hK).ihom_unit
 
+omit [HasCompactification aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
 **The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
