@@ -31,4 +31,5 @@ theorem zariskisMainProperty_of_isQuasiFiniteAtPrime
   rw [← e.isOpen_image, Set.image_singleton]
   exact hq
 
+-- The fibre homeomorphism identifies the singleton used above.
 end Algebra
