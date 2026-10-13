@@ -1,0 +1,205 @@
+{
+ "id": "lem-weil-pbc-colimit-maximal-kernel-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+   "via": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The maximal-ideal multiplication kernel dies at a later stage of a flat colimit",
+ "statement": "Let $\\Lambda$ be a nonempty directed preorder. For each $i\\in\\Lambda$, let $A_i$ be a Noetherian local commutative ring, $B_i$ a Noetherian commutative ring [def-weil-pbc-noetherian-ring], and $N_i$ a finite $B_i$-module [def-weil-finitely-generated-module]. Let $A$, $B$, and $N$ be functors from $\\Lambda$ respectively to commutative rings, commutative rings, and abelian groups, with these objects and transition maps $\\alpha_f$, $\\beta_f$, and $\\eta_f$ for $f:i\\to j$. Let $\\varphi_i:A_i\\to B_i$ be ring maps such that $\\beta_f\\varphi_i=\\varphi_j\\alpha_f$, and suppose $\\eta_f(bx)=\\beta_f(b)\\eta_f(x)$. Let $A_\\infty$, $B_\\infty$, and $N_\\infty$ be their specified categorical colimits [def-weil-pbc-category-colimit], with coprojections $a_i$, $b_i$, and $n_i$. Suppose a ring map $\\psi:A_\\infty\\to B_\\infty$ satisfies $\\psi a_i=b_i\\varphi_i$, and $N_\\infty$ is a $B_\\infty$-module satisfying $n_i(bx)=b_i(b)n_i(x)$. Assume $N_\\infty$ is flat over $A_\\infty$ through $\\psi$ [def-weil-pbc-flat-ring-map]. For every fixed $i$, put $I=\\mathfrak m_{A_i}$. Then there are an index $j$, a morphism $f:i\\to j$, and an additive map $\\theta:I\\otimes_{A_i}N_i\\to (I A_j)\\otimes_{A_j}N_j$, where $I A_j=I.\\mathrm{map}(\\alpha_f)$ and the module structures are through $\\varphi_i$ and $\\varphi_j$, such that $\\theta(a\\otimes x)=\\alpha_f(a)\\otimes\\eta_f(x)$ for every $a\\in I$, $x\\in N_i$, and $\\theta(k)=0$ whenever $k$ lies in the kernel of multiplication $I\\otimes_{A_i}N_i\\to N_i$, $a\\otimes x\\mapsto\\varphi_i(a)x$. No locality of the structure or transition maps and no localization or tensor base-change assumptions are required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "(Notation; restriction to the indices above a fixed $\\lambda$.) Write $\\alpha_{\\mu\\lambda}:A_\\lambda\\to A_\\mu$, $\\beta_{\\mu\\lambda}:B_\\lambda\\to B_\\mu$, $\\eta_{\\mu\\lambda}:N_\\lambda\\to N_\\mu$ for the transition maps, $\\varphi_\\mu:A_\\mu\\to B_\\mu$ for the structure maps, $\\iota_\\mu:A_\\mu\\to A$ and $n_\\mu:N_\\mu\\to N$ for the coprojections; $A_\\mu$ acts on $N_\\mu$ through $\\varphi_\\mu$, and $A$ acts on $N$ through $A\\to B$, so that $\\iota_\\mu(a)\\,n_\\mu(y)=n_\\mu(\\varphi_\\mu(a)y)$ (the composites $A_\\mu\\to A\\to B$ and $A_\\mu\\to B_\\mu\\to B$ agree, and $n_\\mu$ is semilinear). Fix the index $\\lambda=i$ specified in the statement, write $\\mathfrak m=\\mathfrak m_\\lambda$ and $\\Lambda_{\\ge\\lambda}=\\{\\mu\\in\\Lambda:\\mu\\ge\\lambda\\}$. $\\Lambda_{\\ge\\lambda}$ is directed, and every $\\nu\\in\\Lambda$ satisfies $\\nu\\le\\mu$ for some $\\mu\\in\\Lambda_{\\ge\\lambda}$ ($\\Lambda$ is directed). So [lem-weil-pbc-colimit-initial-full-subcategory] (1), applied to the cofiltered category $\\Lambda^{\\mathrm{op}}$ and its full subcategory $\\Lambda_{\\ge\\lambda}^{\\mathrm{op}}$, shows: $(A,(\\iota_\\mu)_{\\mu\\ge\\lambda})$ is a colimit of the system $(A_\\mu)_{\\mu\\ge\\lambda}$ in commutative rings, and $(N,(n_\\mu)_{\\mu\\ge\\lambda})$ is a colimit of $(N_\\mu)_{\\mu\\ge\\lambda}$ in abelian groups [def-weil-pbc-category-colimit]. From here on all indices are in $\\Lambda_{\\ge\\lambda}$.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof ('Pick some lambda'); the restriction to the indices >= lambda is implicit in 'there exists a lambda' >= lambda'"
+   }
+  },
+  {
+   "text": "($\\mathrm{Tor}_1$ as a kernel, finitely generated over $B_\\lambda$.) Since $A_\\lambda$ is Noetherian [def-weil-pbc-noetherian-ring], $\\mathfrak m=(f_1,\\dots,f_r)$. Let $P=\\mathfrak m\\otimes_{A_\\lambda}N_\\lambda$. For $b\\in B_\\lambda$ the map $(g,y)\\mapsto g\\otimes by$ is $A_\\lambda$-balanced (multiplication by $b$ on $N_\\lambda$ is $A_\\lambda$-linear, $B_\\lambda$ being commutative), so $b(g\\otimes y)=g\\otimes by$ makes $P$ a $B_\\lambda$-module. If $y_1,\\dots,y_s$ generate $N_\\lambda$ over $B_\\lambda$ [def-weil-finitely-generated-module] and $g=\\sum_ka_kf_k$, $y=\\sum_lb_ly_l$, then $g\\otimes y=\\sum_{k,l}\\varphi_\\lambda(a_k)b_l\\,(f_k\\otimes y_l)$, so $P$ is a finitely generated $B_\\lambda$-module. The multiplication map $\\pi_\\lambda:P\\to N_\\lambda$, $g\\otimes y\\mapsto\\varphi_\\lambda(g)y$, is $B_\\lambda$-linear, so $K_\\lambda=\\ker\\pi_\\lambda$ is a $B_\\lambda$-submodule of $P$ (by Remark 00M6, $K_\\lambda=\\mathrm{Tor}_1^{A_\\lambda}(N_\\lambda,A_\\lambda/\\mathfrak m)$; this identification is not needed below). As $B_\\lambda$ is Noetherian, $K_\\lambda$ is finitely generated by [lem-weil-pbc-noetherian-submodule-finite]; choose generators $\\xi_1,\\dots,\\xi_n$ of $K_\\lambda$ over $B_\\lambda$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof: 'The right hand side shows that this is a finitely generated S_lambda-module ... Let xi_1, ..., xi_n be generators'; Remark Tag 00M6 (remark-Tor-ring-mod-ideal, line 18690)"
+   }
+  },
+  {
+   "text": "(Tensor products with $\\mathfrak m$ commute with the colimits.) Regard $A_\\mu$, $A$, $N_\\mu$, $N$ as $A_\\lambda$-modules through $\\alpha_{\\mu\\lambda}$, $\\iota_\\lambda$, $\\varphi_\\mu\\circ\\alpha_{\\mu\\lambda}$ and $A_\\lambda\\to A\\to B$; then all $\\alpha_{\\nu\\mu}$, $\\iota_\\mu$, $\\eta_{\\nu\\mu}$, $n_\\mu$ are $A_\\lambda$-linear (e.g. $\\iota_\\mu(\\alpha_{\\mu\\lambda}(c)a)=\\iota_\\lambda(c)\\iota_\\mu(a)$, and $n_\\mu(\\varphi_\\mu(\\alpha_{\\mu\\lambda}(c))y)=\\iota_\\lambda(c)n_\\mu(y)$ by step 1). (i) $(A,(\\iota_\\mu))$ is a colimit of $(A_\\mu)_{\\mu\\ge\\lambda}$ in $A_\\lambda$-modules, by [lem-weil-pbc-filtered-colimit-modules-criterion] (ring $A_\\lambda$): its condition (1) holds by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) (ring $\\mathbb Z$, the ring colimit of step 1), and condition (2) by [lem-weil-pbc-filtered-colimit-rings-zero] ($\\iota_\\mu(x)=0$ implies $\\alpha_{\\nu\\mu}(x)=0$ for some $\\nu\\ge\\mu$). (ii) $(N,(n_\\mu))$ is a colimit of $(N_\\mu)_{\\mu\\ge\\lambda}$ in $A_\\lambda$-modules, by [lem-weil-pbc-filtered-colimit-modules-criterion] (ring $A_\\lambda$), whose conditions (1), (2) are (1), (2) of [lem-weil-pbc-filtered-colimit-modules-elementwise] for the colimit of abelian groups of step 1 (ring $\\mathbb Z$). (iii) By [lem-weil-pbc-tensor-commutes-with-colimits] (ring $A_\\lambda$, the $A_\\lambda$-module $\\mathfrak m$; the symmetry $X\\otimes\\mathfrak m\\cong\\mathfrak m\\otimes X$ is natural), $\\mathfrak m\\otimes_{A_\\lambda}A$ with the maps $1\\otimes\\iota_\\mu$ is a colimit of the $\\mathfrak m\\otimes_{A_\\lambda}A_\\mu$, and $\\mathfrak m\\otimes_{A_\\lambda}N$ with the maps $1\\otimes n_\\mu$ is a colimit of the $Q_\\mu:=\\mathfrak m\\otimes_{A_\\lambda}N_\\mu$ (transition maps $1\\otimes\\alpha_{\\nu\\mu}$, resp. $1\\otimes\\eta_{\\nu\\mu}$), both in $A_\\lambda$-modules; so (1), (2) of [lem-weil-pbc-filtered-colimit-modules-elementwise] apply to them.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof: 'Since (x) commutes with colimits'; Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934)"
+   }
+  },
+  {
+   "text": "(Flatness of $N$.) Let $s:\\mathfrak m\\otimes_{A_\\lambda}A\\to A$, $g\\otimes a\\mapsto\\iota_\\lambda(g)a$; it is $A$-linear for $A$ acting on the second factor; let $K=\\ker s$. The sequence $0\\to K\\to\\mathfrak m\\otimes_{A_\\lambda}A\\xrightarrow{s}A$ is exact and $N$ is a flat $A$-module, so by [lem-weil-pbc-flat-tensor-exact] $K\\otimes_AN\\to(\\mathfrak m\\otimes_{A_\\lambda}A)\\otimes_AN\\xrightarrow{s\\otimes1}A\\otimes_AN$ is exact. Under the isomorphisms $(\\mathfrak m\\otimes_{A_\\lambda}A)\\otimes_AN\\cong\\mathfrak m\\otimes_{A_\\lambda}N$, $(g\\otimes a)\\otimes z\\mapsto g\\otimes az$, and $A\\otimes_AN\\cong N$, $a\\otimes z\\mapsto az$, the map $s\\otimes1$ becomes $\\omega:\\mathfrak m\\otimes_{A_\\lambda}N\\to N$, $g\\otimes z\\mapsto\\iota_\\lambda(g)z$. For $k=\\sum_lg_l\\otimes a_l\\in\\mathfrak m\\otimes_{A_\\lambda}A$ and $z\\in N$ write $k*z=\\sum_lg_l\\otimes a_lz\\in\\mathfrak m\\otimes_{A_\\lambda}N$ (the image of $k\\otimes z$). Hence every element of $\\ker\\omega$ is $\\sum_jk_j*z_j$ with $k_j\\in K$, $z_j\\in N$. For $\\xi=\\sum_kg_k\\otimes y_k\\in K_\\lambda$ put $\\bar\\xi=(1\\otimes n_\\lambda)(\\xi)\\in\\mathfrak m\\otimes_{A_\\lambda}N$; then $\\omega(\\bar\\xi)=\\sum_k\\iota_\\lambda(g_k)n_\\lambda(y_k)=n_\\lambda\\bigl(\\sum_k\\varphi_\\lambda(g_k)y_k\\bigr)=n_\\lambda(\\pi_\\lambda(\\xi))=0$ (step 1). So for $i=1,\\dots,n$ there are finitely many $k_{ij}\\in K$, $z_{ij}\\in N$ with $\\bar\\xi_i=\\sum_jk_{ij}*z_{ij}$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof: 'Because M is flat over R we have that 0 = Ker(m_lambda R (x)_R M -> M)'"
+   }
+  },
+  {
+   "text": "(Descent to a stage $\\lambda'$.) By step 3 (iii) and (ii) with (1) of [lem-weil-pbc-filtered-colimit-modules-elementwise], each $k_{ij}$ is $(1\\otimes\\iota_\\mu)(k'_{ij})$ with $k'_{ij}\\in\\mathfrak m\\otimes_{A_\\lambda}A_\\mu$ and each $z_{ij}$ is $n_\\mu(z'_{ij})$ with $z'_{ij}\\in N_\\mu$; as there are finitely many and $\\Lambda_{\\ge\\lambda}$ is directed, one $\\mu$ serves for all (move each to a common later index along the transition maps). Let $s_\\mu:\\mathfrak m\\otimes_{A_\\lambda}A_\\mu\\to A_\\mu$, $g\\otimes a\\mapsto\\alpha_{\\mu\\lambda}(g)a$; then $\\iota_\\mu(s_\\mu(k'_{ij}))=s(k_{ij})=0$, so by [lem-weil-pbc-filtered-colimit-rings-zero] $\\alpha_{\\nu\\mu}(s_\\mu(k'_{ij}))=0$ for some $\\nu\\ge\\mu$; replacing $\\mu$ by a common such $\\nu$ and $k'_{ij}$, $z'_{ij}$ by their images ($s_\\nu\\circ(1\\otimes\\alpha_{\\nu\\mu})=\\alpha_{\\nu\\mu}\\circ s_\\mu$), we may assume $s_\\mu(k'_{ij})=0$. Define $k'*y\\in Q_\\mu$ for $k'\\in\\mathfrak m\\otimes_{A_\\lambda}A_\\mu$, $y\\in N_\\mu$ as in step 4 ($(g\\otimes a)*y=g\\otimes\\varphi_\\mu(a)y$), and $\\zeta_i=\\sum_jk'_{ij}*z'_{ij}\\in Q_\\mu$. On generators $(1\\otimes n_\\mu)((g\\otimes a)*y)=g\\otimes n_\\mu(\\varphi_\\mu(a)y)=g\\otimes\\iota_\\mu(a)n_\\mu(y)=((1\\otimes\\iota_\\mu)(g\\otimes a))*n_\\mu(y)$ (step 1), so $(1\\otimes n_\\mu)(\\zeta_i)=\\bar\\xi_i=(1\\otimes n_\\mu)((1\\otimes\\eta_{\\mu\\lambda})(\\xi_i))$. By (2) of [lem-weil-pbc-filtered-colimit-modules-elementwise] for the colimit $\\mathfrak m\\otimes_{A_\\lambda}N$ of the $Q_\\nu$ (step 3 (iii)) there is $\\lambda'\\ge\\mu$, one for all $i$, with $(1\\otimes\\eta_{\\lambda'\\lambda})(\\xi_i)=(1\\otimes\\eta_{\\lambda'\\mu})(\\zeta_i)=\\sum_jk''_{ij}*\\eta_{\\lambda'\\mu}(z'_{ij})$, where $k''_{ij}=(1\\otimes\\alpha_{\\lambda'\\mu})(k'_{ij})$ satisfies $s_{\\lambda'}(k''_{ij})=\\alpha_{\\lambda'\\mu}(s_\\mu(k'_{ij}))=0$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof: 'Since (x) commutes with colimits we see there exists a lambda' >= lambda such that each xi_i maps to zero in m_lambda R_lambda' (x)_{R_lambda'} M_lambda''"
+   }
+  },
+  {
+   "text": "(The kernel dies in $\\mathfrak mA_{\\lambda'}\\otimes N_{\\lambda'}$.) Let $J_{\\lambda'}=\\mathfrak mA_{\\lambda'}$, the ideal of $A_{\\lambda'}$ generated by $\\alpha_{\\lambda'\\lambda}(\\mathfrak m)$; $s_{\\lambda'}$ takes values in $J_{\\lambda'}$. Let $\\theta:P\\to J_{\\lambda'}\\otimes_{A_{\\lambda'}}N_{\\lambda'}$, $g\\otimes y\\mapsto\\alpha_{\\lambda'\\lambda}(g)\\otimes\\eta_{\\lambda'\\lambda}(y)$, and $\\chi:Q_{\\lambda'}\\to J_{\\lambda'}\\otimes_{A_{\\lambda'}}N_{\\lambda'}$, $g\\otimes y\\mapsto\\alpha_{\\lambda'\\lambda}(g)\\otimes y$ (both $A_\\lambda$-balanced); so $\\theta=\\chi\\circ(1\\otimes\\eta_{\\lambda'\\lambda})$. On generators $\\chi((g\\otimes a)*y)=\\alpha_{\\lambda'\\lambda}(g)\\otimes ay=s_{\\lambda'}(g\\otimes a)\\otimes y$, so $\\chi(k*y)=s_{\\lambda'}(k)\\otimes y$ for $k\\in\\mathfrak m\\otimes_{A_\\lambda}A_{\\lambda'}$. By step 5, $\\theta(\\xi_i)=\\sum_js_{\\lambda'}(k''_{ij})\\otimes\\eta_{\\lambda'\\mu}(z'_{ij})=0$. Let $B_{\\lambda'}$ act on $J_{\\lambda'}\\otimes_{A_{\\lambda'}}N_{\\lambda'}$ through the second factor (as in step 2). For $b\\in B_\\lambda$, $\\theta(g\\otimes by)=\\alpha_{\\lambda'\\lambda}(g)\\otimes\\beta_{\\lambda'\\lambda}(b)\\eta_{\\lambda'\\lambda}(y)=\\beta_{\\lambda'\\lambda}(b)\\theta(g\\otimes y)$, so $\\theta(\\sum_ib_i\\xi_i)=\\sum_i\\beta_{\\lambda'\\lambda}(b_i)\\theta(\\xi_i)=0$: $\\theta$ vanishes on $K_\\lambda$ (step 2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00R6 (lemma-colimit-eventually-flat, line 32723), proof: 'Hence we see that Tor_1^{R_lambda}(M_lambda, R_lambda/m_lambda) -> Tor_1^{R_lambda'}(M_lambda', R_lambda'/m_lambda R_lambda') is zero'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R6, kernel-descent part of the proof before applying Tag 00MO, with Remark 00M6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a directed colimit of rings and finite modules, the kernel of tensoring an ideal with a stage module vanishes in the extended ideal tensor module at a later stage when the limit module is flat",
+   "results": "Service unavailable: Internal Server Error; no results returned. Other search kinds and source inspection completed.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal ideal tensor multiplication kernel dies at a later stage of a directed system when the colimit module is flat",
+   "results": "Module.Flat.iff_lift_lsmul_comp_subtype_injective (Mathlib.RingTheory.Flat.Tensor); Submodule.FG.rTensor/lTensor.directedSystem (Mathlib.RingTheory.TensorProduct.DirectLimitFG). Neither states descent for varying rings and modules.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, \"eq_zero\"",
+   "results": "TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective (Mathlib.LinearAlgebra.TensorProduct.Vanishing) handles tensor relations, not finite-stage descent.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*(finite stage|later stage|finite-stage)|exists.*(lTensor_eq_zero|kernel_vanishes), in lean/WeilConjectures/Mathlib/RingTheory, lean/Sheaf/RingTheory, and Mathlib/RingTheory; blueprint_refs.py search 00R6",
+   "results": "Module.exists_finset_lTensor_eq_zero (WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber) covers ring tensor base change over subalgebras of a fixed ring. Signature read: not the varying finite modules here. No matching blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitEventuallyFlat",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+  "file": "lean/Sheaf/RingTheory/ColimitMaximalKernelDescent.lean",
+  "declaration": "RingTheory.exists_stage_maximal_kernel_vanishes",
+  "statement": "theorem exists_stage_maximal_kernel_vanishes {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ] (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w}) (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N] [∀ i, IsLocalRing (A.obj i)] [∀ i, IsNoetherianRing (A.obj i)] [∀ i, IsNoetherianRing (B.obj i)] [∀ i, Module (B.obj i) (N.obj i)] [∀ i, Module.Finite (B.obj i) (N.obj i)] (φ : ∀ i, A.obj i →+* B.obj i) (hcomm : ∀ (i j : Λ) (f : i ⟶ j), (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom) (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i), (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x) (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w})) (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i)) [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})] (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i), (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x) (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z})) (i : Λ) : ∃ (j : Λ) (f : i ⟶ j), letI := Module.compHom (N.obj i) (φ i) letI := Module.compHom (N.obj j) (φ j) let I := IsLocalRing.maximalIdeal (A.obj i) ∃ θ : I ⊗[A.obj i] N.obj i →+ (I.map (A.map f).hom) ⊗[A.obj j] N.obj j, (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) = (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ : I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧ (∀ k : I ⊗[A.obj i] N.obj i, TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 → θ k = 0)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T082327-L-1629703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T082327-L-1629703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

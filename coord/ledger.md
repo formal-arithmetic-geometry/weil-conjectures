@@ -11597,3 +11597,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: returned deliver/R1/Sheaf.CategoryTheory.CompactFactorThroughThick (reviewer RETURN: (the landing tools, head 507973954) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 08:23 L: returned deliver/T3/Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity (reviewer RETURN: (the landing tools, head bd6f57392) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:23 L: returned deliver/Y2/Sheaf.AlgebraicGeometry.PicardBaseChangeStalkFinrankEq (reviewer RETURN: (the landing tools, head 4bffdb740) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 08:23 L: merged deliver/A2/Sheaf.RingTheory.ColimitEventuallyFlat (stage 3; reviewer PASS; first push; landing 20261013T082327-L-1629703 (interface); batch 20261013T082326; modules 2; new nodes 1)
