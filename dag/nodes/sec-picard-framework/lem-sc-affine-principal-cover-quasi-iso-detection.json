@@ -13,52 +13,47 @@
  ],
  "proof": [
   {
-   "text": "On each D(f_j), the principal-open tilde sections formula, natural in a module and its homomorphisms, identifies the restriction of termwise tilde with tilde of the localized complex over A_fj. On smaller principal opens this comparison is the canonical further localization, and uniqueness of localization maps proves compatibility with restriction. Transport along X.isoSpec and the natural isomorphism hT. The same comparison identifies the restricted map with tilde of alpha_fj.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
-  },
-  {
-   "text": "Tilde preserves colimits as the left adjoint in the affine tilde/Gamma adjunction. For a module map, the kernel of its tilde map is quasi-coherent by the module kernel theorem. Gamma preserves kernels as a right adjoint, and the adjunction unit identifies Gamma of the source and target with their modules. Hence Gamma of the sheaf kernel is the module kernel. The adjunction counit on this quasi-coherent kernel identifies it with tilde of that module kernel, compatibly with the kernel arrow by naturality. Thus tilde preserves kernels and is exact, so it commutes with homology. Since alpha_fj is a quasi-isomorphism, its associated sheaf map has invertible homology on D(f_j). Exact open restriction and the open-scheme equivalences preserve this assertion.",
+   "text": "Tilde is a left adjoint and preserves colimits. Its map on local representatives of a section is IsLocalizedModule.map at the prime complement. IsLocalizedModule.map_injective therefore shows that tilde preserves monomorphisms. Functor.preservesHomology_of_preservesMonos_and_cokernels proves preservation of homology. This is the fully proved private tilde_preservesHomology helper; it needs no quasi-coherent-kernel theorem.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-module-kernel"
+    "lem-weil-pbc-spec-module-tilde-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
+   "elementary": true
   },
   {
-   "text": "The D(f_j), viewed as opens of U using hsub, cover U by hcover. Each homology map of the restricted T(alpha) is invertible after restriction to these opens. Apply the local open-cover criterion for module sheaf isomorphisms in each degree. Thus the restricted complex map is a quasi-isomorphism. Apply Q, and use the exact restriction localization comparison to identify its image with the map in the conclusion. Invertibility is invariant under this conjugation. An empty family forces U empty, where the same sheaf-cover criterion is vacuous.",
+   "text": "For one a in A, let j be Spec(A_a) -> Spec(A) and p=j followed by X.isoSpec.inv. Equality of the open-immersion ranges explicitly constructs an isomorphism Spec(A_a) ≅ D(a). Unpack this constructed isomorphism together with its inverse factorization to keep subsequent transport independent of its implementation. The source-library Scheme.Modules.tildePullbackIso identifies tilde followed by pullback along j with scalar extension followed by tilde. It is proved by composing the affine tilde/Gamma adjunction with pullback/pushforward, identifying the common right adjoint by pushforwardSpecMapCompΓIso, and uniqueness of left adjoints. Open restriction is pullback, and restrictFunctorComp plus hT transport this natural comparison to T followed by restriction along p. Lift the comparison to complexes and use exactness of tilde on the supplied localized quasi-isomorphism. Restrict along the inverse of Spec(A_a) ≅ D(a) and use overFunctorEquiv to obtain the quasi-isomorphism of the over-site restricted T(alpha). Restriction is exact by preservation of limits and colimits. This is the fully proved private principalOpen_localized_quasiIso helper.",
    "uses": [
-    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-pushforward-spec-global-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08EE",
-    "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
-   }
+   "elementary": true
+  },
+  {
+   "text": "View the D(f_j) as the objects Over.mk(homOfLE(hsub j)) in the localized open site over U. For any object Z and x in Z, hcover gives a j; Z intersect D(f_j) is a covering neighbourhood of x with a map to the j-th object. This proves CoversTop, including the empty-index case. Apply Mathlib Sheaf.isIso_of_coversTop to the underlying abelian sheaves of a module map restricted over U, then reflect isomorphisms with SheafOfModules.toSheaf. Apply this criterion to each ambient homology map of T(alpha). ShortComplex.mapHomologyIso_inv_naturality identifies its local restrictions with homology of the locally restricted complexes. Consequently the map restricted over U is a quasi-isomorphism. The isIso_over_of_cover and quasiIso_over_of_cover helpers prove all these steps directly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The open-scheme equivalence preserves homology and hence quasi-isomorphisms. Q sends the resulting quasi-isomorphism to an isomorphism. Naturality of mapDerivedCategoryFactors conjugates that morphism to the map asserted in the conclusion; cancellation of its invertible component proves IsIso. The statement and universes are unchanged, and no additional derived categories are chosen.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-module-tilde-sections",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Y2",
+  "group": "E3",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/08EE",
-  "place": "Tag 08EE (lemma-lift-pseudo-coherent), affine module-model and final sheafification steps; Tag 08E7 for local pseudo-coherence"
+  "place": "Final sheafification; shorter categorical comparison via the already proved Scheme.Modules.tildePullbackIso, and direct Mathlib sheaf local-isomorphism criterion. All private helpers fully proved."
  },
  "mathlib_searches": [
   {
@@ -146,10 +141,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T100224-L-2504251",
-  "kind": "interface",
+  "landing": "20261013T113339-L-3182467",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
