@@ -47,7 +47,7 @@ theorem derivedCategory_towerLimit_core
         IsDerivedLimit f (DerivedCategory.Q.obj c.pt) := by
   let : HasCountableProducts (DerivedCategory A) := hP
   intro hI I hKI K f e
-  have hc' := (derivedCategory_towerLimit_cone A hP) hI I
+  have hc' := (derivedCategory_towerLimit_cone A) I
   obtain ⟨c, hc⟩ := hc'
   refine ⟨c, hc, ?_⟩
   exact (derivedCategory_towerLimit_property A hP hI I K f e c hc.some)

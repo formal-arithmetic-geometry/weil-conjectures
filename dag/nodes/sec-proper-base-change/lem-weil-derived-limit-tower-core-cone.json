@@ -59,10 +59,8 @@
  ],
  "id": "lem-weil-derived-limit-tower-core-cone",
  "title": "Limit cone for a K-injective tower",
- "statement": "Let A be an abelian category with exact countable products and enough injectives, with derived category D(A) [def-weil-abstract-derived-category] equipped with any chosen countable products. For every K-injective cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
- "stmt_deps": [
-  "def-weil-abstract-derived-category"
- ],
+ "statement": "Let A be an abelian category with countable products. For every cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
+ "stmt_deps": [],
  "proof": [
   {
    "text": "Countable products in A induce countable products of complexes. The tower has countably many objects and arrows. Products indexed by these two sets and equalizers construct the limit, using Mathlib hasLimit_of_equalizer_and_product.",
@@ -75,17 +73,17 @@
   "by": "worker",
   "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerCone.lean",
   "place": "theorem derivedCategory_towerLimit_cone",
-  "note": "Proved from Mathlib products and equalizers, without K-injectivity."
+  "note": "Proved from Mathlib countable products and equalizers; no derived category, exactness, enough injectives, or K-injectivity hypotheses are needed."
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone",
   "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerCone.lean",
   "declaration": "CategoryTheory.derivedCategory_towerLimit_cone",
-  "statement": "theorem derivedCategory_towerLimit_cone\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (hP : HasCountableProducts (DerivedCategory A)) :\n    letI : HasCountableProducts (DerivedCategory A) := hP\n    ∀ (_ : EnoughInjectives A)\n      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective],\n      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)",
+  "statement": "theorem derivedCategory_towerLimit_cone\n    (A : Type u) [Category.{v} A] [Abelian A] [HasCountableProducts A] :\n    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),\n      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)",
   "branch": "sheaf-dag",
-  "by": "K2",
-  "date": "2026-10-12"
+  "by": "Q4",
+  "date": "2026-10-14"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -98,13 +96,33 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-89151",
-  "group": "K2",
+  "reviewer": "X-ddf33",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261012T184314-L-4008534",
+  "landing": "20261013T201807-L-3976112",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered Lean files, DAG nodes, report, and change record agree; all delivered modules and direct importer compile cleanly, with only the documented property sorryAx."
+  "note": "independent Codex review: Packet, delivered files, node, change record, report, adapted importer, original failure, and allowed axioms all agree; compilation succeeds."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "Q4 stage 2",
+  "old_statement": "Let A be an abelian category with exact countable products and enough injectives, with derived category D(A) [def-weil-abstract-derived-category] equipped with any chosen countable products. For every K-injective cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
+  "what": "Upstream review #1424: HasDerivedCategory, CountableAB4Star, chosen countable products hP on the derived category, EnoughInjectives, and IsKInjective are unused. Remove these hypotheses, preserving the existence-of-limit-cone conclusion.",
+  "source": {
+   "document": "Mathlib",
+   "place": "CategoryTheory.Limits.hasLimit_of_equalizer_and_product, Stacks Tag 002N"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-derived-limit-tower-core",
+    "holds": true,
+    "note": "The generalized cone-existence theorem applies to the same K-injective complex; only the proof call loses hP and hI. Its derived-limit statement and property argument are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category"
+  ]
  }
 }
