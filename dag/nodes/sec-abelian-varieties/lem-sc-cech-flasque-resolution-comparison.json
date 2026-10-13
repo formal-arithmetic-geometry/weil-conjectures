@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-cech-flasque-resolution-comparison",
+ "kind": "statement",
+ "title": "Canonical Cech comparison for a single flasque computing resolution",
+ "statement": "Let X be a scheme, U an open cover with supremum top, F an arbitrary module sheaf, and D a computing acyclic resolution of F [def-sc-module-cup-resolution-data]. Suppose each natural-degree term of D.K has flasque underlying abelian sheaf. Then CupCechResolutionComparison U D [def-sc-cech-cup-resolution-comparison-data] is nonempty: its alpha is restriction into Cech degree zero, its beta is the augmentation into resolution degree zero, alpha is a quasi-isomorphism, and its homology identification sends global classes and every specified canonical Cech comparison [def-sc-module-cech-comparison] to the corresponding alpha and beta classes. There is no pairing or choice of a resolution in this statement.",
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data",
+  "def-sc-cech-cup-resolution-comparison-data",
+  "def-sc-module-cech-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Canonical Cech comparison construction; Tag 0FKV, flasque-resolution paragraph"
+ },
+ "proof": [
+  {
+   "text": "For the given resolution define alpha from restrictions and beta from the augmentation followed by total inclusions. Naturality of restriction and the augmentation chain-map equation prove the two cochain identities componentwise. No existence theorem or arbitrary choice of data is used.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheaf gluing identifies the degree-zero homology of each augmented Cech row with global sections. Flasque Cech acyclicity makes its positive homology zero. Transpose the double complex and apply the first-quadrant column-augmentation theorem, then undo transposition, to prove alpha a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse of the computing comparison on homology and the injective-resolution identification, followed by H(alpha), to define iso. Inverse cancellation gives alpha_class. The total Cech map of D.comparison commutes with alpha by restriction naturality and with beta by D.over. Its homology map is invertible by the alpha square, since D.computes and the injective alpha are invertible. Apply the defining canonical-comparison equality to D.I and cancel this total homology map to obtain beta_class. This is unchanged in degree zero or on an empty cover of the empty scheme.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cech-comparison",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Proof of canonical comparison, with the termwise flasque resolution of Tag 0FKV",
+  "group": "K1",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flasque resolution computes total Cech cohomology with augmentation and canonical comparison",
+   "results": "8 hits, primarily sheaf cohomology and Mayer-Vietoris infrastructure; no canonical comparison-data theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"QuasiIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque.*cech|cech.*flasque",
+   "results": "Mathlib search: 0 hits. Repository search finds CechFlasque.exactAt_cechComplex_of_isFlasque and injective ModuleCechComparison; neither provides the given arbitrary flasque resolution comparison data.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flasque computing resolution has canonical Cech comparison maps compatible with injective resolution cohomology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechCupResolutionComparisonExists",
+  "date": "2026-10-14",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-cup-resolution-comparison-exists",
+   "place": "Proof step 2, comparison for each of the three retained flasque resolutions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechFlasqueResolutionComparison",
+  "file": "lean/Sheaf/Paper/CechFlasqueResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cupCechFlasqueResolutionComparison",
+  "statement": "theorem cupCechFlasqueResolutionComparison {X : Scheme.{v}} {ι : Type v}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) {F : X.Modules}\n    (D : CupAcyclicResolution F)\n    (hD : ∀ n : ℕ, TopCat.Sheaf.IsFlasque\n      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (D.K.X n))) :\n    Nonempty (CupCechResolutionComparison U D)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T181107-L-2602856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
