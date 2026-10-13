@@ -16,29 +16,29 @@
  ],
  "proof": [
   {
-   "text": "The coherent finite structure algebra r_*O_F has boundary stalk depth at least two: on an affine chart localize the finite algebra at the base point and apply the finite-local-algebra depth formula of Stacks Tag 0AUK to the source local rings above it. The empty fibre gives the zero module, of infinite depth. Hartogs then makes the canonical map r_*O_F -> j_*((r_*O_F)|_U) invertible. This restriction map preserves products and scalars, so its inverse also preserves them.",
+   "text": "The finite source F is locally Noetherian. Construct the linear equivalence between the stalk of the unit module O_F and the local ring of F using preservation of colimits and the germ scalar-action formula. Depth is invariant under this equivalence, and sections of the unit module on affines are finite. Apply depth-two Hartogs restriction to this unit module. Its adjunction unit has the same underlying section functions as the open inclusion structure-sheaf map, so that map is an isomorphism.",
    "uses": [
     "lem-sbc-depth-two-hartogs-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "The given open morphism induces an algebra map (p_*O_E)|_U -> (r_*O_F)|_U. Adjunction and the inverse Hartogs map extend it to p_*O_E -> r_*O_F. The affine-target structure algebra correspondence supplies f over L. Restricting this algebra map gives the original map by the adjunction identities, hence faithfulness over U gives the required restriction equality.",
+   "text": "Form the structure-algebra map induced by the open morphism. The inclusion gives an isomorphism of pushforward structure algebras; compose with its inverse. Apply the affine algebra local-map theorem and glue the compatible local maps on the inverse-image affine cover to obtain a morphism over L. Morphisms to an affine L-scheme are determined by their algebra maps, as checked on this same affine cover. Functoriality and cancellation of the inclusion algebra isomorphism give the required restriction equality.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec"
+    "lem-weil-pbc-affine-algebra-local-maps"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sbc-depth-two-hartogs-restriction",
-  "lem-weil-pbc-affine-morphism-relative-spec"
+  "lem-weil-pbc-affine-algebra-local-maps"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "J3",
+  "by": "H2",
   "document": "Stacks Project",
-  "place": "Tag 0EY6 converse of (2), separating extension and equality of morphisms using Tags 0AUK, 0E9I and 01SA"
+  "place": "Tags 0E9I and 01SA; direct unit-module Hartogs restriction followed by affine local-map gluing, avoiding finite pushforward depth transfer"
  },
  "mathlib_searches": [
   {
@@ -127,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-f4d21",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T100015-L-2465426",
+  "landing": "20261013T121510-L-3529258",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature with its node, the proof with Hartogs and affine local-map dependencies, and node edits with the implemented route; delivered module, all axiom probes, and direct importer compile cleanly. sorryAx comes only through existing Hartogs dependencies."
  }
 }
