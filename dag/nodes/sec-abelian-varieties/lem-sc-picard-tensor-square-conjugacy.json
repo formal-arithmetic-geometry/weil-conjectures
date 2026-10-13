@@ -16,26 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Transport each tensor pullback to ordinary pullback by picardTensorComparison. Uniqueness of left adjoints identifies the conjugate of each comparison with the identity. Whiskering and composition of conjugates therefore reduce the composition maps to conjugateEquiv_pullbackComp_inv for ordinary pullback. Substitute equal morphisms for the middle equality comparison; on sections its pushforward map is the identity. Compose the three conjugation equations and invert the bijection. Evaluate at A; naturality of picardTensorComparison identifies the composition component with picardTensorCompIso, and eqToHom_app identifies the equality transport. Express the final three factors as the hom of their composite isomorphism, avoiding premature reduction of equality-transport homs.",
+   "text": "Use the definition of picardTensorComparison as leftAdjointUniq for the pinned tensor adjunction and ordinary pullback adjunction. Unfold conjugateIsoEquiv to prove that the comparison and its inverse both have identity conjugates. Bundle the four composition factors in a natural isomorphism tensorComp; its component is definitionally picardTensorCompIso.",
    "uses": [
     "lem-sc-picard-canonical-base-change-comparisons",
     "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand tensorComp.inv. Apply conjugateEquiv_comp three times with the ordinary composite adjunction and the two mixed composite adjunctions. The two whiskering laws identify the whiskered inverse comparisons with whiskered identities. conjugateEquiv_pullbackComp_inv identifies the ordinary composition factor with pushforwardComp.hom. Cancel identities. Apply the inverse equivalence to obtain the inverse mate equation; equality of conjugate isomorphisms and their inverse morphisms gives the forward mate equation.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons",
     "def-weil-pbc-adjunction-mate",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false
+  },
+  {
+   "text": "For equal scheme morphisms k and l, substitute l = k. The pushforward equality comparison is the identity, checked on every module and open using pushforwardCongr_hom_app_app. Its inverse conjugate is the identity by conjugateEquiv_symm_id. This gives eqToHom of the tensor functor equality. Separately substitute the equality to identify the component of this functor equality transport with the hom of the object equality isomorphism.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply conjugateEquiv_symm_comp twice to the three-factor pushforward square. Substitute the forward composition mate, equality mate, and inverse composition mate. Evaluate the resulting natural transformation at A. Use the equality-transport component identity and the tensorComp component identity, then the hom formulas for composite and inverse isomorphisms and associativity, to obtain exactly the displayed equality. No assumption that the square is cartesian is used.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-picard-canonical-base-change-comparisons",
   "lem-pc-module-pullback-adjunction",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0097",
-  "place": "Adjunction uniqueness and composition, expanded as categorical coherence for the tensor formula."
+  "place": "Adjunction uniqueness and composition, made into Lean using Mathlib conjugation composition and whiskering laws; equality transport by substitution and evaluation of the bundled tensor composition isomorphism."
  },
  "mathlib_searches": [
   {
@@ -113,10 +136,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T111840-L-3048598",
-  "kind": "interface",
+  "landing": "20261013T121509-L-3529036",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
