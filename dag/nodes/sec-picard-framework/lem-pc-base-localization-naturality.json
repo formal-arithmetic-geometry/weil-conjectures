@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-base-localization-naturality",
+ "kind": "statement",
+ "title": "Naturality of the characterized base-localization map",
+ "statement": "Let R, Rp, A, B and D be commutative rings with the compatible algebra structures of [lem-pc-base-localization-map], and Rp a localization of R at S. For A-complexes Q and Qprime and any chain map f between them, take base-derived tensor cohomology models L,K for Q over R,Rp and Lprime,Kprime for Qprime. Suppose e and eprime satisfy the canonical generator condition IsBaseLocalizationMap in degree i. If delta and epsilon are counit-compatible derived model transformations and the cohomology maps g and h are characterized by f, delta, epsilon and cohomologyIso as in the model interface, extension of scalars sends g and h to maps satisfying extend(g) followed by eprime equals e followed by extend(h).",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "/-- Naturality of the characterized base-localization map.\nSource: Stacks Project, Tag 06Y6 (blueprint: lem-pc-base-localization-naturality).\n\nProof: write T for exact restriction from Rp to R on derived categories, and\neta and eta-prime for the universal lifts defining the two canonical maps.\nThe defining counit equations and the assumed counit compatibility of delta\nand epsilon show that T whiskered with delta followed by eta-prime and eta\nfollowed by epsilon have the same counit composite. Uniqueness of the\nuniversal lift to Kprime therefore identifies these transformations.\nThe input isomorphism is a composite of restriction composition and the\nhomotopy and derived factorization isomorphisms. Naturality of each of these\nthree isomorphisms gives FR(f) followed by v-prime equals v followed by\nT(FRp(f)). Apply L.derived, naturality of delta and eta, and the preceding\ncocycle equation. This identifies the two composites of derived morphisms.\nApply degree-i B-linear homology and conjugate by the four cohomologyIso\nisomorphisms. The given equations for g and h identify this equality with\nnaturality of baseLocalizationCohomologyMap. Finally evaluate the desired\nD-linear equality on 1 tensor x. The generator equations he and he-prime,\nand extendScalars.map_tmul, reduce it to that B-linear equality. The\nextension-of-scalars hom_ext lemma proves equality on all elements. Zero\ncomplexes, identity and zero chain maps, and zero D satisfy the same proof;\nno invertibility of localizedComparison or flatness of D is used. -/",
+   "uses": [
+    "lem-pc-base-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorRightEquiv, IsLocalization.algebraTensorEquiv, IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.algebraLid, IsLocalization.algebraTensorEquiv, IsLocalization.moduleLid, IsLocalization.moduleTensorEquiv, IsLocalization.mk'_tmul, IsLocalization.tmul_mk'",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*localization|localization.*derived",
+   "results": "Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: canonical map, invertibility, augmentation compatibility and naturality under change of the localized base",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationNaturality.lean",
+  "declaration": "RingTensorCohomology.baseLocalization_naturality",
+  "statement": "theorem baseLocalization_naturality (S : Submonoid R) [IsLocalization S Rp] (i : ℤ) (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q') (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (L' : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q' D) (K' : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q' D) (δ : L.derived ⟶ L'.derived) (ε : K.derived ⟶ K'.derived) (g : L.cohomology i ⟶ L'.cohomology i) (h : K.cohomology i ⟶ K'.cohomology i) (e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ≅ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).obj (K.cohomology i)) (e' : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L'.cohomology i) ≅ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).obj (K'.cohomology i)) (he : IsBaseLocalizationMap R Rp B A D S Q L K i e.hom) (he' : IsBaseLocalizationMap R Rp B A D S Q' L' K' i e'.hom) : Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) δ ≫ L'.counit = L.counit → (ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map g ≫ (L'.cohomologyIso i).hom = (L.cohomologyIso i).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (L.derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map ((restrict R A).map f)))) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (δ.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj ((restrict R A).obj Q')))) → Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} Rp)) ε ≫ K'.counit = K.counit → (ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[Rp] A ⊗[Rp] B).toRingHom).map h ≫ (K'.cohomologyIso i).hom = (K.cohomologyIso i).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (K.derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient (ModuleCat.{u} Rp) (.up ℤ)).map ((restrict Rp A).map f)))) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (ε.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient (ModuleCat.{u} Rp) (.up ℤ)).obj ((restrict Rp A).obj Q')))) → (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).map g ≫ e'.hom = e.hom ≫ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).map h",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "RingTensorCohomology.baseLocalization_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-base-localization-map",
+ "kind": "definition",
+ "title": "Canonical universal map for localization of the tensor base",
+ "statement": "Let R, Rp, A, B and D be commutative rings, with compatible maps R to Rp, Rp to A and B, R to A and B, and from A tensor_R B and A tensor_Rp B to D. Let S be a multiplicative submonoid of R with Rp its localization. For any A-complex Q and base-derived tensor cohomology models L over R and K over Rp [def-pc-base-derived-tensor-cohomology-model], define the canonical B-linear map from L cohomology to K cohomology by the following universal lift. Exact restriction of scalars induces T:D(Rp) to D(R). Compose the factorization of T on homotopy categories, the counit of L, and the ordinary localization tensor identification to obtain a counit for T composed with L. Lift it uniquely to K using its universal counit. Identify the restricted inputs and conjugate its degree-i cohomology map by the two model cohomology isomorphisms. A D-linear map is characterized when it sends 1 tensor x to 1 tensor the canonical B-linear image of x. This generator condition determines it uniquely.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary tensor NatIso using compatible scalar actions. Exact restriction descends to derived categories. Form the counit composite and its universal lift using leftDerivedLift. Identify inputs by restriction composition and the two factorization isomorphisms, then apply cohomology. Extension-of-scalars hom_ext proves uniqueness of the characterized D-linear morphism.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-ring-tensor-cohomology",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorRightEquiv, IsLocalization.algebraTensorEquiv, IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.algebraLid, IsLocalization.algebraTensorEquiv, IsLocalization.moduleLid, IsLocalization.moduleTensorEquiv, IsLocalization.mk'_tmul, IsLocalization.tmul_mk'",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*localization|localization.*derived",
+   "results": "Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: canonical map, invertibility, augmentation compatibility and naturality under change of the localized base",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationMap",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationMap.lean",
+  "declaration": "RingTensorCohomology.IsBaseLocalizationMap",
+  "statement": "def IsBaseLocalizationMap (S : Submonoid R) [IsLocalization S Rp] (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (i : ℤ) (e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ⟶ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).obj (K.cohomology i)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "RingTensorCohomology.baseLocalizationTensorIso",
+   "RingTensorCohomology.baseLocalizationCounit",
+   "RingTensorCohomology.baseLocalizationDerivedMap",
+   "RingTensorCohomology.baseLocalizationInputNatIso",
+   "RingTensorCohomology.baseLocalizationInputIso",
+   "RingTensorCohomology.baseLocalizationCohomologyMap",
+   "RingTensorCohomology.IsBaseLocalizationMap",
+   "RingTensorCohomology.IsBaseLocalizationMap.ext"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

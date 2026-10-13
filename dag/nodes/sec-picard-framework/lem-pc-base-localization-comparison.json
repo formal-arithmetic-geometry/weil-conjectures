@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-base-localization-comparison",
+ "kind": "statement",
+ "title": "Augmentation compatibility of the canonical base-localization map",
+ "statement": "Let R, Rp, A, B and D be commutative rings with the compatible algebra structures and scalar towers of [lem-pc-base-localization-map], and Rp a localization of R at S. Fix a degree i, an A-complex Q, base-derived tensor cohomology models L over R and K over Rp, and a D-linear isomorphism e of their extended cohomology satisfying IsBaseLocalizationMap. For any ordinary-complex isomorphism tau between their extensions of Q to D that sends every d tensor x to d tensor x, the square of localized comparison maps commutes: L.localizedComparison followed by H(tau) equals e followed by K.localizedComparison.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "/-- Compatibility of the characterized map with localized augmentation.\nSource: Stacks Project, Tags 0DJ8 and 06Y6.\n(blueprint: lem-pc-base-localization-comparison).\n\nProof: the universal lift defining baseLocalizationDerivedMap satisfies its\ncounit equation by leftDerived_fac. Apply it to the restricted complex Q and\nthen cohomology. The ordinary tensor identification fixes b tensor x.\nCombine this identity with both comparison_eq equations to identify the\nordinary comparison maps. Transpose by extension/restriction adjunction and\nuse localized_eq on both models. On a generator 1 tensor x, the resulting\nD-linear square is exactly the formula defining IsBaseLocalizationMap.\nEvery ordinary complex identification tau satisfying the specified formula\ncoincides with the canonical identification: tensor induction proves equality\nof its degree-j maps, and complex extensionality proves equality of chain\nmaps. Tensor induction likewise proves the D-linear square from its generators.\nThis proof uses neither invertibility of the comparison maps nor flatness\nof D. Zero complexes and zero coefficient rings give the unique zero maps. -/",
+   "uses": [
+    "lem-pc-base-localization-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorRightEquiv, IsLocalization.algebraTensorEquiv, IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.algebraLid, IsLocalization.algebraTensorEquiv, IsLocalization.moduleLid, IsLocalization.moduleTensorEquiv, IsLocalization.mk'_tmul, IsLocalization.tmul_mk'",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*localization|localization.*derived",
+   "results": "Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: canonical map, invertibility, augmentation compatibility and naturality under change of the localized base",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationComparison",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationComparison.lean",
+  "declaration": "RingTensorCohomology.baseLocalization_comparison",
+  "statement": "theorem baseLocalization_comparison (S : Submonoid R) [IsLocalization S Rp] (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ≅ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).obj (K.cohomology i)) (he : IsBaseLocalizationMap R Rp B A D S Q L K i e.hom) (τ : ((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q ≅ ((ModuleCat.extendScalars ((algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B)))).mapHomologicalComplex (.up ℤ)).obj Q) (hτ : ∀ (j : ℤ) (d : D) (x : Q.X j), τ.hom.f j (d ⊗ₜ[A,(algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] x) = d ⊗ₜ[A,(algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B))] x) : L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i = e.hom ≫ K.localizedComparison i",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "RingTensorCohomology.baseLocalization_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

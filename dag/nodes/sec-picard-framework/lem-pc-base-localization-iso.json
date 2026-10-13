@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-base-localization-iso",
+ "kind": "statement",
+ "title": "Invertibility of the canonical base-localization map",
+ "statement": "Let R, Rp, A, B and D be commutative rings, with the compatible algebra structures and scalar towers of [lem-pc-base-localization-map]. Suppose Rp is the localization of R at S. For every degree i, A-complex Q and base-derived tensor cohomology models L over R and K over Rp, there is a D-linear isomorphism between the D-extensions of their degree-i cohomology, whose forward map satisfies the canonical generator condition IsBaseLocalizationMap of [lem-pc-base-localization-map].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, lemma-single-complex-base-change-condition, affine displayed localization identity; More on Algebra Tag 06Y6"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-map"
+ ],
+ "proof": [
+  {
+   "text": "/-- The canonical map is invertible after extension to D.\nSource: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.\n(blueprint: lem-pc-base-localization-iso).\n\nProof: choose a K-flat Rp-resolution P of the underlying Rp-complex of Q.\nIts restriction to R is K-flat: for an acyclic R-complex F, exact localization\nRp tensor_R F is acyclic, and tensor associativity identifies its tensor with\nP with F tensor_R P. Both universal derived counits are invertible on these\nK-flat complexes. Naturality with respect to the resolution augmentation,\nwhich is a quasi-isomorphism both before and after restriction, therefore\nshows that the universal lift defining baseLocalizationDerivedMap is\ninvertible at Q. Its counit equation identifies it with the pure-tensor\nlocalization identity. Naturality for multiplication by a in A and\ncohomologyIso_smul show that the cohomology map intertwines the two A-actions;\nB-linearity is built in. The algebra isomorphism A tensor_Rp B = A tensor_R B\nfixes pure tensors, so the cohomology map is an isomorphism after transporting\nthis tensor-algebra action. The maps to D agree on A and B by the scalar-tower\nhypotheses. Extend the transported isomorphism to D. Tensor induction gives\nthe displayed generator equation and its uniqueness. For the identity\nlocalization the universal lift is the unique model comparison. If S contains\nzero, Rp, A, B and D are zero rings and the conclusion is the unique zero-module\nisomorphism. No flatness of D or boundedness of Q is used. -/",
+   "uses": [
+    "lem-pc-base-localization-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-map",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with an algebra over a localization agrees with derived tensor over the localized base",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorRightEquiv, IsLocalization.algebraTensorEquiv, IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalization.Away.tensor",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.algebraLid, IsLocalization.algebraTensorEquiv, IsLocalization.moduleLid, IsLocalization.moduleTensorEquiv, IsLocalization.mk'_tmul, IsLocalization.tmul_mk'",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*localization|localization.*derived",
+   "results": "Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact model localization result; ordinary tensor or derived universal-property ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product commutes with localization of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorBaseLocalizationModels",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine localization identity: canonical map, invertibility, augmentation compatibility and naturality under change of the localized base",
+   "via": [
+    "lem-pc-derived-tensor-base-second-localization-models",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-derived-tensor-base-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationIso",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationIso.lean",
+  "declaration": "RingTensorCohomology.exists_baseLocalization_iso",
+  "statement": "theorem exists_baseLocalization_iso (S : Submonoid R) [IsLocalization S Rp] (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) : ∃ e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ≅ (ModuleCat.extendScalars (algebraMap (A ⊗[Rp] B) D)).obj (K.cohomology i), IsBaseLocalizationMap R Rp B A D S Q L K i e.hom",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "RingTensorCohomology.exists_baseLocalization_iso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T140822-L-314982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
