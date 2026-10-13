@@ -36,11 +36,12 @@
  ],
  "proof": [
   {
-   "text": "On an affine open write F as M tilde and the ideal as I tilde. Finite type gives finitely many generators of I. Set M prime to the submodule killed by I. The assumed affine image formula identifies G(U) with M prime and identifies G(D(f)) with the annihilator of I_f in M_f.",
+   "text": "Realize J.toModules as the kernel of the structure-module map to the closed-subscheme pushforward. The source-library closed-immersion pushforward theorem and kernel theorem prove its quasi-coherence. Pull finite local generators back to the slice over an affine W, reusing Scheme.Modules.isFiniteType_over from FinitePushforwardCoherent through a proof-only import all. The affine finite-type criterion then gives finitely many spanning sections e_j of J.toModules(W); their images g_j generate the ideal J(W). Only the quasi-coherent pushforward clause of the bundled closed-immersion node is used, with no Noetherian hypothesis.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-finite-pushforward-coherent"
    ],
    "elementary": false,
    "source": {
@@ -49,9 +50,9 @@
    }
   },
   {
-   "text": "Localization of the inclusion M prime into M is injective. For m/f^n killed by I_f, clear a power of f for each generator of I, then take the maximum exponent e. The numerator f^e m is in M prime and m/f^n is its fraction with denominator f^(n+e). For the empty generator family choose e=0. Thus the localized inclusion has precisely the required annihilator image.",
+   "text": "Given s in G(D(f)), quasi-coherence of F gives t in F(W) restricting to f^n iota(s). Each restricted g_j belongs to J(D(f)), so the assumed image formula makes the restriction of g_j t zero. The affine localization equality criterion gives exponents d_j killing g_j t. Let D be the finite supremum of the d_j (zero for the empty family). Then every g_j kills f^D t. A kernel-and-span argument on J.toModules(W) shows that every a in J(W) kills f^D t. The image formula on W lifts this numerator to v in G(W). Naturality and sectionwise injectivity of iota give v restricted to D(f) = f^(D+n) s.",
    "uses": [
-    "def-weil-pbc-module-localization-away"
+    "lem-weil-pbc-affine-module-basic-open-localization"
    ],
    "elementary": false,
    "source": {
@@ -60,11 +61,10 @@
    }
   },
   {
-   "text": "The image identifications commute with restrictions because all inclusions into F do. They uniquely identify G with M prime tilde on the principal-open basis, and hence on the affine open. Every point has an affine neighborhood, so G is quasi-coherent.",
+   "text": "If t in G(W) restricts to zero on D(f), its image in F(W) also does. The affine localization equality criterion in F gives n with f^n iota(t)=0. Sectionwise injectivity of iota gives f^n t=0. Together with the preceding lifting condition, apply the proved principal-open criterion for quasi-coherence; it supplies the tilde identification and affine-cover gluing.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-affine-spectrum",
-    "pqf-def-coherent"
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "pqf-lem-qcoh-principal-open-criterion"
    ],
    "elementary": false,
    "source": {
@@ -74,17 +74,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-affine-spectrum",
-  "pqf-def-coherent"
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "pqf-lem-qcoh-principal-open-criterion",
+  "lem-weil-pbc-finite-pushforward-coherent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lean realization of Tag 01PO, with the sheaf construction and affine criterion written out and the omitted stalk lifting argument expanded; official source read online because this clone has no literature source files."
+  "place": "Tag 01PO, proof of (1), realized by N3 using existing affine localization and principal-open quasi-coherence criteria; the finite-generator maximum and span arguments are proved in the module. Second reading removes the duplicate-helper workaround and reuses the existing finite-type restriction helper; ideal quasi-coherence is a local kernel argument."
  },
  "mathlib_searches": [
   {
@@ -151,10 +151,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T022408-L-3211188",
-  "kind": "interface",
+  "landing": "20261013T045546-L-133205",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
