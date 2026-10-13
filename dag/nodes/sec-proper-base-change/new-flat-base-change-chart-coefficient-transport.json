@@ -13,19 +13,27 @@
  ],
  "proof": [
   {
-   "text": "Use the fibre-product universal property and affine chart isomorphisms to identify T with L. The equality of algebraMap with g.appLE ensures the two affine-base maps agree. Construct inverses by projection and check their composites by pullback.hom_ext.",
+   "text": "Apply Scheme.Hom.isPullback_resLE to the original pullback square, using L=U intersect inverse-image(W) since L<=U. Transport the restricted square by hV.isoSpec and hW.isoSpec. toSpecGamma_SpecMap_appLE and hAlgebra give the lower affine map. isoPullback gives sigma and both projection equations; map_resLE gives ef.",
    "uses": [
     "def-pc-fibre-product",
-    "def-pc-flat-cohomology-comparison"
+    "def-pc-flat-cohomology-comparison",
+    "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the two pulled-back coefficients by pullback composition and the adjunction-compatible tensor/ordinary pullback comparison. Transpose the identification and its inverse. Adjunction triangles and inverse scheme identities give the two coefficient identities. The equality of the projection to Spec Gamma(W) gives the scalar square by multiplication naturality. Transpose the final unit square; composite-unit identities reduce it to D.unit_square restricted to L, with precisely the restriction composition iso c. This is independent of any cohomology degree and works on empty opens and zero coefficients.",
+   "text": "Construct b by undoing the restriction/pullback comparison and the pushforward comparisons from the restricted D.psi map. Define phi as the inverse adjunction hom-equivalence applied to b. The fixed-chart unit-adjoint isomorphism lemma proves IsIso phi.",
    "uses": [
-    "def-pc-tensor-pullback-composition-iso",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "new-flat-base-change-chart-unit-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct psi by the inverse pushforward identity and composition comparisons followed by pushforward(sigma.inv) of phi inverse. Prove the two reciprocal equations by functoriality and naturality on sections, including cancellation of the equality transports. The second chart projection equation on global sections and pushforward_map_smulHom give scalar compatibility via smulHom_naturality. The adjunction apply_symm_apply equation gives the unit square after cancelling the comparison isomorphisms. No further tensor-pullback composition lemma is needed.",
+   "uses": [
     "def-pc-module-pullback",
+    "def-pc-flat-cohomology-comparison",
     "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
@@ -35,14 +43,14 @@
   "def-pc-fibre-product",
   "def-pc-flat-cohomology-comparison",
   "def-pc-module-pullback",
-  "def-pc-tensor-pullback-composition-iso",
   "def-weil-pbc-flat-base-change-open-choices",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "new-flat-base-change-chart-unit-iso"
  ],
  "proof_origin": {
-  "by": "U1 following document",
-  "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Geometric chart and coefficient steps of the existing proof, expanded with Stacks 0096 and 0097; sources read 2026-10-14."
+  "by": "C2 following document",
+  "document": "https://stacks.math.columbia.edu/tag/0096",
+  "place": "0096 adjunction and 0097 composition, with 02KH affine charts. Geometry, reciprocal maps, scalar square and unit square proved in Lean; only invertibility of the explicit fixed-chart adjoint is left as a new node."
  },
  "mathlib_searches": [
   {
@@ -152,11 +160,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-2e5e5",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T190158-L-3222629",
+  "landing": "20261013T201740-L-3966077",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their packet, node statements, unchanged theorem signature, and clean compilation (including the direct importer)."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
