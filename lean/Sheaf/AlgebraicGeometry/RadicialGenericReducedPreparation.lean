@@ -8,7 +8,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
-import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.RadicialPreparationConstruction
+import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
 
 /-! # Radicial preparation before the final generic-flat shrinking
 
@@ -57,6 +58,13 @@ theorem exists_radicial_generic_reduced_preparation
         ∃ η' : S, IsGenericPoint η' Set.univ ∧ (q ≫ U.ι) η' = η ∧
           GeometricallyReduced (g.fiberToSpecResidueField η') ∧
           ∀ s : S, GeometricallyIrreducible (g.fiberToSpecResidueField s) ↔
-            GeometricallyIrreducible (f.fiberToSpecResidueField ((q ≫ U.ι) s)) := by sorry
+            GeometricallyIrreducible (f.fiberToSpecResidueField ((q ≫ U.ι) s)) := by
+  obtain ⟨U, hηU, hUa, S, Y, q, g, hSa, hSi, hYa, hYr, hq, hfg, η', hη', hqη', hred, h, hh, hg⟩ :=
+    exists_radicial_preparation_construction f V hV himage η hη hgeom
+  have : IsUniversalHomeomorphism h := hh
+  have hcmp (s : S) := exists_radicial_preparation_fibre_comparison f (q ≫ U.ι) h s
+  rw [hg] at hcmp
+  exact ⟨U, hηU, hUa, S, Y, q, g, hSa, hSi, hYa, hYr, hq, hfg,
+    η', hη', hqη', hred, hcmp⟩
 
 end AlgebraicGeometry

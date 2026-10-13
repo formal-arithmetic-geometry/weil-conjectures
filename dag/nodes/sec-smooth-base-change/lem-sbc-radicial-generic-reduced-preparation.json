@@ -17,36 +17,29 @@
  ],
  "proof": [
   {
-   "text": "Nonemptiness of the generic fibre puts the generic point in the given affine open. Factor through that open and reduce both schemes. The reduced irreducible base is integral, reduction maps are universal homeomorphisms, and geometric fibre irreducibility is preserved.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Apply generic flat finite presentation to the reduced finite type affine family. Shrink to a principal open to retain both affineness properties. The reduced flat source ring embeds in its generic fibre, which is a domain because the fibre is geometrically irreducible.",
+   "text": "Apply the radicial construction theorem, obtaining in particular a universal homeomorphism h from Y onto the original base-changed family, with h followed by projection equal to g.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation"
+    "lem-sbc-radicial-preparation-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Let K be the base fraction field and L the generic source function field. Choose a finite purely inseparable extension K prime such that the reduction of L tensor K prime is separably generated. Scale each field generator b satisfying b to the q equals a/d to db, whose q-th power is a times d to the q minus one. Adjoin these scaled generators to the base ring. The finite integral radicial domain has fraction field K prime and its spectrum is a universal homeomorphism.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Base change the source to this finite radicial affine base and reduce it. Its generic fibre embeds in the separably generated function field, which remains reduced under all field extensions; hence the generic fibre is geometrically reduced. The source is affine, reduced and locally of finite type. Reduction and purely inseparable base change preserve geometric fibre spaces and therefore geometric irreducibility at every point, including empty fibres. The base homeomorphism lifts the generic point uniquely. Do not make a second generic-flat shrinking here.",
-   "uses": [],
+   "text": "Apply the proved fibre comparison to f, q followed by U inclusion, and h. Rewrite the factorization to g and package the original conjunction.",
+   "uses": [
+    "lem-sbc-radicial-preparation-fibre-comparison"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-flat-finite-presentation"
+  "lem-sbc-radicial-preparation-construction",
+  "lem-sbc-radicial-preparation-fibre-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
   "place": "Tag 0559, second proof, reductions and finite purely inseparable extension before the final generic-flat shrinking; Tags 051T and 052A.",
-  "note": "V2: affine specialization of the source construction; characteristic zero, relative dimension zero and empty special fibres checked. Sources read online at https://stacks.math.columbia.edu/tag/0559 and https://stacks.math.columbia.edu/tag/052A."
+  "note": "J2 second reading: repaired the formerly unrelated fibre comparison and proved it. Construction and comparison remain separate source steps. The original target signature is unchanged; one original hole closed, one true construction hole added (decomposition, net zero)."
  },
  "mathlib_searches": [
   {
@@ -134,9 +127,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T100159-L-2496485",
+  "landing": "20261013T111856-L-3053914",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
