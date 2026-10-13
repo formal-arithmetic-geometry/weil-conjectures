@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-modulecat-cocontinuous-generator",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Cocontinuous natural transformations on modules are detected on the ring",
+ "statement": "Let R be a commutative ring in universe u, D a category, and F,G:ModuleCat.{u} R → D functors preserving colimits of size (u,u). Let alpha:F → G be a natural transformation. If alpha at the rank-one free module R is an isomorphism, then alpha at every R-module M is an isomorphism. No additive structure on D or additivity of the functors is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+  "place": "PresheafOfModules.isIso_app_of_freeYoneda: coproduct and cokernel argument, specialized to ordinary modules"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For a type I, construct the cofan from copies of R to the free module R^(I), with inclusion at i sending 1 to its basis vector. A map out of this cofan is uniquely the linear extension of the images of those basis vectors. Thus this cofan is colimiting. Since F and G preserve these coproducts, naturality and invertibility of alpha_R imply invertibility of alpha on R^(I).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a module M let g:R^(M) → M send [m] to m, and let f:R^(ker g) → R^(M) send [x] to x. The map g is surjective and im f = ker g: each kernel element x is the image of the basis vector [x], and g(f([x]))=0 extends linearly. Hence g exhibits M as the cokernel of f, equivalently the coequalizer of f and zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both F and G preserve that coequalizer. The transformation between the two image diagrams is an isomorphism at both free vertices by step 1. The induced map between their colimits, which is alpha_M by naturality, is therefore an isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "M4 worker (agent-written specialization)",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+  "place": "PresheafOfModules.isIso_app_of_freeYoneda: coproduct and cokernel argument, specialized to ordinary modules"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between colimit preserving functors on modules is an isomorphism if it is an isomorphism on the rank one free module",
+   "results": "Service unavailable (Internal Server Error); no verdict.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between colimit preserving functors out of modules is invertible if its component at the ring is invertible",
+   "results": "No matching theorem returned; results concern derived functors, free linear categories and generic colimit comparisons.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app_of.*(rankOne|free|generator); local rg for isIso_app_of_freeYoneda and presentation APIs",
+   "results": "No ordinary module criterion found. Source library has PresheafOfModules.isIso_app_of_freeYoneda, whose coproduct/cokernel proof motivates this directly proved specialization. Mathlib provides ModuleCat.free_hom_ext, ModuleCat.isColimitCokernelCofork, and isIso_app_coconePt_of_preservesColimit.",
+   "date": "2026-10-14",
+   "verdict": "supporting results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalTensorPullbackMatesIsIso",
+  "date": "2026-10-14",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-global-tensor-pullback-monoidal-normalization",
+   "place": "mate isomorphism step: extension from the rank-one free module by coproducts and cokernels",
+   "via": [
+    "lem-sc-global-tensor-pullback-mates-isiso",
+    "lem-sc-global-tensor-pullback-oplax-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.CocontinuousGenerator",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/CocontinuousGenerator.lean",
+  "declaration": "ModuleCat.isIso_app_of_rankOne",
+  "statement": "theorem isIso_app_of_rankOne (α : F ⟶ G)\n    (h : IsIso (α.app (ModuleCat.of R R))) (M : ModuleCat.{u} R) :\n    IsIso (α.app M)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T201803-L-3974763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T201803-L-3974763",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

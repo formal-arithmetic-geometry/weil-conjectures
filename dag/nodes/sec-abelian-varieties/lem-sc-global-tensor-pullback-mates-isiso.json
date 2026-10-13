@@ -14,20 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Identify the adjunction with inverse image from the global-sections point and compute the unit and tensor mates on local pure tensors; the explicit maps have inverses given by inserting 1 and multiplying coefficients, so they are isomorphisms. Transport along the unique isomorphism of left adjoints to obtain the assertion for P.",
+   "text": "The unit sheaf represents global sections: identify morphisms from the unit with compatible sections, and compatible sections with evaluation at the top open. A linear map from the rank-one free global-section module is determined by its value at 1. These two equivalences and the adjunction identify precomposition with the unit mate as a bijection on all outgoing Hom sets. The coyoneda criterion gives invertibility of the unit mate.",
    "uses": [
     "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix B. The tensor mates define a natural transformation from (tensorRight B) composed with P to P composed with tensorRight(P B). Prove naturality using adjunction naturality and the section identity whiskerRight_app_tmulSection, evaluated on pure tensors. Both functors preserve colimits: P is a left adjoint, and tensoring is a left adjoint in these symmetric closed categories.",
+   "uses": [
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At A=R, compose the tensor mate with the unit mate tensored with P B, followed by the sheaf left unitor. Transpose through the adjunction and evaluate on r tensor b. The identity unit_R followed by globalSections(unitMate)=unitSectionsEquiv and the section formula for the left unitor show both sides equal r times unit_B(b). Thus this composite is P of the module left unitor. Since the other factors are isomorphisms, the tensor mate at (R,B) is an isomorphism.",
+   "uses": [
+    "lem-sc-module-cup-naive-map-chain"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rank-one free generator criterion to the preceding natural transformation to conclude invertibility at every A. Combine with the proved unit-mate assertion. This route does not construct a pullback from the global-sections point and does not need a lax monoidal structure on global sections.",
+   "uses": [
+    "lem-sc-modulecat-cocontinuous-generator"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-module-cup-naive-map-chain"
+  "lem-sc-module-cup-naive-map-chain",
+  "lem-sc-modulecat-cocontinuous-generator"
  ],
  "proof_origin": {
-  "by": "D4 worker",
-  "document": "https://stacks.math.columbia.edu/tag/01CA",
-  "place": "Modules Lemma 17.16.4"
+  "by": "M4 worker (agent-written shorter proof)",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+  "place": "rank-one coproduct/cokernel argument, combined with TensorSection.unitSectionsEquiv and leftUnitor_hom_app_tmulSection"
  },
  "mathlib_searches": [
   {
@@ -92,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-3c44d",
-  "group": "D4",
+  "reviewer": "COMPILER",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261013T190137-L-3215064",
+  "landing": "20261013T201803-L-3974763",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, node records, report, proofs, and direct importer matched the review rules; all files compiled successfully, including the importer."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
