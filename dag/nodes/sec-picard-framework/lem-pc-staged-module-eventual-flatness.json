@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-staged-module-eventual-flatness",
+ "kind": "statement",
+ "title": "Eventual flatness of a fixed module on a base-change stage",
+ "statement": "In the affine directed Noetherian system of lem-pc-flat-module-descent, fix i <= j and X_i of finite presentation over Spec R_i [def-pc-scheme, def-pc-base-change]. For a fixed finitely presented quasicoherent module M on X_j, if its moduleBaseChange to X is flat over the limit base, there is l >= j such that its moduleBaseChange to every X_k with k >= l is flat over Spec R_k [def-pc-scheme-module-flat-over]. Neither M nor any differential is reselected.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05LY; schemes.tex, Tag 01JX"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sc-finitely-presented-module",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "With starting scheme X_j and structure morphism f_j:X_j -> Spec R_j, compare moduleBaseChange to the canonical iterated pullback using the cartesian baseChangeMap square. Transport the assumed limit flatness.",
+   "uses": [
+    "lem-pc-pullback-model-flatness-comparison",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_eventually_isFlatOver_of_limit at starting index j. The structure map f_j is a base change of f and is finitely presented.",
+   "uses": [
+    "lem-pc-flat-module-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each k beyond the obtained threshold, use the same cartesian-model comparison to turn its iterated-pullback flatness conclusion into flatness of moduleBaseChange f applied to the original fixed M.",
+   "uses": [
+    "lem-pc-pullback-model-flatness-comparison",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pullback-model-flatness-comparison",
+  "def-pc-base-change",
+  "lem-pc-flat-module-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05LY; schemes.tex, Tag 01JX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "eventual flatness descent for a fixed module on an already base-changed scheme",
+   "results": "No exact geometric assertion. Results include affine-limit section descent, flat morphism stability, and sheaf finite-presentation predicates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.equiv_iff; SheafOfModules.IsFinitePresentation",
+   "results": "Module.Flat.equiv_iff handles linear equivalences only; sheaf predicate and its quasicoherence/finite-type instances, no tensor-pullback preservation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOver_tensorPullback_iff|isFinitePresentation_tensorPullback|01BQ",
+   "results": "No matching project declarations. TensorPullback has identity, composition and adjunction theorems; HomologicalComplex.mapHomologicalComplex supplies degreewise mapping.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "eventual flatness descent for a fixed module on an already base-changed scheme",
+   "results": "service unavailable: Internal Server Error (msearch.py, 2026-10-13); other search kinds used",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-bounded-complex-descent",
+   "place": "Proof step 2: fixed-term eventual flatness and functorial enlargement of the complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StagedModuleEventualFlatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/StagedModuleEventualFlatness.lean",
+  "declaration": "AlgebraicGeometry.exists_eventually_isFlatOver_staged_module",
+  "statement": "theorem exists_eventually_isFlatOver_staged_module\n    {I : Type u} [PartialOrder I] [IsDirectedOrder I]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (M : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    [M.IsFinitePresentation] [M.IsQuasicoherent]\n    (hflat : ((Scheme.Modules.moduleBaseChange f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj M).IsFlatOver\n        (pullback.snd f (c.π.app (op i)))) :\n    ∃ l : I, ∃ hjl : j ≤ l, ∀ (k : I) (hlk : l ≤ k),\n      ((Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans (hjl.trans hlk))))))\n        (Over.homMk (Spec.map (R.map (homOfLE (hjl.trans hlk))))\n          (by simp [← Spec.map_comp, ← R.map_comp]))).obj M).IsFlatOver\n            (pullback.snd f\n              (Spec.map (R.map (homOfLE (hij.trans (hjl.trans hlk))))))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

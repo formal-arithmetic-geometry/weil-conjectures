@@ -23,48 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Apply bounded finite-presentation descent to the finite range of terms of G^\\bullet and to all differentials and relations between them. After increasing the stage, obtain a bounded complex H_j^\\bullet of finitely presented \\mathcal{O}_{X_j}-modules with base-change isomorphism H_j^\\bullet\\otimes_{S_j}S\\cong G^\\bullet.",
+   "text": "Infer quasicoherence from finite presentation and apply exists_finitelyPresented_complex_of_limit to obtain a fixed bounded finite-presentation model H at j and compatible termwise limit isomorphisms.",
    "uses": [
     "lem-pc-fp-complex-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.2, Tag 01ZR; Lemma 32.10.4, Tag 05LY"
-   }
+   "elementary": false
   },
   {
-   "text": "For each degree r in the finite bounded range, the term H_j^r is a finitely presented quasi-coherent \\mathcal{O}_{X_j}-module whose pullback to X is isomorphic (step 1) to G^r, hence flat over S; eventual flatness descent applied to H_j^r (with j as the starting stage) gives a stage j_r\\ge j such that the pullback of H_j^r to X_{j'} is flat over S_{j'} for every j'\\ge j_r. A zero term is already flat. There are finitely many degrees, so directedness gives one stage j' above all j_r, at which every pulled-back term is flat over S_{j'}. Base-changing the whole complex H_j^\\bullet from j to j' preserves its differentials, boundedness, finite presentation, and the chosen identification with G^\\bullet.",
+   "text": "Use flatOver_of_iso from PullbackModelFlatnessComparison to transfer each limit flatness test along its termwise module isomorphism. Apply exists_eventually_isFlatOver_staged_module to each fixed term. On the finite interval Icc a b choose one common upper stage k by finite induction and directedness. Outside the interval tensor pullback preserves zero modules and zero modules are flat.",
    "uses": [
-    "lem-pc-flat-module-descent"
+    "lem-pc-staged-module-eventual-flatness",
+    "lem-pc-pullback-model-flatness-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.4, Tag 05LY; filtered-stage enlargement"
-   }
+   "elementary": false
   },
   {
-   "text": "Rename the common later stage j' as j and the base-changed complex as G_j^\\bullet. It is bounded, termwise finitely presented and flat over S_j, and its base change to X is isomorphic to G^\\bullet, as required.",
+   "text": "Apply exists_bounded_complex_baseChange_enlargement to the fixed H and stage maps k -> j and S -> k. Transfer termwise flatness using its term identifications. The cone equation identifies the composite stage map with S -> j. Compose the enlargement comparison, this functor equality isomorphism, and the original limit comparison. Naturality and associativity prove compatibility with every differential.",
    "uses": [
-    "lem-pc-fp-complex-descent",
-    "lem-pc-flat-module-descent"
+    "lem-pc-bounded-complex-base-change-enlargement"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 32.10.1, Tag 01ZM, filtered-stage enlargement"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-fp-complex-descent",
-  "lem-pc-flat-module-descent"
+  "lem-pc-staged-module-eventual-flatness",
+  "lem-pc-bounded-complex-base-change-enlargement",
+  "lem-pc-pullback-model-flatness-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemmas 32.10.2 and 32.10.4, Tags 01ZR and 05LY"
+  "place": "Tags 01ZR and 05LY; finite-stage assembly with Tags 0097, 01BQ and 01JX"
  },
  "mathlib_searches": [
   {
@@ -151,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

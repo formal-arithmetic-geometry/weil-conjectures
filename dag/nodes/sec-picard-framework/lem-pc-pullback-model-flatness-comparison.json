@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-pullback-model-flatness-comparison",
+ "kind": "statement",
+ "title": "Relative flatness comparison for cartesian models",
+ "statement": "For two cartesian squares P and Q of the same morphisms f:X -> S and g:T -> S [def-pc-fibre-product], and any module M on X [def-pc-module-pullback], the tensor pullback of M to P is flat over T if and only if its tensor pullback to Q is flat over T [def-pc-scheme-module-flat-over].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01U4; schemes.tex, Tag 01JX; sheaves.tex, Tag 0097"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "The two cartesian squares give a unique isomorphism e:P -> Q compatible with both projections. Tensor-pullback composition identifies a^*M with e^*((a')^*M).",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport every affine source open through e. Sections and the action of Gamma(T,V) are identified by the structure-sheaf naturality equations. Module.Flat.equiv_iff proves invariance of each affine-pair flatness test; e inverse proves the reverse implication. Empty opens have zero sections.",
+   "uses": [
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01U4; schemes.tex, Tag 01JX; sheaves.tex, Tag 0097"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative flatness of module pullbacks invariant under canonical cartesian-model isomorphism",
+   "results": "No exact geometric assertion. Results include affine-limit section descent, flat morphism stability, and sheaf finite-presentation predicates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.equiv_iff; SheafOfModules.IsFinitePresentation",
+   "results": "Module.Flat.equiv_iff handles linear equivalences only; sheaf predicate and its quasicoherence/finite-type instances, no tensor-pullback preservation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOver_tensorPullback_iff|isFinitePresentation_tensorPullback|01BQ",
+   "results": "No matching project declarations. TensorPullback has identity, composition and adjunction theorems; HomologicalComplex.mapHomologicalComplex supplies degreewise mapping.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative flatness of module pullbacks invariant under canonical cartesian-model isomorphism",
+   "results": "service unavailable: Internal Server Error (msearch.py, 2026-10-13); other search kinds used",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-bounded-complex-descent",
+   "place": "Proof step 2: fixed-term eventual flatness and functorial enlargement of the complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackModelFlatnessComparison.lean",
+  "declaration": "AlgebraicGeometry.isFlatOver_tensorPullback_iff_of_isPullback",
+  "statement": "theorem isFlatOver_tensorPullback_iff_of_isPullback\n    {P Q X S T : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S}\n    {a : P ⟶ X} {b : P ⟶ T} {a' : Q ⟶ X} {b' : Q ⟶ T}\n    (hp : IsPullback a b f g) (hq : IsPullback a' b' f g) (M : X.Modules) :\n    ((Scheme.Modules.tensorPullback a).obj M).IsFlatOver b ↔\n      ((Scheme.Modules.tensorPullback a').obj M).IsFlatOver b'",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

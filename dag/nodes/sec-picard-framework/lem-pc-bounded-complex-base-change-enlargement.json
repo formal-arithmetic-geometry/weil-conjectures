@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-bounded-complex-base-change-enlargement",
+ "kind": "statement",
+ "title": "Functorial enlargement of a bounded finitely presented complex",
+ "statement": "For a scheme morphism f:X -> S [def-pc-scheme] and composable morphisms T'' -> T' -> T over S [def-pc-base-change], any bounded integer-indexed complex H of finitely presented modules on X_T has a bounded finitely presented complex K on X_T', termwise isomorphic to the base change of H. Its further base change to X_T'' is termwise isomorphic to the direct base change of H, compatibly with all differentials. No flatness, inverse limit, or new descent assertion is involved.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095--0097; modules.tex, Tag 01BQ; limits.tex, Tag 01ZM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply moduleBaseChange to H degreewise. It is a left adjoint, so preserves zero morphisms and zero objects, giving a complex with the same bounded interval.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensor-pullback finite-presentation preservation to each term.",
+   "uses": [
+    "lem-pc-tensor-pullback-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "baseChangeMap_comp and nonempty_tensorPullbackComp give a natural functor isomorphism between direct and successive base change. Its components provide the limit comparison and its naturality proves differential compatibility.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095--0097; modules.tex, Tag 01BQ; limits.tex, Tag 01ZM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functorial base change of a bounded complex and comparison of successive tensor pullbacks",
+   "results": "No exact geometric assertion. Results include affine-limit section descent, flat morphism stability, and sheaf finite-presentation predicates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.equiv_iff; SheafOfModules.IsFinitePresentation",
+   "results": "Module.Flat.equiv_iff handles linear equivalences only; sheaf predicate and its quasicoherence/finite-type instances, no tensor-pullback preservation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOver_tensorPullback_iff|isFinitePresentation_tensorPullback|01BQ",
+   "results": "No matching project declarations. TensorPullback has identity, composition and adjunction theorems; HomologicalComplex.mapHomologicalComplex supplies degreewise mapping.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "functorial base change of a bounded complex and comparison of successive tensor pullbacks",
+   "results": "service unavailable: Internal Server Error (msearch.py, 2026-10-13); other search kinds used",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-bounded-complex-descent",
+   "place": "Proof step 2: fixed-term eventual flatness and functorial enlargement of the complex",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedComplexBaseChangeEnlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedComplexBaseChangeEnlargement.lean",
+  "declaration": "AlgebraicGeometry.exists_bounded_complex_baseChange_enlargement",
+  "statement": "theorem exists_bounded_complex_baseChange_enlargement\n    {X S : Scheme.{u}} (f : X ⟶ S) {T T' T'' : Over S}\n    (g : T' ⟶ T) (h : T'' ⟶ T')\n    (H : CochainComplex (pullback f T.hom).Modules ℤ)\n    (hH_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (H.X n))\n    (hH_fp : ∀ n : ℤ, (H.X n).IsFinitePresentation) :\n    ∃ K : CochainComplex (pullback f T'.hom).Modules ℤ,\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n)) ∧\n      (∀ n : ℤ, (K.X n).IsFinitePresentation) ∧\n      (Nonempty (∀ n : ℤ, K.X n ≅ (Scheme.Modules.moduleBaseChange f g).obj (H.X n))) ∧\n      ∃ e : ∀ n : ℤ,\n        (Scheme.Modules.moduleBaseChange f h).obj (K.X n) ≅\n          (Scheme.Modules.moduleBaseChange f (h ≫ g)).obj (H.X n),\n        ∀ n m : ℤ,\n          (Scheme.Modules.moduleBaseChange f h).map (K.d n m) ≫ (e m).hom =\n            (e n).hom ≫ (Scheme.Modules.moduleBaseChange f (h ≫ g)).map (H.d n m)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T100119-L-2484691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
