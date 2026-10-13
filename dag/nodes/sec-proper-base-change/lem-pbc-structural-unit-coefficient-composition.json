@@ -1,0 +1,123 @@
+{
+ "id": "lem-pbc-structural-unit-coefficient-composition",
+ "kind": "statement",
+ "title": "Structural unit coefficient composition",
+ "statement": "Let f:Y→X and g:Z→Y be scheme morphisms. Define coefficientUnit, coeff and invImageComp as in [lem-pc-coefficient-unit-composition, def-pc-flat-cohomology-comparison]. Let e=pullbackObjUnitIso f. Then inverseImage(g)(coefficientUnit(f,O_X)) followed by coeff(g)(e.hom followed by the structural unit map for g) equals invImageComp(g,f) at the forgotten O_X followed by coeff(g followed by f) of its structural unit map. This is a sheaf morphism equality without cohomology, affine bases, degrees or cartesian hypotheses.",
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; step 1 of lem-pbc-cartesian-unit-cohomology-pullback-comp"
+ },
+ "proof": [
+  {
+   "text": "Apply the composite abelian pullback/pushforward adjunction. Naturality in the source and target identifies the adjunct of the left-hand side with the forgotten module pullback unit for f followed by pushforward(f) of e.hom and the structural unit for g.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-coefficient-unit-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate identity unit_conjugateEquiv_symm identifies the adjunct of invImageComp followed by the coefficient map with the forgotten structural map for g followed by f. The module adjunction identity for pullbackObjUnitToUnit replaces unit(f) followed by pushforward(f)(e.hom) with the structural map for f. The remaining equality holds definitionally on every open: both are the composition of the two structure-sheaf maps. Sheaf and natural transformation extensionality finish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Explicit adjunction and Ext argument for the original composition proof step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse image sheaf cohomology with constant integer sheaf comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image maps on sheaf Ext cohomology with constant sheaf comparison",
+   "results": "Sheaf.H and generic Ext lemmas; no scheme inverse-image composition theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use existing Ext and adjunction APIs; no complete matching statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit",
+   "results": "Unit morphism and the homEquiv pullbackObjUnitToUnit identities, no composite coefficient theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use the adjunction identities."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*[Cc]omp|constantSheafsheafPullbackIso",
+   "results": "Ext.mapExactFunctor_comp preserves Ext composition; constantSheafsheafPullbackIso constructs the constant comparison. Local source search also found exactFunctorCompositionComparison.",
+   "date": "2026-10-14",
+   "verdict": "Individual ingredients; no inverseImageCohomology_comp or structuralUnitCoefficient_comp duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullbackComposition",
+  "date": "2026-10-14",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Coefficient composition",
+   "via": [
+    "lem-pbc-cartesian-unit-cohomology-pullback-comp",
+    "lem-pbc-cartesian-unit-cohomology-transport",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.StructuralUnitCoefficientComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/StructuralUnitCoefficientComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.structuralUnitCoefficient_comp",
+  "statement": "theorem structuralUnitCoefficient_comp {X Y Z : Scheme.{u}}\n    (g : Z ⟶ Y) (f : Y ⟶ X) :\n    (invImage g).map (coefficientUnit f (SheafOfModules.unit X.ringCatSheaf)) ≫\n        coeff g ((pullbackObjUnitIso f).hom ≫\n          SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) =\n      (invImageComp g f).hom.app\n          ((SheafOfModules.toSheaf X.ringCatSheaf).obj\n            (SheafOfModules.unit X.ringCatSheaf)) ≫\n        coeff (g ≫ f) (SheafOfModules.unitToPushforwardObjUnit\n          (g ≫ f).toRingCatSheafHom)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-69838",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-69838",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598405",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declaration interfaces are unchanged; direct importer also compiles against the delivered modules; nodes, report, change record, and documented sorry agree."
+ }
+}

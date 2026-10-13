@@ -5,12 +5,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.UnitCohomologyPullbackLinear
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.Cohomology.InverseImageCoefficientComposition
+import Sheaf.AlgebraicGeometry.Cohomology.StructuralUnitCoefficientComposition
+import Sheaf.AlgebraicGeometry.Cohomology.InverseImageCohomologyComposition
 
 @[expose] public section
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
+attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The explicitly constructed forward transport intertwines the two structural
 pullback maps in a displayed cartesian square.
@@ -51,6 +54,35 @@ theorem cartesian_unit_cohomology_pullback_comp
         ι'.toRingCatSheafHom)) n
       (Sheaf.H.mapFunctor (invImage ι') (constIso ι').symm
         ((SheafOfModules.toSheaf C.ringCatSheaf).obj
-          (SheafOfModules.unit C.ringCatSheaf)) n x) := by sorry
+          (SheafOfModules.unit C.ringCatSheaf)) n x) := by
+  let a := baseChangeFst (S := k') f
+  let d := h.isoPullback.hom
+  let F := (SheafOfModules.toSheaf C.ringCatSheaf).obj
+    (SheafOfModules.unit C.ringCatSheaf)
+  let α := coefficientUnit a (SheafOfModules.unit C.ringCatSheaf)
+  let β := coeff d ((pullbackObjUnitIso a).hom ≫
+    SheafOfModules.unitToPushforwardObjUnit d.toRingCatSheafHom)
+  let y := Sheaf.H.mapFunctor (invImage a) (constIso a).symm F n x
+  let z := Sheaf.H.mapFunctor (invImage d) (constIso d).symm ((invImage a).obj F) n y
+  change Sheaf.H.map β n
+    (Sheaf.H.mapFunctor (invImage d) (constIso d).symm _ n (Sheaf.H.map α n y)) = _
+  have hn := Sheaf.H.mapFunctor_map (invImage d) (constIso d).symm n α y
+  have hc := Sheaf.H.map_comp_apply ((invImage d).map α) β z
+  have hs := structuralUnitCoefficient_comp d a
+  have ht := Sheaf.H.map_comp_apply ((invImageComp d a).hom.app F)
+    (coeff (d ≫ a) (SheafOfModules.unitToPushforwardObjUnit (d ≫ a).toRingCatSheafHom)) z
+  have hi := inverseImageCohomology_comp d a F n x
+  have hp : d ≫ a = ι' := h.isoPullback_hom_fst
+  have he := (congrArg (fun w ↦ Sheaf.H.map β n w) hn).trans hc.symm
+  have he' := he.trans (congrArg (fun φ ↦ Sheaf.H.map φ n z) hs)
+  have he'' := (he'.trans ht).trans
+    (congrArg (fun w ↦ Sheaf.H.map
+      (coeff (d ≫ a) (SheafOfModules.unitToPushforwardObjUnit
+        (d ≫ a).toRingCatSheafHom)) n w) hi)
+  have heq := congrArg (fun (t : C' ⟶ C) ↦
+    Sheaf.H.map (coeff t (SheafOfModules.unitToPushforwardObjUnit
+      t.toRingCatSheafHom)) n
+      (Sheaf.H.mapFunctor (invImage t) (constIso t).symm F n x)) hp
+  exact he''.trans heq
 
 end AlgebraicGeometry.Scheme.Modules

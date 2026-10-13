@@ -1,0 +1,126 @@
+{
+ "id": "lem-pbc-inverse-image-cohomology-composition",
+ "kind": "statement",
+ "title": "Inverse-image cohomology composition",
+ "statement": "Let f:Y→X and g:Z→Y be scheme morphisms and F any abelian sheaf on X. For any n≥0 and x∈H^n(X,F), first apply the inverse-image cohomology maps for f and g with their specified constant integer comparisons [def-pc-flat-cohomology-comparison], then apply H.map of invImageComp(g,f) at F [lem-pc-coefficient-unit-composition]. The result is the inverse-image cohomology map for g followed by f with its specified constant comparison, applied to x. No coefficient, structure-sheaf, scalar or cartesian assumptions occur.",
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; step 2 of lem-pbc-cartesian-unit-cohomology-pullback-comp"
+ },
+ "proof": [
+  {
+   "text": "The comparison for the constant integer sheaf along g followed by f agrees with the comparison for g followed by inverseImage(g) of the comparison for f and invImageComp(g,f) at the constant sheaf. Under the composite constant-sections and inverse-image adjunctions both are adjoint to the same sections map; injectivity of the hom equivalence proves coherence.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-coefficient-unit-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand Sheaf.H.mapFunctor as precomposition by the inverse constant comparison and exact-functor action on Ext. Use exactFunctorCompositionComparison for the natural isomorphism invImageComp, Ext.mapExactFunctor_comp and Ext.mapExactFunctor_mk₀ to move the degree-zero source and target comparisons through the two exact-functor actions. Ext composition associativity, cancellation of the comparison isomorphisms and the constant coherence identity identify the two classes. Works for identities, all degrees and zero sheaves.",
+   "uses": [
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Explicit adjunction and Ext argument for the original composition proof step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse image sheaf cohomology with constant integer sheaf comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse image maps on sheaf Ext cohomology with constant sheaf comparison",
+   "results": "Sheaf.H and generic Ext lemmas; no scheme inverse-image composition theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use existing Ext and adjunction APIs; no complete matching statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit",
+   "results": "Unit morphism and the homEquiv pullbackObjUnitToUnit identities, no composite coefficient theorem.",
+   "date": "2026-10-14",
+   "verdict": "Use the adjunction identities."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*[Cc]omp|constantSheafsheafPullbackIso",
+   "results": "Ext.mapExactFunctor_comp preserves Ext composition; constantSheafsheafPullbackIso constructs the constant comparison. Local source search also found exactFunctorCompositionComparison.",
+   "date": "2026-10-14",
+   "verdict": "Individual ingredients; no inverseImageCohomology_comp or structuralUnitCoefficient_comp duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CartesianUnitCohomologyPullbackComposition",
+  "date": "2026-10-14",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Exact inverse-image Ext and constant comparison composition",
+   "via": [
+    "lem-pbc-cartesian-unit-cohomology-pullback-comp",
+    "lem-pbc-cartesian-unit-cohomology-transport",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.InverseImageCohomologyComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/InverseImageCohomologyComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.inverseImageCohomology_comp",
+  "statement": "theorem inverseImageCohomology_comp {X Y Z : Scheme.{u}}\n    (g : Z ⟶ Y) (f : Y ⟶ X)\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (n : ℕ) (x : F.H n) :\n    Sheaf.H.map ((invImageComp g f).hom.app F) n\n        (Sheaf.H.mapFunctor (invImage g) (constIso g).symm ((invImage f).obj F) n\n          (Sheaf.H.mapFunctor (invImage f) (constIso f).symm F n x)) =\n      Sheaf.H.mapFunctor (invImage (g ≫ f)) (constIso (g ≫ f)).symm F n x",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-69838",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-69838",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T181054-L-2598405",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declaration interfaces are unchanged; direct importer also compiles against the delivered modules; nodes, report, change record, and documented sorry agree."
+ }
+}

@@ -14,18 +14,18 @@
  },
  "proof": [
   {
-   "text": "Use the first projection identity d followed by baseChangeFst equals iotaprime. The unit-pullback adjunction identity identifies baseChangeUnit followed by pushforward of e.hom with the structural unit map. Naturality moves e through the adjoint coefficient map; structural maps compose on every open. Apply coefficientUnit_comp to identify composite adjoint coefficient maps.",
+   "text": "Unfold the two defined linear cohomology maps. Sheaf.H.mapFunctor_map moves the coefficientUnit for the first projection through inverse image along the cartesian isomorphism. Combine the two H.map applications with Sheaf.H.map_comp_apply. Apply structuralUnitCoefficient_comp to replace the composite coefficient morphism with invImageComp followed by the structural coefficient map for the composite.",
    "uses": [
-    "lem-pc-coefficient-unit-composition",
-    "def-pbc-unit-cohomology-pullback-linear"
+    "def-pbc-unit-cohomology-pullback-linear",
+    "def-pc-flat-cohomology-comparison",
+    "lem-pbc-structural-unit-coefficient-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The constant-integer comparisons compose with the same inverse-image comparison by uniqueness of left-adjoint comparisons. Functoriality of exact-functor action on Ext and associativity of Ext composition identify the composite cohomology map with structural pullback. This proves compatibility without using bijectivity.",
+   "text": "Apply Sheaf.H.map_comp_apply and inverseImageCohomology_comp to identify successive inverse-image actions with the composite action. Finally h.isoPullback_hom_fst identifies the composite with iotaprime. The coefficient lemma is proved in this delivery; only the degree-independent inverse-image cohomology composition theorem remains open.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "def-pbc-unit-cohomology-pullback-linear"
+    "lem-pbc-inverse-image-cohomology-composition"
    ],
    "elementary": false
   }
@@ -33,12 +33,13 @@
  "proof_deps": [
   "def-pbc-unit-cohomology-pullback-linear",
   "def-pc-flat-cohomology-comparison",
-  "lem-pc-coefficient-unit-composition"
+  "lem-pbc-inverse-image-cohomology-composition",
+  "lem-pbc-structural-unit-coefficient-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01F7",
-  "place": "The explicit Ext comparison, naturality and functoriality; the complete argument is in the Lean docstring."
+  "place": "Original two-step route: a proved coefficient identity and inverse-image cohomology functoriality, combined by explicit naturality, H.map composition and cartesian projection equality."
  },
  "mathlib_searches": [
   {
@@ -152,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-e4303",
-  "group": "N4",
+  "reviewer": "X-69838",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T162411-L-1519488",
+  "landing": "20261013T181054-L-2598405",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged transport theorem and explicit-map reduction with the DAG nodes and dependencies; all three modules compile without warnings, and axioms match the two documented lower holes. The disputed arbitrary-equivalence statement is absent."
+  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declaration interfaces are unchanged; direct importer also compiles against the delivered modules; nodes, report, change record, and documented sorry agree."
  }
 }
