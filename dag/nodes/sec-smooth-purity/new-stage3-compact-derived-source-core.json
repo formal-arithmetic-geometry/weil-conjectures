@@ -12,18 +12,34 @@
  },
  "proof": [
   {
-   "text": "Construct the small-Hom derived category of modules, use the free rank-one module as a compact generator, and transport its triangulated structure and coproducts across the universe-lift equivalence.",
-   "uses": [],
+   "text": "Choose complex representatives of each derived module object using the localization functor. Form their termwise coproduct, use derivedModuleDirectSums for its colimit property, and precompose the cofan legs with the representative isomorphisms. This constructs HasCoproducts for the native derived category.",
+   "uses": [
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use native derived module compact generation. Let B be ULift of the actual derived module category, so its object universe is the required maximum and its Hom universe is unchanged. The ULift equivalence transfers all triangulated structures, the additive shifts and shift comparison. Transfer coproducts via the equivalence, and compact generation via compactGenerationEquivalence. Use the inverse equivalence, with its induced shift comparison, for the final triangulated equivalence.",
+   "uses": [
+    "new-stage3-derived-module-compact-generation",
+    "lem-pc-triangulated-equivalence-transfer",
+    "lem-pc-compact-generation-equivalence"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-derived-module-direct-sums",
+  "new-stage3-derived-module-compact-generation",
+  "lem-pc-triangulated-equivalence-transfer",
+  "lem-pc-compact-generation-equivalence"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "F3",
+  "group": "H3",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0F5V",
-  "place": "Compact derived model, rank-one compact generator and transported triangulated structure component of the parent presentation proof"
+  "document": "https://stacks.math.columbia.edu/tag/0F5X",
+  "place": "Native compact generation followed by proved coproduct and universe transport constructions"
  },
  "mathlib_searches": [
   {
@@ -95,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-62b11",
-  "group": "F3",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T222404-L-1223076",
+  "landing": "20261013T231535-L-1817276",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the DAG and recorded statements; all delivered modules and the direct importer compile cleanly, with only the two documented component sorry declarations remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
