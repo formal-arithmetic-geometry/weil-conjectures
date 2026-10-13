@@ -44,6 +44,13 @@ theorem isRegularLocalRing_iff_strictHenselization
     [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K]
     [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) :
     IsRegularLocalRing R ↔ IsRegularLocalRing C := by
-  sorry
+  have : IsNoetherianRing C :=
+    (isNoetherianRing_iff_isStrictHenselization R K C hC).mp inferInstance
+  obtain ⟨hlocal, _, hcotangent⟩ :=
+    finrank_cotangentSpace_eq_of_isStrictHenselization R K C hC
+  have : IsLocalRing C := hlocal
+  rw [IsRegularLocalRing.iff_finrank_cotangentSpace R,
+    IsRegularLocalRing.iff_finrank_cotangentSpace C, hcotangent,
+    ringKrullDim_eq_of_isStrictHenselization R K C hC]
 
 end Algebra

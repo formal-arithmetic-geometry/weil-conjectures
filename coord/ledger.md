@@ -13228,3 +13228,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/M3/Sheaf.AlgebraicGeometry.RelativeMVInverseOpenComparisons (stage 3; reviewer PASS; first push; landing 20261013T171512-L-1981357 (interface); batch 20261013T171508; modules 3; new nodes 2)
 - 17:15 L: merged deliver/M4/Sheaf.RingTheory.Etale.LocalDimension (stage 3; reviewer PASS; first push; landing 20261013T171512-L-1981547 (proof); batch 20261013T171508; modules 1; new nodes 0)
 - 17:15 L: merged deliver/M4/Sheaf.RingTheory.StrictHenselizationCotangentDimension (stage 3; reviewer PASS; first push; landing 20261013T171513-L-1981803 (proof); batch 20261013T171508; modules 1; new nodes 0)
+- 17:15 L: merged deliver/M4/Sheaf.RingTheory.StrictHenselizationRegular (stage 3; reviewer PASS; first push; landing 20261013T171513-L-1981977 (proof); batch 20261013T171508; modules 1; new nodes 0)
