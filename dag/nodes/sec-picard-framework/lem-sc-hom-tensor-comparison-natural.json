@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-hom-tensor-comparison-natural",
+ "kind": "statement",
+ "title": "Naturality of the sheaf tensor comparison isomorphism",
+ "statement": "Let (C,J) be a site, R a sheaf of commutative rings, A,Aprime,B,Bprime sheaves of R-modules, f:Aprime -> A and g:Bprime -> B. Let S denote module sheafification [def-weil-presheaf-modules-sheafification], and c(A,B):A tensor B -> S(A.val tensor B.val) the canonical comparison isomorphism [def-pur-sheaf-tensor-product]. Then (f tensor g);c(A,B) = c(Aprime,Bprime);S(f.val tensor g.val). This is an equality of sheaf module morphisms. No invertibility of f or g, boundedness or assumption on sections is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (tensor product as sheafification), and Lemma 03CY (module sheafification universal property); https://stacks.math.columbia.edu/tag/03EK and https://stacks.math.columbia.edu/tag/03CY"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Let epsilon be the invertible counit of module sheafification S. Apply naturality of (asIso epsilon).inv to f and g. Tensor interchange rewrites the tensor of these equations as (f tensor g);(epsilon(A) inverse tensor epsilon(B) inverse) = (epsilon(Aprime) inverse tensor epsilon(Bprime) inverse);(S(f.val) tensor S(g.val)). The identity scalar restriction is definitionally the underlying presheaf functor.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose with the tensorator mu of S at A.val,B.val. Tensorator naturality replaces (S(f.val) tensor S(g.val));mu(A.val,B.val) by mu(Aprime.val,Bprime.val);S(f.val tensor g.val). By definition c is the tensor of inverse counits followed by mu, so reassociation gives the stated equality. This applies to identity maps, zero maps and zero objects without any special case or invertibility of f,g.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma 03CY, read online by both workers; K1 second reader closed the comparison using inverse-counit naturality, tensor interchange and Functor.LaxMonoidal.μ_natural."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of tensor sheafification comparison",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor comparison between a tensor of module sheaves and the sheafification of their presheaf tensor is natural",
+   "results": "Module sheafification hom-equivalence compatibility lemmas and presheaf tensorObj_map_tmul were found, but no public comparison naturality theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"μ_natural\" and \"counit_naturality\"",
+   "results": "Functor.LaxMonoidal.μ_natural and Adjunction.counit_naturality supply the categorical ingredients. Neither directly states naturality of the sheaf tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|tensorPure_natural in Mathlib, WeilConjectures and Sheaf",
+   "results": "MonoidalClosed has whiskerLeft/Right_tensorObjIsoSheafification_hom only for C : Type u and Category.{u} C. SheafificationTensor has a private tensorIso_natural with that restriction. No public theorem matches the separate site universes of this statement.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"μ_natural\" (second reading)",
+   "results": "Functor.LaxMonoidal.μ_natural gives two-variable tensorator naturality. Used with inverse-counit naturality to close the comparison proof.",
+   "date": "2026-10-13",
+   "verdict": "ingredient used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the isomorphism from the tensor product of sheaves of modules to the sheafification of their presheaf tensor via the inverse counit",
+   "results": "Returned sheafificationHomEquiv and related module sheafification lemmas, but no direct general-site comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorSectionNaturality",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-tensor-total",
+   "place": "First step of lem-sc-hom-tensor-section-natural: naturality of tensorObjIsoSheafification before passing to its inverse, forgetting and composing with the sheafification unit.",
+   "via": [
+    "lem-sc-hom-tensor-section-natural",
+    "lem-sc-hom-tensor-curry-natural-pure",
+    "lem-sc-hom-tensor-naturality-component",
+    "lem-sc-hom-tensor-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorComparisonNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorComparisonNaturality.lean",
+  "declaration": "CategoryTheory.homTensorComparison_natural",
+  "statement": "theorem homTensorComparison_natural {A A' B B' : Mod}\n    (f : A' ⟶ A) (g : B' ⟶ B) :\n    letI := SheafOfModules.monoidalCategory R\n    (f ⊗ₘ g) ≫ (SheafOfModules.tensorObjIsoSheafification A B).hom =\n      (SheafOfModules.tensorObjIsoSheafification A' B').hom ≫\n        (PresheafOfModules.sheafification\n          (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).map\n          (f.val ⊗ₘ g.val)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T100022-L-2467174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T100022-L-2467174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

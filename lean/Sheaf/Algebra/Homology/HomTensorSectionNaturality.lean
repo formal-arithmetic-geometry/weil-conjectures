@@ -6,6 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Homology.HomTensorComparisonNaturality
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
@@ -31,6 +32,7 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from the presheaf tensor to the sheaf tensor is natural.
 Source: Stacks Project, Modules on Sites, Section 03EK (tensor product of sheaves),
 and the sheafification universal property of Lemma 03CY.
@@ -54,6 +56,27 @@ theorem homTensorSectionMap_natural {A A' B B' : Mod}
     (f : A' ⟶ A) (g : B' ⟶ B) :
     letI := SheafOfModules.monoidalCategory R
     homTensorSectionMap R A' B' ≫ (f ⊗ₘ g).val =
-      (f.val ⊗ₘ g.val) ≫ homTensorSectionMap R A B := by sorry
+      (f.val ⊗ₘ g.val) ≫ homTensorSectionMap R A B := by
+  let := SheafOfModules.monoidalCategory R
+  let S := PresheafOfModules.sheafification
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  have hc := homTensorComparison_natural R f g
+  have hi : (SheafOfModules.tensorObjIsoSheafification A' B').inv ≫ (f ⊗ₘ g) =
+      S.map (f.val ⊗ₘ g.val) ≫
+        (SheafOfModules.tensorObjIsoSheafification A B).inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, ← hc, Category.assoc,
+      Iso.hom_inv_id, Category.comp_id]
+  have hv := congrArg SheafOfModules.Hom.val hi
+  change (SheafOfModules.tensorObjIsoSheafification A' B').inv.val ≫ (f ⊗ₘ g).val =
+    (S.map (f.val ⊗ₘ g.val)).val ≫
+      (SheafOfModules.tensorObjIsoSheafification A B).inv.val at hv
+  have hn := adj.unit.naturality (f.val ⊗ₘ g.val)
+  change (f.val ⊗ₘ g.val) ≫ adj.unit.app (A.val ⊗ B.val) =
+    adj.unit.app (A'.val ⊗ B'.val) ≫ (S.map (f.val ⊗ₘ g.val)).val at hn
+  unfold homTensorSectionMap
+  erw [Category.assoc, hv, ← Category.assoc, ← hn]
+  rfl
 
 end CategoryTheory
