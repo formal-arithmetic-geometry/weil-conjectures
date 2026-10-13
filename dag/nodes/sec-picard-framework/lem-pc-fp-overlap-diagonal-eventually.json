@@ -16,36 +16,44 @@
  ],
  "proof": [
   {
-   "text": "On the chart at k subtract the identity from its self transition. Its source\nand target are pullbacks of the prescribed finitely presented quasi-coherent module,\nup to the supplied component isomorphism. The source is therefore of finite type.\nThe chart is quasi-compact over Spec(R_k), as an affine chart base changed along\nan affine map. The identity-base-change comparison identifies this defect with a\nmap to which finitePresentation_zero_map_descent applies.",
-   "uses": [
-    "def-pc-local-overlap-transitions"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of transitions,\nthe pullback composition comparisons, and limit coherence show that its limit\npullback is zero. Zero-map descent gives l.",
+   "text": "Use the component isomorphism to transfer finite presentation from the pullback of N_a to T.obj a, using the proved upstream isFinitePresentation_pullback and isFinitePresentation_of_iso. Its identity pullback M is finitely presented, hence quasi-coherent and of finite type. Let d be the diagonal transition on M and δ=d−id.",
    "uses": [
     "def-pc-local-overlap-transitions",
-    "lem-pc-fp-zero-map-descent"
+    "pqf-def-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "At any m above l the defect is still\nzero since pullback is additive. The canonical chart refinement maps compose,\nby the pullback universal property, and pseudofunctor associativity identifies\nthis pullback defect with the self transition of the prescribed T' minus identity.\nThus the displayed equation holds. This also handles zero modules and empty charts;\nthe theorem is only invoked for an actual cover index.",
+   "text": "The proved private lemma diagonal_pull_iff uses pulledHom_eq and pullHom_hom to express the pulled diagonal transition as an isomorphism conjugate of the chart pullback of d. Conjugation fixes and reflects identities. Apply this equivalence to the limit chart and use the hom_self field of limit coherence. Additivity shows that the limit pullback of δ is zero.",
    "uses": [
     "def-pc-local-overlap-transitions"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finitePresentation_chart_map_zero_eventually to M,M,δ and the limit-zero equation. It gives l≥k and zero pullback along the canonical refinement map from l to k.",
+   "uses": [
+    "lem-pc-fp-chart-map-zero-eventually"
+   ],
    "elementary": false
+  },
+  {
+   "text": "For any m≥l, prove the canonical refinement chart map from m to k is the composite of those from m to l and l to k: apply pullback.hom_ext and the two overlapRefinementHom projection equations, then overlapStageMap_comp. Naturality of pullbackComp and preservation of zero imply the direct pullback of δ to m is zero. Additivity gives pullback(d)=id; diagonal_pull_iff now proves exactly the prescribed pulled transition diagonal equation.",
+   "uses": [
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-local-overlap-transitions",
-  "lem-pc-fp-zero-map-descent"
+  "pqf-def-coherent",
+  "lem-pc-fp-chart-map-zero-eventually"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR (3), applying the finite-type zero-map clause to one diagonal defect, then preserving vanishing under pullback"
+  "place": "Tag 01ZR (3): identity defect, one-stage chart map vanishing, and explicitly proved persistence and transition conjugation"
  },
  "mathlib_searches": [
   {
@@ -126,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T152439-L-992233",
+  "landing": "20261013T165637-L-1806701",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

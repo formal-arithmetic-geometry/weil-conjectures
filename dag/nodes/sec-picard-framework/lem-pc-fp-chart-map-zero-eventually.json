@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-fp-chart-map-zero-eventually",
+ "kind": "statement",
+ "title": "Vanishing of an arbitrary module map at one affine chart stage",
+ "statement": "Let I be a directed preorder, R a diagram of commutative rings and c an affine limit cone of Spec(R) [def-pc-scheme, def-pc-base-change]. Let f:X_i→Spec(R_i) be any morphism and i≤j≤k. Let U be an open cover of X_j with affine charts and fix a chart a. Put V=U pulled back to X_k. For quasi-coherent modules F,G on V.X a, with F of finite type and G of finite presentation [pqf-def-coherent], let δ:F→G. If the pullback of δ along the chart projection from the limit is zero, then for some l≥k its pullback along the canonical refinement chart map from l to k [def-pc-local-overlap-transitions] is zero. This concludes at one stage only; it has no transition system or coherence hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR (3), first proof (affine case), transported through the canonical chart pullback squares; https://stacks.math.columbia.edu/tag/01ZR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-pc-local-overlap-transitions"
+ ],
+ "proof": [
+  {
+   "text": "The map X_k→X_j is affine, being a base change of a map of spectra. Its inverse image W of the affine chart U.X a is affine. The structural map b:W→Spec(R_k) is consequently quasi-compact. Pull W back along the identity map of Spec(R_k); the first projection is an isomorphism. Transport F,G,δ to that pullback. Finite type, quasi-coherence and finite presentation are invariant under this isomorphism.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-local-overlap-transitions",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limit chart is canonically isomorphic to W×Spec(R_k)c.pt: paste the chart pullback square with the base-change square for X. The same construction at l identifies the stage chart with W×Spec(R_k)Spec(R_l). The maps to W are the canonical cover projection and overlapRefinementHom respectively, because both pullback projections agree. On modules, pullbackComp and pullbackCongr give the corresponding natural comparisons. The tensor pullback defining moduleBaseChange and native pullback are naturally isomorphic by uniqueness of left adjoints to module pushforward; naturality preserves and reflects zero equations.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-local-overlap-transitions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finitePresentation_zero_map_descent to b with initial indices both k and to the transported source, target and map. The preceding limit comparison turns the hypothesis into the required limit-zero equation. Zero-map descent supplies l≥k. The stage comparison turns its conclusion into vanishing along the prescribed canonical refinement chart map. Zero modules and empty affine charts are covered without modification.",
+   "uses": [
+    "lem-pc-fp-zero-map-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-local-overlap-transitions",
+  "pqf-def-coherent",
+  "lem-pc-fp-zero-map-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR (3), affine vanishing; explicit pullback comparison glue in steps 1–2 of lem-pc-fp-overlap-diagonal-eventually"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from a finite type quasicoherent sheaf to a finitely presented sheaf on an affine chart becomes zero at a finite stage if zero on the limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finitely presented quasicoherent modules on a chart of an inverse limit of schemes eventually vanishes if its pullback to the limit is zero",
+   "results": "Eight hits, including exists_app_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isAffine_of_isLimit and sheaf finite-presentation predicates. The first three concern structure-sheaf sections; none is arbitrary module-map zero descent on a cover chart.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, _ = 0",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zero_map.*(chart|affine)|chart_map_zero|pullback.*map.*zero",
+   "results": "0 hits from msearch. Repository rg found finitePresentation_zero_map_descent and finitePresentation_zero_map_affine_open_eventually, whose input and output use moduleBaseChange of a fixed model, requiring the chart comparison here. Blueprint search zero map returned six unrelated imported definitions, no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationOverlapDiagonalEventually",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR (3), the finite-type zero-map step for a single affine cover chart in the original overlap coherence argument",
+   "via": [
+    "lem-pc-fp-overlap-diagonal-eventually",
+    "lem-pc-fp-overlap-eventual-chart-equations",
+    "lem-pc-fp-overlap-eventual-coherence",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationChartMapZeroEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationChartMapZeroEventually.lean",
+  "declaration": "AlgebraicGeometry.finitePresentation_chart_map_zero_eventually",
+  "statement": "theorem finitePresentation_chart_map_zero_eventually\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (j : I) (hij : i ≤ j)\n    (U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u})\n    [∀ a, IsAffine (U.X a)] (a : U.I₀) (k : I) (hjk : j ≤ k)\n    (F G : ((U.pullback₁ (overlapStageMap R f hij hjk)).X a).Modules)\n    (hF_ft : F.IsFiniteType) (hF_qc : F.IsQuasicoherent)\n    (hG_fp : G.IsFinitePresentation) (hG_qc : G.IsQuasicoherent)\n    (δ : F ⟶ G)\n    (hδ : (Scheme.Modules.pullback\n      (Scheme.Cover.pullbackHom (U.pullback₁ (overlapStageMap R f hij hjk))\n        (overlapLimitMap R c f (hij.trans hjk)) a)).map δ = 0) :\n    ∃ (l : I) (hkl : k ≤ l),\n      (Scheme.Modules.pullback\n        (overlapRefinementHom U (overlapStageMap R f hij hjk)\n          (overlapStageMap R f hij (hjk.trans hkl))\n          (overlapStageMap R f (hij.trans hjk) hkl)\n          (overlapStageMap_comp R f hij hjk hkl) a)).map δ = 0",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T165637-L-1806701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T165637-L-1806701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
