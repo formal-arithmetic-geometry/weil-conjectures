@@ -8,6 +8,7 @@ module
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Rank
 public import Mathlib.RingTheory.Ideal.Height
 
 /-!
@@ -46,6 +47,33 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
   [IsLocalization (Algebra.algebraMapSubmonoid B (nonZeroDivisors R₀)) Bk]
   [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
   [Module.Finite Bk L]
+
+omit [IsDomain R₀] [IsIntegrallyClosed R₀] [IsNoetherianRing R₀] [Algebra.Smooth R₀ B]
+  [IsNoetherianRing B] [Module.Finite Bk L] in
+/-- If the integral closure of a localization `B' = B[1/h]` in `L' = L[1/h]` is étale over `B'`,
+then so is the base change `B_h ⊗_B T₀` of the integral closure `T₀` of `B` in `L`. -/
+lemma etale_away_tensor_integralClosure (h : B) (B' L' : Type*) [CommRing B'] [CommRing L']
+    [Algebra B B'] [IsLocalization.Away h B'] [Algebra L L']
+    [IsLocalization.Away (algebraMap B L h) L'] [Algebra B' L'] [Algebra B L']
+    [IsScalarTower B B' L'] [IsScalarTower B L L']
+    (hE : Algebra.Etale B' (integralClosure B' L')) :
+    Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B L) := by
+  have : IsLocalization (Algebra.algebraMapSubmonoid L (Submonoid.powers h)) L' := by
+    rw [Algebra.algebraMapSubmonoid_powers]; infer_instance
+  have : Algebra.IsPushout B L B' L' :=
+    Algebra.isPushout_of_isLocalization (Submonoid.powers h) B' L L'
+  have : Algebra.IsPushout B B' L L' := this.symm
+  let e : B' ⊗[B] integralClosure B L ≃ₐ[B'] integralClosure B' L' :=
+    (AlgEquiv.ofBijective (TensorProduct.toIntegralClosure B B' L)
+      (TensorProduct.toIntegralClosure_bijective_of_isLocalization (Submonoid.powers h))).trans
+      (Algebra.IsPushout.equiv B B' L L').mapIntegralClosure
+  have : Algebra.Etale B' (B' ⊗[B] integralClosure B L) := .of_equiv e.symm
+  let eB : B' ≃ₐ[B] Localization.Away h :=
+    IsLocalization.algEquiv (Submonoid.powers h) B' (Localization.Away h)
+  let : Algebra B' (Localization.Away h) := eB.toRingHom.toAlgebra
+  have : IsScalarTower B B' (Localization.Away h) := .of_algebraMap_eq fun b ↦ (eB.commutes b).symm
+  exact .of_equiv (Algebra.TensorProduct.cancelBaseChange B B' (Localization.Away h)
+    (Localization.Away h) (integralClosure B L))
 
 omit [IsNoetherianRing R₀] [Algebra.Smooth R₀ B] [IsNoetherianRing B] in
 include Bk in
@@ -243,5 +271,34 @@ theorem exists_etale_integralClosure_of_two_le_height (ε : B →ₐ[R₀] R₀)
   have hE' : Algebra.Etale R (R ⊗[B] T₀) := .of_equiv e₀.symm
   have hF' : Module.Finite R (R ⊗[B] T₀) := .equiv e₀.symm.toLinearEquiv
   exact Algebra.exists_etale_integralClosure_of_etale_localization (R := R₀) (Bk := Bk) P hE' hF'
+
+include Bk in
+/-- Variant of `RingTheory.DepthTwo.exists_etale_integralClosure_of_two_le_height` whose
+hypothesis on the strict generizations is the étaleness of the integral closure of some
+localization `B' = B[1/h]` in `L' = L[1/h]`, which is the form in which it comes from the
+normalization of a scheme; finiteness and the rank bound follow from
+`RingTheory.DepthTwo.finite_rankAtStalk_le_of_etale`. -/
+theorem exists_etale_integralClosure_of_two_le_height' [Algebra.Etale Bk L] (ε : B →ₐ[R₀] R₀)
+    (q : Ideal R₀) [q.IsPrime] (hq : 2 ≤ q.height) {k : ℕ}
+    (hrank : ∀ p, Module.rankAtStalk (R := Bk) L p ≤ k)
+    (H : ∀ Q : Ideal B, Q.IsPrime → Q ≤ q.comap ε → Q.comap (algebraMap R₀ B) ≠ q →
+      ∃ h ∉ Q, ∃ (B' L' : Type u) (_ : CommRing B') (_ : CommRing L') (_ : Algebra B B')
+        (_ : IsLocalization.Away h B') (_ : Algebra L L')
+        (_ : IsLocalization.Away (algebraMap B L h) L') (_ : Algebra B' L') (_ : Algebra B L')
+        (_ : IsScalarTower B B' L') (_ : IsScalarTower B L L'),
+        Algebra.Etale B' (integralClosure B' L'))
+    {K : Type u} [Field K] [Algebra R₀ K] [IsFractionRing R₀ K]
+    (φ : Fin k → (L →+* K))
+    (hφ : ∀ j, (φ j).comp (algebraMap B L) = (algebraMap R₀ K).comp ε.toRingHom)
+    (hφinj : Function.Injective φ) :
+    ∃ g ∉ q.comap ε, ∀ (B' L' : Type u) [CommRing B'] [CommRing L'] [Algebra B B']
+      [IsLocalization.Away g B'] [Algebra L L'] [IsLocalization.Away (algebraMap B L g) L']
+      [Algebra B' L'] [Algebra B L'] [IsScalarTower B B' L'] [IsScalarTower B L L'],
+      Algebra.Etale B' (integralClosure B' L') := by
+  refine exists_etale_integralClosure_of_two_le_height (Bk := Bk) ε q hq
+    (fun Q hQ hQP hQq ↦ ?_) φ hφ hφinj
+  obtain ⟨h, hh, B', L', _, _, _, _, _, _, _, _, _, _, hE⟩ := H Q hQ hQP hQq
+  have := etale_away_tensor_integralClosure (L := L) h B' L' hE
+  exact ⟨h, hh, this, finite_rankAtStalk_le_of_etale (R₀ := R₀) h hrank⟩
 
 end RingTheory.DepthTwo
