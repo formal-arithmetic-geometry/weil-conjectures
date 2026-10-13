@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "For $R$-linear $k:Q\\to Q'$ and $h:Q'\\to Q''$, the maps $(h\\circ k)_e$ and $h_e\\circ k_e$ both send $q/e^n$ to $h(k(q))/e^n$; likewise $(h+h')_e$ and $h_e+h'_e$ send it to $(h(q)+h'(q))/e^n$, and $(\\mathrm{id}_Q)_e(q/e^n)=q/e^n$. Every element of $Q_e$ is such a fraction, so the three maps in (1) are equal.",
+   "text": "Use Mathlib IsLocalizedModule.map_comp' for composition, linearity of IsLocalizedModule.map for addition, and IsLocalizedModule.map_id for the identity, specialized to the powers of e.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
@@ -45,8 +45,9 @@
    }
   },
   {
-   "text": "For an $S$-module $Q$, multiplication $m_s:q\\mapsto sq$ is $R$-linear since the images of $R$ commute with $s$. The identities $m_1=\\mathrm{id}$, $m_{s+t}=m_s+m_t$ and $m_{st}=m_s\\circ m_t$ remain true after localization by the preceding step. They therefore define an $S$-module structure on $Q_e$, with $s(q/e^n)=(sq)/e^n$. If $s=\\varphi(r)$, this is the original $R$-action on fractions, so its restricted $R$-module structure is unchanged; $q\\mapsto q/1$ is $S$-linear by the same formula. For an $S$-linear $h:Q\\to Q'$, $h_e(s(q/e^n))=h(sq)/e^n=s(h(q)/e^n)$, proving the last assertion of (1).",
+   "text": "The defining theorem exists_localized_s_module of [def-weil-pbc-formal-glueing-data] specifies the chosen S-action on every fraction. This immediately gives the fraction formula and S-linearity of the localization map. Induction on fractions, LocalizedModule.smul'_mk, and h.map_smul prove respectively restriction to the given R-action and S-linearity of the localized map, including unequal module universes.",
    "uses": [
+    "def-weil-pbc-formal-glueing-data",
     "def-weil-pbc-module-localization",
     "def-weil-pbc-module-localization-away"
    ],
@@ -57,7 +58,7 @@
    }
   },
   {
-   "text": "The element $f$ acts bijectively on $(P_g)_f$ by its outer localization. Multiplication by $g$ is already invertible on $P_g$, and localizing its inverse as an $R$-linear map gives an inverse to multiplication by $g$ on $(P_g)_f$, by the composition and identity formulas of step 1. Hence both $f$ and $g$ act bijectively on $(P_g)_f$.",
+   "text": "Mathlib IsLocalizedModule.map_units gives bijectivity of f on the outer localization and of g on P_g. Localize multiplication by g using IsLocalizedModule.map_injective and map_surjective; the map formula on fractions identifies this localized map with scalar multiplication by g, proving its bijectivity on (P_g)_f.",
    "uses": [
     "def-weil-pbc-module-localization-away",
     "def-weil-pbc-module-localization"
@@ -69,8 +70,9 @@
    }
   },
   {
-   "text": "Compose $P\\to P_g\\to(P_g)_f$. Since $f$ acts bijectively on its target, Lemma 07K0's universal property gives a unique $R$-linear map $u:P_f\\to(P_g)_f$ taking $p/1$ to $(p/1)/1$; its fraction formula is $u(p/f^a)=(p/1)/f^a$. Since $g$ also acts bijectively on the target, the same property extends $u$ uniquely to $\\sigma^P_{f,g}:(P_f)_g\\to(P_g)_f$, with $\\sigma^P_{f,g}((p/f^a)/g^b)=(p/g^b)/f^a$. Any other map with the stated values on $((p/1)/1)$ first agrees with $u$ on $P_f$, then agrees with this extension on $(P_f)_g$, so the asserted uniqueness holds.",
+   "text": "The defining theorem exists_swap of [def-weil-pbc-formal-glueing-data] supplies the values on ((p/1)/1) and uniqueness of the chosen swap. To prove the fraction formula, apply injectivity of multiplication by f^a and g^b in the target. Move scalars through the R-linear swap and cancel both denominators with LocalizedModule.mk_cancel, reducing both sides to the specified value on ((p/1)/1).",
    "uses": [
+    "def-weil-pbc-formal-glueing-data",
     "def-weil-pbc-module-localization-away",
     "def-weil-pbc-module-localization"
    ],
@@ -81,9 +83,11 @@
    }
   },
   {
-   "text": "Interchanging $f$ and $g$ in step 4 constructs $\\sigma^P_{g,f}$. Their two composites send each $((p/f^a)/g^b)$ and $((p/g^b)/f^a)$ back to itself by the displayed fraction formula. Such fractions exhaust the respective iterated localizations, so the maps are inverse isomorphisms, proving (2). This also covers $f=0$, $g=0$, or a zero localization: the same universal property and formulas apply.",
+   "text": "The two composites with the reverse swap fix ((p/1)/1), using the chosen swaps' defining formulas. Apply IsLocalizedModule.ext successively to the outer and inner localization, since both relevant scalars act bijectively on the target, to show the composites equal the identities. The argument requires no nonzero denominator assumption.",
    "uses": [
-    "def-weil-pbc-module-localization-away"
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
@@ -92,10 +96,12 @@
    }
   },
   {
-   "text": "Tensor the localization map $P\\to P_f$ with $S$ to obtain the $R$-linear map $t:P\\otimes_RS\\to P_f\\otimes_RS$, $p\\otimes s\\mapsto(p/1)\\otimes s$. Multiplication by $f$ is invertible on $P_f$ and hence on its tensor product with $S$ (its inverse tensored with the identity is inverse there). Lemma 07K0 therefore extends $t$ uniquely to an $R$-linear map $c^P_f:(P\\otimes_RS)_f\\to P_f\\otimes_RS$. The extension formula gives $c^P_f((p\\otimes s)/f^e)=(p/f^e)\\otimes s$. Pure tensors generate $P\\otimes_RS$, and every localized element has a fraction representative, so this formula determines the extension and its values on $(p\\otimes s)/1$ prove the uniqueness asserted in (3). By the $S$-module structure in step 2, both $c^P_f(s'((p\\otimes s)/f^e))$ and $s'c^P_f((p\\otimes s)/f^e)$ equal $(p/f^e)\\otimes s's$; additivity and generation by localized pure tensors prove $S$-linearity.",
+   "text": "Apply IsLocalizedModule.rTensor from [lem-weil-pbc-localization-tensor-over-base] to P -> P_f and the factor S. Tensor commutativity on the source and target, followed by the identity equivalence between the natural R-action and the R-action restricted through phi, makes the map t = restrictMap phi (extendMap phi (mkLinearMap P)) a localization map. Its map_units gives bijectivity of f on S tensor P_f. The defining theorem exists_compare of [def-weil-pbc-formal-glueing-data] specifies compare composed with the localization map as t. Evaluating this equation on pure tensors gives the denominator-one formula. Injectivity of multiplication by f^n and cancellation of denominators give the full fraction formula. TensorProduct.induction_on extends prescribed pure-tensor values to the composition equation, and exists_compare uniqueness gives uniqueness of the map. Its S-linearity is the existing compare_smul theorem of the same definition module.",
    "uses": [
+    "def-weil-pbc-formal-glueing-data",
     "def-weil-pbc-module-localization-away",
-    "def-weil-module-base-change"
+    "def-weil-module-base-change",
+    "lem-weil-pbc-localization-tensor-over-base"
    ],
    "elementary": false,
    "source": {
@@ -104,8 +110,9 @@
    }
   },
   {
-   "text": "The localization-after-tensor theorem [lem-weil-pbc-localization-tensor-over-base], applied with $A=R$, $M=P$, $T=\\{1,f,f^2,\\dots\\}$ and $N=S$, says that $t$ is a localization at the powers of $f$ and that its induced $R$-linear map $(P\\otimes_RS)_f\\to P_f\\otimes_RS$ is an isomorphism with precisely the formula of step 6. By the uniqueness in step 6 this induced map is $c^P_f$. Since $c^P_f$ is $S$-linear, its inverse is $S$-linear as well: for $y=c^P_f(x)$, $(c^P_f)^{-1}(sy)=(c^P_f)^{-1}(c^P_f(sx))=sx$. Thus $c^P_f$ is an $S$-module isomorphism.",
+   "text": "Since both the standard localization map and t are localization maps, IsLocalizedModule.linearEquiv gives an R-linear equivalence E between their codomains. Its values on the original module and the defining composition equation of compare imply E.toLinearMap = compare by IsLocalizedModule.ext. Transport E.bijective across this equality to conclude bijectivity of compare. Combined with its S-linearity, this proves the canonical S-module isomorphism.",
    "uses": [
+    "def-weil-pbc-formal-glueing-data",
     "lem-weil-pbc-localization-tensor-over-base",
     "def-weil-pbc-module-localization-away"
    ],
@@ -118,14 +125,15 @@
  ],
  "proof_deps": [
   "def-weil-pbc-module-localization",
+  "def-weil-pbc-formal-glueing-data",
   "def-weil-pbc-module-localization-away",
   "def-weil-module-base-change",
   "lem-weil-pbc-localization-tensor-over-base"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "R2 stage 3",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Remark 05EL (remark-glueing-data) supplies the canonical maps without a proof; the argument expands them with Algebra Lemma 07K0 (lemma-universal-property-localization-module), Lemma 00DK (lemma-tensor-localization), and Lemma 00D2 (lemma-tensor-with-bimodule)"
+  "place": "Remark 05EL, canonical maps clauses (1)-(3); Algebra 07JZ, 07K0 and 00DK. Lean proof uses Mathlib localization functoriality, localization under tensor products, and the defining uniqueness theorems already stated in FormalGlueingData."
  },
  "mathlib_searches": [
   {
@@ -238,5 +246,15 @@
   "group": "F1",
   "result": "pass",
   "note": "(1) functoriality comp/add/id via IsLocalizedModule.map on arbitrary R-modules; localizedSModule fraction formula s(q/e^n)=(sq)/e^n, restricted R-action, mk S-linear, h_e S-linear; (2) f,g bijective on (P_g)_f, swap f g : (P_f)_g->(P_g)_f fraction formula, iff-uniqueness on (p/1)/1, swap g f two-sided inverse; (3) f bijective on S⊗P_f, compare (s⊗p)/f^n formula, iff-uniqueness on pure tensors /1, S-linear for localizedSModule, bijective; reuses landed FormalGlueingData swap/compare/localizedSModule (no redefinition); #check names resolve to FormalGlueing.*; no hollow hyps, universes independent"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T082409-L-1646257",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
