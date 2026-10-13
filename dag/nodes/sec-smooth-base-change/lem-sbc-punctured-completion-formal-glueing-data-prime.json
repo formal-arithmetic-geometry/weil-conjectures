@@ -1,0 +1,161 @@
+{
+ "id": "lem-sbc-punctured-completion-formal-glueing-data-prime",
+ "kind": "statement",
+ "title": "Affine chart construction with local matching compatibility",
+ "statement": "Let A be a commutative local ring, C its maximal-ideal adic completion [def-weil-pbc-adic-completion], U its punctured spectrum, q:Y→U and s:E→Spec C finite [def-weil-finite-integral-morphism], and D their supplied overlap identification [def-sbc-punctured-completion-matching-sections]. Let f:Fin t→A generate the maximal ideal. Give Gamma(E,top) its structural C-module action. There exist formal module glueing data X [def-weil-pbc-formal-glueing-data], a C-linear equivalence e:X.M′→Gamma(E,top), opens V_i of Y covering Y, and functions r_i:H0(X)→Gamma(Y,V_i) [def-weil-pbc-formal-glueing-H0]. For every h in H0(X), the sections r_i(h) agree on pairwise intersections. On O=Y×_U(Spec C restricted to U), with first projection p, p.app(V_i)(r_i(h)) equals the restriction to p inverse-image V_i of D.toCompleted.appTop(e(h.prime)). This is only a local chart construction: no global section or matching-ring function is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs (affine charts and overlap data); Tag 05EL, definition of H0. https://stacks.math.columbia.edu/tag/0BLH and https://stacks.math.columbia.edu/tag/05EL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-formal-glueing-H0"
+ ],
+ "proof": [
+  {
+   "text": "Take V_i=(q followed by U inclusion) inverse-image D(f_i). The generators cover U, hence these cover Y, even for the empty family. Finiteness makes these charts and E affine. Take their actual section modules and structural scalar actions, and use the supplied overlap identification and affine localization/base-change isomorphisms for alpha_i and alpha_ij. Restriction identities on double and triple intersections give alpha_smul, square and cocycle. The prime identification is the identity on completed sections.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map a compatible H0 family to its actual chart sections. The chart/chart equations are precisely the sheaf pairwise restriction equations; the prime/chart equations become the displayed equality on each inverse-image chart in the overlap. This proves local compatibility only, without gluing a global section.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-H0"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-formal-glueing-H0",
+  "def-weil-pbc-formal-glueing-data"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "D3",
+  "document": "Stacks Project",
+  "place": "Tags 0BLH (first two proof paragraphs) and 05EL (H0 equations); local chart formulation by the second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-14",
+   "results": "TopCat.Sheaf.existsUnique_gluing",
+   "verdict": "Sheaf unique gluing and the ring pullback construction close the global descent step, but do not construct formal module data from affine charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf compatible local sections glue uniquely over an open cover",
+   "date": "2026-10-14",
+   "results": "TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Presheaf.IsSheafUniqueGluing, TopCat.Presheaf.IsSheaf.section_ext, AlgebraicGeometry.Scheme.OpenCover.ext_elem, TopCat.Presheaf.IsGluing",
+   "verdict": "Sheaf unique gluing and the ring pullback construction close the global descent step, but do not construct formal module data from affine charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible sections of a sheaf on an open cover glue uniquely",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "matchingRing|FormalGlueing",
+   "date": "2026-10-14",
+   "results": "No Mathlib matches.",
+   "verdict": "Sheaf unique gluing and the ring pullback construction close the global descent step, but do not construct formal module data from affine charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine charts with completed overlap isomorphism give module gluing data and compatible local sections",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.Scheme.Cover.gluedCover_J, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+   "verdict": "Sheaf unique gluing and the ring pullback construction close the global descent step, but do not construct formal module data from affine charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackConeIsLimit\"",
+   "date": "2026-10-14",
+   "results": "CommRingCat.pullbackConeIsLimit, TopCat.pullbackConeIsLimit, CategoryTheory.GlueData.vPullbackConeIsLimitOfMap, AlgebraicGeometry.LocallyRingedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit",
+   "verdict": "Sheaf unique gluing and the ring pullback construction close the global descent step, but do not construct formal module data from affine charts."
+  },
+  {
+   "tool": "grep",
+   "query": "rg alpha_overlap|exists.*Data|IsCompatible on lean/Sheaf/RingTheory/FormalGlueing*; rg exists_formalGlueingData_prime|exists_formalGlueingData_matching_map on lean and upstream WeilConjectures",
+   "results": "Existing formal algebra helpers manipulate given Data. No existing finite-scheme chart construction or local matching family theorem was found.",
+   "verdict": "No duplicate of the local construction.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The completion-glueing comparison used to extend a finite model across a punctured local spectrum; Finite affine charts give gluing data and compatible matching sections",
+   "via": [
+    "lem-sbc-punctured-completion-formal-glueing-data",
+    "lem-sbc-completed-matching-ring-map-residue-quotient-surjective",
+    "lem-sbc-completed-matching-ring-map-residue-lift",
+    "lem-sbc-completed-matching-ring-map-surjective",
+    "def-sbc-completed-matching-ring-map",
+    "lem-sbc-punctured-completion-matching-completed-iso",
+    "lem-sbc-punctured-completion-finite-gluing",
+    "lem-sbc-depth-three-punctured-finite-flat-model",
+    "lem-sbc-depth-three-punctured-etale-lifting",
+    "lem-sbc-regular-local-punctured-etale-purity",
+    "lem-sbc-regular-codimension-two-finite-etale-model",
+    "lem-sbc-regular-codimension-two-finite-flat-stalk",
+    "lem-sbc-regular-codimension-two-etale-extension",
+    "lem-sbc-regular-integral-divisor-etale-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingPrime",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionFormalGlueingPrime.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_formalGlueingData_prime",
+  "statement": "theorem exists_formalGlueingData_prime\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A)\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (f : Fin t → A)\n    (hgen : Ideal.span (Set.range f) = IsLocalRing.maximalIdeal A) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let g : CommRingCat.of C ⟶ Γ(E, ⊤) := (ΓSpecIso (.of C)).inv ≫ s.appTop\n    letI : Module C Γ(E, ⊤) := Module.compHom _ g.hom\n    let O := pullback q (completionSpecMap A ∣_ U)\n    let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ f) (e : X.M' ≃ₗ[C] Γ(E, ⊤))\n      (V : Fin t → Y.Opens), ⊤ ≤ iSup V ∧\n      ∃ (r : ∀ i, FormalGlueing.h0 φ f X → Γ(Y, V i)),\n        (∀ h, Y.presheaf.IsCompatible V (fun i ↦ r i h)) ∧\n        ∀ h i, p.app (V i) (r i h) =\n          O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V i ≤ ⊤)).op\n            (D.toCompleted.appTop (e h.val.1))",
+  "by": "D3",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFormalGlueingData",
+  "date": "2026-10-14",
+  "group": "D3"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T190136-L-3214657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
