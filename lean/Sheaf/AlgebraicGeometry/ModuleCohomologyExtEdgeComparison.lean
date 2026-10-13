@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge
 
 /-! # Module/Ext comparisons compatible with the direct-image edge map
 
@@ -78,6 +79,12 @@ theorem exists_moduleCohomology_ext_edge_comparison
               ((SheafOfModules.toSheaf Y.ringCatSheaf).obj
                 ((pushforward (baseChangeFst (S := B) h)).obj F)) p
               (E ((pushforward (baseChangeFst (S := B) h)).obj F) x))) := by
-  sorry
+  refine ⟨fun M ↦ moduleCohomologyExtResolutionEquiv Y M p,
+    fun M ↦ moduleCohomologyExtResolutionEquiv (baseChangedScheme (S := B) h) M p,
+    ?_, ?_, ?_⟩
+  · exact moduleCohomologyExtResolutionEquiv_naturality Y p
+  · exact moduleCohomologyExtResolutionEquiv_naturality (baseChangedScheme (S := B) h) p
+  · intro F x
+    exact moduleCohomologyExtResolutionEquiv_edge (baseChangeFst (S := B) h) F p x
 
 end AlgebraicGeometry.Scheme.Modules
