@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import Mathlib.Algebra.BigOperators.Pi
+import Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface
 
 @[expose] public section
 
@@ -19,6 +19,31 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem amitsurMap_tprod {A B : Type u}
+    [CommRing A] [CommRing B] [Algebra A B] (n : ℕ) (j : Fin (n + 2)) (b : Fin (n + 1) → B) :
+    Algebra.TensorProduct.amitsurMap A B j.succAbove (PiTensorProduct.tprod A b) =
+      PiTensorProduct.tprod A (j.insertNth 1 b) := by
+  have hp (x : Fin (n + 1) → B) :
+      PiTensorProduct.tprod A x =
+        ∏ i, PiTensorProduct.singleAlgHom (R := A) (A := fun _ ↦ B) i (x i) := by
+    simp only [PiTensorProduct.singleAlgHom_apply]
+    rw [← PiTensorProduct.tprod_prod]
+    congr 1
+    exact (Finset.univ_prod_mulSingle x).symm
+  rw [hp, map_prod]
+  simp only [← AlgHom.comp_apply, Algebra.TensorProduct.amitsurMap_comp_singleAlgHom]
+  simp only [PiTensorProduct.singleAlgHom_apply]
+  rw [← PiTensorProduct.tprod_prod]
+  congr 1
+  funext k
+  refine Fin.succAboveCases j ?_ (fun i ↦ ?_) k
+  · simp
+  · simp [Pi.mulSingle_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Fixed-degree pure-tensor coface compatibility.
 Source: Stacks Project, Tag 03P2, affine-case tensor differential formula.
 (blueprint: new-etale-affine-singleton-tensor-pure-coface-fixed)
@@ -45,7 +70,31 @@ theorem singletonTensorDegreeComparison_pure_coface_fixed
         ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)
           Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j) ≫ (e (n + 1)).hom)
             (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) := by
-  sorry
+  classical
+  let : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
+  have hr : ((singletonTensorForget U.left).map
+      ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)
+        Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j))
+      (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) =
+      ULift.up (m ⊗ₜ[Γ(U.left, ⊤)]
+        PiTensorProduct.tprod Γ(U.left, ⊤) (j.insertNth 1 b)) := by
+    apply ULift.ext
+    change ((Algebra.TensorProduct.amitsurCosimplicialObject _ _ _).δ j).hom
+      (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b) = _
+    erw [Algebra.TensorProduct.amitsurCosimplicialObject_δ_hom,
+      LinearMap.lTensor_tmul, AlgHom.toLinearMap_apply, amitsurMap_tprod]
+  change (singletonTensorCechCosimplicial X F U W g).δ j
+    ((e n).hom (ULift.up
+      (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b))) =
+    (e (n + 1)).hom (((singletonTensorForget U.left).map
+      ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)
+        Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j))
+      (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)))
+  rw [hr]
+  apply singletonTensorCech_normalized_coface X F U W g n j (e n).hom
+    (e (n + 1)).hom ?_ ?_ m b
+  · exact he n
+  · exact he (n + 1)
 
 end
 end AlgebraicGeometry.Scheme

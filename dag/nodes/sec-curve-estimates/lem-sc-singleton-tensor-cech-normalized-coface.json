@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-singleton-tensor-cech-normalized-coface",
+ "kind": "statement",
+ "title": "Geometric Čech coface of normalized singleton tensor sections",
+ "statement": "Let X be a scheme [def-pc-scheme], F a quasi-coherent X-module [def-sc-etale-qcoherent-module], U and W étale X-objects, and g:W→U. Put A=Γ(U,O), B=Γ(W,O), and M=Γ(U,U*F). In degrees n and n+1 let f and f' be homomorphisms from the lifted tensor modules M tensor_A B^{tensor(n+1)} and M tensor_A B^{tensor(n+2)} to the singleton tensor-section Čech terms. Assume both maps have the pure-tensor normalization [new-etale-affine-singleton-tensor-degree-comparison-hom-normalization]: evaluation at the unique outer tuple is the product of the projection pullbacks of b(k), acting on the restriction of m from U. For every j∈Fin(n+2), m∈M, and b:Fin(n+1)→B, the geometric Čech coface δ_j sends f(ULift(m tensor tprod(b))) to f'(ULift(m tensor tprod(j.insertNth 1 b))). Neither f nor f' is assumed invertible. No assertion about the Amitsur coface map is made.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, Theorem 59.22.4, affine singleton Čech/Amitsur identification; Tag 03DR, equation 35.8.0.1"
+ },
+ "proof": [
+  {
+   "text": "Let P and Q be the categorical products of n+1 and n+2 copies of W→U. The product map p:Q→P omits j, and p followed by the k-th projection is the j.succAbove(k)-th projection, by Pi.lift_π. The formal-coproduct Čech face has index map precomposition with j.succAbove and component p. Its presheaf map is a product lift of projection followed by section restriction. Evaluating at the constant-zero tuple uses Pi.lift_π and gives restriction along p of the evaluated input section.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply hf to the input m tensor tprod(b). By the semilinearity clause of the restriction theorem, restricting this section pulls back the product of projection functions as a scalar, and restricts the coefficient section. The composition clause and p's over-U triangle identify the restricted coefficient with direct restriction from U to Q. Ring-map preservation of products and p's projection equations identify the scalar with the product of the retained Q-projection functions.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hf' to m tensor tprod(j.insertNth 1 b). Its evaluated scalar product has j-th factor the pullback of 1, hence 1. Fin.prod_univ_succAbove and insertNth at j.succAbove identify the other factors with those in the preceding step. Thus evaluated outputs agree. The outer product index Fin(n+2)→Fin1 is a singleton, so its projection is the hom of productUniqueIso and is injective. ULift.down is injective too. Therefore the Čech coface of f's pure value is f' of the inserted-unit pure value. When n=0 there are the two usual projection restrictions; zero section groups obey the same equations.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Expanded the geometric restriction part implicit in Tag 03P2 using Tag 03DR; both pages read online on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech coface restriction normalized coefficient sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech coface restriction normalized coefficient sections inserts unit into product of functions",
+   "results": "Eight unrelated hits (Profinite.NobelingProof and InverseSystem).",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pi.lift_π\"",
+   "results": "Pi.lift_π, Pi.lift_π_assoc and Pi.lift_π_apply give categorical projection calculations, not the geometric normalized coface statement.",
+   "date": "2026-10-13",
+   "verdict": "tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*coface|coface.*normal|etaleTensorSectionsRestriction",
+   "results": "No Mathlib match through msearch; direct library rg found the existing upper pure-coface statement, which depends on this item, and EtaleTensorSections restriction semilinearity/composition.",
+   "date": "2026-10-13",
+   "verdict": "no independent complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaceFixed",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Affine singleton Čech/Amitsur identification: the geometric coface restriction calculation, before alternating differentials.",
+   "via": [
+    "new-etale-affine-singleton-tensor-pure-coface-fixed",
+    "new-etale-affine-singleton-tensor-pure-cofaces",
+    "new-etale-affine-singleton-tensor-amitsur",
+    "new-etale-affine-tensor-cech-amitsur-comparison",
+    "new-etale-affine-tensor-cech-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingletonTensorCechNormalizedCoface.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonTensorCech_normalized_coface",
+  "statement": "theorem singletonTensorCech_normalized_coface\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))\n    (f : (singletonTensorAmitsur X F U W g).X n ⟶\n      (singletonTensorCech X F U W g).X n)\n    (f' : (singletonTensorAmitsur X F U W g).X (n + 1) ⟶\n      (singletonTensorCech X F U W g).X (n + 1))\n    (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f)\n    (hf' : IsSingletonTensorDegreeComparisonHom X F U W g (n + 1) f')\n    (m : Γ((Modules.tensorPullback U.hom).obj F, ⊤))\n    (b : Fin (n + 1) → Γ(W.left, ⊤)) :\n    letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra\n    (singletonTensorCechCosimplicial X F U W g).δ j\n      (f (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b))) =\n    f' (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)]\n      PiTensorProduct.tprod Γ(U.left, ⊤) (j.insertNth 1 b)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T054240-L-450278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T054240-L-450278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
