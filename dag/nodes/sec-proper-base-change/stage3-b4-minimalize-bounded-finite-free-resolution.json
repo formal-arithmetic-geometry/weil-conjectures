@@ -35,37 +35,20 @@
  },
  "proof": [
   {
-   "text": "Starting from this bounded finite free resolution, if some differential $\\varphi_i:F_i\\to F_{i-1}$ for $1\\le i\\le d$ has a matrix coefficient that is a unit, apply [lem-weil-pbc-free-complex-unit-entry-splits]. After changing bases, the underlying complex is the direct sum of a smaller finite free complex and the identity complex $R\\xrightarrow{1}R$ in degrees $i$ and $i-1$. The augmentation $F_0\\to M$ vanishes on that identity summand: when $i=1$, its $R$ in degree $0$ is the image of $\\varphi_1$ and $\\varepsilon\\varphi_1=0$; when $i>1$, the identity summand has no degree-$0$ term. Thus the augmentation factors through the smaller complex. Since the identity summand is exact, the smaller augmented complex stays exact.",
+   "text": "Use strong induction on the sum of Module.finrank R of the terms in degrees 0 through d, generalizing the resolution. If it is already minimal, return it. Otherwise apply the single-cancellation rank-decrease lemma, and apply the induction hypothesis to the smaller bounded finite free resolution.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits",
-    "def-weil-pbc-exact-sequence"
+    "stage3-s2-bounded-resolution-cancellation-decreases-rank"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), statement and proof, lines 24608--24650; its application in the proof of Lemma Tag 00OA, lines 26989--26994"
-   }
-  },
-  {
-   "text": "Repeat the preceding cancellation while a unit coefficient occurs in any differential. Each cancellation decreases the sum of the finite ranks of the two affected terms, so the process terminates. In the terminal complex every matrix coefficient of every differential is a nonunit; in a local ring every nonunit belongs to $\\mathfrak m$, hence $\\varphi_i(F_i)\\subseteq\\mathfrak mF_{i-1}$ for all $1\\le i\\le d$. The resulting exact sequence is the required minimal finite free resolution.",
-   "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00OA (lemma-length-resolution-residue-field), lines 26989--26994, using Lemma Tag 00MT"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-complex-unit-entry-splits",
-  "def-weil-pbc-exact-sequence"
+  "stage3-s2-bounded-resolution-cancellation-decreases-rank"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00MT, applied in the proof of Tag 00OA to remove trivial summands"
+  "place": "Tag 00MT applied in Tag 00OA; termination made explicit by strong induction on total rank"
  },
  "mathlib_searches": [
   {
@@ -162,12 +145,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T230752-L-1907076",
+  "landing": "20261013T004028-L-2492316",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

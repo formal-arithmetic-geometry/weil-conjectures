@@ -8,7 +8,8 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.Algebra.Homology.UnitEntrySplits
+import Sheaf.RingTheory.BoundedResolutionCancellationDecreasesRank
+import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-! Minimalization of bounded finite free resolutions.
 (blueprint: stage3-b4-minimalize-bounded-finite-free-resolution) -/
@@ -50,5 +51,17 @@ theorem minimalize_bounded_finite_free_resolution {R : Type u} [CommRing R]
       (∀ i : ℕ, i < d →
         LinearMap.range (Q.complex.d (i + 1) i).hom ≤
           IsLocalRing.maximalIdeal R • (⊤ : Submodule R (Q.complex.X i))) := by
-  sorry
+  classical
+  let rankSum (P : ProjectiveResolution M) : ℕ :=
+    ∑ i : Fin (d + 1), Module.finrank R (P.complex.X i.val)
+  generalize hn : rankSum P = n
+  induction n using Nat.strong_induction_on generalizing P with
+  | h n ih =>
+    by_cases hminimal : ∀ i : ℕ, i < d →
+        LinearMap.range (P.complex.d (i + 1) i).hom ≤
+          IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X i))
+    · exact ⟨P, hzero, hfree, hminimal⟩
+    · obtain ⟨P', hzero', hfree', hlt⟩ :=
+        bounded_resolution_cancellation_decreases_rank M d P hzero hfree hminimal
+      exact ih (rankSum P') (by simpa only [← hn] using hlt) P' hzero' hfree' rfl
 end ModuleCat

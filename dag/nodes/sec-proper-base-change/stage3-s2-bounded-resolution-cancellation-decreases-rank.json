@@ -1,0 +1,123 @@
+{
+ "id": "stage3-s2-bounded-resolution-cancellation-decreases-rank",
+ "kind": "statement",
+ "title": "One cancellation decreases the total rank of a bounded free resolution",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], M an R-module and P an augmented projective resolution of M [def-weil-pbc-finite-global-dimension; def-weil-pbc-exact-sequence] with finite free terms [def-weil-finitely-generated-module; def-weil-pbc-free-module], zero above a natural degree d. Suppose not every differential from degree i+1 to i, for i<d, has image in the maximal ideal times P_i. Then there is another augmented projective resolution P′ of M, finite free and zero above d, whose sum of Module.finrank R over degrees 0 through d is strictly smaller than that of P. No minimality is asserted for P′.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MT, applied in the proof of Tag 00OA to remove trivial summands"
+ },
+ "proof": [
+  {
+   "text": "Choose finite bases. If all differential coefficients lie in the maximal ideal, expansion in the source basis proves the excluded containment. Thus some coefficient is a unit. Extend by zero to integer degrees and apply the unit-entry splitting theorem.",
+   "uses": [
+    "lem-weil-pbc-free-complex-unit-entry-splits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the complementary complex back to natural degrees. Its augmentation is the restriction of the original augmentation, which annihilates the removed identity summand. The contractible identity summand contributes no homology; hence the complement remains an augmented exact projective resolution. Its terms are finite free and zero above d.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two affected finite ranks each decrease by one; all other ranks agree. Both affected degrees occur in Fin(d+1), so the displayed total rank strictly decreases.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-complex-unit-entry-splits",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00MT, applied in the proof of Tag 00OA to remove trivial summands"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Nonminimal bounded free resolution over a local ring admits cancellation reducing total rank",
+   "results": "Internal Server Error; unavailable, not a no-match verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting a contractible summand off a finite free projective resolution decreases the sum of the ranks",
+   "results": "Retract.projectiveDimension_le and ModuleCat.free_shortExact_finrank_add are ingredients only; neither constructs this complementary augmented resolution.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveResolution\"",
+   "results": "Generic projective resolution constructors and self resolution only; no cancellation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*[Rr]esolution|cancel.*[Rr]esolution|nonminimal.*resolution",
+   "results": "msearch found zero Mathlib hits. Local rg in Mathlib/Algebra/Homology, Mathlib/RingTheory, lean/WeilConjectures/RingTheory and lean/Sheaf/RingTheory finds only the item and its callers. Also inspected UnitEntrySplits and FiniteFreeSplitTopCancellation: the latter concerns a split top cochain differential and preserves finite freeness by adding a contractible summand, not this rank-decreasing augmented chain resolution step.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MinimalizeBoundedFiniteFreeResolution",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-b4-minimalize-bounded-finite-free-resolution",
+   "place": "one cancellation and preservation of augmentation, without iteration"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.BoundedResolutionCancellationDecreasesRank",
+  "file": "lean/Sheaf/RingTheory/BoundedResolutionCancellationDecreasesRank.lean",
+  "declaration": "ModuleCat.bounded_resolution_cancellation_decreases_rank",
+  "statement": "theorem bounded_resolution_cancellation_decreases_rank {R : Type u} [CommRing R]\n    [IsNoetherianRing R] [IsLocalRing R] (M : ModuleCat.{max u v} R)\n    (d : ℕ) (P : ProjectiveResolution M)\n    (hzero : ∀ i : ℕ, d < i → IsZero (P.complex.X i))\n    (hfree : ∀ i : ℕ, Module.Finite R (P.complex.X i) ∧ Module.Free R (P.complex.X i))\n    (hnot : ¬ ∀ i : ℕ, i < d →\n      LinearMap.range (P.complex.d (i + 1) i).hom ≤\n        IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X i))) :\n    ∃ P' : ProjectiveResolution M,\n      (∀ i : ℕ, d < i → IsZero (P'.complex.X i)) ∧\n      (∀ i : ℕ, Module.Finite R (P'.complex.X i) ∧ Module.Free R (P'.complex.X i)) ∧\n      (∑ i : Fin (d + 1), Module.finrank R (P'.complex.X i.val)) <\n        ∑ i : Fin (d + 1), Module.finrank R (P.complex.X i.val)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T004028-L-2492316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T004028-L-2492316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
