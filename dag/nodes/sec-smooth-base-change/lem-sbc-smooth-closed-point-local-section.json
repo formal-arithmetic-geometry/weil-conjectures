@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-smooth-closed-point-local-section",
+ "kind": "statement",
+ "title": "Flat local base change through a prescribed smooth closed-fibre point",
+ "statement": "Let $A$ be a Noetherian local ring [def-weil-pbc-noetherian-ring]. Let $q:L\\to\\operatorname{Spec}A$ be smooth [def-sbc-smooth-morphisms, def-weil-affine-spectrum] and let $x$ be a closed point of its closed fibre [def-pc-fibre-product, def-weil-pbc-scheme-conventions]. There are a Noetherian local ring $B$, a flat local ring homomorphism $\\varphi:A\\to B$ [def-weil-pbc-flat-ring-map], and a morphism $s:\\operatorname{Spec}B\\to L$ over $\\operatorname{Spec}A$, such that $s$ maps the closed point of $B$ to the image of $x$. The only point of $\\operatorname{Spec}B$ mapping to the closed point of $A$ is its closed point.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, residue extension and étale slice before the completion paragraph; Tags 07NE and 057G"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The smooth fibre is locally of finite type over the residue field. A closed point\ntherefore has finite residue extension. Tag 07NE realizes this extension by a finite flat\nlocal algebra A' over A. In the base-changed fibre choose the rational lift of x. Apply\nTag 057G to obtain an étale slice through this lift, then localize its affine coordinate\nring at the slice point to obtain B. The composite A -> B is flat and local. Both the\nfinite local extension and the localized étale extension have zero-dimensional closed\nfibre; hence the sole prime over the maximal ideal of A is the maximal ideal of B.\nThe map from the local slice to the original smooth scheme is s. The residue lift and\nthe localization send its closed point to the image of x. No open subset or depth\nhypothesis is involved.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "G1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, residue extension and étale slice before the completion paragraph; Tags 07NE and 057G"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth scheme closed fiber point flat power series chart through point",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; RingHom.Smooth.locally_isStandardSmooth; AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*power.series|power.series.*smooth|MvPowerSeries.*IsLocalHom",
+   "results": "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed point in the closed fiber of a smooth scheme acquires a section after a flat local extension of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion along a section of a smooth scheme is a power series ring and its closed fiber generic point maps to a generic point",
+   "results": "AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe; AlgebraicGeometry.Scheme.toSpecΓ_base; AlgebraicGeometry.Scheme.toSpecΓ_apply; AlgebraicGeometry.SpecToEquivOfLocalRing; AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint; AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk; AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(flat.*local|local.*flat)|completion.*section|section.*completion",
+   "results": "Mathlib/Topology/Algebra/LinearMapCompletion.lean; Mathlib/Topology/Algebra/LinearMapCompletion.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/Topology/UniformSpace/Completion.lean; Mathlib/Topology/UniformSpace/Completion.lean; Mathlib/RingTheory/MvPowerSeries/Equiv.lean; Mathlib/RingTheory/Smooth/Flat.lean; Mathlib/Analysis/InnerProductSpace/Completion.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.ClosedFiberPowerSeriesTest",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The local computation before the power-series purity argument: Tag 0EYB, residue extension and étale slice before the completion paragraph; Tags 07NE and 057G",
+   "via": [
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothClosedPointLocalSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_closed_point_local_section",
+  "statement": "theorem exists_smooth_closed_point_local_section\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (x : q.fiber (IsLocalRing.closedPoint A)) (hx : IsClosed ({x} : Set _)) :\n    ∃ (B : Type u) (_ : CommRing B) (_ : IsLocalRing B) (_ : IsNoetherianRing B),\n      ∃ (φ : A →+* B), IsLocalHom φ ∧ φ.Flat ∧\n        (∀ z, (Spec.map (CommRingCat.ofHom φ)) z = IsLocalRing.closedPoint A →\n          z = IsLocalRing.closedPoint B) ∧\n        ∃ (s : Spec (.of B) ⟶ L), s ≫ q = Spec.map (CommRingCat.ofHom φ) ∧\n          s (IsLocalRing.closedPoint B) = q.fiberι (IsLocalRing.closedPoint A) x",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T072348-L-1118824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T072348-L-1118824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

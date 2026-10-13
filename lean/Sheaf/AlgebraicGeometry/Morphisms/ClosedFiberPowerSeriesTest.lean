@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart
+import Sheaf.RingTheory.FlatLocalDepthFormula
 
 /-!
 # A flat power-series test through a closed boundary point
@@ -63,6 +66,51 @@ theorem exists_closed_fiber_power_series_test
           (∀ v, (Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) v ≠
             IsLocalRing.closedPoint B → t v ∈ U) ∧
           ∃ v, t v ∈ U ∧ v.asIdeal =
-            (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n)) := by sorry
+            (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n)) := by
+  obtain ⟨B, hB, hBl, hBn, φ, hφlocal, hφflat, hreflect, s, hs, hsx⟩ :=
+    exists_smooth_closed_point_local_section A q x hx
+  let := hB
+  let := hBl
+  let := hBn
+  let := hφlocal
+  obtain ⟨n, t, htflat, htq, hts, v, η, W, hv, htη, hW, hη⟩ :=
+    exists_smooth_section_power_series_chart A q B φ hφflat s hs
+  have hηU : q.fiberι (IsLocalRing.closedPoint A) η ∈ U := by
+    obtain ⟨z, hzW, hzU⟩ := hclosed.inter_open_nonempty W W.isOpen hW
+    exact (hη z hzW).mem_open (q.fiberι (IsLocalRing.closedPoint A) ⁻¹ᵁ U).isOpen hzU
+  have hvU : t v ∈ U := by rwa [htη]
+  have hn : 0 < n := by
+    by_contra h
+    have hn0 : n = 0 := Nat.eq_zero_of_not_pos h
+    subst n
+    have hvb : v = (Spec.map
+        (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin 0))))
+        (IsLocalRing.closedPoint B) := by
+      apply PrimeSpectrum.ext
+      rw [hv]
+      apply Ideal.comap_injective_of_surjective (MvPowerSeries.C (σ := Fin 0))
+        MvPowerSeries.C_surjective
+      rw [Ideal.comap_map_of_bijective _
+        ⟨MvPowerSeries.C_injective, MvPowerSeries.C_surjective⟩]
+      ext a
+      change a ∈ IsLocalRing.maximalIdeal B ↔
+        MvPowerSeries.constantCoeff (MvPowerSeries.C a) ∈ IsLocalRing.maximalIdeal B
+      rw [MvPowerSeries.constantCoeff_C]
+    exact hout (by rwa [hvb, hts, hsx] at hvU)
+  obtain ⟨_, hfibre, _, hdepthB⟩ := IsLocalRing.depth_eq_add_of_flat_local φ hφflat
+  let := hfibre
+  refine ⟨B, hB, hBl, hBn, ?_, n, hn, t, htflat, ?_, ?_, v, hvU, hv⟩
+  · rw [hdepthB]
+    exact hdepth.trans (le_add_of_nonneg_right bot_le)
+  · exact ⟨_, hts.trans hsx⟩
+  · intro w hw
+    apply haway
+    intro heq
+    have heq' : (Spec.map (CommRingCat.ofHom φ))
+        ((Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n)))) w) =
+          IsLocalRing.closedPoint A := by
+      rw [← Scheme.Hom.comp_apply, ← htq, Scheme.Hom.comp_apply]
+      exact heq
+    exact hw (hreflect _ heq')
 
 end AlgebraicGeometry.Scheme

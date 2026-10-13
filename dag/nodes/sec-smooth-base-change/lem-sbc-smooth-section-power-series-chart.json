@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-smooth-section-power-series-chart",
+ "kind": "statement",
+ "title": "A completed smooth section chart and a generic point of the original closed fibre",
+ "statement": "Let $A$ and $B$ be Noetherian local rings [def-weil-pbc-noetherian-ring], $\\varphi:A\\to B$ a flat local homomorphism [def-weil-pbc-flat-ring-map], and $q:L\\to\\operatorname{Spec}A$ smooth [def-sbc-smooth-morphisms]. Suppose $s:\\operatorname{Spec}B\\to L$ lies over $\\operatorname{Spec}\\varphi$ [def-weil-affine-spectrum]. There exist $n\\geq0$ and a flat morphism $t:\\operatorname{Spec}(B[[X_1,\\ldots,X_n]])\\to L$ [def-weil-flat-morphism] commuting with the maps to $\\operatorname{Spec}A$. Evaluation of the variables at zero induces an origin point over the closed point of $B$; its image under $t$ equals the image of that closed point under $s$. There are a point $v$ of this power-series spectrum whose prime ideal is $\\mathfrak m_B B[[X_1,\\ldots,X_n]]$, a point $\\eta$ of the closed fibre of $q$ [def-pc-fibre-product], and a nonempty open $W$ in that fibre [def-weil-pbc-scheme-conventions], such that $t(v)$ is the image of $\\eta$ and $\\eta$ specializes to every point of $W$. Specialization means containment in the closure of the singleton.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, completion and image of the extended maximal ideal; Tags 05D5 and 00MB"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Base change q along Spec φ; the morphism s gives a section of that smooth scheme.\nChoose an affine chart containing its value at the closed point of B. Its inverse image\nunder the section is an open neighbourhood of the closed point of the local spectrum,\nso is all of Spec B. Thus the affine chart algebra has an augmentation to B. Its\nconormal module is finite projective, hence free over the local ring B. Tag 05D5\nidentifies completion along the augmentation ideal with B[[X_1,...,X_n]]. The chart\nalgebra is Noetherian, so completion is flat by 00MB. Compose with the affine chart\ninclusion and the flat base-change projection to get t. The augmentation gives the\nstated origin equality and the B-algebra structure gives the commuting square.\nThe ideal m_B B[[X]] is prime, since the quotient is the power-series domain over κ(B).\nIts point is generic in the completed closed fibre. Flatness of fibre completion and\nfield base change maps it to a generic point η of an irreducible component of the\noriginal smooth fibre. That fibre is locally Noetherian, so this component has a\nnonempty open W avoiding the other components. Every point of W specializes from η.\nThis argument includes n = 0 and assumes neither a dense open nor a depth bound.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "G1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, completion and image of the extended maximal ideal; Tags 05D5 and 00MB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth scheme closed fiber point flat power series chart through point",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; RingHom.Smooth.locally_isStandardSmooth; AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*power.series|power.series.*smooth|MvPowerSeries.*IsLocalHom",
+   "results": "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed point in the closed fiber of a smooth scheme acquires a section after a flat local extension of the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion along a section of a smooth scheme is a power series ring and its closed fiber generic point maps to a generic point",
+   "results": "AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe; AlgebraicGeometry.Scheme.toSpecΓ_base; AlgebraicGeometry.Scheme.toSpecΓ_apply; AlgebraicGeometry.SpecToEquivOfLocalRing; AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint; AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk; AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(flat.*local|local.*flat)|completion.*section|section.*completion",
+   "results": "Mathlib/Topology/Algebra/LinearMapCompletion.lean; Mathlib/Topology/Algebra/LinearMapCompletion.lean; Mathlib/NumberTheory/Padics/PadicNumbers.lean; Mathlib/Topology/UniformSpace/Completion.lean; Mathlib/Topology/UniformSpace/Completion.lean; Mathlib/RingTheory/MvPowerSeries/Equiv.lean; Mathlib/RingTheory/Smooth/Flat.lean; Mathlib/Analysis/InnerProductSpace/Completion.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.ClosedFiberPowerSeriesTest",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "The local computation before the power-series purity argument: Tag 0EYB, completion and image of the extended maximal ideal; Tags 05D5 and 00MB",
+   "via": [
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothSectionPowerSeriesChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_section_power_series_chart",
+  "statement": "theorem exists_smooth_section_power_series_chart\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (B : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B]\n    (φ : A →+* B) [IsLocalHom φ] (hflat : φ.Flat)\n    (s : Spec (.of B) ⟶ L) (hs : s ≫ q = Spec.map (CommRingCat.ofHom φ)) :\n    ∃ (n : ℕ) (t : Spec (.of (MvPowerSeries (Fin n) B)) ⟶ L), Flat t ∧\n      t ≫ q = Spec.map (CommRingCat.ofHom (MvPowerSeries.C (σ := Fin n))) ≫\n        Spec.map (CommRingCat.ofHom φ) ∧\n      t ((Spec.map (CommRingCat.ofHom (MvPowerSeries.constantCoeff (σ := Fin n))))\n        (IsLocalRing.closedPoint B)) = s (IsLocalRing.closedPoint B) ∧\n      ∃ (v : Spec (.of (MvPowerSeries (Fin n) B)))\n        (η : q.fiber (IsLocalRing.closedPoint A))\n        (W : (q.fiber (IsLocalRing.closedPoint A)).Opens),\n        v.asIdeal = (IsLocalRing.maximalIdeal B).map (MvPowerSeries.C (σ := Fin n)) ∧\n        t v = q.fiberι (IsLocalRing.closedPoint A) η ∧\n        (W : Set (q.fiber (IsLocalRing.closedPoint A))).Nonempty ∧ ∀ z ∈ W, η ⤳ z",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T072348-L-1118824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T072348-L-1118824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
