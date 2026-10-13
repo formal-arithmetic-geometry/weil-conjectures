@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-weil-pbc-transport-identifies-exchange",
-   "place": "Proof: conjugating each arrow through the comparison isomorphisms; the direct-image comparisons must be the canonical mates, as specified in the first two paragraphs of the comparison-direct-image proof.",
+   "place": "Proof of lem-weil-pbc-transport-identifies-exchange: the direct-image comparisons are the canonical counit mates, and the first two paragraphs of prop-weil-pbc-comparison-direct-image verify invertibility and the named-map normalization.",
    "via": []
   },
   "same_as": []
@@ -25,9 +25,116 @@
   "lem-weil-pbc-comparison-pullback",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For K, use the pullback comparison a_{u,r_uK}: A_U l_u r_u K ≅ p_u A_V r_u K and compose its inverse with the etale counit A_U(ε^e_{u,K}) to obtain q_{u,K}: p_u A_V r_u K → A_U K. The adjunction mate definition [def-weil-pbc-adjunction-mate] gives a unique b_{u,K}: A_V r_u K → s_u A_U K whose transpose is q_{u,K}.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, first paragraph: specify the map before proving it invertible"
+   }
+  },
+  {
+   "text": "For a morphism h:K\\to K', naturality of the counit and a_u^{-1} gives A_U(h)\\circ q_{u,K}=q_{u,K'}\\circ p_uA_Vr_u(h). Transposing both sides under p_u\\dashv s_u gives s_uA_U(h)\\circ b_{u,K}=b_{u,K'}\\circ A_Vr_u(h), since the adjunction bijection is natural in both arguments. Thus b_u is natural.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, transformation between functors and adjoints"
+   }
+  },
+  {
+   "text": "First restrict to an affine open V_0\\subset V, putting U_0=u^{-1}V_0. On an injective resolution I of K the restricted etale direct-image complex has sections (u_*I)(W_i)=I(U\\times_V W_i) for every etale W_i\\to V_0, by [def-weil-pbc-direct-image]; restriction of I to U_0 preserves injectives by [lem-weil-pbc-etale-restriction-injectives]. The pro-etale direct-image formula and its restriction analogue give the corresponding identification on the target. The pullback comparison is compatible with these restrictions, and the restricted counit is the counit evaluated on these same sections. Consequently the restriction of b_u is b_{u|_{U_0}}. A cone whose cohomology sheaves restrict to zero on an open cover has zero cohomology: any section restricts to zero on that covering and is zero by the sheaf axiom. It therefore suffices to take V affine.\nFor an affine ind-etale basis object W=\\varprojlim_iW_i, with W_i/V affine etale of finite presentation, put U_i=U\\times_VW_i and U_W=U\\times_VW. Each U_i is qcqs: quasi-compactness and quasi-separatedness of u are preserved by this base change, and W_i is affine. The transition maps of U_i are base changes of the affine transition maps of W_i, hence affine. Fixing a stage i_0 and restricting to its cofinal tail, the complexes on W_i are inverse images of (r_uK)|_{W_{i_0}}, and those on U_i are inverse images of K|_{U_{i_0}}; thus both systems meet the continuity lemma's hypotheses. Pullback compatibility and global-cohomology comparison identify source derived sections with the first term of\n$$H^nR\\Gamma(W_{\\Et},(r_uK)|_W)\\cong\\varinjlim_iH^nR\\Gamma(W_{i,\\Et},(r_uK)|_{W_i})\\cong\\varinjlim_iH^nR\\Gamma(U_{i,\\Et},K|_{U_i})\\cong H^nR\\Gamma(U_{W,\\Et},K|_{U_W}).$$\nThe first and last maps are the canonical restriction isomorphisms of [lem-weil-pbc-derived-cohomology-continuity]. For the middle map, etale inverse image is exact on underlying abelian sheaves [prop-weil-pbc-inverse-image-exact], hence on constant-ring modules because their kernels and cokernels have the underlying abelian kernels and cokernels. Its right adjoint preserves injectives [lem-sp-right-adjoint-preserves-injectives]. Choose a bounded-below injective representative I of K [lem-weil-pbc-dplus-injective-representative]. The complexes u_*I restricted to W_i and I restricted to U_i are injective by [lem-weil-pbc-etale-restriction-injectives], and their section complexes are equal term by term by [def-weil-pbc-direct-image]. This proves the middle identification, including compatibility with every transition restriction.",
+   "uses": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-derived-cohomology-continuity",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, affine basis and three-term derived-sections comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-comparison-global-cohomology] to T=U_W and K|_{U_W}. Pullback compatibility identifies its target with H^nR\\Gamma(U_{W,\\Proet},(A_UK)|_{U_W}). Choose a bounded-below injective representative J of A_UK [lem-weil-pbc-dplus-injective-representative], in the constant-coefficient pro-etale module category of [def-weil-pbc-proetale-operations]. The map U_W\\to U is weakly etale, being a base change of W\\to V, so J|_{U_W} is still injective by [lem-weil-pbc-proetale-restriction-injectives]. Exactness of pro-etale inverse image [prop-weil-pbc-proetale-constant-exact] and [lem-sp-right-adjoint-preserves-injectives] make u_{\\Proet,*}J injective termwise. Its restriction to W is injective by the same restriction lemma applied to W\\to V. The equality \\Gamma(W,u_{\\Proet,*}J)=\\Gamma(U_W,J) from [def-weil-pbc-proetale-operations] therefore identifies this last group with H^nR\\Gamma(W_{\\Proet},s_uA_UK), the target derived sections. This holds for every integer n; no affineness of U_i or U_W was used.",
+   "uses": [
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-ind-etale-basis",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, comparison of the final etale and pro-etale derived sections"
+   }
+  },
+  {
+   "text": "Verify the named map on the resolution models, rather than only comparing the groups. Take I as in Step 3 and a quasi-isomorphism t:A_UI\\to J into a bounded-below injective complex as in Step 4. The comparison is represented by the adjoint chain map B:A_Vu_{\\Et,*}I\\to u_{\\Proet,*}J of t\\circ A_U(\\varepsilon^e_I)\\circ a_{u,u_*I}^{-1}; this follows from the transpose formula [def-weil-pbc-adjunction-mate] and the degreewise exact inverse images. Each u_{\\Et,*}I^r is injective by Step 3, so [lem-weil-pbc-comparison-injective-acyclicity] makes A_Vu_{\\Et,*}I^r acyclic for evaluation on every basis W. Apply [lem-weil-pbc-small-module-diagrams-grothendieck] to the small skeleton of V_{\\Proet}, its coefficient ring sheaf, and J the category with one object and only its identity. Evaluation at that object and the constant-diagram functor are inverse equivalences, so the module-sheaf category is Grothendieck abelian. Clause (3) of [lemma-weil-pbc-leray-acyclicity], with the left exact additive functor \\Gamma(W,-), K=A_Vu_*I and its identity quasi-isomorphism to itself, therefore makes evaluation of A_Vu_*I compute its derived sections; evaluation of u_{\\Proet,*}J already does so by Step 4. The section formula [lem-weil-pbc-comparison-sections] gives\n$$\\Gamma(W,A_Vu_*I)=\\varinjlim_i\\Gamma(W_i,u_*I)=\\varinjlim_i\\Gamma(U_i,I).$$\nFor each stage and each degree, a section x\\in\\Gamma(U_i,I^r) is by definition a section of u_*I^r on W_i. The etale counit sends its pullback to U_i to x itself: the counit is evaluation of the direct-image section on the fibre product. Thus B on W sends the colimit class of x to the restriction of x to U_W, followed by the canonical comparison map on sections \\Gamma(U_{W,\\Et},I|_{U_W})\\to\\Gamma(U_{W,\\Proet},(A_UI)|_{U_W}) and t|_{U_W}. This equality commutes with the differentials and with the transition restrictions, since all three maps are sheaf or complex maps. Passing to cohomology, this is exactly the composite of the canonical restriction maps in Step 3 and the global comparison map in Step 4. Accordingly H^nR\\Gamma(W,b_{u,K}) is that isomorphism for every W and n. Source and target have bounded-below injective or exact-image representatives, so [lem-weil-pbc-basis-derived-detection] applies and proves b_{u,K} invertible. Finally the defining transpose identity is\n$$\\varepsilon^p_{u,A_UK}\\circ p_u(b_{u,K})=q_{u,K}=A_U(\\varepsilon^e_{u,K})\\circ a_{u,r_uK}^{-1}.$$\nPrecomposition by a_{u,r_uK} gives the requested normalization with precisely the composition order in the statement.",
+   "uses": [
+    "lem-weil-pbc-comparison-injective-acyclicity",
+    "lem-weil-pbc-comparison-sections",
+    "lem-weil-pbc-basis-derived-detection",
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-small-module-diagrams-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+    "place": "Proof, named-map verification and final basis detection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-basis-derived-detection",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-weil-pbc-comparison-injective-acyclicity",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-sections",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lemma-weil-pbc-leray-acyclicity",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-pbc-ind-etale-basis",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
+  "place": "Proof, first two paragraphs and named-map verification"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,12 +173,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-transport-identifies-exchange",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "worker": "stage1",
+  "summary": "Audited the canonical mate statement against the comparison-direct-image proof. Created no nodes because every non-elementary ingredient is already an existing DAG node; expanded the proof into the mate construction, naturality, affine-basis cohomology calculation, identification of the named mate, and basis detection/normalization. Second reading expanded local restriction and the colimit calculation, cited injective-preservation and acyclic-complex comparison, and corrected composition order and stale citation quotes.",
+  "blueprint": "Realizes the ancestor transport proof's sentence that direct-image comparisons are canonical counit mates, using the first two paragraphs and named-map verification of prop-weil-pbc-comparison-direct-image.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-4b3b8c152",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-4b3b8c152 (reviewer sub-agent of L); spot-checked: The mate construction, invertibility argument, coefficient category, base-change direction, normalization, source, and target distinction all check out. Steps 3–4 omitted citations for the affine ind-etale basis and the weak-etale/base-change facts used to invoke restriction-injectives. Corrected DAG JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-comparison-direct-image-canonical-mate.json; review.md records all source, route, edge-case, and step checks.; 1 file(s) fixed by the reviewer"
+ }
 }
