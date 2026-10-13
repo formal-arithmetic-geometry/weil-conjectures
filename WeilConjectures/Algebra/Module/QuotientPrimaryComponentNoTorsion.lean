@@ -48,6 +48,29 @@ theorem eq_zero_of_annihilated_quotient_primaryComponent
     {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M]
     (I : Ideal R) (hI : I.FG) (x : M ⧸ primaryComponent M I)
     (hx : ∀ a : R, a ∈ I → a • x = 0) : x = 0 := by
-  sorry
+  obtain ⟨m, rfl⟩ := Submodule.Quotient.mk_surjective _ x
+  -- `J N` is the ideal of scalars `c` with `c • m` killed by `I ^ N`.
+  let J : ℕ → Ideal R := fun N ↦
+    (Submodule.torsionBySet R M ↑(I ^ N)).comap (LinearMap.toSpanSingleton R M m)
+  have hJ : Monotone J := fun i j hij ↦
+    Submodule.comap_mono (Submodule.torsionBySet_le_torsionBySet_pow i j hij I)
+  have hIJ : I ≤ sSup (Set.range J) := by
+    intro c hc
+    have hcm := hx c hc
+    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero, primaryComponent_mem] at hcm
+    obtain ⟨N, hN⟩ := hcm
+    rw [sSup_range]
+    exact Submodule.mem_iSup_of_mem N hN
+  obtain ⟨_, ⟨N, rfl⟩, hN⟩ :=
+    (CompleteLattice.isCompactElement_iff_le_of_directed_sSup_le (α := Ideal R) I).1
+      ((Submodule.fg_iff_compact I).1 hI) _ (Set.range_nonempty J)
+      hJ.directed_le.directedOn_range hIJ
+  rw [Submodule.Quotient.mk_eq_zero, primaryComponent_mem]
+  refine ⟨N + 1, (Submodule.mem_torsionBySet_iff _ _).2 fun a ↦
+    Submodule.mul_induction_on (C := fun a ↦ a • m = 0) ((pow_succ I N).le a.2)
+      (fun b hb c hc ↦ ?_) fun a a' ha ha' ↦ ?_⟩
+  · rw [mul_smul]
+    exact (Submodule.mem_torsionBySet_iff _ _).1 (hN hc) ⟨b, hb⟩
+  · rw [add_smul, ha, ha', add_zero]
 
 end Ideal

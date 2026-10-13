@@ -57,6 +57,36 @@ theorem prod_linearEquiv_of_twoTermHomotopy
     (hB₁ : LinearMap.id - φ₁.comp ψ₁ = h'.comp dB)
     (hB₀ : LinearMap.id - φ₀.comp ψ₀ = dB.comp h') :
     Nonempty ((A₁ × B₀) ≃ₗ[R] (B₁ × A₀)) := by
-  sorry
+  have hA₁' (a : A₁) : a - ψ₁ (φ₁ a) = h (dA a) := LinearMap.congr_fun hA₁ a
+  have hA₀' (e : A₀) : e - ψ₀ (φ₀ e) = dA (h e) := LinearMap.congr_fun hA₀ e
+  have hB₁' (c : B₁) : c - φ₁ (ψ₁ c) = h' (dB c) := LinearMap.congr_fun hB₁ c
+  have hB₀' (b : B₀) : b - φ₀ (ψ₀ b) = dB (h' b) := LinearMap.congr_fun hB₀ b
+  have hφ' (a : A₁) : dB (φ₁ a) = φ₀ (dA a) := LinearMap.congr_fun hφ a
+  have hψ' (c : B₁) : dA (ψ₁ c) = ψ₀ (dB c) := LinearMap.congr_fun hψ c
+  -- The crosswise map `(a, b) ↦ (φ₁ a - h' b, dA a + ψ₀ b)`.
+  let C : (A₁ × B₀) →ₗ[R] (B₁ × A₀) :=
+    (φ₁ ∘ₗ LinearMap.fst R A₁ B₀ - h' ∘ₗ LinearMap.snd R A₁ B₀).prod
+      (dA ∘ₗ LinearMap.fst R A₁ B₀ + ψ₀ ∘ₗ LinearMap.snd R A₁ B₀)
+  refine ⟨LinearEquiv.ofBijective C ⟨(injective_iff_map_eq_zero C).2 ?_, ?_⟩⟩
+  · rintro ⟨a, b⟩ hab
+    have h₁ : φ₁ a = h' b := sub_eq_zero.1 (congr_arg Prod.fst hab)
+    have h₂ : dA a + ψ₀ b = 0 := congr_arg Prod.snd hab
+    obtain rfl : b = 0 := by
+      rw [← sub_add_cancel b (φ₀ (ψ₀ b)), hB₀' b, ← h₁, hφ', ← map_add, h₂, map_zero]
+    rw [map_zero, add_zero] at h₂
+    rw [map_zero] at h₁
+    rw [← sub_add_cancel a (ψ₁ (φ₁ a)), hA₁' a, h₁, h₂, map_zero, map_zero, add_zero,
+      Prod.mk_zero_zero]
+  · rintro ⟨c, e⟩
+    obtain ⟨c, rfl⟩ : ∃ c', c = c' + (φ₁ (h e) - h' (φ₀ e)) := ⟨_, (sub_add_cancel _ _).symm⟩
+    refine ⟨(ψ₁ c + h e, -dB c + φ₀ e), Prod.ext ?_ ?_⟩
+    · simp only [C, LinearMap.prod_apply, Function.prod, LinearMap.sub_apply, LinearMap.comp_apply,
+        LinearMap.fst_apply, LinearMap.snd_apply, map_add, map_neg]
+      rw [← sub_eq_zero, ← hB₁' c]
+      abel
+    · simp only [C, LinearMap.prod_apply, Function.prod, LinearMap.add_apply, LinearMap.comp_apply,
+        LinearMap.fst_apply, LinearMap.snd_apply, map_add, map_neg, hψ']
+      rw [← sub_eq_zero, ← hA₀' e]
+      abel
 
 end Module
