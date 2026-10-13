@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-perfect-ring-hom-tensor-dual-iso",
+ "kind": "statement",
+ "title": "Finite-projective Hom is tensor with the explicit dual",
+ "statement": "Let A be a commutative ring, with module sheaves on the bottom-topology one-object ringed site [def-pc-perfect-rhom-base-change-map]. Let P,Q be cochain complexes. Assume there are integers a,b such that P^n vanishes whenever n<a or b<n, and every evaluated term P^n is finite projective. Put D=Hom_A^\\bullet(P,A[0]), the explicit dual construction of [lem-pc-perfect-ring-dual-term-flat]. Then there exists a chain isomorphism Tot(D\\otimes_A Q)\\cong Hom_A^\\bullet(P,Q), for the shared total tensor [def-pc-tensor-complex-sheaves] and Hom [def-pur-hom-complex]. No boundedness or K-flatness of Q is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate on the one-object bottom-topology site to identify internal Hom and tensor with linear Hom and module tensor. For a finite free M the evaluation map Hom(M,A) tensor N -> Hom(M,N), lambda tensor y |-> (x |-> lambda(x)y), has inverse f |-> sum_i e_i^* tensor f(e_i). The basis identities prove both composites are identities. If M is finite projective, choose maps i:M -> A^r and p:A^r -> M with pi=id. Naturality under precomposition restricts the free evaluation isomorphism to the images of the splitting idempotents and supplies inverse maps for M. Apply this to M=P^(-r) and N=Q^s. Projection identifies the r-th dual term with Hom(P^(-r),A).",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-hom-complex",
+    "lem-pc-perfect-ring-dual-term-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n, reindex r+s=n by p=-r. Bounds on P mean only a<=p<=b can contribute. All remaining terms vanish, so the coproduct over r+s=n and the product over p become the same finite biproduct. Take the direct sum of the evaluation isomorphisms with coefficient (-1)^(rs). This yields degreewise mutually inverse maps Tot(D tensor Q)^n <-> Hom(P,Q)^n. The tensor differential has terms d_D lambda tensor y and (-1)^r lambda tensor d_Q y. Since d_D lambda=-(-1)^r lambda d_P, the first term after evaluation has sign (-1)^(rs+r+s+1) and the second has sign (-1)^(rs). These are the precomposition and postcomposition signs of d_Q f - (-1)^(r+s) f d_P. Thus the forward maps commute with differentials; their inverses do also, by cancellation. They form the asserted chain isomorphism and can be transported back to sheaves. Q may be unbounded, and a>b simply makes all terms zero.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "lem-pc-perfect-ring-dual-term-flat",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
+  "note": "Expanded chain-level finite-projective argument; the exact sheaf interface is not a verbatim Stacks statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dual of a finite projective module is flat and Hom from a bounded finite projective complex is tensor with its dual",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a finite projective module is flat and Hom from a bounded finite projective complex is tensor with its dual",
+   "date": "2026-10-13",
+   "results": "Module.Flat.iff_characterModule_injective; Module.Flat.of_projective; Module.dual_projective; Module.Flat.projective_of_finitePresentation; Module.Flat.iff_characterModule_baer; Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap; FGModuleCat.exactPairing; FGModuleCat.FGModuleCatCoevaluation",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*(projective|flat)|hom.*tensor.*iso|tensor.*hom.*iso",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Category/Ring/Under/Basic.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "verdict": "no exact match",
+   "sub": "Algebra"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRingHomKFlat",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 (1), expanded 0A6A (1): Finite-projective Hom is tensor with the explicit dual",
+   "via": [
+    "lem-pc-perfect-ring-hom-kflat",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectRingHomTensorDualIso",
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRingHomTensorDualIso.lean",
+  "declaration": "CategoryTheory.perfectRingHom_tensorDual_iso",
+  "declarations": [
+   "CategoryTheory.perfectRingHom_tensorDual_iso"
+  ],
+  "statement": "theorem perfectRingHom_tensorDual_iso {A : Type u} [CommRing A] (P Q : CochainComplex (RingSiteModules A) ℤ) (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) : letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A) Nonempty (CochainComplex.mapBifunctor (perfectRingDual P) Q (curriedTensor _) ≅ homComplex (R := CochainComplex.onePointRingSheaf A) P Q)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

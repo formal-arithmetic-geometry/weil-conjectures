@@ -26,50 +26,46 @@
  ],
  "proof": [
   {
-   "text": "Evaluation on the unique object identifies sheaves, sheaf tensor products, and internal Hom with modules, tensor products, and linear Hom. The bottom topology imposes no extra sheaf condition, and the slice over the unique object has one object up to unique isomorphism. Form the dual P^vee in reversed degrees with its usual dual differential. For each finite projective P^i, evaluation Hom(P^i,A) tensor M -> Hom(P^i,M) is invertible: use coordinate evaluation for a finite free module and restrict it and its inverse along the splitting of P^i as a summand. Since P is bounded, each Hom degree contains finitely many nonzero factors. These evaluation maps identify Hom(P,Q) with Tot(P^vee tensor Q); the dual differential and Koszul sign give exactly d_Q f - (-1)^n f d_P.",
+   "text": "Use the actual dual D=Hom(P,A[0]) of lem-pc-perfect-ring-dual-term-flat. Prove directly in Lean that D is bounded above by -a: for n>-a each product factor Hom(P^p,A[0]^(p+n)) is zero. If p<a its source is zero; otherwise p+n>0 so its target is zero. The Hom product cone universal property then makes the identity of D^n zero. The two zero-factor claims are proved by extensionality of internal Hom maps.",
    "uses": [
     "def-pur-hom-complex",
-    "def-pc-perfect-rhom-base-change-map"
+    "lem-pc-perfect-ring-dual-term-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
-   }
+   "elementary": true
   },
   {
-   "text": "P^vee is bounded with finite-projective, hence flat, terms. For every acyclic F, Tot(F tensor P^vee) is acyclic by the bounded-above flat-complex lemma, applied to the evaluated module complexes.",
+   "text": "Apply perfectRingDual_term_isFlat to hp and hf and the proved upper bound to CochainComplex.isKFlat_of_boundedAbove_flat on the ringed site. This gives D.IsKFlat directly, avoiding transport through module complexes.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat"
+    "lem-pc-perfect-ring-dual-term-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
-   }
+   "elementary": true
   },
   {
-   "text": "Associativity of tensor and its Koszul totalization signs identify Tot(F tensor Tot(P^vee tensor Q)) with Tot(Tot(F tensor P^vee) tensor Q). There are only finitely many P^vee factors, so the rearrangement of direct sums is valid even when F and Q are unbounded. K-flatness of Q makes the latter complex acyclic. Transport across the two chain isomorphisms and the exact one-object evaluation equivalence; this gives acyclicity of Tot(F tensor Hom(P,Q)) for every acyclic F, exactly the K-flat predicate.",
+   "text": "For an arbitrary acyclic F, D.IsKFlat makes Tot(F tensor D) acyclic. Q.IsKFlat then makes Tot(Tot(F tensor D) tensor Q) acyclic. Tensor closedness supplies the coproduct-preservation instances needed by the Mathlib HomologicalComplex.associator, whose chain isomorphism transports this to Tot(F tensor Tot(D tensor Q)). Map perfectRingHom_tensorDual_iso through the bifunctor with F fixed and then total.mapIso; transporting exactness once more yields Tot(F tensor Hom(P,Q)) acyclic. This is the IsKFlat predicate.",
    "uses": [
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "lem-pc-perfect-ring-hom-tensor-dual-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 0A6A, lemma-base-change-RHom, clause (1); bounded finite-projective representative argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-hom-complex",
-  "def-pc-perfect-rhom-base-change-map",
-  "lem-pc-module-bounded-flat-kflat",
-  "def-pc-kflat-complex"
+  "lem-pc-perfect-ring-dual-term-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex",
+  "lem-pc-perfect-ring-hom-tensor-dual-iso",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "W4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Expanded finite-projective representative argument for 0A6A (1); from parent proof steps 1 and 3"
+  "place": "Tag 0A6A clause (1), explicit dual argument",
+  "note": "Compiling reduction: dual boundedness proved via the shared Hom product; two finite-projective facts split off; site K-flatness and Mathlib associator used directly."
  },
  "mathlib_searches": [
   {
@@ -143,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T024050-L-3339857",
+  "landing": "20261013T082423-L-1651496",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

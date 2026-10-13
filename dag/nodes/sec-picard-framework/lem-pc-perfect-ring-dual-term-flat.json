@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-perfect-ring-dual-term-flat",
+ "kind": "statement",
+ "title": "Flat terms of the explicit finite-projective ring dual",
+ "statement": "Let A be a commutative ring, with A-modules realized on the bottom-topology one-object ringed site [def-pc-perfect-rhom-base-change-map]. Let P be a cochain complex such that every evaluated term P^n is finite projective over A. Define D=Hom_A^\\bullet(P,A[0]) using the shared Hom complex [def-pur-hom-complex], with the ring sheaf in degree zero. Then D^n is a flat sheaf of modules [def-pc-flat-sheaf-modules] for every integer n. No boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), finite-projective dual argument; projectivity of the dual also Mathlib/LinearAlgebra/Dual/Lemmas.lean, Module.dual_projective (lines 145-147)"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Define D as the actual shared Hom complex Hom(P,A[0]), not as a chosen witness. In degree n its product factors are Hom(P^p,A[0]^(p+n)). All factors except p=-n are zero. Projection to p=-n is an isomorphism: the inverse has the identity component there and zero components elsewhere; the product universal property verifies both inverse identities. On the bottom-topology one-object site, evaluation is an equivalence with A-modules (all restriction maps are identities and every presheaf is a sheaf). Internal Hom evaluates to linear Hom, and the tensor evaluates to module tensor. Hence D^n evaluates to the module dual of P^(-n).",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite projective module M choose a split presentation M -> A^r -> M with composite the identity. Dualizing reverses the arrows and again gives a split presentation, because precomposition preserves composition and identities. Coordinate linear functionals identify the dual of A^r with A^r. Thus the dual of M is projective and therefore flat (Mathlib Module.dual_projective and Module.Flat.of_projective). Tensoring with it preserves finite limits and colimits. Transport this exactness along evaluation and the tensor comparison to obtain SheafOfModules.IsFlat for each D^n. This proves the assertion without boundedness of P.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), finite-projective dual argument; projectivity of the dual also Mathlib/LinearAlgebra/Dual/Lemmas.lean, Module.dual_projective (lines 145-147)",
+  "note": "Expanded chain-level finite-projective argument; the exact sheaf interface is not a verbatim Stacks statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dual of a finite projective module is flat and Hom from a bounded finite projective complex is tensor with its dual",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a finite projective module is flat and Hom from a bounded finite projective complex is tensor with its dual",
+   "date": "2026-10-13",
+   "results": "Module.Flat.iff_characterModule_injective; Module.Flat.of_projective; Module.dual_projective; Module.Flat.projective_of_finitePresentation; Module.Flat.iff_characterModule_baer; Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap; FGModuleCat.exactPairing; FGModuleCat.FGModuleCatCoevaluation",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*(projective|flat)|hom.*tensor.*iso|tensor.*hom.*iso",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Category/Ring/Under/Basic.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "verdict": "no exact match",
+   "sub": "Algebra"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRingHomKFlat",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 (1), expanded 0A6A (1): Flat terms of the explicit finite-projective ring dual",
+   "via": [
+    "lem-pc-perfect-ring-hom-kflat",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectRingDualTermFlat",
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRingDualTermFlat.lean",
+  "declaration": "CategoryTheory.perfectRingDual_term_isFlat",
+  "declarations": [
+   "CategoryTheory.perfectRingDual",
+   "CategoryTheory.perfectRingDual_term_isFlat"
+  ],
+  "statement": "theorem perfectRingDual_term_isFlat {A : Type u} [CommRing A] (P : CochainComplex (RingSiteModules A) ℤ) (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) : ∀ n : ℤ, SheafOfModules.IsFlat ((perfectRingDual P).X n)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
