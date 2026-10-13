@@ -37,9 +37,10 @@
    }
   },
   {
-   "text": "Let $D^n=d\\chi^n-\\chi^{n+1}d:X_B^n\\to I_{B'}'^{n+1}$ be the differential defect of $\\chi$. Since $\\varphi_A,\\varphi_C$ are complex maps, $D^n i^n=\\alpha'(d\\varphi_A-\\varphi_A d)=0$ and $\\beta' D^n=(d\\varphi_C-\\varphi_C d)p=0$. As $\\alpha'^{n+1}$ is a kernel of $\\beta'^{n+1}$ and $p^n$ is a cokernel of $i^n$ [def-sp-abelian], there are unique $E^n:X_C^n\\to I_{A'}'^{n+1}$ with $D^n=\\alpha'E^np^n$. From $D=d\\chi-\\chi d$ one gets $dD=-d\\chi d=-Dd$, so $\\alpha'(dE+Ed)p=0$ and hence $dE^n+E^{n+1}d=0$. At degree zero the augmentation defect $w=\\chi^0s_B-s'_{B'}b:B\\to I_{B'}'^0$ satisfies $wf=\\alpha'\\varphi_A^0s_A-\\alpha's'_{A'}a=0$ and $\\beta'w=\\varphi_C^0s_Cg-s'_{C'}g'b=0$, so likewise $w=\\alpha'eg$ for a unique $e:C\\to I_{A'}'^0$. Since $ds_B=0$ we get $dw=D^0s_B$, i.e. $\\alpha'(de)g=\\alpha'E^0s_Cg$, hence $E^0s_C=de$.",
+   "text": "Let $D^n=d\\chi^n-\\chi^{n+1}d:X_B^n\\to I_{B'}'^{n+1}$ be the differential defect of $\\chi$. Since $\\varphi_A,\\varphi_C$ are complex maps, $D^n i^n=\\alpha'(d\\varphi_A-\\varphi_A d)=0$ and $\\beta' D^n=(d\\varphi_C-\\varphi_C d)p=0$. As $\\alpha'^{n+1}$ is a kernel of $\\beta'^{n+1}$ and $p^n$ is a cokernel of $i^n$ [def-sp-abelian], there are unique $E^n:X_C^n\\to I_{A'}'^{n+1}$ with $D^n=\\alpha'E^np^n$. From $D=d\\chi-\\chi d$ one gets $dD=-d\\chi d=-Dd$, so $\\alpha'(dE+Ed)p=0$ and hence $dE^n+E^{n+1}d=0$. At degree zero the augmentation defect $w=\\chi^0s_B-s'_{B'}b:B\\to I_{B'}'^0$ satisfies $wf=\\alpha'\\varphi_A^0s_A-\\alpha's'_{A'}a=0$ and $\\beta'w=\\varphi_C^0s_Cg-s'_{C'}g'b=0$, so likewise $w=\\alpha'eg$ for a unique $e:C\\to I_{A'}'^0$. Since $ds_B=0$ we get $dw=D^0s_B$, i.e. $\\alpha'(de)g=\\alpha'E^0s_Cg$, hence $E^0s_C=de$. In Lean, both row factorizations reuse the proved private helper factor_through_rows from [lem-weil-pbc-horseshoe-defect-factorization], made available by a proof-only import all of HorseshoeDefectFactorization; the exact-source cocycle and augmentation calculations remain local.",
    "uses": [
-    "def-sp-abelian"
+    "def-sp-abelian",
+    "lem-weil-pbc-horseshoe-defect-factorization"
    ],
    "elementary": false,
    "source": {
@@ -48,14 +49,15 @@
    }
   },
   {
-   "text": "Let $K^\\bullet$ be $X_C^\\bullet$ with $C$ adjoined in degree $-1$ via $s_C$; the exact augmented sequence of the statement says $K^\\bullet$ is acyclic. Let $T^\\bullet$ be the complex with $T^m=I_{A'}'^{m+1}$ and differential $d$; it is zero in degrees below $-1$ and has injective terms. The maps $u^{-1}=e$ and $u^n=(-1)^nE^n$ ($n\\ge0$) form a morphism $u:K^\\bullet\\to T^\\bullet$, by $dE^n=-E^{n+1}d$ and $E^0s_C=de$. By [lem-weil-pbc-acyclic-map-to-injective-nullhomotopy] there are $h^m:K^m\\to T^{m-1}=I_{A'}'^m$ with $u^m=dh^m+h^{m+1}d$; here $h^{-1}=0$. Put $k^n=(-1)^nh^n:X_C^n\\to I_{A'}'^n$. Then $e=k^0s_C$ and $E^n=dk^n-k^{n+1}d$.",
+   "text": "From QuasiIso sC, use CochainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros to get monicity of sC.f 0 and exactness of (sC.f 0, dC 0 1). Transport positive-degree exactness from single₀ via exactAt_iff_of_quasiIsoAt. Extend e across the monic augmentation into JA⁰ to obtain k₀. Since sC(k₀dA-E₀)=0, Exact.descToInjective produces k₁ with dC₀k₁=k₀dA₀-E₀. Inductively the signed cocycle equation dC E=-E dA and d²=0 show dCₙ(kₙ₊₁dAₙ₊₁-Eₙ₊₁)=0. Exactness at n+1 and injectivity of JAⁿ⁺² give kₙ₊₂. A dependent Nat.rec on consecutive pairs builds all k and proves sC k₀=e and dCₙkₙ₊₁=kₙdAₙ-Eₙ. This is the successive injective-extension proof of Tag 013R, used directly without adjoining degree -1 or invoking K-injectivity.",
    "uses": [
-    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+    "def-sp-injective-resolutions",
+    "def-sp-abelian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013R, applied to the exact augmented source C-row and the shifted target injective complex"
+    "place": "Tag 013R, successive extension proof specialized to the exact augmented nonnegative source"
    }
   },
   {
@@ -72,12 +74,12 @@
   "lem-weil-pbc-ses-injective-kernel-splits",
   "def-sp-injective-resolutions",
   "def-sp-abelian",
-  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+  "lem-weil-pbc-horseshoe-defect-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tags 015I and 013R; explicit defect-correction argument"
+  "place": "Tags 015I and 013R; direct degreewise extension, defect factorization, recursive correction; adapted from proved HorseshoeDefectFactorization and HorseshoeHomotopyCorrection; repair: reuse existing factor_through_rows via proof-only import all instead of duplicating it"
  },
  "mathlib_searches": [
   {
@@ -163,5 +165,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c0573",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T054228-L-446207",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature matches the node; proof and dependency records agree. Delivery and sole direct importer Sheaf.CategoryTheory.CartanEilenbergComparisonColumnStep compile cleanly; all four proved declarations use only propext, Classical.choice, and Quot.sound. Import pruning is documented and the earlier duplicate helper is removed."
  }
 }
