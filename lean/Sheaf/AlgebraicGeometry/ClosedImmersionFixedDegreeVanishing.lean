@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.ClosedImmersionTwistCohomologyBound
+import Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep
 
 /-! # Fixed-degree projective Serre vanishing
 
@@ -44,6 +46,23 @@ theorem exists_isZero_closedImmersion_twist_degree
     (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] (q : ℕ) (hq : 0 < q) :
     ∃ t₀ : ℕ, ∀ t : ℕ, t₀ ≤ t →
       IsZero ((RingedSpace.moduleCohomology X.toRingedSpace q).obj
-        (tensorObj F (ProjectiveSpace.twistRestrict i t))) := by sorry
+        (tensorObj F (ProjectiveSpace.twistRestrict i t))) := by
+  let P (r : ℕ) : Prop := ∀ {Y : Scheme.{u}}
+    (j : Y ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion j]
+    (G : Y.Modules) [G.IsQuasicoherent]
+    [G.IsFinitePresentation], ∃ t₀ : ℕ, ∀ t : ℕ, t₀ ≤ t →
+      IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace r).obj
+        (tensorObj G (ProjectiveSpace.twistRestrict j t)))
+  have hbase (r : ℕ) (hr : N < r) : P r := by
+    intro Y j _ G _ _
+    exact ⟨0, fun t _ ↦ isZero_closedImmersion_twist_above_dimension A j G r t hr⟩
+  by_cases hlarge : N < q
+  · exact hbase q hlarge i F
+  · have hqN : q ≤ N + 1 := by omega
+    have hd : P q := Nat.decreasingInduction' (P := P) (n := N + 1) (m := q)
+      (fun r _ hqr hn Y j _ G _ _ ↦
+        exists_isZero_closedImmersion_twist_of_next_degree
+          A j r (by omega) hn G) hqN (hbase (N + 1) (by omega))
+    exact hd i F
 
 end AlgebraicGeometry.Scheme.Modules

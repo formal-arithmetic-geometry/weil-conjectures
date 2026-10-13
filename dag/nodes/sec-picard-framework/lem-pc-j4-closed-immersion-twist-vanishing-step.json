@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-j4-closed-immersion-twist-vanishing-step",
+ "kind": "statement",
+ "title": "Descending twist vanishing step across all closed subschemes",
+ "statement": "Fix A Noetherian, N and q>0. Assume degree q+1 eventual twist vanishing for every coherent module on every closed subscheme of projective N-space over A. Then degree q eventual twist vanishing holds for every such module on any specified closed subscheme.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YS (4), descending induction proof"
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "/-- The descending Serre induction step, simultaneously for all coherent coefficients.\nSource: Stacks Project, Tag 01YS (4), proof of part (4).\n(blueprint: lem-pc-j4-closed-immersion-twist-vanishing-step)\n\nProof: Apply the hypothesis to the identity immersion of projective space. This gives\nnext-degree vanishing for every coherent ambient module, in particular the kernel of\na finite sum of twists surjecting onto i_*F. The kernel is coherent over the Noetherian\nbase. Tensor this exact sequence by the invertible O(t). For large t the finite sum\nhas zero positive-degree cohomology by the projective twist computation, and the\nhypothesis kills the next-degree cohomology of the kernel. The long exact sequence\nkills degree q of the twisted pushforward. The projection formula and the closed\nimmersion cohomology comparison transfer this vanishing to X. Take the maximum of\nthe two integer thresholds and zero to obtain a natural-number threshold. -/",
+   "uses": [
+    "lem-pc-projective-space-twist-quotient",
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-twist-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YS (4), proof of part (4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology vanishing above dimension finite affine cover",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective Serre vanishing descending induction coherent modules",
+   "date": "2026-10-13",
+   "results": "No suitable result: only unrelated projective-object Ext vanishing."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; no usable result."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isZero.*twist|IsZero.*moduleCohomology",
+   "date": "2026-10-13",
+   "results": "Found ClosedImmersionSerreVanishing; its import path is cyclic for the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionFixedDegreeVanishing",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-c2-closed-immersion-fixed-degree-vanishing",
+   "place": "base case and induction step of the given proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionTwistVanishingStep",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionTwistVanishingStep.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_closedImmersion_twist_of_next_degree",
+  "statement": "theorem exists_isZero_closedImmersion_twist_of_next_degree\n    (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}\n    (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]\n    (q : ℕ) (hq : 0 < q)\n    (hnext : ∀ {Y : Scheme.{u}}\n      (j : Y ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion j]\n      (F : Y.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation],\n      ∃ t₀ : ℕ, ∀ t : ℕ, t₀ ≤ t →\n        IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace (q + 1)).obj\n          (tensorObj F (ProjectiveSpace.twistRestrict j t))))\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] :\n    ∃ t₀ : ℕ, ∀ t : ℕ, t₀ ≤ t →\n      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace q).obj\n        (tensorObj F (ProjectiveSpace.twistRestrict i t)))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T115026-L-3324876",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T115026-L-3324876",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
