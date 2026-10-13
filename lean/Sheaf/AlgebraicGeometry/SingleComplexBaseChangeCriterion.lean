@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition
 import Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -107,15 +106,14 @@ theorem singleComplexBaseChangeCriterion
         (Scheme.Modules.pullbackPushforwardAdjunction g')
     exact (SheafOfModules.isQuasicoherent (moduleRings X'.toRingedSpace)).prop_of_iso
       (e.app (G.X i)).symm (Scheme.Modules.isQuasicoherent_pullback g' (G.X i))
-  obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization g' τ hτ
-  let := m.toMonoidal
-  have inherited := (singleComplexInheritedTensorCondition f f' g g' sq
+  obtain ⟨m, hm, hinherit⟩ := singleComplexInheritedTensorCondition f f' g g' sq
     ⟨DerivedCategory.Q.obj G, hG⟩ ⟨DerivedCategory.Q.obj G', hG'⟩
     ((SingleComplexBaseChange.counit g').app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) h_stalk).2 ⟨E, hE⟩
-  have hcomparison :
-      (Functor.Monoidal.μIso (derivedPullback g') E (DerivedCategory.Q.obj G)).inv =
-        τ E (DerivedCategory.Q.obj G) := hm E (DerivedCategory.Q.obj G)
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) h_stalk
+  have inherited := hinherit ⟨E, hE⟩
+  have hcomparison : (m.μIso E (DerivedCategory.Q.obj G)).inv =
+      τ E (DerivedCategory.Q.obj G) :=
+    congrFun (congrFun (hm.unique hτ) E) (DerivedCategory.Q.obj G)
   rw [hcomparison] at inherited
   exact singleComplexBaseChangeQcqsInduction f f' g g' sq _
     (canonical_derivedTensor_preserve_QCoh X E _ hE hG) _

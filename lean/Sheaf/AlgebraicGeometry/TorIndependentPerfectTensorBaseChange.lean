@@ -216,10 +216,9 @@ theorem torIndependent_perfect_tensor_baseChange
   have hK'q := (derivedPullback_tensor_preserve_QCoh g').1 K hK
   have hstalk := stalkCondition_of_comparison f g P
     (torIndependent_perfect_pullback_comparison f g hTor P hP)
-  obtain ⟨hmon, hinherit⟩ := singleComplexInheritedTensorCondition f f' g g' sq
+  obtain ⟨m, _, hinherit⟩ := singleComplexInheritedTensorCondition f f' g g' sq
     ⟨P, hPq⟩ ⟨(derivedPullback g').obj P, hP'q⟩ (𝟙 _) hstalk
-  obtain ⟨mon⟩ := hmon
-  let := mon
+  let : (derivedPullback g').Monoidal := m.toMonoidal
   let φ := (Functor.Monoidal.μIso (derivedPullback g') K P).inv ≫
     ((derivedPullback g').obj K ◁ 𝟙 ((derivedPullback g').obj P))
   have hφ : IsIso φ := by

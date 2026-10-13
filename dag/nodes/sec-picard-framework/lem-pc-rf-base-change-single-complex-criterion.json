@@ -26,9 +26,10 @@
  ],
  "proof": [
   {
-   "text": "Use Tag 0DJA(1) for the canonical map L(g')^*G^bullet \\to (g')^*G^bullet and the given E. It gives the same stalkwise condition for the induced map L(g')^*(E \\otimes^L G^bullet) \\to L(g')^*E \\otimes^L (g')^*G^bullet.",
+   "text": "Apply canonical singleComplexInheritedTensorCondition to the shared left-derived counit at G. It supplies a core-monoidal model m whose inverse tensorator is canonical, and the inherited stalk condition. Uniqueness of IsCanonicalPullbackTensorComparison identifies that inverse tensorator with the given tau.",
    "uses": [
-    "lem-pc-rf-single-complex-inherited-tensor-condition"
+    "lem-pc-rf-single-complex-inherited-tensor-condition",
+    "def-pc-derived-pullback-tensor-comparison"
    ],
    "elementary": false,
    "source": {
@@ -52,10 +53,8 @@
    }
   },
   {
-   "text": "The displayed composite is the canonical base-change map in the statement, by the definition of the derived pullback of a tensor product and functoriality of the comparison maps.",
-   "uses": [
-    "lem-pc-canonical-pullback-tensor-monoidal-realization"
-   ],
+   "text": "Rewrite the inherited inverse tensorator using canonical comparison uniqueness. The qcqs induction result is then exactly the desired composite with the given tau; no second monoidal realization is required.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
@@ -64,8 +63,8 @@
   }
  ],
  "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
   "lem-pc-canonical-derived-tensor-qcoh",
-  "lem-pc-canonical-pullback-tensor-monoidal-realization",
   "lem-pc-derived-pullback-tensor-qcoh",
   "lem-pc-rf-single-complex-inherited-tensor-condition",
   "lem-pc-rf-single-complex-qcqs-induction",
@@ -164,11 +163,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "X-578a5",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T054218-L-443076",
+  "landing": "20261013T151700-L-923921",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered five modules compile cleanly; target unchanged, interfaces and DAG agree, two documented lower obligations are valid and sourced, and both forced adaptations are necessary and compile."
  }
 }

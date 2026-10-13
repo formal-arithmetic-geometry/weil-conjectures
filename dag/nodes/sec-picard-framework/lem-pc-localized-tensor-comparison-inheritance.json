@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-inheritance",
+ "kind": "statement",
+ "title": "Localized tensor cohomology comparison inheritance",
+ "statement": "Let R,A,B,C be commutative rings, with R-algebras A and B and an algebra structure on C over T=A\\otimes_R B. Assume C is flat over T. Let U,Q be K-flat cochain complexes of A-modules (tensoring any acyclic A-complex with either is acyclic), let N be a cochain complex of C-modules, and let F be termwise scalar extension along A\\to T\\to C. Given t:F(Q)\\to N and base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model] m for Q and m_U for U\\otimes_A Q, suppose m.localizedComparison followed by H^i(t) is an isomorphism for every i. Then the analogous comparison for U\\otimes_A Q, followed by H^i(F(U\\otimes Q)\\cong F(U)\\otimes F(Q)\\to F(U)\\otimes N), is an isomorphism for every i. The tensor comparison is the inverse scalar-extension tensorator.",
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), local computation using Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Use the mixed-ring K-flat tensor associator to rebracket U tensor_A Q tensor_R B, naturally in U and Q, with the commuting B-action. This identifies the canonical comparison for the tensor complex with tensoring the comparison for Q.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since C is T-flat, extension to C commutes with cohomology and is exact. The model counit equations identify the localized comparison with this scalar extension of the canonical mixed-ring comparison.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed Q,t, the U for which all comparisons are isomorphisms form a localizing subcategory: shifts reindex; sums commute with cohomology and tensor; the five lemma for the long exact cohomology sequences gives triangles; retracts preserve isomorphisms. It contains every shift of A by the assumed comparison for Q. Apply module-derived free generation. K-flatness lets the displayed total tensors compute the derived ones.",
+   "uses": [
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-derived-module-free-generation",
+  "lem-pc-kflat-derived-tensor-associator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), local stalk computation, with the mixed-ring transitivity argument of Tag 0BYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat localization of derived tensor cohomology comparison inherited by tensor with a K flat complex",
+   "results": "Eight hits: Module.Flat exact tensor and Tor declarations; no localized derived comparison inheritance or simultaneous stalk square theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "Twelve homology map declarations, including preservation of isomorphisms; none constructs the mixed-ring comparison or tensor stalk squares.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorStalkComparison|localizedTensorComparison",
+   "results": "0 hits. Also read existing DerivedTensorTransitivity, StalkTensorComplex, KFlatStalkCriterion and StalkComparisonCoordinateInvariance modules.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor inheritance for localized derived cohomology comparison and stalk comparison commuting squares",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof step: single-complex base-change criterion, Tag 0DJA(1), local tensor inheritance computation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritance",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonInheritance.lean",
+  "declaration": "ModuleCat.localizedTensorComparison_inheritance",
+  "statement": "theorem localizedTensorComparison_inheritance\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (N : CochainComplex (ModuleCat.{u} C) ℤ)\n    (hU : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :\n    letI := HasDerivedCategory.standard (ModuleCat.{u} R)\n    letI := HasDerivedCategory.standard (ModuleCat.{u} B)\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∀ (t : F.obj Q ⟶ N)\n      (m : BaseDerivedTensorCohomologyModel R A B Q C)\n      (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C),\n      (∀ i : ℤ, IsIso (m.localizedComparison i ≫ HomologicalComplex.homologyMap t i)) →\n      ∀ i : ℤ, IsIso (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-578a5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T151700-L-923921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-578a5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T151700-L-923921",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered five modules compile cleanly; target unchanged, interfaces and DAG agree, two documented lower obligations are valid and sourced, and both forced adaptations are necessary and compile."
+ }
+}

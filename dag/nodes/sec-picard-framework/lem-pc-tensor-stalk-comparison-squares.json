@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-tensor-stalk-comparison-squares",
+ "kind": "statement",
+ "title": "Simultaneous ring coordinates for tensor stalk comparisons",
+ "statement": "For a cartesian square X\\xleftarrow{g\\prime}X\\prime with vertical maps f:X\\to S and f\\prime:X\\prime\\to S\\prime and base map g:S\\prime\\to S [def-pc-base-change], quasi-coherent derived objects E,K on X and K\\prime on X\\prime [def-pc-derived-category], a morphism phi:L(g\\prime)^*K\\to K\\prime, and the canonical tensor comparison on derived pullback [def-pc-derived-pullback-tensor-comparison] with its specified K-flat and shared-counit equations, take coordinates c for phi and d for its induced tensor map and a point z [def-pc-single-complex-base-change-stalk-condition]. Set R=O_{S,f(g\\prime z)}, A=O_{X,g\\prime z}, B=O_{S\\prime,f\\prime z}, C=O_{X\\prime,z} with their actual stalk maps. Then C is flat over A\\otimes_R B. There exist K-flat A-complexes U,Q, a C-complex N, a map t:F(Q)\\to N where F is termwise A-to-C extension, and cohomology models m,m_U [def-pc-base-derived-tensor-cohomology-model] for Q,U\\otimes Q. For every i there are source and target isomorphisms giving commuting squares between stalkComparison(c,z,i) and m.localizedComparison(i);H^i(t), and between stalkComparison(d,z,i) and m_U.localizedComparison(i);H^i(mu_F(U,Q)^{-1};(F(U) tensor t)). No invertibility of the horizontal arrows is asserted.",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), local computation using Tag 0BYJ"
+ },
+ "proof": [
+  {
+   "text": "Choose K-flat sheaf representatives of E,K and a K-injective representative of K prime; lift phi via the invertible pullback counit to a chain map. Take stalks to obtain U,Q,N,t. The stalk K-flat criterion proves the stated acyclicity properties.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the cartesian square along its canonical isomorphism with the chosen pullback and apply [lem-pc-pullback-stalk-tensor-flat] to the actual stalk algebra maps to obtain flatness of C over A tensor_R B. Tensor stalk and pullback stalk identifications and the cohomology model equations give the two commuting squares in these representatives. Their naturality gives the tensorator followed by the tensor of t.",
+   "uses": [
+    "lem-pc-stalk-tensor-complex",
+    "lem-pc-pullback-stalk-tensor-flat",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical tensor-comparison predicate supplies its K-flat equation for the shared derived pullback counit. Apply that equation to E,K representatives and compose with the map representing phi. The represents equations identify the resulting map with tau followed by tensoring phi. This gives the tensor square with the canonical scalar-extension tensorator. Use coordinate invariance to transport to arbitrary c,d for these SAME derived maps; no change of the derived map or monoidal structure is made.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-stalk-comparison-coordinate-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-pullback-stalk-tensor-flat",
+  "lem-pc-stalk-comparison-coordinate-invariance",
+  "lem-pc-stalk-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), local stalk computation, with the mixed-ring transitivity argument of Tag 0BYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat localization of derived tensor cohomology comparison inherited by tensor with a K flat complex",
+   "results": "Eight hits: Module.Flat exact tensor and Tor declarations; no localized derived comparison inheritance or simultaneous stalk square theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "Twelve homology map declarations, including preservation of isomorphisms; none constructs the mixed-ring comparison or tensor stalk squares.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorStalkComparison|localizedTensorComparison",
+   "results": "0 hits. Also read existing DerivedTensorTransitivity, StalkTensorComplex, KFlatStalkCriterion and StalkComparisonCoordinateInvariance modules.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor inheritance for localized derived cohomology comparison and stalk comparison commuting squares",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof step: single-complex base-change criterion, Tag 0DJA(1), local tensor inheritance computation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorStalkComparisonSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorStalkComparisonSquares.lean",
+  "declaration": "AlgebraicGeometry.exists_tensorStalkComparison_squares",
+  "statement": "theorem exists_tensorStalkComparison_squares\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (E K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X')\n    (φ : (derivedPullback g').obj K.obj ⟶ K'.obj)\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback g').obj (A ⊗ B) ⟶\n        (derivedPullback g').obj A ⊗ (derivedPullback g').obj B)\n    (hτ : IsCanonicalPullbackTensorComparison g' τ)\n    (c : SingleComplexBaseChange.Coordinates g' K.obj K'.obj φ)\n    (d : SingleComplexBaseChange.Coordinates g' (E.obj ⊗ K.obj)\n      (((derivedPullback g').obj E.obj) ⊗ K'.obj)\n      (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ))) (z : X') :\n    letI := SingleComplexBaseChange.leftAlgebra f g' z\n    letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z\n    letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} (SingleComplexBaseChange.R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z))\n    let R := SingleComplexBaseChange.R f g' z\n    let A := SingleComplexBaseChange.A g' z\n    let B := SingleComplexBaseChange.B f' z\n    let C := SingleComplexBaseChange.C z\n    let F := (ModuleCat.extendScalars.{u, u, u}\n      ((algebraMap (TensorProduct R A B) C).comp\n        (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ)\n    let G := ModuleCat.extendScalars.{u, u, u} (algebraMap (TensorProduct R A B) C)\n    let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex\n      (.up ℤ)\n    Module.Flat (TensorProduct R A B) C ∧\n    ∃ (U Q : CochainComplex (ModuleCat.{u} A) ℤ)\n      (N : CochainComplex (ModuleCat.{u} C) ℤ)\n      (_ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n        (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic)\n      (_ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n        (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n      (t : F.obj Q ⟶ N)\n      (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q C)\n      (mU : ModuleCat.BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C),\n      ∀ i : ℤ,\n      ∃ (a : G.obj (m.cohomology i) ≅\n          G.obj ((SingleComplexBaseChange.cohomologyModel f f' g g' sq z c.P).cohomology i))\n        (b : N.homology i ≅ (S.obj c.N).homology i)\n        (aU : G.obj (mU.cohomology i) ≅\n          G.obj ((SingleComplexBaseChange.cohomologyModel f f' g g' sq z d.P).cohomology i))\n        (bU : (F.obj U ⊗ N).homology i ≅ (S.obj d.N).homology i),\n        a.hom ≫ SingleComplexBaseChange.stalkComparison f f' g g' sq c z i =\n          m.localizedComparison i ≫ HomologicalComplex.homologyMap t i ≫ b.hom ∧\n        aU.hom ≫ SingleComplexBaseChange.stalkComparison f f' g g' sq d z i =\n          mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n            ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i ≫ bU.hom",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-578a5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T151700-L-923921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-578a5",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T151700-L-923921",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered five modules compile cleanly; target unchanged, interfaces and DAG agree, two documented lower obligations are valid and sourced, and both forced adaptations are necessary and compile."
+ }
+}
