@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-etale-ideal-sections-kernel",
+ "kind": "statement",
+ "title": "Sectionwise tensor ideal kernel of closed restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ ideal sheaf data on $X$ [def-sbc-ideal-sheaf-powers], and $u:U\\to X$ an object of its small etale site. Let $P(I)(U)=\\Gamma(U,u^*I.\\mathrm{toModules})$ be tensor sections [lem-sc-etale-qcoherent-presheaf-functorial]. Let $l_I(U):\\operatorname{ULift}P(I)(U)\\to\\operatorname{ULift}\\Gamma(U,\\mathcal O_U)$ be the lift of the section map of the pullback of the specified ideal inclusion followed by the canonical adjoint structure-module map [lem-weil-pbc-module-pullback-structure-sheaf]. Let $r_I(U)$ be additive restriction [def-sc-etale-additive-structure-restriction] to $U\\times_X I.\\mathrm{subscheme}$. Then $l_I(U)r_I(U)=0$ and the corresponding kernel fork of additive groups is limiting.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim: affine tensor identification with restriction kernels; realized using the already formalized base-change ideal-image and flat-pullback declarations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the structure-module coordinate natural transformation using the normalized restriction equation. Whisker the tensor image of the specified ideal inclusion and these coordinates with the additive universe lift; this is etaleIdealSectionsInclusion, with no choices of arbitrary data.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-restriction-equation",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-etale-tensor-sections-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale structure morphism g, flat module pullback preserves finite limits. Thus the pulled-back ideal inclusion followed by the structure-module isomorphism is monic.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the closed-subscheme base-change ideal-image theorem to I.subschemeι and g. Compare its selected adjunction with the normalized tensor adjunction via leftAdjointUniq. Naturality moves the comparison past the ideal inclusion, so the changed map differs by an isomorphism on the source and has the same image. Pullback symmetry identifies the kernel ideals of pullback.snd and pullback.fst. Since the canonical composite is monic, Subobject.isoOfMkEqMk gives an isomorphism with the kernel ideal module, commuting with inclusion.",
+   "uses": [
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the inclusion-compatible isomorphism on the top open. The kernel ideal module inclusion is injective and its range is exactly the kernel of restriction to its subscheme. The actual closed immersion factors as toImage followed by this subscheme inclusion. Since toImage is an isomorphism, its global-section map is injective, so the same range is the kernel of the actual restriction.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Corestrict the section map to the concrete additive kernel. Injectivity and the range equality make this corestriction bijective. AddEquiv.ofBijective gives the kernel-group isomorphism; transport AddCommGrpCat.kernelIsLimit along it with IsKernel.isoKernel and apply KernelFork.mapIsLimit for the additive universe lift. This gives the asserted sectionwise limiting fork.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-tensor-unit-restriction-equation",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-tensor-sections-right-exact",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; N1 Lean proof using flat pullback, image comparison, concrete additive kernels and universe lift.",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat scheme pullback of ideal sheaf sections kernel of closed subscheme restriction",
+   "results": "Eight hits, including IdealSheafData.comap and ker_fst_of_isClosedImmersion; no tensor-section comparison.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"imageSubobject_mono\"",
+   "results": "CategoryTheory.Limits.imageSubobject_mono identifies the image subobject of a monic morphism with Subobject.mk. Used in the proof.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_fst_of_isClosedImmersion|ker_subschemeι_app",
+   "results": "Four Mathlib matches in IdealSheaf/Functorial and IdealSheaf/Subscheme, giving base-change kernel ideals and affine restriction kernels.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat pullback of ideal sheaf identifies sections with kernel of closed subscheme restriction",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelIso",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: identify tensor ideal sections with restriction kernels.",
+   "via": [
+    "lem-sc-etale-ideal-kernel-iso",
+    "lem-sc-etale-ideal-kernel-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleIdealSectionsKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleIdealSectionsKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleIdealSectionsInclusion_isKernel",
+  "statement": "theorem etaleIdealSectionsInclusion_isKernel {X : Scheme.{u}} (I : X.IdealSheafData)\n    (U : X.Etaleᵒᵖ) :\n    ∃ h : (etaleIdealSectionsInclusion I).app U ≫\n        (etaleAdditiveSheafToLowerStar I.subschemeι).hom.app U = 0,\n      Nonempty (IsLimit (KernelFork.ofι (etaleIdealSectionsInclusion I |>.app U) h))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T054228-L-446075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T054228-L-446075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
