@@ -52,14 +52,14 @@ variable {X Y X' Y' : Scheme.{u}}
   [QuasiCompact f] [QuasiSeparated f]
 
 /-- **The smooth base change theorem** in étale cohomology. -/
-theorem Etale.isIso_baseChange_of_isProper [Smooth g] (sq : IsPullback g' f' f g)
+theorem Etale.isIso_baseChange_of_smooth [Smooth g] (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1}))
     (hK : Etale.DerivedCategory.Plus.orderInvertibleOnHomology f K) :
     IsIso ((Etale.baseChange Ab.{u + 1} sq.toCommSq).app K) :=
   sorry
 
 /-- **The smooth base change theorem as an isomorphism of functors** in étale cohomology. -/
-theorem Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring [Smooth g]
+theorem Etale.isIso_baseChange_of_smooth_of_ring_order_invertible [Smooth g]
     (sq : IsPullback g' f' f g) (htor : ∀ (a : Λ), IsUnit (addOrderOf a : Γ(Y, ⊤))) :
     IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
   sorry
