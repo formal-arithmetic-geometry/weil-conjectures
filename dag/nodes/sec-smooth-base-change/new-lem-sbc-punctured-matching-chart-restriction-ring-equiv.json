@@ -12,21 +12,39 @@
  },
  "proof": [
   {
-   "text": "Identify the matching ring with the formal-gluing H0 module, apply the H0 localization comparison, and transport the resulting inverse through the affine section identifications.",
+   "text": "The composite inclusion j from W into Spec matchingRing has image D(baseMap(f)), by preimage/image compatibility and hf. Transport the standard principal-open section localization through j.appIso to obtain IsLocalization.Away (baseMap(f)) Gamma(W).",
    "uses": [
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since D(f) excludes the closed point, f lies in the maximal ideal. Choose a finite generating family and prepend f. Apply the formal-gluing chart realization at index zero to obtain the H0-to-matching-ring linear equivalence b and chart equivalence c. For a numerator z with psi(rho(z))=0, c injectivity gives zero chart coordinate of b inverse(z). The bijective H0 localization map then sends its localized numerator to zero, so injectivity and IsLocalizedModule.exists_of_eq give a power of f killing b inverse(z). Transport by b and its scalar action to get baseMap(f)^n*z=0. This proved local helper does not use the downstream kernel-torsion or chart-injectivity modules.",
+   "uses": [
+    "lem-sbc-punctured-completion-formal-glueing-chart",
     "lem-weil-pbc-formal-glueing-H0-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing chart-power-lifting theorem provides denominator surjectivity for psi composed with rho. The preceding kernel calculation, applied to a difference, provides equality clearing. Units are transported by psi from Gamma(W). Thus the punctured chart section ring is also a localization of matchingRing at baseMap(f). IsLocalization.bijective proves psi bijective. Invert RingEquiv.ofBijective psi, and use symm_apply_apply on rho(z) to obtain the required compatibility.",
+   "uses": [
+    "lem-sbc-punctured-matching-chart-power-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-formal-glueing-H0-localization"
+  "def-sbc-punctured-completion-matching-sections",
+  "lem-sbc-punctured-completion-formal-glueing-chart",
+  "lem-weil-pbc-formal-glueing-H0-localization",
+  "lem-sbc-punctured-matching-chart-power-lift"
  ],
  "proof_origin": {
-  "kind": "split",
-  "by": "worker",
+  "kind": "from-source",
+  "by": "D3",
   "document": "Stacks Project",
-  "place": "Tags 0BLH and 05ER."
+  "place": "Tags 0BLH and 05ER, localized affine chart comparison; explicit localization kernel calculation and localization universal property."
  },
  "mathlib_searches": [
   {
@@ -100,10 +118,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T211104-L-391927",
-  "kind": "interface",
+  "landing": "20261013T215600-L-896217",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
