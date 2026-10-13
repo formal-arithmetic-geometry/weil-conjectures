@@ -1,0 +1,148 @@
+{
+ "id": "lem-sbc-strict-hensel-root-normalization-generic-etale",
+ "kind": "statement",
+ "title": "Generic etaleness of the concrete strict-hensel root normalization",
+ "statement": "Let $i:U\\to L$ be a morphism of schemes [def-weil-pbc-scheme-conventions], $G$ a finite group and $W\\to U$ a finite etale $G$-torsor [def-sbc-normal-dominant-galois]. Let $R$ be a commutative regular ring [def-weil-regular-scheme], $\\varphi:\\operatorname{Spec}R\\to L$, and $f\\in R$ a nonzerodivisor with $R/(f)$ regular. Suppose $|G|$ is a unit in $R$. Assume $\\beta:U\\times_L\\operatorname{Spec}R\\cong D(f)$ commutes with the projection to $\\operatorname{Spec}R$ [def-pc-fibre-product]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ be a geometric point [def-weil-geometric-point], $H$ its canonical strict henselization coordinate-ring colimit [def-weil-pbc-strict-henselization-limit], and $b:R\\to H$ a map inducing its structural morphism [def-weil-pbc-strict-henselization-structural-map]. Put $g=b(f)$, $n_0=|G|$, $A=H[T]/(T^{n_0}-g)$, $N=\\operatorname{Spec}A$, $q:N\\to\\operatorname{Spec}H$ the algebra structural morphism, and $V=D(g)\\subset N$. Assume $g$ is not a unit. Suppose $N$ is locally Noetherian. Let $p:W\\times_L V\\to V$ be the second pullback projection along $V\\hookrightarrow N\\xrightarrow{q}\\operatorname{Spec}H\\xrightarrow{\\operatorname{Spec}b}\\operatorname{Spec}R\\xrightarrow{\\varphi}L$, and assume $p$ is finite and etale [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Put $a=p\\circ(V\\hookrightarrow N)$ and let $a^\\nu:C_a\\to N$ be its concrete relative normalization [lem-weil-pbc-relative-normalization], defined affine locally by integral closure in the sections of the source of $a$. Assume $a^\\nu$ is finite. Fix a regular integral scheme $D$ and an effective Cartier centre $j:D\\to N$ [def-weil-regular-scheme, def-pc-integral-scheme, def-nagata-effective-cartier-ideal] such that every $z\\in N$ lies in $V$ exactly when it lies outside $j(D)$. Let $\\eta\\in D$ be a generic point of $D$. Then there exists an open $O\\subseteq N$ containing $j(\\eta)$ such that $a^\\nu$ restricted to $O$ is etale. No construction or finiteness of a new model, and no identification over $V$, is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), and 0EYG (pione-lemma-abhyankar-one-divisor), group-order root computation; finite-presentation openness of etaleness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The regular-divisor quotient theorem gives a regular local domain H/(g), and structural flatness makes g regular. In the root algebra, t^|G|=g and A/(t)=H/(g). Regularity along the root and the domain quotient make the generic divisor local ring a DVR, with uniformizer t and root ramification index |G|. The supplied reduced integral Cartier divisor has the same support as the root divisor, so j(eta) is this divisor generic point.",
+   "uses": [
+    "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the original cover over D(f) through beta and base change to H. For each connected generic torsor component its Galois group is a stabilizer subgroup of G. The degree formula 09EB makes its ramification and residue degrees divide the stabilizer order and hence |G|. Invertibility excludes wild ramification and inseparable residue degrees. Apply Abhyankar 0BRM to the root extension whose index is |G|: the normalized component extensions have ramification index one and separable residue extensions, hence are etale over the DVR. The relative normalization is therefore etale above j(eta).",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed finite normalization over the Noetherian N is finitely presented. Its nonetale locus is closed, and its image under the finite structural morphism is closed and misses j(eta). Let O be the complement of that image. It contains j(eta) and the whole restriction of a^nu to O is etale.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-sbc-strict-hensel-regular-divisor-quotient",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "worker",
+  "group": "B4",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), and 0EYG (pione-lemma-abhyankar-one-divisor), group-order root computation; finite-presentation openness of etaleness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Abhyankar lemma root extension normalization etale at a regular divisor generic point",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abhyankar lemma adjoining a root kills ramification and normalization is etale near the divisor generic point",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.IsUnramifiedAt, Algebra.IsStandardEtale, Algebra.IsEtaleAt, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instEtaleRing, StandardEtalePair.instFormallyEtaleRing, Algebra.instIsStandardEtaleRing, Ideal.ramificationIdx_eq_one_of_isUnramifiedAt",
+   "verdict": "No exact Mathlib theorem; existing project lemmas and normalization interfaces were read separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Scheme.Hom.fromNormalization",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact Mathlib theorem; existing project lemmas and normalization interfaces were read separately."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|abhyankar",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact Mathlib theorem; existing project lemmas and normalization interfaces were read separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootTameNormalization",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: group-order root extension followed by finite normalization and killing ramification at the divisor generic point.",
+   "via": [
+    "lem-sbc-strict-hensel-root-tame-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.strict_hensel_root_normalization_generic_etale",
+  "statement": "theorem GaloisCover.strict_hensel_root_normalization_generic_etale\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T160708-L-1370738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T160708-L-1370738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

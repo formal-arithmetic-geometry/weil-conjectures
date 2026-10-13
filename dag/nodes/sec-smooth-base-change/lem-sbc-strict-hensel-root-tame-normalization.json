@@ -22,43 +22,51 @@
  ],
  "proof": [
   {
-   "text": "The canonical ring H and its quotient by g are regular local. Flatness preserves the regular g. The root ring is local with regular root coordinate and regular quotient; its generic divisor local ring is a DVR. The supplied regular integral Cartier divisor has the same support and is reduced, so its generic point agrees with that of the root divisor.",
+   "text": "Use beta and its projection equation to identify U times_L T with T whenever the map T to Spec R lands in D(f). Construct the inverse to its second projection using the open-immersion lift and beta.inv; verify the two composites using the pullback universal property. The pasting isomorphism pullbackRightPullbackFstIso then expresses the punctured cover projection p as a base change of W.pi composed with isomorphisms. It is finite and etale.",
    "uses": [
-    "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "lem-sbc-affine-strict-henselization-structural-flat",
-    "lem-sbc-root-algebra-regular-at-root"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pull back W over D(f) using beta. Every connected generic component of this torsor has Galois group a stabilizer in G. The Galois degree formula of 09EB makes the ramification and residue degrees divide the stabilizer order and hence |G|. Invertibility excludes residue-characteristic factors, so the extension is tame. At the divisor generic point, adjoining the group-order root has ramification index |G|. Abhyankar 0BRM kills every component ramification index and gives separable residue extensions.",
-   "uses": [
-    "def-sbc-normal-dominant-galois"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply tame normalization 0EYH (pione-lemma-extend-tame-covering-normal) after the root base change. This gives finiteness and an identification over V. Abhyankar 0BRM gives etaleness over j(eta). The finite morphism is finitely presented over the Noetherian N. Its nonetale locus is closed, and its image is closed by finiteness and omits j(eta). Take O to be the complement of that image. The identification over V gives zeta and its projection equation.",
-   "uses": [
+    "def-sbc-normal-dominant-galois",
     "def-weil-finite-integral-morphism",
     "def-weil-etale-morphism"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Let a be the explicit composite p followed by V.ι and take C=a.normalization, n=a.fromNormalization. Apply strict_hensel_root_normalization_finite to this constructed relative normalization.",
+   "uses": [
+    "lem-sbc-strict-hensel-root-normalization-finite"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply strict_hensel_root_normalization_generic_etale to the same constructed normalization, its proved finiteness, and the supplied D,j,eta. This produces the open O and etaleness over O.",
+   "uses": [
+    "lem-sbc-strict-hensel-root-normalization-generic-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing upstream Scheme.Hom.pullbackFromNormalizationIso p V.ι and its hom_comp projection formula from ExtendOverInertia. Compose it with the inverse open-restriction pullback isomorphism to give zeta from n inverse-image V to the original punctured pullback. The projection formula proves zeta.hom composed with p equals n restricted to V. Since p is etale, its isomorphic restriction n restricted to V is etale. Package C,n,O,zeta and these proofs.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-normal-dominant-galois",
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "lem-sbc-affine-strict-henselization-structural-flat",
-  "lem-sbc-root-algebra-regular-at-root",
-  "lem-sbc-strict-hensel-regular-divisor-quotient"
+  "lem-sbc-strict-hensel-root-normalization-finite",
+  "lem-sbc-strict-hensel-root-normalization-generic-etale",
+  "lem-weil-pbc-relative-normalization"
  ],
  "proof_origin": {
+  "kind": "from-document",
   "by": "worker",
-  "group": "F2",
-  "document": "Stacks Project",
-  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), 0EYG (pione-lemma-abhyankar-one-divisor) and 0EYH (pione-lemma-extend-tame-covering-normal)."
+  "group": "B4",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYG, 0BRM and 032L; explicit relative normalization, finite-etale-open integral closure, and smooth normalization base change.",
+  "note": "Only the finiteness subargument is shortened with an existing generic tool; the root-extension and Abhyankar steps of the unit remain."
  },
  "mathlib_searches": [
   {
@@ -156,9 +164,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261013T145119-L-695797",
-  "kind": "interface"
+  "landing": "20261013T160708-L-1370738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
