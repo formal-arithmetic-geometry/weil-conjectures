@@ -12,14 +12,19 @@
  ],
  "proof": [
   {
-   "text": "Take the canonical pullback stalk comparison of lemma-openclosed-stalk-upperstar and compose it with the identification s f=t. For a fixed tau, precomposition x -> tau followed by x is a natural endomorphism of each geometric point fibre functor: tau fixes s and therefore t, and precomposition commutes with morphisms of etale neighborhoods. On the colimit defining a stalk this induces the map sending the germ of z at x to the germ of z at tau followed by x. The hypotheses ha and hb identify a and b with these induced maps because represented germs exhaust the stalk.",
+   "text": "Substitute t = s followed by f and let k be the inverse component of the canonical comparison Etale.upperStarCompSheafFiberIso from lemma-openclosed-stalk-upperstar. On a germ (V,v,z), k is the germ at the base-changed lift (v,s) of the section obtained from z by the abstract pullback adjunction unit and the comparison from abstract to constructed pullback. Expand the comparison, use toPresheafFiber_sheafFiberIso_inv_app, toPresheafFiber_sheafFiberComapIso_hom_app, and naturality of toPresheafFiber for the comparison of sheaves to prove this formula.",
    "uses": [
     "lemma-openclosed-stalk-upperstar"
    ],
    "elementary": false
   },
   {
-   "text": "The identification of fibre functors along base change sends a lift into U times_Y X to its first projection. Its inverse sends x to the pair (x,s). These maps commute with precomposition by tau, because tau followed by s=s. The comparison of stalks is obtained from the resulting comparison of skyscraper pushforward functors by adjunction. The two paths on right adjoints are equal by the preceding projection calculation; taking their mates gives the corresponding equality on left adjoints (the units and counits are natural). The comparison between the chosen and abstract sheaf pullbacks is natural and respects this equality after whiskering with the fibre functor. Evaluate at M and compose with s f=t to obtain j.hom followed by b = a followed by j.hom.",
+   "text": "For tau with tau followed by s = s, let v prime be tau followed by v and let x and x prime be the base-changed lifts of v and v prime. Their first projections show that x prime and tau followed by x agree on V; their second projections agree on X by the hypothesis on tau. The universal property of the pullback gives x prime = tau followed by x. The hypothesis hb identifies the germ at v followed by b with the germ at v prime. The hypothesis ha identifies the germ at x followed by a with the germ at x prime, for the same pulled-back section. Apply the germ formula on both sides to deduce k followed by a = b followed by k after precomposition with every germ map. The colimit hom-ext lemma proves equality of the stalk morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose j to be k inverse. Precompose k followed by a = b followed by k with k inverse, then cancel the isomorphism k on the right. This gives j followed by b = a followed by j.",
    "uses": [],
    "elementary": true
   }
@@ -30,7 +35,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "P3: change-of-lift naturality of the canonical stalk comparison; Tags 03Q1 and 03QW"
+  "place": "A3: represented-germ proof using the existing canonical stalk comparison and its germ descriptions; Tags 03Q1 and 03QW"
  },
  "mathlib_searches": [
   {
@@ -99,10 +104,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T015605-L-3024354",
-  "kind": "interface",
+  "landing": "20261013T031528-L-3567563",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

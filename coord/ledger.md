@@ -10841,3 +10841,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: returned deliver/T3/Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood (reviewer RETURN: (the landing tools, head 8a1cf0620) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 03:15 L: returned deliver/T4/Sheaf.AlgebraicGeometry.SectionRingSecondChartGenerator (reviewer RETURN: (the landing tools, head 23346f0c9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 03:15 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition (stage 3; reviewer PASS; first push; landing 20261013T031528-L-3567356 (proof); batch 20261013T031526; modules 1; new nodes 0)
+- 03:15 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.PullbackStalkGermAction (stage 3; reviewer PASS; first push; landing 20261013T031528-L-3567563 (proof); batch 20261013T031526; modules 1; new nodes 0)
