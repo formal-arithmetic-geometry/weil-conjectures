@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-s3-alternating-cech-presheaf-terms-sheafification",
+ "kind": "statement",
+ "title": "Sheafification units on intersection-product presheaf terms",
+ "statement": "Let $X$ be a scheme, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$, and $G$ an $\\mathcal O_X$-module. For every $p\\in\\mathbb N$, the unit of module sheafification on the explicit presheaf term $\\prod_{t:\\operatorname{Fin}(p+1)\\hookrightarrow_o\\operatorname{Fin}(r)}(V\\mapsto G(V\\cap W_t))$ [def-pc-s3-alternating-cech-sheaf-construction] is an isomorphism of module presheaves. No covering or affineness assumption is needed.",
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU (cohomology-lemma-covering-resolution), with the increasing-tuple convention of Tag 01FM"
+ },
+ "proof": [
+  {
+   "text": "For a fixed intersection W, the presheaf V ↦ G(V intersect W) is the\ndirect image along the inclusion W into X of the restriction of G to W.\nThe scalar restriction in cechCapModule agrees with the scalar structure\nof that direct image. It is therefore a sheaf. Products of these sheaves\nare computed as products of presheaves, and the explicit terms are exactly\nthose finite products. The sheafification unit of an already sheaf\npresheaf is an isomorphism, also in the category of module presheaves,\nsince the forgetful functor reflects isomorphisms. The empty product is\nthe zero module presheaf and is a sheaf as well.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 02FU and 01FM; M4 sectionwise decomposition of the local-exactness argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The alternating Cech complex restricted to a member of the cover is exact in positive degrees",
+   "results": "8 hits: AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Profinite.NobelingProof.succ_exact, ChainComplex.alternatingConst_exactAt, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, HomologicalComplex.exact_of_degreewise_exact, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, HomologicalComplex.exact_iff_degreewise_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact",
+   "date": "2026-10-13",
+   "verdict": "The module-sheafification and limit results prove the sheafification step; no result states the explicit signed-insertion cocycle primitive.",
+   "digest": "0c57126c575b4620"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "12 hits: PresheafOfModules.sheafification, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-13",
+   "verdict": "The module-sheafification and limit results prove the sheafification step; no result states the explicit signed-insertion cocycle primitive.",
+   "digest": "9d2f1efcbe443551"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*over|over.*sheafification",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean, Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean, Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean, Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "The module-sheafification and limit results prove the sheafification step; no result states the explicit signed-insertion cocycle primitive.",
+   "digest": "66c33dbf870b37a2"
+  },
+  {
+   "tool": "grep",
+   "query": "strictMono_insertNth|isIso_unit_app_of_iso|isSheaf_of_isLimit",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/Topology/Sheaves/Limits.lean, Mathlib/Topology/Sheaves/Limits.lean, Mathlib/Order/Fin/Tuple.lean, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean, Mathlib/CategoryTheory/Sites/CartesianMonoidal.lean, Mathlib/Order/Fin/InsertNth.lean",
+   "date": "2026-10-13",
+   "verdict": "The module-sheafification and limit results prove the sheafification step; no result states the explicit signed-insertion cocycle primitive.",
+   "digest": "6c50dcc0219ef324"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocycle in the increasing tuple Cech complex on an open contained in a cover member is a boundary by signed insertion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafLocalExact",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local sectionwise exactness and sheafification-unit steps of lem-pc-s3-alternating-cech-sheaf-local-exact",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-positive-contraction",
+    "lem-pc-s3-alternating-cech-sheaf-singleton-contraction",
+    "lem-pc-s3-alternating-cech-sheaf-local-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechPresheafTermsSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechPresheafTermsSheafification.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafPresheafTerms_unit_isIso",
+  "statement": "theorem alternatingCechSheafPresheafTerms_unit_isIso\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (p : ℕ) :\n    IsIso ((PresheafOfModules.sheafificationAdjunction\n      (𝟙 X.ringCatSheaf.obj)).unit.app (alternatingCechSheafPresheafTerms U G p))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T140821-L-314437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T140821-L-314437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
