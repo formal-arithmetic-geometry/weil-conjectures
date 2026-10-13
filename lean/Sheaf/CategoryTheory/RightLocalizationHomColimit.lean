@@ -50,6 +50,41 @@ theorem rightLocalization_hom_colimit_bijective
           g (F.ιColimitType (Opposite.op t) f) =
             (MorphismProperty.RightFraction.mk t.hom t.prop f).map Q'
               (Localization.inverts Q' W) := by
-  sorry
+  let F := (MorphismProperty.Over.forget W ⊤ M ⋙ Over.forget M).op ⋙ yoneda.obj N
+  let c : F.CoconeTypes :=
+    { pt := Q'.obj M ⟶ Q'.obj N
+      ι t f := (MorphismProperty.RightFraction.mk t.unop.hom t.unop.prop f).map Q'
+        (Localization.inverts Q' W)
+      ι_naturality := by
+        intro s t a
+        funext f
+        change (MorphismProperty.RightFraction.mk t.unop.hom t.unop.prop
+            (a.unop.left ≫ f)).map Q' (Localization.inverts Q' W) =
+          (MorphismProperty.RightFraction.mk s.unop.hom s.unop.prop f).map Q'
+            (Localization.inverts Q' W)
+        apply (MorphismProperty.RightFraction.map_eq_iff Q' W _ _).mpr
+        refine ⟨t.unop.left, 𝟙 _, a.unop.left, ?_, ?_, ?_⟩
+        · simpa only [Category.id_comp] using (MorphismProperty.Over.w a.unop).symm
+        · simp only [Category.id_comp]
+        · simpa only [Category.id_comp] using t.unop.prop }
+  refine ⟨F.descColimitType c, ⟨?_, ?_⟩, fun t f ↦ rfl⟩
+  · intro x y h
+    obtain ⟨s, f, rfl⟩ := F.ιColimitType_jointly_surjective x
+    obtain ⟨t, g, rfl⟩ := F.ιColimitType_jointly_surjective y
+    change (MorphismProperty.RightFraction.mk s.unop.hom s.unop.prop f).map Q'
+        (Localization.inverts Q' W) =
+      (MorphismProperty.RightFraction.mk t.unop.hom t.unop.prop g).map Q'
+        (Localization.inverts Q' W) at h
+    obtain ⟨R, a, b, hs, hf, ha⟩ :=
+      (MorphismProperty.RightFraction.map_eq_iff Q' W _ _).mp h
+    let r : W.Over ⊤ M := MorphismProperty.Over.mk ⊤ (a ≫ s.unop.hom) ha
+    let α : r ⟶ s.unop := MorphismProperty.Over.homMk a rfl
+    let β : r ⟶ t.unop := MorphismProperty.Over.homMk b hs.symm
+    apply F.ιColimitType_eq_of_map_eq_map f g α.op β.op
+    exact hf
+  · intro g
+    obtain ⟨φ, hφ⟩ := Localization.exists_rightFraction Q' W g
+    exact ⟨F.ιColimitType (Opposite.op (MorphismProperty.Over.mk ⊤ φ.s φ.hs)) φ.f,
+      hφ.symm⟩
 
 end CategoryTheory
