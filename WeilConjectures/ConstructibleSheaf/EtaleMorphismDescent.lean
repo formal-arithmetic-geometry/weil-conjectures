@@ -294,24 +294,20 @@ noncomputable def mapMkIso {W : X.Etale} (g : W.left ⟶ Z) [Etale g] (hg : g �
 /-- The component of `ψ` at a lift `q` of `W`, computed through a factorisation `g` of `q` through
 `p : Z ⟶ X'`. -/
 lemma descentComponent_eq_compRestriction {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v)
-    (g : W.left ⟶ Z) [Etale g] (hg : g ≫ p = q.left) :
+    (g : W.left ⟶ Z) [Etale g] (hg : g ≫ p = q.left)
+    (hgw : g ≫ w = W.hom) :
     descentComponent v ψ q =
-      P.obj.map (mapMkIso w g (by rw [hw, ← Category.assoc, hg]; exact MorphismProperty.Over.w q)).hom.op ≫
+      P.obj.map (mapMkIso w g hgw).hom.op ≫
         (compRestriction v p w hw ψ).hom.app (op (Scheme.Etale.mk g)) ≫
-          Q.obj.map (mapMkIso w g (by rw [hw, ← Category.assoc, hg];
-            exact MorphismProperty.Over.w q)).inv.op := by
+          Q.obj.map (mapMkIso w g hgw).inv.op := by
   let k : liftEtale v q ≅ (MorphismProperty.Over.map ⊤ (inferInstance : Etale p)).obj
       (Scheme.Etale.mk g) := MorphismProperty.Over.isoMk (Iso.refl _) (by simp [liftEtale, hg])
   rw [descentComponent, hom_app_eq_of_iso v ψ k]
-  simp only [compRestriction, Sheaf.comp_hom, NatTrans.comp_app,
+  simp only [compRestriction, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     localizationRestrictionComp_hom_app_hom_app, localizationRestrictionComp_inv_app_hom_app,
     localizationRestriction_map_hom_app, localizationRestriction_obj_obj_map, Category.assoc,
     ← Functor.map_comp, ← Functor.map_comp_assoc, ← op_comp, Quiver.Hom.unop_op]
   congr 3
-  · apply MorphismProperty.Over.Hom.ext
-    simp [k, mapMkIso]
-  · apply MorphismProperty.Over.Hom.ext
-    simp [k, mapMkIso]
 
 /-- **Gluing of morphisms along a surjective étale morphism** `v : X' ⟶ X`, in terms of the
 restriction functors: for a cartesian square `Z = X' ×_X X'` with projections `r₁, r₂`, a
@@ -333,8 +329,8 @@ lemma exists_localizationRestriction_map_eq_of_isPullback (hv : Function.Surject
     rw [hgw]
     exact W.prop
   have : Etale g := Etale.of_comp g w
-  rw [descentComponent_eq_compRestriction v r₁ w h₁ ψ q₁ g hg₁,
-    descentComponent_eq_compRestriction v r₂ w h₂ ψ q₂ g hg₂, hψ]
+  rw [descentComponent_eq_compRestriction v r₁ w h₁ ψ q₁ g hg₁ hgw,
+    descentComponent_eq_compRestriction v r₂ w h₂ ψ q₂ g hg₂ hgw, hψ]
 
 end PullbackDescent
 
