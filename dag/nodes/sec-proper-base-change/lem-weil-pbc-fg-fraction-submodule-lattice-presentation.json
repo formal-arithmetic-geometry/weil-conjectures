@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-fg-fraction-submodule-lattice-presentation",
+ "kind": "statement",
+ "title": "Integral full-rank lattice presentation of a finite fraction-field submodule",
+ "statement": "Let $R$ be a commutative integral domain with fraction field $K$, let $r\\ge0$, and let $M\\subseteq K^r$ be an $R$-submodule spanned by finitely many vectors. There exist an integer $s\\le r$, an $R$-submodule $N\\subseteq R^s$, and $0\\ne d\\in R$ such that $dR^s\\subseteq N$ and $M\\cong N$ as $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00PE (lemma-finite-length), proof: reduction to the K-span and the finite-case clearing of denominators, including a nonzero d with dR^s contained in the integral lattice"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let V be the K-span of M. Set s = finrank_K V, which is at most r. Inclusion into V followed by a finite basis coordinate equivalence gives an injective R-linear map f:M→K^s. Its range P is finitely generated, isomorphic to M, and spans K^s. The span_range_inclusion_eq_top and map_span lemmas establish the spanning assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose finitely many generators of P. IsLocalization.exist_integer_multiples_of_finite on their coordinate pairs supplies a common nonzero denominator a. Let μ multiply vectors by a, and let ι:R^s→K^s be the coordinate algebra map. The generator calculation and span_le show μ(P)⊆range ι. Set N=ι^{-1}(μ(P)). Both maps are injective; map_comap_eq and equivMapOfInjective give P≅N.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any vector in span_K P, a nonzero R-multiple belongs to P. Prove this by closure_induction: for a K-multiple of an element of P clear its scalar denominator using IsFractionRing.div_surjective; for a sum multiply the two denominators; zero uses 1. Apply this to each standard basis vector. The product of their nonzero denominators times a is nonzero d. The erased-product formula shows d times each integral basis vector belongs to N; summing the coordinates gives dR^s⊆N. Empty sums and products also prove the s=0 case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00PE (lemma-finite-length), proof: reduction to the K-span and the finite-case clearing of denominators, including a nonzero d with dR^s contained in the integral lattice"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated fraction field submodule has an integral full rank lattice presentation by clearing denominators",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated submodule of K^r for K fraction field of a domain R is isomorphic to N in R^s for s at most r with d R^s contained in N for some nonzero d",
+   "results": "Submodule.IsLattice.free and Smith-normal-form results require a PID; integer-module finite-quotient results require Z. No general-domain integral presentation with a nonzero scalar sublattice.",
+   "date": "2026-10-13",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg exist_integer_multiples|exists_integer_multiples in Mathlib/RingTheory/Localization and Algebra/Module/LocalizedModule; read Mathlib/Algebra/Module/Lattice.lean; rg commensurable|lattice.presentation|fg-submodule.*length in dag/nodes/sec-proper-base-change",
+   "results": "IsLocalization.exist_integer_multiples_of_finite clears scalar denominators. Span, basis and map equivalences provide individual steps; no theorem assembles this presentation. No matching existing DAG node.",
+   "date": "2026-10-13",
+   "verdict": "No combined match; prove from the component Mathlib declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split, through the proof of Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'; the first sentence of the proof of that lemma (031F) invokes lemma-finite-length (00PE); Algebra, Tag 00PE (lemma-finite-length), proof: reduction to the K-span and the finite-case clearing of denominators, including a nonzero d with dR^s contained in the integral lattice",
+   "via": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.FGFractionFieldSubmoduleLatticePresentation",
+  "file": "lean/Sheaf/RingTheory/FGFractionFieldSubmoduleLatticePresentation.lean",
+  "declaration": "Submodule.exists_lattice_presentation_of_fg",
+  "statement": "theorem exists_lattice_presentation_of_fg {R : Type u} [CommRing R] [IsDomain R] {K : Type v} [Field K] [Algebra R K] [IsFractionRing R K] (r : ℕ) (M : Submodule R (Fin r → K)) (hM : M.FG) : ∃ s : ℕ, s ≤ r ∧ ∃ N : Submodule R (Fin s → R), ∃ d : R, d ≠ 0 ∧ d • (⊤ : Submodule R (Fin s → R)) ≤ N ∧ Nonempty (M ≃ₗ[R] N)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054246-L-451897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054246-L-451897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

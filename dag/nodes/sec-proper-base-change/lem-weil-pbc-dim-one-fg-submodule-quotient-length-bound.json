@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-dim-one-fg-submodule-quotient-length-bound",
+ "kind": "statement",
+ "title": "Finite-submodule case of the fraction-field quotient length bound",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] local integral domain of Krull dimension one [def-weil-pbc-krull-dimension-ring], with fraction field $K$. Let $r\\ge0$ and let $M\\subseteq K^r$ be an $R$-submodule spanned by finitely many vectors. For any $0\\ne x\\in R$, $\\operatorname{length}_R(M/xM)\\le r\\operatorname{length}_R(R/xR)$ [def-weil-pbc-module-length].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00PE (lemma-finite-length), finite-case paragraph; two-short-exact-sequence refinement of its finite-cokernel argument, with Tag 00IV (lemma-length-additive)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fg-fraction-submodule-lattice-presentation] to obtain s≤r, N⊆F=R^s, d≠0, dF⊆N and M≅N. For d, [lem-weil-pbc-dim-le-one-principal-quotient-finite-length] gives length(R/dR)<∞. Coordinate quotientPi and length_pi_of_fintype give length(F/dF)=s length(R/dR). The surjection F/dF→F/N bounds length(F/N) by this finite quantity.",
+   "uses": [
+    "lem-weil-pbc-fg-fraction-submodule-lattice-presentation",
+    "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication by x is injective on F since R is a domain and x≠0. Define A=xN and T=xF. The map F/N→F/A induced by multiplication by x is injective because μ^{-1}(A)=N, and its image is the kernel of F/A→F/T. The map N/xN→F/A induced by inclusion is injective because A pulls back to xN inside N, and its image is the kernel of F/A→F/N. The quotient projections are surjective. Additivity [lem-weil-pbc-length-additive-short-exact] applied to these two sequences gives length(F/N)+length(F/xF)=length(N/xN)+length(F/N). Cancel the finite summand length(F/N), using ENat.add_left_injective_of_ne_top.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coordinatewise quotientPi identifies F/xF with (R/xR)^s. Its length is s length(R/xR), by Module.length_pi_of_fintype. Transport along QuotSMulTop.congr for M≅N, and use s≤r to get the bound.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fg-fraction-submodule-lattice-presentation",
+  "lem-weil-pbc-dim-le-one-principal-quotient-finite-length",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00PE (lemma-finite-length), finite-case paragraph; two-short-exact-sequence refinement of its finite-cokernel argument, with Tag 00IV (lemma-length-additive)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated submodule of power of fraction field, quotient by nonzero scalar has length bounded by dimension times length R/xR",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "length of submodule of finite dimensional fraction field space modulo nonzero scalar bounded by rank times length of ring modulo scalar",
+   "results": "Module.length_of_free_of_finite, Module.length_quotient, Module.length_eq_finrank, Submodule.IsLattice.finrank_of_pi and PID quotient formulas. None states the estimate for a general one-dimensional domain.",
+   "date": "2026-10-13",
+   "verdict": "No match; use generic length and quotient identities."
+  },
+  {
+   "tool": "grep",
+   "query": "rg length_quotSMulTop|quotSMulTop.*length|length.*quotSMulTop in lean/WeilConjectures, lean/Sheaf, and Mathlib/RingTheory; read Mathlib/RingTheory/Length.lean and Algebra/Module/Lattice.lean",
+   "results": "Only the assigned arbitrary-submodule theorem and its users in Sheaf; generic length additivity and finite-free formulas in Mathlib. Lattice freeness and rank formulas require a PID. No finite-case bound or lattice-presentation statement for general domains.",
+   "date": "2026-10-13",
+   "verdict": "No matching combined statement; component Mathlib results used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split, through the proof of Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'; the first sentence of the proof of that lemma (031F) invokes lemma-finite-length (00PE); Algebra, Tag 00PE (lemma-finite-length), finite-case paragraph; two-short-exact-sequence refinement of its finite-cokernel argument, with Tag 00IV (lemma-length-additive)",
+   "via": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.LengthQuotSMulTopFGFractionFieldSubmodule",
+  "file": "lean/Sheaf/RingTheory/LengthQuotSMulTopFGFractionFieldSubmodule.lean",
+  "declaration": "Submodule.length_quotSMulTop_le_of_fg_of_ringKrullDim_eq_one_of_isLocalRing",
+  "statement": "theorem length_quotSMulTop_le_of_fg_of_ringKrullDim_eq_one_of_isLocalRing {R : Type u} [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] {K : Type v} [Field K] [Algebra R K] [IsFractionRing R K] (r : ℕ) (M : Submodule R (Fin r → K)) (hM : M.FG) (hdim : ringKrullDim R = 1) (x : R) (hx : x ≠ 0) : Module.length R (QuotSMulTop x M) ≤ (r : ℕ∞) * Module.length R (QuotSMulTop x R)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054246-L-451897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054246-L-451897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
