@@ -35,37 +35,25 @@
  },
  "proof": [
   {
-   "text": "Put Z=X times_Spec(k) Y, W=pr2 inverse V and E=(pr1^*F tensor pr2^*G)|W. The cover family on W is U_i'=W.ι inverse(pr1 inverse U_i). An intersection is U_intersection times V; both factors are affine. The open-immersion pullback/restriction comparison, its unit equation and pullback composition identify the restricted external coefficients with the external coefficients for F restricted to the intersection and G restricted to V.",
+   "text": "For each degree and tuple, commute finite infima with the two inverse-image maps. The image of the resulting open J in W is the product open of the affine intersection A with V. Apply externalTensor_affine_open_sections to obtain a normalized additive equivalence for this one coordinate.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-module-pullback-tensor"
+    "lem-sc-external-tensor-affine-open-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved externalGlobalSectionsTensor_bijective_of_isAffine to F restricted to the affine intersection and G restricted to V. The normalized open-immersion and pullback-composition comparisons of the preceding step transport this canonical map to the original restricted pullback-unit sections followed by tmulSection. Thus the chart comparison is an additive-group isomorphism with precisely the required pure-tensor formula; the affine tensor algebra calculation is reused, not reproved.",
-   "uses": [
-    "lem-sc-external-global-sections-tensor-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each degree n the tuple set Fin(n+1) to I is finite. Use Mathlib TensorProduct.piRight, conjugated by tensor commutativity, to identify (product M_y) tensor N with product (M_y tensor N). Its pure-tensor formula is coordinatewise tensoring. Compose with the chart comparisons and native Cech product-coordinate equivalences to obtain the asserted normalization. Empty tuple sets, empty intersections, empty V and zero coefficients obey the same formulas. No differential assertion is made.",
+   "text": "Upgrade the native Cech additive coordinate equivalence to a k-linear equivalence after scalar restriction: each projection and presheaf map is linear over the global section ring. Apply TensorProduct.congr to this equivalence and the identity of the fixed right factor, then TensorProduct.piLeft for the finite tuple set. Compose the coordinatewise chart additive equivalences and the inverse native Cech coordinate equivalence. The pure-tensor formula of each comparison gives PicardAffineCechNormalized. This includes empty tuple sets, empty chart opens and zero coefficients.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-external-global-sections-tensor-affine",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-sc-external-tensor-affine-open-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BED",
-  "place": "Details of termwise affine sections and finite products in the equality after Let V be an affine open"
+  "place": "varieties-lemma-kunneth, equality of Cech complexes in the affine-open paragraph; finite-product assembly implemented in Lean by G2"
  },
  "mathlib_searches": [
   {
@@ -147,7 +135,7 @@
   "reviewer": "COMPILER",
   "group": "G2",
   "result": "pass",
-  "landing": "20261013T133745-L-44290",
+  "landing": "20261013T142855-L-497394",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

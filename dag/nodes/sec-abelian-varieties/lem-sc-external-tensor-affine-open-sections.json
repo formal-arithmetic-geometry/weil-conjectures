@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-external-tensor-affine-open-sections",
+ "kind": "statement",
+ "title": "Normalized external tensor sections on one affine product open",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechTerms",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of schemes [def-pc-scheme], and $F,G$ quasi-coherent module sheaves [pqf-def-coherent]. Let $A\\subseteq X$ and $V\\subseteq Y$ be affine opens. Put $Z=X\\times_kY$, $W=\\operatorname{pr}_2^{-1}V$, $E=\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G$ [def-sc-field-linear-module-cohomology-operations], and $J=W.\\iota^{-1}(\\operatorname{pr}_1^{-1}A)$. Write $K=W.\\iota(J)$, with its inclusions into $\\operatorname{pr}_1^{-1}A$ and $\\operatorname{pr}_2^{-1}V$. There exists an additive equivalence $\\Gamma(A,F)\\otimes_k\\Gamma(V,G|_V)\\cong\\Gamma(J,E|_W)$. The $k$ action on the first factor is restriction from the global structure-ring action along $f$. On a pure tensor $s\\otimes t$, the equivalence sends $s$ to its projection-adjunction-unit section restricted to $K$, sends $t$ first through the canonical restriction-section equivalence to $G(V)$ and then through the other projection-unit section restricted to $K$, takes their tensor section, and uses the inverse restriction-section equivalence for $W.\\iota$ to obtain a section on $J$. No finite index set, cover or differential is assumed; empty opens are allowed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "varieties-lemma-kunneth, affine-open paragraph after Let V be an affine open; single term of the displayed equality of Cech complexes"
+ },
+ "proof": [
+  {
+   "text": "Identify K with pr1 inverse A intersect pr2 inverse V, using the image-preimage formula for the open immersion W.ι. The product of the two affine opens is affine. Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff identify the two projection appLE ring maps as a pushout, first over Gamma(Spec k,top), then over k via GammaSpecIso. Scalar-map compatibility follows from naturality of the structure sheaf maps.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_tensorPullback_affine_sections to each projection on the affine target open A or V and affine source open K. Swap the source tensor factors and use its linearity clause to obtain C-linear equivalences C tensor_R M to the first projection sections and C tensor_S N to the second, where R=Gamma(X,A), S=Gamma(Y,V), C=Gamma(Z,K). Each takes 1 tensor s to the original projection adjunction unit restricted to K.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pushout algebra cancellation equivalences and tensor commutativity to identify (C tensor_R M) tensor_C (C tensor_S N) with M tensor_k N. The inverse sends s tensor t to (1 tensor s) tensor (1 tensor t). Tensor the two projection-section equivalences and compose with tensorSectionsMap, which is bijective on affine K for the quasi-coherent projection pullbacks. Its pure-tensor formula is tmulSection.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity on F(A) identifies restriction of scalars through the global structure ring with the local scalar action. Restriction-section isomorphisms identify the right factor with G(V) k-linearly and the output with sections of E restricted to W on J. Compose them with the preceding equivalence; the tracked pure-tensor formula is exactly externalTensorOpenPureSection. All operations apply to empty opens and zero section modules.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BED",
+  "place": "Single-chart affine tensor calculation underlying the equality of Cech complexes; direct appLE proof by G2"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of the external tensor product on the product of two affine open subschemes are the tensor product of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical external tensor sections on the product of two affine opens normalized by pullback adjunction units",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le, AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, AlgebraicGeometry.IsAffineOpen.algebraMap_Spec_obj, AlgebraicGeometry.toOpen_toSpecΓ_app, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No normalized external tensor-section comparison on a product of two affine opens."
+  },
+  {
+   "tool": "grep",
+   "query": "externalTensor.*[Oo]pen|external.*affine.*sections",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No normalized external tensor-section comparison on a product of two affine opens."
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED affine-right Cech calculation: one affine product-open section comparison, before finite-product assembly",
+   "via": [
+    "lem-sc-picard-external-coefficients-affine-cech-terms",
+    "lem-sc-picard-external-coefficients-affine-cech-complexes",
+    "lem-sc-picard-external-coefficients-affine-local-cohomology",
+    "lem-sc-picard-external-coefficients-direct-images",
+    "lem-sc-picard-external-coefficients-acyclic",
+    "lem-sc-picard-external-cup-acyclic",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExternalTensorAffineOpenSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExternalTensorAffineOpenSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.externalTensor_affine_open_sections",
+  "statement": "theorem externalTensor_affine_open_sections [F.IsQuasicoherent] [G.IsQuasicoherent]\n    (hA : IsAffineOpen A) (hV : IsAffineOpen V)\n    (J : ((pullback.snd f g) ⁻¹ᵁ V).toScheme.Opens)\n    (hJ : J = ((pullback.snd f g) ⁻¹ᵁ V).ι ⁻¹ᵁ ((pullback.fst f g) ⁻¹ᵁ A))\n    (hK : ((pullback.snd f g) ⁻¹ᵁ V).ι ''ᵁ J ≤ (pullback.fst f g) ⁻¹ᵁ A)\n    (hKV : ((pullback.snd f g) ⁻¹ᵁ V).ι ''ᵁ J ≤ (pullback.snd f g) ⁻¹ᵁ V) :\n    ∃ e : ((ModuleCat.restrictScalars (scalarMap f ⊤)).obj\n        (F.presheafModuleCat.obj (op A)) ⊗[k]\n          scalarObj (V.ι ≫ g) (G.restrict V.ι) (op ⊤)) ≃+\n        Γ((externalCupCoefficients f g F G).restrict\n          ((pullback.snd f g) ⁻¹ᵁ V).ι, J),\n      ∀ (s : (ModuleCat.restrictScalars (scalarMap f ⊤)).obj\n          (F.presheafModuleCat.obj (op A)))\n        (t : scalarObj (V.ι ≫ g) (G.restrict V.ι) (op ⊤)),\n        e (s ⊗ₜ[k] t) = externalTensorOpenPureSection f g F G A V J hK hKV s t",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T142855-L-497394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
