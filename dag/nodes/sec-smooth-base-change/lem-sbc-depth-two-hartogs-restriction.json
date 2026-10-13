@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-depth-two-hartogs-restriction",
+ "kind": "statement",
+ "title": "Hartogs restriction-adjunction unit for a depth-two coherent module",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $j:U\\hookrightarrow L$ an open subscheme, and $N$ a quasi-coherent $\\mathcal O_L$-module [pqf-def-coherent]. Suppose $N(V)$ is finite over $\\mathcal O_L(V)$ for every affine open $V$, and for every $y\\in L\\setminus U$ the stalk $N_y$ is finite over $\\mathcal O_{L,y}$ and has depth at least two [def-weil-pbc-depth]. The unit $N\\to j_*(N|_U)$ of restriction and direct image is an isomorphism.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Divisors, Lemma 31.5.11 (Tag 0E9I); proof uses Tags 0AVM, 0AVN and 05AM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "On each affine open, quasi-coherence identifies N with the sheaf of its finite module of sections. The affine ring is Noetherian, so this module is finitely presented and N is coherent.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The restriction-adjunction unit is the map of Tag 0E9I: on an open V it restricts sections to V intersect U. Tag 0E9I makes this map an isomorphism under the assumed boundary depth. In its proof, the map is already an isomorphism on U; outside U the direct image has no associated points by Tags 0AVN and 05AM, and the depth-two comparison criterion of Tag 0AVM applies. Work on Noetherian affine opens, where the open immersion is quasi-compact, to see the direct image is quasi-coherent. No global quasi-compactness is needed. The zero module, U empty, U equal to L and L empty are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M2",
+  "document": "Stacks Project",
+  "place": "Tag 0E9I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent module on a locally noetherian scheme extends uniquely across a complement where its stalk depth is at least two",
+   "results": "8 hits; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, ModuleCat.Tilde.exists_const, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; no general depth-two restriction theorem found",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs|depth.*restriction|restriction.*depth",
+   "results": "0 hits; no matches; no general depth-two restriction theorem found",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf of modules equals its pushforward from an open subset if depth is at least two on the complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth >=2 extension paragraph: identification of a depth-two coherent extension with the direct image from the open complement.",
+   "via": [
+    "lem-sbc-depth-two-hartogs-algebra-comparison",
+    "lem-sbc-depth-two-pushforward-coherence",
+    "lem-sbc-depth-two-finite-extension",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoHartogsRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_restrictAdjunction_unit_of_depth_two",
+  "statement": "theorem isIso_restrictAdjunction_unit_of_depth_two\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) :\n    IsIso ((Modules.restrictAdjunction U.ι).unit.app N)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f29dc",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T072357-L-1122340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f29dc",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T072357-L-1122340",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures match both nodes; existing signature unchanged. Both delivered modules and the sole direct importer, DepthTwoPushforwardCoherence, compile cleanly. Axioms match the reported Hartogs dependency; the remaining lemma agrees with Stacks Tag 0E9I."
+ }
+}
