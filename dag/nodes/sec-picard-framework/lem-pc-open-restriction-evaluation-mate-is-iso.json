@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-open-restriction-evaluation-mate-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the mixed-universe restricted evaluation mate",
+ "statement": "Let $X$ be a scheme of universe $u$ [def-pc-scheme] and $U$ any open. Specify the derived categories on $X$ and its over-site with morphism universe $w$ [def-pc-derived-category], and use the standard category on $U.toScheme$ with morphism universe $u+1$. Let $R$ be derived over-site restriction followed by the derived over-equivalence [lem-weil-pbc-module-restriction-open-immersion-colimits]. Write $H_X$ and $H_U$ for the fixed derived internal-Hom functors [def-pur-derived-internal-hom] and $e_X,e_U$ for the canonical tensor-Hom bijections [def-pc-canonical-derived-tensor-hom-bijection], using the recorded derived tensor [def-pc-scheme-derived-tensor-structure]. For every strong monoidal structure $m$ on $R$ and every $K,N$ in $D(\\mathcal O_X)$, the map $c_{K,N}=e_U^{-1}(\\mu_m(H_X(K,N),K);R(e_X(1_{H_X(K,N)})))$ from $R(H_X(K,N))$ to $H_U(RK,RN)$ is an isomorphism. This is pointwise invertibility of an explicitly constructed map; no family of comparisons is chosen and no equation for arbitrary maps into $H_X(K,N)$ is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DL (lemma-restriction-RHom-to-U), 08BS (lemma-restrict-K-injective-to-open); modules.tex Tag 01AK (lemma-j-shriek-exact)"
+ },
+ "proof": [
+  {
+   "text": "Obtain J, its adjunction with the specified composite restriction R, and pointwise invertibility of the adjunction-transposed tensor projection morphism from the projection-formula node. Turn each explicit projection morphism into an isomorphism using asIso. Its defining equation follows from adj.homEquiv.apply_symm_apply and homEquiv_unit.",
+   "uses": [
+    "lem-pc-open-extension-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a test object A, compose five explicit Hom equivalences: the adjunction inverse; canonical e_X at J(A),K,N; precomposition by the projection isomorphism; the adjunction on A tensor R(K),N; and e_U inverse. The private generic mate_isIso_of_projection constructs this equivalence.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify that composite with f mapped to f;c. Apply e_U injectivity and expand the Hom equivalence composite. The projection equation, tensor-Hom naturality on X, tensorator naturality, and the adjunction unit equation unit_A;R(q)=f reduce its value to e_U(f;c). This equality is fully proved in the generic private helper.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit equivalence makes postcomposition by c bijective for every test object. Mathlib isIso_of_yoneda_map_bijective proves invertibility of c. This is the entire generic Hom-side argument; no representative or geometric assertion remains in this theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-pc-open-extension-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DJ (lemma-internal-hom), 08DL (lemma-restriction-RHom-to-U), 08BS (lemma-restrict-K-injective-to-open); modules.tex Tag 01AK (lemma-j-shriek-exact)",
+  "description": "H4 proved the mixed-universe evaluation mate invertibility by an explicit generic Hom-equivalence and Yoneda calculation. Only the geometric exact extension-by-zero projection formula is imported; there is no sorry in this module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate of restricted evaluation is isomorphism for open immersion strong monoidal restriction derived internal Hom",
+   "results": "Internal Server Error: service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor closed internal hom comparison mate evaluation isomorphism",
+   "results": "Eight results in Mathlib.CategoryTheory.Monoidal.Closed.Functor, including expComparison and Frobenius mate lemmas. Their cartesian-monoidal hypotheses do not fit derived module tensor; no open-restriction theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "Twelve generic monoidal structure and transport declarations. No derived restriction construction or evaluation mate invertibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*Monoidal|exists.*Restriction.*monoidal|evaluationMate",
+   "results": "msearch: no matches. Local rg found the common-universe DerivedRestrictionTensorNaturality and DerivedRestrictionEvaluationMateIsIso statements; neither matches the composite to the independently specified standard localization.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictionClosedMonoidal",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route.",
+   "via": [
+    "lem-pc-open-restriction-closed-monoidal",
+    "lem-pc-canonical-evaluation-open-restriction",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionEvaluationMateIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionEvaluationMateIsIso.lean",
+  "declaration": "AlgebraicGeometry.openRestriction_evaluationMate_isIso",
+  "statement": "theorem openRestriction_evaluationMate_isIso (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.sheaf\n    ∀ m : R.Monoidal,\n      letI := m\n      ∀ K N : schemeDerivedCategory X,\n        IsIso ((schemeDerivedTensorHomEquiv U.toScheme\n          (R.obj (H.obj (op K, N))) (R.obj K) (R.obj N)).symm\n            ((Functor.Monoidal.μIso R (H.obj (op K, N)) K).hom ≫\n              R.map (schemeDerivedTensorHomEquiv X (H.obj (op K, N)) K N (𝟙 _))))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T150351-L-809497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T150351-L-809497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

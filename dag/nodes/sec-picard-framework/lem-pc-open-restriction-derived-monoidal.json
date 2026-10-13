@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-open-restriction-derived-monoidal",
+ "kind": "statement",
+ "title": "Strong monoidal descent of exact open restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U$ an arbitrary open. Specify derived categories of $\\mathcal O_X$-modules and modules on the over-site of $U$ with morphism universe $w$ [def-pc-derived-category]. On $U.toScheme$ use the standard derived category with morphism universe $u+1$. Let $R$ be the composite of the derived over-site restriction with the derived functor of $Modules.overEquiv(U)$ [lem-weil-pbc-module-restriction-open-immersion-colimits]. For the recorded K-flat derived tensor monoidal structures [def-pc-scheme-derived-tensor-structure], there exists a strong monoidal structure on $R$ (invertible unit and tensor comparisons satisfying naturality, associativity and both unit laws). No internal-Hom comparison or uncurrying equation is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH (definition-derived-tor), 079U (lemma-pullback-tensor-product)"
+ },
+ "proof": [
+  {
+   "text": "Transport Scheme.Modules.pullbackMonoidal along overFunctorEquiv and restrictFunctorIsoPullback to obtain the ordinary coherent monoidal restriction functor, including its structure-sheaf unit.",
+   "uses": [
+    "lem-pc-adjoint-module-pullback-monoidal",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve both tensor inputs by K-flat complexes. Restriction preserves K-flatness. Sum the ordinary coherent tensorators over each p+q=n; preservation of coproducts and tensor naturality identify both total differentials. The maps and inverse maps form natural total-complex comparisons.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-open-restriction-kflat-model",
+    "lem-pc-open-restriction-total-tensor",
+    "lem-pc-open-restriction-tensor-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mapDerivedCategoryFactors for restriction and the equivalence separately to descend these comparisons to the specified composite R. Common K-flat resolutions identify any two choices and prove naturality for roofs. Each localization has its own universal factorization, so the morphism universes need not coincide.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associativity and both unit equations hold on each coproduct inclusion of the total complex because they are the equations of the ordinary coherent monoidal restriction. Equality of these components gives equality of complex maps. Localization preserves equality; naturality transports the equations from K-flat representatives to every object. The structure sheaf in degree zero supplies the invertible unit. Together with the invertible tensor comparisons this gives R.Monoidal, including for the empty open and zero complexes.",
+   "uses": [
+    "lem-pc-adjoint-module-pullback-monoidal",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-adjoint-module-pullback-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-pc-open-restriction-kflat-model",
+  "lem-pc-open-restriction-tensor-natural",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH (definition-derived-tor), 079U (lemma-pullback-tensor-product)",
+  "description": "H4 read the Stacks source (downloaded into its scratchpad) and wrote the explicit localization/adjunction argument. This is a strictly smaller part of the parent; no replacement of the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact open restriction induces strong monoidal functor between derived categories with different universes",
+   "results": "Internal Server Error: service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor closed internal hom comparison mate evaluation isomorphism",
+   "results": "Eight results in Mathlib.CategoryTheory.Monoidal.Closed.Functor, including expComparison and Frobenius mate lemmas. Their cartesian-monoidal hypotheses do not fit derived module tensor; no open-restriction theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "Twelve generic monoidal structure and transport declarations. No derived restriction construction or evaluation mate invertibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*Monoidal|exists.*Restriction.*monoidal|evaluationMate",
+   "results": "msearch: no matches. Local rg found the common-universe DerivedRestrictionTensorNaturality and DerivedRestrictionEvaluationMateIsIso statements; neither matches the composite to the independently specified standard localization.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictionClosedMonoidal",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof, final paragraph: tensor-Hom identification for finite locally free modules; local ordinary models in Stacks 08DQ, below the unit route.",
+   "via": [
+    "lem-pc-open-restriction-closed-monoidal",
+    "lem-pc-canonical-evaluation-open-restriction",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionDerivedMonoidal",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionDerivedMonoidal.lean",
+  "declaration": "AlgebraicGeometry.exists_openRestriction_derivedMonoidal",
+  "statement": "theorem exists_openRestriction_derivedMonoidal (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    let E := (Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    let R := (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory ⋙ E\n    Nonempty R.Monoidal",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T150351-L-809497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T150351-L-809497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
