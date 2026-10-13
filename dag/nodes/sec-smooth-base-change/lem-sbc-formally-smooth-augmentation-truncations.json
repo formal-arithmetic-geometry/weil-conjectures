@@ -1,0 +1,123 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 05D5, induction on finite truncations"
+ },
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "J1",
+  "document": "Stacks Project",
+  "place": "Tag 05D5"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Smooth.AugmentationCompletionPowerSeries",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 05D5 completion paragraph in the depth-two local computation; Propagation of augmented polynomial coordinates to finite truncations",
+   "via": [
+    "lem-sbc-smooth-augmentation-completion-power-series",
+    "lem-sbc-smooth-section-completion-chart",
+    "lem-sbc-smooth-section-power-series-chart",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sbc-formally-smooth-augmentation-truncations",
+ "title": "Propagation of augmented polynomial coordinates to finite truncations",
+ "statement": "Let $B,C$ be commutative rings, $C$ a formally smooth $B$-algebra, meaning that every $B$-algebra homomorphism $C\\to D/K$ for a commutative $B$-algebra $D$ and nilpotent ideal $K$ lifts to $C\\to D$, and $\\varepsilon:C\\to B$ a $B$-algebra augmentation. Put $I=\\ker\\varepsilon$. Fix $n\\in\\mathbb N$ and a $B$-algebra map $f:B[X_1,\\ldots,X_n]\\to C$, and put $J=(X_1,\\ldots,X_n)$. Suppose $f(J)\\subseteq I$ and $B[X_1,\\ldots,X_n]/J^2\\to C/I^2$ induced by $f$ is bijective. Then for every $k\\in\\mathbb N$, the induced map $B[X_1,\\ldots,X_n]/J^k\\to C/I^k$ is bijective. There is no locality or Noetherian assumption.",
+ "proof": [
+  {
+   "text": "Put I = ker ε and J = the variables ideal. Bijectivity at degree two identifies\nI/I² with the span of the coordinate images over B. Multiplying representatives shows\nthat products of k coordinate images span Iᵏ/Iᵏ⁺¹. Induction, starting with degree two\n(and its degree-one quotient), therefore makes every induced map fₖ surjective.\nDegree zero has zero source and target. For k ≥ 2, assume fₖ is invertible. Formal\nsmoothness lifts the map C → C/Iᵏ → B[X]/Jᵏ across B[X]/Jᵏ⁺¹ → B[X]/Jᵏ; its kernel\nis square-zero since 2k ≥ k+1. The lift sends I into J/Jᵏ⁺¹, since its degree-one\nreduction is the inverse augmentation map, and hence kills Iᵏ⁺¹. Compose its descended\nmap with fₖ₊₁. Each variable becomes Xᵢ + δᵢ with δᵢ in Jᵏ/Jᵏ⁺¹. Substitution\nXᵢ ↦ Xᵢ - δᵢ is the inverse: substituting a correction into a monomial of degree k\nchanges it by terms of degree at least 2k-1 ≥ k+1. Thus this composite is invertible,\nso fₖ₊₁ is injective as well as surjective. This completes induction. Rank zero works\nwith the same argument and empty sums. Neither locality nor Noetherianity is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncations",
+  "file": "lean/Sheaf/RingTheory/Smooth/AugmentationPolynomialTruncations.lean",
+  "declaration": "Algebra.bijective_augmented_polynomial_truncations",
+  "statement": "theorem bijective_augmented_polynomial_truncations\n    (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]\n    [FormallySmooth B C] (ε : C →ₐ[B] B) (n : ℕ)\n    (f : MvPolynomial (Fin n) B →ₐ[B] C)\n    (hf : MvPolynomial.idealOfVars (Fin n) B ≤\n      (RingHom.ker ε.toRingHom).comap f.toRingHom)\n    (h₂ : Function.Bijective\n      (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ 2) f\n        ((pow_le_pow_left' hf 2).trans (Ideal.le_comap_pow f.toRingHom 2)))) :\n    ∀ k : ℕ, Function.Bijective\n      (Ideal.quotientMapₐ ((RingHom.ker ε.toRingHom) ^ k) f\n        ((pow_le_pow_left' hf k).trans (Ideal.le_comap_pow f.toRingHom k)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth augmented algebra over a local ring has polynomial coordinates modulo the square of the augmentation kernel, and substitution is bijective modulo all powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth augmented algebra over a local ring has completion isomorphic to a multivariate power series ring",
+   "results": "Supporting API hits: LaurentSeries.powerSeriesAlgEquiv, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient, AdicCompletion.ofAlgEquiv, Polynomial.IsDistinguishedAt.algEquivQuotient, LaurentSeries.powerSeriesRingEquiv, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "date": "2026-10-13",
+   "verdict": "supporting results only"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|idealOfVars|quotientMapₐ",
+   "results": "Supporting API hits: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting results only"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T122727-L-3632371",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

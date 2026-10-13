@@ -14,27 +14,34 @@
  ],
  "proof": [
   {
-   "text": "Let I be the augmentation kernel. The split conormal sequence identifies I/I² with the differentials of C over B tensored with B through the augmentation. Smoothness makes it finite projective. A finite projective module over a local ring is free of finite rank n. Choose basis lifts f_i in I.",
-   "uses": [],
+   "text": "Choose first-order polynomial coordinates for the split augmentation.",
+   "uses": [
+    "lem-sbc-smooth-augmentation-first-order-coordinates"
+   ],
    "elementary": false
   },
   {
-   "text": "The substitutions X_i ↦ f_i define a B-algebra map from the power-series ring to the I-adic completion. It is an isomorphism modulo squared augmentation ideals. Products of the basis lifts generate each I^k/I^(k+1), so induction gives surjectivity on every truncated quotient. Formal smoothness lifts the inverse at level k to the next level. This lift sends I into the variables ideal, hence annihilates I^(k+1). Its composite with substitution sends each variable to itself plus a term of degree k. Subtracting these corrections gives an inverse to the composite, hence substitution is injective as well as surjective at the next level. The inverses of the substitution maps commute with truncation, so passage to inverse limits gives the required algebra isomorphism.",
-   "uses": [],
+   "text": "Formal smoothness propagates the coordinate bijection to every finite truncation.",
+   "uses": [
+    "lem-sbc-formally-smooth-augmentation-truncations"
+   ],
    "elementary": false
   },
   {
-   "text": "Take the inverse of the substitution isomorphism as e. On the quotient by the augmentation ideals substitution is the identity of B, so constant coefficient of e on the completion image of c is ε(c). The construction allows n = 0; if C = B and the augmentation is the identity, the zero-ideal completion is B and the empty-variable power-series ring is B. No Noetherian hypothesis is needed.",
+   "text": "For each k form the algebra equivalence induced by the coordinate map f on the kth quotients. Quotient induction proves these maps commute with transition maps. Apply the kth equivalence to prove their inverses also commute. AdicCompletion.liftAlgHom assembles the two compatible families into maps on completions. AdicCompletion.ext_evalₐ and the finite equivalence inverse identities prove these maps inverse. Restrict the scalars of MvPowerSeries.toAdicCompletionAlgEquiv to B and compose its inverse with the constructed equivalence. At degree one, polynomial evaluation followed by ε is polynomial constant coefficient: the maps agree on coefficients and every variable has image zero by f(J) contained in I. Evaluating the first truncation of a power series therefore proves the required constant coefficient identity on every c. This is implemented by a fully proved private helper in the module, with no choice from an unproved existence theorem.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-smooth-augmentation-first-order-coordinates",
+  "lem-sbc-formally-smooth-augmentation-truncations"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "A4",
+  "by": "J1",
   "document": "Stacks Project",
-  "place": "Tag 05D5, proof, with the augmentation compatibility made explicit"
+  "place": "Tag 05D5, proof and inverse-limit construction"
  },
  "mathlib_searches": [
   {
@@ -126,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T111836-L-3046893",
+  "landing": "20261013T122727-L-3632371",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
