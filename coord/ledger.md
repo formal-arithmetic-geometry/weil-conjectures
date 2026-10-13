@@ -13071,3 +13071,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/S2/Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeTransport (stage 3; reviewer PASS; first push; landing 20261013T155941-L-1305263 (interface); batch 20261013T155927; modules 2; new nodes 1)
 - 15:59 L: merged deliver/T1/Sheaf.AlgebraicGeometry.AffineSpectrumRepresentativeMap (stage 3; reviewer PASS; first push; landing 20261013T155941-L-1305413 (interface); batch 20261013T155927; modules 2; new nodes 1)
 - 15:59 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare (stage 3; reviewer PASS; first push; landing 20261013T155942-L-1305586 (interface); batch 20261013T155927; modules 2; new nodes 1)
+- 15:59 L: merged deliver/T3/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing (stage 3; reviewer PASS; first push; landing 20261013T155942-L-1305803 (interface); batch 20261013T155927; modules 4; new nodes 4)
