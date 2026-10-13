@@ -28,25 +28,25 @@
  ],
  "proof": [
   {
-   "text": "Use enough injectives for Z.Modules. Replace the nonnegative complex k_*Ch.K by a termwise injective nonnegative complex L with a quasi-isomorphism mu, by extending by zero and using bounded-below injective replacement, then truncating back. The canonical sections comparison followed by Gamma(mu) induces an isomorphism s by the pushforward-injectives sections theorem, since Ch.K is termwise injective.",
+   "text": "Reuse nat_complex_injective_resolution from ModuleCohomologyFMap through a proof-only import all. It extends by zero, applies the lower-bound-zero Mathlib injective replacement, and truncates back to obtain L and mu. Reuse nat_quasiIso_globalSections_pushforward_injectives from the same module to obtain QuasiIso Gamma(mu). Its canonical pushforward_sections_iso followed by Gamma(mu) induces an isomorphism s on homology.",
    "uses": [
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-    "lem-weil-pbc-scheme-modules-enough-injectives"
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Lift k_*(desc id from Ck.I to Ch.J) followed by k_*(Ch.beta) and mu across Ck.lambda to a map e:Ck.K to L up to homotopy. Lift (kh)_* of the identity descent from Cc.I to Ch.I, followed by the inverse successive-pushforward comparison at Ch.I, k_*(Ch.lambda), and mu across Cc.lambda to f:Cc.K to L up to homotopy. These quasi-isomorphisms need not be monic: extend by zero, use the mapping-cylinder split injection and homotopy retraction to reduce to lifting along a monic quasi-isomorphism (013P(1)), and use full faithfulness of extension to return to natural indices.",
+   "text": "Reuse lift_nat_quasiIso from ModuleCohomologyFMapComparison through a proof-only import all. Apply it to Ck.lambda and Cc.lambda with termwise injective target L, and the desired routes gamma=k_*(desc id followed by Ch.beta) followed by mu and delta=(kh)_*(desc id) followed by the inverse pushforwardComp comparison, k_*(Ch.lambda), and mu. The existing helper uses extension by zero and K-injective Qh_map_bijective to obtain maps e and f and the two lambda homotopies. No duplicate lifting theorem, mapping cylinder or monicity is needed.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
-    "lem-weil-pbc-lift-along-injective-quasi-iso"
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sc-kinjective-quasi-iso-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose the two routes Cc.beta followed by f and desc id from Cc.J to Ck.J followed by Ck.beta and e with the augmentation of Cc.J. The beta compatibility equations for Cc, Ck, and Ch, naturality of pushforwardComp, and the identity-descent augmentation equations identify them up to homotopy. Uniqueness of lifts to the injective complex L therefore gives a homotopy between the original routes.",
+   "text": "Construct maps eta and xi from H concentrated in degree zero to k_*Ck.I and (kh)_*Cc.I, respectively, using fromSingle₀Equiv and the augmentation cycle equations. The compatibility fields identify Ck.J.augmentation followed by beta with eta followed by lambda, and likewise for Cc with xi. Identity descents commute with augmentations. In degree zero, the descent equations, Ch.compatible, and naturality and inverse cancellation of pushforwardComp give xi followed by delta = eta followed by gamma. Precompose the two lambda homotopies with xi and eta and concatenate to obtain a homotopy after Cc.J.augmentation. Apply the existing unique_nat_quasiIso helper from ModuleCohomologyFMapComparison across this augmentation quasi-isomorphism to obtain the beta homotopy; the helper implements extension by zero, homotopy uniqueness and ofExtend.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
     "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
@@ -54,7 +54,7 @@
    "elementary": false
   },
   {
-   "text": "Apply additive global sections and homology to all three homotopies. The canonical sections comparisons commute with identity descents and successive pushforwards because restriction is natural and h inverse k inverse top equals (h followed by k) inverse top. Set Q=H^p(Gamma(Z,L)), qk=H^p(Gamma(e)), qc=H^p(Gamma(f)), and s as in the first step. The three squares are exactly bc qc=j bk qk, mc qc=i mh s, and mk qk=g bh s. This proves only the common-target diagram; derived-cohomology transport and cancellation are performed in the parent module.",
+   "text": "Reuse the canonical pushforward_sections_iso from ModuleCohomologyFMap, which uses presheaf.mapIso on inverse-image top equality. Its inverse components match each data system a by the sections field. Naturality follows componentwise from presheaf-morphism naturality. Composition follows by canceling the three isomorphisms, using pushforwardComp_inv_app_app, pushforward_obj_presheaf_map, functoriality of restriction and subsingleton morphisms of opens. Apply global sections and homology to all three homotopies; functoriality and the two proved sections identities give the three stated squares. Take Q=Hp(Gamma(Z,L)), qk=Hp(Gamma(e)), qc=Hp(Gamma(f)), and s=Hp(a(k,Ch.K) followed by Gamma(mu)). No derived-cohomology transport is used in the conclusion.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
     "lem-weil-pbc-homotopic-maps-equal-cohomology"
@@ -64,10 +64,10 @@
  ],
  "proof_deps": [
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-homotopic-maps-equal-cohomology",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
   "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
   "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
   "lem-weil-pbc-scheme-modules-enough-injectives"
@@ -75,7 +75,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01F8 and 01FB, with 013P(1) and 013S; common-target diagram written explicitly by G2"
+  "place": "Tags 01FB and 01EZ, Derived Categories 013P and 013S; verified from the Stacks tag pages. V1 realization uses Mathlib K-injective Hom bijectivity instead of mapping cylinders; canonical sections naturality and composition proved componentwise. Repair: proof-only import all reuses the existing private replacement, lifting, uniqueness, sections quasi-isomorphism and canonical sections construction; all five duplicate implementations are removed."
  },
  "mathlib_searches": [
   {
@@ -150,13 +150,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T223405-L-1636835",
-  "kind": "interface",
+  "landing": "20261013T015619-L-3028470",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
