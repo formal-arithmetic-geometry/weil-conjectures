@@ -1,0 +1,147 @@
+{
+ "id": "new-s3-koszul-conormal-nested-charts",
+ "kind": "statement",
+ "title": "Regular affine Koszul comparisons natural under nested charts",
+ "statement": "For a closed immersion i:Z→Y, an arbitrary open V of Z and n≥0, use B,S,H,G,T,F as in the compatible-cover statement. No regularity assumption is made on V. For every affine U of Y whose immersion ideal admits finite Koszul-regular generators, there are simultaneous isomorphisms F.over(V⁻¹(i⁻¹U)) ≅ T.over(V⁻¹(i⁻¹U)). If U0⊆U1 are two such regular affine charts, their hom components agree on every subopen of V⁻¹(i⁻¹U0). No compatibility of nonnested charts or point-indexed cover is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+ },
+ "proof": [
+  {
+   "text": "Resolve the quotient on each regular affine chart by its Koszul complex, sheafify, compute derived Hom with quotient coefficients and its zero differential. Pair functionals on wedges of generators with wedges of their conormal classes; the regular conormal basis makes this an isomorphism. Tensor-pull back and restrict to V.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a nested pair, restrict the larger resolution to the smaller chart; affine open restriction is flat, so it remains a resolution. Locally around each point of Z compare the two conormal bases. Their ranks agree in the nonzero local quotient ring, and an invertible reduced generator substitution exists after shrinking. Its exterior powers give an augmentation-preserving chain map. The chain equations follow from contraction in degree one and the derivation law. Its reduction is the conormal basis change, so its dual intertwines the two functional pairings. Resolution comparison homotopies remove the substitution choice. Localization and sheaf separatedness give equality on each subopen of the smaller chart. Choose the intrinsic maps simultaneously.",
+   "uses": [
+    "new-q2-koszul-generator-chain-map",
+    "lem-sc-koszul-regular-flat-base-change",
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-koszul-conormal-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-conormal-frame",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-koszul-regular-flat-base-change",
+  "new-j3-koszul-projective-resolution",
+  "new-q2-koszul-generator-chain-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S3",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul regular immersion self Ext dual exterior conormal canonical comparison natural change generators",
+   "results": "Eight results about cotangent presentations and Kahler differentials, no natural self-Ext chart comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular affine chart comparison conormal dual exterior self Ext natural restriction",
+   "results": "Internal Server Error; no absence conclusion.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*conormal|compatible.*cover",
+   "results": "General covering-family sheaf hits. Local rg finds pointwise local isomorphisms, but no nested-chart naturality.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso transports an existing comparison but does not construct normalized chart comparisons.",
+   "date": "2026-10-13",
+   "verdict": "partial tool match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalCompatibleCover",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-self-ext-conormal-local-comparison",
+   "place": "Regular affine Koszul comparisons natural under nested charts",
+   "via": [
+    "new-w4-koszul-self-ext-local-alignment",
+    "new-s3-koszul-conormal-compatible-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSelfExtConormalNestedCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSelfExtConormalNestedCharts.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_self_ext_conormal_nested_charts",
+  "statement": "theorem koszulRegularImmersion_self_ext_conormal_nested_charts\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let T := (Scheme.Modules.restrictFunctor V.ι).obj\n      ((Scheme.Modules.tensorPullback i).obj G)\n    let F := (Scheme.Modules.restrictFunctor V.ι).obj\n      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))\n    ∃ c : ∀ (U : Y.affineOpens)\n      (_hU : ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f),\n        F.over (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)) ≅ T.over (V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)),\n      ∀ (U₀ U₁ : Y.affineOpens)\n        (h₀ : ∃ (m : ℕ) (f : Fin m → Γ(Y, U₀.1)),\n          Ideal.span (Set.range f) = i.ker.ideal U₀ ∧\n            RingTheory.Sequence.IsKoszulRegular f)\n        (h₁ : ∃ (m : ℕ) (f : Fin m → Γ(Y, U₁.1)),\n          Ideal.span (Set.range f) = i.ker.ideal U₁ ∧\n            RingTheory.Sequence.IsKoszulRegular f)\n        (_h : U₀.1 ≤ U₁.1) (A : V.toScheme.Opens)\n        (hA₀ : A ≤ V.ι ⁻¹ᵁ (i ⁻¹ᵁ U₀.1))\n        (hA₁ : A ≤ V.ι ⁻¹ᵁ (i ⁻¹ᵁ U₁.1)),\n        (c U₀ h₀).hom.val.app (op (Over.mk (homOfLE hA₀))) =\n          (c U₁ h₁).hom.val.app (op (Over.mk (homOfLE hA₁)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145729-L-752165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

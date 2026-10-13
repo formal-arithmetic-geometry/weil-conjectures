@@ -15,6 +15,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
+import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalNestedCharts
+import Sheaf.AlgebraicGeometry.KoszulRegularAffineRefinement
+
 /-! # A compatible regular Koszul comparison cover
 
 Source: Stacks Project, Tag 0BQY and Tag 062I. -/
@@ -74,6 +77,47 @@ theorem koszulRegularImmersion_self_ext_conormal_compatible_cover
         ∀ (x y : V.toScheme) (U : V.toScheme.Opens)
           (hx : U ≤ W x) (hy : U ≤ W y),
           (c x).hom.val.app (op (Over.mk (homOfLE hx))) =
-            (c y).hom.val.app (op (Over.mk (homOfLE hy))) := by sorry
+            (c y).hom.val.app (op (Over.mk (homOfLE hy))) := by
+  classical
+  intro B S H G T F
+  obtain ⟨c, hc⟩ := koszulRegularImmersion_self_ext_conormal_nested_charts i V n
+  have hcharts (z : V.toScheme) : ∃ U : Y.affineOpens, i z.1 ∈ U.1 ∧
+      ∃ (m : ℕ) (f : Fin m → Γ(Y, U.1)),
+        Ideal.span (Set.range f) = i.ker.ideal U ∧
+          RingTheory.Sequence.IsKoszulRegular f := hregular z.1 z.2
+  choose A hmem hA using hcharts
+  let W (z : V.toScheme) := V.ι ⁻¹ᵁ (i ⁻¹ᵁ (A z).1)
+  refine ⟨W, hmem, (fun z ↦ c (A z) (hA z)), ?_⟩
+  intro x y U hx hy
+  have hsmall (z : U) : ∃ R : Y.affineOpens,
+      i z.1.1 ∈ R.1 ∧ R.1 ≤ (A x).1 ∧ R.1 ≤ (A y).1 ∧
+        ∃ (m : ℕ) (f : Fin m → Γ(Y, R.1)),
+          Ideal.span (Set.range f) = i.ker.ideal R ∧
+            RingTheory.Sequence.IsKoszulRegular f :=
+    koszulRegularImmersion_affine_refinement i (A x) (A y) z.1.1
+      (hx z.2) (hy z.2) (hA x)
+  choose R hRmem hRx hRy hR using hsmall
+  let Q (z : U) : V.toScheme.Opens := U ⊓ (V.ι ⁻¹ᵁ (i ⁻¹ᵁ (R z).1))
+  have hQx (z : U) : Q z ≤ W x := fun _ hp ↦ hRx z hp.2
+  have hQy (z : U) : Q z ≤ W y := fun _ hp ↦ hRy z hp.2
+  have he (z : U) :
+      (c (A x) (hA x)).hom.val.app (op (Over.mk (homOfLE (hQx z)))) =
+        (c (A y) (hA y)).hom.val.app (op (Over.mk (homOfLE (hQy z)))) := by
+    exact (hc (R z) (A x) (hR z) (hA x) (hRx z) (Q z)
+      inf_le_right (hQx z)).symm.trans
+        (hc (R z) (A y) (hR z) (hA y) (hRy z) (Q z)
+          inf_le_right (hQy z))
+  ext s
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨T.presheaf, T.isSheaf⟩ Q U
+    (fun _ ↦ homOfLE inf_le_left) ?_ _ _ (fun z ↦ ?_)
+  · intro z hz
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨z, hz⟩, hz, hRmem ⟨z, hz⟩⟩
+  · let ax : Over.mk (homOfLE (hQx z)) ⟶ Over.mk (homOfLE hx) :=
+      Over.homMk (homOfLE inf_le_left)
+    let ay : Over.mk (homOfLE (hQy z)) ⟶ Over.mk (homOfLE hy) :=
+      Over.homMk (homOfLE inf_le_left)
+    have ex := ConcreteCategory.congr_hom ((c (A x) (hA x)).hom.val.naturality ax.op) s
+    have ey := ConcreteCategory.congr_hom ((c (A y) (hA y)).hom.val.naturality ay.op) s
+    exact ex.symm.trans ((ConcreteCategory.congr_hom (he z) _).trans ey)
 
 end AlgebraicGeometry
