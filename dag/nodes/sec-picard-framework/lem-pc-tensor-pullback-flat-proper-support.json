@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-tensor-pullback-flat-proper-support",
+ "kind": "statement",
+ "title": "Cartesian tensor pullback preserves flat finite presentation and proper support",
+ "statement": "Let $X_i,X_j,S_i,S_j$ be schemes [def-pc-scheme], $f_i:X_i\\to S_i$ and $f_j:X_j\\to S_j$ locally of finite type [def-pc-morphism-conventions], and let $p:X_j\\to X_i$ and $k:S_j\\to S_i$ give a cartesian square [def-pc-base-change], so $X_j\\cong X_i\\times_{S_i}S_j$. Let $M$ be a finitely presented $\\mathcal O_{X_i}$-module [pqf-def-coherent], flat over $S_i$ (its sections on every affine open mapping into an affine base open are flat over the base ring), with support proper over $S_i$ [def-weil-pbc-closed-subset-proper-over-base]. Then $p^*M$ [def-pc-module-pullback] is finitely presented, flat over $S_j$ in the same affine-local sense, and has support proper over $S_j$.",
+ "source": {
+  "document": "Stacks Project, Modules; Morphisms of Schemes; Cohomology of Schemes",
+  "place": "Tags 01BQ (finite presentation under pullback), 01U8 (relative flatness under base change), 056J (support under pullback), 0CYS (proper support via a closed subscheme)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Tensor a local finite presentation with the new structure sheaf. The tensor-pullback functor is right exact and carries finite free modules to finite free modules, so the resulting module is finitely presented. This is the local presentation argument of Modules, Tag 01BQ.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Relative flatness is affine local. On an affine cartesian chart with rings A -> B and A -> A', and module N over B, identify (B tensor_A A') tensor_B N with A' tensor_A N. The latter is flat over A' by scalar extension of flat modules; localization preserves flatness. These charts cover the pullback, so the affine-local flatness criterion proves the required IsFlatOver predicate for arbitrary affine test opens. This is Morphisms, Tag 01U8, whose proof is Algebra, Lemma 10.39.7. For an arbitrary affine test open U over an affine base open V, quasi-coherence identifies the localization of its section module at each prime of the source ring with the stalk. Relative stalk flatness is flatness over the corresponding localized base ring. Apply lem-pc-affine-sections-flat-over-base (the Mathlib localization criterion, Tag 00HT(6)) to obtain flatness of the whole section module over the base ring.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite presentation implies quasi-coherence and finite type. The support-pullback theorem identifies the new support with the inverse image of the old closed support. Choose a closed subscheme structure on the old support proper over the old base, and base change it to the new base. Its closed immersion has image the inverse image of the old support; its structure morphism is proper by base change. Independence of closed subscheme structure gives properness of the new support.",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-support-pullback-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Modules; Morphisms of Schemes; Cohomology of Schemes",
+  "place": "Tags 01BQ (finite presentation under pullback), 01U8 (relative flatness under base change), 056J (support under pullback), 0CYS (proper support via a closed subscheme)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves finite presentation, relative flatness and proper support of quasi coherent modules on schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback_flat_proper_support|filtered_cartesian_flat_complex_descent|filtered_cartesian_perfect_descent",
+   "results": "No matching declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback of a finitely presented sheaf of modules preserves finite presentation and support proper over a base under cartesian base change",
+   "results": "Candidates: AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, PresheafOfModules.pullbackObjIsDefined, instFinitePresentationTensorProduct, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, FinitePresentation.of_isBaseChange, SheafOfModules.pullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback_flat_proper_support|filtered_cartesian_flat_complex_descent|filtered_cartesian_perfect_descent",
+   "results": "No matching declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianApproximationData",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation of X, the finitely presented complex, flatness, proper support, and the perfect object (Tags 01ZR, 0C0C, 0A1G, 09RK)",
+   "via": [
+    "lem-pc-noetherian-approximation-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackFlatProperSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackFlatProperSupport.lean",
+  "declaration": "AlgebraicGeometry.tensorPullback_flat_proper_support",
+  "statement": "theorem tensorPullback_flat_proper_support\n    {Xi Xj Si Sj : Scheme.{u}}\n    (fi : Xi ⟶ Si) (fj : Xj ⟶ Sj) [LocallyOfFiniteType fi] [LocallyOfFiniteType fj]\n    (p : Xj ⟶ Xi) (k : Sj ⟶ Si) (hcart : IsPullback p fj fi k)\n    (M : Xi.Modules) [M.IsFinitePresentation]\n    (hflat : M.IsFlatOver fi) (hproper : Scheme.Modules.HasSupportProperOver fi M) :\n    (Scheme.Modules.tensorPullbackObj p M).IsFinitePresentation ∧\n      (Scheme.Modules.tensorPullbackObj p M).IsFlatOver fj ∧\n      Scheme.Modules.HasSupportProperOver fj (Scheme.Modules.tensorPullbackObj p M)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T045538-L-131410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T045538-L-131410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,8 +11,9 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.FiniteFlatProperSupportDescent
-import Sheaf.AlgebraicGeometry.PerfectComplexDescent
+import Sheaf.AlgebraicGeometry.FilteredCartesianFlatComplexDescent
+import Sheaf.AlgebraicGeometry.FilteredCartesianPerfectDescent
+import Sheaf.AlgebraicGeometry.TensorPullbackFlatProperSupport
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Noetherian approximation of tensor data
@@ -77,6 +78,65 @@ theorem noetherian_approximation_data
               (e n).hom ≫ G.d n m) ∧
             ∃ (Ei : schemeDerivedCategory Xi), Xi.IsPerfect Ei ∧
               Nonempty ((derivedPullback g).obj Ei ≅ E) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  let D : Iᵒᵖ ⥤ Scheme.{u} := R.op ⋙ Scheme.Spec
+  let d : Cone D := Scheme.Spec.mapCone c.op
+  have hd : IsLimit d := isLimitOfPreserves Scheme.Spec hc.op
+  let (i : Iᵒᵖ) : CompactSpace (D.obj i) := by
+    dsimp [D]
+    infer_instance
+  let (i : Iᵒᵖ) : QuasiSeparatedSpace (D.obj i) := by
+    dsimp [D]
+    infer_instance
+  let (i j : Iᵒᵖ) (a : i ⟶ j) : IsAffineHom (D.map a) := by
+    dsimp [D]
+    infer_instance
+  obtain ⟨i, Xi, fi, hfp, hqc, hqs, g, hcart⟩ :=
+    Scheme.exists_isPullback_of_finitePresentation hd f
+  have : LocallyOfFinitePresentation fi := hfp
+  have : QuasiCompact fi := hqc
+  have : QuasiSeparated fi := hqs
+  obtain ⟨j, Xj, fj, hjfp, hjqc, hjqs, hjft, gj, hjcart,
+      Gj, hJb, hJfp, hJflat, hJproper, eJ, heJ⟩ :=
+    filtered_cartesian_flat_complex_descent R c hc X f i.unop Xi fi g hcart
+      hGb hGflat hGproper
+  have : LocallyOfFinitePresentation fj := hjfp
+  have : QuasiCompact fj := hjqc
+  have : QuasiSeparated fj := hjqs
+  obtain ⟨k, a, Xk, fk, hkfp, hkqc, hkqs, hkft, p, gk, hpcart, htriangle,
+      hkcart, Ek, hEk, eEk⟩ :=
+    filtered_cartesian_perfect_descent R c hc X f j Xj fj gj hjcart E hE
+  have : LocallyOfFiniteType fk := hkft
+  let T := Scheme.Modules.tensorPullback p
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction p
+  have : T.Additive := adj.left_adjoint_additive
+  let Gk := (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj Gj
+  have hprops (n : ℤ) := by
+    have : (Gj.X n).IsFinitePresentation := hJfp n
+    exact tensorPullback_flat_proper_support fj fk p (Spec.map (R.map a)) hpcart
+      (Gj.X n) (hJflat n) (hJproper n)
+  obtain ⟨ec⟩ := Scheme.Modules.nonempty_tensorPullbackComp gk p
+  let ecomp : Scheme.Modules.tensorPullback gj ≅
+      Scheme.Modules.tensorPullback p ⋙ Scheme.Modules.tensorPullback gk :=
+    (eqToIso (congrArg Scheme.Modules.tensorPullback htriangle.symm)) ≪≫ ec
+  let eK (n : ℤ) : Scheme.Modules.tensorPullbackObj gk (Gk.X n) ≅ G.X n :=
+    (ecomp.app (Gj.X n)).symm ≪≫ eJ n
+  refine ⟨k, Xk, fk, hkfp, hkqc, hkqs, hkft, gk, hkcart,
+    Gk, ?_, (fun n ↦ (hprops n).1), (fun n ↦ (hprops n).2.1),
+    (fun n ↦ (hprops n).2.2), eK, ?_, Ek, hEk, eEk⟩
+  · obtain ⟨lo, hi, hb⟩ := hJb
+    exact ⟨lo, hi, fun n hn ↦ T.map_isZero (hb n hn)⟩
+  · intro n m
+    change (Scheme.Modules.tensorPullback gk).map (T.map (Gj.d n m)) ≫
+      ((ecomp.app (Gj.X m)).inv ≫ (eJ m).hom) =
+        ((ecomp.app (Gj.X n)).inv ≫ (eJ n).hom) ≫ G.d n m
+    have hn := ecomp.inv.naturality (Gj.d n m)
+    change (Scheme.Modules.tensorPullback gk).map (T.map (Gj.d n m)) ≫
+      (ecomp.app (Gj.X m)).inv =
+        (ecomp.app (Gj.X n)).inv ≫ Scheme.Modules.tensorPullbackMap gj (Gj.d n m) at hn
+    rw [← Category.assoc, hn]
+    simpa only [Category.assoc] using
+      congrArg (fun t ↦ (ecomp.app (Gj.X n)).inv ≫ t) (heJ n m)
 
 end AlgebraicGeometry
