@@ -1,0 +1,167 @@
+{
+ "id": "lem-sc-picard-affine-cover-module-embedding",
+ "kind": "statement",
+ "title": "Embedding into a quasi-coherent module pushed forward from an affine cover",
+ "statement": "Let X be a quasi-compact scheme over a field k with affine diagonal [def-weil-field] [def-pc-scheme], and F a quasi-coherent O_X-module [pqf-def-coherent]. There exist an affine scheme U, an affine morphism j: U → X, a quasi-coherent O_U-module G, and a monomorphism F → j_*G. This is the geometric construction only, without a cohomological vanishing assertion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0BDY, proof of Lemma 30.4.3 (1), finite affine cover and stalk-injective adjunction unit; verified at https://stacks.math.columbia.edu/tag/0BDY"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover of X using quasi-compactness. Let U be the finite coproduct of the affine members, and j its morphism to X. The finite coproduct is affine, including the empty coproduct when X is empty.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preimage of an affine open V under j is the finite disjoint union of its intersections with the cover members. The affine-diagonal intersection criterion over Spec k makes each intersection affine. Finite affine coproducts are affine, so j is affine.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set G to the actual tensor pullback j*F and use the pullback-pushforward adjunction unit i: F → j_*G. Pullback preserves quasi-coherence. For each x in X choose a cover member containing it. Evaluation in its copy in U followed by the open-immersion stalk identification gives a left inverse to i_x. Hence i is injective on every stalk and is a monomorphism. On the empty scheme this condition is vacuous. No acyclicity is asserted here.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0BDY, proof of Lemma 30.4.3 (1), finite affine cover and stalk-injective adjunction unit; verified at https://stacks.math.columbia.edu/tag/0BDY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent module embeds into pushforward from finite affine cover",
+   "results": "No matching embedding theorem. Results: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "No matching embedding theorem. Results: SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(coproduct|disjoint)|mono.*(unit|pullback)",
+   "results": "No matching embedding theorem. Results: Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent module embeds into pushforward from an affine cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(coproduct|disjoint)|isAffine.*sigma|mono.*unit in Mathlib/AlgebraicGeometry and ModuleCat/Sheaf; affine cover embedding in both project roots",
+   "results": "Mathlib finite affine coproduct instance and the source isAffineHom_sigmaDesc are geometric ingredients; no declaration combines them with the stalk-injective module adjunction unit.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity of pullback pushforward adjunction unit for surjective open cover of a scheme",
+   "results": "Eight unrelated scheme-cover and sheaf-injectivity results; no module affine-cover embedding theorem. Second reader H2.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Mono",
+   "results": "SheafOfModules.Submodule.instMonoι only; no affine-cover embedding theorem. Second reader H2.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*affine.*embedding|mono.*pullbackPushforward|pullbackPushforward.*mono",
+   "results": "msearch: zero hits. Local targeted geometry search found isAffineHom_sigmaDesc and finite affine coproduct ingredients only. Second reader H2.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BDY, geometric steps 1–3 of the acyclic embedding proof",
+   "via": [
+    "lem-sc-picard-qcoh-universal-delta-embedding",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineCoverModuleEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCoverModuleEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_cover_module_embedding",
+  "statement": "theorem exists_affine_cover_module_embedding (k : Type u) [Field k] (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of k))] [CompactSpace X]\n    [IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k)))]\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] :\n    ∃ (U : Scheme.{u}) (j : U ⟶ X)\n      (G : SheafOfModules.{u} (moduleRings U.toRingedSpace)),\n      IsAffine U ∧ IsAffineHom j ∧ G.IsQuasicoherent ∧\n        ∃ i : F ⟶ (Modules.pushforward j).obj G, Mono i",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T031541-L-3571311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T031541-L-3571311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

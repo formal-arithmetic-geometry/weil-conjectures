@@ -10,7 +10,8 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Over
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.AffineCoverModuleEmbedding
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
@@ -56,6 +57,25 @@ theorem exists_quasicoherent_acyclic_embedding (k : Type u) [Field k] (X : Schem
     ∃ F' : SheafOfModules.{u} (moduleRings X.toRingedSpace),
       F'.IsQuasicoherent ∧ ∃ i : F ⟶ F', Mono i ∧
         ∀ p : ℕ, 1 ≤ p → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F') := by
-  sorry
+  obtain ⟨U, j, G, hU, hj, hG, i, hi⟩ := exists_affine_cover_module_embedding k X F
+  have : IsAffine U := hU
+  have : IsAffineHom j := hj
+  have : G.IsQuasicoherent := hG
+  refine ⟨(Modules.pushforward j).obj G,
+    Modules.isQuasicoherent_pushforward_of_isAffineHom j G, i, hi, ?_⟩
+  intro p hp
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : p ≠ 0)
+  have : Subsingleton (Modules.H G (q + 1)) :=
+    Modules.subsingleton_H_succ_of_isAffine G q
+  obtain ⟨e, _⟩ := Modules.exists_moduleCohomology_source_comparison U (q + 1)
+  have : Subsingleton ((RingedSpace.moduleCohomology U.toRingedSpace (q + 1)).obj G) :=
+    (e G).toEquiv.injective.subsingleton
+  have : IsIso (Modules.moduleCohomologyEdgeMap j G (q + 1)) :=
+    ((Modules.affine_morphism_cohomology_edge j G).2 (q + 1)).1
+  have : Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace (q + 1)).obj
+      ((Modules.pushforward j).obj G)) :=
+    (ConcreteCategory.bijective_of_isIso
+      (Modules.moduleCohomologyEdgeMap j G (q + 1))).1.subsingleton
+  exact ModuleCat.isZero_of_subsingleton _
 
 end AlgebraicGeometry.Scheme
