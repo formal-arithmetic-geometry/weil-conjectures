@@ -12,20 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Follow the generic-fibre Noether normalization, clear denominators in the integral equations, and generate S' by the rescaled algebra generators. The resulting localization map is surjective because the rescaled generators generate S after inverting f.",
+   "text": "Choose finitely many algebra generators and apply the finite-subalgebra construction with scaled membership for these generators.",
    "uses": [
-    "lem-weil-pbc-noether-normalization-over-domain"
+    "new-noether-normalization-over-domain-surjective-core"
    ],
    "elementary": false
+  },
+  {
+   "text": "Extend scaled membership to every element of S by Algebra.adjoin_induction. Constants need exponent zero, generators exponent one; sums and products use the sum of the exponents. Apply IsLocalization.Away.map_surjective_iff to the resulting representatives.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noether-normalization-over-domain"
+  "new-noether-normalization-over-domain-surjective-core"
  ],
  "proof_origin": {
-  "by": "B4 stage 3",
+  "by": "F3 second reader",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 07NA"
+  "place": "Stacks 07NA, final surjectivity paragraph; Algebra.adjoin_induction and IsLocalization.Away.map_surjective_iff"
  },
  "mathlib_searches": [
   {
@@ -91,12 +96,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T225258-L-1800943",
+  "landing": "20261013T054214-L-442197",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
