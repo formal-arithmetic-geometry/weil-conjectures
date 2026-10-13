@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-overlap-pair-square-chart-transport",
+ "kind": "statement",
+ "title": "Transport of a chosen pair square through a chart diagram",
+ "statement": "Let V and Vprime be open covers of schemes Y and Yprime [def-pc-scheme], alpha an index map, r:Yprime->Y, and rho_d:Vprime_d->V_alpha(d) commuting with the cover projections. Let p:Z->Y and pprime:Z->Yprime satisfy pprime followed by r=p. Let A and Aprime be chart modules, M a module on Z, c_d:rho_d^*A_alpha(d) ~= Aprime_d, and delta_d maps of the pprime limit charts to the p limit charts commuting both with their maps to Z and with their stage-chart projections. Suppose epsilon compares p-pullbacks of A with restrictions of M, and epsilonprime equals its displayed transport through c, delta and the pullback composition comparisons [def-pc-overlap-pair-canonical-comparisons]. For any fixed pair a,b and any chosen pair map phi satisfying the earlier overlapPairSquare [def-pc-local-overlap-transitions], the explicit later pair map is pullback.fst^*(c_a.inv), followed by overlapPairBaseChangeHom(phi), followed by pullback.snd^*(c_b.hom). This map satisfies the later overlapPairSquare with epsilonprime. No original cover of X, direct-chart comparison e, finite presentation, coherence at the stage, or nonemptiness assumption is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Form K from the later stage overlap to the earlier stage overlap by the pullback lift of fst followed by rho_a and snd followed by rho_b. Form L from the later limit overlap to the earlier limit overlap by the lift of fst followed by delta_a and snd followed by delta_b. The commuting projection equations hr and hdeltaf make both lifts well-defined. Their composites with each projection are those specified arrows, including when an overlap is empty.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "Apply the module pullback functor along L to the original pair-square equality. Conjugate its two ends by the composition comparisons associated to the limit-overlap projections. Naturality of mapComp moves the pulled component maps through these comparisons. DescentData.pullHom_hom for the restriction datum of M, using hdeltaf, identifies the pulled transition of M with its transition on the later limit overlap.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "The two maps from the later limit overlap to the earlier stage overlap, one through L and the earlier limit-to-stage overlap map and the other through K and the later limit-to-stage overlap map, agree after fst and snd, by hdeltav; hence they agree by pullback.hom_ext. Apply pullHom_pullHom to identify the middle map. Apply mapComp pentagon and naturality to move the chart isomorphisms c to its two ends. Cancel adjacent comparison inverses. The resulting component isos are exactly the five factors in hepsilon; replace them by epsilonprime. The resulting map is the displayed explicit conjugate of overlapPairBaseChangeHom(phi), and the resulting equality is the required later square.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pseudofunctor pullback composition preserves a commuting square of morphisms under refinement of two cover charts",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of module morphisms on pairwise overlaps remains commuting under refinement and iterated pullback",
+   "results": "Returned Scheme.Pullback.t'_fst_fst_snd, t'_fst_snd, t'_fst_fst_fst, cocycle_fst_fst_snd and Scheme.Cover.gluedCoverT'_fst_snd, gluedCoverT'_fst_fst. These concern pullback projection equations, not transport of module comparison squares.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom",
+   "results": "pullHom, pullHom_id, pullHom_pullHom, map_eq_pullHom and DescentData.pullHom_hom in Mathlib CategoryTheory/Sites/Descent. Their signatures were read; they supply the categorical identities but not the complete cover-chart transport or the canonical iterated-comparison equality.",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem; use the composition and naturality identities."
+  },
+  {
+   "tool": "grep",
+   "query": "pullHom_pullHom|mapComp.*naturality|pullbackCompOfEq; rg of lean/Sheaf, lean/WeilConjectures, and Mathlib/CategoryTheory/Sites/Descent and Bicategory",
+   "results": "Read OverlapPairCanonicalComparisons, LocalOverlapTransitions, OverlapPairTransitionsAssembly, Mathlib IsPrestack, DescentData, Bicategory/Functor/Cat and Bicategory/Strict/Pseudofunctor, and Modules/PullbackUnit. No existing refinement-square theorem or iterated-component refinement theorem. Blueprint searches comparison refinement and pair square each returned zero matching blueprint nodes.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate; definitions and general coherence identities are available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first-proof Zariski gluing: preservation of a chosen pair map and its canonical limit square under successive stage restrictions.",
+   "via": [
+    "lem-pc-fp-overlap-pair-refinement-persistence",
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapPairSquareChartTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapPairSquareChartTransport.lean",
+  "declaration": "AlgebraicGeometry.overlap_pair_square_chart_transport",
+  "statement": "theorem overlap_pair_square_chart_transport\n    {Y Y' Z : Scheme.{u}} (V : Y.OpenCover.{u}) (V' : Y'.OpenCover.{u})\n    (α : V'.I₀ → V.I₀) (r : Y' ⟶ Y) (ρ : ∀ d, V'.X d ⟶ V.X (α d))\n    (hr : ∀ d, ρ d ≫ V.f (α d) = V'.f d ≫ r)\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (hp : p' ≫ r = p)\n    (A : (d : V.I₀) → (V.X d).Modules)\n    (A' : (d : V'.I₀) → (V'.X d).Modules) (M : Z.Modules)\n    (c : ∀ d, (Scheme.Modules.pullback (ρ d)).obj (A (α d)) ≅ A' d)\n    (δ : ∀ d, (V'.pullback₁ p').X d ⟶ (V.pullback₁ p).X (α d))\n    (hδf : ∀ d, δ d ≫ (V.pullback₁ p).f (α d) = (V'.pullback₁ p').f d)\n    (hδv : ∀ d, δ d ≫ V.pullbackHom p (α d) = V'.pullbackHom p' d ≫ ρ d)\n    (ε : ∀ d, (Scheme.Modules.pullback (V.pullbackHom p d)).obj (A d) ≅\n      (Scheme.Modules.pullback ((V.pullback₁ p).f d)).obj M)\n    (ε' : ∀ d, (Scheme.Modules.pullback (V'.pullbackHom p' d)).obj (A' d) ≅\n      (Scheme.Modules.pullback ((V'.pullback₁ p').f d)).obj M)\n    (hε : ε' =\n    (fun d ↦ (Scheme.Modules.pullback (V'.pullbackHom p' d)).mapIso (c d).symm ≪≫\n      pullbackCompOfEq (V'.pullbackHom p' d) (ρ d)\n        (δ d ≫ V.pullbackHom p (α d)) (hδv d).symm (A (α d)) ≪≫\n      (pullbackCompOfEq (δ d) (V.pullbackHom p (α d))\n        (δ d ≫ V.pullbackHom p (α d)) rfl (A (α d))).symm ≪≫\n      (Scheme.Modules.pullback (δ d)).mapIso (ε (α d)) ≪≫\n      pullbackCompOfEq (δ d) ((V.pullback₁ p).f (α d))\n        ((V'.pullback₁ p').f d) (hδf d) M))\n    (a b : V'.I₀)\n    (φ : (Scheme.Modules.pullback (pullback.fst (V.f (α a)) (V.f (α b)))).obj\n        (A (α a)) ⟶\n      (Scheme.Modules.pullback (pullback.snd (V.f (α a)) (V.f (α b)))).obj\n        (A (α b)))\n    (hs : overlapPairSquare V A p\n      ((modulesPseudofunctor.toDescentData (V.pullback₁ p).f).obj M) ε (α a) (α b) φ) :\n    overlapPairSquare V' A' p'\n      ((modulesPseudofunctor.toDescentData (V'.pullback₁ p').f).obj M)\n      ε' a b\n      ((Scheme.Modules.pullback (pullback.fst (V'.f a) (V'.f b))).map (c a).inv ≫\n        modulesPseudofunctor.overlapPairBaseChangeHom\n          (V.f (α a)) (V.f (α b)) r (ρ a) (ρ b) (V'.f a) (V'.f b)\n          (hr a) (hr b) (A (α a)) (A (α b)) φ ≫\n        (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).map (c b).hom)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

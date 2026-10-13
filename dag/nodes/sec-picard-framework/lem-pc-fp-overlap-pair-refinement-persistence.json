@@ -15,22 +15,50 @@
  ],
  "proof": [
   {
-   "text": "Map each later chart to the earlier one by overlapRefinementHom U q qprime r. Pull the given map back along the induced universal overlap map and conjugate by pullback composition and equality-of-arrow isomorphisms to put its source and target into the prescribed later chart modules. The equation pprime followed by r=p induces a map of the later limit overlaps to the earlier limit overlaps. Pull back the given commuting square along it. Naturality of the pseudofunctor composition comparisons and the pentagon identify the pulled component isomorphisms with the canonical iterated comparisons for qprime and pprime. Composition for pullHom identifies the middle map with pullback of the constructed later map. Naturality of the restriction descent datum of M gives exactly the later commuting square. Universal pullback maps and isomorphisms also handle empty charts and overlaps.",
+   "text": "Take the given pair map phi. Construct rho by overlapRefinementHom. Its two projection equations give the cover refinement and the canonical module isomorphism c, defined by pullbackCompOfEq. Construct delta on each iterated limit chart by pullback.lift of the later Z projection and the later stage-chart projection followed by rho; the equality hp and rho cover-projection equation prove the lift condition. Its two projection equations are pullback.lift_fst and pullback.lift_snd.",
    "uses": [
     "def-pc-local-overlap-transitions",
     "def-pc-overlap-pair-canonical-comparisons"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "Use overlap_iterated_comparison_refinement to identify the actual canonical later comparison family with the explicit transport of the earlier one.",
+   "uses": [
+    "lem-pc-overlap-iterated-comparison-refinement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "Apply overlap_pair_square_chart_transport to the chosen phi, its square, the explicitly constructed rho,c,delta and their projection equations, and the comparison-family equality. It proves the square for an explicit refined map. Introduce that map as the existential witness. The private existential helper only packages this explicit formula to keep elaboration from unfolding the concrete sheaf pullbacks.",
+   "uses": [
+    "lem-pc-overlap-pair-square-chart-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
   }
  ],
  "proof_deps": [
   "def-pc-local-overlap-transitions",
-  "def-pc-overlap-pair-canonical-comparisons"
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-pc-overlap-iterated-comparison-refinement",
+  "lem-pc-overlap-pair-square-chart-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Tag 01ZR, first proof, successive restrictions; Mathlib Pseudofunctor.DescentData pullFunctor composition comparisons; explicit expansion of the original pair-map plan"
+  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
  },
  "mathlib_searches": [
   {
@@ -109,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-267a0",
-  "group": "S2",
+  "reviewer": "COMPILER",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T163539-L-1621406",
+  "landing": "20261013T181123-L-2607513",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the node statements and compile, including both direct downstream importers against the relocated interfaces."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

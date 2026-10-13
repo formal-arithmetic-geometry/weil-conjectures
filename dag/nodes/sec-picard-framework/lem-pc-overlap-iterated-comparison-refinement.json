@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-overlap-iterated-comparison-refinement",
+ "kind": "statement",
+ "title": "Coherence of canonical iterated comparisons under refinement",
+ "statement": "Let X,Y,Yprime,Z be schemes [def-pc-scheme], U an open cover of X, q:Y->X, qprime:Yprime->X, p:Z->Y, pprime:Z->Yprime and t:Z->X with p followed by q=t and pprime followed by qprime=t. Let N_a be modules on the charts U_a, M a module on Z, and e_a:t-chart-pullback of N_a ~= restriction of M to the t-pulled chart [def-pc-base-change]. Let rho_a map the qprime chart to the q chart, commuting with their projections to U_a. Let delta_a map the later iterated limit chart (U pulled by qprime and then pprime) to the earlier one (U pulled by q and then p), commuting both with the projections to Z and with the iterated chart projection followed by rho_a. Then overlapIteratedComparison(U,qprime,pprime,t,hprime,N,M,e) [def-pc-overlap-pair-canonical-comparisons] equals the pullback of the earlier comparison conjugated by the inverse of c_a=pullbackCompOfEq(rho_a, q-chart projection, qprime-chart projection), the comparisons for the two factorizations of delta_a followed by the earlier iterated chart projection, and the comparison for delta_a followed by the earlier Z projection. The five factors are exactly those in the Lean statement. This is an equality of isomorphism families; it assumes no pair map or pair square, no stage-base refinement arrow r, no finite presentation and no nonemptiness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary chart arrows and a pseudofunctor F, use mapComp prime pentagon twice on the n,rho,vprime and n,v,delta triangles to combine the source comparisons. A third use for k,d,delta combines the map to the direct chart. Naturality moves the pullback of e across mapComp(d,delta), and the inverse pentagon for l,d,delta cancels the remaining target comparisons. This proves the generic equality of homs; Iso.ext gives the equality of isomorphisms. These calculations are explicit in the private helpers, with no sorry.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "Specialize to modulesPseudofunctor and convert mapComp prime to pullbackCompOfEq using modulesPseudofunctor_mapComp_prime_hom_app_eq. This yields the normalized scheme-arrow coherence identity. The six factors of overlapIteratedComparison equal its four-factor normalized expression, by trans_symm, equality-of-arrow comparison symmetry, and associativity.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  },
+  {
+   "text": "The composite delta_d followed by the earlier direct-chart map equals the later direct-chart map. Compare both projections of the universal direct pullback: the Z projection agrees by hdeltaf, and the original-chart projection agrees by hdeltav and hrho. Instantiate the normalized scheme-arrow identity with these maps and their projection equations. This gives the stated equality of canonical comparison families, pointwise and then by funext.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01ZR",
+    "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR, first proof (Zariski gluing, details omitted); explicit pseudofunctor pullHom composition, mapComp pentagon and naturality calculations in Mathlib CategoryTheory/Sites/Descent/IsPrestack.lean and CategoryTheory/Bicategory/Strict/Pseudofunctor.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pseudofunctor pullback composition preserves a commuting square of morphisms under refinement of two cover charts",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of module morphisms on pairwise overlaps remains commuting under refinement and iterated pullback",
+   "results": "Returned Scheme.Pullback.t'_fst_fst_snd, t'_fst_snd, t'_fst_fst_fst, cocycle_fst_fst_snd and Scheme.Cover.gluedCoverT'_fst_snd, gluedCoverT'_fst_fst. These concern pullback projection equations, not transport of module comparison squares.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom",
+   "results": "pullHom, pullHom_id, pullHom_pullHom, map_eq_pullHom and DescentData.pullHom_hom in Mathlib CategoryTheory/Sites/Descent. Their signatures were read; they supply the categorical identities but not the complete cover-chart transport or the canonical iterated-comparison equality.",
+   "date": "2026-10-14",
+   "verdict": "No exact theorem; use the composition and naturality identities."
+  },
+  {
+   "tool": "grep",
+   "query": "pullHom_pullHom|mapComp.*naturality|pullbackCompOfEq; rg of lean/Sheaf, lean/WeilConjectures, and Mathlib/CategoryTheory/Sites/Descent and Bicategory",
+   "results": "Read OverlapPairCanonicalComparisons, LocalOverlapTransitions, OverlapPairTransitionsAssembly, Mathlib IsPrestack, DescentData, Bicategory/Functor/Cat and Bicategory/Strict/Pseudofunctor, and Modules/PullbackUnit. No existing refinement-square theorem or iterated-component refinement theorem. Blueprint searches comparison refinement and pair square each returned zero matching blueprint nodes.",
+   "date": "2026-10-14",
+   "verdict": "No duplicate; definitions and general coherence identities are available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence",
+  "date": "2026-10-14",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first-proof Zariski gluing: preservation of a chosen pair map and its canonical limit square under successive stage restrictions.",
+   "via": [
+    "lem-pc-fp-overlap-pair-refinement-persistence",
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapIteratedComparisonRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapIteratedComparisonRefinement.lean",
+  "declaration": "AlgebraicGeometry.overlap_iterated_comparison_refinement",
+  "statement": "theorem overlap_iterated_comparison_refinement\n    {X Y Y' Z : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (q' : Y' ⟶ X)\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (t : Z ⟶ X)\n    (h : p ≫ q = t) (h' : p' ≫ q' = t)\n    (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)\n    (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f a)).obj M)\n    (ρ : ∀ d, (U.pullback₁ q').X d ⟶ (U.pullback₁ q).X d)\n    (hρ : ∀ d, ρ d ≫ U.pullbackHom q d = U.pullbackHom q' d)\n    (δ : ∀ d, ((U.pullback₁ q').pullback₁ p').X d ⟶\n      ((U.pullback₁ q).pullback₁ p).X d)\n    (hδf : ∀ d, δ d ≫ ((U.pullback₁ q).pullback₁ p).f d =\n      ((U.pullback₁ q').pullback₁ p').f d)\n    (hδv : ∀ d, δ d ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p d =\n      Scheme.Cover.pullbackHom (U.pullback₁ q') p' d ≫ ρ d) :\n    overlapIteratedComparison U q' p' t h' N M e =\n    let V := U.pullback₁ q\n    let V' := U.pullback₁ q'\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    let c := fun d ↦ pullbackCompOfEq (ρ d) (U.pullbackHom q d)\n      (U.pullbackHom q' d) (hρ d) (N d)\n    let ε := overlapIteratedComparison U q p t h N M e\n    (fun d ↦ (Scheme.Modules.pullback (Scheme.Cover.pullbackHom V' p' d)).mapIso\n        (c d).symm ≪≫\n      pullbackCompOfEq (Scheme.Cover.pullbackHom V' p' d) (ρ d)\n        (δ d ≫ Scheme.Cover.pullbackHom V p d) (hδv d).symm (A d) ≪≫\n      (pullbackCompOfEq (δ d) (Scheme.Cover.pullbackHom V p d)\n        (δ d ≫ Scheme.Cover.pullbackHom V p d) rfl (A d)).symm ≪≫\n      (Scheme.Modules.pullback (δ d)).mapIso (ε d) ≪≫\n      pullbackCompOfEq (δ d) ((V.pullback₁ p).f d)\n        ((V'.pullback₁ p').f d) (hδf d) M)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T181123-L-2607513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
