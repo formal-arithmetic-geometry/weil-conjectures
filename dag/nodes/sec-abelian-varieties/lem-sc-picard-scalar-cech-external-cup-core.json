@@ -21,7 +21,7 @@
  },
  "id": "lem-sc-picard-scalar-cech-external-cup-core",
  "title": "Core scalar Cech external cup compatibility",
- "statement": "Under the coefficient and comparison hypotheses of lem-sc-picard-scalar-cech-external-cup, without the cover equalities, the displayed cycle compatibility formula holds.",
+ "statement": "Under the coefficient and comparison hypotheses of lem-sc-picard-scalar-cech-external-cup, including iSup U = top and iSup V = top, the displayed cycle compatibility formula holds. The comparisons need not be isomorphisms, and the covers need not be affine.",
  "stmt_deps": [
   "lem-sc-picard-scalar-cech-comparison",
   "lem-sc-picard-external-cech-cup-component"
@@ -32,26 +32,42 @@
  },
  "proof": [
   {
-   "text": "Fix the displayed degree, summand, cycles and total cycle. Expand the refinement and Alexander–Whitney coordinates and use the comparison witnesses; scalar restriction identifies the resulting cup with externalCup.",
+   "text": "Eliminate the degree equality p+q=n. Take the bidegree cochain map given by the summand inclusion followed by c. Its prescribed coordinates are hc. Apply cyclesMap(c) to z; cyclesMap_i and the tensor-summand inclusion hypothesis identify its inclusion with the bidegree pairing of a and v. homologyπ_naturality identifies its class with H(c)([z]).",
+   "uses": [
+    "lem-sc-picard-external-cech-cup-component",
+    "lem-sc-picard-external-cech-cup-bidegree"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extract the ordinary module comparison witnesses cX,cY,cP from the three scalar-comparison predicates, in degrees p,q,p+q. Obtain the uniquely characterized ordinary module cup of the projection pullbacks. Apply picardModuleCech_externalPairing to the image cycle, yielding the ordinary cup of the module pullback classes. The witness equations replace these three ordinary comparisons by eX,eY,eP.",
    "uses": [
     "lem-sc-picard-scalar-cech-comparison",
-    "lem-sc-picard-external-cech-cup-component",
-    "lem-sc-picard-cech-cup-pullback-compat",
-    "def-sc-field-linear-module-cohomology-operations"
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-module-cech-external-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalarExternalCup_moduleComparison on the two factor classes: the ordinary cup of module pullbacks equals the scalar Ext external cup. Compose this equality with the module-comparison equality and transport along p+q=n (already eliminated by equality induction).",
+   "uses": [
+    "lem-sc-scalar-external-cup-module-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations",
-  "lem-sc-picard-cech-cup-pullback-compat",
+  "def-sc-module-cohomology-cup-product",
+  "lem-sc-picard-external-cech-cup-bidegree",
   "lem-sc-picard-external-cech-cup-component",
-  "lem-sc-picard-scalar-cech-comparison"
+  "lem-sc-picard-module-cech-external-pairing",
+  "lem-sc-picard-scalar-cech-comparison",
+  "lem-sc-scalar-external-cup-module-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 01FD, 07MB, 0FKV and 0BED."
+  "place": "A4: decomposition of steps 1-2 into ordinary module Cech external pairing and step 3 into scalar Ext/module external cup comparison. The Lean glue uses cyclesMap_i, homologyπ_naturality, comparison witness equations and equality induction."
  },
  "mathlib_searches": [
   {
@@ -81,9 +97,9 @@
   "module": "Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup",
   "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarCechExternalCup.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.picardScalarCech_externalCup_core",
-  "statement": "theorem picardScalarCech_externalCup_core\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)\n    (c : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ) ⟶\n      (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G))\n    (hc : IsPicardExternalCechCupComponent f g U V F G c)\n    (eX : ∀ p : ℕ, ((picardCechFunctor f U).obj F).homology p →ₗ[k]\n      scalarCohomology f F p)\n    (heX : ∀ p, IsPicardScalarCechComparison f U F p (eX p))\n    (eY : ∀ q : ℕ, ((picardCechFunctor g V).obj G).homology q →ₗ[k]\n      scalarCohomology g G q)\n    (heY : ∀ q, IsPicardScalarCechComparison g V G q (eY q))\n    (eP : ∀ n : ℕ,\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n            (externalCupCoefficients f g F G)).homology n →ₗ[k]\n        scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n)\n    (heP : ∀ n, IsPicardScalarCechComparison (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G) n (eP n)) :\n    let A := (picardCechFunctor f U).obj F\n    let B := (picardCechFunctor g V).obj G\n    let T := HomologicalComplex.mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n      (ComplexShape.up ℕ)\n    ∀ (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n    (a : A.cycles i.val.1) (v : B.cycles i.val.2) (z : T.cycles n),\n    T.iCycles n z = HomologicalComplex.ιMapBifunctor A B\n        (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n\n        i.property ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →\n      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =\n        cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g F G) d)) i.property)\n          (externalCup f g F G i.val.1 i.val.2\n            (eX i.val.1 (A.homologyπ _ a)) (eY i.val.2 (B.homologyπ _ v)))",
+  "statement": "theorem picardScalarCech_externalCup_core\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (F : X.Modules) [F.IsQuasicoherent] (G : Y.Modules) [G.IsQuasicoherent]\n    {ι κ : Type w} (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤)\n    (c : HomologicalComplex.mapBifunctor ((picardCechFunctor f U).obj F)\n        ((picardCechFunctor g V).obj G) (curriedTensor (ModuleCat.{w} k))\n          (ComplexShape.up ℕ) ⟶\n      (picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj (externalCupCoefficients f g F G))\n    (hc : IsPicardExternalCechCupComponent f g U V F G c)\n    (eX : ∀ p : ℕ, ((picardCechFunctor f U).obj F).homology p →ₗ[k]\n      scalarCohomology f F p)\n    (heX : ∀ p, IsPicardScalarCechComparison f U F p (eX p))\n    (eY : ∀ q : ℕ, ((picardCechFunctor g V).obj G).homology q →ₗ[k]\n      scalarCohomology g G q)\n    (heY : ∀ q, IsPicardScalarCechComparison g V G q (eY q))\n    (eP : ∀ n : ℕ,\n      ((picardCechFunctor (pullback.fst f g ≫ f)\n        (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n          pullback.snd f g ⁻¹ᵁ V ij.2)).obj\n            (externalCupCoefficients f g F G)).homology n →ₗ[k]\n        scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n)\n    (heP : ∀ n, IsPicardScalarCechComparison (pullback.fst f g ≫ f)\n      (fun ij : ι × κ ↦ pullback.fst f g ⁻¹ᵁ U ij.1 ⊓\n        pullback.snd f g ⁻¹ᵁ V ij.2) (externalCupCoefficients f g F G) n (eP n)) :\n    let A := (picardCechFunctor f U).obj F\n    let B := (picardCechFunctor g V).obj G\n    let T := HomologicalComplex.mapBifunctor A B (curriedTensor (ModuleCat.{w} k))\n      (ComplexShape.up ℕ)\n    ∀ (n : ℕ) (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n})\n    (a : A.cycles i.val.1) (v : B.cycles i.val.2) (z : T.cycles n),\n    T.iCycles n z = HomologicalComplex.ιMapBifunctor A B\n        (curriedTensor (ModuleCat.{w} k)) (ComplexShape.up ℕ) i.val.1 i.val.2 n\n        i.property ((A.iCycles i.val.1 a) ⊗ₜ[k] (B.iCycles i.val.2 v)) →\n      eP n (HomologicalComplex.homologyMap c n (T.homologyπ n z)) =\n        cast (congrArg (fun d ↦ ↥(scalarCohomology (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g F G) d)) i.property)\n          (externalCup f g F G i.val.1 i.val.2\n            (eX i.val.1 (A.homologyπ _ a)) (eY i.val.2 (B.homologyπ _ v)))",
   "branch": "sheaf-dag",
-  "by": "S1",
+  "by": "A4",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -99,11 +115,40 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
+  "reviewer": "X-4fd32",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261013T153501-L-1085688",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T165637-L-1806853",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered Lean/DAG/report files, compilation, axiom probes, and direct importer checks match the stage-3 brief"
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "A4 stage 2",
+  "old_statement": "Under the coefficient and comparison hypotheses of lem-sc-picard-scalar-cech-external-cup, without the cover equalities, the displayed cycle compatibility formula holds.",
+  "what": "The concurrent S1 landing removed both cover equalities from the core theorem.\nSTATEMENT-DISPUTED (old version): comparison witnesses on noncovers need not be\nmultiplicative away from the union of the chosen opens. For X=Y the disjoint union\nof two copies of Spec k, take U and V to be the first component alone, and F=O_X,\nG=O_Y in degree zero. Let eX and eY extend a section on the first component by zero\non the second. Let eP extend the section on component (1,1) also to component (2,2).\nThese maps satisfy the comparison characterization: after restricting to the\nselected opens, each is the same identity. The condition for every resolution\nstill sees only these restrictions. But for a=b=1, the product comparison gives\nvalue 1 on (2,2), whereas externalCup of the factor extensions gives value zero\nthere. Thus the core equality fails. Tags 01FD and 0FKV explicitly use open covers.\n\nRestore the same cover hypotheses already present in the enclosing theorem,\nthen prove the corrected core using the two strictly separate intermediate\nstatements. The enclosing theorem's existing signature is unchanged and its\ncall passes its two existing cover hypotheses. This changes a helper statement,\nnot any Challenge target or definition. No target meaning is changed. The new\nlocal irreducibility annotations affect proof elaboration only.\n",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 01FD, 07MB, 0FKV and 0BED."
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Fix the displayed degree, summand, cycles and total cycle. Expand the refinement and Alexander–Whitney coordinates and use the comparison witnesses; scalar restriction identifies the resulting cup with externalCup.",
+    "uses": [
+     "lem-sc-picard-scalar-cech-comparison",
+     "lem-sc-picard-external-cech-cup-component",
+     "lem-sc-picard-cech-cup-pullback-compat",
+     "def-sc-field-linear-module-cohomology-operations"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sc-field-linear-module-cohomology-operations",
+   "lem-sc-picard-cech-cup-pullback-compat",
+   "lem-sc-picard-external-cech-cup-component",
+   "lem-sc-picard-scalar-cech-comparison"
+  ]
  }
 }
