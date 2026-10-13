@@ -1,0 +1,83 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group P1
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.StrictLocalUnderivedSectionsMate
+
+/-! # The derived mate on the complex of neighbourhood sections
+
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+-/
+
+@[expose] public section
+
+universe v
+
+open CategoryTheory CategoryTheory.Limits Opposite
+open AlgebraicGeometry
+
+namespace AlgebraicGeometry.Etale
+
+/-- The derived mate on an injective representative is computed by the underived
+exchange map followed by the derived-sections unit. This statement does not identify
+that exchange map with restriction along any strict-local neighbourhood cone.
+
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the generic
+factorization of derived adjunction mates on complexes.
+(blueprint: lem-weil-pbc-strict-local-derived-mate-sections-factorization).
+
+Proof: put M = ιJ, L = f_*M. Pass first to the homotopy category. Apply
+Adjunction.derivedPlus_mateEquiv_app_fac to the two inverse/direct-image
+adjunctions and squareUpperStarIso. The compatibility hypothesis on the square
+follows by expanding pullbackSquareComparison and the localization factorization
+of upperStarComp. The right-derived unit at M is invertible because M is a bounded
+below complex of injectives. Its inverse is precisely the factor used in
+sourceInjectiveDirectImageIso. Move restriction of L across this identity by
+naturality of the right-derived units. Apply global sections on the strict-local
+base. Their exactness identifies homology of sections with sections of homology;
+the derived Leray factorization converts the direct-image unit at p^*M into the
+right-derived sections unit at p^*M. The remaining underived maps are restriction
+on the base, baseChangeMap, and lowerStarCompGlobalSectionsIso, in that order:
+this is strictLocalUnderivedMateSections. Apply localization and degree-n homology,
+using naturality of homologyFunctorFactors and the exact-sections homology
+comparison. Transport by q using naturality. This yields the stated equality.
+Only the direct-image unit at M is inverted; the sections unit at p^*M is retained.
+Thus no acyclicity of p^*M is asserted or needed, and negative degrees and zero
+complexes are included. -/
+theorem strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}}
+    (f : X ⟶ S)
+    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    (n : ℤ)
+    (J : CochainComplex.Plus (InjectiveObject
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))
+    (q : K.obj ≅ DerivedCategory.Q.obj
+      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :
+    ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
+    let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+    let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
+    strictLocalComplexSectionRestriction s
+      ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L
+      (sourceInjectiveDirectImageIso f K J q) n i ≫
+        ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+        AddCommGrpCat.{v + 1}).map
+        ((DerivedCategory.Plus.homologyFunctor _ n).map
+          ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus
+            (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
+              (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
+            (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
+              (IsPullback.of_hasPullback f
+                (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
+                |>.natTrans.app K))) ≫
+        (strictLocalBaseChangeTargetIso f s K n).hom =
+    (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
+      ((NatTrans.mapHomologicalComplex (strictLocalUnderivedMateSections f s i)
+        (.up ℤ)).app M) ≫
+    (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫
+    representativeSectionsComparison
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by sorry
+
+end AlgebraicGeometry.Etale

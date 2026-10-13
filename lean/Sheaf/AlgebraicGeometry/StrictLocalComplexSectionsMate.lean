@@ -6,6 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm
+import Sheaf.AlgebraicGeometry.StrictLocalDerivedMateSectionsFactorization
 
 /-! # The derived mate on the complex of neighbourhood sections
 
@@ -21,6 +22,10 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+set_option maxHeartbeats 800000 in
+-- Comparing the composed section functors across localization requires extra defeq work.
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- The derived mate, on restricted sections of the direct-image representative,
 is the canonical comparison of termwise restriction to fibre hypercohomology.
 This statement starts with cohomology of the complex of sections on S: it contains
@@ -80,6 +85,39 @@ theorem strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
       ((strictLocalNeighbourhoodProjection f s).app i)
       (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm M n ≫
     representativeSectionsComparison
-      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by sorry
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n := by
+  intro i
+  dsimp only
+  rw [strictLocalComplexSectionRestriction_derivedMate f s K n J q i]
+  let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+  let a := (NatIso.mapHomologicalComplex (sourceStageSectionsIso f s i)
+    (.up ℤ)).hom.app M
+  let b := (NatTrans.mapHomologicalComplex (sectionsPullbackNat (Q.legs.app i))
+      (.up ℤ)).app
+      (((upperStar AddCommGrpCat.{v + 1}
+        ((strictLocalNeighbourhoodProjection f s).app i)).mapHomologicalComplex
+          (.up ℤ)).obj M) ≫
+    ((Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
+      AddCommGrpCat.{v + 1}).mapHomologicalComplex (.up ℤ)).map
+        ((NatIso.mapHomologicalComplex
+          (upperStarComp AddCommGrpCat.{v + 1} (Q.legs.app i)
+            ((strictLocalNeighbourhoodProjection f s).app i)
+            (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm)
+          (.up ℤ)).inv.app M)
+  have hb : (NatTrans.mapHomologicalComplex (strictLocalUnderivedMateSections f s i)
+      (.up ℤ)).app M = a ≫ b := by
+    rw [strictLocalUnderivedMateSections_eq f s Q i]
+    ext k
+    simp [a, b]
+  rw [hb, Functor.map_comp, Category.assoc]
+  have hn :=
+    (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.naturality b
+  change _ ≫ _ = _ ≫ _ at hn
+  dsimp only [Functor.comp_map] at hn
+  simpa only [a, b, M, termwiseSectionsRestriction, Category.assoc] using!
+    congrArg (fun t ↦
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map a ≫
+        t ≫ representativeSectionsComparison
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n) hn
 
 end AlgebraicGeometry.Etale

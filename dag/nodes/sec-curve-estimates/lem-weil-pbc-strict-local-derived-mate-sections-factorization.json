@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-strict-local-derived-mate-sections-factorization",
+ "kind": "statement",
+ "title": "Derived mate and the underived sections map",
+ "statement": "Let f:X→S be any scheme morphism, s:Spec Ω→S a geometric point, K∈D⁺(Ab(X_et)), n∈ℤ, J a bounded-below complex of injective abelian etale sheaves on X and q:K≅Q(ιJ). Put M=ιJ and L=f_*M; identify Rf_*K with QL by sourceInjectiveDirectImageIso [def-weil-pbc-strict-local-injective-source-comparison]. For every pointed neighbourhood i, the composite of strictLocalComplexSectionRestriction [lem-weil-pbc-strict-local-localized-hom-germ], global sections of H^n of the derived mate, and strictLocalBaseChangeTargetIso [def-weil-pbc-strict-local-mate-projection-data] equals H^n of the chain map obtained by applying strictLocalUnderivedMateSections f s i degreewise [lem-weil-pbc-strict-local-underived-sections-mate], followed by the inverse localization/homology factorization and representativeSectionsComparison for p:X×_S S_(s)→X [lem-weil-pbc-injective-sections-pullback-comparison]. No neighbourhood cone geometry is chosen and no identification of the underived map with cone restriction is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; details of the adjunction compatibility written by P1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-strict-local-localized-hom-germ",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-strict-local-underived-sections-mate"
+ ],
+ "proof": [
+  {
+   "text": "Put M=ιJ and apply Adjunction.derivedPlus_mateEquiv_app_fac to the two inverse/direct-image adjunctions, the underived squareUpperStarIso and pullbackSquareComparison. The hypothesis identifying the square on complexes is pullbackSquareComparison_hom_app_factorsh (WeilConjectures.SixFunctors.BaseChange.DerivedComparison). Invert the direct-image derived unit on M, which is allowed for the fixed bounded-below injective representative and is exactly the unit factor in sourceInjectiveDirectImageIso. The result expresses the derived mate by the underived mate followed by the derived direct-image unit at p^*M.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move restriction on the base through the derived units using their naturality. Apply global sections on S_(s); they are exact. Expand strictLocalBaseChangeTargetIso as the exact-sections homology isomorphism followed by the derived Leray isomorphism. The defining factorization of derived composition changes the direct-image unit at p^*M followed by Leray into the derived-sections unit at p^*M. Keep this unit as a morphism: it is not inverted. All underived factors are now restriction on S followed by baseChangeMap and lowerStarCompGlobalSectionsIso, the definition of strictLocalUnderivedMateSections. No assertion of the theorem identifying that map with cone restriction is used.",
+   "uses": [
+    "def-weil-pbc-strict-local-mate-projection-data",
+    "lem-weil-pbc-strict-local-localized-hom-germ",
+    "lem-weil-pbc-injective-sections-pullback-comparison",
+    "lem-weil-pbc-strict-local-underived-sections-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localization and degree-n homology to the factorization, commute the exact-sections comparison by naturality, and transport by q. The homologyFunctorFactors inverse is the initial localization comparison; the surviving sections unit transported by q is representativeSectionsComparison. This is the displayed formula. The argument works in every integer degree, including zero complexes, without assuming p^*M injective or acyclic.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "lem-weil-pbc-injective-sections-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "lem-weil-pbc-strict-local-localized-hom-germ",
+  "lem-weil-pbc-strict-local-underived-sections-mate",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent P1",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final injective-complex paragraph; explicit mate and localization factorization argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived mate on an injective representative commutes with exact sections and the derived Leray comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived mate factorization on injective complexes after exact global sections and derived Leray comparison",
+   "results": "Functor.isZero_rightDerived_obj_injective_succ and InjectiveResolution.toRightDerivedZero results; none compares this derived mate with its sections map.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "mateEquiv_counit: generic adjunction formula, without localization or sections.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus_mateEquiv_app_fac|baseChange_eq_derivedBaseChangeMapPlus",
+   "results": "msearch: zero hits. Direct rg found Adjunction.derivedPlus_mateEquiv_app_fac and baseChange_eq_derivedBaseChangeMapPlus; these compute the mate before exact sections/Leray and do not give the asserted sections factorization. Blueprint search: zero matches for derived mate sections factorization.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalComplexSectionsMate",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 final injective-complex paragraph: construct the map from neighbourhood sections and identify it with the derived base-change mate",
+   "via": [
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction",
+    "lem-weil-pbc-strict-local-complex-sections-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalDerivedMateSectionsFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalDerivedMateSectionsFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalComplexSectionRestriction_derivedMate",
+  "statement": "theorem strictLocalComplexSectionRestriction_derivedMate {X S : Scheme.{v}}\n    (f : X ⟶ S)\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (n : ℤ)\n    (J : CochainComplex.Plus (InjectiveObject\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))\n    (q : K.obj ≅ DerivedCategory.Q.obj\n      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) :\n    ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),\n    let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj\n    let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M\n    strictLocalComplexSectionRestriction s\n      ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L\n      (sourceInjectiveDirectImageIso f K J q) n i ≫\n        ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology\n        AddCommGrpCat.{v + 1}).map\n        ((DerivedCategory.Plus.homologyFunctor _ n).map\n          ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus\n            (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}\n              (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus\n            (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}\n              (IsPullback.of_hasPullback f\n                (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))\n                |>.natTrans.app K))) ≫\n        (strictLocalBaseChangeTargetIso f s K n).hom =\n    (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map\n      ((NatTrans.mapHomologicalComplex (strictLocalUnderivedMateSections f s i)\n        (.up ℤ)).app M) ≫\n    (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫\n    representativeSectionsComparison\n      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T025306-L-3424146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T025306-L-3424146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
