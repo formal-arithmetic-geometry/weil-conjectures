@@ -12,17 +12,22 @@
  },
  "proof": [
   {
-   "text": "Identify restricted B-valued finitely supported functions on I with the direct sum of I copies of restricted B, by the identity on underlying functions; the A-actions agree coordinatewise.",
+   "text": "Prove preservation of exact colimits by short-complex homology using the equivalence between short complexes of diagrams and diagrams of short complexes. The colimit functor preserves homology by exactness, and evaluation does as well. Their homology comparison isomorphisms identify the homology of the colimit with the colimit of the homologies; homologyMap_mapNatTrans verifies compatibility with all cocone legs. Apply this to coproducts of modules, which are exact (Mathlib ModuleCat.AB). Evaluation at the three neighboring degrees transfers this preservation to chain-complex homology in any natural degree.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Use the Tor symmetry isomorphism to compute Tor by resolving M with projectives. Tensor commutes with direct sums, so the resulting chain complex is a direct sum of I copies of the complex computing Tor_j(M,B). A finite-support cycle is a finite-support collection of cycles. Exactness of the coordinate complexes in degree j allows a finite-support collection of boundaries to be chosen on precisely these indices, proving exactness of the direct-sum complex in degree j. This is valid in degree zero as well, where exactness means the cokernel is zero. Transport vanishing through the projective-resolution homology isomorphisms and Tor symmetry.",
+   "text": "Choose a projective resolution P of the fixed test module M. Define the functor T taking N to the chain complex P tensor N, and module maps to the induced chain maps. T preserves coproducts because every degree is the tensorLeft functor on P_n, a left adjoint. Compose T with degree-j homology; by the preceding step this composite preserves coproducts. The projective-resolution computation isoLeftDerivedObj gives a natural isomorphism from Tor_j(M,-) to this composite; its naturality follows from leftDerived_app_eq. Transfer coproduct preservation through this isomorphism and the natural symmetry of Tor to obtain coproduct preservation of Tor_j(-,M).",
    "uses": [
     "def-weil-pbc-tor-modules",
     "lem-weil-pbc-tor-symmetry"
    ],
    "elementary": false
+  },
+  {
+   "text": "Identify the free B-module with the direct sum of copies of B using finsuppLEquivDirectSum. The concrete direct-sum cofan is colimiting by ModuleCat.coproductCoconeIsColimit. Scalar restriction preserves coproducts, so its composite with Tor_j(-,M) sends this cofan to a colimiting cofan. Every object of this image diagram is zero by hTor. Its colimit is zero by IsColimit.isZero_pt. Transport this vanishing along the image of the free-module/direct-sum isomorphism. Empty and infinite index sets, degree zero, zero modules and zero rings are all covered by the same preservation statements.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -33,9 +38,9 @@
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 066K, lemma-tor-amplitude-change-rings (free module in degree zero); Tor symmetry: Algebra Tag 00M3, lemma-tor-left-right. Sources read at https://stacks.math.columbia.edu/tag/066K and the TorSymmetry node.",
-  "group": "D4",
+  "group": "K1",
   "date": "2026-10-13",
-  "note": "Fixed-degree free-module part of the parent node plan, with the direct-sum exactness argument made explicit."
+  "note": "Implemented the existing direct-sum and Tor-symmetry route. Exact colimit/homology glue is proved locally from Mathlib APIs; the source-library private comparison in DerivedAmbientDirectSumsHomology supplied a reusable pattern."
  },
  "mathlib_searches": [
   {
@@ -119,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T122726-L-3631940",
-  "kind": "interface",
+  "landing": "20261013T131325-L-4034002",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
