@@ -9,9 +9,17 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+
+import Sheaf.AlgebraicGeometry.ClosedFreeIdealProductIso
+import Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension
+import Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Clearing denominators in a supplied local closed free model
@@ -27,6 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option maxHeartbeats 800000 in
+-- Finite-generator transport and several image comparisons need extra elaboration heartbeats.
 /-- A local map from a finite closed free source extends from an ideal lattice.
 The lattice inclusion is invertible over the given open; no injectivity of the
 extended map or generic stalk hypothesis on the target is asserted.
@@ -68,6 +78,120 @@ theorem coherent_local_free_ideal_lattice
         (restrictFunctor U.ι).map α =
           (restrictFunctor U.ι).map
             ((pushforward i).map (Sigma.desc (fun j : Fin r ↦ I.toModulesι ≫
-          Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) j))) ≫ φ := by sorry
+          Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) j))) ≫ φ := by
+  classical
+  let E : Z.Modules := ∐ fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf
+  let H := (pushforward i).obj E
+  let E' : Z.Modules := SheafOfModules.free (R := Z.ringCatSheaf) (ULift.{u} (Fin r))
+  have hE' : SheafOfModules.IsFiniteLocallyFree.{u, u, u} E' := by
+    let q := (SheafOfModules.free.generatingSections
+      (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).localGeneratorsData
+    apply SheafOfModules.IsFiniteLocallyFree.mk.{u, u, u} (M := E')
+    refine ⟨q, inferInstance, ?_⟩
+    have : (SheafOfModules.free.generatingSections
+        (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).IsFiniteType :=
+      SheafOfModules.GeneratingSections.IsFiniteType.mk.{u, u, u}
+        (by change Finite (ULift.{u} (Fin r)); infer_instance)
+    exact SheafOfModules.LocalGeneratorsData.IsFiniteType.mk.{u, u, u, u}
+      (p := q) (fun V ↦ by
+        change ((SheafOfModules.free.generatingSections
+          (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).map
+            (SheafOfModules.pushforward (𝟙 (Z.ringCatSheaf.over V)))
+            (Iso.refl _)).IsFiniteType
+        infer_instance)
+  have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} E :=
+    SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} (M := E') (h := hE')
+      (Sigma.whiskerEquiv (f := fun _ : ULift.{u} (Fin r) ↦
+        SheafOfModules.unit Z.ringCatSheaf) (g := fun _ : Fin r ↦
+        SheafOfModules.unit Z.ringCatSheaf) Equiv.ulift (fun _ ↦ Iso.refl _))
+  have : E.IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : E.IsQuasicoherent := inferInstance
+  have : E.IsFiniteType := inferInstance
+  have hH : RingedSpace.IsCoherent X.toRingedSpace H :=
+    (isCoherent_iff_isQuasicoherent_and_isFiniteType X H).mpr
+      (isQuasicoherent_and_isFiniteType_pushforward_of_isFinite i E)
+  have : F.IsQuasicoherent :=
+    ((isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF).1
+  let K : X.IdealSheafData := IdealSheafData.vanishingIdeal
+    ⟨(U : Set X)ᶜ, U.2.isClosed_compl⟩
+  have hK : (K.support : Set X) = (U : Set X)ᶜ := by simp [K]
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  obtain ⟨n, β, hβ⟩ := coherent_open_map_tensor_extension K H F hH U hK φ
+  obtain ⟨m, a, ha⟩ := ideal_power_tensor_image_lift K H hH n
+  let I := (K ^ (n + m)).comap i
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
+  have hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules := by
+    have : (SheafOfModules.unit Z.ringCatSheaf).IsInvertible :=
+      SheafOfModules.instIsInvertibleUnit.{u, u, u}
+    have : (SheafOfModules.unit Z.ringCatSheaf).IsFiniteLocallyFree :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    have : (SheafOfModules.unit Z.ringCatSheaf).IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+    have : (SheafOfModules.unit I.subscheme.ringCatSheaf).IsQuasicoherent :=
+      SheafOfModules.isQuasicoherent_unit.{u, u, u}
+    have hpush : ((pushforward I.subschemeι).obj
+        (SheafOfModules.unit I.subscheme.ringCatSheaf)).IsQuasicoherent :=
+      isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated I.subschemeι _
+    have : SheafOfModules.IsQuasicoherent.{u, u, u}
+        ((SheafOfModules.pushforward I.subschemeι.toRingCatSheafHom).obj
+          (SheafOfModules.unit I.subscheme.ringCatSheaf)) := hpush
+    have : I.toModules.IsFinitePresentation := isFinitePresentation_kernel I.toPushforwardSubscheme
+    exact (isCoherent_iff_isQuasicoherent_and_isFiniteType Z _).mpr
+      ⟨inferInstance, inferInstance⟩
+  obtain ⟨e, he⟩ := closed_free_ideal_product_iso i (K ^ (n + m)) r
+  let j := (pushforward i).map (Sigma.desc (fun t : Fin r ↦ I.toModulesι ≫
+    Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) t))
+  have hKU : IsIso ((restrictFunctor U.ι).map (K ^ (n + m)).toModulesι) :=
+    (K ^ (n + m)).isIso_restrictFunctor_map_toModulesι (fun x hx hs ↦ by
+      have hsK := IdealSheafData.support_pow_le (n + m) hs
+      change x ∈ (K.support : Set X) at hsK
+      rw [hK] at hsK
+      exact hsK hx)
+  have : IsIso ((restrictFunctor U.ι).map
+      (MonoidalCategory.whiskerRight (K ^ (n + m)).toModulesι H)) := by
+    rw [NatIso.isIso_map_iff (restrictFunctorIsoPullback U.ι)] at *
+    have h := Functor.LaxMonoidal.μ_natural_left (pullback U.ι)
+      (K ^ (n + m)).toModulesι H
+    rw [(IsIso.eq_inv_comp _).mpr h.symm]
+    infer_instance
+  let μ := MonoidalCategory.whiskerRight (K ^ (n + m)).toModulesι H ≫
+    (MonoidalCategory.leftUnitor H).hom
+  have : IsIso ((restrictFunctor U.ι).map μ) := by
+    dsimp only [μ]
+    rw [Functor.map_comp]
+    infer_instance
+  have hfac : (restrictFunctor U.ι).map (factorThruImage μ) ≫
+      (restrictFunctor U.ι).map (idealModuleProductι (K ^ (n + m)).toModulesι H) =
+      (restrictFunctor U.ι).map μ := by
+    rw [← Functor.map_comp]
+    exact congrArg ((restrictFunctor U.ι).map) (image.fac μ)
+  have : Epi ((restrictFunctor U.ι).map
+      (idealModuleProductι (K ^ (n + m)).toModulesι H)) := epi_of_epi_fac hfac
+  have : Mono ((restrictFunctor U.ι).map
+      (idealModuleProductι (K ^ (n + m)).toModulesι H)) := by
+    have : PreservesLimitsOfSize.{u, u} (restrictFunctor U.ι) :=
+      preservesLimitsOfSize_restrictFunctor U.ι
+    dsimp only [idealModuleProductι]
+    infer_instance
+  have : IsIso ((restrictFunctor U.ι).map
+      (idealModuleProductι (K ^ (n + m)).toModulesι H)) := isIso_of_mono_of_epi _
+  have hj : IsIso ((restrictFunctor U.ι).map j) := by
+    change IsIso ((restrictFunctor U.ι).map
+      ((pushforward i).map (Sigma.desc (fun t : Fin r ↦ I.toModulesι ≫
+        Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) t))))
+    rw [← he, Functor.map_comp]
+    infer_instance
+  refine ⟨I, hI, hj, e.hom ≫ a ≫ β, ?_⟩
+  calc
+    _ = (restrictFunctor U.ι).map e.hom ≫
+        (restrictFunctor U.ι).map a ≫ (restrictFunctor U.ι).map β := by
+      simp only [Functor.map_comp]
+    _ = (restrictFunctor U.ι).map
+        (e.hom ≫ (a ≫ (MonoidalCategory.whiskerRight (K ^ n).toModulesι H ≫
+          (MonoidalCategory.leftUnitor H).hom))) ≫ φ := by
+      rw [hβ]
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [ha, he]
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-g1-closed-free-ideal-product-iso",
+ "kind": "statement",
+ "title": "Closed finite free ideal-product comparison",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion, def-pc-scheme], $K$ a quasi-coherent ideal sheaf on $X$ [def-sbc-closed-immersion-ideal-sheaf], and $r$ a natural number. There exists an isomorphism from $i_*((K\\mathcal O_Z)^{\\oplus r})$ to $K(i_*(\\mathcal O_Z^{\\oplus r}))$ [def-nagata-extended-ideal, def-weil-sheaf-of-modules-category, lem-weil-pbc-ideal-module-product-stalk] whose composite with the ambient product inclusion equals the pushforward of the coordinate ideal inclusions. No Noetherianity is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01QY",
+  "place": "Closed pushforward affine quotient calculation; extension to finite sums by tensor and pushforward coproduct comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-extended-ideal",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized rank-one closed structure ideal-product comparison. Factor tensor multiplication through its image and the inverse comparison, obtaining an epimorphism c from K tensor i_*O_Z onto i_*(K O_Z), whose composite with the ideal inclusion is multiplication.",
+   "uses": [
+    "lem-pc-closed-structure-ideal-product-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pushforward preserves finite coproducts because it is additive; tensorLeft preserves these coproducts by the proved tensor-Hom adjunction. Assemble c coordinatewise using the two coproduct comparison isomorphisms to obtain an epimorphism q onto i_*((K O_Z)^r). The natural ideal inclusion j is monic. On every coproduct coordinate, the comparison equations, whisker exchange and left-unitor naturality show q followed by j is multiplication on i_*(O_Z^r). The image of this epi-mono factorization gives the desired isomorphism and its inclusion equation. Empty finite sums, zero ideals and empty schemes are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-structure-ideal-product-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-13",
+  "based_on": "Tag 01QY and the existing normalized rank-one comparison; finite-sum categorical assembly proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of an ideal times a finite direct sum of closed structure sheaves is the pushforward of the finite sum of the extended ideal",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "Internal Server Error; service unavailable"
+   },
+   "date": "2026-10-13",
+   "verdict": "Unavailable; no absence conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an ideal acting on a finite direct sum of the structure sheaf pushed forward by a closed immersion equals the pushforward of the extended ideal direct sum",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Scheme.IdealSheafData.map_ideal",
+     "Scheme.IdealSheafData.ideal_map_of_isAffineHom"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact module comparison; use rank-one project theorem and coproduct assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.map",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Limits.Sigma.map_epi",
+     "CategoryTheory.Limits.Sigma.ι_map"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "Supplies coordinate assembly and epi facts."
+  },
+  {
+   "tool": "grep",
+   "query": "image.*coproduct|coproduct.*image|image.*biproduct",
+   "results": {
+    "ok": true,
+    "n_hits": 11,
+    "top": [
+     "Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products"
+    ]
+   },
+   "date": "2026-10-13",
+   "verdict": "Coproduct comparison API found; no exact geometric theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentLocalFreeIdealLattice",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-c3-coherent-local-free-ideal-lattice",
+   "place": "Step 3, finite-rank closed ideal-product identification.",
+   "via": [
+    "lem-pc-c3-coherent-local-free-ideal-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedFreeIdealProductIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedFreeIdealProductIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closed_free_ideal_product_iso",
+  "statement": "theorem closed_free_ideal_product_iso\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (K : X.IdealSheafData) (r : ℕ) :\n    ∃ e : (pushforward i).obj (∐ fun _ : Fin r ↦ (K.comap i).toModules) ≅\n        idealModuleProduct K.toModulesι\n          ((pushforward i).obj (∐ fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf)),\n      e.hom ≫ idealModuleProductι K.toModulesι\n          ((pushforward i).obj (∐ fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf)) =\n        (pushforward i).map (Sigma.desc (fun j : Fin r ↦ (K.comap i).toModulesι ≫\n          Sigma.ι (fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf) j))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095953-L-2458822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T095953-L-2458822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
