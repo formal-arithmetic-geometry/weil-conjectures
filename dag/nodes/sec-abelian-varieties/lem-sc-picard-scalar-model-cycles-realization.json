@@ -22,51 +22,28 @@
  },
  "proof": [
   {
-   "text": "Use the affine equivalence between quasi-coherent modules on U and modules over A=Gamma(W,U). Each strictly perfect term is a retract of a finite free sheaf, hence quasi-coherent. The supplied global-section bases e0,e1 therefore give sheaf bases of K-zero and K-one. The equality hd identifies the outgoing differential with a times d. On any V contained in U, a scalar annihilating the restricted d defines a cycle in degree zero. There are no incoming boundaries because all negative terms are zero.",
+   "text": "Apply the scalar derived-cycle theorem to E=R(f_W)_*(L_W[0]) and the given fixed K,hE,e0,e1 to obtain c and derived test-section lifts ξ of all annihilating scalars.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-category"
+    "lem-sc-picard-scalar-derived-cycles"
    ],
    "elementary": false
   },
   {
-   "text": "Apply hE and the canonical arbitrary base-change isomorphism for the relatively flat invertible module L, first to V and then to Spec kappa(w). In degree zero, derived direct image is ordinary pushforward. Thus the cycle on V determines sigma. At the residue point hdw makes the differential zero and the scalar degree-zero basis identifies the cycle group with kappa(w). Its comparison with fibre sections gives c. The same fixed hE and basis e0 define these comparisons on every smaller open.",
+   "text": "Apply the independent direct-image test-section theorem to obtain q_t and, for each V, j,e and the restriction identity for every ξ. Choose the desired residue equivalence to be q_residue inverse followed by c, and realize a by σ=q_V(ξ). Substitute the scalar-cycle restriction equality into the identity for q. The inverse of the composite equivalence sends a(w) to q_residue(c inverse(a(w))), which is the same section.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-canonical-degree-zero-mate-square",
-    "def-pc-derived-direct-image",
-    "def-sc-invertible-module"
+    "lem-sc-picard-direct-image-test-sections"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Factor the residue-field point of W through V, and apply the fibre-product universal property to construct j from Y to X_V. Its image is exactly the points above w: for x above w, the canonical map Spec kappa(x) to X_V factors through its fibre over Spec kappa(w), so the corresponding point of Y maps to x. Tensor-pullback composition, together with equality of the two composites to X, gives e. The canonical degree-zero mate square computes restriction along j as the adjunction unit. Naturality of the derived comparison sends the scalar cycle to its evaluation a(w), hence e transports restriction of sigma to c inverse of a(w). The restriction from j inverse of top to top is the presheaf identity after the canonical equality, giving the exact displayed expression. No assertion that d vanishes on a neighbourhood, nor any scalar lifting assertion, is used.",
-   "uses": [
-    "def-pc-base-change",
-    "def-weil-residue-field",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-canonical-degree-zero-mate-square"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-derived-category",
-  "def-pc-derived-direct-image",
-  "def-pc-perfect-complex",
-  "def-sc-invertible-module",
-  "def-weil-residue-field",
-  "lem-pc-canonical-degree-zero-mate-square",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-pc-rf-perfect-base-change"
+  "lem-sc-picard-scalar-derived-cycles",
+  "lem-sc-picard-direct-image-test-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, More on Morphisms",
-  "place": "Tag 0BF2; explicit interface and comparison details written by A2"
+  "document": "Stacks Project, Tags 0BF2, 0B91 and 08HY",
+  "place": "S2: split scalar-cycle computation for an arbitrary derived object from the independent direct-image comparison; compose the two additive identifications in Lean."
  },
  "mathlib_searches": [
   {
@@ -141,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T054208-L-440350",
+  "landing": "20261013T072405-L-1124760",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
