@@ -12329,3 +12329,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:50 L: merged deliver/R3/Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison (stage 3; reviewer PASS; first push; landing 20261013T115029-L-3326174 (interface); batch 20261013T115020; modules 4; new nodes 3)
 - 11:50 L: merged deliver/R3/Sheaf.AlgebraicGeometry.FlatFibreComponentDimensionSpecialization (stage 3; reviewer PASS; first push; landing 20261013T115030-L-3326345 (proof); batch 20261013T115020; modules 1; new nodes 1)
 - 11:50 L: merged deliver/R4/Sheaf.Algebra.Homology.FiniteStripAugmentation (stage 3; reviewer PASS; first push; landing 20261013T115030-L-3326455 (interface); batch 20261013T115020; modules 2; new nodes 1)
+- 11:50 L: merged deliver/R4/Sheaf.Paper.SquareZeroGluedScalarExistsUnique (stage 3; reviewer PASS; first push; landing 20261013T115031-L-3326554 (proof); batch 20261013T115020; modules 1; new nodes 0)
