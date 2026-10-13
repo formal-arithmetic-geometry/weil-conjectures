@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-p1-rhom-injective-cocycle-bijective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-rhom-hom-derived-roof",
+   "place": "proof: local cohomology quotient bijection",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bijectivity forced by the injective cocycle formula",
+ "statement": "Under the abelian, enough-injectives, and derived-category assumptions [def-sp-abelian, def-sp-injective-resolutions, def-weil-abstract-derived-category], let $M$ be an object and $I$ a bounded below complex [def-weil-pbc-bounded-derived-subcategories] of injectives. Put $v=\\operatorname{Hom}(M,-)$ [def-sp-left-exact-additive]. Fix $n\\in\\mathbf Z$. Any additive homomorphism $\\beta:H^n(Rv(QI))\\to\\operatorname{Hom}_{D(\\mathcal A)}(M[0],(QI)[n])$ whose value on every cocycle class transported through the inverse cohomology-to-Q isomorphism and the derived unit is the corresponding localized shifted map followed by the quotient-to-derived comparison is bijective. No natural family or resolution independence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Bounded below injectives are K-injective. Compose CohomologyClass.equivOfIsKInjective with SmallShiftedHom.equiv and postcomposition by the shifted quotient comparison; this gives a bijection E from Hom-complex cohomology classes to the derived Hom group. Its value on a cocycle is the required localized map.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+   }
+  },
+  {
+   "text": "The composite T from the concrete kernel of the differential of v(I), through cycles and the homology projection, the inverse cohomology-to-Q isomorphism, and the derived unit is surjective, because the projection is epi and the other arrows are isomorphisms. The normalization is beta(Tx)=E([x]). Surjectivity of E and of the single-source cocycle constructor gives surjectivity of beta. If beta(Tx)=beta(Ty), injectivity of E makes [x-y] zero. HomComplexSingle identifies x-y with a boundary g d; hence x-y is in the range subgroup of ShortComplex.abToCycles. The explicit homology quotient annihilates it, so T(x-y)=0 and Tx=Ty. This proves injectivity.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural additive map from cohomology of right derived Hom to morphisms in a derived category normalized on injective cocycles",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism cohomology right derived preadditive coyoneda and shifted morphisms in derived category",
+   "results": "HomComplex.homologyAddEquiv, CohomologyClass.toSmallShiftedHom_mk and singleFunctorIsoCompQ. These give local ingredients, not a natural all-D+ map.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "Exact fixed-target localization bijection found and used through equivOfIsKInjective.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom.*cocycle|homology.*[Cc]oyoneda|[Cc]oyoneda.*homology",
+   "results": "HomComplexSingle supplies fromSingleMk_surjective and fromSingleMk_mem_coboundaries_iff. ShortComplex.Ab supplies the quotient description. No existing natural additive cocycle comparison was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RHomDerivedRoof",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RHomInjectiveCocycleBijective",
+  "declaration": "CategoryTheory.Functor.rhom_injective_cocycle_map_bijective",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RHomInjectiveCocycleBijective.lean",
+  "statement": "theorem rhom_injective_cocycle_map_bijective\n    {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]\n    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C)\n    (I : CochainComplex.Plus C)\n    (_hi : ∀ k : ℤ, Injective (I.obj.X k)) (n : ℤ) :\n    let V := preadditiveCoyoneda.obj (op M)\n    let RV := V.rightDerivedFunctorPlus\n    let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n\n    let S := (DerivedCategory.singleFunctor C 0).obj M\n    ∀ β : (H n).obj (RV.obj ((DerivedCategory.Plus.Q (C := C)).obj I)) →+\n        (S ⟶ ((DerivedCategory.Plus.Q (C := C)).obj I).obj⟦n⟧),\n      (∀ (f : M ⟶ I.obj.X n) (hf : f ≫ I.obj.d n (n + 1) = 0),\n        let J := (V.mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj\n        let a := J.homologyπ n ((J.sc n).abCyclesIso.inv\n          ⟨f, by\n            change f ≫ I.obj.d n ((ComplexShape.up ℤ).next n) = 0\n            rw [CochainComplex.next]\n            exact hf⟩)\n        let b := (DerivedCategory.Plus.homologyFunctorObjQIso\n          (V.mapCochainComplexPlus.obj I) n).inv a\n        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)\n        β ((H n).map η b) =\n          ShiftedHom.map (Cocycle.equivHomShift.symm\n              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫\n            ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧') → Function.Bijective β",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

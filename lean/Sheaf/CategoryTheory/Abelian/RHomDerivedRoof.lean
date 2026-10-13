@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
+import Sheaf.CategoryTheory.Abelian.RHomNaturalCocycleMap
+import Sheaf.CategoryTheory.Abelian.RHomInjectiveCocycleBijective
+
 /-!
 # The natural RHom comparison and its roof normalization
 
@@ -86,6 +89,62 @@ theorem exists_rhom_hom_derived_roof
               (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫
             (CategoryTheory.inv (DerivedCategory.Q.map r.map))⟦n⟧' ≫
             ((DerivedCategory.quotientCompQhIso C).hom.app K.obj)⟦n⟧') := by
-  sorry
+  classical
+  dsimp only
+  let V := preadditiveCoyoneda.obj (op M)
+  let RV := V.rightDerivedFunctorPlus
+  let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n
+  let S := (DerivedCategory.singleFunctor C 0).obj M
+  obtain ⟨τ, hnat, hnorm⟩ := exists_rhom_natural_cocycle_map M
+  have hbij (X : DerivedCategory.Plus C) (n : ℤ) : Function.Bijective (τ X n) := by
+    obtain ⟨m, hm⟩ := X.2
+    have : X.IsGE m := (X.isGE_ι_obj_iff m).1 hm
+    obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso X m
+    let I := (InjectiveObject.ι C).mapCochainComplexPlus.obj L
+    have hi (k : ℤ) : Injective (I.obj.X k) := (L.obj.X k).2
+    have hb := rhom_injective_cocycle_map_bijective M I hi n
+      (τ ((DerivedCategory.Plus.Q (C := C)).obj I) n) (hnorm I hi n)
+    let B := ((DerivedCategory.Plus.ι (C := C)).mapIso e)
+    constructor
+    · intro a b hab
+      have h := congrArg (fun x ↦ x ≫ B.inv⟦n⟧') hab
+      have ha := hnat _ _ e.inv n a
+      have hc := hnat _ _ e.inv n b
+      have heq : (H n).map (RV.map e.inv) a = (H n).map (RV.map e.inv) b := by
+        apply hb.1
+        exact ha.trans (h.trans hc.symm)
+      have := congrArg (fun x ↦ (H n).map (RV.map e.hom) x) heq
+      simpa [← AddCommGrpCat.comp_apply, ← Functor.map_comp] using this
+    · intro b
+      obtain ⟨a, ha⟩ := hb.2 (b ≫ B.inv⟦n⟧')
+      refine ⟨(H n).map (RV.map e.hom) a, ?_⟩
+      rw [hnat, ha]
+      simp [B, ← Functor.map_comp]
+  let ψ (X : DerivedCategory.Plus C) (n : ℤ) := AddEquiv.ofBijective (τ X n) (hbij X n)
+  refine ⟨ψ, ?_, ?_⟩
+  · exact hnat
+  · intro K r hb hi n f hf
+    let I : CochainComplex.Plus C := ⟨r.complex, hb⟩
+    let := r.quasiIso
+    let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅
+        (DerivedCategory.Plus.Q (C := C)).obj I :=
+      (DerivedCategory.Plus.ι (C := C)).preimageIso
+        ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫
+          asIso (DerivedCategory.Q.map r.map) ≪≫
+          (DerivedCategory.quotientCompQhIso C).app r.complex)
+    change τ _ n ((H n).map (RV.map e.inv) _) = _
+    rw [hnat]
+    erw [hnorm I hi n f hf]
+    have he : (DerivedCategory.Plus.ι (C := C)).map e.inv =
+        (DerivedCategory.quotientCompQhIso C).inv.app r.complex ≫
+          CategoryTheory.inv (DerivedCategory.Q.map r.map) ≫
+          (DerivedCategory.quotientCompQhIso C).hom.app K.obj := by
+      change (DerivedCategory.Plus.ι (C := C)).map
+        ((DerivedCategory.Plus.ι (C := C)).preimage _) = _
+      rw [Functor.map_preimage]
+      simp only [Iso.trans_inv, Iso.app_inv, Iso.symm_inv, asIso_inv, Category.assoc]
+    rw [he]
+    simp only [Functor.map_comp, Category.assoc]
+    simp only [I, ← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
 
 end CategoryTheory.Functor

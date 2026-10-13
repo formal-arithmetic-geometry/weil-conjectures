@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-p1-rhom-natural-cocycle-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-rhom-hom-derived-roof",
+   "place": "proof: natural map construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Natural additive RHom map normalized on injective cocycles",
+ "statement": "Let $\\mathcal A$ be abelian [def-sp-abelian] with enough injectives [def-sp-injective-resolutions], $M\\in\\mathcal A$, and $v=\\operatorname{Hom}(M,-)$ [def-sp-left-exact-additive]. Put $Rv=v.rightDerivedFunctorPlus$ on $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories] and $S=M[0]\\in D(\\mathcal A)$ [def-weil-abstract-derived-category]. There exist additive homomorphisms $\\tau_X^n:H^n(RvX)\\to\\operatorname{Hom}_{D(\\mathcal A)}(S,X[n])$, natural in $X$. For every bounded below degreewise injective complex $I$ and cocycle $f:M\\to I^n$, first pass $f$ to $H^n(vI)$ through the canonical cycles isomorphism and homology projection, then through the inverse cohomology-to-Q isomorphism and the cohomology of the total-derived unit. Its image under $\\tau_{QI}^n$ is the localized complex map of $f$, followed by the shifted quotient-to-derived comparison isomorphism on $I$. No bijectivity, no arbitrary resolution roof formula, and no shift coherence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For a bounded below complex of injectives, send a Hom-complex cocycle from M[0] to its localized shifted map. HomComplexSingle identifies boundaries with null-homotopic maps; hence the map descends additively through the cohomology quotient. Use the invertible total-derived unit to identify its source with H^n(Rv(QI)).",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+   }
+  },
+  {
+   "text": "Use the equivalence from the bounded below homotopy category of injective objects to D+ to extend the map: its inverse supplies the injective homotopy representative and its counit transports to the given object. Every derived morphism lifts uniquely to a homotopy class by K-injective localization. The cocycle construction commutes with chain maps, homotopic maps act equally, and naturality of the derived unit proves naturality. The same lifting applied to an arbitrary injective complex gives the stated normalization.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (1), 070I; parent roof-comparison proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural additive map from cohomology of right derived Hom to morphisms in a derived category normalized on injective cocycles",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism cohomology right derived preadditive coyoneda and shifted morphisms in derived category",
+   "results": "HomComplex.homologyAddEquiv, CohomologyClass.toSmallShiftedHom_mk and singleFunctorIsoCompQ. These give local ingredients, not a natural all-D+ map.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "Exact fixed-target localization bijection found and used through equivOfIsKInjective.",
+   "date": "2026-10-13",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom.*cocycle|homology.*[Cc]oyoneda|[Cc]oyoneda.*homology",
+   "results": "HomComplexSingle supplies fromSingleMk_surjective and fromSingleMk_mem_coboundaries_iff. ShortComplex.Ab supplies the quotient description. No existing natural additive cocycle comparison was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.RHomDerivedRoof",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RHomNaturalCocycleMap",
+  "declaration": "CategoryTheory.Functor.exists_rhom_natural_cocycle_map",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RHomNaturalCocycleMap.lean",
+  "statement": "theorem exists_rhom_natural_cocycle_map\n    {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]\n    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) :\n    let V := preadditiveCoyoneda.obj (op M)\n    let RV := V.rightDerivedFunctorPlus\n    let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n\n    let S := (DerivedCategory.singleFunctor C 0).obj M\n    ∃ τ : ∀ (X : DerivedCategory.Plus C) (n : ℤ),\n        (H n).obj (RV.obj X) →+ (S ⟶ X.obj⟦n⟧),\n      (∀ (X Y : DerivedCategory.Plus C) (g : X ⟶ Y) (n : ℤ)\n          (a : (H n).obj (RV.obj X)),\n        τ Y n ((H n).map (RV.map g) a) =\n          τ X n a ≫ ((DerivedCategory.Plus.ι (C := C)).map g)⟦n⟧') ∧\n      (∀ (I : CochainComplex.Plus C) (_hi : ∀ k : ℤ, Injective (I.obj.X k))\n          (n : ℤ) (f : M ⟶ I.obj.X n) (hf : f ≫ I.obj.d n (n + 1) = 0),\n        let J := (V.mapHomologicalComplex (ComplexShape.up ℤ)).obj I.obj\n        let a := J.homologyπ n ((J.sc n).abCyclesIso.inv\n          ⟨f, by\n            change f ≫ I.obj.d n ((ComplexShape.up ℤ).next n) = 0\n            rw [CochainComplex.next]\n            exact hf⟩)\n        let b := (DerivedCategory.Plus.homologyFunctorObjQIso\n          (V.mapCochainComplexPlus.obj I) n).inv a\n        let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I)\n        τ ((DerivedCategory.Plus.Q (C := C)).obj I) n ((H n).map η b) =\n          ShiftedHom.map (Cocycle.equivHomShift.symm\n              (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫\n            ((DerivedCategory.quotientCompQhIso C).hom.app I.obj)⟦n⟧')",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T082358-L-1641176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
