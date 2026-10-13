@@ -1835,7 +1835,12 @@ public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
+public import WeilConjectures.RingTheory.Purity.FreeOfRegularPair
+public import WeilConjectures.RingTheory.Purity.NormalRegularPair
+public import WeilConjectures.RingTheory.Purity.UnramifiedOfRegularPair
+public import WeilConjectures.RingTheory.Purity.ZariskiNagata
 public import WeilConjectures.RingTheory.Regular.Hartogs
+public import WeilConjectures.RingTheory.RegularLocalRing.IsRegularRing
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
