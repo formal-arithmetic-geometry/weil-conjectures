@@ -41,6 +41,10 @@ theorem ringKrullDim_le_of_faithfullyFlat_of_isLocalHom
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B]
     (f : A →+* B) [IsLocalHom f] (hf : f.FaithfullyFlat) :
     ringKrullDim A ≤ ringKrullDim B := by
-  sorry
+  let := f.toAlgebra
+  have : Module.Flat A B := hf.flat
+  exact ringKrullDim_le_of_goingDown_of_surjective f
+    (Algebra.HasGoingDown.of_flat)
+    (FaithfullyFlat.iff_flat_and_comap_surjective.mp hf).2
 
 end RingHom
