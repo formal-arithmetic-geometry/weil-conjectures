@@ -1,0 +1,159 @@
+{
+ "id": "lem-sc-residue-homology-rank-one-coefficient",
+ "kind": "statement",
+ "title": "Derived residue homology detects a nonzero rank-one stalk coefficient",
+ "statement": "Let S be a scheme [def-pc-scheme], E an object of its derived module category [def-pc-derived-category], a: O_S[0] → E and s ∈ U. Let P be strictly perfect on the localized module site [def-pc-perfect-complex], with zero terms in negative degrees. Fix e: E|_U ≅ Q(P), c: (O_S[0])|_U ≅ Q(A), where A is the single restricted structure sheaf, and α: A → P with Q(α) = c⁻¹ ≫ a|_U ≫ e. Assume H⁰(Li_s* a) is invertible for the residue morphism i_s and derived pullback [def-pc-base-change, def-pc-derived-pullback]. For any linear isomorphisms σ: A⁰_s ≃ O_{U,s} and τ: P⁰_s ≃ O_{U,s}, the residue of τ(α⁰_s(σ⁻¹(1))) in κ(s) is nonzero. Stalks are computed via the over-site equivalence and the module stalk functor.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E62 (perfect-lemma-proper-flat-h0), residue-field argument, with the supplied model shape of Tag 0BCD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-base-change",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Identify the localized module site with the open subscheme. The finite-projective terms of P are flat, and its finite support makes it bounded above. Apply [lem-pc-flat-complex-derived-pullback] to compute residue pullback termwise. Derived pullback composition [lem-pc-ringed-spaces-derived-pullback-composition] identifies the residue of the representing equality with the residue of a, conjugated by the residue images of c and e. These are isomorphisms, so the residue homology arrow of alpha is invertible.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since negative terms vanish, residue degree-zero homology of P is the kernel of its outgoing differential, without incoming boundaries. The generator of the residue source has nonzero homology image under the invertible residue arrow, hence alpha^0 sends it to a nonzero vector in the rank-one degree-zero residue term. In the given linear frames σ and τ this vector is the residue of τ(α⁰(σ⁻¹(1))). The source generator is nonzero because the residue ring at a scheme point is a field. Thus the displayed coefficient is nonzero, for every pair of frames.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0E62 (perfect-lemma-proper-flat-h0), residue-field argument, with the supplied model shape of Tag 0BCD",
+  "note": "Agent elaboration of the derived residue and connective homology steps; local rank-one algebra is proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map between free rank one modules over a local ring is invertible if its reduction to the residue field is nonzero",
+   "results": "Found 8 hits: Module.Invertible.exists_linearEquiv_ideal, Module.Invertible.bijective, Module.Invertible.free_iff_linearEquiv, CommRing.Pic.mk_eq_one_iff, Module.IsLocalRing.linearCombination_bijective_of_flat, IsLocalRing.split_injective_iff_lTensor_residueField_injective, CommRing.Pic.instSubsingletonOfIsLocalRing, IsLocalRing.residue_ne_zero_iff_isUnit",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the derived residue coefficient statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue homology isomorphism for a connective perfect complex with rank one degree zero implies the degree zero coefficient is nonzero in the residue field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the derived residue coefficient statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map between rank one modules over a local ring is invertible when its coefficient has nonzero residue",
+   "results": "Found 8 hits: Module.Invertible.bijective, Module.Invertible.toModuleEnd_bijective, LinearEquiv.toSpanNonzeroSingleton, CommRing.Pic.mk_eq_one_iff, Module.Invertible.exists_linearEquiv_ideal, LinearEquiv.coord, LinearEquiv.smul_id_of_finrank_eq_one, Module.Invertible.congr",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the derived residue coefficient statement."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*homology|homology.*residue|residue_ne_zero_rankOne",
+   "results": "Found 0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the derived residue coefficient statement."
+  },
+  {
+   "tool": "grep",
+   "query": "residue_ne_zero_iff_isUnit|homologyMap.*injective|singleObjXSelf",
+   "results": "Found 25 homological-complex API hits, including HomologicalComplex.singleObjXSelf; no derived residue coefficient comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded complex of flat sheaf modules, derived pullback to a residue field computes the chain map on degree zero cohomology",
+   "results": "Second reader: eight hits, mainly SheafOfModules.pullbackObjFreeIso and its naturality, Scheme.Modules.pullback, and residueFieldCongr_inv_residueFieldMap_ofPoint. None identifies derived residue H^0 with the coefficient in supplied stalk frames.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; the remaining comparison is not closed by these APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.residue, IsUnit",
+   "results": "Second reader: IsLocalRing.residue_ne_zero_iff_isUnit, PowerSeries.isUnit_weierstrassUnit, PowerSeries.IsWeierstrassDivision.isUnit_of_map_ne_zero.",
+   "date": "2026-10-13",
+   "verdict": "Confirms the local-ring lemma used by the parent, not the derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a bounded flat complex commutes with degree zero homology and residue field tensor of the stalk",
+   "results": "Second reading by T1: eight Scheme.Pullback residue tensor and point-map results, none comparing the representing chain map with residue H^0. Local rg searches also inspected KFlatStalkResidueCohomology, StalkFreeResidueCohomologyComparison and the private unit-stalk helpers; no matching morphism comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match or immediate closure of the remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RankOneResidueStalkComponent",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field; Tag 0E62, local unit argument, with the fixed model shape of Tag 0BCD; nonzero residue coefficient in the fixed connective rank-one model; residue homology comparison and nonzero degree-zero coefficient, steps 1–2 of lem-sc-rank-one-residue-stalk-component",
+   "via": [
+    "lem-sc-rank-one-residue-stalk-component",
+    "lem-sc-connective-rank-one-model-stalk",
+    "lem-sc-perfect-local-degree-zero-unit",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResidueHomologyRankOneCoefficient.lean",
+  "declaration": "AlgebraicGeometry.residue_ne_zero_rankOne_stalk_coefficient",
+  "statement": "theorem residue_ne_zero_rankOne_stalk_coefficient (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory S)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n        (SheafOfModules.unit S.ringCatSheaf) ⟶ E) (s : S)\n    (U : S.Opens) (hs : s ∈ U)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) ℤ)\n    (hP : Scheme.IsStrictlyPerfect S U P)\n    (hnegative : ∀ i : ℤ, i < 0 → IsZero (P.X i))\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P)\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n        ((derivedPullback (S.fromSpecResidueField s)).map a)))\n    (c : (SheafOfModules.overFunctor.{u}\n        (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n          (SheafOfModules.unit S.ringCatSheaf)) ≅\n      DerivedCategory.Q.obj\n        ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            ((SheafOfModules.overFunctor.{u}\n              (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf))))\n    (α : (CochainComplex.singleFunctor\n        (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n          ((SheafOfModules.overFunctor.{u}\n            (moduleRings S.toRingedSpace) U).obj (SheafOfModules.unit S.ringCatSheaf)) ⟶ P)\n    (hα : DerivedCategory.Q.map α = c.inv ≫\n      (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.map a ≫\n        e.hom)\n    (σ : ((RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩).obj\n      ((Scheme.Modules.overEquiv U).functor.obj\n        (((CochainComplex.singleFunctor\n          (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj\n            ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).obj\n              (SheafOfModules.unit S.ringCatSheaf))).X 0))) ≃ₗ[\n                U.toScheme.presheaf.stalk ⟨s, hs⟩] U.toScheme.presheaf.stalk ⟨s, hs⟩)\n    (τ : ((RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩).obj\n      ((Scheme.Modules.overEquiv U).functor.obj (P.X 0))) ≃ₗ[\n        U.toScheme.presheaf.stalk ⟨s, hs⟩] U.toScheme.presheaf.stalk ⟨s, hs⟩) :\n    IsLocalRing.residue (U.toScheme.presheaf.stalk ⟨s, hs⟩)\n      (τ (((RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨s, hs⟩).map\n        ((Scheme.Modules.overEquiv U).functor.map (α.f 0))).hom (σ.symm 1))) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T054238-L-449728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261013T054238-L-449728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

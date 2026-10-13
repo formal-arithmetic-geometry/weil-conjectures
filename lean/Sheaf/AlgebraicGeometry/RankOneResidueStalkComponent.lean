@@ -8,7 +8,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.LocalizedHomologyStalkComparison
 public import Mathlib.AlgebraicGeometry.ResidueField
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The residue calculation for the degree-zero component of a rank-one model
 
@@ -83,6 +84,95 @@ theorem isIso_localized_stalk_component_of_residue_homology (S : Scheme.{u})
     (hα : DerivedCategory.Q.map α = c.inv ≫
       (SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.map a ≫
         e.hom) :
-    IsIso ((localizedModuleStalk S U ⟨s, hs⟩).map (α.f 0)) := by sorry
+    IsIso ((localizedModuleStalk S U ⟨s, hs⟩).map (α.f 0)) := by
+  classical
+  have rankOne_unit_stalk_iso (X : Scheme.{u}) (x : X) :
+      let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+      ∃ e : S.obj (SheafOfModules.unit X.ringCatSheaf) ≅
+          ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),
+        ∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),
+          e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+            U x hx r) = X.presheaf.germ U x hx r := by
+    let D := (TopologicalSpace.OpenNhds.inclusion x).op ⋙ X.presheaf
+    let A := forget₂ CommRingCat.{u} RingCat.{u} ⋙
+      forget₂ RingCat.{u} AddCommGrpCat.{u}
+    let e : ↑(TopCat.Presheaf.stalk (C := Ab.{u})
+        (SheafOfModules.unit X.ringCatSheaf).val.presheaf x) ≃+ X.presheaf.stalk x :=
+      (preservesColimitIso A D).symm.addCommGroupIsoToAddEquiv
+    have hg (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)) :
+        e (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+          U x hx r) = X.presheaf.germ U x hx r := by
+      change (colimit.ι (D ⋙ A) (Opposite.op (⟨U, hx⟩ : TopologicalSpace.OpenNhds x)) ≫
+        (preservesColimitIso A D).inv) r = _
+      rw [ι_preservesColimitIso_inv]
+      rfl
+    let f : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
+        (SheafOfModules.unit X.ringCatSheaf) →ₗ[X.presheaf.stalk x] X.presheaf.stalk x :=
+      { e.toAddMonoidHom with
+        map_smul' := by
+          intro r m
+          obtain ⟨U, hxU, r, rfl⟩ := X.presheaf.exists_germ_eq r
+          obtain ⟨V, hxV, m, rfl⟩ :=
+            TopCat.Presheaf.exists_germ_eq
+              (SheafOfModules.unit X.ringCatSheaf).val.presheaf m
+          have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+          rw [← X.presheaf.germ_res_apply (homOfLE inf_le_left) x hx r,
+            ← TopCat.Presheaf.germ_res_apply
+              (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+              (homOfLE inf_le_right) x hx m,
+            ← PresheafOfModules.germ_smul (R := X.presheaf)]
+          let r' := X.presheaf.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
+          let m' : Γ(X, U ⊓ V) :=
+            (SheafOfModules.unit X.ringCatSheaf).val.presheaf.map
+              (homOfLE inf_le_right : U ⊓ V ⟶ V).op m
+          change e (TopCat.Presheaf.germ
+            (SheafOfModules.unit X.ringCatSheaf).val.presheaf (U ⊓ V) x hx (r' * m')) =
+            X.presheaf.germ (U ⊓ V) x hx r' * (e (TopCat.Presheaf.germ
+              (SheafOfModules.unit X.ringCatSheaf).val.presheaf (U ⊓ V) x hx m') :
+                X.presheaf.stalk x)
+          rw [hg, hg]
+          exact map_mul (X.presheaf.germ (U ⊓ V) x hx).hom _ _ }
+    refine ⟨(LinearEquiv.ofBijective f e.bijective).toModuleIso, ?_⟩
+    exact hg
+  let x : U.toScheme := ⟨s, hs⟩
+  let T := RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace x
+  let F := (Scheme.Modules.overEquiv U).functor
+  obtain ⟨t, ht⟩ := rankOne_unit_stalk_iso U.toScheme x
+  let A := (CochainComplex.singleFunctor
+    (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U)) 0).obj
+      ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).obj
+        (SheafOfModules.unit S.ringCatSheaf))
+  let b : F.obj (A.X 0) ≅ SheafOfModules.unit U.toScheme.ringCatSheaf :=
+    F.mapIso (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _) ≪≫
+      (Scheme.Modules.overEquivFunctorObjUnitIso U).symm
+  obtain ⟨z⟩ := hzero
+  let d : F.obj (P.X 0) ≅ SheafOfModules.unit U.toScheme.ringCatSheaf :=
+    F.mapIso (z ≪≫ SheafOfModules.freeUniqueIso _) ≪≫
+      (Scheme.Modules.overEquivFunctorObjUnitIso U).symm
+  let σ := (T.mapIso b ≪≫ t).toLinearEquiv
+  let τ := (T.mapIso d ≪≫ t).toLinearEquiv
+  have hn := residue_ne_zero_rankOne_stalk_coefficient S E a s U hs P hP
+    hnegative e ha c α hα σ τ
+  let f := (T.map (F.map (α.f 0))).hom
+  let g : U.toScheme.presheaf.stalk x →ₗ[U.toScheme.presheaf.stalk x]
+      U.toScheme.presheaf.stalk x := τ.toLinearMap.comp (f.comp σ.symm.toLinearMap)
+  have hu : IsUnit (g 1) := (IsLocalRing.residue_ne_zero_iff_isUnit _).mp hn
+  have hg (r : U.toScheme.presheaf.stalk x) : g r = r * g 1 := by
+    simpa only [smul_eq_mul, mul_one] using g.map_smul r (1 : U.toScheme.presheaf.stalk x)
+  have hb : Function.Bijective g := by
+    obtain ⟨v, hv⟩ := hu
+    rw [show (g : U.toScheme.presheaf.stalk x → U.toScheme.presheaf.stalk x) =
+      (fun r ↦ r * (v : U.toScheme.presheaf.stalk x)) by funext r; rw [hg, hv]]
+    exact v.mulRight_bijective
+  have hf : Function.Bijective f := by
+    have heq : (f : _ → _) = τ.symm ∘ g ∘ σ := by
+      funext m
+      simp only [Function.comp_apply, g, LinearMap.comp_apply, LinearEquiv.coe_coe,
+        LinearEquiv.symm_apply_apply]
+      exact congrArg f (σ.symm_apply_apply m).symm
+    rw [heq]
+    exact τ.symm.bijective.comp (hb.comp σ.bijective)
+  apply (ConcreteCategory.isIso_iff_bijective _).mpr
+  exact hf
 
 end AlgebraicGeometry
