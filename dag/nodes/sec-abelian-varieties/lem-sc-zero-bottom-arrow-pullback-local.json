@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-zero-bottom-arrow-pullback-local",
+ "kind": "statement",
+ "title": "Local pullback preserves a specified bottom homology isomorphism",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $D\\in D(\\mathcal O_T)$ [def-pc-derived-category], $a\\in\\mathbf Z$, $M$ an $\\mathcal O_T$-module sheaf, and $f:M[-a]\\to D$ an arrow inducing an isomorphism on $H^a$. Choose derived categories for all schemes in one localization universe. Let $U\\subset T$ be open, and let $K$ be a bounded-above cochain complex on $U$ [def-pc-cochain-complex-modules] with finite free terms [def-weil-pbc-free-module], zero in every degree below $a$, and with $d^a=0$. Fix $e:L(U\\hookrightarrow T)^*D\\cong Q(K)$ [def-pc-derived-pullback]. For any morphism $g:T\\prime\\to T$ and point $y\\in T\\prime$ such that $g(y)\\in U$, there exists an open neighbourhood $V$ of $y$ such that the restriction to $V$ of the module-sheaf map $H^a(Lg^*f)$ is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Pullback clause, computed using 06YD/06YJ, composition 0D5S, and affine chain representatives as in 08CR second proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Exact open restriction and e identify H^a(D)|U with H^a(K). The zero bottom differentials identify H^a(K) with K^a. The isomorphism on H^a(f) therefore identifies M|U with the finite free sheaf K^a. Refine U by affine opens and transport restrictions to their localized sites.",
+   "uses": [
+    "lem-pc-derived-open-pullback-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single complex on M and K restricted to an affine refinement are strictly perfect, since K is bounded above and zero below a. Represent the conjugated restricted arrow f by a chain map alpha using the affine perfect-map representative theorem. Both short complexes at a have zero differentials. HomologyData.ofZeros and its map naturality identify H^a(alpha) with alpha.f a. The hypothesis on H^a(f) and exact restriction make alpha.f a invertible.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative",
+    "lem-pc-derived-open-pullback-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite free terms are flat and the complexes are bounded above. Compute their pullback along the inverse-image chart by the natural flat-complex counit. Its naturality computes the pullback of this specified chain map. Termwise pullback preserves zero objects, zero maps and invertible components. Its bottom homology map is therefore invertible. Derived composition and exact open restriction identify it with H^a(Lg*f) restricted to the inverse image of the affine chart containing g(y). This inverse image contains y, giving V. The arrow is fixed globally, so no compatibility of unrelated local object isomorphisms is required.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-open-pullback-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-pullback-homology",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "Pullback clause, computed using 06YD/06YJ, composition 0D5S, and affine chain representatives as in 08CR second proof",
+  "note": "M1 writes the fixed-arrow truncation reduction of the zero-matrix argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pulling back a specified derived arrow from a single sheaf to a bounded finite free zero bottom differential complex preserves its bottom cohomology isomorphism locally",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of the bottom cohomology sheaf of local finite free zero differential models and existence of its bottom truncation arrow",
+   "results": "8 hits: Algebra.Smooth.flat, AlgebraicGeometry.flat_iff, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.Flat.flat_appLE, Module.Flat.of_forall_exists_factorization, AlgebraicGeometry.Scheme.Hom.flat_appLE, CategoryTheory.Sheaf.H, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic primitives used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap.*ofZeros|ofZeros.*homologyMap|singleFunctorCompHomologyFunctorIso",
+   "results": "14 hits: Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; generic primitives used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a sheaf placed in the lowest degree to a perfect complex with vanishing first differential remains invertible on lowest cohomology after derived tensor product",
+   "results": "Second reader: 8 hits include K-projective/K-injective HomComplex facts and singleFunctor vanishing; no arbitrary scheme pullback theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "Second reader: 12 hits include singleFunctorIsoCompQ and singleFunctorCompHomologyFunctorIso, already used in the reduction; no local pullback lemma.",
+   "date": "2026-10-13",
+   "verdict": "generic primitives already used"
+  },
+  {
+   "tool": "grep",
+   "query": "from_singleFunctor_obj_eq_zero_of_projective|exists_iso_singleFunctor_obj_of_isGE_of_isLE|isIso_liftCycles_iff",
+   "results": "Second reader: 8 Mathlib hits, generic vanishing, single cohomology identification and cycles. Sheaf BottomChainModelPullbackTransport is degree zero on localized sites and assumes an existing chain model; PerfectUniversalH0LocalChainModel additionally assumes universal rank and perfection. Neither directly supplies this arbitrary-degree chart statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalZeroBottomModelPullback",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Zero-matrix model pullback comparison; bottom truncation and local invertibility of the pulled-back arrow",
+   "via": [
+    "lem-sc-perfect-universal-lowest-cohomology-pullback",
+    "lem-sc-local-zero-bottom-model-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroBottomArrowPullbackLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.zeroBottomArrow_pullback_local",
+  "statement": "theorem zeroBottomArrow_pullback_local\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (T : Scheme.{u}) (D : schemeDerivedCategory T) (a : ℤ)\n    (M : SheafOfModules.{u} (moduleRings T.toRingedSpace))\n    (f : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj M ⟶ D)\n    (hf : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).map f))\n    (U : T.Opens)\n    (K : CochainComplex\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ)\n    (hbounded : ∃ c : ℤ, ∀ i : ℤ, c < i → IsZero (K.X i))\n    (hnegative : ∀ i : ℤ, i < a → IsZero (K.X i))\n    (hzero : K.d a (a + 1) = 0)\n    (hfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (K.X i ≅ SheafOfModules.free\n      (R := moduleRings U.toScheme.toRingedSpace) (ULift.{u} (Fin n))))\n    (e : (derivedPullback U.ι).obj D ≅ DerivedCategory.Q.obj K)\n    (T' : Scheme.{u}) (g : T' ⟶ T) (y : T') (hy : g.base y ∈ U) :\n    ∃ V : T'.Opens, y ∈ V ∧\n      IsIso (((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).map\n          ((derivedPullback g).map f)).over V)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2468950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T100029-L-2468950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
