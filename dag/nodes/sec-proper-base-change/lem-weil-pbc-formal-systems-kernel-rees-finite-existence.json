@@ -15,45 +15,36 @@
  },
  "proof": [
   {
-   "text": "Construct multiplication and the action by local lifts; independence follows because all errors lie in I^(m+n+1) F_(m+n+1), which is zero. Bilinearity and restriction compatibility allow gluing. Verify the unit, associativity and commutativity on common representatives at one sufficiently high level. Iterated ideal multiplication supplies the global section c for actual power-ideal sections.",
+   "text": "Obtain the associated graded algebra with its unit and multiplication formulas from formalAssociatedGraded_algebra_exists; this does not use the formal system.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-formal-associated-graded-algebra-exists"
    ],
    "elementary": false
   },
   {
-   "text": "On an affine neighbourhood, identify the formal system with the quotients of its finite completion module N. Ideal-product and quotient sections identify B_n and K_n with the sheaves associated to I^n/I^(n+1) and I^n N/I^(n+1) N. The local-lift formulas identify the graded operations with multiplication of module representatives.",
+   "text": "Apply formalKernel_graded_action_exists to this algebra and F to obtain the graded module with its representative action formula.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-formal-kernel-graded-action-exists"
    ],
    "elementary": false
   },
   {
-   "text": "Choose finitely many generators of N/IN. The completed-module associated-graded generator theorem makes the finite sum of copies of the graded algebra surject onto each graded module piece. Applying tilde preserves these epimorphisms. Their sheaf-local surjectivity gives exactly the finite coefficient sections required by the degree-zero local generation predicate, for arbitrary smaller opens and points.",
+   "text": "Specialize the action formula to module degree zero and apply formalKernel_graded_action_local_generators. Assemble the algebra, module, formulas and local finite generation into the original existential conjunction.",
    "uses": [
-    "lem-weil-pbc-completed-module-associated-graded-generators",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-formal-kernel-graded-action-local-generators"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-completed-module-associated-graded-generators"
+  "lem-weil-pbc-formal-associated-graded-algebra-exists",
+  "lem-weil-pbc-formal-kernel-graded-action-exists",
+  "lem-weil-pbc-formal-kernel-graded-action-local-generators"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z affine proof via 087W; lift independence, homogeneous laws and local generation expanded by Q4."
+  "place": "Lemma 087Z construction and affine proof via 087W, decomposed into algebra, action and generation by Q3; Lean specializes the action formula to module degree zero."
  },
  "mathlib_searches": [
   {
@@ -125,12 +116,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q4",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T232904-L-2043486",
+  "landing": "20261013T024044-L-3337718",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -6,6 +6,9 @@ Authors: SHEAF group Q4
 module
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import Sheaf.AlgebraicGeometry.GradedSheafStructures
+import Sheaf.AlgebraicGeometry.FormalAssociatedGradedAlgebraExists
+import Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists
+import Sheaf.AlgebraicGeometry.FormalKernelGradedActionLocalGenerators
 @[expose] public section
 universe ut
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -72,5 +75,10 @@ theorem formalSystems_kernel_rees_finite_exists {X : Scheme.{ut}} [IsNoetherian 
           (formalKernelι F (m + n)).val.app (op U)
             (M.act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) =
               (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t := by
-  sorry
+  obtain ⟨A, hunit, hmul⟩ := formalAssociatedGraded_algebra_exists I
+  obtain ⟨M, hact⟩ := formalKernel_graded_action_exists I F A hunit hmul
+  refine ⟨A, hunit, hmul, M, ?_, hact⟩
+  apply formalKernel_graded_action_local_generators I F A M
+  intro n U a x t ht
+  exact hact n 0 U a x t ht
 end AlgebraicGeometry

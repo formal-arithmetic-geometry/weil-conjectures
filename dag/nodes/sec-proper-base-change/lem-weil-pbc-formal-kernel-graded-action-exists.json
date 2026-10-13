@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-graded-action-exists",
+ "kind": "statement",
+ "title": "Graded kernel action from local lifts, without finite generation",
+ "statement": "Let X be Noetherian, I a quasi-coherent ideal, and F a coherent formal module [def-weil-pbc-coherent-formal-module]. Let A be any graded sheaf algebra on the pieces B_n of [def-weil-pbc-formal-kernel-graded-pieces], with the degree-zero quotient unit and multiplication induced by products of ideal-power representatives. There exists a graded sheaf module M [def-weil-pbc-graded-sheaf-structures] on the kernel pieces K_n. For all m,n,U, sections a in I^m(U), x in K_n(U), and t in F_(m+n+1)(U) reducing to the inclusion of x, the inclusion of M.act of the class of a and x is a times t. No finite-generation assertion is included.",
+ "stmt_deps": [
+  "def-weil-pbc-formal-kernel-graded-pieces",
+  "def-weil-pbc-graded-sheaf-structures",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z, affine proof via Lemma 087W and Section 0EHN; constituent of the parent existence proof, expanded in the Lean docstring."
+ },
+ "proof": [
+  {
+   "text": "Induct on the number of successive reductions to obtain F_l/I^r F_l=F_r for l>=r>=1. The quotient descriptions make every transition an epimorphism. A local lift of x in K_n to level m+n+1 lies in I^n at that level when n>0; at n=0 no constraint is needed. Multiplication by I^m has zero reduction to level m+n, hence factors through K_(m+n).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Differences of lifts lie in I^(n+1)F_(m+n+1); differences of coefficients lie in I^(m+1). Products of these differences with the other factor vanish by level m+n+1 annihilation. Local lifts of quotient coefficients and system sections exist by sheaf epimorphy. Independence, bilinearity and restriction compatibility give action maps on all opens by gluing.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check associativity locally after lifting to one common high level, using the given representative multiplication formula for A: both sides become (ab)t=a(bt). Its given quotient unit acts as 1. Monic kernel inclusions and sheaf uniqueness prove the graded module laws and the formula for every existing lift.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z, construction and affine proof; local-lift and sheaf descent details expanded by Q3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The graded algebra of a sheaf ideal acts on successive kernels in an adic inverse system of coherent modules, using local lifts",
+   "results": "Service unavailable: Internal Server Error (msearch.py). No verdict claimed.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated graded sheaf algebra of an ideal acts on successive kernels of a coherent adic formal module and is generated in degree zero",
+   "results": "Eight hits include AdicCompletion.submodule and Ideal.Filtration.submodule. These are algebraic inverse limits and Rees filtrations, not homogeneous sheaf operations or local degree-zero generation. Loogle GradedSheafAlgebra returned unknown identifier.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|GradedSheaf|IsLocallyGeneratedInDegreeZero; rg associated graded sheaf, graded kernel, graded degree.zero in library and DAG",
+   "results": "Mathlib GradedAlgebra and filtrations concern algebraic graded objects. The library has only GradedSheafStructures, the holed parent existence theorem and downstream uses. Existing ideal-powers Rees nodes concern unquotiented ideal powers, not successive formal-system kernels. No duplicate of these three constituent statements found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemsKernelReesFiniteExistence",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Graded kernel action from local lifts, without finite generation; constituent of the graded-kernel construction used in finite etale lifting.",
+   "via": [
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence",
+    "lem-weil-pbc-formal-systems-kernel-rees-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalKernelGradedActionExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelGradedActionExists.lean",
+  "declaration": "AlgebraicGeometry.formalKernel_graded_action_exists",
+  "statement": "theorem formalKernel_graded_action_exists {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F : CoherentFormalModule X I)\n    (A : GradedSheafAlgebra (formalAssociatedGradedPiece I))\n    (hunit : A.unit = formalAssociatedGradedπ I 0)\n    (hmul : ∀ (m n : ℕ) (U : X.Opens)\n        (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n        (b : (Scheme.idealSheafPower I.toModulesι n).1.val.obj (op U)),\n        ∃ c : (Scheme.idealSheafPower I.toModulesι (m + n)).1.val.obj (op U),\n          (Scheme.idealSheafPower I.toModulesι (m + n)).2.val.app (op U) c =\n            (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) *\n              (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι n).2.val.app (op U) b)) ∧\n          A.mul m n U ((formalAssociatedGradedπ I m).val.app (op U) a)\n            ((formalAssociatedGradedπ I n).val.app (op U) b) =\n              (formalAssociatedGradedπ I (m + n)).val.app (op U) c) :\n    ∃ M : GradedSheafModule A (formalKernelPiece F),\n        ∀ (m n : ℕ) (U : X.Opens)\n          (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U))\n          (x : (formalKernelPiece F n).val.obj (op U))\n          (t : (F.obj.obj (op (m + n))).val.obj (op U)),\n          (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op U) t =\n            (formalKernelι F n).val.app (op U) x →\n          (formalKernelι F (m + n)).val.app (op U)\n            (M.act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) =\n              (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
