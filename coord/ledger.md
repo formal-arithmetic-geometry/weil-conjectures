@@ -12266,3 +12266,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:33 L: merged deliver/H1/Sheaf.AlgebraicGeometry.PicardH1CommonMinimalModel (stage 3; reviewer PASS; first push; landing 20261013T113343-L-3183946 (interface); batch 20261013T113333; modules 4; new nodes 3)
 - 11:33 L: merged deliver/H3/Sheaf.RingTheory.PowerSeriesSubringIntersection (stage 3; reviewer PASS; first push; landing 20261013T113343-L-3184147 (proof); batch 20261013T113333; modules 1; new nodes 0)
 - 11:33 L: merged deliver/J1/Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection (stage 3; reviewer PASS; first push; landing 20261013T113343-L-3184257 (interface); batch 20261013T113333; modules 3; new nodes 2)
+- 11:33 L: merged deliver/J1/Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality (stage 3; reviewer PASS; first push; landing 20261013T113344-L-3184407 (proof); batch 20261013T113333; modules 1; new nodes 0)

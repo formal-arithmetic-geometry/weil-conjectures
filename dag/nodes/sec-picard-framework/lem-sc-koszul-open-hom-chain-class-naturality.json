@@ -15,30 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Adjunction transposition commutes with postcomposition by t; Hom-complex cycles, the homology projection, homologyFunctorFactors, and the specified stage object iso therefore take the class of s to the class of s followed by t.",
+   "text": "Construct the module Hom-complex postcomposition chain map from Cochain.comp and δ_comp_ofHom. Its map on cycles is determined by cyclesMap_i and moduleCatCyclesIso_inv_iCycles; homologyπ_naturality therefore sends the class of a chain map s to the class of its composite. Use ordinary tilde/sections adjunction homEquiv_naturality_right, naturality of homologyFunctorFactors.inv, and cancellation of the stage object isomorphism to obtain stage-class postcomposition naturality. This uses only the actual stage-class definitions, not the quasi-coherent chain-representative equivalence theorem.",
    "uses": [
     "lem-sc-koszul-open-hom-chain-representatives"
    ],
    "elementary": false
   },
   {
-   "text": "The A-linear coefficient map t commutes with restrictions, with the invertible denominators on each principal intersection, and with the integer sign. Hence the explicit cocones and their colimit injections commute with postcomposition. The Cech derived comparison is natural by its defining K-injective resolution equation. Apply Q and H^0 and their composition laws to obtain the formula; empty covers and zero objects satisfy the same identities.",
+   "text": "Apply colimit.ι_desc to express the stage-to-Cech comparison by the specified cocone. Transport to principalCechTotal and use principalCechFunctor_exists to identify the coefficient map componentwise. On each nonempty ordered subset J, cancel product(f_j)^(e+1) using Scheme.Modules.isSMulRegular_of_le_basicOpen. The two specified cocone denominator equations then reduce equality to restriction naturality; postcomposition evaluates as coefficient-map composition, and the integer sign commutes with the additive coefficient map. This proves equality of stage-to-Cech chain maps for every degree, without quasi-coherence.",
    "uses": [
-    "def-sc-koszul-cech-comparison-construction"
+    "def-sc-koszul-cech-comparison-construction",
+    "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct the natural resolution roof using the functorial K-injective resolution I and its quasi-isomorphism η, the Cech augmentation a on I, and the right-derived-functor unit b. The augmentation on I is invertible by principalCechAugmentation_quasiIso and the image of η is invertible. Thus β=C(η) followed by inverse(a_I), b_I, and inverse(G(Qη)) is a natural transformation. For each complex, cancel the invertible resolution, derived-object identification, and augmentation in the characterization principalCechDerivedComparison_exists to prove that its chosen comparison equals β.app. Naturality follows from β.naturality.",
+   "uses": [
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Q to the stage-to-Cech equality and compose with the Cech derived comparison. Use its naturality, cancel Q of the inverse stage-object isomorphism, and apply H^0. Preservation of composition by Q and H^0 and stage-class naturality give the displayed element equality. The calculations are uniform for the empty cover, zero ring, zero maps, and zero complexes.",
+   "uses": [
+    "lem-sc-koszul-open-hom-chain-representatives",
+    "def-sc-koszul-cech-comparison-construction",
+    "def-sc-principal-open-alternating-total"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-koszul-open-hom-chain-representatives",
-  "def-sc-koszul-cech-comparison-construction"
+  "def-sc-koszul-cech-comparison-construction",
+  "def-sc-principal-open-alternating-total"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q2",
-  "document": "https://stacks.math.columbia.edu/tag/08DD",
-  "place": "Proposition 36.9.5, proof",
-  "note": "Postcomposition commutes with adjunction transposition and Hom cycles, the explicit localized signed cocone, its colimit map, and the resolution-characterized Cech comparison. Source read online; independently reviewed by Q2."
+  "group": "J1",
+  "document": "https://stacks.math.columbia.edu/tag/08D1",
+  "place": "Tag 08D1 signed functorial Koszul-to-Cech comparison; Tag 08DD proof and Tag 08D2 functorial Cech comparison",
+  "note": "Sources read online. Complete Lean proof of cycle, localized-cocone, and resolution-roof naturality, using the existing definitions and the existing augmentation quasi-isomorphism theorem. No new holes or statement changes."
  },
  "mathlib_searches": [
   {
@@ -141,10 +159,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T100100-L-2478410",
-  "kind": "interface",
+  "landing": "20261013T113344-L-3184407",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
