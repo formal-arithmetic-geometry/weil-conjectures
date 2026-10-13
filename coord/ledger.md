@@ -11114,3 +11114,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact (stage 3; reviewer PASS; first push; landing 20261013T045526-L-127932 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion (stage 3; reviewer PASS; first push; landing 20261013T045526-L-128091 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/F3/Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice (stage 3; reviewer PASS; after a return; landing 20261013T045527-L-128328 (interface); batch 20261013T045507; modules 4; new nodes 3)
+- 04:55 L: merged deliver/F3/Sheaf.Paper.EtaleCEStationaryComparisonsAtBounds (stage 3; reviewer PASS; first push; landing 20261013T045528-L-128449 (proof); batch 20261013T045507; modules 1; new nodes 0)
