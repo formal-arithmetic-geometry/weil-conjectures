@@ -1,0 +1,23 @@
+## What changed
+The target module adds the proof-only import `Sheaf.CategoryTheory.DerivedModuleRankOneProperties`. Its unchanged theorem constructs the explicit degree-zero object on `ModuleCat.of S (ULift S)`, forms a singleton family, and transports weak generation through Mathlib's `coproductUniqueIso`. The new intermediate module states compactness and weak generation of that fixed object. No data is selected from an unproved existence theorem; no definition is added.
+
+## Proved and sorry left
+Hole closed: `CategoryTheory.derivedModuleCompactGeneration` (node `new-stage3-derived-module-compact-generation`). Its reduction is compiled, but it still depends on the lower hole.
+Hole added: `CategoryTheory.derivedModule_rankOne_properties` (node `new-stage3-derived-module-rank-one-properties`), the sole sorry left in the delivery. This is a decomposition: one upper hole closed and one lower hole added, net zero holes closed, not a completed mathematical proof of compact generation.
+
+## No longer needed
+No existing imports or modules are pruned. The old direct proof dependency `lem-pc-derived-module-direct-sums` moves below the new rank-one-properties node, whose proof-only import retains its module. It is still needed by the cohomological compactness argument, and is not pruned. The target's direct proof dependency is now the new rank-one-properties node.
+
+## Where the brief, the DAG or earlier work was wrong
+The first worker's existential statement did not construct its advertised rank-one object and obscured the actual reduction. The new theorem concerns a specified degree-zero object instead. Its original docstring lacked the required blueprint tag and full proof, its searches covered only grep, and the target node's proof dependencies were not updated. These faults are repaired. The original target DAG already gave the mathematical rank-one construction; it did not lack this plan.
+
+## New nodes
+`new-stage3-derived-module-rank-one-properties`, in `lean/Sheaf/CategoryTheory/DerivedModuleRankOneProperties.lean`, records the properties of the explicit degree-zero free left module. Its source is Stacks Tags 0F5X and 07D9. Searches are recorded, with LeanSearch explicitly unavailable. There are no changes to existing statements and no change records.
+
+## Second reading by G1
+1. Compared the target file with the repository by diff and the declaration parser: the existing theorem signature and public imports are unchanged byte for byte. Only its proof and a proof-only import change. The new intermediate signature is repaired before delivery; there are no existing declaration or definition changes.
+2. Both modules compile through lcompile.py. The only sorry is the entire proof of the named, documented intermediate theorem. There are no forbidden declarations or hollow definitions. Axiom inspection permits only propext, Classical.choice, Quot.sound and the remaining sorryAx; deliver3.py checks every delivered declaration again.
+3. Replaced the existential lemma with properties of the explicit singleFunctor object. Checked zero rings, noncommutative left modules, empty sums and universe lifting. The detailed docstring gives the Hom/cohomology calculation, canonical coproduct comparison, and acyclicity detection. LeanFinder, Loogle and source grep found no complete existing result; LeanSearch was unavailable. The fixed-object calculation is strictly part of the argument; the singleton-family conversion is actually proved.
+4. Read the definitions of compactness and weak generation and the proved derivedModuleDirectSums declaration. Kept the valid singleton conversion and shortened its cancellation step. Imports of the new module cover its statement and the planned direct-sum proof. No shorter complete library theorem was found. The unit sk-prop-sf-cbc has empty realized statement and step lists; this lower-node refinement bypasses no realized unit route. The old direct-sums dependency remains transitively needed.
+5. Updated the target node's proof, proof_deps and proof_origin to match the Lean reduction. Updated the new node's exact Lean statement, source-backed proof steps, proof dependencies and all search records. Its chapter and unit agree with the parent. No protected node fields or unit records change.
+Changes made: constructed the rank-one object explicitly, repaired the new theorem docstring and node, added missing searches and the planned direct-sums import, updated the parent proof record, restored the exact existing signature spacing, shortened the cancellation proof, and corrected the progress report to decomposition (net zero).

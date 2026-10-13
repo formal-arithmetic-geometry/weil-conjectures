@@ -7,6 +7,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.CompactlyGenerated
+import Sheaf.CategoryTheory.DerivedModuleRankOneProperties
 
 /-! # Compact generation of the derived category of modules
 
@@ -45,6 +46,24 @@ theorem derivedModuleCompactGeneration
     [HasCoproducts.{max w vH} (DerivedCategory (ModuleCat.{max w vH} S))] :
     IsCompactlyGeneratedTriangulated.{max w vH}
       (DerivedCategory (ModuleCat.{max w vH} S)) := by
-  sorry
+  classical
+  let P := (DerivedCategory.singleFunctor (ModuleCat.{max w vH} S) 0).obj
+    (ModuleCat.of S (ULift.{vH} S))
+  obtain ⟨hPcompact, hPgen⟩ := derivedModule_rankOne_properties (S := S)
+  let I : Type (max w vH) := ULift.{max w vH} PUnit
+  let E : I → DerivedCategory (ModuleCat.{max w vH} S) := fun _ => P
+  let e : (∐ E) ≅ P := coproductUniqueIso E
+  have hgenE : IsWeakTriangulatedGenerator (∐ E) := by
+    intro K hK
+    obtain ⟨n, f, hf⟩ := hPgen K hK
+    refine ⟨n, e.hom ≫ f, ?_⟩
+    intro hz
+    apply hf
+    have hh : e.hom ≫ f = e.hom ≫ (0 : P ⟶ K⟦n⟧) := by
+      simpa only [comp_zero] using hz
+    exact (cancel_epi e.hom).1 hh
+  refine ⟨I, E, ?_, hgenE⟩
+  intro i
+  exact hPcompact
 
 end CategoryTheory
