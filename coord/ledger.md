@@ -12569,3 +12569,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:03 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels (stage 3; reviewer PASS; first push; landing 20261013T130351-L-3952794 (interface); batch 20261013T130345; modules 3; new nodes 2)
 - 13:03 L: merged deliver/Y2/Sheaf.Paper.ModuleCupRealizationEvaluation (stage 3; reviewer PASS; first push; landing 20261013T130351-L-3952900 (interface); batch 20261013T130345; modules 2; new nodes 1)
 - 13:07 L: merged deliver/A3/Sheaf.RingTheory.TorIdealHomologyExactness (stage 3; reviewer PASS; first push; landing 20261013T130748-L-3985565 (proof); batch 20261013T130746; modules 1; new nodes 0)
+- 13:07 L: merged deliver/A3/Sheaf.RingTheory.TorIdealHomologyFormula (stage 3; reviewer PASS; first push; landing 20261013T130748-L-3985712 (proof); batch 20261013T130746; modules 1; new nodes 0)
