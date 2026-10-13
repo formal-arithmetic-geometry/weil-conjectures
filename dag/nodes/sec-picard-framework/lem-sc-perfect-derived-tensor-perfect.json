@@ -27,52 +27,37 @@
  ],
  "proof": [
   {
-   "text": "By [def-pc-perfect-complex] there are open coverings $X=\\bigcup_iU_i$ and $X=\\bigcup_jV_j$ with $K|_{U_i}$ and $L|_{V_j}$ isomorphic in the derived categories to strictly perfect complexes. Restriction to an open is an exact functor on modules and the restriction of a strictly perfect complex to a smaller open is strictly perfect (restrict the finite free modules and the summand decompositions), so on each $W=U_i\\cap V_j$ of the covering $X=\\bigcup_{i,j}W$ there are strictly perfect complexes $\\mathcal E^\\bullet,\\mathcal F^\\bullet$ of $\\mathcal O_W$-modules with $K|_W\\cong\\mathcal E^\\bullet$ and $L|_W\\cong\\mathcal F^\\bullet$ in $D(\\mathcal O_W)$. By [lem-pc-affine-derived-pullback-tensor-tilde] (1), applied to $f=\\mathrm{id}_X$ and the open $W$, $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_W\\cong K|_W\\otimes^{\\mathbf L}_{\\mathcal O_W}L|_W\\cong\\mathcal E^\\bullet\\otimes^{\\mathbf L}_{\\mathcal O_W}\\mathcal F^\\bullet$.",
+   "text": "At each x, apply lem-pc-perfect-common-affine-models to K and L. It gives one affine neighbourhood U of x and strictly perfect complexes A,B, together with representing isomorphisms for the two restricted objects. This implements the common-refinement step without duplicating the restriction argument.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-perfect-common-affine-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma lemma-tensor-perfect (Tag 09J5), local reduction to strictly perfect models"
-   }
+   "elementary": false
   },
   {
-   "text": "Each term $\\mathcal E^i$ is a direct summand of a finite free $\\mathcal O_W$-module $\\mathcal O_W^{\\oplus r}$, hence flat (a direct summand of a flat module is flat), and $\\mathcal E^\\bullet$ is bounded, in particular bounded above. Hence $\\mathcal E^\\bullet$ is K-flat by [lem-pc-bounded-above-flat-kflat], so the identity is a K-flat resolution [def-pc-kflat-complex] and, with the description of $\\otimes^{\\mathbf L}$ in [lem-pc-affine-derived-pullback-tensor-tilde], $\\mathcal E^\\bullet\\otimes^{\\mathbf L}_{\\mathcal O_W}\\mathcal F^\\bullet$ is represented by the total tensor complex $\\operatorname{Tot}(\\mathcal E^\\bullet\\otimes_{\\mathcal O_W}\\mathcal F^\\bullet)$.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat",
-    "def-pc-kflat-complex",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma lemma-tensor-perfect (Tag 09J5), K-flat strictly perfect models"
-   }
-  },
-  {
-   "text": "Since $\\mathcal E^\\bullet$ and $\\mathcal F^\\bullet$ are bounded, $\\operatorname{Tot}(\\mathcal E^\\bullet\\otimes_{\\mathcal O_W}\\mathcal F^\\bullet)$ is bounded, and its degree-$n$ term is the finite direct sum $\\bigoplus_{i+j=n}\\mathcal E^i\\otimes_{\\mathcal O_W}\\mathcal F^j$. If $\\mathcal E^i\\oplus\\mathcal E'\\cong\\mathcal O_W^{\\oplus r}$ and $\\mathcal F^j\\oplus\\mathcal F'\\cong\\mathcal O_W^{\\oplus s}$, then $\\mathcal E^i\\otimes\\mathcal F^j$ is a direct summand of $\\mathcal O_W^{\\oplus r}\\otimes\\mathcal O_W^{\\oplus s}\\cong\\mathcal O_W^{\\oplus rs}$, and a finite direct sum of direct summands of finite free modules is again one. So the total complex is strictly perfect, $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_W$ is isomorphic to a strictly perfect complex for every member $W$ of the covering, and $K\\otimes^{\\mathbf L}_{\\mathcal O_X}L$ is perfect by [def-pc-perfect-complex].",
+   "text": "Prove strictlyPerfect_totalTensor directly in Lean. If A is supported in [a,b] and B in [c,d], the tensor total term vanishes outside [a+c,b+d]: each summand has a zero factor. In degree n, use the finite index set J={(p,q):p+q=n and a<=p<=b}. Tensor the two finite-free retract pairs. The freeTensorFreeIso identifies their target with the free sheaf on the product of the two finite bases. Assemble these retracts by biproduct.map. The total term retracts onto the sum over J, by mapBifunctorDesc and its summand equations; all omitted summands are zero. The sum of the free targets is free on the dependent sum of the finite bases, reindexed by ULift(Fin(card)). The composite retraction is the identity, proving strict perfectness.",
    "uses": [
     "def-pc-perfect-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma lemma-tensor-perfect (Tag 09J5), termwise tensor of finite free summands (Stacks, Cohomology of Sheaves, Definition 08C4)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Map eP and eN under exact restriction and compose with the local representing isomorphisms. Apply lem-sc-strict-perfect-tensor-local-comparison with these prescribed local models. Its comparison identifies the restriction of Q(Tot(P tensor N)) with Q(Tot(A tensor B)). Combine this comparison with the strict perfectness proved in step 2 and the membership x in U. The definition def-pc-perfect-complex then gives perfectness at every point.",
+   "uses": [
+    "lem-sc-strict-perfect-tensor-local-comparison",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-perfect-common-affine-models",
   "def-pc-perfect-complex",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-bounded-above-flat-kflat",
-  "def-pc-kflat-complex"
+  "lem-sc-strict-perfect-tensor-local-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent R1",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma lemma-tensor-perfect (Tag 09J5)"
+  "place": "Tag 09J5, local strictly perfect model argument, implemented using the existing common-affine-model theorem and a finite-free-retraction totalization proof"
  },
  "mathlib_searches": [
   {
@@ -179,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

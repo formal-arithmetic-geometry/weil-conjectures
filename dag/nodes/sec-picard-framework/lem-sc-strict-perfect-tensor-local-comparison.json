@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-strict-perfect-tensor-local-comparison",
+ "kind": "statement",
+ "title": "Local tensor comparison with prescribed strictly perfect models",
+ "statement": "Let X be a scheme [def-pc-scheme] and U an open. Give the categories of O_X-modules and of modules on the localized site over U derived categories [def-pc-derived-category]. Let P,N be K-flat complexes of O_X-modules [def-pc-kflat-complex]. Let A,B be strictly perfect complexes on the localized site [def-pc-perfect-complex], with prescribed isomorphisms R(Q(P)) ≅ Q(A) and R(Q(N)) ≅ Q(B), where R is exact open restriction. Then R(Q(Tot(P tensor N))) ≅ Q(Tot(A tensor B)), with the actual sheaf tensor total complexes [def-pc-tensor-complex-sheaves]. No point, covering, affine hypothesis or perfectness assertion is part of the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09J5 local model argument and Tag 06YH derived tensor construction; restriction is Tag 06YC and the local calculation of schemes.tex Tag 08DX"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-perfect-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Let R be exact open restriction followed by the equivalence from the localized site to modules on U.toScheme. The comparison between termwise and derived restriction identifies R(Q(P)) and R(Q(N)) with Q of the restricted complexes. Open restriction preserves K-flatness by lem-pc-open-restriction-kflat-model. By lem-pc-open-restriction-total-tensor, restriction of the total tensor equals the total tensor of the restricted complexes. The same equivalence transports the tensor comparison back to the localized site over U.",
+   "uses": [
+    "lem-pc-open-restriction-kflat-model",
+    "lem-pc-open-restriction-total-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strictly perfect hypotheses def-pc-perfect-complex bound A and B above and split their terms off finite free sheaves. Finite free sheaves are flat and a retract of a flat object is flat, so bounded-above flat K-flatness lem-pc-bounded-above-flat-kflat applies after transporting to the open subscheme. Hence the prescribed A and B are K-flat for the localized sheaf tensor as well.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-pc-kflat-derived-tensor-comparison on the restricted global representatives and the strictly perfect representatives. Tensor the prescribed input isomorphisms in the derived category between the two comparisons. Compose with exact restriction and totalization comparisons of step 1, and transport through the exact over equivalence to recover the displayed isomorphism on the localized site. This proves only the comparison, not boundedness or finite-free retracts of the output.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-restriction-kflat-model",
+  "lem-pc-open-restriction-total-tensor",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-complex",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-kflat-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent R1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 09J5 and 06YH, prescribed local K-flat models; online primary source read because the local literature snapshot is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K flat representatives of a derived tensor product agree with prescribed local strictly perfect models",
+   "results": "8 hits, including Module.Flat.tfae_equational_criterion and algebraic tensor-flatness criteria; none compares localized sheaf complexes",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "overFunctor, overFunctorMap, Scheme.Modules.overFunctorEquiv; restriction API only, no prescribed tensor model theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*[Ii]so|[Ii]so.*KFlat",
+   "results": "0 Mathlib hits; library KFlatDerivedTensorComparison is only scheme-level and OpenRestrictionTotalTensor transports to U.toScheme, not the localized-site statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor of K-flat complexes agrees locally with the tensor of prescribed strictly perfect representatives",
+   "results": "service unavailable: Internal Server Error; no mathematical verdict made",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDerivedTensor",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-perfect-derived-tensor-perfect",
+   "place": "proof steps 1 and 2: comparison of the given K-flat representatives with prescribed local strictly perfect models"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectTensorLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.strictPerfect_tensor_localComparison",
+  "statement": "theorem strictPerfect_tensor_localComparison (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (hN : CochainComplex.IsKFlat (R := X.sheaf) N)\n    (A B : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hA : Scheme.IsStrictlyPerfect X U A) (hB : Scheme.IsStrictlyPerfect X U B)\n    (eA : Nonempty ((SheafOfModules.overFunctor\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅\n        DerivedCategory.Q.obj A))\n    (eB : Nonempty ((SheafOfModules.overFunctor\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj N) ≅\n        DerivedCategory.Q.obj B)) :\n    Nonempty ((SheafOfModules.overFunctor\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N\n          (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _\n            (SheafOfModules.monoidalCategory X.sheaf)))) ≅\n      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A B\n        (@curriedTensor (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) _\n          (SheafOfModules.monoidalCategory (X.sheaf.over U)))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T100108-L-2481206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
