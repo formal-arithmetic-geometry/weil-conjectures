@@ -13063,3 +13063,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:59 L: merged deliver/R2/Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal (stage 3; reviewer PASS; first push; landing 20261013T155937-L-1303901 (proof); batch 20261013T155927; modules 1; new nodes 0)
 - 15:59 L: merged deliver/R3/Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionNatural (stage 3; reviewer PASS; first push; landing 20261013T155938-L-1304050 (proof); batch 20261013T155927; modules 1; new nodes 0)
 - 15:59 L: merged deliver/R3/Sheaf.AlgebraicGeometry.OpenSectionsStructureClass (stage 3; reviewer PASS; first push; landing 20261013T155938-L-1304198 (interface); batch 20261013T155927; modules 2; new nodes 1)
+- 15:59 L: merged deliver/R4/Sheaf.Algebra.Homology.FiniteStripConeGradedMapDifferential (stage 3; reviewer PASS; first push; landing 20261013T155939-L-1304307 (proof); batch 20261013T155927; modules 1; new nodes 0)
