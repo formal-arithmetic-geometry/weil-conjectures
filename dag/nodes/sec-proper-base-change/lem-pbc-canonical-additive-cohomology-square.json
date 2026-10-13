@@ -1,0 +1,150 @@
+{
+ "id": "lem-pbc-canonical-additive-cohomology-square",
+ "kind": "statement",
+ "title": "Canonical additive structure-sheaf cohomology square",
+ "statement": "Let $g:Y\\to X$ be a morphism of quasi-compact separated schemes [def-pc-scheme] and $n\\ge0$. Write $A_Z$ for the fixed lifted additive structure sheaf [def-sc-etale-additive-structure-restriction]. Define $m_Z(r)$ on an etale object $U\\to Z$ by $x\\mapsto x r|_U$ with the lift retained; let $q_g:g^*A_X\\to A_Y$ be adjoint to structural pullback [def-weil-pbc-inverse-image]. There are additive equivalences $e:H^n(A_X)\\simeq H^n(O_X)$ and $e':H^n(A_Y)\\simeq H^n(O_Y)$ for unit modules $O_Z$ [def-weil-pbc-etale-cohomology, pqf-def-cohomology], intertwining $H^n(m_X(r))$ and $H^n(m_Y(s))$ with ordinary $H^n(\\operatorname{smulHom}(r))$ and $H^n(\\operatorname{smulHom}(s))$ for every global function $r,s$. Moreover $e'(H^n(q_g)(g_H^*x))$ is the ordinary Ext pullback of $e(x)$ followed by the coefficient map adjoint to $O_X\\to g_*O_Y$, with the invImage and inverse constIso normalization [def-pc-flat-cohomology-comparison]. No base ring or cartesian square is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "etale-cohomology-theorem-zariski-fpqc-quasi-coherent, separated-case proof; Tag 01FD, cohomology-lemma-cech-functorial, the augmented double-complex diagram"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "pqf-def-cohomology",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the fixed additive sheaf A_X (respectively A_Y) with the coefficient lift of the tensor-section sheaf of the unit module using its natural unit coordinates. The maps on each etale object are explicit ULift maps of structural functions, so multiplication by a global function conjugates to the tensor pullback of smulHom.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite affine covers of X and Y and refine the latter inside inverse images of the former. Separatedness makes all tuple intersections affine. Affine etale acyclicity in both coefficient universes and the natural coefficient-lift, etale/Zariski and ordinary-H comparisons identify the degree-zero Cech rows, finite products of structural functions after lowering ULift. Their edge comparisons give e and eprime. Global multiplication acts componentwise and commutes with every augmentation and comparison, giving both smulHom identities.",
+   "uses": [
+    "lem-sc-etale-qcoherent-source-comparison-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each refined tuple the coefficient map is structural pullback, both for etaleAdditivePullback and for unitToPushforwardObjUnit. Compare the augmented Cech double complexes on the two sites using this same section map: the coefficient augmentation pentagon and the global-section resolution squares commute. Invert the injective-Cech augmentation quasi-isomorphisms. The outer square identifies the etale Ext inverse-image map with the ordinary Ext inverse-image map normalized by invImage, constIso and coeff. Every class is represented by a cycle because all tuple intersections are acyclic. For the ordinary affine Cech inverse-image statement, index both covers by one finite disjoint union, duplicate source opens for refined target members, and put empty target opens at unused source indices. The same argument gives degree zero and the empty scheme.",
+   "uses": [
+    "lem-pc-affine-cech-inverse-image",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-affine-cech-inverse-image",
+  "lem-sc-etale-qcoherent-source-comparison-natural",
+  "lem-sc-etale-tensor-unit-sections-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "etale-cohomology-theorem-zariski-fpqc-quasi-coherent, separated-case proof; Tag 01FD, cohomology-lemma-cech-functorial, the augmented double-complex diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural additive etale Zariski structure sheaf cohomology comparison commutes with scheme pullback",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H.map",
+   "date": "2026-10-13",
+   "results": "loogle: unknown identifier 'Sheaf.H.map'",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*etale",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural cohomology comparison for etale additive structure sheaf commuting with inverse image",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyPullbackComparison",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Additive structure-sheaf cohomology comparison in the characteristic-p Artin-Schreier argument; normalization before tensoring. Canonical additive square and ordinary cartesian transport.",
+   "via": [
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.CanonicalAdditiveCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/CanonicalAdditiveCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_canonical_additive_cohomology_square",
+  "statement": "theorem exists_canonical_additive_cohomology_square {X Y : Scheme.{u}} (g : Y ⟶ X) [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated] (n : ℕ) : ∃ e : Sheaf.H X.etaleAdditiveSheaf n ≃+ H (SheafOfModules.unit X.ringCatSheaf) n, ∃ e' : Sheaf.H Y.etaleAdditiveSheaf n ≃+ H (SheafOfModules.unit Y.ringCatSheaf) n, (∀ (r : Γ(X, ⊤)) x, e (Sheaf.H.map (etaleAdditiveSmul X r) n x) = H.map (smulHom (SheafOfModules.unit X.ringCatSheaf) r) n (e x)) ∧ (∀ (r : Γ(Y, ⊤)) x, e' (Sheaf.H.map (etaleAdditiveSmul Y r) n x) = H.map (smulHom (SheafOfModules.unit Y.ringCatSheaf) r) n (e' x)) ∧ ∀ x, e' (Sheaf.H.map (etaleAdditivePullback g) n (Etale.cohomologyMap g X.etaleAdditiveSheaf n x)) = Sheaf.H.map (coeff g (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom)) n (Sheaf.H.mapFunctor (invImage g) (constIso g).symm ((SheafOfModules.toSheaf X.ringCatSheaf).obj (SheafOfModules.unit X.ringCatSheaf)) n (e x))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_canonical_additive_cohomology_square",
+   "AlgebraicGeometry.Scheme.Modules.etaleAdditiveSmul",
+   "AlgebraicGeometry.Scheme.Modules.etaleAdditivePullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

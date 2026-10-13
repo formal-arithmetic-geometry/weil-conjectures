@@ -1,0 +1,141 @@
+{
+ "id": "lem-pbc-cartesian-unit-cohomology-transport",
+ "kind": "statement",
+ "title": "Ordinary unit cohomology transport across a cartesian square",
+ "statement": "Let $k\\to k'$ be an algebra map of commutative rings, $f:C\\to\\operatorname{Spec}k$, and let $h$ display $C'$ as the cartesian base change with projections $\\iota'$ and $f'$ [def-pc-scheme, def-pc-base-change]. For $n\\ge0$ and unit modules $O_C,O_{C'}$ there is a $k'$-linear equivalence $t:HOver(f',O_{C'},n)\\simeq HOver(f_{k'},(O_C)_{k'},n)$ for the structural scalar actions [def-pc-flat-cohomology-comparison]. For every $x\\in HOver(f,O_C,n)$, applying $t$ to its ordinary structural pullback along $\\iota'$ (invImage, inverse constIso and the coefficient map adjoint to $O_C\\to\\iota'_*O_{C'}$) gives $H.baseChangeLinear(f,O_C,n)(x)$. This concerns only ordinary cohomology; there is no etale sheaf, compactness, separatedness or flatness hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; Tag 02KH, coherent-lemma-flat-base-change-cohomology, untensored map construction; Mathlib Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The universal property gives an isomorphism d from Cprime to the categorical base change commuting with both projections. The adjoint structure-sheaf map from the ordinary canonical pullback of O_C to the unit module is an isomorphism. Its adjunction identity identifies baseChangeUnit followed by its pushforward with unitToPushforwardObjUnit. Use the ordinary pullbackObjUnitIso, the Mathlib clause of the cited node.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the cohomology map of the unit-module isomorphism and transport cohomology along d inverse, producing the additive equivalence t. On sections the second projection identity identifies pullback of the structural kprime scalar with the scalar on the categorical base change. Naturality for multiplication and Sheaf.H.map proves kprime-linearity.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first projection identity gives d inverse followed by iota prime equal to baseChangeFst. Coefficient-unit composition identifies the adjoint coefficient maps after the unit-module isomorphism. The constant-integer comparisons are unique adjunction comparisons and compose with the same inverse-image comparison. Exact-functor action on Ext and associativity of Ext composition identify the two pullback maps, giving the equality with H.baseChangeLinear. No tensor exactness, flatness, separatedness or compactness is used.",
+   "uses": [
+    "lem-pc-coefficient-unit-composition",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-coefficient-unit-composition",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "cohomology-equation-functorial; Tag 02KH, coherent-lemma-flat-base-change-cohomology, untensored map construction; Mathlib Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport cohomology of the structure module across a cartesian scheme base change isomorphism",
+   "date": "2026-10-13",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-13",
+   "results": "6 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf cohomology transport across a displayed pullback square",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|pullbackObjUnitIso",
+   "date": "2026-10-13",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "verdict": "No complete comparison square; generic naturality and pullback tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyPullbackComparison",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Additive structure-sheaf cohomology comparison in the characteristic-p Artin-Schreier argument; normalization before tensoring. Canonical additive square and ordinary cartesian transport.",
+   "via": [
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.CartesianUnitCohomologyTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/CartesianUnitCohomologyTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cartesian_unit_cohomology_transport",
+  "statement": "theorem exists_cartesian_unit_cohomology_transport {k k' : Type u} [CommRing k] [CommRing k'] [Algebra k k'] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (n : ℕ) : ∃ t : HOver f' (SheafOfModules.unit C'.ringCatSheaf) n ≃ₗ[k'] HOver (baseChangeSnd (S := k') f) (baseChangedModule (S := k') f (SheafOfModules.unit C.ringCatSheaf)) n, ∀ x : HOver f (SheafOfModules.unit C.ringCatSheaf) n, t (Sheaf.H.map (coeff ι' (SheafOfModules.unitToPushforwardObjUnit ι'.toRingCatSheafHom)) n (Sheaf.H.mapFunctor (invImage ι') (constIso ι').symm ((SheafOfModules.toSheaf C.ringCatSheaf).obj (SheafOfModules.unit C.ringCatSheaf)) n x)) = H.baseChangeLinear (S := k') f (SheafOfModules.unit C.ringCatSheaf) n x",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T082338-L-1633199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
