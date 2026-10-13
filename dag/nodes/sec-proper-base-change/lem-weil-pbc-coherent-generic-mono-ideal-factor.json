@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Form Q = coker(a). Coherent cokernel closure makes Q coherent. On the locally Noetherian scheme it is quasi-coherent and finite type.",
+   "text": "Put Q = cokernel(a) and q = cokernel.π(a). Apply coherent_kernel_cokernel_sum to K, G and a to make Q coherent. Apply isCoherent_iff_isQuasicoherent_and_isFiniteType to Q and G to obtain the quasi-coherence and finite type needed for scheme-theoretic support and affine products.",
    "uses": [
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
     "pqf-lem-coherent-ft-locnoeth"
@@ -25,14 +25,14 @@
    "elementary": false
   },
   {
-   "text": "The stalk of the cokernel is the cokernel of the stalk map. Since a is surjective at ξ, Q has zero ξ-stalk. In particular ξ does not belong to its nonzero-stalk locus.",
+   "text": "The cokernel part of module_stalk_exact says that q_ξ is an epimorphism, hence surjective as a module map. For any y in Q_ξ lift y to g in G_ξ, then use the surjectivity component of ha to lift g to k in K_ξ. Functoriality and the cokernel condition give q_ξ(a_ξ(k)) = 0, hence y = 0. Thus the underlying abelian stalk of Q at ξ is subsingleton.",
    "uses": [
     "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Let H be the annihilator ideal of Q from scheme-theoretic support. It is quasi-coherent, its affine section ideals are the annihilators of the affine section modules of Q, and its closed support is precisely the nonzero-stalk locus of Q. The ideal zero-set stalk criterion therefore shows that H → O_X is surjective at ξ.",
+   "text": "Apply schemeTheoreticSupport to Q and obtain ideal-sheaf data J, with affine ideals Ann(Q(U)) and closed-immersion range equal to the nonsubsingleton-stalk locus of Q. The final clause of quasi_coherent_ideal_zero_set_affine identifies the same range with the locus of nonsurjective ideal stalk inclusions. As Q_ξ is subsingleton, J.toModulesι is surjective at ξ.",
    "uses": [
     "lem-weil-pbc-scheme-theoretic-support",
     "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
@@ -40,16 +40,19 @@
    "elementary": false
   },
   {
-   "text": "Put J = H.toModules and ι = H.toModulesι. The product inclusion JG → G followed by q : G → Q is zero: on every affine open its image consists of sums of jg with j in the annihilator ideal of Q, and q(jg)=j q(g)=0. Vanishing on the affine basis implies global vanishing by sheaf separatedness. Lift JG → G to ker(q) by the kernel universal property. Since a is mono, its image is canonically K and ker(q)=im(a); compose the lift with this canonical isomorphism to obtain ψ with ψ ≫ a = idealModuleProductι ι G. This argument includes zero cokernels and does not use compactness.",
+   "text": "Apply ideal_times_quasiCoherent_affine_sections to J and G. Its powers clause for n=1 proves J.toModules quasi-coherent. Its affine product-range clause says that the image of the product inclusion over V is J(V) • G(V). This submodule lies in the kernel of q(V): for r in J(V) = Ann(Q(V)), linearity gives q(V)(r • t) = r • q(V)(t) = 0. For any section on an arbitrary open U, restrict at each point to an affine V contained in U. Naturality of the composite product inclusion followed by q identifies its restriction with the zero section just computed. Sheaf separatedness gives idealModuleProductι J.toModulesι G ≫ q = 0 globally.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use Mathlib CategoryTheory.Abelian.monoLift a (idealModuleProductι J.toModulesι G) with the established zero composite. This is the kernel universal property of a mono as kernel of its cokernel. Abelian.monoLift_comp gives the required equality ψ ≫ a = idealModuleProductι J.toModulesι G. Return J.toModules with its kernel inclusion, which is mono. Zero cokernels and zero modules require no separate cases.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
   "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-module-stalk-exact",
@@ -60,7 +63,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01YL, third proof paragraph: the annihilating ideal multiple lies in the ideal-sum submodule. Use the annihilator ideal of the coherent cokernel (Tags 05JU and 05JV). Source read at https://stacks.math.columbia.edu/tag/01YL."
+  "place": "Tag 01YL, third proof paragraph, using the annihilator of the coherent cokernel as in Tags 05JU and 05JV; Lean realization by Q3, 2026-10-13. The mono factorization is Mathlib Abelian.monoLift and monoLift_comp (CategoryTheory/Abelian/Basic.lean)."
  },
  "mathlib_searches": [
   {
@@ -150,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-6953f",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261013T022430-L-3220509",
-  "kind": "interface",
-  "note": "independent Codex review: Matched unchanged core signature and delivered proof with the node; matched the new factorization statement with its node and cited argument. Both delivered modules and both direct importers compile cleanly; axiom probes pass with sorryAx only for unfinished dependencies."
+  "landing": "20261013T033006-L-3677858",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
