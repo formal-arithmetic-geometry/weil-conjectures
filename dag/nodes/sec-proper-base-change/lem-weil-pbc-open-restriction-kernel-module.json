@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-open-restriction-kernel-module",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof: universal first-order thickening and conormal sheaf restriction to opens (step 7 of the original split, as recorded on lem-weil-pbc-universal-thickening-open-restriction).",
+   "via": [
+    "lem-weil-pbc-universal-thickening-open-restriction-conormal",
+    "lem-weil-pbc-universal-thickening-open-restriction",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kernel ideal modules commute with open restriction",
+ "statement": "Let $i:Z\\to Z^\\prime$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Let $V\\subseteq Z$ and $V^\\prime\\subseteq Z^\\prime$ be open subschemes with inclusions $j_V,j_{V^\\prime}$ [def-weil-open-immersion], and let $i_V:V\\to V^\\prime$ be a closed immersion such that $i^{-1}(V^\\prime)=V$ and $j_{V^\\prime}\\circ i_V=i\\circ j_V$. Write $I_i$ and $I_{i_V}$ for their kernel ideal sheaves, regarded as modules by the kernel construction [def-sbc-closed-immersion-ideal-sheaf]. Then there exists an isomorphism of $\\mathcal O_{V^\\prime}$-modules $j_{V^\\prime}^{*}I_i\\cong I_{i_V}$, where $j_{V^\\prime}^{*}$ is tensor pullback [def-pc-module-pullback]. No universal thickening or square-zero assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Reuse AlgebraicGeometry.range_kernelIdeal from Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal via a proof-only import all. It computes the range of the ideal module inclusion on every open as the kernel of i.app. The existing private theorem is reused unchanged, not redeclared or reproved.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-conormal-sheaf-formally-unramified"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change"
+   }
+  },
+  {
+   "text": "Fix W open in V prime. Its image in the ambient scheme has inverse image under i contained in V by hpre. The section map of the source open inclusion on that inverse image is consequently an isomorphism. The commuting square, Scheme.Hom.comp_app, and the open appIso identify the zero equations for iV on W and for i on the ambient image of W. This explicitly transports kernels without assuming W affine.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change"
+   }
+  },
+  {
+   "text": "Restrict the original ideal module inclusion and compose with restrictUnitIso to obtain alpha into the restricted structure module. The kernel zero equivalence from the preceding step makes alpha factor through the restricted kernel ideal module by kernel.lift. Its component is injective because the original ideal inclusion and open section isomorphism are injective. Given a target ideal section, apply the inverse open section isomorphism to its image in the structure module; the zero equivalence puts this section in the range of the original ideal inclusion. Lift it, and use injectivity of the target ideal inclusion to show its image is the prescribed section. Thus every component is bijective and the module map is an isomorphism.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change"
+   }
+  },
+  {
+   "text": "Tensor pullback and open restriction are left adjoints of the same pushforward. Their unique comparison isomorphism, composed with the just-constructed ideal module isomorphism, gives the displayed result.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00A0 (lemma-j-pullback), including modules; Morphisms, Section 01R1 preceding Definition 01R2; More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), open base change; repair: reuse the existing private range_kernelIdeal through import all"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The module of the kernel ideal of a closed immersion restricts to the kernel ideal module on an open subscheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conormal sheaf of a closed immersion restricts to open subscheme",
+   "results": "Eight hits including subschemeι_app and toImage_app; no module restriction isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "results": "restrictFunctorIsoPullback identifies open restriction with Mathlib pullback, but does not identify kernel ideal modules. Used with tensor adjunction uniqueness.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*restrict|restrict.*ker|tensorPullbackComp",
+   "results": "No matching ideal-module restriction isomorphism. Local rg additionally found ideal-data ker_morphismRestrict and tensor composition; invertible ideal comparison in EffectiveCartier needs extra hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionConormal",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionKernelModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionKernelModule.lean",
+  "declaration": "AlgebraicGeometry.nonempty_tensorPullback_open_kernel",
+  "statement": "theorem nonempty_tensorPullback_open_kernel\n    {Z Z' : Scheme.{u}} (i : Z ⟶ Z') [IsClosedImmersion i]\n    {V : Z.Opens} {V' : Z'.Opens} (iV : V.toScheme ⟶ V'.toScheme)\n    [IsClosedImmersion iV] (hpre : i ⁻¹ᵁ V' = V)\n    (hcomm : iV ≫ V'.ι = V.ι ≫ i) :\n    Nonempty ((Scheme.Modules.tensorPullback V'.ι).obj i.ker.toModules ≅\n      iV.ker.toModules)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T034205-L-3766125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T034205-L-3766125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -23,32 +23,58 @@
  ],
  "proof": [
   {
-   "text": "Use the restricted square-zero ideal from the open restriction of the thickening. Formal unramifiedness of the restricted map follows from the open restriction property, and the conormal modules are the pullbacks of the ideals. Pullback composition and the open-immersion restriction comparison identify the restricted original conormal with the restricted conormal; the existence theorem supplies the required witness and universal thickening data.",
+   "text": "Derive hV followed by the base open inclusion equals the original h after the source open inclusion, from the three given square equations and i followed by h'=h. Composition preserves formal unramifiedness, and Mathlib FormallyUnramified.of_comp cancels the base open inclusion, giving the required hVform. Take HV directly from hdata.",
    "uses": [
-    "lem-weil-pbc-thickening-open-restriction",
-    "lem-weil-pbc-universal-first-order-thickening-exists",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-pc-module-pullback",
-    "def-weil-pbc-conormal-sheaf-formally-unramified"
+    "lem-weil-pbc-formally-unramified-open-restriction",
+    "def-weil-pbc-universal-first-order-thickening"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2"
+    "place": "Lemma 04FA (lemma-universal-thickening-localize), conormal restriction clause; Lemma 02HC (lemma-formally-unramified-on-opens)"
+   }
+  },
+  {
+   "text": "The two universal thickening witnesses imply that i and iV are closed immersions. Apply the proved open-kernel module lemma to their given preimage equality and commuting square. It identifies tensor pullback of the ambient kernel ideal along the ambient open inclusion with the restricted kernel ideal.",
+   "uses": [
+    "lem-weil-pbc-open-restriction-kernel-module",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 04FA (lemma-universal-thickening-localize), conormal restriction clause; Lemma 02HC (lemma-formally-unramified-on-opens)"
+   }
+  },
+  {
+   "text": "Identify source open restriction with tensor pullback by uniqueness of left adjoints to its pushforward. Rewrite successive tensor pullback along i and the source inclusion as pullback along their composite, transport through the square equality, and expand along iV and the ambient inclusion. Apply tensor pullback along iV to the kernel ideal comparison. Composition of these five module isomorphisms is the required conormal isomorphism by its definition.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-conormal-sheaf-formally-unramified",
+    "lem-weil-pbc-open-restriction-kernel-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 04FA (lemma-universal-thickening-localize), conormal restriction clause; Lemma 02HC (lemma-formally-unramified-on-opens)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-thickening-open-restriction",
-  "lem-weil-pbc-universal-first-order-thickening-exists",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
   "def-pc-module-pullback",
-  "def-weil-pbc-conormal-sheaf-formally-unramified"
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "def-weil-pbc-universal-first-order-thickening",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-formally-unramified-open-restriction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-open-restriction-kernel-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2"
+  "place": "Lemma 04FA (lemma-universal-thickening-localize), conormal restriction clause; Lemma 02HC (lemma-formally-unramified-on-opens); explicit tensor pullback composition and kernel restriction proof by G3"
  },
  "mathlib_searches": [
   {
@@ -112,12 +138,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T202234-L-702499",
+  "landing": "20261013T034205-L-3766125",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
