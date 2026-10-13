@@ -14,24 +14,35 @@
  },
  "proof": [
   {
-   "text": "At every stalk, use the ideal-product, power, and quotient descriptions and induct on the distance between levels to identify the reduction from F_(r+1) to F_(n+1), r>=n, with quotient by I^(n+1). Quotienting by a larger ideal power and then by a smaller one has the same result as the latter quotient alone. Thus all transitions are sheaf epimorphisms.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-module-product-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Locally lift the fixed coefficient a to a prime in I^m and the inclusion of the fixed kernel section x to t in F_(m+n+1). For n>0, t reduces to zero in F_n, so lies in I^n F_(m+n+1); for n=0 use I^0 F=F. The product a prime times t lies in I^(m+n) F_(m+n+1), and therefore has a unique preimage in K_(m+n), using the identity inclusion if m+n=0. Replacing t by an element of I^(n+1) F, or a prime by an element of I^(m+1), changes this product by I^(m+n+1) F=0. The same argument works after any restriction.",
+   "text": "Prove restriction stability of the universal equation using PresheafOfModules.map_comp_apply. Obtain local simultaneous coefficient and transition lifts using the proved private formal_transition_epi and local_lifts_three helpers from FormalKernelBilinearActionAssociative (import all). Coefficient projections are cokernel projections and hence epi. The transition epimorphism proof uses only the defining adjacent quotient isomorphisms, not any stalk quotient identification.",
    "uses": [
     "def-weil-pbc-coherent-formal-module",
     "def-weil-pbc-formal-kernel-graded-pieces",
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-formal-kernel-bilinear-action-associative"
    ],
    "elementary": false
   },
   {
-   "text": "Independence of representatives and injectivity of the kernel inclusion make these local preimages agree on overlaps. Glue them by the sheaf axiom. For representatives on an arbitrary smaller open, compare with the original representatives locally on its intersections with the cover; independence and sheaf separation give the required equation there. If y and z both satisfy all these equations, locally lift the two fixed inputs near each point; their restricted inclusions both equal the same product. Injectivity of the kernel inclusion and sheaf separation imply y=z. For the empty open the empty cover gives uniqueness; zero degrees use the identity inclusion.",
+   "text": "For actual coefficient and transition representatives apply the representative-product lemma to obtain a kernel section. On every smaller open restrict both representatives. Naturality of the projection and transition identifies the restricted classes. Apply the independence clause there; naturality of the kernel inclusion and semilinearity of restriction give the universal equation.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-representative-product",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove uniqueness independently of existence: near each point simultaneously lift the coefficient section and the kernel inclusion through the transition. Any two outputs satisfying the universal equation have the same inclusion on this neighbourhood. Cancel the sectionwise injective kernel inclusion and use TopCat.Sheaf.eq_of_locally_eq' to conclude equality. Restrict local products to pairwise intersections and apply this uniqueness result to establish compatibility. TopCat.Sheaf.existsUnique_gluing' produces their global gluing.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-bilinear-action-associative",
+    "def-weil-pbc-formal-kernel-graded-pieces",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary smaller W and arbitrary representatives on W, compare the desired formula on W intersected with each member of the gluing cover. Naturality moves the kernel inclusion through restriction, and the gluing equations identify the restricted global output with the local product. Restrict the specified representatives and apply the local universal equation. The intersections cover W, so sheaf separation gives the formula on W. The preceding uniqueness proof finishes ExistsUnique. Subtype indexing and empty covers handle empty opens without an extra assumption.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-formal-kernel-graded-pieces"
@@ -43,12 +54,13 @@
   "def-weil-pbc-coherent-formal-module",
   "def-weil-pbc-formal-kernel-graded-pieces",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ideal-module-product-stalk"
+  "lem-weil-pbc-formal-kernel-bilinear-action-associative",
+  "lem-weil-pbc-formal-kernel-representative-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Expanded fixed-section construction from the associated graded module argument of Lemma 087Z and the quotient conditions of Section 0EHN; sources read online at tags 087Z and 0EHN by A2."
+  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), associated graded construction; Section 0EHN (section-coherent-formal), defining quotient and annihilation conditions. Sources read online at https://stacks.math.columbia.edu/tag/087Z and https://stacks.math.columbia.edu/tag/0EHN. Q1 wrote the Lean restriction, uniqueness, compatibility, gluing, and local-to-global formula proof, reducing only representative algebra to the new node."
  },
  "mathlib_searches": [
   {
@@ -128,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T072337-L-1114530",
+  "landing": "20261013T100056-L-2477111",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
