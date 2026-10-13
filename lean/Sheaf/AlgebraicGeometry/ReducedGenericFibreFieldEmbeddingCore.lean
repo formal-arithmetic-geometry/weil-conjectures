@@ -3,6 +3,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreMapCore
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -57,5 +58,13 @@ theorem exists_reduced_generic_fibre_field_embedding_core
             Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E)) ∧
         ∀ x : S'.residueField η',
           algebraMap (S'.residueField η') E x = algebraMap k' E (e x) := by
-  sorry
+  let aE : Algebra (S'.residueField η') E :=
+    ((algebraMap k' E).comp e.toRingHom).toAlgebra
+  obtain ⟨h, hh, hb⟩ := exists_reduced_generic_fibre_map_core
+    g q η η' hq hη' L k' E j hj hjbase e he hsquare aE
+  refine ⟨aE, ?_⟩
+  let _ := aE
+  refine ⟨h, hh, hb, ?_⟩
+  intro x
+  rfl
 end AlgebraicGeometry

@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-reduced-generic-fibre-field-embedding-core-map",
+ "kind": "statement",
+ "title": "Dominant map from the reduced generic fibre",
+ "statement": "In the affine setup of [lem-sbc-reduced-generic-fibre-field-embedding-core], after choosing the induced residue-field algebra structure on E, there exists a scheme-theoretically dominant map from Spec E to the eta-prime fibre of the reduction of the pullback, with the stated base composite.",
+ "stmt_deps": [
+  "lem-sbc-reduced-generic-fibre-field-embedding-core"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0559 and 030R"
+ },
+ "proof": [
+  {
+   "text": "Use the affine tensor-product description of the fibre, injectivity from scheme-theoretic dominance, flat base change by the finite purely inseparable extension, and passage to reductions. Identify the localization at the generic point of the integral base with the reduced generic fibre, then take Spec of the induced injective map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0559 and 030R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dominant map from reduced generic fibre after purely inseparable extension",
+   "results": "No exact result (service unavailable).",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme reduction generic fibre localization injective tensor map purely inseparable field",
+   "results": "No exact combined statement; related prime-spectrum and reduction lemmas only",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+   "results": "Prime-spectrum homeomorphism theorem",
+   "date": "2026-10-13",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical generic fibre reduction localization",
+   "results": "No exact repository theorem",
+   "date": "2026-10-13",
+   "verdict": "No exact theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingCore",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-reduced-generic-fibre-field-embedding",
+   "place": "Affine tensor and reduction construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedGenericFibreMapCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedGenericFibreMapCore.lean",
+  "declaration": "AlgebraicGeometry.exists_reduced_generic_fibre_map_core",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13",
+  "statement": "theorem exists_reduced_generic_fibre_map_core\n    {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']\n    (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)\n    (hη' : IsGenericPoint η' Set.univ)\n    (L k' E : Type u) [Field L] [Field k'] [Field E]\n    [Algebra (S.residueField η) L] [Algebra (S.residueField η) k']\n    [Algebra L E] [Algebra k' E]\n    [Module.Finite (S.residueField η) k'] [IsPurelyInseparable (S.residueField η) k']\n    (j : Spec (.of L) ⟶ g.fiber η) (hj : IsSchemeTheoreticallyDominant j)\n    (hjbase : j ≫ g.fiberToSpecResidueField η =\n      Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L)))\n    (e : S'.residueField η' ≃+* k')\n    (he : e.toRingHom.comp\n      (((S.residueFieldCongr hq).inv ≫ q.residueFieldMap η').hom) =\n        algebraMap (S.residueField η) k')\n    (hsquare : (algebraMap k' E).comp (algebraMap (S.residueField η) k') =\n      (algebraMap L E).comp (algebraMap (S.residueField η) L))\n    (aE : Algebra (S'.residueField η') E) :\n    letI := aE\n    ∃ h : Spec (.of E) ⟶\n          ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',\n        IsSchemeTheoreticallyDominant h ∧\n        h ≫ ((pullback g q).nilradical.subschemeι ≫\n          pullback.snd g q).fiberToSpecResidueField η' =\n            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E))"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T150350-L-808940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261013T150350-L-808940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
