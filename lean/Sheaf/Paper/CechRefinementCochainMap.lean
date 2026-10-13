@@ -78,7 +78,67 @@ theorem exists_unique_cechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
         (ComplexShape.up ℕ)).obj
           ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat),
       IsCechRefinementMap f U U' refine hrefine F gamma := by
-  sorry
+  let G := (tensorPullback f).obj F
+  let φ := (Classical.choose (exists_tensorPullbackAdjunction f)).unit.app F
+  let P := F.presheafModuleCat ⋙ forget₂ _ AddCommGrpCat
+  let Q := G.presheafModuleCat ⋙ forget₂ _ AddCommGrpCat
+  let t (n : ℕ) : TopCat.Presheaf.CechCochain U P n →+
+      TopCat.Presheaf.CechCochain U' Q n :=
+    AddMonoidHom.pi fun y ↦
+      (G.presheaf.map (cechRefinementIntersection f U U' refine hrefine n y).op).hom.comp
+        ((φ.val.app (op (⨅ j, U (refine (y j))))).hom.toAddMonoidHom.comp
+          (Pi.evalAddMonoidHom _ (refine ∘ y)))
+  have t_apply (n : ℕ) (a : TopCat.Presheaf.CechCochain U P n)
+      (y : Fin (n + 1) → ι') : t n a y =
+      G.presheaf.map (cechRefinementIntersection f U U' refine hrefine n y).op
+        (φ.val.app (op (⨅ j, U (refine (y j)))) (a (refine ∘ y))) := rfl
+  have ht (n : ℕ) (a : TopCat.Presheaf.CechCochain U P n) :
+      ((TopCat.Presheaf.cechComplex U').obj Q).d n (n + 1) (t n a) =
+        t (n + 1) (((TopCat.Presheaf.cechComplex U).obj P).d n (n + 1) a) := by
+    funext y
+    simp only [t_apply, TopCat.Presheaf.cechComplex_d_apply, map_sum, map_zsmul]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    congr 1
+    let h := TopCat.Presheaf.iInf_le_iInf_comp U (refine ∘ y) i.succAbove
+    have hφ : φ.val.app (op (⨅ j, U (refine (y j))))
+        (P.map (homOfLE h).op (a ((refine ∘ y) ∘ i.succAbove))) =
+        G.presheaf.map ((Opens.map f.base).map (homOfLE h)).op
+          (φ.val.app (op (⨅ j, U (refine ((y ∘ i.succAbove) j))))
+            (a ((refine ∘ y) ∘ i.succAbove))) :=
+      PresheafOfModules.naturality_apply φ.val (homOfLE h).op _
+    rw [hφ]
+    change G.presheaf.map _ (G.presheaf.map _ _) =
+      G.presheaf.map _ (G.presheaf.map _ _)
+    rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+      ← G.presheaf.map_comp, ← G.presheaf.map_comp]
+    congr 2
+  let γ : (TopCat.Presheaf.cechComplex U).obj P ⟶
+      (TopCat.Presheaf.cechComplex U').obj Q :=
+    { f := fun n ↦ AddCommGrpCat.ofHom (t n)
+      comm' := by
+        rintro n _ rfl
+        exact AddCommGrpCat.ext (ht n) }
+  let e := TopCat.Presheaf.cechComplexFunctorIso U F.presheafModuleCat
+  let e' := TopCat.Presheaf.cechComplexFunctorIso U' G.presheafModuleCat
+  refine ⟨e.hom ≫ γ ≫ e'.inv, ?_, ?_⟩
+  · intro n a y
+    change (TopCat.Presheaf.cechComplexFunctorXAddEquiv U' G.presheafModuleCat n)
+      ((TopCat.Presheaf.cechComplexFunctorXAddEquiv U' G.presheafModuleCat n).symm
+        (t n (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a))) y = _
+    rw [AddEquiv.apply_symm_apply]
+    rfl
+  · intro δ hδ
+    ext n : 1
+    apply AddCommGrpCat.ext
+    intro a
+    apply (TopCat.Presheaf.cechComplexFunctorXAddEquiv U' G.presheafModuleCat n).injective
+    funext y
+    rw [hδ n a y]
+    change _ = (TopCat.Presheaf.cechComplexFunctorXAddEquiv U' G.presheafModuleCat n)
+      ((TopCat.Presheaf.cechComplexFunctorXAddEquiv U' G.presheafModuleCat n).symm
+        (t n (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a))) y
+    rw [AddEquiv.apply_symm_apply]
+    rfl
 
 /-- The refinement map on cohomology, transported through the canonical homology
 comparison for forgetting scalars on each scheme.
