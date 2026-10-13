@@ -159,6 +159,6 @@ theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
   apply Presheaf.isSheaf_of_isSheaf_comp _ Q
     (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
   rw [Presheaf.isSheaf_of_iso_iff e, isSheaf_iff_isSheaf_of_type]
-  exact equivarianceSubfunctor_isSheaf ℓ c N
+  simpa only [] using (equivarianceSubfunctor_isSheaf ℓ c N)
 
 end AlgebraicGeometry
