@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-open-sections-ordinary-structure-class",
+ "kind": "statement",
+ "title": "Ordinary restricted structure cycle class",
+ "statement": "For any commutative ring A and open U of Spec A, let K=A[0] as a natural-index chain complex, L its integer extension, C its tilde complex [def-sc-koszul-open-system], and eta the termwise tilde.toOpen unit [def-sc-principal-open-alternating-total]. Let j:H^0(L)≅A be the extension and single homology comparisons. Let e:T(C)≅O_U[0] be the ordinary extension-single, tilde-single, restriction-single and over-unit comparisons, for restriction T of [lem-sc-open-sections-cohomology-model-comparison]. Let epsilon:H^0(Gamma(U,O_U[0]))≅Gamma(U,O_U) be the single-map and single-homology comparison. Then H^0(Gamma(e inverse))(epsilon inverse(1)) equals openComparisonOrdinaryIso inverse applied to H^0(eta)(j inverse(1)). This is an ordinary homology equality and requires no derived categories, derived units, or quasi-coherence assumptions.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "Tilde/sections adjunction unit and its restriction; ordinary cycle calculation in the proof of lem-sc-open-sections-structure-class, step 2."
+ },
+ "stmt_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-open-sections-cohomology-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the extension single and its homology with A[0], then apply termwise tilde and restriction. The single-map and over-unit comparisons preserve the degree-zero unit.",
+   "uses": [
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "tilde.toOpen sends one to the constant section one by the defining localization section map and StructureSheaf.const_one. The top-open restriction sections isomorphism preserves this section. Naturality of homology on cycles and of exact scalar-forgetting homology comparisons gives the asserted ordinary equality, including empty U and the zero ring.",
+   "uses": [
+    "def-sc-principal-open-alternating-total",
+    "lem-sc-open-sections-cohomology-model-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-open-sections-cohomology-model-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "Tilde/sections unit restricted to U; extracted ordinary part of the existing structure-class proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The class of one in derived global sections is natural under restriction of the structure sheaf to an open",
+   "results": "StructureSheaf.res_const, ModuleCat.Tilde.res_const, StructureSheaf.const_one, StructureSheaf.toOpen_eq_const, Scheme.Modules.restrictFunctorId_hom_app_app.",
+   "date": "2026-10-13",
+   "verdict": "Ordinary section ingredients, no complete ordinary homology comparison equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctorFactors\"",
+   "results": "DerivedCategory.homologyFunctorFactors and naturality; no ordinary structure-cycle identity.",
+   "date": "2026-10-13",
+   "verdict": "Derived transport ingredients only; no statement of this ordinary identity."
+  },
+  {
+   "tool": "grep",
+   "query": "toOpen_eq_const|overUnit|singleObjHomologySelfIso",
+   "results": "singleObjHomologySelfIso, homologyπ_singleObjHomologySelfIso_hom, sheafOfModulesEquivOverUnit. Local rg also found extendSingleIso_hom_f and homologyπ_extendHomologyIso_hom.",
+   "date": "2026-10-13",
+   "verdict": "Degree-zero calculation ingredients, no exact match in Mathlib or the project."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zeroth homology class of one in the restricted structure sheaf agrees with the tilde sections unit through the single complex and extension homology isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenSectionsStructureClass",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Restricted structure class: ordinary degree-zero cycle calculation",
+   "via": [
+    "lem-sc-open-sections-structure-class",
+    "lem-sc-open-sections-cohomology-unit-comparison",
+    "lem-sc-derived-open-structure-sections-unit",
+    "lem-sc-koszul-open-structure-evaluation",
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSectionsOrdinaryStructureClass.lean",
+  "declaration": "AlgebraicGeometry.openComparison_ordinary_structure_class",
+  "statement": "theorem openComparison_ordinary_structure_class (A : Type u) [CommRing A]\n    (U : (Spec (.of A)).Opens) :\n    let T := openComparisonRestriction A U\n    let K := (ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)\n    let L := K.extend ComplexShape.embeddingDownNat\n    let C := ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).obj L\n    let η₀ : 𝟭 (ModuleCat.{u} A) ⟶ koszulOpenTilde A ⋙ affineOpenSections A U :=\n      { app := fun M ↦ tilde.toOpen M U\n        naturality := fun _ _ g ↦ (tilde.toOpen_map_app g U).symm }\n    let η := (NatTrans.mapHomologicalComplex η₀ (.up ℤ)).app L\n    let j : L.homology 0 ≅ ModuleCat.of A A :=\n      K.extendHomologyIso ComplexShape.embeddingDownNat (j := 0) rfl ≪≫\n        HomologicalComplex.singleObjHomologySelfIso (.down ℕ) 0 (ModuleCat.of A A)\n    let e₀ : L ≅ (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj\n        (ModuleCat.of A A) :=\n      HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat\n        (ModuleCat.of A A) 0 0 rfl\n    let e₁ : C ≅ (CochainComplex.singleFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)) :=\n      ((koszulOpenTilde A).mapHomologicalComplex (.up ℤ)).mapIso e₀ ≪≫\n      (HomologicalComplex.singleMapHomologicalComplex (koszulOpenTilde A) (.up ℤ) 0).app\n        (ModuleCat.of A A)\n    let B := (moduleRings U.toScheme.toRingedSpace).obj.obj (op ⊤)\n    let S := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace\n    let D := (CochainComplex.singleFunctor\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj\n        (SheafOfModules.unit (moduleRings U.toScheme.toRingedSpace))\n    let J := (T.mapHomologicalComplex (.up ℤ)).obj C\n    let e : J ≅ D :=\n      (T.mapHomologicalComplex (.up ℤ)).mapIso e₁ ≪≫\n        (HomologicalComplex.singleMapHomologicalComplex T (.up ℤ) 0).app\n          (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)) ≪≫\n        (CochainComplex.singleFunctor\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).mapIso\n            (TopologicalSpace.Opens.sheafOfModulesEquivOverUnit U\n              (moduleRings (Spec (.of A)).toRingedSpace))\n    let ε : ((S.mapHomologicalComplex (.up ℤ)).obj D).homology 0 ≅ ModuleCat.of B B :=\n      (HomologicalComplex.homologyFunctor _ (.up ℤ) 0).mapIso\n        ((HomologicalComplex.singleMapHomologicalComplex S (.up ℤ) 0).app _) ≪≫\n        HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (ModuleCat.of B B)\n    HomologicalComplex.homologyMap\n        ((S.mapHomologicalComplex (.up ℤ)).map e.inv) 0 (ε.inv (1 : B)) =\n      (openComparisonOrdinaryIso A U C).inv\n        ((HomologicalComplex.homologyMap η 0) (j.inv (1 : A)))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T155938-L-1304198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T155938-L-1304198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
