@@ -6,6 +6,8 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonMap
+import Sheaf.AlgebraicGeometry.AbelianRepresentableCohomologyMapNaturality
+import Sheaf.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility
 
 /-! # Naturality of cyclic free-representable cohomology comparison
 Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf.
@@ -48,6 +50,20 @@ theorem cyclicRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
       Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app
           (AddCommGrpCat.of (ULift (ZMod e)))).hom q
         (cohomologyMap g _ q (cyclicRepresentableCohomologyMap h e q W ξ)) =
-          cyclicRepresentableCohomologyMap h e q V (P.map v.op ξ) := by sorry
+          cyclicRepresentableCohomologyMap h e q V (P.map v.op ξ) := by
+  dsimp only
+  intro W V v ξ
+  let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp)
+  let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom)
+    (pullback.fst h V.hom) (by simp [g])
+  have hn := abelianRepresentableCohomologyMap_naturality h
+    (Y.constantZMod e) q W V v ξ
+  have hc := cyclicCoefficientPullbackCompatibility h e q W V v
+    (abelianRepresentableCohomologyMap h (Y.constantZMod e) q W ξ)
+  dsimp [g] at hn hc ⊢
+  have hfinal := hc
+  rw [hn] at hfinal
+  unfold cyclicRepresentableCohomologyMap
+  convert hfinal using 1 <;> rfl
 
 end AlgebraicGeometry.Etale

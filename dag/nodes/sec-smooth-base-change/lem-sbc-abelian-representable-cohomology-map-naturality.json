@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-abelian-representable-cohomology-map-naturality",
+ "kind": "statement",
+ "title": "Naturality of the free-representable cohomology comparison",
+ "statement": "theorem abelianRepresentableCohomologyMap_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : let P := (uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(q : ℤ)⟧) ∀ (W V : X.Etale) (v : V ⟶ W) (ξ : P.obj (op W)), let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp) let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom) (pullback.fst h V.hom) (by simp [g]) Sheaf.H.map (i.inv.app F) q (cohomologyMap g _ q (abelianRepresentableCohomologyMap h F q W ξ)) = abelianRepresentableCohomologyMap h F q V (P.map v.op ξ)",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "free-sheaf adjunction and restricted cohomology presheaf"
+ },
+ "stmt_deps": [
+  "def-sbc-abelian-representable-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand the defining comparison and use naturality of pullback on Ext and the universal section.",
+   "uses": [
+    "def-sbc-abelian-representable-cohomology-map",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-abelian-representable-cohomology-map",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker S2",
+  "document": "Stacks Project Tag 03Q8",
+  "place": "naturality of Ext pullback and universal section"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of Ext pullback and cohomology restriction",
+   "results": "No exact match; construction-specific comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cohomologyMap_map Ext precomp",
+   "results": "Generic cohomologyMap_map found; no exact construction match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianRepresentableCohomologyMap_naturality",
+   "results": "No existing declaration.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of cohomology pullback and Ext comparison",
+   "results": "No exact construction-specific match found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonNaturality",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-cyclic-representable-cohomology-map-naturality",
+   "place": "proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianRepresentableCohomologyMapNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianRepresentableCohomologyMapNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianRepresentableCohomologyMap_naturality",
+  "statement": "theorem abelianRepresentableCohomologyMap_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : let P := (uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(q : ℤ)⟧) ∀ (W V : X.Etale) (v : V ⟶ W) (ξ : P.obj (op W)), let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp) let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom) (pullback.fst h V.hom) (by simp [g]) Sheaf.H.map (i.inv.app F) q (cohomologyMap g _ q (abelianRepresentableCohomologyMap h F q W ξ)) = abelianRepresentableCohomologyMap h F q V (P.map v.op ξ)",
+  "by": "S2",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T224518-L-1475069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T224518-L-1475069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

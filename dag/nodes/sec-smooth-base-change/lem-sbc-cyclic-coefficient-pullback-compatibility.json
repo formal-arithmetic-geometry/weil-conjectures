@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-cyclic-coefficient-pullback-compatibility",
+ "kind": "statement",
+ "title": "Compatibility of cyclic coefficient pullback comparisons",
+ "statement": "theorem cyclicCoefficientPullbackCompatibility {X Y : Scheme.{u}} (h : Y ⟶ X) (e q : ℕ) (W V : X.Etale) (v : V ⟶ W) (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).obj (Y.constantZMod e)) q) : let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp) let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom) (pullback.fst h V.hom) (by simp [g]) Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q (cohomologyMap g _ q (Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q x)) = Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (pullback.fst h V.hom)).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q (Sheaf.H.map (i.inv.app (Y.constantZMod e)) q (cohomologyMap g _ q x))",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "constant sheaf pullback coherence"
+ },
+ "stmt_deps": [
+  "def-sbc-abelian-representable-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand the defining comparison and use naturality of pullback on Ext and the universal section.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker S2",
+  "document": "Stacks Project Tag 03Q8",
+  "place": "composition coherence for constant sheaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of Ext pullback and cohomology restriction",
+   "results": "No exact match; construction-specific comparison.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "cohomologyMap_map Ext precomp",
+   "results": "Generic cohomologyMap_map found; no exact construction match.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianRepresentableCohomologyMap_naturality",
+   "results": "No existing declaration.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of cohomology pullback and Ext comparison",
+   "results": "No exact construction-specific match found.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonNaturality",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-cyclic-representable-cohomology-map-naturality",
+   "place": "proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CyclicCoefficientPullbackCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.cyclicCoefficientPullbackCompatibility",
+  "statement": "theorem cyclicCoefficientPullbackCompatibility {X Y : Scheme.{u}} (h : Y ⟶ X) (e q : ℕ) (W V : X.Etale) (v : V ⟶ W) (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).obj (Y.constantZMod e)) q) : let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp) let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom) (pullback.fst h V.hom) (by simp [g]) Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q (cohomologyMap g _ q (Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q x)) = Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (pullback.fst h V.hom)).app (AddCommGrpCat.of (ULift (ZMod e)))).hom q (Sheaf.H.map (i.inv.app (Y.constantZMod e)) q (cohomologyMap g _ q x))",
+  "by": "S2",
+  "date": "2026-10-14",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T224518-L-1475069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T224518-L-1475069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
