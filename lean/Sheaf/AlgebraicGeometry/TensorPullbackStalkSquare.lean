@@ -8,11 +8,12 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility
 
 /-! # Stalk compatibility of a specified tensor pullback chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-pullback-stalk-square).
+(blueprint: lem-pc-tensor-pullback-stalk-square-assembly).
 -/
 
 @[expose] public section
@@ -43,6 +44,8 @@ local instance tensorPullbackStalkSquareInstance4 (Y : Scheme.{u}) (M : Y.Module
     ((curriedTensor Y.Modules).obj M).PreservesZeroMorphisms :=
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj Y.sheaf M
 
+set_option maxHeartbeats 1500000 in
+-- Elaborating the scalar-extension and stalk tensor constructions needs more heartbeats.
 /-- Stalk compatibility of a specified tensor pullback chain map.
 
 Proof: Take sigma as the inverse stalk-total-tensor isomorphism on P and Q.
@@ -61,7 +64,7 @@ signs. Arbitrary direct sums, zero rings, zero factors and unbounded complexes
 are included; no derived-category morphisms or K-flatness are used.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
 equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB.
-(blueprint: lem-pc-tensor-pullback-stalk-square). -/
+(blueprint: lem-pc-tensor-pullback-stalk-square-assembly). -/
 theorem exists_tensor_pullback_stalk_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -112,6 +115,12 @@ theorem exists_tensor_pullback_stalk_square
           (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z
             (pullbackTensorTotal X P Q)).hom ≫
           S.map (χ.hom ≫ HomologicalComplex.mapBifunctorMap (𝟙 _) a (curriedTensor _) (.up ℤ)) =
-        (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by sorry
+        (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom := by
+  let := SingleComplexBaseChange.leftAlgebra f g' z
+  let := SingleComplexBaseChange.rightAlgebra f f' g g' sq z
+  let := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra
+  let := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' z))
+  let := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z))
+  exact ⟨_, _, pinned_tensor_pullback_stalk_compatibility f f' g g' sq P Q N a χ hχ z⟩
 
 end AlgebraicGeometry

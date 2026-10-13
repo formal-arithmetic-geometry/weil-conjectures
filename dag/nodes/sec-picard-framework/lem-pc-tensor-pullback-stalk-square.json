@@ -2,11 +2,11 @@
  "id": "lem-pc-tensor-pullback-stalk-square",
  "kind": "statement",
  "title": "Stalk compatibility of a specified tensor pullback chain map",
- "statement": "Fix a cartesian square of schemes $X'\\xrightarrow{g'}X$, $S'\\xrightarrow g S$, $f:X\\to S$, $f':X'\\to S'$ and a point $z\\in X'$. Use its actual stalk rings $R,A,B,C$ and the scalar-extension functor $F$ and stalk functors of [def-pc-single-complex-base-change-stalk-condition]. Let $P,Q$ be arbitrary complexes on $X$, $N$ an arbitrary complex on $X'$, and $a:H Q\\to N$ a chain map, where $H$ is termwise module pullback. Suppose $\\chi:H\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(HP\\otimes HQ)$ restricts on every total-degree summand to the specified module pullback tensor isomorphism [lem-weil-pbc-module-pullback-tensor]. Write $U=P_{g'z}$, $V=Q_{g'z}$, and $t=\\operatorname{tensorStalkIso}(Q);S(a)$, with $S$ the stalk complex functor on $X'$ at $z$. There exist chain isomorphisms $\\sigma:U\\otimes V\\cong(\\operatorname{Tot}(P\\otimes Q))_{g'z}$ and $\\rho:F(U)\\otimes S(N)\\cong S(\\operatorname{Tot}(HP\\otimes N))$ such that $F(\\sigma);\\operatorname{tensorStalkIso}(\\operatorname{Tot}(P\\otimes Q));S(\\chi;(1\\otimes a))=\\mu_F^{-1};(1\\otimes t);\\rho$. No K-flatness, derived identification, boundedness, or horizontal invertibility is assumed.",
+ "statement": "Let Y be a scheme and z a point of Y. Let T be the module stalk functor [def-pc-module-stalk-functor] and S its termwise functor on integer cochain complexes. There exists a family e_{P,Q}: S(Tot(P tensor Q)) ≅ S(P) tensor S(Q) [def-pc-derived-pullback-tensor-comparison] for all cochain complexes P,Q of modules on Y. For every p+q=n, T(ι_{p,q});e_{P,Q}^n = φ_{P^p,Q^q};ι_{p,q}, where φ is precisely Classical.choose (SheafOfModules.stalkTensorIso Y.toRingedSpace z) [lem-pc-ringed-space-module-stalk-tensor]. No boundedness or flatness hypotheses are imposed.",
  "stmt_deps": [
-  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-module-stalk-functor",
   "def-pc-derived-pullback-tensor-comparison",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-pc-ringed-space-module-stalk-tensor"
  ],
  "source": {
   "document": "literature/stacks-project/perfect.tex",
@@ -14,35 +14,43 @@
  },
  "proof": [
   {
-   "text": "Take sigma from the inverse source stalk tensor comparison. Construct rho from tensorStalkIso(P) on the first factor followed by the inverse target stalk tensor comparison. The comparisons are chain isomorphisms by naturality, including the signed total differential.",
+   "text": "Fix φ to the chosen canonical module stalk tensor isomorphism. Its naturality is the second conjunct of its characterizing theorem.",
    "uses": [
-    "lem-pc-stalk-tensor-complex",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "lem-pc-ringed-space-module-stalk-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "For each total-degree summand, apply the assumed degreewise equation for chi. The generator formulas for the pinned module tensor-pullback map and pullback-stalk comparison, together with the scalar-extension tensorator formula, identify the two composites on each pure tensor with scalar extension of its first factor followed by the stalk of a in its second factor. Pure tensors generate each summand, and the coproduct universal property gives equality in every degree, hence equality of chain maps. Zero rings and zero factors give the unique maps; arbitrary direct sums handle unbounded complexes.",
+   "text": "Apply exists_stalk_tensor_degree_iso to φ. It supplies degreewise isomorphisms e and the summand injection equation for the prescribed φ.",
    "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
-    "def-pc-derived-pullback-tensor-comparison",
-    "def-pc-single-complex-base-change-stalk-condition",
-    "lem-pc-stalk-tensor-complex"
+    "lem-pc-stalk-tensor-complex-degrees"
    ],
    "elementary": false
+  },
+  {
+   "text": "The module stalk functor is additive: forget its linear morphisms to abelian-group presheaf morphisms and apply additivity of the abelian stalk functor. Apply stalk_tensor_degree_differential to φ, its naturality, e and the injection equation.",
+   "uses": [
+    "lem-pc-stalk-tensor-complex-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib HomologicalComplex.Hom.isoOfComponents to assemble the degree isomorphisms into a chain isomorphism. Its hom components are definitionally the e_n maps, so the degreewise injection equation is exactly the required pinned equation. Integer degree π(p,q)=p+q is definitional. Coproducts include all pairs, so unbounded inputs and zero modules need no special hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback-tensor-comparison",
-  "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-stalk-tensor-complex",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-stalk-tensor-complex-degrees",
+  "lem-pc-stalk-tensor-complex-differential"
  ],
  "proof_origin": {
-  "by": "agent",
-  "agent": "J4",
+  "by": "worker",
+  "group": "M1",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Explicit refinement of Tag 0DJA(1), tensor-transitivity chain calculation (parent step 2)"
+  "place": "Tag 0DJA(1), pinned stalk tensor assembly using the proved degree and differential comparisons"
  },
  "mathlib_searches": [
   {
@@ -98,12 +106,12 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackStalkSquare.lean",
-  "declaration": "AlgebraicGeometry.exists_tensor_pullback_stalk_square",
-  "statement": "theorem exists_tensor_pullback_stalk_square\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (N : CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ)\n    (a : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q ⟶ N)\n    (χ : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal X P Q) ≅\n      pullbackTensorTotal X'\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q))\n    (hχ : ∀ (p q n : ℤ) (h : p + q = n),\n      (Scheme.Modules.tensorPullback g').map\n          (HomologicalComplex.ιMapBifunctor P Q (curriedTensor _) (.up ℤ) p q n h) ≫\n        χ.hom.f n =\n      ((Classical.choose (Scheme.Modules.module_pullback_tensor g')) (P.X p) (Q.X q)).hom ≫\n        HomologicalComplex.ιMapBifunctor\n          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P)\n          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q)\n          (curriedTensor _) (.up ℤ) p q n h) (z : X') :\n    letI := SingleComplexBaseChange.leftAlgebra f g' z\n    letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z\n    letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} (SingleComplexBaseChange.R f g' z))\n    letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z))\n    let R := SingleComplexBaseChange.R f g' z\n    let A := SingleComplexBaseChange.A g' z\n    let B := SingleComplexBaseChange.B f' z\n    let C := SingleComplexBaseChange.C z\n    let F := (ModuleCat.extendScalars.{u, u, u}\n      ((algebraMap (TensorProduct R A B) C).comp\n        (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ)\n    let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex\n      (.up ℤ)\n    let U := SingleComplexBaseChange.stalkComplex g' z P\n    let V := SingleComplexBaseChange.stalkComplex g' z Q\n    let t := (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom ≫ S.map a\n    ∃ (σ : U ⊗ V ≅ SingleComplexBaseChange.stalkComplex g' z\n        (pullbackTensorTotal X P Q))\n      (ρ : F.obj U ⊗ S.obj N ≅ S.obj\n        (pullbackTensorTotal X'\n          (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) N)),\n      F.map σ.hom ≫\n          (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z\n            (pullbackTensorTotal X P Q)).hom ≫\n          S.map (χ.hom ≫ HomologicalComplex.mapBifunctorMap (𝟙 _) a (curriedTensor _) (.up ℤ)) =\n        (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom",
+  "module": "Sheaf.AlgebraicGeometry.PinnedStalkTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedStalkTensor.lean",
+  "declaration": "AlgebraicGeometry.exists_pinned_stalk_tensor",
+  "statement": "theorem exists_pinned_stalk_tensor (Y : Scheme.{u}) (z : Y) : letI := SheafOfModules.monoidalCategory Y.sheaf let T := RingedSpace.moduleStalkFunctor Y.toRingedSpace z letI := ModuleCat.monoidalCategory (R := Y.presheaf.stalk z) let S := T.mapHomologicalComplex (.up ℤ) ∃ e : ∀ P Q : CochainComplex Y.Modules ℤ, S.obj (pullbackTensorTotal Y P Q) ≅ S.obj P ⊗ S.obj Q, ∀ P Q p q n (h : p + q = n), T.map (HomologicalComplex.ιMapBifunctor P Q (curriedTensor _) (.up ℤ) p q n h) ≫ (e P Q).hom.f n = (Classical.choose (SheafOfModules.stalkTensorIso Y.toRingedSpace z) (P.X p) (Q.X q)).hom ≫ HomologicalComplex.ιMapBifunctor (S.obj P) (S.obj Q) (curriedTensor _) (.up ℤ) p q n h",
   "branch": "sheaf-dag",
-  "by": "J4",
+  "by": "M1",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -120,10 +128,58 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T181106-L-2602503",
+  "landing": "20261013T211109-L-393708",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "M1 stage 2",
+  "old_statement": "Fix a cartesian square of schemes $X'\\xrightarrow{g'}X$, $S'\\xrightarrow g S$, $f:X\\to S$, $f':X'\\to S'$ and a point $z\\in X'$. Use its actual stalk rings $R,A,B,C$ and the scalar-extension functor $F$ and stalk functors of [def-pc-single-complex-base-change-stalk-condition]. Let $P,Q$ be arbitrary complexes on $X$, $N$ an arbitrary complex on $X'$, and $a:H Q\\to N$ a chain map, where $H$ is termwise module pullback. Suppose $\\chi:H\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(HP\\otimes HQ)$ restricts on every total-degree summand to the specified module pullback tensor isomorphism [lem-weil-pbc-module-pullback-tensor]. Write $U=P_{g'z}$, $V=Q_{g'z}$, and $t=\\operatorname{tensorStalkIso}(Q);S(a)$, with $S$ the stalk complex functor on $X'$ at $z$. There exist chain isomorphisms $\\sigma:U\\otimes V\\cong(\\operatorname{Tot}(P\\otimes Q))_{g'z}$ and $\\rho:F(U)\\otimes S(N)\\cong S(\\operatorname{Tot}(HP\\otimes N))$ such that $F(\\sigma);\\operatorname{tensorStalkIso}(\\operatorname{Tot}(P\\otimes Q));S(\\chi;(1\\otimes a))=\\mu_F^{-1};(1\\otimes t);\\rho$. No K-flatness, derived identification, boundedness, or horizontal invertibility is assumed.",
+  "what": "Reviewer X-56534 requested the pinned complex-level stalk tensor interface. The previously registered chain-square declaration is retained verbatim and given its own assembly node; its caller remains valid.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJA(1), chain-level stalk tensor assembly"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-tensor-stalk-chain-coordinates",
+    "holds": true,
+    "note": "The chain-square declaration and its signature are retained; the proof dependency is retargeted to lem-pc-tensor-pullback-stalk-square-assembly, which records that same declaration."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-single-complex-base-change-stalk-condition",
+   "def-pc-derived-pullback-tensor-comparison",
+   "lem-weil-pbc-module-pullback-tensor"
+  ],
+  "old_proof": [
+   {
+    "text": "Take sigma from the inverse source stalk tensor comparison. Construct rho from tensorStalkIso(P) on the first factor followed by the inverse target stalk tensor comparison. The comparisons are chain isomorphisms by naturality, including the signed total differential.",
+    "uses": [
+     "lem-pc-stalk-tensor-complex",
+     "def-pc-single-complex-base-change-stalk-condition"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For each total-degree summand, apply the assumed degreewise equation for chi. The generator formulas for the pinned module tensor-pullback map and pullback-stalk comparison, together with the scalar-extension tensorator formula, identify the two composites on each pure tensor with scalar extension of its first factor followed by the stalk of a in its second factor. Pure tensors generate each summand, and the coproduct universal property gives equality in every degree, hence equality of chain maps. Zero rings and zero factors give the unique maps; arbitrary direct sums handle unbounded complexes.",
+    "uses": [
+     "lem-weil-pbc-module-pullback-tensor",
+     "def-pc-derived-pullback-tensor-comparison",
+     "def-pc-single-complex-base-change-stalk-condition",
+     "lem-pc-stalk-tensor-complex"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-pc-derived-pullback-tensor-comparison",
+   "def-pc-single-complex-base-change-stalk-condition",
+   "lem-pc-stalk-tensor-complex",
+   "lem-weil-pbc-module-pullback-tensor"
+  ]
  }
 }

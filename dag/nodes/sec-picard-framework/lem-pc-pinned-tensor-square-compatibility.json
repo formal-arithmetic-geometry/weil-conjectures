@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, lemma-single-complex-base-change-condition-inherited, part (1), local computation using Tag 0BYJ"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-pinned-tensor-square-compatibility",
+ "title": "Chain equation for the constructed pinned stalk tensor coordinates",
+ "statement": "Fix a cartesian square of schemes $X'\\xrightarrow{g'}X$, $S'\\xrightarrow g S$, $f:X\\to S$, $f':X'\\to S'$ and a point $z\\in X'$. Use its actual stalk rings $R,A,B,C$ and the scalar-extension functor $F$ and stalk functors of [def-pc-single-complex-base-change-stalk-condition]. Let $P,Q$ be arbitrary complexes on $X$, $N$ an arbitrary complex on $X'$, and $a:H Q\\to N$ a chain map, where $H$ is termwise module pullback. Suppose $\\chi:H\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(HP\\otimes HQ)$ restricts on every total-degree summand to the specified module pullback tensor isomorphism [lem-weil-pbc-module-pullback-tensor]. Write $U=P_{g'z}$, $V=Q_{g'z}$, and $t=\\operatorname{tensorStalkIso}(Q);S(a)$, with $S$ the stalk complex functor on $X'$ at $z$. Fix σ to the inverse source pinned stalk tensor isomorphism of [lem-pc-tensor-pullback-stalk-square]. Fix ρ to tensorStalkIso(P) tensor identity followed by the inverse target pinned stalk tensor comparison. For these explicitly constructed σ and ρ the equation F(σ);tensorStalkIso(Tot(P tensor Q));S(χ;(1 tensor a)) = μ_F^{-1};(1 tensor t);ρ holds. This statement verifies the chain equation only; it does not assert existence of coordinate isomorphisms.",
+ "stmt_deps": [
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-tensor-pullback-stalk-square"
+ ],
+ "proof": [
+  {
+   "text": "Fix sigma and rho by the specific isomorphism constructions in the statement, using the proved pinned stalk tensor comparison. Its injection equation is retained for both source and target comparisons. The tensorStalkIso component formula is the inverse canonical module pullback-stalk comparison transported along the stalk ring map equality.",
+   "uses": [
+    "lem-pc-tensor-pullback-stalk-square",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each total-degree summand, apply the assumed degreewise equation for chi. The generator formulas for the pinned module tensor-pullback map and pullback-stalk comparison, together with the scalar-extension tensorator formula, identify the two composites on each pure tensor with scalar extension of its first factor followed by the stalk of a in its second factor. Pure tensors generate each summand, and the coproduct universal property gives equality in every degree, hence equality of chain maps. Zero rings and zero factors give the unique maps; arbitrary direct sums handle unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-tensor-pullback-stalk-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-tensor-pullback-stalk-square",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M1",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), separate construction of stalk coordinates from verification of the chain equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical summand formula for stalk tensor isomorphism of unbounded cochain complexes",
+   "results": "Eight hits for the generic tensor injection and unit APIs, no combined stalk/pullback chain-square theorem.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isoOfComponents",
+   "results": "Found the component assembly constructor and its component formulas; used for the pinned comparison. It does not prove pullback compatibility.",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*tensor.*complex|tensor.*stalk.*compatibility",
+   "results": "msearch zero hits. Local rg finds StalkTensorComplexDegrees, StalkTensorComplexDifferential and StalkTensorComplex. The first two are used; the third lacks the prescribed component equation. No proved chain-square compatibility found.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars tensorator and termwise pullback stalk isomorphism commute on tensor complexes",
+   "results": "Eight presheaf tensor, free sheaf pullback and topological presheaf stalk pullback results. No pinned module stalk tensor chain-square equation.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ιTensorObj_mapCochainComplexμIso_hom_f",
+   "results": "Service reports unknown identifier because this declaration is in the upstream library rather than Mathlib. Local source reading confirms its component formula in WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex. It supplies one part of the intended equality calculation, not the full compatibility.",
+   "date": "2026-10-14",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of total tensor complex canonical tensor summand comparison pullback",
+   "results": "Service unavailable: Internal Server Error. No mathematical result obtained; the other search kinds and local source search were used.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorPullbackStalkSquare",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-tensor-stalk-chain-coordinates",
+   "place": "Chain equation for the constructed pinned stalk tensor coordinates",
+   "via": [
+    "lem-pc-tensor-pullback-stalk-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedTensorSquareCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedTensorSquareCompatibility.lean",
+  "declaration": "AlgebraicGeometry.pinned_tensor_pullback_stalk_compatibility",
+  "statement": "theorem pinned_tensor_pullback_stalk_compatibility [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (P Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (N : CochainComplex (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) ℤ) (a : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q ⟶ N) (χ : ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj (pullbackTensorTotal X P Q) ≅ pullbackTensorTotal X' (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q)) (hχ : ∀ (p q n : ℤ) (h : p + q = n), (Scheme.Modules.tensorPullback g').map (HomologicalComplex.ιMapBifunctor P Q (curriedTensor _) (.up ℤ) p q n h) ≫ χ.hom.f n = ((Classical.choose (Scheme.Modules.module_pullback_tensor g')) (P.X p) (Q.X q)).hom ≫ HomologicalComplex.ιMapBifunctor (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor _) (.up ℤ) p q n h) (z : X') : letI := SingleComplexBaseChange.leftAlgebra f g' z letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq z letI := (SingleComplexBaseChange.tensorMap f f' g g' sq z).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' z)) letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' z)) let R := SingleComplexBaseChange.R f g' z let A := SingleComplexBaseChange.A g' z let B := SingleComplexBaseChange.B f' z let C := SingleComplexBaseChange.C z let F := (ModuleCat.extendScalars.{u, u, u} ((algebraMap (TensorProduct R A B) C).comp (algebraMap A (TensorProduct R A B)))).mapHomologicalComplex (.up ℤ) let S := (RingedSpace.moduleStalkFunctor X'.toRingedSpace z).mapHomologicalComplex (.up ℤ) let U := SingleComplexBaseChange.stalkComplex g' z P let V := SingleComplexBaseChange.stalkComplex g' z Q let t := (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z Q).hom ≫ S.map a let H := (Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ) let e := Classical.choose (exists_pinned_stalk_tensor X (g' z)) let e' := Classical.choose (exists_pinned_stalk_tensor X' z) let σ : U ⊗ V ≅ SingleComplexBaseChange.stalkComplex g' z (pullbackTensorTotal X P Q) := (e P Q).symm let ρ : F.obj U ⊗ S.obj N ≅ S.obj (pullbackTensorTotal X' (H.obj P) N) := tensorIso (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z P) (Iso.refl (S.obj N)) ≪≫ (e' (H.obj P) N).symm F.map σ.hom ≫ (SingleComplexBaseChange.tensorStalkIso f f' g g' sq z (pullbackTensorTotal X P Q)).hom ≫ S.map (χ.hom ≫ HomologicalComplex.mapBifunctorMap (𝟙 _) a (curriedTensor _) (.up ℤ)) = (Functor.Monoidal.μIso F U V).inv ≫ (F.obj U ◁ t) ≫ ρ.hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T211109-L-393708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T211109-L-393708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
