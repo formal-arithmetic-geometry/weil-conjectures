@@ -13,23 +13,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-def PicardUniversalRankMatchCoreCondition {X S T : Scheme.{u}} (f : X ⟶ S)
+abbrev PicardUniversalRankMatchCoreCondition {X S T : Scheme.{u}} (f : X ⟶ S)
     (E : X.Modules) (g : T ⟶ S) : Prop :=
-  ∀ {T' : Scheme.{u}} (h : T' ⟶ T) (t : T'),
-    ∃ U : T'.Opens, t ∈ U ∧ ∃ r : ℕ,
-      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
-        ((Modules.tensorPullback U.ι).obj
-          ((Modules.pushforward (pullback.snd f (h ≫ g))).obj
-            ((Modules.tensorPullback (pullback.fst f (h ≫ g))).obj E))) r ∧
-      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
-        ((Modules.tensorPullback U.ι).obj
-          ((Modules.pushforward (pullback.snd f (h ≫ g))).obj
-            ((Modules.tensorPullback (pullback.fst f (h ≫ g))).obj
-              (Modules.dual E)))) r
+  PicardUniversalRankMatch f E g
 
-/-- Rank decomposition and the fibre product of the two lowest-cohomology loci produce an
-immersion representing the two direct-image rank clauses. Source: Stacks Project, Tag 0BDP,
-first three proof paragraphs. (blueprint: lem-sc-picard-universal-rank-match-locus-core-rank)
+/-- Fix the rank of E before constructing the two direct-image loci of that same rank.
+Source: Stacks Project, Tag 0BDP, first three proof paragraphs.
+(blueprint: lem-sc-picard-universal-rank-match-locus-core-rank)
+
+The universal structure-pushforward hypothesis makes each fibre connected. The locally
+constant rank of E is therefore constant on each fibre. Flatness and finite presentation
+make f open, and properness makes f closed, so these ranks give open-and-closed base
+strata S_r. On S_r the pullback of E has rank r after every base change. Proper flat
+cohomology and base change give perfect direct-image complexes for E and its dual,
+concentrated in nonnegative degrees. Apply the lowest-cohomology rank-r locus construction
+to both complexes. Their fibre product represents the two universal direct-image rank-r
+conditions. It is an immersion, and the third rank clause holds on this stratum by
+construction. Conversely that clause fixes the same rank r, so a test morphism satisfying
+all three clauses factors through both loci locally. Uniqueness of factorization through
+an immersion glues these local maps. Finally glue the constructions over the disjoint
+open-and-closed strata. Empty test schemes satisfy both sides vacuously.
 -/
 theorem exists_picardUniversalRankMatchLocus_core_rank {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
@@ -42,11 +45,14 @@ theorem exists_picardUniversalRankMatchLocus_core_rank {X S : Scheme.{u}} (f : X
       IsImmersion j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S),
         (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatchCoreCondition f E g := by sorry
 
-/-- On the rank locus, the pulled-back module has the common rank; this is the final
-identification in Tag 0BDP. Source: Stacks Project, Tag 0BDP.
+/-- The corrected core condition and PicardUniversalRankMatch have identical definitions:
+both require the two direct images and the pulled-back E to have the same local rank
+universally under further base change. Unfolding the two definitions proves the equivalence
+by reflexivity; no rank of E is inferred from the ranks of its direct images.
+Source: Stacks Project, Tag 0BDP, rank fixed before the two lowest-cohomology loci.
 (blueprint: lem-sc-picard-universal-rank-match-locus-core-compat) -/
 theorem picardUniversalRankMatchCoreCondition_iff {X S T : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (E : X.Modules)
     [E.IsFiniteLocallyFree] (g : T ⟶ S) :
-    PicardUniversalRankMatchCoreCondition f E g ↔ PicardUniversalRankMatch f E g := by sorry
+    PicardUniversalRankMatchCoreCondition f E g ↔ PicardUniversalRankMatch f E g := by rfl
 end AlgebraicGeometry.Scheme
