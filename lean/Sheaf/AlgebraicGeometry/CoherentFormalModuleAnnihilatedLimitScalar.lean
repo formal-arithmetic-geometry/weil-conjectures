@@ -2,6 +2,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
+import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 @[expose] public section
 
@@ -63,6 +67,71 @@ abbrev affineLimitModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData
     (U : X.affineOpens) := ↥(limit (F.obj ⋙
       SheafOfModules.evaluation X.ringCatSheaf (op U.1)) : ModuleCat Γ(X, U.1))
 
+-- Projectionwise verification avoids unfolding the concrete inverse limit.
+private theorem limit_scalar_composites {A : Type u} [CommRing A]
+    {P Q : ℕᵒᵖ ⥤ ModuleCat.{u} A} (δ : P ⟶ Q) (β : Q ⟶ P) (r : A)
+    (hl : ∀ j, δ.app j ≫ β.app j = r • 𝟙 (P.obj j))
+    (hr : ∀ j, β.app j ≫ δ.app j = r • 𝟙 (Q.obj j)) :
+    lim.map δ ≫ lim.map β = r • 𝟙 (limit P) ∧
+      lim.map β ≫ lim.map δ = r • 𝟙 (limit Q) := by
+  constructor
+  · apply limit.hom_ext
+    intro j
+    rw [← limMap_eq δ, ← limMap_eq β, Category.assoc, limMap_π β j,
+      ← Category.assoc, limMap_π δ j, Category.assoc, hl j]
+    apply ModuleCat.hom_ext
+    ext x
+    simp
+  · apply limit.hom_ext
+    intro j
+    rw [← limMap_eq δ, ← limMap_eq β, Category.assoc, limMap_π δ j,
+      ← Category.assoc, limMap_π β j, Category.assoc, hr j]
+    apply ModuleCat.hom_ext
+    ext x
+    simp
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem affine_section_annihilation {X : Scheme.{u}} (K : X.IdealSheafData)
+    {M N : X.Modules} [M.IsQuasicoherent] [N.IsQuasicoherent]
+    (a : M ⟶ N) (t : ℕ)
+    (hk : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+      (kernel a)))
+    (hc : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+      (cokernel a))) (U : X.affineOpens) :
+    K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) (LinearMap.ker (a.val.app (op U.1)).hom) ∧
+    K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1)
+      (Γ(N, U.1) ⧸ LinearMap.range (a.val.app (op U.1)).hom) := by
+  have := Scheme.Modules.isQuasicoherent_kernel a
+  have := Scheme.Modules.isQuasicoherent_cokernel a
+  have cover : ∀ x : X, ∃ V ∈ (Set.univ : Set X.affineOpens), x ∈ V.1 := by
+    intro x
+    obtain ⟨V, hV, hx, _⟩ :=
+      exists_isAffineOpen_mem_and_subset (U := ⊤) (x := x) (by simp)
+    exact ⟨⟨V, hV⟩, Set.mem_univ _, hx⟩
+  have hks := (Scheme.idealPowerProduct_isZero_iff_affine_cover X (kernel a) K
+    Set.univ cover t).mp hk U (Set.mem_univ _)
+  have hcs := (Scheme.idealPowerProduct_isZero_iff_affine_cover X (cokernel a) K
+    Set.univ cover t).mp hc U (Set.mem_univ _)
+  constructor
+  · intro f hf
+    apply Module.mem_annihilator.mpr
+    intro x
+    obtain ⟨y, hy⟩ := (Set.ext_iff.mp (Scheme.Modules.range_map_kernelι U.1 a) x.val).mpr
+      (LinearMap.mem_ker.mp x.property)
+    apply Subtype.ext
+    change f • x.val = 0
+    rw [← hy]
+    change f • ((kernel.ι a).val.app (op U.1)).hom y = 0
+    rw [← map_smul, Module.mem_annihilator.mp (hks hf) y, map_zero]
+  · obtain ⟨e, he⟩ := (Scheme.Modules.quasiCoherent_cokernel_image a).2.2.2.2.2.2.2.2 U
+      |>.2.2.2
+    intro f hf
+    apply Module.mem_annihilator.mpr
+    intro x
+    apply e.injective
+    rw [map_smul, map_zero]
+    exact Module.mem_annihilator.mp (hcs hf) (e x)
+
 /-- For scalars in the affine ideal power, construct compatible reverse maps on all
 levels and pass them to the inverse limit. At each level, annihilation of the
 kernel makes the map independent of the chosen lift, while annihilation of the
@@ -89,6 +158,39 @@ theorem coherentFormalModule_affine_limit_scalar_composites
           (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom.comp k =
           (f * g) • (LinearMap.id : affineLimitModule X I G U →ₗ[Γ(X, U.1)]
             affineLimitModule X I G U) := by
-  sorry
+  classical
+  let E := SheafOfModules.evaluation X.ringCatSheaf (op U.1)
+  let P : ℕᵒᵖ ⥤ ModuleCat.{u} Γ(X, U.1) := F.obj ⋙ E
+  let Q : ℕᵒᵖ ⥤ ModuleCat.{u} Γ(X, U.1) := G.obj ⋙ E
+  let δ : P ⟶ Q := Functor.whiskerRight α.hom E
+  have hann (n : ℕ) :
+      K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1)
+        (LinearMap.ker (δ.app (op n)).hom) ∧
+      K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1)
+        (Q.obj (op n) ⧸ LinearMap.range (δ.app (op n)).hom) := by
+    let : (F.obj.obj (op n)).IsQuasicoherent :=
+      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+        (F.property.1 n)).1
+    let : (G.obj.obj (op n)).IsQuasicoherent :=
+      ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+        (G.property.1 n)).1
+    exact affine_section_annihilation K (α.hom.app (op n)) t (h n).1 (h n).2 U
+  intro f g hf hg
+  have maps (j : ℕᵒᵖ) :=
+    (_root_.LinearMap.ker_coker_annihilated_mod_ideal.{u, u, u, u, u, u, u}
+      (K.ideal U) t ht (δ.app j).hom (hann j.unop).1 (hann j.unop).2).1 f g hf hg
+  choose k formula left right natural using fun j ↦ (maps j).2.2
+  let β : Q ⟶ P :=
+    { app := fun j ↦ ModuleCat.ofHom (k j)
+      naturality := by
+        intro i j q
+        apply ModuleCat.hom_ext
+        exact (natural i (P.obj j) (Q.obj j) (δ.app j).hom
+          (hann j.unop).1 (hann j.unop).2 (P.map q).hom (Q.map q).hom (k j)
+          (congrArg ModuleCat.Hom.hom (δ.naturality q)) (formula j)).symm }
+  have composites := limit_scalar_composites δ β (f * g)
+    (fun j ↦ ModuleCat.hom_ext (left j)) (fun j ↦ ModuleCat.hom_ext (right j))
+  exact ⟨(lim.map β).hom, congrArg ModuleCat.Hom.hom composites.1,
+    congrArg ModuleCat.Hom.hom composites.2⟩
 
 end AlgebraicGeometry

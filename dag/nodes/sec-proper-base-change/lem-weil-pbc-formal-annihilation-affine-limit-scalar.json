@@ -12,20 +12,47 @@
  ],
  "proof": [
   {
-   "text": "Construct componentwise lift maps and pass to the inverse limit using compatibility and joint monicity of projections.",
+   "text": "At each level coherence implies quasi-coherence on the Noetherian scheme. Kernels and cokernels of the component maps are quasi-coherent.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ideal-power vanishing criterion to the cover of all affine opens, first to the kernel and then to the cokernel. Sections of the kernel map onto the linear kernel (range_map_kernelι), so linearity transfers annihilation. The affine cokernel linear equivalence transfers annihilation from the categorical cokernel sections to the quotient by the component map range.",
+   "uses": [
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed f,g in K(U)^t, apply the scalar quasi-inverse theorem at every level. Choose the reverse maps with their lifting formula; the formula uniquely determines each map since lifts exist. The naturality clause of the same theorem, applied to the naturality square of alpha, makes these maps a natural transformation from the G-section diagram to the F-section diagram.",
    "uses": [
     "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply lim.map to the reverse natural transformation. For both composite identities apply limit.hom_ext: limMap_π moves the composite through each projection, and the termwise scalar identity and linearity of the projection give multiplication by f*g. Apply ModuleCat.Hom.hom to recover the stated linear-map identities. This is the proved private limit_scalar_composites helper.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal"
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+  "lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Remark 0888"
+  "document": "Stacks Project",
+  "place": "Remark 0888, final paragraph; affine-section transport supplied by the cited library lemmas"
  },
  "mathlib_searches": [
   {
@@ -101,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T015610-L-3025811",
-  "kind": "interface",
+  "landing": "20261013T031552-L-3574712",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
