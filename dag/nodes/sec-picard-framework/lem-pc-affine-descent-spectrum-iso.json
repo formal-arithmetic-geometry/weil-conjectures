@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-affine-descent-spectrum-iso",
+ "kind": "statement",
+ "title": "Canonical spectrum comparison for affine base changes",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ a colimit cocone, $i\\in I$, $Z$ an affine scheme, and $t:Z\\to\\operatorname{Spec}R_i$ a morphism [def-pc-scheme]. Let $F$, $Y$, and the ring cocone $b$ be the canonical constructions of [def-pc-affine-descent-ring-diagram]. Then the specified morphism $Y\\to\\operatorname{Spec}\\Gamma(Y,\\mathcal O)\\xrightarrow{\\operatorname{Spec}(\\operatorname{colim}.desc\\ b)}\\operatorname{Spec}(\\operatorname{colim}F)$ is an isomorphism. No Noetherian or finite-presentation hypothesis is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF (perfect-lemma-descend-perfect), affine case; Tag 01YW (limits-lemma-affine-limit)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-affine-descent-ring-diagram"
+ ],
+ "proof": [
+  {
+   "text": "The upper-tail inclusion is final by Functor.final_of_exists_of_isFiltered and common upper bounds. Final.isColimitWhiskerEquiv restricts hc to the tail. Spec preserves limits, giving the limiting spectral cone. Build the stage base-change cone with its canonical legs and use isLimitOfIsPullbackOfIsConnected with isPullback_baseChangeMap to prove it limiting.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stages and vertex are affine. The existing Mathlib preservation instance for Scheme.Γ sends this limit to a colimit. Reindex the double opposite using opOpEquivalence and identify the resulting functor and cocone with the explicit affineDescentRings and affineDescentRingCocone. Uniqueness of colimit vertices makes colimit.desc b an isomorphism. The affine toSpecΓ and Spec of this ring isomorphism give the result.",
+   "uses": [
+    "def-pc-affine-descent-ring-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-affine-descent-ring-diagram"
+ ],
+ "proof_origin": {
+  "by": "worker U1",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF (perfect-lemma-descend-perfect), affine case; Tag 01YW (limits-lemma-affine-limit)",
+  "note": "Complete Lean proof using Mathlib filtered-finality, connected pullback limits, and affine Scheme.Γ preservation; no new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coordinate rings of affine base changes form a directed colimit and perfect complexes have bounded projective models compatible with derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes descend over a directed colimit of rings on an affine scheme",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget; AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit; AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Γ",
+   "results": "AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.Scheme.Γ_def; AlgebraicGeometry.Scheme.SpecΓIdentity; AlgebraicGeometry.Scheme.SpecΓIdentity_app; AlgebraicGeometry.Scheme.Γ_map_op; AlgebraicGeometry.Scheme.Γ_map; AlgebraicGeometry.Scheme.Γ_obj_op; AlgebraicGeometry.Scheme.Γ_obj",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*colimit|toSpecΓ|baseChangeMap",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentAffineOpen",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: descend the perfect object; affine case of Tag 09RF, coordinate rings and associated-sheaf comparisons",
+   "via": [
+    "lem-pc-perfect-descent-affine-open",
+    "lem-pc-perfect-complex-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDescentSpectrumIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDescentSpectrumIso.lean",
+  "declaration": "AlgebraicGeometry.isIso_affine_descent_colimit_toSpec",
+  "statement": "theorem isIso_affine_descent_colimit_toSpec\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I)\n    (Z : Scheme.{u}) [IsAffine Z] (t : Z ⟶ Spec (R.obj i)) :\n    IsIso ((pullback t (Spec.map (c.ι.app i))).toSpecΓ ≫\n      Spec.map (colimit.desc _ (affineDescentRingCocone R i t c)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100143-L-2492034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100143-L-2492034",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

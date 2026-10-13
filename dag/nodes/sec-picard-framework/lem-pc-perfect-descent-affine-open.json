@@ -12,33 +12,40 @@
  ],
  "proof": [
   {
-   "text": "For an open-immersion presentation f:Z → X_i with affine image U, Z is affine and quasi-compact. The composite t=s∘f is finitely presented. On the directed tail j≥i, write its affine base changes as Spec A_j and its limit base change as Spec A. Affine base change identifies A_j with A_i tensor_(R_i) R_j, and the colimit universal property gives A = colim A_j. Perfectness implies quasi-coherent cohomology. Apply [lem-pc-perfect-affine-bounded-projective] to represent E by a bounded complex P of finite projective A-modules.",
+   "text": "Treat the empty open as affine using isAffineOpen_bot. For each open-immersion presentation, affine image implies that the source is affine. Form the canonical tail ring diagram. Represent the limit perfect object by a bounded finite-projective complex over its colimit.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective",
-    "def-pc-perfect-complex"
+    "def-pc-affine-descent-ring-diagram",
+    "lem-pc-affine-descent-colimit-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-pc-affine-perfect-colimit-descent] on this tail and transport across the specified colimit isomorphism to obtain a bounded finite projective complex P_j with scalar extension P. Sheafify P_j on the affine stage. Its projective terms are locally summands of finite free modules, so the result is perfect. Flatness of these terms computes its derived pullback by termwise scalar extension, giving the isomorphism to E for the canonical map. The tail index supplies j≥i. For U empty, Z and all its base changes are empty. Module sheaves and their derived categories on the empty space have only the zero object up to unique isomorphism; the zero object at j=i is perfect and descends E. This also covers zero rings and an empty affine source.",
+   "text": "The tail is nonempty, containing i, and directed by common upper bounds. Apply exists_finite_projective_model_of_directed_colimit to obtain j and Pj with its boundedness, finiteness, projectivity and scalar-extension isomorphism.",
    "uses": [
-    "lem-pc-affine-perfect-colimit-descent",
-    "def-pc-perfect-complex",
-    "def-pc-derived-pullback"
+    "lem-pc-affine-perfect-colimit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify Pj using the explicit stage realization; it is perfect and its pullback is the limit realization of its scalar extension. Apply the limit realization functor to the algebraic complex isomorphism and compose this with the model isomorphism to E. The tail index yields j≥i and its map is definitionally the one in PerfectDescentOnOpen.",
+   "uses": [
+    "lem-pc-affine-descent-stage-realization",
+    "def-pc-perfect-descent-on-open"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-affine-bounded-projective",
-  "def-pc-perfect-complex",
+  "def-pc-affine-descent-ring-diagram",
+  "lem-pc-affine-descent-colimit-model",
   "lem-pc-affine-perfect-colimit-descent",
-  "def-pc-derived-pullback"
+  "lem-pc-affine-descent-stage-realization",
+  "def-pc-perfect-descent-on-open"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RF, proof: affine case using Tags 08EB and 0BC7; empty base case of compact-open induction"
+  "by": "worker U1",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Affine case, implemented with canonical tail coordinate-ring diagram, algebraic complex descent and affine K-flat chart comparison; bottom open uses isAffineOpen_bot."
  },
  "mathlib_searches": [
   {
@@ -148,9 +155,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T072355-L-1121927",
+  "landing": "20261013T100143-L-2492034",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

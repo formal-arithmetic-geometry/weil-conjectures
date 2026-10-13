@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-affine-descent-stage-realization",
+ "kind": "statement",
+ "title": "Perfectness and canonical pullback of a fixed stage model",
+ "statement": "Let $I$ be a directed preorder, $R:I\\to\\mathrm{CommRing}$ a diagram, $c$ any cocone, $i\\in I$, $Z$ an affine scheme and $t:Z\\to\\operatorname{Spec}R_i$ a morphism. Use $F,Y,Y_j,b$ of [def-pc-affine-descent-ring-diagram] and chosen derived categories [def-pc-derived-category]. For every $j\\ge i$ and bounded finite-projective complex $P$ over $F_j$, its specified realization on $Y_j$ is perfect [def-pc-perfect-complex]. The derived pullback [def-pc-derived-pullback] along the canonical map $Y\\to Y_j$ of this realization is isomorphic to realization on $Y$ of $P\\otimes_{F_j}\\operatorname{colim}F$, using the map $\\operatorname{colim}.desc\\ b$. No choice or existence of a stage is asserted, and $c$ need not be colimiting.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF, affine case"
+ },
+ "stmt_deps": [
+  "def-pc-affine-descent-ring-diagram",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For each term choose its finite-free retract. Tilde and ordinary pullback preserve the splitting equations and finite free objects, and preserve zero terms. Restrict the termwise sheafification to the top open. These retracts and the original bounds prove strict perfectness; the exact restriction/localization comparison gives perfectness.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Projective terms are flat and a bounded complex of flat modules is K-flat. Use the proved affine K-flat chart comparison for the canonical map f:Y→Y_j to compute derived pullback of the source realization. K-flatness is supplied directly by the proved generic source-library CochainComplex.kFlat_of_bounded_of_flat, not by the separate module-bounded-flat node.",
+   "uses": [
+    "lem-pc-affine-kflat-pullback-chart-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The colimit injection a and cocone comparison r satisfy a;r=f.appTop by colimit.ι_desc. Rewrite scalar extension along f.appTop using extendScalarsComp. The ordinary tilde pullback isomorphism for r and the chart restriction comparison identify this with the target realization. Map the functor isomorphisms to complexes and apply Q; compose with mapDerivedCategoryFactors. The natural comparison used is the already proved generic Scheme.Modules.tildePullbackIso, rather than the separate elementwise base-change node.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-affine-kflat-pullback-chart-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker U1",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF, affine case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coordinate rings of affine base changes form a directed colimit and perfect complexes have bounded projective models compatible with derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes descend over a directed colimit of rings on an affine scheme",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget; AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit; AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Γ",
+   "results": "AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.Scheme.Γ_def; AlgebraicGeometry.Scheme.SpecΓIdentity; AlgebraicGeometry.Scheme.SpecΓIdentity_app; AlgebraicGeometry.Scheme.Γ_map_op; AlgebraicGeometry.Scheme.Γ_map; AlgebraicGeometry.Scheme.Γ_obj_op; AlgebraicGeometry.Scheme.Γ_obj",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*colimit|toSpecΓ|baseChangeMap",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDescentAffineOpen",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: descend the perfect object; affine case of Tag 09RF, coordinate rings and associated-sheaf comparisons",
+   "via": [
+    "lem-pc-perfect-descent-affine-open",
+    "lem-pc-perfect-complex-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDescentStageRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDescentStageRealization.lean",
+  "declaration": "AlgebraicGeometry.affine_descent_stage_realization",
+  "statement": "theorem affine_descent_stage_realization\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)\n    (Z : Scheme.{u}) [IsAffine Z] (t : Z ⟶ Spec (R.obj i))\n    [hDer : ∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{u}) (U : Y.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (j : Set.Ici i)\n    (P : CochainComplex (ModuleCat.{u} ((affineDescentRings R i t).obj j)) ℤ)\n    (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hf : ∀ n : ℤ, Module.Finite ((affineDescentRings R i t).obj j) (P.X n))\n    (hp : ∀ n : ℤ, Module.Projective ((affineDescentRings R i t).obj j) (P.X n)) :\n    (affineDescentStage R i t j).IsPerfect\n      ((affineDescentRealization (affineDescentStage R i t j)\n        ((affineDescentRings R i t).obj j) (𝟙 _)).obj P) ∧\n    Nonempty ((derivedPullback (affineDescentLimitMap R i t c j)).obj\n      ((affineDescentRealization (affineDescentStage R i t j)\n        ((affineDescentRings R i t).obj j) (𝟙 _)).obj P) ≅\n      (affineDescentRealization (pullback t (Spec.map (c.ι.app i)))\n        (colimit (affineDescentRings R i t) : CommRingCat.{u})\n        (colimit.desc _ (affineDescentRingCocone R i t c))).obj\n          (((ModuleCat.extendScalars\n            (colimit.ι (affineDescentRings R i t) j).hom).mapHomologicalComplex\n              (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100143-L-2492034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T100143-L-2492034",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
