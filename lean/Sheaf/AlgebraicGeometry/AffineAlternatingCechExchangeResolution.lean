@@ -9,11 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffineAlternatingCechModel
 public import Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.AffineOpenPushforwardAcyclic
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionCore
+import Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionExchange
 
 /-! # An alternating acyclic resolution with ordinary exchange
 
@@ -26,6 +23,7 @@ of `lem-pc-affine-alternating-cech-pinned-mate`.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option linter.unusedVariables false
 universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry
@@ -96,6 +94,10 @@ theorem exists_affineAlternatingCech_exchange_resolution
       IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}
         (moduleRings (Spec B).toRingedSpace))).map
         ((moduleHomotopyBaseChange f (pullback.snd f g) g (pullback.fst f g)
-          pullback.condition).app D)) := by sorry
+          pullback.condition).app D)) := by
+  obtain ⟨D, a, _q, ha, hpa, hα, hβ, hterms⟩ :=
+    affineAlternatingCech_resolution_core f g U hU haffine G
+  have hb := affineAlternatingCech_resolution_exchange f g G D hterms
+  exact ⟨D, a, _q, ha, hpa, hα, hβ, hb⟩
 
 end AlgebraicGeometry

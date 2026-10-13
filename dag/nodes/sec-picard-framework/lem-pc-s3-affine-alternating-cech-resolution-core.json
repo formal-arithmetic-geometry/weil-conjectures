@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02KG (affine arbitrary base change) and 02KH (finite affine Cech computation); expanded construction in the original exchange-resolution node docstring"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-affine-alternating-cech-model",
+  "def-pc-derived-direct-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 02KG (affine arbitrary base change) and 02KH (finite affine Cech computation); expanded construction in the original exchange-resolution node docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite products of affine open direct images ordinary base change Cech complex",
+   "results": "8 hits; ; AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans",
+   "results": "0 hits; ; ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategory.*[Ii]so|[Ii]so.*mapHomotopyCategory",
+   "results": "21 hits; ; Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary base change is invertible on finite products of quasi coherent affine open pushforward sheaves in a Cech resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechExchangeResolution",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-alternating-cech-exchange-resolution",
+   "place": "core and exchange substeps",
+   "via": [
+    "lem-pc-affine-alternating-cech-exchange-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "id": "lem-pc-s3-affine-alternating-cech-resolution-core",
+ "title": "Core affine alternating Cech resolution data",
+ "statement": "Fix shared derived categories [def-pc-derived-category], rings A and B, a quasi-compact separated f:X→Spec A, g:Spec B→Spec A, a finite affine open cover U:Fin r→X.Opens with supremum top, a quasi-coherent X-module G, and additive tensor pullbacks along g and p=pullback.fst f g. There exist a homotopy complex D, an augmentation a:G[0]→D, and an isomorphism q:f_*D≅the homotopy image of affineAlternatingCechModel f U G [def-pc-affine-alternating-cech-model]. The localized augmentations Qh(a) and Qh(p*(a)) and the right-derived units for f at D and pullback.snd f g at p*D are invertible. Moreover D is isomorphic to the homotopy quotient of an integer cochain complex C whose every term is isomorphic to a finite product of W_j.ι_*(G restricted to W_j) for affine opens W:Fin n→X.Opens; n=0 is allowed.",
+ "proof": [
+  {
+   "text": "Construct the increasing-tuple Cech complex, contract it by insertion of a cover index, and use affine pushforward acyclicity and derived-unit compatibility to obtain the four isomorphisms and the affine tilde comparison. Retain C as the representative and enumerate its finite increasing-tuple intersections by Fin n in each degree; negative and out-of-range degrees use the empty product.",
+   "uses": [
+    "def-pc-affine-alternating-cech-model",
+    "lem-pc-affine-open-pushforward-acyclic",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-alternating-cech-model",
+  "lem-pc-affine-open-pushforward-acyclic",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlternatingCechResolutionCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlternatingCechResolutionCore.lean",
+  "declaration": "AlgebraicGeometry.affineAlternatingCech_resolution_core",
+  "statement": "theorem affineAlternatingCech_resolution_core\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)\n    [QuasiCompact f] [IsSeparated f] (g : Spec B ⟶ Spec A)\n    {r : ℕ} (U : Fin r → X.Opens) (hU : iSup U = ⊤)\n    (haffine : ∀ i, IsAffineOpen (U i))\n    [(Scheme.Modules.tensorPullback g).Additive]\n    [(Scheme.Modules.tensorPullback (pullback.fst f g)).Additive]\n    (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] :\n    ∃ (D : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))\n      (a : (HomotopyCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G ⟶ D)\n      (q : ((Scheme.Modules.pushforward f).mapHomotopyCategory\n          (ComplexShape.up ℤ)).obj D ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n          (affineAlternatingCechModel f U G)),\n      IsIso (DerivedCategory.Qh.map a) ∧\n      IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}\n        (moduleRings (pullback f g).toRingedSpace))).map\n        (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomotopyCategory\n          (ComplexShape.up ℤ)).map a)) ∧\n      IsIso ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app D) ∧\n      IsIso ((RingedSpace.moduleDirectImage\n        (pullback.snd f g).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomotopyCategory\n            (ComplexShape.up ℤ)).obj D)) ∧\n      (∃ C : CochainComplex\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,\n        Nonempty (D ≅ (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj C) ∧\n        ∀ k : ℤ, ∃ (n : ℕ) (W : Fin n → X.Opens),\n          (∀ j, IsAffineOpen (W j)) ∧\n          Nonempty (C.X k ≅ ∏ᶜ fun j : Fin n ↦\n            (Scheme.Modules.pushforward (W j).ι).obj (G.restrict (W j).ι)))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-76fe2",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T015611-L-3026025",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-76fe2",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T015611-L-3026025",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature and proof with its node, both new theorem signatures with their nodes and source arguments, and the recorded dependencies; all three modules and direct importer Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate compile cleanly, with only standard axioms and the two declared sorry dependencies."
+ }
+}
