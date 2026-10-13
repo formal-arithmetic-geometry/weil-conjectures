@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-derived-arrow",
+ "kind": "statement",
+ "title": "Localized tensor comparison as a derived arrow functor",
+ "statement": "Let R, A, B and C be commutative rings in a universe u, with R-algebra structures on A and B, and an E-algebra structure on C, where E=A tensor_R B. Assume derived categories of R-, A- and B-modules [def-weil-abstract-derived-category]. Let F be termwise extension from A along A to E to C. Let Q be an A-K-flat cochain complex, N any C-cochain complex, and t:F(Q) to N a chain map. Assume C is flat over E. For each integer i there exists a functor H:D(A) to Arrow(ModuleCat C) such that for every A-K-flat complex U and every base-derived tensor cohomology model mU of U tensor_A Q [def-pc-base-derived-tensor-cohomology-model], the arrow mU.localizedComparison(i) followed by H^i(mu_F(U,Q) inverse followed by identity of F(U) tensor t) is isomorphic in the arrow category to H(Q_A(U)). Here Q_A is the localization functor, and mu_F is the monoidal scalar-extension isomorphism as used in [def-pc-localized-tensor-comparison-property]. No retract, comparison invertibility or hypothesis on N is assumed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 (derived change of rings), Tag 0BYJ (functorial tensor rebracketing), and perfect.tex Tag 0DJ7 (equation-bc), used by Tag 0DJA(1)"
+ },
+ "proof": [
+  {
+   "text": "Use functorial A-K-flat resolutions for tensor with Q. Restrict to R and apply derived extension to B. The degree-i cohomology has a canonical tensor-algebra action: multiplication by A on the input commutes with the B action, and both agree on R. On morphisms the derived maps commute with multiplication by A and B, hence tensor induction makes them E-linear. Extend this cohomology functor from E to C to obtain the source functor S on D(A). The affine tensor cohomology lift provides the coefficient-linear functors and comparison on complexes; localization gives their derived version.",
+   "uses": [
+    "def-pc-ring-tensor-cohomology",
+    "lem-pc-affine-tensor-cohomology-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the target T on D(A), extend scalars to C on A-K-flat resolutions, tensor with N and take degree-i homology. Scalar extension preserves K-flatness. A quasi-isomorphism between the resulting C-K-flat complexes remains a quasi-isomorphism after tensor with arbitrary N. Thus these degree-i maps invert the K-flat resolution quasi-isomorphisms, including unbounded complexes and non-K-flat N. Homotopic maps induce the same homology map, so roofs give a well-defined functor T.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived coefficient chain comparison gives a map from derived R-to-B tensor to derived A-to-C extension, restricted to B. Its naturality at multiplication by A gives E-linearity on homology. Transpose via E-to-C extension/restriction adjunction and compose with the scalar-extension monoidal comparison followed by identity tensor t. This defines a natural transformation S to T. For a chain map f between K-flat U and V, the tensorator identity delta_U followed by F(f) tensor identity equals F(f tensor identity) followed by delta_V, and the whisker-exchange identity moves t past F(f); these give the final comparison square. For roof denominators the source and target maps are invertible. Compose with their inverses to get the square on derived morphisms. Common refinements preserve the square, and functoriality of the derived coefficient map gives identity and composition compatibility. Regard the natural transformation as an arrow-valued functor H, with H.map(f) given by these two component maps.",
+   "uses": [
+    "lem-pc-base-tensor-derived-chain-comparison",
+    "def-pc-localized-tensor-comparison-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-flat U, tensor with the K-flat Q computes its derived tensor. For every model mU, uniqueness of its universal counit identifies its cohomology with the source functor. Naturality at A-multiplication and B-linearity make the identification E-linear; extend it to C to obtain an isomorphism e. The target K-flat computation gives an isomorphism d from H^i(F(U) tensor N) to T(Q(U)). The ordinaryIso and ordinaryToLocalized generator equations force the canonical coefficient maps. Substitute comparison_eq and localized_eq, and use adjunction naturality: they yield alpha_U followed by d.hom equals e.hom followed by the component of the derived comparison. The existing localized model independence and quasi-isomorphism comparison squares verify invariance under changes of model and resolution. Arrow.isoMk(e,d) is the claimed isomorphism. Neither alpha_U nor t is presumed invertible.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
+    "lem-pc-base-derived-tensor-model-quasiiso-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-localized-tensor-comparison-property",
+  "def-pc-ring-tensor-cohomology",
+  "lem-pc-affine-tensor-cohomology-lifts",
+  "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
+  "lem-pc-base-derived-tensor-model-quasiiso-comparison",
+  "lem-pc-base-tensor-derived-chain-comparison",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6, 0BYJ and perfect.tex equation-bc (0DJ7); M1 makes explicit the naturality/model-realization step of retract closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural derived tensor comparison is a functor from the derived category to the arrow category",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison between derived tensor cohomology functors determines a functor to the arrow category",
+   "results": "Eight Tor/Tor-prime hits, involving projective resolutions and naturality, no total unbounded derived comparison with coefficient localization.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Arrow",
+   "results": "Zero hits.",
+   "date": "2026-10-14",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Cc]omparison|[Cc]omparison.*tensor in Mathlib/Algebra/Homology/DerivedCategory and CategoryTheory/Comma/Arrow.lean; localized comparison naturality in Sheaf and WeilConjectures",
+   "results": "No Mathlib specialized match. Sheaf has representative isomorphism squares and base coefficient derived chain comparisons, but no localized tensor comparison arrow functor. Blueprint search tensor comparison found two unrelated nodes, completed Frobenius structures and constant tensor.",
+   "date": "2026-10-14",
+   "verdict": "No existing statement supplies the required graph functor and all-model realizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore",
+  "date": "2026-10-14",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: the single-complex base-change condition inherited by derived tensor products, localizing/retract argument; natural comparison identification",
+   "via": [
+    "lem-pc-localized-tensor-comparison-closure-retracts-core",
+    "lem-pc-localized-tensor-comparison-closure-retracts",
+    "lem-pc-localized-tensor-comparison-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonDerivedArrow.lean",
+  "declaration": "ModuleCat.exists_localizedTensorComparison_derived_arrow",
+  "statement": "theorem exists_localizedTensorComparison_derived_arrow\n    (hC : Module.Flat (A ⊗[R] B) C)\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) :\n    ∃ H : DerivedCategory (ModuleCat.{u} A) ⥤ Arrow (ModuleCat.{u} C),\n      ∀ (U : CochainComplex (ModuleCat.{u} A) ℤ),\n      (∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n        (CochainComplex.mapBifunctor V U (curriedTensor _)).Acyclic) →\n      ∀ mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C,\n      let F := (extendScalars.{u, u, u}\n        ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n          (.up ℤ)\n      Nonempty (Arrow.mk (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≅\n          H.obj (DerivedCategory.Q.obj U))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T190144-L-3217550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T190144-L-3217550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
