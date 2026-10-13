@@ -11203,3 +11203,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/X3/Sheaf.Paper.CechRefinementCochainMap (stage 3; reviewer PASS; first push; landing 20261013T045620-L-141376 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.BoundedComplexTensorProperSupportBound (stage 3; reviewer PASS; first push; landing 20261013T045621-L-141473 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange (stage 3; reviewer PASS; first push; landing 20261013T045621-L-141619 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:59 L: returned deliver/A2/Sheaf.Algebra.Homology.HomTensorDegreewise (reviewer RETURN: (reviewer X-e239e, head e239eacfd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Hom)
