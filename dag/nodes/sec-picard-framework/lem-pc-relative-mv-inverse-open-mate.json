@@ -19,32 +19,47 @@
  },
  "proof": [
   {
-   "text": "Write j=W.ι, j'=(g'⁻¹W).ι, p=pullback.fst g' j, v=pullback.snd g' j,\nand s=pullbackRestrictIsoRestrict g' W. The equations s.hom≫j'=p and\ns.hom≫(g'.resLE W (g'⁻¹W) le_rfl)=v identify the inverse-image square with\nthe chosen pullback square. Transpose the displayed composites under the pinned\nadjunction for p≫f'. For the left side, expand mvBaseChangeOpenMap and both of\nits base-change factors as adjoints of pulled-back counits (08HY). Expand the\nsource exact-open comparison into left-adjoint uniqueness and direct-image\ncomposition. The unit and counit identities of left-adjoint uniqueness replace\nexact restriction by Lj. On the target, relativeMVInverseOpenIso is Rf' of\nleft-adjoint uniqueness followed by iso-open transport and direct-image\ncomposition. Iso-open transport uses the unit of Ls⊣Rs and right-adjoint\nuniqueness for (Lj'⊣Rj') composed with (Ls⊣Rs), transported along Ls Lj'≅Lp.\nIts right-adjoint uniqueness counit equation replaces the counit for p by the\ncomposite counit, and the s unit cancels by the triangle identity. Substitute\nthe composite-adjunction counit for j≫f. Naturality moves φ to the final factor;\nthe j and f' triangle identities cancel the inserted unit-counit pairs.\nAssociativity of the fixed pullback comparisons, first for s,j',g' and then\nfor p,f',g, identifies the remaining comparisons with Lv Lj≅Lp Lg'. The two\nprojection equations supply exactly the equality transport in relativeMVLocalArrow.\nThe remaining source comparison is Lg of relativeMVExactOpenIso, and the\nremaining morphism is the counit transpose defining relativeMVLocalArrow.hom.\nInjectivity of the composite Hom equivalence gives the equation. For W empty,\nW top, zero K or K', and zero φ the same natural transformation identities\napply; no affine, flat, cover or quasi-coherence assumption is used.",
+   "text": "Expand mvBaseChangeOpenMap and the specified inverse-open comparison. Apply the proved coefficient transport on X′ inside Rf′.",
    "uses": [
-    "lem-pc-relative-mv-inverse-open-iso",
-    "def-pc-derived-base-change-map",
     "def-pc-rf-mv-base-change-components",
-    "def-pc-relative-mv-maps",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-relative-mv-exact-open-comparison",
-    "lem-weil-pbc-open-preimage-fibre-product"
+    "lem-pc-relative-mv-inverse-open-iso",
+    "lem-pc-relative-mv-open-coefficient-transport"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use coefficient naturality of the global base-change map to move the exact-to-pinned W comparison to the source. Naturality of relativeMVImageComp moves the coefficient arrow through the target composition comparison.",
+   "uses": [
+    "lem-pc-derived-base-change-coefficient-naturality",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply horizontal pasting to W.ι,f,p,f′,g,g′,v and LW K, then postcompose with R(p≫f′) of the coefficient arrow. Functoriality combines the two source factors into Lg of relativeMVExactOpenIso; the target composite is the defining relativeMVLocalArrow.",
+   "uses": [
+    "lem-pc-derived-base-change-horizontal",
+    "lem-pc-relative-mv-exact-open-comparison",
+    "def-pc-relative-mv-maps",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-base-change-map",
   "def-pc-relative-mv-maps",
   "def-pc-rf-mv-base-change-components",
+  "lem-pc-derived-base-change-coefficient-naturality",
+  "lem-pc-derived-base-change-horizontal",
   "lem-pc-relative-mv-exact-open-comparison",
   "lem-pc-relative-mv-inverse-open-iso",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-weil-pbc-open-preimage-fibre-product"
+  "lem-pc-relative-mv-open-coefficient-transport"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08HZ and 08HY; explicit adjunction calculation by M3, with open fibre-product identification of Schemes Tag 01JR"
+  "place": "Tags 08HY and 08HZ; T4 second reading: proved open coefficient transport, coefficient naturality and horizontal pasting"
  },
  "mathlib_searches": [
   {
@@ -124,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T171512-L-1981357",
+  "landing": "20261013T190157-L-3222297",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

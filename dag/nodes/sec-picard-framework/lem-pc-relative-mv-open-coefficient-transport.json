@@ -1,0 +1,146 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY (remark-base-change), using Tag 0D5S (lemma-derived-pullback-composition)"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVInverseOpenMate",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-relative-mv-open-coefficient-transport",
+ "title": "Coefficient transport for one inverse-image open",
+ "statement": "Assume derived module categories on all schemes [def-pc-derived-category]. Let g′:X′→X, W an open of X, K in D(O_X), K′ in D(O_X′) and φ:Lg′ K→K′. Put p=pullback.fst g′ W.ι and v=pullback.snd g′ W.ι. The exact-open base-change component [def-pc-rf-mv-base-change-components], before application of any structure-map direct image, followed by relativeMVInverseOpenLocalizationIso(g′,W,K′).hom [lem-pc-relative-mv-inverse-open-iso], equals Lg′ applied to RW of the exact-to-pinned left-adjoint uniqueness comparison, followed by BC(W.ι,p,g′,v) at LW K, then Rp applied to c(v,W.ι).hom, the pullback equality transport, c(p,g′).inv and Lp φ. Here BC is [def-pc-derived-base-change-map], and c and the pinned adjunctions are [def-pc-relative-mv-maps]. This identity is on X′ and has no structure maps f,f′ or second base change g.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-relative-mv-inverse-open-iso"
+ ],
+ "proof": [
+  {
+   "text": "The localization comparison sends the exact-open unit to the p unit. Expand its exact-to-pinned comparison; left-adjoint uniqueness sends the first unit to the pinned open unit. The isomorphism transport then sends this to the p unit by the unit equation of right-adjoint uniqueness applied to the transported composite adjunction. These are private iso_open_transport_unit and inverse_open_localization_unit.",
+   "uses": [
+    "lem-pc-relative-mv-inverse-open-iso",
+    "def-pc-relative-mv-maps",
+    "def-pc-rf-mv-base-change-components"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction to W inverts its own unit. Pullback/restriction comparison shows that exact restriction to the inverse open inverts Lg′ of that unit. Postcompose with pullback along pullbackRestrictIsoRestrict and use its first projection identity and the pinned comparison to conclude that Lp inverts Lg′ of the unit.",
+   "uses": [
+    "lem-pc-scheme-derived-open-unit-restriction-iso",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-relative-mv-maps",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Adjunction transposition and cancellation of the invertible Lp-image make precomposition by Lg′ of the exact-open unit injective into Rp objects. On the exact side use mvOpenBaseChange_unit followed by localization-unit preservation. On the pinned side use left-adjoint uniqueness to replace the exact unit, then transpose the defining single-square base-change mate. Naturality of the square comparison and the left triangle identity cancel its unit and counit; the inverse square comparison cancels and naturality of the target unit leaves φ followed by the p unit. The precomposites agree, hence so do the original maps. Empty and top opens and zero objects or φ are included.",
+   "uses": [
+    "lem-pc-rf-mv-open-base-change-unit",
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "lem-pc-relative-mv-inverse-open-iso",
+  "lem-pc-rf-mv-open-base-change-unit",
+  "lem-pc-scheme-derived-open-unit-restriction-iso",
+  "lem-weil-pbc-open-preimage-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY (remark-base-change), using Tag 0D5S (lemma-derived-pullback-composition); second-reader reduction by T4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two maps into the direct image of an open are equal if their precompositions with the open restriction unit are equal",
+   "date": "2026-10-14",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.appLE_map', AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.Scheme.Hom.app_eq, AlgebraicGeometry.Scheme.app_eq, AlgebraicGeometry.Scheme.Hom.map_appLE', TopCat.Presheaf.pullbackObjObjOfImageOpen, TopCat.Presheaf.ext, TopologicalSpace.Opens.mapIso_hom_app",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*leftAdjointUniq|isIso_map_iff",
+   "date": "2026-10-14",
+   "results": "12 hits: Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open localization comparison by adjunction unit injectivity for derived sheaves",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: compare the pasted open base-change mate with the local component",
+   "via": [
+    "lem-pc-relative-mv-inverse-open-mate",
+    "lem-pc-relative-mv-inverse-open-comparisons",
+    "lem-pc-relative-mv-pinned-vertex-comparisons",
+    "lem-pc-relative-mv-cone-presentation",
+    "lem-pc-relative-mv-pinned-triangle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVOpenCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVOpenCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_open_coefficient_transport",
+  "statement": "theorem relativeMV_open_coefficient_transport\n    {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (W : X.Opens) :\n    schemeDerivedBaseChangeMap W.ι (g' ⁻¹ᵁ W).ι g'\n        (g'.resLE W (g' ⁻¹ᵁ W) le_rfl) (Scheme.Hom.resLE_comp_ι g' le_rfl)\n        ((schemeOpenRestriction X W).mapDerivedCategory.obj K) ≫\n      (schemeDerivedDirectImage (g' ⁻¹ᵁ W).ι).map\n        ((mvPullbackOpenRestrictionIso g' W).inv.app K ≫\n          (schemeOpenRestriction X' (g' ⁻¹ᵁ W)).mapDerivedCategory.map φ) ≫\n      (relativeMVInverseOpenLocalizationIso g' W K').hom =\n    (derivedPullback g').map ((schemeDerivedDirectImage W.ι).map\n        (((mvOpenRestrictionAdjunction X W).leftAdjointUniq\n          (relativeMVAdj W.ι)).hom.app K)) ≫\n      schemeDerivedBaseChangeMap W.ι (pullback.fst g' W.ι) g'\n        (pullback.snd g' W.ι) (pullback.condition (f := g') (g := W.ι)).symm\n        ((derivedPullback W.ι).obj K) ≫\n      (schemeDerivedDirectImage (pullback.fst g' W.ι)).map\n        ((relativeMVComp (pullback.snd g' W.ι) W.ι).hom.app K ≫\n          eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n            (pullback.condition (f := g') (g := W.ι)).symm) ≫\n          (relativeMVComp (pullback.fst g' W.ι) g').inv.app K ≫\n          (derivedPullback (pullback.fst g' W.ι)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190157-L-3222297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190157-L-3222297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

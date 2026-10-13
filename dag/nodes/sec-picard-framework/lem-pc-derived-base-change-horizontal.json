@@ -1,0 +1,121 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY (remark-base-change), using Tag 0D5S (lemma-derived-pullback-composition)"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVInverseOpenMate",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-derived-base-change-horizontal",
+ "title": "Horizontal pasting of canonical derived base-change maps",
+ "statement": "Assume derived module categories on every scheme [def-pc-derived-category]. Let j:A→X, f:X→S, j′:A′→X′, f′:X′→S′, g:S′→S, g′:X′→X and v:A′→A satisfy g′≫f=f′≫g and v≫j=j′≫g′. For every E in D(O_A), the canonical base-change maps [def-pc-derived-base-change-map] obey BC(f,f′,g,g′)(Rj E)≫Rf′(BC(j,j′,g′,v)(E))≫relativeMVImageComp(j′,f′).hom at Lv E = Lg(relativeMVImageComp(j,f).hom at E)≫BC(j≫f,j′≫f′,g,v)(E), with relativeMVImageComp as defined in [def-pc-relative-mv-maps]. No square need be cartesian and no arrow need be an open immersion.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "Transpose under the adjunction for j′≫f′, transporting it to the composite j′ and f′ adjunction by the right-adjoint uniqueness equation defining relativeMVImageComp. Expand both inner base-change maps as counit transposes. Naturality moves the inner transpose through the f′ counit; the triangle identity cancels the inserted unit. The two counits become the composite counit for j≫f. Transport the source through its uniqueness comparison. Associativity of the pinned derived pullback comparisons, applied to j′,f′,g and v,j,f, identifies the resulting square comparison with the outer base-change comparison; the two commutativity equations identify the equality transports, and proof irrelevance identifies their proofs. Injectivity of the composite Hom equivalence proves the displayed equality. Identity arrows, empty schemes and zero E require no exclusions. This is the scheme specialization of horizontal composition of mates, including the canonical composition comparisons.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY (remark-base-change), using Tag 0D5S (lemma-derived-pullback-composition); second-reader reduction by T4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of base change morphisms defined as adjoints of counits for composition of two right adjoints",
+   "date": "2026-10-14",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ChosenPullbacksAlong.comp, CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, PresheafOfModules.pullbackComp",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-14",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|comp.*counit",
+   "date": "2026-10-14",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "verdict": "generic support only; no exact scheme-derived statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "horizontal composition mates adjunction base change",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: compare the pasted open base-change mate with the local component",
+   "via": [
+    "lem-pc-relative-mv-inverse-open-mate",
+    "lem-pc-relative-mv-inverse-open-comparisons",
+    "lem-pc-relative-mv-pinned-vertex-comparisons",
+    "lem-pc-relative-mv-cone-presentation",
+    "lem-pc-relative-mv-pinned-triangle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontal",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeHorizontal.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedBaseChange_horizontal",
+  "statement": "theorem schemeDerivedBaseChange_horizontal\n    {A X S A' X' S' : Scheme.{u}}\n    (j : A ⟶ X) (f : X ⟶ S) (j' : A' ⟶ X') (f' : X' ⟶ S')\n    (g : S' ⟶ S) (g' : X' ⟶ X) (v : A' ⟶ A)\n    (h : g' ≫ f = f' ≫ g) (hj : v ≫ j = j' ≫ g')\n    (E : schemeDerivedCategory A) :\n    schemeDerivedBaseChangeMap f f' g g' h ((schemeDerivedDirectImage j).obj E) ≫\n        (schemeDerivedDirectImage f').map\n          (schemeDerivedBaseChangeMap j j' g' v hj E) ≫\n        (relativeMVImageComp j' f').hom.app ((derivedPullback v).obj E) =\n      (derivedPullback g).map ((relativeMVImageComp j f).hom.app E) ≫\n        schemeDerivedBaseChangeMap (j ≫ f) (j' ≫ f') g v\n          (by rw [← Category.assoc, hj, Category.assoc, h, ← Category.assoc]) E",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190157-L-3222297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T190157-L-3222297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
