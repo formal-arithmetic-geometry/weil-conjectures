@@ -1,0 +1,140 @@
+{
+ "id": "new-j3-self-ext-tor-core",
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SelfExtTorResolutionModel",
+  "date": "2026-10-14",
+  "group": "B2"
+ },
+ "title": "Core common self Ext Tor complexes",
+ "statement": "For schemes Z,Y [def-pc-scheme], a closed immersion i:Z -> Y [def-weil-closed-immersion], n in N, and the supplied derived category on Y [def-pc-derived-category], put B=i_*O_Z, S the degree-zero single functor, H=RHom_Y [def-pur-derived-internal-hom], G=H^n(H(B[0],B[0])), and Q=i*H^(-n)(B[0] tensor^L B[0]) [def-pc-module-pullback, def-pc-scheme-derived-tensor-structure]. There exist an additivity witness for i*, cochain complexes P on Y and J on Z [def-pc-cochain-complex-modules], augmentations a:P -> B[0] and b:O_Z[0] -> J which are quasi-isomorphisms [def-pc-quasi-iso-modules], P K-flat [def-pc-kflat-complex] with flat terms [def-pc-flat-sheaf-modules], and J K-injective [def-pur-kinjective-complex]. For the actual termwise tensor pullback T=i*P, there are vanishing statements H^k(J)=0 for k != 0, and isomorphisms H^0(J) with O_Z, i*G with H^n(Hom(T,J)) [def-pur-hom-complex], and Q with H^(-n)(T). No local finite-free condition is asserted here.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "def-pc-quasi-iso-modules",
+  "def-pc-scheme",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQY",
+  "place": "duality.tex, lemma-regular-ideal-ext, together with tags 08DH, 08I3, 08KS and 068G for the derived pullback, internal Hom and tensor identifications."
+ },
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution a:P -> B[0] with flat terms, and a K-injective resolution b:O_Z[0] -> J. Retain the quasi-isomorphisms and resolution properties. Tensor pullback is additive by its adjunction with pushforward. Define T as its termwise application to P, representing Li*B. The quasi-isomorphism b identifies H^0(J) with O_Z and makes other homology zero.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the internal Hom against an arbitrary derived object A. Tensor-Hom adjunction, derived pullback/direct-image adjunction and tensor comparison give the natural Yoneda isomorphism RHom_Y(B,i_*O_Z) = Ri_*RHom_Z(Li*B,O_Z). Since J is K-injective the right-hand internal Hom is represented by Hom(T,J). Closed-immersion pushforward is exact, so homology commutes with it; its fully faithful adjunction has invertible ordinary tensor-pullback counit. These yield eG. The qcqs projection formula for O_Z and the quasi-coherent B identifies B tensor^L B with i_*Li*B, since a closed immersion is affine, quasi-compact and quasi-separated. Exact pushforward and the same counit in degree -n give eQ. Transport these representative calculations to the supplied localization on Y without changing its universe.",
+   "uses": [
+    "lem-pc-derived-internal-hom-pullback-adjunction",
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-sc-closed-immersion-pushforward-exact",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-internal-hom-pullback-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pc-qcqs-derived-projection-iso-universes",
+  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "B2",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/0BQY",
+   "place": "duality.tex, lemma-regular-ideal-ext, together with tags 08DH, 08I3, 08KS and 068G for the derived pullback, internal Hom and tensor identifications."
+  },
+  "note": "B2 returned-delivery repair: augmented global resolutions followed by their local chart model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A K flat resolution of a closed immersion structure sheaf pulled back has local finite free Koszul models with zero differentials",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; not evidence that no lemma exists.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat resolution tensor pullback closed immersion Koszul finite free zero differential local model",
+   "results": "Eight general flatness/scheme declarations, none giving this resolution-model interface.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "Twelve matches including K-injectivity under homotopy equivalence and isomorphism; none gives the joint quotient Koszul model.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "selfExt|selfTor|self_ext|self_tor",
+   "results": "msearch grep returned zero Mathlib hits; repository rg found no source-library self-Ext/self-Tor model.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-self-ext-tor-resolution-model",
+   "place": "decomposition of common model proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfExtTorResolutionCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfExtTorResolutionCore.lean",
+  "declaration": "AlgebraicGeometry.exists_selfExt_tor_resolution_core",
+  "statement": "theorem exists_selfExt_tor_resolution_core\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (n : ℕ) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (n : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let Q := (Scheme.Modules.tensorPullback i).obj\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj\n          (S.obj B ⊗ S.obj B))\n    ∃ (_add : (Scheme.Modules.tensorPullback i).Additive)\n      (P : CochainComplex Y.Modules ℤ) (J : CochainComplex Z.Modules ℤ)\n      (a : P ⟶ (HomologicalComplex.single Y.Modules (.up ℤ) 0).obj B)\n      (b : (HomologicalComplex.single Z.Modules (.up ℤ) 0).obj\n        (SheafOfModules.unit Z.ringCatSheaf) ⟶ J),\n      CochainComplex.IsKFlatResolution (R := Y.sheaf) a ∧\n      (∀ k : ℤ, SheafOfModules.IsFlat (P.X k)) ∧\n      QuasiIso b ∧ J.IsKInjective ∧\n      let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P\n      ∃ (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))\n      (e0 : J.homology 0 ≅ SheafOfModules.unit Z.ringCatSheaf)\n      (eG : (Scheme.Modules.tensorPullback i).obj G ≅\n        (homComplex (R := Z.sheaf) T J).homology (n : ℤ))\n      (eQ : Q ≅ T.homology (-(n : ℤ))), True",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d645b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T190134-L-3213959",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d645b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T190134-L-3213959",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet, unchanged target signature, clean compilation, importer gate, permitted axioms, DAG, and report requirements."
+ }
+}

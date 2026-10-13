@@ -12,6 +12,8 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.SelfExtTorResolutionCore
+import Sheaf.AlgebraicGeometry.SelfExtTorResolutionLocal
 
 /-! # A common complex model for self Ext and self Tor
 
@@ -20,6 +22,7 @@ Source: Stacks Project, Tags 08DH, 08I3, 08KS, 0BQY and 068G.
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
@@ -90,6 +93,13 @@ theorem exists_selfExt_tor_resolution_model
         let W := V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)
         let Fc := moduleOpenOverComplexFunctor Z V W
         CochainComplex.IsKInjective (Fc.obj J) ∧
-          HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) := by sorry
+          HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) := by
+  dsimp
+  obtain ⟨add, P, J, a, b, hP, hflat, hb, hKI, hJ, e0, eG, eQ, _⟩ :=
+    exists_selfExt_tor_resolution_core i n
+  let := add
+  let T := ((Scheme.Modules.tensorPullback i).mapHomologicalComplex (.up ℤ)).obj P
+  refine ⟨T, J, hJ, e0, eG, eQ, ?_⟩
+  exact selfExt_tor_resolution_local i P J a b hP hflat hb hKI
 
 end AlgebraicGeometry
