@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit
+import Sheaf.AlgebraicGeometry.AffineSpectrumRepresentativeMap
+import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Termwise representatives in affine spectrum coordinates
 
@@ -17,9 +20,15 @@ Source: Stacks Project, Tags 0DJ8 and 0D5S.
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
+
+attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
+  Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
+
 
 /-- Spectrum transport can be represented by the actual termwise tensor pullbacks.
 This only constructs representatives; it asserts no stalk condition or comparison
@@ -59,6 +68,63 @@ theorem exists_affineSpectrum_coordinate_representatives
       d.P = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
         (.up ℤ)).obj c.P ∧
       d.N = ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex
-        (.up ℤ)).obj c.N := by sorry
+        (.up ℤ)).obj c.N := by
+  classical
+  let P₀ : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) ℤ :=
+    ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj c.P
+  let N₀ : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec Γ(X', ⊤)).toRingedSpace)) ℤ :=
+    ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).obj c.N
+  have hP₀ : CochainComplex.IsKFlat (R := (Spec Γ(X, ⊤)).sheaf) P₀ := by
+    have h := CochainComplex.isKFlat_pullback X.isoSpec.inv.base
+      (Spec Γ(X, ⊤)).sheaf X.sheaf ⟨X.isoSpec.inv.c⟩ c.P c.isKFlat
+    convert h using 1
+    with_unfolding_all rfl
+  have hcP := isIso_counit_of_isIso X.isoSpec.inv c.P
+  have hcN := isIso_counit_of_isIso X'.isoSpec.inv c.N
+  let e : DerivedCategory.Q.obj P₀ ≅ affineSpectrumDerivedObject X K :=
+    ((DerivedCategory.quotientCompQhIso _).app P₀).symm ≪≫
+      (asIso ((counit X.isoSpec.inv).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P))).symm ≪≫
+      (derivedPullback X.isoSpec.inv).mapIso
+        ((DerivedCategory.quotientCompQhIso _).app c.P) ≪≫
+      (derivedPullback X.isoSpec.inv).mapIso c.e
+  let e' : DerivedCategory.Q.obj N₀ ≅ affineSpectrumDerivedObject X' K' :=
+    ((DerivedCategory.quotientCompQhIso _).app N₀).symm ≪≫
+      (asIso ((counit X'.isoSpec.inv).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N))).symm ≪≫
+      (derivedPullback X'.isoSpec.inv).mapIso
+        ((DerivedCategory.quotientCompQhIso _).app c.N) ≪≫
+      (derivedPullback X'.isoSpec.inv).mapIso c.e'
+  let a : Scheme.Modules.tensorPullback X.isoSpec.inv ⋙
+        Scheme.Modules.tensorPullback (Spec.map g'.appTop) ≅
+        Scheme.Modules.tensorPullback g' ⋙ Scheme.Modules.tensorPullback X'.isoSpec.inv :=
+    (Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv
+      ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫
+    Scheme.Modules.tensorPullbackCompositionIso X'.isoSpec.inv g'
+      ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm
+  let t : ((Scheme.Modules.tensorPullback (Spec.map g'.appTop)).mapHomologicalComplex
+        (.up ℤ)).obj
+      (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+        (.up ℤ)).obj c.P) ⟶
+      ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex
+        (.up ℤ)).obj c.N :=
+      (NatIso.mapHomologicalComplex a (.up ℤ)).hom.app c.P ≫
+    ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex (.up ℤ)).map c.t
+  have ht := affineSpectrum_representative_map_eq g' K K' φ c e e'
+    (by simp [e]; rfl) (by simp [e']; rfl)
+  let d : Coordinates (Spec.map g'.appTop)
+      (affineSpectrumDerivedObject X K) (affineSpectrumDerivedObject X' K')
+      (affineSpectrumDerivedMorphism g' K K' φ) :=
+    { P := P₀
+      N := N₀
+      e := e
+      e' := e'
+      isKFlat := hP₀
+      counit_isIso := counit_isIso_kFlat (Spec.map g'.appTop) P₀ hP₀
+      t := t
+      represents := ht }
+  exact ⟨d, rfl, rfl⟩
 
 end AlgebraicGeometry.SingleComplexBaseChange

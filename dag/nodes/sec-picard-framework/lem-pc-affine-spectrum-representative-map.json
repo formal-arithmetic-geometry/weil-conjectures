@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-spectrum-representative-map",
+ "kind": "statement",
+ "title": "Counit compatibility of the explicit affine spectrum chain map",
+ "statement": "Let $X,X\\prime$ be affine schemes [def-pc-scheme], $g\\prime:X\\prime\\to X$, and $c=(P,N,e_c,e_c\\prime,t_c)$ Coordinates for $\\phi: L(g\\prime)^*K\\to K\\prime$ [def-pc-single-complex-base-change-stalk-condition]. Put $j=X.\\mathrm{isoSpec}^{-1}$ and $j\\prime=X\\prime.\\mathrm{isoSpec}^{-1}$. Let $e:Q(j^*P)\\simeq Lj^*K$ and $e\\prime:Q(j\\prime{}^*N)\\simeq Lj\\prime{}^*K\\prime$ be isomorphisms whose inverses equal the derived images of $e_c^{-1}$ and $e_c\\prime{}^{-1}$ followed by the pinned counits and the canonical quotient/localization comparison maps. Compose the inverse of the tensor-pullback composition comparison for $(\\operatorname{Spec}(g\\prime_{\\mathrm{top}}),j)$ with the composition comparison for $(j\\prime,g\\prime)$ transported along inverse-spectrum naturality [def-pc-tensor-pullback-composition-iso], and denote its termwise component at $P$ by $a_P$. Then the explicit chain map $t_0=j\\prime{}^*t_c\\circ a_P$ satisfies $\\epsilon_{\\operatorname{Spec}(g\\prime_{\\mathrm{top}}),j^*P}\\,Q(t_0)\\,e\\prime= L(\\operatorname{Spec}(g\\prime_{\\mathrm{top}}))^*(e)\\,\\phi_0$, where $\\phi_0$ is the explicitly transported coefficient morphism [def-pc-affine-spectrum-derived-coordinates].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-tensor-pullback-composition-iso",
+  "def-pc-affine-spectrum-derived-coordinates"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Derived pullback, composition; Tag 0DJ8 affine reduction; Tag 0098 stalk formula"
+ },
+ "proof": [
+  {
+   "text": "Inverse-spectrum naturality identifies the two composite scheme maps. Apply the stated underived composition comparisons termwise and compose with pullback of c.t; this is the explicit t0 in the Lean statement.",
+   "uses": [
+    "def-pc-tensor-pullback-composition-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the two derived composition comparisons in affineSpectrumDerivedPullbackIso by their leftDerivedLift factorization equations. Those equations identify the composite of the two successive pinned counits and Q of each underived composition comparison with the corresponding composite derived counit.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use counit naturality on c.e.inv and c.eprime.inv and quotientCompQhIso naturality on c.t. Substitute the two prescribed inverse equations for e and eprime. The remaining equation is the derived image of c.represents. Cancel the isomorphisms e and eprime to obtain the required equation for the explicit t0.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-affine-spectrum-derived-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-affine-spectrum-derived-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Expansion of the counit-compatible affine spectrum transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a chain map representing a derived pullback morphism to the canonical affine spectrum schemes compatibly with the left derived composition counits",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a chain map representing a derived pullback morphism to the canonical affine spectrum schemes compatibly with the left derived composition counits",
+   "results": "Eight hits including Scheme.isPullback_toSpecΓ_toSpecΓ, pullbackSpecIso_hom_base and Scheme.Modules.pullbackPushforwardAdjunction. None gives the chain-level representing equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSpec|quotientCompQhIso|mapHomologicalComplexCompIso",
+   "results": "msearch grep returned 25 hits including Functor.mapHomologicalComplexCompIso and quotientCompQhIso; local rg additionally found tensorPullbackCompositionIso and isoSpec_inv_naturality. None states the full representing equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateRepresentatives",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine reduction: termwise representative transport and compatibility with derived pullback counits",
+   "via": [
+    "lem-pc-affine-spectrum-coordinate-representatives",
+    "lem-pc-affine-spectrum-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumRepresentativeMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumRepresentativeMap.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.affineSpectrum_representative_map_eq",
+  "statement": "theorem affineSpectrum_representative_map_eq\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']\n    (g' : X' ⟶ X) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (c : Coordinates g' K K' φ)\n    (e : (DerivedCategory.Q.obj\n      (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.P) : schemeDerivedCategory (Spec Γ(X, ⊤))) ≅\n      affineSpectrumDerivedObject X K)\n    (e' : (DerivedCategory.Q.obj\n      (((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.N) : schemeDerivedCategory (Spec Γ(X', ⊤))) ≅\n      affineSpectrumDerivedObject X' K')\n    (he : e.inv = (derivedPullback X.isoSpec.inv).map c.e.inv ≫\n      (derivedPullback X.isoSpec.inv).map\n        ((DerivedCategory.quotientCompQhIso _).inv.app c.P) ≫\n      (counit X.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.P) ≫\n      (DerivedCategory.quotientCompQhIso _).hom.app _)\n    (he' : e'.inv = (derivedPullback X'.isoSpec.inv).map c.e'.inv ≫\n      (derivedPullback X'.isoSpec.inv).map\n        ((DerivedCategory.quotientCompQhIso _).inv.app c.N) ≫\n      (counit X'.isoSpec.inv).app ((HomotopyCategory.quotient _ (.up ℤ)).obj c.N) ≫\n      (DerivedCategory.quotientCompQhIso _).hom.app _) :\n    let a : Scheme.Modules.tensorPullback X.isoSpec.inv ⋙\n        Scheme.Modules.tensorPullback (Spec.map g'.appTop) ≅\n        Scheme.Modules.tensorPullback g' ⋙ Scheme.Modules.tensorPullback X'.isoSpec.inv :=\n      (Scheme.Modules.tensorPullbackCompositionIso (Spec.map g'.appTop) X.isoSpec.inv\n        ((Spec.map g'.appTop) ≫ X.isoSpec.inv) rfl).symm ≪≫\n      Scheme.Modules.tensorPullbackCompositionIso X'.isoSpec.inv g'\n        ((Spec.map g'.appTop) ≫ X.isoSpec.inv) (Scheme.isoSpec_inv_naturality g').symm\n    let t : ((Scheme.Modules.tensorPullback (Spec.map g'.appTop)).mapHomologicalComplex\n        (.up ℤ)).obj\n      (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.P) ⟶\n      ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).obj c.N :=\n      (NatIso.mapHomologicalComplex a (.up ℤ)).hom.app c.P ≫\n      ((Scheme.Modules.tensorPullback X'.isoSpec.inv).mapHomologicalComplex\n        (.up ℤ)).map c.t\n    (counit (Spec.map g'.appTop)).app\n          ((HomotopyCategory.quotient _ (.up ℤ)).obj\n            (((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex\n              (.up ℤ)).obj c.P)) ≫\n        (DerivedCategory.Q (C := SheafOfModules.{u}\n          (moduleRings (Spec Γ(X', ⊤)).toRingedSpace))).map t ≫ e'.hom =\n        (derivedPullback (Spec.map g'.appTop)).map e.hom ≫\n          affineSpectrumDerivedMorphism g' K K' φ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3b4fb",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T142900-L-499164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3b4fb",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T142900-L-499164",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered packet, DAG records, Lean files, change record, report, and direct importer against the stage-3 brief; all delivered files and the adapted direct importer compile without errors or warnings, with only the named compatibility theorem sorry remaining."
+ }
+}

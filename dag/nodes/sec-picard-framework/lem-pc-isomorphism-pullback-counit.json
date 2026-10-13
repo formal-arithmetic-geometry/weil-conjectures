@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-isomorphism-pullback-counit",
+ "kind": "statement",
+ "title": "Invertibility of the pinned tensor-pullback counit along scheme isomorphisms",
+ "statement": "Let $j:Y\\to Z$ be an isomorphism of schemes [def-pc-scheme], with chosen derived categories [def-pc-derived-category]. For any complex $M$ of structure-sheaf modules, the pinned homotopy-category counit $Lj^*Q_h(M)\\to Q_h(j^*M)$ [def-pc-single-complex-base-change-stalk-condition] is invertible. No K-flatness or boundedness hypothesis on $M$ is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Derived pullback, composition; Tag 0DJ8 affine reduction; Tag 0098 stalk formula"
+ },
+ "proof": [
+  {
+   "text": "Since j is an isomorphism it is an open immersion. The tensor-pullback adjunction and the exact open-restriction adjunction have the same right adjoint, so left-adjoint uniqueness identifies tensor pullback with exact restriction.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take a K-flat resolution P to M. Tensor pullback preserves its quasi-isomorphism by exactness. The derived-pullback computation makes its counit invertible at P, and left-derived uniqueness transfers this assertion to the pinned counit.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the naturality square for P to M, the two localized vertical maps and the counit at P are invertible. Therefore the counit at M is invertible by cancellation.",
+   "uses": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Expansion of the counit-compatible affine spectrum transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived pullback counit along a scheme isomorphism is invertible on every complex",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback along an isomorphism of schemes is exact and the derived counit on every complex is invertible",
+   "results": "Eight hits including Scheme.Modules.pullbackComp and pullbackIso; none states invertibility of the pinned derived counit.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*counit|IsIso.*counit|tensorPullback.*Exact",
+   "results": "msearch grep returned 25 hits, mostly abstract adjunction counits. Further local rg found exact open restriction in WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel and left-derived uniqueness in Mathlib; these prove the new lemma with a K-flat resolution.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpectrumCoordinateRepresentatives",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine reduction: termwise representative transport and compatibility with derived pullback counits",
+   "via": [
+    "lem-pc-affine-spectrum-coordinate-representatives",
+    "lem-pc-affine-spectrum-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IsomorphismPullbackCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphismPullbackCounit.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.isIso_counit_of_isIso",
+  "statement": "theorem isIso_counit_of_isIso\n    [d : ∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]\n    (M : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :\n    IsIso ((counit j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3b4fb",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T142900-L-499164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-3b4fb",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T142900-L-499164",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered packet, DAG records, Lean files, change record, report, and direct importer against the stage-3 brief; all delivered files and the adapted direct importer compile without errors or warnings, with only the named compatibility theorem sorry remaining."
+ }
+}
