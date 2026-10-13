@@ -13146,3 +13146,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:27 L: returned deliver/B2/Sheaf.CategoryTheory.DerivedSourceComparisonInjective (reviewer RETURN: (reviewer X-5a4c5, head 5a4c5e766) H1 / brief point 4: Move sourceExtMap and derivedSourceComparison_ext_compatibility, )
 
 - 00:31 L: batch 20261013T162406 dependency take-out
+- 16:35 L: merged deliver/B3/Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormula (stage 3; reviewer PASS; first push; landing 20261013T163533-L-1619350 (interface); batch 20261013T163531; modules 3; new nodes 2)

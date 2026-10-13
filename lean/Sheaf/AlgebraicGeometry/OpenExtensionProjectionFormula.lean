@@ -6,10 +6,8 @@ Authors: SHEAF group H4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.OpenExtensionDerivedAdjunction
+import Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormulaAux
 
 /-! # Projection formula for open extension by zero
 Source: Stacks Project, Tags 08BS, 01AK and 06YB.
@@ -40,6 +38,9 @@ local instance openExtensionProjectionStandardDerived (X : Scheme.{u}) (U : X.Op
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
+set_option maxHeartbeats 1000000 in
+-- The derived-category elaboration needs a larger reduction budget.
+set_option linter.style.haveILetI false in
 /-- Exact extension by zero satisfies the tensor projection formula for any
 strong monoidal structure on the specified derived restriction functor.
 
@@ -87,6 +88,12 @@ theorem exists_openExtension_projectionFormula (X : Scheme.{u})
           ∀ (A : schemeDerivedCategory U.toScheme) (K : schemeDerivedCategory X),
             IsIso ((adj.homEquiv (A ⊗ R.obj K) (J.obj A ⊗ K)).symm
               ((adj.unit.app A ⊗ₘ 𝟙 (R.obj K)) ≫
-                (Functor.Monoidal.μIso R (J.obj A) K).hom)) := by sorry
+                (Functor.Monoidal.μIso R (J.obj A) K).hom)) := by
+  dsimp
+  intro m
+  letI := m
+  obtain ⟨J, adj, _⟩ := exists_openExtension_derivedAdjunction X U
+  refine ⟨J, adj, ?_⟩
+  exact openExtension_projection_formula_of_adjunction X U m J adj
 
 end AlgebraicGeometry
