@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-affine-localized-derived-sheafification",
+ "kind": "statement",
+ "title": "Full derived affine sheafification on the localized open site",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, and $R=\\Gamma(U,\\mathcal O_X)$. Choose derived categories [def-weil-abstract-derived-category] of $R$-modules and of sheaf modules on the localized site over $U$. For the explicit affine sheafification functor $F_U$ of [lem-pc-affine-perfect-module-model], there is a full functor $G:D(R)\\to D(\\mathcal O_U)$ and a natural isomorphism $G\\circ Q\\cong Q\\circ F_U^{\\bullet}$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, Lemma 36.3.5, affine equivalence followed by localized-site transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "Choose the standard derived category for sheaf modules on Spec R. Apply the core affine derived equivalence to R, obtaining its termwise tilde factorization. Compose the equivalence functor with the full quasi-coherent subcategory inclusion.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this functor with the derived affine-site transport equivalence. Both equivalences and the full subcategory inclusion are full, so the composite is full. Whisker the core factorization with transport and compose its comparison using the functor associator.",
+   "uses": [
+    "lem-pc-affine-localized-site-derived-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-affine-qcoh-derived-equivalence-core",
+  "lem-pc-affine-localized-site-derived-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, Lemma 36.3.5, affine equivalence followed by localized-site transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine sheafification derived category fully faithful localized open site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived morphism between bounded perfect complexes on affine scheme represented by chain map",
+   "results": "AlgebraicGeometry.AffineScheme.ofHom, DerivedCategory.left_fac, DerivedCategory.right_fac, AlgebraicGeometry.AffineSpace.functor_obj_map, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, CategoryTheory.Abelian.Ext.hom",
+   "date": "2026-10-12",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Ff]ull|perfect_affine_map|exists_Q_map_eq",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean",
+   "date": "2026-10-12",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: represent the derived arrow between strictly perfect affine witnesses by a chain map",
+   "via": [
+    "lem-pc-perfect-affine-map-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalizedDerivedSheafification.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_localized_derived_sheafification",
+  "statement": "theorem affine_localized_derived_sheafification (X : Scheme.{u}) (U : X.Opens)\n    (hU : IsAffineOpen U)\n    [HasDerivedCategory.{wR} (ModuleCat.{u} (X.presheaf.obj (.op U)))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    ∃ G : DerivedCategory (ModuleCat.{u} (X.presheaf.obj (.op U))) ⥤\n        DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)),\n      G.Full ∧ Nonempty (DerivedCategory.Q ⋙ G ≅\n        (affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ) ⋙\n          DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

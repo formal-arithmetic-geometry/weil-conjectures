@@ -27,53 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Transport the localized site to the affine scheme $U\\cong\\operatorname{Spec}(R)$. Each term of the transported $A^\\bullet$ and $B^\\bullet$ is a retract of a finite free sheaf, hence quasi-coherent. The affine tilde/global-sections adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction] recovers these terms by its counit. Taking sections termwise constructs bounded complexes $P^\\bullet,Q^\\bullet$ of finite projective $R$-modules: map the finite-free retract equations to sections. The counit is natural in the differentials, hence yields actual complex isomorphisms $\\widetilde P\\cong A$ and $\\widetilde Q\\cong B$.",
+   "text": "Use affine_perfect_module_model on A and B to obtain actual complexes P and T, a proof that P is K-projective, and complex isomorphisms eA:F(P)~A and eB:F(T)~B. These module models are proved by actual termwise global sections, not chosen as data of a definition.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-affine-perfect-module-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Conjugate $f$ by these complex isomorphisms. The factorization isomorphism of [lem-pc-affine-qcoh-derived-equivalence] identifies the resulting arrow with an arrow between the images of $Q(P)$ and $Q(Q)$ in the full quasi-coherent derived subcategory. Its fully faithful inclusion and the equivalence lift the arrow to $D(R)$. By [lem-pc-ring-derived-map-representative], since $P$ is bounded above and projective, this lift has a chain-map representative $\\beta:P\\to Q$.",
+   "text": "Obtain the full derived sheafification G and comparison c:Q followed by G ~ F followed by Q. Form a=c(P) followed by Q(eA) and b=c(T) followed by Q(eB). Fullness gives g with G(g)=a.hom followed by f followed by b.inv. Apply CochainComplex.IsKProjective.exists_Q_map_eq from WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective to obtain beta:P->T with Q(beta)=g.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-localized-derived-sheafification",
     "lem-pc-ring-derived-map-representative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Sheafify $\\beta$ termwise, conjugate by the complex counit isomorphisms, and transport back to the localized site. Naturality of the factorization isomorphism for the affine equivalence shows that the image of this chain map under $Q$ is the original $f$. This proof uses actual complexes of sections; it chooses no object from an undetermined existence theorem. In the empty affine case all objects and arrows vanish.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pc-affine-qcoh-derived-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
-   }
+   "text": "Define alpha=eA.inv followed by F(beta) followed by eB.hom. Naturality of c identifies Q(F(beta)) with c(P).inv followed by G(g) followed by c(T).hom. Substitute the fullness equation and cancel the comparison and complex isomorphisms. Functor.map_comp, associativity and the iso cancellation identities prove Q(alpha)=f.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-ring-derived-map-representative",
-  "def-weil-abstract-derived-category"
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-affine-localized-derived-sheafification",
+  "lem-pc-ring-derived-map-representative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+  "place": "Tag 08CR, second proof, with Tag 06Z0; explicit affine sections models, K-projective representatives, and comparison naturality"
  },
  "mathlib_searches": [
   {
@@ -139,12 +121,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T194144-L-465996",
+  "landing": "20261013T011924-L-2762235",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

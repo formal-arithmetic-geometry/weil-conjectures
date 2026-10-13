@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-affine-perfect-module-model",
+ "kind": "statement",
+ "title": "Actual K-projective module models on affine opens",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open and $R=\\Gamma(U,\\mathcal O_X)$. Define $F_U:\\mathrm{Mod}_R\\to\\mathrm{Mod}(\\mathcal O_U)$ by tilde on $\\operatorname{Spec}(R)$ [lem-weil-pbc-affine-tilde-gamma-adjunction], restriction along $U\\cong\\operatorname{Spec}(R)$, and the equivalence with the localized site. For each strictly perfect complex $K$ [def-pc-perfect-complex] on that localized site, there exists a K-projective complex $P$ of $R$-modules and an actual complex isomorphism $F_U(P)\\cong K$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR, second proof; affine realization using Tag 06Z0 and the tilde adjunction (Tags 01I7 and 01HV)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sheaf equivalence E by restriction along isoSpec.hom with inverse restriction along isoSpec.inv, using restrictFunctorComp and restrictFunctorId for unit and counit. Compose with overEquiv.inverse. Set F = tilde followed by E and H = E.inverse followed by moduleSpecGammaFunctor. Compose the tilde adjunction with E.toAdjunction.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define P by applying H termwise to K. Identify F of every finite free module with the finite free sheaf via tildeFinsupp, restrictUnitIso, overEquivFunctorObjUnitIso and mapFreeIso. The counit is invertible on these sheaves, since the tilde unit and the E unit are invertible. Naturality makes its component on each retract K.X n a retract arrow of the free component. Isomorphisms are closed under retract arrows, so every counit component is invertible.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Applying H to each finite-free retract exhibits P.X n as a retract of a free module: H of the free sheaf is isomorphic to the free module by H.mapIso and the adjunction unit. Retract.projective gives projectivity of each term. H preserves zero objects, so the upper support bound of K gives IsStrictlyLE P b. Apply CochainComplex.isKProjective_of_projective. The termwise counit is an isomorphism of complexes by HomologicalComplex.Hom.isIso_of_components, and mapHomologicalComplexIdIso identifies its target with K.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-perfect-complex",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR, second proof; affine realization using Tag 06Z0 and the tilde adjunction (Tags 01I7 and 01HV)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strictly perfect affine complexes global sections K projective module model",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.isKProjective_of_projective",
+   "results": "CochainComplex.isKProjective_of_projective",
+   "date": "2026-10-13",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_isIso_of_retract|overEquivFunctorObjUnitIso|Retract.projective",
+   "results": "Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean, Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+   "date": "2026-10-12",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: represent the derived arrow between strictly perfect affine witnesses by a chain map",
+   "via": [
+    "lem-pc-perfect-affine-map-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectModuleModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectModuleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_perfect_module_model",
+  "statement": "theorem affine_perfect_module_model (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hK : IsStrictlyPerfect X U K) :\n    ∃ P : CochainComplex (ModuleCat.{u} (X.presheaf.obj (.op U))) ℤ,\n      P.IsKProjective ∧\n      Nonempty (((affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ)).obj P\n        ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

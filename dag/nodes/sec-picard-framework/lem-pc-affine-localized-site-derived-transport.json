@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-affine-localized-site-derived-transport",
+ "kind": "statement",
+ "title": "Derived transport from the affine spectrum to the localized open site",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, $R=\\Gamma(U,\\mathcal O_X)$, and choose derived categories [def-weil-abstract-derived-category] of sheaf modules on $\\operatorname{Spec}(R)$ and on the localized site over $U$. There is an equivalence $E:D(\\mathcal O_{\\operatorname{Spec}(R)})\\simeq D(\\mathcal O_U)$ with a natural isomorphism $E\\circ Q\\circ\\widetilde{(-)}^{\\bullet}\\cong Q\\circ F_U^{\\bullet}$, where $F_U$ is the explicit affine sheafification functor described in [lem-pc-affine-perfect-module-model].",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+  "place": "isLocalizedEquivalence_of_unit_of_unit and isEquivalence; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, mapDerivedCategoryFactors; affine-site identification in Tag 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "proof": [
+  {
+   "text": "Build the ordinary sheaf equivalence from restriction along isoSpec.hom and isoSpec.inv, and then overEquiv.inverse, exactly as in the construction of F_U. Equivalences preserve limits and colimits and therefore binary biproducts; additive_of_preservesBinaryBiproducts supplies additivity.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mapHomologicalComplexUpToQuasiIsoLocalizerMorphism for the functor and inverse. The unit and inverse counit of their complex equivalence are pointwise quasi-isomorphisms. Apply LocalizerMorphism.isLocalizedEquivalence_of_unit_of_unit and isEquivalence to the derived functor with the square given by mapDerivedCategoryFactors. Use asEquivalence to bundle it.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker mapDerivedCategoryFactors with termwise tilde, then compose with mapHomologicalComplexCompIso and associators. Since F_U is the actual composite tilde followed by the sheaf equivalence, this produces the stated natural comparison.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-perfect-module-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+  "place": "isLocalizedEquivalence_of_unit_of_unit and isEquivalence; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, mapDerivedCategoryFactors; affine-site identification in Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact equivalence of sheaf module categories induces derived equivalence compatible with sheafification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact equivalence of abelian categories induces equivalence of derived categories",
+   "results": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, HasDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-13",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalizedEquivalence_of_unit_of_unit|mapDerivedCategoryFactors",
+   "results": "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfFunctorialResolutions.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-13",
+   "verdict": "component API found; no exact match for the localized affine statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: represent the derived arrow between strictly perfect affine witnesses by a chain map",
+   "via": [
+    "lem-pc-perfect-affine-map-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalizedSiteDerivedTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalizedSiteDerivedTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_localized_site_derived_transport",
+  "statement": "theorem affine_localized_site_derived_transport (X : Scheme.{u}) (U : X.Opens)\n    (hU : IsAffineOpen U)\n    [HasDerivedCategory.{wS} (SheafOfModules.{u}\n      (moduleRings (Spec (X.presheaf.obj (.op U))).toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :\n    ∃ E : DerivedCategory (SheafOfModules.{u}\n        (moduleRings (Spec (X.presheaf.obj (.op U))).toRingedSpace)) ≌\n        DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)),\n      Nonempty ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n        (@id (ModuleCat.{u} (X.presheaf.obj (.op U)) ⥤\n          SheafOfModules.{u}\n            (moduleRings (Spec (X.presheaf.obj (.op U))).toRingedSpace))\n          (tilde.functor (X.presheaf.obj (.op U)))) ⟨fun _ _ ↦ tilde.map_zero⟩\n          (.up ℤ) ⋙ DerivedCategory.Q) ⋙ E.functor ≅\n        (affinePerfectSheafification X U hU).mapHomologicalComplex (.up ℤ) ⋙\n          DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T011924-L-2762235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
