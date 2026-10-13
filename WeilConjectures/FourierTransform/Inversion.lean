@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.FourierTransform.AffineSpace
+public import WeilConjectures.FourierTransform.AffineSpace.Convolution
 
 /-!
 
@@ -95,8 +96,17 @@ theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponen
             (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ⁻¹ (stdPairing n S))) ≅
         (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
           ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
-            (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))) :=
-  sorry
+            (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))) := by
+  rw [kernelConvolution_eq]
+  obtain ⟨e₁⟩ := nonempty_iso_fourierKernel_convolution_integrand Λ n S Ψ
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedLowerShriek_tripleProj₁₃_tripleShear Λ n S
+    ((DerivedCategory.singleFunctor _ 0).obj
+      (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
+  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedLowerShriek_fourierKernel Λ n S Ψ hΨ
+  obtain ⟨e₄⟩ := nonempty_iso_leftDerivedUpperStar_sub_tateObject Λ n S
+  exact ⟨(R(pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+      (𝔸(n; S) ↘ S))_![ModuleCat.{u + 1} Λ]).mapIso e₁ ≪≫ e₂ ≪≫
+    (L((sub n S)^*[ModuleCat.{u + 1} Λ])).mapIso e₃ ≪≫ e₄⟩
 
 /-- **Fourier inversion.** On `𝔸(n; S)` the Fourier–Deligne transform for the inverse
 character inverts the Fourier–Deligne transform up to the Tate twist `(-r)`,
