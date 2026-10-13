@@ -16,35 +16,55 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pc-open-derived-localization-adjunction] for the common Hom universe on each open subscheme. Compute direct image of the restricted K-injective representative using [def-pc-open-image-complex-comparison-iso]. The exact derived factorization [lem-weil-pbc-exact-functor-derived-factorization] carries the open-site equivalence to a derived equivalence. Uniqueness of right adjoints transports the comparison to the supplied G and adj, and apply the restriction of the representative isomorphism e.",
+   "text": "For every open T, use [lem-pc-open-derived-localization-adjunction] to supply the open-scheme localization in Hom universe w. Use the constructed K-injective comparison [def-pc-open-image-complex-comparison-iso] and its unit identity [lem-pc-open-image-complex-comparison-unit] for the derived underived adjunction. Exact derived composition [lem-weil-pbc-exact-functor-derived-factorization] identifies scheme restriction with localized restriction followed by the derived open-site equivalence. Restrict the adjunction through this fully faithful functor using Mathlib Adjunction.restrictFullyFaithful; its unit formula is the original unit followed by direct image of the composition isomorphism. Compose the comparison with that same isomorphism and rightAdjointUniq for the supplied adj T. The unit_rightAdjointUniq_hom_app identity proves that the resulting comparison c_T carries Q of the concrete unit to the supplied unit.",
    "uses": [
     "lem-pc-open-derived-localization-adjunction",
     "def-pc-open-image-complex-comparison-iso",
+    "lem-pc-open-image-complex-comparison-unit",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-pc-open-image-complex-comparison-restriction] for each nested inclusion. Exact derived composition identifies the transported nested comparison with derivedOpenHomRestriction. The unique right-adjoint comparison preserves counits and is natural; the transpose of identity is the supplied counit. Thus the localized concrete restriction is precisely the adj W transpose of the restricted transpose of identity. Naturality in e gives the claimed identity for E.",
+   "text": "Define e_T by c_T followed by G_T of R_T(e). Naturality of the supplied unit shows Q(eta_T);e_T = e;unit(adj T)_E. Each normalized comparison is uniquely determined by this unit condition, since applying R_T to Q(eta_T) is invertible by the next step.",
    "uses": [
-    "lem-pc-open-image-complex-comparison-restriction",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For i:W into T, prove R_W(Q(eta_T)) invertible. Underived open direct image is fully faithful. Thus the left triangle and invertibility of its counit imply invertibility of schemeOpenRestriction T applied to eta_T in each degree. Restrict further and transport through schemeOpenRestrictionCompIso [def-pc-derived-open-restriction-maps]. The open-site equivalence reflects invertibility, giving invertibility on the localized W site. The map of complexes is invertible degreewise; exact localization and its natural factorization [lem-weil-pbc-exact-functor-derived-factorization] give the required derived invertibility. Transposition through adj W therefore permits cancellation of Q(eta_T) in maps into G_W.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
+    "def-pc-derived-open-restriction-maps",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Precompose both proposed maps with Q(eta_T). The concrete identity eta_T;rho_TW=eta_W [def-pc-kinjective-mayer-vietoris-data] and the normalized unit identities reduce the left side to e;unit(adj W)_E. On the right, naturality of the nested localized restriction comparison changes R_W(unit(adj T)_E) followed by the restricted counit into the restriction of the T left triangle, hence identity. Adjunction homEquiv naturality and homEquiv_id give unit(adj T)_E followed by the W-mate of its restricted counit equal to unit(adj W)_E. The transpose of identity is precisely the counit. This proves the precomposed equality; cancellation from the preceding step proves the original equality.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data",
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data",
   "def-pc-open-image-complex-comparison-iso",
   "lem-pc-open-derived-localization-adjunction",
-  "lem-pc-open-image-complex-comparison-restriction",
+  "lem-pc-open-image-complex-comparison-unit",
+  "lem-sc-derived-hom-mayer-vietoris",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U3",
+  "group": "D4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "note": "Adapted from Stacks Tags 08BV, 08BS and 079W; tag pages read directly because the local literature checkout contains only citation indexes."
+  "note": "Stacks Tags 08BV, 08BS and 079W read from their official pages; localized comparison follows from the existing constructed open-scheme comparison and its unit identity. Nested compatibility is proved by cancellation after smaller restriction, replacing the planned open-scheme restriction-comparison dependency."
  },
  "mathlib_searches": [
   {
@@ -118,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T130036-L-3924157",
-  "kind": "interface",
+  "landing": "20261013T142854-L-496756",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
