@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-colimit-site-abelian-kan-unit-relations",
+ "kind": "lemma",
+ "title": "Eventual equality of abelian Kan unit images",
+ "statement": "Let $J$ be a small filtered category [def-weil-pbc-category-colimit], $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone whose object and arrow cocones are set colimits [def-weil-pbc-arrows-functor]. Fix $i\\in J$ and put $I=(i\\downarrow J)$; for $t\\in I$ write $v_t=V_{t.right}$ and $f_t=F(t.hom)$. Fix $t\\in I$ and $U\\in F(t.right)$. For every $r\\in I$ give an abelian presheaf $A_r$ on $F(r.right)$ and, for every $b:t\\to r$, a natural transformation $\\theta_b:A_t\\to F(b.right)^{op}\\circ A_r$. Give an abelian presheaf $K$ on $V.pt$ and $\\beta:A_t\\to v_t^{op}\\circ K$ exhibiting $K$ as a left Kan extension (composition with $\\beta$ bijects maps from $K$ to any presheaf $T$ with maps from $A_t$ to $v_t^{op}\\circ T$). If $x,x'\\in A_t(U)$ satisfy $\\beta(U)(x)=\\beta(U)(x')$, there are $r\\in I$ and $b:t\\to r$ with $\\theta_b(U)(x)=\\theta_b(U)(x')$. No coherence among different $\\theta_b$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of the section presentation; abelian colimits as in sites-modules.tex Tag 03CO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the pointwise abelian Kan cocone. The quotient-of-direct-sums map Quot.desc to this cocone point is injective: Quot.desc_toCocone_desc_app supplies a left inverse from its universal property. Equality of the two beta unit images therefore gives equality of the corresponding quotient generators. QuotientAddGroup.eq_iff_sub_mem puts their difference in the subgroup of relations.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write the relation subgroup as the closure of the range of all single-arrow differences. AddSubgroup.exists_finsupp_of_mem_closure_range gives a finitely supported integer linear combination. Include both endpoints of every supported relation, together with the unit object, in the finite set of objects. Apply the finite restriction-family lifting theorem to these objects and the supported arrows; the costructured-arrow equations give its triangles.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-finite-restriction-family-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each selected object corestrict theta_b along its lifted restriction arrow, obtaining an additive homomorphism to A_r(F(b.right)U). Set this map to zero at unselected objects and extend over the direct sum with DFinsupp.sumAddHom. Naturality of theta_b and each lifted triangle make the supported single-arrow differences vanish. Applying this additive map to the finite integer linear combination makes the difference of the two unit sections zero. The lifted unit arrow is an isomorphism, so cancel its restriction map to conclude equality of theta_b(x) and theta_b(x').",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-site-finite-restriction-family-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of the section presentation; abelian colimits as in sites-modules.tex Tag 03CO; F2 complete Lean proof from Mathlib"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of two unit images in an abelian left Kan extension is detected after transporting to a later category",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of two unit images in an abelian left Kan extension is detected after transporting to a later category",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.leftKanExtension_hom_ext_iff, CategoryTheory.Functor.leftKanExtension_hom_ext, CategoryTheory.Functor.leftKanExtensionUnique_hom, CategoryTheory.Functor.leftKanExtensionUnique, CategoryTheory.Functor.hom_ext_of_isLeftKanExtension, CategoryTheory.Functor.leftKanExtensionUniqueOfIso, CategoryTheory.Functor.leftKanExtensionUniqueOfIso_hom, CategoryTheory.Functor.isLeftKanExtension_iff_isIso",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Quot.desc_toCocone_desc_app|eq_iff_sub_mem|Relations",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/Modular.lean:40, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean:13, Mathlib/NumberTheory/FactorisationProperties.lean:19, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean:239, Mathlib/NumberTheory/Height/MvPolynomial.lean:402, Mathlib/NumberTheory/EllipticDivisibilitySequence.lean:40, Mathlib/NumberTheory/EllipticDivisibilitySequence.lean:42, Mathlib/NumberTheory/RamificationInertia/Valuation.lean:24, Mathlib/NumberTheory/Cyclotomic/Gal.lean:14, Mathlib/Logic/Relation.lean:21, Mathlib/Logic/Relation.lean:23, Mathlib/Logic/Relation.lean:155, Mathlib/Logic/Relation.lean:217, Mathlib/Logic/Pairwise.lean:13, Mathlib/Logic/Pairwise.lean:15, Mathlib/NumberTheory/Real/GoldenRatio.lean:210, Mathlib/NumberTheory/Real/GoldenRatio.lean:218, Mathlib/NumberTheory/Real/GoldenRatio.lean:223, Mathlib/NumberTheory/Real/GoldenRatio.lean:235, Mathlib/Logic/Relator.lean:32, Mathlib/Logic/Encodable/Basic.lean:57, Mathlib/Logic/Hydra.lean:31, Mathlib/Topology/Algebra/InfiniteSum/Basic.lean:401, Mathlib/Topology/Algebra/InfiniteSum/Basic.lean:404, Mathlib/Topology/Algebra/InfiniteSum/Basic.lean:420",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionEvaluation",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-abelian-section-evaluation",
+   "place": "Steps 2 and 3: equality of Kan unit images after one refinement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteAbelianKanUnitRelations",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteAbelianKanUnitRelations.lean",
+  "declaration": "CategoryTheory.raw_abelian_section_kan_unit_relations",
+  "statement": "theorem raw_abelian_section_kan_unit_relations\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (t : Under i)\n    (A : ∀ r : Under i, (F.obj r.right)ᵒᵖ ⥤ AddCommGrpCat.{u})\n    (θ : ∀ (r : Under i) (b : t ⟶ r),\n      A t ⟶ (F.map b.right).toFunctor.op ⋙ A r)\n    (K : V.ptᵒᵖ ⥤ AddCommGrpCat.{u})\n    (β : A t ⟶ (V.ι.app t.right).toFunctor.op ⋙ K)\n    (hβ : K.IsLeftKanExtension β)\n    (U : F.obj t.right) :\n    ∀ (x x' : (A t).obj (op U)), β.app (op U) x = β.app (op U) x' →\n      ∃ (r : Under i) (b : t ⟶ r),\n        (θ r b).app (op U) x = (θ r b).app (op U) x'",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

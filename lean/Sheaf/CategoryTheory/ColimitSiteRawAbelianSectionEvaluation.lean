@@ -14,6 +14,11 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+import Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionGenerators
+import Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionRelations
 
 /-! # ColimitSiteRawAbelianSectionEvaluation
 
@@ -132,6 +137,123 @@ theorem colimit_site_raw_abelian_section_evaluation
         Arrow.mk (R.ι.app t ≫ q.hom ≫
           (colimit.desc B (Cocone.mk T γ)).app
             (op ((V.ι.app i).toFunctor.obj U))) =
-        Arrow.mk ((E t).hom ≫ (a t).app (op ((F.map t.hom).toFunctor.obj U))) := by sorry
+        Arrow.mk ((E t).hom ≫ (a t).app (op ((F.map t.hom).toFunctor.obj U))) := by
+  have _ := hθ
+  have hpre : ∀ {A B C D : AddCommGrpCat.{u}} (f : A ⟶ B) (g : A ⟶ C),
+      Arrow.mk f = Arrow.mk g → (k : D ⟶ A) →
+        Arrow.mk (k ≫ f) = Arrow.mk (k ≫ g) := by
+    intro A B C D f g h k
+    obtain ⟨hA, hB, hf⟩ := (Arrow.mk_eq_mk_iff f g).mp h
+    apply (Arrow.mk_eq_mk_iff _ _).mpr
+    refine ⟨rfl, hB, ?_⟩
+    simp [hf, Category.assoc]
+  have hpost : ∀ {C : Type u} [SmallCategory C]
+      {S T : C ⥤ AddCommGrpCat.{u}} (δ : S ⟶ T) {A : AddCommGrpCat.{u}} {Y Z : C},
+      Y = Z → (f : A ⟶ S.obj Y) → (g : A ⟶ S.obj Z) →
+      Arrow.mk f = Arrow.mk g →
+      Arrow.mk (f ≫ δ.app Y) = Arrow.mk (g ≫ δ.app Z) := by
+    intro C _ S T δ A Y Z e f g h
+    subst Z
+    rw [Arrow.mk_injective _ _ h]
+  let e (t : Under i) :
+      (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =
+        (V.ι.app i).toFunctor.obj U :=
+    congrArg (fun f : F.obj i ⟶ V.pt ↦ f.toFunctor.obj U) (V.w t.hom)
+  let κ (t : Under i) :
+      D.obj t ⟶ (colimit B).obj (op ((V.ι.app i).toFunctor.obj U)) :=
+    (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫
+      (colimit.ι B t).app
+        (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫
+      eqToHom (congrArg (fun X ↦ (colimit B).obj (op X)) (e t))
+  have hκ {t t' : Under i} (b : t ⟶ t') : D.map b ≫ κ t' = κ t := by
+    have hU : (F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =
+        (F.map t'.hom).toFunctor.obj U := by
+      change (F.map t.hom ≫ F.map b.right).toFunctor.obj U = _
+      rw [← F.map_comp, Under.w b]
+    have hV : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =
+        (V.ι.app t'.right).toFunctor.obj
+          ((F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U)) := by
+      exact (congrArg (fun f : F.obj t.right ⟶ V.pt ↦
+        f.toFunctor.obj ((F.map t.hom).toFunctor.obj U)) (V.w b.right)).symm
+    have h₁ := hpre _ _ (hβmap t t' b ((F.map t.hom).toFunctor.obj U))
+      (E t).hom
+    have h₂ := hpost (colimit.ι B t') (congrArg op hV) _ _ h₁
+    have h₃ := hpost (β t') (congrArg op hU) _ _ (hm t t' b)
+    have h₄ := hpost (colimit.ι B t')
+      (congrArg (fun X ↦ op ((V.ι.app t'.right).toFunctor.obj X)) hU) _ _ h₃
+    apply Arrow.mk_injective
+    simp only [κ, ← Category.assoc, Arrow.arrow_mk_comp_eqToHom]
+    calc
+      _ = Arrow.mk (((E t).hom ≫
+          (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U)) ≫
+          (β t').app (op ((F.map b.right).toFunctor.obj
+            ((F.map t.hom).toFunctor.obj U)))) ≫
+          (colimit.ι B t').app (op ((V.ι.app t'.right).toFunctor.obj
+            ((F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))))) := by
+        simpa only [Category.assoc] using h₄.symm
+      _ = Arrow.mk (((E t).hom ≫
+          (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫
+          (B.map b).app (op ((V.ι.app t.right).toFunctor.obj
+            ((F.map t.hom).toFunctor.obj U)))) ≫
+          (colimit.ι B t').app (op ((V.ι.app t.right).toFunctor.obj
+            ((F.map t.hom).toFunctor.obj U)))) := by
+        simpa only [Category.assoc] using h₂.symm
+      _ = _ := by
+        congr 1
+        simp only [Category.assoc, ← NatTrans.comp_app, colimit.w]
+  let K : Cocone D :=
+    { pt := (colimit B).obj (op ((V.ι.app i).toFunctor.obj U))
+      ι := { app := κ, naturality := fun _ _ b ↦ by simpa using hκ b } }
+  have hformula : ∀ t : Under i,
+      ∃ e : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =
+          (V.ι.app i).toFunctor.obj U,
+        κ t = (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫
+          (colimit.ι B t).app
+            (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫
+          eqToHom (congrArg (fun X ↦ (colimit B).obj (op X)) e) :=
+    fun t ↦ ⟨e t, rfl⟩
+  have hgen := raw_abelian_section_generators
+    J F P V hobjects harrows i G θ B β hβ hβmap U D E κ (fun _ _ b ↦ hκ b) hformula
+  have hrel := raw_abelian_section_relations
+    J F P V hobjects harrows i G θ B β hβ hβmap U D E hm κ hformula
+  let R : Cocone D := colimit.cocone D
+  let μ : R.pt ⟶ K.pt := colimit.desc D K
+  have hμ (t : Under i) : R.ι.app t ≫ μ = κ t := colimit.ι_desc K t
+  have hc := isColimitOfPreserves (forget AddCommGrpCat) (colimit.isColimit D)
+  have hsurj : Function.Surjective μ := by
+    intro x
+    obtain ⟨t, y, hy⟩ := hgen x
+    refine ⟨R.ι.app t y, ?_⟩
+    exact (ConcreteCategory.congr_hom (hμ t) y).trans hy
+  have hinj : Function.Injective μ := by
+    intro x y h
+    obtain ⟨t, x', hx⟩ := Types.jointly_surjective_of_isColimit hc x
+    obtain ⟨t', y', hy⟩ := Types.jointly_surjective_of_isColimit hc y
+    change R.ι.app t x' = x at hx
+    change R.ι.app t' y' = y at hy
+    have hh : κ t x' = κ t' y' := by
+      rw [← ConcreteCategory.congr_hom (hμ t) x',
+        ← ConcreteCategory.congr_hom (hμ t') y']
+      change μ (R.ι.app t x') = μ (R.ι.app t' y')
+      rwa [hx, hy]
+    obtain ⟨r, b, c, he⟩ := hrel t t' x' y' hh
+    have hb := ConcreteCategory.congr_hom (R.ι.naturality b) x'
+    have hc' := ConcreteCategory.congr_hom (R.ι.naturality c) y'
+    rw [← hx, ← hy]
+    simpa using hb.symm.trans ((congrArg (R.ι.app r) he).trans hc')
+  have : IsIso μ := (ConcreteCategory.isIso_iff_bijective μ).mpr ⟨hinj, hsurj⟩
+  let q : R.pt ≅ K.pt := asIso μ
+  refine ⟨R, q, ⟨colimit.isColimit D⟩, ?_⟩
+  intro t
+  change Arrow.mk (R.ι.app t ≫ μ ≫ _) = _
+  rw [← Category.assoc, hμ t]
+  obtain ⟨e, he⟩ := hformula t
+  rw [he]
+  have hn := (colimit.desc B (Cocone.mk T γ)).naturality (eqToHom (congrArg op e))
+  simp only [eqToHom_map] at hn
+  rw [Category.assoc, Category.assoc, Category.assoc, hn]
+  simp only [← Category.assoc, colimit.ι_desc_app]
+  rw [Arrow.arrow_mk_comp_eqToHom, Category.assoc, ha]
+
 
 end CategoryTheory

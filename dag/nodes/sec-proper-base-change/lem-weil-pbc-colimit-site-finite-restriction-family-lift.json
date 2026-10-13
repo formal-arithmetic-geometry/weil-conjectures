@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-colimit-site-finite-restriction-family-lift",
+ "kind": "lemma",
+ "title": "Finite restriction arrows and triangles lift at one refinement",
+ "statement": "Let $J$ be a small filtered category [def-weil-pbc-category-colimit], $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone whose object and arrow cocones are set colimits [def-weil-pbc-arrows-functor]. Fix $i\\in J$ and put $I=(i\\downarrow J)$; for $t\\in I$ write $v_t=V_{t.right}$ and $f_t=F(t.hom)$. Fix $t\\in I$, $U\\in F(t.right)$, finite sets $\\alpha$ and $\\epsilon$, objects $W_q\\in F(t.right)$ for $q\\in\\alpha$, and arrows $f_q:v_t(U)\\to v_t(W_q)$. Give maps $s,d:\\epsilon\\to\\alpha$ and arrows $a_e:W_{s(e)}\\to W_{d(e)}$ with $f_{s(e)}v_t(a_e)=f_{d(e)}$. Fix $q_0\\in\\alpha$, an equality $W_{q_0}=U$, and assume $f_{q_0}$ is the identity transported along that equality. Then there are $r\\in I$, $b:t\\to r$, and arrows $g_q:F(b.right)(U)\\to F(b.right)(W_q)$ such that $g_{s(e)}F(b.right)(a_e)=g_{d(e)}$ for all $e\\in\\epsilon$, and $g_{q_0}$ is the identity transported along $F(b.right)(W_{q_0})=F(b.right)(U)$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0A35 (lemma-compute-pullback-to-limit) and 09YL (lemma-colimit-sites), finite-diagram observation and independence of the section presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the proved private lift_arrow from ColimitSiteRawSectionGenerators through a proof-only import all. It lifts a restriction arrow and aligns both prescribed endpoints at a common stage. The local lift_same_stage_arrow helper then equalizes the two arrows out of t.right to obtain a single refinement in Under i.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-section-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply that construction to every member of the finite object family. IsFiltered.wideSpan synchronizes all refinements b_q to one b. Transport the lifted arrows along F.map_comp; cocone naturality proves their images are f_q.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The prescribed triangles and base identity have equal Arrow images; reuse arrow_comp_congr from FilteredColimitFiniteIsoLift for the triangles. Apply its proved finite_stage_eq helper to the arrow-colimit family indexed by epsilon plus Unit. Functor.congr_hom transports the resulting equations to the composite refinement. Both existing private helpers are accessed through a proof-only import all, with no duplicate declarations.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-finite-iso-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-site-raw-section-generators",
+  "lem-weil-pbc-filtered-colimit-finite-iso-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of the section presentation; abelian colimits as in sites-modules.tex Tag 03CO; F2 complete Lean proof from Mathlib; repair reuses the existing private arrow lift and finite-equality/composition helpers via import all"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift finitely many arrows with prescribed stage endpoints and finitely many commuting triangles in a filtered colimit of categories",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift finitely many arrows with prescribed stage endpoints and finitely many commuting triangles in a filtered colimit of categories",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.IsFiltered.sup_exists, CategoryTheory.IsFiltered.toSup, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom, CategoryTheory.IsFiltered.toSup_commutes, CategoryTheory.IsFiltered.tulip, CategoryTheory.IsFiltered.sup, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, CategoryTheory.IsFiltered.rightToMax",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  },
+  {
+   "tool": "grep",
+   "query": "wideSpan|isColimit_eq_iff",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Category/Ring/FilteredColimits.lean:375, Mathlib/Algebra/Category/Ring/FinitePresentation.lean:54, Mathlib/Algebra/Category/Ring/FinitePresentation.lean:115, Mathlib/Algebra/Category/Ring/FinitePresentation.lean:122, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:735, Mathlib/CategoryTheory/Types/Monomorphisms.lean:57, Mathlib/CategoryTheory/Presentable/Type.lean:49, Mathlib/CategoryTheory/Presentable/Basic.lean:253, Mathlib/CategoryTheory/Presentable/Basic.lean:259, Mathlib/CategoryTheory/Presentable/Basic.lean:274, Mathlib/CategoryTheory/Presentable/Basic.lean:281, Mathlib/CategoryTheory/Presentable/Limits.lean:74, Mathlib/CategoryTheory/Presentable/Limits.lean:121, Mathlib/CategoryTheory/Presentable/Finite.lean:94, Mathlib/Order/Category/PartOrdEmb.lean:233, Mathlib/Order/Category/PartOrdEmb.lean:246, Mathlib/Order/Category/PartOrdEmb.lean:249, Mathlib/Order/Category/PartOrdEmb.lean:270, Mathlib/Order/Category/PartOrdEmb.lean:275, Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean:133, Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean:317, Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean:341, Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean:247, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean:74, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean:181",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionEvaluation",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-abelian-section-evaluation",
+   "place": "Step 2: simultaneously lift the finitely many restriction arrows and triangles of an abelian Kan relation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteFiniteRestrictionFamilyLift",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteFiniteRestrictionFamilyLift.lean",
+  "declaration": "CategoryTheory.colimit_site_finite_restriction_family_lift",
+  "statement": "theorem colimit_site_finite_restriction_family_lift\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (t : Under i) (U : F.obj t.right)\n    {α ε : Type u} [Finite α] [Finite ε]\n    (W : α → F.obj t.right)\n    (f : ∀ q, (V.ι.app t.right).toFunctor.obj U ⟶\n      (V.ι.app t.right).toFunctor.obj (W q))\n    (src dst : ε → α) (a : ∀ e, W (src e) ⟶ W (dst e))\n    (hf : ∀ e, f (src e) ≫ (V.ι.app t.right).toFunctor.map (a e) = f (dst e))\n    (q₀ : α) (hW : W q₀ = U)\n    (h₀ : f q₀ = eqToHom (congrArg (V.ι.app t.right).toFunctor.obj hW.symm)) :\n    ∃ (r : Under i) (b : t ⟶ r)\n      (g : ∀ q, (F.map b.right).toFunctor.obj U ⟶\n        (F.map b.right).toFunctor.obj (W q)),\n      (∀ e, g (src e) ≫ (F.map b.right).toFunctor.map (a e) = g (dst e)) ∧\n      g q₀ = eqToHom (congrArg (F.map b.right).toFunctor.obj hW.symm)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

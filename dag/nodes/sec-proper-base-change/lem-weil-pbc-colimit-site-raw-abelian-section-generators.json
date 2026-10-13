@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-colimit-site-raw-abelian-section-generators",
+ "kind": "lemma",
+ "title": "Stage representatives of raw abelian Kan sections",
+ "statement": "Let $J$ be a small filtered category [def-weil-pbc-category-colimit], $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone whose object and arrow cocones are set colimits [def-weil-pbc-arrows-functor]. Fix $i\\in J$ and put $I=(i\\downarrow J)$; for $t\\in I$ write $v_t=V_{t.right}$ and $f_t=F(t.hom)$. Equip each $F(j)$ with a precoverage $P_j$, with every transition functor continuous for the generated Grothendieck topologies [def-weil-pbc-sites-and-cohomology]. Fix an abelian sheaf $G$ on $F(i)$ and $U\\in F(i)$, and put $A_t=f_{t,s}G$ and $U_t=f_t(U)$. Give sheaf maps $\\theta_b:A_t\\to F(b.right)^sA_{t'}$ for all $b:t\\to t'$. Give a diagram $B:I\\to\\mathrm{PSh}(V.pt,\\mathrm{Ab})$ and left Kan units $\\beta_t:A_t\\to v_t^pB_t$ (composition with $\\beta_t$ bijects maps $B_t\\to T$ with maps $A_t\\to v_t^pT$ for every abelian presheaf $T$). Assume $\\operatorname{Arrow.mk}(\\beta_t(X)B(b)(v_tX))=\\operatorname{Arrow.mk}(\\theta_b(X)\\beta_{t'}(F(b.right)X))$ for each stage object $X$. Give a diagram $D:I\\to\\mathrm{Ab}$ with isomorphisms $E_t:D_t\\cong A_t(U_t)$. Set $Y=V_i(U)$ and $H=\\operatorname{colim}B$. Suppose $\\kappa_t:D_t\\to H(Y)$ satisfies: there is an equality $e_t:v_t(U_t)=Y$ such that $\\kappa_t$ is $E_t$, then $\\beta_t(U_t)$, then the coprojection $B_t\\to H$ at $v_t(U_t)$, then transport along $e_t$. Assume also $D(b)\\kappa_{t'}=\\kappa_t$ for every $b:t\\to t'$. Then every $x\\in H(Y)$ equals $\\kappa_t(y)$ for some $t\\in I$ and $y\\in D_t$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of the section presentation; abelian colimits as in sites-modules.tex Tag 03CO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "An individual pointwise Kan generator (W,s,f) is represented by a D section. Reuse the proved private lift_under_arrow helper from ColimitSiteRawSectionGenerators through a proof-only import all: it lifts f, aligns its prescribed endpoints by eventual object equality, and equalizes the two maps out of i. Transport s with theta, restrict along the lift, and apply E inverse. Naturality of beta and the coprojections and hbeta_map prove the kappa formula for this representative. No set-valued Kan representative assertion is applied to the abelian Kan colimit.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-raw-section-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The union S of the ranges of kappa is an additive subgroup: zero and negatives come from one stage, while a sum is represented at a common upper stage using hkappa_map and D.map additivity. For a fixed t, take the preimage of S under the evaluated coprojection B_t(Y) to H(Y). It contains every pointwise Kan generator by the preceding step.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A subgroup of the point of an abelian colimit containing every coprojection image equals the whole group. Prove this directly: corestrict the cocone legs to the subgroup, descend using IsColimit, and compose with the subgroup inclusion. Colimit hom_ext identifies this composite with the identity, so every element belongs to the subgroup. The proved private lemma colimit_mem_subgroup implements this argument. Apply it to the pointwise Kan cocone.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation and the abelian forgetful functor preserve filtered colimits. Thus every element of H(Y) comes from a B_t(Y); the preceding subgroup argument puts its image in S and gives the desired D representative.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-colimit-site-raw-section-generators",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), independence of the section presentation; abelian colimits as in sites-modules.tex Tag 03CO; F2 complete Lean proof from Mathlib; repair reuses existing private lift_under_arrow via import all"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every element of an abelian left Kan extension colimit is represented by a section at a later stage of a filtered diagram of categories",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of an abelian left Kan extension colimit is represented by a section at a later stage of a filtered diagram of categories",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension, CategoryTheory.Functor.isDenseAt_iff, CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]olimit.*[Gg]enerator|exists_finsupp_of_mem_closure_range",
+   "results": "[grep] OK 6 hit(s); Mathlib/Algebra/Group/Subgroup/Finsupp.lean:22, Mathlib/Algebra/Group/Subgroup/Finsupp.lean:44, Mathlib/Algebra/Group/Subgroup/Finsupp.lean:52, Mathlib/Algebra/Group/Submonoid/Finsupp.lean:21, Mathlib/Algebra/Group/Submonoid/Finsupp.lean:37, Mathlib/Algebra/Group/Submonoid/Finsupp.lean:45",
+   "date": "2026-10-13",
+   "verdict": "supporting results only; no exact varying-category statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionEvaluation",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-abelian-section-evaluation",
+   "place": "Step 2: every abelian Kan generator and its finite sums have stage representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawAbelianSectionGenerators",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawAbelianSectionGenerators.lean",
+  "declaration": "CategoryTheory.raw_abelian_section_generators",
+  "statement": "theorem raw_abelian_section_generators\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u})\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u}\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ AddCommGrpCat.{u}))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (U : F.obj i)\n    (D : Under i ⥤ AddCommGrpCat.{u})\n    (E : ∀ t : Under i, D.obj t ≅ ((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t.hom).toFunctor.obj U)))\n    (κ : ∀ t : Under i,\n      D.obj t ⟶ (colimit B).obj (op ((V.ι.app i).toFunctor.obj U)))\n    (hκmap : ∀ (t t' : Under i) (b : t ⟶ t'), D.map b ≫ κ t' = κ t)\n    (hκ : ∀ t : Under i,\n        ∃ e : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =\n            (V.ι.app i).toFunctor.obj U,\n          κ t =\n            (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫\n              (colimit.ι B t).app\n                (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫\n              eqToHom (congrArg (fun X => (colimit B).obj (op X)) e)) :\n    ∀ x : (colimit B).obj (op ((V.ι.app i).toFunctor.obj U)),\n      ∃ (t : Under i) (y : D.obj t), κ t y = x",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T065100-L-897247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
