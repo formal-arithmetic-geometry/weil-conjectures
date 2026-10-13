@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-internal-hom-coproduct-fan",
+ "kind": "statement",
+ "title": "Internal Hom of a coproduct is a product",
+ "statement": "For a sheaf of rings R and a family of sheaf modules M indexed by I, any colimit cofan c with point c.pt induces a limit fan whose point is internalHom(c.pt,N) and whose projections are precomposition by c.inj i.",
+ "stmt_deps": [
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma internal-hom-adjoint-tensor (Tag 03EO)"
+ },
+ "proof": [
+  {
+   "text": "Use the tensor-Hom adjunction to identify maps into internal Hom with maps out of a tensor product. Tensoring with a fixed module preserves coproducts because it is a left adjoint, and curry the descended map. Naturality gives the fan factors and the coproduct universal property gives uniqueness.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Tag 03EO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of a coproduct is a product fan for sheaf modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (IsLimit (Fan.mk (homObj _ _ _) _))",
+   "results": "Unknown identifier IsLimit; no hits",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*Cofan.*IsLimit",
+   "results": "No matches",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorSummandRestriction",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-summand-restriction-ext",
+   "place": "tensor-Hom adjunction and coproduct universal property"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/InternalHomCoproduct.lean",
+  "declaration": "SheafOfModules.internalHomCoproductFanIsLimit",
+  "statement": "theorem internalHomCoproductFanIsLimit {I : Type w} (M : I → Mod)\n    (c : Cofan M) (hc : IsColimit c) (N : Mod) :\n    Nonempty (IsLimit (Fan.mk (homObj (R := R) c.pt N)\n      (fun i ↦ homObjMap (R := R) (c.inj i) (𝟙 N))))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T054207-L-440173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T054207-L-440173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

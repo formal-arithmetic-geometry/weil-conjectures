@@ -14,31 +14,30 @@
  },
  "proof": [
   {
-   "text": "Use the tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed] to uncurry f and g into maps T^t tensor A→N. Naturality identifies the assumed internal Hom restrictions with precomposition by ι_(p,q) tensor identity_A.",
+   "text": "Use the total-degree cofan of tensor summands and the universal map constructor for HomologicalComplex.mapBifunctor; its colimit property is proved by mapBifunctor.hom_ext and the ι_mapBifunctorDesc equations.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed"
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor with A preserves coproducts: by symmetry it is isomorphic to the tensor-left functor, which has internal Hom as right adjoint. Apply the coproduct universal property to the total-degree coproduct [def-pc-tensor-complex-sheaves] after tensoring. The uncurried maps agree on every summand, so they agree. Injectivity of the tensor-Hom equivalence gives f=g. This works for all integer t and for zero summands; it does not assume that sections of sheaf tensor are sums of global pure tensors.",
+   "text": "Apply internalHomCoproductFanIsLimit to this cofan. Fan hom_ext reduces equality of maps into the internal Hom to equality after every summand inclusion, exactly the hypothesis.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves"
+    "lem-sc-internal-hom-coproduct-fan"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-internal-hom-coproduct-fan"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "N3",
+  "by": "worker",
+  "group": "A2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK and Lemma internal-hom-adjoint-tensor (Tag 03EO), with the coproduct universal property"
+  "place": "Section 03EK and Lemma internal-hom-adjoint-tensor (Tag 03EO), via the total-degree cofan and internal-Hom fan limit"
  },
  "mathlib_searches": [
   {
@@ -107,9 +106,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T040754-L-3950618",
+  "landing": "20261013T054207-L-440173",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
