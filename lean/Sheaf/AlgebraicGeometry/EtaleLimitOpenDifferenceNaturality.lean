@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
+import Sheaf.AlgebraicGeometry.EtaleLimitStageRestrictionNaturality
+import Sheaf.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality
 
 /-! # Difference of restrictions on the actual open cohomology groups
 
@@ -20,10 +22,33 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-attribute [local irreducible] upperStar openCohomologyRestriction cohomologyMap
+attribute [local irreducible] upperStar cohomologyMap Sheaf.H.map
+  CategoryTheory.Abelian.Ext.instAddCommGroup
   tailOpenCohomologyMapDegree tailOpenCohomologyLegDegree
 
 set_option backward.isDefEq.respectTransparency true
+
+private def differenceMap {A B C : Type*}
+    [AddCommGroup A] [AddCommGroup B] [AddCommGroup C]
+    (r : A →+ C) (s : B →+ C) : (A × B) →+ C where
+  toFun x := r x.1 - s x.2
+  map_zero' := by simp
+  map_add' x y := by
+    simp only [Prod.fst_add, Prod.snd_add, map_add, sub_add_sub_comm]
+
+private theorem differenceMap_natural {A B C A' B' C' : Type*}
+    [AddCommGroup A] [AddCommGroup B] [AddCommGroup C]
+    [AddCommGroup A'] [AddCommGroup B'] [AddCommGroup C']
+    (r : A →+ C) (s : B →+ C) (r' : A' →+ C') (s' : B' →+ C')
+    (tA : A →+ A') (tB : B →+ B') (tC : C →+ C')
+    (hr : ∀ x, r' (tA x) = tC (r x)) (hs : ∀ y, s' (tB y) = tC (s y))
+    (x : A) (y : B) :
+    differenceMap r' s' (tA x, tB y) = tC (differenceMap r s (x, y)) := by
+  change r' (tA x) - s' (tB y) = tC (r x - s y)
+  rw [hr, hs, map_sub]
+
+attribute [local irreducible] openCohomologyRestriction
+
 
 /-- Difference of restrictions commutes with canonical transitions and cone legs.
 
@@ -105,6 +130,45 @@ theorem tailOpenDifference_naturality
       dL ((tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ U F G eG L q j).hom x,
         (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ V F G eG L q j).hom y) =
       (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ (U ⊓ V) F G eG L q j).hom
-        (d j (x, y))) := by sorry
+        (d j (x, y))) := by
+  let r (A B : X.Opens) (h : A ≤ B) (j : Set.Ici i₀) :
+      Sheaf.H.{u + 1} ((upperStar AddCommGrpCat.{u + 1}
+        (tailStageOpen D g₀ B j).ι).obj (F j.val)) q →+
+      Sheaf.H.{u + 1} ((upperStar AddCommGrpCat.{u + 1}
+        (tailStageOpen D g₀ A j).ι).obj (F j.val)) q :=
+    openCohomologyRestriction
+      ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono h) (F j.val) q
+  let rL (A B : X.Opens) (h : A ≤ B) :
+      Sheaf.H.{u + 1} ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ B).ι).obj L.pt) q →+
+      Sheaf.H.{u + 1} ((upperStar AddCommGrpCat.{u + 1}
+        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ A).ι).obj L.pt) q :=
+    openCohomologyRestriction ((c.π.app (op i₀) ≫ g₀).preimage_mono h) L.pt q
+  have hs := tailOpenCohomologyMapDegree_restriction D F φ q g₀
+  have hl := tailOpenCohomologyLegDegree_restriction D c F G eG L q g₀
+  refine ⟨fun j ↦ differenceMap (r (U ⊓ V) U inf_le_left j)
+      (r (U ⊓ V) V inf_le_right j),
+    differenceMap (rL (U ⊓ V) U inf_le_left) (rL (U ⊓ V) V inf_le_right),
+    ?_, ?_, ?_, ?_⟩
+  · intro j x
+    rfl
+  · intro x
+    rfl
+  · intro j k f x y
+    exact differenceMap_natural
+      (r (U ⊓ V) U inf_le_left j) (r (U ⊓ V) V inf_le_right j)
+      (r (U ⊓ V) U inf_le_left k) (r (U ⊓ V) V inf_le_right k)
+      (tailOpenCohomologyMapDegree D g₀ U F φ q f).hom
+      (tailOpenCohomologyMapDegree D g₀ V F φ q f).hom
+      (tailOpenCohomologyMapDegree D g₀ (U ⊓ V) F φ q f).hom
+      (hs (U ⊓ V) U inf_le_left j k f) (hs (U ⊓ V) V inf_le_right j k f) x y
+  · intro j x y
+    exact differenceMap_natural
+      (r (U ⊓ V) U inf_le_left j) (r (U ⊓ V) V inf_le_right j)
+      (rL (U ⊓ V) U inf_le_left) (rL (U ⊓ V) V inf_le_right)
+      (tailOpenCohomologyLegDegree D c g₀ U F G eG L q j).hom
+      (tailOpenCohomologyLegDegree D c g₀ V F G eG L q j).hom
+      (tailOpenCohomologyLegDegree D c g₀ (U ⊓ V) F G eG L q j).hom
+      (hl (U ⊓ V) U inf_le_left j) (hl (U ⊓ V) V inf_le_right j) x y
 
 end AlgebraicGeometry.Etale

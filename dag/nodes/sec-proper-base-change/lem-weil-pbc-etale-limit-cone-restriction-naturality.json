@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-etale-limit-cone-restriction-naturality",
+ "kind": "statement",
+ "title": "A single nested-open restriction commutes with each canonical cohomology cone leg",
+ "statement": "Let X be a scheme [def-pc-scheme], let I be a preorder, let D:I^op → Sch be a diagram, and let F_i be abelian etale sheaves on D_i [def-weil-pbc-abelian-etale-sheaves]. Fix q≥0, i₀∈I, g₀:D_i₀→X, opens A≤B of X [def-weil-pbc-scheme-conventions], and put J=I_{≥i₀}. For W=A,B and j∈J put W_j=(D(j→i₀);g₀)^-1W. Set H_W(j)=H^q(W_j,F_j|W_j) using inverse image [def-weil-pbc-inverse-image] and etale cohomology [def-weil-pbc-etale-cohomology]. Let R_j:H_B(j)→H_A(j) be openCohomologyRestriction for the inverse-image inclusion [lem-weil-pbc-open-cohomology-whole-restriction-naturality]. Let c be a cone on D [def-weil-pbc-category-colimit], let G:I→Ab(c.pt_et), let eG_i:G_i≅c_i^*F_i be specified isomorphisms, and let L be a cocone on G. Put W_L=(c_i₀;g₀)^-1W and H_W(L)=H^q(W_L,L.pt|W_L). Let R_L:H_B(L)→H_A(L) be restriction. Let λ_W(j):H_W(j)→H_W(L) be tailOpenCohomologyLegDegree [lem-weil-pbc-etale-limit-open-cohomology-cocone-degree], with coefficient (eG_j)^-1;L_j. Then for every j and x∈H_B(j), R_L(λ_B(j)x)=λ_A(j)(R_j x). Neither c nor L is assumed universal, and no formula for arrows of G, cover, directedness, or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Functoriality of pullback and coefficient morphisms, specialized as parent proof step 1; Tag 09YQ for the restricted-system construction. Agent-written specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-limit-open-cohomology-cocone-degree",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Put f₀ = c.π.app (op j.val). The cone equation for j.val → i₀, followed by g₀, and composition of inverse-image opens give W_L = f₀⁻¹W_j for W = A and W = B. The defining equations for tailLimitOpenMap show that its compositions with the stage-open inclusions are the limit-open inclusions followed by f₀. Monicity of the stage-open inclusions identifies these maps with the restrictions of f₀, after transporting along the equalities of opens. Expand tailOpenCohomologyLegDegree and openSquareCoefficient. Using Sheaf.H.map_comp_apply, the leg on W is openCohomologyPullback f₀ W_j (F j.val) q followed by the cohomology map of the restriction of the coefficient morphism (eG j.val).inv ≫ L.ι.app j.val. Apply openCohomologyPullback_restriction to A_j ≤ B_j. Restriction commutes with this coefficient morphism: expand openCohomologyRestriction, move the morphism past cohomologyMap using cohomologyMap_map, combine the Sheaf.H.map factors, and apply naturality of the inverse upperStarComp comparison to their coefficient composites. Compose the two equalities and transport back to the supplied limit opens. Proof irrelevance identifies the inclusion and commuting-square proofs. Only the single coefficient morphism is used; no coefficient-system or cocone naturality law is needed for this square. Empty or equal opens satisfy the same calculation.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-open-cohomology-restriction-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-cohomology-restriction-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7",
+  "place": "K2: single nested-open square specialization of parent step 1; complete argument in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction between nested opens commutes with inverse system cohomology transitions and cone projection cohomology maps with arbitrary coefficient morphisms",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary nested opens A ≤ B of X, restriction from B to A on the limit inverse-image opens commutes with the actual cohomology leg from each tail stage. The coefficient map is (eG j.val).inv followed by the cocone leg. The cone and coefficient cocone need not be limiting or colimiting.",
+   "results": "Eight general presheaf or inverse-system compatibility lemmas; none concerns actual etale cohomology transitions with openSquareCoefficient.",
+   "date": "2026-10-14",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"restrict\"",
+   "results": "Only groupCohomology.exists_mul_galRestrict_of_norm_eq_one, unrelated to the scheme maps.",
+   "date": "2026-10-14",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg restriction|naturality Mathlib/CategoryTheory/Sites/SheafCohomology/*.lean; rg tail.*Restriction.*naturality lean/Sheaf; blueprint_refs.py search restriction transition cohomology and restriction cone cohomology",
+   "results": "Mathlib has fixed-site Mayer-Vietoris and degree-zero coefficient naturality; no actual tail-map specialization. The project has nested-open pullback naturality, whose transport through the concrete stage/cone coefficients is the remaining step. No blueprint duplicate.",
+   "date": "2026-10-14",
+   "verdict": "No direct match; specialize the cited dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitOpenDifferenceNaturality",
+  "date": "2026-10-14",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Single restriction square in step 1 of difference-map naturality, before subtracting the two restrictions.",
+   "via": [
+    "lem-weil-pbc-etale-limit-open-difference-naturality",
+    "lem-weil-pbc-etale-limit-open-boundary-transform",
+    "lem-weil-pbc-etale-limit-open-mayer-vietoris-maps",
+    "lem-weil-pbc-etale-limit-binary-successor-cocone-segment",
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitConeRestrictionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.tailOpenCohomologyLegDegree_restriction",
+  "statement": "theorem tailOpenCohomologyLegDegree_restriction\n    {X : Scheme.{u}} {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (L : Cocone G) (q : ℕ) {i₀ : I} (g₀ : D.obj (op i₀) ⟶ X)\n    (A B : X.Opens) (h : A ≤ B) (j : Set.Ici i₀)\n      (x : Sheaf.H.{u + 1} ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D g₀ B j).ι).obj (F j.val)) q) :\n      openCohomologyRestriction\n        ((c.π.app (op i₀) ≫ g₀).preimage_mono h) L.pt q\n        ((tailOpenCohomologyLegDegree D c g₀ B F G eG L q j).hom x) =\n      (tailOpenCohomologyLegDegree D c g₀ A F G eG L q j).hom (openCohomologyRestriction\n        ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono h) (F j.val) q x)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e3051",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T201758-L-3972741",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e3051",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T201758-L-3972741",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements, signatures, proofs, imports, change record, report, and direct importer compile all match the stage-3 review requirements; all delivered modules and EtaleLimitOpenBoundaryTransform compile without errors or warnings."
+ }
+}

@@ -21,32 +21,27 @@
  ],
  "proof": [
   {
-   "text": "Construct the additive stage and limit maps by the two restriction maps composed with product projections, subtracting the second term. Their displayed equations specify every value and determine the data uniquely by AddMonoidHom.ext. For each of the inclusions U∩V≤U and U∩V≤V after inverse image, use nested-open restriction pullback naturality and coefficient naturality. The square maps are tailStageOpenMap, with openSquareCoefficient as the coefficient comparison. Expand the inverse-image composition isomorphisms; associativity and inverse cancellation identify restriction after the transition with the intersection transition after restriction.",
-   "uses": [
-    "lem-weil-pbc-open-cohomology-restriction-naturality",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
+   "text": "Construct each difference homomorphism as x ↦ res_U(x.1) - res_V(x.2). Zero and addition are preserved by the restrictions and the abelian group subtraction identity. The displayed value formulas hold by reflexivity.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Subtract the two component equalities. Since the intersection transition is an additive homomorphism, it carries the difference to the difference. Repeat the same calculation for the cone-projection square and coefficient (eG_j)^-1;L_j; the cone equation identifies the inverse-image limit opens. This proves both displayed equations without covering hypotheses.",
+   "text": "Apply stage single-restriction naturality to U∩V ≤ U and U∩V ≤ V. Apply the proved elementary differenceMap_natural helper: substitute the two component equalities and use the intersection transition homomorphism's map_sub law. Apply cone single-restriction naturality to the same two inclusions and finish using the intersection leg's map_sub law. These are genuine component-square statements; the construction of the difference maps and the combination of the component squares are proved in the parent.",
    "uses": [
-    "lem-weil-pbc-open-cohomology-restriction-naturality",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-limit-stage-restriction-naturality",
+    "lem-weil-pbc-etale-limit-cone-restriction-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-open-cohomology-restriction-naturality"
+  "lem-weil-pbc-etale-limit-stage-restriction-naturality",
+  "lem-weil-pbc-etale-limit-cone-restriction-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0A50",
-  "place": "J3: explicit stage/cone specialization of the section-resolution construction and pullback/coefficient naturality; construction and exact equations written in the docstring. The difference data are fixed by explicit value equations, and used only inside the parent proof; no data definition chooses an arbitrary existence witness."
+  "place": "K2: explicit additive difference construction and subtraction of the stage and cone single-restriction squares; the two geometric compatibility steps remain named statements."
  },
  "mathlib_searches": [
   {
@@ -115,7 +110,7 @@
   "declaration": "AlgebraicGeometry.Etale.tailOpenDifference_naturality",
   "statement": "theorem tailOpenDifference_naturality\n    (X : Scheme.{u}) (U V : X.Opens)\n    {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (L : Cocone G) (q : ℕ) (i₀ : I) (g₀ : D.obj (op i₀) ⟶ X)\n    :\n    ∃ (d : ∀ j : Set.Ici i₀,\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ U j).ι).obj\n        (F j.val)) q ×\n       Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ V j).ι).obj\n        (F j.val)) q) →+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ (U ⊓ V) j).ι).obj\n        (F j.val)) q)\n    (dL : (Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U).ι).obj L.pt) q ×\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V).ι).obj L.pt) q) →+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        ((c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V)).ι).obj L.pt) q),\n    (∀ j x, d j x =\n      openCohomologyRestriction (X := D.obj (op j.val))\n        (A := tailStageOpen D g₀ (U ⊓ V) j) (B := tailStageOpen D g₀ U j)\n        ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono\n          (inf_le_left : U ⊓ V ≤ U)) (F j.val) q x.1 -\n      openCohomologyRestriction (X := D.obj (op j.val))\n        (A := tailStageOpen D g₀ (U ⊓ V) j) (B := tailStageOpen D g₀ V j)\n        ((D.map (homOfLE j.property).op ≫ g₀).preimage_mono\n          (inf_le_right : U ⊓ V ≤ V)) (F j.val) q x.2) ∧\n    (∀ x, dL x =\n      openCohomologyRestriction (X := c.pt)\n        (A := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V))\n        (B := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ U)\n        ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_left : U ⊓ V ≤ U)) L.pt q x.1 -\n      openCohomologyRestriction (X := c.pt)\n        (A := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ (U ⊓ V))\n        (B := (c.π.app (op i₀) ≫ g₀) ⁻¹ᵁ V)\n        ((c.π.app (op i₀) ≫ g₀).preimage_mono (inf_le_right : U ⊓ V ≤ V)) L.pt q x.2) ∧\n    (∀ (j k : Set.Ici i₀) (f : j ⟶ k)\n      (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ U j).ι).obj (F j.val)) q)\n      (y : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ V j).ι).obj (F j.val)) q),\n      d k ((tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ U F φ q f).hom x,\n        (tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ V F φ q f).hom y) =\n      (tailOpenCohomologyMapDegree D (X := X) (i₀ := i₀) g₀ (U ⊓ V) F φ q f).hom (d j (x, y))) ∧\n    (∀ (j : Set.Ici i₀)\n      (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ U j).ι).obj (F j.val)) q)\n      (y : Sheaf.H ((upperStar AddCommGrpCat.{u + 1}\n        (tailStageOpen D (X := X) (i₀ := i₀) g₀ V j).ι).obj (F j.val)) q),\n      dL ((tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ U F G eG L q j).hom x,\n        (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ V F G eG L q j).hom y) =\n      (tailOpenCohomologyLegDegree D c (X := X) (i₀ := i₀) g₀ (U ⊓ V) F G eG L q j).hom\n        (d j (x, y)))",
   "branch": "sheaf-dag",
-  "by": "J3",
+  "by": "K2",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -131,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-e3051",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T181104-L-2601848",
+  "landing": "20261013T201758-L-3972741",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, node statements, signatures, proofs, imports, change record, report, and direct importer compile all match the stage-3 review requirements; all delivered modules and EtaleLimitOpenBoundaryTransform compile without errors or warnings."
  }
 }
