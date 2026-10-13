@@ -10255,3 +10255,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:16 L: returned deliver/U1/Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness (reviewer RETURN: (reviewer X-97f0a, head 97f0aa070) the reviewer passed it, but the landing failed: etry.ChowFiniteCohomologyWitness remo)
 - 00:18 L: returned deliver/E1/Sheaf.AlgebraicGeometry.EtaleComplexCoherentFiltrations (reviewer RETURN: (reviewer X-3e332, head 3e3320d9b) C1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-complex-coherent-page-diagram)
 - 00:19 L: returned deliver/Q2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (reviewer X-39192, head 3919275b9) H8 (stage-3 review points 3–4): Bracket.lean lines 279–283 leave four sorries inside )
+- 00:20 L: merged deliver/B3/Sheaf.RingTheory.MPseudoCoherentLocalizationConeLocal (stage 3; reviewer PASS; first push; landing 20261013T002006-L-2357577 (proof); batch 20261013T002005; modules 1; new nodes 0)
