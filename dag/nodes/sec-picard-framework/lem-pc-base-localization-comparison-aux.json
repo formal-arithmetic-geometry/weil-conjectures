@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-base-localization-comparison-aux",
+ "kind": "statement",
+ "title": "Generator identity for base localization comparison",
+ "statement": "Under the compatible ring, algebra, scalar tower, derived category, localization, complex, and model hypotheses of lem-pc-base-localization-comparison, and for an ordinary-complex isomorphism tau satisfying the displayed tensor-generator formula, the composite L.localizedComparison i followed by HomologicalComplex.homologyMap tau.hom i sends every element 1 tensor x to K.localizedComparison i applied to 1 tensor the canonical base-localization cohomology map of x.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "stmt_deps": [
+  "lem-pc-base-localization-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Expand localized_eq and comparison_eq for L and K, use the universal counit equation for baseLocalizationDerivedMap, and evaluate the resulting ordinary square on the tensor generators. The hypothesis hτ identifies the ordinary-complex map on d tensor x, yielding the canonical baseLocalizationCohomologyMap. The full generator calculation is left as this named theorem.",
+   "uses": [
+    "lem-pc-base-localization-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-base-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8 affine localization identity; Tag 06Y6 universal counit and localization tensor identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base localization derived tensor comparison generator",
+   "results": "No exact theorem; the target is project-specific.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization TensorProduct HomologicalComplex",
+   "results": "Only ordinary localization tensor lemmas; no exact derived model theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*localization.*comparison",
+   "results": "No exact existing declaration in Mathlib or WeilConjectures.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "J3",
+  "item": "Sheaf.Algebra.Homology.BaseLocalizationComparison",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-base-localization-comparison",
+   "place": "Generator calculation in the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseLocalizationComparisonAux",
+  "file": "lean/Sheaf/Algebra/Homology/BaseLocalizationComparisonAux.lean",
+  "declaration": "RingTensorCohomology.baseLocalization_comparison_aux",
+  "statement": "theorem baseLocalization_comparison_aux (S : Submonoid R) [IsLocalization S Rp] (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ) (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) (K : ModuleCat.BaseDerivedTensorCohomologyModel Rp A B Q D) (τ : ((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q ≅ ((ModuleCat.extendScalars ((algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B)))).mapHomologicalComplex (.up ℤ)).obj Q) (hτ : ∀ (j : ℤ) (d : D) (x : Q.X j), τ.hom.f j (d ⊗ₜ[A,(algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] x) = d ⊗ₜ[A,(algebraMap (A ⊗[Rp] B) D).comp (algebraMap A (A ⊗[Rp] B))] x) : ∀ x : L.cohomology i, (L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i) ((1 : D) ⊗ₜ[A ⊗[R] B,algebraMap (A ⊗[R] B) D] x) = K.localizedComparison i ((1 : D) ⊗ₜ[A ⊗[Rp] B,algebraMap (A ⊗[Rp] B) D] (baseLocalizationCohomologyMap R Rp B A D S Q L K i x))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14",
+  "declarations": [
+   "RingTensorCohomology.baseLocalization_comparison_aux"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T224509-L-1470884",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T224509-L-1470884",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

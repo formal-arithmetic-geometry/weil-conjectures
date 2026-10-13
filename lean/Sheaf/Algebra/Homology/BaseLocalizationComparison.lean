@@ -7,6 +7,7 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Sheaf.Algebra.Homology.BaseLocalizationMap
+import Sheaf.Algebra.Homology.BaseLocalizationComparisonAux
 /-! # Localizing the base and second factor of a derived tensor
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
@@ -77,6 +78,13 @@ theorem baseLocalization_comparison (S : Submonoid R) [IsLocalization S Rp] (i :
                 (algebraMap A (A ⊗[Rp] B))] x) :
           L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i =
             e.hom ≫ K.localizedComparison i := by
-  sorry
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro x
+  change (L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i)
+      ((1 : D) ⊗ₜ[A ⊗[R] B,algebraMap (A ⊗[R] B) D] x) =
+    K.localizedComparison i (e.hom
+      ((1 : D) ⊗ₜ[A ⊗[R] B,algebraMap (A ⊗[R] B) D] x))
+  rw [baseLocalization_comparison_aux R A B Rp D S i Q L K τ hτ, he]
+
 
 end RingTensorCohomology
