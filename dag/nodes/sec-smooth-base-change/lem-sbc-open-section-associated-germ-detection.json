@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-open-section-associated-germ-detection",
+ "kind": "statement",
+ "title": "Associated germs detect sections on opens of Noetherian affine schemes",
+ "statement": "Let R be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], V an open of Spec R [def-weil-pbc-scheme-conventions], and s a structure-sheaf section on V. If the germ of s at every q in V whose prime ideal is associated to R is zero, then s=0.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0311 and 0310 (associated-prime localization), principal affine cover and affine stalk localization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "First prove the affine-global case. Transport the section through ΓSpecIso to r in R. The stalk at each associated prime is its prime localization; vanishing yields a denominator outside the prime annihilating r. The injective product-of-localizations criterion makes r zero. For arbitrary V, at each x choose D(g) contained in V. Identify D(g) with Spec R_g. Associated primes of R_g contract to associated primes of R by Noetherian associated-prime localization. Pull the section to Spec R_g; germ_stalkMap transfers the hypothesis, and the affine-global case kills this pullback. The map Spec R_g to V is an open immersion, so its stalk map is an isomorphism and the germ at x is zero. Sheaf section_ext finishes. Includes empty V and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0311 and 0310 (associated-prime localization), principal affine cover and affine stalk localization; detailed Lean argument written by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A section on an open subset of the spectrum vanishes if its germs at every associated prime vanish",
+   "results": "8 hits; germ vanishing and local restriction, but no associated-germ section criterion",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the returned elementary interfaces in a direct proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkSpecializes",
+   "results": "Stalk specialization and germ compatibility available; no associated-point detection",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the returned elementary interfaces in a direct proof."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|associatedPoints",
+   "results": "Associated-prime localization and injectivity available, no scheme-section criterion",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the returned elementary interfaces in a direct proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "power series associated prime germ detection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGermDetection",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-power-series-punctured-germ-detection",
+   "place": "Associated-prime and section-detection steps of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AssociatedGermDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AssociatedGermDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.eq_zero_of_associated_germs",
+  "statement": "theorem eq_zero_of_associated_germs\n    (R : Type u) [CommRing R] [IsNoetherianRing R]\n    (V : (Spec (.of R)).Opens) (s : Γ(V.toScheme, ⊤))\n    (hs : ∀ (q : Spec (.of R)) (hq : q ∈ V),\n      q.asIdeal ∈ associatedPrimes R R →\n        (V.toScheme.presheaf.Γgerm ⟨q, hq⟩).hom s = 0) :\n    s = 0",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T145725-L-750843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T145725-L-750843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

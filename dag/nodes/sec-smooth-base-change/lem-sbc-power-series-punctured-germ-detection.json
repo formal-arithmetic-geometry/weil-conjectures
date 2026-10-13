@@ -15,45 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Flat base change along the constants inclusion gives Ass_B(B) as the union of Ass_B(B/pB) over p in Ass_A(A). Since p is finitely generated, coefficientwise reduction identifies B/pB with (A/p)[[X_1,...,X_d]]: a series with coefficients in p is a finite linear combination of constant generators of p, by coefficientwise lifting. The quotient is a domain, so its only associated prime as a B-module is pB.",
+   "text": "Apply associated-germ detection on the Noetherian power-series ring. For each associated prime q, apply associatedPrimes_quotient_map_of_flat with I=bot, using constants_flat and quotientBot linear equivalences. This gives p associated to A and q associated to B/pB. The prime-extension theorem makes pB prime, so the associated-prime radical equality identifies q=pB.",
    "uses": [
     "lem-sbc-mv-power-series-constants-flat",
-    "lem-weil-pbc-associated-primes-flat-base-change",
-    "lem-weil-pbc-power-series-domain"
+    "lem-weil-pbc-associated-primes-flat-quotient",
+    "lem-sbc-power-series-prime-extension",
+    "lem-weil-pbc-power-series-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "The associated-prime depth bound excludes p=m_A, since dim(A/m_A)=0. The point pB specializes to pB+I=z(p). By hV this specialization lies in V, hence so does pB. Its germ of s is the image of the zero germ at z(p) under the specialization map of stalks, and is zero.",
+   "text": "The depth bound applied to p excludes the maximal ideal, whose quotient is a field of Krull dimension zero. The inclusion pB into constantCoeff-comap p gives q specializing to z(p). The open inverse-image hypothesis puts z(p) in V. Restrict the specialization to V and apply germ_stalkSpecializes to the zero germ furnished by hs. Associated-germ detection concludes.",
    "uses": [
-    "lem-weil-pbc-depth-le-dim-associated-prime"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Cover V by principal affine opens of Y contained in V. B is Noetherian, and the associated primes of each principal localization are the localizations of associated primes of B that avoid its denominator. Thus all associated localizations of the section on such an open vanish. The injection into the product of the associated-prime localizations makes that section zero. The affine opens cover V, so the sheaf condition gives s=0. The canonical affine-open stalk localization identification supplies the ring germ maps; associated-prime localization here is Mathlib Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule (AssociatedPrime/Localization.lean:118).",
-   "uses": [
-    "lem-weil-pbc-power-series-noetherian",
-    "lem-weil-pbc-module-injects-localizations-associated-primes",
-    "lem-weil-pbc-affine-open-stalk-localization"
+    "lem-weil-pbc-depth-le-dim-associated-prime",
+    "lem-sbc-open-section-associated-germ-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sbc-mv-power-series-constants-flat",
-  "lem-weil-pbc-associated-primes-flat-base-change",
-  "lem-weil-pbc-power-series-domain",
-  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-associated-primes-flat-quotient",
+  "lem-sbc-power-series-prime-extension",
   "lem-weil-pbc-power-series-noetherian",
-  "lem-weil-pbc-module-injects-localizations-associated-primes",
-  "lem-weil-pbc-affine-open-stalk-localization"
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-sbc-open-section-associated-germ-detection"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0EY9 (lemma-fully-faithful-power-series-over-depth2), omitted injectivity detail in the first comparison, expanded using Tags 0312, 0BK4 and 0311; coefficient and associated-point details written out by G2"
+  "place": "Tag 0EY9, associated-prime calculation via Tags 0312 and 0BK4, then associated-germ detection via 0310 and 0311; Lean assembly by G1"
  },
  "mathlib_searches": [
   {
@@ -141,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T140817-L-312868",
+  "landing": "20261013T145725-L-750843",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
