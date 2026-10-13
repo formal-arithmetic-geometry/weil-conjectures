@@ -9,10 +9,14 @@ public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Filtered.Final
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Colimits
+
+import Sheaf.CategoryTheory.ColimitSiteAbelianSectionRepresentatives
+import Sheaf.CategoryTheory.ColimitSiteFiniteSectionEventualZero
 
 /-! # Bijectivity of the finite-site section comparison
 
@@ -27,6 +31,15 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
+
+private theorem arrow_map_apply_heq
+    {C : Type*} [Category C] (H : C ⥤ Type u)
+    {A B B' : C} {f : A ⟶ B} {g : A ⟶ B'}
+    (h : Arrow.mk f = Arrow.mk g) (x : H.obj A) :
+    HEq (H.map f x) (H.map g x) := by
+  have hb : B = B' := congrArg Arrow.right h
+  subst B'
+  rw [(Arrow.mk_inj _ _).mp h]
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the general-object presentation,
 sheaf equalizer and adjunction paragraphs; Modules on Sites, Tag 03CO.
@@ -139,6 +152,39 @@ theorem colimit_site_finite_section_comparison_bijective
       Arrow.mk ((E t).hom ≫ (α t).hom.app (op ((F.map t.hom).toFunctor.obj U))))
     (hD : ∀ (t t' : Under i) (b : t ⟶ t'),
       Arrow.mk ((E t).hom ≫ (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =
-      Arrow.mk (D.map b ≫ (E t').hom)) : Function.Bijective (colimit.desc D K) := by sorry
+      Arrow.mk (D.map b ≫ (E t').hom)) : Function.Bijective (colimit.desc D K) := by
+  have hzero := colimit_site_finite_section_eventual_zero
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+      i G α θ hα hθ U D E K e hK hD
+  constructor
+  · apply (injective_iff_map_eq_zero (colimit.desc D K).hom).2
+    intro z hz
+    obtain ⟨t, x, rfl⟩ := Concrete.colimit_exists_rep D z
+    have hx : (K.ι.app t).hom x = 0 := by
+      change (colimit.ι D t ≫ colimit.desc D K).hom x = 0 at hz
+      rwa [colimit.ι_desc] at hz
+    obtain ⟨t', b, hb⟩ := hzero t x hx
+    calc
+      (colimit.ι D t).hom x = (colimit.ι D t').hom ((D.map b).hom x) :=
+        (colimit.w_apply D b x).symm
+      _ = 0 := by rw [hb, map_zero]
+  · intro y
+    obtain ⟨t, x, hx⟩ := colimit_site_abelian_section_representatives
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+      i G α hα U (e.hom y)
+    let z := (E t).inv x
+    have hz : HEq (e.hom (K.ι.app t z))
+        ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) x) := by
+      have hz := arrow_map_apply_heq (forget AddCommGrpCat.{u}) (hK t) z
+      change HEq (e.hom (K.ι.app t z))
+        ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) ((E t).hom z)) at hz
+      have hEz : (E t).hom z = x := Iso.inv_hom_id_apply (E t) x
+      rw [hEz] at hz
+      exact hz
+    refine ⟨(colimit.ι D t).hom z, ?_⟩
+    change (colimit.ι D t ≫ colimit.desc D K).hom z = y
+    rw [colimit.ι_desc]
+    apply (ConcreteCategory.bijective_of_isIso e.hom).1
+    exact eq_of_heq (hz.trans hx)
 
 end CategoryTheory

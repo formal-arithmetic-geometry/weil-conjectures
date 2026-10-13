@@ -16,58 +16,30 @@
  ],
  "proof": [
   {
-   "text": "A presentation of Y is (t,W,p), with t in Under(i), W in F(t.right), and p:V(t.right)(W)=Y. A refinement b:t to t-prime carries W to W-prime, with endpoint transports. Nonemptiness follows by lifting Y using hobjects and moving its stage to a common stage with i. Under(i) is filtered. A common stage for two presentations followed by eventual equality of their object representatives supplies a common refinement. Filteredness equalizes parallel refinements. Evaluating the unique unit-characterized adjunct transition at W gives the group transition; uniqueness proves identity and composition. Lift restriction arrows using harrows, move to a common stage with i and the chosen presentations, and correct endpoints using hobjects. Eventual arrow equality proves independence of the lift; lifting finite collections proves the presheaf laws. Refinements of any fixed presentation are final: lift its representative and any other representative to a common stage and use eventual object equality, then equalize parallel refinements. Equivalently apply the dual cofiltered initiality criterion.",
+   "text": "Apply the existing abelian inverse-image section representative theorem to e.hom y. Transfer the stage representative through (E t).inv. Evaluate the heterogeneous arrow equation hK under the forgetful functor to Type using the generalized private arrow_map_apply_heq lemma (proved from Mathlib Arrow.mk_inj). This evaluation and the inverse-hom identity identify the image with e.hom y; injectivity of e.hom gives the required colimit representative and colimit.ι_desc computes its image.",
    "uses": [
-    "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-abelian-section-representatives"
    ],
    "elementary": false
   },
   {
-   "text": "Take the filtered colimit of the inverse-image section groups over these presentations. Lift a restriction arrow to a common stage. The unit equations determine transition sheaf maps uniquely by the stage adjunction, so eventual equality and naturality make restriction independent of its lift and prove the identity and composition laws. All restrictions are additive. Every Q cover is an image finite stage cover by hQ and hfinite. Covering pullbacks are preserved. Lift the finitely many matching-family objects and equations to one stage; filtered group colimits commute with the finite products and equalizers for the stage sheaf condition. This makes the constructed abelian presheaf a sheaf. An empty cover gives its zero section group.",
+   "text": "Represent a filtered colimit element by Concrete.colimit_exists_rep. Compute its zero image using colimit.ι_desc, apply the strictly smaller eventual-zero theorem to its stage representative, and use colimit.w_apply and map_zero to conclude it is zero. The additive kernel criterion then gives injectivity.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-finite-precoverage"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Maps from this sheaf to an arbitrary abelian sheaf T are compatible maps on stage section groups. Moving a presentation to its identity refinement identifies each compatible family with a stage sheaf map L_t to V_t restriction of T. The stage adjunction transposes this to a map G to V_i restriction of T; compatibility with the source unit forces the adjunct to be the same for all t. Conversely such a map supplies each stage adjunct, and the colimit property assembles the section maps. The inverse homEquiv equations and colimit hom_ext show that these correspondences are mutually inverse and natural in T. Uniqueness of left adjoints identifies the constructed sheaf with the canonical V_i inverse image, compatibly with its unit.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At V_i(U), presentations obtained by carrying U forward are final by the common-refinement and eventual-equality argument of the first step. Hence their section colimit is the group of sections of the constructed sheaf at V_i(U). Adjunct uniqueness identifies the supplied alpha and theta with the canonical comparison maps: transpose them and use the assumed unit equations at every source object. The transition equation hD then gives a natural isomorphism from supplied D to the canonical diagram via E, and hK identifies the supplied cocone legs via e. Transporting the comparison across these isomorphisms shows colimit.desc D K is an isomorphism and therefore bijective. This step does not assume source-unit zero detection or the parent section-presentation theorem.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-finite-section-eventual-zero",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-colimit-site-abelian-section-representatives",
+  "lem-weil-pbc-colimit-site-finite-section-eventual-zero",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, presentation construction, finite-cover sheaf equalizer and adjunction identification before exactness; details omitted in the source are expanded using filtered object/arrow equality. Abelian extension via Tag 03CO."
+  "place": "Tag 0A35: surjectivity uses the existing abelian section representatives theorem; injectivity reduces to the strict eventual-zero intermediate and Mathlib concrete filtered-colimit representatives."
  },
  "mathlib_searches": [
   {
@@ -190,9 +162,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T000907-L-2281348",
+  "landing": "20261013T024039-L-3335947",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

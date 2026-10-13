@@ -10746,3 +10746,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:40 L: merged deliver/J4/Sheaf.AlgebraicGeometry.GlobalSectionsPointUnitTransport (stage 3; reviewer PASS; first push; landing 20261013T024037-L-3335586 (proof); batch 20261013T024029; modules 1; new nodes 0)
 - 02:40 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ChowFormalSystemExtension (stage 3; reviewer PASS; first push; landing 20261013T024038-L-3335713 (interface); batch 20261013T024029; modules 2; new nodes 1)
 - 02:40 L: merged deliver/K1/Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFixedRankRetrocompact (stage 3; reviewer PASS; first push; landing 20261013T024038-L-3335821 (interface); batch 20261013T024029; modules 4; new nodes 3)
+- 02:40 L: merged deliver/M1/Sheaf.CategoryTheory.ColimitSiteFiniteSectionComparisonBijective (stage 3; reviewer PASS; after a return; landing 20261013T024039-L-3335947 (interface); batch 20261013T024029; modules 2; new nodes 1)
