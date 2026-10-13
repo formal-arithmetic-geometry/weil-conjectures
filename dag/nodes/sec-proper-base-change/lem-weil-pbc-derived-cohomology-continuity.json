@@ -3,56 +3,183 @@
  "blueprint": {
   "is": "lem-weil-pbc-derived-cohomology-continuity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuity for bounded-below etale complexes",
- "statement": "Let $X=\\varprojlim_jX_j$ be a cofiltered system of quasi-compact\nquasi-separated schemes [def-weil-pbc-scheme-conventions] with affine\ntransition maps. For a finite ring $\\Lambda$, let $K_i\\in\\Dplus(X_{i,\\Et},\n\\Lambda)$ and let $K_j,K$ be its inverse images\n[def-weil-pbc-inverse-image]. Then the canonical restriction map is an\nisomorphism\n\n$$\n \\varinjlim_{j\\geq i}H^nR\\Gamma(X_{j,\\Et},K_j)\n \\xrightarrow{\\sim}H^nR\\Gamma(X_{\\Et},K)\n \\qquad(n\\in\\mathbb Z).\n$$",
+ "statement": "Let $X=\\varprojlim_jX_j$ be a small cofiltered system of quasi-compact\nquasi-separated schemes [def-weil-pbc-scheme-conventions] with affine\ntransition maps. For a finite commutative ring $\\Lambda$, let $K_i\\in\\Dplus(X_{i,\\Et},\n\\Lambda)$ and let $K_j,K$ be its inverse images\n[def-weil-pbc-inverse-image], [def-weil-pbc-derived-inverse-image]. Then the canonical restriction map is an\nisomorphism\n\n$$\n \\varinjlim_{j\\geq i}H^nR\\Gamma(X_{j,\\Et},K_j)\n \\xrightarrow{\\sim}H^nR\\Gamma(X_{\\Et},K)\n \\qquad(n\\in\\mathbb Z).\n$$\nHere $\\Dplus(X_{i,\\Et},\\Lambda)$ is the derived category of sheaves of modules over the constant ring sheaf $\\Lambda$ [def-weil-pbc-derived-categories], and $R\\Gamma$ is computed by applying sections at the terminal object to a K-injective resolution [def-weil-pbc-kinjective-resolutions], [prop-weil-pbc-kinjective-resolutions-exist]. The notation $j\\geq i$ means the category of stages equipped with a transition to $i$ (the overcategory of $i$), rather than an assumed ordering of the index category. Restriction sends a section of a resolution to its inverse image, followed by a comparison to a resolution on the target site.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-derived-cohomology-continuity.md",
   "place": "node lem-weil-pbc-derived-cohomology-continuity, order 1238"
  },
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "proof": [
   {
-   "text": "Choose $a$ below the cohomological support of $K_i$, in\n[def-weil-pbc-derived-categories]. Exact inverse image in\n[prop-weil-pbc-inverse-image-exact] preserves this bound and commutes with\ntruncations and cohomology sheaves. To calculate degree $n$, one may replace\nall these complexes by their truncations in degrees $[a,n]$. Indeed the\ncomplementary truncation starts in degree $n+1$, and its injective resolution\nand derived sections have no cohomology in degrees at most $n$.",
+   "text": "Choose $a$ with $\\mathcal H^r(K_i)=0$ for $r<a$, using [def-weil-pbc-derived-categories]. The coefficient pullback is exact and agrees with abelian inverse image by [prop-weil-pbc-inverse-image-modules-exact], not merely by the abelian-sheaf exactness theorem. By [lem-sp-exact-functor-preserves-homology] it commutes with cohomology. Canonical truncation has terms $\\ker d^b$ at its upper endpoint; exactness preserves that kernel and all its inclusion maps. Thus pullback commutes naturally with $\\tau_{\\leq b}$, its inclusions, and its cohomology-sheaf projections. All $K_j$ and $K$ have the same lower bound $a$. The category $I/i$ is nonempty (it contains $\\mathrm{id}_i$). For $(j\\to i)$ and $(k\\to i)$ choose a common predecessor in $I$, then equalize its two composites to $i$; this gives a common predecessor in $I/i$. Parallel arrows in $I/i$ are equalized by an equalizer predecessor in $I$. Thus $(I/i)^{\\mathrm{op}}$ is filtered, as required for the colimit.",
    "uses": [
     "def-weil-pbc-derived-categories",
-    "prop-weil-pbc-inverse-image-exact"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-exact-functor-preserves-homology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits); exact pullback as in the cited module-exactness node; Homology Tag 010N"
+   }
   },
   {
-   "text": "For a single sheaf in one degree, the assertion is\n[lemma-weil-pbc-etale-cohomology-continuity]. Its proof works in\n$\\Lambda$-module sheaves by the module version of\n[thm-weil-pbc-hypercover-cohomology]; its cochains and refinements are\nunchanged. Build a bounded truncation by its finite sequence of triangles\n\n$$\n \\tau_{\\leq b-1}K_i\\longrightarrow\\tau_{\\leq b}K_i\n \\longrightarrow\\mathcal H^b(K_i)[-b]\\longrightarrow .\n$$",
+   "text": "First prove continuity for a module sheaf $F_i$ in degree zero. If $m$ is the additive order of $1\\in\\Lambda$, then $mF_i=0$, so its underlying abelian sheaf is torsion; coefficient pullback preserves this underlying sheaf by [prop-weil-pbc-inverse-image-modules-exact]. Apply [lemma-weil-pbc-etale-cohomology-continuity] to those underlying sheaves. The limit $X$ is also qcqs: specialize [lem-sbc-target-limit-geometry] to $S=T=\\operatorname{Spec}\\mathbf Z$, $p=g=\\mathrm{id}_S$, and the given diagram over this terminal scheme. Its pullback functor is the identity, and its conclusion says the limit structure map to $S$ is qcqs, which is precisely that $X$ is qcqs. To identify its cohomology with module-derived cohomology, use both clauses of [thm-weil-pbc-hypercover-cohomology]: for each finite hypercover, the module cochain complex and the abelian cochain complex have exactly the same underlying groups, alternating differentials, and restriction maps. Their kernels, images and quotients therefore agree, and the underlying group of the colimit agrees too: scalar multiplication on a representative is $\\lambda[x]=[\\lambda x]$. The resulting comparison is the canonical restriction comparison, is $\\Lambda$-linear, and is bijective on underlying groups; its inverse is consequently $\\Lambda$-linear. For $F_i[-b]$ it gives continuity in degree $r$ as continuity for $F_i$ in degree $r-b\\geq0$. For $r-b<0$ both sides vanish by [lem-weil-pbc-derived-functor-negative-vanishing]. Shift compatibility of derived sections comes from [lem-weil-pbc-derived-direct-image-triangulated], applied to the left exact additive sections functor.",
    "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
     "lemma-weil-pbc-etale-cohomology-continuity",
-    "thm-weil-pbc-hypercover-cohomology"
+    "thm-weil-pbc-hypercover-cohomology",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sbc-target-limit-geometry"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01H0 (theorem-cohomology-hypercoverings); Etale Cohomology Tag 09YQ (theorem-colimit); Derived Categories Tags 05TC and 05SU"
+   }
   },
   {
-   "text": "Apply derived sections at all stages and at the limit. Filtered colimits of\nmodules are exact, so their long exact cohomology sequences remain exact\nafter taking the colimit. The five lemma, inductively in $b-a$, proves the\ncomparison in all degrees for every finite truncation. The preceding\ntruncation argument then gives the assertion for $K_i$. All arrows used are\nthe restriction arrows, so this proves the named map, naturally in the\ncomplex and in the inverse system.",
-   "uses": [],
-   "elementary": null
+   "text": "The categories of module sheaves are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $\\Mod(\\Lambda)$ is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]. Sections at the terminal object are additive and left exact: a section of a kernel is exactly a section annihilated by the given map. Thus the general derived-functor results apply. If $n<a$, [lem-weil-pbc-derived-functor-negative-vanishing] makes every degree-$n$ group zero, proving the assertion. If $n\\geq a$, [lem-weil-pbc-derived-functor-truncation-iso] identifies $H^nR\\Gamma(\\tau_{\\leq n}K_j)$ with $H^nR\\Gamma(K_j)$, and likewise at $X$. These are the maps induced by the canonical truncation inclusions. It suffices to prove continuity for complexes with cohomology in a finite interval $[a,b]$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), parts (1) and (2)"
+   }
+  },
+  {
+   "text": "We verify the boundary squares needed for the induction. For any transition $u:Y\\to T$, compute restriction on a module complex $L$ using resolutions $L\\to I$ and $u^{-1}L\\to J$, as $\\Gamma(T,I)\\xrightarrow{\\eta}\\Gamma(Y,u^{-1}I)\\to\\Gamma(Y,J)$. The adjunction unit is that of [prop-weil-pbc-inverse-image-modules-exact], and resolutions are supplied by [prop-weil-pbc-kinjective-resolutions-exist]. Write $s:L\\to I$ and $t:u^{-1}L\\to J$ for the resolution maps. Exactness makes $u^{-1}s$ a quasi-isomorphism. Apply [lem-sp-kinjective-comparison-principle] in the target module-sheaf category, with K-injective target $J$: there is a unique homotopy class $h:u^{-1}I\\to J$ with $h\\circ u^{-1}s=t$ in the homotopy category. This is the comparison used above; it does not require $u^{-1}I$ to be K-injective. Uniqueness gives naturality in $L$ and independence of the resolutions. This defines a natural derived restriction transformation; for a composable pair, [lem-weil-pbc-inverse-image-composition-module-linear] identifies the composite unit with the single unit by a module-linear composition isomorphism. The composite resolution comparisons and the single comparison agree after precomposition with the pulled-back resolution of $L$, hence agree up to homotopy by [lem-sp-kinjective-comparison-principle]. For the identity the comparison is the identity up to homotopy by the same uniqueness. Thus the maps form the prescribed stage diagram. By [lem-weil-pbc-kinjective-shift] we may use $I[1]$ and $J[1]$ for $L[1]$. In degree $r$ the unit and comparison then equal the original maps in degree $r+1$, including the shifted differential sign. Hence restriction commutes with the shift isomorphisms. Derived sections are triangulated by [lem-weil-pbc-derived-direct-image-triangulated]. Exact module pullback induces the triangulated derived pullback [def-weil-pbc-derived-inverse-image]. Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to this shift-compatible natural transformation, and then [lem-weil-pbc-derived-cohomology-ladder]. Restriction therefore gives a morphism of long exact cohomology sequences, including the connecting arrows; exactness of those sequences is [lem-sf-derived-homology-long-exact]. These arguments apply to all transitions and to the projections to $X$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070H (definition-K-injective), 05SE (proposition-derived-functor), 0144 (definition-triangle), 05RS (lemma-cohomology-homological); restriction resolution recipe as in Cohomology Tag 01F8 (lemma-functoriality); Tag 070I (lemma-K-injective), equivalent condition (2); Modules on Sites Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "For a complex $L_i$ with cohomology supported in $[a,b]$, set $P_t=\\tau_{\\leq t}L_i$. Start with $P_{a-1}=0$ in the derived category, since all its cohomology is zero by [lem-weil-pbc-truncation-cohomology]; quasi-isomorphisms are inverted by [def-weil-abstract-derived-category]. For $a\\leq t\\leq b$, [lem-weil-pbc-truncation-triangle] gives the functorial distinguished triangle $P_{t-1}\\to P_t\\to\\mathcal H^t(L_i)[-t]\\to P_{t-1}[1]$, and step 1 identifies its pullbacks with the corresponding triangles at each stage. Inductively assume comparison is an isomorphism in every degree for $P_{t-1}$; step 2 gives this for $C=\\mathcal H^t(L_i)[-t]$. By step 4 the stage sequences and the limit sequence form a commutative ladder. Filtered colimits of $\\Lambda$-modules are exact by [lem-weil-pbc-ring-modules-grothendieck-abelian], so the top row remains exact. For each integer $r$, take the five terms $H^{r-1}(C)\\to H^r(P_{t-1})\\to H^r(P_t)\\to H^r(C)\\to H^{r+1}(P_{t-1})$, with the top row understood as stage colimits. All four outer vertical arrows are isomorphisms. The middle arrow is an isomorphism by [lem-weil-pbc-five-lemma]. This proves the inductive assertion simultaneously in all degrees. Finally $P_b\\to L_i$ is a quasi-isomorphism by [lem-weil-pbc-truncation-cohomology], hence continuity holds for $L_i$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); Algebra Tag 00DB (lemma-directed-colimit-exact); Homology Tag 05QB (lemma-five-lemma)"
+   }
+  },
+  {
+   "text": "Apply step 5 to $L_i=\\tau_{\\leq n}K_i$. Its cohomology is supported in $[a,n]$ by [lem-weil-pbc-truncation-cohomology], and step 1 identifies all its inverse images with the analogous truncations. Step 3 identifies the top and bottom degree-$n$ groups with those for $K_j$ and $K$. The square between these identifications and restriction commutes by the naturality established in step 4, applied to the inclusions $\\tau_{\\leq n}K_i\\to K_i$. Thus the isomorphism obtained is exactly the canonical restriction map in the statement. The case $n<a$ was settled in step 3.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), part (2), and naturality of the canonical truncation inclusion"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-categories",
-  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-exact-functor-preserves-homology",
   "lemma-weil-pbc-etale-cohomology-continuity",
-  "thm-weil-pbc-hypercover-cohomology"
+  "thm-weil-pbc-hypercover-cohomology",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sbc-target-limit-geometry",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-shift",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-derived-cohomology-continuity.md",
-  "place": "## Proof"
+  "place": "Proof, all three paragraphs, with Stacks-supported truncation and coefficient/connecting-map details"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale hypercohomology of a bounded below complex commutes with inverse limits of quasi compact quasi separated schemes with affine transition maps",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern structure-sheaf sections, finite limits of module sheaves, or the sheaf condition, not derived etale continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*etale|hypercohomology.*limit",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern structure-sheaf sections, finite limits of module sheaves, or the sheaf condition, not derived etale continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of etale cohomology for bounded below complexes on inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"cohomology\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern structure-sheaf sections, finite limits of module sheaves, or the sheaf condition, not derived etale continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of sheaves of finite ring modules commute with cofiltered limits of schemes",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, SheafOfModules.Finite.evaluationPreservesFiniteLimits, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern structure-sheaf sections, finite limits of module sheaves, or the sheaf condition, not derived etale continuity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +206,64 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-derived-cohomology-continuity",
+  "worker": "stage1",
+  "summary": "Reused existing nodes throughout. Made smallness and commutative coefficient conventions explicit, supplied module-to-abelian continuity via identical hypercover cochains, cited truncation/vanishing/triangle/colimit/five-lemma tools and wrote out shift and boundary compatibility, with an induction valid in all integer degrees.",
+  "blueprint": "Paragraph 1 is realized by steps 1 and 3; paragraph 2 by steps 2 and 5; paragraph 3 by steps 4, 5 and 6.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic coefficient, resolution, or cohomology tool used as stated; this unit has no replacement for that tool, and the finite truncation route is unchanged."
+   },
+   {
+    "node": "lemma-weil-pbc-etale-cohomology-continuity",
+    "why": "Generic coefficient, resolution, or cohomology tool used as stated; this unit has no replacement for that tool, and the finite truncation route is unchanged."
+   },
+   {
+    "node": "thm-weil-pbc-hypercover-cohomology",
+    "why": "Generic coefficient, resolution, or cohomology tool used as stated; this unit has no replacement for that tool, and the finite truncation route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic coefficient, resolution, or cohomology tool used as stated; this unit has no replacement for that tool, and the finite truncation route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic coefficient, resolution, or cohomology tool used as stated; this unit has no replacement for that tool, and the finite truncation route is unchanged."
+   },
+   {
+    "node": "lem-sbc-target-limit-geometry",
+    "why": "Only its general qcqs limit geometry is used, specialized to the terminal affine base and identity pullback, to check the limit hypothesis of the hypercover theorem; no base-change cohomology result is used."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic quasi-isomorphism precomposition bijection into a K-injective target supplies comparison maps when the pulled-back resolution is not K-injective."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic module-linear inverse-image composition and its unit formula establish coherence of the canonical restriction diagram."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-etale-cohomology-continuity",
+  "thm-weil-pbc-hypercover-cohomology",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-sbc-target-limit-geometry",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-c270d4750",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c270d4750 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and route. The truncation induction, coefficient comparison, and canonical restriction-map compatibility check out. Repaired one missing citation to derived inverse image in the statement and stmt_deps; no assertion changed. Full findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-proper-base-change/.; 1 file(s) fixed by the reviewer"
+ }
 }
