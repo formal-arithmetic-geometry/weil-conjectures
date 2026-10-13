@@ -8,10 +8,14 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.NoetherianApproximationData
 import Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage
-import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso
+import Sheaf.AlgebraicGeometry.ProperSupportLocalNoetherianModel
+import Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 
 /-! # Perfect direct image with proper support
 
@@ -30,6 +34,7 @@ namespace AlgebraicGeometry
 /-- The direct image of a perfect complex tensored with a bounded, finitely presented,
 base-flat complex with proper support is perfect and satisfies arbitrary base change.
 Source: Stacks Project, Lemma 36.30.1, Tag 0A1H.
+The new complex is ordinary termwise pullback of G, as in Tag 0A1D.
 
 Proof: arbitrary base change is Tag 0A1D (lem-pc-rf-base-change-complex). Spread the
 finite-presentation, flatness, support and perfectness data by Noetherian approximation
@@ -58,7 +63,33 @@ theorem properSupport_perfect_directImage
             ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ≅
           (schemeDerivedDirectImage (pullback.snd f g)).obj
             ((derivedPullback (pullback.fst f g)).obj E ⊗
-              (derivedPullback (pullback.fst f g)).obj (DerivedCategory.Q.obj G))) := by
-  sorry
+              DerivedCategory.Q.obj
+                (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex
+                  (.up ℤ)).obj G))) := by
+  constructor
+  · apply perfect_of_open_pullbacks
+    intro x
+    obtain ⟨U, hx, Xi, Si, fi, hSi, hfp, hqc, hqs, hft, Ei, hEi,
+      Gi, hGib, hGifp, hGiflat, hGiproper, g, ⟨e⟩⟩ :=
+      properSupport_local_noetherian_model f E hE G hGb hGflat hGproper x
+    let : IsNoetherian Si := hSi
+    let : LocallyOfFinitePresentation fi := hfp
+    let : QuasiCompact fi := hqc
+    let : QuasiSeparated fi := hqs
+    let : LocallyOfFiniteType fi := hft
+    let : ∀ n : ℤ, (Gi.X n).IsFinitePresentation := hGifp
+    have hi := noetherian_perfect_directImage fi Ei hEi Gi hGib hGiflat hGiproper
+    have hg := derivedPullback_preserve_perfect g _ hi
+    refine ⟨U, hx, ?_⟩
+    intro y
+    obtain ⟨V, hy, P, hP, ⟨c⟩⟩ := hg y
+    exact ⟨V, hy, P, hP, ⟨(SheafOfModules.overFunctor
+      (moduleRings U.toScheme.toRingedSpace) V).mapDerivedCategory.mapIso e ≪≫ c⟩⟩
+  · intro T g
+    obtain ⟨a, b, hb⟩ := hGb
+    apply relativelyFlat_tensor_baseChange_iso f g E
+      (schemeDerivedQCohProperty_of_isPerfect X E hE) G
+      ⟨b, fun n hn ↦ hb n (Or.inr hn)⟩
+      (fun n ↦ inferInstance) hGflat
 
 end AlgebraicGeometry

@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-proper-support-local-noetherian-model",
+ "kind": "statement",
+ "title": "Local Noetherian comparison models for proper-support tensor data",
+ "statement": "Let $f:X\\to S$ be of finite presentation [def-pc-morphism-conventions], $E\\in D(\\mathcal O_X)$ perfect [def-pc-perfect-complex], and $G^\\bullet$ a bounded complex of finitely presented modules, termwise flat over S, with each term supported properly over S [def-weil-pbc-closed-subset-proper-over-base]. Set $K=Rf_*(E\\otimes^L G^\\bullet)$ [def-pc-derived-direct-image]. For each $x\\in S$ there are an open neighbourhood $U$, schemes $X_i,S_i$ with $S_i$ Noetherian, a finite-presentation morphism $f_i:X_i\\to S_i$, a perfect $E_i$, a bounded finitely presented termwise $S_i$-flat complex $G_i^\\bullet$ with proper term supports, and a morphism $g:U\\to S_i$, together with an isomorphism $L\\iota_U^*K\\cong Lg^*Rf_{i,*}(E_i\\otimes^L G_i^\\bullet)$ [def-pc-derived-pullback]. No assertion about perfectness of either direct image is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A1H, lemma-base-change-tensor-perfect, affine reduction and Noetherian approximation paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood U of x. Restrict the morphism and tensor data to U and its inverse image. Open base change identifies the derived restriction of K with the direct image of restricted data. Open restriction preserves all input properties, including proper support.",
+   "uses": [
+    "lem-pc-relatively-flat-tensor-base-change-iso",
+    "lem-pc-derived-pullback-perfect",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the ring of U as the filtered colimit of its finitely generated Z-subalgebras. These rings are Noetherian. Spread the finitely presented scheme to a stage and invoke noetherian_approximation_data to obtain Xi, fi, Ei, Gi, with all their properties and pullback identifications.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-pc-noetherian-approximation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Si be Spec of that stage and g the map from U. Identify the descended cartesian square with the pullback square. Apply ordinary relatively flat tensor base change to fi and g. Compose its isomorphism with the descended E and complex identifications and the first open-base-change comparison. The result is the required isomorphism, without using any direct-image perfectness assertion.",
+   "uses": [
+    "lem-pc-relatively-flat-tensor-base-change-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-noetherian-approximation-data",
+  "lem-pc-relatively-flat-tensor-base-change-iso",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project (source checked at https://stacks.math.columbia.edu/tag/0A1H and linked tags)",
+  "place": "Tag 0A1H, lemma-base-change-tensor-perfect, affine reduction and Noetherian approximation paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complexes locality open restriction Noetherian approximation direct image tensor base change",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Noetherian approximation model of derived direct image bounded relatively flat tensor perfect complex proper support",
+   "results": "Eight hits about flat or smooth algebras; no derived direct-image comparison or perfect-complex locality theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Twelve exact-functor declarations, including mapDerivedCategoryCompIso; no perfectness locality, approximation or tensor base-change theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian.*colimit|colimit.*Noetherian|isLocal.*Perfect",
+   "results": "No Mathlib hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation scheme descend perfect complex flat module proper support Noetherian ring filtered colimit",
+   "results": "Second reader: 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, CommRingCat.isFinitelyPresentable_hom; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Second reader: 3 hits; SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overFunctorEquiv|KFlat|IsNoetherianRing.*colimit",
+   "results": "Second reader: 3 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage",
+  "group": "R1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Classical Tag 0A1H input: Tag 0A1H, lemma-base-change-tensor-perfect, affine reduction and Noetherian approximation paragraph",
+   "via": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportLocalNoetherianModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportLocalNoetherianModel.lean",
+  "declaration": "AlgebraicGeometry.properSupport_local_noetherian_model",
+  "statement": "theorem properSupport_local_noetherian_model\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E)\n    (G : CochainComplex X.Modules ℤ)\n    (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    [∀ n : ℤ, (G.X n).IsFinitePresentation]\n    (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f)\n    (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) (x : S) :\n    ∃ U : S.Opens, x ∈ U ∧\n      ∃ (Xi Si : Scheme.{u}) (fi : Xi ⟶ Si),\n        IsNoetherian Si ∧ LocallyOfFinitePresentation fi ∧\n        QuasiCompact fi ∧ QuasiSeparated fi ∧\n        ∃ (hfi : LocallyOfFiniteType fi) (Ei : schemeDerivedCategory Xi),\n          Scheme.IsPerfect Xi Ei ∧\n          ∃ Gi : CochainComplex Xi.Modules ℤ,\n            (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Gi.X n)) ∧\n            (∀ n : ℤ, (Gi.X n).IsFinitePresentation) ∧\n            (∀ n : ℤ, (Gi.X n).IsFlatOver fi) ∧\n            (∀ n : ℤ, @Scheme.Modules.HasSupportProperOver _ _ fi hfi (Gi.X n)) ∧\n            ∃ g : U.toScheme ⟶ Si,\n              Nonempty ((derivedPullback U.ι).obj\n                  ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G)) ≅\n                (derivedPullback g).obj\n                  ((schemeDerivedDirectImage fi).obj (Ei ⊗ DerivedCategory.Q.obj Gi)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
+ }
+}

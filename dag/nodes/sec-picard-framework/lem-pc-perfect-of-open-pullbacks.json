@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-perfect-of-open-pullbacks",
+ "kind": "statement",
+ "title": "Perfectness detected on open neighbourhoods",
+ "statement": "Let $S$ be a scheme, $K\\in D(\\mathcal O_S)$ [def-pc-derived-category]. Suppose that for every $x\\in S$ there is an open neighbourhood $U$ such that $L\\iota_U^*K$ [def-pc-derived-pullback] is perfect on the open subscheme $U$ [def-pc-perfect-complex]. Then $K$ is perfect on $S$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CM, definition-perfect; Tag 0A1H, lemma-base-change-tensor-perfect, locality sentence"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "For x choose U from the hypothesis and a strictly perfect representative near the corresponding point of U. Regard its open neighbourhood V as an open of S contained in U.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Open tensor pullback is exact, so its left derived functor is ordinary derived restriction by uniqueness of derived functors. Transport successive restrictions through the equivalences with localized open sites, and identify them with restriction to V. The equivalences preserve the structure module, finite coproducts, retract equations and zero terms. Thus the transported complex is strictly perfect and its derived image is the restriction of K. This is the witness at x required by the definition.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project (source checked at https://stacks.math.columbia.edu/tag/0A1H and linked tags)",
+  "place": "Tag 08CM, definition-perfect; Tag 0A1H, lemma-base-change-tensor-perfect, locality sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complexes locality open restriction Noetherian approximation direct image tensor base change",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Noetherian approximation model of derived direct image bounded relatively flat tensor perfect complex proper support",
+   "results": "Eight hits about flat or smooth algebras; no derived direct-image comparison or perfect-complex locality theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Twelve exact-functor declarations, including mapDerivedCategoryCompIso; no perfectness locality, approximation or tensor base-change theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian.*colimit|colimit.*Noetherian|isLocal.*Perfect",
+   "results": "No Mathlib hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect object derived category detected by restriction along open immersion",
+   "results": "Second reader: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Second reader: 3 hits; SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overFunctorEquiv|KFlat|IsNoetherianRing.*colimit",
+   "results": "Second reader: 3 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage",
+  "group": "R1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Classical Tag 0A1H input: Tag 08CM, definition-perfect; Tag 0A1H, lemma-base-change-tensor-perfect, locality sentence",
+   "via": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOfOpenPullbacks.lean",
+  "declaration": "AlgebraicGeometry.perfect_of_open_pullbacks",
+  "statement": "theorem perfect_of_open_pullbacks\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    {S : Scheme.{u}} (K : schemeDerivedCategory S)\n    (h : ∀ x : S, ∃ U : S.Opens, x ∈ U ∧\n      Scheme.IsPerfect U.toScheme ((derivedPullback U.ι).obj K)) :\n    Scheme.IsPerfect S K",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
+ }
+}

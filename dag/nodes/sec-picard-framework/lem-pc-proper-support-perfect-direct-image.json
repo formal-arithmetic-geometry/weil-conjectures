@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Perfect direct image of a tensor product with proper support",
- "statement": "Let $f:X\\to S$ be a morphism of schemes of finite presentation [def-pc-morphism-conventions]. Let $E\\in D(\\mathcal O_X)$ be perfect [def-pc-perfect-complex], and let $\\mathcal G^\\bullet$ be a bounded complex of finitely presented $\\mathcal O_X$-modules, each flat over $S$, whose terms have support proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]. Then $$K=Rf_*(E\\otimes^L_{\\mathcal O_X}\\mathcal G^\\bullet)$$ is perfect in $D(\\mathcal O_S)$, and its formation commutes with arbitrary base change: for every $g:T\\to S$, the canonical map $Lg^*K\\to Rf_{T,*}(E_T\\otimes^L_{\\mathcal O_{X_T}}\\mathcal G_T^\\bullet)$ is an isomorphism.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes of finite presentation [def-pc-morphism-conventions]. Let $E\\in D(\\mathcal O_X)$ be perfect [def-pc-perfect-complex], and let $\\mathcal G^\\bullet$ be a bounded complex of finitely presented $\\mathcal O_X$-modules, each flat over $S$, whose terms have support proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]. Then $$K=Rf_*(E\\otimes^L_{\\mathcal O_X}\\mathcal G^\\bullet)$$ is perfect in $D(\\mathcal O_S)$, and its formation commutes with arbitrary base change: for every $g:T\\to S$, the canonical map $Lg^*K\\to Rf_{T,*}(E_T\\otimes^L_{\\mathcal O_{X_T}}\\mathcal G_T^\\bullet)$ is an isomorphism. Here $\\mathcal G_T^\\bullet=(g\\prime)^*\\mathcal G^\\bullet$ is the ordinary termwise tensor pullback complex [def-pc-module-pullback], not its derived pullback.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Lemma 36.30.1, Tag 0A1H (lemma-base-change-tensor-perfect)"
@@ -23,55 +23,47 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-module-pullback"
  ],
  "proof": [
   {
-   "text": "The arbitrary-base-change assertion is Stacks Project, Lemma 36.26.4 (Tag 0A1D), applied with E as the perfect object (hypotheses of [lem-pc-rf-base-change-complex] checked: f of finite presentation is quasi-compact and quasi-separated by [def-pc-morphism-conventions]; a perfect E is locally quasi-isomorphic to a finite complex of finite free modules, so its cohomology sheaves are quasi-coherent and E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X); the terms of G^\\bullet are finitely presented, hence quasi-coherent, and a bounded complex is bounded above) and G^\\bullet as the bounded-above termwise S-flat complex. Its canonical comparison is exactly Lg^* Rf_*(E\\otimes^L G^\\bullet) \\cong Rf_{T,*}(L(g')^*E\\otimes^L (g')^*G^\\bullet) for every g:T\\to S; since E is perfect, L(g')^*E identifies with E_T. Thus it remains to prove perfectness of K.",
+   "text": "Use the existing schemeDerivedQCohProperty_of_isPerfect theorem to show that E has quasi-coherent cohomology. The upper endpoint of the boundedness interval makes G bounded above, and finite presentation implies quasi-coherence of every term. Apply relativelyFlat_tensor_baseChange_iso, whose second tensor factor is ordinary pulled G.",
    "uses": [
-    "lem-pc-rf-base-change-complex"
+    "lem-pc-relatively-flat-tensor-base-change-iso",
+    "lem-sc-perfect-qcoherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.30.1, Tag 0A1H, first sentence of proof invoking Lemma 36.26.4 (Tag 0A1D)"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume S is affine, S = Spec(R), and write R as a filtered colimit of Noetherian rings R_i. By Limits, Lemma 32.10.1 (Tag 01ZM), after replacing i, the finite-presentation morphism X\\to S descends to X_i\\to\\operatorname{Spec}(R_i). The finite-presentation, flatness, proper-support, and perfectness descent assertions are exactly the combined Noetherian-approximation statement [lem-pc-noetherian-approximation-data], which packages Tags 01ZR, 05LY, 081G (with Cohomology of Schemes, Lemma 30.26.7), and 09RF. Hence after increasing i we have a bounded finitely presented complex G_i^\\bullet flat over R_i with proper support and a perfect E_i whose base changes recover the original data.",
+   "text": "At each x use properSupport_local_noetherian_model to obtain U, a Noetherian Si, finite-presentation fi, perfect Ei and bounded finite-presentation base-flat Gi with proper term supports, and the displayed isomorphism of the restricted direct image with a pulled descended direct image. Register the propositional geometric and termwise finite-presentation instances.",
    "uses": [
-    "thm-pd-spreading-out",
-    "lem-pc-noetherian-approximation-data"
+    "lem-pc-proper-support-local-noetherian-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.30.1, Tag 0A1H, Noetherian approximation paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the Noetherian perfect-direct-image theorem, Stacks Lemma 36.27.2 (Tag 0DJQ), to X_i\\to\\operatorname{Spec}(R_i), E_i, and G_i^\\bullet. It makes Rf_{i,*}(E_i\\otimes^L G_i^\\bullet) perfect. Pullback preserves perfectness because a perfect object is locally a bounded finite locally free complex, and this local description also shows perfectness is Zariski-local. The base-change isomorphism of [lem-pc-rf-base-change-complex] for X_i\\to\\operatorname{Spec}(R_i) (finite presentation over a Noetherian base, hence quasi-compact and quasi-separated) along \\operatorname{Spec}(R)\\to\\operatorname{Spec}(R_i), as in step 1, identifies the pullback with K; the affine argument therefore glues over S.",
+   "text": "Apply noetherian_perfect_directImage to fi, Ei and Gi. Pullback preserves perfectness. Transport its local strictly perfect witnesses along the model isomorphism, by applying each exact restriction functor to that isomorphism and composing it with the witness. Apply perfect_of_open_pullbacks to these witnesses through every x. Pair the resulting perfectness with the first-step base-change isomorphism.",
    "uses": [
     "lem-pc-noetherian-perfect-direct-image",
-    "lem-pc-rf-base-change-complex"
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-perfect-of-open-pullbacks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.30.1, Tag 0A1H, final application of Lemma 36.27.2 (Tag 0DJQ)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-rf-base-change-complex",
-  "thm-pd-spreading-out",
-  "lem-pc-noetherian-approximation-data",
-  "lem-pc-noetherian-perfect-direct-image"
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-noetherian-perfect-direct-image",
+  "lem-pc-perfect-of-open-pullbacks",
+  "lem-pc-proper-support-local-noetherian-model",
+  "lem-pc-relatively-flat-tensor-base-change-iso",
+  "lem-sc-perfect-qcoherent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.30.1, Tag 0A1H; source proof checked online and reconstructed as base change, Noetherian approximation, and the Noetherian case"
+  "place": "Tag 0A1H, lemma-base-change-tensor-perfect; Tag 0A1D, lemma-base-change-tensor, ordinary second factor; R1 Lean reduction"
  },
  "mathlib_searches": [
   {
@@ -129,14 +121,14 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psp2009 (reviewer sub-agent of L); spot-checked: Return 19:04 points 1-4 repaired: step 1 now cites lem-pc-rf-base-change-complex (Tag 0A1D, f qcqs, E in D_QCoh, G bounded-above qcoh S-flat; statement matches Stacks text); step 2 cites thm-pd-spreading-out (01ZM) and combined node lem-pc-noetherian-approximation-data (01ZR/05LY/081G/09RF, true as stated); step 3 cites lem-pc-noetherian-perfect-direct-image (Tag 0DJQ, fp is a specialization of locally finite type, fp modules coherent over Noetherian); pullback/locality of perfectness argued from the definition (accepted as elementary). No duplicate nodes for these tags in dag/nodes; no cycle. FIX more, RETURN less: (1) E4 step 1: hypotheses of the base-change node checked in text (fp => qcqs by def-pc-morphism-conventions, perfect => D_QCoh, fp terms quasi-coherent, bounded => bounded above); (2) C4 step 2: wrong tags 0C0C (descend smooth) and 09RK (factor regular immersion) corrected to 05LY, 081G (+30.26.7), 09RF; (3) C1 step 3: base change for X_i -> Spec R_i now cites lem-pc-rf-base-change-complex in uses; stale split_report summary tags corrected. Second reading by J1 missed the wrong tags left in step 2 text.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
+  "existing": false,
   "module": "Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage",
-  "declaration": "AlgebraicGeometry.properSupport_perfect_directImage",
   "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportPerfectDirectImage.lean",
-  "statement": "theorem properSupport_perfect_directImage {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) (G : CochainComplex X.Modules ℤ) (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) [∀ n : ℤ, (G.X n).IsFinitePresentation] (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f) (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) : Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), Nonempty ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ≅ (schemeDerivedDirectImage (pullback.snd f g)).obj ((derivedPullback (pullback.fst f g)).obj E ⊗ (derivedPullback (pullback.fst f g)).obj (DerivedCategory.Q.obj G)))",
+  "declaration": "AlgebraicGeometry.properSupport_perfect_directImage",
+  "statement": "theorem properSupport_perfect_directImage\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E)\n    (G : CochainComplex X.Modules ℤ)\n    (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    [∀ n : ℤ, (G.X n).IsFinitePresentation]\n    (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f)\n    (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) :\n    Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj\n      (E ⊗ (DerivedCategory.Q.obj G))) ∧\n      ∀ {T : Scheme.{u}} (g : T ⟶ S),\n        Nonempty ((derivedPullback g).obj\n            ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ≅\n          (schemeDerivedDirectImage (pullback.snd f g)).obj\n            ((derivedPullback (pullback.fst f g)).obj E ⊗\n              DerivedCategory.Q.obj\n                (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex\n                  (.up ℤ)).obj G)))",
   "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "R1",
+  "date": "2026-10-13"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -157,5 +149,99 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "R1 stage 2",
+  "old_statement": "Let $f:X\\to S$ be a morphism of schemes of finite presentation [def-pc-morphism-conventions]. Let $E\\in D(\\mathcal O_X)$ be perfect [def-pc-perfect-complex], and let $\\mathcal G^\\bullet$ be a bounded complex of finitely presented $\\mathcal O_X$-modules, each flat over $S$, whose terms have support proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]. Then $$K=Rf_*(E\\otimes^L_{\\mathcal O_X}\\mathcal G^\\bullet)$$ is perfect in $D(\\mathcal O_S)$, and its formation commutes with arbitrary base change: for every $g:T\\to S$, the canonical map $Lg^*K\\to Rf_{T,*}(E_T\\otimes^L_{\\mathcal O_{X_T}}\\mathcal G_T^\\bullet)$ is an isomorphism.",
+  "what": "The node intended ordinary G_T but its Lean used derived pullback of G. Explicitly specify ordinary termwise pullback to agree with Tag 0A1D; these differ for A=Z[x]/(2x), G=A/(x), base change to F2. The latter derived pullback has Tor_2=F2 while the ordinary pulled complex is concentrated in degree zero. Hypotheses and perfectness clause are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0A1D, lemma-base-change-tensor, precise statement in proof; Tag 0A1H invokes it"
+  },
+  "old_stmt_deps": [
+   "def-pc-morphism-conventions",
+   "def-pc-derived-category",
+   "def-pc-perfect-complex",
+   "def-weil-pbc-closed-subset-proper-over-base",
+   "def-pc-derived-direct-image",
+   "def-pc-derived-pullback",
+   "def-pc-base-change"
+  ],
+  "old_proof": [
+   {
+    "text": "The arbitrary-base-change assertion is Stacks Project, Lemma 36.26.4 (Tag 0A1D), applied with E as the perfect object (hypotheses of [lem-pc-rf-base-change-complex] checked: f of finite presentation is quasi-compact and quasi-separated by [def-pc-morphism-conventions]; a perfect E is locally quasi-isomorphic to a finite complex of finite free modules, so its cohomology sheaves are quasi-coherent and E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X); the terms of G^\\bullet are finitely presented, hence quasi-coherent, and a bounded complex is bounded above) and G^\\bullet as the bounded-above termwise S-flat complex. Its canonical comparison is exactly Lg^* Rf_*(E\\otimes^L G^\\bullet) \\cong Rf_{T,*}(L(g')^*E\\otimes^L (g')^*G^\\bullet) for every g:T\\to S; since E is perfect, L(g')^*E identifies with E_T. Thus it remains to prove perfectness of K.",
+    "uses": [
+     "lem-pc-rf-base-change-complex"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Lemma 36.30.1, Tag 0A1H, first sentence of proof invoking Lemma 36.26.4 (Tag 0A1D)"
+    }
+   },
+   {
+    "text": "Assume S is affine, S = Spec(R), and write R as a filtered colimit of Noetherian rings R_i. By Limits, Lemma 32.10.1 (Tag 01ZM), after replacing i, the finite-presentation morphism X\\to S descends to X_i\\to\\operatorname{Spec}(R_i). The finite-presentation, flatness, proper-support, and perfectness descent assertions are exactly the combined Noetherian-approximation statement [lem-pc-noetherian-approximation-data], which packages Tags 01ZR, 05LY, 081G (with Cohomology of Schemes, Lemma 30.26.7), and 09RF. Hence after increasing i we have a bounded finitely presented complex G_i^\\bullet flat over R_i with proper support and a perfect E_i whose base changes recover the original data.",
+    "uses": [
+     "thm-pd-spreading-out",
+     "lem-pc-noetherian-approximation-data"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Lemma 36.30.1, Tag 0A1H, Noetherian approximation paragraph"
+    }
+   },
+   {
+    "text": "Apply the Noetherian perfect-direct-image theorem, Stacks Lemma 36.27.2 (Tag 0DJQ), to X_i\\to\\operatorname{Spec}(R_i), E_i, and G_i^\\bullet. It makes Rf_{i,*}(E_i\\otimes^L G_i^\\bullet) perfect. Pullback preserves perfectness because a perfect object is locally a bounded finite locally free complex, and this local description also shows perfectness is Zariski-local. The base-change isomorphism of [lem-pc-rf-base-change-complex] for X_i\\to\\operatorname{Spec}(R_i) (finite presentation over a Noetherian base, hence quasi-compact and quasi-separated) along \\operatorname{Spec}(R)\\to\\operatorname{Spec}(R_i), as in step 1, identifies the pullback with K; the affine argument therefore glues over S.",
+    "uses": [
+     "lem-pc-noetherian-perfect-direct-image",
+     "lem-pc-rf-base-change-complex"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Lemma 36.30.1, Tag 0A1H, final application of Lemma 36.27.2 (Tag 0DJQ)"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-rf-base-change-complex",
+   "thm-pd-spreading-out",
+   "lem-pc-noetherian-approximation-data",
+   "lem-pc-noetherian-perfect-direct-image"
+  ],
+  "citers": [
+   {
+    "id": "lem-sc-proper-flat-right-adjoint-open-support",
+    "holds": true,
+    "note": "The Stacks interpretation is unchanged: the original node intended ordinary base-changed G. Perfectness is unchanged; the only Lean user of this theorem uses its first conjunct. Any use of the second clause must keep the ordinary factor as in Tag 0A1D."
+   },
+   {
+    "id": "lem-sc-proper-flat-right-adjoint-direct-sums",
+    "holds": true,
+    "note": "The Stacks interpretation is unchanged: the original node intended ordinary base-changed G. Perfectness is unchanged; the only Lean user of this theorem uses its first conjunct. Any use of the second clause must keep the ordinary factor as in Tag 0A1D."
+   },
+   {
+    "id": "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "holds": true,
+    "note": "The Stacks interpretation is unchanged: the original node intended ordinary base-changed G. Perfectness is unchanged; the only Lean user of this theorem uses its first conjunct. Any use of the second clause must keep the ordinary factor as in Tag 0A1D."
+   },
+   {
+    "id": "lem-pc-rf-perfect-base-change",
+    "holds": true,
+    "note": "The Stacks interpretation is unchanged: the original node intended ordinary base-changed G. Perfectness is unchanged; the only Lean user of this theorem uses its first conjunct. Any use of the second clause must keep the ordinary factor as in Tag 0A1D."
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
  }
 }

@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-relatively-flat-tensor-base-change-iso",
+ "kind": "statement",
+ "title": "Object isomorphism for relatively flat tensor base change",
+ "statement": "Let $f:X\\to S$ be quasi-compact and quasi-separated [def-pc-morphism-conventions], $g:T\\to S$, and $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Let $G^\\bullet$ be a bounded-above complex of quasi-coherent modules termwise flat over $S$. Write $f_T:X_T\\to T$ and $g\\prime:X_T\\to X$ for the projections [def-pc-base-change]. There is an isomorphism $Lg^*Rf_*(E\\otimes^L G^\\bullet)\\cong Rf_{T,*}(L(g\\prime)^*E\\otimes^L (g\\prime)^*G^\\bullet)$, where the second factor is ordinary termwise tensor pullback [def-pc-module-pullback], regarded in the derived category. The derived functors are [def-pc-derived-pullback] and [def-pc-derived-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A1D, lemma-base-change-tensor, object-level reading of its canonical comparison"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution of a representative of E. Its total tensor with G represents E tensor^L G using the derived tensor counit for a K-flat left factor.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relativelyFlat_derivedBaseChange_complex to the K-flat representative, its tensor identification, and the supplied quasi-coherence, upper bound and relative flatness. Take asIso of its invertible composite.",
+   "uses": [
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary pullback of the total tensor is the total tensor of the ordinary pullbacks by module tensor compatibility. The pulled K-flat left factor represents derived pullback of E. Thus this total complex represents the tensor of that object with Q of the ordinary pulled G. Apply the direct-image functor to this identification and compose with the preceding isomorphism. No derived pullback of G is substituted.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-product",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-pullback-tensor-product",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution",
+  "lem-pc-rf-base-change-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project (source checked at https://stacks.math.columbia.edu/tag/0A1H and linked tags)",
+  "place": "Tag 0A1D, lemma-base-change-tensor, object-level reading of its canonical comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complexes locality open restriction Noetherian approximation direct image tensor base change",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local Noetherian approximation model of derived direct image bounded relatively flat tensor perfect complex proper support",
+   "results": "Eight hits about flat or smooth algebras; no derived direct-image comparison or perfect-complex locality theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Twelve exact-functor declarations, including mapDerivedCategoryCompIso; no perfectness locality, approximation or tensor base-change theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian.*colimit|colimit.*Noetherian|isLocal.*Perfect",
+   "results": "No Mathlib hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image tensor relatively flat complex ordinary pullback base change isomorphism",
+   "results": "Second reader: 8 hits; Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, CategoryTheory.Tor'_map_app, CategoryTheory.Tor', Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Second reader: 3 hits; SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overFunctorEquiv|KFlat|IsNoetherianRing.*colimit",
+   "results": "Second reader: 3 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; no matching perfect-locality, tensor-base-change object comparison, or simultaneous Noetherian model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage",
+  "group": "R1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Classical Tag 0A1H input: Tag 0A1D, lemma-base-change-tensor, object-level reading of its canonical comparison",
+   "via": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatTensorBaseChangeIso.lean",
+  "declaration": "AlgebraicGeometry.relativelyFlat_tensor_baseChange_iso",
+  "statement": "theorem relativelyFlat_tensor_baseChange_iso\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]\n    (g : T ⟶ S) (E : schemeDerivedCategory X)\n    (hE : schemeDerivedQCohProperty X E) (G : CochainComplex X.Modules ℤ)\n    (hGb : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (G.X n))\n    (hGqc : ∀ n : ℤ, (G.X n).IsQuasicoherent)\n    (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f) :\n    Nonempty ((derivedPullback g).obj\n        ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G)) ≅\n      (schemeDerivedDirectImage (pullback.snd f g)).obj\n        ((derivedPullback (pullback.fst f g)).obj E ⊗\n          DerivedCategory.Q.obj\n            (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex\n              (.up ℤ)).obj G)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-cbcd4",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337853",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
+ }
+}
