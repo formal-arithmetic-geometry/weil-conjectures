@@ -1,0 +1,99 @@
+{
+ "id": "lem-sbc-depth-two-coherent-module-extension",
+ "kind": "statement",
+ "title": "A coherent depth-two module extending a finite etale algebra",
+ "statement": "theorem exists_depth_two_coherent_module_extension\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    ∃ N : L.Modules,\n      N.IsQuasicoherent ∧\n      (∀ V : L.Opens, IsAffineOpen V →\n        Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V))) ∧\n      (∀ y : L, y ∉ U →\n        ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) ∧\n      Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι)",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "the affine double-dual construction produces a coherent extension with finite affine sections and depth at least two at boundary stalks, together with the restriction isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M3",
+  "document": "Stacks Project",
+  "place": "Tag 0EY6 proof of (1), Tags 0EBJ and 0EBI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent depth-two module extending a finite etale algebra",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "depth sheaf module",
+   "results": "no exact matching theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs depth coherent",
+   "results": "no exact matching theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-depth-two-pushforward-coherence",
+   "place": "Intermediate result used by the target proof.",
+   "via": [
+    "lem-sbc-depth-two-pushforward-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoCoherentModuleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoCoherentModuleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_depth_two_coherent_module_extension",
+  "statement": "theorem exists_depth_two_coherent_module_extension\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    (hboundary : ∀ y : L, y ∉ U →\n      (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y) (L.presheaf.stalk y))\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    ∃ N : L.Modules,\n      N.IsQuasicoherent ∧\n      (∀ V : L.Opens, IsAffineOpen V →\n        Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V))) ∧\n      (∀ y : L, y ∉ U →\n        ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n          letI := hfinite\n          (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) ∧\n      Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

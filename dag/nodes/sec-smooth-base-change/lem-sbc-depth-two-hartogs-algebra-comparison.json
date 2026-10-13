@@ -1,0 +1,99 @@
+{
+ "id": "lem-sbc-depth-two-hartogs-algebra-comparison",
+ "kind": "statement",
+ "title": "Hartogs comparison with the actual algebra pushforward",
+ "statement": "theorem depth_two_hartogs_algebra_comparison\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι) →\n    Nonempty (N ≅ B.toModule) ∧\n      ∀ y : L,\n        letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.toAlgebra\n        Nonempty ((TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)\n          ≃ₗ[L.presheaf.stalk y]\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj))",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E9I"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Hartogs extension identifies a coherent module with the actual pushforward from the depth-two open complement; applying stalks gives the scalar-compatible linear equivalences.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M3",
+  "document": "Stacks Project",
+  "place": "Tag 0E9I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hartogs comparison with the actual algebra pushforward",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "depth sheaf module",
+   "results": "no exact matching theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs depth coherent",
+   "results": "no exact matching theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-depth-two-pushforward-coherence",
+   "place": "Intermediate result used by the target proof.",
+   "via": [
+    "lem-sbc-depth-two-pushforward-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoHartogsAlgebraComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.depth_two_hartogs_algebra_comparison",
+  "statement": "theorem depth_two_hartogs_algebra_comparison\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι) →\n    Nonempty (N ≅ B.toModule) ∧\n      ∀ y : L,\n        letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.toAlgebra\n        Nonempty ((TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)\n          ≃ₗ[L.presheaf.stalk y]\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T054227-L-445829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
