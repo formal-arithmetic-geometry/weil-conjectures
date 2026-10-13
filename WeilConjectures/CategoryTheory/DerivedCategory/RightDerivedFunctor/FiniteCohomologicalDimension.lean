@@ -52,7 +52,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveReso
 /-- A left exact additive functor `F : C ⥤ D` of *pointwise* finite cohomological dimension sends
 an exact cochain complex `K` whose terms are all `F`-acyclic to an exact complex `F(K)`, with no
 boundedness assumption on `K`. Here pointwise finite cohomological dimension is measured by a
-jointly conservative family of functors `r i : D ⥤ E` preserving monomorphisms (for example the
+jointly conservative family of functors `r i : D ⥤ E i` preserving monomorphisms (for example the
 stalk functors of sheaves): `r i (R^q F X) = 0` for every `X` and every `q > d i`.
 
 The short exact sequences `0 ⟶ Zⁿ⁻¹ ⟶ Kⁿ⁻¹ ⟶ Zⁿ ⟶ 0` of cycles give injections
@@ -61,7 +61,8 @@ The short exact sequences `0 ⟶ Zⁿ⁻¹ ⟶ Kⁿ⁻¹ ⟶ Zⁿ ⟶ 0` of cycl
 exact sequences of cycles exact. -/
 theorem Acyclic.map_of_rightAcyclic_of_forall_isZero {K : CochainComplex C ℤ}
     (hK : K.Acyclic) (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-    {E : Type*} [Category* E] [HasZeroMorphisms E] {ι : Type*} (r : ι → D ⥤ E)
+    {ι : Type*} {E : ι → Type*} [∀ i, Category* (E i)] [∀ i, HasZeroMorphisms (E i)]
+    (r : ∀ i, D ⥤ E i)
     [∀ i, (r i).PreservesMonomorphisms] (hr : ∀ M : D, (∀ i, IsZero ((r i).obj M)) → IsZero M)
     (d : ι → ℕ) (hF : ∀ i (X : C) (q : ℕ), d i < q → IsZero ((r i).obj ((F.rightDerived q).obj X)))
     (hK' : ∀ n, F.rightAcyclic (K.X n)) :

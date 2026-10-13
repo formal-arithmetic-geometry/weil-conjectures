@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTors
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimensionFamily
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FiniteCohomologicalDimension
 
 /-!
 
@@ -267,7 +267,7 @@ theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ :
   refine Etale.isIso_derivedBaseChangeMap_of_isIso_baseChangeMap _ sq.toCommSq
     (fun M hM hM' ↦ ?_) (fun I _ ↦ ?_)
   · choose d hd using Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper Λ hΛ f'
-    exact hM.map_of_rightAcyclic_of_forall_isZero_of_family _
+    exact hM.map_of_rightAcyclic_of_forall_isZero _
       (fun y ↦ Etale.upperStar (ModuleCat.{u + 1} Λ) (Y'.algClosurePoint y))
       (Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ) d hd hM'
   · have : IsTorsionModuleSheaf I := .of_isTorsion hΛ _
