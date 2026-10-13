@@ -76,28 +76,45 @@ noncomputable def horizontalOrdinaryBaseComparison
     {Y S T : Scheme.{u}} (g : S ⟶ Y) (h : T ⟶ S) :
     qcPullback g ⋙ qcPullback h ≅ qcPullback (h ≫ g) := horizontalMateComp h g
 
-/-- Forward ordinary base-change pasting with the canonical comparisons, without
-any invertibility hypothesis on base change.
-Source: Stacks Project, Remark 20.28.5 (Tag 0ATM), Remark 20.28.3 (Tag 08HY),
-and Lemma 20.27.2 (Tag 0D5S).
-(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting).
+/-- Fixed-comparison mate calculation for ordinary forward pasting.
+Source: Stacks Project, Tags 0ATM and 0D5S.
+Proof: transpose under the pinned adjunction and apply the two derived
+base-change pasting laws, then cancel units and counits.
+(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting-core) -/
+theorem horizontal_ordinary_forward_fixed_pasting_core
+    [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X Y Y' Z : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']
+    (g : Y' ⟶ Y) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    [CompactSpace Z] [QuasiSeparatedSpace Z]
+    (h : Z ⟶ Y') :
+    letI : QuasiSeparatedSpace (pullback f (h ≫ g) : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd f (h ≫ g))
+    letI : QuasiSeparatedSpace (pullback (pullback.snd f g) h : Scheme.{u}) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (pullback.snd f g) h)
+    let s := horizontalOrdinaryUpperComparison f g h
+    let e := pullbackLeftPullbackSndIso f g h
+    let q := pullback.snd f (h ≫ g)
+    let p := pullback.snd (pullback.snd f g) h
+    let k := horizontalOrdinaryTransfer e q p (pullbackLeftPullbackSndIso_hom_snd f g h)
+    let β := qcBaseChange f (h ≫ g)
+    let γ := fun E : schemeDerivedQCohCategory X ↦
+      (qcPullback h).map ((qcBaseChange f g).app E) ≫
+        (@qcBaseChange _ (pullback f g) Y' Z _
+          (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+          (pullback.snd f g) _ _ h).app ((qcPullback (pullback.fst f g)).obj E)
+    ∀ E : schemeDerivedQCohCategory X,
+      (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫
+          β.app E =
+        γ E ≫ (qcDirectImage p).map (s.hom.app E) ≫
+          k.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by sorry
 
-Proof: Transpose the outer ordinary square and the two successive ordinary squares
-under the pinned adjunction for the iterated second projection. Expand each base-change
-map as pullback of the counit followed by adjunction transposition. Naturality moves the
-first counit through the second comparison; the middle projection triangle identity
-cancels its unit and counit. Associativity of the pinned pullback comparison family
-identifies the base chain h,g and the upper chain of first projections. The two projection
-equations for the canonical pullback isomorphism identify the scheme maps and their
-transports. The conjugate of the pullback composition comparison is the pinned direct
-image comparison. Right-adjoint uniqueness identifies direct image along the scheme
-isomorphism with the inverse of its explicitly constructed pullback equivalence;
-the inverse equivalence unit cancels that inverse pullback. Thus the transported outer
-square has exactly the displayed transfer component k. Injectivity of the adjunction
-Hom equivalence gives the ambient equation, and faithfulness of the QCoh inclusions
-reflects it to the displayed equality. No ordinary square is inverted. The calculation
-uses only naturality and triangle identities, so identity arrows, empty schemes and
-zero complexes require no extra hypothesis. -/
+
+/-- Forward ordinary base-change pasting with supplied comparisons equal to the canonical ones.
+Source: Stacks Project, Tags 0ATM, 08HY and 0D5S.
+Proof: substitute the supplied equalities and apply the fixed-comparison core theorem.
+(blueprint: lem-sc-horizontal-ordinary-forward-fixed-pasting) -/
 theorem horizontal_ordinary_forward_fixed_pasting
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y Y' Z : Scheme.{u}}
@@ -131,6 +148,12 @@ theorem horizontal_ordinary_forward_fixed_pasting
       (horizontalOrdinaryBaseComparison g h).hom.app ((qcDirectImage f).obj E) ≫
           β.app E =
         γ E ≫ (qcDirectImage p).map (s'.hom.app E) ≫
-          k'.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by sorry
+          k'.app ((qcPullback (pullback.fst f (h ≫ g))).obj E) := by
+  classical
+  dsimp
+  intro s' k' hs hk
+  subst s'
+  subst k'
+  exact horizontal_ordinary_forward_fixed_pasting_core g f h
 
 end AlgebraicGeometry
