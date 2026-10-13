@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Project T(H) to the skyscraper at x, apply the module stalk functor at x, then use skyscraperStalkEval. The resulting e_H:(T(H))_x to H_x satisfies e_H unit_H=id by the germ and evaluation identities. Naturality in H implies that inner unit insertions commute with e, with their indices reduced by one; the outer insertion followed by e is the identity.",
+   "text": "Define stalk evaluation as the stalk map of the product projection followed by skyscraperStalkEval. The product universal property and skyscraperHomEquiv.left_inv prove evaluation after the germ unit is the identity. The same adjunction identity proves naturality for moduleCup_godementMap. The stalk functor is additive by the underlying abelian-group stalk functor.",
    "uses": [
     "def-sc-module-cup-godement-model",
     "def-pc-module-stalk-functor"
@@ -23,7 +23,23 @@
    "elementary": false
   },
   {
-   "text": "Transport evaluation through the term equalities of ModuleCupGodementModel. In positive degree pair adjacent terms in the alternating sum of cofaces, leaving d h+h d=id. In degree zero the remaining term is id-a r, where r is evaluation in degree zero; r a=id by the unit identity. Negative degrees are zero and all maps there are zero. The same identities say r is a chain map. They give the two homotopies required for a homotopy equivalence whose forward map is the stalk augmentation.",
+   "text": "Separate the zero coface from the finite alternating sum using Fin.sum_univ_succ. The zero insertion followed by evaluation is the identity. Every successor insertion is the Godement map of the preceding insertion, so naturality moves evaluation past it. The successor signs negate the remaining sum; hence the differential followed by evaluation equals identity minus evaluation followed by the previous differential. Transport coface sums along the model term equalities and extendXIso.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the retraction in degree zero by the term isomorphism, stalk evaluation, and the inverse single-object isomorphism; put its other components equal to zero. Its chain-map equations follow from zero objects in negative degrees and from the target being concentrated in degree zero. Construct degree-lowering maps from coordinate evaluation in each positive degree, and put all other components equal to zero. The alternating-sum identity gives the Homotopy.comm equation in positive degrees. In degree zero, the specified augmentation identity identifies the missing summand with the retraction followed by augmentation. Negative degrees are zero.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the augmentation followed by the retraction is the identity degreewise: in degree zero apply the specified augmentation equation and evaluation after the unit, and elsewhere use the zero source. Homotopy.ofEq gives one homotopy. Package the degree-lowering maps and the established differential identity as the other homotopy, reverse its orientation with Homotopy.symm, and construct HomotopyEquiv with forward map exactly the given stalk augmentation.",
    "uses": [
     "def-sc-module-cup-godement-model",
     "def-pc-module-stalk-functor"
@@ -36,9 +52,9 @@
   "def-sc-module-cup-godement-model"
  ],
  "proof_origin": {
-  "by": "R4 stage-3 worker; explicit Lean product-of-module-stalks construction and adaptation of the cited proof",
+  "by": "K2 stage-3 worker; Lean proof using the explicit product projection and stalk-skyscraper adjunction",
   "document": "https://stacks.math.columbia.edu/tag/0FKR",
-  "place": "construction and Lemma 20.30.1; Banerjee section 1.1.4"
+  "place": "Tag 0FKR, Lemma 20.30.1 (0FKS); explicit alternating-coface cancellation"
  },
  "status": "split",
  "created": {
@@ -120,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
+  "reviewer": "X-40bdf",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T140825-L-315952",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T151134-L-877203",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node metadata, report, compilation, axioms, and required importer all match the stage-3 review brief."
  }
 }
