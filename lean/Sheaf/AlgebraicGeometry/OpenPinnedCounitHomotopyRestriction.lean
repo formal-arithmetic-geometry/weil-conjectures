@@ -3,6 +3,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
 public import Sheaf.AlgebraicGeometry.PinnedPullbackCounitShifts
+import Sheaf.AlgebraicGeometry.OpenPinnedTensorCounitTransport
 
 /-! # Pinned counit restriction on homotopy complexes
 Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
@@ -16,6 +17,20 @@ universe u w
 open CategoryTheory Limits
 noncomputable section
 namespace AlgebraicGeometry
+
+private theorem counit_path_glue {C : Type*} [Category C]
+    {A B C₀ D E I J H K : C}
+    (s : A ⟶ B) (c : B ⟶ C₀) (e : C₀ ⟶ D) (a : E ≅ D)
+    (v : E ⟶ I) (ε : D ⟶ J) (b : J ⟶ H) (z : H ⟶ I)
+    (δ : C₀ ⟶ K) (l : K ⟶ I) (out : A ⟶ I)
+    (ht : v = a.hom ≫ ε ≫ b ≫ z)
+    (hc : e ≫ ε ≫ b ≫ z = δ ≫ l)
+    (hs : s ≫ c ≫ δ ≫ l = out) :
+    s ≫ c ≫ e ≫ a.inv ≫ v = out := by
+  rw [ht]
+  simp only [Iso.inv_hom_id_assoc]
+  rw [hc]
+  exact hs
 
 /-- The pinned counit restriction equation for an arbitrary homotopy complex.
 Source: Stacks Project, Tags 08DW, 08HY and 0D5S.
@@ -48,6 +63,25 @@ theorem open_pinned_counit_homotopy_restriction
       DerivedCategory.Qh.map ((openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P) =
     (derivedPullback j).map ((schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app P) ≫
       (pinnedPullbackCounit.{u, w} j).app
-        ((schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ) |>.obj P) := by sorry
+        ((schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ) |>.obj P)  := by
+  classical
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  have ht := open_pinned_target_counit_triangle.{u, w} k U' P
+  have hs := open_pinned_source_counit_triangle.{u, w} U j P
+  have hc := open_pinned_tensor_counit_transport.{u, w} k U U' j hj P
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at ht hs hc
+  have ht' := congrArg (fun f ↦ f ≫ DerivedCategory.Qh.map
+    ((openPinnedHomotopyTensorRestrictionIso k U U' j hj).hom.app P)) ht
+  simp only [Category.assoc] at ht'
+  have h := counit_path_glue
+    ((derivedPullback j).map ((singleComplexOpenPullbackIso X U).inv.app
+      (DerivedCategory.Qh.obj P)))
+    ((pinnedPullbackComposition.{u, w} j U.ι).hom.app (DerivedCategory.Qh.obj P))
+    (eqToHom (congrArg (fun f ↦ (derivedPullback f).obj (DerivedCategory.Qh.obj P)) hj))
+    ((pinnedPullbackComposition.{u, w} U'.ι k).app (DerivedCategory.Qh.obj P))
+    _ _ _ _ _ _ _ ht' hc hs
+  simpa only [singleComplexRestrictedCoefficient, pinnedPullbackComposition, Iso.app_inv,
+    CategoryTheory.Functor.map_id,
+    Category.comp_id, Category.assoc] using h
 
 end AlgebraicGeometry
