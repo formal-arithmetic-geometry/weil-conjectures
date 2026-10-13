@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift
+import Mathlib.Data.Int.Interval
 
 /-! # Extending degreewise maps between perfect open-site stalks
 
@@ -58,7 +60,57 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
       let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)
       ∃ (e : R ⋙ S ≅ T) (g : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n),
         ∀ n : ℤ, (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) =
-          (e.app P).hom.f n ≫ t n ≫ (e.app Q).inv.f n := by sorry
+          (e.app P).hom.f n ≫ t n ≫ (e.app Q).inv.f n := by
+  classical
+  obtain ⟨a, b, hzero⟩ := hP.1
+  choose m ι π hιπ using hP.2
+  let T := openModuleStalkFunctor X U ⟨x, hxU⟩
+  obtain ⟨e, he⟩ := exists_open_stalk_free_map_local_lifts X U x hxU
+  have lifts (n : ℤ) := he (m n) (Q.X n) (T.map (π n) ≫ t n)
+  choose V hxV hVU lift using lifts
+  let I := {n : ℤ // n ∈ Finset.Icc a b}
+  let D : X.Opens := U ⊓ ⨅ n : I, V n.val
+  have hxD : x ∈ D := by
+    refine ⟨hxU, ?_⟩
+    change x ∈ (↑(⨅ n : I, V n.val) : Set X)
+    rw [TopologicalSpace.Opens.coe_iInf]
+    exact Set.mem_iInter.mpr (fun n ↦ hxV n.val)
+  obtain ⟨W, hW, hxW, hWD⟩ := exists_isAffineOpen_mem_and_subset hxD
+  have hWU : W ≤ U := le_trans hWD inf_le_left
+  have hWV (n : I) : W ≤ V n.val :=
+    le_trans hWD (inf_le_right.trans (iInf_le _ n))
+  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)
+  let S := openModuleStalkFunctor X W ⟨x, hxW⟩
+  let eW := e W hxW hWU
+  choose f hf using (fun n : I ↦ lift n.val W hxW (hWV n) hWU)
+  let g (n : ℤ) : R.obj (P.X n) ⟶ R.obj (Q.X n) :=
+    if hn : n ∈ Finset.Icc a b then R.map (ι n) ≫ f ⟨n, hn⟩ else 0
+  refine ⟨W, hxW, hW, hWU,
+    Functor.mapHomologicalComplexCompIso eW (.up ℤ), g, ?_⟩
+  intro n
+  change S.map (g n) = eW.hom.app (P.X n) ≫ t n ≫ eW.inv.app (Q.X n)
+  by_cases hn : n ∈ Finset.Icc a b
+  · dsimp only [g]
+    rw [dif_pos hn, S.map_comp, hf ⟨n, hn⟩]
+    have hnat := eW.hom.naturality (ι n)
+    change S.map (R.map (ι n)) ≫ eW.hom.app _ =
+      eW.hom.app _ ≫ T.map (ι n) at hnat
+    calc
+      S.map (R.map (ι n)) ≫
+          (eW.hom.app _ ≫ (T.map (π n) ≫ t n) ≫ eW.inv.app _) =
+          (S.map (R.map (ι n)) ≫ eW.hom.app _) ≫
+            T.map (π n) ≫ t n ≫ eW.inv.app _ := by simp only [Category.assoc]
+      _ = (eW.hom.app _ ≫ T.map (ι n)) ≫
+          T.map (π n) ≫ t n ≫ eW.inv.app _ := by rw [hnat]
+      _ = eW.hom.app _ ≫ t n ≫ eW.inv.app _ := by
+        rw [Category.assoc, ← Category.assoc (T.map (ι n)), ← T.map_comp, hιπ n,
+          T.map_id, Category.id_comp]
+  · have hz : IsZero (P.X n) := hzero n (by
+      simp only [Finset.mem_Icc, not_and_or, not_le] at hn
+      exact hn)
+    have ht : t n = 0 := (T.map_isZero hz).eq_of_src _ _
+    dsimp only [g]
+    rw [dif_neg hn, S.map_zero, ht, zero_comp, comp_zero]
 
 end
 end AlgebraicGeometry.Scheme
