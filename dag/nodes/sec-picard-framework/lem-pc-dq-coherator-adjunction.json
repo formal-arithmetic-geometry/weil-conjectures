@@ -25,51 +25,59 @@
  ],
  "proof": [
   {
-   "text": "For qcqs Y, [lem-pc-derived-qcoh-compact-generation] says that D_QCoh(O_Y), with the shifts and distinguished triangles of D(O_Y), is compactly generated, and [lem-pc-derived-qcoh-direct-sums] says that it has all set-indexed coproducts. Its inclusion j into D(O_Y) is exact because the shifts and distinguished triangles of this full subcategory are those of the ambient derived category. The ambient category D(O_Y) has set-indexed coproducts by [lem-pc-derived-ambient-direct-sums]. The functor j preserves coproducts: for a family (E_i)_{i\\in I} in D_QCoh(O_Y), the ambient sum E has H^q(E)\\cong\\bigoplus_i H^q(E_i) for every q by [lem-pc-derived-ambient-direct-sums]. This sheaf is the colimit, over the directed set of finite subsets J of I, of the finite sums \\bigoplus_{i\\in J}H^q(E_i). These finite sums are quasi-coherent by induction on |J| using [lem-weil-pbc-quasi-coherent-module-direct-sum], the empty sum 0 being quasi-coherent. Hence the colimit is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections], so E lies in D_QCoh(O_Y) [def-pc-derived-category]. Because the subcategory is full, the ambient bijection Hom(E,G)\\cong\\prod_i Hom(E_i,G) for G in D_QCoh(O_Y) makes E a coproduct there. Thus every coproduct in D_QCoh(O_Y) is isomorphic to E, and j sends it to an ambient coproduct. Apply [lem-pc-brown-representability-right-adjoint] to j to obtain a right adjoint DQ_Y and its natural Hom bijection. The only scheme hypothesis needed here is qcqs, used by compact generation.",
+   "text": "Obtain the inherited triangulated structure, u-indexed coproducts and compact generation from schemeDerivedQCoh_compactlyGenerated. The ambient category has u-indexed coproducts by derivedAmbientHasCoproducts, and schemeDerivedQCohClosedUnderCoproducts makes the full inclusion preserve them. SheafOfModules.isGrothendieckAbelian and the proved K-injective-resolution library make the ambient derived category locally u-small; the full subcategory is locally u-small as well. Apply brownHomRepresentabilityLocallySmall to the inclusion for each ambient object, and use Mathlib isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top to assemble its right adjoint. The adjunction supplies the required natural Hom bijections.",
    "uses": [
     "def-pc-derived-category",
     "lem-pc-derived-qcoh-compact-generation",
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-brown-representability-right-adjoint",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum",
-    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-pc-brown-hom-representability-locally-small"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6I (Lemma 48.1.1), proof after the sheaf comparison; Derived Categories of Schemes, Lemma perfect-lemma-better-coherator"
-   }
+   "elementary": false
   },
   {
-   "text": "Let u:E\\to E' have DQ_Y(u) an isomorphism. Choose a K-injective complex I representing E. By [def-pc-global-derived-rhom], R\\Gamma(Y,E) is represented by the complex of global sections of I, so its degree-i cohomology is the group of chain maps O_Y[-i] to I modulo homotopy (a map is an i-cocycle of global sections and a null homotopy is an i-coboundary). By [lem-sc-kinjective-quasi-iso-comparison], this group is Hom_{D(O_Y)}(O_Y[-i],E), naturally in E; the same holds for E'. The shift O_Y[-i] has only the quasi-coherent cohomology sheaf O_Y, hence belongs to D_QCoh(O_Y) by [def-pc-derived-category]. The adjunction of Step 1 identifies both Hom groups with Hom_{D_QCoh(O_Y)}(O_Y[-i],DQ_Y(-)), and DQ_Y(u) makes the induced map bijective. Thus every cohomology map of R\\Gamma(Y,u) is an isomorphism, which is precisely a quasi-isomorphism.",
+   "text": "Mathlib singleFunctors.shiftIso identifies O_Y[-i] with the degree-i single complex. Its degree-i homology is O_Y via singleFunctorCompHomologyFunctorIso, and O_Y is quasi-coherent by the proved source-library isQuasicoherent_unit. In all other degrees, homologyFunctorFactors and isZero_single_obj_homology identify its homology with a zero object. The empty quasi-coherent coproduct is zero: Sigma.hom_ext proves its identity is zero, so transport quasi-coherence of this empty sum to the homology object. This includes every integer degree and the empty scheme.",
    "uses": [
-    "def-pc-global-derived-rhom",
-    "lem-sc-kinjective-quasi-iso-comparison",
-    "def-pc-derived-category"
+    "def-pc-derived-category",
+    "lem-pc-quasicoherent-module-coproducts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0B6I (Lemma 48.1.1), final paragraph of the proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Build the additive unitSectionsEquiv by evaluating a unit-module morphism at 1 on the total open. Its inverse extends a global section by restriction to every open and applies unitHomEquiv; the section compatibility and inverse identities are proved explicitly. Cochain.fromSingleEquiv gives an isomorphism between the Hom complex from the degree-zero unit single complex and the underlying additive global-sections complex. The leftHomologyData homology isomorphism identifies its cohomology with CohomologyClass. CohomologyClass.homAddEquiv identifies classes with homotopy morphisms into the shifted K-injective target. Qh_map_bijective supplies the additive derived Hom equivalence; quotientCompQhIso and Q.commShiftIso transport it to the stated localization model. The additive Hom equivalence of the (-i,i) shift adjunction shifts the source instead of the target. Finally mapHomologyIso for forgetting module structure gives the requested additive equivalence from the module-valued global cohomology.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of both comparisons on actual maps. Postcomposition defines a map of Hom complexes and of cohomology classes; an explicit LeftHomologyMapData proves compatibility with leftHomologyData. The degreewise unitSectionsEquiv and Cochain.fromSingleMk_postcomp prove naturality of the sections-complex isomorphism, hence of unitClassSectionsIso. On derived Hom, Cocycle.equivHomShift_symm_postcomp, quotientCompQhIso naturality, Q.commShiftIso naturality, and the shift adjunction Hom naturality prove unitClassDerivedEquiv_naturality. For O_Y[-i] in the full subcategory, the given adjunction conjugates postcomposition by Q(f) to postcomposition by DQ_Y(Q(f)), a bijection since the latter is an isomorphism. Naturality of unitClassDerivedEquiv gives bijectivity of the cohomology-class postcomposition map. Naturality of unitClassSectionsIso then gives an isomorphism on each underlying global cohomology object. The forgetful functor from modules reflects isomorphisms and preserves homology, so quasiIso_map_iff_of_preservesHomology proves the required module-valued quasi-isomorphism.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-category",
   "lem-pc-derived-qcoh-compact-generation",
-  "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-weil-pbc-quasi-coherent-module-direct-sum",
-  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
-  "lem-pc-brown-representability-right-adjoint",
-  "def-pc-global-derived-rhom",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-pc-brown-hom-representability-locally-small",
+  "lem-pc-quasicoherent-module-coproducts",
+  "def-sc-ringed-space-module-cohomology",
   "lem-sc-kinjective-quasi-iso-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0B6I (Lemma 48.1.1)"
+  "place": "Tag 0B6I, final proof paragraph, and perfect-lemma-better-coherator; V2 Lean implementation using the existing locally-small Brown criterion, ambient coproduct closure, and natural K-injective Hom-complex computation."
  },
  "mathlib_searches": [
   {
@@ -176,5 +184,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T045613-L-139600",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
