@@ -18,29 +18,34 @@
  },
  "proof": [
   {
-   "text": "The restricted cartesian square identifies I with Z times_U B. These schemes are affine: Z and B by hypothesis, U by hypothesis, and I by the affine base-change result. The affine scheme/ring equivalence gives C=R tensor_A D, where D=Gamma(Z,O).",
+   "text": "Apply coefficientIntersection_scalar_decomposition to express the intersection scalar as a finite sum of products rho(r_j)*delta(d_j), where rho is the restricted fprime section map and delta is the restricted gprime section map from V=the image of Z in X. This supplies precisely the affine ring calculation, including the empty case.",
    "uses": [
-    "lem-pc-finite-affine-cech-intersection-base-change"
+    "lem-pc-coefficient-intersection-scalar-decomposition"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Write a as a finite sum of r_j tensor d_j. Define d_j*s using the original D-module structure on sections over Z (restricting scalars to A leaves the carrier unchanged). Linearity of the pullback unit, F.restrictAppIso, and restriction give u(d_j*s)=image(1 tensor d_j)*u(s). The structural R-action on the support module is carried to image(r_j tensor 1) by coefficientSupportIso_smul. Thus coefficientSupportIso.inv(image(r_j tensor d_j)*u(s))=r_j*k(d_j*s). Add these equations: every term belongs to span_R(range k), and so does their finite sum. No affine module-section equivalence is needed for this scalar calculation.",
+   "text": "Let e=F.restrictAppIso and u be the restricted pullback generator. Define t_j=e.inv(d_j*e.hom(s)), a genuine section, not a chosen existence witness. Hom.app_smul for the pullback adjunction unit and two applications of Modules.map_smul give u(t_j)=delta(d_j)*u(s); the two structural restriction maps compose to the single map defining delta. coefficientSupportIso_smul and injectivity of its hom give inv(rho(r)*x)=r*inv(x).",
    "uses": [
     "lem-pc-finite-affine-cech-coefficient-comparison-map"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Rewrite a by its finite product expansion. Distribute its action across the sum and map the sum through the additive inverse support map. For each product use mul_smul and the two proved transport formulas to obtain r_j*k(t_j). Each k(t_j) is a generator of the R-span, each R-multiple belongs to the span, and their finite sum belongs to it by Submodule.sum_mem. Restriction of scalars leaves the section carrier unchanged, so these are exactly the target generators.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-affine-cech-intersection-base-change",
+  "lem-pc-coefficient-intersection-scalar-decomposition",
   "lem-pc-finite-affine-cech-coefficient-comparison-map"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker C1",
   "document": "Stacks Project",
-  "place": "Tags 02KG, 01I9, 01IA and 0097",
-  "note": "V3 second reading: scalar transport on one generator only; independent of module-section generation."
+  "place": "Tag 02KG affine tensor calculation; Tags 01I9, 01IA and 0097, unit and restriction formulas",
+  "note": "Complete Lean proof. The affine ring computation uses Mathlib directly; no affine-intersection-morphism lemma is needed."
  },
  "mathlib_searches": [
   {
@@ -125,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T125449-L-3875905",
+  "landing": "20261013T141523-L-378080",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
