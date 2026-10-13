@@ -12956,3 +12956,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: returned deliver/U3/Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison (reviewer RETURN: (reviewer X-b71ea, head b71ea8e5a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fl)
 - 15:20 L: merged deliver/D4/Sheaf.AlgebraicGeometry.Morphisms.RootSplitFactorFiniteEtale (stage 3; reviewer PASS; first push; landing 20261013T152017-L-953413 (proof); batch 20261013T152016; modules 1; new nodes 0)
 - 15:20 L: merged deliver/D4/Sheaf.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits (stage 3; reviewer PASS; first push; landing 20261013T152017-L-953546 (interface); batch 20261013T152016; modules 3; new nodes 2)
+- 15:20 L: merged deliver/N2/Sheaf.AlgebraicGeometry.RelativeMVPinnedTriangleComparison (stage 3; reviewer PASS; first push; landing 20261013T152018-L-953761 (interface); batch 20261013T152016; modules 2; new nodes 1)

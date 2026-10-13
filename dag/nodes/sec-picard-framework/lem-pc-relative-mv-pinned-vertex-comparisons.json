@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-relative-mv-pinned-vertex-comparisons",
+ "kind": "lemma",
+ "title": "Pinned vertex comparisons and the overlap vertical-pasting identity",
+ "statement": "Let g′:X′→X, f′:X′→S′, f:X→S and g:S′→S form a cartesian square of schemes [def-pc-scheme, def-pc-base-change]. Assume the derived module categories of all schemes exist [def-pc-derived-category]. Let K∈D(O_X), K′∈D(O_X′), φ:L(g′)K→K′ and U,V arbitrary opens in X. Set F=Lg*Rf* and G=Rf′* [def-pc-derived-pullback, def-pc-derived-direct-image]. Form the two exact-restriction rows T and T′ of [def-pc-rf-mv-base-change-components], using its fixed mvOpenRestrictionAdjunctions, overlap U∩V and inverse-image overlap, and zero third arrows (zero is just a placeholder, with no distinguishedness asserted). Form the pinned local arrows a(W) of [def-pc-relative-mv-maps]. There exist isomorphisms e₂:F(T₂)≅a(U).left⊕a(V).left, e₃:F(T₃)≅a(U∩V).left, e₂′:G(T₂′)≅a(U).right⊕a(V).right and e₃′:G(T₃′)≅a(U∩V).right. The four identities F(T.mor₁)≫e₂.hom=relativeMVSourceFirst, F(T.mor₂)≫e₃.hom=e₂.hom≫relativeMVSourceSecond, G(T′.mor₁)≫e₂′.hom=relativeMVTargetFirst and G(T′.mor₂)≫e₃′.hom=e₂′.hom≫relativeMVTargetSecond hold. Finally mvBaseChangeOpenMap(U∩V)≫e₃′.hom=e₃.hom≫a(U∩V).hom. No cover, compactness, quasi-coherence, distinguishedness, connecting morphism or triangle morphism is assumed or concluded.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-relative-mv-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-unbounded-mayer-vietoris), 08HZ (lemma-unbounded-relative-mayer-vietoris), 08HY (remark-base-change); perfect.tex, Tag 0DJ9 (lemma-single-complex-base-change), vertex identifications in the induction diagram"
+ },
+ "proof": [
+  {
+   "text": "Use the canonical adjunction uniqueness comparison from exact open restriction to derived pullback. Map it by derived direct image and compose with the right-adjoint mate relativeMVImageComp. Apply Lg* on the source. For the target use also the projection-preserving isomorphism from the inverse-image open to the chosen fibre product. The additive biproduct comparison gives the two middle comparisons. The unit identity for adjunction uniqueness proves both first-arrow identities.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-rf-mv-base-change-components",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the restricted counits under the same adjunction comparisons. The counit identity and the pinned pullback composition coherence give both second-arrow identities, with a negative sign on the V component. Expand the base-change mate as the pulled-back counit, substitute the composite-adjunction counit formula and cancel the triangle identities. The pullback projection equality and the two pinned composition comparisons then identify the overlap composite with relativeMVLocalArrow. Empty or repeated opens and zero objects or object maps satisfy exactly the same formulas.",
+   "uses": [
+    "def-pc-relative-mv-maps",
+    "def-pc-rf-mv-base-change-components",
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-relative-mv-maps",
+  "def-pc-rf-mv-base-change-components",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV, 08HZ and 08HY; expanded vertex and mate calculation by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical vertex isomorphisms identify exact open restriction relative Mayer Vietoris rows with pinned derived pullback direct image rows and base change mates",
+   "results": "Eight hits about sites MayerVietorisSquare and opens MayerVietorisSquare; none states the pinned scheme-derived vertex and mate comparisons.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits: leftAdjointUniq and its unit, counit and transitivity lemmas. They supply adjunction comparison identities but not the scheme-derived vertex and mate comparisons.",
+   "date": "2026-10-13",
+   "verdict": "partial match",
+   "how": "Read Mathlib/CategoryTheory/Adjunction/Unique.lean, declarations leftAdjointUniq, unit_leftAdjointUniq_hom_app and leftAdjointUniq_hom_app_counit."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|mapBiprod|mvBaseChangeOpenMap",
+   "results": "Twenty-five hits, including Adjunction.Unique, AdditiveFunctor and Biproducts; no complete pinned vertex comparison. Local rg over both library roots finds no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "partial matches only",
+   "how": "Read Mathlib/CategoryTheory/Adjunction/Unique.lean and Limits/Preserves/Shapes/Biproducts.lean, including mapBiprod and its lift/desc lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical vertex isomorphisms identify exact open restriction relative Mayer Vietoris rows with pinned derived pullback direct image rows and base change mates",
+   "results": "Service unavailable: Internal Server Error; zero hits returned, so no exact-match conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVPinnedTriangleComparison",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 induction diagram: identify the relative Mayer--Vietoris open vertices and the local base-change component by the pinned adjunction comparisons",
+   "via": [
+    "lem-pc-relative-mv-cone-presentation",
+    "lem-pc-relative-mv-pinned-triangle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVPinnedVertexComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVPinnedVertexComparisons.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_pinned_vertex_comparisons",
+  "statement": "theorem relativeMV_pinned_vertex_comparisons\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) :\n    let F := schemeDerivedDirectImage f ⋙ derivedPullback g\n    let G := schemeDerivedDirectImage f'\n    let T := mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left)\n      (homOfLE inf_le_right) (mvOpenRestrictionAdjunction X U)\n      (mvOpenRestrictionAdjunction X V) (mvOpenRestrictionAdjunction X (U ⊓ V)) K 0\n    let T' := mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))\n      ((TopologicalSpace.Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))\n      ((TopologicalSpace.Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))\n      (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U))\n      (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V))\n      (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V))) K' 0\n    let a := relativeMVLocalArrow f f' g g' hpull K K' φ\n    ∃ (e₂ : F.obj T.obj₂ ≅ (a U).left ⊞ (a V).left)\n      (e₃ : F.obj T.obj₃ ≅ (a (U ⊓ V)).left)\n      (e₂' : G.obj T'.obj₂ ≅ (a U).right ⊞ (a V).right)\n      (e₃' : G.obj T'.obj₃ ≅ (a (U ⊓ V)).right),\n      F.map T.mor₁ ≫ e₂.hom = relativeMVSourceFirst f g U V K ∧\n      F.map T.mor₂ ≫ e₃.hom = e₂.hom ≫ relativeMVSourceSecond f g U V K ∧\n      G.map T'.mor₁ ≫ e₂'.hom = relativeMVTargetFirst g' f' U V K' ∧\n      G.map T'.mor₂ ≫ e₃'.hom = e₂'.hom ≫ relativeMVTargetSecond g' f' U V K' ∧\n      mvBaseChangeOpenMap f f' g g' hpull.w K K' φ (U ⊓ V) ≫ e₃'.hom =\n        e₃.hom ≫ (a (U ⊓ V)).hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T152018-L-953761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T152018-L-953761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
