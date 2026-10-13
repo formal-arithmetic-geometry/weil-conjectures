@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardLeftCechCupConstruction
 public import Sheaf.AlgebraicGeometry.PicardExternalCupHomologyUnique
+import Sheaf.AlgebraicGeometry.PicardRightCechCupHomology
+import Sheaf.AlgebraicGeometry.PicardLeftRightCechCup
 
 /-! # Comparison of the specified left Cech cup on cycles
 
@@ -72,7 +74,42 @@ theorem picardLeftCechCup_homology
             (externalCupCoefficients f g F G)).homology (n : ℤ)),
       IsPicardExternalCupHomology f g F G (fun n ↦
         (a n).inv ≫ HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ (b n).hom) :=
-  by sorry
+  by
+  classical
+  obtain ⟨ψ, hψ⟩ := picardRightCechCup_exists f g
+    (picardFiniteAffineOpens X) (picardFiniteAffineOpens Y) F
+  have hX (i : X.affineCover.finiteSubcover.I₀) :
+      IsAffineOpen (picardFiniteAffineOpens X i) := by
+    dsimp [picardFiniteAffineOpens, Scheme.OpenCover.finiteSubcover_f]
+    exact isAffineOpen_opensRange _
+  have hY (i : Y.affineCover.finiteSubcover.I₀) :
+      IsAffineOpen (picardFiniteAffineOpens Y i) := by
+    dsimp [picardFiniteAffineOpens, Scheme.OpenCover.finiteSubcover_f]
+    exact isAffineOpen_opensRange _
+  have hXc : iSup (picardFiniteAffineOpens X) = ⊤ := by
+    exact X.affineCover.finiteSubcover.iSup_opensRange
+  have hYc : iSup (picardFiniteAffineOpens Y) = ⊤ := by
+    exact Y.affineCover.finiteSubcover.iSup_opensRange
+  obtain ⟨a, b, hab⟩ := picardRightCechCup_homology f g F
+    (picardFiniteAffineOpens X) (picardFiniteAffineOpens Y) hX hY hXc hYc ψ hψ G
+  obtain ⟨s, hs⟩ := picardLeftRightCechCup_compare f g F G θ hθ ψ hψ
+  let t (n : ℕ) := (HomologicalComplex.homologyFunctor (ModuleCat.{w} k)
+    (ComplexShape.up ℤ) (n : ℤ)).mapIso s
+  refine ⟨fun n ↦ t n ≪≫ a n, b, ?_⟩
+  have hmaps (n : ℕ) :
+      (t n).hom ≫ HomologicalComplex.homologyMap (ψ.app G) (n : ℤ) =
+        HomologicalComplex.homologyMap (θ.app F) (n : ℤ) := by
+    change HomologicalComplex.homologyMap s.hom (n : ℤ) ≫ _ = _
+    rw [← HomologicalComplex.homologyMap_comp, hs]
+  have heq : (fun n ↦ (t n ≪≫ a n).inv ≫
+      HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ (b n).hom) =
+      (fun n ↦ (a n).inv ≫
+        HomologicalComplex.homologyMap (ψ.app G) (n : ℤ) ≫ (b n).hom) := by
+    funext n
+    rw [← hmaps n]
+    simp only [Iso.trans_inv, Category.assoc, Iso.inv_hom_id_assoc]
+  rw [heq]
+  exact hab
 
 end
 end AlgebraicGeometry.Scheme.Modules
