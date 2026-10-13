@@ -12,15 +12,16 @@
  ],
  "proof": [
   {
-   "text": "Take the existential nonnegative integer complexes K,L,M, their quasi-isomorphic augmentations and total tensor cochain map from moduleCup_godement_pairing; no specified or natural Godement model is assumed by this lemma. Restrict the complexes to natural degrees using their strictly nonnegative support. On each tensor summand and open, compose tensoring sections with the summand inclusion and the supplied cochain map. The cochain-map equation gives signed Leibniz, sheaf morphisms give restriction compatibility, and the degree-zero equation gives augmentation compatibility.",
+   "text": "Use the MonoidalPreadditive proof in SheafOfModules.tensorClosed and obtain the strictly nonnegative flasque integer complexes K,L,M, quasi-isomorphic augmentations a,b,c and tensor cochain map t from moduleCup_godement_pairing. Restrict each complex along embeddingUpNat. The map from restriction to truncGE′ is an isomorphism for strictly supported complexes; truncGE preserves quasi-isomorphisms, hence restriction does too. Identify the restriction of the degree-zero single complex with single₀ to construct the natural-degree augmentations. Curry tensorSectionsMap followed by the tensor-summand inclusion and t to define the section pairing. Naturality of sheaf morphisms and tmulSection_map give restriction compatibility. The tensor differential formula on each summand, composed with the cochain identity of t, gives signed Leibniz. The two equality transports are proved by substitution, and the integer negOnePow becomes (-1)^r in natural degrees. The degree-zero equation of t supplies augmentation compatibility.",
    "uses": [
     "def-sc-module-cup-resolution-data",
-    "lem-sc-module-cup-godement-aw"
+    "lem-sc-module-cup-godement-aw",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false
   },
   {
-   "text": "The supplied terms are flasque and the supplied augmentations are quasi-isomorphisms. Extend each augmentation to a comparison with an injective resolution degree by degree. Use moduleCup_flasque_acyclicity for the terms, then the separately cited Leray acyclic-resolution criterion to show that global comparison homology maps are isomorphisms. Assemble the three computing resolutions and their section pairing into CupResolutionPairing.",
+   "text": "For each restricted flasque resolution choose the existing injectiveResolution of its coefficient sheaf and construct the comparison explicitly by InjectiveResolution.descOfQuasiIso applied to the identity. Its commutation theorem gives the over-augmentation equality and its existing instance proves that the comparison is a quasi-isomorphism. Global sections preserves finite limits by its evaluation construction. moduleCup_flasque_acyclicity makes the source terms right-acyclic, and Functor.rightAcyclic_of_injective makes the injective terms right-acyclic. Apply Functor.quasiIso_map_of_rightAcyclic_nat from WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic to obtain isomorphisms on every global homology group. Assemble these explicitly constructed computing resolutions and the section pairing into CupResolutionPairing.",
    "uses": [
     "def-sc-module-cup-resolution-data",
     "def-sp-injective-resolutions",
@@ -35,14 +36,17 @@
   "def-sc-module-cup-resolution-data",
   "def-sc-ringed-space-module-cohomology",
   "def-sp-injective-resolutions",
+  "lem-pc-sheaf-modules-tensor-closed",
   "lem-sc-module-cup-flasque-acyclicity",
   "lem-sc-module-cup-godement-aw",
   "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "P3 stage-3 worker",
+  "by": "U3 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/0FKU",
-  "place": "Proof of the acyclic-resolution characterization, extracted from the item docstring and Section 20.31"
+  "place": "Cohomology of Sheaves, Section 20.31; Lemma 20.31.3 and the flasque-resolution proof of Lemma 20.31.4 (Tag 0FKV); implementation of the existing two-step plan using Mathlib restriction/truncation and the source acyclic-resolution comparison",
+  "date": "2026-10-13",
+  "group": "U3"
  },
  "mathlib_searches": [
   {
@@ -131,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-02feb",
-  "group": "P3",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T100051-L-2475276",
-  "kind": "interface",
-  "note": "independent Codex review: Matched preserved signatures and definition bodies, the proof decomposition and six named obligations with their nodes, sources and report; all ten delivered modules and direct importer Sheaf.Paper.CechCupProduct compile cleanly, and axiom probes satisfy the brief."
+  "landing": "20261013T115954-L-3403918",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

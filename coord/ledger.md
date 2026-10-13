@@ -12352,3 +12352,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:59 L: merged deliver/K4/Sheaf.Algebra.Homology.HomTensorDifferentialSummand (stage 3; reviewer PASS; after a return; landing 20261013T115952-L-3403537 (interface); batch 20261013T115950; modules 3; new nodes 2)
 - 11:59 L: merged deliver/P1/Sheaf.AlgebraicGeometry.SingleComplexOpenUnitNaturality (stage 3; reviewer PASS; first push; landing 20261013T115953-L-3403652 (proof); batch 20261013T115950; modules 1; new nodes 0)
 - 11:59 L: merged deliver/T3/Sheaf.Algebra.Homology.TorIndependentKFlatResolutionTensor (stage 3; reviewer PASS; first push; landing 20261013T115953-L-3403751 (interface); batch 20261013T115950; modules 2; new nodes 1)
+- 11:59 L: merged deliver/U3/Sheaf.Paper.ModuleCupPairingExists (stage 3; reviewer PASS; first push; landing 20261013T115954-L-3403918 (proof); batch 20261013T115950; modules 1; new nodes 0)
