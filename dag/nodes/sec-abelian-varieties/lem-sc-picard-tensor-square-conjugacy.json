@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-picard-tensor-square-conjugacy",
+ "kind": "statement",
+ "title": "Conjugation identifies the tensor pullback square comparison",
+ "statement": "Let $f:X\\to S$, $f':X'\\to T$, $g:T\\to S$ and $v:X'\\to X$ be morphisms of schemes [def-pc-scheme], with $f\\circ v=g\\circ f'$ (written $v \\gg f=f' \\gg g$ in Lean). Let $A$ be an arbitrary module on $S$. Write $P_k$ for tensor pullback [def-pc-module-pullback], $R_k$ for pushforward, and use the pinned adjunctions [lem-pc-module-pullback-adjunction]. The inverse conjugate [def-weil-pbc-adjunction-mate] of the pushforward square $R_v R_f\\to R_{vf}\\to R_{f'g}\\to R_{f'}R_g$, evaluated at $A$, equals the composite $P_{f'}P_g A\\to P_{f'g}A\\to P_{vf}A\\to P_vP_f A$ constructed using the tensor composition isomorphisms [lem-sc-picard-canonical-base-change-comparisons] and the equality of the composite morphisms. This asserts coherence of the composition comparisons; it involves neither a base-change morphism nor a counit formula. The exact equality is lean.statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Composition of pullback and pushforward; with the adjunction in 0096 and the square mate in 08HY."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Transport each tensor pullback to ordinary pullback by picardTensorComparison. Uniqueness of left adjoints identifies the conjugate of each comparison with the identity. Whiskering and composition of conjugates therefore reduce the composition maps to conjugateEquiv_pullbackComp_inv for ordinary pullback. Substitute equal morphisms for the middle equality comparison; on sections its pushforward map is the identity. Compose the three conjugation equations and invert the bijection. Evaluate at A; naturality of picardTensorComparison identifies the composition component with picardTensorCompIso, and eqToHom_app identifies the equality transport. Express the final three factors as the hom of their composite isomorphism, avoiding premature reduction of equality-transport homs.",
+   "uses": [
+    "lem-sc-picard-canonical-base-change-comparisons",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Adjunction uniqueness and composition, expanded as categorical coherence for the tensor formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp|leftAdjointUniq|mateEquiv_counit",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Unique.lean', 'Mathlib/CategoryTheory/Adjunction/Triple.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean']",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools; no exact scheme tensor square comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a base change map followed by the counit equals the pullback composition comparison followed by pullback of the counit",
+   "results": "['CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit', 'CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc', 'CategoryTheory.ExponentiableMorphism.ev_coev', 'CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom', 'CategoryTheory.ExponentiableMorphism.ev_coev_assoc', 'CategoryTheory.MorphismProperty.Over.mapPullbackAdj_counit_app', 'CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit', 'CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit']",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools; no exact scheme tensor square comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "['CategoryTheory.conjugateEquiv', 'CategoryTheory.conjugateEquiv_id', 'CategoryTheory.conjugateEquiv_iso', 'CategoryTheory.conjugateEquiv_of_iso', 'CategoryTheory.conjugateEquiv_symm_id', 'CategoryTheory.conjugateEquiv_symm_iso', 'CategoryTheory.conjugateEquiv_symm_of_iso', 'CategoryTheory.conjugateEquiv_adjunction_id']",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools; no exact scheme tensor square comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conjugate of a composite pushforward square is the tensor pullback composition comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeCounit",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero cup-pairing base-change compatibility in Tag 0BDP: identifying the pullback square comparison in the counit calculation.",
+   "via": [
+    "lem-sc-picard-base-change-counit",
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardTensorSquareConjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTensorSquareConjugacy.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardTensorSquareConjugacy",
+  "statement": "theorem picardTensorSquareConjugacy\n    {X S T X' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ T)\n    (g : T ⟶ S) (v : X' ⟶ X) (e : v ≫ f = f' ≫ g) (A : S.Modules) :\n    let adj : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), tensorPullback k ⊣ pushforward k :=\n      fun k ↦ Classical.choose (exists_tensorPullbackAdjunction k)\n    ((conjugateEquiv ((adj f).comp (adj v)) ((adj g).comp (adj f'))).symm\n      ((pushforwardComp v f).hom ≫ (pushforwardCongr e).hom ≫\n        (pushforwardComp f' g).inv)).app A =\n    (picardTensorCompIso f' g A ≪≫\n      eqToIso (congrArg (fun k ↦ (tensorPullback k).obj A) e.symm) ≪≫\n      (picardTensorCompIso v f A).symm).hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T111840-L-3048598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T111840-L-3048598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
