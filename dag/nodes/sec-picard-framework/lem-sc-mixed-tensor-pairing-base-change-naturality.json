@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-mixed-tensor-pairing-base-change-naturality",
+ "kind": "statement",
+ "title": "Naturality of the derived base-change map",
+ "statement": "For any commutative square of scheme morphisms f:X→S, f′:X′→S′, g:S′→S, g′:X′→X with g′;f=f′;g [def-pc-scheme], let β_E:Lg*Rf_*E→Rf′_*Lg′*E be the canonical derived base-change map [def-pc-derived-base-change-map]. For all E,F in D(O_X) [def-pc-derived-category] and every a:E→F, β_E;Rf′_*(Lg′*a) = Lg*(Rf_*a);β_F. Neither a pullback square nor invertibility of β is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-derived-base-change-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY: the canonical base-change map as adjoint transpose"
+ },
+ "proof": [
+  {
+   "text": "Form the natural transformation q by whiskering the fixed pullback-composition comparisons and the fixed derived-adjunction counit. Its component is definitionally the arrow transposed in schemeDerivedBaseChangeMap. Apply q.naturality a and the left and right naturality of the adjunction Hom equivalence. This gives the equality, reversed to match the displayed convention. This is the existing private proof in AffineMorphismHomOutOfPerfect, reused without importing that unrelated module.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 08HY and Lemma 079U",
+  "note": "Second reading by J4: identity coherence remains open; naturality uses the existing private categorical proof, with no new assumptions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the base change mate with the tensor pairing of direct image right adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley base change mate respects the tensor product lax monoidal comparison on direct image",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no exact theorem for the fixed scheme comparisons. Naturality is proved below from naturality of the transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_square",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left_square",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no exact theorem for the fixed scheme comparisons. Naturality is proved below from naturality of the transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_square|rightAdjointLaxMonoidal|mateEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic categorical tools only; no exact theorem for the fixed scheme comparisons. Naturality is proved below from naturality of the transpose."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChange",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: tensor compatibility underlying the internal Hom exchange",
+   "via": [
+    "lem-sc-mixed-internal-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedTensorPairingBaseChangeNaturality.lean",
+  "declaration": "AlgebraicGeometry.mixedTensorPairing_baseChange_naturality",
+  "statement": "theorem mixedTensorPairing_baseChange_naturality\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g) {E F : schemeDerivedCategory X} (a : E ⟶ F) :\n    schemeDerivedBaseChangeMap f f' g g' h E ≫\n        (schemeDerivedDirectImage f').map ((derivedPullback g').map a) =\n      (derivedPullback g).map ((schemeDerivedDirectImage f).map a) ≫\n        schemeDerivedBaseChangeMap f f' g g' h F",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T145727-L-751536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T145727-L-751536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

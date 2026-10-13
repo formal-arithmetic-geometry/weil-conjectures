@@ -6,6 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeTransport
+import Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeNaturality
 
 /-! # Base change preserves the direct-image tensor pairing
 Source: Stacks Project, cohomology.tex Tag 08I3 and Remark 08HY;
@@ -77,6 +79,29 @@ theorem mixedTensorPairing_baseChange
       (derivedPullback g).map
         (mixedDirectImageTensorPairing f A B ≫ (schemeDerivedDirectImage f).map a) ≫
       schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
-        pullback.condition C := by sorry
+        pullback.condition C := by
+  have h :
+    (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+        pullback.condition A ⊗ₘ
+      schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+        pullback.condition B) ≫
+      mixedDirectImageTensorPairing (pullback.snd f g)
+        ((derivedPullback (pullback.fst f g)).obj A)
+        ((derivedPullback (pullback.fst f g)).obj B) ≫
+      (schemeDerivedDirectImage (pullback.snd f g)).map
+        ((mixedHomTensorPullbackIso (pullback.fst f g)).inv.app (A, B)) =
+    (mixedHomTensorPullbackIso g).inv.app
+        ((schemeDerivedDirectImage f).obj A, (schemeDerivedDirectImage f).obj B) ≫
+      (derivedPullback g).map
+        (mixedDirectImageTensorPairing f A B) ≫
+      schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
+        pullback.condition (A ⊗ B) := by
+    exact mixedTensorPairing_baseChange_identity f g A B
+  have ha := congrArg
+    (fun z ↦ z ≫ (schemeDerivedDirectImage (pullback.snd f g)).map
+      ((derivedPullback (pullback.fst f g)).map a)) h
+  simpa only [Functor.map_comp, Category.assoc,
+    mixedTensorPairing_baseChange_naturality] using ha
+
 
 end AlgebraicGeometry
