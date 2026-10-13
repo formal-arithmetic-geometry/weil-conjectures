@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-formal-completion-affine-natural-comparison",
+ "kind": "statement",
+ "title": "Natural affine section comparison for coherent completion",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], I a quasi-coherent ideal sheaf, and U an affine open [def-weil-affine-spectrum] with Noetherian open subscheme. Write A = Gamma(X,U) and J = I(U). Let rho: Coh(X,I) → Coh(U,I|U) [def-weil-pbc-coherent-formal-module] be a functor whose composite with the full inverse-system inclusion equals termwise open restriction. There exists a zero-preserving functor F: Coh(U,I|U) → Mod(A), reflecting limits of parallel pairs, and A-linear equivalences e_G: F(rho(completion G)) ≃ AdicCompletion J Gamma(G,U) [def-weil-pbc-adic-completion] for every coherent G. For every coherent morphism f: G → H and every element x, e_H(F(rho(completion f))(x)) = AdicCompletion.map J (Gamma(f,U))(e_G(x)). No short exact sequence, finite-generation conclusion, or exactness assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine identification in the proof, and Lemma 087W (lemma-inverse-systems-affine)"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Put A = Gamma(X,U) and J = I(U). Transport formal systems through the canonical isomorphism U ≅ Spec A and identify the ideal using the affine ideal dictionary. Apply the affine formal-module equivalence of 087W, and compose with the full finite-module inclusion and scalar restriction to A to obtain F.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalences and full inclusion reflect limits by full faithfulness. Restriction of scalars preserves limits and reflects isomorphisms, hence reflects limits because its source has limits. Composition gives reflection of parallel-pair limits. The componentwise natural limit cones show F preserves zero maps.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open restriction preserves ideal products, powers, and quotient cokernels. Affine sections identify the positive-level quotient system of any coherent G with Gamma(G,U)/J^(n+1)Gamma(G,U), with canonical quotient transitions. The specified equality after the formal-system inclusion identifies this very system with rho(completion G).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limiting cones of 087W identify F(rho(completion G)) with the inverse limit of these quotients. Adjoining the initial zero quotient gives the limit defining AdicCompletion. The unique limit isomorphism yields e_G. For a coherent map f, evaluate the two composites on every quotient projection: both are reduction of f. Joint monicity of the limit projections proves naturality. Zero and unit ideals, empty affine opens, and zero modules require no exceptions.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine identification in the proof, and Lemma 087W (lemma-inverse-systems-affine)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine formal coherent modules identified with adic completion of sections naturally on morphisms",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.of_apply; no natural affine coherent-completion comparison found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules on an affine open are naturally identified with adic completion of sections of coherent modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*completion|adic.*completion|moduleSpecΓFunctor",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean; no natural affine coherent-completion comparison found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalCompletionAffineComparison",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine identification in Lemma 0881: natural realization of completion by the affine inverse-limit equivalence (087W); steps 2–4 of lem-weil-pbc-formal-completion-affine-comparison.",
+   "via": [
+    "lem-weil-pbc-formal-completion-affine-comparison",
+    "lem-weil-pbc-formal-completion-affine-kernel",
+    "lem-weil-pbc-formal-completion-exact",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalCompletionAffineNaturalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineNaturalComparison.lean",
+  "declaration": "AlgebraicGeometry.formalCompletion_affine_natural_comparison",
+  "statement": "theorem formalCompletion_affine_natural_comparison\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)\n    (ρ : CoherentFormalModule X I ⥤ CoherentFormalModule U.toScheme (I.comap U.ι))\n    (hρ : ρ ⋙ (IsCoherentFormalModule (I.comap U.ι)).ι =\n      (IsCoherentFormalModule I).ι ⋙\n        (Functor.whiskeringRight ℕᵒᵖ X.Modules U.toScheme.Modules).obj\n          (Scheme.Modules.restrictFunctor U.ι)) :\n    ∃ F : CoherentFormalModule U.toScheme (I.comap U.ι) ⥤ ModuleCat.{u} Γ(X, U),\n      F.PreservesZeroMorphisms ∧ ReflectsLimitsOfShape WalkingParallelPair F ∧\n      ∃ e : ∀ G : CoherentModules X,\n        F.obj (ρ.obj ((completion X I).obj G)) ≃ₗ[Γ(X, U)]\n          AdicCompletion (I.ideal ⟨U, hU⟩) Γ(G.obj, U),\n        ∀ (G H : CoherentModules X) (f : G ⟶ H) (x),\n          e H ((F.map (ρ.map ((completion X I).map f))) x) =\n            AdicCompletion.map (I.ideal ⟨U, hU⟩) (f.hom.val.app (op U)).hom (e G x)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4a1ac",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T062517-L-731821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-4a1ac",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T062517-L-731821",
+  "kind": "interface"
+ }
+}
