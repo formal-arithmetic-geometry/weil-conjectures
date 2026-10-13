@@ -18,11 +18,69 @@
  },
  "stmt_deps": [
   "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit"
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the given bounded representative E^\\bullet and complex representatives I_n of C_n. A bounded complex whose terms are direct summands of finite free A_T-modules is K-flat: tensoring an acyclic complex with a finite free complex is acyclic degreewise, and the property is preserved by finite direct sums, bounded totalization, and retracts. Hence E^\\bullet\\otimes_{A_T}I_n computes C_n\\otimes^L_{A_T}E. By the termwise product description in [def-weil-pbc-derived-inverse-limit], which applies because countable products are exact, the product complex \\prod_n I_n represents R\\!\\prod_n C_n. The canonical comparison is therefore represented by the chain map (\\prod_n I_n)\\otimes E^\\bullet\\to\\prod_n(I_n\\otimes E^\\bullet), with all objects in D(\\operatorname{Mod}(T_{\\Proet},A_T)).",
+   "uses": [
+    "def-weil-derived-tensor",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, final sentence: tensor with the bounded finite-projective representative in the A_T-module sheaf category"
+   }
+  },
+  {
+   "text": "For a finite free term A_T^r, tensoring a product of complexes with that term is the canonical finite distributivity map (\\prod_n C_n)^r\\cong\\prod_n C_n^r. The same map is an isomorphism for a direct summand, because the idempotent defining the summand acts on both sides and the product comparison intertwines these idempotents. Thus the comparison is an isomorphism degreewise for every term E^j, and it is natural in the term maps and in the family maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, bounded finite-projective mechanism: finite free terms and direct summands"
+   }
+  },
+  {
+   "text": "Since E^\\bullet is bounded, each degree of its total tensor with a product is a finite direct sum of the degreewise comparisons from step 2. These finite direct sums are isomorphisms, and the displayed sign differential is respected because every component comparison is induced by the same product projections. Hence the chain map is a quasi-isomorphism before passing to the derived category. The exactness of countable products of A_T-module sheaves ensures that the product complex represents the derived product and that this quasi-isomorphism remains an isomorphism after localization.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, Roos product computation: finite totalization and exact countable products"
+   }
+  },
+  {
+   "text": "By the definition of the derived inverse-limit construction, each occurrence R\\!\\prod_{n\\geq1}C_n is the product in D(\\operatorname{Mod}(T_{\\Proet},A_T)) computed termwise by the exact-product model. Applying the chain-level isomorphism of step 3 and then localizing gives the canonical comparison in the statement. Because every map used is induced by the projections and the tensor bifunctor, the construction is functorial in E and in all maps of the family (C_n).",
+   "uses": [
+    "def-weil-pbc-derived-inverse-limit",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, final sentence on tensor and the two derived Roos products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-derived-inverse-limit",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+  "place": "Proof, final sentence on tensor and the two derived Roos products"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,12 +119,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-reduction-reconstruction",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-projective-tensor-products",
+  "worker": "stage1",
+  "summary": "Expanded the imported tensor-product clause into a four-step proof: derived tensors are represented by the bounded finite-projective complex, finite free distributivity extends to direct summands, bounded totalization preserves the product comparison, and the termwise product model gives the canonical functorial derived comparison. No new nodes were needed; all non-elementary ambient product and derived-category facts cite existing statements.",
+  "blueprint": "Realizes the parent lemma's proof sentence asserting that tensor with a bounded finite-projective representative commutes with the two derived products in the Roos triangle, interpreted over A_T-module sheaves.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "The proof needs exactness of countable products in the pro-etale A_T-module sheaf category to identify the termwise product complex with the derived product; the proper-base-change unit has no local replacement for this generic product theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-abb1198bc",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-abb1198bc (reviewer sub-agent of L); spot-checked: The finite-projective product comparison is mathematically sound and all hypotheses, source routes, cited statements, edge cases, and Mathlib searches were checked. Two repairable faults remain: step 1 assumed uncited K-injective representatives in the completed pro-etale A_T-module category, so the repair uses arbitrary complex representatives as allowed by the exact-product definition; step 4 misstated the ambient category as D(T_Proet,A), corrected to D(Mod(T_Proet,A_T)). Review and corrected whole-node JSON are written under the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }
