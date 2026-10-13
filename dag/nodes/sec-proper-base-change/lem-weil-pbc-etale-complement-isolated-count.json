@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-etale-complement-isolated-count",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the finite-type decomposition at Tag 00UK, one-point removal and complementary fibre count",
+   "via": [
+    "lem-weil-pbc-finite-type-etale-finite-factor-decomposition",
+    "lem-weil-pbc-etale-retraction-finite-type-splitting",
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "strict decrease for the complementary idempotent fibre",
+ "statement": "Let R→S be a finite-type map of commutative rings [def-weil-pbc-finite-type-algebra], let R→R₁ be any algebra, p⊂R and P⊂R₁ primes with P over p and bijective canonical residue-field map κ(p)→κ(P) [def-weil-residue-field]. Put C=R₁⊗_R S. Let e∈C be idempotent. Suppose q⊂S is a prime over p at which S/R is quasi-finite, and r⊂C is a prime over P contracting to q with e∉r. Then the number of points with open singleton in Spec(κ(P)⊗_{R₁}(C/(e))) is strictly less than the number in Spec(κ(p)⊗_R S) [def-weil-affine-spectrum]. The comparison does not require R→R₁ étale or C[e⁻¹] finite.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00UK, induction proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "The bijective canonical residue-field map κ(p)→κ(P) is a field isomorphism. Associativity/cancellation of tensor products identifies κ(P)⊗[R₁](R₁⊗[R]S) with κ(p)⊗[R]S. The corresponding spectrum homeomorphism is compatible with contraction to S. This is the affine ring form of the base-change fibre description and the fibre-prime correspondence.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre of D=C/(e) is the quotient of the fibre of C by the image of e (Mathlib Algebra.TensorProduct.tensorQuotientEquiv). Since e is idempotent, its zero locus is clopen, the complement of D(e). Its spectrum is that clopen subspace, by the quotient/localization identification and the localization basic-open homeomorphism. Isolated points in this open subspace remain isolated in the ambient fibre.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre point corresponding to r is outside the clopen quotient factor because e∉r. Under the residue-field comparison it corresponds to q by hrq. It is isolated because q is quasi-finite, using the quasi-finite/fibre-singleton criterion recorded with the one-prime theorem.",
+   "uses": [
+    "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The isolated-point set in the original finite-type field fibre is finite. The clopen inclusion followed by the spectrum homeomorphism gives an injective map from the quotient isolated-point set into it, missing the isolated point corresponding to q. The image is a strict subset; Set.ncard_image_of_injective and Set.ncard_lt_ncard give the strict inequality, also showing the quotient set is finite.",
+   "uses": [
+    "lem-weil-pbc-finite-type-field-finite-isolated-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+  "lem-weil-pbc-finite-type-field-finite-isolated-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00UK proof lines 40362-40420"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isolated points of a clopen complementary idempotent factor of a fiber decrease in number under an isomorphism of residue fields",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, Ideal.ResidueField.map",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_of_isIdempotentElem|preimageHomeomorphFiber|localization_away_isOpenEmbedding",
+   "results": "12 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleFiniteFactorDecomposition",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleComplementIsolatedCount",
+  "file": "lean/Sheaf/RingTheory/EtaleComplementIsolatedCount.lean",
+  "declaration": "Algebra.fibre_ncard_quotient_idempotent_lt",
+  "statement": "theorem fibre_ncard_quotient_idempotent_lt {R : Type u} {S : Type (max u v)} {R₁ : Type u} [CommRing R] [CommRing S] [CommRing R₁] [Algebra R S] [Algebra R R₁] [Algebra.FiniteType R S] (p : Ideal R) [p.IsPrime] (P : Ideal R₁) [P.IsPrime] [P.LiesOver p] (hres : Function.Bijective (Ideal.ResidueField.mapₐ p P (Algebra.ofId R R₁) (P.over_def p))) (e : R₁ ⊗[R] S) (he : IsIdempotentElem e) (q : Ideal S) [q.IsPrime] [q.LiesOver p] [Algebra.QuasiFiniteAt R q] (r : Ideal (R₁ ⊗[R] S)) [r.IsPrime] [r.LiesOver P] (hrq : r.comap Algebra.TensorProduct.includeRight.toRingHom = q) (her : e ∉ r) : {z : PrimeSpectrum (P.Fiber ((R₁ ⊗[R] S) ⧸ Ideal.span {e})) | IsOpen ({z} : Set (PrimeSpectrum (P.Fiber ((R₁ ⊗[R] S) ⧸ Ideal.span {e}))))}.ncard < {z : PrimeSpectrum (p.Fiber S) | IsOpen ({z} : Set (PrimeSpectrum (p.Fiber S)))}.ncard",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T115032-L-3327016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T115032-L-3327016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

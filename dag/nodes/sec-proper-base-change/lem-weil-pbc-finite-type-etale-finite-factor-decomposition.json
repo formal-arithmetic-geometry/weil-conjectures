@@ -34,99 +34,58 @@
  ],
  "proof": [
   {
-   "text": "*Fibre and induction parameter.* Put $F=S\\otimes_R\\kappa(\\mathfrak p)$. The base change is a finitely generated $\\kappa(\\mathfrak p)$-algebra, so its isolated spectrum points form a finite set by [lem-weil-pbc-finite-type-field-finite-isolated-points]. By [lem-weil-pbc-fibre-ring-primes-bijection], these points correspond to primes of $S$ over $\\mathfrak p$, and by [def-weil-pbc-ring-map-quasi-finite-at-prime] they are exactly the primes where $R\\to S$ is quasi-finite at the prime. We prove the assertion by induction on an upper bound $N$ for their number.",
+   "text": "Replace S by its actual ULift to Type(max u v), transporting finite type by ULift.algEquiv. Prove a private auxiliary assertion by strong induction on an upper bound for the ncard of the isolated-point set of the fibre.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-finite-type-field-finite-isolated-points",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, proof lines 40362-40420: finite isolated points in the finite-type fibre"
-   }
-  },
-  {
-   "text": "*Base case.* If $N=0$, take $R'=R$, $\\mathfrak p'=\\mathfrak p$, $A'=0$, and $B'=S$. The identity is etale, the residue-field map is the identity, and $R'\\otimes_RS\\cong0\\times S$. The finite factor is finite, and the last assertion is exactly the absence of isolated fibre points in the definition [def-weil-pbc-ring-map-quasi-finite-at-prime].",
-   "uses": [
-    "def-weil-etale-morphism",
-    "def-weil-residue-field",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, proof lines 40362-40420: empty quasi-finite locus"
-   }
-  },
-  {
-   "text": "*One isolated point.* Assume $N>0$ and choose an isolated prime $\\mathfrak q\\subset S$ over $\\mathfrak p$. Applying [lem-weil-pbc-etale-quasi-finite-finite-one-prime] gives an etale map $R\\to R_1$, a prime $\\mathfrak p_1$ over $\\mathfrak p$ with $\\kappa(\\mathfrak p)\\cong\\kappa(\\mathfrak p_1)$, an idempotent $e$ in $C=R_1\\otimes_RS$, and a prime $\\mathfrak r$ over $\\mathfrak p_1$ with $e\\notin\\mathfrak r$, such that $C_e$ is finite over $R_1$, $\\mathfrak r$ is the unique prime over $\\mathfrak p_1$ not containing $e$, and its contraction to $S$ is $\\mathfrak q$. Let $D=C_{1-e}$. Then $C\\cong C_e\\times D$, and $R_1\\to D$ is finite type by base change and localization.",
-   "uses": [
-    "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
-    "def-weil-etale-morphism",
-    "def-weil-residue-field",
     "def-weil-pbc-finite-type-algebra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, proof lines 40362-40420, applying Lemma 00UJ to one isolated fibre prime"
-   }
+   "elementary": true
   },
   {
-   "text": "*The count drops.* The residue-field isomorphism identifies the fibre of $C$ over $\\mathfrak p_1$ with $F$, and [lem-weil-pbc-fibre-ring-primes-bijection] transports the topology and isolatedness. Primes of $D=C_{1-e}$ over $\\mathfrak p_1$ correspond to primes of $C$ over $\\mathfrak p_1$ containing $e$, since a prime contains one of the orthogonal idempotents $e$ and $1-e$. The selected prime $\\mathfrak r$ has $e\\notin\\mathfrak r$, so it lies in the $C_e$ factor and not in $D$. Thus the fibre of $R_1\\to D$ has at most $N-1$ isolated points.",
+   "text": "When the ncard is zero, finiteness of isolated points implies the set is empty. Use the identity R-algebra, P=p, A=PUnit (the zero ring), B=S, and TensorProduct.lid followed by AlgEquiv.uniqueProd.symm. The canonical residue-field map is the identity. A quasi-finite prime over p would give an isolated fibre point by the definition, contradicting emptiness.",
    "uses": [
-    "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-finite-type-field-finite-isolated-points",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "def-weil-residue-field"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, proof lines 40362-40420: the idempotent factor removes the selected isolated point"
-   }
+   "elementary": false
   },
   {
-   "text": "*Induction and assembly.* Apply the induction hypothesis to $R_1\\to D$ and $\\mathfrak p_1$, obtaining an etale $R_1\\to R_2$, a prime $\\mathfrak p_2$, and $R_2$-algebras $A_2,B_2$ with $R_2\\otimes_{R_1}D\\cong A_2\\times B_2$, $A_2$ finite, and $R_2\\to B_2$ non-quasi-finite over $\\mathfrak p_2$. Tensor $C\\cong C_e\\times D$ along $R_1\\to R_2$ and use [lem-weil-pbc-algebra-tensor-product-distributes-product] to obtain $R_2\\otimes_RS\\cong(R_2\\otimes_{R_1}C_e)\\times A_2\\times B_2$. Set $A'=(R_2\\otimes_{R_1}C_e)\\times A_2$ and $B'=B_2$. The first factor is finite because $C_e$ is finite and finite modules remain finite after base change; a finite product of finite modules is finite. The composite $R\\to R_2$ is etale by [lem-weil-pbc-etale-composition-cancellation], and the residue-field isomorphisms compose.",
+   "text": "For positive ncard apply the proved one-point-removal theorem. It constructs R₁,P₁,A₁,D and a decomposition R₁⊗_R S≃A₁×D with A₁ finite and strictly smaller fibre count for D. Invoke the strong induction hypothesis on R₁→D at P₁.",
    "uses": [
-    "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
-    "lem-weil-pbc-algebra-tensor-product-distributes-product",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-weil-pbc-etale-isolated-point-removal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, proof lines 40362-40420: induction, tensoring, and combining finite factors"
-   }
+   "elementary": false
   },
   {
-   "text": "*The complementary factor.* Since $B'=B_2$, every prime of $B'$ over $\\mathfrak p_2$ is non-quasi-finite by the induction hypothesis, which is the required final clause. This completes the induction and combines all finite factors into the single finite algebra $A'$.",
+   "text": "Compose the étale algebras using Algebra.Etale.comp and the lying-over relations using Ideal.LiesOver.trans. Prove equality of the composite canonical residue-field map with the composition using Ideal.ResidueField.ringHom_ext and map_algebraMap; compose their bijectivity proofs.",
    "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use TensorProduct.cancelBaseChange, TensorProduct.congr, prodRight, prodCongr and the explicit product reassociation to identify R₂⊗_R S with ((R₂⊗_{R₁}A₁)×A₂)×B₂. Module.Finite.base_change and Module.Finite.prod give finiteness of the new A. The B₂ clause is exactly the induction hypothesis. Finally transport back from ULift S along TensorProduct.congr.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-product-distributes-product",
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00UK, final paragraphs of the proof (lines 40362-40420)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-type-algebra",
   "lem-weil-pbc-finite-type-field-finite-isolated-points",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
-  "def-weil-etale-morphism",
   "def-weil-residue-field",
-  "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
-  "lem-weil-pbc-algebra-tensor-product-distributes-product",
-  "lem-weil-pbc-etale-composition-cancellation"
+  "lem-weil-pbc-etale-isolated-point-removal",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-algebra-tensor-product-distributes-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40362-40420; tensor/base-change and fibre-count details written out here"
+  "place": "Tag 00UK proof: strong induction, explicit zero-ring base case, one-point removal, and tensor/product assembly; Lean written by U1 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -205,5 +164,15 @@
   "group": "G1",
   "result": "pass",
   "note": "finite type R->S [Algebra.FiniteType R S], prime p; etale R' : Type u (R's universe; ULift feeds E1 49bcfd276's Type (max u v) hR) Algebra.Etale; P prime LiesOver p; kappa iso = ResidueField.mapₐ p P ofId bijective (E1 form); R'⊗[R]S ≃ₐ[R'] A×B, A B : Type (max u v); Module.Finite R' A; ∀ q of B LiesOver P, ¬IsQuasiFiniteAtPrime R' B q; FiniteType R' B witness only types the predicate (B quotient of R'⊗S); zero A/B and empty fibre allowed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T115032-L-3327016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

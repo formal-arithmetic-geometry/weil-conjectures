@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-etale-isolated-point-removal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the finite-type decomposition at Tag 00UK, one-point removal and complementary fibre count",
+   "via": [
+    "lem-weil-pbc-finite-type-etale-finite-factor-decomposition",
+    "lem-weil-pbc-etale-retraction-finite-type-splitting",
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "one-point etale splitting and strict decrease of isolated fibre points",
+ "statement": "Let R→S be a finite-type map of commutative rings [def-weil-pbc-finite-type-algebra], and p a prime. If the set of points of Spec(κ(p)⊗_R S) [def-weil-residue-field, def-weil-affine-spectrum] with open singleton has positive finite cardinality, there exist an étale R-algebra R₁ [def-weil-etale-morphism], a prime P over p with bijective canonical residue-field map, and R₁-algebras A,D with D finite type, C=R₁⊗_R S≅A×D and A finite as R₁-module, such that the isolated-point set in Spec(κ(P)⊗_{R₁}D) has strictly smaller cardinality than that in Spec(κ(p)⊗_R S). No assertion that the remaining fibre has no isolated points is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00UK, induction proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Choose an isolated fibre point from the positive ncard. Apply the inverse of PrimeSpectrum.preimageHomeomorphFiber to obtain a prime q over p. Algebra.QuasiFiniteAt.of_isOpen_singleton on the fibre, followed by of_quasiFiniteAt_residueField, establishes Algebra.QuasiFiniteAt R q. These are the fibre correspondence and quasi-finiteness facts recorded by the cited nodes.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-etale-quasi-finite-finite-one-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (00UJ) to q. It gives R₁, P, e, r, residue-field bijectivity and finiteness of C[e⁻¹], where C=R₁⊗[R]S.",
+   "uses": [
+    "lem-weil-pbc-etale-quasi-finite-finite-one-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct A=C/(1-e) and D=C/(e), using their actual quotient rings. Mathlib IsLocalization.Away.quotient_of_isIdempotentElem identifies A as C[e⁻¹]; the localization algebra equivalence transfers module finiteness. AlgEquiv.prodQuotientOfIsIdempotentElem with 1-e and e supplies C≃A×D. D is finite type as a quotient of the base change. These are direct applications of the indicated Mathlib declarations, not choices of unproved existence witnesses.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the complementary-fibre cardinal lemma to e, q and r, with their supplied contraction, avoidance and residue-field data. This supplies the strict decrease, completing the one-point removal.",
+   "uses": [
+    "lem-weil-pbc-etale-complement-isolated-count"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-etale-quasi-finite-finite-one-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-etale-complement-isolated-count"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00UK proof lines 40362-40420"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isolated points of a clopen complementary idempotent factor of a fiber decrease in number under an isomorphism of residue fields",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, Ideal.ResidueField.map",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_of_isIdempotentElem|preimageHomeomorphFiber|localization_away_isOpenEmbedding",
+   "results": "12 hits: Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; component lemmas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleFiniteFactorDecomposition",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleIsolatedPointRemoval",
+  "file": "lean/Sheaf/RingTheory/EtaleIsolatedPointRemoval.lean",
+  "declaration": "Algebra.exists_etale_finiteFactor_smaller_fibre",
+  "statement": "theorem exists_etale_finiteFactor_smaller_fibre {R : Type u} {S : Type (max u v)} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (p : Ideal R) [p.IsPrime] (hpos : 0 < {q : PrimeSpectrum (p.Fiber S) | IsOpen ({q} : Set (PrimeSpectrum (p.Fiber S)))}.ncard) : ∃ (R₁ : Type u) (_ : CommRing R₁) (_ : Algebra R R₁) (_ : Algebra.Etale R R₁) (P : Ideal R₁) (_ : P.IsPrime) (_ : P.LiesOver p) (A : Type (max u v)) (_ : CommRing A) (_ : Algebra R₁ A) (D : Type (max u v)) (_ : CommRing D) (_ : Algebra R₁ D) (_ : Algebra.FiniteType R₁ D), Function.Bijective (Ideal.ResidueField.mapₐ p P (Algebra.ofId R R₁) (P.over_def p)) ∧ Nonempty ((R₁ ⊗[R] S) ≃ₐ[R₁] (A × D)) ∧ Module.Finite R₁ A ∧ {q : PrimeSpectrum (P.Fiber D) | IsOpen ({q} : Set (PrimeSpectrum (P.Fiber D)))}.ncard < {q : PrimeSpectrum (p.Fiber S) | IsOpen ({q} : Set (PrimeSpectrum (p.Fiber S)))}.ncard",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T115032-L-3327016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T115032-L-3327016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
