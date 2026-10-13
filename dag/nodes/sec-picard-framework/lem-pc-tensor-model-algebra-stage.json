@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-tensor-model-algebra-stage",
+ "kind": "statement",
+ "title": "One finite-stage pushout square for a tensor model",
+ "statement": "Let $I$ be a directed preorder and $F:I\\to\\mathrm{CommRing}$ a diagram with colimit cocone $(C,\\iota)$ [def-weil-pbc-category-colimit]. Fix $i\\in I$, finitely presented $F(i)$-algebras $A,B$ [def-weil-pbc-finitely-presented-algebra] and an $F(i)$-algebra map $f:A\\to B$. Let $P,Q$ be commutative rings, $Q$ a $P$-algebra, with $P$ finitely presented over $\\mathbf Z$ and $Q$ finitely presented over $P$. Put $X=C\\otimes_{F(i)}A$, $Y=C\\otimes_{F(i)}B$. Given a $P$-algebra structure on $X$ and a ring isomorphism $e:X\\otimes_PQ\\simeq Y$ whose restriction to $X$ equals $1\\otimes f$, there are $k\\ge i$ and $q_k:Q\\to B_k=F(k)\\otimes_{F(i)}B$ such that the map $B_k\\to Y$ composed with $q_k$ is $e$ composed with the right inclusion. Moreover $A_k=F(k)\\otimes_{F(i)}A$ admits a $P$-algebra structure for which its induced $P$-map to $B_k$ equals the one through $Q$, and the square $P\\to A_k$, $P\\to Q$, $A_k\\xrightarrow{1\\otimes f}B_k$, $Q\\xrightarrow{q_k}B_k$ is a pushout (its canonical map $A_k\\otimes_PQ\\to B_k$ is an isomorphism). All scalar extensions use $F(i)\\to F(k)$ and $F(i)\\to C$ from the diagram and cocone. There is no assertion about later stages.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO and 05N9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "On the cofinal tail above i, the tensors with A and B have colimits X and Y.\n   Tensor products commute with filtered colimits, by representatives and eventual\n   equality. Factor P to X through one stage using finite presentation over Z.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO and 05N9"
+   }
+  },
+  {
+   "text": "The map Q to Y induced by e is P-linear, by he. Factor it through a B stage\n   using finite presentation of Q over P. The tensor universal property produces\n   a comparison from the model algebra to the prescribed algebra there.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO and 05N9"
+   }
+  },
+  {
+   "text": "B is finitely presented over A: finite presentation over the common base and\n   finite type of A imply this. Both sides of the comparison are therefore\n   finitely presented over the A stage. Descend the inverse of e and both inverse\n   identities by Tag 05N9, then take a common upper bound.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (3), final paragraph; Tags 00QO and 05N9"
+   }
+  },
+  {
+   "text": "At the common later stage k the comparison and its descended inverse are inverse ring maps. Transport the canonical tensor pushout along that equivalence. Its restrictions to A_k and Q are the prescribed map f_k and the descended Q-map. Naturality of the factorization gives its equality after passage to Y. This concludes only one finite-stage square, with no assertion about a family on a tail.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (3), final paragraph; Tags 00QO and 05N9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented algebra pushout model of a directed colimit descends to one stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebra pushout model of a directed colimit descends to one stage",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.isFinitelyPresentable_hom, CommRingCat.pushoutCoconeIsColimit, isFinitelyPresentable, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom, CommRingCat.isFinitelyPresentable_under",
+   "date": "2026-10-13",
+   "verdict": "components only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout.*comp|tensorProduct_tensorProduct|exists_tensor_model",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Localization/BaseChange.lean",
+   "date": "2026-10-13",
+   "verdict": "components only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TensorModelAlgebraDescent",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: eventual flatness of a finitely presented module, using Algebra Lemma 10.168.1 (Tag 02JO), part (3), after restricting to affine charts; model comparison, affine descent step 8; tensor-model comparison: A compatible algebra tensor model becomes a pushout on a directed tail; One finite-stage pushout square for a tensor model",
+   "via": [
+    "lem-pc-fp-module-tensor-model-comparison",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent",
+    "lem-pc-tensor-model-algebra-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TensorModelAlgebraStage",
+  "file": "lean/Sheaf/RingTheory/TensorModelAlgebraStage.lean",
+  "declaration": "AlgebraicGeometry.exists_tensor_model_algebra_stage",
+  "statement": "theorem exists_tensor_model_algebra_stage\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {A B : Type w} [CommRing A] [CommRing B]\n    [Algebra (F.obj i : Type v) A] [Algebra (F.obj i : Type v) B]\n    [Algebra.FinitePresentation (F.obj i : Type v) A]\n    [Algebra.FinitePresentation (F.obj i : Type v) B] (f : A →ₐ[F.obj i] B)\n    (P Q : Type x) [CommRing P] [CommRing Q] [Algebra P Q]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    (aP : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Algebra P ((c.pt : Type v) ⊗[F.obj i] A))\n    (e : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      ((c.pt : Type v) ⊗[F.obj i] A) ⊗[P] Q ≃+* (c.pt : Type v) ⊗[F.obj i] B)\n    (he : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n        (Algebra.TensorProduct.map (Algebra.ofId (c.pt : Type v) (c.pt : Type v))\n          f).toRingHom) :\n    ∃ (k : I) (hik : i ≤ k),\n      letI := (F.map (homOfLE hik)).hom.toAlgebra\n      ∃ qk : Q →+* (F.obj k : Type v) ⊗[F.obj i] B,\n        (letI : Algebra (F.obj i : Type v) (c.pt : Type v) :=\n          (c.ι.app i).hom.toAlgebra\n         let t : F.obj k →ₐ[F.obj i] c.pt :=\n           { (c.ι.app k).hom with\n             commutes' := fun s ↦ ConcreteCategory.congr_hom (c.w (homOfLE hik)) s }\n         (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp qk =\n           e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) ∧\n        (let D := (F.obj k : Type v) ⊗[F.obj i] A\n         let E := (F.obj k : Type v) ⊗[F.obj i] B\n         let d : D →+* E :=\n           (Algebra.TensorProduct.map (AlgHom.id (F.obj k) (F.obj k)) f).toRingHom\n         letI : Algebra D E := d.toAlgebra\n         letI : Algebra Q E := qk.toAlgebra\n         ∃ aPk : Algebra P D,\n           letI := aPk\n           letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n           letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n           ∃ hPQ : IsScalarTower P Q E,\n             letI := hPQ\n             Algebra.IsPushout P D Q E)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113354-L-3187744",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113354-L-3187744",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

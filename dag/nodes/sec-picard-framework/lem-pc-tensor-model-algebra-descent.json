@@ -13,64 +13,33 @@
  ],
  "proof": [
   {
-   "text": "On the cofinal tail above i, the tensors with A and B have colimits X and Y.\n   Tensor products commute with filtered colimits, by representatives and eventual\n   equality. Factor P to X through one stage using finite presentation over Z.",
+   "text": "Use the finite-stage descent statement to obtain k above i, qk, its prescribed image in Y, and the pushout square at k. This is only the finite-stage part of the argument, not the tail statement.",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-pc-tensor-model-algebra-stage"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   },
   {
-   "text": "The map Q to Y induced by e is P-linear, by he. Factor it through a B stage\n   using finite presentation of Q over P. The tensor universal property produces\n   a comparison from the model algebra to the prescribed algebra there.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "text": "For each j above k define qj=(F(k to j) tensor id_B) composed with qk. Cocone naturality and tensor-map composition show that qj has the prescribed image in Y. Functoriality F(k to j) followed by F(j to l)=F(k to l) and tensor-map composition prove compatibility qj to ql. These are the two explicit ring-hom equalities in the Lean proof.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "B is finitely presented over A: finite presentation over the common base and\n   finite type of A imply this. Both sides of the comparison are therefore\n   finitely presented over the A stage. Descend the inverse of e and both inverse\n   identities by Tag 05N9, then take a common upper bound.",
+   "text": "Apply pushout preservation under scalar extension with R=F(i), S=F(k), T=F(j), t=F(k to j), and the original f. The resulting Q-map is definitionally qj and its pushout conclusion is precisely the third clause.",
    "uses": [
-    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-weil-pbc-colimit-category-fp-algebras"
+    "lem-pc-tensor-model-pushout-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
-  },
-  {
-   "text": "Extend the resulting algebra isomorphism and the two structure maps to every\n   later stage by base change. Its tensor universal property is precisely the\n   pushout square asserted here. The maps from Q are compatible with transition\n   maps and with the given map to Y by construction. Zero rings and empty\n   presentations require no separate nonvanishing or flatness hypothesis.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-base-change-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-category-fp-algebras",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+  "lem-pc-tensor-model-algebra-stage",
+  "lem-pc-tensor-model-pushout-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02JO (3), final paragraph; Tags 00QO, 05N9 and 05N7"
+  "place": "Tag 02JO (3), final paragraph; finite-stage descent by 00QO and 05N9, then explicit transition and pushout pasting"
  },
  "mathlib_searches": [
   {
@@ -151,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261013T100055-L-2476642",
+  "landing": "20261013T113354-L-3187744",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

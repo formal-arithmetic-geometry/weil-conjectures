@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.RingTheory.TensorModelAlgebraStage
+import Sheaf.RingTheory.TensorModelPushoutBaseChange
 
 /-! # Descending the algebra part of a tensor model
 
@@ -22,6 +24,18 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
 namespace AlgebraicGeometry
+
+private theorem tensor_map_comp_left
+    {R S T U B : Type*} [CommRing R] [CommRing S] [CommRing T]
+    [CommRing U] [CommRing B] [Algebra R S] [Algebra R T]
+    [Algebra R U] [Algebra R B] (u : S →ₐ[R] T) (v : T →ₐ[R] U) :
+    (Algebra.TensorProduct.map v (AlgHom.id R B)).toRingHom.comp
+      (Algebra.TensorProduct.map u (AlgHom.id R B)).toRingHom =
+      (Algebra.TensorProduct.map (v.comp u) (AlgHom.id R B)).toRingHom := by
+  apply RingHom.ext
+  intro x
+  exact DFunLike.congr_fun
+    (Algebra.TensorProduct.map_comp v u (AlgHom.id R B) (AlgHom.id R B)).symm x
 
 /-- The algebra part of a finitely presented tensor model descends to a compatible
 family of pushout squares on a tail. This statement involves no modules.
@@ -102,6 +116,60 @@ theorem exists_tensor_model_algebra_tail
           letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
           ∃ hPQ : IsScalarTower P Q E,
             letI := hPQ
-            Algebra.IsPushout P D Q E) := by sorry
+            Algebra.IsPushout P D Q E) := by
+  obtain ⟨k, hik, qk, hlimit, hpush⟩ :=
+    exists_tensor_model_algebra_stage F c hc f P Q aP e he
+  let := (F.map (homOfLE hik)).hom.toAlgebra
+  let : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra
+  let t (j : I) (hkj : k ≤ j) :
+      let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+      F.obj k →ₐ[F.obj i] F.obj j := by
+    let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+    exact { (F.map (homOfLE hkj)).hom with
+      commutes' := fun s ↦ (ConcreteCategory.congr_hom
+        (F.map_comp (homOfLE hik) (homOfLE hkj)) s).symm }
+  let q (j : I) (hkj : k ≤ j) :
+      let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+      Q →+* (F.obj j : Type v) ⊗[F.obj i] B := by
+    let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+    exact (Algebra.TensorProduct.map (t j hkj)
+      (AlgHom.id (F.obj i) B)).toRingHom.comp qk
+  refine ⟨k, hik, q, ?_, ?_, ?_⟩
+  · intro j hkj
+    let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+    let cj : F.obj j →ₐ[F.obj i] c.pt :=
+      { (c.ι.app j).hom with
+        commutes' := fun s ↦ ConcreteCategory.congr_hom
+          (c.w (homOfLE (hik.trans hkj))) s }
+    let ck : F.obj k →ₐ[F.obj i] c.pt :=
+      { (c.ι.app k).hom with
+        commutes' := fun s ↦ ConcreteCategory.congr_hom (c.w (homOfLE hik)) s }
+    have ht : cj.comp (t j hkj) = ck := by
+      ext s
+      exact ConcreteCategory.congr_hom (c.w (homOfLE hkj)) s
+    change (Algebra.TensorProduct.map cj (AlgHom.id (F.obj i) B)).toRingHom.comp
+      ((Algebra.TensorProduct.map (t j hkj) (AlgHom.id (F.obj i) B)).toRingHom.comp
+        qk) = _
+    rw [← RingHom.comp_assoc, tensor_map_comp_left, ht]
+    exact hlimit
+  · intro j l hkj hkl hjl
+    let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+    let := (F.map (homOfLE (hik.trans hkl))).hom.toAlgebra
+    let tjl : F.obj j →ₐ[F.obj i] F.obj l :=
+      { (F.map (homOfLE hjl)).hom with
+        commutes' := fun s ↦ (ConcreteCategory.congr_hom
+          (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }
+    have ht : tjl.comp (t j hkj) = t l hkl := by
+      ext s
+      exact (ConcreteCategory.congr_hom
+        (F.map_comp (homOfLE hkj) (homOfLE hjl)) s).symm
+    change (Algebra.TensorProduct.map tjl (AlgHom.id (F.obj i) B)).toRingHom.comp
+      ((Algebra.TensorProduct.map (t j hkj) (AlgHom.id (F.obj i) B)).toRingHom.comp
+        qk) = _
+    rw [← RingHom.comp_assoc, tensor_map_comp_left, ht]
+  · intro j hkj
+    let := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra
+    exact tensor_model_pushout_base_change (F.obj i) (F.obj k) (F.obj j)
+      A B P Q (t j hkj) f qk hpush
 
 end AlgebraicGeometry
