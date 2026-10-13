@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
+import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonBijective
+import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonNaturality
+
 /-!
 # Comparing free-representable derived Hom with cyclic cohomology
 
@@ -59,6 +62,24 @@ theorem exists_cyclicDerivedHom_cohomology_comparison {X Y : Scheme.{u}}
         ∀ (V : X.Etale) (v : V ⟶ W) (ξ : P.obj (op W)),
           cohomologyMap
             (pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp)
-              (by simp)) _ q (E ξ) = 0 → P.map v.op ξ = 0 := by sorry
+              (by simp)) _ q (E ξ) = 0 → P.map v.op ξ = 0 := by
+  dsimp only
+  intro W
+  have hbij (V : X.Etale) : Function.Bijective (cyclicRepresentableCohomologyMap h e q V) := by
+    let i := (Sheaf.functorH _ q).mapIso
+      ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}
+        (pullback.fst h V.hom)).app (AddCommGrpCat.of (ULift (ZMod e))))
+    exact i.addCommGroupIsoToAddEquiv.bijective.comp
+      (abelianRepresentableCohomologyMap_bijective h (Y.constantZMod e) q V)
+  let E := AddEquiv.ofBijective (cyclicRepresentableCohomologyMap h e q W) (hbij W)
+  refine ⟨E, ?_⟩
+  intro V v ξ hz
+  apply (hbij V).injective
+  rw [map_zero]
+  have hn := cyclicRepresentableCohomologyMap_naturality h e q W V v ξ
+  change cohomologyMap _ _ q (cyclicRepresentableCohomologyMap h e q W ξ) = 0 at hz
+  dsimp only at hn
+  rw [hz, map_zero] at hn
+  exact hn.symm
 
 end AlgebraicGeometry.Etale

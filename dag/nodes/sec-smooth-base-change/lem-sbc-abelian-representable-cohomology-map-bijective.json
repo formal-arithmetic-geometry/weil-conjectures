@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-abelian-representable-cohomology-map-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the universal-section cohomology map",
+ "statement": "For every morphism of schemes $h:Y\\to X$, every abelian sheaf $F$ on $Y_{et}$, every $q\\in\\mathbf N$ and every etale $W\\to X$, the explicitly constructed additive map $C_{h,F,q,W}$ of [def-sbc-abelian-representable-cohomology-map] from derived Hom to $H^q(Y\\times_X W,r^*F)$ is bijective. There are no additional hypotheses on $h$, $F$, $q$ or $W$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8 restricted cohomology presheaf and Tag 072W; free-representable interpretation in the docstring and restriction section of lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean"
+ },
+ "stmt_deps": [
+  "def-sbc-abelian-representable-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "The free/sheafification/Yoneda adjunction and inverse-image/direct-image adjunction identify maps from A=h*Z[W] to G with sections of G over T=Y times_X W, naturally in G.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the etale projection r:T to Y, construct the abelian extension-by-zero adjunction from sheafAdjunctionContinuous along the localization functor, as in injective_upperStar_obj_of_etale_addCommGrp in WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic. Its left adjoint is exact and takes Z_T to A by the degree-zero corepresenting property. Its unit is the universal section gamma constructed in the definition. The exact Ext adjunction gives a bijection Ext(A,F,q) to Ext(Z_T,r*F,q) whose forward map is pullback followed by gamma-precomposition. The module-coefficient restriction-injectives node is an analogue, not an applicable abelian-coefficient lemma.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-sheafification",
+    "def-sbc-abelian-representable-cohomology-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fully faithful inclusion D+ to D and Ext.homAddEquiv give the source equivalence. By the definition of H the target is the stated cohomology group, so the explicit map is the composite of bijections.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-cohomology",
+    "def-sbc-abelian-representable-cohomology-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-abelian-representable-cohomology-map",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker T2",
+  "document": "Stacks Project and the library free-sheaf adjunction",
+  "place": "Tags 03Q8 and 072W; Bijectivity of the universal-section cohomology map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a sheaf restricted to an etale object is Ext from the free abelian sheaf on the representable",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "free.*cohomology|cohomology.*free",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from the free abelian sheaf on an etale representable computes cohomology of the restricted sheaf naturally under restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "second-reader",
+   "query": "Ext of a free abelian representable sheaf equals derived evaluation on a localized site; CategoryTheory.Abelian.Ext, Function.Bijective; mapExtUnit|extAddEquiv|uliftYonedaEquiv",
+   "results": "LeanFinder returns Sheaf.H, cohomologyPresheafFunctor and generic Ext/resolution APIs; Loogle returns mk₀_bijective and mapExt bijections, not representable-restriction comparison. Local source reading finds the general free-sheaf and sections constructions in EtaleOpenCohomologyComparison and the exact Ext adjunction in MapBijective; the former are reused. Open-object cohomology comparison requires an open immersion and does not apply to a general etale W. The latter still needs the representable isomorphism and identification of its unit with the explicit generator.",
+   "date": "2026-10-14",
+   "verdict": "reuse existing constructions; neither remaining theorem is an existing declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CyclicDerivedHomCohomologyComparison",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-cyclic-derived-hom-cohomology-comparison",
+   "place": "Bijectivity of the universal-section cohomology map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/CyclicDerivedHomComparisonBijective.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianRepresentableCohomologyMap_bijective",
+  "statement": "theorem abelianRepresentableCohomologyMap_bijective {X Y : Scheme.{u}} (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (W : X.Etale) : Function.Bijective (abelianRepresentableCohomologyMap h F q W)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T211115-L-395569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T211115-L-395569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
