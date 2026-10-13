@@ -6,6 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.AlgebraicGeometry.DerivedRestrictionEvaluationMatePostcompBijective
 
 /-! # Invertibility of the restricted evaluation mate
 Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
@@ -78,6 +79,11 @@ theorem derivedRestriction_evaluationMate_isIso
         (R.obj (H.obj (op L, E))) (R.obj L) (R.obj E)).symm
           ((t (H.obj (op L, E)) L).inv ≫
             R.map (schemeDerivedTensorHomEquiv X (H.obj (op L, E)) L E (𝟙 _)))) :=
-  by sorry
+  by
+    dsimp
+    intro t ht L E
+    apply isIso_of_yoneda_map_bijective
+    intro A
+    exact derivedRestriction_evaluationMate_postcomp_bijective X U t ht L E A
 
 end AlgebraicGeometry.Scheme

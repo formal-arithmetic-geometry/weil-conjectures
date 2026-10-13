@@ -12808,3 +12808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: merged deliver/K4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientColumns (stage 3; reviewer PASS; first push; landing 20261013T142858-L-498443 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:28 L: merged deliver/M3/Sheaf.AlgebraicGeometry.AffineModelStalkTransportLinear (stage 3; reviewer PASS; first push; landing 20261013T142859-L-498591 (proof); batch 20261013T142848; modules 1; new nodes 0)
 - 14:28 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PicardExternalRightRectangleSymmetry (stage 3; reviewer PASS; first push; landing 20261013T142859-L-498713 (interface); batch 20261013T142848; modules 2; new nodes 1)
+- 14:29 L: merged deliver/N3/Sheaf.AlgebraicGeometry.DerivedRestrictionEvaluationMateIsIso (stage 3; reviewer PASS; first push; landing 20261013T142859-L-498914 (interface); batch 20261013T142848; modules 2; new nodes 1)
