@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
 public import Sheaf.AlgebraicGeometry.OpenRestrictedComparisonComposition
+import Sheaf.AlgebraicGeometry.OpenRestrictedCounitFactorization
 
 /-! # The counit equation for literal open restriction
 
@@ -62,6 +63,9 @@ theorem openRestricted_counit_compatibility
           ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
       (counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q) ≫
-        (openRestrictedTensorDerivedIso g' U P).inv := by sorry
+        (openRestrictedTensorDerivedIso g' U P).inv := by
+  dsimp only
+  rw [openRestricted_counit_factorization]
+  simp
 
 end AlgebraicGeometry.SingleComplexBaseChange
