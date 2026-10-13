@@ -10317,3 +10317,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:35 L: returned deliver/Q4/Sheaf.AlgebraicGeometry.FlatDescentAffineCharts (reviewer RETURN: (reviewer X-7a120, head 7a1202381) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fl)
 - 00:36 L: returned deliver/J1/Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent (reviewer RETURN: (reviewer X-3e89d, head 3e89df323) C1 (review point 6): TensorPullbackGeneratorReflection.lean:81 uses AlgebraicGeometry)
 - 00:37 L: returned deliver/T1/Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionZero (reviewer RETURN: (reviewer X-0641d, head 0641d81a9) C (brief point 6): In dag/nodes/sec-proper-base-change/lem-weil-pbc-well-ordered-unio)
+- 00:37 L: returned deliver/Y2/Sheaf.LinearAlgebra.SymmetricAlgebra.Graded (reviewer RETURN: (reviewer X-62526, head 625260282) H8/E5: In lean/Sheaf/LinearAlgebra/SymmetricAlgebra/Graded.lean, replace the entire g)
