@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-tor-localization-denominators",
+ "kind": "statement",
+ "title": "Clear denominators of individual localized Tor classes",
+ "statement": "Let A, B and C be commutative rings, φ : A → B a ring map, S a submonoid of B, and C an S-localization of B [def-weil-pbc-module-localization]. Let N be an A-module and j ≥ 0 [def-weil-pbc-tor-modules]. Let f : B → C be the A-linear coefficient map given on elements by the localization structure map, using φ and (B → C) ∘ φ for scalar restriction. For every x in Tor^A_j(C,N), there are a unit u of C and a class y in Tor^A_j(B,N) such that Tor^A_j(mul_u,N)(x) = Tor^A_j(f,N)(y), where mul_u is the A-linear endomorphism of C induced by multiplication by u. There is no Tor-vanishing hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, localized derived-tensor homology identity in its proof; specialized to B in degree zero and expanded to clearing denominators of classes"
+ },
+ "proof": [
+  {
+   "text": "Choose a free A-resolution Q of N. Natural Tor symmetry and the resolution computation identify Tor_j(B,N) and Tor_j(C,N) with H_j(B tensor_A Q) and H_j(C tensor_A Q). Tensor-localization compatibility identifies C tensor_A Q with localization of B tensor_A Q. Represent x by a cycle in that localization. Clear its denominator to get a chain z over B; since dz becomes zero, multiply by another denominator to annihilate dz. The resulting chain is a cycle over B, defining y. The product s of the denominators belongs to S and its image u in C is a unit. Thus u times the original class is the image of y. Naturality of the resolution computation and of symmetry translates these two maps to the Tor maps in the statement. This is the elementwise surjectivity part of localization of homology; no vanishing or finiteness hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, localized derived-tensor homology identity in its proof; specialized to B in degree zero and expanded to clearing denominators of classes; expansion by Q1, source read online https://stacks.math.columbia.edu/tag/0B67"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor of a localized coefficient module is the localization of Tor and elements are fractions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every Tor class after localization can have its denominator cleared to lie in the image of the coefficient localization map",
+   "results": "IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; IsLocalizedModule.commonDenom; IsLocalizedModule.exists_integer_multiple; IsLocalizedModule.exist_integer_multiples; IsLocalizedModule.integerMultiple; Module.FinitePresentation.exists_lift_of_isLocalizedModule; IsLocalizedModule.exist_integer_multiples_of_finite; IsLocalizedModule.commonDenomOfFinset; no Tor-localization comparison. IsLocalizedModule.exists_integer_multiple requires an IsLocalizedModule instance for the Tor map, which is not available.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*localiz|localiz.*Tor|leftDerived.*localiz",
+   "results": "Only unrelated localization occurrences; no Tor or leftDerived localization result. Also rg of lean/Sheaf and lean/WeilConjectures found no comparison at this interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorVanishingLocalizedAlgebra",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Denominator-clearing step of the localization-of-homology argument for lem-pc-tor-vanishing-localized-algebra.",
+   "via": [
+    "lem-pc-tor-vanishing-localized-algebra",
+    "lem-pc-affine-sections-tor-bound-stalk",
+    "lem-pc-stalk-tor-dimension-locally-uniform",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorLocalizationDenominators",
+  "file": "lean/Sheaf/RingTheory/TorLocalizationDenominators.lean",
+  "declaration": "ModuleCat.tor_localization_denominators",
+  "statement": "theorem tor_localization_denominators\n    (A B C : Type u) [CommRing A] [CommRing B] [CommRing C]\n    (φ : A →+* B) [Algebra B C] (S : Submonoid B) [IsLocalization S C]\n    (N : ModuleCat.{u} A) (j : ℕ)\n    (f : (restrictScalars φ).obj (of B B) ⟶\n      (restrictScalars ((algebraMap B C).comp φ)).obj (of C C))\n    (hf : ∀ b : B, f b = algebraMap B C b)\n    (x : (((Tor' (ModuleCat.{u} A) j).obj\n      ((restrictScalars ((algebraMap B C).comp φ)).obj (of C C))).obj N)) :\n    ∃ u : Cˣ, ∃ y : (((Tor' (ModuleCat.{u} A) j).obj\n      ((restrictScalars φ).obj (of B B))).obj N),\n      (((Tor' (ModuleCat.{u} A) j).map\n        ((restrictScalars ((algebraMap B C).comp φ)).map\n          (u.mulLeftLinearEquiv C C).toModuleIso.hom)).app N) x =\n        (((Tor' (ModuleCat.{u} A) j).map f).app N) y",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T111912-L-3058997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T111912-L-3058997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
