@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.Ideal.Height
 import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
@@ -27,25 +27,50 @@ namespace Algebra
 local rings. Source: Stacks Project, Algebra, Tag 00QF
 (blueprint: lem-weil-pbc-dimension-inequality-quasi-finite).
 
-Proof: Let `T` be the integral closure of `R` in `S` and let `q'` be the contraction of `q`
-to `T` (`def-weil-pbc-integral-closure`). By the pointwise Zariski Main Theorem
-(`lem-weil-pbc-integral-closure-zariski-main-away`), there is `g` in `T` outside `q'` for
-which `T_g → S_g` is an isomorphism. A fraction `t/g^n` belongs to the prime induced by
-`q` exactly when `t` belongs to `q'`. Localizing the isomorphism at these primes gives
-`S_q ≃+* T_q'` (`lem-weil-pbc-localization-prime-residue-field-iso`), and the contraction
-of `q'` to `R` is `p = q ∩ R`.
+Proof: Let `T` be the integral closure of `R` in `S`, and `q'` the contraction
+of `q` to `T`. The pointwise Zariski Main Theorem
+(`lem-weil-pbc-integral-closure-zariski-main-away`) gives `r` outside `q` such that
+for every `x : S`, some `r ^ n * x` is integral over `R`. Thus `T` saturated at
+its elements outside `q` is all of `S`. Mathlib's
+`Localization.localRingHom_bijective_of_saturated_inf_eq_top` identifies `T_q'`
+and `S_q` as rings, so their Krull dimensions agree.
 
-Since `T` is integral over `R`, incomparability
-(`lem-weil-pbc-integral-incomparability`) sends each strict chain of primes of `T` below
-`q'` to a strict chain of the same length in `R` below `p`. Local dimension is the
-supremum of these lengths (`lem-weil-pbc-localization-dimension-chains-below-prime`), so
-`dim T_q' ≤ dim R_p`. The ring isomorphism preserves prime chains and thus dimension;
-this proves `dim S_q ≤ dim R_p`, including when dimensions are infinite. -/
+Integral incomparability (`lem-weil-pbc-integral-incomparability`) makes contraction
+`PrimeSpectrum T → PrimeSpectrum R` strictly monotone. The height of `q'` is therefore
+at most the height of its contraction to `R`, namely `q ∩ R`, by
+`Order.height_le_height_apply_of_strictMono`. Finally,
+`IsLocalization.AtPrime.ringKrullDim_eq_height`
+(`lem-weil-pbc-localization-dimension-chains-below-prime`) identifies these heights
+with the dimensions of the local rings. This also covers infinite dimensions. -/
 theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteType R S] (q : PrimeSpectrum S) (hq : IsQuasiFiniteAtPrime R S q) :
     ringKrullDim (Localization.AtPrime q.asIdeal) ≤
       ringKrullDim (Localization.AtPrime (q.comap (algebraMap R S)).asIdeal) := by
-  sorry
+  let T := integralClosure R S
+  let q' := q.asIdeal.under T
+  have hmain : ZariskisMainProperty R q.asIdeal :=
+    zariskisMainProperty_of_isQuasiFiniteAtPrime R S q.asIdeal hq
+  obtain ⟨r, hrq, hrT, hr⟩ := zariskisMainProperty_iff.mp hmain
+  have hsat : T.saturation (q.asIdeal.primeCompl ⊓ T.toSubmonoid) (by simp) = ⊤ := by
+    apply top_le_iff.mp
+    intro x _hx
+    obtain ⟨n, hn⟩ := hr x
+    exact ⟨r ^ n, ⟨pow_mem hrq n, pow_mem hrT n⟩, hn⟩
+  have hbij := Localization.localRingHom_bijective_of_saturated_inf_eq_top _ hsat q'
+  let e := RingEquiv.ofBijective
+    (Localization.localRingHom q' q.asIdeal (algebraMap T S) (q.asIdeal.over_def q')) hbij
+  rw [← ringKrullDim_eq_of_ringEquiv e]
+  rw [IsLocalization.AtPrime.ringKrullDim_eq_height q',
+    IsLocalization.AtPrime.ringKrullDim_eq_height (q.comap (algebraMap R S)).asIdeal]
+  apply WithBot.coe_le_coe.mpr
+  let f : PrimeSpectrum T → PrimeSpectrum R := PrimeSpectrum.comap (algebraMap R T)
+  have hf : StrictMono f := by
+    intro a b hab
+    exact Ideal.IsIntegral.comap_lt_comap hab
+  have hh := Order.height_le_height_apply_of_strictMono f hf
+    (⟨q', inferInstance⟩ : PrimeSpectrum T)
+  simpa [← PrimeSpectrum.height_eq_orderHeight, f, q', T, Ideal.under,
+    Ideal.comap_comap, ← IsScalarTower.algebraMap_eq R (integralClosure R S) S] using hh
 
 end Algebra

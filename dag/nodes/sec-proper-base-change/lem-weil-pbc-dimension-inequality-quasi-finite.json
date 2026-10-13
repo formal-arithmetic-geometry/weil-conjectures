@@ -36,11 +36,10 @@
  ],
  "proof": [
   {
-   "text": "Put $T=\\{s\\in S:\\ s\\text{ is integral over }R\\}$, the integral closure of $R$ in $S$ [def-weil-pbc-integral-closure], and $\\mathfrak q'=\\mathfrak q\\cap T$. By [lem-weil-pbc-integral-closure-zariski-main-away], finite type and quasi-finiteness at $\\mathfrak q$ give $g\\in T\\setminus\\mathfrak q'$ such that $T_g\\to S_g$ is an isomorphism. The prime $\\mathfrak qS_g$ corresponds under it to $\\mathfrak q'T_g$: a fraction $t/g^n$ with $t\\in T$ belongs to $\\mathfrak qS_g$ exactly when $t\\in\\mathfrak q$, because $g\\notin\\mathfrak q$. Localizing this isomorphism at those primes, [lem-weil-pbc-localization-prime-residue-field-iso] identifies $S_{\\mathfrak q}$ with $T_{\\mathfrak q'}$ as rings. Moreover the contraction of $\\mathfrak q'$ to $R$ is $\\mathfrak p$.",
+   "text": "Put T = integralClosure R S and q' = q ∩ T. Apply lem-weil-pbc-integral-closure-zariski-main-away. The equivalent Mathlib formulation zariskisMainProperty_iff gives r outside q such that every x in S has r^n*x in T for some n. Each r^n belongs to the submonoid of elements of T outside q, so the saturation of T at that submonoid is S. Apply Mathlib Localization.localRingHom_bijective_of_saturated_inf_eq_top to obtain a bijective canonical homomorphism T_q' → S_q, and RingEquiv.ofBijective to identify their local rings. This replaces the two successive localization/residue-field identifications of the original plan.",
    "uses": [
     "def-weil-pbc-integral-closure",
-    "lem-weil-pbc-integral-closure-zariski-main-away",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "lem-weil-pbc-integral-closure-zariski-main-away"
    ],
    "elementary": false,
    "source": {
@@ -49,7 +48,7 @@
    }
   },
   {
-   "text": "Take any chain $\\mathfrak q'_0\\subsetneq\\cdots\\subsetneq\\mathfrak q'_n\\subseteq\\mathfrak q'$ of prime ideals of $T$. Since $T$ is integral over $R$ by its definition, [lem-weil-pbc-integral-incomparability] makes the contractions $\\mathfrak p_i=\\mathfrak q'_i\\cap R$ a strictly increasing chain of primes of $R$. Each $\\mathfrak p_i$ is contained in $\\mathfrak q'\\cap R=\\mathfrak p$, so this is a chain of length $n$ below $\\mathfrak p$.",
+   "text": "Integral incomparability (Ideal.IsIntegral.comap_lt_comap) makes the contraction map PrimeSpectrum T → PrimeSpectrum R strictly monotone. Apply Order.height_le_height_apply_of_strictMono: the height of q' is at most that of its contraction to R. The scalar tower and Ideal.comap_comap identify this contraction with q ∩ R.",
    "uses": [
     "def-weil-pbc-integral-closure",
     "lem-weil-pbc-integral-incomparability"
@@ -61,7 +60,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-localization-dimension-chains-below-prime], the dimension of $T_{\\mathfrak q'}$ is the supremum of lengths of chains of primes of $T$ below $\\mathfrak q'$, and the dimension of $R_{\\mathfrak p}$ is the corresponding supremum below $\\mathfrak p$. Step 2 sends every chain counted by the first supremum to one of the same length counted by the second. Therefore $\\dim T_{\\mathfrak q'}\\le\\dim R_{\\mathfrak p}$. The ring isomorphism from step 1 preserves prime chains, so $\\dim S_{\\mathfrak q}=\\dim T_{\\mathfrak q'}$, proving the claim, including infinite-dimensional local rings.",
+   "text": "Rewrite dim S_q using the ring equivalence of step 1, then apply IsLocalization.AtPrime.ringKrullDim_eq_height to T_q' and R_(q∩R). Rewrite prime-ideal height as Order.height with PrimeSpectrum.height_eq_orderHeight. Step 2 gives the comparison in ENat; WithBot.coe_le_coe gives the comparison of Krull dimensions, including infinite dimensions.",
    "uses": [
     "lem-weil-pbc-localization-dimension-chains-below-prime",
     "def-weil-pbc-krull-dimension-ring",
@@ -77,7 +76,6 @@
  "proof_deps": [
   "def-weil-pbc-integral-closure",
   "lem-weil-pbc-integral-closure-zariski-main-away",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
   "lem-weil-pbc-integral-incomparability",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
   "def-weil-pbc-krull-dimension-ring",
@@ -86,7 +84,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00QF (lemma-dimension-inequality-quasi-finite), proof lines 31276-31287; general-case argument through 00Q9 and 00OJ, with 00OJ's incomparability argument applied directly to chains below the chosen prime"
+  "place": "Algebra, Lemma Tag 00QF (lemma-dimension-inequality-quasi-finite), proof lines 31276-31287; general-case argument through 00Q9 and 00OJ, with 00OJ's incomparability argument applied directly to chains below the chosen prime; U1 stage-3 proof uses Mathlib saturation/localRingHom bijectivity and strict-monotone height comparison to implement the same integral-closure argument"
  },
  "mathlib_searches": [
   {
@@ -169,5 +167,15 @@
   "group": "C1",
   "result": "pass",
   "note": "R,S CommRing univ-independent; [Algebra R S] the map; [Algebra.FiniteType R S]; q : PrimeSpectrum S; p = q.comap algebraMap; hq recorded Algebra.IsQuasiFiniteAtPrime (J1, same binders as E1 completion lemma, no Noetherian: 00QF has none); ringKrullDim (root, #check) of Localization.AtPrime q ≤ of Localization.AtPrime p; WithBot ℕ∞ keeps zero ring/infinite dim"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261013T072407-L-1125640",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
