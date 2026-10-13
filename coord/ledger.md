@@ -12407,3 +12407,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:24 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsRestrictionComparison (stage 3; reviewer PASS; first push; landing 20261013T122443-L-3609688 (interface); batch 20261013T122442; modules 3; new nodes 2)
 - 12:24 L: merged deliver/J3/Sheaf.RingTheory.ComparisonTensorCocones (stage 3; reviewer PASS; first push; landing 20261013T122444-L-3609799 (interface); batch 20261013T122442; modules 2; new nodes 1)
 - 12:24 L: merged deliver/K4/Sheaf.RingTheory.PopescuPolynomialKernelParameters (stage 3; reviewer PASS; first push; landing 20261013T122444-L-3609985 (interface); batch 20261013T122442; modules 2; new nodes 1)
+- 12:24 L: merged deliver/U4/Sheaf.RingTheory.FormalGlueingExtensionTransport (stage 3; reviewer PASS; first push; landing 20261013T122445-L-3610139 (proof); batch 20261013T122442; modules 1; new nodes 0)

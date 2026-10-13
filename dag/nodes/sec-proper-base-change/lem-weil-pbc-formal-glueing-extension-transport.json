@@ -34,44 +34,41 @@
  ],
  "proof": [
   {
-   "text": "Define the prime component by theta, transported along the prime-module equality, and the ith chart component by psi_i composed with j_fi inverse, transported along the chart-module equalities. They are bijective. Scalar extension and localization preserve the inverse identities, by their fraction and tensor formulas.",
+   "text": "Use canonical_functor_maps on Can.obj and the supplied canonical object identifications to obtain a morphism F : Can(H) → Can(E) whose prime map is extendMap φ j and whose chart maps are localMap (f i) j, through heterogeneous equality. Only this prescribed morphism is used; no property of Can.map is assumed. Identify each restricted canonical chart with localize (f i) using module extensionality and algebraMap_smul. Transport bijectivity of localMap j to F.chart. Transport theta along the prime-module equality to an equivalence p and use the heterogeneous equations to prove p composed with F.prime = psi.prime.",
    "uses": [
-    "def-weil-pbc-formal-glueing-data",
-    "def-weil-module-base-change",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "lem-weil-pbc-formal-glueing-canonical-functor-maps",
+    "def-weil-pbc-formal-glueing-data"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose the prime compatibility equation with the localization of S tensor j. Canonical comparison identifies this map with S tensor j_fi, hence it is bijective. Naturality of comparison, checked on (s tensor h)/f_i^e, and theta composed with S tensor j = psi prime reduce both sides to psi prime compatibility. Cancellation proves the desired equation.",
+   "text": "For arbitrary glueing objects A, B, X and morphisms F : A → B and psi : A → X as above, define each new chart as psi.chart composed with the inverse of the bijective F.chart and the prime map as p. Tensor base change preserves surjections (Mathlib LinearMap.baseChange_surjective), so the prime compatibility of F and the structural alpha equivalences imply that localizing F.prime is surjective. Precompose the proposed prime compatibility with this surjection: preservation of composition under localization and scalar extension, the equation p composed with F.prime = psi.prime, the chart inverse identity, and the compatibilities of F and psi prove the equation. Only surjectivity, rather than bijectivity, is needed for cancellation.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
     "def-weil-module-base-change",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "def-weil-pbc-module-localization-away"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose the overlap equation at (i,k) with j localized first at f_i and then at f_k. This is bijective. Naturality of interchange, checked on (h/f_i^a)/f_k^b, and the inverse identity for j_fi reduce both sides to psi overlap compatibility. Cancel the bijection. The components and these two equations bundle to Phi. An empty chart family needs only theta.",
+   "text": "Localization preserves surjections (Mathlib IsLocalizedModule.map_surjective). Precompose each proposed overlap compatibility with the localization of F.chart i. The chart inverse identities, preservation of composition, and overlap compatibilities of F and psi prove the equation; cancel the surjection. Bundle these two equations into the desired Hom. The prime map is the transported theta equivalence and the chart maps are composites of bijections. For t = 0 the compatibility and chart assertions are vacuous and the prime equivalence suffices.",
    "uses": [
     "def-weil-pbc-formal-glueing-data",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-formal-glueing-canonical-maps"
+    "def-weil-pbc-module-localization-away"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-formal-glueing-canonical-functor-maps",
   "def-weil-pbc-formal-glueing-data",
   "def-weil-module-base-change",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-formal-glueing-canonical-maps"
+  "def-weil-pbc-module-localization-away"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 05ER, proposition-equivalence, proof, third paragraph, reconstruction of Can(E) -> X"
+  "place": "Tag 05ER, proposition-equivalence, third paragraph; canonical morphism from Remark 05EL. U4 formalization using cancellation and the existing canonical_functor_maps statement."
  },
  "mathlib_searches": [
   {
@@ -146,10 +143,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T111839-L-3048109",
-  "kind": "interface",
+  "landing": "20261013T122445-L-3610139",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
