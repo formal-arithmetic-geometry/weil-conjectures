@@ -15,23 +15,51 @@
  ],
  "proof": [
   {
-   "text": "Identify T with Spec A and transport the twist through the induced projective isomorphism. For at least two coordinates the monomial twist-cohomology formula gives finite free cohomology, since the sets of nonnegative or strictly negative integer exponent vectors with a fixed sum are finite. For one coordinate the single chart trivializes every twist and affine vanishing handles positive degree. For no coordinates the scheme is empty. Naturality under multiplication by A makes the comparison linear for restriction along the projection.",
+   "text": "Work directly over the affine base T, with A=Gamma(T,top). The standard intersection is the pullback of the integral-model basic open. The affine pushout of global rings and the integral Laurent-monomial basis give a bijective A-linear coefficient-to-section map. Shift the degree-zero exponents by m at any coordinate of the nonempty intersection and use its free twist generator. No choice of an affine-base isomorphism is needed.",
    "uses": [
-    "lem-pc-projective-space-twist-cohomology",
-    "lem-pc-affine-vanishing"
+    "def-nagata-projective-space-base-change",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble these basis maps into a chain isomorphism between the standard-cover Cech complex restricted along the projective projection appTop and monomialCechComplex N A m. The restriction rule for twistMonomialSection and the alternating face sum prove compatibility with the differential. The separated affine-cover Cech comparison and restrictionScalarsHomologyIso give an A-linear equivalence from twist cohomology to monomial homology.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ring-general algebraic formulas in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech underlying the twist-cohomology calculation, rather than its Field-only wrappers in Cohomology.Serre. For nonnegative twists degree zero is the homogeneous polynomial submodule, finite by homogeneousSubmodule_fg. For negative twists and at least two coordinates degree zero is zero. Top homology is the finitely supported functions on negativeExponents; negativeExponentsEquiv identifies that type with fixed-degree natural monomials when m<=-d-1, and otherwise it is empty. Finsupp.finite_of_degree_eq and Module.Finite.equiv prove finiteness. The single-coordinate negative-twist case uses the same top-degree formula. Middle degrees are exact by exactAt_monomialCechComplex.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the general finite-affine-cover bound: for any scheme X separated over an affine T, any finite affine open cover indexed by N, and any quasi-coherent module, H^q vanishes when q>=Nat.card N. The alternating cover complex has zero degree-q term because no strictly increasing tuple of length q+1 exists in N. Alternating Cech comparison and separated affine-cover comparison transfer this to ordinary cohomology. Apply this general bound to the standard projective cover, including the empty-coordinate case. In lower degrees transport finite monomial homology along the explicitly A-linear comparison, with scalar structure exactly restriction along the projection appTop.",
+   "uses": [
+    "lem-pc-alternating-cech-computes",
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-cech-computes"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-projective-space-twist-cohomology",
-  "lem-pc-affine-vanishing"
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-cech-computes",
+  "lem-pc-projective-space-twist-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tag 01XT, Lemma 30.8.1",
-  "note": "Affine-base and ring-valued extraction of the standard affine-cover monomial calculation."
+  "place": "Tag 01XT, Lemma 30.8.1; standard affine-cover calculation, read at https://stacks.math.columbia.edu/tag/01XT on 2026-10-13",
+  "note": "J4 repair X-853f9: complete affine-base Laurent-monomial comparison and ring-general algebraic finiteness. The high-degree helper is generalized to arbitrary finite affine covers on schemes separated over an affine base, avoiding the duplicate private projective-only bound in ProjectiveAffineFiniteCohomologyIndependent. Importing that module is impossible because it depends on this item; no public interface or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -170,11 +198,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M4",
+  "reviewer": "X-06a57",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261013T111904-L-3056651",
+  "landing": "20261013T123546-L-3711602",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and projection scalar action match the node; proof and DAG agree. Delivery and sole direct importer compile cleanly; axioms are exactly propext, Classical.choice, and Quot.sound."
  }
 }
