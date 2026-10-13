@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-affine-localizing-presheaf-basis-sheaf",
+ "kind": "statement",
+ "title": "A localizing module presheaf satisfies the affine-basis sheaf condition",
+ "statement": "Let T be a scheme [def-pc-scheme] and P a presheaf of O_T-modules [def-weil-sheaf-of-modules-category]. Suppose for every affine open W and every a in Gamma(T,W) the restriction P(W) -> P(D(a)), with scalars restricted to Gamma(T,W), is localization at powers of a. Then the underlying abelian-group presheaf restricted to the full subcategory of affine opens is a sheaf for the topology induced from the open-cover Grothendieck topology of T.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV; https://stacks.math.columbia.edu/tag/009N; https://stacks.math.columbia.edu/tag/009Q",
+  "place": "Tag 01HV (associated module sheaf and principal-open localization), Tags 009N/009Q (sheaves on a basis and extension)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine W = Spec A and N = P(W). The principal restrictions identify P(D(a)) with N[1/a]. The associated module sheaf of N has the same principal sections, and localization uniqueness makes the identifications commute with all principal restrictions. Thus compatible principal-cover families glue uniquely in P(W), including the empty cover (localization at zero).",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any affine covering sieve on W, refine by principal opens of W and glue their sections to a section of P(W). For each affine member V, refine its overlaps with this principal cover by principal opens of V. Compatibility of the given sieve family identifies the restrictions on this refinement; the already proved separatedness on principal covers of V detects equality with the given section. Uniqueness follows by the principal refinement of W. These are exactly the covering sieves of the induced topology.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 01HV, 009N and 009Q",
+  "place": "The principal-localization and affine refinement portion of the original item proof, separated from its now-proved sheafification comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Presheaf of modules with localized restrictions satisfies unique gluing on the affine open basis of a scheme",
+   "results": "SmallAffineZariski.PreservesLocalization, preservesLocalization_toOpensFunctor, exists_eq_pow_mul_of_isAffineOpen, ring localization and structure sheaf tools. These are ring-valued or algebraic tools, not the module-presheaf basis sheaf condition.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.Away",
+   "results": "Away; Module.eq_zero_of_isLocalized_span, Module.eq_of_isLocalized_span and bijective_of_isLocalized_span. No affine-site sheaf criterion; these can prove local algebra pieces.",
+   "date": "2026-10-13",
+   "verdict": "Tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSheaf.*localiz|localiz.*IsSheaf|sheafInducedTopologyEquivOfIsCoverDense|isIso.*toSheafify; repository isSheaf_affineBasis_of_localizing and module_sheafification_iso_of_affine_restriction",
+   "results": "Mathlib sheafInducedTopologyEquivOfIsCoverDense and isIso_toSheafify give the categorical comparison, which is proved in the item. Tilde.toOpen gives principal localization for the associated sheaf. Existing module_sheafification_iso_of_affine_restriction requires an already supplied affine-basis isomorphism with a sheaf. The duplicate AffineLocalizationSheafification now depends on the item; none proves this localization-to-basis sheaf condition.",
+   "date": "2026-10-13",
+   "verdict": "No direct duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf of modules with localization maps on principal affine opens is a sheaf on the affine basis",
+   "results": "service unavailable: Internal Server Error (msearch.py reports UNAVAILABLE, zero hits)",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-localizing-presheaf-sheafification",
+   "place": "Principal-open localization implies the sheaf condition on the affine basis; the categorical extension and canonical unit comparison are proved in the item.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalizingPresheafBasisSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalizingPresheafBasisSheaf.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isSheaf_affineBasis_of_localizing",
+  "statement": "theorem isSheaf_affineBasis_of_localizing\n    (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)\n    (hP : ∀ (W : T.Opens), IsAffineOpen W → ∀ a : Γ(T, W),\n      IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom) :\n    CategoryTheory.Presheaf.IsSheaf\n      (((Subtype.mono_coe T.affineOpens).functor).inducedTopology\n        (Opens.grothendieckTopology T))\n      (((Subtype.mono_coe T.affineOpens).functor).op ⋙ P.presheaf)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T062532-L-736046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T062532-L-736046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
