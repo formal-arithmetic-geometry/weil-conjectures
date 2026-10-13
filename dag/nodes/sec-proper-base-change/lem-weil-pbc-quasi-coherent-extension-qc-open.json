@@ -33,55 +33,55 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 ($j$ is quasi-compact and quasi-separated).* $j$ is quasi-compact by hypothesis, i.e. in the sense of [def-weil-finite-type-morphism] ($j^{-1}(W)=U\\cap W$ is quasi-compact for every affine open $W\\subseteq X$). $j$ is the inclusion of an open subscheme, hence an open immersion [def-weil-open-immersion], hence a monomorphism of schemes [lem-weil-pbc-open-immersion-monomorphism] (the source quotes Schemes 01L7: an immersion is a monomorphism, in particular separated). So its diagonal $\\Delta_j:U\\to U\\times_XU$ [def-pc-fibre-product] is an isomorphism: the two projections $p_1,p_2:U\\times_XU\\to U$ satisfy $j\\circ p_1=j\\circ p_2$, hence $p_1=p_2$; then $\\Delta_j\\circ p_1$ has components $(p_1,p_1)=(p_1,p_2)$, so $\\Delta_j\\circ p_1=\\mathrm{id}$, and $p_1\\circ\\Delta_j=\\mathrm{id}_U$. An isomorphism is a homeomorphism, so the preimage under $\\Delta_j$ of every quasi-compact open is quasi-compact: $\\Delta_j$ is quasi-compact and $j$ is quasi-separated [def-weil-quasi-separated-morphism].",
+   "text": "The inclusion j = U.ι is quasi-compact by hU. Mathlib supplies IsOpenImmersion j, its monomorphism and separatedness, and hence QuasiSeparated j. Set E = overEquiv U, L = restrictFunctor j, R = pushforward j, and A = restrictAdjunction j. The private proved helper overEquiv_quasiCoherent transports quasi-coherence of G along E using SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint and continuity on the iterated over sites.",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-weil-open-immersion",
     "lem-weil-pbc-open-immersion-monomorphism",
     "def-pc-fibre-product",
-    "def-weil-quasi-separated-morphism"
+    "def-weil-quasi-separated-morphism",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), first paragraph of the proof (Schemes 01L7)"
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3), lines 2787-2836 with its proof ($\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$)"
    }
   },
   {
-   "text": "*Step 2 (the modules $j_*\\mathcal G$ and $j_*(\\mathcal F|_U)$ and the map $d$).* For an $\\mathcal O_U$-module $\\mathcal M$ let $j_*\\mathcal M$ be the direct image [def-pc-module-pullback]: $(j_*\\mathcal M)(W)=\\mathcal M(W\\cap U)$ for $W\\subseteq X$ open, with the restriction maps of $\\mathcal M$ and $\\mathcal O_X(W)$ acting through the restriction $\\mathcal O_X(W)\\to\\mathcal O_X(W\\cap U)=\\mathcal O_U(W\\cap U)$; for a morphism $\\beta$ of $\\mathcal O_U$-modules, $(j_*\\beta)_W=\\beta_{W\\cap U}$. The restriction $\\mathcal F|_U$ is a quasi-coherent $\\mathcal O_U$-module [lem-weil-pbc-module-restriction-open-immersion-colimits] (2), and $\\mathcal G$ is quasi-coherent by hypothesis; by Step 1 and [pqf-lem-pushforward-qcoh] (Schemes 01LC) $j_*\\mathcal G$ and $j_*(\\mathcal F|_U)$ are quasi-coherent $\\mathcal O_X$-modules. Let $a:\\mathcal F\\to j_*(\\mathcal F|_U)$, $a_W(f)=f|_{W\\cap U}$; it is $\\mathcal O_X$-linear because the restriction maps of $\\mathcal F$ are semilinear [def-weil-sheaf-of-modules-category], and compatible with restrictions. Let $b=j_*\\varphi:j_*\\mathcal G\\to j_*(\\mathcal F|_U)$, $b_W(g)=\\varphi_{W\\cap U}(g)$. On the direct sum $\\mathcal F\\oplus j_*\\mathcal G$ ($W\\mapsto\\mathcal F(W)\\oplus\\mathcal G(W\\cap U)$), which is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-direct-sum], define the $\\mathcal O_X$-linear map $d:\\mathcal F\\oplus j_*\\mathcal G\\to j_*(\\mathcal F|_U)$, $d_W(f,g)=a_W(f)-b_W(g)=f|_{W\\cap U}-\\varphi_{W\\cap U}(g)$ (this fixes the sign convention of the source's map $\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F$; here $j^*\\mathcal F=\\mathcal F|_U$).",
+   "text": "Set G′ = E.functor.obj G and φ′ = E.functor.map φ followed by (overFunctorEquiv U).hom.app F. Restriction preserves quasi-coherence by Mathlib isQuasicoherent_restrictFunctor. The two modules R(G′) and R(L(F)) are quasi-coherent by pqf-lem-pushforward-qcoh. Define a = A.unit.app F and b = R.map φ′. Take the actual categorical pullback H = pullback a b and ψ = pullback.fst a b; no arbitrary witness of an existence theorem is selected.",
    "uses": [
-    "def-pc-module-pullback",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-lem-pushforward-qcoh",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum"
+    "pqf-lem-pushforward-qcoh"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), first and second paragraphs (Schemes 01LC, Schemes Section 01LA)"
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3), lines 2787-2836 with its proof ($\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$)"
    }
   },
   {
-   "text": "*Step 3 ($\\mathcal H$ and $\\psi$).* Let $\\mathcal H=\\ker d$, the sub-$\\mathcal O_X$-module of $\\mathcal F\\oplus j_*\\mathcal G$ with $\\mathcal H(W)=\\{(f,g)\\in\\mathcal F(W)\\oplus\\mathcal G(W\\cap U):f|_{W\\cap U}=\\varphi_{W\\cap U}(g)\\}$ (kernels in $\\Mod(\\mathcal O_X)$ are sectionwise). Its source and target being quasi-coherent (Step 2), $\\mathcal H$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Let $\\psi:\\mathcal H\\to\\mathcal F$ be the first projection, $\\psi_W(f,g)=f$; it is $\\mathcal O_X$-linear and compatible with restrictions, being the composite of the inclusion $\\mathcal H\\subseteq\\mathcal F\\oplus j_*\\mathcal G$ with the projection to $\\mathcal F$.",
+   "text": "The private proved helper quasiCoherent_pullback identifies pullback a b with kernel (biprod.desc a (-b)) using Mathlib Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct. The biproduct is quasi-coherent by isQuasicoherent_biprod, its kernel is quasi-coherent by isQuasicoherent_kernel, and quasi-coherence transports along the resulting isomorphism. This is exactly the source construction Ker(F ⊕ j_*G → j_*j^*F), up to its canonical isomorphism.",
    "uses": [
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
     "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), second paragraph ($\\mathcal H$ is quasi-coherent, Schemes Section 01LA) and part (3) ('its obvious map to $\\mathcal F$')"
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3), lines 2787-2836 with its proof ($\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$)"
    }
   },
   {
-   "text": "*Step 4 ($\\alpha$ and $\\varphi\\circ\\alpha=\\psi|_U$).* By definition of restriction [lem-weil-pbc-module-restriction-open-immersion-colimits], for an open $W\\subseteq U$ we have $(\\mathcal H|_U)(W)=\\mathcal H(W)$, and $W\\cap U=W$, so $(\\mathcal H|_U)(W)=\\{(f,g)\\in\\mathcal F(W)\\oplus\\mathcal G(W):f=\\varphi_W(g)\\}$. Define $\\alpha_W:(\\mathcal H|_U)(W)\\to\\mathcal G(W)$, $\\alpha_W(f,g)=g$. It is $\\mathcal O_U(W)$-linear and commutes with the restriction maps (both are componentwise), so $\\alpha:\\mathcal H|_U\\to\\mathcal G$ is a morphism of $\\mathcal O_U$-modules; and $g\\mapsto(\\varphi_W(g),g)$ is an inverse of $\\alpha_W$ for every $W$ (it lands in $(\\mathcal H|_U)(W)$, and $(f,g)\\mapsto g\\mapsto(\\varphi_W(g),g)=(f,g)$), compatible with restrictions since $\\varphi$ is, so $\\alpha$ is an isomorphism of $\\mathcal O_U$-modules. Finally, for $W\\subseteq U$ and $(f,g)\\in(\\mathcal H|_U)(W)$: $(\\varphi\\circ\\alpha)_W(f,g)=\\varphi_W(g)=f=\\psi_W(f,g)=(\\psi|_U)_W(f,g)$. Hence $\\varphi\\circ\\alpha=\\psi|_U$, and $(\\mathcal H,\\psi,\\alpha)$ has all the required properties.",
+   "text": "Restriction L preserves limits by the source-library preservesLimitsOfSize_restrictFunctor. The counit of A is an isomorphism for an open immersion. The left triangle identity makes L.map a its inverse. Thus the second projection of the restricted pullback is an isomorphism. Compose PreservesPullback.iso L a b, that second projection, and the counit at G′ to obtain e : L(H) ≅ G′. Pullback commutativity, counit naturality, and the triangle identity prove L.map ψ = e.hom ≫ φ′. Use the fully faithful E.functor to take the preimage isomorphism α : H.over U ≅ G of (overFunctorEquiv U).app H ≪≫ e. Apply E.functor.map_injective; naturality of overFunctorEquiv U and cancellation of its component at F give overFunctor.map ψ = α.hom ≫ φ. These steps are written out in Lean, without any additional assumed statement.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PE (lemma-extend-trivial), proof, lines 2806-2843 (first paragraph for $j$ separated and quasi-compact and $j_*$ quasi-coherent; part (2) for $\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$; part (3) 'with its obvious map to $\\mathcal F$ and its obvious identification with $\\mathcal G$ over $U$'), part (3) ('its obvious identification with $\\mathcal G$ over $U$'; Sheaves, Section 'open immersions')"
+    "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3), lines 2787-2836 with its proof ($\\mathcal H=\\Ker(\\mathcal F\\oplus j_*\\mathcal G\\to j_*j^*\\mathcal F)$)"
    }
   }
  ],
@@ -91,17 +91,16 @@
   "lem-weil-pbc-open-immersion-monomorphism",
   "def-pc-fibre-product",
   "def-weil-quasi-separated-morphism",
-  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "pqf-lem-pushforward-qcoh",
-  "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-quasi-coherent-module-direct-sum",
   "lem-weil-pbc-quasi-coherent-module-kernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3) and its proof, lines 2787-2843"
+  "place": "Properties, Lemma 01PE (lemma-extend-trivial), part (3) and proof; the kernel-of-difference construction is represented by its canonically isomorphic pullback. Formalized by G2 on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -204,5 +203,15 @@
   "group": "M1",
   "result": "fix",
   "note": "X scheme, U open, hU QuasiCompact U.ι (node's quasi-compact j, X not qcqs), F qcoh on moduleRings, G qcoh on over U, φ : G ⟶ F.over U; ∃ H qcoh, ψ : H ⟶ F, α : H.over U ≅ G, overFunctor.map ψ = α.hom ≫ φ (φ∘α = ψ|_U)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T045530-L-129060",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

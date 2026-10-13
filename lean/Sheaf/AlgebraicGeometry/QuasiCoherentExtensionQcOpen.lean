@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Extension of a quasi-coherent module across a quasi-compact open
@@ -29,6 +29,32 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+/-- Transport quasi-coherence from the localized site to the open subscheme. -/
+private theorem overEquiv_quasiCoherent (X : Scheme.{u}) (U : X.Opens)
+    (M : SheafOfModules.{u} (X.ringCatSheaf.over U)) [M.IsQuasicoherent] :
+    ((overEquiv U).functor.obj M).IsQuasicoherent := by
+  have : ∀ W, (Over.post (X := W) U.overEquivalence.symm.functor).IsContinuous
+      ((Opens.grothendieckTopology ↥U).over W)
+      (((Opens.grothendieckTopology X).over U).over _) := fun W ↦
+    Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+      ((CoverPreserving.of_isContinuous U.overEquivalence.symm.functor _ _).overPost W)
+  apply SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint
+    (U.overEquivalence.symm.functor) _
+    (U.sheafOfModulesEquivOverUnit X.ringCatSheaf)
+
+/-- The pullback is the kernel of the difference map on the binary biproduct. -/
+private theorem quasiCoherent_pullback {X : Scheme.{u}} {M N P : X.Modules}
+    [M.IsQuasicoherent] [N.IsQuasicoherent] [P.IsQuasicoherent]
+    (f : M ⟶ P) (g : N ⟶ P) : (Limits.pullback f g).IsQuasicoherent := by
+  let : Limits.HasFiniteBiproducts X.Modules :=
+    Limits.HasFiniteBiproducts.of_hasFiniteProducts
+  have := isQuasicoherent_biprod M N
+  have h := isQuasicoherent_kernel (Limits.biprod.desc f (-g))
+  let e : Limits.pullback f g ≅ Limits.kernel (Limits.biprod.desc f (-g)) :=
+    (Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct f g).conePointUniqueUpToIso
+      (Limits.limit.isLimit _)
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e.symm h
 
 /-- A quasi-coherent module and a map on a quasi-compact open extend across the open.
 Source: Stacks Project, Properties, Lemma 01PE (lemma-extend-trivial), part (3)
@@ -59,7 +85,58 @@ theorem exists_quasiCoherent_extension_of_quasiCompact_open
     (φ : G ⟶ F.over U) :
     ∃ (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)), H.IsQuasicoherent ∧
       ∃ (ψ : H ⟶ F) (α : H.over U ≅ G),
-        (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ψ = α.hom ≫ φ :=
-  sorry
+        (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ψ = α.hom ≫ φ := by
+  let : QuasiCompact U.ι := hU
+  let E := overEquiv U
+  let L := restrictFunctor U.ι
+  have : Limits.PreservesLimitsOfSize.{u, u} L := preservesLimitsOfSize_restrictFunctor U.ι
+  have hsmall : Limits.PreservesLimitsOfSize.{0, 0} L :=
+    Limits.preservesSmallestLimits_of_preservesLimits L
+  let R := pushforward U.ι
+  let A := restrictAdjunction U.ι
+  let G' := E.functor.obj G
+  have : G'.IsQuasicoherent := overEquiv_quasiCoherent X U G
+  let φ' : G' ⟶ L.obj F := E.functor.map φ ≫ (overFunctorEquiv U).hom.app F
+  let a : F ⟶ R.obj (L.obj F) := A.unit.app F
+  let b : R.obj G' ⟶ R.obj (L.obj F) := R.map φ'
+  have : (R.obj G').IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated U.ι G'
+  have : (R.obj (L.obj F)).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated U.ι (L.obj F)
+  let H := Limits.pullback a b
+  have hH : H.IsQuasicoherent := quasiCoherent_pullback a b
+  have ha : L.map a ≫ A.counit.app (L.obj F) = 𝟙 _ :=
+    A.left_triangle_components F
+  have : IsIso (L.map a) := by
+    have he : L.map a = inv (A.counit.app (L.obj F)) := by
+      apply (cancel_mono (A.counit.app (L.obj F))).1
+      simpa using ha
+    rw [he]
+    infer_instance
+  have hshape : Limits.PreservesLimitsOfShape Limits.WalkingCospan L :=
+    hsmall.preservesLimitsOfShape
+  have : Limits.PreservesLimit (Limits.cospan a b) L := hshape.preservesLimit
+  let e : L.obj H ≅ G' :=
+    Limits.PreservesPullback.iso L a b ≪≫
+      asIso (Limits.pullback.snd (L.map a) (L.map b)) ≪≫
+      asIso (A.counit.app G')
+  have he : e.hom = L.map (Limits.pullback.snd a b) ≫ A.counit.app G' := by
+    simp [e]
+  have hfac : L.map (Limits.pullback.fst a b) = e.hom ≫ φ' := by
+    rw [he, Category.assoc, ← A.counit_naturality φ']
+    change L.map (Limits.pullback.fst a b) =
+      L.map (Limits.pullback.snd a b) ≫ L.map b ≫ A.counit.app (L.obj F)
+    rw [← L.map_comp_assoc, ← Limits.pullback.condition, L.map_comp, Category.assoc, ha,
+      Category.comp_id]
+  let α : H.over U ≅ G := E.functor.preimageIso ((overFunctorEquiv U).app H ≪≫ e)
+  refine ⟨H, hH, Limits.pullback.fst a b, α, ?_⟩
+  apply E.functor.map_injective
+  rw [Functor.map_comp]
+  have hα : E.functor.map α.hom = (overFunctorEquiv U).hom.app H ≫ e.hom := by
+    exact E.functor.map_preimage _
+  rw [hα, Category.assoc]
+  apply (cancel_mono ((overFunctorEquiv U).hom.app F)).1
+  rw [Category.assoc, Category.assoc, ← hfac]
+  exact (overFunctorEquiv U).hom.naturality (Limits.pullback.fst a b)
 
 end AlgebraicGeometry.Scheme.Modules
