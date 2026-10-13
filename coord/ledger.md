@@ -13342,3 +13342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:15 L: returned deliver/M1/Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi (reviewer RETURN: (reviewer X-d3187, head d3187313c) H7: The report lacks the required `## Statement corrected` section for the changed st)
 - 18:20 L: returned deliver/J4/Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle (reviewer RETURN: (reviewer X-7b327, head 7b3278e00) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Op)
 - 18:25 L: returned deliver/G3/Sheaf.Paper.ModuleCupEqualDerivedMapsClass (reviewer RETURN: (reviewer X-e43c1, head e43c188b1) H10: lean/Sheaf/Paper/ModuleCupEqualDerivedMapsClass.lean does not compile cleanly un)
+- 18:27 L: returned deliver/C3/Sheaf.CategoryTheory.GrothendieckDerivedExactLocalization (reviewer RETURN: (reviewer X-bc67d, head bc67da48c) E2: `lean/Sheaf/CategoryTheory/GrothendieckDerivedExactLocalization.lean` retains the)
