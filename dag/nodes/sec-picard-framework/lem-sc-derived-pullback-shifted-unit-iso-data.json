@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-derived-pullback-shifted-unit-iso-data",
+ "kind": "statement",
+ "title": "Shifted unit isomorphism data for derived pullback",
+ "statement": "Under the noetherian proper monoidal hypotheses, the derived pullback of the shifted monoidal unit is isomorphic to the shifted unit.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "translated-unit comparison"
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison from the monoidal derived pullback and translated-unit argument.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D2",
+  "document": "https://stacks.math.columbia.edu/tag/06YJ",
+  "place": "translated-unit comparison"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackKFlatCounitData",
+  "date": "2026-10-14",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-pullback-kflat-counit-data",
+   "place": "strict intermediate shifted-unit component",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "stmt_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackShiftedUnitIsoData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackShiftedUnitIsoData.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedPullback_shifted_unit_iso",
+  "statement": "theorem exists_derivedPullback_shifted_unit_iso\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    Nonempty ((derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅\n        (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "monoidal functor preserves shifted unit isomorphism",
+   "results": "No direct match",
+   "date": "2026-10-14",
+   "verdict": "No direct Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal shift unit iso",
+   "results": "No direct match",
+   "date": "2026-10-14",
+   "verdict": "No direct Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback shifted unit iso",
+   "results": "No existing declaration",
+   "date": "2026-10-14",
+   "verdict": "New project interface required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoidal derived pullback shift comparison",
+   "results": "No direct match",
+   "date": "2026-10-14",
+   "verdict": "No direct declaration."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f59d8",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201742-L-3966550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-f59d8",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T201742-L-3966550",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and both direct importers compiled cleanly; target signature and existing declaration signatures are unchanged, with the named shifted-unit sorry and node metadata aligned."
+ }
+}
