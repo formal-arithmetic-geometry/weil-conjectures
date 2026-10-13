@@ -17,51 +17,34 @@
  },
  "proof": [
   {
-   "text": "Use the tensor-unit adjunction on U and the canonical restriction comparison for RHom to define e. Compose the adjunction with the unit comparison and right unitor. Thus e is the particular equivalence induced by evaluation, so its choice is compatible with restriction.",
+   "text": "Obtain the simultaneous global and restricted total-tensor Hom equivalences t(J,E), r(J,E), their restriction compatibility and their naturality from lem-sc-tensor-model-restriction-adjunction. Let c: B_T isomorphic to A be Q(rightUnitor_P) followed by e_A. Define e by r(T,E) followed by precomposition with R(c).inverse, and gamma=t(J,E)(xi).",
    "uses": [
-    "lem-sc-derived-internal-hom-adjunction",
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-sc-derived-internal-hom-restrict-open"
+    "lem-sc-tensor-model-restriction-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the supplied ξ under the canonical tensor-Hom equivalence on X. The comparison on K-flat representatives identifies the source A tensor^L Q(J) with Q(Tot(P tensor J)), transporting the first factor through e_A and using tensor symmetry to fix the order. This defines γ. The representative equation of the canonical bijection fixes its evaluation maps.",
+   "text": "Naturality conjugates precomposition by R(Q(u)) to precomposition by d=R(Q(id_P tensor u)). Since R(Q(u)) is invertible, the latter operation is bijective for every target R(F). For F=B_J, surjectivity supplies g with d;g=identity. For F=B_T, injectivity and d;(g;d)=d imply g;d=identity. Thus d is invertible. Composing with the invertible R(c) proves the exact beta of the statement is invertible.",
    "uses": [
-    "def-pc-canonical-derived-tensor-hom-bijection",
-    "lem-sc-derived-internal-hom-adjunction"
+    "lem-sc-tensor-model-restriction-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restriction preserves K-flatness and computes the total tensor termwise. On restricted representatives, the chain formula β is id on P tensored with u, followed by the right unitor and e_A. Under the K-flat comparison this becomes id_R(A) tensor R(Q(u)) followed by the derived right unitor. All these maps are invertible under the hypothesis, so R(β) is invertible.",
+   "text": "By definition e(s)=R(c).inverse;r(T,E)(s). Expand beta as Q(id_P tensor u);c.hom, cancel R(c).hom with its inverse, and apply naturality of r. Substitute R(Q(u));s=R(xi), then use r(J,E)(R(xi))=R(t(J,E)(xi)) to obtain R(beta);e(s)=R(gamma). These are categorical identities, including the empty open and zero complex.",
    "uses": [
-    "lem-pc-open-restriction-kflat-model",
-    "def-pc-canonical-derived-tensor-hom-bijection"
+    "lem-sc-tensor-model-restriction-adjunction"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The Hom-complex restriction comparison acts on each local component by restriction. The tensor-Hom evaluation maps act on the same components, and therefore these comparisons commute with evaluation, not merely on objects. Apply adjunction naturality to R(Q(u)) followed by s = R(ξ). Transport through the unit comparison and the right unitor to get R(β) followed by e(s) = R(γ). The same identity holds for zero complexes and empty U.",
-   "uses": [
-    "lem-sc-hom-complex-restrict-open",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "def-pc-canonical-derived-tensor-hom-bijection"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-internal-hom-adjunction",
-  "def-pc-canonical-derived-tensor-hom-bijection",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-pc-open-restriction-kflat-model",
-  "lem-sc-hom-complex-restrict-open"
+  "lem-sc-tensor-model-restriction-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ, equation-internal-hom and lemma-internal-hom; Tag 08DL, lemma-restriction-RHom-to-U; perfect.tex Tag 08EH, lemma-lift-map, construction of the two maps; representative-level specialization of the source argument"
+  "place": "Tags 08DJ and 08DL, representative adjunction reduction; perfect.tex Tag 08EH, unit and augmentation calculation; invertibility proved by two precomposition tests"
  },
  "mathlib_searches": [
   {
@@ -148,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261013T045520-L-126498",
+  "landing": "20261013T100130-L-2488271",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
