@@ -114,7 +114,7 @@ theorem tower_limit_exact_surjective_kernels
         Function.Surjective V) := by
   obtain ⟨U, V, hU, hV⟩ := tower_limit_induced_maps R F G H α β hα hβ
   obtain ⟨hUi, hEx, hVs⟩ := tower_limit_exact_of_coordinate_maps
-    R F G H α β hshort U V hU hV
+    R F G H α β hα hβ hshort U V hU hV
   exact ⟨U, V, hU, hV, hUi, hEx, hVs⟩
 
 end CategoryTheory

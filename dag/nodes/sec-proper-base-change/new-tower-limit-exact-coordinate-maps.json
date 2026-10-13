@@ -42,35 +42,46 @@
  ],
  "id": "new-tower-limit-exact-coordinate-maps",
  "title": "Exactness of coordinate induced maps on inverse limits",
- "statement": "For coordinatewise short exact sequences of towers, induced maps on inverse limits are injective and exact in the middle; if the kernel tower has surjective transitions, the induced map on quotients is surjective.",
+ "statement": "Let $R$ be a commutative ring, and let $F,G,H$ be towers of $R$-modules indexed by $\\mathbf N$. Let $\\alpha_n:F_n\\to G_n$ and $\\beta_n:G_n\\to H_n$ commute with successor transition maps, with $0\\to F_n\\xrightarrow{\\alpha_n}G_n\\xrightarrow{\\beta_n}H_n\\to0$ exact at every index. Let $U:\\varprojlim F\\to\\varprojlim G$ and $V:\\varprojlim G\\to\\varprojlim H$ be linear maps characterized by these coordinate maps. Then $U$ is injective and $\\operatorname{im}U=\\ker V$. If every successor transition in $F$ is surjective, then $V$ is surjective.",
  "stmt_deps": [
   "lem-weil-pbc-tower-limit-exact-surjective-kernels"
  ],
  "proof": [
   {
-   "text": "Use injectivity and exactness in each coordinate, uniqueness of coordinate preimages, and recursive correction of lifts using surjective kernel transitions.",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
-   ],
-   "elementary": false
+   "text": "A successor-compatible family is a section: induction on n ≤ m proves compatibility with every transition. The forgetful functor from modules preserves limits, and Mathlib Types.isLimitEquivSections realizes each such section as a unique limit element.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If U(x)=U(y), each coordinate of x and y agrees by coordinate injectivity of alpha; concrete limit extensionality gives x=y.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For y in ker V, exactness gives a preimage x_n under alpha_n at each coordinate. Naturality of alpha and its injectivity force transition(x_(n+1))=x_n. Realize this family in lim F. Its U-image is y by coordinates. Conversely beta_n(alpha_n(x_n))=0 coordinatewise proves V(U(x))=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Fix z in lim H. Given b_n lifting z_n, choose b_prime lifting z_(n+1). By naturality of beta the defect transition(b_prime)-b_n is in ker beta_n. Write it as alpha_n(a), lift a along the surjective F transition to a_prime, and replace b_prime by b_prime-alpha_(n+1)(a_prime). This preserves its beta-image and makes its transition b_n. Recursively choose such corrected lifts, realize their compatible family in lim G, and verify its V-image equals z by coordinate extensionality.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 03CA and Homology Lemma 02N1"
+  "place": "Algebra Lemmas 03CA and 0598, surjective-kernel specialization; Homology Lemma 02N1(1)"
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps",
   "file": "lean/Sheaf/Algebra/Category/ModuleCat/TowerLimitExactCoordinateMaps.lean",
   "declaration": "CategoryTheory.tower_limit_exact_of_coordinate_maps",
-  "statement": "theorem tower_limit_exact_of_coordinate_maps (R : Type u) [CommRing R] (F : ℕᵒᵖ ⥤ ModuleCat.{v} R) (G : ℕᵒᵖ ⥤ ModuleCat.{w} R) (H : ℕᵒᵖ ⥤ ModuleCat.{t} R) (α : ∀ n : ℕ, F.obj (Opposite.op n) →ₗ[R] G.obj (Opposite.op n)) (β : ∀ n : ℕ, G.obj (Opposite.op n) →ₗ[R] H.obj (Opposite.op n)) (hshort : ∀ n : ℕ, Function.Injective (α n) ∧ Function.Exact (α n) (β n) ∧ Function.Surjective (β n)) (U : ↑(limit F) →ₗ[R] ↑(limit G)) (V : ↑(limit G) →ₗ[R] ↑(limit H)) (hU : ∀ (n : ℕ) (x : ↑(limit F)), limit.π G (Opposite.op n) (U x) = α n (limit.π F (Opposite.op n) x)) (hV : ∀ (n : ℕ) (x : ↑(limit G)), limit.π H (Opposite.op n) (V x) = β n (limit.π G (Opposite.op n) x)) : Function.Injective U ∧ Function.Exact U V ∧ ((∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_add_right n 1)).op)) → Function.Surjective V)",
+  "statement": "theorem tower_limit_exact_of_coordinate_maps (R : Type u) [CommRing R] (F : ℕᵒᵖ ⥤ ModuleCat.{v} R) (G : ℕᵒᵖ ⥤ ModuleCat.{w} R) (H : ℕᵒᵖ ⥤ ModuleCat.{t} R) (α : ∀ n : ℕ, F.obj (Opposite.op n) →ₗ[R] G.obj (Opposite.op n)) (β : ∀ n : ℕ, G.obj (Opposite.op n) →ₗ[R] H.obj (Opposite.op n)) (hα : ∀ (n : ℕ) (x : F.obj (Opposite.op (n + 1))), G.map (homOfLE (Nat.le_add_right n 1)).op (α (n + 1) x) = α n (F.map (homOfLE (Nat.le_add_right n 1)).op x)) (hβ : ∀ (n : ℕ) (x : G.obj (Opposite.op (n + 1))), H.map (homOfLE (Nat.le_add_right n 1)).op (β (n + 1) x) = β n (G.map (homOfLE (Nat.le_add_right n 1)).op x)) (hshort : ∀ n : ℕ, Function.Injective (α n) ∧ Function.Exact (α n) (β n) ∧ Function.Surjective (β n)) (U : ↑(limit F) →ₗ[R] ↑(limit G)) (V : ↑(limit G) →ₗ[R] ↑(limit H)) (hU : ∀ (n : ℕ) (x : ↑(limit F)), limit.π G (Opposite.op n) (U x) = α n (limit.π F (Opposite.op n) x)) (hV : ∀ (n : ℕ) (x : ↑(limit G)), limit.π H (Opposite.op n) (V x) = β n (limit.π G (Opposite.op n) x)) : Function.Injective U ∧ Function.Exact U V ∧ ((∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_add_right n 1)).op)) → Function.Surjective V)",
   "branch": "sheaf-dag",
-  "by": "D4",
+  "by": "K2",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -84,13 +95,42 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "X-c4bdb",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T225303-L-1802796",
+  "landing": "20261013T054223-L-444705",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Corrected Lean signature and proof matched the node, cited sources, change record, and minimal forced caller adaptation; compilation and axiom checks passed."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "K2 stage 2",
+  "old_statement": "For coordinatewise short exact sequences of towers, induced maps on inverse limits are injective and exact in the middle; if the kernel tower has surjective transitions, the induced map on quotients is surjective.",
+  "what": "The Lean signature lacked transition compatibility of the coordinate maps, although the cited source requires maps of short exact sequences. Without it the surjectivity conclusion is false: F is the zero tower, G has Z at every level with zero strict transitions, H is the constant Z tower, alpha=0 and beta=id. lim G=0, lim H=Z, U=V=0 satisfy the coordinate identities, and F transitions are surjective, but V is not. Add hα and hβ, which the sole caller already assumes. This restores the source statement, not an extra restriction on the intended theorem.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Algebra Lemma 03CA and Homology Lemma 02N1"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "holds": true,
+    "note": "Its theorem already assumes hα and hβ. Only the call must pass these existing hypotheses; its statement is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use injectivity and exactness in each coordinate, uniqueness of coordinate preimages, and recursive correction of lifts using surjective kernel transitions.",
+    "uses": [
+     "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+  ]
  }
 }
