@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison
 
 /-! # The derived evaluation square before choosing a generator
 
@@ -107,6 +108,48 @@ theorem restrictedDerivedEvaluation_pullback {S Y Y' : Scheme.{v}}
         rawAffineRestrictedCohomologyMap a h h' w p F F' φ U =
       transportZero a h h' w G G' e.hom U ≫
         (Hzero h' U).map (pullbackHom a p e φ t) ≫ (shiftIso h' p F' U).hom := by
-  sorry
+  let L := upperStar AddCommGrpCat.{v + 1} a
+  let A := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  let B := ((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧
+  let α := (L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G ≫
+    (DerivedCategory.Plus.singleFunctor _ 0).map e.hom
+  let αinv := (DerivedCategory.Plus.singleFunctor _ 0).map e.inv ≫
+    (L.mapDerivedCategoryPlusSingleFunctor 0).inv.app G
+  let β := (D+(L).commShiftIso (p : ℤ)).hom.app
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
+    (shiftFunctor _ (p : ℤ)).map
+      ((L.mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
+        (DerivedCategory.Plus.singleFunctor _ 0).map φ)
+  have hα : α ≫ αinv = 𝟙 _ := by
+    simp [α, αinv, Category.assoc]
+  have hzero : (restrictedSectionPullback a h h' w U).app A ≫
+      (Hzero h' U).map α = transportZero a h h' w G G' e.hom U :=
+    restrictedSectionPullback_zero a h h' w G G' e.hom U
+  have hshift : (restrictedSectionPullback a h h' w U).app B ≫
+      (Hzero h' U).map β ≫ (shiftIso h' p F' U).hom =
+      (shiftIso h p F U).hom ≫
+        rawAffineRestrictedCohomologyMap a h h' w p F F' φ U :=
+    restrictedSectionPullback_shift a h h' w p F F' φ U
+  have hnat : (Hzero h U).map t ≫ (restrictedSectionPullback a h h' w U).app B =
+      (restrictedSectionPullback a h h' w U).app A ≫ (Hzero h' U).map (D+(L).map t) :=
+    (restrictedSectionPullback a h h' w U).naturality t
+  have hpull : pullbackHom a p e φ t = αinv ≫ D+(L).map t ≫ β := by
+    simp only [pullbackHom, αinv, β, L, Category.assoc]
+  have hcancel : (Hzero h' U).map α ≫ (Hzero h' U).map αinv = 𝟙 _ := by
+    rw [← Functor.map_comp, hα]
+    exact (Hzero h' U).map_id _
+  calc
+    _ = (Hzero h U).map t ≫ (restrictedSectionPullback a h h' w U).app B ≫
+        (Hzero h' U).map β ≫ (shiftIso h' p F' U).hom := by rw [hshift]
+    _ = (restrictedSectionPullback a h h' w U).app A ≫
+        (Hzero h' U).map (D+(L).map t) ≫ (Hzero h' U).map β ≫
+          (shiftIso h' p F' U).hom := by
+      simpa only [Category.assoc] using congrArg
+        (fun f ↦ f ≫ (Hzero h' U).map β ≫ (shiftIso h' p F' U).hom) hnat
+    _ = _ := by
+      rw [hpull, ← hzero]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← Category.assoc ((Hzero h' U).map α), hcancel]
+      simp only [Category.id_comp]
 
 end AlgebraicGeometry.Etale.RawRestrictedComparison

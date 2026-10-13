@@ -1,0 +1,152 @@
+{
+ "id": "lem-sbc-restricted-derived-section-shift-comparison",
+ "kind": "statement",
+ "title": "Shifted single comparison for restricted derived section pullback",
+ "statement": "Let $S,Y,Y'$ be schemes, $a:Y'\\to Y$, $h:Y\\to S$, $h':Y'\\to S$, $a\\gg h=h'$, $U\\to S$ etale, and $p\\in\\mathbb N$. Let $F,F'$ be abelian etale sheaves and $\\phi:a^*F\\to F'$. Let $\\tau:T_h\\to D^+(a^*)\\,T_{h'}$ be the explicitly constructed natural transformation of [lem-sbc-restricted-derived-section-zero-comparison]. Let $s_{h,F}:T_h(F[0][p])\\cong H^p(U\\times_S Y,r^*F)$ be the shift comparison [def-sbc-raw-restricted-cohomology-comparison-map]. Put $\\beta=\\mathrm{commShift}_{D^+(a^*),p}.\\mathrm{hom}_{F[0]}\\gg(c_F.\\mathrm{hom}\\gg\\phi[0])[p]$, with $c_F$ the exact-pullback single comparison. Then $\\tau_{F[0][p]}\\gg T_{h'}(\\beta)\\gg s_{h',F'}.\\mathrm{hom}=s_{h,F}.\\mathrm{hom}\\gg R_{a,\\phi}$, where $R_{a,\\phi}$ is the explicitly constructed restricted-cohomology map [def-sbc-raw-affine-restricted-cohomology]. There is no source sheaf, derived morphism into $F[0][p]$, or source isomorphism in this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07A6",
+  "place": "Cohomology on Sites, lemma-adjoint (07A6); lemma-unbounded-cohomology-of-open (0D6F); specialization of the parent derived-section square proof to its shifted-single comparison."
+ },
+ "stmt_deps": [
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Commute restriction and derived global sections with the shift by p. The derived unit commutes with the shift by its induced adjunction of complexes; the Leray comparison does so by its defining composite right-derived unit. After the homology shift comparison, its contribution is H^p of the derived unit followed by the Leray and mapDerivedCategoryFactors comparisons on the single complex, which is rawAffineComplexPullback by definition.",
+   "uses": [
+    "lem-sbc-restricted-derived-section-zero-comparison",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the factorization of the derived restriction isomorphism on single complexes: it is Q of the mapCochainComplexSingleFunctor comparison followed by the single image of upperStarComp(q,r) inverse and upperStarComp(r\\prime,a). Naturality for phi supplies the restricted coefficient morphism. Substitute in shiftIso and cancel the single and shift comparisons. This gives rawAffineRestrictedCohomologyMap; the calculation also holds for p=0, an empty restriction, and noninvertible phi.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-restricted-derived-section-zero-comparison",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent G3",
+  "document": "Stacks Project and the parent proof plan",
+  "place": "The shifted-single comparison in lem-sbc-restricted-derived-evaluation-pullback; expanded using the explicit derived-unit and Leray construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived global sections pullback via derived adjunction unit",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.ExponentiableMorphism.ev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv. No exact restricted derived-section comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. No exact restricted derived-section comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth homology of derived global sections pullback agrees with ordinary section pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso.*single|rightDerivedFunctorCompIso.*zero|mapDerivedCategoryRightDerivedAdjunction",
+   "results": "0 hits: none. No exact restricted derived-section comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shift compatibility of derived adjunction unit and Leray comparison for global sections",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.sheafComposeNatIso, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, SheafOfModules.sheafificationCompPullback. No exact restricted derived-section comparison.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedDerivedEvaluationPullback",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Derived section pullback and the single/shift comparisons; parent proof step 2. Stacks Tags 07A6 (derived adjunction), 0D6F (restriction of derived sections), 03Q8 (restricted cohomology presentation).",
+   "via": [
+    "lem-sbc-restricted-derived-evaluation-pullback",
+    "lem-sbc-raw-restricted-cohomology-comparison-naturality",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedDerivedSectionShiftComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedSectionPullback_shift",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.restrictedSectionPullback_shift"
+  ],
+  "statement": "theorem restrictedSectionPullback_shift {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : (upperStar AddCommGrpCat.{v + 1} a).obj F ⟶ F') (U : S.Etale) :\n    (restrictedSectionPullback a h h' w U).app\n        (((DerivedCategory.Plus.singleFunctor _ 0).obj F)⟦(p : ℤ)⟧) ≫\n      (sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) ⋙\n        DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0).map\n          ((D+(upperStar AddCommGrpCat.{v + 1} a).commShiftIso (p : ℤ)).hom.app\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫\n            (shiftFunctor _ (p : ℤ)).map\n              (((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n                  F ≫ (DerivedCategory.Plus.singleFunctor _ 0).map φ)) ≫\n        (shiftIso h' p F' U).hom =\n      (shiftIso h p F U).hom ≫ rawAffineRestrictedCohomologyMap a h h' w p F F' φ U",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T031539-L-3570655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T031539-L-3570655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
