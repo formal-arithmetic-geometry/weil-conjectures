@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-module-hom-complex-quotient",
+ "kind": "statement",
+ "title": "Module Hom homology as homotopy classes",
+ "statement": "Let $A$ be a commutative ring and $L,M$ arbitrary integer cochain complexes of $A$-modules [def-weil-abstract-derived-category]. Let $H$ denote the homotopy-category quotient, identifying chain-homotopic maps. There are additive equivalences $b_{L,M}:\\operatorname{Hom}(HL,HM)\\simeq H^0(\\operatorname{Hom}^{\\bullet}_A(L,M))$, for the module Hom complex [def-sc-module-total-hom-complex]. For every chain map $f:L\\to M$ there is a cycle $z$ whose inclusion in degree-zero cochains is $\\operatorname{ofHom}(f)$ and such that $b_{L,M}(Hf)=\\pi(z)$ for the canonical homology projection. No projectivity, boundedness or derived-category hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A8H",
+  "place": "section-hom-complexes, equation-cohomology-hom-complex (15.73.0.1); Mathlib HomComplexCohomology homAddEquiv and leftHomologyData"
+ },
+ "proof": [
+  {
+   "text": "Forget A-module structure using U = forget₂ (ModuleCat A) AddCommGrpCat. The short complex in degree zero becomes definitionally the short complex of Mathlib HomComplex. The forgetful functor preserves homology. For its canonical left homology data D₀, compose U.mapIso D₀.homologyIso, (D₀.map U).homologyIso.symm, and HomComplex.leftHomologyData.homologyIso to identify module homology with CohomologyClass. These are Mathlib homology universal-property isomorphisms.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib CohomologyClass.homAddEquiv in degree zero and postcompose with the homotopy quotient of the canonical zero-shift isomorphism. Invert this additive equivalence and compose with the inverse of the homology comparison from step 1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct z using HomologicalComplex.cyclesMk on ofHom f; δ_ofHom gives the cycle equation and i_cyclesMk gives its inclusion. The left-homology-data projection and cycles identities show that the homology comparison sends homologyπ z to mk(ofHom f). The kernel inclusion is injective, so the corresponding abstract cycle is ofHom f. Finally compute equivHomShift.symm(ofHom f) followed by the zero-shift isomorphism degreewise; the two shift comparison maps cancel, leaving f. This proves the representative formula.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T2",
+  "date": "2026-10-13",
+  "document": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+  "place": "homAddEquiv; leftHomologyData; ShortComplex.LeftHomologyData projection and cycles comparison identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes of chain maps are degree zero homology of the module-valued Hom complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": "homAddEquiv and homAddEquiv_apply found; applies to quotient of cocycles, not the project moduleHomComplex homology",
+   "date": "2026-10-13",
+   "verdict": "reuse quotient equivalence; module homology bridge still required"
+  },
+  {
+   "tool": "grep",
+   "query": "homCongr.*[Aa]dd|homology.*[Aa]ddEquiv; moduleHomComplex.*homology; blueprint_refs search Hom complex",
+   "results": "Mathlib homologyAddEquiv concerns the abelian-group HomComplex. No existing moduleHomComplex quotient bridge in either project root or the blueprint. ShortComplex.ModuleCat and PreservesHomology provide generic tools.",
+   "date": "2026-10-13",
+   "verdict": "no exact theorem; all needed generic tools are available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKProjectiveHomComplex",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine Koszul Hom identification: the generic degree-zero quotient in step 2 of lem-sc-affine-kprojective-hom-complex.",
+   "via": [
+    "lem-sc-affine-kprojective-hom-complex",
+    "lem-sc-koszul-open-hom-homology-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ModuleHomComplexQuotient",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleHomComplexQuotient.lean",
+  "declaration": "CochainComplex.moduleHomComplex_quotient",
+  "statement": "theorem moduleHomComplex_quotient (A : Type u) [CommRing A] :\n    ∃ b : ∀ (L M : CochainComplex (ModuleCat.{u} A) ℤ),\n        ((HomotopyCategory.quotient _ _).obj L ⟶\n          (HomotopyCategory.quotient _ _).obj M) ≃+\n          (moduleHomComplex L M).homology 0,\n      ∀ (L M : CochainComplex (ModuleCat.{u} A) ℤ) (f : L ⟶ M),\n        ∃ z : (moduleHomComplex L M).cycles 0,\n          (moduleHomComplex L M).iCycles 0 z = HomComplex.Cochain.ofHom f ∧\n          b L M ((HomotopyCategory.quotient _ _).map f) =\n            (moduleHomComplex L M).homologyπ 0 z",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100133-L-2489080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100133-L-2489080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
