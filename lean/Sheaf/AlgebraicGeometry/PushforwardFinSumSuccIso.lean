@@ -20,6 +20,24 @@ theorem pushforward_fin_sum_succ_iso
     Nonempty ((pushforward i).obj (∐ fun _ : Fin (r + 1) => I.toModules) ≅
       (pushforward i).obj (∐ fun _ : Fin r => I.toModules) ⊞
         (pushforward i).obj I.toModules) := by
-  sorry
+  let A : Fin (r + 1) → Z.Modules := fun _ ↦ I.toModules
+  let B : Fin r → Z.Modules := fun _ ↦ I.toModules
+  let e : (∐ A) ≅ (∐ B) ⊞ I.toModules :=
+    { hom := Sigma.desc (Fin.cases biprod.inr (fun j ↦ Sigma.ι B j ≫ biprod.inl))
+      inv := biprod.desc (Sigma.desc fun j ↦ Sigma.ι A j.succ) (Sigma.ι A 0)
+      hom_inv_id := by
+        apply Sigma.hom_ext
+        intro j
+        cases j using Fin.cases with
+        | zero => simp [A, B]
+        | succ j => simp [A, B]
+      inv_hom_id := by
+        apply biprod.hom_ext'
+        · apply Sigma.hom_ext
+          intro j
+          simp [A, B]
+        · simp [A, B] }
+  have := preservesBinaryBiproducts_of_preservesBinaryProducts (pushforward i)
+  exact ⟨(pushforward i).mapIso e ≪≫ (pushforward i).mapBiprod (∐ B) I.toModules⟩
 
 end AlgebraicGeometry.Scheme.Modules

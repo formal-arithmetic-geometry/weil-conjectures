@@ -12,20 +12,23 @@
  ],
  "proof": [
   {
-   "text": "Construct the filtration by composing the old chain with the split inclusion into the biproduct, append the full object, and transport coherence and quotient witnesses across the resulting isomorphisms.",
-   "uses": [
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
-   ],
-   "elementary": false
+   "text": "Let A be the constant family I.toModules on Fin (r+1), and B the constant family on Fin r. Define e from the coproduct of A to the binary biproduct of the coproduct of B and I.toModules by Sigma.desc: send index zero to biprod.inr, and each successor j.succ to Sigma.ι B j followed by biprod.inl. Its inverse is biprod.desc of Sigma.desc (fun j => Sigma.ι A j.succ) and Sigma.ι A 0. The two composites are identities by Sigma.hom_ext and biprod.hom_ext', followed by Fin.cases and the coproduct and biproduct inclusion equations. This also covers r=0, where there are no successor indices.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The existing Mathlib instance Scheme.Modules.pushforward.IsRightAdjoint gives preservation of binary products, and its Additive instance gives preservation of zero morphisms. Apply Mathlib preservesBinaryBiproducts_of_preservesBinaryProducts locally and compose (pushforward i).mapIso e with Functor.mapBiprod. This is the required isomorphism; no coherence, integralness, or closed-immersion hypothesis is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "S4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01YF, final paragraph of lemma-coherent-filter"
+  "place": "Tag 01YF, final paragraph (i_*(I^{oplus r})); S4 supplies the elementary finite-sum comparison via coproduct universal properties and the Mathlib right-adjoint pushforward instance."
  },
  "mathlib_searches": [
   {
@@ -107,13 +110,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T231638-L-1963099",
-  "kind": "interface",
+  "landing": "20261013T011935-L-2765834",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
