@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-single-complex-nested-coefficient-coherence",
+ "kind": "statement",
+ "title": "Coherence of iterated source-open coefficient restriction",
+ "statement": "Let g′:X′→X be a scheme morphism [def-pc-scheme], K∈D(X), K′∈D(X′),\nφ:L_g′K→K′ [def-pc-derived-category, def-pc-derived-pullback], and Z≤W opens of X.\nPut A=W.ι⁻¹Z, P=X′×_X W with p:P→X′, q:P→W, B=P×_W A with r:B→P,t:B→A,\nand P_Z=X′×_X Z with p_Z:P_Z→X′,q_Z:P_Z→Z. Let e:A≅Z be Scheme.Opens.isoOfLE,\nand e′:B≅P_Z any isomorphism with e′p_Z=rp and e′q_Z=te.\nUsing the fixed composition comparisons c [lem-pc-ringed-spaces-derived-pullback-composition],\nset K_W=L_W.ι K, K_W′=L_p K′. Define φ_W by c(q,W.ι), transport qW.ι=pg′,\nc(p,g′) inverse and L_pφ; define φ_Z analogously. Define φ_A by c(t,A.ι),\ntransport tA.ι=rq, c(r,q) inverse and L_rφ_W. Define\nα:L_e L_Z.ι K≅L_A.ι K_W by c(e,Z.ι), transport eZ.ι=A.ιW.ι, c(A.ι,W.ι) inverse;\ndefine β:L_e′ L_p_Z K′≅L_r K_W′ by c(e′,p_Z), transport e′p_Z=rp,\nc(r,p) inverse. Then L_t(α.hom) followed by φ_A equals c(t,e).hom at L_Z.ι K,\ntransport te=e′q_Z, c(e′,q_Z) inverse, L_e′φ_Z and β.hom. No direct image or\nbase-change comparison is part of the conclusion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S: associativity and naturality of composition; Tag 0DJ9: iterated source-open restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand the three coefficient morphisms and the explicitly constructed isomorphisms α,β. Naturality of c in φ moves the final coefficient map through c(e′,p_Z) and c(r,p). Associativity of c on the chains t,A.ι,W.ι and r,q,W.ι identifies the twice-restricted source comparison. Associativity on r,p,g′ and e′,p_Z,g′ identifies its target comparison. Use the two pullback conditions, the isoOfLE projection equation, and the equations on e′ to identify the composite scheme maps. Equality-transport naturality moves all transports to the same places; inverse comparisons cancel. The two remaining composites coincide by associativity on t,e,Z.ι and e′,q_Z,Z.ι. This proves the displayed coefficient identity, also for empty opens and zero coefficients.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08HY",
+    "place": "Tag 0D5S composition and its associativity; Tag 0DJ9 source-open induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0D5S",
+  "place": "Tag 0D5S: associativity and naturality of composition; Tag 0DJ9: iterated source-open restriction",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "note": "Expansion of the original nested-comparison proof; checked against the online Stacks text."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback composition comparisons identify coefficient morphisms restricted twice to nested opens",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback composition comparisons identify coefficient morphisms restricted twice to nested opens",
+   "results": "Eight hits: Scheme.Hom.appLE_map_assoc, map_appLE_assoc, pullbackRestrictIsoRestrict_hom_ι_assoc and hom_morphismRestrict_assoc, appLE_comp_appLE_assoc, appLE_map′_assoc, map_appLE′_assoc, resLE_comp_resLE_assoc. These concern underived restriction, not this derived coefficient identity.",
+   "date": "2026-10-13",
+   "verdict": "no match: the returned statements do not state this derived coefficient or mate identity"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*base.*change.*source.*iso|nested.*coefficient.*coherence",
+   "results": "No relevant match in Mathlib AlgebraicGeometry or either library root.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenNestedComparison",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Nested restriction coordinate transport in Tag 0DJ9: Tag 0D5S: associativity and naturality of composition; Tag 0DJ9: iterated source-open restriction",
+   "via": [
+    "lem-pc-single-complex-open-nested-comparison",
+    "lem-pc-single-complex-open-union",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexNestedCoefficientCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexNestedCoefficientCoherence.lean",
+  "declaration": "AlgebraicGeometry.singleComplex_nested_coefficient_coherence",
+  "statement": "theorem singleComplex_nested_coefficient_coherence\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (phi : (derivedPullback g').obj K ⟶ K')\n    (W Z : X.Opens) (hZW : Z ≤ W)\n    (e' : pullback (pullback.snd g' W.ι) (W.ι ⁻¹ᵁ Z).ι ≅ pullback g' Z.ι)\n    (hp : e'.hom ≫ pullback.fst g' Z.ι =\n      pullback.fst (pullback.snd g' W.ι) (W.ι ⁻¹ᵁ Z).ι ≫ pullback.fst g' W.ι)\n    (hq : e'.hom ≫ pullback.snd g' Z.ι =\n      pullback.snd (pullback.snd g' W.ι) (W.ι ⁻¹ᵁ Z).ι ≫\n        (Scheme.Opens.isoOfLE hZW).hom) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))\n    let A := W.ι ⁻¹ᵁ Z\n    let e := Scheme.Opens.isoOfLE hZW\n    let q := pullback.snd g' W.ι\n    let p := pullback.fst g' W.ι\n    let t := pullback.snd q A.ι\n    let r := pullback.fst q A.ι\n    let KW := (derivedPullback W.ι).obj K\n    let KW' := (derivedPullback p).obj K'\n    let phiW := (c q W.ι).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (pullback.condition (f := g') (g := W.ι)).symm) ≫\n      (c p g').inv.app K ≫ (derivedPullback p).map phi\n    let phiZ := (c (pullback.snd g' Z.ι) Z.ι).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (pullback.condition (f := g') (g := Z.ι)).symm) ≫\n      (c (pullback.fst g' Z.ι) g').inv.app K ≫\n      (derivedPullback (pullback.fst g' Z.ι)).map phi\n    let phiA := (c t A.ι).hom.app KW ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj KW)\n        (pullback.condition (f := q) (g := A.ι)).symm) ≫\n      (c r q).inv.app KW ≫ (derivedPullback r).map phiW\n    let alpha := (c e.hom Z.ι).app K ≪≫\n      eqToIso (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (Scheme.Opens.isoOfLE_hom_ι hZW)) ≪≫ (c A.ι W.ι).symm.app K\n    let beta := (c e'.hom (pullback.fst g' Z.ι)).app K' ≪≫\n      eqToIso (congrArg (fun k ↦ (derivedPullback k).obj K') hp) ≪≫\n      (c r p).symm.app K'\n    (derivedPullback t).map alpha.hom ≫ phiA =\n      (c t e.hom).hom.app ((derivedPullback Z.ι).obj K) ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj\n        ((derivedPullback Z.ι).obj K)) hq.symm) ≫\n      (c e'.hom (pullback.snd g' Z.ι)).inv.app ((derivedPullback Z.ι).obj K) ≫\n      (derivedPullback e'.hom).map phiZ ≫ beta.hom",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T113351-L-3186774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T113351-L-3186774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
