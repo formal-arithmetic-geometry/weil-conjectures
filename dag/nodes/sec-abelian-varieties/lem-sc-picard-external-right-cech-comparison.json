@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-picard-external-right-cech-comparison",
+ "kind": "statement",
+ "title": "Cup comparison of the fixed right external Cech sequences",
+ "statement": "For $k,X,Y,f,g,F$ and any short complex $S$ of quasi-coherent modules on $Y$, and finite affine covers $U,V$ with affine diagonals, set $T=S.map(A)$ and $P=S.map(B)$ using [def-sc-picard-external-right-cech-models]. There are three normalized maps $d_r$ [lem-sc-picard-external-cup-cochain], a morphism $\\psi:T\\to P$, and natural-degree homology isomorphisms $a_r:H^n(T.X_r)\\cong H^n(\\operatorname{picardExternalTotal}(F,S.X_r))$, $b_r:H^n(P.X_r)\\cong H^n(\\operatorname{picardScalarModel}(F\\boxtimes S.X_r))$ [lem-sc-picard-kunneth-resolution-model], such that $H^n(\\psi.\\tau_r)=a_r.hom\\,H^n(d_r)\\,b_r.inv$. Neither short exactness nor cup invertibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech (33.29.1.1) and the following coefficient sequence diagram; official tag page read"
+ },
+ "stmt_deps": [
+  "def-sc-picard-external-right-cech-models",
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sp-abelian",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Refine the factor pullback covers to the product cover and use the signed cup pairing. Coefficient naturality produces the three commuting components of psi. Pullback and tensor preserve quasi-coherence; the product intersections are affine.",
+   "uses": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use natural affine Cech comparisons and the scalar resolution model comparison to identify the product homologies with the scalar models. Compare the two tensor totals using the factor comparisons and tensor Kunneth. Extension homology isomorphisms give a_r and b_r in natural degrees.",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose normalized d_r using the cochain existence theorem. The Cech refinement/cup compatibility identifies psi on factor tensor cycles with external cup, the same formula as the normalization of d_r. Tensor Kunneth, surjective homology projections and pure tensor spanning establish each conjugation equation on all classes. Empty schemes and zero coefficients are handled by the same formulas.",
+   "uses": [
+    "lem-sc-picard-external-cup-cochain",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-qcoh-cech-total-tensor-nat-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, explicit fixed Cech models and the right-variable version of the coefficient diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite affine Cech cover gives a short exact sequence of tensor total complexes for quasi coherent modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact diagram of Cech complexes for the external cup product in the right coefficient",
+   "results": "Eight Mayer-Vietoris square definitions and component/exactness lemmas; no external-cup coefficient diagram or comparison. Loogle also confirms HomologicalComplex.isZero_extend_X for the proved negative-degree glue.",
+   "date": "2026-10-13",
+   "verdict": "No matching external-cup statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Ss]hort[Ee]xact|[Ss]hort[Ee]xact.*Cech|cech.*[Ss]hort[Ee]xact; scalar.*Cech|Cech.*scalar; blueprint_refs search Cech short exact and 0BED",
+   "results": "Mathlib grep has no match. Project: TopCat.Sheaf.shortExact_cechComplex is abelian-valued and conditional on intersection surjectivity; cechOver packages a complex but no coefficient functor. LeftComparisonComplexes has the other coefficient variable. No fixed right tensor/product Cech exactness or cup comparison. Blueprint search returns no matching imported node.",
+   "date": "2026-10-13",
+   "verdict": "Need the two fixed-model lemmas and functorial packaging."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupRightCechDiagram",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Cup comparison of the fixed right external Cech sequences in the Cech proof of Tag 0BED",
+   "via": [
+    "lem-sc-picard-external-cup-right-cech-diagram",
+    "lem-sc-picard-external-cup-right-exact-ladder",
+    "lem-sc-picard-external-cup-shift-right",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalRightCechComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternal_right_cech_comparison",
+  "statement": "theorem picardExternal_right_cech_comparison\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (S : ShortComplex Y.Modules)\n    [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]\n    {ι κ : Type w} [Finite ι] [Finite κ]\n    (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hU : ∀ i, IsAffineOpen (U i)) (hV : ∀ j, IsAffineOpen (V j))\n    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤)\n    :\n    ∃ (d1 : picardExternalTotal f g F S.X₁ ⟶\n      picardScalarModel (pullback.fst f g ≫ f)\n        (externalCupCoefficients f g F S.X₁)),\n    ∃ (d2 : picardExternalTotal f g F S.X₂ ⟶\n      picardScalarModel (pullback.fst f g ≫ f)\n        (externalCupCoefficients f g F S.X₂)),\n    ∃ (d3 : picardExternalTotal f g F S.X₃ ⟶\n      picardScalarModel (pullback.fst f g ≫ f)\n        (externalCupCoefficients f g F S.X₃)),\n    let T := S.map (picardRightTensorCechFunctor f g U V F)\n    let P := S.map (picardRightProductCechFunctor f g U V F)\n    ∃ (ψ : T ⟶ P)\n      (a1 : ∀ n : ℕ, T.X₁.homology (n : ℤ) ≅\n        (picardExternalTotal f g F S.X₁).homology (n : ℤ))\n      (b1 : ∀ n : ℕ, P.X₁.homology (n : ℤ) ≅\n        (picardScalarModel (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g F S.X₁)).homology (n : ℤ))\n      (a2 : ∀ n : ℕ, T.X₂.homology (n : ℤ) ≅\n        (picardExternalTotal f g F S.X₂).homology (n : ℤ))\n      (b2 : ∀ n : ℕ, P.X₂.homology (n : ℤ) ≅\n        (picardScalarModel (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g F S.X₂)).homology (n : ℤ))\n      (a3 : ∀ n : ℕ, T.X₃.homology (n : ℤ) ≅\n        (picardExternalTotal f g F S.X₃).homology (n : ℤ))\n      (b3 : ∀ n : ℕ, P.X₃.homology (n : ℤ) ≅\n        (picardScalarModel (pullback.fst f g ≫ f)\n          (externalCupCoefficients f g F S.X₃)).homology (n : ℤ)),\n      IsPicardExternalCupCochain f g F S.X₁ d1 ∧\n      IsPicardExternalCupCochain f g F S.X₂ d2 ∧\n      IsPicardExternalCupCochain f g F S.X₃ d3 ∧\n      (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₁ (n : ℤ) =\n        (a1 n).hom ≫ HomologicalComplex.homologyMap d1 (n : ℤ) ≫ (b1 n).inv) ∧\n      (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₂ (n : ℤ) =\n        (a2 n).hom ≫ HomologicalComplex.homologyMap d2 (n : ℤ) ≫ (b2 n).inv) ∧\n      (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₃ (n : ℤ) =\n        (a3 n).hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ) ≫ (b3 n).inv)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100034-L-2470760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100034-L-2470760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

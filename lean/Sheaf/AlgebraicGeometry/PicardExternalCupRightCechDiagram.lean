@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.AlgebraicGeometry.PicardExternalRightCechExact
+import Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison
 import Sheaf.Algebra.Homology.TensorKunnethNat
 import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
@@ -112,6 +114,36 @@ theorem picardExternalCup_right_cech_diagram
       (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₂ (n : ℤ) =
         (a2 n).hom ≫ HomologicalComplex.homologyMap d2 (n : ℤ) ≫ (b2 n).inv) ∧
       (∀ n : ℕ, HomologicalComplex.homologyMap ψ.τ₃ (n : ℤ) =
-        (a3 n).hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ) ≫ (b3 n).inv) := by sorry
+        (a3 n).hom ≫ HomologicalComplex.homologyMap d3 (n : ℤ) ≫ (b3 n).inv) := by
+  classical
+  let C := X.affineCover.finiteSubcover
+  let D := Y.affineCover.finiteSubcover
+  let U : C.I₀ → X.Opens := fun i ↦ (C.f i).opensRange
+  let V : D.I₀ → Y.Opens := fun j ↦ (D.f j).opensRange
+  have hU : ∀ i, IsAffineOpen (U i) := by
+    intro i
+    exact isAffineOpen_opensRange (X.affineCover.f _)
+  have hV : ∀ j, IsAffineOpen (V j) := by
+    intro j
+    exact isAffineOpen_opensRange (Y.affineCover.f _)
+  have hUc : iSup U = ⊤ := C.iSup_opensRange
+  have hVc : iSup V = ⊤ := D.iSup_opensRange
+  let T := S.map (picardRightTensorCechFunctor f g U V F)
+  let P := S.map (picardRightProductCechFunctor f g U V F)
+  obtain ⟨hT, hP⟩ := picardExternal_right_cech_exact f g U V hU hV F S hS
+  obtain ⟨d1, d2, d3, ψ, a1, b1, a2, b2, a3, b3,
+      hd1, hd2, hd3, he1, he2, he3⟩ :=
+    picardExternal_right_cech_comparison k X Y f g F S U V hU hV hUc hVc
+  refine ⟨d1, d2, d3, T, P, ψ, a1, b1, a2, b2, a3, b3,
+    hd1, hd2, hd3, hT, hP, ?_, he1, he2, he3⟩
+  intro i hi
+  have hz (K : CochainComplex (ModuleCat.{w} k) ℕ) :
+      IsZero ((K.extend ComplexShape.embeddingUpNat).homology i) := by
+    apply ((K.extend ComplexShape.embeddingUpNat).sc i).isZero_homology_of_isZero_X₂
+    apply HomologicalComplex.isZero_extend_X
+    intro n hn
+    change (n : ℤ) = i at hn
+    omega
+  exact ⟨hz _, hz _, hz _, hz _⟩
 
 end AlgebraicGeometry.Scheme.Modules
