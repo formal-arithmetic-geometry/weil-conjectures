@@ -32,84 +32,72 @@
  ],
  "proof": [
   {
-   "text": "*Comparison of the two twisting sheaves.* Let $\\mathcal O^{\\mathrm{gl}}(1)$ be the module of [def-pc-projective-space-twist] on $\\mathbf P^n_{\\mathbf Z}$ ($A=\\mathbf Z$, $d=1$, index set $\\{0,\\dots,n\\}$) with its global sections $T^{\\mathrm{gl}}_k$. By [lem-weil-pbc-projective-space-twist-glued-identification] there is an isomorphism $\\theta:\\mathcal O^{\\mathrm{gl}}(1)\\to\\widetilde{S(1)}=\\mathcal O_{\\mathbf P^n_{\\mathbf Z}}(1)$ with $\\theta(T^{\\mathrm{gl}}_k)=T_k$. Applying the functor $\\rho^*$ [def-pc-module-pullback] gives an isomorphism $\\rho^*\\theta:\\rho^*\\mathcal O^{\\mathrm{gl}}(1)\\to\\mathcal O_{\\mathbf P^n_A}(1)$ carrying $\\rho^*T^{\\mathrm{gl}}_k$ to $\\rho^*T_k$ (a functor carries isomorphisms to isomorphisms, and pullback of sections is natural), and then $i^*\\rho^*\\theta$ identifies $i^*\\rho^*\\mathcal O^{\\mathrm{gl}}(1)$ with $\\mathcal L$, carrying $i^*\\rho^*T^{\\mathrm{gl}}_k$ to $s_k$. So it suffices to prove every assertion for $\\mathcal O_P(1)=\\rho^*\\mathcal O^{\\mathrm{gl}}(1)$ and its sections $T_k$, which is the module of [lem-weil-pbc-projective-space-standard-charts] for $S=\\operatorname{Spec}A$; write $P=\\mathbf P^n_A$, $D_+(T_k)_S=\\rho^{-1}(D_+(T_k))$ and $u_{l/k}$ as there.",
+   "text": "The Proj polynomial twist is invertible by the proved source instance Proj.isInvertible_twist_homogeneousSubmodule. Compare tensorPullback g with Scheme.Modules.pullback g by Adjunction.leftAdjointUniq applied to exists_tensorPullbackAdjunction and pullbackPushforwardAdjunction. IsInvertible.of_iso transports the usual pullback instance. Apply first to rho and then to i; this is the private, proved tensorPullback_invertible helper.",
    "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
     "def-pc-projective-space-twist",
-    "lem-weil-pbc-projective-space-twist-glued-identification",
+    "def-sc-invertible-module",
     "def-pc-module-pullback",
-    "lem-weil-pbc-projective-space-standard-charts"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Definition 01MN (definition-twist) and Lemma 01NG; the identification of the glued and the $\\widetilde{S(1)}$ twisting sheaf"
-   }
+   "elementary": true
   },
   {
-   "text": "*$\\mathcal L$ is invertible.* Put $X_k=i^{-1}(D_+(T_k)_S)$. By [lem-weil-pbc-projective-space-standard-charts] (a) the $D_+(T_k)_S$ cover $P$, so the $X_k$ cover $X$. By (b) of that lemma applied to $g=i:X\\to P$, the section $s_k=i^*T_k$ is a free generator of $\\mathcal L=i^*\\mathcal O_P(1)$ over $X_k$: for every open $V\\subseteq X_k$ the map $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(V,\\mathcal L)$, $a\\mapsto a\\,s_k|_V$, is bijective, i.e. $\\mathcal O_{X_k}\\to\\mathcal L|_{X_k}$, $a\\mapsto as_k$, is an isomorphism of $\\mathcal O_{X_k}$-modules. Hence $\\mathcal L$ is locally free of rank one, and quasi-coherent (being locally isomorphic to $\\mathcal O_X$), i.e. invertible [def-sc-invertible-module].",
+   "text": "Recover a morphism out of the structure module from its global value at one: unitHomEquiv is injective, homOfGlobalSection_app_one computes each component, and Hom.app_presheaf_map plus map_one identifies the restrictions. Apply nonvanishingLocus_eq_compl_support_zeroLocus and the proved source theorem Proj.compl_support_zeroLocus_unitToTwist, using Proj.exists_mem_basicOpen_homogeneousSubmodule for the degree-one cover. Each integral coordinate therefore has precisely its Proj basic open as its nonvanishing locus. The recovery calculation is the proved private homOfGlobalSection_appTop_one helper.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-sc-invertible-module"
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-projective-space-twist",
+    "prop-nagata-proj-standard-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01NG (lemma-standard-covering-projective-space), Definition 01NF and the discussion after it ($\\mathcal L=\\varphi^*\\mathcal O(1)$, $s_i=\\varphi^*T_i$)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The non-vanishing loci: $X_{s_k}=X_k$.* For $x\\in X$ the value of $s_k$ at $x$ is its image in $\\mathcal L_x\\otimes\\kappa(x)$, as in [def-weil-pbc-ample-invertible-module] (with $\\mathcal L^{\\otimes1}=\\mathcal L$). If $x\\in X_k$, $s_k$ generates the free rank-one module $\\mathcal L_x$ (Step 2), so its value is a basis of the one-dimensional $\\kappa(x)$-vector space $\\mathcal L_x\\otimes\\kappa(x)$, hence nonzero: $X_k\\subseteq X_{s_k}$. Conversely let $x\\notin X_k$, $p=i(x)\\notin D_+(T_k)_S$, and choose $j$ with $x\\in X_j$ (Step 2). By [lem-weil-pbc-projective-space-standard-charts] (b) for $g=\\mathrm{id}_P$, $T_k=u_{k/j}T_j$ on $D_+(T_j)_S$, $T_j$ is a generator there, and $P_{T_k}=D_+(T_k)_S$; so $0=T_k(p)=u_{k/j}(p)\\,T_j(p)$ with $T_j(p)\\neq0$, whence $u_{k/j}(p)=0$ in $\\kappa(p)$. By (b) for $g=i$, $s_k=i^*(u_{k/j})\\,s_j$ on $X_j$, and the value of the function $i^*(u_{k/j})$ at $x$ is the image of $u_{k/j}(p)=0$ under $\\kappa(p)\\to\\kappa(x)$ (the stalk map of $i$ is local), so $s_k(x)=0$. Thus $X_{s_k}=X_k$.",
+   "text": "Apply nonvanishing_tensorPullback first to rho and then to i. Transitivity of the two pointwise equivalences and the integral coordinate-locus equality identifies the twice-pulled coordinate locus with i inverse-image of standardOpen. The source theorem ProjectiveSpace.iSup_standardOpen and Scheme.Hom.iSup_preimage_eq_top give the cover. This uses the literal Proj twist and the chosen adjunction units occurring in the statement, so neither a glued-twist identification nor the still-holed projectiveSpace_standardCharts conjunction is required.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-weil-pbc-ample-invertible-module",
-    "def-weil-residue-field"
+    "lem-sc-nonvanishing-tensor-pullback",
+    "def-nagata-projective-space-base-change",
+    "prop-nagata-proj-standard-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01NG (lemma-standard-covering-projective-space), Definition 01NF and the discussion after it ($\\mathcal L=\\varphi^*\\mathcal O(1)$, $s_i=\\varphi^*T_i$)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Each $X_{s_k}$ is affine.* By [lem-weil-pbc-projective-space-standard-charts] (c) for the affine open $S'=S=\\operatorname{Spec}A$ (so $q^{-1}(S')=P$), $D_+(T_k)_S$ is affine, $\\cong\\operatorname{Spec}A[U_l:l\\neq k]$. Since $i$ is a closed immersion, by the affine form of [def-weil-closed-immersion] (Stacks 01QO) the preimage of the affine open $D_+(T_k)_S=\\operatorname{Spec}R$ is $\\operatorname{Spec}(R/I)$ for an ideal $I$, so $X_{s_k}=X_k=i^{-1}(D_+(T_k)_S)$ is an affine open subscheme of $X$ (Stacks Schemes 01IH, used in the proof of Properties 01PU).",
+   "text": "The proved source theorem ProjectiveSpace.isAffineOpen_standardOpen applies directly because the base is Spec A, hence affine. A closed immersion is an affine morphism; IsAffineOpen.preimage i proves each chart preimage affine. This is the affine special case of Constructions 01NG, already proved in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-weil-closed-immersion"
+    "def-weil-closed-immersion",
+    "def-nagata-projective-space-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PU (lemma-ample-on-closed), proof, and Definition 01PS"
-   }
+   "elementary": true
   },
   {
-   "text": "*$\\mathcal L$ is ample.* $X=X_{s_0}\\cup\\dots\\cup X_{s_n}$ is a finite union of affine schemes, each quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii); a finite union of quasi-compact subspaces is quasi-compact, so $X$ is quasi-compact, condition (1) of [def-weil-pbc-ample-invertible-module]. For $x\\in X$ choose $k$ with $x\\in X_{s_k}$; then $s_k\\in\\Gamma(X,\\mathcal L^{\\otimes1})$ and $X_{s_k}$ is affine (Step 4), which is condition (2) with exponent $1$. Hence $\\mathcal L$ is ample. (For the remark: $f=q\\circ i$ with $\\operatorname{Spec}A$ affine, so by Stacks Morphisms Lemma 01VK this is the same as $\\mathcal L$ being $f$-ample in the sense of Morphisms Definition 01VH; no node asserts or needs that relative notion.)",
+   "text": "Each affine open is compact by IsAffineOpen.isCompact. Mathlib isCompact_iUnion applies to the finite type ULift (Fin (n+1)); the cover equality identifies the union with univ, and isCompact_univ_iff gives CompactSpace X. For each point select a covering chart by Opens.mem_iSup. The inverse right unitor L isomorphic to L.tensorPow 1 transports its coordinate section; the proved nonvanishingLocus_iso helper in AmpleIso preserves its locus. This affine chart and exponent one satisfy IsAmple exactly.",
    "uses": [
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "def-weil-pbc-ample-invertible-module"
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-iso"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PU (lemma-ample-on-closed), proof, and Definition 01PS"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
   "def-pc-projective-space-twist",
-  "lem-weil-pbc-projective-space-twist-glued-identification",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-projective-space-standard-charts",
   "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "prop-nagata-proj-standard-open",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "def-nagata-projective-space-base-change",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-iso"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PU (lemma-ample-on-closed) with its proof, applied to the standard covering of Constructions Lemma 01NG (literature/stacks-project/constructions.tex); the ampleness of O(1) on P^n_A is shown directly from Definition 01PS through the affine charts D_+(T_k) instead of through Constructions Lemma 01MW"
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/constructions.tex",
+  "place": "Properties Definition 01PS and Lemma 01PU; Constructions Lemma 01NG. Direct source-library coordinate-zero-locus calculation and affine standard charts replace the glued-twist and standard-chart conjunction route. Stalk/zero-locus and pullback comparisons use existing proved section-nonvanishing and nonvanishing-tensor-pullback nodes. Online tags 01PS, 01PU and 01NG read because the local literature sources are absent."
  },
  "mathlib_searches": [
   {
@@ -205,5 +193,15 @@
   "group": "J1",
   "result": "fix",
   "note": "A ring, n:ℕ with ULift (Fin (n+1)) coords; P^n_A = recorded ℙ(·;Spec A), q = ↘ Spec A, ρ = toProjInt onto Proj(ULift ℤ[T]); O(1) = Proj.twist _ 1 pulled by tensorPullback ρ then i; i closed immersion with q∘i=f; L invertible (∃ hL) and IsAmple; CompactSpace X; s_k = unit-section pullbacks of unitToTwist X_k at 1; U k = nonvanishingLocus, affine, ⨆ = ⊤. Fix: expanded file-local notations in the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T001615-L-2330684",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
