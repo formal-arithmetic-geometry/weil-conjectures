@@ -6,14 +6,9 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.Filtration
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionObjects
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.RingTheory.AdicKernelImageBound
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineKernelImageComparison
 
 /-! # Affine Artin--Rees bound for formal kernel images
 
@@ -51,6 +46,19 @@ theorem coherentFormalModule_kernel_affine_bound {X : Scheme.{u}} [IsNoetherian 
       Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫
         F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)).app W) =
       Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫
-        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app W) := by sorry
+        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app W) := by
+  let A := Γ(X, U.1)
+  let R := AdicCompletion (I.ideal U) A
+  let J := (I.ideal U).map (algebraMap A R)
+  have : IsNoetherianRing A := IsLocallyNoetherian.component_noetherian U
+  have : IsNoetherianRing R := AdicCompletion.isNoetherianRing (I.ideal U)
+  obtain ⟨M, N, f, _, hN, hcompare⟩ :=
+    coherentFormalModule_affine_kernel_image_comparison I F H α U
+  have : Module.Finite R N := hN
+  obtain ⟨c, hc⟩ := LinearMap.adic_kernel_image_bound J f.hom
+  refine ⟨c, fun l m h ↦ ?_⟩
+  apply (hcompare l (m + c) m (Nat.le_trans (Nat.le_add_right m c) h)
+    (Nat.le_add_right m c)).mp
+  exact (hc l m h).trans (hc (m + c) m le_rfl).symm
 
 end AlgebraicGeometry

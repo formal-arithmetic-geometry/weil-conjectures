@@ -1,0 +1,135 @@
+{
+ "id": "new-formal-affine-kernel-image-comparison",
+ "kind": "statement",
+ "title": "Finite-level affine comparison of formal kernel images and quotient submodules",
+ "statement": "theorem coherentFormalModule_affine_kernel_image_comparison\n    {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)\n    (F H : CoherentFormalModule X I) (α : F ⟶ H) (U : X.affineOpens) :\n    let A := Γ(X, U.1)\n    let R := AdicCompletion (I.ideal U) A\n    let J := (I.ideal U).map (algebraMap A R)\n    ∃ (M N : ModuleCat.{u} R) (f : M ⟶ N),\n      Module.Finite R M ∧ Module.Finite R N ∧\n      ∀ (l k m : ℕ) (hl : m ≤ l) (hk : m ≤ k),\n        (((J ^ (l + 1) • (⊤ : Submodule R N)).comap f.hom).map\n            (J ^ (m + 1) • (⊤ : Submodule R M)).mkQ =\n          ((J ^ (k + 1) • (⊤ : Submodule R N)).comap f.hom).map\n            (J ^ (m + 1) • (⊤ : Submodule R M)).mkQ) ↔\n        ∀ (W : X.Opens), W ≤ U.1 →\n          Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE hl).op)).app W) =\n          Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op k)) ≫\n            F.obj.map (homOfLE hk).op)).app W)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a); Lemma 087W for affine comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict both coherent formal objects and their morphism to U. Transport across U = Spec Gamma(U,O_X) and use the affine formal-module equivalence to obtain finite completed modules M,N and f. The level projections are quotient projections modulo the extended ideal powers and commute with f and transitions.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lifting through the level-l projection identifies the image of the reduced kernel in level m with the image of f inverse(J^(l+1)N) in M/J^(m+1)M. Kernels and images are quasi-coherent and their affine sections compute the linear kernels and images.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine tilde equivalence identifies these quotient submodule inclusions with the corresponding image subsheaf inclusions. Equal submodules yield equal subsheaves, hence equal section ranges on all W inside U. The converse follows by taking W=U and the same affine quotient identification.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "images of kernels of reductions of a linear map modulo ideal powers",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees images of kernels modulo powers of ideal stabilize uniformly",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul is the Artin--Rees ingredient. No affine kernel-image comparison theorem found.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_inf_eq_pow_smul",
+   "results": "Exact Artin--Rees theorem in Mathlib.RingTheory.Filtration.",
+   "date": "2026-10-13",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*stabil|stabil.*kernel; range.*subobject in Lean module sources",
+   "results": "No completed-module kernel-image comparison found. Existing private affine-range comparison in IdealTimesQuasiCoherentAffineSections is an ingredient.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineBound",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-formal-kernel-affine-bound",
+   "place": "Affine comparison steps 1 and 4",
+   "via": [
+    "new-formal-kernel-affine-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAffineKernelImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAffineKernelImageComparison.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_affine_kernel_image_comparison",
+  "statement": "theorem coherentFormalModule_affine_kernel_image_comparison\n    {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)\n    (F H : CoherentFormalModule X I) (α : F ⟶ H) (U : X.affineOpens) :\n    let A := Γ(X, U.1)\n    let R := AdicCompletion (I.ideal U) A\n    let J := (I.ideal U).map (algebraMap A R)\n    ∃ (M N : ModuleCat.{u} R) (f : M ⟶ N),\n      Module.Finite R M ∧ Module.Finite R N ∧\n      ∀ (l k m : ℕ) (hl : m ≤ l) (hk : m ≤ k),\n        (((J ^ (l + 1) • (⊤ : Submodule R N)).comap f.hom).map\n            (J ^ (m + 1) • (⊤ : Submodule R M)).mkQ =\n          ((J ^ (k + 1) • (⊤ : Submodule R N)).comap f.hom).map\n            (J ^ (m + 1) • (⊤ : Submodule R M)).mkQ) ↔\n        ∀ (W : X.Opens), W ≤ U.1 →\n          Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n            F.obj.map (homOfLE hl).op)).app W) =\n          Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op k)) ≫\n            F.obj.map (homOfLE hk).op)).app W)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

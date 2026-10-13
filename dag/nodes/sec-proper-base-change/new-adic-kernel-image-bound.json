@@ -1,0 +1,118 @@
+{
+ "id": "new-adic-kernel-image-bound",
+ "kind": "statement",
+ "title": "Uniform Artin--Rees bound for reduced linear kernel images",
+ "statement": "theorem adic_kernel_image_bound {R : Type u} [CommRing R] [IsNoetherianRing R]\n    {M : Type v} [AddCommGroup M] [Module R M]\n    {N : Type w} [AddCommGroup N] [Module R N] [Module.Finite R N]\n    (I : Ideal R) (f : M →ₗ[R] N) :\n    ∃ c : ℕ, ∀ (l m : ℕ), m + c ≤ l →\n      ((I ^ (l + 1) • (⊤ : Submodule R N)).comap f).map\n          (I ^ (m + 1) • (⊤ : Submodule R M)).mkQ =\n        f.ker.map (I ^ (m + 1) • (⊤ : Submodule R M)).mkQ",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a); Lemma 087W for affine comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply Ideal.exists_pow_inf_eq_pow_smul to range(f) inside the finite module N; choose c.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x with f(x) in I^(l+1)N use the range intersection formula and map_smul to lift f(x) to y in I^(l+1-c)M. The inequality l >= m+c gives y in I^(m+1)M. The element x-y is in ker(f) and has the same quotient class. Conversely ker(f) lies in every preimage. Prove equality by these inclusions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artin-rees"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "images of kernels of reductions of a linear map modulo ideal powers",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees images of kernels modulo powers of ideal stabilize uniformly",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul is the Artin--Rees ingredient. No affine kernel-image comparison theorem found.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_inf_eq_pow_smul",
+   "results": "Exact Artin--Rees theorem in Mathlib.RingTheory.Filtration.",
+   "date": "2026-10-13",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*stabil|stabil.*kernel; range.*subobject in Lean module sources",
+   "results": "No completed-module kernel-image comparison found. Existing private affine-range comparison in IdealTimesQuasiCoherentAffineSections is an ingredient.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineBound",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-formal-kernel-affine-bound",
+   "place": "Artin--Rees calculation steps 2 and 3",
+   "via": [
+    "new-formal-kernel-affine-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdicKernelImageBound",
+  "file": "lean/Sheaf/RingTheory/AdicKernelImageBound.lean",
+  "declaration": "LinearMap.adic_kernel_image_bound",
+  "statement": "theorem adic_kernel_image_bound {R : Type u} [CommRing R] [IsNoetherianRing R]\n    {M : Type v} [AddCommGroup M] [Module R M]\n    {N : Type w} [AddCommGroup N] [Module R N] [Module.Finite R N]\n    (I : Ideal R) (f : M →ₗ[R] N) :\n    ∃ c : ℕ, ∀ (l m : ℕ), m + c ≤ l →\n      ((I ^ (l + 1) • (⊤ : Submodule R N)).comap f).map\n          (I ^ (m + 1) • (⊤ : Submodule R M)).mkQ =\n        f.ker.map (I ^ (m + 1) • (⊤ : Submodule R M)).mkQ",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T033007-L-3678215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
