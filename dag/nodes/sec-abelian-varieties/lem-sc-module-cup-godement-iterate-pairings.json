@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-module-cup-godement-iterate-pairings",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Tensor pairings of canonical Godement iterates",
+ "statement": "Let $X$ be a scheme and $F,G$ sheaves of $\\mathcal O_X$-modules. Write $T^n$ for the explicit Godement iterates and $u_{n,i}:T^nH\\to T^{n+1}H$ for unit insertions [def-sc-module-cup-godement-model], and $m_{n,i}:T^{n+2}H\\to T^{n+1}H$ for multiplication insertions [def-sc-module-cup-godement-codegeneracies]. There exist morphisms $p_n:T^nF\\otimes T^nG\\to T^n(F\\otimes G)$ for every $n\\geq0$, with $p_0=\\mathrm{id}_{F\\otimes G}$, such that $(u_{n,i}^F\\otimes u_{n,i}^G)p_{n+1}=p_nu_{n,i}^{F\\otimes G}$ and $(m_{n,i}^F\\otimes m_{n,i}^G)p_{n+1}=p_{n+2}m_{n,i}^{F\\otimes G}$ for every $0\\leq i\\leq n$. No cosimplicial model or augmentation occurs in this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Godement resolution, construction preceding Lemma 20.30.1; Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof": [
+  {
+   "text": "For each x, compose the two product projections with the stalk tensor pairing into the skyscraper of the tensor stalk. On opens this is bilinear, and the formulas commute with restriction; the sheaf tensor universal property constructs beta(H,K):T(H) tensor T(K) to T(H tensor K). Naturality is checked on tensor generators. Projection to every coordinate proves the unit identity. To prove the multiplication identity, represent the two outer germs on a common neighbourhood of x. Both composites evaluate their inner x-coordinates and take their tensor. Coordinate projections and stalk representatives detect equality. The construction also works for zero sheaves and empty products.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take p_0 to be the identity. Recursively set p_(n+1)=beta(T^n F,T^n G) followed by T(p_n). Induct on n and the insertion position. Position zero for unit insertions uses unit naturality and the unit identity for beta; positive positions use the induction hypothesis, functoriality of T and naturality of beta. For multiplication insertions, position zero uses multiplication naturality and the multiplication identity for beta. Positive positions use the same induction and functoriality. This proves the two displayed identities for all n and i.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "def-sc-module-cup-godement-codegeneracies"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model",
+  "def-sc-module-cup-godement-codegeneracies"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, pp. 15–16; coordinatewise module-sheaf adaptation of the Godement tensor construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The iterated Godement construction of module sheaves admits tensor pairings compatible with insertion of units and multiplication",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Godement tensor pairing of iterated products of stalks compatible with unit insertion and multiplication",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj_obj, smoothSheafCommRing.forgetStalk_inv_comp_eval, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, PresheafOfModules.Monoidal.tensorObj, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, PresheafOfModules.Monoidal.tensorObj_map_tmul, smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply, CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact iterate pairing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "available": true,
+   "verdict": "No exact iterate pairing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementPairingForModels",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Godement coordinatewise tensor multiplication and its iterate identities, steps 1–2 of lem-sc-module-cup-godement-model-pairing-pairing",
+   "via": [
+    "lem-sc-module-cup-godement-model-pairing-pairing",
+    "lem-sc-module-cup-godement-model-pairing",
+    "lem-sc-module-cup-godement-cosimplicial-input",
+    "lem-sc-module-cup-godement-aw",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementIteratePairings",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementIteratePairings.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_iterate_pairings",
+  "statement": "theorem moduleCup_godement_iterate_pairings (X : Scheme.{u}) (F G : X.Modules) :\n    ∃ p : ∀ n : ℕ, moduleCup_godementIterate X F n ⊗\n        moduleCup_godementIterate X G n ⟶ moduleCup_godementIterate X (F ⊗ G) n,\n      p 0 = 𝟙 (F ⊗ G) ∧\n      (∀ (n : ℕ) (i : Fin (n + 1)),\n        (moduleCup_godementInsert X F n i ⊗ₘ moduleCup_godementInsert X G n i) ≫\n          p (n + 1) = p n ≫ moduleCup_godementInsert X (F ⊗ G) n i) ∧\n      (∀ (n : ℕ) (i : Fin (n + 1)),\n        (moduleCup_godementCollapse X F n i ⊗ₘ moduleCup_godementCollapse X G n i) ≫\n          p (n + 1) = p (n + 2) ≫ moduleCup_godementCollapse X (F ⊗ G) n i)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T152438-L-991657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T152438-L-991657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
