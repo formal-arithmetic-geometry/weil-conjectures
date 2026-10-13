@@ -18,24 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Base change D and c to U using the pullbacks U times_S D(i). The universal\nproperty of each pullback defines the transition arrows and cone arrows, proves\nfunctoriality, and identifies the resulting cone as limiting. Affineness survives\nbase change. The maps to affine U are qcqs by base change, so their sources are\ncompact and quasi-separated. Restrict the sheaves A.hom^*F to these fibre products\nand form their degree-zero single complexes. The coefficient identifications are\nupperStarComp inverses, restricted using the two comparisons displayed in\nrawAffineRestrictedCoefficient. Unit and associativity coherence give the complex\nidentity and composition equations. The lower bound is zero. On the limiting\nscheme these complexes identify with the pullback of F from W, in degree zero.\nTake the constant diagram of that complex and its identity cocone. I opposite\nis nonempty and connected, so that cocone is colimiting; the composition comparisons\ngive eG and its map equation. Set p=q and P=rawAffineComplexPullback q. The stage\ncohomology is precisely restrictedOverCohomology; compose the single-complex\nidentifications with e to give eH. Identify the constant cocone point similarly\nand compose with e₀ to obtain the apex isomorphism. The definitions of\nrestrictedOverCohomologyMap and rawAffineRestrictedCoefficient identify the stage\nmaps with P followed by cohomology of phi, and the cone maps with P followed by\ncohomology of the coefficient leg. The assumed squares give hH and hB.\nNo derived Hom, scalar comparison, or cohomology continuity is used. For q<0\nsingle-complex cohomology vanishes; the identical construction still applies.\nFor an empty test object the same pullback and zero sheaf constructions apply.",
+   "text": "Construct restrictedOverDiagram, restrictedOverCone and the explicit restrictedOverSingleIso. Pass the underlying scheme limit to Over S using reflection by its forgetful functor. Apply Over.pullback U.hom and Over.forget U.left, which preserve connected limits. Pullback symmetry identifies this limit with the constructed cone. Base change of qcqs morphisms over affine U gives compact and quasi-separated stages; MorphismProperty.pullbackMap gives affine transitions.",
    "uses": [
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-inverse-image-composition",
+    "lem-sbc-restricted-over-single-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use restrictedOverSingle_coherence for the identity and composition laws and the constant coefficient diagram comparison. All data equalities are reflexive; no data are selected from an existence theorem. The bound is zero by HomologicalComplex.isZero_single_obj_X. The identity cocone of the constant complex is colimiting since I opposite is filtered and hence connected.",
+   "uses": [
+    "lem-sbc-restricted-over-single-coherence",
     "lem-weil-pbc-colimit-constant-connected-diagram"
    ],
    "elementary": false
+  },
+  {
+   "text": "Take p=q and P=rawAffineComplexPullback q, whose required canonical expression is reflexivity. The given e and e₀ are the stage and apex comparisons by the definitions of the explicit single complexes. Cancel e_j in the stage square, and expand the inverse cone comparison and identity cocone leg in the apex square. The definitions of restrictedOverSingleIso and restrictedOverCohomologyMap identify the resulting maps. Apply the given he and he₀.",
+   "uses": [
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-sbc-restricted-over-single-coherence"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-colimit-constant-connected-diagram"
+  "lem-sbc-restricted-over-single-coherence",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "def-sbc-raw-affine-restricted-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Explicit Lean interface for the cited tags, W2"
+  "document": "Stacks Project, Tags 09Z1 and 0EZM",
+  "place": "Explicit geometric construction, coherence reduction, and cohomology square assembly by V2"
  },
  "mathlib_searches": [
   {
@@ -183,11 +199,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8c362",
-  "group": "W2",
+  "reviewer": "COMPILER",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T100212-L-2500516",
+  "landing": "20261013T120803-L-3470660",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean with its nodes, sources, change record and report; witness fields and existing theorem signatures are unchanged. All four modules and all three direct importers compile cleanly. Axioms are standard, with sorryAx only from open proofs; accepted as a decomposition."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

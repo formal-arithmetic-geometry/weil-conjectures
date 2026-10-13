@@ -12366,3 +12366,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:08 L: merged deliver/N2/Sheaf.AlgebraicGeometry.RelativeMVCanonicalTriangles (stage 3; reviewer PASS; first push; landing 20261013T120801-L-3470190 (interface); batch 20261013T120759; modules 4; new nodes 3)
 - 12:08 L: merged deliver/P3/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsPushforwardCoproduct (stage 3; reviewer PASS; first push; landing 20261013T120802-L-3470307 (interface); batch 20261013T120759; modules 2; new nodes 1)
 - 12:08 L: merged deliver/S3/Sheaf.RingTheory.FormalGlueingCanonicalFunctorObjects (stage 3; reviewer PASS; first push; landing 20261013T120802-L-3470545 (proof); batch 20261013T120759; modules 1; new nodes 0)
+- 12:08 L: merged deliver/V2/Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData (stage 3; reviewer PASS; first push; landing 20261013T120803-L-3470660 (interface); batch 20261013T120759; modules 2; new nodes 1)

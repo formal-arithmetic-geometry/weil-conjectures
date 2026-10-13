@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import Sheaf.AlgebraicGeometry.RestrictedOverSingleCoherence
 
 /-! # Geometric complex data for restricted abelian cohomology
 
@@ -100,6 +101,90 @@ theorem restrictedOverAbelianCocone_complex_data
       (e i).hom ≫ restrictedOverCohomologyMap k F₀ q (D₀.map f) U)
     (he₀ : ∀ i : I, B.ι.app (op i) ≫ e₀.hom =
       (e i).hom ≫ restrictedOverCohomologyMap k F₀ q (c₀.π.app i) U) :
-  EtaleComplexCohomologyPresentationData H B := by sorry
+  EtaleComplexCohomologyPresentationData H B := by
+  let D := restrictedOverDiagram k D₀ U
+  let c : Cone D := restrictedOverCone k D₀ c₀ U
+  let K : ∀ i : I, CochainComplex
+      (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ :=
+    fun i ↦ restrictedOverSingle k F₀ (D₀.obj i) U
+  let φ : ∀ {i j : I} (f : j ⟶ i),
+      ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj (K i) ⟶ K j :=
+    fun {i j : I} (f : j ⟶ i) ↦ (restrictedOverSingleIso k F₀ (D₀.map f) U).hom
+  let G : Iᵒᵖ ⥤ CochainComplex
+      (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ := restrictedOverSingleG k F₀ D₀ c₀ U
+  let eG : ∀ i : I, G.obj (op i) ≅
+      ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj (K i) := restrictedOverSingleConeIso k F₀ D₀ c₀ U
+  let L : Cocone G := constCocone Iᵒᵖ (restrictedOverSingle k F₀ c₀.pt U)
+  obtain ⟨hid, hcomp, hG⟩ := restrictedOverSingle_coherence k F₀ D₀ c₀ U
+    D c K @φ G eG rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
+  set_option backward.isDefEq.respectTransparency false in
+  have hc : IsLimit c := by
+    let E := D₀ ⋙ Over.map k
+    let cE := (Over.map k).mapCone c₀
+    have hcE : IsLimit ((Over.forget S).mapCone cE) := hc₀
+    let P := Over.pullback U.hom ⋙ Over.forget U.left
+    let eD : E ⋙ P ≅ D :=
+      NatIso.ofComponents (fun i ↦ pullbackSymmetry ((D₀.obj i).hom ≫ k) U.hom) (by
+        intro i j f
+        apply pullback.hom_ext <;>
+          simp [E, P, D, restrictedOverDiagram, rawAffineRestrictedMap, Category.assoc])
+    have : IsConnected I := IsCofiltered.isConnected I
+    have : PreservesLimitsOfShape I P := by dsimp [P]; infer_instance
+    have h := isLimitOfPreserves P (isLimitOfReflects (Over.forget S) hcE)
+    apply ((IsLimit.postcomposeHomEquiv eD (P.mapCone cE)).symm h).ofIsoLimit
+    refine Cone.ext (pullbackSymmetry (c₀.pt.hom ≫ k) U.hom) ?_
+    intro i
+    change
+      ((Over.pullback U.hom).map ((Over.map k).map (c₀.π.app i))).left ≫
+        (pullbackSymmetry ((D₀.obj i).hom ≫ k) U.hom).hom =
+      (pullbackSymmetry (c₀.pt.hom ≫ k) U.hom).hom ≫ c.π.app i
+    apply pullback.hom_ext <;>
+      simp [c, restrictedOverCone, rawAffineRestrictedMap, Category.assoc]
+  have hcompact (i : I) : CompactSpace (D.obj i) := by
+    dsimp [D, restrictedOverDiagram]
+    infer_instance
+  have hqs (i : I) : QuasiSeparatedSpace (D.obj i) := by
+    have : QuasiSeparatedSpace U.left := quasiSeparatedSpace_of_isAffine U.left
+    exact @quasiSeparatedSpace_of_quasiSeparated
+      (pullback U.hom ((D₀.obj i).hom ≫ k) : Scheme.{u}) U.left
+      (pullback.fst U.hom ((D₀.obj i).hom ≫ k)) ‹QuasiSeparatedSpace U.left› inferInstance
+  set_option backward.isDefEq.respectTransparency false in
+  have haffine (i j : I) (f : i ⟶ j) : IsAffineHom (D.map f) := by
+    dsimp [D, restrictedOverDiagram, rawAffineRestrictedMap]
+    exact MorphismProperty.pullbackMap (P := @IsAffineHom)
+      (by infer_instance) (by infer_instance) (by simp)
+      (by rw [← Category.assoc, Over.w])
+  let eH : ∀ i : I, H.obj (op i) ≅
+      (cohomology AddCommGrpCat.{u + 1} (D.obj i) q).obj
+        (DerivedCategory.Q.obj (K i)) := e
+  let eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt q).obj
+      (DerivedCategory.Q.obj L.pt) := e₀
+  have : IsConnected Iᵒᵖ := IsFiltered.isConnected Iᵒᵖ
+  refine EtaleComplexCohomologyPresentationData.intro D c hc hcompact hqs haffine
+    K @φ hid hcomp 0 ?_ G eG hG q (@rawAffineComplexPullback.{u} q)
+    ?_ eH ?_ L (isColimitConstCocone Iᵒᵖ _) eB ?_ trivial
+  · intro i n hn
+    exact HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0
+      ((upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom ((D₀.obj i).hom ≫ k))).obj
+        (restrictedOverCoefficient F₀ (D₀.obj i))) n (ne_of_lt hn)
+  · intro X Y f T
+    rfl
+  · intro i j f
+    apply (cancel_mono (e j).hom).1
+    dsimp only [D, restrictedOverDiagram, K, φ, eH]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact he i j f
+  · intro i
+    change B.ι.app (op i) ≫ e₀.hom = (e i).hom ≫
+      rawAffineComplexPullback q
+        (rawAffineRestrictedMap (c₀.π.app i).left ((D₀.obj i).hom ≫ k)
+          (c₀.pt.hom ≫ k) (by rw [← Category.assoc, Over.w]; rfl) U)
+        (restrictedOverSingle k F₀ (D₀.obj i) U) ≫
+      (cohomology AddCommGrpCat.{u + 1} (pullback U.hom (c₀.pt.hom ≫ k)) q).map
+        (DerivedCategory.Q.map ((restrictedOverSingleIso k F₀ (c₀.π.app i) U).hom ≫
+          𝟙 (restrictedOverSingle k F₀ c₀.pt U)))
+    exact (he₀ i).trans (by congr 2)
 
 end AlgebraicGeometry.Etale
