@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase
+import Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceExtend
 
 /-! # Coherence of varying-coefficient raw pullbacks
 
@@ -93,6 +95,11 @@ theorem abelianRawPullback_coherent {S : Scheme.{v}}
           (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) V t) ∧
       (∀ i : I, τ (𝟙 i) = 𝟙 _) ∧
       (∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), τ (f ≫ g) = τ f ≫ τ g) ∧
-      (∀ {i j : I} (f : i ⟶ j), τ f ≫ β j = β i) := by sorry
+      (∀ {i j : I} (f : i ⟶ j), τ f ≫ β j = β i) := by
+  rcases abelianRawPullback_coherent_base D c F φ hφid hφcomp H eH hH p with
+    ⟨τ, β, hτ, hβ, hid, hcomp⟩
+  refine ⟨τ, β, hτ, hβ, hid, hcomp, ?_⟩
+  exact abelianRawPullback_coherent_extend D c F φ hφid hφcomp H eH hH p
+    τ β hτ hβ
 
 end AlgebraicGeometry.Etale

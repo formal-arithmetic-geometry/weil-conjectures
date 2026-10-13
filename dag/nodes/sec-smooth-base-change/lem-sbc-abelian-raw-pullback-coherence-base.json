@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-abelian-raw-pullback-coherence-base",
+ "kind": "statement",
+ "title": "Base coherence of raw pullbacks",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ any preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Over}(S)$ any diagram with cone $c$. Write $g_i:X_i\\to S$, $g:X\\to S$, $a_f:X_j\\to X_i$ and $a_i:X\\to X_i$ for its structure, transition and cone maps. Let $F_i$ be abelian etale sheaves [def-weil-pbc-etale-sheaves], with coefficient maps $\\varphi_f:a_f^{-1}F_i\\to F_j$ [def-weil-pbc-inverse-image], satisfying $\\varphi_{1_i}=e_{X_i,F_i}$ and $\\varphi_{f;g}=C_{a_g,a_f,F_i};a_g^{-1}(\\varphi_f);\\varphi_g$, where $e$ is the canonical inverse-image identity comparison and $C:(a_g;a_f)^{-1}\\simeq a_g^{-1}a_f^{-1}$ is the canonical composition comparison. These equalities include the canonical transports along the identity and composition equalities of $D$. Let $H:I\\to\\mathrm{Sh}(X_{\\mathrm{et}},\\mathbf{Ab})$ have a colimit, with $eH_i:H_i\\simeq a_i^{-1}F_i$ and canonical transition equation $H(f)=eH_i;\\mathrm{upperStarComp};a_j^{-1}(\\varphi_f);eH_j^{-1}$. Fix $p\\in\\mathbf N$. Put $A_i=\\mathrm{raw}(g_i,p,F_i)$ and $Z=\\mathrm{raw}(g,p,\\operatorname{colim}H)$, the derived-Hom presheaves of [lem-sbc-abelian-higher-direct-image-natural-comparison]. There exist natural transformations $\\tau_f:A_i\\to A_j$ and $\\beta_i:A_i\\to Z$, whose components at every etale $V\\to S$ are the explicit raw pullbacks along $(a_f,\\varphi_f)$ and $(a_i,eH_i^{-1};\\iota_i)$ respectively. They satisfy $\\tau_{1_i}=1$ and $\\tau_{f;f'}=\\tau_f;\\tau_{f'}$. No directedness, nonemptiness, limit, affineness or qcqs assumption is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Tag 09Z1, lemma-relative-colimit, canonical cohomology maps before continuity; Tag 03CB inverse-image composition; parent proof step 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Bundle each explicit raw function additively: derived pullback is additive and precomposition/postcomposition with the fixed source, single, shift and coefficient factors are additive. For restrictions of etale objects, naturality of inverse-image composition and the single-functor comparison moves the free-sheaf restriction past the first two factors; preservation of composition by derived pullback moves it past the class. This gives the naturality square. Thus these homomorphisms define tau and beta with exactly the prescribed components.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For identities expand the five factors, identify the coefficient map using hphiid, and cancel the single comparisons through the identity coherence of inverse image. For composition map the inner factors through the outer pullback, use single-comparison naturality to cancel adjacent direct and inverse comparisons, apply associativity of inverse-image composition and hphicomp to the source and coefficient factors, and combine the shift comparisons. Extensionality at every test object gives the identity and composition equalities of natural transformations.",
+   "uses": [
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-sbc-abelian-pullback-single-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-sbc-abelian-pullback-single-composition"
+ ],
+ "proof_origin": {
+  "by": "W2",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1 canonical maps; second reading W2: explicit five-factor derived-Hom argument using existing derived coherence and single-complex comparison, then colimit.w for the cocone part."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations on derived Hom presheaves induced by inverse image with varying coefficient morphisms identity composition cocone",
+   "date": "2026-10-13",
+   "results": "8 hits about presheaf cocones and colimits; none supplies the varying-coefficient derived-Hom coherence statement.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preadditiveYoneda\"",
+   "date": "2026-10-13",
+   "results": "12 hits, including preadditiveYonedaMap (bundles an additive functor on Hom groups); does not provide scheme composition, coefficient, and shift comparisons.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveYoneda.*(map|whisker)|mapDerivedCategoryPlusSingleFunctor|upperStarComp_assoc",
+   "date": "2026-10-13",
+   "results": "9 Mathlib hits, including preadditiveYonedaMap and the additive adjunction comparison; no full raw-pullback statement. Local rg additionally found AbelianPullbackSingleComposition, DerivedInverseImageComposition, and canonical-coefficient higher-direct-image composition. These are ingredients, not duplicate statements.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image induces natural maps on derived Hom presheaves compatible with identity composition and colimit cocones",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherence",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, lemma-relative-colimit, canonical cohomology maps before continuity; Tag 03CB inverse-image composition; parent proof step 2",
+   "via": [
+    "lem-sbc-raw-affine-colimit-comparison-injective",
+    "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing",
+    "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+    "lem-sbc-higher-direct-image-affine-computation-vanishing",
+    "lem-sbc-higher-direct-image-local-section-vanishing",
+    "sbc-lem-higher-direct-image-affine-section-vanishing",
+    "sbc-lem-higher-direct-image-limit-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianRawPullbackCoherenceBase.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianRawPullback_coherent_base",
+  "statement": "theorem abelianRawPullback_coherent_base {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D) (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) (hH : ∀ {i j : I} (f : i ⟶ j), H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv) [HasColimit H] (p : ℕ) : ∃ (τ : ∀ {i j : I} (_f : i ⟶ j), abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i) ⟶ abelianHigherDirectImageRawPresheaf (D.obj (op j)).hom p (F j)) (β : ∀ i : I, abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i) ⟶ abelianHigherDirectImageRawPresheaf c.pt.hom p (colimit H)), (∀ {i j : I} (f : i ⟶ j) (V : S.Etale) (t : (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).obj (op V)), (τ f).app (op V) t = abelianHigherDirectImageRawPullback (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) V t) ∧ (∀ (i : I) (V : S.Etale) (t : (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).obj (op V)), (β i).app (op V) t = abelianHigherDirectImageRawPullback (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) V t) ∧ (∀ i : I, τ (𝟙 i) = 𝟙 _) ∧ (∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), τ (f ≫ g) = τ f ≫ τ g)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T015622-L-3029563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T015622-L-3029563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
