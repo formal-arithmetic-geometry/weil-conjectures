@@ -13,15 +13,26 @@
  ],
  "proof": [
   {
-   "text": "Choose complex representatives of the three derived objects and K-flat\nresolutions of the first two. Maps into Hom(Lc,I(M)) lift to chain maps modulo\nhomotopy because that Hom complex is K-injective. Evaluate t on these chain\ninputs and transport the answer along the chosen representative isomorphisms.\nThe normalization hypothesis expresses every value used here as localized\ncomponentwise evaluation, so it supplies homotopy invariance and compatibility\nunder changes of the chain lift. For changes of representatives, compute roofs\non common K-flat resolutions and K-injective targets. On each tensor summand,\nthe sheaf tensor-Hom adjunction and the Hom projections commute with pre- and\npostcomposition. The coproduct universal property gives the comparison identity\nfor evaluation. Localize it, use the naturality of the tensor model map, Hom\nresolution comparison and resolution augmentation, and cancel the invertible\nquasi-isomorphisms. This proves independence of representatives and the asserted\ntransport identity for arbitrary derived isomorphisms. If the input already has\nthe form in the agreement clause, use its given K-flat P. Resolve its possibly\nnon-K-flat L; both P tensor - and Hom(-,I(M)) invert this resolution and evaluation\ncommutes with it. Cancellation and ht give precisely agreement with t on that\ninput. The construction does not retain arbitrary values of t elsewhere. Identity\nisomorphisms, zero inputs and zero complexes satisfy the same comparison; no\nboundedness or naturality of the given t outside its normalized inputs is used.",
+   "text": "For every derived input choose K-flat representatives P and Lc of K and L and a complex Mc representing M. The Hom complex Hom(Lc,I(Mc)) is K-injective. Lift the transported derived morphism first through the bijection on homotopy-category maps and then through the full quotient functor to a chain map phi. Naturality of quotientCompQhIso yields exactly the normalized input equation. This coverage step is proved as the private helper normalizedInput_exists.",
    "uses": [
-    "lem-pc-tensor-hom-uncurry-differential",
     "lem-pc-kflat-resolution",
     "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pur-hom-complex-global-cochains"
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the normalized comparison theorem for the localized chain evaluations. A generic proved helper extendNormalizedValues forms the relation whose witnesses are normalized representatives and their three isomorphisms to the desired objects. Coverage makes every fiber nonempty. Comparing two witnesses by their composite representative isomorphisms and applying normalized comparison gives equality of outputs after cancelling invertible tensor and target maps; thus every fiber is a singleton. Choose that unique output. Identity witnesses establish normalization, and composing a witness with the three given isomorphisms establishes transport; uniqueness supplies the desired equation. The actual evaluation values use schemeTensorHomUncurry, whose chain-map construction uses the differential-compatibility theorem.",
+   "uses": [
+    "lem-pc-tensor-hom-uncurry-normalized-comparison",
+    "lem-pc-tensor-hom-uncurry-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this helper to the actual normalized chain inputs and localized schemeTensorHomUncurry values. Its normalization equation, followed by the reverse of ht, gives agreement with t precisely on the inputs in the agreement clause. Its transport equation is the second required conjunct. The family is selected only within the theorem proof, after uniqueness has been proved; no definition chooses an undetermined existence witness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -29,14 +40,14 @@
   "lem-pc-kflat-resolution",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-hom-complex-global-cochains"
+  "lem-pc-tensor-hom-uncurry-normalized-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "H1",
+  "group": "P2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 08DJ, 0A90, 0A96; representative construction and extension separated by H1"
+  "place": "Tags 08DJ, 0A90, 0A96; coverage and generic singleton-fiber transport proved in Lean; normalized comparison split off"
  },
  "mathlib_searches": [
   {
@@ -145,9 +156,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T060417-L-583063",
+  "landing": "20261013T065114-L-900278",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -11458,3 +11458,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:51 L: merged deliver/N1/Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink (stage 3; reviewer PASS; first push; landing 20261013T065112-L-899769 (interface); batch 20261013T065054; modules 3; new nodes 2)
 - 06:51 L: merged deliver/N2/Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition (stage 3; reviewer PASS; first push; landing 20261013T065112-L-899923 (proof); batch 20261013T065054; modules 1; new nodes 0)
 - 06:51 L: merged deliver/N2/Sheaf.AlgebraicGeometry.OrderedCechModuleKernelNullHomotopic (stage 3; reviewer PASS; first push; landing 20261013T065113-L-900082 (interface); batch 20261013T065054; modules 3; new nodes 2)
+- 06:51 L: merged deliver/P2/Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentExtension (stage 3; reviewer PASS; first push; landing 20261013T065114-L-900278 (interface); batch 20261013T065054; modules 2; new nodes 1)
