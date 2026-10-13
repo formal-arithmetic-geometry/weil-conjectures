@@ -16,17 +16,37 @@
  ],
  "proof": [
   {
-   "text": "put A = Gamma(S, top), a domain, and K = Frac(A). Identify the generic\nfibre ring with K[t_1,...,t_n]/(P_K). If P_K is zero, all coefficients of P vanish\nby injectivity of A into K, so P is zero; all fibres are affine spaces and the\nwhole base works. Otherwise geometric reducedness and irreducibility say that\nover an algebraic closure of K the principal ideal (P_K) is prime. Thus P_K is\nabsolutely irreducible up to a nonzero scalar. A nonzero constant is excluded by\nthe nonemptiness of the generic fibre. A triangular substitution by sufficiently\nseparated powers of the last variable makes the leading coefficient a nonzero\nelement of A. Invert it and divide by it to make the polynomial monic in the\nlast variable of positive degree d. This coordinate change commutes with every\nfield specialization. Bound factor degrees in each of the remaining variables\nby the corresponding degree of P. For each positive pair e_1 + e_2 = d, form\nthe finite type coefficient algebra of two monic factors with these bounds,\nquotienting by all coefficient equations of P = Q_1 Q_2. Absolute irreducibility\nexcludes points over the algebraic closure of K. Nullstellensatz says the generic\ncoefficient algebra is zero. Consequently 1 is killed by some nonzero base\nelement, and localizing at this element kills the whole coefficient algebra.\nInvert the finite product of these elements and the leading coefficient. No\nspecialization into any algebraically closed residue field can then factor P.\nThe monic polynomial retains positive degree, so each hypersurface is nonempty\nand integral over that field. For an arbitrary field extension of a residue\nfield, pass to its algebraic closure and descend irreducibility and nonemptiness\nalong the surjective field-extension base change. This gives exactly geometric\nirreducibility of the fibre morphism. The resulting principal base open contains\neta. If d = 1 the product of factor obstructions is empty and equals 1. If n = 0,\nthe generic hypotheses force P = 0, handled in the first case.",
-   "uses": [],
+   "text": "Use the hypersurface fibre prime criterion to turn the generic geometric irreducibility and reducedness into primality of the defining ideal over every extension field of kappa(eta). If P = 0, every specialized ideal is zero in a polynomial ring over a field and is prime. The same criterion makes every fibre geometrically irreducible, so the whole base works.",
+   "uses": [
+    "lem-sbc-hypersurface-geometric-fibre-prime-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For P nonzero, global evaluation at eta is injective: a section vanishing there has basic open avoiding eta, and genericity forces that open empty; reducedness makes the section zero. The coefficient map into an algebraic closure of kappa(eta) is therefore injective and preserves P nonzero. The prime principal ideal gives a prime polynomial and hence an irreducible polynomial. Apply absolute irreducibility specialization to obtain a nonzero a in Gamma(S, top).",
+   "uses": [
+    "lem-sbc-absolute-irreducibility-specialization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take U = S.basicOpen a. It is nonempty since a is nonzero and S is reduced, and hence contains eta by genericity. For any s in U and any residue field embedding phi into a field K, evaluation of a at s is nonzero, and phi is injective, so the specialization theorem gives an irreducible polynomial in K[t]. The polynomial ring is a UFD, so this polynomial is prime and its principal ideal is prime. Apply the fibre prime criterion and project to geometric irreducibility. This is a complete Lean proof; the polynomial specialization theorem is the only remaining hole.",
+   "uses": [
+    "lem-sbc-hypersurface-geometric-fibre-prime-criterion",
+    "lem-sbc-absolute-irreducibility-specialization"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-hypersurface-geometric-fibre-prime-criterion",
+  "lem-sbc-absolute-irreducibility-specialization"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0557, lemma-irreducible-polynomial; scheme interpretation of its polynomial specialization statement",
-  "note": "Agent-written scheme specialization of the sources read online on 2026-10-13."
+  "place": "Tag 0557; Tags 01JQ and 05DY for the affine-fibre interpretation",
+  "note": "P3 Lean reduction, 2026-10-13: pointwise criterion proved from Mathlib, zero-polynomial case proved, nonzero case reduced to absolute irreducibility specialization."
  },
  "mathlib_searches": [
   {
@@ -129,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T100136-L-2489952",
+  "landing": "20261013T111910-L-3058298",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
