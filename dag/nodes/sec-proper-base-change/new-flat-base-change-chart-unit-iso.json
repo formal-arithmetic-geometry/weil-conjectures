@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Use the tensor pullback adjunction and ordinary pullback adjunction to compare their left adjoints. Use restriction/pullback comparison and composition to identify sigma pullback of A with M along ef and the restriction equations. Since sigma is an isomorphism this gives an isomorphism A to sigma pushforward M.",
+   "text": "Set p=pullback.snd g f, a=(f inverse V).iota, t=baseChangeFst h and l=L.iota. The chart equality ef and restriction equations give (sigma.hom followed by t) followed by a equals l followed by p. Identify the right adjoints of the composite restriction-a/pullback-t/pullback-sigma adjunction and of tensor-pullback-p/restriction-l using the pushforward composition and congruence isomorphisms. Uniqueness of left adjoints gives an actual coefficient isomorphism; prepend the pullback of the inverse restriction/pullback comparison along a to obtain k:sigma^* A isomorphic to M.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "def-pc-module-pullback",
@@ -23,11 +23,10 @@
    "elementary": false
   },
   {
-   "text": "Transpose the isomorphism through the composite restriction, baseChangeFst and sigma adjunctions. The unit-leftAdjointUniq and composite-unit equations, together with D.unit_square, identify its adjoint with b: further restriction along j is exactly its unit followed by pushforward c.hom. Injectivity of the hom-equivalence identifies the explicit adjoint of b with the isomorphism.",
+   "text": "Construct an inverse functor to pushforward sigma.hom using pushforward sigma.inv and the pushforward composition, congruence and identity isomorphisms. Thus the sigma pullback-pushforward adjunction unit is invertible. The transpose of k.hom is its unit followed by pushforward of an isomorphism, hence is invertible. Apply the general restriction-chart unit normalization to p,a,U.iota,l,j,q,t,sigma, the restriction equations and D.unit_square. It identifies this invertible transpose with the explicit inverse transpose of b. Rewrite to obtain the required IsIso instance.",
    "uses": [
-    "def-weil-pbc-flat-base-change-open-choices",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+    "lem-pc-restriction-chart-unit-normalization",
+    "def-weil-pbc-flat-base-change-open-choices"
    ],
    "elementary": false
   }
@@ -37,12 +36,13 @@
   "def-pc-module-pullback",
   "def-weil-pbc-flat-base-change-open-choices",
   "lem-pc-module-pullback-adjunction",
+  "lem-pc-restriction-chart-unit-normalization",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
-  "by": "C2 following document",
-  "document": "https://stacks.math.columbia.edu/tag/0096",
-  "place": "Adjunction and composition 0096/0097 applied to the coefficient step of new-flat-base-change-chart-coefficient-transport; unit normalization uses D.unit_square."
+  "by": "T2 following document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0096 and 0097; the two-step chart coefficient argument using uniqueness of composite left adjoints; the general unit-normalization equation is proved from the unit square by restriction maps on opens."
  },
  "mathlib_searches": [
   {
@@ -140,9 +140,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T201740-L-3966077",
+  "landing": "20261013T215613-L-901535",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

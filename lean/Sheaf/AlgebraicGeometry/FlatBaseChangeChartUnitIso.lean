@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization
 
 /-! # Unit-compatible coefficient isomorphism on a fixed base-change chart
 
@@ -22,6 +23,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 attribute [local irreducible] pushforward pushforwardComp pushforwardCongr pushforwardId
 
+-- Keep the existing unused let A in the statement without changing its signature.
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- The statement elaborates several successive module pushforwards and pullbacks.
 /-- The adjoint of the restricted tensor unit is invertible on a fixed chart.
@@ -82,6 +85,42 @@ theorem isIso_flatBaseChange_chart_unit_adjoint
         (pushforwardComp j q).hom.app M ≫ (pushforwardCongr ef).inv.app M ≫
         (pushforwardComp σ.hom (baseChangeFst (S := Γ(S', W)) h)).inv.app M
       IsIso ((pullbackPushforwardAdjunction
-        (baseChangeFst (S := Γ(S', W)) h)).homEquiv _ _ |>.symm b) := by sorry
+        (baseChangeFst (S := Γ(S', W)) h)).homEquiv _ _ |>.symm b) := by
+  intro h N T A G U L e M j c r q σ ef
+  let p := pullback.snd g f
+  let a := (f ⁻¹ᵁ V).ι
+  let t := baseChangeFst (S := Γ(S', W)) h
+  let l := L.ι
+  have E : (σ.hom ≫ t) ≫ a = l ≫ p := by
+    rw [ef, Category.assoc, Scheme.Hom.resLE_comp_ι, ← Category.assoc]
+    rw [Scheme.homOfLE_ι]
+  let rightIso : pushforward σ.hom ⋙ pushforward t ⋙ pushforward a ≅
+      pushforward l ⋙ pushforward p :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (pushforwardComp σ.hom t) (pushforward a) ≪≫
+      pushforwardComp (σ.hom ≫ t) a ≪≫ pushforwardCongr E ≪≫
+      (pushforwardComp l p).symm
+  let adj₁ := (restrictAdjunction a).comp
+    ((pullbackPushforwardAdjunction t).comp (pullbackPushforwardAdjunction σ.hom))
+  let adj₂ := (Classical.choose (exists_tensorPullbackAdjunction p)).comp
+    (restrictAdjunction l)
+  let k : (pullback σ.hom).obj A ≅ M :=
+    (pullback σ.hom).mapIso ((pullback t).mapIso
+      ((restrictFunctorIsoPullback a).symm.app F)) ≪≫
+      (adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm)).app F
+  have hp : (pushforward σ.hom).IsEquivalence :=
+    Functor.IsEquivalence.mk' (pushforward σ.inv)
+      ((pushforwardComp σ.hom σ.inv) ≪≫ pushforwardCongr σ.hom_inv_id ≪≫
+        pushforwardId _).symm
+      ((pushforwardComp σ.inv σ.hom) ≪≫ pushforwardCongr σ.inv_hom_id ≪≫
+        pushforwardId _)
+  have hb : IsIso ((pullbackPushforwardAdjunction σ.hom).homEquiv A M k.hom) := by
+    rw [Adjunction.homEquiv_unit]
+    infer_instance
+  have hn := restriction_chart_unit_normalization p a U.ι l j q t σ
+    (Scheme.homOfLE_ι (Limits.pullback g f) e) (Scheme.Hom.resLE_comp_ι p le_rfl)
+    ef F D.psi D.unit_square
+  dsimp only at hn ⊢
+  exact hn ▸ hb
 
 end AlgebraicGeometry.Scheme.Modules

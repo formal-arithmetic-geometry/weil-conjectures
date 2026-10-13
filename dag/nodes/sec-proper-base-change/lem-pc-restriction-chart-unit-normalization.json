@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-restriction-chart-unit-normalization",
+ "kind": "statement",
+ "title": "Unit normalization of a restriction chart coefficient comparison",
+ "statement": "For schemes X, X prime, Y, Z, L and T, morphisms p:X prime -> X, a:Y -> X, u:Z -> X prime, l:L -> X prime, j:L -> Z, q:Z -> Y, t:T -> Y, and sigma:L isomorphic to T, assume a,u,l,j are open immersions, j followed by u equals l, q followed by a equals u followed by p, and sigma.hom followed by t equals j followed by q. For F an O_X-module let G be tensorPullback p of F, N the ordinary pullback along a of F, and M the restriction along l of G. Suppose psi:restriction a F -> q_* restriction u G obeys the unit-square equation recorded in the Lean statement. Define c as the restriction-composition and congruence comparison, r as the restriction unit for j followed by j_* c.hom, and b as the comparison from N through psi and q_* r followed by the pushforward composition and congruence comparisons. Let k:sigma^* t^* N isomorphic to M be the coefficient comparison constructed by uniqueness of the two composite left adjoints, after identifying their right adjoints by the pushforward composition and congruence comparisons and preceding it by the pullback of the inverse restriction/ordinary comparison along a. All these isomorphisms are defined explicitly in the recorded Lean statement. Then the transpose of k.hom through sigma^* left adjoint to sigma_* equals the inverse transpose of b through t^* left adjoint to t_*. This is an equality of specified coefficient maps and makes no assertion of invertibility. Definitions and the tensor adjunction are those of [def-pc-module-pullback] and [lem-pc-module-pullback-adjunction]; restriction comparisons are those of [lem-weil-pbc-open-immersion-module-pullback-restriction].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0096 and 0097, adjunction and composition; the explicit unit-square calculation in the second proof step of new-flat-base-change-chart-unit-iso."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Let adj1 be restriction along a followed by pullback along t and sigma.hom, and adj2 be tensor pullback along p followed by restriction along l. Construct rightIso between their right adjoints by the pushforward associativity, composition and congruence comparisons for (sigma.hom followed by t) followed by a = l followed by p. The coefficient isomorphism k is pullback of the inverse restriction/pullback comparison along a, followed by adj1.leftAdjointUniq of adj2 transported by rightIso inverse. Apply the t adjunction hom-equivalence and cancel precomposition with the restriction/pullback comparison along a, then apply the restriction adjunction hom-equivalence. Naturality cancels that comparison in k. The homEquiv_leftAdjointUniq_hom_app equation gives adj2.unit followed by rightIso inverse.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel rightIso.hom and use extensionality of module morphisms on opens. At an open B of X, expand the pushforward composition/congruence comparisons and the restriction units. Apply the given unit square on B, followed by restriction of G from u(u inverse(p inverse B)) to l(l inverse(p inverse B)). This open inclusion follows elementwise from l = j followed by u: an element l(y) also equals u(j(y)), and the p-preimage condition is unchanged. Expand c and r and combine all the resulting presheaf restriction maps by functoriality. The two maps on each side have identical source and target opens, so they agree in the thin category of opens. This yields the evaluated equation and hence the equality of module morphisms. Injectivity of the adjunction hom-equivalences and cancellation prove the claimed normalization.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "T2 following document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0096 and 0097, adjunction and composition; the explicit unit-square calculation in the second proof step of new-flat-base-change-chart-unit-iso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A unit compatible comparison of module restriction and pullback across a commuting square has the canonical adjoint transpose",
+   "date": "2026-10-14",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction left adjoint unique isomorphism unit compatibility",
+   "date": "2026-10-14",
+   "results": "Adjunction.unit_leftAdjointUniq_hom_app, Adjunction.homEquiv_leftAdjointUniq_hom_app and leftAdjointUniq; these supply individual unit identities, not the chart normalization.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-14",
+   "results": "Left-adjoint uniqueness and its unit compatibility equations; no combined chart normalization.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorIsoPullback|pullbackPushforwardEquivalence; restriction.*chart.*unit|chart.*unit.*normal|unit.*restrictFunctorComp",
+   "date": "2026-10-14",
+   "results": "Mathlib restriction/pullback comparison; library FlatBaseChangeChartUnitIso and EtaleChartSectionsArrowComparison. ModulePullbackAffineChartUnit is an affine-chart sections identity with a different specified comparison. EtaleTensorOpenSectionsNaturality proves restriction-composition unit compatibility privately. No public theorem gives this equation.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeChartUnitIso",
+  "date": "2026-10-14",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Unit normalization, second proof step of new-flat-base-change-chart-unit-iso.",
+   "via": [
+    "new-flat-base-change-chart-unit-iso",
+    "new-flat-base-change-chart-coefficient-transport",
+    "new-flat-base-change-chart-cohomology-transport",
+    "new-flat-base-change-module-leray-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeRestrictionUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restriction_chart_unit_normalization",
+  "statement": "theorem restriction_chart_unit_normalization\n    {X X' Y Z L T : Scheme.{u}}\n    (p : X' ⟶ X) (a : Y ⟶ X) (u : Z ⟶ X') (l : L ⟶ X')\n    (j : L ⟶ Z) (q : Z ⟶ Y) (t : T ⟶ Y) (σ : L ≅ T)\n    [IsOpenImmersion a] [IsOpenImmersion u] [IsOpenImmersion l]\n    [IsOpenImmersion j]\n    (eju : j ≫ u = l) (eqa : q ≫ a = u ≫ p) (ef : σ.hom ≫ t = j ≫ q)\n    (F : X.Modules)\n    (ψ : (restrictFunctor a).obj F ⟶\n      (pushforward q).obj ((restrictFunctor u).obj ((tensorPullback p).obj F)))\n    (square :\n      (restrictAdjunction a).unit.app F ≫ (pushforward a).map ψ ≫\n        (pushforwardComp q a).hom.app ((restrictFunctor u).obj ((tensorPullback p).obj F)) ≫\n        (pushforwardCongr eqa).hom.app\n          ((restrictFunctor u).obj ((tensorPullback p).obj F)) =\n      (Classical.choose (exists_tensorPullbackAdjunction p)).unit.app F ≫\n        (pushforward p).map ((restrictAdjunction u).unit.app ((tensorPullback p).obj F)) ≫\n        (pushforwardComp u p).hom.app\n          ((restrictFunctor u).obj ((tensorPullback p).obj F))) :\n    let N := (pullback a).obj F\n    let G := (tensorPullback p).obj F\n    let M := (restrictFunctor l).obj G\n    let c := (restrictFunctorComp j u).symm.app G ≪≫\n      (restrictFunctorCongr eju).app G\n    let r := (restrictAdjunction j).unit.app ((restrictFunctor u).obj G) ≫\n      (pushforward j).map c.hom\n    let b := ((restrictFunctorIsoPullback a).app F).inv ≫ ψ ≫\n      (pushforward q).map r ≫ (pushforwardComp j q).hom.app M ≫\n      (pushforwardCongr ef).inv.app M ≫ (pushforwardComp σ.hom t).inv.app M\n    let e : (σ.hom ≫ t) ≫ a = l ≫ p := by\n      rw [ef, Category.assoc, eqa, ← Category.assoc, eju]\n    let rightIso : pushforward σ.hom ⋙ pushforward t ⋙ pushforward a ≅\n        pushforward l ⋙ pushforward p :=\n      (Functor.associator _ _ _).symm ≪≫\n        Functor.isoWhiskerRight (pushforwardComp σ.hom t) (pushforward a) ≪≫\n        pushforwardComp (σ.hom ≫ t) a ≪≫ pushforwardCongr e ≪≫\n        (pushforwardComp l p).symm\n    let adj₁ := (restrictAdjunction a).comp\n      ((pullbackPushforwardAdjunction t).comp (pullbackPushforwardAdjunction σ.hom))\n    let adj₂ := (Classical.choose (exists_tensorPullbackAdjunction p)).comp\n      (restrictAdjunction l)\n    let k : (pullback σ.hom).obj ((pullback t).obj N) ≅ M :=\n      (pullback σ.hom).mapIso ((pullback t).mapIso\n        ((restrictFunctorIsoPullback a).symm.app F)) ≪≫\n        (adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm)).app F\n    (pullbackPushforwardAdjunction σ.hom).homEquiv _ _ k.hom =\n      ((pullbackPushforwardAdjunction t).homEquiv _ _).symm b",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T215613-L-901535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T215613-L-901535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
