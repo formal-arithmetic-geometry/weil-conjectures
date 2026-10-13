@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-generic-polynomial-hypersurface-descent",
+ "kind": "statement",
+ "title": "Descent of a generic polynomial hypersurface to base sections",
+ "statement": "Let S be integral [def-pc-integral-scheme] and affine [def-weil-affine-spectrum], and let eta be a generic point, meaning its closure is all of S. Put A=\\Gamma(S,\\mathcal O_S) and K=\\kappa(eta), the residue field [def-weil-residue-field]. For every n and Q\\in K[t_1,\\ldots,t_n] [def-weil-pbc-mv-polynomial-ring], there exists P\\in A[t_1,\\ldots,t_n] such that, writing H=\\operatorname{Spec}(A[t_1,\\ldots,t_n]/(P)) and g:H\\to S for the coefficient-induced map followed by the inverse of the affine spectrum identification, there is an isomorphism i:H_{eta}\\to\\operatorname{Spec}(K[t_1,\\ldots,t_n]/(Q)) commuting with the two maps to \\operatorname{Spec}(K). The fibre is scheme-theoretic [def-pc-scheme-fibre]. There are no nonzero, irreducibility or reducedness assumptions on Q, and no claim about fibres away from eta.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0559 (more-morphisms.tex, lemma-geom-irreducible-generic-fibre), first proof, clearing finitely many coefficient denominators in the generic fraction field"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Identify eta with the canonical generic point. Mathlib functionField_isFractionRing_of_isAffineOpen identifies Gamma(S,top) with a subring of the generic stalk fraction field. The stalk is a field; its residue map is bijective. An algebra equivalence induced by that map and IsFractionRing.of_algEquiv give the fraction-ring structure on kappa(eta) under the evaluation map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply IsLocalization.exist_integer_multiples to Q.support and its coefficient function. Write each multiplied coefficient as a base section, and sum the monomials over that same finite support to form P. MvPolynomial.map_monomial, smul_monomial and support_sum_monomial_coeff show P_K=dQ. This also covers the zero polynomial, empty support and zero variables.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use tensorQuotientEquiv to tensor the quotient, and MvPolynomial.algebraTensorAlgEquiv to identify the polynomial tensor product. Ideal.map_span and map_map identify the extended principal ideal with (P_K). The scalar d is a unit by IsLocalization.map_units, so Ideal.span_singleton_mul_left_unit identifies this ideal with (Q). Compose the two algebra equivalences.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The evaluation map describes fromSpecResidueField followed by isoSpec.hom, by fromSpecStalk_toSpecGamma and contravariance of Spec. Transport the fibre pullback across isoSpec with pullback.map, swap its factors, and apply pullbackSpecIso. Apply Spec to the inverse algebra equivalence from the preceding step. Its algebra commutation and pullbackSpecIso_hom_fst prove that the resulting scheme isomorphism commutes with the generic projection to Spec kappa(eta).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0559 (more-morphisms.tex, lemma-geom-irreducible-generic-fibre), first proof",
+  "note": "S2: proved in Lean from Mathlib, including coefficient construction, tensor quotient, affine base identification and projection compatibility. No sorry remains in this module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Clear denominators of a multivariate polynomial over the fraction field so its hypersurface descends to the integral base",
+   "results": "{\"t\": \"2026-10-13T12:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"Clear denominators of a multivariate polynomial over the fraction field so its hypersurface descends to the integral base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.isIntegral_isLocalization_polynomial_quotient\", \"WeierstrassCurve.exists_isIntegral\", \"IsLocalization.integerNormalization_map_to_map\", \"IsLocalization.integerNormalization\", \"IsLocalization.coeffIntegerNormalization\", \"IsLocalization.scaleRoots_commonDenom_mem_lifts\", \"IsLocalization.integerNormalization_spec\", \"DenomsClearable\"], \"digest\": \"1992a0e7851ec286\"}",
+   "digest": "1992a0e7851ec286",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this statement; related declarations read locally."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsFractionRing\"",
+   "results": "{\"t\": \"2026-10-13T12:46:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"IsFractionRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this statement; related declarations read locally."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multivariate polynomial over a fraction field descends after clearing finitely many coefficient denominators",
+   "results": "{\"t\": \"2026-10-13T12:47:57Z\", \"tool\": \"leansearch\", \"query\": \"A multivariate polynomial over a fraction field descends after clearing finitely many coefficient denominators\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "note": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "commonDenom|integerNormalization",
+   "results": "{\"t\": \"2026-10-13T12:47:57Z\", \"tool\": \"grep\", \"query\": \"commonDenom|integerNormalization\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"Mathlib/RingTheory/Localization/Integer.lean\", \"Mathlib/RingTheory/Localization/Integer.lean\"], \"digest\": \"9dd3e4a157a2dbab\"}",
+   "digest": "9dd3e4a157a2dbab",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this statement; related declarations read locally."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreHypersurfaceFunctionFieldModel",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 0559 generic hypersurface construction underlying the geometric generic cover in the slicing proof; clearing finitely many coefficient denominators in the generic fraction field",
+   "via": [
+    "lem-sbc-generic-fibre-hypersurface-function-field-model",
+    "lem-sbc-generic-fibre-birational-hypersurface-model",
+    "lem-sbc-common-generic-hypersurface-affine-open",
+    "lem-sbc-generic-geometrically-integral-affine-chart",
+    "lem-sbc-affine-source-geometric-irreducibility-shrink",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-sbc-closed-family-geometric-fibre-shrink",
+    "lem-sbc-geometric-generic-cover-model",
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericPolynomialHypersurfaceDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericPolynomialHypersurfaceDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_base_hypersurface_of_generic_polynomial",
+  "statement": "theorem exists_base_hypersurface_of_generic_polynomial\n    {S : Scheme.{u}} [IsAffine S] [IsIntegral S]\n    (η : S) (hη : IsGenericPoint η Set.univ)\n    {n : ℕ} (Q : MvPolynomial (Fin n) (S.residueField η)) :\n    ∃ P : MvPolynomial (Fin n) Γ(S, ⊤),\n      let H := Spec (.of (MvPolynomial (Fin n) Γ(S, ⊤) ⧸ Ideal.span {P}))\n      let g : H ⟶ S := Spec.map (CommRingCat.ofHom\n        ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C)) ≫ S.isoSpec.inv\n      let Z := Spec (.of (MvPolynomial (Fin n) (S.residueField η) ⧸ Ideal.span {Q}))\n      let q : Z ⟶ Spec (.of (S.residueField η)) := Spec.map (CommRingCat.ofHom\n        ((Ideal.Quotient.mk (Ideal.span {Q})).comp MvPolynomial.C))\n      ∃ i : g.fiber η ≅ Z, i.hom ≫ q = g.fiberToSpecResidueField η",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T133228-L-4194150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T133228-L-4194150",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

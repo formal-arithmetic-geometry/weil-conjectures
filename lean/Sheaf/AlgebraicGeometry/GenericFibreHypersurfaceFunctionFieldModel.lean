@@ -11,11 +11,65 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 
 public import Mathlib.RingTheory.Localization.FractionRing
 
+import Sheaf.AlgebraicGeometry.FieldHypersurfaceFunctionFieldModel
+import Sheaf.AlgebraicGeometry.GenericPolynomialHypersurfaceDescent
+
 @[expose] public section
 
 universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
+
+
+private theorem integral_of_geometrically_integral_field
+    {K : Type u} [Field K] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of K))
+    (hgeom : GeometricallyIrreducible p) (hred : GeometricallyReduced p) : IsIntegral Y := by
+  have : GeometricallyIrreducible p := hgeom
+  have : GeometricallyReduced p := hred
+  have : IrreducibleSpace Y := GeometricallyIrreducible.irreducibleSpace_of_subsingleton p
+  have : IsReduced Y := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian p
+  exact isIntegral_of_irreducibleSpace_of_isReduced Y
+
+private theorem hypersurface_model_transport
+    {Y W Z T : Scheme.{u}} (p : Y ⟶ T) (w : W ⟶ T) (q : Z ⟶ T)
+    (i : W ≅ Z) (hi : i.hom ≫ q = w)
+    (hgeom : GeometricallyIrreducible q) (hred : GeometricallyReduced q)
+    (hZ : IsIntegral Z) (hft : LocallyOfFiniteType q)
+    (e : FractionRing Γ(Y, ⊤) ≃+* FractionRing Γ(Z, ⊤))
+    (he : ∀ a : Γ(T, ⊤),
+      e (algebraMap Γ(Y, ⊤) (FractionRing Γ(Y, ⊤)) (p.appTop.hom a)) =
+        algebraMap Γ(Z, ⊤) (FractionRing Γ(Z, ⊤)) (q.appTop.hom a)) :
+    GeometricallyIrreducible w ∧ GeometricallyReduced w ∧
+      IsIntegral W ∧ LocallyOfFiniteType w ∧
+      ∃ e' : FractionRing Γ(Y, ⊤) ≃+* FractionRing Γ(W, ⊤),
+        ∀ a : Γ(T, ⊤),
+          e' (algebraMap Γ(Y, ⊤) (FractionRing Γ(Y, ⊤)) (p.appTop.hom a)) =
+            algebraMap Γ(W, ⊤) (FractionRing Γ(W, ⊤)) (w.appTop.hom a) := by
+  have hgeomW : GeometricallyIrreducible w := by
+    rw [← hi]
+    exact (MorphismProperty.cancel_left_of_respectsIso
+      @GeometricallyIrreducible i.hom q).mpr hgeom
+  have hredW : GeometricallyReduced w := by
+    rw [← hi]
+    exact (MorphismProperty.cancel_left_of_respectsIso
+      @GeometricallyReduced i.hom q).mpr hred
+  have : IsIntegral Z := hZ
+  have hW : IsIntegral W := IsIntegral.of_isIso i.inv
+  have hftW : LocallyOfFiniteType w := by
+    rw [← hi]
+    exact (MorphismProperty.cancel_left_of_respectsIso
+      @LocallyOfFiniteType i.hom q).mpr hft
+  let r : Γ(Z, ⊤) ≃+* Γ(W, ⊤) :=
+    (Scheme.Γ.mapIso i.op).commRingCatIsoToRingEquiv
+  let er : FractionRing Γ(Z, ⊤) ≃+* FractionRing Γ(W, ⊤) :=
+    IsFractionRing.ringEquivOfRingEquiv r
+  refine ⟨hgeomW, hredW, hW, hftW, e.trans er, ?_⟩
+  intro a
+  change er (e _) = _
+  rw [he a, IsFractionRing.ringEquivOfRingEquiv_algebraMap]
+  congr 1
+  change i.hom.appTop.hom (q.appTop.hom a) = _
+  rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, hi]
 
 /-- Construct a geometrically integral hypersurface with the same generic fraction ring.
 The fraction-ring isomorphism fixes sections of the spectrum of the residue field.
@@ -59,6 +113,31 @@ theorem exists_generic_fibre_hypersurface_function_field_model
             e (algebraMap Γ(f.fiber η, ⊤) (FractionRing Γ(f.fiber η, ⊤))
               ((f.fiberToSpecResidueField η).appTop.hom a)) =
             algebraMap Γ(g.fiber η, ⊤) (FractionRing Γ(g.fiber η, ⊤))
-              ((g.fiberToSpecResidueField η).appTop.hom a) := by sorry
+              ((g.fiberToSpecResidueField η).appTop.hom a) := by
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField η) :=
+    show LocallyOfFiniteType (Limits.pullback.snd f (S.fromSpecResidueField η)) from
+      inferInstance
+  obtain ⟨n, Q, hgeomQ, hredQ, e, he⟩ :=
+    exists_field_hypersurface_function_field_model (f.fiberToSpecResidueField η) hgeom hred
+  obtain ⟨P, i, hi⟩ := exists_base_hypersurface_of_generic_polynomial η hη Q
+  let H := Spec (.of (MvPolynomial (Fin n) Γ(S, ⊤) ⧸ Ideal.span {P}))
+  let g : H ⟶ S := Spec.map (CommRingCat.ofHom
+    ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C)) ≫ S.isoSpec.inv
+  let Z := Spec (.of (MvPolynomial (Fin n) (S.residueField η) ⧸ Ideal.span {Q}))
+  let q : Z ⟶ Spec (.of (S.residueField η)) := Spec.map (CommRingCat.ofHom
+    ((Ideal.Quotient.mk (Ideal.span {Q})).comp MvPolynomial.C))
+  have hX : IsIntegral (f.fiber η) :=
+    integral_of_geometrically_integral_field (f.fiberToSpecResidueField η) hgeom hred
+  have hZ : IsIntegral Z := integral_of_geometrically_integral_field q hgeomQ hredQ
+  have hftQ : LocallyOfFiniteType q := by
+    apply HasRingHomProperty.Spec_iff.mpr
+    change RingHom.FiniteType
+      (algebraMap (S.residueField η)
+        (MvPolynomial (Fin n) (S.residueField η) ⧸ Ideal.span {Q}))
+    exact RingHom.finiteType_algebraMap.mpr inferInstance
+  obtain ⟨hgeomG, hredG, hG, hftG, e', he'⟩ :=
+    hypersurface_model_transport (f.fiberToSpecResidueField η)
+      (g.fiberToSpecResidueField η) q i hi hgeomQ hredQ hZ hftQ e he
+  exact ⟨n, P, hgeomG, hredG, hX, hG, hftG, e', he'⟩
 
 end AlgebraicGeometry
