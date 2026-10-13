@@ -17,51 +17,46 @@
  },
  "proof": [
   {
-   "text": "The composite stalk ring map equals the actual stalk map of g′. The natural degreewise pullback-stalk identification gives the specified tensorStalkIso on complexes and homotopies.",
+   "text": "Use the specified restriction equation for tensorMap and the degreewise equation of exists_tensorStalkIso. Naturality of the chosen module pullback-stalk isomorphism, together with naturality of equality transport in extension of scalars, proves tensorStalkIso_naturality for chain maps.",
    "uses": [
     "def-pc-single-complex-base-change-stalk-condition",
     "lem-weil-pbc-module-stalk-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Resolve sheaf complexes by K-flat complexes; their stalks are K-flat. Both universal counits are invertible on these objects. Compose these counits, their localization factors and tensorStalkIso to define the comparison on representatives.",
+   "text": "Install the sheaf tensor, closed and Grothendieck structures and schemeModule_hasFunctorialFlatResolution. Translate the upstream K-flat predicate to the recorded sheaf IsKFlat predicate. Tensor pullback preserves quasi-isomorphisms between such complexes. Its universal counit therefore computes it on the K-flat left derivability structure. Apply the proved upstream LocalizerMorphism.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure to postcompose with comparisonDerivedStalk; this gives the universal property of derivedPullback followed by exact stalk, with the whiskered recorded counit.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-stalk-criterion",
-    "lem-pc-kflat-scalar-extension-counit",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-tensor-pullback-kflat-quasi-iso",
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "lem-pc-stalk-comparison-source-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Use K-flat roofs and common refinements to descend the displayed representative composite to a natural transformation. Naturality of every factor gives naturality on chain maps, hence on the localization. For a K-flat complex use its identity resolution, giving precisely the required equation. No invertibility of the resulting natural transformation is asserted here.",
+   "text": "On complexes compose L of the original exact-stalk factor, the supplied scalar-extension counit, Q of tensorStalkIso, and the inverse new exact-stalk factor. The Q/Qh and ordinary homotopy-category factors in the requested formula have identity components by their quotient-lift construction. Naturality of the exact-stalk factors and of the scalar-extension counit, and step 1, prove naturality of this composite. Quotient.natTransLift descends it to the homotopy category. Functor.leftDerivedLift for the universal pair in step 2 constructs j. Its leftDerived_fac_app equation, followed by cancellation of the assumed invertible pullback counit and the old stalk factor, is exactly the required representative equation. This uses no separate roof or common-refinement theorem and asserts no invertibility of j.",
    "uses": [
-    "lem-pc-right-fraction-representation",
-    "lem-pc-right-fraction-common-refinement",
-    "lem-pc-kflat-resolution"
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-stalk-comparison-source-transport"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-scalar-extension-counit",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-right-fraction-common-refinement",
-  "lem-pc-right-fraction-representation",
   "lem-pc-ringed-spaces-derived-pullback-composition",
   "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-tensor-pullback-kflat-quasi-iso",
   "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "U2",
+  "group": "A3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "equation-bc preceding Tag 0DJ8; Tags 06YB, 0D5S, 06Y6"
+  "place": "equation-bc preceding Tag 0DJ8; existing K-flat derivability and left-derived universal-property constructions in the Lean library"
  },
  "mathlib_searches": [
   {
@@ -143,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T131329-L-4035221",
-  "kind": "interface",
+  "landing": "20261013T142850-L-495189",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

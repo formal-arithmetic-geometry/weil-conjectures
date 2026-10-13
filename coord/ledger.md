@@ -12787,3 +12787,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:22 L: returned deliver/G4/Sheaf.Paper.ModuleCupNaiveDerivedCompatibility (reviewer RETURN: (reviewer X-c21c2, head c21c2ee3b) C1/C4: dag/nodes/sec-abelian-varieties/lem-sc-module-cup-kinjective-target.json uses )
 - 14:27 L: returned deliver/H2/Sheaf.AlgebraicGeometry.RelativeTensorRoofComparison (reviewer RETURN: (reviewer X-a2a6e, head a2a6ef486) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Re)
 - 14:28 L: returned deliver/U3/Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison (reviewer RETURN: (reviewer X-52e2d, head 52e2dfbcc) B5/C4: Incorrect source citation. In lean/Sheaf/AlgebraicGeometry/FlatBaseChangeChart)
+- 14:28 L: merged deliver/A3/Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore (stage 3; reviewer PASS; first push; landing 20261013T142850-L-495189 (proof); batch 20261013T142848; modules 1; new nodes 0)
