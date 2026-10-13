@@ -17,42 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a basis b indexed by a type I in universe w of the k-vector space Gamma(X,F). The scalar action is the recorded scalarObj f F at the top open. For each b_i, the external product with a section t of G on V defines a section of pr2_*E on V. The tensor-pullback adjunction units and tensor-section formulas ensure these maps are O_Y(V)-linear and commute with restriction, so they define module-sheaf maps iota_i:G -> pr2_*E.",
+   "text": "Choose the basis Module.Basis.ofVectorSpace of scalarObj f F at the top open, with its small index type I. Let P be the canonical presheaf-module coproduct of the constant family G.val. Apply the affine-basis comparison to obtain an isomorphism between P and the ordinary external direct image after restriction to all affine opens of Y.",
    "uses": [
     "lem-weil-pbc-vector-space-basis-through-vector",
-    "def-sc-scalar-global-sections-comparison"
+    "lem-sc-picard-external-coefficients-pushforward-coproduct-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On each affine V of Y, identify the inverse-image open with X times V and E restricted there with the external coefficients for F and G restricted to V. Open-immersion pullback agrees with restriction and composition, including its units. Apply the affine-right external section comparison to get Gamma(X,F) tensor_k G(V) isomorphic to (pr2_*E)(V). Its explicit pure-tensor formula identifies the maps iota_i with t maps to b_i tensor t.",
+   "text": "Regard P and the direct image as constant functors from Discrete PUnit, and assemble the affine comparison into a natural isomorphism. Apply module_sheafification_iso_of_affine_restriction to obtain an isomorphism from the module sheafification S(P) to the direct image. Naturality for the constant parameter is checked by functor map_id and identity composition.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-sc-external-global-sections-tensor-affine-right"
+    "lem-sc-module-sheafification-affine-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Basis expansion identifies the tensor module on every affine V with the algebraic direct sum of copies of G(V). In the presheaf category the direct sum is pointwise. Sheafify its coproduct cofan; sheafification is a left adjoint and therefore preserves its colimit. The maps iota_i induce a morphism from this sheaf coproduct to pr2_*E. Its source presheaf comparison is an isomorphism on the affine basis, so its stalk maps are invertible (every germ can be represented on an affine neighbourhood; equality of germs can be tested after shrinking to another such neighbourhood). Sheafification does not change stalks, and stalks detect isomorphisms. Transport the sheaf coproduct cofan through this isomorphism. An empty basis gives the zero coproduct. No acyclicity, compactness of Y, or equality of arbitrary open sections with an infinite direct sum is asserted.",
+   "text": "The module sheafification functor S is a left adjoint and preserves the canonical presheaf coproduct cofan. Its adjunction counit gives an isomorphism S(G.val) ≅ G. Precompose the sheafified colimiting cofan with the discrete family of inverse counit isomorphisms. Transport its apex along S(P) ≅ pr2_*E using IsColimit.ofIsoColimit and Cofan.ext. This gives the required maps G → pr2_*E and IsColimit witness, including an empty index type.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-scalar-global-sections-comparison",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sc-external-global-sections-tensor-affine-right",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-module-sheafification-affine-restriction",
+  "lem-sc-picard-external-coefficients-pushforward-coproduct-comparison",
   "lem-weil-pbc-vector-space-basis-through-vector"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED; detailed expansion of the basis and sheafification argument"
+  "place": "Tag 0BED, degree-zero affine calculation; categorical sheafification and cofan transport made into Lean by P3"
  },
  "mathlib_searches": [
   {
@@ -137,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T111845-L-3050190",
+  "landing": "20261013T120802-L-3470307",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
