@@ -1,0 +1,145 @@
+{
+ "id": "lem-pc-single-complex-open-nested-comparison",
+ "kind": "statement",
+ "title": "Invariance of the single-complex comparison under nested source-open restriction",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S and g′:X′→X form a commutative square of schemes [def-pc-scheme]. Let K∈D(O_X), K′∈D(O_{X′}) and φ:L(g′)*K→K′ [def-pc-derived-category, def-pc-derived-pullback]. For open subschemes Z⊆W⊆X, put P=X′×_X W with projections p:P→X′ and q:P→W, f_W=f|W, f′_W=p composed with f′, K_W=L(W→X)*K, and K′_W=Lp*K′. Define φ_W:Lq*K_W→K′_W by the canonical pullback composition comparison Lq*L(W→X)*K≅L(q composed with W→X)*K=L(p composed with g′)*K≅Lp*L(g′)*K followed by Lp*φ [lem-pc-ringed-spaces-derived-pullback-composition]. The ambient comparison b_Z [def-pc-single-complex-open-comparison] is invertible if and only if the comparison on the open (W→X)⁻¹Z computed in the restricted square (q,f′_W,f_W,g) with coefficient arrow φ_W is invertible. No cartesianness, quasi-coherence, compactness, affine-base, cover or local-isomorphism hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), source-open induction; canonical comparison from cohomology.tex, Tag 08HY; composition from Tag 0D5S (lemma-derived-pullback-composition)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Put A = W⁻¹(Z) inside W. Since Z ⊆ W, the composite A → W → X has image Z. Its canonical image isomorphism identifies A with Z over X. Pasting the pullback squares and uniqueness of their limits identifies (X′ ×_X W) ×_W A with X′ ×_X Z compatibly with both projections. These are isomorphisms of the two restricted commutative squares.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the canonical derived pullback composition comparisons on A → W → X and on the two pullback projections to X′. The associative composition law and naturality with φ identify the twice-restricted coefficient arrow with the once-restricted arrow after those source isomorphisms. The coefficient is the explicit composite of the pullback comparison, equality transport from the pullback condition, inverse pullback comparison, and pullback of φ; no object or arrow is obtained from a bare existence theorem.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-single-complex-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the mates of these pullback composition comparisons under the canonical derived adjunctions to identify the direct-image functors. To check the base-change arrows, transpose under the target adjunction as in the counit definition of the base-change map. Both transposes are the pullback composition identification followed by pullback of the source counit. Naturality of the counit and the associative law give equality; injectivity of the adjunction Hom equivalence gives equality of the comparison arrows after the identifications. Here the isomorphisms are e:A≅Z and e′:((X′×_X W)×_W A)≅(X′×_X Z). Their structural maps to S and S′ agree after composition with e and e′, so their pinned adjunction units and counits are invertible. Apply the cited mate-pasting computation to these coordinate isomorphisms. No unit or counit for the open immersion W→X is asserted invertible. The pulled-back φ is compatible by its naturality in the preceding step.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-base-change-pasting",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two arrows are therefore conjugate by isomorphisms in D(O_{S′}). A composite with invertible arrows is invertible if and only if the middle arrow is invertible. Apply this in both directions. The construction includes empty Z, empty W, Z = W and W = X, since it uses only pullback and adjunction identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-derived-base-change-pasting",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Expansion by C1 of the nested restriction transport in Tag 0DJ9; checked online against Tags 0DJ9, 08HY and 0D5S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change map is invariant under restricting twice to nested open subschemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change comparison is invariant under two successive restrictions to nested open subschemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.resLE_map; AlgebraicGeometry.Scheme.Hom.map_resLE; AlgebraicGeometry.morphismRestrictRestrict; AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE; AlgebraicGeometry.Scheme.Hom.map_resLE_assoc; AlgebraicGeometry.morphismRestrict_comp; AlgebraicGeometry.Scheme.Hom.resLE_map_assoc; AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE_assoc",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*past|derived.*restrict|restrict.*derived",
+   "results": "No matches in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenUnion",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Single-complex qcqs induction (Tag 0DJ9): identify the comparisons on U, V and their intersection after restricting the source to U union V",
+   "via": [
+    "lem-pc-single-complex-open-union",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenNestedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenNestedComparison.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_nested_isIso_iff",
+  "statement": "theorem singleComplexOpenComparison_nested_isIso_iff\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (h : g' ≫ f = f' ≫ g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (W Z : X.Opens) (hZW : Z ≤ W) :\n    let hW : pullback.snd g' W.ι ≫ (W.ι ≫ f) =\n        (pullback.fst g' W.ι ≫ f') ≫ g := by\n      rw [← pullback.condition_assoc, Category.assoc, h, ← Category.assoc]\n    let φW : (derivedPullback (pullback.snd g' W.ι)).obj\n        ((derivedPullback W.ι).obj K) ⟶\n        (derivedPullback (pullback.fst g' W.ι)).obj K' :=\n    (((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition))))\n      (pullback.snd g' W.ι) W.ι).hom.app K ≫\n    eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n      (pullback.condition (f := g') (g := W.ι)).symm) ≫\n    ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition))))\n      (pullback.fst g' W.ι) g').inv.app K ≫\n    (derivedPullback (pullback.fst g' W.ι)).map φ)\n    IsIso (singleComplexOpenComparison f f' g g' h K K' φ Z) ↔\n      IsIso (singleComplexOpenComparison (W.ι ≫ f) (pullback.fst g' W.ι ≫ f')\n        g (pullback.snd g' W.ι) hW ((derivedPullback W.ι).obj K)\n        ((derivedPullback (pullback.fst g' W.ι)).obj K') φW (W.ι ⁻¹ᵁ Z))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095934-L-2452781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095934-L-2452781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
