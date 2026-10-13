@@ -26,7 +26,16 @@
  ],
  "proof": [
   {
-   "text": "For a map from an acyclic complex K into the termwise product P, each composite with a projection to I_t admits a null-homotopy by K-injectivity [def-sp-kinjective-bridge]. Assemble their degree-(p,q) components using the limit in degree q. The homotopy zero and commutation identities hold after every projection, so degreewise limit extensionality proves them. This gives a null-homotopy of the original map, hence P is K-injective. The Lean helper productHomotopy proves the more general assertion for homotopies between any two maps.",
+   "text": "Mathlib isLimitConeOfHasLimitEval constructs the termwise product in complexes. Lift the legs of a cone through the full homotopy quotient and apply that limit property. Projection equations follow by functoriality. For uniqueness, lift a candidate to a chain map, convert equality of projections into homotopies and assemble their components degreewise with productHomotopy. Only limits of the evaluated family are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, label lemma-product-K-injective, proof of the product universal property"
+   }
+  },
+  {
+   "text": "Apply Mathlib CochainComplex.isKInjective_iff_rightOrthogonal to P. Given an acyclic object X and a morphism f from X to q(P), each projection composite is zero by IsKInjective.rightOrthogonal for the corresponding factor [def-sp-kinjective-bridge]. The homotopy-category limit from the preceding step implies f = 0 by hom_ext. Thus P is K-injective, with no separate assembly of null-homotopies.",
    "uses": [
     "def-sp-kinjective-bridge"
    ],
@@ -37,16 +46,7 @@
    }
   },
   {
-   "text": "Mathlib isLimitConeOfHasLimitEval gives the termwise cone its limit property in complexes. Lift a cone in the homotopy category componentwise through the full quotient functor and then apply this limit property. The projection equations follow by functoriality. For uniqueness, represent a candidate by a chain map and turn equality of its projections in the homotopy category into component homotopies; productHomotopy assembles them, proving equality in the quotient.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0BK6, label lemma-product-K-injective, proof of the product universal property"
-   }
-  },
-  {
-   "text": "Use the K-injective Hom comparison [lem-weil-pbc-kinjective-hom-derived] for P and every I_t. The private mapProduct helper transfers a discrete limit through an essentially surjective functor whose maps on morphisms into the cone point and every diagram object are bijective: pull back each cone through an object preimage and the Hom bijections, lift with the original limit, and prove uniqueness using the same bijections. Apply it to Qh and the homotopy-category product of Step 2. Finally transport the limiting cone along quotientCompQhIso, obtaining exactly Q.mapCone P and thus the product [def-weil-category-product].",
+   "text": "Use the K-injective Hom comparison [lem-weil-pbc-kinjective-hom-derived] for P and every I_t. The private mapProduct helper transfers a discrete limit through an essentially surjective functor whose maps on morphisms into the cone point and every diagram object are bijective: pull back each cone through an object preimage and the Hom bijections, lift with the original limit, and prove uniqueness using the same bijections. Apply it to Qh and the homotopy-category product of Step 1. Finally transport the limiting cone along quotientCompQhIso, obtaining exactly Q.mapCone P and thus the product [def-weil-category-product].",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-category-product"
@@ -65,10 +65,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N2",
-  "date": "2026-10-12",
+  "group": "K4",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0BK6; componentwise null-homotopy variant of its Hom-complex argument; Mathlib Qh_map_bijective"
+  "place": "Tag 0BK6; homotopy-category product and Mathlib right-orthogonality criterion, followed by Qh_map_bijective"
  },
  "mathlib_searches": [
   {
@@ -149,13 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T231550-L-1822708",
+  "landing": "20261013T234514-L-2163999",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

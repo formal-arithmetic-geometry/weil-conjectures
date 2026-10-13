@@ -106,14 +106,15 @@ K-injectivity is the `IsKInjective` convention of `def-sp-kinjective-bridge`; th
 localization universe is that of `def-weil-abstract-derived-category`.
 
 Proof:
-1. For a map from an acyclic complex `K` into the termwise product, choose a
-   null-homotopy of each composite with a projection, using K-injectivity of the factors.
-   Assemble the homotopy components using the degreewise limits. The homotopy identities
-   hold after every projection, hence hold by limit extensionality. Thus the product is
-   K-injective; no exactness assumption on products in `C` is needed.
-2. Lift each leg of a cone in the homotopy category to a chain map and use the limit of
+1. Lift each leg of a cone in the homotopy category to a chain map and use the limit of
    complexes to obtain its lift. Equality of projections gives component homotopies;
-   assembling these as in Step 1 proves uniqueness in the homotopy category.
+   assembling their components degreewise proves uniqueness in the homotopy category.
+   This uses only the limits of this family's evaluations, not all products of this shape.
+2. Apply Mathlib's `isKInjective_iff_rightOrthogonal` to the product. Every morphism
+   from an acyclic object has zero composites with the projections, by the factors'
+   `IsKInjective.rightOrthogonal`. Limit extensionality then makes the morphism zero.
+   Thus K-injectivity follows from the homotopy-category product already constructed,
+   without a second null-homotopy assembly or any exactness assumption on products.
 3. Mathlib's K-injective Hom comparison (`lem-weil-pbc-kinjective-hom-derived`) gives
    bijections on morphisms into the product and each factor. Essential surjectivity of
    `Qh` lets us pull back any cone in the derived category to the homotopy category.
@@ -127,15 +128,7 @@ theorem termwise_product_isKInjective_and_isLimit
     let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
     IsKInjective P.pt ∧ Nonempty (IsLimit (DerivedCategory.Q.mapCone P)) := by
   classical
-  -- Assemble null-homotopies directly, avoiding exactness of products in Ab.
   let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
-  have hPI : IsKInjective P.pt := by
-    refine ⟨fun f hK ↦ ?_⟩
-    exact ⟨productHomotopy I fun j ↦ by
-      letI : IsKInjective ((Discrete.functor I).obj ⟨j⟩) := inferInstanceAs
-        (IsKInjective (I j))
-      simpa using IsKInjective.homotopyZero (f ≫ P.π.app ⟨j⟩) hK⟩
-  let := hPI
   let q := HomotopyCategory.quotient C (.up ℤ)
   let hP := HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)
   have hq : IsLimit (q.mapCone P) := by
@@ -157,6 +150,14 @@ theorem termwise_product_isKInjective_and_isLimit
       apply HomotopyCategory.homotopyOfEq
       rw [Functor.map_comp, hP.fac]
       exact (hm ⟨j⟩).trans (q.map_preimage (s.π.app ⟨j⟩)).symm
+  have hPI : IsKInjective P.pt := by
+    apply (isKInjective_iff_rightOrthogonal P.pt).2
+    intro X f hX
+    apply hq.hom_ext
+    intro j
+    rw [zero_comp]
+    exact IsKInjective.rightOrthogonal (I j.as) (f ≫ q.map (P.π.app j)) hX
+  let := hPI
   have hd : IsLimit (DerivedCategory.Qh.mapCone (q.mapCone P)) := by
     exact mapProduct DerivedCategory.Qh (Discrete.functor I ⋙ q) (q.mapCone P) hq
       (fun X ↦ IsKInjective.Qh_map_bijective X P.pt)
