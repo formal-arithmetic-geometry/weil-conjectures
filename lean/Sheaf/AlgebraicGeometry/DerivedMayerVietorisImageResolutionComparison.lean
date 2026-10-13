@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonFirst
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonIntersection
 
 /-! # Comparing the concrete Mayer--Vietoris sequences after direct image
 
@@ -89,6 +91,10 @@ theorem schemeMV_image_resolution_comparison
               schemeDerivedDirectImage (U ⊓ V).ι).map
               (schemeMVResolutionIso Y ((schemeDerivedDirectImage h).obj E)).inv ≫
             (schemeOpenModuleImageComplexComparison Y (U ⊓ V) J
-              (schemeMVAdjunction Y (U ⊓ V))).inv) := by sorry
+              (schemeMVAdjunction Y (U ⊓ V))).inv) := by
+  dsimp
+  obtain ⟨m, hm⟩ := schemeMV_image_resolution_comparison_first X Y h U V E
+  refine ⟨m, hm, ?_⟩
+  exact schemeMV_image_resolution_comparison_intersection X Y h U V E m
 
 end AlgebraicGeometry
