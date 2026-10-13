@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-coherent-map-reduction-torsion-coker",
+ "kind": "lemma",
+ "title": "Cokernel part of reduction torsion bound",
+ "statement": "Let $X$ be a Noetherian scheme, $I,K$ quasi-coherent ideal sheaves, $F,H$ coherent $\\mathcal O_X$-modules [def-weil-pbc-coherent-formal-module], and $a:F\\to H$ a module morphism. If $t\\ge1$ and $K^t$ annihilates $\\ker(a)$ and $\\operatorname{coker}(a)$, then for every $n\\ge0$, $K^{2t}$ annihilates the cokernel of the induced map $F/I^{n+1}F\\to H/I^{n+1}H$. Kernels, cokernels and ideal products are taken in the ambient category of $\\mathcal O_X$-modules.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), commutative algebra fact"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "The quotient projection H to H/I^(n+1)H followed by the reduced cokernel projection is epic and kills a. Mathlib cokernel.desc and cokernel.desc_epi give an epimorphism from coker(a) to the reduced cokernel. Tensoring it by K^t is epic, so naturality of multiplication transfers zero of the original ideal product to the reduced ideal product. formalModuleQuotient_factor with the identity and t <= 2*t factors the higher-power inclusion through this zero inclusion; its monicity gives the requested IsZero statement.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-formal-module-ideal-power-factor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-module-ideal-power-factor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0888 (remark-inverse-systems-kernel-cokernel-annihilated-by), commutative algebra fact",
+  "note": "Independent second reading; kernel follows the source scalar quasi-inverse argument; cokernel uses its simpler categorical quotient argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ideal annihilates cokernel quotient induced map sheaf modules",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.presentationOfIsCokernelFree_relations, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree_generators. Categorical quotient primitives or module-level facts; no exact sheaf reduction bound.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.desc",
+   "results": "12 hits: CategoryTheory.Limits.cokernel.desc, CategoryTheory.Limits.cokernel.desc_epi, CategoryTheory.Limits.cokernel.π_desc, CategoryTheory.Limits.cokernel.π_desc_assoc, CategoryTheory.Limits.cokernelEpiComp_hom, CategoryTheory.Limits.cokernelImageι_hom, CategoryTheory.Limits.cokernel.desc_zero, CategoryTheory.Limits.cokernelImageι_inv. Categorical quotient primitives or module-level facts; no exact sheaf reduction bound.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*quotient|cokernel.*quotient|kernel.*reduction",
+   "results": "25 hits: Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Kernels.lean, Mathlib/Algebra/Module/PID.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Kernels.lean. Categorical quotient primitives or module-level facts; no exact sheaf reduction bound.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If an ideal annihilates the kernel and cokernel of a morphism of coherent sheaves then its square annihilates the kernel after quotient by an ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_coker_reduction|annihilated_double|idealModuleProduct.*epi",
+   "results": "0 hits: ; no exact sheaf reduction bound.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "annihilator of kernel after base change quotient tensor map square ideal",
+   "results": "8 hits: LinearMap.ker_tensorProductMk, KaehlerDifferential.range_kerCotangentToTensor, KaehlerDifferential.range_mapBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.kerToTensor_apply, KaehlerDifferential.kerCotangentToTensor_toCotangent, Ideal.ker_tensorProductMk_quotient, LinearMap.tensorKer; no exact sheaf reduction bound.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_epi\", \"tensor\"",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentMapReductionTorsion",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, complete Noetherian essential surjectivity via Grothendieck existence; Tag 088A final paragraph: Actual coherent map torsion bounds survive arbitrary ideal-power reduction",
+   "via": [
+    "lem-weil-pbc-devissage-recover-levels",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionCoker",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentMapReductionTorsionCoker.lean",
+  "declaration": "AlgebraicGeometry.coherentMap_reduction_torsion_coker",
+  "statement": "theorem coherentMap_reduction_torsion_coker\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (F H : CoherentModules X) (a : F ⟶ H) (t : ℕ) (ht : 1 ≤ t)\n    (hker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n      (kernel a.hom)))\n    (hcoker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n      (cokernel a.hom))) :\n    ∀ n : ℕ, IsZero (Scheme.idealModuleProduct\n      (Scheme.idealSheafPower K.toModulesι (2 * t)).2\n      (cokernel (formalModuleQuotientMap I a.hom (Nat.le_refl (n + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T004025-L-2491509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T004025-L-2491509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

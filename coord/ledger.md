@@ -10336,3 +10336,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:40 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitBinaryZeroRestrictionRow (stage 3; reviewer PASS; first push; landing 20261013T004024-L-2491144 (interface); batch 20261013T004020; modules 2; new nodes 1)
 - 00:40 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt (stage 3; reviewer PASS; first push; landing 20261013T004024-L-2491292 (interface); batch 20261013T004020; modules 4; new nodes 3)
 - 00:40 L: merged deliver/H3/Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology (stage 3; reviewer PASS; first push; landing 20261013T004025-L-2491394 (proof); batch 20261013T004020; modules 1; new nodes 0)
+- 00:40 L: merged deliver/M1/Sheaf.AlgebraicGeometry.CoherentMapReductionTorsion (stage 3; reviewer PASS; after a return; landing 20261013T004025-L-2491509 (interface); batch 20261013T004020; modules 3; new nodes 2)
