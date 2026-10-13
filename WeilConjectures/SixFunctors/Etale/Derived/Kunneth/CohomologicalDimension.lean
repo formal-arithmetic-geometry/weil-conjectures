@@ -6,7 +6,11 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
 # Cohomological dimension of étale sheaves of `Λ`-modules
@@ -64,6 +68,44 @@ def HasFiniteCohomologicalDimensionMorphism {Y : Scheme.{u}} (f : X ⟶ Y) : Pro
 
 end Defs
 
+/-- A quasi-compact scheme locally of finite type over a field has finite dimension. -/
+lemma exists_topologicalKrullDim_le_of_locallyOfFiniteType {K : Type u} [Field K]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of K)) [LocallyOfFiniteType aX] [QuasiCompact aX] :
+    ∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) := by
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_isPullback aX
+  exact ⟨d, hd K (𝟙 _) (𝟙 X) aX (IsPullback.id_horiz aX)⟩
+
+/-- The `q`-th homology of `Rf_*` of a sheaf placed in degree `0` is the higher direct image
+`R^q f_*`, computed on the bounded below derived category. -/
+noncomputable def homologyRightDerivedLowerStarSingleIsoHigherDirectImage {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) :
+    (DerivedCategory.homologyFunctor _ q).obj
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F)) ≅
+      Etale.higherDirectImage Λ f q F :=
+  ((f)_*[ModuleCat.{u + 1} Λ]).homologyRightDerivedFunctorObjSingleFunctorIso F q ≪≫
+    (((f)_*[ModuleCat.{u + 1} Λ]).homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm
+
+/-- Blueprint `lem-kun-0f10`, part (1), over a separably closed field: a morphism between
+`K`-schemes of finite type has finite cohomological dimension, with bound `2 dim X`. This is
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`. -/
+theorem hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFiniteType
+    (hΛ : IsAddTorsion Λ) {K : Type u} [Field K] [IsSepClosed K]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) :
+    HasFiniteCohomologicalDimensionMorphism Λ f := by
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_locallyOfFiniteType aX
+  have : LocallyOfFiniteType f := by
+    subst hf
+    exact locallyOfFiniteType_of_comp f aY
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : QuasiCompact f := inferInstance
+  refine ⟨2 * d, fun F q hq ↦ ?_⟩
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, q = n := ⟨q.toNat, by omega⟩
+  exact (Etale.isZero_higherDirectImage_of_two_mul_lt hΛ f aX aY hf d hd F n hq).of_iso
+    (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F n)
+
 /-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (1).
 
 Let `K` be a field and `f : X ⟶ Y` a morphism between `K`-schemes of finite type. For a torsion
@@ -84,8 +126,16 @@ sheaf `F` of `Λ`-modules and all large `q`. -/
 theorem hasFiniteCohomologicalDimension_of_isSepClosed (hΛ : IsAddTorsion Λ) {K : Type u}
     [Field K] [IsSepClosed K] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] :
-    HasFiniteCohomologicalDimension Λ X :=
-  sorry
+    HasFiniteCohomologicalDimension Λ X := by
+  obtain ⟨d, hd⟩ := hasFiniteCohomologicalDimensionMorphism_of_isSepClosed_of_locallyOfFiniteType
+    Λ hΛ aX (𝟙 _) aX (Category.comp_id _)
+  refine ⟨d, fun F q hq ↦ ?_⟩
+  -- `H^q(X, F) = H^q(Spec K, Ra_* F) = Γ(Spec K, R^q a_* F)`, `Γ` being exact on `Spec K`
+  exact ((Sheaf.Γ _ _).map_isZero (hd F q hq)).of_iso
+    ((DerivedCategory.homologyFunctor _ q).mapIso
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app _).symm ≪≫
+      ((Sheaf.Γ (Spec (.of K)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)).rightDerivedFunctorHomologyFunctorIso q).symm.app _)
 
 end Etale
 
