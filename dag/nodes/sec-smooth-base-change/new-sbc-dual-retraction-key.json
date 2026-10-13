@@ -2,7 +2,7 @@
  "id": "new-sbc-dual-retraction-key",
  "kind": "statement",
  "title": "Categorical cancellation for the transpose retraction",
- "statement": "Given a restriction internal-Hom isomorphism family e, a local section s of f, the composite of the restricted transpose with the conjugated precomposition map is the identity.",
+ "statement": "Given a scheme X, sheaves P and Q of O_X-modules, f:P → Q, an open U, and a section s:Q|_U → P|_U with s followed by f|_U equal to the identity, let e(A,B) identify restricted internal Homs with internal Homs of the restrictions. Assume e is natural in both variables: restriction of homObjMap(a,b) followed by e(A′,B′) equals e(A,B) followed by homObjMap(a|_U,b|_U). Then the restricted transpose of f followed by e(P,O_X), precomposition by s, and the inverse of e(Q,O_X) is the identity.",
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-weil-sheaf-of-modules-category",
@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Expand the naturality equation of the internal-Hom restriction isomorphisms, then compose with precomposition by s. Contravariant functoriality of homObjMap reduces the composite to precomposition by s followed by f, which is the identity by hs. The detailed reassociation and cancellation are postponed in this intermediate theorem.",
+   "text": "Specialize the naturality hypothesis to f and id of O_X. Functor.map_id replaces the restricted identity by an identity. Compose with precomposition by s; homObjMap_comp_homObjMap identifies the two precompositions with precomposition by s followed by f|_U. Use the section equation and homObjMap_id. Reassociate the composite and cancel e(Q,O_X). These identities also apply to zero modules and the empty open.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
     "def-weil-sheaf-of-modules-category",
@@ -32,10 +32,11 @@
   "def-pur-localized-ringed-site"
  ],
  "proof_origin": {
-  "kind": "proof-decomposition",
-  "by": "C1 stage 3",
+  "kind": "written-by-agent",
+  "by": "S1 stage 3",
   "document": "Stacks Project",
-  "place": "Tag 0EKP"
+  "place": "Tag 0EKP, dualizing the surjection in (2) to (3); categorical details written by S1 using internal-Hom functoriality.",
+  "note": "Stacks Tag 0EKP supplies the dualization step, but omits its details. S1 wrote the categorical cancellation proof using the existing internal-Hom composition and identity API; the second reader checked it independently."
  },
  "mathlib_searches": [
   {
@@ -98,7 +99,7 @@
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-14",
-  "statement": "theorem dual_retraction_key\n    {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)\n    (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)\n    (e : ∀ A B : X.Modules,\n      (restrictFunctor U.ι).obj (SheafOfModules.homObj\n        (R := X.toRingedSpace.sheaf) A B) ≅\n        SheafOfModules.homObj (R := U.toScheme.toRingedSpace.sheaf)\n          ((restrictFunctor U.ι).obj A) ((restrictFunctor U.ι).obj B))\n    (hs : s ≫ (restrictFunctor U.ι).map f = 𝟙 _) :\n    (restrictFunctor U.ι).map (dualMap f) ≫\n        (e P (SheafOfModules.unit X.ringCatSheaf)).hom ≫\n        SheafOfModules.homObjMap (R := U.toScheme.toRingedSpace.sheaf)\n          s (𝟙 _) ≫ (e Q (SheafOfModules.unit X.ringCatSheaf)).inv = 𝟙 _"
+  "statement": "theorem dual_retraction_key\n    {X : Scheme.{u}} {P Q : X.Modules} (f : P ⟶ Q) (U : X.Opens)\n    (s : (restrictFunctor U.ι).obj Q ⟶ (restrictFunctor U.ι).obj P)\n    (e : ∀ A B : X.Modules,\n      (restrictFunctor U.ι).obj (SheafOfModules.homObj\n        (R := X.sheaf) A B) ≅\n        SheafOfModules.homObj (R := U.toScheme.sheaf)\n          ((restrictFunctor U.ι).obj A) ((restrictFunctor U.ι).obj B))\n    (he : ∀ {A A' B B' : X.Modules} (a : A' ⟶ A) (b : B ⟶ B'),\n      (restrictFunctor U.ι).map\n          (SheafOfModules.homObjMap (R := X.sheaf) a b) ≫\n        (e A' B').hom = (e A B).hom ≫\n          SheafOfModules.homObjMap (R := U.toScheme.sheaf)\n            ((restrictFunctor U.ι).map a) ((restrictFunctor U.ι).map b))\n    (hs : s ≫ (restrictFunctor U.ι).map f = 𝟙 _) :\n    (restrictFunctor U.ι).map (dualMap f) ≫\n        (e P (SheafOfModules.unit X.ringCatSheaf)).hom ≫\n        SheafOfModules.homObjMap (R := U.toScheme.sheaf)\n          s (𝟙 _) ≫ (e Q (SheafOfModules.unit X.ringCatSheaf)).inv = 𝟙 _"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -113,11 +114,34 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "X-4728c",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T201738-L-3965382",
+  "landing": "20261013T222413-L-1226536",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node; both modules compiled, the original caller failed against the changed theorem, and the adapted caller compiled with allowed axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "S1 stage 2",
+  "old_statement": "Given a restriction internal-Hom isomorphism family e, a local section s of f, the composite of the restricted transpose with the conjugated precomposition map is the identity.",
+  "what": "The arbitrary isomorphism family was missing the naturality assumed by the proof. At U=X, on a rank-two rational vector bundle, take f to swap basis vectors and s=f inverse. A comparison changed by diag(2,1) need not commute with f dual, so its conjugated precomposition is not a retraction of the fixed transpose. Adding naturality restores the intended restriction comparison, already supplied by the sole caller.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 0EKP, transpose compatibility"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Expand the naturality equation of the internal-Hom restriction isomorphisms, then compose with precomposition by s. Contravariant functoriality of homObjMap reduces the composite to precomposition by s followed by f, which is the identity by hs. The detailed reassociation and cancellation are postponed in this intermediate theorem.",
+    "uses": [
+     "def-weil-pbc-scheme-conventions",
+     "def-weil-sheaf-of-modules-category",
+     "def-pur-sheaf-hom",
+     "def-pur-localized-ringed-site"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }

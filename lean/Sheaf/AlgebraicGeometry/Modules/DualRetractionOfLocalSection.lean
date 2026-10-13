@@ -42,6 +42,6 @@ theorem isSplitMono_restrict_dualMap_of_local_section
       SheafOfModules.homObjMap (R := U.toScheme.toRingedSpace.sheaf) s (𝟙 _) ≫
       (e Q (SheafOfModules.unit X.ringCatSheaf)).inv
   refine IsSplitMono.mk ⟨⟨r, ?_⟩⟩
-  exact dual_retraction_key f U s e hs
+  exact dual_retraction_key f U s e he hs
 
 end AlgebraicGeometry.Scheme.Modules
