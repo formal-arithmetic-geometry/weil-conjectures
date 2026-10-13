@@ -13278,3 +13278,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:59 L: returned deliver/D4/Sheaf.Paper.GlobalTensorPullbackMonoidalNormalization (reviewer RETURN: (reviewer X-1420a, head 1420aa8fb) B3/C1: `lem-sc-global-sections-lax-monoidal-data.json` cites nonexistent node `lem-sc)
 
 - 02:01 L: batch 20261013T172648 dependency take-out
+- 18:01 L: returned deliver/R1/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-78644, head 786440492) E2/E5 (brief point 4): RingTheory.preserves_colimit_of_filtered_commring is false wit)
