@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.FieldTheory.Galois.Basic
-import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
 
 /-!
 # Fibre product of a finite Galois field extension
@@ -49,6 +48,35 @@ theorem finiteGaloisTensorCoproduct
       (∀ q : E ≃ₐ[L] E,
         Sigma.ι (fun _ : E ≃ₐ[L] E => Spec (.of E)) q ≫ e.hom ≫
           pullback.snd _ _ = Spec.map (CommRingCat.ofHom q.toRingEquiv.toRingHom)) := by
-  sorry
+  classical
+  let R : (E ≃ₐ[L] E) → CommRingCat := fun _ ↦ .of E
+  let eφ := Scheme.Spec.mapIso φ.toRingEquiv.toCommRingCatIso.op
+  refine ⟨asIso (sigmaSpec R) ≪≫ eφ ≪≫ (pullbackSpecIso L E E).symm, ?_, ?_⟩
+  · intro q
+    simp only [Iso.trans_hom, asIso_hom, Iso.symm_hom, Category.assoc,
+      pullbackSpecIso_inv_fst]
+    rw [ι_sigmaSpec_assoc R q]
+    change Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun _ : E ≃ₐ[L] E ↦ E) q)) ≫
+      Spec.map (CommRingCat.ofHom φ.toRingHom) ≫
+      Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom) = _
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    have h : (CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom) ≫
+        CommRingCat.ofHom φ.toRingHom ≫
+        CommRingCat.ofHom (Pi.evalRingHom (fun _ : E ≃ₐ[L] E ↦ E) q) =
+        𝟙 (CommRingCat.of E) := by
+      ext a
+      simpa using hφ a 1 q
+    rw [Category.assoc, h, Spec.map_id]
+  · intro q
+    simp only [Iso.trans_hom, asIso_hom, Iso.symm_hom, Category.assoc,
+      pullbackSpecIso_inv_snd]
+    rw [ι_sigmaSpec_assoc R q]
+    change Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun _ : E ≃ₐ[L] E ↦ E) q)) ≫
+      Spec.map (CommRingCat.ofHom φ.toRingHom) ≫
+      Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom) = _
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext b
+    simpa using hφ 1 b q
 
 end AlgebraicGeometry

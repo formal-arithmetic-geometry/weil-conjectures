@@ -30,26 +30,32 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with R=L and A=B=E: W is Spec(E tensor_L E), and its projections come from a mapsto a tensor 1 and b mapsto 1 tensor b. The inverse of the given L-algebra isomorphism phi induces W = Spec(E tensor_L E) isomorphic to Spec(product_{q in Q} E). By [lem-weil-pbc-spec-finite-product-fields], the maps $\\operatorname{Spec}E\\to\\operatorname{Spec}(\\prod_{q\\in Q}E)$ induced by the coordinate projections are open immersions with pairwise disjoint images covering the spectrum. Morphisms defined separately on these disjoint open pieces glue uniquely, so they exhibit this spectrum as the coproduct of the Q copies of Spec E. On component q, composing the coordinate projection with phi sends a tensor b to a q(b); in particular a tensor 1 maps to a and 1 tensor b maps to q(b). By contravariance, the restrictions of the two projections of W are respectively id_(Spec E) and Spec q. Since Q contains the identity automorphism, the finite-product statement applies also when E=L (one component).",
+   "text": "Use Mathlib AlgebraicGeometry.sigmaSpec with the constant family of rings E indexed by Aut_L(E). Its finite-index IsIso instance gives the isomorphism from the coproduct of Spec E to Spec of the product ring; AlgebraicGeometry.ι_sigmaSpec identifies each component map with Spec of coordinate evaluation. This is the finite-product spectrum step directly supplied by Mathlib, without the unfinished finite-product-fields theorem.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Spec to the opposite of the ring isomorphism underlying the supplied algebra isomorphism phi, giving Spec of the product ring isomorphic to Spec(E tensor_L E). Compose with the inverse of pullbackSpecIso L E E from [lem-weil-pbc-fibre-product-affine-spectra]. This constructs the required coproduct-to-pullback isomorphism.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-spec-finite-product-fields"
+    "lem-weil-pbc-fibre-product-affine-spectra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tags 01I4 (affine fibre products) and 00ED (spectrum of a product); Tag 03SF is the surrounding Galois-cover context"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the first projection, use pullbackSpecIso_inv_fst and ι_sigmaSpec, then combine the three Spec maps using Spec.map_comp. The resulting ring homomorphism sends a to phi(a tensor 1)(q)=a q(1)=a by hphi, so it is the identity. For the second projection use pullbackSpecIso_inv_snd: the corresponding composite sends b to phi(1 tensor b)(q)=q(b), again by hphi. Ring-homomorphism extensionality and contravariant functoriality prove both required equations. No nontriviality assumption on the automorphism group is used, so this includes E=L.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-spec-finite-product-fields"
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 03SF"
+  "place": "Tag 03SF; affine-fibre-product step via Mathlib pullbackSpecIso and the finite-product spectrum step via Mathlib sigmaSpec and its finite-index IsIso instance; Lean proof by E2"
  },
  "mathlib_searches": [
   {
@@ -146,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T040744-L-3947597",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
