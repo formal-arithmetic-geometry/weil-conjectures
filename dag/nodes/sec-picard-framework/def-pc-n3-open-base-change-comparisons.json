@@ -1,0 +1,107 @@
+{
+ "id": "def-pc-n3-open-base-change-comparisons",
+ "kind": "definition",
+ "title": "Explicit open direct-image and base-change source comparisons",
+ "statement": "Let f:X→S be a morphism of schemes [def-pc-scheme], with derived categories of O-modules [def-pc-derived-category] and derived direct image Rf_* [def-pc-derived-direct-image]. For an open V⊆S, put U=f⁻¹V, f₀=f|V, and let R_S and R_X be restriction to V and U [def-pc-derived-open-restriction-maps]. Define singleComplexOpenDirectImageIso(f,V):Rf_*⋙R_S≅R_X⋙Rf₀_* by deriving the sectionwise identity f_*M|V=f₀_*(M|U), using exact restriction and preservation of K-injectives. Explicitly compose the inverse of rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorNatIso of the underived sectionwise identity, rightDerivedFunctorCompIso for restriction followed by f₀_*, and rightDerivedFunctorIsoMapDerivedCategory whiskered by Rf₀_*. For g:S′→S, K∈D(O_X), opens V⊆S and V′⊆S′ with V′⊆g⁻¹V, define singleComplexOpenBaseChangeSourceIso(f,g,K,V,V′):R_{S′}(Lg*Rf_*K)≅L(g|V′)*Rf₀_*(R_XK). Its factors are inverse open pullback on S′ [def-pc-single-complex-open-restriction-data], composition along V′.ι and g [lem-pc-ringed-spaces-derived-pullback-composition], the equality g|V′≫V.ι=V′.ι≫g, inverse composition along g|V′ and V.ι, L(g|V′)* of open pullback on S, and L(g|V′)* of singleComplexOpenDirectImageIso(f,V). These are real constructed data, with no arbitrary existence witness.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE and 08HY; explicit derived-functor construction and counit calculation, with Tag 0D5S composition coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived open base change mate isomorphism counit compatibility",
+   "results": "Derived adjunction factorization and mateEquiv_counit lemmas found; no scheme-level canonical comparison identity.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, mateEquiv_hcomp, mateEquiv_vcomp and counit compatibility found. None constructs the open scheme comparison.",
+   "date": "2026-10-13",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "openRestriction|[Bb]aseChange.*[Pp]ast",
+   "results": "Mathlib search had no hits. Project rg found schemeDerivedDirectImage_openRestriction (Nonempty only), schemeDerivedBaseChange_pasting (upper-left pasting only), SingleComplexOpenUnitNaturality (unit compatibility for source-open comparison, not this identity). Canonical data here exposes the explicit construction of the existing open direct-image existence proof.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate canonical data or fixed identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image sectionwise open restriction comparison counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-single-complex-open-base-change-identity",
+   "place": "explicit comparison data and residual mate calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenBaseChangeComparisons.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenDirectImageIso",
+  "statement": "def singleComplexOpenDirectImageIso\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :\n    schemeDerivedDirectImage f ⋙ (schemeOpenRestriction Y V).mapDerivedCategory ≅\n      (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory ⋙\n        schemeDerivedDirectImage (f ∣_ V)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexOpenDirectImageIso",
+   "AlgebraicGeometry.singleComplexOpenBaseChangeSourceIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T125013-L-3838151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T125013-L-3838151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

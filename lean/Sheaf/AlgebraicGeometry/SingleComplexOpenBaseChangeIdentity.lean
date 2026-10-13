@@ -6,6 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
+import Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Restrict
 
@@ -71,6 +72,9 @@ theorem singleComplexOpen_baseChange_identity
         a.hom ≫ schemeDerivedBaseChangeMap
           (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w K₀ ≫
           (schemeDerivedDirectImage (f' ∣_ V')).map δ ≫
-          b.inv.app ((derivedPullback g').obj K) := by sorry
+          b.inv.app ((derivedPullback g').obj K) := by
+  refine ⟨singleComplexOpenBaseChangeSourceIso f g K V V' hV',
+    singleComplexOpenDirectImageIso f' V', ?_⟩
+  exact singleComplexOpen_baseChange_calculation f f' g g' sq K V V' hV' j hj sq₀
 
 end AlgebraicGeometry
