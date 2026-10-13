@@ -1,0 +1,141 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Homology, lemma-double-complex-gives-resolution, canonical augmentation; Tag 012X, second filtration and its graded differential; augmented-cone refinement of parent proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded piece column filtration augmentation mapping cone short complex isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short complex isomorphism between the graded piece of a column filtered augmentation mapping cone and the column mapping cone",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingConeHomOfDegreewiseSplitXIso; CochainComplex.mappingConeHomOfDegreewiseSplitIso. These commute additive functors with cones or split a short exact sequence; none treats the column filtration quotient.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMapIso",
+   "results": "0 hits: unknown identifier 'ShortComplex.homologyMapIso'. Local source confirms the namespaced CategoryTheory.ShortComplex.homologyMapIso exists, but it only passes an already constructed short-complex iso to homology.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*shortComplex|shortComplex.*graded|graded.*mappingCone",
+   "results": "0 Mathlib hits. Repository search finds the first-quadrant natural-indexed ConeHorizontalGradedIso, whose cone and cutoff formula differ; no matching integer-indexed augmented-cone short-complex result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sp-cartan-eilenberg-cone-graded-normalized-differential",
+ "title": "Adjacent differential compatibility of normalized column-cone maps",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $K$ an integer-indexed cochain complex, $I$ a bicomplex with complex index $s\\in\\mathbf Z$ and resolution index $r\\in\\mathbf N$ [def-sp-double-complex-total], and $a:K[0]\\to I$ a bicomplex map, where $K[0]$ concentrates $K^s$ in resolution degree zero. Let $b\\in\\mathbf Z$, assume $I^{s,\\bullet}=0$ and $K^s=0$ for $s<b$, and let $J$ be the identity-mapped, extended-by-zero and flipped bicomplex [def-sp-cartan-eilenberg-presentation]. Let $\\epsilon:K\\to\\operatorname{Tot}(J)$ be a chain map, $C=\\operatorname{Cone}(\\epsilon)$ [lem-pur-quasi-iso-cone-acyclic], and $F$ a decreasing subcomplex filtration of $C$ [def-sp-filtration]. Write $u_t:K^{t+1}\\to C^t$ and $v_t:\\operatorname{Tot}(J)^t\\to C^t$ for the cone inclusions. Assume its degreewise image steps [def-sp-filtered-complex-subquotients] satisfy $F^qC^t=(\\operatorname{im}(u_t)\\text{ if }q\\le t+1\\text{, else }0)+\\sum_{s=\\max(b,q)}^t\\operatorname{im}(J^{t-s,s}\\to\\operatorname{Tot}(J)^t\\xrightarrow{v_t}C^t)$, with empty sum zero. Set $D_p=\\operatorname{Cone}(\\operatorname{extend}(a^p))$, $G_p=\\operatorname{gr}^p_F C$, and let $\\pi_{p,t}:(F^pC)^t\\to G_p^t$ be the quotient map. A degreewise isomorphism $e:G_p^t\\cong D_p^{t-p}$ is called normalized if (1) for every $r\\in\\mathbf N$ with $r+p=t$ there is a lift $l:I^{p,r}\\to(F^pC)^t$ whose composite with the filtration inclusion is the $(r,p)$ diagonal inclusion followed by $v_t$, and whose composite with $\\pi_{p,t}$ is the canonical inclusion of $I^{p,r}$ into $D_p^{t-p}$ followed by $e^{-1}$, using the extension identifications on both sides; and (2) when $t+1=p$ there is a lift $l:K^p\\to(F^pC)^t$ whose composite with the filtration inclusion is $u_t$ after the index identification, and whose composite with $\\pi_{p,t}$ is the canonical inclusion of $K^p$ into $D_p^{-1}$ followed by $e^{-1}$. The lifts are unique by monicity of the filtration inclusion. Assume additionally that $\\epsilon^s$ equals $a^{s,0}$ followed by the extension identification and the $(0,s)$ diagonal inclusion. For $p,t,t'\\in\\mathbf Z$ with $t+1=t'$, and normalized isomorphisms $e:G_p^t\\cong D_p^{t-p}$ and $e':G_p^{t'}\\cong D_p^{t'-p}$ [lem-sp-cartan-eilenberg-cone-graded-normalized-iso], we have $e^{-1}\\,d_{G_p}^{t,t'}=d_{D_p}^{t-p,t'-p}\\,(e')^{-1}$. This concerns one adjacent differential and assumes the specified degreewise maps.",
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sp-cartan-eilenberg-cone-graded-normalized-iso"
+ ],
+ "proof": [
+  {
+   "text": "precompose the asserted equality with the two inclusions of the column\ncone. In negative resolution degrees both sources are zero, except for K in\ncone degree -1. For an I term use the normalization lift in degree m. The\nfiltration arrow is monic and commutes with the cone differential, so its lift\nhas the same differential as its ambient diagonal inclusion. The horizontal\ndifferential raises the complex index to p+1 and factors through step p+1;\nits graded image is zero. The resolution differential preserves index p and\nhas coefficient one in the flipped total, and its lift in degree m+1 is the\none in the I normalization equation. On K in degree p-1, the -d_K term\nraises index and vanishes in the quotient. The augmentation term is, by haug,\nthe resolution-zero column inclusion of (a.f p).f 0; normalization in degree p\nidentifies it with the off-diagonal column-cone differential. Extension by zero\nkills all other components. Equality on the cone's jointly epic biproduct\ninclusions proves the equality. This uses the specified lifts, never arbitrary\nobject isomorphisms.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration",
+    "lem-sp-cartan-eilenberg-cone-graded-normalized-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-cartan-eilenberg-cone-graded-normalized-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "U3 explicit refinement of parent steps 3, using normalized retained summand lifts; canonical augmentation from Tag 0133"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergConeGradedShortComplex",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: canonical quasi-isomorphism from the augmented Cartan--Eilenberg resolution to its total; graded column-cone calculation in the finite-diagonal filtration.",
+   "via": [
+    "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso",
+    "lem-sp-cartan-eilenberg-cone-filtration-properties",
+    "lem-sp-cartan-eilenberg-cone-filtration",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedNormalizedDifferential",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedNormalizedDifferential.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_normalized_differential",
+  "statement": "theorem cartanEilenberg_cone_graded_normalized_differential\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K ⟶ I)\n    (b : ℤ)\n    (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (haug : ∀ n : ℤ, aug.f n = (a.f n).f 0 ≫\n      (HomologicalComplex.extendXIso\n        (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n))\n        ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n      (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n        (ComplexShape.up ℤ) 0 n n (zero_add n))\n    (F : DecreasingFiltration (CochainComplex.mappingCone aug))\n    (hF : ∀ p n : ℤ, F.complexStep p n =\n        (if p ≤ n + 1 then imageSubobject\n          ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔\n        (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject\n          ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero\n            (ComplexShape.up ℤ) (n - s) s n ≫\n              (CochainComplex.mappingCone.inr aug).f n)))\n    (p m m' : ℤ) (hmm' : m + 1 = m')\n    (e : (F.gradedPiece p).X m ≅ (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).X (m - p))\n    (e' : (F.gradedPiece p).X m' ≅ (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).X (m' - p))\n    (he : CartanEilenbergConeGradedNormalized K I a aug F p m e)\n    (he' : CartanEilenbergConeGradedNormalized K I a aug F p m' e') :\n    e.inv ≫ (F.gradedPiece p).d m m' =\n      (CochainComplex.mappingCone\n        (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).d\n        (m - p) (m' - p) ≫ e'.inv",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T025309-L-3425145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
