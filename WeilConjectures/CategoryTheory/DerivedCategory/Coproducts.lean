@@ -8,192 +8,101 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.DerivabilityStructureKInjectives
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-!
-# Coproducts in derived categories
+# Coproducts in the derived category
 
-Let `C` be an abelian category with K-injective resolutions and with coproducts of shape `J`.
-We show that the derived category `D(C)` has coproducts of shape `J` and that the
-localization functor `Q : CochainComplex C ℤ ⥤ D(C)` preserves them: a coproduct of complexes
-(computed degreewise) is also a coproduct in `D(C)`.
+Let `C` be an abelian category with K-injective resolutions. We show that a coproduct of
+cochain complexes (which is computed degreewise) is also a coproduct in the derived category
+(`DerivedCategory.isColimitCofanMkQObj`). No exactness of coproducts is needed: for a K-injective
+complex `I`, morphisms `Q.obj X ⟶ Q.obj I` in the derived category are homotopy classes of
+morphisms `X ⟶ I` (`DerivedCategory.homEquivOfIsKInjective`), and homotopy classes of morphisms
+out of a coproduct are families of homotopy classes of morphisms out of the summands
+(`HomotopyCategory.isColimitCofanQuotient`).
 
-The proof goes through the homotopy category: the quotient functor to the homotopy category
-preserves coproducts, because homotopies can be glued along a coproduct of complexes; and for a
-K-injective complex `I`, morphisms `Q(K) ⟶ Q(I)` in `D(C)` are homotopy classes of morphisms
-`K ⟶ I`. Since every object of `D(C)` is the image of a K-injective complex, this shows that
-`Q` sends coproducts of complexes to coproducts.
+## Main definitions and statements
 
-As a consequence, a functor `G : D(C) ⥤ E` preserves coproducts of shape `J` as soon as
-`Q ⋙ G` does; in particular, for an exact functor `F : C ⥤ D` preserving coproducts of shape
-`J` (with `D` satisfying the same assumptions), the induced functor `F.mapDerivedCategory`
-preserves coproducts of shape `J`.
-
-## Main statements
-
-- `HomotopyCategory.preservesColimitsOfShape_quotient`: the quotient functor to the homotopy
-  category preserves coproducts.
-- `DerivedCategory.preservesColimitsOfShape_Q`: `Q : CochainComplex C ℤ ⥤ D(C)` preserves
-  coproducts of shape `J`.
-- `DerivedCategory.hasColimitsOfShape_discrete`: `D(C)` has coproducts of shape `J`.
-- `DerivedCategory.preservesColimitsOfShape_of_Q_comp`: a functor out of `D(C)` preserves
-  coproducts of shape `J` if its composition with `Q` does.
+- `DerivedCategory.homEquivOfIsKInjective`: morphisms `Q.obj K ⟶ Q.obj L` for `L` K-injective
+  are morphisms in the homotopy category.
+- `DerivedCategory.isColimitCofanMkQObj`: coproducts of cochain complexes are coproducts in the
+  derived category.
+- `DerivedCategory.preservesColimitsOfShape_Q`, `DerivedCategory.hasColimitsOfShape_discrete`:
+  `Q` preserves coproducts and `D(C)` has coproducts of shape `J` if `C` does.
 - `CategoryTheory.Functor.preservesColimitsOfShape_mapDerivedCategory`: the functor induced on
   derived categories by an exact functor preserving coproducts preserves coproducts.
 -/
 
 @[expose] public section
 
-open CategoryTheory Limits Abelian
-
-namespace CategoryTheory.Limits.Cofan
-
-variable {C : Type*} [Category* C] {J : Type*} {f : J → C}
-
-/-- A cofan `c` is a colimit cofan if, for every object `Y`, a morphism `c.pt ⟶ Y` is uniquely
-determined by its compositions with the injections, and every family of morphisms arises in
-this way. -/
-noncomputable def isColimitOfBijective (c : Cofan f)
-    (h : ∀ Y : C, Function.Bijective (fun (φ : c.pt ⟶ Y) (j : J) ↦ c.inj j ≫ φ)) :
-    IsColimit c :=
-  Cofan.IsColimit.mk c (fun s ↦ (Equiv.ofBijective _ (h s.pt)).symm s.inj)
-    (fun s j ↦ congrFun ((Equiv.ofBijective _ (h s.pt)).apply_symm_apply s.inj) j)
-    (fun s m hm ↦ (Equiv.ofBijective _ (h s.pt)).injective (by
-      rw [Equiv.apply_symm_apply]
-      funext j
-      exact hm j))
-
-/-- For a colimit cofan `c`, morphisms out of `c.pt` are the same as families of morphisms out
-of the components. -/
-lemma bijective_of_isColimit {c : Cofan f} (hc : IsColimit c) (Y : C) :
-    Function.Bijective (fun (φ : c.pt ⟶ Y) (j : J) ↦ c.inj j ≫ φ) :=
-  ⟨fun _ _ h ↦ Cofan.IsColimit.hom_ext hc _ _ fun j ↦ congrFun h j,
-    fun g ↦ ⟨Cofan.IsColimit.desc hc g, funext fun j ↦ Cofan.IsColimit.fac hc g j⟩⟩
-
-/-- The bijectivity condition of `Cofan.isColimitOfBijective` is invariant under isomorphisms
-of the test object. -/
-lemma bijective_of_iso (c : Cofan f) {Y Y' : C} (e : Y ≅ Y')
-    (h : Function.Bijective (fun (φ : c.pt ⟶ Y) (j : J) ↦ c.inj j ≫ φ)) :
-    Function.Bijective (fun (φ : c.pt ⟶ Y') (j : J) ↦ c.inj j ≫ φ) := by
-  have key : (fun (φ : c.pt ⟶ Y') (j : J) ↦ c.inj j ≫ φ) =
-      (fun (ψ : ∀ j, f j ⟶ Y) (j : J) ↦ ψ j ≫ e.hom) ∘
-        (fun (φ : c.pt ⟶ Y) (j : J) ↦ c.inj j ≫ φ) ∘ (fun φ ↦ φ ≫ e.inv) := by
-    funext φ j
-    simp
-  rw [key]
-  refine Function.Bijective.comp ?_ (h.comp ?_)
-  · exact (Function.bijective_iff_has_inverse).2 ⟨fun ψ j ↦ ψ j ≫ e.inv,
-      fun ψ ↦ by simp, fun ψ ↦ by simp⟩
-  · exact (Function.bijective_iff_has_inverse).2 ⟨fun φ ↦ φ ≫ e.hom,
-      fun φ ↦ by simp, fun φ ↦ by simp⟩
-
-/-- A functor preserves coproducts of shape `J` if it sends colimit cofans to colimit cofans. -/
-lemma _root_.CategoryTheory.Functor.preservesColimitsOfShape_discrete_of_isColimit_cofan
-    {D : Type*} [Category* D] (F : C ⥤ D)
-    (h : ∀ (K : J → C) (s : Cofan K), IsColimit s →
-      Nonempty (IsColimit (Cofan.mk (F.obj s.pt) fun j ↦ F.map (s.inj j)))) :
-    PreservesColimitsOfShape (Discrete J) F := by
-  have (K : J → C) : PreservesColimit (Discrete.functor K) F :=
-    ⟨fun {s} hs ↦ ⟨(isColimitMapCoconeCofanMkEquiv F K (Cofan.inj (f := K) s)).symm
-      (h K s hs).some⟩⟩
-  exact preservesColimitsOfShape_of_discrete F
-
-end CategoryTheory.Limits.Cofan
-
-namespace HomotopyCategory
-
-variable {C : Type*} [Category* C] [Preadditive C] {ι : Type*} {c : ComplexShape ι}
-
-/-- Homotopies can be glued along a coproduct of complexes which is computed degreewise: if
-`s` is a cofan of complexes such that each degree is a colimit cofan, and the compositions of
-`f, g : s.pt ⟶ L` with all the injections are homotopic, then `f` and `g` are homotopic. -/
-noncomputable def homotopyOfCofan {J : Type*} {K : J → HomologicalComplex C c} (s : Cofan K)
-    (hs : ∀ i, IsColimit (Cofan.mk (s.pt.X i) fun j ↦ (s.inj j).f i))
-    {L : HomologicalComplex C c} (f g : s.pt ⟶ L)
-    (H : ∀ j, Homotopy (s.inj j ≫ f) (s.inj j ≫ g)) : Homotopy f g where
-  hom i i' := Cofan.IsColimit.desc (hs i) fun j ↦ (H j).hom i i'
-  zero i i' hii' := Cofan.IsColimit.hom_ext (hs i) _ _ fun j ↦ by
-    simp only [Cofan.IsColimit.fac, comp_zero]
-    exact (H j).zero i i' hii'
-  comm i := Cofan.IsColimit.hom_ext (hs i) _ _ fun j ↦ by
-    have hfac (a b : ι) : (s.inj j).f a ≫ Cofan.IsColimit.desc (hs a)
-        (fun j ↦ (H j).hom a b) = (H j).hom a b := Cofan.IsColimit.fac (hs a) _ j
-    have h₁ := dNext_comp_left (s.inj j) (fun a b ↦ Cofan.IsColimit.desc (hs a)
-      (fun j ↦ (H j).hom a b)) i
-    have h₂ := prevD_comp_left (s.inj j) (fun a b ↦ Cofan.IsColimit.desc (hs a)
-      (fun j ↦ (H j).hom a b)) i
-    simp only [hfac] at h₁ h₂
-    have := (H j).comm i
-    simp only [HomologicalComplex.comp_f] at this
-    simp only [cofan_mk_inj, Preadditive.comp_add, ← h₁, ← h₂, this]
-
-variable (C c) in
-/-- The quotient functor to the homotopy category preserves coproducts (computed
-degreewise). -/
-instance preservesColimitsOfShape_quotient (J : Type*) [HasColimitsOfShape (Discrete J) C] :
-    PreservesColimitsOfShape (Discrete J) (quotient C c) := by
-  refine Functor.preservesColimitsOfShape_discrete_of_isColimit_cofan _ fun K s hs ↦ ⟨?_⟩
-  have hs' (i : ι) : IsColimit (Cofan.mk (s.pt.X i) fun j ↦ (s.inj j).f i) :=
-    isColimitCofanMkObjOfIsColimit (HomologicalComplex.eval C c i) K s.inj
-      (hs : IsColimit (Cofan.mk s.pt s.inj))
-  refine Cofan.isColimitOfBijective _ fun Y ↦ ?_
-  obtain ⟨L, rfl⟩ := quotient_obj_surjective Y
-  refine ⟨fun φ₁ φ₂ h ↦ ?_, fun ψ ↦ ?_⟩
-  · obtain ⟨f, rfl⟩ := (quotient C c).map_surjective φ₁
-    obtain ⟨g, rfl⟩ := (quotient C c).map_surjective φ₂
-    refine eq_of_homotopy _ _ (homotopyOfCofan s hs' f g fun j ↦ homotopyOfEq _ _ ?_)
-    simpa only [Functor.map_comp, cofan_mk_inj] using congrFun h j
-  · choose g hg using fun j ↦ (quotient C c).map_surjective (ψ j)
-    refine ⟨(quotient C c).map (Cofan.IsColimit.desc hs g), funext fun j ↦ ?_⟩
-    simp only [cofan_mk_inj, ← Functor.map_comp, Cofan.IsColimit.fac, hg]
-
-end HomotopyCategory
+open CategoryTheory Limits Category
 
 namespace DerivedCategory
 
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
-/-- Every object of the derived category is isomorphic to the image of a K-injective
-complex. -/
-lemma exists_iso_Qh_quotient_obj [HasKInjectiveResolutions C] (Y : DerivedCategory C) :
-    ∃ (I : CochainComplex C ℤ) (_ : I.IsKInjective),
-      Nonempty (Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj I) ≅ Y) := by
-  obtain ⟨I, hI, h⟩ := ((HomotopyCategory.KInjectives.Qh (C := C)).objPreimage Y).mk_surjective
-  exact ⟨I, hI, ⟨(HomotopyCategory.KInjectives.Qh (C := C)).mapIso (eqToIso h.symm) ≪≫
-    (HomotopyCategory.KInjectives.Qh (C := C)).objObjPreimageIso Y⟩⟩
+/-- For a K-injective complex `L`, morphisms `Q.obj K ⟶ Q.obj L` in the derived category
+identify with morphisms in the homotopy category. -/
+noncomputable def homEquivOfIsKInjective (K L : CochainComplex C ℤ) [L.IsKInjective] :
+    ((HomotopyCategory.quotient C (.up ℤ)).obj K ⟶ (HomotopyCategory.quotient C (.up ℤ)).obj L) ≃
+      (Q.obj K ⟶ Q.obj L) :=
+  (Equiv.ofBijective _ (CochainComplex.IsKInjective.Qh_map_bijective _ L)).trans
+    (Iso.homCongr ((quotientCompQhIso C).app K) ((quotientCompQhIso C).app L))
 
-variable [HasKInjectiveResolutions C]
+@[simp]
+lemma homEquivOfIsKInjective_quotient_map {K L : CochainComplex C ℤ} [L.IsKInjective]
+    (f : K ⟶ L) :
+    homEquivOfIsKInjective K L ((HomotopyCategory.quotient C (.up ℤ)).map f) = Q.map f := by
+  simp [homEquivOfIsKInjective]
 
-/-- The functor `Qh : K(C) ⥤ D(C)` preserves coproducts: morphisms from the image of a
-coproduct to the image of a K-injective complex are morphisms in the homotopy category. -/
-instance preservesColimitsOfShape_Qh (J : Type*) :
-    PreservesColimitsOfShape (Discrete J) (Qh (C := C)) := by
-  refine Functor.preservesColimitsOfShape_discrete_of_isColimit_cofan _ fun K s hs ↦ ⟨?_⟩
-  refine Cofan.isColimitOfBijective _ fun Y ↦ ?_
-  obtain ⟨I, _, ⟨e⟩⟩ := exists_iso_Qh_quotient_obj Y
-  refine Cofan.bijective_of_iso _ e ?_
-  have key : (fun (φ : Qh.obj s.pt ⟶ Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj I))
-      (j : J) ↦ (Cofan.mk (Qh.obj s.pt) fun j ↦ Qh.map (s.inj j)).inj j ≫ φ) ∘ Qh.map =
-      (fun ψ j ↦ Qh.map (ψ j)) ∘ (fun φ (j : J) ↦ s.inj j ≫ φ) := by
-    funext φ j
-    simp
-  have h₂ : Function.Bijective ((fun (ψ : ∀ j, K j ⟶ (HomotopyCategory.quotient C _).obj I)
-      (j : J) ↦ Qh.map (ψ j)) ∘ (fun φ (j : J) ↦ s.inj j ≫ φ)) := by
-    refine Function.Bijective.comp ⟨fun ψ₁ ψ₂ h ↦ funext fun j ↦ ?_, fun ψ ↦ ?_⟩
-      (Cofan.bijective_of_isColimit hs _)
-    · exact (CochainComplex.IsKInjective.Qh_map_bijective (K j) I).1 (congrFun h j)
-    · exact ⟨fun j ↦ ((CochainComplex.IsKInjective.Qh_map_bijective (K j) I).2 (ψ j)).choose,
-        funext fun j ↦
-          ((CochainComplex.IsKInjective.Qh_map_bijective (K j) I).2 (ψ j)).choose_spec⟩
-  rw [← key] at h₂
-  exact (Function.Bijective.of_comp_iff _
-    (CochainComplex.IsKInjective.Qh_map_bijective s.pt I)).1 h₂
+lemma homEquivOfIsKInjective_quotient_map_comp {K K' L : CochainComplex C ℤ} [L.IsKInjective]
+    (u : K' ⟶ K) (g : (HomotopyCategory.quotient C (.up ℤ)).obj K ⟶
+      (HomotopyCategory.quotient C (.up ℤ)).obj L) :
+    homEquivOfIsKInjective K' L ((HomotopyCategory.quotient C (.up ℤ)).map u ≫ g) =
+      Q.map u ≫ homEquivOfIsKInjective K L g := by
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective g
+  rw [← Functor.map_comp, homEquivOfIsKInjective_quotient_map,
+    homEquivOfIsKInjective_quotient_map, Functor.map_comp]
+
+lemma homEquivOfIsKInjective_comp_quotient_map {K L L' : CochainComplex C ℤ} [L.IsKInjective]
+    [L'.IsKInjective] (g : (HomotopyCategory.quotient C (.up ℤ)).obj K ⟶
+      (HomotopyCategory.quotient C (.up ℤ)).obj L) (v : L ⟶ L') :
+    homEquivOfIsKInjective K L' (g ≫ (HomotopyCategory.quotient C (.up ℤ)).map v) =
+      homEquivOfIsKInjective K L g ≫ Q.map v := by
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective g
+  rw [← Functor.map_comp, homEquivOfIsKInjective_quotient_map,
+    homEquivOfIsKInjective_quotient_map, Functor.map_comp]
+
+variable [Abelian.HasKInjectiveResolutions C]
+
+/-- If `C` has K-injective resolutions, a coproduct of cochain complexes (which is computed
+degreewise) is also a coproduct in the derived category. -/
+noncomputable def isColimitCofanMkQObj {β : Type*} {K : β → CochainComplex C ℤ} {s : Cofan K}
+    (hs : IsColimit s) : IsColimit (Cofan.mk (Q.obj s.pt) fun j ↦ Q.map (s.inj j)) := by
+  refine Cofan.IsColimit.ofBijective _ fun Y ↦ ?_
+  obtain ⟨I, _, ⟨e⟩⟩ := exists_iso_Q_obj_of_isKInjective Y
+  refine Cofan.bijective_of_iso _ e.symm ?_
+  have h := Cofan.IsColimit.bijective (HomotopyCategory.isColimitCofanQuotient hs)
+    ((HomotopyCategory.quotient C (.up ℤ)).obj I)
+  have : (fun (g : Q.obj s.pt ⟶ Q.obj I) (j : β) ↦ Q.map (s.inj j) ≫ g) =
+      (Equiv.piCongrRight fun j ↦ homEquivOfIsKInjective (K j) I) ∘
+        (fun g (j : β) ↦ (HomotopyCategory.quotient C (.up ℤ)).map (s.inj j) ≫ g) ∘
+          (homEquivOfIsKInjective s.pt I).symm := by
+    ext g j
+    simp [homEquivOfIsKInjective_quotient_map_comp]
+  exact this ▸ (Equiv.bijective _).comp (h.comp (Equiv.bijective _))
+
 
 /-- The localization functor `Q : CochainComplex C ℤ ⥤ D(C)` preserves coproducts: a
 coproduct of complexes is a coproduct in the derived category. -/
-instance preservesColimitsOfShape_Q (J : Type*) [HasColimitsOfShape (Discrete J) C] :
-    PreservesColimitsOfShape (Discrete J) (Q (C := C)) :=
-  preservesColimitsOfShape_of_natIso (quotientCompQhIso C)
+instance preservesColimitsOfShape_Q (J : Type*) :
+    PreservesColimitsOfShape (Discrete J) (Q (C := C)) := by
+  have (K : J → CochainComplex C ℤ) : PreservesColimit (Discrete.functor K) Q :=
+    ⟨fun {s} hs ↦ ⟨(isColimitMapCoconeCofanMkEquiv Q K (Cofan.inj (f := K) s)).symm
+      (isColimitCofanMkQObj (s := Cofan.mk s.pt (Cofan.inj (f := K) s)) hs)⟩⟩
+  exact preservesColimitsOfShape_of_discrete Q
 
 /-- Every family of objects of `D(C)` is isomorphic to the image under `Q` of a family of
 complexes. -/
@@ -227,8 +136,8 @@ end DerivedCategory
 namespace CategoryTheory.Functor
 
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions C]
-  [HasKInjectiveResolutions D] (F : C ⥤ D) [F.Additive]
+  [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+  [Abelian.HasKInjectiveResolutions D] (F : C ⥤ D) [F.Additive]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The functor induced on cochain complexes by a functor preserving coproducts of shape `J`

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 
@@ -24,7 +25,8 @@ the image, still factor through the image; this makes the image a group object o
 
 ## Main statements
 
-- `AlgebraicGeometry.exists_isMonHom_imageι`: the scheme-theoretic image of a homomorphism
+- `AlgebraicGeometry.exists_isClosedSubgroupScheme_imageι`,
+  `AlgebraicGeometry.exists_isMonHom_imageι`: the scheme-theoretic image of a homomorphism
   from a proper group scheme to a separated group scheme of finite type over a field is a
   closed subgroup scheme of finite type, onto which the homomorphism is surjective.
 -/
@@ -128,5 +130,34 @@ theorem exists_isMonHom_imageι (f : G ⟶ H) [IsMonHom f] [IsProper G.hom] [IsS
       rw [tensorHom_def, Over.comp_left]; infer_instance
     exact key _ (f' ⊗ₘ f') μ[G] (by rw [tensorHom_comp_tensorHom_assoc, hf, IsMonHom.mul_hom])
   exact ⟨GrpObj.ofMono j hone hmul hinv, GrpObj.isMonHom_ofMono j hone hmul hinv⟩
+
+
+/-- Blueprint `lem-sc-image-subgroup`: The image of a homomorphism is a closed subgroup scheme.
+
+Let `f : G ⟶ H` be a homomorphism of group schemes over a field `K`, with `G` proper and `H`
+separated and of finite type over `K`. Then the scheme-theoretic image `Z` of `f` is of finite
+type over `K` (locally of finite type and quasi-compact), the induced morphism `G ⟶ Z` is
+surjective, and `Z ⟶ H` is a closed subgroup scheme.
+
+This completes `AlgebraicGeometry.exists_isMonHom_imageι`: `Z` is quasi-compact as the image of
+the quasi-compact `G`, and the closed immersion `Z ⟶ H` is a monomorphism, hence injective on
+points. -/
+theorem exists_isClosedSubgroupScheme_imageι (f : G ⟶ H) [IsMonHom f] [IsProper G.hom]
+    [IsSeparated H.hom] [LocallyOfFiniteType H.hom] :
+    LocallyOfFiniteType (f.left.imageι ≫ H.hom) ∧ QuasiCompact (f.left.imageι ≫ H.hom) ∧
+      Surjective f.left.toImage ∧ ∃ _ : GrpObj (Over.mk (f.left.imageι ≫ H.hom)),
+        IsClosedSubgroupScheme
+          (Over.homMk f.left.imageι : Over.mk (f.left.imageι ≫ H.hom) ⟶ H) := by
+  obtain ⟨h₁, h₂, inst, h₃⟩ := exists_isMonHom_imageι f
+  refine ⟨h₁, ?_, h₂, inst, ?_⟩
+  · have : CompactSpace G.left := QuasiCompact.compactSpace_of_compactSpace G.hom
+    have : CompactSpace f.left.image := ⟨by
+      rw [← Set.range_eq_univ.mpr h₂.surj]
+      exact isCompact_range f.left.toImage.continuous⟩
+    exact (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).mpr this
+  · have : Mono (Over.homMk f.left.imageι : Over.mk (f.left.imageι ≫ H.hom) ⟶ H) :=
+      Over.mono_of_mono_left _
+    exact { toIsSubgroupScheme := .of_mono _, isClosedImmersion := inferInstanceAs
+      (IsClosedImmersion f.left.imageι) }
 
 end AlgebraicGeometry
