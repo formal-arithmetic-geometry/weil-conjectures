@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.GlobalSectionsPointUnitTransport
 
 /-!
 # Global-sections acyclicity of a direct image of a K-injective
@@ -53,6 +54,11 @@ theorem isIso_directImage_globalSections_unit_on_kInjective
     [I.IsKInjective] :
     IsIso ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).rightDerivedFunctorUnit.app
       (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory
-          (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I))) := by sorry
+          (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I))) := by
+  let _ : HasDerivedCategory (SheafOfModules (moduleRings (globalSectionsPoint Y))) :=
+    HasDerivedCategory.standard _
+  apply globalSections_unit_isIso_of_point_unit f I
+  exact RingedSpace.isIso_moduleDirectImage_unit_on_kInjective
+    f.toLRSHom.toShHom (toGlobalSectionsPoint Y) I
 
 end AlgebraicGeometry
