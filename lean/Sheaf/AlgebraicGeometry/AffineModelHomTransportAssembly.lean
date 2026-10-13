@@ -60,6 +60,52 @@ private theorem exists_affineTildeHomEquiv (A : CommRingCat.{u})
     ((α.app M).inv_hom_id_assoc _)
 
 
+private theorem exists_conjugatedHomEquiv
+    {C D : Type*} [Category C] [Category D] {H : Type*}
+    {X Y : C} {U V : D} (h : H ≃ (X ⟶ Y)) (e : C ≌ D)
+    (α : e.functor.obj X ≅ U) (β : e.functor.obj Y ≅ V) :
+    ∃ t : H ≃ (U ⟶ V), ∀ a, t a = α.inv ≫ e.functor.map (h a) ≫ β.hom := by
+  exact ⟨(h.trans e.fullyFaithfulFunctor.homEquiv).trans (Iso.homCongr α β),
+    fun _ ↦ rfl⟩
+
+
+private theorem conjugatedHom_congr
+    {C D : Type*} [Category C] [Category D] {X Y : C} {U V : D}
+    {f g : X ⟶ Y} (hfg : f = g) (e : C ≌ D)
+    (α : e.functor.obj X ≅ U) (β : e.functor.obj Y ≅ V) :
+    α.inv ≫ e.functor.map f ≫ β.hom = α.inv ≫ e.functor.map g ≫ β.hom := by
+  cases hfg
+  rfl
+
+
+private noncomputable def affineTildeComplex (A : CommRingCat.{u}) :=
+  @Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)
+    (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))
+    _ _ _ _ (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) (tilde.functor A))
+    ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem exists_affineTransportedHomEquiv (A : CommRingCat.{u})
+    [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))]
+    (M N : CochainComplex (ModuleCat.{u} A) ℤ)
+    {D : Type*} [Category D] (d : schemeDerivedCategory (Spec A) ≌ D) {X Y : D}
+    (α : d.functor.obj (DerivedCategory.Q.obj ((affineTildeComplex A).obj M)) ≅ X)
+    (β : d.functor.obj (DerivedCategory.Q.obj ((affineTildeComplex A).obj N)) ≅ Y) :
+    ∃ t : (DerivedCategory.Q.obj M ⟶ DerivedCategory.Q.obj N) ≃ (X ⟶ Y),
+      ∀ f : M ⟶ N, t (DerivedCategory.Q.map f) =
+        α.inv ≫ d.functor.map (DerivedCategory.Q.map ((affineTildeComplex A).map f)) ≫
+          β.hom := by
+  obtain ⟨h, hh⟩ := exists_affineTildeHomEquiv.{u, w} A M N
+  obtain ⟨t, ht⟩ := exists_conjugatedHomEquiv h d α β
+  refine ⟨t, fun f ↦ (ht (DerivedCategory.Q.map f)).trans ?_⟩
+  exact conjugatedHom_congr (hh f) d α β
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Convert coherent object comparisons to derived module Hom comparisons.
 Source: Stacks Project, Tags 06Z0, 08DW and 09RE.
 (blueprint: lem-pc-affine-model-hom-transport-assembly).
@@ -137,6 +183,42 @@ theorem exists_affineModelHomTransportAssembly
               (congrArg CommRingCat.Hom.hom (C.w (homOfLE j.property)).symm)
               E K f)) =
             perfectLimitMap R c s j.val.property
-              (stage j (DerivedCategory.Q.map f))) := by sorry
+              (stage j (DerivedCategory.Q.map f))) := by
+  rename_i hDmodule
+  rename_i hDsheaf
+  classical
+  let QM := fun A : CommRingCat.{u} ↦
+    @DerivedCategory.Q (ModuleCat.{u} A) _ _ (hDmodule A)
+  let QS := fun A : CommRingCat.{u} ↦
+    @DerivedCategory.Q (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))
+      _ _ (hDsheaf (Spec A))
+  unfold affineModelComparisonData at hcomp
+  obtain ⟨d, dlim, αE, αK, βE, βK, hstage, hlimit⟩ := hcomp
+  have hs := fun j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i) ↦
+    @exists_affineTransportedHomEquiv.{u, w} (F.obj j.val)
+      (hDmodule (F.obj j.val)) (hDsheaf (Spec (F.obj j.val)))
+      ((Functor.mapHomologicalComplex
+        (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E)
+      ((Functor.mapHomologicalComplex
+        (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj K)
+      _ _ (d j) _ _ (αE j) (αK j)
+  have hl := @exists_affineTransportedHomEquiv.{u, w} C.pt
+    (hDmodule C.pt) (hDsheaf (Spec C.pt))
+    ((Functor.mapHomologicalComplex
+      (ModuleCat.extendScalars (C.ι.app ⟨i, le_rfl⟩).hom) (.up ℤ)).obj E)
+    ((Functor.mapHomologicalComplex
+      (ModuleCat.extendScalars (C.ι.app ⟨i, le_rfl⟩).hom) (.up ℤ)).obj K)
+    _ _ dlim _ _ βE βK
+  obtain ⟨stage, hstageEq⟩ := Classical.axiom_of_choice hs
+  obtain ⟨limit, hlimitEq⟩ := hl
+  refine ⟨stage, limit, ?_, ?_⟩
+  · intro j k hjk f
+    exact (hstageEq k _).trans ((hstage j k hjk f).trans
+      (congrArg (perfectStageMap R s j.val.property hjk (P := P) (Q := Q))
+        (hstageEq j f).symm))
+  · intro j f
+    exact (hlimitEq _).trans ((hlimit j f).trans
+      (congrArg (perfectLimitMap R c s j.val.property (P := P) (Q := Q))
+        (hstageEq j f).symm))
 
 end AlgebraicGeometry
