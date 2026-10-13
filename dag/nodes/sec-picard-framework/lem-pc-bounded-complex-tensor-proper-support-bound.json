@@ -17,58 +17,49 @@
  ],
  "proof": [
   {
-   "text": "If [c,d] bounds G, let Z be the union of the supports of G^n for c <= n <= d. Terms outside the interval are zero, with empty support. This is a finite union of closed subsets. If c > d the entire complex is zero and the union is empty.",
+   "text": "Choose for each term its closed support Z_n from HasSupportProperOver; the support equality uniquely determines this closed subset. Extract a,b bounding G. Reindex the finite subtype of integers in Finset.Icc a b by Fin(card I), and let T be the supremum of the resulting closed subsets. Apply isClosedSubsetProperOver_union_preimage, clause (1), to obtain properness of T over f, including the empty interval.",
    "uses": [
     "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every term support is contained in T. For n in the interval use le_iSup. Outside the interval G.X n is zero by the bounding hypothesis; forgetting to the abelian presheaf and taking stalks preserves zero, so its stalks are subsingletons and its support is empty.",
+   "uses": [
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
-   }
+   "elementary": true
   },
   {
-   "text": "Each reduced term support maps by a closed immersion into the reduced union Z. The finite disjoint union of these supports therefore maps properly and surjectively to Z. Its map to S is proper by the assumed properness of every term support. Separatedness of Z over S descends along this proper surjection (09MQ (4)), and universal closedness descends by 03GN. Local finite type follows from Z being a closed subscheme of X. These three properties make Z proper over S.",
-   "uses": [
-    "def-weil-pbc-closed-subset-proper-over-base",
-    "lem-weil-pbc-surjective-universally-closed-separated",
-    "lem-weil-pbc-image-universally-closed",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
-   }
-  },
-  {
-   "text": "On the open complement of Z every term of G has zero stalks, hence is the zero sheaf. Therefore the restricted complex G is zero. Restriction to an open commutes with the K-flat derived tensor, and tensor with zero is zero, so E tensor^L G restricts to zero there, for arbitrary E. Exactness of open restriction shows every cohomology sheaf is zero on this complement. Its nonzero-stalk locus is consequently contained in Z, as asserted. For an empty Z the same proof gives zero cohomology everywhere.",
+   "text": "On U=X minus T, section_ext and the subsingleton stalks make the identity of each over-site restricted term zero. Pass through Modules.overEquiv U, and use componentwise HomologicalComplex.Hom.ext to prove the restricted complex is zero. Q preserves zero; mapDerivedCategoryFactors gives that the derived restriction of Q(G) is zero. Derived tensor commutes with this restriction by derivedTensor_openRestriction_iso_universes; tensorLeft preserves zero by the canonical monoidal preadditive derived structure. Thus the restricted tensor is zero.",
    "uses": [
     "def-pc-scheme-derived-tensor-structure",
-    "def-pc-derived-category",
+    "lem-pc-derived-tensor-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact restriction R commutes with derived homology by mapDerivedCategoryHomologyFunctorIso. Hence R(H^i(E tensor Q(G))) is zero. Its stalk at a point y of U is a subsingleton. Compose Modules.overFunctorEquiv U with Modules.restrictStalkNatIso U.ι y to identify this stalk with the original stalk at x. For x outside T this contradicts membership of x in the nonzero-stalk locus. Pair this support containment with the properness of T.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below",
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-surjective-universally-closed-separated",
-  "lem-weil-pbc-image-universally-closed",
-  "def-weil-finite-type-morphism",
   "def-pc-scheme-derived-tensor-structure",
-  "def-pc-derived-category"
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "0DJQ: support hypothesis in the application of 08EV; 01AT; 09MQ (4); 03GN"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJQ",
+  "place": "Support verification, using finite unions (0CYR), locality of derived tensor (08DX), and exact open restriction (015F); Lean proof by Y2, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -138,10 +129,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261013T025305-L-3423777",
-  "kind": "interface",
+  "landing": "20261013T045621-L-141473",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
