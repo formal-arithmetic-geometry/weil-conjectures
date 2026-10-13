@@ -9,10 +9,10 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Restrict
-public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.Algebra.Homology.KFlatPullback
+public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.StalkComparisonCoordinateInvariance
+import Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateTransport
+import Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity
 
 /-! # Restriction of the single-complex base-change arrow
 
@@ -26,68 +26,10 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the sheaf tensor comparisons and their naturality needs this budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The comparison from pullback along an open immersion to exact restriction,
-constructed using the pinned tensor-pullback adjunction and left-derived counit.
-Source: Stacks Project, Tag 08DW, restriction of derived pullback.
-(blueprint: lem-pc-single-complex-open-restriction-comparison). -/
-noncomputable def singleComplexOpenPullbackIso
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    (Y : Scheme.{u}) (U : Y.Opens) :
-    derivedPullback U.ι ≅ (schemeOpenRestriction Y U).mapDerivedCategory := by
-  classical
-  let T : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
-      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
-    Scheme.Modules.tensorPullback U.ι
-  have : T.Additive := (Classical.choose exists_derivedPullbackComposition) U.ι
-  let ε := (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) U.ι
-  let W := HomotopyCategory.quasiIso
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)
-  have : (derivedPullback U.ι).IsLeftDerivedFunctor ε W :=
-    (Classical.choose (Classical.choose_spec
-      (Classical.choose_spec exists_derivedPullbackComposition))) U.ι
-  let η : T ≅ Scheme.Modules.restrictFunctor U.ι :=
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U.ι)).leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction U.ι) ≪≫
-        (Scheme.Modules.restrictFunctorIsoPullback U.ι).symm
-  let θ : schemeOpenRestriction Y U ≅ T := Scheme.Modules.overFunctorEquiv U ≪≫ η.symm
-  have : PreservesFiniteLimits (schemeOpenRestriction Y U) :=
-    schemeOpenRestriction_preservesFiniteLimits Y U
-  have : PreservesFiniteColimits (schemeOpenRestriction Y U) :=
-    schemeOpenRestriction_preservesFiniteColimits Y U
-  have : PreservesFiniteLimits T := preservesFiniteLimits_of_natIso θ
-  have : PreservesFiniteColimits T := preservesFiniteColimits_of_natIso θ
-  have : T.mapDerivedCategory.IsLeftDerivedFunctor T.mapDerivedCategoryFactorsh.hom W :=
-    Functor.isLeftDerivedFunctor_of_inverts _ _ T.mapDerivedCategoryFactorsh
-  exact Functor.leftDerivedUnique T.mapDerivedCategory (derivedPullback U.ι) ε
-    T.mapDerivedCategoryFactorsh.hom W ≪≫ (Functor.mapDerivedCategoryNatIso θ).symm
-
-/-- Restrict the coefficient morphism using the canonical pullback composition
-comparisons and the constructed open-pullback comparisons. Both objects and the
-morphism are constructed; no existence theorem supplies arbitrary coefficient data.
-Source: Stacks Project, Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-single-complex-open-restriction-comparison). -/
-noncomputable def singleComplexRestrictedCoefficient
-    [∀ Y : Scheme.{u},
-      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {X X' : Scheme.{u}} (g' : X' ⟶ X)
-    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (φ : (derivedPullback g').obj K ⟶ K')
-    (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)
-    (hj : j ≫ U.ι = U'.ι ≫ g') :
-    (derivedPullback j).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj K) ⟶
-      (schemeOpenRestriction X' U').mapDerivedCategory.obj K' :=
-  (derivedPullback j).map ((singleComplexOpenPullbackIso X U).inv.app K) ≫
-  ((Classical.choose (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition)))) j U.ι).hom.app K ≫
-  eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K) hj) ≫
-  ((Classical.choose (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition)))) U'.ι g').inv.app K ≫
-  (singleComplexOpenPullbackIso X' U').hom.app ((derivedPullback g').obj K) ≫
-  (schemeOpenRestriction X' U').mapDerivedCategory.map φ
-
 /-- Restricting a single-complex base-change problem to compatible base opens gives
 an arrow isomorphic to the restriction of the original arrow, and preserves its
 stalk condition. No affineness, quasi-compactness, or invertibility is assumed.
@@ -96,20 +38,14 @@ Source: Stacks Project, perfect.tex, Tag 0DJ9, first paragraph; cohomology.tex,
 Tag 08HY (derived base-change counit), and Tag 08FE (direct-image restriction).
 (blueprint: lem-pc-single-complex-open-restriction-comparison).
 
-Proof: Put U = f inverse-image V and U' = f' inverse-image V'. Restrict a K-flat
-representative P of K to U and a K-injective representative N of K' to U'.
-Restriction preserves K-flatness and K-injectivity. Termwise pullback commutes
-with these restrictions, so the map representing phi restricts to a map
-representing phi0 from Lj* of K|U to K'|U'. The pullback comparison used here is
-induced by the left-derived universal property, rather than an arbitrary functor
-isomorphism. Stalks of restricted complexes and local rings on an open agree with
-the original stalks and local rings. In these coordinates the tensor-stalk map
-is exactly the original map, transported through these identifications. Thus it
-is invertible by the original stalk condition. For any other K-flat coordinates
-of phi0, compare the two resolutions in the localized homotopy category; tensor
-and stalk comparisons are natural and carry quasi-isomorphisms of K-flat models
-to isomorphisms. The representing equations identify the maps induced by phi0,
-so the same stalk assertion holds for all coordinates.
+Proof: Put U = f inverse-image V and U' = f' inverse-image V'. Choose a
+coordinate presentation of phi using nonempty_coordinates. The open-coordinate
+transport theorem restricts its K-flat complex and representing chain map,
+producing coordinates of the explicitly constructed phi0 and an equivalence of
+invertibility of the original and restricted stalk comparisons. The original
+stalk condition gives invertibility in these coordinates. Apply coordinate
+invariance to obtain it in every restricted coordinate presentation. No
+K-injectivity assumption is needed on the supplied coordinate complex N.
 
 The source comparison a is the composite of the pullback-open comparison for g
 and the direct-image-open comparison for f; the target comparison b is the
@@ -149,6 +85,37 @@ theorem singleComplexBaseChange_openRestrictionComparison
           (schemeDerivedDirectImage f').map φ) =
         a.hom ≫ (schemeDerivedBaseChangeMap
           (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w K₀ ≫
-            (schemeDerivedDirectImage (f' ∣_ V')).map φ₀) ≫ b.inv := by sorry
+            (schemeDerivedDirectImage (f' ∣_ V')).map φ₀) ≫ b.inv := by
+  classical
+  dsimp only
+  constructor
+  · obtain ⟨c⟩ := SingleComplexBaseChange.nonempty_coordinates g' K K' φ
+    obtain ⟨d, hd⟩ := singleComplexOpen_coordinates_transport
+      f f' g g' sq K K' φ c V V' hV' j hj sq₀
+    intro c₀ z i
+    apply (SingleComplexBaseChange.isIso_stalkComparison_iff_coordinates
+      (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ d c₀ z i).mp
+    exact (hd z i).mpr (h_stalk c z.val i)
+  · obtain ⟨a, b, hb⟩ := singleComplexOpen_baseChange_identity
+      f f' g g' sq K V V' hV' j hj sq₀
+    refine ⟨a, b.app K', ?_⟩
+    let R := (schemeOpenRestriction S' V').mapDerivedCategory
+    let R' := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory
+    let D := schemeDerivedDirectImage (f' ∣_ V')
+    let δ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _)
+      (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj
+    have hφ : singleComplexRestrictedCoefficient g' K K' φ
+        (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj = δ ≫ R'.map φ := by
+      dsimp only [δ, singleComplexRestrictedCoefficient, R']
+      rw [CategoryTheory.Functor.map_id]
+      simp only [Category.comp_id, Category.assoc]
+    rw [Functor.map_comp, hb, hφ, Functor.map_comp]
+    have hn := b.inv.naturality φ
+    dsimp only [Functor.comp_map] at hn
+    simp only [Category.assoc, Iso.app_inv]
+    exact congrArg (fun t ↦ a.hom ≫ schemeDerivedBaseChangeMap
+      (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w
+      ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K) ≫ D.map δ ≫ t)
+      hn.symm
 
 end AlgebraicGeometry

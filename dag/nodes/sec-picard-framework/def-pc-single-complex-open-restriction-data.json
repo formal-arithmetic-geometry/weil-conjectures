@@ -1,0 +1,122 @@
+{
+ "id": "def-pc-single-complex-open-restriction-data",
+ "kind": "definition",
+ "title": "Canonical open-pullback comparison and restricted coefficient construction",
+ "statement": "Let derived categories of module sheaves be given for every scheme [def-pc-derived-category, def-pc-scheme]. For an open U of Y, construct the isomorphism from derivedPullback U.ι to exact derived open restriction [def-pc-derived-open-restriction-maps] using the ordinary tensor-pullback adjunction comparison, finite exactness and leftDerivedUnique with the pinned counit [lem-pc-ringed-spaces-derived-pullback-composition]. For g':X'→X, K in D(O_X), K' in D(O_X'), and φ:L(g')*K→K', and opens U,U' and j:U'→U with j≫U.ι=U'.ι≫g', define the restricted coefficient by pullback of the inverse open comparison, the pinned composition comparison for j,U.ι, transport by this equality, the inverse composition comparison for U'.ι,g', the second open comparison, and exact restriction of φ. This is a construction, with no choice of an arbitrary coefficient witness.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Keep the two existing definitions verbatim: use exactness of open restriction to apply leftDerivedUnique with the pinned tensor-pullback counit; compose the stated comparison factors to obtain the coefficient morphism.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 first paragraph, canonical coefficient restriction needed for locality on the target; expanded from the cited canonical constructions and adjunction factorization equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism compatible with open restriction and stalk comparison",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Hom.resLEStalkMap, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.morphismRestrictStalkMap, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, AlgebraicGeometry.Scheme.Hom.map_appLE. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; top results: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Rr]estrict|stalkComparison.*[Rr]estrict",
+   "results": "25 hits; top results: Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Basic.lean. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change and restriction to open subschemes",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, canonical coefficient restriction needed for locality on the target",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-single-complex-target-locality",
+    "lem-pc-single-complex-open-restriction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.singleComplexRestrictedCoefficient",
+  "statement": "def singleComplexRestrictedCoefficient\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U : X.Opens) (U' : X'.Opens) (j : U'.toScheme ⟶ U.toScheme)\n    (hj : j ≫ U.ι = U'.ι ≫ g') :\n    (derivedPullback j).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj K) ⟶\n      (schemeOpenRestriction X' U').mapDerivedCategory.obj K'",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexOpenPullbackIso",
+   "AlgebraicGeometry.singleComplexRestrictedCoefficient"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and declarations match the recorded nodes; all four modules and direct importer compile cleanly, with only the two documented sorry-backed lemmas remaining."
+ }
+}

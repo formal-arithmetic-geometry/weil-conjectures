@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-single-complex-open-base-change-identity",
+ "kind": "statement",
+ "title": "Restriction of the bare derived base-change arrow with natural target comparison",
+ "statement": "Let f:X→S, f':X'→S', g:S'→S and g':X'→X form a cartesian square [def-pc-scheme, def-pc-base-change], with derived categories [def-pc-derived-category], and K∈D(O_X). Let V⊆S, V'⊆S' with V'⊆g⁻¹V, U=f⁻¹V, U'=f'⁻¹V', and j:U'→U with j≫U.ι=U'.ι≫g', and suppose the restricted square is cartesian. Put K0=K|U, R=restriction from S' to V', R'=restriction from X' to U' [def-pc-derived-open-restriction-maps]. Let δ:L(j)*K0→R'(L(g')*K) be singleComplexRestrictedCoefficient for identity on L(g')*K [def-pc-single-complex-open-restriction-data]. There exist an isomorphism a:R(Lg*Rf*K)≅L(g|V')*R(f|V)*K0 and a natural isomorphism b:(Rf'_* followed by R)≅(R' followed by R(f'|V')_*) such that R(baseChange(K))=a.hom≫baseChange0(K0)≫R(f'|V')_*(δ)≫b.inv.app(L(g')*K) [def-pc-derived-base-change-map]. There is no K', coefficient map or stalk-condition hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Form a from pullback-open compatibility and direct-image open restriction for f. Form the natural isomorphism b by the direct-image restriction construction for f', which is computed on K-injective models and is natural in every coefficient.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective models, underived restriction identifies sections on inverse-image opens, and hence identifies the restriction of the adjunction counit with the restricted counit. Transpose both bare base-change arrows using the compatible derived adjunction. They are pullback of these counits by Tag 08HY. The factorization equations for the pinned derived composition comparisons, hj, and the two commutative-square equations identify the pullback paths. After cancelling inverse factors, the residual map is exactly δ. Transposing back gives the stated equality; no naturality in a separate coefficient map is included or needed in this step.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 first paragraph, locality on S'; bare-arrow counit calculation of Tag 08HY and open direct-image comparison of Tag 08FE; expanded from the cited canonical constructions and adjunction factorization equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism compatible with open restriction and stalk comparison",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Hom.resLEStalkMap, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.morphismRestrictStalkMap, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, AlgebraicGeometry.Scheme.Hom.map_appLE. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; top results: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Rr]estrict|stalkComparison.*[Rr]estrict",
+   "results": "25 hits; top results: Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Basic.lean. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change and restriction to open subschemes",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, locality on S'; bare-arrow counit calculation of Tag 08HY and open direct-image comparison of Tag 08FE",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-single-complex-target-locality",
+    "lem-pc-single-complex-open-restriction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenBaseChangeIdentity.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_baseChange_identity",
+  "statement": "theorem singleComplexOpen_baseChange_identity\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X)\n    (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V)\n    (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme)\n    (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')\n    (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) :\n    let K₀ := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K\n    let R := (schemeOpenRestriction S' V').mapDerivedCategory\n    let R' := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory\n    let δ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _)\n      (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj\n    ∃ (a : R.obj ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj K)) ≅\n          (derivedPullback (g.resLE V V' hV')).obj\n            ((schemeDerivedDirectImage (f ∣_ V)).obj K₀))\n      (b : schemeDerivedDirectImage f' ⋙ R ≅ R' ⋙ schemeDerivedDirectImage (f' ∣_ V')),\n      R.map (schemeDerivedBaseChangeMap f f' g g' sq.w K) =\n        a.hom ≫ schemeDerivedBaseChangeMap\n          (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀.w K₀ ≫\n          (schemeDerivedDirectImage (f' ∣_ V')).map δ ≫\n          b.inv.app ((derivedPullback g').obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and declarations match the recorded nodes; all four modules and direct importer compile cleanly, with only the two documented sorry-backed lemmas remaining."
+ }
+}

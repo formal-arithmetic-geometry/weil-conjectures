@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-single-complex-open-coordinate-transport",
+ "kind": "statement",
+ "title": "Transport one K-flat coordinate presentation to compatible target opens",
+ "statement": "Let f:X→S, f':X'→S', g:S'→S and g':X'→X form a cartesian square [def-pc-scheme, def-pc-base-change], and suppose derived categories exist [def-pc-derived-category]. Let K,K',φ:L(g')*K→K' and any coordinate presentation c for φ be given [def-pc-single-complex-base-change-stalk-condition]. Let V⊆S, V'⊆S' with V'⊆g⁻¹V, U=f⁻¹V, U'=f'⁻¹V', and j:U'→U with j≫U.ι=U'.ι≫g'. Suppose j,f'|V',f|V,g|V' is cartesian. Form the exact restrictions K0,K0' and canonical coefficient φ0 [def-pc-single-complex-open-restriction-data]. There exists a coordinate presentation d for φ0 such that for every z∈U' and integer i, the stalk comparison of d in the restricted square is invertible if and only if the stalk comparison of c in the original square at the image of z is invertible. No original stalk condition is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), first paragraph; Tag 0DJ7 equation-bc; cohomology.tex Tag 08HY and Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict c.P and c.N termwise to U,U'. K-flat open restriction preserves c.P's K-flatness. Transport c.e,c.e' through exact localization. The underived pullback composition comparison, open-pullback adjunction comparison and pinned left-derived counit factorization identify the restriction of c.t with a representing map for the constructed φ0. The counit is invertible on the restricted K-flat complex, yielding coordinates d.",
+   "uses": [
+    "lem-pc-kflat-open-restriction",
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-single-complex-open-restriction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At z∈U', use the actual open-immersion stalk maps to identify the four local rings and the stalk complexes. Their compatibility with morphism stalk maps identifies the tensor-product algebra and tensorMap. The localized tensor comparison, tensorStalkIso and homology of the restricted representing map commute with these identifications. Hence the two stalk comparisons are conjugate through isomorphisms, proving the equivalence of invertibility. This is the termwise calculation of equation-bc and does not use the universally quantified stalk condition.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-open-restriction",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-single-complex-open-restriction-data",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 first paragraph, locality on S'; coordinate and stalk calculation in step 2 of the open-restriction comparison; expanded from the cited canonical constructions and adjunction factorization equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism compatible with open restriction and stalk comparison",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Hom.resLEStalkMap, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.morphismRestrictStalkMap, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, AlgebraicGeometry.Scheme.Hom.map_appLE. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; top results: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Rr]estrict|stalkComparison.*[Rr]estrict",
+   "results": "25 hits; top results: Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/IsBaseChange.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Basic.lean. No exact open-restriction coordinate transport or bare derived-base-change restriction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change and restriction to open subschemes",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionComparison",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, locality on S'; coordinate and stalk calculation in step 2 of the open-restriction comparison",
+   "via": [
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-single-complex-target-locality",
+    "lem-pc-single-complex-open-restriction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenCoordinateTransport.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_coordinates_transport",
+  "statement": "theorem singleComplexOpen_coordinates_transport\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (c : SingleComplexBaseChange.Coordinates g' K K' φ)\n    (V : S.Opens) (V' : S'.Opens) (hV' : V' ≤ g ⁻¹ᵁ V)\n    (j : (f' ⁻¹ᵁ V').toScheme ⟶ (f ⁻¹ᵁ V).toScheme)\n    (hj : j ≫ (f ⁻¹ᵁ V).ι = (f' ⁻¹ᵁ V').ι ≫ g')\n    (sq₀ : IsPullback j (f' ∣_ V') (f ∣_ V) (g.resLE V V' hV')) :\n    let K₀ := (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.obj K\n    let K₀' := (schemeOpenRestriction X' (f' ⁻¹ᵁ V')).mapDerivedCategory.obj K'\n    let φ₀ := singleComplexRestrictedCoefficient g' K K' φ\n      (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj\n    ∃ d : SingleComplexBaseChange.Coordinates j K₀ K₀' φ₀,\n      ∀ (z : (f' ⁻¹ᵁ V').toScheme) (i : ℤ),\n        IsIso (SingleComplexBaseChange.stalkComparison\n          (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ d z i) ↔\n        IsIso (SingleComplexBaseChange.stalkComparison f f' g g' sq c z.val i)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-d14c3",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261013T115432-L-3360003",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and declarations match the recorded nodes; all four modules and direct importer compile cleanly, with only the two documented sorry-backed lemmas remaining."
+ }
+}
