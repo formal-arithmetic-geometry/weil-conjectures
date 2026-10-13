@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "In degree n the categorical coproduct of the modules K^(p,q), p+q=n,\nis isomorphic to their algebraic direct sum. Transport the given element across\nthis isomorphism. Its nonzero coordinates form a finite set. A positive column\nis zero by h_positive, so all nonzero coordinates have p <= 0. Choose r bounding\nall the natural numbers -p in this finite set (r=0 for the empty set). Define\nx_i to be the coordinate in bidegree (-i,n+i), using zero when absent. The direct\nsum reconstruction formula gives exactly the displayed finite sum. This uses\nneither a cycle condition nor horizontal exactness.",
+   "text": "Let M_i = K^(-i,n+i) for i in the natural numbers and let f from the dependent finite-support sum of the M_i to Tot(K)^n be the linear sum of their inclusions, constructed with DFinsupp.lsum. To prove f is epi, suppose f followed by g equals f followed by h. Test this equation on DFinsupp.single i a: DFinsupp.lsum_single gives equality after the inclusion of M_i. Every summand K^(p,q) with p+q=n and p<=0 has this form, with i=(-p).toNat and q=n+i. The other summands are zero: the degree-q evaluation functor maps h_positive to IsZero K^(p,q), so equality after their inclusions is automatic. HomologicalComplex₂.total.hom_ext therefore gives g=h. ModuleCat.epi_iff_surjective provides a finite-support vector x mapping to the given z. Take r to be Finset.sup id of x.support (zero for empty support). Each supported i satisfies i<=r. DFinsupp.lsum_apply_apply and DFinsupp.sumAddHom_apply express f(x) as the support sum. DFinsupp.sum_of_support_subset extends it to Finset.range (r+1), because each inclusion maps zero to zero. This proves the required expansion with coordinates x i, without a cycle condition or horizontal exactness.",
    "uses": [],
    "elementary": false
   }
@@ -21,7 +21,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 09IZ, proof, explicit finite-support decomposition"
+  "place": "Tag 09IZ, proof, finite-support representation; direct coproduct cancellation proof using Mathlib DFinsupp and ModuleCat epimorphisms"
  },
  "mathlib_searches": [
   {
@@ -92,13 +92,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T204507-L-868746",
-  "kind": "interface",
+  "landing": "20261013T072342-L-1116399",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
