@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrderedCechModuleCoordinates
 public import Mathlib.GroupTheory.Perm.Sign
-import Sheaf.AlgebraicGeometry.SignedCechExtension
+import Sheaf.AlgebraicGeometry.OrderedCechDegreewiseProjectionDifferential
 
 /-! # Signed projection of module Čech cochains
 
@@ -86,17 +86,17 @@ def IsOrderedCechModuleProjection {X' T' : Scheme.{u}} (f' : X' ⟶ T')
 Source: Stacks 01FK, signed extension; 01FM, the map cπ.
 (blueprint: lem-pc-ordered-cech-module-projection-lift).
 
-Proof: In each natural degree use the displayed finite permutation sum and transport
-by e inverse to define the section map. Naturality of e and functoriality of restrictions
-make it natural in the open. The local scalar equation hlinear, in each summand, makes
-it linear over the local ring: the two scalar restrictions agree in the poset of opens.
-Consequently it defines a module-sheaf map. Identify the filtered sum with
-signedCechExtension: an injective tuple has exactly one increasing sorting permutation,
-and a repeated tuple has none. Apply signedCechExtension_differential to commute
-signed extension with the face differential, and hd to transport this equation to D.
-Push forward and extend by zero; all negative
-components and boundary equations are zero. Evaluation gives precisely the formula.
-Empty families and degrees exceeding r have zero projection, by the strict filter. -/
+Proof: Obtain the degreewise module maps and their coordinate formula from
+orderedCech_degreewise_projection_exists, whose construction uses the actual finite
+signed sum and hlinear. Apply orderedCech_degreewise_projection_comm with hd and
+assemble a morphism of D using CochainComplex.ofHom. Push it forward and extend by
+zero with HomologicalComplex.extendMap. In a natural degree, extendMap_f expresses
+its component using extendXIso, the pushed-forward degreewise map, and the inverse
+of extendXIso. Composing with the coordinate's extendXIso cancels that inverse.
+The degreewise formula on the inverse-image open is definitionally the required
+signed formula. The extension functor supplies all negative components and boundary
+equations. Empty families and degrees exceeding r have zero projection by the
+strict-increase filter. -/
 theorem orderedCech_module_projection_exists {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)
@@ -127,6 +127,28 @@ theorem orderedCech_module_projection_exists {X' T' : Scheme.{u}} (f' : X' ⟶ T
       ComplexShape.embeddingUpNat) ⟶
       ((((Modules.pushforward f').mapHomologicalComplex _).obj D).extend
       ComplexShape.embeddingUpNat),
-      IsOrderedCechModuleProjection f' M W₀ D e P := by sorry
+      IsOrderedCechModuleProjection f' M W₀ D e P := by
+  obtain ⟨Q, hQ⟩ := orderedCech_degreewise_projection_exists M W₀ D e hlinear
+  let q : D ⟶ D := CochainComplex.ofHom Q
+    (orderedCech_degreewise_projection_comm M W₀ D e hd Q hQ)
+  let v := ((Modules.pushforward f').mapHomologicalComplex (ComplexShape.up ℕ)).map q
+  refine ⟨HomologicalComplex.extendMap v ComplexShape.embeddingUpNat, ?_⟩
+  intro p B s y
+  let E := (((Modules.pushforward f').mapHomologicalComplex _).obj D).extendXIso
+    ComplexShape.embeddingUpNat (i := p) rfl
+  have hv : E.hom.app B
+      (((HomologicalComplex.extendMap v ComplexShape.embeddingUpNat).f (p : ℤ)).app B s) =
+      (Q p).app (f' ⁻¹ᵁ B) (E.hom.app B s) := by
+    rw [HomologicalComplex.extendMap_f v ComplexShape.embeddingUpNat
+      (i := p) (i' := (p : ℤ)) rfl]
+    change E.hom.app B (E.inv.app B ((Q p).app (f' ⁻¹ᵁ B) (E.hom.app B s))) = _
+    have hi := congrArg (fun k ↦ (k.app B) ((Q p).app (f' ⁻¹ᵁ B)
+      (E.hom.app B s))) E.inv_hom_id
+    simpa only [Hom.comp_app, ConcreteCategory.comp_apply, Hom.id_app,
+      CategoryTheory.id_apply] using hi
+  change orderedCechNaturalCoordinate M W₀ D e p (f' ⁻¹ᵁ B) y
+      (E.hom.app B _) = _
+  rw [hv]
+  exact hQ p (f' ⁻¹ᵁ B) (E.hom.app B s) y
 
 end AlgebraicGeometry.Scheme.Modules

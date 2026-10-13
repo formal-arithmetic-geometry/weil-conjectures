@@ -13,31 +13,38 @@
  },
  "proof": [
   {
-   "text": "Define the natural-degree full tuple maps by the finite signed extension formula. Transport by the inverse of e. Naturality of e and restrictions makes the maps natural; hlinear makes every summand locally linear because both scalar maps land on the same intersection. Thus they assemble module-sheaf morphisms.",
+   "text": "Apply the proved degreewise signed projection construction to the local scalar hypothesis, obtaining module-sheaf maps Q_p with their finite coordinate formulas.",
+   "uses": [
+    "lem-pc-ordered-cech-degreewise-projection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply differential compatibility of the degreewise formula using hd, and use CochainComplex.ofHom to assemble q:D→D. Push q forward and apply HomologicalComplex.extendMap along embeddingUpNat.",
+   "uses": [
+    "lem-pc-ordered-cech-degreewise-projection-differential"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each nonnegative degree, extendMap_f writes the extended component as E.hom followed by the pushed-forward Q_p followed by E.inv. Evaluate on B and compose with E.hom; E.inv_hom_id cancels the final pair. The pushforward component is Q_p evaluated on f inverse B. Substitute the degreewise coordinate formula, which is definitionally the required full-tuple formula. Negative degrees and boundary commutation are handled by extendMap itself.",
    "uses": [
     "def-pc-ordered-cech-module-coordinates"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Identify the finite filtered sum with the existing signedCechExtension: injective tuples have one increasing sorting permutation and repeated tuples have none. Use signedCechExtension_differential for differential compatibility, then hd, pushforward and extension by zero. The construction satisfies the displayed coordinate formula, including empty families and degrees exceeding r.",
-   "uses": [
-    "def-pc-ordered-cech-module-coordinates",
-    "lem-pc-signed-cech-extension-differential"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-ordered-cech-module-coordinates",
-  "lem-pc-signed-cech-extension-differential"
+  "lem-pc-ordered-cech-degreewise-projection",
+  "lem-pc-ordered-cech-degreewise-projection-differential",
+  "def-pc-ordered-cech-module-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "N2",
+  "agent": "C1",
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tags 01FK and 01FM",
-  "note": "Module-sheaf assembly of the explicit signed restrictions; a strictly separate step of the parent argument."
+  "note": "Degreewise assembly fully proved; adjacent differential compatibility is split off. The parent proof assembles, pushes forward, extends and verifies the coordinate formula in Lean."
  },
  "mathlib_searches": [
   {
@@ -137,9 +144,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T065113-L-900082",
+  "landing": "20261013T082333-L-1631447",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
