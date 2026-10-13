@@ -8,6 +8,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.CategoryTheory.GrothendieckDerivedCompactSource
+import Sheaf.CategoryTheory.GrothendieckDerivedExactLocalization
 
 /-! # A compactly generated source for derived Gabriel--Popescu localization
 
@@ -80,6 +82,19 @@ theorem grothendieckDerived_compact_localization_model
       ∃ (L : B ⥤ DerivedCategory A) (R : DerivedCategory A ⥤ B)
         (adj : L ⊣ R) (sL : L.CommShift ℤ),
       letI := sL
-      L.IsTriangulated ∧ IsIso adj.counit := by sorry
+      L.IsTriangulated ∧ IsIso adj.counit := by
+  obtain ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB⟩ :=
+    grothendieckDerived_compact_source.{w, uA, vA, vH} (A := A)
+  let _ := cB
+  let _ := zB
+  let _ := sB
+  let _ := pB
+  let _ := aB
+  let _ := tB
+  let _ := iB
+  let _ := sumsB
+  obtain ⟨L, R, adj, sL, hL, hc⟩ :=
+    grothendieckDerived_exact_localization.{w, uA, vA, vH} (A := A) B cB zB sB pB aB tB iB sumsB
+  exact ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB, L, R, adj, sL, hL, hc⟩
 
 end CategoryTheory
