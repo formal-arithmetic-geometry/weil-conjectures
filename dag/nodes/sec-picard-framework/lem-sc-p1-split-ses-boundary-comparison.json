@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-p1-split-ses-boundary-comparison",
+ "kind": "statement",
+ "title": "Comparing cone and degreewise split boundaries",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $S=(A^\\bullet\\xrightarrow{i}B^\\bullet\\xrightarrow{p}C^\\bullet)$ be a short exact sequence of integer cochain complexes [def-weil-abstract-derived-category]. Fix a splitting $(r^k,s^k)$ of every row, so $i^k r^k=1$, $s^k p^k=1$, and $r^k i^k+p^k s^k=1$ in diagrammatic composition. The cochain boundary $d:C^\\bullet\\to A^\\bullet[1]$ of [lem-weil-pbc-degreewise-split-connecting-morphism] has component $s^k d_B^k r^{k+1}$. Under the localization functor $Q$ and its canonical shift comparison, the canonical cone boundary of the short exact sequence [lem-weil-pbc-complex-ses-triangle] equals $Q(d)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0152 and 06XR; split boundary components as in homology.tex Tag 011J"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof": [
+  {
+   "text": "Use the degreewise splitting to express the differential of B as the matrix with diagonal entries d_A and d_C and upper-right entry s d_B r. The latter is the boundary cochain map.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-connecting-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let q:Cone(i) -> C be the canonical cone comparison. In diagrammatic composition its split-boundary composite differs from the third cone map by d_Cone H + H d_{A[1]}, where H^k=proj_B r^k: Cone(i)^k -> A[1]^{k-1}. Expanding the cone differential and d_{A[1]}=-d_A gives proj_A + proj_B (d_B r - r d_A) = proj_A + proj_B p s d_B r. This is q followed by the split boundary minus the third cone map -proj_A, using r i+p s=1, i r=1, and i d_B=d_A i.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The cone comparison q is a quasi-isomorphism. Apply Q to the homotopy and cancel Q(q). The defining cone formula for the canonical SES boundary and the shift comparison of Q give the asserted equality.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
+  "note": "Explicit component expansion of the canonical boundary and roof comparison from Stacks Tags 0152, 011J and 06XR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical short exact cochain complex cone boundary equals degreewise split connecting morphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical short exact cochain complex cone boundary equals degreewise split connecting morphism",
+   "results": "Mathlib gives triangleOfSESδ, its naturality and the split boundary constructor, but no equality of these two boundary maps.",
+   "date": "2026-10-13",
+   "verdict": "partial; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ|homOfDegreewiseSplit",
+   "results": "Mathlib gives triangleOfSESδ, its naturality and the split boundary constructor, but no equality of these two boundary maps.",
+   "date": "2026-10-13",
+   "verdict": "partial; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cocycle.equivHomShift",
+   "results": "Second reader: 12 hits, including equivHomShift, pre/postcomposition, toHom_mk and toSmallShiftedHom_mk; none compares the SES cone boundary with the split boundary or computes composition with its degree-one boundary. Read component shift definitions separately.",
+   "date": "2026-10-13",
+   "verdict": "partial; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+   "via": [
+    "lem-sc-p1-ext-resolution-derived-connecting",
+    "lem-sc-p1-boundary-one-extension-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.SplitSESBoundaryComparison",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/SplitSESBoundaryComparison.lean",
+  "declaration": "DerivedCategory.triangleOfSESδ_eq_degreewiseSplit",
+  "statement": "theorem triangleOfSESδ_eq_degreewiseSplit\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (S : ShortComplex (CochainComplex C ℤ)) (hS : S.ShortExact)\n    (σ : ∀ k : ℤ,\n      (S.map (HomologicalComplex.eval C (ComplexShape.up ℤ) k)).Splitting) :\n    triangleOfSESδ hS =\n      ShiftedHom.map (CochainComplex.homOfDegreewiseSplit S σ) Q",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T082344-L-1635495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T082344-L-1635495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

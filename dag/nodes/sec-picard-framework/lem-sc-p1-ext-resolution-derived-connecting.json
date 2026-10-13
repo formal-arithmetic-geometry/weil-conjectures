@@ -28,44 +28,45 @@
  ],
  "proof": [
   {
-   "text": "The functor $v=\\operatorname{Hom}_{\\mathcal A}(M,-)$ is additive and left exact: additivity is pointwise, and a morphism $M\\to K$ into the kernel of a map is exactly a morphism $M\\to B$ whose composite to $C$ is zero. Apply [lem-sc-p1-right-derived-triangle-connecting] to this $v$ and to the triangle $A[0]\\to B[0]\\to C[0]\\xrightarrow{w}A[0][1]$ of [lem-sf-derived-ses-triangle]: under the identifications $\\theta^n_X:H^n(Rv(X[0]))\\cong R^nv(X)$ of [lem-sp-derived-functor-single-identification], the horseshoe connecting map $R^nv(C)\\to R^{n+1}v(A)$ (the connecting map of the injective-resolution long exact sequence for $\\operatorname{Ext}^n_{\\mathcal A}(M,-)$) is the homology connecting map $\\delta^n$ of the distinguished triangle $Rv(A[0])\\to Rv(B[0])\\to Rv(C[0])\\to Rv(A[0])[1]$ in $D^+(\\mathrm{Ab})$.",
+   "text": "Extend the prescribed horseshoe maps from natural to integer degrees. For nonnegative degrees transport splittingOfInjective through the canonical degree isomorphisms; below zero all three complexes vanish, giving the zero splitting. The splittings imply short exactness of the extended row.",
    "uses": [
-    "lem-sc-p1-right-derived-triangle-connecting",
-    "lem-sf-derived-ses-triangle",
-    "lem-sp-derived-functor-single-identification"
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-ses-injective-kernel-splits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TE and 015B: canonical delta-functor from the derived category and its injective-resolution realization"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-sc-p1-rhom-hom-derived-connecting] to the distinguished triangle $A[0]\\to B[0]\\to C[0]\\xrightarrow{w}A[0][1]$ of $D^+(\\mathcal A)$: its isomorphisms $\\psi^n_X:H^n(Rv(X))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(M[0],X[n])$ carry $\\delta^n$ of Step 1 to $\\xi\\mapsto w[n]\\circ\\xi$, the connecting morphism of $\\operatorname{Hom}_{D(\\mathcal A)}(M[0],-)$ [lem-sp-long-exact-of-triangle]. For $N\\in\\{A,C\\}$ and an injective resolution $\\varepsilon:N\\to I^\\bullet$ (for instance the one of the horseshoe resolution of Step 1), $\\theta^n_N$ is induced by $Rv(N[0])\\cong v(I^\\bullet)=\\operatorname{Hom}_{\\mathcal A}(M,I^\\bullet)$, and $\\psi^n_{N[0]}$ sends the class of a cocycle $f:M\\to I^n$ to $(\\varepsilon[n])^{-1}\\circ f$; by [lem-weil-pbc-ext-via-injective-resolution] this composite $\\psi^n_{N[0]}\\circ(\\theta^n_N)^{-1}:R^nv(N)\\to\\operatorname{Ext}^n_{\\mathcal A}(M,N)$ is exactly the canonical comparison of the statement. Composing with Step 1 gives the asserted equality of connecting morphisms.",
+   "text": "The augmentations define a morphism from the single-object short exact row to the extended row. Apply Mathlib triangleOfSESδ_naturality and identify the latter boundary using the cone/split comparison. Transport the singleFunctor comparisons and invert the augmentation quasi-isomorphisms.",
    "uses": [
-    "lem-sc-p1-rhom-hom-derived-connecting",
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport c,b,a to the integer resolutions and apply the split cocycle boundary formula. Rewrite both extMk homs using the Mathlib injective-resolution roof formula. Associativity of shifted composition and the inverse-augmentation boundary square identify the two sides. The preadditiveCoyoneda homologySequenceδ formula is exactly this shifted composition.",
+   "uses": [
+    "lem-sc-p1-split-ses-cocycle-boundary",
     "lem-weil-pbc-ext-via-injective-resolution",
     "lem-sp-long-exact-of-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XR and 05TE: Ext by injective resolutions as Hom in K(A), and the long exact sequence of a homological functor"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-right-derived-triangle-connecting",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "lem-sc-p1-split-ses-boundary-comparison",
   "lem-sf-derived-ses-triangle",
-  "lem-sp-derived-functor-single-identification",
-  "lem-sc-p1-rhom-hom-derived-connecting",
+  "lem-sc-p1-split-ses-cocycle-boundary",
   "lem-weil-pbc-ext-via-injective-resolution",
   "lem-sp-long-exact-of-triangle"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05TE and 06XR"
+  "by": "agent",
+  "group": "G1",
+  "date": "2026-10-13",
+  "note": "Direct split-row calculation and Mathlib cone-boundary naturality; component proof expands the original source route."
  },
  "mathlib_searches": [
   {
@@ -145,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T082344-L-1635495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
