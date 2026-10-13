@@ -419,7 +419,7 @@ theorem exists_jacobian_galoisAction [PerfectField K] (p : C ⟶ Spec (.of K))
   have : GeometricallyConnected (C ↘ Spec (.of K)) := ‹GeometricallyConnected p›
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
   have : IsProper (C ↘ Spec (.of K)) := ‹IsProper p›
-  obtain ⟨J₀, _, r, -, -, -, -, ⟨rK⟩, e, he⟩ := exists_jacobian_descent K (AlgebraicClosure K)
+  obtain ⟨J₀, _, r, -, -, -, -, ⟨rK⟩, e, -, he⟩ := exists_jacobian_descent K (AlgebraicClosure K)
     (AlgebraicClosure K) C _ rfl p.geometricFiber p.geometricFiberProj
     (IsPullback.of_hasPullback _ _)
   let φ : (Scheme.specAlgebraicClosure K ⟶ J₀) →* p.geometricFiber.Pic :=
