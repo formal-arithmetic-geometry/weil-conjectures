@@ -12597,3 +12597,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:13 L: merged deliver/Q2/Sheaf.RingTheory.LocalizedPolynomialFiniteProjectiveDimension (stage 3; reviewer PASS; first push; landing 20261013T131327-L-4034723 (interface); batch 20261013T131320; modules 3; new nodes 2)
 - 13:13 L: merged deliver/R2/Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre (stage 3; reviewer PASS; first push; landing 20261013T131328-L-4034824 (interface); batch 20261013T131320; modules 2; new nodes 1)
 - 13:13 L: merged deliver/R2/Sheaf.Paper.EtaleAbelianLocalUnitRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T131328-L-4034968 (interface); batch 20261013T131320; modules 2; new nodes 1)
+- 13:13 L: merged deliver/U1/Sheaf.AlgebraicGeometry.CompletedAffineSectionsPowerTorsion (stage 3; reviewer PASS; first push; landing 20261013T131328-L-4035119 (proof); batch 20261013T131320; modules 1; new nodes 0)
