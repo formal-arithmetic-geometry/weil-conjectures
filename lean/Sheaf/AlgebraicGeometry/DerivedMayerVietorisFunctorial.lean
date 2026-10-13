@@ -6,9 +6,10 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
-public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-public import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageSquares
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageBoundary
 import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisExact
 import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
 import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction
@@ -32,6 +33,10 @@ set_option synthInstance.maxSize 2048
 
 noncomputable section
 namespace AlgebraicGeometry
+
+attribute [local instance 2000] schemeMVModuleAbelian schemeMVDirectImageTriangulated
+attribute [local irreducible] schemeMVOpenComparison schemeMVMiddleComparison
+  schemeMVOpenRestrictionComparison schemeMVDirectImageComposition
 
 private theorem derived_map_surjective
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
@@ -149,7 +154,7 @@ private theorem concrete_map (X : Scheme.{u}) (U V : X.Opens)
       schemeMayerVietorisG X U V I ≫ gW
     apply biprod.hom_ext'
     · simpa only [schemeMayerVietorisG, Category.assoc, biprod.inl_map_assoc,
-        biprod.inl_desc_assoc, biprod.inl_desc, gU, gW] using hr (homOfLE inf_le_left)
+        biprod.inl_desc_assoc, biprod.inl_desc, gU, gW] using hr (homOfLE (inf_le_left : U ⊓ V ≤ U))
     · simpa only [schemeMayerVietorisG, Category.assoc, biprod.inr_map_assoc,
         biprod.inr_desc_assoc, biprod.inr_desc, Preadditive.comp_neg,
         Preadditive.neg_comp, gV, gW] using
@@ -188,8 +193,9 @@ private theorem mv_comm₂ (X : Scheme.{u}) (U V : X.Opens)
       schemeDerivedDirectImage (U ⊓ V).ι)
     {E F : schemeDerivedCategory X} (f : E ⟶ F) :
     biprod.desc
-        (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjW E)
-        (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjW E)) ≫
+        (schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) adjU adjW E)
+        (-(schemeDerivedOpenDirectImageRestriction X
+          (homOfLE (inf_le_right : U ⊓ V ≤ V)) adjV adjW E)) ≫
       (schemeDerivedDirectImage (U ⊓ V).ι).map
         ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map f) =
     biprod.map ((schemeDerivedDirectImage U.ι).map
@@ -197,8 +203,9 @@ private theorem mv_comm₂ (X : Scheme.{u}) (U V : X.Opens)
           ((schemeDerivedDirectImage V.ι).map
             ((schemeOpenRestriction X V).mapDerivedCategory.map f)) ≫
       biprod.desc
-        (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjW F)
-        (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjW F)) := by
+        (schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) adjU adjW F)
+        (-(schemeDerivedOpenDirectImageRestriction X
+          (homOfLE (inf_le_right : U ⊓ V ≤ V)) adjV adjW F)) := by
   let ρ {A : X.Opens}
       [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toScheme.toRingedSpace))]
       (i : U ⊓ V ⟶ A)
@@ -224,14 +231,14 @@ private theorem mv_comm₂ (X : Scheme.{u}) (U V : X.Opens)
     simpa only [ρ, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.comp_map, Functor.comp_obj,
       schemeDerivedOpenDirectImageRestriction, Adjunction.homEquiv_unit]
-      using ((ρ (homOfLE inf_le_left) adjU).naturality f).symm
+      using ((ρ (homOfLE (inf_le_left : U ⊓ V ≤ U)) adjU).naturality f).symm
   · simp only [biprod.inr_desc_assoc, biprod.inr_map_assoc,
       biprod.inr_desc, Preadditive.neg_comp, Preadditive.comp_neg]
     apply congrArg Neg.neg
     simpa only [ρ, NatTrans.comp_app, Functor.whiskerLeft_app,
       Functor.whiskerRight_app, Functor.comp_map, Functor.comp_obj,
       schemeDerivedOpenDirectImageRestriction, Adjunction.homEquiv_unit]
-      using ((ρ (homOfLE inf_le_right) adjV).naturality f).symm
+      using ((ρ (homOfLE (inf_le_right : U ⊓ V ≤ V)) adjV).naturality f).symm
 
 private def representativeBoundary (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -299,9 +306,9 @@ private theorem representativeBoundary_distinguished (X : Scheme.{u}) (U V : X.O
     Triangle.mk (biprod.lift (adjU.unit.app (DerivedCategory.Q.obj I))
       (adjV.unit.app (DerivedCategory.Q.obj I)))
       (biprod.desc
-        (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
+        (schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U))
           adjU adjW (DerivedCategory.Q.obj I))
-        (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
+        (-(schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V))
           adjV adjW (DerivedCategory.Q.obj I))))
       (representativeBoundary X U V adjW hcover I hI) ∈
         distTriang (schemeDerivedCategory X) := by
@@ -316,9 +323,9 @@ private theorem representativeBoundary_distinguished (X : Scheme.{u}) (U V : X.O
   let T := Triangle.mk (biprod.lift (adjU.unit.app (DerivedCategory.Q.obj I))
       (adjV.unit.app (DerivedCategory.Q.obj I)))
     (biprod.desc
-      (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjW
+      (schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_left : U ⊓ V ≤ U)) adjU adjW
         (DerivedCategory.Q.obj I))
-      (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjW
+      (-(schemeDerivedOpenDirectImageRestriction X (homOfLE (inf_le_right : U ⊓ V ≤ V)) adjV adjW
         (DerivedCategory.Q.obj I))))
     (representativeBoundary X U V adjW hcover I hI)
   let hs := schemeMayerVietorisComplex_shortExact X U V hcover I hI
@@ -360,7 +367,87 @@ private theorem representativeBoundary_distinguished (X : Scheme.{u}) (U V : X.O
     exact Category.comp_id _
 
 
-set_option maxHeartbeats 800000 in
+private theorem transport_boundary_square
+    {C : Type*} [Category C] (H S : C ⥤ C) {A B E F : C}
+    (e : A ≅ E) (d : B ≅ F) (a : H.obj A ⟶ S.obj A) (b : H.obj B ⟶ S.obj B)
+    (f : A ⟶ B) (φ : E ⟶ F) (hf : f = e.hom ≫ φ ≫ d.inv)
+    (ha : a ≫ S.map f = H.map f ≫ b) :
+    (H.map e.inv ≫ a ≫ S.map e.hom) ≫ S.map φ =
+      H.map φ ≫ (H.map d.inv ≫ b ≫ S.map d.hom) := by
+  have ht : e.hom ≫ φ = f ≫ d.hom := by
+    simp only [hf, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have ht' : e.inv ≫ f = φ ≫ d.inv := by
+    simp only [hf, Iso.inv_hom_id_assoc]
+  simp only [Category.assoc]
+  rw [← S.map_comp, ht, S.map_comp, reassoc_of% ha]
+  rw [← H.map_comp_assoc, ht', H.map_comp, Category.assoc]
+
+set_option maxHeartbeats 300000 in
+-- The transported functor comparisons require additional elaboration heartbeats.
+private theorem canonicalMV_spec
+    (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
+    [d1 : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [d2 : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    [d3 : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
+    [d4 : HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))] :
+    (∀ E, schemeMVTriangle X U V hcover E ∈ distTriang (schemeDerivedCategory X)) ∧
+    (∀ (E F : schemeDerivedCategory X) (φ : E ⟶ F),
+      schemeMVBoundary X U V hcover E ≫ φ⟦(1 : ℤ)⟧' =
+        (schemeDerivedDirectImage (U ⊓ V).ι).map
+          ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map φ) ≫
+            schemeMVBoundary X U V hcover F) := by
+  classical
+  let I := schemeMVResolution.{u, w} X
+  have hi (E : schemeDerivedCategory X) : (I E).IsKInjective := by
+    dsimp only [I]
+    infer_instance
+  have hinj (E : schemeDerivedCategory X) (n : ℤ) : Injective ((I E).X n) := by
+    dsimp only [I]
+    infer_instance
+  let e := schemeMVResolutionIso.{u, w} X
+  let adj (W : X.Opens)
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] :=
+    schemeMVAdjunction X W
+  let aU := adj U
+  let aV := adj V
+  let aW := adj (U ⊓ V)
+  let H := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⋙
+    schemeDerivedDirectImage (U ⊓ V).ι
+  let δ (E : schemeDerivedCategory X) :=
+    H.map (e E).inv ≫ representativeBoundary X U V aW hcover (I E) (hinj E) ≫
+      (e E).hom⟦(1 : ℤ)⟧' 
+  have hn (E F : schemeDerivedCategory X) (φ : E ⟶ F) :
+      δ E ≫ φ⟦(1 : ℤ)⟧' = H.map φ ≫ δ F := by
+    obtain ⟨f, hf⟩ := derived_map_surjective (I E) (I F)
+      ((e E).hom ≫ φ ≫ (e F).inv)
+    exact transport_boundary_square H (shiftFunctor _ (1 : ℤ)) (e E) (e F)
+      (representativeBoundary X U V aW hcover (I E) (hinj E))
+      (representativeBoundary X U V aW hcover (I F) (hinj F))
+      (DerivedCategory.Q.map f) φ hf
+      (representativeBoundary_naturality X U V aW hcover
+        (I E) (I F) (hinj E) (hinj F) f)
+  have hδ (E : schemeDerivedCategory X) : schemeMVBoundary X U V hcover E = δ E := by
+    dsimp only [schemeMVBoundary, δ, H, I, e, representativeBoundary, aW, adj,
+      schemeMVDerivedRestriction]
+  dsimp only [schemeMVTriangle]
+  simp only [hδ]
+  refine ⟨?_, hn⟩
+  · intro E
+    have hd := representativeBoundary_distinguished X U V aU aV aW hcover (I E) (hinj E)
+    refine isomorphic_distinguished _ hd _ ?_
+    let HU := (schemeOpenRestriction X U).mapDerivedCategory ⋙ schemeDerivedDirectImage U.ι
+    let HV := (schemeOpenRestriction X V).mapDerivedCategory ⋙ schemeDerivedDirectImage V.ι
+    refine (Triangle.isoMk _ _ (e E)
+      (biprod.mapIso (HU.mapIso (e E)) (HV.mapIso (e E))) (H.mapIso (e E))
+      (mv_comm₁ X U V aU aV (e E).hom)
+      (mv_comm₂ X U V aU aV aW (e E).hom) ?_).symm
+    change representativeBoundary X U V aW hcover (I E) (hinj E) ≫
+      (e E).hom⟦(1 : ℤ)⟧' = H.map (e E).hom ≫ δ E
+    simp only [δ, ← H.map_comp_assoc,
+      Iso.hom_inv_id, H.map_id, Category.id_comp]
+
+set_option maxHeartbeats 300000 in
 -- The transported functor comparisons require additional elaboration heartbeats.
 /-- Mayer--Vietoris boundaries can be chosen simultaneously, naturally in the object.
 The adjunction units and the difference of restrictions are the first two maps.
@@ -443,82 +530,54 @@ theorem schemeDerived_mayerVietoris_naturality
             m.hom₃ = (schemeDerivedDirectImage (U ⊓ V).ι).map
           ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map φ) := by
   classical
+  rename_i d1 d2 d3 d4
   have _ := hU
   have _ := hV
-  let A := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  let I (E : schemeDerivedCategory X) :=
-    (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj (DerivedCategory.Q.objPreimage E)
-  have hi (E : schemeDerivedCategory X) : (I E).IsKInjective := by
-    dsimp only [I]
-    infer_instance
-  have hinj (E : schemeDerivedCategory X) (n : ℤ) : Injective ((I E).X n) := by
-    dsimp only [I]
-    infer_instance
-  have hq (E : schemeDerivedCategory X) : QuasiIso
-      ((CochainComplex.toKInjectiveResolution.{u} A).app (DerivedCategory.Q.objPreimage E)) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A _).2
-  let e (E : schemeDerivedCategory X) : DerivedCategory.Q.obj (I E) ≅ E :=
-    (asIso (DerivedCategory.Q.map
-      ((CochainComplex.toKInjectiveResolution.{u} A).app
-        (DerivedCategory.Q.objPreimage E)))).symm ≪≫ DerivedCategory.Q.objObjPreimageIso E
-  let adj (W : X.Opens)
-      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] :
-      (schemeOpenRestriction X W).mapDerivedCategory ⊣ schemeDerivedDirectImage W.ι :=
-    let a : schemeOpenRestriction X W ⊣
-      RingedSpace.moduleDirectImage W.ι.toLRSHom.toShHom := schemeOpenModuleAdjunction X W
-    a.mapDerivedCategoryRightDerivedAdjunction
-  let aU := adj U
-  let aV := adj V
-  let aW := adj (U ⊓ V)
-  let H := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⋙
-    schemeDerivedDirectImage (U ⊓ V).ι
-  let δ (E : schemeDerivedCategory X) :=
-    H.map (e E).inv ≫ representativeBoundary X U V aW hcover (I E) (hinj E) ≫
-      (e E).hom⟦(1 : ℤ)⟧'
-  have hn (E F : schemeDerivedCategory X) (φ : E ⟶ F) :
-      δ E ≫ φ⟦(1 : ℤ)⟧' = H.map φ ≫ δ F := by
-    obtain ⟨f, hf⟩ := derived_map_surjective (I E) (I F)
-      ((e E).hom ≫ φ ≫ (e F).inv)
-    have ht : (e E).hom ≫ φ = DerivedCategory.Q.map f ≫ (e F).hom := by
-      simp only [hf, Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    have ht' : (e E).inv ≫ DerivedCategory.Q.map f = φ ≫ (e F).inv := by
-      simp only [hf, Iso.inv_hom_id_assoc]
-    have hs : (e E).hom⟦(1 : ℤ)⟧' ≫ φ⟦(1 : ℤ)⟧' =
-        (DerivedCategory.Q.map f)⟦(1 : ℤ)⟧' ≫ (e F).hom⟦(1 : ℤ)⟧' := by
-      rw [← Functor.map_comp, ht, Functor.map_comp]
-    dsimp only [δ]
-    simp only [Category.assoc]
-    rw [hs]
-    rw [reassoc_of% (representativeBoundary_naturality X U V aW hcover
-      (I E) (I F) (hinj E) (hinj F) f)]
-    change H.map (e E).inv ≫ H.map (DerivedCategory.Q.map f) ≫ _ = _
-    rw [← H.map_comp_assoc, ht', H.map_comp, Category.assoc]
-  refine ⟨aU, aV, aW, δ, ?_, ?_⟩
+  have hs := @canonicalMV_spec.{u, w} X U V hcover d1 d2 d3 d4
+  have hd := hs.1
+  have hn := hs.2
+  refine ⟨schemeMVAdjunction X U, schemeMVAdjunction X V,
+    schemeMVAdjunction X (U ⊓ V), schemeMVBoundary X U V hcover, ?_, ?_⟩
   · intro E _
-    have hd := representativeBoundary_distinguished X U V aU aV aW hcover (I E) (hinj E)
-    refine isomorphic_distinguished _ hd _ ?_
-    let HU := (schemeOpenRestriction X U).mapDerivedCategory ⋙ schemeDerivedDirectImage U.ι
-    let HV := (schemeOpenRestriction X V).mapDerivedCategory ⋙ schemeDerivedDirectImage V.ι
-    refine (Triangle.isoMk _ _ (e E)
-      (biprod.mapIso (HU.mapIso (e E)) (HV.mapIso (e E))) (H.mapIso (e E))
-      (mv_comm₁ X U V aU aV (e E).hom)
-      (mv_comm₂ X U V aU aV aW (e E).hom) ?_).symm
-    change representativeBoundary X U V aW hcover (I E) (hinj E) ≫
-      (e E).hom⟦(1 : ℤ)⟧' = H.map (e E).hom ≫ δ E
-    simp only [δ, ← H.map_comp_assoc, Iso.hom_inv_id, H.map_id, Category.id_comp]
+    exact hd E
   · intro E F _ _ φ
     refine ⟨⟨φ, biprod.map
-      ((schemeDerivedDirectImage U.ι).map ((schemeOpenRestriction X U).mapDerivedCategory.map φ))
-      ((schemeDerivedDirectImage V.ι).map ((schemeOpenRestriction X V).mapDerivedCategory.map φ)),
-      H.map φ, mv_comm₁ X U V aU aV φ, mv_comm₂ X U V aU aV aW φ, hn E F φ⟩,
+      ((schemeDerivedDirectImage U.ι).map
+        ((schemeOpenRestriction X U).mapDerivedCategory.map φ))
+      ((schemeDerivedDirectImage V.ι).map
+        ((schemeOpenRestriction X V).mapDerivedCategory.map φ)),
+      (schemeDerivedDirectImage (U ⊓ V).ι).map
+        ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map φ),
+      mv_comm₁ X U V (schemeMVAdjunction.{u, w} X U)
+        (schemeMVAdjunction.{u, w} X V) φ,
+      mv_comm₂ X U V (schemeMVAdjunction.{u, w} X U)
+        (schemeMVAdjunction.{u, w} X V) (schemeMVAdjunction.{u, w} X (U ⊓ V)) φ,
+      hn E F φ⟩,
       rfl, rfl, rfl⟩
 
+private theorem first_square_identity
+    {C : Type*} [Category C] {A B D : C}
+    (a : A ⟶ B) (c : B ⟶ D) (b : A ⟶ D) (ha : a ≫ c = b) :
+    a ≫ c = (𝟙 A) ≫ b := by
+  rw [Category.id_comp]
+  exact ha
+
+private theorem boundary_square_identity
+    {C : Type*} [Category C] (S : C ⥤ C) {A B D : C}
+    (a : A ⟶ S.obj B) (c : A ⟶ D) (b : D ⟶ S.obj B) (ha : a = c ≫ b) :
+    a ≫ S.map (𝟙 B) = c ≫ b := by
+  rw [S.map_id, Category.comp_id]
+  exact ha
+
+set_option backward.isDefEq.respectTransparency true in
+set_option maxHeartbeats 60000 in
+-- Comparison transport needs additional elaboration heartbeats.
 /-- The image Mayer--Vietoris triangle is identified with the target one by
 composition and open-restriction comparison isomorphisms, with identity first component.
-The comparison functor isomorphisms are the recorded ones of
-lem-pc-derived-direct-image-composition and lem-pc-restrict-derived-direct-image-open
-(`Classical.choice` of `derivedDirectImageComposition` and
-`schemeDerivedDirectImage_openRestriction`), the same for every object.
+The comparison functor isomorphisms are the normalized constructions
+`schemeMVDirectImageComposition` and `schemeMVOpenRestrictionComparison`,
+with the determining right-derived unit equation and sectionwise restriction identity,
+the same for every object.
 The triangle isomorphism includes compatibility with the connecting maps.
 Source: Stacks, Tags 08BV, 0D5T and 0DJ9
 (blueprint: lem-pc-derived-mayer-vietoris-functorial).
@@ -548,10 +607,6 @@ Proof:
    of distinguished triangles. Quasi-coherence of Rh_*E' follows from
    lem-pc-derived-direct-image-preserves-qcoh.
 -/
--- STATEMENT-DISPUTED: Classical.choice of Nonempty comparison isomorphisms carries no
--- canonical unit or restriction compatibility. The required triangle squares need those
--- compatibilities, which derivedDirectImageComposition and the open-restriction interface
--- discard. This is an interface dispute; no concrete scheme counterexample is certified.
 theorem schemeDerived_mayerVietoris_directImage
     (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -560,123 +615,166 @@ theorem schemeDerived_mayerVietoris_directImage
     (hcover : U ⊔ V = ⊤)
     (hU' : IsCompact ((h ⁻¹ᵁ U) : Set X))
     (hV' : IsCompact ((h ⁻¹ᵁ V) : Set X))
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    [∀ T : X.Opens, HasDerivedCategory.{w}
+    [d1 : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [d2 : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [d3 : ∀ T : X.Opens, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]
-    [∀ T : Y.Opens, HasDerivedCategory.{w}
+    [d4 : ∀ T : Y.Opens, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]
     :
-    ∃ (adjU : (schemeOpenRestriction Y U).mapDerivedCategory ⊣
+    ∃ (adjU : (schemeMVDerivedRestriction Y U) ⊣
         schemeDerivedDirectImage U.ι)
-      (adjV : (schemeOpenRestriction Y V).mapDerivedCategory ⊣
+      (adjV : (schemeMVDerivedRestriction Y V) ⊣
         schemeDerivedDirectImage V.ι)
-      (adjUV : (schemeOpenRestriction Y (U ⊓ V)).mapDerivedCategory ⊣
+      (adjUV : (schemeMVDerivedRestriction Y (U ⊓ V)) ⊣
         schemeDerivedDirectImage (U ⊓ V).ι)
       (δ : ∀ E : schemeDerivedCategory Y,
         (schemeDerivedDirectImage (U ⊓ V).ι).obj
-          ((schemeOpenRestriction Y (U ⊓ V)).mapDerivedCategory.obj E) ⟶ E⟦(1 : ℤ)⟧)
-      (adjU' : (schemeOpenRestriction X (h ⁻¹ᵁ U)).mapDerivedCategory ⊣
+          ((schemeMVDerivedRestriction Y (U ⊓ V)).obj E) ⟶ E⟦(1 : ℤ)⟧)
+      (adjU' : (schemeMVDerivedRestriction X (h ⁻¹ᵁ U)) ⊣
         schemeDerivedDirectImage (h ⁻¹ᵁ U).ι)
-      (adjV' : (schemeOpenRestriction X (h ⁻¹ᵁ V)).mapDerivedCategory ⊣
+      (adjV' : (schemeMVDerivedRestriction X (h ⁻¹ᵁ V)) ⊣
         schemeDerivedDirectImage (h ⁻¹ᵁ V).ι)
-      (adjUV' : (schemeOpenRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).mapDerivedCategory ⊣
+      (adjUV' : (schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))) ⊣
         schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι)
       (δ' : ∀ E : schemeDerivedCategory X,
         (schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).obj
-          ((schemeOpenRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).mapDerivedCategory.obj E) ⟶ E⟦(1 :
+          ((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).obj E) ⟶ E⟦(1 :
             ℤ)⟧),
       (∀ (E F : schemeDerivedCategory X),
         schemeDerivedQCohProperty X E → schemeDerivedQCohProperty X F →
         ∀ φ : E ⟶ F,
           δ' E ≫ φ⟦(1 : ℤ)⟧' =
             (schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)).ι).map
-              ((schemeOpenRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).mapDerivedCategory.map φ) ≫ δ' F) ∧
+              ((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).map φ) ≫ δ' F) ∧
       (∀ (E F : schemeDerivedCategory Y),
         schemeDerivedQCohProperty Y E → schemeDerivedQCohProperty Y F →
         ∀ φ : E ⟶ F,
           δ E ≫ φ⟦(1 : ℤ)⟧' =
             (schemeDerivedDirectImage (U ⊓ V).ι).map
-              ((schemeOpenRestriction Y (U ⊓ V)).mapDerivedCategory.map φ) ≫ δ F) ∧
+              ((schemeMVDerivedRestriction Y (U ⊓ V)).map φ) ≫ δ F) ∧
       ∀ (E : schemeDerivedCategory X), schemeDerivedQCohProperty X E →
       schemeDerivedQCohProperty Y ((schemeDerivedDirectImage h).obj E) ∧
       (Triangle.mk (biprod.lift (adjU'.unit.app E) (adjV'.unit.app E))
         (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
+          (schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_left : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ U))
             adjU' adjUV' E)
-          (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
+          (-(schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_right : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ V))
             adjV' adjUV' E))) (δ' E)) ∈ distTriang (schemeDerivedCategory X) ∧
       (Triangle.mk (biprod.lift (adjU.unit.app ((schemeDerivedDirectImage h).obj E))
             (adjV.unit.app ((schemeDerivedDirectImage h).obj E)))
         (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction Y (homOfLE inf_le_left)
+          (schemeDerivedOpenDirectImageRestriction Y (homOfLE (inf_le_left : U ⊓ V ≤ U))
             adjU adjUV ((schemeDerivedDirectImage h).obj E))
-          (-(schemeDerivedOpenDirectImageRestriction Y (homOfLE inf_le_right)
+          (-(schemeDerivedOpenDirectImageRestriction Y (homOfLE (inf_le_right : U ⊓ V ≤ V))
             adjV adjUV ((schemeDerivedDirectImage h).obj E)))) (δ ((schemeDerivedDirectImage
             h).obj E))) ∈ distTriang (schemeDerivedCategory Y) ∧
-      (schemeDerivedDirectImage h).mapTriangle.obj (Triangle.mk (biprod.lift (adjU'.unit.app E)
+      schemeMVImageTriangle h (Triangle.mk (biprod.lift (adjU'.unit.app E)
             (adjV'.unit.app E))
         (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
+          (schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_left : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ U))
             adjU' adjUV' E)
-          (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
+          (-(schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_right : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ V))
             adjV' adjUV' E))) (δ' E)) ∈
         distTriang (schemeDerivedCategory Y) ∧
       ∃ (cU : (schemeDerivedDirectImage h).obj ((schemeDerivedDirectImage (h ⁻¹ᵁ U).ι).obj
-          ((schemeOpenRestriction X (h ⁻¹ᵁ U)).mapDerivedCategory.obj E)) ≅
+          ((schemeMVDerivedRestriction X (h ⁻¹ᵁ U)).obj E)) ≅
           (schemeDerivedDirectImage U.ι).obj
-          ((schemeOpenRestriction Y U).mapDerivedCategory.obj ((schemeDerivedDirectImage h).obj E)))
+          ((schemeMVDerivedRestriction Y U).obj ((schemeDerivedDirectImage h).obj E)))
         (cV : (schemeDerivedDirectImage h).obj ((schemeDerivedDirectImage (h ⁻¹ᵁ V).ι).obj
-          ((schemeOpenRestriction X (h ⁻¹ᵁ V)).mapDerivedCategory.obj E)) ≅
+          ((schemeMVDerivedRestriction X (h ⁻¹ᵁ V)).obj E)) ≅
           (schemeDerivedDirectImage V.ι).obj
-          ((schemeOpenRestriction Y V).mapDerivedCategory.obj ((schemeDerivedDirectImage h).obj E)))
+          ((schemeMVDerivedRestriction Y V).obj ((schemeDerivedDirectImage h).obj E)))
         (cUV : (schemeDerivedDirectImage h).obj ((schemeDerivedDirectImage ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ
             V)).ι).obj
-          ((schemeOpenRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).mapDerivedCategory.obj E)) ≅
+          ((schemeMVDerivedRestriction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V))).obj E)) ≅
           (schemeDerivedDirectImage (U ⊓ V).ι).obj
-          ((schemeOpenRestriction Y (U ⊓ V)).mapDerivedCategory.obj ((schemeDerivedDirectImage
+          ((schemeMVDerivedRestriction Y (U ⊓ V)).obj ((schemeDerivedDirectImage
             h).obj E)))
-        (e : (schemeDerivedDirectImage h).mapTriangle.obj (Triangle.mk (biprod.lift
+        (e : schemeMVImageTriangle h (Triangle.mk (biprod.lift
             (adjU'.unit.app E) (adjV'.unit.app E))
         (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left)
+          (schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_left : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ U))
             adjU' adjUV' E)
-          (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right)
+          (-(schemeDerivedOpenDirectImageRestriction X
+            (homOfLE (inf_le_right : (h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V) ≤ h ⁻¹ᵁ V))
             adjV' adjUV' E))) (δ' E)) ≅
           (Triangle.mk (biprod.lift (adjU.unit.app ((schemeDerivedDirectImage h).obj E))
             (adjV.unit.app ((schemeDerivedDirectImage h).obj E)))
         (biprod.desc
-          (schemeDerivedOpenDirectImageRestriction Y (homOfLE inf_le_left)
+          (schemeDerivedOpenDirectImageRestriction Y (homOfLE (inf_le_left : U ⊓ V ≤ U))
             adjU adjUV ((schemeDerivedDirectImage h).obj E))
-          (-(schemeDerivedOpenDirectImageRestriction Y (homOfLE inf_le_right)
+          (-(schemeDerivedOpenDirectImageRestriction Y (homOfLE (inf_le_right : U ⊓ V ≤ V))
             adjV adjUV ((schemeDerivedDirectImage h).obj E)))) (δ ((schemeDerivedDirectImage
             h).obj E)))),
-        cU.hom =
-          ((Classical.choice (derivedDirectImageComposition (h ⁻¹ᵁ U).ι h)).symm ≪≫
-            eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h U).symm)
-              ≪≫ Classical.choice (derivedDirectImageComposition (h ∣_ U) U.ι)).hom.app
-                ((schemeOpenRestriction X (h ⁻¹ᵁ U)).mapDerivedCategory.obj E) ≫
-          (schemeDerivedDirectImage U.ι).map
-            ((Classical.choice (schemeDerivedDirectImage_openRestriction h U)).inv.app E) ∧
-        cV.hom =
-          ((Classical.choice (derivedDirectImageComposition (h ⁻¹ᵁ V).ι h)).symm ≪≫
-            eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h V).symm)
-              ≪≫ Classical.choice (derivedDirectImageComposition (h ∣_ V) V.ι)).hom.app
-                ((schemeOpenRestriction X (h ⁻¹ᵁ V)).mapDerivedCategory.obj E) ≫
-          (schemeDerivedDirectImage V.ι).map
-            ((Classical.choice (schemeDerivedDirectImage_openRestriction h V)).inv.app E) ∧
-        cUV.hom =
-          ((Classical.choice (derivedDirectImageComposition (h ⁻¹ᵁ (U ⊓ V)).ι h)).symm ≪≫
-            eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h (U ⊓ V)).symm)
-              ≪≫ Classical.choice (derivedDirectImageComposition (h ∣_ (U ⊓ V)) (U ⊓ V).ι)).hom.app
-                ((schemeOpenRestriction X (h ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj E) ≫
-          (schemeDerivedDirectImage (U ⊓ V).ι).map
-            ((Classical.choice (schemeDerivedDirectImage_openRestriction h (U ⊓ V))).inv.app E) ∧
+        cU.hom = (schemeMVOpenComparison h U E).hom ∧
+        cV.hom = (schemeMVOpenComparison h V E).hom ∧
+        cUV.hom = (schemeMVOpenComparison h (U ⊓ V) E).hom ∧
         e.hom.hom₁ = 𝟙 ((schemeDerivedDirectImage h).obj E) ∧
         e.hom.hom₂ = biprod.lift
           ((schemeDerivedDirectImage h).map biprod.fst ≫ cU.hom)
           ((schemeDerivedDirectImage h).map biprod.snd ≫ cV.hom) ∧
         e.hom.hom₃ = cUV.hom := by
-  sorry
+  classical
+  have _ := hU
+  have _ := hV
+  have _ := hU'
+  have _ := hV'
+  have hcover' : (h ⁻¹ᵁ U) ⊔ (h ⁻¹ᵁ V) = ⊤ := by
+    rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]
+  have hsX := @canonicalMV_spec.{u, w} X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover'
+    d1 (d3 _) (d3 _) (d3 _)
+  have hdX := hsX.1
+  have hnX := hsX.2
+  have hsY := @canonicalMV_spec.{u, w} Y U V hcover
+    d2 (d4 U) (d4 V) (d4 (U ⊓ V))
+  have hdY := hsY.1
+  have hnY := hsY.2
+  refine ⟨schemeMVAdjunction Y U, schemeMVAdjunction Y V,
+    schemeMVAdjunction Y (U ⊓ V), schemeMVBoundary Y U V hcover,
+    schemeMVAdjunction X (h ⁻¹ᵁ U), schemeMVAdjunction X (h ⁻¹ᵁ V),
+    schemeMVAdjunction X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)),
+    schemeMVBoundary X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover', ?_, ?_, ?_⟩
+  · intro E F _ _ φ
+    exact hnX E F φ
+  · intro E F _ _ φ
+    exact hnY E F φ
+  · intro E hE
+    refine ⟨schemeDerivedDirectImage_preserves_QCoh h E hE, hdX E,
+      hdY ((schemeDerivedDirectImage.{u, w, w} h).obj E),
+      schemeMVImageTriangle_distinguished.{u, w} h
+        (schemeMVTriangle.{u, w} X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover' E) (hdX E), ?_⟩
+    let cU := schemeMVOpenComparison h U E
+    let cV := schemeMVOpenComparison h V E
+    let cW := schemeMVOpenComparison h (U ⊓ V) E
+    have hc := @schemeMV_directImage_squares.{u, w} X Y h U V hcover hcover'
+      d1 d2 d3 d4 E
+    have hc₁ := hc.1
+    have hc₂ := hc.2
+    have hc₃ := @schemeMV_directImage_boundary.{u, w} X Y h U V hcover hcover'
+      d1 d2 d3 d4 E
+    let e := Triangle.isoMk
+      (schemeMVImageTriangle h
+        (schemeMVTriangle X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover' E))
+      (schemeMVTriangle Y U V hcover ((schemeDerivedDirectImage h).obj E))
+      (Iso.refl _) (schemeMVMiddleComparison h U V E) cW
+      (first_square_identity _ _ _ hc₁) hc₂
+      (boundary_square_identity (shiftFunctor _ (1 : ℤ)) _ cW.hom _ hc₃)
+    refine ⟨cU, cV, cW, e, rfl, rfl, rfl, rfl, ?_, rfl⟩
+    change (schemeMVMiddleComparison h U V E).hom = _
+    unfold schemeMVMiddleComparison
+    dsimp only [Iso.trans_hom, biprod.mapIso]
+    apply biprod.hom_ext
+    · simp only [Category.assoc, biprod.map_fst]
+      simp only [Functor.mapBiprod_hom, biprod.lift_fst_assoc]
+      exact (biprod.lift_fst _ _).symm
+    · simp only [Category.assoc, biprod.map_snd]
+      simp only [Functor.mapBiprod_hom, biprod.lift_snd_assoc]
+      exact (biprod.lift_snd _ _).symm
 
 end AlgebraicGeometry

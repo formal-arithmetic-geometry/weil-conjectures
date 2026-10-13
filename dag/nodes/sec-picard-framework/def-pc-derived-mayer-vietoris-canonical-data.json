@@ -1,0 +1,164 @@
+{
+ "id": "def-pc-derived-mayer-vietoris-canonical-data",
+ "kind": "definition",
+ "title": "Explicit canonical Mayer--Vietoris triangle and direct-image comparison data",
+ "statement": "Let $X$ be a scheme with derived module categories on $X$ and its opens. For a two-open cover $X=U\\cup V$ and $E\\in D(\\mathcal O_X)$, define $I(E)$ by the fixed functorial K-injective resolution of a localization preimage, and $e_E:Q(I(E))\\cong E$ by the inverse localized resolution map. Derive the fixed module restriction adjunctions $a_T$. Define $\\delta_E$ by transporting the boundary of the concrete Mayer--Vietoris short exact sequence of $I(E)$ along $e_E$ and the explicit intersection comparison. Define $\\operatorname{MV}(E)$ with first arrow the pair of units of $a_U,a_V$, second arrow the difference of their nested restriction maps, and third arrow $\\delta_E$. For $h:X\\to Y$ and an open $T\\subseteq Y$, define $c_T:Rh_*Rj_{h^{-1}T,*}(E|_{h^{-1}T})\\cong Rj_{T,*}((Rh_*E)|_T)$ using composition isomorphisms normalized by their right-derived unit equation and the derived sectionwise open-restriction identity. Define the middle comparison as the biproduct comparison followed by $c_U\\oplus c_V$. All objects and maps are explicitly constructed; no boundary or comparison is selected from a bare existence assertion. Derived restriction is an abbreviation of the existing exact derived functor, elaborating its exactness witnesses once for reuse.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-open-image-complex-comparison-iso"
+ ],
+ "proof": [
+  {
+   "text": "Choose the fixed functorial K-injective resolution of the localization preimage of E, and invert its localized resolution map. Derive the fixed module restriction adjunction. Transport the concrete short-exact-sequence boundary using the explicit intersection comparison and this resolution isomorphism. All these are real constructions. The resolution is a named construction with proved K-injectivity and injective-term instances, so consumers need not unfold the resolution functor merely to reuse these properties.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "def-pc-open-image-complex-comparison-iso",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Select the composition isomorphism by the determining right-derived unit equation of exists_derivedModuleDirectImageComposition. Construct the open-restriction comparison by deriving the sectionwise identity: use rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorNatIso and rightDerivedFunctorCompIso, followed by rightDerivedFunctorIsoMapDerivedCategory. Compose these comparisons and the additive biproduct comparison. No isomorphism is selected from mere Nonempty. The construction uses the generic right-derived functor composition and exact-functor comparison declarations from WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory and Comp directly; the bare Nonempty wrapper of the scheme restriction theorem is not used. The image triangle is a named definition of mapTriangle.obj, with shift commutation elaborated once; its distinguishedness is proved using the triangulated direct-image instance.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kinjective-mayer-vietoris-exact",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-derived-k-injective-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online",
+  "note": "Explicit construction and two separate compatibility steps of the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived direct image comparison commutes with Mayer Vietoris unit and restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of termwise split short exact sequence connecting morphism on K injective complexes",
+   "results": "8 hits: DerivedCategory.triangleOfSESδ, singleδ, homologySequenceδ and related generic short-exact-sequence declarations; no comparison for direct image of the explicit Mayer--Vietoris boundary",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*triangleOfSES|triangleOfSES.*rightDerivedFunctor",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisCanonicalData.lean",
+  "declaration": "AlgebraicGeometry.schemeMVBoundary",
+  "declarations": [
+   "AlgebraicGeometry.schemeMVModuleAbelian",
+   "AlgebraicGeometry.schemeMVDerivedRestriction",
+   "AlgebraicGeometry.schemeMVAdjunction",
+   "AlgebraicGeometry.schemeMVResolution",
+   "AlgebraicGeometry.schemeMVResolution_isKInjective",
+   "AlgebraicGeometry.schemeMVResolution_term_injective",
+   "AlgebraicGeometry.schemeMVResolutionIso",
+   "AlgebraicGeometry.schemeMVBoundary",
+   "AlgebraicGeometry.schemeMVTriangle",
+   "AlgebraicGeometry.schemeMVDirectImageTriangulated",
+   "AlgebraicGeometry.schemeMVImageTriangle",
+   "AlgebraicGeometry.schemeMVImageTriangle_distinguished",
+   "AlgebraicGeometry.schemeMVDirectImageComposition",
+   "AlgebraicGeometry.schemeMVOpenRestrictionComparison",
+   "AlgebraicGeometry.schemeMVOpenComparison",
+   "AlgebraicGeometry.schemeMVMiddleComparison"
+  ],
+  "statement": "def schemeMVBoundary (U V : X.Opens) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))] (E : schemeDerivedCategory X) : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeMVDerivedRestriction X (U ⊓ V)).obj E) ⟶ E⟦(1 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all four modules and three direct importers compile cleanly, with permitted axioms only and exactly the two documented sorry declarations."
+ }
+}

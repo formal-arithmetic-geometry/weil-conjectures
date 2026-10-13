@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-derived-mayer-vietoris-direct-image-boundary",
+ "kind": "statement",
+ "title": "Direct-image comparison of the canonical Mayer--Vietoris boundary",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes, let $Y=U\\cup V$ be a two-open cover and $X=h^{-1}U\\cup h^{-1}V$ its inverse-image cover. Assume the derived categories of modules on $X,Y$ and all their opens exist. For every $E\\in D(\\mathcal O_X)$ use the explicit boundary and normalized comparison data of [def-pc-derived-mayer-vietoris-canonical-data]. The third arrow of $Rh_*\\operatorname{MV}_X(E)$, formed with its actual shift comparison, equals the intersection comparison $c_{U\\cap V}$ followed by $\\delta_{Rh_*E}$. This is the boundary square only; it makes no assertion about the other triangle squares, distinguishedness or quasi-coherence.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-open-image-complex-comparison-iso",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "Use I, the fixed K-injective resolution with injective terms. The concrete Mayer--Vietoris short complex is short exact. Its degreewise sequences split because their first terms are injective. Restriction and right adjoints to exact restriction preserve K-injectivity; so do finite biproducts. Thus all three terms are K-injective.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-kinjective-mayer-vietoris-exact",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the termwise-split short-exact-sequence triangle comparison to h_* and this short complex. It identifies the mapped boundary including commutation with shift with the boundary of the termwise image short complex. Resolve h_*I by J and use the resolution map and its restrictions to obtain a morphism to the concrete Mayer--Vietoris short complex of J. Its intersection comparison is exactly the normalized direct-image composition followed by the inverse sectionwise restriction comparison.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-derived-functor-termwise-split-ses-triangle",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply triangleOfSESδ_naturality to that morphism. Compose with the two fixed resolution isomorphisms and the inverse intersection computation isomorphisms. Naturality and cancellation of these isomorphisms gives the displayed boundary equation. The image triangle uses the actual shift commutation of the right-derived functor.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-kinjective-mayer-vietoris-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-derived-functor-termwise-split-ses-triangle",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online",
+  "note": "Explicit construction and two separate compatibility steps of the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived direct image comparison commutes with Mayer Vietoris unit and restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of termwise split short exact sequence connecting morphism on K injective complexes",
+   "results": "8 hits: DerivedCategory.triangleOfSESδ, singleδ, homologySequenceδ and related generic short-exact-sequence declarations; no comparison for direct image of the explicit Mayer--Vietoris boundary",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*triangleOfSES|triangleOfSES.*rightDerivedFunctor",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisDirectImageBoundary.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_directImage_boundary",
+  "declarations": [
+   "AlgebraicGeometry.schemeMV_directImage_boundary"
+  ],
+  "statement": "theorem schemeMV_directImage_boundary (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens) (hcover : U ⊔ V = ⊤) (hcover' : (h ⁻¹ᵁ U) ⊔ (h ⁻¹ᵁ V) = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ T : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))] [∀ T : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))] (E : schemeDerivedCategory X) : (schemeMVImageTriangle h (schemeMVTriangle X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover' E)).mor₃ = (schemeMVOpenComparison h (U ⊓ V) E).hom ≫ schemeMVBoundary Y U V hcover ((schemeDerivedDirectImage h).obj E)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all four modules and three direct importers compile cleanly, with permitted axioms only and exactly the two documented sorry declarations."
+ }
+}

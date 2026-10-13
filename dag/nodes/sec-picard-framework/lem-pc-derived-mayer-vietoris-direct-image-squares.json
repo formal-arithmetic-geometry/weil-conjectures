@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-derived-mayer-vietoris-direct-image-squares",
+ "kind": "statement",
+ "title": "First two squares of the canonical direct-image Mayer--Vietoris comparison",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes, let $Y=U\\cup V$ be a two-open cover and $X=h^{-1}U\\cup h^{-1}V$ its inverse-image cover. Assume the derived categories of modules on $X,Y$ and all their opens exist. For every $E\\in D(\\mathcal O_X)$ use the explicit triangle and normalized comparison data of [def-pc-derived-mayer-vietoris-canonical-data]. Write $A=Rh_*\\operatorname{MV}_X(E)$ and $B=\\operatorname{MV}_Y(Rh_*E)$, and write $c_2,c_3$ for the middle and intersection comparison. Then $A_1c_2=B_1$ and $A_2c_3=c_2B_2$: the first two triangle squares commute.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-open-image-complex-comparison-iso",
+  "def-pc-derived-mayer-vietoris-canonical-data"
+ ],
+ "proof": [
+  {
+   "text": "On a K-injective representative I, use the normalized direct-image composition and the sectionwise identity for open restriction. These identities carry the two restriction units on X to the two restriction units on Y. Localize and assemble the pair using the additive biproduct comparison. Naturality transports the equation to E.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-open-image-complex-comparison-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise identities commute with restriction from U and V to their intersection. The explicit adjunction mate defining each derived restriction agrees with the localized nested restriction. Localize these identities, subtract the V identity and assemble the biproduct. This gives the second square with the specified intersection comparison.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-open-image-complex-comparison-restriction",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-open-image-complex-comparison-unit",
+  "lem-pc-open-image-complex-comparison-restriction",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), 08FE (lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition); official Stacks pages read online",
+  "note": "Explicit construction and two separate compatibility steps of the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived direct image comparison commutes with Mayer Vietoris unit and restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of termwise split short exact sequence connecting morphism on K injective complexes",
+   "results": "8 hits: DerivedCategory.triangleOfSESδ, singleδ, homologySequenceδ and related generic short-exact-sequence declarations; no comparison for direct image of the explicit Mayer--Vietoris boundary",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*triangleOfSES|triangleOfSES.*rightDerivedFunctor",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof: induction on a finite open cover, naturality of relative Mayer--Vietoris triangles including the connecting map",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "lem-pc-rf-mv-triangle-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisDirectImageSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisDirectImageSquares.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_directImage_squares",
+  "declarations": [
+   "AlgebraicGeometry.schemeMV_directImage_squares"
+  ],
+  "statement": "theorem schemeMV_directImage_squares (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens) (hcover : U ⊔ V = ⊤) (hcover' : (h ⁻¹ᵁ U) ⊔ (h ⁻¹ᵁ V) = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ T : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))] [∀ T : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))] (E : schemeDerivedCategory X) : (schemeMVImageTriangle h (schemeMVTriangle X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover' E)).mor₁ ≫ (schemeMVMiddleComparison h U V E).hom = (schemeMVTriangle Y U V hcover ((schemeDerivedDirectImage h).obj E)).mor₁ ∧ (schemeMVImageTriangle h (schemeMVTriangle X (h ⁻¹ᵁ U) (h ⁻¹ᵁ V) hcover' E)).mor₂ ≫ (schemeMVOpenComparison h (U ⊓ V) E).hom = (schemeMVMiddleComparison h U V E).hom ≫ (schemeMVTriangle Y U V hcover ((schemeDerivedDirectImage h).obj E)).mor₂",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-21431",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T162411-L-1519747",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all four modules and three direct importers compile cleanly, with permitted axioms only and exactly the two documented sorry declarations."
+ }
+}
