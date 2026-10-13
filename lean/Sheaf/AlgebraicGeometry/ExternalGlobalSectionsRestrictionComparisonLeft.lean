@@ -6,6 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.ExternalSectionsUnitMapLeft
 
 /-! # Restriction compatibility of external global sections
 
@@ -93,7 +94,14 @@ theorem exists_externalSectionsRestrictionComparisonLeft
               (externalCupCoefficients (V.ι ≫ f) g (F.restrict V.ι) G) (op ⊤),
           c.app (op V) ≫ eT.hom = eS.hom ≫
             ModuleCat.ofHom
-              (externalGlobalSectionsTensor (V.ι ≫ f) g (F.restrict V.ι) G) := by sorry
+              (externalGlobalSectionsTensor (V.ι ≫ f) g (F.restrict V.ι) G) := by
+  refine ⟨externalSectionsUnitLeft f g F G, externalSectionsUnitLeft_top f g F G, ?_⟩
+  intro V
+  obtain ⟨eS, eT, h⟩ := exists_externalSectionsUnitOpenTransportLeft f g F G V
+  refine ⟨eS, eT, ?_⟩
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro s t
+  exact h s t
 
 end
 end AlgebraicGeometry.Scheme.Modules

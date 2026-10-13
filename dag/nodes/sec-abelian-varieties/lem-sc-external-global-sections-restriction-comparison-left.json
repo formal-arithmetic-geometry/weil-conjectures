@@ -15,37 +15,30 @@
  ],
  "proof": [
   {
-   "text": "For V open in X put W=p inverse-image V. Apply the unit F -> p_*p^*F at V to the first section and the unit G -> q_*q^*G at Y to the second, restricting the latter from P to W. Their tensor section is bilinear over k because the scalar maps agree by the pullback equation. TensorProduct.lift defines c_V. Naturality of the units and tmulSection_map give its restriction compatibility on pure tensors; tensor induction extends it to all tensors. At the top open the restrictions along preimage_top are exactly tensorPullbackTopSection, giving the normalization equation.",
+   "text": "Construct the section unit as the adjoint of the scalar pullback coefficient. Tensor its first-factor component with the restriction of the second-factor global unit, and compose with the sectionwise tensor coefficient. Unit naturality and tmulSection_map prove naturality by tensor extensionality. At the top open, the two restrictions are tensorPullbackTopSection and yield the canonical externalGlobalSectionsTensor.",
    "uses": [
-    "def-sc-scalar-global-sections-comparison",
-    "def-sc-field-linear-module-cohomology-operations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The cartesian square of V -> X identifies V times Y with p inverse-image V. Restriction sections identify F(V) with Gamma(V,F restricted), preserving the k-action from V -> X -> Spec k; tensoring with Gamma(Y,G) gives eS. Identify restriction of H to W with tensor pullback along W -> P by the unique left-adjoint comparison carrying the restriction unit to the chosen tensor-pullback unit. Tensor pullback preserves the coefficient tensor; composition comparisons identify its two factors with p_V^*(F restricted) and q_V^*G. Taking sections gives eT. The unit equations carry the first pulled-back section to the pullback of its restriction and the second to the pullback of the unchanged section of G. The pure tensor formula for module pullback carries their tensor to the tensor of the two images. Hence the square commutes on pure tensors and then on all tensors by induction. Empty V, empty X or Y and zero coefficients require no exception.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-field-linear-module-cohomology-operations",
     "def-sc-scalar-global-sections-comparison"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the pure tensor open transport theorem for each V to get eS and eT. ModuleCat tensor extensionality extends its equality on s tensor t to equality of the two linear maps. This proves the local clause for the explicit natural transformation.",
+   "uses": [
+    "lem-sc-external-sections-unit-open-transport-left"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-field-linear-module-cohomology-operations",
   "def-sc-scalar-global-sections-comparison",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-sc-external-sections-unit-open-transport-left"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, omitted degree-zero canonical-cup verification; first-factor restriction compatibility written out using Tags 0096, 0097, 01CD; source read at https://stacks.math.columbia.edu/tag/0BED"
+  "place": "Tag 0BED; explicit unit morphism, naturality and top normalization in Lean; open transport isolated on pure tensors"
  },
  "mathlib_match": null,
  "status": "split",
@@ -181,9 +174,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U4",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261013T120502-L-3445521",
+  "landing": "20261013T125012-L-3837525",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
