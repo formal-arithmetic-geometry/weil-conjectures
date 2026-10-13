@@ -12202,3 +12202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/S4/Sheaf.AlgebraicGeometry.ScalarTensorUnitCoefficient (stage 3; reviewer PASS; first push; landing 20261013T111923-L-3063324 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/T1/Sheaf.Algebra.Homology.AffinePerfectChainMapEqualityDetection (stage 3; reviewer PASS; first push; landing 20261013T111924-L-3063513 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/T1/Sheaf.RingTheory.FiniteRankCoefficientCorrection (stage 3; reviewer PASS; first push; landing 20261013T111924-L-3063639 (interface); batch 20261013T111833; modules 2; new nodes 1)
+- 11:19 L: merged deliver/T1/Sheaf.RingTheory.FractionFieldCompleteIntersectionCotangent (stage 3; reviewer PASS; first push; landing 20261013T111925-L-3063790 (proof); batch 20261013T111833; modules 1; new nodes 0)
