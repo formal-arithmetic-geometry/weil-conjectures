@@ -68,8 +68,7 @@ Source: blueprint, Riemann--Roch determinant paragraph
 Proof: substitute the equality with the original linear maps into the restriction equation;
 then apply their assumed naturality. -/
 theorem determinant_split_comparison_restriction {X : Scheme.{v}}
-    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (_hr : r₂ = r₁ + r₃)
-    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]
+    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ)
     (V : X.Opens) (d : ∀ (W : X.Opens), W ≤ V →
       (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
         ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))
