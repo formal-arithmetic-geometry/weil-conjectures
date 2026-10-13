@@ -26,7 +26,7 @@
    }
   },
   {
-   "text": "For fixed kprime,l and j in E_k, form b_j=a_kprime*h_klj-sum_{jprime in E_kprime}h_kprime,l,jprime*h_k,jprime,j. Comparing the two cleared expressions for a_k*a_kprime*f_l gives the zero conormal class with coefficients b_j on the chosen conormal basis. Prepared.conormal makes each b_j zero in Cbar localized at a_k. Using Prepared.kernel and surjectivity, clear finitely many denominators to put a_k^N*b_j in I+pi^2P.",
+   "text": "The private proved lemma chart_coefficient_clearing reduces Prepared.relation modulo pi squared, maps it to the conormal module and localizes at a_k. Comparing the k and kprime expressions gives a zero combination of the Prepared.conormal basis. Each coefficient b_j=a_kprime*h_klj-sum h_kprime,l,jprime*h_k,jprime,j is therefore zero after localization. IsLocalization.Away.exists_of_eq supplies an exponent N for each coefficient. Surjectivity of polynomial reduction lifts ideal membership and the polynomial quotient-kernel criterion gives a_k^N*b_j in I+(pi^2). This calculation is fully proved, including the finite sum rearrangement and the lift from the reduced polynomial ring.",
    "uses": [
     "lem-weil-pbc-popescu-lift-preparation",
     "def-weil-pbc-module-localization-away"
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "Prepared.relation implies a_k*I is contained in I_Ek+pi^2P. Multiply the preceding coefficient relations once more by a_k. Expand a_k*p_kprime,l-a_kprime*p_kl+sum h_kprime,l,jprime*p_k,jprime modulo pi; its z_j coefficients are b_j. All p_kl vanish in D_k, including l in E_k by normalization. Multiply by the common a_k^N and substitute f_j=pi*z_j for j in E_k. The result belongs to pi*D_k after inverting a_k. Divide by the unit power of a_k and pass to the local ring at q_k to obtain the claimed witness y.",
+   "text": "Put T=(D_k)_{q_k}, J=(pi) in T, and S=T/J. The image of a_k is a unit, and chart_original_equation_eq_zero implies every f_j maps to zero in S. Thus I+(pi^2) is in the kernel of the coefficient evaluation map. Apply chart_coefficient_clearing and cancel the unit power of a_k separately for each j to make b_j zero in S. Normalization makes p_kl zero for l in E_k; the defining chart equations handle the complement. Hence a_k*z_l=sum h_klj*z_j in S. Substitute this equality into a_k*p_kprime,l, interchange the two finite sums, and obtain sum b_j*z_j=0. Cancel the unit a_k. Finally the quotient kernel criterion and Ideal.mem_span_singleton give the required witness of divisibility by pi in T. No common exponent, flatness, or annihilator hypothesis is needed.",
    "uses": [
     "lem-weil-pbc-popescu-lift-preparation",
     "def-weil-pbc-module-localization-away",
@@ -59,7 +59,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent.; implemented using the quotient of the chart local ring by (pi), with individual unit-power cancellation."
  },
  "mathlib_searches": [
   {
@@ -143,13 +143,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
   "group": "M3",
   "result": "pass",
-  "landing": "20261012T232142-L-1993271",
-  "kind": "interface",
+  "landing": "20261013T015602-L-3023083",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

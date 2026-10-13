@@ -6,6 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.RingTheory.PopescuLiftPartialChart
+import Mathlib.Tactic.Ring
 
 /-! # Comparing the partial chart with the full Popescu lifting algebra
 
@@ -18,6 +19,127 @@ Source: Stacks Project, Tag 07CP, the final local kernel calculation.
 universe a c
 
 namespace Algebra.PopescuLiftPresentation
+
+
+/-- The coefficients comparing two cleared relations vanish after localization
+of the reduced coefficient quotient.
+
+Source: Stacks Project, Tag 07CP, the paragraph beginning “The relations (4) imply”.
+(blueprint: lem-weil-pbc-popescu-lift-chart-relations).
+
+Proof: Reduce the cleared relations modulo pi squared and apply the quotient map
+I -> I/I squared, then localize at a_k. Multiplying the k-th expression for f_l
+by a_kprime and substituting the k-th expressions into the kprime-th expression
+produces a zero combination of the specified conormal basis. Its coordinate at j
+is the displayed coefficient, hence this coefficient is zero in the localized
+quotient. The localization equality criterion gives a power of a_k annihilating
+its quotient class. Thus the reduced polynomial belongs to the ideal of the
+reduced f_l. Lift a finite ideal expression to R[x] using surjectivity of reduction.
+The residual polynomial reduces to zero, so C(pi squared) divides it. This gives
+membership in the sum of the original relation ideal and (C(pi squared)). Empty
+E has no j to check; zero rings and nilpotent a_k are handled by the same
+localization equality criterion, and no cancellation of pi is used. -/
+private theorem chart_coefficient_clearing {R : Type a} {Cbar : Type c}
+    [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
+    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
+    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
+    (k k' : Fin d.r) (l : Fin d.m) (j : d.E k) :
+    ∃ N : ℕ, d.a k ^ N *
+        (d.a k' * d.h k l j - ∑ j' ∈ d.E k', d.h k' l j' * d.h k j' j) ∈
+      Ideal.span (Set.range d.f) ⊔ Ideal.span ({MvPolynomial.C (π ^ 2)} :
+        Set (MvPolynomial (Fin d.n) R)) := by
+  classical
+  let P := MvPolynomial (Fin d.n) (R ⧸ Ideal.span ({π ^ 2} : Set R))
+  let I : Ideal P := d.reducedIdeal
+  let Q := P ⧸ I
+  let S := Localization.Away (d.reducedElement k)
+  let F := LocalizedModule.mkLinearMap (Submonoid.powers (d.reducedElement k)) I.Cotangent
+  let v (l : Fin d.m) : I := ⟨d.reduced (d.f l), Ideal.subset_span ⟨l, rfl⟩⟩
+  let t (l : Fin d.m) := F (I.toCotangent (v l))
+  let s (p : MvPolynomial (Fin d.n) R) : S :=
+    algebraMap Q S (Ideal.Quotient.mk I (d.reduced p))
+  have hred (i : Fin d.r) (l : Fin d.m) :
+      d.reduced (d.a i) * d.reduced (d.f l) =
+        ∑ j ∈ d.E i, d.reduced (d.h i l j) * d.reduced (d.f j) := by
+    have h := congrArg (MvPolynomial.map (Ideal.Quotient.mk
+      (Ideal.span ({π ^ 2} : Set R))) (σ := Fin d.n)) (hd.relation i l)
+    simpa only [map_mul, map_add, map_sum, MvPolynomial.map_C,
+      Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self (π ^ 2)),
+      map_zero, zero_mul, add_zero] using h
+  have hrel (i : Fin d.r) (l : Fin d.m) :
+      s (d.a i) • t l = ∑ j ∈ d.E i, s (d.h i l j) • t j := by
+    have hi : d.reduced (d.a i) • v l =
+        ∑ j ∈ d.E i, d.reduced (d.h i l j) • v j := by
+      apply Subtype.ext
+      simpa only [Submodule.coe_smul, Submodule.coe_sum, smul_eq_mul] using hred i l
+    have hc := congrArg I.toCotangent hi
+    simp only [map_smul, map_sum] at hc
+    have hc' : algebraMap P Q (d.reduced (d.a i)) • I.toCotangent (v l) =
+        ∑ j ∈ d.E i,
+          algebraMap P Q (d.reduced (d.h i l j)) • I.toCotangent (v j) := by
+      simpa only [algebraMap_smul] using hc
+    change algebraMap Q S (algebraMap P Q (d.reduced (d.a i))) •
+      F (I.toCotangent (v l)) = ∑ j ∈ d.E i,
+        algebraMap Q S (algebraMap P Q (d.reduced (d.h i l j))) •
+          F (I.toCotangent (v j))
+    simp only [algebraMap_smul, ← F.map_smul, ← map_sum]
+    exact congrArg F hc'
+  obtain ⟨b, hb⟩ := hd.conormal k
+  have ht (j : d.E k) : t j = b j := (hb j).symm
+  have hsum : ∑ j : d.E k,
+      (s (d.a k') * s (d.h k l j) -
+        ∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j)) • b j = 0 := by
+    simp_rw [← ht]
+    rw [Finset.sum_coe_sort (d.E k) (fun j : Fin d.m ↦
+      (s (d.a k') * s (d.h k l j) -
+        ∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j)) • t j)]
+    simp only [sub_smul, Finset.sum_sub_distrib,
+      Finset.sum_smul (R := S), mul_smul]
+    rw [← Finset.smul_sum, ← hrel k l]
+    rw [Finset.sum_comm]
+    simp_rw [← Finset.smul_sum, ← hrel k]
+    simp_rw [smul_comm (s (d.h k' l _)) (s (d.a k))]
+    rw [← Finset.smul_sum, ← hrel k' l, smul_smul, smul_smul, mul_comm]
+    exact sub_self _
+  have hcoeff : s (d.a k') * s (d.h k l j) -
+      ∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j) = 0 := by
+    exact Fintype.linearIndependent_iff.mp b.linearIndependent _ hsum j
+  have hs : s (d.a k' * d.h k l j -
+      ∑ j' ∈ d.E k', d.h k' l j' * d.h k j' j) = 0 := by
+    simpa only [s, map_sub, map_mul, map_sum] using hcoeff
+  let B := d.a k' * d.h k l j -
+    ∑ j' ∈ d.E k', d.h k' l j' * d.h k j' j
+  have hs' : algebraMap Q S (Ideal.Quotient.mk I (d.reduced B)) =
+      algebraMap Q S 0 := by simpa only [map_zero] using hs
+  obtain ⟨N, hN⟩ := IsLocalization.Away.exists_of_eq (d.reducedElement k) hs'
+  have hmem : d.reduced (d.a k ^ N * B) ∈ I := by
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    simpa only [map_mul, map_pow, mul_zero] using hN
+  let red := MvPolynomial.map (Ideal.Quotient.mk
+    (Ideal.span ({π ^ 2} : Set R))) (σ := Fin d.n)
+  let I₀ : Ideal (MvPolynomial (Fin d.n) R) := Ideal.span (Set.range d.f)
+  have hmap : I₀.map red = I := by
+    rw [Ideal.map_span]
+    change Ideal.span (red '' Set.range d.f) = Ideal.span (Set.range (fun j ↦ red (d.f j)))
+    rw [← Set.range_comp']
+  have hsurj : Function.Surjective red :=
+    MvPolynomial.map_surjective _ Ideal.Quotient.mk_surjective
+  obtain ⟨p, hp, heq⟩ := (Ideal.mem_map_iff_of_surjective red hsurj).mp (hmap.symm ▸ hmem)
+  have hz : red (d.a k ^ N * B - p) = 0 := by rw [map_sub, heq, sub_self]
+  have hdiv : MvPolynomial.C (π ^ 2) ∣ d.a k ^ N * B - p := by
+    apply (MvPolynomial.C_dvd_iff_map_hom_eq_zero
+      (Ideal.Quotient.mk (Ideal.span ({π ^ 2} : Set R))) (π ^ 2)
+      (fun r ↦ (Ideal.Quotient.eq_zero_iff_mem.trans Ideal.mem_span_singleton)) _).mpr
+    exact hz
+  refine ⟨N, ?_⟩
+  have hdiff : d.a k ^ N * B - p ∈
+      Ideal.span ({MvPolynomial.C (π ^ 2)} : Set (MvPolynomial (Fin d.n) R)) :=
+    Ideal.mem_span_singleton.mpr hdiv
+  have hadd := (I₀ ⊔ Ideal.span ({MvPolynomial.C (π ^ 2)} :
+    Set (MvPolynomial (Fin d.n) R))).add_mem
+    (Ideal.mem_sup_left hp) (Ideal.mem_sup_right hdiff)
+  simpa only [add_sub_cancel] using hadd
+
 
 /-- Other charts' equations are pi-divisible in the partial chart local ring.
 
@@ -53,7 +175,123 @@ theorem chart_relations_pi_divisible {R : Type a} {Cbar : Type c}
       ∃ y : d.chartLocal k q,
         algebraMap (d.chartAlgebra k) (d.chartLocal k q)
           (ULift.up (Ideal.Quotient.mk (d.chartIdeal k) (d.equation (.inr (k', l))))) =
-            algebraMap R (d.chartLocal k q) π * y := by sorry
+            algebraMap R (d.chartLocal k q) π * y := by
+  classical
+  let T := d.chartLocal k q
+  let J : Ideal T := Ideal.span ({algebraMap R T π} : Set T)
+  let S := T ⧸ J
+  let evT : d.polynomial →+* T :=
+    (algebraMap (d.chartAlgebra k) T).comp
+      ((ULift.algEquiv (R := R)).symm.toRingHom.comp (Ideal.Quotient.mk (d.chartIdeal k)))
+  let ev : d.polynomial →+* S := (Ideal.Quotient.mk J).comp evT
+  let s : MvPolynomial (Fin d.n) R →+* S := ev.comp d.includeX.toRingHom
+  have hs (p : MvPolynomial (Fin d.n) R) : s p = ev (d.includeX p) := rfl
+  have hπ : ev (MvPolynomial.C π) = 0 := by
+    change Ideal.Quotient.mk J (algebraMap R T π) = 0
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self _)
+  have hunitT : IsUnit (evT (d.includeX (d.a k))) :=
+    IsLocalization.map_units T
+      (⟨ULift.up (Ideal.Quotient.mk (d.chartIdeal k) (d.includeX (d.a k))), by
+        change (d.chartMap k) _ ∉ q.asIdeal
+        exact hk⟩ : (d.chartPrime k q).asIdeal.primeCompl)
+  have hunit : IsUnit (s (d.a k)) := hunitT.map (Ideal.Quotient.mk J)
+  have hf (j : Fin d.m) : s (d.f j) = 0 := by
+    have hu := congrArg (Ideal.Quotient.mk J)
+      (d.chart_original_equation_eq_zero hd k q hk j)
+    change ev (d.equation (.inl j)) = 0 at hu
+    simpa only [hs, equation,
+      map_sub, map_mul, hπ, zero_mul, sub_zero] using hu
+  have hI : Ideal.span (Set.range d.f) ⊔
+      Ideal.span ({MvPolynomial.C (π ^ 2)} : Set (MvPolynomial (Fin d.n) R)) ≤
+        RingHom.ker s := by
+    apply sup_le
+    · apply Ideal.span_le.mpr
+      rintro _ ⟨j, rfl⟩
+      exact hf j
+    · apply Ideal.span_le.mpr
+      rintro _ ⟨rfl⟩
+      change s (MvPolynomial.C (π ^ 2)) = 0
+      change ev (d.includeX (MvPolynomial.C (π ^ 2))) = 0
+      rw [show d.includeX (MvPolynomial.C (π ^ 2)) = (MvPolynomial.C π) ^ 2 by
+        change MvPolynomial.rename Sum.inl (MvPolynomial.C (π ^ 2)) = _
+        rw [MvPolynomial.rename_C, MvPolynomial.C_pow], map_pow, hπ, zero_pow (by decide)]
+  have hb (k' : Fin d.r) (l : Fin d.m) (j : Fin d.m) (hj : j ∈ d.E k) :
+      s (d.a k') * s (d.h k l j) -
+        ∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j) = 0 := by
+    obtain ⟨N, hN⟩ := chart_coefficient_clearing π d hd k k' l ⟨j, hj⟩
+    have hz : s (d.a k ^ N *
+        (d.a k' * d.h k l j - ∑ j' ∈ d.E k', d.h k' l j' * d.h k j' j)) = 0 :=
+      hI hN
+    rw [map_mul, map_pow] at hz
+    have hz' := (hunit.pow N).mul_right_eq_zero.mp hz
+    simpa only [map_sub, map_mul, map_sum] using hz'
+  have hp (l : Fin d.m) : ev (d.equation (.inr (k, l))) = 0 := by
+    by_cases hl : l ∈ d.E k
+    · have heq : d.equation (.inr (k, l)) = 0 := by
+        simp only [equation, hd.normalized_g k l hl, map_zero, mul_zero, sub_zero]
+        have hsum : (∑ j ∈ d.E k, d.includeX (d.h k l j) *
+            MvPolynomial.X (.inr j)) =
+            d.includeX (d.a k) * MvPolynomial.X (.inr l) := by
+          rw [Finset.sum_eq_single l]
+          · rw [hd.normalized_h k l hl l, if_pos rfl]
+          · intro j hj hjl
+            rw [hd.normalized_h k l hl j, if_neg (Ne.symm hjl), map_zero, zero_mul]
+          · exact fun h ↦ (h hl).elim
+        rw [hsum, sub_self]
+      rw [heq, map_zero]
+    · have heq : Ideal.Quotient.mk (d.chartIdeal k) (d.equation (.inr (k, l))) = 0 :=
+        Ideal.Quotient.eq_zero_iff_mem.mpr
+          (Ideal.subset_span ⟨l, by simp [chartEquation, hl]⟩)
+      change Ideal.Quotient.mk J
+        (algebraMap (d.chartAlgebra k) T
+          ((ULift.algEquiv (R := R)).symm (Ideal.Quotient.mk _ _))) = 0
+      rw [heq, map_zero, map_zero, map_zero]
+  have hrel (l : Fin d.m) :
+      s (d.a k) * ev (MvPolynomial.X (.inr l)) =
+        ∑ j ∈ d.E k, s (d.h k l j) * ev (MvPolynomial.X (.inr j)) := by
+    have h := hp l
+    simpa only [hs, equation, map_sub,
+      map_mul, map_sum, hπ, zero_mul, sub_zero, sub_eq_zero] using h
+  intro k' l
+  have hswap :
+      (∑ j' ∈ d.E k', s (d.h k' l j') *
+        ∑ j ∈ d.E k, s (d.h k j' j) * ev (MvPolynomial.X (.inr j))) =
+      ∑ j ∈ d.E k, (∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j)) *
+        ev (MvPolynomial.X (.inr j)) := by
+    simp only [Finset.mul_sum, Finset.sum_mul, mul_assoc]
+    rw [Finset.sum_comm]
+  have hmul : s (d.a k) * ev (d.equation (.inr (k', l))) = 0 := by
+    calc
+      s (d.a k) * ev (d.equation (.inr (k', l))) =
+          s (d.a k') * (s (d.a k) * ev (MvPolynomial.X (.inr l))) -
+            ∑ j' ∈ d.E k', s (d.h k' l j') *
+              (s (d.a k) * ev (MvPolynomial.X (.inr j'))) := by
+        simp only [hs, equation, map_sub,
+          map_mul, map_sum, hπ, zero_mul, sub_zero, mul_sub, Finset.mul_sum]
+        congr 1
+        · ring
+        · apply Finset.sum_congr rfl
+          intro j hj
+          ring
+      _ = ∑ j ∈ d.E k,
+          (s (d.a k') * s (d.h k l j) -
+            ∑ j' ∈ d.E k', s (d.h k' l j') * s (d.h k j' j)) *
+              ev (MvPolynomial.X (.inr j)) := by
+        simp_rw [hrel]
+        rw [hswap]
+        rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+        apply Finset.sum_congr rfl
+        intro j hj
+        ring
+      _ = 0 := by
+        apply Finset.sum_eq_zero
+        intro j hj
+        rw [hb k' l j hj, zero_mul]
+  have hz : ev (d.equation (.inr (k', l))) = 0 := hunit.mul_right_eq_zero.mp hmul
+  have hmem : evT (d.equation (.inr (k', l))) ∈ J :=
+    Ideal.Quotient.eq_zero_iff_mem.mp hz
+  exact Ideal.mem_span_singleton.mp hmem
+
 
 private theorem localRingHom_bijective_of_kernel_vanishes
     {A B : Type*} [CommRing A] [CommRing B] (f : A →+* B)
