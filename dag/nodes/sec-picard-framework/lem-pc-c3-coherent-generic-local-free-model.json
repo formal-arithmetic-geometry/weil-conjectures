@@ -20,40 +20,75 @@
  ],
  "proof": [
   {
-   "text": "Take the coherent subsheaf F prime annihilated by the ideal of the closed immersion. Its generic stalk agrees with F by the maximal-ideal-annihilation hypothesis, and it descends as i_*G for a coherent module G on Z.",
+   "text": "Let xi be the generic point of Z, R = O_X,i(xi), K = O_Z,xi, and M = F_i(xi). The closed immersion gives a surjective ring map phi : R -> K; Mathlib makes K a field for integral Z and ker_eq_maximalIdeal identifies its kernel with the maximal ideal of R. The hypothesis hkill makes M torsion by this kernel. Construct its quotient-ring module action with Module.IsTorsionBySet.module, then its K-action through the inverse of phi.quotientKerEquivOfSurjective. The quotient formula proves phi(a) acts on M as a does. These are actual constructions, not chosen witnesses.",
    "uses": [
-    "lem-weil-pbc-coherent-generic-point-closed-descent"
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme",
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Coherence gives F finite type. finite_moduleStalk_of_isFiniteType supplies Module.Finite R M. The identity semilinear map over phi transfers this to Module.Finite K M by Module.Finite.of_surjective. Set r = Module.finrank K M, take Module.finBasis, and reindex by ULift (Fin r). Combine its equivFun with exists_finite_free_moduleStalk_linearEquiv to give an isomorphism E_xi -> M over K, where E = free (ULift (Fin r)). This performs the finite generic basis step directly over the residue field and includes r = 0.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-stalk-finite",
+    "lem-weil-pbc-finite-free-module-stalk-equiv"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the finite free closed-pushforward model coherent in the private helper isCoherent_closedImmersion_finiteFree. E has an explicit finite presentation with empty relations. To show i_*E quasi-coherent, apply isQuasicoherent_of_forall_isAffineOpen: the two basic-open localization conditions for E on i^{-1}(W) transfer using i.preimage_basicOpen and i.naturality. Its sections on each affine W are finite over Gamma(Z,i^{-1}(W)) since E is finitely presented, and therefore finite over Gamma(X,W) since i.app W is surjective. The private affine_restrict_sections equivalence transports these sections to the restriction along W.fromSpec. Over the Noetherian coordinate ring, exists_presentation_isFinite gives a finite global presentation. Affine opens cover X; isFinitePresentation_of_iSup_opensRange_eq_top gives finite presentation of i_*E, and the locally Noetherian coherence criterion concludes. The affine finiteness and finite-presentation facts here are the proved upstream declarations finite_sections_of_isFinitePresentation, exists_presentation_isFinite, and isFinitePresentation_of_iSup_opensRange_eq_top, not an application of quasicoherent_finite_type_affine.",
+   "uses": [
+    "pqf-lem-qcoh-principal-open-criterion",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false
   },
   {
-   "text": "The finite function-field vector space G at the generic point has a basis of finite rank r. Extend this basis to a map O_Z^{direct sum r}|V -> G|V on a neighbourhood of the generic point, and shrink so that it is an isomorphism.",
+   "text": "The closed-pushforward stalk comparison is bijective and linear through i.stalkMap xi. Package it with LinearEquiv.ofBijective as an isomorphism (i_*E)_i(xi) -> restrictScalars(phi)(E_xi). Apply restriction of scalars to the basis isomorphism. The identity additive equivalence on M is R-linear because phi(a) acts as a, proved in step 1. Compose these three isomorphisms to give (i_*E)_i(xi) isomorphic to F_i(xi), without descending F or its annihilator subsheaf.",
    "uses": [
-    "lem-weil-pbc-coherent-integral-generic-free-neighbourhood",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved private helper coherent_stalk_iso_near applies exists_open_hom_of_coherent_stalk_map to the coherent modules i_*E and F on X. Its equality expresses the original stalk isomorphism as the new stalk map conjugated by the bijective restriction-stalk comparisons; cancellation proves this new map bijective. Coherence restricts to the resulting U. Apply coherent_local_isomorphism on the open subscheme U to obtain W containing the lifted point on which the over-site map is invertible.",
+   "uses": [
+    "lem-weil-pbc-coherent-stalk-map-extends",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
     "lem-weil-pbc-coherent-local-isomorphism"
    ],
    "elementary": false
   },
   {
-   "text": "The monomorphism i_*G -> F with bijective generic stalk is an isomorphism on some ambient neighbourhood. Push the free model forward and use the open X minus i(Z minus V), whose inverse image is V because i is a closed embedding. Intersect the two neighbourhoods and compose the isomorphisms. The zero generic stalk case uses the empty free module.",
+   "text": "Convert the over-site isomorphism through overFunctorEquiv and overEquiv. For g = W.iota followed by U.iota, restrictFunctorComp identifies nested restrictions with restriction along g. Pull the isomorphism back along g.isoOpensRange.inv and compose restrictCompIso with g.isoOpensRange_inv_comp to obtain an isomorphism on g.opensRange, which contains i(xi). Sigma.whiskerEquiv reindexes E from ULift (Fin r) to Fin r. Pushforward and restriction transport this reindexing to exactly the coproduct in the unchanged conclusion.",
    "uses": [
-    "lem-weil-pbc-coherent-local-isomorphism",
-    "lem-weil-pbc-finite-pushforward-coherent"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-generic-point-closed-descent",
-  "lem-weil-pbc-coherent-integral-generic-free-neighbourhood",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
+  "lem-weil-pbc-finite-free-module-stalk-equiv",
+  "pqf-lem-qcoh-principal-open-criterion",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-coherent-stalk-map-extends",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
   "lem-weil-pbc-coherent-local-isomorphism",
-  "lem-weil-pbc-finite-pushforward-coherent"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "C3",
+  "agent": "V3",
   "date": "2026-10-13",
-  "based_on": "Stacks Project source, opened online; explicit affine compatibility and edge-case details supplied by C3."
+  "based_on": "Stacks Project Tag 01YE (read online), finite generic basis; Tags 01Y4 and 01Y3 for extension and shrinking. A direct quotient-field action replaces annihilator descent to avoid the cyclic planned imports. Finite-free closed-pushforward coherence is proved by the affine localization argument of Tags 01Y6 and 01XZ using the existing proved source-library API. Complete Lean proof, no new holes; route below the unit level. Second reader V3 checked the quotient action, finite-free pushforward proof, stalk comparison and neighbourhood transport; removed the unused quasicoherent_finite_type_affine dependency and aligned the docstring."
  },
  "mathlib_searches": [
   {
@@ -140,10 +175,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T072339-L-1115271",
-  "kind": "interface",
+  "landing": "20261013T100203-L-2497862",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
