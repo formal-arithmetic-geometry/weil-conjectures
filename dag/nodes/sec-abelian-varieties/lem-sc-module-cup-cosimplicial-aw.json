@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-module-cup-cosimplicial-aw",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Alexander–Whitney tensor cochain map for cosimplicial module sheaves",
+ "statement": "For any cosimplicial module sheaves A,B,C on a scheme X and natural pointwise tensor morphism mu from A tensor B to C, the total tensor of the zero-extended alternating coface complexes of A,B admits a cochain map to the corresponding complex of C. On the (0,0) summand it is mu in degree zero, conjugated by the extension identifications. There are no flasqueness, exactness, or augmentation hypotheses.",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16, Alexander–Whitney formula and (1.1.2); applied to the additive tensor structure of module sheaves."
+ },
+ "stmt_deps": [
+  "lem-sc-module-cup-godement-cosimplicial-input"
+ ],
+ "proof": [
+  {
+   "text": "on the summand in bidegree (r,s), r,s nonnegative, apply to the first\nfactor the cofaces associated with the inclusion [r] → [r+s] of the first\nr+1 vertices, and to the second factor those associated with the inclusion\n[s] → [r+s] of the last s+1 vertices. Tensor these two maps and follow by\nμ in degree r+s. The other summands have a zero factor. The coproduct universal\nproperty assembles these maps into the components of the total-complex map.\nExpand the alternating coface differential. Naturality of μ moves each coface\npast μ; the front/back inclusion identities cancel all interior terms and\nleave exactly the left differential and (-1)^r times the right differential.\nThis is the cochain-map identity. In bidegree (0,0) both inclusions are identities,\nso the resulting map is precisely μ in degree zero, conjugated by the extension\nidentifications. No exactness, flasqueness, or augmentations are used.",
+   "uses": [
+    "lem-sc-module-cup-godement-cosimplicial-input"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-cosimplicial-input"
+ ],
+ "proof_origin": {
+  "by": "M1 stage-3 worker; explicit adaptation to module sheaves",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "Banerjee, Tensor Structure on Smooth Motives, §1.1.4, p. 16, Alexander–Whitney formula and (1.1.2); applied to the additive tensor structure of module sheaves."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementPairing",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-godement-aw",
+   "place": "Godement construction and Alexander–Whitney step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Godement flasque resolution of module sheaves with Alexander Whitney tensor product",
+   "results": "Returned sheaf-module abelian category and sheafification APIs; no Godement/AW theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\"; \"extendXIso\"",
+   "results": "Cosimplicial object and extension APIs exist; no pairing theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|AlexanderWhitney; alternatingCofaceMapComplex|mapBifunctorDesc",
+   "results": "No AW theorem. Alternating coface complexes and tensor coproduct descent APIs exist. The upstream abelian Godement presheaf has no module tensor pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cosimplicial Godement resolution of sheaves of modules admits a natural Alexander Whitney tensor cochain pairing",
+   "results": "Service unavailable: Internal Server Error. No results were returned; no mathematical verdict can be drawn from this unavailable search.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupCosimplicialAW",
+  "file": "lean/Sheaf/Paper/ModuleCupCosimplicialAW.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicial_aw",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicial_aw"
+  ],
+  "statement": "theorem moduleCup_cosimplicial_aw (X : Scheme.{u}) [MonoidalPreadditive X.Modules]\n    (A B C : CosimplicialObject X.Modules) (μ : moduleCup_cosimplicialTensor X A B ⟶ C) :\n    ∃ t : HomologicalComplex.tensorObj (moduleCup_cosimplicialComplex X A)\n        (moduleCup_cosimplicialComplex X B) ⟶ moduleCup_cosimplicialComplex X C,\n      HomologicalComplex.ιTensorObj (moduleCup_cosimplicialComplex X A)\n        (moduleCup_cosimplicialComplex X B) 0 0 0 (by simp) ≫ t.f 0 =\n        moduleCup_cosimplicialZeroPair X A B C μ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

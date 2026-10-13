@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-module-cup-godement-cosimplicial-input",
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "Flasque cosimplicial Godement resolutions with pointwise multiplication",
+ "statement": "For a scheme X and module sheaves F,G, there exist cosimplicial module sheaves A,B,C, quasi-isomorphic augmentations of the zero extensions of their alternating coface complexes from F[0],G[0],(F tensor G)[0], and a natural pointwise tensor multiplication A tensor B to C agreeing with tensor sections in degree zero. All terms of the extended complexes are flasque. No cochain map on the total tensor complex is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Section 20.30, Lemma 20.30.1 (0FKS); pointwise multiplication: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16."
+ },
+ "stmt_deps": [
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof": [
+  {
+   "text": "let T(F) be the sheaf of all discontinuous sections of the stalks of F.\nIt has sections over V equal to the product of F_x for x in V, with the O(V)\naction through germs. The germ map is the unit of the stalk/product-skyscraper\nadjunction. Iterate its monad: the n-th cosimplicial term is T^(n+1)(F), faces\ninsert the unit, and degeneracies use the counit on stalks. Take its alternating\ncoface complex and extend by zero. Evaluation at a fixed stalk supplies an extra\ncodegeneracy of the augmented object, so its stalk complex is contractible;\nexactness and conservativity of stalks imply that the augmentation is a quasi-isomorphism.\nEvery nonnegative term is a product-of-stalks sheaf; its restrictions are projections\nand are surjective. Negative terms are zero and therefore flasque. Coordinatewise\ntensor products give T(F) tensor T(G) → T(F tensor G); iterate them to obtain a\ncosimplicial morphism μ. The unit and counit commute with this multiplication,\nwhich proves compatibility with faces, degeneracies, and the degree-zero germ maps.\nFor an empty scheme every coordinate product and every stalk assertion is empty;\nzero sheaves give the same construction without any nonvanishing assumption.\nThis statement supplies only a pointwise cosimplicial multiplication, not a map\nof total tensor complexes; the Alexander--Whitney construction is separate.",
+   "uses": [
+    "def-sc-module-cup-resolution-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-resolution-data"
+ ],
+ "proof_origin": {
+  "by": "M1 stage-3 worker; explicit adaptation to module sheaves",
+  "document": "https://stacks.math.columbia.edu/tag/0FKR",
+  "place": "Section 20.30, Lemma 20.30.1 (0FKS); pointwise multiplication: Banerjee, arXiv:1004.1491, §1.1.4, pp. 15–16."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementPairing",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-cup-godement-aw",
+   "place": "Godement construction and Alexander–Whitney step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Godement flasque resolution of module sheaves with Alexander Whitney tensor product",
+   "results": "Returned sheaf-module abelian category and sheafification APIs; no Godement/AW theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\"; \"extendXIso\"",
+   "results": "Cosimplicial object and extension APIs exist; no pairing theorem.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|AlexanderWhitney; alternatingCofaceMapComplex|mapBifunctorDesc",
+   "results": "No AW theorem. Alternating coface complexes and tensor coproduct descent APIs exist. The upstream abelian Godement presheaf has no module tensor pairing.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cosimplicial Godement resolution of sheaves of modules admits a natural Alexander Whitney tensor cochain pairing",
+   "results": "Service unavailable: Internal Server Error. No results were returned; no mathematical verdict can be drawn from this unavailable search.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementCosimplicialInput",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementCosimplicialInput.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_cosimplicial_input",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicialComplex",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicialZeroIso",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicialTensor",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_cosimplicialZeroPair",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_cosimplicial_input"
+  ],
+  "statement": "theorem moduleCup_godement_cosimplicial_input (X : Scheme.{u}) (F G : X.Modules) :\n    ∃ (A B C : CosimplicialObject X.Modules)\n      (a : (CochainComplex.singleFunctor X.Modules 0).obj F ⟶\n        moduleCup_cosimplicialComplex X A)\n      (b : (CochainComplex.singleFunctor X.Modules 0).obj G ⟶\n        moduleCup_cosimplicialComplex X B)\n      (c : (CochainComplex.singleFunctor X.Modules 0).obj (F ⊗ G) ⟶\n        moduleCup_cosimplicialComplex X C)\n      (μ : moduleCup_cosimplicialTensor X A B ⟶ C),\n      QuasiIso a ∧ QuasiIso b ∧ QuasiIso c ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj\n          ((moduleCup_cosimplicialComplex X A).X n))) ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj\n          ((moduleCup_cosimplicialComplex X B).X n))) ∧\n      (∀ n : ℤ, TopCat.Sheaf.IsFlasque\n        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj\n          ((moduleCup_cosimplicialComplex X C).X n))) ∧\n      ∀ (V : X.Opens)\n        (x : Γ(((CochainComplex.singleFunctor X.Modules 0).obj F).X 0, V))\n        (y : Γ(((CochainComplex.singleFunctor X.Modules 0).obj G).X 0, V)),\n        (moduleCup_cosimplicialZeroPair X A B C μ).val.app (op V)\n          (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y)) =\n        (c.f 0).val.app (op V) (tmulSection x y)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261013T125011-L-3837418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
+import Sheaf.Paper.ModuleCupCosimplicialAW
 public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.Embedding.IsSupported
@@ -26,6 +27,8 @@ open AlgebraicGeometry TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Flasque augmented resolutions admit a tensor chain pairing over the augmentations.
 Source: Godement, Topologie algébrique et théorie des faisceaux, II §6,
 canonical flasque resolutions and their Alexander–Whitney product.
@@ -61,6 +64,30 @@ theorem moduleCup_godement_pairing (X : Scheme.{u}) (F G : X.Modules) :
           (t.f 0).val.app (op V)
             ((HomologicalComplex.ιTensorObj K L 0 0 0 (by simp)).val.app (op V)
               (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) =
-            (c.f 0).val.app (op V) (tmulSection x y) := by sorry
+            (c.f 0).val.app (op V) (tmulSection x y) := by
+  let : MonoidalPreadditive X.Modules :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  have hinput := moduleCup_godement_cosimplicial_input X F G
+  rcases hinput with ⟨A, B, C, a, b, c, μ, hinput⟩
+  rcases hinput with ⟨ha, hb, hc, hA, hB, hC, hμ⟩
+  have haw := moduleCup_cosimplicial_aw X A B C μ
+  rcases haw with ⟨t, ht⟩
+  refine ⟨moduleCup_cosimplicialComplex X A, moduleCup_cosimplicialComplex X B,
+    moduleCup_cosimplicialComplex X C, a, b, c, ha, hb, hc, ?_, ?_, ?_,
+    hA, hB, hC, t, ?_⟩
+  · unfold moduleCup_cosimplicialComplex
+    infer_instance
+  · unfold moduleCup_cosimplicialComplex
+    infer_instance
+  · unfold moduleCup_cosimplicialComplex
+    infer_instance
+  · intro V x y
+    have h := congrArg
+      (fun (f : (moduleCup_cosimplicialComplex X A).X 0 ⊗
+          (moduleCup_cosimplicialComplex X B).X 0 ⟶
+          (moduleCup_cosimplicialComplex X C).X 0) ↦ f.app V
+        (tmulSection ((a.f 0).val.app (op V) x) ((b.f 0).val.app (op V) y))) ht
+    rw [Hom.comp_app, ConcreteCategory.comp_apply] at h
+    exact h.trans (hμ V x y)
 
 end AlgebraicGeometry.Scheme.Modules
