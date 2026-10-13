@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-popescu-separable-residue-realization",
+ "kind": "statement",
+ "title": "Realize a separable residue element in an admissible subalgebra",
+ "statement": "Let k be a field and B an Artinian local k-algebra. Let A₀⊆B be a local admissible subalgebra [def-weil-pbc-popescu-admissible-subalgebra] relative to m_B whose inclusion is local. Give K=residueField B an F₀=residueField A₀ algebra structure with a compatible k-scalar tower and satisfying algebraMap F₀ K(residue_A₀(a₀))=residue_B(a₀) for every a₀∈A₀. For any element β∈K separable over F₀ [def-weil-pbc-separable-algebraic-extension], there exist a local admissible k-subalgebra A⊆B, an inclusion A₀⊆A, and a∈A with residue_B(a)=β. There is an F₀-algebra structure on residueField A with compatible k-scalar tower, agreeing with the inclusion on residues of A₀, and formally étale over F₀. No positive-characteristic or unit hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tags 07FH and 07FI; algebraic case of 07FI after extraction of a separable power, finite étale lifting and embedding into the ambient Artinian local algebra."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Residue compatibility hmap and surjectivity of A₀→F₀ identify the supplied F₀-algebra structure on K with the canonical residue algebra of inclusion. Admissibility supplies Artinianness and flatness of A₀→B. Apply Algebra.exists_finiteEtale_artinian_residue_lift to β to obtain a finite étale local Artinian A₀-algebra D, a flat local homomorphism g:D→B factoring inclusion, and d∈D with residue_B(g(d))=β.",
+   "uses": [
+    "def-weil-pbc-popescu-admissible-subalgebra",
+    "lem-weil-pbc-artinian-separable-residue-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local flat map g is faithfully flat, hence injective. Make it a k-algebra homomorphism using its factorization on A₀. Its image A is a k-subalgebra containing A₀ and is isomorphic to D. Transfer its finite module and étale structures over A₀. Finiteness over the Artinian A₀ makes A Artinian; essential finite type over k follows from finiteness over A₀ and composition. Inclusion A→B is flat by composition with the inverse isomorphism. For the local étale map A₀→A, Mathlib Algebra.FormallyUnramified.map_maximalIdeal gives m_A=m_A₀ A; extending to B gives m_A B=m_A₀ B=m_B. Thus A is admissible.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-popescu-admissible-subalgebra",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-etale-prime-generates-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a to be the image of d. Its residue equality is the equality supplied by the lifting theorem. Choose the canonical residue algebra of the local map A₀→A; quotient functoriality gives its compatibility on residues and its k-scalar tower. The finite étale local extension induces a finite separable residue-field extension (Mathlib RingTheory.Unramified.LocalRing instances), so Algebra.FormallyEtale.of_isSeparable supplies formal étaleness.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "lem-weil-pbc-artinian-separable-residue-lift",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-etale-residue-field-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, algebraic branch; use the existing Artinian separable residue lift, then its injective image and the canonical residue algebra. The entire proof is implemented without new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Realize a separable element of the residue field of an Artinian local algebra in a finite etale subalgebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparable, IsLocalRing.ResidueField",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "No direct realization lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic element in characteristic p has a p-power that is separable over the base field",
+   "results": "IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_pow_of_isSeparable and related perfect closure lemmas; no Artinian subalgebra realization.",
+   "date": "2026-10-13",
+   "verdict": "Only field-theoretic support, not the geometric realization."
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*(realiz|separable)|separable.*residue|exists.*finiteEtale",
+   "results": "Sheaf.RingTheory.HenselianFiniteEtaleFieldLift.exists_finiteEtale_residueField_equiv_of_finite_separable supplies an abstract lift but not its embedded admissible image in B. Mathlib FormallySmooth.lift lifts maps through nilpotent quotients. No direct embedded-image theorem found.",
+   "date": "2026-10-13",
+   "verdict": "Existing abstract lifting and flatness statements do not close the image and residue compatibility glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuAlgebraicResidueEnlargement",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07FI, geometric part of the algebraic residue enlargement",
+   "via": [
+    "lem-weil-pbc-popescu-unscaled-unit-basis",
+    "lem-weil-pbc-popescu-denominator-basis-enlargement",
+    "lem-weil-pbc-popescu-quotient-basis-enlargement",
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-popescu-algebraic-residue-enlargement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuSeparableResidueRealization",
+  "file": "lean/Sheaf/RingTheory/PopescuSeparableResidueRealization.lean",
+  "declaration": "Algebra.exists_popescu_separable_residue_realization",
+  "statement": "theorem exists_popescu_separable_residue_realization\n    (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B]\n    [IsArtinianRing B] [IsLocalRing B]\n    (A₀ : Subalgebra k B) [IsLocalRing A₀]\n    (hA₀ : A₀.IsPopescuAdmissible (IsLocalRing.maximalIdeal B))\n    [IsLocalHom A₀.val]\n    [Algebra (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField B)]\n    [IsScalarTower k (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField B)]\n    (hmap : ∀ a₀ : A₀, algebraMap (IsLocalRing.ResidueField A₀)\n      (IsLocalRing.ResidueField B) (IsLocalRing.residue A₀ a₀) =\n        IsLocalRing.residue B (a₀ : B))\n    (β : IsLocalRing.ResidueField B) (hβ : IsSeparable (IsLocalRing.ResidueField A₀) β) :\n    ∃ (A : Subalgebra k B) (_ : IsLocalRing A), ∃ hle : A₀ ≤ A,\n      A.IsPopescuAdmissible (IsLocalRing.maximalIdeal B) ∧\n      ∃ a : A, IsLocalRing.residue B (a : B) = β ∧\n        ∃ (alg : Algebra (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField A)),\n          letI := alg\n          IsScalarTower k (IsLocalRing.ResidueField A₀) (IsLocalRing.ResidueField A) ∧\n          (∀ a₀ : A₀, algebraMap (IsLocalRing.ResidueField A₀)\n            (IsLocalRing.ResidueField A) (IsLocalRing.residue A₀ a₀) =\n              IsLocalRing.residue A (Subalgebra.inclusion hle a₀)) ∧\n          Algebra.FormallyEtale (IsLocalRing.ResidueField A₀)\n            (IsLocalRing.ResidueField A)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142856-L-497733",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T142856-L-497733",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

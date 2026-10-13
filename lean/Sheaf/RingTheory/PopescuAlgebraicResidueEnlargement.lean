@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Algebraic.Defs
 
+import Sheaf.RingTheory.PopescuSeparableResidueRealization
+import Mathlib.FieldTheory.Separable
+import Mathlib.Algebra.CharP.Algebra
+
 
 /-!
 # Geometric residue-power capture in an Artinian local algebra
@@ -22,6 +26,19 @@ Source: Stacks Project, Tags 07FH and 07FI.
 set_option autoImplicit false
 universe u v
 namespace Algebra
+
+private theorem exists_separable_power
+    {F : Type*} {K : Type*} [Field F] [Field K] [Algebra F K]
+    (p : ℕ) [CharP F p] (hp : 0 < p) (α : K) (hα : IsAlgebraic F α) :
+    ∃ Q : ℕ, 1 ≤ Q ∧ IsSeparable F (α ^ Q) := by
+  obtain ⟨n, g, hg, heq⟩ :=
+    Polynomial.exists_separable_of_irreducible p (minpoly.irreducible hα.isIntegral) hp.ne'
+  refine ⟨p ^ n, one_le_pow₀ hp, ?_⟩
+  apply hg.of_dvd
+  apply minpoly.dvd
+  have h := congrArg (Polynomial.aeval α) heq
+  simpa only [Polynomial.expand_aeval, minpoly.aeval] using h
+
 
 /-- The algebraic branch of geometric enlargement, before lifting an inverse.
 Source: Stacks Project, Tag 07FI, algebraic case.
@@ -66,6 +83,15 @@ theorem exists_popescu_algebraic_residue_enlargement
             (IsLocalRing.ResidueField A) (IsLocalRing.residue A₀ a₀) =
               IsLocalRing.residue A (Subalgebra.inclusion hle a₀)) ∧
           Algebra.FormallyEtale (IsLocalRing.ResidueField A₀)
-            (IsLocalRing.ResidueField A) := by sorry
+            (IsLocalRing.ResidueField A) := by
+  have _ := hx
+  have : CharP (IsLocalRing.ResidueField A₀) p :=
+    charP_of_injective_algebraMap (algebraMap k (IsLocalRing.ResidueField A₀)).injective p
+  obtain ⟨Q, hQ, hsep⟩ := exists_separable_power p hp (IsLocalRing.residue B x) hα
+  obtain ⟨A, hlocal, hle, hA, a, ha, alg, htower, hres, hetale⟩ :=
+    exists_popescu_separable_residue_realization k B A₀ hA₀ hmap
+      (IsLocalRing.residue B x ^ Q) hsep
+  refine ⟨A, hlocal, hle, hA, Q, hQ, a, ?_, alg, htower, hres, hetale⟩
+  simpa only [map_pow] using ha
 
 end Algebra
