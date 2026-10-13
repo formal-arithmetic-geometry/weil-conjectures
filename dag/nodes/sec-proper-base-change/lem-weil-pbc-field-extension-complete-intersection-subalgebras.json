@@ -57,7 +57,7 @@
    }
   },
   {
-   "text": "For each $e\\in E$, write $e=a_e/s_e$ with $a_e,s_e\\in A$ and $s_e\\ne0$, using $L=\\operatorname{Frac}(A)$ from step 2. Put $g=\\prod_{e\\in E}s_e\\in A$, with $g=1$ when $E$ is empty. Since $A$ is a domain, $g\\ne0$. The principal localization $B=A_g$ [def-weil-ring-localization-away] embeds in $L$ and contains $E$, because $s_e$ divides $g$ and $e=(a_e(g/s_e))/g$ in $B$. Composing with $L\\subseteq K$ embeds $B$ in $K$.",
+   "text": "For the finite subset in L=k(E), apply the proved private exists_common_denominator lemma. Induct on the Finset: use denominator 1 for the empty set; adding z=a/s to a set with common denominator g replaces the denominator by sg and adjusts the old and new numerators. Injectivity into L ensures the images of nonzero s and g remain nonzero, so field_simp verifies both identities. Lift the embedding to A[1/g] by IsLocalization.Away.liftAlgHom; injective_iff_map_algebraMap_eq and the original embedding show the lift is injective.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-finitely-generated-field-complete-intersection-model"
@@ -69,21 +69,19 @@
    }
   },
   {
-   "text": "Choose $h\\in k[X_1,\\dots,X_n]$ mapping to $g\\in A$. The universal property of localization gives $B=A_g\\cong k[X_1,\\dots,X_n,T]/(f_1,\\dots,f_c,hT-1)$ as $k$-algebras: the class of $T$ maps to $g^{-1}$, and conversely $g$ is invertible in the displayed quotient. The sequence $f_1,\\dots,f_c$ remains regular in $k[X_1,\\dots,X_n,T]$: at each stage the quotient is the polynomial ring over the corresponding quotient of $k[X_1,\\dots,X_n]$, and coefficientwise multiplication by $f_i$ is injective. After these equations the ring is $A[T]$, a domain, and $hT-1$ is nonzero because its constant coefficient is $-1$; hence it is a nonzerodivisor. The final quotient is $B\\ne0$, as $B$ embeds in $L$ by step 3. Thus $f_1,\\dots,f_c,hT-1$ is a regular sequence [def-weil-pbc-regular-sequence], giving the presentation required in the statement with $n+1$ variables and $c+1$ equations.",
+   "text": "Apply [lem-weil-pbc-regular-sequence-quotient-localization-presentation] to the regular-sequence domain model A and the nonzero common denominator g. It supplies a regular sequence q of length f.length+1 and a k-algebra equivalence from its polynomial quotient to A[1/g]. Compose this equivalence, the localization embedding into L, and L.val into K. Each composite is injective. For x in E with x=a/g, take the inverse image under the equivalence of the localization element a times invSelf(g); map_mul and mul_invSelf verify that it maps to x.",
    "uses": [
-    "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-regular-sequence"
+    "lem-weil-pbc-regular-sequence-quotient-localization-presentation",
+    "def-weil-ring-localization-away"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07BV (lemma-colimit-syntomic), lines 44549-44559; proof of Lemma Tag 00SA (lemma-localize-lci), lines 35868-35881, with regularity of the displayed sequence checked from Definition Tag 00LF"
+    "document": "https://stacks.math.columbia.edu/tag/00SA",
+    "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
    }
   },
   {
-   "text": "Every finite $E\\subseteq K$ is contained in such an image $B$ by steps 1-4, and each image is a finitely generated $k$-subalgebra. For any two such images $B_1,B_2$, take the union of finite sets of $k$-algebra generators of $B_1$ and $B_2$ and repeat steps 1-4; the resulting image contains both. Thus these subalgebras form a directed family whose union is $K$, which is the asserted filtered-colimit description.",
+   "text": "The Lean declaration states finite-subset containment, proved by the preceding composition. Its parenthetical directed-union interpretation follows by applying containment to the union of two finite algebra-generating sets and to singleton sets; no separate directedness declaration is added.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -93,17 +91,17 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-transcendence-basis",
-  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
-  "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
   "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-transcendence-basis",
   "def-weil-ring-localization-away",
-  "def-weil-pbc-mv-polynomial-ring"
+  "lem-weil-pbc-finitely-generated-field-complete-intersection-model",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-regular-sequence-quotient-localization-presentation"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07BV (lemma-colimit-syntomic), proof of the first assertion; Lemma Tag 00SA (lemma-localize-lci), proof of the explicit localization presentation"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/07BV",
+  "place": "The finite-subset argument of 07BV with a Lean Finset induction for common denominators and the proved explicit regular-sequence presentation from 00SA."
  },
  "mathlib_searches": [
   {
@@ -187,5 +185,15 @@
   "group": "E1",
   "result": "pass",
   "note": "matched k field, K/k as [Field K][Algebra k K], E : Finset K universal before ∃ n c; f : List (MvPolynomial (Fin n) k) with length c; IsRegular (#print: regular_mod_prev + top_ne_smul = both clauses, c=0 ok); ι : (MvPolynomial ⧸ Ideal.ofList f) →ₐ[k] K injective with E ⊆ range; node statement unchanged (diff adds lean record only); parenthetical directed union is commentary, presentation form stated by node"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

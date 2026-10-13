@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-regular-sequence-quotient-localization-presentation",
+ "kind": "statement",
+ "title": "Regular-sequence presentation of a principal localization of a domain polynomial quotient",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq 0$, and $f=(f_1,\\ldots,f_c)$ a regular sequence [def-weil-pbc-regular-sequence] in $R=k[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring]. Suppose $A=R/(f)$ is a domain and $0\\ne g\\in A$. Then there is a regular sequence $q$ of length $c+1$ in $k[X_1,\\ldots,X_{n+1}]$ whose quotient is isomorphic as a $k$-algebra to the principal localization $A[1/g]$ [def-weil-ring-localization-away].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00SA",
+  "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Lift g to h in R, and set S=R[T], fs to the constant-polynomial images of f, t=hT-1, and Q=(fs). The quotient S/Q is A[T] by Mathlib MvPolynomial.quotientEquivQuotientMvPolynomial. The image of t is gT-1. The double-quotient isomorphism identifies S/(fs,t) with A[T]/(gT-1), which is A[1/g] by [lem-weil-pbc-localization-away-polynomial-quotient].",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/00SA",
+    "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
+   }
+  },
+  {
+   "text": "The R-module R[T] is free, hence flat. Mathlib IsWeaklyRegular.of_flat makes fs weakly regular. In S/Q=A[T], gT-1 has constant coefficient -1, so is nonzero; A[T] is a domain, so multiplication by it is injective. Transport this cancellation across the quotient isomorphism and apply isWeaklyRegular_append_iff to fs followed by t.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/00SA",
+    "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
+   }
+  },
+  {
+   "text": "The map A to A[1/g] is injective because g is nonzero and A is a domain. Thus A[1/g] is nonzero. The presentation isomorphism shows the ideal (fs,t) is proper, establishing the nonzero final quotient required for a regular sequence.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/00SA",
+    "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
+   }
+  },
+  {
+   "text": "Use sumAlgEquiv and renameEquiv to reindex the nested polynomial ring R[T] by Fin(n+1). Transport regularity by AddEquiv.isRegular_congr and the quotient by Ideal.quotientEquivAlg. List.map preserves length, giving c+1 equations.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/00SA",
+    "place": "Algebra, proof of Lemma 00SA (lemma-localize-lci), displayed polynomial presentation; regularity checked as in the proof of 07BV (lemma-colimit-syntomic)."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00SA",
+  "place": "Explicit regularity verification of the presentation in 00SA, following the regular-sequence argument of 07BV. All steps proved in Lean using Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A localization of a quotient of a polynomial ring by a regular sequence at one nonzero element admits a regular sequence polynomial quotient presentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a polynomial quotient by a regular sequence at a nonzero element is a polynomial quotient by a regular sequence with one extra variable and equation",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Algebra.SubmersivePresentation.localizationAway, Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero, Algebra.Generators.localizationAway_σ, Algebra.Generators.compLocalizationAwayAlgHom_X_inl, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem; no direct match for the entire regular-sequence presentation theorem",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegular.*(localization|polynomial)|completeIntersection|complete_intersection",
+   "results": "Mathlib/Algebra/MvPolynomial/Basic.lean, Mathlib/Algebra/MvPolynomial/Basic.lean, Mathlib/Algebra/MvPolynomial/Basic.lean, Mathlib/Algebra/Lie/Rank.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/Localization/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean; no direct match for the entire regular-sequence presentation theorem",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 4 of the complete-intersection subalgebra argument used in the finite-etale-lifting essential-surjectivity route: the explicit regular-sequence localization presentation.",
+   "via": [
+    "lem-weil-pbc-field-extension-complete-intersection-subalgebras",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceQuotientLocalizationPresentation",
+  "file": "lean/Sheaf/RingTheory/RegularSequenceQuotientLocalizationPresentation.lean",
+  "declaration": "RingTheory.Sequence.exists_localizationAway_presentation",
+  "statement": "theorem exists_localizationAway_presentation (k : Type u) [Field k] (n : ℕ) (f : List (MvPolynomial (Fin n) k)) (hf : IsRegular (MvPolynomial (Fin n) k) f) [IsDomain (MvPolynomial (Fin n) k ⧸ Ideal.ofList f)] (g : MvPolynomial (Fin n) k ⧸ Ideal.ofList f) (hg : g ≠ 0) : ∃ q : List (MvPolynomial (Fin (n + 1)) k), q.length = f.length + 1 ∧ IsRegular (MvPolynomial (Fin (n + 1)) k) q ∧ Nonempty ((MvPolynomial (Fin (n + 1)) k ⧸ Ideal.ofList q) ≃ₐ[k] Localization.Away g)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-polynomial-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T082356-L-1640039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
