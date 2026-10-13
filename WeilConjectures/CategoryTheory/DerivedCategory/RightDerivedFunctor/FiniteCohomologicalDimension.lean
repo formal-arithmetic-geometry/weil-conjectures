@@ -49,33 +49,38 @@ namespace HomologicalComplex
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveResolutions C]
   [Abelian D]
 
-/-- A left exact additive functor `F : C ⥤ D` of finite cohomological dimension (`R^q F = 0` for
-`q > d`) sends an exact cochain complex `K` whose terms are all `F`-acyclic to an exact complex
-`F(K)`, with no boundedness assumption on `K`.
+/-- A left exact additive functor `F : C ⥤ D` of *pointwise* finite cohomological dimension sends
+an exact cochain complex `K` whose terms are all `F`-acyclic to an exact complex `F(K)`, with no
+boundedness assumption on `K`. Here pointwise finite cohomological dimension is measured by a
+jointly conservative family of functors `r i : D ⥤ E` preserving monomorphisms (for example the
+stalk functors of sheaves): `r i (R^q F X) = 0` for every `X` and every `q > d i`.
 
 The short exact sequences `0 ⟶ Zⁿ⁻¹ ⟶ Kⁿ⁻¹ ⟶ Zⁿ ⟶ 0` of cycles give injections
-`R^q F(Zⁿ) ⟶ R^{q+1} F(Zⁿ⁻¹)` for `q ≥ 1`, so `R^q F(Zⁿ)` embeds into
-`R^{q+d} F(Zⁿ⁻ᵈ) = 0`: all the cycles are `F`-acyclic, and `F` keeps the short exact sequences
-of cycles exact. -/
-theorem Acyclic.map_of_rightAcyclic_of_isZero_rightDerived {K : CochainComplex C ℤ}
-    (hK : K.Acyclic) (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (d : ℕ)
-    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+`R^q F(Zⁿ) ⟶ R^{q+1} F(Zⁿ⁻¹)` for `q ≥ 1`, so `r i (R^q F(Zⁿ))` embeds into
+`r i (R^{q + d i} F(Zⁿ⁻ᵈ⁽ⁱ⁾)) = 0`: all the cycles are `F`-acyclic, and `F` keeps the short
+exact sequences of cycles exact. -/
+theorem Acyclic.map_of_rightAcyclic_of_forall_isZero {K : CochainComplex C ℤ}
+    (hK : K.Acyclic) (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+    {E : Type*} [Category* E] [HasZeroMorphisms E] {ι : Type*} (r : ι → D ⥤ E)
+    [∀ i, (r i).PreservesMonomorphisms] (hr : ∀ M : D, (∀ i, IsZero ((r i).obj M)) → IsZero M)
+    (d : ι → ℕ) (hF : ∀ i (X : C) (q : ℕ), d i < q → IsZero ((r i).obj ((F.rightDerived q).obj X)))
     (hK' : ∀ n, F.rightAcyclic (K.X n)) :
     ((F.mapHomologicalComplex _).obj K).Acyclic := by
   have hS (n : ℤ) := (hK (n + 1)).shortExact_cyclesShortComplex (i := n) (by simp)
-  -- dimension shifting: `R^{q+1} F(Zⁿ) = 0` as soon as `d ≤ q + k`, by induction on `k`
-  have hZ' (k : ℕ) : ∀ (n : ℤ) (q : ℕ), d ≤ q + k →
-      IsZero ((F.rightDerived (q + 1)).obj (K.cycles n)) := by
+  -- dimension shifting: `r i (R^{q+1} F(Zⁿ)) = 0` as soon as `d i ≤ q + k`, by induction on `k`
+  have hZ' (i : ι) (k : ℕ) : ∀ (n : ℤ) (q : ℕ), d i ≤ q + k →
+      IsZero ((r i).obj ((F.rightDerived (q + 1)).obj (K.cycles n))) := by
     induction k with
-    | zero => exact fun n q hq ↦ hF _ _ (by lia)
+    | zero => exact fun n q hq ↦ hF i _ _ (by lia)
     | succ k ih =>
       intro n q hq
       obtain ⟨δ, w₁, w₂, h, -⟩ := (hS (n - 1)).exists_rightDerived_δ_exact F (q + 1)
-      have h' := (h.isZero_X₂_iff).2
-        ⟨(hK' (n - 1) q).eq_of_src _ _, (ih (n - 1) (q + 1) (by lia)).eq_of_tgt _ _⟩
-      have h'' : IsZero ((F.rightDerived (q + 1)).obj (K.cycles (n - 1 + 1))) := h'
-      rwa [sub_add_cancel] at h''
-  have hZ (n : ℤ) : F.rightAcyclic (K.cycles n) := fun q ↦ hZ' d n q (by lia)
+      have : Mono δ := h.mono_g ((hK' (n - 1) q).eq_of_src _ _)
+      have h' : IsZero ((r i).obj ((F.rightDerived (q + 1)).obj (K.cycles (n - 1 + 1)))) :=
+        IsZero.of_mono ((r i).map δ) (ih (n - 1) (q + 1) (by lia))
+      rwa [sub_add_cancel] at h'
+  have hZ (n : ℤ) : F.rightAcyclic (K.cycles n) := fun q ↦
+    hr _ fun i ↦ hZ' i (d i) n q (by lia)
   intro m
   obtain ⟨n, rfl⟩ : ∃ n, m = n + 1 := ⟨m - 1, by lia⟩
   rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp; lia)]
@@ -93,6 +98,18 @@ theorem Acyclic.map_of_rightAcyclic_of_isZero_rightDerived {K : CochainComplex C
   rw [ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ]
   exact ShortComplex.exact_of_f_is_kernel _ hT
 
+/-- A left exact additive functor `F : C ⥤ D` of finite cohomological dimension (`R^q F = 0` for
+`q > d`) sends an exact cochain complex `K` whose terms are all `F`-acyclic to an exact complex
+`F(K)`, with no boundedness assumption on `K`
+(`HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero`). -/
+theorem Acyclic.map_of_rightAcyclic_of_isZero_rightDerived {K : CochainComplex C ℤ}
+    (hK : K.Acyclic) (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (d : ℕ)
+    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+    (hK' : ∀ n, F.rightAcyclic (K.X n)) :
+    ((F.mapHomologicalComplex _).obj K).Acyclic :=
+  hK.map_of_rightAcyclic_of_forall_isZero F (fun _ : Unit ↦ 𝟭 D) (fun _ h ↦ h ())
+    (fun _ ↦ d) (fun _ ↦ hF) hK'
+
 end HomologicalComplex
 
 namespace CategoryTheory
@@ -105,22 +122,34 @@ section Classical
 
 variable [HasInjectiveResolutions C] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
 
-/-- A left exact additive functor of finite cohomological dimension preserves
-quasi-isomorphisms between (unbounded) cochain complexes of `F`-acyclic objects: the mapping
-cone is an exact complex of `F`-acyclic objects. -/
-theorem quasiIso_map_of_rightAcyclic_of_isZero_rightDerived {K L : CochainComplex C ℤ}
-    (φ : K ⟶ L) [QuasiIso φ] (d : ℕ)
-    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+omit [PreservesFiniteLimits F] in
+/-- A left exact additive functor `F` which sends exact complexes of `F`-acyclic objects to exact
+complexes preserves quasi-isomorphisms between (unbounded) cochain complexes of `F`-acyclic
+objects: the mapping cone is an exact complex of `F`-acyclic objects. -/
+theorem quasiIso_map_of_rightAcyclic_of_map_acyclic {K L : CochainComplex C ℤ}
+    (φ : K ⟶ L) [QuasiIso φ]
+    (hF : ∀ M : CochainComplex C ℤ, M.Acyclic → (∀ n, F.rightAcyclic (M.X n)) →
+      ((F.mapHomologicalComplex _).obj M).Acyclic)
     (hK : ∀ n, F.rightAcyclic (K.X n)) (hL : ∀ n, F.rightAcyclic (L.X n)) :
     QuasiIso ((F.mapHomologicalComplex _).map φ) := by
   have hφ := (CochainComplex.mappingCone.quasiIso_iff_acyclic φ).1 ‹_›
   rw [CochainComplex.mappingCone.quasiIso_iff_acyclic]
   refine HomologicalComplex.Acyclic.of_iso ?_
     (CochainComplex.mappingCone.mapHomologicalComplexIso φ F)
-  refine hφ.map_of_rightAcyclic_of_isZero_rightDerived F d hF fun n ↦ ?_
+  refine hF _ hφ fun n ↦ ?_
   exact F.rightAcyclic.prop_of_iso
     (HomologicalComplex.homotopyCofiber.XIsoBiprod φ n (n + 1) rfl).symm
     (rightAcyclic_biprod (hK (n + 1)) (hL n))
+
+/-- A left exact additive functor of finite cohomological dimension preserves
+quasi-isomorphisms between (unbounded) cochain complexes of `F`-acyclic objects. -/
+theorem quasiIso_map_of_rightAcyclic_of_isZero_rightDerived {K L : CochainComplex C ℤ}
+    (φ : K ⟶ L) [QuasiIso φ] (d : ℕ)
+    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+    (hK : ∀ n, F.rightAcyclic (K.X n)) (hL : ∀ n, F.rightAcyclic (L.X n)) :
+    QuasiIso ((F.mapHomologicalComplex _).map φ) :=
+  F.quasiIso_map_of_rightAcyclic_of_map_acyclic φ
+    (fun _ hM hM' ↦ hM.map_of_rightAcyclic_of_isZero_rightDerived F d hF hM') hK hL
 
 end Classical
 
@@ -144,22 +173,24 @@ lemma isZero_rightDerived_of_isZero_homology [HasInjectiveResolutions C] (X : C)
 
 variable [PreservesFiniteLimits F]
 
+omit [PreservesFiniteLimits F] in
 /-- **Acyclic complexes compute the unbounded right derived functor.** Let `C` be a Grothendieck
-abelian category and `F : C ⥤ D` a left exact additive functor of finite cohomological dimension.
-For every (unbounded) cochain complex `K` of `F`-acyclic objects, the unit
-`F(K) ⟶ RF(K)` of the right derived functor is an isomorphism.
+abelian category and `F : C ⥤ D` a left exact additive functor which sends exact complexes of
+`F`-acyclic objects to exact complexes. For every (unbounded) cochain complex `K` of `F`-acyclic
+objects, the unit `F(K) ⟶ RF(K)` of the right derived functor is an isomorphism.
 
 Indeed `K` has a quasi-isomorphism `K ⟶ I` to a K-injective complex with injective components
 (`CochainComplex.toKInjectiveResolution`), at which the unit is an isomorphism, and `F` maps it to
-a quasi-isomorphism (`Functor.quasiIso_map_of_rightAcyclic_of_isZero_rightDerived`). -/
-theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic [IsGrothendieckAbelian.{w} C]
-    [HasInjectiveResolutions C] (d : ℕ)
-    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+a quasi-isomorphism (`Functor.quasiIso_map_of_rightAcyclic_of_map_acyclic`). -/
+theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic_of_map_acyclic
+    [IsGrothendieckAbelian.{w} C] [HasInjectiveResolutions C]
+    (hF : ∀ M : CochainComplex C ℤ, M.Acyclic → (∀ n, F.rightAcyclic (M.X n)) →
+      ((F.mapHomologicalComplex _).obj M).Acyclic)
     (K : CochainComplex C ℤ) (hK : ∀ n, F.rightAcyclic (K.X n)) :
     IsIso (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) := by
   let ι := (CochainComplex.toKInjectiveResolution.{w} C).app K
   have : QuasiIso ι := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{w} C K).2
-  have := F.quasiIso_map_of_rightAcyclic_of_isZero_rightDerived ι d hF hK
+  have := F.quasiIso_map_of_rightAcyclic_of_map_acyclic ι hF hK
     (fun n ↦ rightAcyclic_of_injective _)
   have h₁ : IsIso (DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map ι)) :=
     Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso C _) _
@@ -181,6 +212,18 @@ theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic [IsGrothendieckAbelian
   exact IsIso.of_isIso_fac_right (h := (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
     ((HomotopyCategory.quotient C (.up ℤ)).map ι) ≫ F.rightDerivedFunctorUnit.app _)
     (F.rightDerivedFunctorUnit.naturality _).symm
+
+/-- **Acyclic complexes compute the unbounded right derived functor**, for a left exact functor
+`F` of finite cohomological dimension on a Grothendieck abelian category: for every
+(unbounded) cochain complex `K` of `F`-acyclic objects, the unit `F(K) ⟶ RF(K)` is an
+isomorphism (`Functor.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic_of_map_acyclic`). -/
+theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic [IsGrothendieckAbelian.{w} C]
+    [HasInjectiveResolutions C] (d : ℕ)
+    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))
+    (K : CochainComplex C ℤ) (hK : ∀ n, F.rightAcyclic (K.X n)) :
+    IsIso (F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K)) :=
+  F.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic_of_map_acyclic
+    (fun _ hM hM' ↦ hM.map_of_rightAcyclic_of_isZero_rightDerived F d hF hM') K hK
 
 /-- **Right derived functors of finite cohomological dimension commute with coproducts.** Let
 `C` be a Grothendieck abelian category and `F : C ⥤ D` a left exact additive functor of finite
