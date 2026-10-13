@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-inheritance",
+ "kind": "statement",
+ "title": "Tensor inheritance of a localized mixed-ring comparison",
+ "statement": "Let $R,A,B,C$ be commutative rings, $A,B$ be $R$-algebras, and $C$ an $A\\otimes_R B$-algebra flat over $A\\otimes_R B$. Let $E,P$ be complexes of $A$-modules that are K-flat [def-pc-module-kflat-complex], meaning that their total tensor with any acyclic $A$-complex is acyclic, and $N$ any complex of $C$-modules. Write $J$ for termwise extension along $A\\to A\\otimes_R B\\to C$ [def-weil-module-base-change]. Let $t:J(P)\\to N$ be a chain map and $\\gamma:J(\\operatorname{Tot}(E\\otimes_A P))\\cong\\operatorname{Tot}(J(E)\\otimes_C J(P))$ the scalar-extension tensor isomorphism, pinned on each summand by the standard scalar-extension tensor map [def-weil-pbc-module-tensor-product]. Let $L$ and $M$ be arbitrary base-derived tensor cohomology models [def-pc-base-derived-tensor-cohomology-model] for $P$ and $\\operatorname{Tot}(E\\otimes_A P)$ respectively. If $L.\\mathrm{localizedComparison}^i;H^i(t)$ is invertible for every integer $i$, then $M.\\mathrm{localizedComparison}^i;H^i(\\gamma;\\operatorname{Tot}(1\\otimes t))$ is invertible for every integer $i$. Derived categories of $R$- and $B$-modules are available in the common module universe, with no boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA (lemma-single-complex-base-change-condition-inherited), proof of part (1); More on Algebra Tag 0BYJ"
+ },
+ "stmt_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For fixed P,N,t define the canonical degreewise comparison as a natural transformation of graded cohomological functors on D(A), using common K-flat representatives. The model counit and action equations and gamma summand formula identify its value with the stated comparison, independently of the representatives and the models L,M.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-kflat-derived-tensor-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let V be its isomorphism locus in all degrees. The source long exact sequences are A tensor_R B-linear; flatness of C preserves their exactness. The target is also cohomological, and the canonical comparison commutes with connecting maps. The five lemma gives triangle closure. Derived tensor, module homology and scalar extension commute with direct sums, giving coproduct closure; naturality gives retract closure. For every shift of A the comparison is the input comparison up to unit, shift and model isomorphisms, so the hypothesis puts each generator in V.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedModuleFreeGeneration to V to include every unbounded derived A-module. The given K-flatness of E computes the source total tensor. Its scalar extension is C-K-flat by tensor adjunction and exactness of restriction, so the target total tensor computes its derived value. The gamma summand identity and M counit equation identify the comparison with the formula in the conclusion.",
+   "uses": [
+    "lem-pc-derived-module-free-generation",
+    "lem-pc-kflat-extension-of-scalars",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-kflat-derived-tensor-associator",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-derived-module-free-generation",
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "note": "Agent expansion of Stacks 0DJA(1), using the cohomological isomorphism locus and free-module generation (09PB). No strict chain-level A tensor_R B model is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology derived base change comparison tensor K-flat complex flat localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor base change comparison isomorphism preserved by tensoring a K-flat complex",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_flat_tensorProduct, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.baseChange; none states the comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison|mapBifunctor.*[Bb]ase[Cc]hange",
+   "results": "0 hits: ; none states the comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof step: single-complex base-change criterion, tensor inheritance in Tag 0DJA(1)",
+   "via": [
+    "lem-pc-rf-single-complex-inherited-tensor-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritance",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonInheritance.lean",
+  "declaration": "ModuleCat.localizedTensorComparison_inheritance",
+  "declarations": [
+   "ModuleCat.localizedTensorExtension",
+   "ModuleCat.localizedTensorComparison",
+   "ModuleCat.IsLocalizedTensorComparison",
+   "ModuleCat.localizedTensorComparison_inheritance"
+  ],
+  "statement": "theorem localizedTensorComparison_inheritance (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C] [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C] [HasDerivedCategory.{w} (ModuleCat.{u} R)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] (hflat : Module.Flat (A ⊗[R] B) C) (E P : CochainComplex (ModuleCat.{u} A) ℤ) (hE : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic → (CochainComplex.mapBifunctor E V (curriedTensor _)).Acyclic) (hP : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic → (CochainComplex.mapBifunctor P V (curriedTensor _)).Acyclic) (N : CochainComplex (ModuleCat.{u} C) ℤ) (t : (localizedTensorExtension R A B C).obj P ⟶ N) (γ : (localizedTensorExtension R A B C).obj (CochainComplex.mapBifunctor E P (curriedTensor _)) ≅ CochainComplex.mapBifunctor ((localizedTensorExtension R A B C).obj E) ((localizedTensorExtension R A B C).obj P) (curriedTensor _)) (hγ : IsLocalizedTensorComparison R A B C E P γ) (L : BaseDerivedTensorCohomologyModel R A B P C) (M : BaseDerivedTensorCohomologyModel R A B (CochainComplex.mapBifunctor E P (curriedTensor _)) C) (h : ∀ i : ℤ, IsIso (localizedTensorComparison R A B C L t i)) : ∀ i : ℤ, IsIso (localizedTensorComparison R A B C M (γ.hom ≫ HomologicalComplex.mapBifunctorMap (𝟙 _) t (curriedTensor _) (.up ℤ)) i)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a9856",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T060423-L-584555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a9856",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T060423-L-584555",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node metadata; all delivered modules and both direct importers compiled cleanly, with only permitted axioms and the two named sorry lemmas."
+ }
+}

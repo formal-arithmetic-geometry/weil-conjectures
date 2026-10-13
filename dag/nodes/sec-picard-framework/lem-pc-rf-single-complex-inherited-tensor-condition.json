@@ -23,33 +23,40 @@
  ],
  "proof": [
   {
-   "text": "Fix x' and write R = O_{S,s}, A = O_{X,x}, B = O_{S',s'}, and C = O_{X',x'}. The stalk of the map for E tensor^L K is obtained by first forming E_x tensor_A^L K_x, then tensoring over R with B and extending scalars to C.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJA, proof of part (1), local stalk computation"
-   }
+   "text": "Accept the pinned canonical comparison tau with its characterization h_tau. Obtain a core monoidal model of derived pullback to establish the monoidal existence clause, using only the model toMonoidal conversion.",
+   "uses": [
+    "def-pc-derived-pullback-monoidal-model"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pc-derived-tensor-transitivity] with $T=A\\otimes_R B$, $E=E_x$, $K=K_x$ (complexes of $A$-modules), $K'=K'_{x'}$ (a complex of $C$-modules) and $\\psi:K_x\\otimes_A^{L}C=(L(g')^*K)_{x'}\\to K'_{x'}$ the stalk at $x'$ of the given map $L(g')^*K\\to K'$ (a morphism in $D(C)$). Then $\\varphi_{K_x}=\\psi\\circ c_{K_x}:K_x\\otimes_R^{L}B\\to K'_{x'}$ is the stalk map of the hypothesis, and $\\beta^i_{K_x}:H^i(K_x\\otimes_R^{L}B)\\otimes_T C\\to H^i(K'_{x'})$ is exactly the canonical map of the hypothesis, which is an isomorphism for every $i$. For $E\\otimes^{L}K$, the stalk at $x'$ of $L(g')^*(E\\otimes^{L}K)\\to L(g')^*E\\otimes^{L}K'$ is, under $(E\\otimes^{L}K)_x=E_x\\otimes_A^{L}K_x$, $(L(g')^*(E\\otimes^L K))_{x'}=(E_x\\otimes_A^{L}K_x)\\otimes_A^{L}C$ and $(L(g')^*E\\otimes^{L}K')_{x'}=(E_x\\otimes_A^{L}C)\\otimes_C^{L}K'_{x'}\\cong E_x\\otimes_A^{L}K'_{x'}$, the composite of the associativity isomorphism $(E_x\\otimes_A^{L}K_x)\\otimes_A^{L}C\\cong E_x\\otimes_A^{L}(K_x\\otimes_A^{L}C)$ and $1_{E_x}\\otimes\\psi$; so its comparison map from $(E_x\\otimes_A^{L}K_x)\\otimes_R^{L}B$ is $\\varphi_{E_x,K_x}$ of the lemma, and the canonical map of the conclusion at $(x',i)$ is $\\beta^i_{E_x,K_x}:H^i((E_x\\otimes_A^{L}K_x)\\otimes_R^{L}B)\\otimes_T C\\to H^i(E_x\\otimes_A^{L}K'_{x'})$. Since $C=\\mathcal O_{X',x'}$ is a localization of $T$ (stalk of $X'=X\\times_S S'$), it is flat over $T$ (Tag 00HT), so the flat clause of the lemma shows that $\\beta^i_{E_x,K_x}$ is an isomorphism for every $i$. Since $x'$ and $i$ were arbitrary, the inherited stalkwise condition holds everywhere.",
+   "text": "Fix E, arbitrary output coordinates c, a point z and an integer i. The tensor stalk coordinate lemma supplies input coordinates d, A-K-flat stalk complexes Q,P, flatness of C over A tensor_R B, the chain map t and the pinned scalar-extension tensor isomorphism gamma. Homology of composites rewrites h_stalk d z j as invertibility of the input module comparison for every j.",
    "uses": [
-    "lem-pc-derived-tensor-transitivity"
+    "lem-pc-single-complex-tensor-stalk-coordinates",
+    "def-pc-single-complex-base-change-stalk-condition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0DJA, proof of part (1), computation using the transitive property of tensor product (Tag 0BYJ, more-algebra-lemma-triple-tensor-product)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply localizedTensorComparison_inheritance with the input model, output model and the preceding degreewise hypothesis. It makes the middle comparison invertible in degree i. Rewrite the output stalk comparison using the coordinate equation a;beta;b. Composition with the two coordinate isomorphisms preserves invertibility. Quantifying over c,z,i proves the canonical inherited stalk condition for E.",
+   "uses": [
+    "lem-pc-localized-tensor-comparison-inheritance",
+    "lem-pc-single-complex-tensor-stalk-coordinates"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-tensor-transitivity"
+  "def-pc-derived-pullback-monoidal-model",
+  "lem-pc-single-complex-tensor-stalk-coordinates",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-localized-tensor-comparison-inheritance"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA, proof of part (1)"
+  "by": "agent",
+  "group": "N3",
+  "date": "2026-10-13",
+  "note": "Compiling canonical Stacks 0DJA(1) reduction to stalk coordinates and the ring-level comparison. Corrects the Lean interface to the canonical source map without changing the natural-language node or unit route."
  },
  "mathlib_searches": [
   {
@@ -124,12 +131,13 @@
   "module": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
   "declaration": "AlgebraicGeometry.singleComplexInheritedTensorCondition",
   "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexInheritedTensorCondition.lean",
-  "statement": "theorem singleComplexInheritedTensorCondition [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X') (φ : (derivedPullback g').obj K.obj ⟶ K'.obj) (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K.obj K'.obj φ) : Nonempty (Functor.Monoidal (derivedPullback g')) ∧ ∀ [Functor.Monoidal (derivedPullback g')] (E : schemeDerivedQCohCategory X), SingleComplexBaseChange.StalkCondition f f' g g' sq (E.obj ⊗ K.obj) (((derivedPullback g').obj E.obj) ⊗ K'.obj) ((Functor.Monoidal.μIso (derivedPullback g') E.obj K.obj).inv ≫ ((derivedPullback g').obj E.obj ◁ φ))",
+  "statement": "theorem singleComplexInheritedTensorCondition [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X') (φ : (derivedPullback g').obj K.obj ⟶ K'.obj) (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K.obj K'.obj φ) (τ : ∀ E L : schemeDerivedCategory X, (derivedPullback g').obj (E ⊗ L) ⟶ (derivedPullback g').obj E ⊗ (derivedPullback g').obj L) (hτ : IsCanonicalPullbackTensorComparison g' τ) : Nonempty (Functor.Monoidal (derivedPullback g')) ∧ ∀ E : schemeDerivedQCohCategory X, SingleComplexBaseChange.StalkCondition f f' g g' sq (E.obj ⊗ K.obj) (((derivedPullback g').obj E.obj) ⊗ K'.obj) (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ))",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-12",
+  "by": "N3",
+  "date": "2026-10-13",
   "existing": false,
-  "fixed_by": "R-itc"
+  "fixed_by": "R-itc",
+  "note": "Source-faithful interface correction: accepts the pinned canonical tensor comparison used by the caller. The old universal monoidal-instance claim is not proved or assumed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -137,5 +145,15 @@
   "reviewer": "R-itc",
   "group": "C1",
   "result": "fix"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-a9856",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T060423-L-584555",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node metadata; all delivered modules and both direct importers compiled cleanly, with only permitted axioms and the two named sorry lemmas."
  }
 }
