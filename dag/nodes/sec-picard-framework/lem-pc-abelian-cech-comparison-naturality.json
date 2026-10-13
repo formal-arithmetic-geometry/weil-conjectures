@@ -14,35 +14,48 @@
  },
  "proof": [
   {
-   "text": "Choose resolutions and a comparison lift of f. Naturality of restriction and the resolution lifting equation give commuting alpha and beta squares on cochain complexes. Apply homology.",
+   "text": "Choose Mathlib injective resolutions I,J and the descent lift of f. Represent c(x) as extMk(a) using extMk_surjective and obtain its section cycle z. Apply the section cochain map to get z-prime; adjunction naturality identifies its section value with a composed with the lift. extMk_comp_mk0 identifies its Ext class with H(f)(c(x)).",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction"
+    "def-pc-abelian-cech-comparison-construction",
+    "def-pc-abelian-cech-sections-map",
+    "lem-pc-ext-section-cycle"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the comparison output by extMk; the constant-sheaf adjunction supplies its section cycle. Under the lift, extMk_comp_mk0 identifies the image cocycle with H(f) of that class. Apply both canonical comparison equations to these representatives.",
+   "text": "Represent d(CechH(f)(x)) as extMk(b), with section cycle w. The two defining comparison equations, the alpha and beta cochain squares, and homology projection naturality give equality of H(alpha_J)([w]) and H(alpha_J)([z-prime]).",
    "uses": [
-    "def-pc-abelian-cech-comparison-construction"
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-pc-ext-section-cycle",
+    "def-pc-abelian-cech-total-map",
+    "lem-pc-abelian-cech-alpha-square",
+    "lem-pc-abelian-cech-beta-square"
    ],
    "elementary": false
   },
   {
-   "text": "The augmentation squares give equality after H(alpha on G) and the canonical section/Ext identification. Cancel the invertible maps and use extensionality.",
+   "text": "The section augmentation quasi-isomorphism makes H(alpha_J) injective. Cancel it to obtain equality of section homology classes, apply the proved Ext/section injectivity theorem to b and the transported a, and conclude equality on x. Additive morphism extensionality yields the required unchanged equality.",
    "uses": [
-    "lem-pc-abelian-cech-alpha-quasi-iso"
+    "lem-pc-abelian-cech-alpha-quasi-iso",
+    "lem-pc-ext-section-injective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-abelian-cech-comparison-construction",
-  "lem-pc-abelian-cech-alpha-quasi-iso"
+  "def-pc-abelian-cech-sections-map",
+  "def-pc-abelian-cech-total-map",
+  "lem-pc-abelian-cech-alpha-quasi-iso",
+  "lem-pc-abelian-cech-alpha-square",
+  "lem-pc-abelian-cech-beta-square",
+  "lem-pc-ext-section-cycle",
+  "lem-pc-ext-section-injective"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Lemma 20.11.2, omitted coefficient-functoriality verification; Tag 01FD, augmented comparison squares"
+  "place": "Lemma 20.11.2 augmentations; Tag 01FD square route; complete Lean representative and cancellation proof by N2"
  },
  "mathlib_searches": [
   {
@@ -114,12 +127,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T234221-L-2125679",
+  "landing": "20261013T024041-L-3336757",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

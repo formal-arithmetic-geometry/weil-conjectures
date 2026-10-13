@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-ext-section-cycle",
+ "kind": "statement",
+ "title": "An Ext cocycle supplies a section cycle",
+ "statement": "Let $X$ be a scheme, $F$ an abelian sheaf, $I$ an injective resolution, and $q\\geq0$. For a cocycle $a:\\mathbf Z_X\\to I^q$ with $a d^q=0$, there exists a cycle $z$ of $A=\\Gamma(X,I^\\bullet)$ [def-pc-abelian-cech-comparison-construction] such that the constant-sheaf adjunction applied to $a$ and evaluated at $1$ equals $iCycles(z)$.",
+ "stmt_deps": [
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, augmentation construction and omitted coefficient functoriality; Tag 01FD comparison diagram; explicit formal verification using the Mathlib APIs named in the proof"
+ },
+ "proof": [
+  {
+   "text": "The constant-sheaf adjunction takes a to an additive morphism from lifted integers into sections. Naturality takes a composed with the differential to the section differential composed with that morphism. Since the cocycle composite is zero and the additive adjunction preserves zero, this morphism factors through cycles. Evaluate the factor on 1 and use liftCycles_i.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Augmentation construction; explicit coefficient-functoriality and Ext/section verification by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cocycle from the constant integer sheaf gives a cycle of global sections by adjunction",
+   "results": "{\"t\": \"2026-10-13T01:36:05Z\", \"tool\": \"leansearch\", \"query\": \"A cocycle from the constant integer sheaf gives a cycle of global sections by adjunction\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocycle from the constant integer sheaf gives a cycle of global sections by adjunction",
+   "results": "{\"t\": \"2026-10-13T01:31:47Z\", \"tool\": \"leanfinder\", \"query\": \"A cocycle from the constant integer sheaf gives a cycle of global sections by adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.leftHomologyData_K_coe\", \"CochainComplex.HomComplex.leftHomologyData'_K_coe\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\", \"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"CategoryTheory.PresheafOfGroups.H1\", \"groupCohomology.isoCocycles₁\", \"CochainComplex.HomComplex.CohomologyClass\"], \"digest\": \"783bbf802c29c82c\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact specialized result; generic Mathlib APIs are used in the construction or proof. "
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.liftCycles_i",
+   "results": "{\"t\": \"2026-10-13T01:31:47Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.liftCycles_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.liftCycles_i\"], \"digest\": \"52cc262ced2229f2\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact specialized result; generic Mathlib APIs are used in the construction or proof. "
+  },
+  {
+   "tool": "grep",
+   "query": "liftCycles_i|homAddEquiv_zero",
+   "results": "{\"t\": \"2026-10-13T01:31:46Z\", \"tool\": \"grep\", \"query\": \"liftCycles_i|homAddEquiv_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean\"], \"digest\": \"3fd64d0d92e051cd\"}",
+   "date": "2026-10-13",
+   "verdict": "No exact specialized result; generic Mathlib APIs are used in the construction or proof. "
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNaturality",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Separated-case Cech comparison paragraph: coefficient-functoriality of the augmented injective-resolution comparison",
+   "via": [
+    "lem-pc-abelian-cech-comparison-naturality",
+    "lem-pc-cech-comparison-system-existence",
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionCycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechExtSectionCycle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCech_ext_section_cycle",
+  "statement": "theorem abelianCech_ext_section_cycle\n    {X : Scheme.{u}} {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}\n    (I : InjectiveResolution F) (q : ℕ)\n    (a : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ I.cocomplex.X q)\n    (ha : a ≫ I.cocomplex.d q (q + 1) = 0) :\n    ∃ z : (abelianCechSections I).cycles q,\n      ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u}\n        isTerminalTop).homEquiv _ _ a) (ULift.up 1) =\n          (abelianCechSections I).iCycles q z",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T024041-L-3336757",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
