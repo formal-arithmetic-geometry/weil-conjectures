@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-kflat-stalk-residue-cohomology",
+ "kind": "statement",
+ "title": "Residue fibre cohomology of a K-flat sheaf representative",
+ "statement": "Let X be a scheme [def-pc-scheme], x a point [def-weil-residue-field], and P a K-flat complex of structure-sheaf modules [def-pc-kflat-complex]. Let E in D(O_X) [def-pc-derived-category] be equipped with Q(P) ≅ E. For every integer i, derivedFiberCohomology X E i x [def-sc-derived-fiber-betti] is linearly equivalent over kappa(x) to H^i(kappa(x) tensor over O_X,x the stalk complex P_x [def-pc-module-stalk-functor]). No ring derived category, boundedness or termwise freeness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YI and 06YJ; derived pullback computation on K-flat models, with Tag 0098 and one-point evaluation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-sc-derived-fiber-betti",
+  "def-pc-module-stalk-functor",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The universal-property witness specifying derivedPullback has a counit invertible on P. Identify its underlying additive functor with tensorPullback by its recorded object and morphism equalities. Compose the quotient-to-Qh factorization, this invertible counit, and the tensor functor quotient factorization to get L i_x^* Q(P) ≅ Q(i_x^* P). Transport along Q(P) ≅ E and apply derived homology.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of modules on the one-point ringed space Spec kappa(x) is an equivalence, hence preserves finite limits and colimits. Restriction of scalars along GammaSpecIso inverse is exact. Their composite therefore commutes with homology; use the short-complex mapHomologyIso in degree i.",
+   "uses": [
+    "lem-pc-point-module-evaluation-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the natural isomorphism of residue pullback global sections to complexes, apply homology, and compose with the preceding two isomorphisms. ModuleCat.toLinearEquiv retains the kappa(x)-action.",
+   "uses": [
+    "lem-sc-residue-pullback-global-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-point-module-evaluation-equivalence",
+  "lem-sc-residue-pullback-global-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YI and 06YJ; derived pullback computation on K-flat models, with Tag 0098 and one-point evaluation; T3 writes the Lean interface and composition argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of derived pullback to the residue field is tensor of a K-flat stalk complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback residue field cohomology K-flat stalk complex",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.residue_residueFieldMap, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Hom.residueFieldMap; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*pullback.*stalk|stalk.*derived.*pullback|extendScalars.*quasiIso",
+   "results": "0 hits: ; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison; strict-perfect stalk fibre data, step 3; Residue fibre cohomology of a K-flat sheaf representative",
+   "via": [
+    "lem-sc-stalk-free-residue-cohomology-comparison",
+    "lem-sc-strict-perfect-stalk-fiber-data",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/KFlatStalkResidueCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_kFlat_stalk_residueCohomology_linearEquiv",
+  "statement": "theorem nonempty_kFlat_stalk_residueCohomology_linearEquiv\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (E : schemeDerivedCategory X) (x : X)\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (hP : CochainComplex.IsKFlat (R := X.sheaf) P)\n    (eP : DerivedCategory.Q.obj P ≅ E) (i : ℤ) :\n    Nonempty (derivedFiberCohomology X E i x ≃ₗ[IsLocalRing.ResidueField\n      (X.presheaf.stalk x)]\n        ((((ModuleCat.extendScalars\n          (IsLocalRing.residue (X.presheaf.stalk x))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj\n              (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n                (ComplexShape.up ℤ)).obj P)).homology i))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045607-L-138264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045607-L-138264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

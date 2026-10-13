@@ -17,61 +17,48 @@
  ],
  "proof": [
   {
-   "text": "1. Take a K-flat sheaf resolution of G. Its stalk is K-flat by Tag 06YB, and\n   exactness of stalks preserves its comparison to G_x. Pulling this resolution\n   back to the residue-field point computes Li_x^*E using eG. On the one-point\n   spectrum, sections are exact. The pullback tensor product of a sheaf has\n   sections kappa(x) tensor over O_X,x its stalk by Tag 0098. The scalar and vector\n   germs restrict to the residue point, and their balanced bilinear map\n   induces this canonical identification. The identification is functorial in\n   the sheaf, hence is an identification of the corresponding complexes.",
+   "text": "Take a K-flat sheaf resolution s:P→G. Its localized map is invertible; compose Q(s) with eG to obtain Q(P)≅E. Exactness of the module stalk functor implies it preserves homology, so its termwise image of s is a quasi-isomorphism. Compose eK with the inverse of Q(s_x) to obtain Q(K)≅Q(P_x). The stalk criterion makes P_x K-flat.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pc-kflat-stalk-criterion",
     "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-stalk-pullback",
-    "def-pc-derived-pullback"
+    "lem-pc-kflat-stalk-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB, 064K and 0098; K-flat stalks and residue pullback computation"
-   }
+   "elementary": false
   },
   {
-   "text": "2. The bounded-above free K is K-flat by Tag 064K. Its derived comparison\n   eK with G_x identifies their derived residue tensor products, since derived\n   tensor inverts quasi-isomorphisms and therefore respects derived isomorphisms.\n   The termwise residue extension of K is a representative of this product.",
+   "text": "The supplied strict upper bound gives the boundedness hypothesis of acyclic_mapBifunctor_of_boundedAbove_flat, and Module.Flat.of_free gives flatness of each K term. Thus K is K-flat. Apply the scalar extension homology comparison to K and P_x with their derived isomorphism and the residue map.",
    "uses": [
     "lem-pc-module-bounded-flat-kflat",
     "def-weil-pbc-free-module",
-    "def-pc-derived-pullback"
+    "lem-sc-kflat-scalar-extension-derived-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB, 064K and 0098; K-flat stalks and residue pullback computation"
-   }
+   "elementary": false
   },
   {
-   "text": "3. Apply degree-i homology to this comparison. Sections on Spec kappa(x) and\n   transport along GammaSpecIso give exactly derivedFiberCohomology. The residue\n   field of the scheme point is definitionally IsLocalRing.ResidueField O_X,x.\n   The comparisons commute with its scalar action, so give a linear equivalence,\n   not merely an additive equivalence. This is independent of the chosen K.\nNo finiteness of the cohomology or local strict perfection is assumed or concluded.\nIn particular the statement includes zero complexes and arbitrary upper bounds;\nunbounded below K and free terms of infinite rank are allowed by bounded-above K-flatness.",
+   "text": "Compute derivedFiberCohomology from the K-flat sheaf P and its isomorphism to E, using the K-flat stalk residue cohomology comparison. Compose its linear equivalence with the inverse scalar extension comparison from the previous step. This gives the original statement in all degrees without changing its hypotheses or universes.",
    "uses": [
+    "lem-sc-kflat-stalk-residue-cohomology",
     "def-sc-derived-fiber-betti",
     "def-weil-residue-field"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 06YB, 064K and 0098; K-flat stalks and residue pullback computation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-kflat-resolution",
-  "lem-pc-kflat-stalk-criterion",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-stalk-pullback",
-  "def-pc-derived-pullback",
+  "lem-pc-kflat-stalk-criterion",
   "lem-pc-module-bounded-flat-kflat",
   "def-weil-pbc-free-module",
+  "lem-sc-kflat-scalar-extension-derived-iso",
+  "lem-sc-kflat-stalk-residue-cohomology",
   "def-sc-derived-fiber-betti",
   "def-weil-residue-field"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 06YB, 064K and 0098; K-flat stalks and residue pullback computation; C4 writes out the stalk/localization interface from these source arguments"
+  "place": "Tags 06YB, 064K and 0098; T3 Lean resolution/stalk comparison and scalar-extension roof argument; remaining ordinary residue global-sections naturality isolated"
  },
  "mathlib_searches": [
   {
@@ -152,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C4",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T032956-L-3674228",
+  "landing": "20261013T045607-L-138264",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-residue-pullback-global-sections",
+ "kind": "statement",
+ "title": "Global sections of residue-point pullback are tensor of the stalk",
+ "statement": "Let X be a scheme [def-pc-scheme] and x a point with residue field kappa(x) [def-weil-residue-field]. The functor from O_X-module sheaves that first pulls back along i_x:Spec kappa(x)→X [def-pc-module-pullback], then takes global sections and restricts scalars along GammaSpecIso inverse, is naturally isomorphic to the composite of the module stalk functor at x [def-pc-module-stalk-functor] and extension of scalars along the residue map O_X,x→kappa(x). This holds for all module sheaves, without quasi-coherence or flatness.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0098, Lemma 6.26.4, specialized to a residue-field point with global sections on a singleton spectrum"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Let y be the unique point of Spec kappa(x). Every open neighborhood of y equals the whole space. The global germ map therefore identifies sections of any module sheaf with its stalk; its inverse sends a germ to the global representative, uniquely since every representative neighborhood is the whole space. The ring germ likewise identifies the ring stalk with global sections. Transport scalars by GammaSpecIso to kappa(x).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the natural tensorPullback stalk isomorphism at y. The equality i_x(y)=x and the equality of its stalk map, under the preceding ring identification, with the residue map identify the right side with kappa(x) tensor over O_X,x the original stalk. Those identities follow by applying both maps to germs of sections in the definition of fromSpecResidueField.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the global germ identification to give the required linear isomorphism. Its forward map sends a pure tensor a tensor m to a times the restricted germ, and its inverse is the inverse stalk tensor map followed by the inverse global germ map. Their inverse identities and linearity follow from the constituent isomorphisms. The naturality of germs and tensorPullback stalks gives naturality in every module sheaf, hence a natural isomorphism of the two functors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0098, Lemma 6.26.4, specialized to a residue-field point with global sections on a singleton spectrum; T3 writes the Lean interface and composition argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of module pullback to a residue field are extension of scalars of the stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of module pullback to a residue field are extension of scalars of the stalk",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Γevaluation, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.Scheme.evaluation, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.germ_residue; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullback|stalkToFiber|stalk.*germ.*iso",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Stalk.lean; no exact comparison for arbitrary module sheaves / K-flat models.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the listed APIs are used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StalkFreeResidueCohomologyComparison",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; finite-free model existence, Tag 0BCD, local-ring paragraph; Tags 08EB, 06YB and 01AG, stalk and residue comparison; strict-perfect stalk fibre data, step 3; Global sections of residue-point pullback are tensor of the stalk",
+   "via": [
+    "lem-sc-stalk-free-residue-cohomology-comparison",
+    "lem-sc-strict-perfect-stalk-fiber-data",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResiduePullbackGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResiduePullbackGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_residuePullback_globalSections_iso",
+  "statement": "theorem nonempty_residuePullback_globalSections_iso (X : Scheme.{u}) (x : X) :\n    Nonempty\n      (Modules.tensorPullback (X.fromSpecResidueField x) ⋙\n          (SheafOfModules.evaluation\n            (moduleRings (Spec (X.residueField x)).toRingedSpace) (op ⊤) ⋙\n              ModuleCat.restrictScalars (ΓSpecIso (X.residueField x)).inv.hom) ≅\n        RingedSpace.moduleStalkFunctor X.toRingedSpace x ⋙\n          ModuleCat.extendScalars (IsLocalRing.residue (X.presheaf.stalk x)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045607-L-138264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T045607-L-138264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

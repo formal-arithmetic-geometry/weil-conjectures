@@ -12,7 +12,9 @@ import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
+import Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
+import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Residue cohomology computed by a free stalk representative
 
@@ -73,6 +75,33 @@ theorem nonempty_stalkFree_residueCohomology_linearEquiv
       (X.presheaf.stalk x)]
         ((((ModuleCat.extendScalars
           (IsLocalRing.residue (X.presheaf.stalk x))).mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj K).homology i)) := by sorry
+            (ComplexShape.up ℤ)).obj K).homology i)) := by
+  obtain ⟨P, s, hP, _, hs, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) G
+  have : QuasiIso s := hs
+  have : IsIso (DerivedCategory.Q.map s) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ s).2 hs
+  let eP : DerivedCategory.Q.obj P ≅ E := asIso (DerivedCategory.Q.map s) ≪≫ eG
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  have : S.PreservesHomology := Functor.preservesHomology_of_map_exact S (by
+    intro T hT
+    exact ((RingedSpace.module_stalk_exact X.toRingedSpace T.f).2.2.2.2
+      T.X₃ T.f T.g T.zero).mp hT x)
+  let Sc := S.mapHomologicalComplex (ComplexShape.up ℤ)
+  have hSs : QuasiIso (Sc.map s) := inferInstance
+  have : IsIso (DerivedCategory.Q.map (Sc.map s)) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ (Sc.map s)).2 hSs
+  let eKP : DerivedCategory.Q.obj K ≅ DerivedCategory.Q.obj (Sc.obj P) :=
+    eK ≪≫ (asIso (DerivedCategory.Q.map (Sc.map s))).symm
+  have hPK := (RingedSpace.isKFlat_iff_stalk_isKFlat X.toRingedSpace P).mp hP x
+  have hKK := CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat K
+    ⟨b, (K.isStrictlyLE_iff b).mp hb⟩ (by
+      intro j
+      have := hfree j
+      exact Module.Flat.of_free)
+  obtain ⟨e₁⟩ := nonempty_kFlat_stalk_residueCohomology_linearEquiv X E x P hP eP i
+  obtain ⟨e₂⟩ := CochainComplex.nonempty_kFlat_scalarExtension_homology_linearEquiv
+    (IsLocalRing.residue (X.presheaf.stalk x)) K (Sc.obj P) hKK hPK eKP i
+  exact ⟨e₁.trans e₂.symm⟩
 
 end AlgebraicGeometry.Scheme
