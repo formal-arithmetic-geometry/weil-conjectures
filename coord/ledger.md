@@ -13123,3 +13123,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:17 L: merged deliver/K1/Sheaf.RingTheory.PointedEtaleFiltered (stage 3; reviewer PASS; first push; landing 20261013T161730-L-1460648 (proof); batch 20261013T161725; modules 1; new nodes 0)
 - 16:17 L: merged deliver/M3/Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants (stage 3; reviewer PASS; first push; landing 20261013T161730-L-1460805 (proof); batch 20261013T161725; modules 1; new nodes 0)
 - 16:17 L: merged deliver/M3/Sheaf.RingTheory.AssociatedGradedRing (stage 3; reviewer PASS; first push; landing 20261013T161731-L-1460907 (proof); batch 20261013T161725; modules 1; new nodes 0)
+- 16:17 L: merged deliver/T3/Sheaf.AlgebraicGeometry.Morphisms.CompletedPuncturedQuotientFullyFaithful (stage 3; reviewer PASS; first push; landing 20261013T161731-L-1461051 (interface); batch 20261013T161725; modules 3; new nodes 2)

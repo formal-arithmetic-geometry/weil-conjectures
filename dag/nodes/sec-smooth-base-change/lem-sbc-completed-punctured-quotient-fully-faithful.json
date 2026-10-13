@@ -19,51 +19,62 @@
  ],
  "proof": [
   {
-   "text": "The Noetherian maximal-ideal completion C is flat over A and its maximal ideal is the extended maximal ideal of A. A prime above the maximal ideal of A contains that extension, so is its maximal ideal. Hence W is the punctured spectrum of C.",
+   "text": "The completion C is Noetherian, local and flat over A, by AdicCompletion.isNoetherianRing and Mathlib completion instances. Flat local base change preserves regular sequences in the maximal ideal, so depth C is at least depth A. The maximal ideal of C is the extension of that of A; hence precisely its closed point lies over the closed point of A and W is its puncture.",
    "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
     "def-weil-pbc-adic-completion",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-flat-morphism",
+    "def-weil-pbc-depth",
     "def-weil-pbc-scheme-conventions"
    ],
    "elementary": false
   },
   {
-   "text": "By the depth/local-cohomology vanishing criterion of 0AVY, H¹_m(A) and H²_m(A) vanish. Derived local cohomology base change 0ALZ, together with flatness of C over A, gives vanishing of the corresponding local cohomology modules of C. Thus they are annihilated by a power of g.",
+   "text": "The depth-two puncture lemma makes W connected and its principal slice nonempty. Choose a geometric point on that slice. Equality after pullback gives equality on the corresponding geometric fibre, so faithfulness of the fibre functor for finite etale covers of connected W makes pullback injective on Hom sets.",
    "uses": [
-    "def-weil-pbc-depth",
-    "def-weil-flat-morphism"
+    "lem-sbc-depth-two-punctured-principal-slice-connected",
+    "lem-fet-galois-category",
+    "def-galois-fibre-functor"
    ],
    "elementary": false
   },
   {
-   "text": "C is (g)-adically complete: (g)-adic Cauchy sequences converge in the maximal ideal topology, powers of (g) are closed, and Krull intersection gives separatedness. Tag 0ALJ makes (C,(g)) henselian. Apply 0BM6 to C, g and its punctured spectrum W. The principal quotient open is W₀, and its restriction functor is precisely the displayed morphism-property-over pullback functor. The case g=0 and empty covers is included.",
+   "text": "Given a morphism on the principal slice, finiteEtale_adic_unique_lift lifts it uniquely to every nilpotent thickening. Uniqueness makes these lifts compatible. Apply scalar formal sections comparison, and then finiteEtale_adic_sections_comparison_of_structureSheaf to the finite etale source cover. This uniquely algebraizes the induced compatible ring maps on global sections. The quasi-affine relative toSpecGamma pullback converts the resulting ring map into a scheme morphism over W. The two pullback projection equations verify that its restriction is the prescribed morphism.",
    "uses": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-adic-completion",
-    "def-weil-etale-morphism",
+    "lem-sbc-finite-etale-adic-unique-lift",
+    "lem-sbc-complete-punctured-principal-formal-sections",
+    "lem-sbc-finite-etale-adic-sections-transfer",
+    "def-pc-fibre-product",
     "def-weil-finite-integral-morphism",
-    "def-pc-fibre-product"
+    "def-weil-etale-morphism"
    ],
    "elementary": false
+  },
+  {
+   "text": "The pullback functor is bijective on all Hom sets by the preceding injectivity and surjectivity. Apply Functor.FullyFaithful.nonempty_iff_map_bijective to construct the required Nonempty FullyFaithful.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-galois-fibre-functor",
   "def-pc-fibre-product",
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "def-weil-flat-morphism",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-depth",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "lem-fet-galois-category",
+  "lem-sbc-complete-punctured-principal-formal-sections",
+  "lem-sbc-depth-two-punctured-principal-slice-connected",
+  "lem-sbc-finite-etale-adic-sections-transfer",
+  "lem-sbc-finite-etale-adic-unique-lift",
+  "lem-weil-pbc-adic-completion-noetherian"
  ],
  "proof_origin": {
   "kind": "from-source",
   "by": "T3",
   "document": "Stacks Project",
-  "place": "Tag 0BM6; Tag 0BLS, complete-case comparison paragraph; Tags 0AVY, 0ALZ and 0ALJ"
+  "place": "Tags 0BM6, 0EKS, 0EL8, 0EII; direct preservation of regular sequences under flat local completion replaces derived local-cohomology base change"
  },
  "mathlib_searches": [
   {
@@ -150,7 +161,7 @@
   "reviewer": "COMPILER",
   "group": "T3",
   "result": "pass",
-  "landing": "20261013T154358-L-1163507",
+  "landing": "20261013T161731-L-1461051",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
