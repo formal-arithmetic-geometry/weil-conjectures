@@ -10,18 +10,32 @@
  },
  "proof": [
   {
-   "text": "Construct the small Gabriel–Popescu module presentation using a separator, then extend the exact left adjoint and invertible counit to the displayed universe by the Baer-criterion argument.",
-   "uses": [],
+   "text": "Shrink the hom types of A to universe w. Choose its separator G and S=End(G)^op. Construct U explicitly as ShrinkHoms.equivalence.functor followed by preadditiveCoyonedaObj G and ModuleCat.uliftFunctor to modules in Type max(w,vH). Apply the large-Hom adjoint-existence component to this fixed U.",
+   "uses": [
+    "new-stage3-gabriel-popescu-large-hom-right-adjoint"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Mathlib GabrielPopescu.full and the separator-faithfulness equivalence show the small Hom functor is fully faithful. ShrinkHoms.equivalence.functor and ModuleCat.uliftFunctor are fully faithful, so U is fully faithful. Mathlib GabrielPopescu.preservesInjectiveObjects and ModuleCat.uliftFunctor preserve injectives (the latter by the Baer criterion for a w-small ring); the equivalence does also. Thus U preserves injectives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let F be the left adjoint determined up to natural isomorphism by U.IsRightAdjoint. Enough injectives and preservation of injectives by U imply F preserves monomorphisms. As a left adjoint F preserves finite colimits and binary coproducts, hence binary biproducts and is additive. Preservation of monomorphisms and cokernels gives preservation of homology, hence finite limits. Full faithfulness of U gives the invertible counit. Construct the required derived module category from its Grothendieck structure, transferred from modules over the lifted ring ULift S, and assemble the witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-stage3-gabriel-popescu-large-hom-right-adjoint"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "F3",
+  "group": "H3",
   "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/0F5V",
-  "place": "Abelian separator, large-coproduct, counit and exactness component of the parent presentation proof"
+  "document": "https://stacks.math.columbia.edu/tag/0F5S",
+  "place": "Separate adjoint existence for the fixed lifted Hom functor; discharge full faithfulness, Baer size extension, exactness and counit by Mathlib GabrielPopescu, ModuleCat.Ulift and adjunction APIs."
  },
  "mathlib_searches": [
   {
@@ -93,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-62b11",
-  "group": "F3",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T222404-L-1223076",
+  "landing": "20261013T234511-L-2163178",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the DAG and recorded statements; all delivered modules and the direct importer compile cleanly, with only the two documented component sorry declarations remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

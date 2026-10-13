@@ -1,0 +1,117 @@
+{
+ "id": "new-stage3-gabriel-popescu-large-hom-right-adjoint",
+ "kind": "statement",
+ "title": "Left adjoint for the fixed universe-enlarged Hom functor",
+ "statement": "theorem gabriel_popescu_large_hom_isRightAdjoint\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)]\n    (G : ShrinkHoms A) :\n    ((ShrinkHoms.equivalence.{w} A).functor ⋙ preadditiveCoyonedaObj G ⋙\n      ModuleCat.uliftFunctor.{vH, w} (End G)ᵐᵒᵖ).IsRightAdjoint",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F5S",
+  "place": "Lemma 19.14.1, second proof: free presentation and cokernel construction; universe extension from the original abelian-core node large-coproduct step"
+ },
+ "proof": [
+  {
+   "text": "For a family X_i in A indexed at the displayed size, form its derived coproduct K in D(A) and P=H^0(K). For an injective I, its degree-zero complex is K-injective, so Hom_A(P,I) is naturally Hom_D(K,I[0]), hence the product of Hom_A(X_i,I). For general Y choose 0 -> Y -> I^0 -> I^1 with the two I^j injective. Both Hom_A(P,-) and the product of Hom_A(X_i,-) are left exact; identifying their kernels gives the same natural isomorphism for Y. The induced maps X_i -> P therefore form a coproduct. Transfer along ShrinkHoms.equivalence.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For S=End(G)^op in ShrinkHoms A and a module M in Type max(w,vH), use the canonical free presentation with generators indexed by M and relations indexed by the kernel of the free-module surjection. The indices lie in Type max(w,vH). Replace free modules by coproducts of G. Finite-support coefficient columns define the induced morphism by the action of End(G) and the coproduct universal property. Define the representing object as its cokernel.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel universal property identifies maps from this object to X with module maps M -> Hom(G,X), naturally in M and X. The equivalence between a small module and its ULift preserves the latter identification. This determines the left adjoint and its functorial action by the universal property. Compose with the inverse ShrinkHoms equivalence to obtain the right-adjoint property for the exact functor displayed in the Lean statement. No separator condition or exactness is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-14",
+  "document": "https://stacks.math.columbia.edu/tag/0F5S",
+  "place": "Lemma 19.14.1, second proof: free presentation and cokernel construction; universe extension from the original abelian-core node large-coproduct step",
+  "note": "Free presentation follows the source; derived-to-abelian large-coproduct step expands the original core plan using injective targets."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Hom functor of an object in a cocomplete abelian category has a left adjoint from modules over its endomorphism ring",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj, CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.instIsRightAdjointCoextendScalars, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, ModuleCat.instIsRightAdjointForget, ModuleCat.adj, PresheafOfModules.freeAdjunction",
+   "date": "2026-10-14",
+   "verdict": "No complete universe-extended Hom adjoint match; Mathlib has the small adjoint and the full, faithful, injective-preserving module lift separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.uliftFunctor",
+   "results": "12 hits: ModuleCat.uliftFunctor, ModuleCat.fullyFaithfulUliftFunctor, ModuleCat.instFaithfulUliftFunctor, ModuleCat.instFullUliftFunctor, ModuleCat.instPreservesFiniteColimitsUliftFunctor, ModuleCat.instPreservesFiniteLimitsUliftFunctor, ModuleCat.instPreservesLimitsOfSizeUliftFunctor, ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall",
+   "date": "2026-10-14",
+   "verdict": "No complete universe-extended Hom adjoint match; Mathlib has the small adjoint and the full, faithful, injective-preserving module lift separately."
+  },
+  {
+   "tool": "grep",
+   "query": "uliftFunctor|isRightAdjoint_of_preservesLimits",
+   "results": "25 hits: Mathlib/Logic/UnivLE.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/TopologicalSimplex.lean, Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-14",
+   "verdict": "No complete universe-extended Hom adjoint match; Mathlib has the small adjoint and the full, faithful, injective-preserving module lift separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hom functor followed by universe lift on modules has a left adjoint when the abelian category has large coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GabrielPopescuAbelianCore",
+  "date": "2026-10-14",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
+   "place": "Abelian-core proof: large coproducts allow the free-presentation left adjoint at the enlarged module universe",
+   "via": [
+    "new-stage3-gabriel-popescu-abelian-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GabrielPopescuLargeHomRightAdjoint",
+  "file": "lean/Sheaf/CategoryTheory/GabrielPopescuLargeHomRightAdjoint.lean",
+  "declaration": "CategoryTheory.gabriel_popescu_large_hom_isRightAdjoint",
+  "statement": "theorem gabriel_popescu_large_hom_isRightAdjoint\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)]\n    (G : ShrinkHoms A) :\n    ((ShrinkHoms.equivalence.{w} A).functor ⋙ preadditiveCoyonedaObj G ⋙\n      ModuleCat.uliftFunctor.{vH, w} (End G)ᵐᵒᵖ).IsRightAdjoint",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T234511-L-2163178",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T234511-L-2163178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
