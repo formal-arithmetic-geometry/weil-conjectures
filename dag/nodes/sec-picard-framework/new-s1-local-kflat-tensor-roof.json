@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "The two augmentations identify F(P) and F(K) in D(U). Apply Mathlib DerivedCategory.right_fac to this isomorphism, obtaining actual chain maps from a common vertex. The first is a quasi-isomorphism by construction; the second is one by DerivedCategory.isIso_Q_map_iff_quasiIso, since its image is a composite of isomorphisms. Replace the vertex by a K-flat resolution and compose with both maps.",
+   "text": "The quasi-isomorphisms a and b identify F(P) and F(K) in the standard derived category of U-modules. Factor Q(a) followed by the inverse of Q(b) using Mathlib DerivedCategory.right_fac. Reflect isomorphisms with isIso_Q_map_iff_quasiIso to see that both roof maps s and t are quasi-isomorphisms. Choose a K-flat resolution r:R -> T of the common vertex; r followed by s and r followed by t are quasi-isomorphisms between K-flat complexes.",
    "uses": [
     "def-pc-derived-category",
     "lem-pc-kflat-resolution"
@@ -25,43 +25,39 @@
    "elementary": false
   },
   {
-   "text": "Apply inverse image along the restriction of i over U. It is exact and preserves K-flatness, as the ringed-space pullback theorem applied with the inverse-image ring sheaf shows. Extension of scalars to the source structure sheaf preserves each quasi-isomorphism between these K-flat complexes. This gives the tensor-pulled roof on i^{-1}(U).",
+   "text": "Put W=V.ι inverse-image of i inverse-image U and g=(V.ι followed by i) restricted over U. Let E be Mathlib Scheme.Modules.overEquiv W and H the termwise functor of tensorPullback g followed by E.inverse. Tensor pullback and open restriction have the same right adjoint, so leftAdjointUniq identifies them for an open immersion. Apply nonempty_tensorPullbackComp, morphismRestrict_ι and overFunctorEquiv W to obtain a natural isomorphism F followed by H -> G. These comparisons are lifted degreewise using NatIso.mapHomologicalComplex. Additivity of tensor pullback follows from its adjunction; E.inverse is additive because it preserves binary biproducts.",
    "uses": [
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pur-change-of-rings-kflat-quasi-iso"
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "new-b2-homology-evaluation-definitions"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the roof to V intersect i^{-1}(U) and to the over site. Exact restriction preserves its quasi-isomorphisms. The inverse-image and extension-of-scalars formulas identify its endpoints with G(P) and G(K), because all opens in question map into U. Compose with those endpoint isomorphisms. Empty opens give zero complexes. K=0 can satisfy b only if F(S) is acyclic.",
+   "text": "Apply tensorPullback_quasiIso_of_isKFlat to r followed by s and r followed by t along g. The inverse equivalence E.inverse is exact, so its functor on complexes preserves both quasi-isomorphisms. Compose these two maps with the P and K components of the natural isomorphism F followed by H -> G. Their common source H(R) and their two quasi-isomorphism properties give the desired witnesses. No nonempty-open assumption is used, and a zero endpoint is allowed precisely when the supplied augmentation is a quasi-isomorphism.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-limits",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-sc-homology-evaluation-formal-complex",
-    "lem-sc-derived-hom-mayer-vietoris"
+    "lem-pc-tensor-pullback-kflat-quasi-iso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-category",
-  "lem-pc-kflat-pullback-preservation",
+  "def-pc-module-pullback",
   "lem-pc-kflat-resolution",
-  "lem-pur-change-of-rings-kflat-quasi-iso",
-  "lem-sc-derived-hom-mayer-vietoris",
-  "lem-sc-homology-evaluation-formal-complex",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-restriction-open-immersion-limits"
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-tensor-pullback-kflat-quasi-iso",
+  "new-b2-homology-evaluation-definitions"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "S1",
+  "group": "U2",
   "date": "2026-10-14",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/06YJ",
    "place": "Proof of independence of K-flat representatives; Tag 06YI derived pullback and composition with open restriction."
   },
-  "note": "Strict component of split-local-tensor-finite-free. The module docstring gives the complete construction and edge cases."
+  "note": "Common roof and K-flat vertex replacement are written in Lean. Existing scheme-level tensorPullback_quasiIso_of_isKFlat replaces the lower-level inverse-image/change-of-rings glue. All endpoint comparisons are proved using adjunction uniqueness and the open over-site equivalence; no new holes."
  },
  "mathlib_searches": [
   {
@@ -151,10 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T211112-L-394675",
-  "kind": "interface",
+  "landing": "20261013T215614-L-902228",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
