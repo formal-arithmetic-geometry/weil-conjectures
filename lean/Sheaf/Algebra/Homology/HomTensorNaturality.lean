@@ -6,6 +6,8 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
+import Sheaf.Algebra.Homology.HomTensorNaturalityComponent
+import Sheaf.Algebra.Homology.HomComplexProjections
 
 /-!
 # Degreewise currying for the Hom-total-tensor comparison
@@ -61,6 +63,14 @@ theorem homTensorDegreewiseMap_natural
         ((((homComplexFunctor (R := R)).map
           (HomologicalComplex.mapBifunctorMap f g (curriedTensor Mod) (.up ℤ)).op).app M) ≫
           ((homComplexFunctor (R := R)).obj
-            (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h).f n := by sorry
+            (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h).f n := by
+  let := SheafOfModules.monoidalCategory R
+  have hlim := (Classical.choose_spec
+    (homComplex_projections_exists (R := R))).1
+      (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)) M' n
+  apply CategoryTheory.Limits.Fan.IsLimit.hom_ext hlim.some
+  intro p
+  exact homTensorDegreewiseMap_natural_component R K K' L L' M M' f g h
+    n p (p + n) rfl
 
 end CategoryTheory

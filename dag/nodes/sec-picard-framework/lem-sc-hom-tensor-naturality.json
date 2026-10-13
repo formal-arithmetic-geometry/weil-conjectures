@@ -23,28 +23,28 @@
  ],
  "proof": [
   {
-   "text": "functoriality.",
+   "text": "Apply the limiting fan specification in homComplex_projections_exists, a proved wrapper of homComplex_exists. For Tot(K'⊗L'), M', n these are precisely the homTensorProjection maps. Mathlib CategoryTheory.Limits.Fan.IsLimit.hom_ext reduces equality to composites with each p-th projection, with target degree p+n.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sc-hom-complex-projections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each integer p apply homTensorDegreewiseMap_natural_component with q=p+n and the reflexive degree equality. This proves precisely the required projection equality.",
+   "uses": [
+    "lem-sc-hom-tensor-naturality-component"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-tensor-naturality-component"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90"
+  "place": "Tag 0A90; K1 reduction to a single component using the limiting product from Section 0A8X and Mathlib Fan.IsLimit.hom_ext"
  },
  "mathlib_searches": [
   {
@@ -100,12 +100,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T235113-L-2172370",
+  "landing": "20261013T011927-L-2763268",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
