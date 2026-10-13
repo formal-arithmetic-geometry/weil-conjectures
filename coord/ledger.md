@@ -13838,3 +13838,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/J1/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitAffine (stage 3; reviewer PASS; first push; landing 20261013T231536-L-1817801 (proof); batch 20261013T231527; modules 1; new nodes 0)
 - 23:15 L: merged deliver/J3/Sheaf.Algebra.Homology.AffineDerivedPushforwardSheafEdge (stage 3; reviewer PASS; first push; landing 20261013T231537-L-1817905 (interface); batch 20261013T231527; modules 3; new nodes 2)
 - 23:15 L: merged deliver/J3/Sheaf.AlgebraicGeometry.OpenRestrictedTensorHomologyTransport (stage 3; reviewer PASS; first push; landing 20261013T231537-L-1818056 (interface); batch 20261013T231527; modules 3; new nodes 2)
+- 23:15 L: merged deliver/J4/Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveRestrictionExact (stage 3; reviewer PASS; first push; landing 20261013T231538-L-1818258 (interface); batch 20261013T231527; modules 3; new nodes 2)
