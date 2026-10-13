@@ -7,10 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback
+import Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel
+import Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso
+import Sheaf.Algebra.Homology.RingTensorCohomology
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import all Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Source model for the affine derived base-change arrow
 
@@ -29,34 +32,6 @@ namespace AlgebraicGeometry
 
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-
-/-- The localized comparison ending in stalks of the pullback cohomology sheaf,
-before any morphism from that pullback is applied. Source: Stacks, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-source-model). -/
-def affineBaseChangeIntoPullback
-    {X S X' S' : Scheme.{u}}
-    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
-    (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X)
-    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (e : DerivedCategory.Q.obj P ≅ K)
-    (hc : IsIso ((SingleComplexBaseChange.counit g').app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (p : X') (i : ℤ) :=
-  letI := SingleComplexBaseChange.leftAlgebra f g' p
-  letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq p
-  letI := (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' p))
-  letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' p))
-  letI := hc
-  let T := ((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P
-  let H := DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) i
-  let s := RingedSpace.moduleStalkFunctor X'.toRingedSpace p
-  (SingleComplexBaseChange.cohomologyModel f f' g g' sq p P).localizedComparison i ≫
-    HomologicalComplex.homologyMap
-      (SingleComplexBaseChange.tensorStalkIso f f' g g' sq p P).hom i ≫
-    (affineRepresentativeStalkIso X' p T i).inv ≫
-    s.map (H.map (inv ((SingleComplexBaseChange.counit g').app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ (derivedPullback g').map e.hom))
 
 /-- The affine base-change arrow has a cohomology module source and a map to the
 canonical module of pullback cohomology. No target K', map phi or target coordinates
@@ -128,6 +103,56 @@ theorem exists_affineBaseChangeSourceModel
         ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left,
           ∀ x, affineDerivedCohomologyStalkIso A' i p L
             (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x) := by
-  sorry
+  let := HasDerivedCategory.standard (ModuleCat.{u} A)
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+      (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  let ι := (schemeDerivedQCohProperty (Spec (.of A))).ι
+  let Kq : schemeDerivedQCohCategory (Spec (.of A)) := ⟨K, hK⟩
+  obtain ⟨E, ⟨α⟩, _, _⟩ := exists_affineQCohDerivedEquivalence_core A
+  let N := DerivedCategory.Q.objPreimage (E.inverse.obj Kq)
+  let M := (RingTensorCohomology.resolution A).obj N
+  let sM : M ⟶ N := (RingTensorCohomology.augmentation A).app N
+  have hsM : QuasiIso sM := by
+    dsimp [sM, RingTensorCohomology.augmentation]
+    infer_instance
+  have hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M :=
+    (RingTensorCohomology.flatResolution A).kFlat_resolutionFunctor_obj
+      ObjectProperty.flat.essImage_ι_le N
+  have : IsIso (DerivedCategory.Q.map sM) := by
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hsM
+  let P₀ : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ := T.obj M
+  let e₀ : DerivedCategory.Q.obj P₀ ≅ K :=
+    (α.app M).symm ≪≫ ι.mapIso
+      (E.functor.mapIso
+        (asIso (DerivedCategory.Q.map sM) ≪≫
+          DerivedCategory.Q.objObjPreimageIso (E.inverse.obj Kq)) ≪≫ E.counitIso.app Kq)
+  have hP₀ : CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf) P₀ :=
+    isKFlat_tilde A M (by
+      intro F hF
+      have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj M)).mp
+          ((HomotopyCategory.kFlat_quotient_obj_iff M).mpr hM)
+      have hF' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF
+      exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+        (h _ hF').2)
+  have hc₀ : IsIso ((SingleComplexBaseChange.counit
+      (Spec.map (CommRingCat.ofHom φg'))).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P₀)) :=
+    SingleComplexBaseChange.counit_isIso_of_isKFlat _ P₀ hP₀
+  obtain ⟨d, U, a, eU, ha, hl⟩ := exists_affineBaseChangeTildeSourceModel
+    R A R' A' φf φg φg' φf' sq K hK hL M hM e₀ hc₀ i
+  refine ⟨d, U, a, eU, ha, ?_⟩
+  intro p
+  obtain ⟨l₀, hl₀⟩ := hl p
+  obtain ⟨t, ht⟩ := exists_affineBaseChangeIntoPullback_representativeIso
+    (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf'))
+    (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg'))
+    sq K P P₀ hP hP₀ e e₀ hc hc₀ p i
+  refine ⟨l₀.trans t, ?_⟩
+  intro x
+  exact (hl₀ x).trans (ht (l₀ x))
 
 end AlgebraicGeometry

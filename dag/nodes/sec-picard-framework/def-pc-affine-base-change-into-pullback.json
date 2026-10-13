@@ -1,0 +1,116 @@
+{
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof and equation-bc preceding the lemma"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeSourceModel",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0DJ8, 06Z0 and 06Y6",
+  "note": "Source consulted at the official Stacks tags; separates affine module computation from representative independence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived functor comparison independent of K-flat complex representative with counit compatibility",
+   "results": "Service unavailable: Internal Server Error; no verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology naturality under isomorphisms of K-flat representatives and localization",
+   "results": "Tor naturality and projective-resolution comparisons; no unbounded scheme stalk comparison matching this source-only map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "Found leftDerivedLift, isLeftDerivedFunctor_iff_isIso_leftDerivedLift and leftDerived_fac_app; these are the universal comparisons used in the stated representative proof.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Bb]ase[Cc]hange|affine.*[Dd]irect[Ii]mage|affineBaseChangeIntoPullback",
+   "results": "Read affine derived equivalence, termwise pullback and ring comparison modules. No duplicate of either restricted module computation or representative-invariance square. The source-only map previously lived in the item and is relocated verbatim.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "def-pc-affine-base-change-into-pullback",
+ "kind": "definition",
+ "title": "The canonical source-only localized comparison",
+ "statement": "For a cartesian square g':X'→X, f':X'→S', f:X→S, g:S'→S [def-pc-base-change], a complex P, a derived isomorphism e:QP≅K and an invertible pullback counit [def-pc-single-complex-base-change-stalk-condition], define r at p and degree i as localizedComparison of the stalk complex, followed by homology of tensorStalkIso, the inverse exact representative/stalk isomorphism, and the stalk of cohomology of counit inverse followed by Lg'(e). Its target is the stalk H^i(Lg'^*K); no additional target morphism is applied. This relocates the existing construction without changing it.",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-affine-derived-cohomology-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-base-change-source-model",
+   "place": "Source model proof: isolate the localized arrow, affine module computation, and representative transport.",
+   "via": [
+    "lem-pc-affine-base-change-source-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeIntoPullback",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeIntoPullback.lean",
+  "declaration": "AlgebraicGeometry.affineBaseChangeIntoPullback",
+  "statement": "def affineBaseChangeIntoPullback {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedCategory X) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (e : DerivedCategory.Q.obj P ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (p : X') (i : ℤ) : letI := SingleComplexBaseChange.leftAlgebra f g' p letI := SingleComplexBaseChange.rightAlgebra f f' g g' sq p letI := (SingleComplexBaseChange.tensorMap f f' g g' sq p).toAlgebra letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.R f g' p)) letI := HasDerivedCategory.standard (ModuleCat.{u} (SingleComplexBaseChange.B f' p)) (ModuleCat.extendScalars (algebraMap (SingleComplexBaseChange.A g' p ⊗[SingleComplexBaseChange.R f g' p] SingleComplexBaseChange.B f' p) (SingleComplexBaseChange.C p))).obj ((SingleComplexBaseChange.cohomologyModel f f' g g' sq p P).cohomology i) ⟶ (RingedSpace.moduleStalkFunctor X'.toRingedSpace p).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) i).obj ((derivedPullback g').obj K))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-87b5c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T130037-L-3924354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-87b5c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T130037-L-3924354",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures, unchanged definition body, and proof route match the DAG and change record; remaining lemmas agree with [Stacks 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8). All four delivered modules and direct importer Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel compile cleanly; axioms conform."
+ }
+}

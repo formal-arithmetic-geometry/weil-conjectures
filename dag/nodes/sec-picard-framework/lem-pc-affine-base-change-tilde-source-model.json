@@ -1,0 +1,158 @@
+{
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof and equation-bc preceding the lemma"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.AffineBaseChangeSourceModel",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0DJ8, 06Z0 and 06Y6",
+  "note": "Source consulted at the official Stacks tags; separates affine module computation from representative independence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived functor comparison independent of K-flat complex representative with counit compatibility",
+   "results": "Service unavailable: Internal Server Error; no verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor cohomology naturality under isomorphisms of K-flat representatives and localization",
+   "results": "Tor naturality and projective-resolution comparisons; no unbounded scheme stalk comparison matching this source-only map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "Found leftDerivedLift, isLeftDerivedFunctor_iff_isIso_leftDerivedLift and leftDerived_fac_app; these are the universal comparisons used in the stated representative proof.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Bb]ase[Cc]hange|affine.*[Dd]irect[Ii]mage|affineBaseChangeIntoPullback",
+   "results": "Read affine derived equivalence, termwise pullback and ring comparison modules. No duplicate of either restricted module computation or representative-invariance square. The source-only map previously lived in the item and is relocated verbatim.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-pc-affine-base-change-tilde-source-model",
+ "kind": "statement",
+ "title": "Affine source model on a K-flat module complex",
+ "statement": "Let R,A,R',A' be commutative rings with the four ring maps whose spectra form a cartesian square [def-pc-base-change]. Let M be an A-module complex K-flat in the module-derived sense [def-pc-module-kflat-complex]. Let K on Spec A have quasi-coherent cohomology, and let L=Lg'^*K have quasi-coherent cohomology. Put P=tilde M termwise, supply e:QP≅K and invertibility of its pullback counit. For every i, there exist the natural affine direct-image cohomology presentation d, an A'-module U and A'-linear a:U→ΓH^i(L), and eU:tilde(restrict_R' U)≅H^i(Lg^*Rf_*K), satisfying the global base-change square. For every p of Spec A', there is an additive equivalence U_p≃source(r) taking localized a to r under the canonical affineDerivedCohomologyStalkIso, where r is the source-only comparison [def-pc-affine-base-change-into-pullback] for P=tilde M and e. This is the affine module calculation, with no arbitrary sheaf-complex representative.",
+ "stmt_deps": [
+  "def-pc-affine-base-change-into-pullback",
+  "def-pc-base-change",
+  "def-pc-module-kflat-complex",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-derived-cohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Compute the scheme base-change mate on the R- and A-K-flat module comparison span using the affine derived pullback/tensor formula and the universal counits.",
+   "uses": [
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift source and target cohomology to the tensor-algebra modules, transport the cartesian algebra to A', and use exact tilde and the natural affine direct-image cohomology comparison to obtain U,a,eU,d and the global square.",
+   "uses": [
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-derived-cohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the same span at p. Exact localization and tilde stalks identify it with the canonical stalk model. The localized_eq and counit equations give the source-only map and its localized square.",
+   "uses": [
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-affine-base-change-into-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-base-change-into-pullback",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-base-change-map",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "lem-pc-affine-derived-cohomology-presentation",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "new-affine-qcoh-derived-equivalence-core"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-base-change-source-model",
+   "place": "Source model proof: isolate the localized arrow, affine module computation, and representative transport.",
+   "via": [
+    "lem-pc-affine-base-change-source-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AffineBaseChangeTildeSourceModel",
+  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeTildeSourceModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBaseChangeTildeSourceModel",
+  "statement": "theorem exists_affineBaseChangeTildeSourceModel (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φg))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (hL : schemeDerivedQCohProperty (Spec (.of A')) ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K)) (M : CochainComplex (ModuleCat.{u} A) ℤ) (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M) (e : DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))) (i : ℤ) : ∃ d : affineDerivedCohomologyModules A' i ⋙ (ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')) ≅ (schemeDerivedQCohProperty (Spec (.of A'))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf')) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i, let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩ let V := (affineDerivedCohomologyModules A' i).obj L let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i ∃ (U : ModuleCat.{u} A') (a : U ⟶ V) (eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom φg))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf))).obj K))), eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L ∧ ∀ p : PrimeSpectrum A', let r := affineBaseChangeIntoPullback (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq K ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) e hc p i ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left, ∀ x, affineDerivedCohomologyStalkIso A' i p L (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-87b5c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T130037-L-3924354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-87b5c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T130037-L-3924354",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures, unchanged definition body, and proof route match the DAG and change record; remaining lemmas agree with [Stacks 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8). All four delivered modules and direct importer Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel compile cleanly; axioms conform."
+ }
+}
