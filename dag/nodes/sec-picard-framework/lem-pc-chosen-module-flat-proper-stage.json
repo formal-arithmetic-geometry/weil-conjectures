@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-chosen-module-flat-proper-stage",
+ "kind": "statement",
+ "title": "Eventual flatness and proper support for one chosen module",
+ "statement": "Let $I$ be a directed preorder and $R:I\\to\\mathrm{CommRing}$ a diagram of Noetherian rings. Let $c$ be a limiting cone of the opposite diagram of spectra, with affine point $S$. Fix $i\\le j$, a finitely presented morphism $f:X_i\\to\\operatorname{Spec}(R_i)$ [def-pc-scheme, def-pc-morphism-conventions], and a finitely presented module $M$ [def-sc-finitely-presented-module] on $X_j=X_i\\times_{\\operatorname{Spec}(R_i)}\\operatorname{Spec}(R_j)$ [def-pc-base-change]. Assume its tensor pullback to $X_i\\times_{\\operatorname{Spec}(R_i)}S$ is flat over $S$ [def-pc-scheme-module-flat-over] and has support proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]. Then there is $k\\ge j$ such that, for every $l\\ge k$, the tensor pullback of this same $M$ to $X_l$ is flat over $\\operatorname{Spec}(R_l)$ and has support proper over $\\operatorname{Spec}(R_l)$. No complex, differentials, or newly chosen module are part of this conclusion.",
+ "source": {
+  "document": "Stacks Project, Limits of Schemes; Cohomology of Schemes; Categories; Sheaves of Modules",
+  "place": "Tags 05LY, 081G, 0CYS, 0032 and 0097; chosen-complex refinement proof step 1, followed by preservation in step 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-sc-finitely-presented-module",
+  "def-pc-base-change",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "For a partial order, work with the chosen module M on the finitely presented scheme X_j over Spec R_j. Pullback pasting identifies its tensor pullback to the limit with the displayed moduleBaseChange object. Apply eventual flatness to this particular module, not to an unspecified descended model.",
+   "uses": [
+    "lem-pc-flat-module-descent",
+    "def-pc-base-change",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proper-support descent to M at stage j. Finite presentation supplies quasi-coherence and finite type. The proper closed support condition is the one interpreted by Tag 0CYS in that descent theorem. Choose an upper bound of the flatness stage and the proper-support stage.",
+   "uses": [
+    "lem-pc-proper-support-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each subsequent stage, cartesian tensor pullback preserves relative flatness and proper support. Composition of tensor pullback and the pullback-pasting isomorphism identify its object with the direct base change of the fixed M from stage j. This establishes the properties for every later stage, independently of the choice of comparison isomorphisms.",
+   "uses": [
+    "lem-pc-tensor-pullback-flat-proper-support",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a directed preorder I, it is nonempty since j is given. Choose a final directed poset with a functor to the thin filtered category I. Choose an object whose image is above j, and pull M to that image. Restriction along the final functor preserves the inverse limit. Apply the partial-order argument to this chosen pullback. Its image stage k is above j; for an arbitrary l above k in I, preservation under cartesian tensor pullback proves the desired properties at l. Such an l need not itself lie in the image of the final functor.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "lem-pc-tensor-pullback-flat-proper-support",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097",
+  "place": "Finite-stage enlargement of a fixed finitely presented module, and cartesian pullback preservation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chosen finitely presented module becomes flat with proper support at every sufficiently late stage of a directed system",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chosen finitely presented module whose pullback to an inverse limit is flat and has proper support becomes flat with proper support at every sufficiently late stage",
+   "results": "AdicCompletion.flat_of_isNoetherian; Module.Flat.of_forall_exists_factorization; Module.FaithfullyFlat.iff_flat_and_proper_ideal; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Module.Flat.iff_forall_exists_factorization; Module.flat_of_localized_span; Module.flat_of_isLocalized_span; Module.Flat.exists_factorization_of_isFinitelyPresented. No scheme-module support descent result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eventually.*flat|exists_hasSupportProperOver",
+   "results": "No Mathlib hits; library FlatModuleDescent and ProperSupportDescent provide separate statements, with different indexing and pullback interfaces.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChosenComplexFlatProperRefinement",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: eventual flatness and proper support for one term of an already chosen complex",
+   "via": [
+    "lem-pc-chosen-complex-flat-proper-refinement",
+    "lem-pc-finite-flat-proper-support-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-pc-flat-module-descent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-proper-support-descent",
+  "lem-pc-tensor-pullback-flat-proper-support",
+  "lem-weil-pbc-filtered-category-exists-directed-final"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChosenModuleFlatProperStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChosenModuleFlatProperStage.lean",
+  "declaration": "AlgebraicGeometry.exists_eventually_chosen_module_flat_proper",
+  "statement": "theorem exists_eventually_chosen_module_flat_proper\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (M : (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    [M.IsFinitePresentation]\n    (hflat : ((Scheme.Modules.moduleBaseChange f\n      (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n      (T' := Over.mk (c.π.app (op i)))\n      (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj M).IsFlatOver\n        (pullback.snd f (c.π.app (op i))))\n    (hproper : Scheme.Modules.HasSupportProperOver\n      (pullback.snd f (c.π.app (op i)))\n      ((Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj M)) :\n    ∃ (k : I) (hjk : j ≤ k), ∀ (l : I) (hkl : k ≤ l),\n      let hjl := hjk.trans hkl\n      let B := Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))\n        (Over.homMk (Spec.map (R.map (homOfLE hjl)))\n          (by simp [← Functor.map_comp, ← Spec.map_comp]))\n      (B.obj M).IsFlatOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjl))))) ∧\n      Scheme.Modules.HasSupportProperOver\n        (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjl)))))\n        (B.obj M)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100210-L-2500088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T100210-L-2500088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

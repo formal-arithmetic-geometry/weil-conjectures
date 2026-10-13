@@ -12045,3 +12045,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: merged deliver/V4/Sheaf.AlgebraicGeometry.DiagonalConormalAffineLiftInjective (stage 3; reviewer PASS; first push; landing 20261013T100208-L-2499605 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:02 L: merged deliver/V4/Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T100209-L-2499767 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:02 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AffineFreeSheafStalkRealization (stage 3; reviewer PASS; first push; landing 20261013T100209-L-2499957 (interface); batch 20261013T095923; modules 6; new nodes 5)
+- 10:02 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ChosenComplexFlatProperRefinement (stage 3; reviewer PASS; first push; landing 20261013T100210-L-2500088 (interface); batch 20261013T095923; modules 2; new nodes 1)
