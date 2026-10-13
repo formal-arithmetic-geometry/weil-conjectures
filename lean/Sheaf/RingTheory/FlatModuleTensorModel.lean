@@ -10,12 +10,11 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
 
-import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
-import Sheaf.RingTheory.ColimitEventuallyFlat
-import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
-import Sheaf.RingTheory.FlatModuleAtPrime
+import Mathlib.RingTheory.IsTensorProduct
+import Mathlib.RingTheory.FiniteStability
+import Sheaf.RingTheory.FiniteTypeApproximationFlatLoci
+import Sheaf.RingTheory.FiniteTypeApproximationFlatStage
 import Sheaf.RingTheory.LimitModuleFinitePresentation
-import Sheaf.RingTheory.OpenFlatLocus
 
 /-! # A flat model of a scalar extension of a finitely presented module
 
@@ -84,6 +83,109 @@ theorem exists_flat_module_tensor_model
           (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom).toAlgebra
          letI : Algebra B (C ⊗[R] B) := Algebra.TensorProduct.rightAlgebra
          Nonempty ((C ⊗[R] B) ⊗[Q] L ≃ₗ[C ⊗[R] B] (C ⊗[R] B) ⊗[B] M)) := by
-  sorry
+  classical
+  let : Algebra A B := f.toRingHom.toAlgebra
+  have : IsScalarTower R A B := IsScalarTower.of_algebraMap_eq' f.comp_algebraMap.symm
+  let : Module A M := Module.compHom M f.toRingHom
+  let : Algebra A (C ⊗[R] A) := Algebra.TensorProduct.rightAlgebra
+  let : Algebra B (C ⊗[R] B) := Algebra.TensorProduct.rightAlgebra
+  let : AddCommGroup M := Module.addCommMonoidToAddCommGroup B
+  let X := C ⊗[R] A
+  let Y := C ⊗[R] B
+  let g : X →+* Y := (Algebra.TensorProduct.map (Algebra.ofId C C) f).toRingHom
+  let : Algebra X Y := g.toAlgebra
+  let e₀ := Algebra.IsPushout.cancelBaseChangeAlg R C A X B
+  have he₀ : ∀ (c : C) (a : A) (b : B),
+      e₀ ((c ⊗ₜ[R] a) ⊗ₜ[A] b) = c ⊗ₜ[R] (f a * b) := by
+    intro c a b
+    apply e₀.symm.injective
+    simp only [AlgEquiv.symm_apply_apply, e₀,
+      Algebra.IsPushout.cancelBaseChangeAlg_symm_tmul]
+    change (c ⊗ₜ[R] a) ⊗ₜ[A] b = (c ⊗ₜ[R] (1 : A)) ⊗ₜ[A] (a • b)
+    rw [← TensorProduct.smul_tmul]
+    congr 1
+    change c ⊗ₜ[R] a = ((1 : C) ⊗ₜ[R] a) * (c ⊗ₜ[R] (1 : A))
+    rw [Algebra.TensorProduct.tmul_mul_tmul, one_mul, mul_one]
+  have heLeft : ∀ x : X, e₀ (x ⊗ₜ[A] (1 : B)) = g x := by
+    intro x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | add x y hx hy => simp [TensorProduct.add_tmul, hx, hy]
+    | tmul c a =>
+      rw [he₀, mul_one]
+      change c ⊗ₜ[R] f a = Algebra.TensorProduct.map (Algebra.ofId C C) f (c ⊗ₜ[R] a)
+      rw [Algebra.TensorProduct.map_tmul]
+      rfl
+  let eX : X ⊗[A] B ≃ₐ[X] Y :=
+    { e₀.toRingEquiv with
+      commutes' := heLeft }
+  have : Algebra.FinitePresentation A B :=
+    Algebra.FinitePresentation.of_restrict_scalars_finitePresentation R A B
+  have : Algebra.FinitePresentation X Y := Algebra.FinitePresentation.equiv eX
+  let : Algebra A Y := ((algebraMap B Y).comp f.toRingHom).toAlgebra
+  have : IsScalarTower A X Y := IsScalarTower.of_algebraMap_eq' (by
+    ext a
+    change g ((1 : C) ⊗ₜ[R] a) = (1 : C) ⊗ₜ[R] f a
+    exact Algebra.TensorProduct.map_tmul (Algebra.ofId C C) f 1 a)
+  have : IsScalarTower A B Y := IsScalarTower.of_algebraMap_eq' rfl
+  have : Algebra.IsPushout A X B Y := by
+    constructor
+    apply IsBaseChange.of_equiv eX.toLinearEquiv
+    intro b
+    change e₀ (((1 : C) ⊗ₜ[R] (1 : A)) ⊗ₜ[A] b) = (1 : C) ⊗ₜ[R] b
+    simp only [he₀, map_one, one_mul]
+  have : IsScalarTower A B M := IsScalarTower.of_compHom A B M
+  let : Module X (Y ⊗[B] M) := Module.compHom (Y ⊗[B] M) (algebraMap X Y)
+  have : IsScalarTower X Y (Y ⊗[B] M) := IsScalarTower.of_compHom X Y _
+  have hTflat : Module.Flat X (Y ⊗[B] M) := by
+    exact (Module.Flat.equiv_iff
+      (Algebra.IsPushout.cancelBaseChange A X B Y M)).mpr hflat
+  obtain ⟨Λ, hpo, hne, hdir, P, Q, η, π, κ, D, ν, hmod, hmodel⟩ :=
+    Algebra.limitModuleFinitePresentation X Y (Y ⊗[B] M)
+  let := hpo
+  let := hne
+  let := hdir
+  let := hmod
+  rcases hmodel with ⟨hPcol, hQcol, hDcol, hcomm, hscalar, hν, hPft, hQft,
+    hDfin, htransQ, htransD, hfinalQ, hfinalD, _⟩
+  obtain ⟨U, hUopen, hUflat, hUpersist, hUcover⟩ :=
+    Algebra.exists_flat_finiteType_approximation_loci
+      X Y (Y ⊗[B] M) P Q η π κ D ν
+      ⟨hPcol, hQcol, hDcol, hcomm, hscalar, hν, hPft, hQft, hDfin,
+        htransQ, htransD, hfinalQ, hfinalD⟩ hTflat
+  obtain ⟨i, hflatStage⟩ := Algebra.exists_flat_finiteType_approximation_stage
+    Y P Q D (fun i ↦ (η.app i).hom) κ hQcol.some U hUopen hUflat hUpersist hUcover
+  let : Algebra (P.obj i) (Q.obj i) := (η.app i).hom.toAlgebra
+  let : Algebra (P.obj i) X := (π.app i).hom.toAlgebra
+  have : Algebra.FiniteType ℤ (P.obj i) := hPft i
+  have : Algebra.FiniteType (P.obj i) (Q.obj i) := hQft i
+  have : IsNoetherianRing (P.obj i) := Algebra.FiniteType.isNoetherianRing ℤ _
+  have : IsNoetherianRing (Q.obj i) := Algebra.FiniteType.isNoetherianRing (P.obj i) _
+  have : Module.Finite (Q.obj i) (D.obj i) := hDfin i
+  have hPfp : Algebra.FinitePresentation ℤ (P.obj i) :=
+    Algebra.FinitePresentation.of_finiteType.mp inferInstance
+  have hQfp : Algebra.FinitePresentation (P.obj i) (Q.obj i) :=
+    Algebra.FinitePresentation.of_finiteType.mp inferInstance
+  have hDfp : Module.FinitePresentation (Q.obj i) (D.obj i) :=
+    Module.finitePresentation_of_finite (Q.obj i) (D.obj i)
+  obtain ⟨er, her⟩ := hfinalQ i
+  let e := (Algebra.TensorProduct.comm (P.obj i) X (Q.obj i)).toRingEquiv.trans er
+  have heLeft : e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom = g := by
+    apply RingHom.ext
+    intro x
+    change er ((1 : Q.obj i) ⊗ₜ[P.obj i] x) = g x
+    rw [her, map_one, one_mul]
+    rfl
+  refine ⟨P.obj i, Q.obj i, D.obj i, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, hPfp, hQfp, hDfp, hflatStage,
+    e, heLeft, ?_⟩
+  have heRight : e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom =
+      (κ.app i).hom := by
+    ext q
+    change er (q ⊗ₜ[P.obj i] (1 : X)) = (κ.app i).hom q
+    rw [her, map_one, mul_one]
+    rfl
+  rw [heRight]
+  exact ⟨(hfinalD i).choose⟩
 
 end AlgebraicGeometry

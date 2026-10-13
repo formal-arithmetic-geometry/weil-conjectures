@@ -14,123 +14,65 @@
  ],
  "proof": [
   {
-   "text": "Give B its A-algebra structure through f. Finite presentation over the finite-type algebra A and tensor base change make Y=C\\otimes_R B finitely presented over X=C\\otimes_R A. Tensor cancellation identifies Y\\otimes_B M with X\\otimes_A M as X-modules, so it is flat over X and finitely presented over Y.",
+   "text": "Install B as an A-algebra through f. Mathlib finite presentation over a finite-type algebra and base change imply X tensor_A B is finitely presented over X. Algebra.IsPushout.cancelBaseChangeAlg R C A X B identifies it with Y. On pure tensors this sends (c tensor a) tensor b to c tensor f(a)b, hence restricts to the stated X to Y map g.",
    "uses": [
     "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
     "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-pc-fp-module-base-change"
+    "lem-weil-pbc-tensor-cancel-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), applied to the scalar extension"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the finite-presentation approximation theorem to X, Y and T=Y\\otimes_B M. The approximation has base-change transition maps and the specified colimit identifications. Its base rings are finite type over the integers, its top rings are finite type over the base, and its modules are finite. The rings are Noetherian; the rings and modules therefore have the asserted finite presentations.",
+   "text": "The ring equivalence is X-linear because its restriction to X is g, giving the X-algebra finite presentation of Y. Its pure-tensor formula gives the pushout A to X, B to Y. Algebra.IsPushout.cancelBaseChange A X B Y M identifies Y tensor_B M with X tensor_A M as X-modules, so hflat gives flatness of the former. Module finite presentation is preserved by base change.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-cancel-base-change",
+    "lem-pc-fp-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Algebra.limitModuleFinitePresentation to X,Y,Y tensor_B M, obtaining a supplied finite-type integer ring and finite-module diagram. Apply Algebra.exists_flat_finiteType_approximation_loci to the diagram and the transported flatness, obtaining open persistent flat loci with pointwise covering of Spec(Y). Apply the proved Algebra.exists_flat_finiteType_approximation_stage to that cover and the Q-ring colimit. Its compactness, unit-relation descent, and maximal-prime argument yield a stage module flat over its stage base.",
    "uses": [
     "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-pc-finite-type-approximation-flat-stage",
+    "lem-pc-finite-type-approximation-flat-loci"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen P_i and Q_i are Noetherian by finite type over Z and P_i respectively. Convert their finite-type algebra hypotheses to finite presentations and convert finite D_i over Noetherian Q_i to finite presentation.",
+   "uses": [
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-finite-type-noetherian-finite-presentation",
     "lem-sc-noetherian-finite-module-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), first paragraph; Tag 00R1"
-   }
+   "elementary": false
   },
   {
-   "text": "At each prime of Y contract the prime to every approximation ring and localize. Localization-colimit and localization-tensor identifications give the local ring systems and their module colimit. The limit module is flat over the localized base. Apply the local Noetherian eventual-flatness criterion to obtain a stage flat at this contracted prime.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-tensor-product",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "lem-pc-affine-flat-module-local-criterion",
-    "lem-weil-pbc-colimit-eventually-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), first paragraph; Tag 00R6"
-   }
-  },
-  {
-   "text": "At each stage the flat locus in the top spectrum is open. Localization commutes with base change and preserves flatness, so the inverse image of a flat locus is contained in each later flat locus. Their inverse images in Spec(Y) form a directed open cover. Quasi-compactness gives one stage whose flat locus pulls back to all of Spec(Y).",
-   "uses": [
-    "lem-weil-pbc-openness-of-flatness",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-pc-affine-flat-module-local-criterion",
-    "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), second paragraph"
-   }
-  },
-  {
-   "text": "The closed complement at that stage is V(J). Its extended ideal in Y is the unit ideal. Lift the coefficients of a finite unit relation to one stage and its equality to 1 to a later stage. Every prime of the later top ring avoids one of these coefficients from J; persistence puts it in the flat locus. The prime-local criterion makes the whole model module L flat over its base P.",
-   "uses": [
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero",
-    "lem-weil-pbc-flat-over-localization",
-    "lem-pc-affine-sections-flat-over-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), third paragraph"
-   }
-  },
-  {
-   "text": "The approximation theorem gives the canonical isomorphism e:X\\otimes_P Q\\simeq Y and its compatibility with the map X\\to Y. Its module base-change isomorphism is Y\\otimes_Q L\\simeq T. On pure tensors its Q-action is the right inclusion followed by e, exactly the algebra structure in the Lean statement.",
+   "text": "Compose tensor symmetry X tensor_(P_i) Q_i to Q_i tensor_(P_i) X with the diagram ring comparison to Y. Its prescribed formula proves compatibility on the left inclusion and proves that its right inclusion is exactly κ_i. Rewrite the induced Q_i-algebra structure on Y using this ring-hom equality. The diagram module comparison now gives the required Y-linear equivalence Y tensor_(Q_i) D_i to Y tensor_B M. Return P_i,Q_i,D_i and their existing instances.",
    "uses": [
     "lem-weil-pbc-limit-module-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02JO (1), conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "lem-pc-affine-flat-module-local-criterion",
-  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-finite-type-approximation-flat-loci",
+  "lem-pc-finite-type-approximation-flat-stage",
   "lem-pc-fp-module-base-change",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-weil-pbc-colimit-eventually-flat",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
   "lem-weil-pbc-finite-presentation-base-change-composition",
   "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-flat-over-localization",
   "lem-weil-pbc-limit-module-finite-presentation",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-openness-of-flatness",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+  "lem-weil-pbc-module-tensor-cancel-base-change",
+  "lem-weil-pbc-tensor-cancel-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02JO (1)"
+  "place": "Tag 02JO (1); tensor setup, comparisons, compactness and unit-relation descent proved in Lean; localized stage flatness and persistence isolated in lem-pc-finite-type-approximation-flat-loci"
  },
  "mathlib_searches": [
   {
@@ -210,9 +152,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T082415-L-1648810",
+  "landing": "20261013T100054-L-2476383",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

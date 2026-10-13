@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-finite-type-approximation-flat-stage",
+ "kind": "statement",
+ "title": "Global flatness at a stage from a persistent open cover",
+ "statement": "Let Λ be a nonempty directed preorder and A,B:Λ to CommRing and D:Λ to AddCommGrp functors [def-weil-pbc-category-colimit]. Give D_i a B_i-module structure, and choose ring maps φ_i:A_i to B_i. Let S be a commutative ring and κ:B to const(S) a colimit cocone. Suppose U_i are open subsets of Spec(B_i) [def-weil-affine-spectrum], every q in U_i has D_i localized at q flat over A_i along φ_i [def-weil-pbc-localization-at-prime] [def-weil-pbc-flat-ring-map], and for i≤j the inverse image of U_i along Spec(B_j) to Spec(B_i) is contained in U_j. Assume every prime q of S has its contraction along κ_i in U_i for some i. Then some D_i, restricted along φ_i, is flat over A_i. No finiteness, transition base-change, limit-flatness, or compatibility of the φ_i is required: these are only used elsewhere to supply the specified open cover.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), proof second and third paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Pull U_i back by Spec(κ_i) to V_i in Spec(S). Continuity makes V_i open. Cocone naturality identifies contraction through a transition with direct contraction, and persistence gives V_i contained in V_j for i≤j. Directedness and the pointwise covering therefore give a directed open cover. Compactness of Spec(S) selects i with V_i all Spec(S).",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the closed complement of U_i as V(J) using the closed-set ideal characterization in Spec(B_i). If the extension of J to S lay in a prime q, its contraction would lie in V(J), contradicting V_i containing all Spec(S). The empty-zero-locus criterion implies the extension of J is the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove elementwise descent of membership in the extended ideal by induction on its span: an image generator already lifts at i; zero lifts at i; addition takes a common upper bound of the two representatives; scalar multiplication first lifts its coefficient from S by the ring-colimit representative theorem, then takes a common upper bound. Functor and cocone naturality give equality with the limit element. Apply the result to 1 in the extended unit ideal. Its stage representative equals 1 in S, so the eventual-equality criterion descends this equality to a later stage. The transported ideal then contains 1, hence is the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a prime of that later stage, persistence and the description of the closed complement show that being outside U_j would force the prime to contain the transported ideal J, now the unit ideal. Thus all primes lie in U_j and all corresponding module localizations are flat over A_j. Install the restricted A_j-module action, its scalar tower with B_j, and compare the two restricted localization actions by equality on fractions. Apply Module.flat_of_isLocalized_maximal to the canonical localized-module maps at maximal ideals, obtaining D_j flat over A_j.",
+   "uses": [
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), proof second and third paragraphs; fully proved in Lean using the stated cover and Mathlib colimit representatives/equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite type integer approximation of a flat finitely presented module has a flat stage",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a directed finite type integer algebra and finite module approximation whose colimit is flat has one flat stage",
+   "results": "No exact match; semantic search for the flat module model returns Module.Flat.exists_factorization_of_isFinitelyPresented, Module.Flat.projective_of_finitePresentation, Module.flat_of_localized_span and smooth-algebra flatness results. None selects a stage in a supplied algebra-and-module diagram.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPushout.cancelBaseChange",
+   "results": "Tensor module equivalences and pure tensor formulas only; no flat-stage result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_flat_stage|flat.*approximation|flat.*finite.*model",
+   "results": "No Mathlib match. Library search finds RingTheory.exists_flat_stage, which requires local stage rings and local transitions, and RingHom.exists_flat_finitePresentation_model, which treats top rings as modules. Neither supplies the global stage for arbitrary modules. Blueprint search for flat module found lem-pc-rf-base-change-flat-module; searches for Tag 02JO found no duplicate of the supplied-diagram statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatModuleTensorModel",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Flat-model approximation in lem-pc-rf-perfect-base-change: globalizing the persistent open flat loci by compactness and descending the unit relation (FlatModuleTensorModel original steps 4--5).",
+   "via": [
+    "lem-pc-flat-module-tensor-model",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeApproximationFlatStage",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeApproximationFlatStage.lean",
+  "declaration": "Algebra.exists_flat_finiteType_approximation_stage",
+  "statement": "theorem exists_flat_finiteType_approximation_stage\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (S : Type u) [CommRing S]\n    (A B : Λ ⥤ CommRingCat.{u}) (D : Λ ⥤ AddCommGrpCat.{v})\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n    (hc : IsColimit (Cocone.mk (CommRingCat.of S) κ))\n    (U : (i : Λ) → Set (PrimeSpectrum (B.obj i)))\n    (hUopen : ∀ i, IsOpen (U i))\n    (hUflat : ∀ i (q : PrimeSpectrum (B.obj i)), q ∈ U i →\n      letI : Module (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)) :=\n        Module.compHom _ (φ i)\n      Module.Flat (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)))\n    (hUpersist : ∀ (i j : Λ) (h : i ≤ j),\n      PrimeSpectrum.comap (B.map (homOfLE h)).hom ⁻¹' U i ⊆ U j)\n    (hUcover : ∀ q : PrimeSpectrum S, ∃ i, PrimeSpectrum.comap (κ.app i).hom q ∈ U i) :\n    ∃ i : Λ, letI : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (φ i)\n      Module.Flat (A.obj i) (D.obj i)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100054-L-2476383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100054-L-2476383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,179 @@
+{
+ "id": "lem-pc-finite-type-approximation-flat-loci",
+ "kind": "statement",
+ "title": "Persistent open flat loci covering the limit of a supplied approximation",
+ "statement": "Let R and S be commutative rings and let R to S be a ring map. Let M be an S-module. Let Λ be a nonempty directed preorder and let A,B:Λ to CommRing and D:Λ to AddCommGrp be functors [def-weil-pbc-category-colimit]. Give D_i a B_i-module structure for every i. Suppose η:A to B, π:A to const(R), κ:B to const(S), and ν:D to const(M) are natural transformations. Assume R,S,M with these coprojections are colimits, η_i followed by κ_i equals π_i followed by R to S, every D transition is semilinear with respect to its B transition, and ν_i(bx)=κ_i(b)ν_i(x). Suppose each A_i is a finite-type integer algebra and each B_i is finite type over A_i [def-weil-pbc-finite-type-algebra], with D_i finite over B_i [def-weil-finitely-generated-module]. For i≤j assume a ring isomorphism B_i tensor_(A_i) A_j to B_j sending b tensor a to B(i≤j)(b)η_j(a), and a B_j-linear isomorphism B_j tensor_(B_i) D_i to D_j sending b tensor x to b D(i≤j)(x). At each i suppose also a ring isomorphism B_i tensor_(A_i) R to S sending b tensor r to κ_i(b)r, and an S-linear isomorphism S tensor_(B_i) D_i to M sending s tensor x to sν_i(x). The algebra structures in these tensors are induced by η, π, κ and the transitions. If M, restricted along R to S, is flat over R [def-weil-pbc-flat-ring-map], then there are open subsets U_i of Spec(B_i) [def-weil-affine-spectrum] such that: every q in U_i has D_i localized at q flat over A_i with the restricted module action; the inverse image of U_i under Spec(B_j) to Spec(B_i) lies in U_j whenever i≤j; and for every prime q of S there is i whose contraction κ_i^(-1)(q) lies in U_i. This concerns only local flatness and persistence in the supplied diagram, and asserts neither a globally flat stage nor an existential model comparison. Localization at q means LocalizedModule of the complement of q [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), proof first paragraph and start of second paragraph, before compactness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Each A_i is finite type over Z, hence Noetherian. Each B_i is finite type over A_i, hence Noetherian; its finite D_i is finitely presented. Each A_i to B_i is finitely presented as well.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), with tensor base-change identifications"
+   }
+  },
+  {
+   "text": "At each prime of Y contract the prime to every approximation ring and localize. Localization-colimit and localization-tensor identifications give the local ring systems and their module colimit. The limit module is flat over the localized base. Apply the local Noetherian eventual-flatness criterion to obtain a stage flat at this contracted prime. The supplied abelian-group colimit and the canonical module comparisons give its localized module colimit directly, so no separate underlying-algebra-module colimit theorem is required. The local module action is the restriction along the localized base-ring map.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), first paragraph; Tag 00R6"
+   }
+  },
+  {
+   "text": "Define U_i to be the flat locus of D_i over A_i. The stage algebra and module are finitely presented by step 1, so the flat locus is open. If i≤j and q_j contracts to q_i in U_i, use the canonical transition ring and module tensor comparisons: D_j localized at q_j is a further localization of A_j tensor_(A_i) (D_i localized at q_i). Base change preserves flatness over A_j, and localization of the top-module factor preserves it. Thus the inverse image of U_i is in U_j. Step 2 gives, for every q of S, one contracted stage prime in U_i. This is the requested pointwise cover; no compactness or unit-relation descent occurs here.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (1), second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-openness-of-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02JO (1), proof first paragraph and start of second paragraph, before compactness; read at https://stacks.math.columbia.edu/tag/02JO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite type integer approximation of a flat finitely presented module has a flat stage",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a directed finite type integer algebra and finite module approximation whose colimit is flat has one flat stage",
+   "results": "No exact match; semantic search for the flat module model returns Module.Flat.exists_factorization_of_isFinitelyPresented, Module.Flat.projective_of_finitePresentation, Module.flat_of_localized_span and smooth-algebra flatness results. None selects a stage in a supplied algebra-and-module diagram.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPushout.cancelBaseChange",
+   "results": "Tensor module equivalences and pure tensor formulas only; no flat-stage result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_flat_stage|flat.*approximation|flat.*finite.*model",
+   "results": "No Mathlib match. Library search finds RingTheory.exists_flat_stage, which requires local stage rings and local transitions, and RingHom.exists_flat_finitePresentation_model, which treats top rings as modules. Neither supplies the global stage for arbitrary modules. Blueprint search for flat module found lem-pc-rf-base-change-flat-module; searches for Tag 02JO found no duplicate of the supplied-diagram statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatModuleTensorModel",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Flat-model approximation in lem-pc-rf-perfect-base-change: localized eventual flatness, openness and persistence of flat loci, before globalizing by compactness (FlatModuleTensorModel original steps 3--4).",
+   "via": [
+    "lem-pc-flat-module-tensor-model",
+    "lem-pc-affine-flat-module-descent",
+    "lem-pc-flat-module-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeApproximationFlatLoci",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeApproximationFlatLoci.lean",
+  "declaration": "Algebra.exists_flat_finiteType_approximation_loci",
+  "statement": "theorem exists_flat_finiteType_approximation_loci\n    (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [AddCommGroup M] [Module S M]\n    {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]\n    (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)\n      (π : A ⟶ (Functor.const Λ).obj (CommRingCat.of R))\n      (κ : B ⟶ (Functor.const Λ).obj (CommRingCat.of S))\n      (D : Λ ⥤ AddCommGrpCat.{v})\n      (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M))\n    [∀ i : Λ, Module (B.obj i) (D.obj i)]\n    (hmodel :\n      -- (1) the three colimits, compatible with `R → S` and the module actions\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of R) π)) ∧\n      Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ)) ∧\n      Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)) ∧\n      (∀ i, η.app i ≫ κ.app i = π.app i ≫ CommRingCat.ofHom (algebraMap R S)) ∧\n      (∀ (i j : Λ) (h : i ≤ j) (y : B.obj i) (x : D.obj i),\n        (D.map (homOfLE h)).hom (y • x) =\n          (B.map (homOfLE h)).hom y • (D.map (homOfLE h)).hom x) ∧\n      (∀ i (y : B.obj i) (x : D.obj i),\n        (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) (y • x) =\n          (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) y •\n            (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) ∧\n      -- (2) finiteness of the stages\n      (∀ i, Algebra.FiniteType ℤ (A.obj i)) ∧\n      (∀ i, letI := (η.app i).hom.toAlgebra; Algebra.FiniteType (A.obj i) (B.obj i)) ∧\n      (∀ i, Module.Finite (B.obj i) (D.obj i)) ∧\n      -- (3) transition base changes\n      (∀ (i j : Λ) (h : i ≤ j),\n        letI := (η.app i).hom.toAlgebra\n        letI := (A.map (homOfLE h)).hom.toAlgebra\n        ∃ e : B.obj i ⊗[A.obj i] A.obj j ≃+* B.obj j,\n          ∀ (x : B.obj i) (y : A.obj j),\n            e (x ⊗ₜ[A.obj i] y) = (B.map (homOfLE h)).hom x * (η.app j).hom y) ∧\n      (∀ (i j : Λ) (h : i ≤ j),\n        letI := (B.map (homOfLE h)).hom.toAlgebra\n        ∃ e : B.obj j ⊗[B.obj i] D.obj i ≃ₗ[B.obj j] D.obj j,\n          ∀ (y : B.obj j) (x : D.obj i),\n            e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x) ∧\n      -- (4) base changes to the limit\n      (∀ i,\n        letI := (η.app i).hom.toAlgebra\n        letI := (@CommRingCat.Hom.hom _ (CommRingCat.of R) (π.app i)).toAlgebra\n        ∃ e : B.obj i ⊗[A.obj i] R ≃+* S,\n          ∀ (x : B.obj i) (y : R),\n            e (x ⊗ₜ[A.obj i] y) =\n              (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)) x * algebraMap R S y) ∧\n      (∀ i,\n        letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app i)).toAlgebra\n        ∃ e : S ⊗[B.obj i] D.obj i ≃ₗ[S] M,\n          ∀ (y : S) (x : D.obj i),\n            e (y ⊗ₜ[B.obj i] x) = y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x))\n    (hflat : letI : Module R M := Module.compHom M (algebraMap R S)\n      Module.Flat R M) :\n    ∃ U : (i : Λ) → Set (PrimeSpectrum (B.obj i)),\n      (∀ i, IsOpen (U i)) ∧\n      (∀ i (q : PrimeSpectrum (B.obj i)), q ∈ U i →\n        letI : Module (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i)) :=\n          Module.compHom _ (η.app i).hom\n        Module.Flat (A.obj i) (LocalizedModule q.asIdeal.primeCompl (D.obj i))) ∧\n      (∀ (i j : Λ) (h : i ≤ j),\n        PrimeSpectrum.comap (B.map (homOfLE h)).hom ⁻¹' U i ⊆ U j) ∧\n      (∀ q : PrimeSpectrum S, ∃ i, PrimeSpectrum.comap (κ.app i).hom q ∈ U i)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100054-L-2476383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100054-L-2476383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
