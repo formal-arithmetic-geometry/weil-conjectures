@@ -30,20 +30,35 @@
  ],
  "proof": [
   {
-   "text": "Strictly smaller component of the parent argument via numerator reduction.",
+   "text": "Apply Ideal.associatedPrimes_fractionalPrincipalQuotient_height to obtain p.height = 1. The associated-prime structure gives p.IsPrime, and this height equality gives p.FiniteHeight.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-height"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient annihilator is J by Ideal.annihilator_quotient and Submodule.annihilator_top; IsAssociatedPrime.annihilator_le gives J ≤ p.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 031T, clause (3)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use IsFractionRing.div_surjective to write y = a/b with b a non-zero-divisor. Nonzero y implies a ≠ 0. The identity b • y = algebraMap A K a shows a ∈ J using Submodule.mem_span_singleton, so J ≠ ⊥.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Ideal.height_eq_zero_iff_eq_bot gives J.height ≠ 0. Order.one_le_iff_ne_zero yields 1 ≤ J.height. Apply Ideal.mem_minimalPrimes_of_height_le to J ≤ p and p.height = 1 ≤ J.height.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-height"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 031T, clause (3), decomposition"
+  "place": "Tag 031T clause (3), numerator reduction and final minimality argument; formalized by J3 from the existing height-one theorem and Mathlib"
  },
  "mathlib_searches": [
   {
@@ -135,13 +150,13 @@
   "note": "A: CommRing+IsNoetherianRing+IsDomain+IsIntegrallyClosed (NORMAL RING domain form); K: Field+Algebra+IsFractionRing; y≠0; J=A∩yA as comap (Algebra.linearMap A K) (A∙y) (membership ↔ ∃b, a=y·b checked by simp); associated primes = associatedPrimes (isAssociatedPrime_iff under Noetherian); no embedded = p ∈ Ideal.minimalPrimes J; height = p.height = 1 as in landed sibling; FIX: let J inlined (J1 c634916b4 rule)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
+  "reviewer": "X-6b4c2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T203951-L-833142",
+  "landing": "20261013T024037-L-3335296",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature with its node and Stacks 031T(3), the proof with its recorded height dependency, and the documented import removal with clean delivery, axiom, and direct-importer checks."
  }
 }
