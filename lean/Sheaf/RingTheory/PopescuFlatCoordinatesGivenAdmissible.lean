@@ -6,12 +6,9 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.Algebra.MvPolynomial.Basic
 
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.PopescuSolutionModuloChoose
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.PopescuAppendFlatParameters
+import Mathlib.LinearAlgebra.Basis.Basic
 
 @[expose] public section
 set_option autoImplicit false
@@ -76,7 +73,32 @@ theorem exists_popescu_flat_coordinates_given_admissible
           Submodule.span (IsLocalRing.ResidueField A)
             (Set.range (fun j ↦ KaehlerDifferential.D k (IsLocalRing.ResidueField A)
               (IsLocalRing.residue A (a j)))) = ⊤ := by
-  sorry
+  classical
+  obtain ⟨A, hAloc, hinc, hA, hmax, ι, _hinj, hcompat,
+    t, r, xs, ys, a, a', ha, ha', ⟨b, hb⟩, hys⟩ :=
+    exists_popescu_admissible_differential_basis k Λ p hp hreg q n hn A₀ hA₀
+  let : IsLocalRing A := hAloc
+  let : EssFiniteType k A := hA.2.1
+  let : EssFiniteType k (IsLocalRing.ResidueField A) :=
+    EssFiniteType.comp k A (IsLocalRing.ResidueField A)
+  obtain ⟨e, s, ψ, hcomp, hideal, hflat⟩ :=
+    exists_popescu_append_flat_parameters k Λ p hp hreg q (IsLocalRing.ResidueField A)
+      ι t r xs ys (fun j ↦ IsLocalRing.residue A (a j))
+      (fun j ↦ hcompat (a j) _ (ha j)) b hb (fun i ↦ (ha' i).1) hys
+  let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=
+    MvPolynomial.aeval (Fin.addCases xs (fun i ↦ ys (s i)))
+  refine ⟨A, hAloc, hA, hmax, hinc, t + e, φ, ψ, hcomp, hideal, hflat,
+    Fin.addCases a (fun i ↦ a' (s i)), ?_, ?_⟩
+  · intro j
+    refine Fin.addCases (fun i ↦ ?_) (fun i ↦ ?_) j
+    · simpa [φ] using ha i
+    · simpa [φ] using (ha' (s i)).2
+  · apply top_unique
+    rw [← b.span_eq]
+    apply Submodule.span_mono
+    rintro _ ⟨j, rfl⟩
+    refine ⟨Fin.castAdd e j, ?_⟩
+    simpa using (hb j).symm
 
 
 end Algebra

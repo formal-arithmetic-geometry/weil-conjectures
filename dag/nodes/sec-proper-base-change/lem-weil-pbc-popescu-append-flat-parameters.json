@@ -1,0 +1,186 @@
+{
+ "id": "lem-weil-pbc-popescu-append-flat-parameters",
+ "kind": "statement",
+ "title": "Append selected ideal generators to a residue differential basis",
+ "statement": "Let $k$ be a field of characteristic $p>0$, let $\\Lambda$ be a Noetherian $k$-algebra [def-weil-pbc-noetherian-ring] geometrically regular over $k$ [def-weil-pbc-g-ring], and let $\\mathfrak q\\subset\\Lambda$ be prime. Put $L=\\Lambda_{\\mathfrak q}$ and $K=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. Let $F/k$ be a field extension [def-pc-field-extension] essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], with a $k$-algebra embedding $\\iota:F\\to K$. Fix $t,r\\ge0$, elements $x_j\\in\\Lambda$ ($j\\in\\operatorname{Fin}(t)$), elements $y_i\\in\\mathfrak q$ ($i\\in\\operatorname{Fin}(r)$) whose images generate $\\mathfrak qL$, and elements $a_j\\in F$ such that $\\iota(a_j)$ is the residue of $x_j/1$. Assume $(\\mathrm da_j)_j$ is an $F$-basis of $\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials]. Then there exist $e\\ge0$ and $s:\\operatorname{Fin}(e)\\to\\operatorname{Fin}(r)$ such that the explicitly defined polynomial map $\\varphi:k[X_1,\\ldots,X_{t+e}]\\to\\Lambda$ [def-weil-pbc-mv-polynomial-ring], sending its first $t$ variables to $x_j$ and its last $e$ variables to $y_{s(i)}$, extends to a ring map $\\psi:k[X_1,\\ldots,X_{t+e}]_{\\varphi^{-1}(\\mathfrak q)}\\to L$. This map restricts to the composite of $\\varphi$ and $\\Lambda\\to L$, is flat [def-weil-pbc-flat-ring-map], and satisfies $\\mathfrak qL=\\varphi^{-1}(\\mathfrak q)L$. No subalgebra of a thickened quotient, containment, or differential-spanning conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH, lemma-solution-modulo, proof: differential basis through property (1); also more-algebra.tex Tag 07E6, lemma-geometrically-regular-over-field"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put L = Λ_q and K = κ(q). L is Noetherian, and geometrically regular over k: after each finite purely inseparable scalar extension, L is a localization of the corresponding scalar extension of Λ, which is regular. Base change of localization and preservation of regularity prove this.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-of-regular-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify F with the image of its k-algebra embedding ι into K; field homomorphisms are injective. Essential finite type for a field extension is finite generation as a field (Mathlib IntermediateField.fg_top_iff), and this property and the given differential basis transport across the field algebra isomorphism. The polynomial map xs has exactly the prescribed residues ha. Apply lem-weil-pbc-geometrically-regular-over-field-flat to L, this image field and this basis. The first localized polynomial map is flat and its closed fibre S is regular local. The prime used there equals the contraction of q because qL contracts to q.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "def-pc-field-extension",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given ys generate qL, so their images generate the maximal ideal of S. Extract from their cotangent images a basis; its lifts are a subset indexed by s : Fin e → Fin r. Nakayama shows that they generate that maximal ideal. The basis size e is the embedding dimension, hence dim S, so the selected images form a regular system of parameters and, by lem-weil-pbc-regular-local-generators-regular-sequence, a regular sequence. This also permits the empty sequence when S is a field.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define φ by evaluating the first t variables at xs and the last e at ys ∘ s, exactly Fin.addCases in Lean. Extend it to ψ by localization, since the complement of q.comap φ maps to units of L. Its restriction is the required composite. The extended contracted prime lies inside qL; it contains the first-coordinate ideal and the selected parameters, whose sum is qL by their generation of the maximal ideal of S. This gives the ideal equality.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The closed fibre of the extended polynomial localization over the first polynomial localization is the polynomial ring on e variables over κ(p′), localized at the origin. Indeed the contracted prime contains all added variables, and their ideal in this fibre is already maximal. By lem-weil-pbc-polynomial-ring-origin-regular-local its localization is regular local of dimension e with these variables as parameters. Both polynomial localizations are Noetherian local and the induced maps are local.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map of closed fibres sends the e parameters to the selected regular sequence in S; the quotient is its nonzero residue field. Apply lem-weil-pbc-flat-over-regular to obtain fibre flatness. Apply lem-weil-pbc-criterion-flatness-fibre-noetherian to the first polynomial localization, the extended localization, and L as a module over itself. Initial flatness comes from the second step, and L is finite and nonzero over itself. It follows that ψ is flat.",
+   "uses": [
+    "lem-weil-pbc-flat-over-regular",
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-over-regular",
+  "lem-weil-pbc-geometrically-regular-over-field-flat",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH proof, coordinate construction; explicit fibre-flatness details following Tag 07E6 and the existing parent plan, by J1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A residue differential basis can be extended by a subset of maximal ideal generators to flat polynomial coordinates",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; no absence verdict asserted.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Appending selected maximal ideal generators to a residue differential basis gives a flat map from a polynomial localization",
+   "results": "Candidates: Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.Generators.basisCotangentAway, Algebra.IsStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, RingHom.IsStandardSmooth, Algebra.SubmersivePresentation.basisCotangent_localizationAway_apply. These concern smooth finite-presentation algebras and do not supply the parameter selection and localized ideal equality here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "append.*flat|flat.*parameters",
+   "results": "Candidates: Mathlib/Data/List/Perm/Basic.lean, Mathlib/Data/List/Sublists.lean, Mathlib/Data/List/Sublists.lean, Mathlib/Data/List/Sublists.lean, Mathlib/Data/List/Sublists.lean, Mathlib/Data/List/Forall2.lean, Mathlib/Data/List/Permutation.lean, Mathlib/Data/List/Permutation.lean. The hits are list concatenation/flatMap identities, not flat ring maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuFlatCoordinatesGivenAdmissible",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); coordinate construction (steps 1–9 of 07FH); fixed differential coordinates and parameter append for property (1)",
+   "via": [
+    "lem-weil-pbc-popescu-flat-coordinates-given-admissible",
+    "lem-weil-pbc-popescu-flat-coordinates",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuAppendFlatParameters",
+  "file": "lean/Sheaf/RingTheory/PopescuAppendFlatParameters.lean",
+  "declaration": "Algebra.exists_popescu_append_flat_parameters",
+  "statement": "theorem exists_popescu_append_flat_parameters\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]\n    (F : Type w) [Field F] [Algebra k F] [EssFiniteType k F]\n    (ι : F →ₐ[k] q.ResidueField)\n    (t r : ℕ) (xs : Fin t → Λ) (ys : Fin r → Λ) (a : Fin t → F)\n    (ha : ∀ j, ι (a j) = IsLocalRing.residue (Localization.AtPrime q)\n      (algebraMap Λ (Localization.AtPrime q) (xs j)))\n    (b : Module.Basis (Fin t) F (KaehlerDifferential k F))\n    (hb : ∀ j, b j = KaehlerDifferential.D k F (a j))\n    (hyq : ∀ i, ys i ∈ q)\n    (hys : Ideal.span (Set.range (fun i ↦ algebraMap Λ (Localization.AtPrime q) (ys i))) =\n      q.map (algebraMap Λ (Localization.AtPrime q))) :\n    ∃ (e : ℕ) (s : Fin e → Fin r),\n      let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=\n        MvPolynomial.aeval (Fin.addCases xs (fun i ↦ ys (s i)))\n      ∃ ψ : Localization.AtPrime (q.comap φ.toRingHom) →+* Localization.AtPrime q,\n        ψ.comp (algebraMap (MvPolynomial (Fin (t + e)) k)\n            (Localization.AtPrime (q.comap φ.toRingHom))) =\n          (algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom ∧\n        q.map (algebraMap Λ (Localization.AtPrime q)) =\n          (q.comap φ.toRingHom).map\n            ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) ∧\n        ψ.Flat",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T005856-L-2607099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T005856-L-2607099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
