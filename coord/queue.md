@@ -1,6 +1,6 @@
 # Work queue
 
-274 items; claim with `tools/claim.py next <group> [--stage N]`.
+269 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (244)
+## Stage 3: modules to prove (239)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -81,10 +81,10 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitAffineStageTailColimit` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ResolutionUnitTwistComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageTransitionCoreComposition` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ResolutionOpenScalarComparison` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GroupScheme.TwoParameterTranslationAction` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveTwistFiniteCohomology` | 12 | 1 | proof |
@@ -141,7 +141,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineAlgebraUpperTruncationEdge` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNaturality` | 20 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomExtension` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationDiagonalBlock` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationPreDifferential` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal` | 20 | 1 | proof |
@@ -161,11 +160,9 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.TensorCounitCoordinateEquation` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest` | 21 | 1 | proof |
 | `Sheaf.RingTheory.ComparisonTensorCocones` | 21 | 1 | proof |
-| `Sheaf.RingTheory.FormalGlueingMapToAlgebraization` | 21 | 1 | proof |
 | `Sheaf.RingTheory.PBasisComplementMonomialBasis` | 21 | 1 | proof |
 | `Sheaf.RingTheory.PopescuCoefficientInduction` | 21 | 1 | proof |
 | `Sheaf.RingTheory.PopescuPolynomialKernelParameters` | 21 | 1 | proof |
-| `Sheaf.RingTheory.PowerSeriesResidueMonomialBasis` | 21 | 1 | proof |
 | `Sheaf.RingTheory.Smooth.AugmentationCompletionPowerSeries` | 21 | 1 | proof |
 | `Sheaf.Algebra.Homology.DerivedInternalHomShiftComparison` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedMonoidalPullbackUnitalShiftKFlatOne` | 22 | 1 | proof |
@@ -182,7 +179,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardDirectImageSectionNaturality` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardOrdinaryScalarCoordinates` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardRankMatchDirectImage` | 22 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardTensorSquareConjugacy` | 22 | 1 | proof |
 | `Sheaf.Algebra.Homology.ProjectiveRestrictionTorBound` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineBoundedAboveFiberBettiComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFreeResidueSectionsCohomology` | 23 | 1 | proof |
@@ -245,11 +241,9 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenCoordinateTransport` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenStalkConjugacy` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIso` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorModelRestrictionAdjunction` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroBottomArrowAffineChainModel` | 24 | 1 | proof |
 | `Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary` | 24 | 1 | proof |
 | `Sheaf.RingTheory.FormalGlueingExtensionTransport` | 24 | 1 | proof |
-| `Sheaf.RingTheory.TorLocalizationDenominators` | 24 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.FiniteStripConeFiltration` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExternalGlobalSectionsRestrictionComparisonLeft` | 25 | 1 | proof |
@@ -264,6 +258,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVBoundaryCompletion` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TensorModelRestrictionComparisons` | 25 | 1 | proof |
 | `Sheaf.Paper.ModuleCupResolutionInvariance` | 25 | 1 | proof |
 | `Sheaf.Algebra.Homology.BaseTensorDerivedComparison` | 26 | 1 | proof |
 | `Sheaf.Algebra.Homology.TorIndependentTensorAugmentation` | 26 | 1 | proof |
