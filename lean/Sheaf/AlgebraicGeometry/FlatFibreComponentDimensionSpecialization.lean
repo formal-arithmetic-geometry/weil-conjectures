@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
+import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrata
+
 /-! # FlatFibreComponentDimensionSpecialization
 
 Source: Stacks Project, Tag 054U (lemma-dimension-fibre-specialization).
@@ -35,7 +37,11 @@ theorem exists_fibre_dimension_open_of_flat_restrict
     ∃ V : X.Opens, x ∈ V ∧
       ∀ y ∈ V, topologicalKrullDimAt (f.asFiber y) =
         topologicalKrullDimAt (f.asFiber x) := by
-  sorry
+  obtain ⟨V, hcover, hdim⟩ := exists_fibre_dimension_strata_of_flat_restrict f U
+  obtain ⟨n, hxn⟩ := hcover x hx hcomponent
+  refine ⟨V n, hxn, ?_⟩
+  intro y hy
+  exact (hdim n y hy).trans (hdim n x hxn).symm
 
 /-- Local fibre dimension is constant along a generalization of a fibre component point.
 Source: Stacks Project, Tag 054U (lemma-dimension-fibre-specialization).
