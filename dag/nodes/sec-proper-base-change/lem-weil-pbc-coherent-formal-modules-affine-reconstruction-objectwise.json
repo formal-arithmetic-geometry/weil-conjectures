@@ -18,31 +18,51 @@
  ],
  "proof": [
   {
-   "text": "The affine first-isomorphism and tilde/Gamma argument described in Lemma 087W proves the stated reconstruction component (and, for assembly, its compatibility equations).",
+   "text": "For the tilde of the restricted module N, compute the affine range of the ideal-power multiplication inclusion: tensor sections send pure tensors to scalar multiples, the cokernel/image theorem identifies the image range, and the ideal-powers section formula identifies it with I^n N. The same tensor and image statements show quasi-coherence of the product. Transport by tilde.isoTop and apply the module cokernel universal property, then transport it through the tilde adjunction to obtain the sheaf cokernel comparison. Reuse the proved product_qc and multiplication_range helpers of the ideal-section dependency via a proof-only import all; the remaining cokernel transport is proved in the private helper affineIdealPower_tilde_cokernel.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-coherent-formal-modules-affine-quotient",
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each n, coherence of F_n implies quasi-coherence. The given surjective projection with kernel I^(n+1)N identifies N/I^(n+1)N with its sections by Mathlib LinearMap.quotKerEquivOfSurjective and Submodule.quotEquivOfEq. Compose tilde of this isomorphism with the preceding cokernel comparison and the quasi-coherent counit. The resulting isomorphism e_n satisfies the exact projection factorization; this is the private helper affineFormalQuotient_projection_iso.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble e_n with NatIso.ofComponents. Precompose each naturality equation with the source cokernel projection and cancel its epimorphism. The quotient transition reduces that composite to the target projection. The projection factorization, naturality of the affine counit, and naturality of p identify the two composites. Lift the resulting system isomorphism with ObjectProperty.isoMk to the full subcategory of coherent formal systems.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-coherent-formal-modules-affine-quotient",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-coherent-formal-module",
   "pqf-lem-coherent-ft-locnoeth",
-  "def-weil-pbc-coherent-formal-module"
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-coherent-formal-modules-affine-quotient"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R2",
+  "group": "D3",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087W, first-isomorphism and assembly steps"
+  "place": "Lemma 087W, first-isomorphism and assembly steps; existing sandbox proof completed and checked"
  },
  "mathlib_searches": [
   {
@@ -105,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T231639-L-1963494",
-  "kind": "interface",
+  "landing": "20261013T045521-L-126617",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
