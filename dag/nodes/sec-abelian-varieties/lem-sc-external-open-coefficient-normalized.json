@@ -17,46 +17,42 @@
  ],
  "proof": [
   {
-   "text": "Construct the coefficient isomorphism: restriction-to-tensor-pullback by leftAdjointUniq, followed by module_pullback_tensor, followed by tensoring the two normalized projection-composition comparisons. On the second factor, use the inverse composition comparison for the new second projection and V.ι, then pull back the inverse restriction-to-tensor-pullback comparison for V.ι. The projection equations identify the composite morphisms. This explicitly constructs the coefficient isomorphism, rather than selecting an arbitrary witness of an existence assertion.",
+   "text": "Apply the proved restriction-tensor comparison to the two projection pullbacks. Its inverse pure-section formula gives the forward pure-section formula by applying the hom and the inverse-hom identity, and by naturality of tensor sections under the image-equality transport.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-module-pullback-tensor",
-    "def-weil-pbc-composite-adjunction",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluate the leftAdjointUniq unit equation on an open that is the image of the whole source and restrict to the top open. Naturality and composition of presheaf restriction maps identify this with the displayed transport along the image equality. Apply module_pullback_tensor's pure-section equation and its naturality with restriction to split the section into two j-pullback units.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluate unit_conjugateEquiv_symm for the composite adjunction on arbitrary open sections and restrict to the whole new source. For the first factor, naturality moves the old restriction past the j-unit and the composition unit becomes the new first-projection unit. For the second factor, its unit becomes that of the second projection followed by V.ι. The inverse composition comparison separates these units, naturality moves the inverse V.ι restriction comparison through the new pullback unit, and the inverse leftAdjointUniq unit equation cancels the V.ι pullback unit. Thus the two factor sections are exactly the new projection sections. tensorHom_app_tmulSection combines their equations. Restriction and adjunction isomorphisms apply also when V is empty.",
-   "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-module-restriction-tensor-comparison",
     "def-sc-scalar-global-sections-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the normalized open-triangle comparison for the first projection and hfst, and the normalized open-square comparison for the second projection, hj and hsnd. Tensor the resulting two isomorphisms and compose with the restriction-tensor comparison. This explicitly constructs the coefficient isomorphism.",
+   "uses": [
+    "lem-sc-tensor-pullback-open-triangle",
+    "lem-sc-tensor-pullback-open-square",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The triangle unit equation gives the new first-projection section after composing the old restriction map with transport along hj. The square unit equation gives the new second-projection section of the transported local section. The pure-section tensorHom formula combines these equations. All restriction and adjunction comparisons include the empty open.",
+   "uses": [
+    "lem-sc-tensor-pullback-open-triangle",
+    "lem-sc-tensor-pullback-open-square",
+    "def-sc-scalar-global-sections-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-scalar-global-sections-comparison",
-  "def-weil-pbc-composite-adjunction",
-  "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-sc-tensor-pullback-open-square",
+  "lem-sc-tensor-pullback-open-triangle",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED omitted canonical-cup verification, expanded using Tags 0096, 0097, 01CD and the existing normalized tensor comparisons; the Lean coefficient comparison is left as a named theorem for the next worker. Sources read at https://stacks.math.columbia.edu/tag/0BED, https://stacks.math.columbia.edu/tag/0096, https://stacks.math.columbia.edu/tag/0097, https://stacks.math.columbia.edu/tag/01CD."
+  "place": "Tag 0BED canonical-cup compatibility expanded using Tags 0096, 0097 and 01CD. Lean proof uses the already proved restriction-tensor comparison and the two generic normalized factor comparisons proved in this delivery."
  },
  "mathlib_searches": [
   {
@@ -160,9 +156,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T134102-L-72284",
+  "landing": "20261013T143544-L-560191",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
