@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-affine-basis-ring-action-gluing",
+ "kind": "statement",
+ "title": "Extension of compatible ring actions from affine opens",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $R$ a sheaf of rings and $F$ a sheaf of abelian groups on its space. For each affine open $U$ [lem-weil-pbc-affine-opens-basis] give a unital ring map $\\tau_U:R(U)\\to\\operatorname{End}_{\\mathbf Z}(F(U))$. Assume that for every inclusion $i:V\\subseteq U$ of affine opens, $\\tau_U(r)(x)|_V=\\tau_V(r|_V)(x|_V)$. Then there is a unique family of unital ring maps $\\sigma_U:R(U)\\to\\operatorname{End}_{\\mathbf Z}(F(U))$, now indexed by all opens, natural for all inclusions in the same sense, with $\\sigma_U=\\tau_U$ on each affine open. No quasi-coherence, intersection-closed affine basis, or finite-cover hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, Sheaves on Spaces",
+  "place": "Tag 009O, label lemma-restrict-basis-equivalence, https://stacks.math.columbia.edu/tag/009O read 2026-10-13; explicit application to the action map R times F to F in the affine-basis gluing of Tags 01LX and 0897."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof": [
+  {
+   "text": "Form the presheaf of sets P(U)=R(U) times F(U). The action maps on the affine basis form a natural transformation into the underlying sheaf of sets of F. Use TopCat.Sheaf.restrictHomEquivHom and extend_hom_app to construct the unique extension alpha on all opens, with exactly the given affine components.",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a(U,r,x)=alpha_U(r,x), naturality and affine agreement say its restriction on every affine V contained in U is tau_V(r|V)(x|V). Separatedness of F and the affine basis prove zero and additivity in x, and zero, addition, unit, and multiplication in r from the corresponding local ring identities. Bundle these equations into a ring hom sigma_U. Naturality of alpha gives the naturality of sigma. Any other sigma restricts to the same local actions and hence equals it by separatedness.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Sheaves on Spaces",
+  "place": "Tag 009O, label lemma-restrict-basis-equivalence, https://stacks.math.columbia.edu/tag/009O read 2026-10-13; explicit application to the action map R times F to F in the affine-basis gluing of Tags 01LX and 0897."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible ring actions on a sheaf of abelian groups on a basis extend uniquely to all open sets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.restrictHomEquivHom",
+   "results": "2 hits: TopCat.Sheaf.restrictHomEquivHom, TopCat.Sheaf.extend_hom_app",
+   "date": "2026-10-13",
+   "verdict": "Related declarations read; no one-line match for this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictHomEquivHom|extend_hom_app|section_ext",
+   "results": "10 hits: Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/Sheaf.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "date": "2026-10-13",
+   "verdict": "Related declarations read; no one-line match for this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BalancedActionDirectImageModule",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The affine-basis gluing part of the relative-spectrum paragraph of Tag 0897, extracted from step 2 of lem-weil-pbc-balanced-action-direct-image-module, after the affine section actions are supplied.",
+   "via": [
+    "lem-weil-pbc-balanced-action-direct-image-module",
+    "lem-weil-pbc-balanced-action-quasicoherent-realization",
+    "lem-weil-pbc-graded-module-quasicoherent-realization",
+    "lem-weil-pbc-graded-module-relative-spec-realization",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineBasisRingActionGluing",
+  "file": "lean/Sheaf/Paper/AffineBasisRingActionGluing.lean",
+  "declaration": "AlgebraicGeometry.affineBasis_ringAction_gluing",
+  "statement": "theorem affineBasis_ringAction_gluing\n    (X : Scheme.{u}) (R : TopCat.Sheaf RingCat.{u} X)\n    (F : TopCat.Sheaf AddCommGrpCat.{u} X)\n    (tau : ∀ U : X.affineOpens,\n      R.obj.obj (op U.val) →+* AddMonoid.End (F.obj.obj (op U.val)))\n    (htau : ∀ (U V : X.affineOpens) (i : U.val ⟶ V.val)\n      (r : R.obj.obj (op V.val)) (x : F.obj.obj (op V.val)),\n      F.obj.map i.op (tau V r x) =\n        tau U (R.obj.map i.op r) (F.obj.map i.op x)) :\n    ∃! sigma : ∀ U : X.Opens,\n      R.obj.obj (op U) →+* AddMonoid.End (F.obj.obj (op U)),\n      (∀ (U V : X.Opens) (i : U ⟶ V)\n        (r : R.obj.obj (op V)) (x : F.obj.obj (op V)),\n        F.obj.map i.op (sigma V r x) =\n          sigma U (R.obj.map i.op r) (F.obj.map i.op x)) ∧\n      (∀ U : X.affineOpens, sigma U.val = tau U)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T045620-L-141237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T045620-L-141237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

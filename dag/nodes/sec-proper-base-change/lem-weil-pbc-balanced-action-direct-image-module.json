@@ -15,32 +15,38 @@
  ],
  "proof": [
   {
-   "text": "On an affine open U = Spec C, put N = M(U). Each rho(b) is C-linear; its additivity, multiplicativity and unit come from the ring map rho. The scalar condition identifies the A-actions. Thus the commuting C and B actions extend uniquely to the C tensor_A B action (c tensor b)n = c rho(b)n. On a basic open D(c), quasi-coherence identifies sections with localization, and naturality of rho makes that identification B-linear.",
+   "text": "Obtain the unique affine actions, with naturality and the O_X and B generator identities, from balancedAction_affine_sections.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-balanced-action-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Relative-spectrum base change identifies the direct-image algebra of pi with f-star B-tilde. On U its sections are C tensor_A B and fB-sharp(b) is 1 tensor b. The actions from the preceding step commute with restrictions on the affine basis; refining overlaps by basic affine opens and the sheaf axiom extend them uniquely to all opens. This yields G over pi-star O_Y, with the same underlying abelian sheaf and the original O_X scalar action. The identity on that sheaf gives e. The equality for b holds on the affine basis and hence on all opens. No quasi-coherence assertion over the larger algebra, inverse correspondence, or O_Y-module F is asserted here.",
+   "text": "Apply affineBasis_ringAction_gluing to the ring sheaf underlying pi_* O_Y and the existing abelian sheaf of M. This gives natural ring actions sigma on all opens and their affine agreement.",
    "uses": [
-    "lem-weil-pbc-relative-spec-base-change",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-affine-basis-ring-action-gluing"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the affine basis and sheaf separatedness to extend the two generator identities to all opens: for O_X use naturality of pi-sharp and semilinearity of M restrictions; for B use composition of structure-sheaf restrictions and naturality of rho. Convert each sigma_U into a Module instance by Module.compHom. PresheafOfModules.ofPresheaf constructs G using M sections and restriction maps; its sheaf condition is M.isSheaf. The scalar identity makes the sectionwise identity maps linear after restricting scalars; naturality and the inverse identities hold by reflexivity. The B identity proves the requested equation.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-balanced-action-affine-sections",
+  "lem-weil-pbc-affine-basis-ring-action-gluing",
+  "lem-weil-pbc-affine-opens-basis",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01LX and 0897",
-  "place": "Local balanced tensor action and affine-basis gluing explicitly spelled out from the relative-spectrum paragraph."
+  "document": "Stacks Project, Tags 01LX and 0897; Tag 009O",
+  "place": "Affine section actions, proved extension of the action map from the affine basis, and explicit module-sheaf packaging on the existing abelian presheaf."
  },
  "mathlib_searches": [
   {
@@ -122,9 +128,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T034207-L-3766762",
+  "landing": "20261013T045620-L-141237",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
