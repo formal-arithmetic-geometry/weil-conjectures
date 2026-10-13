@@ -19,46 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Fix a stage j0 (in zero detection, use the given j). Work over the cofiltered category of arrows k to j0. Its projection is initial; cofilteredness supplies refinements and equalizes parallel arrows. The same cone is limiting after this restriction. Reindex by a nonempty directed inverse system. All stages and transitions are affine; each structure map to the fixed affine stage is an open immersion.",
+   "text": "Rewrite the vanishing assumption with the supplied component formula hnu. Apply the zero-neighbourhood lemma to the given stage and its limit projection. It yields an open U containing the limit image on which s restricts to zero.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+    "lem-weil-pbc-etale-section-zero-neighbourhood"
    ],
    "elementary": false
   },
   {
-   "text": "Apply affine-etale-site continuity to this affine system. Objects, arrows, equality of arrows, and finite covers on the limit descend to stages. Apply the inverse-image section formula for the colimit site at the terminal object. The formula is a filtered colimit over stages mapping to j0 of sections of the pullback of F restricted to D(j0).",
+   "text": "The stages are affine, hence compact, and maps between affine schemes are affine. Convert containment of the limit image in U to the equation that its inverse image is the whole limit. Apply AlgebraicGeometry.exists_map_eq_top to get k and f:k to j with the whole stage k mapping into U.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-colimit-of-sites"
+    "lem-weil-pbc-limit-image-contained-in-open"
    ],
    "elementary": false
   },
   {
-   "text": "For each open immersion D(k) to X, the localization-restriction comparison identifies the pullback sections with F(D(k)). Its unit formula identifies the transition maps with F applied to D arrows. Uniqueness of left adjoints gives an isomorphism from the constructed pullback to H carrying its unit to hH.unit. Evaluate this isomorphism at the terminal object; naturality and the supplied component formula identify the colimit legs with nu.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compare the given section s with the zero section at the fixed stage j. Equality of their images in the filtered colimit is detected after one transition. This yields an arrow from a later stage k to j and equality of the restriction of s with the restriction of zero, which is zero since the restriction is a group homomorphism.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false
+   "text": "Factor D(f) through U by IsOpenImmersion.lift. The factor is a morphism of etale objects over X since its composite with U to X is the structure map of D(k). Functoriality of F identifies restriction along D(f) with restriction to U followed by this factor. The first restriction is zero and the second is additive, so the composite is zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-etale-section-zero-neighbourhood",
+  "lem-weil-pbc-limit-image-contained-in-open"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/03Q6",
-  "place": "Degree-zero continuity, expanded using affine-site continuity and the inverse-image section formula"
+  "document": "https://stacks.math.columbia.edu/tag/03PN",
+  "place": "Zero-locus route: geometric stalks followed by Mathlib exists_map_eq_top and explicit factorization through an open subscheme"
  },
  "mathlib_searches": [
   {
@@ -131,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G4",
+  "reviewer": "X-99e9c",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T072349-L-1119523",
+  "landing": "20261013T100046-L-2474238",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Lean signatures and proof matched node statements and dependencies; both delivered modules and direct importer Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore compile cleanly; axioms match the reported helper sorry."
  }
 }

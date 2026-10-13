@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-section-zero-neighbourhood",
+ "kind": "statement",
+ "title": "A zero neighbourhood for an etale section killed by inverse image",
+ "statement": "Let $X,T$ be schemes [def-pc-scheme], $V\\to X$ an etale object [def-weil-pbc-etale-site], $a:T\\to V$, and $p:T\\to X$ satisfy $a$ followed by the structure map of $V$ equals $p$. Let $F$ be an abelian etale sheaf on $X$ [def-weil-pbc-abelian-etale-sheaves] and let $H$ be any left adjoint to $p_*$, with its supplied adjunction unit [def-weil-pbc-direct-image]. For $s\\in F(V)$ assume its image under the unit $F(V)\\to H(F)(V\\times_X T)$ followed by restriction along $(a,\\mathrm{id}_T):T\\to V\\times_X T$ is zero. There exists an open subset $U\\subseteq V$ containing $a(T)$ such that the restriction of $s$ to the etale object $U\\to V\\to X$ is zero.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03PN",
+  "place": "Definition 59.29.6 (filtered-colimit stalks) in Tag 03PN; Lemma 03Q1 (lemma-stalk-pullback) (3), with unit-germ compatibility"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For any geometric point of V, a zero germ of s is represented by an etale neighbourhood on which s restricts to zero. This is the filtered-colimit description of the stalk. The neighbourhood morphism is etale, hence open. It covers its image, and separatedness of F makes s zero on that image. Take U to be the union of all opens on which s is zero; separatedness on this covering makes s zero on U.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a point t of T choose a geometric point over t. The stalk-of-pullback isomorphism, its unit-germ compatibility, and naturality of germs under restriction identify the germ of the canonical unit/restriction section with the germ of s at its image in V. The assumed zero section therefore gives a zero germ, so a(t) lies in U. Uniqueness of left adjoints to p_* identifies the supplied H with the standard inverse image and carries its unit to the supplied unit. This justifies the same calculation for any hH.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Thus the image of a lies in U and restriction of s to U is zero, as required. For empty T its image is empty; U may be empty. For s=0 one can take U=V. There is no affine or inverse-limit hypothesis in this statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03PN",
+  "place": "Zero-germ argument, expanded by descent from an etale neighbourhood to its open image and the pullback stalk isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an etale sheaf killed by inverse image is zero on an open neighbourhood of the image",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zero locus of a section of an etale sheaf is open and contains the image of a scheme where its pullback is zero",
+   "results": "Eight hits concerning the algebra etale locus and structure-sheaf zero loci; no arbitrary etale-sheaf zero-neighbourhood theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "zero.*neighbourhood|zero.*locus.*section|section.*zero.*locus",
+   "results": "Eleven hits, including Geometry/RingedSpace/Basic.lean:61 for structure-sheaf germs; no arbitrary etale sheaf theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOpenSectionsZeroDetection",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Degree-zero injectivity on affine neighbourhoods in the Tag 09AX effacement comparison: the local zero-neighbourhood step before descending image containment to a stage",
+   "via": [
+    "affine-open-sections-zero-detection",
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+    "new-local-stalk-sections-cocone-colimit",
+    "new-local-stalk-sections-canonical-colimit",
+    "affine-open-sections-canonical-colimit-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSectionZeroNeighbourhood",
+  "file": "lean/Sheaf/Paper/EtaleSectionZeroNeighbourhood.lean",
+  "declaration": "etaleSection_zero_neighbourhood",
+  "statement": "theorem etaleSection_zero_neighbourhood {X T : Scheme.{u + 1}} (V : X.Etale) (a : T ⟶ V.left) (p : T ⟶ X) (hp : a ≫ V.hom = p) (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H ⊣ p.Etale.sheafPushforwardContinuous AddCommGrpCat.{u + 1} X.smallEtaleTopology T.smallEtaleTopology) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (s : F.obj.obj (op V)) (hs : ((hH.unit.app F).hom.app (op V) ≫ (H.obj F).obj.map (MorphismProperty.Over.homMk (A := Scheme.Etale.mk (𝟙 T)) (B := p.Etale.obj V) (pullback.lift a (𝟙 T) (by change a ≫ V.hom = 𝟙 T ≫ p rw [Category.id_comp] exact hp)) (by exact pullback.lift_snd _ _ _)).op) s = 0) : ∃ (U : V.left.Opens), Set.range a ⊆ (U : Set V.left) ∧ F.obj.map (MorphismProperty.Over.homMk (A := Scheme.Etale.mk (U.ι ≫ V.hom)) (B := V) U.ι rfl).op s = 0",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-99e9c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T100046-L-2474238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-99e9c",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T100046-L-2474238",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proof matched node statements and dependencies; both delivered modules and direct importer Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore compile cleanly; axioms match the reported helper sorry."
+ }
+}

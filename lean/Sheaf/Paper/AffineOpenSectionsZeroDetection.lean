@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.Paper.EtaleSectionZeroNeighbourhood
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.CategoryTheory.ColimitSites
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
@@ -22,26 +23,18 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 /-- A section whose canonical restriction to the affine limit is zero vanishes at a later stage.
 Source: Stacks Project, Tag 03Q6, degree zero of lemma-colimit, proof steps (1)--(3);
 Sites, Tag 0A35, lemma-pullback-to-limit; Etale Cohomology, Tag 0EYL.
-Proof: Fix a stage j0 (the given j for zero detection). Restrict to the category of
-stages equipped with an arrow to j0. Cofilteredness makes its projection initial, so
-this restricted diagram has the same limit. Replace it by a cofinal directed system.
-Every stage and every transition is affine. Over the fixed affine stage D(j0), the
-affine etale site of the limit is the colimit site: affine etale objects, morphisms,
-equalities of morphisms, and finite covering families all descend to stages (0EYL).
-The inverse-image section formula for this colimit site (0A35), evaluated at the
-terminal affine etale object, is the filtered colimit of the stage sections.
-For each open immersion D(k) to X, the localization-restriction comparison identifies
-these sections with F(D(k)); its unit formula identifies transitions with restriction
-along D arrows. The unique comparison of left adjoints to p_* carries the standard
-unit to hH.unit. Its naturality with respect to the terminal-object pullback maps,
-together with hν₀, identifies the formula's legs with ν₀.
-Compare s with zero at the given stage. Equality in the filtered colimit is detected
-after one transition, giving k and an arrow k to j. Restriction is a group homomorphism,
-so equality with the restriction of zero means that the restriction of s is zero.
-A singleton system reduces to restriction along an open immersion, an isomorphism on
-these terminal sections. A zero sheaf has only the zero section. If the affine limit
-is empty, its finite empty cover descends to an empty stage by 0EYL, so the same formula
-handles that case. No empty indexing category is allowed by IsCofiltered.
+Proof: Rewrite the canonical component formula in the vanishing hypothesis.
+The zero-neighbourhood lemma gives an open U in D(j) containing the limit image
+and on which s restricts to zero. Each stage is compact because it is affine,
+and each transition is affine because its source and target are affine.
+Mathlib exists_map_eq_top supplies k and f : k ⟶ j whose image lies in U.
+Use IsOpenImmersion.lift to factor D(f) through U as a morphism of etale objects
+over X. Presheaf functoriality expresses restriction along D(f) as restriction
+to U followed by restriction along this factor. The first restriction is zero;
+the second is a group homomorphism and preserves zero.
+The empty limit is covered by the same compact-limit theorem, which then supplies
+a stage mapping into U. Singleton diagrams and the zero sheaf need no separate case.
+No site-colimit or directed-reindexing theorem is used by this proof.
 (blueprint: affine-open-sections-zero-detection) -/
 theorem affineOpenSections_zero_detection
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
@@ -66,4 +59,41 @@ theorem affineOpenSections_zero_detection
           exact hp j))
         (by exact pullback.lift_snd _ _ _)).op) :
     ∀ (j : J) (s : F.obj.obj (op (D.obj j))), ν₀.app (op j) s = 0 →
-      ∃ (k : J) (f : k ⟶ j), F.obj.map (D.map f).op s = 0 := by sorry
+      ∃ (k : J) (f : k ⟶ j), F.obj.map (D.map f).op s = 0 := by
+  intro j s hs
+  rw [hν₀ j] at hs
+  obtain ⟨U, hU, hz⟩ := etaleSection_zero_neighbourhood
+    (D.obj j) (c.π.app j) p (hp j) H hH F s hs
+  let E := D ⋙ Scheme.Etale.forget X ⋙ Over.forget X
+  have : ∀ i, CompactSpace (E.obj i) := fun i ↦
+    inferInstanceAs (CompactSpace (D.obj i).left)
+  have : ∀ {i k : J} (f : i ⟶ k), IsAffineHom (E.map f) := fun f ↦
+    inferInstanceAs (IsAffineHom (D.map f).left)
+  have htop : c.π.app j ⁻¹ᵁ U = ⊤ := by
+    apply top_le_iff.mp
+    intro x _
+    exact hU ⟨x, rfl⟩
+  obtain ⟨k, f, hf⟩ := exists_map_eq_top E c hc U htop
+  let b : (D.obj k).left ⟶ U :=
+    IsOpenImmersion.lift U.ι (D.map f).left (by
+      rintro _ ⟨x, rfl⟩
+      rw [Scheme.Opens.range_ι]
+      have hx := hf.ge (Set.mem_univ x)
+      change (D.map f).left x ∈ U at hx
+      exact hx)
+  let g : D.obj k ⟶ Scheme.Etale.mk (U.ι ≫ (D.obj j).hom) :=
+    MorphismProperty.Over.homMk b (by
+      change b ≫ (U.ι ≫ (D.obj j).hom) = (D.obj k).hom
+      rw [← Category.assoc]
+      dsimp only [b]
+      rw [IsOpenImmersion.lift_fac]
+      exact (D.map f).w)
+  let i : Scheme.Etale.mk (U.ι ≫ (D.obj j).hom) ⟶ D.obj j :=
+    MorphismProperty.Over.homMk U.ι rfl
+  have hgi : g ≫ i = D.map f := by
+    apply MorphismProperty.Over.Hom.ext
+    exact IsOpenImmersion.lift_fac _ _ _
+  refine ⟨k, f, ?_⟩
+  rw [← hgi, op_comp, F.obj.map_comp]
+  change F.obj.map g.op (F.obj.map i.op s) = 0
+  rw [hz, map_zero]
