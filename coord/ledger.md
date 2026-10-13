@@ -12358,3 +12358,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:02 L: merged deliver/U3/Sheaf.RingTheory.FiniteRankDefectDerivation (stage 3; reviewer PASS; first push; landing 20261013T120252-L-3428896 (interface); batch 20261013T120249; modules 2; new nodes 1)
 - 12:02 L: merged deliver/U4/Sheaf.RingTheory.FormalGlueingInjectiveApproximation (stage 3; reviewer PASS; first push; landing 20261013T120252-L-3429093 (proof); batch 20261013T120249; modules 1; new nodes 0)
 - 12:05 L: merged deliver/P1/Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison (stage 3; reviewer PASS; first push; landing 20261013T120501-L-3445346 (interface); batch 20261013T120500; modules 2; new nodes 1)
+- 12:05 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCoverLeft (stage 3; reviewer PASS; first push; landing 20261013T120502-L-3445521 (interface); batch 20261013T120500; modules 2; new nodes 1)
