@@ -13214,3 +13214,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:56 L: merged deliver/T2/Sheaf.AlgebraicGeometry.TensorStalkFixedMapSquare (stage 3; reviewer PASS; first push; landing 20261013T165650-L-1811085 (interface); batch 20261013T165635; modules 2; new nodes 1)
 - 16:56 L: merged deliver/T3/Sheaf.Paper.FiniteStructureProductCore (stage 3; reviewer PASS; first push; landing 20261013T165650-L-1811347 (proof); batch 20261013T165635; modules 1; new nodes 1)
 - 16:56 L: merged deliver/U1/Sheaf.AlgebraicGeometry.OpenExtensionDerivedAdjunction (stage 3; reviewer PASS; first push; landing 20261013T165651-L-1811451 (proof); batch 20261013T165635; modules 1; new nodes 0)
+- 16:56 L: merged deliver/U3/Sheaf.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison (stage 3; reviewer PASS; first push; landing 20261013T165651-L-1811640 (interface); batch 20261013T165635; modules 5; new nodes 4)

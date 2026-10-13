@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport
+import Sheaf.AlgebraicGeometry.ModuleCohomologyExtEdgeComparison
 
 /-! # Module and Ext cohomology comparisons compatible with scheme maps
 
@@ -21,6 +23,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
+
 
 /-- The module/Ext comparison can be normalized on both schemes so that
 it intertwines the base-change unit h-map with exact abelian inverse image on Ext.
@@ -67,6 +70,18 @@ theorem exists_moduleCohomology_ext_pullback_comparison
             (moduleCohomologyFMap (baseChangeFst (S := B) h)
               (baseChangeUnit (S := B) h N) p x) =
             H.baseChangeLinear (S := B) h N p (E N x)) := by
-  sorry
+  classical
+  obtain ⟨E, E', hE, hE', hedge⟩ := exists_moduleCohomology_ext_edge_comparison
+    (R := R) (B := B) (Y := Y) h p
+  refine ⟨E, E', hE, hE', ?_⟩
+  intro N x
+  have hs := moduleCohomology_transport_coefficient
+    (X := baseChangedScheme (S := B) h) (Y := Y)
+    (baseChangeFst (S := B) h) N (baseChangedModule (S := B) h N)
+    (baseChangeUnit (S := B) h N) p (fun M y ↦ E M y)
+    (fun y ↦ E' (baseChangedModule (S := B) h N) y)
+    (hE N _ (baseChangeUnit (S := B) h N)) (hedge (baseChangedModule (S := B) h N)) x
+  dsimp only [H.baseChangeLinear, cohomologyComparisonLinear]
+  exact hs
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,137 @@
+{
+ "id": "new-module-cohomology-coefficient-transport",
+ "kind": "statement",
+ "title": "Transport coefficient naturality through edge compatibility",
+ "statement": "For any scheme morphism f:X -> Y and coefficient morphism phi:N -> f_*F, functions E from module cohomology to Ext cohomology on Y and E prime for F on X that respect phi and the identity edge map also respect the h-map of phi. No equivalence hypothesis is required. The two coefficient factorizations [new-module-cohomology-coefficient-factor] [new-module-cohomology-ext-coefficient-factor] prove this compatibility.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Coefficient functoriality, specialized to an identity coefficient map."
+ },
+ "stmt_deps": [
+  "new-module-cohomology-coefficient-factor",
+  "new-module-cohomology-ext-coefficient-factor",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Factor the module map through the identity edge map. Apply its given compatibility, then the given source coefficient naturality. The Ext coefficient factorization supplies the last equality. Combine the four equalities by congrArg and transitivity.",
+   "uses": [
+    "new-module-cohomology-coefficient-factor",
+    "new-module-cohomology-ext-coefficient-factor",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-coefficient-factor",
+  "new-module-cohomology-ext-coefficient-factor",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "U3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Coefficient functoriality, specialized to an identity coefficient map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of modules agree naturally with Ext cohomology of abelian sheaves compatible with pullback",
+   "results": "Eight hits: basic Sheaf.H and cohomologyPresheafFunctor, and generic injective-resolution Ext comparisons; no module/Ext edge comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapFunctor\"",
+   "results": "Twelve hits for generic functor definitions, no edge comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomology.*[Ee]dge|[Ee]dge.*[Ee]xt",
+   "results": "Mathlib grep returned 25 generic edge/ext hits unrelated to this comparison. Direct rg in lean/Sheaf and lean/WeilConjectures found moduleCohomologyEdgeMap and its naturality, but no cross-model edge comparison. Read ModuleCohomologySourceComparison, ModuleCohomologyFMapFunctorial and FlatCohomologyComparison.",
+   "date": "2026-10-13",
+   "verdict": "new edge interface needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module cohomology agrees naturally with abelian sheaf Ext cohomology and the comparison commutes with coefficient maps and inverse image",
+   "results": "Service unavailable: Internal Server Error. Recorded by msearch.py in searches.jsonl; the other search kinds and local source search were used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local cohomology dictionary in the flat base-change input to the formal-functions stalk comparison, specifically the source and target section identifications before applying flat cohomology base change. Target affine chart and Leray comparison with common-complex cohomological pullback compatibility.; Natural module/Ext comparisons intertwining the scalar-extension unit; common-complex module/Ext identification for the identity coefficient map on a direct image, before factoring the pullback unit. Coefficient factorization preceding the edge comparison.",
+   "via": [
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomology_transport_coefficient",
+  "statement": "theorem moduleCohomology_transport_coefficient\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Y.Modules) (F : X.Modules)\n    (φ : N ⟶ (pushforward f).obj F) (p : ℕ)\n    (E : ∀ M : Y.Modules,\n      (RingedSpace.moduleCohomology Y.toRingedSpace p).obj M → H (X := Y) M p)\n    (E' : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F → H (X := X) F p)\n    (hnat : ∀ x, E ((pushforward f).obj F)\n      (((RingedSpace.moduleCohomology Y.toRingedSpace p).map φ).hom x) =\n        H.map (X := Y) φ p (E N x))\n    (hedge : ∀ x, E' (moduleCohomologyEdgeMap f F p x) =\n      Sheaf.H.map (coeff (X := X) (Y := Y) (M := (pushforward f).obj F) (N := F)\n        f (𝟙 ((pushforward f).obj F))) p\n        (Sheaf.H.mapFunctor (invImage f) (constIso f).symm\n          ((SheafOfModules.toSheaf Y.ringCatSheaf).obj ((pushforward f).obj F)) p\n          (E ((pushforward f).obj F) x)))\n    (x : (RingedSpace.moduleCohomology Y.toRingedSpace p).obj N) :\n    E' (moduleCohomologyFMap (X := X) (Y := Y) (G := N) (F := F) f φ p x) =\n      Sheaf.H.map (coeff (X := X) (Y := Y) (M := N) (N := F) f φ) p\n        (Sheaf.H.mapFunctor (invImage f) (constIso f).symm\n          ((SheafOfModules.toSheaf Y.ringCatSheaf).obj N) p (E N x))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T165651-L-1811640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T165651-L-1811640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

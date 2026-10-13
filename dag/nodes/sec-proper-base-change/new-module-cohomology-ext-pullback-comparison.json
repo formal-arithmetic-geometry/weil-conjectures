@@ -14,53 +14,30 @@
  ],
  "proof": [
   {
-   "text": "On Y and Y_B construct the comparison using forgotten module injective resolutions, whose terms are acyclic for abelian sections. The same section complex computes both derived-section groups. Identify Ext from the sheafified free abelian representable at the top open with Ext from the constant integer sheaf by the section evaluation at 1. Normalize the comparison in degree zero by this identification; do not independently choose arbitrary natural equivalences on the two schemes.",
+   "text": "Choose the natural comparison families with identity-edge compatibility from the edge theorem.",
    "uses": [
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lem-sc-site-cohomology-right-derived-sections",
-    "lem-sc-module-cohomology-source-comparison"
+    "new-module-cohomology-ext-edge-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For a module morphism use an augmentation-preserving resolution lift on the common section complex. The induced map computes both cohomology functors; two such lifts are homotopic. This establishes naturality of each family E and E prime.",
+   "text": "Apply the proved generic coefficient transport to the base-change unit, using source naturality of E and the edge compatibility. Its Ext formula equals H.baseChangeLinear by definition.",
    "uses": [
-    "lem-sc-module-abelian-zariski-cohomology",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-weil-pbc-homotopic-maps-equal-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the base-change unit N -> (p_Y)_*N_B, use beta and lambda in the defining 01FB diagram. After forgetting modules the same section maps beta and mu compute the abelian h-map. Under the evaluation-at-1 normalization, exact inverse image on Ext followed by the adjoint coefficient map is this abelian h-map. Cancel the invertible cohomology map of mu; independence of the resolution choices gives E prime(N_B)(moduleCohomologyFMap(unit)(x)) = H.baseChangeLinear(E(N)(x)). No flatness is used: only abelian inverse image is exact, not module pullback.",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "new-module-cohomology-coefficient-transport",
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
-  },
-  {
-   "text": "Degree zero is the section unit. Zero modules and the empty scheme give zero section complexes; the same construction applies for the zero ring and for arbitrary, including nonflat, scalar extensions.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "def-weil-pbc-module-cohomology-fmap",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-sc-module-abelian-zariski-cohomology",
-  "lem-sc-module-cohomology-source-comparison",
-  "lem-sc-site-cohomology-right-derived-sections",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-homotopic-maps-equal-cohomology",
-  "lem-weil-pbc-module-cohomology-fmap-functorial"
+  "new-module-cohomology-ext-edge-comparison",
+  "new-module-cohomology-coefficient-transport",
+  "def-pc-flat-cohomology-comparison"
  ],
  "proof_origin": {
-  "by": "P4 following document",
-  "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Lemma 21.12.4, normalized module/abelian comparison; Tag 01FB, Remark 20.14.2, the common resolution diagram; Tag 01F7 and the canonical map in Tag 02KH. Source read on the Stacks website on 2026-10-13."
+  "by": "U3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Remark 20.14.2, factor a coefficient h-map through the direct-image edge map; Tag 03FD comparison."
  },
  "mathlib_searches": [
   {
@@ -170,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T131950-L-4087892",
+  "landing": "20261013T165651-L-1811640",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
