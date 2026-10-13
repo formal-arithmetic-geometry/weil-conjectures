@@ -15,6 +15,9 @@ import Sheaf.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
 import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
 import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorProduct
+import Sheaf.Algebra.Homology.KFlatPullback
 
 /-!
 Canonical adjunction and tensor data are pinned by their characterising equations.
@@ -48,6 +51,8 @@ variable (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
   (hy : ∀ (A A' L L' M M' : D) (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
     (g : A ⟶ J.obj (op L, M)),
     ey A' L' M' (a ≫ g ≫ J.map (b.op, d)) = (a ⊗ₘ b) ≫ ey A L M g ≫ d)
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 include hx hy in
 /-- Transpose evaluation with fixed natural tensor-Hom bijections.
 Source: Stacks, Tag 08I3 (blueprint: lem-pc-global-hom-adjunction). -/
@@ -138,6 +143,8 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
   (h : ∀ (A A' L L' M M' : C) (a : A' ⟶ A) (b : L' ⟶ L) (d : M ⟶ M')
     (g : A ⟶ H.obj (op L, M)),
     e A' L' M' (a ≫ g ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A L M g ≫ d)
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Build the tensor-Hom adjunction from the pinned natural bijections.
 Source: Stacks, Tag 08DJ (blueprint: lem-pc-global-hom-adjunction). -/
 private def tensorAdjunctionCore (L : C) :
@@ -177,6 +184,8 @@ private theorem lerayNaturality {U U' : C} {V V' : D} (u : U ⟶ U') (v : V ⟶ 
 
 end LerayNaturality
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Derived Leray from acyclicity and an exact change of scalar category.
 Source: Stacks, Tag 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
 private theorem lerayCore
@@ -362,6 +371,78 @@ def schemeHomPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) f))
 
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- The localization tensor map computes tensor when its first input is K-flat.
+Source: Stacks, Tag 06YH (blueprint: lem-pc-global-hom-adjunction). -/
+private theorem pullbackTensorModelMap_isIso (X : Scheme.{u})
+    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : P.IsKFlat) : IsIso (pullbackTensorModelMap X P N) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let : MonoidalCategory C := SheafOfModules.monoidalCategory X.sheaf
+  let : SymmetricCategory C := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive C := Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed C := Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{u} C :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink.{0, 0, u, u} C
+  have := schemeModule_hasFunctorialFlatResolution X
+  have := DerivedCategory.hasDerivedMonoidalCategory C
+  have hk : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+    rw [HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro N hN
+    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+    have hright : HomotopyCategory.subcategoryAcyclic C
+        ((HomotopyCategory.quotient C (.up ℤ)).obj N ⊗
+          (HomotopyCategory.quotient C (.up ℤ)).obj P) :=
+      (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 (hP N hN)
+    exact ⟨(HomotopyCategory.subcategoryAcyclic C).prop_of_iso (β_ _ _) hright, hright⟩
+  have hq := DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+    (DerivedCategory.Qh (C := C)) (HomotopyCategory.quasiIso C (.up ℤ))
+    ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+    ((HomotopyCategory.quotient C (.up ℤ)).obj N) hk
+  have : IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Qh (C := C))
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj N)) := hq
+  change IsIso (_ ≫ _ ≫ _)
+  change IsIso (_ ≫ (_ ≫ _) ≫ _)
+  infer_instance
+
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
+/-- Any universal pullback counit computes pullback on K-flat complexes.
+Source: Stacks, Tag 079U (blueprint: lem-pc-global-hom-adjunction). -/
+private theorem pullbackCounit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hP : P.IsKFlat) :
+    IsIso ((SingleComplexBaseChange.counit f).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
+    Classical.choose_spec (exists_derivedPullback f)
+  have h : E = Scheme.Modules.tensorPullback f :=
+    CategoryTheory.Functor.ext hE (fun _ _ a ↦ hEmap a)
+  subst E
+  have hL' : (derivedPullback f).IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso _ (.up ℤ)) := hL
+  have hε := (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition)).1 f
+  let δ := (derivedPullback f).leftDerivedLift ε
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (derivedPullback f)
+    (SingleComplexBaseChange.counit f)
+  have : IsIso δ := (Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift
+    (derivedPullback f) ε (HomotopyCategory.quasiIso _ (.up ℤ))
+    (derivedPullback f) (SingleComplexBaseChange.counit f)).mp hε
+  have := hK P hP
+  have fac := (derivedPullback f).leftDerived_fac_app ε
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (derivedPullback f)
+    (SingleComplexBaseChange.counit f) ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+  rw [← fac]
+  change IsIso (δ.app _ ≫ _)
+  infer_instance
+
+set_option linter.unusedSectionVars false in
+-- Retain the existing ModuleCat derived-category binder in the public signature.
 /-- The canonical comparison of def-pc-derived-pullback-tensor-comparison is an iso.
 Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-adjunction).
 Proof: choose K-flat representatives. The canonical module tensor comparison is
@@ -373,7 +454,71 @@ theorem exists_schemeHomTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅
       (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X),
       IsCanonicalPullbackTensorComparison f (fun K L ↦ t.hom.app (K, L)) := by
-  sorry
+  obtain ⟨τ, hτ⟩ := exists_canonicalPullbackTensorComparison f
+  let c : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ⟶
+      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
+    { app := fun Z ↦ τ Z.1 Z.2
+      naturality := fun Z Z' a ↦ hτ.2 Z.1 Z'.1 Z.2 Z'.2 a.1 a.2 }
+  have hflat (P N : CochainComplex
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (hP : P.IsKFlat) (hN : N.IsKFlat) :
+      IsIso (c.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) := by
+    let : MonoidalCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+      SheafOfModules.monoidalCategory Y.sheaf
+    let : MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+      SheafOfModules.monoidalCategory X.sheaf
+    obtain ⟨φ, _, hφ⟩ := hτ.1 P N hP hN
+    have htot := CochainComplex.IsKFlat.mapBifunctor
+      (X := Y.toRingedSpace) P N hP hN
+    have hpull : CochainComplex.IsKFlat (R := X.sheaf)
+        (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P) := by
+      convert CochainComplex.isKFlat_pullback f.base X.sheaf Y.sheaf ⟨f.c⟩ P hP using 1
+      rfl
+    have := pullbackTensorModelMap_isIso Y P N hP
+    have := pullbackTensorModelMap_isIso X
+      (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P)
+      (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj N) hpull
+    have := pullbackCounit_isIso f P hP
+    have := pullbackCounit_isIso f N hN
+    have := pullbackCounit_isIso f (pullbackTensorTotal Y P N) htot
+    have hi : IsIso (τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) ≫
+        ((SingleComplexBaseChange.counit f).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+        (SingleComplexBaseChange.counit f).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+        pullbackTensorModelMap X
+          (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P)
+          (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj N)) := by
+      rw [← hφ]
+      infer_instance
+    change IsIso (τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N))
+    exact IsIso.of_isIso_comp_right _
+      (((SingleComplexBaseChange.counit f).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ
+        (SingleComplexBaseChange.counit f).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj N)) ≫
+        pullbackTensorModelMap X
+          (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj P)
+          (((Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ)).obj N))
+  have hc (Z : schemeDerivedCategory Y × schemeDerivedCategory Y) : IsIso (c.app Z) := by
+    let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolution (R := Y.sheaf) (Q.objPreimage Z.1)
+    obtain ⟨N, t, hN, _, ht, _⟩ :=
+      CochainComplex.exists_isKFlatResolution (R := Y.sheaf) (Q.objPreimage Z.2)
+    have := hs
+    have := ht
+    let eP : Q.obj P ≅ Z.1 := asIso (Q.map s) ≪≫ Q.objObjPreimageIso Z.1
+    let eN : Q.obj N ≅ Z.2 := asIso (Q.map t) ≪≫ Q.objObjPreimageIso Z.2
+    let e : (Q.obj P, Q.obj N) ≅ Z :=
+      { hom := (eP.hom, eN.hom)
+        inv := (eP.inv, eN.inv)
+        hom_inv_id := by ext <;> simp
+        inv_hom_id := by ext <;> simp }
+    exact (NatTrans.isIso_app_iff_of_iso c e).mp (hflat P N hP hN)
+  have (Z : schemeDerivedCategory Y × schemeDerivedCategory Y) := hc Z
+  exact ⟨NatIso.ofComponents (fun Z ↦ asIso (c.app Z))
+    (fun a ↦ c.naturality a), hτ⟩
 
 /-- The canonical derived pullback tensor iso, specified on K-flat representatives.
 Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-adjunction). -/
@@ -462,6 +607,8 @@ def schemeGlobalHomAdjunctionMap {X Y : Scheme.{u}}
   schemeGlobalHomDirectImageMap f P.obj (a.obj K).obj ≫
     (schemeGlobalDerivedHom Y).map ((𝟙 _).op, (adj.counit.app K).hom)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The counit-induced global Hom adjunction is invertible, naturally in P and K.
 Source: Stacks, Tag 0B6I (blueprint: lem-pc-global-hom-adjunction).
 Proof:

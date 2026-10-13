@@ -26,7 +26,23 @@
  ],
  "proof": [
   {
-   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. No K-flat construction is reproved here: existence of the canonical pullback tensor isomorphism remains the existing named theorem hole of this module.",
+   "text": "Obtain the natural comparison family from exists_canonicalPullbackTensorComparison. On K-flat representatives P,N use its characterising chain-isomorphism equation. The localization tensor model map is invertible by the upstream derived-monoidal K-flat counit theorem; convert sheaf K-flatness to categorical K-flatness using the acyclicity criterion and symmetry. Any universal pullback counit is invertible on K-flat complexes: compare it with the counit supplied by exists_derivedPullback using the universal left-derived lift, which is invertible by uniqueness. Tensor of P,N is K-flat, and pullback of P is K-flat. Therefore both sides of the characterising equation are composites of isomorphisms except for the comparison itself. Cancel the invertible right factor to prove the comparison invertible at (Q(P),Q(N)). For each arbitrary derived object choose a complex representative and a K-flat resolution and localize its quasi-isomorphism. Pair the resulting representative isomorphisms and apply naturality to transport component invertibility. Package the family as NatIso.ofComponents. Its hom components are definitionally the original family, so the canonical predicate is unchanged. The private helpers pullbackTensorModelMap_isIso and pullbackCounit_isIso and exists_schemeHomTensorPullbackIso implement this argument without any new hole.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, proof on K-flat representatives; Tags 06YH, 079R and 06YC"
+   }
+  },
+  {
+   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. Use the canonical pullback tensor isomorphism constructed in the preceding step; no new assumptions are introduced.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection",
     "def-pc-derived-pullback-tensor-comparison",
@@ -67,8 +83,13 @@
   }
  ],
  "proof_deps": [
-  "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-tensor-product",
+  "def-pc-canonical-derived-tensor-hom-bijection",
   "def-pc-derived-base-change-map",
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-qcqs-sheaf-rhom-adjunction",
@@ -80,7 +101,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3"
+  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; Leray reduction via global-sections acyclicity implemented and second-read by G3; canonical tensor-isomorphism proof on K-flat pairs and naturality transport implemented by V2, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -178,13 +199,13 @@
   "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
+  "reviewer": "X-d0de8",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T184301-L-4003760",
+  "landing": "20261013T002358-L-2377058",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and three direct importers compiled; declarations, Challenge.lean, node metadata, report, and axioms matched the stage-3 brief."
  }
 }
