@@ -1,0 +1,130 @@
+{
+ "id": "lem-ag-lie-bracket-add-right",
+ "kind": "statement",
+ "title": "The mixed-commutator bracket is additive in its second argument",
+ "statement": "Let S be an arbitrary scheme and G an arbitrary group object in schemes over S. Let Lie(G) be the dual of its identity cotangent module, with the mixed-commutator bracket defined by infBracket and transported by lieEquiv in WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket. For all x,y,z in Lie(G), ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆. There are no field, affine, smoothness, characteristic or nonemptiness hypotheses.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Original LieRing instance docstring: commutator of derivations of the structure sheaf; blueprint sk-d-tangent. Detailed coefficient argument written by Q2."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Put v = (lieEquiv G).symm x. Base change v along G → S and right-multiply the\nuniversal point of G by this infinitesimal point. The resulting automorphism of G[ε]\nreduces to the identity, so on every open its comorphism has the unique form\nf ↦ f + ε D_x(f). Multiplicativity makes D_x a relative derivation; restriction of\ncomorphisms makes these derivations agree on overlaps. Associativity of multiplication\nmakes D_x left invariant. Evaluation at the identity recovers x, so x ↦ D_x is\ninjective. The product of two such automorphisms with the same ε has coefficient\nD_x + D_y, since ε² = 0. The identity has coefficient zero. Together with\nlieEquiv_mul and lieEquiv_one this gives D_(x+y) = D_x + D_y and D_0 = 0.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For independent ε and δ the pullback of right multiplication by the commutator is\n(1+εD_x)(1+δD_y)(1-εD_x)(1-δD_y)\n= 1 + εδ(D_x D_y - D_y D_x). Here the derivations act coefficientwise, killing\nε and δ; the inverse formulas use ε² = δ² = 0. The definition of infBracket and\nmixedEquiv, followed by evaluation at the identity, therefore identifies\nD_⁅x,y⁆ with D_x D_y - D_y D_x. These constructions are on the structure sheaf:\nno affineness, smoothness, or characteristic restriction is used.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Now expand D_x(D_y + D_z) - (D_y + D_z)D_x. Distributivity gives\n(D_x D_y - D_y D_x) + (D_x D_z - D_z D_x), which is the derivation attached to\nthe right-hand side. Injectivity of the invariant extension proves the equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2 worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "place": "Expanded proof of the original LieRing field; coefficient and invariant-derivation argument, not a quotation from the matrix-only blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lie_self|leibniz_lie|add_lie|lie_add",
+   "digest": "9972977ba4d4a6f0",
+   "date": "2026-10-13",
+   "results": "Generic Lie-ring axioms and derivation instances; no arbitrary group-scheme mixed-bracket proof.",
+   "verdict": "no exact match for this group-scheme bracket"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The commutator bracket on infinitesimal points of a group scheme is biadditive alternating and satisfies the Jacobi identity",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, ⁅_, _⁆",
+   "digest": "9516dcbeb13dedac",
+   "date": "2026-10-13",
+   "results": "Derivation.commutator_apply gives the algebraic formula; left invariant hit is for manifolds, not schemes.",
+   "verdict": "no exact match for this group-scheme bracket"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group scheme Lie algebra defined by dual number commutators satisfies biadditivity alternation and Jacobi over arbitrary base scheme",
+   "digest": "aab1680b7b264232",
+   "date": "2026-10-13",
+   "results": "LieAlgebra.ofAssociativeAlgebra and manifold Lie algebras; no scheme/invariant-derivation comparison.",
+   "verdict": "no exact match for this group-scheme bracket"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: bracket XY-YX gives a Lie algebra; general-base obligation of the adopted source module, field lie_add",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.lieBracket_add_right",
+  "statement": "theorem lieBracket_add_right (x y z : Lie G) :\n    ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-31d79",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T022424-L-3217454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-31d79",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T022424-L-3217454",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with the baseline, four obligation nodes, change record, report, and earlier return; delivery and all three direct importers compile cleanly, signatures agree, and axiom probes show only permitted dependencies."
+ }
+}
