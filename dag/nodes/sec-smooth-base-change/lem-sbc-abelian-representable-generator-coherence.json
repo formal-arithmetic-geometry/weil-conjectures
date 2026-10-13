@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-abelian-representable-generator-coherence",
+ "kind": "statement",
+ "title": "Naturality of the abelian representable generator",
+ "statement": "For h:Y→X, W,V in X.Etale and v:V→W, let g:Y×_X V→Y×_X W be its base change and let i:(r_V)* ≅ (r_W)* ⋙ g* be upperStarComp, where r_W and r_V are the projections to Y. The generator defined in [def-sbc-abelian-representable-cohomology-map] satisfies generator(h,V) ≫ (r_V)*.map(h*.map(Z[v])) ≫ i.hom.app(h*Z[W]) = (upperStarConstantSheafIso(g)).inv.app(ULift Z) ≫ g*.map(generator(h,W)). This is an equality of morphisms from the constant abelian sheaf ULift Z on Y×_X V to g*(r_W)*(h*Z[W]), for arbitrary schemes and arbitrary h; no open immersion assumption on W or V is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Lemma 59.51.6, restriction on the cohomology presheaf; explicit free-sheaf and inverse-image adjunction calculation by X3"
+ },
+ "stmt_deps": [
+  "def-sbc-abelian-representable-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify the constant-sheaf adjunct of the generator with the defining section: invert H.equiv₀ and Ext.addEquiv₀, then evaluate the free ULift Z homomorphism on 1. Write this section as restriction of the inverse-image unit along the final-object identification followed by pullback symmetry.",
+   "uses": [
+    "def-sbc-abelian-representable-cohomology-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary etale objects r:T→Y and s:S→Y with s=j≫r, compare the inverse-image units with localization restriction. Apply unit_leftAdjointUniq and the composition-unit equation, then identify the iterated-pullback arrows by their two projections. Combining this identity with the constant-section adjunct pullback theorem expresses the adjunct of j* m, transported by upperStarComp inverse, as restriction of the section for m.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-constant-section-adjunct-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the sheafification, free-abelian, and ULift Yoneda adjunctions identifies precomposition by the free-representable map of v with section restriction. Apply inverse-image unit naturality to deduce naturality of the section defining the generator. The two arrows into the base-changed etale object agree after both pullback projections, using pullback symmetry and the pullback.map projection equations.",
+   "uses": [
+    "def-sbc-abelian-representable-cohomology-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the inverse upperStarComp component, apply the constant-sheaf hom adjunction and the free-Z hom equivalence injectively, and use the preceding section identities. Naturality of the localization restriction isomorphism and its inverse-hom cancellation finish the equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-abelian-representable-cohomology-map",
+  "lem-weil-pbc-constant-section-adjunct-pullback",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker X3",
+  "document": "Sheaf.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence",
+  "place": "Complete Lean proof from adjunction naturality, terminal-object restriction, and pullback universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The universal generator of a pulled back free abelian representable sheaf is natural under morphisms of etale objects",
+   "results": "Eight module pullback/free results; none identifies the small-etale universal generator.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "Generic unit naturality found and used; no generator identity.",
+   "date": "2026-10-14",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianRepresentableGenerator|sectionsEquiv_precomp",
+   "results": "No Mathlib match. Project search found private adjunction calculations for nested opens, generalized here to arbitrary etale objects.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of the universal section of a free abelian representable sheaf under etale base change",
+   "results": "Service unavailable: Internal Server Error; recorded by msearch.py. Other search kinds and project grep used instead.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianRepresentableCohomologyMapNaturality",
+  "date": "2026-10-14",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-abelian-representable-cohomology-map-naturality",
+   "place": "proof step 1: naturality of the universal section",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianRepresentableGeneratorCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianRepresentableGenerator_coherence",
+  "statement": "theorem abelianRepresentableGenerator_coherence {X Y : Scheme.{u}}\n    (h : Y ⟶ X) (W V : X.Etale) (v : V ⟶ W) :\n    let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp)\n    let i := upperStarComp AddCommGrpCat.{u + 1} g (pullback.fst h W.hom)\n      (pullback.fst h V.hom) (by simp [g])\n    abelianRepresentableGenerator h V ≫\n        (upperStar AddCommGrpCat.{u + 1} (pullback.fst h V.hom)).map\n          ((upperStar AddCommGrpCat.{u + 1} h).map ((abelianRepresentable X).map v)) ≫\n        i.hom.app ((upperStar AddCommGrpCat.{u + 1} h).obj\n          ((abelianRepresentable X).obj W)) =\n      (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).inv.app\n          (AddCommGrpCat.of (ULift ℤ)) ≫\n        (upperStar AddCommGrpCat.{u + 1} g).map (abelianRepresentableGenerator h W)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T234525-L-2168482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T234525-L-2168482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
