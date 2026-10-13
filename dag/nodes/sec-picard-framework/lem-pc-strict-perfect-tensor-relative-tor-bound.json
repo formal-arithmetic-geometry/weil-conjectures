@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-strict-perfect-tensor-relative-tor-bound",
+ "kind": "statement",
+ "title": "Relative Tor bound on one strictly perfect chart",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], and $G,K$ complexes of $\\mathcal O_X$-modules. Suppose $QK\\cong E\\otimes^{\\mathbf L}QG$ [def-pc-scheme-derived-tensor-structure]. Let $U\\subseteq X$ be open and $L$ a strictly perfect complex on the localized open site of $U$ [def-pc-perfect-complex], with $E|_U\\cong QL$. Let $a,b,c,d\\in\\mathbf Z$ bound the terms of $L$ and $G$ in $[a,b]$ and $[c,d]$, and assume every term of $G$ is flat over $S$ [def-pc-scheme-module-flat-over]. Put $R=f^{-1}\\mathcal O_S$. For every K-flat complex $P$ of $R$-modules [def-pc-kflat-complex] and quasi-isomorphism $q:P\\to K|_R$ [def-pc-quasi-iso-modules], every $R$-module sheaf $F$, every integer $i<a+c$ or $i>b+d$, and every open $V\\subseteq U$, the module of sections over $V$ of $H^i(\\operatorname{Tot}(P\\otimes_R F[0]))$ [def-pc-tensor-complex-sheaves] is zero. No compactness or quasi-coherence is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "On the specified open U, the given isomorphism identifies E with the bounded strictly perfect complex L. Its terms are direct summands of finite free modules, hence flat over O_U. Bounded-above flat complexes are K-flat. Thus L tensor G|_U computes the restriction of the derived tensor. The total degree n is the sum over p+q=n; outside [a+c,b+d], either p is outside [a,b] or q is outside [c,d], and every summand is zero.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-closure",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+   }
+  },
+  {
+   "text": "Fix x in U and an affine neighbourhood V of f(x). Affine neighbourhoods W of x contained in f^{-1}V form a filtered neighbourhood basis. The hypothesis makes G^q(W) flat over O_S(V). Their filtered colimit is the stalk G^q_x and is flat over O_S(V). The canonical O_{S,f(x)} action restricts to this action, and O_{S,f(x)} is a localization of O_S(V); the localization flatness criterion therefore gives flatness over O_{S,f(x)}. This is the stalk of the inverse-image base ring. Tensoring with L^p gives a retract of a finite direct sum of G^q|_U, so the total model is termwise flat over the inverse-image base ring. Its boundedness makes it K-flat over that ring.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+   }
+  },
+  {
+   "text": "Exact open restriction commutes with the direct-sum total tensor and its cohomology and preserves K-flatness (apply the ringed-space pullback preservation theorem to the open inclusion with the inverse-image base ring). The given global quasi-isomorphism q and representative isomorphism eK identify P|_U with the local bounded relatively flat model in the derived category of base-ring modules. Independence of K-flat resolutions identifies their derived tensors with every F|_U. The latter has zero terms, hence zero cohomology, outside [a+c,b+d]. The restriction to U of the global homology sheaf is therefore zero. Its sections on every V contained in U vanish. Empty opens are vacuous; reversed intervals force one of the bounded factors to vanish and give the same conclusion.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-quasi-iso-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0DJQ, proof, local relative Tor verification; Tag 08CI, implication (2) to (1); Tag 08CG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-closure",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 0DJQ and 08CI, local tensor argument expanded to the fixed global K-flat model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local strict perfect tensor relative flat complex Tor amplitude sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a K flat resolution of a tensor with locally strictly perfect complex vanishes on an open outside sum of degree bounds",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, CochainComplex.IsKProjective, CochainComplex.IsKInjective",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|strictlyPerfect|relativeTor",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTensorFiniteRelativeTor",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian proper-support perfect direct image argument: local strict-perfect tensor model and its relative Tor bound, expanded from 0DJQ",
+   "via": [
+    "lem-pc-perfect-tensor-finite-relative-tor",
+    "lem-pc-noetherian-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectTensorRelativeTorBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectTensorRelativeTorBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictPerfect_tensor_relativeTor_bound",
+  "statement": "theorem strictPerfect_tensor_relativeTor_bound\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X)\n    (G K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (eK : DerivedCategory.Q.obj K ≅ E ⊗ DerivedCategory.Q.obj G)\n    (U : X.Opens)\n    (L : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hL : IsStrictlyPerfect X U L)\n    (eL : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj L)\n    (a b c d : ℤ)\n    (hLb : ∀ n : ℤ, n < a ∨ b < n → IsZero (L.X n))\n    (hGb : ∀ n : ℤ, n < c ∨ d < n → IsZero (G.X n))\n    (hGflat : ∀ n : ℤ, Modules.IsFlatOver (G.X n) f) :\n    let R := TopCat.Sheaf.inverseImageRing f.base S.sheaf\n    let A := (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj R\n    ∀ (P : CochainComplex (SheafOfModules.{u} A) ℤ),\n      CochainComplex.IsKFlat (R := R) P →\n      ∀ q : P ⟶ ((SheafOfModules.restrictScalars\n          ((sheafCompose (Opens.grothendieckTopology X)\n            (forget₂ CommRingCat.{u} RingCat.{u})).map\n              (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K,\n        QuasiIso q → ∀ (F : SheafOfModules.{u} A) (i : ℤ),\n          i < a + c ∨ b + d < i → ∀ (V : X.Opens), V ≤ U →\n            IsZero ((SheafOfModules.evaluation A (Opposite.op V)).obj\n              ((CochainComplex.mapBifunctor P\n                ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n                (@curriedTensor _ _ (SheafOfModules.monoidalCategory R))).homology i))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T072338-L-1114868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261013T072338-L-1114868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
