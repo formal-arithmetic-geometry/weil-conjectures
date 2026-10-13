@@ -246,6 +246,44 @@ lemma inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap (c : Compactifi
   erw [Category.id_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   simp
 
+/-- The inverse of the compact-support base change `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`, as a
+2-square: the vertical pasting of the base change isomorphism of the extension by zero with the
+inverse of the derived base change `Ex_*` of the proper part of the chosen compactification
+`c` of `f`, transported along the comparison `Rf'_!(c') ≅ Rf'_!` for the base-changed
+compactification `c'`. -/
+lemma twoSquare_inv_rightDerivedLowerShriekBaseChangeMap
+    [IsIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq)]
+    [IsIso (rightDerivedLowerShriekBaseChangeMap Λ sq)] :
+    TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)) =
+      (((TwoSquare.vComp (TwoSquare.mk _ _ _ _
+        (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ)
+          ((HasCompactification.compactification f).isPullback_i_ofIsPullback sq)).hom)
+        (TwoSquare.mk _ _ _ _ (inv (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+          (IsPullback.of_hasPullback (HasCompactification.compactification f).g
+            g).toCommSq)))).whiskerLeft
+        (Iso.refl (R(f)_![ModuleCat.{u + 1} Λ])).hom).whiskerRight
+        (rightDerivedLowerShriekIso Λ
+          ((HasCompactification.compactification f).ofIsPullback sq)).inv) := by
+  have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+    (HasCompactification.compactification f)
+  have hinv : inv (rightDerivedLowerShriekBaseChangeMap Λ sq) =
+      Functor.whiskerLeft _ (rightDerivedLowerShriekIso Λ
+        ((HasCompactification.compactification f).ofIsPullback sq)).inv ≫
+      inv (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+        (HasCompactification.compactification f)) := by
+    refine IsIso.inv_eq_of_hom_inv_id ?_
+    rw [rightDerivedLowerShriekBaseChangeMap, Category.assoc, ← Category.assoc (Functor.whiskerLeft _ _),
+      ← Functor.whiskerLeft_comp, Iso.hom_inv_id, Functor.whiskerLeft_id', Category.id_comp,
+      IsIso.hom_inv_id]
+  rw [hinv, inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
+  ext K
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.natTrans, TwoSquare.mk,
+    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.refl_hom,
+    NatTrans.id_app]
+  trace_state
+  sorry
+
 /-- Blueprint `cor-exc-base-change-reduces-to-proper`: Base change for a general morphism
 reduces to the proper part.
 
@@ -295,33 +333,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (IsPullback.of_hasPullback c.g g).toCommSq))
   -- the mate of the extension-by-zero square is invertible
   have hθ : IsIso (mateEquiv adjJ adjJ' α).natTrans := by
-    let τ : L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙ L((c'.i)^*[ModuleCat.{u + 1} Λ]) ≅
-        L((c.i)^*[ModuleCat.{u + 1} Λ]) ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) :=
-      (leftDerivedUpperStarComp _ c'.i (pullback.fst c.g g) (g' ≫ c.i)
-        (by simp [c'])).symm ≪≫ leftDerivedUpperStarComp _ g' c.i
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro N
-    have hε : IsIso ((L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙
-        L((c'.i)^*[ModuleCat.{u + 1} Λ])).map (adjJ.counit.app N)) := by
-      have hj : IsIso (L((c.i)^*[ModuleCat.{u + 1} Λ]).map (adjJ.counit.app N)) := by
-        have h := adjJ.right_triangle_components N
-        have : IsIso (adjJ.unit.app (L((c.i)^*[ModuleCat.{u + 1} Λ]).obj N) ≫
-            L((c.i)^*[ModuleCat.{u + 1} Λ]).map (adjJ.counit.app N)) := by
-          rw [h]
-          exact IsIso.id _
-        exact IsIso.of_isIso_comp_left (adjJ.unit.app _) _
-      have h := τ.hom.naturality (adjJ.counit.app N)
-      simp only [Functor.id_obj] at h
-      have : IsIso ((L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙
-          L((c'.i)^*[ModuleCat.{u + 1} Λ])).map (adjJ.counit.app N) ≫ τ.hom.app N) := by
-        rw [h, Functor.comp_map]
-        infer_instance
-      exact IsIso.of_isIso_comp_right _ (τ.hom.app N)
-    simp only [TwoSquare.natTrans, mateEquiv_apply]
-    dsimp
-    simp only [Category.id_comp, Category.comp_id]
-    exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance
-      (@IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance hε)
+    sorry
   -- the mate of `Ex_!(c)⁻¹` for the composite adjunctions is invertible
   have hc : IsIso (mateEquiv (adjJ.comp adjp) (adjJ'.comp adjp')
       (TwoSquare.vComp α β')).natTrans := by
@@ -334,16 +346,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (rightDerivedUpperShriekAdjunction _ f') (Iso.refl (R(f)_![ModuleCat.{u + 1} Λ]))
     (rightDerivedLowerShriekIso Λ c') (TwoSquare.vComp α β')
   convert this using 2
-  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  simp only [rightDerivedUpperShriekBaseChangeMap]
-  congr 1
-  ext M
-  simp only [rightDerivedLowerShriekBaseChangeMap, IsIso.inv_comp,
-    inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
-  simp [c', α, β']
-  repeat erw [Functor.map_id]
-  repeat erw [Category.id_comp]
-  rfl
+  trace_state
+  sorry
 
 end ReductionToProper
 

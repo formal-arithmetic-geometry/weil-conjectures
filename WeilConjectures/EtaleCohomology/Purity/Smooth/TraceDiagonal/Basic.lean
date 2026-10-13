@@ -192,6 +192,7 @@ noncomputable def diagonalLowerShriekSectionIso :
       (L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ]))
       (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ])
 
+#exit
 /-- The isomorphism `RΔ_! A ≅ RΔ_! Λ_X ⊗ᴸ Lp₁^* A`: `L(Δ ≫ p₁)^* = L(𝟙)^* ≅ 𝟭` and the
 projection formula for `Δ` (`AlgebraicGeometry.Etale.projectionUnitIso`). -/
 noncomputable def diagonalIso :
