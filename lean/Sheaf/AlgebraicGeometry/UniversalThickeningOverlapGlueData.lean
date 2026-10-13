@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
 public import Mathlib.AlgebraicGeometry.Gluing
-import Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces
+import Sheaf.AlgebraicGeometry.UniversalThickeningPairwiseOverlaps
+import Sheaf.AlgebraicGeometry.UniversalThickeningOverlapCocycle
 
 /-!
 # Overlap glue data for universal first order thickenings
@@ -67,6 +68,57 @@ theorem universalFirstOrderThickening_overlapGlueData
           pullback.snd _ _ ≫ i l ≫ (b l).hom) ∧
       ∀ k l (z : C.X l),
         (b l).hom (i l z) ∈ Set.range (D.f (a l) (a k)) ↔
-          C.f l z ∈ Set.range (C.f k) := by sorry
+          C.f l z ∈ Set.range (C.f k) := by
+  classical
+  obtain ⟨V, f, s, hf, hfdiag, Hs, hsf, hrange⟩ :=
+    universalFirstOrderThickening_pairwiseOverlaps h C Z' i h' H
+  have lift (k l : C.I₀) : ∃! t : V (k, l) ⟶ V (l, k),
+      t ≫ (f l k ≫ h' l) = f k l ≫ h' k ∧
+        s k l ≫ t = (pullbackSymmetry (C.f k) (C.f l)).hom ≫ s l k := by
+    apply (Hs l k).2.2 (s k l) (f k l ≫ h' k)
+      (pullbackSymmetry (C.f k) (C.f l)).hom (Hs k l).1
+    rw [(Hs k l).2.1]
+    simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
+    rw [pullback.condition]
+  let t : ∀ k l, V (k, l) ⟶ V (l, k) := fun k l ↦ (lift k l).exists.choose
+  have ht (k l : C.I₀) := (lift k l).exists.choose_spec
+  have htbase (k l : C.I₀) : t k l ≫ f l k ≫ h' l = f k l ≫ h' k := (ht k l).1
+  have htsource (k l : C.I₀) :
+      s k l ≫ t k l = (pullbackSymmetry (C.f k) (C.f l)).hom ≫ s l k := (ht k l).2
+  have ht_id (k : C.I₀) : t k k = 𝟙 _ := by
+    apply (lift k k).unique
+    · exact ht k k
+    · simp only [Category.id_comp, Category.comp_id,
+        pullbackSymmetry_hom_of_mono_eq, and_self]
+  obtain ⟨t', ht_fac, ht_cocycle⟩ :=
+    universalFirstOrderThickening_overlapCocycle h C Z' i h' V f s hf Hs hsf hrange
+      t htbase htsource
+  have (k l : C.I₀) : IsOpenImmersion (f k l) := hf k l
+  let D : Scheme.GlueData.{u} :=
+    { J := C.I₀
+      U := Z'
+      V := V
+      f := f
+      f_id := hfdiag
+      t := t
+      t_id := ht_id
+      t' := t'
+      t_fac := ht_fac
+      cocycle := ht_cocycle
+      f_open := hf }
+  refine ⟨D, Equiv.refl _, fun k ↦ Iso.refl _, ?_, ?_, ?_⟩
+  · intro k l
+    change f k l ≫ 𝟙 _ ≫ h' k = t k l ≫ f l k ≫ 𝟙 _ ≫ h' l
+    simpa only [Category.id_comp] using (htbase k l).symm
+  · intro k l
+    refine ⟨s k l, ?_, ?_⟩
+    · change s k l ≫ f k l = pullback.fst _ _ ≫ i k ≫ 𝟙 _
+      simpa only [Category.comp_id] using hsf k l
+    · change s k l ≫ t k l ≫ f l k ≫ 𝟙 _ = pullback.snd _ _ ≫ i l ≫ 𝟙 _
+      simp only [Category.comp_id, ← Category.assoc, htsource]
+      rw [Category.assoc, hsf]
+      simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
+  · intro k l z
+    exact hrange l k z
 
 end AlgebraicGeometry

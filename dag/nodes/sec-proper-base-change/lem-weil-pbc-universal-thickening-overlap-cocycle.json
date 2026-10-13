@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-universal-thickening-overlap-cocycle",
+ "kind": "statement",
+ "title": "Cocycle of canonical universal overlap transitions",
+ "statement": "Let h:Z→X, C an open cover of Z, and Z'_k schemes with i_k:C_k→Z'_k and h'_k:Z'_k→X [def-weil-pbc-scheme-conventions, def-weil-open-immersion]. Suppose V(k,l) are schemes with open immersions f(k,l):V(k,l)→Z'_k and maps s(k,l):C_k ×_Z C_l→V(k,l) [def-pc-fibre-product]. Assume s(k,l) is a universal first order thickening [def-weil-pbc-universal-first-order-thickening] over X for the first projection followed by C.f k and h, with structure map f(k,l) followed by h'_k. Assume s(k,l) followed by f(k,l) equals the first projection followed by i_k, and i_k(z) belongs to the image of f(k,l) exactly when C.f k(z) belongs to the image of C.f l. Let t(k,l):V(k,l)→V(l,k) commute with structure maps to X and satisfy s(k,l) followed by t(k,l) equals pullback symmetry followed by s(l,k). Then there are t prime(k,l,m):V(k,l) ×_{Z'_k} V(k,m)→V(l,m) ×_{Z'_l} V(l,k) whose second projection is the first projection followed by t(k,l), and whose cyclic threefold composite is the identity. No diagonal-isomorphism or original-chart-universality assumption is required.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+ },
+ "proof": [
+  {
+   "text": "Apply the public open-pieces theorem to s(k,l). Its closed image has an open complement whose inverse image is empty. Uniqueness of the open with empty inverse image identifies the complement with the empty open, so every point of a triple overlap lifts along s(k,l). Source compatibility of t and the range equivalences show that its image after t and f(l,k) lies in the image of f(l,m). Use the open-immersion lift and pullback.lift to define t prime. Its second projection is the required map.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  },
+  {
+   "text": "Let P be the triple overlap and p its first projection. Pull back s(k,l) along p to obtain j:Q→P, a first order thickening by the base-change theorem. Its second projection supplies the source pair coordinates k,l. The source factorization and P pullback equation put the k coordinate in the overlap with m; the range equivalence and open-immersion lift give an m coordinate mapping to the same point of Z. Form source pairs (l,m) and (m,k) by pullback.lift.",
+   "uses": [
+    "lem-weil-pbc-first-order-thickening-base-change",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  },
+  {
+   "text": "For any test map q into a triple overlap whose first projection is a source pair followed by s, the first projection after t prime is the next source pair followed by s. Prove this by composing with its open immersion f, using the pullback equation, t prime second-projection identity, t source compatibility and s factorization; cancel f. Apply this three times to j to show the cyclic composite followed by p extends the same source map as p itself. Each t prime is over X by its second-projection identity and base compatibility of t. Apply the lifting uniqueness for s(k,l) to the test thickening j. It equates the cyclic composite followed by p with p; cancel the monomorphism p to obtain the cocycle.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04F3, proof, the overlap opens and canonical transitions in the paragraphs beginning Choose an affine open covering and By the general remarks; verified at https://stacks.math.columbia.edu/tag/04F3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-thickening-open-pieces",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-first-order-thickening-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, pairwise overlaps and omitted cocycle verification, expanded into the compiled Lean proof by M3; source read at https://stacks.math.columbia.edu/tag/04F3. Repair: use the existing public open-pieces theorem for point lifting; remove the duplicate private firstOrder_surjective proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal first order thickenings restricted to opens and canonical overlap cocycle",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal first order thickening canonical overlap transitions and pairwise restrictions",
+   "results": "TopCat.GlueData.MkCore.cocycle and t_inter; general topological gluing fields, no universal thickening construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*[Oo]verlap|[Tt]hickening.*[Gg]lue in Mathlib and library; range_pullbackFst, isoOfRangeEq, ker_comp_of_isIso",
+   "results": "Mathlib provides open pullback ranges and isoOfRangeEq, not this theorem. Library supplies open-pieces and first-order base-change. No matching blueprint node in whole-blueprint searches for universal thickening or thickening cocycle.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalThickeningOverlapGlueData",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential surjectivity, canonical overlap restrictions and cocycle verification, Tag 04F3; step 3 of the overlap-glue-data proof.",
+   "via": [
+    "lem-weil-pbc-universal-thickening-overlap-glue-data",
+    "lem-weil-pbc-universal-thickening-cartesian-atlas-core",
+    "lem-weil-pbc-universal-thickening-cartesian-atlas",
+    "lem-weil-pbc-universal-first-order-thickening-glued-atlas",
+    "lem-weil-pbc-universal-first-order-thickening-affine-local",
+    "lem-weil-pbc-universal-first-order-thickening-exists-existence",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningOverlapCocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningOverlapCocycle.lean",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_overlapCocycle",
+  "statement": "theorem universalFirstOrderThickening_overlapCocycle\n    {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})\n    (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)\n    (h' : ∀ k, Z' k ⟶ X)\n    (V : C.I₀ × C.I₀ → Scheme.{u}) (f : ∀ k l, V (k, l) ⟶ Z' k)\n    (s : ∀ k l, pullback (C.f k) (C.f l) ⟶ V (k, l))\n    (hf : ∀ k l, IsOpenImmersion (f k l))\n    (Hs : ∀ k l, IsUniversalFirstOrderThickening\n      (pullback.fst (C.f k) (C.f l) ≫ C.f k ≫ h) (s k l) (f k l ≫ h' k))\n    (hsf : ∀ k l, s k l ≫ f k l = pullback.fst _ _ ≫ i k)\n    (hrange : ∀ k l (z : C.X k),\n      i k z ∈ Set.range (f k l) ↔ C.f k z ∈ Set.range (C.f l))\n    (t : ∀ k l, V (k, l) ⟶ V (l, k))\n    (htbase : ∀ k l, t k l ≫ f l k ≫ h' l = f k l ≫ h' k)\n    (htsource : ∀ k l,\n      s k l ≫ t k l = (pullbackSymmetry (C.f k) (C.f l)).hom ≫ s l k) :\n    ∃ t' : ∀ k l m, pullback (f k l) (f k m) ⟶ pullback (f l m) (f l k),\n      (∀ k l m, t' k l m ≫ pullback.snd _ _ = pullback.fst _ _ ≫ t k l) ∧\n      ∀ k l m, t' k l m ≫ t' l m k ≫ t' m k l = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100033-L-2470390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100033-L-2470390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
