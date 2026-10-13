@@ -16,11 +16,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
-import Sheaf.RingTheory.KoszulConormalBasis
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNegative
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheafNonnegative
 
 /-! # Cohomology sheaves of a Koszul-regular immersion
 
@@ -93,6 +90,9 @@ theorem koszulRegularImmersion_extSheaf
         (Scheme.Modules.locallyRankedExteriorTerm
           (SheafOfModules.homObj (R := Z.sheaf)
             ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
-            (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by sorry
+            (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by
+  rcases lt_or_ge q 0 with hq | hq
+  · exact koszulRegularImmersion_extSheaf_negative i r hq
+  · exact koszulRegularImmersion_extSheaf_nonnegative i hregular r hr hq
 
 end AlgebraicGeometry

@@ -10245,3 +10245,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:16 L: merged deliver/J4/Sheaf.AlgebraicGeometry.FiniteFreeResolutionSheafification (stage 3; reviewer PASS; after a return; landing 20261013T001614-L-2330405 (proof); batch 20261013T001612; modules 1; new nodes 0)
 - 00:16 L: merged deliver/M3/Sheaf.RingTheory.FiniteNormalSup (stage 3; reviewer PASS; first push; landing 20261013T001614-L-2330513 (proof); batch 20261013T001612; modules 1; new nodes 0)
 - 00:16 L: merged deliver/M4/Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible (stage 3; reviewer PASS; first push; landing 20261013T001615-L-2330684 (proof); batch 20261013T001612; modules 1; new nodes 0)
+- 00:16 L: merged deliver/R4/Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf (stage 3; reviewer PASS; first push; landing 20261013T001615-L-2330786 (interface); batch 20261013T001612; modules 3; new nodes 2)

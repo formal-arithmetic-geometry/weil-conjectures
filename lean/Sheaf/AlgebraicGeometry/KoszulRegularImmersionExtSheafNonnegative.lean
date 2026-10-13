@@ -1,0 +1,94 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group T2
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import Sheaf.RingTheory.KoszulConormalBasis
+
+@[expose] public section
+
+universe u w
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry
+
+/-- In nonnegative degree, the scalar Ext sheaf is the direct image of the determinant
+on the degree-q rank stratum. This identifies sheaves, without reconstructing a derived object.
+
+Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
+(blueprint: lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative).
+
+Proof:
+1. Near each point of Z choose an affine chart with a Koszul-regular sequence
+   generating the immersion ideal. The quotient-spectrum description of a closed
+   immersion identifies the pushforward structure sheaf with the tilde of A/I.
+   The local Koszul resolution in koszulRegular_closedImmersion_perfect provides
+   its finite free model; extend the chain complex to integer cochain degrees.
+2. Restrict derived internal Hom to this chart using
+   derivedInternalHom_restrict_open. The finite free model computes it by
+   derivedInternalHom_of_boundedAbove_finiteFree, with target O in degree zero.
+   Sheaf Hom of finite free tilde modules agrees with tilde of module Hom.
+3. Apply koszul_conormal_comparison_cohomology to the affine dual Koszul complex.
+   Its only surviving cohomology is the dual conormal determinant in degree equal
+   to the sequence length. The Koszul conormal basis identifies this length with
+   the stalk finrank in hr. Shrink around the chosen point to the constant-rank
+   stratum if necessary. Identify I/I² with the pullback of the immersion ideal,
+   and its dual and determinant with the sheaf Hom and exterior sheaf in the goal.
+4. On overlaps compare on smaller affine standard opens. The normalized affine
+   comparison is independent of generators and commutes with localization, by
+   koszul_conormal_comparison_change_generators and
+   koszul_conormal_comparison_localization. Thus the cohomology-sheaf maps and
+   their inverses agree and glue. Off the closed image the first argument is zero,
+   so derived Hom and all its cohomology vanish. Only the rank-q stratum contributes
+   in the specified nonnegative degree. Clopen direct image
+   extends its determinant by zero, giving precisely locallyRankedExteriorTerm.
+The zero-length sequence gives degree zero; an empty source gives zero everywhere.
+No global boundedness, Noetherian hypothesis, or finite-image condition is used. -/
+theorem koszulRegularImmersion_extSheaf_nonnegative
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧
+      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),
+        Ideal.span (Set.range f) = i.ker.ideal U ∧
+          RingTheory.Sequence.IsKoszulRegular f)
+    (r : LocallyConstant Z ℕ)
+    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)
+      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj
+        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)))
+    {q : ℤ} (hq : 0 ≤ q) :
+    Nonempty ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj
+        ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj
+          (op ((DerivedCategory.singleFunctor
+            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
+              ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),
+            (DerivedCategory.singleFunctor
+              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
+                (SheafOfModules.unit Y.ringCatSheaf))) ≅
+      (Scheme.Modules.pushforward i).obj
+        (Scheme.Modules.locallyRankedExteriorTerm
+          (SheafOfModules.homObj (R := Z.sheaf)
+            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
+            (SheafOfModules.unit Z.ringCatSheaf)) r q)) := by sorry
+
+
+end AlgebraicGeometry
