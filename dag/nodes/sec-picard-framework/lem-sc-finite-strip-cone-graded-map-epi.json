@@ -12,17 +12,29 @@
  },
  "proof": [
   {
-   "text": "Proof: write the ambient cone in degree n as the biproduct of A.X (n+1)\nand the total diagonal coproduct. The given hsteps identifies the current tail\nwith the sum of its supported generators. Suppose two arrows out of its graded\nquotient agree after the displayed map. Precompose their difference with the\nquotient projection, which is epic. On target generators with vertical index p,\nthe difference vanishes by the assumed equality after the row inclusion. Target\ngenerators with vertical index strictly greater than p lie in the next tail and\nare killed by the quotient; these are all remaining target generators. The source\ngenerator survives only when n+1=p and is then the source summand of the row cone;\nwhen n+1>p it lies in the next tail. The source single object is zero in all other\ndegrees. Thus the difference vanishes on every generator of the current tail,\nso the two arrows agree. Unsupported horizontal summands are zero by hsupport.\nThis proves epimorphy also for r=0 and when n-p lies outside the strip.",
+   "text": "The image of the row inclusion and the next filtration step jointly generate the current step: each source or target generator either has vertical index exactly p and factors through the row inclusion, or has strictly greater vertical index and lies in the next step. Conversely, the row factors through the current step and the next step is contained in it.",
    "uses": [
     "def-sc-finite-strip-cone-graded-map"
    ],
    "elementary": false
+  },
+  {
+   "text": "Lift the row into the evaluated current subcomplex via the inverse of its image factor, which is an isomorphism because the evaluated step inclusion is mono. Evaluate the next-subcomplex inclusion and cokernel projection; their composite is zero and the projection is epi.",
+   "uses": [
+    "def-sc-finite-strip-cone-graded-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To prove the row-to-quotient composite epic, take an arrow z from the quotient annihilating it. Both the lifted row and the next-subcomplex inclusion factor through the kernel of q followed by z. The joint-image equality implies that the entire current step factors through that kernel. Cancel its monic inclusion to see q followed by z is zero, then cancel the epic q to get z zero. Apply Preadditive.epi_of_cancel_zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-finite-strip-cone-graded-map"
  ],
- "proof_origin": "R4 stage-3 decomposition of the parent diagonal quotient argument into cancellation on generators and a left inverse.",
+ "proof_origin": "M1 repair of return X-80797: the complete joint-image and cokernel cancellation proof is placed in the existing finiteStripGradedMap_epi, retaining its exact signature and visibility. The false prequotient theorem is no longer used.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -106,15 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-5622a",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T162408-L-1518626",
+  "landing": "20261013T190144-L-3217385",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "HomologicalComplex₂.finiteStripGradedMap_epi"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files compile; original adapted caller fails with the recorded type mismatch, adapted Epi and direct importer IsIso compile, signatures and DAG/report records agree, and axioms are permitted only."
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-sc-finite-strip-cone-graded-map-split-epi",
  "kind": "lemma",
  "title": "Finite-strip row map is epic onto the filtration step",
- "statement": "Let C be an abelian category and K an integer commuting double cochain complex with total [def-sp-double-complex-total]. Let r be natural and assume K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, b:A→Tot(K), and f_p:single(A.X p,0)→K.flip.X p for every integer p. Let F be a decreasing filtration of Cone(b) [def-sp-filtered-complex-subquotients], whose degree-n step p is the join of the source image when p<=n+1 and the target diagonal images indexed by 0<=i<r and p<=n-i. The row inclusion underlying the canonical map [def-sc-finite-strip-cone-graded-map] induces an epimorphism onto the filtration step for all integer p,n.",
+ "statement": "Let C be an abelian category and K an integer commuting double cochain complex with total [def-sp-double-complex-total]. Let r be natural and assume K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, b:A→Tot(K), and f_p:single(A.X p,0)→K.flip.X p for every integer p. Let F be a decreasing filtration of Cone(b) [def-sp-filtered-complex-subquotients], whose degree-n step p is the join of the source image when p<=n+1 and the target diagonal images indexed by 0<=i<r and p<=n-i. The canonical map [def-sc-finite-strip-cone-graded-map], obtained by factoring the row inclusion through the current filtration step and projecting to its quotient by the next step, is an epimorphism onto the graded piece for all integer p,n.",
  "stmt_deps": [
   "def-sc-finite-strip-cone-graded-map"
  ],
@@ -12,17 +12,17 @@
  },
  "proof": [
   {
-   "text": "Identify the image of the row inclusion with the supremum prescribed by hsteps. The induced map from the row cone into the step subobject is therefore epic by the image-subobject characterization of epimorphisms.",
+   "text": "Import FiniteStripConeGradedMapEpi and apply the existing finiteStripGradedMap_epi to the unchanged inputs. This is a compatibility name for the corrected quotient statement, not a second proof. Category and abelian-category binders are explicit in this alias. The complete proof is in the existing theorem module, which no longer imports this module.",
    "uses": [
-    "def-sc-finite-strip-cone-graded-map"
+    "lem-sc-finite-strip-cone-graded-map-epi"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-finite-strip-cone-graded-map"
+  "lem-sc-finite-strip-cone-graded-map-epi"
  ],
- "proof_origin": "Stage-3 decomposition: isolate the image-covering step needed before composing with the quotient map.",
+ "proof_origin": "M1 repair of return X-80797: reuse the existing finiteStripGradedMap_epi; reverse the proof dependency and keep only a compatibility alias for the corrected statement.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,9 +88,9 @@
   "module": "Sheaf.Algebra.Homology.FiniteStripConeGradedMapSplitEpi",
   "file": "lean/Sheaf/Algebra/Homology/FiniteStripConeGradedMapSplitEpi.lean",
   "declaration": "HomologicalComplex₂.finiteStripGradedMap_factorThru_epi",
-  "statement": "theorem finiteStripGradedMap_factorThru_epi\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ) (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) : Epi ((F.complexStep p n).factorThru\n      (finiteStripRowInclusion K A b f p n)\n      (finiteStripRowInclusion_factors K r hsupport A b f F hsteps p n))",
+  "statement": "theorem finiteStripGradedMap_factorThru_epi\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)\n    (hsupport : ∀ i : ℤ, i < 0 ∨ (r : ℤ) ≤ i → IsZero (K.X i))\n    (A : CochainComplex C ℤ) (b : A ⟶ K.total (ComplexShape.up ℤ))\n    (f : ∀ p : ℤ,\n      (HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj (A.X p) ⟶ K.flip.X p)\n    (F : DecreasingFiltration (CochainComplex.mappingCone b))\n    (hsteps : ∀ p n : ℤ, F.complexStep p n =\n      (if p ≤ n + 1 then imageSubobject\n        ((CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)) else ⊥) ⊔\n      (Finset.Ico (0 : ℤ) (r : ℤ)).sup (fun i ↦\n        if p ≤ n - i then imageSubobject\n          (K.ιTotalOrZero (ComplexShape.up ℤ) i (n - i) n ≫\n            (CochainComplex.mappingCone.inr b).f n) else ⊥))\n    (p n : ℤ) : Epi (finiteStripGradedMap K r hsupport A b f F hsteps p n)",
   "branch": "sheaf-dag",
-  "by": "A4",
+  "by": "M1",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -106,11 +106,34 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-5622a",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T162408-L-1518626",
+  "landing": "20261013T190144-L-3217385",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile; original adapted caller fails with the recorded type mismatch, adapted Epi and direct importer IsIso compile, signatures and DAG/report records agree, and axioms are permitted only."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "M1 stage 2",
+  "old_statement": "Let C be an abelian category and K an integer commuting double cochain complex with total [def-sp-double-complex-total]. Let r be natural and assume K.X i is zero for i<0 or r<=i. Let A be an integer cochain complex, b:A→Tot(K), and f_p:single(A.X p,0)→K.flip.X p for every integer p. Let F be a decreasing filtration of Cone(b) [def-sp-filtered-complex-subquotients], whose degree-n step p is the join of the source image when p<=n+1 and the target diagonal images indexed by 0<=i<r and p<=n-i. The row inclusion underlying the canonical map [def-sc-finite-strip-cone-graded-map] induces an epimorphism onto the filtration step for all integer p,n.",
+  "what": "STATEMENT-DISPUTED (original): when p<n+1 the row has zero projection to the source A.X(n+1), while hsteps contains that source image. For K=0, r=0, A concentrated in degree 1, p=n=0, the row is zero and the current step is nonzero. The intended result is epimorphy onto the quotient by the next step. No hypotheses or definitions change.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/0133",
+   "place": "Lemma 12.25.4 second-variable variant; projection onto surviving diagonal quotient"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Identify the image of the row inclusion with the supremum prescribed by hsteps. The induced map from the row cone into the step subobject is therefore epic by the image-subobject characterization of epimorphisms.",
+    "uses": [
+     "def-sc-finite-strip-cone-graded-map"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sc-finite-strip-cone-graded-map"
+  ]
  }
 }
