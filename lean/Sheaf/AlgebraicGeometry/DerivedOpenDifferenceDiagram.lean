@@ -6,6 +6,10 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 /-! # The difference diagram before derived open gluing
 
@@ -27,6 +31,79 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_upper_triangular
+    {C : Type*} [Category C] [Preadditive C] [HasBinaryBiproducts C]
+    {P Q A D : C} (e : P ⟶ A) (a : P ⟶ D) (b : Q ⟶ D)
+    [IsIso e] [IsIso b] : IsIso (Biprod.ofComponents e a 0 b) := by
+  have h : Biprod.ofComponents e a 0 b =
+      biprod.map e b ≫ (Biprod.unipotentUpper (inv e ≫ a)).hom := by
+    ext <;> simp [Biprod.unipotentUpper, Biprod.ofComponents]
+  rw [h]
+  have : IsIso (biprod.map e b) := (biprod.mapIso (asIso e) (asIso b)).isIso_hom
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_lift_from_first
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) [F.Additive] {P Q Z : C} {A : D}
+    (e : F.obj P ⟶ A) (d : P ⊞ Q ⟶ Z) [IsIso e]
+    (h : IsIso (F.map (biprod.inr : Q ⟶ P ⊞ Q) ≫ F.map d)) :
+    IsIso (biprod.lift (F.map biprod.fst ≫ e) (F.map d)) := by
+  have : PreservesFiniteBiproducts F :=
+    Functor.preservesFiniteBiproductsOfAdditive F
+  have : PreservesBinaryBiproduct P Q F :=
+    preservesBinaryBiproduct_of_preservesBiproduct F P Q
+  have : IsIso ((F.mapBiprod P Q).inv ≫
+      biprod.lift (F.map biprod.fst ≫ e) (F.map d)) := by
+    have heq : (F.mapBiprod P Q).inv ≫
+        biprod.lift (F.map biprod.fst ≫ e) (F.map d) =
+        Biprod.ofComponents e (F.map biprod.inl ≫ F.map d) 0
+          (F.map biprod.inr ≫ F.map d) := by
+      ext <;> simp only [Category.assoc, biprod.lift_fst, biprod.lift_snd,
+        Biprod.inl_ofComponents, Biprod.inr_ofComponents, Preadditive.add_comp,
+        biprod.inl_fst, biprod.inr_fst, biprod.inl_snd, biprod.inr_snd,
+        Category.comp_id, comp_zero, zero_comp,
+        add_zero, zero_add, Functor.mapBiprod_inv, biprod.inl_desc_assoc,
+        biprod.inr_desc_assoc, ← F.map_comp_assoc, Functor.map_zero]
+      all_goals first
+      | exact (F.map_id P ▸ Category.id_comp e)
+      | exact (F.map_comp _ _).symm
+    rw [heq]
+    exact isIso_upper_triangular _ _ _
+  exact IsIso.of_isIso_comp_left (F.mapBiprod P Q).inv _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_lift_from_second
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) [F.Additive] {P Q Z : C} {B : D}
+    (e : F.obj Q ⟶ B) (d : P ⊞ Q ⟶ Z) [IsIso e]
+    (h : IsIso (F.map (biprod.inl : P ⟶ P ⊞ Q) ≫ F.map d)) :
+    IsIso (biprod.lift (F.map biprod.snd ≫ e) (F.map d)) := by
+  have h' : IsIso (F.map (biprod.inr : P ⟶ Q ⊞ P) ≫
+      F.map ((biprod.braiding Q P).hom ≫ d)) := by
+    have hb : (biprod.inr : P ⟶ Q ⊞ P) ≫ (biprod.braiding Q P).hom =
+        biprod.inl := by ext <;> simp [biprod.braiding]
+    rw [F.map_comp, ← Category.assoc, ← F.map_comp, hb]
+    exact h
+  have ht := isIso_lift_from_first F e ((biprod.braiding Q P).hom ≫ d) h'
+  have heq : biprod.lift (F.map biprod.fst ≫ e)
+      (F.map ((biprod.braiding Q P).hom ≫ d)) =
+      F.map (biprod.braiding Q P).hom ≫
+        biprod.lift (F.map biprod.snd ≫ e) (F.map d) := by
+    ext
+    · simp only [Category.assoc, biprod.lift_fst, ← F.map_comp_assoc,
+        biprod.braiding_hom, biprod.lift_snd]
+    · simp only [Category.assoc, biprod.lift_snd, F.map_comp]
+  rw [heq] at ht
+  exact IsIso.of_isIso_comp_left (F.map (biprod.braiding Q P).hom) _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- The threefold transported restriction needs additional instance search.
@@ -96,6 +173,112 @@ theorem derived_open_difference_diagram
       IsIso (biprod.lift pU (rU.map d)) ∧
       IsIso (biprod.lift pV (rV.map d)) ∧
       eU.inv.app E ≫ sU.map pU ≫ c.hom - eV.inv.app E ≫ sV.map pV = rW.map d ≫ k := by
-  sorry
+  have _cover := hcover
+  classical
+  dsimp only
+  let adj (O : X.Opens)
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings O.toScheme.toRingedSpace))] :
+      (schemeOpenRestriction X O).mapDerivedCategory ⊣ schemeDerivedDirectImage O.ι := by
+    let a : schemeOpenRestriction X O ⊣
+        RingedSpace.moduleDirectImage O.ι.toLRSHom.toShHom :=
+      (Scheme.Modules.restrictAdjunction O.ι).ofNatIsoLeft
+        (Scheme.Modules.overFunctorEquiv O).symm
+    exact a.mapDerivedCategoryRightDerivedAdjunction
+  have hc (O : X.Opens)
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings O.toScheme.toRingedSpace))] :
+      IsIso (adj O).counit := by
+    let a : schemeOpenRestriction X O ⊣
+        RingedSpace.moduleDirectImage O.ι.toLRSHom.toShHom :=
+      (Scheme.Modules.restrictAdjunction O.ι).ofNatIsoLeft
+        (Scheme.Modules.overFunctorEquiv O).symm
+    have : IsIso a.counit := by
+      dsimp [a, Adjunction.ofNatIsoLeft]
+      infer_instance
+    have : (RingedSpace.moduleDirectImage O.ι.toLRSHom.toShHom).Full :=
+      a.fullyFaithfulROfIsIsoCounit.full
+    have : (RingedSpace.moduleDirectImage O.ι.toLRSHom.toShHom).Faithful :=
+      a.fullyFaithfulROfIsIsoCounit.faithful
+    have : (RingedSpace.moduleDirectImage O.ι.toLRSHom.toShHom).PreservesKInjectiveComplexes :=
+      a.preservesKInjectiveComplexes
+    exact Adjunction.counit_isIso_of_R_fully_faithful (adj O)
+  let adjU := adj U
+  let adjV := adj V
+  let adjW := adj (U ⊓ V)
+  let rU := (schemeOpenRestriction X U).mapDerivedCategory
+  let rV := (schemeOpenRestriction X V).mapDerivedCategory
+  let rW := (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory
+  let sU := (schemeOpenOverlapRestriction X
+    (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory
+  let sV := (schemeOpenOverlapRestriction X
+    (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory
+  let eU := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : U ⊓ V ⟶ U)
+  let eV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : U ⊓ V ⟶ V)
+  let E := (schemeDerivedDirectImage U.ι).obj A ⊞ (schemeDerivedDirectImage V.ι).obj B
+  let εU : rU.obj ((schemeDerivedDirectImage U.ι).obj A) ⟶ A := adjU.counit.app A
+  let εV : rV.obj ((schemeDerivedDirectImage V.ι).obj B) ⟶ B := adjV.counit.app B
+  let pU : rU.obj E ⟶ A := rU.map biprod.fst ≫ εU
+  let pV : rV.obj E ⟶ B := rV.map biprod.snd ≫ εV
+  let t : rW.obj E ⟶ sV.obj B :=
+    eU.inv.app E ≫ sU.map pU ≫ c.hom - eV.inv.app E ≫ sV.map pV
+  let d := (adjW.homEquiv E (sV.obj B)) t
+  let f := (adjW.homEquiv ((schemeDerivedDirectImage U.ι).obj A) (sU.obj A))
+    (eU.inv.app _ ≫ sU.map εU)
+  let g := (adjW.homEquiv ((schemeDerivedDirectImage V.ι).obj B) (sV.obj B))
+    (eV.inv.app _ ≫ sV.map εV)
+  have hf : IsIso (rV.map f) :=
+    derived_open_intersection_mate_isIso X V U (U ⊓ V) (inf_comm U V)
+      (homOfLE inf_le_left) adjU adjW A
+  have hg : IsIso (rU.map g) :=
+    derived_open_intersection_mate_isIso X U V (U ⊓ V) rfl
+      (homOfLE inf_le_right) adjV adjW B
+  have hU : rW.map (biprod.inl : (schemeDerivedDirectImage U.ι).obj A ⟶ E) ≫ t =
+      eU.inv.app _ ≫ sU.map εU ≫ c.hom := by
+    dsimp only [t, pU, pV]
+    rw [Preadditive.comp_sub]
+    rw [eU.inv.naturality_assoc, eV.inv.naturality_assoc]
+    change eU.inv.app _ ≫ sU.map (rU.map biprod.inl) ≫
+        sU.map (rU.map biprod.fst ≫ εU) ≫ c.hom -
+      eV.inv.app _ ≫ sV.map (rV.map biprod.inl) ≫
+        sV.map (rV.map biprod.snd ≫ εV) = _
+    simp only [← sU.map_comp_assoc, ← sV.map_comp, ← rU.map_comp_assoc,
+      ← rV.map_comp_assoc, biprod.inl_fst, biprod.inl_snd,
+      Functor.map_zero, zero_comp, comp_zero, sub_zero]
+    rw [rU.map_id, Category.id_comp]
+  have hV : rW.map (biprod.inr : (schemeDerivedDirectImage V.ι).obj B ⟶ E) ≫ t =
+      -(eV.inv.app _ ≫ sV.map εV) := by
+    dsimp only [t, pU, pV]
+    rw [Preadditive.comp_sub]
+    rw [eU.inv.naturality_assoc, eV.inv.naturality_assoc]
+    change eU.inv.app _ ≫ sU.map (rU.map biprod.inr) ≫
+        sU.map (rU.map biprod.fst ≫ εU) ≫ c.hom -
+      eV.inv.app _ ≫ sV.map (rV.map biprod.inr) ≫
+        sV.map (rV.map biprod.snd ≫ εV) = _
+    simp only [← sU.map_comp_assoc, ← sV.map_comp, ← rU.map_comp_assoc,
+      ← rV.map_comp_assoc, biprod.inr_fst, biprod.inr_snd,
+      Functor.map_zero, zero_comp, comp_zero, zero_sub]
+    rw [rV.map_id, Category.id_comp]
+  have hdU : (biprod.inl : (schemeDerivedDirectImage U.ι).obj A ⟶ E) ≫ d =
+      f ≫ (schemeDerivedDirectImage (U ⊓ V).ι).map c.hom := by
+    rw [← adjW.homEquiv_naturality_left, hU]
+    simpa only [Category.assoc, f] using
+      adjW.homEquiv_naturality_right (eU.inv.app _ ≫ sU.map εU) c.hom
+  have : (schemeDerivedDirectImage (U ⊓ V).ι).Additive := adjW.right_adjoint_additive
+  have hdV : (biprod.inr : (schemeDerivedDirectImage V.ι).obj B ⟶ E) ≫ d = -g := by
+    rw [← adjW.homEquiv_naturality_left, hV]
+    simp only [Adjunction.homEquiv_apply, Functor.map_neg, Preadditive.comp_neg, g]
+  have hcU : IsIso εU := by
+    have := hc U
+    infer_instance
+  have hcV : IsIso εV := by
+    have := hc V
+    infer_instance
+  refine ⟨d, pU, pV, adjW.counit.app (sV.obj B), ?_, ?_, ?_⟩
+  · apply isIso_lift_from_first rU εU d
+    rw [← rU.map_comp, hdV, rU.map_neg]
+    exact ⟨⟨-inv (rU.map g), by simp, by simp⟩⟩
+  · apply isIso_lift_from_second rV εV d
+    rw [← rV.map_comp, hdU, rV.map_comp]
+    infer_instance
+  · exact ((adjW.homEquiv E (sV.obj B)).symm_apply_apply t).symm
 
 end AlgebraicGeometry

@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-derived-open-intersection-mate-iso",
+ "kind": "statement",
+ "title": "The canonical derived direct-image restriction mate is invertible on the other open",
+ "statement": "Let X be a scheme [def-pc-scheme], O,P,W opens with W=O∩P, and i:W→P its inclusion. Fix derived module categories on X,O,P,W in one morphism universe [def-pc-derived-category]. Write rP,rW,rO for canonical exact derived restriction, sP for overlap restriction along i, and eP:rP⋆sP≅rW for its canonical composition comparison [def-pc-derived-open-restriction-maps]. Let JP=RjP_* and JW=RjW_* be the fixed derived direct images [def-pc-derived-direct-image], and let adjP:rP⊣JP and adjW:rW⊣JW be any adjunctions on these functors. For every B in D(O_P), the morphism rO.map(adjW.homEquiv(JP B,sP B)(eP.inv at JP B followed by sP.map(adjP.counit at B))) is an isomorphism. No covering hypothesis or overlap gluing isomorphism is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08FE (restriction of derived direct image), and Tag 08DG proof, the identification of both restricted summands with the direct image from the overlap"
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-pc-restrict-derived-direct-image-open] to the inclusions of P and W into X and the open O. Since W=O∩P, both restricted derived direct images identify with the derived direct image to O of B restricted to W. These identifications are valid on unbounded derived categories and natural in B.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08FE (restriction of derived direct image), and Tag 08DG proof, the identification of both restricted summands with the direct image from the overlap"
+   }
+  },
+  {
+   "text": "Check the canonical mate, rather than just existence of an isomorphism. For the canonical derived open adjunctions, represent B by a K-injective complex I on P; its restriction to W remains K-injective by the restriction result used in [lem-pc-restrict-derived-direct-image-open]. The comparisons of [def-pc-derived-open-restriction-maps] identify iterated restriction with restriction to W. The displayed mate is induced by the restriction of the P counit, so on an open T of O it is the identity on I(T∩P). This follows from the underived restriction counit and triangle identity, and the derived adjunction construction preserves that identity. Thus the mate is an isomorphism on O. For arbitrary adjP and adjW, uniqueness of adjunctions on fixed left and right functors expresses their units and counits through natural automorphisms of the right adjoints; the new mate is conjugate to the canonical mate by these automorphisms, so remains invertible. Empty opens and empty intersection have zero complexes and require no exception.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08FE (restriction of derived direct image), and Tag 08DG proof, the identification of both restricted summands with the direct image from the overlap"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08FE (restriction of derived direct image), and Tag 08DG proof, the identification of both restricted summands with the direct image from the overlap"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived open intersection restriction direct image adjunction mate isomorphism",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to intersection of open subsets canonical direct image restriction map derived counit is isomorphism",
+   "date": "2026-10-13",
+   "results": "8 hits, including Scheme.restrictFunctorΓ and Scheme.Opens.ι_appIso; these are underived comparisons.",
+   "verdict": "No derived intersection-mate isomorphism theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "date": "2026-10-13",
+   "results": "One hit: the generic homEquiv naturality law.",
+   "verdict": "Useful for assembling the difference arrow, not for invertibility of the open base-change mate."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*mate|mate.*intersection|intersection.*direct.image|direct.image.*intersection; baseChange|beck|Beck in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "results": "No intersection-mate theorem in Mathlib module sheaves or the Lean library. Existing DerivedDirectImageOpenRestriction gives existence of a natural isomorphism but does not identify this specified mate. Blueprint searches for 08FE and restriction direct image open returned zero imported blueprint nodes.",
+   "verdict": "A canonical-morphism compatibility step remains beyond the existing natural-isomorphism statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley canonical mate open immersion restriction pushforward isomorphism",
+   "date": "2026-10-13",
+   "results": "Second reading: 8 hits, including restrictFunctorComp, restrictFunctorAdjCounitIso, and restrictAdjunction_unit_app_app. All are underived APIs.",
+   "verdict": "No theorem of the specified unbounded derived intersection mate found."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*mate|mate.*derived|intersection.*restriction; local unbounded and Plus derived adjunction/base-change modules",
+   "date": "2026-10-13",
+   "results": "Second reading: Mathlib search only generic derived infrastructure; local PlusAdjunction.derivedPlus_mateEquiv_app_fac and PlusBaseChange.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic concern bounded-below categories. DerivedDirectImageOpenRestriction gives Nonempty isomorphism, not identification of this mate.",
+   "verdict": "No duplicate of the unbounded canonical-mate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedOpenDifferenceDiagram",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "first assertion, local split restrictions in the derived two-open gluing construction",
+   "via": [
+    "lem-sc-derived-open-difference-diagram",
+    "lem-sc-derived-open-gluing-objects",
+    "lem-sc-derived-open-gluing",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenIntersectionMateIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenIntersectionMateIso.lean",
+  "declaration": "AlgebraicGeometry.derived_open_intersection_mate_isIso",
+  "statement": "theorem derived_open_intersection_mate_isIso\n    (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (i : W ⟶ P)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings O.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings P.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    (adjP : (schemeOpenRestriction X P).mapDerivedCategory ⊣ schemeDerivedDirectImage P.ι)\n    (adjW : (schemeOpenRestriction X W).mapDerivedCategory ⊣ schemeDerivedDirectImage W.ι)\n    (B : schemeDerivedCategory P.toScheme) :\n    let sP := (schemeOpenOverlapRestriction X i).mapDerivedCategory;\n    let eP := schemeDerivedOpenRestrictionCompIso X i;\n    IsIso ((schemeOpenRestriction X O).mapDerivedCategory.map\n      ((adjW.homEquiv ((schemeDerivedDirectImage P.ι).obj B) (sP.obj B))\n        (eP.inv.app _ ≫ sP.map (adjP.counit.app B))))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T082409-L-1646492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T082409-L-1646492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
