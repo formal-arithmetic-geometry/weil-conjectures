@@ -9,10 +9,10 @@ public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 
 /-!
-# Right exactness of tensor products: complements
+# Complements on right exactness of the tensor product
 
-* If a sequence stays exact after tensoring with a module `P`, it stays exact after tensoring with
-  every retract `M` of `P`, for instance with `M` when `P = N × M`.
+* If a sequence stays exact after tensoring with a module `P`, it stays exact after tensoring
+  with every retract `M` of `P`, for instance with `M` when `P = N × M`.
 * For ideals `I ⊆ A` and `J ⊆ B` of algebras over a field `R`, an element of `A ⊗[R] B` lying in
   both extended ideals `I (A ⊗ B)` and `J (A ⊗ B)` comes from `I ⊗[R] J`; we state this for any
   `C ≅ A ⊗[R] B`.
@@ -25,7 +25,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 
 @[expose] public section
 
-open TensorProduct
+open scoped TensorProduct
 
 namespace Function.Exact
 

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
-# Complements on geometrically integral morphisms
+# Geometrically integral morphisms
 
 An irreducible space is connected, so a geometrically irreducible morphism, and in particular a
 geometrically integral one, is geometrically connected.
@@ -35,7 +35,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-section
+section GeometricallyConnected
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
@@ -52,7 +52,9 @@ lemma GeometricallyIntegral.geometricallyConnected [GeometricallyIntegral f] :
     GeometricallyConnected f :=
   GeometricallyIrreducible.geometricallyConnected f
 
-end
+end GeometricallyConnected
+
+section Comp
 
 variable {X Y Z : Scheme.{u}}
 
@@ -78,5 +80,7 @@ theorem GeometricallyIntegral.comp_of_flat (f : X ⟶ Y) (g : Y ⟶ Z) [Geometri
   have := GeometricallyReduced.comp_of_flat f g
   have := GeometricallyIrreducible.comp f g
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
+
+end Comp
 
 end AlgebraicGeometry

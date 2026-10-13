@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Leray
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
