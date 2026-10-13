@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Module.LocalizedModule.Away
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.AlgebraicGeometry.AffineOpenLocalizedTensorExact
+import Mathlib.Algebra.Category.ModuleCat.Images
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
+import Mathlib.RingTheory.LocalProperties.Projective
 
 /-! # Flatness of the lower truncation image on principal opens
 
@@ -28,6 +32,44 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
+open MonoidalCategory in
+private theorem image_flat_finitePresentation
+    {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)
+    (hfree : ∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i))
+    (a r : ℤ) (hr : r < a)
+    (hexact : ∀ N : ModuleCat.{u} R, ∀ i : ℤ, i < a →
+      (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj P).ExactAt i) :
+    Module.Flat R (LinearMap.range (P.d (r - 1) r).hom) ∧
+      Module.FinitePresentation R (LinearMap.range (P.d (r - 1) r).hom) := by
+  have hflat (i : ℤ) : Module.Flat R (P.X i) := by
+    have := (hfree i).1
+    infer_instance
+  have hop : Module.Flat R (P.opcycles (r - 1)) :=
+    Module.Flat.opcycles_of_exactAt P (r - 1) hflat
+      (fun N ↦ hexact N ((r - 1) - 1) (by omega))
+  have he : P.ExactAt (r - 1) :=
+    (hexact (𝟙_ (ModuleCat R)) (r - 1) (by omega)).of_iso
+      ((NatIso.mapHomologicalComplex (rightUnitorNatIso (ModuleCat R)) (.up ℤ)).app P ≪≫
+        (Functor.mapHomologicalComplexIdIso (ModuleCat R) (.up ℤ)).app P)
+  have hp : (ComplexShape.up ℤ).prev (r - 1) = r - 2 := by simp; omega
+  have hn : (ComplexShape.up ℤ).next (r - 1) = r := by simp
+  have hk : LinearMap.range (P.d (r - 2) (r - 1)).hom =
+      LinearMap.ker (P.d (r - 1) r).hom :=
+    ((P.exactAt_iff' (r - 2) (r - 1) r hp hn).mp he).moduleCat_range_eq_ker
+  let e : P.opcycles (r - 1) ≃ₗ[R] LinearMap.range (P.d (r - 1) r).hom :=
+    (P.opcyclesIsoSc' (r - 2) (r - 1) r hp hn ≪≫
+      (P.sc' (r - 2) (r - 1) r).moduleCatOpcyclesIso).toLinearEquiv ≪≫ₗ
+      Submodule.quotEquivOfEq _ _ hk ≪≫ₗ (P.d (r - 1) r).hom.quotKerEquivRange
+  refine ⟨Module.Flat.of_linearEquiv e.symm, ?_⟩
+  have := (hfree (r - 1)).1
+  have := (hfree (r - 1)).2
+  have := (hfree (r - 2)).2
+  apply Module.finitePresentation_of_free_of_surjective
+    (P.d (r - 1) r).hom.rangeRestrict
+    (LinearMap.surjective_rangeRestrict (P.d (r - 1) r).hom)
+  rw [LinearMap.ker_rangeRestrict, ← hk]
+  exact Submodule.fg_range _
+
 /-- For a bounded-above finite-free complex whose associated sheaf complex on `U` has
 Tor amplitude in `[a,b]`, the image
 of the differential entering degree `r < a` becomes flat and finitely presented after
@@ -37,21 +79,21 @@ Source: Stacks Project, Tag 08EG, proof paragraph invoking
 (blueprint: lem-sc-affine-truncation-kernel-flat).
 
 Proof:
-1. Fix f with D(f) contained in U. Open restriction preserves Tor amplitude
-   (Stacks Tag 09U8). Apply lem-pc-affine-tor-amplitude-criterion on Spec(A_f):
-   widen the upper bound to max(a,b) if necessary. Tensoring the localized complex
-   with any A_f-module N has
-   zero cohomology below a. Its image in degree r is K_f, since localization is exact.
-2. With N = A_f, vanishing in degree r - 1 identifies the relations of K_f with
-   the image of P_f^(r-2). Thus P_f^(r-2) → P_f^(r-1) → K_f → 0 is a finite free
-   presentation, so K_f is finitely presented.
-3. For every N, vanishing in degree r - 1 and
-   lem-pc-module-flat-opcycles-tor-criterion applied with lower bound r show that
-   C_f = coker(P_f^(r-1) → P_f^r) is flat. In the exact sequence
-   0 → K_f → P_f^r → C_f → 0 both P_f^r and C_f are flat; hence K_f is flat
-   by Stacks Tag 00HM (kernel of a surjection between flat modules).
-4. The choice of f was arbitrary. These principal opens cover U, giving the
-   equivalent flatness and finite-presentation assertion for the associated sheaf on U.
+1. Fix f with D(f) contained in U. The principal-open tensor-exactness lemma
+   identifies the sheaf Tor-amplitude hypothesis with exactness of the localized
+   tensor complex in every degree below a.
+2. Tensor with the unit and transport along the right unitor. Exactness in
+   degree r - 1 gives range(d^(r-2)) = ker(d^(r-1)). The quotient description of
+   opcycles and the first isomorphism theorem identify opcycles in degree r - 1
+   with the differential image in degree r.
+3. Apply the flat-opcycles criterion at r - 1, using tensor exactness at r - 2.
+   Transfer flatness along the preceding linear equivalence. The surjection
+   from P_f^(r-1) onto its differential image has finitely generated kernel,
+   the range of P_f^(r-2), so the image is finitely presented.
+4. Exact localization preserves categorical images. Compose the image/range
+   comparisons with the canonical Shrink linear equivalence to identify this
+   localized differential image with LocalizedModule.Away f of the original
+   image. Transfer both properties across that equivalence.
 -/
 theorem affine_truncation_kernel_flat
     (A : Type u) [CommRing A]
@@ -89,6 +131,26 @@ theorem affine_truncation_kernel_flat
           (LocalizedModule.Away f (LinearMap.range (P.d (r - 1) r).hom)) ∧
         Module.FinitePresentation (Localization.Away f)
           (LocalizedModule.Away f (LinearMap.range (P.d (r - 1) r).hom)) := by
-  sorry
+  intro f hf
+  let S := Submonoid.powers f
+  let L := ModuleCat.localizedModuleFunctor S
+  let Q := (L.mapHomologicalComplex (.up ℤ)).obj P
+  have hQ (i : ℤ) : Module.Free (Localization.Away f) (Q.X i) ∧
+      Module.Finite (Localization.Away f) (Q.X i) := by
+    change Module.Free (Localization.Away f) ((P.X i).localizedModule S) ∧
+      Module.Finite (Localization.Away f) ((P.X i).localizedModule S)
+    have := (hfree i).1
+    have := (hfree i).2
+    exact ⟨Module.free_of_isLocalizedModule S ((P.X i).localizedModuleMkLinearMap S),
+      Module.Finite.of_isLocalizedModule S ((P.X i).localizedModuleMkLinearMap S)⟩
+  have hx := affine_open_localized_tensor_exact A P hP hfree U hU a b hamp f hf
+  obtain ⟨hflat, hfp⟩ := image_flat_finitePresentation Q hQ a r hr hx
+  let d := P.d (r - 1) r
+  let e : LinearMap.range (Q.d (r - 1) r).hom ≃ₗ[Localization.Away f]
+      LocalizedModule.Away f (LinearMap.range d.hom) :=
+    ((ModuleCat.imageIsoRange (L.map d)).symm ≪≫ PreservesImage.iso L d ≪≫
+      L.mapIso (ModuleCat.imageIsoRange d)).toLinearEquiv ≪≫ₗ
+        Shrink.linearEquiv (Localization.Away f) _
+  exact ⟨Module.Flat.of_linearEquiv e.symm, Module.FinitePresentation.of_equiv e⟩
 
 end AlgebraicGeometry

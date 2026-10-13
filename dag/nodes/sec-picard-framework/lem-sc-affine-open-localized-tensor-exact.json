@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-affine-open-localized-tensor-exact",
+ "kind": "statement",
+ "title": "Tor amplitude on an open implies universal tensor exactness of principal localizations",
+ "statement": "Let A be a commutative ring, let P be a bounded-above cochain complex of finite free A-modules [def-pc-cochain-complex-modules], and let U be a quasi-compact open of Spec(A) [def-pc-scheme]. Suppose the derived restriction to U of the termwise associated-sheaf complex of P has Tor amplitude in [a,b], expressed by [def-pc-derived-tensor-cohomology-vanishes]. For every f in A with D(f) contained in U and every A_f-module N, the termwise tensor complex P_f tensor N is exact in every integer degree i<a. Here P_f is the canonical localized complex defined by Mathlib ModuleCat.localizedModuleFunctor at powers f.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EG",
+  "place": "Proof of Lemma 36.13.6, lower truncation paragraph; Tags 09U8 and 08E9 for restriction and affine tensor computation"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-scheme",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [
+  {
+   "text": "Fix f with D(f) contained in U, and identify D(f) with Spec(A_f). For any sheaf H on D(f), take G = j_*H under the ordinary sheaf direct image for j:D(f) to U. Its restriction is H, since on opens V contained in D(f) its sections are H(V). Exact restriction preserves vanishing cohomology. The derived tensor/open-restriction comparison of [lem-pc-affine-derived-pullback-tensor-tilde] therefore turns the given vanishing for G into vanishing of the derived restriction tensor H. This proves open restriction preserves the given Tor amplitude (the restriction case of Stacks Tag 09U8), without assuming any exactness of j_*. Widen the upper bound to max(a,b), without changing lower-bound vanishing.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Termwise tilde commutes with localization: the restricted complex on Spec(A_f) is represented by the tilde of Q = (ModuleCat.localizedModuleFunctor (powers f)).mapHomologicalComplex(P). This is the open-immersion specialization of the affine derived pullback computation [lem-pc-affine-derived-pullback-tensor-tilde]. Apply [lem-pc-affine-tor-amplitude-criterion] to Q and interval [a,max(a,b)]. Its derived tensor with every A_f-module N has zero homology in every degree i<a.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-tor-amplitude-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization is exact and preserves finite free modules, so Q remains bounded above with flat terms. By [lem-pc-module-bounded-flat-kflat], Q is K-flat. Consequently termwise tensor with N computes the derived tensor used in the previous step. Its homology in degree i<a is zero, equivalently it is ExactAt i. The canonical Shrink linear equivalences in the localization functor transport this exactness without changing the module or differential.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EG",
+  "place": "Proof of Lemma 36.13.6, lower truncation paragraph; Tags 09U8 and 08E9 for restriction and affine tensor computation; explicit combination of these cited source arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a bounded above finite free complex to a principal open with Tor amplitude implies exactness after tensoring its localization with every module",
+   "results": "Service unavailable: Internal Server Error; no verdict supplied.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a bounded above free complex has vanishing tensor homology below the Tor amplitude of its associated sheaf restricted to an open subscheme",
+   "results": "Eight derived t-structure vanishing results, including DerivedCategory.isZero_of_isGE and isGE_iff. None relates open sheaf Tor amplitude to a concrete localized tensor complex.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, LinearMap.range",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedModuleFunctor|tensor.*ExactAt|ExactAt.*tensor",
+   "results": "Fifteen Mathlib hits for exact localization and localized injective/projective dimensions. Library searches find AffineUniversalTensorExact, whose hypothesis is universal scheme pullback exactness rather than sheaf Tor amplitude on a containing open; no existing statement of this localization comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EG lower truncation paragraph: principal-open tensor exactness needed to apply last-one-flat",
+   "via": [
+    "lem-sc-affine-truncation-kernel-flat",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenLocalizedTensorExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenLocalizedTensorExact.lean",
+  "declaration": "AlgebraicGeometry.affine_open_localized_tensor_exact",
+  "statement": "theorem affine_open_localized_tensor_exact (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ) (hP : ∃ n : ℤ, ∀ i : ℤ, n < i → IsZero (P.X i)) (hfree : ∀ i : ℤ, Module.Free A (P.X i) ∧ Module.Finite A (P.X i)) (U : (Spec (.of A)).Opens) (hU : IsCompact (U : Set (Spec (.of A)))) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [HasDerivedCategory.{wU} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (a b : ℤ) (hamp : ∀ G : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme ((@Functor.mapDerivedCategory (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) _ _ _ ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)) (Functor.additive_of_preserves_binary_products _) (comp_preservesFiniteLimits _ _) (comp_preservesFiniteColimits _ _)).obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj P))) G i) : ∀ f : A, PrimeSpectrum.basicOpen f ≤ U → ∀ N : ModuleCat.{u} (Localization.Away f), ∀ i : ℤ, i < a → (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj (((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex (.up ℤ)).obj P)).ExactAt i",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082419-L-1650244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T082419-L-1650244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
