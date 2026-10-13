@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
+import Sheaf.Paper.EtaleAbelianKanComparisonLocallySurjective
 
 /-! # Local representatives for a supplied abelian inverse-image adjunction
 
@@ -18,6 +19,7 @@ Source: Stacks Project, Tag 09XN, local description of inverse-image sections.
 universe u
 open CategoryTheory Opposite AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Every inverse-image section has unit representatives on an etale cover.
 Source: Stacks Project, Tag 09XN, proof of lemma-describe-pullback, paragraph
 beginning "By construction"; compatibility with abelian structure and units.
@@ -53,4 +55,48 @@ theorem etaleAbelian_local_unit_representatives
       Sieve.ofArrows Z z ∈ T.smallEtaleTopology (Scheme.Etale.mk (𝟙 T)) ∧
       ∀ i, (H.obj F).obj.map (z i).op t =
         (H.obj F).obj.map (a i).op ((hH.unit.app F).hom.app (op (W i)) (s i)) := by
-  sorry
+  classical
+  let P := etaleAbelianSetKan p F
+  let G := etaleAbelianLargeSections (H.obj F)
+  let q := etaleAbelianKanComparison p H hH F
+  let α := p.Etale.op.leftKanExtensionUnit (etaleAbelianLargeSections F)
+  let U := Scheme.Etale.mk (𝟙 T)
+  let := etaleAbelianKanComparison_locally_surjective p H hH F
+  have hcover := Presheaf.imageSieve_mem (CA := fun X ↦ X) T.smallEtaleTopology q (U := op U)
+    (show G.obj (op U) from ULift.up t)
+  have hrep (Z : T.Etale) (z : Z ⟶ U)
+      (hz : Presheaf.imageSieve (CA := fun X ↦ X) q (U := U) (ULift.up t) z) :
+      ∃ (W : X.Etale) (a : Z ⟶ p.Etale.obj W) (s : F.obj.obj (op W)),
+        (H.obj F).obj.map z.op t =
+          (H.obj F).obj.map a.op ((hH.unit.app F).hom.app (op W) s) := by
+    obtain ⟨r, hr⟩ := hz
+    obtain ⟨j, b, hb⟩ := CategoryTheory.Limits.Types.jointly_surjective _
+      (p.Etale.op.isPointwiseLeftKanExtensionLeftKanExtensionUnit
+        (etaleAbelianLargeSections F) (op Z)) r
+    change (etaleAbelianLargeSections F).obj j.left at b
+    change P.map j.hom (α.app j.left b) = r at hb
+    refine ⟨j.left.unop, j.hom.unop, b.down, ?_⟩
+    have hunit : q.app (p.Etale.op.obj j.left) (α.app j.left b) =
+        ULift.up ((hH.unit.app F).hom.app j.left b.down) := by
+      exact ConcreteCategory.congr_hom (Functor.descOfIsLeftKanExtension_fac_app P α G
+        (Functor.whiskerRight (Functor.whiskerRight (hH.unit.app F).hom
+          (forget AddCommGrpCat.{u + 1})) uliftFunctor.{u + 2, u + 1}) j.left) b
+    have he : G.map j.hom (ULift.up ((hH.unit.app F).hom.app j.left b.down)) =
+        G.map z.op (ULift.up t) := by
+      rw [← hunit, ← q.naturality_apply j.hom, hb]
+      exact hr
+    exact (congrArg ULift.down he).symm
+  have hc := (Scheme.mem_smallEtaleTopology_iff _).mp hcover
+  have hx (x : U.left) : ∃ (Z : T.Etale) (z : Z ⟶ U),
+      (∃ y : Z.left, z.left y = x) ∧
+      ∃ (W : X.Etale) (a : Z ⟶ p.Etale.obj W) (s : F.obj.obj (op W)),
+        (H.obj F).obj.map z.op t =
+          (H.obj F).obj.map a.op ((hH.unit.app F).hom.app (op W) s) := by
+    obtain ⟨Z, z, hz, hy⟩ := hc x
+    exact ⟨Z, z, hy, hrep Z z hz⟩
+  choose Z z hpoint W a s he using hx
+  refine ⟨U.left, Z, z, W, a, s, ?_, he⟩
+  rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+  apply Set.eq_univ_iff_forall.mpr
+  intro x
+  exact Set.mem_iUnion.mpr ⟨x, hpoint x⟩

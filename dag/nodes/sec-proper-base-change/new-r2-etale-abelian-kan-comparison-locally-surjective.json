@@ -1,0 +1,143 @@
+{
+ "id": "new-r2-etale-abelian-kan-comparison-locally-surjective",
+ "kind": "statement",
+ "title": "Local surjectivity of the concrete underlying-set Kan comparison",
+ "statement": "Let X and T be schemes in universe u+1, p:T → X, H a left adjoint to the actual abelian small-etale pushforward along p with specified adjunction hH, and F an abelian sheaf with carriers in Type (u+1) [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-direct-image]. Lift the underlying presheaf of F to Type (u+2), and let P be its pointwise left Kan extension along p.Etale.op (the pointwise colimit over pairs of an etale X-object and a map from the test object into its base change). Let q:P → ULift(H(F)) be the unique natural transformation whose composite with the Kan unit is the lifted supplied adjunction unit. Then q is locally surjective on the small-etale topology of T [def-weil-pbc-etale-site]: for every etale object Z and every lifted section t of H(F)(Z), the sieve of arrows on which t lifts through q is covering. This asserts no explicit representatives of elements of P and no small indexed cover.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00YV",
+  "place": "Proposition 7.44.3, abelian inverse image compatible with underlying sets; Tag 09XN, local representatives; Sites Tag 00WK, local surjectivity of sheafification; Tag 04HR, affine cover-dense etale site"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Sheafify P. The sheafification unit is locally surjective by the local sheafification section theorem. Base change preserves finite limits; hence its comma categories are filtered and their underlying set colimits carry the abelian operations of F. Sheafification transports addition, zero, and inverse and their identities. The resulting abelian sheaf is the abelian inverse image with its composite unit. For the coefficient-universe comparison, use the small basis of affine etale finite-presentation maps into affine opens. Every etale object is covered by these and their fibre products have covers in the same basis. The Kan and plus constructions on that basis use small diagrams in Type (u+1); lifting commutes with these finite limits and filtered colimits. Extend by descent on covering families. The abelian compatibility and its adjunction are the mathematical assertion of lem-weil-pbc-etale-inverse-image-algebraic-structures; its currently recorded Lean specialization has larger carriers, so it cannot be applied directly to F. The small affine basis is used to construct the same adjunction in the present coefficient universe, not to choose arbitrary data from that unproved specialization.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of left adjoints to the fixed pushforward compares this abelian inverse image to the supplied H. The comparison is an isomorphism and respects the supplied unit. On underlying lifted presheaves its composite with the sheafification unit equals q, since both have the same composite with the Kan unit and a Kan extension determines that morphism uniquely. Local surjectivity of the sheafification unit is preserved by the isomorphism. Empty etale objects have the empty covering sieve.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/00YV",
+  "place": "Proposition 7.44.3, abelian inverse image compatible with underlying sets; Tag 09XN, local representatives; Sites Tag 00WK, local surjectivity of sheafification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical map from left Kan extension of underlying presheaf to underlying abelian inverse image is locally surjective",
+   "results": "UNAVAILABLE: service returned Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of inverse image of a sheaf are locally images of unit sections",
+   "results": "Only unrelated topological and structure-sheaf local-section theorems; no exact comparison theorem",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.descOfIsLeftKanExtension",
+   "results": "descOfIsLeftKanExtension and descOfIsLeftKanExtension_fac_app construct q and prove its unit equation; no local-surjectivity theorem",
+   "verdict": "supporting lemmas only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallySurjective.*Kan|Kan.*locally_surjective",
+   "results": "No hits; rg in EtaleInverseImage modules found the existing algebraic lift only at larger coefficient universe",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleAbelianLocalUnitRepresentatives",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Strictly henselian local-ring comparison in the Tag 09AX effacement argument: degree-zero continuity on affine Zariski neighbourhoods, Descent of affine-limit sections; Unit representatives of terminal inverse-image sections; finite local representing covering before overlap agreement; Local unit representatives for a supplied abelian etale inverse image; local surjectivity of the concrete Kan comparison",
+   "via": [
+    "lem-weil-pbc-affine-open-inverse-image-finite-local-lifts",
+    "affine-open-inverse-image-unit-representatives",
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+    "new-local-stalk-sections-cocone-colimit",
+    "new-local-stalk-sections-canonical-colimit",
+    "affine-open-sections-canonical-colimit-core",
+    "affine-open-sections-descent",
+    "lem-weil-pbc-etale-abelian-local-unit-representatives"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleAbelianKanComparisonLocallySurjective",
+  "file": "lean/Sheaf/Paper/EtaleAbelianKanComparisonLocallySurjective.lean",
+  "declaration": "etaleAbelianKanComparison_locally_surjective",
+  "statement": "theorem etaleAbelianKanComparison_locally_surjective\n    {X T : Scheme.{u + 1}} (p : T ⟶ X)\n    (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hH : H ⊣ p.Etale.sheafPushforwardContinuous\n      AddCommGrpCat.{u + 1} X.smallEtaleTopology T.smallEtaleTopology)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    Presheaf.IsLocallySurjective T.smallEtaleTopology\n      (etaleAbelianKanComparison p H hH F)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T131328-L-4034968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T131328-L-4034968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
