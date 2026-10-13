@@ -1,0 +1,122 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "status": "split",
+ "kind": "statement",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbedding",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-reduced-generic-fibre-field-embedding",
+   "place": "Affine tensor and reduction construction",
+   "via": []
+  }
+ },
+ "same_as": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project",
+  "place": "Tags 0559 and 030R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme reduction generic fibre localization injective tensor map purely inseparable field",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:43Z\", \"tool\": \"leanfinder\", \"query\": \"scheme reduction generic fibre localization injective tensor map purely inseparable field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"738263c0e1260a62\"}",
+   "digest": "738263c0e1260a62",
+   "verdict": "No exact combined statement; related primitives were inspected. Prime-spectrum homeomorphism and reduction lemmas are ingredients, not the full affine generic-fibre construction."
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical.*local|local.*nilradical|reduced_generic_fibre_field|separablyGenerated_of",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:55Z\", \"tool\": \"grep\", \"query\": \"nilradical.*local|local.*nilradical|reduced_generic_fibre_field|separablyGenerated_of\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HopkinsLevitzki.lean\", \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"Mathlib/RingTheory/KrullDimension/Zero.lean\", \"Mathlib/RingTheory/KrullDimension/Zero.lean\"], \"digest\": \"6ac59d81bab60ba6\"}",
+   "digest": "6ac59d81bab60ba6",
+   "verdict": "No exact combined statement; related primitives were inspected. Prime-spectrum homeomorphism and reduction lemmas are ingredients, not the full affine generic-fibre construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:29:55Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\"], \"digest\": \"c7bfbb7dbf13116a\"}",
+   "digest": "c7bfbb7dbf13116a",
+   "verdict": "No exact combined statement; related primitives were inspected. Prime-spectrum homeomorphism and reduction lemmas are ingredients, not the full affine generic-fibre construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dominant field point after purely inseparable base change gives a dominant point of the reduction of the generic fibre",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T14:30:39Z\", \"tool\": \"leansearch\", \"query\": \"A dominant field point after purely inseparable base change gives a dominant point of the reduction of the generic fibre\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "availability": "unavailable",
+   "note": "service unavailable: Internal Server Error"
+  }
+ ],
+ "id": "lem-sbc-reduced-generic-fibre-field-embedding-core",
+ "title": "Core affine reduced fibre embedding",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0559 and 030R"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof_deps": [],
+ "statement": "Let Z, S and S-prime be affine schemes [def-pc-fibre-product], with S-prime integral [def-pc-integral-scheme]. Let g: Z to S and q: S-prime to S, and let eta-prime be a generic point with q(eta-prime)=eta. Let L, k-prime, E be fields with algebra structures kappa(eta) to L and k-prime, and L and k-prime to E, whose composites agree. Suppose k-prime/kappa(eta) is finite purely inseparable; j: Spec L to the eta fibre [def-pc-scheme-fibre] is scheme-theoretically dominant with its base composite the algebra map; and e: kappa(eta-prime) to k-prime is a ring equivalence identifying the q residue map with the specified algebra map. Then there exists a kappa(eta-prime)-algebra structure on E and a scheme-theoretically dominant map from Spec E to the eta-prime fibre of the reduction [def-weil-pbc-scheme-reduction] of Z times_S S-prime. Its base composite is the spectrum of that algebra map, and the algebra map sends every x to the image of e(x) in E. No separable-generation assumption or conclusion occurs.",
+ "proof": [
+  {
+   "text": "Construct the residue-field algebra on E as the composition of e with k-prime to E. Write C for the original affine fibre ring and k for kappa(eta). Affine scheme-theoretic dominance of j identifies C with a k-subalgebra of L.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Flatness of k-prime over k gives an injection C tensor_k k-prime into L tensor_k k-prime. The latter is a finite-dimensional L-algebra whose prime spectrum is a singleton by pure inseparability. The compatible maps give a unital homomorphism to E, with prime kernel equal to the nilradical. Thus its reduction injects into E; the injection from C tensor_k k-prime also stays injective on reductions by detection of nilpotence.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Writing B-prime for the integral coordinate ring of S-prime, its generic residue field is its fraction field. Localization at its nonzero elements commutes with reduction. The compatibility he identifies the reduced pullback generic fibre ring with the reduction of C tensor_k k-prime. Compose the injections and take Spec. Injectivity gives scheme-theoretic dominance, and the tensor scalar maps give the base identity and compatibility with e.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedGenericFibreFieldEmbeddingCore.lean",
+  "declaration": "AlgebraicGeometry.exists_reduced_generic_fibre_field_embedding_core",
+  "statement": "theorem exists_reduced_generic_fibre_field_embedding_core\n    {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']\n    (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)\n    (hη' : IsGenericPoint η' Set.univ)\n    (L k' E : Type u) [Field L] [Field k'] [Field E]\n    [Algebra (S.residueField η) L] [Algebra (S.residueField η) k']\n    [Algebra L E] [Algebra k' E]\n    [Module.Finite (S.residueField η) k'] [IsPurelyInseparable (S.residueField η) k']\n    (j : Spec (.of L) ⟶ g.fiber η) (hj : IsSchemeTheoreticallyDominant j)\n    (hjbase : j ≫ g.fiberToSpecResidueField η =\n      Spec.map (CommRingCat.ofHom (algebraMap (S.residueField η) L)))\n    (e : S'.residueField η' ≃+* k')\n    (he : e.toRingHom.comp\n      (((S.residueFieldCongr hq).inv ≫ q.residueFieldMap η').hom) =\n        algebraMap (S.residueField η) k')\n    (hsquare : (algebraMap k' E).comp (algebraMap (S.residueField η) k') =\n      (algebraMap L E).comp (algebraMap (S.residueField η) L)) :\n    ∃ aE : Algebra (S'.residueField η') E,\n      letI := aE\n      ∃ h : Spec (.of E) ⟶\n          ((pullback g q).nilradical.subschemeι ≫ pullback.snd g q).fiber η',\n        IsSchemeTheoreticallyDominant h ∧\n        h ≫ ((pullback g q).nilradical.subschemeι ≫\n          pullback.snd g q).fiberToSpecResidueField η' =\n            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E)) ∧\n        ∀ x : S'.residueField η',\n          algebraMap (S'.residueField η') E x = algebraMap k' E (e x)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T144156-L-615044",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T144156-L-615044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

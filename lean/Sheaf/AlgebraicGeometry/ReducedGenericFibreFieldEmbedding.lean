@@ -12,6 +12,9 @@ public import Sheaf.FieldTheory.SeparableExtension
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingCore
+import Sheaf.AlgebraicGeometry.ReducedGenericFibreFieldEmbeddingTransport
+
 /-! # Affine steps in the radicial generic field construction
 
 Source: Stacks Project, Tags 0559 and 030R. -/
@@ -68,6 +71,13 @@ theorem exists_reduced_generic_fibre_field_embedding
         Algebra.IsSeparablyGenerated (S'.residueField η') E ∧
         h ≫ ((pullback g q).nilradical.subschemeι ≫
           pullback.snd g q).fiberToSpecResidueField η' =
-            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E)) := by sorry
+            Spec.map (CommRingCat.ofHom (algebraMap (S'.residueField η') E)) := by
+  obtain ⟨aE, h, hdom, hbase, hcompat⟩ :=
+    exists_reduced_generic_fibre_field_embedding_core g q η η' hq hη' L k' E
+      j hj hjbase e he hsquare
+  let := aE
+  have hsep' := separablyGenerated_of_residueField_equiv
+    (K := S'.residueField η') (K' := k') (E := E) e hcompat hsep
+  exact ⟨aE, h, hdom, hsep', hbase⟩
 
 end AlgebraicGeometry
