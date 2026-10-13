@@ -8,8 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
-import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit
+import Sheaf.Algebra.Homology.KFlatResolution
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Koszul representatives of sections on an affine open
@@ -32,7 +34,38 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Realize a derived augmentation by a chain map after a K-flat replacement.
+Source: Stacks Project, Tag 06YS, and calculus of fractions in the derived category. -/
+private theorem kflat_augmentation_realization
+    (X : Scheme.{uX})
+    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
+    (P : schemeDerivedCategory X)
+    (T : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)
+    (a : P ⟶ DerivedCategory.Q.obj T) :
+    ∃ J : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ,
+      CochainComplex.IsKFlat (R := X.sheaf) J ∧
+      ∃ (c : DerivedCategory.Q.obj J ≅ P) (u : J ⟶ T),
+        DerivedCategory.Q.map u = c.hom ≫ a := by
+  let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
+  let Q := DerivedCategory.Q (C := C)
+  let P₀ := Q.objPreimage P
+  let c₀ : Q.obj P₀ ≅ P := Q.objObjPreimageIso P
+  obtain ⟨K, t, ht, b, hb⟩ := DerivedCategory.right_fac (c₀.hom ≫ a)
+  let := ht
+  obtain ⟨J, q, hJ, _, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) K
+  let : QuasiIso q := hq
+  let c : Q.obj J ≅ P := asIso (Q.map q) ≪≫ asIso (Q.map t) ≪≫ c₀
+  refine ⟨J, hJ, c, q ≫ b, ?_⟩
+  dsimp only [c, Iso.trans_hom, asIso_hom]
+  rw [Category.assoc, Category.assoc, hb]
+  dsimp only [Q]
+  simp only [Functor.map_comp, IsIso.hom_inv_id_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
+set_option maxHeartbeats 1000000 in
+-- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
 There is no perfect source, tensor product, or lifted morphism in this statement.
@@ -42,24 +75,20 @@ Tag 08EH; cohomology.tex, Tag 06YD.
 (blueprint: lem-sc-affine-koszul-section-roof).
 
 Proof:
-1. Use the canonical affine isomorphism X ≅ Spec Γ(X,O_X). Compactness of U and
-   the principal-open basis give a finite family f with U the union of D(f_i).
-   Transport E and the section along the exact equivalence of module sheaves and
-   its induced derived equivalence. Transport the open by the same isomorphism.
-2. Apply affine_perfect_open_represent_cohomology to the transported E. The
-   colimit of the Hom sets is jointly surjective, so the given section is the image
-   of a map ξ_e at some exponent e. The cocone formula says that restriction of
-   ξ_e is the section precomposed with the restricted augmentation.
-3. Take the actual associated-sheaf Koszul tail at e, transported back to X.
-   Identify its degree-zero target with the tensor-unit complex via tilde(A)=O_X
-   and the single-complex comparison. Compose its chain augmentation with this
-   chain isomorphism. Its bounded finite free terms imply K-flatness by
-   isKFlat_of_boundedAbove_flat_ringedSpace; its derived object is perfect by the
-   cohomology-representation theorem. The restricted augmentation is invertible
-   by that theorem. Naturality of transport gives the displayed equation.
-4. If U is empty, use the empty family and the zero tail: both restricted objects
-   are zero and the unique augmentation is invertible. The proof needs neither
-   nonemptiness of U nor a lower bound on the cohomology of E. -/
+1. The transported Hom-colimit comparison `affine_koszul_section_colimit` supplies
+   perfect derived objects P_n, augmentations a_n to Q(T), and a colimit whose legs
+   are restriction followed by the inverse restricted augmentation.
+2. `Types.jointly_surjective` gives a finite index n and ξ : P_n → E representing s.
+3. Represent P_n by a complex and apply `DerivedCategory.right_fac` to its augmentation.
+   This gives K → T and a quasi-isomorphism K → P_n's representative. Apply
+   `exists_isKFlatResolution` to K and compose chain maps to obtain u : J → T,
+   an isomorphism c : Q(J) ≅ P_n, and Q(u) = c.hom followed by a_n.
+4. Transport each strictly perfect local model along c to prove Q(J) perfect.
+   Restriction of Q(u) is the composite of restriction of c.hom and a_n, so is
+   invertible. Multiply the cocone formula by the restricted augmentation and
+   cancel its inverse. Functoriality yields R(Q(u)) followed by s = R(c.hom followed by ξ).
+5. Empty U, zero E and the zero ring use the same colimit and realization arguments.
+   No boundedness or nonempty assumption is introduced. -/
 theorem affine_koszul_section_roof
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
@@ -81,6 +110,42 @@ theorem affine_koszul_section_roof
         CochainComplex.IsKFlat (R := X.sheaf) J ∧ IsPerfect X (DerivedCategory.Q.obj J) ∧
         ∃ (u : J ⟶ T) (ξ : DerivedCategory.Q.obj J ⟶ E.obj),
           IsIso (R.map (DerivedCategory.Q.map u)) ∧
-          R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by sorry
+          R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by
+  classical
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := (SheafOfModules.tensorClosed X.sheaf).1.some
+  let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
+  let T := HomologicalComplex.tensorUnit C (ComplexShape.up ℤ)
+  let LX := SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U
+  let EX : SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U) ≌
+      SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace) := Modules.overEquiv U
+  let R := (LX ⋙ EX.functor).mapDerivedCategory
+  change ∀ s : R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj, _
+  intro s
+  obtain ⟨P, a, hP, v, hav, hva, D, hD, ι, hι, ⟨hc⟩⟩ :=
+    affine_koszul_section_colimit X U hU E
+  obtain ⟨n, z, hz⟩ := Types.jointly_surjective D hc s
+  let ξ : P n ⟶ E.obj := cast (hD n) z
+  have hξ : ι.app n (cast (hD n).symm ξ) = s := by
+    simpa only [ξ, cast_cast, cast_eq] using hz
+  obtain ⟨J, hJ, c, u, hu⟩ := kflat_augmentation_realization X (P n) T (a n)
+  have hp : IsPerfect X (DerivedCategory.Q.obj J) := by
+    intro x
+    obtain ⟨V, hx, K, hK, ⟨eK⟩⟩ := hP n x
+    exact ⟨V, hx, K, hK,
+      ⟨(SheafOfModules.overFunctor (moduleRings X.toRingedSpace) V).mapDerivedCategory.mapIso
+        c ≪≫ eK⟩⟩
+  let j : R.obj (P n) ≅ R.obj (DerivedCategory.Q.obj T) :=
+    ⟨R.map (a n), v n, hav n, hva n⟩
+  have hiu : IsIso (R.map (DerivedCategory.Q.map u)) := by
+    rw [hu, Functor.map_comp]
+    change IsIso (R.map c.hom ≫ j.hom)
+    exact (R.mapIso c ≪≫ j).isIso_hom
+  refine ⟨J, hJ, hp, u, c.hom ≫ ξ, hiu, ?_⟩
+  have hs : v n ≫ R.map ξ = s := (hι n ξ).symm.trans hξ
+  rw [hu, Functor.map_comp, Functor.map_comp, ← hs]
+  change (R.map c.hom ≫ R.map (a n)) ≫ (v n ≫ R.map ξ) =
+    R.map c.hom ≫ R.map ξ
+  rw [Category.assoc, ← Category.assoc (R.map (a n)), hav n, Category.id_comp]
 
 end AlgebraicGeometry.Scheme

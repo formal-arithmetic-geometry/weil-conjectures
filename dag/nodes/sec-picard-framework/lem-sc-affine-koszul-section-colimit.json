@@ -1,0 +1,177 @@
+{
+ "id": "lem-sc-affine-koszul-section-colimit",
+ "kind": "statement",
+ "title": "Transported affine Koszul Hom-colimit comparison",
+ "statement": "Let X be an affine scheme [def-pc-scheme], U a compact open, and E an arbitrary object of D_QCoh(O_X) [def-pc-derived-category]. With independently chosen derived localizations in morphism universe w for X, every localized open site, and U, let T=O_X[0] [def-pc-tensor-complex-sheaves] and R be restriction to the localized site followed by Modules.overEquiv. There are perfect derived objects P_n [def-pc-perfect-complex], augmentations a_n:P_n→Q(T), two-sided inverse restricted augmentations v_n, a diagram D:ℕ→Type w with D(n)=Hom(P_n,E), and a colimit cocone with point Hom(R(Q(T)),R(E)) whose leg at n sends ξ to v_n followed by R(ξ). No chain-level representatives or K-flatness assertions are included.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08DC (equation-comparison), 08DD (proposition-represent-cohomology-class-on-open), 08EH (lemma-lift-map, affine setup); source read at https://stacks.math.columbia.edu/tag/08DD and https://stacks.math.columbia.edu/tag/08EH"
+ },
+ "proof": [
+  {
+   "text": "Identify X with Spec Γ(X,O_X). The image of compact open U is a finite union of principal opens by PrimeSpectrum.isCompact_isOpen_iff; enumerate the finite set with Fintype.equivFin. Include the empty finite family. Transport the chosen global and open derived localizations to the spectrum without increasing the morphism universe.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact derived equivalence along the affine isomorphism and transport E by its inverse. Quasi-coherent cohomology is preserved. Apply affine_perfect_open_represent_cohomology on Spec A to obtain the perfect Koszul objects, derived augmentations, inverse restricted augmentations, directed Hom diagram and its colimit cocone.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-equivalence",
+    "lem-pc-scheme-iso-derived-qcoh",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the structure object with Q(O[0]) using HomologicalComplex.extendSingleIso, singleMapHomologicalComplex and tildeSelf. Transport the global objects, morphisms and Hom diagram through the exact derived equivalence. Transport perfectness through the inverse perfect-transport theorem applied to the inverse isomorphism.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "lem-pc-scheme-iso-perfect-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction square and composition with Modules.overEquiv identify the two restricted functors. Modules.restrictUnitIso identifies the transported unit, and its single complex identifies the transported structure object with Q(T). Naturality transports the inverse identities and the displayed cocone formula. Transport the Type-valued cocone using the induced natural Hom equivalences (Functor.CoconeTypes.IsColimit.precompose and of_equiv). Its colimit property is unchanged. The empty open has zero restricted objects and singleton Hom sets; the zero ring and zero E are included, and no cohomological bound on E is used.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-restriction-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-iso-derived-localizations",
+  "lem-pc-scheme-iso-derived-equivalence",
+  "lem-pc-scheme-iso-derived-qcoh",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "def-sc-koszul-open-system",
+  "lem-pc-scheme-iso-perfect-transport",
+  "lem-pc-scheme-iso-derived-restriction-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08DC (equation-comparison), 08DD (proposition-represent-cohomology-class-on-open), 08EH (lemma-lift-map, affine setup); source read at https://stacks.math.columbia.edu/tag/08DD and https://stacks.math.columbia.edu/tag/08EH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.jointly_surjective",
+   "results": "1 hits: CategoryTheory.Limits.Types.jointly_surjective; no exact affine Koszul colimit transport statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every section of an unbounded quasi coherent derived object on a quasi compact open of an affine scheme factors through an augmented perfect Koszul complex",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; no exact affine Koszul colimit transport statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jointly_surjective|exists.*[Kk][Ff]lat",
+   "results": "25 hits: Mathlib/Topology/Sheaves/Points.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/LocalPredicate.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean; no exact affine Koszul colimit transport statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul perfect complexes represent the colimit of derived Hom groups giving sections on a compact open of an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a colimit of Hom sets through an equivalence of categories and a natural isomorphism of restriction functors",
+   "results": "8 hits: CategoryTheory.Limits.HasColimit.isoOfEquivalence_hom_π, CategoryTheory.Functor.CoconeTypes.isColimit_precompose_iff, CategoryTheory.Limits.HasColimit.isoOfEquivalence, CategoryTheory.Functor.CoconeTypes.IsColimit.precompose, CategoryTheory.Limits.HasColimit.isoOfEquivalence_inv_π, CategoryTheory.Limits.IsColimit.precomposeHomEquiv, CategoryTheory.Limits.IsColimit.precomposeInvEquiv, CategoryTheory.Functor.CoconeTypes.IsColimitCore.precompose; no exact affine Koszul colimit transport statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|mapDerivedCategoryCompIso",
+   "results": "0 hits: ; no exact affine Koszul colimit transport statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived morphisms from the structure sheaf on a quasicompact open computed as a direct limit of morphisms from perfect complexes with augmentation",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor; second-reader search found no exact transported affine Koszul Hom-colimit statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoconeTypes.*equiv|isColimit.*precompose",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean; second-reader search found no exact transported affine Koszul Hom-colimit statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulSectionRoof",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: representing the affine-open morphism by a Koszul tail; transport the Hom-colimit comparison before choosing a representative",
+   "via": [
+    "lem-sc-affine-koszul-section-roof",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_koszul_section_colimit",
+  "statement": "theorem affine_koszul_section_colimit\n    (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))]\n    (E : schemeDerivedQCohCategory X) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := (SheafOfModules.tensorClosed X.sheaf).1.some\n    let T := HomologicalComplex.tensorUnit\n      (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    ∃ (P : ℕ → schemeDerivedCategory X)\n      (a : ∀ n : ℕ, P n ⟶ DerivedCategory.Q.obj T),\n      (∀ n : ℕ, IsPerfect X (P n)) ∧\n      ∃ v : ∀ n : ℕ, R.obj (DerivedCategory.Q.obj T) ⟶ R.obj (P n),\n        (∀ n : ℕ, R.map (a n) ≫ v n = 𝟙 _) ∧\n        (∀ n : ℕ, v n ≫ R.map (a n) = 𝟙 _) ∧\n        ∃ (D : ℕ ⥤ Type wD) (hD : ∀ n : ℕ, D.obj n = (P n ⟶ E.obj)),\n        ∃ ι : D ⟶ (Functor.const ℕ).obj\n            (R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj),\n          (∀ (n : ℕ) (ξ : P n ⟶ E.obj),\n            ι.app n (cast (hD n).symm ξ) = v n ≫ R.map ξ) ∧\n          Nonempty (IsColimit (Cocone.mk _ ι))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100145-L-2492555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100145-L-2492555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,41 +17,36 @@
  },
  "proof": [
   {
-   "text": "Transport along the canonical affine isomorphism X ≅ Spec Γ(X,O_X). The principal opens form a basis; compactness gives a finite subcover of U. The exact equivalence of module sheaves transports E, Q(T), and s. Its derived equivalence commutes with restriction because both are termwise transport along the same scheme isomorphism.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For the resulting finite family f, apply affine_perfect_open_represent_cohomology to E. Its colimit cocone represents Hom(O_U,E|_U). Filtered colimits of sets are jointly surjective, so s equals v_e followed by R(ξ_e) for some e and ξ_e. Since v_e is the inverse augmentation, multiply by the augmentation to obtain R(u_e) followed by s = R(ξ_e).",
+   "text": "Apply affine_koszul_section_colimit to obtain the perfect-object Hom diagram and its colimit cocone. Types.jointly_surjective extracts n and a derived map ξ representing s; the leg formula identifies s with inverse restricted augmentation followed by R(ξ).",
    "uses": [
-    "lem-sc-affine-perfect-open-represent-cohomology"
+    "lem-sc-affine-koszul-section-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Use the actual associated-sheaf Koszul tail of def-sc-koszul-open-system, not an arbitrary representative chosen from an existence assertion. Identify the sheaf associated to A with O_X and the degree-zero complex with T, obtaining a chain map u. The tail is bounded finite free; hence each term is flat and the bounded-above flat criterion proves K-flatness. Perfectness and invertibility of its restricted augmentation are supplied by the cohomology-representation theorem. Transport J,u,ξ back along the affine isomorphism; the inverse transport gives exactly the displayed equation.",
+   "text": "Represent P_n by Q.objPreimage. DerivedCategory.right_fac factors its augmentation into a quasi-isomorphism denominator and an actual chain map. Apply exists_isKFlatResolution to the denominator source, compose the chain augmentation, and build c:Q(J)≅P_n from the two inverted quasi-isomorphisms. Functoriality and cancellation give Q(u)=c.hom followed by a_n. This is the fully proved private helper kflat_augmentation_realization.",
    "uses": [
-    "def-sc-koszul-open-system",
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-sc-affine-perfect-open-represent-cohomology"
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "For empty U take the empty family and the zero tail; restriction of both source and unit is zero. The unique map is invertible, and the equation is an equality of zero morphisms. For nonempty U the preceding argument uses no bound on E.",
-   "uses": [],
+   "text": "For each local strictly perfect model of P_n, compose its model isomorphism with restriction of c to obtain a local model of Q(J). Compose the mapped c isomorphism with the restricted augmentation isomorphism to establish IsIso R(Q(u)). Finally rewrite the colimit leg formula, expand functor maps of composites, associate, and cancel augmentation followed by its inverse. This gives the displayed equation for ξ precomposed with c.hom. Empty U and zero objects use exactly the same proof.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-perfect-open-represent-cohomology",
-  "def-sc-koszul-open-system",
-  "lem-pc-bounded-above-flat-kflat"
+  "lem-sc-affine-koszul-section-colimit",
+  "lem-pc-kflat-resolution",
+  "def-pc-perfect-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08DC and 08DD, equation-comparison and proposition-represent-cohomology-class-on-open; Tag 08EH, lemma-lift-map; cohomology.tex Tag 06YD, lemma-bounded-flat-K-flat; representative-level specialization of the source argument"
+  "place": "Tags 08DC and 08DD for the transported section colimit; Mathlib DerivedCategory.right_fac and Stacks Tag 06YS for chain realization by K-flat resolution"
  },
  "mathlib_searches": [
   {
@@ -138,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261013T045520-L-126498",
+  "landing": "20261013T100145-L-2492555",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
