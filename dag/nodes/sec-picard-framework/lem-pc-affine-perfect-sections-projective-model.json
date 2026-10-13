@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-affine-perfect-sections-projective-model",
+ "title": "Bounded finite-projective model of ordinary affine sections",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], with the derived categories of module sheaves and localized open sites [def-pc-derived-category]. Put $A=\\Gamma(Y,\\mathcal O_Y)$. Choose a derived category of $A$-modules. Let $D$ be a cochain complex of $\\mathcal O_Y$-modules [def-pc-cochain-complex-modules], zero above a natural degree $d$, with quasi-coherent terms, whose derived image is perfect [def-pc-perfect-complex]. There exist a complex $P$ of $A$-modules and integers $a,b$ such that $P^n=0$ for $n<a$ or $b<n$, each $P^n$ is finite and projective over $A$, and $Q(P)$ is isomorphic to $Q(\\Gamma(Y,D))$. Here sections are applied termwise to the actual complex $D$, and $Q$ is localization at quasi-isomorphisms.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 08EB (perfect-lemma-perfect-affine), 0656, 06Z0 (perfect-lemma-affine-compare), and 01IB (schemes-lemma-spec-sheaves)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Transport D along Y.isoSpec. The natural quasi-coherent counit gives a termwise isomorphism from associated sheaves of ordinary sections to this transported complex. Exactness of tilde shows that its homology sheaves are quasi-coherent. Transport perfectness along the same scheme isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-scheme-iso-perfect-transport",
+    "lem-pc-scheme-iso-derived-equivalence",
+    "lem-pc-scheme-iso-derived-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine bounded-projective characterization to the transported derived object and retain the bounds, finiteness, projectivity and derived isomorphism. Compose with the termwise counit isomorphism.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use full faithfulness of affine derived sheafification to lift the resulting isomorphism between tilde(P) and tilde(Gamma(Y,D)) to the ring derived category. Lift its inverse too; faithfulness proves both inverse identities. For the empty affine scheme the ring and its module category are zero.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "kind": "statement",
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-scheme-iso-derived-equivalence",
+  "lem-pc-scheme-iso-derived-qcoh",
+  "lem-pc-scheme-iso-perfect-transport",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 08EB (perfect-lemma-perfect-affine), 0656, 06Z0 (perfect-lemma-affine-compare), and 01IB (schemes-lemma-spec-sheaves); specialization and chain-level glue by S4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme ordinary sections of a quasi-coherent perfect complex have a bounded finite projective derived representative",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on an affine scheme has a bounded projective replacement mapping quasi-isomorphically to a quasi-coherent complex",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKProjective.leftOrthogonal, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CochainComplex.IsKProjective.Qh_map_bijective",
+   "date": "2026-10-13",
+   "verdict": "no exact match; partial generic API only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*sections|sections.*projective|projective.*sheafification",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; partial generic API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectFlatModelReplacement",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): bounded perfect replacement of the affine flat Cech complex, the ring-model step",
+   "via": [
+    "lem-pc-affine-perfect-flat-model-replacement",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectSectionsProjectiveModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectSectionsProjectiveModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_perfect_sections_projective_model",
+  "statement": "theorem exists_affine_perfect_sections_projective_model (Y : Scheme.{u}) (hY : IsAffine Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ V : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))] [HasDerivedCategory.{v} (ModuleCat.{u} (Γ(Y, ⊤) : Type u))] (D : CochainComplex Y.Modules ℤ) (d : ℕ) (hDle : D.IsStrictlyLE d) (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) (hperfect : Y.IsPerfect ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).obj D)) : ∃ (P : CochainComplex (ModuleCat.{u} (Γ(Y, ⊤) : Type u)) ℤ) (a b : ℤ), (∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite (Γ(Y, ⊤) : Type u) (P.X n)) ∧ (∀ n : ℤ, Module.Projective (Γ(Y, ⊤) : Type u) (P.X n)) ∧ Nonempty (DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj (((SheafOfModules.evaluation.{u} (moduleRings Y.toRingedSpace) (op ⊤)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T024049-L-3339203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T024049-L-3339203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-affine-projective-sections-sheafification",
+ "title": "Sheafification of a finite-projective affine section comparison",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme] and put $A=\\Gamma(Y,\\mathcal O_Y)$. Let $D$ be a cochain complex of $\\mathcal O_Y$-modules [def-pc-cochain-complex-modules] with quasi-coherent terms. Let $P$ be a cochain complex of finite projective $A$-modules and let $q:P\\to\\Gamma(Y,D)$ be a quasi-isomorphism of the actual complexes. Define $C$ by termwise associated sheaves followed by restriction along the canonical isomorphism $Y\\to\\operatorname{Spec}A$. Each $C^n$ is quasi-coherent, finitely presented and flat over the identity of $Y$ [def-pc-morphism-conventions], and there exists a quasi-isomorphism $e:C\\to D$. There are no bounds or perfectness hypotheses.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01IB (schemes-lemma-spec-sheaves) and 08EB (perfect-lemma-perfect-affine); affine sectionwise flatness as in Tags 01I9 and 00HT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply exact associated sheaves and restriction along the affine chart to q. Apply the quasi-coherent counit to each term of D; its naturality in the differentials yields a chain isomorphism from the associated ordinary section complex to D. Compose with the sheafified q to obtain e, a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each finite projective term is a retract of a finite free A-module. Tilde and chart restriction transport that splitting to a finite free structure-module on Y. Thus each term is quasi-coherent and finitely presented. On an affine open U its section module is a finite projective Gamma(U,O)-module, hence flat. If U is contained in an affine V, Gamma(U,O) is flat over Gamma(V,O), and transitivity proves the required sectionwise flatness with the canonical restriction action. This includes rank zero and the zero ring.",
+   "uses": [
+    "lem-pc-affine-associated-module-flat-over"
+   ],
+   "elementary": false
+  }
+ ],
+ "kind": "statement",
+ "proof_deps": [
+  "lem-pc-affine-associated-module-flat-over",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01IB (schemes-lemma-spec-sheaves) and 08EB (perfect-lemma-perfect-affine); affine sectionwise flatness as in Tags 01I9 and 00HT; specialization and chain-level glue by S4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying a quasi-isomorphism to affine sections yields a quasi-isomorphism to a quasi-coherent complex and sends finite projective modules to flat finitely presented sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a quasi-isomorphism to the global sections of a quasi-coherent complex on an affine scheme preserves quasi-isomorphisms and finite projective terms give flat finitely presented sheaves",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, CochainComplex.IsKProjective.Qh_map_bijective, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "no exact match; partial generic API only"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*sections|sections.*projective|projective.*sheafification",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; partial generic API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectFlatModelReplacement",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): sheafifying the bounded projective affine replacement and retaining its quasi-isomorphism",
+   "via": [
+    "lem-pc-affine-perfect-flat-model-replacement",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineProjectiveSectionsSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineProjectiveSectionsSheafification.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_projective_sections_sheafification",
+  "statement": "theorem affine_projective_sections_sheafification (Y : Scheme.{u}) [IsAffine Y] (D : CochainComplex Y.Modules ℤ) (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent) (P : CochainComplex (ModuleCat.{u} (Γ(Y, ⊤) : Type u)) ℤ) (hfinite : ∀ n : ℤ, Module.Finite (Γ(Y, ⊤) : Type u) (P.X n)) (hprojective : ∀ n : ℤ, Module.Projective (Γ(Y, ⊤) : Type u) (P.X n)) (q : P ⟶ ((@Functor.mapHomologicalComplex ℤ Y.Modules (ModuleCat.{u} (Γ(Y, ⊤) : Type u)) _ _ _ _ (SheafOfModules.evaluation.{u} Y.ringCatSheaf (op ⊤)) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)).obj D)) (hq : QuasiIso q) : let C := ((tilde.functor Γ(Y, ⊤) ⋙ restrictFunctor Y.isoSpec.hom).mapHomologicalComplex (ComplexShape.up ℤ)).obj P (∀ n : ℤ, (C.X n).IsFlatOver (𝟙 Y)) ∧ (∀ n : ℤ, (C.X n).IsQuasicoherent) ∧ (∀ n : ℤ, (C.X n).IsFinitePresentation) ∧ ∃ e : C ⟶ D, QuasiIso e",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T024049-L-3339203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261013T024049-L-3339203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
