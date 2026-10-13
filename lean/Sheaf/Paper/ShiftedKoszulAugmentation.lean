@@ -36,7 +36,8 @@ theorem shiftedKoszul_square (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → 
     (n : ℕ) :
     (-ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r f (n + 2))) ≫
       (-ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r f (n + 1))) = 0 := by
-  sorry
+  simpa only [Preadditive.neg_comp, Preadditive.comp_neg, neg_neg] using
+    ExteriorAlgebra.koszulBoundary_comp A r f (n + 1)
 
 /-- The chain version of `I`, with term `K_(n+1)` and negative differential.
 Source: Stacks, Tag 08CX (blueprint: def-pc-shifted-koszul-augmentation). -/
@@ -62,7 +63,11 @@ theorem shiftedKoszul_augmentation_comp (A : Type u) [CommRing A] (r : ℕ)
     (shiftedKoszulChain A r f).d 1 0 ≫
       ModuleCat.ofHom ((exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap.comp
         (ExteriorAlgebra.koszulBoundary A r f 0)) = 0 := by
-  sorry
+  change (-ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r f 1)) ≫
+    (ModuleCat.ofHom (ExteriorAlgebra.koszulBoundary A r f 0) ≫
+      ModuleCat.ofHom (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap) = 0
+  rw [Preadditive.neg_comp, ← Category.assoc,
+    ExteriorAlgebra.koszulBoundary_comp, zero_comp, neg_zero]
 
 /-- The canonical augmentation of the chain version of `I` to `A` in degree zero.
 Its component in degree zero sends the standard basis vector `i` to `f i`.
