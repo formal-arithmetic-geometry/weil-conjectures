@@ -31,73 +31,32 @@
  ],
  "proof": [
   {
-   "text": "*The ideal test and a common coefficient stage.* By [lem-weil-pbc-flat-fg-ideal-criterion], it is enough to prove that for each finitely generated ideal $\\mathfrak a=(r_1,\\ldots,r_n)\\subseteq R$, multiplication $\\mathfrak a\\otimes_RM\\to M$ is injective. Since $R=\\bigcup_\\lambda R_\\lambda$, choose $\\lambda_0$ containing all $r_i$ (use an upper bound repeatedly). For $\\mu\\ge\\lambda_0$ put $\\mathfrak a_\\mu=(r_1,\\ldots,r_n)R_\\mu$. The upper set $J=\\{\\mu:\\mu\\ge\\lambda_0\\}$ is nonempty and directed, and cofinal in $\\Lambda$: any $\\lambda$ and $\\lambda_0$ have a common upper bound. The ideals $\\mathfrak a_\\mu$ and modules $M_\\mu$ restrict to directed systems on $J$.",
+   "text": "Apply the backward equational criterion [lem-weil-pbc-flat-equational-criterion]. Given a finite relation ∑ₖ rₖ mₖ = 0 in M, use the union hypothesis to choose stages for the coefficients and h_repr to choose stage representatives for the elements. The finite union of these sets of indices has an upper bound i by directedness and nonemptiness, including when the relation is empty. Move coefficients and representatives to stage i. Naturality gives ιᵢ(yₖ) = mₖ.",
    "uses": [
-    "lem-weil-pbc-flat-fg-ideal-criterion"
+    "lem-weil-pbc-flat-equational-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), proof: the finitely generated ideal descends to an index and the proof proceeds over indices above it; flatness test is Lemma Tag 00HD (lemma-flat)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The colimits of the rings and ideals.* For $\\mu\\le\\nu$ in $J$, the maps $R_\\mu\\hookrightarrow R_\\nu$ and $\\mathfrak a_\\mu\\hookrightarrow\\mathfrak a_\\nu$ are inclusions. Their unions are respectively $R$ and $\\mathfrak a$: every element of $R$ lies in some $R_\\lambda$, hence in a common upper stage with $\\lambda_0$; and an element $\\sum_i s_ir_i$ of $\\mathfrak a$ has finitely many coefficients $s_i$, all in one such stage. Consequently $R$ is the colimit of the $R_\\mu$ as rings and as abelian groups, and $\\mathfrak a$ is the colimit of the $\\mathfrak a_\\mu$ as abelian groups [def-weil-pbc-category-colimit]. The induced $R$-module structure on this ideal colimit agrees with multiplication in $R$, because each transition map is a ring inclusion.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), proof: $\\mathfrak a=\\varinjlim_{i'\\ge i}\\mathfrak a'R_{i'}$"
-   }
+   "text": "The stage-i relation s = ∑ₖ aₖ yₖ has ιᵢ(s) = 0 by linearity and the original relation. Apply h_zero to s: there are j ≥ i and tᵢⱼ(s) = 0. Linearity of tᵢⱼ for the restricted scalar action gives ∑ₖ bₖ zₖ = 0 in Mⱼ, where bₖ is the inclusion of aₖ into Rⱼ and zₖ = tᵢⱼ(yₖ). Naturality still gives ιⱼ(zₖ) = mₖ.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*The module colimit encoded by (i) and (ii).* The compatible maps $\\iota_\\mu:M_\\mu\\to M$ make $M$ the colimit of the underlying abelian groups on $J$ [def-weil-pbc-category-colimit]. Indeed (i), followed by a common upper bound with $\\lambda_0$, represents every $m\\in M$ at a stage in $J$. If $\\iota_\\mu(x)=\\iota_\\nu(y)$, choose $\\rho\\ge\\mu,\\nu$; the difference $t_{\\mu\\rho}(x)-t_{\\nu\\rho}(y)$ maps to zero in $M$, so (ii) makes it zero at a later stage $\\sigma\\ge\\rho$. Thus the two representatives have equal images eventually. Given compatible additive maps $g_\\mu:M_\\mu\\to G$, the formula $g(\\iota_\\mu(x))=g_\\mu(x)$ is therefore well defined, additive after moving two inputs to a common stage, and unique. The induced $R$-action on this colimit is the given one on $M$: for $r\\in R_\\mu$ and $x\\in M_\\nu$, move both to a common stage $\\rho$; then $r\\iota_\\nu(x)=r\\iota_\\rho(t_{\\nu\\rho}(x))=\\iota_\\rho(r t_{\\nu\\rho}(x))$ by compatibility and $R_\\rho$-linearity of $\\iota_\\rho$.",
+   "text": "By hflat j and the forward equational criterion [lem-weil-pbc-flat-equational-criterion], choose a finite matrix cₖₛ over Rⱼ and elements qₛ of Mⱼ with zₖ = ∑ₛ cₖₛ qₛ and ∑ₖ bₖ cₖₛ = 0. Applying ιⱼ to the first equations gives mₖ = ∑ₛ cₖₛ ιⱼ(qₛ), with coefficients now in R. Applying the subring inclusion Rⱼ → R to the second equations gives ∑ₖ rₖ cₖₛ = 0. This trivializes the original relation and closes the backward criterion.",
    "uses": [
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-flat-equational-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), hypothesis $M=\\varinjlim_i M_i$; its elementwise colimit condition is expanded here from (i) and (ii)"
-   }
-  },
-  {
-   "text": "*The tensor comparison.* Apply [lem-weil-pbc-filtered-colimit-tensor-varying-rings] to the systems $A_\\mu=R_\\mu$, $P_\\mu=\\mathfrak a_\\mu$, $N_\\mu=M_\\mu$ on $J$. The transition maps on the ideals are semilinear by inclusion, and those on $M_\\mu$ are semilinear by the hypothesis that $t_{\\mu\\nu}$ is $R_\\mu$-linear (the $R_\\mu$-action on $M_\\nu$ is by restriction along $R_\\mu\\subseteq R_\\nu$). Steps 2 and 3 identify their colimits with $R$, $\\mathfrak a$, and $M$ and identify the resulting module structures. Hence $\\varinjlim_{\\mu\\in J}(\\mathfrak a_\\mu\\otimes_{R_\\mu}M_\\mu)\\cong\\mathfrak a\\otimes_RM$, taking the class of $y\\otimes x$ at stage $\\mu$ to $y\\otimes\\iota_\\mu(x)$.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), proof: the displayed multiplication map is the colimit of the maps $\\mathfrak a'R_{i'}\\otimes_{R_{i'}}M_{i'}\\to M_{i'}$"
-   }
-  },
-  {
-   "text": "*Injectivity at each stage and passage to the limit.* For each $\\mu\\in J$, multiplication $h_\\mu:\\mathfrak a_\\mu\\otimes_{R_\\mu}M_\\mu\\to M_\\mu$ is injective: it is the inclusion $\\mathfrak a_\\mu\\hookrightarrow R_\\mu$ tensored with the flat $R_\\mu$-module $M_\\mu$ [def-weil-pbc-flat-ring-map], followed by $R_\\mu\\otimes_{R_\\mu}M_\\mu\\cong M_\\mu$. These injections commute with transitions since $t_{\\mu\\nu}$ is semilinear. By [lem-weil-pbc-filtered-colimit-abelian-groups-exact], the induced map between their abelian-group colimits is injective. Under the identifications of steps 3 and 4 it is multiplication $\\mathfrak a\\otimes_RM\\to M$, as both maps send the stage-$\\mu$ class of $y\\otimes x$ to $y\\iota_\\mu(x)$. Thus the ideal test of step 1 shows that $M$ is flat over $R$.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), proof: stage maps are injective by flatness and their colimit is injective by Lemma Tag 00DB (lemma-directed-colimit-exact)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-fg-ideal-criterion",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+  "lem-weil-pbc-flat-equational-criterion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 05UU (lemma-colimit-rings-flat), proof of part (2), with the elementwise colimit conditions (i) and (ii) expanded"
+  "place": "Alternative proof of Tag 05UU (lemma-colimit-rings-flat), part (2), using the equational criterion Tag 00HK (lemma-flat-eq). Written and fully proved in Lean by J3; finite relation descent and eventual vanishing replace the ideal/tensor-colimit argument."
  },
  "mathlib_searches": [
   {
@@ -185,5 +144,15 @@
   "group": "J1",
   "result": "pass",
   "note": "R CommRing; Λ PartialOrder+Nonempty+IsDirected; Rsub: Λ→Subring R monotone; hUnion Set.univ = ⋃ coe; M R-module; Mstage R_λ-modules; ι R_λ-linear via compHom subtype; t R_λ-linear via compHom inclusion; t_id, t_comp, ι naturality pointwise; (i) h_repr; (ii) h_zero eventual vanishing; hflat Module.Flat stages; concl Module.Flat R M; not Mathlib (varying rings), distinct from landed part (1) FlatColimitRings"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T054222-L-444220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
