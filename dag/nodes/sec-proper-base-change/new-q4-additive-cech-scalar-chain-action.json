@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Scalar compatibility of augmentation-normalized additive etale Cech edges.",
+   "via": [
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sp-injective-resolutions",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "id": "new-q4-additive-cech-scalar-chain-action",
+ "title": "Scalar compatibility of the actual additive Cech coefficient augmentation",
+ "statement": "Let X be a scheme [def-pc-scheme], U any family of opens, I an injective resolution [def-sp-injective-resolutions] of the additive etale structure sheaf, and mu a family of coefficient endomorphisms acting on every etale section by multiplication by the pulled-back structural section r. Apply global sections to desc(mu(r),I,I) to obtain G; apply the open Cech functor, flip, and totalize the same descent to obtain F. With alpha and beta of [def-pbc-etale-additive-cech-normalization], in every degree n one has F_n(beta_n(y))=beta_n(r*y) for every unit Cech cochain y. The auxiliary theorem additiveCech_alpha_natural separately proves F_n(alpha_n(x))=alpha_n(G_n(x)) for any coefficient endomorphism and global cochain x. This asserts chain-level identities only, without choosing cycle representatives or comparing sheaf cohomology classes.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Augmented double-complex construction and functoriality, together with Tag 01EQ and the Ext injective-resolution comparison."
+ },
+ "proof": [
+  {
+   "text": "Construct the global and total maps by applying the indicated functors to InjectiveResolution.desc. For alpha, use ιTotal_map to reduce to the Cech-degree-zero product. Test equality against each product projection; Pi.map_π and Pi.lift_π reduce it to naturality of the resolution morphism under restriction from X to the tuple intersection. This proves additiveCech_alpha_natural for every coefficient endomorphism, including empty indexing families.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total map on a summand is the Čech map of the resolution comparison\nin that resolution degree. Use desc_commutes_zero to move the comparison\npast I.ι in each tuple coordinate. Substitute hμ, and use naturality of\nrestrictFunctorΓ to identify the restricted structural section with the scalar\non the module coordinate. The base ring map is the identity by ΓSpecIso and\ntoSpecΓ, so this coordinate is r times the original coordinate. The product\nmaps are equal coordinatewise; applying ιTotal_map proves the beta identity.\nThese arguments include zero scalar, unit scalar, degree zero, and empty products.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-pbc-etale-additive-cech-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-pbc-etale-additive-cech-normalization"
+ ],
+ "proof_origin": {
+  "by": "Q4 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Actual resolution descent and its global-section and total-complex functor images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cyclesMap_iCycles|homologyπ_naturality|extMk.*comp",
+   "results": "21 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution comparison map induces natural map on sheaf cohomology and Cech total complexes",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.desc_commutes, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.Hom.ι_comp_hom, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.descFOne_zero_comm, CategoryTheory.InjectiveResolution.Hom.ι_f_zero_comp_hom_f_zero",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "1 hits: HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of sheaf cohomology under a lifted injective resolution endomorphism and the augmented Cech total complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarChainAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechScalarChainAction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCech_scalar_chain_action",
+  "statement": "theorem additiveCech_scalar_chain_action\n    (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)\n    (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))\n    (hμ : ∀ r (W : X.Etaleᵒᵖ) (x : X.etaleAdditiveSheaf.obj.obj W),\n      (μ r).hom.app W x =\n        ULift.up ((show Γ(W.unop.left, ⊤) from x.down) *\n          (show Γ(W.unop.left, ⊤) from W.unop.hom.appTop r)))\n    (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (n : ℕ) (r : Γ(X, ⊤)) :\n    ∀ x : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).X n,\n      (additiveCechTotalMap U I (μ r)).f n (additiveCechBeta U I n x) =\n        additiveCechBeta U I n (r • x)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

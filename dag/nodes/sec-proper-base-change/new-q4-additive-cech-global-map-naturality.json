@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Scalar compatibility of augmentation-normalized additive etale Cech edges.",
+   "via": [
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-sc-etale-additive-structure-restriction",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "new-q4-additive-cech-scalar-chain-action"
+ ],
+ "id": "new-q4-additive-cech-global-map-naturality",
+ "title": "Naturality of the canonical global cocycle comparison under coefficient maps",
+ "statement": "For any scheme X [def-pc-scheme], injective resolution I of the additive etale structure sheaf [def-sp-injective-resolutions], normalized comparison c [def-weil-pbc-etale-resolution-section-canonical-comparison], coefficient endomorphism f and degree-n global resolution cycle s, let G be the actual global-section chain map of desc(f,I,I) [new-q4-additive-cech-scalar-chain-action]. Then c([cyclesMap(G)(s)])=H(f)(c([s])). There is no open family, coefficient Cech cycle or total-complex comparison hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Augmented double-complex construction and functoriality, together with Tag 01EQ and the Ext injective-resolution comparison."
+ },
+ "proof": [
+  {
+   "text": "Represent the cycle by the constant-free-sheaf morphism corresponding\nunder constantSheafAdj and uliftZMultiplesAddEquiv. Its differential is zero\nbecause iCycles maps into the kernel. The resolution comparison sends this\nmorphism to its composite with desc(f).f n, by naturality of that adjunction.\nApply global_cocycle to both representing cycles. The identity extMk_comp_mk₀\nfor the augmentation-preserving resolution morphism identifies their Ext\nclasses; the latter composite with Ext.mk₀ f is exactly Sheaf.H.map f n.\nThis holds in degree zero as well, with the same cocycle formula.",
+   "uses": [
+    "new-q4-additive-cech-scalar-chain-action",
+    "def-weil-pbc-etale-resolution-section-canonical-comparison",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-q4-additive-cech-scalar-chain-action",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "Q4 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Actual resolution descent and its global-section and total-complex functor images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cyclesMap_iCycles|homologyπ_naturality|extMk.*comp",
+   "results": "21 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution comparison map induces natural map on sheaf cohomology and Cech total complexes",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.desc_commutes, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.Hom.ι_comp_hom, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.descFOne_zero_comm, CategoryTheory.InjectiveResolution.Hom.ι_f_zero_comp_hom_f_zero",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "1 hits: HomologicalComplex.homologyπ_naturality",
+   "date": "2026-10-13",
+   "verdict": "Use the resolution descent, cyclesMap and projection naturality APIs; no exact augmented scalar-transport statement is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of sheaf cohomology under a lifted injective resolution endomorphism and the augmented Cech total complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport",
+  "date": "2026-10-13",
+  "group": "Q4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechGlobalMapNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechGlobalMapNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.additiveCech_global_map_naturality",
+  "statement": "theorem additiveCech_global_map_naturality\n    (X : Scheme.{u}) (I : InjectiveResolution X.etaleAdditiveSheaf)\n    (c : Etale.ResolutionSectionCanonicalComparison X.etaleAdditiveSheaf I)\n    (f : X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf) (n : ℕ)\n    (s : (additiveCechGlobal I).cycles n) :\n    c.globalEquiv n ((additiveCechGlobal I).homologyπ n\n      (HomologicalComplex.cyclesMap (additiveCechGlobalMap I f) n s)) =\n      Sheaf.H.map f n (c.globalEquiv n ((additiveCechGlobal I).homologyπ n s))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T131951-L-4088282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

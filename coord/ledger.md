@@ -12617,3 +12617,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:19 L: merged deliver/P4/Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison (stage 3; reviewer PASS; first push; landing 20261013T131950-L-4087892 (interface); batch 20261013T131946; modules 3; new nodes 2)
 - 13:19 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.FinitePresentationSectionAffineOpenVanishing (stage 3; reviewer PASS; first push; landing 20261013T131950-L-4087997 (interface); batch 20261013T131946; modules 3; new nodes 2)
 - 13:19 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.PerfectDescentCommonLocalModels (stage 3; reviewer PASS; first push; landing 20261013T131951-L-4088098 (interface); batch 20261013T131946; modules 2; new nodes 1)
+- 13:19 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechScalarTransport (stage 3; reviewer PASS; first push; landing 20261013T131951-L-4088282 (interface); batch 20261013T131946; modules 3; new nodes 2)
