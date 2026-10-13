@@ -14,37 +14,35 @@
  ],
  "proof": [
   {
-   "text": "A finite k-basis extends to finite A- and K-bases of A' and B=K tensor_k k' using Algebra.TensorProduct.basis. Compute C=A'/mA' as A' tensor_A K by the tensor quotient equivalence, swap factors, and cancel base change to obtain e:C to B on pure tensors as stated. Transport the K-basis along e to prove finrank d and nontriviality of B.",
+   "text": "Use the tensor finite-module instance to make B = A tensor_k k' finite over A. By the finite-algebra local-radical lemma, every maximal ideal n of B contracts to m. Mathlib PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Stacks Tag 0BRA) makes contraction injective on prime ideals. Therefore any two maximal ideals agree, so IsLocalRing.of_unique_max_ideal proves locality. If a prime P contains mB, its contraction contains m and is proper, hence equals m; contraction injectivity then gives P = n. Conversely mB is contained in n by Ideal.map_le_iff_le_comap.",
    "uses": [
-    "lem-weil-pbc-free-base-change-tower",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-tensor-cancel-base-change"
+    "lem-weil-pbc-finite-algebra-local-radical"
    ],
    "elementary": false
   },
   {
-   "text": "IsPurelyInseparable.exists_pow_mem_range_tensorProduct gives a positive power of every z in B in the image of K. This makes z nilpotent or a unit. The nilradical N is proper, contains every proper ideal, and is the only prime ideal: each prime contains N and every proper ideal is contained in N. Hence N is maximal.",
+   "text": "Define f : A/m to B/n by Ideal.Quotient.lift of the composite A to B to B/n, using mB <= n. Its value on residue classes is definitional. The quotient B/n is finite over A. The displayed residue-class formula gives IsScalarTower A (A/m) (B/n) by IsScalarTower.of_algebraMap_eq. Module.Finite.of_restrictScalars_finite A (A/m) (B/n) proves finiteness for precisely f.toAlgebra.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Pull N back through e and the quotient map to obtain m'. Quotient prime correspondence gives the unique prime over mA' and its maximality. Since A' is finite over A, every maximal ideal contracts to the unique maximal ideal m, so every maximal ideal equals m', and A' is local. Descend the structure map A to A'/m' through A/m to obtain f with the displayed formula. C surjects K-linearly onto A'/m'; images of its d basis vectors span, proving finiteness for the specified f-action.",
+   "text": "Use Mathlib Algebra.TensorProduct.quotientTensorEquiv directly: its inverse identifies B/mB with (A/m) tensor_k k', and quotientTensorEquiv_symm_apply_tmul proves the formula on pure tensors. Equip B/mB with the stipulated algebra structure e inverse composed with the left-factor map. The additive equivalence underlying e is K-linear: multiplicativity of e and e(e inverse(r)) = r prove the scalar formula. Its LinearEquiv.finrank_eq, followed by Module.finrank_baseChange (the rank-preserving base-change lemma), proves the required equality with finrank k k'.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-local-radical"
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-free-base-change-tower"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-base-change-tower",
+  "lem-weil-pbc-finite-algebra-local-radical",
   "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-tensor-cancel-base-change",
-  "lem-weil-pbc-finite-algebra-local-radical"
+  "lem-weil-pbc-free-base-change-tower"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proposition Tag 07E5, proof of (3) => (1); locality and finite flatness are used there without proof, expanded by the agent"
+  "document": "Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean; Mathlib/RingTheory/TensorProduct/Quotient.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+  "place": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Stacks Tag 0BRA), Algebra.TensorProduct.quotientTensorEquiv, Module.Finite.of_restrictScalars_finite, Module.finrank_baseChange; shorter implementation of the expanded argument for Stacks Tag 07E5"
  },
  "mathlib_searches": [
   {
@@ -121,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T211614-L-1057224",
-  "kind": "interface",
+  "landing": "20261013T005900-L-2608171",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
