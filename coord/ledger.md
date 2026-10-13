@@ -10851,3 +10851,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/C3/Sheaf.CategoryTheory.ColimitSiteRawSectionRelations (stage 3; reviewer PASS; first push; landing 20261013T031532-L-3568738 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/C4/Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong (stage 3; reviewer PASS; first push; landing 20261013T031532-L-3568891 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/D2/Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology (stage 3; reviewer PASS; after a return; landing 20261013T031533-L-3569021 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/D2/Sheaf.RingTheory.AdicFieldDifferentialsInjective (stage 3; reviewer PASS; first push; landing 20261013T031533-L-3569147 (proof); batch 20261013T031526; modules 1; new nodes 0)

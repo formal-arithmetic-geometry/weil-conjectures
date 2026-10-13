@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "*Characteristic zero: the residue field extension.* Assume $\\operatorname{char}k=0$. By [lem-weil-pbc-char-zero-field-extension-formally-smooth] the field $K$ is formally smooth over $k$ (lifting property of [def-weil-pbc-formally-smooth-adic] with $\\mathfrak n=0$). Hence by [lem-weil-pbc-formally-smooth-differentials-injective], applied to $\\mathbf Z\\to k\\to K$, the map $u_K:K\\otimes_k\\Omega_{k/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm da\\mapsto x\\,\\mathrm d\\bar a$, is injective. (This is Algebra, Proposition 0322 (5) in characteristic zero, which Stacks quotes here.)",
+   "text": "*Characteristic zero: the residue field extension.* Assume $\\operatorname{char}k=0$. By [lem-weil-pbc-char-zero-field-extension-formally-smooth] the field $K$ is formally smooth over $k$ (lifting property of [def-weil-pbc-formally-smooth-adic] with $\\mathfrak n=0$). Hence by [lem-weil-pbc-formally-smooth-differentials-injective], applied to $\\mathbf Z\\to k\\to K$, the map $u_K:K\\otimes_k\\Omega_{k/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm da\\mapsto x\\,\\mathrm d\\bar a$, is injective. (This is Algebra, Proposition 0322 (5) in characteristic zero, which Stacks quotes here.) Lean implements these existing Mathlib matches in the proved private helper charZero_injective: choose a transcendence basis, obtain an algebraic and hence separable extension over its characteristic-zero intermediate field, apply Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, then Algebra.H1Cotangent.exact_δ_mapBaseChange with the subsingleton H1 domain.",
    "uses": [
     "lem-weil-pbc-char-zero-field-extension-formally-smooth",
     "def-weil-pbc-formally-smooth-adic",
@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "*Characteristic zero: factor through $\\Omega_{C/\\mathbf Z}\\otimes_CK$.* Let $w:K\\otimes_C\\Omega_{C/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm dc\\mapsto x\\,\\mathrm d\\bar c$, be the map $u$ of [lem-weil-pbc-kahler-differentials-first-exact-sequence] for $\\mathbf Z\\to C\\to K$. On generators $w(\\lambda(\\mathrm da\\otimes x))=w(\\mathrm d(a\\cdot1_C)\\otimes x)=x\\,\\mathrm d(\\bar a)=u_K(x\\otimes\\mathrm da)$, since the image of $a\\cdot1_C$ in $K$ is the image $\\bar a$ of $a$ under $k\\to K$; both sides are $K$-linear, so $w\\circ\\lambda=u_K$. As $u_K$ is injective (step 2), so is $\\lambda$. This proves the statement in characteristic $0$, including its parenthetical remark that $w\\circ\\lambda$ is injective. (Formal smoothness of $C$ is not used in this case.)",
+   "text": "*Characteristic zero: factor through $\\Omega_{C/\\mathbf Z}\\otimes_CK$.* Let $w:K\\otimes_C\\Omega_{C/\\mathbf Z}\\to\\Omega_{K/\\mathbf Z}$, $x\\otimes\\mathrm dc\\mapsto x\\,\\mathrm d\\bar c$, be the map $u$ of [lem-weil-pbc-kahler-differentials-first-exact-sequence] for $\\mathbf Z\\to C\\to K$. On generators $w(\\lambda(\\mathrm da\\otimes x))=w(\\mathrm d(a\\cdot1_C)\\otimes x)=x\\,\\mathrm d(\\bar a)=u_K(x\\otimes\\mathrm da)$, since the image of $a\\cdot1_C$ in $K$ is the image $\\bar a$ of $a$ under $k\\to K$; both sides are $K$-linear, so $w\\circ\\lambda=u_K$. As $u_K$ is injective (step 2), so is $\\lambda$. This proves the statement in characteristic $0$, including its parenthetical remark that $w\\circ\\lambda$ is injective. (Formal smoothness of $C$ is not used in this case.) Lean checks the composite of differential maps by Derivation.liftKaehlerDifferential_unique on D a, then checks the tensor maps with TensorProduct.AlgebraTensorModule.ext.",
    "uses": [
     "lem-weil-pbc-kahler-differentials-first-exact-sequence",
     "def-weil-pbc-kahler-differentials"
@@ -107,9 +107,10 @@
    }
   },
   {
-   "text": "*Characteristic $p$: from $\\mathbf F_p$ to $\\mathbf Z$.* For an $\\mathbf F_p$-algebra $R$ (here $R=k$ and $R=C$), a derivation $D:R\\to M$ over $\\mathbf Z$ is additive, hence kills the image of $\\mathbf Z$, which is the image of $\\mathbf F_p$; so the $\\mathbf Z$-derivations and the $\\mathbf F_p$-derivations of $R$ into any $R$-module coincide, and by the universal property of [def-weil-pbc-kahler-differentials] the identity of $R$ induces an isomorphism $\\Omega_{R/\\mathbf Z}\\cong\\Omega_{R/\\mathbf F_p}$ with $\\mathrm d_{R/\\mathbf Z}a\\mapsto\\mathrm d_{R/\\mathbf F_p}a$. These isomorphisms for $R=k$ and $R=C$, tensored with $K$, commute with the maps $\\mathrm da\\otimes x\\mapsto\\mathrm d(a\\cdot1_C)\\otimes x$ (check on generators), so the map of the statement is identified with the injective map of step 6, and is injective. This is the parenthetical remark of the statement in characteristic $p$.",
+   "text": "For an F_p-algebra R, the map Z -> F_p is surjective, so Omega_{F_p/Z} is zero by KaehlerDifferential.subsingleton_of_surjective. The first differential exact sequence, in the form range_mapBaseChange Z F_p R, therefore shows that map Z F_p R R has zero kernel; map_surjective supplies surjectivity. This proves both asserted canonical bijections for R=k and R=C (private proved helper primeField_bijective). Tensoring the comparison for k with K preserves injectivity because K is flat over the field k. Use the composite ZMod p-algebra structure on C required by the existing step-6 theorem. The comparison square commutes on differentials D a by map_D and hence on all differentials by Derivation.liftKaehlerDifferential_unique; tensor induction extends this to all K-tensors. Applying the injective prime-field map of step 6, then the injective tensor comparison for k, proves injectivity of the integer-relative map. This is the parenthetical prime-field identification in 07EL and 07NQ.",
    "uses": [
-    "def-weil-pbc-kahler-differentials"
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
    ],
    "elementary": true,
    "source": {
@@ -205,5 +206,15 @@
   "group": "G1",
   "result": "pass",
   "note": "Field k, CommRing C k-algebra, IsLocalRing+IsNoetherianRing, FormallySmoothAdic k C m (test rings max u v), iota = cancelBaseChange.symm then (mapBaseChange Z k C).baseChange K sends x(x)da to x(x)d(a) (simp-checked), injective; char 0 composite with mapBaseChange Z C K; char p bijective map Z (ZMod p) for k and C; #check'd all names"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T031533-L-3569147",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
