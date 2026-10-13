@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-scalar-tensor-unit-coefficient",
+ "kind": "statement",
+ "title": "Scalar tensor coefficient respects the two unit maps",
+ "statement": "Let $k$ be a field, $f:X\\to\\operatorname{Spec}k$, and $F$ any $\\mathcal O_X$-module. Write $S_f$ for scalar restriction, $U=\\mathcal O_X$, $v:\\mathbf1\\to S_fU$ for scalarUnitMorphism, and $c_{F,G}:S_fF\\otimes_k S_fG\\to S_f(F\\otimes_{\\mathcal O_X}G)$ for scalarTensorCoefficient [def-sc-field-linear-module-cohomology-operations]. Both morphism equalities hold: $(S_fF\\mathbin{\\triangleleft}v);c_{F,U};S_f(\\rho_F)=\\rho_{S_fF}$ and $(v\\mathbin{\\triangleright}S_fF);c_{U,F};S_f(\\lambda_F)=\\lambda_{S_fF}$. No cohomology classes occur in these equalities.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, section-cup-product, Lemma 20.31.1 (Tag 0FKU); Tag 01F7; Modules, Tags 0096 and 01CA"
+ },
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheafification adjunction and monoidal tensorator of the sheaf inclusion to check the two maps on elementary tensors. The constant-sheaf adjunction defining the scalar-unit map makes its presheaf component send r to scalarMap(f,U)(r) on every open U. The coefficient map sends a pure tensor to tmulSection of its factors, by exists_scalarTensorCoefficient.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On s tensor r, the right module unitor after scalarTensorCoefficient returns scalarMap(f,U)(r) times s, which is r times s in the scalar module. On r tensor s, the left module unitor returns the same scalar multiple. The corresponding scalar unitors have these actions as well. Pure tensors generate the sectionwise tensor product. The sheafification adjunction and the unit coherence of the inclusion identify these sectionwise equalities with the claimed sheaf morphism equalities. The argument applies also to the zero module and empty scheme.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof_origin": {
+  "by": "agent Q2",
+  "document": "Stacks Project, Cohomology; Mathlib Ext and tensor API",
+  "place": "Tags 01DZ and 0FKU, expanded specialization of the parent proof; explicit Lean proof where supplied"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor coefficient of restriction of scalars commutes with the left and right unit maps of sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of sheaf modules respects tensor product unit left right unitor",
+   "results": "8 hits: SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.restrictScalars, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, SheafOfModules.unitHomEquiv_symm_comp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scalar sheaf statement in the pinned Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|right_unitality",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/PushforwardZeroMonoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/PushforwardZeroMonoidal.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scalar sheaf statement in the pinned Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Parent scalar cup unit argument: Scalar tensor coefficient respects the two unit maps",
+   "via": [
+    "lem-sc-scalar-cup-unit-identities",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarTensorUnitCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarTensorUnitCoefficient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficient_unit",
+  "statement": "theorem scalarTensorCoefficient_unit\n    (f : X ⟶ Spec (CommRingCat.of k)) (F : X.Modules) :\n    ((scalarSheaf f F) ◁ scalarUnitMorphism f) ≫\n        scalarTensorCoefficient f F (SheafOfModules.unit X.ringCatSheaf) ≫\n        scalarHom f (ρ_ F).hom = (ρ_ (scalarSheaf f F)).hom ∧\n    (scalarUnitMorphism f ▷ (scalarSheaf f F)) ≫\n        scalarTensorCoefficient f (SheafOfModules.unit X.ringCatSheaf) F ≫\n        scalarHom f (λ_ F).hom = (λ_ (scalarSheaf f F)).hom",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

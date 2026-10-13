@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-scalar-unit-ext-class",
+ "kind": "statement",
+ "title": "The class of one in scalar degree-zero Ext",
+ "statement": "Let $k$ be a field, $f:X\\to\\operatorname{Spec}k$ a scheme over $k$, and $U=\\mathcal O_X$. Use scalar cohomology and its recorded comparison with scalar Ext [def-sc-field-linear-module-cohomology-operations]. The canonical class $u_X$ of one [lem-sc-scalar-unit-cohomology-coordinates] satisfies $e_{U,0}(u_X)=\\operatorname{mk}_0(\\operatorname{scalarUnitMorphism}(f))$ in $\\operatorname{Ext}^0(\\mathbf1,S_fU)$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, section-cup-product, Lemma 20.31.1 (Tag 0FKU); Tag 01F7; Modules, Tags 0096 and 01CA"
+ },
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-unit-cohomology-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution I of U. The canonical map to the zeroth right derived functor is I.toRightDerivedZero followed by the degree-zero homology projection and the inverse resolution comparison. Apply this to one. Its image in the cycles has iCycles equal to the section obtained from the augmentation I.iota in degree zero. The characterization in exists_moduleExtEquiv therefore identifies its module Ext class with I.extMk of this augmentation.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-scalar-unit-cohomology-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Import all of Cohomology.AbelianCechComparisonNormalization and apply its existing proved private extMk_augmentation to the identity of U. This identifies the augmentation class with mk0 identity without reproving that fact. Exact-functor transport sends mk0 identity to mk0 identity. Precompose with mk0 scalarUnitMorphism and use the identity law for Ext composition. The forward map of the AddEquiv wrapper is the same scalarCohomologyExtMap.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "new-abelian-cech-comparison-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-unit-cohomology-coordinates",
+  "new-abelian-cech-comparison-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent Q2",
+  "document": "Stacks Project, Cohomology; Mathlib Ext and tensor API",
+  "place": "Tags 01DZ and 0FKU; reuse the existing augmentation helper via import all, then exact-functor transport and Ext identity laws"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical zeroth derived cohomology class of one maps to the identity morphism in Ext zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mk₀\", \"toRightDerivedZero\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scalar sheaf statement in the pinned Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|extMk.*mk₀",
+   "results": "13 hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scalar sheaf statement in the pinned Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Parent scalar cup unit argument: The class of one in scalar degree-zero Ext",
+   "via": [
+    "lem-sc-scalar-cup-unit-identities",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarUnitExtClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarUnitExtClass.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarUnitCohomologyClass_ext",
+  "statement": "theorem scalarUnitCohomologyClass_ext\n    (f : X ⟶ Spec (CommRingCat.of k)) :\n    scalarCohomologyExtEquiv f (SheafOfModules.unit X.ringCatSheaf) 0\n      (scalarUnitCohomologyClass f) = Abelian.Ext.mk₀ (scalarUnitMorphism f)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

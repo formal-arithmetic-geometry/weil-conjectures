@@ -15,24 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Evaluate morphisms from the structure sheaf at one in an injective resolution.\nThe augmentation representing the canonical degree-zero class corresponds to the\nidentity of the structure sheaf in degree-zero Ext. After restriction to k-vector\nsheaves and precomposition by the scalar unit, its scalar Ext class is mk₀ of\nscalarUnitMorphism. Expand scalarExtCup. Tensoring this degree-zero morphism on\neither side and composing with scalarTensorCoefficient and the structure-sheaf\nunitor gives the identity on the other coefficient: on sections the two composites\nsend s tensor one and one tensor s to s. The tensor universal property and the\nsheafification adjunction give these equalities on sheaves. Naturality of the\nunitors for exact-functor transport on Ext, and associativity of Ext composition,\nand equality of the two unitors at the tensor unit\ntherefore reduce both products to the original Ext class. The cohomology-to-Ext\ncomparison is natural in coefficients, so transport this equality back along its\ninjective equivalence. Degree zero introduces no sign. This argument uses neither\nan acyclic cover nor quasi-coherence.",
+   "text": "Identify the canonical class of one under scalarCohomologyExtEquiv with mk0 scalarUnitMorphism. Use the recorded scalar cohomology coefficient naturality to compare the image under the structure-sheaf left unitor with postcomposition in Ext. Unfold scalarCohomologyCup and cancel its inverse Ext comparison.",
    "uses": [
-    "lem-sc-scalar-unit-cohomology-coordinates",
-    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-scalar-unit-ext-class",
     "lem-sc-scalar-cohomology-ext-coefficient-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two degree-one scalar Ext cup formulas to the scalar-unit morphism. By associativity of Ext composition and mk0_comp_mk0, the remaining postcomposition is mk0 of the inverse scalar unitor followed by the whiskered scalar unit, scalarTensorCoefficient, and the image of the module left unitor. The tensor-unit coefficient equations reduce these composites to identities; for the right product the module left and right unitors agree at U. Cancel the scalar unitor and use injectivity of scalarCohomologyExtEquiv.",
+   "uses": [
+    "lem-sc-scalar-ext-cup-degree-zero",
+    "lem-sc-scalar-tensor-unit-coefficient"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-scalar-unit-cohomology-coordinates",
-  "def-sc-field-linear-module-cohomology-operations",
-  "lem-sc-scalar-cohomology-ext-coefficient-naturality"
+  "lem-sc-scalar-unit-ext-class",
+  "lem-sc-scalar-cohomology-ext-coefficient-naturality",
+  "lem-sc-scalar-ext-cup-degree-zero",
+  "lem-sc-scalar-tensor-unit-coefficient"
  ],
  "proof_origin": {
-  "by": "agent A3, second reader",
+  "by": "agent Q2",
   "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
-  "place": "Tags 0FKU and 01F7; specialization of the tensor and functoriality formulas to the section one"
+  "place": "Tags 01DZ, 0FKU and 01F7; complete Lean reduction to degree-zero normalization, tensor coefficient unit laws, and proved degree-one Ext formulas"
  },
  "mathlib_searches": [
   {
@@ -125,9 +133,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T054208-L-440456",
+  "landing": "20261013T100101-L-2478571",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

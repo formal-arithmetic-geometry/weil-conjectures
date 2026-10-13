@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-scalar-ext-cup-degree-zero",
+ "kind": "statement",
+ "title": "Degree-one scalar Ext cup with a degree-zero morphism",
+ "statement": "Let $k$ be a field and $X$ a scheme. In the category of sheaves of $k$-vector spaces $K(X,k)$, use scalarExtCup [def-sc-field-linear-module-cohomology-operations]. For arbitrary sheaves $A,B$, $a\\in\\operatorname{Ext}^1(\\mathbf1,B)$ and a morphism $v:\\mathbf1\\to A$, one has $\\operatorname{scalarExtCup}(a,\\operatorname{mk}_0(v))=a;\\operatorname{mk}_0(\\rho_B^{-1};(B\\mathbin{\\triangleleft}v))$ and $\\operatorname{scalarExtCup}(\\operatorname{mk}_0(v),a)=a;\\operatorname{mk}_0(\\lambda_B^{-1};(v\\mathbin{\\triangleright}B))$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, section-cup-product, Lemma 20.31.1 (Tag 0FKU); Tag 01F7; Modules, Tags 0096 and 01CA"
+ },
+ "stmt_deps": [
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "For exact additive functors L,R and a natural transformation alpha from L to R, prove naturality of transport on Ext by induction on the degree. Degree zero is naturality on ordinary morphisms and mapExactFunctor_mk0. In successor degree embed the second object into an injective and express the class as a class composed with the connecting extension. The natural transformation gives a map from the short exact sequence mapped by L to the one mapped by R. Extension-class naturality and the induction hypothesis give the desired transport square. Sheaves of k-vector spaces have enough injectives by the Grothendieck abelian sheaf instance.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact functor identity comparison identifies transport through tensorRight-unit and tensorLeft-unit with the original Ext class, precomposed and postcomposed by the appropriate unitors. Postcompose the comparison by its inverse component to obtain the explicit transport formula.",
+   "uses": [
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand scalarExtCup and mapExactFunctor_mk0. For the right product insert the right-unit transport formula, cancel the unit unitor using equality of left and right unitors at the unit, and combine the remaining degree-zero compositions. For the left product first apply the transport naturality square for the transformation from tensorLeft-unit to tensorLeft-A induced by v, then insert the left-unit transport formula and cancel the left unitor. Associativity and mk0_comp_mk0 give the two formulas.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-ext-exact-functor-identity-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-ext-exact-functor-identity-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent Q2",
+  "document": "Stacks Project, Cohomology; Mathlib Ext and tensor API",
+  "place": "Tags 01DZ and 0FKU, expanded specialization of the parent proof; explicit Lean proof where supplied"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor pairing on Ext with a degree zero morphism is composition with its tensor whiskering",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExactFunctor\", \"NatTrans\"",
+   "results": "1 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp",
+   "date": "2026-10-13",
+   "verdict": "Online Loogle finds a newer Mathlib lemma absent from the pinned Mathlib; proof uses induction on Ext degree instead."
+  },
+  {
+   "tool": "grep",
+   "query": "extClass_naturality|mapExactFunctor.*naturality",
+   "results": "1 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scalar sheaf statement in the pinned Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Parent scalar cup unit argument: Degree-one scalar Ext cup with a degree-zero morphism",
+   "via": [
+    "lem-sc-scalar-cup-unit-identities",
+    "lem-sc-picard-external-cup-unit-comparison",
+    "lem-sc-picard-external-cup-scalar-comparison",
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarExtCupDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarExtCupDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarExtCup_mk₀",
+  "statement": "theorem scalarExtCup_mk₀ {A B : KSheaf X k}\n    (a : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) B 1)\n    (v : 𝟙_ (KSheaf X k) ⟶ A) :\n    scalarExtCup a (Abelian.Ext.mk₀ v) =\n      a.comp (Abelian.Ext.mk₀ ((ρ_ B).inv ≫ (B ◁ v))) rfl ∧\n    scalarExtCup (Abelian.Ext.mk₀ v) a =\n      a.comp (Abelian.Ext.mk₀ ((λ_ B).inv ≫ (v ▷ B)))\n        (by omega : 1 + 0 = 0 + 1)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100101-L-2478571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
