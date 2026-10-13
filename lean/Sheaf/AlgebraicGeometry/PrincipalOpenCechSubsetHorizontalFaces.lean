@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertion
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowReassembly
+import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaceCoordinate
 
 /-! # Ordered horizontal faces of a single principal-open subset
 
@@ -80,6 +82,28 @@ theorem principalSubsetHorizontalFaces
                     (op (D (S.val.erase j.val)))
                     ((Pi.single S₀ x : principalSubsetCoordinates A r f J n)
                       ⟨S.val.erase j.val, h⟩))
-          else 0) := by sorry
+          else 0) := by
+  classical
+  intro V U K H D hle he n S₀ x p q P L e hdeg
+  apply principalSubsetRowReassembly A r f J (n + 1) (p + 1) q hdeg
+  · intro S hcard
+    apply Finset.sum_eq_zero
+    intro j _
+    split_ifs with h
+    · have hne : (⟨S.val.erase j.val, h⟩ :
+          {S : Finset (Fin r) // S.Nonempty}) ≠ S₀ := by
+        intro heq
+        have hv := congrArg Subtype.val heq
+        have hc := Finset.card_erase_of_mem j.property
+        have hp := S₀.property.card_pos
+        dsimp only [p] at hcard
+        change S.val.erase j.val = S₀.val at hv
+        rw [hv] at hc
+        omega
+      rw [Pi.single_eq_of_ne hne, map_zero, map_zero, smul_zero]
+    · rfl
+  · intro S hcard
+    exact principalSubsetHorizontalFaceCoordinate A r f J hle he n S₀ x S hcard
+
 
 end AlgebraicGeometry

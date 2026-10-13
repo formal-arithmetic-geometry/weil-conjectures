@@ -13,38 +13,37 @@
  },
  "proof": [
   {
-   "text": "Fix a nonempty source subset S₀, put p=|S₀|-1 and q=n+1-|S₀|, and apply the explicit ordered Cech differential to the tuple vector supported at the increasing enumeration of S₀. At each increasing target tuple t the result is the sum over deleted positions k of signed face restriction. The source single is zero unless the deleted tuple has range S₀; equality of ranges implies equality of increasing embeddings.",
+   "text": "Apply principalSubsetRowReassembly to the target ordered row p+1 with its differential vector and the stated signed subset family. The supplied hdeg is its total-degree equation.",
    "uses": [
-    "def-sc-principal-open-cech-subset-insertion",
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-principal-open-cech-subset-row-reassembly"
    ],
    "elementary": false
   },
   {
-   "text": "For each target range T, biject deleted positions k with j in T by evaluation of its increasing enumeration. The position k equals the number of elements of T less than j, and the deleted tuple enumerates T erase j. Naturality of overFunctorEquiv and functoriality of the coefficient presheaf identify transported face restriction with restriction along D_T ≤ D_(T erase j). The equality he identifies coefficient degrees and proof irrelevance identifies equality transports. Thus the target tuple coordinate is exactly the signed sum stated.",
+   "text": "For a subset S of cardinality different from p+2, prove every signed term is zero. If the deletion is empty it is zero by definition. Otherwise equality S erase j=S0 would imply card(S)=card(S0)+1=p+2 by card_erase_of_mem and nonemptiness of S0. Thus the source subset singleton is zero, and both coefficient maps preserve zero.",
    "uses": [
-    "def-sc-principal-open-cech-subset-insertion",
-    "def-sc-alternating-cech-total-complex"
+    "def-sc-principal-open-cech-subset-insertion"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Reassemble the target tuple product and apply its inverse extension isomorphism followed by the bidegree-(p+1,q) total inclusion. The supplied hdeg makes that inclusion land in degree n+1. In the subset insertion on the right, a term can be nonzero only when T erase j=S₀, hence |T|=|S₀|+1, so all other bidegrees vanish. Singleton targets have only empty deletions and contribute zero; r=0 has no nonempty S₀.",
+   "text": "On a subset of cardinality p+2, principalSubsetHorizontalFaceCoordinate gives exactly the heterogeneous equality required by row reassembly. The latter then identifies the row inclusion with the full subset insertion.",
    "uses": [
-    "def-sc-principal-open-cech-subset-insertion",
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-principal-open-cech-subset-horizontal-face-coordinate",
+    "lem-sc-principal-open-cech-subset-row-reassembly"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-principal-open-cech-subset-row-reassembly",
   "def-sc-principal-open-cech-subset-insertion",
-  "def-sc-alternating-cech-total-complex"
+  "lem-sc-principal-open-cech-subset-horizontal-face-coordinate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01FG, ordered differential immediately preceding Definition 20.23.2; Tag 08C1 and equation-global-sections-to-alternating-cech (08C0). Read at https://stacks.math.columbia.edu/tag/01FG, https://stacks.math.columbia.edu/tag/08C1 and https://stacks.math.columbia.edu/tag/08C0."
+  "place": "Tag 01FG, ordered differential and tuple product preceding Definition 20.23.2; Tags 08C0 (equation 20.40.0.1) and 08C1, alternating Cech totalization. Read online at https://stacks.math.columbia.edu/tag/01FG and https://stacks.math.columbia.edu/tag/08C1."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -119,9 +118,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T163535-L-1620161",
+  "landing": "20261013T181052-L-2597865",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
