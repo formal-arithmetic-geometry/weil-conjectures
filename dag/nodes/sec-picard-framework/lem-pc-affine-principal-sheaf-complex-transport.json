@@ -54,9 +54,11 @@
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08E7, converse proof"
+  "place": "Tag 08E7, converse local-model comparison; categorical proof using Mathlib adjunction uniqueness"
  },
  "created": {
   "by": "worker",
@@ -82,25 +84,22 @@
  "statement": "theorem affine_principal_sheaf_complex_transport (A : Type u) [CommRing A] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] (M : CochainComplex (ModuleCat.{u} A) ℤ) (f : A) [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))] (U : (Spec (.of A)).Opens) (hf : PrimeSpectrum.basicOpen f ≤ U) (P : CochainComplex (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ℤ) (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → CategoryTheory.Limits.IsZero (P.X i)) (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{u} (Fin r)))) (hiso : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ≅ DerivedCategory.Q.obj P)) : ∃ C : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → CategoryTheory.Limits.IsZero (C.X i)) ∧ (∀ i : ℤ, ∃ r : ℕ, Nonempty (C.X i ≅ SheafOfModules.free (R := moduleRings (Spec (.of (Localization.Away f))).toRingedSpace) (ULift.{u} (Fin r)))) ∧ Nonempty (DerivedCategory.Q.obj C ≅ DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f)) (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) _ _ _ _ (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away f))) (ComplexShape.up ℤ)).obj M)))",
  "proof": [
   {
-   "text": "Restrict the complex and supplied derived isomorphism to D(f), transport along the affine scheme isomorphism D(f) ≅ Spec(A_f), and preserve the upper bound and finite-free terms by exact additive equivalences.",
-   "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
+   "text": "Let j : Spec(A_f) → U be basicOpenIsoSpecAway(f).inv followed by the inclusion D(f) → U, and let F = overEquiv(U).functor followed by restrictFunctor(j). Restriction preserves limits by the proved upstream instance Scheme.Modules.preservesLimitsOfSize_restrictFunctor (WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel), whose proof uses abelian-presheaf precomposition and preservation/reflection by the forgetful functor; it preserves colimits by its Mathlib left adjoint instance. Thus F is additive and exact. Define C = F.mapHomologicalComplex(P). Apply F.map_isZero to the supplied upper-bound witnesses. For each finite-free term, identify F of the structure module with the new structure module using overFunctorEquiv and restrictUnitIso; mapFreeIso and F.mapIso give the same finite rank.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "The principal-open sections formula gives a natural comparison between transported tilde N and tilde(A_f tensor_A N), so the transported complex is derived-isomorphic to the localized tilde complex.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
+   "text": "Evaluate pushforwardCompModulesSpecToSheafIso at the full open to identify pushforward(Spec(A_f) → Spec(A)) followed by moduleSpecΓFunctor with moduleSpecΓFunctor followed by restrictScalars. Compose the tilde/Gamma and restriction/pushforward adjunctions. Compare this right adjoint with the right adjoint of extendScalars followed by tilde, and apply leftAdjointUniq. This gives a natural underived isomorphism tilde followed by principal-open restriction ≅ extendScalars followed by tilde, without invoking any unproved localization-comparison theorem.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use overFunctorEquiv, restrictFunctorComp and restrictFunctorCongr for j followed by U.ι = Spec.map(algebraMap A A_f) to identify restriction to U followed by F with direct principal-open restriction. Map the two natural comparisons to complexes. Apply F.mapDerivedCategory to the inverse of hiso, and compose with F.mapDerivedCategoryFactors on P, the mapped factorization for restriction to U, the factorization on the restricted tilde complex, and Q.mapIso of the two complex comparisons. This yields the required derived comparison for C, including independent morphism universes wX and wY. All component results and both local helpers are proved; no further project proof dependency is required.",
+   "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-weil-pbc-spec-module-tilde-sections"
- ],
+ "proof_deps": [],
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport",
@@ -125,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T015620-L-3028871",
-  "kind": "interface",
+  "landing": "20261013T033011-L-3679574",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
