@@ -24,22 +24,24 @@
  },
  "proof": [
   {
-   "text": "Write n=|G| and t for the root. The hypothesis identifies the base prime\nwith (t), so its stalk is A_(t). Since g is regular and H/(g) is a domain,\nH_(g) is a DVR with uniformizer g. The monic root algebra is free over H,\nthe equation t^n=g makes t regular, and A/(t)=H/(g). Thus the regular local\nring A_(t) is a DVR with uniformizer t, and its extension over H_(g) has\nramification index n. The cartesian chart beta restricts W to a G-torsor on\nD(f); localizing at (g) gives a G-torsor on the fraction field of H_(g).\nEach connected factor is Galois for its stabilizer subgroup in G. By 09EB,\nits ramification index divides the stabilizer order, which divides n, and\nits residue extension is separable because n is invertible. The factors are\ntame. Abhyankar 0BRM for the index-n root extension makes the normalized\nbase-change factors adically formally smooth. The index-one implication of\n09E7 says that the valuation of t in each factor is one. By 0307, localizing\nthe concrete relative normalization gives precisely these integral closures;\nfurther localization at x gives their DVR local rings, with the displayed\nstructural stalk map. Every element of their maximal ideal is therefore a\nmultiple of the image of t. Passing to the quotient by the square of that\nideal gives the asserted cotangent spanning statement. Only this first-order\nconclusion is retained; the caller uses Noetherianity and Nakayama to recover\nideal generation. No Cartier centre, divisor generic point, or comparison\nwith the base maximal ideal occurs in this statement. For n=1 the root base\nchange is the identity and the same tame calculation applies. Empty factors\nhave no x and give no assertion.",
+   "text": "Apply root_normalization_stalk_maximalIdeal_isPrincipal (with n = Nat.card G) and root_normalization_root_not_square. Write m=(r). If tau is a unit its principal ideal is top. Otherwise tau=c*r. Were c a nonunit it and r would belong to m, contradicting tau not in m*m. Therefore c is a unit; for z=d*r in m, z=(d*c inverse)*tau. This proves m <= (tau), and le_sup_left gives the stated cotangent containment.",
    "uses": [
-    "lem-sbc-normalization-stalk-base-change"
+    "lem-sbc-root-normalization-stalk-principal-ideal",
+    "lem-sbc-root-normalization-root-not-square"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normalization-stalk-base-change"
+  "lem-sbc-root-normalization-stalk-principal-ideal",
+  "lem-sbc-root-normalization-root-not-square"
  ],
  "proof_origin": {
   "by": "agent",
   "kind": "written-by-agent",
+  "agent": "D3",
   "document": "Stacks Project",
-  "place": "Tags 09EB, 0BRM, 09E7 and 0307; the index-one calculation, retained only modulo the square of the maximal ideal; the explicit kernel/generic-point and Nakayama decomposition is written by G3.",
-  "agent": "G3"
+  "place": "Tags 0307, 035L, 00PD for principalness; Tags 09EB, 0BRM, 09E7 for the nonzero first-order root class; elementary unit-coefficient proof combines the two."
  },
  "mathlib_searches": [
   {
@@ -110,9 +112,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T211104-L-392134",
+  "landing": "20261013T231532-L-1816267",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
