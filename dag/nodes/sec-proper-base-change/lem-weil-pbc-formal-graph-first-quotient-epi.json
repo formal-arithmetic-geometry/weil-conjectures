@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-formal-graph-first-quotient-epi",
+ "kind": "statement",
+ "title": "The finite formal comparison graph surjects onto the first ideal quotient",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], J a quasi-coherent ideal, and F,Fprime,H coherent modules with a:F→H and aprime:Fprime→H. Completion and formal quotients are [def-weil-pbc-coherent-formal-module]. For a formal map theta:Fhat→Fprimehat satisfying theta followed by aprimehat = ahat and n≥0, put P=F×_H Fprime and d=p2 followed by qprime minus p1 followed by q followed by theta_n, where q,qprime are the J^(n+1) quotient projections. Then ker(d)→P→F→F/JF is epi. No power-torsion hypothesis on aprime is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine comparison; Tag 087W; Algebra Tag 00MB"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "On every affine open use the tilde/global-sections equivalence and the coherent formal-module dictionary to identify the discrepancy kernel and its completed morphism with finite module constructions.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact finite completion preserves the pullback and discrepancy kernel. Compatibility of the formal comparison morphism gives the section (id,theta) into the completed pullback, killed by the completed discrepancy; hence the completed first projection is split epi.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduction modulo the ideal identifies a finite module with the first quotient of its completion, compatibly with maps. Reduce the preceding split epimorphism to obtain local surjectivity onto F/JF, then use the affine cover to get sheaf epimorphy.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine comparison; Tag 087W; Algebra Tag 00MB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible formal morphism gives a split surjective completed projection from its finite graph kernel and hence an epimorphism to the first ideal quotient",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible formal morphism gives a split surjective completed projection from its finite graph kernel and hence an epimorphism to the first ideal quotient",
+   "results": "AdicCompletion.map_surjective_of_mkQ_comp_surjective, surjective_of_mkQ_comp_surjective and surjective evaluation maps. None identifies the finite coherent comparison graph.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.map_exact",
+   "results": "AdicCompletion.map_exact in Mathlib.RingTheory.AdicCompletion.Exactness; exact completion, not the sheaf graph projection.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalGraph|finite.*graph|graph.*quotient",
+   "results": "25 unrelated Mathlib hits, including Goursat graphs and definability; no comparison graph theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible map of adic completions lifts to the completion of the pullback kernel and surjects modulo the ideal",
+   "results": "Second reader: kerProj, exists_smodEq_pow_smul_top_and_mkQ_eq, map_surjective_of_mkQ_comp_surjective and generic completion lifting. No finite coherent comparison-graph theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Function.Surjective",
+   "results": "Second reader: eval_surjective, map_surjective and map_exact supply module completion facts, not the sheaf pullback/kernel comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*pullback|pullback.*completed|quotient.*annihilat|annihilat.*quotient",
+   "results": "Second reader: Mathlib search has unrelated lattice pullbacks and annihilator quotient facts. Direct rg of both library roots finds formal completion exactness and torsion-reflection lemmas, none with this graph conclusion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic formal comparison morphism gives surjectivity modulo the ideal from the kernel of a discrepancy on a coherent sheaf fiber product",
+   "results": "Current second reader: kerProj_surjective, map_surjective_of_mkQ_comp_surjective, exists_smodEq_pow_smul_top_and_mkQ_eq, map_surjective and eval_surjective. These are module completion facts, not the coherent sheaf graph comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"exact\"",
+   "results": "Current second reader: AdicCompletion.map_exact in Mathlib.RingTheory.AdicCompletion.Exactness. This supplies finite-module exact completion, not the graph kernel comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*(mul|cokernel)|cokernel.*(pullback|annihilator)|surjective.*completion",
+   "results": "Current second reader: mono_cokernel_map_of_isPullback and map_surjective, already used or below the remaining comparison. Direct rg of lean/Sheaf and lean/WeilConjectures finds formalCompletion_exact and completion_thickening_cokernel_reflection, but neither states graph closed-fibre surjectivity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledFiniteGraphEpi",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity and uniqueness argument using coherent algebraization (0889); finite-graph comparison step restricted to the closed fibre.",
+   "via": [
+    "lem-weil-pbc-torsion-controlled-finite-graph-epi",
+    "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion",
+    "lem-weil-pbc-torsion-controlled-completion-hom-lift-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalGraphFirstQuotientEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalGraphFirstQuotientEpi.lean",
+  "declaration": "AlgebraicGeometry.formalGraph_first_quotient_epi",
+  "statement": "theorem formalGraph_first_quotient_epi\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)\n    (n : ℕ) :\n    let t : formalModuleQuotient J (n + 1) F.obj ⟶\n        formalModuleQuotient J (n + 1) F'.obj := θ.hom.app (op n)\n    let d : pullback a.hom a'.hom ⟶ formalModuleQuotient J (n + 1) F'.obj :=\n      pullback.snd a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj -\n        pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F.obj ≫ t\n    Epi (kernel.ι d ≫ pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J 1 F.obj)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T095937-L-2453474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T095937-L-2453474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

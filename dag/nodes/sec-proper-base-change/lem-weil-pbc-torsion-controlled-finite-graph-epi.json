@@ -14,35 +14,39 @@
  ],
  "proof": [
   {
-   "text": "On an affine open the coherent pullback and its graph kernel correspond to finite modules. Use the affine tilde-sections dictionary, and identify θ with its map between finite completed modules.",
+   "text": "Apply the finite formal-graph first-quotient epimorphism to the prescribed compatible formal map. This gives E→F/JF epi without using either torsion hypothesis.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-formal-graph-first-quotient-epi"
    ],
    "elementary": false
   },
   {
-   "text": "Exactness of Noetherian completion preserves the finite pullback and graph kernel. The pair (id,θ) maps into the completed graph, so its first projection is surjective. The finite cokernel therefore vanishes at primes containing J by reduction modulo J and Nakayama.",
+   "text": "Choose the exponent s from the given comparison torsion data. Apply the proved kernel-pullback cokernel bound to the graph discrepancy; J^(s+n+1) kills coker(E→F). Only the comparison cokernel hypothesis is needed.",
    "uses": [
-    "lem-weil-pbc-completion-exact-finite-modules"
+    "lem-weil-pbc-finite-kernel-pullback-cokernel-annihilated"
    ],
    "elementary": false
   },
   {
-   "text": "At primes not containing J, a′ is an isomorphism because its kernel and cokernel are J-power torsion, and the quotient condition is zero. The graph projection is an isomorphism there. Thus its cokernel is zero at every stalk, which proves epimorphy.",
-   "uses": [],
-   "elementary": true
+   "text": "Let C=coker(E→F). Naturality of quotient maps and cancellation of E→F/JF show that C→C/JC is zero. At a stalk, the ideal-power quotient formula gives IC=C and the annihilator formula gives I^(s+n+1)C=0. Induct on k using I^(k+1)C=I^k(IC) to obtain I^kC=C; hence C=0. Section extensionality detects this globally, and the categorical zero-cokernel criterion proves epimorphy.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-completion-exact-finite-modules"
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-finite-kernel-pullback-cokernel-annihilated",
+  "lem-weil-pbc-formal-graph-first-quotient-epi",
+  "lem-weil-pbc-ideal-module-product-stalk"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
+  "group": "C3",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), finite-graph comparison repair"
+  "place": "Tag 0889(1), finite-graph comparison reduced to closed-fibre surjectivity and a proved power-annihilator bound; final power-annihilated Nakayama argument as in Algebra Tag 00DV(9)."
  },
  "mathlib_searches": [
   {
@@ -125,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b3649",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T054236-L-448895",
+  "landing": "20261013T095937-L-2453474",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proof dependencies with the nodes and change record; all four modules and the adapted direct importer compile cleanly, the original caller fails at the removed theorem, and axiom checks show only permitted axioms plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
