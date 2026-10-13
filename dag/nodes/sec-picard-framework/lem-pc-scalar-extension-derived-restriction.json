@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065Y, construction of equation-comparison-map (Tag 065Z); Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7)"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 065Y and 06Y6; universal left-derived functor argument using the K-flat criterion of Tag 06XN"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-scalar-extension-derived-restriction",
+ "title": "Exact restriction preserves a scalar-extension derived pair",
+ "statement": "Let A,D,B be commutative rings and f:A to D a ring homomorphism. Use the derived categories of [def-weil-abstract-derived-category]. Let s:Mod(D) to Mod(B) be additive and preserve finite limits and finite colimits. If (L,epsilon) is a universal left derived functor for scalar extension along f, then L followed by derived s is a universal left derived functor of scalar extension along f followed by s. Its counit is epsilon postcomposed with derived s, followed by the canonical localization factorization for exact s.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Scalar extension preserves quasi-isomorphisms between K-flat complexes. Reuse the proved scalarExtension_quasiIso_of_kFlat helper in KFlatScalarExtensionDerivedIso, whose argument tensors a mapping cone and uses mixed tensor K-flat invariance.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact s carries their localized isomorphisms to isomorphisms. Naturality of its localization factorization proves that scalar extension followed by s derives along the K-flat localizer. The K-flat left derivability structure and the criterion isLeftDerivedFunctor_iff_isIso_app_of_kFlat show the original counit is invertible on K-flat objects. Whiskering it with derived s and composing localization isomorphisms preserves invertibility. Apply isLeftDerivedFunctor_of_isIso for that derivability structure.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left derived scalar extension counit remains universal after exact restriction of scalars",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "No result obtained"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension derived functor remains a left derived functor after exact restriction of scalars",
+   "date": "2026-10-13",
+   "results": "8 generic hits",
+   "verdict": "No exact postcomposition theorem; use K-flat derivability criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "date": "2026-10-13",
+   "results": "6 hits including leftDerived_fac_app",
+   "verdict": "Universal factorization will combine the helpers"
+  },
+  {
+   "tool": "grep",
+   "query": "isLeftDerivedFunctor.*isIso|baseTensor.*Natural|PreservesKFlatQuasiIso",
+   "date": "2026-10-13",
+   "results": "3 Mathlib hits",
+   "verdict": "Library source has the specialized K-flat criterion, reused directly"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Coefficient comparison construction in the proper-base-change proof before applying homology.",
+   "via": [
+    "lem-pc-base-tensor-derived-chain-comparison",
+    "lem-pc-base-tensor-derived-comparison",
+    "lem-pc-base-derived-tensor-localized-naturality",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarExtensionDerivedRestriction",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarExtensionDerivedRestriction.lean",
+  "declaration": "ModuleCat.scalarExtensionDerivedRestriction",
+  "statement": "theorem scalarExtensionDerivedRestriction\n    {A D B : Type u} [CommRing A] [CommRing D] [CommRing B]\n    [HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} D)]\n    [HasDerivedCategory.{w} (ModuleCat.{u} B)]\n    (f : A →+* D) (s : ModuleCat.{u} D ⥤ ModuleCat.{u} B)\n    [s.Additive] [PreservesFiniteLimits s] [PreservesFiniteColimits s]\n    (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} D))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      (extendScalars.{u, u, u} f).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ))) :\n    (L ⋙ s.mapDerivedCategory).IsLeftDerivedFunctor\n      ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε s.mapDerivedCategory ≫\n        (Functor.associator _ _ _).hom ≫\n        Functor.whiskerLeft ((extendScalars f).mapHomotopyCategory (.up ℤ))\n          s.mapDerivedCategoryFactorsh.hom ≫ (Functor.associator _ _ _).inv)\n      (HomotopyCategory.quasiIso _ (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T143549-L-562000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T143549-L-562000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 065Y, construction of equation-comparison-map (Tag 065Z); Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7)"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 065Y and 06Y6; universal left-derived functor argument using the K-flat criterion of Tag 06XN"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorDerivedChainComparison",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-base-tensor-coefficient-natural-map",
+ "title": "Natural coefficient map on complexes",
+ "statement": "Let R,A,B,D be commutative rings, with A and B R-algebras and D an (A tensor_R B)-algebra. Scalar extension and restriction are those of [def-weil-module-base-change], tensor products are those of [def-weil-pbc-module-tensor-product], and cochain complexes are those of [def-pc-cochain-complex-modules]. There exists a natural transformation on A-complexes from B tensor_R Res_R(P) to Res_B(D tensor_A P), whose degree-j component sends b tensor p to the image in D of (1 tensor b), tensor p. No flatness assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "The two composite ring maps R to D agree by the balancing identity in the tensor algebra. This gives an identity-valued comparison between the corresponding double restrictions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the A-to-D scalar-extension unit, after restriction, through the R-to-B scalar-extension adjunction. Adjunction naturality gives a natural transformation on modules. Apply mapHomologicalComplex to get a natural transformation on complexes. The adjunction formula on pure tensors gives exactly the required generator identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural coefficient change from B tensor R restriction of A modules to restriction of D tensor A modules",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "No result obtained"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation of coefficient extension on complexes from B tensor R restriction of A modules to D tensor A modules restricted to B",
+   "date": "2026-10-13",
+   "results": "8 hits, including extendRestrictScalarsAdj unit and counit",
+   "verdict": "Underived adjunction supplies the construction; no exact comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-13",
+   "results": "6 hits for scalar-extension adjunction and generator formulas",
+   "verdict": "Used the adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "fromExtendScalars_hom_apply|restrictScalarsComp",
+   "date": "2026-10-13",
+   "results": "20 hits in Mathlib ChangeOfRings",
+   "verdict": "Used fromExtendScalars_hom_apply; no exact coefficient natural transformation"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Coefficient comparison construction in the proper-base-change proof before applying homology.",
+   "via": [
+    "lem-pc-base-tensor-derived-chain-comparison",
+    "lem-pc-base-tensor-derived-comparison",
+    "lem-pc-base-derived-tensor-localized-naturality",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "lem-pc-stalk-comparison-coordinate-invariance",
+    "lem-pc-counit-stalk-condition-from-localized-comparison",
+    "lem-pc-rf-base-change-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorCoefficientNaturalMap",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorCoefficientNaturalMap.lean",
+  "declaration": "ModuleCat.exists_baseTensorCoefficientNaturalMap",
+  "statement": "theorem exists_baseTensorCoefficientNaturalMap :\n    ∃ γ : (restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ) ⋙\n        (extendScalars.{u, u, u} (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⟶\n      (extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) D).comp\n        (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ) ⋙\n        (restrictScalars.{u} (algebraMap (A ⊗[R] B) D) ⋙\n          restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).mapHomologicalComplex\n            (.up ℤ),\n      ∀ (P : CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ) (b : B) (p : P.X j),\n        (γ.app P).f j (b ⊗ₜ[R, algebraMap R B] p) =\n          (algebraMap (A ⊗[R] B) D (Algebra.TensorProduct.includeRight b) ⊗ₜ[A,\n            (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] p)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T143549-L-562000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T143549-L-562000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
