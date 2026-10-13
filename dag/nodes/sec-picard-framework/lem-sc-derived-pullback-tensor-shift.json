@@ -16,50 +16,38 @@
  ],
  "proof": [
   {
-   "text": "On K-flat representatives, use the Koszul shift comparison for total tensor in its first variable. The comparison is natural in the fixed second variable. Tensor of mapping cones is the corresponding mapping cone, so the resulting tensor functors are triangulated. Termwise tensor pullback on K-flat resolutions likewise preserves mapping cones and commutes with translation.",
+   "text": "Use the exact coherent shift choices and the degree-one compatibility squares on K-flat varying representatives supplied by [lem-sc-derived-pullback-tensor-shift-kflat-one]. Keep these same three shift choices throughout the argument.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-weil-proper-morphism"
+    "lem-sc-derived-pullback-tensor-shift-kflat-one"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the pullback comparison together with the tensor comparisons for the supplied strong monoidal structure, rather than fixing a shift of pullback in advance. Express translation as tensor with the translated unit and transport through the inverse tensorator and the unit isomorphism. Tensorator associativity gives the addition identity and its unit identities give the zero identity. Transport the distinguished cone triangles along the comparison isomorphisms. The resulting exact pullback and tensor shift structures make the flipped inverse tensorator commute with translation in its varying first factor.",
+   "text": "For any derived object K, take a complex representing K and a K-flat resolution [lem-pc-kflat-resolution]. Its localization is an isomorphism because the resolution map is a quasi-isomorphism, giving a K-flat representative isomorphic to K. Naturality of the two sides of each degree-one compatibility square transports its equality to K: precompose with the isomorphism mapped by shiftFunctor 1 followed by the source functor, and cancel this epimorphism. Thus both degree-one squares hold at all derived objects.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-weil-proper-morphism"
+    "lem-pc-kflat-resolution",
+    "lem-sc-derived-pullback-tensor-shift-kflat-one",
+    "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Descend these natural comparisons through K-flat localization; the comparisons respect quasi-isomorphisms and the zero and addition equations descend as equalities. Naturality of the tensor comparison in its fixed second variable gives NatTrans.CommShift for every tensorRight morphism. These are precisely the two compatibility clauses of the theorem. The zero object, empty schemes, and zero shifts are included by the unit/zero equations.",
+   "text": "For any natural transformation between integer-shift functors, establish compatibility for shift a from compatibility for b and a+b by expanding the addition comparison, moving the shift-add isomorphisms by naturality, and cancelling the comparison isomorphisms. Faithfulness of shiftFunctor b gives the desired equation. Taking a=-1 and b=1, the known degree-one square and the automatic zero square give compatibility for -1. Integer induction, using addition with 1 and -1, now gives all integer squares. Apply this generic argument to tensorRight b and the flipped inverse tensorator; combine with the three exactness clauses already supplied by the representative lemma.",
    "uses": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-weil-proper-morphism"
+    "lem-sc-derived-pullback-tensor-shift-kflat-one"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-weil-proper-morphism"
+  "lem-sc-derived-pullback-tensor-shift-kflat-one",
+  "lem-pc-kflat-resolution",
+  "def-pc-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08EU",
-  "place": "Exactness assertion in Tag 08EU proof, expanded using the K-flat tensor/pullback constructions and monoidal transport from steps 2–3 of lem-sc-projection-comparison-exact; equation (20.54.2.1) fixes the inverse tensorator orientation."
+  "place": "P4 formalized K-flat representative descent and coherent integer-shift extension in Lean; the geometric generator calculation is isolated in lem-sc-derived-pullback-tensor-shift-kflat-one, sourced from the original steps 1–2."
  },
  "mathlib_searches": [
   {
@@ -142,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T072347-L-1118452",
+  "landing": "20261013T100053-L-2476186",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

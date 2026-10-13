@@ -11926,3 +11926,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/P3/Sheaf.RingTheory.NilpotentCoefficientAdjustment (stage 3; reviewer PASS; after a return; landing 20261013T100052-L-2475470 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/P4/Sheaf.Algebra.Homology.FiniteProjectiveModuleColimitDescent (stage 3; reviewer PASS; first push; landing 20261013T100052-L-2475720 (interface); batch 20261013T095923; modules 3; new nodes 2)
 - 10:00 L: merged deliver/P4/Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineTensorCoordinates (stage 3; reviewer PASS; first push; landing 20261013T100053-L-2475947 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:00 L: merged deliver/P4/Sheaf.AlgebraicGeometry.DerivedPullbackTensorShift (stage 3; reviewer PASS; first push; landing 20261013T100053-L-2476186 (interface); batch 20261013T095923; modules 2; new nodes 1)

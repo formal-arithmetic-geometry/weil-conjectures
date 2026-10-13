@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-derived-pullback-tensor-shift-kflat-one",
+ "kind": "statement",
+ "title": "Exact pullback and tensor shifts with generator squares on K-flat representatives",
+ "statement": "Let $f:Z\\to Y$ be a proper morphism of Noetherian schemes [def-pc-scheme, def-weil-proper-morphism]. Use the shared derived categories $D(\\mathcal O_Y)$ and $D(\\mathcal O_Z)$ [def-pc-derived-category], the K-flat derived tensor [def-pc-scheme-derived-tensor-structure], and $F=Lf^*$ [def-pc-derived-pullback] with any supplied strong monoidal structure. There exist coherent integer-shift structures $s_F$, $s_Y(M)$ and $s_Z(M)$ on $F$ and every $T_M=(-\\otimes^{\\mathbf L}M)$, making $F$ and these tensor functors triangulated. Write $c_G(K):G(K[1])\\to G(K)[1]$ for the degree-one comparison of a functor with its chosen shift structure, and $Q_X$ for the localization of cochain complexes on $X$. For every derived morphism $b:M\\to N$ on $Z$ and every K-flat cochain complex $P$ of $\\mathcal O_Z$-modules [def-pc-kflat-complex, def-pc-cochain-complex-modules], let $K=Q_Z(P)$ and $\\tau_b(K)=1_K\\otimes b$. Then $c_{T_M}(K)\\circ\\tau_b(K)[1]=\\tau_b(K[1])\\circ c_{T_N}(K)$, with composition written in Lean's diagrammatic order. For every $M\\in D(\\mathcal O_Y)$ and every K-flat cochain complex $P$ on $Y$, let $K=Q_Y(P)$ and let $\\delta_M(K):F(K\\otimes^{\\mathbf L}M)\\to F(K)\\otimes^{\\mathbf L}F(M)$ be the supplied inverse tensorator. Then $c_{T_M\\,F}(K)\\circ\\delta_M(K)[1]=\\delta_M(K[1])\\circ c_{F\\,T_{F(M)}}(K)$, again in diagrammatic order. These two squares are required only at K-flat representatives and only for shift by one; no square at an arbitrary derived object or other integer is part of this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, proof: exactness of the two composite functors; Cohomology, equation (20.54.2.1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism",
+  "def-pc-kflat-complex",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Compute total tensor on K-flat representatives and use its Koszul degree-one comparison in the varying first complex. Tensor preserves mapping-cone triangles. Descend the coherent zero and addition comparisons through K-flat localization, so all tensor functors are exact. Natural dependence on the fixed second factor gives the degree-one square for tensoring with b on each K-flat varying representative.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-kflat-complex",
+    "def-pc-cochain-complex-modules",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute derived pullback on K-flat resolutions by termwise module pullback. Termwise pullback preserves the mapping-cone construction. Choose the pullback and tensor shift comparisons jointly for the supplied strong monoidal structure: express translation as tensor with the translated unit, and apply its inverse tensorator and unit isomorphism. The tensorator associativity and unit equations give the coherent addition and zero laws. Transport cone triangles along these isomorphisms to retain exactness.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each K-flat varying complex and fixed derived factor, compare the two paths of the inverse-tensorator square for translation by one. They give the same translated total tensor with the same Koszul sign: use associativity of the supplied tensorator and the preceding jointly chosen comparisons. Descend this representative equality through localization. Empty schemes and the zero complex produce zero squares. No extension to arbitrary derived varying objects or other integers is used in this lemma.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-category",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-kflat-complex",
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Representative computation in steps 1–2 and the degree-one naturality calculation of step 3 of lem-sc-derived-pullback-tensor-shift; the integer extension and descent are separated and proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat representatives tensor shift by one inverse tensorator of derived pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat representatives tensor shift by one inverse tensorator of derived pullback",
+   "results": "CategoryTheory.pullbackShiftFunctorAdd'_inv_app; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'; CategoryTheory.Tor_map; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp; CategoryTheory.Functor.commShiftPullback_iso_eq; CategoryTheory.Functor.commShiftPullback; CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorShift_kFlat_one|CommShiftCore|commShift_of_tensorRight_fac",
+   "results": "Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorShift",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Geometric representative calculation for translation by one in the tensor/pullback part of projection-formula exactness, via lem-sc-derived-pullback-tensor-shift steps 1–2.",
+   "via": [
+    "lem-sc-derived-pullback-tensor-shift",
+    "lem-sc-projection-comparison-exact",
+    "lem-sc-projection-comparison-triangles",
+    "lem-sc-right-adjoint-tensor-comparison-projection",
+    "lem-sc-right-adjoint-tensor-comparison-natural",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorShiftKFlatOne",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorShiftKFlatOne.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensorShift_kFlat_one",
+  "statement": "theorem derivedPullback_tensorShift_kFlat_one\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)] :\n    ∃ (sF : (derivedPullback f).CommShift ℤ)\n      (sY : ∀ M : schemeDerivedCategory Y, (tensorRight M).CommShift ℤ)\n      (sZ : ∀ M : schemeDerivedCategory Z, (tensorRight M).CommShift ℤ),\n      letI := sF\n      letI := sY\n      letI := sZ\n      (derivedPullback f).IsTriangulated ∧\n      (∀ M : schemeDerivedCategory Y, (tensorRight M).IsTriangulated) ∧\n      (∀ M : schemeDerivedCategory Z, (tensorRight M).IsTriangulated) ∧\n      (∀ {M N : schemeDerivedCategory Z} (b : M ⟶ N)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ),\n        CochainComplex.IsKFlat (R := Z.sheaf) P →\n        let K := DerivedCategory.Q.obj P\n        let τ := ((curriedTensor (schemeDerivedCategory Z)).flip.map b)\n        ((tensorRight M).commShiftIso (1 : ℤ)).hom.app K ≫ (τ.app K)⟦(1 : ℤ)⟧' =\n          τ.app (K⟦(1 : ℤ)⟧) ≫ ((tensorRight N).commShiftIso (1 : ℤ)).hom.app K) ∧\n      (∀ (M : schemeDerivedCategory Y)\n        (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ),\n        CochainComplex.IsKFlat (R := Y.sheaf) P →\n        let K := DerivedCategory.Q.obj P\n        let τ := ((Functor.flipping.functor.map\n          (Functor.OplaxMonoidal.δNatTrans (derivedPullback f))).app M)\n        ((tensorRight M ⋙ derivedPullback f).commShiftIso (1 : ℤ)).hom.app K ≫\n            (τ.app K)⟦(1 : ℤ)⟧' =\n          τ.app (K⟦(1 : ℤ)⟧) ≫\n            ((derivedPullback f ⋙ tensorRight ((derivedPullback f).obj M)).commShiftIso\n              (1 : ℤ)).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100053-L-2476186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T100053-L-2476186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
