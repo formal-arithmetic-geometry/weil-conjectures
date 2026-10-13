@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-affine-resolution-section-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the normalized affine resolution section class",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes, $F$ a quasi-coherent $\\mathcal O_X$-module, $I$ an injective resolution of $F$ [def-sp-injective-resolutions], $p\\in\\mathbb N$, and $V\\subset S$ an affine open. Put $U=f^{-1}V$, $M=F|_U$ and $P=R^p f_*F$, where cohomology and ordinary higher images are right derived functors [pqf-def-cohomology]. Let $R$ be any augmentation-preserving restricted resolution section data [def-weil-pbc-flat-base-change-open-choices]. Then the specified additive class map $c:H^p_{\\mathrm{Mod}}(U,M)\\to\\Gamma(V,P)$ is bijective, where $c$ is resolutionSectionClass for $R$, followed by evaluation at $V$ of the inverse of $I.\\mathrm{isoRightDerivedObj}(f_*,p)$. The class map sends the cohomology class of a cocycle of the restricted resolution to the section of the homology sheaf it defines [lem-weil-pbc-higher-direct-image-presheaf]. No Ext comparison is part of this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Tags 01F4 (2), 01XJ (1), 01E4 and 01E5; affine degeneration and normalization on cocycles"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "pqf-def-cohomology",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Set U=f inverse V, g=f restricted to U -> V, and M=F restricted to U. Restriction preserves quasi-coherence; g is qcqs by base change. Its higher images are quasi-coherent. On affine V their positive cohomology vanishes, so the cocycle-defined Leray edge is an isomorphism in degree p. Open restriction and restrictAppIso identify its target with Gamma(V,R^p f_*F).",
+   "uses": [
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-pc-affine-vanishing",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-higher-direct-image-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a global-section cocycle representing a class computed by R.resolution. R.components identifies its representative with the original resolution evaluated on U; R.augmentation says the comparison induces the identity on M. Independence and naturality of injective-resolution computations therefore identify the two cohomology classes. The Leray cocycle formula projects this representative to the homology sheaf of f_*I. By the cohomology-presheaf description this is precisely the homology evaluation comparison followed by sectionCohomologyTheta, and then the inverse resolution comparison. This is c. The edge and all the comparisons are isomorphisms, hence c is bijective. In degree zero the same computation uses the augmentation. Empty V and zero F yield zero groups.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-sp-derived-well-defined",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-pc-leray-degenerate-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "lem-pc-affine-vanishing",
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-ordinary-higher-image-quasi-coherent",
+  "lem-sp-derived-well-defined",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 01F4, 01XJ, 01E4 and 01E5",
+  "place": "Tags 01F4 (2), 01XJ (1), 01E4 and 01E5; affine degeneration and normalization on cocycles; explicit normalization argument for the existing resolutionSectionClass definition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|sectionCohomologyTheta|leray",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact normalized section class statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on the inverse image of an affine open equals sections of higher direct image via the resolution cocycle map",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map",
+   "date": "2026-10-13",
+   "verdict": "no exact normalized section class statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact normalized section class statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from cohomology on an inverse image open to sections of a higher direct image is bijective on affine opens and commutes with scalars",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCohomologySectionEquiv",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Affine-local reduction in the flat base-change input to the formal-functions stalk comparison: normalized source and target cohomology identifications before choosing a lift. Source affine dictionary: normalized affine Leray edge before tensor extension. Tags 01F4 (2), 01XJ (1), 01E4 and 01E5; affine degeneration and normalization on cocycles",
+   "via": [
+    "new-affine-cohomology-section-equiv",
+    "new-flat-base-change-affine-source",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineResolutionSectionBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_resolutionSectionClass_bijective",
+  "statement": "theorem affine_resolutionSectionClass_bijective {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F) (p : ℕ) (V : S.Opens) (hV : IsAffineOpen V) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) : Function.Bijective (resolutionSectionClass R.resolution (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045521-L-126743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T045521-L-126743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

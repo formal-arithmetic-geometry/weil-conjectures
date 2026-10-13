@@ -9,11 +9,8 @@ public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
-import Sheaf.Paper.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective
+import Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap
 
 /-! # Affine cohomology and higher-image sections
 
@@ -30,6 +27,9 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- The explicit derived section comparisons require substantial elaboration.
 /-- The affine Leray comparison, normalized by any augmentation-preserving restricted
 resolution. This comparison is formed before any base change or scalar extension.
 Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 03FD.
@@ -76,6 +76,32 @@ theorem exists_affine_cohomology_section_equiv
         e xi = (resolutionSectionClass R.resolution
           (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
           V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V)
-            (eH.symm xi) := by sorry
+            (eH.symm xi) := by
+  classical
+  intro h N P eH
+  let c := resolutionSectionClass R.resolution
+    (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
+    V R.sections p ≫ Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V
+  let l : HOver h N p →ₗ[Γ(S, V)] Γ(P, V) :=
+    { toFun := fun xi ↦ c (eH.symm xi)
+      map_add' := fun x y ↦ by
+        rw [map_add, map_add]
+      map_smul' := fun a xi ↦ by
+        let M := (restrictFunctor (f ⁻¹ᵁ V).ι).obj F
+        let C := RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p
+        let b := ((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a
+        let e := H.mapLinearEquiv ((restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F) p
+        have he (x : C.obj M) : eH ((C.map (M.smulHom b)).hom x) = a • eH x := by
+          exact (congrArg e (hE M M (M.smulHom b) x)).trans (e.map_smul b (E M x))
+        have hi : eH.symm (a • xi) = (C.map (M.smulHom b)).hom (eH.symm xi) := by
+          apply eH.injective
+          rw [AddEquiv.apply_symm_apply, he, AddEquiv.apply_symm_apply]
+        change c (eH.symm (a • xi)) = a • c (eH.symm xi)
+        rw [hi]
+        exact resolutionSectionClass_map_smulHom f F I p V R a (eH.symm xi) }
+  have hc : Function.Bijective c :=
+    affine_resolutionSectionClass_bijective f F I p V hV R
+  have hl : Function.Bijective l := hc.comp eH.symm.bijective
+  exact ⟨LinearEquiv.ofBijective l hl, fun _ ↦ rfl⟩
 
 end AlgebraicGeometry.Scheme.Modules
