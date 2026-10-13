@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-open-extension-counit-stalk",
+ "kind": "statement",
+ "title": "Inside isomorphism and outside vanishing for an open-extension counit",
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], $R$ its underlying sheaf of rings, $W\\subseteq X$ an open, $S:\\operatorname{Mod}(R|_W)\\to\\operatorname{Mod}(R)$ any left adjoint to restriction with adjunction $a$, and $F$ a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Write $T_x$ for the stalk of the underlying abelian sheaf at $x\\in X$ [def-weil-pbc-module-stalk]. If $x\\in W$, then $T_x(a.\\varepsilon_F)$ is an isomorphism; if $x\\notin W$, then $T_x(S(F|_W))$ is a zero object. No covering or additivity assumptions on $S$ are required.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 00A7 (sheaves-lemma-j-shriek-modules), clauses (2)--(4)"
+ },
+ "proof": [
+  {
+   "text": "Use the direct-sum extension presheaf followed by module sheafification to construct the canonical left adjoint to restriction. At a point outside W all neighborhoods have no morphism into W, so the direct-sum extension values vanish. At a point inside W neighborhoods contained in W are cofinal; the counit on those neighborhoods is the identity, and sheafification preserves stalks. Thus the outside stalk vanishes and the inside counit stalk is an isomorphism.",
+   "uses": [
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjunction uniqueness identifies any specified left adjoint S with the canonical extension by zero. The uniqueness isomorphism commutes with the adjunction counits (Mathlib Adjunction.leftAdjointUniq_hom_app_counit). Apply T_x, and transport zero objects and isomorphisms across the resulting component isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 00A7; spell out the omitted stalk calculation and adjunction uniqueness"
+ },
+ "created": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-13",
+  "item": "Sheaf.Algebra.Homology.OpenCoverMateModuleShortExactCore"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: Mayer--Vietoris triangle, stalk calculation for extension by zero (Stacks 08BU via 00A7)",
+   "via": [
+    "lem-sc-open-cover-mate-module-short-exact-core",
+    "lem-sc-open-cover-mate-module-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero sheaf modules counit stalk isomorphism inside open zero outside",
+   "results": "Service returned Internal Server Error; unavailable, not a no-match result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk counit extension by zero left adjoint open restriction isomorphism inside zero outside",
+   "results": "Eight hits on stalk/skyscraper adjunctions; none describes the open-extension counit.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*counit.*stalk|counit.*stalk",
+   "results": "Three hits in Mathlib/Topology/Sheaves/Skyscraper.lean concerning skyscraper counits; no open-extension counit calculation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenExtensionCounitStalk",
+  "file": "lean/Sheaf/Algebra/Homology/OpenExtensionCounitStalk.lean",
+  "declaration": "SheafOfModules.open_extension_counit_stalk",
+  "statement": "theorem open_extension_counit_stalk (X : AlgebraicGeometry.RingedSpace.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (_hR : R = (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)\n    (W : Opens X)\n    (S : SheafOfModules.{u} (R.over W) ⥤ SheafOfModules.{u} R)\n    (a : S ⊣ overFunctor.{u} R W) (F : SheafOfModules.{u} R) (x : X) :\n    let T := toSheaf R ⋙ TopCat.Sheaf.forget AddCommGrpCat.{u} X.carrier ⋙\n      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x\n    (x ∈ W → IsIso (T.map (a.counit.app F))) ∧\n      (x ∉ W → IsZero (T.obj (S.obj ((overFunctor.{u} R W).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
