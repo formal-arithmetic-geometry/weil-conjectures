@@ -23,6 +23,47 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
 attribute [local irreducible] lowerStarPlusTransition
 
+/-- Functoriality expands the mapped composite into the two mapped factors.
+Source: Tags 03Q8 and 09Z1. (blueprint: sbc-lem-higher-image-over-map-coefficient-factorization). -/
+theorem higherDirectImageOverMap_coefficient_factorization
+    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    {A B : Over W} (f : A ⟶ B) :
+    (DerivedCategory.Plus.homologyFunctor
+      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map
+      (lowerStarPlusTransition Λ f.left (B.hom ≫ k) (A.hom ≫ k)
+        (by rw [← Category.assoc, Over.w])
+        (higherDirectImageRawOverComplex Λ G B) ≫
+        R+((A.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
+          (higherDirectImageRawOverCoefficient Λ G f)) =
+    (DerivedCategory.Plus.homologyFunctor
+      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map
+      (lowerStarPlusTransition Λ f.left (B.hom ≫ k) (A.hom ≫ k)
+        (by rw [← Category.assoc, Over.w])
+        (higherDirectImageRawOverComplex Λ G B)) ≫
+      (DerivedCategory.Plus.homologyFunctor
+        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map
+        (R+((A.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
+        (higherDirectImageRawOverCoefficient Λ G f)) := by
+  rw [Functor.map_comp]
+
+/-- Endpoint coherence identifies the factorized morphism with the canonical over-map.
+Source: Tags 03Q8 and 09Z1. (blueprint: sbc-lem-higher-image-over-map-coefficient-endpoint). -/
+theorem higherDirectImageOverMap_coefficient_endpoint
+    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    {A B : Over W} (f : A ⟶ B) :
+    (DerivedCategory.Plus.homologyFunctor
+      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map
+      (lowerStarPlusTransition Λ f.left (B.hom ≫ k) (A.hom ≫ k)
+        (by rw [← Category.assoc, Over.w])
+        (higherDirectImageRawOverComplex Λ G B)) ≫
+      (DerivedCategory.Plus.homologyFunctor
+        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map
+        (R+((A.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
+          (higherDirectImageRawOverCoefficient Λ G f)) =
+      higherDirectImageOverMap Λ k G q f := by sorry
+
 /-- Identify the homology map of the combined derived coefficient morphism with
  the canonical transition for coefficients restricted from W.
 Source: Stacks Project, Tags 03Q8 and 09Z1, the canonical transition construction.
@@ -51,6 +92,8 @@ theorem higherDirectImageOverMap_coefficient
         (higherDirectImageRawOverComplex Λ G B) ≫
         R+((A.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
           (higherDirectImageRawOverCoefficient Λ G f)) =
-      higherDirectImageOverMap Λ k G q f := by sorry
+      higherDirectImageOverMap Λ k G q f := by
+  rw [higherDirectImageOverMap_coefficient_factorization Λ k G q f]
+  exact higherDirectImageOverMap_coefficient_endpoint Λ k G q f
 
 end AlgebraicGeometry.Etale
