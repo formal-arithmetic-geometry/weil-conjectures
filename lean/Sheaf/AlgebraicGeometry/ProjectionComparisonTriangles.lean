@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ProjectionComparisonExact
 
 /-! # Shifts and triangles for the projection comparison locus
 
@@ -68,6 +69,58 @@ theorem projectionComparison_triangles
       ∀ (T : Pretriangulated.Triangle (schemeDerivedCategory Y)),
         T ∈ Pretriangulated.distinguishedTriangles →
         Nonempty (T.obj₁ ≅ A.obj) → Nonempty (T.obj₂ ≅ B.obj) →
-        ∀ (C : schemeDerivedQCohCategory Y), Nonempty (T.obj₃ ≅ C.obj) → P C) := by sorry
+        ∀ (C : schemeDerivedQCohCategory Y), Nonempty (T.obj₃ ≅ C.obj) → P C) := by
+  obtain ⟨s, t, hs, ht, hη⟩ := projectionComparison_exact f a E
+  let := s
+  let := t
+  let := hs
+  let := ht
+  let η := projectionComparisonNatTrans f a E.obj
+  let : NatTrans.CommShift η ℤ := hη
+  have transport (X X' : schemeDerivedCategory Y) (e : X ≅ X')
+      (h : IsIso (η.app X')) : IsIso (η.app X) := by
+    let := h
+    have he : η.app X =
+        (tensorRight ((schemeDerivedDirectImage f).obj E.obj)).map e.hom ≫
+          η.app X' ≫
+          ((derivedPullback f ⋙ tensorRight E.obj) ⋙
+            schemeDerivedDirectImage f).map e.inv := by
+      rw [η.naturality_assoc, ← Functor.map_comp, e.hom_inv_id, CategoryTheory.Functor.map_id,
+        Category.comp_id]
+    rw [he]
+    infer_instance
+  change (∀ (A : schemeDerivedQCohCategory Y) (n : ℤ), IsIso (η.app A.obj) →
+    ∀ (B : schemeDerivedQCohCategory Y), Nonempty (B.obj ≅ A.obj⟦n⟧) →
+      IsIso (η.app B.obj)) ∧ _
+  constructor
+  · intro A n hA B ⟨e⟩
+    apply transport _ _ e
+    let := hA
+    rw [NatTrans.app_shift η n A.obj]
+    infer_instance
+  · intro A B hA hB T hT ⟨eA⟩ ⟨eB⟩ C ⟨eC⟩
+    change IsIso (η.app C.obj)
+    change IsIso (η.app A.obj) at hA
+    change IsIso (η.app B.obj) at hB
+    let S := tensorRight ((schemeDerivedDirectImage f).obj E.obj)
+    let R := (derivedPullback f ⋙ tensorRight E.obj) ⋙ schemeDerivedDirectImage f
+    let φ : S.mapTriangle.obj T ⟶ R.mapTriangle.obj T :=
+      { hom₁ := η.app T.obj₁
+        hom₂ := η.app T.obj₂
+        hom₃ := η.app T.obj₃
+        comm₁ := η.naturality T.mor₁
+        comm₂ := η.naturality T.mor₂
+        comm₃ := by
+          change (S.map T.mor₃ ≫ (S.commShiftIso (1 : ℤ)).hom.app T.obj₁) ≫
+              (η.app T.obj₁)⟦(1 : ℤ)⟧' =
+            η.app T.obj₃ ≫ R.map T.mor₃ ≫ (R.commShiftIso (1 : ℤ)).hom.app T.obj₁
+          rw [Category.assoc, NatTrans.shift_app_comm,
+            ← Category.assoc, η.naturality, Category.assoc] }
+    have h₁ : IsIso φ.hom₁ := transport _ _ eA hA
+    have h₂ : IsIso φ.hom₂ := transport _ _ eB hB
+    have h₃ : IsIso (η.app T.obj₃) :=
+      Pretriangulated.isIso₃_of_isIso₁₂ φ
+        (S.map_distinguished T hT) (R.map_distinguished T hT) h₁ h₂
+    exact transport _ _ eC.symm h₃
 
 end AlgebraicGeometry

@@ -10892,3 +10892,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/U3/Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotientCone (stage 3; reviewer PASS; first push; landing 20261013T031553-L-3574960 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/U3/Sheaf.AlgebraicGeometry.KoszulCoordinateConeIso (stage 3; reviewer PASS; first push; landing 20261013T031553-L-3575318 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:15 L: merged deliver/U3/Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift (stage 3; reviewer PASS; first push; landing 20261013T031554-L-3575602 (interface); batch 20261013T031526; modules 2; new nodes 1)
+- 03:15 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ProjectionComparisonTriangles (stage 3; reviewer PASS; first push; landing 20261013T031554-L-3575936 (interface); batch 20261013T031526; modules 2; new nodes 1)

@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-projection-comparison-exact",
+ "kind": "statement",
+ "title": "Exact shift-compatible realization of the canonical projection mate",
+ "statement": "In the proper Noetherian scheme setting of [def-pc-scheme, def-weil-proper-morphism], use the derived categories [def-pc-derived-category], shared derived tensor [def-pc-scheme-derived-tensor-structure], strong monoidal pullback F [def-pc-derived-pullback], direct image R [def-pc-derived-direct-image], and an adjunction a:F ⊣ R. Fix E in D_QCoh(O_Z). Define S(K)=K tensor R(E) and T(K)=R(F(K) tensor E). The maps eta_K=a.homEquiv(mu^{-1}_{K,R(E)} followed by F(K) tensor the counit at E) form the explicit natural transformation projectionComparisonNatTrans. There exist coherent integer-shift structures on the specified functors S and T for which both functors are triangulated and this natural transformation commutes with shifts. This asserts the diagrammatic exactness data only, without an isomorphism-locus or invertibility assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, proof: exactness of the two composite functors; Cohomology, equation (20.54.2.1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural projection transformation on the ambient derived category, with components given by the adjunction mate of the inverse tensorator followed by the whiskered counit. Its naturality follows by homEquiv_naturality_left_square, oplax tensorator naturality in the first variable, and whisker_exchange; this construction and naturality proof are implemented without any holes.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose K-flat representatives for the two tensor products and pullback, and K-injective representatives for direct image. Tensoring a K-flat complex preserves quasi-isomorphisms and mapping-cone triangles; derived pullback and right derived direct image preserve the same triangles. The tensor shift comparison on a homogeneous tensor incorporates the Koszul sign, giving exact integer-shift structures on the specified source and target composites. Transport the pullback shift comparison via K[n] = K tensor the shifted unit and the supplied inverse tensorator; its associativity and unit coherence give exactness after natural-isomorphism transport.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the square comparing the projection mate at K[n] with the shifted projection mate at K under the adjunction. Expand its adjunct as the inverse tensorator followed by tensoring the counit. Tensorator naturality, associativity, unit coherence and counit naturality identify the two sides with the same map on the chosen representatives. The zero and addition coherence use the tensor shift zero and addition identities, with the same Koszul signs. Localization descends these identities to the given derived categories, establishing NatTrans.CommShift for the constructed transformation. No component is assumed or asserted to be invertible.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Tag 08EU, proof: exactness of the two composite functors; Cohomology, equation (20.54.2.1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor projection mate is a natural transformation of exact triangulated functors commuting with shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor projection mate is a natural transformation of exact triangulated functors commuting with shift",
+   "results": "8 hits, including CategoryTheory.Adjunction.IsTriangulated.commShift, mk' and mk'', CategoryTheory.Adjunction.IsTriangulated, and Functor.mapTriangleCompIso_hom_app_hom₁. None provides exactness and compatibility for the supplied geometric monoidal structure.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_rightAdjointProjectionMap_app|isTriangulated_tensorRight",
+   "results": "msearch grep: 0 hits. Local rg finds WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift and DerivedCategory.Monoidal.Shift. These require compatible tensor/adjunction shift structures; they do not supply them for the geometric functors and arbitrary supplied tensorator.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionComparisonTriangles",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of the right-adjoint tensor formula: projection formula used to construct the canonical comparison; shift and triangle closure of that projection formula",
+   "via": [
+    "lem-sc-projection-comparison-triangles",
+    "lem-sc-right-adjoint-tensor-comparison-projection",
+    "lem-sc-right-adjoint-tensor-comparison-natural",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectionComparisonExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectionComparisonExact.lean",
+  "declaration": "AlgebraicGeometry.projectionComparison_exact",
+  "declarations": [
+   "AlgebraicGeometry.projectionComparisonNatTrans",
+   "AlgebraicGeometry.projectionComparison_exact"
+  ],
+  "statement": "theorem projectionComparison_exact\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [Functor.Monoidal (derivedPullback f)]\n    (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (E : schemeDerivedQCohCategory Z) :\n    ∃ (s : (tensorRight ((schemeDerivedDirectImage f).obj E.obj)).CommShift ℤ)\n      (t : ((derivedPullback f ⋙ tensorRight E.obj) ⋙\n        schemeDerivedDirectImage f).CommShift ℤ),\n      letI := s\n      letI := t\n      (tensorRight ((schemeDerivedDirectImage f).obj E.obj)).IsTriangulated ∧\n      ((derivedPullback f ⋙ tensorRight E.obj) ⋙\n        schemeDerivedDirectImage f).IsTriangulated ∧\n      NatTrans.CommShift (projectionComparisonNatTrans f a E.obj) ℤ",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T031554-L-3575936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T031554-L-3575936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
