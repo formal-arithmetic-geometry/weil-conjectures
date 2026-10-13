@@ -11,18 +11,133 @@
  },
  "kind": "statement",
  "title": "Uniform projective resolution bound for finite perfect quotients",
- "statement": "Let $A$ be a commutative Noetherian ring and $I\\subset A$ an ideal, with $P_n=A/I^n$ as in [def-weil-pbc-adic-coefficient-datum]. Suppose every $P_n$ is finite as a set and perfect as an $A$-module [def-pc-perfect-ring-complex]. There is a nonnegative integer $r$, independent of $n\\geq1$, such that every $P_n$ has a resolution by finitely generated projective $A$-modules concentrated in degrees $[-r,0]$. Equivalently its tensor with any $A$-module has cohomology only in $[-r,0]$. The zero quotient is allowed.",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $I\\subseteq A$ an ideal. For every integer $n\\geq1$ put $P_n=A/I^n$, using the ideal powers and quotients of [def-weil-pbc-algebra-hom-quotient]. Suppose every $P_n$ is finite as a set and its degree-zero complex is perfect [def-pc-perfect-ring-complex]. There is an integer $r\\geq0$, independent of $n$, such that every $P_n$ has a resolution by finitely generated projective $A$-modules [def-weil-finitely-generated-module, def-weil-pbc-projective-module] concentrated in cochain degrees $[-r,0]$. Equivalently, for the same $r$, for every $n\\geq1$ and every $A$-module $M$, the derived tensor $P_n\\otimes_A^{\\mathbf L}M$ has cohomology only in degrees $[-r,0]$; here derived tensor is computed by tensoring a projective resolution of $P_n$ with $M$, so $H^{-i}=\\operatorname{Tor}_i^A(P_n,M)$ for $i\\geq0$ [def-weil-pbc-tor-modules]. The zero quotient is allowed.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 090V, proposition-Auslander-Buchsbaum: applied to the nonzero finite-length localizations of the perfect quotients. The common-bound conclusion is an agent assembly, not the literal statement of 090V."
  },
  "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-pc-perfect-ring-complex"
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-perfect-ring-complex",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $n$, perfectness supplies a bounded finite projective cochain complex $C_n$ with $H^0(C_n)\\cong P_n$ and all other cohomology zero. Remove its positive terms by descending induction on the greatest positive degree $b$ with a nonzero term. Since $H^b(C_n)=0$, the map $C_n^{b-1}\\twoheadrightarrow C_n^b$ is surjective and has a section by projectivity of $C_n^b$. Thus $C_n^{b-1}=\\ker(d^{b-1})\\oplus C_n^b$; the differential from degree $b-2$ lands in the kernel, and the two copies of $C_n^b$ form the contractible identity complex. Delete this summand. The replacement kernel is finite projective: it is a direct summand of a finite projective module, and the images under its projection of a finite generating set generate it. Iterate until all positive terms are zero. The quotient $C_n^0\\twoheadrightarrow H^0(C_n)\\cong P_n$ then augments an exact finite projective resolution in nonpositive degrees. Denote one such resolution by $Q_n$, of length $s_n\\geq0$. Set $r=s_1$. This uses no uniformity yet. If $I=A$, all $P_n=0$ and we may immediately use the zero resolutions with $r=0$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-projective-module",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O4, definition-finite-proj-dim; elementary cancellation of the positive tail of the bounded projective model"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ of $A$ and write $R=A_{\\mathfrak m}$. It is local with maximal ideal $\\mathfrak mR$. It is Noetherian: any ideal $J\\subseteq R$ is the extension of its contraction $J^c$ (if $a/s\\in J$ then $a/1\\in J$, and conversely denominators are units); finitely many generators of $J^c$ therefore generate $J$. Localizing $Q_n$ preserves exactness and projectivity, and the images of finite generating sets still generate the localized terms. Hence $(P_n)_{\\mathfrak m}$ has finite projective dimension, and $\\operatorname{pd}_R((P_1)_{\\mathfrak m})\\leq r$. If $I\\not\\subseteq\\mathfrak m$, choose $a\\in I\\setminus\\mathfrak m$; the element $a^n$ kills $P_n$ and is invertible after localization, so $(P_n)_{\\mathfrak m}=0$ for every $n$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CS (proposition-localization-exact), 05A3 (lemma-ascend-properties-modules), and fraction calculations"
+   }
+  },
+  {
+   "text": "Now assume $I\\subseteq\\mathfrak m$ and put $B=(P_1)_{\\mathfrak m}$. This is a nonzero cyclic $R$-module: $1/1=0$ would imply that some $u\\notin\\mathfrak m$ belongs to $I$. Also $B/\\mathfrak mRB\\cong A/\\mathfrak m\\ne0$, by the map $\\overline a/s\\mapsto\\overline a\\,\\overline s^{-1}$, whose kernel is $\\mathfrak mRB$; thus the depth definition takes its regular-sequence branch. For any $x=a/s\\in\\mathfrak mR$ take $a\\in\\mathfrak m$, $s\\notin\\mathfrak m$. Finiteness of the ring $A/I$ gives $0\\leq i<j$ with $\\overline a^i=\\overline a^j$. The numerator $1-a^{j-i}$ is outside $\\mathfrak m$, hence invertible in $R$. The identity $a^i(1-a^{j-i})B=0$ consequently gives $a^iB=0$. Nonzeroness of $B$ excludes $i=0$, and $x$ acts nilpotently on $B$. If multiplication by $x$ were injective, its $i$-fold iterate would be both injective and zero, forcing $B=0$. Therefore no element of $\\mathfrak mR$ can start a $B$-regular sequence; the empty sequence is allowed and $\\operatorname{depth}_R(B)=0$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LI, definition-depth; elementary repetition of powers in the finite ring A/I"
+   }
+  },
+  {
+   "text": "Apply Auslander–Buchsbaum first to the nonzero finite $R$-module $B$: its finite projective dimension was established in step 2, and step 3 gives depth zero. Thus $\\operatorname{depth}(R)=\\operatorname{pd}_R(B)\\leq r$, in particular the ring depth is finite. For each $n$, $(P_n)_{\\mathfrak m}$ is likewise cyclic, of finite projective dimension by step 2, and nonzero: $1/1=0$ would give an element outside $\\mathfrak m$ lying in $I^n\\subseteq\\mathfrak m$. The same formula applied to this module gives $\\operatorname{pd}_R((P_n)_{\\mathfrak m})+\\operatorname{depth}_R((P_n)_{\\mathfrak m})=\\operatorname{depth}(R)\\leq r$. Depth is nonnegative by definition, so $\\operatorname{pd}_R((P_n)_{\\mathfrak m})\\leq r$. In conjunction with the zero case of step 2, this bound holds at every maximal ideal, for all $n$.",
+   "uses": [
+    "lem-weil-pbc-auslander-buchsbaum",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090V, proposition-Auslander-Buchsbaum, applied to the two nonzero finite localized modules"
+   }
+  },
+  {
+   "text": "Each $P_n$ is cyclic, hence finitely generated over the Noetherian ring $A$. The projective-resolution/Ext characterization turns the bounds of step 4 into $\\mathrm{PD}_{\\leq r}((P_n)_{\\mathfrak m})$ at every maximal ideal (the zero module has the zero resolution). The maximal-localization criterion therefore gives $\\mathrm{PD}_{\\leq r}(P_n)$ globally. Apply the same characterization in the reverse direction to get a projective resolution of $P_n$ of length at most $r$. The integer $r$ chosen in step 1 depends only on $P_1$, not on $n$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-pd-local-global",
+    "lem-weil-pbc-projective-dimension-ext-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Mathlib local-global criterion, ProjectiveDimension.lean:82, and Tag 065R, lemma-projective-dimension-ext"
+   }
+  },
+  {
+   "text": "Retain the finite projective resolution $Q_n$ of length $s_n$ from step 1. If $s_n\\leq r$, pad on the left with zeros. If $s_n>r=0$, step 5 says $P_n$ itself is projective, and its generator $1$ makes it finite, so use $P_n$ in degree zero. If $s_n>r\\geq1$, write the resolution in homological degrees and put $K=\\ker(Q_{n,r-1}\\to Q_{n,r-2})$, with $K=\\ker(Q_{n,0}\\to P_n)$ when $r=1$. The kernel-projectivity criterion, using step 5 and $e=r-1$, makes $K$ projective. Exactness gives $K=\\operatorname{im}(Q_{n,r}\\to Q_{n,r-1})$, so the images of finitely many generators of $Q_{n,r}$ generate $K$. Hence $0\\to K\\to Q_{n,r-1}\\to\\cdots\\to Q_{n,0}\\to P_n\\to0$ is the required finite projective resolution. Reindexing homological degree $j$ as cochain degree $-j$ yields support in $[-r,0]$.",
+   "uses": [
+    "lem-weil-pbc-projective-resolution-kernel-projective",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O5, lemma-independent-resolution; finite-projective shortening as in Tag 0CXE, lemma-what-kind-of-resolutions-Noetherian"
+   }
+  },
+  {
+   "text": "Tensor the resolution of step 6 with any module $M$ in degree zero. By the definition of Tor and of derived tensor via projective resolutions, its cohomology in degree $-i$ is $\\operatorname{Tor}_i^A(P_n,M)$, and its terms vanish outside $[-r,0]$, proving the asserted amplitude. Conversely, if these derived tensors vanish outside $[-r,0]$ for every $M$, then $\\operatorname{Tor}_i^A(P_n,M)=0$ for all $i>r$ and all $M$. The finite-module Tor-bound criterion applies because $A$ is Noetherian and $P_n$ is cyclic, and gives $\\mathrm{PD}_{\\leq r}(P_n)$. The projective-resolution/Ext characterization and the explicit shortening in step 6 recover a resolution by finite projectives of length at most $r$. Thus the two formulations have the same bound, including $r=0$ and zero quotients.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-pc-finite-projective-dimension-of-tor-bound",
+    "lem-weil-pbc-projective-dimension-ext-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY, section-tor; Tor-bound criterion through Tags 00M5 and 058R"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-projective",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-auslander-buchsbaum",
+  "lem-weil-pbc-finite-module-pd-local-global",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "lem-weil-pbc-projective-resolution-kernel-projective",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-finite-projective-dimension-of-tor-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tag 090V (Auslander–Buchsbaum), the maximal-localization criterion in Mathlib, and Tag 00O5; the repetition-of-powers argument and choice r=s_1 are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,15 +173,81 @@
    "results": "; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bound on projective dimensions of finite perfect quotients by powers of a fixed ideal in a Noetherian ring",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform bound on projective dimensions of finite perfect quotients by powers of a fixed ideal in a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"CategoryTheory.hasProjectiveDimensionLT_of_ge\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"localCohomology.ideal_powers_initial\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat_1\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\"], \"digest\": \"cba0a6718a99a2e0\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic projective-dimension inequalities and local-global results do not assert the common bound for ideal powers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective dimensions of perfect finite ring quotients A divided by I to the n are bounded by the projective dimension of A divided by I",
+   "results": "{\"t\": \"2026-10-13T23:34:29Z\", \"tool\": \"leanfinder\", \"query\": \"Projective dimensions of perfect finite ring quotients A divided by I to the n are bounded by the projective dimension of A divided by I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hasProjectiveDimensionLT_of_ge\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat\", \"CategoryTheory.instHasProjectiveDimensionLTHAddNat_1\", \"CategoryTheory.projectiveDimension_lt_iff\", \"CategoryTheory.projectiveDimension_le_iff\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.projectiveDimension_ge_iff\"], \"digest\": \"72e2d3672ebf871a\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic projective-dimension inequalities and local-global results do not assert the common bound for ideal powers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectiveDimension\"",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectiveDimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.projectiveDimension\", \"CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"CategoryTheory.instProjectiveOfHasProjectiveDimensionLTOfNatNat\", \"CategoryTheory.isZero_of_hasProjectiveDimensionLT_zero\", \"CategoryTheory.Limits.IsZero.hasProjectiveDimensionLT_zero\"], \"digest\": \"a58748f7d787bffb\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic projective-dimension inequalities and local-global results do not assert the common bound for ideal powers."
+  },
+  {
+   "tool": "grep",
+   "query": "Auslander|Buchsbaum|depth.*projective",
+   "results": "{\"t\": \"2026-10-13T23:34:03Z\", \"tool\": \"grep\", \"query\": \"Auslander|Buchsbaum|depth.*projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic projective-dimension inequalities and local-global results do not assert the common bound for ideal powers."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveDimension|projective.dimension|Auslander",
+   "results": "{\"t\": \"2026-10-13T23:34:28Z\", \"tool\": \"grep\", \"query\": \"projectiveDimension|projective.dimension|Auslander\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\"], \"digest\": \"ad0d6e11dd0217ec\"}",
+   "date": "2026-10-14",
+   "verdict": "no match: generic projective-dimension inequalities and local-global results do not assert the common bound for ideal powers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform projective dimension bound for finite perfect ideal power quotients",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"leansearch\", \"query\": \"Uniform projective dimension bound for finite perfect ideal power quotients\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-weil-pbc-amplification-proper",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-uniform-perfect-quotient-bound",
+  "worker": "stage1",
+  "summary": "Proved a common bound r given by the length of a finite projective resolution of A/I, using the elementary depth-zero calculation for finite A/I at supported maximal ideals, the general Auslander–Buchsbaum formula and the Mathlib local-global Ext-bound criterion. Made tensor explicitly derived, removed the unrelated completed sheaf datum from the algebraic statement, and wrote out perfect-model cancellation, localization, shortening and the converse Tor formulation. Two genuinely general ingredients are new: one statement-only formula and one Mathlib leaf.",
+  "blueprint": "Realizes the common tensor bound required for proof (c), TOW, of thm-weil-pbc-amplification-proper: the input local complexes are supported in one interval and reduction by all perfect finite P_n must admit a common amplitude bound. No change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-dimension-of-tor-bound",
+    "why": "Generic Noetherian finite-module Tor-to-projective-dimension criterion used only for the converse amplitude formulation; the proper-base-change unit does not supply this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-dimension-of-tor-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-e1de85111",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-e1de85111 (reviewer sub-agent of L); spot-checked: Reviewed the item, both new nodes, all cited DAG statements, unit/chapter route, and cited literature. Verified hypotheses, localization and coefficient categories, derived-tensor correction, edge cases, searches, provenance, and absence of duplicates or circularity. Detailed review written to review.md."
+ }
 }

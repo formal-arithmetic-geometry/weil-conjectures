@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-finite-module-pd-local-global",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: local models supported in [d_0,d_1]; the common tensor-amplitude bound for all perfect finite quotients needed to retain uniform bounds",
+   "via": [
+    "lem-weil-pbc-uniform-perfect-quotient-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Maximal-localization criterion for the Ext projective-dimension bound",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $M$ be a finitely generated $R$-module [def-weil-finitely-generated-module], and let $d\\geq0$ be an integer. Write $\\mathrm{PD}_{\\leq d}(M)$ for the predicate that $\\operatorname{Ext}_R^i(M,N)=0$ for every $R$-module $N$ and every integer $i\\geq d+1$ [def-pc-ext]. For a maximal ideal $\\mathfrak m$ put $R_{\\mathfrak m}=(R\\setminus\\mathfrak m)^{-1}R$ [def-weil-pbc-localization-at-prime] and $M_{\\mathfrak m}=(R\\setminus\\mathfrak m)^{-1}M$ [def-weil-pbc-module-localization], and define the same predicate over $R_{\\mathfrak m}$ using all $R_{\\mathfrak m}$-modules. Then $$\\mathrm{PD}_{\\leq d}(M)\\quad\\Longleftrightarrow\\quad\\mathrm{PD}_{\\leq d}(M_{\\mathfrak m})\\text{ for every maximal ideal }\\mathfrak m\\subset R.$$ This includes $M=0$, $R=0$, and $d=0$.",
+ "source": {
+  "document": "Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean",
+  "place": "ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum, line 82; HasProjectiveDimensionLE unfolds to the stated Ext predicate in Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean, lines 40–54"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-ext",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module over a noetherian ring has projective dimension at most n if and only if all its localizations at maximal ideals do",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated module over a noetherian ring has projective dimension at most n if and only if all its localizations at maximal ideals do\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal\", \"Module.projective_of_localization_maximal'\", \"CategoryTheory.projectiveDimension_lt_iff\", \"CategoryTheory.projectiveDimension_le_iff\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.projectiveDimension_ge_iff\", \"CategoryTheory.hasProjectiveDimensionLT_of_ge\", \"CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff\"], \"digest\": \"92152a3ac93085a5\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Loogle and grep find ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum; semantic hits include the d=0 projectivity criterion and generic bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hasProjectiveDimensionLE_iff_forall_maximalSpectrum\"",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"hasProjectiveDimensionLE_iff_forall_maximalSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum\"], \"digest\": \"831cac0825a9319f\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Loogle and grep find ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum; semantic hits include the d=0 projectivity criterion and generic bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "hasProjectiveDimensionLE_iff_forall_maximalSpectrum",
+   "results": "{\"t\": \"2026-10-13T23:34:03Z\", \"tool\": \"grep\", \"query\": \"hasProjectiveDimensionLE_iff_forall_maximalSpectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean\"], \"digest\": \"e719acba05ecbb15\"}",
+   "date": "2026-10-14",
+   "verdict": "match: Loogle and grep find ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum; semantic hits include the d=0 projectivity criterion and generic bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective dimension of a finite module is the supremum of projective dimensions at maximal localizations",
+   "results": "{\"t\": \"2026-10-13T23:34:04Z\", \"tool\": \"leansearch\", \"query\": \"Projective dimension of a finite module is the supremum of projective dimensions at maximal localizations\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.hasProjectiveDimensionLE_iff_forall_maximalSpectrum",
+  "file": "Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean",
+  "line": 82,
+  "how": "exact after unfolding CategoryTheory.HasProjectiveDimensionLE (Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean:52) and HasProjectiveDimensionLT (:45) to the Ext-vanishing predicate. Apply at ModuleCat.of R M in a universe containing R and M, so Small R is automatic. The theorem at line 82 assumes exactly CommRing R, IsNoetherianRing R and Module.Finite R M; no finite Krull dimension or nonzero hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-uniform-perfect-quotient-bound",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
