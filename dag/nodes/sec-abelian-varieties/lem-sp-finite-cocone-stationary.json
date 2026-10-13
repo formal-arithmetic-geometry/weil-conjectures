@@ -1,0 +1,111 @@
+{
+ "id": "lem-sp-finite-cocone-stationary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-cocone-limits",
+   "place": "Stationarity sublemma"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Eventual stationarity of finite diagonal cycle and boundary towers",
+ "statement": "Under the finite diagonal tail hypotheses, the cycle and boundary subobjects of the canonical tower are eventually constant at every bidegree.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, finite exact-couple convergence argument"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Write T for the canonical tower. For every natural t, its subobjects satisfy\nZ_t(p,q) = f(p,q)^{-1}(im incomingAlphaIter t (p+2) (q-1)) and\nB_t(p,q) = im(initialG(p,q) restricted to ker(alphaIter t p q)).\nThese identities are proved simultaneously by induction on t. At zero the incoming\niterate is an identity, giving the whole E-object, and the outgoing iterate has zero\nkernel, giving zero boundaries. For the successor, use the tower pullback formulas:\nthe derived D inclusion identifies its D-object with the image of the incoming alpha;\nthe derived f commutation identifies the lifted cycle condition with membership in\nthe next incoming image. The derived g commutation identifies the pulled-back image\nof the incoming differential with the initial g-image of the next outgoing kernel.\nExactness at D supplies the kernel/image identifications, and the epimorphic tower\nprojection with kernel B_t makes these equalities of subobjects of the initial E.\nFix p,q and choose the upper bound b on diagonal p+q+1 and the lower bound a on\ndiagonal p+q. Choose r natural with p+2+r >= b and p-r <= a. For every t >= r,\nthe source of incomingAlphaIter t (p+2) (q-1) is zero, so Z_t = ker(f(p,q)).\nThe iterated cocone equation says alphaIter t p q followed by the cocone map at\np-t equals the cocone map at p, after the canonical index transports. The map at\np-t is an isomorphism, hence ker(alphaIter t p q) is the kernel of the cocone map\nat p. Thus B_t is its image under initialG, independently of t. Both formulas\nalso hold at r, proving the required simultaneous stationarity.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stationary|stabilization|eventually_constant",
+   "results": "25 hits; none gives exact-couple cycle/boundary stationarity. Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded exact couple cycles and boundaries eventually constant",
+   "results": "8 hits; none gives exact-couple cycle/boundary stationarity. HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.exact_iff_degreewise_exact",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Antitone, IsGLB, Set.range",
+   "results": "4 hits; none gives exact-couple cycle/boundary stationarity. tendsto_atTop_isGLB, isGLB_of_tendsto_atTop, iUnion_Ioo_of_mono_of_isGLB_of_isLUB",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an exact couple finite diagonal tails imply eventual equality of cycle and boundary subobjects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FiniteCoconeLimits",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteCoconeStationary",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoconeStationary.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCocone_stationary",
+  "statement": "theorem finiteCocone_stationary {C : Type u} [Category.{v} C] [Abelian C] (X : BigradedExactCouple C 0) (A : ∀ n : ℤ, X.AlphaColimit n) (hA : ∀ n : ℤ, ∃ a b : ℤ, (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧ (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))) : ∀ p q : ℤ, ∃ r : ℕ, ∀ t : ℕ, r ≤ t → X.cycleBoundaryTower.Z t p q = X.cycleBoundaryTower.Z r p q ∧ X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c48ee",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022429-L-3219042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c48ee",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022429-L-3219042",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged finiteCocone_limits signature and proof with its node; checked stationarity formulas, metadata, repair, clean compilation of both delivered modules and direct importer Sheaf.CategoryTheory.FiniteCoconeExactCouple, and axioms limited to the three permitted axioms plus sorryAx from the named stationarity hole."
+ }
+}
