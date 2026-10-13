@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRightCechCupCycleComparison",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED, equation-kunneth-on-cech and its identification with the external cup map; Cohomology Tags 01FD, 07MB and 0FKV.",
+   "via": [
+    "lem-sc-picard-right-cech-cup-cycle-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sc-picard-scalar-cech-comparison",
+ "title": "Canonical scalar Cech comparison for affine-intersection covers",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], $f:X\\to\\operatorname{Spec}k$, $U=(U_i)_{i\\in I}$ an open cover, and $F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Assume that every intersection indexed by a nonempty finite tuple is affine. For every $p\\in\\mathbb N$ there exists a $k$-linear equivalence $e:H^p(\\operatorname{picardCechFunctor}(f,U)(F))\\to\\operatorname{scalarCohomology}(f,F,p)$ [def-sc-picard-external-right-cech-models, def-sc-field-linear-module-cohomology-operations]. It is canonical in the following precise sense: there exists a canonical module Cech comparison $c$ [def-sc-module-cech-comparison] such that $e(a)=c(M^{-1}S(a))$ for every $a$, where $S$ and $M$ are the explicit additive Cech homology identifications of the scalar presheaf and the global-section-module presheaf. This equality defines the predicate IsPicardScalarCechComparison for any $k$-linear map, without requiring invertibility.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-module-cech-comparison",
+  "def-sc-picard-external-right-cech-models",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XD (coherent-lemma-cech-cohomology-quasi-coherent), and Cohomology Tag 01EQ (cohomology-lemma-cech-to-cohomology): canonical comparison and scalar restriction."
+ },
+ "proof": [
+  {
+   "text": "Obtain a canonical module comparison c from cechComparisonMapNaturality. The affine-intersection comparison theorem makes c an isomorphism.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-map-iso-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two additive presheaves are definitionally identical. Under their explicit additive Cech homology identifications S and M, the action of r in k equals the action of scalarMap(f,top)(r) on ordinary module Cech homology: the sectionwise scalar multiplication transformations agree by scalarMap and restriction composition. Apply cechComplexFunctorHomologyIso_hom_smul on both sides and cancel M.",
+   "uses": [
+    "def-sc-picard-external-right-cech-models",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose S, inverse M, and c as additive equivalences. The scalar-action equality and linearity of c make this composite k-linear; inverse cancellation gives its inverse and the canonical-comparison equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-picard-external-right-cech-models",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "S3: explicit scalar restriction and natural-degree external-cup comparison of Tags 01XD, 01FD, 0FKV and 0BED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical affine Cech comparison isomorphism after restriction of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine Cech comparison isomorphism scalar cohomology compatible external cup product",
+   "results": "8 hits: groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.inhomogeneousCochainsIso, groupCohomology.cocyclesIso₀_inv_comp_iCocycles, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂, groupCohomology.isoCocycles₁_inv_comp_iCocycles, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc, groupCohomology.cocyclesIso₀_hom_comp_f, groupCohomology.cochainsMap_f_0_comp_cochainsIso₀",
+   "verdict": "No exact match; project-specific scalar comparison interface.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Cc]ech|[Cc]ech.*scalar",
+   "results": "0 hits: ",
+   "verdict": "No exact match; project-specific scalar comparison interface.",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardScalarCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardScalarCechComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardScalarCechComparison_exists",
+  "statement": "theorem picardScalarCechComparison_exists\n    {k : Type w} [Field k] {X : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) {ι : Type w} (U : ι → X.Opens)\n    (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hcover : iSup U = ⊤) (F : X.Modules) [F.IsQuasicoherent] (p : ℕ) :\n    ∃ e : ((picardCechFunctor f U).obj F).homology p ≃ₗ[k] scalarCohomology f F p,\n      IsPicardScalarCechComparison f U F p e",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.IsPicardScalarCechComparison",
+   "AlgebraicGeometry.Scheme.Modules.picardScalarCechComparison_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T150354-L-810653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T150354-L-810653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
