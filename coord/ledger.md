@@ -11627,3 +11627,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/E1/Sheaf.AlgebraicGeometry.IdealPowerTensorImageLift (stage 3; reviewer PASS; first push; landing 20261013T082338-L-1633312 (interface); batch 20261013T082326; modules 4; new nodes 3)
 - 08:23 L: merged deliver/E2/Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassTopComparison (stage 3; reviewer PASS; first push; landing 20261013T082339-L-1633464 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/E2/Sheaf.Paper.CyclicExtensionCocycle (stage 3; reviewer PASS; first push; landing 20261013T082339-L-1633566 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:23 L: merged deliver/E3/Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension (stage 3; reviewer PASS; first push; landing 20261013T082339-L-1633716 (interface); batch 20261013T082326; modules 3; new nodes 2)

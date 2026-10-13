@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
+import all Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
+import Sheaf.AlgebraicGeometry.QuasicoherentSheafHom
+import Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
+import Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 
 /-! # Tensor extension of a coherent local morphism
 
@@ -51,6 +56,24 @@ theorem coherent_open_map_tensor_extension
     ∃ (n : ℕ) (β : (I ^ n).toModules ⊗ H ⟶ F),
       (restrictFunctor U.ι).map β =
         (restrictFunctor U.ι).map ((I ^ n).toModulesι ▷ H ≫ (λ_ H).hom) ≫ φ := by
-  sorry
+  classical
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  have : H.IsFinitePresentation :=
+    AlgebraicGeometry.isFinitePresentation_of_coherent X H hH
+  let E : X.Modules := SheafOfModules.homObj (R := X.sheaf) H F
+  have : E.IsQuasicoherent := isQuasicoherent_homObj_of_isFinitePresentation X H F
+  let ψ := (overFunctorEquiv U).hom.app H ≫ φ ≫ (overFunctorEquiv U).inv.app F
+  let σ : H.over U ⟶ F.over U := (overEquiv U).functor.preimage ψ
+  let s : E.val.obj (.op U) := σ.val
+  obtain ⟨n, α, hα⟩ := quasicoherent_open_section_ideal_extension I E U hI s
+  obtain ⟨e, he, _⟩ := SheafOfModules.exists_tensorHom_linearEquiv X X.sheaf H F
+  refine ⟨n, e _ α, ?_⟩
+  have ht := tensorHom_restriction_of_local_scalar (I ^ n).toModules H F
+    (I ^ n).toModulesι U s α hα (e _ α) (he _ α).1
+  have hσ : (overEquiv U).functor.map σ = ψ := Functor.map_preimage _ _
+  change (restrictFunctor U.ι).map (e _ α) = _
+  rw [ht]
+  rw [show (⟨s⟩ : H.over U ⟶ F.over U) = σ from rfl, hσ]
+  simp [ψ, Category.assoc]
 
 end AlgebraicGeometry.Scheme.Modules

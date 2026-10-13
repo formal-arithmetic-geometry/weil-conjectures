@@ -17,45 +17,35 @@
  ],
  "proof": [
   {
-   "text": "A coherent H is finitely presented on X, so internal Hom(H,F) is quasi-coherent and its U-sections identify with maps H|U -> F|U.",
+   "text": "Reuse the proved finite-presentation-from-coherence helper in CoherentStalkMapExtends (finite local generators and finite relations, followed by locality). The finite-presentation Hom theorem makes E=Hom(H,F) quasi-coherent.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-stalk-map-extends",
     "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "For a section of a quasi-coherent module on U, extend its finite-type image to a finite-type quasi-coherent submodule on X. It is coherent. Stabilize its I-power torsion using Noetherian ACC; Artin-Rees gives a high ideal product disjoint from this torsion and unchanged on U. Apply the sections comparison to this torsion-free module; a colimit representative gives a map I^n into internal Hom recovering the section.",
+   "text": "Conjugate phi by overFunctorEquiv and take its preimage under overEquiv. Its underlying slice morphism is a section s of E on U. Apply the ideal-power section-extension theorem to obtain n and alpha with local scalar values.",
    "uses": [
-    "lem-weil-pbc-module-finite-type-submodule-extension",
-    "lem-weil-pbc-noetherian-acc-quasi-coherent",
-    "lem-weil-pbc-sections-over-quasi-compact-open",
-    "lem-weil-pbc-sections-annihilated-by-ideal",
-    "lem-weil-pbc-coherent-artin-rees"
+    "lem-pc-quasicoherent-open-section-ideal-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Apply tensor-Hom adjunction. Evaluation on U gives beta|U = mu_n|U followed by phi. The support criterion identifies the specified U; the affine power formula identifies ideal-data powers with recursive powers. Naturality of overFunctorEquiv gives the restriction equation.",
+   "text": "The tensor-Hom linear equivalence supplies beta=e(alpha) and its pure tensor evaluation formula. The scalar restriction lemma computes the restriction. The map-preimage equation and inverse identities of overFunctorEquiv cancel the transports and recover exactly phi.",
    "uses": [
     "lem-weil-pbc-module-tensor-hom-adjunction",
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-pc-tensor-hom-restriction-scalar"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-artin-rees",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-pc-quasicoherent-open-section-ideal-extension",
+  "lem-pc-tensor-hom-restriction-scalar",
+  "lem-weil-pbc-coherent-stalk-map-extends",
   "lem-weil-pbc-module-tensor-hom-adjunction",
-  "lem-weil-pbc-noetherian-acc-quasi-coherent",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "lem-weil-pbc-sections-annihilated-by-ideal",
-  "lem-weil-pbc-sections-over-quasi-compact-open",
-  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
  ],
  "proof_origin": {
   "by": "agent",
@@ -170,9 +160,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T062535-L-736731",
+  "landing": "20261013T082339-L-1633716",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

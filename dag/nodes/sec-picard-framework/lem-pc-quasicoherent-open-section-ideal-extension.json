@@ -1,0 +1,176 @@
+{
+ "id": "lem-pc-quasicoherent-open-section-ideal-extension",
+ "kind": "statement",
+ "title": "Extension of a quasi-coherent open section from an ideal power",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $I$ a quasi-coherent ideal sheaf represented by ideal-sheaf data [def-sbc-closed-immersion-ideal-sheaf], $E$ a quasi-coherent module [pqf-def-coherent, def-weil-sheaf-of-modules-category], and $U$ an open with $V(I)=X\\setminus U$. For every section $s\\in E(U)$, there exist $n\\geq0$ and $\\alpha:I^n\\to E$ such that for every open $W\\subseteq U$ and $a\\in I^n(W)$, $\\alpha_W(a)=a\\,s|_W$, using the canonical inclusion $I^n\\to\\mathcal O_X$ and ideal-sheaf-data powers (the zeroth power is the unit ideal) [lem-weil-pbc-ideal-module-product-stalk].",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (coherent-lemma-homs-over-open), structure-module case and internal-Hom/tensor-Hom paragraphs before the kernel argument."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Extend the finite-type image of the section map O_U to E|U to a finite-type quasi-coherent submodule G of E. On the Noetherian scheme this submodule is coherent.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quasi-coherent annihilators of I-powers form an increasing chain in G. By ACC they stabilize at T=G_r. Artin-Rees yields c with I^(r+c)G intersect T=0. The submodule G prime=I^(r+c)G has zero annihilator for every I-power and agrees with G on U.",
+   "uses": [
+    "lem-weil-pbc-sections-annihilated-by-ideal",
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-weil-pbc-coherent-artin-rees",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sections comparison to G prime. Its annihilator quotients equal G prime, so colimit evaluation gives a representative I^n to G prime of the section. Compose with the inclusion into E. On U each power is O_U; O-linear maps from O_U are multiplication by their value at 1. Naturality gives the equality on every W contained in U. The affine power formula identifies recursive powers with ideal-data powers, including zero.",
+   "uses": [
+    "lem-weil-pbc-sections-over-quasi-compact-open",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-artin-rees",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-sections-annihilated-by-ideal",
+  "lem-weil-pbc-sections-over-quasi-compact-open",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YB (coherent-lemma-homs-over-open), structure-module case and internal-Hom/tensor-Hom paragraphs before the kernel argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of a quasi coherent sheaf over the complement of an ideal on a Noetherian scheme extends to a homomorphism from some power of the ideal",
+   "results": {
+    "t": "2026-10-13T06:39:07Z",
+    "tool": "leansearch",
+    "query": "Every section of a quasi coherent sheaf over the complement of an ideal on a Noetherian scheme extends to a homomorphism from some power of the ideal",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+   "results": {
+    "t": "2026-10-13T06:32:27Z",
+    "tool": "leanfinder",
+    "query": "A morphism from a coherent sheaf on an open complement extends from an ideal power tensor the sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.exists_const",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+     "ModuleCat.Tilde.res_const",
+     "localCohomology",
+     "ModuleCat.Tilde.toOpen",
+     "AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+     "ModuleCat.Tilde.sectionsSubmodule",
+     "localCohomology.ofSelfLERadical"
+    ],
+    "digest": "6d342ce071ca297e"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match; results concern localization or tensor functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*power.*section|section.*ideal.*power",
+   "results": {
+    "t": "2026-10-13T06:44:54Z",
+    "tool": "grep",
+    "query": "ideal.*power.*section|section.*ideal.*power",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No exact match; results concern localization or tensor functoriality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentOpenMapTensorExtension",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "The ambient ideal-power extension in the integral ideal devissage: the tensor extension part of 01YB. Extension of a quasi-coherent open section from an ideal power",
+   "via": [
+    "lem-pc-coherent-open-map-tensor-extension",
+    "lem-pc-closed-structure-ambient-ideal-extension",
+    "lem-pc-local-closed-ideal-map-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentOpenSectionIdealExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasicoherent_open_section_ideal_extension",
+  "statement": "theorem quasicoherent_open_section_ideal_extension\n    {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)\n    (E : X.Modules) [E.IsQuasicoherent] (U : X.Opens)\n    (hI : (I.support : Set X) = (U : Set X)ᶜ) (s : E.val.obj (op U)) :\n    ∃ (n : ℕ) (α : (I ^ n).toModules ⟶ E),\n      ∀ (W : X.Opens) (h : W ≤ U) (a : (I ^ n).toModules.val.obj (op W)),\n        α.val.app (op W) a =\n          (I ^ n).toModulesι.val.app (op W) a • E.val.map (homOfLE h).op s",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T082339-L-1633716",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261013T082339-L-1633716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
