@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-module-finite-presentation-affine-replacement",
+ "kind": "statement",
+ "title": "Finitely presented affine replacement with an overlap isomorphism",
+ "statement": "Let X be a quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions], W a quasi-compact open [def-weil-pbc-quasi-compact-scheme], V an affine open, and H a quasi-coherent module [def-weil-sheaf-of-modules-category, pqf-def-coherent]. Suppose H restricted to W is finitely presented [def-weil-pbc-module-finite-type-presentation]. There exists a finitely presented module E on V and a map j from E to H restricted to V whose restriction to W intersect V is an isomorphism. No extension away from V and no glued module is asserted.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Work on the affine scheme V. The intersection W intersect V is quasi-compact by quasi-separatedness and compactness of affine opens. Restrict the finite presentation on W to the overlap, using the canonical restriction identifications.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "Apply finite-type submodule extension to H restricted to V, using its whole finite-type restriction on the overlap. This gives a finite-type quasi-coherent H-prime contained in H restricted to V, with equal restriction on the overlap.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "Take a finite free epimorphism onto H-prime using its affine global generators. Its kernel K is quasi-coherent. Restriction preserves kernels and epimorphisms. The restricted target is finitely presented, so Modules 01BP says that K restricted to the overlap is finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "Apply finite-type submodule extension to K and its whole restriction on the overlap, producing K-prime. The cokernel E of K-prime mapping to the finite free source is finitely presented by Modules 0H96. Since K-prime is contained in the kernel, the epimorphism descends to a map E to H-prime and then H. On the overlap K-prime equals K; an epimorphism is the cokernel of its kernel, so the restricted induced map is an isomorphism. Transport E and its map back to the localized site over V.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension",
+    "lem-weil-pbc-module-finite-presentation-cokernel",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation sheaf module affine replacement isomorphism on open",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a finitely presented sheaf of modules on a quasi compact open of a scheme extends to a finitely presented module",
+   "results": "Finite-presentation predicates, local presentation data and presentation transport; no replacement or binary gluing theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "Predicates and instances for finite presentation; overMap, its unit isomorphism and adjunction, and restriction comparison. No construction of a replacement or glued object.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*extension|finitePresentation.*affine.*union; binary gluing and affine replacement in Mathlib and both library roots",
+   "results": "No matching theorem. Blueprint searches for finite presentation glue, affine finite presentation and 01PI found no duplicate blueprint node. Existing generic sheaf-module descent is used as a dependency, not restated.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Steps 3 and 5--8 of the finite-presentation extension proof (affine replacement)",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-extension",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationAffineReplacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFinitePresentationAffineReplacement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_affine_replacement",
+  "statement": "theorem exists_finitePresentation_affine_replacement (X : Scheme.{u}) [QuasiSeparatedSpace X] (W : X.Opens) (hW : IsCompact (W : Set X)) (V : X.affineOpens) (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent] [(H.over W).IsFinitePresentation] : ∃ E : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V.1), E.IsFinitePresentation ∧ ∃ (j : E ⟶ H.over V.1), IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE (show W ⊓ V.1 ≤ V.1 from inf_le_right))).map j)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-module-finite-presentation-binary-gluing",
+ "kind": "statement",
+ "title": "Binary gluing of a finitely presented module and a compatible map",
+ "statement": "Let X be a scheme [def-pc-scheme], W and V open subsets, and H a module [def-weil-sheaf-of-modules-category] such that H restricted to W is finitely presented [def-weil-pbc-module-finite-type-presentation]. Let E be a finitely presented module on V, with a map j from E to H restricted to V whose restriction to W intersect V is an isomorphism. There is a finitely presented module G on W union V and a map phi from G to H restricted to W union V whose restriction to W is an isomorphism. No compactness, affineness, quasi-separatedness, or quasi-coherence is assumed, and no module outside W union V is constructed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "On W intersect V the map j is an isomorphism. Use it as the identification between E on V and H restricted to W. The two-open cocycle follows from the inverse identities. Apply module-object descent on W union V to glue these modules.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "The identity map to H on W and j on V agree on the overlap by the chosen identification. Morphism descent glues them to a map phi from the glued module G to H restricted to W union V. Its restriction to W is the gluing identification and hence is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  },
+  {
+   "text": "Finite presentation is local and invariant under isomorphism: transport the finite local presentations of H restricted to W and of E along the gluing identifications, and combine their covering families. This yields a finite local presentation of G. Neither compactness nor quasi-coherence is needed in this step.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PI (lemma-extend-finite-presentation), proof; https://stacks.math.columbia.edu/tag/01PI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "glue finite presentation modules on two opens with compatible maps",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue finitely presented sheaves of modules on two open sets with compatible morphisms",
+   "results": "Finite-presentation predicates, local presentation data and presentation transport; no replacement or binary gluing theorem.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overMap",
+   "results": "Predicates and instances for finite presentation; overMap, its unit isomorphism and adjunction, and restriction comparison. No construction of a replacement or glued object.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*extension|finitePresentation.*affine.*union; binary gluing and affine replacement in Mathlib and both library roots",
+   "results": "No matching theorem. Blueprint searches for finite presentation glue, affine finite presentation and 01PI found no duplicate blueprint node. Existing generic sheaf-module descent is used as a dependency, not restated.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Step 9 of the finite-presentation extension proof (gluing on the union only)",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-extension",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationBinaryGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFinitePresentationBinaryGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_binary_gluing",
+  "statement": "theorem exists_finitePresentation_binary_gluing (X : Scheme.{u}) (W V : X.Opens) (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [(H.over W).IsFinitePresentation] (E : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) [E.IsFinitePresentation] (j : E ⟶ H.over V) [IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE (show W ⊓ V ≤ V from inf_le_right))).map j)] : ∃ G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W ⊔ V)), G.IsFinitePresentation ∧ ∃ (φ : G ⟶ H.over (W ⊔ V)), IsIso ((SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE (show W ≤ W ⊔ V from le_sup_left))).map φ)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T100015-L-2465275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
