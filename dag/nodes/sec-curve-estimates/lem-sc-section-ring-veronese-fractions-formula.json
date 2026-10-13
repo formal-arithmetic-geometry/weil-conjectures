@@ -2,7 +2,7 @@
  "id": "lem-sc-section-ring-veronese-fractions-formula",
  "kind": "statement",
  "title": "Formula for Veronese fraction generators",
- "statement": "For a scheme X, an invertible module L, a natural number d, a homogeneous section s of degree d, and an additive equivalence e between the corresponding homogeneous localization and section-fraction presentation, if e equals the choice of the core equivalence, then for every n and ξ : sectionRingGrade L (n • d), e applied to HomogeneousLocalization.Away.mk ... n ξ.val ξ.property equals the displayed sectionFraction with numerator transported by exponent commutativity, tensorPowMulIso, and the inverse left unitor.",
+ "statement": "For a scheme X [def-pc-scheme], an invertible module L [def-sc-invertible-module], a natural number d, and a homogeneous section s of degree d of its section ring [def-sc-invertible-section-ring], let g be the explicit numerator-to-fraction map [def-sc-section-ring-veronese-fraction-map]. Its quotient by the relation submodule [def-sc-section-fraction-presentation] is an additive equivalence, by its proved surjectivity and the kernel equality [lem-sc-section-ring-veronese-fraction-kernel]. Define sectionRingVeroneseFractionEquiv to be the inverse of this fixed quotient equivalence. If e equals sectionRingVeroneseFractionEquiv X L d s, then for each n>=0 and xi in S_(n*d), e(xi/s^n) is the section-fraction generator [n,T_n(xi_(n*d))], with T_n the exponent-commutativity, tensorPowMulIso and inverse-left-unitor isomorphism. This is the canonical constructed map, not an arbitrary additive equivalence.",
  "source": {
   "document": "literature/stacks-project/properties.tex",
   "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
@@ -11,19 +11,30 @@
   "def-pc-scheme",
   "def-sc-invertible-module",
   "def-sc-invertible-section-ring",
-  "def-sc-section-fraction-presentation"
+  "def-sc-section-fraction-presentation",
+  "def-sc-section-ring-veronese-fraction-map",
+  "lem-sc-section-ring-veronese-fraction-kernel"
  ],
  "proof": [
   {
-   "text": "The construction follows by identifying homogeneous summands with tensor-power section summands and quotienting by transition relations.",
+   "text": "Construct the additive quotient equivalence with QuotientAddGroup.liftEquiv applied to the explicit direct-sum map, its proved surjectivity, and its kernel equality. Define sectionRingVeroneseFractionEquiv to be its unique inverse.",
    "uses": [
-    "lem-sc-section-ring-veronese-fractions-core"
+    "def-sc-section-ring-veronese-fraction-map",
+    "lem-sc-section-ring-veronese-fraction-kernel"
    ],
    "elementary": false
+  },
+  {
+   "text": "Substitute the equality hypothesis. Apply injectivity of the inverse equivalence to the claimed generator formula. The quotient map evaluates on a generator by DirectSum.toAddMonoid_of; sectionRingVeroneseNumerator_cancel cancels the tensor-power isomorphism and degree injection. The remaining equality is reflexive.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-section-ring-veronese-fractions-core"
+  "def-sc-section-ring-veronese-fraction-map",
+  "lem-sc-section-ring-veronese-fraction-kernel"
  ],
  "proof_origin": {
   "by": "agent",
@@ -87,9 +98,13 @@
   "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula",
   "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseFractionsFormula.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRing_veronese_fraction_formula",
-  "statement": "theorem sectionRing_veronese_fraction_formula\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d)\n    (e : HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+\n      SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d))\n    (he : e = Classical.choice (sectionRing_veronese_fraction_core X L d s)) :\n    ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)),\n      e (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n\n        ξ.val ξ.property) =\n      sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n\n        ((eqToIso (congrArg L.tensorPow (by simp [Nat.mul_comm])) ≪≫\n          L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionEquiv",
+   "AlgebraicGeometry.Scheme.Modules.sectionRing_veronese_fraction_formula"
+  ],
+  "statement": "theorem sectionRing_veronese_fraction_formula\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d)\n    (e : HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+\n      SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d))\n    (he : e = sectionRingVeroneseFractionEquiv X L d s) :\n    ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)),\n      e (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n\n        ξ.val ξ.property) =\n      sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n\n        ((eqToIso (congrArg L.tensorPow (by simp [Nat.mul_comm])) ≪≫\n          L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))",
   "branch": "sheaf-dag",
-  "by": "A3",
+  "by": "R3",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -105,11 +120,40 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "X-1177c",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261013T001225-L-2305084",
+  "landing": "20261013T040759-L-3952109",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with all four nodes, the declared statement repair, and the sourced kernel argument; four modules and sole direct importer compile cleanly, original caller fails as reported, adaptation is exactly one forced line, and axioms match the named kernel hole."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "R3 stage 2",
+  "old_statement": "For a scheme X, an invertible module L, a natural number d, a homogeneous section s of degree d, and an additive equivalence e between the corresponding homogeneous localization and section-fraction presentation, if e equals the choice of the core equivalence, then for every n and ξ : sectionRingGrade L (n • d), e applied to HomogeneousLocalization.Away.mk ... n ξ.val ξ.property equals the displayed sectionFraction with numerator transported by exponent commutativity, tensorPowMulIso, and the inverse left unitor.",
+  "what": "Reviewer X-9f6b3 required replacing a choice from bare Nonempty with an explicit quotient equivalence. Replace only the equality hypothesis naming that witness; the generator conclusion is identical. Supply the actual additive direct-sum map, prove surjectivity and the formula, and reduce the construction to a kernel-equality lemma.",
+  "source": {
+   "document": "literature/stacks-project/properties.tex",
+   "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-sc-invertible-module",
+   "def-sc-invertible-section-ring",
+   "def-sc-section-fraction-presentation"
+  ],
+  "old_proof": [
+   {
+    "text": "The construction follows by identifying homogeneous summands with tensor-power section summands and quotienting by transition relations.",
+    "uses": [
+     "lem-sc-section-ring-veronese-fractions-core"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-section-ring-veronese-fractions-core"
+  ]
  }
 }

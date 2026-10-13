@@ -57,7 +57,7 @@ theorem exists_sectionRing_veronese_fraction_equiv
         sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n
           ((eqToIso (congrArg L.tensorPow (by simp [Nat.mul_comm])) ≪≫
             L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d))) := by
-  let e := Classical.choice (sectionRing_veronese_fraction_core X L d s)
+  let e := sectionRingVeroneseFractionEquiv X L d s
   exact ⟨e, sectionRing_veronese_fraction_formula X L d s e rfl⟩
 
 end AlgebraicGeometry.Scheme.Modules

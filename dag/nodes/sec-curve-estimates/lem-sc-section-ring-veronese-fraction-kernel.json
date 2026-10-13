@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-section-ring-veronese-fraction-kernel",
+ "kind": "statement",
+ "title": "Kernel of the explicit Veronese fraction map",
+ "statement": "For any scheme X [def-pc-scheme], invertible module L [def-sc-invertible-module], natural number d and s in degree d of its section ring [def-sc-invertible-section-ring], let g be the explicit additive map of [def-sc-section-ring-veronese-fraction-map] and let R be the fraction-relation submodule of [def-sc-section-fraction-presentation] for M=L tensorPow d, F=O_X and sigma=s_d. Then R, regarded as an additive subgroup of the numerator direct sum, equals ker(g). This states equality of subgroups for a fixed constructed map, without a generator formula for any unspecified equivalence.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-fraction-presentation",
+  "def-sc-section-ring-veronese-fraction-map"
+ ],
+ "proof": [
+  {
+   "text": "Write T_n for the explicit numerator isomorphism of [def-sc-section-ring-veronese-fraction-map]. On each open set trivializing L, both the section-ring product and tensor-power transition multiply coefficient functions in the structure sheaf; the tensor-power isomorphisms preserve powers of the chosen generator. Glue to obtain a_(n+b)(transition_n,b(t))=a_n(t)*s^b, where a_n(t)=of_(nd)(T_n inverse(t)). The same local calculation identifies global-function scalar multiplication with multiplication by the degree-zero ring element. Every transition difference and every scalar multiple maps to zero; additivity kills their whole submodule span.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map",
+    "def-sc-section-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite-support numerator family z in the kernel, choose N at least every support index. Subtract the transition difference from each index n to N, so z is congruent modulo the relation submodule to a single generator of degree N with numerator t. Its image a_N(t)/s^N is zero. The localization equality criterion gives k>=0 such that s^k*a_N(t)=0. The coherence identity and injectivity of the degree-(N+k)d injection and numerator isomorphism show that transition_N,k(t)=0. The degree N to N+k relation then puts the single generator, hence z, in the relation submodule. Empty support, d=0 and nilpotent s require no changes. This proves the reverse kernel inclusion.",
+   "uses": [
+    "def-sc-section-ring-veronese-fraction-map",
+    "def-sc-section-fraction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-section-fraction-presentation",
+  "def-sc-section-ring-veronese-fraction-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of direct sum fraction map equals span of transition relations homogeneous localization",
+   "results": "Unavailable: HTTP Internal Server Error. No verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive equivalence quotient direct sum of homogeneous components by transition relations to homogeneous localization away",
+   "results": "HomogeneousLocalization, mk, mk_add, Away.mk, val, map, Away.isLocalizationElem; no section-fraction kernel computation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftEquiv|add_mk_self|Away.mk_surjective",
+   "results": "QuotientAddGroup.liftEquiv is the generic quotient construction; Localization.add_mk_self proves summand additivity; Away.mk_surjective proves the explicit map surjective. Searches of both repository roots found no section-fraction kernel computation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-section-ring-veronese-fractions",
+   "place": "Explicit quotient construction repairing the arbitrary-choice formula",
+   "via": [
+    "lem-sc-section-ring-veronese-fractions-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseFractionKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionMap_kernel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionMap_kernel"
+  ],
+  "statement": "theorem sectionRingVeroneseFractionMap_kernel\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) :\n    (sectionFractionRelations (L.tensorPow d) (𝟙_ X.Modules) (s.val d)).toAddSubgroup =\n      (sectionRingVeroneseFractionMap X L d s).ker",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1177c",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1177c",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952109",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with all four nodes, the declared statement repair, and the sourced kernel argument; four modules and sole direct importer compile cleanly, original caller fails as reported, adaptation is exactly one forced line, and axioms match the named kernel hole."
+ }
+}

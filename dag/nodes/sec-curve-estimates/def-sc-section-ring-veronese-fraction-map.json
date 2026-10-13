@@ -1,0 +1,117 @@
+{
+ "id": "def-sc-section-ring-veronese-fraction-map",
+ "kind": "definition",
+ "title": "Explicit Veronese numerator-to-fraction map",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible module [def-sc-invertible-module], S its tensor-power section ring [def-sc-invertible-section-ring], d a natural number and s in S_d. Put M=L tensorPow d and Q_0=direct sum over n>=0 of Gamma(X,O_X tensor M tensorPow n), the numerator direct sum of [def-sc-section-fraction-presentation]. Let T_n:L tensorPow (n*d) -> O_X tensor M tensorPow n be the exponent-commutativity, tensorPowMulIso and inverse-left-unitor isomorphism. Define an additive map g:Q_0 -> S_(s) by extending, from the n-th summand, t -> of_(n*d)(T_n inverse(t))/s^n. This is an explicit DirectSum.toAddMonoid construction. Its component maps are additive by the same-denominator localization addition identity. Evaluation and injection in degree n*d are inverse, so g is surjective by Away.mk_surjective. No positive-degree or nonnilpotence condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-fraction-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of direct sum fraction map equals span of transition relations homogeneous localization",
+   "results": "Unavailable: HTTP Internal Server Error. No verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive equivalence quotient direct sum of homogeneous components by transition relations to homogeneous localization away",
+   "results": "HomogeneousLocalization, mk, mk_add, Away.mk, val, map, Away.isLocalizationElem; no section-fraction kernel computation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftEquiv|add_mk_self|Away.mk_surjective",
+   "results": "QuotientAddGroup.liftEquiv is the generic quotient construction; Localization.add_mk_self proves summand additivity; Away.mk_surjective proves the explicit map surjective. Searches of both repository roots found no section-fraction kernel computation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionsFormula",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-section-ring-veronese-fractions",
+   "place": "Explicit quotient construction repairing the arbitrary-choice formula",
+   "via": [
+    "lem-sc-section-ring-veronese-fractions-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractionMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseFractionMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseNumeratorIso",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseHomogeneousFraction",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseNumerator",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionMap",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseNumerator_cancel",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingVeroneseFractionMap_surjective"
+  ],
+  "statement": "def sectionRingVeroneseFractionMap\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) :\n    (⨁ n : ℕ, Γ((𝟙_ X.Modules) ⊗ (L.tensorPow d).tensorPow n, ⊤)) →+\n      HomogeneousLocalization.Away (sectionRingGrade L) s.val",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1177c",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1177c",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952109",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with all four nodes, the declared statement repair, and the sourced kernel argument; four modules and sole direct importer compile cleanly, original caller fails as reported, adaptation is exactly one forced line, and axioms match the named kernel hole."
+ }
+}
