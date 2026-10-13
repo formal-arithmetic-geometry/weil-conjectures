@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
+import Sheaf.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftComparisonAux
 
 /-! # Shift compatibility of the identity-resolution comparison
 
@@ -110,6 +111,8 @@ theorem derivedModuleDirectImageKInjectiveIso_shift
       (moduleDirectImageLocalizedShiftIso g K).hom =
     ((derivedModuleDirectImage g).commShiftIso (1 : ℤ)).hom.app
         (DerivedCategory.Q.obj K) ≫
-      (derivedModuleDirectImageKInjectiveIso g K).hom⟦(1 : ℤ)⟧' :=  sorry
+      (derivedModuleDirectImageKInjectiveIso g K).hom⟦(1 : ℤ)⟧'  := by
+  rw [← Category.assoc, derivedModuleDirectImageKInjectiveIso_shift_aux]
+  simp
 
 end AlgebraicGeometry.RingedSpace
