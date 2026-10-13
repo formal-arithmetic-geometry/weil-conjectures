@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "On the affine open V, refine simultaneous finite free frames of M and N to principal affine opens. Compactness of V selects finitely many frames covering V.",
+   "text": "For each x in V, take finite free neighbourhoods for M and N using the proved source-library exists_mem_over_iso_free. Refine their intersection with V to an affine open U using exists_isAffineOpen_mem_and_subset. Restrict the two frames to U via overIsoFreeEquiv, restrictCompIso and restrictFreeIso. This is the proved private helper exists_affine_compact_isoLocus_neighbourhood.",
    "uses": [
     "def-sc-finite-locally-free-sheaf",
     "def-weil-affine-spectrum"
@@ -23,15 +23,14 @@
    "elementary": true
   },
   {
-   "text": "On an equal-rank frame the neighbourhood-defined locus is the determinant principal open: the adjugate supplies an inverse there, and invertibility at a stalk forces the determinant to be a unit. On unequal-rank frames the locus is empty by residue-field dimensions. Zero rank has determinant 1. These statements identify the intersection with the union defining U_phi.",
+   "text": "Apply the affine finite free principal-open identity to each such U. Its intersection with the isomorphism locus is a basic open, affine by IsAffineOpen.basicOpen and compact by IsAffineOpen.isCompact.",
    "uses": [
-    "def-sc-module-map-iso-locus",
-    "def-pc-module-pullback"
+    "lem-sc-finite-free-map-iso-locus-basic-open"
    ],
    "elementary": true
   },
   {
-   "text": "The determinant principal opens in the finitely many affine frames are affine and compact; their images in V and W remain compact. Their finite union is V intersect U_phi.",
+   "text": "These U form an open cover of V. Use hV.isCompact.elim_finite_subcover to select finitely many. Each U lies in V, so a pointwise set-membership argument identifies V intersect the locus with the finite union of U intersect the locus. Finset.isCompact_biUnion proves compactness of that union.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
@@ -41,13 +40,12 @@
  "proof_deps": [
   "def-sc-finite-locally-free-sheaf",
   "def-weil-affine-spectrum",
-  "def-sc-module-map-iso-locus",
-  "def-pc-module-pullback"
+  "lem-sc-finite-free-map-iso-locus-basic-open"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "Final determinant sentence; Tag 05GD, Lemma 10.79.4(3), local matrix proof; explicit formalization of this part of the parent argument"
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Lemma 10.79.4(3), local matrix argument; Tag 0BDP final determinant sentence; F4 formal frame refinement and finite-cover gluing"
  },
  "mathlib_searches": [
   {
@@ -131,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261012T225318-L-1808939",
+  "landing": "20261013T004023-L-2490829",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

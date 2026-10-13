@@ -1,0 +1,168 @@
+{
+ "id": "lem-sc-finite-free-map-iso-locus-basic-open",
+ "kind": "statement",
+ "title": "The isomorphism locus in an affine finite free frame is principal",
+ "statement": "Let W be a scheme [def-pc-scheme], let M,N be sheaves of modules on W [def-weil-sheaf-of-modules-category], and let φ:M→N. Let U be an affine open [def-weil-affine-spectrum]. Suppose I,J are finite sets and the ordinary restrictions of M,N to U are isomorphic to the free structure modules indexed by I,J. Then there exists f∈Γ(U,𝒪_W) such that U∩U_φ=D_U(f), where U_φ is the neighbourhood-defined locally invertible open [def-sc-module-map-iso-locus]. No equality of the two ranks is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Lemma 10.79.4(3), local matrix argument; Tag 0BDP final determinant sentence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-affine-spectrum",
+  "def-sc-module-map-iso-locus"
+ ],
+ "proof": [
+  {
+   "text": "Enumerate the finite frame index types. In equal ranks the restriction of the morphism is a square matrix of sections on U. Take f to be its determinant. Restriction carries this matrix to the matrix on each smaller open. On D(f) the determinant is a unit, so the adjugate matrix divided by f gives an inverse. Tensor pullback along open inclusions and ordinary restriction are naturally isomorphic by uniqueness of left adjoints to module pushforward. Hence D(f) is contained in U intersect the neighbourhood-defined isomorphism locus.",
+   "uses": [
+    "def-sc-module-map-iso-locus",
+    "def-pc-module-pullback",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, a point in U intersect the locus has an inverse on some neighbourhood. Intersect that neighbourhood with U and take the stalk: the transported matrices are inverse. The determinant is therefore a unit in the local ring, precisely the condition for membership in D(f). This proves the equality in equal ranks, including rank zero with determinant 1.",
+   "uses": [
+    "def-sc-module-map-iso-locus",
+    "def-pc-module-pullback",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For unequal ranks take f=0. If a point were in the intersection, the neighbourhood inverse would induce an isomorphism on residue-field vector spaces of dimensions card I and card J. Their dimensions must agree, a contradiction. Thus both sides are empty. An empty U has no points and satisfies the equality as well.",
+   "uses": [
+    "def-sc-module-map-iso-locus",
+    "def-pc-module-pullback",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-map-iso-locus",
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Local finite free matrix argument in Lemma 10.79.4(3); explicit determinant expansion of the final sentence of Tag 0BDP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an affine open where both sheaves are free of finite rank, the isomorphism locus of a morphism is the principal open of its determinant",
+   "results": "Service unavailable: Internal Server Error. No conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism locus of a map of finite locally free sheaves intersected with an affine open is compact",
+   "results": "Eight results: basic-open compactness and generic quasi-compact section lemmas; no finite free map locus identification.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, Set.iUnion",
+   "results": "isCompact_iUnion, Finset.isCompact_biUnion, IsCompact.elim_finite_subcover provide the gluing used by the parent; no matrix locus identification.",
+   "date": "2026-10-13",
+   "verdict": "Generic compactness tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "isoLocus|IsoLocus|isCompact.*[Ii]so; 05GD|0BDP|determinant.*locus; exists_mem_over_iso_free",
+   "results": "No existing principal-open identity for moduleMapIsoLocus in Lean or DAG. Reuse source-library exists_mem_over_iso_free, overIsoFreeEquiv, restrictCompIso and restrictFreeIso for frame refinement in the parent.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertibility locus of a finite free sheaf homomorphism is a distinguished open defined by determinant",
+   "results": "Independent second reading: free-locus lemmas and RingedSpace.isUnit_res_basicOpen found; no sheaf-map principal-open identity.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, IsUnit",
+   "results": "Independent second reading: Matrix.isUnit_iff_isUnit_det, Matrix.invertibleOfIsUnitDet and inverse lemmas; the sheaf comparison is still required.",
+   "date": "2026-10-13",
+   "verdict": "Matrix ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "isolocus|iso_locus|isomorphism locus|invertib.*locus|locus.*invertib; matrix|det|IsIso in sheaf modules",
+   "results": "Independent second reading: existing moduleMapIsoLocus modules and unrelated geometric loci found; no duplicate finite-free matrix identity in Mathlib, upstream or lean/.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of universal locally closed Picard locus: determinant isomorphism open in Tag 0BDP; the affine local determinant step of lem-sc-finite-locally-free-map-iso-locus-compact",
+   "via": [
+    "lem-sc-finite-locally-free-map-iso-locus-compact",
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeMapIsoLocusBasicOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeMapIsoLocusBasicOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleMapIsoLocus_inter_eq_basicOpen_of_free",
+  "statement": "theorem moduleMapIsoLocus_inter_eq_basicOpen_of_free {W : Scheme.{u}}\n    {M N : W.Modules} (φ : M ⟶ N) (U : W.Opens) (hU : IsAffineOpen U)\n    {I J : Type u} [Finite I] [Finite J]\n    (eM : M.restrict U.ι ≅ SheafOfModules.free I)\n    (eN : N.restrict U.ι ≅ SheafOfModules.free J) :\n    ∃ f : W.presheaf.obj (.op U),\n      (U : Set W) ∩ (moduleMapIsoLocus φ : Set W) = (W.basicOpen f : Set W)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T004023-L-2490829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261013T004023-L-2490829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
