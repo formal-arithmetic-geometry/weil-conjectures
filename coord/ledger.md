@@ -10192,3 +10192,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator (stage 3; reviewer PASS; first push; landing 20261012T235559-L-2202947 (interface); batch 20261012T235552; modules 3; new nodes 2)
 - 23:56 L: returned deliver/F1/Sheaf.RingTheory.PopescuReductionPresentationFromFactor (reviewer RETURN: (reviewer X-892fb, head 892fb94fc) E2 / brief point 4: the disputed counterexample does not establish that the displayed)
 - 00:00 L: returned deliver/P1/Sheaf.AlgebraicGeometry.AlternatingCechRepeatOuterFaces (reviewer RETURN: (the landing tools, head 0e1b23c88) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 00:00 L: merged deliver/A2/Sheaf.Algebra.Homology.ConeHorizontalProjectionDifferential (stage 3; reviewer PASS; first push; landing 20261013T000042-L-2230632 (interface); batch 20261013T000041; modules 2; new nodes 1)
