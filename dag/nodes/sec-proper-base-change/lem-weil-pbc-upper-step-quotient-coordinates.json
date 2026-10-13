@@ -13,14 +13,14 @@
  ],
  "proof": [
   {
-   "text": "The inclusion into K is mono, so the compatibility determines i uniquely. Below q-1 identify the two truncations with K; i is the identity. At q-1 it is the kernel inclusion, at q its source is zero, and above q both terms are zero. These identifications follow degreewise from the canonical truncation definition.",
+   "text": "The compatibility with the inclusions into K determines i uniquely, since the latter inclusion is mono. The single proved helper truncLE_inclusion_coordinates simultaneously identifies the truncation inclusion with truncLEXIsoCycles followed by iCycles at its boundary and with truncLEXIso below the boundary, by dualizing the Mathlib truncGE component identities. Strict upper support makes the source of i.f q zero. The kernel universal property identifies cycles in degree q-1 with kernel (K.d (q - 1) q). These are the degreewise canonical truncation identifications for the complexes in the statement.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true
   },
   {
-   "text": "The category of complexes is abelian and kernels and cokernels are computed degreewise. Evaluate the cokernel sequence of i. Cokernels of the identity and of maps between zero objects vanish; the cokernel of zero into cycles is cycles; and in degree q-1 it is the cokernel of the kernel inclusion. The unique isomorphisms of these cokernel cocones give e0, e1 and the two projection identities.",
+   "text": "Use PreservesCokernel.iso and PreservesCokernel.π_iso_hom for HomologicalComplex.eval to identify each evaluated cokernel with cokernel (i.f r), using the Mathlib degreewise cokernel-preservation instances. At q use cokernelIsoOfEq and cokernelZeroIsoTarget; at q-1 use cokernel.mapIso with the kernel and truncation identifications. Their projection identities give he₀ and he₁. Away from the two degrees, i.f r is epi: below q-1 this follows from the two inclusion isomorphisms and hi, and above q its target is zero. Apply isZero_cokernel_of_epi.",
    "uses": [
     "lem-weil-pbc-cochain-complexes-degreewise-exact",
     "def-sp-abelian"
@@ -28,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "Use the chain-map equation for p from q-1 to q and the two projection identities. The component p at q-1 is epi, so cancelling it yields the stated differential equation. Its composite with the cycles inclusion, after e0, is the induced map from the coimage of d_K to K^q. This is mono by the coimage-mono lemma. Cancel the isomorphism e0 to conclude that the differential of M is mono.",
+   "text": "Cancel the isomorphic degree-(q-1) truncation inclusion, substitute he₀ and he₁, and use the cokernel projection chain-map equation and the truncation inclusion chain-map equation to obtain hd. Cancel the cokernel projection and use Abelian.coimage.fac to identify e₀.inv ≫ d_M ≫ e₁.hom ≫ K.iCycles q with Abelian.factorThruCoimage (K.d (q-1) q). The Mathlib coimage-mono instance makes this composite mono. Apply mono_of_mono and cancel the source isomorphism to conclude Mono d_M.",
    "uses": [
     "lem-weil-pbc-coimage-mono"
    ],
@@ -44,7 +44,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/08J5",
-  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle; original node steps 2-4. Canonical truncation: Tag 0118 (section-truncations); degreewise cokernels: Tag 0114 (lemma-cat-cochain-abelian).; degreewise details expanded by F2 from Tags 010V, 0114, 0118."
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle; original node steps 2-4. Canonical truncation: Tag 0118 (section-truncations); degreewise cokernels: Tag 0114 (lemma-cat-cochain-abelian).; degreewise details expanded by F2 from Tags 010V, 0114, 0118. Stage-3 Lean realization read by M1: direct Mathlib degreewise cokernel isomorphisms, truncation component identities, and the coimage-mono instance; no open Sheaf lemmas."
  },
  "mathlib_searches": [
   {
@@ -120,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-afb21",
-  "group": "F2",
+  "reviewer": "X-b3c4e",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T194109-L-454497",
+  "landing": "20261013T000046-L-2231831",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and two remaining obligations with their DAG nodes and sources; verified axioms and clean compilation of all three delivered modules and direct importers TruncationCouple, TruncationDescends, and TruncationTriangle."
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its DAG node; verified the import remains publicly reachable, clean compilation of the delivery and direct importer UpperTruncationStepSES, and only allowed axioms for both proved declarations."
  }
 }
