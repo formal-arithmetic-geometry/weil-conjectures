@@ -10265,3 +10265,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:20 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsFirst (stage 3; reviewer PASS; first push; landing 20261013T002009-L-2358471 (proof); batch 20261013T002005; modules 1; new nodes 0)
 - 00:20 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPrimeBaseChangeModel (stage 3; reviewer PASS; first push; landing 20261013T002010-L-2358657 (interface); batch 20261013T002005; modules 2; new nodes 1)
 - 00:20 L: merged deliver/R1/Sheaf.RingTheory.Derivation.NonzeroDifferentialToDerivation (stage 3; reviewer PASS; first push; landing 20261013T002010-L-2358773 (proof); batch 20261013T002005; modules 1; new nodes 0)
+- 00:20 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat (stage 3; reviewer PASS; first push; landing 20261013T002010-L-2358893 (interface); batch 20261013T002005; modules 2; new nodes 1)

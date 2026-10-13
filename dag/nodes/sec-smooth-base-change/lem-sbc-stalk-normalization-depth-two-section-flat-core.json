@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+ "kind": "statement",
+ "title": "Formal-neighbourhood flatness at a depth-two section",
+ "statement": "Let S be a Noetherian integral quasi-separated scheme, c:C→S a quasi-compact quasi-separated smooth morphism, σ:S→C a section, U an open containing the generic point, and PA a finite etale cover of C_U. If s∉U is minimal among points outside U under specialization and the stalk depth at s is at least two, then the relative normalization pulled back to Spec O_{S,s} is flat on a neighbourhood of the section closed point, whenever that pullback morphism is finite.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, formal-neighbourhood calculation in the proof of Tag 0EYJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Complete a smooth affine chart at the section. The punctured finite etale algebra is split by the rational section and its translates; the depth-two extension and normality identify it with the completed normalization. Faithfully flat descent gives flatness at every point over the section closed point. The finite flat locus is open and the image of its closed complement is closed, so deleting that image gives the required neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-normal-local-depth-two"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-normal-local-depth-two"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, formal-neighbourhood calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite normalization flat neighbourhood section depth two smooth scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat normalization near a section depth two smooth scheme",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme Flat normalization finite open locus",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk_normalization_depth_two_section_flat",
+   "results": "new declaration only",
+   "date": "2026-10-13",
+   "verdict": "no existing match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-stalk-normalization-depth-two-section-flat",
+   "place": "Tag 0EYJ formal-neighbourhood calculation",
+   "via": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-sbc-generic-fibre-action-extension",
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationDepthTwoSectionFlatCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_depth_two_section_flat_core",
+  "statement": "theorem stalk_normalization_depth_two_section_flat_core {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (U : S.Opens) (hηU : genericPoint S ∈ U) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (s : S) (hs : s ∉ U) (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := S.presheaf.stalk s) (S.presheaf.stalk s)) : letI : IsFinite PA.obj.hom := PA.property letI : QuasiCompact (c ⁻¹ᵁ U).ι := MorphismProperty.of_isPullback (isPullback_morphismRestrict c U) (inferInstance : QuasiCompact U.ι) let a := S.fromSpecStalk s let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a := pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ]) IsFinite n → ∃ W : (pullback c a).Opens, τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T002010-L-2358893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T002010-L-2358893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

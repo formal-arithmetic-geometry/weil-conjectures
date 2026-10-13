@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
 import Sheaf.RingTheory.NormalLocalDepthTwo
 import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlatCore
 
 /-!
 # Flatness of the normalization near a split section
@@ -104,6 +105,16 @@ theorem GaloisCover.stalk_normalization_depth_two_section_flat {S C : Scheme.{u}
     let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=
       pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])
     IsFinite n → ∃ W : (pullback c a).Opens,
-      τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W) := by sorry
+      τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W) := by
+  dsimp
+  intro hn
+  have _hS := hS
+  have _hCη := hCη
+  have _hsq := hsq
+  have _hsj := hsj
+  have _hZ := hZ
+  have _hjU := hjU
+  have _hψ := hψ
+  exact stalk_normalization_depth_two_section_flat_core c σ hσ U hηU PA s hs hmin hdepth hn
 
 end AlgebraicGeometry.Scheme
