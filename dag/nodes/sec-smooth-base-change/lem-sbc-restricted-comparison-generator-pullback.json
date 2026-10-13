@@ -15,26 +15,44 @@
  ],
  "proof": [
   {
-   "text": "Write A = the sheafification of the free abelian presheaf represented by U,\nG = h^* A and G' = h'^* A. Cancel the zeroIso at the source of transportZero\nagainst its inverse. The remaining input is generator h U, namely the identity\nsection of A at U, mapped by the unit for h, then by sectionsIso inverse.\nWrite q = U times_S a, r = pr_Y and r' = pr_Y'. The pullback projection equations\ngive r' followed by a equals q followed by r. Expanding the restricted coefficient\nmap with the inverse-image composition comparisons identifies the two restrictions\nof A along these equal morphisms. Naturality of the inverse-image adjunction unit,\nand its composition formula, show that pulling the unit for h across q and applying\nthe comparison for a followed by h gives exactly the unit for h'. The terminal\nobject comparisons in globalSectionsUpperStarMap and sectionsIso agree: both send\nthe identity etale object of V' to the base change of U. Thus the resulting section\nis generator h' U. Postcompose with zeroIso inverse for G' to obtain the stated\nidentity. This uses no higher derived morphism and no invertibility of the section\npullback. Identity maps, degree-zero sections, and empty schemes obey the same unit\nand terminal-object equations.",
+   "text": "Identify sectionsIso W G inverse with etaleObjectSectionsIso W hom by unfolding their constructions and applying naturality of the terminal-evaluation isomorphism. Apply etaleObjectSections_baseChange to q = rawAffineRestrictedMap a h h′ w U; its two projection equations follow from pullback.map. Factor rawAffineRestrictedCoefficient as the square comparison followed by r′ inverse image of the coefficient map. Naturality of etaleObjectSectionsIso in that map and cancellation of sectionsIso at the target give the ordinary section pullback square for arbitrary G, G′ and psi.",
    "uses": [
     "def-sbc-raw-restricted-cohomology-comparison-map",
-    "lem-sbc-restricted-derived-evaluation-pullback",
+    "lem-weil-pbc-etale-object-sections-base-change",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply upperStarComp_hom_app_unit_app to A = freeSheaf S U and the triangle a followed by h = h′. Expand the composite adjunction unit, postcompose with h′ direct image of the inverse composition comparison, and cancel its hom/inv pair. Evaluate the resulting sheaf-morphism identity at U. This gives eta_h followed by eta_a, the direct-image composition comparison, and the inverse coefficient comparison equals eta_h′.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
     "def-weil-pbc-inverse-image",
     "lem-weil-pbc-inverse-image-composition"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the ordinary section square at eta_h(U) of the explicitly sheafified represented identity element. Substitute the evaluated unit identity from step 2. Injectivity of sectionsIso W′ G′ hom, an isomorphism, gives that the ordinary section map sends generator h U to generator h′ U. Unfold transportZero, cancel source zeroIso hom with its inverse, and apply target zeroIso inverse to this generator identity.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-sbc-restricted-derived-evaluation-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-raw-restricted-cohomology-comparison-map",
-  "lem-sbc-restricted-derived-evaluation-pullback",
+  "lem-weil-pbc-etale-object-sections-base-change",
+  "def-sbc-raw-affine-restricted-cohomology",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-restricted-derived-evaluation-pullback"
  ],
  "proof_origin": {
-  "by": "agent C1",
-  "document": "Stacks Project and parent proof plan",
-  "place": "Parent proof step 1: represented identity and inverse-image units; Stacks Tag 03Q8, with restriction of sections as in Tag 0D6F. The explicit generator calculation is an agent expansion of this naturality step."
+  "by": "agent W4",
+  "document": "Stacks Project and existing Lean section and unit identities",
+  "place": "Original generator-naturality plan, implemented using etaleObjectSections_baseChange (Tags 03S2, 03CF, 03EF) and upperStarComp_hom_app_unit_app; elementary terminal-comparison and inverse cancellation glue."
  },
  "mathlib_searches": [
   {
@@ -141,10 +159,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T015545-L-3016995",
-  "kind": "interface",
+  "landing": "20261013T082425-L-1651865",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
