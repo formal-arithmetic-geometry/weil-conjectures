@@ -18,36 +18,37 @@
  },
  "proof": [
   {
-   "text": "Tensor the fixed K-flat complexes P and c.P. Their total tensor is K-flat. The localization tensor map and eP tensor c.e identify it with E tensor K. The stalk tensor isomorphism identifies its stalk complex with U tensor Q.",
+   "text": "Obtain the tensor coordinates e and the source and target chain isomorphisms sigma,rho from the chain-level tensor coordinate theorem. Their square is an equality of chain maps, before cohomology.",
    "uses": [
-    "lem-pc-kflat-tensor-product",
-    "lem-pc-stalk-tensor-complex",
-    "def-pc-derived-pullback-tensor-comparison"
+    "lem-pc-tensor-stalk-chain-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Use the specified K-flat equation for the canonical pullback tensor comparison, then compose with tensoring c.t. Its represents equation and naturality of tau identify the resulting chain map with the tensor map represented by d. The canonical degreewise pullback-stalk and scalar-extension tensor maps identify its stalk with mu_F inverse followed by F(U) tensor t.",
+   "text": "Apply exists_baseDerivedTensorModel_quasiIso_comparison to sigma.hom, a chain isomorphism, using the canonical model mU and cohomologyModel(e.P). Apply homology to the chain equation and use homologyMap_comp. Postcompose the model comparison equality with homology of tensorStalkIso(e.P) and S(e.t). Transitivity yields the fixed-map square in coordinates e.",
    "uses": [
-    "def-pc-derived-pullback-tensor-comparison",
-    "def-pc-single-complex-base-change-stalk-condition"
+    "lem-pc-base-derived-tensor-model-quasiiso-comparison",
+    "def-pc-base-derived-tensor-cohomology-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derived stalk cohomology to the representative isomorphism and d.represents to obtain b_U. Apply exists_comparisonSourceIso to the derived source isomorphism, lifting the B-linear cohomology transport to the tensor algebra using cohomologyIso_smul, and extend to C to obtain a_U. comparison_eq, localized_eq and comparisonIntoPullback_naturality give the commuting square.",
+   "text": "The proved private normalization helper uses c.represents to solve for Q(c.t), then comparisonStalkHomologyIso_naturality to express stalkComparison as comparisonIntoPullback followed by derived stalk cohomology of pullback(c.e.hom);phi;c.e-prime inverse and the homology identification. The proved coordinate-transport helper applies exists_comparisonSourceIso to e.e;d.e inverse and comparisonIntoPullback_naturality. Its target isomorphism is stalk cohomology of e.e-prime;d.e-prime inverse conjugated by the homology identifications. Functor laws and inverse cancellation give its square. Compose this source isomorphism with extension of the model isomorphism, and this target isomorphism with homology of rho. Reassociation gives the required equation for d.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
     "lem-pc-stalk-comparison-source-transport",
-    "lem-pc-stalk-comparison-pullback-naturality"
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "T2",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA(1), local tensor-transitivity computation using Tag 0BYJ and equation-bc before Tag 0DJ8"
+  "place": "Tags 0DJA(1), 0BYJ and equation-bc before 0DJ8",
+  "note": "Lean proof of cohomology assembly and arbitrary-coordinate transport; chain-coordinate construction split into one strictly lower theorem."
  },
  "mathlib_searches": [
   {
@@ -109,12 +110,11 @@
  },
  "proof_deps": [
   "def-pc-base-derived-tensor-cohomology-model",
-  "def-pc-derived-pullback-tensor-comparison",
   "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-kflat-tensor-product",
+  "lem-pc-base-derived-tensor-model-quasiiso-comparison",
   "lem-pc-stalk-comparison-pullback-naturality",
   "lem-pc-stalk-comparison-source-transport",
-  "lem-pc-stalk-tensor-complex"
+  "lem-pc-tensor-stalk-chain-coordinates"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -130,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T154357-L-1163089",
+  "landing": "20261013T165650-L-1811085",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
