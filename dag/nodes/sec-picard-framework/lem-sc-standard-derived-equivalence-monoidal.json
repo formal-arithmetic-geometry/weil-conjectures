@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-standard-derived-equivalence-monoidal",
+ "kind": "statement",
+ "title": "Strong monoidality of the standard derived localization equivalence",
+ "statement": "For any scheme X [def-pc-scheme] with a chosen derived localization [def-pc-derived-category], the functor of schemeDerivedStandardEquivalence X [def-pc-derived-pullback-across-universes] admits a CoreMonoidal structure for the fixed K-flat derived tensor structures [def-pc-scheme-derived-tensor-structure]. This asserts existence only; the unit and tensor comparison maps are invertible and satisfy the monoidal coherence laws. No hypothesis on X is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback-across-universes",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Stacks Project, Tags 079U (identity morphism), 05RU (localization); derived.tex for Tag 05RU"
+ },
+ "proof": [
+  {
+   "text": "The specified equivalence to the standard localization preserves the fixed\nK-flat derived tensor and its unit. Source: Stacks Project, Tags 079U and 05RU,\nwith the identity morphism in 079U and the localization universal property.\n(blueprint: lem-sc-standard-derived-equivalence-monoidal).\n\nProof: write E for schemeDerivedStandardEquivalence X. Its canonical comparison\nQh ⋙ E.functor ≅ Qh_standard identifies localized representatives. For K-flat\ncomplexes P and N, identify their derived tensor with the localization of their\nordinary total tensor complex in both localizations. Conjugating these two\ncomparison isomorphisms by the factorization of E yields an invertible map\nE(P) tensor E(N) -> E(P tensor N). The unit is the localization of the structure\nsheaf in degree zero in both categories, so the same factorization gives its\ninvertible comparison. Extend the tensor maps to arbitrary objects through K-flat\nresolutions. Naturality of the localization factorization and tensor comparisons\nshows independence of the resolutions and naturality in both arguments.\nResolve three arguments simultaneously: associativity is the image of the\nassociativity of the total tensor complex; the comparison maps cancel. Resolving\none argument and using the structure sheaf as the other gives both unit laws.\nThe localization universal property descends these equalities to all objects.\nPackage the maps and these laws as CoreMonoidal. No condition on X or on the\nchosen localization universe is required; zero complexes and empty schemes use\nthe same construction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback-across-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback-across-universes"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079U (identity morphism), 05RU (localization); read online 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A localization equivalence between derived categories is strong monoidal for the derived tensor product",
+   "results": "Ordinary monoidal localization structures only; no theorem for the fixed K-flat derived tensor or the specified localization equivalence.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.inverseMonoidal",
+   "results": "inverseMonoidal transports a known monoidal structure to the inverse equivalence; it does not provide the initial structure or the left-derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "Used in the target assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "Localization.*[Mm]onoidal|uniq.*[Mm]onoidal",
+   "results": "Mathlib ordinary monoidal localization functorMonoidalOfComp requires strong monoidal localization, whereas Qh is only lax monoidal. Repository rg found no interface for standard derived equivalence monoidality or across-universes left-derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equivalence between derived localizations preserves the derived tensor and transports a left-derived universal property",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesMonoidalAdjunction",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-pullback-across-universes-monoidal-adjunction",
+   "place": "Step 1 localization tensor comparisons"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedStandardEquivalenceMonoidal.lean",
+  "declaration": "AlgebraicGeometry.exists_schemeDerivedStandardEquivalence_monoidal",
+  "statement": "theorem exists_schemeDerivedStandardEquivalence_monoidal\n    (X : Scheme.{u})\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    Nonempty ((schemeDerivedStandardEquivalence X).functor.CoreMonoidal)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T123543-L-3710646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T123543-L-3710646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

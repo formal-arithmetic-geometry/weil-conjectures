@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal
+import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesLeftDerived
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Monoidal adjunction for the transported derived pullback
 
@@ -25,6 +29,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- The transported K-flat pullback is strong monoidal and left adjoint to the
 specified K-injective direct image, with independent localization universes.
 Source: Stacks Project, Tags 079U, 079W and 05RU.
@@ -52,6 +57,31 @@ theorem exists_derivedPullbackAcrossUniverses_monoidal_adjunction
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
     ∃ m : (derivedPullbackAcrossUniverses f).CoreMonoidal,
-      Nonempty (derivedPullbackAcrossUniverses f ⊣ schemeDerivedDirectImage f) := by sorry
+      Nonempty (derivedPullbackAcrossUniverses f ⊣ schemeDerivedDirectImage f) := by
+  classical
+  obtain ⟨mY⟩ := exists_schemeDerivedStandardEquivalence_monoidal Y
+  obtain ⟨mX⟩ := exists_schemeDerivedStandardEquivalence_monoidal X
+  let := mY.toMonoidal
+  let := mX.toMonoidal
+  let := (schemeDerivedStandardEquivalence X).inverseMonoidal
+  obtain ⟨m, _⟩ := @exists_derivedPullbackMonoidalModel X Y f
+    (HasDerivedCategory.standard _) (HasDerivedCategory.standard _)
+  let := m.toMonoidal
+  obtain ⟨P, hP, hmap, hAdd, L, ε, hL, _, ⟨a⟩⟩ :=
+    RingedSpace.derivedModulePullback_adjunction f.toLRSHom.toShHom
+  let := hAdd
+  obtain ⟨ε', hL'⟩ := exists_derivedPullbackAcrossUniverses_leftDerived f P hP hmap
+  let := hL
+  let := hL'
+  let e := Functor.leftDerivedUnique (derivedPullbackAcrossUniverses f) L ε ε'
+    (HomotopyCategory.quasiIso
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))
+  let a' : derivedPullbackAcrossUniverses f ⊣ schemeDerivedDirectImage f :=
+    a.ofNatIsoLeft e
+  refine ⟨?_, ⟨a'⟩⟩
+  change ((schemeDerivedStandardEquivalence Y).functor ⋙
+    @derivedPullback X Y f (HasDerivedCategory.standard _)
+      (HasDerivedCategory.standard _) ⋙ (schemeDerivedStandardEquivalence X).inverse).CoreMonoidal
+  exact Functor.CoreMonoidal.ofLaxMonoidal _
 
 end AlgebraicGeometry
