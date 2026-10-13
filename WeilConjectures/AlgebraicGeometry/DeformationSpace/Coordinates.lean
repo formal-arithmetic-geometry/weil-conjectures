@@ -51,6 +51,115 @@ lemma etale_specMap_extendedReesAlgebraMap {C A : Type u} [CommRing C] [CommRing
     HasRingHomProperty.Spec_iff.mpr hψ
   exact MorphismProperty.of_isPullback (isPullback_SpecMap_of_isPushout _ _ _ _ hpush) this
 
+/-- The relative affine spaces over the components of a disjoint union `∐ Bᵢ` cover the relative
+affine space over `∐ Bᵢ` by disjoint opens, so `𝔸(n; ∐ Bᵢ) = ∐ 𝔸(n; Bᵢ)`. -/
+lemma nonempty_isColimit_cofanMk_affineSpaceMap (n : Type u) {ι : Type u}
+    (B₀ : ι → Scheme.{u}) :
+    Nonempty (IsColimit (Cofan.mk 𝔸(n; ∐ B₀) fun i ↦ AffineSpace.map n (Sigma.ι B₀ i))) := by
+  have hrange (i : ι) (x : 𝔸(n; ∐ B₀)) (hx : x ∈ (AffineSpace.map n (Sigma.ι B₀ i)).opensRange) :
+      (𝔸(n; ∐ B₀) ↘ ∐ B₀) x ∈ (Sigma.ι B₀ i).opensRange := by
+    obtain ⟨y, rfl⟩ := hx
+    refine ⟨(𝔸(n; B₀ i) ↘ B₀ i) y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, AffineSpace.map_over]
+  refine nonempty_isColimit_cofanMk_of _ ?_ fun i i' hii' ↦ ?_
+  · refine eq_top_iff.mpr fun x _ ↦ ?_
+    obtain ⟨i, y, hy⟩ := (sigmaOpenCover B₀).exists_eq ((𝔸(n; ∐ B₀) ↘ ∐ B₀) x)
+    obtain ⟨p, hp, -⟩ := Scheme.exists_preimage_of_isPullback
+      (AffineSpace.isPullback_map (n := n) (Sigma.ι B₀ i)) x y hy.symm
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, p, hp⟩
+  · refine disjoint_iff.mpr (eq_bot_iff.mpr fun x hx ↦ ?_)
+    exact (disjoint_iff.mp (disjoint_opensRange_sigmaι B₀ i i' hii')).le
+      ⟨hrange i x hx.1, hrange i' x hx.2⟩
+
+/-- **Gluing étale coordinates over a finite disjoint union.** Let `P : D ⟶ 𝔸¹_B` be separated
+and `S : 𝔸¹_B ⟶ D`. Étale coordinates for `(P, S)` over finitely many affine étale
+`vᵢ : Bᵢ ⟶ B` jointly covering `B`, on affine charts `Wᵢ`, glue to étale coordinates over the
+surjective étale `∐ Bᵢ ⟶ B` on the chart `∐ Wᵢ`. -/
+lemma exists_etale_coordinates_of_finite {D : Scheme.{u}} (P : D ⟶ 𝔸(ULift.{u} (Fin 1); B))
+    [IsSeparated P] (S : 𝔸(ULift.{u} (Fin 1); B) ⟶ D) (d : ℕ) {ι : Type u} [Finite ι]
+    (B₀ : ι → Scheme.{u}) [∀ i, IsAffine (B₀ i)] (v₀ : ∀ i, B₀ i ⟶ B)
+    (hv₀ : ∀ i, Etale (v₀ i)) (hv : ⋃ i, Set.range (v₀ i) = Set.univ)
+    (W₀ : ι → Scheme.{u}) [∀ i, IsAffine (W₀ i)]
+    (j₀ : ∀ i, W₀ i ⟶ pullback P (AffineSpace.map (ULift.{u} (Fin 1)) (v₀ i)))
+    (hj₀ : ∀ i, IsOpenImmersion (j₀ i))
+    (c₀ : ∀ i, W₀ i ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B₀ i)))
+    (hc₀ : ∀ i, Etale (c₀ i)) (σ₀ : ∀ i, 𝔸(ULift.{u} (Fin 1); B₀ i) ⟶ W₀ i)
+    (h₁ : ∀ i, j₀ i ≫ pullback.snd _ _ =
+      c₀ i ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B₀ i)) ↘ 𝔸(ULift.{u} (Fin 1); B₀ i))
+    (h₂ : ∀ i, σ₀ i ≫ j₀ i ≫ pullback.fst _ _ =
+      AffineSpace.map (ULift.{u} (Fin 1)) (v₀ i) ≫ S)
+    (h₃ : ∀ i, σ₀ i ≫ c₀ i =
+      AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B₀ i)) :
+    ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
+      (j : W ⟶ pullback P (AffineSpace.map (ULift.{u} (Fin 1)) v))
+      (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
+      (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
+      Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
+      QuasiCompact j ∧ Etale c ∧ QuasiCompact c ∧ HasCompactification c ∧
+      j ≫ pullback.snd _ _ =
+        c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
+      σ ≫ j ≫ pullback.fst _ _ = AffineSpace.map (ULift.{u} (Fin 1)) v ≫ S ∧
+      σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B') := by
+  have hLv (i : ι) : AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i) ≫
+      AffineSpace.map _ (Sigma.desc v₀) = AffineSpace.map _ (v₀ i) := by
+    rw [← AffineSpace.map_comp, Sigma.ι_desc]
+  -- the inclusion of the base change over `Bᵢ` into the base change over `∐ Bᵢ`
+  let m (i : ι) : pullback P (AffineSpace.map (ULift.{u} (Fin 1)) (v₀ i)) ⟶
+      pullback P (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.desc v₀)) :=
+    pullback.lift (pullback.fst _ _)
+      (pullback.snd _ _ ≫ AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i))
+      (by rw [pullback.condition, Category.assoc, hLv])
+  have hm (i : ι) : IsPullback (m i) (pullback.snd _ _) (pullback.snd _ _)
+      (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i)) := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback P _)
+    rw [pullback.lift_fst, hLv]
+    exact IsPullback.of_hasPullback _ _
+  have hmo (i : ι) : IsOpenImmersion (m i) :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) (hm i).flip inferInstance
+  have hrange (i : ι) (x) (hx : x ∈ Set.range (j₀ i ≫ m i)) :
+      (pullback.snd P (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.desc v₀)) ≫
+        𝔸(ULift.{u} (Fin 1); ∐ B₀) ↘ ∐ B₀) x ∈ (Sigma.ι B₀ i).opensRange := by
+    obtain ⟨y, rfl⟩ := hx
+    refine ⟨(j₀ i ≫ pullback.snd _ _ ≫ 𝔸(ULift.{u} (Fin 1); B₀ i) ↘ B₀ i) y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply]
+    simp only [m, Category.assoc, pullback.lift_snd_assoc, AffineSpace.map_over]
+  have hcolim := (nonempty_isColimit_cofanMk_affineSpaceMap (ULift.{u} (Fin 1)) B₀).some
+  have : IsOpenImmersion (Sigma.desc fun i ↦ j₀ i ≫ m i) := by
+    refine isOpenImmersion_sigmaDesc _ _ fun i i' hii' ↦ Set.disjoint_left.mpr ?_
+    intro x hx hx'
+    exact (disjoint_iff.mp (disjoint_opensRange_sigmaι B₀ i i' hii')).le
+      ⟨hrange i x hx, hrange i' x hx'⟩
+  have : Etale (Sigma.desc v₀) := IsZariskiLocalAtSource.sigmaDesc hv₀
+  have : Etale (Sigma.desc fun i ↦ c₀ i ≫
+      AffineSpace.map (ULift.{u} (Fin d)) (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i))) :=
+    IsZariskiLocalAtSource.sigmaDesc fun i ↦ by
+      have := hc₀ i
+      infer_instance
+  have hsnd : (Sigma.desc fun i ↦ j₀ i ≫ m i) ≫ pullback.snd _ _ =
+      (Sigma.desc fun i ↦ c₀ i ≫
+        AffineSpace.map (ULift.{u} (Fin d)) (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i))) ≫
+        𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); ∐ B₀)) ↘ 𝔸(ULift.{u} (Fin 1); ∐ B₀) := by
+    refine Sigma.hom_ext _ _ fun i ↦ ?_
+    rw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc, Category.assoc, pullback.lift_snd,
+      reassoc_of% h₁, Category.assoc, AffineSpace.map_over]
+  have : IsSeparated (Sigma.desc v₀ ≫ B.toSpecΓ) := inferInstance
+  have : QuasiCompact ((Sigma.desc fun i ↦ j₀ i ≫ m i) ≫ pullback.snd _ _) := by
+    rw [hsnd]
+    infer_instance
+  refine ⟨∐ B₀, Sigma.desc v₀, ∐ W₀, Sigma.desc fun i ↦ j₀ i ≫ m i,
+    Sigma.desc fun i ↦ c₀ i ≫
+      AffineSpace.map (ULift.{u} (Fin d)) (AffineSpace.map (ULift.{u} (Fin 1)) (Sigma.ι B₀ i)),
+    Cofan.IsColimit.desc hcolim fun i ↦ σ₀ i ≫ Sigma.ι W₀ i, inferInstance,
+    Surjective.sigmaDesc_of_union_range_eq_univ hv, IsSeparated.of_comp _ B.toSpecΓ,
+    inferInstance, QuasiCompact.of_comp _ (pullback.snd _ _), inferInstance, inferInstance,
+    inferInstance, hsnd, ?_, ?_⟩
+  · refine Cofan.IsColimit.hom_ext hcolim _ _ fun i ↦ ?_
+    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_desc_assoc,
+      Category.assoc, pullback.lift_fst, h₂, reassoc_of% hLv]
+  · refine Cofan.IsColimit.hom_ext hcolim _ _ fun i ↦ ?_
+    rw [Cofan.IsColimit.fac_assoc, cofan_mk_inj, Category.assoc, Sigma.ι_desc, reassoc_of% h₃,
+      AffineSpace.zeroSection_comp_map]
+
 namespace Scheme.Hom
 
 open AffineZariskiSite
@@ -134,7 +243,8 @@ lemma exists_etale_coordinates_deformationSpace_of_mem (d : ℕ) (g : V ⟶ B)
         𝔸(ULift.{u} (Fin 1); Spec Γ(B, W)) = p ≫ e₁ := by
     rw [Category.assoc, Category.assoc, AffineSpace.map_over, AffineSpace.SpecIso_inv_over_assoc,
       ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp, hθC]
-  refine ⟨Spec Γ(B, W), inferInstance, hW.fromSpec, Spec (.of (s.ker.siteIdeal U).extendedReesAlgebra),
+  refine ⟨Spec Γ(B, W), inferInstance, hW.fromSpec,
+    Spec (.of (s.ker.siteIdeal U).extendedReesAlgebra),
     inferInstance, pullback.lift ιU (p ≫ e₁) hp, Spec.map (CommRingCat.ofHom θ) ≫ T,
     τ ≫ Spec.map ρ, inferInstance, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · rw [hW.range_fromSpec]
@@ -166,13 +276,44 @@ lemma exists_etale_coordinates_deformationSpace_of_mem (d : ℕ) (g : V ⟶ B)
       have hzero : (CommRingCat.ofHom θ ≫ ρ) (MvPolynomial.X k) = 0 := by
         rw [CommRingCat.comp_apply, CommRingCat.ofHom_apply, hθX]
         exact Ideal.extendedReesAlgebraToPolynomial_C_mul_T_neg_one _ Ideal.mk_ker.ge hmem
-      have hΓ : (Spec.map (CommRingCat.ofHom θ ≫ ρ)).appTop
-          (T.appTop (AffineSpace.coord _ k)) = 0 := by
-        rw [hT, ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply,
+      have hΓ : (Spec.map ρ ≫ Spec.map (CommRingCat.ofHom θ) ≫ T).appTop
+          (AffineSpace.coord _ k) = 0 := by
+        rw [← Spec.map_comp_assoc, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, hT,
+          ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply,
           hzero, map_zero]
-      rw [Category.assoc, ← Spec.map_comp_assoc, Scheme.Hom.comp_appTop,
-        CommRingCat.comp_apply, Scheme.Hom.comp_appTop, CommRingCat.comp_apply, hΓ, map_zero,
+      rw [Category.assoc, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
         AffineSpace.zeroSection_appTop_coord]
+      exact (congrArg _ hΓ).trans (map_zero _)
+
+/-- **Étale coordinates on the deformation space** (blueprint `sk-lem-geometry` (2), (4), (5)).
+There are a separated surjective étale `v : B' ⟶ B` and a quasi-compact open `j : W ⟶ 𝒟'` of the
+base change `𝒟' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}` containing the base-changed section `σ`, with a
+quasi-compact compactifiable étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the
+zero section. -/
+theorem exists_etale_coordinates_deformationSpace (d : ℕ) (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g] [IsSeparated g] [CompactSpace B] (s : B ⟶ V)
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
+      (j : W ⟶ pullback (deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) v))
+      (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
+      (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
+      Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
+      QuasiCompact j ∧ Etale c ∧ QuasiCompact c ∧ HasCompactification c ∧
+      j ≫ pullback.snd _ _ =
+        c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
+      σ ≫ j ≫ pullback.fst _ _ =
+        AffineSpace.map (ULift.{u} (Fin 1)) v ≫ s.deformationSpaceSection ∧
+      σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B') := by
+  choose B₀ hB₀ v₀ W₀ hW₀ j₀ c₀ σ₀ hv₀ hbv hj₀ hc₀ h₁ h₂ h₃ using
+    exists_etale_coordinates_deformationSpace_of_mem d g s hs
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun b ↦ Set.range (v₀ b))
+    (fun b ↦ (v₀ b).isOpenEmbedding.isOpen_range) fun b _ ↦ Set.mem_iUnion.mpr ⟨b, hbv b⟩
+  refine exists_etale_coordinates_of_finite _ _ d (ι := t) (fun b ↦ B₀ b) (fun b ↦ v₀ b)
+    (fun b ↦ inferInstance) ?_ (fun b ↦ W₀ b) (fun b ↦ j₀ b) (fun b ↦ hj₀ b) (fun b ↦ c₀ b)
+    (fun b ↦ hc₀ b) (fun b ↦ σ₀ b) (fun b ↦ h₁ b) (fun b ↦ h₂ b) (fun b ↦ h₃ b)
+  refine Set.eq_univ_of_forall fun x ↦ ?_
+  obtain ⟨b, hb, hx⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+  exact Set.mem_iUnion.mpr ⟨⟨b, hb⟩, hx⟩
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
@@ -184,11 +325,8 @@ over `t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V �
 extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
 normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
 dimension `d`. As `g` is separated and quasi-compact over a quasi-compact quasi-separated base,
-`g̃` is separated and compactifiable.
-
-TODO: the étale-local coordinates (`exists_etale_coordinates`, clauses (2), (4) and (5)) are not
-yet constructed; the charts of `smoothOfRelativeDimension_deformationSpaceProj` are their
-Zariski-local form. -/
+`g̃` is separated and compactifiable. Étale-locally on `B` it has étale coordinates in which
+`s̃` is the zero section (`exists_etale_coordinates_deformationSpace`). -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [CompactSpace B]
     [QuasiSeparatedSpace B] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
@@ -219,7 +357,7 @@ theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
      exists_sect_generic := ⟨P.lift _ _ hm, by
        rw [← deformationSpaceGeneric_toBase g s, P.lift_fst_assoc, Category.assoc,
          deformationSpaceSection_toBase, Category.assoc], P.lift_snd _ _ _, P.lift_fst _ _ _⟩
-     exists_etale_coordinates := sorry }⟩
+     exists_etale_coordinates := exists_etale_coordinates_deformationSpace d g s hs }⟩
 
 
 end Scheme.Hom
