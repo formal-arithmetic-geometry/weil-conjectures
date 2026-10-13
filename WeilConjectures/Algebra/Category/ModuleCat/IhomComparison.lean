@@ -46,12 +46,15 @@ theorem isIso_ihomComparison_app_of_finitePresentation (P : ModuleCat.{u} R)
   have hfree (n : ℕ) : IsIso ((ihomComparison F (ModuleCat.of R (Fin n → R))).natTrans.app Q) := by
     have (_ : Fin n) : IsIso ((ihomComparison F (𝟙_ (ModuleCat.{u} R))).natTrans.app Q) :=
       isIso_ihomComparison_app_unit F Q
-    have := isIso_ihomComparison_app_biproduct F (fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) Q
-    exact isIso_ihomComparison_app_of_iso F (biproductIsoPi _) Q
+    have := @isIso_ihomComparison_app_biproduct _ _ _ _ _ _ _ _ F _ _ _ _ _ _ _ _
+      (fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) _ Q this
+    let e : (⨁ fun _ : Fin n ↦ 𝟙_ (ModuleCat.{u} R)) ≅ ModuleCat.of R (Fin n → R) :=
+      biproductIsoPi _
+    exact isIso_ihomComparison_app_of_iso F e Q
   obtain ⟨n, m, π, g, hπ, hexact⟩ := Module.FinitePresentation.exists_fin' R P
   let S : ShortComplex (ModuleCat.{u} R) := ShortComplex.mk (ofHom g) (ofHom π)
-    (by ext x; exact hexact.apply_apply_eq_zero x)
-  have hS : S.Exact := (ShortComplex.moduleCat_exact_iff_function_exact S).2 hexact
+    (ModuleCat.hom_ext (LinearMap.ext hexact.apply_apply_eq_zero))
+  have hS : S.Exact := (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact S).2 hexact
   have : Epi S.g := (ModuleCat.epi_iff_surjective _).2 hπ
   have := hfree n
   have := hfree m

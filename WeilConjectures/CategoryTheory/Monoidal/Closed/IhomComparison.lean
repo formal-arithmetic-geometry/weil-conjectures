@@ -150,9 +150,9 @@ noncomputable def isLimitKernelForkPreApp {P₁ P₀ P : C} {f : P₁ ⟶ P₀} 
   · intro T g hg m hm
     rw [eq_curry_iff]
     refine Cofork.IsColimit.hom_ext (hT T) ?_
-    rw [Cofork.IsColimit.π_desc' (hT T)]
     simp only [CokernelCofork.π_ofπ]
     rw [← uncurry_pre_app, hm]
+    exact ((hT T).fac (CokernelCofork.ofπ (uncurry g) _) WalkingParallelPair.one).symm
 
 end Preadditive
 
@@ -220,6 +220,7 @@ theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type} [Finite J] (P
       (fun j ↦ biproduct.π P j ≫ biproduct.ι P j) Finset.univ
     simp only [preAppAddHom_apply] at h
     rw [← h, biproduct.total, pre_id, NatTrans.id_app, F.map_id]
+    rfl
   · rw [Preadditive.sum_comp]
     simp_rw [Category.assoc, map_pre_app_comp_ihomComparison_app, IsIso.inv_hom_id_assoc,
       ← NatTrans.comp_app, ← pre_map, ← F.map_comp]
@@ -227,6 +228,7 @@ theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type} [Finite J] (P
       (fun j ↦ F.map (biproduct.π P j ≫ biproduct.ι P j)) Finset.univ
     simp only [preAppAddHom_apply] at h
     rw [← h, ← F.map_sum, biproduct.total, F.map_id, pre_id, NatTrans.id_app]
+    rfl
 
 variable [BraidedCategory C] [BraidedCategory D]
 
