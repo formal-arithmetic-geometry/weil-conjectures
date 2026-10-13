@@ -1,0 +1,104 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 055G; strict decomposition of the model construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric generic cover model etale scheme closed subsets irreducible fibres",
+   "date": "2026-10-13",
+   "results": "No exact matching theorem returned.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spread finite etale cover with closed subsets and irreducible geometric fibres",
+   "date": "2026-10-13",
+   "results": "No exact matching theorem returned.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic cover model geometrically irreducible fibre etale",
+   "date": "2026-10-13",
+   "results": "No exact matching declaration found in Mathlib.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-geometric-generic-cover-model",
+   "place": "strict decomposition of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "id": "new-lem-sbc-geometric-generic-cover-model-data",
+ "title": "Étale model with closed generic cover",
+ "statement": "The model-data existence assertion used in the proof of lem-sbc-geometric-generic-cover-model.",
+ "proof": [
+  {
+   "text": "This is the corresponding construction step in the cited Stacks argument; the theorem is isolated as a strict intermediate assertion so the main theorem combines two independent parts.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricGenericCoverModel.lean",
+  "declaration": "AlgebraicGeometry.exists_geometric_generic_cover_model_data",
+  "statement": "theorem exists_geometric_generic_cover_model_data {X S : Scheme.{u}} [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] {L : Type u} [Field L] (yη : Spec (CommRingCat.of L) ⟶ Spec (CommRingCat.of (S.residueField (genericPoint S)))) [IsFinite yη] [Etale yη] {I : Type u} [Finite I] (A : I → Set ↥(pullback (f.fiberToSpecResidueField (genericPoint S)) yη)) (hclosed : ∀ i, IsClosed (A i)) (hcover : (⋃ i, A i) = Set.univ) (hgeom : ∀ i, ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)), IsIrreducible ((pullback.fst (pullback.snd (f.fiberToSpecResidueField (genericPoint S)) yη) z) ⁻¹' A i)) : ∃ (T : Scheme.{u}) (g : T ⟶ S) (η : T) (C : I → Set ↥(pullback f g)), Etale g ∧ IsGenericPoint η Set.univ ∧ g η = genericPoint S ∧ (∀ i, IsClosed (C i)) ∧ (⋃ i, C i) = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T011937-L-2766808",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T011937-L-2766808",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
