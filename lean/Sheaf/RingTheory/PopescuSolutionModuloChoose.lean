@@ -10,15 +10,8 @@ public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.Paper.CartierEquality
-import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.LocalDimensionZeroHenselian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.RingTheory.PopescuQuotientBasisEnlargement
+import Mathlib.RingTheory.LocalRing.Module
 
 /-!
 # Choosing elements in an admissible Popescu subalgebra
@@ -328,6 +321,81 @@ theorem exists_popescu_admissible_differential_basis
               (IsLocalRing.residue A (a j))) ∧
           Ideal.span (Set.range (fun i => algebraMap Λ (Localization.AtPrime q) (ys i))) =
             q.map (algebraMap Λ (Localization.AtPrime q)) := by
-  sorry
+  classical
+  let L := Localization.AtPrime q
+  let m : Ideal L := q.map (algebraMap Λ L)
+  let B := L ⧸ m ^ n
+  let π : L →+* B := Ideal.Quotient.mk (m ^ n)
+  have hm : m = IsLocalRing.maximalIdeal L :=
+    IsLocalization.AtPrime.map_eq_maximalIdeal q L
+  have hpow : m ^ n ≤ m := Ideal.pow_le_self (by omega)
+  let f : B →ₐ[k] q.ResidueField := Ideal.Quotient.liftₐ (m ^ n)
+    (IsScalarTower.toAlgHom k L q.ResidueField) (fun x hx ↦ by
+      change IsLocalRing.residue L x = 0
+      exact (IsLocalRing.residue_eq_zero_iff x).mpr (hm ▸ hpow hx))
+  have hf : RingHom.ker f.toRingHom = m.map π := by
+    dsimp only [f, Ideal.Quotient.liftₐ]
+    rw [Ideal.ker_quotient_lift]
+    change (RingHom.ker (IsLocalRing.residue L)).map π = m.map π
+    rw [IsLocalRing.ker_residue, ← hm]
+  obtain ⟨A, hlocal, hle, hAdm, t, r, xs, ys, a, a', ha, ha', hb, hspan⟩ :=
+    exists_popescu_admissible_quotient_basis k Λ p hp hreg q n hn A₀ hA₀
+  let : IsLocalRing A := hlocal
+  have hmap : (IsLocalRing.maximalIdeal A).map A.val.toRingHom = m.map π := by
+    obtain ⟨_, _, hlocal', _, hmap⟩ := hAdm
+    exact hmap
+  have hmax : IsLocalRing.maximalIdeal A = Ideal.comap A.val.toRingHom (m.map π) := by
+    apply Ideal.IsMaximal.eq_of_le (IsLocalRing.maximalIdeal.isMaximal A)
+    · rw [← hf, RingHom.comap_ker]
+      exact RingHom.ker_ne_top (f.toRingHom.comp A.val.toRingHom)
+    · rw [← hmap]
+      exact Ideal.le_comap_map
+  let ι : IsLocalRing.ResidueField A →ₐ[k] q.ResidueField :=
+    Ideal.Quotient.liftₐ (IsLocalRing.maximalIdeal A) (f.comp A.val) (fun x hx ↦ by
+      apply RingHom.mem_ker.mp
+      change (x : B) ∈ RingHom.ker f.toRingHom
+      rw [hf]
+      change x ∈ Ideal.comap A.val.toRingHom (m.map π)
+      rwa [← hmax])
+  refine ⟨A, hlocal, hle, hAdm, hmax, ι, ι.injective, ?_, ?_⟩
+  · intro z x hz
+    change f (z : B) = IsLocalRing.residue L x
+    rw [hz]
+    rfl
+  · by_cases hn1 : n = 1
+    · obtain ⟨r', zs, hzs⟩ :=
+        Submodule.fg_iff_exists_fin_generating_family.mp (IsNoetherian.noetherian q)
+      have hzmem : ∀ i, zs i ∈ q := fun i ↦ hzs ▸ Ideal.subset_span ⟨i, rfl⟩
+      have hzero : ∀ i, π (algebraMap Λ L (zs i)) = 0 := by
+        intro i
+        apply Ideal.Quotient.eq_zero_iff_mem.mpr
+        simpa [hn1] using (Ideal.mem_map_of_mem (algebraMap Λ L) (hzmem i))
+      refine ⟨t, r', xs, zs, a, fun _ ↦ 0, ha, ?_, hb, ?_⟩
+      · intro i
+        exact ⟨hzmem i, (hzero i).symm⟩
+      · have h := congrArg (Ideal.map (algebraMap Λ L)) hzs
+        rwa [Ideal.map_span, ← Set.range_comp] at h
+    · have hn2 : 2 ≤ n := by omega
+      have hJle : Ideal.span (Set.range (fun i ↦ algebraMap Λ L (ys i))) ≤ m := by
+        apply Ideal.span_le.mpr
+        rintro _ ⟨i, rfl⟩
+        exact Ideal.mem_map_of_mem _ (ha' i).1
+      have hJmap : (Ideal.span (Set.range (fun i ↦ algebraMap Λ L (ys i)))).map π =
+          m.map π := by
+        rw [Ideal.map_span, ← Set.range_comp]
+        exact hspan
+      have hsup : m ≤ Ideal.span (Set.range (fun i ↦ algebraMap Λ L (ys i))) ⊔ m ^ n := by
+        have h := congrArg (Ideal.comap π) hJmap
+        rw [Ideal.comap_map_quotientMk, Ideal.comap_map_mk hpow] at h
+        exact le_of_eq (h.symm.trans (sup_comm _ _))
+      have hJ : Ideal.span (Set.range (fun i ↦ algebraMap Λ L (ys i))) = m := by
+        apply le_antisymm hJle
+        apply Submodule.le_of_le_smul_of_le_jacobson_bot (I := m)
+          (IsNoetherian.noetherian m)
+        · rw [IsLocalRing.jacobson_eq_maximalIdeal (⊥ : Ideal L) bot_ne_top, ← hm]
+        · exact hsup.trans (sup_le_sup_left
+            (by simpa [Ideal.smul_eq_mul, pow_two] using
+              (Ideal.pow_le_pow_right (I := m) hn2)) _)
+      exact ⟨t, r, xs, ys, a, a', ha, ha', hb, hJ⟩
 
 end Algebra
