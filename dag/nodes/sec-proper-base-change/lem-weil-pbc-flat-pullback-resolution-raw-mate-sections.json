@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-flat-pullback-resolution-raw-mate-sections",
+ "kind": "statement",
+ "title": "The homology mate on raw sections of resolution complexes",
+ "statement": "Let $f:X\\to S$ and $g:S'\\to S$ be morphisms of schemes, with $g$ flat, and let $g':X\\times_S S'\\to X$ and $f':X\\times_S S'\\to S'$ be the projections. Let $F$ be an $\\mathcal O_X$-module, $I$ an injective resolution of $F$, $J$ an injective resolution of $(g')^*F$, and $t:I\\to g'_*J$ any cochain map. Set $K=f_*I$ and $L=f'_*J$, and let $q:K\\to g_*L$ and $c:g^*K\\to L$ be the corresponding adjoint cochain maps defined in [def-weil-pbc-flat-base-change-resolution-construction]. For every degree $p\\ge0$ and open $V\\subset S$, let $r_{K,V}:H^p(K(V))\\to H^p(K)(V)$ be the raw section class morphism: the exact evaluation homology comparison followed by the evaluation of theta from [def-weil-pbc-flat-base-change-open-choices]. Define $r_{L,g^{-1}V}$ similarly. Let $b:g^*H^p(K)\\to H^p(L)$ be the inverse exact pullback homology comparison followed by $H^p(c)$. Then $r_{K,V}$ followed by the section morphism of the adjoint of $b$ equals $H^p(q(V))$ followed by $r_{L,g^{-1}V}$. This formula involves no restricted resolution, open-choice record, or derived-image comparison.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7 and 01E4; raw cycle calculation in the parent proof"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction"
+ ],
+ "proof": [
+  {
+   "text": "Represent a raw section-complex homology class on V by a cycle. Its image under the termwise unit is a cycle on g inverse V by naturality for the differential. Naturality for the cycle inclusion identifies this with the image under the unit on the cycle sheaf.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exactness of A identifies its image of the cycle sheaf with the cycle sheaf of AK and its image of the homology quotient with the quotient for AK. Naturality of the unit for the quotient identifies the image of the source cycle class with the target cycle class under the inverse comparison.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map theta is the sheafification unit on cycle classes, with the exact homology comparison for sheafification followed by the counit. On cycles its composite with the homology quotient equals the quotient into the homology sheaf. Apply exact evaluation to this identity on source and target. The two unit images from the preceding steps agree on all cycles, and the raw homology quotient is epimorphic, proving equality of morphisms. No inverse for theta is required, and the same calculation covers p=0 and empty opens.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the unit case with the termwise adjoint c of q. Naturality of theta for c follows from the exact homology comparison and sheafification counit naturality. The unit followed by pushforward of c equals q by the complex adjunction. Functoriality of homology gives the raw section identity. No resolution-section or derived-image isomorphisms are used.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7 and 01E4; raw cycle calculation before resolution transports"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint homology mate unit naturality section cohomology",
+   "results": "Eight results on monoidal adjunction unit and mates; none identifies the raw section-class map with the termwise unit.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; naturality ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap_mapNatTrans\"",
+   "results": "CategoryTheory.ShortComplex.homologyMap_mapNatTrans, in Mathlib.Algebra.Homology.ShortComplex.PreservesHomology.",
+   "date": "2026-10-13",
+   "verdict": "Generic exact-functor ingredient; does not include the theta comparison for section complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*homEquiv|adjoint_homology_comparison|sectionCohomologyTheta; searched lean/WeilConjectures, lean/Sheaf and Mathlib homology sources",
+   "results": "HigherDirectImageResolutionNaturality proves theta naturality for maps on one scheme; ShortComplexSectionComparison proves a private cycle formula for an exact left adjoint. No theorem states this flat unit compatibility.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; use the generic cycle and naturality arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology mate of a morphism of complexes under an exact pullback adjunction agrees on section classes with the cohomology map of the complex morphism.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology comparison naturality adjunction unit exact functor cycles",
+   "results": "Second reading G4: ShortComplex.mapCyclesIso_hom_naturality, mapCyclesIso_inv_naturality, mapCyclesIso_hom_iCycles, NatTrans.app_homology; eight generic homology/cycle comparison results.",
+   "date": "2026-10-13",
+   "verdict": "No raw section-class formula. These are ingredients for the documented cycle proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ_naturality\"",
+   "results": "Second reading G4: eight results, including ShortComplex.homologyπ_naturality and HomologicalComplex.homologyπ_naturality with their reassociated versions.",
+   "date": "2026-10-13",
+   "verdict": "Naturality of the homology quotient is an ingredient; it does not identify the flat adjunction mate with the two theta class maps."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*(adj|unit)|adj.*homology|sectionCohomologyTheta|rawMate_sections in lean/Sheaf, lean/WeilConjectures, upstream AlgebraicGeometry, and Mathlib homology/modules sources",
+   "results": "Second reading G4: ShortComplexSectionComparison has a private cycle identity for the sheafification adjunction. HigherDirectImageResolutionNaturality has private theta naturality on one scheme. FlatScalarExtensionHomologyAdjunct_isIso handles modules over rings and an isomorphism conclusion. None states the section identity for a morphism of schemes.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate or directly applicable shorter route. The raw flat-unit compatibility is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatPullbackHomologySections",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-pullback-homology-sections",
+   "place": "proof steps 1–3, the raw cycle calculation before resolution transports",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatPullbackResolutionRawMateSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPullbackResolutionRawMateSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolution_rawMate_sections",
+  "statement": "theorem flatBaseChangeResolution_rawMate_sections {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S) [Flat g] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex) (p : ℕ) (V : S.Opens) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let L := ((pushforward (pullback.fst g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex\n    let U := SheafOfModules.forget S.ringCatSheaf\n    let U' := SheafOfModules.forget S'.ringCatSheaf\n    let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op V)\n    let E' := PresheafOfModules.toPresheaf S'.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S'.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op (g ⁻¹ᵁ V))\n    let adj := Classical.choose (exists_tensorPullbackAdjunction g)\n    ((((U.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso E).hom ≫\n        E.map (sectionCohomologyTheta K p) ≫\n        Hom.app (adj.homEquiv _ _\n          (((K.sc p).mapHomologyIso (tensorPullback g)).inv ≫\n            HomologicalComplex.homologyMap (flatBaseChangeResolutionC f g I J t) p)) V =\n      HomologicalComplex.homologyMap\n        (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex\n          (ComplexShape.up ℕ)).map (flatBaseChangeResolutionQ f g I J t)) p ≫\n        ((((U'.mapHomologicalComplex (ComplexShape.up ℕ)).obj L).sc p)\n          |>.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta L p)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b2166",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141527-L-379131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b2166",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T141527-L-379131",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, node statements, proof dependencies, report, and interface changes match the packet; both modules and the direct importer compile successfully."
+ }
+}

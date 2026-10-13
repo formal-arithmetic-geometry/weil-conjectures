@@ -15,47 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Flatness makes tensor pullback exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective]. Thus kernels, images and homology of K commute with tensor pullback. The inverse comparison in b is this exact homology comparison.",
+   "text": "Apply the raw section homology-mate identity for the fixed two pushforward resolution complexes. It computes the cycle calculation before the open cohomology and derived-image transports.",
    "uses": [
-    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+    "lem-weil-pbc-flat-pullback-resolution-raw-mate-sections"
    ],
    "elementary": false
   },
   {
-   "text": "For a cycle s in K(V), the adjunction identity says that the unit followed by g_*c sends s to q(s), degreewise. Passing through the preserved kernel and homology quotient therefore sends its cycle class to the class of q(s). This uses only the defining adjunction identity and the universal properties of kernel and quotient.",
+   "text": "Use the two homEquiv naturality identities to transport the mate through the source and target derived-image comparison isomorphisms in beta. This is the generic proved adjoint_transport lemma.",
    "uses": [
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The map theta is the sheafification of cycle classes with its canonical homology comparison [def-weil-pbc-flat-base-change-open-choices]. Naturality of sheafification and the evaluation comparison takes the preceding equality on cycle representatives to the displayed equality. Every element of section-complex homology is represented by a cycle, so this establishes equality of the additive group morphisms.",
-   "uses": [
-    "def-weil-pbc-flat-base-change-open-choices"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "In the constructed open map [def-weil-pbc-flat-base-change-resolution-open-map], cancel the inverse target section/resolution comparison against the one in targetClass. In sourceClass and beta cancel the inverse source derived-image comparison using naturality of the tensor adjunction. The remaining equality is the cycle-class identity established in the preceding steps. This argument uses no augmentation and no moduleCohomologyFMap.",
-   "uses": [
-    "def-weil-pbc-flat-base-change-resolution-open-map",
+    "lem-pc-module-pullback-adjunction",
     "def-weil-pbc-flat-base-change-resolution-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand sourceClass and targetClass into their pinned resolution homology isomorphisms, raw class maps, and inverse derived-image comparisons. Their evaluation presentations agree pointwise. Cancel the source derived-image inverse with its hom, apply the raw identity, then cancel the inverse target resolution-section isomorphism from the open map with its hom from targetClass. Evaluate the resulting equality of AddCommGrpCat morphisms on xi.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-flat-base-change-resolution-open-map"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-  "lem-pc-module-pullback-adjunction",
   "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-flat-base-change-resolution-construction",
   "def-weil-pbc-flat-base-change-resolution-open-map",
-  "def-weil-pbc-flat-base-change-resolution-construction"
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-flat-pullback-resolution-raw-mate-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "B3",
+  "agent": "G4",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 02N7, 01FB, 01EZ, 01E4; detailed resolution/section comparison"
+  "place": "Tags 02N7 and 01E4; raw homology mate identity followed by proved adjunction naturality and resolution cancellations"
  },
  "mathlib_searches": [
   {
@@ -159,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "X-b2166",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T113336-L-3181261",
+  "landing": "20261013T141527-L-379131",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules, node statements, proof dependencies, report, and interface changes match the packet; both modules and the direct importer compile successfully."
  }
 }
