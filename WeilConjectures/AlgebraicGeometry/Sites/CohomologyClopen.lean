@@ -146,7 +146,7 @@ theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens
 
 /-- Two factorisations `f ≫ g = f' ≫ g'` of the same morphism give pullback maps on cohomology
 which agree up to a bijection
-(`AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap`). -/
+(`AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_of_comp_eq`). -/
 lemma exists_bijective_cohomologyMap_cohomologyMap_eq {Z Y' : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ Z) (f' : X ⟶ Y') (g' : Y' ⟶ Z) (h : f ≫ g = f' ≫ g')
     (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
@@ -159,7 +159,8 @@ lemma exists_bijective_cohomologyMap_cohomologyMap_eq {Z Y' : Scheme.{u}} (f : X
   have hb' := bijective_mk₀_comp_comp_mk₀ (cohomologyMapCompIso f' g' (f ≫ g) h.symm).hom
     ((upperStarComp AddCommGrpCat.{u + 1} f' g' (f ≫ g) h).hom.app F) n
   refine ⟨_ ∘ (Equiv.ofBijective _ hb').symm, hb.comp (Equiv.bijective _), fun x ↦ ?_⟩
-  rw [cohomologyMap_cohomologyMap f g _ rfl, cohomologyMap_cohomologyMap f' g' (f ≫ g) h.symm]
+  rw [cohomologyMap_cohomologyMap_of_comp_eq f g _ rfl,
+    cohomologyMap_cohomologyMap_of_comp_eq f' g' (f ≫ g) h.symm]
   simp only [Function.comp_apply]
   congr 2
   exact ((Equiv.ofBijective _ hb').symm_apply_apply _).symm

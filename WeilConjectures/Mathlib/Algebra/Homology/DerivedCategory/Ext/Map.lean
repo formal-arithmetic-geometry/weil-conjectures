@@ -210,7 +210,7 @@ lemma mk₀_comp_mapExactFunctor_comp_eq_zero_iff' (G₁ : C ⥤ D) [G₁.Additi
 /-- Let `G₁ : C ⥤ D`, `G₂ : D ⥤ E` and `G : C ⥤ E` be exact functors and `τ : G ≅ G₁ ⋙ G₂`.
 Pushing a class `x` of `Extⁿ(A, B)` forward along `G₁` and then along `G₂` is pushing it forward
 along `G`, up to the isomorphisms `τ_A` and `τ_B`. -/
-lemma mapExactFunctor_mapExactFunctor (G₁ : C ⥤ D) [G₁.Additive]
+lemma mapExactFunctor_mapExactFunctor_of_iso (G₁ : C ⥤ D) [G₁.Additive]
     [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁] (G₂ : D ⥤ E) [G₂.Additive]
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] (G : C ⥤ E) [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (τ : G ≅ G₁ ⋙ G₂) {A B : C} {n : ℕ}

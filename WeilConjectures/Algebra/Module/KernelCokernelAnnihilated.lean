@@ -124,7 +124,7 @@ theorem mul_le_annihilator_ker_and_coker {v : P →ₗ[A] R}
       exact mem_range_self v _
 
 /-- The map `M ⧸ J • ⊤ →ₗ[A] N ⧸ J • ⊤` induced by `u` (reduction of `u` modulo `J`). -/
-noncomputable abbrev reduceModIdeal (u : M →ₗ[A] N) (J : Ideal A) :
+noncomputable abbrev mapQSmulTop (u : M →ₗ[A] N) (J : Ideal A) :
     M ⧸ (J • ⊤ : Submodule A M) →ₗ[A] N ⧸ (J • ⊤ : Submodule A N) :=
   Submodule.mapQ _ _ u (Submodule.smul_top_le_comap_smul_top J u)
 
@@ -132,11 +132,11 @@ include hker hcoker in
 /-- If the kernel and cokernel of `u` are killed by `I`, then so are kernel and cokernel of
 the reduction of `u` modulo any ideal `J`, by `I * I`. -/
 theorem mul_le_annihilator_ker_and_coker_reduceModIdeal (J : Ideal A) :
-    I * I ≤ Module.annihilator A (ker (u.reduceModIdeal J)) ∧
+    I * I ≤ Module.annihilator A (ker (u.mapQSmulTop J)) ∧
       I * I ≤ Module.annihilator A
-        ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range (u.reduceModIdeal J)) := by
+        ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range (u.mapQSmulTop J)) := by
   refine mul_le_annihilator_ker_and_coker fun f hf g hg => ?_
-  refine ⟨(fgMap u hker hcoker hf hg).reduceModIdeal J, ?_, ?_⟩
+  refine ⟨(fgMap u hker hcoker hf hg).mapQSmulTop J, ?_, ?_⟩
   · ext x
     simp [← comp_apply (fgMap u hker hcoker hf hg) u, fgMap_comp_self]
   · ext y
@@ -165,9 +165,9 @@ theorem ker_coker_annihilated_mod_ideal (K : Ideal A) (t : ℕ) (u : M →ₗ[A]
       (hcoker' : K ^ t ≤ Module.annihilator A (N' ⧸ range u')) (a : M →ₗ[A] M')
       (b : N →ₗ[A] N'), u' ∘ₗ a = b ∘ₗ u → ∀ f g (hf : f ∈ K ^ t) (hg : g ∈ K ^ t),
         a ∘ₗ fgMap u hker hcoker hf hg = fgMap u' hker' hcoker' hf hg ∘ₗ b) ∧
-    (∀ J : Ideal A, K ^ (2 * t) ≤ Module.annihilator A (ker (u.reduceModIdeal J)) ∧
+    (∀ J : Ideal A, K ^ (2 * t) ≤ Module.annihilator A (ker (u.mapQSmulTop J)) ∧
       K ^ (2 * t) ≤ Module.annihilator A
-        ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range (u.reduceModIdeal J))) ∧
+        ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range (u.mapQSmulTop J))) ∧
     (∀ v : P →ₗ[A] R, (∀ f ∈ K ^ t, ∀ g ∈ K ^ t, ∃ k : R →ₗ[A] P,
       k ∘ₗ v = (f * g) • LinearMap.id ∧ v ∘ₗ k = (f * g) • LinearMap.id) →
       K ^ (2 * t) ≤ Module.annihilator A (ker v) ∧

@@ -74,10 +74,10 @@ theorem addConjugate_cohomologyMap_of_comm {P₀ P₁ P₂ P₃ : Scheme.{u}} (i
     ((upperStarComp AddCommGrpCat.{u + 1} j r (r' ≫ i) h).hom.app G) n
   have hα : ∀ x, cohomologyMap r' _ n (cohomologyMap i G n x) =
       α (cohomologyMap (r' ≫ i) G n x) :=
-    fun x ↦ cohomologyMap_cohomologyMap r' i _ rfl G x
+    fun x ↦ cohomologyMap_cohomologyMap_of_comp_eq r' i _ rfl G x
   have hβ : ∀ x, cohomologyMap j _ n (cohomologyMap r G n x) =
       β (cohomologyMap (r' ≫ i) G n x) :=
-    fun x ↦ cohomologyMap_cohomologyMap j r _ h.symm G x
+    fun x ↦ cohomologyMap_cohomologyMap_of_comp_eq j r _ h.symm G x
   let e₁ := AddEquiv.ofBijective _ (cohomologyMap_bijective r G n)
   let e₂ := (AddEquiv.ofBijective _ (cohomologyMap_bijective r'
     (((i)^*[AddCommGrpCat.{u + 1}]).obj G) n)).trans (α.symm.trans β)

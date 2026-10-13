@@ -94,7 +94,7 @@ theorem bijective_cohomologyMap_biproduct
 quasi-separated schemes is bijective for a filtered colimit of sheaves if it is bijective for
 each member of the diagram: cohomology commutes with filtered colimits
 (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`) and `g^*` preserves colimits. -/
-theorem bijective_cohomologyMap_of_isColimit [CompactSpace X] [QuasiSeparatedSpace X]
+theorem bijective_cohomologyMap_of_isColimit' [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] {J : Type*} [Category J] [IsFiltered J]
     {D : J ⥤ Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (hD : ∀ j, Function.Bijective (cohomologyMap g (D.obj j) q)) :
@@ -299,7 +299,7 @@ theorem bijective_cohomologyMap_constantModSheaf {X' : Scheme.{u}} (g : X' ⟶ X
     (fun n ↦ have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
       HasFiniteBiproducts.of_hasFiniteProducts
       bijective_cohomologyMap_biproduct g q n _ fun _ ↦ h)
-    (fun hc hD ↦ bijective_cohomologyMap_of_isColimit g q hc hD)
+    (fun hc hD ↦ bijective_cohomologyMap_of_isColimit' g q hc hD)
     _ (nsmul_quotient_span_eq_zero Λ p)
   exact (bijective_cohomologyMap_iff_of_iso g (constantModSheafForgetIso Λ X p).symm q).1 key
 

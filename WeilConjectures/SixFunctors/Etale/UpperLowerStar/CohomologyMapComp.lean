@@ -18,7 +18,7 @@ pullback map along `f ≫ g` is.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap`: the composition formula.
+- `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_of_comp_eq`: the composition formula.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_comp_iff`: bijectivity of the composite.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_iff_of_iso`: bijectivity of the pullback
   map only depends on the coefficient sheaf up to isomorphism.
@@ -35,7 +35,8 @@ namespace AlgebraicGeometry.Etale
 variable {X Y Z : Scheme.{u}}
 
 /-- The automorphism of the constant sheaf `ℤ` on `X` relating the pullback maps along `g`,
-then `f`, and along `k = f ≫ g`, see `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap`. -/
+then `f`, and along `k = f ≫ g`, see
+`AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_of_comp_eq`. -/
 noncomputable def cohomologyMapCompIso (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k) :
     (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift ℤ)) ≅
@@ -51,8 +52,8 @@ noncomputable def cohomologyMapCompIso (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
 `g : Y ⟶ Z` and then along `f : X ⟶ Y` is pulling it back along `k = f ≫ g`, up to the
 composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`.
 (blueprint: `lem-weil-pbc-cohomology-pullback-functorial`, composition) -/
-theorem cohomologyMap_cohomologyMap (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k)
-    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
+theorem cohomologyMap_cohomologyMap_of_comp_eq (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
+    (hk : f ≫ g = k) (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
     cohomologyMap f _ n (cohomologyMap g F n x) =
       (Ext.mk₀ (cohomologyMapCompIso f g k hk).hom).comp
         ((cohomologyMap k F n x).comp
@@ -60,7 +61,7 @@ theorem cohomologyMap_cohomologyMap (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (h
         (zero_add n) := by
   have : EnoughInjectives (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
   rw [cohomologyMap_apply, cohomologyMap_apply, cohomologyMap_apply, Ext.mapExactFunctor_comp,
-    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor _ _ _
+    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor_of_iso _ _ _
       (upperStarComp AddCommGrpCat.{u + 1} f g k hk.symm)]
   simp only [cohomologyMapCompIso, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀_assoc,
     Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
@@ -87,7 +88,7 @@ theorem bijective_cohomologyMap_comp_iff (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ 
       (fun z ↦ (Ext.mk₀ (cohomologyMapCompIso f g k hk).hom).comp
         (z.comp (Ext.mk₀ ((upperStarComp AddCommGrpCat.{u + 1} f g k hk.symm).hom.app F))
           (add_zero n)) (zero_add n)) ∘ cohomologyMap k F n :=
-    funext fun x ↦ cohomologyMap_cohomologyMap f g k hk F x
+    funext fun x ↦ cohomologyMap_cohomologyMap_of_comp_eq f g k hk F x
   rw [this]
   exact (Function.Bijective.of_comp_iff' (bijective_mk₀_comp_comp_mk₀ _ _ n) _)
 
