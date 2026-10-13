@@ -29,9 +29,9 @@
   "group": "J1"
  },
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E, projective compactification argument"
+  "place": "Theorem Tag 088E (theorem-grothendieck-existence), projective compactification and restriction paragraphs; Lean composition written by S1"
  },
  "mathlib_searches": [
   {
@@ -66,21 +66,41 @@
  "statement": "Let A be a commutative Noetherian ring complete for an ideal I, Z a Noetherian scheme, and f : Z → Spec A separated and of finite type. Let Q = I O_Z and G a coherent formal Q-module with degree-zero support proper over A. Given a proper q : Y → Z, n : ℕ, an immersion e of Y into P^n_A, and equality of its projection with q ≫ f, there exists a coherent module F on Y whose Q.comap q completion is isomorphic to the tensor pullback of G.",
  "proof": [
   {
-   "text": "Construct the scheme-theoretic image compactification of the quasi-compact immersion, extend the pulled formal system by zero, and apply projective Grothendieck existence; restrict the resulting algebraization to Y.",
+   "text": "Take X = e.image, p = e.imageι followed by the projective projection, and j = e.toImage. The quasi-compact immersion has an open image factor, its image inclusion is closed, and both X and Y are Noetherian by finite type over Spec A. The image factorization and he give j followed by p = q followed by f. Identify the ideal kernel of Spec(A/I) to Spec(A) with ofIdealTop(I) using ker_of_isAffine, ΓSpecIso_naturality, and Ideal.mk_ker.",
    "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-grothendieck-existence-projective",
     "def-nagata-scheme-theoretic-image",
     "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_chow_formal_system_extension to obtain a coherent formal module H on X and an isomorphism between the pulled G system and the restriction of H. This is the extension-by-zero part of the argument, without algebraization.",
+   "uses": [
+    "lem-weil-pbc-chow-formal-system-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply completion_isEquivalence_of_projective_embedding to the closed immersion e.imageι. Essential surjectivity supplies a coherent module Fprime whose completion is isomorphic to H. All choices are local to the existential proof, with no definition choosing data from mere existence.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-existence-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exists_formalSystemsPullback for j. Its coherent pullback functor C supplies F = C(Fprime). Map the component of its completion comparison through the full-subcategory inclusion, rewrite the underlying pulled system using the functor equality in that theorem, and rewrite the ideal using comap_comp and the equality j followed by p = q followed by f. Compose the extension isomorphism, the whiskered algebraization isomorphism, and this comparison to obtain the required system isomorphism.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-grothendieck-existence-projective",
   "def-nagata-scheme-theoretic-image",
-  "lemma-nagata-immersion-open-in-scheme-image"
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-weil-pbc-chow-formal-system-extension",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-formal-systems-pullback"
  ],
  "lean": {
   "existing": false,
@@ -105,12 +125,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T230758-L-1908910",
+  "landing": "20261013T010620-L-2672982",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

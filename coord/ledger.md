@@ -10419,3 +10419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:06 L: merged deliver/R3/Sheaf.RingTheory.SelectedBasisOfLocalizedSplit (stage 3; reviewer PASS; first push; landing 20261013T010619-L-2672576 (proof); batch 20261013T010609; modules 1; new nodes 0)
 - 01:06 L: merged deliver/R4/Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution (stage 3; reviewer PASS; first push; landing 20261013T010619-L-2672701 (proof); batch 20261013T010609; modules 1; new nodes 0)
 - 01:06 L: merged deliver/R4/Sheaf.AlgebraicGeometry.KoszulRestrictionZeroBase (stage 3; reviewer PASS; first push; landing 20261013T010620-L-2672815 (interface); batch 20261013T010609; modules 3; new nodes 2)
+- 01:06 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreCandidate (stage 3; reviewer PASS; after a return; landing 20261013T010620-L-2672982 (interface); batch 20261013T010609; modules 2; new nodes 1)
