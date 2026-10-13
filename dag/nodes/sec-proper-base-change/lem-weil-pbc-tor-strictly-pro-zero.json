@@ -31,77 +31,75 @@
  ],
  "proof": [
   {
-   "text": "(Resolutions of $M$ and of $K$.) Let $M$ be a finitely generated $A$-module [def-weil-finitely-generated-module]. Since $A$ is Noetherian, by [lem-weil-pbc-finite-free-resolution-noetherian] there is an exact complex $\\cdots\\to F_2\\xrightarrow{d_2}F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\varepsilon}M\\to0$ with $F_i=A^{\\oplus n_i}$. Put $t=n_0$ and $K=\\ker\\varepsilon=\\operatorname{im}d_1\\subseteq A^{\\oplus t}$, so that $0\\to K\\to A^{\\oplus t}\\xrightarrow{\\varepsilon}M\\to0$ is exact. $K$ is finitely generated, by the images under $d_1$ of the $n_1$ standard basis vectors of $F_1$. Let $d_1':F_1\\to K$ be $d_1$ with target $K$; it is surjective, and $\\ker d_1'=\\ker d_1=\\operatorname{im}d_2$, so $\\cdots\\to F_3\\xrightarrow{d_3}F_2\\xrightarrow{d_2}F_1\\xrightarrow{d_1'}K\\to0$ is exact: $G_q=F_{q+1}$ with differentials $d^G_q=d_{q+1}$ ($q\\ge1$) is a resolution of $K$ by free modules. By [def-weil-pbc-tor-modules], for every $A$-module $N$ we may and do compute $\\operatorname{Tor}^A_p(M,N)=H_p(F_\\bullet\\otimes_AN)$ and $\\operatorname{Tor}^A_q(K,N)=H_q(G_\\bullet\\otimes_AN)$ (another choice of resolution gives canonically isomorphic modules, Algebra 00LZ), and for an $A$-linear map $g:N\\to N'$ the induced maps $\\operatorname{Tor}_p(M,g)$, $\\operatorname{Tor}_q(K,g)$ are the maps on homology induced by the maps of complexes $1\\otimes g$.",
+   "text": "Choose q : (Fin t → R) →ₗ[R] X surjective using Mathlib Module.Finite.exists_fin' from finite generation [def-weil-finitely-generated-module]. Put K = ker q. The free module is finite, so K is finite by [lem-weil-pbc-noetherian-submodule-finite]. This requires only a finite free presentation, not an infinite finite free resolution.",
    "uses": [
     "def-weil-finitely-generated-module",
-    "lem-weil-pbc-finite-free-resolution-noetherian",
-    "def-weil-pbc-tor-modules"
+    "lem-weil-pbc-noetherian-submodule-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 0911 (lemma-tor-strictly-pro-zero), lines 6462--6473 ('Choose a short exact sequence 0 -> K -> A^t -> M -> 0'); finite free resolution: Algebra, Lemma 00LP (lemma-resolution-by-finite-free); Tor computed from any free resolution: Algebra, Section 00LY and Lemma 00LZ (lemma-tor-welldefined)"
+    "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), with its proof (lines 6462--6473: p = 1 from 0 -> K -> A^t -> M -> 0, Tor_1(M, A/I^n) = (K cap (I^n)^t)/I^nK and Artin-Rees (Algebra, Lemma 00IN); p > 1 by dimension shifting); reference Quillen, Homology of commutative rings, Lemma 9.9. Tag verified in tags/tags: 0911,more-algebra-lemma-tor-strictly-pro-zero"
    }
   },
   {
-   "text": "(Dimension shifting, natural in $N$.) Let $p\\ge2$ and $N$ an $A$-module, with the resolutions of Step 1. In $F_\\bullet\\otimes_AN$, $H_p=\\ker(d_p\\otimes1_N:F_p\\otimes N\\to F_{p-1}\\otimes N)/\\operatorname{im}(d_{p+1}\\otimes1_N)$. Since $p-1\\ge1$, $F_p=G_{p-1}$, $F_{p-1}=G_{p-2}$, $F_{p+1}=G_p$, $d_p=d^G_{p-1}$ and $d_{p+1}=d^G_p$ (for $p=2$: $d_2=d^G_1:G_1=F_2\\to G_0=F_1$), so $H_p(F_\\bullet\\otimes_AN)$ and $H_{p-1}(G_\\bullet\\otimes_AN)$ are the same quotient of the same submodule of $F_p\\otimes_AN$. Hence $\\operatorname{Tor}^A_p(M,N)=\\operatorname{Tor}^A_{p-1}(K,N)$ [def-weil-pbc-tor-modules]. For $g:N\\to N'$ both $\\operatorname{Tor}_p(M,g)$ and $\\operatorname{Tor}_{p-1}(K,g)$ are induced by the same map $1_{F_p}\\otimes g:F_p\\otimes N\\to F_p\\otimes N'$, so under these identifications $\\operatorname{Tor}_p(M,g)=\\operatorname{Tor}_{p-1}(K,g)$.",
+   "text": "Apply [lem-weil-pbc-tor-long-exact-first-variable] to K → R^t → X. Since the middle module is projective, Mathlib isZero_Tor'_succ_of_projective and exactness make the boundary δ_N : Tor_1(X,N) → K tensor N injective, naturally in N. Using [lem-weil-pbc-tensor-over-quotient-ring], represent δ_(R/J)(z) by k tensor 1. Exactness at K tensor R/J says k lies in J R^t, and k is already in K. If J R^t intersect K ≤ J' K, then Submodule.mem_smul_top_iff identifies k with an element of J' times top in K. Tensor/quotient equivalence kills k tensor 1 modulo J'; boundary naturality and injectivity force Tor_1(X,R/J → R/J') = 0. This is the proved private helper tor_one_reduction_zero.",
    "uses": [
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 0911 (lemma-tor-strictly-pro-zero), lines 6462--6473 ('For p > 1 we have Tor_p(M, A/I^n) = Tor_{p-1}(K, A/I^n)'), here read off the resolution of Step 1 instead of the long exact sequence"
-   }
-  },
-  {
-   "text": "($\\operatorname{Tor}_1$ against $A/J$.) Let $J\\subseteq A$ be an ideal. For every $A$-module $X$, $X\\otimes_A(A/J)\\cong X/JX$, $x\\otimes\\bar a\\mapsto ax\\bmod JX$, naturally in $X$ [lem-weil-pbc-tensor-over-quotient-ring] (1) (with the symmetry of $\\otimes$); for ideals $J\\subseteq J'$ the map induced by the quotient $A/J\\to A/J'$ becomes the reduction $X/JX\\to X/J'X$ (both send $x\\otimes\\bar a$ to $ax\\bmod J'X$). So $F_\\bullet\\otimes_A(A/J)$ is the complex $F_i/JF_i$ with differentials $\\bar d_i$, and $\\operatorname{Tor}^A_1(M,A/J)=\\ker(\\bar d_1:F_1/JF_1\\to A^{\\oplus t}/JA^{\\oplus t})/\\operatorname{im}\\bar d_2$. By [lem-weil-pbc-tensor-right-exact] applied to the exact sequence $F_2\\xrightarrow{d_2}F_1\\xrightarrow{d_1'}K\\to0$ of Step 1 and to $A/J$, the sequence $F_2/JF_2\\xrightarrow{\\bar d_2}F_1/JF_1\\xrightarrow{\\bar d_1'}K/JK\\to0$ is exact. Let $\\bar\\iota:K/JK\\to A^{\\oplus t}/JA^{\\oplus t}$ be induced by the inclusion $K\\subseteq A^{\\oplus t}$; then $\\bar d_1=\\bar\\iota\\circ\\bar d_1'$. Hence $\\ker\\bar d_1=(\\bar d_1')^{-1}(\\ker\\bar\\iota)$ contains $\\ker\\bar d_1'=\\operatorname{im}\\bar d_2$ and maps onto $\\ker\\bar\\iota$ ($\\bar d_1'$ is surjective), so $\\bar d_1'$ induces an isomorphism $\\theta_J:\\operatorname{Tor}^A_1(M,A/J)\\xrightarrow{\\sim}\\ker\\bar\\iota$. As $JA^{\\oplus t}=J^{\\oplus t}$ and $JK\\subseteq K\\cap J^{\\oplus t}$, $\\ker\\bar\\iota=\\{k+JK:\\ k\\in K\\cap J^{\\oplus t}\\}=(K\\cap J^{\\oplus t})/JK$. For $J\\subseteq J'$ all maps above commute with the reductions mod $J'$, so $\\theta_{J'}\\circ\\operatorname{Tor}_1(M,A/J\\to A/J')\\circ\\theta_J^{-1}$ is the map $(K\\cap J^{\\oplus t})/JK\\to(K\\cap J'^{\\oplus t})/J'K$, $k+JK\\mapsto k+J'K$.",
-   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
     "lem-weil-pbc-tensor-over-quotient-ring",
-    "lem-weil-pbc-tensor-right-exact",
     "def-weil-pbc-tor-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 0911 (lemma-tor-strictly-pro-zero), lines 6462--6473 ('Then Tor_1^A(M, A/I^n) = K cap (I^n)^t / I^n K', stated without proof; written out here)"
+    "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), with its proof (lines 6462--6473: p = 1 from 0 -> K -> A^t -> M -> 0, Tor_1(M, A/I^n) = (K cap (I^n)^t)/I^nK and Artin-Rees (Algebra, Lemma 00IN); p > 1 by dimension shifting); reference Quillen, Homology of commutative rings, Lemma 9.9. Tag verified in tags/tags: 0911,more-algebra-lemma-tor-strictly-pro-zero"
    }
   },
   {
-   "text": "(The case $p=1$.) Let $M$, $t$, $K$ be as in Step 1. $A^{\\oplus t}$ is a finitely generated $A$-module and $K\\subseteq A^{\\oplus t}$ a submodule, $A$ is Noetherian [def-weil-pbc-noetherian-ring], so by the Artin--Rees lemma [lem-weil-pbc-artin-rees] (with $R=A$, its $M=A^{\\oplus t}$, its $N=K$) there is $c_0\\ge0$ such that $I^nA^{\\oplus t}\\cap K\\subseteq I^{n-c}K$ for all $n\\ge c$, for every $c\\ge c_0$ (the 'in particular' clause of that node). Take $c=\\max(c_0,1)>0$; note $I^nA^{\\oplus t}=(I^n)^{\\oplus t}$. Let $n\\ge c$ and $m=n-c\\ge0$ ($I^0=A$), so $I^n\\subseteq I^m$. By Step 3 (with $J=I^n$, $J'=I^m$) an element of $\\operatorname{Tor}^A_1(M,A/I^n)$ is $\\theta_{I^n}^{-1}(k+I^nK)$ with $k\\in K\\cap(I^n)^{\\oplus t}$, and its image in $\\operatorname{Tor}^A_1(M,A/I^m)$ is $\\theta_{I^m}^{-1}(k+I^mK)$. Since $k\\in K\\cap(I^n)^{\\oplus t}\\subseteq I^{n-c}K=I^mK$, this image is $0$. So $\\operatorname{Tor}^A_1(M,A/I^n)\\to\\operatorname{Tor}^A_1(M,A/I^{n-c})$ is zero for all $n\\ge c$, with $c>0$ depending only on $M$ (through $K\\subseteq A^{\\oplus t}$) and $I$, uniform in $n$.",
+   "text": "Apply Mathlib Ideal.exists_pow_inf_eq_pow_smul [lem-weil-pbc-artin-rees] to K inside R^t. Obtain c0 such that I^n top intersect K = I^(n-c0) (I^c0 top intersect K) for n ≥ c0. Set c = max c0 1 > 0. For n ≥ c, monotonicity gives I^n top intersect K ≤ I^(n-c0) K ≤ I^(n-c) K. Step 2 with J = I^n and J' = I^(n-c) proves the degree-one case, including n=c.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-artin-rees"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 0911 (lemma-tor-strictly-pro-zero), lines 6462--6473 ('By Artin-Rees (Algebra, Lemma 00IN) there is a constant c >= 0 such that K cap (I^n)^t subset I^{n-c}K for n >= c. Thus the result for p = 1'); Artin-Rees: Algebra, Lemma 00IN (lemma-Artin-Rees, line 12187)"
+    "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), with its proof (lines 6462--6473: p = 1 from 0 -> K -> A^t -> M -> 0, Tor_1(M, A/I^n) = (K cap (I^n)^t)/I^nK and Artin-Rees (Algebra, Lemma 00IN); p > 1 by dimension shifting); reference Quillen, Homology of commutative rings, Lemma 9.9. Tag verified in tags/tags: 0911,more-algebra-lemma-tor-strictly-pro-zero"
    }
   },
   {
-   "text": "(Induction on $p$.) Fix $A$ and $I$. Claim $P(p)$ for $p\\ge1$: for every finitely generated $A$-module $M$ there is $c>0$ such that $\\operatorname{Tor}^A_p(M,A/I^n)\\to\\operatorname{Tor}^A_p(M,A/I^{n-c})$ is zero for all $n\\ge c$. $P(1)$ is Step 4. Let $p\\ge2$ and assume $P(p-1)$. Given $M$, let $K$ be as in Step 1; it is finitely generated, so $P(p-1)$ gives $c>0$ with $\\operatorname{Tor}^A_{p-1}(K,A/I^n)\\to\\operatorname{Tor}^A_{p-1}(K,A/I^{n-c})$ zero for all $n\\ge c$. By Step 2 with $N=A/I^n$, $N'=A/I^{n-c}$ and $g$ the quotient map, $\\operatorname{Tor}_p(M,g)=\\operatorname{Tor}_{p-1}(K,g)$ under the identifications $\\operatorname{Tor}^A_p(M,-)=\\operatorname{Tor}^A_{p-1}(K,-)$, hence $\\operatorname{Tor}_p(M,g)=0$ for all $n\\ge c$, and $P(p)$ holds with the same $c$. By induction $P(p)$ holds for all $p\\ge1$, which is the statement.",
+   "text": "Induct on positive p, uniformly over all finite modules X in the universe of R. The degree-one case is Step 3. For p ≥ 1, form the short exact sequence K → R^t → X from Step 1. Apply the proved natural dimension-shift theorem [lem-sc-p1-tor-dimension-shift-natural] to obtain Tor_(p+1)(X,N) ≅ Tor_p(K,N), natural in N. The inductive hypothesis applies to the finite module K and gives a single c > 0 uniformly in n. Naturality expresses the higher transition composed with the target isomorphism as the source isomorphism composed with the zero transition. Cancel the target isomorphism to obtain zero. This is the proved private helper tor_pow_zero_same_universe.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), with its proof (lines 6462--6473: p = 1 from 0 -> K -> A^t -> M -> 0, Tor_1(M, A/I^n) = (K cap (I^n)^t)/I^nK and Artin-Rees (Algebra, Lemma 00IN); p > 1 by dimension shifting); reference Quillen, Homology of commutative rings, Lemma 9.9. Tag verified in tags/tags: 0911,more-algebra-lemma-tor-strictly-pro-zero"
+   }
+  },
+  {
+   "text": "For the original universe-polymorphic statement take R = ULift A, J = I.map ULift.ringEquiv.symm.toRingHom, and X = ULift M. Noetherianity and finiteness transfer along the ring equivalence, using Mathlib isNoetherianRing_of_ringEquiv and Module.Finite.of_surjective. Ideal.map_pow and Ideal.quotientEquiv give explicit R-linear equivalences e_n : R/J^n ≃ ULift (A/I^n). On every quotient generator the square between the ordinary transition and the displayed conjugated reduction commutes by reflexivity. Map the square through Tor and cancel its source isomorphism to transfer Step 4's vanishing. All universe lifts and the public signature are unchanged.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 0911 (lemma-tor-strictly-pro-zero), lines 6462--6473 ('Thus the lemma follows by induction')"
+    "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), with its proof (lines 6462--6473: p = 1 from 0 -> K -> A^t -> M -> 0, Tor_1(M, A/I^n) = (K cap (I^n)^t)/I^nK and Artin-Rees (Algebra, Lemma 00IN); p > 1 by dimension shifting); reference Quillen, Homology of commutative rings, Lemma 9.9. Tag verified in tags/tags: 0911,more-algebra-lemma-tor-strictly-pro-zero"
    }
   }
  ],
  "proof_deps": [
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-finite-free-resolution-noetherian",
-  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-tor-long-exact-first-variable",
   "lem-weil-pbc-tensor-over-quotient-ring",
-  "lem-weil-pbc-tensor-right-exact",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-artin-rees"
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-artin-rees",
+  "lem-sc-p1-tor-dimension-shift-natural"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0911 (lemma-tor-strictly-pro-zero, line 6449), proof lines 6462--6473; the identification of Tor_1 and the dimension shift, which the source states without proof, are written out from the definition of Tor by a free resolution (Algebra, Section 00LY)"
+  "place": "Stacks Tag 0911, proof; Y3, 2026-10-13: finite-presentation variant using the existing natural low-degree Tor exact sequence and natural dimension-shift theorem. Artin–Rees, tensor-quotient compatibility, induction, and universe transport proved in Lean; no new holes."
  },
  "mathlib_searches": [
   {
@@ -211,5 +209,15 @@
   "reviewer": "R-tpz",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T153225-L-1060914",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
