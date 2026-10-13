@@ -26,9 +26,154 @@
   "def-pur-derived-internal-hom",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Expand $P_m$: its degree-$q$ summands have bases $e_I$ for $|I|=q$, and $d(e_I)=\\sum_{j\\notin I}(-1)^{|\\{i\\in I:i<j\\}|}b_j^m e_{I\\cup\\{j\\}}$. Put $t_I=\\prod_{i\\in I}b_i$. The identity $t_{I\\cup\\{j\\}}b_j^m=t_I b_j^{m+1}$ verifies the forward maps are chain maps. In the dual Hom differential, the one-factor differential is $b_j^m$ from degree $-1$ to degree $0$; the transition is $(b_j,1)$. For the multi-factor dual, evaluate $\\phi_1\\otimes\\cdots\\otimes\\phi_r$ on $p_1\\otimes\\cdots\\otimes p_r$ with sign $(-1)^{\\sum_{a<b}|\\phi_b||p_a|}$, moving each $\\phi_b$ past the earlier $p_a$. Substitution into $d\\phi=-(-1)^{|\\phi|}\\phi d_P$ gives the tensor dual differential, and degree-zero transition maps introduce no extra signs. Evaluation gives $\\mathcal Hom^\\bullet(P_m,N)\\cong\\operatorname{Tot}(N\\otimes Q_m)$: on homogeneous $x\\in N^a$, $\\phi\\in Q_m^c$, send $x\\otimes\\phi$ to $(p\\mapsto\\phi(p)x)$ for $p\\in P_m^{-c}$. Inserting the Hom differential gives $d_Nx\\otimes\\phi+(-1)^a x\\otimes d_Q\\phi$, and precomposition by $P_m\\to P_{m+1}$ becomes $1_N\\otimes(Q_{m+1}\\to Q_m)$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0913, finite Koszul expansion; sites-cohomology.tex Tag 0A0A"
+   }
+  },
+  {
+   "text": "For $I$, send $a e_I$ at stage $m$ to $a/t_I^m$. This is compatible with transition multiplication by $t_I$. Every fraction is represented at a sufficiently large stage; $a/t_I^m=a'/t_I^{m'}$ means a power of $t_I$ kills the cross-multiplied difference, exactly equality at a later stage. Perform this calculation on sections and sheafify, as required for the colimit of module sheaves. The insertion term $b_j^m a e_{I\\cup\\{j\\}}$ maps to $a/t_I^m$ localized at $b_j$, with the alternating sign from step 1. Thus both differentials and the degree-zero projection agree with $C_b$ and $\\epsilon$. For $I=\\varnothing$, $t_I=1$ and this is the constant copy of $\\mathcal O$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0913, colimit calculation"
+   }
+  },
+  {
+   "text": "Let $S=\\bigoplus_m P_m$ and let $u:S\\to S$ be identity minus the map sending the $m$-th summand to the $(m+1)$-st by its transition. The cited telescope theorem gives a canonical quasi-isomorphism $T=\\operatorname{Cone}(u)\\to C_b$. Hence $R\\mathcal Hom(C_b,N)\\to R\\mathcal Hom(T,N)$ is an isomorphism. Choose the functorial K-injective resolution $N\\to I$ supplied by the derived internal Hom definition, so the latter object is represented by $\\mathcal Hom^\\bullet(T,I)$.",
+   "uses": [
+    "lem-pc-complex-hocolim-colimit",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0949 (lemma-colim-hocolim)"
+   }
+  },
+  {
+   "text": "Put $H_m=\\mathcal Hom^\\bullet(P_m,I)=\\operatorname{Tot}(I\\otimes Q_m)$ with the strict inverse transitions from step 1. Every $H_m$ is K-injective by the bounded split-projective tensor theorem (each term of $Q_m$ is finite free). Set $B=\\prod_m H_m$ termwise. The product-K-injective theorem identifies $B$ with the product in $D(\\mathcal O)$, without assuming exact products of sheaves. The sheaf Hom universal property gives $\\mathcal Hom^\\bullet(S,I)=B$; precomposition by $u$ is $1-s$, where $(s h)_m=h_{m+1}\\circ(P_m\\to P_{m+1})$. Expanding the two summands of the mapping cone and its Hom differential identifies $\\mathcal Hom^\\bullet(T,I)$ with the mapping fibre $\\operatorname{Cone}(1-s:B\\to B)[-1]$, with differential $(y,x)\\mapsto(-d_By-(1-s)x,d_Bx)$ in terms $B^{k-1}\\oplus B^k$ Explicitly a degree-$k$ Hom element has components $(\\alpha,\\beta)$ on $S[1]$ and $S$; the identification is $(\\alpha,\\beta)\\mapsto((-1)^{k-1}\\alpha,\\beta)$. Its differential becomes the displayed one by $d\\alpha=d_B\\alpha-(-1)^k u^*\\beta$ and $d\\beta=d_B\\beta$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-split-perfect-tensor-kinjective",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A0A, label lemma-colim-and-lim-of-duals, proof; K-injective input Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective); derived.tex Tag 0BK6 (lemma-product-K-injective)"
+   }
+  },
+  {
+   "text": "Apply the strict-tower theorem to $H_\\bullet$. More explicitly, the tower category is Grothendieck: colimits and filtered exactness are levelwise; if $G$ is a generator of $\\operatorname{Mod}(\\mathcal O)$, the direct sum of its images under the left adjoints to all evaluations is a generator, since evaluation detects nonzero morphisms. The ringed-site Grothendieck theorem supplies $G$, and the general degreewise-injective K-injective existence theorem therefore applies to this tower category. Take a K-injective tower resolution $H_\\bullet\\to J_\\bullet$ with injective terms. Its evaluations $J_m$ are K-injective: evaluation has the exact left adjoint which places a module at levels $1,\\ldots,m$, with identity transitions there and zero above $m$; adjunction carries maps from acyclic complexes to null-homotopic maps. Thus $H_m\\to J_m$ is a quasi-isomorphism between K-injectives and is a homotopy equivalence: the comparison principle gives $g:J_m\\to H_m$ with $g f\\simeq 1$, and its injectivity with target $J_m$ gives $f g\\simeq 1$. The termwise product map $\\prod H_m\\to\\prod J_m$ is a homotopy equivalence (take the product of the component inverses and homotopies); it commutes with $1-s$. The induced map of mapping fibres is therefore a quasi-isomorphism. For an injective tower $J^k$, the monomorphism $L_m(F)\\hookrightarrow L_{m+1}(F)$ of these evaluation left adjoints shows that $\\operatorname{Hom}(F,J_{m+1}^k)\\to\\operatorname{Hom}(F,J_m^k)$ is surjective; taking $F=J_m^k$ splits each transition. Consequently $1-s:\\prod J_m^k\\to\\prod J_m^k$ is surjective on sections: recursively choose $x_{m+1}$ lifting $x_m-y_m$, starting with $x_1=0$. Its kernel is $\\lim J_m^k$. The resulting short exact sequence of complexes gives the canonical quasi-isomorphism $(0,\\iota):\\lim J_m\\to\\operatorname{Cone}(1-s)[-1]$; its quotient cone is contractible, being the cone of the identity on $\\prod J_m$. Thus the strict-tower Roos computation identifies $\\lim_m J_m$ with $\\operatorname{Cone}(1-s:\\prod J_m\\to\\prod J_m)[-1]$. Consequently the fibre in step 4 computes the total right derived inverse limit of the strict tower $H_\\bullet$. This construction fixes the comparison by actual maps of complexes, rather than by a choice of a map between abstract triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-pur-kinjective-complex",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-abstract-derived-category",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-sp-kinjective-comparison-principle",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, label lemma-derived-limit-is-ok, proof; ringed-module version recorded by the cited strict-tower theorem"
+   }
+  },
+  {
+   "text": "The complexes $Q_m$ are K-flat: filter the bounded complex by its finitely many stupid truncations; tensoring an acyclic complex with each successive quotient gives a finite direct sum of a shift of that acyclic complex, and the degreewise split short exact sequences then give acyclicity of the total tensor complex by finite induction. Therefore $\\operatorname{Tot}(N\\otimes Q_m)\\to\\operatorname{Tot}(I\\otimes Q_m)$ is a levelwise quasi-isomorphism of strict towers. It is an isomorphism in the derived tower category, and $R\\lim$ sends it to an isomorphism. Combining steps 3--5 with its inverse gives $\\theta_N$. A quasi-isomorphism of representatives gives the same commuting diagram, by evaluation and the functorial resolution defining derived internal Hom, so $\\theta_N$ descends naturally to $D(\\mathcal O)$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), finite free bounded case; Tag 0A0A (lemma-colim-and-lim-of-duals)"
+   }
+  },
+  {
+   "text": "The compatible projections $P_m\\to\\mathcal O[0]$ induce the augmentation $T\\to C_b\\xrightarrow{\\epsilon}\\mathcal O[0]$. Precomposition sends $x\\in I$ to the family of Hom maps supported on $P_m^0$, all with value $x$; under evaluation these are exactly the degree-zero maps $I\\to I\\otimes Q_m$. Their family lies in $\\ker(1-s)$, so the map into the fibre is $x\\mapsto(0,(x)_m)$. Composing with $\\lim J_m\\to\\operatorname{Cone}(1-s)[-1]$ is the same map obtained by factoring the compatible component maps $I\\to J_m$ through $\\lim J_m$. This proves the asserted equality with the strict-tower unit, including its naturality, before passing to the derived category.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), proof, with the compatible Koszul augmentations"
+   }
+  },
+  {
+   "text": "Restriction to $\\mathcal C/U$ is exact, and $I|_U$ is K-injective by the cited restriction lemma. The Hom definition gives $\\mathcal Hom^\\bullet(L,I)|_U=\\mathcal Hom^\\bullet(L|_U,I|_U)$ by evaluating its sections over objects over $U$. Restriction preserves products (they are sectionwise), finite totalizations and the displayed cone. Hence the fibre in step 4 restricts to precisely the fibre constructed on the slice from $P_m|_U$ and $I|_U$. Steps 4--6 applied on that slice identify this fibre with the strict derived limit of the restricted tower. All evaluation, projection and $1-s$ maps are the same after further restriction, so both the comparison and the unit commute with those restrictions and with maps of $N$. No assertion that arbitrary products of sheaves are exact is used.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); label lemma-restrict-K-injective-to-open; sites-modules.tex labels lemma-extension-by-zero and lemma-extension-by-zero-exact"
+   }
+  },
+  {
+   "text": "For $r=0$, all $P_m$ and $Q_m$ are $\\mathcal O[0]$, all transitions are identities, and $C_b=\\mathcal O[0]$. In the fibre model the map $1-s:\\prod I\\to\\prod I$ is split surjective as a map of complexes: solve $x_m-x_{m+1}=y_m$ by $x_1=0$ and $x_{m+1}=x_m-y_m$ (only finite sums for each component). Its kernel is the diagonal copy of $I$. The inclusion $I\\to\\operatorname{Cone}(1-s)[-1]$ from step 7 is therefore a quasi-isomorphism giving the constant-tower identification. Under it $\\theta_N$ and the unit are the identity.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A0A (lemma-colim-and-lim-of-duals), empty Koszul system specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-complex-hocolim-colimit",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-kinjective-complex",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sp-kinjective-comparison-principle",
+  "def-sp-injective-resolutions",
+  "def-pc-kflat-complex",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-kinjective-restrict-localized"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913, with sites-cohomology.tex Tags 0A0A and 0941"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +212,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-ringed-koszul-completion-reflector",
   "by": "worker",
@@ -82,5 +227,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "worker": "stage1",
+  "summary": "Removed the redundant dual-colimit node. Computed Hom of the telescope as the explicit Roos fibre using existing finite-free K-injective, product and slice-restriction lemmas; checked strict-tower comparison, representative independence, unit and empty list.",
+  "blueprint": "Detailed form, final paragraph: derived completion computed as the displayed derived limit; finite Koszul model and completion-unit comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-complex-hocolim-colimit",
+    "why": "Generic telescope theorem identifying a degreewise filtered colimit of complexes with the homotopy colimit; the proper-base-change unit supplies no replacement for this general colimit tool."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic abelian-category product of K-injectives, valid for module sheaves on any site; needed to represent derived products without AB4*."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact slice restriction and extension-by-zero adjunction, used to verify slice compatibility."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic K-injective preservation under slice restriction; no unit-specific purity result used."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck property of module sheaves, needed for injective-term strict-tower resolution."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "General Grothendieck category K-injective resolution with injective terms, applied to the tower category."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "General abelian-category K-injective comparison, used only for the product comparison in the Roos model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-complex-hocolim-colimit",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sp-kinjective-comparison-principle"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-1fac0ded1",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-1fac0ded1 (reviewer sub-agent of L); spot-checked: Full mathematical and source review passed. One route defect remains: step 3 cites off-unit split node lem-pc-complex-hocolim-colimit without declaring it in split_report.tool_uses. Added the complete corrected DAG JSON under fixes/dag/nodes/sec-proper-base-change/. Review written to review.md; no statement or proof weakening.; 1 file(s) fixed by the reviewer"
  }
 }
