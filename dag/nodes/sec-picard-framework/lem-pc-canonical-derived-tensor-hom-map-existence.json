@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-canonical-derived-tensor-hom-map-existence",
+ "kind": "theorem",
+ "title": "Existence of normalized derived tensor-Hom maps",
+ "statement": "Let $X$ be a scheme, with the derived category of its modules and recorded derived tensor. There exists a family of functions $t_{K,L,M}:\\operatorname{Hom}(K,R\\mathcal Hom(L,M))\\to\\operatorname{Hom}(K\\otimes^L L,M)$ satisfying exactly the naturality and componentwise representative normalization of [def-pc-canonical-derived-tensor-hom-model]. No bijectivity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ (lemma-internal-hom); component calculation in sites-cohomology.tex, Tag 0A90"
+ },
+ "stmt_deps": [
+  "def-pc-canonical-derived-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Reuse `homTensorDegreewiseMap_spec`, `homTensorDegreewiseMap_comm`, and\n`homTensorDegreewiseMap_natural` for the normalized degreewise construction,\ndifferential compatibility and functoriality. The global-cochain comparison\n`homComplex_global_cochains` identifies chain maps with degree-zero cocycles and\nhomotopies with degree-minus-one boundaries; hence this comparison gives precisely\nthe stated map on homotopy classes. The pure-tensor condition in the degreewise\nspecification agrees with `schemeTensorHomUncurryComponent` by the sheaf tensor-Hom\nadjunction and symmetry. Thus these existing lemmas supply the component calculation,\nincluding its normalization, rather than an arbitrary existential isomorphism.\n\nChoose K-flat complex representatives of K and L and the fixed K-injective\nreplacement I(M). A derived map to RHom(L,M) lifts to a homotopy class of maps into\nHom(L,I(M)), since this complex is K-injective for K-flat L. Lift that class to a\nchain map. Uncurry its components by the sheaf tensor-Hom adjunction and use tensor\nsymmetry to put P before L. The total-tensor differential and the Hom differential\nagree on each (p,q) summand, so these components define a chain map. Homotopic input\nmaps give homotopic uncurried maps by the same componentwise calculation. Transport\nits localization along the tensor model comparison and inverse resolution map.\nCommon K-flat resolutions and quasi-isomorphisms into K-injectives show independence\nof representatives; componentwise composition gives the three-variable naturality.\nFor an arbitrary L in the representative equation, replace L by a K-flat Lc.\nHom(-,I(M)) and P tensor - both invert this quasi-isomorphism; the componentwise\nconstruction commutes with it. Cancel the localized comparison to obtain the exact\nrepresentative equation for L. This constructs functions only; their inverse laws\nare not asserted here.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sc-hom-tensor-degreewise",
+    "lem-sc-hom-tensor-differential",
+    "lem-sc-hom-tensor-naturality",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-differential",
+  "lem-sc-hom-tensor-naturality",
+  "lem-pur-hom-complex-global-cochains"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ; explicit normalized uncurrying and inverse currying spelled out from the source argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived tensor Hom maps via K-flat and K-injective representatives, bijective componentwise evaluation",
+   "results": "CategoryTheory.Tor'_map_app, CategoryTheory.Tor', CategoryTheory.Tor'_obj_map, CategoryTheory.Tor_map, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CochainComplex.IsKProjective.Qh_map_bijective, CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized family match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural derived tensor Hom map obtained from uncurrying chain maps and K-flat resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*tensor.*Hom|ofBijective",
+   "results": "Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact normalized family match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-13",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "canonical tensor/internal-Hom bijection used by global Hom comparison: Existence of normalized derived tensor-Hom maps",
+   "via": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomMapExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalDerivedTensorHomMapExistence.lean",
+  "declaration": "AlgebraicGeometry.exists_canonicalDerivedTensorHomMap",
+  "statement": "theorem exists_canonicalDerivedTensorHomMap (X : Scheme.{uCD}) [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] : ∃ t : ∀ K L M : schemeDerivedCategory X, (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M), IsCanonicalDerivedTensorHomMap X t",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.exists_canonicalDerivedTensorHomMap"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-924e0",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T011931-L-2764584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-924e0",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T011931-L-2764584",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, unchanged extracted definitions, source arguments, change record and report; compiled four delivery modules and all six direct importers; checked axioms."
+ }
+}

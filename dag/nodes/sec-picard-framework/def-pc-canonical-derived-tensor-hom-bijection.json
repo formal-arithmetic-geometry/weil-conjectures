@@ -41,13 +41,12 @@
  ],
  "proof": [
   {
-   "text": "Existence remains open: use K-flat representatives of both tensor inputs and the fixed K-injective replacement of the target. The componentwise tensor-Hom adjunction produces the uncurried chain maps; common resolutions give a natural family compatible with the localization tensor model map. This is the argument still required by exists_canonicalDerivedTensorHom.",
+   "text": "Use lem-pc-canonical-derived-tensor-hom-map-existence to obtain normalized natural functions t. Apply lem-pc-canonical-derived-tensor-hom-map-bijective to obtain a bijectivity proof for every component. Build each equivalence using Equiv.ofBijective. Its toFun is definitionally the original t, so both the naturality and representative normalization clauses carry over unchanged. This closes exists_canonicalDerivedTensorHom by combining the map construction with its inverse-law theorem.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-kflat-into-kinjective"
+    "lem-pc-canonical-derived-tensor-hom-map-existence",
+    "lem-pc-canonical-derived-tensor-hom-map-bijective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
    "text": "For uniqueness, choose K-flat resolutions P and Lc of complex representatives of K and L using lem-pc-kflat-resolution. Their quasi-isomorphisms give isomorphisms a:QP≅K and b:QLc≅L; essential surjectivity gives c:QMc≅M. The fixed replacement I(Mc) is K-injective, and lem-pur-hom-kflat-into-kinjective makes Hom(Lc,I(Mc)) K-injective.",
@@ -76,17 +75,18 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-canonical-derived-tensor-hom-map-existence",
+  "lem-pc-canonical-derived-tensor-hom-map-bijective",
   "lem-pc-kflat-resolution",
-  "lem-sc-derived-hom-tensor-total",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F3",
+  "group": "M4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DJ; uniqueness formalized using sites-cohomology Tag 0A96 and Mathlib KInjective.Qh_map_bijective. Existence remains open."
+  "place": "Tag 08DJ; existence reduced to normalized functions and bijectivity, with Equiv.ofBijective; existing uniqueness proof unchanged"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -152,11 +152,6 @@
   "date": "2026-10-12",
   "existing": false,
   "declarations": [
-   "AlgebraicGeometry.schemeHomKInjectiveResolution",
-   "AlgebraicGeometry.schemeHomResolutionInverse",
-   "AlgebraicGeometry.schemeDerivedInternalHomResolutionIso",
-   "AlgebraicGeometry.schemeTensorHomUncurryComponent",
-   "AlgebraicGeometry.IsCanonicalDerivedTensorHom",
    "AlgebraicGeometry.exists_canonicalDerivedTensorHom",
    "AlgebraicGeometry.IsCanonicalDerivedTensorHom.unique",
    "AlgebraicGeometry.schemeDerivedTensorHomEquiv"
@@ -187,13 +182,13 @@
   "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-6e677",
-  "group": "F3",
+  "reviewer": "X-924e0",
+  "group": "M4",
   "result": "pass",
-  "landing": "20261012T194110-L-454887",
+  "landing": "20261013T011931-L-2764584",
   "kind": "interface",
-  "note": "independent Codex review: Delivered file, DAG node, change record, report, compile result, and all five direct importers match the stage-3 review brief."
+  "note": "independent Codex review: Matched delivered Lean with DAG statements, unchanged extracted definitions, source arguments, change record and report; compiled four delivery modules and all six direct importers; checked axioms."
  }
 }
