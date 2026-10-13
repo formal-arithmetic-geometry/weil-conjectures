@@ -13,34 +13,36 @@
  ],
  "proof": [
   {
-   "text": "Take G and U as in the statement. Extension by zero at degree k and restriction to source degrees at least k+1 give maps Hom(G,M) to Hom(P,M) to Hom(U,M). Internal Homs from all source terms below k are zero.",
+   "text": "Construct the source short complex U → P → G using HomologicalComplex.ιStupidTrunc and mkHomToSingle. The latter is a chain map because each differential into degree k has zero source by hbelow. The composite is zero by to_single_hom_ext and the zero degree-k term of U. Its evaluation in each degree has a splitting: at k the projection is an isomorphism and U is zero; above k the inclusion is an isomorphism and G is zero; below k both U and P are zero. Use ShortComplex.Splitting.ofIsZeroOfIsIso and ofIsIsoOfIsZero.",
    "uses": [
     "def-pur-hom-complex"
    ],
    "elementary": true
   },
   {
-   "text": "Check the chain-map identities using d_M h - (-1)^n h d_P. The only possible incoming differential for extension is from P^(k-1), which is zero. The restriction differential uses only p and p+1, both at least k+1 for p in the tail. Split each product into its k factor and its tail factors. This proves degreewise split short exactness and hence short exactness as complexes.",
+   "text": "Prove homComplex_preservesZero from the product projections and their componentwise map formula: internal Hom precomposition by zero vanishes sectionwise. For any degreewise split source short complex, build a retraction and section in each Hom degree by the limit-fan lifts whose components precompose with the source splitting section and retraction. Fan hom-ext, homObjMap composition, and sectionwise additivity verify the three splitting identities. Splitting.shortExact and HomologicalComplex.shortExact_of_degreewise_shortExact give exactness as complexes. This is the proved private helper homComplex_degreewise_split; it needs no exactness of infinite products.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true
   },
   {
-   "text": "Repeat for N. Postcomposition by f commutes with extension and restriction on every product projection. These three maps form a morphism of the two short exact sequences. The universal product identifications with the named Hom complexes supply the three arrow isomorphisms. No infinite-product exactness is used: the product is separated into two direct factors.",
+   "text": "Map the opposite source short complex by homComplexFunctor.flip.obj M and by its value at N. Apply the degreewise-splitting helper to both. The natural transformation homComplexFunctor.flip.map f induces their morphism by ShortComplex.mapNatTrans. Its components are definitionally the three specified Hom maps; Iso.refl supplies each arrow isomorphism.",
    "uses": [
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0A8X, 08DM, 010N and 0117",
-  "place": "The bounded exact-term Hom argument, separated into its single-degree and split-tail calculations"
+  "document": "Stacks Project, Tags 0A8X and 0117; Mathlib split short-complex and degreewise exactness APIs",
+  "place": "V1 Lean proof: constructed source sequence; product lifts induced by each degreewise splitting; naturality by mapping a natural transformation"
  },
  "mathlib_searches": [
   {
@@ -120,10 +122,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261013T022421-L-3216603",
-  "kind": "interface",
+  "landing": "20261013T040803-L-3953727",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
