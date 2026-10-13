@@ -14,24 +14,41 @@
  },
  "proof": [
   {
-   "text": "Evaluate the consecutive filtration tails in degree n as finite biproducts of diagonal source and target summands. The signed projection kills all summands of index greater than p and therefore descends through the cokernel. The p-th source and target inclusions define an inverse, with the source signs squaring to one.",
+   "text": "Apply the kernel equality for the restricted signed projection g and the next-tail inclusion i. Since image(i)=ker(g), i factors through that kernel and i followed by g is zero. Form the short complex (i,g), and use ShortComplex.exact_iff_image_eq_kernel to prove exactness.",
    "uses": [
-    "def-sp-cone-horizontal-projection",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sp-cone-horizontal-step-stable"
+    "lem-sp-cone-horizontal-projection-kernel"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The explicit column-inclusion construction proves g is epic. Mathlib ShortComplex.Exact.gIsCokernel then supplies the cokernel universal property of g.",
+   "uses": [
+    "lem-sp-cone-horizontal-projection-epi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The graded piece is the cokernel of the next-tail subcomplex inclusion. Evaluation in degree n preserves this cokernel, by CokernelCofork.mapIsColimit applied to cokernelIsCokernel and HomologicalComplex.eval.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use IsColimit.coconePointUniqueUpToIso to compare the evaluated graded cokernel with gIsCokernel. Its hom is an isomorphism. The component equation comp_coconePointUniqueUpToIso_hom at WalkingParallelPair.one proves exactly the prescribed quotient-projection equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-cone-horizontal-projection",
   "def-sp-filtered-complex-subquotients",
-  "lem-sp-cone-horizontal-step-stable"
+  "lem-sp-cone-horizontal-projection-epi",
+  "lem-sp-cone-horizontal-projection-kernel"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/012X",
-  "place": "Objectwise quotient construction."
+  "place": "V1: exactness and epimorphic projection imply cokernel, followed by evaluation and uniqueness of cokernels."
  },
  "mathlib_searches": [
   {
@@ -138,12 +155,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T232142-L-1993371",
+  "landing": "20261013T024051-L-3340313",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,167 @@
+{
+ "id": "lem-sp-cone-horizontal-projection-epi",
+ "kind": "statement",
+ "title": "The restricted signed horizontal projection is epic",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] in which every natural-indexed bicomplex has a total complex [def-sp-double-complex-total]. Let $f:A\\to B$ be a morphism of bicomplexes of shape $\\mathrm{up}(\\mathbb N)$ in both directions, and put $M=\\operatorname{Cone}(\\operatorname{extend}(\\operatorname{Tot}(f)))$, with extension along $\\mathbb N\\hookrightarrow\\mathbb Z$. Let $F$ be a decreasing subcomplex filtration of $M$ with $F.\\mathrm{complexStep}(r,m)=\\mathrm{coneHorizontalStep}(f,r,m)$ for all $r,m\\in\\mathbb Z$ [def-sp-filtered-complex-subquotients; lem-sp-cone-horizontal-step-stable]. For $p\\in\\mathbb N$, $n\\in\\mathbb Z$, put $T=\\operatorname{Cone}(\\operatorname{extend}(f.f(p)))[-p]$ and let $g:(F^pM)^n\\to T^n$ be the filtration inclusion followed by the signed column projection [def-sp-cone-horizontal-projection]. Then $g$ is an epimorphism.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cone-horizontal-projection",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Displayed first-filtration formula before Lemma 12.25.1 (label lemma-double-complex), and the source/target cone refinement of lem-sp-cone-horizontal-quotient-iso-exists, proof step 1."
+ },
+ "proof": [
+  {
+   "text": "Construct the extended column inclusion as the extension isomorphism followed by coneHorizontalSummand when m>=p, and zero otherwise. The totalDesc inclusion equation proves that the horizontal projection retracts it; when m<p its source is a zero object.",
+   "uses": [
+    "def-sp-cone-horizontal-projection",
+    "lem-sp-cone-horizontal-step-stable"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the two extended column inclusions with the source and target cone inclusions, including the required degree transports. Their images lie in the p-tail finite supremum. Apply the public Mathlib declarations Subobject.factors_of_le and imageSubobject_factors_comp_self directly to obtain factorization through the tail, without restating the private factors_image helper of ConeHorizontalStepStable. Multiply the source inclusion by (-1)^p and assemble the section with the column-cone biproduct decomposition. The source and target projection equations prove section followed by projection equals the identity because ((-1)^p)^2=1.",
+   "uses": [
+    "def-sp-cone-horizontal-projection",
+    "lem-sp-cone-horizontal-step-stable"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The assembled section factors through the p-tail using precomposition, integer scalar multiplication and addition of subobject factorizations. Use hF and imageSubobject_mono to factor it through the monic degreewise arrow of F.step p. This gives a SplitEpi of g, hence g is epic.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cone-horizontal-projection",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Displayed first-filtration formula before Lemma 12.25.1 (label lemma-double-complex), and the source/target cone refinement of lem-sp-cone-horizontal-quotient-iso-exists, proof step 1.",
+  "note": "Detailed cone refinement written by V1 from the first-filtration formula; the source omits the proof of Lemma 12.25.1."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-13T01:14:48Z",
+   "tool": "leansearch",
+   "query": "a coordinate projection restricted to the tail of a finite direct sum is a split epimorphism",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-13T01:14:47Z",
+   "tool": "leanfinder",
+   "query": "a morphism with a right inverse is an epimorphism",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.SplitEpi.epi",
+    "CategoryTheory.IsSplitEpi.epi",
+    "CategoryTheory.MorphismProperty.IsStableUnderRetracts.epimorphisms",
+    "CategoryTheory.IsSplitEpi",
+    "CategoryTheory.isSplitEpi_of_epi",
+    "CategoryTheory.SplitEpi",
+    "CategoryTheory.SplitEpiCategory.isSplitEpi_of_epi",
+    "CategoryTheory.SplitEpiCategory"
+   ],
+   "digest": "c91cab7867b61563",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.SplitEpi.epi, CategoryTheory.IsSplitEpi.epi, CategoryTheory.MorphismProperty.IsStableUnderRetracts.epimorphisms, CategoryTheory.IsSplitEpi, CategoryTheory.isSplitEpi_of_epi, CategoryTheory.SplitEpi, CategoryTheory.SplitEpiCategory.isSplitEpi_of_epi, CategoryTheory.SplitEpiCategory",
+   "verdict": "Generic split-epi and biproduct APIs exist; the explicit signed projection and tail-image factorization are project definitions, requiring the construction proved here."
+  },
+  {
+   "t": "2026-10-13T01:14:47Z",
+   "tool": "grep",
+   "query": "structure SplitEpi|def epi_of_split_epi|IsSplitEpi.*Epi|epi_of_epi",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/Factorizations/Basic.lean",
+    "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+    "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+    "Mathlib/Algebra/Homology/HomologicalComplex.lean",
+    "Mathlib/Algebra/Homology/HomologicalComplex.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/Abelian.lean"
+   ],
+   "digest": "1adfc59d4f939a3c",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/Algebra/Homology/Factorizations/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean",
+   "verdict": "Generic split-epi and biproduct APIs exist; the explicit signed projection and tail-image factorization are project definitions, requiring the construction proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sp-cone-horizontal-quotient-iso-exists, proof step 1: p-th source and target inclusions define a section",
+   "via": [
+    "lem-sp-cone-horizontal-quotient-iso-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ConeHorizontalProjectionEpi",
+  "file": "lean/Sheaf/Algebra/Homology/ConeHorizontalProjectionEpi.lean",
+  "declaration": "HomologicalComplex₂.coneHorizontal_projection_epi",
+  "statement": "theorem coneHorizontal_projection_epi\n    {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}\n    (f : A ⟶ B)\n    (F : DecreasingFiltration (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (total.map f (ComplexShape.up ℕ))\n        ComplexShape.embeddingUpNat)))\n    (hF : ∀ p n : ℤ, F.complexStep p n = coneHorizontalStep f p n)\n    (p : ℕ) (n : ℤ) :\n    Epi ((F.step (p : ℤ)).arrow.f n ≫ coneHorizontalProjection f p n)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-sp-cone-horizontal-projection-kernel",
+ "kind": "statement",
+ "title": "The next horizontal tail is the kernel of the restricted signed projection",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] in which every natural-indexed bicomplex has a total complex [def-sp-double-complex-total]. Let $f:A\\to B$ be a morphism of bicomplexes of shape $\\mathrm{up}(\\mathbb N)$ in both directions, and put $M=\\operatorname{Cone}(\\operatorname{extend}(\\operatorname{Tot}(f)))$, with extension along $\\mathbb N\\hookrightarrow\\mathbb Z$. Let $F$ be a decreasing subcomplex filtration of $M$ with $F.\\mathrm{complexStep}(r,m)=\\mathrm{coneHorizontalStep}(f,r,m)$ for all $r,m\\in\\mathbb Z$ [def-sp-filtered-complex-subquotients; lem-sp-cone-horizontal-step-stable]. For $p\\in\\mathbb N$, $n\\in\\mathbb Z$, put $T=\\operatorname{Cone}(\\operatorname{extend}(f.f(p)))[-p]$ and let $g:(F^pM)^n\\to T^n$ be the filtration inclusion followed by the signed column projection [def-sp-cone-horizontal-projection]. Let $i:(F^{p+1}M)^n\\to(F^pM)^n$ be the degreewise inclusion given by filtration antitonicity. Then $\\operatorname{im}(i)=\\ker(g)$ as subobjects of $(F^pM)^n$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cone-horizontal-projection",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Displayed first-filtration formula before Lemma 12.25.1 (label lemma-double-complex), and the source/target cone refinement of lem-sp-cone-horizontal-quotient-iso-exists, proof step 1."
+ },
+ "proof": [
+  {
+   "text": "Identify the total degree m with the finite diagonal biproduct of K^{h,m-h} for 0<=h<=m using the totalComplex coproduct inclusions and totalDesc. For negative m the extended total object is zero. The cone biproduct is the sum of the source diagonal at n+1 and the target diagonal at n. Each summand inclusion is monic and these inclusions give biproduct coordinates. The finite supremum of their images for h>=p is therefore the image of the inclusion of the sub-biproduct on exactly those coordinates; this is coneHorizontalStep f p n.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-sp-cone-horizontal-step-stable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the tail coordinates the signed projection g keeps only the two coordinates at index p. Its source coefficient is (-1)^p and its target coefficient is 1, both invertible. The kernel of this projection is the sub-biproduct with both index-p coordinates deleted, by the finite-biproduct kernel calculation. All the remaining indices are >=p+1, so its ambient image is precisely coneHorizontalStep f (p+1) n. If n<p-1 the p-tail and target are zero; if n=p-1 there is only a source coordinate, whose projection is invertible. These cases give the same kernel description.",
+   "uses": [
+    "def-sp-cone-horizontal-projection",
+    "lem-sp-cone-horizontal-step-stable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation sends the monic subcomplex arrows and the inclusion of F.step (p+1) into F.step p to monomorphisms, and their composite is the next-step arrow. The equality hF identifies their ambient image with the next coordinate tail. Pulling back that ambient subobject along the monic arrow of F.step p identifies image(i) inside (F.step p).X n with the kernel calculated above. This proves equality of subobjects rather than only an abstract isomorphism of their underlying objects.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cone-horizontal-projection",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Displayed first-filtration formula before Lemma 12.25.1 (label lemma-double-complex), and the source/target cone refinement of lem-sp-cone-horizontal-quotient-iso-exists, proof step 1.",
+  "note": "Detailed cone refinement written by V1 from the first-filtration formula; the source omits the proof of Lemma 12.25.1."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-13T00:56:08Z",
+   "tool": "leansearch",
+   "query": "kernel of a projection on a finite direct sum is the sum of the other summands",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-13T01:03:46Z",
+   "tool": "leanfinder",
+   "query": "kernel of the coordinate projection of a finite biproduct is the sum of all other summands",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Limits.kernelBiproductToSubtypeIso",
+    "CategoryTheory.Limits.kernelBiproductπIso",
+    "CategoryTheory.Limits.kernelBiproductToSubtypeIso_hom",
+    "CategoryTheory.Limits.instHasKernelToSubtype",
+    "CategoryTheory.Limits.instHasKernelπ",
+    "CategoryTheory.Limits.kernelForkBiproductToSubtype",
+    "CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit",
+    "CategoryTheory.Limits.kernelBiproductπIso_hom"
+   ],
+   "digest": "f91f8548c8327ed5",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Limits.kernelBiproductToSubtypeIso, CategoryTheory.Limits.kernelBiproductπIso, CategoryTheory.Limits.kernelBiproductToSubtypeIso_hom, CategoryTheory.Limits.instHasKernelToSubtype, CategoryTheory.Limits.instHasKernelπ, CategoryTheory.Limits.kernelForkBiproductToSubtype, CategoryTheory.Limits.kernelForkBiproductToSubtype_isLimit, CategoryTheory.Limits.kernelBiproductπIso_hom",
+   "verdict": "Generic finite-biproduct kernels are available, but applying them requires identifying the concrete image-supremum tails and their degreewise representatives. No direct specialization for coneHorizontalStep was found."
+  },
+  {
+   "t": "2026-10-13T01:03:46Z",
+   "tool": "grep",
+   "query": "kernelBiproductπIso|kernelBiproductToSubtypeIso|cokernelBiproductFromSubtypeIso",
+   "sub": "",
+   "ok": true,
+   "n_hits": 3,
+   "note": "",
+   "top": [
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean"
+   ],
+   "digest": "478ac075f5002898",
+   "date": "2026-10-13",
+   "results": "3 hits: Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "verdict": "Generic finite-biproduct kernels are available, but applying them requires identifying the concrete image-supremum tails and their degreewise representatives. No direct specialization for coneHorizontalStep was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sp-cone-horizontal-quotient-iso-exists, proof step 1: projection kills precisely the next tail",
+   "via": [
+    "lem-sp-cone-horizontal-quotient-iso-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ConeHorizontalProjectionKernel",
+  "file": "lean/Sheaf/Algebra/Homology/ConeHorizontalProjectionKernel.lean",
+  "declaration": "HomologicalComplex₂.coneHorizontal_projection_kernel",
+  "statement": "theorem coneHorizontal_projection_kernel\n    {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}\n    (f : A ⟶ B)\n    (F : DecreasingFiltration (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (total.map f (ComplexShape.up ℕ))\n        ComplexShape.embeddingUpNat)))\n    (hF : ∀ p n : ℤ, F.complexStep p n = coneHorizontalStep f p n)\n    (p : ℕ) (n : ℤ) :\n    imageSubobject ((Subobject.ofLE (F.step ((p : ℤ) + 1))\n      (F.step (p : ℤ)) (F.antitone_step (by omega))).f n) =\n      kernelSubobject ((F.step (p : ℤ)).arrow.f n ≫ coneHorizontalProjection f p n)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T024051-L-3340313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
