@@ -12,22 +12,36 @@
  },
  "proof": [
   {
-   "text": "Use the tensor-Hom adjunction to identify maps into internal Hom with maps out of a tensor product. Tensoring with a fixed module preserves coproducts because it is a left adjoint, and curry the descended map. Naturality gives the fan factors and the coproduct universal property gives uniqueness.",
+   "text": "For a presheaf map f : A → homObj M N, evaluate f_U(a) at the identity slice object to obtain the pairing b_U(a,m). Naturality of f and of each local map gives restriction compatibility of b. Construct its transpose M → homObj A N: at U, m maps to the local map whose component at W → U sends a to b_W(a,m|W). Linearity in a and m follows from the linearity of f and its values; restriction compatibility gives both required naturality laws. This is the local bilinear correspondence underlying Stacks 03EO and uses only the existing internal-Hom construction.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed"
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the transpose twice at U, a and W → U, m. Naturality of f identifies its value with f_U(a)_W(m), so transposition is involutive. Evaluate precomposition by g : M′ → M in the same way: naturality of g gives transpose(f ≫ homObjMap g id) = g ≫ transpose(f). Both constructions lift from presheaves to sheaf morphisms because sheaf morphisms are precisely the underlying presheaf morphisms.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a fan s with vertex A, transpose its projections into maps M i → homObj A N. Descend this family through the given colimit cofan, obtaining c.pt → homObj A N, then transpose back for the lift. Involutivity and the precomposition formula turn the fan factorization into Cofan.IsColimit.fac. For uniqueness, transpose the candidate lift and apply Cofan.IsColimit.hom_ext to its composites with all injections. Involutivity makes transposition injective. Fan.IsLimit.mk packages these data. The proof applies equally to an empty indexing type.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-sheaf-modules-tensor-closed"
+  "def-pur-sheaf-hom"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A2",
+  "group": "H2",
   "date": "2026-10-13",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK and Tag 03EO"
+  "document": "literature/stacks-project/sites-modules.tex; existing InternalHom implementation",
+  "place": "Section 03EK and Tag 03EO, local bilinear pairing; direct transposition argument written by H2 without tensor or sheafification"
  },
  "mathlib_searches": [
   {
@@ -90,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-c8c85",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261013T054207-L-440173",
+  "landing": "20261013T100001-L-2461354",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature to its node, the transposition proof to the updated DAG, and the private scopes to the change record; delivery and sole direct importer compile cleanly, and all axiom probes contain only the three permitted axioms."
  }
 }
