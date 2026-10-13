@@ -1,0 +1,157 @@
+{
+ "id": "lem-pbc-etale-additive-cech-inverse-image",
+ "kind": "statement",
+ "title": "Etale additive Cech coordinates and inverse-image cocycles",
+ "statement": "Let g:Y→X be a morphism of quasi-compact separated schemes [def-pc-scheme], and let U,V be finite open covers indexed by the same type, with all intersections indexed by positive-length tuples affine and V-tuples contained in the g-preimages of U-tuples. Let A_Z be the fixed lifted additive structure sheaf [def-sc-etale-additive-structure-restriction], and let mu_Z(r) be an endomorphism whose every section component sends lifted x to lifted x times the structural pullback of r. For each n≥0, there are additive equivalences a:H^n(A_X)→H^n(C(U,O_X)) and aprime:H^n(A_Y)→H^n(C(V,O_Y)), where C denotes cechOver for the unit module and Z.toSpecGamma [lem-pc-flat-cech-base-change]. They intertwine mu_Z(r) with multiplication by r on Cech homology. For each etale class x, there are source and target cycles z,zprime whose classes are a(x) and aprime(H(q_g)(g_H^*x)), where q_g is adjoint to structural pullback [def-weil-pbc-inverse-image, def-weil-pbc-etale-cohomology]. On every tuple the target cycle coordinate is the source coordinate mapped by unitToPushforwardObjUnit and then restricted along the tuple inclusion. This compares etale cohomology only with section Cech homology; it asserts no ordinary Ext inverse-image identity.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated-case affine-cover proof; Tag 01FD, Lemma 20.15.1, cocycle-coordinate rule and augmented double-complex diagram; the same argument on the small etale site."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the natural unit section coordinates to identify the fixed lifted additive structure sheaf with lifted unit tensor sections. Restrict to the affine opens of U and V. The coefficient-lift finite Cech comparison is obtained from affine etale acyclicity and the injective Cech double complex. Lower each finite product coordinate, restrict scalars along Z.toSpecGamma and take homology to produce additive equivalences a and aprime to the ordinary unit Cech complexes. In degree zero use sections and gluing. Empty schemes, empty intersections and empty index types give zero groups.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural",
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix these equivalences using the coefficient and global-section augmentations. The stipulated mu maps act on each coordinate by multiplication with the restriction of r. This commutes with the Cech differential, both augmentations and lowering the lift. Therefore the edge equivalences take Sheaf.H.map(mu r) to multiplication by r on cechOver homology. The canonical map to Spec of global functions has scalar homomorphism the identity by GammaSpecIso.inv_hom_id.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form the section chain map for the refined cover by structural pullback on each tuple intersection. The refinement inclusion lets each source tuple section restrict to the target tuple. The adjunction equation identifies the underlying coefficient section map with the adjoint of etaleAdditiveSheafToLowerStar. Choose normalized section comparisons by exists_resolutionSection_canonical_comparison. Lift this map to resolutions and compare the coefficient and global-section augmentations in the double-complex diagram of 01FD. The normalized resolution transfer identifies the global-resolution map with Etale.cohomologyMap; compose with an augmentation-preserving lift of the adjoint coefficient map into a resolution of the target additive sheaf. Its extMk cocycle formula identifies the induced homology map with Sheaf.H.map of that coefficient map. Naturality here is established from the augmentation diagram, not inferred from the bare Nonempty finite-Cech equivalence. Invert the augmentation quasi-isomorphisms; the resulting homology map is conjugated by a and aprime. Represent a(x) by a cycle z (homologyPi is surjective in ModuleCat), and let zprime be its section-chain-map image. The chain-map property makes it a cycle and its coordinates and classes have exactly the stated three identities.",
+   "uses": [
+    "lem-weil-pbc-etale-resolution-section-canonical-data",
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+  "lem-sc-etale-tensor-unit-sections-natural",
+  "lem-weil-pbc-etale-resolution-section-canonical-data",
+  "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated-case affine-cover proof; Tag 01FD, Lemma 20.15.1, cocycle-coordinate rule and augmented double-complex diagram; the same argument on the small etale site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology quasi coherent structure sheaf comparison natural pullback",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso",
+   "verdict": "No complete canonical etale-to-Cech inverse-image comparison. Generic sheaf/module pullback tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapFunctor\"",
+   "date": "2026-10-13",
+   "results": "12 hits: CategoryTheory.Over.mapFunctor, CategoryTheory.Under.mapFunctor, CategoryTheory.Over.mapFunctor_obj, CategoryTheory.Under.mapFunctor_obj, CategoryTheory.Over.mapFunctor_map, CategoryTheory.Under.mapFunctor_map, CategoryTheory.PrelaxFunctor.mapFunctor, CategoryTheory.PrelaxFunctor.mkOfHomFunctors_mapFunctor",
+   "verdict": "No complete canonical etale-to-Cech inverse-image comparison. Generic sheaf/module pullback tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cech|cech.*etale",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No complete canonical etale-to-Cech inverse-image comparison. Generic sheaf/module pullback tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaf cohomology computed by affine open Cech complex naturally in inverse image",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.CanonicalAdditiveCohomologyComparison",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier additive structure-sheaf comparison: affine etale Cech edge maps and structural pullback on cocycles, before comparison with ordinary Ext.",
+   "via": [
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_etaleAdditive_cech_inverseImage",
+  "statement": "theorem exists_etaleAdditive_cech_inverseImage\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated]\n    {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hV : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, V (y l)))\n    (hcover : iSup U = ⊤) (hcover' : iSup V = ⊤)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (μX : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))\n    (μY : Γ(Y, ⊤) → (Y.etaleAdditiveSheaf ⟶ Y.etaleAdditiveSheaf))\n    (hμX : ∀ r (W : X.Etaleᵒᵖ) (x : X.etaleAdditiveSheaf.obj.obj W),\n      (μX r).hom.app W x =\n        ULift.up ((show Γ(W.unop.left, ⊤) from x.down) *\n          (show Γ(W.unop.left, ⊤) from W.unop.hom.appTop r)))\n    (hμY : ∀ r (W : Y.Etaleᵒᵖ) (x : Y.etaleAdditiveSheaf.obj.obj W),\n      (μY r).hom.app W x =\n        ULift.up ((show Γ(W.unop.left, ⊤) from x.down) *\n          (show Γ(W.unop.left, ⊤) from W.unop.hom.appTop r)))\n    (n : ℕ) :\n    ∃ a : Sheaf.H X.etaleAdditiveSheaf n ≃+\n        (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n,\n    ∃ a' : Sheaf.H Y.etaleAdditiveSheaf n ≃+\n        (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).homology n,\n      (∀ r x, a (Sheaf.H.map (μX r) n x) = r • a x) ∧\n      (∀ r x, a' (Sheaf.H.map (μY r) n x) = r • a' x) ∧\n      ∀ x,\n        ∃ z : (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).cycles n,\n        ∃ z' : (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).cycles n,\n          (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homologyπ n z =\n            a x ∧\n          (cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).homologyπ n z' =\n            a' (Sheaf.H.map\n              (((Etale.upperStarLowerStarAdjunction _ g).homEquiv _ _).symm\n                (Scheme.etaleAdditiveSheafToLowerStar g)) n\n              (Etale.cohomologyMap g X.etaleAdditiveSheaf n x)) ∧\n          ∀ y : Fin (n + 1) → ι,\n            cechCoordinate Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf) n y\n                ((cechOver Y.toSpecΓ V (SheafOfModules.unit Y.ringCatSheaf)).iCycles n z') =\n              (show Y.Modules from SheafOfModules.unit Y.ringCatSheaf).presheaf.map\n                (homOfLE (hinter n y)).op\n                ((SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom).val.app\n                  (op (⨅ l, U (y l)))\n                  (cechCoordinate X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf) n y\n                    ((cechOver X.toSpecΓ U\n                      (SheafOfModules.unit X.ringCatSheaf)).iCycles n z)))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-tensor-unit-sections-natural",
+    "why": "Generic section coordinates for the unit module; no curve-calculation route is replaced."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+    "why": "Generic finite affine-cover computation of lifted associated sheaf cohomology; the new statement adds normalization and morphism compatibility."
+   }
+  ],
+  "blueprint": "This is only the etale-to-Cech leg of the additive comparison in the Artin-Schreier argument."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100113-L-2482740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100113-L-2482740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
