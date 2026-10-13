@@ -1,132 +1,125 @@
 {
- "id": "lem-sc-picard-universal-rank-match-locus-lfp-core",
- "kind": "statement",
- "title": "Construction of a locally finitely presented universal rank-match representative",
- "statement": "Let f : X → S be flat, proper and locally of finite presentation, and let E be a finite locally free module on X. There exist a scheme W′ and an immersion j′ : W′ → S locally of finite presentation such that, for every g : T → S, g factors through j′ if and only if PicardUniversalRankMatch f E g (def-sc-picard-universal-rank-match). This construction assumes no pre-existing representing immersion and asserts no comparison isomorphism.",
- "stmt_deps": [
-  "def-sc-picard-universal-rank-match"
- ],
- "source": {
-  "document": "Stacks Project",
-  "place": "Tags 0BDP, first three proof paragraphs; 0B91; 0BDL. Rank decomposition adapted to omit the structure-pushforward hypothesis by excluding mixed-rank fibres."
- },
- "proof": [
-  {
-   "text": "Apply the single-image locally finitely presented locus theorem to F=E and F=dual E, using finite local freeness of dual E. Obtain two immersions j1 and j2 and their single-image universal properties.",
-   "uses": [
-    "lem-sc-picard-universal-single-rank-locus-lfp"
-   ],
-   "elementary": false
+  "id": "lem-sc-picard-universal-rank-match-locus-lfp-core",
+  "kind": "statement",
+  "title": "Construction of a locally finitely presented universal rank-match representative",
+  "statement": "Let f : X → S be flat, proper and locally of finite presentation, and let E be a finite locally free module on X. There exist a scheme W′ and an immersion j′ : W′ → S locally of finite presentation such that, for every g : T → S, g factors through j′ if and only if PicardUniversalRankMatch f E g (def-sc-picard-universal-rank-match). This construction assumes no pre-existing representing immersion and asserts no comparison isomorphism.",
+  "stmt_deps": [
+    "def-sc-picard-universal-rank-match"
+  ],
+  "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0BDP, first three proof paragraphs; 0B91; 0BDL. Rank decomposition adapted to omit the structure-pushforward hypothesis by excluding mixed-rank fibres."
   },
-  {
-   "text": "Their fibre product over S has structural map pullback.fst followed by j1. Immersion and local finite presentation follow from the Mathlib base-change and composition instances.",
-   "uses": [],
-   "elementary": true
+  "proof": [
+    {
+      "text": "The images of each clopen rank locus of E and its complement are clopen, by openness of flat locally finitely presented morphisms and closedness of proper morphisms. Inside the clopen image of X, remove the image of the complement of rank r to obtain pairwise disjoint clopen homogeneous-rank components S_r. A mixed-rank fibre has an open neighbourhood in the images of two different ranks, meeting no S_r; the empty-fibre component is clopen. Testing residue fields shows every map satisfying universal rank matching lands in the union of the homogeneous and empty-fibre components.",
+      "uses": [],
+      "elementary": true
+    },
+    {
+      "text": "On S_r, the derived direct images of E and its dual are perfect and satisfy arbitrary derived base change. Their pullbacks have no negative cohomology; hence locally their Tor amplitude starts at zero.",
+      "uses": [
+        "lem-pc-rf-perfect-base-change"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the universal lowest-cohomology rank-r locus theorem to both complexes on amplitude charts and take their fibre product. The comparison with ordinary pushforward and the fixed rank of E identify this universal property with the rank-match clause.",
+      "uses": [
+        "lem-sc-perfect-h0-locally-closed"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The local representing immersions glue uniquely on chart overlaps. Unite the disjoint S_r representatives and the empty-fibre component. Immersion and local finite presentation are local on the target; mixed-rank fibres have neighbourhoods meeting none of these representatives. On empty fibres all pushforwards are zero and the pulled-back rank clause is vacuous, so rank zero supplies that component.",
+      "uses": [],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-h0-locally-closed"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "Stacks Project",
+    "place": "Tags 0BDP, 0B91, 0BDL; construction portion, with homogeneous-rank components replacing the connected-fibre rank decomposition; reviewed by H1"
   },
-  {
-   "text": "The simultaneous rank condition implies the two single conditions by dropping one direct-image rank witness each time. The converse is the synchronization theorem, including empty inverse images without any structure-sheaf assumption.",
-   "uses": [
-    "lem-sc-picard-universal-rank-match-synchronization",
-    "def-sc-picard-universal-rank-match",
-    "def-sc-picard-universal-single-rank-match"
-   ],
-   "elementary": true
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "rank.*locus|locus.*rank",
+      "results": "0 hits; ; ",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsImmersion, LocallyOfFinitePresentation",
+      "results": "0 hits; loogle: unknown identifier 'IsImmersion'; ",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A proper flat family and a finite locally free module have an immersion representing universal equality of the module rank and both direct image ranks",
+      "results": "8 hits; ; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.flat_iff, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+      "date": "2026-10-13",
+      "verdict": "no exact construction theorem; generic morphism APIs only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "A proper flat family has a finitely presented immersion representing universal equality of finite locally free module rank and direct image ranks",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationIso",
+    "date": "2026-10-13",
+    "group": "H1"
   },
-  {
-   "text": "A factor through the fibre product projects to factors through each locus. Conversely the two single conditions give factors a,b through j1,j2, and their equal composites to S permit pullback.lift a b. Its first projection identity proves the required factorization. This is the universal property claimed by the original theorem.",
-   "uses": [
-    "lem-sc-picard-universal-single-rank-locus-lfp",
-    "lem-sc-picard-universal-rank-match-synchronization"
-   ],
-   "elementary": true
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-picard-universal-rank-match-locus-lfp-iso",
+      "place": "stage-3 decomposition"
+    },
+    "same_as": []
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore",
+    "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalRankMatchLocusFinitePresentationCore.lean",
+    "declaration": "AlgebraicGeometry.Scheme.exists_picardUniversalRankMatchLocus_finitePresentation_core",
+    "statement": "theorem exists_picardUniversalRankMatchLocus_finitePresentation_core\n    {X S : Scheme.{u}}\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] :\n    ∃ (W' : Scheme.{u}) (j' : W' ⟶ S),\n      IsImmersion j' ∧ LocallyOfFinitePresentation j' ∧\n      ∀ {T : Scheme.{u}} (g : T ⟶ S),\n        (∃ h : T ⟶ W', h ≫ j' = g) ↔ PicardUniversalRankMatch f E g",
+    "branch": "sheaf-dag",
+    "by": "H1",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261013T015555-L-3020919",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H1",
+    "result": "pass",
+    "landing": "20261013T015555-L-3020919",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-sc-picard-universal-single-rank-locus-lfp",
-  "lem-sc-picard-universal-rank-match-synchronization",
-  "def-sc-picard-universal-rank-match",
-  "def-sc-picard-universal-single-rank-match"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 0BDP, 0B91 and 0BDL; X2 Lean assembly through one single-image locus applied twice, with a fully proved synchronization lemma including empty fibres."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "rank.*locus|locus.*rank",
-   "results": "0 hits; ; ",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsImmersion, LocallyOfFinitePresentation",
-   "results": "0 hits; loogle: unknown identifier 'IsImmersion'; ",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A proper flat family and a finite locally free module have an immersion representing universal equality of the module rank and both direct image ranks",
-   "results": "8 hits; ; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.flat_iff, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
-   "date": "2026-10-13",
-   "verdict": "no exact construction theorem; generic morphism APIs only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "A proper flat family has a finitely presented immersion representing universal equality of finite locally free module rank and direct image ranks",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationIso",
-  "date": "2026-10-13",
-  "group": "H1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-picard-universal-rank-match-locus-lfp-iso",
-   "place": "stage-3 decomposition"
-  },
-  "same_as": []
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardUniversalRankMatchLocusFinitePresentationCore.lean",
-  "declaration": "AlgebraicGeometry.Scheme.exists_picardUniversalRankMatchLocus_finitePresentation_core",
-  "statement": "theorem exists_picardUniversalRankMatchLocus_finitePresentation_core\n    {X S : Scheme.{u}}\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] :\n    ∃ (W' : Scheme.{u}) (j' : W' ⟶ S),\n      IsImmersion j' ∧ LocallyOfFinitePresentation j' ∧\n      ∀ {T : Scheme.{u}} (g : T ⟶ S),\n        (∃ h : T ⟶ W', h ≫ j' = g) ↔ PicardUniversalRankMatch f E g",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
-  "result": "pass",
-  "landing": "20261013T015555-L-3020919",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
-  "result": "pass",
-  "landing": "20261013T060430-L-586464",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

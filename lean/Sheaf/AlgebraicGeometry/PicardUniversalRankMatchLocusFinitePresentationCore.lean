@@ -4,8 +4,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocusFinitePresentation
-import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchSynchronization
+import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -54,45 +54,5 @@ theorem exists_picardUniversalRankMatchLocus_finitePresentation_core
       IsImmersion j' ∧ LocallyOfFinitePresentation j' ∧
       ∀ {T : Scheme.{u}} (g : T ⟶ S),
         (∃ h : T ⟶ W', h ≫ j' = g) ↔ PicardUniversalRankMatch f E g := by
-  have : (Modules.dual E).IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual E
-  obtain ⟨W₁, j₁, hj₁, hfp₁, hW₁⟩ :=
-    exists_picardUniversalSingleRankLocus_finitePresentation f E E
-  obtain ⟨W₂, j₂, hj₂, hfp₂, hW₂⟩ :=
-    exists_picardUniversalSingleRankLocus_finitePresentation f E (Modules.dual E)
-  have : IsImmersion j₁ := hj₁
-  have : IsImmersion j₂ := hj₂
-  have : LocallyOfFinitePresentation j₁ := hfp₁
-  have : LocallyOfFinitePresentation j₂ := hfp₂
-  let j : pullback j₁ j₂ ⟶ S := pullback.fst j₁ j₂ ≫ j₁
-  refine ⟨pullback j₁ j₂, j, inferInstance, inferInstance, ?_⟩
-  intro T g
-  have hmatch : PicardUniversalRankMatch f E g ↔
-      PicardUniversalSingleRankMatch f E E g ∧
-        PicardUniversalSingleRankMatch f E (Modules.dual E) g := by
-    constructor
-    · intro hR
-      constructor
-      · intro T' h t
-        obtain ⟨U, ht, r, hE, _, hr⟩ := hR h t
-        exact ⟨U, ht, r, hE, hr⟩
-      · intro T' h t
-        obtain ⟨U, ht, r, _, hd, hr⟩ := hR h t
-        exact ⟨U, ht, r, hd, hr⟩
-    · rintro ⟨hE, hd⟩
-      exact picardUniversalRankMatch_of_singleRankMatch_without_unit f E g hE hd
-  rw [hmatch]
-  constructor
-  · rintro ⟨h, hh⟩
-    constructor
-    · exact (hW₁ g).mp ⟨h ≫ pullback.fst j₁ j₂, by
-        simpa only [Category.assoc] using hh⟩
-    · exact (hW₂ g).mp ⟨h ≫ pullback.snd j₁ j₂, by
-        rw [Category.assoc, ← pullback.condition]
-        exact hh⟩
-  · rintro ⟨h₁, h₂⟩
-    obtain ⟨a, ha⟩ := (hW₁ g).mpr h₁
-    obtain ⟨b, hb⟩ := (hW₂ g).mpr h₂
-    refine ⟨pullback.lift a b (ha.trans hb.symm), ?_⟩
-    dsimp only [j]
-    rw [← Category.assoc, pullback.lift_fst, ha]
+  sorry
 end AlgebraicGeometry.Scheme

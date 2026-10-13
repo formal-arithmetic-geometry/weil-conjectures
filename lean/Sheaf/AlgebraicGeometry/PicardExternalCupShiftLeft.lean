@@ -8,12 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.PicardExternalCupLeftHomologyLadder
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-
 /-! # Left dimension shifting for external cup
 
 Source: Stacks Project, Varieties, Tag 0BED, proof of lemma-kunneth.
@@ -74,51 +68,6 @@ theorem picardExternalCupCochain_isIso_shiftLeft
     (c : picardExternalTotal f g F G ⟶
       picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))
     (hc : IsPicardExternalCupCochain f g F G c) (n : ℕ) :
-    IsIso (HomologicalComplex.homologyMap c (n : ℤ)) := by
-  let : X.Over (Spec (CommRingCat.of k)) := ⟨f⟩
-  have : IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k))) := by
-    change IsAffineHom (pullback.diagonal f)
-    infer_instance
-  obtain ⟨E, hE, i, hi, hacyclic⟩ := exists_quasicoherent_acyclic_embedding k X F
-  have : E.IsQuasicoherent := hE
-  have : Mono i := hi
-  let Q := cokernel i
-  have : Q.IsQuasicoherent := isQuasicoherent_cokernel i
-  let S := ShortComplex.mk i (cokernel.π i) (cokernel.condition i)
-  have hS : S.ShortExact :=
-    .mk' (ShortComplex.exact_cokernel i) inferInstance inferInstance
-  let Γ := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  have : PreservesFiniteLimits Γ :=
-    inferInstanceAs (PreservesFiniteLimits
-      (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (Opposite.op ⊤)))
-  let : EnoughInjectives (SheafOfModules.{w} (moduleRings X.toRingedSpace)) :=
-    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
-  obtain ⟨_, _, hexact⟩ := hS.exists_rightDerived_full_long_exact Γ
-  have hQ : ∀ p : ℕ, d < p →
-      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj Q) := by
-    intro p hp
-    obtain ⟨_, _, _, h₁, _⟩ := hexact p
-    exact h₁.isZero_of_both_isZero (hacyclic p (by omega)) (hF (p + 1) (by omega))
-  have hEbound : ∀ p : ℕ, d < p →
-      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj E) := by
-    intro p hp
-    exact hacyclic p (by omega)
-  obtain ⟨cE, hcE⟩ := picardExternalCupCochain_exists f g E G
-  obtain ⟨cQ, hcQ⟩ := picardExternalCupCochain_exists f g Q G
-  obtain ⟨R₁, R₂, φ, e₁, e₂, hR₁, hR₂, houterE, houterQ, hcomm⟩ :=
-    picardExternalCupCochain_left_homology_ladder k X Y f g S hS G
-      cE hcE cQ hcQ c hc n
-  obtain ⟨h₀, h₃⟩ := houterE (ih E hEbound cE hcE)
-  obtain ⟨h₁, h₄⟩ := houterQ (ih Q hQ cQ hcQ)
-  have : IsIso (ComposableArrows.app' φ 0) := h₀
-  have : IsIso (ComposableArrows.app' φ 4) := h₄
-  have : IsIso (ComposableArrows.app' φ 2) :=
-    Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono hR₁ hR₂ φ
-      inferInstance h₁ h₃ inferInstance
-  have hmap : HomologicalComplex.homologyMap c (n : ℤ) =
-      e₁.inv ≫ ComposableArrows.app' φ 2 ≫ e₂.hom := by
-    rw [hcomm, ← Category.assoc, e₁.inv_hom_id, Category.id_comp]
-  rw [hmap]
-  infer_instance
+    IsIso (HomologicalComplex.homologyMap c (n : ℤ)) := by sorry
 
 end AlgebraicGeometry.Scheme.Modules

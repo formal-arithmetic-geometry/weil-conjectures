@@ -1,162 +1,162 @@
 {
- "id": "lem-sc-picard-rank-match-derived-truncation-data",
- "kind": "statement",
- "title": "Derived truncation data and the canonical comparison for Picard rank matching",
- "statement": "Let f:X→S be proper, flat and locally of finite presentation, E finite locally free, g:T→S, and R(f,E,g) [def-sc-picard-universal-rank-match]. Let F=E or F=E∨, p=pr2:X×_S T→T, q=pr1, and M=p_*q^*F, using [def-pc-module-pullback] and [lem-pc-module-pullback-adjunction]. There exist K∈D(O_T) [def-pc-derived-category] and a:M[0]→K such that K is perfect [def-pc-perfect-complex]; H^i(Lk^*K)=0 for all k:Y→T and i<0; every s∈T admits U and r with H^0(L(k≫U.ι)^*K) finite locally free of rank r for every k:Y→U; and H^0(a) is invertible. For every k:Y→T put H=H^0, p′=pr2:(X×_S T)×_T Y→Y, v=pr1, and β:k^*M→p′_*v^*q^*F the specified ordinary map [lem-weil-pbc-module-base-change-map-open-restriction]. There are isomorphisms e0:k^*M≅H(Lk^*(M[0])) and e1:H(Lk^*K)≅p′_*v^*q^*F such that β≫e1.inv=e0.hom≫H(Lk^*a). No surjectivity or invertibility of β or H(Lk^*a) is asserted.",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "second and third proof paragraphs, derived-image and rank dictionary; Tags 0B91(2), 08HY"
- },
- "stmt_deps": [
-  "def-sc-picard-universal-rank-match",
-  "def-pc-scheme",
-  "def-pc-module-pullback",
-  "lem-pc-module-pullback-adjunction",
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
-  "def-pc-derived-pullback",
-  "def-amb-finite-locally-free-module",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
- ],
- "proof": [
-  {
-   "text": "For F=E or its dual, finite local freeness of the dual and pullback supplies finite local freeness of G=q^*F, hence finite presentation. On affine opens, G has projective and thus flat sections over the source coordinate ring. Flatness of p makes that ring flat over the base coordinate ring; transitivity of module flatness proves G.IsFlatOver p.",
-   "uses": [
-    "lem-pc-finite-flat-affine-sections-projective",
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
+  "id": "lem-sc-picard-rank-match-derived-truncation-data",
+  "kind": "statement",
+  "title": "Derived truncation data and the canonical comparison for Picard rank matching",
+  "statement": "Let f:X→S be proper, flat and locally of finite presentation, E finite locally free, g:T→S, and R(f,E,g) [def-sc-picard-universal-rank-match]. Let F=E or F=E∨, p=pr2:X×_S T→T, q=pr1, and M=p_*q^*F, using [def-pc-module-pullback] and [lem-pc-module-pullback-adjunction]. There exist K∈D(O_T) [def-pc-derived-category] and a:M[0]→K such that K is perfect [def-pc-perfect-complex]; H^i(Lk^*K)=0 for all k:Y→T and i<0; every s∈T admits U and r with H^0(L(k≫U.ι)^*K) finite locally free of rank r for every k:Y→U; and H^0(a) is invertible. For every k:Y→T put H=H^0, p′=pr2:(X×_S T)×_T Y→Y, v=pr1, and β:k^*M→p′_*v^*q^*F the specified ordinary map [lem-weil-pbc-module-base-change-map-open-restriction]. There are isomorphisms e0:k^*M≅H(Lk^*(M[0])) and e1:H(Lk^*K)≅p′_*v^*q^*F such that β≫e1.inv=e0.hom≫H(Lk^*a). No surjectivity or invertibility of β or H(Lk^*a) is asserted.",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0BDP",
+    "place": "second and third proof paragraphs, derived-image and rank dictionary; Tags 0B91(2), 08HY"
   },
-  {
-   "text": "Use picardRankMatch_ordinary_ranks for finite local freeness of M and the universal ordinary ranks. Set K=Rp_*(G[0]) and a=canonicalSingleDirectImageMap p G. The existing perfect_derivedDirectImage_baseChange theorem gives IsPerfect K and invertibility of every characterised canonical derived module base-change map.",
-   "uses": [
-    "lem-sc-picard-rank-match-ordinary-ranks",
-    "lem-pc-rf-perfect-base-change",
+  "stmt_deps": [
+    "def-sc-picard-universal-rank-match",
+    "def-pc-scheme",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-category",
+    "def-pc-perfect-complex",
+    "def-pc-derived-pullback",
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+  ],
+  "proof": [
+    {
+      "text": "Take K=Rp_*(q^*F[0]). Pullbacks and duals preserve finite local freeness. Proper flat finite presentation gives relative flatness of q^*F. Perfect direct image and arbitrary derived base change identify Lk*K with the derived direct image after the iterated base change. Nonnegative injective resolutions give negative vanishing.",
+      "uses": [
+        "lem-pc-rf-perfect-base-change",
+        "def-pc-derived-direct-image",
+        "lem-pc-module-pullback-identity-composition"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply R to the identity at s to obtain U,r. On nonempty fibres, pulling the rank-r module E to a common residue-field extension forces each further R-test rank to equal r. The nonempty-fibre locus is open by flat finite presentation and closed by properness. On its complement all direct images vanish, and take r=0. Shrink U into the relevant locus and use locality of finite local freeness. Derived base change and associativity convert these ordinary rank tests into the displayed H0 tests. This step does not use any canonical H0 comparison isomorphism after pullback.",
+      "uses": [
+        "def-sc-picard-universal-rank-match",
+        "lem-pc-rf-perfect-base-change",
+        "lem-pc-module-pullback-identity-composition"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The identity test makes M finite locally free. Connective truncation of K and the degree-zero direct-image identification give a:M[0]→K with invertible H0(a). Flatness of M gives e0 by termwise derived pullback; arbitrary canonical derived base change gives e1.",
+      "uses": [
+        "lem-pc-flat-complex-derived-pullback",
+        "lem-pc-rf-perfect-base-change",
+        "lem-pc-canonical-direct-image-h0-unit"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Use the canonical degree-zero mate square, transporting abstract pullback to tensorPullback with its pinned adjunction. The transpose is pushforward of the pullback unit followed by composition, square commutation and inverse composition. It is the exact moduleBaseChangeMap. Natural truncation and pullback associativity give beta≫e1.inv=e0.hom≫H0(Lk*a), and naturality glues the equality on opens. No matrix-zero conclusion is used.",
+      "uses": [
+        "lem-pc-canonical-degree-zero-mate-square",
+        "lem-pc-module-pullback-adjunction",
+        "lem-pc-module-pullback-identity-composition",
+        "lem-weil-pbc-module-base-change-map-open-restriction"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-pc-derived-direct-image",
-    "lem-pc-canonical-single-direct-image-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "canonicalDirectImageH0Unit identifies H0(a) followed by the canonical direct-image H0 isomorphism with the single-homology isomorphism. Thus that composite is invertible. Cancel the direct-image isomorphism to show H0(a) invertible.",
-   "uses": [
-    "lem-pc-canonical-direct-image-h0-unit",
-    "lem-pc-canonical-degree-zero-mate-square"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For every k apply tensorDegreeZeroMateSquare to obtain e0, phi, its canonical predicate and its equation. The existing perfect base-change theorem makes phi invertible. Define e1=H0(asIso phi) followed by canonicalDirectImageH0Iso. Right-derived images of modules are connective by the nonnegative injective-resolution calculation (Functor.isGE_rightDerivedFunctor_obj_singleFunctor), so transport negative vanishing through H^i(asIso phi). Transport each ordinary rank witness through e1.symm. Finally use Iso.comp_inv_eq to turn beta=e0.hom≫H0(Lk*a)≫e1.hom into the required beta≫e1.inv=e0.hom≫H0(Lk*a).",
-   "uses": [
-    "lem-sc-picard-tensor-degree-zero-mate-square",
-    "lem-sc-picard-rank-match-ordinary-ranks",
-    "lem-pc-rf-perfect-base-change",
+    "def-sc-picard-universal-rank-match",
     "lem-pc-canonical-degree-zero-mate-square",
-    "def-pc-derived-direct-image"
-   ],
-   "elementary": false
+    "lem-pc-canonical-direct-image-h0-unit",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-rf-perfect-base-change",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "https://stacks.math.columbia.edu/tag/0BDP",
+    "place": "second and third proof paragraphs, derived-image and rank dictionary; Tags 0B91(2), 08HY",
+    "note": "F4 expanded the canonical-map part of the matrix-chart argument."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "canonical truncation of a perfect complex universally locally free degree zero cohomology commutes with pullback",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "proper flat derived direct image canonical degree zero comparison with ordinary base change map and truncation",
+      "results": "8 hits: exact-functor derived comparison isomorphisms, pushforward naturality, flat_appLE",
+      "date": "2026-10-13",
+      "verdict": "generic tools"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerivedZeroIsoSelf\"",
+      "results": "10 hits: rightDerivedZeroIsoSelf and its identities",
+      "date": "2026-10-13",
+      "verdict": "degree-zero dictionary only"
+    },
+    {
+      "tool": "grep",
+      "query": "rightDerivedZeroIsoSelf|homologyFunctor.*IsIso",
+      "results": "6 hits: RightDerived.lean and ShortComplex homology",
+      "date": "2026-10-13",
+      "verdict": "no entire derived presentation"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective",
+    "date": "2026-10-13",
+    "group": "F4"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-sc-theorem-of-cube",
+      "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail",
+      "via": [
+        "lem-sc-picard-base-change-stalk-surjective",
+        "lem-sc-picard-rank-match-base-change",
+        "lem-sc-picard-direct-image-rank-locus",
+        "lem-sc-picard-diagonal-locally-closed",
+        "lem-sc-general-theorem-of-cube"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-cube",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData",
+    "file": "lean/Sheaf/AlgebraicGeometry/PicardRankMatchDerivedTruncationData.lean",
+    "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_derived_truncation_data",
+    "statement": "theorem picardRankMatch_derived_truncation_data\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ U : T.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) :\n    let M := (Modules.pushforward (pullback.snd f g)).obj\n      ((Modules.tensorPullback (pullback.fst f g)).obj F)\n    ∃ (K : schemeDerivedCategory T)\n      (a : (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj M ⟶ K),\n      IsPerfect T K ∧\n      (∀ (Y : Scheme.{u}) (k : Y ⟶ T) (i : ℤ), i < 0 →\n        IsZero ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj\n            ((derivedPullback k).obj K))) ∧\n      (∀ s : T, ∃ U : T.Opens, s ∈ U ∧ ∃ r : ℕ,\n        ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme),\n          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n            ((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                ((derivedPullback (k ≫ U.ι)).obj K)) r) ∧\n      IsIso ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).map a) ∧\n      ∀ (Y : Scheme.{u}) (k : Y ⟶ T),\n        let H := DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n        ∃ (e0 : (Modules.tensorPullback k).obj M ≅\n            H.obj ((derivedPullback k).obj ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj M)))\n          (e1 : H.obj ((derivedPullback k).obj K) ≅\n            (Modules.pushforward (pullback.snd (pullback.snd f g) k)).obj\n              ((Modules.tensorPullback (pullback.fst (pullback.snd f g) k)).obj\n                ((Modules.tensorPullback (pullback.fst f g)).obj F))),\n          Modules.moduleBaseChangeMap (pullback.snd f g)\n              (pullback.snd (pullback.snd f g) k) k\n              (pullback.fst (pullback.snd f g) k) pullback.condition\n              ((Modules.tensorPullback (pullback.fst f g)).obj F) ≫ e1.inv =\n            e0.hom ≫ H.map ((derivedPullback k).map a)",
+    "branch": "sheaf-dag",
+    "by": "F4",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "F4",
+    "result": "pass",
+    "landing": "20261013T015552-L-3019860",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "F4",
+    "result": "pass",
+    "landing": "20261013T015552-L-3019860",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-pc-derived-direct-image",
-  "lem-pc-canonical-degree-zero-mate-square",
-  "lem-pc-canonical-direct-image-h0-unit",
-  "lem-pc-canonical-single-direct-image-comparison",
-  "lem-pc-finite-flat-affine-sections-projective",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-picard-rank-match-ordinary-ranks",
-  "lem-sc-picard-tensor-degree-zero-mate-square"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "second and third proof paragraphs, derived-image and rank dictionary; Tags 0B91(2), 08HY",
-  "note": "B3 constructs the derived image and canonical unit explicitly, proves H0 invertibility by cancellation, and reduces the ordinary rank dictionary and tensor-form mate transport to two independent smaller statements."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "canonical truncation of a perfect complex universally locally free degree zero cohomology commutes with pullback",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "proper flat derived direct image canonical degree zero comparison with ordinary base change map and truncation",
-   "results": "8 hits: exact-functor derived comparison isomorphisms, pushforward naturality, flat_appLE",
-   "date": "2026-10-13",
-   "verdict": "generic tools"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerivedZeroIsoSelf\"",
-   "results": "10 hits: rightDerivedZeroIsoSelf and its identities",
-   "date": "2026-10-13",
-   "verdict": "degree-zero dictionary only"
-  },
-  {
-   "tool": "grep",
-   "query": "rightDerivedZeroIsoSelf|homologyFunctor.*IsIso",
-   "results": "6 hits: RightDerived.lean and ShortComplex homology",
-   "date": "2026-10-13",
-   "verdict": "no entire derived presentation"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective",
-  "date": "2026-10-13",
-  "group": "F4"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-sc-theorem-of-cube",
-   "place": "proof: application of the general theorem of the cube; Tag 0BDP third paragraph, omitted canonical base-change detail",
-   "via": [
-    "lem-sc-picard-base-change-stalk-surjective",
-    "lem-sc-picard-rank-match-base-change",
-    "lem-sc-picard-direct-image-rank-locus",
-    "lem-sc-picard-diagonal-locally-closed",
-    "lem-sc-general-theorem-of-cube"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardRankMatchDerivedTruncationData.lean",
-  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_derived_truncation_data",
-  "statement": "theorem picardRankMatch_derived_truncation_data\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ U : T.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) :\n    let M := (Modules.pushforward (pullback.snd f g)).obj\n      ((Modules.tensorPullback (pullback.fst f g)).obj F)\n    ∃ (K : schemeDerivedCategory T)\n      (a : (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj M ⟶ K),\n      IsPerfect T K ∧\n      (∀ (Y : Scheme.{u}) (k : Y ⟶ T) (i : ℤ), i < 0 →\n        IsZero ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj\n            ((derivedPullback k).obj K))) ∧\n      (∀ s : T, ∃ U : T.Opens, s ∈ U ∧ ∃ r : ℕ,\n        ∀ (Y : Scheme.{u}) (k : Y ⟶ U.toScheme),\n          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n            ((DerivedCategory.homologyFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                ((derivedPullback (k ≫ U.ι)).obj K)) r) ∧\n      IsIso ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).map a) ∧\n      ∀ (Y : Scheme.{u}) (k : Y ⟶ T),\n        let H := DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n        ∃ (e0 : (Modules.tensorPullback k).obj M ≅\n            H.obj ((derivedPullback k).obj ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj M)))\n          (e1 : H.obj ((derivedPullback k).obj K) ≅\n            (Modules.pushforward (pullback.snd (pullback.snd f g) k)).obj\n              ((Modules.tensorPullback (pullback.fst (pullback.snd f g) k)).obj\n                ((Modules.tensorPullback (pullback.fst f g)).obj F))),\n          Modules.moduleBaseChangeMap (pullback.snd f g)\n              (pullback.snd (pullback.snd f g) k) k\n              (pullback.fst (pullback.snd f g) k) pullback.condition\n              ((Modules.tensorPullback (pullback.fst f g)).obj F) ≫ e1.inv =\n            e0.hom ≫ H.map ((derivedPullback k).map a)",
-  "branch": "sheaf-dag",
-  "by": "F4",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
-  "result": "pass",
-  "landing": "20261013T015552-L-3019860",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261013T060411-L-581212",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

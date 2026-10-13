@@ -1,196 +1,215 @@
 {
- "id": "lem-pc-proper-direct-image-finite-tor",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Tag 08EV proof: Rf_*E has finite tor dimension (reduction to quasi-compact f, base change Rf_*E tensor^L F = Rf_*(E tensor^L_{f^{-1}O_S} f^{-1}F), tor amplitude)",
-   "via": [
-    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
-   ]
+  "id": "lem-pc-proper-direct-image-finite-tor",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Tag 08EV proof: Rf_*E has finite tor dimension (reduction to quasi-compact f, base change Rf_*E tensor^L F = Rf_*(E tensor^L_{f^{-1}O_S} f^{-1}F), tor amplitude)",
+      "via": [
+        "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Proper-support direct image of a finite-Tor complex has finite Tor dimension",
- "statement": "Let S be a Noetherian scheme [def-pc-scheme], let f:X\\to S be a morphism locally of finite type, and let E be an object of D(\\mathcal O_X) [def-pc-derived-category]. Assume E is bounded with coherent cohomology sheaves, every cohomology sheaf of E has support proper over S [def-weil-pbc-closed-subset-proper-over-base], and E has finite Tor dimension as an object of D(f^{-1}\\mathcal O_S). Then Rf_*E [def-pc-derived-direct-image] has finite Tor dimension as an object of D(\\mathcal O_S): there are integers a\\le b such that H^i(Rf_*E\\otimes^L_{\\mathcal O_S}\\mathcal F)=0 for every i\\notin[a,b] and every \\mathcal O_S-module \\mathcal F.",
- "source": {
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV; label lemma-perfect-direct-image), proof, from 'Hence it suffices to show that Rf_*E has finite tor dimension' to the end (uses Tags 08EA, 08EU base change, Cohomology 08DZ variant derived pullback)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-weil-pbc-closed-subset-proper-over-base",
-  "def-pc-derived-direct-image",
-  "def-pc-finite-tor-dimension-over"
- ],
- "proof": [
-  {
-   "text": "Apply directImage_isBounded_coherent to the boundedness hypothesis after forgetting a<=b. Extract an upper cohomology bound b and coherence of every cohomology sheaf of Rf_*E. On Noetherian S, coherence implies quasi-coherence.",
-   "uses": [
+  "kind": "statement",
+  "title": "Proper-support direct image of a finite-Tor complex has finite Tor dimension",
+  "statement": "Let S be a Noetherian scheme [def-pc-scheme], let f:X\\to S be a morphism locally of finite type, and let E be an object of D(\\mathcal O_X) [def-pc-derived-category]. Assume E is bounded with coherent cohomology sheaves, every cohomology sheaf of E has support proper over S [def-weil-pbc-closed-subset-proper-over-base], and E has finite Tor dimension as an object of D(f^{-1}\\mathcal O_S). Then Rf_*E [def-pc-derived-direct-image] has finite Tor dimension as an object of D(\\mathcal O_S): there are integers a\\le b such that H^i(Rf_*E\\otimes^L_{\\mathcal O_S}\\mathcal F)=0 for every i\\notin[a,b] and every \\mathcal O_S-module \\mathcal F.",
+  "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV; label lemma-perfect-direct-image), proof, from 'Hence it suffices to show that Rf_*E has finite tor dimension' to the end (uses Tags 08EA, 08EU base change, Cohomology 08DZ variant derived pullback)"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-pc-derived-direct-image",
+    "def-pc-finite-tor-dimension-over"
+  ],
+  "proof": [
+    {
+      "text": "By [lem-pc-direct-image-qc-support-reduction] (S Noetherian, f locally of finite type, E bounded with coherent cohomology whose cohomology sheaves have support proper over S) there is a quasi-compact open immersion j:X'\\to X containing all supports of the H^i(E) with f'=f\\circ j quasi-compact and quasi-separated and Rf'_*j^*E\\cong Rf_*E. The hypotheses on E pass to j^*E (restriction to an open is exact and j^{-1}f^{-1}\\mathcal O_S=f'^{-1}\\mathcal O_S, so the finite Tor interval [a,b] of E over f^{-1}\\mathcal O_S is one for j^*E). Replace X,f,E by X',f',j^*E. Since S is Noetherian, hence quasi-compact, [lem-pc-derived-direct-image-uniform-truncation-bound] applies to f and gives an integer N.",
+      "uses": [
+        "lem-pc-direct-image-qc-support-reduction",
+        "lem-pc-derived-direct-image-uniform-truncation-bound"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), reduction to a quasi-compact morphism using proper supports"
+      }
+    },
+    {
+      "text": "Let F be a quasi-coherent O_S-module. By [lem-pc-kflat-bounded-flat-replacement] (with N=0) choose a complex P of flat O_S-modules with P^i=0 for i>0 and a quasi-isomorphism P\\to F. By [lem-pc-flat-complex-derived-pullback] Lf^*F is represented by the termwise pullback f^*P, which is K-flat over O_X by [lem-pc-bounded-above-flat-kflat] and [lem-pc-kflat-pullback-preservation]; so E\\otimes^L_{O_X}Lf^*F is computed termwise by E\\otimes_{O_X}(O_X\\otimes_{f^{-1}O_S}f^{-1}P)=E\\otimes_{f^{-1}O_S}f^{-1}P (associativity of the tensor product). The terms f^{-1}P^i are flat f^{-1}O_S-modules (stalks (f^{-1}P^i)_x=P^i_{f(x)} over (f^{-1}O_S)_x=O_{S,f(x)}), so f^{-1}P is K-flat over f^{-1}O_S by [lem-pc-bounded-above-flat-kflat] applied on the ringed space (X,f^{-1}O_S), and f^{-1}P\\to f^{-1}F is a quasi-isomorphism since f^{-1} is exact. Hence E\\otimes^L_{O_X}Lf^*F\\cong E\\otimes^L_{f^{-1}O_S}f^{-1}F, which by the finite Tor-dimension hypothesis has cohomology only in [a,b], with a\\le b independent of F.",
+      "uses": [
+        "lem-pc-kflat-bounded-flat-replacement",
+        "lem-pc-flat-complex-derived-pullback",
+        "lem-pc-bounded-above-flat-kflat",
+        "lem-pc-kflat-pullback-preservation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), the identity Lf^*F tensor E = f^{-1}F tensor_{f^{-1}O_S} E (Cohomology, variant derived pullback)"
+      }
+    },
+    {
+      "text": "E has coherent, hence quasi-coherent, cohomology and F is quasi-coherent, so Lf^*F and E\\otimes^L_{O_X}Lf^*F lie in D_QCoh [lem-pc-derived-pullback-tensor-qcoh]. As f is quasi-compact and quasi-separated, the projection formula [lem-pc-projection-formula] identifies Rf_*E\\otimes^L_{O_S}F with Rf_*(E\\otimes^L_{O_X}Lf^*F). The complex inside Rf_* has cohomology in [a,b] by Step 2; its shift by b has no cohomology in positive degrees, so [lem-pc-derived-direct-image-uniform-truncation-bound] gives vanishing in degrees >= b+N. Since Rf_* is the total right derived functor [def-pc-derived-direct-image], computed on a K-injective complex that may be taken zero in degrees < a, there is no cohomology below a. Thus H^i(Rf_*E\\otimes^L_{O_S}F)=0 for i\\notin[a,b+N-1] and every quasi-coherent F.",
+      "uses": [
+        "lem-pc-derived-pullback-tensor-qcoh",
+        "lem-pc-projection-formula",
+        "lem-pc-derived-direct-image-uniform-truncation-bound",
+        "def-pc-derived-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), projection-formula computation (Tag 08EU) and the final Tor-amplitude bound"
+      }
+    },
+    {
+      "text": "S is Noetherian, hence quasi-separated, and Rf_*E has coherent cohomology by [lem-pc-direct-image-bounded-coherent], so it lies in D_QCoh(O_S). By [lem-pc-tor-amplitude-qcoh-test] the vanishing of Step 3 for all quasi-coherent F gives H^i(Rf_*E\\otimes^L_{O_S}F)=0 for i\\notin[a,b+N-1] and every O_S-module F, which is the asserted finite Tor dimension.",
+      "uses": [
+        "lem-pc-direct-image-bounded-coherent",
+        "lem-pc-tor-amplitude-qcoh-test"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), reduction to quasi-coherent test modules by Lemma 36.10.6 (Tag 08EA)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-direct-image-qc-support-reduction",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-projection-formula",
+    "def-pc-derived-direct-image",
     "lem-pc-direct-image-bounded-coherent",
-    "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The proper-support lower-bound lemma supplies an integer a controlling tensor cohomology below a for every quasi-coherent test module.",
-   "uses": [
-    "lem-pc-proper-direct-image-tensor-lower-bound"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The general derived-tensor upper-bound lemma applied to Rf_*E and b gives tensor cohomology vanishing above b for every test module.",
-   "uses": [
-    "lem-pc-derived-tensor-upper-bound"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the ordered interval [a,max(a,b)]. Below a use the lower bound; above max(a,b), hence above b, use the upper bound. Apply the quasi-coherent test criterion to the quasi-coherent direct image to extend vanishing to every module. This is HasFiniteTorDimension.",
-   "uses": [
     "lem-pc-tor-amplitude-qcoh-test"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "lem-pc-direct-image-bounded-coherent",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-proper-direct-image-tensor-lower-bound",
-  "lem-pc-derived-tensor-upper-bound",
-  "lem-pc-tor-amplitude-qcoh-test"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EV, lemma-perfect-direct-image, finite-Tor paragraph: use boundedness of the direct image for the upper bound, projection formula only for the lower bound; C2 Lean reduction 2026-10-13"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'finiteTorDim|HasFiniteTorDim|IsPerfect' Mathlib/AlgebraicGeometry Mathlib/Algebra/Homology in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "0 hits",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-proper-direct-image-finite-tor",
-  "worker": "stage1",
-  "summary": "Split the Tag 08EV finite-Tor paragraph into the quasi-compact reduction, K-flat resolution and finite-Tor interval, projection/base-change computation, and final definition step. Reused existing DAG nodes for the uniform direct-image truncation bound, K-flat resolutions, termwise derived pullback, projection formula, and derived base change; no duplicate nodes were needed.",
-  "blueprint": "Realizes the blueprint ancestor lem-sc-finite-duality at the place describing reduction to quasi-compact f, the identity Rf_*E tensor^L F = Rf_*(E tensor^L f^{-1}F), and the resulting uniform Tor amplitude.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "The Tag 08EV proof needs a generic K-flat resolution of an arbitrary O_S-module; the picard-duality unit has no replacement node for this construction."
-   },
-   {
-    "node": "lem-pc-flat-complex-derived-pullback",
-    "why": "The Tag 08EV proof computes pullback termwise on the bounded-above flat resolution; this generic derived-pullback tool is outside the unit route."
-   },
-   {
-    "node": "lem-pc-projection-formula",
-    "why": "The finite-Tor calculation is the standard projection-formula reduction, and no node in sk-thm-picard-duality supplies that generic identity."
-   },
-   {
-    "node": "lem-pc-kflat-bounded-flat-replacement",
-    "why": "Generic bounded-above flat resolution of a module on a site, needed for the termwise pullback; not in this unit."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat",
-    "why": "Generic K-flatness of bounded-above flat complexes on a ringed space; not in this unit."
-   },
-   {
-    "node": "lem-pc-kflat-pullback-preservation",
-    "why": "Generic preservation of K-flatness under termwise pullback; not in this unit."
-   },
-   {
-    "node": "lem-pc-derived-pullback-tensor-qcoh",
-    "why": "Generic quasi-coherence of Lf^* and derived tensor products, needed for the projection formula; not in this unit."
-   },
-   {
-    "node": "lem-pc-direct-image-qc-support-reduction",
-    "why": "Generic proper-support reduction to a quasi-compact open; not in this unit."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-projection-formula",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-direct-image-qc-support-reduction",
-  "lem-pc-kflat-resolution",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-projection-formula",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-direct-image-qc-support-reduction"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-dft2553",
-  "group": "H1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft2553 (reviewer sub-agent of L); spot-checked: Statement equals the citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect step 3 hypotheses exactly (S Noetherian, f lft, D^b_Coh, proper supports, finite Tor over f^{-1}O_S); read all cited statements against Tag 08EV. FIX more, RETURN less: (1) C1 step 1: the proper-support reduction to a qcqs open was asserted uncited; now cites lem-pc-direct-image-qc-support-reduction and notes S Noetherian => quasi-compact for the truncation bound. (2) C4 step 2: lem-pc-kflat-resolution gives no bounded-above complex, but lem-pc-flat-complex-derived-pullback needs one, and the identity E tensor^L Lf^*F = E tensor^L_{f^{-1}O_S} f^{-1}F was not derived; now uses lem-pc-kflat-bounded-flat-replacement (N=0), lem-pc-bounded-above-flat-kflat, lem-pc-kflat-pullback-preservation, termwise associativity. (3) C4 step 3: lem-pc-projection-formula needs K in D_QCoh but F was an arbitrary O_S-module; now F quasi-coherent (D_QCoh via lem-pc-derived-pullback-tensor-qcoh), explicit bound [a,b+N-1], and new statement-only node lem-pc-tor-amplitude-qcoh-test (Tag 08EA, (2)=>(1)) plus lem-pc-direct-image-bounded-coherent extend to all O_S-modules in step 4; one Mathlib grep recorded. No Grothendieck-vanishing restatement; no pc tor-amplitude definition node exists, the statement spells the definition out. Edge cases E=0, f=id.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
- },
- "lead_note": "2026-10-10 L (R-dft2553): Second reading by H1 claims edits (bounded-flat replacement, created.item) absent from head 3f61714ec and missed the qcoh hypothesis of the projection formula.",
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor",
-  "declaration": "AlgebraicGeometry.Scheme.hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperDirectImageFiniteTor.lean",
-  "statement": "theorem hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support (S : Scheme.{u₁}) [IsNoetherian S] (X : Scheme.{u₁}) (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hTor : HasFiniteTorDimensionOver f E) : HasFiniteTorDimension S ((schemeDerivedDirectImage f).obj E)",
-  "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-pft"
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-pft",
-  "group": "E1",
-  "result": "fix",
-  "note": "S Noetherian, f lft, bounded (a<=b), coherent H^i, H^i support proper over S, finite Tor over f^{-1}O_S (new def, genuinely new: no landed ringed-space/derived tensor over f^{-1}O_S; upstream finiteTorAmplitude needs a derived monoidal structure absent here), conclusion Scheme.HasFiniteTorDimension of schemeDerivedDirectImage f; def rewritten without let/letI and without HasDerivedCategory.standard (K-flat resolution as a quasi-iso P -> K|_{f^{-1}O_S}, tensor instance passed explicitly)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), proof of finite Tor dimension"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rln 'finiteTorDim|HasFiniteTorDim|IsPerfect' Mathlib/AlgebraicGeometry Mathlib/Algebra/Homology in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
+      "results": "0 hits",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-proper-direct-image-finite-tor",
+    "worker": "stage1",
+    "summary": "Split the Tag 08EV finite-Tor paragraph into the quasi-compact reduction, K-flat resolution and finite-Tor interval, projection/base-change computation, and final definition step. Reused existing DAG nodes for the uniform direct-image truncation bound, K-flat resolutions, termwise derived pullback, projection formula, and derived base change; no duplicate nodes were needed.",
+    "blueprint": "Realizes the blueprint ancestor lem-sc-finite-duality at the place describing reduction to quasi-compact f, the identity Rf_*E tensor^L F = Rf_*(E tensor^L f^{-1}F), and the resulting uniform Tor amplitude.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "The Tag 08EV proof needs a generic K-flat resolution of an arbitrary O_S-module; the picard-duality unit has no replacement node for this construction."
+      },
+      {
+        "node": "lem-pc-flat-complex-derived-pullback",
+        "why": "The Tag 08EV proof computes pullback termwise on the bounded-above flat resolution; this generic derived-pullback tool is outside the unit route."
+      },
+      {
+        "node": "lem-pc-projection-formula",
+        "why": "The finite-Tor calculation is the standard projection-formula reduction, and no node in sk-thm-picard-duality supplies that generic identity."
+      },
+      {
+        "node": "lem-pc-kflat-bounded-flat-replacement",
+        "why": "Generic bounded-above flat resolution of a module on a site, needed for the termwise pullback; not in this unit."
+      },
+      {
+        "node": "lem-pc-bounded-above-flat-kflat",
+        "why": "Generic K-flatness of bounded-above flat complexes on a ringed space; not in this unit."
+      },
+      {
+        "node": "lem-pc-kflat-pullback-preservation",
+        "why": "Generic preservation of K-flatness under termwise pullback; not in this unit."
+      },
+      {
+        "node": "lem-pc-derived-pullback-tensor-qcoh",
+        "why": "Generic quasi-coherence of Lf^* and derived tensor products, needed for the projection formula; not in this unit."
+      },
+      {
+        "node": "lem-pc-direct-image-qc-support-reduction",
+        "why": "Generic proper-support reduction to a quasi-compact open; not in this unit."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-projection-formula",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-direct-image-qc-support-reduction",
+    "lem-pc-kflat-resolution",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-projection-formula",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-direct-image-qc-support-reduction"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-dft2553",
+    "group": "H1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft2553 (reviewer sub-agent of L); spot-checked: Statement equals the citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect step 3 hypotheses exactly (S Noetherian, f lft, D^b_Coh, proper supports, finite Tor over f^{-1}O_S); read all cited statements against Tag 08EV. FIX more, RETURN less: (1) C1 step 1: the proper-support reduction to a qcqs open was asserted uncited; now cites lem-pc-direct-image-qc-support-reduction and notes S Noetherian => quasi-compact for the truncation bound. (2) C4 step 2: lem-pc-kflat-resolution gives no bounded-above complex, but lem-pc-flat-complex-derived-pullback needs one, and the identity E tensor^L Lf^*F = E tensor^L_{f^{-1}O_S} f^{-1}F was not derived; now uses lem-pc-kflat-bounded-flat-replacement (N=0), lem-pc-bounded-above-flat-kflat, lem-pc-kflat-pullback-preservation, termwise associativity. (3) C4 step 3: lem-pc-projection-formula needs K in D_QCoh but F was an arbitrary O_S-module; now F quasi-coherent (D_QCoh via lem-pc-derived-pullback-tensor-qcoh), explicit bound [a,b+N-1], and new statement-only node lem-pc-tor-amplitude-qcoh-test (Tag 08EA, (2)=>(1)) plus lem-pc-direct-image-bounded-coherent extend to all O_S-modules in step 4; one Mathlib grep recorded. No Grothendieck-vanishing restatement; no pc tor-amplitude definition node exists, the statement spells the definition out. Edge cases E=0, f=id.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  },
+  "lead_note": "2026-10-10 L (R-dft2553): Second reading by H1 claims edits (bounded-flat replacement, created.item) absent from head 3f61714ec and missed the qcoh hypothesis of the projection formula.",
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor",
+    "declaration": "AlgebraicGeometry.Scheme.hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support",
+    "file": "lean/Sheaf/AlgebraicGeometry/ProperDirectImageFiniteTor.lean",
+    "statement": "theorem hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support (S : Scheme.{u₁}) [IsNoetherian S] (X : Scheme.{u₁}) (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hTor : HasFiniteTorDimensionOver f E) : HasFiniteTorDimension S ((schemeDerivedDirectImage f).obj E)",
+    "branch": "sheaf-dag",
+    "by": "E1",
+    "date": "2026-10-11",
+    "existing": false,
+    "fixed_by": "R-pft"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-pft",
+    "group": "E1",
+    "result": "fix",
+    "note": "S Noetherian, f lft, bounded (a<=b), coherent H^i, H^i support proper over S, finite Tor over f^{-1}O_S (new def, genuinely new: no landed ringed-space/derived tensor over f^{-1}O_S; upstream finiteTorAmplitude needs a derived monoidal structure absent here), conclusion Scheme.HasFiniteTorDimension of schemeDerivedDirectImage f; def rewritten without let/letI and without HasDerivedCategory.standard (K-flat resolution as a quasi-iso P -> K|_{f^{-1}O_S}, tensor instance passed explicitly)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
-  "result": "pass",
-  "landing": "20261013T060412-L-581519",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

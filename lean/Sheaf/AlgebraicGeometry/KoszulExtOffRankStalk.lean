@@ -15,11 +15,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.AlgebraicGeometry.AffineConormalFrame
-import Sheaf.AlgebraicGeometry.AffineKoszulScalarExtComparison
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Off-rank vanishing of pulled-back Koszul Ext stalks
 
@@ -32,26 +33,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-private theorem stalk_isZero_of_zero_over (X : Scheme.{u}) (U : X.Opens)
-    (M : X.Modules) (hM : IsZero (M.over U)) (x : X) (hx : x ∈ U) :
-    IsZero ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M) := by
-  have hz (a : ↑(TopCat.Presheaf.stalk M.val.presheaf x)) : a = 0 := by
-    obtain ⟨V, hxV, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf a
-    have hres : M.val.presheaf.map
-        (homOfLE inf_le_left : V ⊓ U ⟶ V).op s = 0 := by
-      have hid := (IsZero.iff_id_eq_zero _).mp hM
-      exact congrArg (fun g ↦ g.val.app
-        (op (Over.mk (homOfLE inf_le_right : V ⊓ U ⟶ U)))
-        (M.val.presheaf.map (homOfLE inf_le_left : V ⊓ U ⟶ V).op s)) hid
-    rw [← TopCat.Presheaf.germ_res_apply M.val.presheaf
-      (homOfLE inf_le_left : V ⊓ U ⟶ V) x ⟨hxV, hx⟩ s, hres]
-    exact map_zero _
-  have : Subsingleton (↑(TopCat.Presheaf.stalk M.val.presheaf x)) :=
-    ⟨fun a b ↦ (hz a).trans (hz b).symm⟩
-  change IsZero (ModuleCat.of (X.presheaf.stalk x)
-    (↑(TopCat.Presheaf.stalk M.val.presheaf x)))
-  exact ModuleCat.isZero_of_subsingleton _
 
 /-- The pulled-back scalar Ext stalk vanishes when its degree differs from conormal rank.
 
@@ -94,34 +75,6 @@ theorem koszulRegularImmersion_ext_offRank_stalk
               (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
                 (SheafOfModules.unit Y.ringCatSheaf)))
     IsZero ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj
-      ((Scheme.Modules.tensorPullback i).obj F)) := by
-  obtain ⟨U, hzU, n, f, hf, hreg⟩ := hregular z
-  obtain ⟨b, _⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
-    (Γ(Y, U.1) : Type u) (i.ker.ideal U) n f hreg hf
-  have hrn : r z = n := (hr z).trans ((affine_conormal_frame i U n b).2 z hzU)
-  have hqn : q ≠ (n : ℤ) := by simpa only [hrn] using hq
-  let := HasDerivedCategory.standard (ModuleCat.{u} (Γ(Y, U.1) : Type u))
-  obtain ⟨φ, hφ, _⟩ := ExteriorAlgebra.exists_unique_koszul_conormal_comparison
-    (Γ(Y, U.1) : Type u) (i.ker.ideal U) n f hreg hf
-  have hdual := (ExteriorAlgebra.koszul_conormal_comparison_cohomology
-    (Γ(Y, U.1) : Type u) (i.ker.ideal U) n f hreg hf φ hφ.1).2.1 q hqn
-  obtain ⟨e⟩ := affine_koszul_scalar_ext_comparison i U n f hf hreg q
-  let F : Y.Modules := (DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) q).obj
-      ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj
-        (op ((DerivedCategory.singleFunctor
-          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-            ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),
-          (DerivedCategory.singleFunctor
-            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-              (SheafOfModules.unit Y.ringCatSheaf)))
-  have hF : IsZero (F.over U.1) :=
-    ((Scheme.Modules.overEquiv U.1).inverse.map_isZero
-      ((Scheme.Modules.restrictFunctor U.2.isoSpec.hom).map_isZero
-        ((tilde.functor Γ(Y, U.1)).map_isZero hdual))).of_iso e
-  have hs := stalk_isZero_of_zero_over Y U.1 F hF (i z) hzU
-  obtain ⟨t, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso i z
-  exact ((ModuleCat.extendScalars (i.stalkMap z).hom).map_isZero hs).of_iso (t.app F)
-
+      ((Scheme.Modules.tensorPullback i).obj F)) := by sorry
 
 end AlgebraicGeometry

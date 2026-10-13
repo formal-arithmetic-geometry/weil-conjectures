@@ -1,159 +1,141 @@
 {
- "id": "lem-pc-rf-single-complex-inherited-tensor-condition",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-rf-perfect-base-change",
-   "place": "proof step: single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)",
-   "via": []
+  "id": "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-rf-perfect-base-change",
+      "place": "proof step: single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Tensor inheritance of the single-complex base-change condition",
- "statement": "For a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S and f':X'\\to S' the vertical morphisms [def-pc-base-change], let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) [def-pc-derived-category] and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}). For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). If for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism, then for every E \\in D_{\\mathrm{QCoh}}(\\mathcal O_X), the induced map L(g')^*(E \\otimes^L K) \\to L(g')^*E \\otimes^L K' has the same property: its corresponding canonical map at every x' and i is an isomorphism.",
- "source": {
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJA (lemma-single-complex-base-change-condition-inherited), part (1)"
- },
- "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pc-derived-pullback",
-  "def-pc-base-change"
- ],
- "proof": [
-  {
-   "text": "Accept the pinned canonical comparison tau with its characterization h_tau. Obtain a core monoidal model of derived pullback to establish the monoidal existence clause, using only the model toMonoidal conversion.",
-   "uses": [
-    "def-pc-derived-pullback-monoidal-model"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Tensor inheritance of the single-complex base-change condition",
+  "statement": "For a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S and f':X'\\to S' the vertical morphisms [def-pc-base-change], let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) [def-pc-derived-category] and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}). For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). If for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism, then for every E \\in D_{\\mathrm{QCoh}}(\\mathcal O_X), the induced map L(g')^*(E \\otimes^L K) \\to L(g')^*E \\otimes^L K' has the same property: its corresponding canonical map at every x' and i is an isomorphism.",
+  "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA (lemma-single-complex-base-change-condition-inherited), part (1)"
   },
-  {
-   "text": "Fix E, arbitrary output coordinates c, a point z and an integer i. The tensor stalk coordinate lemma supplies input coordinates d, A-K-flat stalk complexes Q,P, flatness of C over A tensor_R B, the chain map t and the pinned scalar-extension tensor isomorphism gamma. Homology of composites rewrites h_stalk d z j as invertibility of the input module comparison for every j.",
-   "uses": [
-    "lem-pc-single-complex-tensor-stalk-coordinates",
-    "def-pc-single-complex-base-change-stalk-condition"
-   ],
-   "elementary": false
+  "stmt_deps": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-base-change"
+  ],
+  "proof": [
+    {
+      "text": "Fix x' and write R = O_{S,s}, A = O_{X,x}, B = O_{S',s'}, and C = O_{X',x'}. The stalk of the map for E tensor^L K is obtained by first forming E_x tensor_A^L K_x, then tensoring over R with B and extending scalars to C.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Tag 0DJA, proof of part (1), local stalk computation"
+      }
+    },
+    {
+      "text": "Apply [lem-pc-derived-tensor-transitivity] with $T=A\\otimes_R B$, $E=E_x$, $K=K_x$ (complexes of $A$-modules), $K'=K'_{x'}$ (a complex of $C$-modules) and $\\psi:K_x\\otimes_A^{L}C=(L(g')^*K)_{x'}\\to K'_{x'}$ the stalk at $x'$ of the given map $L(g')^*K\\to K'$ (a morphism in $D(C)$). Then $\\varphi_{K_x}=\\psi\\circ c_{K_x}:K_x\\otimes_R^{L}B\\to K'_{x'}$ is the stalk map of the hypothesis, and $\\beta^i_{K_x}:H^i(K_x\\otimes_R^{L}B)\\otimes_T C\\to H^i(K'_{x'})$ is exactly the canonical map of the hypothesis, which is an isomorphism for every $i$. For $E\\otimes^{L}K$, the stalk at $x'$ of $L(g')^*(E\\otimes^{L}K)\\to L(g')^*E\\otimes^{L}K'$ is, under $(E\\otimes^{L}K)_x=E_x\\otimes_A^{L}K_x$, $(L(g')^*(E\\otimes^L K))_{x'}=(E_x\\otimes_A^{L}K_x)\\otimes_A^{L}C$ and $(L(g')^*E\\otimes^{L}K')_{x'}=(E_x\\otimes_A^{L}C)\\otimes_C^{L}K'_{x'}\\cong E_x\\otimes_A^{L}K'_{x'}$, the composite of the associativity isomorphism $(E_x\\otimes_A^{L}K_x)\\otimes_A^{L}C\\cong E_x\\otimes_A^{L}(K_x\\otimes_A^{L}C)$ and $1_{E_x}\\otimes\\psi$; so its comparison map from $(E_x\\otimes_A^{L}K_x)\\otimes_R^{L}B$ is $\\varphi_{E_x,K_x}$ of the lemma, and the canonical map of the conclusion at $(x',i)$ is $\\beta^i_{E_x,K_x}:H^i((E_x\\otimes_A^{L}K_x)\\otimes_R^{L}B)\\otimes_T C\\to H^i(E_x\\otimes_A^{L}K'_{x'})$. Since $C=\\mathcal O_{X',x'}$ is a localization of $T$ (stalk of $X'=X\\times_S S'$), it is flat over $T$ (Tag 00HT), so the flat clause of the lemma shows that $\\beta^i_{E_x,K_x}$ is an isomorphism for every $i$. Since $x'$ and $i$ were arbitrary, the inherited stalkwise condition holds everywhere.",
+      "uses": [
+        "lem-pc-derived-tensor-transitivity"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Tag 0DJA, proof of part (1), computation using the transitive property of tensor product (Tag 0BYJ, more-algebra-lemma-triple-tensor-product)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-derived-tensor-transitivity"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA, proof of part (1)"
   },
-  {
-   "text": "Apply localizedTensorComparison_inheritance with the input model, output model and the preceding degreewise hypothesis. It makes the middle comparison invertible in degree i. Rewrite the output stalk comparison using the coordinate equation a;beta;b. Composition with the two coordinate isomorphisms preserves invertibility. Quantifying over c,z,i proves the canonical inherited stalk condition for E.",
-   "uses": [
-    "lem-pc-localized-tensor-comparison-inheritance",
-    "lem-pc-single-complex-tensor-stalk-coordinates"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "tensoring derived base change condition by arbitrary complex",
+      "results": "generic tensor/base-change declarations only; no sheaf criterion",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory, Iso",
+      "results": "0 hits; unknown identifier Iso",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "base.change.*complex",
+      "results": "0 matches",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived base change condition inherited after tensoring by arbitrary E",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pc-rf-base-change-single-complex-criterion",
+    "by": "worker",
+    "date": "2026-10-10"
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-semicon",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-rf-single-complex-inherited-tensor-condition",
+    "worker": "stage1",
+    "summary": "No sorry-free project declaration states the item. I split the proof into the stalkwise computation from Stacks Tag 0DJA(1): after fixing x', the assumed base-change map is tensored with E_x, and derived-tensor transitivity identifies that map with the inherited condition. The only non-elementary input is recorded as the unsplit generic node lem-pc-derived-tensor-transitivity.",
+    "blueprint": "Realizes the ancestor proof step 'single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)' through the Tag 0DJA(1) transitivity computation."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-itc2918",
+    "group": "J1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itc2918 (reviewer sub-agent of L); spot-checked: Statement byte-identical to sheaf-dag and to Tag 0DJA(1) (E\\otimes K inheritance, not a restriction-to-opens statement), and exactly the form E1 (lem-pc-rf-base-change-single-complex-criterion step 1, K=G, K'=(g')^*G) uses; F1 does not cite it. Proof is the 0DJA(1) transitivity argument via new generic node lem-pc-derived-tensor-transitivity (Tag 0BYJ; true; no DAG duplicate, only defs; Mathlib has no derived tensor). Arbitrary E, x', i handled honestly. FIX more, RETURN less: step 2 silently passed from the H^i-then-tensor-C hypothesis to a quasi-isomorphism of complexes; added the elementary flatness of C=O_{X',x'} as a localization of A\\otimes_R B (Tag 00HT) so H^i commutes with -\\otimes C (missed by the second reading).; 1 file(s) fixed by the reviewer"
+  },
+  "lead_notes": [
+    "2026-10-11 00:58 UTC L: step 2 rewritten by L (R-dtr0054) to use exactly clauses (1)-(2) of the restated lem-pc-derived-tensor-transitivity (D(A) form; the old step formed (K_x (x)^L_R B) (x)_{A(x)B} C as a complex, which is undefined); uses unchanged."
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
+    "declaration": "AlgebraicGeometry.singleComplexInheritedTensorCondition",
+    "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexInheritedTensorCondition.lean",
+    "statement": "theorem singleComplexInheritedTensorCondition [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X') (φ : (derivedPullback g').obj K.obj ⟶ K'.obj) (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K.obj K'.obj φ) : Nonempty (Functor.Monoidal (derivedPullback g')) ∧ ∀ [Functor.Monoidal (derivedPullback g')] (E : schemeDerivedQCohCategory X), SingleComplexBaseChange.StalkCondition f f' g g' sq (E.obj ⊗ K.obj) (((derivedPullback g').obj E.obj) ⊗ K'.obj) ((Functor.Monoidal.μIso (derivedPullback g') E.obj K.obj).inv ≫ ((derivedPullback g').obj E.obj ◁ φ))",
+    "branch": "sheaf-dag",
+    "by": "C1",
+    "date": "2026-10-12",
+    "existing": false,
+    "fixed_by": "R-itc"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-itc",
+    "group": "C1",
+    "result": "fix"
   }
- ],
- "proof_deps": [
-  "def-pc-derived-pullback-monoidal-model",
-  "lem-pc-single-complex-tensor-stalk-coordinates",
-  "def-pc-single-complex-base-change-stalk-condition",
-  "lem-pc-localized-tensor-comparison-inheritance"
- ],
- "proof_origin": {
-  "by": "agent",
-  "group": "N3",
-  "date": "2026-10-13",
-  "note": "Compiling canonical Stacks 0DJA(1) reduction to stalk coordinates and the ring-level comparison. Corrects the Lean interface to the canonical source map without changing the natural-language node or unit route."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "tensoring derived base change condition by arbitrary complex",
-   "results": "generic tensor/base-change declarations only; no sheaf criterion",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory, Iso",
-   "results": "0 hits; unknown identifier Iso",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "base.change.*complex",
-   "results": "0 matches",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived base change condition inherited after tensoring by arbitrary E",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-pc-rf-base-change-single-complex-criterion",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-rf-single-complex-inherited-tensor-condition",
-  "worker": "stage1",
-  "summary": "No sorry-free project declaration states the item. I split the proof into the stalkwise computation from Stacks Tag 0DJA(1): after fixing x', the assumed base-change map is tensored with E_x, and derived-tensor transitivity identifies that map with the inherited condition. The only non-elementary input is recorded as the unsplit generic node lem-pc-derived-tensor-transitivity.",
-  "blueprint": "Realizes the ancestor proof step 'single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)' through the Tag 0DJA(1) transitivity computation."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-itc2918",
-  "group": "J1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itc2918 (reviewer sub-agent of L); spot-checked: Statement byte-identical to sheaf-dag and to Tag 0DJA(1) (E\\otimes K inheritance, not a restriction-to-opens statement), and exactly the form E1 (lem-pc-rf-base-change-single-complex-criterion step 1, K=G, K'=(g')^*G) uses; F1 does not cite it. Proof is the 0DJA(1) transitivity argument via new generic node lem-pc-derived-tensor-transitivity (Tag 0BYJ; true; no DAG duplicate, only defs; Mathlib has no derived tensor). Arbitrary E, x', i handled honestly. FIX more, RETURN less: step 2 silently passed from the H^i-then-tensor-C hypothesis to a quasi-isomorphism of complexes; added the elementary flatness of C=O_{X',x'} as a localization of A\\otimes_R B (Tag 00HT) so H^i commutes with -\\otimes C (missed by the second reading).; 1 file(s) fixed by the reviewer"
- },
- "lead_notes": [
-  "2026-10-11 00:58 UTC L: step 2 rewritten by L (R-dtr0054) to use exactly clauses (1)-(2) of the restated lem-pc-derived-tensor-transitivity (D(A) form; the old step formed (K_x (x)^L_R B) (x)_{A(x)B} C as a complex, which is undefined); uses unchanged."
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition",
-  "declaration": "AlgebraicGeometry.singleComplexInheritedTensorCondition",
-  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexInheritedTensorCondition.lean",
-  "statement": "theorem singleComplexInheritedTensorCondition [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : schemeDerivedQCohCategory X) (K' : schemeDerivedQCohCategory X') (φ : (derivedPullback g').obj K.obj ⟶ K'.obj) (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K.obj K'.obj φ) (τ : ∀ E L : schemeDerivedCategory X, (derivedPullback g').obj (E ⊗ L) ⟶ (derivedPullback g').obj E ⊗ (derivedPullback g').obj L) (hτ : IsCanonicalPullbackTensorComparison g' τ) : Nonempty (Functor.Monoidal (derivedPullback g')) ∧ ∀ E : schemeDerivedQCohCategory X, SingleComplexBaseChange.StalkCondition f f' g g' sq (E.obj ⊗ K.obj) (((derivedPullback g').obj E.obj) ⊗ K'.obj) (τ E.obj K.obj ≫ ((derivedPullback g').obj E.obj ◁ φ))",
-  "branch": "sheaf-dag",
-  "by": "N3",
-  "date": "2026-10-13",
-  "existing": false,
-  "fixed_by": "R-itc",
-  "note": "Source-faithful interface correction: accepts the pinned canonical tensor comparison used by the caller. The old universal monoidal-instance claim is not proved or assumed."
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-itc",
-  "group": "C1",
-  "result": "fix"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "X-a9856",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261013T060423-L-584555",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node metadata; all delivered modules and both direct importers compiled cleanly, with only permitted axioms and the two named sorry lemmas."
- }
 }

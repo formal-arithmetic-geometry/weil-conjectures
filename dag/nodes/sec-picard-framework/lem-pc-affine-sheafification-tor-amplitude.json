@@ -1,164 +1,166 @@
 {
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "id": "lem-pc-affine-sheafification-tor-amplitude",
- "kind": "statement",
- "title": "Finite Tor amplitude of a module model on an affine open",
- "statement": "Let S be a scheme [def-pc-scheme], U an affine open and R = Gamma(U,O_S). Let K in D(O_S) [def-pc-derived-category] have finite Tor dimension [def-pc-finite-tor-dimension]. Let P be any complex of R-modules whose image under the explicit affine sheafification functor F_U [lem-pc-affine-perfect-module-model] represents the restriction of K to the localized site over U. Then there exist integers a <= b such that Q(P) has Tor amplitude in [a,b] over R: for every R-module N, H^i(Q(P) tensor_R^L N) = 0 for i outside [a,b]. No pseudo-coherence or boundedness of P is assumed.",
- "source": {
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08E9(1), combined with Cohomology of Sheaves Tag 08CG and Derived Categories of Schemes Tag 08DX(2)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-derived-category",
-  "def-pc-finite-tor-dimension",
-  "lem-pc-affine-perfect-module-model"
- ],
- "proof": [
-  {
-   "text": "Unpack HasFiniteTorDimension to obtain a <= b and the global tensor cohomology vanishing for every test sheaf. Choose HasDerivedCategory.standard for spectrum sheaves at universe u+1; the module localization remains the one supplied in the original signature.",
-   "uses": [
-    "def-pc-finite-tor-dimension"
-   ],
-   "elementary": true
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "id": "lem-pc-affine-sheafification-tor-amplitude",
+  "kind": "statement",
+  "title": "Finite Tor amplitude of a module model on an affine open",
+  "statement": "Let S be a scheme [def-pc-scheme], U an affine open and R = Gamma(U,O_S). Let K in D(O_S) [def-pc-derived-category] have finite Tor dimension [def-pc-finite-tor-dimension]. Let P be any complex of R-modules whose image under the explicit affine sheafification functor F_U [lem-pc-affine-perfect-module-model] represents the restriction of K to the localized site over U. Then there exist integers a <= b such that Q(P) has Tor amplitude in [a,b] over R: for every R-module N, H^i(Q(P) tensor_R^L N) = 0 for i outside [a,b]. No pseudo-coherence or boundedness of P is assumed.",
+  "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E9(1), combined with Cohomology of Sheaves Tag 08CG and Derived Categories of Schemes Tag 08DX(2)"
   },
-  {
-   "text": "For any spectrum module sheaf G and degree i outside [a,b], specialize the global vanishing to the actual sheaf (Modules.pushforward (isoSpec.inv followed by U.ι)).obj G. Apply affine_sheafification_tensor_vanishing_test to obtain the degree-i vanishing for Q(tilde P) against G. This combines locality and affine-site transport from the original first two steps, without changing the interval.",
-   "uses": [
-    "lem-pc-affine-sheafification-tensor-vanishing-test"
-   ],
-   "elementary": false
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-finite-tor-dimension",
+    "lem-pc-affine-perfect-module-model"
+  ],
+  "proof": [
+    {
+      "text": "Choose the global interval a <= b from [def-pc-finite-tor-dimension]. For every module sheaf G on U, test with its direct image along the open inclusion. Restriction of this direct image is G, and exact restriction commutes with derived tensor by [lem-pc-derived-tensor-open-restriction-universes]. Hence the same bounds hold for K restricted to U.",
+      "uses": [
+        "def-pc-finite-tor-dimension",
+        "lem-pc-derived-tensor-open-restriction-universes"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Use isoSpec and the localized-site equivalence in [lem-pc-affine-localized-site-derived-transport] to transport to Spec R. These exact equivalences preserve the structure sheaf, tensor and cohomology. The representing isomorphism identifies the resulting object with Q(tilde P).",
+      "uses": [
+        "lem-pc-affine-localized-site-derived-transport"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply [lem-pc-affine-tor-amplitude-criterion] from sheaf Tor amplitude to module Tor amplitude, keeping a <= b as the witnesses. Empty affine opens, zero rings and unbounded representatives are included.",
+      "uses": [
+        "lem-pc-affine-tor-amplitude-criterion"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E9(1); locality as in Tags 08CG and 08DX"
   },
-  {
-   "text": "Apply the forward implication of affine_torAmplitude_iff to this sheaf-side fixed-interval vanishing. Keep a, b and a<=b as the existential witnesses.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "restriction to an affine open preserves finite Tor amplitude of a complex",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-13",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A pseudo-coherent complex of sheaves with finite Tor dimension is perfect",
+      "results": "Only t-structure and K-projective declarations; no affine Tor transport",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory.IsPseudoCoherent",
+      "results": "unknown identifier; no hits",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "finiteTor|torAmplitude|TorAmplitude in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
+      "results": "no hits; project affine_torAmplitude_iff covers the spectrum criterion but not global-to-open-site transport",
+      "date": "2026-10-13",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A complex represented by associated sheaves on an affine open has finite Tor amplitude when its global sheaf complex has finite Tor dimension",
+      "results": "8 hits: finite-type sheaves, derived t-structure, and projective Tor vanishing; no matching transport theorem",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"torAmplitudeIn\"",
+      "results": "0 hits",
+      "date": "2026-10-13",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "affine_torAmplitude|finiteTorAmplitude_of|torAmplitude.*[Oo]pen in lean/Sheaf and lean/WeilConjectures; TorAmplitude|torAmplitude|finiteTor in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
+      "results": "affine_torAmplitude_iff is the spectrum criterion, not global-to-localized-site transport. No Mathlib match.",
+      "date": "2026-10-13",
+      "verdict": "no exact match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension",
+    "date": "2026-10-13",
+    "group": "X2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "Tag 08EV proof: finite Tor dimension together with pseudo-coherence implies perfectness; affine Tor transfer in Steps 1 and 2 of lem-pc-pseudo-coherent-finite-tor-perfect",
+      "via": [
+        "lem-pc-pseudo-coherent-finite-tor-perfect",
+        "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+      ]
+    },
+    "same_as": []
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.AffineSheafificationTorAmplitude",
+    "file": "lean/Sheaf/AlgebraicGeometry/AffineSheafificationTorAmplitude.lean",
+    "declaration": "AlgebraicGeometry.Scheme.finiteTorAmplitude_of_affine_sheafification",
+    "statement": "theorem finiteTorAmplitude_of_affine_sheafification (S : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ V : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over V))] (U : S.Opens) (hU : IsAffineOpen U) [HasDerivedCategory.{wR} (ModuleCat.{u} (S.presheaf.obj (.op U)))] (K : schemeDerivedCategory S) (P : CochainComplex (ModuleCat.{u} (S.presheaf.obj (.op U))) ℤ) (hP : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj (((affinePerfectSheafification S U hU).mapHomologicalComplex (.up ℤ)).obj P))) (hTor : HasFiniteTorDimension S K) : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} (S.presheaf.obj (.op U))) a b (DerivedCategory.Q.obj P)",
+    "branch": "sheaf-dag",
+    "by": "X2",
+    "date": "2026-10-13",
+    "existing": false
+  },
+  "proof_deps": [
+    "def-pc-finite-tor-dimension",
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-affine-localized-site-derived-transport",
     "lem-pc-affine-tor-amplitude-criterion"
-   ],
-   "elementary": false
+  ],
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261013T045618-L-140791",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261013T045618-L-140791",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/08E9",
-  "place": "Part (1), after pointwise direct-image transfer from the original locality and transport steps; Lean reduction by R1, 2026-10-13"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "restriction to an affine open preserves finite Tor amplitude of a complex",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-13",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A pseudo-coherent complex of sheaves with finite Tor dimension is perfect",
-   "results": "Only t-structure and K-projective declarations; no affine Tor transport",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory.IsPseudoCoherent",
-   "results": "unknown identifier; no hits",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "finiteTor|torAmplitude|TorAmplitude in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
-   "results": "no hits; project affine_torAmplitude_iff covers the spectrum criterion but not global-to-open-site transport",
-   "date": "2026-10-13",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A complex represented by associated sheaves on an affine open has finite Tor amplitude when its global sheaf complex has finite Tor dimension",
-   "results": "8 hits: finite-type sheaves, derived t-structure, and projective Tor vanishing; no matching transport theorem",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"torAmplitudeIn\"",
-   "results": "0 hits",
-   "date": "2026-10-13",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "affine_torAmplitude|finiteTorAmplitude_of|torAmplitude.*[Oo]pen in lean/Sheaf and lean/WeilConjectures; TorAmplitude|torAmplitude|finiteTor in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory",
-   "results": "affine_torAmplitude_iff is the spectrum criterion, not global-to-localized-site transport. No Mathlib match.",
-   "date": "2026-10-13",
-   "verdict": "no exact match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension",
-  "date": "2026-10-13",
-  "group": "X2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "Tag 08EV proof: finite Tor dimension together with pseudo-coherence implies perfectness; affine Tor transfer in Steps 1 and 2 of lem-pc-pseudo-coherent-finite-tor-perfect",
-   "via": [
-    "lem-pc-pseudo-coherent-finite-tor-perfect",
-    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
-   ]
-  },
-  "same_as": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffineSheafificationTorAmplitude",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSheafificationTorAmplitude.lean",
-  "declaration": "AlgebraicGeometry.Scheme.finiteTorAmplitude_of_affine_sheafification",
-  "statement": "theorem finiteTorAmplitude_of_affine_sheafification (S : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ V : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over V))] (U : S.Opens) (hU : IsAffineOpen U) [HasDerivedCategory.{wR} (ModuleCat.{u} (S.presheaf.obj (.op U)))] (K : schemeDerivedCategory S) (P : CochainComplex (ModuleCat.{u} (S.presheaf.obj (.op U))) ℤ) (hP : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings S.toRingedSpace) U).mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj (((affinePerfectSheafification S U hU).mapHomologicalComplex (.up ℤ)).obj P))) (hTor : HasFiniteTorDimension S K) : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} (S.presheaf.obj (.op U))) a b (DerivedCategory.Q.obj P)",
-  "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-13",
-  "existing": false
- },
- "proof_deps": [
-  "def-pc-finite-tor-dimension",
-  "lem-pc-affine-sheafification-tensor-vanishing-test",
-  "lem-pc-affine-tor-amplitude-criterion"
- ],
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
-  "result": "pass",
-  "landing": "20261013T045618-L-140791",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261013T060425-L-585061",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

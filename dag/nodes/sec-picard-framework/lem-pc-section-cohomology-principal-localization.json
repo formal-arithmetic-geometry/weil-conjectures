@@ -1,123 +1,126 @@
 {
- "id": "lem-pc-section-cohomology-principal-localization",
- "kind": "statement",
- "title": "Principal localization of the raw cohomology presheaf",
- "statement": "Let f : X → T be a quasi-compact quasi-separated scheme morphism [def-pc-scheme, def-pc-morphism-conventions], F a quasi-coherent O_X-module [pqf-def-coherent], I an injective resolution of F, q a natural number, W an affine open of T, and a ∈ Γ(T,W). Put K = f_*I and P = sectionCohomologyPresheaf(K,q) [def-weil-pbc-flat-base-change-open-choices], the presheaf V ↦ H^q(I(f⁻¹V)). Regard P(D(a)) as a Γ(T,W)-module by restriction of scalars along Γ(T,W) → Γ(T,D(a)). Then the canonical restriction P(W) → P(D(a)) is a module localization at the powers of a (IsLocalizedModule.Away).",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/09MR",
-  "place": "Lemma 30.17.3, tensor-unit specialization; Tag 01E4, evaluation of the pushed-forward injective resolution."
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-morphism-conventions",
-  "pqf-def-coherent",
-  "def-weil-pbc-flat-base-change-open-choices"
- ],
- "proof": [
-  {
-   "text": "For N=P(D(a)) with scalars restricted along Γ(T,W)→Γ(T,D(a)), multiplication by a is bijective: its restriction is a unit by RingedSpace.isUnit_res_basicOpen. Map this unit to Module.End over Γ(T,D(a)); Module.End.isUnit_iff identifies its bijective underlying map with the scalar action over Γ(T,W).",
-   "uses": [],
-   "elementary": true
+  "id": "lem-pc-section-cohomology-principal-localization",
+  "kind": "statement",
+  "title": "Principal localization of the raw cohomology presheaf",
+  "statement": "Let f : X → T be a quasi-compact quasi-separated scheme morphism [def-pc-scheme, def-pc-morphism-conventions], F a quasi-coherent O_X-module [pqf-def-coherent], I an injective resolution of F, q a natural number, W an affine open of T, and a ∈ Γ(T,W). Put K = f_*I and P = sectionCohomologyPresheaf(K,q) [def-weil-pbc-flat-base-change-open-choices], the presheaf V ↦ H^q(I(f⁻¹V)). Regard P(D(a)) as a Γ(T,W)-module by restriction of scalars along Γ(T,W) → Γ(T,D(a)). Then the canonical restriction P(W) → P(D(a)) is a module localization at the powers of a (IsLocalizedModule.Away).",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/09MR",
+    "place": "Lemma 30.17.3, tensor-unit specialization; Tag 01E4, evaluation of the pushed-forward injective resolution."
   },
-  {
-   "text": "Apply IsLocalizedModule.Away.mk_of_addCommGroup. Fraction surjectivity comes from sectionCohomologyPresheaf_clearDenominators, rewriting restriction of a^n using map_pow. The kernel field comes from sectionCohomologyPresheaf_kernel_pow_annihilates. Mathlib subtracts equal numerators to obtain the general equality field.",
-   "uses": [
-    "lem-pc-section-cohomology-clear-denominators",
-    "lem-pc-section-cohomology-kernel-power-torsion"
-   ],
-   "elementary": true
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-morphism-conventions",
+    "pqf-def-coherent",
+    "def-weil-pbc-flat-base-change-open-choices"
+  ],
+  "proof": [
+    {
+      "text": "Restrict to Y = f⁻¹W, which is qcqs, and pull a back to b on Y. The inverse image f⁻¹D(a) is D(b). Restricted injective resolutions compute cohomology on these opens; identify their sections with evaluation of the pushed-forward resolution.",
+      "uses": [
+        "def-pc-morphism-conventions",
+        "def-weil-pbc-flat-base-change-open-choices"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply invertS_cohomology with the tensor unit on Y. Identify all tensor powers and twisted coefficients with F. The quotient fraction presentation is the ordinary localization of the cohomology module: use the relations [n,x] = [n+k,b^k x]. The canonical equation in invertS_cohomology identifies its map with restriction and division. The pullback Γ(T,W)-action commutes with restriction and multiplication; hence the identification is Γ(T,W)-linear. Transport the three localization fields (units, fraction surjectivity, equality after multiplication by a power) to the displayed restriction linear map.",
+      "uses": [
+        "lem-sc-invert-s-cohomology"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-pc-morphism-conventions",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-sc-invert-s-cohomology"
+  ],
+  "proof_origin": {
+    "by": "agent: C3, formal interface for the cited localization and basis argument",
+    "document": "https://stacks.math.columbia.edu/tag/09MR",
+    "place": "Lemma 30.17.3, tensor-unit specialization; Tag 01E4, evaluation of the pushed-forward injective resolution."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "cohomology of quasi coherent sheaves on principal open localizes and sheafification preserves affine values",
+      "results": "msearch.py: service unavailable (Internal Server Error).",
+      "date": "2026-10-13",
+      "verdict": "unavailable; no absence verdict"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Sections on a principal open are fractions of global sections for quasi coherent higher direct images",
+      "results": "Generic tilde and localization constructions; no theorem for raw cohomology or affine values of a general presheaf sheafification. Existing invertS_cohomology and higherDirectImagePresheaf interfaces read separately.",
+      "date": "2026-10-13",
+      "verdict": "no direct match"
+    },
+    {
+      "tool": "grep",
+      "query": "IsLocalizedModule; sheafification unit; basis in Mathlib/AlgebraicGeometry/Modules, Mathlib/Algebra/Category/ModuleCat/Presheaf and Mathlib/Topology/Sheaves",
+      "results": "Tilde.toOpen localization; IsLocalizedModule.Away.surj; isIso_toSheafify for already sheaf presheaves; basis extension tools. No matching raw cohomology localization or affine-unit assertion for a presheaf satisfying localizations. Repository and DAG searched for duplicates.",
+      "date": "2026-10-13",
+      "verdict": "tools only; statement not present"
+    },
+    {
+      "tool": "second-reader C3: loogle, leanfinder, grep",
+      "query": "IsLocalizedModule.Away; sheafification agrees with a presheaf on a gluing basis; module_sheafification_iso_of_affine_restriction",
+      "results": "Loogle finds Away and local algebra criteria; LeanFinder finds sheaf hom ext, cover-dense amalgamation and sheafification constructions. Read Mathlib tilde.toOpen localization, existing invertS_cohomology, higherDirectImagePresheaf, basis extension, and module_sheafification_iso_of_affine_restriction. The latter assumes a supplied affine-basis identification with a sheaf and does not establish the localization-to-canonical-unit bridge. No direct duplicate found.",
+      "date": "2026-10-13",
+      "verdict": "interfaces read; no direct match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators",
+    "date": "2026-10-13",
+    "group": "C3"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-finite-support-hi",
+      "place": "Denominator proof: raw cohomology localization and passage from the principal-open basis to actual higher-image sections.",
+      "via": [
+        "lem-pc-higher-direct-image-section-denominators",
+        "new-higher-direct-image-affine-local-qcoherent",
+        "lem-pc-sections-higher-direct-image-quasi-coherent"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization",
+    "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyPrincipalLocalization.lean",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.sectionCohomologyPresheaf_isLocalized_away",
+    "statement": "theorem sectionCohomologyPresheaf_isLocalized_away {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) [QuasiCompact f] [QuasiSeparated f]\n    [F.IsQuasicoherent] (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (hW : IsAffineOpen W) (a : Γ(T, W)) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=\n      Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom\n    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom",
+    "branch": "sheaf-dag",
+    "by": "C3",
+    "date": "2026-10-13"
+  },
+  "reviewed": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C3",
+    "result": "pass",
+    "landing": "20261013T045518-L-125778",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-13",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "C3",
+    "result": "pass",
+    "landing": "20261013T045518-L-125778",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-pc-section-cohomology-clear-denominators",
-  "lem-pc-section-cohomology-kernel-power-torsion"
- ],
- "proof_origin": {
-  "by": "agent: A2",
-  "document": "https://stacks.math.columbia.edu/tag/09MR",
-  "place": "Separate fraction-surjectivity and zero-kernel consequences of the tensor-unit comparison; combine by Mathlib IsLocalizedModule.Away.mk_of_addCommGroup."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "cohomology of quasi coherent sheaves on principal open localizes and sheafification preserves affine values",
-   "results": "msearch.py: service unavailable (Internal Server Error).",
-   "date": "2026-10-13",
-   "verdict": "unavailable; no absence verdict"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Sections on a principal open are fractions of global sections for quasi coherent higher direct images",
-   "results": "Generic tilde and localization constructions; no theorem for raw cohomology or affine values of a general presheaf sheafification. Existing invertS_cohomology and higherDirectImagePresheaf interfaces read separately.",
-   "date": "2026-10-13",
-   "verdict": "no direct match"
-  },
-  {
-   "tool": "grep",
-   "query": "IsLocalizedModule; sheafification unit; basis in Mathlib/AlgebraicGeometry/Modules, Mathlib/Algebra/Category/ModuleCat/Presheaf and Mathlib/Topology/Sheaves",
-   "results": "Tilde.toOpen localization; IsLocalizedModule.Away.surj; isIso_toSheafify for already sheaf presheaves; basis extension tools. No matching raw cohomology localization or affine-unit assertion for a presheaf satisfying localizations. Repository and DAG searched for duplicates.",
-   "date": "2026-10-13",
-   "verdict": "tools only; statement not present"
-  },
-  {
-   "tool": "second-reader C3: loogle, leanfinder, grep",
-   "query": "IsLocalizedModule.Away; sheafification agrees with a presheaf on a gluing basis; module_sheafification_iso_of_affine_restriction",
-   "results": "Loogle finds Away and local algebra criteria; LeanFinder finds sheaf hom ext, cover-dense amalgamation and sheafification constructions. Read Mathlib tilde.toOpen localization, existing invertS_cohomology, higherDirectImagePresheaf, basis extension, and module_sheafification_iso_of_affine_restriction. The latter assumes a supplied affine-basis identification with a sheaf and does not establish the localization-to-canonical-unit bridge. No direct duplicate found.",
-   "date": "2026-10-13",
-   "verdict": "interfaces read; no direct match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators",
-  "date": "2026-10-13",
-  "group": "C3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-finite-support-hi",
-   "place": "Denominator proof: raw cohomology localization and passage from the principal-open basis to actual higher-image sections.",
-   "via": [
-    "lem-pc-higher-direct-image-section-denominators",
-    "new-higher-direct-image-affine-local-qcoherent",
-    "lem-pc-sections-higher-direct-image-quasi-coherent"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyPrincipalLocalization.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionCohomologyPresheaf_isLocalized_away",
-  "statement": "theorem sectionCohomologyPresheaf_isLocalized_away {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) [QuasiCompact f] [QuasiSeparated f]\n    [F.IsQuasicoherent] (I : InjectiveResolution F) (q : ℕ)\n    (W : T.Opens) (hW : IsAffineOpen W) (a : Γ(T, W)) :\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let : Module Γ(T, W) (P.obj (op (T.basicOpen a))) :=\n      Module.compHom _ (T.presheaf.map (homOfLE (T.basicOpen_le a)).op).hom\n    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom",
-  "branch": "sheaf-dag",
-  "by": "C3",
-  "date": "2026-10-13"
- },
- "reviewed": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
-  "result": "pass",
-  "landing": "20261013T045518-L-125778",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-13",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
-  "result": "pass",
-  "landing": "20261013T060410-L-580946",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
