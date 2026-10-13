@@ -10,6 +10,11 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitAffine
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnion
+import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalization
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+
 /-! # Flat scalar-extension coordinates for a single-module comparison
 
 Source: Stacks Project, Tags 0A1D and 0DJ9, affine calculation and
@@ -94,6 +99,21 @@ theorem exists_standardSingle_stalk_flat_counit_model
             (RingedSpace.moduleStalkFunctor A.toRingedSpace a).map
                 ((DerivedCategory.homologyFunctor _ n).map (standardSingleBaseChangeMap p M g)) =
               eL.hom ≫ (DerivedCategory.homologyFunctor _ n).map
-                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom := by sorry
+                (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ eR.hom := by
+  apply standardSingleFlatCounit_localization ?_ p M hM g a
+  intro Y₀ B₀ A₀ p₀ _ _ _ _ g₀
+  let : CompactSpace Y₀ := QuasiCompact.compactSpace_of_compactSpace p₀
+  let : QuasiSeparatedSpace Y₀ := quasiSeparatedSpace_of_quasiSeparated p₀
+  let P : Y₀.Opens → Prop := StandardSingleFlatCounitOnOpen p₀ g₀
+  have h_affine : ∀ U : Y₀.Opens, IsAffineOpen U → P U := by
+    intro U hU
+    exact standardSingleFlatCounitOnOpen_affine p₀ g₀ U hU
+  have h_union : ∀ U V : Y₀.Opens, IsCompact (U : Set Y₀) → IsAffineOpen V →
+      P U → P V → P (U ⊓ V) → P (U ⊔ V) := by
+    intro U V hU hV hPU hPV hPUV
+    exact standardSingleFlatCounitOnOpen_union p₀ g₀ U V hU hV hPU hPV hPUV
+  exact quasiCompactOpen_induction Y₀ P h_affine h_union ⊤
+    (by simpa using (isCompact_univ : IsCompact (Set.univ : Set Y₀)))
+
 
 end AlgebraicGeometry

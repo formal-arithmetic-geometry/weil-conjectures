@@ -17,48 +17,32 @@
  },
  "proof": [
   {
-   "text": "Work on affine neighbourhoods of g(a) and a. For an affine source chart, the degree-zero complex of sections of M is flat over the old base sections by relative flatness. The affine section tensor formula computes the pullback complex. The adjunction unit and counit equations identify the canonical base-change map with the scalar-extension counit; no invertibility of that counit is used.",
+   "text": "Apply the affine-presentation localization lemma. It remains to provide a flat counit presentation for the top open of every qcqs source over affine bases. These are sheaf-complex presentations before taking stalks, not the original coordinate conclusion as an input.",
    "uses": [
-    "def-pc-standard-single-base-change-map",
-    "def-pc-scheme-module-flat-over"
+    "lem-pc-standard-single-flat-counit-localization"
    ],
    "elementary": false
   },
   {
-   "text": "For a quasi-compact separated source open, choose a finite affine cover. Finite intersections are affine. The finite alternating Cech complex computes its direct image and has flat terms. The elementary-tensor identifications on each intersection commute with restrictions and hence alternating differentials; they give the ordinary base-change cohomology identification and the counit square.",
+   "text": "Over an affine base quasi-compactness of p makes Y compact and quasi-separatedness makes it a quasi-separated space. Set P(U)=StandardSingleFlatCounitOnOpen p g U. Supply its affine case and its union closure to quasiCompactOpen_induction. Apply that induction to the top open, which is compact. This proves the premise of the first step and hence the original statement unchanged. The separated Cech overlap calculation remains below the generic open-induction lemma.",
    "uses": [
-    "lem-pc-affine-alternating-cech-model-flat"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a qcqs source use induction on a finite affine cover. At a union U with one affine V, U intersect V is a quasi-compact separated open of V, so the preceding Cech calculation applies. The relative Mayer--Vietoris triangle represents the union by the shifted cone of the two-open-to-overlap restriction map. Lift that map to bounded-above flat resolutions, replacing its terms by such resolutions when needed; finite sums and shifted cones remain flat and bounded above. Naturality of the unit/counit description gives the scalar-extension counit square on this cone. This constructs the model and its comparison identifications without assuming the comparison is invertible.",
-   "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "def-pc-derived-base-change-map"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize the constructed complex at g(a). Flatness and the upper support bound survive. Extend to the local ring of A at a. Exactness of stalks identifies its cohomology with the two sheaf cohomology stalks and transports the counit square. Uniqueness of the universal left-derived scalar-extension pair permits any universal pair LF,epsilon in the coordinates. All witnesses are destructured only in proofs, never selected to define data.",
-   "uses": [
-    "def-pc-module-stalk-functor"
+    "lem-pc-standard-single-flat-counit-affine",
+    "lem-pc-standard-single-flat-counit-union",
+    "lem-sc-invert-s-cohomology-induction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-module-stalk-functor",
-  "def-pc-scheme-module-flat-over",
-  "def-pc-standard-single-base-change-map",
-  "lem-pc-affine-alternating-cech-model-flat",
-  "lem-pc-derived-mayer-vietoris-triangle"
+  "lem-pc-standard-single-flat-counit-affine",
+  "lem-pc-standard-single-flat-counit-localization",
+  "lem-pc-standard-single-flat-counit-union",
+  "lem-sc-invert-s-cohomology-induction"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0A1D and 0DJ9; T4 expands their single-module affine and Mayer--Vietoris calculations into flat counit coordinates"
+  "place": "Tags 0DJ9 and 08DR; R1 formalizes source-open induction, separating the affine calculation, union gluing and final stalk localization"
  },
  "mathlib_searches": [
   {
@@ -136,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T4",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T201809-L-3977238",
+  "landing": "20261013T215610-L-900471",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

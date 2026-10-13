@@ -13667,3 +13667,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:56 L: merged deliver/P4/Sheaf.AlgebraicGeometry.AffineChartOrdinaryHomComparison (stage 3; reviewer PASS; first push; landing 20261013T215609-L-899843 (interface); batch 20261013T215553; modules 2; new nodes 1)
 - 21:56 L: merged deliver/P4/Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComposition (stage 3; reviewer PASS; first push; landing 20261013T215609-L-900038 (proof); batch 20261013T215553; modules 1; new nodes 0)
 - 21:56 L: merged deliver/R1/Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport (stage 3; reviewer PASS; first push; landing 20261013T215610-L-900272 (interface); batch 20261013T215553; modules 2; new nodes 1)
+- 21:56 L: merged deliver/R1/Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel (stage 3; reviewer PASS; first push; landing 20261013T215610-L-900471 (interface); batch 20261013T215553; modules 5; new nodes 5)

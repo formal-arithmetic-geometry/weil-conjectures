@@ -1,0 +1,124 @@
+{
+ "id": "def-pc-standard-single-flat-counit-presentation-on-open",
+ "kind": "definition",
+ "title": "Presentation property on a source open",
+ "statement": "Let p:Y -> B and g:A -> B be scheme morphisms and U an open of Y. StandardSingleFlatCounitOnOpen p g U means: for every quasi-coherent O_U-module N flat over U -> Y -> B, StandardSingleFlatCounitPresentation (U -> Y -> B) N g holds. It does not assume U quasi-compact; the induction applies it only on quasi-compact opens. N is an arbitrary module on U, not the restriction of a fixed ambient module, so its further open restrictions can be used in gluing.",
+ "stmt_deps": [
+  "def-pc-standard-single-flat-counit-presentation",
+  "def-pc-scheme-module-flat-over",
+  "pqf-def-coherent",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9; property of source opens in the induction paragraph"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded flat sheaf complex presenting affine direct image and canonical counit base change, with Mayer Vietoris gluing and localization to stalks",
+   "results": "Service unavailable: Internal Server Error. The three separate affine, union and localization queries also returned Internal Server Error.",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor, leftDerivedLift, uniqueness and pointwise-derived-functor lemmas; no scheme sheaf presentation or gluing result.",
+   "date": "2026-10-14",
+   "verdict": "generic universal-property tools only; no matching presentation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded flat complex presentations of derived direct image glue on the union of two opens by Mayer Vietoris",
+   "results": "Mathlib.CategoryTheory.Sites.MayerVietorisSquare supplies underived sheaf conditions and short complexes, not flat derived direct-image presentations. The stalk query returned TopCat.Presheaf.stalkPullbackIso and stalkPullbackHom, not derived tensor-counit transport.",
+   "date": "2026-10-14",
+   "verdict": "no exact match; the underived stalk and gluing tools do not imply these statements in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "rg counit|stalk|[Ff]lat in Mathlib/AlgebraicGeometry/Modules and Algebra/Category/ModuleCat/Stalk.lean; rg stalk.*counit in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/AlgebraicGeometry; blueprint_refs.py search flat counit / base change tensor / Mayer Vietoris",
+   "results": "Mathlib has ordinary restriction-stalk isomorphisms and tilde adjunction counits, but no flat counit presentations. Library has affineAlternatingCechModel_flat, derived Mayer--Vietoris and stalk-derived-extension comparison. AffineAlternatingCechBaseChangeFactorization, AffineAlternatingCechPinnedMate and AffineAlternatingCechExchangeResolution cannot be imported: import_direction.py reports that each reaches the item and would close a cycle. Blueprint string searches returned zero matches.",
+   "date": "2026-10-14",
+   "verdict": "no existing usable statement of these presentation or gluing steps; retain the available flatness, Mayer--Vietoris and stalk tools in the new proof plans"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent flat module on an affine scheme computes arbitrary derived base change by the single complex of global sections",
+   "results": "Eight hits: Scheme.Hom.flat_appLE, Flat.flat_appLE, flat_iff, Flat.flat_of_affine_subset, Flat.instHasRingHomPropertyFlat, Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.of_flat_tensorProduct. No presentation or pinned counit square.",
+   "date": "2026-10-14",
+   "verdict": "second reader: no exact replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"stalk\"",
+   "results": "0 hits",
+   "date": "2026-10-14",
+   "verdict": "second reader: no direct termwise-stalk transport theorem returned"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(flat|Flat)|MayerVietoris.*(cone|Cone)",
+   "results": "msearch grep: 0 hits. Additional rg on the library finds flatComplexDerivedPullback, flat_stalk_of_isFlat, exists_stalkDerivedExtensionComparisonIso and the affine Cech pinned-mate modules. Read their signatures and supporting proofs; none directly proves the three new statements.",
+   "date": "2026-10-14",
+   "verdict": "second reader: retain decomposition, use existing tools in its proof plans"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel",
+  "date": "2026-10-14",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 0DJ9; property of source opens in the induction paragraph",
+   "via": [
+    "lem-pc-standard-single-stalk-flat-counit-model",
+    "lem-pc-standard-flat-single-base-change",
+    "lem-pc-standard-flat-single-base-change-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSingleFlatCounitPresentation.lean",
+  "declaration": "AlgebraicGeometry.StandardSingleFlatCounitOnOpen",
+  "statement": "def StandardSingleFlatCounitOnOpen\n    {Y B A : Scheme.{u}} (p : Y ⟶ B) (g : A ⟶ B) (U : Y.Opens) : Prop",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T215610-L-900471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T215610-L-900471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
