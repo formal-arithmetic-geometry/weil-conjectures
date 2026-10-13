@@ -12,39 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Represent P by a complex L, and compute the second variable using the functorial K-injective resolution and the natural representative comparison for internal derived Hom.",
+   "text": "Fix the standard functorial K-injective resolution I. Curry the proved derivedInternalHom_comparison and restrict its first variable to any complex L, obtaining Q composed with F_(Q L) naturally isomorphic to I composed with Hom(L,-) composed with Q.",
    "uses": [
-    "def-pur-derived-internal-hom",
-    "prop-pur-kinjective-resolutions-exist"
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Construct Hom(L,I)[-m] ≅ Hom(L[m],I) degreewise. In degree k, the p-th output is (-1)^(m*k) times input component p+m. The inverse reindexes backwards and has the same sign. The source postcomposition differential has factor (-1)^m, while its precomposition term has coefficient -(-1)^k. The target postcomposition coefficient is 1 and its precomposition coefficient is -(-1)^(k+m). The adjacent-degree scalar ratio (-1)^m gives the chain identity. Componentwise postcomposition commutes with this construction, so it is natural in I.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply derived localization and its compatibility with shifts. The representative comparisons and quasi-isomorphism invariance transport the comparison to derived objects. Maps between K-injective representatives are represented by chain maps modulo homotopy; homotopies are preserved by precomposition with L, so the localized comparison is natural for all derived maps.",
+   "text": "Whisker this comparison by shift(-m), commute the shift across Q using its CommShift isomorphism, and whisker the signed Hom-complex source-shift isomorphism by I and Q. Compose with the inverse representative comparison for L[m]. This gives an isomorphism after precomposition with Q.",
    "uses": [
     "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined"
+    "lem-pur-hom-complex-shift-left"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Precomposition with the localization Q is fully faithful (Localization.fullyFaithfulWhiskeringLeft), so its preimageIso descends the comparison to natural functors on the derived category. Choose L using Q.objPreimage P and its canonical representative isomorphism. Transport the first-variable functors along that isomorphism and along Q.commShiftIso m at L. Contravariance reverses each representative isomorphism; the resulting composite has exactly the required direction.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "lem-pur-rhom-well-defined",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-hom-complex-shift-left"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Sections 21.34 and 21.35: one-variable specialization of the signed shift calculation in lem-pur-derived-internal-hom-shift-comparison"
+  "place": "Tags 0A8X and 08JA; source-shift calculation on Hom complexes followed by the existing functorial representative comparison and Mathlib localization descent."
  },
  "mathlib_searches": [
   {
@@ -117,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b0d17",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261013T125007-L-3835621",
+  "landing": "20261013T134802-L-129974",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules compile cleanly, downstream importer compiles, target and existing declaration interfaces remain equivalent, DAG/report/change records agree, and only documented lower sorries remain with allowed axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

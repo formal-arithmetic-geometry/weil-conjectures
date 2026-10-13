@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-hom-complex-shift-left",
+ "kind": "statement",
+ "title": "Signed source-shift natural isomorphism for the sheaf Hom complex",
+ "statement": "Let $(C,J)$ be a small site and $R$ a sheaf of commutative rings. Let $A$ be the category of sheaves of modules over the underlying ring sheaf. For any unbounded cochain complex $L$ in $A$ and integer $m$, the functor $M\\mapsto \\mathcal Hom^\\bullet(L,M)[-m]$ is naturally isomorphic to $M\\mapsto \\mathcal Hom^\\bullet(L[m],M)$, where the Hom-complex bifunctor is [def-pur-hom-complex]. No injectivity, flatness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, displayed Hom differential; signed reindexing calculation in step 2 of lem-pur-derived-internal-hom-shift-left."
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the product projections and their universal property. In degree k, construct the forward map with p-th component (-1)^(m*k) times projection p+m in Hom(L,M) degree k-m. Construct the inverse by projection p-m in Hom(L[m],M) degree k, followed by the equality isomorphism identifying L^(p-m+m) with L^p and the same sign. Projection extensionality proves both inverse identities, since the scalar squares to one.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the chain identity after projection to each p-th factor in degree k+1. Expand both differentials using the specified Hom differential. The source shift contributes (-1)^m; source precomposition has coefficient -(-1)^k and target precomposition has -(-1)^(k+m). The scalar in degree k+1 is the scalar in degree k times (-1)^m. These equalities give agreement of the two postcomposition and precomposition terms. Build the chain isomorphism with HomologicalComplex.Hom.isoOfComponents.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a chain map M to N, expand its Hom-complex map after every projection. Postcomposition commutes with the integer scalar and the reindexing, so the forward maps are natural. NatIso.ofComponents assembles the natural isomorphism. All index arithmetic and sign identities hold for arbitrary integers; at m=0 the reindexing and signs are identities and zero complexes give the zero maps.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes: explicit signed source reindexing of its displayed differential."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf Hom complex shift in first argument natural isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism internal Hom complex shifting first argument",
+   "results": "Eight results concern CochainComplex.shiftEval and shiftShortComplexFunctorIso and their component formulas; none compares the internal sheaf Hom complex.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulWhiskeringLeft\"",
+   "results": "Localization.fullyFaithfulWhiskeringLeft supports the derived descent, but is not the sheaf Hom-complex shift calculation.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*shift|shift.*homComplex",
+   "results": "Two hits are imports of Mathlib HomComplexShift for ordinary morphism cochains. No sheaf-valued Hom-complex shift theorem. Local rg searches in Sheaf and WeilConjectures also found no such theorem.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The shifted global RHom identification: source-shift reindexing of the Hom complex before taking global sections.",
+   "via": [
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-pur-derived-internal-hom-shift-comparison",
+    "lem-sc-global-hom-shifted-hypercohomology",
+    "lem-sc-restricted-global-hom-shifted-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexShiftLeft",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexShiftLeft.lean",
+  "declaration": "CategoryTheory.homComplex_shift_left",
+  "statement": "theorem homComplex_shift_left\n    {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    (L : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (m : ℤ) :\n    Nonempty (((homComplexFunctor (R := R)).obj (op L) ⋙ shiftFunctor _ (-m)) ≅\n      (homComplexFunctor (R := R)).obj (op (L⟦m⟧)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T134802-L-129974",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T134802-L-129974",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
