@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-filtered-quotient-map",
+ "kind": "statement",
+ "title": "Descent of filtered chain maps to coherent quotient pages",
+ "statement": "Let $C$ be abelian [def-sp-abelian], $K,K\\prime$ be integer-indexed cochain complexes, and $F,F\\prime$ decreasing filtrations by subcomplexes [def-sp-filtration]. Let $E,E\\prime$ be cohomological spectral sequences beginning at page one [def-sp-spectral-sequence], with concrete quotient identifications $e,e\\prime$ and quotient coherence [def-weil-pbc-filtered-quotient-coherence]. Suppose a chain map $b:K\\to K\\prime$ has restrictions to every filtration step, commuting with the step inclusions. Then there exists a spectral-sequence morphism $N:E\\to E\\prime$ whose components send every graded cycle representative of $x$ to that of $bx$. Precisely, for any test object $A$, degree $(p,q)$, positive page $r$, representatives $x:A\\to F^pK^{p+q}$ and $y:A\\to F\\prime{}^pK\\prime{}^{p+q}$ with $xb=y$ after step inclusions, and graded cycles $z,z\\prime$ projecting from $x,y$, one has $z\\pi_r e_r^{-1}N_r=z\\prime\\pi\\prime_r e\\prime_r{}^{-1}$. No finiteness, projectivity, CE resolution or first-page cohomology identification is assumed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex and lemma-functorial"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "def-weil-pbc-filtered-quotient-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Restrict b to the steps, descend through the graded projections, restrict to the cycle image subobjects and boundary image subobjects, and apply cokernel.map. The chain-map equation preserves the pullbacks defining cycles and the differential images defining boundaries. This gives each quotient component and its representative equation.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the quotient components by the supplied e. On the epimorphic representative covers, the differential equations in quotient coherence and b.comm give the chain-map equation for each page; cancel the representative epimorphisms.",
+   "uses": [
+    "def-weil-pbc-filtered-quotient-coherence",
+    "lem-sp-filtered-complex-differential-representatives-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the epic cover of page cycles by successor cycles. Precompose each successor square with that cover and the homology projection. The two successor equations of quotient coherence reduce the square to the already established successor quotient representative equation. Cancel the composite epimorphism and assemble the page chain maps into N.",
+   "uses": [
+    "def-weil-pbc-filtered-quotient-coherence",
+    "lem-sp-filtered-complex-successor-cycles-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-pbc-filtered-quotient-coherence",
+  "lem-sp-filtered-complex-boundaries-le-cycles",
+  "lem-sp-filtered-complex-differential-representatives-cover",
+  "lem-sp-filtered-complex-successor-cycles-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex and lemma-functorial"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filteredComplex.*(map|natur)|SpectralSequence.*Hom",
+   "date": "2026-10-13",
+   "results": "16 results: Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"hom\"",
+   "date": "2026-10-13",
+   "results": "12 results: CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂HomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceFinHAddNatOfNatProdIntCoreE₂CohomologicalFin, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdIntCoreE₂Cohomological, CategoryTheory.E₂CohomologicalSpectralSequence, CategoryTheory.E₂CohomologicalSpectralSequenceNat, CategoryTheory.CohomologicalSpectralSequence, CategoryTheory.CohomologicalSpectralSequenceNat; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered chain map induces a morphism of spectral sequences on cycle boundary quotient pages with canonical successor homology isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 results: HomologicalComplex.HomologySequence.composableArrows₃Functor_map, HomologicalComplex.HomologySequence.mapComposableArrows₂, HomologicalComplex.HomologySequence.mapSnakeInput, HomologicalComplex.HomologySequence.composableArrows₃Functor, HomologicalComplex.HomologySequence.mapComposableArrows₅, HomologicalComplex.gradedHomologyFunctor_map, HomologicalComplex.HomologySequence.composableArrows₂, HomologicalComplex.HomologySequence.snakeInput_v₁₂; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical cycle quotient spectral sequence functoriality and signed row first page comparison for etale hypercohomology",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEQuotientPageDescent",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Derived clause: construction of termwise CE pages for derived global sections and their restriction maps.",
+   "via": [
+    "lem-weil-pbc-ce-quotient-page-descent",
+    "lem-weil-pbc-ce-coherent-first-page-lifts",
+    "lem-weil-pbc-ce-filtered-total-construction",
+    "lem-weil-pbc-ce-total-filtered-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexQuotientMap",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexQuotientMap.lean",
+  "declaration": "CategoryTheory.filteredComplex_quotient_map",
+  "statement": "theorem filteredComplex_quotient_map (K K' : CochainComplex C ℤ) (F : DecreasingFiltration K) (F' : DecreasingFiltration K') (E E' : CohomologicalSpectralSequence C 1) (e : ∀ (p q r : ℤ) (hr : 1 ≤ r), (E.page r hr).X (p, q) ≅ filteredComplexPageObject K F r (p, q)) (e' : ∀ (p q r : ℤ) (hr : 1 ≤ r), (E'.page r hr).X (p, q) ≅ filteredComplexPageObject K' F' r (p, q)) (hc : FilteredComplexQuotientCoherence K F E e) (hc' : FilteredComplexQuotientCoherence K' F' E' e') (b : K ⟶ K') (hb : ∀ p : ℤ, ∃ s : (F.step p : CochainComplex C ℤ) ⟶ (F'.step p : CochainComplex C ℤ), s ≫ (F'.step p).arrow = (F.step p).arrow ≫ b) : ∃ N : E ⟶ E', ∀ (A : C) (p q r : ℤ) (hr : 1 ≤ r) (x : A ⟶ (F.step p : CochainComplex C ℤ).X (p + q)) (y : A ⟶ (F'.step p : CochainComplex C ℤ).X (p + q)) (z : A ⟶ (F.complexCycles p (p + q) r : C)) (z' : A ⟶ (F'.complexCycles p (p + q) r : C)), x ≫ (F.step p).arrow.f (p + q) ≫ b.f (p + q) = y ≫ (F'.step p).arrow.f (p + q) → z ≫ (F.complexCycles p (p + q) r).arrow = x ≫ (F.complexQuotientπ p (p + 1) (by omega)).f (p + q) → z' ≫ (F'.complexCycles p (p + q) r).arrow = y ≫ (F'.complexQuotientπ p (p + 1) (by omega)).f (p + q) → z ≫ filteredComplexPageπ K F r (p, q) ≫ (e p q r hr).inv ≫ (N.hom r hr).f (p, q) = z' ≫ filteredComplexPageπ K' F' r (p, q) ≫ (e' p q r hr).inv",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

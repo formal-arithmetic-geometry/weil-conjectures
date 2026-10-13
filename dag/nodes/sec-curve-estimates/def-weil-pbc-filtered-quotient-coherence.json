@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-pbc-filtered-quotient-coherence",
+ "kind": "definition",
+ "title": "Representative compatibility of quotient spectral sequences",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Let $E$ be a cohomological spectral sequence starting at page one [def-sp-spectral-sequence], and let $e_{p,q,r}:E_r^{p,q}\\cong Z_r^{p,q}/B_r^{p,q}$ identify its objects with the concrete page cokernels [lem-sp-filtered-complex-page-differential]. Define quotient coherence to mean: (1) for each positive page there is representative differential data $D_r$ and an isomorphism of complexes $E_r\\cong D_r$ whose components are $e$; (2) for every successor-cycle inclusion $Z_{r+1}\\to Z_r$, every test object $A$, and maps $x:A\\to Z_{r+1}$ and $z:A\\to\\ker(d_r)$ whose page inclusions agree after the quotient projection and $e_r^{-1}$, the composite of $z$ with the homology projection, the successor isomorphism of $E$, and $e_{r+1}$ equals $x$ followed by the concrete successor quotient projection. This is a proposition about specified data, asserting no choice or existence of any object.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex and lemma-functorial"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filteredComplex.*(map|natur)|SpectralSequence.*Hom",
+   "date": "2026-10-13",
+   "results": "16 results: Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"hom\"",
+   "date": "2026-10-13",
+   "results": "12 results: CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂HomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceFinHAddNatOfNatProdIntCoreE₂CohomologicalFin, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdIntCoreE₂Cohomological, CategoryTheory.E₂CohomologicalSpectralSequence, CategoryTheory.E₂CohomologicalSpectralSequenceNat, CategoryTheory.CohomologicalSpectralSequence, CategoryTheory.CohomologicalSpectralSequenceNat; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered chain map induces a morphism of spectral sequences on cycle boundary quotient pages with canonical successor homology isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 results: HomologicalComplex.HomologySequence.composableArrows₃Functor_map, HomologicalComplex.HomologySequence.mapComposableArrows₂, HomologicalComplex.HomologySequence.mapSnakeInput, HomologicalComplex.HomologySequence.composableArrows₃Functor, HomologicalComplex.HomologySequence.mapComposableArrows₅, HomologicalComplex.gradedHomologyFunctor_map, HomologicalComplex.HomologySequence.composableArrows₂, HomologicalComplex.HomologySequence.snakeInput_v₁₂; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical cycle quotient spectral sequence functoriality and signed row first page comparison for etale hypercohomology",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEQuotientPageDescent",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Derived clause: construction of termwise CE pages for derived global sections and their restriction maps.",
+   "via": [
+    "lem-weil-pbc-ce-quotient-page-descent",
+    "lem-weil-pbc-ce-coherent-first-page-lifts",
+    "lem-weil-pbc-ce-filtered-total-construction",
+    "lem-weil-pbc-ce-total-filtered-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexQuotientCoherence",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexQuotientCoherence.lean",
+  "declaration": "CategoryTheory.FilteredComplexQuotientCoherence",
+  "statement": "structure FilteredComplexQuotientCoherence (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (E : CohomologicalSpectralSequence C 1) (e : ∀ (p q r : ℤ) (hr : 1 ≤ r), (E.page r hr).X (p, q) ≅ filteredComplexPageObject K F r (p, q)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

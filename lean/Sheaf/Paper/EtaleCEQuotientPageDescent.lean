@@ -6,10 +6,8 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.FilteredComplexPageHomology
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.CategoryTheory.FilteredComplexQuotientMap
+import Sheaf.Paper.EtaleCECoherentQuotientPresentations
 
 /-! # Coherent quotient pages with descent of supplied comparisons
 
@@ -25,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Choose quotient-page presentations on which a supplied filtered augmented
@@ -107,6 +106,19 @@ theorem exists_etaleCE_quotient_page_descent :
           (D.firstPageIso p q).hom ≫
             AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
               (cohomologyMap f (K.obj.X q) p))) ∧
-        EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N := by sorry
+        EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N := by
+  obtain ⟨P, e, hc, hfirst⟩ := exists_etaleCE_coherent_quotient_presentations
+  refine ⟨P, e, ?_⟩
+  intro X Y f K L v D D' φ hφ u hu b hb
+  obtain ⟨N, hN⟩ := filteredComplex_quotient_map
+    D.sectionsTotal D'.sectionsTotal D.L D'.L
+    D.sequence D'.sequence (e X K) (e Y L) (hc X K) (hc Y L) b hb
+  have hrep : EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N :=
+    hN
+  refine ⟨N, ?_, hrep⟩
+  intro p q
+  exact hfirst f K L v φ hφ u hu p q ((N.hom 1 (by decide)).f (q, (p : ℤ)))
+    (fun A x y z z' hxy hz hz' ↦
+      hrep A q (p : ℤ) 1 (by decide) x y z z' hxy hz hz')
 
 end AlgebraicGeometry.Etale

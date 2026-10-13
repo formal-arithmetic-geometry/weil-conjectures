@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-ce-coherent-quotient-presentations",
+ "kind": "statement",
+ "title": "Coherent CE quotient presentations and comparison of a supplied first-page component",
+ "statement": "For every scheme $X$ and bounded-below complex $K$ of abelian etale sheaves [def-weil-pbc-scheme-conventions, def-weil-pbc-etale-sheaves], there exist simultaneous termwise hypercohomology presentations $P(X,K)$ [def-weil-pbc-termwise-hypercohomology-presentation] and concrete quotient realizations $e$ [lem-weil-pbc-ce-stationary-page-naturality] satisfying quotient coherence [def-weil-pbc-filtered-quotient-coherence]. For $f:Y\\to X$ [def-weil-pbc-inverse-image], $v:f^{-1}K\\to L$, an augmented bicomplex comparison $\\varphi$, and a supplied sheaf-total map $u$ satisfying the nonnegative diagonal summand equation, put $b=P(X,K).\\mathrm{totalSectionsIso}.\\mathrm{hom}\\,\\mathrm{ceSectionsLift}(f,u)\\,P(Y,L).\\mathrm{totalSectionsIso}.\\mathrm{inv}$ [lem-weil-pbc-ce-total-sections-comparison]. Fix $p\\ge0,q\\in\\mathbf Z$. Any single first-page component $m:E_1^{q,p}(X,K)\\to E_1^{q,p}(Y,L)$ with the displayed action of $b$ on all cycle representatives satisfies $m\\,\\mathrm{firstPageIso}_{Y,L}=\\mathrm{firstPageIso}_{X,K}\\,H^p(v^q)\\,\\mathrm{cohomologyMap}_f$ [def-weil-pbc-cohomology-pullback]. The representative premise is restricted to this one bidegree on page one, exactly as in Lean. No spectral-sequence morphism or lift is constructed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J, lemma-two-ss-complex-functor; Tag 015K, remark-functorial-ss; Homology Tag 012K"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-weil-pbc-ce-stationary-page-naturality",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-filtered-quotient-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Shift each complex to nonnegative degrees, take a CE resolution, and shift back. Form the sections total and complex-degree filtration. Take the actual quotient objects with representative differentials. In the quotient-of-quotients calculation use the cokernel comparison fixed by the successor projection equation, giving quotient coherence. Adjoin the graded page zero. Retain the augmented CE total, K-injective comparison and transported image filtration of the first hypercohomology construction.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "thm-sp-if-e1",
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-page-homology",
+    "def-weil-pbc-filtered-quotient-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the signed row-cohomology identifications. The diagonal summand formula identifies b on a row cocycle with sections of the supplied comparison, preceded by the pullback unit. Its augmentation equation puts this resolution comparison over v. The injective-resolution computation gives cohomologyMap followed by Sheaf.H.map. A supplied component m with that representative action has the same composite with the epimorphic cycle-to-page map, so cancel that map. Equal sign corrections in source and target commute with the additive row map.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-cohomology-pullback",
+    "thm-sp-if-e1"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-filtered-quotient-coherence",
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-page-homology",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "thm-sp-if-e1"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J, lemma-two-ss-complex-functor; Tag 015K, remark-functorial-ss; Homology Tag 012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filteredComplex.*(map|natur)|SpectralSequence.*Hom",
+   "date": "2026-10-13",
+   "results": "16 results: Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"hom\"",
+   "date": "2026-10-13",
+   "results": "12 results: CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂CohomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdNatCoreE₂HomologicalNat, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceFinHAddNatOfNatProdIntCoreE₂CohomologicalFin, CategoryTheory.Abelian.SpectralObject.instHasSpectralSequenceEIntProdIntCoreE₂Cohomological, CategoryTheory.E₂CohomologicalSpectralSequence, CategoryTheory.E₂CohomologicalSpectralSequenceNat, CategoryTheory.CohomologicalSpectralSequence, CategoryTheory.CohomologicalSpectralSequenceNat; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered chain map induces a morphism of spectral sequences on cycle boundary quotient pages with canonical successor homology isomorphisms",
+   "date": "2026-10-13",
+   "results": "8 results: HomologicalComplex.HomologySequence.composableArrows₃Functor_map, HomologicalComplex.HomologySequence.mapComposableArrows₂, HomologicalComplex.HomologySequence.mapSnakeInput, HomologicalComplex.HomologySequence.composableArrows₃Functor, HomologicalComplex.HomologySequence.mapComposableArrows₅, HomologicalComplex.gradedHomologyFunctor_map, HomologicalComplex.HomologySequence.composableArrows₂, HomologicalComplex.HomologySequence.snakeInput_v₁₂; no exact statement found.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical cycle quotient spectral sequence functoriality and signed row first page comparison for etale hypercohomology",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEQuotientPageDescent",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Derived clause: construction of termwise CE pages for derived global sections and their restriction maps.",
+   "via": [
+    "lem-weil-pbc-ce-quotient-page-descent",
+    "lem-weil-pbc-ce-coherent-first-page-lifts",
+    "lem-weil-pbc-ce-filtered-total-construction",
+    "lem-weil-pbc-ce-total-filtered-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCECoherentQuotientPresentations",
+  "file": "lean/Sheaf/Paper/EtaleCECoherentQuotientPresentations.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_coherent_quotient_presentations",
+  "statement": "theorem exists_etaleCE_coherent_quotient_presentations : ∃ (P : ∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})), EtaleTermwiseHypercohomology X K) (e : ∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})), EtaleCEQuotientRealization (P X K)), (∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})), FilteredComplexQuotientCoherence (P X K).sectionsTotal (P X K).L (P X K).sequence (e X K)) ∧ ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj), let D := P X K let D' := P Y L ∀ (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I) (hφ : ∀ q : ℤ, (upperStar AddCommGrpCat.{uNatural + 1} f).map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.obj.X q)).inv ≫ (D.a.f q).f 0) ≫ (φ.f q).f 0 = v.f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (L.obj.X q)).inv ≫ (D'.a.f q).f 0) (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal) (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n), (upperStar AddCommGrpCat.{uNatural + 1} f).map ((HomologicalComplex.extendXIso (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex (ComplexShape.up ℕ)).obj (D.I.X q)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj D.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h) ≫ u.f n = (φ.f q).f m ≫ (HomologicalComplex.extendXIso (((𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex (ComplexShape.up ℕ)).obj (D'.I.X q)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj D'.I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) q n h), let b := D.totalSectionsIso.hom ≫ ceSectionsLift f u ≫ D'.totalSectionsIso.inv ∀ (p : ℕ) (q : ℤ) (m : (D.sequence.page 1).X (q, (p : ℤ)) ⟶ (D'.sequence.page 1).X (q, (p : ℤ))), (∀ (A : AddCommGrpCat.{uNatural + 1}) (x : A ⟶ (D.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X (q + (p : ℤ))) (y : A ⟶ (D'.L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ).X (q + (p : ℤ))) (z : A ⟶ (D.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1})) (z' : A ⟶ (D'.L.complexCycles q (q + (p : ℤ)) 1 : AddCommGrpCat.{uNatural + 1})), x ≫ (D.L.step q).arrow.f (q + (p : ℤ)) ≫ b.f (q + (p : ℤ)) = y ≫ (D'.L.step q).arrow.f (q + (p : ℤ)) → z ≫ (D.L.complexCycles q (q + (p : ℤ)) 1).arrow = x ≫ (D.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) → z' ≫ (D'.L.complexCycles q (q + (p : ℤ)) 1).arrow = y ≫ (D'.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) → z ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫ (e X K q (p : ℤ) 1 (by decide)).inv ≫ m = z' ≫ filteredComplexPageπ D'.sectionsTotal D'.L 1 (q, (p : ℤ)) ≫ (e Y L q (p : ℤ) 1 (by decide)).inv) → m ≫ (D'.firstPageIso p q).hom = (D.firstPageIso p q).hom ≫ AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp (cohomologyMap f (K.obj.X q) p))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T054226-L-445554",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
