@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "merged_into": null,
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, converse proof, local model comparison"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free sheaf complex on affine scheme lifts to modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free sheaf complex affine lift",
+   "results": "no exact match; finite-type declarations only",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tildeFinsupp|fullyFaithfulFunctor in Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "AlgebraicGeometry.tildeFinsupp and tilde.fullyFaithfulFunctor",
+   "date": "2026-10-13",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a complex of locally free sheaves from an open subset to a principal affine open and identify it with a localized module complex",
+   "results": "Scheme.preservesLocalization_toOpensFunctor and affine principal-open section localization results; no complex transport theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, Scheme.Modules.overFunctorEquiv; component comparisons only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overFunctorEquiv|tildeFinsupp|fullyFaithfulFunctor",
+   "results": "Mathlib Modules/Sheaf.lean overFunctorEquiv; Modules/Tilde.lean tilde.fullyFaithfulFunctor and tildeFinsupp; ModuleCat/Sheaf/PushforwardContinuous.lean overFunctorMap. Local upstream and Sheaf searches found no exact duplicate",
+   "date": "2026-10-13",
+   "verdict": "components only"
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, converse proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-pseudo-coherent-principal-sheaf-model",
+   "place": "proof step 2: local model construction",
+   "via": [
+    "lem-pc-affine-pseudo-coherent-principal-sheaf-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-pc-affine-principal-sheaf-complex-transport",
+ "title": "Principal-open restriction transports a finite-free sheaf complex",
+ "statement": "theorem affine_principal_sheaf_complex_transport (A : Type u) [CommRing A] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] (M : CochainComplex (ModuleCat.{u} A) ℤ) (f : A) [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))] (U : (Spec (.of A)).Opens) (hf : PrimeSpectrum.basicOpen f ≤ U) (P : CochainComplex (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ℤ) (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → CategoryTheory.Limits.IsZero (P.X i)) (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{u} (Fin r)))) (hiso : Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ≅ DerivedCategory.Q.obj P)) : ∃ C : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → CategoryTheory.Limits.IsZero (C.X i)) ∧ (∀ i : ℤ, ∃ r : ℕ, Nonempty (C.X i ≅ SheafOfModules.free (R := moduleRings (Spec (.of (Localization.Away f))).toRingedSpace) (ULift.{u} (Fin r)))) ∧ Nonempty (DerivedCategory.Q.obj C ≅ DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f)) (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) _ _ _ _ (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away f))) (ComplexShape.up ℤ)).obj M)))",
+ "proof": [
+  {
+   "text": "Restrict the complex and supplied derived isomorphism to D(f), transport along the affine scheme isomorphism D(f) ≅ Spec(A_f), and preserve the upper bound and finite-free terms by exact additive equivalences.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The principal-open sections formula gives a natural comparison between transported tilde N and tilde(A_f tensor_A N), so the transported complex is derived-isomorphic to the localized tilde complex.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePrincipalSheafComplexTransport.lean",
+  "declaration": "AlgebraicGeometry.affine_principal_sheaf_complex_transport",
+  "statement": "theorem affine_principal_sheaf_complex_transport (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wX}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wX}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) (f : A)\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))]\n    (U : (Spec (.of A)).Opens)\n    (hf : PrimeSpectrum.basicOpen f ≤ U)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ℤ)\n    (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → CategoryTheory.Limits.IsZero (P.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free\n      (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{u} (Fin r))))\n    (hiso : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of A))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ≅\n      DerivedCategory.Q.obj P)) :\n    ∃ C : CochainComplex\n      (SheafOfModules.{u}\n        (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) ℤ,\n      (∃ b : ℤ, ∀ i : ℤ, b < i → CategoryTheory.Limits.IsZero (C.X i)) ∧\n      (∀ i : ℤ, ∃ r : ℕ, Nonempty (C.X i ≅ SheafOfModules.free\n        (R := moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)\n        (ULift.{u} (Fin r)))) ∧\n      Nonempty (DerivedCategory.Q.obj C ≅\n        DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))\n            (SheafOfModules.{u}\n              (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of (Localization.Away f)))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n              ((Functor.mapHomologicalComplex\n                (ModuleCat.extendScalars (algebraMap A (Localization.Away f)))\n                (ComplexShape.up ℤ)).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T015620-L-3028871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T015620-L-3028871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

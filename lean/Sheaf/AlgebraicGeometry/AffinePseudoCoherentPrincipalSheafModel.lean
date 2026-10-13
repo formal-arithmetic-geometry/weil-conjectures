@@ -5,7 +5,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.AffinePrincipalSheafComplexTransport
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift
 
 /-! A finite-free witness for the local principal-open pseudo-coherence comparison.
 (blueprint: lem-pc-affine-pseudo-coherent-principal-sheaf-model)
@@ -90,6 +91,11 @@ theorem affine_pseudoCoherent_principal_sheaf_model (A : Type u) [CommRing A]
               ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj
                 ((Functor.mapHomologicalComplex
                   (ModuleCat.extendScalars (algebraMap A (Localization.Away f)))
-                  (ComplexShape.up ℤ)).obj M))) := by sorry
+                  (ComplexShape.up ℤ)).obj M))) := by
+  obtain ⟨C, hCbound, hCfree, ⟨eC⟩⟩ :=
+    affine_principal_sheaf_complex_transport A M f U hf P hb hfree hiso
+  obtain ⟨E, b, hEbound, hEfree, ⟨eE⟩⟩ :=
+    affine_finiteFree_sheaf_complex_lift (Localization.Away f) C hCbound hCfree
+  exact ⟨E, b, hEbound, hEfree, ⟨DerivedCategory.Q.mapIso eE ≪≫ eC⟩⟩
 
 end AlgebraicGeometry
