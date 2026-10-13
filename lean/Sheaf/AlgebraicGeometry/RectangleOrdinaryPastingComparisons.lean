@@ -6,8 +6,8 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
-import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricComparisons
+import Sheaf.CategoryTheory.EquivalenceRightAdjointCounitTransport
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
@@ -16,8 +16,8 @@ Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
 
 @[expose] public section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u w
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.TwoSquare
@@ -112,6 +112,16 @@ theorem rectangle_ordinary_pasting_comparisons
            (comp k (pullback.fst f (h ≫ g))).hom.app E.obj ≫
              eqToHom (congrArg (fun v ↦ (derivedPullback v).obj E.obj) hk₁) ≫
              (comp (pullback.fst (pullback.snd f g) h)
-               (pullback.fst f g)).inv.app E.obj)) := by sorry
+               (pullback.fst f g)).inv.app E.obj)) := by
+  classical
+  intro U L V P Q B H α δ
+  have geom := rectangle_ordinary_geometric_comparisons.{u, w} f g h hβ hβS hβI k hk₁ hk₂
+  dsimp only at geom
+  rcases geom with ⟨s, p, b, hL, hα, hs⟩
+  let : L.IsEquivalence := hL
+  have tr := equivalence_rightAdjoint_counit_transport
+    (P := P) (Q := Q) (c := c) (d := d) L adjc adjd p
+  rcases tr with ⟨t, ht⟩
+  exact ⟨s, p, b, t, ht, hα, hs⟩
 
 end AlgebraicGeometry

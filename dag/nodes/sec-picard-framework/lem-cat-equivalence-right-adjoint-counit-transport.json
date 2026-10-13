@@ -1,0 +1,108 @@
+{
+ "id": "lem-cat-equivalence-right-adjoint-counit-transport",
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "title": "Counit-compatible right-adjoint transport along an equivalence",
+ "statement": "Let E,J,T be categories, L:E→J an equivalence, P:E→T and Q:J→T functors, ac:P⊣c and ad:Q⊣d adjunctions, and p:L⋙Q≅P. There exists t:c⋙L≅d with Q(t_Z) followed by ad.counit_Z equal to p_{c(Z)} followed by ac.counit_Z for every Z. No assumption on objects or nonemptiness is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0ATR",
+  "place": "Lemma 48.5.2 (0ATR), reduction to ordinary base-change pasting; Remark 20.28.3 (08HY), Remark 20.28.5 (0ATM), and Lemma 20.27.2 (0D5S)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For e=L.asEquivalence define j:e.inverse⋙P≅Q by whiskering p inverse, re-associating, applying e.counitIso, and the left unitor. Compose e.symm.toAdjunction with ac and transport along j to obtain a:Q⊣c⋙L. Set t=a.rightAdjointUniq ad. Its counit compatibility reduces the desired equation to the formula for a.counit. Expand the transported and composite counits; use naturality of p, functoriality, and e.counitInv_functor_comp to obtain p followed by ac.counit.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cat-right-adjoint-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 0ATR and 0D5S",
+  "note": "Split from the ordinary rectangle argument, keeping its geometric construction and adjunction transport separate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a right adjoint along an equivalence of the source and an isomorphism of left adjoints, with counit compatibility",
+   "results": "Eight hits including ofNatIsoLeft and ofNatIsoRight.",
+   "date": "2026-10-13",
+   "verdict": "Used ofNatIsoLeft."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Twelve hits including rightAdjointUniq_hom_app_counit.",
+   "date": "2026-10-13",
+   "verdict": "Used to construct the comparison and prove the counit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq_hom_app_counit|ofNatIsoLeft_counit",
+   "results": "Mathlib Adjunction/Unique.lean:127 and Adjunction/Basic.lean:506.",
+   "date": "2026-10-13",
+   "verdict": "Exact generic tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a right adjoint along an equivalence with a specified counit compatibility",
+   "results": "Service unavailable: Internal Server Error; zero hits.",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RectangleOrdinaryPastingComparisons",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sc-rectangle-ordinary-pasting-comparisons",
+   "place": "Final right-adjoint transport"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.EquivalenceRightAdjointCounitTransport",
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceRightAdjointCounitTransport.lean",
+  "declaration": "equivalence_rightAdjoint_counit_transport",
+  "statement": "theorem equivalence_rightAdjoint_counit_transport\n    {E J T : Type*} [Category* E] [Category* J] [Category* T]\n    (L : E ⥤ J) [L.IsEquivalence]\n    {P : E ⥤ T} {Q : J ⥤ T} {c : T ⥤ E} {d : T ⥤ J}\n    (ac : P ⊣ c) (ad : Q ⊣ d) (p : L ⋙ Q ≅ P) :\n    ∃ t : c ⋙ L ≅ d, ∀ Z : T,\n      Q.map (t.hom.app Z) ≫ ad.counit.app Z =\n        p.hom.app (c.obj Z) ≫ ac.counit.app Z",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2276e",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T151131-L-876167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-2276e",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T151131-L-876167",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures with their node records, the unchanged item with the clone, and the proof with its dependencies; delivered modules and sole direct importer compile cleanly, with permitted axioms only."
+ }
+}
