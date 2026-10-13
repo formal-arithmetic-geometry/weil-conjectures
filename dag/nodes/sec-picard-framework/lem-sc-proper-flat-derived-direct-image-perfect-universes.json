@@ -17,37 +17,46 @@
  ],
  "proof": [
   {
-   "text": "Use the universal property of derived localization to compare the supplied derived categories, including those on opens, with standard K-injective models in a common sufficiently large Hom universe. Exact restriction commutes with the localization equivalences, so local strictly perfect representatives are preserved and reflected. Derived direct image commutes with these equivalences by its K-injective construction. The statement concerns an already supplied object E; no arbitrary object is chosen from an unproved existence assertion.",
+   "text": "Represent E as QK using essential surjectivity of DerivedCategory.Q and transport perfectness along QK ≅ E. For every point retain the same open U and strictly perfect complex L. mapDerivedCategoryFactors identifies each restricted QK with Q of the termwise restricted K. Localization.uniq and compUniqFunctor transfer the isomorphism to QL to the standard localization on U. Thus K remains perfect in the standard source and open models in Hom universe u+1; all standard scheme and open models are constructed by HasDerivedCategory.standard.",
    "uses": [
     "def-pc-derived-category",
-    "def-pc-derived-direct-image"
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply properSupport_perfect_directImage to QK and the actual single complex G = O_X[0]. Its bounds are [0,0]. O_X is invertible and finitely presented, and the zero terms are finitely presented because a rank-zero free module is zero. isFlatOver_of_isInvertible gives relative flatness of the degree-zero term; for other degrees the section modules are subsingleton and hence flat. finite_type_module_support_closed gives closed term supports. Each reduced closed support immersion followed by the proper f is proper. Properness also supplies quasi-compactness and quasi-separatedness. The first conclusion is perfectness of Rf_*(QK tensor QG). singleFunctorIsoCompQ identifies QG with the derived tensor unit; tensorIso followed by rightUnitor identifies QK tensor QG with QK. Transport the local strictly perfect witnesses along the direct image of this isomorphism.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-flat-morphism",
+    "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "In the common models apply lem-pc-proper-support-perfect-direct-image with the given perfect object E and G=O_X concentrated in degree zero. G is bounded. Its terms are finitely presented; the nonzero term is flat over Y because f is flat and has proper support because f is proper. Zero terms are finitely presented and flat and have empty proper support. Properness supplies quasi-compactness and quasi-separatedness of f, and local finite presentation combined with quasi-compactness is finite presentation. The tensor-unit isomorphism E tensor^L O_X ≅ E identifies the first conclusion with perfectness of Rf_*E.",
+   "text": "Set J = f_*I(K), using the existing functorial K-injective resolution, independent of the supplied derived localizations. derivedModuleDirectImageFactorization represents the standard direct image of QK as QJ. Transfer perfectness of QJ to the supplied target localization and the supplied localizations on its opens by the first-step exact-restriction and localization-uniqueness argument. The same factorization in the original source and target models, composed with the direct image of QK ≅ E, gives Rf_*E ≅ QJ. Transfer perfectness back along that isomorphism. All transports are proved private helpers, and no sorry is added.",
    "uses": [
-    "lem-pc-proper-support-perfect-direct-image"
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the conclusion back to the supplied model on Y, using the compatible equivalences on its opens. Each local strictly perfect representative of Rf_*E remains a representative there. Thus the conclusion holds with the original independent Hom universes. The argument also covers the empty scheme and E=0.",
-   "uses": [
-    "def-pc-derived-category"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-derived-category",
-  "def-pc-derived-direct-image",
-  "lem-pc-proper-support-perfect-direct-image"
+  "def-pc-perfect-complex",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0B91 proof, with explicit localization-universe transport; source read at https://stacks.math.columbia.edu/tag/0B91 on 2026-10-13"
+  "place": "Tag 0B91(1), proof invoking Tag 0A1H; sources read online 2026-10-13. S1 Lean proof uses Mathlib localization uniqueness and the shared K-injective direct-image factorization to implement the independent-Hom-universe transport."
  },
  "mathlib_searches": [
   {
@@ -124,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T045600-L-136724",
-  "kind": "interface",
+  "landing": "20261013T082412-L-1647177",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

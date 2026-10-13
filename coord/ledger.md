@@ -11707,3 +11707,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/R4/Sheaf.AlgebraicGeometry.PseudoCoherentDistinguishedTriangle (stage 3; reviewer PASS; first push; landing 20261013T082410-L-1646790 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/R4/Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral (stage 3; reviewer PASS; first push; landing 20261013T082411-L-1646890 (interface); batch 20261013T082326; modules 4; new nodes 3)
 - 08:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineLocalizingPresheafBasisSheaf (stage 3; reviewer PASS; first push; landing 20261013T082411-L-1646994 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261013T082412-L-1647177 (proof); batch 20261013T082326; modules 1; new nodes 0)
