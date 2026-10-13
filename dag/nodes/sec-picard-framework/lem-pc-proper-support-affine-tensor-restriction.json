@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-proper-support-affine-tensor-restriction",
+ "kind": "statement",
+ "title": "Affine restriction of the proper-support tensor input data and direct image",
+ "statement": "Let f:X→S be of finite presentation [def-pc-morphism-conventions], E perfect [def-pc-perfect-complex], and G a bounded finitely presented complex termwise flat over S and with proper support [def-weil-pbc-closed-subset-proper-over-base]. For any affine open U⊆S, pull back along j:Spec Γ(U,O)→U→S. The resulting X′→Spec Γ(U,O) is of finite presentation, E′ is perfect, and G′ has the same termwise and boundedness properties. Moreover Lι_U*Rf*(E tensor^L G) is isomorphic to L(U.isoSpec.hom)*Rf′*(E′ tensor^L G′) [def-pc-derived-pullback, def-pc-derived-direct-image]. No Noetherian model is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A1H",
+  "place": "Lemma 36.30.1, affine reduction and Noetherian approximation paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-perfect-complex",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct j as U.isoSpec.inv followed by the open inclusion; choose the canonical pullback scheme, its projections, E′ as derived pullback, and G′ as ordinary termwise tensor pullback. Morphism finite-presentation and qcqs instances survive base change. Apply preservation of perfectness to E and properSupport_tensorPullback_properties to every term of G. The additive tensor-pullback functor sends all zero terms outside the original finite interval to zero terms.",
+   "uses": [
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-proper-support-tensor-pullback-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Perfectness gives quasi-coherent cohomology of E, and finite presentation gives quasi-coherence of each G term. Apply cartesian_tensor_data_comparison to the canonical square with identity identifications of the pulled factors.",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-cartesian-tensor-data-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the proved composition isomorphisms of derived pullback. Pull the preceding comparison back along U.isoSpec.hom. Rewrite U.isoSpec.hom followed by j as U.ι using the scheme isomorphism identity; the inverse composition comparison identifies the left object with Lι_U*Rf*(E tensor^L G).",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cartesian-tensor-data-comparison",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-proper-support-tensor-pullback-properties",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A1H",
+  "place": "Lemma 36.30.1, affine reduction and Noetherian approximation paragraph; categorical glue written by H1 following the cited proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction bounded finitely presented flat complex proper support affine open",
+   "results": "Service unavailable: Internal Server Error; no search verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback finite presentation module sheaf relative flatness proper support",
+   "results": "Eight hits: finite-presentation sheaf definitions and Flat.isStableUnderBaseChange for scheme morphisms. None states relative flatness of a module or the required derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoPullback",
+   "results": "Service unavailable; no search verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "HasSupportProperOver|tensorPullback.*IsFinitePresentation|IsFlatOver.*pullback; tensor.*baseChange|baseChange.*tensor",
+   "results": "Source Modules.FiniteDescent proves finite presentation for native pullback. FiniteTypeModuleSupportPullback proves support equality. No combined proper-support/flatness result. Existing RelativelyFlatTensorBaseChangeIso is for the canonical pullback only. Blueprint searches for 0A1D, 0A1H and tensor base change found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "partial matches reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportLocalNoetherianModel",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0A1H: The question is local on S, hence assume S affine",
+   "via": [
+    "lem-pc-proper-support-local-noetherian-model",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportAffineTensorRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportAffineTensorRestriction.lean",
+  "declaration": "AlgebraicGeometry.properSupport_affine_tensor_restriction",
+  "statement": "theorem properSupport_affine_tensor_restriction\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E)\n    (G : CochainComplex X.Modules ℤ)\n    (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    [∀ n : ℤ, (G.X n).IsFinitePresentation]\n    (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f)\n    (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n))\n    (U : S.Opens) [IsAffine U.toScheme] :\n    ∃ (X' : Scheme.{u}) (f' : X' ⟶ Spec Γ(U.toScheme, ⊤)),\n      LocallyOfFinitePresentation f' ∧ QuasiCompact f' ∧ QuasiSeparated f' ∧\n      ∃ (hf' : LocallyOfFiniteType f') (E' : schemeDerivedCategory X'),\n        Scheme.IsPerfect X' E' ∧\n        ∃ G' : CochainComplex X'.Modules ℤ,\n          (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G'.X n)) ∧\n          (∀ n : ℤ, (G'.X n).IsFinitePresentation) ∧\n          (∀ n : ℤ, (G'.X n).IsFlatOver f') ∧\n          (∀ n : ℤ, @Scheme.Modules.HasSupportProperOver _ _ f' hf' (G'.X n)) ∧\n          Nonempty ((derivedPullback U.ι).obj\n              ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G)) ≅\n            (derivedPullback U.toScheme.isoSpec.hom).obj\n              ((schemeDerivedDirectImage f').obj (E' ⊗ DerivedCategory.Q.obj G')))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T045531-L-129199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T045531-L-129199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

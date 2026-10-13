@@ -12,10 +12,12 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Sheaf.AlgebraicGeometry.NoetherianApproximationData
-import Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
+import Sheaf.AlgebraicGeometry.ProperSupportAffineTensorRestriction
+import Sheaf.AlgebraicGeometry.CartesianTensorDataComparison
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 /-! # Local Noetherian models for proper-support direct images
 
 Source: Stacks Project, Tag 0A1H, lemma-base-change-tensor-perfect, approximation paragraph
@@ -78,6 +80,48 @@ theorem properSupport_local_noetherian_model
               Nonempty ((derivedPullback U.ι).obj
                   ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G)) ≅
                 (derivedPullback g).obj
-                  ((schemeDerivedDirectImage fi).obj (Ei ⊗ DerivedCategory.Q.obj Gi))) := by sorry
+                  ((schemeDerivedDirectImage fi).obj (Ei ⊗ DerivedCategory.Q.obj Gi))) := by
+  classical
+  obtain ⟨U, hU, hx, _⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := S) (x := x) (U := ⊤) (by trivial)
+  let : IsAffine U.toScheme := hU
+  obtain ⟨X', f', hfp', hqc', hqs', hft', E', hE', G', hb', hfin', hflat',
+    hproper', ⟨eopen⟩⟩ :=
+    properSupport_affine_tensor_restriction f E hE G hGb hGflat hGproper U
+  let : LocallyOfFinitePresentation f' := hfp'
+  let : QuasiCompact f' := hqc'
+  let : QuasiSeparated f' := hqs'
+  let : LocallyOfFiniteType f' := hft'
+  let : ∀ n : ℤ, (G'.X n).IsFinitePresentation := hfin'
+  let A := Γ(U.toScheme, ⊤)
+  let I := {B : Subalgebra ℤ A // B.FG}
+  let R := CommRingCat.fgSubalgebraDiagram A
+  let c := CommRingCat.fgSubalgebraCocone A
+  have hnoeth : ∀ i : I, IsNoetherianRing (R.obj i) := by
+    intro i
+    let : Algebra.FiniteType ℤ i.1 := (Subalgebra.fg_iff_finiteType _).mp i.2
+    exact Algebra.FiniteType.isNoetherianRing ℤ i.1
+  let : ∀ i : I, IsNoetherianRing (R.obj i) := hnoeth
+  obtain ⟨i, Xi, fi, hfp, hqc, hqs, hft, q, sq, Gi, hb, hfin, hflat,
+    hproper, e, he, Ei, hEi, hEE⟩ :=
+    noetherian_approximation_data R c (CommRingCat.isColimitFgSubalgebraCocone A)
+      X' f' hb' hflat' hproper' E' hE'
+  let : LocallyOfFinitePresentation fi := hfp
+  let : QuasiCompact fi := hqc
+  let : QuasiSeparated fi := hqs
+  let : LocallyOfFiniteType fi := hft
+  let : ∀ n : ℤ, (Gi.X n).IsFinitePresentation := hfin
+  obtain ⟨a, b, hab⟩ := hb
+  obtain ⟨ecart⟩ := cartesian_tensor_data_comparison fi (Spec.map (c.ι.app i)) q f' sq
+    Ei (schemeDerivedQCohProperty_of_isPerfect Xi Ei hEi) Gi
+    ⟨b, fun n hn ↦ hab n (Or.inr hn)⟩ (fun n ↦ inferInstance) hflat E' hEE G' e he
+  obtain ⟨_, _, _, comp, _⟩ := exists_derivedPullbackComposition.{u, w}
+  refine ⟨U, hx, Xi, Spec (R.obj i), fi, inferInstance, hfp, hqc, hqs,
+    hft, Ei, hEi, Gi, ⟨a, b, hab⟩, hfin, hflat, hproper,
+    U.toScheme.isoSpec.hom ≫ Spec.map (c.ι.app i), ?_⟩
+  exact ⟨eopen ≪≫ (derivedPullback U.toScheme.isoSpec.hom).mapIso ecart.symm ≪≫
+    (comp U.toScheme.isoSpec.hom (Spec.map (c.ι.app i))).app
+      ((schemeDerivedDirectImage fi).obj (Ei ⊗ DerivedCategory.Q.obj Gi))⟩
+
 
 end AlgebraicGeometry

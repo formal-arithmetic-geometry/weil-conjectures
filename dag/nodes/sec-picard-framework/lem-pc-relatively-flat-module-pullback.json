@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-relatively-flat-module-pullback",
+ "kind": "statement",
+ "title": "Relative flatness of a module under scheme base change",
+ "statement": "Let f:X→S and p:T→S be morphisms of schemes [def-pc-base-change]. If a quasi-coherent O_X-module F is flat over S [def-pc-scheme-module-flat-over], then the ordinary tensor pullback of F by X×_S T→X [def-pc-module-pullback] is flat over T. No finiteness or flatness hypothesis is imposed on f or p.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/051D",
+  "place": "Section 10.100, Lemma 10.100.1(1), proof; applied to the affine stalk description of base change"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "For quasi-coherent F, the affine-section condition IsFlatOver is equivalent to stalkwise relative flatness by def-pc-scheme-module-flat-over (Stacks Tag 01U4). Fix a point of the fibre product. The stalk tensor-pullback isomorphism identifies the pulled stalk with extension of scalars from the original module stalk along the first projection stalk map.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In affine coordinates the fibre-product stalk is a localization of the tensor product of the two relevant stalk rings over the base stalk. The original stalk is flat over the base by hypothesis. Scalar extension gives a flat module over the new base stalk, and localization in the tensor-product ring preserves that flatness (Stacks, Section 10.100, Lemma 10.100.1(1), Tag 051D). Transport through the stalk identification and apply the definition pointwise. Empty fibre products are vacuous. Ordinary pullback preserves quasi-coherence, so the same affine local criterion (Tag 01U4) recovers the required affine-section flatness: for affine W over affine V, every localization of the module of sections on W is flat over the corresponding localized base ring, hence the module of sections is flat over the base coordinate ring.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-scheme-module-flat-over",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/051D",
+  "place": "Section 10.100, Lemma 10.100.1(1), proof; applied to the affine stalk description of base change; categorical glue written by H1 following the cited proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction bounded finitely presented flat complex proper support affine open",
+   "results": "Service unavailable: Internal Server Error; no search verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback finite presentation module sheaf relative flatness proper support",
+   "results": "Eight hits: finite-presentation sheaf definitions and Flat.isStableUnderBaseChange for scheme morphisms. None states relative flatness of a module or the required derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.isoPullback",
+   "results": "Service unavailable; no search verdict available.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "HasSupportProperOver|tensorPullback.*IsFinitePresentation|IsFlatOver.*pullback; tensor.*baseChange|baseChange.*tensor",
+   "results": "Source Modules.FiniteDescent proves finite presentation for native pullback. FiniteTypeModuleSupportPullback proves support equality. No combined proper-support/flatness result. Existing RelativelyFlatTensorBaseChangeIso is for the canonical pullback only. Blueprint searches for 0A1D, 0A1H and tensor base change found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "partial matches reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportLocalNoetherianModel",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0A1H affine reduction: preservation of relative flatness on restricting the tensor data",
+   "via": [
+    "lem-pc-proper-support-local-noetherian-model",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatModulePullback.lean",
+  "declaration": "AlgebraicGeometry.relativelyFlat_module_pullback",
+  "statement": "theorem relativelyFlat_module_pullback\n    {X S T : Scheme.{u}} (f : X ⟶ S) (p : T ⟶ S) (F : X.Modules) [F.IsQuasicoherent]\n    (hflat : F.IsFlatOver f) :\n    (Scheme.Modules.tensorPullbackObj (pullback.fst f p) F).IsFlatOver\n      (pullback.snd f p)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T045531-L-129199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T045531-L-129199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

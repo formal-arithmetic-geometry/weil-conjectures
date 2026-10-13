@@ -18,41 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood U of x. Restrict the morphism and tensor data to U and its inverse image. Open base change identifies the derived restriction of K with the direct image of restricted data. Open restriction preserves all input properties, including proper support.",
+   "text": "Choose an affine open neighbourhood U of x by Mathlib.exists_isAffineOpen_mem_and_subset. Apply properSupport_affine_tensor_restriction to construct the restricted tensor data over Spec Γ(U,O) with their comparison to the restriction of the original direct image.",
    "uses": [
-    "lem-pc-relatively-flat-tensor-base-change-iso",
-    "lem-pc-derived-pullback-perfect",
-    "def-weil-pbc-closed-subset-proper-over-base"
+    "lem-pc-proper-support-affine-tensor-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Write the ring of U as the filtered colimit of its finitely generated Z-subalgebras. These rings are Noetherian. Spread the finitely presented scheme to a stage and invoke noetherian_approximation_data to obtain Xi, fi, Ei, Gi, with all their properties and pullback identifications.",
+   "text": "Set A=Γ(U,O). Use the concrete diagram and cocone CommRingCat.fgSubalgebraDiagram A and fgSubalgebraCocone A and its proved colimit witness isColimitFgSubalgebraCocone A. Each stage is a finite-type Z-algebra by Subalgebra.fg_iff_finiteType, hence Noetherian by Algebra.FiniteType.isNoetherianRing. Apply noetherian_approximation_data to the restricted data and extract Xi, fi, Gi, Ei, the cartesian square and both factor identifications.",
    "uses": [
-    "thm-pd-spreading-out",
     "lem-pc-noetherian-approximation-data"
    ],
    "elementary": false
   },
   {
-   "text": "Let Si be Spec of that stage and g the map from U. Identify the descended cartesian square with the pullback square. Apply ordinary relatively flat tensor base change to fi and g. Compose its isomorphism with the descended E and complex identifications and the first open-base-change comparison. The result is the required isomorphism, without using any direct-image perfectness assertion.",
+   "text": "The descended Ei has quasi-coherent cohomology by perfectness, and Gi has quasi-coherent terms by finite presentation. Apply cartesian_tensor_data_comparison to the descended square, retaining only the upper bound of Gi. Pull the inverse comparison back along U.isoSpec.hom and compose it with the affine comparison and the proved derived-pullback composition isomorphism. Choose g=U.isoSpec.hom followed by Spec.map of the cocone leg. Package the Noetherian Spec instance and all descended properties as the original conclusion.",
    "uses": [
-    "lem-pc-relatively-flat-tensor-base-change-iso"
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-cartesian-tensor-data-comparison",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-pc-derived-pullback-perfect",
+  "lem-pc-cartesian-tensor-data-comparison",
   "lem-pc-noetherian-approximation-data",
-  "lem-pc-relatively-flat-tensor-base-change-iso",
-  "thm-pd-spreading-out"
+  "lem-pc-proper-support-affine-tensor-restriction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-perfect-qcoherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project (source checked at https://stacks.math.columbia.edu/tag/0A1H and linked tags)",
-  "place": "Tag 0A1H, lemma-base-change-tensor-perfect, affine reduction and Noetherian approximation paragraph"
+  "document": "https://stacks.math.columbia.edu/tag/0A1H",
+  "place": "Lemma 36.30.1, affine reduction and approximation paragraph; explicit ring system and categorical composition formalized by H1"
  },
  "mathlib_searches": [
   {
@@ -149,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-cbcd4",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T024044-L-3337853",
+  "landing": "20261013T045531-L-129199",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with node records, correction with Stacks 0A1D/0A1H, and downstream uses; four delivery modules and four direct importers compile cleanly; axioms conform."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
