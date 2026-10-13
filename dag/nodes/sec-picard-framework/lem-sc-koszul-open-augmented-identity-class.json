@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-koszul-open-augmented-identity-class",
+ "kind": "statement",
+ "title": "Exponent independence of the augmented explicit Koszul identity class",
+ "statement": "Let A be a commutative ring, r a natural number and f:Fin(r) to A. Let U, I_e, O and u_e be the principal-open union, derived tails, structure object and augmentations of [def-sc-koszul-open-system]. Assume derived categories on module sheaves on Spec(A) and on A-modules, in the universes of the Lean statement [def-pc-derived-category]. Let H=H^0 and G=derived affineOpenSections(U). For each e, define c_e in H(G(I_e)) to be the explicit identity-chain stage class [lem-sc-koszul-open-hom-chain-representatives], followed by the derived colimit injection and Cech comparison [def-sc-koszul-cech-comparison-construction]. Then H(G(u_e))(c_e)=H(G(u_0))(c_0) for every e. This is an equality between explicit augmented classes in H(G(O)); it asserts no evaluation equivalence or inverse augmentation formula.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08D1",
+  "place": "Functorial signed Hom-to-Cech comparison and the compatible power system; Tag 08DC, equation 36.9.4.1"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-koszul-cech-comparison-construction",
+  "lem-sc-koszul-open-hom-chain-representatives"
+ ],
+ "proof": [
+  {
+   "text": "Apply postcomposition naturality of the explicit chain class to the identity on the sheaf tail and its chain augmentation, and simplify id followed by augmentation. This identifies H(G(u_e))(c_e) with the explicit colimit class of the augmentation into the structure complex.",
+   "uses": [
+    "lem-sc-koszul-open-hom-chain-class-naturality",
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The power transition from index zero to e commutes with augmentation: contraction is natural under the diagonal map scaling generator i by f_i^e; the scalar identity f_i*f_i^e=f_i^(e+1) identifies the linear forms; naturality of the degree-zero exterior equivalence removes the map on exterior power zero. In positive chain degrees the target is zero. Transposition carries this precomposition to the module transition. Use the defining cochain formula of koszulCechHomDiagram, cyclesMap_i and homology projection naturality, then homologyFunctorFactors naturality, to identify the transition of the stage-zero augmentation class with the stage-e augmentation class.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "lem-sc-koszul-open-hom-chain-representatives",
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The colimit cocone law D.map(0 to e) followed by iota_e equals iota_0 identifies their colimit homology classes. Apply the fixed Cech-to-derived-sections map. All identities hold for e=0, empty Fin(r), zero f_i and the zero ring.",
+   "uses": [
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-open-hom-chain-class-naturality",
+  "def-sc-koszul-open-system",
+  "lem-sc-koszul-open-hom-chain-representatives",
+  "def-sc-koszul-cech-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "document": "https://stacks.math.columbia.edu/tag/08D1",
+  "place": "Functorial signed Hom-to-Cech comparison and the compatible power system; Tag 08DC, equation 36.9.4.1",
+  "note": "Reduction below the unit level. Sources read on the official Stacks tag pages; the Lean specialization and glue are written by V4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at one natural derived structure sheaf Hom open global sections equivalence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation maps from restricted structure sheaf to derived open global sections and Koszul augmentation identity class",
+   "results": "ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_const and structure-sheaf restriction maps; no normalized derived evaluation theorem.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "The ordinary adjunction naturality theorem exists. It does not compare derived open sections or normalize a Koszul class.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulOpenHomStageClass|koszulCech.*naturality|homEquiv_naturality_right; DAG: augmented identity|augmentation class|structure evaluation",
+   "results": "Existing chain-class naturality handles postcomposition. No structure-object exponent-one evaluation or augmented-identity exponent-independence theorem. Generic Mathlib adjunction naturality only.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate of either new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomIdentityEvaluation",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Exponent independence of the augmented explicit Koszul identity class in identity-normalized Koszul open evaluation",
+   "via": [
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenAugmentedIdentityClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenAugmentedIdentityClass.lean",
+  "declaration": "AlgebraicGeometry.koszulOpen_augmented_identity_class",
+  "statement": "theorem koszulOpen_augmented_identity_class\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)] :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor\n    let c := fun e : ℕ ↦ H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))\n        (H.map (DerivedCategory.Q.map (colimit.ι\n          (koszulCechHomDiagram A r f\n            (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj\n              (koszulOpenSheafComplex A r f e))) e))\n          (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))\n    ∀ e : ℕ, H.map (G.map (koszulOpenUnit A r f e)) (c e) =\n      H.map (G.map (koszulOpenUnit A r f 0)) (c 0)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T111938-L-3068541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T111938-L-3068541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

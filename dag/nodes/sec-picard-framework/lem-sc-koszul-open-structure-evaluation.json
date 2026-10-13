@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-koszul-open-structure-evaluation",
+ "kind": "statement",
+ "title": "Natural structure-object evaluation with exponent-one normalization",
+ "statement": "Let A be a commutative ring, r a natural number and f:Fin(r) to A. Let X=Spec(A), U be the principal-open union, O the extended tilde of A[0], and I_e and u_e the tails and augmentations of [def-sc-koszul-open-system]. Assume the derived categories on X, every over-open, U and A-modules in the universes of the Lean statement [def-pc-derived-category]. Let R be derived restriction followed by the over-equivalence, H=H^0 on D(A), and G=derived affineOpenSections(U). Define c_e in H(G(I_e)) to be the identity-chain stage class of [lem-sc-koszul-open-hom-chain-representatives], followed by H(Q(iota_e)) and H(koszulCechDerivedComparison(I_e)) of [def-sc-koszul-cech-comparison-construction]. There exist equivalences b_E:Hom(R(O),R(E)) to H(G(E)), natural in every derived arrow E to E', with the single normalization b_O(id)=H(G(u_0))(c_0). No evaluation of an inverse augmentation at a tail object and no formula at other indices is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "Structure-sheaf specialization of the first paragraph; Tags 08DC and 08D1, exponent-one augmented identity cycle"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-koszul-cech-comparison-construction",
+  "lem-sc-koszul-open-hom-chain-representatives"
+ ],
+ "proof": [
+  {
+   "text": "Apply the structure-sheaf Hom/hypercohomology equivalence on U after identifying R(O) with its degree-zero structure sheaf. Restrict scalars from sections of O_U to A and use the comparison of composite derived sections with derived affineOpenSections. The unit, counit, restriction-of-scalars homology and derived composition isomorphisms are natural, giving the family b and its postcomposition identity.",
+   "uses": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+    "def-sc-koszul-open-system",
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the one fixed index zero, augment the explicit identity chain class. On D(f_j), contraction at exponent one has generator value 1/f_j; the augmentation multiplies it by f_j. The structure complex has only degree zero, so the signed Cech formula has only p=q=0 terms, with positive sign. These are the restrictions of 1. The Cech-to-derived-sections comparison identifies this cycle with evaluation of the structure identity. Empty covers and the zero ring give zero classes.",
+   "uses": [
+    "lem-sc-koszul-open-hom-chain-representatives",
+    "def-sc-koszul-cech-comparison-construction",
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
+  "def-sc-koszul-open-system",
+  "def-sc-koszul-cech-comparison-construction",
+  "lem-sc-koszul-open-hom-chain-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "Structure-sheaf specialization of the first paragraph; Tags 08DC and 08D1, exponent-one augmented identity cycle",
+  "note": "Reduction below the unit level. Sources read on the official Stacks tag pages; the Lean specialization and glue are written by V4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at one natural derived structure sheaf Hom open global sections equivalence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural evaluation maps from restricted structure sheaf to derived open global sections and Koszul augmentation identity class",
+   "results": "ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_const and structure-sheaf restriction maps; no normalized derived evaluation theorem.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "The ordinary adjunction naturality theorem exists. It does not compare derived open sections or normalize a Koszul class.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulOpenHomStageClass|koszulCech.*naturality|homEquiv_naturality_right; DAG: augmented identity|augmentation class|structure evaluation",
+   "results": "Existing chain-class naturality handles postcomposition. No structure-object exponent-one evaluation or augmented-identity exponent-independence theorem. Generic Mathlib adjunction naturality only.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate of either new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomIdentityEvaluation",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Natural structure-object evaluation with exponent-one normalization in identity-normalized Koszul open evaluation",
+   "via": [
+    "lem-sc-koszul-open-hom-identity-evaluation",
+    "lem-sc-koszul-open-hom-chain-evaluation",
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenStructureEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenStructureEvaluation.lean",
+  "declaration": "AlgebraicGeometry.koszulOpen_structure_evaluation",
+  "statement": "theorem koszulOpen_structure_evaluation\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)] :\n    let R := ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u}\n          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))\n        (D := SheafOfModules.{u}\n          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor\n    let c := fun e : ℕ ↦ H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))\n        (H.map (DerivedCategory.Q.map (colimit.ι\n          (koszulCechHomDiagram A r f\n            (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj\n              (koszulOpenSheafComplex A r f e))) e))\n          (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))\n    ∃ b : ∀ E : schemeDerivedCategory (Spec (.of A)),\n      (R.obj (koszulOpenStructure A) ⟶ R.obj E) ≃ H.obj (G.obj E),\n      (∀ (E E' : schemeDerivedCategory (Spec (.of A))) (g : E ⟶ E')\n        (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),\n        b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧\n      b (koszulOpenStructure A) (𝟙 _) =\n        H.map (G.map (koszulOpenUnit A r f 0)) (c 0)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T111938-L-3068541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T111938-L-3068541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
