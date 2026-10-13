@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-affine-associated-module-flat-over",
+ "kind": "statement",
+ "title": "Associated flat modules are flat over their affine base",
+ "statement": "Let $T$ be an affine scheme [def-pc-morphism-conventions], $A=\\Gamma(T,\\mathcal O_T)$ and $M$ a flat $A$-module. Associate its sheaf on $\\operatorname{Spec} A$ and pull it back along the canonical affine isomorphism $T\\to\\operatorname{Spec} A$. The resulting $\\mathcal O_T$-module is flat over $\\operatorname{id}_T$ in the affine-section sense of [def-pc-scheme-module-flat-over]: for affine opens $W\\subseteq Z$ of $T$, its sections on $W$ are flat over $\\Gamma(Z,\\mathcal O_T)$ via restriction. No complex, cover or cohomology assertion is included.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I9 (1), 00HT; affine open immersions are flat"
+ },
+ "proof": [
+  {
+   "text": "The canonical affine chart identifies T with Spec A. For affine W, the affine pullback formula identifies sections of the associated module with Gamma(W,O) tensor_A M. Base change of the flat module M is flat over Gamma(W,O).",
+   "uses": [
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine W contained in affine Z the inclusion is an open immersion, hence flat. Its ring map Gamma(Z,O) to Gamma(W,O) is flat by the affine criterion for a flat morphism. Flatness transitivity proves the required section condition. Naturality of the pullback-section identification gives the scalar action specified by IsFlatOver of the identity, and the empty-open case gives a zero module.",
+   "uses": [
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof_origin": {
+  "by": "worker N1",
+  "document": "Stacks Project",
+  "place": "Tags 01I9 (1), 00HT; affine open immersions are flat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated scheme morphism and a relatively flat quasi coherent module admit a bounded flat Cech complex computing higher direct images under every base change",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.comp, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Flat",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCechModuleFunctor|tildeFunctor|finiteSubcover",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite alternating Cech complex relative flat quasi coherent sheaf affine base sections arbitrary base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_sections|IsFlatOver|isFlat_tilde",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf of a flat module over an affine scheme has flat sections over every affine open",
+   "results": "AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.flat_of_localized_span, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatCohomologyData",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Flatness of the associated sheaves of the flat affine section modules in coherence unit part (a)",
+   "via": [
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAssociatedModuleFlatOver",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAssociatedModuleFlatOver.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatOver_affineAssociatedModule",
+  "statement": "theorem flatOver_affineAssociatedModule (T : Scheme.{u}) [IsAffine T]\n    (M : ModuleCat.{u} Γ(T, ⊤)) (hM : Module.Flat Γ(T, ⊤) M) :\n    ((Modules.pullback T.toSpecΓ).obj ((tilde.functor Γ(T, ⊤)).obj M)).IsFlatOver\n      (𝟙 T)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T005857-L-2607448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T005857-L-2607448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "def-pc-finite-affine-cech-model",
+ "kind": "definition",
+ "title": "The finite affine Cech model transported from the canonical base chart",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-morphism-conventions], $F$ an $\\mathcal O_X$-module, and $V:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$ a finite family. Form the specified complex [def-pc-affine-alternating-cech-model] for $f$ composed with $T\\to\\operatorname{Spec}\\Gamma(T,\\mathcal O_T)$, then pull it back termwise to $T$. This is the definition of $C(f,F,V)$, with no choice of a witness. Its terms are quasi-coherent, its negative terms are zero, and its terms in degrees greater than $r$ are zero. No affineness, covering, flatness or cohomology claim is required for these three properties.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-affine-alternating-cech-model"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02KE (affine termwise base-change calculation), 01XD, 01XK and 01FK"
+ },
+ "proof": [
+  {
+   "text": "Use the existing affine alternating section complex, restricting scalars along the composite to the spectrum of the base global ring, associating sheaves, then applying pullback along the canonical base chart. All data are actual functor constructions.",
+   "uses": [
+    "def-pc-affine-alternating-cech-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extension by embeddingUpNat gives zero negative terms, preserved by the additive functors. In degree n greater than r, an order embedding Fin(n+1) into Fin(r) would contradict Fintype.card_le_of_injective. The increasing-tuple product is therefore over an empty index type, hence a zero module. Map this zero object through scalar restriction, tilde and pullback. Tilde terms are quasi-coherent and pullback preserves quasi-coherence.",
+   "uses": [
+    "def-pc-affine-alternating-cech-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-alternating-cech-model"
+ ],
+ "proof_origin": {
+  "by": "worker N1",
+  "document": "Stacks Project",
+  "place": "Tags 02KE (affine termwise base-change calculation), 01XD, 01XK and 01FK; explicit construction and reduction written by N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated scheme morphism and a relatively flat quasi coherent module admit a bounded flat Cech complex computing higher direct images under every base change",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.comp, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Flat",
+   "results": "service unavailable: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCechModuleFunctor|tildeFunctor|finiteSubcover",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite alternating Cech complex relative flat quasi coherent sheaf affine base sections arbitrary base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_sections|IsFlatOver|isFlat_tilde",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf of a flat module over an affine scheme has flat sections over every affine open",
+   "results": "AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.flat_of_localized_span, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatCohomologyData",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Finite affine cover in the coherence unit part (a): construction, boundedness and quasi-coherence of the section complex",
+   "via": [
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel",
+  "statement": "def finiteAffineCechModel {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules)\n    {r : ℕ} (V : Fin r → X.Opens) : CochainComplex T.Modules ℤ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel",
+   "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel_ge",
+   "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel_le",
+   "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel_quasicoherent"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T005857-L-2607448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T005857-L-2607448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

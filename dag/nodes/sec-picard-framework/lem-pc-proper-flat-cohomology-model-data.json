@@ -11,9 +11,9 @@
   "def-weil-pbc-free-module"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker N1",
   "document": "Stacks Project",
-  "place": "Tags 0A1D and 01XK; construction preceding Tag 0A1H. Restore the complete parent Cech construction/comparison plan after X-87b4c E2; the Lean proof is open, with no use of the invalid split."
+  "place": "Tags 02KE (affine termwise base-change calculation), 01XD, 01XK and 01FK; explicit construction and reduction written by N1; repair reuses the public affine-open restriction theorem and transports along inverse chart and module isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -71,23 +71,33 @@
  "statement": "Let f:X→T be quasi-compact and separated and F a quasi-coherent O_X-module flat over T. Assume injective resolutions in X.Modules. For each t∈T there exist an affine open U containing t, a natural number d, and a quasi-coherent complex C on U concentrated in [0,d], termwise flat over U, such that for every cartesian square with base map T′→U→T (and injective resolutions on X′), the homology of the ordinary pullback of C in degree q is isomorphic to R^q f′_* g′*F, for every q∈ℕ.",
  "proof": [
   {
-   "text": "choose an affine neighbourhood U of t. Quasi-compactness gives a finite affine\ncover of its inverse image; separatedness makes all its nonempty finite intersections\naffine. In degree n take the finite direct sum of sections of F on increasing\n(n+1)-tuples of members of the cover, with signed restriction differential, and associate\nsheaves over U. Above the number of cover members there are no such tuples; negative\nterms are zero. The affine local flatness criterion makes the section modules flat over\nGamma(U,O), so their associated sheaves are flat and quasi-coherent. On any affine new\nbase the inverse-image affine cover has section modules obtained by tensoring these\nmodules with the new base ring. The alternating complex and its differential therefore\nbase-change termwise. Affine acyclicity and Cech comparison identify its homology with\nhigher direct images. These identifications are induced by the Cech augmentation and\nhence agree on overlaps, giving the assertion for arbitrary new bases. Transport the\nstandard fibre-product result along the unique isomorphism associated to the given\ncartesian square. An empty inverse image uses the zero complex and d=0.",
+   "text": "Choose an affine open U containing t by exists_isAffineOpen_mem_and_subset. Its inverse image is compact by f.isCompact_preimage. Use its affineCover.finiteSubcover and reindex by Fin r using Fintype.equivFin. Its opensRange family is a covering by affine opens. Apply isFlatOver_affineOpenRestriction to F and the affine open U. Transport its flatness along the inverse of overFunctorEquiv, evaluated on each affine open with scalars restricted along appLE, using Module.Flat.equiv_iff. Postcompose the resulting base map with the inverse spectrum-chart isomorphism: its app map is a ring isomorphism, hence flat by RingHom.Flat.of_bijective; Module.Flat.trans and comp_appLE transport flatness back to f restricted to U. Simplify the chart followed by its inverse.",
    "uses": [
-    "lem-pc-affine-sections-flat-over-base",
-    "lem-pc-affine-vanishing",
-    "lem-pc-cech-computes",
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-alternating-cech-computes"
+    "lem-pc-flat-over-affine-open-restriction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the actual complex C=finiteAffineCechModel (f restricted to U) (F restricted to the inverse image) V, and d=r. The proved construction properties give the lower and upper bounds and quasi-coherence of every term. The flatness lemma, applied to the restricted flatness just proved, gives IsFlatOver of the identity in every degree.",
+   "uses": [
+    "def-pc-finite-affine-cech-model",
+    "lem-pc-finite-affine-cech-model-flat-over"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the comparison for this specified complex, affine open, and affine cover to obtain the required isomorphism for every supplied cartesian square and every q. Combine the bounds, flatness and quasi-coherence with this comparison in the existential conclusion.",
+   "uses": [
+    "lem-pc-finite-affine-cech-model-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-sections-flat-over-base",
-  "lem-pc-affine-vanishing",
-  "lem-pc-cech-computes",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-alternating-cech-computes"
+  "def-pc-finite-affine-cech-model",
+  "lem-pc-finite-affine-cech-model-comparison",
+  "lem-pc-finite-affine-cech-model-flat-over",
+  "lem-pc-flat-over-affine-open-restriction"
  ],
  "lean": {
   "existing": false,
@@ -110,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1dce5",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T213438-L-1178630",
+  "landing": "20261013T005857-L-2607448",
   "kind": "interface",
-  "note": "independent Codex review: Delivery matches X-87b4c’s exact repair and recorded withdrawal; parent signature and docstring unchanged. Both modules compile cleanly; the sole direct importer fails as reported before adaptation and compiles afterward. Axioms match the named parent sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
