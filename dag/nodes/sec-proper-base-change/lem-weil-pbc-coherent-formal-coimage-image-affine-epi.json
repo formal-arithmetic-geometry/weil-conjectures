@@ -8,9 +8,11 @@
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, affine first-isomorphism calculation"
+  "place": "Lemmas 087W and 087X, affine comparison paragraph; categorical transport written in Lean from the existing scheme-isomorphism and open-kernel-preservation statements. No new holes."
  },
  "mathlib_searches": [
   {
@@ -59,19 +61,42 @@
  "statement": "Under the hypotheses of the affine coimage-image comparison, the restriction of its level n component to an affine open is an epimorphism.",
  "proof": [
   {
-   "text": "The affine equivalence identifies the comparison with the module first-isomorphism map, which is surjectivity; restriction and associated sheaf preserve this property, and universal kernel/cokernel identifications transport it.",
+   "text": "Write the affine open as Spec of its global sections. Transport its ideal and coherent formal category along isoSpec using the scheme-isomorphism equivalence. Map the ideal through ΓSpecIso and back to recover the transported ideal, then apply the affine equivalence. Noetherianity of the adic completion makes the finite-module category abelian. Finite products transfer along the equivalence, so Mathlib abelianOfEquivalence supplies abelianness on this one affine open, without any global abelian assumption.",
    "uses": [
+    "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
     "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-coherent-formal-module-kernel",
-    "lem-weil-pbc-coherent-formal-cokernel-closure"
+    "lem-weil-pbc-adic-completion-noetherian"
    ],
    "elementary": false
+  },
+  {
+   "text": "The full-subcategory inclusion preserves cokernels by ambient cokernel closure. Termwise module restriction preserves cokernels, hence the composite of formal restriction with the target full-subcategory inclusion preserves them. That fully faithful inclusion reflects colimits, so formal restriction preserves cokernels. This is proved as a private helper using preservesColimit_of_reflects_of_preserves.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-cokernel-closure",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply open-restriction kernel preservation to alpha and its cokernel projection, and the preceding cokernel-preservation helper to alpha and its kernel inclusion. Mathlib PreservesCoimageImageComparison.iso identifies the restricted comparison with the coimage-image comparison in the affine formal category. The latter is invertible by its transferred abelian structure, so the former is invertible for the originally supplied global kernel and cokernel choices.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-kernels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the functor consisting of the affine full-subcategory inclusion and evaluation at op n. Functors preserve isomorphisms; its image is definitionally the stated restricted component, and every isomorphism is an epimorphism. This includes the empty affine open, zero arrows, and zero and unit ideals.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-iso-equivalence",
   "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-module-kernel",
-  "lem-weil-pbc-coherent-formal-cokernel-closure"
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-coherent-formal-cokernel-closure",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-coherent-formal-modules-restriction-kernels"
  ],
  "lean": {
   "existing": false,
@@ -94,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T230752-L-1907175",
-  "kind": "interface",
+  "landing": "20261013T024033-L-3334215",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
