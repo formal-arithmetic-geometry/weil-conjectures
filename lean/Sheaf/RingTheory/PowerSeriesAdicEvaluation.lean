@@ -65,6 +65,21 @@ theorem exists_unique_adic_evaluation {C : Type u} {T : Type v}
           Ideal.Quotient.mk (I ^ N) t =
             Ideal.Quotient.mk (I ^ N) (MvPolynomial.eval₂ α b (F.truncTotal N))) ↔
         t = E F) := by
-  sorry
+  obtain ⟨E, hC, hX, hred, huniq⟩ :=
+    exists_ringHom_of_isAdicComplete I α n b hb
+  refine ⟨E, hC, hX, ?_, ?_, hred⟩
+  · intro N
+    refine ⟨N, ?_⟩
+    have hvars : Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) C)) ≤
+        I.comap E := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      change E (X i) ∈ I
+      rw [hX]
+      exact hb i
+    intro F hF
+    exact ((pow_le_pow_left' hvars N).trans (Ideal.le_comap_pow E N)) hF
+  · intro E' hC' hX' _
+    exact huniq E' hC' hX'
 
 end MvPowerSeries
