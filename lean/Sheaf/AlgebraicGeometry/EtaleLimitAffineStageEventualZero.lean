@@ -6,6 +6,9 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineStageTailColimit
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 import Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero
 
 /-! # Finite-stage vanishing when one stage is affine
@@ -89,7 +92,26 @@ theorem etale_limit_affine_stage_eventual_zero_tail
     (i₀ : I) [IsAffine (D.obj (op i₀))] :
     ∀ (i : I) (_hi : i₀ ≤ i) (x : H.obj i), (B.ι.app i).hom x = 0 →
       ∃ (j : I) (f : i ⟶ j), (H.map f).hom x = 0  := by
-  sorry
+  intro i hi x hx
+  let J := Set.Ici i₀
+  let t : J ⥤ I := (Subtype.mono_coe (· ∈ Set.Ici i₀)).functor
+  let : Nonempty J := ⟨⟨i₀, le_rfl⟩⟩
+  let : IsDirected J (· ≤ ·) := ⟨fun a b ↦ by
+    obtain ⟨k, ha, hb⟩ := exists_ge_ge a.val b.val
+    exact ⟨⟨k, a.property.trans ha⟩, ha, hb⟩⟩
+  let : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  obtain ⟨hBT⟩ := etale_limit_affine_stage_tail_colimit
+    D c hc F φ hidentity hcomposition G eG hG L hL p H eH hH B eB hB i₀
+  let it : J := ⟨i, hi⟩
+  have hx0 : ((B.whisker t).ι.app it) x = ((B.whisker t).ι.app it) (0 : H.obj i) := by
+    change (B.ι.app i).hom x = (B.ι.app i).hom 0
+    rw [hx, map_zero]
+  obtain ⟨j, f, hf⟩ := (hBT.eq_iff' (i := it) x (0 : (t ⋙ H).obj it)).mp hx0
+  refine ⟨t.obj j, t.map f, ?_⟩
+  change (H.map (t.map f)).hom x = (H.map (t.map f)).hom 0 at hf
+  rw [map_zero] at hf
+  exact hf
 
 theorem etale_limit_affine_stage_eventual_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
