@@ -10,15 +10,7 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothBaseChange
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.PopescuParameterCoefficientModel
 
 /-!
 # Coefficient construction for compatible Popescu parameters
@@ -38,34 +30,18 @@ standardizer algebra. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
 items item-NP through item-choose-deltai and item-eighth-resolve.
 (blueprint: lem-weil-pbc-popescu-parameter-coefficients).
 
-Proof: Set e = 8c and n = N + de. Apply 07FH to a finite algebra generating family
-of A modulo the n-th power of the maximal ideal of L = Λ_q. Its flat local
-polynomial model has the same dimension as L by the flat height formula. Since L
-is regular, choose d parameters u_i which generate both maximal ideals. Adjoin
-variables t_i and let S map by X_i to u_i t_i. Ogoma and regular-sequence powers,
-applied successively to the preceding e-th power quotients, permit rescaling the
-u_i outside the polynomial prime to give both kernel equalities in the polynomial
-ring. Faithful-flat contraction gives coefficients for u_i^N in the singular ideal
-inside the Artinian solution. Lift to L, correct modulo the n-th maximal-ideal power,
-and multiply by u_i^N. Clear both the coefficient denominators and the equality's
-error in Λ, obtaining (δ_i u_i)^(2N) = sum_j λ_ij α(a_j). Use 07FI to include the
-clearing units and coefficients in an enlarged Artinian solution. A second Ogoma
-application on Λ modulo preceding e-th powers gives the Λ kernel equalities;
-further 07FI enlargements preserve all earlier equations.
-
-Map R to Λ by t_i to δ_i, put I₀ = p^n R and K = m_L^n. The t_i become units
-in Q. The pigeonhole containment m_L^(d(e-1)+1) ⊆ (u_i^e)L and its polynomial
-analogue imply all required containments since n = N + de. The coefficient solution
-D' maps faithfully flatly to L/K. Set E = D'[t], whose R/I₀-algebra structure is
-essentially smooth by localization, polynomial base change, and composition. Send
-A to its coefficient image f in D' and set μ_ij = bar(λ_ij)t_i^(2N)bar(δ_i)^(-2N).
-Locality makes bar(δ_i) units; injectivity of D' to L/K proves the displayed
-coefficient equations. Evaluation at δ_i defines b and verifies the two image
-formulas. Append zero to the list (u_i t_i)^c; equality of first and square kernels
-persists under positive powers, so the displayed eighth-power kernel conditions
-hold. For d = 0 the maximal ideal is zero and n = N, and these statements remain
-valid. Finite polynomial models for D' give its carrier in Type(max u v). Finally
-reindex the finite polynomial variables to Fin m and transport all structures. -/
+Proof: Apply the rescaled-parameter coefficient-model construction (the preceding
+steps of Stacks 07FJ). It supplies an injective map on the constants of D'[t], units
+δ_i, coefficient constants λ_ij, and images X_i = C(u_i)t_i. Its R-algebra evaluation
+map sends t_i to C(δ_i), and the images of A and λ_ij are the prescribed residues.
+Apply the evaluation map to the equation in Λ. Injectivity on constants contracts
+this to (u_i δ_i)^(2N) = sum_j λ_ij f₀(a_j) in D'. Multiply by δ_i^(-2N), using
+δ_i δ_i⁻¹ = 1, to obtain u_i^(2N) = sum_j λ_ij δ_i^(-2N) f₀(a_j).
+Set f = C composed with f₀ and μ_ij = C(λ_ij δ_i^(-2N))t_i^(2N). Preservation
+of powers and sums by C and distributivity give the coefficient equations in D'[t].
+Evaluation sends μ_ij to λ_ij because the powers of δ_i cancel, and sends f(x)
+to the prescribed residue of α(x). Retain the parameters, kernel equalities and
+ideal bounds of the model. No choices become global definitions. -/
 theorem exists_popescu_parameter_coefficients
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]
@@ -127,6 +103,97 @@ theorem exists_popescu_parameter_coefficients
               (∀ i, algebraMap S E (MvPolynomial.X i) ^ (2 * N) =
                 ∑ j : Fin s, μ (i, j) * f (a j)) ∧
               (∀ x, b (f x) = Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
-              (∀ ij, b (μ ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+              (∀ ij, b (μ ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  classical
+  obtain ⟨m, algR, towerkR, algSR, towerkSR, algSL, towerSRL, towerkSL,
+    ell, π, heq, hπ, hq, hkerR, hkerL, n, hn, hbound, I₀, K,
+    hI₀, hK, hIK, D', ringD, localD, artD, algkD, algRE, algQE,
+    towerRQE, algSE, towerSRE, algkE, towerkSE, hsmooth,
+    towerkDE, f₀, b, u₀, δ, coeff, hinj, hX, hδ, hf₀, hcoeff⟩ :=
+    exists_popescu_parameter_coefficient_model p hp α q hreg N hN hpower d hd s a ha c hc
+  let R := MvPolynomial (Fin m) k
+  let S := MvPolynomial (Fin d) k
+  let L := Localization.AtPrime q.asIdeal
+  let E := MvPolynomial (Fin d) D'
+  let : CommRing D' := ringD
+  let : IsLocalRing D' := localD
+  let : IsArtinianRing D' := artD
+  let : Algebra k R := inferInstance
+  let : Algebra R Λ := algR
+  let : IsScalarTower k R Λ := towerkR
+  let : Algebra S R := algSR
+  let : IsScalarTower k S R := towerkSR
+  let : Algebra S Λ := algSL
+  let : IsScalarTower S R Λ := towerSRL
+  let : IsScalarTower k S Λ := towerkSL
+  let : Algebra k D' := algkD
+  let : Algebra R E := algRE
+  let : Algebra (R ⧸ I₀) E := algQE
+  let : IsScalarTower R (R ⧸ I₀) E := towerRQE
+  let : Algebra S E := algSE
+  let : IsScalarTower S R E := towerSRE
+  let : Algebra k E := algkE
+  let : IsScalarTower k S E := towerkSE
+  let : IsScalarTower k D' E := towerkDE
+  let f : A →ₐ[k] E := (IsScalarTower.toAlgHom k D' E).comp f₀
+  let μ : Fin d × Fin s → E := fun ij ↦
+    MvPolynomial.C (coeff ij * (↑((δ ij.1)⁻¹) : D') ^ (2 * N)) *
+      MvPolynomial.X ij.1 ^ (2 * N)
+  have hf (x : A) : f x = MvPolynomial.C (f₀ x) := rfl
+  have hbX (i : Fin d) : b (algebraMap S E (MvPolynomial.X i)) =
+      Ideal.Quotient.mk K (algebraMap Λ L (algebraMap S Λ (MvPolynomial.X i))) := by
+    let Q := Localization.AtPrime (q.asIdeal.under R)
+    let := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal
+    rw [IsScalarTower.algebraMap_apply S R E, b.commutes]
+    rw [IsScalarTower.algebraMap_apply S R Λ]
+    rfl
+  let g : D' →+* L ⧸ K := b.toRingHom.comp MvPolynomial.C
+  have hconst (i : Fin d) : u₀ i ^ (2 * N) =
+      ∑ j : Fin s, coeff (i, j) * (↑((δ i)⁻¹) : D') ^ (2 * N) * f₀ (a j) := by
+    have hrel : (u₀ i * (↑(δ i) : D')) ^ (2 * N) =
+        ∑ j : Fin s, coeff (i, j) * f₀ (a j) := by
+      apply hinj
+      change g _ = g _
+      simp only [map_pow, map_mul, map_sum]
+      change (b (MvPolynomial.C (u₀ i)) * b (MvPolynomial.C (↑(δ i) : D'))) ^
+        (2 * N) = ∑ j : Fin s, b (MvPolynomial.C (coeff (i, j))) *
+          b (MvPolynomial.C (f₀ (a j)))
+      rw [← hδ i, ← map_mul, ← hX i, hbX i]
+      simp only [hcoeff, hf₀]
+      simpa only [map_pow, map_sum, map_mul] using
+        congrArg (fun z : Λ ↦ Ideal.Quotient.mk K (algebraMap Λ L z)) (heq i)
+    calc
+      u₀ i ^ (2 * N) =
+          (u₀ i * (↑(δ i) : D')) ^ (2 * N) *
+            (↑((δ i)⁻¹) : D') ^ (2 * N) := by
+        rw [← mul_pow, mul_assoc, Units.mul_inv, mul_one]
+      _ = _ := by
+        rw [hrel, Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro j _
+        ring
+  refine ⟨m, algR, towerkR, algSR, towerkSR, algSL, towerSRL, towerkSL,
+    ell, π, heq, hπ, hq, hkerR, hkerL, n, hn, hbound, I₀, K,
+    hI₀, hK, hIK, d, D', ringD, localD, artD, algRE, algQE,
+    towerRQE, algSE, towerSRE, algkE, towerkSE, hsmooth, f, μ, b, ?_, ?_, ?_⟩
+  · intro i
+    rw [hX i, mul_pow, ← map_pow, hconst i]
+    simp only [μ, map_sum, map_mul, map_pow]
+    rw [Finset.sum_mul]
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [hf]
+    ring
+  · intro x
+    rw [hf]
+    exact hf₀ x
+  · intro ij
+    change b (MvPolynomial.C (coeff ij * (↑((δ ij.1)⁻¹) : D') ^ (2 * N)) *
+      MvPolynomial.X ij.1 ^ (2 * N)) = _
+    rw [map_mul, map_pow, hδ ij.1]
+    change g (coeff ij * (↑((δ ij.1)⁻¹) : D') ^ (2 * N)) *
+      g (↑(δ ij.1) : D') ^ (2 * N) = _
+    rw [← map_pow, ← map_mul, mul_assoc, ← mul_pow, Units.inv_mul, one_pow, mul_one]
+    exact hcoeff ij
 
 end Algebra
