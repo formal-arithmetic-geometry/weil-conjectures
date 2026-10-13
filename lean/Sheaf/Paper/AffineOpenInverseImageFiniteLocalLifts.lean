@@ -9,6 +9,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
+import Sheaf.Paper.EtaleAbelianLocalUnitRepresentatives
+import Sheaf.Paper.AffineOpenRepresentingCoverDescent
+
 /-! # Finite local lifts at an affine open stage -/
 
 @[expose] public section
@@ -21,20 +24,22 @@ Source: Stacks Project, Tags 09XN (local inverse-image sections), 0EYL (descent 
 objects, arrows and finite covers), and 03Q6, proof steps (1)--(3).
 (blueprint: lem-weil-pbc-affine-open-inverse-image-finite-local-lifts).
 
-Proof: Fix an affine open stage and reindex its cofiltered tail by a directed order.
-On the affine limit, inverse-image sheafification gives local unit representatives.
-Refine their cover by a finite affine etale cover. Descend these covering objects,
-their maps to the representing etale base objects, and the finite cover to one
-later stage. Each descended affine object is etale over that open stage and hence
-etale over X. Restrict the representing sections along the descended maps to obtain
-s. Localization of inverse image along each open stage is restriction, so its unit
-is precisely the restriction map. Unit naturality gives the displayed local
-identities for the supplied H; uniqueness of left adjoints transports the standard
-unit calculation to hH. Canonical pullback comparisons supply the arrows pi.
-There is no agreement assertion on overlaps at this stage. For an empty limit,
-descend the empty finite cover to an empty stage; the empty family of sections
-then works. Singleton diagrams reduce to the open localization adjunction and
-zero coefficients give zero representatives. -/
+Proof: Apply etaleAbelian_local_unit_representatives to t, before choosing
+any finite stage cover. This gives an etale cover Z_i of the limit, base
+objects W_i, arrows a_i to their pullbacks, and sections s_i representing t
+locally by the supplied unit. Apply affineOpen_representing_cover_descent to
+this geometric data. It refines the cover, selects a finite family, and
+provides one stage j, affine models V_b covering D(j), maps w_b to W_{r(b)},
+and arrows e_b from their pullbacks to Z_{r(b)}. These satisfy
+p^*(w_b) = e_b followed by a_{r(b)}, and e_b followed by z_{r(b)} covers the
+terminal object. Set the required sections to F(w_b)(s_{r(b)}) and pi_b to
+e_b followed by z_{r(b)}. Naturality of hH's unit identifies the unit image
+of the restricted section with restriction along p^*(w_b). The geometric
+factorization equation, the local representative equation, and functoriality
+then prove each required identity. This calculation uses the specified
+adjunction throughout and needs no additional localization comparison.
+Empty covers are permitted in both geometric steps; the final pointwise
+calculation is vacuous for an empty index. No overlap agreement is asserted. -/
 theorem affineOpenSections_inverse_image_finite_local_lifts
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)
@@ -57,4 +62,18 @@ theorem affineOpenSections_inverse_image_finite_local_lifts
       Sieve.ofArrows (fun b ↦ p.Etale.obj (V b)) π ∈
         c.pt.smallEtaleTopology (Scheme.Etale.mk (𝟙 c.pt)) ∧
       ∀ b, (H.obj F).obj.map (π b).op t =
-        (hH.unit.app F).hom.app (op (V b)) (s b) := by sorry
+        (hH.unit.app F).hom.app (op (V b)) (s b) := by
+  obtain ⟨I, Z, z, W, a, s, hz, hs⟩ :=
+    etaleAbelian_local_unit_representatives p H hH F t
+  obtain ⟨j, B, hB, r, V, v, w, e, hV, hv, hπ, hw⟩ :=
+    affineOpen_representing_cover_descent D c p hp hc I Z z W a hz
+  refine ⟨j, B, hB, V, v, (fun b ↦ F.obj.map (w b).op (s (r b))),
+    (fun b ↦ e b ≫ z (r b)), hV, hv, hπ, ?_⟩
+  intro b
+  have hu := (hH.unit.app F).hom.naturality_apply (w b).op (s (r b))
+  change (hH.unit.app F).hom.app (op (V b)) (F.obj.map (w b).op (s (r b))) =
+    (H.obj F).obj.map (p.Etale.map (w b)).op
+      ((hH.unit.app F).hom.app (op (W (r b))) (s (r b))) at hu
+  rw [hu, hw b]
+  rw [op_comp, Functor.map_comp_apply, op_comp, Functor.map_comp_apply, hs (r b)]
+

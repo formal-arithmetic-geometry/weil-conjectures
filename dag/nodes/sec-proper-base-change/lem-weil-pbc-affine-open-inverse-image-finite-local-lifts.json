@@ -19,48 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Restrict to a cofiltered tail at a fixed affine stage and reindex by a directed order, preserving the limit. Use underlying-set inverse image and its unit-compatible abelian comparison to obtain local unit representatives of t by the local inverse-image section description. Refining the cover of the affine limit by a finite affine etale cover retains these representations by restriction.",
+   "text": "Obtain local unit representatives Z_i,z_i,W_i,a_i,s_i of t on the limit using the specified adjunction. No finite stage covering is chosen before these representatives.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-etale-inverse-image-section-description",
-    "lem-weil-pbc-etale-covering-affine-refinement"
+    "lem-weil-pbc-etale-abelian-local-unit-representatives"
    ],
    "elementary": false
   },
   {
-   "text": "Descend the finite affine cover and its maps, equations, and representing maps to the base etale objects to a common later stage. For a representing base object which is not quasi-compact, refine its inverse image into affine opens first; the finite affine source gives a finite refinement. Finite-presentation morphism descent then applies to the individual representing arrows. Descent of finite covers makes the models cover the stage. Their actual limit pullbacks recover the original covering; canonical pullback comparisons are used, never definitional identification of iterated pullbacks.",
+   "text": "Apply geometric representing-cover descent. Obtain j,B,r,V,v,w,e with two covering properties and p*(w_b)=e_b;a_{r(b)}.",
    "uses": [
-    "lem-weil-pbc-etale-limit-finite-diagram-descent",
-    "lem-weil-pbc-etale-limit-finite-cover-descent",
-    "thm-pd-spreading-out"
+    "lem-weil-pbc-affine-open-representing-cover-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Compose each stage model with its open immersion into X. Restrict each representing base section to this model. Since inverse image along an open stage is localization restriction and its unit is restriction, naturality identifies its pullback unit image with the originally represented local section. The unit-preserving uniqueness comparison of left adjoints identifies this with hH. The pulled-back cover gives π and its covering property. Descending the empty finite cover handles an empty limit; no overlap agreement or global amalgamation is taken.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false
+   "text": "Set s_b=F(w_b)(s_{r(b)}) and π_b=e_b;z_{r(b)}. Unit naturality for w_b identifies η(s_b) with H(F)(p*(w_b))(η(s_{r(b)})). Substitute the geometric arrow equality and use contravariant functoriality and the local representative equation to obtain H(F)(π_b)(t)=η(s_b). Assemble the witnesses, affineness, and the two covering properties. The Lean calculation proves this step completely, with no localization comparison or overlap agreement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-etale-inverse-image-section-description",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-limit-finite-diagram-descent",
-  "lem-weil-pbc-etale-limit-finite-cover-descent",
-  "thm-pd-spreading-out",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "lem-weil-pbc-etale-abelian-local-unit-representatives",
+  "lem-weil-pbc-affine-open-representing-cover-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09XN",
-  "place": "Specialization of the cited local-section and finite-descent arguments to the affine open system with a supplied adjunction"
+  "place": "Local inverse-image representatives combined with geometric cover descent as in 0EYL; Lean restriction and unit-naturality assembly by R4"
  },
  "mathlib_searches": [
   {
@@ -136,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T111942-L-3069942",
+  "landing": "20261013T122231-L-3591864",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

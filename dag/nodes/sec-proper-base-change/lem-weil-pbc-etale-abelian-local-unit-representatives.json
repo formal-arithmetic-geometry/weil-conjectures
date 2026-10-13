@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-etale-abelian-local-unit-representatives",
+ "kind": "statement",
+ "title": "Local unit representatives for a supplied abelian etale inverse image",
+ "statement": "Let X and T be schemes [def-pc-scheme], p:T→X a morphism, H a functor from abelian etale sheaves on X to those on T [def-weil-pbc-abelian-etale-sheaves], and hH a specified adjunction H⊣p_* to the actual base-change pushforward [def-weil-pbc-direct-image]. For an abelian sheaf F on X and a section t of H(F) on the terminal etale T-object, there exist a possibly empty index set I in the scheme universe, etale T-objects Z_i, arrows z_i:Z_i→(T,id) whose generated sieve covers, etale X-objects W_i, arrows a_i:Z_i→p*W_i, and sections s_i∈F(W_i), such that H(F)(z_i)(t)=H(F)(a_i)(η_F(W_i)(s_i)) for all i, where η is the specified unit [def-pc-fibre-product]. No finiteness, affineness, stage, or compatibility on overlaps is claimed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09XN",
+  "place": "Lemma 59.39.2, local inverse-image representatives in the proof; abelian compatibility and adjunction from Proposition 7.44.3, Tag 00YV"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the underlying-set construction of inverse image and its compatibility with abelian structure and adjunction units. Unlike the currently recorded Lean coefficient specialization, this assertion uses the same universe for schemes and coefficient carriers and allows any specified left adjoint H. An implementation must establish the comparison at this universe, e.g. through an essentially small site or universe transport; it may not apply the large-coefficient signature unchanged.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Local surjectivity of the sheafification unit and elementwise representatives in the filtered pointwise Kan extension give a covering with objects Z_i, representing objects W_i, arrows a_i and sections s_i. The composite-adjunction unit is the Kan unit followed by sheafification; naturality gives the displayed local equations. The existing set-valued section description expresses exactly this part of the construction.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-section-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the constructed abelian left adjoint to H by uniqueness of left adjoints to the fixed pushforward. The comparison intertwines the two units; its naturality intertwines restriction maps. Transport t and the local equations. The small etale covering criterion gives an index in the scheme universe. Empty targets permit an empty cover.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-inverse-image-section-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09XN",
+  "place": "Lemma 59.39.2, local inverse-image representatives in the proof; abelian compatibility and adjunction from Proposition 7.44.3, Tag 00YV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an abelian sheaf inverse image is locally the image of a section under the adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an inverse image etale sheaf over a cofiltered limit of affine open subschemes descend locally to some stage",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_isAffineOpen_preimage_eq; AlgebraicGeometry.exists_map_eq_top",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallySurjective|locallySurjective.*unit|unit.*locallySurjective",
+   "results": "Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Epi.lean; Mathlib/Condensed/Epi.lean; Mathlib/Condensed/Epi.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting lemmas only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOpenInverseImageFiniteLocalLifts",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Strictly henselian local-ring comparison in the Tag 09AX effacement argument: degree-zero continuity on affine Zariski neighbourhoods, Descent of affine-limit sections; Unit representatives of terminal inverse-image sections; finite local representing covering before overlap agreement; Local unit representatives for a supplied abelian etale inverse image",
+   "via": [
+    "lem-weil-pbc-affine-open-inverse-image-finite-local-lifts",
+    "affine-open-inverse-image-unit-representatives",
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+    "new-local-stalk-sections-cocone-colimit",
+    "new-local-stalk-sections-canonical-colimit",
+    "affine-open-sections-canonical-colimit-core",
+    "affine-open-sections-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleAbelianLocalUnitRepresentatives",
+  "file": "lean/Sheaf/Paper/EtaleAbelianLocalUnitRepresentatives.lean",
+  "declaration": "etaleAbelian_local_unit_representatives",
+  "statement": "theorem etaleAbelian_local_unit_representatives\n    {X T : Scheme.{u + 1}} (p : T ⟶ X)\n    (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n      Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hH : H ⊣ p.Etale.sheafPushforwardContinuous\n      AddCommGrpCat.{u + 1} X.smallEtaleTopology T.smallEtaleTopology)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (t : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) :\n    ∃ (I : Type (u + 1)) (Z : I → T.Etale)\n      (z : ∀ i, Z i ⟶ Scheme.Etale.mk (𝟙 T))\n      (W : I → X.Etale) (a : ∀ i, Z i ⟶ p.Etale.obj (W i))\n      (s : ∀ i, F.obj.obj (op (W i))),\n      Sieve.ofArrows Z z ∈ T.smallEtaleTopology (Scheme.Etale.mk (𝟙 T)) ∧\n      ∀ i, (H.obj F).obj.map (z i).op t =\n        (H.obj F).obj.map (a i).op ((hH.unit.app F).hom.app (op (W i)) (s i))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T122231-L-3591864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T122231-L-3591864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
