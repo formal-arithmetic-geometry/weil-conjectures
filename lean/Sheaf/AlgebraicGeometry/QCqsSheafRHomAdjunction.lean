@@ -8,10 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom
 public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
 public import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
-import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionMate
+import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Coherated sheaf derived Hom adjunction
 
@@ -31,6 +30,99 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Detection of an isomorphism by Hom and a right adjoint.
+Source: the Yoneda step of Stacks, Tag 0A9Q. -/
+private theorem rightAdjoint_map_isIso_of_bijective
+    {C D : Type*} [Category* C] [Category* D]
+    {i : D ⥤ C} {r : C ⥤ D} (coh : i ⊣ r)
+    {U V : C} (q : U ⟶ V)
+    (hb : ∀ M : D, Function.Bijective (fun α : i.obj M ⟶ U ↦ α ≫ q)) :
+    IsIso (r.map q) := by
+  apply isIso_of_yoneda_map_bijective
+  intro M
+  let eU := coh.homEquiv M U
+  let eV := coh.homEquiv M V
+  have h (α : i.obj M ⟶ U) : eV (α ≫ q) = eU α ≫ r.map q :=
+    coh.homEquiv_naturality_right α q
+  constructor
+  · intro α β hab
+    apply eU.symm.injective
+    apply (hb M).injective
+    apply eV.injective
+    simpa only [h, Equiv.apply_symm_apply] using hab
+  · intro β
+    obtain ⟨α, hα⟩ := (hb M).surjective (eV.symm β)
+    refine ⟨eU α, ?_⟩
+    change eU α ≫ r.map q = β
+    change α ≫ q = eV.symm β at hα
+    rw [← h, hα, Equiv.apply_symm_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The five Hom bijections in the proof of Stacks, Tag 0A9Q.
+The mate equation identifies their composite with postcomposition by the trace. -/
+private theorem trace_bijective_of_projection
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    (F : D ⥤ C) (R : C ⥤ D) (hR : ∀ E, P E → Q (R.obj E))
+    (a : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adj : Q.lift (P.ι ⋙ R) (fun E ↦ hR E.obj E.property) ⊣ a)
+    (p : F ⊣ R) (L : P.FullSubcategory) (K M : Q.FullSubcategory)
+    (hS : P (F.obj M.obj ⊗ L.obj))
+    (bX : tensorRight L.obj ⊣ (Functor.curry.obj H).obj (op L.obj))
+    (bY : tensorRight (R.obj L.obj) ⊣ (Functor.curry.obj J).obj (op (R.obj L.obj)))
+    (d : F.obj (M.obj ⊗ R.obj L.obj) ⟶ F.obj M.obj ⊗ F.obj (R.obj L.obj))
+    (c : R.obj (H.obj (op L.obj, (a.obj K).obj)) ⟶
+      J.obj (op (R.obj L.obj), R.obj (a.obj K).obj))
+    (hc : ∀ α : M.obj ⟶ R.obj (H.obj (op L.obj, (a.obj K).obj)),
+      (bY.homEquiv M.obj (R.obj (a.obj K).obj)).symm (α ≫ c) =
+        p.homEquiv _ _ (d ≫ (𝟙 _ ⊗ₘ p.counit.app L.obj) ≫
+          (bX.homEquiv _ _).symm ((p.homEquiv _ _).symm α)))
+    (hpf : IsIso (p.homEquiv _ (F.obj M.obj ⊗ L.obj)
+      (d ≫ (𝟙 _ ⊗ₘ p.counit.app L.obj)))) :
+    Function.Bijective (fun α : M.obj ⟶ R.obj (H.obj (op L.obj, (a.obj K).obj)) ↦
+      α ≫ c ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom)) := by
+  let S : P.FullSubcategory := ⟨F.obj M.obj ⊗ L.obj, hS⟩
+  let pf : M.obj ⊗ R.obj L.obj ⟶ R.obj S.obj :=
+    p.homEquiv _ _ (d ≫ (𝟙 _ ⊗ₘ p.counit.app L.obj))
+  have : IsIso pf := hpf
+  let e₁ := (p.homEquiv M.obj (H.obj (op L.obj, (a.obj K).obj))).symm
+  let e₂ := (bX.homEquiv (F.obj M.obj) (a.obj K).obj).symm
+  let e₃ : (S.obj ⟶ (a.obj K).obj) ≃ (R.obj S.obj ⟶ K.obj) :=
+    (P.fullyFaithfulι.homEquiv.symm.trans (adj.homEquiv S K).symm).trans
+      Q.fullyFaithfulι.homEquiv
+  let e₄ : (R.obj S.obj ⟶ K.obj) ≃ (M.obj ⊗ R.obj L.obj ⟶ K.obj) :=
+    Iso.homCongr (asIso pf).symm (Iso.refl K.obj)
+  let e₅ := bY.homEquiv M.obj K.obj
+  let e := (((e₁.trans e₂).trans e₃).trans e₄).trans e₅
+  have he (α : M.obj ⟶ R.obj (H.obj (op L.obj, (a.obj K).obj))) :
+      α ≫ c ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom) = e α := by
+    apply e₅.symm.injective
+    rw [← Category.assoc]
+    change (bY.homEquiv M.obj K.obj).symm
+      ((α ≫ c) ≫ ((Functor.curry.obj J).obj (op (R.obj L.obj))).map
+        (adj.counit.app K).hom) = _
+    rw [bY.homEquiv_naturality_right_symm, hc]
+    dsimp only [e, Equiv.trans_apply, e₅, Equiv.symm_apply_apply]
+    change p.homEquiv _ _ (d ≫ (𝟙 _ ⊗ₘ p.counit.app L.obj) ≫ e₂ (e₁ α)) ≫
+      (adj.counit.app K).hom = _
+    rw [← Category.assoc, p.homEquiv_naturality_right]
+    change _ = e₅.symm (e₅ (e₄ (e₃ (e₂ (e₁ α)))))
+    rw [e₅.symm_apply_apply]
+    change (pf ≫ R.map (e₂ (e₁ α))) ≫ (adj.counit.app K).hom =
+      pf ≫ (R.map (e₂ (e₁ α)) ≫ (adj.counit.app K).hom) ≫ 𝟙 _
+    simp only [Category.assoc, Category.comp_id]
+  exact (show (fun α ↦ α ≫ c ≫ J.map (𝟙 _ ×ₘ (adj.counit.app K).hom)) = e
+    from funext he) ▸ e.bijective
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 1600000 in
+-- Elaborating the derived tensor instances needs this budget.
 /-- For qcqs schemes and a qcqs morphism `f`, let `adj : Rf_* ⊣ a` be the restricted
 adjunction on `D_QCoh` and let `c` be the internal-Hom comparison
 `Rf_* RHom_X(L, M) ⟶ RHom_Y(Rf_* L, Rf_* M)`, tied by the mate equation `hc` of
@@ -41,19 +133,17 @@ Source: Stacks Project, Tag 0A9Q and equation 48.3.5.1
 (blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
 
 Proof:
-1. The comparison of `lem-pc-sheaf-rhom-projection-formula` at `(L, aK)`, followed by
-internal Hom applied to the counit of `lem-pc-qcqs-derived-direct-image-right-adjoint`, is the
-map of the statement. Naturality of the comparison, internal Hom and the counit proves
-naturality.
-2. By `lem-pc-dq-coherator-adjunction`, test the map on Hom from every quasi-coherent M.
-3. The adjunction `lem-pc-ringed-spaces-derived-adjoint-general` and
-`lem-sc-derived-internal-hom-adjunction` identify its source Hom with
-Hom_X(Lf*M ⊗ L, aK). This tensor is quasi-coherent by
-`lem-pc-derived-pullback-tensor-qcoh`. The restricted adjunction identifies it with
-Hom_Y(Rf*(Lf*M ⊗ L), K). By `lem-pc-projection-formula` and tensor symmetry this is
-Hom_Y(M ⊗ Rf*L, K), hence Hom_Y(M, RHom(Rf*L, K)) by tensor-Hom adjunction again.
-4. Naturality and the triangle identities identify the map with the identity under
-these bijections. Yoneda in the coherator adjunction proves invertibility. -/
+1. Naturality of c and the restricted adjunction counit give the naturality square.
+2. The coherator adjunction and Yoneda reduce invertibility to bijectivity of
+   postcomposition on Hom from each quasi-coherent M.
+3. Derived pullback preserves quasi-coherence, and
+   canonical_derivedTensor_preserve_QCoh puts Lf*M tensor L in the full subcategory.
+4. Compose pullback/direct-image, tensor-Hom and restricted adjunction equivalences.
+   Precomposition with qcqsDerivedProjectionMate_isIso supplies the fourth Hom
+   bijection; the target tensor-Hom adjunction supplies the fifth.
+5. The supplied mate equation hc, naturality of the tensor-Hom and pullback
+   adjunctions, and the counit formula for the restricted adjunction identify
+   this composite equivalence with postcomposition by the trace. -/
 theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁})
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]
@@ -112,6 +202,38 @@ theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁})
         IsIso (DQ.map (c.app (op L.obj, (a.obj K).obj) ≫
           (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map
             (𝟙 _ ×ₘ (adj.counit.app K).hom)))) := by
-  sorry
+  constructor
+  · intro L L' K K' g h
+    let HX := derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf
+    let HY := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+    have hn := c.naturality (g.hom.op ×ₘ (a.map h).hom)
+    dsimp only [Functor.comp_map, Functor.prod_map, Functor.op_map] at hn
+    rw [← Category.assoc, hn, Category.assoc, ← HY.map_comp,
+      Category.assoc, ← HY.map_comp]
+    congr 2
+    apply Prod.ext
+    · simp
+    · have he := congrArg (fun z ↦ z.hom) (adj.counit.naturality h)
+      exact he
+  · intro L K
+    let HX := derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf
+    let HY := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+    let R := schemeDerivedDirectImage f
+    let F := derivedPullback f
+    let trace := c.app (op L.obj, (a.obj K).obj) ≫
+      HY.map (𝟙 _ ×ₘ (adj.counit.app K).hom)
+    have hb (M : schemeDerivedQCohCategory Y) :
+        Function.Bijective (fun α : M.obj ⟶ R.obj (HX.obj (op L.obj, (a.obj K).obj)) ↦
+          α ≫ trace) := by
+      have hS := canonical_derivedTensor_preserve_QCoh X (F.obj M.obj) L.obj
+        ((derivedPullback_tensor_preserve_QCoh f).1 M.obj M.property) L.property
+      have hpf := qcqsDerivedProjectionMate_isIso X Y f p t M L
+      simpa only [trace, Category.assoc, Functor.op_obj] using
+        trace_bijective_of_projection HX HY
+          (schemeDerivedQCohProperty X) (schemeDerivedQCohProperty Y)
+          F R hpres a adj p L K M hS (bX L.obj) (bY (R.obj L.obj))
+          (t.hom.app (M.obj, R.obj L.obj)) (c.app (op L.obj, (a.obj K).obj))
+          (hc L.obj (a.obj K).obj M.obj) hpf
+    exact rightAdjoint_map_isIso_of_bijective coh trace hb
 
 end AlgebraicGeometry

@@ -11645,3 +11645,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineFormalMapPresentation (stage 3; reviewer PASS; first push; landing 20261013T082345-L-1635749 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/G2/Sheaf.RingTheory.TransitivityGamma (stage 3; reviewer PASS; first push; landing 20261013T082346-L-1635860 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/G3/Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal (stage 3; reviewer PASS; first push; landing 20261013T082346-L-1636053 (interface); batch 20261013T082326; modules 2; new nodes 1)
+- 08:23 L: merged deliver/G3/Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction (stage 3; reviewer PASS; first push; landing 20261013T082346-L-1636200 (interface); batch 20261013T082326; modules 2; new nodes 1)

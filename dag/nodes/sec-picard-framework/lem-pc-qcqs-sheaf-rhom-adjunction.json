@@ -27,71 +27,39 @@
  ],
  "proof": [
   {
-   "text": "For L and K, apply the canonical internal-Hom comparison [lem-pc-sheaf-rhom-projection-formula] with M=a(K), then postcompose with the morphism induced by the counit Rf_*a(K)\\to K. This is exactly the canonical map in the statement, and its construction is natural in L and K.",
-   "uses": [
-    "lem-pc-sheaf-rhom-projection-formula",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "paragraph before Tag 0A9Q defining equation-sheafy-trace (first arrow: Cohomology, Remark remark-projection-formula-for-internal-hom; second arrow: the counit)"
-   }
+   "text": "Use naturality of the supplied internal-Hom comparison c. Postcompose with internal Hom of the restricted counit. Functor.map_comp and the counit naturality square identify both composites, proving the first conjunct without using any existence theorem.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Because DQ_Y is right adjoint to the inclusion of D_QCoh(O_Y), it suffices by [lem-pc-dq-coherator-adjunction] to test the displayed map after applying Hom from an arbitrary M\\in D_QCoh(O_Y): the induced map must be a bijection Hom_Y(M,Rf_*R\\mathcal Hom_X(L,a(K)))\\to Hom_Y(M,R\\mathcal Hom_Y(Rf_*L,K)).",
+   "text": "For a quasi-coherent test object M, put S=Lf^*M tensor L. Apply [lem-pc-derived-pullback-tensor-qcoh] and [lem-pc-canonical-derived-tensor-qcoh] to make S an object of the full subcategory. Apply [lem-pc-qcqs-derived-projection-mate] to the supplied adjunction p and tensor comparison t, obtaining an invertible map pf:M tensor Rf_*L to Rf_*S.",
    "uses": [
-    "lem-pc-dq-coherator-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9Q proof, paragraph beginning 'Since DQ_Y is the right adjoint'"
-   }
-  },
-  {
-   "text": "For such M, the required map is identified through the following natural chain of bijections. First, [lem-pc-ringed-spaces-derived-adjoint-general] gives Hom_Y(M,Rf_*R\\mathcal Hom_X(L,a(K))) = Hom_X(Lf^*M,R\\mathcal Hom_X(L,a(K))). Next, [lem-sc-derived-internal-hom-adjunction] gives Hom_X(Lf^*M,R\\mathcal Hom_X(L,a(K))) = Hom_X(Lf^*M\\otimes^L L,a(K)). Since M\\in D_QCoh(O_Y) and L\\in D_QCoh(O_X), the object Lf^*M\\otimes^L L lies in D_QCoh(O_X) by [lem-pc-derived-pullback-tensor-qcoh], so the adjunction Rf_*\\dashv a on D_QCoh from [lem-pc-qcqs-derived-direct-image-right-adjoint] applies and gives Hom_X(Lf^*M\\otimes^L L,a(K)) = Hom_Y(Rf_*(Lf^*M\\otimes^L L),K). The projection formula [lem-pc-projection-formula], together with symmetry of derived tensor, gives Rf_*(Lf^*M\\otimes^L L) = M\\otimes^L Rf_*L. Finally [lem-sc-derived-internal-hom-adjunction] gives Hom_Y(M\\otimes^L Rf_*L,K)=Hom_Y(M,R\\mathcal Hom_Y(Rf_*L,K)).",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-derived-internal-hom-adjunction",
     "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint",
-    "lem-pc-projection-formula"
+    "lem-pc-canonical-derived-tensor-qcoh",
+    "lem-pc-qcqs-derived-projection-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9Q proof, displayed string of five Hom equalities"
-   }
+   "elementary": false
   },
   {
-   "text": "The bijections in the chain are natural, and under them the map constructed in Step 1 is the identity on Hom_Y(M\\otimes^L Rf_*L,K), by the triangle identities for Rf_*\\dashv a, naturality of the internal-Hom bijections, and naturality of the projection-formula isomorphism. Yoneda therefore gives a bijection for every quasi-coherent M, so DQ_Y applied to the canonical map is an isomorphism.",
-   "uses": [
-    "lem-pc-dq-coherator-adjunction",
-    "lem-pc-qcqs-derived-direct-image-right-adjoint",
-    "lem-pc-projection-formula",
-    "lem-sc-derived-internal-hom-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9Q proof, conclusion after the five equalities"
-   }
+   "text": "The proved private helper trace_bijective_of_projection composes five Hom equivalences: inverse pullback adjunction; inverse tensor-Hom adjunction on X; full-subcategory Hom equivalences and inverse restricted adjunction; precomposition with pf; tensor-Hom adjunction on Y. Apply the supplied mate equation hc, tensor-Hom naturality in the second variable, and pullback-adjunction naturality. The restricted-adjunction inverse is Rf_*(alpha) followed by its counit, so the composite equivalence is exactly postcomposition by the sheafy trace.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved private helper rightAdjoint_map_isIso_of_bijective transfers these Hom bijections through the supplied coherator adjunction coh by homEquiv_naturality_right. It proves injectivity and surjectivity of each postcomposition map and applies Mathlib isIso_of_yoneda_map_bijective. This gives the second conjunct.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-sheaf-rhom-projection-formula",
-  "lem-pc-qcqs-derived-direct-image-right-adjoint",
-  "lem-pc-dq-coherator-adjunction",
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-derived-internal-hom-adjunction",
-  "lem-pc-projection-formula",
-  "lem-pc-derived-pullback-tensor-qcoh"
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "lem-pc-qcqs-derived-projection-mate"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9Q (lemma-iso-on-RSheafHom), proof"
+  "place": "Tag 0A9Q (lemma-iso-on-RSheafHom), five Hom bijections and coherator Yoneda detection; categorical glue formalized by G3, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -184,5 +152,15 @@
   "group": "R1",
   "result": "fix",
   "note": "H5: derivedSheafyTrace was Classical.choose of sorried exists_derivedDirectImage_internalHom_comparison; node dropped, comparison c tied in-theorem by the landed mate equation hc; qcqs X,Y,f, hpres/adj restricted adjunction, coh: iota -| DQ, naturality (L contra, K co) and IsIso (DQ.map (c(L,aK) >> RHom(Rf_*L, counit_K))); dropped duplicate new node(s) def-pc-derived-sheafy-trace-data (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T082346-L-1636200",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
