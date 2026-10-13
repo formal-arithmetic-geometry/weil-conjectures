@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-public import Mathlib.CategoryTheory.Triangulated.Functor
+import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 
@@ -30,6 +30,12 @@ theorem exists_derivedPullback_shifted_unit_iso
     [Functor.Monoidal (derivedPullback f)] :
     Nonempty ((derivedPullback f).obj ((𝟙_ (schemeDerivedCategory Y))⟦(1 : ℤ)⟧) ≅
         (𝟙_ (schemeDerivedCategory Z))⟦(1 : ℤ)⟧) := by
-  sorry
+  obtain ⟨I, hI, hmap, hadd, hlim, hcolim, hres, E, hE, hEmap, hEadd,
+    ε, hleft, htri, hε⟩ := Classical.choose_spec (exists_derivedPullback f)
+  obtain ⟨s, _⟩ := htri
+  let : (derivedPullback f).CommShift ℤ := s
+  exact ⟨((derivedPullback f).commShiftIso (1 : ℤ)).app _ ≪≫
+    (shiftFunctor (schemeDerivedCategory Z) (1 : ℤ)).mapIso
+      (Functor.Monoidal.εIso (derivedPullback f)).symm⟩
 
 end AlgebraicGeometry
