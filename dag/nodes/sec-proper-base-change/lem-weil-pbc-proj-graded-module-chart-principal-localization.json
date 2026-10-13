@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-chart-principal-localization",
+ "kind": "statement",
+ "title": "ProjGradedModuleChartPrincipalLocalization",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, let $M$ be an $S$-module, and set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$. Put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], $N_f=M_a$, and let $Z_f\\subseteq N_f$ be $R_f$-submodules, where the scalar action on $N_f$ is restricted from $S_a$. For each inclusion $D_g\\subseteq D_f$, suppose ring maps $\\rho^S_{f,g}:R_f\\to R_g$ and additive maps $\\rho_{f,g}:Z_f\\to Z_g$ are given. Let $U_{f,g}\\in R_f$ have image $g^{\\deg f}/f^{\\deg g}$ in $S_f$. Suppose additive equivalences $\\theta_{f,g}:(Z_f)_{U_{f,g}}\\cong Z_g$ and ring equivalences $\\theta^S_{f,g}:(R_f)_{U_{f,g}}\\cong R_g$ are given for all these inclusions, with $\\theta_{f,g}(q/1)=\\rho_{f,g}(q)$, $\\theta^S_{f,g}(r/1)=\\rho^S_{f,g}(r)$ and $\\theta_{f,g}(tq)=\\theta^S_{f,g}(t)\\theta_{f,g}(q)$. Assume every $\\rho^S_{f,g}$ is induced by an $S$-algebra map $S_f\\to S_g$. Let $F$ be an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category] with additive equivalences $\\alpha_f:F(D_f)\\cong Z_f$, compatible with scalar multiplication via awayToSection and with restriction via $\\rho$. Fix a chart $f$, write $e:D_f\\cong\\operatorname{Spec}R_f$ for its canonical affine isomorphism and $E=F|_{D_f}$. There is an additive equivalence $b:E(D_f)\\cong Z_f$ such that, for every $r\\in R_f$ and $V=e^{-1}D(r)$, and every ring equivalence $t:\\mathcal O_{D_f}(V)\\cong(R_f)_r$ sending the pulled-back constant $x$ to $x/1$, there is an additive equivalence $c:E(V)\\cong(Z_f)_r$. It satisfies $c(xs)=t(x)c(s)$ for all section-ring scalars and $c(s|_V)=b(s)/1$ for all whole-chart sections. No tilde comparison or compatibility between proper opens is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M4 (lemma-standard-open) (1)(e),(h), 01M7 (lemma-sheaves) and 01MB (lemma-proj-scheme), last paragraph; read via the Stacks website"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "def-weil-pbc-module-localization-away",
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For r=a/f^n choose g=f*a of degree (n+1)*deg(f)>0. The chart intersection formula and U f g=r^deg(f) identify the image of e inverse D(r) with D_+(g). The localization at r^deg(f) equals that at r, since deg(f)>0. This remains valid for r=0.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify whole-chart sections with Z f via restrictionAppIso and alpha f. On the principal open transport alpha g through theta inverse and the r-power localization identification. hrestriction and htheta show that whole-chart restrictions map to b(s)/1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any fraction a/f^n, an S-algebra map out of S_f sends it to a times the inverse of f^n. Thus hcanonical fixes rhoS uniquely and it agrees with structure-sheaf restriction under the chart identifications. For a fraction x/r^k in the chart section ring, the specified ring equivalence t must send it to (x/1)/(r/1)^k. Transporting alpha g through theta inverse then gives c(x*s)=t(x)*c(s) directly from hscalar and htheta. The ring and module identifications used here are those constructed in steps 1 and 2; no new geometric assertion is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "E2 stage-3 worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M4 (lemma-standard-open) (1)(e),(h), 01M7 (lemma-sheaves) and 01MB (lemma-proj-scheme), last paragraph; read via the Stacks website",
+  "note": "Formalized the localization and transport steps of the fixed-core proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf of modules on an affine Proj chart are localized modules on principal opens",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.sectionInBasicOpen; AlgebraicGeometry.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType; AlgebraicGeometry.openToLocalization; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ; AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen",
+   "verdict": "No exact transported normalized section comparison; use localization and tilde primitives."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sections of tilde of a module over a principal open are the localized module and restriction from global sections is the localization map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.toOpen_res|IsLocalizedModule.iso|appLE_appIso_inv",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Free.lean; Mathlib/RingTheory/Localization/Free.lean",
+   "verdict": "No exact transported normalized section comparison; use localization and tilde primitives."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps",
+  "group": "E2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core",
+   "place": "Principal-open identification of the given sheaf",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartPrincipalLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartPrincipalLocalization.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_principalLocalization",
+  "statement": "theorem gradedModuleChart_principalLocalization\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (U : ∀ (f g : Fidx), R[f])\n    (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n      (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))\n    (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →\n      LocalizedModule.Away (U f g) (Z f) ≃+ Z g)\n    (thetaS : ∀ (f g : Fidx), D[g] ≤ D[f] → Localization.Away (U f g) ≃+* R[g])\n    (htheta : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      (∀ r : R[f], thetaS f g i (algebraMap R[f] (Localization.Away (U f g)) r) =\n        rhoS f g i r) ∧\n      (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧\n      (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),\n        theta f g i (r • q) = thetaS f g i r • theta f g i q))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n      alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s)\n    (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f])\n      (s : F.val.obj (op D[f])),\n      alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s))\n    (f : Fidx) :\n      let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1\n      let E := Scheme.Modules.restrict F D[f].ι\n      ∃ b : E.val.obj (op ⊤) ≃+ Z f,\n        ∀ (r : R[f]),\n          let V := e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r\n          ∀ t : D[f].toScheme.ringCatSheaf.obj.obj (op V) ≃+* Localization.Away r,\n            (∀ x : R[f], t ((e.hom.appLE ⊤ V (by simp))\n              ((Scheme.ΓSpecIso (CommRingCat.of R[f])).inv x)) =\n                algebraMap R[f] (Localization.Away r) x) →\n            ∃ c : E.val.obj (op V) ≃+ LocalizedModule.Away r (Z f),\n              (∀ (x : D[f].toScheme.ringCatSheaf.obj.obj (op V))\n                (s : E.val.obj (op V)), c (x • s) = t x • c s) ∧\n              ∀ s : E.val.obj (op ⊤),\n                c (E.val.map V.leTop.op s) = mk (b s) 1",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T040744-L-3947704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T040744-L-3947704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

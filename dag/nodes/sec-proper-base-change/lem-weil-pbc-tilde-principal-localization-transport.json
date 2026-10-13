@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-tilde-principal-localization-transport",
+ "kind": "statement",
+ "title": "TildePrincipalLocalizationTransport",
+ "statement": "Let $R$ be a commutative ring, $N$ an $R$-module and $e:X\\cong\\operatorname{Spec}R$ an isomorphism of schemes. Let $G=e^*(\\widetilde N)$, using restriction along $e$ [lem-weil-pbc-spec-module-tilde-sections]. There is an additive equivalence $b:G(X)\\cong N$ such that, for every $r\\in R$ and $V=e^{-1}D(r)$, there are a ring equivalence $t:\\mathcal O_X(V)\\cong R_r$ and an additive equivalence $d:G(V)\\cong N_r$. The map $t$ sends the pullback to $V$ of each constant $x\\in R$ to $x/1$; $d(xs)=t(x)d(s)$ for all section-ring scalars and sections; and $d(s|_V)=b(s)/1$ for every whole-scheme section. The empty open and zero ring are included.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV (lemma-spec-sheaves) (2),(4),(5); read via the Stacks website"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "Compose restrictAppIso on the whole scheme with tilde.isoTop inverse to obtain b. On each principal open compose restrictAppIso with IsLocalizedModule.iso inverse for tilde.toOpen, obtaining d. The ring equivalence t is appIso inverse composed with IsLocalization.algEquiv to the concrete localization.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ring map commutes with constants by appLE_appIso_inv. Restriction compatibility is transportSection_res followed by tilde.toOpen_res and iso_symm_apply. For scalars transportSection_smul reduces to an R-linear localization equivalence; equip the concrete localized module with the section-ring action via the canonical ring equivalence, and use linearMap_compatibleSMul to extend R-linearity to the localized ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "E2 stage-3 worker",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV (lemma-spec-sheaves) (2),(4),(5); read via the Stacks website",
+  "note": "Formalized the localization and transport steps of the fixed-core proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf of modules on an affine Proj chart are localized modules on principal opens",
+   "date": "2026-10-13",
+   "results": "AlgebraicGeometry.sectionInBasicOpen; AlgebraicGeometry.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType; AlgebraicGeometry.openToLocalization; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ; AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen",
+   "verdict": "No exact transported normalized section comparison; use localization and tilde primitives."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sections of tilde of a module over a principal open are the localized module and restriction from global sections is the localization map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.toOpen_res|IsLocalizedModule.iso|appLE_appIso_inv",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Module.lean; Mathlib/RingTheory/Localization/Free.lean; Mathlib/RingTheory/Localization/Free.lean",
+   "verdict": "No exact transported normalized section comparison; use localization and tilde primitives."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps",
+  "group": "E2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed-core",
+   "place": "Principal-open identification of the tilde sheaf",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TildePrincipalLocalizationTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/TildePrincipalLocalizationTransport.lean",
+  "declaration": "AlgebraicGeometry.tilde_principalLocalization_transport",
+  "statement": "theorem tilde_principalLocalization_transport\n    (R : CommRingCat.{u}) (N : ModuleCat.{u} R)\n    (X : Scheme.{u}) (e : X ≅ Spec R) :\n    let G := Scheme.Modules.restrict (tilde (R := R) N) e.hom\n    ∃ b : G.val.obj (op ⊤) ≃+ N,\n      ∀ r : R,\n        let V := e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r\n        ∃ t : X.ringCatSheaf.obj.obj (op V) ≃+* Localization.Away r,\n          (∀ x : R, t ((e.hom.appLE ⊤ V (by simp))\n            ((Scheme.ΓSpecIso R).inv x)) =\n              algebraMap R (Localization.Away r) x) ∧\n          ∃ d : G.val.obj (op V) ≃+ LocalizedModule.Away r N,\n            (∀ (x : X.ringCatSheaf.obj.obj (op V)) (s : G.val.obj (op V)),\n              d (x • s) = t x • d s) ∧\n            ∀ s : G.val.obj (op ⊤),\n              d (G.val.map V.leTop.op s) = mk (b s) 1",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T040744-L-3947704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T040744-L-3947704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

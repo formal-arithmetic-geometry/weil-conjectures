@@ -10998,3 +10998,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/D2/Sheaf.RingTheory.PowerSeriesParameterPerturbation (stage 3; reviewer PASS; first push; landing 20261013T040743-L-3947339 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/D3/Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension (stage 3; reviewer PASS; first push; landing 20261013T040743-L-3947445 (interface); batch 20261013T040738; modules 3; new nodes 2)
 - 04:07 L: merged deliver/E2/Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct (stage 3; reviewer PASS; first push; landing 20261013T040744-L-3947597 (proof); batch 20261013T040738; modules 1; new nodes 0)
+- 04:07 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps (stage 3; reviewer PASS; first push; landing 20261013T040744-L-3947704 (interface); batch 20261013T040738; modules 3; new nodes 2)
