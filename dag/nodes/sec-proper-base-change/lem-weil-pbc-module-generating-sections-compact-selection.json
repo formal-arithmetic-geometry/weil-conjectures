@@ -15,36 +15,33 @@
  },
  "proof": [
   {
-   "text": "For x in K, choose finitely many local generators of H on a neighbourhood inside K. The epimorphism from the specified global free sheaf locally lifts them. Each germ of a section of the free sheaf is a finite linear combination of its basis germs: the free sheaf is the filtered colimit of its finite sub-coproducts, and stalks commute with filtered colimits. The finitely many lifts therefore have a common finite support S_x. Their germ identities hold on a common smaller neighbourhood; on that neighbourhood the finite-support map is epi because its image contains every local generator. This is the local lifting argument of Stacks 01B8 and 01BB. No finite presentation, affine localization, or quasi-coherence is used.",
+   "text": "For every point x of K apply the local finite-selection theorem to obtain U_x contained in K and a finite support S_x whose map is epi on U_x. These neighbourhoods cover K.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "lem-weil-pbc-module-stalk-filtered-colimit"
+    "lem-weil-pbc-module-generating-sections-local-selection"
    ],
    "elementary": false
   },
   {
-   "text": "The neighbourhoods just constructed cover K. Choose finitely many using compactness, and let S be the union of their finite supports. For each selected neighbourhood, the free map for S_x factors through the free map for S. Thus the latter is epi on every selected neighbourhood. Local surjectivity, equivalently surjectivity on stalks, proves that its restriction to K is epi. The slice restriction functor and its free-module comparison identify this with the overMap expression in Lean. When K is empty choose the empty finset; if the original index type is empty, its epimorphism already identifies H on V with zero.",
+   "text": "Apply IsCompact.elim_finite_subcover to this cover, and take the finset biUnion T of the chosen S_x. For each chosen support S_x contained in T, the subtype inclusion induces a freeMap. The coproduct universal property proves that its composite with the T basis map equals the S_x basis map. Applying overMap preserves this factorization, and epi_of_epi_fac implies that the T map is epi on U_x.",
    "uses": [
-    "def-weil-pbc-quasi-compact-scheme",
-    "lem-weil-pbc-locally-surjective-iff-stalks",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "def-weil-pbc-quasi-compact-scheme"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the local-lifting criterion on the slice site by forgetting to abelian sheaves and applying Sheaf.isLocallySurjective_iff_epi′. For W contained in K and a section on W, choose a selected U_x containing a given point, restrict the section to W intersect U_x, and use the epimorphism there to lift it on a smaller neighbourhood. Composition of restriction maps supplies a lift of the original section. The criterion yields the epimorphism over K. If K is empty the pointwise condition is vacuous and the finite subcover and support union may both be empty. This step is implemented by the proved private helper epi_overMap_iff_local_lifts using Mathlib Sites.EpiMono, together with the proved preservation of colimits by the module-to-abelian-sheaf forgetful functor; the stalk comparison lemma is not used.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-finite-type-presentation",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-module-stalk-filtered-colimit",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-locally-surjective-iff-stalks",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-weil-pbc-module-generating-sections-local-selection",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Lemma 01BB, proof, finite-cover argument applied to finite subsets of a global generating family; the local shrinking is Lemma 01B8."
+  "place": "Modules, Lemma 01BB finite-subcover proof, with local finite support isolated and the categorical local-lifting glue implemented directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -132,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T111919-L-3061870",
+  "landing": "20261013T133229-L-473",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
