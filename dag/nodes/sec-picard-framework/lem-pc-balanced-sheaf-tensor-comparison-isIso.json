@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-balanced-sheaf-tensor-comparison-isIso",
+ "kind": "statement",
+ "title": "Invertibility of the canonical balanced sheaf tensor map",
+ "statement": "Let $Z$ be a topological space, $R,B$ sheaves of commutative rings on $Z$, and $\\alpha:R\\to B$ a unital morphism. Let $M$ be a sheaf of $B$-modules and $N$ a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Put $H=\\operatorname{Res}_\\alpha$ and $E=B\\otimes_R N$, defined by sheafifying the sectionwise extension presheaf [def-pur-sheaf-tensor-product]. Write $p_R,p_B$ for the pure-tensor inclusions into the sheaf tensor products and $\\eta$ for the module sheafification unit [def-weil-presheaf-modules-sheafification]. Every $R$-linear sheaf morphism $\\varphi:H(M)\\otimes_R N\\to H(M\\otimes_B E)$ satisfying $\\varphi(p_R(m,n))=p_B(m,\\eta(1\\otimes n))$ on every open and every pair of sections is an isomorphism. No flatness or nonzero assumptions are made.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DE, proof, ordinary balanced tensor identity; Tag 0GMW, sheafification tensor comparison"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "On sections the inverse balanced maps m tensor (b tensor n) to (b m) tensor n and m tensor n to m tensor (1 tensor n) commute with restrictions and are inverse by tensor induction. The module-level cancellation theorem supplies this identity without flatness.",
+   "uses": [
+    "lem-pc-tensor-restrict-extend-module-natural",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor commutes with module sheafification. Forgetting coefficients identifies both module sheafifications with abelian sheafification, so the sectionwise maps give inverse abelian-sheaf maps. The formula in the hypothesis identifies phi with the canonical map by the tensor and sheafification universal properties. The forgetful functor to abelian sheaves reflects isomorphisms.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-restrict-extend-module-natural",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "reason": "Isolates invertibility only; the parent constructs the map, proves its section formula and proves both naturality equations in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction and extension of scalars sheaf tensor canonical comparison isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map restricted module tensor sheaf to restricted tensor extension scalars is an isomorphism",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; IsLocalization.moduleLid; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; IsLocalization.moduleTensorEquiv; PresheafOfModules.Monoidal.tensorObj; ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found, no exact mixed-coefficient sheaf invertibility criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationCompToSheaf",
+   "results": "PresheafOfModules.sheafificationCompToSheaf",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found, no exact mixed-coefficient sheaf invertibility criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|sheafificationCompToSheaf",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-13",
+   "verdict": "Ingredients found, no exact mixed-coefficient sheaf invertibility criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTensorPullbackBalancedNaturality",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DE proof: invertibility of the ordinary balanced tensor identity, after sheafification",
+   "via": [
+    "lem-pc-relative-tensor-pullback-balanced-naturality",
+    "lem-pc-relative-tensor-pullback-complex-comparison",
+    "lem-pc-relative-tensor-pullback-homology-comparison",
+    "lem-pc-relative-tor-pullback-tensor-lower-bound",
+    "lem-pc-proper-direct-image-tensor-lower-bound",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/BalancedTensorComparisonIsIso.lean",
+  "declaration": "SheafOfModules.balancedTensorComparison_isIso",
+  "statement": "theorem balancedTensorComparison_isIso (α : R ⟶ B)\n    (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))\n    (φ : (monoidalCategory R).tensorObj ((restrictScalars (𝓻 α)).obj M) N ⟶\n      (restrictScalars (𝓻 α)).obj\n        ((monoidalCategory B).tensorObj M (changeOfRings.{u, u, u} α N)))\n    (hφ : ∀ (W : (Opens Z)ᵒᵖ) (m : M.val.obj W) (n : N.val.obj W),\n      φ.val.app W\n        ((tensorObjIsoSheafification ((restrictScalars (𝓻 α)).obj M) N).inv.val.app W\n          (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 R).obj)).unit.app\n            (((restrictScalars (𝓻 α)).obj M).val ⊗ N.val)).app W\n              (m ⊗ₜ[R.obj.obj W] n))) =\n      (tensorObjIsoSheafification M (changeOfRings.{u, u, u} α N)).inv.val.app W\n        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n          (M.val ⊗ (changeOfRings.{u, u, u} α N).val)).app W\n            (m ⊗ₜ[B.obj.obj W]\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n                (changeOfRingsPresheaf.{u, u, u} α N)).app W\n                  ((1 : B.obj.obj W) ⊗ₜ[R.obj.obj W,(α.hom.app W).hom] n)))) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-07f14",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T152018-L-953911",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-07f14",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T152018-L-953911",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivery modules compiled cleanly, the target signature was unchanged, the sole remaining sorry was named and documented, and the direct importer compiled."
+ }
+}

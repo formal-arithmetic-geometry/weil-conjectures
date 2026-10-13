@@ -14,36 +14,41 @@
  ],
  "proof": [
   {
-   "text": "On section tensor products construct m tensor (b tensor n) ↦ (b m) tensor n with inverse m tensor n ↦ m tensor (1 tensor n). The R- and O_X-balancing relations imply both maps are well defined and tensor induction proves inverse identities. Module-map naturality follows from a(b m)=b a(m) and from functoriality of b tensor n.",
+   "text": "Construct the R-linear inverse-direction map from the balanced pairing m,n to the image of m tensor sheafify(1 tensor n). Verify additivity, scalar compatibility and restriction compatibility directly. The sheaf tensor universal property supplies a unique map and its pure-tensor formula.",
    "uses": [
-    "def-pc-module-pullback",
     "def-pur-sheaf-tensor-product",
-    "lem-pc-tensor-restrict-extend-module-natural"
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
    "elementary": false
   },
   {
-   "text": "The balanced section maps commute with all restrictions. Tensoring a module sheaf with module sheafification agrees with sheafifying the presheaf tensor, so replacing the scalar-extension presheaf by its module sheafification yields the same associated abelian sheaf. Underlying module sheafification is abelian sheafification, hence it is independent of the chosen coefficient ring. These universal properties descend the mutually inverse section maps to inverse maps of abelian sheaves, with naturality preserved. Finally transport G.obj along hG; hGmap gives exactly the transported morphisms.",
+   "text": "Prove simultaneous module-map naturality by precomposing with the pure-tensor inclusions; naturality of the tensor inclusion and of the extension sheafification unit identifies both composites. Apply the invertibility criterion to the constructed map.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-pc-topological-inverse-image-module",
-    "lem-pc-sites-module-sheafification-tensor",
+    "lem-pc-balanced-sheaf-tensor-comparison-isIso",
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false
+  },
+  {
+   "text": "Forget the R-module structure and invert the resulting isomorphism. Cancel its hom to turn the proved naturality equations into the required inverse-map equations. The hypotheses hG and hGmap give equality of G with tensorPullback by functor extensionality; substitute this equality.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-tensor-restrict-extend-module-natural",
-  "def-pc-topological-inverse-image-module",
-  "lem-pc-sites-module-sheafification-tensor",
-  "def-weil-presheaf-modules-sheafification"
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-balanced-sheaf-tensor-comparison-isIso",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-module-pullback",
+  "def-pc-topological-inverse-image-module"
  ],
  "proof_origin": {
   "by": "worker",
-  "reason": "Balanced tensor identity and its naturality from the proof of Stacks Tag 08DE."
+  "reason": "N4: explicit balanced pairing, unique sheaf tensor map, tensor-unit naturality and categorical inversion; invertibility alone split off."
  },
  "mathlib_searches": [
   {
@@ -117,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "X-07f14",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T140819-L-313794",
+  "landing": "20261013T152018-L-953911",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivery modules compiled cleanly, the target signature was unchanged, the sole remaining sorry was named and documented, and the direct importer compiled."
  }
 }
