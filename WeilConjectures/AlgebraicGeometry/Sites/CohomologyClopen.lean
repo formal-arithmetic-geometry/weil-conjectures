@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
@@ -58,16 +59,17 @@ theorem bijective_edgeMap_of_isFinite (f : X ⟶ Y) [IsFinite f]
 
 /-- **Étale cohomology over a clopen decomposition.** Let `U : ι → X.Opens` be a finite
 family of pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf
-on `X`. Then `Hⁿ(X, F) ≅ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})` (as sets).
+on `X`. Then the restriction maps `Hⁿ(X, F) ⟶ Hⁿ(Uᵢ, F|_{Uᵢ})` assemble to a bijection
+`Hⁿ(X, F) ⟶ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})`.
 
 The unit maps assemble to an isomorphism `F ≅ ⨁ᵢ ιᵢ_* ιᵢ^* F`, as can be checked after
 restricting to each `Uⱼ`, where all summands but the `j`-th vanish; and
 `Hⁿ(X, ιᵢ_* ιᵢ^* F) = Hⁿ(Uᵢ, ιᵢ^* F)` since `ιᵢ` is a closed immersion, hence finite. -/
-theorem nonempty_equiv_pi_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
+theorem bijective_pi_cohomologyMap_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
     (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
     (hcov : ∀ x : X, ∃ i, x ∈ U i) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n : ℕ) :
-    Nonempty (Sheaf.H F n ≃ ∀ i, Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n) := by
+    Function.Bijective fun (x : Sheaf.H F n) (i : ι) ↦ cohomologyMap (U i).ι F n x := by
   have := Fintype.ofFinite ι
   have : HasFiniteBiproducts (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
     HasFiniteBiproducts.of_hasFiniteProducts
@@ -107,9 +109,29 @@ theorem nonempty_equiv_pi_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.
       invFun := Sheaf.H.map (inv φ) n
       left_inv x := by rw [← Sheaf.H.map_comp_apply, IsIso.hom_inv_id, Sheaf.H.map_id_apply]
       right_inv x := by rw [← Sheaf.H.map_comp_apply, IsIso.inv_hom_id, Sheaf.H.map_id_apply] }
-  exact ⟨e₁.trans ((Ext.addEquivBiproduct _ (biproduct.isBilimit G) n).toEquiv.trans
-    (Equiv.piCongrRight fun i ↦ Equiv.ofBijective _
-      (bijective_edgeMap_of_isFinite (U i).ι _ n)))⟩
+  let e : Sheaf.H F n ≃ ∀ i, Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n :=
+    e₁.trans ((Ext.addEquivBiproduct _ (biproduct.isBilimit G) n).toEquiv.trans
+      (Equiv.piCongrRight fun i ↦ Equiv.ofBijective _
+        (bijective_edgeMap_of_isFinite (U i).ι _ n)))
+  convert e.bijective using 1
+  funext x i
+  change _ = Sheaf.H.map ((adj i).counit.app _) n (cohomologyMap (U i).ι _ n
+    ((Sheaf.H.map φ n x).comp (Ext.mk₀ (biproduct.π G i)) (add_zero n)))
+  rw [← Sheaf.H.map_apply, ← Sheaf.H.map_comp_apply, biproduct.lift_π, cohomologyMap_map]
+  refine (Sheaf.H.map_id_apply _).symm.trans ?_
+  rw [← (adj i).left_triangle_components F, Sheaf.H.map_comp_apply]
+  rfl
+
+/-- **Étale cohomology over a clopen decomposition.** Let `U : ι → X.Opens` be a finite
+family of pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf
+on `X`. Then `Hⁿ(X, F) ≅ ∏ᵢ Hⁿ(Uᵢ, F|_{Uᵢ})` (as sets), by
+`AlgebraicGeometry.Etale.bijective_pi_cohomologyMap_of_isClopen`. -/
+theorem nonempty_equiv_pi_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens)
+    (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
+    (hcov : ∀ x : X, ∃ i, x ∈ U i) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (n : ℕ) :
+    Nonempty (Sheaf.H F n ≃ ∀ i, Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n) :=
+  ⟨Equiv.ofBijective _ (bijective_pi_cohomologyMap_of_isClopen U hU hdisj hcov F n)⟩
 
 /-- **Vanishing over a clopen decomposition.** Let `U : ι → X.Opens` be a finite family of
 pairwise disjoint closed opens covering `X`, and let `F` be an abelian étale sheaf on `X`. If
@@ -121,5 +143,87 @@ theorem subsingleton_H_of_isClopen {ι : Type u} [Finite ι] (U : ι → X.Opens
     (n : ℕ) (hF : ∀ i, Subsingleton (Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)) :
     Subsingleton (Sheaf.H F n) :=
   (nonempty_equiv_pi_H_of_isClopen U hU hdisj hcov F n).some.subsingleton
+
+/-- Two factorisations `f ≫ g = f' ≫ g'` of the same morphism give pullback maps on cohomology
+which agree up to a bijection
+(`AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap`). -/
+lemma exists_bijective_cohomologyMap_cohomologyMap_eq {Z Y' : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) (f' : X ⟶ Y') (g' : Y' ⟶ Z) (h : f ≫ g = f' ≫ g')
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
+    ∃ A : Sheaf.H ((f')^*[AddCommGrpCat.{u + 1}].obj ((g')^*[AddCommGrpCat.{u + 1}].obj F)) n →
+      Sheaf.H ((f)^*[AddCommGrpCat.{u + 1}].obj ((g)^*[AddCommGrpCat.{u + 1}].obj F)) n,
+      Function.Bijective A ∧ ∀ x, cohomologyMap f _ n (cohomologyMap g F n x) =
+        A (cohomologyMap f' _ n (cohomologyMap g' F n x)) := by
+  have hb := bijective_mk₀_comp_comp_mk₀ (cohomologyMapCompIso f g (f ≫ g) rfl).hom
+    ((upperStarComp AddCommGrpCat.{u + 1} f g (f ≫ g) rfl).hom.app F) n
+  have hb' := bijective_mk₀_comp_comp_mk₀ (cohomologyMapCompIso f' g' (f ≫ g) h.symm).hom
+    ((upperStarComp AddCommGrpCat.{u + 1} f' g' (f ≫ g) h).hom.app F) n
+  refine ⟨_ ∘ (Equiv.ofBijective _ hb').symm, hb.comp (Equiv.bijective _), fun x ↦ ?_⟩
+  rw [cohomologyMap_cohomologyMap f g _ rfl, cohomologyMap_cohomologyMap f' g' (f ≫ g) h.symm]
+  simp only [Function.comp_apply]
+  congr 2
+  exact ((Equiv.ofBijective _ hb').symm_apply_apply _).symm
+
+variable {ι : Type u} [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsClosed (U i : Set X))
+  (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j)) (hcov : ∀ x : X, ∃ i, x ∈ U i)
+include hU hdisj hcov
+
+/-- The pullback map along `g : Y ⟶ X` and the restriction maps to the pieces of a finite
+clopen decomposition of `X` and of its preimage in `Y` commute, up to bijections. -/
+lemma exists_bijective_pi_cohomologyMap_eq (g : Y ⟶ X)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
+    ∃ A : ∀ i, Sheaf.H ((g ∣_ U i)^*[AddCommGrpCat.{u + 1}].obj
+        (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F)) n →
+      Sheaf.H (((g ⁻¹ᵁ U i).ι)^*[AddCommGrpCat.{u + 1}].obj
+        ((g)^*[AddCommGrpCat.{u + 1}].obj F)) n,
+      (∀ i, Function.Bijective (A i)) ∧
+      Function.Bijective (fun (y : Sheaf.H ((g)^*[AddCommGrpCat.{u + 1}].obj F) n) (i : ι) ↦
+        cohomologyMap (g ⁻¹ᵁ U i).ι _ n y) ∧
+      Function.Bijective (fun (x : Sheaf.H F n) (i : ι) ↦ cohomologyMap (U i).ι F n x) ∧
+      ∀ x i, cohomologyMap (g ⁻¹ᵁ U i).ι _ n (cohomologyMap g F n x) =
+        A i (cohomologyMap (g ∣_ U i) _ n (cohomologyMap (U i).ι F n x)) := by
+  choose A hA hAx using fun i ↦ exists_bijective_cohomologyMap_cohomologyMap_eq
+    ((g ⁻¹ᵁ U i).ι) g (g ∣_ U i) (U i).ι (morphismRestrict_ι g (U i)).symm F n
+  refine ⟨A, hA, bijective_pi_cohomologyMap_of_isClopen (fun i ↦ g ⁻¹ᵁ U i)
+    (fun i ↦ (hU i).preimage g.continuous) (fun i j hij ↦ (hdisj hij).preimage g)
+    (fun y ↦ hcov (g y)) _ n, bijective_pi_cohomologyMap_of_isClopen U hU hdisj hcov F n,
+    fun x i ↦ hAx i x⟩
+
+/-- **Bijectivity of pullback maps over a clopen decomposition.** Let `U` be a finite clopen
+decomposition of `X` and `g : Y ⟶ X`. If the pullback maps along the restrictions
+`g⁻¹(Uᵢ) ⟶ Uᵢ` are bijective in degree `n`, then so is the pullback map along `g`. -/
+theorem bijective_cohomologyMap_of_isClopen (g : Y ⟶ X)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)
+    (h : ∀ i, Function.Bijective
+      (cohomologyMap (g ∣_ U i) (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)) :
+    Function.Bijective (cohomologyMap g F n) := by
+  obtain ⟨A, hA, hR', hR, hAx⟩ := exists_bijective_pi_cohomologyMap_eq U hU hdisj hcov g F n
+  have hP : Function.Bijective fun (y : ∀ i, Sheaf.H (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)
+      (i : ι) ↦ A i (cohomologyMap (g ∣_ U i) _ n (y i)) := by
+    refine ⟨fun y y' hy ↦ funext fun i ↦ (h i).1 ((hA i).1 (congr_fun hy i)), fun z ↦ ?_⟩
+    choose y hy using fun i ↦ ((hA i).comp (h i)).2 (z i)
+    exact ⟨y, funext hy⟩
+  rw [← Function.Bijective.of_comp_iff' hR']
+  convert hP.comp hR using 1
+  funext x
+  exact funext (hAx x)
+
+/-- **Surjectivity of pullback maps over a clopen decomposition.** Let `U` be a finite clopen
+decomposition of `X` and `g : Y ⟶ X`. If the pullback maps along the restrictions
+`g⁻¹(Uᵢ) ⟶ Uᵢ` are surjective in degree `n`, then so is the pullback map along `g`. -/
+theorem surjective_cohomologyMap_of_isClopen (g : Y ⟶ X)
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)
+    (h : ∀ i, Function.Surjective
+      (cohomologyMap (g ∣_ U i) (((U i).ι)^*[AddCommGrpCat.{u + 1}].obj F) n)) :
+    Function.Surjective (cohomologyMap g F n) := by
+  obtain ⟨A, hA, hR', hR, hAx⟩ := exists_bijective_pi_cohomologyMap_eq U hU hdisj hcov g F n
+  intro z
+  choose y hy using fun i ↦ ((hA i).2.comp (h i)) (cohomologyMap (g ⁻¹ᵁ U i).ι _ n z)
+  obtain ⟨x, hx⟩ := hR.2 y
+  refine ⟨x, hR'.1 (funext fun i ↦ ?_)⟩
+  have hxi : cohomologyMap (U i).ι F n x = y i := congr_fun hx i
+  dsimp only
+  rw [hAx, hxi]
+  exact hy i
 
 end AlgebraicGeometry.Etale
