@@ -761,6 +761,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+public import WeilConjectures.CategoryTheory.Adjunction.LiftCompIso
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommGrpBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects

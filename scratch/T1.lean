@@ -89,7 +89,11 @@ theorem exists_compIso_lift
       rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
       erw [Functor.map_id, Category.id_comp]
       rfl
-    sorry
+    have k := ((Au.comp Av).homEquiv _ _).injective key
+    rw [← k]
+    simp only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app_assoc]
+    rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+      Iso.hom_inv_id_app_assoc]
   · ext G
     apply ((aU.comp aV).homEquiv _ _).injective
     simp only [homEquiv_unit]

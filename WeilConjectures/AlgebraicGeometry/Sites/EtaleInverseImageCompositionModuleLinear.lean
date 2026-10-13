@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Adjunction.LiftCompIso
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
@@ -187,6 +188,33 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
+  intro gammaU gammaV gammaUV hgU hgV hgUV LU eU aU hU LV eV aV hV LUV eUV aUV hUV
+  let e : MorphismProperty.Over.pullback @Etale ⊤ uMap ⋙
+      MorphismProperty.Over.pullback @Etale ⊤ vMap ≅
+      MorphismProperty.Over.pullback @Etale ⊤ (vMap ≫ uMap) :=
+    (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) vMap uMap (vMap ≫ uMap)
+      rfl).symm
+  haveI : (MorphismProperty.Over.pullback @Etale ⊤ uMap ⋙
+      MorphismProperty.Over.pullback @Etale ⊤ vMap).IsContinuous
+      (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) :=
+    Functor.isContinuous_comp _ _ _ (Y.smallGrothendieckTopology @Etale) _
+  -- Step 1: the ring map of the composite is the composite of the ring maps.
+  have hring : gammaUV ≫ (Functor.sheafPushforwardContinuousNatTrans e.hom CommRingCat.{u + 1}
+      (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).app
+        ((constantSheaf (Z.smallGrothendieckTopology @Etale) CommRingCat.{u + 1}).obj R) =
+      gammaU ≫ ((MorphismProperty.Over.pullback @Etale ⊤ uMap).sheafPushforwardContinuous
+        CommRingCat.{u + 1} (X.smallGrothendieckTopology @Etale)
+        (Y.smallGrothendieckTopology @Etale)).map gammaV := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _ (Sheaf.cond _)
+    ext W r
+    have hZ := ConcreteCategory.congr_hom
+      ((toSheafify (Z.smallGrothendieckTopology @Etale)
+        ((Functor.const Z.Etaleᵒᵖ).obj R)).naturality (e.hom.app W.unop).op) r
+    simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp] at hZ
+    simp only [NatTrans.comp_app, CommRingCat.hom_comp, RingHom.comp_apply, Sheaf.comp_hom,
+      Functor.sheafPushforwardContinuousNatTrans_app_hom, Functor.whiskerRight_app,
+      NatTrans.op_app]
+    erw [hgUV W r, hgU W r, hgV _ r]
+    exact hZ
   sorry
-
-end AlgebraicGeometry
