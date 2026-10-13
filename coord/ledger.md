@@ -11912,3 +11912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:00 L: merged deliver/N4/Sheaf.Algebra.Homology.RingExtensionFiniteSupportProduct (stage 3; reviewer PASS; first push; landing 20261013T100043-L-2473297 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/N4/Sheaf.Algebra.Homology.RingHomExtensionTransport (stage 3; reviewer PASS; first push; landing 20261013T100043-L-2473445 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:00 L: merged deliver/N4/Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap (stage 3; reviewer PASS; first push; landing 20261013T100044-L-2473620 (interface); batch 20261013T095923; modules 4; new nodes 3)
+- 10:00 L: merged deliver/N4/Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison (stage 3; reviewer PASS; first push; landing 20261013T100045-L-2473754 (interface); batch 20261013T095923; modules 4; new nodes 3)

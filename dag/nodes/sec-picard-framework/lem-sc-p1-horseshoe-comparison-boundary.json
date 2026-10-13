@@ -1,0 +1,173 @@
+{
+ "id": "lem-sc-p1-horseshoe-comparison-boundary",
+ "kind": "statement",
+ "title": "Boundary compatibility of explicit horseshoe resolution comparisons",
+ "statement": "Let $v:A\\to B$ be additive and left exact, $A,B$ abelian with derived categories and $A$ having enough injectives. Let $S$ be short exact and $I_A,I_B,I_C$ arbitrary compatible injective resolutions with maps alpha,beta, beta alpha=0, augmentation squares and short exact rows. Assume their termwise image H and extension EH are short exact. Let T=Rv(S[0]) and U=triangleOfSES(EH). For the explicit comparisons c_I of [lem-sc-p1-injective-resolution-derived-comparison], one has T.mor3;c_IA[1]=c_IC;U.mor3. This asserts only compatibility with the boundary, with no endpoint homology assertion.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q, 05TE and 015B: item proof Steps 1-4, fixed resolution triangle comparison before homology naturality; Tag 0159 (exactness of RF), Section 13.10 (termwise additive functors preserve split triangles)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "lem-sc-p1-injective-resolution-derived-comparison",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Extend the resolutions and maps by zero. Split each row using injectivity of the first term. The split connecting chain map is s then d then pi; its cone comparison, whose third map is minus projection, fixes its sign.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-weil-pbc-degreewise-split-derived-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible augmentation quasi-isomorphisms transport the resolution triangle to a distinguished triangle on the single objects. Hom_D(X_1[1],X_3) vanishes by computation into the bounded below injective resolution of X_3 in the homotopy category: the supports are disjoint. Third-map uniqueness identifies the transported map with the canonical single-triangle boundary.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the right derived functor and its unit on bounded below injectives. Naturality identifies the first two maps with termwise images. Compatibility with shifts identifies the third map with the image of s d pi, since both shifted differentials are -v(d). The degreewise split triangle of the image sequence is therefore the image triangle. The three comparison components give a morphism to the canonical derived SES triangle.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the comparisons obtained from the derived unit with the explicit comparisons c_I. Compare each chosen resolution to the fixed one by desc(id); all compatible lifts are homotopic and their localized maps agree. This identifies the endpoint components and proves the boundary equation, without invoking any homology assertion. Naturality of the derived unit on desc(id) identifies the inverse-unit comparison for the fixed resolution with the chosen-resolution comparison followed by the lift. Quotient factorization and mapExtendIso give its exact target Q(EvI).",
+   "uses": [
+    "lem-sc-p1-injective-resolution-derived-comparison",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sc-p1-injective-resolution-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N4 stage-3 worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014Q, 05TE and 015B: item proof Steps 1-4, fixed resolution triangle comparison before homology naturality",
+  "note": "Explicit comparison and naturality calculations proved in Lean; boundary compatibility remains a named theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor single injective resolution triangle comparison",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSES\"",
+   "results": "12 hits: DerivedCategory.triangleOfSES, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.triangleOfSES_obj₁, DerivedCategory.triangleOfSES_obj₂, DerivedCategory.triangleOfSES_obj₃, DerivedCategory.triangleOfSESδ, DerivedCategory.triangleOfSES_mor₃, DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Tt]riangle|homologyFunctorFactorsh_hom_app_quotient_obj",
+   "results": "4 hits: Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor comparison with an injective resolution is natural and respects connecting morphisms of a horseshoe triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+   "via": [
+    "lem-sc-p1-horseshoe-derived-triangle-comparison",
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeComparisonBoundary.lean",
+  "declaration": "CategoryTheory.horseshoe_comparison_boundary",
+  "statement": "theorem horseshoe_comparison_boundary\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]\n    [EnoughInjectives A] [Category.{v₂} B] [Abelian B]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]\n    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]\n    (S : ShortComplex A) (hS : S.ShortExact)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (hαβ : α ≫ β = 0)\n    (_hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι)\n    (_hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι)\n    (_hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact)\n    (hvH : ((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact)\n    (hExt : (((ShortComplex.mk α β hαβ).map\n      (v.mapHomologicalComplex (ComplexShape.up ℕ))).map\n      (ComplexShape.embeddingUpNat.extendFunctor B)).ShortExact) :\n    let T := (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj\n      hS.singleTrianglePlus\n    let U := DerivedCategory.triangleOfSES hExt\n    (T.mor₃ ≫ (injectiveResolutionDerivedComparison v IA)⟦(1 : ℤ)⟧' =\n      injectiveResolutionDerivedComparison v IC ≫ U.mor₃)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T100045-L-2473754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261013T100045-L-2473754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

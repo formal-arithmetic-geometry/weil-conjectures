@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.Abelian.NatComplexDerivedBoundary
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Sheaf.CategoryTheory.Abelian.HorseshoeComparisonBoundary
+import Sheaf.CategoryTheory.Abelian.InjectiveResolutionDerivedComparisonNaturality
 import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
@@ -94,6 +96,22 @@ theorem horseshoe_derived_triangle_comparison
               ((v.mapHomologicalComplex _).obj IC.cocomplex) n).hom =
           (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₃ n).hom ≫
             (IC.isoRightDerivedObj v n).hom) := by
-  sorry
+  have h₃ := horseshoe_comparison_boundary v S hS IA IB IC
+    α β hαβ _hιA _hιB _hH hvH hExt
+  let τ : ((v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.obj
+      hS.singleTrianglePlus) ⟶ DerivedCategory.triangleOfSES hExt :=
+    { hom₁ := injectiveResolutionDerivedComparison v IA
+      hom₂ := injectiveResolutionDerivedComparison v IB
+      hom₃ := injectiveResolutionDerivedComparison v IC
+      comm₁ := by
+        exact injectiveResolutionDerivedComparison_naturality v S.f IA IB α _hιA
+      comm₂ := by
+        exact injectiveResolutionDerivedComparison_naturality v S.g IB IC β _hιB
+      comm₃ := h₃ }
+  refine ⟨τ, ?_, ?_⟩
+  · intro n
+    exact injectiveResolutionDerivedComparison_homology v IA n
+  · intro n
+    exact injectiveResolutionDerivedComparison_homology v IC n
 
 end CategoryTheory
