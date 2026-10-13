@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientMap
-import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
+import all Sheaf.Algebra.Homology.TotalFreeFiltrationOddQuotientBijective
 
 /-!
 # Degreewise bijectivity of the even column quotient map
@@ -87,7 +87,55 @@ the even term trivially.
 -/
 theorem evenQuotientComponent_injective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
-    Function.Injective (evenQuotientComponent K S e h_positive j k) := by sorry
+    Function.Injective (evenQuotientComponent K S e h_positive j k) := by
+  obtain ⟨r, hr, hearlier⟩ := column_projection K j k
+  have hzero : term K S e (2 * j) k ≤ LinearMap.ker r.hom := by
+    apply iSup_le
+    intro a
+    apply sup_le
+    · split_ifs with ha
+      · rintro y ⟨z, rfl⟩
+        exact congrArg (fun f ↦ f z) (hearlier a (by omega))
+      · exact bot_le
+    · split_ifs with ha
+      · apply le_trans (lower_range_le_full K S e a k)
+        rintro y ⟨z, rfl⟩
+        exact congrArg (fun f ↦ f z) (hearlier a (by omega))
+      · exact bot_le
+  let p : (complex K S e h_positive (2 * j + 1)).X k ⟶
+      (K.X (-(j : ℤ))).X (k + j) :=
+    ModuleCat.ofHom (r.hom.comp (term K S e (2 * j + 1) k).subtype)
+  have hp : (step K S e h_positive (2 * j)).f k ≫ p = 0 := by
+    exact restrictMap_projection_zero (K.total (ComplexShape.up ℤ))
+      (term K S e (2 * j)) (term K S e (2 * j + 1))
+      (differential_mem K S e h_positive (2 * j))
+      (differential_mem K S e h_positive (2 * j + 1))
+      (fun l ↦ term_mono K S e (Nat.le_succ (2 * j)) l) k _ r
+      (fun x hx ↦ hzero hx)
+  let hc := isColimitOfHasCokernelOfPreservesColimit
+    (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) k)
+    (step K S e h_positive (2 * j))
+  let q := hc.desc (CokernelCofork.ofπ p hp)
+  have hq : (cokernel.π (step K S e h_positive (2 * j))).f k ≫ q = p :=
+    Cofork.IsColimit.π_desc hc
+  have hcomp : evenQuotientComponent K S e h_positive j k ≫ q =
+      (S j).f.f (k + j) ≫ (e j).hom.f (k + j) := by
+    change lowerToOdd K S e h_positive j k ≫
+      (cokernel.π (step K S e h_positive (2 * j))).f k ≫ q = _
+    rw [hq]
+    change lower K S e j k ≫ r = _
+    simp only [lower, Category.assoc, hr, Category.comp_id]
+  have hs := (h_exact j).map_of_exact
+    (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) (k + j))
+  have : Mono ((S j).f.f (k + j)) := hs.mono_f
+  have : Mono ((S j).f.f (k + j) ≫ (e j).hom.f (k + j)) := inferInstance
+  have hinj := (ModuleCat.mono_iff_injective
+    ((S j).f.f (k + j) ≫ (e j).hom.f (k + j))).mp inferInstance
+  intro x y hxy
+  apply hinj
+  have h := congrArg (fun f ↦ f x) hcomp
+  have h' := congrArg (fun f ↦ f y) hcomp
+  exact h.symm.trans ((congrArg q hxy).trans h')
 
 /-- Surjectivity of the even quotient component.
 Source: Stacks Project, Tag 09KP, proof, decomposition of the odd term by the new lower range.

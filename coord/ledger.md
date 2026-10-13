@@ -11656,3 +11656,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/H4/Sheaf.AlgebraicGeometry.RawRestrictedHomotopySectionsIso (stage 3; reviewer PASS; first push; landing 20261013T082350-L-1637524 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/J1/Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra (stage 3; reviewer PASS; first push; landing 20261013T082350-L-1637705 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:23 L: merged deliver/J2/Sheaf.AlgebraicGeometry.ProperDirectImageTensorLowerBound (stage 3; reviewer PASS; first push; landing 20261013T082350-L-1637831 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:23 L: merged deliver/J4/Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientBijective (stage 3; reviewer PASS; after a return; landing 20261013T082351-L-1638022 (proof); batch 20261013T082326; modules 1; new nodes 0)

@@ -15,14 +15,15 @@
  "statement": "Injectivity of evenQuotientComponent under the hypotheses of the parent node.",
  "proof_origin": {
   "by": "worker",
-  "group": "Y2",
+  "group": "J4",
   "date": "2026-10-13",
-  "document": "Stacks Project",
-  "place": "Tag 09KP"
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, alternating column filtration; explicit degreewise projection and cokernel descent"
  },
  "proof_deps": [
   "lem-pc-derived-total-filtration-stable",
-  "lem-pc-derived-total-filtration-even-quotient-map"
+  "lem-pc-derived-total-filtration-even-quotient-map",
+  "lem-pc-derived-total-filtration-odd-quotient-bijective"
  ],
  "status": "split",
  "created": {
@@ -95,10 +96,11 @@
  },
  "proof": [
   {
-   "text": "Degreewise decomposition of the filtration quotient proves this half of the bijectivity claim.",
+   "text": "Construct the projection from the coproduct total degree onto column -j by totalDesc. Its composite with the full inclusion of column -j is the identity; its composites with earlier full columns are zero. Every full or lower summand entering stage 2j belongs to an earlier column, so the projection kills the even term. Restrict it to stage 2j+1. Reuse the proved private restrictMap_projection_zero helper from the odd quotient bijectivity module via a proof-only import all to show this restriction kills the inclusion of stage 2j. Then descend through the degreewise cokernel using preservation of cokernels by evaluation. The composite of evenQuotientComponent with this descended map is the degree-k+j arrow of S_j followed by e_j.hom. Evaluation preserves short exactness, hence this composite is injective. Equality of quotient images therefore implies equality of inputs. The same proof covers j=0, zero columns and zero rings. All steps are proved in Lean without new holes.",
    "uses": [
     "lem-pc-derived-total-filtration-stable",
-    "lem-pc-derived-total-filtration-even-quotient-map"
+    "lem-pc-derived-total-filtration-even-quotient-map",
+    "lem-pc-derived-total-filtration-odd-quotient-bijective"
    ],
    "elementary": false
   }
@@ -120,20 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T202237-L-703799",
+  "landing": "20261013T082351-L-1638022",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CochainComplex.TotalFreeFiltration.evenQuotientComponent_injective",
-   "CochainComplex.TotalFreeFiltration.evenQuotientComponent_surjective"
-  ],
-  "sorry_after": [
-   "CochainComplex.TotalFreeFiltration.evenQuotientComponent_injective"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
