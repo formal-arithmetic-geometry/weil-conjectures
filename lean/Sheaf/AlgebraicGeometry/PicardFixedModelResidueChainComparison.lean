@@ -19,6 +19,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+import Sheaf.AlgebraicGeometry.PicardFixedModelResidueDerivedComparison
+import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 /-! # Fixed-affine models used in the Picard comparison
 
 Source: Stacks Project, Tag 0BF2.
@@ -32,6 +34,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 600000 in
+-- Elaborating the chosen derived models and their residue tensor comparisons needs extra fuel.
 /-- The residue maps of chain representatives agree with geometric pullback on H-one.
 Source: Stacks Project, Tag 0BF2, chain maps and their fibre comparison; Tags 08CR and 0B91.
 (blueprint: lem-sc-picard-fixed-model-residue-chain-comparison)
@@ -139,6 +143,29 @@ theorem picard_fixed_model_residue_chain_comparison
         structureSheafCohomologyPullback
           (((Over.pullback (S.fromSpecResidueField s)).map
             (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-              (ui i) (hui i))).left) 1 (α z) := by sorry
+              (ui i) (hui i))).left) 1 (α z) := by
+  classical
+  obtain ⟨α, a, γ, hγ⟩ :=
+    picard_fixed_model_residue_derived_comparison
+      f Xi fi ui hui hO L W k w s hw hLs U hwU hU htrivial m K hK hnegative hrank e1 hE C
+      hC hCnegative hCzero hCi
+  have hφ : ∀ i, ∃ φ : K ⟶ C i, DerivedCategory.Q.map φ = a i :=
+    fun i ↦ perfect_affine_map_representative W U hU K (C i) hK (hC i) (a i)
+  let φ : ∀ i, K ⟶ C i := fun i ↦ Classical.choose (hφ i)
+  have hφeq : ∀ i, DerivedCategory.Q.map (φ i) = a i :=
+    fun i ↦ Classical.choose_spec (hφ i)
+  let t : (Fin m → Γ(W, U)) →ₗ[Γ(W, U)]
+      (∀ i, ((C i).X 1).val.obj (.op (Over.mk (𝟙 U)))) :=
+    LinearMap.pi (fun i ↦
+      (((φ i).f 1).val.app (.op (Over.mk (𝟙 U)))).hom.comp e1.symm.toLinearMap)
+  refine ⟨α, t, γ, ?_, hγ φ hφeq⟩
+  intro x
+  ext i
+  have hc : K.d 0 1 ≫ (φ i).f 1 = 0 := by
+    rw [← (φ i).comm 0 1, hCzero i, comp_zero]
+  have he := congrArg
+    (fun q ↦ (q.val.app (.op (Over.mk (𝟙 U)))) (e0.symm x)) hc
+  have hz : (0 : K.X 0 ⟶ (C i).X 1).val = 0 := rfl
+  simpa [t, SheafOfModules.comp_val, PresheafOfModules.comp_app, hz] using he
 
 end AlgebraicGeometry.Scheme
