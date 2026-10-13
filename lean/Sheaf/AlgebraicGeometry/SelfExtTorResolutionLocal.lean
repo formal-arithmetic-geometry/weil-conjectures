@@ -7,9 +7,9 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.RingTheory.KoszulProjectiveResolution
+import Sheaf.AlgebraicGeometry.LocalTensorFiniteFreeZeroModel
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
 
 /-! # Local models of augmented self-Ext/self-Tor resolutions
 
@@ -68,6 +68,25 @@ theorem selfExt_tor_resolution_local
       let Fc := moduleOpenOverComplexFunctor Z V W
       CochainComplex.IsKInjective (Fc.obj J) ∧
         HasFiniteFreeZeroModel (V.toScheme.ringCatSheaf.over W) (Fc.obj T) := by
-  sorry
+  dsimp
+  intro V U hU
+  let W := V.ι ⁻¹ᵁ (i ⁻¹ᵁ U.1)
+  constructor
+  · let := _hJ
+    let F := Scheme.Modules.restrictFunctor V.ι
+    let G := SheafOfModules.overFunctor V.toScheme.ringCatSheaf W
+    let : F.Additive := restriction_additive _
+    let : F.PreservesKInjectiveComplexes :=
+      (openImmersion_restriction_derived_properties V.ι).2
+    let Jv : CochainComplex V.toScheme.Modules ℤ := (F.mapHomologicalComplex (.up ℤ)).obj J
+    let : CochainComplex.IsKInjective Jv := Functor.PreservesKInjectiveComplexes.isKInjective_map J
+    have hzero : G.PreservesZeroMorphisms := by
+      constructor
+      intro M N
+      ext A x
+      rfl
+    exact isKInjective_restrict_localized V.toScheme.ringCatSheaf W
+      hzero Jv
+  · exact local_tensor_has_finite_free_zero_model i P a _hP _hflat V U hU
 
 end AlgebraicGeometry
