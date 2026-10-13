@@ -11248,3 +11248,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:42 L: merged deliver/G1/Sheaf.AlgebraicGeometry.PrincipalOpenSectionsResolutionQuasiIso (stage 3; reviewer PASS; first push; landing 20261013T054216-L-442498 (interface); batch 20261013T054206; modules 3; new nodes 2)
 - 05:42 L: merged deliver/G2/Sheaf.Algebra.Homology.NatSplitFunctionalsHomotopy (stage 3; reviewer PASS; first push; landing 20261013T054216-L-442606 (proof); batch 20261013T054206; modules 1; new nodes 0)
 - 05:42 L: merged deliver/G2/Sheaf.AlgebraicGeometry.PerfectTensorBoundedCoherent (stage 3; reviewer PASS; after a return; landing 20261013T054216-L-442706 (interface); batch 20261013T054206; modules 3; new nodes 2)
+- 05:42 L: merged deliver/G3/Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase (stage 3; reviewer PASS; after a return; landing 20261013T054217-L-442825 (interface); batch 20261013T054206; modules 3; new nodes 2)

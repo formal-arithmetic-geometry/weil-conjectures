@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.AbelianPullbackSingleComposition
+import Sheaf.AlgebraicGeometry.AbelianRawPullbackIdentity
+import Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
 
 /-! # Coherence of varying-coefficient raw pullbacks
 
@@ -24,6 +24,93 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
+
+private lemma presheaf_map_ext {C : Type*} [Category* C]
+    {P Q : C ⥤ AddCommGrpCat.{v + 1}} (f g : P ⟶ Q)
+    (h : ∀ U (z : P.obj U), f.app U z = g.app U z) : f = g := by
+  apply NatTrans.ext
+  funext U
+  exact AddCommGrpCat.ext (h U)
+
+private def homAddMap {D E : Type*} [Category.{v + 1} D] [Category.{v + 1} E]
+    [Preadditive D] [Preadditive E] (L : D ⥤ E) [L.Additive]
+    {X Z : D} {X' X'' Z'' Z' : E}
+    (s₁ : X' ⟶ X'') (s₂ : X'' ⟶ L.obj X)
+    (e₁ : L.obj Z ⟶ Z'') (e₂ : Z'' ⟶ Z') :
+    (X ⟶ Z) →+ (X' ⟶ Z') where
+  toFun z := s₁ ≫ s₂ ≫ L.map z ≫ e₁ ≫ e₂
+  map_zero' := by simp
+  map_add' x y := by
+    simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+
+private noncomputable def rawPullbackMapGeneral
+    {T C₀ C₁ C D E D' E' : Type*}
+    [Category* T] [Category* C₀] [Category* C₁] [Category* C]
+    [Category* D] [Category* E] [Category.{v + 1} D'] [Category.{v + 1} E']
+    [Preadditive D'] [Preadditive E']
+    (Q₀ : T ⥤ C₀) (Q₁ : C₀ ⥤ C₁) (Q₂ : C₁ ⥤ C)
+    (P : C ⥤ D) (P' : C ⥤ E) (A : D ⥤ E)
+    (SY : D ⥤ D') (SY' : E ⥤ E') (L : D' ⥤ E') [L.Additive]
+    (c : P' ⟶ P ⋙ A) (t : SY ⋙ L ≅ A ⋙ SY')
+    {Z : D'} {Z₁ Z₂ : E'} (e₁ : L.obj Z ⟶ Z₁) (e₂ : Z₁ ⟶ Z₂) :
+    (Q₀ ⋙ Q₁ ⋙ Q₂ ⋙ P ⋙ SY).op ⋙ preadditiveYoneda.obj Z ⟶
+      (Q₀ ⋙ Q₁ ⋙ Q₂ ⋙ P' ⋙ SY').op ⋙ preadditiveYoneda.obj Z₂ := by
+  let Q := Q₀ ⋙ Q₁ ⋙ Q₂
+  refine
+    { app := fun U ↦ AddCommGrpCat.ofHom
+        (homAddMap L (SY'.map (c.app (Q.obj U.unop)))
+          (t.inv.app (P.obj (Q.obj U.unop))) e₁ e₂)
+      naturality := ?_ }
+  intro U V r
+  apply AddCommGrpCat.ext
+  intro z
+  change SY'.map (c.app (Q.obj V.unop)) ≫ t.inv.app (P.obj (Q.obj V.unop)) ≫
+      L.map (SY.map (P.map (Q.map r.unop)) ≫ z) ≫ (e₁ ≫ e₂) =
+    SY'.map (P'.map (Q.map r.unop)) ≫ SY'.map (c.app (Q.obj U.unop)) ≫
+      t.inv.app (P.obj (Q.obj U.unop)) ≫ L.map z ≫ (e₁ ≫ e₂)
+  have hc := c.naturality (Q.map r.unop)
+  have ht := t.inv.naturality (P.map (Q.map r.unop))
+  change P'.map (Q.map r.unop) ≫ c.app (Q.obj U.unop) =
+    c.app (Q.obj V.unop) ≫ A.map (P.map (Q.map r.unop)) at hc
+  change SY'.map (A.map (P.map (Q.map r.unop))) ≫
+      t.inv.app (P.obj (Q.obj U.unop)) =
+    t.inv.app (P.obj (Q.obj V.unop)) ≫
+      L.map (SY.map (P.map (Q.map r.unop))) at ht
+  rw [L.map_comp, Category.assoc, ← reassoc_of% ht,
+    ← SY'.map_comp_assoc, ← hc, SY'.map_comp, Category.assoc]
+
+private noncomputable def rawPullbackMap {S Y Y' : Scheme.{v}}
+    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (φ : ((a)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F') :
+    abelianHigherDirectImageRawPresheaf h p F ⟶
+      abelianHigherDirectImageRawPresheaf h' p F' :=
+  rawPullbackMapGeneral uliftYoneda.{v + 1}
+    ((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free)
+    (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (h)^*[AddCommGrpCat.{v + 1}] (h')^*[AddCommGrpCat.{v + 1}]
+    (a)^*[AddCommGrpCat.{v + 1}]
+    (DerivedCategory.Plus.singleFunctor _ 0) (DerivedCategory.Plus.singleFunctor _ 0)
+    D+((a)^*[AddCommGrpCat.{v + 1}])
+    (upperStarComp AddCommGrpCat.{v + 1} a h h' w.symm).hom
+    (((a)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0)
+    ((D+((a)^*[AddCommGrpCat.{v + 1}]).commShiftIso (p : ℤ)).hom.app
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+    ((shiftFunctor _ (p : ℤ)).map
+      ((((a)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
+        (DerivedCategory.Plus.singleFunctor _ 0).map φ))
+
+private lemma rawPullbackMap_app {S Y Y' : Scheme.{v}}
+    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})
+    (φ : ((a)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F') (U : S.Etale)
+    (z : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)) :
+    (rawPullbackMap a h h' w p F F' φ).app (op U) z =
+      abelianHigherDirectImageRawPullback a h h' w p F F' φ U z := by
+  rfl
+
 
 /-- The explicit raw pullbacks form natural transformations and obey identity and composition.
 Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
@@ -96,7 +183,39 @@ theorem abelianRawPullback_coherent_base {S : Scheme.{v}}
           (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p
           (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) V t) ∧
       (∀ i : I, τ (𝟙 i) = 𝟙 _) ∧
-      (∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), τ (f ≫ g) = τ f ≫ τ g) := by sorry
-
+      (∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), τ (f ≫ g) = τ f ≫ τ g) := by
+  have _ := @hH
+  clear hH
+  let τ := fun {i j : I} (f : i ⟶ j) ↦
+    rawPullbackMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom
+      (Over.w (D.map f.op)) p (F i) (F j) (φ f)
+  let β := fun i : I ↦
+    rawPullbackMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom
+      (Over.w (c.π.app (op i))) p (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i)
+  refine ⟨τ, β, ?_, ?_, ?_, ?_⟩
+  · intro i j f V t
+    exact rawPullbackMap_app _ _ _ _ _ _ _ _ _ _
+  · intro i V t
+    exact rawPullbackMap_app _ _ _ _ _ _ _ _ _ _
+  · intro i
+    apply presheaf_map_ext
+    rintro ⟨U⟩ t
+    dsimp only [τ, NatTrans.id_app, AddCommGrpCat.id_apply]
+    rw [rawPullbackMap_app]
+    have ha : (D.map (𝟙 i).op).left = 𝟙 (D.obj (op i)).left := by
+      exact congrArg (fun q ↦ q.left) (D.map_id (op i))
+    exact abelianHigherDirectImageRawPullback_identity _ ha (D.obj (op i)).hom
+      (Over.w (D.map (𝟙 i).op)) p (F i) (φ (𝟙 i)) (hφid i) U t
+  · intro i j k f g
+    apply presheaf_map_ext
+    rintro ⟨U⟩ t
+    simp only [τ, NatTrans.comp_app, AddCommGrpCat.comp_apply]
+    rw [rawPullbackMap_app, rawPullbackMap_app, rawPullbackMap_app]
+    have hd : (D.map (f ≫ g).op).left = (D.map g.op).left ≫ (D.map f.op).left := by
+      exact congrArg (fun q ↦ q.left) (D.map_comp g.op f.op)
+    exact abelianHigherDirectImageRawPullback_composition _ _ _ hd
+      (D.obj (op i)).hom (D.obj (op j)).hom (D.obj (op k)).hom
+      (Over.w (D.map f.op)) (Over.w (D.map g.op)) (Over.w (D.map (f ≫ g).op)) p
+      (F i) (F j) (F k) (φ f) (φ g) (φ (f ≫ g)) (hφcomp f g) U t
 
 end AlgebraicGeometry.Etale

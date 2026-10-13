@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-abelian-raw-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of varying-coefficient raw pullbacks",
+ "statement": "Let $h:Y\\to S$, $h\\prime:Y\\prime\\to S$, $h\\prime\\prime:Y\\prime\\prime\\to S$ be scheme maps [def-weil-pbc-scheme-conventions]. Let $a:Y\\prime\\to Y$, $b:Y\\prime\\prime\\to Y\\prime$, $d:Y\\prime\\prime\\to Y$ satisfy $d=b;a$, $a;h=h\\prime$, $b;h\\prime=h\\prime\\prime$, and $d;h=h\\prime\\prime$. Let $F,F\\prime,F\\prime\\prime$ be abelian etale sheaves [def-weil-pbc-etale-sheaves] on these schemes and let $\\varphi_a:a^{-1}F\\to F\\prime$, $\\varphi_b:b^{-1}F\\prime\\to F\\prime\\prime$, $\\varphi_d:d^{-1}F\\to F\\prime\\prime$. Assume that $\\varphi_d$ agrees, after transport along $d=b;a$, with $C_{b,a,F};b^{-1}(\\varphi_a);\\varphi_b$, where $C$ is the canonical inverse-image composition comparison [lem-weil-pbc-inverse-image-composition]. For every $p\\in\\mathbb N$, etale $U$ over $S$ and $z\\in\\mathrm{raw}(h,p,F)(U)$ [lem-sbc-abelian-higher-direct-image-natural-comparison], raw pullback along $(d,\\varphi_d)$ equals raw pullback along $(b,\\varphi_b)$ of the raw pullback along $(a,\\varphi_a)$. No diagram, cone, colimit, or geometric condition is assumed. Inverse images are those of [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Canonical cohomology comparison maps in lemma-relative-colimit; Tag 03CB for inverse-image comparisons; explicit five-factor calculation of parent lem-sbc-abelian-raw-pullback-coherence-base proof step 2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Substitute hd so d is b ≫ a, and convert hφ to equality of morphisms. Expand the\nfive factors of each raw pullback. Functor.map_comp distributes D(b^*) over the inner\nfive factors. Naturality of the single-functor comparison for b^* at the source comparison\nmoves that comparison to the left of the inverse single comparison. The adjacent direct\nand inverse single comparisons at the intermediate source then cancel. Use naturality of\nthe derived composition isomorphism D((b ≫ a)^*) ≅ D(a^*) ⋙ D(b^*) at z to replace the\ntwice pulled-back class by the class pulled back along b ≫ a. The source factors agree\nwith the source factor for d by upperStarComp associativity applied to b, a, h. On single\ncomplexes the derived composition agrees with the underived comparison by\nabelianPullbackSingleComposition (specialized to b, a, b ≫ a, rfl), so its source component\nmoves across the single comparisons. Its shift compatibility, proved on complexes and\ndescended through localization, moves the target component through the two commShiftIso\nfactors. Naturality of the single comparison at φa moves φa past the intermediate\ncomparison; functoriality of single and shift combines the coefficient factors as\nsingle(upperStarComp.hom ≫ b^*.map φa ≫ φb). This is single(φd) by hφ. Use wa, wb, wd\nand associativity to identify the structure-map equalities (their proof transports are\nproof-irrelevant). The five remaining factors are exactly the raw formula for d.\nNo invertibility of any coefficient morphism is used; zero coefficients, empty schemes,\nidentity maps and p = 0 obey the same calculation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-sbc-abelian-pullback-single-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-sbc-abelian-pullback-single-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 09Z1 and 03CB",
+  "place": "G3 spells out the structural five-factor calculation in parent proof step 2; not the geometric continuity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback composition identity on derived Hom groups",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition of pullback on derived Hom classes of varying abelian sheaves",
+   "date": "2026-10-13",
+   "results": "8 hits: sheafHom, continuous module sheaf pullback associativity, and site over-map comparison. None states the varying-coefficient abelian derived-Hom formula.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryPlusSingleFunctor\"",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianHigherDirectImageRawPullback.*(identity|composition|id|comp)",
+   "date": "2026-10-13",
+   "results": "0 Mathlib hits. Local rg found only the parent coherence theorem and its consumers; the analogous HigherDirectImageRawOverPullback laws use ModuleCat coefficients restricted from a fixed base, not arbitrary abelian sheaves.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Structural canonical-map calculation in parent proof step 2",
+   "via": [
+    "lem-sbc-raw-affine-colimit-comparison-injective",
+    "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing",
+    "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+    "lem-sbc-higher-direct-image-affine-computation-vanishing",
+    "lem-sbc-higher-direct-image-local-section-vanishing",
+    "sbc-lem-higher-direct-image-affine-section-vanishing",
+    "sbc-lem-higher-direct-image-limit-class-vanishing",
+    "lem-sbc-abelian-raw-pullback-coherence-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianRawPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianHigherDirectImageRawPullback_composition",
+  "statement": "theorem abelianHigherDirectImageRawPullback_composition {S Y Y' Y'' : Scheme.{v}}\n    (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (d : Y'' ⟶ Y) (hd : d = b ≫ a)\n    (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)\n    (wa : a ≫ h = h') (wb : b ≫ h' = h'') (wd : d ≫ h = h'') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (F'' : Sheaf Y''.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φa : ((a)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F')\n    (φb : ((b)^*[AddCommGrpCat.{v + 1}]).obj F' ⟶ F'')\n    (φd : ((d)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F'')\n    (hφ : HEq φd ((upperStarComp AddCommGrpCat.{v + 1} b a).hom.app F ≫\n      ((b)^*[AddCommGrpCat.{v + 1}]).map φa ≫ φb))\n    (U : S.Etale) (z : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)) :\n    abelianHigherDirectImageRawPullback d h h'' wd p F F'' φd U z =\n      abelianHigherDirectImageRawPullback b h' h'' wb p F' F'' φb U\n        (abelianHigherDirectImageRawPullback a h h' wa p F F' φa U z)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T054217-L-442825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T054217-L-442825",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

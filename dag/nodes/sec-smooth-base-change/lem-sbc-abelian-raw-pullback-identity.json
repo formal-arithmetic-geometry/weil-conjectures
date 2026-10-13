@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-abelian-raw-pullback-identity",
+ "kind": "statement",
+ "title": "Identity of varying-coefficient raw pullback",
+ "statement": "Let $h:Y\\to S$ be a scheme map [def-weil-pbc-scheme-conventions] and let $a:Y\\to Y$ satisfy $a=1_Y$. Let $w:a;h=h$, $p\\in\\mathbb N$, and $F$ an abelian etale sheaf [def-weil-pbc-etale-sheaves] on $Y$. Let $\\varphi:a^{-1}F\\to F$ agree, after transport along $a=1_Y$, with the canonical inverse-image identity comparison $e_{Y,F}$. For every etale test object $U$ over $S$ and every class $z\\in\\mathrm{raw}(h,p,F)(U)$ of [lem-sbc-abelian-higher-direct-image-natural-comparison], the explicit raw pullback satisfies $\\mathrm{rawPullback}(a,h,h,w,p,F,F,\\varphi,U,z)=z$. This is a single-class identity law; it assumes neither an index diagram nor a colimit. Inverse images are those of [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Canonical cohomology comparison maps in lemma-relative-colimit; Tag 03CB for inverse-image comparisons; explicit five-factor calculation of parent lem-sbc-abelian-raw-pullback-coherence-base proof step 2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Substitute ha, so a is the identity, and convert hφ to equality of morphisms.\nThe left unit law upperStarComp_id_left identifies the first raw factor with the single\nfunctor applied to upperStarId.inv at h-pullback of the free sheaf of U. Let eD be the\ncanonical derived identity comparison upperStarIdDerivedPlus. On a single complex its\ncomponent is the single-functor comparison followed by single(upperStarId.hom): compute\non the complex concentrated in degree zero, where both maps are upperStarId.hom; in all\nother degrees they are the unique map between zero objects. Apply the factorization\ncomparison and localization to obtain this equality in the derived category, then restrict\nto D⁺ using the fully faithful inclusion. The same termwise computation shows that eD\ncommutes with shifts. Consequently the last three factors of the raw formula are\nD(id^*).map z followed by eD.hom at the shifted single of F. Naturality of eD changes\nthis to eD.hom at the source single followed by z. The inverse single comparison cancels\nits direct comparison. What remains is single(upperStarId.inv) followed by\nsingle(upperStarId.hom) followed by z; functoriality and the inverse-hom identity give z.\nThis proof applies also for zero F, zero z, empty schemes and p = 0.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-derived-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 09Z1 and 03CB",
+  "place": "G3 spells out the structural five-factor calculation in parent proof step 2; not the geometric continuity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback composition identity on derived Hom groups",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition of pullback on derived Hom classes of varying abelian sheaves",
+   "date": "2026-10-13",
+   "results": "8 hits: sheafHom, continuous module sheaf pullback associativity, and site over-map comparison. None states the varying-coefficient abelian derived-Hom formula.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryPlusSingleFunctor\"",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianHigherDirectImageRawPullback.*(identity|composition|id|comp)",
+   "date": "2026-10-13",
+   "results": "0 Mathlib hits. Local rg found only the parent coherence theorem and its consumers; the analogous HigherDirectImageRawOverPullback laws use ModuleCat coefficients restricted from a fixed base, not arbitrary abelian sheaves.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherenceBase",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Structural canonical-map calculation in parent proof step 2",
+   "via": [
+    "lem-sbc-raw-affine-colimit-comparison-injective",
+    "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing",
+    "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+    "lem-sbc-higher-direct-image-affine-computation-vanishing",
+    "lem-sbc-higher-direct-image-local-section-vanishing",
+    "sbc-lem-higher-direct-image-affine-section-vanishing",
+    "sbc-lem-higher-direct-image-limit-class-vanishing",
+    "lem-sbc-abelian-raw-pullback-coherence-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianRawPullbackIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianRawPullbackIdentity.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianHigherDirectImageRawPullback_identity",
+  "statement": "theorem abelianHigherDirectImageRawPullback_identity {S Y : Scheme.{v}}\n    (a : Y ⟶ Y) (ha : a = 𝟙 Y) (h : Y ⟶ S) (w : a ≫ h = h) (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ((a)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F)\n    (hφ : HEq φ ((upperStarId AddCommGrpCat.{v + 1} Y).hom.app F))\n    (U : S.Etale) (z : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)) :\n    abelianHigherDirectImageRawPullback a h h w p F F φ U z = z",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T054217-L-442825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T054217-L-442825",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
