@@ -16,29 +16,29 @@
  ],
  "proof": [
   {
-   "text": "Apply the final-step consequence of the pth-root tower to L/M (which is finite purely inseparable of prime degree p). It gives beta, g in M, L = M(beta), beta^p = g, g not a pth power in M, and L isomorphic over M to M[z]/(z^p-g).",
+   "text": "Work directly over the specified field M. Choose x outside M in L and let r be the least exponent for which x^(p^r) lies in M. The previous power beta has beta^p = g in M and beta outside M. Frobenius injectivity shows g is not a pth power. Mathlib X_pow_sub_C_irreducible_of_prime and minpoly.eq_of_irreducible_of_monic identify the minimal polynomial. IntermediateField.isSimpleOrder_of_finrank_prime, applied to [L:M] = p, makes M(beta) = L. minpoly.equivAdjoin therefore gives M[X]/(X^p-g) equiv L. This is the proved private helper degree_p_coefficient; the full pth-root tower is unnecessary.",
    "uses": [
-    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-x-pow-p-minus-t-irreducible"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a finite K-basis m_i of M. Pure inseparability gives m_i^q_i = a_i/s_i in K for q_i a p-power and s_i nonzero in A. Then (s_i m_i)^q_i = s_i^(q_i-1)a_i lies in A. The monic equation shows these rescaled generators integral. Their A-adjoin A' is module-finite by integral generators. Its fraction field is M: clear the coefficients of any K-linear combination of the m_i, multiplying also by the product of the s_i. Write g = c/e in Frac(A'), e nonzero. Replace beta by e beta and g by f0 = e^p g = e^(p-1)c. This leaves L and degree p unchanged and keeps f0 non-pth-power.",
+   "text": "Construct a finite A-subalgebra B of M explicitly as the adjoin of an integral K-basis provided by Mathlib FiniteDimensional.exists_is_basis_integral (its proof scales a basis by a common nonzero denominator). Algebra.finite_adjoin_of_finite_of_isIntegral makes B finite over A. For each z in M, clear the finite family of basis coordinates using IsLocalization.exist_integer_multiples_of_finite. The basis expansion gives d*z in B for a nonzero d in A, so every z is a quotient of two elements of B. Verify all three IsFractionRing fields directly. Write g = c/e in this fraction field and put f0 = e^(p-1)*c in B. Then f0 maps to e^p*g. If f0 had a pth root x in M, x/e would be a pth root of g. No data is chosen from an unproved existence theorem.",
    "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension",
     "lem-weil-pbc-finite-of-integral-generators"
    ],
    "elementary": false
   },
   {
-   "text": "A' is a domain of characteristic p, finite type over the complete Noetherian local A, with fraction field M. Apply 07PH to f0 to obtain D0 : A' -> A' with D0(f0) nonzero.",
+   "text": "The algebra B is a domain of characteristic p, finite type over the complete Noetherian local A, with fraction field M. Apply Derivation.exists_apply_ne_zero_of_not_pth_power to f0 to obtain an absolute derivation D0 of B with D0(f0) nonzero.",
    "uses": [
     "lem-weil-pbc-derivation-nonzero-on-non-pth-power"
    ],
    "elementary": false
   },
   {
-   "text": "Base change makes C' = C tensor_A A' formally smooth over A' for the extended maximal ideal of C. Finite module generators of A' make C' finite over C. Finite-module completeness gives completeness for the maximal ideal of C; its powers acting on C' equal the powers of the extended ideal. Apply 07PL to extend D0 to C'.",
+   "text": "Set T = C tensor_A B with the right B-algebra structure and n the extended maximal ideal of C. Base change makes T formally smooth over B for n. The tensor is finite over C, so finite_module_complete_over_complete_noetherian makes it complete as a C-module; IsAdicComplete.map_algebraMap_iff gives completeness for n. Apply Derivation.exists_extension_of_formallySmoothAdic to obtain DT agreeing with D0 on B.",
    "uses": [
     "lem-weil-pbc-fs-adic-base-change",
     "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
@@ -48,16 +48,15 @@
    "elementary": false
   },
   {
-   "text": "Localize C' at the images of nonzero A' elements. Tensor cancellation and localization base change identify it with C tensor_A M. Extend the derivation by the localization formula. Its value on f0 is the image of D0(f0), which is invertible since it is nonzero in M.",
+   "text": "Set W to the images of the nonzero elements of B in T, and U = T tensor_B M. IsLocalization.tensor makes U a localization at W. Use the already proved upstream IsLocalization.extendDerivation with the identity ring map and the additive map obtained by composing DT with T -> U; Derivation.mk' packages the extension as an integer derivation. Tensor commutation, commRight, and cancelBaseChange identify U with M tensor_A C. Conjugate the derivation through this ring equivalence and verify its values on every b in B. In particular D(f0) is the image of D0(f0), hence a unit. The image of p in the tensor is zero even if the tensor ring is trivial; the Leibniz power rule gives D(e^p)=0. Since f0=e^p*g, D(f0)=e^p*D(g). A factor of a unit product is a unit, so D(g) is a unit. These constructions are proved private helpers, not new assumed statements.",
    "uses": [
     "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-derivation-extends",
     "def-weil-module-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the presentation L = M[z]/(z^p-f0) with C tensor_A M. Polynomial scalar extension and quotient base change give the quotient of (C tensor_A M)[z] by z^p-f0. Commuting tensor factors transports the derivation, f0 and ring equivalence to R = M tensor_A C. No regularity assumption was used. If R is zero, the same quotient is zero and D(f) is its (unique) unit.",
+   "text": "Keep the original coefficient g in the final presentation. Build Polynomial M tensor_A C equiv Polynomial (M tensor_A C) explicitly using cancelBaseChange, tensor commutation, the unique-variable polynomial equivalence and MvPolynomial.algebraTensorAlgEquiv. Check that the relation X^p-C(g) maps to X^p-C(g tensor 1). Ideal.map_span and Ideal.quotientEquiv transport the principal ideal. Algebra.TensorProduct.quotientTensorEquiv and TensorProduct.congr applied to the field presentation finish the ring equivalence. Combine this equivalence with the derivation and its unit value. The proof uses no regularity or nontriviality of the generic fibre.",
    "uses": [
     "lem-weil-pbc-polynomial-scalar-extension",
     "lem-weil-pbc-tensor-quotient-base-change",
@@ -67,8 +66,8 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-purely-inseparable-pth-root-tower",
   "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-x-pow-p-minus-t-irreducible",
   "lem-weil-pbc-finite-of-integral-generators",
   "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
   "lem-weil-pbc-fs-adic-base-change",
@@ -76,14 +75,13 @@
   "lem-weil-pbc-fs-adic-lift-derivation",
   "def-weil-module-base-change",
   "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-derivation-extends",
   "lem-weil-pbc-polynomial-scalar-extension",
   "lem-weil-pbc-tensor-quotient-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proposition Tag 07PM, proof of (4) => (1), coefficient reduction and final two paragraphs; read at https://stacks.math.columbia.edu/tag/07PM"
+  "place": "Tag 07PM, final two paragraphs; fixed-intermediate-field presentation and explicit tensor transport by N3, using the integral basis construction in Mathlib."
  },
  "mathlib_searches": [
   {
@@ -150,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T194118-L-457609",
-  "kind": "interface",
+  "landing": "20261013T005054-L-2551306",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
