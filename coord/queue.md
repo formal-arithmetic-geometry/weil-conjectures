@@ -1,6 +1,6 @@
 # Work queue
 
-693 items; claim with `tools/claim.py next <group> [--stage N]`.
+684 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (22)
 
@@ -44,7 +44,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (663)
+## Stage 3: modules to prove (654)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -69,7 +69,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsLast` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentReducibleSupportExactSequence` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleTensorSections` | 8 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ProperFlatCohomologyData` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentGenericFilteredExtension` | 9 | 1 | proof |
@@ -87,7 +86,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteTypeEpiImage` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GabberH0ZariskiSectionUnitEquation` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GabberH0ZariskiTargetComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ObjectSectionsNaturality` | 10 | 1 | proof |
@@ -124,7 +122,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLaws` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitSingleOpenComparison` | 13 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatBaseChangeAffineDictionary` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientTransition` | 13 | 1 | proof |
@@ -136,9 +133,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystem` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition` | 13 | 1 | proof |
-| `Sheaf.Paper.EtaleHypercohomologySupportedResolutionMaps` | 13 | 1 | proof |
 | `Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction` | 13 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AlternatingCechRepeatOuterFaces` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionColimit` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransferPointwise` | 14 | 1 | proof |
@@ -146,8 +141,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore` | 14 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback` | 14 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality` | 14 | 1 | proof |
+| `Sheaf.Paper.EtaleHypercohomologySupportedCETotals` | 14 | 1 | proof |
 | `Sheaf.RingTheory.PopescuParameterSolution` | 14 | 1 | proof |
 | `Sheaf.Topology.TopologicalTerminalResolutionExtComparison` | 14 | 1 | proof |
 | `Sheaf.Algebra.Homology.OpenExtensionCounitStalk` | 15 | 1 | proof |
@@ -155,7 +150,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherence` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineAlternatingCechExchangeResolution` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingPrefixContribution` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonCompat` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHom` | 15 | 1 | proof |
@@ -166,6 +160,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransferExtClass` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GenericFlatness` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity` | 15 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility` | 15 | 1 | proof |
 | `Sheaf.RingTheory.FormalFiberDegreePDerivation` | 15 | 1 | proof |
 | `Sheaf.RingTheory.KoszulCoefficientExtension` | 15 | 1 | proof |
@@ -181,7 +176,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedFormalCover` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedLimit` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelCanonical` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CompletionInternalHomAffineSectionsLift` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationConstantQuotient` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafExactness` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility` | 16 | 1 | proof |
@@ -193,7 +187,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.GrothendieckDevissageCompletedComparison` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackCompositionFormula` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HomComplexSingleNaturality` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HomLocalKernelOfPresentation` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowersLocalCoefficientSpan` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.LocalBlockResidueRank` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison` | 16 | 1 | proof |
@@ -214,7 +207,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.CategoryTheory.Sites.PresheafCechSheafAugmentationExact` | 16 | 1 | proof |
 | `Sheaf.LinearAlgebra.SymmetricAlgebra.Graded` | 16 | 1 | proof |
 | `Sheaf.Paper.GradedModuleRelativeSpecRealization` | 16 | 1 | proof |
-| `Sheaf.RingTheory.AdjoinSingletonFiniteCoverCore` | 16 | 1 | proof |
 | `Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions` | 16 | 1 | proof |
 | `Sheaf.RingTheory.CompletionLocalizedAlgebraFiniteQuotients` | 16 | 1 | proof |
 | `Sheaf.RingTheory.Derivation.DetectNonPthPower` | 16 | 1 | proof |
@@ -222,7 +214,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.PopescuReductionPresentationCore` | 16 | 1 | proof |
 | `Sheaf.RingTheory.PopescuSpecialChartPolynomial` | 16 | 1 | proof |
 | `Sheaf.RingTheory.PopescuZeroBaseChartPolynomial` | 16 | 1 | proof |
-| `Sheaf.RingTheory.SmoothStableConormalBasisAux` | 16 | 1 | proof |
 | `Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftKernel` | 16 | 1 | proof |
 | `Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc` | 16 | 1 | proof |
 | `Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionZero` | 16 | 1 | proof |
@@ -249,6 +240,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCover` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalRestrict` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CompletionInternalHomAffineTensorDictionary` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelPresentation` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationBaseChange` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel` | 17 | 1 | proof |
@@ -276,7 +268,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardKunnethQcohIso` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusQuasiCompact` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperPerfectPreservesCompact` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 17 | 1 | proof |
@@ -285,7 +276,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.SectionRingQuotientChartTransfer` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPowerAux` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition` | 17 | 3 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationModel` | 17 | 1 | proof |
@@ -313,12 +303,12 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Paper.EtaleCEStationaryPageNaturality` | 17 | 1 | proof |
 | `Sheaf.Paper.FiniteFreeKernelIdealFiltration` | 17 | 1 | proof |
 | `Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable` | 17 | 1 | proof |
+| `Sheaf.RingTheory.AdjoinSingletonSplittingCover` | 17 | 1 | proof |
 | `Sheaf.RingTheory.BoundedFiniteFreeResolution` | 17 | 1 | proof |
 | `Sheaf.RingTheory.CmModuleGoodElementSetup` | 17 | 1 | proof |
 | `Sheaf.RingTheory.CohenMacaulayDepthFirstTerm` | 17 | 1 | proof |
 | `Sheaf.RingTheory.CohenRingModPowFormallySmoothStep` | 17 | 1 | proof |
 | `Sheaf.RingTheory.ColimitFlatRingMap` | 17 | 2 | proof |
-| `Sheaf.RingTheory.CompatibleRingTowerRecursion` | 17 | 1 | proof |
 | `Sheaf.RingTheory.CompleteLocalMapCohenPresentation` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FiniteConeCycleAttachment` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FiniteNormalCover` | 17 | 1 | proof |
@@ -331,16 +321,13 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.PopescuFlatCoordinatesA0` | 17 | 1 | proof |
 | `Sheaf.RingTheory.PopescuFlatCoordinatesGivenAdmissible` | 17 | 1 | proof |
 | `Sheaf.RingTheory.PopescuLiftPartialChart` | 17 | 1 | proof |
-| `Sheaf.RingTheory.PowerSeriesN2` | 17 | 1 | proof |
 | `Sheaf.RingTheory.PurelyInseparableBaseChangeResidue` | 17 | 1 | proof |
-| `Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SelectedBasisOfLocalizedSplit` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SmoothProductAlgebra` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SmoothQuotientFibreFinrankAddLe` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SmoothQuotientFibreFinrankEqSub` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SymmetricConormalPresentationTransport` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SymmetricProjectivePresentationConormal` | 17 | 1 | proof |
-| `Sheaf.RingTheory.SyntomicPrincipalLocalizationHypotheses` | 17 | 1 | proof |
 | `Sheaf.RingTheory.TateN2CompletePrincipal` | 17 | 1 | proof |
 | `Sheaf.RingTheory.UniversalFirstOrderThickeningCore` | 17 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution` | 18 | 1 | proof |
@@ -352,12 +339,10 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.LocalizedHomComplexBoundaries` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedHomComplexCyclesBijective` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedHomComplexCyclesForward` | 18 | 1 | proof |
-| `Sheaf.Algebra.Homology.TensorKunneth` | 18 | 1 | proof |
 | `Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive` | 18 | 1 | proof |
 | `Sheaf.Algebra.LimitFinitePresentation` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineIdealTensorSections` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyColimit` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore` | 18 | 1 | proof |
@@ -401,6 +386,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.OpenModuleImageGluing` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelData` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence` | 18 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardKunnethCechModels` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCoreRank` | 18 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusFinitePresentationIso` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange` | 18 | 1 | proof |
@@ -409,8 +395,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardFinSumSuccIso` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QcqsCohomologySmallSubsumDiagram` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding` | 18 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapInjective` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective` | 18 | 1 | proof |
@@ -450,7 +434,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.FieldTheory.GaloisMatrixHilbert90Normalized` | 18 | 1 | proof |
 | `Sheaf.FieldTheory.PBasisDifferentialsBasis` | 18 | 1 | proof |
 | `Sheaf.Paper.AffinePerfectKoszulPrincipalUnit` | 18 | 1 | proof |
-| `Sheaf.Paper.CechCupPullbackCompat` | 18 | 7 | proof |
 | `Sheaf.Paper.CohomologyFractionMayerVietorisExact` | 18 | 1 | proof |
 | `Sheaf.Paper.NormalLocusAssociatedPrime` | 18 | 1 | proof |
 | `Sheaf.Paper.PolynomialIdealCoefficientsMonomialMap` | 18 | 1 | proof |
@@ -477,19 +460,21 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesMinimal` | 18 | 1 | proof |
 | `Sheaf.RingTheory.GeometricallyRegularH1Injective` | 18 | 1 | proof |
 | `Sheaf.RingTheory.GeometricallyRegularOverFieldFlat` | 18 | 1 | proof |
-| `Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization` | 18 | 1 | proof |
 | `Sheaf.RingTheory.KrullAkizukiNoetherian` | 18 | 1 | proof |
 | `Sheaf.RingTheory.LocalCompleteIntersectionPresentation` | 18 | 1 | proof |
 | `Sheaf.RingTheory.OpenFlatLocus` | 18 | 1 | proof |
 | `Sheaf.RingTheory.PopescuSolutionModuloChoose` | 18 | 1 | proof |
 | `Sheaf.RingTheory.PowerSeriesAdicEvaluation` | 18 | 1 | proof |
-| `Sheaf.RingTheory.PowerSeriesNormalDomain` | 18 | 1 | proof |
+| `Sheaf.RingTheory.PowerSeriesN2Aux` | 18 | 1 | proof |
+| `Sheaf.RingTheory.PrincipalLocalizationAlgEquiv` | 18 | 1 | proof |
+| `Sheaf.RingTheory.PrincipalLocalizationCI` | 18 | 1 | proof |
 | `Sheaf.RingTheory.ProjectiveResolutionKernelProjective` | 18 | 3 | proof |
 | `Sheaf.RingTheory.RegularPresentationFlatFiber` | 18 | 1 | proof |
 | `Sheaf.RingTheory.RegularSequenceConormal` | 18 | 1 | proof |
 | `Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence` | 18 | 1 | proof |
 | `Sheaf.RingTheory.SyntomicEquationCountComparisonCore` | 18 | 1 | proof |
 | `Sheaf.RingTheory.SyntomicEquationCountComparisonDimension` | 18 | 1 | proof |
+| `Sheaf.RingTheory.SyntomicPrincipalLocalizationFibreTransport` | 18 | 1 | proof |
 | `Sheaf.RingTheory.UnitMaximalMinorOfDepthZero` | 18 | 1 | proof |
 | `Sheaf.Topology.FiniteTypeSurjectiveNearStalk` | 18 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.AdicTowerFiniteLimit` | 19 | 1 | proof |
@@ -498,8 +483,10 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Algebra.Homology.BaseChangeRHomPerfect` | 19 | 1 | proof |
 | `Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction` | 19 | 1 | proof |
 | `Sheaf.Algebra.Homology.FilteredFreeKProjectiveStep` | 19 | 1 | proof |
+| `Sheaf.Algebra.Homology.TensorKunneth` | 19 | 1 | proof |
 | `Sheaf.Algebra.Schanuel` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePerfectHomColimit` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePerfectMapLift` | 19 | 1 | proof |
@@ -529,6 +516,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QuasicoherentSheafHom` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 19 | 1 | proof |
@@ -543,8 +532,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore` | 19 | 1 | proof |
 | `Sheaf.Paper.AffineOpenSectionsCanonicalTransformation` | 19 | 1 | proof |
 | `Sheaf.Paper.CartierEquality` | 19 | 1 | proof |
-| `Sheaf.Paper.CechCupProduct` | 19 | 2 | proof |
-| `Sheaf.Paper.CechRefinementCochainMap` | 19 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 19 | 7 | proof |
 | `Sheaf.Paper.CohomologySectionDivision` | 19 | 1 | proof |
 | `Sheaf.Paper.NoetherianApproximation` | 19 | 1 | proof |
 | `Sheaf.Paper.ShiftedKoszulAugmentation` | 19 | 2 | proof |
@@ -559,6 +547,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.RingTheory.FiniteMaximalsOverElement` | 19 | 1 | proof |
 | `Sheaf.RingTheory.FlatOfLocalCriterionBaseChange` | 19 | 1 | proof |
 | `Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence` | 19 | 1 | proof |
+| `Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization` | 19 | 1 | proof |
 | `Sheaf.RingTheory.HenselianFiniteEtaleEquivalence` | 19 | 1 | proof |
 | `Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality` | 19 | 1 | proof |
 | `Sheaf.RingTheory.KaehlerDifferentialsModPowerIdealCore` | 19 | 1 | proof |
@@ -610,7 +599,8 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras` | 20 | 1 | proof |
 | `Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel` | 20 | 1 | proof |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | 20 | 1 | proof |
-| `Sheaf.Paper.ModuleCohomologyCupProduct` | 20 | 1 | proof |
+| `Sheaf.Paper.CechCupProduct` | 20 | 2 | proof |
+| `Sheaf.Paper.CechRefinementCochainMap` | 20 | 1 | proof |
 | `Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra` | 20 | 1 | proof |
 | `Sheaf.Paper.SectionsOverQuasiCompactOpen` | 20 | 1 | proof |
 | `Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP` | 20 | 1 | proof |
@@ -645,6 +635,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility` | 21 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors` | 21 | 1 | proof |
 | `Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral` | 21 | 1 | proof |
+| `Sheaf.Paper.ModuleCohomologyCupProduct` | 21 | 1 | proof |
 | `Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra` | 21 | 1 | proof |
 | `Sheaf.RingTheory.DirectedUnionSubringsFlatModule` | 21 | 1 | proof |
 | `Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting` | 21 | 1 | proof |
