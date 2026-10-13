@@ -662,13 +662,15 @@ lemma basicOpen_appLE {X' Y' : Scheme.{u}} (f : X' ⟶ Y') {W : Y'.Opens} {U : X
     X'.basicOpen (f.appLE W U e r) = U ⊓ f ⁻¹ᵁ Y'.basicOpen r := by
   rw [Scheme.Hom.appLE, CommRingCat.comp_apply, Scheme.basicOpen_res, Scheme.preimage_basicOpen]
 
-/-- **Charts along the section.** Near a point `s(b)` there are étale coordinates on `V` over `B`
-in which `s` is the origin, and on the corresponding chart `g̃` is smooth. -/
-lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClosedImmersion s]
-    (hs : s ≫ g = 𝟙 B) (b : B) :
-    ∃ U : V.AffineZariskiSite, s b ∈ U.1 ∧ SmoothOfRelativeDimension d
-      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
-        deformationSpaceProj g s) := by
+/-- **Étale coordinates along the section.** Near a point `s(b)` there are an affine open
+`W ∋ b` of `B` and an affine open `U ⊆ g⁻¹ W` of `V` with `s⁻¹ U = W`, together with étale
+coordinates `ψ : Γ(W)[X₁, …, X_d] ⟶ Γ(U)` over `Γ(W)` generating the ideal of the section. -/
+lemma exists_etale_coordinates_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g]
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) (b : B) :
+    ∃ (W : B.Opens) (_ : IsAffineOpen W) (U : V.AffineZariskiSite) (hUW : U.1 ≤ g ⁻¹ᵁ W),
+      b ∈ W ∧ s ⁻¹ᵁ U.1 = W ∧ ∃ ψ : MvPolynomial (Fin d) Γ(B, W) →+* Γ(V, U.1), ψ.Etale ∧
+        ψ.comp MvPolynomial.C = (g.appLE W U.1 hUW).hom ∧
+        s.ker.siteIdeal U = (Ideal.mvPolynomialOrigin Γ(B, W) (Fin d)).map ψ := by
   have hgs : ∀ b, g (s b) = b := fun b ↦ by rw [← Scheme.Hom.comp_apply, hs]; rfl
   obtain ⟨W₀, hW₀, U₀, hU₀, hvU₀, -, hUW₀, hQ₀⟩ :=
     exists_isStandardSmooth_appLE_basicOpen g d (s b) ⊤ trivial
@@ -701,30 +703,40 @@ lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClo
     erw [B.presheaf.map_id]
     rfl
   obtain ⟨φ, hφf, hφ⟩ := hQ.exists_etale_mvPolynomial
-  obtain ⟨a, hσa, H⟩ := exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section f.hom σ.hom
-    hσf φ hφ hφf
+  obtain ⟨a, hσa, H⟩ := exists_etale_coordinates_of_section f.hom σ.hom hσf φ hφ hφf
   have hσ : σ = s.app U ≫ B.presheaf.map (eqToHom hsU.symm).op := rfl
   have hinj : Function.Injective (B.presheaf.map (eqToHom hsU.symm).op).hom :=
     (ConcreteCategory.bijective_of_isIso _).1
   set U' := V.basicOpen a
   have hU' : IsAffineOpen U' := hU.basicOpen a
   have hU'W : U' ≤ g ⁻¹ᵁ W := (V.basicOpen_le a).trans hUW
-  refine ⟨⟨U', hU'⟩, ?_, smoothOfRelativeDimension_ι_deformationSpaceProj d ⟨U', hU'⟩ hW hU'W ?_⟩
-  · have hb : b ∈ B.basicOpen (σ a) := by
+  have := hU.isLocalization_basicOpen a
+  obtain ⟨ψ, hψ, hψf, hJ⟩ := H Γ(V, U')
+  refine ⟨W, hW, ⟨U', hU'⟩, hU'W, hbc, ?_, ψ, hψ, ?_, ?_⟩
+  · have hb : B.basicOpen (σ a) = W := by
       rw [hσa, Scheme.basicOpen_of_isUnit _ isUnit_one]
-      exact hbc
     rw [hσ, CommRingCat.comp_apply, Scheme.basicOpen_res, ← Scheme.preimage_basicOpen] at hb
-    exact hb.2
-  · have := hU.isLocalization_basicOpen a
-    have hI : s.ker.siteIdeal ⟨U', hU'⟩ =
-        (RingHom.ker σ.hom).map (algebraMap Γ(V, U) Γ(V, U')) := by
-      rw [hσ, CommRingCat.hom_comp, RingHom.ker_comp_of_injective _ hinj,
-        ← Scheme.Hom.ker_apply s ⟨U, hU⟩]
-      exact (s.ker.map_ideal_basicOpen ⟨U, hU⟩ a).symm
-    have hf : (g.appLE W U' hU'W).hom = (algebraMap Γ(V, U) Γ(V, U')).comp f.hom := by
-      rw [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.appLE_map]
-    rw [hI, hf]
-    exact H Γ(V, U')
+    refine le_antisymm ((s.preimage_mono (V.basicOpen_le a)).trans hsU.le) ?_
+    exact hb.ge.trans inf_le_right
+  · rw [hψf, RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.appLE_map]
+  · rw [← hJ, hσ, CommRingCat.hom_comp, RingHom.ker_comp_of_injective _ hinj,
+      ← Scheme.Hom.ker_apply s ⟨U, hU⟩]
+    exact (s.ker.map_ideal_basicOpen ⟨U, hU⟩ a).symm
+
+/-- **Charts along the section.** Near a point `s(b)` there are étale coordinates on `V` over `B`
+in which `s` is the origin, and on the corresponding chart `g̃` is smooth. -/
+lemma exists_chart_of_mem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 B) (b : B) :
+    ∃ U : V.AffineZariskiSite, s b ∈ U.1 ∧ SmoothOfRelativeDimension d
+      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
+        deformationSpaceProj g s) := by
+  obtain ⟨W, hW, U, hUW, hbW, hsU, ψ, hψ, hψf, hI⟩ :=
+    exists_etale_coordinates_of_mem_range g s d hs b
+  refine ⟨U, ?_, smoothOfRelativeDimension_ι_deformationSpaceProj d U hW hUW ?_⟩
+  · change b ∈ s ⁻¹ᵁ U.1
+    rwa [hsU]
+  · rw [hI]
+    exact smoothOfRelativeDimension_extendedReesAlgebra_of_etale _ _ hψ hψf
 
 end Charts
 
