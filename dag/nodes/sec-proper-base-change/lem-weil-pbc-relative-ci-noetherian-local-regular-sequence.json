@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-relative-ci-noetherian-local-regular-sequence",
+ "kind": "statement",
+ "title": "Noetherian polynomial local complete-intersection regularity",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], and $f_1,\\ldots,f_c\\in P=R[x_1,\\ldots,x_n]$ define a specified relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. If $Q$ is a prime of $P$ containing the ideal of the equations, the images of the equations form a regular sequence in $P_Q$ [def-weil-pbc-localization-at-prime] [def-weil-pbc-regular-sequence].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV first paragraph, flat local map and 00MG lifting."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The polynomial ring is free and hence flat over R, and is Noetherian. The canonical local map R_p to P_Q is flat and local; both localizations are Noetherian.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed-fibre equations are regular by the closed-fibre regularity theorem. Apply Grothendieck regular-sequence lifting and take its regularity conjunct.",
+   "uses": [
+    "lem-weil-pbc-relative-ci-closed-fiber-regular-sequence",
+    "lem-weil-pbc-grothendieck-regular-sequence-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-relative-ci-closed-fiber-regular-sequence",
+  "lem-weil-pbc-grothendieck-regular-sequence-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV first paragraph, flat local map and 00MG lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equations of a relative global complete intersection over a Noetherian ring are regular in polynomial local rings and their closed fibres",
+   "results": "Service unavailable: Internal Server Error. No verdict on coverage of LeanSearch.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative complete intersection polynomial presentation has a regular sequence of equations after localization at any prime",
+   "results": "LeanFinder returned localization transport lemmas only; no relative complete-intersection criterion.",
+   "date": "2026-10-13",
+   "verdict": "partial tools only; no direct match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegular complete intersections and Noetherian closed-fibre lifting in Mathlib and both library roots",
+   "results": "The existing 00MG theorem is the lifting step, not the full assertion; polynomial flatness and flat localization are in Mathlib. Imported blueprint searches for regular sequence, closed fibre, and filtered colimit found no identical blueprint statement.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "00SV first paragraph, flat local map and 00MG lifting. This serves the local regular-sequence step of the 00SV conormal argument in the finite-etale-lifting route.",
+   "via": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RelativeCompleteIntersectionNoetherianRegularSequence",
+  "file": "lean/Sheaf/RingTheory/RelativeCompleteIntersectionNoetherianRegularSequence.lean",
+  "declaration": "Algebra.isRegular_localization_of_relativeCompleteIntersection_of_noetherian",
+  "statement": "theorem isRegular_localization_of_relativeCompleteIntersection_of_noetherian\n    {R : Type u} [CommRing R] [IsNoetherianRing R] {n c : ℕ}\n    (f : Fin c → MvPolynomial (Fin n) R)\n    (h : IsRelativeGlobalCompleteIntersectionPresentation f)\n    (Q : Ideal (MvPolynomial (Fin n) R)) [Q.IsPrime]\n    (hQ : Ideal.span (Set.range f) ≤ Q) :\n    RingTheory.Sequence.IsRegular (Localization.AtPrime Q)\n      ((List.ofFn f).map\n        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

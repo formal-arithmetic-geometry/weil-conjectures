@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-relative-ci-closed-fiber-regular-sequence",
+ "kind": "statement",
+ "title": "Regularity of equations in the polynomial closed fibre",
+ "statement": "Let $R$ be a commutative ring and $f_1,\\ldots,f_c\\in P=R[x_1,\\ldots,x_n]$ a specified relative global complete-intersection presentation [def-weil-pbc-relative-global-complete-intersection]. Let $Q$ be a prime of $P$ containing $(f_1,\\ldots,f_c)$, $p=Q\\cap R$, and $B=P_Q$ [def-weil-pbc-localization-at-prime]. If $I$ is the extension of the maximal ideal of $R_p$ under its canonical local map to $B$, then the images of the $f_i/1$ form a regular sequence in $B/I$ [def-weil-pbc-regular-sequence].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV first paragraph, the application of 00SC to the closed polynomial fibre."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Obtain Qk and the natural equation-preserving ring isomorphism B/I = k[x]_{Qk} from the polynomial closed-fibre equivalence. Qk contains the coefficient images of the equations because its contraction is Q.",
+   "uses": [
+    "lem-weil-pbc-polynomial-local-closed-fiber-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the specified presentation to k=kappa(p). Over any field the fibre at its zero prime is the quotient itself: the field is canonically isomorphic to its residue field, and tensoring with itself is the identity. Thus the relative complete-intersection hypothesis gives c <= n and global quotient dimension n-c. The prime Qk makes this quotient nonzero.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
+    "def-weil-pbc-relative-global-complete-intersection",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite dimension as dimension+c=n and apply the field-case global-complete-intersection local-regular-sequence theorem. Transport the regular sequence back along the equation-preserving isomorphism, using multiplication compatibility.",
+   "uses": [
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-local-closed-fiber-equiv",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV first paragraph, the application of 00SC to the closed polynomial fibre."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equations of a relative global complete intersection over a Noetherian ring are regular in polynomial local rings and their closed fibres",
+   "results": "Service unavailable: Internal Server Error. No verdict on coverage of LeanSearch.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular sequence in the closed fibre of a polynomial local ring from dimension of a complete intersection quotient",
+   "results": "LeanFinder returned regular-sequence localization and local maximal-ideal criteria; no complete-intersection field-dimension criterion.",
+   "date": "2026-10-13",
+   "verdict": "partial tools only; no direct match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Regular sequences, closed fibres and complete intersections in Mathlib and both library roots",
+   "results": "Existing GlobalCompleteIntersectionLocalRegularSequence supplies the field dimension step; no exact closed-fibre statement. Imported blueprint searches for regular sequence, closed fibre, and filtered colimit found no identical blueprint statement.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "00SV first paragraph, the application of 00SC to the closed polynomial fibre. This serves the local regular-sequence step of the 00SV conormal argument in the finite-etale-lifting route.",
+   "via": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RelativeCompleteIntersectionClosedFiberRegularSequence",
+  "file": "lean/Sheaf/RingTheory/RelativeCompleteIntersectionClosedFiberRegularSequence.lean",
+  "declaration": "Algebra.isRegular_closedFiber_of_relativeCompleteIntersection",
+  "statement": "theorem isRegular_closedFiber_of_relativeCompleteIntersection\n    {R : Type u} [CommRing R] {n c : ℕ}\n    (f : Fin c → MvPolynomial (Fin n) R)\n    (h : IsRelativeGlobalCompleteIntersectionPresentation f)\n    (Q : Ideal (MvPolynomial (Fin n) R)) [Q.IsPrime]\n    (hQ : Ideal.span (Set.range f) ≤ Q) :\n    let p := Q.comap (algebraMap R (MvPolynomial (Fin n) R))\n    let φ := Localization.localRingHom p Q (algebraMap R (MvPolynomial (Fin n) R)) rfl\n    let I := (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map φ\n    RingTheory.Sequence.IsRegular (Localization.AtPrime Q ⧸ I)\n      (((List.ofFn f).map\n        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q))).map\n          (Ideal.Quotient.mk I))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

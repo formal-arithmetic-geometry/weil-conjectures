@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-polynomial-local-weak-regular-sequence-descent",
+ "kind": "statement",
+ "title": "Weak regularity descends from finite coefficient-subring polynomial localizations",
+ "statement": "Let $R$ be a commutative ring and $R_0\\subseteq R$ a finite type integer subring [def-weil-pbc-finite-type-algebra]. Let $f_1,\\ldots,f_c\\in R_0[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and $Q$ a prime of $R[x]$. For every finite type integer subring $B$ containing $R_0$, contract $Q$ to $Q_B$ in $B[x]$. Suppose the coefficientwise images of $f_1,\\ldots,f_c$ form a weakly regular sequence in $B[x]_{Q_B}$: each next element acts injectively on the preceding prefix quotient [def-weil-pbc-regular-sequence] [def-weil-pbc-localization-at-prime]. Then their images form a weakly regular sequence in $R[x]_Q$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV filtered-colimit paragraphs and displayed prefix quotients and multiplication maps; 00DB exactness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "The finite type subrings B containing R0 are a nonempty directed system: adjoining the finitely many ring generators of two stages gives a common upper stage. Their union contains every element of R by adjoining one further element. The contractions Q_B make localization transition maps compatible.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every fraction of R[x]_Q occurs at a stage containing the finitely many numerator and denominator coefficients. If a stage fraction vanishes in the full localization, some polynomial outside Q kills its numerator. Adjoin that polynomial’s coefficients to make it vanish at a later stage. This proves that the colimit of the localized stage rings is R[x]_Q.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each prefix quotient, clear denominators in an expression of membership in the prefix ideal and adjoin the coefficients of its multipliers and killing denominator. The same surjectivity and eventual-vanishing tests show the prefix quotients have the corresponding colimit.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each index, multiplication by the next equation is a compatible injective map at every stage by hypothesis. Exactness of filtered colimits of abelian groups preserves its injectivity. The identified colimit multiplication maps are exactly the successive quotient conditions of weak regularity. The empty sequence has no such conditions.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "00SV filtered-colimit paragraphs and displayed prefix quotients and multiplication maps; 00DB exactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Weakly regular sequences in polynomial local rings descend along filtered unions of finitely generated coefficient subrings",
+   "results": "Service unavailable: Internal Server Error. No verdict on coverage of LeanSearch.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of multiplication on successive quotients over a filtered union of coefficient rings implies weak regularity",
+   "results": "Independent second reading: found isWeaklyRegular_iff, isWeaklyRegular_iff_Fin, regular_mod_prev and recursive cons/append criteria. None constructs finite-coefficient localization or quotient colimits. Loogle query RingTheory.Sequence.IsWeaklyRegular, Subring returned zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular colimit, colimit regular, finite type subring weak regularity in Mathlib/Regular and both library roots",
+   "results": "No generic descent declaration found. Flat transport cannot be used because the coefficient-subring inclusions need not be flat. Imported blueprint searches for regular sequence, closed fibre, and filtered colimit found no identical blueprint statement.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "00SV filtered-colimit paragraphs and displayed prefix quotients and multiplication maps; 00DB exactness. This serves the local regular-sequence step of the 00SV conormal argument in the finite-etale-lifting route.",
+   "via": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialLocalWeakRegularSequenceDescent",
+  "file": "lean/Sheaf/RingTheory/PolynomialLocalWeakRegularSequenceDescent.lean",
+  "declaration": "RingTheory.Sequence.isWeaklyRegular_polynomial_local_of_finiteType_subrings",
+  "statement": "theorem isWeaklyRegular_polynomial_local_of_finiteType_subrings\n    {R : Type u} [CommRing R] (R₀ : Subring R)\n    (hR₀ : Algebra.FiniteType ℤ R₀) {n c : ℕ}\n    (f₀ : Fin c → MvPolynomial (Fin n) R₀)\n    (Q : Ideal (MvPolynomial (Fin n) R)) [Q.IsPrime]\n    (hstage : ∀ (B : Subring R) (hB : R₀ ≤ B), Algebra.FiniteType ℤ B →\n      IsWeaklyRegular\n        (Localization.AtPrime (Q.comap (MvPolynomial.map B.subtype)))\n        ((List.ofFn (fun i ↦ MvPolynomial.map (Subring.inclusion hB) (f₀ i))).map\n          (algebraMap (MvPolynomial (Fin n) B)\n            (Localization.AtPrime (Q.comap (MvPolynomial.map B.subtype)))))) :\n    IsWeaklyRegular (Localization.AtPrime Q)\n      ((List.ofFn (fun i ↦ MvPolynomial.map R₀.subtype (f₀ i))).map\n        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -34,110 +34,60 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathfrak p=R\\cap\\mathfrak q'$ and $B=P_{\\mathfrak q'}$. First assume $R$ Noetherian [def-weil-pbc-noetherian-ring]. The monomials form an $R$-basis of $P$ [def-weil-pbc-mv-polynomial-ring], so $P$ is flat over $R$ by [lem-weil-pbc-projective-module-flat]. The polynomial ring $P$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. By [lem-weil-pbc-flat-local-ring-maps] the induced map $R_{\\mathfrak p}\\to B$ is a flat local map of Noetherian local rings. Its closed-fibre ring is $B/\\mathfrak pB$ [def-weil-pbc-localization-at-prime].",
-   "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-projective-module-flat",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV (lemma-relative-global-complete-intersection-conormal), lines 36783-36792, first paragraph; flat localization is Lemma Tag 00HT (6)"
-   }
-  },
-  {
-   "text": "Still assuming $R$ Noetherian, set $k=\\kappa(\\mathfrak p)$ and $C=P\\otimes_Rk$. The base-change isomorphism [lem-weil-pbc-polynomial-scalar-extension] identifies $C$ with $k[x_1,\\dots,x_n]$ and sends $f_j\\otimes1$ to the coefficientwise images $\\bar f_j$. By [lem-weil-pbc-fibre-ring-primes-bijection], $\\mathfrak q'$ determines a prime $\\mathfrak Q$ of $C$ contracting to $\\mathfrak q'$; let $\\mathfrak q''$ be its image in $k[x_1,\\dots,x_n]$. Base change [lem-weil-pbc-relative-global-complete-intersection-base-change] makes $T=k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$ a relative global complete intersection over $k$ [def-weil-pbc-relative-global-complete-intersection]. The prime $\\mathfrak q''$ contains all $\\bar f_j$, so $T\\ne0$ and its sole fibre over $\\operatorname{Spec}k$ has dimension $n-c$. Thus [lem-weil-pbc-global-complete-intersection-local-regular-sequence] applies at $\\mathfrak q''$ and says that the $\\bar f_j/1$ are regular in $k[x_1,\\dots,x_n]_{\\mathfrak q''}$. The explicit isomorphism [lem-weil-pbc-fibre-ring-local-ring-natural-iso] identifies this ring with $B/\\mathfrak pB$ and sends the class of $f_j/1$ to $\\bar f_j/1$; hence the images of the $f_j/1$ form a regular sequence in $B/\\mathfrak pB$ [def-weil-pbc-regular-sequence].",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-relative-global-complete-intersection-base-change",
-    "def-weil-pbc-relative-global-complete-intersection",
-    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-    "lem-weil-pbc-fibre-ring-local-ring-natural-iso",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV, lines 36785-36792 ('By Lemma 00SC ... regular sequence in ... tensor_R kappa(p)'); Lemma Tag 00SC (lemma-lci), last paragraph, and Remark Tag 0H9M for the fibre local ring"
-   }
-  },
-  {
-   "text": "The hypotheses of [lem-weil-pbc-grothendieck-regular-sequence-flat] now hold for the flat local map $R_{\\mathfrak p}\\to B$ from step 1 and its closed fibre $B/\\mathfrak pB$ from step 2: both local rings are Noetherian and the fibre images of $f_1/1,\\dots,f_c/1$ are regular. The lemma gives that $f_1/1,\\dots,f_c/1$ is a regular sequence in $B$ [def-weil-pbc-regular-sequence]. This establishes the claim for Noetherian $R$; it includes $c=0$, since $B$ is a nonzero local ring at the prime $\\mathfrak q'$.",
-   "uses": [
-    "lem-weil-pbc-grothendieck-regular-sequence-flat",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV, lines 36789-36793, application of Lemma Tag 00MG (lemma-grothendieck-regular-sequence) to obtain assertion (1)"
-   }
-  },
-  {
-   "text": "Now let $R$ be arbitrary. By [lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation], choose a finite type $\\mathbf Z$-subalgebra $R_0\\subseteq R$ containing the coefficients of all $f_j$ such that $S_0=R_0[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection. Let $\\Lambda$ be the directed set of subrings $R_\\lambda\\subseteq R$ generated as rings by $R_0$ and finitely many further elements of $R$. Their union is $R$. Each $R_\\lambda$ is a finite type $\\mathbf Z$-algebra, hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and $S_\\lambda=R_\\lambda[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection by [lem-weil-pbc-relative-global-complete-intersection-base-change]. Set $P_\\lambda=R_\\lambda[x_1,\\dots,x_n]$ and $\\mathfrak q'_\\lambda=\\mathfrak q'\\cap P_\\lambda$; this is prime, contains all $f_j$, and therefore determines a prime of $S_\\lambda$.",
+   "text": "Use Noetherian approximation to obtain a finite type integer subring R0 and equations f0. Their coefficient equalities imply that the original equations are exactly the coefficientwise images of f0.",
    "uses": [
     "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any finite type integer subring B containing R0, equip B with the inclusion R0-algebra structure. Base change preserves the specified presentation. B is Noetherian. The contracted polynomial prime contains all mapped equations, since their composites to R[x] are the original equations.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
     "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-relative-global-complete-intersection-base-change"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV, lines 36795-36813: finite type Z-subalgebras containing the R_0 of Lemma Tag 00SU and base change by Lemma Tag 00SS"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $\\lambda$, put $B_\\lambda=(P_\\lambda)_{\\mathfrak q'_\\lambda}$. Step 3 applies to the Noetherian ring $R_\\lambda$, the relative global complete intersection $S_\\lambda$ and its prime induced by $\\mathfrak q'$, so $f_1/1,\\dots,f_c/1$ is regular in $B_\\lambda$. The inclusions $P_\\lambda\\subseteq P_\\mu\\subseteq P$ and the identities $\\mathfrak q'_\\lambda=\\mathfrak q'_\\mu\\cap P_\\lambda$ give compatible localization maps $B_\\lambda\\to B_\\mu\\to B$. Every fraction $h/s\\in B$ has $h,s\\in P_\\lambda$ for some $\\lambda$, with $s\\notin\\mathfrak q'_\\lambda$, and hence comes from $B_\\lambda$. If a fraction from $B_\\lambda$ maps to zero in $B$, some $u\\in P\\setminus\\mathfrak q'$ kills its numerator; enlarging $\\lambda$ to contain the finitely many coefficients of $u$ makes it zero already in $B_\\mu$. Thus $B=\\varinjlim B_\\lambda$. The same finite-coefficient argument, applied also to coefficients of expressions in $(f_1,\\dots,f_i)B$, gives $B/(f_1,\\dots,f_i)B=\\varinjlim B_\\lambda/(f_1,\\dots,f_i)B_\\lambda$ for every $0\\le i\\le c$.",
+   "text": "Apply the proved Noetherian local regularity theorem at every contracted prime and retain its weak-regularity conclusion.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-relative-ci-noetherian-local-regular-sequence",
+    "def-weil-pbc-regular-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV, lines 36813-36829: the displayed colimit of localized quotients; the fraction criterion spells out its identification"
-   }
+   "elementary": false
   },
   {
-   "text": "For $0\\le i<c$, multiplication by $f_{i+1}/1$ on $B_\\lambda/(f_1,\\dots,f_i)B_\\lambda$ is injective, by regularity in step 5 [def-weil-pbc-regular-sequence]; these multiplication maps form a compatible system. By exactness of filtered colimits [lem-weil-pbc-filtered-colimit-abelian-groups-exact] and the quotient identifications in step 5, multiplication by $f_{i+1}/1$ on $B/(f_1,\\dots,f_i)B$ is injective. Finally $B/(f_1,\\dots,f_c)B$ is the localization of $S=P/(f_1,\\dots,f_c)$ at its prime $\\mathfrak q$, hence is nonzero: its maximal ideal is proper [def-weil-pbc-localization-at-prime]. These are precisely the two conditions of [def-weil-pbc-regular-sequence], so $f_1/1,\\dots,f_c/1$ is regular in $B=P_{\\mathfrak q'}$.",
+   "text": "Apply finite coefficient-subring weak-regularity descent to obtain weak regularity in the original polynomial local ring.",
    "uses": [
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-polynomial-local-weak-regular-sequence-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00SV, lines 36824-36832: colimit of the multiplication maps and exactness by Lemma Tag 00DB (lemma-directed-colimit-exact)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The inverse image of q contains every equation. Its extension is the maximal ideal of its prime localization, so every displayed equation lies in this maximal ideal. The local finite-module regularity criterion converts weak regularity into regularity, including an empty sequence.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-projective-module-flat",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "lem-weil-pbc-relative-global-complete-intersection-base-change",
-  "def-weil-pbc-relative-global-complete-intersection",
-  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-  "lem-weil-pbc-fibre-ring-local-ring-natural-iso",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-grothendieck-regular-sequence-flat",
   "lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-relative-ci-noetherian-local-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-polynomial-local-weak-regular-sequence-descent",
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00SV (lemma-relative-global-complete-intersection-conormal), lines 36783-36832, using 00SC, 00MG, 00SU, 00SS and 00DB; colimit identification and nonzero quotient made explicit"
+  "document": "https://stacks.math.columbia.edu/tag/00SV",
+  "place": "Proof of 00SV (1), now formalized via Noetherian approximation, polynomial closed-fibre regularity, flat lifting, finite coefficient-subring descent, and the maximal-ideal properness criterion. D4 stage 3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -224,5 +174,15 @@
   "group": "G1",
   "result": "fix",
   "note": "reverted the delivery's change of existing node(s) def-weil-pbc-relative-global-complete-intersection (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T032957-L-3674666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

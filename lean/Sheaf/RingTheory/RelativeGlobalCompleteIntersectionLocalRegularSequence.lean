@@ -10,9 +10,8 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.Paper.NoetherianApproximation
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
-import Sheaf.RingTheory.FibreLocalRingNaturalIso
-import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
-import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
+import Sheaf.RingTheory.RelativeCompleteIntersectionNoetherianRegularSequence
+import Sheaf.RingTheory.PolynomialLocalWeakRegularSequenceDescent
 
 /-!
 # Local regularity of equations of a relative global complete intersection
@@ -68,6 +67,54 @@ theorem isRegular_localization_of_relativeGlobalCompleteIntersection
         algebraMap (MvPolynomial (Fin n) R)
           (Localization.AtPrime (q.comap (Ideal.Quotient.mk (Ideal.span (Set.range relations)))))
           (relations i)) := by
-  sorry
+  classical
+  let Q := q.comap (Ideal.Quotient.mk (Ideal.span (Set.range relations)))
+  have hQ : Ideal.span (Set.range relations) ≤ Q := by
+    intro x hx
+    change Ideal.Quotient.mk (Ideal.span (Set.range relations)) x ∈ q
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx]
+    exact q.zero_mem
+  obtain ⟨R₀, hR₀, f₀, hcoeff, hf₀⟩ :=
+    exists_finiteType_subring_relativeGlobalCompleteIntersection R n c relations h
+  have hf : relations = fun i ↦ MvPolynomial.map R₀.subtype (f₀ i) := by
+    funext i
+    ext d
+    simpa only [MvPolynomial.coeff_map, Subring.subtype_apply] using hcoeff i d
+  have hweak : RingTheory.Sequence.IsWeaklyRegular (Localization.AtPrime Q)
+      ((List.ofFn relations).map
+        (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q))) := by
+    rw [congrArg List.ofFn hf]
+    apply RingTheory.Sequence.isWeaklyRegular_polynomial_local_of_finiteType_subrings
+      R₀ hR₀ f₀ Q
+    intro B hB hft
+    let : Algebra R₀ B := (Subring.inclusion hB).toAlgebra
+    have : Algebra.FiniteType ℤ B := hft
+    have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing ℤ B
+    let fB := fun i ↦ MvPolynomial.map (Subring.inclusion hB) (f₀ i)
+    have hfB : IsRelativeGlobalCompleteIntersectionPresentation fB :=
+      (relativeGlobalCompleteIntersection_baseChange R₀ B n c f₀).2 hf₀
+    have hQB : Ideal.span (Set.range fB) ≤ Q.comap (MvPolynomial.map B.subtype) := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      change MvPolynomial.map B.subtype (fB i) ∈ Q
+      have hmap : MvPolynomial.map B.subtype (fB i) = relations i := by
+        rw [hf]
+        dsimp [fB]
+        rw [MvPolynomial.map_map]
+        rfl
+      rw [hmap]
+      exact hQ (Ideal.subset_span ⟨i, rfl⟩)
+    exact (isRegular_localization_of_relativeCompleteIntersection_of_noetherian
+      fB hfB (Q.comap (MvPolynomial.map B.subtype)) hQB).toIsWeaklyRegular
+  have hmem : ∀ x ∈ (List.ofFn relations).map
+      (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime Q)),
+      x ∈ IsLocalRing.maximalIdeal (Localization.AtPrime Q) := by
+    intro x hx
+    obtain ⟨f, hf, rfl⟩ := List.mem_map.mp hx
+    obtain ⟨i, rfl⟩ := List.mem_ofFn.mp hf
+    rw [← Localization.AtPrime.map_eq_maximalIdeal]
+    exact Ideal.mem_map_of_mem _ (hQ (Ideal.subset_span ⟨i, rfl⟩))
+  simpa only [List.map_ofFn, Function.comp_def] using
+    (IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal hmem).mpr hweak
 
 end Algebra
