@@ -24,32 +24,32 @@
    "elementary": false
   },
   {
-   "text": "Apply the generic-point ideal inclusion to obtain a monomorphism from a finite sum of a coherent ideal pushforward into F, invertible near xi. Since xi is in the support of F, apply the ideal-sum cokernel reduction to get a nonzero ideal, coherent source A and coherent cokernel Q with support strictly contained in T.",
+   "text": "The generic point lies in the support of F, so its stalk is nonzero. Apply the filtered-source construction to the integral reduced subscheme and the generic-annihilation hypothesis, obtaining coherent A, a mono alpha : A -> F, an integral-ideal filtration of A, and a surjective generic stalk map.",
    "uses": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-coherent-ideal-sum-cokernel-reduction"
+    "lem-pc-s3-coherent-generic-filtered-source"
    ],
    "elementary": false
   },
   {
-   "text": "Filter A by partial sums of the nonzero ideal pushforward. The mono and its actual cokernel projection form the required short exact sequence. No support induction and no filtration of F is asserted.",
+   "text": "Set Q to the actual cokernel of alpha. Coherent cokernel closure gives coherent Q. Stalk exactness makes the cokernel projection surjective on every stalk, so Supp(Q) is contained in Supp(F). At the generic point, surjectivity of alpha on the stalk and the zero composite with the projection make every Q stalk element zero. The generic point belongs to Supp(F), so containment is strict. A mono and its actual cokernel form a short exact sequence by ShortComplex.exact_cokernel.",
    "uses": [
-    "lem-weil-pbc-coherent-integral-filtration-ideal-sum"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-coherent-ideal-sum-cokernel-reduction",
-  "lem-weil-pbc-coherent-integral-filtration-ideal-sum",
+  "lem-pc-s3-coherent-generic-filtered-source",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-module-stalk-exact",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "W3",
+  "agent": "R1",
   "date": "2026-10-13",
-  "based_on": "Construction subproblem extracted from the literal Stacks 01YF proof, not a restatement of an existing filtration theorem."
+  "based_on": "Stacks 01YE and 01YF. The generic filtered-source construction is isolated; coherence, the cokernel stalk calculation, strict support containment, and actual cokernel short exactness are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -161,9 +161,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T001618-L-2331747",
+  "landing": "20261013T045555-L-135575",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
