@@ -10901,3 +10901,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:15 L: merged deliver/W3/Sheaf.RingTheory.CohenStructurePowerSeriesSurjection (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577047 (proof); batch 20261013T031526; modules 1; new nodes 0)
 - 03:15 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment (stage 3; reviewer PASS; first push; landing 20261013T031558-L-3577148 (interface); batch 20261013T031526; modules 2; new nodes 1)
 - 03:17 L: returned deliver/P3/Sheaf.Paper.ModuleCohomologyCupProduct (reviewer RETURN: (reviewer X-e5709, head e57090dbb) C1/D3: In dag/nodes/sec-abelian-varieties/lem-sc-module-cup-pairing-exists.json, proo)
+- 03:29 L: returned deliver/D4/Sheaf.AlgebraicGeometry.StalkFiniteFree (reviewer RETURN: (reviewer X-04161, head 041611dee) the reviewer passed it, but the landing failed: coordinateAdd_germ in Sheaf.Algebraic)
