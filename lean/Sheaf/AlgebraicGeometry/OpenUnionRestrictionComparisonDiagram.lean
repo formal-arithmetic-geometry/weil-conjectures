@@ -6,8 +6,8 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
+import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonData
+import Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 
 /-! # Canonical comparison diagram on inverse image opens of an open union
 
@@ -21,6 +21,12 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+-- The inherited statement binds JW and JV, which its conclusion does not reference.
+set_option linter.unusedVariables false in
+set_option linter.style.haveILetI false in
+-- Inline the localization witnesses as in the dependent statement, avoiding costly conversion.
+set_option maxHeartbeats 400000 in
+-- Specializing the two comparisons over dependent localizations needs this limit.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Canonical comparison diagram for restriction through an open union.
@@ -106,6 +112,30 @@ theorem open_union_restriction_comparison_diagram
       (∀ G : schemeDerivedCategory X,
         eI.functor.map (tT.inv.app (L.obj G)) ≫ cV.hom.app (RT.obj (L.obj G)) ≫
           SV.map (qV.hom.app (L.obj G)) ≫ SV.map (kV.hom.app G) ≫ sV.hom.app G =
-            qI.hom.app G) := by sorry
+            qI.hom.app G) := by
+  classical
+  rename_i dX dW dV dWV dY
+  have h := open_union_restriction_comparison_data.{u, w} X W V
+  refine h.imp ?_
+  intro hU h
+  letI := hU
+  refine h.imp ?_
+  intro hT h
+  letI := hT
+  refine h.imp ?_
+  intro hI h
+  letI := hI
+  refine h.imp ?_
+  intro eW h
+  refine h.imp ?_
+  intro eV h
+  refine h.imp ?_
+  intro qW h
+  refine h.imp ?_
+  intro qV h
+  obtain ⟨eI, ⟨qIY⟩⟩ := h
+  refine ⟨eI, ?_⟩
+  exact @open_union_restriction_comparison_coherence.{u, w}
+    X W V dX dW dV dWV dY hU hT hI eW eV qW qV eI qIY
 
 end AlgebraicGeometry.Scheme

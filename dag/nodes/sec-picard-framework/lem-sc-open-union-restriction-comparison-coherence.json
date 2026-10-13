@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-open-union-restriction-comparison-coherence",
+ "kind": "statement",
+ "title": "Overlap coherence of supplied direct restriction comparisons",
+ "statement": "Let X be a scheme [def-pc-scheme], W,V opens, Y=W union V, U=Y.ι inverse image W, and T=Y.ι inverse image V. Choose derived categories [def-pc-derived-category] in Hom universe w on X,W,V,W intersect V,Y,U,T,U intersect T. Use the canonical restrictions and comparisons [def-pc-derived-open-restriction-maps]. Given equivalences eW:D(U)≌D(W), eV:D(T)≌D(V), eI:D(U intersect T)≌D(W intersect V), and natural isomorphisms qW:RU eW≅PW, qV:RT eV≅PV, qIY:RI eI≅PI, there exist cW:SU eI≅eW SW, cV:ST eI≅eV SV, and qI:(L RI) eI≅direct restriction X to W intersect V such that, at every G in D(X), eI(tU(LG) inverse) followed by cW(RU(LG)), SW(qW(LG)), SW(kW(G)), and sW(G) equals qI(G); the corresponding equation for T,V also holds. Here L restricts X to Y, RU,RT,RI restrict Y to U,T,U intersect T, PW,PV,PI are overlap restrictions inside X from Y to W,V,W intersect V, and SW,SV,SU,ST restrict the corresponding opens to their intersections. tU,tT,kW,kV,sW,sV,kI are the canonical comparisons. This statement constructs only the overlap comparisons, the ambient intersection comparison, and their pasting laws; all localizations, equivalences, and direct comparison isomorphisms are supplied inputs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom; explicit restriction comparison expansion using Mathlib.AlgebraicGeometry.Modules.Sheaf; derived extension-by-zero adjunction from Tag 08BT, lemma-adjoint-lower-shriek-restrict"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Exact extension by zero is left adjoint to restriction. Restricting extension by zero is the identity. Derive the adjunction and its invertible unit using exactness and mapDerivedCategory functoriality, and transport across overEquiv. Thus RU is a localization (Mathlib Adjunction.isLocalization_rightAdjoint').",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Canonical restriction composition identifies PW followed by SW with PI. Combine this comparison with qW, qIY and tU to obtain an isomorphism RU followed by SU followed by eI with RU followed by eW followed by SW. Localization.fullyFaithfulWhiskeringLeft descends it uniquely to cW. Repeat on the V chain with the same supplied qIY and eI to obtain cV. Underived threefold restriction coherence is checked on sections by cancelling overEquiv units and counits and applying overFunctorMap. Derive this equality using mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac and Localization.natTrans_ext. Substitute it into the defining equation of c to obtain the asserted ambient pasting. Define qI using the functor associator, whisker qIY with L, and compose with the ambient direct comparison kI. Its components are qIY(LG) followed by kI(G), proving the asserted identities.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-open-extension-restriction-iso",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/08BW",
+  "place": "cohomology.tex, lemma-mayer-vietoris-hom; explicit restriction comparison expansion using Mathlib.AlgebraicGeometry.Modules.Sheaf; derived extension-by-zero adjunction from Tag 08BT, lemma-adjoint-lower-shriek-restrict",
+  "note": "Agent-written explicit expansion of the restriction comparison argument, not a verbatim assertion of Tag 08BW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction functors to nested open subschemes canonical composition coherence",
+   "date": "2026-10-13",
+   "results": "8 hits, including Scheme.Hom.resLE_map, morphismRestrictRestrict and morphismRestrict_ι. These identify scheme morphisms but do not state the derived functor comparison.",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-13",
+   "results": "3 hits: restrictFunctorComp and its hom_app_app and inv_app_app lemmas. They give underived restriction composition only.",
+   "verdict": "underived ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|restrictFunctorCongr|mapDerivedCategoryCompIso",
+   "date": "2026-10-13",
+   "results": "7 Mathlib hits for restrictFunctorCongr in Modules/Sheaf.lean and Modules/Tilde.lean. Additional repository rg found scheme-isomorphism transport in SchemeIsoDerivedRestrictionSquare and SchemeIsoNestedOpenFiniteFreeModel, but neither states the required comparisons. Blueprint searches for nested open restriction comparison and inverse image opens union returned 0 nodes.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived restriction functors to nested open subschemes canonical composition coherence",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error; no search results were returned.",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonDiagram",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Two-open gluing in the relative gluing step: transport to inverse image covering opens of W union V.",
+   "via": [
+    "lem-sc-open-union-restriction-comparison-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenUnionRestrictionComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.open_union_restriction_comparison_coherence",
+  "statement": "theorem open_union_restriction_comparison_coherence\n    (X : Scheme.{u}) (W V : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings ((W ⊔ V).ι ⁻¹ᵁ W).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings ((W ⊔ V).ι ⁻¹ᵁ V).toScheme.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (((W ⊔ V).ι ⁻¹ᵁ W) ⊓ ((W ⊔ V).ι ⁻¹ᵁ V)).toScheme.toRingedSpace))]\n    :\n    let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory\n    let JW := (schemeOpenRestriction X W).mapDerivedCategory\n    let JV := (schemeOpenRestriction X V).mapDerivedCategory\n    let SW := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory\n    let SV := (schemeOpenOverlapRestriction X\n      (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory\n    let sW := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left : W ⊓ V ⟶ W)\n    let sV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : W ⊓ V ⟶ V)\n    let PW := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_left : W ⟶ W ⊔ V)).mapDerivedCategory\n    let PV := (schemeOpenOverlapRestriction X\n      (homOfLE le_sup_right : V ⟶ W ⊔ V)).mapDerivedCategory\n    let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ W ⊔ V)\n    let kV := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_right : V ⟶ W ⊔ V)\n    let U := (W ⊔ V).ι ⁻¹ᵁ W\n    let T := (W ⊔ V).ι ⁻¹ᵁ V\n      let RU := (schemeOpenRestriction (W ⊔ V).toScheme U).mapDerivedCategory\n      let RT := (schemeOpenRestriction (W ⊔ V).toScheme T).mapDerivedCategory\n      let SU := (schemeOpenOverlapRestriction (W ⊔ V).toScheme\n        (homOfLE inf_le_left : U ⊓ T ⟶ U)).mapDerivedCategory\n      let ST := (schemeOpenOverlapRestriction (W ⊔ V).toScheme\n        (homOfLE inf_le_right : U ⊓ T ⟶ T)).mapDerivedCategory\n      let tU := schemeDerivedOpenRestrictionCompIso (W ⊔ V).toScheme\n        (homOfLE inf_le_left : U ⊓ T ⟶ U)\n      let tT := schemeDerivedOpenRestrictionCompIso (W ⊔ V).toScheme\n        (homOfLE inf_le_right : U ⊓ T ⟶ T)\n      ∀ (eW : schemeDerivedCategory U.toScheme ≌ schemeDerivedCategory W.toScheme)\n        (eV : schemeDerivedCategory T.toScheme ≌ schemeDerivedCategory V.toScheme)\n        (qW : RU ⋙ eW.functor ≅ PW) (qV : RT ⋙ eV.functor ≅ PV),\n      ∀ (eI : schemeDerivedCategory (U ⊓ T).toScheme ≌\n          schemeDerivedCategory (W ⊓ V).toScheme)\n        (_qIY : (schemeOpenRestriction (W ⊔ V).toScheme (U ⊓ T)).mapDerivedCategory ⋙\n          eI.functor ≅ (schemeOpenOverlapRestriction X\n            (homOfLE (inf_le_left.trans le_sup_left) : W ⊓ V ⟶ W ⊔ V)).mapDerivedCategory),\n      ∃ (cW : SU ⋙ eI.functor ≅ eW.functor ⋙ SW)\n        (cV : ST ⋙ eI.functor ≅ eV.functor ⋙ SV)\n        (qI : (L ⋙ (schemeOpenRestriction (W ⊔ V).toScheme (U ⊓ T)).mapDerivedCategory) ⋙\n          eI.functor ≅ (schemeOpenRestriction X (W ⊓ V)).mapDerivedCategory),\n      (∀ G : schemeDerivedCategory X,\n        eI.functor.map (tU.inv.app (L.obj G)) ≫ cW.hom.app (RU.obj (L.obj G)) ≫\n          SW.map (qW.hom.app (L.obj G)) ≫ SW.map (kW.hom.app G) ≫ sW.hom.app G =\n            qI.hom.app G) ∧\n      (∀ G : schemeDerivedCategory X,\n        eI.functor.map (tT.inv.app (L.obj G)) ≫ cV.hom.app (RT.obj (L.obj G)) ≫\n          SV.map (qV.hom.app (L.obj G)) ≫ SV.map (kV.hom.app G) ≫ sV.hom.app G =\n            qI.hom.app G)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T152731-L-1016160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T152731-L-1016160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
