@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-punctured-root-section-etale-descent",
+ "kind": "statement",
+ "title": "A punctured-root section descends to a pointed affine etale neighbourhood",
+ "statement": "Let i:U→L and π:P→U be scheme morphisms [def-weil-pbc-scheme-conventions], with π finite [def-weil-finite-integral-morphism] and etale [def-weil-etale-morphism]. Let R be a commutative ring, φ:Spec R→L and f∈R any element. Let β:U×_L Spec R≅D(f) commute with projections [def-pc-fibre-product]. Fix any n≥0, a geometric point barY:Spec Ω→Spec R over y, and H=the canonical strict henselization ring [def-weil-pbc-strict-henselization-limit]. Let b:R→H induce its structural map [def-weil-pbc-strict-henselization-structural-map]. Put A_H=H[T]/(T^n-b(f)), q_H:Spec A_H→Spec H and V_H=D(b(f)). Suppose there is s_H:V_H→P satisfying s_H;π;i=V_H→Spec A_H→Spec H→Spec R→L. Then there are a commutative ring S, a:R→S and z∈Spec S, with Spec(a) etale and Spec(a)(z)=y. Put g=a(f), A_S=S[T]/(T^n-g), q_S:Spec A_S→Spec S and V_S=D(g). There is s_S:V_S→P satisfying s_S;π;i=V_S→Spec A_S→Spec S→Spec R→L. No torsor, ramification, regularity or nonzerodivisor assumption, and no positivity or invertibility assumption on n, is required; the existence of the section over H is an explicit hypothesis.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BSK (strict henselization as a filtered colimit), 05N9 (finite presentation descent), and 0EYG, descent paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The affine pointed-neighbourhood rings have colimit H with structural map b. Formation of the polynomial quotient by T^n-b(f) and localization at b(f) commutes with that colimit; the root punctures form the corresponding limit diagram.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use beta to identify the base-changed π with a finite etale cover of D(f). It is affine and finitely presented over R[1/f]. The given section is an algebra map into the punctured root algebra. Its finitely many generators and relations descend by 05N9 to one pointed-neighbourhood ring S; enlarge the stage to make its structure equation hold. The pointed lift of barY supplies z over y. This uses only finite presentation; no divisor regularity or condition on n enters. If the limit puncture is empty, the equation making its localized root algebra the zero ring descends at some finite stage.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0BSK (strict henselization as a filtered colimit), 05N9 (finite presentation descent), and 0EYG, descent paragraph; extracted part of the original proof; source pages read at the official Stacks website"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of a finite etale cover over a punctured root algebra of a strict henselization descends to a pointed affine etale neighborhood",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a finite etale cover over a punctured root algebra of a strict henselization descends to a pointed affine etale neighborhood",
+   "date": "2026-10-13",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, StandardEtalePair.homEquiv, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.etaleLocus, StandardEtalePair.hasMap_X, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.lift",
+   "verdict": "no exact match for the scheme-level root section assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*section|section.*hensel|etale.*descend|descend.*etale",
+   "date": "2026-10-13",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "verdict": "no exact match for the scheme-level root section assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: finite-presentation descent from the strictly henselian root calculation to an affine pointed etale neighbourhood, the descent paragraph of 0EYG.",
+   "via": [
+    "lem-sbc-regular-divisor-galois-root-splitting",
+    "lem-sbc-regular-divisor-galois-punctured-root-chart",
+    "lem-sbc-trait-generic-punctured-root-chart",
+    "lem-sbc-trait-generic-root-model",
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootSectionEtaleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootSectionEtaleDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_root_section_etale_descent",
+  "statement": "theorem punctured_root_section_etale_descent\n    {L U P : Scheme.{u}} (i : U ⟶ L) (π : P ⟶ U) [IsFinite π] [Etale π]\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    (n : ℕ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (y : Spec R) (hy : ∀ x : Spec (.of Ω), barY x = y)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hs : let H := strictHenselizationRing barY\n      let g := b.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ) :\n    ∃ (S : CommRingCat.{u}) (a : R ⟶ S) (z : Spec S),\n      Etale (Spec.map a) ∧ (Spec.map a) z = y ∧\n      let g := a.hom f\n      let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C g)\n      let N := Spec (CommRingCat.of A)\n      let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n      let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A g)\n      ∃ s : V.toScheme ⟶ P, s ≫ π ≫ i = V.ι ≫ q ≫ Spec.map a ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T124314-L-3777614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T124314-L-3777614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

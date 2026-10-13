@@ -1,0 +1,159 @@
+{
+ "id": "lem-sbc-regular-divisor-strict-hensel-root-section",
+ "kind": "statement",
+ "title": "A group-order root cover admits a section over the strict henselization",
+ "statement": "Let i:U→L be a morphism of schemes [def-weil-pbc-scheme-conventions], G a finite group and W→U a finite etale G-torsor [def-sbc-normal-dominant-galois]. Let R be a commutative regular ring [def-weil-regular-scheme], φ:Spec R→L and f∈R a nonzerodivisor with R/(f) regular. Assume |G| is invertible in R. Let β:U×_L Spec R≅D(f) commute with projections [def-pc-fibre-product]. Let barY:Spec Ω→Spec R be a geometric point [def-weil-geometric-point]. Put H=the canonical affine pointed-neighbourhood coordinate-ring colimit [def-weil-pbc-strict-henselization-limit], and let b:R→H induce its canonical structural morphism [def-weil-pbc-strict-henselization-structural-map]. Put g=b(f), n=|G|, A=H[T]/(T^n-g), N=Spec A, q:N→Spec H the structural morphism and V=D(g)⊂N. There is s:V→W such that s;π;i=V→N→Spec H→Spec R→L. All schemes and rings have universe u, and G has universe u+1. Only a section over this fixed limit ring is asserted: no finite-stage neighbourhood or coproduct isomorphism is part of the conclusion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09EB (Galois degree formula), 0BRM (Abhyankar), 0EYE (purity), and 0EYG, strictly henselian calculation through the extension C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-regular-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Pull W back and identify its base with D(f) using beta. At divisor generic points regularity makes the local rings DVRs. The stabilizer of each connected generic torsor component is its Galois group. The Galois degree formula in 09EB makes the ramification and residue degrees divide |G|; invertibility of |G| makes the ramification tame and the residue extension separable.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass to the canonical strict henselization H, using its pointed-neighbourhood interpretation. Flatness preserves f as a nonzerodivisor and the quotient is the strict henselization of the regular divisor ring. Apply the same stabilizer argument after this base change to see every ramification index divides n=|G|.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-regular-scheme",
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When barY lies on the divisor, A=H[T]/(T^n-b(f)) is a finite local extension of the strictly henselian H, hence strictly henselian. Its root T is a nonzerodivisor with regular quotient, so A is regular. By 0BRM the root extension kills ramification along its divisor. By 0EYE the pulled-back cover extends to a finite etale cover of Spec A. That cover splits over the strictly henselian ring; surjectivity of the torsor makes it nonempty. Choose a component section and restrict it to V. Its projection to W has the stated structure equation.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Off the divisor b(f) is a unit. The torsor already splits over Spec H, so pull a section along q and compose with its projection to W. This gives the same equation without needing A to be local. No data definition chooses an existential witness.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 09EB (Galois degree formula), 0BRM (Abhyankar), 0EYE (purity), and 0EYG, strictly henselian calculation through the extension C; extracted part of the original proof; source pages read at the official Stacks website"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tame finite group torsor on the complement of a regular divisor has a section after adjoining a root over the strict henselization",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame finite group torsor on the complement of a regular divisor has a section after adjoining a root over the strict henselization",
+   "date": "2026-10-13",
+   "results": "8 hits: arithFrobAt, IsArithFrobAt.mul_inv_mem_inertia, HenselianRing.is_henselian, IsArithFrobAt.exists_of_isInvariant, groupCohomology.exists_div_of_norm_eq_one, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, HenselianLocalRing.is_henselian, groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+   "verdict": "no exact match for the scheme-level root section assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsRegularRing",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match for the scheme-level root section assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|isIso_sigmaDesc_lift_comp|root.*section",
+   "date": "2026-10-13",
+   "results": "1 hits: Mathlib/Algebra/Lie/Weights/IsSimple.lean",
+   "verdict": "no exact match for the scheme-level root section assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: tame ramification is killed by one root extension; the strictly henselian calculation in 0EYG through C supplies one section before descent.",
+   "via": [
+    "lem-sbc-regular-divisor-galois-root-splitting",
+    "lem-sbc-regular-divisor-galois-punctured-root-chart",
+    "lem-sbc-trait-generic-punctured-root-chart",
+    "lem-sbc-trait-generic-root-model",
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictHenselRootSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RegularDivisorStrictHenselRootSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.strict_hensel_root_section",
+  "statement": "theorem GaloisCover.strict_hensel_root_section\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∃ s : V.toScheme ⟶ W.P,\n      s ≫ W.π ≫ i = V.ι ≫ q ≫ Spec.map b ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T124314-L-3777614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T124314-L-3777614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

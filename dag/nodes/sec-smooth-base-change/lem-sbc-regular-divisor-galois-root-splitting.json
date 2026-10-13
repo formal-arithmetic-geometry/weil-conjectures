@@ -15,26 +15,43 @@
  ],
  "proof": [
   {
-   "text": "Pull back the torsor and identify its base with D(f) by beta. The divisor generic-point local rings are DVRs. Generic connected components are Galois under stabilizers in G. By 09EB their ramification and residue degrees divide |G|, so the ramification is tame and the residue extensions separable.",
-   "uses": [],
+   "text": "Choose Ω as the algebraic closure of the residue field at y, and take barY to be its spectrum map followed by fromSpecResidueField y. This geometric point has image y. Use full faithfulness of Spec to recover the unique ring map b:R→H inducing the canonical strict-henselization structural morphism.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the strict-henselization root-section theorem with n=Nat.card G. Apply the section-descent theorem to π=W.π to obtain S,a,z and a section on its punctured root cover. Prove regularity of S directly by IsRegularLocalRing.localization_of_etale and Noetherianity of a finite-type algebra. Flatness proves g regular using hf.of_flat. Identify S/(g) with (R/(f)) tensor_R S by quotIdealMapEquivQuotTensor and apply the same etale regularity argument over R/(f). These are fully proved in the private helper regular_divisor_properties_of_etale. Positivity is Nat.card_pos because a group is nonempty; invertibility in S follows directly by applying a to hG.",
+   "uses": [
+    "lem-sbc-regular-divisor-strict-hensel-root-section",
+    "lem-sbc-punctured-root-section-etale-descent"
+   ],
    "elementary": false
   },
   {
-   "text": "At y on the divisor, pass to the strict henselization. The nonzerodivisor and regular quotient persist. Take n=|G|, positive and a unit. After strict henselization the cover is still a G-torsor; apply the same stabilizer and DVR argument to see that every new ramification index divides n. The n-th root ring is regular local and strictly henselian. By 0BRM the pulled-back torsor is unramified along the root divisor; 0EYE extends it to a finite etale cover of the root ring, which splits over the strictly henselian ring. Restrict to the punctured root cover to get the splitting over V.",
+   "text": "The map pullback.snd i φ is monic because hβ identifies it with beta followed by the basic-open inclusion. Pullback.lift and cancellation against this monomorphism identify the ambient pullback of W.π;i along the punctured root structure map with the pullback of W.π along the section followed by W.π. This comparison is an explicitly constructed isomorphism with its projection equation proved by pullback.hom_ext.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The splitting, its inverse and projection identities descend to an affine pointed etale neighborhood by the finite presentation argument of 0EYG (0BSK, 05N9). Take g=a(f). Etale ascent preserves regularity of the base and divisor, and flatness preserves its equation. Off the divisor split the finite etale cover first and use n=1; a(f) is then a unit. Zero splitting factors and empty bases are allowed.",
-   "uses": [],
-   "elementary": false
+   "text": "Reindex the defining torsor coproduct from G to Fin(Nat.card G) and swap the pullback factors. The resulting map has components (identity,smul g). Apply the already proved library lemma CategoryTheory.FinitaryPreExtensive.isIso_sigmaDesc_lift_comp to the section. Invert this isomorphism; Sigma.hom_ext and the pullback projection identities show that its composite with the fold map is the second projection. Finally use pullbackLeftPullbackSndIso and pullback.congrHom to compare the iterated pullback in the statement with the ambient pullback, and compose the isomorphisms. All these categorical steps are fully proved in the item, with no new hole.",
+   "uses": [
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-punctured-root-section-etale-descent",
+  "lem-sbc-regular-divisor-strict-hensel-root-section"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 09EB, 0EYG: proof up to construction of B' and its extension C; 0BRM (Abhyankar), 0EYE (purity), 0BSK and 05N9 (descent from strict henselization); extracted subargument with explicit cyclic descent and boundary cases"
+  "place": "Tags 09EB, 0BRM, 0EYE, 0EYG, 0BSK and 05N9; P4 factors the geometric proof into strict-hensel root section and pointed etale section descent, and proves the complete torsor trivialization and iterated-pullback assembly in Lean. The regular base, regular divisor quotient and nonzerodivisor ascent are also proved directly, not included in either new hole."
  },
  "mathlib_searches": [
   {
@@ -152,9 +169,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T113348-L-3186051",
+  "landing": "20261013T124314-L-3777614",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
