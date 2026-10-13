@@ -1,0 +1,160 @@
+{
+ "id": "lem-sbc-punctured-completion-affine-coordinate-squares",
+ "kind": "statement",
+ "title": "A-linear affine chart coordinates and restriction squares",
+ "statement": "Let A be a commutative local ring, C its maximal-ideal adic completion [def-weil-pbc-adic-completion], and phi:A to C the structural map. Let U be any open of Spec A, q:Y to U and s:E to Spec C finite [def-weil-finite-integral-morphism], and D their supplied completion overlap data [def-sbc-punctured-completion-matching-sections]. Let g:Fin t to A satisfy D(g_j) contained in U. Put V_j=(q followed by U inclusion) inverse-image D(g_j), O=Y times_U the restriction of Spec C to U, and p:O to Y. Equip Gamma(Y), Gamma(E), and Gamma(Y,V_j) with the exact structural A-actions specified in Lean. There exist formal gluing data X for phi and g [def-weil-pbc-formal-glueing-data], A-linear coordinate equivalences e:restrict(phi,M prime) to Gamma(E) and d_j:piece(g_j,M_j) to Gamma(Y,V_j), equivalences b_j from C tensor_A M_j to Gamma(O,p inverse-image V_j), and c_ij from (M_j) localized at g_i to Gamma(Y,V_i intersect V_j). Their four numerator equations are: b_j(alpha_j(m prime/1)) is the restriction of D.toCompleted.appTop(e(m prime)); b_j(1 tensor m) is p.app(V_j)(d_j(m)); c_ij(alpha_overlap_ij(m/1)) is the left restriction of d_i(m); c_ij(n/1) is the right restriction of d_j(n). This construction makes no cover or H0 assertion. The coordinate equivalences are A-linear, not merely additive.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BLH, first two proof paragraphs; Tag 05EL, item (1); structural linearity of the affine section identifications."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Since each D(g_j) is contained in U, its inverse image V_j is a finite scheme over an affine scheme, hence is affine. E is affine for the same reason. Set M prime to Gamma(E) with its structural C action and M_j to Gamma(Y,V_j) with the A[1/g_j] action: the image of g_j is invertible on that principal open, so the localization universal property extends the structural A action uniquely. The identity coordinate maps e and d_j are A-linear for precisely the structural actions displayed in the Lean statement.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-module-localization-away",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The double chart V_i intersect V_j is the principal open of the image of g_i in V_j. Mathlib IsAffineOpen.isLocalization_basicOpen and the module-localization universal property identify its section ring with localize(g_i,M_j); use the underlying equivalence as c_ij. The completed chart is the affine base change of V_j to Spec C. Apply the affine fibre-product tensor formula, including its projection equations, to obtain b_j from C tensor_A M_j to its section ring. The supplied overlapIso, its over equation, and overlap_base identify this same chart with the principal open of g_j in E. Its sections are therefore the localization of M prime at g_j.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define alpha_j by the E-side principal-localization identification followed by b_j inverse. Define alpha_overlap_ij by the two identifications with sections of V_i intersect V_j. These maps preserve the structural scalar actions; alpha_j preserves C-scalars because overlapIso is over the completed base. On (m/g_j^a)/g_k^b, both cocycle routes restrict m to the triple chart and divide by g_j^a g_k^b. On (m prime/g_i^a)/g_j^b, both square routes restrict the E-section to the completed double chart and divide by g_i^a g_j^b. Swap exchanges these denominators; compare sends (c tensor m)/g_j^b to c tensor (m/g_j^b). Localization uniqueness and additive generation by pure tensors extend the formulas to all inputs. This yields a Data object X.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "def-sbc-punctured-completion-matching-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a numerator m prime/1 the E-side identification is restriction through D.toCompleted, giving the first equation. The affine tensor projection formula identifies 1 tensor m with p pullback of d_j(m), giving the second. The two localization numerator formulas identify alpha_overlap_ij(m/1) with the left restriction of d_i(m), and n/1 with the right restriction of d_j(n), giving the last two equations. Empty charts have zero sections and zero localizations, so all maps and equations remain valid. For t=0 only the prime module and e remain. No cover assertion, kernel calculation, or H0 characterization is part of this lemma.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-localization-away",
+    "def-sbc-punctured-completion-matching-sections",
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-punctured-completion-matching-sections",
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "G3",
+  "document": "Stacks Project",
+  "place": "Tags 0BLH and 05EL; affine localization construction, with structural A-linearity and numerator squares made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme sections localization tensor product base change commutes with restriction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Section ring of an affine scheme fiber product is a tensor product and sections on principal opens are localizations",
+   "results": "Found IsAffineOpen.algebraMap_Spec_obj, appLE_eq_away_map, app_basicOpen_eq_away_map, Gamma_restrict_isLocalization, and StructureSheaf.comap_basicOpen. These are constituent affine localization APIs; no complete A-linear formal-gluing coordinate construction returned.",
+   "date": "2026-10-14",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalGlueing|tensorProduct.*[Ss]ection|[Ss]ection.*tensorProduct|isLocalization.*[Ss]ection",
+   "results": "No Mathlib FormalGlueing construction. Local library search found exists_affine_chart_realization in PuncturedCompletionAffineChartRealization, but its chart coordinates are additive only; it does not supply the A-linear chart coordinate equivalences of this statement. exists_formalGlueingData_prime is only one-way on H0; the matching projection does not give coordinate equivalences.",
+   "date": "2026-10-14",
+   "verdict": "existing affine chart realization lacks needed A-linear coordinate interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineDatum",
+  "date": "2026-10-14",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Affine section realization in the completion-glueing input; steps 1 (affineness) and 2 of lem-sbc-punctured-completion-affine-datum.",
+   "via": [
+    "lem-sbc-punctured-completion-affine-datum",
+    "lem-sbc-punctured-completion-formal-glueing-chart",
+    "lem-sbc-punctured-matching-chart-power-lift",
+    "new-sbc-punctured-completion-matching-affine-sections-comparison",
+    "lem-sbc-punctured-completion-matching-affine-sections",
+    "lem-sbc-punctured-completion-matching-punctured-iso",
+    "lem-sbc-punctured-completion-finite-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineCoordinateSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedCompletionAffineCoordinateSquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CompletionGluingData.exists_affine_coordinate_squares",
+  "statement": "theorem exists_affine_coordinate_squares\n    {A : Type u} [CommRing A] [IsLocalRing A]\n    {U : (Spec (.of A)).Opens}\n    {Y : Scheme.{u}} {q : Y ⟶ U.toScheme} [IsFinite q]\n    {E : Scheme.{u}} {s : E ⟶ Spec\n      (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))} [IsFinite s]\n    (D : CompletionGluingData A U q E s) (t : ℕ) (g : Fin t → A)\n    (hcharts : ∀ j, PrimeSpectrum.basicOpen (g j) ≤ U) :\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let φ := algebraMap A C\n    let V : Fin t → Y.Opens := fun j ↦ (q ≫ U.ι) ⁻¹ᵁ PrimeSpectrum.basicOpen (g j)\n    let aY := ((ΓSpecIso (.of A)).inv ≫ (q ≫ U.ι).appTop).hom\n    let aE := ((ΓSpecIso (.of A)).inv ≫ (s ≫ completionSpecMap A).appTop).hom\n    letI : Algebra A Γ(Y, ⊤) := aY.toAlgebra\n    letI : Algebra A Γ(E, ⊤) := aE.toAlgebra\n    letI : ∀ j, Algebra A Γ(Y, V j) := fun j ↦\n      ((Y.presheaf.map (homOfLE (le_top : V j ≤ ⊤)).op).hom.comp aY).toAlgebra\n    let O := pullback q (completionSpecMap A ∣_ U)\n    let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)\n    letI : Algebra A C := φ.toAlgebra\n    ∃ (X : FormalGlueing.Data.{u, u, u} φ g)\n      (e : FormalGlueing.restrict φ X.M' ≃ₗ[A] Γ(E, ⊤))\n      (d : ∀ j, FormalGlueing.piece (g j) (X.M j) ≃ₗ[A] Γ(Y, V j))\n      (b : ∀ j, FormalGlueing.restrict φ\n        (FormalGlueing.extend φ (FormalGlueing.piece (g j) (X.M j))) ≃ Γ(O, p ⁻¹ᵁ V j))\n      (c : ∀ i j, FormalGlueing.localize (g i)\n        (FormalGlueing.piece (g j) (X.M j)) ≃ Γ(Y, V i ⊓ V j)),\n      (∀ j m, b j (X.alpha j (LocalizedModule.mk m 1)) =\n        O.presheaf.map (homOfLE (le_top : p ⁻¹ᵁ V j ≤ ⊤)).op\n          (D.toCompleted.appTop (e m))) ∧\n      (∀ j m, b j (TensorProduct.tmul A (1 : C) m) = p.app (V j) (d j m)) ∧\n      (∀ i j m, c i j (X.alpha_overlap i j (LocalizedModule.mk m 1)) =\n        Y.presheaf.map (homOfLE (inf_le_left : V i ⊓ V j ≤ V i)).op (d i m)) ∧\n      (∀ i j m, c i j (LocalizedModule.mk m 1) =\n        Y.presheaf.map (homOfLE (inf_le_right : V i ⊓ V j ≤ V j)).op (d j m))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211102-L-391499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T211102-L-391499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
