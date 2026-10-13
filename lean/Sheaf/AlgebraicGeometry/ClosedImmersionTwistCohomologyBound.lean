@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 
 /-! # A step in projective Serre vanishing -/
 
@@ -16,6 +20,36 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+private def opensSiteCech (X : Scheme.{u}) {n : Type u} (U : n → X.Opens) :
+    SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)) where
+  W p t := ⨅ k, U (t k)
+  pr p t k := homOfLE (iInf_le _ k)
+  comm _ _ _ := Subsingleton.elim _ _
+  universal p t Z a _ := by
+    refine ⟨homOfLE (le_iInf fun k ↦ (a k).le), ?_, ?_⟩
+    · intro k
+      apply Subsingleton.elim
+    · intro b _
+      apply Subsingleton.elim
+  W_zero t := by simp
+  pr_zero _ := Subsingleton.elim _ _
+  indexMap t α := homOfLE (le_iInf fun k ↦ iInf_le _ (α k))
+  indexMap_pr _ _ _ := Subsingleton.elim _ _
+
+private noncomputable def opensSiteCechIso (X : Scheme.{u}) {n : Type u} (U : n → X.Opens)
+    (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    (opensSiteCech X U).complex F ≅ (TopCat.Presheaf.cechComplex U).obj F :=
+  HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) (by
+    intro p q hpq
+    obtain rfl : p + 1 = q := hpq
+    simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+    apply AddCommGrpCat.ext
+    intro s
+    funext t
+    rw [TopCat.Presheaf.cechComplex_d_apply]
+    simp only [SiteCechComplex.complex, CochainComplex.of_d]
+    rfl)
 
 /-- The standard N+1 affine opens bound cohomology of a closed projective subscheme.
 Source: Stacks Project, Tags 01XT and 01YS (4).
@@ -34,6 +68,42 @@ theorem isZero_closedImmersion_twist_above_dimension
     (F : X.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation]
     (q t : ℕ) (hq : N < q) :
     IsZero ((RingedSpace.moduleCohomology X.toRingedSpace q).obj
-      (tensorObj F (ProjectiveSpace.twistRestrict i t))) := by sorry
+      (tensorObj F (ProjectiveSpace.twistRestrict i t))) := by
+  classical
+  let n := ULift.{u} (Fin (N + 1))
+  let : LinearOrder n := LinearOrder.lift' ULift.down ULift.down_injective
+  let U : n → X.Opens := fun a ↦ i ⁻¹ᵁ ProjectiveSpace.standardOpen n (Spec (.of A)) a
+  have hU : iSup U = ⊤ :=
+    i.iSup_preimage_eq_top (ProjectiveSpace.iSup_standardOpen n _)
+  let G := tensorObj F (ProjectiveSpace.twistRestrict i t)
+  have : G.IsQuasicoherent := isQuasicoherent_tensorObj F _
+  let P := G.presheafModuleCat ⋙ forget₂ (ModuleCat Γ(X, ⊤)) AddCommGrpCat
+  obtain ⟨K, e, r, -, -, hr⟩ := Scheme.alternatingCechComputes X U hU P
+    (opensSiteCech X U)
+  have hempty : IsEmpty {a : Fin (q + 1) → n // StrictMono a} := by
+    refine ⟨fun a ↦ ?_⟩
+    have hc := Fintype.card_le_of_injective a.1 a.2.injective
+    simp only [Fintype.card_fin, Fintype.card_ulift, n] at hc
+    omega
+  have hz : IsZero (K.X q) :=
+    ((AddCommGrpCat.isZero_iff_subsingleton).mpr inferInstance).of_iso (e q)
+  have hh : IsZero (K.homology q) :=
+    ShortComplex.isZero_homology_of_isZero_X₂ (K.sc q) hz
+  have := hr q
+  have hz' : IsZero (((opensSiteCech X U).complex P).homology q) :=
+    hh.of_iso (asIso (HomologicalComplex.homologyMap r q))
+  have hcech : IsZero (((TopCat.Presheaf.cechComplex U).obj P).homology q) :=
+    hz'.of_iso (HomologicalComplex.homologyMapIso (opensSiteCechIso X U P) q).symm
+  let ec := TopCat.Presheaf.cechComplexFunctorHomologyIso U G.presheafModuleCat q
+  have : Subsingleton (((TopCat.Presheaf.cechComplex U).obj P).homology q) :=
+    (AddCommGrpCat.isZero_iff_subsingleton).mp hcech
+  have : Subsingleton (((cechComplexFunctor U).obj G.presheafModuleCat).homology q) :=
+    ec.addCommGroupIsoToAddEquiv.toEquiv.subsingleton
+  obtain ⟨el⟩ := nonempty_cechComplex_linearEquiv_H_of_isSeparated
+    (i ≫ (ℙ(n; Spec (.of A)) ↘ Spec (.of A))) U
+    (fun a ↦ (ProjectiveSpace.isAffineOpen_standardOpen n _ a).preimage i) hU G q
+  have : Subsingleton (G.H q) := el.symm.toEquiv.subsingleton
+  obtain ⟨c, _⟩ := exists_moduleCohomology_source_comparison X q
+  exact (ModuleCat.isZero_iff_subsingleton).mpr (c G).toEquiv.subsingleton
 
 end AlgebraicGeometry.Scheme.Modules

@@ -13,20 +13,47 @@
  ],
  "proof": [
   {
-   "text": "/-- The standard N+1 affine opens bound cohomology of a closed projective subscheme.\nSource: Stacks Project, Tags 01XT and 01YS (4).\n(blueprint: lem-pc-j4-closed-immersion-twist-cohomology-bound)\n\nProof: Restrict the N+1 standard affine opens to X. A closed subscheme of an affine\nscheme is affine. Their intersections are affine because X is separated. The twisted\nmodule is quasi-coherent, so its higher cohomology on each intersection is zero.\nThe ordered Cech complex computes cohomology and its terms, indexed by strictly\nincreasing tuples of distinct cover indices, are zero in all degrees above N. Hence\ncohomology is zero above N, for every twist, including\nzero; no finite presentation is needed for this cover argument. -/",
+   "text": "Restrict the N+1 standard affine coordinate opens to X by inverse image under the closed immersion. They cover X and are affine. The composite X to projective space to Spec A is separated. The twist is invertible, so tensoring F with it is quasi-coherent. Apply the separated affine-base specialization of the affine Cech comparison to this cover and twisted module.",
    "uses": [
-    "lem-pc-projective-space-cohomology-bound"
+    "def-pc-projective-space-twist",
+    "def-pc-proj",
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct chosen intersections as finite infima of the restricted opens; their universal properties follow from the poset of opens. Identify its signed site Cech differential with the explicit abelian presheaf Cech differential degreewise, and forget module scalars. Apply the alternating Cech comparison to this same cover.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q>N, a strictly increasing map from Fin(q+1) into ULift(Fin(N+1)) would be injective, contradicting cardinalities. The degree-q alternating cochain group is therefore zero, so its homology is zero. Transport this along the alternating homology isomorphism, the explicit Cech encoding isomorphism, and the affine Cech linear equivalence to obtain subsingleton ordinary cohomology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport subsingletonness from ordinary cohomology through the additive module-cohomology source comparison. ModuleCat.isZero_iff_subsingleton gives precisely the unchanged conclusion.",
+   "uses": [
+    "lem-sc-module-cohomology-source-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-projective-space-cohomology-bound"
+  "def-pc-projective-space-twist",
+  "def-pc-proj",
+  "lem-pc-cech-computes",
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-computes",
+  "lem-sc-module-cohomology-source-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project, coherent.tex",
-  "place": "Tag 01YS (4), proof of part (4)"
+  "by": "agent",
+  "document": "Stacks Project, coherent.tex and cohomology.tex",
+  "place": "Tags 01XT, 01YS (4), 01XD, 01FM; D2 second reading: restricted affine cover and alternating Cech truncation"
  },
  "mathlib_searches": [
   {
@@ -96,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261013T115026-L-3324876",
-  "kind": "interface",
+  "landing": "20261013T125007-L-3835787",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
