@@ -14,38 +14,47 @@
  ],
  "proof": [
   {
-   "text": "Take an injective module resolution. Forgetting module coefficients is exact. Its terms are flasque abelian sheaves; sections of a short exact sequence beginning in a flasque sheaf are surjective on every open, and quotients of two flasque sheaves are flasque. The direct-image acyclicity criterion makes these terms direct-image acyclic. Acyclic resolutions compute abelian higher direct images, while the module resolution computes module higher direct images; forgetting commutes with direct image and homology. Hence positive module-image vanishing implies positive abelian-image vanishing.",
+   "text": "Let A be module pushforward and B be global sections on X. Positive higher-direct-image vanishing says F is A-right-acyclic. Apply quasiIso_map_of_rightAcyclic_nat to the augmentation F[0] -> I of an injective resolution: the source terms are F or zero, and the target terms are injective. Compose with singleMapHomologicalComplex to obtain the quasi-isomorphism (A F)[0] -> A I. The module pushforward injective acyclicity theorem says every term A(I^n) is B-right-acyclic. The acyclic-resolution comparison identifies R^q B(A F) with the homology of B(A I), while isoRightDerivedObj identifies R^q(A composed with B)(F) with the same homology. Compose these actual canonical isomorphisms.",
    "uses": [
     "lemma-weil-pbc-leray-acyclicity",
-    "lem-sc-zariski-flasque-quotient-sections",
-    "lem-sc-module-abelian-zariski-cohomology"
+    "lem-weil-pbc-module-pushforward-injective-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the natural topological Leray edge to the underlying abelian sheaf. Positive higher direct images vanish by the preceding step, so the edge is an isomorphism in every degree.",
+   "text": "For an endomorphism phi of F, lift phi to the chosen injective resolution by InjectiveResolution.desc. The lift commutes with the augmentation, and naturality of singleMapHomologicalComplex gives the corresponding square after A. Apply acyclicComparison_naturality to B and isoRightDerivedObj_inv_naturality to A composed with B. Cancel the acyclic comparison inverse and compose the two squares. This is the private proved helper acyclic_composite_comparison; it supplies an isomorphism commuting with every phi.",
    "uses": [
-    "lem-sc-leray-closed-pushforward-cohomology"
+    "lem-sc-acyclic-comparison-natural"
    ],
    "elementary": false
   },
   {
-   "text": "The sheafified free abelian representable at the terminal open is the constant integer sheaf: each open has exactly one map to the terminal open. Precomposition with this actual source isomorphism identifies terminal Ext cohomology with the ordinary H definition. Associativity of Ext composition proves its coefficient naturality. Compose both source-model identifications with the natural Leray edge; its naturality for every coefficient endomorphism is the displayed equation.",
-   "uses": [],
-   "elementary": true
+   "text": "Forget scalars from this module-valued comparison. Compose with the inverse of the natural sections-resolution comparison R^q Gamma(Y,-) -> R^q(A composed with B). Functor.map_comp and naturality of that comparison yield a natural additive comparison between module-derived cohomology of A F on X and F on Y.",
+   "uses": [
+    "lem-pc-leray-sections-resolution-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the natural additive moduleCohomology-to-H comparisons on X and Y. Compose the inverse of the comparison on X, the preceding additive isomorphism, and the comparison on Y. Apply their naturality equations in succession to prove the displayed equality for every endomorphism and every x. All operations apply in degree zero and to zero coefficients and empty schemes; the unit route is unchanged.",
+   "uses": [
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-leray-closed-pushforward-cohomology",
-  "lem-sc-module-abelian-zariski-cohomology",
-  "lem-sc-zariski-flasque-quotient-sections",
+  "lem-pc-leray-sections-resolution-comparison",
+  "lem-sc-acyclic-comparison-natural",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
   "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "K2 stage 3 worker",
-  "document": "Stacks Project, cohomology.tex and sites-cohomology.tex",
-  "place": "Tags 01F4 (1), 01EY and 03FD",
-  "note": "The additive/naturality part of the original two-step Leray plan; the scalar promotion is proved in the parent module."
+  "by": "C2 stage 3 worker",
+  "document": "Stacks Project, cohomology.tex and derived.tex",
+  "place": "Tags 01F4 (1), 01EX (2), 015E and 03FD",
+  "note": "Direct acyclic-resolution proof using canonical comparisons and their naturality; no topological Leray spectral sequence or abelian higher-direct-image comparison is needed. The source-model comparison remains encapsulated in lem-sc-module-cohomology-source-comparison."
  },
  "mathlib_searches": [
   {
@@ -166,10 +175,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261013T100023-L-2467544",
-  "kind": "interface",
+  "landing": "20261013T111838-L-3047731",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
